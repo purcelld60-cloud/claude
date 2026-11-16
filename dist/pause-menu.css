@@ -1,0 +1,72 @@
+/* Timber, enamel and stitched paper: a pause at the edge of the farm. */
+#gameShell #pauseScreen{background:#10291fd9;backdrop-filter:blur(5px);padding:12px;z-index:34;overflow:auto;overscroll-behavior:contain}
+#gameShell #pauseScreen .ranch-pause{width:min(690px,100%);max-width:690px;max-height:calc(100% - 8px);padding:0;border:5px solid #493529;outline:2px solid #d9a768;border-radius:5px;color:#3e3928;background:#ebd7a5;box-shadow:0 7px 0 #2d281e,0 16px 45px #07170bc9,inset 0 0 0 2px #ffe6b6;overflow:auto;text-align:left;scrollbar-color:#a4774a #e0c795}
+.rp-header{position:relative;padding:22px 27px 18px;min-height:110px;background:linear-gradient(90deg,#634431 0%,#7f5736 70%,#65462d);color:#fff0c1;border-bottom:4px solid #ac7b45;overflow:hidden;text-shadow:0 2px #3d2d23}
+#gameShell #pauseScreen .ranch-pause .rp-header h2{position:relative;color:#ffe1a0;font-family:Pixel,monospace;font-size:24px;line-height:1.5;margin:6px 0 2px;letter-spacing:1px}
+.rp-eyebrow{position:relative;font-family:Space,Arial,sans-serif;font-size:8px;letter-spacing:2px;font-weight:bold;line-height:1.5}
+#gameShell #pauseScreen .ranch-pause .rp-header p{position:relative;color:#f1dcb7;font:12px/1.5 Space,Arial,sans-serif;margin:0;max-width:75%}
+.rp-sky{position:absolute;right:0;top:0;width:220px;height:100%;background:linear-gradient(#6fa5a0,#b8cf9b);opacity:.88;clip-path:polygon(20% 0,100% 0,100% 100%,0 100%);overflow:hidden}
+.rp-sun{position:absolute;right:25px;top:19px;width:24px;height:24px;background:#ffe69b;box-shadow:0 0 0 5px #ffedab2b}
+.rp-cloud{position:absolute;right:95px;top:24px;width:53px;height:9px;background:#f5ecd0;box-shadow:10px -5px #f5ecd0,20px -9px #f5ecd0,31px -4px #f5ecd0}
+.rp-hill{position:absolute;left:0;bottom:-27px;width:270px;height:80px;background:#709463;transform:rotate(-10deg);box-shadow:0 -15px #96ad75}
+.rp-barn{position:absolute;right:30px;bottom:11px;width:50px;height:37px;background:#b06a43;box-shadow:inset 0 0 0 3px #cf9560}
+.rp-barn:before{content:'';position:absolute;left:-6px;top:-23px;border-left:31px solid transparent;border-right:31px solid transparent;border-bottom:25px solid #4b6d58}
+.rp-barn:after{content:'';position:absolute;left:18px;bottom:0;width:16px;height:23px;background:#533a2c;border:2px solid #deb87a;border-bottom:0}
+.rp-fence{position:absolute;left:32px;bottom:9px;width:160px;height:4px;background:#edd8a0;box-shadow:0 -9px #edd8a0}
+.rp-fence:before{content:'';position:absolute;left:6px;top:-19px;width:5px;height:26px;background:#f8e6b4;box-shadow:25px 0 #f8e6b4,50px 0 #f8e6b4,75px 0 #f8e6b4,100px 0 #f8e6b4,125px 0 #f8e6b4}
+.rp-body{padding:19px 23px 15px;background-image:repeating-linear-gradient(0deg,transparent 0,transparent 23px,#8765350b 24px)}
+#gameShell #pauseScreen .ranch-pause .rp-sandbox-result{grid-column:1/-1;margin:0 0 10px;padding:11px 12px;background:#d3dfa9;border:2px solid #93aa6b;color:#435e35;font:9px/1.8 Pixel,monospace}
+.rp-sandbox-result[hidden]{display:none}
+.rp-main-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#gameShell #pauseScreen .ranch-pause .rp-action{display:flex;align-items:center;gap:10px;position:relative;width:100%;min-width:0;min-height:61px;margin:0;padding:10px 12px;color:#493c2a;border:2px solid #b68a54;border-bottom:5px solid #94683d;background:linear-gradient(#fff0c5,#efdaaa);box-shadow:inset 0 0 0 1px #fff7df,0 2px 0 #c7ab78;text-align:left;border-radius:4px;text-decoration:none;cursor:pointer;transition:background .13s,transform .13s}
+#gameShell #pauseScreen .ranch-pause .rp-action:hover{background:#fff5d4;border-color:#926738}
+#gameShell #pauseScreen .ranch-pause .rp-action:active{transform:translateY(2px);border-bottom-width:3px}
+.rp-action>svg{width:31px;height:31px;flex-shrink:0;color:#6a7950;filter:drop-shadow(0 1px #fff4ce)}
+.rp-action>span{display:flex;flex:1;min-width:0;gap:5px;flex-direction:column}
+.rp-action b{font:8px/1.6 Pixel,monospace;letter-spacing:.2px}
+.rp-action small{font:10px/1.35 Space,Arial,sans-serif;color:#776245;white-space:normal}
+.rp-action>i{font:24px/1 Georgia,serif;color:#9a7546;font-style:normal}
+#gameShell #pauseScreen .ranch-pause #resumeBtn{background:linear-gradient(#689455,#4d7745);border-color:#3d6238;border-bottom-color:#2e4f30;color:#fff2c3}
+#gameShell #pauseScreen .ranch-pause #resumeBtn small,#gameShell #pauseScreen .ranch-pause #resumeBtn svg,#gameShell #pauseScreen .ranch-pause #resumeBtn i{color:#e9ebae;filter:none}
+#gameShell #pauseScreen .ranch-pause #ranchExitSandboxBtn{background:#edc1a3;border-color:#b17a50}
+#gameShell #pauseScreen .ranch-pause .rp-action:disabled{cursor:not-allowed;opacity:.65;filter:saturate(.45);transform:none}
+.rp-difficulty{min-width:0;margin:21px 0 0;padding:12px 12px 9px;border:1px solid #c7a778;border-radius:3px;background:#fff3d33d}
+.rp-difficulty legend{padding:0 8px;color:#795b37;font:7px/1.6 Pixel,monospace;letter-spacing:.4px}
+.rp-difficulty-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.rp-difficulty-row button{display:flex;align-items:center;flex-direction:column;justify-content:center;gap:5px;min-width:0;min-height:70px;padding:8px 3px;background:#e1c99d;border:2px solid #b19463;border-bottom:4px solid #ad8a53;border-radius:3px;color:#786246;cursor:pointer;box-shadow:inset 0 0 0 1px #f5e3bd}
+.rp-difficulty-row button>span{font:bold 23px/1 Georgia,serif;color:#97794c}
+.rp-difficulty-row b{font:7px/1.5 Pixel,monospace}.rp-difficulty-row small{font:9px/1.4 Space,Arial,sans-serif}
+.rp-difficulty-row button[aria-pressed=true]{background:#557348;color:#fff0be;border-color:#355539;box-shadow:inset 0 0 0 1px #91a469}
+.rp-difficulty-row button[aria-pressed=true]>span{color:#ffe1a0}
+.rp-difficulty-row button[data-rp-difficulty=hard][aria-pressed=true]{background:#85543f;border-color:#653d30;box-shadow:inset 0 0 0 1px #ba8d65}
+#gameShell #pauseScreen .ranch-pause .rp-mode-description{margin:9px 0 0;color:#665337;min-height:28px;font:11px/1.5 Space,Arial,sans-serif}
+#gameShell #pauseScreen .ranch-pause .rp-note{margin:7px 3px 12px;color:#7d6546;font:10px/1.5 Space,Arial,sans-serif}
+.rp-utility{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-top:1px dashed #b99b6d;padding-top:12px}
+#gameShell #pauseScreen .ranch-pause .rp-utility .rp-action{min-height:48px;padding:8px;gap:6px;background:#e6cea0;border-width:1px;border-bottom-width:3px;box-shadow:inset 0 0 0 1px #f9e7c4}
+.rp-utility .rp-action>svg{width:23px;height:23px}.rp-utility .rp-action b{font-size:6px}.rp-utility .rp-action small,.rp-utility .rp-action>i{display:none}
+.rp-footer{display:flex;justify-content:center;gap:10px;background:#dec495;border-top:1px solid #c3a474;color:#80633e;padding:11px;font:6px/1.5 Pixel,monospace;letter-spacing:.4px}
+.rp-footer>span{color:#9d7844}
+.ranch-pause button:focus-visible,.ranch-sandbox button:focus-visible{outline:3px solid #f4a943;outline-offset:3px}
+#gameShell .ranch-sandbox{box-sizing:border-box;width:min(940px,calc(100vw - 24px));max-width:100%;max-height:calc(100dvh - 24px);padding:0;background:#eedcaf;border:4px solid #65472f;outline:2px solid #d8b16e;border-radius:4px;color:#493b2a;box-shadow:0 10px 0 #302b22,0 20px 60px #07170bc9;scrollbar-color:#9a7048 #e5cfa6}
+.ranch-sandbox::backdrop{background:#0d241ce8;backdrop-filter:blur(4px)}
+.rs-heading{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:repeating-linear-gradient(0deg,#765337 0,#765337 28px,#6e4c32 29px,#6e4c32 30px);border-bottom:4px solid #b58b50;color:#fff0c2}
+.rs-heading .rp-eyebrow{font-size:7px}.rs-heading h2{font:17px/1.6 Pixel,monospace;color:#ffe4a8;margin:6px 0 0;text-shadow:0 2px #3d2d23}
+.rs-heading>button{width:40px;height:40px;flex-shrink:0;margin-left:14px;background:#4d392a;border:2px solid #d5ae76;border-bottom:4px solid #2d281e;border-radius:3px;color:#ffe5ae;font:26px/1 Georgia,serif;cursor:pointer}
+.rs-intro{padding:0 24px;margin:16px 0 12px;font:12px/1.7 Space,Arial,sans-serif;color:#6a5638}
+.rs-top{display:flex;justify-content:space-between;gap:12px;padding:0 24px 12px;color:#7d603a;font:7px/1.7 Pixel,monospace;border-bottom:1px dashed #c0a06b}
+.rs-bosses{padding:17px 24px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.rs-boss{position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;padding:0;background:#f8e9c3;border:2px solid #ae8957;border-bottom:5px solid #8b653c;border-radius:4px;box-shadow:inset 0 0 0 1px #fff5d9;cursor:pointer;text-align:left;color:#4d3e2c}
+.rs-boss:hover{background:#fff4d4;border-color:#5b7750;transform:translateY(-2px)}
+.rs-portrait{position:relative;display:block;width:100%;height:108px;background:#425d54;border-bottom:2px solid #ad8957;overflow:hidden}
+.rs-portrait canvas{display:block;width:100%;height:100%;image-rendering:pixelated;object-fit:contain}
+.rs-portrait>i{position:absolute;right:5px;bottom:5px;color:#fff2bd;background:#253d32e0;border:1px solid #c9b47f;padding:4px;font:5px/1.6 Pixel,monospace;font-style:normal}
+.rs-copy{padding:11px 10px 9px;display:flex;flex-direction:column;gap:7px;flex:1}.rs-copy small{font:9px/1.4 Space,Arial,sans-serif;color:#9a7549}.rs-copy b{font:8px/1.6 Pixel,monospace}.rs-copy>span{font:10px/1.4 Space,Arial,sans-serif;color:#7f6847}
+.rs-challenge{display:block;width:100%;padding:8px 10px;background:#e2ca9b;border-top:1px solid #d0b47e;font:6px/1.6 Pixel,monospace;color:#725634}
+.rs-feedback{margin:0;padding:0 24px 12px;color:#954b38;font:12px/1.6 Space,Arial,sans-serif;min-height:12px}
+.rs-footer{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:12px 24px;background:#dfc594;border-top:1px solid #bd9b66}
+.rs-footer>span{font:6px/1.7 Pixel,monospace;color:#8c6c41}.rs-footer>button{font:7px/1.5 Pixel,monospace;color:#fff1bf;background:#547249;border:2px solid #3a5537;border-bottom:4px solid #2d432d;border-radius:3px;min-height:38px;padding:9px 13px;cursor:pointer}
+#titleSandboxBtn[hidden],#endingSandboxBtn[hidden],#ranchExitSandboxBtn[hidden],#ranchRetrySandboxBtn[hidden]{display:none!important}
+#titleSandboxBtn>svg{width:23px;height:23px}#endingSandboxBtn{border-color:#bfa777;background:#25422d;color:#f1dfad}
+@media(max-width:620px){#gameShell #pauseScreen .ranch-pause{border-width:3px}.rp-header{padding:18px 17px 14px}.rp-sky{width:160px}.rp-body{padding:15px}.rp-action small{font-size:9px}.rp-action b{font-size:7px}.rp-action>svg{width:25px;height:25px}#gameShell #pauseScreen .ranch-pause .rp-action{min-height:58px;padding:8px;gap:7px}.rp-difficulty{padding:9px 7px}.rp-difficulty legend{font-size:6px}.rp-difficulty-row button{min-height:66px}.rp-difficulty-row small{font-size:8px}.rp-utility{gap:5px}.rp-utility .rp-action>svg{display:none}.rp-utility .rp-action b{font-size:5px}.rp-footer{font-size:5px}.rs-bosses{grid-template-columns:repeat(2,minmax(0,1fr));padding:14px;gap:10px}.rs-heading{padding:15px}.rs-heading h2{font-size:13px}.rs-heading .rp-eyebrow{font-size:5px}.rs-intro{padding:0 15px;font-size:11px}.rs-top{padding:0 15px 12px;font-size:6px}.rs-footer{padding:12px 15px}.rs-footer>span{display:none}.rs-footer>button{width:100%}.rs-portrait{height:100px}}
+@media(orientation:landscape) and (max-height:600px){#gameShell #pauseScreen{padding:7px}#gameShell #pauseScreen .ranch-pause{width:min(760px,100%);max-height:calc(100% - 5px);border-width:3px}.rp-header{padding:10px 20px;min-height:0}#gameShell #pauseScreen .ranch-pause .rp-header h2{font-size:17px;margin:2px 0}#gameShell #pauseScreen .ranch-pause .rp-header p{font-size:10px}.rp-eyebrow{font-size:6px}.rp-body{display:grid;grid-template-columns:1.1fr 1fr;gap:7px 16px;padding:12px 16px}.rp-main-actions{grid-row:span 2;gap:7px}#gameShell #pauseScreen .ranch-pause .rp-action{min-height:54px;padding:7px 9px}.rp-action b{font-size:6px}.rp-action small{font-size:9px}.rp-action>svg{width:24px;height:24px}.rp-difficulty{margin:0;padding:6px 8px}.rp-difficulty legend{font-size:5px}.rp-difficulty-row{gap:4px}.rp-difficulty-row button{min-height:58px;padding:5px 2px;gap:3px}.rp-difficulty-row button>span{font-size:18px}.rp-difficulty-row b{font-size:5px}.rp-difficulty-row small{font-size:7px}#gameShell #pauseScreen .ranch-pause .rp-mode-description{font-size:9px;min-height:0;margin-top:6px}#gameShell #pauseScreen .ranch-pause .rp-note{font-size:8px;margin:0}.rp-utility{grid-column:1/-1;padding-top:7px}#gameShell #pauseScreen .ranch-pause .rp-utility .rp-action{min-height:33px;padding:5px 9px}.rp-utility .rp-action>svg{width:18px;height:18px}.rp-footer{padding:7px;font-size:5px}.rs-heading{padding:12px 20px}.rs-heading h2{font-size:13px;margin:2px 0}.rs-heading .rp-eyebrow{font-size:5px}.rs-intro{font-size:10px;margin:9px 0}.rs-top{font-size:6px;padding-bottom:8px}.rs-bosses{grid-template-columns:repeat(4,minmax(0,1fr));padding:12px 20px;gap:10px}.rs-portrait{height:90px}.rs-copy{padding:8px;gap:4px}.rs-copy b{font-size:6px}.rs-copy small,.rs-copy>span{font-size:9px}.rs-challenge{font-size:5px;padding:6px 8px}.rs-footer{padding:8px 20px}}
+@media(prefers-reduced-motion:reduce){.rp-action,.rs-boss{transition:none;transform:none!important}}
