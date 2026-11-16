@@ -591,6 +591,19 @@
     if(epic.flash>0){ctx.save();ctx.globalAlpha=Math.min(.55,epic.flash);ctx.fillStyle=epic.flashColor;ctx.fillRect(0,0,W,H);ctx.restore();}
   }
 
+  // Detailed floating plank: same top line and width as the collider, only richer paint.
+  function drawPlank(p){
+    const x=Math.round(p[0]),y=Math.round(p[1]),w=Math.round(p[2]),metal=scene===2,ink=scene===6,grassy=scene===0||scene===7||scene===3;
+    const dark=metal?'#3e4a45':ink?'#3d2c52':'#4f3624',mid=metal?'#63736a':ink?'#7d6596':'#8d6a45',lit=metal?'#8fa096':ink?'#b59bd0':'#b88d5c';
+    ctx.fillStyle='rgba(20,28,24,.22)';ctx.fillRect(x+10,y+15,w-20,6);
+    for(const sx of [x+14,x+w-20]){ctx.fillStyle=dark;ctx.fillRect(sx,y+12,6,10);ctx.fillStyle=mid;ctx.fillRect(sx+1,y+12,2,9);}
+    ctx.fillStyle=dark;ctx.fillRect(x-1,y,w+2,14);ctx.fillStyle=mid;ctx.fillRect(x,y+1,w,11);
+    for(let xx=x;xx<x+w;xx+=Math.max(18,Math.round(w/Math.max(2,Math.round(w/34))))){ctx.fillStyle=dark;ctx.fillRect(xx,y+1,1,11);ctx.fillStyle=lit;ctx.fillRect(xx+2,y+3,Math.min(10,x+w-xx-3),1);ctx.fillStyle=dark;ctx.fillRect(xx+5,y+7,2,2);}
+    ctx.fillStyle=lit;ctx.fillRect(x,y+1,w,2);
+    if(grassy){ctx.fillStyle='#4f8f3c';ctx.fillRect(x-1,y-1,w+2,3);ctx.fillStyle='#8fc451';for(let xx=x+2;xx<x+w-2;xx+=5){const h=1+((xx*7)%3),sw=Math.round(Math.sin(time*1.6+xx*.05));ctx.fillRect(xx+sw,y-1-h,2,h);}ctx.fillStyle='#3f7a34';for(let xx=x+6;xx<x+w-6;xx+=23)ctx.fillRect(xx,y+12,2,3+((xx*13)%5));}
+    else{ctx.fillStyle=metal?'#b8c4bc':'#d9c08f';ctx.fillRect(x,y,w,1);}
+  }
+
   function epilogueCue(film){
     if(film?.kind!=='jorge_epilogue')return;
     const shot=window.Cinematics?.beat?.(film)?.id;
@@ -988,7 +1001,7 @@
     if(arena&&window.Art?.drawArena){ctx.save();ctx.globalAlpha=arena.blend;Art.drawArena(ctx,arena.type,camera,time,arena.homeX);ctx.restore();}
     ctx.save();ctx.translate(-Math.round(camera),0);
     window.CampaignVfx?.draw?.(ctx,time,'back');
-    for(const p of scenePlatforms()){ctx.fillStyle=scene===2?'#63736a':'#8d724f';ctx.fillRect(p[0],p[1],p[2],12);ctx.fillStyle=scene===0?'#abc378':'#c0ab7f';ctx.fillRect(p[0],p[1],p[2],4);ctx.fillStyle='#263c303d';ctx.fillRect(p[0]+8,p[1]+12,p[2]-16,4);}
+    for(const p of scenePlatforms()){if(window.Graphics?.isLite?.()){ctx.fillStyle=scene===2?'#63736a':'#8d724f';ctx.fillRect(p[0],p[1],p[2],12);ctx.fillStyle=scene===0?'#abc378':'#c0ab7f';ctx.fillRect(p[0],p[1],p[2],4);ctx.fillStyle='#263c303d';ctx.fillRect(p[0]+8,p[1]+12,p[2]-16,4);}else drawPlank(p);}
     if(!arena){
     window.BivoltQuest?.draw?.(ctx,0,time,q,scene);
     if(scene===1)drawSchoolWatch();
@@ -1002,7 +1015,7 @@
     if(!arena)drawSchoolCover();if(arena)drawMinions();drawBossTelegraphs();drawReeis();
     if(!arena&&!dialog&&started){const nearby=closestBoss();if(nearby){const access=bossAccess(nearby);pill(access.ok?'[E] DESAFIAR '+bossNames[nearby.type].toUpperCase():'[E] VER MISSÕES PARA O CHEFE',nearby.x,nearby.y-(nearby.type==='giant'?242:172),access.ok?'#daeda3':'#f3d298');}}
     if(arena?.phase==='active'&&!dialog)pill('[E] SAIR DA ARENA',arena.bounds[0]+87,FLOOR-65,'#e4ce9b');
-    if(started)window.SceneLife?.drawBack?.(ctx,{scene,player,camera,time,arena:!!arena});
+    if(started)window.SceneLife?.drawBack?.(ctx,{scene,player,camera,time,arena:!!arena,gapAt});
     for(const a of afterimages){ctx.save();ctx.globalAlpha=a.life*2;sprite('daroca',a.x,a.y,{facing:a.facing,frame:time,dash:true,moving:true,muscular:q.trained,grounded:player.ground});ctx.restore();}
     if(started)drawBivoltAura(ctx,player.x,player.y-40);
     if(started&&(player.inv<=0||Math.floor(time*15)%2===0)){if(vehicle&&window.Art?.drawVehicle){Art.drawVehicle(ctx,player.x,player.y,time);sprite('daroca',player.x+4,player.y-22,playerSpriteOptions(.8));}else{const k=window.SceneLife?.heroScale?.(player,vehicle)||{sx:1,sy:1};ctx.save();ctx.translate(Math.round(player.x),Math.round(player.y));ctx.scale(k.sx,k.sy);sprite('daroca',0,0,playerSpriteOptions());ctx.restore();}}

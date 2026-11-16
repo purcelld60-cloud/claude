@@ -58,6 +58,7 @@
     if (p.attack > 0 && lastAttack <= 0) lines.push({ x: p.x, y: p.y, age: 0, life: .2, kind: 'smear', dir: p.facing, type: p.attackType });
     lastAttack = p.attack || 0;
 
+    window.Critters?.update?.(dt, s);
     for (const e of particles) { e.life -= dt; e.x += e.vx * dt; e.y += e.vy * dt; e.vx *= Math.exp(-dt * 4); e.vy += 40 * dt; }
     particles = particles.filter(e => e.life > 0);
     for (const l of lines) l.age += dt;
@@ -90,6 +91,7 @@
   }
 
   function drawBack(c, s) {
+    window.Critters?.draw?.(c, s);
     // Landing ring sits on the floor behind the hero.
     for (const l of lines) if (l.kind === 'ring') {
       const k = l.age / l.life, w = (18 + k * 46) * l.size;
@@ -138,5 +140,7 @@
     }
   }
 
-  window.SceneLife = Object.freeze({ update, drawBack, drawFront, heroScale });
+  function burst(x, y, color, n) { for (let i = 0; i < n; i++) puff(x, y, (Math.random() - .5) * 120, -20 - Math.random() * 50, 2, color, .35); }
+  window.Graphics?.onChange?.(() => window.Critters?.reset?.());
+  window.SceneLife = Object.freeze({ update, drawBack, drawFront, heroScale, burst });
 })();
