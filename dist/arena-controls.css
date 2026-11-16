@@ -38,3 +38,21 @@
 .is-spectating:not(.arena-layout-editing) .arena-custom-controls>.arena-layout-target{pointer-events:none!important}
 .roca-arena.in-battle .arena-joystick>small{bottom:2px;max-width:90%;padding:1px 3px;font-size:7px;overflow:hidden}
 .roca-arena.in-battle:not(.arena-layout-editing) .arena-joystick>small{display:none}
+/* Arena 2.0: placar em fileira no topo (fora do joystick), dano visível e botões translúcidos. */
+.roca-arena .arena-fighter-hud{--card:calc(var(--life-size) + 8px);width:var(--card);top:0!important;bottom:auto!important;right:auto!important}
+.roca-arena .arena-fighter-hud[data-slot="0"]{left:calc(50% - 64px - var(--card)*2 - 8px)!important}
+.roca-arena .arena-fighter-hud[data-slot="1"]{left:calc(50% - 64px - var(--card))!important}
+.roca-arena .arena-fighter-hud[data-slot="2"]{left:calc(50% + 64px)!important}
+.roca-arena .arena-fighter-hud[data-slot="3"]{left:calc(50% + 72px + var(--card))!important}
+.roca-arena .arena-life-circle{border-width:3px;border-color:var(--damage)}
+.roca-arena .arena-damage{display:block;position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);min-width:34px;padding:1px 4px;border:2px solid #3b2416;border-radius:3px;background:#2a1a10;color:var(--damage);font-size:12px;font-weight:900;line-height:1.15;letter-spacing:0;font-variant-numeric:tabular-nums;text-shadow:1px 1px #000}
+.roca-arena .arena-damage[data-tier="3"],.roca-arena .arena-damage[data-tier="4"]{animation:arenaDamagePulse .5s steps(2) infinite}
+@keyframes arenaDamagePulse{50%{transform:translateX(-50%) scale(1.12)}}
+.roca-arena .arena-combo-meter{margin-top:8px}
+@media(max-width:760px),(max-height:440px){.roca-arena .arena-damage{font-size:10px;min-width:30px;bottom:-8px}}
+@media(pointer:coarse){
+ .roca-arena .arena-mobile-controls .arena-actions button,.roca-arena .arena-mobile-controls .arena-pad{opacity:.62;transition:opacity .12s}
+ .roca-arena .arena-mobile-controls .arena-actions button:active,.roca-arena .arena-mobile-controls .arena-actions button.pressed,.roca-arena .arena-mobile-controls .arena-pad:active{opacity:.95}
+}
+@media(prefers-reduced-motion:reduce){.roca-arena .arena-damage{animation:none!important}}
+.roca-arena .arena-stock-count{top:-6px!important;bottom:auto!important;right:-8px!important;left:auto!important}

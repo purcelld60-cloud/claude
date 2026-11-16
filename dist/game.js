@@ -15,6 +15,8 @@
   const emptyQuest=()=>({carMissionAccepted:false,carParts:[],almiroAccepted:false,notebooks:[],lucas:false,kaua:false,mota:false,almiro:false,miqueias:false,reeis:false,marco:false,giant:false,menezes:false,training:false,trained:false,nikolas:false,freddy:false,nicolas:false,bigodon:false,vitor:false,dede:false,patioAccepted:false,arthur:false,acai:false,celebrationSeen:false,easyEndingSeen:false,jorgeSeen:false,jorgeStarted:false,rayssaVisit:false,ollyan:false,bivoltAccepted:false,bivoltParts:[],bivoltUnlocked:false,bivoltCharges:0,igor:false,kaique:false,igorSneak:false,kaiqueSneak:false,npcVisits:{}});
   let q=emptyQuest(),player,scene=0,camera=0,time=0,playing=false,paused=false,dialog=null,started=false,won=false,sound=false,vehicle=false,transition=0;
   let particles=[],shots=[],enemies=[],pickups=[],targets=[],damageTexts=[],shake=0,hitFlash=0,hazards=[],afterimages=[];
+  // Visual-only boss drama: impact freeze, intro plate, phase shockwaves and the defeat burst.
+  let hitStop=0;const epic={intro:null,rings:[],flash:0,flashColor:'#fff6d8',plate:null};const calmMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let joystick={x:0,y:0},dashTimer=0,dashCooldown=0,dashDir=1,activeBoss=null,defeated=false,chapterEnded=false,respawnCheckpoint=null,routeTransition=null,routeEdgeCooldown=0,releasingInputs=false;
   let reeisPhase='idle',reeisPhaseTimer=0,reeisX=0,reeisY=FLOOR,reeisFacing=1,reeisFireTimer=0;
   let sandbox=null;
@@ -487,10 +489,10 @@
   function toggleVehicle(){if(ollyanEncounter)return false;if(room||cutscene||arena){toast('Saia da sala ou da arena para entrar no carro.');return;}if(!q.lucas){toast('Fale com Lucas para recuperar as chaves do carro a gás do seu pai.');return;}if(activeBoss){toast('O chefe não deixa você entrar no carro! Vença ou recue primeiro.');return;}vehicle=!vehicle;releaseInputs();player.vy=0;toast(vehicle?'Carro a gás do seu pai ligado! Escolha uma rota ou dirija com o joystick.':'Carro a gás estacionado.');beep(vehicle?160:90,.2,'sawtooth');if(vehicle)requestRoutePicker('entered-car');}
   function damageEnemy(e,n,element){
     if(e.hp<=0||e.state==='underground'||e.damageLock>0||dialog||won||defeated||room||cutscene||arena&&arena.phase!=='active')return;if(!activeBoss&&Math.abs(player.x-e.x)>390)return;if(!activeBoss&&!engageBoss(e))return;if(activeBoss!==e)return;
-    e.damageLock=.14;const exposed=e.state==='recover';n=Math.max(1,Math.round(n*(exposed?(e.type==='marco'&&e.phase>1?.9:1):bossProfile(e).armor)));e.hp-=n;e.hit=.15;window.CampaignVfx?.emit?.('hit',{x:e.x,y:e.y-(e.type==='giant'?80:e.type==='igor'?45*igorScale(e):e.type==='nikolas'&&e.phase>=2?nikolasBounds(e).centerY:32),dir:player.facing,element,damage:n,kind:e.type});if(element==='fire')e.burn=3;if(element==='electric'){e.stateTimer+=exposed?.08:0;fx(e.x,e.y-55,'#a8e9ff',12,100);}fx(e.x,e.y-32,e.type==='nikolas'?'#a6d05d':'#e9ae68',8,90);floating(e.x,e.y-85,'−'+n);beep(220,.06);
+    e.damageLock=.14;const exposed=e.state==='recover';n=Math.max(1,Math.round(n*(exposed?(e.type==='marco'&&e.phase>1?.9:1):bossProfile(e).armor)));e.hp-=n;epicFreeze(n>=18?.085:exposed?.06:.04);e.hit=.15;window.CampaignVfx?.emit?.('hit',{x:e.x,y:e.y-(e.type==='giant'?80:e.type==='igor'?45*igorScale(e):e.type==='nikolas'&&e.phase>=2?nikolasBounds(e).centerY:32),dir:player.facing,element,damage:n,kind:e.type});if(element==='fire')e.burn=3;if(element==='electric'){e.stateTimer+=exposed?.08:0;fx(e.x,e.y-55,'#a8e9ff',12,100);}fx(e.x,e.y-32,e.type==='nikolas'?'#a6d05d':'#e9ae68',8,90);floating(e.x,e.y-85,'−'+n);beep(220,.06);
     if(e.hp<=0&&e.type!=='giant'&&(e.phase||1)<(e.phaseCount||3)){e.hp=0;beginBossPhase(e,(e.phase||1)+1);updateUI();return;}
     if(e.hp<=0&&sandbox){e.hp=0;finishSandbox('won');return;}
-    if(e.hp<=0){e.hp=0;shake=9;killCount++;const type=e.type;leaveArena(true);activeBoss=null;hazards=[];shots=shots.filter(a=>a.owner!=='enemy');
+    if(e.hp<=0){e.hp=0;shake=12;epicFreeze(.3);epic.flash=.75;epic.flashColor='#fff6d8';epicRing(e.x,e.y-60,'#ffe08b',1.6);epicRing(e.x,e.y-60,'#ff9b6a',1.1);epicPlate('DERROTADO!',(bossNames[e.type]||'').toUpperCase(),'#ffd25a',2.2);killCount++;const type=e.type;leaveArena(true);activeBoss=null;hazards=[];shots=shots.filter(a=>a.owner!=='enemy');
       awardXP(type==='nikolas'?900:type==='giant'?750:type==='nicolas'?700:type==='reeisBoss'?600:type==='menezes'?650:type==='freddy'?400:type==='dede'?320:type==='arthur'?450:type==='igor'?360:type==='kaique'?420:480,'boss-'+type);
       if(type==='arthur'){q.arthur=true;startCutscene('arthur_revenge',()=>{toast('Paz no pátio! Ravile levantou e Arthur aprendeu a respeitar o cabelo dos outros.');save();updateUI();});}
       else if(type==='igor'||type==='kaique'){q[type]=true;q[type+'Sneak']=true;say(type==='igor'?[{name:'Igor · monitor',text:'Oxe, véi... tu passou mesmo! Achou um pão de queijo, fortalece o pai aqui, viu?'},{name:'Da Roça',text:'Tua barriga fez mais chamada que o professor, pô! Bora que meu bolo não se acha sozinho.'}]:[{name:'Kaique · monitor',text:'Vai, se pique logo, véi! Hoje tu passou... mas se eu achar outra bolinha, já sabe, né?'},{name:'Da Roça',text:'Qual foi, Kaique? Era só um trabalho de física voando, pô!'}]);}
@@ -547,6 +549,48 @@
       {name:'Lucas · o Sapo',text:'Tem bolo pra todo mundo. Até pro Nikolas, se ele lavar as mãos primeiro.'}],
       ()=>startCutscene('outro',beginCelebration));
   }
+  function epicRing(x,y,color,size=1){if(epic.rings.length>8)epic.rings.shift();epic.rings.push({x,y,color,size,age:0,life:.62*size});}
+  function epicFreeze(seconds){if(!calmMotion)hitStop=Math.max(hitStop,Math.min(.35,seconds));}
+  function epicPlate(title,sub,color,life=1.9){epic.plate={title,sub,color,age:0,life};}
+  function updateEpic(dt){
+    if(epic.intro){epic.intro.age+=dt;if(!epic.intro.slammed&&epic.intro.age>=.36){epic.intro.slammed=true;shake=Math.max(shake,calmMotion?2:7);}if(epic.intro.age>2.7)epic.intro=null;}
+    for(const r of epic.rings)r.age+=dt;epic.rings=epic.rings.filter(r=>r.age<r.life);
+    if(epic.plate){epic.plate.age+=dt;if(epic.plate.age>epic.plate.life)epic.plate=null;}
+    epic.flash=Math.max(0,epic.flash-dt*2.2);
+  }
+  function drawEpicWorld(){
+    const b=activeBoss;
+    if(b&&b.hp>0&&(b.phase||1)>=(b.phaseCount||1)&&b.max&&b.hp/b.max<.35){
+      const pulse=.5+.5*Math.sin(time*9),h=b.type==='giant'?190:b.type==='nikolas'&&b.phase>=4?210:110,g=ctx.createRadialGradient(b.x,b.y-h*.45,8,b.x,b.y-h*.45,h*.85);
+      g.addColorStop(0,`rgba(255,96,64,${.2+.14*pulse})`);g.addColorStop(1,'rgba(255,60,40,0)');
+      ctx.save();ctx.globalCompositeOperation='lighter';ctx.fillStyle=g;ctx.fillRect(b.x-h,b.y-h*1.3,h*2,h*1.5);
+      ctx.fillStyle=`rgba(255,180,120,${.5+.4*pulse})`;for(let i=0;i<5;i++){const a=time*2.2+i*1.26,r=h*.42+Math.sin(time*4+i)*6;ctx.fillRect(Math.round(b.x+Math.cos(a)*r*.7),Math.round(b.y-h*.45+Math.sin(a)*r*.5-((time*60+i*23)%40)),3,3);}
+      ctx.restore();
+    }
+    for(const r of epic.rings){const k=r.age/r.life,rad=(28+k*230)*r.size,alpha=1-k;ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=r.color;ctx.lineWidth=Math.max(2,Math.round(8*(1-k)*r.size));ctx.beginPath();ctx.ellipse(r.x,r.y,rad,rad*.55,0,0,Math.PI*2);ctx.stroke();
+      ctx.fillStyle='#fff6d8';for(let i=0;i<10;i++){const a=i/10*Math.PI*2+r.size;ctx.fillRect(Math.round(r.x+Math.cos(a)*rad*1.05),Math.round(r.y+Math.sin(a)*rad*.58),4,4);}ctx.restore();}
+  }
+  function drawEpicScreen(){
+    const I=epic.intro;
+    if(I){const a=I.age,inK=clamp(a/.32,0,1),outK=clamp((a-2.25)/.4,0,1),bar=Math.round(H*.085*(inK*(1-outK)));
+      if(bar>0){ctx.fillStyle='#0b1210';ctx.fillRect(0,0,W,bar);ctx.fillRect(0,H-bar,W,bar);}
+      if(a>.18&&outK<1){const slide=clamp((a-.18)/.2,0,1),ease=1-Math.pow(1-slide,3),x=-420+ease*(W/2+420),y=H*.27,w=Math.min(W-40,Math.max(320,I.name.length*14+80));
+        ctx.save();ctx.globalAlpha=1-outK;ctx.translate(Math.round(x),Math.round(y));
+        ctx.fillStyle='#14211d';ctx.fillRect(-w/2-6,-34,w+12,72);ctx.fillStyle=I.color;ctx.fillRect(-w/2,-28,w,60);ctx.fillStyle='#1c2e28';ctx.fillRect(-w/2+5,-23,w-10,50);
+        ctx.fillStyle=I.color;for(let i=0;i<6;i++)ctx.fillRect(-w/2+8+i*12,-31,6,3);
+        text('CHEFE · NÍVEL '+I.level,0,-9,12,'#ffd98a');text(I.name.toUpperCase(),0,13,Math.max(12,Math.min(20,Math.floor((w-30)/Math.max(8,I.name.length)*1.55))),'#fff3d6');
+        if(a>=.36&&a<.62){ctx.globalAlpha=(.62-a)/.26*.6;ctx.fillStyle='#fff6d8';ctx.fillRect(-w/2,-28,w,60);}
+        ctx.restore();}
+    }
+    const P=epic.plate;
+    if(P){const k=P.age/P.life,pop=P.age<.18?.6+P.age/.18*.5:P.age<.3?1.1-(P.age-.18)/.12*.1:1,alpha=k>.8?(1-k)/.2:1;
+      ctx.save();ctx.globalAlpha=clamp(alpha,0,1);ctx.translate(W/2,H*.36);ctx.scale(pop,pop);
+      ctx.font='bold 34px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=7;ctx.lineJoin='round';ctx.strokeStyle='#14211d';ctx.strokeText(P.title,0,0);ctx.fillStyle=P.color;ctx.fillText(P.title,0,0);
+      if(P.sub){ctx.font='bold 14px monospace';ctx.lineWidth=4;ctx.strokeText(P.sub,0,30);ctx.fillStyle='#fff3d6';ctx.fillText(P.sub,0,30);}
+      ctx.restore();}
+    if(epic.flash>0){ctx.save();ctx.globalAlpha=Math.min(.55,epic.flash);ctx.fillStyle=epic.flashColor;ctx.fillRect(0,0,W,H);ctx.restore();}
+  }
+
   function epilogueCue(film){
     if(film?.kind!=='jorge_epilogue')return;
     const shot=window.Cinematics?.beat?.(film)?.id;
@@ -668,8 +712,8 @@
     if(e.type==='nikolas'){e.form=['normal','muscular','flying','giant'][e.phase-1];e.kind=e.phase===2?'muscleClap':e.phase===3?'auraComets':'giantPalm';e.targetX=player.x;e.targetY=player.y-30;}
     else{e.y=FLOOR;const kit=bossPhaseSkills[e.type];e.kind=kit?.[e.phase-2]||'fan';}
     shots=shots.filter(shot=>shot.owner!=='enemy');hazards=[];minions=minions.filter(m=>!m.summoned);
-    player.inv=Math.max(player.inv,e.phaseDuration);shake=Math.max(shake,e.type==='nikolas'?8:5);fx(e.x,e.y-60,e.type==='nikolas'?'#ffe18b':e.type==='menezes'?'#efbfd3':'#deb4f0',e.type==='nikolas'?46:24,170);
-    floating(e.x,bossCaptionY(e),e.type==='nikolas'?['','NOVA FORMA!','SHAPE DO CALEB!','AURA ASCENDENTE!','TITÃ DO CATARRO!'][e.phase]:'FASE '+e.phase+' · VIDA RENOVADA!','#ffe0a2');beep(e.phase>=3?190:290,.24,'triangle',.025);
+    player.inv=Math.max(player.inv,e.phaseDuration);shake=Math.max(shake,e.type==='nikolas'?10:7);epicFreeze(.16);epic.flash=.4;epic.flashColor=e.type==='nikolas'?'#ffe18b':'#f3d9ff';epicRing(e.x,e.y-60,e.type==='nikolas'?'#ffe18b':'#deb4f0',1.3);fx(e.x,e.y-60,e.type==='nikolas'?'#ffe18b':e.type==='menezes'?'#efbfd3':'#deb4f0',e.type==='nikolas'?46:24,170);
+    epicPlate(e.type==='nikolas'?['','NOVA FORMA!','SHAPE DO CALEB!','AURA ASCENDENTE!','TITÃ DO CATARRO!'][e.phase]:'FASE '+e.phase,e.phase>=(e.phaseCount||3)?'ÚLTIMA FASE · VIDA RENOVADA':'VIDA RENOVADA · O CHEFE FICOU MAIS FORTE','#ffb36b',1.7);beep(e.phase>=3?190:290,.24,'triangle',.025);
   }
   function phasePillar(e,x,type,delay=.95,height=310,r=34,damage=15){hazards.push({x:clamp(x,arena.bounds[0]+45,arena.bounds[1]-45),y:FLOOR-6,type,r,delay,life:.55,height,damage,triggered:false});}
   function phaseReturnFan(e,type,count=5,speed=180,spread=.18){
@@ -743,7 +787,7 @@
     if(activeBoss||e.hp<=0||defeated||won||room||cutscene||activity||dialog||paused)return false;
     const access=bossAccess(e);if(!access.ok){if(!bossHintCooldown){toast(access.reason);bossHintCooldown=3;}return false;}
     e.difficultyMode=window.Difficulty?.getMode?.()||'normal';e.difficultyProfile=window.Difficulty?.boss?.(e.type,e.difficultyMode)||null;if(e.difficultyProfile){e.hp=e.max=e.baseMax=e.difficultyProfile.hp;e.phaseHP=e.difficultyProfile.phaseHP?[...e.difficultyProfile.phaseHP]:undefined;bossDefaults(e);}
-    activeBoss=e;vehicle=false;releaseInputs();player.inv=Math.max(player.inv,.85);respawnCheckpoint={scene,x:Math.max(180,e.homeX-400),boss:e.type};makeArena(e);toast((window.Difficulty?.getSettings?.(e.difficultyMode)?.label||'NORMAL')+' · Nv. '+bossProfile(e).level+' sugerido. Invista em ATRIBUTOS e ataque nas aberturas. E na saída: recuar.');return true;
+    activeBoss=e;vehicle=false;epic.intro={age:0,name:bossNames[e.type]||'Chefe',level:bossProfile(e).level||1,color:e.type==='nikolas'?'#a6d05d':e.type==='menezes'?'#efbfd3':e.type==='giant'?'#f0a35b':'#e9b45c',slammed:false};releaseInputs();player.inv=Math.max(player.inv,.85);respawnCheckpoint={scene,x:Math.max(180,e.homeX-400),boss:e.type};makeArena(e);toast((window.Difficulty?.getSettings?.(e.difficultyMode)?.label||'NORMAL')+' · Nv. '+bossProfile(e).level+' sugerido. Invista em ATRIBUTOS e ataque nas aberturas. E na saída: recuar.');return true;
   }
 
   function bossFan(e,type,count,speed,spread=.16){window.CampaignVfx?.emit?.('cast',{x:e.x+Math.sign(e.targetX-e.x)*26,y:e.y-42,dir:Math.sign(e.targetX-e.x),kind:type});const a=Math.atan2(e.targetY-(e.y-42),e.targetX-e.x);for(let i=0;i<count;i++){const angle=a+(i-(count-1)/2)*spread;shots.push({x:e.x+Math.sign(e.targetX-e.x)*30,y:e.y-42,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:5,type,owner:'enemy',damage:type==='smoke'?10:type==='confetti'?12:type==='word'?12:type==='doodle'?(e.angry>0?18:13):16,text:phrases[i%phrases.length],variant:i%3,enraged:e.angry>0});}}
@@ -966,6 +1010,7 @@
     for(const p of particles){ctx.globalAlpha=clamp(p.life*2,0,1);ctx.fillStyle=p.color;ctx.fillRect(Math.round(p.x),Math.round(p.y),p.size,p.size);}ctx.globalAlpha=1;
     for(const d of damageTexts){ctx.globalAlpha=clamp(d.life*2,0,1);text(d.text,d.x,d.y,17,d.color);}ctx.globalAlpha=1;
     if(q.nikolas&&scene===3&&window.Art?.drawCake)Art.drawCake(ctx,1970,FLOOR-5);
+    drawEpicWorld();
     ctx.restore();
     if(!started){ctx.fillStyle='#192e301c';ctx.fillRect(0,0,W,H);if(window.Art?.drawVehicle)Art.drawVehicle(ctx,760,FLOOR,time);sprite('daroca',760,FLOOR-20,{facing:1,frame:time,scale:.8});}
     if(started&&!dialog&&!paused&&!won&&!defeated&&!arena&&!routeTransition&&!training?.active&&!activity){const needPart=pickups.find(p=>p.type==='repair'&&!p.taken),needBook=pickups.find(p=>p.type==='notebook'&&!p.taken);const bivoltTarget=window.BivoltQuest?.parts?.find(p=>!q.bivoltParts.includes(p.id))?.x;const objective=scene===11&&!q.ollyan?3260:scene===10&&!q.bivoltUnlocked?(q.bivoltAccepted?(bivoltTarget??1220):1220):scene===10&&!q.rayssaVisit?450:scene===0&&!q.lucas?(q.carMissionAccepted&&q.carParts.length<3?needPart?.x:480):scene===7&&!q.mota?500:scene===8&&!q.bigodon?520:scene===9&&!q.arthur?(q.patioAccepted?bossHome('arthur',2850):500):scene===4&&!q.nicolas?bossHome('nicolas',5350):scene===1&&!q.almiro?(q.almiroAccepted&&q.notebooks.length<3?needBook?.x:1350):scene===1&&!q.miqueias?2350:scene===5&&!q.freddy&&!q.reeis?bossHome('freddy',5680):scene===5&&!q.reeis?bossHome('reeisBoss',6400):scene===1&&!q.marco?bossHome('marco',3700):scene===6&&!q.giant?bossHome('giant',5650):scene===1&&!q.menezes?bossHome('menezes',5200):scene===2&&!q.trained?400:scene===3&&!q.nikolas?bossHome('nikolas',4300):null;if(objective!==null&&(objective<camera+45||objective>camera+W-45)){const right=objective>camera+W-45;pill(right?'OBJETIVO →':'← OBJETIVO',right?W-83:83,62,'#ffe09b');}
@@ -974,9 +1019,10 @@
     if(reeisPhase==='charging'||reeisPhase==='burst'){ctx.save();ctx.globalAlpha=reeisPhase==='burst'?.55:.2;ctx.strokeStyle='#ffe7ab';ctx.lineWidth=2;for(let i=0;i<16;i++){const yy=20+i*33+Math.sin(time*15+i)*12;ctx.beginPath();ctx.moveTo(i%2?0:W,yy);ctx.lineTo(i%2?180:W-180,yy+Math.sin(i)*25);ctx.stroke();}ctx.restore();}
     if(training?.active)drawTraining();if(routeTransition)drawRouteTransition();
     if(hitFlash>0){ctx.fillStyle=`rgba(225,104,76,${hitFlash*.8})`;ctx.fillRect(0,0,W,H);}if(transition>0){ctx.fillStyle=`rgba(25,43,35,${transition*.5})`;ctx.fillRect(0,0,W,H);}
+    drawEpicScreen();
     ctx.restore();
   }
-  function frame(now){const challenge=window.WorldLife?.getStatus?.();const counting=started&&!sandbox&&!won&&!chapterEnded&&!defeated&&!document.hidden&&!window.Arena?.isOpen?.()&&(!paused||challenge?.open&&challenge.stage==='live');window.CampaignRun?.tick?.(now,counting);if(counting&&!cutscene&&!window.SwiftGuide?.isOpen?.())window.CampaignRun?.confirmInitialMode?.();const dt=Math.min(.035,(now-last)/1000);last=now;update(dt);draw();requestAnimationFrame(frame);}
+  function frame(now){const challenge=window.WorldLife?.getStatus?.();const counting=started&&!sandbox&&!won&&!chapterEnded&&!defeated&&!document.hidden&&!window.Arena?.isOpen?.()&&(!paused||challenge?.open&&challenge.stage==='live');window.CampaignRun?.tick?.(now,counting);if(counting&&!cutscene&&!window.SwiftGuide?.isOpen?.())window.CampaignRun?.confirmInitialMode?.();const dt=Math.min(.035,(now-last)/1000);last=now;if(hitStop>0&&started&&!cutscene&&!paused&&!dialog){hitStop=Math.max(0,hitStop-dt);}else{hitStop=0;update(dt);}updateEpic(dt);draw();requestAnimationFrame(frame);}
   createBivoltControl();
   const editableTarget=target=>!!(target?.isContentEditable||target?.closest?.('input,textarea,select,[contenteditable=""],[contenteditable="true"],[role="textbox"]'));
   const visibleKeyboardButton=target=>{const button=target?.closest?.('button,a');return button&&!button.closest('[hidden],[inert]')&&button.getClientRects().length&&getComputedStyle(button).visibility!=='hidden'?button:null;};

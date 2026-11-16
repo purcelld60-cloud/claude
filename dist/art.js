@@ -8,12 +8,69 @@
   const r = (c,x,y,w,h,color) => {c.fillStyle=color;c.fillRect(Math.round(x),Math.round(y),Math.ceil(w),Math.ceil(h));};
   function poly(c, points, color) {c.fillStyle=color;c.beginPath();points.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.closePath();c.fill();}
   function oval(c,x,y,rx,ry,color,p=3) {for(let yy=-ry;yy<ry;yy+=p){const ww=Math.sqrt(Math.max(0,1-(yy/ry)*(yy/ry)))*rx;r(c,x-ww,y+yy,ww*2,p,color);}}
-  function cloud(c,x,y,s=1,color='#fffef4') {r(c,x,y+12*s,66*s,15*s,color);r(c,x+12*s,y+4*s,38*s,24*s,color);r(c,x+21*s,y-3*s,22*s,29*s,color);r(c,x-8*s,y+17*s,85*s,7*s,color);r(c,x+4*s,y+28*s,56*s,3*s,'#d8e7e9');}
+  function cloud(c,x,y,s=1,color='#fffef4') {r(c,x+3*s,y+15*s,66*s,15*s,'#b9d3e366');r(c,x,y+12*s,66*s,15*s,color);r(c,x+12*s,y+4*s,38*s,24*s,color);r(c,x+21*s,y-3*s,22*s,29*s,color);r(c,x-8*s,y+17*s,85*s,7*s,color);r(c,x+4*s,y+28*s,56*s,3*s,'#d8e7e9');r(c,x-6*s,y+20*s,81*s,4*s,'#e3edf1');r(c,x+22*s,y-2*s,14*s,3*s,'#ffffff');r(c,x+14*s,y+5*s,10*s,2*s,'#ffffff');}
   function steppedHill(c,x,y,w,h,color) {poly(c,[[x,y+h],[x,y+75],[x+w*.09,y+75],[x+w*.09,y+55],[x+w*.21,y+55],[x+w*.21,y+31],[x+w*.35,y+31],[x+w*.35,y+12],[x+w*.48,y+12],[x+w*.48,y],[x+w*.6,y],[x+w*.6,y+16],[x+w*.73,y+16],[x+w*.73,y+39],[x+w*.85,y+39],[x+w*.85,y+66],[x+w,y+66],[x+w,y+h]],color);}
+  /* Scenery remaster: cached, ordered-dither (Bayer 4x4) light and depth layers.
+     Only paints scenery; collisions, platforms and characters are untouched. */
+  const BAYER=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
+  const remasterCache=new Map();
+  const hex=(h)=>{const n=parseInt(h.slice(1),16);return[(n>>16)&255,(n>>8)&255,n&255];};
+  function cachedLayer(key,w,h,paint){let layer=remasterCache.get(key);if(layer)return layer;layer=document.createElement('canvas');layer.width=w;layer.height=h;const x=layer.getContext('2d');x.imageSmoothingEnabled=false;paint(x,w,h);remasterCache.set(key,layer);return layer;}
+  // Paints a vertical palette ramp at 1/px resolution so each dither cell is a crisp px*px block.
+  function ditherRamp(key,w,h,stops,px=2){
+    return cachedLayer(key,w,h,(x)=>{const lw=Math.ceil(w/px),lh=Math.ceil(h/px),small=document.createElement('canvas');small.width=lw;small.height=lh;const sc=small.getContext('2d'),img=sc.createImageData(lw,lh),cols=stops.map(hex),n=cols.length-1;
+      for(let yy=0;yy<lh;yy++){const f=yy/(lh-1)*n,i=Math.min(n-1,Math.floor(f)),frac=f-i;for(let xx=0;xx<lw;xx++){const pick=frac*16>BAYER[(yy&3)*4+(xx&3)]+.5?cols[i+1]:cols[i],o=(yy*lw+xx)*4;img.data[o]=pick[0];img.data[o+1]=pick[1];img.data[o+2]=pick[2];img.data[o+3]=255;}}
+      sc.putImageData(img,0,0);x.drawImage(small,0,0,lw*px,lh*px);});
+  }
+  // Alpha ramp of a single colour (shadows, haze, light) using the same ordered dither.
+  function ditherShade(key,w,h,color,alphaAt,px=2){
+    return cachedLayer(key,w,h,(x)=>{const lw=Math.ceil(w/px),lh=Math.ceil(h/px),small=document.createElement('canvas');small.width=lw;small.height=lh;const sc=small.getContext('2d'),img=sc.createImageData(lw,lh),col=hex(color);
+      for(let yy=0;yy<lh;yy++)for(let xx=0;xx<lw;xx++){const a=Math.max(0,Math.min(1,alphaAt(xx/(lw-1),yy/(lh-1)))),steps=a*4,base=Math.floor(steps),on=(steps-base)*16>BAYER[(yy&3)*4+(xx&3)]+.5?base+1:base,o=(yy*lw+xx)*4;img.data[o]=col[0];img.data[o+1]=col[1];img.data[o+2]=col[2];img.data[o+3]=Math.round(on/4*255);}
+      sc.putImageData(img,0,0);x.drawImage(small,0,0,lw*px,lh*px);});
+  }
+  const SKIES={
+    day:['#2f7cc8','#4a95d9','#68abe3','#8cc1ea','#b0d5ee','#d4e8ec','#ecefdc'],
+    afternoon:['#3a6fb4','#5b8cc8','#83a9d6','#aec4d9','#d4d6cc','#efdcb6'],
+    golden:['#35609f','#5a82bd','#8ea4c8','#c7b9bd','#ecc49b','#f7d79a'],
+    plaza:['#2e86c9','#4f9fdb','#77b8e6','#a2d0ee','#cfe6ee','#eef2e2']
+  };
+  const skyFor=(scene)=>scene===3?'afternoon':scene===5?'golden':scene===4?'plaza':'day';
+  function farRange(scene){
+    const mood=skyFor(scene),far=mood==='golden'?'#8a84a8':mood==='afternoon'?'#7d98bb':'#78a3c6',near=mood==='golden'?'#6f6b92':mood==='afternoon'?'#64819f':'#5f8fb3',snow=mood==='golden'?'#f0c9b0':'#e6f0f4';
+    return cachedLayer('range-'+mood,1920,190,(x)=>{
+      for(const [col,amp,base,seed] of [[far,70,40,3],[near,48,92,9]]){x.fillStyle=col;let h=base;for(let xx=0;xx<1920;xx+=6){const n=Math.sin((xx+seed*91)/151)*.55+Math.sin((xx+seed*37)/67)*.3+Math.sin((xx+seed*13)/29)*.15;h=Math.round((base+amp*(.5-n*.5))/3)*3;x.fillRect(xx,h,6,190-h);if(col===far&&h<base+8){x.fillStyle=snow;x.fillRect(xx,h,6,3);x.fillStyle=col;}}}
+      // Atmospheric haze fades the foot of the range into the horizon.
+      x.drawImage(ditherShade('haze-'+mood,1920,190,mood==='golden'?'#f2d3a8':'#e4eef0',(u,v)=>v<.35?0:Math.pow((v-.35)/.65,1.4)*.7,2),0,0);
+    });
+  }
+  function sunGlow(c,x,y,warm){
+    const g=c.createRadialGradient(x,y,10,x,y,170);g.addColorStop(0,warm?'rgba(255,214,150,.55)':'rgba(255,248,214,.5)');g.addColorStop(.35,warm?'rgba(255,200,140,.18)':'rgba(255,250,224,.16)');g.addColorStop(1,'rgba(255,250,224,0)');
+    c.save();c.globalCompositeOperation='lighter';c.fillStyle=g;c.fillRect(x-170,y-170,340,340);c.restore();
+    for(let i=0;i<3;i++){c.save();c.globalAlpha=.16-i*.04;oval(c,x,y,46+i*12,46+i*12,warm?'#ffe0b0':'#fff7da',3);c.restore();}
+  }
+  const OUTDOOR=new Set([0,1,3,4,5,7,9]);
+  function lightPass(c,scene,camera,t){
+    const outdoor=OUTDOOR.has(scene),ink=scene===6,mood=skyFor(scene);
+    // Contact shadow where walls, fences and props meet the walkway (y=440), plus soil depth below it.
+    {const g=c.createLinearGradient(0,412,0,442);g.addColorStop(0,'rgba(20,16,12,0)');g.addColorStop(1,'rgba(20,16,12,.28)');c.fillStyle=g;c.fillRect(0,412,960,30);
+     const d=c.createLinearGradient(0,452,0,540);d.addColorStop(0,'rgba(20,14,10,0)');d.addColorStop(1,ink?'rgba(20,10,40,.45)':'rgba(20,14,10,.42)');c.fillStyle=d;c.fillRect(0,452,960,88);}
+    if(outdoor){
+      // Slow god-rays from the sun side, warm in the late scenes.
+      const warm=mood!=='day'&&mood!=='plaza';c.save();c.globalCompositeOperation='lighter';
+      for(let i=0;i<4;i++){const sway=Math.sin(t*.25+i*1.7)*18,x0=620+i*70+sway-camera*.02%60,a=warm?.055:.04;c.fillStyle=warm?`rgba(255,206,140,${a})`:`rgba(255,250,215,${a})`;c.beginPath();c.moveTo(x0,0);c.lineTo(x0+60+i*10,0);c.lineTo(x0-260+i*40,440);c.lineTo(x0-380+i*30,440);c.closePath();c.fill();}
+      c.restore();
+      if(warm){c.save();c.globalCompositeOperation='soft-light';c.fillStyle=mood==='golden'?'rgba(255,170,90,.32)':'rgba(255,200,130,.22)';c.fillRect(0,0,960,440);c.restore();}
+    }else{
+      // Interiors: a cool ambient dims the room, window light keeps the centre readable.
+      c.save();c.globalCompositeOperation='multiply';c.fillStyle=ink?'rgba(120,90,170,.18)':'rgba(214,206,196,.22)';c.fillRect(0,0,960,540);c.restore();
+    }
+    {const v=c.createRadialGradient(480,300,180,480,300,620);v.addColorStop(0,'rgba(12,16,14,0)');v.addColorStop(1,ink?'rgba(20,10,38,.5)':outdoor?'rgba(12,16,14,.32)':'rgba(12,16,14,.42)');c.fillStyle=v;c.fillRect(0,0,960,540);}
+  }
+
   function sky(c,scene,camera,t) {
-    const colors=scene===3?['#78a9d7','#a7cbe4','#d6e3dc']:['#74b8e7','#96cef0','#c9e7ec'];
-    r(c,0,0,960,120,colors[0]);r(c,0,120,960,120,colors[1]);r(c,0,240,960,200,colors[2]);
-    const sx=scene===3?762:734;oval(c,sx-camera*.025,99,35,35,scene===3?'#fff0c4':'#fff6cc',4);
+    const mood=skyFor(scene);c.drawImage(ditherRamp('sky-'+mood,960,440,SKIES[mood],2),0,0);
+    const sx=scene===3?762:734;sunGlow(c,sx-camera*.025,99,mood==='golden'||mood==='afternoon');
+    {const range=farRange(scene),off=((camera*.05)%960+960)%960;c.drawImage(range,-off,150);c.drawImage(range,960-off,150);}oval(c,sx-camera*.025,99,35,35,scene===3?'#fff0c4':'#fff6cc',4);
     for(let i=-1;i<6;i++){const x=((i*283+t*5+1800)%1800)-283-camera*.09;cloud(c,x,50+hash(i+10)*95,.8+hash(i)*.6,'#fffef5');}
     for(let i=-2;i<7;i++)steppedHill(c,i*318-camera*.12,197+hash(i+5)*34,422,250,scene===3?'#7eada0':'#89b7a0');
     for(let i=-2;i<8;i++)steppedHill(c,i*289-camera*.25,271+hash(i+21)*25,400,190,scene===3?'#5b937b':'#64a068');
@@ -249,7 +306,7 @@
     sky(c,scene,camera,t);
     if(scene===1)school(c,camera,t);else if(scene===2)gym(c,camera,t);else if(scene===3)court(c,camera,t);else if(scene===4)plaza(c,camera,t);else if(scene===5)favela(c,camera,t);else if(scene===6)inkRealm(c,camera,t);else if(scene===7)footballField(c,camera,t);else if(scene===8)bigodon(c,camera,t);else if(scene===9)courtyard(c,camera,t);else if(scene===10)rayssaHouse(c,camera,t);else farm(c,camera,t);
     if(scene!==2&&scene!==8&&scene!==10)for(let i=0;i<13;i++){const lx=((i*137+t*13-camera*.65)%1120+1120)%1120-80,ly=158+((i*43+t*15)%235);r(c,lx,ly,5,2,i%2?'#8bb65a':'#b2c56c');r(c,lx+Math.round(Math.sin(t*5+i)*2),ly+2,3,2,'#5e954c');}
-    worldExtensions(c,scene,camera,t);ground(c,camera,scene);groundBridges(c,scene,camera,t);c.restore();
+    worldExtensions(c,scene,camera,t);ground(c,camera,scene);groundBridges(c,scene,camera,t);lightPass(c,scene,camera,t);c.restore();
   }
   /* Every former pit has a walking surface at the same y=440 used by collision. */
   function woodenBridge(c,x,width,t=0,scene=0,feet=440,depth=100) {
