@@ -1,0 +1,96 @@
+/* The two-player porch: local pairing, shared arena and tactile pixel controls. */
+#coopOverlay{--coop-wood:#715033;--coop-ink:#4f3d2a;--coop-paper:#f3e2b6;position:fixed;inset:0;z-index:2500;display:flex;flex-direction:column;min-width:0;height:100vh;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);overflow:hidden;background:#1e3936;color:var(--coop-ink);font-family:Space,Arial,sans-serif;-webkit-text-size-adjust:100%;overscroll-behavior:none}
+#coopOverlay *{box-sizing:border-box}
+#coopOverlay[hidden],#coopOverlay [hidden]{display:none!important}
+#coopOverlay .coop-header{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:56px;gap:12px;padding:6px 16px;border-bottom:3px solid #b49155;background:repeating-linear-gradient(0deg,#6d4c32 0 18px,#775437 19px 21px);box-shadow:inset 0 2px #c5a46c,0 3px #1d2e2b6b;color:#f8e9bb}
+#coopOverlay .coop-header h2{margin:0;font:11px Pixel,monospace;line-height:1.6;color:#fff0bd;text-shadow:2px 2px #453323;letter-spacing:.2px}
+#coopOverlay button{min-width:44px;min-height:44px;padding:9px 14px;border:2px solid #62462d;border-bottom-width:5px;border-radius:4px;background:#e8cc94;color:#5b4028;box-shadow:inset 0 2px #fff4d07d,1px 2px #22392c40;font:8px Pixel,monospace;line-height:1.65;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#coopOverlay button:hover{filter:brightness(1.06)}
+#coopOverlay button:active,#coopOverlay button.pressed{transform:translateY(2px);border-bottom-width:3px;box-shadow:inset 0 2px #483b2e22}
+#coopOverlay button:focus-visible,#coopOverlay textarea:focus-visible,#coopJoystick:focus-visible{outline:3px solid #e4e7a2;outline-offset:3px}
+#coopOverlay button:disabled{cursor:default;filter:saturate(.3);opacity:.55}
+#coopOverlay #coopCloseBtn{width:44px;height:44px;flex:0 0 44px;padding:0;display:grid;place-items:center;border-color:#d1b176;border-bottom-color:#a0804c;background:#4c3829;color:#fff1c0;font:24px Space,Arial,sans-serif;line-height:1}
+#coopOverlay .coop-lobby{width:min(840px,calc(100% - 32px));flex:0 1 auto;min-height:0;max-height:calc(100% - 32px);margin:16px auto;padding:24px 27px;border:4px solid #775235;border-radius:8px;background:var(--coop-paper);box-shadow:inset 0 2px #fff3cb,0 4px #b68d50,0 8px #112b2666;overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#a7834c #e8d4a2;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+#coopOverlay .coop-lead{margin:0 0 18px;font-size:14px;line-height:1.7;color:#5c5132}
+#coopOverlay .coop-lead strong,#coopOverlay .coop-lead b{color:#385e47}
+#coopOverlay .coop-role-picker{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 16px}
+#coopOverlay #coopHostBtn{background:#b6d083;border-color:#597343;border-bottom-color:#3d5734;color:#364f2d}
+#coopOverlay #coopJoinBtn{background:#a3c8c1;border-color:#507873;border-bottom-color:#31564f;color:#315a52}
+#coopOverlay .coop-status{min-height:44px;margin:0 0 16px;padding:12px 14px;border:2px solid #9fa56d;border-radius:4px;background:#e2e2b6;color:#4b623b;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+#coopOverlay .coop-status:empty{display:none}
+#coopOverlay .coop-status.coop-error,#coopOverlay .coop-status.error,#coopOverlay .coop-status[data-error="true"]{background:#efd0b5;color:#814a34;border-color:#b47b55}
+#coopOverlay #coopPairing{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;padding:18px;border:2px solid #be9c63;border-radius:5px;background:#ead5a5;min-width:0}
+#coopOverlay #coopPairing label{grid-column:1/-1;margin-top:8px;color:#6a4d2e;font-size:12px;font-weight:600;line-height:1.6}
+#coopOverlay #coopPairing label:first-child{margin-top:0}
+#coopOverlay #coopPairing textarea{grid-column:1;display:block;width:100%;min-width:0;min-height:74px;max-height:180px;resize:vertical;padding:10px 11px;border:2px solid #aa8a55;border-radius:3px;background:#fff5d7;color:#4b4939;font:11px/1.55 Space,Arial,sans-serif;overflow:auto;overflow-wrap:anywhere;word-break:break-all;touch-action:pan-y;-webkit-user-select:text;user-select:text}
+#coopOverlay #coopPairing textarea[readonly]{background:#f8edcd;color:#65705a}
+#coopOverlay #coopCopyBtn,#coopOverlay #coopApplyBtn{align-self:stretch;min-width:118px}
+#coopOverlay #coopApplyBtn{background:#a9c887;border-color:#627c45;color:#3e5730}
+#coopOverlay #coopPairing .coop-step{grid-column:1/-1;min-width:0}
+#coopOverlay #coopPairing .coop-step textarea{margin:7px 0}
+#coopOverlay .coop-note{margin:16px 0 0;color:#81704b;font-size:11px;line-height:1.7}
+#coopOverlay .coop-note a{color:#3d6c65;text-decoration:underline}
+#coopOverlay .coop-arena{position:relative;flex:1 1 auto;min-width:0;min-height:0;width:100%;overflow:hidden;background:#152d2c;isolation:isolate;touch-action:none;-webkit-user-select:none;user-select:none}
+#coopCanvas{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;background:#152d2c;touch-action:none;outline:0}
+#coopOverlay .coop-game-hud{position:absolute;top:8px;left:12px;right:12px;z-index:4;display:flex;align-items:center;gap:10px;justify-content:space-between;pointer-events:none;color:#f4ebc5;font:7px Pixel,monospace;line-height:1.8;text-shadow:1px 2px #142b29}
+#coopOverlay .coop-game-hud>span{padding:5px 8px;border:1px solid #c3b67566;border-radius:3px;background:#18352cd9;box-shadow:0 2px #162c2555}
+#coopOverlay #coopWaveLabel{margin-left:auto}
+#coopOverlay #coopRestartBtn{pointer-events:auto;min-height:44px;min-width:150px;font-size:7px}
+#coopOverlay .coop-player-badge{padding:5px 8px;border:1px solid #d4ca8d;border-radius:3px;background:#3f6248;color:#fff0c6;font:6px Pixel,monospace}
+#coopOverlay .coop-game-notice{position:absolute;z-index:5;top:46px;left:50%;transform:translateX(-50%);width:max-content;max-width:min(65%,620px);margin:0;padding:8px 13px;border:2px solid #8b6943;border-radius:4px;background:#f9e9bde8;color:#63482d;box-shadow:1px 2px #17312c4d;font-size:12px;line-height:1.5;text-align:center;pointer-events:none}
+#coopOverlay .coop-game-notice:empty{display:none}
+#coopOverlay .coop-touch{position:absolute;inset:0;z-index:8;pointer-events:none;touch-action:none}
+#coopJoystick{position:absolute;left:18px;bottom:16px;width:112px;height:112px;border:3px solid #3e392b;border-radius:35%;background:#b5a06d;box-shadow:inset 0 3px #e2d095,inset 0 -4px #7e7147,0 3px #20382c,0 0 0 2px #d5c48a77;pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none;outline-offset:4px}
+#coopJoystick:before{content:'';position:absolute;inset:12px;border:3px solid #6c6341;border-radius:50%;background:#899064;box-shadow:inset 0 3px #555d3d}
+#coopJoystick:after{content:'';position:absolute;inset:24px;border:1px dashed #c9c38b99;border-radius:50%;pointer-events:none}
+#coopJoystick .coop-stick{position:absolute;z-index:1;left:50%;top:50%;width:48px;height:48px;border:2px solid #3c5038;border-radius:35%;background:#91ae72;box-shadow:inset 0 3px #cfdda2,inset 0 -3px #627f4c,0 4px #394d34;transform:translate(calc(-50% + var(--stick-x,0px)),calc(-50% + var(--stick-y,0px)));pointer-events:none}
+#coopJoystick .coop-stick:after{content:'';position:absolute;inset:11px;border:2px solid #718d52;border-top-color:#d4e3a5;border-left-color:#c2d492;border-radius:2px}
+#coopJoystick.engaged{border-color:#f3e5a9}
+#coopOverlay .coop-action-buttons{position:absolute;right:18px;bottom:16px;display:grid;grid-template-columns:58px 58px;gap:10px;pointer-events:auto}
+#coopOverlay .coop-action-buttons button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:58px;min-height:58px;width:58px;height:58px;padding:5px 2px;border:2px solid #324235;border-bottom-width:5px;border-radius:5px;background:#c5dbd4;color:#3c6664;box-shadow:inset 0 2px #f5f4d4,inset 2px 0 #a5bbb0,inset -2px 0 #a5bbb0,0 2px #213d2d55;touch-action:none;-webkit-user-select:none;user-select:none}
+#coopOverlay .coop-action-buttons button svg{display:block;flex:0 0 auto;width:27px;height:27px;pointer-events:none;shape-rendering:crispEdges}
+#coopOverlay .coop-action-buttons button small{display:block;font:6px Pixel,monospace;line-height:1.5;letter-spacing:0;pointer-events:none;white-space:nowrap}
+#coopOverlay .coop-action-buttons button[data-coop-action="fart"]{background:#bed47e;color:#49653b;box-shadow:inset 0 2px #f1efa9,inset 2px 0 #a2ba67,inset -2px 0 #a2ba67,0 2px #213d2d55}
+#coopOverlay .coop-action-buttons button[data-coop-action="jump"]{background:#edc477;color:#71502c;box-shadow:inset 0 2px #fff0b1,inset 2px 0 #c9a251,inset -2px 0 #c9a251,0 2px #213d2d55}
+#coopOverlay .coop-action-buttons button[data-coop-action="dash"]{background:#b3b7da;color:#4c547c;box-shadow:inset 0 2px #e8e5f0,inset 2px 0 #8f98bd,inset -2px 0 #8f98bd,0 2px #213d2d55}
+#coopOverlay .coop-action-buttons button:active,#coopOverlay .coop-action-buttons button.pressed{transform:translateY(3px);border-bottom-width:2px;filter:brightness(1.08)}
+#gameShell #startScreen .start-menu #coopOpenBtn{background:#a8cec2;color:#315f55;border-color:#4e7468;border-bottom-color:#34564c;gap:10px}
+#gameShell #startScreen .start-menu #coopOpenBtn svg{width:20px;height:20px;flex:0 0 20px;pointer-events:none}
+@media(pointer:fine) and (min-width:1000px){#coopOverlay .coop-touch{opacity:.7}#coopOverlay .coop-action-buttons{right:24px;bottom:20px}#coopJoystick{left:24px;bottom:20px}}
+@media(max-width:600px){#coopOverlay .coop-header{min-height:56px;padding:5px 10px;gap:8px}#coopOverlay .coop-header h2{font-size:8px;line-height:1.8}#coopOverlay .coop-lobby{width:calc(100% - 18px);max-height:calc(100% - 20px);margin:10px auto;padding:17px 14px;border-width:3px}#coopOverlay .coop-lead{font-size:12px;margin-bottom:13px}#coopOverlay .coop-role-picker{gap:8px}#coopOverlay .coop-role-picker button{font-size:6px;padding:8px 6px}#coopOverlay .coop-status{font-size:11px;padding:10px 11px}#coopOverlay #coopPairing{padding:12px;grid-template-columns:1fr;gap:8px}#coopOverlay #coopPairing textarea,#coopOverlay #coopPairing label{grid-column:1}#coopOverlay #coopPairing label{font-size:11px}#coopOverlay #coopCopyBtn,#coopOverlay #coopApplyBtn{min-width:0;width:100%;min-height:44px}#coopOverlay .coop-note{font-size:10px}#coopOverlay .coop-game-hud{font-size:5px;gap:5px;top:7px;left:8px;right:8px}#coopOverlay .coop-game-hud>span{padding:4px 5px}#coopOverlay #coopRestartBtn{min-width:118px;font-size:6px;padding:5px 7px}#coopOverlay .coop-game-notice{font-size:10px;max-width:calc(100% - 24px);top:48px;padding:7px 10px}#coopJoystick{left:12px;bottom:14px;width:100px;height:100px}#coopOverlay .coop-action-buttons{right:12px;bottom:14px;grid-template-columns:54px 54px;gap:8px}#coopOverlay .coop-action-buttons button{width:54px;min-width:54px;height:56px;min-height:56px}#coopOverlay .coop-action-buttons button small{font-size:6px}}
+@media(orientation:landscape) and (max-height:520px){#coopOverlay .coop-header{min-height:44px;padding:0 10px;border-bottom-width:2px;gap:8px}#coopOverlay .coop-header h2{font-size:8px}#coopOverlay #coopCloseBtn{height:44px}#coopOverlay .coop-lobby{max-height:calc(100% - 16px);margin:8px auto;padding:14px 20px;border-width:3px}#coopOverlay .coop-lead{font-size:12px;margin-bottom:10px}#coopOverlay .coop-role-picker{margin-bottom:10px;gap:9px}#coopOverlay .coop-role-picker button{font-size:7px}#coopOverlay .coop-status{min-height:0;padding:8px 10px;margin-bottom:10px;font-size:11px}#coopOverlay #coopPairing{padding:10px 13px;gap:6px 9px}#coopOverlay #coopPairing label{font-size:11px;margin-top:5px}#coopOverlay #coopPairing textarea{min-height:58px;padding:7px 9px;font-size:10px}#coopOverlay .coop-note{margin-top:11px;font-size:10px}#coopOverlay .coop-game-hud{font-size:6px;top:6px;left:10px;right:10px}#coopOverlay .coop-game-notice{top:40px;font-size:10px;max-width:58%;padding:6px 10px}#coopJoystick{left:12px;bottom:11px;width:100px;height:100px}#coopOverlay .coop-action-buttons{right:12px;bottom:11px;grid-template-columns:54px 54px;gap:8px}#coopOverlay .coop-action-buttons button{width:54px;min-width:54px;height:54px;min-height:54px}#coopOverlay .coop-action-buttons button svg{width:24px;height:24px}#coopOverlay .coop-action-buttons button small{font-size:6px}#coopOverlay #coopRestartBtn{min-height:44px;font-size:6px}}
+@media(max-width:600px) and (max-height:740px) and (orientation:portrait){#gameShell #startScreen:has(#coopOpenBtn) .start-content{top:10%;gap:9px}#gameShell #startScreen:has(#coopOpenBtn) .chapter-tag{font-size:4.5px;padding:4px 6px}#gameShell #startScreen:has(#coopOpenBtn) .wooden-title{padding:12px 20px 14px;min-width:94%}#gameShell #startScreen:has(#coopOpenBtn) h2{font-size:28px}#gameShell #startScreen:has(#coopOpenBtn) .start-subtitle{font-size:10px;padding:6px 9px}#gameShell #startScreen:has(#coopOpenBtn) .start-menu{gap:7px;margin-top:0}#gameShell #startScreen:has(#coopOpenBtn) .start-menu button,#gameShell #startScreen:has(#coopOpenBtn) .start-menu #startBtn{min-height:44px;font-size:7px}#gameShell #startScreen:has(#coopOpenBtn) .start-tip{display:none}#gameShell #startScreen:has(#coopOpenBtn) .wooden-title:before,#gameShell #startScreen:has(#coopOpenBtn) .wooden-title:after{box-shadow:0 1px #e8bc75,0 51px #493628}}
+@media(prefers-reduced-motion:reduce){#coopOverlay button{transition:none}}
+
+#coopOverlay .coop-local-guide{padding:16px;margin:10px 0 16px;border:2px solid #99805a;background:#e4d7ac;color:#4d5435;font:12px Space,Arial,sans-serif;line-height:1.7}#coopOverlay .coop-local-guide>b{font:8px Pixel,monospace;color:#4d673d}#coopOverlay .coop-local-guide p{margin:8px 0}#coopOverlay .coop-local-guide ol{padding-left:21px;margin:8px 0 13px}#coopOverlay .coop-download,#coopDirectBtn{display:inline-flex;justify-content:center;align-items:center;min-height:44px;padding:8px 12px;border:2px solid #4a6855;background:#426d59;color:#fff0bf;font:7px Pixel,monospace;text-decoration:none;border-radius:3px}#coopDirectBtn{background:#e5d8b1;color:#5c6644;margin-left:9px;border-color:#9c9067}#coopOverlay[data-transport="lan"] #coopCodeOut{font:24px Pixel,monospace;letter-spacing:5px;text-align:center;min-height:64px;height:64px}#coopOverlay[data-transport="lan"] #coopCodeIn{font:20px Space,Arial,sans-serif;letter-spacing:4px;min-height:56px;height:56px}@media(max-width:600px){#coopDirectBtn{margin-left:0;margin-top:9px}#coopOverlay .coop-local-guide{padding:12px;font-size:11px}#coopOverlay .coop-download,#coopDirectBtn{width:100%;font-size:6px}}
+/* Cloud rooms use the same short invite as Arena, on a parchment lobby. */
+#coopOverlay .coop-adventure-sign{float:right;width:215px;margin:0 0 18px 24px;padding:15px 12px;border:3px solid #69472e;background:repeating-linear-gradient(0deg,#785232 0 24px,#825e39 25px 27px);box-shadow:inset 0 2px #c29a5f,0 4px #b18a50;color:#fff0c1;transform:rotate(1deg);text-align:center}
+#coopOverlay .coop-adventure-sign>span{font:7px Pixel,monospace;color:#c9df95;line-height:2}
+#coopOverlay .coop-adventure-sign>strong{display:block;margin:8px 0;font:14px/1.7 Pixel,monospace;text-shadow:2px 2px #3f2d21}
+#coopOverlay .coop-adventure-sign>p{margin:0;font-size:11px;line-height:1.5;color:#ead5a4}
+#coopOverlay .coop-name-label{display:flex;flex-direction:column;gap:8px;margin-bottom:15px;font:7px/1.8 Pixel,monospace;color:#5e5033}
+#coopOverlay input{width:100%;min-width:0;min-height:46px;padding:10px 12px;border:2px solid #a38756;border-bottom-color:#ccae76;border-radius:3px;outline:none;background:#fff3cf;box-shadow:inset 0 2px #d7c594;color:#4c5135;font:16px Space,Arial,sans-serif;touch-action:manipulation;-webkit-user-select:text;user-select:text}
+#coopOverlay input:focus-visible{outline:3px solid #7a9f67;outline-offset:2px}
+#coopOverlay #coopPairing{display:block;margin-bottom:15px}
+#coopOverlay .coop-code-in{display:grid;grid-template-columns:minmax(100px,1fr) auto;gap:9px}
+#coopOverlay .coop-code-in label{grid-column:1/-1;font:7px/1.8 Pixel,monospace}
+#coopOverlay #coopCodeIn{font:23px/1.3 Space,Arial,sans-serif;letter-spacing:6px;text-align:center;text-transform:uppercase}
+#coopOverlay .coop-room{clear:both;margin:14px 0;padding:17px;border:2px solid #ab925b;border-radius:4px;background:#e8d5a4;box-shadow:inset 0 2px #fff0c7}
+#coopOverlay .coop-room-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}
+#coopOverlay .coop-room-heading>div{display:grid;grid-template-columns:minmax(120px,1fr) auto;gap:8px;min-width:0;flex:1}
+#coopOverlay .coop-room-heading label{grid-column:1/-1;font:7px/1.8 Pixel,monospace;color:#5c603b}
+#coopOverlay #coopCodeOut{max-width:260px;font:23px/1.2 Pixel,monospace;letter-spacing:4px;text-align:center;color:#3d674d;background:#fff3cd}
+#coopOverlay #coopLeaveBtn{align-self:end;background:#d7b593;color:#69492f}
+#coopOverlay .coop-seats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:17px 0}
+#coopOverlay .coop-seat{min-height:73px;padding:12px;border:2px dashed #a19162;background:#f4e4b9;color:#766441}
+#coopOverlay .coop-seat.is-you{border:2px solid #75905a;background:#e0e2ae}
+#coopOverlay .coop-seat strong{display:block;font:10px/1.6 Space,Arial,sans-serif;overflow-wrap:anywhere}
+#coopOverlay .coop-seat small{display:block;margin-top:8px;font:6px/1.8 Pixel,monospace}
+#coopOverlay .coop-room-actions{display:flex;gap:12px;flex-wrap:wrap}
+#coopOverlay #coopStartBtn{flex:1;background:#b4d17e;border-color:#5e7a40;color:#3e5933}
+#coopOverlay #coopReadyBtn.is-ready{background:#c9dea0;border-color:#6e8c4f;color:#3b5d32}
+#coopOverlay .coop-status{clear:both;margin-top:15px}
+#coopOverlay .coop-header .coop-eyebrow{font:6px/1.6 Pixel,monospace;color:#d8d59f}
+#coopOverlay.is-playing .coop-game-notice{top:auto;bottom:7px;max-width:50%;padding:3px 8px;border-width:1px;font-size:10px;opacity:.85}
+@media(max-width:620px){#coopOverlay .coop-adventure-sign{float:none;width:100%;margin:0 0 17px;transform:none;padding:11px}#coopOverlay .coop-adventure-sign>strong{font-size:12px}#coopOverlay .coop-room{padding:12px}#coopOverlay .coop-room-heading{display:block}#coopOverlay #coopLeaveBtn{margin-top:10px;width:100%}#coopOverlay #coopCodeOut{font-size:18px;max-width:none}#coopOverlay .coop-room-heading>div{grid-template-columns:1fr}#coopOverlay .coop-room-heading label{font-size:6px}#coopOverlay .coop-seats{gap:7px}#coopOverlay .coop-seat{padding:10px 7px}#coopOverlay .coop-code-in{grid-template-columns:1fr}#coopOverlay .coop-room-actions{gap:8px}#coopOverlay .coop-room-actions button{flex:1;font-size:6px}}
+@media(orientation:landscape) and (max-height:520px){#coopOverlay .coop-adventure-sign{float:right;width:200px;margin:0 0 10px 18px;padding:8px}#coopOverlay .coop-adventure-sign>strong{font-size:10px;margin:3px 0}#coopOverlay .coop-adventure-sign>span{font-size:6px}#coopOverlay .coop-room-heading{display:flex}#coopOverlay .coop-room-heading>div{grid-template-columns:1fr auto}#coopOverlay #coopLeaveBtn{width:auto;margin:0}#coopOverlay .coop-room{padding:10px}#coopOverlay .coop-seats{margin:10px 0}}

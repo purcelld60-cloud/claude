@@ -1,0 +1,33 @@
+/* Edition 3.3: legible boss life and a quiet, uninterrupted film frame. */
+#gameShell .boss-hud{position:absolute;z-index:17;top:calc(env(safe-area-inset-top) + var(--screen-hud-height,72px) + 5px);left:50%;transform:translateX(-50%);width:min(610px,calc(100% - 350px));padding:5px 10px 4px;border:2px solid #dac08e;border-radius:3px;background:#201e24ed;box-shadow:0 2px #14151c;color:#fae9be;pointer-events:none}
+.boss-hud-heading,.boss-hud-meta{display:flex;justify-content:space-between;align-items:center;gap:9px}.boss-hud-heading b{font:7px Pixel,monospace;line-height:1.6;color:#f8e6bd}.boss-hud-heading>span{font:9px Space,Arial,sans-serif;line-height:1.4;white-space:nowrap;color:#e4c2ae}.boss-hud-meter{height:7px;border:1px solid #896353;background:#392d37;margin:3px 0;overflow:hidden}.boss-hud-meter i{display:block;width:100%;height:100%;background:#e28a72;transform-origin:left center;transition:transform 90ms linear;box-shadow:inset 0 2px #ffc494}.boss-hud-meta{font:8px Space,Arial,sans-serif;line-height:1.3;color:#cbb7a3}.boss-hud-meta>span:last-child{font-variant-numeric:tabular-nums;color:#f4dac2;white-space:nowrap}.boss-hud[data-boss="nicolas"] .boss-hud-meter i{background:#d7c172;box-shadow:inset 0 2px #fff0b5}.boss-hud[data-boss="marco"] .boss-hud-meter i{background:#cc7389}.boss-hud[data-boss="menezes"] .boss-hud-meter i{background:#b1bf7d}
+#gameShell.is-cutscene .boss-hud,#gameShell.is-dialog .boss-hud,#gameShell.is-paused .boss-hud,#gameShell.in-main-menu .boss-hud{display:none!important}
+#gameShell.is-epilogue,#gameShell.is-epilogue .viewport{background:#030207!important}
+#gameShell.is-epilogue .game-topbar,#gameShell.is-epilogue .progress-hud,#gameShell.is-epilogue .touch-controls,#gameShell.is-epilogue .screen-fit-tools,#gameShell.is-epilogue .scene-chip,#gameShell.is-epilogue .toast,#gameShell.is-epilogue .cinematic-heading,#gameShell.is-epilogue #rotateHint{display:none!important}
+#gameShell.is-epilogue .viewport{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0;aspect-ratio:auto}
+#gameShell.is-epilogue #gameCanvas{object-fit:contain!important;object-position:center}
+#gameShell.is-epilogue .cinematic-caption{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:0;border:0!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap;box-shadow:none!important}
+#gameShell.is-epilogue .cinematic-caption:before,#gameShell.is-epilogue .cinematic-caption:after{display:none}
+#gameShell.is-epilogue .speech-controls{right:calc(env(safe-area-inset-right) + 14px);bottom:calc(env(safe-area-inset-bottom) + 12px);gap:8px;opacity:.73}
+#gameShell.is-epilogue .speech-controls:hover,#gameShell.is-epilogue .speech-controls:focus-within{opacity:1}
+#gameShell.is-epilogue .speech-controls button{background:#1a1424d9;color:#c9b6de;border:1px solid #776186;box-shadow:none;min-height:36px;min-width:0;padding:0 12px;font:7px Space,Arial,sans-serif;letter-spacing:1px}
+#gameShell.is-epilogue .speech-controls .primary-btn{min-width:96px}
+#gameShell .epilogue-sound{display:none}#gameShell.is-epilogue .epilogue-sound{display:block}
+#gameShell .chapter-end-screen{position:absolute;inset:0;z-index:85;background:#030207;display:grid;place-items:center;overflow:hidden;color:#eee6f7}
+#gameShell .chapter-end-screen[hidden]{display:none!important}
+#endingCanvas{width:100%;height:100%;object-fit:contain;object-position:center;image-rendering:auto}
+.ending-options{position:absolute;bottom:calc(env(safe-area-inset-bottom) + 24px);left:16px;right:16px;display:flex;justify-content:center;gap:15px;opacity:0;visibility:hidden;transition:opacity 1s}
+.chapter-end-screen.show-options .ending-options{opacity:1;visibility:visible}
+.ending-options button{min-height:44px;background:#120d1bd9;color:#ac93c2;border:1px solid #493558;border-radius:2px;padding:9px 16px;font:8px Space,Arial,sans-serif;letter-spacing:1.5px;touch-action:manipulation}.ending-options button:hover,.ending-options button:focus-visible{background:#271632;color:#e8d2ff;border-color:#9d73b8}
+#gameShell.is-chapter-ended .game-topbar,#gameShell.is-chapter-ended .progress-hud,#gameShell.is-chapter-ended .touch-controls,#gameShell.is-chapter-ended .scene-chip,#gameShell.is-chapter-ended .boss-hud,#gameShell.is-chapter-ended .screen-fit-tools,#gameShell.is-chapter-ended #rotateHint{display:none!important}
+.screen-reader-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap;border:0!important}
+.allef-char{background-color:#bd9a72}.eloisa-char{background-color:#cdb29b}.giselle-char{background-color:#9ab5b2}.rayssa-char{background-color:#b4b28e}.analaura-char{background-color:#c7b0bf}
+@media(orientation:portrait){#gameShell .boss-hud{width:calc(100% - 28px);top:calc(env(safe-area-inset-top) + var(--screen-hud-height,135px) + 6px)}.ending-options{flex-wrap:wrap;bottom:calc(env(safe-area-inset-bottom) + 35px)}.ending-options button{font-size:8px;min-height:44px}#gameShell.is-epilogue .speech-controls{right:10px;bottom:calc(env(safe-area-inset-bottom) + 14px);gap:6px}#gameShell.is-epilogue .speech-controls button{font-size:7px;padding:0 9px;min-height:38px}}
+@media(orientation:landscape) and (max-height:360px){#gameShell .boss-hud{width:calc(100% - 350px);top:calc(env(safe-area-inset-top) + var(--screen-hud-height,72px) + 3px);padding:3px 7px}.boss-hud-heading b{font-size:6px}.boss-hud-meta{font-size:7px}.boss-hud-meter{height:6px;margin:2px 0}.ending-options{bottom:calc(env(safe-area-inset-bottom) + 10px)}.ending-options button{min-height:38px;font-size:7px}#gameShell.is-epilogue .speech-controls button{min-height:30px}}
+@media(prefers-reduced-motion:reduce){.ending-options,.boss-hud-meter i{transition:none}}
+/* Keep movie controls in the screen's black margin, outside a portrait film frame. */
+#gameShell.is-epilogue #cinematicOverlay{inset:0!important;left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:none;max-height:none;transform:none!important}
+#gameShell.is-epilogue #gameViewport{height:100%!important;width:100%!important;inset:0!important;margin:0!important;align-self:stretch;aspect-ratio:auto!important}
+
+#defeatScreen .primary-btn + .primary-btn{margin-top:10px}
+@media(orientation:landscape) and (max-height:360px){#defeatScreen .game-modal{max-height:calc(100dvh - 16px);overflow-y:auto;padding:15px 24px}#defeatScreen h2{margin:9px 0;font-size:14px}#defeatScreen p{margin:8px 0;font-size:10px}#defeatScreen .primary-btn{min-height:39px}}

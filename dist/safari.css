@@ -1,0 +1,31 @@
+/* The game follows Safari's visible viewport as its address and tab bars move. */
+#gameShell.immersive{left:var(--visible-left,0);top:var(--visible-top,0);right:auto;bottom:auto;width:var(--visible-width,100vw);height:var(--visible-height,100dvh);-webkit-text-size-adjust:100%}
+#gameShell .screen-fit-tools{display:none}
+#gameShell.immersive.screen-wide .screen-fit-tools{position:absolute;top:calc(env(safe-area-inset-top) + var(--screen-hud-height,72px) + 6px);left:calc(env(safe-area-inset-left) + 10px);z-index:15;display:flex;gap:6px;max-width:calc(100% - 30px)}
+#gameShell .screen-fit-tools button{min-height:32px;min-width:76px;padding:4px 9px;border:2px solid #5d3f28;border-bottom-width:4px;border-radius:4px;background:#f6dfaa;color:#573c24;font:6px Pixel,monospace;line-height:1.5;box-shadow:2px 2px #241e2240;touch-action:manipulation}
+#gameShell .screen-fit-tools button:active{transform:translateY(2px);border-bottom-width:2px}
+#gameShell.immersive.screen-wide .game-topbar{position:absolute;top:env(safe-area-inset-top);left:env(safe-area-inset-left);right:env(safe-area-inset-right);z-index:13;width:auto;max-width:none;height:44px;min-height:44px;box-shadow:0 2px #241f2655}
+#gameShell.immersive.screen-wide .progress-hud{position:absolute;top:calc(env(safe-area-inset-top) + 44px);left:env(safe-area-inset-left);right:env(safe-area-inset-right);z-index:12;width:auto;max-width:none;height:28px;min-height:28px}
+#gameShell.immersive.screen-wide .viewport{position:absolute;inset:0;width:100%!important;height:100%!important;margin:0;max-width:none;aspect-ratio:auto;align-self:auto}
+#gameShell.immersive.screen-wide #gameCanvas{object-fit:contain;object-position:center center}
+#gameShell.immersive.screen-wide.screen-fill.screen-crop-safe:not(.screen-story) #gameCanvas{object-fit:cover;object-position:center var(--fill-offset,100%);background:#98c9df}
+/* Story scenes keep every actor and platform in frame; speech follows that frame. */
+#gameShell.immersive.screen-wide.screen-story .viewport{top:calc(env(safe-area-inset-top) + var(--screen-hud-height,72px));height:calc(100% - env(safe-area-inset-top) - var(--screen-hud-height,72px))!important;bottom:0}
+#gameShell.immersive.screen-wide.screen-story .screen-fit-tools{display:none}
+#gameShell.immersive.screen-wide .touch-controls{top:calc(env(safe-area-inset-top) + var(--screen-hud-height,72px))}
+#gameShell.immersive.screen-wide .touch-controls .touch-combat{right:calc(env(safe-area-inset-right) + 12px)}
+#gameShell.immersive.screen-wide .touch-controls .touch-move{left:calc(env(safe-area-inset-left) + 12px)}
+#gameShell .iphone-screen-guide{background:#fff0c9;color:#553a26;border:4px solid #6b492e;border-radius:7px;padding:24px;max-width:460px;max-height:calc(100dvh - 24px);font-family:Space,Arial,sans-serif;box-shadow:6px 6px #35271b88}
+#gameShell .iphone-screen-guide::backdrop{background:#172c22c9}
+#gameShell .iphone-screen-guide h2{font:12px Pixel,monospace;line-height:1.8;color:#6b4328;margin:0 0 12px}
+#gameShell .iphone-screen-guide p,#gameShell .iphone-screen-guide li{font-size:13px;line-height:1.7;color:#604a32}
+#gameShell .iphone-screen-guide ol{padding-left:21px}
+#gameShell .iphone-screen-guide .primary-btn{margin-top:12px;min-height:42px;width:100%;font-size:8px}
+@media(orientation:landscape) and (max-height:360px){#gameShell .screen-fit-tools button{min-height:28px;font-size:5px;padding:3px 7px}#gameShell .iphone-screen-guide{padding:16px}#gameShell .iphone-screen-guide p,#gameShell .iphone-screen-guide li{font-size:11px;line-height:1.5}}
+
+#gameShell.immersive.screen-wide:not(.screen-story) .toast{top:calc(env(safe-area-inset-top) + var(--screen-hud-height,72px) + 46px);z-index:16}
+#gameShell .screen-fit-tools button:disabled{opacity:.65;cursor:default}
+/* Portrait story scenes use the available height so balloons fit above the film. */
+#gameShell.immersive:not(.screen-wide).screen-story .viewport{flex:1 1 auto;width:100%!important;height:auto!important;min-height:0;margin:0;aspect-ratio:auto}
+#gameShell.is-cutscene .toast{display:none}
+#gameShell.immersive:not(.screen-wide).screen-story #gameCanvas{object-fit:contain;object-position:center}

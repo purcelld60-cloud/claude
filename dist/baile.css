@@ -1,0 +1,12 @@
+/* Flight uses the campaign's existing touch controls and their safe-area layout. */
+#gameShell.is-ollyan-flight .scene-chip{border-color:#bba6d4;background:#202644;color:#eee1fa}
+#gameShell.is-ollyan-flight #gameCanvas{background:#14213d}
+#gameShell.is-ollyan-flight [data-action="paper"]{border-color:#d9c7a6}
+#gameShell.is-ollyan-flight [data-action="fart"]{border-color:#b4d29b}
+@media(prefers-reduced-motion:reduce){#gameShell.is-ollyan-flight .scene-chip{transition:none}}
+#gameShell.is-ollyan-flight .cinematic-heading,
+#gameShell.is-ollyan-flight .cinematic-caption{display:none!important}
+
+/* Keep every cloud, platform and flying-ear telegraph inside short mobile screens. */
+#gameShell.is-ollyan-flight .viewport{background:linear-gradient(#172747,#41354f)}
+#gameShell.is-ollyan-flight #gameCanvas{object-fit:contain!important;object-position:center!important;background:linear-gradient(#172747,#41354f)}
