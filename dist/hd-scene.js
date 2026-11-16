@@ -199,9 +199,34 @@
     c.restore();
   }
 
+  // ---------------------------------------------------------------- fases ao ar livre
+  // Céu da hora do dia por cima do céu original (chamado pelo art.js logo após o degradê).
+  function sky(c, t, camera) {
+    if (window.Graphics?.isLite?.() || !window.DayTime) return false;
+    const s = window.DayTime.state(), pre = (v) => [Math.min(1, v[0] / s.amb[0]), Math.min(1, v[1] / s.amb[1]), Math.min(1, v[2] / s.amb[2])];
+    const away = Math.min(1, (3 - s.amb[0] - s.amb[1] - s.amb[2]) * 2.2 + s.night);
+    if (away > .02) { c.save(); c.globalAlpha = away; for (let i = 0; i < 44; i++) { const k = i / 43; R(c, 0, i * 10, 960, 10, css(pre(mix(s.top, s.bot, k * k * .5 + k * .5)))); } c.restore(); }
+    if (s.night > .25) for (let i = 0; i < 110; i++) { const tw = .5 + .5 * Math.sin(t * (1 + hash(i) * 2) + i); c.fillStyle = `rgba(255,255,255,${(s.night - .25) * 1.3 * (.35 + .65 * tw) * (.4 + hash(i + 9) * .6)})`; c.fillRect(Math.round(((hash(i + 300) * 1100 - camera * .01) % 960 + 960) % 960 / 2) * 2, Math.round(hash(i + 400) * 150) * 2, 2, 2); }
+    const disc = (x, y, r, col) => { c.fillStyle = col; for (let yy = -r; yy <= r; yy += 2) { const w = Math.round(Math.sqrt(r * r - yy * yy) / 2) * 2; c.fillRect(Math.round(x / 2) * 2 - w, Math.round((y + yy) / 2) * 2, w * 2, 2); } };
+    if (s.sunT !== null) { const x = 80 + s.sunT * 800 - camera * .025, y = 300 - Math.sin(s.sunT * Math.PI) * 215; disc(x, y, 64, css(pre(s.sun), .12)); disc(x, y, 46, css(pre(s.sun), .22)); disc(x, y, 34, css(pre(mix(s.sun, [1, 1, 1], .5)))); }
+    if (s.moonT !== null) { const x = 100 + s.moonT * 760 - camera * .025, y = 280 - Math.sin(s.moonT * Math.PI) * 190; disc(x, y, 40, 'rgba(200,215,255,.14)'); disc(x, y, 24, '#ffffff'); R(c, x - 10, y - 8, 6, 6, '#c9d4f0'); R(c, x + 4, y + 6, 8, 4, '#c9d4f0'); R(c, x + 8, y - 12, 4, 4, '#c9d4f0'); }
+    return true;
+  }
+  // Luz ambiente da hora do dia sobre a fase inteira, depois dos personagens.
+  function ambient(c, t, hx, hy) {
+    if (window.Graphics?.isLite?.() || !window.DayTime) return;
+    const s = window.DayTime.state(); if (s.amb[0] > .995 && s.amb[1] > .995 && s.amb[2] > .995) return;
+    c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = css(s.amb); c.fillRect(-40, -40, 1040, 620);
+    if (s.night > .2) { const a = (s.night - .2) * 1.25; lg.clearRect(0, 0, LW, LH);
+      glow(lg, hx / 2, hy / 2 - 22, 70, 52, [1, .86, .6], .30 * a); // lampião do herói: mantém a luta legível
+      for (let i = 0; i < 16; i++) { const x = (hash(i + 700) * 520 + Math.sin(t * .4 + i) * 14) % 480, y = 150 + hash(i + 710) * 62 + Math.sin(t * .7 + i * 2) * 6, on = Math.max(0, Math.sin(t * 1.6 + i * 2.3)); lg.fillStyle = `rgba(210,255,140,${on * a * .9})`; lg.fillRect(Math.round(x), Math.round(y), 1, 1); lg.fillStyle = `rgba(210,255,140,${on * a * .25})`; lg.fillRect(Math.round(x) - 1, Math.round(y) - 1, 3, 3); }
+      c.globalCompositeOperation = 'lighter'; c.imageSmoothingEnabled = false; c.drawImage(lightCv, 0, 0, 960, 540); }
+    c.restore();
+  }
+
   window.Art.drawArena = function (c, type, camera = 0, t = 0, homeX = 0) {
     if (!active(type)) return orig.apply(this, arguments);
     try { back(c, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); } catch (e) { return orig.apply(this, arguments); }
   };
-  window.HdScene = Object.freeze({ active, drawFront: (c, type, camera, t, homeX, blend) => { try { front(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) {} }, scenes: Object.keys(HANDLED) });
+  window.HdScene = Object.freeze({ active, sky: (c, t, camera) => { try { return sky(c, Number(t) || 0, Number(camera) || 0); } catch (e) { return false; } }, drawAmbient: (c, t, hx, hy) => { try { ambient(c, Number(t) || 0, Number(hx) || 480, Number(hy) || 440); } catch (e) {} }, drawFront: (c, type, camera, t, homeX, blend) => { try { front(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) {} }, scenes: Object.keys(HANDLED) });
 })();
