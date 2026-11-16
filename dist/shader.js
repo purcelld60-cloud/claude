@@ -16,6 +16,7 @@ uniform float rays;
 uniform float warm;
 uniform float t;
 float lum(vec3 c){return dot(c,vec3(.299,.587,.114));}
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 vec3 tap(vec2 o){return texture2D(img,uv+o/res).rgb;}
 void main(){
   vec2 px=(floor(uv*res)+.5)/res;
@@ -44,6 +45,17 @@ void main(){
     shaft=min(shaft*rays*.5,vec3(.35));
   }
   vec3 col=base+glow*.45+shaft;
+  if(rays>0.){
+    // Animated god rays: angular bands fanning out of the sun, drifting slowly.
+    vec2 q=(uv-sun)*vec2(res.x/res.y,1.);float ang=atan(q.y,q.x),dist=length(q);
+    float bands=.55+.45*sin(ang*26.+t*.35)*sin(ang*11.-t*.22+1.3);
+    float cone=smoothstep(1.25,.05,dist)*smoothstep(-.2,.6,q.y+.15);
+    col+=vec3(1.,.9,.68)*bands*cone*.11*rays;
+    // Dust motes glittering inside the light.
+    vec2 cell=floor(uv*res/6.);float h=hash(cell+floor(t*.5));
+    float mote=step(.996,h)*(.5+.5*sin(t*3.+h*40.))*cone;
+    col+=vec3(1.,.95,.8)*mote*.6*rays;
+  }
   // Sky glow around the sun.
   if(rays>0.){float d=distance(uv*vec2(res.x/res.y,1.),sun*vec2(res.x/res.y,1.));col+=vec3(1.,.82,.55)*exp(-d*5.)*.18*rays;}
   // Filmic grading: warm highlights, cool deep shadows, a little more colour and contrast.
@@ -87,7 +99,7 @@ void main(){
       gl.bindTexture(gl.TEXTURE_2D, tex);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
       const scene = Number(s.scene), outdoor = !!s.outdoor;
-      const sunX = ((scene === 3 ? 762 : 734) - (Number(s.camera) || 0) * .025) / 960, sunY = 99 / 540;
+      const sunX = s.sun ? s.sun[0] : ((scene === 3 ? 762 : 734) - (Number(s.camera) || 0) * .025) / 960, sunY = s.sun ? s.sun[1] : 99 / 540;
       gl.uniform1i(loc.img, 0); gl.uniform2f(loc.res, w, h); gl.uniform2f(loc.sun, sunX, sunY);
       gl.uniform1f(loc.rays, outdoor ? (scene === 3 ? 1.15 : scene === 5 ? .9 : 1) : 0);
       gl.uniform1f(loc.warm, scene === 5 ? .55 : scene === 6 ? .3 : .7);
