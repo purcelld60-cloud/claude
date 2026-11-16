@@ -128,6 +128,13 @@
     }
     // Foreground grass carpet.
     if (lite) return;
+    // Leaves and petals riding the wind across the whole view (outdoor maps).
+    if ([0, 1, 3, 4, 5, 7, 9].includes(s.scene) && !s.arena) {
+      for (let i = 0; i < 22; i++) { const sp = .045 + hash(i + 900) * .05, k = (t * sp + hash(i + 910)) % 1, gust = wind(t, i * 40);
+        const x = cam + 990 - k * 1060, y = 60 + hash(i + 920) * 340 + Math.sin(t * 1.7 + i) * 16 + gust * 10;
+        c.save(); c.translate(Math.round(x), Math.round(y)); c.rotate(t * (2 + hash(i) * 3) + i); c.globalAlpha = .9;
+        c.fillStyle = s.scene === 4 ? ['#ffb7c8', '#ffe08a', '#ffffff'][i % 3] : ['#8fcf5a', '#c9a24a', '#e8783a', '#6aa84a'][i % 4]; c.fillRect(-3, -1, 6, 3); c.fillStyle = '#00000022'; c.fillRect(-3, 1, 6, 1); c.restore(); }
+    }
     const pal = MEADOW[s.scene];
     if (pal && !s.arena) {
       const from = Math.floor(cam / 6) - 1, to = Math.ceil((cam + 960) / 6) + 1;
