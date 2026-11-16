@@ -1064,33 +1064,6 @@
       c.save();c.translate(flight?-2:Math.round(-walk),flight?-3:Math.round(-Math.abs(walk)));
       r(c,-20,-61,41,5,'#6e5335');r(c,-19,-65,39,5,'#dbb969');r(c,-12,-76,27,13,'#a98045');r(c,-10,-76,23,10,'#dfb96a');r(c,-8,-78,19,3,'#f0ce7e');r(c,-11,-67,25,4,'#8a5a3b');r(c,-17,-64,34,2,'#f1cf7a');r(c,-5,-73,3,3,'#f5d68b');
       c.restore();
-      if(!window.Graphics?.isLite?.()){
-        // Redesigned head (realistic mode): rounded skull and jaw, real eye, ear, stubble, hat shadow.
-        const SK=skin,SH='#a8693f',HI='#e8b07c',HAIR='#3b2a1c',INKC='#2a201a';
-        const rows=[[-58,-9,12],[-57,-11,14],[-56,-11,15],[-55,-12,16],[-54,-12,16],[-53,-12,17],[-52,-12,17],[-51,-12,17],[-50,-12,17],[-49,-11,16],[-48,-11,16],[-47,-10,15],[-46,-10,14],[-45,-9,13],[-44,-8,12],[-43,-6,10],[-42,-4,8]];
-        for(const [y,x0,x1] of rows){r(c,x0-1,y,x1-x0+2,1,INKC);}
-        for(const [y,x0,x1] of rows){r(c,x0,y,x1-x0,1,SK);}
-        for(const [y,x0,x1] of rows){r(c,x0,y,5,1,SH);}                       // back of head in shade
-        r(c,5,-49,6,3,HI);r(c,7,-48,3,1,'#f2c494');                             // cheek light
-        r(c,-12,-58,8,10,HAIR);r(c,-11,-48,4,4,HAIR);r(c,-4,-58,13,3,HAIR);     // hair under the hat + sideburn
-        r(c,-7,-52,4,6,SH);r(c,-6,-51,2,4,'#8a5232');r(c,-7,-53,4,1,INKC);       // ear
-        r(c,1,-55,7,1,'#2a1d14');r(c,7,-54,2,1,'#2a1d14');                        // brow
-        r(c,2,-53,6,3,'#f4ece2');r(c,5,-53,3,3,'#5a3518');r(c,6,-53,2,2,'#1d120c');r(c,5,-53,1,1,'#ffffff');r(c,2,-54,6,1,INKC); // eye
-        r(c,15,-51,3,4,SK);r(c,17,-50,1,3,INKC);r(c,15,-47,3,1,SH);r(c,14,-48,1,1,'#7a4428'); // nose
-        r(c,7,-44,6,1,'#7a3f2c');r(c,8,-43,4,1,'#c98a6a');                       // mouth
-        for(const [x,y] of [[2,-43],[4,-42],[0,-44],[10,-42],[12,-43],[6,-41]])r(c,x,y,1,1,'#7b5236'); // stubble
-        r(c,-11,-58,28,3,'rgba(30,18,10,.32)');                                  // hat shadow on the brow
-        r(c,-3,-41,8,4,SH);r(c,-2,-40,6,1,INKC);                                 // neck
-        c.save();c.translate(flight?-2:Math.round(-walk),flight?-3:Math.round(-Math.abs(walk)));
-        // Straw hat: stepped brim, woven crown, banded with a knot, sun on top.
-        r(c,-23,-61,47,4,INKC);r(c,-22,-62,45,3,'#c79a4f');r(c,-21,-63,43,2,'#e6c37a');r(c,-19,-64,39,1,'#f4d690');r(c,-22,-59,45,1,'#7a5530');
-        r(c,-13,-79,29,16,INKC);r(c,-12,-78,27,15,'#d9b265');r(c,-10,-80,23,2,INKC);r(c,-9,-79,21,2,'#f0cf86');
-        for(let yy=-77;yy<-66;yy+=2)for(let xx=-11;xx<14;xx+=3)r(c,xx+((yy/2)&1),yy,2,1,'#b88c45');
-        r(c,8,-78,6,12,'rgba(90,60,25,.35)');
-        r(c,-12,-68,27,4,'#7a3f22');r(c,-12,-68,27,1,'#a55a32');r(c,-10,-67,4,4,'#5e2f18');r(c,-12,-64,3,3,'#7a3f22');
-        r(c,-6,-77,5,2,'#fff0b8');r(c,-17,-63,10,1,'#fff0b8');
-        c.restore();
-      }
       c.save();c.translate(moving?Math.round(-walk*2):0,moving?Math.round(Math.abs(walk)*2):flight?-2:0);
       r(c,-17,-37,5,18,'#5f6041');r(c,-20,-35,6,15,'#8d814a');r(c,-19,-33,3,7,'#b1a262');
       c.restore();
