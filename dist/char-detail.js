@@ -39,9 +39,19 @@
     const g = sprite.createLinearGradient(0, OY - 110, 0, OY);
     g.addColorStop(0, 'rgba(255,244,214,.10)'); g.addColorStop(.45, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(24,18,28,.20)');
     sprite.fillStyle = g; sprite.fillRect(0, 0, W, H);
+    // Soft volume (deliberately smooth, on top of the pixel art): key light from the front-top,
+    // a cool falloff on the back.
+    const face = (o.facing || 1) < 0 ? -1 : 1;
+    const key = sprite.createRadialGradient(OX + face * 16, OY - 96, 4, OX + face * 16, OY - 96, 92);
+    key.addColorStop(0, 'rgba(255,238,204,.24)'); key.addColorStop(.55, 'rgba(255,230,190,.07)'); key.addColorStop(1, 'rgba(255,230,190,0)');
+    sprite.fillStyle = key; sprite.fillRect(0, 0, W, H);
+    const back = sprite.createLinearGradient(OX - face * 26, 0, OX + face * 6, 0);
+    back.addColorStop(0, 'rgba(18,14,34,.26)'); back.addColorStop(1, 'rgba(18,14,34,0)');
+    sprite.fillStyle = back; sprite.fillRect(0, 0, W, H);
     sprite.globalCompositeOperation = 'source-over';
 
     out.globalCompositeOperation = 'source-over'; out.clearRect(0, 0, W, H);
+    { const cs = out.createRadialGradient(OX, OY, 2, OX, OY, 30); cs.addColorStop(0, 'rgba(10,12,8,.32)'); cs.addColorStop(1, 'rgba(10,12,8,0)'); out.save(); out.translate(0, OY); out.scale(1, .22); out.translate(0, -OY); out.fillStyle = cs; out.fillRect(OX - 32, OY - 32, 64, 64); out.restore(); }
     // 1px outline behind the silhouette.
     const ink = tinted('#1b1714');
     out.globalAlpha = .9; out.drawImage(ink, -1, 0); out.drawImage(ink, 1, 0); out.drawImage(ink, 0, -1); out.drawImage(ink, 0, 1); out.globalAlpha = 1;
