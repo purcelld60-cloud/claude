@@ -954,6 +954,7 @@
   function character(c,type,x,y,o={}) {
     if(type==='nikolas'&&Number(o.bossPhase)>=2){nikolasForm(c,x,y,o);return;}
     if(type==='ollyan'&&window.BaileWorld?.drawOllyan){window.BaileWorld.drawOllyan(c,x,y,Number(o.frame)||0,o);return;}
+    if(window.HdChars?.draw?.(c,type,x,y,o))return;
     if(type==='igor'||type==='kaique'){schoolMonitor(c,type,x,y,o);return;}
     if(['allef','eloisa','giselle','rayssa','analaura'].includes(type)){socialCharacter(c,type,x,y,o);return;}if(['dede','aica','ravile','arthur'].includes(type)){storyCharacter(c,type,x,y,o);return;}if(['davi','vitor','freddy','nicolas'].includes(type)){newCharacter(c,type,x,y,o);return;}if(type==='giant'){giant(c,x,y,Number(o.frame)||0,o);return;}if(type==='thug'){thug(c,x,y,Number(o.frame)||0,o);return;}if(type==='reeisBoss'){type='reeis';o={...o,transformed:true,powered:true};}
     c.save();c.imageSmoothingEnabled=false;c.translate(Math.round(x),Math.round(y));const face=o.facing<0?-1:1;const scl=o.scale||1;c.scale(face*scl,scl);
