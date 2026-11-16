@@ -14,7 +14,7 @@
   const DUST = { 0: '#b8946a', 7: '#8fb36a', 2: '#8f8780', 6: '#a58fbd', 8: '#cdb594', 10: '#c9a77f' };
 
   const springs = new Map();
-  let particles = [], lines = [], lastStep = null, wasGround = true, lastVy = 0, squash = 0, squashV = 0, lastScene = -1, lastAttack = 0;
+  let sparks = [], shards = [], clouds = [], particles = [], lines = [], lastStep = null, wasGround = true, lastVy = 0, squash = 0, squashV = 0, lastScene = -1, lastAttack = 0;
 
   function wind(t, x) { const g = .55 + .45 * Math.sin(t * .31); return (Math.sin(t * 1.15 + x * .0042) * .62 + Math.sin(t * 2.4 + x * .013) * .38) * g; }
   function dustColor(scene) { return DUST[scene] || '#bdb4a2'; }
@@ -59,6 +59,12 @@
     lastAttack = p.attack || 0;
 
     window.Critters?.update?.(dt, s);
+    for (const e of sparks) { e.life -= dt; e.x += e.vx * dt; e.y += e.vy * dt; e.vy += 300 * dt; e.vx *= Math.exp(-dt * 5); }
+    sparks = sparks.filter(e => e.life > 0);
+    for (const e of shards) { e.life -= dt; e.x += e.vx * dt; e.y += e.vy * dt; e.vy += 620 * dt; e.rot += e.vr * dt; if (e.y > FLOOR - 1) { e.y = FLOOR - 1; e.vy *= -.25; e.vx *= .6; e.vr *= .5; } }
+    shards = shards.filter(e => e.life > 0);
+    for (const e of clouds) { e.life -= dt; e.x += e.vx * dt; e.y += e.vy * dt; e.vx *= Math.exp(-dt * 2.6); e.r += e.grow * dt; }
+    clouds = clouds.filter(e => e.life > 0);
     for (const e of particles) { e.life -= dt; e.x += e.vx * dt; e.y += e.vy * dt; e.vx *= Math.exp(-dt * 4); e.vy += 40 * dt; }
     particles = particles.filter(e => e.life > 0);
     for (const l of lines) l.age += dt;
@@ -107,6 +113,9 @@
 
   function drawFront(c, s) {
     const t = Number(s.time) || 0, cam = Number(s.camera) || 0, lite = !!window.Graphics?.isLite?.();
+    for (const e of clouds) { const k = e.life / e.max; c.save(); c.globalAlpha = Math.min(.55, k * .7); c.fillStyle = e.col; const r = Math.round(e.r); c.beginPath(); c.arc(Math.round(e.x), Math.round(e.y), r, 0, Math.PI * 2); c.fill(); c.globalAlpha *= .6; c.fillStyle = '#f2f8c8'; c.beginPath(); c.arc(Math.round(e.x - r * .3), Math.round(e.y - r * .35), Math.round(r * .45), 0, Math.PI * 2); c.fill(); c.restore(); }
+    for (const e of sparks) { c.save(); c.globalAlpha = Math.min(1, e.life * 8); c.strokeStyle = e.col; c.lineWidth = 2; c.beginPath(); c.moveTo(Math.round(e.x), Math.round(e.y)); c.lineTo(Math.round(e.x - e.vx * .025), Math.round(e.y - e.vy * .025)); c.stroke(); c.restore(); }
+    for (const e of shards) { c.save(); c.globalAlpha = Math.min(1, e.life * 3); c.translate(Math.round(e.x), Math.round(e.y)); c.rotate(Math.round(e.rot * 2) / 2); c.fillStyle = e.col; c.fillRect(-2, -1, 4, 2); c.restore(); }
     // Dust in front so it partly covers the feet, like real kicked-up dirt.
     for (const e of particles) { const k = e.life / e.max; c.save(); c.globalAlpha = clamp(k * 1.4, 0, .85); c.fillStyle = e.color; const z = Math.max(1, Math.round(e.size * (1.6 - k * .6))); c.fillRect(Math.round(e.x - z / 2), Math.round(e.y - z / 2), z, z); c.restore(); }
     for (const l of lines) if (l.kind === 'smear') {
@@ -140,7 +149,19 @@
     }
   }
 
+  // Impact: hot sparks that streak out fast and paper/debris shards that tumble with gravity.
+  function impact(x, y, color, power, dir) {
+    const lite = !!window.Graphics?.isLite?.(), n = lite ? 3 : Math.min(14, 5 + Math.round((power || 10) / 6));
+    for (let i = 0; i < n; i++) { const a = (Math.random() - .5) * 2.4 + (dir < 0 ? Math.PI : 0), sp = 160 + Math.random() * 260; sparks.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 40, life: .12 + Math.random() * .14, col: i % 3 ? color : '#fff6d8' }); }
+    if (!lite) for (let i = 0; i < Math.min(8, 2 + Math.round((power || 10) / 10)); i++) shards.push({ x, y, vx: (dir || 1) * (40 + Math.random() * 120) + (Math.random() - .5) * 80, vy: -80 - Math.random() * 160, rot: Math.random() * 6, vr: (Math.random() - .5) * 20, life: .5 + Math.random() * .4, col: Math.random() > .5 ? '#f3ead2' : color });
+    if (sparks.length > 60) sparks.splice(0, sparks.length - 60); if (shards.length > 40) shards.splice(0, shards.length - 40);
+  }
+  function gas(x, y, dir, stage) {
+    const lite = !!window.Graphics?.isLite?.(), n = lite ? 3 : 6 + stage * 4;
+    for (let i = 0; i < n; i++) clouds.push({ x: x + dir * (6 + Math.random() * 20), y: y + (Math.random() - .5) * 14, vx: dir * (60 + Math.random() * 140 * stage) + (Math.random() - .5) * 40, vy: -10 - Math.random() * 30, r: 6 + Math.random() * 8, grow: 22 + stage * 10, life: .7 + Math.random() * .5, max: 1.2, col: stage === 3 ? '#d9ee86' : '#bfdc66' });
+    if (clouds.length > 50) clouds.splice(0, clouds.length - 50);
+  }
   function burst(x, y, color, n) { for (let i = 0; i < n; i++) puff(x, y, (Math.random() - .5) * 120, -20 - Math.random() * 50, 2, color, .35); }
   window.Graphics?.onChange?.(() => window.Critters?.reset?.());
-  window.SceneLife = Object.freeze({ update, drawBack, drawFront, heroScale, burst });
+  window.SceneLife = Object.freeze({ update, drawBack, drawFront, heroScale, burst, impact, gas });
 })();

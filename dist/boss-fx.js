@@ -73,10 +73,10 @@
   function drawShotTrails(c, shots) {
     if (lite()) return;
     for (const s of shots) {
-      if (s.owner !== 'enemy') continue;
+      const mine = s.owner !== 'enemy';
       let tr = shotTrails.get(s); if (!tr) { tr = []; shotTrails.set(s, tr); }
       tr.push([s.x, s.y]); if (tr.length > 6) tr.shift();
-      for (let i = 0; i < tr.length - 1; i++) { const a = (i + 1) / tr.length; c.globalAlpha = a * .45; const z = Math.max(2, Math.round(a * 6)); c.fillStyle = s.enraged ? '#ff8a7a' : '#fff1c4'; c.fillRect(Math.round(tr[i][0] - z / 2), Math.round(tr[i][1] - z / 2), z, z); }
+      for (let i = 0; i < tr.length - 1; i++) { const a = (i + 1) / tr.length; c.globalAlpha = a * .45; const z = Math.max(2, Math.round(a * 6)); c.fillStyle = mine ? (s.element === 'electric' ? '#a9e7f4' : s.element === 'fire' ? '#ffb064' : '#fff6e0') : s.enraged ? '#ff8a7a' : '#fff1c4'; c.fillRect(Math.round(tr[i][0] - z / 2), Math.round(tr[i][1] - z / 2), z, z); }
     }
     c.globalAlpha = 1;
   }
