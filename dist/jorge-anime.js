@@ -72,55 +72,63 @@
     line(c, [[x + side * w, y - 3], [x + side * (w + 7), y - 8]], INK, 2.6);
     line(c, [[x + side * (w - 4), y - 1], [x + side * (w + 3), y - 4]], INK, 1.6);
     c.beginPath(); c.moveTo(x - w * .8, y - h * 1.25 - 5); c.quadraticCurveTo(x, y - h * 1.75 - 6, x + w * .85, y - h * 1.2 - 6); c.lineWidth = 1.5; c.strokeStyle = 'rgba(70,35,25,.75)'; c.stroke();
-    c.beginPath(); c.moveTo(x - w * .6, y + h * .75); c.quadraticCurveTo(x, y + h * 1.05, x + w * .7, y + h * .55); c.lineWidth = 1.4; c.strokeStyle = '#4a2a22'; c.stroke();
-    for (let k = 0; k < 3; k++) line(c, [[x + side * (w * .2 + k * 6), y + h * .85], [x + side * (w * .2 + k * 6 + 2), y + h * .85 + 3]], '#4a2a22', 1);
+    c.beginPath(); c.moveTo(x - w * .6, y + h * .75); c.quadraticCurveTo(x, y + h * 1.05, x + w * .7, y + h * .55); c.lineWidth = 1; c.strokeStyle = 'rgba(74,42,34,.7)'; c.stroke();
     c.beginPath(); c.moveTo(x - w * .5, y + h + 6); c.quadraticCurveTo(x, y + h + 10, x + w * .55, y + h + 5); c.lineWidth = 1.2; c.strokeStyle = 'rgba(110,55,35,.55)'; c.stroke();
     c.restore();
   }
-  // Serious adult face: angular jaw, cheekbones, brow furrow, nasolabial folds, stubble.
+  // Grown man's face: broad square jaw, cheekbones, heavy low brows, strong nose,
+  // five-o'clock shadow and a thick neck. Clean two-tone shading, no stray lines.
   function head(c, x, y, s, t, o = {}) {
     c.save(); c.translate(x, y); c.scale(s, s); c.rotate(o.tilt || 0);
-    fill(c, [[-160, 270], [-128, 150], [-46, 116], [46, 116], [128, 150], [160, 270]], SHIRT);
-    fill(c, [[46, 116], [128, 150], [160, 270], [70, 270]], SHIRT_SH);
-    line(c, [[-60, 170], [-90, 230]], SHIRT_SH, 3); line(c, [[70, 175], [96, 236]], '#7a3a16', 3);
-    line(c, [[-160, 270], [-128, 150], [-46, 116], [46, 116], [128, 150], [160, 270]], INK, 4);
-    fill(c, [[-34, 64], [34, 64], [40, 128], [0, 146], [-40, 128]], SKIN_SH);
-    line(c, [[4, 96], [8, 112], [4, 124]], '#6a3b28', 2.4);
-    line(c, [[-46, 116], [0, 146], [46, 116]], INK, 3);
-    // face: longer, angular, defined jaw
-    const facePath = () => { c.beginPath(); c.moveTo(-72, -60); c.bezierCurveTo(-78, -10, -76, 40, -60, 70); c.lineTo(-24, 112); c.quadraticCurveTo(2, 124, 26, 112); c.lineTo(60, 68); c.bezierCurveTo(74, 38, 76, -10, 72, -60); c.closePath(); };
+    // shoulders + collar + thick neck with trapezius
+    fill(c, [[-172, 270], [-140, 160], [-62, 122], [62, 122], [140, 160], [172, 270]], SHIRT);
+    fill(c, [[62, 122], [140, 160], [172, 270], [80, 270]], SHIRT_SH);
+    fill(c, [[-40, 128], [0, 176], [40, 128], [26, 124], [0, 150], [-26, 124]], '#b8612a');
+    line(c, [[-172, 270], [-140, 160], [-62, 122], [62, 122], [140, 160], [172, 270]], INK, 4);
+    fill(c, [[-46, 60], [46, 60], [56, 126], [0, 150], [-56, 126]], SKIN);
+    fill(c, [[10, 60], [46, 60], [56, 126], [14, 140]], SKIN_SH);
+    fill(c, [[-56, 126], [-86, 132], [-62, 122]], SKIN_SH); fill(c, [[56, 126], [86, 132], [62, 122]], SKIN_SH);
+    line(c, [[-46, 74], [-56, 126]], INK, 3); line(c, [[46, 74], [56, 126]], INK, 3);
+    line(c, [[2, 110], [6, 122]], 'rgba(90,45,30,.55)', 2.2);
+    // broad, square face
+    const facePath = () => { c.beginPath(); c.moveTo(-76, -64); c.lineTo(-80, 6); c.quadraticCurveTo(-80, 46, -66, 76); c.lineTo(-34, 108); c.quadraticCurveTo(0, 120, 34, 108); c.lineTo(66, 76); c.quadraticCurveTo(80, 46, 80, 6); c.lineTo(76, -64); c.closePath(); };
     facePath(); c.fillStyle = SKIN; c.fill();
     c.save(); facePath(); c.clip();
-    c.beginPath(); c.moveTo(34, -70); c.bezierCurveTo(58, 0, 54, 60, 10, 122); c.lineTo(90, 122); c.lineTo(90, -70); c.closePath(); c.fillStyle = SKIN_SH; c.fill();
-    fill(c, [[-66, 34], [-36, 50], [-24, 64], [-58, 66]], 'rgba(120,70,45,.45)'); fill(c, [[40, 30], [60, 26], [56, 60], [34, 52]], 'rgba(90,50,35,.5)');
-    c.globalAlpha = .4; oval(c, -44, 22, 14, 9, SKIN_HI, -.3); c.globalAlpha = 1;
-    c.fillStyle = 'rgba(30,15,20,.5)'; c.fillRect(-90, -90, 180, o.empty ? 84 : 34);
-    if (o.empty) { const gg = c.createLinearGradient(0, -6, 0, 30); gg.addColorStop(0, 'rgba(20,10,20,.6)'); gg.addColorStop(1, 'rgba(20,10,20,0)'); c.fillStyle = gg; c.fillRect(-90, -6, 180, 36); }
-    c.fillStyle = 'rgba(60,40,35,.35)'; for (let k = 0; k < 160; k++) { const a = (k * 137.5) % 360 * Math.PI / 180, rr = 40 + (k * 31) % 46, sx = Math.cos(a) * rr * .9, sy = 70 + Math.abs(Math.sin(a)) * rr * .5; if (sy > 72 && Math.abs(sx) < 62) c.fillRect(sx, sy, 1.6, 1.6); }
+    // light from the left: one clean shadow plane on the right, a soft one under the cheekbone
+    c.beginPath(); c.moveTo(30, -80); c.quadraticCurveTo(50, 0, 40, 52); c.quadraticCurveTo(30, 96, 4, 124); c.lineTo(96, 124); c.lineTo(96, -80); c.closePath(); c.fillStyle = SKIN_SH; c.fill();
+    const cb = c.createLinearGradient(0, 26, 0, 60); cb.addColorStop(0, 'rgba(110,60,38,0)'); cb.addColorStop(.5, 'rgba(110,60,38,.28)'); cb.addColorStop(1, 'rgba(110,60,38,0)'); c.fillStyle = cb; c.fillRect(-80, 26, 160, 34);
+    c.globalAlpha = .35; oval(c, -46, 14, 16, 8, SKIN_HI, -.2); oval(c, -6, -44, 30, 10, SKIN_HI); c.globalAlpha = 1;
+    // five-o'clock shadow over jaw, chin and upper lip
+    const beard = c.createLinearGradient(0, 40, 0, 120); beard.addColorStop(0, 'rgba(46,34,40,0)'); beard.addColorStop(.35, 'rgba(46,34,40,.32)'); beard.addColorStop(1, 'rgba(46,34,40,.5)');
+    c.fillStyle = beard; c.beginPath(); c.moveTo(-80, 40); c.quadraticCurveTo(-70, 70, -40, 70); c.quadraticCurveTo(-16, 56, 0, 60); c.quadraticCurveTo(16, 56, 40, 70); c.quadraticCurveTo(70, 70, 80, 40); c.lineTo(80, 124); c.lineTo(-80, 124); c.closePath(); c.fill();
+    c.fillStyle = 'rgba(40,28,34,.35)'; c.beginPath(); c.moveTo(-22, 66); c.quadraticCurveTo(2, 58, 26, 66); c.quadraticCurveTo(2, 72, -22, 66); c.fill();
+    // hat brim shadow over the brow (heavier when the eyes go empty)
+    c.fillStyle = 'rgba(28,14,18,.5)'; c.fillRect(-90, -90, 180, o.empty ? 82 : 30);
+    if (o.empty) { const gg = c.createLinearGradient(0, -8, 0, 26); gg.addColorStop(0, 'rgba(20,10,20,.55)'); gg.addColorStop(1, 'rgba(20,10,20,0)'); c.fillStyle = gg; c.fillRect(-90, -8, 180, 34); }
     c.restore();
-    facePath(); c.lineWidth = 4; c.strokeStyle = INK; c.stroke();
-    // ear, hair
-    oval(c, -76, 8, 11, 22, SKIN_SH); line(c, [[-70, -12], [-88, -2], [-86, 26], [-70, 32]], INK, 3); line(c, [[-80, 0], [-84, 14], [-78, 22]], '#6a3b28', 1.6);
-    fill(c, [[-72, -62], [-58, -62], [-64, 4], [-74, 0]], '#1a1216'); fill(c, [[72, -62], [58, -62], [64, 4], [74, 0]], '#1a1216');
-    fill(c, [[-64, -66], [-46, -24], [-36, -62], [-18, -20], [-8, -64], [14, -26], [24, -64], [40, -30], [50, -66]], '#1a1216');
-    // brows with a furrow
-    const bw = o.mouth === 'gasp' ? -8 : o.empty ? 4 : 2;
-    fill(c, [[-62, -28 + bw * .3], [-36, -36 - bw], [-10, -30], [-12, -24], [-36, -29 - bw], [-60, -22]], INK);
-    fill(c, [[10, -30], [36, -37 - bw], [62, -30 + bw * .3], [60, -24], [36, -30 - bw], [12, -24]], INK);
-    line(c, [[-5, -30], [-3, -18]], 'rgba(90,45,30,.7)', 2); line(c, [[4, -31], [3, -19]], 'rgba(90,45,30,.7)', 2);
-    line(c, [[-40, -48], [-10, -50]], 'rgba(120,65,40,.4)', 1.4); line(c, [[10, -50], [40, -48]], 'rgba(120,65,40,.4)', 1.4);
-    animeEye(c, -34, -6, -1, o, t); animeEye(c, 34, -7, 1, o, t);
-    // nose: bridge, wing shadow, tip light
-    line(c, [[2, -14], [8, 30], [14, 40]], '#7a4630', 2.4); line(c, [[-6, 42], [4, 46], [16, 42]], '#5a2e20', 2.4); circ(c, -2, 41, 2, '#5a2e20'); circ(c, 12, 40, 2, '#5a2e20'); circ(c, 6, 34, 2.2, '#f0c08e');
-    // nasolabial folds and mouth
-    line(c, [[-12, 46], [-24, 66], [-22, 80]], 'rgba(100,55,35,.65)', 2); line(c, [[22, 44], [32, 64], [30, 78]], 'rgba(80,40,28,.7)', 2);
+    facePath(); c.lineWidth = 4.5; c.strokeStyle = INK; c.stroke();
+    // ears and short hair
+    oval(c, -82, 4, 11, 22, SKIN_SH); line(c, [[-76, -16], [-94, -6], [-92, 22], [-76, 30]], INK, 3); line(c, [[-86, -2], [-88, 12], [-82, 20]], '#6a3b28', 1.6);
+    oval(c, 82, 4, 10, 21, '#7e4a30'); line(c, [[76, -16], [93, -6], [91, 22], [76, 30]], INK, 3);
+    fill(c, [[-78, -66], [-64, -66], [-70, 0], [-80, -6]], '#1a1216'); fill(c, [[78, -66], [64, -66], [70, 0], [80, -6]], '#1a1216');
+    fill(c, [[-66, -68], [-50, -40], [-38, -66], [-20, -42], [-6, -68], [14, -44], [26, -68], [44, -42], [56, -68]], '#1a1216');
+    // heavy, low brows
+    const bw = o.mouth === 'gasp' ? -7 : o.empty ? 3 : 2;
+    fill(c, [[-66, -24 + bw * .3], [-40, -32 - bw], [-12, -28], [-12, -20], [-40, -24 - bw], [-64, -16]], INK);
+    fill(c, [[12, -28], [40, -33 - bw], [66, -25 + bw * .3], [64, -17], [40, -25 - bw], [12, -20]], INK);
+    line(c, [[-4, -26], [-2, -16]], 'rgba(90,45,30,.55)', 1.8);
+    animeEye(c, -36, -6, -1, { ...o, open: (o.open ?? 1) * .8 }, t); animeEye(c, 36, -7, 1, { ...o, open: (o.open ?? 1) * .8 }, t);
+    // strong nose
+    fill(c, [[4, -12], [18, 36], [6, 44], [0, 40]], 'rgba(120,64,40,.45)');
+    line(c, [[2, -12], [8, 30], [16, 40]], '#6a3826', 2.6); line(c, [[-10, 44], [4, 50], [20, 44]], '#4a2418', 2.6); circ(c, -5, 44, 2.6, '#4a2418'); circ(c, 14, 43, 2.6, '#4a2418'); circ(c, 4, 36, 2.4, '#f0c08e');
+    // firm mouth
     const tr = o.tremble ? Math.sin(t * 40) * 1.2 : 0;
-    if (o.mouth === 'gasp') { oval(c, 3, 84 + tr, 12, 9 + tr, '#2a0e10'); oval(c, 3, 89 + tr, 7, 3, '#8a3a3a'); line(c, [[-10, 80], [16, 80]], INK, 2); }
-    else if (o.mouth === 'open') oval(c, 3, 82, 9, 5, '#2a0e10');
-    else { line(c, [[-16, 82], [3, 80], [22, 83]], '#4a2018', 3); line(c, [[-8, 89], [12, 89]], 'rgba(110,55,35,.6)', 1.6); }
-    line(c, [[-2, 104], [2, 110]], 'rgba(100,55,35,.5)', 1.6);
-    if (o.sweat) for (let k = 0; k < 3; k++) { const p = (t * .5 + k * .33) % 1; const sx = [56, -62, 46][k], sy = -24 + p * 70; fill(c, [[sx, sy - 8], [sx - 4, sy + 2], [sx, sy + 6], [sx + 4, sy + 2]], '#d8ecf6'); line(c, [[sx, sy - 8], [sx - 4, sy + 2], [sx, sy + 6], [sx + 4, sy + 2], [sx, sy - 8]], '#5a7a9a', 1.2); }
-    c.save(); c.translate(0, -34); hat(c, s, t, -.03); c.restore();
+    if (o.mouth === 'gasp') { oval(c, 3, 84 + tr, 13, 9 + tr, '#2a0e10'); oval(c, 3, 89 + tr, 8, 3, '#8a3a3a'); line(c, [[-12, 80], [18, 80]], INK, 2.4); }
+    else if (o.mouth === 'open') oval(c, 3, 82, 10, 5, '#2a0e10');
+    else { line(c, [[-20, 82], [3, 81], [26, 83]], '#3a160f', 3.4); line(c, [[-10, 90], [14, 90]], 'rgba(90,45,30,.55)', 2); }
+    line(c, [[-16, 50], [-24, 70]], 'rgba(100,55,35,.45)', 1.8); line(c, [[24, 48], [30, 68]], 'rgba(80,40,28,.5)', 1.8);
+    if (o.sweat) for (let k = 0; k < 3; k++) { const p = (t * .5 + k * .33) % 1; const sx = [58, -64, 48][k], sy = -24 + p * 70; fill(c, [[sx, sy - 8], [sx - 4, sy + 2], [sx, sy + 6], [sx + 4, sy + 2]], '#d8ecf6'); line(c, [[sx, sy - 8], [sx - 4, sy + 2], [sx, sy + 6], [sx + 4, sy + 2], [sx, sy - 8]], '#5a7a9a', 1.2); }
+    c.save(); c.translate(0, -36); c.scale(1.04, 1); hat(c, s, t, -.03); c.restore();
     c.restore();
   }
   // A real hand gripping the phone (phone-local units: phone spans x -96..96, y -180..180).
