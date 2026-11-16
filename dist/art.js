@@ -12,9 +12,9 @@
   function steppedHill(c,x,y,w,h,color) {poly(c,[[x,y+h],[x,y+75],[x+w*.09,y+75],[x+w*.09,y+55],[x+w*.21,y+55],[x+w*.21,y+31],[x+w*.35,y+31],[x+w*.35,y+12],[x+w*.48,y+12],[x+w*.48,y],[x+w*.6,y],[x+w*.6,y+16],[x+w*.73,y+16],[x+w*.73,y+39],[x+w*.85,y+39],[x+w*.85,y+66],[x+w,y+66],[x+w,y+h]],color);}
   /* Scenery remaster: cached, ordered-dither (Bayer 4x4) light and depth layers.
      Only paints scenery; collisions, platforms and characters are untouched. */
-  let animT=0,animCam=0;
-  const windAt=(screenX)=>{const x=screenX+animCam,g=.55+.45*Math.sin(animT*.31);return(Math.sin(animT*1.15+x*.0042)*.62+Math.sin(animT*2.4+x*.013)*.38)*g;};
-  const screenX=(c,x)=>{try{const m=c.getTransform();return m.e/(m.a||1)+x;}catch(e){return x;}};
+  let animT=0,animCam=0,liteNow=false;
+  const windAt=(screenX)=>{if(liteNow)return 0;const x=screenX+animCam,g=.55+.45*Math.sin(animT*.31);return(Math.sin(animT*1.15+x*.0042)*.62+Math.sin(animT*2.4+x*.013)*.38)*g;};
+  const screenX=(c,x)=>{if(liteNow)return x;try{const m=c.getTransform();return m.e/(m.a||1)+x;}catch(e){return x;}};
   const BAYER=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5];
   const remasterCache=new Map();
   const hex=(h)=>{const n=parseInt(h.slice(1),16);return[(n>>16)&255,(n>>8)&255,n&255];};
@@ -54,12 +54,14 @@
   const OUTDOOR=new Set([0,1,3,4,5,7,9]);
   function lightPass(c,scene,camera,t){
     const outdoor=OUTDOOR.has(scene),ink=scene===6,mood=skyFor(scene);
+    if(liteNow)return;
     c.drawImage(cachedLayer('overlay-'+(ink?'ink':outdoor?'out':'in'),960,540,(x)=>{
       const g=x.createLinearGradient(0,412,0,442);g.addColorStop(0,'rgba(20,16,12,0)');g.addColorStop(1,'rgba(20,16,12,.28)');x.fillStyle=g;x.fillRect(0,412,960,30);
       const d=x.createLinearGradient(0,452,0,540);d.addColorStop(0,'rgba(20,14,10,0)');d.addColorStop(1,ink?'rgba(20,10,40,.45)':'rgba(20,14,10,.42)');x.fillStyle=d;x.fillRect(0,452,960,88);
       if(!outdoor){x.fillStyle=ink?'rgba(40,20,70,.12)':'rgba(40,34,28,.1)';x.fillRect(0,0,960,540);}
       const v=x.createRadialGradient(480,300,180,480,300,620);v.addColorStop(0,'rgba(12,16,14,0)');v.addColorStop(1,ink?'rgba(20,10,38,.5)':outdoor?'rgba(12,16,14,.32)':'rgba(12,16,14,.42)');x.fillStyle=v;x.fillRect(0,0,960,540);
     }),0,0);
+    if(liteNow)return;
     if(outdoor){
       // Slow god-rays from the sun side, warm in the late scenes.
       const warm=mood!=='day'&&mood!=='plaza';c.save();
@@ -73,6 +75,7 @@
 
   function sky(c,scene,camera,t) {
     if(scene===2||scene===6||scene===8||scene===10){r(c,0,0,960,440,'#c9e7ec');return;}
+    if(liteNow){const colors=scene===3?['#78a9d7','#a7cbe4','#d6e3dc']:['#74b8e7','#96cef0','#c9e7ec'];r(c,0,0,960,120,colors[0]);r(c,0,120,960,120,colors[1]);r(c,0,240,960,200,colors[2]);const lx=scene===3?762:734;oval(c,lx-camera*.025,99,35,35,scene===3?'#fff0c4':'#fff6cc',4);for(let i=-1;i<6;i++){const x=((i*283+t*5+1800)%1800)-283-camera*.09;cloud(c,x,50+hash(i+10)*95,.8+hash(i)*.6,'#fffef5');}for(let i=-2;i<7;i++)steppedHill(c,i*318-camera*.12,197+hash(i+5)*34,422,250,scene===3?'#7eada0':'#89b7a0');for(let i=-2;i<8;i++)steppedHill(c,i*289-camera*.25,271+hash(i+21)*25,400,190,scene===3?'#5b937b':'#64a068');return;}
     const mood=skyFor(scene);c.drawImage(ditherRamp('sky-'+mood,960,440,SKIES[mood],2),0,0);
     const sx=scene===3?762:734;sunGlow(c,sx-camera*.025,99,mood==='golden'||mood==='afternoon');
     {const range=farRange(scene),off=((camera*.05)%960+960)%960;c.drawImage(range,-off,150);c.drawImage(range,960-off,150);}oval(c,sx-camera*.025,99,35,35,scene===3?'#fff0c4':'#fff6cc',4);
@@ -302,7 +305,7 @@
   }
 
   function drawScene(c,scene,camera=0,t=0) {
-    c.save();c.imageSmoothingEnabled=false;c.beginPath();c.rect(0,0,960,540);c.clip();camera=Number(camera)||0;t=Number(t)||0;animT=t;animCam=0;
+    c.save();c.imageSmoothingEnabled=false;c.beginPath();c.rect(0,0,960,540);c.clip();camera=Number(camera)||0;t=Number(t)||0;animT=t;animCam=0;liteNow=!!window.Graphics?.isLite?.();
     if(scene===11){
       if(window.BaileWorld?.draw)window.BaileWorld.draw(c,camera,t,{hideOllyan:true});
       else{r(c,0,0,960,440,'#111526');r(c,0,440,960,100,'#31324d');r(c,0,440,960,5,'#7892c3');}

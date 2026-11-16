@@ -18,7 +18,7 @@
 
   function wind(t, x) { const g = .55 + .45 * Math.sin(t * .31); return (Math.sin(t * 1.15 + x * .0042) * .62 + Math.sin(t * 2.4 + x * .013) * .38) * g; }
   function dustColor(scene) { return DUST[scene] || '#bdb4a2'; }
-  function puff(x, y, vx, vy, size, color, life) { if (particles.length > 70) particles.shift(); particles.push({ x, y, vx, vy, size, color, life, max: life }); }
+  function puff(x, y, vx, vy, size, color, life) { if (window.Graphics?.isLite?.() && (particles.length > 14 || Math.random() < .5)) return; if (particles.length > 70) particles.shift(); particles.push({ x, y, vx, vy, size, color, life, max: life }); }
 
   function update(dt, s) {
     dt = clamp(Number(dt) || 0, 0, .05);
@@ -104,7 +104,7 @@
   }
 
   function drawFront(c, s) {
-    const t = Number(s.time) || 0, cam = Number(s.camera) || 0;
+    const t = Number(s.time) || 0, cam = Number(s.camera) || 0, lite = !!window.Graphics?.isLite?.();
     // Dust in front so it partly covers the feet, like real kicked-up dirt.
     for (const e of particles) { const k = e.life / e.max; c.save(); c.globalAlpha = clamp(k * 1.4, 0, .85); c.fillStyle = e.color; const z = Math.max(1, Math.round(e.size * (1.6 - k * .6))); c.fillRect(Math.round(e.x - z / 2), Math.round(e.y - z / 2), z, z); c.restore(); }
     for (const l of lines) if (l.kind === 'smear') {
@@ -114,6 +114,7 @@
       c.restore();
     }
     // Foreground grass carpet.
+    if (lite) return;
     const pal = MEADOW[s.scene];
     if (pal && !s.arena) {
       const from = Math.floor(cam / 6) - 1, to = Math.ceil((cam + 960) / 6) + 1;

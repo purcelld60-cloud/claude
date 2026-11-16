@@ -83,6 +83,7 @@
  });
  mainActions.append(controls);
  const audio=makeButton('ranchAudioBtn','SOM DA ROÇA','Músicas e efeitos do jogo.','sound',()=>{document.getElementById('soundBtn')?.click();render();});mainActions.append(audio);
+ const gfx=makeButton('ranchGraphicsBtn','GRÁFICOS: '+(window.Graphics?.label?.()||'REALISTA'),window.Graphics?.describe?.()||'Cenário vivo, luz e partículas.','controls',()=>{window.Graphics?.toggle?.();gfx.querySelector('b').textContent='GRÁFICOS: '+window.Graphics.label();gfx.querySelector('small').textContent=window.Graphics.describe();});mainActions.append(gfx);window.Graphics?.onChange?.(()=>{gfx.querySelector('b').textContent='GRÁFICOS: '+window.Graphics.label();gfx.querySelector('small').textContent=window.Graphics.describe();});
  const sandboxButton=makeButton('ranchSandboxBtn','TERREIRO DOS CHEFES','Sandbox: escolha uma revanche.','sandbox',()=>openSandbox());mainActions.append(sandboxButton);
  const retryButton=makeButton('ranchRetrySandboxBtn','TENTAR DE NOVO','Reinicie esta revanche com vida cheia.','sandbox',()=>{const state=gameState();if(window.Game?.retrySandboxBoss)window.Game.retrySandboxBoss();else if(state.sandbox?.type)window.Game?.startSandboxBoss?.(state.sandbox.type);render();});retryButton.hidden=true;mainActions.append(retryButton);
  const returnButton=makeButton('ranchExitSandboxBtn','VOLTAR À CAMPANHA','Encerre o treino e recupere sua aventura.','exit',()=>{window.Game?.exitSandbox?.();render();});returnButton.hidden=true;mainActions.append(returnButton);
