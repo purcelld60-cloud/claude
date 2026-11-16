@@ -95,7 +95,7 @@
   // Reflected window shapes remain below the walking surface.
   for(const x of [190,815]){poly(c,[[x,449],[x+55,449],[x+88,520],[x-6,520]],'#e2ecdc18');rect(c,x+27,449,2,71,'#709b9918');rect(c,x+1,481,69,2,'#71969422');}c.restore();
  }
- function boss(c,type,camera,t,homeX){if(!sceneAllowed())return;t=time(t);type=typeof type==='object'?type.type:type;const center=homeX?homeX-camera:480;c.save();
+ function boss(c,type,camera,t,homeX){if(!sceneAllowed())return;t=time(t);type=typeof type==='object'?type.type:type;if(window.HdScene?.active?.(type))return;const center=homeX?homeX-camera:480;c.save();
   const dark=['marco','menezes','giant','dede'].includes(type),color=dark?'#d8a9d555':'#f3dfae66';
   for(let i=0;i<7;i++){const x=((i*167+t*4+center*.07+1120)%1120)-80,y=27+(i*43)%200;rect(c,x,y,1,2,color);}
   // Fine surface imperfections stay entirely below the actors' feet.

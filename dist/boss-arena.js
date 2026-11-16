@@ -67,7 +67,7 @@
   }
   window.Art.drawArena = function (c, type, camera = 0, t = 0, homeX = 0) {
     orig(c, type, camera, t, homeX);
-    if (window.Graphics?.isLite?.()) return;
+    if (window.Graphics?.isLite?.() || window.HdScene?.active?.(type)) return;
     try { overlay(c, typeof type === 'object' ? type.type : type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); } catch (e) {}
   };
   window.BossArena = Object.freeze({ themes: Object.keys(THEME) });
