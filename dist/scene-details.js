@@ -21,6 +21,7 @@
  function sky(c,scene,camera,t){
   if(![0,1,3,4,5,7,9].includes(scene))return;
   if(scene===4||scene===5){for(let i=0;i<2;i++)cloud(c,((i*423+t*1.8-camera*.06+1200)%1200)-100,31+i*12,.38+i*.06);return;}
+  if(window.Graphics?.isLite?.()){
   const h=scene===9?140:180;
   const bg=cached('sky:'+scene,960,h,g=>{const grad=g.createLinearGradient(0,0,0,h);grad.addColorStop(0,scene===3?'#3f99d5':'#3199df');grad.addColorStop(.64,'#7fc9ee');grad.addColorStop(1,h<120?'#74b8e7':'#96cef0');g.fillStyle=grad;g.fillRect(0,0,960,h);for(let i=0;i<9;i++)rect(g,0,h-15+i*2,960,1,'#acd9ee0a');});
   c.drawImage(bg,0,0);c.save();c.beginPath();c.rect(0,0,960,h);c.clip();
@@ -30,6 +31,7 @@
   for(let i=0;i<5;i++){const x=((i*257+t*(2.2+i%2)-camera*.06+1500)%1500)-190;cloud(c,x,36+(i%3)*37,.57+(i%3)*.17);}
   for(let i=0;i<3;i++){const x=((i*379+t*9-camera*.1+1130)%1130)-70,y=31+(i%2)*34,flap=Math.round(Math.sin(t*5+i)*2);line(c,[[x-5,y+flap],[x,y],[x+5,y+flap]],'#4687a8',1);}
   c.restore();
+  }
   // The new sky remains behind the original floodlight silhouettes.
   if(scene===3)for(const wx of [85,2450]){const x=wx-camera;if(x< -30||x>990)continue;rect(c,x,122,8,58,'#4b6260');rect(c,x+1,122,2,58,'#9eb9b8');rect(c,x-16,112,41,16,'#3e5354');for(let k=0;k<3;k++)rect(c,x-11+k*11,115,8,9,'#f9e5ac');}
   if(scene===7)for(let wx=300;wx<camera+1000;wx+=1300){const x=wx-camera;if(x< -30||x>990)continue;rect(c,x,100,7,80,'#40687b');rect(c,x+1,100,2,80,'#9bbecb');rect(c,x-18,89,43,17,'#1f425c');for(let j=0;j<3;j++)rect(c,x-13+j*12,93,9,8,'#fff2b6');}

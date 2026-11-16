@@ -9,13 +9,13 @@
   const R = (c, x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), w, h); };
   // What lives where: [type, spacing in world px, chance per slot].
   const PLAN = {
-    0: [['chicken', 420, .8], ['butterfly', 360, .7]],
-    1: [['pigeon', 520, .7], ['can', 900, .6]],
-    3: [['ball', 1400, 1], ['butterfly', 700, .4]],
+    0: [['chicken', 420, .8], ['butterfly', 360, .7], ['sparrow', 380, .85]],
+    1: [['pigeon', 520, .7], ['can', 900, .6], ['sparrow', 640, .7]],
+    3: [['ball', 1400, 1], ['butterfly', 700, .4], ['sparrow', 420, .85]],
     4: [['pigeon', 380, .9], ['butterfly', 600, .5], ['can', 1000, .5]],
     5: [['pigeon', 600, .6], ['dog', 1500, .9], ['cat', 1300, .8], ['kite', 700, .8], ['can', 800, .6]],
-    7: [['ball', 2000, 1], ['butterfly', 500, .6]],
-    9: [['pigeon', 600, .8], ['can', 900, .5]]
+    7: [['ball', 2000, 1], ['butterfly', 500, .6], ['sparrow', 450, .9]],
+    9: [['pigeon', 600, .8], ['can', 900, .5], ['sparrow', 560, .7]]
   };
   let scene = -1, list = [], worldW = 4800;
 
@@ -28,9 +28,9 @@
       for (let x = 300 + hash(k + sc) * gap; x < worldW - 120; x += gap * (lite ? 1.8 : 1)) {
         const seed = Math.floor(x) + k * 1000 + sc * 77;
         if (hash(seed) > chance) continue;
-        const n = type === 'chicken' ? 2 + Math.floor(hash(seed + 1) * 2) : type === 'pigeon' ? 2 + Math.floor(hash(seed + 2) * 3) : 1;
+        const n = type === 'chicken' ? 2 + Math.floor(hash(seed + 1) * 2) : type === 'pigeon' ? 2 + Math.floor(hash(seed + 2) * 3) : type === 'sparrow' ? 3 + Math.floor(hash(seed + 5) * 4) : 1;
         for (let j = 0; j < n; j++) {
-          const hx = x + j * (14 + hash(seed + j) * 22);
+          const hx = x + j * (type === 'sparrow' ? 7 + hash(seed + j) * 12 : 14 + hash(seed + j) * 22);
           list.push({ type, hx, x: hx, y: type === 'butterfly' ? FLOOR - 40 - hash(seed + j) * 50 : type === 'kite' ? 70 + hash(seed) * 70 : FLOOR, vx: 0, vy: 0, face: hash(seed + j * 3) > .5 ? 1 : -1, state: 'idle', timer: hash(seed + j) * 3, seed: seed + j, rot: 0, gone: 0 });
         }
       }
@@ -50,11 +50,14 @@
         if (c.state === 'flee') { c.vy += GRAV * dt; c.x += c.vx * dt; c.y = Math.min(FLOOR, c.y + c.vy * dt); if (c.y >= FLOOR) { c.vy = 0; c.vx *= Math.exp(-dt * 3); } if (c.timer <= 0) c.state = 'idle'; }
         else if (c.timer <= 0) { c.state = hash(c.seed + Math.floor(t)) > .5 ? 'peck' : 'walk'; c.timer = 1 + hash(c.seed + t) * 2; if (c.state === 'walk') c.face = c.x > c.hx + 40 ? -1 : c.x < c.hx - 40 ? 1 : c.face; }
         if (c.state === 'walk') c.x += c.face * 18 * dt;
-      } else if (c.type === 'pigeon') {
+      } else if (c.type === 'pigeon' || c.type === 'sparrow') {
+        const fear = (c.type === 'sparrow' ? 70 : 60) + hash(c.seed + 9) * 70, scared = p && near < fear && Math.abs(p.y - c.y) < 110;
         if (c.state === 'fly') { c.vy -= 60 * dt; c.x += c.vx * dt; c.y += c.vy * dt; if (c.y < -40) { c.state = 'away'; c.timer = 6 + hash(c.seed) * 6; } }
         else if (c.state === 'away') { if (c.timer <= 0 && (!p || Math.abs(p.x - c.hx) > 520)) { c.state = 'idle'; c.x = c.hx; c.y = FLOOR; } }
         else {
-          if (threat) { c.state = 'fly'; c.face = Math.sign(dx) || 1; c.vx = c.face * (120 + hash(c.seed) * 80); c.vy = -170 - hash(c.seed + 3) * 80; }
+          if (scared || threat) { c.state = 'fly'; c.face = Math.sign(dx) || 1; c.vx = c.face * (c.type === 'sparrow' ? 170 + hash(c.seed) * 110 : 120 + hash(c.seed) * 80); c.vy = -(c.type === 'sparrow' ? 200 : 170) - hash(c.seed + 3) * 90; }
+          else if (c.state === 'hop') { c.vy += GRAV * dt; c.x += c.vx * dt; c.y = Math.min(FLOOR, c.y + c.vy * dt); if (c.y >= FLOOR) { c.state = 'peck'; c.vx = 0; } }
+          else if (c.timer <= 0 && c.type === 'sparrow') { const r = hash(c.seed + Math.floor(t * 3)); c.state = r > .55 ? 'peck' : 'hop'; if (c.state === 'hop') { c.vy = -90; c.vx = c.face * 40; c.y -= 1; if (r < .2) c.face *= -1; } c.timer = .35 + hash(c.seed + t) * .9; }
           else if (c.timer <= 0) { c.state = hash(c.seed + Math.floor(t * 2)) > .4 ? 'peck' : 'walk'; c.timer = .6 + hash(c.seed + t) * 1.6; if (hash(c.seed + Math.floor(t)) > .7) c.face *= -1; }
           if (c.state === 'walk') c.x += c.face * 14 * dt;
         }
@@ -104,6 +107,15 @@
     R(c, -5, -1, 10, 1, 'rgba(30,30,30,.2)'); R(c, -1, -3, 1, 3, '#c0605a'); R(c, 1, -3, 1, 3, '#c0605a');
     R(c, -6, -8, 10, 5, '#8b93a0'); R(c, -7, -7, 3, 2, '#5f6672'); R(c, -3, -7, 5, 2, '#a7aebb');
     R(c, 2, -11 + peck, 4, 4, '#7e8794'); R(c, 2, -8 + peck, 3, 2, '#6aa38e'); R(c, 6, -10 + peck, 2, 1, '#e9d9b0'); R(c, 4, -10 + peck, 1, 1, '#f0a050');
+    c.restore();
+  }
+  function sparrow(c, x, y, f, t, k) {
+    c.save(); c.translate(Math.round(x), Math.round(y)); c.scale(f, 1);
+    if (k.state === 'fly') { const w = Math.round(Math.sin(t * 34 + k.seed) * 3); R(c, -3, -4, 7, 3, '#8a6a4a'); R(c, -2, -7 + w, 5, 3, '#a88560'); R(c, -2, -1 - w, 5, 2, '#6e5238'); R(c, 3, -5, 3, 2, '#7a5a3c'); R(c, -5, -4, 2, 1, '#5e4630'); c.restore(); return; }
+    const peck = k.state === 'peck' ? Math.max(0, Math.sin(t * 13 + k.seed)) * 2 : 0;
+    R(c, -3, -1, 7, 1, 'rgba(30,25,20,.22)'); R(c, 0, -2, 1, 2, '#c08a60');
+    R(c, -4, -6, 7, 4, '#8a6a4a'); R(c, -6, -5, 3, 1, '#5e4630'); R(c, -3, -6, 4, 1, '#b08a62'); R(c, -2, -3, 4, 1, '#d8c8a8');
+    R(c, 2, -8 + peck, 3, 3, '#7a5a3c'); R(c, 2, -6 + peck, 2, 1, '#e8dcc0'); R(c, 5, -7 + peck, 1, 1, '#e0b060'); R(c, 3, -8 + peck, 1, 1, '#1d1612');
     c.restore();
   }
   function butterfly(c, x, y, t, k) {
@@ -156,6 +168,7 @@
       switch (k.type) {
         case 'chicken': chicken(c, k.x, k.y, k.face, t, k); break;
         case 'pigeon': pigeon(c, k.x, k.y, k.face, t, k); break;
+        case 'sparrow': sparrow(c, k.x, k.y, k.face, t, k); break;
         case 'butterfly': butterfly(c, k.x, k.y, t, k); break;
         case 'dog': dog(c, k.x, k.y, k.face, t, k); break;
         case 'cat': cat(c, k.x, k.y, k.face, t, k); break;
