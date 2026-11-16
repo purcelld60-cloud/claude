@@ -13,6 +13,7 @@
   const WEED_COLORS = ['#3f6e3a', '#55873f', '#79a64a'];
   const DUST = { 0: '#b8946a', 7: '#8fb36a', 2: '#8f8780', 6: '#a58fbd', 8: '#cdb594', 10: '#c9a77f' };
 
+  let heroPos = null;
   const springs = new Map();
   let sparks = [], shards = [], clouds = [], particles = [], lines = [], lastStep = null, wasGround = true, lastVy = 0, squash = 0, squashV = 0, lastScene = -1, lastAttack = 0;
 
@@ -24,6 +25,7 @@
     dt = clamp(Number(dt) || 0, 0, .05);
     const p = s.player;
     if (!p || !Number.isFinite(p.x)) return;
+    heroPos = { x: p.x, y: p.y, scene: s.scene };
     if (s.scene !== lastScene) { springs.clear(); particles = []; lines = []; lastScene = s.scene; lastStep = null; }
     const moving = Math.abs(p.vx) > 40, onGround = !!p.ground && !s.vehicle, color = dustColor(s.scene);
 
@@ -163,5 +165,5 @@
   }
   function burst(x, y, color, n) { for (let i = 0; i < n; i++) puff(x, y, (Math.random() - .5) * 120, -20 - Math.random() * 50, 2, color, .35); }
   window.Graphics?.onChange?.(() => window.Critters?.reset?.());
-  window.SceneLife = Object.freeze({ update, drawBack, drawFront, heroScale, burst, impact, gas });
+  window.SceneLife = Object.freeze({ update, drawBack, drawFront, heroScale, burst, impact, gas, hero: () => heroPos });
 })();

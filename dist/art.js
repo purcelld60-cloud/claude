@@ -84,7 +84,8 @@
       const n=Math.max(1,Math.floor(sw/(near?11:8)));
       for(let i=0;i<n;i++){const h=hash(seed*31+k*7+i);if(h<.35)continue;const tx=sx+3+i*(sw-6)/n;
         if(near&&h>.93){ // little farmhouse
-          r(c,tx-5,sy-7,11,7,'#efe2c4');r(c,tx-6,sy-10,13,3,'#c2573e');r(c,tx-1,sy-4,3,4,'#6b4a33');
+          r(c,tx-5,sy-7,11,7,'#efe2c4');r(c,tx-6,sy-10,13,3,'#c2573e');r(c,tx-1,sy-4,3,4,'#6b4a33');r(c,tx+2,sy-13,2,3,'#8a5a40');
+          for(let q=0;q<4;q++){const k=((animT*.35+q/4+h)%1);c.globalAlpha=(1-k)*.55;r(c,tx+2+Math.round(windAt(0)*4*k+k*5),sy-15-k*22,2+Math.round(k*3),2+Math.round(k*2),'#eef2f3');}c.globalAlpha=1;
         }else if(near&&h>.86){ // cow
           r(c,tx-4,sy-5,8,4,h>.9?'#f2efe6':'#8a5a3a');r(c,tx+3,sy-6,3,3,h>.9?'#f2efe6':'#8a5a3a');r(c,tx-3,sy-1,1,2,'#3a3028');r(c,tx+2,sy-1,1,2,'#3a3028');r(c,tx-2,sy-4,2,2,'#2c2a28');
         }else if(near&&h>.8){ // coconut palm
@@ -170,7 +171,7 @@
       const lo=Math.floor((camera-170)/210),hi=Math.ceil((camera+1180)/210);
       for(let i=lo;i<hi;i++){const x=i*210,yy=272+(i%2)*29,seed=Math.abs(i+100);
         if(seed%2===0)dish(c,x+150,yy-22);
-        if(seed%3===0)ac(c,x+120,yy+14);
+        if(seed%3===0&&!(((x+120-870)%900+900)%900<132||((x+146-870)%900+900)%900<132))ac(c,x+120,yy+14);
         if(seed%3===1)planter(c,x+16,yy+64);
         if(seed%4===2){for(let k=0;k<6;k++)for(let j=0;j<3;j++)r(c,x+60+k*9+(j%2)*4,yy+86+j*6,8,5,j%2?'#9c4f36':'#b5603f');}
         if(seed%5===1)tag(c,x+70,yy+122-(i%2)*29,seed);
@@ -182,6 +183,43 @@
       for(let x=60;x<worldWidth(7);x+=520){if(!vis(x,120))continue;const cols=[['#21496c','#f2c14e'],['#c0392b','#ffffff'],['#2e7d32','#fff3c4']][(x/520|0)%3];r(c,x,300,110,22,cols[0]);r(c,x+4,304,102,14,cols[1]);r(c,x+10,308,40,6,cols[0]);r(c,x+56,308,44,6,cols[0]);}
     }
     c.restore();
+  }
+
+  /* Living background: neighbours in windows that turn and wave when the hero passes
+     below (no button needed), an airliner with contrail, V flocks and chimney smoke. */
+  const SKIN=['#f0c9a8','#d6a071','#a86c4e','#7a4a33','#e8b48e'],SHIRT=['#d8433a','#2f5f86','#e0a020','#3f6e3a','#7b3fb0','#f2f2f2','#2a2a2a'];
+  function windowPerson(c,x,y,w,h,seed,t,hx,lean){
+    // x,y = window interior (world coords). Character sits at the sill and turns to the hero.
+    const cx=x+w/2,near=hx!=null&&Math.abs(hx-cx)<140,dir=hx==null?0:Math.sign(hx-cx),skin=SKIN[seed%SKIN.length],shirt=SHIRT[(seed>>2)%SHIRT.length],hair=['#1d1612','#3b2a1e','#6b4a2a','#c9a050','#1d1612'][(seed>>1)%5];
+    const bob=Math.round(Math.sin(t*1.7+seed)*1),by=y+h-2,head=by-22+bob-(lean?4:0);
+    r(c,cx-9,by-12+bob,18,12,shirt);r(c,cx-9,by-12+bob,18,2,'#ffffff22');
+    r(c,cx-6,head,12,11,skin);r(c,cx-7,head-3,14,5,hair);if(seed%3===0)r(c,cx-7,head-3,3,10,hair);
+    const look=near?dir*2:Math.round(Math.sin(t*.5+seed)*1.4);r(c,cx-3+look,head+4,2,2,'#1d1612');r(c,cx+2+look,head+4,2,2,'#1d1612');
+    if(near){r(c,cx-2+look,head+8,4,1,'#8a3a2a');
+      const wave=Math.round(Math.sin(t*12+seed)*3),ax=cx+(dir>=0?9:-12);r(c,ax,by-24+bob+wave,3,12,shirt);r(c,ax-1,by-28+bob+wave,5,5,skin);}
+    else r(c,cx-1+look,head+8,3,1,'#8a5a4a');
+  }
+  function liveBackground(c,scene,camera,t){
+    const signs5=[];if(scene===5){for(let x=870;x<worldWidth(5);x+=900)signs5.push(x);}
+    const hero=window.SceneLife?.hero?.(),hx=hero&&Number.isFinite(hero.x)?hero.x:null;
+    c.save();c.translate(-Math.round(camera),0);
+    const vis=(x,w=100)=>x+w>camera-20&&x<camera+980;
+    if(scene===1){for(let i=0;i<12;i++){const x=140+i*137;if(x>=1750||!vis(x))continue;const seed=i*13+7;if(hash(seed)<.5)continue;
+      c.save();c.beginPath();c.rect(x+5,272,73,68);c.clip();windowPerson(c,x+5,272,34,68,seed,t,hx);c.restore();}}
+    if(scene===9){const width=worldWidth(9);for(let x=55,i=0;x<width;x+=187,i++){if(!vis(x))continue;const seed=i*17+3;if(hash(seed)<.45)continue;
+      c.save();c.beginPath();c.rect(x+5,249,91,54);c.clip();windowPerson(c,x+51,249,40,54,seed,t,hx);c.restore();}}
+    if(scene===5){const lo=Math.floor((camera-170)/210),hi=Math.ceil((camera+1180)/210);
+      for(let i=lo;i<hi;i++){const x=i*210,yy=272+(i%2)*29,seed=Math.abs(i*7+31);if(hash(seed)<.45)continue;
+        const wx=x+13+(seed%2)*(188*.48),ww=Math.min(30,188*.3),wh=Math.min(42,(163-(i%2)*29)-27);
+        if(signs5.some(sx=>wx+ww>sx-4&&wx<sx+132))continue;c.save();c.beginPath();c.rect(wx+3,yy+18+3,ww-6,wh-7);c.clip();windowPerson(c,wx+3,yy+21,ww-6,wh-7,seed,t,hx,true);c.restore();}}
+    c.restore();
+    // Sky life (screen space): an airliner every ~38s and a V of birds every ~23s.
+    if([0,1,3,4,5,7,9].includes(scene)){
+      const ph=(t%38)/38;if(ph<.55){const k=ph/.55,x=-80+k*1120,y=58+Math.sin(scene)*8;
+        c.save();c.globalAlpha=.55;for(let i=0;i<30;i++){const tx=x-14-i*9;if(tx<-10)break;c.globalAlpha=.4*(1-i/30);r(c,tx,y+1,9,2,'#ffffff');}c.restore();
+        r(c,x-12,y,20,3,'#e9eef2');r(c,x+8,y+1,3,1,'#9fb0bf');r(c,x-6,y-3,6,3,'#c9d3dc');r(c,x-4,y+3,8,2,'#b9c5cf');r(c,x-12,y-3,3,3,'#c0503e');}
+      const pb=(t%23)/23;if(pb<.6){const k=pb/.6,bx=1000-k*1150,by=120+Math.sin(scene*2)*20;for(let i=0;i<7;i++){const row=Math.ceil(i/2),side=i%2?1:-1,x=bx+row*11,y=by+(i?side*row*6:0),f=Math.round(Math.sin(t*10+i)*2);r(c,x-3,y-f,3,1,'#3d4f5a');r(c,x,y,2,1,'#3d4f5a');r(c,x+2,y-f,3,1,'#3d4f5a');}}
+    }
   }
 
   function sky(c,scene,camera,t) {
@@ -425,7 +463,7 @@
     sky(c,scene,camera,t);
     if(scene===1)school(c,camera,t);else if(scene===2)gym(c,camera,t);else if(scene===3)court(c,camera,t);else if(scene===4)plaza(c,camera,t);else if(scene===5)favela(c,camera,t);else if(scene===6)inkRealm(c,camera,t);else if(scene===7)footballField(c,camera,t);else if(scene===8)bigodon(c,camera,t);else if(scene===9)courtyard(c,camera,t);else if(scene===10)rayssaHouse(c,camera,t);else farm(c,camera,t);
     if(scene!==2&&scene!==8&&scene!==10)for(let i=0;i<13;i++){const lx=((i*137+t*13-camera*.65)%1120+1120)%1120-80,ly=158+((i*43+t*15)%235);r(c,lx,ly,5,2,i%2?'#8bb65a':'#b2c56c');r(c,lx+Math.round(Math.sin(t*5+i)*2),ly+2,3,2,'#5e954c');}
-    if(!liteNow){wallDecor(c,scene,camera,t);facadeTexture(c,scene,camera);}
+    if(!liteNow){wallDecor(c,scene,camera,t);facadeTexture(c,scene,camera);liveBackground(c,scene,camera,t);}
     worldExtensions(c,scene,camera,t);ground(c,camera,scene);groundBridges(c,scene,camera,t);lightPass(c,scene,camera,t);c.restore();
   }
   /* Every former pit has a walking surface at the same y=440 used by collision. */
