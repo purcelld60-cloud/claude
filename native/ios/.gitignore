@@ -1,0 +1,4 @@
+*.xcodeproj
+build/
+App/Info.plist
+App/Assets.xcassets/AppIcon.appiconset/icon.png
