@@ -577,6 +577,14 @@
     }else{
       for(let i=0;i<9;i++){const xx=Math.cos(t*3+i*1.25)*32,yy=-((t*82+i*19)%98);r(c,xx,yy,3,6,glow[2]);}
     }
+    if(!window.Graphics?.isLite?.()){
+      // Anime-style mantle: pixel flame tongues licking upward, sparks and small arcs.
+      const a0=c.globalAlpha;
+      for(let i=0;i<12;i++){const side=i%2?1:-1,bx=side*(8+((i*7)%26)),life=((t*1.6+hash(i+300))%1),h=26+hash(i+310)*46,yy=-12-life*90,w=Math.max(2,Math.round((1-life)*8));
+        c.globalAlpha=a0*(1-life)*.85;r(c,bx-w/2+Math.sin(t*9+i)*3,yy-h*(1-life)*.3,w,Math.max(4,h*(1-life)*.6),i%3?glow[1]:glow[2]);r(c,bx-1+Math.sin(t*9+i)*3,yy-h*(1-life)*.3,2,Math.max(2,h*(1-life)*.3),glow[5]);}
+      c.globalAlpha=a0;for(let i=0;i<10;i++){const a=t*4+i*.63,rr=40+Math.sin(t*6+i)*8;r(c,Math.cos(a)*rr,-48+Math.sin(a)*rr*1.2,2,2,glow[5]);}
+      if(Math.sin(t*7)>.82){c.strokeStyle=glow[4];c.lineWidth=2;c.beginPath();let x=-30+hash(Math.floor(t*7))*60,y=-110;c.moveTo(x,y);for(let k=0;k<5;k++){x+=(hash(k+Math.floor(t*7))-.5)*24;y+=18;c.lineTo(x,y);}c.stroke();}
+    }
     c.restore();
   }
   function supremeAura(c,t,o={}) {
