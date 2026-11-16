@@ -52,10 +52,63 @@
     }
   }
 
+  // ---------- Fighter animation layer: smears, hit flash, tumble, flips, squash, ghosts ----------
+  const hist = new Map();
+  const OX = 130, OY = 180, buf = document.createElement('canvas'); buf.width = 260; buf.height = 230; const bx = buf.getContext('2d');
+  function flash(c, p, t, alpha) {
+    bx.setTransform(1, 0, 0, 1, 0, 0); bx.globalCompositeOperation = 'source-over'; bx.globalAlpha = 1; bx.clearRect(0, 0, 260, 230);
+    A.drawFighter(bx, { ...p, x: OX, y: OY }, t);
+    bx.globalCompositeOperation = 'source-in'; bx.fillStyle = '#ffffff'; bx.fillRect(0, 0, 260, 230); bx.globalCompositeOperation = 'source-over';
+    c.save(); c.globalAlpha *= alpha; c.drawImage(buf, Math.round(p.x) - OX, Math.round(p.y) - OY); c.restore();
+  }
+  function smear(c, p, color) {
+    const prog = Number(p.attackProgress) || 0; if (!(p.attackAnim > 0) || prog < .16 || prog > .72) return;
+    const k = (prog - .16) / .56, face = p.facing < 0 ? -1 : 1, dir = p.attackDirection || 'side', ranged = p.attackType === 'ranged', combo = p.attackType === 'combo';
+    const cx = p.x + face * (ranged ? 10 : 16), cy = p.y - 36, r = ranged ? 26 : combo ? 50 : 40;
+    let a0, a1; if (dir === 'up') { a0 = Math.PI * 1.05; a1 = Math.PI * 1.95; } else if (dir === 'down') { a0 = Math.PI * .05; a1 = Math.PI * .95; } else { a0 = -1.1; a1 = 1.0; }
+    if (face < 0 && dir !== 'up' && dir !== 'down') { a0 = Math.PI - 1.0; a1 = Math.PI + 1.1; }
+    const head = a0 + (a1 - a0) * Math.min(1, k * 1.4), tail = a0 + (a1 - a0) * Math.max(0, k * 1.4 - .55);
+    c.save(); c.globalAlpha = (1 - k) * .9;
+    for (let i = 0; i < 3; i++) { c.beginPath(); c.arc(cx, cy, r - i * 6, tail, head); c.lineWidth = (3 - i) * 4 * (1 - k * .5); c.strokeStyle = i === 0 ? '#ffffff' : color; c.lineCap = 'round'; c.stroke(); }
+    c.restore();
+  }
+  function fighter(c, p, t) {
+    if (!p || p.stocks === 0 || p.eliminated) return A.drawFighter(c, p, t);
+    const id = p.id || p.character, h = hist.get(id) || { ghosts: [], spin: 0, lastT: t, puffs: [] }; hist.set(id, h);
+    const dt = Math.max(0, Math.min(.05, t - h.lastT)); h.lastT = t;
+    const vx = Number(p.vx) || 0, vy = Number(p.vy) || 0, speed = Math.hypot(vx, vy), air = !p.ground, launched = air && ((p.launch || 0) > 0 || (p.stun || 0) > 0) && speed > 330;
+    const motion = p.motion || 'idle', mt = Number(p.motionTime) || 0, color = window.ArenaRoster?.get?.(p.character)?.color || '#ffd27a';
+    // ghosts on dodge/dash and on big launches
+    if ((motion === 'dash' || launched) && (!h.ghosts.length || t - h.ghosts[h.ghosts.length - 1].t > .035)) { h.ghosts.push({ ...p, t, a: .32 }); if (h.ghosts.length > 5) h.ghosts.shift(); }
+    for (const g of h.ghosts) g.a -= dt * 1.6; h.ghosts = h.ghosts.filter(g => g.a > 0);
+    for (const g of h.ghosts) { c.save(); c.globalAlpha *= g.a; A.drawFighter(c, { ...g, hit: 0, attackAnim: 0 }, t); c.restore(); }
+    // smoke trail while flying from a hit
+    if (launched && Math.random() < .7) { h.puffs.push({ x: p.x, y: p.y - 30, life: .5, r: 5 + Math.random() * 5 }); if (h.puffs.length > 24) h.puffs.shift(); }
+    for (const q of h.puffs) { q.life -= dt; q.r += dt * 18; } h.puffs = h.puffs.filter(q => q.life > 0);
+    c.save(); for (const q of h.puffs) { c.globalAlpha = q.life * .8; c.fillStyle = '#eef2f4'; c.beginPath(); c.arc(q.x, q.y, q.r, 0, Math.PI * 2); c.fill(); c.globalAlpha = q.life * .5; c.fillStyle = '#cfd6da'; c.beginPath(); c.arc(q.x + 2, q.y + 2, q.r * .6, 0, Math.PI * 2); c.fill(); } c.restore();
+    // body transform: tumble, flip, squash & stretch (pivot at the feet / body centre)
+    let rot = 0, sx = 1, sy = 1, jx = 0;
+    if (launched) { h.spin += (vx / 260) * dt * 6; rot = h.spin; } else h.spin *= .8;
+    if (motion === 'doubleJump' && mt < .32) rot = (p.facing < 0 ? -1 : 1) * (mt / .32) * Math.PI * 2;
+    if (motion === 'land' && mt < .14) { const k = 1 - mt / .14; sy = 1 - .16 * k; sx = 1 + .14 * k; }
+    else if (air && !launched && vy < -150) { sy = 1.07; sx = .95; }
+    else if (motion === 'run') { sy = 1 + Math.sin(t * 22) * .025; }
+    if ((p.hit || 0) > 0) jx = (Math.random() - .5) * 5;
+    c.save();
+    if (rot) { c.translate(p.x, p.y - 34); c.rotate(rot); c.translate(-p.x, -(p.y - 34)); }
+    if (sx !== 1 || sy !== 1) { c.translate(p.x, p.y); c.scale(sx, sy); c.translate(-p.x, -p.y); }
+    if (jx) c.translate(jx, 0);
+    A.drawFighter(c, p, t);
+    if ((p.hit || 0) > 0) flash(c, p, t, Math.min(.85, (p.hit || 0) / .18));
+    c.restore();
+    smear(c, p, color);
+  }
+
   window.ArenaArt = Object.freeze({
     ...A,
     drawBackground(c, camera, t, W = 960, H = 540) { A.drawBackground(c, camera, t, W, H); if (!lite()) { try { sky(c, camera, Number(t) || 0, W, H); } catch (e) {} } },
-    drawStage(c, platforms, t) { A.drawStage(c, platforms, t); if (!lite()) { try { stage(c, platforms, Number(t) || 0); } catch (e) {} } }
+    drawStage(c, platforms, t) { A.drawStage(c, platforms, t); if (!lite()) { try { stage(c, platforms, Number(t) || 0); } catch (e) {} } },
+    drawFighter(c, p, t) { if (lite()) return A.drawFighter(c, p, t); try { fighter(c, p, Number(t) || 0); } catch (e) { A.drawFighter(c, p, t); } }
   });
   window.ArenaFx = Object.freeze({ version: 1 });
 })();
