@@ -50,7 +50,7 @@
       const sc = e.igorScale || 1, jig = (k, f) => Math.sin(k * f) * Math.exp(-k * 7);
       py = 46 * sc;
       if (e.state === 'windup' && e.kind === 'bellyBounce') { const k = clamp(1 - (e.stateTimer || 0) / (e.windupDuration || 1), 0, 1); sy = 1 - .2 * k; sx = 1 + .16 * k; dx = Math.round((Math.random() - .5) * 3 * k); return { sx, sy, dx, rot, py }; }
-      if (e.state === 'bellyAir') { const k = clamp(1 - (e.stateTimer || 0) / (e.bellyDuration || 1), 0, 1), dir = Math.sign((e.bellyTo || e.x) - (e.bellyFrom || e.x)) || 1; rot = dir * Math.PI * 2 * (k * k * (3 - 2 * k)); if (k < .25) { sy = 1.18 - k * .7; sx = .88 + k * .45; } else if (k > .75) { sy = 1.1; sx = .93; } return { sx, sy, dx, rot, py }; }
+      if (e.state === 'bellyAir') { const k = clamp(1 - (e.stateTimer || 0) / (e.bellyDuration || 1), 0, 1), dir = Math.sign((e.bellyTo || e.x) - (e.bellyFrom || e.x)) || 1; void dir; if (k < .25) { sy = 1.18 - k * .7; sx = .88 + k * .45; } else if (k > .75) { sy = 1.1; sx = .93; } return { sx, sy, dx, rot, py }; }
       if (m.landed != null && m.landed < .6) { const k = m.landed; sy = 1 - .3 * Math.exp(-k * 9) + jig(k, 30) * .08; sx = 1 + .3 * Math.exp(-k * 9) - jig(k, 30) * .08; return { sx, sy, dx, rot, py }; }
       if (e.state === 'bellyRolling') { sx = 1.05; sy = .96; }
       else if (e.state === 'firing' && m.clap != null && m.clap < .5) { const k = m.clap; sx = 1 + .18 * Math.exp(-k * 8) + jig(k, 34) * .06; sy = 1 - .12 * Math.exp(-k * 8); return { sx, sy, dx, rot, py }; }
@@ -100,5 +100,14 @@
     c.globalAlpha = 1;
   }
 
-  window.BossFx = Object.freeze({ update, transform, drawBack, drawFront, drawShotTrails });
+  // Igor body language for the belly jump: arms swing back, fly up, spread to balance, brace to land.
+  function igorPose(e) {
+    if (!e || e.type !== 'igor' || lite()) return undefined;
+    const m = state(e);
+    if (e.state === 'windup' && e.kind === 'bellyBounce') return { pose: 'crouch', k: clamp(1 - (e.stateTimer || 0) / (e.windupDuration || 1), 0, 1) };
+    if (e.state === 'bellyAir') { const k = clamp(1 - (e.stateTimer || 0) / (e.bellyDuration || 1), 0, 1); return { pose: k < .45 ? 'rise' : k < .8 ? 'fall' : 'land', k }; }
+    if (m.landed != null && m.landed < .3) return { pose: 'land', k: 1 };
+    return undefined;
+  }
+  window.BossFx = Object.freeze({ update, transform, drawBack, drawFront, drawShotTrails, igorPose });
 })();
