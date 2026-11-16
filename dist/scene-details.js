@@ -135,7 +135,7 @@
   }c.restore();
  }
  const originalScene=art.drawScene,originalRoom=art.drawClassroom,originalBoss=art.drawArena;
- art.drawScene=function(c,scene,camera=0,t=0){originalScene(c,scene,camera,t);campaign(c,Number(scene),Number(camera)||0,t);};
+ art.drawScene=function(c,scene,camera=0,t=0){originalScene(c,scene,camera,t);if(window.HdMaps?.handles?.(Number(scene)))return;campaign(c,Number(scene),Number(camera)||0,t);};
  art.drawClassroom=function(c,id,t=0){originalRoom(c,id,t);classroom(c,id,t);};
  art.drawArena=function(c,type,camera=0,t=0,homeX=0){originalBoss(c,type,camera,t,homeX);boss(c,type,camera,t,homeX);};
  if(arena){const background=arena.drawBackground,stage=arena.drawStage;window.ArenaArt=Object.freeze({...arena,drawBackground(c,camera,t,W=960,H=540){background(c,camera,t,W,H);arenaBackdrop(c,camera,t,W,H);},drawStage(c,platforms,t){stage(c,platforms,t);arenaSurface(c,platforms,t);}});}

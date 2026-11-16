@@ -460,6 +460,7 @@
       else{r(c,0,0,960,440,'#111526');r(c,0,440,960,100,'#31324d');r(c,0,440,960,5,'#7892c3');}
       c.restore();return;
     }
+    if(!liteNow&&window.HdMaps?.draw?.(c,scene,camera,t)){groundBridges(c,scene,camera,t);window.HdMaps.finish(c,scene);c.restore();return;}
     sky(c,scene,camera,t);
     if(scene===1)school(c,camera,t);else if(scene===2)gym(c,camera,t);else if(scene===3)court(c,camera,t);else if(scene===4)plaza(c,camera,t);else if(scene===5)favela(c,camera,t);else if(scene===6)inkRealm(c,camera,t);else if(scene===7)footballField(c,camera,t);else if(scene===8)bigodon(c,camera,t);else if(scene===9)courtyard(c,camera,t);else if(scene===10)rayssaHouse(c,camera,t);else farm(c,camera,t);
     if(scene!==2&&scene!==8&&scene!==10)for(let i=0;i<13;i++){const lx=((i*137+t*13-camera*.65)%1120+1120)%1120-80,ly=158+((i*43+t*15)%235);r(c,lx,ly,5,2,i%2?'#8bb65a':'#b2c56c');r(c,lx+Math.round(Math.sin(t*5+i)*2),ly+2,3,2,'#5e954c');}

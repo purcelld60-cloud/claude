@@ -237,10 +237,10 @@
     return true;
   }
   // Luz ambiente da hora do dia sobre a fase inteira, depois dos personagens.
-  function ambient(c, t, hx, hy) {
+  function ambient(c, t, hx, hy, selfLit) {
     if (window.Graphics?.isLite?.() || !window.DayTime) return;
-    const s = window.DayTime.state(); if (s.amb[0] > .995 && s.amb[1] > .995 && s.amb[2] > .995) return;
-    c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = css(s.amb); c.fillRect(-40, -40, 1040, 620);
+    const s = window.DayTime.state(); if (s.night <= .2 && (selfLit || (s.amb[0] > .995 && s.amb[1] > .995 && s.amb[2] > .995))) return;
+    c.save(); if (!selfLit) { c.globalCompositeOperation = 'multiply'; c.fillStyle = css(s.amb); c.fillRect(-40, -40, 1040, 620); }
     if (s.night > .2) { const a = (s.night - .2) * 1.25; lg.clearRect(0, 0, LW, LH);
       glow(lg, hx / 2, hy / 2 - 22, 70, 52, [1, .86, .6], .30 * a); // lampião do herói: mantém a luta legível
       for (let i = 0; i < 16; i++) { const x = (hash(i + 700) * 520 + Math.sin(t * .4 + i) * 14) % 480, y = 150 + hash(i + 710) * 62 + Math.sin(t * .7 + i * 2) * 6, on = Math.max(0, Math.sin(t * 1.6 + i * 2.3)); lg.fillStyle = `rgba(210,255,140,${on * a * .9})`; lg.fillRect(Math.round(x), Math.round(y), 1, 1); lg.fillStyle = `rgba(210,255,140,${on * a * .25})`; lg.fillRect(Math.round(x) - 1, Math.round(y) - 1, 3, 3); }
@@ -252,5 +252,5 @@
     if (!active(type)) return orig.apply(this, arguments);
     try { back(c, typeof type === 'object' ? type.type : type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); } catch (e) { return orig.apply(this, arguments); }
   };
-  window.HdScene = Object.freeze({ active, sky: (c, t, camera) => { try { return sky(c, Number(t) || 0, Number(camera) || 0); } catch (e) { return false; } }, drawAmbient: (c, t, hx, hy) => { try { ambient(c, Number(t) || 0, Number(hx) || 480, Number(hy) || 440); } catch (e) {} }, drawFront: (c, type, camera, t, homeX, blend) => { try { front(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) {} }, scenes: Object.keys(HANDLED) });
+  window.HdScene = Object.freeze({ active, sky: (c, t, camera) => { try { return sky(c, Number(t) || 0, Number(camera) || 0); } catch (e) { return false; } }, drawAmbient: (c, t, hx, hy, scene) => { try { ambient(c, Number(t) || 0, Number(hx) || 480, Number(hy) || 440, !!window.HdMaps?.handles?.(Number(scene))); } catch (e) {} }, drawFront: (c, type, camera, t, homeX, blend) => { try { front(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) {} }, scenes: Object.keys(HANDLED) });
 })();
