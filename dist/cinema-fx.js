@@ -59,6 +59,7 @@
   function draw(c, s) {
     if (!c || !s || lite()) return orig(c, s);
     const jorge = s.kind === 'jorge_epilogue';
+    if (jorge && window.JorgeAnime) { window.JorgeAnime.draw(c, s); c.fillStyle = '#000'; c.fillRect(0, 0, 960, 26); c.fillRect(0, 514, 960, 26); grain(c, Number(s.elapsed) || 0, .45); return; }
     const b = jorge ? window.JorgeEpilogue?.beat?.(s) : null, shot = b?.id, st = Number(s.time) || 0, dur = b?.duration || 8, total = Number(s.elapsed) || st;
     const k = jorge ? clamp(st / dur) : (st % 10) / 10;
     let zoom = 1.012 + (jorge ? .03 : .02) * smooth(k), amp = calm ? 0 : jorge ? (shot === 'tremor' ? 3.2 : shot === 'recognition' ? 2 : 1.1) : .6;
