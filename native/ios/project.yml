@@ -1,0 +1,47 @@
+# Projeto iOS do Da Roça Adventure. O arquivo .xcodeproj é gerado pelo XcodeGen no
+# GitHub Actions (.github/workflows/ios.yml); não precisa de Mac nem de abrir o Xcode.
+name: DaRoca
+options:
+  bundleIdPrefix: com.daroca
+  deploymentTarget:
+    iOS: "14.0"
+targets:
+  DaRoca:
+    type: application
+    platform: iOS
+    scheme: {}
+    sources:
+      - path: App
+      # A pasta dist/ inteira vai dentro do app: o jogo roda sem internet.
+      - path: ../../dist
+        type: folder
+        buildPhase: resources
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Da Roça
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UIRequiresFullScreen: true
+        UIStatusBarHidden: true
+        UIViewControllerBasedStatusBarAppearance: true
+        ITSAppUsesNonExemptEncryption: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.daroca.adventure
+        PRODUCT_NAME: DaRoca
+        MARKETING_VERSION: "3.14.3"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGN_IDENTITY: ""

@@ -1,0 +1,70 @@
+name: Gerar IPA (iOS, sem assinatura)
+
+# Gera um .ipa SEM assinatura e publica em Releases. Para instalar no iPhone é preciso
+# um instalador que assine ou dispense assinatura (TrollStore, AltStore, SideStore,
+# Sideloadly, ESign...). Não usa senhas nem certificados.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['dist/**', 'native/ios/**', '.github/workflows/ios.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ipa:
+    runs-on: macos-14
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Preparar ícone e projeto
+        working-directory: native/ios
+        run: |
+          sips -s format png -z 1024 1024 ../../dist/assets/app-icon-512.png --out App/Assets.xcassets/AppIcon.appiconset/icon.png
+          which xcodegen || brew install xcodegen
+          xcodegen generate
+
+      - name: Compilar sem assinatura
+        working-directory: native/ios
+        run: |
+          VERSAO=$(python3 -c "import json;print(json.load(open('../../dist/app-version.json'))['versionName'])")
+          xcodebuild -project DaRoca.xcodeproj -scheme DaRoca -configuration Release \
+            -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
+            MARKETING_VERSION="$VERSAO" CURRENT_PROJECT_VERSION="${{ github.run_number }}" \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            build | tail -40
+          echo "VERSAO=$VERSAO" >> "$GITHUB_ENV"
+
+      - name: Empacotar o IPA
+        working-directory: native/ios
+        run: |
+          DATA=$(date -u +%Y%m%d)
+          NOME="DaRoca-${VERSAO}-${DATA}-b${{ github.run_number }}.ipa"
+          rm -rf Payload && mkdir Payload
+          cp -R build/Build/Products/Release-iphoneos/DaRoca.app Payload/
+          test -f Payload/DaRoca.app/dist/index.html
+          zip -qry "$NOME" Payload
+          cp "$NOME" DaRoca.ipa
+          ls -la *.ipa
+          echo "NOME=$NOME" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DaRoca-ipa
+          path: native/ios/${{ env.NOME }}
+
+      - name: Publicar em Releases
+        working-directory: native/ios
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "ios-b${{ github.run_number }}" "$NOME" DaRoca.ipa \
+            --target "${{ github.sha }}" \
+            --title "Da Roça iOS ${VERSAO} (build ${{ github.run_number }})" \
+            --notes "IPA sem assinatura. Instale com o seu instalador de IPA (TrollStore, AltStore, SideStore, Sideloadly, ESign...)."
