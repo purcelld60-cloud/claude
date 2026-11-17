@@ -156,7 +156,7 @@
     if (scene !== treeScene) return;
     const ax = wx / 2, top = (wy - 76) / 2, bot = wy / 2, speed = Math.min(1, (Math.abs(vx) + Math.abs(vy) * .6) / 260);
     for (const tr of TREES) { const r = tr.r * 1.05; if (Math.abs(ax - tr.x) > r) continue; if (bot < tr.y0 - 4 || top > tr.y1 + 20) continue; // até ~40 px abaixo da copa: o chapéu raspa nas folhas
-      const inside = top < tr.y1 - 4, add = (inside ? .9 : .35) * (.15 + speed); const v = Math.min(1.6, (RUSTLE.get(tr.seed) || 0) + add * .12); RUSTLE.set(tr.seed, v);
+      const inside = top < tr.y1 - 4, add = (inside ? .9 : .35) * speed; if (add < .01) continue; // parado embaixo da copa não mexe nas folhas const v = Math.min(1.6, (RUSTLE.get(tr.seed) || 0) + add * .12); RUSTLE.set(tr.seed, v);
       if (Math.abs(vx) + Math.abs(vy) > 20 && Math.random() < (inside ? .6 : .2) * (.3 + speed)) for (let k = 0; k < (inside ? 2 : 1); k++) LEAVES.push({ wx: tr.x + (Math.random() - .5) * r * 1.4, wy: tr.y0 + Math.random() * (tr.y1 - tr.y0), vx: (Math.random() - .5) * 10 + vx * .02, vy: 4 + Math.random() * 6, a: Math.random() * 6, life: 4 + Math.random() * 3, col: Math.random() < .25 ? '#c9a24a' : Math.random() < .5 ? '#56a64c' : '#7cc85a' }); }
     if (LEAVES.length > 140) LEAVES.splice(0, LEAVES.length - 140);
   }
@@ -178,7 +178,9 @@
     const th = 46 * s; R(c, x - 4 * s, base - th, 8 * s, th, '#674c36'); R(c, x - 4 * s, base - th, 2 * s, th, '#896241'); R(c, x + 2 * s, base - th, 2 * s, th, '#4f3a29'); for (let k = 0; k < 6; k++) R(c, x - 2 * s + hash(k + seed) * 4 * s, base - 6 - k * 7 * s, 1, 3, '#4f3a29');
     R(c, x - 6 * s, base - 2, 12 * s, 2, '#5a4230'); R(c, x - 9 * s, base - 30 * s, 6 * s, 3, '#674c36'); R(c, x + 4 * s, base - 36 * s, 8 * s, 3, '#674c36');
     const CL = [[0, -58, 19], [-18, -50, 15], [18, -52, 15], [-9, -70, 15], [11, -72, 14], [0, -82, 13], [-25, -62, 11], [25, -64, 11]];
-    const sway = (i) => Math.round(Math.sin(t * (1.3 + shake * 9) + seed + i * 1.7) * (1.4 + shake * 3.2));
+    // parada: a copa inteira balança junta e devagar com o vento (cada bolo só um pouco atrasado);
+    // quando Da Roça encosta (shake), cada bolo chacoalha sozinho e mais rápido
+    const sway = (i) => shake > .05 ? Math.round(Math.sin(t * (1.3 + shake * 9) + seed + i * 1.7) * (1 + shake * 3.2)) : Math.round(Math.sin(t * .9 + seed + i * .18) * .9 + Math.sin(t * .37 + seed) * .4);
     CL.forEach((p, i) => ell(c, x + p[0] * s + sway(i), base + p[1] * s + 3, p[2] * s, p[2] * s * .92, '#2a5f36'));
     CL.forEach((p, i) => ell(c, x + p[0] * s + sway(i), base + p[1] * s, p[2] * s, p[2] * s * .9, '#3f8a45'));
     CL.forEach((p, i) => ell(c, x + p[0] * s + sway(i) - lean * 4 * s, base + p[1] * s - 4 * s, p[2] * s * .62, p[2] * s * .5, '#56a64c'));
