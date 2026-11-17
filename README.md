@@ -54,6 +54,7 @@ Veja o [guia para modificar com IA](docs/MODIFICAR-COM-IA.md), as [orientações
 | Servidor, APK automático e validação MP3 | `worker/index.mjs`, `apk.mjs`, `digest-stream.mjs`, `mp3.mjs` |
 | Servidor online próprio (Arena, Dupla e Fliperama online) | `server/server.js`, `dist/online.js`, `dist/servidor.json` (guia em `docs/SERVIDOR-ONLINE.md`) |
 | Fliperama (10 minigames, sozinho, dupla e online) | `dist/fliperama.js`, `dist/fliperama.css` (guia em `docs/FLIPERAMA.md`) |
+| Modo TV: TV anfitriã e celular como controle | `dist/controle.html`, `controle.js`, `native/android/.../TvServer.java` (guia em `docs/MODO-TV.md`) |
 | Banco do servidor | Migrações SQL em `drizzle/`, na ordem numérica |
 | Aplicativos Android e iOS | `native/android/`, `native/ios/` |
 | Empacotamento e ferramentas | `tools/`, `native/package.py` |

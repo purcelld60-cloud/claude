@@ -1,5 +1,7 @@
 # Servidor online (Fase 7)
 
+**Servidor oficial deste repositório:** `https://daroca-online.onrender.com`, no plano grátis do Render, publicado a partir do `main`. O site do GitHub Pages, o APK e o IPA já usam esse endereço (`dist/servidor.json`). O plano grátis dorme depois de 15 minutos sem uso; o primeiro acesso leva cerca de 1 minuto para acordar.
+
 O código do servidor fica em `server/server.js`. É um único programa em Node.js que faz três coisas:
 
 1. **Serve o jogo.** Quem abre o endereço do servidor joga com o online já ligado, sem configurar nada.

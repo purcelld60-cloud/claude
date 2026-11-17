@@ -1,4 +1,4 @@
 {
-  "url": "",
-  "ajuda": "Depois de colocar o servidor no ar (docs/SERVIDOR-ONLINE.md), escreva o endereço em url, por exemplo https://meu-daroca.fly.dev. Quem abre o jogo pelo próprio servidor não precisa disso."
+  "url": "https://daroca-online.onrender.com",
+  "ajuda": "Endereço do servidor online (Render, plano grátis). Para trocar, edite url. Quem abre o jogo pelo próprio servidor não precisa disso."
 }

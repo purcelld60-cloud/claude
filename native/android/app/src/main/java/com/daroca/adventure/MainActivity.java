@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
@@ -15,15 +17,31 @@ import android.webkit.WebViewClient;
 
 import androidx.webkit.WebViewAssetLoader;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Collections;
+
 /**
  * Da Roça Adventure: abre o jogo (pasta dist/, embutida em assets) num WebView em tela cheia.
  * Os arquivos são servidos por https://appassets.androidplatform.net, uma origem fixa,
  * então o progresso salvo (localStorage) continua entre aberturas e o jogo funciona sem internet.
+ * Modo TV (Fase 8): o app também liga o TvServer na rede Wi-Fi. Os celulares abrem
+ * http://IP-DA-TV:PORTA no navegador e viram controles; o jogo na tela fala com ele em ws://127.0.0.1.
  */
 public class MainActivity extends Activity {
     private static final String HOST = "appassets.androidplatform.net";
     private static final String HOME = "https://" + HOST + "/assets/dist/index.html?native=1";
     private WebView web;
+    private TvServer tvServer;
+    private int tvPort = 0;
+    private final Handler ticker = new Handler(Looper.getMainLooper());
+    private final Runnable tick = new Runnable() {
+        @Override public void run() {
+            if (tvServer != null) new Thread(() -> { try { tvServer.tick(); } catch (Exception ignored) { } }).start();
+            ticker.postDelayed(this, 15000);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle state) {
@@ -33,6 +51,8 @@ public class MainActivity extends Activity {
         final WebViewAssetLoader loader = new WebViewAssetLoader.Builder()
                 .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
                 .build();
+
+        startTvServer();
 
         web = new WebView(this);
         web.setBackgroundColor(0xFF000000);
@@ -45,6 +65,8 @@ public class MainActivity extends Activity {
         s.setAllowFileAccess(false);
         s.setAllowContentAccess(false);
         s.setCacheMode(WebSettings.LOAD_DEFAULT);
+        // o jogo (https://appassets...) conversa com o servidor da TV em ws://127.0.0.1
+        s.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         web.setWebViewClient(new WebViewClient() {
             @Override
@@ -65,7 +87,47 @@ public class MainActivity extends Activity {
         web.setWebChromeClient(new WebChromeClient());
 
         if (state != null) web.restoreState(state);
-        else web.loadUrl(HOME);
+        else web.loadUrl(homeUrl());
+    }
+
+    /** Liga o servidor da TV numa porta livre (8787 a 8797). Se não der, o jogo segue sem o modo TV. */
+    private void startTvServer() {
+        for (int port = 8787; port <= 8797 && tvServer == null; port++) {
+            try {
+                TvServer srv = new TvServer(getAssets(), port);
+                srv.startServer();
+                tvServer = srv;
+                tvPort = port;
+            } catch (Exception ignored) { }
+        }
+        if (tvServer != null) ticker.postDelayed(tick, 15000);
+    }
+
+    /** Endereço IPv4 da TV na rede local (Wi-Fi ou cabo), para os celulares acharem o servidor. */
+    private static String lanAddress() {
+        try {
+            String fallback = "";
+            for (NetworkInterface ni : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+                if (!ni.isUp() || ni.isLoopback()) continue;
+                for (InetAddress a : Collections.list(ni.getInetAddresses())) {
+                    if (!(a instanceof Inet4Address) || a.isLoopbackAddress()) continue;
+                    String ip = a.getHostAddress();
+                    if (a.isSiteLocalAddress()) {
+                        String n = ni.getName();
+                        if (n.startsWith("wlan") || n.startsWith("eth")) return ip;
+                        if (fallback.isEmpty()) fallback = ip;
+                    }
+                }
+            }
+            return fallback;
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private String homeUrl() {
+        if (tvServer == null) return HOME;
+        return HOME + "&tvport=" + tvPort + "&tvip=" + lanAddress();
     }
 
     private void immersive() {
@@ -112,6 +174,11 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        ticker.removeCallbacks(tick);
+        if (tvServer != null) {
+            try { tvServer.stop(); } catch (Exception ignored) { }
+            tvServer = null;
+        }
         if (web != null) {
             web.destroy();
             web = null;
