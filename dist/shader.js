@@ -63,7 +63,7 @@ void main(){
   if(rays>0.){vec2 q=(uv-sun)*vec2(res.x/res.y,1.);float ang=atan(q.y,q.x),dist=length(q);
     float bands=.55+.45*sin(ang*26.+t*.35)*sin(ang*11.-t*.22+1.3);float cone=smoothstep(1.25,.05,dist)*smoothstep(-.2,.6,q.y+.15);
     col+=mix(vec3(1.,.9,.68),vec3(.7,.8,1.),night)*bands*cone*.1*rays;
-    vec2 cell=floor(uv*res/6.);float h=hash(cell+floor(t*.5));col+=vec3(1.,.95,.8)*step(.996,h)*(.5+.5*sin(t*3.+h*40.))*cone*.6*rays;
+    vec2 cell=floor(uv*res/6.);float h=hash(cell+floor(t*.5));col+=vec3(1.,.95,.8)*step(.996,h)*sin(fract(t*.5)*3.1416)*(.6+.4*sin(t*3.+h*40.))*cone*.45*rays;
     float d=distance(uv*vec2(res.x/res.y,1.),sun*vec2(res.x/res.y,1.));col+=mix(vec3(1.,.82,.55),vec3(.6,.7,1.),night)*exp(-d*5.)*.16*rays;}
   // hora dourada: luz quente e rosada, sombras arroxeadas e um véu dourado perto do sol (estilo shader de Minecraft)
   if(golden>0.){float l0=lum(col);col=mix(col,col*vec3(1.16,.9,.72),golden*.55*smoothstep(.15,.9,l0));col=mix(col,col*vec3(.92,.82,1.08),golden*.4*smoothstep(.5,.05,l0));
