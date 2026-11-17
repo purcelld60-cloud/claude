@@ -1,7 +1,7 @@
 /* Áudio da Roça (Fase 9): volumes, efeitos sonoros e ambiente das fases.
    - Volume de MÚSICA e de EFEITOS separados (0 a 100%), salvos no aparelho ('daroca-volumes-v1').
      O tocador de música, os sons do jogo, das cutscenes, do fliperama e do cenário obedecem.
-   - Efeitos sintetizados (sem arquivos): DarocaAudio.play('quebra'), 'porta', 'alavanca', 'agua',
+   - Efeitos sintetizados (sem arquivos): DarocaAudio.play('quebra'), 'porta', 'alavanca', 'agua', 'mato',
      'tac', 'fogo', 'moeda', 'pulo'... Só tocam com o som do jogo ligado.
    - Ambiente de cada fase (passarinhos e vento na roça, rio na praça, torcida na quadra e no campo,
      conversa no pátio e na favela, zumbido no Reino de Tinta, grilos à noite, chuva...). Também dá
@@ -34,6 +34,7 @@
       case 'porta': tone(180, 140, .25, 'sawtooth', 0, .35); tone(320, 260, .2, 'triangle', .05, .3); noise(.06, .5, .25, 300, 'lowpass'); break;
       case 'alavanca': tone(400, 600, .06, 'square'); tone(900, 900, .05, 'square', .08); break;
       case 'agua': noise(.25, .9, 0, 1200, 'bandpass'); tone(700, 300, .12, 'sine', 0, .6); break;
+      case 'mato': noise(.16, .7, 0, 3400); noise(.12, .5, .05, 1500, 'bandpass'); break;
       case 'tac': tone(1400, 800, .04, 'square'); noise(.04, .7, 0, 3000); break;
       case 'fogo': noise(.5, .8, 0, 500, 'lowpass'); noise(.3, .4, .1, 2000); break;
       case 'moeda': tone(988, 988, .07, 'square'); tone(1319, 1319, .14, 'square', .07); break;

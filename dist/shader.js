@@ -20,6 +20,7 @@ uniform vec2 res;
 uniform vec2 sun;
 uniform float rays;
 uniform float golden;
+uniform float rim;
 uniform float warm;
 uniform float t;
 uniform vec2 ldir;
@@ -55,6 +56,10 @@ void main(){
   vec3 shaft=vec3(0.);
   if(rays>0.){vec2 dir=(sun-uv)/22.;vec2 s=uv;float decay=1.;float th=mix(.9,.8,golden);for(int i=0;i<22;i++){s+=dir;vec3 c=texture2D(img,s).rgb;float near=smoothstep(.55,.06,length((s-sun)*vec2(res.x/res.y,1.)));float b=max(lum(c)-th,0.)*step(s.y,.6)*near;shaft+=c*b*decay;decay*=mix(.93,.955,golden);}shaft=min(shaft*rays*(.5+golden*.9),vec3(.32+golden*.2))*mix(vec3(1.),vec3(1.15,.82,.6),golden);}
   vec3 col=base+glow*(.38+night*.4)+shaft;
+  // luz de contorno: a borda virada para o sol (onde o vizinho é céu claro) ganha um fio de luz quente
+  if(rim>0.){vec2 sd=(sun-uv)*res;sd=sd/max(length(sd),1.);vec3 n1=at(pix+floor(sd*2.+.5)),n2=at(pix+floor(sd*7.+.5));
+    float lb=lum(base),e=min(lum(n1),lum(n2))-lb;float edge=smoothstep(.09,.3,e)*smoothstep(.85,.45,lb)*smoothstep(.36,.58,min(lum(n1),lum(n2)));
+    col+=mix(vec3(1.,.92,.72),vec3(1.,.66,.38),golden)*edge*rim*(.34+.3*lum(n2));}
   if(rays>0.){vec2 q=(uv-sun)*vec2(res.x/res.y,1.);float ang=atan(q.y,q.x),dist=length(q);
     float bands=.55+.45*sin(ang*26.+t*.35)*sin(ang*11.-t*.22+1.3);float cone=smoothstep(1.25,.05,dist)*smoothstep(-.2,.6,q.y+.15);
     col+=mix(vec3(1.,.9,.68),vec3(.7,.8,1.),night)*bands*cone*.1*rays;
@@ -79,7 +84,7 @@ void main(){
   vec2 v=uv-.5;col*=1.-dot(v,v)*(.55+night*.25);
   gl_FragColor=vec4(clamp(col,0.,1.),1.);
 }`;
-  const NAMES = ['img', 'res', 'sun', 'rays', 'golden', 'warm', 't', 'ldir', 'relief', 'fogCol', 'fogY', 'fogAmt', 'water', 'heat', 'night', 'wet', 'dof'];
+  const NAMES = ['img', 'res', 'sun', 'rays', 'golden', 'rim', 'warm', 't', 'ldir', 'relief', 'fogCol', 'fogY', 'fogAmt', 'water', 'heat', 'night', 'wet', 'dof'];
   function init(w, h) {
     try {
       glCanvas = document.createElement('canvas'); glCanvas.width = w; glCanvas.height = h;
@@ -126,7 +131,7 @@ void main(){
       let rays = outdoor ? (k && k.y < 0 ? 0 : k && k.moon ? .45 : scene === 3 ? 1.15 : 1) : 0; rays *= 1 - (wx.rain || 0) * .85 - (wx.snow || 0) * .5;
       gl.uniform1i(loc.img, 0); gl.uniform2f(loc.res, w, h); gl.uniform2f(loc.sun, sunX, sunY);
       gl.uniform1f(loc.rays, Math.max(0, rays));
-      const golden = outdoor && k && !k.moon && k.y >= 0 ? Math.max(0, Math.min(1, 1 - k.up * 1.7)) * (1 - (wx.rain || 0) * .8) * (1 - (wx.snow || 0) * .5) : 0; gl.uniform1f(loc.golden, golden);
+      const golden = outdoor && k && !k.moon && k.y >= 0 ? Math.max(0, Math.min(1, 1 - k.up * 1.7)) * (1 - (wx.rain || 0) * .8) * (1 - (wx.snow || 0) * .5) : 0; gl.uniform1f(loc.golden, golden); gl.uniform1f(loc.rim, outdoor && k && !k.moon && k.y >= 0 ? (.35 + golden * .65) * Math.min(1, k.up * 3 + .2) * (1 - (wx.rain || 0) * .8) * (1 - (wx.snow || 0) * .4) : 0);
       gl.uniform1f(loc.warm, (scene === 6 ? .3 : .7) * (1 - night * .6));
       gl.uniform1f(loc.t, t);
       // relevo: luz vem do lado do sol; à noite e em interiores fica mais fraca

@@ -1171,10 +1171,33 @@
     lastCam = camera; lastT = t; MAPS[scene].text?.(c, camera); return true;
   }
   // luz da hora do dia sobre o cenário pronto (chamado depois das pontes); personagens ficam de fora
+  // Luz direcional do sol sobre o cenário inteiro (todas as qualidades com mapa HD; mais suave com o shader,
+  // que já faz a correção de cor): lado do sol quente, lado oposto frio, brilho no ar perto do sol e luz
+  // rasante no chão na hora dourada.
+  function dirLight(c, s) {
+    if (s.sunT === null) return; const sun = sunInfo(s); if (sun.str < .05) return;
+    const wx = window.Weather?.state?.() || {}, cloud = cl(1 - (wx.rain || 0) * .8 - (wx.snow || 0) * .4 - (wx.dust || 0) * .2);
+    const up = Math.sin(s.sunT * Math.PI), gold = cl(1 - up * 1.7), k = (window.Graphics?.isShader?.() ? .55 : 1) * cloud * cl(sun.str);
+    if (k < .03) return;
+    const camL = Math.floor(lastCam / 2), sx = (40 + s.sunT * 400 - camL * .012) * 2, sy = (168 - up * 128) * 2;
+    c.globalCompositeOperation = 'soft-light';
+    const far = sx < 480 ? 1060 : -100, g = c.createLinearGradient(sx, 0, far, 0);
+    g.addColorStop(0, `rgba(255,${Math.round(214 - 70 * gold)},${Math.round(150 - 80 * gold)},${(.30 + .30 * gold) * k})`);
+    g.addColorStop(.55, 'rgba(128,128,128,0)');
+    g.addColorStop(1, `rgba(${Math.round(70 + 40 * gold)},${Math.round(92 - 10 * gold)},170,${(.22 + .18 * gold) * k})`);
+    c.fillStyle = g; c.fillRect(0, 0, 960, 540);
+    c.globalCompositeOperation = 'screen';
+    const r = c.createRadialGradient(sx, sy, 0, sx, sy, 560);
+    r.addColorStop(0, `rgba(255,${Math.round(200 - 50 * gold)},${Math.round(140 - 60 * gold)},${(.16 + .16 * gold) * k})`); r.addColorStop(1, 'rgba(255,200,140,0)');
+    c.fillStyle = r; c.fillRect(0, 0, 960, 540);
+    if (gold > .05) { const gr = c.createLinearGradient(0, 360, 0, 452); gr.addColorStop(0, 'rgba(255,170,90,0)'); gr.addColorStop(.8, `rgba(255,170,90,${.10 * gold * k})`); gr.addColorStop(1, 'rgba(255,170,90,0)'); c.fillStyle = gr; c.fillRect(0, 360, 960, 92); }
+    c.globalCompositeOperation = 'multiply';
+  }
   function finish(c, scene) {
     if (!handles(scene)) return;
     const s = window.DayTime.state(), camL = Math.floor(lastCam / 2), sub = Math.round(lastCam) - camL * 2;
     c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = css(MAPS[scene].amb ? MAPS[scene].amb(s) : s.amb); c.fillRect(0, 0, 960, 540);
+    if (!MAPS[scene].amb) dirLight(c, s);
     LIGHTS = []; lightCam = camL; lightScene = scene; if (MAPS[scene].lights) { lg.clearRect(0, 0, LW, LH); MAPS[scene].lights(lg, s, lastT, camL); c.globalCompositeOperation = 'lighter'; c.imageSmoothingEnabled = false; c.drawImage(lightCv, -sub, 0, LW * 2, LH * 2); }
     c.restore();
   }
