@@ -50,11 +50,11 @@ void main(){
     base*=1.+relief*clamp(sh,-.6,.6);}
   // brilho: vizinhos claros espalham luz
   vec3 glow=vec3(0.);
-  for(int i=0;i<12;i++){float a=float(i)*.5236;vec2 d=vec2(cos(a),sin(a));vec3 n1=tap(d*4.),n2=tap(d*11.);glow+=max(n1-.88,0.)*1.6+max(n2-.86,0.)*1.2;}
-  glow/=12.;
+  for(int i=0;i<8;i++){float a=float(i)*.7854+.39;vec2 d=vec2(cos(a),sin(a));vec3 n1=tap(d*4.),n2=tap(d*11.);glow+=max(n1-.88,0.)*1.6+max(n2-.86,0.)*1.2;}
+  glow/=8.;
   // raios volumétricos em direção ao sol (ou à lua)
   vec3 shaft=vec3(0.);
-  if(rays>0.){vec2 dir=(sun-uv)/22.;vec2 s=uv;float decay=1.;float th=mix(.9,.8,golden);for(int i=0;i<22;i++){s+=dir;vec3 c=texture2D(img,s).rgb;float near=smoothstep(.55,.06,length((s-sun)*vec2(res.x/res.y,1.)));float b=max(lum(c)-th,0.)*step(s.y,.6)*near;shaft+=c*b*decay;decay*=mix(.93,.955,golden);}shaft=min(shaft*rays*(.5+golden*.9),vec3(.32+golden*.2))*mix(vec3(1.),vec3(1.15,.82,.6),golden);}
+  if(rays>0.){vec2 dir=(sun-uv)/16.;vec2 s=uv;float decay=1.;float th=mix(.9,.8,golden);for(int i=0;i<16;i++){s+=dir;vec3 c=texture2D(img,s).rgb;float near=smoothstep(.55,.06,length((s-sun)*vec2(res.x/res.y,1.)));float b=max(lum(c)-th,0.)*step(s.y,.6)*near;shaft+=c*b*decay;decay*=mix(.905,.938,golden);}shaft=min(shaft*rays*(.5+golden*.9)*1.25,vec3(.32+golden*.2))*mix(vec3(1.),vec3(1.15,.82,.6),golden);}
   vec3 col=base+glow*(.38+night*.4)+shaft;
   // luz de contorno: a borda virada para o sol (onde o vizinho é céu claro) ganha um fio de luz quente
   if(rim>0.){vec2 sd=(sun-uv)*res;sd=sd/max(length(sd),1.);vec3 n1=at(pix+floor(sd*2.+.5)),n2=at(pix+floor(sd*7.+.5));
@@ -87,8 +87,9 @@ void main(){
   const NAMES = ['img', 'res', 'sun', 'rays', 'golden', 'rim', 'warm', 't', 'ldir', 'relief', 'fogCol', 'fogY', 'fogAmt', 'water', 'heat', 'night', 'wet', 'dof'];
   function init(w, h) {
     try {
-      glCanvas = document.createElement('canvas'); glCanvas.width = w; glCanvas.height = h;
-      gl = glCanvas.getContext('webgl', { premultipliedAlpha: false, preserveDrawingBuffer: true, antialias: false });
+      glCanvas = document.createElement('canvas'); glCanvas.width = w; glCanvas.height = h; glCanvas.className = 'shader-layer'; glCanvas.setAttribute('aria-hidden', 'true');
+      // alpha:false e sem preserveDrawingBuffer: a imagem vai direto para a tela (mais leve no iPhone)
+      gl = glCanvas.getContext('webgl', { alpha: false, premultipliedAlpha: false, preserveDrawingBuffer: false, antialias: false, powerPreference: 'high-performance' });
       if (!gl) throw Error('no webgl');
       const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw Error(gl.getShaderInfoLog(s)); return s; };
       prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG)); gl.linkProgram(prog);
@@ -120,7 +121,9 @@ void main(){
   function apply(canvas, s = {}) {
     if (broken || !canvas || !window.Graphics?.isShader?.()) return false;
     const w = canvas.width, h = canvas.height;
-    if (!gl || glCanvas.width !== w || glCanvas.height !== h) { if (!init(w, h)) return false; }
+    if (!gl) { if (!init(w, h)) return false; }
+    if (glCanvas.width !== w || glCanvas.height !== h) { glCanvas.width = w; glCanvas.height = h; } // o mesmo contexto WebGL, só muda o tamanho
+    show(canvas, w, h);
     try {
       gl.viewport(0, 0, w, h);
       gl.bindTexture(gl.TEXTURE_2D, tex);
@@ -144,10 +147,37 @@ void main(){
       const midday = k && !k.moon ? Math.max(0, k.up - .55) * 2.2 : 0; gl.uniform1f(loc.heat, outdoor && HOT[scene] ? HOT[scene] * midday * (1 - (wx.rain || 0)) : 0);
       gl.uniform1f(loc.night, night); gl.uniform1f(loc.wet, wx.rain || 0); gl.uniform1f(loc.dof, outdoor ? .35 : 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      const c = canvas.getContext('2d'); c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.globalCompositeOperation = 'copy'; c.drawImage(glCanvas, 0, 0); c.restore();
       return true;
-    } catch (e) { broken = true; return false; }
+    } catch (e) { broken = true; hide(); return false; }
   }
+  /* A imagem do shader aparece numa camada (canvas WebGL) logo acima do canvas do jogo, com o mesmo
+     tamanho, posição e enquadramento (object-fit). Antes ela era copiada de volta para o canvas 2D,
+     o que obrigava o aparelho a esperar a placa de vídeo a cada quadro (caro no iPhone).
+     Acima dela fica uma camada 2D transparente para os itens que dá para pegar, sem efeito do shader.
+     Se o jogo para de chamar apply (outra qualidade, fliperama, menu), as camadas somem sozinhas. */
+  let target = null, itemsCv = null, itemsCtx = null, lastApply = 0, layoutAt = 0, itemsUsed = false, watching = false;
+  function place(el, cv) {
+    const cs = getComputedStyle(cv);
+    if (!cv.offsetWidth || cs.display === 'none' || cs.visibility === 'hidden') { el.style.display = 'none'; return; }
+    el.style.cssText = `position:absolute;left:${cv.offsetLeft}px;top:${cv.offsetTop}px;width:${cv.offsetWidth}px;height:${cv.offsetHeight}px;margin:0;padding:0;border:0;pointer-events:none;` +
+      `object-fit:${cs.objectFit};object-position:${cs.objectPosition};image-rendering:${cs.imageRendering};transform:${cs.transform === 'none' ? 'none' : cs.transform};transform-origin:${cs.transformOrigin};border-radius:${cs.borderRadius};opacity:${cs.opacity}`;
+  }
+  function show(canvas, w, h) {
+    const now = performance.now(); lastApply = now;
+    if (!itemsCv) { itemsCv = document.createElement('canvas'); itemsCv.className = 'shader-items'; itemsCv.setAttribute('aria-hidden', 'true'); itemsCtx = itemsCv.getContext('2d'); }
+    if (itemsCv.width !== w || itemsCv.height !== h) { itemsCv.width = w; itemsCv.height = h; }
+    else if (itemsUsed) itemsCtx.clearRect(0, 0, w, h);
+    itemsUsed = false;
+    if (target !== canvas || glCanvas.nextSibling !== itemsCv || canvas.nextSibling !== glCanvas) { target = canvas; canvas.after(glCanvas); glCanvas.after(itemsCv); layoutAt = 0; }
+    if (now - layoutAt > 300 || glCanvas.style.display === 'none') { layoutAt = now; place(glCanvas, canvas); place(itemsCv, canvas); }
+    else { // a tela cheia recortada do celular muda o enquadramento a cada quadro para seguir os pulos
+      const op = getComputedStyle(canvas).objectPosition; if (op !== glCanvas.style.objectPosition) { glCanvas.style.objectPosition = op; itemsCv.style.objectPosition = op; } }
+    if (!watching) { watching = true; const watch = () => { if (performance.now() - lastApply > 90) { hide(); watching = false; return; } requestAnimationFrame(watch); }; requestAnimationFrame(watch); }
+  }
+  function hide() { if (glCanvas) glCanvas.style.display = 'none'; if (itemsCv) { itemsCv.style.display = 'none'; if (itemsUsed) { itemsCtx.clearRect(0, 0, itemsCv.width, itemsCv.height); itemsUsed = false; } } layoutAt = 0; }
+  addEventListener('resize', () => { layoutAt = 0; });
+  // contexto 2D da camada dos itens (só existe no quadro em que o shader foi aplicado)
+  function items() { if (!itemsCtx || !gl || performance.now() - lastApply > 50 || itemsCv.style.display === 'none') return null; itemsUsed = true; return itemsCtx; }
   let canGL = null; // testado uma vez só: criar contexto WebGL a cada pergunta estoura o limite do navegador
-  window.Shader = Object.freeze({ apply, supported: () => { if (broken) return false; if (gl) return true; if (canGL === null) { try { const t = document.createElement('canvas'), x = t.getContext('webgl'); canGL = !!x; x?.getExtension?.('WEBGL_lose_context')?.loseContext?.(); } catch (e) { canGL = false; } } return canGL; } });
+  window.Shader = Object.freeze({ apply, items, hide, supported: () => { if (broken) return false; if (gl) return true; if (canGL === null) { try { const t = document.createElement('canvas'), x = t.getContext('webgl'); canGL = !!x; x?.getExtension?.('WEBGL_lose_context')?.loseContext?.(); } catch (e) { canGL = false; } } return canGL; } });
 })();
