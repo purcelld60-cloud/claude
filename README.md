@@ -52,6 +52,8 @@ Veja o [guia para modificar com IA](docs/MODIFICAR-COM-IA.md), as [orientações
 | Festa 3D | `dist/party*.js`, `party.css`, `dist/vendor/three.min.js` |
 | Músicas, painel e atualizações | `dist/music-player.js`, `music-contexts.js`, `admin.js`, `cutscene-preview.js`, `updates.js` |
 | Servidor, APK automático e validação MP3 | `worker/index.mjs`, `apk.mjs`, `digest-stream.mjs`, `mp3.mjs` |
+| Servidor online próprio (Arena, Dupla e Fliperama online) | `server/server.js`, `dist/online.js`, `dist/servidor.json` (guia em `docs/SERVIDOR-ONLINE.md`) |
+| Fliperama (10 minigames, sozinho, dupla e online) | `dist/fliperama.js`, `dist/fliperama.css` (guia em `docs/FLIPERAMA.md`) |
 | Banco do servidor | Migrações SQL em `drizzle/`, na ordem numérica |
 | Aplicativos Android e iOS | `native/android/`, `native/ios/` |
 | Empacotamento e ferramentas | `tools/`, `native/package.py` |

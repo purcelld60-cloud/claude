@@ -138,7 +138,7 @@
   if(party?.open){if(party.view!=='live')return['party.menu','menu.title'];if(party.phase==='board')return['party.board','party.menu'];if(party.phase==='ceremony')return['party.ceremony','party.menu'];if(party.phase==='results')return['party.results',party.game?'party.'+party.game:'party.menu','party.menu'];return[party.game?'party.'+party.game:'party.menu','party.menu'];}
   try{coop=window.CoopArena?.getStatus?.();}catch{}
   if(coop?.open){if(!coop.stage)return['coop.menu','menu.title'];if(coop.stage==='victory')return['events.celebration','coop.menu'];if(coop.stage==='defeat')return['events.defeat','coop.menu'];return[coop.boss?.type?'coop.'+coop.boss.type:'coop.menu','coop.menu'];}
-  try{state=window.Game?.getAudioState?.();lastAudioState=state||null;}catch{}
+  if(window.Fliperama?.isOpen?.())return['minigames.fliperama','activities.memory','menu.title'];try{state=window.Game?.getAudioState?.();lastAudioState=state||null;}catch{}
   if(!state)return['menu.title'];
   const map='maps.'+(SCENES[Number(state.scene)]||SCENES[0]);
   if(state.chapterEnded)return['events.chapter_end'];

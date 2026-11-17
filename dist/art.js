@@ -989,8 +989,10 @@
     if(type==='reeis'&&o.transformed)c.scale(1.9,1.75);
     const skin=type==='reeis'?'#825033':type==='caleb'?'#f0c9af':type==='lucas'?'#efc9b0':type==='menezes'?'#b47d54':type==='marco'?'#f0cdb8':type==='mota'?'#f1ccb4':type==='nikolas'?'#e1b28a':type==='miqueias'?'#f0cbb5':type==='almiro'?'#b47b53':'#d6a071';
     const shadow=type==='reeis'?'#51382c':type==='almiro'?'#8a573d':type==='caleb'||type==='miqueias'||type==='mota'||type==='marco'?'#c3977f':'#a86c4e';
-    const shirt={daroca:'#dc8c47',lucas:'#9a9e9e',reeis:'#4d7374',nikolas:'#8c6594',menezes:'#647c84',caleb:'#e1b563',ravid:'#7c93a1',marco:'#222b30',kaua:'#66888a',almiro:'#367cba',miqueias:'#617b70',mota:'#1b4677'}[type]||'#dc8c47';
-    const pants=type==='marco'?'#2b353e':type==='nikolas'?'#423e59':type==='caleb'?'#564d3e':type==='almiro'||type==='lucas'?'#1e3355':type==='miqueias'?'#354c53':type==='mota'?'#1c3558':'#455b62';
+    // Visual escolhido no espelho da Bigodon (visual.js). Sem escolha, Da Roça fica como sempre.
+    const LK=type==='daroca'&&o.look!==false?(o.look||window.DarocaLook?.get?.()||null):null,lion=LK?.costume==='jaglion';
+    const shirt=lion?'#e3a83f':LK?.shirt||{daroca:'#dc8c47',lucas:'#9a9e9e',reeis:'#4d7374',nikolas:'#8c6594',menezes:'#647c84',caleb:'#e1b563',ravid:'#7c93a1',marco:'#222b30',kaua:'#66888a',almiro:'#367cba',miqueias:'#617b70',mota:'#1b4677'}[type]||'#dc8c47';
+    const pants=lion?'#d39a36':LK?.pants||(type==='marco'?'#2b353e':type==='nikolas'?'#423e59':type==='caleb'?'#564d3e':type==='almiro'||type==='lucas'?'#1e3355':type==='miqueias'?'#354c53':type==='mota'?'#1c3558':'#455b62');
     // Feet travel through contact, passing and lifted swing poses; knees bend separately.
     function leg(front){
       const sign=front?1:-1, swing=front?walk:-walk;
@@ -1004,8 +1006,8 @@
       if(type==='daroca'&&attackOn&&attackType==='paper'){footX+=front?Math.round(strike*3):-Math.round(strike*2);}
       const kneeX=air?footX-5:Math.round((footX+hipX)/2)+(front?2:-2)-Math.round(squat*.7),kneeY=-12-bob+Math.round(squat*.7)-lift*.45;
       const pts=[[hipX,hipY],[kneeX,kneeY],[footX,footY-4]];
-      limb(c,pts,type==='mota'||type==='marco'?7:9,P.ink);limb(c,pts,type==='mota'||type==='marco'?4:5,front?pants:(type==='lucas'||type==='almiro'||type==='mota'?'#17283e':'#374a50'));
-      const shoe=type==='lucas'?'#f4f7f3':type==='almiro'?'#9ef13d':type==='mota'?'#18394d':'#343b35';r(c,footX-4,footY-5,12,5,shoe);r(c,footX-3,footY-2,11,2,type==='lucas'?'#bac6cd':type==='almiro'?'#d1ff77':type==='mota'?'#f1ede3':front?'#bba784':'#8e8c70');if(type==='mota')for(let i=0;i<3;i++)r(c,footX-3+i*4,footY,2,2,'#dbe4d7');
+      limb(c,pts,type==='mota'||type==='marco'?7:9,P.ink);limb(c,pts,type==='mota'||type==='marco'?4:5,front?pants:lion?'#b8862e':(type==='lucas'||type==='almiro'||type==='mota'?'#17283e':'#374a50'));
+      const shoe=lion?'#e3a83f':type==='lucas'?'#f4f7f3':type==='almiro'?'#9ef13d':type==='mota'?'#18394d':'#343b35';r(c,footX-4,footY-5,12,5,shoe);r(c,footX-3,footY-2,11,2,type==='lucas'?'#bac6cd':type==='almiro'?'#d1ff77':type==='mota'?'#f1ede3':front?'#bba784':'#8e8c70');if(lion){r(c,footX-4,footY-6,12,2,'#f0c25a');r(c,footX+1,footY-4,1,3,'#b8802a');r(c,footX+4,footY-4,1,3,'#b8802a');r(c,footX-3,footY-1,10,1,'#8a4a2a');}if(type==='mota')for(let i=0;i<3;i++)r(c,footX-3+i*4,footY,2,2,'#dbe4d7');
     }
     leg(false);leg(true);
     c.translate(lean,-bob+squat+Math.round(recoil*2));if(type==='daroca'&&attackOn&&attackType==='paper')c.rotate(progress<.3?-.035*Math.sin(progress/.3*Math.PI*.5):Math.sin((progress-.3)/.7*Math.PI)*.045);
@@ -1044,9 +1046,9 @@
       if(type==='daroca'&&attackOn){const upper=muscular?14:11,lower=muscular?15:12,dx=hand[0]-should[0],dy=hand[1]-should[1],distance=Math.min(upper+lower-.05,Math.max(Math.abs(upper-lower)+.05,Math.hypot(dx,dy))),angle=Math.atan2(dy,dx),bend=(front?-1:1)*Math.acos(Math.max(-1,Math.min(1,(upper*upper+distance*distance-lower*lower)/(2*upper*distance))));elbow=[should[0]+Math.cos(angle+bend)*upper,should[1]+Math.sin(angle+bend)*upper];hand=[should[0]+Math.cos(angle)*distance,should[1]+Math.sin(angle)*distance];if(front){frontHand=hand;frontElbow=elbow;}else{backHand=hand;backElbow=elbow;}}
 
       limb(c,[should,elbow,hand],muscular?13:slim?6:8,P.ink);
-      limb(c,[should,elbow],muscular?9:slim?4:5,muscular?skin:shirt);
+      limb(c,[should,elbow],muscular?9:slim?4:5,muscular&&!lion?skin:shirt);
       if(heroStrong)limb(c,[should,[should[0]*.86,-33]],11,shirt);
-      limb(c,[elbow,hand],muscular?8:slim?4:5,type==='marco'?shirt:skin);r(c,hand[0]-3,hand[1]-3,muscular?9:slim?5:6,muscular?8:slim?5:6,skin);
+      limb(c,[elbow,hand],muscular?8:slim?4:5,type==='marco'||lion?shirt:skin);r(c,hand[0]-3,hand[1]-3,muscular?9:slim?5:6,muscular?8:slim?5:6,lion?'#f0c25a':skin);if(lion){r(c,hand[0]-4,hand[1]-4,muscular?11:8,2,P.ink);r(c,hand[0]-1,hand[1],3,2,'#8a4a2a');r(c,hand[0]-2,hand[1]-2,1,1,'#8a4a2a');r(c,hand[0]+2,hand[1]-2,1,1,'#8a4a2a');}
       if(muscular){r(c,elbow[0]-2,elbow[1]-4,4,2,type==='reeis'?'#a26c45':'#f5d8bb');r(c,elbow[0]-3,elbow[1]+2,5,2,shadow);}
     }
     arm(false);
@@ -1061,23 +1063,53 @@
       poly(c,[[-8,-37],[9,-37],[8,-28],[6,-19],[-6,-19],[-8,-28]],shirt);
     }else{
       const broad=fart?(progress<.32?Math.round(Math.sin(progress/.32*Math.PI*.5)*2):progress<.65?-1:0):0;
-      r(c,-13-broad,-39,27+broad*2,23,P.ink);r(c,-11-broad,-38,23+broad*2,19,shirt);r(c,-10,-35,3,12,type==='lucas'?'#c3c9c7':type==='almiro'?'#80b2dc':'#e7ac65');if(type==='miqueias'){oval(c,3,-26,18,13,P.ink,2);oval(c,3,-27,16,11,shirt,2);r(c,-10,-30,27,2,'#8aa498');r(c,-8,-21,23,2,'#344e45');}
+      r(c,-13-broad,-39,27+broad*2,23,P.ink);r(c,-11-broad,-38,23+broad*2,19,shirt);r(c,-10,-35,3,12,type==='lucas'?'#c3c9c7':type==='almiro'?'#80b2dc':lion?'#f3c766':LK?.shirtLight||'#e7ac65');if(lion){r(c,-7,-36,14,16,'#f6e0b0');r(c,-8,-33,1,10,'#f6e0b0');r(c,7,-33,1,10,'#f6e0b0');r(c,0,-38,1,19,'#c9a050');r(c,-1,-38,3,2,'#c9a050');}if(type==='miqueias'){oval(c,3,-26,18,13,P.ink,2);oval(c,3,-27,16,11,shirt,2);r(c,-10,-30,27,2,'#8aa498');r(c,-8,-21,23,2,'#344e45');}
     }
     arm(true);
     r(c,-5,-43,12,7,P.ink);r(c,-4,-43,9,8,skin);r(c,-11,-59,24,19,P.ink);r(c,-10,-58,22,17,skin);r(c,-11,-54,3,10,shadow);r(c,11,-51,5,6,skin);r(c,4,-51,3,3,'#302f2c');r(c,11,-47,4,2,shadow);r(c,3,-43,7,2,shadow);
     if(type==='daroca'){
-      r(c,-12,-59,25,6,'#5f4934');r(c,-9,-57,4,4,'#5f4934');
+      const hairC=LK?.hairColor||'#5f4934',hs=LK?.hairStyle||'curto',hat=lion?'jaglion':LK?.hat||'palha';
+      if(!lion){r(c,-12,-59,25,6,hairC);r(c,-9,-57,4,4,hairC);
+        if(hat==='sem'){ // sem chapéu: o penteado aparece inteiro
+          if(hs==='curto'){r(c,-12,-63,25,6,hairC);r(c,-10,-65,20,3,hairC);r(c,-6,-66,12,2,'rgba(255,255,255,.18)');}
+          else if(hs==='black'){r(c,-17,-72,35,16,P.ink);r(c,-16,-71,33,15,hairC);r(c,-14,-74,29,4,hairC);r(c,-18,-64,4,10,hairC);r(c,14,-64,4,10,hairC);r(c,-10,-72,8,2,'rgba(255,255,255,.18)');}
+          else if(hs==='moicano'){r(c,-12,-61,25,3,hairC);r(c,-3,-72,7,13,hairC);r(c,-1,-75,4,4,hairC);r(c,-2,-71,2,8,'rgba(255,255,255,.2)');}
+          else if(hs==='raspado'){r(c,-11,-60,23,3,hairC);r(c,-9,-61,19,1,'rgba(0,0,0,.15)');}
+          else if(hs==='comprido'){r(c,-13,-64,27,7,hairC);r(c,-14,-58,5,20,hairC);r(c,-11,-62,20,2,'rgba(255,255,255,.18)');}
+        }else if(hs==='comprido'){r(c,-14,-58,5,18,hairC);}else if(hs==='black'){r(c,-15,-60,5,10,hairC);r(c,11,-60,4,6,hairC);}}
       r(c,-7,-54,3,4,'#72513b');r(c,1,-53,8,1,'#855b3d');r(c,5,-51,2,3,'#252f2b');r(c,3,-44,7,1,'#8e5e43');r(c,4,-43,5,1,'#e9b684');
       if(heroAnim==='idle'&&poseIndex===3){r(c,3,-52,6,4,skin);r(c,3,-50,6,1,'#4a3e30');}
-      // The straw hat is the hero's signature.
+      // The straw hat is the hero's signature (padrão). O espelho da Bigodon troca o chapéu ou veste o Jaglion.
       c.save();c.translate(flight?-2:Math.round(-walk),flight?-3:Math.round(-Math.abs(walk)));
-      r(c,-20,-61,41,5,'#6e5335');r(c,-19,-65,39,5,'#dbb969');r(c,-12,-76,27,13,'#a98045');r(c,-10,-76,23,10,'#dfb96a');r(c,-8,-78,19,3,'#f0ce7e');r(c,-11,-67,25,4,'#8a5a3b');r(c,-17,-64,34,2,'#f1cf7a');r(c,-5,-73,3,3,'#f5d68b');
+      if(hat==='palha'){r(c,-20,-61,41,5,'#6e5335');r(c,-19,-65,39,5,'#dbb969');r(c,-12,-76,27,13,'#a98045');r(c,-10,-76,23,10,'#dfb96a');r(c,-8,-78,19,3,'#f0ce7e');r(c,-11,-67,25,4,'#8a5a3b');r(c,-17,-64,34,2,'#f1cf7a');r(c,-5,-73,3,3,'#f5d68b');}
+      else if(hat==='bone'){const bc=LK?.hatColor||'#c0392b';r(c,-13,-70,27,12,P.ink);r(c,-12,-69,25,10,bc);r(c,-12,-61,34,4,P.ink);r(c,-11,-61,32,3,bc);r(c,-6,-68,8,2,'rgba(255,255,255,.3)');r(c,0,-71,3,2,bc);}
+      else if(hat==='couro'){r(c,-22,-61,45,5,'#3e2a1a');r(c,-21,-64,43,4,'#7a5232');r(c,-12,-77,26,15,'#3e2a1a');r(c,-11,-76,24,13,'#8a5e38');r(c,-11,-67,24,3,'#c9a24a');r(c,-21,-66,4,3,'#7a5232');r(c,19,-66,4,3,'#7a5232');r(c,-6,-74,3,6,'rgba(255,255,255,.15)');}
+      else if(hat==='preto'){r(c,-20,-61,41,5,'#14161a');r(c,-19,-65,39,5,'#2a2d33');r(c,-12,-76,27,13,'#14161a');r(c,-10,-76,23,10,'#2e3138');r(c,-11,-67,25,4,'#b8322c');r(c,-5,-73,3,3,'#4a4e57');}
+      else if(hat==='jaglion'){ // Jaglion: macacão de leão (kigurumi) com capuz-cara de leão, juba de tufos e orelhas redondas
+        const tuft=['#7a3a12','#9a4a18','#b85e20','#c9702a'],cx=1,cy=-56;
+        for(let i=0;i<20;i++){const a=i/20*Math.PI*2,mx=Math.round(Math.cos(a)*19)+cx,my=Math.round(Math.sin(a)*18)+cy;r(c,mx-6,my-6,12,12,P.ink);}
+        for(let i=0;i<20;i++){const a=i/20*Math.PI*2,mx=Math.round(Math.cos(a)*18)+cx,my=Math.round(Math.sin(a)*17)+cy;r(c,mx-5,my-5,10,10,tuft[i%2]);r(c,mx-3,my-4,4,3,tuft[2+(i%2)]);}
+        // juba caindo nos ombros e no peito
+        r(c,-17,-45,36,9,P.ink);r(c,-16,-44,34,7,'#9a4a18');for(let x=-15;x<17;x+=5)r(c,x,-40+((x/5)&1),4,4,'#b85e20');r(c,-15,-44,30,2,'#c9702a');
+        // orelhas redondas
+        r(c,-15,-80,10,9,P.ink);r(c,-14,-79,8,7,'#e3a83f');r(c,-12,-77,4,4,'#f6e0b0');r(c,7,-80,10,9,P.ink);r(c,8,-79,8,7,'#e3a83f');r(c,10,-77,4,4,'#f6e0b0');
+        // capuz dourado em volta do rosto
+        r(c,-13,-76,28,35,P.ink);r(c,-12,-75,26,33,'#e3a83f');r(c,-11,-75,24,2,'#f0c25a');r(c,-13,-60,3,16,'#d39a36');
+        // rosto de Da Roça pela abertura do capuz
+        r(c,-9,-58,21,16,P.ink);r(c,-8,-57,19,14,skin);r(c,-8,-54,2,9,shadow);r(c,4,-52,3,3,'#302f2c');r(c,1,-54,8,1,'#855b3d');r(c,3,-45,7,1,'#8e5e43');r(c,4,-44,5,1,'#e9b684');r(c,12,-52,3,5,skin);r(c,-9,-58,3,2,P.ink);r(c,-9,-58,2,3,P.ink);r(c,10,-58,3,2,P.ink);r(c,11,-58,2,3,P.ink);r(c,-9,-44,2,2,P.ink);r(c,11,-44,2,2,P.ink);
+        // a cara do leão bordada no capuz, acima da testa
+        r(c,-7,-74,3,3,'#1e1410');r(c,-6,-74,1,1,'#ffffff');r(c,6,-74,3,3,'#1e1410');r(c,7,-74,1,1,'#ffffff');r(c,-8,-76,5,1,'#b8802a');r(c,5,-76,5,1,'#b8802a');
+        r(c,-4,-70,12,6,'#f6e0b0');r(c,-1,-71,6,3,'#6a2a1a');r(c,0,-72,4,1,'#8a3a2a');r(c,1,-68,2,2,'#6a2a1a');r(c,-2,-66,2,1,'#6a2a1a');r(c,4,-66,2,1,'#6a2a1a');
+        r(c,-3,-69,1,1,'#b8802a');r(c,-3,-67,1,1,'#b8802a');r(c,7,-69,1,1,'#b8802a');r(c,7,-67,1,1,'#b8802a');}
       c.restore();
+      if(lion){ // rabo de leão comprido, curvado para cima, com tufo escuro na ponta
+        const sw=Math.round(Math.sin(frame*3.5)*2),pts=[[-13,-22],[-19,-21],[-24,-24+sw],[-27,-29+sw],[-28,-35+sw*2]];limb(c,pts,6,P.ink);limb(c,pts,3,'#d39a36');
+        r(c,-33,-44+sw*2,10,10,P.ink);r(c,-32,-43+sw*2,8,8,'#7a3a12');r(c,-30,-43+sw*2,3,3,'#9a4a18');}
       c.save();c.translate(moving?Math.round(-walk*2):0,moving?Math.round(Math.abs(walk)*2):flight?-2:0);
       r(c,-17,-37,5,18,'#5f6041');r(c,-20,-35,6,15,'#8d814a');r(c,-19,-33,3,7,'#b1a262');
       c.restore();
       r(c,3,-36,5,3,'#f4cf81');r(c,-4,-20,8,3,'#b5814a');
-      r(c,-9,-28,7,2,'#bd7135');r(c,4,-30,6,2,'#f0ab59');r(c,-11,-21,23,4,'#6e5339');r(c,-2,-22,6,5,'#d7bb72');r(c,0,-21,2,3,'#6d573a');
+      r(c,-9,-28,7,2,lion?'#b8802a':LK?.shirt?'rgba(0,0,0,.22)':'#bd7135');r(c,4,-30,6,2,lion?'#f6d68b':LK?.shirtLight||'#f0ab59');r(c,-11,-21,23,4,'#6e5339');r(c,-2,-22,6,5,'#d7bb72');r(c,0,-21,2,3,'#6d573a');
     }else if(type==='reeis'){
       if(o.transformed||o.powered||o.charging){
         c.save();if(o.charging)c.globalAlpha*=.7+Math.sin(frame*18)*.15;

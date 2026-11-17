@@ -1,0 +1,39 @@
+/* Fliperama da Roça (dist/fliperama.js): janela por cima do jogo, tela em pixels e controles de toque. */
+#fliperama{position:absolute;inset:0;z-index:60;background:#0c0a0e;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none}
+#fliperama[hidden]{display:none}
+#fliperama .fliperama-canvas{width:min(100%,calc(100vh * 16 / 9));max-height:100%;aspect-ratio:16/9;image-rendering:pixelated;outline:none;display:block}
+#fliperama .fliperama-close{position:absolute;top:max(8px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right));width:40px;height:40px;border:6px solid transparent;border-image:var(--px-dark,linear-gradient(#2a2018,#2a2018)) 3 fill / 6px / 0 stretch;background:none;color:#f3e2b8;font:12px Pixel,monospace;cursor:pointer;z-index:3}
+.game-shell.is-fliperama .touch-controls,.game-shell.is-fliperama .game-topbar,.game-shell.is-fliperama .hud-min-left{visibility:hidden}
+/* controles de toque: aparecem só em telas de toque e só durante a partida */
+#fliperama .fliperama-touch{position:absolute;inset:auto 0 0 0;display:none;justify-content:space-between;align-items:flex-end;padding:0 max(10px,env(safe-area-inset-left)) max(10px,env(safe-area-inset-bottom));pointer-events:none;z-index:2}
+@media (pointer:coarse){#fliperama .fliperama-touch:not([data-mode="menu"]){display:flex}}
+#fliperama .fliperama-touch[data-mode="solo"] .fp-p2{display:none}
+#fliperama .fp-pad{display:flex;align-items:flex-end;gap:12px;pointer-events:none}
+#fliperama .fp-dpad{position:relative;width:132px;height:132px;pointer-events:none}
+#fliperama .fp-dir,#fliperama .fp-btn{position:absolute;pointer-events:auto;touch-action:none;border:5px solid transparent;border-image:var(--px-paper,linear-gradient(#e4d7a2,#e4d7a2)) 3 fill / 5px / 0 stretch;background:none;color:#5d4728;font:12px Pixel,monospace;opacity:.82;padding:0}
+#fliperama .fp-dir{width:44px;height:44px}
+#fliperama .fp-u{left:44px;top:0}#fliperama .fp-d{left:44px;bottom:0}#fliperama .fp-l{left:0;top:44px}#fliperama .fp-r{right:0;top:44px}
+#fliperama .fp-ab{position:relative;width:120px;height:110px;pointer-events:none}
+#fliperama .fp-btn{width:56px;height:56px;font-size:16px}
+#fliperama .fp-a{right:0;bottom:6px;border-image:var(--px-green,linear-gradient(#8ea25c,#8ea25c)) 3 fill / 5px / 0 stretch;color:#fff2bd}
+#fliperama .fp-b{left:0;top:0}
+#fliperama .fp-dir.on,#fliperama .fp-btn.on{opacity:1;filter:brightness(1.2);transform:translateY(2px)}
+/* dupla no mesmo celular: P1 à esquerda, P2 à direita, cada um com direcional e botões menores */
+#fliperama .fliperama-touch[data-mode="duo"] .fp-dpad{width:108px;height:108px}
+#fliperama .fliperama-touch[data-mode="duo"] .fp-dir{width:36px;height:36px}
+#fliperama .fliperama-touch[data-mode="duo"] .fp-u,#fliperama .fliperama-touch[data-mode="duo"] .fp-d{left:36px}
+#fliperama .fliperama-touch[data-mode="duo"] .fp-l,#fliperama .fliperama-touch[data-mode="duo"] .fp-r{top:36px}
+#fliperama .fliperama-touch[data-mode="duo"] .fp-ab{width:96px;height:92px}
+#fliperama .fliperama-touch[data-mode="duo"] .fp-btn{width:46px;height:46px}
+#fliperama .fliperama-touch[data-mode="duo"] .fp-p1 .fp-a{border-image:var(--px-wood,linear-gradient(#e8823a,#e8823a)) 3 fill / 5px / 0 stretch}
+#fliperama .fliperama-touch[data-mode="duo"] .fp-p2 .fp-dir{filter:hue-rotate(150deg)}
+/* inventário: linha do fliperama */
+#hudInvPanel .hud-fliperama{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#hudInvPanel .hud-fliperama-btn{margin-left:auto;border:5px solid transparent;border-image:var(--px-green,linear-gradient(#8ea25c,#8ea25c)) 3 fill / 5px / 0 stretch;background:none;color:#fff2bd;font:7px Pixel,monospace;padding:2px 6px;cursor:pointer}
+/* caixa do código da sala (online) */
+#fliperama .fliperama-code{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;gap:10px;align-items:stretch;padding:18px 20px;border:8px solid transparent;border-image:var(--px-dark,linear-gradient(#2a2018,#2a2018)) 3 fill / 8px / 0 stretch;z-index:4;min-width:260px}
+#fliperama .fliperama-code[hidden]{display:none}
+#fliperama .fliperama-code label{display:flex;flex-direction:column;gap:8px;font:9px Pixel,monospace;color:#f3e2b8;text-align:center}
+#fliperama .fliperama-code input{font:22px Pixel,monospace;letter-spacing:6px;text-align:center;text-transform:uppercase;padding:8px;background:#120c10;color:#fff3a0;border:3px solid #e8c27a;outline:none}
+#fliperama .fliperama-code button{font:10px Pixel,monospace;padding:10px;border:5px solid transparent;border-image:var(--px-green,linear-gradient(#8ea25c,#8ea25c)) 3 fill / 5px / 0 stretch;background:none;color:#fff2bd;cursor:pointer}
+#fliperama .fliperama-code .fp-cancel{border-image:var(--px-paper,linear-gradient(#e4d7a2,#e4d7a2)) 3 fill / 5px / 0 stretch;color:#5d4728}

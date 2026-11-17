@@ -1,0 +1,6 @@
+.git
+native
+roblox
+docs
+server/node_modules
+**/*.png.orig

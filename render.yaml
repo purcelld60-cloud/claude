@@ -1,0 +1,9 @@
+# Blueprint do Render para o servidor online (veja docs/SERVIDOR-ONLINE.md).
+services:
+  - type: web
+    name: daroca-online
+    runtime: docker
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/health

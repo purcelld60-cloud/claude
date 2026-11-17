@@ -4,6 +4,7 @@
  const contexts=[];
  const add=(id,label,group)=>contexts.push(Object.freeze({id,label,group}));
  add('characters.swift','Conversa · Irmão de Clara Swift','Personagens');
+ add('minigames.fliperama','Fliperama da Roça','Minigames');
  add('arena.menu','Arena online · seleção e sala','Arena online');add('arena.battle','Arena online · confronto','Arena online');add('arena.results','Arena online · resultado','Arena online');
  for(const[id,label]of [['pump','Bombeamento · pomar e campo'],['memory','Memória · luzes da praça e do baile'],['sort','Reciclagem · escola e pátio']])add('activities.'+id,label,'Minigames');
  const maps=[['roca','A roça'],['escola','Colégio Adventista'],['academia','Academia do Caleb'],['quadra','Quadra da escola'],['camacan','Praça Camacan'],['favela','Favela do Reeis'],['caderno','Caderno do Caos'],['campo','Campo do Mota'],['bigodon','Bigodon'],['patio','Pátio da escola'],['rayssa','Casa de Rayssa'],['baile','Baile funk · noite da resenha']];
