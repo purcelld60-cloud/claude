@@ -55,7 +55,7 @@
       }
       row.dataset.k = key; row.append(list); rows.append(row);
     }
-    panel.querySelector('.vp-note').textContent = lion ? 'JAGLION: fantasia de leão costurada pelo Vitor. Rugido não incluso.' : isDefault() ? 'O Da Roça de sempre.' : 'Visual novo, mesma resenha.';
+    panel.querySelector('.vp-note').textContent = lion ? 'JAGLION: macacão de leão com capuz de juba, patas e rabo, costurado pelo Vitor. Rugido não incluso.' : isDefault() ? 'O Da Roça de sempre.' : 'Visual novo, mesma resenha.';
   }
   function drawPreview(now) {
     if (panel.hidden) return; const c = preview.getContext('2d'), t = (now - t0) / 1000;
