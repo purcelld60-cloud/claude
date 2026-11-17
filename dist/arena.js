@@ -66,7 +66,7 @@
   const headers={'Content-Type':'application/json',...(options.headers||{})};if(credentials?.token)headers.Authorization='Bearer '+credentials.token;
   let response;
   if(location.protocol==='file:'&&window.DaRocaNetwork?.request){response=await window.DaRocaNetwork.request(path,{method:options.method||'POST',headers,body:options.body===undefined?undefined:JSON.stringify(options.body)});}
-  else{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);try{response=await fetch((location.protocol==='file:'?OFFICIAL:'')+path,{method:options.method||'POST',headers,body:options.body===undefined?undefined:JSON.stringify(options.body),signal:controller.signal,cache:'no-store',credentials:'omit'});}finally{clearTimeout(timer);}}
+  else{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),25000);try{response=await fetch((location.protocol==='file:'?OFFICIAL:'')+path,{method:options.method||'POST',headers,body:options.body===undefined?undefined:JSON.stringify(options.body),signal:controller.signal,cache:'no-store',credentials:'omit'});}finally{clearTimeout(timer);}}
   let data;if(typeof response?.json==='function')data=await response.json();else{data=response?.body??response?.data??response;if(typeof data==='string')data=JSON.parse(data);}
   const status=response?.status??200;if(response?.ok===false||status>=400||data?.error){const error=new Error(data?.error?.message||data?.message||(typeof data?.error==='string'?data.error:'Não foi possível conectar à sala.'));error.status=status;throw error;}return data;
  }

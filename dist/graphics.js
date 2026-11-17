@@ -20,6 +20,10 @@
     const tv = /Android TV|GoogleTV|BRAVIA|AFT[A-Z]|SmartTV|SMART-TV|Tizen|WebOS|HbbTV|CrKey/i.test(ua);
     const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || (navigator.maxTouchPoints > 1 && Math.min(screen.width, screen.height) < 820);
     if (tv) return { kind: 'tv', level: 'medium' };
+    // iPhone e iPad: o Safari esconde o número real de núcleos (informa 2 ou 4), então não dá para medir por ali.
+    // Começa na MÉDIA; se travar, o modo automático desce sozinho para a BAIXA.
+    const ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+    if (ios) return { kind: 'mobile', level: 'medium' };
     if (mobile) return { kind: 'mobile', level: mem <= 3 || cores <= 4 ? 'low' : 'medium' };
     return { kind: 'desktop', level: webgl() ? 'high' : 'medium' };
   }
