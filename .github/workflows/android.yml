@@ -1,0 +1,70 @@
+name: Gerar APK (Android e Android TV)
+
+# Gera o APK a cada push na main (e quando você clicar em "Run workflow") e publica em Releases.
+# O APK sai assinado com a chave de debug, então instala direto no celular ou na TV
+# ("Instalar apps desconhecidos"). Não usa senhas nem keystore.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, 'claude/**']
+    paths: ['dist/**', 'native/android/**', '.github/workflows/android.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Colocar o jogo e o ícone dentro do app
+        run: |
+          mkdir -p native/android/app/src/main/assets native/android/app/src/main/res/drawable-nodpi
+          rm -rf native/android/app/src/main/assets/dist
+          cp -R dist native/android/app/src/main/assets/dist
+          cp dist/assets/app-icon-512.png native/android/app/src/main/res/drawable-nodpi/ic_launcher.png
+          VERSAO=$(python3 -c "import json;print(json.load(open('dist/app-version.json'))['versionName'])")
+          echo "VERSAO=$VERSAO" >> "$GITHUB_ENV"
+
+      - name: Compilar
+        working-directory: native/android
+        run: gradle --no-daemon assembleRelease -PversionName="$VERSAO" -PversionCode="${{ github.run_number }}"
+
+      - name: Nomear o APK
+        run: |
+          DATA=$(date -u +%Y%m%d)
+          NOME="DaRoca-${VERSAO}-${DATA}-b${{ github.run_number }}.apk"
+          APK=$(ls native/android/app/build/outputs/apk/release/*.apk | head -1)
+          cp "$APK" "$NOME"
+          cp "$APK" DaRoca.apk
+          ls -la *.apk
+          echo "NOME=$NOME" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DaRoca-apk
+          path: ${{ env.NOME }}
+
+      - name: Publicar em Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "android-b${{ github.run_number }}" "$NOME" DaRoca.apk \
+            --target "${{ github.sha }}" \
+            --title "Da Roça Android ${VERSAO} (build ${{ github.run_number }})" \
+            --notes "APK para Android e Android TV. Baixe DaRoca.apk e instale (permita instalar apps desconhecidos)."
