@@ -1,0 +1,312 @@
+{
+  "id": "creditos",
+  "titulo": "Créditos finais",
+  "depois": "jorge_epilogue",
+  "uma_vez": true,
+  "descricao": "Fecha o capítulo 1 depois da ligação do Jorge. Toca uma vez por save.",
+  "cenas": [
+    {
+      "titulo": "FIM DO CAPÍTULO 1",
+      "cenario": "roca",
+      "hora": 17.2,
+      "hora_ate": 18.2,
+      "duracao": 6,
+      "camera": {
+        "de": {
+          "x": 480,
+          "y": 160,
+          "zoom": 1.5
+        },
+        "para": {
+          "x": 620,
+          "y": 420,
+          "zoom": 1
+        },
+        "tempo": 5.5
+      },
+      "efeitos": [
+        {
+          "tipo": "entrada",
+          "dur": 1.2
+        },
+        {
+          "tipo": "raios"
+        },
+        {
+          "tipo": "cartao",
+          "texto": "DA ROÇA ADVENTURE",
+          "sub": "FIM DO CAPÍTULO 1",
+          "t": 1.2,
+          "dur": 4.4
+        }
+      ],
+      "sons": [
+        {
+          "som": "sino",
+          "t": 1.2
+        }
+      ]
+    },
+    {
+      "titulo": "A TURMA DA RESENHA",
+      "cenario": "roca",
+      "hora": 18.2,
+      "duracao": 7.5,
+      "camera": {
+        "de": {
+          "x": 400,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "para": {
+          "x": 980,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "tempo": 7.5,
+        "curva": "linear"
+      },
+      "atores": [
+        {
+          "quem": "lucas",
+          "x": 330
+        },
+        {
+          "quem": "daroca",
+          "x": 420,
+          "emocao": "friend"
+        },
+        {
+          "quem": "reeis",
+          "x": 510,
+          "olhando": -1
+        },
+        {
+          "quem": "nikolas",
+          "x": 620,
+          "olhando": -1,
+          "emocao": "embarrassed"
+        },
+        {
+          "quem": "aica",
+          "x": 730
+        },
+        {
+          "quem": "ravile",
+          "x": 800,
+          "olhando": -1
+        },
+        {
+          "quem": "freddy",
+          "x": 910
+        },
+        {
+          "quem": "dede",
+          "x": 1000,
+          "olhando": -1
+        },
+        {
+          "quem": "arthur",
+          "x": 1100,
+          "olhando": -1
+        },
+        {
+          "quem": "rayssa",
+          "x": 1190,
+          "olhando": -1
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "confete"
+        },
+        {
+          "tipo": "cartao",
+          "texto": "A TURMA DA RESENHA",
+          "sub": "DA ROÇA · LUCAS · REEIS · NIKOLAS · AICA · RAVILE · FREDDY · DEDÉ · ARTHUR · RAYSSA",
+          "t": 0.5,
+          "dur": 6.5,
+          "y": 110
+        }
+      ]
+    },
+    {
+      "titulo": "PARTICIPAÇÕES",
+      "cenario": "praca",
+      "hora": 18.6,
+      "duracao": 7,
+      "camera": {
+        "de": {
+          "x": 700,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "para": {
+          "x": 1200,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "tempo": 7,
+        "curva": "linear"
+      },
+      "atores": [
+        {
+          "quem": "almiro",
+          "x": 640
+        },
+        {
+          "quem": "miqueias",
+          "x": 720,
+          "olhando": -1
+        },
+        {
+          "quem": "caleb",
+          "x": 840
+        },
+        {
+          "quem": "mota",
+          "x": 920,
+          "olhando": -1
+        },
+        {
+          "quem": "marco",
+          "x": 1040
+        },
+        {
+          "quem": "menezes",
+          "x": 1120,
+          "olhando": -1
+        },
+        {
+          "quem": "nicolas",
+          "x": 1230,
+          "olhando": -1
+        },
+        {
+          "quem": "kaua",
+          "x": 1320,
+          "olhando": -1
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "brilhos"
+        },
+        {
+          "tipo": "cartao",
+          "texto": "PARTICIPAÇÕES",
+          "sub": "PROF. ALMIRO · PROF. MIQUEIAS · CALEB · GABRIEL MOTA · MARCO · MENEZES · NICOLAS · KAUA",
+          "t": 0.5,
+          "dur": 6,
+          "y": 110
+        }
+      ]
+    },
+    {
+      "titulo": "UM PEDAÇO DE BOLO",
+      "cenario": "roca",
+      "hora": 18.8,
+      "camera": {
+        "de": {
+          "x": 560,
+          "y": 430,
+          "zoom": 2
+        },
+        "para": {
+          "x": 560,
+          "y": 430,
+          "zoom": 2.2
+        },
+        "tempo": 6
+      },
+      "atores": [
+        {
+          "quem": "daroca",
+          "x": 510,
+          "emocao": "friend"
+        },
+        {
+          "quem": "nikolas",
+          "x": 610,
+          "olhando": -1,
+          "emocao": "embarrassed"
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "vinheta",
+          "forca": 0.45
+        }
+      ],
+      "falas": [
+        {
+          "quem": "daroca",
+          "texto": "Ô Nikolas... semana que vem tem bolo de novo. Vai pedir ou vai roubar?"
+        },
+        {
+          "quem": "nikolas",
+          "emocao": "embarrassed",
+          "texto": "Dessa vez eu peço! Prometo! Um pedaço... talvez dois... no máximo a metade."
+        },
+        {
+          "quem": "daroca",
+          "emocao": "friend",
+          "texto": "Hahaha! Batatão. Bora, que a resenha continua."
+        }
+      ]
+    },
+    {
+      "titulo": "OBRIGADO POR JOGAR",
+      "cenario": "roca",
+      "hora": 19.4,
+      "duracao": 6,
+      "camera": {
+        "de": {
+          "x": 560,
+          "y": 430,
+          "zoom": 2.2
+        },
+        "para": {
+          "x": 560,
+          "y": 120,
+          "zoom": 1.2
+        },
+        "tempo": 5
+      },
+      "atores": [
+        {
+          "quem": "daroca",
+          "x": 510
+        },
+        {
+          "quem": "nikolas",
+          "x": 610,
+          "olhando": -1
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "brilhos"
+        },
+        {
+          "tipo": "cartao",
+          "texto": "OBRIGADO POR JOGAR!",
+          "sub": "A RESENHA CONTINUA...",
+          "t": 1.2,
+          "dur": 4.2
+        },
+        {
+          "tipo": "saida",
+          "t": 5,
+          "dur": 1
+        }
+      ],
+      "sons": [
+        {
+          "som": "fanfarra",
+          "t": 1.2
+        }
+      ]
+    }
+  ]
+}

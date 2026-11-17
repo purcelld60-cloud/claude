@@ -1,0 +1,90 @@
+{
+  "id": "chegada_quadra",
+  "titulo": "Chegada: A Quadra",
+  "chegada": 3,
+  "uma_vez": true,
+  "descricao": "Toca na primeira vez que o jogador chega de carro nesta fase.",
+  "cenas": [
+    {
+      "titulo": "A QUADRA",
+      "cenario": "quadra",
+      "duracao": 4.6,
+      "camera": {
+        "de": {
+          "x": 1500,
+          "y": 400,
+          "zoom": 1
+        },
+        "para": {
+          "x": 480,
+          "y": 400,
+          "zoom": 1
+        },
+        "tempo": 3.6
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": -120,
+          "ate": 230,
+          "tempo": [
+            2.6,
+            4.4
+          ]
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "entrada",
+          "dur": 0.6
+        },
+        {
+          "tipo": "letreiro",
+          "texto": "A QUADRA",
+          "sub": "VOCÊ CHEGOU",
+          "t": 0.4,
+          "dur": 3.8
+        }
+      ],
+      "sons": [
+        {
+          "som": "tambor",
+          "t": 0.8
+        },
+        {
+          "som": "buzina",
+          "t": 4.1
+        }
+      ]
+    },
+    {
+      "titulo": "A QUADRA",
+      "cenario": "quadra",
+      "camera": {
+        "de": {
+          "x": 480,
+          "y": 410,
+          "zoom": 1
+        },
+        "para": {
+          "x": 330,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "tempo": 1.2
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": 230
+        }
+      ],
+      "falas": [
+        {
+          "quem": "daroca",
+          "texto": "A quadra da escola. A bola é redonda, mas a resenha aqui é bem quadrada."
+        }
+      ]
+    }
+  ]
+}

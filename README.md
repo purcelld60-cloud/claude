@@ -45,7 +45,7 @@ Veja o [guia para modificar com IA](docs/MODIFICAR-COM-IA.md), as [orientações
 | Mapas, personagens e progressão | `dist/world.js`, `campaign.js`, `progression.js`, `world-life.js`, `activities.js` |
 | Dificuldade e cronômetro | `dist/difficulty.js`, `campaign-run.js` |
 | Pixel art, cenários e efeitos | `dist/art.js`, `scene-details.js`, `campaign-vfx.js` |
-| Cutscenes e final | `dist/cinematics.js`, `epilogue.js`, `easy-ending.js`, `baile.js` |
+| Cutscenes e final | `dist/cinematics.js`, `epilogue.js`, `easy-ending.js`, `baile.js`; roteiros em dados: `dist/roteiro.js` + `dist/roteiros/*.json` (guia em `docs/ROTEIROS.md`) |
 | Teclado, joystick, botões e pausa | `dist/controls.js`, `control-settings.js`, `joystick.js`, `campaign-controls.js`, `pause-menu.js` e respectivos CSS |
 | Arena e seus personagens | `dist/arena.js`, `arena-roster.js`, `arena-combat.js`, `arena-motion.js`, `arena-art.js`, `arena-controls.js` |
 | Transporte das salas e Dupla | `dist/arena-net.js`, `network.js`, `coop.js`, `worker/arena.mjs` |

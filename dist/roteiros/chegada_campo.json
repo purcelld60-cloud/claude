@@ -1,0 +1,90 @@
+{
+  "id": "chegada_campo",
+  "titulo": "Chegada: Campo Do Mota",
+  "chegada": 7,
+  "uma_vez": true,
+  "descricao": "Toca na primeira vez que o jogador chega de carro nesta fase.",
+  "cenas": [
+    {
+      "titulo": "CAMPO DO MOTA",
+      "cenario": "campo",
+      "duracao": 4.6,
+      "camera": {
+        "de": {
+          "x": 1500,
+          "y": 400,
+          "zoom": 1
+        },
+        "para": {
+          "x": 480,
+          "y": 400,
+          "zoom": 1
+        },
+        "tempo": 3.6
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": -120,
+          "ate": 230,
+          "tempo": [
+            2.6,
+            4.4
+          ]
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "entrada",
+          "dur": 0.6
+        },
+        {
+          "tipo": "letreiro",
+          "texto": "CAMPO DO MOTA",
+          "sub": "VOCÊ CHEGOU",
+          "t": 0.4,
+          "dur": 3.8
+        }
+      ],
+      "sons": [
+        {
+          "som": "tambor",
+          "t": 0.8
+        },
+        {
+          "som": "buzina",
+          "t": 4.1
+        }
+      ]
+    },
+    {
+      "titulo": "CAMPO DO MOTA",
+      "cenario": "campo",
+      "camera": {
+        "de": {
+          "x": 480,
+          "y": 410,
+          "zoom": 1
+        },
+        "para": {
+          "x": 330,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "tempo": 1.2
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": 230
+        }
+      ],
+      "falas": [
+        {
+          "quem": "daroca",
+          "texto": "O campo do Mota. Grama alta, trave torta e um juiz que só existe quando é pra marcar falta contra mim."
+        }
+      ]
+    }
+  ]
+}
