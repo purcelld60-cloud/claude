@@ -1,0 +1,53 @@
+/* HUD minimalista: só corações e papéis no canto; dados e inventário ficam em painéis.
+   A barra deixa de ocupar espaço: o mapa usa a tela toda. */
+#gameShell .game-topbar{position:absolute;top:max(env(safe-area-inset-top),0px);left:env(safe-area-inset-left,0px);right:env(safe-area-inset-right,0px);z-index:30;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;height:0!important;min-height:0!important;padding:8px 10px 0;margin:0;background:none!important;border:0!important;box-shadow:none!important;pointer-events:none;width:auto;max-width:none}
+#gameShell .progress-hud{display:none!important}
+#gameShell .game-topbar>*{pointer-events:auto}
+#gameShell .hud-min-left{display:flex;align-items:center;gap:10px;padding:5px 10px;background:rgba(34,24,14,.55);border:2px solid rgba(182,138,80,.8);border-radius:4px;box-shadow:0 2px rgba(20,12,6,.5);backdrop-filter:blur(2px);pointer-events:none}
+#gameShell .hud-min-left .hearts{font-size:16px;letter-spacing:2px;line-height:1.2;color:#ff8f78;text-shadow:1px 1px #2a1a0e,0 0 6px rgba(255,120,90,.35)}
+#gameShell .hud-min-left .ammo{display:flex;align-items:center;gap:5px;font:12px Pixel,monospace;color:#fff0c7;text-shadow:1px 1px #2a1a0e}
+#gameShell .hud-min-left .paper-icon{color:#f4e6c0;font-size:12px}
+#gameShell .hud-min-left .ammo-label{display:none}
+#gameShell .hud-gas-mini{display:none;align-items:center;gap:5px;font:8px Pixel,monospace;color:#eee3ad}
+#gameShell .hud-gas-mini.on{display:flex}
+#gameShell .hud-gas-mini i{display:block;width:34px;height:5px;background:#392f22;border:1px solid #c9a163}
+#gameShell .hud-gas-mini b{display:block;height:100%;background:#9fd35c}
+#gameShell .hud-min-right{display:flex;align-items:center;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+#gameShell .hud-btn{position:relative;height:30px;padding:0 9px;font:8px Pixel,monospace;letter-spacing:.5px;color:#fff0c7;background:rgba(34,24,14,.55);border:2px solid rgba(182,138,80,.8);border-radius:4px;box-shadow:0 2px rgba(20,12,6,.5);cursor:pointer;text-shadow:1px 1px #2a1a0e}
+#gameShell .hud-btn:hover,#gameShell .hud-btn[aria-expanded="true"]{background:rgba(92,64,36,.8);border-color:#e0b66f}
+#gameShell .hud-btn:focus-visible{outline:2px solid #fff0bd;outline-offset:1px}
+#gameShell .hud-btn .hud-dot{display:none;position:absolute;top:-4px;right:-4px;width:10px;height:10px;background:#f4cc66;border:2px solid #2a1a0e;border-radius:50%;animation:hudPulse 1.1s ease-in-out infinite}
+#gameShell .hud-btn.alert .hud-dot{display:block}
+@keyframes hudPulse{50%{transform:scale(1.35)}}
+#gameShell .game-actions{display:flex;gap:4px;margin:0}
+#gameShell .game-actions .icon-button{width:30px;height:30px;min-width:30px;min-height:30px;padding:0;background:rgba(34,24,14,.55);border:2px solid rgba(182,138,80,.8);border-radius:4px;color:#fff0c7;box-shadow:0 2px rgba(20,12,6,.5)}
+#gameShell .game-actions .icon-button:hover{background:rgba(92,64,36,.8)}
+#gameShell .game-actions .icon-button svg{width:16px;height:16px}
+#gameShell .game-actions #fullscreenBtn small{display:none}
+#gameShell .hud-panel{position:absolute;top:46px;right:10px;width:min(300px,calc(100% - 20px));max-height:min(72vh,430px);overflow:auto;display:flex;flex-direction:column;gap:9px;padding:12px;background:rgba(38,27,16,.94);border:3px solid #b68a50;border-radius:5px;box-shadow:0 6px 0 rgba(20,12,6,.5);color:#eee6bf;z-index:5}
+#gameShell .hud-panel[hidden]{display:none}
+#gameShell .hud-panel h3{margin:0;font:9px Pixel,monospace;letter-spacing:1px;color:#f4cc66}
+#gameShell .hud-panel .hud-sub{font:7px Pixel,monospace;color:#bda06a}
+#gameShell .hud-panel .player-info{display:flex;align-items:center;gap:10px;min-width:0}
+#gameShell .hud-panel .player-info canvas{width:42px;height:42px;border:2px solid #cca25e;background:#566e38}
+#gameShell .hud-panel .player-info b{font:9px Pixel,monospace;color:#fff0bd}
+#gameShell .hud-panel .gas-block{display:block;width:auto;font:8px Pixel,monospace;color:#eee3ad}
+#gameShell .hud-panel .gas-block .gas-track{margin-top:5px;height:9px;background:#392f22;border:2px solid #c9a163}
+#gameShell .hud-panel .location{display:flex;align-items:center;gap:8px;border:0;padding:0;margin:0;color:#eee6bf}
+#gameShell .hud-panel .location small{display:block;font:7px Pixel,monospace;color:#bda06a}
+#gameShell .hud-panel .location b{font:10px Pixel,monospace;color:#fff0bd}
+#gameShell .hud-panel #statsBtn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;height:36px;padding:0 10px;background:#48673a;color:#f3edbe;border:2px solid #8c985c;border-radius:3px;cursor:pointer;font:9px Pixel,monospace}
+#gameShell .hud-panel #statsBtn small{font:7px Pixel,monospace;color:#dce3ac}
+#gameShell .hud-panel #statsBtn.has-points{background:#8f6536;border-color:#e0b66f}
+#gameShell .hud-panel .xp-block{display:flex;flex-direction:column;gap:5px;min-width:0;width:100%}
+#gameShell .hud-panel .xp-block>span{font:8px Pixel,monospace;color:#d8c58f}
+#gameShell .hud-panel .xp-track{height:9px;width:100%;background:#2f2a1a;border:2px solid #7c8755}
+#gameShell .hud-panel .campaign-chapter{display:block;font:7px Pixel,monospace;color:#bda06a;line-height:1.5}
+#gameShell .hud-panel .inventory-hud{display:flex;flex-direction:column;gap:9px;min-width:0;font:9px Pixel,monospace;color:#eee6bf}
+#gameShell .hud-panel .inventory-hud small{color:#bda06a}
+#gameShell .hud-panel .inventory-hud b{color:#fff0bd}
+#gameShell .hud-panel .hud-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 9px;background:rgba(0,0,0,.25);border:1px solid rgba(182,138,80,.4);border-radius:3px;font:9px Pixel,monospace}
+#gameShell .hud-panel .hud-row b{color:#fff0bd}
+#gameShell .scene-chip{top:50px}
+@media(max-width:720px){#gameShell .hud-btn{height:28px;padding:0 7px;font-size:7px}#gameShell .game-actions .icon-button{width:28px;height:28px;min-width:28px;min-height:28px}#gameShell .hud-min-left .hearts{font-size:13px}#gameShell .game-topbar{padding:6px 6px 0}#gameShell .hud-panel{top:40px;right:6px;width:min(280px,calc(100% - 12px))}}
+#gameShell.immersive.screen-wide .screen-fit-tools,#gameShell .screen-fit-tools{top:calc(env(safe-area-inset-top) + 48px)!important}
