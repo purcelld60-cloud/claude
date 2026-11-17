@@ -8,6 +8,11 @@ name: Gerar IPA (iOS, sem assinatura)
 # os outros só substituem os mesmos arquivos.
 on:
   workflow_dispatch:
+    inputs:
+      tentativa:
+        description: 'Número da tentativa (o workflow tenta de novo sozinho até 4 vezes se faltar Mac)'
+        required: false
+        default: '1'
   push:
     branches: [main]
     paths: ['dist/**', 'native/ios/**', '.github/workflows/ios.yml', '.github/scripts/**']
@@ -80,3 +85,24 @@ jobs:
             --title "Da Roça iOS ${VERSAO} (build ${{ github.run_number }})" \
             --notes "IPA sem assinatura. Instale com o seu instalador de IPA (TrollStore, AltStore, SideStore, Sideloadly, ESign...)." || true
           gh release upload "$TAG" "$NOME" DaRoca.ipa --clobber
+
+  # Se nenhum Mac pegou o trabalho (o GitHub cancela depois de ~15 minutos na fila),
+  # dispara o workflow de novo sozinho, até 4 tentativas no total.
+  nova-tentativa:
+    needs: ipa
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Tentar de novo se o IPA não saiu
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TENTATIVA: ${{ github.event.inputs.tentativa || '1' }}
+        run: |
+          if gh release view "ios-b${{ github.run_number }}" >/dev/null 2>&1; then echo "IPA publicado."; exit 0; fi
+          if [ "$TENTATIVA" -ge 4 ]; then echo "::warning title=IPA::Sem Mac livre depois de 4 tentativas. Rode o workflow de novo mais tarde."; exit 0; fi
+          echo "Nenhum Mac livre: tentativa $((TENTATIVA + 1)) de 4."
+          gh workflow run ios.yml --ref main -f tentativa=$((TENTATIVA + 1))
