@@ -39,4 +39,6 @@ android {
 
 dependencies {
     implementation("androidx.webkit:webkit:1.11.0")
+    // Servidor HTTP + WebSocket do modo TV (celular como controle na rede Wi-Fi)
+    implementation("org.nanohttpd:nanohttpd-websocket:2.3.1")
 }

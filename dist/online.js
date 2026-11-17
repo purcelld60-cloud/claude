@@ -9,6 +9,8 @@
   'use strict';
   if (window.DarocaOnline) return;
   const KEY = 'daroca-servidor';
+  // App da Android TV: o servidor da rede Wi-Fi roda dentro do app (porta e IP chegam pelo endereço)
+  try { const q = new URLSearchParams(location.search), port = Number(q.get('tvport')); if (port > 0 && port < 65536) window.DAROCA_TV = Object.freeze({ port, ip: /^[0-9.]{7,15}$/.test(q.get('tvip') || '') ? q.get('tvip') : '' }); } catch (e) {}
   const norm = (u) => { try { const x = new URL(String(u || '').trim()); return /^https?:$/.test(x.protocol) ? x.origin : ''; } catch (e) { return ''; } };
   let base = null, configured = '', sameOrigin = false;
   try { const q = new URLSearchParams(location.search).get('servidor'); if (q !== null) { const n = norm(q); if (n) localStorage.setItem(KEY, n); else localStorage.removeItem(KEY); } configured = localStorage.getItem(KEY) || ''; } catch (e) {}
@@ -35,7 +37,7 @@
     const api = { on, send, close, kick, get ping() { return ping; }, get online() { return !!ws && ws.readyState === 1; }, id: null };
     function send(m) { if (ws && ws.readyState === 1) { ws.send(JSON.stringify(m)); return true; } if (m.t !== 'input' && m.t !== 'state' && m.t !== 'ping') pending.push(m); return false; }
     function open() {
-      const url = wsUrl(); if (!url) { emit('error', { m: 'Nenhum servidor online configurado. Veja como em docs/SERVIDOR-ONLINE.md.', fatal: true }); return; }
+      const url = opts.url || wsUrl(); if (!url) { emit('error', { m: 'Nenhum servidor online configurado. Veja como em docs/SERVIDOR-ONLINE.md.', fatal: true }); return; }
       try { ws = new WebSocket(url); } catch (e) { return retry(); }
       ws.onopen = () => { tries = 0; ws.send(JSON.stringify({ t: 'hello', v: 1, name: opts.name || 'Jogador', avatar: opts.avatar, token: tok || undefined })); emit('status', { online: true }); clearInterval(pingT); pingT = setInterval(() => send({ t: 'ping', c: performance.now() }), 2000); };
       ws.onmessage = (ev) => { let m; try { m = JSON.parse(ev.data); } catch (e) { return; } if (m.t === 'welcome') { tok = m.token; api.id = m.id; const q = pending; pending = []; q.forEach(send); } if (m.t === 'pong') ping = Math.round(ping === null ? performance.now() - m.c : ping * .7 + (performance.now() - m.c) * .3); emit(m.t, m); };
