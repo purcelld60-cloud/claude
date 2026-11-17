@@ -15,7 +15,7 @@
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
   const FW = 260, FH = 240, FX = 130, FY = 210; // quadro do herói: pés em (FX, FY)
-  let fig = null, sil = null, layer = null, shadeNow = 0;
+  let fig = null, sil = null, layer = null, shadeNow = 0, lastLamps = [];
 
   function light(o) {
     if (o.room) return { lean: .12, str: .5, indoor: true };
@@ -38,22 +38,38 @@
     return sil;
   }
   // sombra no chão, montada em meia resolução e ampliada 2x (pixels iguais aos do cenário)
+  // uma silhueta deitada no chão: k = inclinação (para onde a sombra vai), d = achatamento,
+  // fade = quanto ela some na ponta (luz de poste não alcança longe)
+  let tmp = null;
+  function cast(g, k, d, a, ex, ey, fade) {
+    const LWd = layer.width, LHd = layer.height; if (!tmp) tmp = mk(LWd, LHd);
+    const tg = tmp.getContext('2d'); tg.setTransform(1, 0, 0, 1, 0, 0); tg.clearRect(0, 0, LWd, LHd); tg.imageSmoothingEnabled = false; tg.globalCompositeOperation = 'source-over';
+    tg.setTransform(.5, 0, -k * .5, d * .5, ex, ey); tg.drawImage(sil, -FX, -FY); tg.setTransform(1, 0, 0, 1, 0, 0);
+    if (fade > 0) { const len = Math.abs(k) * 40 + 10, dir = k < 0 ? -1 : 1, down = d < 0 ? Math.abs(d) * 40 : 0, gr = tg.createLinearGradient(ex, ey, ex + dir * len, ey + down); gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(1, `rgba(0,0,0,${1 - fade})`); tg.globalCompositeOperation = 'destination-in'; tg.fillStyle = gr; tg.fillRect(0, 0, LWd, LHd); tg.globalCompositeOperation = 'source-over'; }
+    g.globalAlpha = clamp(a, 0, 1); g.drawImage(tmp, 0, 0); g.globalAlpha = 1;
+  }
   function ground(ctx, o, L) {
     if (o.floor === null || o.floor === undefined) return;
-    const h = Math.max(0, o.floor - o.y), fade = clamp(1 - h / 260, .2, 1);
+    const h = Math.max(0, o.floor - o.y), lift = clamp(1 - h / 260, .2, 1);
+    // luzes do cenário perto dele (postes, refletores, luminárias, frestas da janela)
+    const lamps = o.arena || o.room ? [] : L.indoor && !OUTDOOR[o.scene] || !L.indoor ? (window.HdMaps?.lightsAt?.(o.scene, o.x) || []) : [];
+    lastLamps = lamps;
     const k = L.indoor ? L.lean : L.lean * (.4 + .74 * Math.abs(L.lean)), d = L.indoor ? .16 : .14 + .07 * (1 - Math.min(1, Math.abs(L.lean)));
-    const a = (L.str > .02 ? .26 + .4 * clamp(L.str, 0, 1) : 0) * fade;
-    if (a < .02) return;
-    const LWd = 300, LHd = 60; if (!layer) layer = mk(LWd, LHd);
+    // de dia o sol manda; na luz de poste a sombra do sol quase some
+    const lampSum = lamps.reduce((s2, l) => s2 + l.a, 0);
+    const a = (L.str > .02 ? .26 + .4 * clamp(L.str, 0, 1) : 0) * lift * (L.indoor && lampSum > .2 ? .35 : 1);
+    if (a < .02 && !lamps.length) return;
+    const LWd = 300, LHd = 80; if (!layer) layer = mk(LWd, LHd);
     const g = layer.getContext('2d'); g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, LWd, LHd); g.imageSmoothingEnabled = false;
-    // camada cobre o mundo de (x-300, floor-100) a (x+300, floor+20), em meia resolução
-    const ox = Math.round((o.x - 300) / 2) * 2, oy = Math.round((o.floor - 100) / 2) * 2;
-    const ex = (o.x + k * h - ox) / 2, ey = (o.floor - oy) / 2;
-    g.globalAlpha = a; g.setTransform(.5, 0, -k * .5, d * .5, ex, ey); g.drawImage(sil, -FX, -FY);
+    // camada cobre o mundo de (x-300, floor-100) a (x+300, floor+60), em meia resolução
+    const ox = Math.round((o.x - 300) / 2) * 2, oy = Math.round((o.floor - 100) / 2) * 2, ey = (o.floor - oy) / 2;
+    if (a >= .02) cast(g, k, d, a, (o.x + k * h - ox) / 2, ey, 0);
+    // as luzes ficam atrás dele (postes na mureta, refletores, janelas no fundo): a sombra cai para a frente,
+    // no chão embaixo e ao lado, do lado contrário ao da luz
+    for (const l of lamps) { const la = Math.min(.8, l.a * 1.8) * lift; if (la < .03) continue; cast(g, l.k * .9, -.3, la, (o.x + l.k * h - ox) / 2, ey, l.fade); }
     // contato com o chão: sombra curtinha e mais escura embaixo dos pés
-    g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = a * .9 * clamp(1 - h / 90, 0, 1);
-    if (g.globalAlpha > .01) { const cx = (o.x - ox) / 2, w = (o.vehicle ? 30 : 13) * clamp(1 - h / 200, .5, 1); g.fillStyle = 'rgb(18,30,52)'; g.fillRect(Math.round(cx - w), Math.round(ey) - 1, Math.round(w * 2), 2); g.fillRect(Math.round(cx - w * .7), Math.round(ey), Math.round(w * 1.4), 1); }
-    g.globalAlpha = 1;
+    const ca = Math.max(a, lamps.length ? Math.min(.6, lamps[0].a) : 0) * .9 * clamp(1 - h / 90, 0, 1);
+    if (ca > .01) { g.globalAlpha = ca; const cx = (o.x - ox) / 2, w = (o.vehicle ? 30 : 13) * clamp(1 - h / 200, .5, 1); g.fillStyle = 'rgb(18,30,52)'; g.fillRect(Math.round(cx - w), Math.round(ey) - 1, Math.round(w * 2), 2); g.fillRect(Math.round(cx - w * .7), Math.round(ey), Math.round(w * 1.4), 1); g.globalAlpha = 1; }
     ctx.save(); ctx.imageSmoothingEnabled = false; ctx.drawImage(layer, ox, oy, LWd * 2, LHd * 2); ctx.restore();
   }
   // quanto de sombra cai em cima do herói agora
@@ -72,6 +88,7 @@
     if (!L.indoor && L.str > .05) { const side = L.lean >= 0 ? -1 : 1, s = Math.min(1, Math.abs(L.lean) * 1.3 + .25) * Math.min(1, L.str) * (1 - shadeNow);
       const grd = c.createLinearGradient(FX - 22, 0, FX + 22, 0); const lit = `rgba(255,236,190,${.16 * s})`, dark = `rgba(24,30,60,${.2 * s})`;
       grd.addColorStop(0, side < 0 ? lit : dark); grd.addColorStop(.5, 'rgba(0,0,0,0)'); grd.addColorStop(1, side < 0 ? dark : lit); c.fillStyle = grd; c.fillRect(0, 0, FW, FH); }
+    { const l = lastLamps.find((x) => x.lx !== undefined && x.a > .12); if (l) { const side = l.k > 0 ? -1 : 1, s2 = Math.min(1, l.a); const grd = c.createLinearGradient(FX - 22, 0, FX + 22, 0), lit = `rgba(255,226,160,${.22 * s2})`; grd.addColorStop(0, side < 0 ? lit : 'rgba(0,0,0,0)'); grd.addColorStop(.55, 'rgba(0,0,0,0)'); grd.addColorStop(1, side < 0 ? 'rgba(0,0,0,0)' : lit); c.fillStyle = grd; c.fillRect(0, 0, FW, FH); } }
     if (shadeNow > .02) {
       c.fillStyle = `rgba(18,30,52,${.42 * shadeNow})`; c.fillRect(0, 0, FW, FH);
       // manchas de luz entre as folhas, mexendo com o vento

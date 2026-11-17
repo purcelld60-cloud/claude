@@ -242,7 +242,7 @@
     const s = window.DayTime.state(); if (s.night <= .2 && (selfLit || (s.amb[0] > .995 && s.amb[1] > .995 && s.amb[2] > .995))) return;
     c.save(); if (!selfLit) { c.globalCompositeOperation = 'multiply'; c.fillStyle = css(s.amb); c.fillRect(-40, -40, 1040, 620); }
     if (s.night > .2) { const a = (s.night - .2) * 1.25; lg.clearRect(0, 0, LW, LH);
-      glow(lg, hx / 2, hy / 2 - 22, 70, 52, [1, .86, .6], .30 * a); // lampião do herói: mantém a luta legível
+      glow(lg, hx / 2, hy / 2 - 30, 64, 34, [1, .86, .6], .30 * a); // lampião do herói: ilumina o corpo (não o chão, para a sombra dele aparecer)
       for (let i = 0; i < 16; i++) { const x = (hash(i + 700) * 520 + Math.sin(t * .4 + i) * 14) % 480, y = 150 + hash(i + 710) * 62 + Math.sin(t * .7 + i * 2) * 6, on = Math.max(0, Math.sin(t * 1.6 + i * 2.3)); lg.fillStyle = `rgba(210,255,140,${on * a * .9})`; lg.fillRect(Math.round(x), Math.round(y), 1, 1); lg.fillStyle = `rgba(210,255,140,${on * a * .25})`; lg.fillRect(Math.round(x) - 1, Math.round(y) - 1, 3, 3); }
       c.globalCompositeOperation = 'lighter'; c.imageSmoothingEnabled = false; c.drawImage(lightCv, 0, 0, 960, 540); }
     c.restore();
