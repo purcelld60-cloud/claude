@@ -359,7 +359,8 @@
         {name:'Da Roça',text:'Só alinha o chapéu. Se cortar meu cabelo, vou perder a aerodinâmica do peido.'},
         {name:n.name,text:'Relaxa! Meu corte é tão alinhado que até o carro do seu pai sai daqui fazendo curva certinha.'},
         {name:'Vitor · ajudante',text:'Davi, a tesoura! Você está penteando o vento de novo.'},
-        {name:n.name,text:'É o acabamento premium, pô! Pronto: vida cheia, gás no tanque e autoestima na régua.'}],()=>{q.bigodon=true;player.hp=bonus().maxHP;player.gas=bonus().maxGas;if(first)awardXP(120,'side-bigodon');save();updateUI();toast('Resenha na Bigodon: vida e gás recuperados!');});return;
+        {name:n.name,text:'É o acabamento premium, pô! Pronto: vida cheia, gás no tanque e autoestima na régua.'},
+        {name:n.name,text:'E olha o espelho ali: troca o chapéu, o cabelo, a cor da camisa... e o Vitor costurou até uma fantasia de leão. O JAGLION!'}],()=>{q.bigodon=true;player.hp=bonus().maxHP;player.gas=bonus().maxGas;if(first)awardXP(120,'side-bigodon');save();updateUI();toast('Resenha na Bigodon: vida e gás recuperados!');window.DarocaLook?.open?.({line:'Davi: Senta na cadeira e escolhe. Aqui o visual é por conta da casa!'});});return;
     }
     if(id==='vitor'){
       const first=!q.vitor;
