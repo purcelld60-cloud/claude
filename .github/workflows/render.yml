@@ -1,0 +1,21 @@
+name: Atualizar servidor (Render)
+
+# A cada merge no main que mexa no jogo ou no servidor, pede ao Render para publicar de novo.
+# Precisa de um Secret chamado RENDER_DEPLOY_HOOK com o "Deploy Hook" do serviço no Render
+# (Render → serviço daroca-online → Settings → Deploy Hook → copiar). Sem o Secret, não faz nada.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['dist/**', 'server/**', 'render.yaml']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Avisar o Render
+        env:
+          HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "::warning title=Render::Crie o Secret RENDER_DEPLOY_HOOK para atualizar o servidor sozinho (docs/SERVIDOR-ONLINE.md)."; exit 0; fi
+          curl -fsS -X POST "$HOOK" > /dev/null && echo "Render avisado: o servidor vai atualizar em alguns minutos."
