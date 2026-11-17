@@ -2,7 +2,7 @@ name: Publicar o jogo (GitHub Pages)
 
 on:
   push:
-    branches: [main, claude/game-update-6g517u]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
