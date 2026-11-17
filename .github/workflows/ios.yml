@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main, 'claude/**']
-    paths: ['dist/**', 'native/ios/**', '.github/workflows/ios.yml']
+    paths: ['dist/**', 'native/ios/**', '.github/workflows/ios.yml', '.github/scripts/**']
 
 permissions:
   contents: write
@@ -22,6 +22,9 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+
+      - name: Lista de músicas (dist/musicas)
+        run: python3 .github/scripts/musicas.py
 
       - name: Preparar ícone e projeto
         working-directory: native/ios

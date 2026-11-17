@@ -16,6 +16,11 @@
   const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
   const FW = 260, FH = 240, FX = 130, FY = 210; // quadro do herói: pés em (FX, FY)
   let fig = null, sil = null, layer = null, shadeNow = 0, lastLamps = [];
+  // Chuva e neve no personagem: molhado (escurece, brilha em cima e pinga) e flocos no chapéu e ombros
+  let wet = 0, snowy = 0, lastT = 0, drips = [], rimCv = null;
+  function rimMask() { // só os pixels de cima da silhueta (onde a chuva e a neve batem)
+    if (!rimCv) rimCv = mk(FW, FH); const r = rimCv.getContext('2d'); r.globalCompositeOperation = 'source-over'; r.clearRect(0, 0, FW, FH); r.drawImage(fig, 0, 0);
+    r.globalCompositeOperation = 'destination-out'; r.drawImage(fig, 0, 3); r.globalCompositeOperation = 'source-over'; return rimCv; }
 
   function light(o) {
     if (o.room) return { lean: .12, str: .5, indoor: true };
@@ -96,7 +101,24 @@
         for (let i = 0; i < 7; i++) { const x = FX - 20 + ((i * 13 + Math.sin(t * 1.3 + i * 2.1) * 6 + o.x * .15) % 40 + 40) % 40, y = FY - 78 + ((i * 23 + Math.cos(t * .9 + i) * 5) % 74 + 74) % 74; c.fillRect(Math.round(x / 2) * 2, Math.round(y / 2) * 2, 4, 2); c.fillRect(Math.round(x / 2) * 2 + 2, Math.round(y / 2) * 2 + 2, 2, 2); } }
     }
     c.restore();
+    // molhado e com neve
+    const t = o.time || 0, dt = Math.max(0, Math.min(.1, t - lastT)); lastT = t;
+    const wx = !L.indoor && !o.room && !o.arena ? window.Weather?.state?.() || {} : {}, cover = shadeNow > .45 ? .3 : 1;
+    wet = Math.max(0, Math.min(1, wet + ((wx.rain || 0) > .15 ? dt * .18 * wx.rain * cover : -dt * .025 * (1 + L.str))));
+    snowy = Math.max(0, Math.min(1, snowy + ((wx.snow || 0) > .15 ? dt * .08 * wx.snow * cover : -dt * .05)));
+    if (wet > .02 || snowy > .02) {
+      const rim = rimMask(); c.save(); c.globalCompositeOperation = 'source-atop';
+      if (wet > .02) { c.fillStyle = `rgba(16,26,52,${.24 * wet})`; c.fillRect(0, 0, FW, FH); c.globalAlpha = .55 * wet; c.drawImage(rim, 0, 1); c.globalAlpha = 1; }
+      c.restore();
+      if (wet > .02) { const g = rim.getContext('2d'); g.globalCompositeOperation = 'source-in'; g.fillStyle = `rgba(215,232,255,${.5 * wet})`; g.fillRect(0, 0, FW, FH); g.globalCompositeOperation = 'source-over'; c.drawImage(rim, 0, 0); }
+      if (snowy > .02) { const rim2 = rimMask(), g = rim2.getContext('2d'); g.globalCompositeOperation = 'source-in'; g.fillStyle = `rgba(250,252,255,${Math.min(1, snowy * 1.2)})`; g.fillRect(0, 0, FW, FH); g.globalCompositeOperation = 'source-over'; c.drawImage(rim2, 0, -1); c.drawImage(rim2, 0, 0); }
+    }
     ctx.save(); ctx.imageSmoothingEnabled = false; ctx.drawImage(fig, Math.round(o.x) - FX, Math.round(o.y) - FY); ctx.restore();
+    // pingos caindo do chapéu e das mangas
+    if (wet > .25 && Math.random() < wet * .5) drips.push({ x: o.x + (Math.random() - .5) * 30, y: o.y - 30 - Math.random() * 30, vy: 40, life: .8 });
+    if (drips.length > 30) drips.splice(0, drips.length - 30);
+    ctx.save(); for (const d of drips) { d.life -= dt; d.vy += 600 * dt; d.y += d.vy * dt; if (d.life > 0 && d.y < (o.floor || 440)) { ctx.fillStyle = `rgba(200,222,255,${Math.min(1, d.life * 1.5) * .8})`; ctx.fillRect(Math.round(d.x / 2) * 2, Math.round(d.y / 2) * 2, 2, 4); } } ctx.restore();
+    drips = drips.filter((d) => d.life > 0 && d.y < (o.floor || 440));
   }
   /* o: { draw(c, x, y), x, y, floor (y do chão/plataforma embaixo ou null), platforms, scene, time, room, arena, vehicle }
      Devolve true se desenhou o herói (com sombra); false para o jogo desenhar do jeito antigo. */
@@ -110,5 +132,5 @@
       return true;
     } catch (e) { window.__heroShadowError = e; return false; }
   }
-  window.HeroShadow = Object.freeze({ draw, shade: () => shadeNow });
+  window.HeroShadow = Object.freeze({ draw, shade: () => shadeNow, wet: () => wet, snowy: () => snowy });
 })();

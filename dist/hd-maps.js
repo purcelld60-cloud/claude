@@ -28,10 +28,36 @@
     if (Math.abs(s.h - skyH) > .012) { skyH = s.h; const N = 14, bh = 14; for (let i = 0; i < N; i++) { const k = i / (N - 1), col = css(pre(mix(s.top, s.bot, k * k * .45 + k * .55))); R(sk, 0, i * bh, LW, bh, col); if (i) { dither(sk, 0, i * bh - 1, LW, col); for (let x = 1; x < LW; x += 4) sk.fillRect(x, i * bh - 2, 1, 1); } } }
     c.drawImage(skyCv, 0, 0);
     if (s.night > .25) for (let i = 0; i < 90; i++) { const tw = .5 + .5 * Math.sin(t * (1 + hash(i) * 2) + i); c.fillStyle = `rgba(255,255,255,${cl((s.night - .25) * 1.4 * (.35 + .65 * tw) * (.4 + hash(i + 9) * .6))})`; c.fillRect(Math.round(((hash(i + 300) * 560 - camL * .01) % LW + LW) % LW), Math.round(hash(i + 400) * 120), 1, 1); }
-    if (s.sunT !== null) { const x = 40 + s.sunT * 400 - camL * .012, y = (arc.sb || 168) - Math.sin(s.sunT * Math.PI) * (arc.sa || 128); ell(c, x, y, 26, 26, css(pre(s.sun), .12)); ell(c, x, y, 19, 19, css(pre(s.sun), .22)); ell(c, x, y, 13, 13, css(pre(mix(s.sun, [1, 1, 1], .55)))); }
+    // hora dourada: 1 com o sol perto do horizonte, 0 ao meio-dia
+    const gold = s.sunT !== null ? cl(1 - Math.sin(s.sunT * Math.PI) * 1.7) : 0, sunX = s.sunT !== null ? 40 + s.sunT * 400 - camL * .012 : -999, sunY = s.sunT !== null ? (arc.sb || 168) - Math.sin(s.sunT * Math.PI) * (arc.sa || 128) : 0;
+    if (gold > .02) { // brilho quente em volta do sol e o cinturão rosa do outro lado do céu
+      const wash = c.createLinearGradient(0, 0, 0, 180); wash.addColorStop(0, css(pre([.6, .12, .2]), .55 * gold)); wash.addColorStop(.55, css(pre([.98, .3, .22]), .45 * gold)); wash.addColorStop(1, css(pre([1, .62, .3]), .45 * gold)); c.fillStyle = wash; c.fillRect(0, 0, LW, 196);
+      c.save(); c.translate(sunX, sunY); c.scale(1.7, 1); const g1 = c.createRadialGradient(0, 0, 3, 0, 0, 220); g1.addColorStop(0, css(pre([1, .9, .55]), .9 * gold)); g1.addColorStop(.22, css(pre([1, .66, .3]), .6 * gold)); g1.addColorStop(.55, css(pre([.95, .36, .26]), .3 * gold)); g1.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = g1; c.fillRect(-260, -220, 520, 440); c.restore();
+      const g2 = c.createLinearGradient(0, 40, 0, 170); g2.addColorStop(0, 'rgba(0,0,0,0)'); g2.addColorStop(.6, css(pre([.78, .45, .62]), .2 * gold)); g2.addColorStop(1, css(pre([.95, .6, .55]), .28 * gold)); c.fillStyle = g2; c.fillRect(0, 40, LW, 130); }
+    if (s.sunT !== null) { const x = sunX, y = sunY, sc = mix(s.sun, [1, .45, .25], gold * .6);
+      ell(c, x, y, 34 + gold * 14, 34 + gold * 10, css(pre(sc), .08 + gold * .08)); ell(c, x, y, 26, 26, css(pre(sc), .14)); ell(c, x, y, 19, 19, css(pre(sc), .24)); ell(c, x, y, 13, 13, css(pre(mix(sc, [1, 1, .92], .55))));
+      if (gold > .35) { ell(c, x, y + 1, 70 * gold, 2, css(pre([1, .85, .6]), .35 * gold)); ell(c, x, y + 1, 40 * gold, 1, css(pre([1, .95, .8]), .5 * gold)); }
+      if (gold > .15 && s.night < .4) { c.save(); c.globalCompositeOperation = 'lighter'; for (let i = 0; i < 9; i++) { const a = -Math.PI * .95 + i * .23 + Math.sin(t * .05 + i) * .03, len = 260, wd = .045 + hash(i + 7) * .04; c.fillStyle = css(pre([1, .78, .45]), (.05 + hash(i + 3) * .05) * gold); c.beginPath(); c.moveTo(x, y); c.lineTo(x + Math.cos(a - wd) * len, y + Math.sin(a - wd) * len); c.lineTo(x + Math.cos(a + wd) * len, y + Math.sin(a + wd) * len); c.closePath(); c.fill(); } c.restore(); } }
     if (s.moonT !== null) { const x = 50 + s.moonT * 380 - camL * .012, y = (arc.mb || 150) - Math.sin(s.moonT * Math.PI) * (arc.ma || 108); ell(c, x, y, 16, 16, 'rgba(200,215,255,.14)'); ell(c, x, y, 9, 9, '#ffffff'); R(c, x - 4, y - 3, 3, 3, '#dfe6ff'); R(c, x + 2, y + 3, 3, 2, '#dfe6ff'); R(c, x + 3, y - 5, 2, 2, '#dfe6ff'); }
+    // nuvens: altas e finas (cirros) + nuvens com volume; na hora dourada a barriga das nuvens pega o laranja e o rosa do sol
     const cloud = pre(mix(mix(s.bot, [1, 1, 1], .7 * (1 - s.night) + .1), s.top, s.night * .45)), shade = [cloud[0] * .86, cloud[1] * .89, cloud[2] * .96];
-    for (let i = 0; i < 7; i++) { const x = ((hash(i + 20) * 700 + t * (1.5 + hash(i) * 2.5) - camL * .05) % 640 + 640) % 640 - 90, y = 16 + hash(i + 30) * 86, w = 34 + hash(i + 31) * 34; R(c, x, y, w, 5, css(cloud)); R(c, x + 5, y - 4, w - 13, 4, css(cloud)); R(c, x + 11, y - 7, w * .42, 3, css(cloud)); R(c, x + w * .55, y - 6, w * .22, 2, css(cloud)); R(c, x + 3, y + 5, w - 8, 2, css(shade)); R(c, x + 9, y + 7, w - 22, 1, css(shade)); }
+    const cbody = pre(mix(mix(mix(s.bot, [1, 1, 1], .7 * (1 - s.night) + .1), s.top, s.night * .45), [.98, .5, .46], gold * .7 * (1 - s.night))), belly = pre(mix(mix(s.bot, [.62, .66, .78], .5), [1, .42, .22], gold * (1 - s.night))), rim = pre(mix([1, 1, .96], [1, .9, .56], gold)), dark = pre(mix(shade, [.5, .2, .3], gold * .6));
+    for (let i = 0; i < 6; i++) { const x = ((hash(i + 60) * 900 + t * (3 + hash(i) * 2) - camL * .03) % 760 + 760) % 760 - 140, y = 18 + hash(i + 61) * 48, w = 70 + hash(i + 62) * 90;
+      c.fillStyle = css(mix(cloud, belly, .6 * gold), .35 + .25 * gold); for (let k = 0; k < 3; k++) c.fillRect(Math.round(x + k * 9), Math.round(y + k * 3), Math.round(w - k * 18), 1); }
+    for (let i = 0; i < 8; i++) { const x = ((hash(i + 20) * 700 + t * (1.5 + hash(i) * 2.5) - camL * .05) % 680 + 680) % 680 - 110, y = 22 + hash(i + 30) * 92, w = 34 + hash(i + 31) * 42, h = 8 + hash(i + 32) * 6;
+      const puffs = [[0, 0, w * .5, h], [w * .28, -h * .7, w * .22, h * .8], [w * .55, -h * .45, w * .2, h * .7], [w * .78, 0, w * .26, h * .7], [w * .4, -h * 1.2, w * .14, h * .55]];
+      for (const [px, py, rx, ry] of puffs) ell(c, x + px + w * .1, y + py + 2, rx, ry, css(dark));
+      for (const [px, py, rx, ry] of puffs) ell(c, x + px + w * .1, y + py, rx, ry * .92, css(gold > .05 ? cbody : cloud));
+      for (const [px, py, rx, ry] of puffs) ell(c, x + px + w * .1 + (sunX > x + w * .5 ? 2 : -2), y + py - 2, rx * .7, ry * .5, css(rim, .55 + gold * .2));
+      R(c, x + w * .05, y + h * .55, w * 1.05, 3, css(gold > .05 ? belly : shade)); R(c, x + w * .15, y + h * .55 + 3, w * .8, 1, css(gold > .05 ? belly : shade, .7)); }
+  }
+
+  // névoa no horizonte (mais quente na hora dourada) e neblina baixa de manhã cedo
+  function haze(c, s, t, camL, y0 = 150, y1 = 215) {
+    const gold = s.sunT !== null ? cl(1 - Math.sin(s.sunT * Math.PI) * 1.7) : 0, h = s.h, morning = h > 5 && h < 9.5 ? Math.sin((h - 5) / 4.5 * Math.PI) : 0;
+    const col = mix(mix(s.bot, [1, 1, 1], .35), [1, .66, .5], gold * .7), a = .16 + gold * .18 + morning * .1;
+    const g = c.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(.55, css(col, a)); g.addColorStop(1, css(col, a * .4)); c.fillStyle = g; c.fillRect(0, y0, LW, y1 - y0);
+    if (morning > .05) for (let i = 0; i < 9; i++) { const x = ((hash(i + 90) * 900 + t * (2 + hash(i) * 3) - camL * .2) % 760 + 760) % 760 - 140, y = y1 - 26 + hash(i + 91) * 20, w = 90 + hash(i + 92) * 120; c.fillStyle = css(mix([1, 1, 1], col, .4), .12 * morning); for (let k = 0; k < 4; k++) c.fillRect(Math.round(x + k * 7), Math.round(y - k * 2), Math.round(w - k * 14), 2); }
   }
 
   // ------------------------------------------------------------------------------- serras (parallax)
@@ -123,22 +149,42 @@
     return cv;
   }
   // árvores (desenhadas ao vivo para balançar com o vento)
+  // Folhas que reagem: cada árvore desenhada fica registrada (posição da copa); HdMaps.touch() recebe o
+  // jogador a cada quadro e, se ele passa pela copa (por baixo ou pulando dentro), a árvore chacoalha e solta folhas.
+  let TREES = [], treeScene = -1; const RUSTLE = new Map(), LEAVES = [];
+  function touch(scene, wx, wy, vx, vy) {
+    if (scene !== treeScene) return;
+    const ax = wx / 2, top = (wy - 76) / 2, bot = wy / 2, speed = Math.min(1, (Math.abs(vx) + Math.abs(vy) * .6) / 260);
+    for (const tr of TREES) { const r = tr.r * 1.05; if (Math.abs(ax - tr.x) > r) continue; if (bot < tr.y0 - 4 || top > tr.y1 + 20) continue; // até ~40 px abaixo da copa: o chapéu raspa nas folhas
+      const inside = top < tr.y1 - 4, add = (inside ? .9 : .35) * (.15 + speed); const v = Math.min(1.6, (RUSTLE.get(tr.seed) || 0) + add * .12); RUSTLE.set(tr.seed, v);
+      if (Math.abs(vx) + Math.abs(vy) > 20 && Math.random() < (inside ? .6 : .2) * (.3 + speed)) for (let k = 0; k < (inside ? 2 : 1); k++) LEAVES.push({ wx: tr.x + (Math.random() - .5) * r * 1.4, wy: tr.y0 + Math.random() * (tr.y1 - tr.y0), vx: (Math.random() - .5) * 10 + vx * .02, vy: 4 + Math.random() * 6, a: Math.random() * 6, life: 4 + Math.random() * 3, col: Math.random() < .25 ? '#c9a24a' : Math.random() < .5 ? '#56a64c' : '#7cc85a' }); }
+    if (LEAVES.length > 140) LEAVES.splice(0, LEAVES.length - 140);
+  }
+  function leavesDraw(c, camL, t, dt) {
+    for (const [k, v] of RUSTLE) { const n = v * Math.pow(.25, dt); if (n < .01) RUSTLE.delete(k); else RUSTLE.set(k, n); }
+    for (const L of LEAVES) { L.life -= dt; L.a += dt * 3; L.wx += (L.vx + Math.sin(L.a) * 8) * dt; L.wy += L.vy * dt; if (L.wy > 214) { L.wy = 214; L.vx *= .5; L.vy = 0; } const x = L.wx - camL; if (x < -4 || x > LW + 4) continue; R(c, x, L.wy, 2, 1, L.col); if (Math.sin(L.a) > 0) R(c, x + 1, L.wy - 1, 1, 1, L.col); }
+    for (let i = LEAVES.length - 1; i >= 0; i--) if (LEAVES[i].life <= 0) LEAVES.splice(i, 1);
+  }
+  let lastLeafT = 0;
   function tree(c, x, base, s, kind, t, seed, lean = 1) {
+    const camHere = treeCam; TREES.push({ seed, x: x + camHere, r: kind === 1 ? 26 * s : 30 * s, y0: base - (kind === 1 ? 50 : 92) * s, y1: base - (kind === 1 ? 30 : 38) * s });
+    const shake = RUSTLE.get(seed) || 0, snow = window.Weather?.state?.()?.cover || 0;
     if (kind === 1) { // coqueiro
       for (let k = 0; k < 42 * s; k++) { const px = x + Math.round(k * .08 * s), py = base - k; R(c, px - 2, py, 5, 1, k % 5 === 0 ? '#5f4530' : '#79553b'); R(c, px - 2, py, 1, 1, '#98704b'); }
-      const tx = x + Math.round(42 * .08 * s * s), ty = base - Math.round(42 * s), sw = Math.sin(t * 1.4 + seed) * 1.5;
+      const tx = x + Math.round(42 * .08 * s * s), ty = base - Math.round(42 * s), sw = Math.sin(t * (1.4 + shake * 6) + seed) * (1.5 + shake * 4);
       for (let i = 0; i < 8; i++) { const a = -Math.PI + .2 + i * .39, len = 30 * s; for (let k = 0; k <= len; k++) { const u = k / len, px = tx + Math.cos(a) * k + sw * u, py = ty + Math.sin(a) * k * .55 + u * u * 16 * s; R(c, px, py, 2, 1, i % 2 ? '#367c42' : '#64a147'); if (k % 2 === 0) R(c, px, py + 1, 1, 2 + Math.round(u * 3), i % 2 ? '#2c6838' : '#4f8f3f'); } }
       ell(c, tx - 1, ty + 2, 2, 2, '#5a3f2a'); ell(c, tx + 3, ty + 3, 2, 2, '#6a4a30'); return;
     }
     const th = 46 * s; R(c, x - 4 * s, base - th, 8 * s, th, '#674c36'); R(c, x - 4 * s, base - th, 2 * s, th, '#896241'); R(c, x + 2 * s, base - th, 2 * s, th, '#4f3a29'); for (let k = 0; k < 6; k++) R(c, x - 2 * s + hash(k + seed) * 4 * s, base - 6 - k * 7 * s, 1, 3, '#4f3a29');
     R(c, x - 6 * s, base - 2, 12 * s, 2, '#5a4230'); R(c, x - 9 * s, base - 30 * s, 6 * s, 3, '#674c36'); R(c, x + 4 * s, base - 36 * s, 8 * s, 3, '#674c36');
     const CL = [[0, -58, 19], [-18, -50, 15], [18, -52, 15], [-9, -70, 15], [11, -72, 14], [0, -82, 13], [-25, -62, 11], [25, -64, 11]];
-    const sway = (i) => Math.round(Math.sin(t * 1.3 + seed + i * 1.7) * 1.4);
+    const sway = (i) => Math.round(Math.sin(t * (1.3 + shake * 9) + seed + i * 1.7) * (1.4 + shake * 3.2));
     CL.forEach((p, i) => ell(c, x + p[0] * s + sway(i), base + p[1] * s + 3, p[2] * s, p[2] * s * .92, '#2a5f36'));
     CL.forEach((p, i) => ell(c, x + p[0] * s + sway(i), base + p[1] * s, p[2] * s, p[2] * s * .9, '#3f8a45'));
     CL.forEach((p, i) => ell(c, x + p[0] * s + sway(i) - lean * 4 * s, base + p[1] * s - 4 * s, p[2] * s * .62, p[2] * s * .5, '#56a64c'));
     CL.forEach((p, i) => ell(c, x + p[0] * s + sway(i) - lean * 7 * s, base + p[1] * s - 7 * s, p[2] * s * .3, p[2] * s * .2, '#7cc85a'));
     for (let i = 0; i < 46; i++) { const p = CL[i % 8], a = hash(i + seed) * 6.28, r = hash(i + seed + 3) * p[2] * s * .85, px = x + p[0] * s + Math.cos(a) * r + sway(i % 8), py = base + p[1] * s + Math.sin(a) * r * .9; R(c, px, py, 2, 1, i % 3 ? '#2f6b3c' : '#8fd468'); if (i % 9 === 0) { R(c, px, py + 1, 2, 2, '#f0a030'); R(c, px, py + 1, 1, 1, '#ffd070'); } }
+    if (snow > .05) { const a = Math.min(1, snow * 1.3); CL.forEach((p, i) => { if (p[1] > -55) return; const cx = x + p[0] * s + sway(i), cy = base + p[1] * s - p[2] * s * .62; ell(c, cx, cy + 1, p[2] * s * .78, Math.max(1.5, p[2] * s * .26 * a), `rgba(150,170,205,${.7 * a})`); ell(c, cx, cy, p[2] * s * .74, Math.max(1.2, p[2] * s * .22 * a), `rgba(250,252,255,${a})`); }); R(c, x - 9 * s, base - 31 * s, 6 * s, 1, `rgba(250,252,255,${a})`); R(c, x + 4 * s, base - 37 * s, 8 * s, 1, `rgba(250,252,255,${a})`); }
   }
   const FARM_TREES = [[26, 212, 1.25, 0], [267, 212, .78, 1], [397, 212, 1.12, 0], [695, 213, 1.2, 1], [905, 214, 1.2, 0], [1220, 215, 1.3, 0]];
   { for (let x = 1295, i = 0; x < 2400; x += 122.5, i++) if (i % 3 === 0) FARM_TREES.push([x + 74, 215, .8 + (i % 2) * .2, i % 2]); }
@@ -148,7 +194,7 @@
   function sunInfo(s) { const T = s.sunT !== null ? s.sunT : s.moonT; if (T === null) return { lean: 0, str: 0 }; return { lean: (0.5 - T) * 2, str: s.sunT !== null ? cl(Math.sin(s.sunT * Math.PI) * 1.4 + .15) : .3 * Math.sin(s.moonT * Math.PI) }; }
   // Áreas de sombra no chão (em pixels de arte, relativos à tela) registradas a cada quadro:
   // usadas por hero-shadow.js para escurecer Da Roça quando ele passa na frente de árvores e casas.
-  let SHADE = [], shadeCam = 0, shadeScene = -1;
+  let SHADE = [], shadeCam = 0, shadeScene = -1, treeCam = 0;
   const shadeAdd = (x0, x1, k, leaves) => { if (x1 - x0 > 4) SHADE.push([Math.min(x0, x1), Math.max(x0, x1), k, !!leaves]); };
   function shadeAt(scene, worldX) {
     if (scene !== shadeScene) return { k: 0, leaves: false };
@@ -178,9 +224,10 @@
     if (!far) far = buildFar(); if (!mids[0]) mids[0] = buildFarmMid();
     sky(c, s, t, camL);
     const sun = sunInfo(s), lean = sun.lean, la = Math.min(1, Math.abs(lean) * 1.3) * sun.str, rel = far[lean >= 0 ? 3 : 4];
-    [.04, .1, .22].forEach((p, i) => { tile(c, far[i], camL * p); if (la > .03) { c.globalAlpha = la; tile(c, rel[i], camL * p); c.globalAlpha = 1; } });
+    [.04, .1, .22].forEach((p, i) => { tile(c, far[i], camL * p); if (la > .03) { c.globalAlpha = la; tile(c, rel[i], camL * p); c.globalAlpha = 1; } if (i === 1) haze(c, s, t, camL, 120, 200); });
     for (const hx of FARM_HOUSES) { const x = hx - camL + 66; if (x < -30 || x > LW + 30) continue; for (let i = 0; i < 6; i++) { const k = (t * .22 + i / 6) % 1; c.fillStyle = `rgba(235,235,230,${(1 - k) * .5})`; const r = 2 + k * 4; c.fillRect(Math.round(x + Math.sin(t + i * 2) * 3 * k + k * 10 - r / 2), Math.round(119 - k * 34), Math.round(r), Math.round(r * .8)); } }
     c.drawImage(mids[0], camL, 0, LW, LH, 0, 0, LW, LH);
+    { const snow = window.Weather?.state?.()?.cover || 0; if (snow > .05) { const a = Math.min(1, snow * 1.3); for (const hx of FARM_HOUSES) { const x = hx - camL; if (x < -140 || x > LW + 40) continue; for (let r2 = 0; r2 < 4; r2++) { const k = r2 / 10, xa = x + 8 - k * 18, xb = x + 78 + k * 24; R(c, xa, 136 + r2 * 2, xb - xa, 2, `rgba(250,252,255,${a * (1 - r2 * .2)})`); } R(c, x + 50, 112, 13, 2, `rgba(250,252,255,${a})`); } } }
     // sombras projetadas no chão: acompanham o sol (compridas cedo e no fim da tarde)
     if (sun.str > .04) { const sh = `rgba(18,30,52,${.30 * sun.str})`, reach = lean * (14 + Math.abs(lean) * 26);
       for (const hx of FARM_HOUSES) { const x = hx - camL; if (x > -160 && x < LW + 160) { slant(c, x - 3, x + 94, 215, reach * 1.6, 5, sh); shadeAdd(x - 3 + reach * 1.6, x + 94 + reach * 1.6, 1); } }
@@ -300,7 +347,7 @@
   function floodlight(c, x, top, lamps) { R(c, x, top, 4, 220 - top, '#4b6260'); R(c, x, top, 1, 220 - top, '#7a918c'); R(c, x + 3, top, 1, 220 - top, '#33474a'); const w = lamps * 6 + 4; R(c, x + 2 - w / 2 - 1, top - 9, w + 2, 10, '#27383a'); R(c, x + 2 - w / 2, top - 8, w, 8, '#3e5354'); for (let k = 0; k < lamps; k++) { R(c, x + 4 - w / 2 + k * 6, top - 7, 5, 5, '#e9d8a2'); R(c, x + 4 - w / 2 + k * 6, top - 7, 5, 1, '#fff6d0'); } for (let y = top + 14; y < 214; y += 22) R(c, x - 1, y, 6, 1, '#33474a'); }
   function floodBeam(g, x, top, a, reach) { if (a < .02) return; lightAdd(x + 2, top - 4, a, reach); const gr = g.createLinearGradient(0, top, 0, 262); gr.addColorStop(0, `rgba(235,240,255,${.34 * a})`); gr.addColorStop(1, `rgba(235,240,255,${.04 * a})`); g.fillStyle = gr; g.beginPath(); g.moveTo(x - 8, top - 4); g.lineTo(x + 12, top - 4); g.lineTo(x + reach, 262); g.lineTo(x - reach + 4, 262); g.closePath(); g.fill(); const b = g.createRadialGradient(x + 2, top - 4, 1, x + 2, top - 4, 30); b.addColorStop(0, `rgba(255,250,225,${.9 * a})`); b.addColorStop(1, 'rgba(255,250,225,0)'); g.fillStyle = b; g.fillRect(x - 30, top - 36, 64, 64); g.save(); g.translate(x + 2, 232); g.scale(1, .3); const p = g.createRadialGradient(0, 0, 0, 0, 0, reach); p.addColorStop(0, `rgba(235,240,255,${.3 * a})`); p.addColorStop(1, 'rgba(235,240,255,0)'); g.fillStyle = p; g.fillRect(-reach, -reach, reach * 2, reach * 2); g.restore(); }
   function board(c, x, y, w, h, col, edge) { R(c, x - 1, y - 1, w + 2, h + 2, edge); R(c, x, y, w, h, col); R(c, x, y, w, 1, 'rgba(255,255,255,.2)'); for (const [bx, by] of [[x + 1, y + 1], [x + w - 2, y + 1], [x + 1, y + h - 2], [x + w - 2, y + h - 2]]) R(c, bx, by, 1, 1, '#d9cc9e'); }
-  function backdrop(c, s, t, camL, cityKey) { if (!far) far = buildFar(); const sun = sunInfo(s), la = Math.min(1, Math.abs(sun.lean) * 1.3) * sun.str, rel = far[sun.lean >= 0 ? 3 : 4]; sky(c, s, t, camL); tile(c, far[0], camL * .04); if (la > .03) { c.globalAlpha = la; tile(c, rel[0], camL * .04); c.globalAlpha = 1; } tile(c, far[1], camL * .1 + 300); if (la > .03) { c.globalAlpha = la; tile(c, rel[1], camL * .1 + 300); c.globalAlpha = 1; } tile(c, city(cityKey[0], cityKey[1])[0], camL * .07); return sun; }
+  function backdrop(c, s, t, camL, cityKey) { if (!far) far = buildFar(); const sun = sunInfo(s), la = Math.min(1, Math.abs(sun.lean) * 1.3) * sun.str, rel = far[sun.lean >= 0 ? 3 : 4]; sky(c, s, t, camL); tile(c, far[0], camL * .04); if (la > .03) { c.globalAlpha = la; tile(c, rel[0], camL * .04); c.globalAlpha = 1; } tile(c, far[1], camL * .1 + 300); if (la > .03) { c.globalAlpha = la; tile(c, rel[1], camL * .1 + 300); c.globalAlpha = 1; } haze(c, s, t, camL, 110, 190); tile(c, city(cityKey[0], cityKey[1])[0], camL * .07); return sun; }
 
   // ------------------------------------------------------------------------------- QUADRA (mapa 3)
   const COURT_HOOPS = [150, 1100], COURT_FLOODS = [[42, 61, 3], [1225, 61, 3]]; { for (let x = 1350; x < 2600; x += 210) COURT_FLOODS.push([x, 101, 4]); }
@@ -1119,17 +1166,40 @@
   function draw(c, scene, camera, t) {
     if (!handles(scene)) return false;
     const s = window.DayTime.state(), camL = Math.floor(camera / 2), sub = Math.round(camera) - camL * 2;
-    lc.clearRect(0, 0, LW, LH); SHADE = []; shadeCam = camL; shadeScene = scene; MAPS[scene].draw(lc, s, t, camL);
+    lc.clearRect(0, 0, LW, LH); SHADE = []; shadeCam = camL; shadeScene = scene; TREES = []; treeCam = camL; treeScene = scene; MAPS[scene].draw(lc, s, t, camL); { const dt = Math.max(0, Math.min(.1, t - lastLeafT)); lastLeafT = t; leavesDraw(lc, camL, t, dt); }
     c.save(); c.imageSmoothingEnabled = false; c.drawImage(low, -sub, 0, LW * 2, LH * 2); c.restore();
     lastCam = camera; lastT = t; MAPS[scene].text?.(c, camera); return true;
   }
   // luz da hora do dia sobre o cenário pronto (chamado depois das pontes); personagens ficam de fora
+  // Luz direcional do sol sobre o cenário inteiro (todas as qualidades com mapa HD; mais suave com o shader,
+  // que já faz a correção de cor): lado do sol quente, lado oposto frio, brilho no ar perto do sol e luz
+  // rasante no chão na hora dourada.
+  function dirLight(c, s) {
+    if (s.sunT === null) return; const sun = sunInfo(s); if (sun.str < .05) return;
+    const wx = window.Weather?.state?.() || {}, cloud = cl(1 - (wx.rain || 0) * .8 - (wx.snow || 0) * .4 - (wx.dust || 0) * .2);
+    const up = Math.sin(s.sunT * Math.PI), gold = cl(1 - up * 1.7), k = (window.Graphics?.isShader?.() ? .55 : 1) * cloud * cl(sun.str);
+    if (k < .03) return;
+    const camL = Math.floor(lastCam / 2), sx = (40 + s.sunT * 400 - camL * .012) * 2, sy = (168 - up * 128) * 2;
+    c.globalCompositeOperation = 'soft-light';
+    const far = sx < 480 ? 1060 : -100, g = c.createLinearGradient(sx, 0, far, 0);
+    g.addColorStop(0, `rgba(255,${Math.round(214 - 70 * gold)},${Math.round(150 - 80 * gold)},${(.30 + .30 * gold) * k})`);
+    g.addColorStop(.55, 'rgba(128,128,128,0)');
+    g.addColorStop(1, `rgba(${Math.round(70 + 40 * gold)},${Math.round(92 - 10 * gold)},170,${(.22 + .18 * gold) * k})`);
+    c.fillStyle = g; c.fillRect(0, 0, 960, 540);
+    c.globalCompositeOperation = 'screen';
+    const r = c.createRadialGradient(sx, sy, 0, sx, sy, 560);
+    r.addColorStop(0, `rgba(255,${Math.round(200 - 50 * gold)},${Math.round(140 - 60 * gold)},${(.16 + .16 * gold) * k})`); r.addColorStop(1, 'rgba(255,200,140,0)');
+    c.fillStyle = r; c.fillRect(0, 0, 960, 540);
+    if (gold > .05) { const gr = c.createLinearGradient(0, 360, 0, 452); gr.addColorStop(0, 'rgba(255,170,90,0)'); gr.addColorStop(.8, `rgba(255,170,90,${.10 * gold * k})`); gr.addColorStop(1, 'rgba(255,170,90,0)'); c.fillStyle = gr; c.fillRect(0, 360, 960, 92); }
+    c.globalCompositeOperation = 'multiply';
+  }
   function finish(c, scene) {
     if (!handles(scene)) return;
     const s = window.DayTime.state(), camL = Math.floor(lastCam / 2), sub = Math.round(lastCam) - camL * 2;
     c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = css(MAPS[scene].amb ? MAPS[scene].amb(s) : s.amb); c.fillRect(0, 0, 960, 540);
+    if (!MAPS[scene].amb) dirLight(c, s);
     LIGHTS = []; lightCam = camL; lightScene = scene; if (MAPS[scene].lights) { lg.clearRect(0, 0, LW, LH); MAPS[scene].lights(lg, s, lastT, camL); c.globalCompositeOperation = 'lighter'; c.imageSmoothingEnabled = false; c.drawImage(lightCv, -sub, 0, LW * 2, LH * 2); }
     c.restore();
   }
-  window.HdMaps = Object.freeze({ lightsAt: (scene, x) => { try { return lightsAt(Number(scene), Number(x) || 0); } catch (e) { return []; } }, shadeAt: (scene, x) => { try { return shadeAt(Number(scene), Number(x) || 0); } catch (e) { return { k: 0, leaves: false }; } }, sun: () => { try { return sunInfo(window.DayTime.state()); } catch (e) { return { lean: 0, str: 0 }; } }, drawRoom: (c, id, t) => { try { return drawRoom(c, id, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, arenaHandles, drawArena: (c, type, camera, t, homeX) => { try { drawArena(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); return true; } catch (e) { window.__hdMapsError = e; return false; } }, arenaFront: (c, type, camera, t, homeX, blend) => { try { arenaFront(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) { window.__hdMapsError = e; } }, handles, darkness: (c, scene, camera, t, hx, hy, facing) => { try { darkness(c, Number(scene), Number(camera) || 0, Number(t) || 0, Number(hx) || 0, Number(hy) || 0, facing); } catch (e) {} }, draw: (c, scene, camera, t) => { try { return draw(c, Number(scene), Number(camera) || 0, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, finish: (c, scene) => { try { finish(c, Number(scene)); } catch (e) {} }, maps: Object.keys(MAPS).map(Number) });
+  window.HdMaps = Object.freeze({ leaves: () => ({ caindo: LEAVES.length, balancando: RUSTLE.size }), touch: (scene, x, y, vx, vy) => { try { touch(Number(scene), +x || 0, +y || 0, +vx || 0, +vy || 0); } catch (e) {} }, lightsAt: (scene, x) => { try { return lightsAt(Number(scene), Number(x) || 0); } catch (e) { return []; } }, shadeAt: (scene, x) => { try { return shadeAt(Number(scene), Number(x) || 0); } catch (e) { return { k: 0, leaves: false }; } }, sun: () => { try { return sunInfo(window.DayTime.state()); } catch (e) { return { lean: 0, str: 0 }; } }, drawRoom: (c, id, t) => { try { return drawRoom(c, id, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, arenaHandles, drawArena: (c, type, camera, t, homeX) => { try { drawArena(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); return true; } catch (e) { window.__hdMapsError = e; return false; } }, arenaFront: (c, type, camera, t, homeX, blend) => { try { arenaFront(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) { window.__hdMapsError = e; } }, handles, darkness: (c, scene, camera, t, hx, hy, facing) => { try { darkness(c, Number(scene), Number(camera) || 0, Number(t) || 0, Number(hx) || 0, Number(hy) || 0, facing); } catch (e) {} }, draw: (c, scene, camera, t) => { try { return draw(c, Number(scene), Number(camera) || 0, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, finish: (c, scene) => { try { finish(c, Number(scene)); } catch (e) {} }, maps: Object.keys(MAPS).map(Number) });
 })();

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main, 'claude/**']
-    paths: ['dist/**', 'native/android/**', '.github/workflows/android.yml']
+    paths: ['dist/**', 'native/android/**', '.github/workflows/android.yml', '.github/scripts/**']
 
 permissions:
   contents: write
@@ -31,6 +31,9 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
+
+      - name: Lista de músicas (dist/musicas)
+        run: python3 .github/scripts/musicas.py
 
       - name: Colocar o jogo e o ícone dentro do app
         run: |

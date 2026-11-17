@@ -75,6 +75,16 @@ docker build -f server/Dockerfile -t daroca .
 docker run -p 8080:8080 daroca
 ```
 
+## Manter o servidor do Render atualizado
+
+O Render só publica sozinho quando está ligado ao repositório. Para atualizar a cada merge:
+
+1. **Pegue o endereço secreto no Render:** abra o serviço **daroca-online** → **Settings** → **Deploy Hook** e copie o endereço.
+2. **Guarde no GitHub:** no repositório, vá em **Settings → Secrets and variables → Actions → New repository secret**, crie o nome `RENDER_DEPLOY_HOOK` e cole o endereço como valor. O endereço é secreto: não cole em lugar nenhum além desse.
+3. **Pronto.** O workflow **Atualizar servidor (Render)** avisa o Render a cada merge no `main`.
+
+Sem isso, dá para atualizar à mão: no serviço do Render, **Manual Deploy → Deploy latest commit**.
+
 ## Ligar o site do GitHub Pages e os apps ao servidor
 
 Quem abre o jogo pelo próprio endereço do servidor já está pronto. Para o site do GitHub Pages, o APK e o IPA usarem o servidor:

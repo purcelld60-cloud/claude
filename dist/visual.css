@@ -26,3 +26,9 @@
 .visual-panel .vp-actions button{font:9px Pixel,monospace;min-height:40px;padding:0 16px;border:6px solid transparent;border-image:var(--px-paper,linear-gradient(#e4d7a2,#e4d7a2)) 3 fill / 6px / 0 stretch;background:none;color:#5d4728;cursor:pointer}
 .visual-panel .vp-actions .vp-done{border-image:var(--px-green,linear-gradient(#8ea25c,#8ea25c)) 3 fill / 6px / 0 stretch;color:#fff2bd}
 @media (max-width:640px),(max-height:440px){.visual-panel .vp-mirror{width:110px}.visual-panel .vp-mirror canvas{width:104px;height:120px}.visual-panel .vp-row>span{width:auto;flex-basis:100%}.visual-panel .vp-opt{min-height:26px;padding:3px 5px}.visual-panel .vp-swatch{width:26px;height:26px}}
+/* Balanço da roça (balanco.js): só a vista, sem interface */
+.game-shell.is-balanco .touch-controls,.game-shell.is-balanco .game-topbar,.game-shell.is-balanco .hud-min-left,.game-shell.is-balanco .scene-chip,.game-shell.is-balanco .controls-bar,.game-shell.is-balanco .screen-fit-tools{visibility:hidden}
+.balanco-ui{position:absolute;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom));z-index:40;display:flex;justify-content:center;align-items:center;gap:14px;pointer-events:none}
+.balanco-ui[hidden]{display:none}
+.balanco-ui .bl-hora{font:9px Pixel,monospace;color:#ffe2a8;text-shadow:2px 2px #1a0e06;letter-spacing:.5px}
+.balanco-ui .bl-sair{pointer-events:auto;font:8px Pixel,monospace;padding:8px 14px;border:6px solid transparent;border-image:var(--px-paper,linear-gradient(#e4d7a2,#e4d7a2)) 3 fill / 6px / 0 stretch;background:none;color:#5d4728;cursor:pointer}

@@ -1,0 +1,38 @@
+# ============================================================
+#  MÚSICAS DO DA ROÇA: qual música toca em cada lugar
+# ============================================================
+# 1. Coloque o arquivo de música (.mp3, .ogg ou .m4a) nesta pasta (dist/musicas).
+# 2. Escreva uma linha:  lugar = nome-do-arquivo.mp3
+# 3. Envie para o GitHub. O site, o APK e o IPA são gerados de novo sozinhos.
+#
+# Atalho: se o arquivo tiver o nome do lugar (ex.: roca.mp3, chefe-marco.ogg),
+# ele já toca lá sem precisar escrever nada aqui.
+#
+# Opções no fim da linha (todas opcionais):
+#   volume=0.8   (0 a 1)          fade=2      (segundos de transição)
+#   inicio=12    (começa no seg. 12)  atraso=1  (espera 1 s, só em cutscenes)
+#   sem-repetir  (toca uma vez só)
+#
+# LUGARES:
+#   menu, pausa, derrota, fim, comemoracao
+#   roca, escola, academia, quadra, praca, favela, caderno (Reino de Tinta),
+#   campo, bigodon, patio, rayssa, baile, sala-almiro, sala-miqueias
+#   chefe-marco, chefe-menezes, chefe-nikolas, chefe-reeis, chefe-freddy,
+#   chefe-nicolas, chefe-dede, chefe-arthur, chefe-colosso, chefe-igor,
+#   chefe-kaique, chefe-ollyan   (por fase: chefe-nikolas-fase2 ...)
+#   apresentacao-marco ... (a cutscene antes de cada chefe)
+#   cutscene-abertura, cutscene-intro, cutscene-creditos, cutscene-chegada_praca ...
+#   arena, arena-menu, arena-resultado, dupla, dupla-marco ...
+#   fliperama, fliperama-minhoca, fliperama-pong, fliperama-quebra, fliperama-cabo,
+#   fliperama-chinelo, fliperama-galo, fliperama-memoria, fliperama-tiro,
+#   fliperama-corrida, fliperama-subida
+#   conversa-davi, conversa-lucas ... (quando conversa com alguém)
+#   ambiente-roca, ambiente-praca, ambiente-favela ... (som de fundo da fase,
+#   no lugar do ambiente que o jogo faz sozinho)
+#
+# EXEMPLOS (tire o # do começo para usar):
+# roca = tema-da-roca.mp3
+# chefe-marco = batalha-do-caderno.ogg volume=0.9 fade=1
+# fliperama = fliperama.mp3
+# cutscene-creditos = creditos.mp3 sem-repetir
+# ambiente-praca = rio-e-cidade.ogg

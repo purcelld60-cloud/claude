@@ -39,6 +39,8 @@
   }
   return c;
  }
+ // Pasta de músicas (musicas.js): as faixas da pasta somam com a configuração e os lugares de musicas.txt mandam.
+ function mergeLocal(c,local){if(!local||!c||(!local.tracks.length&&!Object.keys(local.bindings).length))return c;const out={...c,tracks:c.tracks.concat(local.tracks.filter(t=>!c.tracks.some(x=>x.id===t.id))),bindings:Object.assign(Object.create(null),c.bindings,local.bindings)};return out;}
  function readCache(){if(isNative)return null;try{const cached=JSON.parse(localStorage.getItem(CONFIG_CACHE)||'null');return cached&&Date.now()-cached.at<DAY?normaliseConfig(cached.config):null;}catch{return null;}}
  function saveCache(c){try{localStorage.setItem(CONFIG_CACHE,JSON.stringify({at:Date.now(),config:c}));}catch{}}
  async function fetchConfig(url){const controller=typeof AbortController==='function'?new AbortController():null,timer=setTimeout(()=>controller?.abort(),6000);try{const r=await fetch(url,{cache:'no-store',credentials:'same-origin',signal:controller?.signal});if(!r.ok)throw Error('HTTP '+r.status);return normaliseConfig(await r.json());}finally{clearTimeout(timer);}}
@@ -48,10 +50,11 @@
   const generation=++loadGeneration;
   loading=(async()=>{
    let bundled=null;try{if(window.DAROCA_MUSIC_CONFIG)bundled=normaliseConfig(window.DAROCA_MUSIC_CONFIG);else bundled=await fetchConfig('music/config.json');}catch(e){configError='Não foi possível ler a configuração incluída no jogo.';}
+   let local=null;try{local=await window.DarocaMusicas?.load?.();}catch{}if(local)bundled=mergeLocal(bundled||empty(),local);
    if(generation!==loadGeneration)return getStatus();
-   const cached=readCache();if(bundled||cached)applyConfig(cached&&(!bundled||cached.revision>=bundled.revision)?cached:bundled,cached&&(!bundled||cached.revision>=bundled.revision)?'cache':'bundled');
+   const cached=mergeLocal(readCache(),local);if(bundled||cached)applyConfig(cached&&(!bundled||cached.revision>=bundled.revision)?cached:bundled,cached&&(!bundled||cached.revision>=bundled.revision)?'cache':'bundled');
    if(!isNative&&isWeb&&!window.DAROCA_LAN){
-    try{const remote=await fetchConfig('/api/music/config');if(generation===loadGeneration){lastRemoteAt=Date.now();applyConfig(remote,'remote');saveCache(remote);}}
+    try{const remote=await fetchConfig('/api/music/config');if(generation===loadGeneration){lastRemoteAt=Date.now();applyConfig(mergeLocal(remote,local),'remote');saveCache(remote);}}
     catch(e){if(!ready){ready=true;source='bundled';}configError='A configuração online não respondeu; usando as trilhas disponíveis neste aparelho.';}
    }else if(!ready)ready=true;
    return getStatus();
@@ -138,7 +141,7 @@
   if(party?.open){if(party.view!=='live')return['party.menu','menu.title'];if(party.phase==='board')return['party.board','party.menu'];if(party.phase==='ceremony')return['party.ceremony','party.menu'];if(party.phase==='results')return['party.results',party.game?'party.'+party.game:'party.menu','party.menu'];return[party.game?'party.'+party.game:'party.menu','party.menu'];}
   try{coop=window.CoopArena?.getStatus?.();}catch{}
   if(coop?.open){if(!coop.stage)return['coop.menu','menu.title'];if(coop.stage==='victory')return['events.celebration','coop.menu'];if(coop.stage==='defeat')return['events.defeat','coop.menu'];return[coop.boss?.type?'coop.'+coop.boss.type:'coop.menu','coop.menu'];}
-  if(window.Fliperama?.isOpen?.())return['minigames.fliperama','activities.memory','menu.title'];try{state=window.Game?.getAudioState?.();lastAudioState=state||null;}catch{}
+  if(window.Fliperama?.isOpen?.()){const g=window.Fliperama.current?.();return[...(g?['minigames.fliperama.'+g]:[]),'minigames.fliperama','activities.memory','menu.title'];};try{state=window.Game?.getAudioState?.();lastAudioState=state||null;}catch{}
   if(!state)return['menu.title'];
   const map='maps.'+(SCENES[Number(state.scene)]||SCENES[0]);
   if(state.chapterEnded)return['events.chapter_end'];
@@ -163,7 +166,7 @@
    const cutsceneKind=lastAudioState?.cutscene,legacyCue=key==='events.'+cutsceneKind&&(binding.startSeconds!==undefined||binding.delaySeconds!==undefined),cutscene=!!(cutsceneKind&&(key==='cutscenes.'+cutsceneKind||legacyCue))||!!(override&&key.startsWith('cutscenes.'));
    const startSeconds=binding.startSeconds||0,delaySeconds=cutscene?binding.delaySeconds||0:0,token=cutscene?(override?'override-'+overrideSerial:lastAudioState?.cutsceneToken??cutsceneKind):null;
    matchedContext=key;
-   return{track,key,src:isNative?track.file:track.url||track.file,loop:binding.loop===undefined?track.loop:binding.loop,volume:clamp(config.masterVolume*track.volume*(binding.volume===undefined?1:binding.volume),0,1),fadeMs:binding.fadeMs===undefined?track.fadeMs:binding.fadeMs,startSeconds,delaySeconds,cutscene,token,elapsed:cutscene?Math.max(0,number(lastAudioState?.cutsceneElapsed,0)):0,index:cutscene?lastAudioState?.cutsceneIndex??0:null,cueKey:cutscene?'film|'+token+'|'+key+'|'+startSeconds+'|'+delaySeconds:startSeconds>0?'offset|'+track.id+'|'+startSeconds:null};
+   return{track,key,src:isNative?track.file:track.url||track.file,loop:binding.loop===undefined?track.loop:binding.loop,volume:clamp(config.masterVolume*track.volume*(binding.volume===undefined?1:binding.volume)*(window.DarocaAudio?.music?.()??1),0,1),fadeMs:binding.fadeMs===undefined?track.fadeMs:binding.fadeMs,startSeconds,delaySeconds,cutscene,token,elapsed:cutscene?Math.max(0,number(lastAudioState?.cutsceneElapsed,0)):0,index:cutscene?lastAudioState?.cutsceneIndex??0:null,cueKey:cutscene?'film|'+token+'|'+key+'|'+startSeconds+'|'+delaySeconds:startSeconds>0?'offset|'+track.id+'|'+startSeconds:null};
   }
   matchedContext=null;return null;
  }
@@ -252,6 +255,8 @@
  window.addEventListener('storage',e=>{if(e.key==='daroca-music-revision')reload();});
  try{if(typeof BroadcastChannel==='function'){const channel=new BroadcastChannel('daroca-music');channel.addEventListener('message',e=>{if(e.data?.type==='config-updated')reload();});}}catch{}
  const title=document.getElementById('startScreen'),sourceButton=document.getElementById('soundBtn');if(title&&sourceButton&&typeof title.append==='function'&&!document.getElementById('menuMusicBtn')){const button=document.createElement('button');button.id='menuMusicBtn';button.type='button';button.className='menu-music-control';button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13M9 9l11-2"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><small>SOM</small>';const reflect=()=>{const on=sourceButton.getAttribute('aria-pressed')==='true';button.setAttribute('aria-pressed',String(on));button.setAttribute('aria-label',on?'Desativar músicas e efeitos':'Ativar músicas e efeitos');};button.addEventListener('click',()=>sourceButton.click());title.append(button);if(typeof MutationObserver==='function')new MutationObserver(reflect).observe(sourceButton,{attributes:true,attributeFilter:['aria-pressed']});reflect();}
+ // mexer no volume de música aplica na hora
+ try{window.DarocaAudio?.onChange?.(()=>{lastAttempt='';syncSelection(true);});}catch{}
  window.GameMusic=Object.freeze({hasSelection:()=>enabled&&!!desired,version:'3.7.0',isCutsceneTimed,unlock,setEnabled,isPlaying,getStatus,reload,setContext});
  // Retry pending browser autoplay on the first real interaction, without waiting
  // for the remote configuration request or requiring a second tap on the speaker.

@@ -73,7 +73,10 @@
   function dust(S, x, y, n, col = 'rgba(214,196,160,.8)') { for (let i = 0; i < n; i++) S.fx.push({ k: 'puff', x: x + (Math.random() - .5) * 26, y: y - Math.random() * 8, vx: (Math.random() - .5) * 90, vy: -20 - Math.random() * 40, s: 4 + Math.random() * 6, col, life: .7 + Math.random() * .4, max: 1.1 }); }
   function drops(S, x, y, n, power = 1) { for (let i = 0; i < n; i++) S.fx.push({ k: 'drop', x: x + (Math.random() - .5) * 16, y, vx: (Math.random() - .5) * 220 * power, vy: -(120 + Math.random() * 200) * power, s: 2, col: Math.random() > .5 ? '#bfe6f6' : '#e8f8ff', life: .9 }); }
   function sparks(S, x, y, n, col = '#ffd27a') { for (let i = 0; i < n; i++) S.fx.push({ k: 'spark', x, y, vx: (Math.random() - .5) * 300, vy: -60 - Math.random() * 260, s: 2, col: i % 3 ? col : '#fff6d0', life: .5 + Math.random() * .5 }); }
-  function say(S, x, y, txt, col = '#fff0c4') { S.texts.push({ x, y, txt, col, life: 1.1 }); }
+  // cada onomatopeia tem seu som (audio.js); um som por vez a cada 60 ms para não embolar
+  const SOUND = { 'CRAC!': 'quebra', 'CRÁS!': 'quebra', 'BLAM!': 'quebra', 'PLAFT!': 'quebra', 'SPLOC!': 'agua', 'TÁC!': 'tac', 'FUFF!': 'fogo', 'LIGOU!': 'alavanca', 'DESLIGOU': 'alavanca' }; let lastSound = 0;
+  function sound(name) { const t = performance.now(); if (t - lastSound < 60) return; lastSound = t; try { window.DarocaAudio?.play?.(name); } catch (e) {} }
+  function say(S, x, y, txt, col = '#fff0c4') { S.texts.push({ x, y, txt, col, life: 1.1 }); const snd = SOUND[txt] || (String(txt).startsWith('LIGOU') ? 'alavanca' : null); if (snd) sound(snd); }
   function leaves(S, x, n) { for (let i = 0; i < n; i++) S.fx.push({ k: 'leaf', x: x + (Math.random() - .5) * 260, y: 120 + Math.random() * 140, vx: (Math.random() - .5) * 60, vy: 30 + Math.random() * 40, s: 4, col: ['#6aa850', '#c9a24a', '#a8c060', '#d8783a'][i % 4], life: 2.6 + Math.random(), ph: Math.random() * 6 }); }
 
   // ------------------------------------------------------------------ reações
@@ -145,7 +148,7 @@
         q.vy = (q.vy || 0) + 1000 * dt; q.y = Math.min(0, (q.y || 0) + q.vy * dt); if (q.y >= 0 && q.vy > 0) q.vy = q.vy > 140 ? -q.vy * (q.type === 'ball' ? .62 : .25) : 0;
         q.x += q.vx * dt; q.vx *= Math.pow(q.y < 0 ? .9 : (q.type === 'ball' || q.type === 'tire' ? .55 : .12), dt); if (Math.abs(q.vx) < 4) q.vx = 0; q.rot += q.vx * dt / (q.w / 2);
         if (q.x < 20 || q.x > W - 40) { q.x = Math.max(20, Math.min(W - 40, q.x)); q.vx = -q.vx * .5; } }
-      if (q.type === 'door') { const near = Math.abs(p.x - (q.x + q.w / 2)) < (q.kind === 'class' ? 90 : 70) && p.y > FLOOR - 80; q.open += ((near ? 1 : 0) - q.open) * Math.min(1, dt * 6); }
+      if (q.type === 'door') { const near = Math.abs(p.x - (q.x + q.w / 2)) < (q.kind === 'class' ? 90 : 70) && p.y > FLOOR - 80; { const was = q.open; q.open += ((near ? 1 : 0) - q.open) * Math.min(1, dt * 6); if (was < .05 && q.open >= .05) sound('porta'); }; }
       if (q.type === 'lever') q.flip = Math.max(0, q.flip - dt * 3);
       if (q.type === 'puddle') { if (p.x > q.x && p.x < q.x + q.w && p.ground && Math.abs(p.vx || 0) > 60 && Math.random() < dt * 8) { q.ripples.push({ x: p.x, t }); drops(S, p.x, FLOOR, 2, .5); } const rain = window.Weather?.state?.().rain || 0; if (rain > .1 && Math.random() < rain * dt * 10) q.ripples.push({ x: q.x + Math.random() * q.w, t, small: 1 }); q.ripples = q.ripples.filter((r) => t - r.t < 1.2); }
       if (q.type === 'trap') { if (q.armed && Math.abs(p.x - q.x - 9) < 12 && p.ground) snap(S, q, t); if (!q.armed && t - q.t > 8) q.armed = true; }
