@@ -14,7 +14,28 @@
   const cl = (v) => Math.max(0, Math.min(1, v));
   const css = (v, a) => { const s = `${Math.round(cl(v[0]) * 255)},${Math.round(cl(v[1]) * 255)},${Math.round(cl(v[2]) * 255)}`; return a === undefined ? `rgb(${s})` : `rgba(${s},${a})`; };
   const mix = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k];
-  function ell(c, cx, cy, rx, ry, col) { c.fillStyle = col; for (let y = Math.ceil(cy - ry); y <= Math.floor(cy + ry); y++) { const t = (y - cy) / ry, w = rx * Math.sqrt(Math.max(0, 1 - t * t)); const xa = Math.round(cx - w), xb = Math.round(cx + w); c.fillRect(xa, y, Math.max(1, xb - xa), 1); } }
+  // Elipse em pixels de arte. Com cor fixa (#rrggbb) a elipse fica guardada pronta numa imagem pequena
+  // e é desenhada de uma vez (antes eram até 40 retângulos por elipse, milhares por quadro nas copas).
+  // O resultado é igual pixel a pixel: a forma só depende do tamanho e da parte fracionária da posição.
+  const ECACHE = new Map(); let missT = 0, misses = 0;
+  const q4 = (v) => Math.round(v * 4) / 4; // posição e tamanho em 1/4 de pixel de arte (diferença invisível)
+  function ellRows(c, cx, cy, rx, ry, dx, dy) { for (let y = Math.ceil(cy - ry); y <= Math.floor(cy + ry); y++) { const t = (y - cy) / ry, w = rx * Math.sqrt(Math.max(0, 1 - t * t)); const xa = Math.round(cx - w), xb = Math.round(cx + w); c.fillRect(xa + dx, y + dy, Math.max(1, xb - xa), 1); } }
+  function ell(c, cx, cy, rx, ry, col) {
+    c.fillStyle = col;
+    if (ry < 2.5) { ellRows(c, cx, cy, rx, ry, 0, 0); return; }
+    cx = q4(cx); cy = q4(cy); rx = q4(rx); ry = q4(ry);
+    const ix = Math.floor(cx), iy = Math.floor(cy), fx = cx - ix, fy = cy - iy, key = col + '|' + rx + '|' + ry + '|' + fx + '|' + fy;
+    let s = ECACHE.get(key);
+    if (!s) {
+      // muitas formas novas de uma vez (cor ou tamanho mudando a cada quadro): desenha direto, sem guardar
+      const now = performance.now(); if (now - missT > 250) { missT = now; misses = 0; }
+      if (++misses > 60) { ellRows(c, cx, cy, rx, ry, 0, 0); return; }
+      if (ECACHE.size > 1500) ECACHE.clear();
+      const ox = Math.ceil(rx) + 2, oy = Math.ceil(fy - ry), h = Math.floor(fy + ry) - oy + 1, cv = document.createElement('canvas'); cv.width = ox * 2 + 2; cv.height = Math.max(1, h);
+      const g = cv.getContext('2d'); g.fillStyle = col; ellRows(g, fx, fy, rx, ry, ox, -oy); s = { cv, ox, oy }; ECACHE.set(key, s);
+    }
+    c.drawImage(s.cv, ix - s.ox, iy + s.oy);
+  }
   // faixa de transição pontilhada entre duas cores (dithering)
   function limb(c, pts, w, col) { for (let i = 0; i < pts.length - 1; i++) { const a = pts[i], b = pts[i + 1], n = Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1])) + 1; for (let k = 0; k <= n; k++) { const u = k / n; c.fillStyle = col; c.fillRect(Math.round(a[0] + (b[0] - a[0]) * u - w / 2), Math.round(a[1] + (b[1] - a[1]) * u - w / 2), Math.max(1, w), Math.max(1, w)); } } }
   function dither(c, x, y, w, col) { c.fillStyle = col; for (let i = (Math.round(y) & 1); i < w; i += 2) c.fillRect(Math.round(x) + i, Math.round(y), 1, 1); }

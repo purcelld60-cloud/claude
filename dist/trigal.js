@@ -95,10 +95,14 @@
   function stalk(c, s, lite, back) {
     const n = Math.max(6, Math.round(s.h / 2)), ear = Math.min(8, Math.round(n * .3)), ca = Math.cos(s.a * .9), lean = PAL.lean;
     const stem = s.tone < .15 ? PAL.green : back ? (s.tone > .7 ? PAL.stemD : PAL.stemB) : s.tone > .5 ? PAL.stemL : PAL.stemD;
-    let prevX = null;
+    // haste: trechos retos (mesmo x) viram um retângulo só, em vez de um por pixel
+    let runX = null, runBot = 0, runTop = 0;
+    const flush = () => { if (runX !== null) c.fillRect(runX, runTop, 2, runBot - runTop + 2); };
+    c.fillStyle = stem;
     for (let k = 0; k <= n; k++) {
       const u = k / n, off = Math.sin(s.a) * s.h * Math.pow(u, 1.7), x = px2(s.x + off), y = px2(s.base - k * 2 * ca);
-      if (k < n - ear) { c.fillStyle = stem; c.fillRect(x, y, 2, 2); if (prevX !== null && Math.abs(x - prevX) > 2) c.fillRect(Math.min(x, prevX) + 2, y, Math.abs(x - prevX) - 2, 2); prevX = x; continue; }
+      if (k < n - ear) { if (x === runX) { runTop = Math.min(runTop, y); continue; } flush(); if (runX !== null && Math.abs(x - runX) > 2) c.fillRect(Math.min(x, runX) + 2, y, Math.abs(x - runX) - 2, 2); runX = x; runBot = y; runTop = y; continue; }
+      if (k === n - ear) { flush(); runX = null; }
       // espiga: haste central com grãos alternando de lado, curvada para o lado do tombo
       const j = k - (n - ear), ex = x + Math.round(s.a * 2 * (j / ear)) * 2, side = (j + (s.ph * 2 | 0)) % 2 ? -2 : 2;
       c.fillStyle = back ? PAL.earD : PAL.ear; c.fillRect(ex, y, 2, 2);
