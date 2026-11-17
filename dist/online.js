@@ -22,6 +22,11 @@
     if (!configured) { try { const r = await withTimeout(origFetch('servidor.json', { cache: 'no-cache' }), 2500); if (r.ok) configured = norm((await r.json()).url); } catch (e) {} }
     base = configured || ''; return base;
   })();
+  // Plano grátis do Render dorme sem uso e leva ~1 minuto para acordar: assim que o jogo abre,
+  // já chama o servidor em segundo plano (sem esperar), para ele estar acordado quando a pessoa entrar no online.
+  let awake = false;
+  const wake = () => ready.then((b) => { if (!b || awake) return; origFetch(b + '/api/health', { cache: 'no-store', mode: 'cors', credentials: 'omit' }).then((r) => { awake = r.ok; }).catch(() => {}); });
+  wake(); setInterval(() => { awake = false; if (!document.hidden) wake(); }, 10 * 60 * 1000);
   // pedidos da Arena e da Dupla online vão para o servidor configurado
   window.fetch = function (input, init) {
     if (typeof input === 'string' && input.startsWith('/api/arena') && base) { input = base + input; init = { ...(init || {}), mode: 'cors', credentials: 'omit' }; }
@@ -44,7 +49,7 @@
       ws.onclose = () => { clearInterval(pingT); emit('status', { online: false }); if (!closed) retry(); };
       ws.onerror = () => {};
     }
-    function retry() { if (closed) return; tries++; if (tries > 12) { emit('error', { m: 'Não deu para falar com o servidor. Confira a internet.', fatal: true }); return; } clearTimeout(timer); timer = setTimeout(open, Math.min(8000, 400 * 2 ** Math.min(tries, 5))); }
+    function retry() { if (closed) return; tries++; if (tries > 24) { emit('error', { m: 'Não deu para falar com o servidor. Confira a internet.', fatal: true }); return; } clearTimeout(timer); timer = setTimeout(open, Math.min(8000, 400 * 2 ** Math.min(tries, 5))); }
     function kick() { try { ws?.close(); } catch (e) {} } // força reconectar (a vaga na sala continua guardada)
     function close() { closed = true; clearTimeout(timer); clearInterval(pingT); try { if (ws && ws.readyState === 1) ws.send(JSON.stringify({ t: 'leave' })); ws?.close(); } catch (e) {} }
     ready.then(open);

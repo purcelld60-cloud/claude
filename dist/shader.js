@@ -148,5 +148,6 @@ void main(){
       return true;
     } catch (e) { broken = true; return false; }
   }
-  window.Shader = Object.freeze({ apply, supported: () => { if (broken) return false; if (gl) return true; try { const t = document.createElement('canvas'); return !!t.getContext('webgl'); } catch (e) { return false; } } });
+  let canGL = null; // testado uma vez só: criar contexto WebGL a cada pergunta estoura o limite do navegador
+  window.Shader = Object.freeze({ apply, supported: () => { if (broken) return false; if (gl) return true; if (canGL === null) { try { const t = document.createElement('canvas'), x = t.getContext('webgl'); canGL = !!x; x?.getExtension?.('WEBGL_lose_context')?.loseContext?.(); } catch (e) { canGL = false; } } return canGL; } });
 })();
