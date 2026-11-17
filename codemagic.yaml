@@ -1,0 +1,49 @@
+# Codemagic: gera o IPA do Da Roça SEM assinatura (igual ao workflow do GitHub "Gerar IPA").
+# Não usa senha, certificado nem conta da Apple. Para instalar no iPhone, use um instalador
+# que assine ou dispense assinatura (TrollStore, AltStore, SideStore, Sideloadly, ESign...).
+# Passo a passo: docs/CODEMAGIC.md
+workflows:
+  ipa-sem-assinatura:
+    name: IPA sem assinatura
+    instance_type: mac_mini_m2
+    max_build_duration: 40
+    environment:
+      xcode: latest
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+      cancel_previous_builds: true
+    scripts:
+      - name: Lista de músicas (dist/musicas)
+        script: python3 .github/scripts/musicas.py
+      - name: Preparar ícone e projeto
+        script: |
+          cd native/ios
+          sips -s format png -z 1024 1024 ../../dist/assets/app-icon-512.png --out App/Assets.xcassets/AppIcon.appiconset/icon.png
+          which xcodegen || brew install xcodegen
+          xcodegen generate
+      - name: Compilar sem assinatura
+        script: |
+          cd native/ios
+          VERSAO=$(python3 -c "import json;print(json.load(open('../../dist/app-version.json'))['versionName'])")
+          xcodebuild -project DaRoca.xcodeproj -scheme DaRoca -configuration Release \
+            -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
+            MARKETING_VERSION="$VERSAO" CURRENT_PROJECT_VERSION="${BUILD_NUMBER:-1}" \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            build | tail -40
+          test -d build/Build/Products/Release-iphoneos/DaRoca.app
+      - name: Empacotar o IPA
+        script: |
+          cd native/ios
+          VERSAO=$(python3 -c "import json;print(json.load(open('../../dist/app-version.json'))['versionName'])")
+          NOME="DaRoca-${VERSAO}-$(date -u +%Y%m%d)-cm${BUILD_NUMBER:-1}.ipa"
+          rm -rf Payload && mkdir Payload
+          cp -R build/Build/Products/Release-iphoneos/DaRoca.app Payload/
+          test -f Payload/DaRoca.app/dist/index.html
+          zip -qry "$NOME" Payload
+          ls -la *.ipa
+    artifacts:
+      - native/ios/*.ipa
