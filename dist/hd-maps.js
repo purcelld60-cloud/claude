@@ -146,6 +146,16 @@
   const FARM_FENCES = [[0, 56], [166, 157], [393, 107], [540, 210], [785, 340]]; { for (let x = 1295; x < 2400; x += 122.5) FARM_FENCES.push([x, 111]); }
   // sol: de que lado vem a luz (lean > 0 = luz da esquerda, sombras para a direita) e com que força
   function sunInfo(s) { const T = s.sunT !== null ? s.sunT : s.moonT; if (T === null) return { lean: 0, str: 0 }; return { lean: (0.5 - T) * 2, str: s.sunT !== null ? cl(Math.sin(s.sunT * Math.PI) * 1.4 + .15) : .3 * Math.sin(s.moonT * Math.PI) }; }
+  // Áreas de sombra no chão (em pixels de arte, relativos à tela) registradas a cada quadro:
+  // usadas por hero-shadow.js para escurecer Da Roça quando ele passa na frente de árvores e casas.
+  let SHADE = [], shadeCam = 0, shadeScene = -1;
+  const shadeAdd = (x0, x1, k, leaves) => { if (x1 - x0 > 4) SHADE.push([Math.min(x0, x1), Math.max(x0, x1), k, !!leaves]); };
+  function shadeAt(scene, worldX) {
+    if (scene !== shadeScene) return { k: 0, leaves: false };
+    const x = worldX / 2 - shadeCam; let k = 0, leaves = false;
+    for (const [a, b, kk, lv] of SHADE) { const edge = Math.min(x - a, b - x); if (edge <= -3) continue; const v = kk * Math.min(1, (edge + 3) / 7); if (v > k) { k = v; leaves = lv; } }
+    return { k, leaves };
+  }
   function slant(c, x0, x1, y0, dx, h, col) { c.fillStyle = col; for (let r = 0; r < h; r++) c.fillRect(Math.round(x0 + dx * (r + 1) / h), y0 + r, Math.max(1, Math.round(x1 - x0)), 1); }
 
   function farm(c, s, t, camL) {
@@ -157,10 +167,10 @@
     c.drawImage(mids[0], camL, 0, LW, LH, 0, 0, LW, LH);
     // sombras projetadas no chão: acompanham o sol (compridas cedo e no fim da tarde)
     if (sun.str > .04) { const sh = `rgba(18,30,52,${.30 * sun.str})`, reach = lean * (14 + Math.abs(lean) * 26);
-      for (const hx of FARM_HOUSES) { const x = hx - camL; if (x > -160 && x < LW + 160) slant(c, x - 3, x + 94, 215, reach * 1.6, 5, sh); }
+      for (const hx of FARM_HOUSES) { const x = hx - camL; if (x > -160 && x < LW + 160) { slant(c, x - 3, x + 94, 215, reach * 1.6, 5, sh); shadeAdd(x - 3 + reach * 1.6, x + 94 + reach * 1.6, 1); } }
       { const x = 985 - camL; if (x > -160 && x < LW + 160) slant(c, x - 4, x + 82, 219, reach, 3, sh); }
       for (const [fx, fw] of FARM_FENCES) { if (fx - camL > LW + 40 || fx + fw - camL < -40) continue; for (let xx = fx; xx < fx + fw; xx += 16.5) slant(c, xx - camL, xx - camL + 3, 212, reach * .7, 4, sh); slant(c, fx - camL, fx + fw - camL, 214, reach * .5, 2, `rgba(18,30,52,${.14 * sun.str})`); }
-      for (const [tx, base, sc, kind] of FARM_TREES) { const x = tx - camL; if (x < -120 || x > LW + 120) continue; slant(c, x - 2, x + 3, base, reach * .8, 5, sh); ell(c, x + reach * (kind ? 1.5 : 1.2) * sc, base + 4, (kind ? 16 : 24) * sc, 3.2, sh); } }
+      for (const [tx, base, sc, kind] of FARM_TREES) { const x = tx - camL; if (x < -120 || x > LW + 120) continue; slant(c, x - 2, x + 3, base, reach * .8, 5, sh); ell(c, x + reach * (kind ? 1.5 : 1.2) * sc, base + 4, (kind ? 16 : 24) * sc, 3.2, sh); { const cx = x + reach * (kind ? 1.5 : 1.2) * sc, r = (kind ? 16 : 24) * sc; shadeAdd(cx - r, cx + r, .9, true); } } }
     for (const [tx, base, sc, kind] of FARM_TREES) { const x = tx - camL; if (x < -70 || x > LW + 70) continue; tree(c, x, base, sc, kind, t, tx, lean >= 0 ? Math.max(.35, lean) : Math.min(-.35, lean)); }
     // sol batendo nas casas: parede do lado do sol clareia, a outra escurece, e o vidro reflete
     if (sun.str > .04) for (const hx of FARM_HOUSES) { const x = hx - camL; if (x < -120 || x > LW + 20) continue; const a = Math.min(1, Math.abs(lean) * 1.4) * sun.str, litX = lean >= 0 ? x : x + 63, darkX = lean >= 0 ? x + 63 : x;
@@ -318,7 +328,7 @@
       for (let x = Math.floor(camL / 32.5) * 32.5 - 65; x < camL + LW + 65; x += 32.5) slant(c, x - camL, x - camL + 2, 197, reach * 1.6, 12, `rgba(18,30,52,${.12 * sun.str})`);
       for (const x of COURT_HOOPS) { slant(c, x - camL, x - camL + 5, 219, reach, 4, sh); slant(c, x - camL - 30 + reach * 3, x - camL + 6 + reach * 3, 221, reach * .3, 3, sh); }
       for (const [x] of COURT_FLOODS) slant(c, x - camL, x - camL + 4, 219, reach * 1.4, 5, sh);
-      { const x = 356 - camL; if (x > -260 && x < LW + 100) slant(c, x, x + 183, 219, reach * 1.2, 4, sh); } }
+      { const x = 356 - camL; if (x > -260 && x < LW + 100) { slant(c, x, x + 183, 219, reach * 1.2, 4, sh); shadeAdd(x + reach * 1.2, x + 183 + reach * 1.2, .75); } } { const x = 1265 - camL; if (x > -90 && x < LW + 90) { const cx = x + reach * 1.2; ell(c, cx, 221, 18, 2.5, sh); shadeAdd(cx - 18, cx + 18, .9, true); } } }
     { const x = 1265 - camL; if (x > -70 && x < LW + 70) tree(c, x, 218, .8, 0, t, 1265, sun.lean >= 0 ? Math.max(.35, sun.lean) : Math.min(-.35, sun.lean)); } { const x = 55 - camL; if (x > -60) bush(c, x, 50); }
     // bandeirinhas e bola quicando
     { const x0 = 545 - camL; if (x0 < LW && x0 + 485 > 0) { R(c, x0, 99, 485, 1, '#586e65'); for (let i = 0; i < 20; i++) { const x = x0 + 5 + i * 23.5, wv = Math.round(Math.sin(t * 2 + i) * 1.2); for (let k = 0; k < 11; k++) R(c, x + k * .5 + wv * (k / 11), 100 + k, 12 - k, 1, i % 3 === 0 ? '#b87d59' : i % 3 === 1 ? '#879c81' : '#e8c86a'); } } }
@@ -372,7 +382,7 @@
     // torcida nas arquibancadas
     for (let x = 95; x < worldW(7); x += 480) { if (x - camL > LW + 40 || x + 200 - camL < -40) continue; for (let r2 = 0; r2 < 3; r2++) for (let j = 0; j < 15 + r2; j++) { const n = x + r2 * 31 + j * 7, px = Math.round(x - r2 * 8 + 5 + j * 10.4) - camL, bob = Math.round(Math.max(0, Math.sin(t * (4 + hash(n) * 2.5) + n)) * 2), py = 128 + r2 * 10 - bob; R(c, px, py + 5, 7, 5, FAN_SHIRT[n % 6]); R(c, px + 1, py, 5, 5, FAN_SKIN[n % 5]); R(c, px + 1, py - 1, 5, 2, FAN_HAIR[(n * 3) % 5]); R(c, px + 2, py + 2, 1, 1, '#1c1c22'); R(c, px + 4, py + 2, 1, 1, '#1c1c22'); if ((n + Math.floor(t * 1.5)) % 5 === 0) { R(c, px - 1, py - 3 - bob, 2, 8, FAN_SKIN[n % 5]); R(c, px + 6, py - 3 - bob, 2, 8, FAN_SKIN[n % 5]); } if (n % 11 === 0) { R(c, px - 2, py - 7, 11, 4, FAN_SHIRT[(n + 2) % 6]); R(c, px - 2, py - 7, 1, 10, '#6a583d'); } } }
     if (sun.str > .04) { const sh = `rgba(14,40,30,${.30 * sun.str})`, reach = sun.lean * (14 + Math.abs(sun.lean) * 26);
-      for (const gx of FIELD_GOALS) { const x = gx - camL; if (x < -200 || x > LW + 200) continue; slant(c, x, x + 4, 219, reach * 1.5, 5, sh); slant(c, x + 87, x + 91, 219, reach * 1.5, 5, sh); slant(c, x + reach * 1.5, x + 91 + reach * 1.5, 223, reach * .2, 2, sh); }
+      for (const gx of FIELD_GOALS) { const x = gx - camL; if (x < -200 || x > LW + 200) continue; slant(c, x, x + 4, 219, reach * 1.5, 5, sh); slant(c, x + 87, x + 91, 219, reach * 1.5, 5, sh); slant(c, x + reach * 1.5, x + 91 + reach * 1.5, 223, reach * .2, 2, sh); shadeAdd(x + reach * 1.5, x + 91 + reach * 1.5, .45); }
       for (const fx of FIELD_FLOODS) slant(c, fx - camL, fx - camL + 4, 163, reach * 1.2, 6, sh);
       for (let x = 95; x < worldW(7); x += 480) { const sx = x - camL; if (sx > -300 && sx < LW + 100) slant(c, sx - 16, sx + 192, 164, reach, 5, sh); } }
     { const bx = 890 + Math.sin(t * .7) * 11 - camL, by = 213 - Math.abs(Math.sin(t * 2.8)) * 9; ell(c, bx, 218, 4, 1, 'rgba(0,0,0,.25)'); ell(c, bx, by, 4.5, 4.5, '#2a2a2a'); ell(c, bx, by, 3.6, 3.6, '#f4f4ea'); const a = t * 5; R(c, bx - 1 + Math.cos(a) * 1.5, by - 1 + Math.sin(a) * 1.5, 2, 2, '#2a2a2a'); R(c, bx + Math.cos(a + 2.4) * 2.6, by + Math.sin(a + 2.4) * 2.6, 1, 1, '#2a2a2a'); R(c, bx + Math.cos(a + 4.2) * 2.6, by + Math.sin(a + 4.2) * 2.6, 1, 1, '#2a2a2a'); }
@@ -611,8 +621,8 @@
     { const bx = ((t * 6 - camL * .4) % 700 + 700) % 700 - 60; R(c, bx, 150, 22, 3, '#7a5a3a'); R(c, bx + 2, 153, 18, 1, '#5a4028'); R(c, bx + 9, 143, 4, 7, '#c8946a'); R(c, bx + 9, 141, 4, 3, '#e8c84a'); R(c, bx + 13, 144, 9, 1, '#5a4028'); R(c, bx - 2, 154, 28, 1, 'rgba(255,255,255,.35)'); }
     c.drawImage(mids[4], camL, 0, LW, LH, 0, 0, LW, LH);
     const reach = sun.lean * (12 + Math.abs(sun.lean) * 26), sh = `rgba(14,24,50,${.24 * sun.str})`;
-    if (sun.str > .04) { for (const x of PZ_LAMPS) slant(c, x - camL, x - camL + 3, 219, reach * 1.5, 5, sh); for (const x of PZ_KIOSK) { const sx = x - camL; if (sx > -200 && sx < LW + 120) { slant(c, sx, sx + 85, 219, reach, 3, sh); sunWall(c, sx, 157, 85, 62, sun.lean, Math.min(1, Math.abs(sun.lean) * 1.4) * sun.str); } } for (let x = Math.floor(camL / 160) * 160 - 160; x < camL + LW + 60; x += 160) slant(c, x - camL, x - camL + 3, 190, reach * .8, 6, `rgba(14,24,50,${.14 * sun.str})`); }
-    for (let x = 80; x < worldW(4); x += 285) { const sx = x - camL; if (sx > -70 && sx < LW + 70) { if (sun.str > .04) ell(c, sx + reach * 1.2, 219, 14, 2.5, sh); tree(c, sx, 216, .72, 1, t, x); } }
+    if (sun.str > .04) { for (const x of PZ_LAMPS) slant(c, x - camL, x - camL + 3, 219, reach * 1.5, 5, sh); for (const x of PZ_KIOSK) { const sx = x - camL; if (sx > -200 && sx < LW + 120) { slant(c, sx, sx + 85, 219, reach, 3, sh); shadeAdd(sx + reach, sx + 85 + reach, .9); sunWall(c, sx, 157, 85, 62, sun.lean, Math.min(1, Math.abs(sun.lean) * 1.4) * sun.str); } } for (let x = Math.floor(camL / 160) * 160 - 160; x < camL + LW + 60; x += 160) slant(c, x - camL, x - camL + 3, 190, reach * .8, 6, `rgba(14,24,50,${.14 * sun.str})`); }
+    for (let x = 80; x < worldW(4); x += 285) { const sx = x - camL; if (sx > -70 && sx < LW + 70) { if (sun.str > .04) { ell(c, sx + reach * 1.2, 219, 14, 2.5, sh); shadeAdd(sx + reach * 1.2 - 14, sx + reach * 1.2 + 14, .85, true); } tree(c, sx, 216, .72, 1, t, x); } }
     for (const x of PZ_FOUNT) { const sx = x - camL; if (sx < -80 || sx > LW + 80) continue; for (let j = 0; j < 7; j++) { const a = (j - 3) / 3, ph = (t * 1.6 + j * .13) % 1; for (let k = 0; k < 14; k++) { const u = k / 13, px = sx + a * 24 * u, py = 146 - Math.sin(u * Math.PI) * (14 - Math.abs(a) * 5) + u * 22; R(c, px, py, 1, 2, k % 3 === Math.floor(ph * 3) ? '#edf8ee' : '#b7eced'); } R(c, sx + a * 24, 166 + ph * 3, 2, 2, '#edf8ee'); } for (let j = 0; j < 12; j++) R(c, sx - 37 + j * 7, 204 - Math.abs(Math.sin(t * 3 + j)) * 3, 2, 1, '#d6f2e8'); for (let j = 0; j < 6; j++) R(c, sx - 22 + j * 9, 172 + ((t * 20 + j * 7) % 30), 1, 3, 'rgba(210,240,240,.7)'); }
   }
   function plazaText(c, camera) { c.save(); c.translate(-Math.round(camera), 0); c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = '16px Pixel, monospace'; c.fillStyle = '#285e76'; c.fillText('PRAÇA CAMACAN', 462, 312); c.font = '8px Pixel, monospace'; c.fillText('ITABUNA · RIO CACHOEIRA', 462, 330); c.fillStyle = '#f8ebc7'; for (const x of PZ_KIOSK) c.fillText('CACAU & RESENHA', (x + 42) * 2, 334); c.restore(); }
@@ -1093,7 +1103,7 @@
   function draw(c, scene, camera, t) {
     if (!handles(scene)) return false;
     const s = window.DayTime.state(), camL = Math.floor(camera / 2), sub = Math.round(camera) - camL * 2;
-    lc.clearRect(0, 0, LW, LH); MAPS[scene].draw(lc, s, t, camL);
+    lc.clearRect(0, 0, LW, LH); SHADE = []; shadeCam = camL; shadeScene = scene; MAPS[scene].draw(lc, s, t, camL);
     c.save(); c.imageSmoothingEnabled = false; c.drawImage(low, -sub, 0, LW * 2, LH * 2); c.restore();
     lastCam = camera; lastT = t; MAPS[scene].text?.(c, camera); return true;
   }
@@ -1105,5 +1115,5 @@
     if (MAPS[scene].lights) { lg.clearRect(0, 0, LW, LH); MAPS[scene].lights(lg, s, lastT, camL); c.globalCompositeOperation = 'lighter'; c.imageSmoothingEnabled = false; c.drawImage(lightCv, -sub, 0, LW * 2, LH * 2); }
     c.restore();
   }
-  window.HdMaps = Object.freeze({ drawRoom: (c, id, t) => { try { return drawRoom(c, id, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, arenaHandles, drawArena: (c, type, camera, t, homeX) => { try { drawArena(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); return true; } catch (e) { window.__hdMapsError = e; return false; } }, arenaFront: (c, type, camera, t, homeX, blend) => { try { arenaFront(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) { window.__hdMapsError = e; } }, handles, darkness: (c, scene, camera, t, hx, hy, facing) => { try { darkness(c, Number(scene), Number(camera) || 0, Number(t) || 0, Number(hx) || 0, Number(hy) || 0, facing); } catch (e) {} }, draw: (c, scene, camera, t) => { try { return draw(c, Number(scene), Number(camera) || 0, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, finish: (c, scene) => { try { finish(c, Number(scene)); } catch (e) {} }, maps: Object.keys(MAPS).map(Number) });
+  window.HdMaps = Object.freeze({ shadeAt: (scene, x) => { try { return shadeAt(Number(scene), Number(x) || 0); } catch (e) { return { k: 0, leaves: false }; } }, sun: () => { try { return sunInfo(window.DayTime.state()); } catch (e) { return { lean: 0, str: 0 }; } }, drawRoom: (c, id, t) => { try { return drawRoom(c, id, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, arenaHandles, drawArena: (c, type, camera, t, homeX) => { try { drawArena(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); return true; } catch (e) { window.__hdMapsError = e; return false; } }, arenaFront: (c, type, camera, t, homeX, blend) => { try { arenaFront(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) { window.__hdMapsError = e; } }, handles, darkness: (c, scene, camera, t, hx, hy, facing) => { try { darkness(c, Number(scene), Number(camera) || 0, Number(t) || 0, Number(hx) || 0, Number(hy) || 0, facing); } catch (e) {} }, draw: (c, scene, camera, t) => { try { return draw(c, Number(scene), Number(camera) || 0, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, finish: (c, scene) => { try { finish(c, Number(scene)); } catch (e) {} }, maps: Object.keys(MAPS).map(Number) });
 })();
