@@ -813,7 +813,91 @@
     for (const x of RY_LAMPS) { const sx = x - camL; if (sx < -90 || sx > LW + 90) continue; bulbGlow(g, sx, 36, base, '255,214,150', 34); const gr = g.createLinearGradient(0, 36, 0, 240); gr.addColorStop(0, `rgba(255,222,160,${.24 * base})`); gr.addColorStop(1, `rgba(255,222,160,${.03 * base})`); g.fillStyle = gr; g.beginPath(); g.moveTo(sx - 8, 36); g.lineTo(sx + 8, 36); g.lineTo(sx + 56, 236); g.lineTo(sx - 56, 236); g.closePath(); g.fill(); pool(g, sx, 226, base, '255,214,150', 54); }
     bulbGlow(g, 1205 - camL, 138, .3 + a * .6, '255,190,100', 34); for (const w of RY_WIN) bulbGlow(g, w.x + 51 - camL, 100, a * .3, '150,170,255', 40); }
 
+  // ------------------------------------------------------------------------------- ARENAS DE CHEFE (480x270, centro em x=240)
+  // Cada arena é uma camada de 780 de largura (150 de sobra de cada lado) que acompanha a câmera.
+  const AO = 150, AW = 780, ARENA = {};
+  const arenaLayers = {}; let aox = 0, lastArena = null;
+  const [alow, ac] = mk(LW, LH);
+  function aLayer(type, build) { if (!arenaLayers[type]) { const [cv, c] = mk(AW, LH); c.translate(AO, 0); build(c); arenaLayers[type] = cv; } return arenaLayers[type]; }
+  function arenaGround(c, base, dark, line, top, step) { R(c, -AO, FLOOR, AW, 50, base); R(c, -AO, 240, AW, 30, dark); dither(c, -AO, 239, AW, dark); for (let x = -AO; x < AW - AO; x += step) { R(c, x, 225, 1, 45, line); R(c, x + 1, 225, 1, 45, 'rgba(255,255,255,.14)'); } R(c, -AO, 248, AW, 1, line); for (let i = 0; i < 700; i++) R(c, -AO + hash(i + 223) * AW, 226 + hash(i + 224) * 43, 1 + hash(i) * 2, 1, i % 3 ? 'rgba(0,0,0,.12)' : 'rgba(255,255,255,.14)'); R(c, -AO, FLOOR, AW, 3, top); R(c, -AO, FLOOR, AW, 1, 'rgba(255,255,255,.4)'); R(c, -AO, FLOOR + 3, AW, 2, line); }
+  function cakeHD(c, x, y) { R(c, x - 14, y - 2, 28, 3, '#e8d8c0'); R(c, x - 12, y - 10, 24, 9, '#7a4a30'); R(c, x - 12, y - 10, 24, 2, '#e8c898'); R(c, x - 9, y - 18, 18, 8, '#a8603c'); R(c, x - 9, y - 18, 18, 2, '#f0d8a8'); for (let k = 0; k < 6; k++) R(c, x - 11 + k * 4, y - 9, 2, 3 + (k % 2) * 2, '#f6ecd0'); R(c, x - 3, y - 25, 6, 7, '#f6ecd0'); R(c, x - 1, y - 30, 2, 5, '#c94f45'); R(c, x - 2, y - 32, 4, 3, '#e04a3a'); R(c, x - 2, y - 32, 1, 1, '#ff9a8a'); }
+
+  // --- MARCO: o mundo do caderno
+  function buildMarco(c) {
+    for (let i = 0; i < 14; i++) R(c, -AO, i * 20, AW, 20, css(mix([.1, .09, .19], [.2, .16, .32], i / 13)));
+    for (let i = 0; i < 90; i++) R(c, -AO + hash(i + 5) * AW, 4 + hash(i + 6) * 150, 1, 1, i % 3 ? '#5a4a80' : '#8a76b0');
+    for (let i = 0; i < 10; i++) { const x = -70 + i * 60, h = 100 + Math.round(hash(i + 41) * 40), col = i % 2 ? '#69617d' : '#5a546e'; for (let r2 = 0; r2 < h; r2++) { const edge = r2 > h - 7 ? ((r2 + i) % 2 ? 2 : 0) : 0; R(c, x + edge, r2, 47 - edge * 2, 1, col); } R(c, x, 0, 1, h, 'rgba(255,255,255,.16)'); R(c, x + 46, 0, 1, h, 'rgba(0,0,0,.2)'); for (let k = 0; k < 7; k++) R(c, x + 8, 20 + k * 13, 31, 1, '#a69bad'); R(c, x + 6, 10, 1, h - 20, '#b07a94'); for (const hy of [14, 40, 66]) ell(c, x + 3, hy, 2, 2, '#1c1830'); for (let k = 0; k < 18; k++) R(c, x + 12 + Math.round(Math.sin(k * 1.1 + i) * 6 + k), 78 + (k % 3) * 2, 2, 1, 'rgba(60,40,80,.5)'); }
+    arenaGround(c, '#4b3b60', '#3c2e50', '#76547f', '#c19bc6', 26);
+    for (let y = 226; y < 270; y += 5) R(c, -AO, y, AW, 1, 'rgba(154,109,148,.35)'); R(c, 60, 225, 1, 45, 'rgba(255,90,120,.4)'); R(c, 62, 225, 1, 45, 'rgba(255,90,120,.25)');
+    board(c, 89, 24, 304, 21, '#6c5677', '#3f3653'); R(c, 92, 27, 298, 1, '#9a82a8');
+    for (const [x0, x1, col, sd] of [[151, 238, '#b1a2bb', 1], [241, 328, '#cfbfd0', -1]]) for (let x = x0; x < x1; x++) { const k = (x - x0) / (x1 - x0), top = sd > 0 ? 140 + Math.round(k * 7) : 147 - Math.round(k * 8), bot = sd > 0 ? 184 + Math.round(k * 9) : 193 - Math.round(k * 9); R(c, x, top, 1, bot - top, col); }
+    for (const [x0, sd] of [[153, 1], [243, -1]]) for (let j = 0; j < 5; j++) for (let x = 0; x < 80; x += 2) { const k = x / 80, yy = (sd > 0 ? 150 + Math.round(k * 7) : 156 - Math.round(k * 8)) + j * 6; R(c, x0 + x, yy, 2, 1, sd > 0 ? '#7c6385' : '#997ea1'); }
+    R(c, 238, 146, 3, 48, '#68546f'); R(c, 238, 146, 1, 48, '#8a7090'); for (let k = 0; k < 40; k++) R(c, 160 + Math.round(Math.sin(k * .5) * 6) + k, 160 + Math.round(Math.cos(k * .7) * 4), 2, 1, 'rgba(60,40,80,.5)');
+    for (const [x, col, dk] of [[10, '#e8c84a', '#a8861f'], [455, '#d83a6a', '#8a1f40']]) { R(c, x, 94, 11, 126, col); R(c, x, 94, 3, 126, 'rgba(255,255,255,.25)'); R(c, x + 8, 94, 3, 126, dk); for (let k = 0; k < 6; k++) R(c, x + k, 94 - k * 2 - 2, 11 - k * 2, 2, k > 3 ? '#2a2a30' : '#e8cfa0'); R(c, x, 200, 11, 4, '#b9c3bf'); R(c, x, 204, 11, 16, '#e8a0b0'); }
+    R(c, 346, 196, 26, 24, '#2a2040'); R(c, 348, 198, 22, 20, '#3a2e58'); R(c, 350, 204, 18, 12, '#e84a9a'); R(c, 350, 204, 18, 2, '#ff9ad0'); R(c, 354, 188, 10, 9, '#2a2040'); R(c, 356, 190, 6, 5, '#e84a9a');
+  }
+  ARENA.marco = { build: buildMarco, dyn(c, t) { for (let i = 0; i < 13; i++) { const x = ((hash(i + 3) * 520 + t * (3 + hash(i) * 4)) % 560) - 40, yy = 35 + hash(i + 18) * 115 + Math.sin(t + i) * 5; R(c, x, yy, 3, 4, '#d8c6dd'); R(c, x, yy, 3, 1, '#ffffff'); } for (let i = 0; i < 6; i++) { const u = (t * .45 + i / 6) % 1; R(c, 358 + (i % 3) * 3, 205 + u * 14, 1, 3, '#e84a9a'); } }, text(c, t) { c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#2a1830'; c.fillText('RABISCOS À SOLTA', 482, 68); c.fillStyle = '#f2d8a6'; c.fillText('RABISCOS À SOLTA', 480, 66); if (window.Art?.drawDoodle) for (let i = 0; i < 5; i++) { c.save(); c.translate(70 + i * 203, 170 + (i % 2) * 59); c.scale(2.5, 2.5); try { window.Art.drawDoodle(c, 0, 0, i % 3, t * .35 + i, true); } catch (e) {} c.restore(); } }, light(g, t) { const p = .75 + .25 * Math.sin(t * 2); bulbGlow(g, 367, 208, p, '255,70,160', 34); bulbGlow(g, 240, 162, .55 * p, '170,120,255', 70); pool(g, 240, 222, .8, '170,120,255', 90); } };
+
+  // --- MENEZES: o palco da provocação
+  function buildMenezes(c) {
+    R(c, -AO, 0, AW, 220, '#382b35'); for (let x = -AO; x < AW - AO; x += 14) { R(c, x, 28, 1, 160, 'rgba(255,255,255,.05)'); R(c, x + 7, 28, 1, 160, 'rgba(0,0,0,.14)'); } for (let i = 0; i < 400; i++) R(c, -AO + hash(i + 3) * AW, 30 + hash(i + 4) * 160, 1, 1, i % 2 ? '#2e2229' : '#43343e');
+    R(c, -AO, 0, AW, 27, '#241a20'); R(c, -AO, 27, AW, 13, '#6c514b'); R(c, -AO, 27, AW, 1, '#a07a62'); R(c, -AO, 40, AW, 6, '#c1a16f'); R(c, -AO, 40, AW, 1, '#ecd09a'); R(c, -AO, 46, AW, 1, 'rgba(0,0,0,.35)');
+    for (let x = -AO; x < AW - AO; x += 10) { R(c, x + 3, 15, 4, 5, '#ffe1a0'); R(c, x + 4, 16, 2, 3, '#fff3cf'); }
+    for (const sd of [0, 1]) { const x0 = sd ? 408 : -100, w = 172; R(c, x0, 27, w, 191, '#7b4252'); for (let k = 0; k < w; k += 7) { R(c, x0 + k, 46, 3, 170, '#a85e61'); R(c, x0 + k, 46, 1, 170, '#c97c7e'); R(c, x0 + k + 5, 46, 2, 170, '#5a2c3a'); } for (let k = 0; k < w; k++) { const y = sd ? 140 + Math.round(k * .18) : 158 - Math.round(k * .18); R(c, x0 + k, y, 1, 14, '#c39865'); R(c, x0 + k, y, 1, 2, '#ecd09a'); R(c, x0 + k, y + 12, 1, 2, '#8a6a3a'); } for (let k = 0; k < w; k += 5) R(c, x0 + k, 212, 2, 6, '#c39865'); R(c, x0 + (sd ? 0 : w - 3), 27, 3, 191, 'rgba(0,0,0,.3)'); }
+    board(c, 90, 41, 300, 115, '#2f5147', '#8c7552'); R(c, 94, 45, 292, 1, '#668168'); for (let i = 0; i < 200; i++) R(c, 96 + hash(i + 7) * 286, 48 + hash(i + 9) * 104, 2, 1, i % 2 ? '#38604f' : '#264238');
+    for (const x of [53, 389]) { R(c, x - 1, 142, 43, 78, '#101614'); R(c, x, 143, 41, 76, '#263b37'); R(c, x, 143, 41, 2, '#47605a'); for (const cy of [163, 197]) { ell(c, x + 20, cy, 13, 13, '#141c19'); ell(c, x + 20, cy, 9, 9, '#8b9978'); ell(c, x + 20, cy, 3, 3, '#3f5749'); } }
+    R(c, 180, 18, 120, 3, '#16100e'); for (const x of [200, 240, 280]) { R(c, x - 1, 21, 3, 5, '#16100e'); R(c, x - 5, 25, 11, 8, '#2a2220'); R(c, x - 4, 26, 9, 6, '#fff3cf'); }
+    R(c, -AO, 199, AW, 21, '#68594e'); R(c, -AO, 199, AW, 3, '#dbbd86'); R(c, -AO, 199, AW, 1, '#f6e2b0'); for (let x = -AO; x < AW - AO; x += 27) R(c, x, 202, 1, 18, '#9d8262');
+    arenaGround(c, '#755d47', '#665040', '#a18461', '#dbbd86', 27); for (let k = 0; k < 40; k++) R(c, -AO + hash(k + 331) * AW, 230 + hash(k + 332) * 36, 14, 1, 'rgba(255,230,180,.12)');
+  }
+  ARENA.menezes = { build: buildMenezes, dyn(c, t) { for (const x of [53, 389]) for (const cy of [163, 197]) { const p = Math.max(0, Math.sin(t * 9 + x + cy)); ell(c, x + 20, cy, 9 + p, 9 + p, '#8b9978'); ell(c, x + 20, cy, 3 + p * .8, 3 + p * .8, '#3f5749'); } for (let x = -AO + 5; x < AW - AO; x += 10) if (Math.sin(t * 4 + x * .3) <= -.3) R(c, x + 3, 15, 4, 5, '#7a5a30'); }, text(c, t) { c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#e7e2bd'; c.fillText('PALCO DA PROVOCAÇÃO', 480, 108); c.fillStyle = '#cfe0c0'; c.fillText('da roça poudiaaam', 440, 156); c.fillStyle = '#f2d89a'; c.fillText('reeeis pouddiaaam', 540, 196); c.fillStyle = '#cfe0c0'; c.fillText('da roça pegou ar', 410, 236); c.font = '8px Pixel, monospace'; c.fillStyle = '#f2d89a'; c.fillText('teketeketeketeke', 560, 268); c.fillStyle = '#cfe0c0'; c.fillText('o pra ravid falando sozinho', 420, 292); }, light(g, t) { for (const [x, col] of [[200, '255,120,150'], [240, '255,240,200'], [280, '120,180,255']]) { const sw = Math.sin(t * .7 + x) * 40, cx = 240 + sw + (x - 240) * .4, gr = g.createLinearGradient(0, 30, 0, 225); gr.addColorStop(0, `rgba(${col},.32)`); gr.addColorStop(1, `rgba(${col},.04)`); g.fillStyle = gr; g.beginPath(); g.moveTo(x - 3, 30); g.lineTo(x + 3, 30); g.lineTo(cx + 30, 225); g.lineTo(cx - 30, 225); g.closePath(); g.fill(); pool(g, cx, 226, .9, col, 42); bulbGlow(g, x, 30, .8, col, 22); } for (let x = -AO + 5; x < AW - AO; x += 20) bulbGlow(g, x + 5, 18, .35, '255,210,130', 12); } };
+
+  // --- NIKOLAS: o trono do bolo roubado
+  function buildNikolas(c) {
+    for (let i = 0; i < 14; i++) R(c, -AO, i * 9, AW, 9, css(mix([.52, .74, .88], [.98, .9, .75], Math.pow(i / 13, 1.4))));
+    ell(c, 375, 41, 15, 15, 'rgba(255,231,168,.2)'); ell(c, 375, 41, 11, 11, '#ffe7a8'); ell(c, 373, 39, 6, 6, '#fff6d6');
+    for (let i = 0; i < 8; i++) { const x = -90 + i * 100 + (i % 2) * 20, h = 26 + (i % 3) * 14; for (let k = -30; k <= 30; k++) { const hh = Math.round(h * (1 - (k * k) / 900)); R(c, x + k, 120 - hh, 1, hh + 4, i % 2 ? '#a8785c' : '#c08a68'); R(c, x + k, 120 - hh, 1, 2, '#e8c898'); } for (let k = -20; k <= 20; k += 7) R(c, x + k, 120 - Math.round(h * (1 - (k * k) / 900)), 2, 6 + (k & 7), '#f6ecd0'); }
+    R(c, -AO, 120, AW, 100, '#9e7256'); R(c, -AO, 120, AW, 4, '#d1a273'); R(c, -AO, 120, AW, 1, '#ecd0a0'); for (let x = -AO; x < AW - AO; x += 9) R(c, x, 124, 5, 2 + (hash(x) * 4 | 0), '#f6ecd0'); for (let i = 0; i < 360; i++) R(c, -AO + hash(i + 3) * AW, 128 + hash(i + 4) * 90, 1 + hash(i) * 2, 1, ['#8a5e44', '#b88660', '#6a4632'][i % 3]); for (let i = 0; i < 40; i++) R(c, -AO + hash(i + 71) * AW, 130 + hash(i + 72) * 84, 2, 1, ['#e84a8a', '#f2d24a', '#4ab8e8', '#6ad86a'][i % 4]);
+    R(c, 105, 73, 270, 23, '#6f4937'); R(c, 100, 70, 280, 8, '#e4bf83'); R(c, 100, 70, 280, 1, '#f6dca8'); for (let i = 0; i < 12; i++) { R(c, 107 + i * 23, 79, 7, 8 + (i % 3) * 3, '#d8b17a'); R(c, 107 + i * 23, 79, 2, 8 + (i % 3) * 3, '#f0d3a0'); } for (let x = 100; x < 380; x += 7) R(c, x, 96, 4, 2, '#4a2e22');
+    for (const x of [113, 359]) { R(c, x, 96, 8, 118, '#644634'); R(c, x, 96, 2, 118, '#aa8055'); R(c, x + 6, 96, 2, 118, '#3f2a1e'); for (let k = 100; k < 210; k += 12) R(c, x + 1, k, 6, 2, '#7a5a40'); R(c, x - 2, 208, 12, 6, '#4a2e22'); }
+    R(c, 187, 131, 107, 76, '#624937'); R(c, 192, 136, 96, 66, '#85a45d'); R(c, 196, 140, 88, 62, '#a8bd69'); R(c, 196, 140, 88, 2, '#c4d68a'); for (const yy of [150, 164, 178]) { R(c, 205, yy, 72, 3, '#72994f'); R(c, 205, yy, 72, 1, '#8fb468'); } for (let i = 0; i < 12; i++) R(c, 198 + i * 7, 200, 4, 2 + (i % 3) * 3, '#a8bd69');
+    const crown = [[187, 133], [190, 117], [203, 129], [217, 111], [230, 127], [243, 106], [256, 127], [272, 114], [282, 129], [294, 118], [294, 136]];
+    for (let x = 187; x <= 294; x++) { let top = 133; for (let k = 0; k < crown.length - 1; k++) { const a = crown[k], b = crown[k + 1]; if (x >= a[0] && x <= b[0]) top = a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); } R(c, x, top, 1, 136 - top, '#6b8d43'); R(c, x, top, 1, 1, '#9fc064'); }
+    for (const x of [178, 285]) { R(c, x, 182, 18, 34, '#74643e'); R(c, x, 180, 17, 6, '#b6c26b'); R(c, x, 180, 17, 1, '#d8e08a'); }
+    for (const x of [64, 403]) { R(c, x - 24, 186, 48, 29, '#704934'); R(c, x - 22, 191, 44, 8, '#d0a66b'); R(c, x - 24, 184, 49, 6, '#e5c58e'); for (let i = 0; i < 5; i++) R(c, x - 21 + i * 9, 190, 4, 4 + (i % 2) * 3, '#e5c58e'); cakeHD(c, x, 184); }
+    for (let i = 0; i < 10; i++) ell(c, 58 + i * 39, 216, 11, 2.5, '#84a24e');
+    board(c, 165, 84, 150, 12, '#6f4937', '#3f2a1e');
+  }
+  ARENA.nikolas = { build: buildNikolas, dyn(c, t) { for (let i = 0; i < 10; i++) R(c, 60 + i * 39, 212 - Math.abs(Math.sin(t * 2 + i)) * 4, 2, 3, '#bbcb6c'); for (let i = 0; i < 9; i++) { const x = 108 + i * 31, u = (t * .35 + hash(i + 5)) % 1; R(c, x, 98 + u * 40, 2, 3 + u * 4, '#a8bd69'); ell(c, x + 1, 98 + u * 40 + 5 + u * 4, 2, 1.5, '#a8bd69'); } for (let i = 0; i < 5; i++) { const x = ((hash(i + 9) * 600 + t * (2 + i)) % 700) - 100, y = 24 + hash(i + 12) * 50, w = 26 + hash(i + 14) * 26; R(c, x, y, w, 4, 'rgba(255,248,230,.85)'); R(c, x + 5, y - 3, w - 12, 3, 'rgba(255,248,230,.85)'); R(c, x + 3, y + 4, w - 8, 1, 'rgba(206,196,200,.7)'); } }, text(c, t) { c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#2a1a10'; c.fillText('O TRONO DO BOLO ROUBADO', 482, 182); c.fillStyle = '#f7e4bc'; c.fillText('O TRONO DO BOLO ROUBADO', 480, 180); }, light(g, t) { const sh = .5 + .5 * Math.sin(t * 1.5); bulbGlow(g, 240, 160, .35 + sh * .15, '170,230,110', 62); } };
+
+  // --- ARTHUR: o pátio do mapa 9 por trás, com a placa e as máquinas da arena por cima
+  ARENA.arthur = {};
+  function arthurBoard(c, t) { c.fillStyle = '#0e2a44'; c.fillRect(215, 116, 532, 50); c.fillStyle = '#16476a'; c.fillRect(217, 118, 528, 46); c.fillStyle = '#2d6686'; c.fillRect(223, 124, 516, 34); c.fillStyle = '#eff2d8'; c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('UM ACERTO NO PÁTIO', 480, 141);
+    for (const x of [110, 809]) { c.fillStyle = '#1d3a4c'; c.fillRect(x - 2, 329, 53, 108); c.fillStyle = '#315d7a'; c.fillRect(x, 331, 49, 104); c.fillStyle = '#527c91'; c.fillRect(x + 4, 335, 41, 96); c.fillStyle = '#bed4cf'; c.fillRect(x - 8, 326, 65, 9); c.fillStyle = '#91b5b8'; c.fillRect(x + 9, 348, 24, 2); c.fillRect(x + 9, 367, 24, 2); c.fillStyle = '#e04a4a'; c.fillRect(x + 36, 380, 6, 6); c.fillStyle = '#7ad87a'; c.fillRect(x + 36, 392, 6, 6); }
+    c.fillStyle = '#b6d8d5'; for (let i = 0; i < 6; i++) { const xx = 191 + i * 112, yy = Math.round(301 + Math.sin(t + i) * 4); c.fillRect(xx, yy, 20, 2); c.fillRect(xx + 4, yy - 7, 2, 7); c.fillRect(xx + 10, yy - 9, 2, 9); c.fillRect(xx + 16, yy - 6, 2, 6); } }
+
+  const ARENA_TYPES = ['arthur', 'marco', 'menezes', 'nikolas'];
+  const arenaHandles = (type) => { type = typeof type === 'object' ? type?.type : type; return ARENA_TYPES.includes(type) && !window.Graphics?.isLite?.() && !!window.DayTime; };
+  function drawArena(c, type, camera, t, homeX) {
+    type = typeof type === 'object' ? type.type : type;
+    const center = homeX ? homeX - camera : 480; aox = Math.round((center - 480) / 2);
+    if (type === 'arthur') {
+      const s = window.DayTime.state(), camX = Math.max(0, homeX - 480), camL = Math.floor(camX / 2); lc.clearRect(0, 0, LW, LH); mapDrawers[9](lc, s, t, camL);
+      c.save(); c.imageSmoothingEnabled = false; c.drawImage(low, 0, 0, 960, 540); c.restore(); lastCam = camX; lastT = t; mapTexts[9](c, camX);
+      c.save(); c.translate(aox * 2, 0); arthurBoard(c, t); c.restore(); window.HdMaps.finish(c, 9); return;
+    }
+    const a = ARENA[type]; ac.clearRect(0, 0, LW, LH); ac.drawImage(aLayer(type, a.build), aox - AO, 0); a.dyn?.(ac, t);
+    c.save(); c.imageSmoothingEnabled = false; c.drawImage(alow, 0, 0, 960, 540); c.translate(aox * 2, 0); a.text?.(c, t); c.restore();
+  }
+  function arenaFront(c, type, camera, t, homeX, blend) {
+    type = typeof type === 'object' ? type.type : type; if (!arenaHandles(type)) return; const a = ARENA[type]; if (!a.light) return;
+    const center = homeX ? homeX - camera : 480, ox = Math.round((center - 480) / 2);
+    lg.clearRect(0, 0, LW, LH); lg.save(); lg.translate(ox, 0); a.light(lg, t); lg.restore();
+    c.save(); c.globalCompositeOperation = 'lighter'; c.globalAlpha = cl(blend); c.imageSmoothingEnabled = false; c.drawImage(lightCv, 0, 0, 960, 540); c.restore();
+  }
+
   const MAPS = { 0: { draw: farm, text: farmText, lights: farmLights }, 2: { draw: gym, text: gymText, lights: gymLights, amb: gymAmb }, 3: { draw: court, text: courtText, lights: courtLights }, 7: { draw: field, text: fieldText, lights: fieldLights }, 5: { draw: favela, text: favelaText, lights: favelaLights }, 9: { draw: patio, text: patioText, lights: patioLights }, 1: { draw: school, text: schoolText, lights: schoolLights }, 4: { draw: plaza, text: plazaText, lights: plazaLights }, 6: { draw: ink, text: inkText, lights: inkLights, amb: () => [1, 1, 1] }, 8: { draw: bigodon, text: bigodonText, lights: bigodonLights, amb: roomAmb(.62) }, 10: { draw: rayssa, text: rayssaText, lights: rayssaLights, amb: roomAmb(.6) } };
+  const mapDrawers = new Proxy({}, { get: (_, k) => MAPS[k].draw }), mapTexts = new Proxy({}, { get: (_, k) => MAPS[k].text });
   const handles = (scene) => !!MAPS[scene] && !window.Graphics?.isLite?.() && !!window.DayTime;
   let lastCam = 0, lastT = 0;
   function draw(c, scene, camera, t) {
@@ -831,5 +915,5 @@
     if (MAPS[scene].lights) { lg.clearRect(0, 0, LW, LH); MAPS[scene].lights(lg, s, lastT, camL); c.globalCompositeOperation = 'lighter'; c.imageSmoothingEnabled = false; c.drawImage(lightCv, -sub, 0, LW * 2, LH * 2); }
     c.restore();
   }
-  window.HdMaps = Object.freeze({ handles, darkness: (c, scene, camera, t, hx, hy, facing) => { try { darkness(c, Number(scene), Number(camera) || 0, Number(t) || 0, Number(hx) || 0, Number(hy) || 0, facing); } catch (e) {} }, draw: (c, scene, camera, t) => { try { return draw(c, Number(scene), Number(camera) || 0, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, finish: (c, scene) => { try { finish(c, Number(scene)); } catch (e) {} }, maps: Object.keys(MAPS).map(Number) });
+  window.HdMaps = Object.freeze({ arenaHandles, drawArena: (c, type, camera, t, homeX) => { try { drawArena(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); return true; } catch (e) { window.__hdMapsError = e; return false; } }, arenaFront: (c, type, camera, t, homeX, blend) => { try { arenaFront(c, type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, blend); } catch (e) { window.__hdMapsError = e; } }, handles, darkness: (c, scene, camera, t, hx, hy, facing) => { try { darkness(c, Number(scene), Number(camera) || 0, Number(t) || 0, Number(hx) || 0, Number(hy) || 0, facing); } catch (e) {} }, draw: (c, scene, camera, t) => { try { return draw(c, Number(scene), Number(camera) || 0, Number(t) || 0); } catch (e) { window.__hdMapsError = e; return false; } }, finish: (c, scene) => { try { finish(c, Number(scene)); } catch (e) {} }, maps: Object.keys(MAPS).map(Number) });
 })();
