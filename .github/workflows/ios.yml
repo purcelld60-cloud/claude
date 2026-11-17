@@ -3,10 +3,13 @@ name: Gerar IPA (iOS, sem assinatura)
 # Gera um .ipa SEM assinatura e publica em Releases. Para instalar no iPhone é preciso
 # um instalador que assine ou dispense assinatura (TrollStore, AltStore, SideStore,
 # Sideloadly, ESign...). Não usa senhas nem certificados.
+# Os Macs do GitHub às vezes ficam sem vaga ("not acquired by Runner"): por isso o build
+# tenta em três tipos de Mac ao mesmo tempo. O primeiro que terminar publica a Release;
+# os outros só substituem os mesmos arquivos.
 on:
   workflow_dispatch:
   push:
-    branches: [main, 'claude/**']
+    branches: [main]
     paths: ['dist/**', 'native/ios/**', '.github/workflows/ios.yml', '.github/scripts/**']
 
 permissions:
@@ -18,8 +21,12 @@ concurrency:
 
 jobs:
   ipa:
-    runs-on: macos-15
-    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        mac: [macos-15, macos-14, macos-15-intel]
+    runs-on: ${{ matrix.mac }}
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -59,7 +66,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: DaRoca-ipa
+          name: DaRoca-ipa-${{ matrix.mac }}
           path: native/ios/${{ env.NOME }}
 
       - name: Publicar em Releases
@@ -67,7 +74,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "ios-b${{ github.run_number }}" "$NOME" DaRoca.ipa \
+          TAG="ios-b${{ github.run_number }}"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" \
             --target "${{ github.sha }}" \
             --title "Da Roça iOS ${VERSAO} (build ${{ github.run_number }})" \
-            --notes "IPA sem assinatura. Instale com o seu instalador de IPA (TrollStore, AltStore, SideStore, Sideloadly, ESign...)."
+            --notes "IPA sem assinatura. Instale com o seu instalador de IPA (TrollStore, AltStore, SideStore, Sideloadly, ESign...)." || true
+          gh release upload "$TAG" "$NOME" DaRoca.ipa --clobber
