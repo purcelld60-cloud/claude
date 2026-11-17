@@ -814,90 +814,165 @@
     bulbGlow(g, 1205 - camL, 138, .3 + a * .6, '255,190,100', 34); for (const w of RY_WIN) bulbGlow(g, w.x + 51 - camL, 100, a * .3, '150,170,255', 40); }
 
   // ------------------------------------------------------------------------------- ARENAS DE CHEFE (480x270, centro em x=240)
-  // Cada arena é uma camada de 780 de largura (150 de sobra de cada lado) que acompanha a câmera.
+  // Cada arena tem camadas próprias (de 780 de largura) em parallax: o fundo anda devagar,
+  // a frente acompanha a câmera. Todas desenhadas em pixels de arte, ampliadas 2x.
   const AO = 150, AW = 780, ARENA = {};
-  const arenaLayers = {}; let aox = 0, lastArena = null;
+  const arenaLayers = {};
   const [alow, ac] = mk(LW, LH);
-  function aLayer(type, build) { if (!arenaLayers[type]) { const [cv, c] = mk(AW, LH); c.translate(AO, 0); build(c); arenaLayers[type] = cv; } return arenaLayers[type]; }
+  function aLayer(key, build) { if (!arenaLayers[key]) { const [cv, c] = mk(AW, LH); c.translate(AO, 0); build(c); arenaLayers[key] = cv; } return arenaLayers[key]; }
   function arenaGround(c, base, dark, line, top, step) { R(c, -AO, FLOOR, AW, 50, base); R(c, -AO, 240, AW, 30, dark); dither(c, -AO, 239, AW, dark); for (let x = -AO; x < AW - AO; x += step) { R(c, x, 225, 1, 45, line); R(c, x + 1, 225, 1, 45, 'rgba(255,255,255,.14)'); } R(c, -AO, 248, AW, 1, line); for (let i = 0; i < 700; i++) R(c, -AO + hash(i + 223) * AW, 226 + hash(i + 224) * 43, 1 + hash(i) * 2, 1, i % 3 ? 'rgba(0,0,0,.12)' : 'rgba(255,255,255,.14)'); R(c, -AO, FLOOR, AW, 3, top); R(c, -AO, FLOOR, AW, 1, 'rgba(255,255,255,.4)'); R(c, -AO, FLOOR + 3, AW, 2, line); }
+  function poly(c, pts, col) { c.fillStyle = col; c.beginPath(); c.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) c.lineTo(pts[i][0], pts[i][1]); c.closePath(); c.fill(); }
+  function hillLine(c, x0, x1, base, amp, seed, fill, edge, edgeW = 1) { for (let x = x0; x < x1; x++) { const y = Math.round(base - amp * (.55 + .45 * Math.sin(x * .021 + seed)) * (.6 + .4 * Math.sin(x * .053 + seed * 2)) - Math.sin(x * .17 + seed) * 2); R(c, x, y, 1, LH - y, fill); if (edge) R(c, x, y, 1, edgeW, edge); } }
   function cakeHD(c, x, y) { R(c, x - 14, y - 2, 28, 3, '#e8d8c0'); R(c, x - 12, y - 10, 24, 9, '#7a4a30'); R(c, x - 12, y - 10, 24, 2, '#e8c898'); R(c, x - 9, y - 18, 18, 8, '#a8603c'); R(c, x - 9, y - 18, 18, 2, '#f0d8a8'); for (let k = 0; k < 6; k++) R(c, x - 11 + k * 4, y - 9, 2, 3 + (k % 2) * 2, '#f6ecd0'); R(c, x - 3, y - 25, 6, 7, '#f6ecd0'); R(c, x - 1, y - 30, 2, 5, '#c94f45'); R(c, x - 2, y - 32, 4, 3, '#e04a3a'); R(c, x - 2, y - 32, 1, 1, '#ff9a8a'); }
+  function student(c, x, y, n, t, cheer) { const bob = cheer ? Math.round(Math.max(0, Math.sin(t * (4 + hash(n) * 2.5) + n)) * 2) : 0, yy = y - bob, sk = FAN_SKIN[n % 5]; R(c, x, yy + 5, 7, 6, FAN_SHIRT[n % 6]); R(c, x + 1, yy, 5, 5, sk); R(c, x + 1, yy - 1, 5, 2, FAN_HAIR[(n * 3) % 5]); R(c, x + 2, yy + 2, 1, 1, '#1c1c22'); R(c, x + 4, yy + 2, 1, 1, '#1c1c22'); if (cheer && (n + Math.floor(t * 1.6)) % 4 === 0) { R(c, x - 1, yy - 4, 2, 8, sk); R(c, x + 6, yy - 4, 2, 8, sk); } }
 
-  // --- MARCO: o mundo do caderno
-  function buildMarco(c) {
-    for (let i = 0; i < 14; i++) R(c, -AO, i * 20, AW, 20, css(mix([.1, .09, .19], [.2, .16, .32], i / 13)));
-    for (let i = 0; i < 90; i++) R(c, -AO + hash(i + 5) * AW, 4 + hash(i + 6) * 150, 1, 1, i % 3 ? '#5a4a80' : '#8a76b0');
-    for (let i = 0; i < 10; i++) { const x = -70 + i * 60, h = 100 + Math.round(hash(i + 41) * 40), col = i % 2 ? '#69617d' : '#5a546e'; for (let r2 = 0; r2 < h; r2++) { const edge = r2 > h - 7 ? ((r2 + i) % 2 ? 2 : 0) : 0; R(c, x + edge, r2, 47 - edge * 2, 1, col); } R(c, x, 0, 1, h, 'rgba(255,255,255,.16)'); R(c, x + 46, 0, 1, h, 'rgba(0,0,0,.2)'); for (let k = 0; k < 7; k++) R(c, x + 8, 20 + k * 13, 31, 1, '#a69bad'); R(c, x + 6, 10, 1, h - 20, '#b07a94'); for (const hy of [14, 40, 66]) ell(c, x + 3, hy, 2, 2, '#1c1830'); for (let k = 0; k < 18; k++) R(c, x + 12 + Math.round(Math.sin(k * 1.1 + i) * 6 + k), 78 + (k % 3) * 2, 2, 1, 'rgba(60,40,80,.5)'); }
-    arenaGround(c, '#4b3b60', '#3c2e50', '#76547f', '#c19bc6', 26);
-    for (let y = 226; y < 270; y += 5) R(c, -AO, y, AW, 1, 'rgba(154,109,148,.35)'); R(c, 60, 225, 1, 45, 'rgba(255,90,120,.4)'); R(c, 62, 225, 1, 45, 'rgba(255,90,120,.25)');
-    board(c, 89, 24, 304, 21, '#6c5677', '#3f3653'); R(c, 92, 27, 298, 1, '#9a82a8');
-    for (const [x0, x1, col, sd] of [[151, 238, '#b1a2bb', 1], [241, 328, '#cfbfd0', -1]]) for (let x = x0; x < x1; x++) { const k = (x - x0) / (x1 - x0), top = sd > 0 ? 140 + Math.round(k * 7) : 147 - Math.round(k * 8), bot = sd > 0 ? 184 + Math.round(k * 9) : 193 - Math.round(k * 9); R(c, x, top, 1, bot - top, col); }
-    for (const [x0, sd] of [[153, 1], [243, -1]]) for (let j = 0; j < 5; j++) for (let x = 0; x < 80; x += 2) { const k = x / 80, yy = (sd > 0 ? 150 + Math.round(k * 7) : 156 - Math.round(k * 8)) + j * 6; R(c, x0 + x, yy, 2, 1, sd > 0 ? '#7c6385' : '#997ea1'); }
-    R(c, 238, 146, 3, 48, '#68546f'); R(c, 238, 146, 1, 48, '#8a7090'); for (let k = 0; k < 40; k++) R(c, 160 + Math.round(Math.sin(k * .5) * 6) + k, 160 + Math.round(Math.cos(k * .7) * 4), 2, 1, 'rgba(60,40,80,.5)');
-    for (const [x, col, dk] of [[10, '#e8c84a', '#a8861f'], [455, '#d83a6a', '#8a1f40']]) { R(c, x, 94, 11, 126, col); R(c, x, 94, 3, 126, 'rgba(255,255,255,.25)'); R(c, x + 8, 94, 3, 126, dk); for (let k = 0; k < 6; k++) R(c, x + k, 94 - k * 2 - 2, 11 - k * 2, 2, k > 3 ? '#2a2a30' : '#e8cfa0'); R(c, x, 200, 11, 4, '#b9c3bf'); R(c, x, 204, 11, 16, '#e8a0b0'); }
-    R(c, 346, 196, 26, 24, '#2a2040'); R(c, 348, 198, 22, 20, '#3a2e58'); R(c, 350, 204, 18, 12, '#e84a9a'); R(c, 350, 204, 18, 2, '#ff9ad0'); R(c, 354, 188, 10, 9, '#2a2040'); R(c, 356, 190, 6, 5, '#e84a9a');
-  }
-  ARENA.marco = { build: buildMarco, dyn(c, t) { for (let i = 0; i < 13; i++) { const x = ((hash(i + 3) * 520 + t * (3 + hash(i) * 4)) % 560) - 40, yy = 35 + hash(i + 18) * 115 + Math.sin(t + i) * 5; R(c, x, yy, 3, 4, '#d8c6dd'); R(c, x, yy, 3, 1, '#ffffff'); } for (let i = 0; i < 6; i++) { const u = (t * .45 + i / 6) % 1; R(c, 358 + (i % 3) * 3, 205 + u * 14, 1, 3, '#e84a9a'); } }, text(c, t) { c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#2a1830'; c.fillText('RABISCOS À SOLTA', 482, 68); c.fillStyle = '#f2d8a6'; c.fillText('RABISCOS À SOLTA', 480, 66); if (window.Art?.drawDoodle) for (let i = 0; i < 5; i++) { c.save(); c.translate(70 + i * 203, 170 + (i % 2) * 59); c.scale(2.5, 2.5); try { window.Art.drawDoodle(c, 0, 0, i % 3, t * .35 + i, true); } catch (e) {} c.restore(); } }, light(g, t) { const p = .75 + .25 * Math.sin(t * 2); bulbGlow(g, 367, 208, p, '255,70,160', 34); bulbGlow(g, 240, 162, .55 * p, '170,120,255', 70); pool(g, 240, 222, .8, '170,120,255', 90); } };
+  // --- ARTHUR: duelo no pátio, com a escola, a torcida na arquibancada e a hora do dia
+  const ART_FAR = (c) => {
+    // prédio principal com torre do relógio
+    R(c, 20, 58, 440, 96, '#e9eee9'); for (let i = 0; i < 900; i++) R(c, 20 + hash(i + 3) * 440, 60 + hash(i + 4) * 90, 1, 1, i % 2 ? '#dde4df' : '#f6f9f6'); R(c, 18, 54, 444, 5, '#173e65'); R(c, 18, 54, 444, 1, '#3a6a94'); R(c, 20, 140, 440, 14, '#254f75'); R(c, 20, 140, 440, 1, '#3a6a94');
+    for (let r2 = 0; r2 < 3; r2++) for (let k = 0; k < 15; k++) { const x = 30 + k * 28.5, y = 66 + r2 * 24; if (x > 196 && x < 270) continue; R(c, x, y, 16, 16, '#294e68'); R(c, x + 1, y + 1, 14, 14, '#7bafb7'); R(c, x + 1, y + 1, 14, 5, '#a5cbd0'); R(c, x + 7, y + 1, 1, 14, '#e6eee1'); R(c, x - 1, y + 16, 18, 2, '#c7d9e0'); }
+    R(c, 205, 20, 70, 120, '#f3f6f1'); R(c, 205, 20, 2, 120, '#ffffff'); R(c, 272, 20, 3, 120, '#c8d2cc'); R(c, 200, 16, 80, 5, '#173e65'); for (let r2 = 0; r2 < 12; r2++) R(c, 210 + r2 * 2, 4 + r2, 60 - r2 * 4, 1, '#2d5a86'); R(c, 239, -2, 2, 6, '#5a6a7a');
+    R(c, 222, 108, 36, 32, '#5c4a36'); R(c, 224, 110, 32, 30, '#8a6a46'); R(c, 239, 110, 2, 30, '#5c4a36'); R(c, 225, 104, 30, 3, '#173e65');
+    R(c, 300, 8, 2, 50, '#8a96a0'); R(c, 300, 8, 2, 1, '#e0e8ee');
+    for (const [x, s] of [[48, 1], [150, .8], [330, .9], [430, 1.1]]) { for (let k = 0; k < 28 * s; k++) R(c, x + Math.round(k * .08), 154 - k, 3, 1, k % 4 ? '#7a5a3a' : '#5a4028'); for (let i = 0; i < 7; i++) { const a = -Math.PI + .25 + i * .44, L = 16 * s; for (let k = 0; k <= L; k++) { const u = k / L; R(c, x + 2 + Math.cos(a) * k, 154 - 28 * s + Math.sin(a) * k * .5 + u * u * 8 * s, 2, 1, i % 2 ? '#3f8a46' : '#5aa850'); } } }
+  };
+  const ART_MID = (c) => {
+    // arquibancada e alambrado
+    for (let r2 = 0; r2 < 3; r2++) { const y = 160 + r2 * 13; R(c, -AO, y + 9, AW, 4, '#9aa6b0'); R(c, -AO, y + 9, AW, 1, '#d0d8de'); R(c, -AO, y + 13, AW, 3, '#5f6c78'); } for (let x = -AO; x < AW - AO; x += 40) R(c, x, 169, 3, 51, '#4f5c66');
+    c.fillStyle = 'rgba(160,175,170,.45)'; for (let y = 120; y < 200; y++) for (let x = -AO + (y % 6); x < AW - AO; x += 6) c.fillRect(x, y, 1, 1);
+    R(c, -AO, 118, AW, 2, '#657e71'); R(c, -AO, 118, AW, 1, '#93a898'); for (let x = -AO; x < AW - AO; x += 48) { R(c, x, 118, 3, 82, '#597a70'); R(c, x, 118, 1, 82, '#99a48a'); }
+    // faixas pintadas pelos alunos
+    for (const [x, w, col] of [[100, 280, '#f3ead6'], [-110, 120, '#e8c84a'], [470, 110, '#7ac8e8']]) { R(c, x, 124, w, 22, col); R(c, x, 124, w, 1, 'rgba(255,255,255,.5)'); for (let k = 0; k < w; k += 4) R(c, x + k, 146, 3, 1 + (k % 3), col); R(c, x - 1, 123, 2, 3, '#5a5a5a'); R(c, x + w - 1, 123, 2, 3, '#5a5a5a'); for (let i = 0; i < 30; i++) R(c, x + hash(i + x) * w, 126 + hash(i + x + 1) * 18, 1, 1, 'rgba(0,0,0,.08)'); }
+  };
+  const ART_NEAR = (c) => {
+    R(c, -AO, 200, AW, 20, '#b9c3bd'); for (let x = -AO; x < AW - AO; x += 30) R(c, x, 201, 1, 19, '#a3aea8'); R(c, -AO, 200, AW, 1, '#e3e8e2');
+    arenaGround(c, '#bacbc7', '#a9bbb7', '#80a6aa', '#f3efcf', 29.5);
+    for (let a = 0; a < 260; a++) { const an = a / 260 * Math.PI * 2, x = 240 + Math.cos(an) * 120, y = 245 + Math.sin(an) * 16; if (hash(a + 5) > .15) R(c, x, y, 2, 1, 'rgba(255,255,255,.7)'); } R(c, 238, 230, 4, 30, 'rgba(255,255,255,.5)');
+    for (const x of [55, 404]) { R(c, x - 1, 164, 27, 56, '#1d3a4c'); R(c, x, 165, 25, 54, '#315d7a'); R(c, x + 2, 168, 21, 30, '#527c91'); for (let r2 = 0; r2 < 3; r2++) for (let k = 0; k < 3; k++) { R(c, x + 4 + k * 6, 171 + r2 * 9, 4, 6, ['#e04a3a', '#3a7fd0', '#e8c23a'][(k + r2) % 3]); R(c, x + 4 + k * 6, 171 + r2 * 9, 4, 1, 'rgba(255,255,255,.5)'); } R(c, x + 2, 203, 21, 8, '#1d2a30'); R(c, x + 18, 200, 3, 3, '#7ad87a'); R(c, x - 3, 162, 31, 4, '#bed4cf'); for (let k = 0; k < 18; k++) R(c, x + 4 + Math.round((18 - k) * .4), 169 + k, 2, 1, 'rgba(255,255,255,.3)'); }
+    for (const [x, d] of [[-80, 1], [560, -1]]) { R(c, x, 120, 4, 100, '#425e58'); R(c, x, 120, 1, 100, '#6f8a82'); R(c, x + (d > 0 ? 4 : -34), 108, 34, 22, '#d3d2b8'); R(c, x + (d > 0 ? 6 : -32), 110, 30, 18, '#849e91'); R(c, x + (d > 0 ? 20 : -18), 128, 14, 2, '#c16f4e'); }
+    for (const [x, col] of [[30, '#c9574a'], [150, '#3a6a9a'], [330, '#e8c23a'], [440, '#6ab86a']]) { R(c, x, 212, 8, 8, col); R(c, x + 1, 210, 6, 2, col); R(c, x + 2, 214, 4, 2, 'rgba(255,255,255,.3)'); R(c, x, 219, 8, 1, 'rgba(0,0,0,.25)'); }
+  };
+  ARENA.arthur = { daytime: true, layers: [[.3, 'arthur-far', ART_FAR], [.6, 'arthur-mid', ART_MID], [1, 'arthur-near', ART_NEAR]],
+    back(c, s, t, ox) { sky(c, s, t, 0); tile(c, city(31, 108)[0], -ox * .12); },
+    mid(c, s, t, ox) { const fx = Math.round(ox * .3); { const kx = 240 + fx, ky = 36; ell(c, kx, ky, 11, 11, '#173e65'); wallClock(c, kx, ky, s.h, 9, '#f6f2e2', '#c8b88a'); } for (let k = 0; k < 13; k++) { const wv = Math.round(Math.sin(t * 3 + k * .5) * (k / 12) * 2); R(c, 302 + k + fx, 9 + wv, 1, 9, k < 6 ? '#2a5ab8' : '#e8c84a'); } const mx = Math.round(ox * .6); for (let r2 = 0; r2 < 3; r2++) for (let k = 0; k < 66; k++) { const x = -AO + 4 + k * 12 + (r2 % 2) * 6 + mx, y = 160 + r2 * 13 - 2; if (x < -10 || x > LW + 10) continue; if (hash(k * 7 + r2) < .18) continue; student(c, x, y, k * 3 + r2 * 31, t, true); } },
+    text(c, t, ox) { c.save(); c.translate(Math.round(ox * .6) * 2, 0); c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#c94f45'; c.fillText('UM ACERTO NO PÁTIO', 480, 270); c.fillStyle = '#2a3a78'; c.fillText('BRIGA!', -100, 270); c.fillStyle = '#16476a'; c.fillText('UUUH!', 1050, 270); c.restore(); },
+    light(g, s, t) { const a = cl((s.night - .12) * 1.4); for (const x of [-60, 540]) { if (a < .02) break; const gr = g.createLinearGradient(0, 100, 0, 262); gr.addColorStop(0, `rgba(235,240,255,${.3 * a})`); gr.addColorStop(1, `rgba(235,240,255,${.04 * a})`); g.fillStyle = gr; g.beginPath(); g.moveTo(x - 6, 100); g.lineTo(x + 6, 100); g.lineTo(x + 120 * Math.sign(240 - x), 262); g.lineTo(x + 20 * Math.sign(240 - x), 262); g.closePath(); g.fill(); } } };
 
-  // --- MENEZES: o palco da provocação
-  function buildMenezes(c) {
-    R(c, -AO, 0, AW, 220, '#382b35'); for (let x = -AO; x < AW - AO; x += 14) { R(c, x, 28, 1, 160, 'rgba(255,255,255,.05)'); R(c, x + 7, 28, 1, 160, 'rgba(0,0,0,.14)'); } for (let i = 0; i < 400; i++) R(c, -AO + hash(i + 3) * AW, 30 + hash(i + 4) * 160, 1, 1, i % 2 ? '#2e2229' : '#43343e');
-    R(c, -AO, 0, AW, 27, '#241a20'); R(c, -AO, 27, AW, 13, '#6c514b'); R(c, -AO, 27, AW, 1, '#a07a62'); R(c, -AO, 40, AW, 6, '#c1a16f'); R(c, -AO, 40, AW, 1, '#ecd09a'); R(c, -AO, 46, AW, 1, 'rgba(0,0,0,.35)');
-    for (let x = -AO; x < AW - AO; x += 10) { R(c, x + 3, 15, 4, 5, '#ffe1a0'); R(c, x + 4, 16, 2, 3, '#fff3cf'); }
-    for (const sd of [0, 1]) { const x0 = sd ? 408 : -100, w = 172; R(c, x0, 27, w, 191, '#7b4252'); for (let k = 0; k < w; k += 7) { R(c, x0 + k, 46, 3, 170, '#a85e61'); R(c, x0 + k, 46, 1, 170, '#c97c7e'); R(c, x0 + k + 5, 46, 2, 170, '#5a2c3a'); } for (let k = 0; k < w; k++) { const y = sd ? 140 + Math.round(k * .18) : 158 - Math.round(k * .18); R(c, x0 + k, y, 1, 14, '#c39865'); R(c, x0 + k, y, 1, 2, '#ecd09a'); R(c, x0 + k, y + 12, 1, 2, '#8a6a3a'); } for (let k = 0; k < w; k += 5) R(c, x0 + k, 212, 2, 6, '#c39865'); R(c, x0 + (sd ? 0 : w - 3), 27, 3, 191, 'rgba(0,0,0,.3)'); }
-    board(c, 90, 41, 300, 115, '#2f5147', '#8c7552'); R(c, 94, 45, 292, 1, '#668168'); for (let i = 0; i < 200; i++) R(c, 96 + hash(i + 7) * 286, 48 + hash(i + 9) * 104, 2, 1, i % 2 ? '#38604f' : '#264238');
-    for (const x of [53, 389]) { R(c, x - 1, 142, 43, 78, '#101614'); R(c, x, 143, 41, 76, '#263b37'); R(c, x, 143, 41, 2, '#47605a'); for (const cy of [163, 197]) { ell(c, x + 20, cy, 13, 13, '#141c19'); ell(c, x + 20, cy, 9, 9, '#8b9978'); ell(c, x + 20, cy, 3, 3, '#3f5749'); } }
-    R(c, 180, 18, 120, 3, '#16100e'); for (const x of [200, 240, 280]) { R(c, x - 1, 21, 3, 5, '#16100e'); R(c, x - 5, 25, 11, 8, '#2a2220'); R(c, x - 4, 26, 9, 6, '#fff3cf'); }
-    R(c, -AO, 199, AW, 21, '#68594e'); R(c, -AO, 199, AW, 3, '#dbbd86'); R(c, -AO, 199, AW, 1, '#f6e2b0'); for (let x = -AO; x < AW - AO; x += 27) R(c, x, 202, 1, 18, '#9d8262');
-    arenaGround(c, '#755d47', '#665040', '#a18461', '#dbbd86', 27); for (let k = 0; k < 40; k++) R(c, -AO + hash(k + 331) * AW, 230 + hash(k + 332) * 36, 14, 1, 'rgba(255,230,180,.12)');
-  }
-  ARENA.menezes = { build: buildMenezes, dyn(c, t) { for (const x of [53, 389]) for (const cy of [163, 197]) { const p = Math.max(0, Math.sin(t * 9 + x + cy)); ell(c, x + 20, cy, 9 + p, 9 + p, '#8b9978'); ell(c, x + 20, cy, 3 + p * .8, 3 + p * .8, '#3f5749'); } for (let x = -AO + 5; x < AW - AO; x += 10) if (Math.sin(t * 4 + x * .3) <= -.3) R(c, x + 3, 15, 4, 5, '#7a5a30'); }, text(c, t) { c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#e7e2bd'; c.fillText('PALCO DA PROVOCAÇÃO', 480, 108); c.fillStyle = '#cfe0c0'; c.fillText('da roça poudiaaam', 440, 156); c.fillStyle = '#f2d89a'; c.fillText('reeeis pouddiaaam', 540, 196); c.fillStyle = '#cfe0c0'; c.fillText('da roça pegou ar', 410, 236); c.font = '8px Pixel, monospace'; c.fillStyle = '#f2d89a'; c.fillText('teketeketeketeke', 560, 268); c.fillStyle = '#cfe0c0'; c.fillText('o pra ravid falando sozinho', 420, 292); }, light(g, t) { for (const [x, col] of [[200, '255,120,150'], [240, '255,240,200'], [280, '120,180,255']]) { const sw = Math.sin(t * .7 + x) * 40, cx = 240 + sw + (x - 240) * .4, gr = g.createLinearGradient(0, 30, 0, 225); gr.addColorStop(0, `rgba(${col},.32)`); gr.addColorStop(1, `rgba(${col},.04)`); g.fillStyle = gr; g.beginPath(); g.moveTo(x - 3, 30); g.lineTo(x + 3, 30); g.lineTo(cx + 30, 225); g.lineTo(cx - 30, 225); g.closePath(); g.fill(); pool(g, cx, 226, .9, col, 42); bulbGlow(g, x, 30, .8, col, 22); } for (let x = -AO + 5; x < AW - AO; x += 20) bulbGlow(g, x + 5, 18, .35, '255,210,130', 12); } };
+  // --- MARCO: dentro do caderno, à noite
+  const MAR_FAR = (c) => {
+    R(c, -AO, 0, AW, LH, '#1e1b33'); for (let x = -AO; x < AW - AO; x += 8) R(c, x, 0, 1, LH, x % 40 ? '#26234a' : '#34306a'); for (let y = 0; y < LH; y += 8) R(c, -AO, y, AW, 1, y % 40 ? '#26234a' : '#34306a');
+    for (let x = -AO + 6; x < AW - AO; x += 22) { ell(c, x + 4, 4, 6, 7, '#5a5878'); ell(c, x + 4, 4, 4, 5, '#1e1b33'); R(c, x, 0, 2, 6, '#b8b8d8'); R(c, x + 1, 9, 6, 2, '#0e0c1c'); }
+    for (let a = 0; a < 140; a++) { const an = a / 140 * 6.28; R(c, 360 + Math.cos(an) * 18, 44 + Math.sin(an) * 18, 1, 1, '#c8d0ff'); } for (let k = -16; k < 16; k += 3) for (let j = 0; j < 30; j++) { const x = 360 + k + j * .5 - 7, y = 44 - 15 + j; if ((x - 360) ** 2 + (y - 44) ** 2 < 300) R(c, x, y, 1, 1, '#8a96e8'); }
+    for (let i = 0; i < 40; i++) { const x = -AO + hash(i + 31) * AW, y = 14 + hash(i + 32) * 90; R(c, x - 1, y, 3, 1, '#9aa6ff'); R(c, x, y - 1, 1, 3, '#9aa6ff'); }
+  };
+  const MAR_HILLS = (c) => {
+    hillLine(c, -AO, AW - AO, 150, 46, 1.7, '#2c2846', '#6a7ad8', 1);
+    for (let x = -AO; x < AW - AO; x += 3) for (let y = 110; y < 200; y += 4) { if (hash(x * 7 + y) > .5) R(c, x + ((y / 4) & 1), y, 2, 1, 'rgba(106,122,216,.18)'); }
+    hillLine(c, -AO, AW - AO, 182, 30, 4.2, '#3a3458', '#7f8ff0', 1);
+    const cx = 110, cy = 112; for (const [dx, w, h] of [[-22, 12, 34], [-8, 18, 44], [12, 12, 30]]) { const x = cx + dx; R(c, x, cy - h, w, h, '#3a3458'); R(c, x, cy - h, w, 1, '#8a9af8'); R(c, x, cy - h, 1, h, '#8a9af8'); R(c, x + w - 1, cy - h, 1, h, '#8a9af8'); for (let k = 0; k < w; k += 4) R(c, x + k, cy - h - 3, 2, 3, '#8a9af8'); R(c, x + w / 2 - 1, cy - h + 8, 2, 4, '#ffd88a'); } R(c, cx + 1, cy - 58, 1, 14, '#8a9af8'); for (let k = 0; k < 7; k++) R(c, cx + 2, cy - 58 + k, 7 - k, 1, '#e84a9a');
+    for (let i = 0; i < 14; i++) { const x = -AO + 20 + i * 56 + hash(i) * 20, y = 160 + Math.round(hash(i + 3) * 14); R(c, x, y, 1, 12, '#7f8ff0'); for (let a = 0; a < 30; a++) { const an = a / 30 * 6.28; R(c, x + Math.cos(an) * 6, y - 4 + Math.sin(an) * 5, 1, 1, '#7f8ff0'); } }
+  };
+  const MAR_MID = (c) => {
+    for (let i = 0; i < 7; i++) { const x = -120 + i * 120 + (i % 2) * 30, h = 70 + Math.round(hash(i + 41) * 40), col = i % 2 ? '#69617d' : '#5a546e'; for (let r2 = 0; r2 < h; r2++) { const edge = r2 > h - 6 ? ((r2 + i) % 2 ? 2 : 0) : 0; R(c, x + edge, r2, 40 - edge * 2, 1, col); } R(c, x, 0, 1, h, 'rgba(255,255,255,.16)'); for (let k = 0; k < 5; k++) R(c, x + 7, 16 + k * 12, 27, 1, '#a69bad'); R(c, x + 5, 8, 1, h - 16, '#b07a94'); for (const hy of [12, 34, 56]) ell(c, x + 3, hy, 1.5, 1.5, '#1c1830'); }
+    R(c, 80, 150, 160, 9, '#c9a56a'); R(c, 80, 150, 160, 2, '#e8c890'); for (let k = 0; k < 160; k += 4) R(c, 80 + k, 151, 1, k % 20 ? 3 : 5, '#5a4028'); R(c, 84, 159, 4, 61, '#8a6a46'); R(c, 232, 159, 4, 61, '#8a6a46');
+    R(c, 392, 108, 34, 112, '#a8b0c0'); R(c, 392, 108, 6, 112, '#d8e0ec'); R(c, 420, 108, 6, 112, '#6a7080'); R(c, 386, 102, 46, 8, '#8a90a0'); for (let y = 118; y < 210; y += 10) R(c, 396, y, 26, 2, '#7a8090'); ell(c, 409, 132, 7, 7, '#2a2a38'); ell(c, 409, 132, 4, 4, '#14141c');
+    for (const [x, r] of [[-40, 14], [300, 10], [520, 16]]) { ell(c, x, 220 - r, r, r * .9, '#c8c0d0'); for (let k = 0; k < 12; k++) { const a = hash(k + x) * 6.28, rr = hash(k + x + 1) * r * .8; R(c, x + Math.cos(a) * rr, 220 - r + Math.sin(a) * rr * .9, 3, 1, '#8a8098'); } ell(c, x - r * .3, 220 - r * 1.3, r * .3, r * .2, '#e8e0f0'); }
+  };
+  const MAR_NEAR = (c) => {
+    arenaGround(c, '#4b3b60', '#3c2e50', '#76547f', '#c19bc6', 26); for (let y = 226; y < 270; y += 5) R(c, -AO, y, AW, 1, 'rgba(154,109,148,.35)'); R(c, 60, 225, 1, 45, 'rgba(255,90,120,.4)'); R(c, 62, 225, 1, 45, 'rgba(255,90,120,.25)');
+    R(c, -AO, 196, AW, 24, '#3a2e50'); R(c, -AO, 196, AW, 1, '#6a5a88'); for (let y = 200; y < 220; y += 5) R(c, -AO, y, AW, 1, 'rgba(154,109,148,.3)');
+    for (const [x0, x1, col, sd] of [[151, 238, '#b1a2bb', 1], [241, 328, '#cfbfd0', -1]]) for (let x = x0; x < x1; x++) { const k = (x - x0) / (x1 - x0), top = sd > 0 ? 150 + Math.round(k * 7) : 157 - Math.round(k * 8), bot = sd > 0 ? 194 + Math.round(k * 9) : 203 - Math.round(k * 9); R(c, x, top, 1, bot - top, col); R(c, x, bot, 1, 2, 'rgba(0,0,0,.3)'); }
+    for (const [x0, sd] of [[153, 1], [243, -1]]) for (let j = 0; j < 5; j++) for (let x = 0; x < 80; x += 2) { const k = x / 80, yy = (sd > 0 ? 160 + Math.round(k * 7) : 166 - Math.round(k * 8)) + j * 6; R(c, x0 + x, yy, 2, 1, sd > 0 ? '#7c6385' : '#997ea1'); }
+    R(c, 238, 156, 3, 48, '#68546f'); for (const [x, col, dk] of [[10, '#e8c84a', '#a8861f'], [455, '#d83a6a', '#8a1f40']]) { R(c, x, 104, 11, 116, col); R(c, x, 104, 3, 116, 'rgba(255,255,255,.25)'); R(c, x + 8, 104, 3, 116, dk); for (let k = 0; k < 6; k++) R(c, x + k, 104 - k * 2 - 2, 11 - k * 2, 2, k > 3 ? '#2a2a30' : '#e8cfa0'); R(c, x, 200, 11, 4, '#b9c3bf'); R(c, x, 204, 11, 16, '#e8a0b0'); }
+    R(c, 346, 196, 26, 24, '#2a2040'); R(c, 348, 198, 22, 20, '#3a2e58'); R(c, 350, 204, 18, 12, '#e84a9a'); R(c, 350, 204, 18, 2, '#ff9ad0'); R(c, 354, 188, 10, 9, '#2a2040'); R(c, 356, 190, 6, 5, '#e84a9a'); ell(c, 330, 219, 18, 2.5, '#e84a9a'); ell(c, 120, 219, 12, 2, '#4ad8e8');
+    R(c, 270, 210, 20, 10, '#e8a0b0'); R(c, 270, 210, 20, 2, '#ffc8d8'); R(c, 270, 217, 20, 3, '#5a8ac8'); for (let k = 0; k < 8; k++) R(c, 262 + hash(k) * 40, 218, 2, 2, '#e8a0b0');
+    board(c, 120, 60, 240, 22, '#d7c9d7', '#8a7a94'); for (const x of [126, 350]) { R(c, x, 56, 6, 8, 'rgba(240,230,170,.8)'); }
+  };
+  ARENA.marco = { layers: [[.1, 'marco-far', MAR_FAR], [.3, 'marco-hills', MAR_HILLS], [.6, 'marco-mid', MAR_MID], [1, 'marco-near', MAR_NEAR]],
+    mid(c, s, t, ox) { for (let i = 0; i < 16; i++) { const x = ((hash(i + 3) * 520 + t * (3 + hash(i) * 4)) % 560) - 40, yy = 30 + hash(i + 18) * 140 + Math.sin(t + i) * 5; R(c, x, yy, 3, 4, '#d8c6dd'); R(c, x, yy, 3, 1, '#ffffff'); } const nx = ox; for (let i = 0; i < 6; i++) { const u = (t * .45 + i / 6) % 1; R(c, 358 + (i % 3) * 3 + nx, 205 + u * 14, 1, 3, '#e84a9a'); } },
+    text(c, t, ox) { c.save(); c.translate(ox * 2, 0); c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#3a2848'; c.fillText('RABISCOS À SOLTA', 480, 142); if (window.Art?.drawDoodle) for (let i = 0; i < 5; i++) { c.save(); c.translate(70 + i * 203, 170 + (i % 2) * 59); c.scale(2.5, 2.5); try { window.Art.drawDoodle(c, 0, 0, i % 3, t * .35 + i, true); } catch (e) {} c.restore(); } c.restore(); },
+    light(g, s, t) { const p = .75 + .25 * Math.sin(t * 2); bulbGlow(g, 367, 208, p, '255,70,160', 38); bulbGlow(g, 330, 219, p * .6, '255,70,160', 26); bulbGlow(g, 120, 219, p * .6, '70,220,255', 26); bulbGlow(g, 240, 172, .55 * p, '170,120,255', 74); pool(g, 240, 224, .8, '170,120,255', 100); } };
 
-  // --- NIKOLAS: o trono do bolo roubado
-  function buildNikolas(c) {
-    for (let i = 0; i < 14; i++) R(c, -AO, i * 9, AW, 9, css(mix([.52, .74, .88], [.98, .9, .75], Math.pow(i / 13, 1.4))));
-    ell(c, 375, 41, 15, 15, 'rgba(255,231,168,.2)'); ell(c, 375, 41, 11, 11, '#ffe7a8'); ell(c, 373, 39, 6, 6, '#fff6d6');
-    for (let i = 0; i < 8; i++) { const x = -90 + i * 100 + (i % 2) * 20, h = 26 + (i % 3) * 14; for (let k = -30; k <= 30; k++) { const hh = Math.round(h * (1 - (k * k) / 900)); R(c, x + k, 120 - hh, 1, hh + 4, i % 2 ? '#a8785c' : '#c08a68'); R(c, x + k, 120 - hh, 1, 2, '#e8c898'); } for (let k = -20; k <= 20; k += 7) R(c, x + k, 120 - Math.round(h * (1 - (k * k) / 900)), 2, 6 + (k & 7), '#f6ecd0'); }
-    R(c, -AO, 120, AW, 100, '#9e7256'); R(c, -AO, 120, AW, 4, '#d1a273'); R(c, -AO, 120, AW, 1, '#ecd0a0'); for (let x = -AO; x < AW - AO; x += 9) R(c, x, 124, 5, 2 + (hash(x) * 4 | 0), '#f6ecd0'); for (let i = 0; i < 360; i++) R(c, -AO + hash(i + 3) * AW, 128 + hash(i + 4) * 90, 1 + hash(i) * 2, 1, ['#8a5e44', '#b88660', '#6a4632'][i % 3]); for (let i = 0; i < 40; i++) R(c, -AO + hash(i + 71) * AW, 130 + hash(i + 72) * 84, 2, 1, ['#e84a8a', '#f2d24a', '#4ab8e8', '#6ad86a'][i % 4]);
+  // --- MENEZES: teatro no esgoto, com túnel ao fundo e plateia de ratos
+  const MEN_TUNNEL = (c) => {
+    R(c, -AO, 0, AW, LH, '#120e10');
+    for (let i = 0; i < 7; i++) { const w = 560 - i * 70, h = 210 - i * 24, x = 240 - w / 2, y = 205 - h, col = css(mix([.36, .25, .22], [.07, .06, .06], i / 6)), mort = css(mix([.24, .17, .15], [.05, .04, .04], i / 6));
+      for (let yy = 0; yy < h; yy++) { const r = Math.min(1, yy / (w * .5)), half = yy < w * .5 ? Math.round(Math.sqrt(Math.max(0, (w * .5) ** 2 - (w * .5 - yy) ** 2))) : w / 2; R(c, 240 - half, y + yy, half * 2, 1, col); }
+      for (let yy = y; yy < 205; yy += 5) for (let xx = x + ((yy / 5) & 1) * 5; xx < x + w; xx += 10) R(c, xx, yy, 1, 5, mort); for (let xx = x; xx < x + w; xx += 2) R(c, xx, 205, 1, 1, mort); }
+    for (let yy = 0; yy < 26; yy++) R(c, 240 - 24 + yy * .3, 168 + yy, 48 - yy * .6, 1, `rgba(120,220,140,${.35 - yy * .01})`);
+    for (let r2 = 0; r2 < 14; r2++) { const k = r2 / 13, w = 26 + k * 260, y = 180 + r2 * 2.6; R(c, 240 - w / 2, y, w, 3, css(mix([.12, .32, .24], [.18, .42, .3], k))); }
+  };
+  const MEN_WALLS = (c) => {
+    for (const [x0, w] of [[-AO, 210], [370, 260]]) { R(c, x0, 0, w, 205, '#4a2e28'); for (let y = 0; y < 205; y += 6) for (let x = x0 + ((y / 6) & 1) * 6; x < x0 + w; x += 12) { R(c, x, y, 11, 5, ['#5a3a30', '#6a4436', '#52342c'][(x * 3 + y) % 3]); R(c, x, y, 11, 1, 'rgba(255,255,255,.07)'); } R(c, x0 + (x0 < 0 ? w - 2 : 0), 0, 2, 205, '#1c1210'); }
+    for (const [y, h, col] of [[44, 9, '#6a7a72'], [64, 6, '#8a5a3a']]) { R(c, -AO, y, 210, h, col); R(c, -AO, y, 210, 2, 'rgba(255,255,255,.25)'); R(c, -AO, y + h - 2, 210, 2, 'rgba(0,0,0,.3)'); R(c, 370, y + 6, 260, h, col); R(c, 370, y + 6, 260, 2, 'rgba(255,255,255,.25)'); for (let x = -AO + 20; x < 60; x += 50) R(c, x, y - 1, 4, h + 2, '#3a4440'); for (let x = 380; x < 630; x += 50) R(c, x, y + 5, 4, h + 2, '#3a4440'); }
+    for (const x of [30, 420]) { R(c, x, 0, 10, 205, '#5a6a64'); R(c, x, 0, 3, 205, '#8a9a92'); R(c, x + 8, 0, 2, 205, '#3a4440'); for (let y = 20; y < 200; y += 40) R(c, x - 2, y, 14, 4, '#3a4440'); ell(c, x + 5, 120, 8, 8, '#a83a2a'); ell(c, x + 5, 120, 5, 5, '#5a4a40'); ell(c, x + 5, 120, 2, 2, '#a83a2a'); }
+    for (const [x, y, col] of [[-60, 110, '#e8c84a'], [470, 130, '#3ad0c0'], [540, 90, '#e84a8a']]) { for (let k = 0; k < 26; k++) R(c, x + k, y + Math.round(Math.sin(k * .7) * 3), 2, 2, col); R(c, x + 2, y - 5, 2, 10, col); R(c, x + 12, y - 6, 2, 11, col); R(c, x + 21, y - 4, 2, 9, col); }
+  };
+  const MEN_STAGE = (c) => {
+    for (const sd of [0, 1]) { const x0 = sd ? 400 : -150, w = 230; for (let k = 0; k < w; k += 9) { const col = ['#7b4252', '#8a4a4a', '#6a3a48', '#9a5a50'][(k / 9 | 0) % 4]; R(c, x0 + k, 20, 9, 186, col); R(c, x0 + k, 20, 2, 186, 'rgba(255,255,255,.12)'); R(c, x0 + k + 7, 20, 2, 186, 'rgba(0,0,0,.25)'); if ((k / 9 | 0) % 3 === 1) { R(c, x0 + k + 2, 80 + (k % 50), 5, 6, '#c8a878'); R(c, x0 + k + 3, 81 + (k % 50), 1, 4, '#5a4030'); } } R(c, x0, 20, w, 3, '#3a2a20'); for (let k = 0; k < w; k += 4) R(c, x0 + k, 204, 2, 3, '#c39865'); }
+    for (let x = 80, i = 0; x < 400; x += 4, i++) R(c, x, 20 + Math.round(Math.sin(i * .2) * 2), 4, 1, '#2a2220');
+    for (let y = 32; y < 98; y++) { const sag = Math.round(Math.sin((y - 32) / 66 * Math.PI) * 2); R(c, 122 + sag, y, 236 - sag * 2, 1, y % 9 === 0 ? '#cfc6b4' : '#e2dccd'); } for (let k = 0; k < 7; k++) R(c, 128 + k * 34, 32, 1, 66, 'rgba(120,100,80,.18)'); for (let k = 0; k < 236; k += 3) R(c, 122 + k, 97 + (k % 2), 2, 2, '#e2dccd'); R(c, 122, 30, 236, 3, '#5a4a40'); for (const x of [126, 354]) R(c, x, 20, 2, 10, '#2a2220');
+    for (const x of [53, 389]) { R(c, x - 1, 142, 43, 64, '#101614'); R(c, x, 143, 41, 62, '#263b37'); R(c, x, 143, 41, 2, '#47605a'); for (const cy of [160, 188]) { ell(c, x + 20, cy, 12, 12, '#141c19'); ell(c, x + 20, cy, 8, 8, '#8b9978'); ell(c, x + 20, cy, 3, 3, '#3f5749'); } }
+    R(c, -AO, 205, AW, 15, '#68594e'); R(c, -AO, 205, AW, 2, '#dbbd86'); for (let x = -AO; x < AW - AO; x += 27) R(c, x, 207, 1, 13, '#9d8262'); for (let x = -AO + 6; x < AW - AO; x += 14) { R(c, x, 212, 4, 4, '#ffe1a0'); R(c, x + 1, 213, 2, 2, '#fff3cf'); }
+    R(c, -AO, FLOOR, AW, 50, '#1c1416'); R(c, -AO, FLOOR, AW, 2, '#dbbd86');
+  };
+  ARENA.menezes = { layers: [[.15, 'men-tunnel', MEN_TUNNEL], [.45, 'men-walls', MEN_WALLS], [1, 'men-stage', MEN_STAGE]],
+    mid(c, s, t, ox) { const tx = Math.round(ox * .15); for (let i = 0; i < 18; i++) { const k = (i % 9) / 8, w = 30 + k * 220, y = 182 + (i % 9) * 2.4, x = 240 - w / 2 + ((t * (8 + i) + i * 40) % w) + tx; R(c, x, y, 4 + k * 6, 1, 'rgba(150,255,190,.45)'); } const wx = Math.round(ox * .45); for (let i = 0; i < 8; i++) { const x = (i < 4 ? -120 + i * 50 : 390 + (i - 4) * 55) + wx, u = (t * .6 + hash(i)) % 1; R(c, x, 60 + u * 140, 1, 3, 'rgba(160,220,200,.7)'); } for (let x = -AO + 10; x < AW - AO; x += 40) { const sx = x + wx, y = 30 + Math.round(Math.sin(x * .1) * 3); if (sx < -10 || sx > LW + 10) continue; R(c, sx, 0, 1, y, '#2a2220'); R(c, sx - 2, y, 5, 5, '#ffd88a'); } },
+    near(c, s, t, ox) { for (const x of [53, 389]) for (const cy of [160, 188]) { const p = Math.max(0, Math.sin(t * 9 + x + cy)); ell(c, x + 20 + ox, cy, 8 + p, 8 + p, '#8b9978'); ell(c, x + 20 + ox, cy, 3 + p * .8, 3 + p * .8, '#3f5749'); } for (let r2 = 0; r2 < 3; r2++) for (let k = 0; k < 40; k++) { const x = -AO + 6 + k * 20 + (r2 % 2) * 10 + ox, y = 236 + r2 * 11; if (x < -10 || x > LW + 10) continue; const bob = Math.round(Math.max(0, Math.sin(t * 5 + k + r2 * 2)) * 2); ell(c, x, y - bob, 6, 4, '#2a2228'); ell(c, x - 4, y - 4 - bob, 2.5, 2.5, '#3a2e34'); ell(c, x + 4, y - 4 - bob, 2.5, 2.5, '#3a2e34'); if (Math.sin(t * .7 + k * 3 + r2) > -.85) { R(c, x - 2, y - 1 - bob, 1, 1, '#ff5a6a'); R(c, x + 2, y - 1 - bob, 1, 1, '#ff5a6a'); } } },
+    text(c, t, ox) { c.save(); c.translate(ox * 2, 0); c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#a8322f'; c.fillText('PALCO DA PROVOCAÇÃO', 480, 88); c.font = '8px Pixel, monospace'; c.fillStyle = '#3a3a48'; c.fillText('da roça poudiaaam', 420, 116); c.fillText('reeeis pouddiaaam', 545, 134); c.fillText('da roça pegou ar', 410, 152); c.fillText('teketeketeketeke', 550, 170); c.fillText('o pra ravid falando sozinho', 470, 186); c.restore(); },
+    light(g, s, t) { bulbGlow(g, 240, 178, .5, '120,240,160', 80); for (const [x, col] of [[180, '255,120,150'], [240, '255,240,200'], [300, '120,180,255']]) { const sw = Math.sin(t * .7 + x) * 40, cx = 240 + sw + (x - 240) * .4, gr = g.createLinearGradient(0, 22, 0, 222); gr.addColorStop(0, `rgba(${col},.3)`); gr.addColorStop(1, `rgba(${col},.04)`); g.fillStyle = gr; g.beginPath(); g.moveTo(x - 3, 22); g.lineTo(x + 3, 22); g.lineTo(cx + 30, 222); g.lineTo(cx - 30, 222); g.closePath(); g.fill(); pool(g, cx, 222, .9, col, 42); bulbGlow(g, x, 22, .8, col, 20); } for (let x = -AO + 8; x < AW - AO; x += 28) bulbGlow(g, x, 214, .4, '255,210,130', 12); } };
+
+  // --- NIKOLAS: reino de doces sob a tempestade
+  const NIK_FAR = (c) => {
+    for (let i = 0; i < 16; i++) R(c, -AO, i * 8, AW, 8, css(mix([.16, .22, .17], [.46, .5, .38], Math.pow(i / 15, 1.2))));
+    for (const [x, h, col] of [[-100, 60, '#c8a0b8'], [20, 80, '#d8b0c4'], [380, 70, '#c8a0b8'], [520, 90, '#d8b0c4']]) { for (let k = -46; k <= 46; k++) { const hh = Math.round(h * (1 - Math.abs(k) / 46)); R(c, x + k, 128 - hh, 1, hh, col); if (hh > h * .62) R(c, x + k, 128 - hh, 1, Math.min(6, hh - h * .6), '#fff6ea'); } }
+    const cx = 240; for (const [w, h, y, col] of [[120, 22, 128, '#c08a68'], [90, 20, 106, '#e8a8b8'], [60, 18, 86, '#c08a68'], [34, 14, 68, '#f6ecd0']]) { R(c, cx - w / 2, y - h, w, h, col); R(c, cx - w / 2, y - h, w, 3, '#fff6ea'); for (let k = 0; k < w; k += 5) R(c, cx - w / 2 + k, y - h + 3, 3, 2 + (k % 3), '#fff6ea'); for (let k = 8; k < w - 6; k += 14) { R(c, cx - w / 2 + k, y - h + 8, 4, 6, '#3a2418'); R(c, cx - w / 2 + k + 1, y - h + 9, 2, 4, '#ffd88a'); } }
+    for (const [x, h] of [[175, 52], [305, 52], [205, 70], [275, 70]]) { R(c, x - 5, 128 - h, 10, h, '#d8b0c4'); R(c, x - 5, 128 - h, 10, 2, '#fff6ea'); for (let k = 0; k < 6; k++) R(c, x - 6 + k, 128 - h - k, 12 - k * 2, 1, '#8a4a6a'); ell(c, x, 128 - h - 8, 2.5, 2.5, '#e04a3a'); } ell(c, cx, 50, 4, 4, '#e04a3a'); R(c, cx, 42, 1, 5, '#4a7a3a');
+  };
+  const NIK_MID = (c) => {
+    R(c, -AO, 118, AW, 12, '#5a3420'); for (let x = -AO; x < AW - AO; x += 6) R(c, x, 118, 3, 1, '#8a5a3a');
+    for (let i = 0; i < 12; i++) { const x = -120 + i * 68 + (i % 2) * 14, y = 122; R(c, x, y - 26, 2, 26, '#f6ecd0'); for (let a = 0; a < 70; a++) { const an = a / 70 * 6.28 * 2.2, rr = 2 + a * .13; R(c, x + 1 + Math.cos(an) * rr, y - 34 + Math.sin(an) * rr, 2, 2, ['#e84a8a', '#f6ecd0', '#4ab8e8', '#f2d24a'][i % 4]); } }
+    for (let x = -AO; x < AW - AO; x += 10) { R(c, x, 120, 2, 10, '#f6ecd0'); R(c, x, 120 + ((x / 10) & 1) * 4, 2, 3, '#e04a3a'); }
+    for (let i = 0; i < 16; i++) { const x = -AO + 10 + i * 50, col = ['#e84a8a', '#6ad86a', '#f2d24a', '#8a5ae8'][i % 4]; ell(c, x, 128, 6, 5, col); ell(c, x - 2, 126, 2, 1.5, 'rgba(255,255,255,.6)'); }
+  };
+  const NIK_NEAR = (c) => {
+    R(c, -AO, 130, AW, 90, '#9e7256'); R(c, -AO, 130, AW, 3, '#d1a273'); for (let i = 0; i < 360; i++) R(c, -AO + hash(i + 3) * AW, 134 + hash(i + 4) * 84, 1 + hash(i) * 2, 1, ['#8a5e44', '#b88660', '#6a4632'][i % 3]); for (let i = 0; i < 50; i++) R(c, -AO + hash(i + 71) * AW, 136 + hash(i + 72) * 80, 2, 1, ['#e84a8a', '#f2d24a', '#4ab8e8', '#6ad86a'][i % 4]);
     R(c, 105, 73, 270, 23, '#6f4937'); R(c, 100, 70, 280, 8, '#e4bf83'); R(c, 100, 70, 280, 1, '#f6dca8'); for (let i = 0; i < 12; i++) { R(c, 107 + i * 23, 79, 7, 8 + (i % 3) * 3, '#d8b17a'); R(c, 107 + i * 23, 79, 2, 8 + (i % 3) * 3, '#f0d3a0'); } for (let x = 100; x < 380; x += 7) R(c, x, 96, 4, 2, '#4a2e22');
     for (const x of [113, 359]) { R(c, x, 96, 8, 118, '#644634'); R(c, x, 96, 2, 118, '#aa8055'); R(c, x + 6, 96, 2, 118, '#3f2a1e'); for (let k = 100; k < 210; k += 12) R(c, x + 1, k, 6, 2, '#7a5a40'); R(c, x - 2, 208, 12, 6, '#4a2e22'); }
-    R(c, 187, 131, 107, 76, '#624937'); R(c, 192, 136, 96, 66, '#85a45d'); R(c, 196, 140, 88, 62, '#a8bd69'); R(c, 196, 140, 88, 2, '#c4d68a'); for (const yy of [150, 164, 178]) { R(c, 205, yy, 72, 3, '#72994f'); R(c, 205, yy, 72, 1, '#8fb468'); } for (let i = 0; i < 12; i++) R(c, 198 + i * 7, 200, 4, 2 + (i % 3) * 3, '#a8bd69');
+    R(c, 187, 131, 107, 76, '#624937'); R(c, 192, 136, 96, 66, '#85a45d'); R(c, 196, 140, 88, 62, '#a8bd69'); R(c, 196, 140, 88, 2, '#c4d68a'); for (const yy of [150, 164, 178]) { R(c, 205, yy, 72, 3, '#72994f'); R(c, 205, yy, 72, 1, '#8fb468'); }
     const crown = [[187, 133], [190, 117], [203, 129], [217, 111], [230, 127], [243, 106], [256, 127], [272, 114], [282, 129], [294, 118], [294, 136]];
     for (let x = 187; x <= 294; x++) { let top = 133; for (let k = 0; k < crown.length - 1; k++) { const a = crown[k], b = crown[k + 1]; if (x >= a[0] && x <= b[0]) top = a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); } R(c, x, top, 1, 136 - top, '#6b8d43'); R(c, x, top, 1, 1, '#9fc064'); }
-    for (const x of [178, 285]) { R(c, x, 182, 18, 34, '#74643e'); R(c, x, 180, 17, 6, '#b6c26b'); R(c, x, 180, 17, 1, '#d8e08a'); }
-    for (const x of [64, 403]) { R(c, x - 24, 186, 48, 29, '#704934'); R(c, x - 22, 191, 44, 8, '#d0a66b'); R(c, x - 24, 184, 49, 6, '#e5c58e'); for (let i = 0; i < 5; i++) R(c, x - 21 + i * 9, 190, 4, 4 + (i % 2) * 3, '#e5c58e'); cakeHD(c, x, 184); }
-    for (let i = 0; i < 10; i++) ell(c, 58 + i * 39, 216, 11, 2.5, '#84a24e');
+    for (const x of [178, 285]) { R(c, x, 182, 18, 34, '#74643e'); R(c, x, 180, 17, 6, '#b6c26b'); }
+    for (const x of [64, 403]) { R(c, x - 24, 186, 48, 29, '#704934'); R(c, x - 22, 191, 44, 8, '#d0a66b'); R(c, x - 24, 184, 49, 6, '#e5c58e'); cakeHD(c, x, 184); }
     board(c, 165, 84, 150, 12, '#6f4937', '#3f2a1e');
-  }
-  ARENA.nikolas = { build: buildNikolas, dyn(c, t) { for (let i = 0; i < 10; i++) R(c, 60 + i * 39, 212 - Math.abs(Math.sin(t * 2 + i)) * 4, 2, 3, '#bbcb6c'); for (let i = 0; i < 9; i++) { const x = 108 + i * 31, u = (t * .35 + hash(i + 5)) % 1; R(c, x, 98 + u * 40, 2, 3 + u * 4, '#a8bd69'); ell(c, x + 1, 98 + u * 40 + 5 + u * 4, 2, 1.5, '#a8bd69'); } for (let i = 0; i < 5; i++) { const x = ((hash(i + 9) * 600 + t * (2 + i)) % 700) - 100, y = 24 + hash(i + 12) * 50, w = 26 + hash(i + 14) * 26; R(c, x, y, w, 4, 'rgba(255,248,230,.85)'); R(c, x + 5, y - 3, w - 12, 3, 'rgba(255,248,230,.85)'); R(c, x + 3, y + 4, w - 8, 1, 'rgba(206,196,200,.7)'); } }, text(c, t) { c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#2a1a10'; c.fillText('O TRONO DO BOLO ROUBADO', 482, 182); c.fillStyle = '#f7e4bc'; c.fillText('O TRONO DO BOLO ROUBADO', 480, 180); }, light(g, t) { const sh = .5 + .5 * Math.sin(t * 1.5); bulbGlow(g, 240, 160, .35 + sh * .15, '170,230,110', 62); } };
-
-  // --- ARTHUR: o pátio do mapa 9 por trás, com a placa e as máquinas da arena por cima
-  ARENA.arthur = {};
-  function arthurBoard(c, t) { c.fillStyle = '#0e2a44'; c.fillRect(215, 116, 532, 50); c.fillStyle = '#16476a'; c.fillRect(217, 118, 528, 46); c.fillStyle = '#2d6686'; c.fillRect(223, 124, 516, 34); c.fillStyle = '#eff2d8'; c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('UM ACERTO NO PÁTIO', 480, 141);
-    for (const x of [110, 809]) { c.fillStyle = '#1d3a4c'; c.fillRect(x - 2, 329, 53, 108); c.fillStyle = '#315d7a'; c.fillRect(x, 331, 49, 104); c.fillStyle = '#527c91'; c.fillRect(x + 4, 335, 41, 96); c.fillStyle = '#bed4cf'; c.fillRect(x - 8, 326, 65, 9); c.fillStyle = '#91b5b8'; c.fillRect(x + 9, 348, 24, 2); c.fillRect(x + 9, 367, 24, 2); c.fillStyle = '#e04a4a'; c.fillRect(x + 36, 380, 6, 6); c.fillStyle = '#7ad87a'; c.fillRect(x + 36, 392, 6, 6); }
-    c.fillStyle = '#b6d8d5'; for (let i = 0; i < 6; i++) { const xx = 191 + i * 112, yy = Math.round(301 + Math.sin(t + i) * 4); c.fillRect(xx, yy, 20, 2); c.fillRect(xx + 4, yy - 7, 2, 7); c.fillRect(xx + 10, yy - 9, 2, 9); c.fillRect(xx + 16, yy - 6, 2, 6); } }
+    const L = [[220, 6, '#6a3a22'], [226, 4, '#f6ecd0'], [230, 8, '#e8c070'], [238, 3, '#f0a0b8'], [241, 9, '#e8c070'], [250, 3, '#f6ecd0'], [253, 17, '#5a3020']]; for (const [y, h, col] of L) R(c, -AO, y, AW, h, col); for (let i = 0; i < 300; i++) R(c, -AO + hash(i + 91) * AW, 231 + hash(i + 92) * 18, 1, 1, i % 2 ? '#d8a050' : '#f8d890'); for (let i = 0; i < 70; i++) R(c, -AO + hash(i + 51) * AW, 255 + hash(i + 52) * 12, 2, 1, ['#e84a8a', '#f2d24a', '#4ab8e8', '#6ad86a'][i % 4]); for (let x = -AO; x < AW - AO; x += 9) R(c, x, 226 + 4, 4, 2 + ((x / 9) & 1) * 2, '#f6ecd0');
+  };
+  ARENA.nikolas = { layers: [[.12, 'nik-far', NIK_FAR], [.35, 'nik-mid', NIK_MID], [1, 'nik-near', NIK_NEAR]],
+    back(c, s, t, ox) { },
+    mid(c, s, t, ox) { for (let i = 0; i < 7; i++) { const x = ((hash(i + 9) * 700 + t * (4 + i * 1.5)) % 760) - 140, y = 8 + hash(i + 12) * 40, w = 50 + hash(i + 14) * 50; R(c, x, y, w, 7, 'rgba(30,44,30,.75)'); R(c, x + 8, y - 4, w - 20, 4, 'rgba(30,44,30,.75)'); R(c, x + 4, y + 7, w - 10, 2, 'rgba(20,30,20,.6)'); } const rx = Math.round(ox * .35); for (let i = 0; i < 20; i++) { const x = ((i * 41 + t * 12) % AW) - AO + rx; R(c, x, 120 + (i % 3) * 3, 6, 1, '#8a5a3a'); } },
+    near(c, s, t, ox) { for (let i = 0; i < 9; i++) { const x = 108 + i * 31 + ox, u = (t * .35 + hash(i + 5)) % 1; R(c, x, 98 + u * 40, 2, 3 + u * 4, '#a8bd69'); ell(c, x + 1, 98 + u * 40 + 5 + u * 4, 2, 1.5, '#a8bd69'); } },
+    text(c, t, ox) { c.save(); c.translate(ox * 2, 0); c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#2a1a10'; c.fillText('O TRONO DO BOLO ROUBADO', 482, 182); c.fillStyle = '#f7e4bc'; c.fillText('O TRONO DO BOLO ROUBADO', 480, 180); c.restore(); },
+    light(g, s, t) { const sh = .5 + .5 * Math.sin(t * 1.5); bulbGlow(g, 240, 160, .35 + sh * .15, '170,230,110', 62); for (const [x, y] of [[240, 82], [222, 102], [258, 102]]) bulbGlow(g, x, y, .5, '255,214,140', 14); } };
 
   const ARENA_TYPES = ['arthur', 'marco', 'menezes', 'nikolas'];
   const arenaHandles = (type) => { type = typeof type === 'object' ? type?.type : type; return ARENA_TYPES.includes(type) && !window.Graphics?.isLite?.() && !!window.DayTime; };
   function drawArena(c, type, camera, t, homeX) {
     type = typeof type === 'object' ? type.type : type;
-    const center = homeX ? homeX - camera : 480; aox = Math.round((center - 480) / 2);
-    if (type === 'arthur') {
-      const s = window.DayTime.state(), camX = Math.max(0, homeX - 480), camL = Math.floor(camX / 2); lc.clearRect(0, 0, LW, LH); mapDrawers[9](lc, s, t, camL);
-      c.save(); c.imageSmoothingEnabled = false; c.drawImage(low, 0, 0, 960, 540); c.restore(); lastCam = camX; lastT = t; mapTexts[9](c, camX);
-      c.save(); c.translate(aox * 2, 0); arthurBoard(c, t); c.restore(); window.HdMaps.finish(c, 9); return;
-    }
-    const a = ARENA[type]; ac.clearRect(0, 0, LW, LH); ac.drawImage(aLayer(type, a.build), aox - AO, 0); a.dyn?.(ac, t);
-    c.save(); c.imageSmoothingEnabled = false; c.drawImage(alow, 0, 0, 960, 540); c.translate(aox * 2, 0); a.text?.(c, t); c.restore();
+    const a = ARENA[type], s = window.DayTime.state(), center = homeX ? homeX - camera : 480, ox = Math.round((center - 480) / 2);
+    ac.clearRect(0, 0, LW, LH); a.back?.(ac, s, t, ox);
+    a.layers.forEach(([p, key, build], i) => { ac.drawImage(aLayer(key, build), Math.round(ox * p) - AO, 0); if (i === a.layers.length - 2) a.mid?.(ac, s, t, ox); });
+    a.near?.(ac, s, t, ox);
+    c.save(); c.imageSmoothingEnabled = false; c.drawImage(alow, 0, 0, 960, 540); a.text?.(c, t, ox); c.restore();
+    if (a.daytime) { c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = css(s.amb); c.fillRect(0, 0, 960, 540); c.restore(); }
   }
   function arenaFront(c, type, camera, t, homeX, blend) {
     type = typeof type === 'object' ? type.type : type; if (!arenaHandles(type)) return; const a = ARENA[type]; if (!a.light) return;
-    const center = homeX ? homeX - camera : 480, ox = Math.round((center - 480) / 2);
-    lg.clearRect(0, 0, LW, LH); lg.save(); lg.translate(ox, 0); a.light(lg, t); lg.restore();
+    const s = window.DayTime.state(), center = homeX ? homeX - camera : 480, ox = Math.round((center - 480) / 2);
+    lg.clearRect(0, 0, LW, LH); lg.save(); lg.translate(ox, 0); a.light(lg, s, t); lg.restore();
     c.save(); c.globalCompositeOperation = 'lighter'; c.globalAlpha = cl(blend); c.imageSmoothingEnabled = false; c.drawImage(lightCv, 0, 0, 960, 540); c.restore();
   }
 
   const MAPS = { 0: { draw: farm, text: farmText, lights: farmLights }, 2: { draw: gym, text: gymText, lights: gymLights, amb: gymAmb }, 3: { draw: court, text: courtText, lights: courtLights }, 7: { draw: field, text: fieldText, lights: fieldLights }, 5: { draw: favela, text: favelaText, lights: favelaLights }, 9: { draw: patio, text: patioText, lights: patioLights }, 1: { draw: school, text: schoolText, lights: schoolLights }, 4: { draw: plaza, text: plazaText, lights: plazaLights }, 6: { draw: ink, text: inkText, lights: inkLights, amb: () => [1, 1, 1] }, 8: { draw: bigodon, text: bigodonText, lights: bigodonLights, amb: roomAmb(.62) }, 10: { draw: rayssa, text: rayssaText, lights: rayssaLights, amb: roomAmb(.6) } };
-  const mapDrawers = new Proxy({}, { get: (_, k) => MAPS[k].draw }), mapTexts = new Proxy({}, { get: (_, k) => MAPS[k].text });
   const handles = (scene) => !!MAPS[scene] && !window.Graphics?.isLite?.() && !!window.DayTime;
   let lastCam = 0, lastT = 0;
   function draw(c, scene, camera, t) {
