@@ -1,0 +1,16 @@
+{
+  "roteiros": [
+    "abertura.json",
+    "chegada_escola.json",
+    "chegada_academia.json",
+    "chegada_quadra.json",
+    "chegada_praca.json",
+    "chegada_favela.json",
+    "chegada_caderno.json",
+    "chegada_campo.json",
+    "chegada_bigodon.json",
+    "chegada_patio.json",
+    "chegada_rayssa.json",
+    "creditos.json"
+  ]
+}

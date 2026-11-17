@@ -1,0 +1,187 @@
+{
+  "id": "abertura",
+  "titulo": "Abertura",
+  "antes": "intro",
+  "descricao": "Toca antes da história do bolo, ao começar uma aventura nova (e ao rever a história).",
+  "cenas": [
+    {
+      "titulo": "ITABUNA, BAHIA",
+      "cenario": "roca",
+      "hora": 5.4,
+      "hora_ate": 6.4,
+      "duracao": 6,
+      "camera": {
+        "de": {
+          "x": 640,
+          "y": 120,
+          "zoom": 1.5
+        },
+        "para": {
+          "x": 620,
+          "y": 430,
+          "zoom": 1
+        },
+        "tempo": 5.5
+      },
+      "efeitos": [
+        {
+          "tipo": "entrada",
+          "dur": 1.4
+        },
+        {
+          "tipo": "raios"
+        },
+        {
+          "tipo": "cartao",
+          "texto": "DA ROÇA ADVENTURE",
+          "sub": "UMA AVENTURA CULTIVADA EM ITABUNA",
+          "t": 1.6,
+          "dur": 3.8
+        }
+      ],
+      "sons": [
+        {
+          "som": "galo",
+          "t": 0.8
+        }
+      ]
+    },
+    {
+      "titulo": "QUARTA-FEIRA, 7 DA MANHÃ",
+      "cenario": "roca",
+      "hora": 7,
+      "camera": {
+        "de": {
+          "x": 420,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "para": {
+          "x": 560,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "tempo": 4
+      },
+      "atores": [
+        {
+          "quem": "daroca",
+          "x": 225,
+          "ate": 520,
+          "tempo": [
+            0.4,
+            3.4
+          ]
+        }
+      ],
+      "sons": [
+        {
+          "som": "passos",
+          "t": 0.5
+        },
+        {
+          "som": "passos",
+          "t": 1.6
+        }
+      ],
+      "falas": [
+        {
+          "quem": "daroca",
+          "texto": "Quarta-feira em Itabuna. Sol no chapéu, poeira na bota e cheiro de bolo no ar..."
+        },
+        {
+          "quem": "narrador",
+          "texto": "Na roça, toda grande aventura começa com uma coisa bem simples: a fome de alguém."
+        }
+      ]
+    },
+    {
+      "titulo": "O DIA PERFEITO",
+      "cenario": "roca",
+      "hora": 7,
+      "camera": {
+        "de": {
+          "x": 520,
+          "y": 430,
+          "zoom": 2
+        },
+        "para": {
+          "x": 520,
+          "y": 430,
+          "zoom": 2.5
+        },
+        "tempo": 3
+      },
+      "atores": [
+        {
+          "quem": "daroca",
+          "x": 520,
+          "emocao": "friend"
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "vinheta",
+          "forca": 0.5
+        }
+      ],
+      "falas": [
+        {
+          "quem": "daroca",
+          "emocao": "friend",
+          "texto": "Hoje nada vai estragar meu dia. Nada mesmo."
+        }
+      ]
+    },
+    {
+      "titulo": "O DIA PERFEITO",
+      "cenario": "roca",
+      "hora": 7,
+      "duracao": 1.6,
+      "camera": {
+        "de": {
+          "x": 520,
+          "y": 430,
+          "zoom": 2.5
+        },
+        "para": {
+          "x": 520,
+          "y": 430,
+          "zoom": 2.5
+        }
+      },
+      "atores": [
+        {
+          "quem": "daroca",
+          "x": 520,
+          "emocao": "confused"
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "zoom_soco",
+          "t": 0.1
+        },
+        {
+          "tipo": "texto",
+          "texto": "...NÉ?",
+          "x": 600,
+          "y": 170,
+          "t": 0.15,
+          "dur": 1.4
+        },
+        {
+          "tipo": "saida",
+          "t": 0.8,
+          "dur": 0.8
+        }
+      ],
+      "sons": [
+        {
+          "som": "misterio",
+          "t": 0.1
+        }
+      ]
+    }
+  ]
+}

@@ -47,18 +47,18 @@
     if (kind === 'leaves') for (let i = 0; i < 12; i++) { const k = (t * .1 + rnd(i)) % 1; c.globalAlpha = .9; R(c, (rnd(i) * 960 + t * 30) % 960, k * 440, 5, 3, i % 2 ? '#7aa84a' : '#c9a24a'); }
     c.restore();
   }
-  function overlay(c, type, camera, t, homeX) {
+  function overlay(c, type, camera, t, homeX, hd) {
     const th = THEME[type]; if (!th) return;
     const center = homeX ? homeX - camera : 480;
     c.save();
-    if (th.storm) { const g = c.createLinearGradient(0, 0, 0, 300); g.addColorStop(0, 'rgba(20,40,10,.6)'); g.addColorStop(1, 'rgba(20,40,10,0)'); c.fillStyle = g; c.fillRect(0, 0, 960, 300);
-      for (let i = 0; i < 6; i++) { c.globalAlpha = .35; c.fillStyle = '#1e2e14'; c.beginPath(); c.ellipse(((i * 210 + t * 22) % 1300) - 170, 40 + (i % 3) * 30, 160, 40, 0, 0, Math.PI * 2); c.fill(); }
+    if (th.storm) { if (!hd) { const g = c.createLinearGradient(0, 0, 0, 300); g.addColorStop(0, 'rgba(20,40,10,.6)'); g.addColorStop(1, 'rgba(20,40,10,0)'); c.fillStyle = g; c.fillRect(0, 0, 960, 300); }
+      for (let i = 0; i < (hd ? 0 : 6); i++) { c.globalAlpha = .35; c.fillStyle = '#1e2e14'; c.beginPath(); c.ellipse(((i * 210 + t * 22) % 1300) - 170, 40 + (i % 3) * 30, 160, 40, 0, 0, Math.PI * 2); c.fill(); }
       c.globalAlpha = 1; const ph = t % 4.2; if (ph < .1) { c.fillStyle = 'rgba(210,255,170,.35)'; c.fillRect(0, 0, 960, 540); c.strokeStyle = '#e8ffd0'; c.lineWidth = 3; c.beginPath(); let x = 200 + (Math.floor(t / 4.2) * 337) % 600, y = 0; c.moveTo(x, y); while (y < 300) { x += (rnd(y + t) - .5) * 60; y += 30; c.lineTo(x, y); } c.stroke(); } }
     if (th.rays) { c.globalCompositeOperation = 'lighter'; for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2 + t * .12; cone(c, center, 171, a, 520, 70, th.light, .08); } c.globalCompositeOperation = 'source-over'; }
     if (th.spot) { c.globalCompositeOperation = 'lighter'; cone(c, 120, -10, -.55 + Math.sin(t * .7) * .35, 560, 90, th.light, .16); cone(c, 840, -10, .55 + Math.sin(t * .6 + 1) * .35, 560, 90, th.light, .16); cone(c, center, -10, Math.sin(t * .5) * .15, 520, 70, '255,255,255', .08); c.globalCompositeOperation = 'source-over'; }
     if (th.alarm) { const a = (Math.sin(t * 6) + 1) / 2; c.fillStyle = `rgba(255,40,40,${a * .1})`; c.fillRect(0, 0, 960, 440); R(c, 470, 92, 20, 10, a > .5 ? '#ff3a3a' : '#7a1a1a'); }
     particles(c, th.parts, t, center);
-    if (th.crowd) crowd(c, th.crowd, t, center, true);
+    if (th.crowd && !hd) crowd(c, th.crowd, t, center, true);
     if (th.chant) { const k = (t * .5) % 1; if (k < .6) { c.globalAlpha = 1 - k / .6; c.font = '900 22px monospace'; c.textAlign = 'center'; c.fillStyle = '#ffe36b'; c.strokeStyle = '#1a1a1a'; c.lineWidth = 4; const y = 280 - k * 30; for (const [x, s] of [[140, 'BRIGA!'], [820, 'BRIGA!'], [480, 'UUUUH!']]) { c.strokeText(s, x, y); c.fillText(s, x, y); } c.globalAlpha = 1; } }
     // floor sheen and vignette
     const fl = c.createLinearGradient(0, 440, 0, 540); fl.addColorStop(0, `rgba(${th.light},.18)`); fl.addColorStop(1, `rgba(${th.light},0)`); c.fillStyle = fl; c.fillRect(0, 440, 960, 100);
@@ -66,6 +66,10 @@
     c.restore();
   }
   window.Art.drawArena = function (c, type, camera = 0, t = 0, homeX = 0) {
+    if (window.HdMaps?.arenaHandles?.(type) && window.HdMaps.drawArena(c, type, camera, t, homeX)) {
+      try { overlay(c, typeof type === 'object' ? type.type : type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0, true); } catch (e) {}
+      return;
+    }
     orig(c, type, camera, t, homeX);
     if (window.Graphics?.isLite?.() || window.HdScene?.active?.(type)) return;
     try { overlay(c, typeof type === 'object' ? type.type : type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); } catch (e) {}

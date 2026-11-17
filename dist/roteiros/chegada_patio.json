@@ -1,0 +1,90 @@
+{
+  "id": "chegada_patio",
+  "titulo": "Chegada: Pátio Da Escola",
+  "chegada": 9,
+  "uma_vez": true,
+  "descricao": "Toca na primeira vez que o jogador chega de carro nesta fase.",
+  "cenas": [
+    {
+      "titulo": "PÁTIO DA ESCOLA",
+      "cenario": "patio",
+      "duracao": 4.6,
+      "camera": {
+        "de": {
+          "x": 1600,
+          "y": 400,
+          "zoom": 1
+        },
+        "para": {
+          "x": 480,
+          "y": 400,
+          "zoom": 1
+        },
+        "tempo": 3.6
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": -120,
+          "ate": 230,
+          "tempo": [
+            2.6,
+            4.4
+          ]
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "entrada",
+          "dur": 0.6
+        },
+        {
+          "tipo": "letreiro",
+          "texto": "PÁTIO DA ESCOLA",
+          "sub": "VOCÊ CHEGOU",
+          "t": 0.4,
+          "dur": 3.8
+        }
+      ],
+      "sons": [
+        {
+          "som": "plim",
+          "t": 0.8
+        },
+        {
+          "som": "buzina",
+          "t": 4.1
+        }
+      ]
+    },
+    {
+      "titulo": "PÁTIO DA ESCOLA",
+      "cenario": "patio",
+      "camera": {
+        "de": {
+          "x": 480,
+          "y": 410,
+          "zoom": 1
+        },
+        "para": {
+          "x": 330,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "tempo": 1.2
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": 230
+        }
+      ],
+      "falas": [
+        {
+          "quem": "daroca",
+          "texto": "O pátio da escola. Cartaz, pulseirinha, violão... tem alguém aqui MUITO fã de uma certa cantora."
+        }
+      ]
+    }
+  ]
+}

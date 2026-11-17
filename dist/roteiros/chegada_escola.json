@@ -1,0 +1,94 @@
+{
+  "id": "chegada_escola",
+  "titulo": "Chegada: Colégio Adventista",
+  "chegada": 1,
+  "uma_vez": true,
+  "descricao": "Toca na primeira vez que o jogador chega de carro nesta fase.",
+  "cenas": [
+    {
+      "titulo": "COLÉGIO ADVENTISTA",
+      "cenario": "escola",
+      "duracao": 4.6,
+      "camera": {
+        "de": {
+          "x": 1700,
+          "y": 400,
+          "zoom": 1
+        },
+        "para": {
+          "x": 480,
+          "y": 400,
+          "zoom": 1
+        },
+        "tempo": 3.6
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": -120,
+          "ate": 230,
+          "tempo": [
+            2.6,
+            4.4
+          ]
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "entrada",
+          "dur": 0.6
+        },
+        {
+          "tipo": "letreiro",
+          "texto": "COLÉGIO ADVENTISTA",
+          "sub": "VOCÊ CHEGOU",
+          "t": 0.4,
+          "dur": 3.8
+        }
+      ],
+      "sons": [
+        {
+          "som": "sino",
+          "t": 0.6
+        },
+        {
+          "som": "buzina",
+          "t": 4.1
+        }
+      ]
+    },
+    {
+      "titulo": "COLÉGIO ADVENTISTA",
+      "cenario": "escola",
+      "camera": {
+        "de": {
+          "x": 480,
+          "y": 410,
+          "zoom": 1
+        },
+        "para": {
+          "x": 330,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "tempo": 1.2
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": 230
+        }
+      ],
+      "falas": [
+        {
+          "quem": "daroca",
+          "texto": "Colégio Adventista. Corredor comprido, sinal tocando e cheiro de merenda. Se alguém viu o bolo, foi aqui."
+        },
+        {
+          "quem": "narrador",
+          "texto": "As portas das salas dos professores ficam no corredor. Chegue perto e interaja para entrar."
+        }
+      ]
+    }
+  ]
+}

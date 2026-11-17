@@ -1,0 +1,95 @@
+{
+  "id": "chegada_caderno",
+  "titulo": "Chegada: Caderno Do Caos",
+  "chegada": 6,
+  "uma_vez": true,
+  "descricao": "Toca na primeira vez que o jogador chega de carro nesta fase.",
+  "cenas": [
+    {
+      "titulo": "CADERNO DO CAOS",
+      "cenario": "caderno",
+      "duracao": 4.6,
+      "camera": {
+        "de": {
+          "x": 1200,
+          "y": 400,
+          "zoom": 1
+        },
+        "para": {
+          "x": 480,
+          "y": 400,
+          "zoom": 1
+        },
+        "tempo": 3.6
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": -120,
+          "ate": 230,
+          "tempo": [
+            2.6,
+            4.4
+          ]
+        }
+      ],
+      "efeitos": [
+        {
+          "tipo": "entrada",
+          "dur": 0.6
+        },
+        {
+          "tipo": "letreiro",
+          "texto": "CADERNO DO CAOS",
+          "sub": "VOCÊ CHEGOU",
+          "t": 0.4,
+          "dur": 3.8
+        }
+      ],
+      "sons": [
+        {
+          "som": "misterio",
+          "t": 0.4
+        },
+        {
+          "som": "buzina",
+          "t": 4.1
+        }
+      ]
+    },
+    {
+      "titulo": "CADERNO DO CAOS",
+      "cenario": "caderno",
+      "camera": {
+        "de": {
+          "x": 480,
+          "y": 410,
+          "zoom": 1
+        },
+        "para": {
+          "x": 330,
+          "y": 420,
+          "zoom": 1.5
+        },
+        "tempo": 1.2
+      },
+      "atores": [
+        {
+          "quem": "carro",
+          "x": 230
+        }
+      ],
+      "falas": [
+        {
+          "quem": "daroca",
+          "emocao": "confused",
+          "texto": "Isso aqui é um caderno... ou o pesadelo de quem não fez o dever de casa?"
+        },
+        {
+          "quem": "narrador",
+          "texto": "No Reino de Tinta a escuridão engole tudo. Fique perto da luz da tocha."
+        }
+      ]
+    }
+  ]
+}

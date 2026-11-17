@@ -51,3 +51,6 @@
 #gameShell .scene-chip{top:50px}
 @media(max-width:720px){#gameShell .hud-btn{height:28px;padding:0 7px;font-size:7px}#gameShell .game-actions .icon-button{width:28px;height:28px;min-width:28px;min-height:28px}#gameShell .hud-min-left .hearts{font-size:13px}#gameShell .game-topbar{padding:6px 6px 0}#gameShell .hud-panel{top:40px;right:6px;width:min(280px,calc(100% - 12px))}}
 #gameShell.immersive.screen-wide .screen-fit-tools,#gameShell .screen-fit-tools{top:calc(env(safe-area-inset-top) + 48px)!important}
+/* barra de vida do chefe fica logo abaixo dos botões */
+#gameShell .boss-hud{top:calc(env(safe-area-inset-top) + 44px)!important;width:min(540px,calc(100% - 330px))!important}
+@media(max-width:720px){#gameShell .boss-hud{top:calc(env(safe-area-inset-top) + 40px)!important}}

@@ -143,7 +143,7 @@
   const map='maps.'+(SCENES[Number(state.scene)]||SCENES[0]);
   if(state.chapterEnded)return['events.chapter_end'];
   if(!state.started||state.playing===false)return['menu.title'];
-  if(state.cutscene)return['cutscenes.'+String(state.cutscene),'events.'+String(state.cutscene),map];
+  if(state.cutscene)return['cutscenes.'+String(state.cutscene),...(window.Roteiro?.musicFor?.(state.cutscene)||[]),'events.'+String(state.cutscene),map];
   if(state.paused)return['menu.pause',map];
   if(state.defeated)return['events.defeat',map];
   if(state.boss)return[...(Number.isInteger(state.bossPhase)&&state.bossPhase>0?['battles.'+state.boss+'.phase'+state.bossPhase]:[]),'battles.'+state.boss,map];

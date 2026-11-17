@@ -1,0 +1,9 @@
+/* Roteiros (dist/roteiro.js): retrato de quem fala dentro do balão e planos sem fala. */
+#gameShell .cinematic-overlay.is-roteiro.roteiro-com-retrato .cinematic-caption{padding-left:88px!important;min-height:90px}
+#gameShell .cinematic-overlay .roteiro-retrato{display:none}
+#gameShell .cinematic-overlay.is-roteiro.roteiro-com-retrato .roteiro-retrato{display:block;position:absolute;left:10px;top:10px;width:64px;height:64px;image-rendering:pixelated;border:4px solid transparent;border-image:var(--px-wood,linear-gradient(#7a4f2c,#7a4f2c)) 3 fill / 4px / 0 stretch;box-sizing:content-box;background:#c98f52}
+#gameShell .cinematic-overlay.is-roteiro.roteiro-sem-fala .cinematic-caption{visibility:hidden!important}
+@media(max-width:720px),(orientation:landscape) and (max-height:520px){
+#gameShell .cinematic-overlay.is-roteiro.roteiro-com-retrato .cinematic-caption{padding-left:62px!important;min-height:64px}
+#gameShell .cinematic-overlay.is-roteiro.roteiro-com-retrato .roteiro-retrato{left:7px;top:8px;width:44px;height:44px;border-width:3px}
+}
