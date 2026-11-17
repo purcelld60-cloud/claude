@@ -30,6 +30,15 @@ No celular, as cartas da memória e os alvos do tiro também podem ser tocados d
 
 Cada jogo mostra regras e controles antes de começar e de novo na contagem regressiva. Depois vêm o placar, as medalhas (bronze, prata e ouro no modo sozinho) e as fichas. O ranking guarda os 5 melhores com iniciais de 3 letras, no estilo fliperama; nos jogos de dupla "contra", ele conta as vitórias de cada um.
 
+## Online (Fase 7)
+
+No menu do fliperama, toque em ONLINE ou aperte O:
+- **CRIAR SALA:** mostra um código de 6 letras e números.
+- **ENTRAR COM CÓDIGO:** entra na sala de um amigo.
+- **SALA RÁPIDA:** junta você com quem estiver esperando.
+
+Quem cria a sala escolhe o jogo; os dois jogam em dupla, cada um no seu aparelho. É preciso um servidor online no ar: veja `docs/SERVIDOR-ONLINE.md`.
+
 ## Recompensas
 
 - **Fichas** em toda partida. No modo sozinho, a primeira medalha de cada nível dá fichas extras.

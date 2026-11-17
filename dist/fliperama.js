@@ -24,6 +24,7 @@
   /* ---------------- sons sintetizados ---------------- */
   let actx = null, muted = false;
   function sfx(name) {
+    if (net && net.role === 'host' && net.sfx.length < 20) net.sfx.push(name);
     if (muted) return;
     try {
       actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume();
@@ -55,7 +56,7 @@
   let solo = true, anyPress = { a: false, b: false, back: false, up: false, down: false, left: false, right: false };
   const K1 = { up: ['KeyW'], down: ['KeyS'], left: ['KeyA'], right: ['KeyD'], a: ['KeyJ', 'Space'], b: ['KeyK'] };
   const K2 = { up: ['ArrowUp'], down: ['ArrowDown'], left: ['ArrowLeft'], right: ['ArrowRight'], a: ['Enter', 'NumpadEnter', 'Period', 'Numpad0'], b: ['ShiftRight', 'Comma', 'Numpad1'] };
-  const held = (list) => list.some((k) => keys[k]);
+  const latch = new Set(), held = (list) => list.some((k) => keys[k] || latch.has(k)); // latch: toque rápido entre dois quadros também conta
   function readPads() {
     const out = [null, null];
     try { const pads = [...(navigator.getGamepads?.() || [])].filter(Boolean); pads.slice(0, 2).forEach((g, i) => { const ax = g.axes[0] || 0, ay = g.axes[1] || 0, bt = (n) => !!g.buttons[n]?.pressed; out[i] = { x: (ax < -.4 || bt(14) ? -1 : ax > .4 || bt(15) ? 1 : 0), y: (ay < -.4 || bt(12) ? -1 : ay > .4 || bt(13) ? 1 : 0), a: bt(0), b: bt(1) || bt(2), start: bt(9) }; }); } catch (e) {}
@@ -64,15 +65,17 @@
   function pollInput() {
     const pads = readPads();
     for (let i = 0; i < 2; i++) {
-      const p = P[i], k = i === 0 ? K1 : K2, both = solo && i === 0; // sozinho: P1 também usa as setas e Enter
+      const p = P[i], k = i === 0 ? K1 : K2, both = (solo || !!net) && i === 0; // sozinho: P1 também usa as setas e Enter
       const kk = (n) => held(k[n]) || (both && held(K2[n])), pad = pads[i], t = touch[i];
-      const x = (kk('left') ? -1 : 0) + (kk('right') ? 1 : 0) || pad?.x || t.x, y = (kk('up') ? -1 : 0) + (kk('down') ? 1 : 0) || pad?.y || t.y;
-      const a = kk('a') || !!pad?.a || t.a, b = kk('b') || !!pad?.b || t.b;
+      let x = (kk('left') ? -1 : 0) + (kk('right') ? 1 : 0) || pad?.x || t.x, y = (kk('up') ? -1 : 0) + (kk('down') ? 1 : 0) || pad?.y || t.y;
+      let a = kk('a') || !!pad?.a || t.a, b = kk('b') || !!pad?.b || t.b;
+      if (net && i === 1) { const r = net.role === 'host' ? (net.queue.length ? net.queue.shift() : net.remote) : { x: 0, y: 0, a: false, b: false }; x = r.x; y = r.y; a = r.a; b = r.b; }
       p.ap = a && !p.pa; p.bp = b && !p.pb;
       if (x && x !== p.px) p.dirs.push(x < 0 ? 'l' : 'r'); if (y && y !== p.py) p.dirs.push(y < 0 ? 'u' : 'd');
       if (p.dirs.length > 3) p.dirs.splice(0, p.dirs.length - 3);
       p.x = x; p.y = y; p.a = a; p.b = b; p.px = x; p.py = y; p.pa = a; p.pb = b;
     }
+    latch.clear();
     const pad0 = pads[0];
     menuNav.start = !!pad0?.start && !menuNav.pstart; menuNav.pstart = !!pad0?.start;
   }
@@ -94,7 +97,7 @@
   // Personagens do fliperama: Da Roça e Reeis de começo; os outros saem na LOJA com fichas (só no fliperama).
   const AV_NAMES = { daroca: 'DA ROÇA', reeis: 'REEIS', lucas: 'LUCAS', nikolas: 'NIKOLAS', aica: 'AICA', ravile: 'RAVILE', freddy: 'FREDDY', dede: 'DEDÉ', caleb: 'CALEB', mota: 'MOTA', menezes: 'MENEZES', nicolas: 'NICOLAS', rayssa: 'RAYSSA', allef: 'ALLEF' };
   const SHOP = [['daroca', 0], ['reeis', 0], ['lucas', 10], ['nikolas', 15], ['aica', 20], ['ravile', 20], ['freddy', 25], ['dede', 25], ['caleb', 30], ['mota', 30], ['menezes', 35], ['nicolas', 35], ['rayssa', 35], ['allef', 40]];
-  const PLAYER_TYPES = { get 0() { return data.avatar[0]; }, get 1() { return data.avatar[1]; } }, PLAYER_COL = ['#ffb347', '#7ad1ff'], PLAYER_NAME = { get 0() { return AV_NAMES[data.avatar[0]] || 'P1'; }, get 1() { return AV_NAMES[data.avatar[1]] || 'P2'; } };
+  const PLAYER_TYPES = { get 0() { return net?.av?.[0] || data.avatar[0]; }, get 1() { return net?.av?.[1] || data.avatar[1]; } }, PLAYER_COL = ['#ffb347', '#7ad1ff'], PLAYER_NAME = { get 0() { return AV_NAMES[PLAYER_TYPES[0]] || 'P1'; }, get 1() { return AV_NAMES[PLAYER_TYPES[1]] || 'P2'; } };
   const cpuType = () => (data.avatar[0] === 'nikolas' ? 'lucas' : 'nikolas'), cpuName = () => AV_NAMES[cpuType()];
 
   /* ---------------- minigames ---------------- */
@@ -580,8 +583,107 @@
     if (!data.unlocked.includes(type)) { if (slot === 1) { shopMsg = { s: 'Compre primeiro com A', t: 1.6 }; sfx('fake'); return; } if (data.fichas < price) { shopMsg = { s: 'Faltam ' + (price - data.fichas) + ' fichas', t: 1.6 }; sfx('lose'); return; } data.fichas -= price; data.unlocked.push(type); persist(); shopMsg = { s: AV_NAMES[type] + ' liberado!', t: 1.6 }; sfx('win'); return; }
     data.avatar[slot] = type; if (data.avatar[1 - slot] === type) data.avatar[1 - slot] = data.avatar[slot] === 'daroca' ? 'reeis' : 'daroca'; persist(); shopMsg = { s: AV_NAMES[type] + ' é o P' + (slot + 1), t: 1.4 }; sfx('pick');
   }
+  /* ---------------- ONLINE: dupla pela internet (Fase 7) ----------------
+     Quem cria a sala é o anfitrião: roda o jogo e manda o estado 30 vezes por segundo.
+     O convidado só manda os comandos (direcional, A e B) e desenha o que recebe.
+     Se o amigo cair, a partida pausa até ele voltar (a vaga fica guardada por 60 s). */
+  let net = null, onlineSel = 0, codeBox = null;
+  const ONLINE_OPTS = ['CRIAR SALA', 'ENTRAR COM CÓDIGO', 'SALA RÁPIDA', 'SERVIDOR', 'VOLTAR'];
+  const peerLive = () => !!net && net.peerOnline && (performance.now() - (net.lastIn || 0) < 3000 || !(screen === 'play' || screen === 'count'));
+  function openOnline() { screen = 'online'; onlineSel = 0; sfx('menu'); window.DarocaOnline?.ready?.then(() => {}); }
+  function startNet(kind, code) {
+    if (!window.DarocaOnline) return;
+    if (net) leaveNet(''); onlineSel = 0;
+    const conn = window.DarocaOnline.connect({ name: localStorage.getItem('daroca-fliperama-nome') || 'DRC', avatar: data.avatar[0] });
+    net = { conn, kind, code: null, role: null, live: false, peerOnline: false, players: [], av: null, remote: { x: 0, y: 0, a: false, b: false }, queue: [], sfx: [], seq: 0, sent: 0, last: '', snap: null, msg: kind === 'join' ? 'Entrando na sala ' + code + '…' : 'Conectando ao servidor…', joined: false, gotOver: false };
+    conn.on('welcome', () => { if (net?.conn !== conn || net.joined) return; net.joined = true; conn.send(kind === 'join' ? { t: 'join', code } : kind === 'quick' ? { t: 'quick', kind: 'fliperama' } : { t: 'create', kind: 'fliperama', cap: 2 }); });
+    conn.on('room', (m) => { if (net?.conn !== conn) return; net.code = m.code; net.players = m.players; net.role = m.hostId === conn.id ? 'host' : 'guest'; net.live = true;
+      const bySlot = [0, 1].map((sl) => m.players.find((p) => p.slot === sl)); net.av = [bySlot[0]?.avatar || 'daroca', bySlot[1]?.avatar || 'reeis']; if (net.av[0] === net.av[1]) net.av[1] = net.av[0] === 'reeis' ? 'daroca' : 'reeis';
+      const was = net.peerOnline; net.peerOnline = m.players.length >= 2 && m.players.every((p) => p.online);
+      net.msg = net.peerOnline ? (net.role === 'host' ? 'Amigo conectado! Escolha o jogo.' : 'Conectado! O anfitrião escolhe o jogo.') : m.players.length >= 2 ? 'O amigo caiu. Esperando ele voltar…' : 'Sala ' + m.code + ' aberta. Passe o código para o amigo.';
+      if (!was && net.peerOnline) { sfx('win'); if (net.role === 'host' && screen === 'online') screen = 'menu'; } });
+    conn.on('input', (m) => { if (net?.conn !== conn) return; net.lastIn = performance.now(); net.remote = m.i; if (net.queue.length < 8) net.queue.push(m.i); });
+    conn.on('state', (m) => { if (net?.conn !== conn || net.role !== 'guest') return; net.lastIn = performance.now(); applySnap(m.d); });
+    conn.on('error', (m) => { if (net?.conn !== conn) return; net.msg = m.m; if (m.fatal || m.end) { const msg = m.m; leaveNet(msg); } });
+    conn.on('status', (m) => { if (net?.conn === conn && !m.online && net.live) net.msg = 'Reconectando…'; });
+  }
+  function leaveNet(msg) { if (!net) return; try { net.conn.close(); } catch (e) {} net = null; solo = true; if (screen !== 'online') screen = 'menu'; if (msg) { shopMsg = { s: msg, t: 3 }; onlineMsg = msg; } }
+  let onlineMsg = '';
+  function askCode() {
+    if (!codeBox) { codeBox = document.createElement('form'); codeBox.className = 'fliperama-code'; codeBox.innerHTML = '<label>CÓDIGO DA SALA<input maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text"></label><button type="submit">ENTRAR</button><button type="button" class="fp-cancel">VOLTAR</button>'; root.append(codeBox);
+      const inp = codeBox.querySelector('input'); inp.addEventListener('input', () => { inp.value = inp.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6); });
+      inp.addEventListener('keydown', (e) => e.stopPropagation(), true);
+      codeBox.addEventListener('submit', (e) => { e.preventDefault(); const v = inp.value; if (v.length === 6) { codeBox.hidden = true; startNet('join', v); cv.focus(); } });
+      codeBox.querySelector('.fp-cancel').addEventListener('click', () => { codeBox.hidden = true; cv.focus(); }); }
+    codeBox.hidden = false; const inp = codeBox.querySelector('input'); inp.value = ''; setTimeout(() => inp.focus(), 30);
+  }
+  function onlineAct(i) {
+    sfx('menu'); onlineMsg = '';
+    if (net && net.live) { if (i === 0 && net.role === 'host' && net.peerOnline) screen = 'menu'; else { leaveNet(''); } return; }
+    if (i === 0) startNet('create'); else if (i === 1) askCode(); else if (i === 2) startNet('quick');
+    else if (i === 3) { const cur = window.DarocaOnline?.configured?.() || ''; const v = prompt('Endereço do servidor online (ex.: https://meu-servidor.fly.dev). Deixe vazio para usar o padrão.', cur); if (v !== null) { window.DarocaOnline?.set?.(v); onlineMsg = v ? 'Servidor salvo neste aparelho.' : 'Usando o servidor padrão.'; } }
+    else { if (net) leaveNet(''); screen = 'menu'; }
+  }
+  function updateOnline(dirs, ap) {
+    if (codeBox && !codeBox.hidden) return;
+    const n = net && net.live ? 2 : ONLINE_OPTS.length;
+    for (const d of dirs) { if (d === 'u' || d === 'l') { onlineSel = (onlineSel + n - 1) % n; sfx('move'); } if (d === 'd' || d === 'r') { onlineSel = (onlineSel + 1) % n; sfx('move'); } }
+    if (ap) onlineAct(onlineSel);
+  }
+  function drawOnline(c) {
+    R(c, 0, 0, W, H, '#14121c'); for (let i = 0; i < 30; i++) R(c, (hash(i + 3) * W) | 0, (hash(i + 7) * H) | 0, 2, 2, `rgba(160,220,255,${.2 + .3 * Math.sin(t * 2 + i)})`);
+    frame(c, 230, 18, 500, 64, '#102030', '#7ad1ff', '#2a4a6a'); txt(c, 'FLIPERAMA ONLINE', W / 2, 42, 22, '#d8f0ff'); txt(c, 'dupla pela internet · cada um no seu aparelho', W / 2, 66, 9, '#a8d0f0', 'center', null);
+    const srv = window.DarocaOnline?.sameOrigin?.() ? 'este site' : (window.DarocaOnline?.configured?.() || 'nenhum');
+    txt(c, 'SERVIDOR: ' + srv.replace(/^https?:\/\//, ''), W / 2, 102, 9, srv === 'nenhum' ? '#ff9a8a' : '#8ad070', 'center', null);
+    if (net && net.live) {
+      frame(c, 300, 128, 360, 120, '#1e1a10', '#ffd75a', '#4a3a20'); txt(c, 'CÓDIGO DA SALA', W / 2, 152, 10, '#e8d8b0'); txt(c, net.code || '······', W / 2, 200, 40, '#fff3a0', 'center', '#6a4a10');
+      const ps = [0, 1].map((sl) => net.players.find((p) => p.slot === sl));
+      ps.forEach((pl, i) => { const x = i ? 640 : 320; hero(c, net.av?.[i] || (i ? 'reeis' : 'daroca'), x, 370, { scale: 1.3, frame: t, emotion: pl?.online ? 'friend' : undefined, opacity: pl ? (pl.online ? 1 : .4) : .15 }); txt(c, pl ? (i === 0 ? 'ANFITRIÃO' : 'CONVIDADO') + (pl.online ? '' : ' (caiu)') : 'esperando…', x, 392, 10, PLAYER_COL[i]); });
+      txt(c, net.msg, W / 2, 420, 12, '#fff');
+      button(c, net.role === 'host' && net.peerOnline ? 'ESCOLHER JOGO' : 'AGUARDANDO…', 300, 452, 200, 52, onlineSel === 0, () => onlineAct(0)); button(c, 'SAIR DA SALA', 520, 452, 160, 52, onlineSel === 1, () => onlineAct(1));
+    } else {
+      ONLINE_OPTS.forEach((l, i) => button(c, l, 330, 128 + i * 64, 300, 54, onlineSel === i, () => { onlineSel = i; onlineAct(i); }));
+      txt(c, net ? net.msg : onlineMsg || 'Crie uma sala e passe o código, ou entre na sala do amigo.', W / 2, 466, 11, '#e8d8b0', 'center', null);
+      txt(c, 'Sem servidor ainda? Veja docs/SERVIDOR-ONLINE.md para colocar um no ar de graça.', W / 2, 500, 9, '#8a8aa8', 'center', null);
+    }
+  }
+  // anfitrião: manda o estado (30 por segundo) e os sons
+  function hostTick(now) {
+    if (!net || !net.live || now - net.sent < 33) return; net.sent = now;
+    const playing = (screen === 'play' || screen === 'count' || screen === 'over') && st && game;
+    let d;
+    if (playing) d = { scr: screen, g: game.id, m: st.mode, cd, av: net.av, st: JSON.parse(JSON.stringify(st, (k, v) => (typeof v === 'function' || k === 'fx' && Array.isArray(v) && v.length > 40 ? undefined : v))), sfx: net.sfx.splice(0), away: !peerLive() };
+    else d = { scr: 'wait', g: GAMES[sel]?.id, what: screen, av: net.av, sfx: net.sfx.splice(0) };
+    net.conn.send({ t: 'state', s: ++net.seq, d });
+  }
+  // convidado: manda os comandos e aplica o estado recebido
+  function guestTick() {
+    if (performance.now() - (net.lastIn || performance.now()) > 4000 && !net.kicked) { net.kicked = true; net.stale = true; net.conn.kick?.(); setTimeout(() => { if (net) net.kicked = false; }, 4000); }
+    const p = P[0], i = { x: p.x, y: p.y, a: p.a, b: p.b }, key = JSON.stringify(i), now = performance.now();
+    if (key !== net.last || now - net.sent > 100) { net.last = key; net.sent = now; net.conn.send({ t: 'input', s: ++net.seq, i }); }
+    P.forEach((q) => (q.dirs = []));
+  }
+  function applySnap(d) {
+    if (!d || typeof d !== 'object') return; net.snap = d; if (Array.isArray(d.av)) net.av = d.av;
+    for (const n of (d.sfx || []).slice(0, 8)) { const keep = net.role; net.role = 'x'; sfx(String(n)); net.role = keep; }
+    if (net.stale) { net.stale = false; }
+    if (d.scr === 'wait') { if (screen !== 'online') screen = 'guestwait'; st = st && screen === 'over' ? st : st; game = GAMES.find((g2) => g2.id === d.g) || game; net.waitWhat = d.what; net.gotOver = false; return; }
+    const gm = GAMES.find((g2) => g2.id === d.g); if (!gm || !d.st) return;
+    game = gm; st = d.st; st.end = () => {}; st.pop = st.pop || []; cd = Number(d.cd) || 0; screen = d.scr; paused = false; solo = true;
+    if (d.scr === 'over' && !net.gotOver) { net.gotOver = true; data.fichas += 2; persist(); }
+  }
+  function drawNetBar(c) {
+    const on = net.conn.online, ping = net.conn.ping;
+    c.save(); c.fillStyle = 'rgba(10,14,24,.75)'; c.fillRect(W / 2 - 150, H - 22, 300, 20);
+    txt(c, (net.code ? 'SALA ' + net.code + ' · ' : '') + (on ? (ping !== null ? 'PING ' + ping + ' ms' : 'ONLINE') : 'RECONECTANDO…'), W / 2, H - 12, 9, on ? (ping > 180 ? '#ffb347' : '#8ad070') : '#ff9a8a', 'center', null);
+    if (net.role === 'host' && net.live && !peerLive() && net.players.length >= 2 && (screen === 'play' || screen === 'count')) { c.fillStyle = 'rgba(10,8,12,.6)'; c.fillRect(0, 200, W, 90); txt(c, 'O AMIGO CAIU · ESPERANDO ELE VOLTAR', W / 2, 245, 18, '#fff3a0'); }
+    if (net.role === 'guest' && (net.snap?.away || performance.now() - (net.lastIn || performance.now()) > 1500 && (screen === 'play' || screen === 'count'))) { c.fillStyle = 'rgba(10,8,12,.6)'; c.fillRect(0, 200, W, 90); txt(c, 'RECONECTANDO COM O ANFITRIÃO…', W / 2, 245, 18, '#fff3a0'); }
+    c.restore();
+  }
   function back() {
     sfx('menu');
+    if (net && net.live && (screen !== 'menu' || net.role === 'guest')) { if (net.role === 'guest' || screen === 'play' || screen === 'count' || screen === 'over') { leaveNet('Você saiu da sala online.'); return; } }
+    if (screen === 'online') { if (net) leaveNet(''); screen = 'menu'; return; }
     if (screen === 'play' || screen === 'count') { paused = !paused; pauseSel = 0; return; }
     if (screen === 'mode' || screen === 'loja') { screen = 'menu'; return; }
     if (screen === 'over') { screen = 'menu'; return; }
@@ -595,11 +697,13 @@
       const N = GAMES.length; for (const d of dirs) { if (d === 'l') sel = nav((sel + N - 1) % N); if (d === 'r') sel = nav((sel + 1) % N); if (d === 'u' || d === 'd') sel = nav((sel + 5) % (Math.ceil(N / 5) * 5)) % N; }
       if (ap) { screen = 'mode'; modeSel = 0; sfx('menu'); }
       if (p.bp || p2.bp) { screen = 'loja'; shopSel = 0; sfx('menu'); }
+    } else if (screen === 'online') { updateOnline(dirs, ap, nav);
     } else if (screen === 'loja') {
       for (const d of dirs) { if (d === 'l') shopSel = nav((shopSel + SHOP.length - 1) % SHOP.length); if (d === 'r') shopSel = nav((shopSel + 1) % SHOP.length); if (d === 'u' || d === 'd') shopSel = nav((shopSel + 7) % SHOP.length); }
       if (ap) shopAct(0); if (p.bp || p2.bp) shopAct(1);
     } else if (screen === 'mode') {
       for (const d of dirs) if (d === 'l' || d === 'r' || d === 'u' || d === 'd') modeSel = nav(1 - modeSel);
+      if (net && net.live) { if (ap) { if (net.peerOnline) startGame(GAMES[sel], 'duo'); else sfx('fake'); } if (p.bp || p2.bp) { screen = 'menu'; } return; }
       if (ap) startGame(GAMES[sel], modeSel ? 'duo' : 'solo');
       if (p.bp || p2.bp) { screen = 'menu'; sfx('menu'); }
     } else if (screen === 'count') { const before = Math.ceil(cd); cd -= dt; if (Math.ceil(cd) !== before && cd > 0) sfx('tick'); if (cd <= 0) { screen = 'play'; sfx('go'); } st.t += dt; }
@@ -608,7 +712,7 @@
     else if (screen === 'over') {
       if (initials) { for (const d of dirs) { const k = LETTERS.indexOf(initials.s[initials.i]); if (d === 'u') initials.s[initials.i] = nav(LETTERS[(k + 1) % LETTERS.length]); if (d === 'd') initials.s[initials.i] = nav(LETTERS[(k + LETTERS.length - 1) % LETTERS.length]); if (d === 'l') initials.i = nav(Math.max(0, initials.i - 1)); if (d === 'r') initials.i = nav(Math.min(2, initials.i + 1)); } if (ap) { if (initials.i < 2) { initials.i++; sfx('move'); } else saveInitials(); } return; }
       for (const d of dirs) if (d === 'l' || d === 'r' || d === 'u' || d === 'd') overSel = nav(1 - overSel);
-      if (ap) { if (overSel === 0) startGame(game, st.mode); else { screen = 'menu'; sfx('menu'); } }
+      if (ap) { if (overSel === 0) { if (!net || net.peerOnline) startGame(game, st.mode); } else { screen = 'menu'; sfx('menu'); } }
       if (p.bp || p2.bp) screen = 'menu';
     }
   }
@@ -629,6 +733,8 @@
   function button(c, label, x, y, w, h, on, act) { frame(c, x, y, w, h, on ? '#4a7a3a' : '#2a2018', on ? '#fff3a0' : '#e8c27a'); txt(c, label, x + w / 2, y + h / 2 + 1, 14, on ? '#fff' : '#e8d8b0'); clicks.push({ x, y, w, h, act }); }
   function drawScreens(c) {
     clicks = [];
+    if (screen === 'online') { drawOnline(c); return; }
+    if (screen === 'guestwait') { R(c, 0, 0, W, H, '#14121c'); frame(c, 230, 150, 500, 220, '#102030', '#7ad1ff', '#2a4a6a'); txt(c, 'SALA ' + (net?.code || ''), W / 2, 190, 16, '#d8f0ff'); const gm = GAMES.find((g2) => g2.id === net?.snap?.g); txt(c, 'O anfitrião está escolhendo o jogo…', W / 2, 240, 12, '#fff'); if (gm) { txt(c, gm.name, W / 2, 284, 14, gm.color); } txt(c, 'Esc: sair da sala', W / 2, 340, 9, '#8a8aa8', 'center', null); return; }
     if (screen === 'menu') {
       R(c, 0, 0, W, H, '#1a1420'); for (let i = 0; i < 40; i++) R(c, (hash(i) * W) | 0, (hash(i + 9) * H) | 0, 2, 2, `rgba(255,220,160,${.2 + .3 * Math.sin(t * 2 + i)})`);
       // letreiro neon
@@ -640,8 +746,8 @@
         const words = gm.name.split(' '), half = Math.ceil(words.length / 2); txt(c, words.slice(0, half).join(' '), x + 86, y + 82, 9, on ? '#fff' : '#f0e0c0'); txt(c, words.slice(half).join(' '), x + 86, y + 98, 9, on ? '#fff' : '#f0e0c0');
         txt(c, gm.duo === 'coop' ? 'DUPLA JUNTOS' : 'DUPLA CONTRA', x + 86, y + 120, 8, gm.color, 'center', null); txt(c, best ? 'RECORDE ' + best : 'SEM RECORDE', x + 86, y + 140, 8, '#c8b890', 'center', null);
         clicks.push({ x, y, w: 172, h: 164, act: () => { if (sel === i) { screen = 'mode'; modeSel = 0; } else sel = i; sfx('menu'); } }); });
-      txt(c, GAMES[sel].sub, W / 2, 498, 12, '#e8d8b0', 'center', null);
-      button(c, 'SAIR', 24, 476, 120, 50, false, close); button(c, 'LOJA (B)', W - 164, 476, 140, 50, false, () => { screen = 'loja'; shopSel = 0; sfx('menu'); });
+      if (net) txt(c, GAMES[sel].sub, W / 2, 498, 12, '#e8d8b0', 'center', null); else txt(c, GAMES[sel].sub, W / 2, 96, 10, '#e8d8b0', 'center', null);
+      button(c, 'SAIR', 24, 476, 120, 50, false, close); if (!net) button(c, 'ONLINE (O)', W / 2 - 80, 470, 160, 50, false, openOnline); button(c, 'LOJA (B)', W - 164, 476, 140, 50, false, () => { screen = 'loja'; shopSel = 0; sfx('menu'); });
       txt(c, 'Setas/WASD escolhem · A abre o jogo · B abre a loja · Esc sai', W / 2, 526, 9, '#8a7a6a', 'center', null);
     } else if (screen === 'loja') {
       R(c, 0, 0, W, H, '#1a1420'); frame(c, 250, 14, 460, 60, '#2a1030', '#ffd75a', '#6a4a2a'); txt(c, 'LOJA DE FICHAS', W / 2, 38, 20, '#fff3a0'); txt(c, 'personagens para jogar no fliperama', W / 2, 60, 9, '#e8d8b0', 'center', null);
@@ -668,9 +774,10 @@
       if (modeSel && gm.duo === 'versus') { txt(c, PLAYER_NAME[0] + '  ' + r.wins[0], 750, 220, 14, PLAYER_COL[0]); txt(c, PLAYER_NAME[1] + '  ' + r.wins[1], 750, 256, 14, PLAYER_COL[1]); }
       else { const list = r[modeSel ? 'duo' : 'solo']; if (!list.length) txt(c, 'Ninguém ainda. Seja o primeiro!', 750, 250, 9, '#a89878', 'center', null); list.forEach((e, i) => { txt(c, (i + 1) + '. ' + e.n, 640, 200 + i * 30, 13, i ? '#e8d8b0' : '#ffd75a', 'left'); txt(c, String(e.s), 870, 200 + i * 30, 13, i ? '#e8d8b0' : '#ffd75a', 'right'); }); }
       if (!modeSel) { txt(c, 'MEDALHAS: ' + gm.medals.join(' / '), 750, 352, 9, '#c8b890', 'center', null); }
-      button(c, 'SOZINHO', 300, 410, 170, 56, modeSel === 0, () => { if (modeSel === 0) startGame(gm, 'solo'); else { modeSel = 0; sfx('move'); } });
+      if (net && net.live) { button(c, net.peerOnline ? 'JOGAR ONLINE (A)' : 'ESPERANDO O AMIGO…', 300, 410, 390, 56, true, () => { if (net.peerOnline) startGame(gm, 'duo'); }); button(c, 'VOLTAR', 60, 410, 140, 56, false, () => { screen = 'menu'; }); }
+      else { button(c, 'SOZINHO', 300, 410, 170, 56, modeSel === 0, () => { if (modeSel === 0) startGame(gm, 'solo'); else { modeSel = 0; sfx('move'); } });
       button(c, gm.duo === 'coop' ? 'DUPLA JUNTOS' : 'DUPLA CONTRA', 490, 410, 200, 56, modeSel === 1, () => { if (modeSel === 1) startGame(gm, 'duo'); else { modeSel = 1; sfx('move'); } });
-      button(c, 'VOLTAR', 60, 410, 140, 56, false, () => { screen = 'menu'; sfx('menu'); });
+      button(c, 'VOLTAR', 60, 410, 140, 56, false, () => { screen = 'menu'; sfx('menu'); }); }
       txt(c, 'Escolha com as setas e aperte A para começar', W / 2, 490, 9, '#8a7a6a', 'center', null);
     } else if (screen === 'over') {
       const res = st.ended, sm = st.summary;
@@ -683,6 +790,7 @@
       txt(c, '+' + sm.fichas + ' FICHAS  (TOTAL ' + data.fichas + ')', W / 2, 336, 12, '#ffd75a');
       if (initials) { txt(c, 'NOVO RECORDE! SUAS INICIAIS:', W / 2, 372, 11, '#fff'); initials.s.forEach((ch, i) => { const x = W / 2 - 60 + i * 60; frame(c, x - 22, 388, 44, 54, i === initials.i ? '#4a3a20' : '#1e1612', i === initials.i ? '#fff3a0' : '#a08060', '#3a2a2a'); txt(c, ch, x, 416, 22, '#fff'); clicks.push({ x: x - 22, y: 388, w: 44, h: 54, act: () => { if (initials.i === i) { initials.s[i] = LETTERS[(LETTERS.indexOf(ch) + 1) % LETTERS.length]; } else initials.i = i; sfx('move'); } }); });
         button(c, 'OK', W / 2 + 120, 392, 80, 46, false, saveInitials); txt(c, 'Cima/baixo troca a letra · A confirma', W / 2, 466, 9, '#8a7a6a', 'center', null); }
+      else if (net && net.role === 'guest') txt(c, 'O anfitrião escolhe o próximo jogo…', W / 2, 420, 12, '#e8d8b0');
       else { button(c, 'DE NOVO', 300, 400, 170, 56, overSel === 0, () => startGame(game, st.mode)); button(c, 'MENU', 490, 400, 170, 56, overSel === 1, () => { screen = 'menu'; sfx('menu'); }); }
     }
   }
@@ -704,11 +812,12 @@
     if (!open) return;
     const dt = Math.min(.05, (now - last) / 1000 || 0); last = now; t += dt;
     pollInput();
-    updateScreens(paused ? 0 : dt);
+    if (net && net.role === 'guest' && net.live) guestTick(); else { const away = net && net.role === 'host' && net.live && !peerLive() && (screen === 'play' || screen === 'count'); updateScreens(paused || away ? 0 : dt); if (net && net.role === 'host') hostTick(now); }
     ctx.save(); ctx.imageSmoothingEnabled = false;
     if (screen === 'play' || screen === 'count') drawPlay(ctx); else { if (st && screen === 'over') drawPlay(ctx); drawScreens(ctx); }
+    if (net) drawNetBar(ctx);
     ctx.restore();
-    if (touchUI) touchUI.dataset.mode = (screen === 'play' || screen === 'count') && !paused ? (solo ? 'solo' : 'duo') : 'menu';
+    if (touchUI) touchUI.dataset.mode = (screen === 'play' || screen === 'count') && !paused ? (solo || net ? 'solo' : 'duo') : 'menu';
     raf = requestAnimationFrame(loop);
   }
 
@@ -729,7 +838,7 @@
     root.append(cv, touchUI, close);
     (document.getElementById('gameShell') || document.body).append(root);
     cv.addEventListener('pointerdown', (e) => { const r = cv.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * W, y = (e.clientY - r.top) / r.height * H; if (screen === 'play' && !paused && !st?.ended && game?.tap) { e.preventDefault(); game.tap(st, x / 2, y / 2); return; } for (const k of clicks.slice().reverse()) if (x >= k.x && x <= k.x + k.w && y >= k.y && y <= k.y + k.h) { e.preventDefault(); k.act(); return; } });
-    window.addEventListener('keydown', (e) => { if (!open) return; if (e.code === 'Escape' || e.code === 'Backspace') { e.preventDefault(); back(); } else if (e.code === 'KeyP' && (screen === 'play' || screen === 'count')) back(); keys[e.code] = true; if (e.code.startsWith('Arrow') || e.code === 'Space' || e.code === 'Enter') e.preventDefault(); e.stopImmediatePropagation(); }, true);
+    window.addEventListener('keydown', (e) => { if (!open || e.target?.tagName === 'INPUT') return; if (e.code === 'Escape' || e.code === 'Backspace') { e.preventDefault(); back(); } else if (e.code === 'KeyP' && (screen === 'play' || screen === 'count')) back(); keys[e.code] = true; if (!e.repeat) latch.add(e.code); if (e.code === 'KeyO' && screen === 'menu' && !net && !e.repeat) openOnline(); if (e.code.startsWith('Arrow') || e.code === 'Space' || e.code === 'Enter') e.preventDefault(); e.stopImmediatePropagation(); }, true);
     window.addEventListener('keyup', (e) => { keys[e.code] = false; if (open) e.stopImmediatePropagation(); }, true);
     window.addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
   }
@@ -803,6 +912,6 @@
   window.Fliperama = Object.freeze({
     open: openUp, close, isOpen: () => open, near, drawWorld, games: () => GAMES.map((gm) => ({ id: gm.id, name: gm.name, duo: gm.duo })),
     stats: () => JSON.parse(JSON.stringify(data)), register: (gm) => { if (gm && gm.id && !GAMES.some((x) => x.id === gm.id)) GAMES.push(gm); },
-    debug: () => ({ screen, sel, st, P })
+    debug: () => ({ screen, sel, st, P, net })
   });
 })();

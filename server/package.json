@@ -1,0 +1,15 @@
+{
+  "name": "daroca-servidor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Servidor online do Da Roça Adventure: salas da Arena, Dupla online, Fliperama online e TV.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node teste.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "ws": "8.18.3"
+  }
+}

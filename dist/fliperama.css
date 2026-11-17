@@ -30,3 +30,10 @@
 /* inventário: linha do fliperama */
 #hudInvPanel .hud-fliperama{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 #hudInvPanel .hud-fliperama-btn{margin-left:auto;border:5px solid transparent;border-image:var(--px-green,linear-gradient(#8ea25c,#8ea25c)) 3 fill / 5px / 0 stretch;background:none;color:#fff2bd;font:7px Pixel,monospace;padding:2px 6px;cursor:pointer}
+/* caixa do código da sala (online) */
+#fliperama .fliperama-code{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;gap:10px;align-items:stretch;padding:18px 20px;border:8px solid transparent;border-image:var(--px-dark,linear-gradient(#2a2018,#2a2018)) 3 fill / 8px / 0 stretch;z-index:4;min-width:260px}
+#fliperama .fliperama-code[hidden]{display:none}
+#fliperama .fliperama-code label{display:flex;flex-direction:column;gap:8px;font:9px Pixel,monospace;color:#f3e2b8;text-align:center}
+#fliperama .fliperama-code input{font:22px Pixel,monospace;letter-spacing:6px;text-align:center;text-transform:uppercase;padding:8px;background:#120c10;color:#fff3a0;border:3px solid #e8c27a;outline:none}
+#fliperama .fliperama-code button{font:10px Pixel,monospace;padding:10px;border:5px solid transparent;border-image:var(--px-green,linear-gradient(#8ea25c,#8ea25c)) 3 fill / 5px / 0 stretch;background:none;color:#fff2bd;cursor:pointer}
+#fliperama .fliperama-code .fp-cancel{border-image:var(--px-paper,linear-gradient(#e4d7a2,#e4d7a2)) 3 fill / 5px / 0 stretch;color:#5d4728}
