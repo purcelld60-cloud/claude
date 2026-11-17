@@ -114,7 +114,7 @@
     if (window.Game?.soundOn && !window.Game.soundOn()) return;
     try {
       actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume();
-      const now = actx.currentTime, out = actx.createGain(); out.gain.value = .05; out.connect(actx.destination);
+      const now = actx.currentTime, out = actx.createGain(); out.gain.value = .05 * (window.DarocaAudio?.sfx?.() ?? 1); out.connect(actx.destination);
       const tone = (f, f2, d, type = 'square', at = 0, vol = 1) => { const o = actx.createOscillator(), g = actx.createGain(); o.type = type; o.frequency.setValueAtTime(f, now + at); if (f2) o.frequency.exponentialRampToValueAtTime(Math.max(30, f2), now + at + d); g.gain.setValueAtTime(vol, now + at); g.gain.exponentialRampToValueAtTime(.001, now + at + d); o.connect(g); g.connect(out); o.start(now + at); o.stop(now + at + d + .02); };
       const noise = (d, vol = 1, at = 0, hp = 0) => { const len = Math.floor(actx.sampleRate * d), buf = actx.createBuffer(1, len, actx.sampleRate), ch = buf.getChannelData(0); for (let i = 0; i < len; i++) ch[i] = (Math.random() * 2 - 1) * (1 - i / len); const src = actx.createBufferSource(), g = actx.createGain(); src.buffer = buf; g.gain.value = vol; let node = src; if (hp) { const f = actx.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = hp; src.connect(f); node = f; } node.connect(g); g.connect(out); src.start(now + at); };
       switch (name) {

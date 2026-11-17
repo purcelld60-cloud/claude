@@ -1,0 +1,31 @@
+name: Lista de músicas
+
+# Quando você envia músicas para dist/musicas/ (ou muda o musicas.txt) no main, este workflow
+# atualiza dist/musicas/lista.json e lista.js no repositório e mostra avisos (arquivo que falta,
+# lugar com nome errado). O site, o APK e o IPA já geram a lista sozinhos a cada build.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['dist/musicas/**', '.github/scripts/musicas.py']
+
+permissions:
+  contents: write
+
+jobs:
+  lista:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gerar a lista
+        run: |
+          sudo apt-get install -y -qq ffmpeg >/dev/null 2>&1 || true
+          python3 .github/scripts/musicas.py
+      - name: Salvar no repositório (se mudou)
+        run: |
+          if git diff --quiet -- dist/musicas/lista.json dist/musicas/lista.js; then echo "Lista já estava em dia."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dist/musicas/lista.json dist/musicas/lista.js
+          git commit -m "Atualiza a lista de músicas"
+          git push
