@@ -6,8 +6,8 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 
 | Passo | Conteúdo | Situação |
 | --- | --- | --- |
-| 1 | Personagens no mesmo traço | **feito, aguardando aprovação** |
-| 2 | Cenários: os 10 novos e o reuso do mapa de Itabuna | — |
+| 1 | Personagens no mesmo traço | feito e aprovado |
+| 2 | Cenários: os 10 novos e o reuso do mapa de Itabuna | **feito, aguardando aprovação** |
 | 3 | Poderes de Da Roça e sistema de escolher poder no quarto | — |
 | 4 | Cutscenes | — |
 | 5 | O resto: menu "Campanha 2", missões, chefes, bloqueio depois do embarque, save e créditos | — |
@@ -57,3 +57,48 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 **O que fica para os próximos passos**
 - **Falas, histórias e missões:** dependem dos cenários e das cutscenes.
 - **Ataques específicos dos chefes:** o cabelo do Fred e os golpes do Jorge entram no passo dos poderes e dos chefes.
+
+## Passo 2 · Cenários (`dist/campanha2/cenarios.js`)
+
+**Pesquisa:** antes de desenhar, olhei fotos reais do Wikimedia Commons:
+- o Cristo de Mário Cravo na Serra do Periperi;
+- a Catedral Nossa Senhora das Vitórias;
+- a marquise do Aeroporto Glauber Rocha;
+- a Avenida Olívia Flores, com a ciclovia no canteiro central;
+- o Centro de Cultura, o comércio do centro e a vista da cidade.
+
+O que as fotos mostram de Conquista:
+- **Cidade:** um planalto plano coberto de prédios brancos e bege.
+- **Catedral:** fachada creme, uma torre central com relógio e agulha, janelas ogivais, nave lateral e grade de ferro na frente.
+- **Cristo:** uma cruz alta e fina, sobre um disco num pilar.
+- **Clima:** o frio e a neblina viraram piada recorrente nos cenários.
+
+**Como funciona:** os cenários usam o mesmo motor dos cenários HD atuais. O `hd-maps.js` ganhou duas coisas:
+- `HdMaps.register`, para registrar as cenas 12 e seguintes;
+- `HdMaps.kit`, com as ferramentas de desenho.
+
+Por isso os cenários novos têm o mesmo céu realista, a hora do dia, as sombras do sol, as luzes à noite, as folhas que reagem e o shader. As fases 0 a 11 não mudaram: passei por todas nas três qualidades, com sol, chuva e neve, e não apareceu nenhum erro.
+
+| Cena | Cenário | Destaques |
+| --- | --- | --- |
+| 12 | Aeroportos | **Itabuna:** saguão, check-in com fila de fitas, painel de voos, raio-X com esteira e pórtico, portão de embarque. **Pista:** o avião com escada. **Glauber Rocha:** marquise branca com letreiro azul, vidraças, esteira de bagagem e o táxi do Seu Zé na saída |
+| 13 | Bairro da pensão | Pensão Dona Lurdes (sobrado), casinhas coloridas com muro, padaria com fumaça de pão quente, mercadinho, postes com fiação e muita neblina |
+| 14 | Centro e Praça da Catedral | Catedral (fiel à foto), Praça Tancredo Neves com coqueiros, bancos, pombos e postes, comércio com toldos, Memorial e fiação. À noite, a catedral iluminada |
+| 15 | Serra do Periperi | Morro de pedra e cerrado, cactos cabeça-de-frade (típicos da serra), torres de antena, vento no capim, neblina passando e a cidade lá embaixo. No alto, o Cristo de Mário Cravo. Fase de subida com 3 ravinas |
+| 16 | Monumento ao Índio | Avenida com trânsito nos dois sentidos (carros, ônibus, motos), semáforos, posto, outdoors com piadas e a rotatória com a estátua de bronze. Fase de perseguição com buracos de obra |
+| 17 | Feira e biscoitarias | Barracas de lona colorida com frutas e grãos, três biscoitarias com potes de biscoito de polvilho e vapor saindo do forno |
+| 18 | Fazendas de café | Fileiras de café com grãos vermelhos, eucaliptos, sede com varanda, terreiro de secagem, secador girando, descascadora e caixa-d'água. Canais de irrigação |
+| 19 | Teatro e Planetário | Centro de Cultura (bloco cinza), Teatro Glauber Rocha com marquise de lâmpadas e cartazes, cúpula do Planetário, holofotes e estrelas. Fase noturna |
+| 20 | Shopping | Dois andares de lojas, praça de alimentação, cinema com cartazes, lan house com telas piscando e escada rolante |
+| 21 | Olívia Flores e Escola SESI | Avenida com ciclovia no canteiro central, coqueiros e prédios altos. Na escola: pátio, quadra coberta em arco, auditório e laboratório de informática |
+
+**Visualizador:** abra o jogo com `?cenarios2` no fim do endereço.
+- **Andar:** setas ou ◀ ▶.
+- **Trocar de cenário:** `[` e `]`, ou os botões.
+- **Trocar a hora:** os botões ou as teclas 1 a 4.
+
+**Itabuna:** a missão do passaporte reusa a fase 0 (a Roça) e o mapa de Itabuna que já existem. Não há cenário novo; o reuso entra no Passo 5.
+
+**O que fica para o Passo 5:**
+- ligar as cenas 12 a 21 ao jogo: menu "Campanha 2", portas, missões, inimigos, chefes, save e bloqueio de Itabuna depois do embarque;
+- o clima de chuva e neve nessas cenas. A neblina já vem nos cenários.
