@@ -35,8 +35,8 @@
      hair: { style, color } · hat · glasses · beard · mustache · scarf · item (objeto na mão) · pose (gesto parado) */
   const SPEC = {
     // trio
-    jorge_gordo: { name: 'Jorge (época do trio)', skin: '#e3b48c', shade: '#b98563', build: 'belly', top: '#b8473d', topKind: 'tee', sleeve: 'short', pants: '#3b4b63', hair: { style: 'bowl', color: '#3b2a20' }, pose: 'relaxed' },
-    jorge: { name: 'Jorge', skin: '#e3b48c', shade: '#b98563', build: 'normal', top: '#2f3b4c', topKind: 'hoodie', inner: '#d9d6c8', pants: '#2c3a4f', hair: { style: 'bowl', color: '#3b2a20' }, item: 'phone', pose: 'phone' },
+    jorge_gordo: { name: 'Jorge (época do trio)', skin: '#dcaa82', shade: '#b07e5c', build: 'belly', top: '#b8473d', topKind: 'tee', sleeve: 'short', pants: '#3b4b63', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', pose: 'relaxed' },
+    jorge: { name: 'Jorge', skin: '#dcaa82', shade: '#b07e5c', build: 'normal', top: '#4b3428', topKind: 'tee', sleeve: 'short', pants: '#2c3a4f', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', stubble: '#7a5640', item: 'phone', pose: 'phone' },
     // amigos
     miguel: { name: 'Miguel', skin: '#f0c9af', shade: '#c3977f', build: 'strong', top: '#2c4f78', topKind: 'tee', sleeve: 'short', pants: '#3f4a52', hair: { style: 'side', color: '#4a3426' }, glasses: '#2f78c8', strap: '#5d4a3a', pose: 'thumb' },
     fred_conquista: { name: 'Fred', skin: '#f1cfb6', shade: '#c49b80', build: 'slim', top: '#1d1f26', topKind: 'tee', sleeve: 'short', print: '#c63d4a', pants: '#34404f', hair: { style: 'mullet', color: '#121518' }, chain: '#c9ccc4', pose: 'cocky' },
@@ -92,6 +92,16 @@
         const dk = shadeHex(col, .62);
         for (let yy = -64; yy <= -58; yy += 3) for (let xx = -12 + ((yy / 3) & 1) * 2; xx < 14; xx += 4) { r(c, xx, yy, 2, 1, hi); r(c, xx + 1, yy + 1, 1, 1, dk); }
         for (let yy = -54; yy < -48; yy += 3) { r(c, -13, yy, 2, 1, hi); r(c, -11, yy + 1, 1, 1, dk); }
+        break;
+      }
+      case 'curly': { // cachos definidos: volume alto, laterais baixas e cachinhos caindo na testa (Jorge)
+        const dk = shadeHex(col, .35), hl = shadeHex(col, 2.6), fade = H.fade || col;
+        r(c, -12, -60, 4, 12, fade); r(c, -12, -60, 1, 12, shadeHex(fade, .8)); r(c, 11, -58, 3, 3, fade); // laterais disfarçadas
+        const curls = [[-4, -70, 4], [3, -71, 4], [10, -69, 4], [-11, -66, 4], [-4, -65, 4], [3, -66, 4], [10, -64, 4], [-12, -61, 3], [15, -61, 3], [-1, -59, 3], [4, -58, 3], [9, -59, 3], [14, -57, 3]];
+        for (const [xx, yy, rr] of curls) oval(c, xx, yy, rr + 1, rr + 1, OUT, 1);
+        r(c, -11, -64, 25, 6, col);
+        curls.forEach(([xx, yy, rr], i) => { oval(c, xx, yy, rr, rr, i % 3 === 1 ? shadeHex(col, 1.25) : col, 1); r(c, xx - 1, yy - 1, 2, 2, dk); r(c, xx - rr + 1, yy - rr + 1, 2, 1, hl); r(c, xx + rr - 2, yy + 1, 1, 2, hl); });
+        r(c, 2, -55, 1, 1, col); r(c, 12, -54, 1, 2, col); // pontinhas dos cachos na testa
         break;
       }
       case 'side': // curto e liso jogado para o lado (Miguel)
@@ -252,6 +262,7 @@
     else if (mood === 'sad') { r(c, 3, ey, 3, 3, '#2d3031'); r(c, 1, ey - 3, 6, 1, shadeHex(S.hair?.color || '#3a2a20', 1)); }
     else { r(c, 3, ey, 3, 3, '#2d3031'); if (twitch) r(c, 2, ey - 1, 5, 1, '#2d3031'); }
     if (S.glasses) { r(c, -1, -56, 12, 7, S.glasses); r(c, 0, -55, 10, 5, '#d8eef4'); r(c, 3, -54, 3, 3, '#2d3031'); r(c, 1, -55, 3, 1, '#ffffff'); r(c, -9, -54, 10, 1, S.glasses); }
+    if (S.stubble) { r(c, 4, -47, 9, 1, S.stubble); r(c, 6, -42, 5, 2, S.stubble); r(c, 12, -44, 2, 2, S.stubble); }
     if (S.shades) { r(c, -1, -55, 13, 5, '#14181c'); r(c, 1, -54, 3, 1, '#5a7a9a'); r(c, -9, -54, 10, 1, '#14181c'); }
     if (S.goggles) { r(c, -12, -62, 27, 3, '#3a3a34'); r(c, 1, -63, 7, 5, S.goggles); r(c, 9, -63, 6, 5, S.goggles); }
     // boca
@@ -266,6 +277,9 @@
     if (S.beard) { r(c, -9, -50, 6, 9, S.beard); r(c, -4, -44, 18, 4, S.beard); r(c, 1, -47, 12, 2, S.beard); r(c, 3, -45, 7, 1, '#7a4a3a'); }
     if (S.earrings) { r(c, -9, -50, 3, 4, S.earrings); }
     hairFront(c, S, t); hat(c, S);
+    if (S.thinGlasses) { // armação fina e escura, só em cima (meio aro), desenhada por cima dos cachos
+      const g = S.thinGlasses; r(c, -1, -55, 13, 2, g); r(c, -1, -55, 1, 5, g); r(c, 11, -55, 1, 4, g); r(c, 0, -53, 11, 4, '#d8eef433'); r(c, 1, -53, 2, 1, '#ffffffaa'); r(c, -9, -54, 8, 1, g); r(c, 3, -53, 3, 3, '#2d3031');
+    }
     if (S.headset) { r(c, -14, -63, 28, 3, S.headset); r(c, -15, -58, 5, 9, S.headset); limb(c, [[-12, -51], [-2, -45], [6, -44]], 2, S.headset); r(c, 5, -45, 3, 2, '#5ae0d0'); }
     hand(1);
     if (S.item && !attack && !o.reach && o.item !== false) item(c, S, Rh[0], Rh[1], t, o);
