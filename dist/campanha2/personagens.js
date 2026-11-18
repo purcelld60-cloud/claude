@@ -35,8 +35,8 @@
      hair: { style, color } · hat · glasses · beard · mustache · scarf · item (objeto na mão) · pose (gesto parado) */
   const SPEC = {
     // trio
-    jorge_gordo: { name: 'Jorge (época do trio)', skin: '#dcaa82', shade: '#b07e5c', build: 'belly', top: '#b8473d', topKind: 'tee', sleeve: 'short', pants: '#3b4b63', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', pose: 'relaxed' },
-    jorge: { name: 'Jorge', skin: '#dcaa82', shade: '#b07e5c', build: 'normal', top: '#4b3428', topKind: 'tee', sleeve: 'short', pants: '#2c3a4f', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', stubble: '#7a5640', item: 'phone', pose: 'phone' },
+    jorge_gordo: { name: 'Jorge (época do trio)', skin: '#dcaa82', shade: '#b07e5c', build: 'chubby', top: '#1c1e22', topKind: 'pullover', print: 'pizza', pants: '#3b4b63', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', pose: 'relaxed' },
+    jorge: { name: 'Jorge', skin: '#dcaa82', shade: '#b07e5c', build: 'slim', top: '#4b3428', topKind: 'tee', sleeve: 'short', pants: '#2c3a4f', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', stubble: '#7a5640', item: 'phone', pose: 'phone' },
     // amigos
     miguel: { name: 'Miguel', skin: '#f0c9af', shade: '#c3977f', build: 'strong', top: '#2c4f78', topKind: 'tee', sleeve: 'short', pants: '#3f4a52', hair: { style: 'side', color: '#4a3426' }, glasses: '#2f78c8', strap: '#5d4a3a', pose: 'thumb' },
     fred_conquista: { name: 'Fred', skin: '#f1cfb6', shade: '#c49b80', build: 'slim', top: '#1d1f26', topKind: 'tee', sleeve: 'short', print: '#c63d4a', pants: '#34404f', hair: { style: 'mullet', color: '#121518' }, chain: '#c9ccc4', pose: 'cocky' },
@@ -168,11 +168,11 @@
     const t = Number(o.frame) || 0, moving = !!o.moving || Number(o.speed) > 8, air = o.grounded === false;
     const walk = moving && !air ? Math.sin(t * 9) : 0, bob = moving && !air ? Math.round(Math.abs(Math.cos(t * 9)) * 2) : Math.round(Math.sin(t * 2) * .7);
     const attack = !!o.attack, strike = attack ? Math.max(0, Math.sin((Number.isFinite(o.attackProgress) ? o.attackProgress : .5 + Math.sin(t * 7) * .5) * Math.PI)) : 0;
-    const belly = S.build === 'belly', strong = S.build === 'strong', slim = S.build === 'slim';
-    const wide = belly ? 18 : strong ? 17 : slim ? 10 : 12, skin = S.skin, shade = S.shade;
+    const belly = S.build === 'belly', strong = S.build === 'strong', slim = S.build === 'slim', chubby = S.build === 'chubby';
+    const wide = belly ? 18 : strong ? 17 : slim ? 10 : chubby ? 14 : 12, skin = S.skin, shade = S.shade;
     const shiver = S.shiver || o.cold ? Math.round(Math.sin(t * 40)) : 0, twitch = S.twitch && Math.sin(t * 13) > .85 ? 1 : 0;
     const mood = o.emotion || S.mood || '';
-    oval(c, 0, -1, belly ? 23 : strong ? 21 : 17, 3, '#2e433d', 2);
+    oval(c, 0, -1, belly ? 23 : strong ? 21 : chubby ? 19 : 17, 3, '#2e433d', 2);
     if (o.rage || (type === 'c2_breno' && o.powered)) { c.save(); c.globalAlpha *= .3; oval(c, 0, -34, 30 + Math.sin(t * 11) * 3, 42, '#f26154', 3); c.restore(); }
     // pernas
     for (const side of [-1, 1]) {
@@ -224,6 +224,9 @@
     // tronco
     const top = S.top, edge = shadeHex(top, .62);
     if (belly) { oval(c, 1, -30, 23, 20, '#202a31', 2); oval(c, 1, -31, 20, 17, top, 2); r(c, -14, -20, 31, 3, shadeHex(top, .55)); }
+    else if (chubby) { // gordinho: tronco um pouco mais largo e barriguinha leve (não é bola)
+      poly(c, [[-wide - 1, -42], [wide + 2, -42], [wide + 4, -30], [wide + 2, -17], [-wide, -17], [-wide - 2, -30]], '#243037');
+      poly(c, [[-wide + 1, -40], [wide, -40], [wide + 2, -30], [wide, -19], [-wide + 2, -19], [-wide, -30]], top); r(c, -wide + 2, -21, wide * 2, 3, edge); r(c, wide - 2, -31, 3, 8, shadeHex(top, 1.35)); }
     else { poly(c, [[-wide - 1, -42], [wide + 2, -42], [wide, -17], [-wide, -17]], '#243037'); poly(c, [[-wide + 1, -40], [wide, -40], [wide - 2, -19], [-wide + 2, -19]], top); r(c, -wide + 2, -21, wide * 2 - 2, 3, edge); }
     const bx = belly ? 16 : wide - 1;
     switch (S.topKind) {
@@ -233,6 +236,17 @@
         if (S.topKind === 'hoodie') { r(c, -bx + 1, -43, 9, 5, edge); r(c, -bx + 2, -42, 7, 3, top); r(c, 0, -33, 1, 7, '#e8e2d0'); r(c, 3, -33, 1, 6, '#e8e2d0'); }
         if (S.topKind === 'puffer') for (let k = 0; k < 3; k++) r(c, -bx + 1, -37 + k * 6, bx * 2 - 2, 1, shadeHex(top, .8));
         if (S.topKind === 'coat') { r(c, -wide, -19, wide * 2, 5, top); r(c, -wide, -15, wide * 2, 1, edge); }
+        break;
+      case 'pullover':
+        r(c, -bx + 1, -44, 10, 5, edge); r(c, -bx + 2, -43, 8, 3, shadeHex(top, 1.6)); // capuz atrás do pescoço
+        r(c, 0, -40, 1, 6, '#e8e2d0'); r(c, 4, -40, 1, 5, '#e8e2d0');                 // cordões
+        r(c, -bx + 4, -25, bx * 2 - 7, 5, shadeHex(top, 1.5)); r(c, -bx + 5, -24, bx * 2 - 9, 3, top); // bolso canguru
+        if (S.print === 'pizza') { // fatia de pizza com contorno branco
+          poly(c, [[-8, -38], [9, -38], [1, -26]], '#f4f1e8');
+          poly(c, [[-6, -37], [7, -37], [1, -28]], '#f2c14e');
+          r(c, -6, -37, 13, 2, '#c47a35');
+          r(c, -2, -34, 2, 2, '#c8382f'); r(c, 2, -33, 2, 2, '#c8382f'); r(c, 0, -30, 2, 2, '#c8382f');
+        }
         break;
       case 'polo': r(c, -4, -41, 9, 4, shadeHex(top, .85)); r(c, 0, -38, 1, 6, edge); if (S.pattern) for (let k = 0; k < 6; k++) r(c, -bx + 3 + (k % 3) * 9, -36 + Math.floor(k / 3) * 8, 3, 3, S.pattern); break;
       case 'tank': r(c, -bx + 4, -40, 5, 3, skin); r(c, bx - 8, -40, 5, 3, skin); break;

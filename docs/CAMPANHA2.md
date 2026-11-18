@@ -25,8 +25,8 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 | Grupo | Tipo no código | Personagem |
 | --- | --- | --- |
 | Trio | `daroca`, `reeis` | os mesmos de sempre |
-| Trio | `jorge_gordo` | Jorge na época do trio, o "Gordo": cabelo cacheado em tigela com franjinha |
-| Trio | `jorge` | Jorge hoje: mais magro, mesma tigela, de moletom e celular |
+| Trio | `jorge_gordo` | Jorge na época do trio, o "Gordo": gordinho, cachos, óculos finos e moletom preto com estampa de pizza com contorno branco |
+| Trio | `jorge` | Jorge hoje: magro, cachos, óculos finos, bigodinho ralo, camiseta marrom e celular |
 | Amigo | `miguel` | Miguel: forte (estilo Caleb), óculos azuis, cabelo curto e liso de lado, alça de mochila de viajante |
 | Amigo do Jorge | `fred_conquista` | Fred de Conquista: mullet preto e liso. É um tipo separado do `freddy` da campanha 1 |
 | Flashback | `crianca_daroca`, `crianca_reeis`, `crianca_jorge` | o trio criança |
