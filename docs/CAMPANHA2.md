@@ -26,9 +26,10 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 | --- | --- | --- |
 | Trio | `daroca`, `reeis` | os mesmos de sempre |
 | Trio | `jorge_gordo` | Jorge na época do trio, o "Gordo": gordinho, cachos, óculos finos e moletom preto com estampa de pizza com contorno branco |
-| Trio | `jorge` | Jorge hoje: magro, cachos, óculos finos, bigodinho ralo, camiseta marrom e celular |
+| Trio | `jorge` | Jorge hoje: magro, cachos, óculos finos, bigodinho ralo e camiseta marrom |
+| Trio | `jorge_celular` | o mesmo Jorge de hoje, com o celular na orelha (cenas da ligação) |
 | Amigo | `miguel` | Miguel: forte (estilo Caleb), óculos azuis, cabelo curto e liso de lado, alça de mochila de viajante |
-| Amigo do Jorge | `fred_conquista` | Fred de Conquista: mullet preto e liso. É um tipo separado do `freddy` da campanha 1 |
+| Amigo do Jorge | `fred_conquista` | Fred de Conquista: cabelo preto ondulado com topetinho pequeno. É um tipo separado do `freddy` da campanha 1 |
 | Flashback | `crianca_daroca`, `crianca_reeis`, `crianca_jorge` | o trio criança |
 | Flashback | `pre_daroca`, `pre_reeis`, `pre_jorge` | o trio com uns 12 anos |
 | Aliados | `c2_ze_taxi` | Seu Zé do Táxi |
@@ -55,4 +56,4 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 
 **O que fica para os próximos passos**
 - **Falas, histórias e missões:** dependem dos cenários e das cutscenes.
-- **Ataques específicos dos chefes:** o mullet do Fred e os golpes do Jorge entram no passo dos poderes e dos chefes.
+- **Ataques específicos dos chefes:** o cabelo do Fred e os golpes do Jorge entram no passo dos poderes e dos chefes.

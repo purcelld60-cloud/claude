@@ -36,10 +36,11 @@
   const SPEC = {
     // trio
     jorge_gordo: { name: 'Jorge (época do trio)', skin: '#dcaa82', shade: '#b07e5c', build: 'chubby', top: '#1c1e22', topKind: 'pullover', print: 'pizza', pants: '#3b4b63', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', pose: 'relaxed' },
-    jorge: { name: 'Jorge', skin: '#dcaa82', shade: '#b07e5c', build: 'slim', top: '#4b3428', topKind: 'tee', sleeve: 'short', pants: '#2c3a4f', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', stubble: '#7a5640', item: 'phone', pose: 'phone' },
+    jorge: { name: 'Jorge', skin: '#dcaa82', shade: '#b07e5c', build: 'slim', top: '#4b3428', topKind: 'tee', sleeve: 'short', pants: '#2c3a4f', hair: { style: 'curly', color: '#22170f', fade: '#5a4436' }, thinGlasses: '#26221f', stubble: '#7a5640', pose: 'relaxed' },
+    jorge_celular: null, // preenchido abaixo: o mesmo Jorge de hoje com o celular na orelha
     // amigos
     miguel: { name: 'Miguel', skin: '#f0c9af', shade: '#c3977f', build: 'strong', top: '#2c4f78', topKind: 'tee', sleeve: 'short', pants: '#3f4a52', hair: { style: 'side', color: '#4a3426' }, glasses: '#2f78c8', strap: '#5d4a3a', pose: 'thumb' },
-    fred_conquista: { name: 'Fred', skin: '#f1cfb6', shade: '#c49b80', build: 'slim', top: '#1d1f26', topKind: 'tee', sleeve: 'short', print: '#c63d4a', pants: '#34404f', hair: { style: 'mullet', color: '#121518' }, chain: '#c9ccc4', pose: 'cocky' },
+    fred_conquista: { name: 'Fred', skin: '#f1cfb6', shade: '#c49b80', build: 'slim', top: '#1d1f26', topKind: 'tee', sleeve: 'short', print: '#c63d4a', pants: '#34404f', hair: { style: 'wavy', color: '#121518' }, chain: '#c9ccc4', pose: 'cocky' },
     // aliados e NPCs
     c2_ze_taxi: { name: 'Seu Zé do Táxi', skin: '#c99068', shade: '#9a6849', build: 'belly', top: '#dccb98', topKind: 'polo', sleeve: 'short', pattern: '#b9a26a', pants: '#4a4a42', hair: { style: 'bald', color: '#b8b2a6' }, mustache: '#d6d0c4', item: 'keys', pose: 'talk' },
     c2_lurdes: { name: 'Dona Lurdes', skin: '#d9a57f', shade: '#ac7856', build: 'normal', h: .94, top: '#7a5a8c', topKind: 'apron', apron: '#efe6d2', skirt: '#5d4672', hair: { style: 'bun', color: '#3a312c', gray: '#9a938a' }, glasses: '#7a5a3a', scarf: '#b9524a', pose: 'hips' },
@@ -62,8 +63,9 @@
     c2_ryan: { name: 'Ryan', skin: '#e9c2a3', shade: '#bb9275', build: 'slim', top: '#2f6fb5', topKind: 'hoodie', inner: '#1d2a3c', pants: '#25303f', hair: { style: 'fringe', color: '#2a1d16' }, headset: '#20262c', item: 'pad', pose: 'game' },
     c2_bryan: { name: 'Bryan', skin: '#e9c2a3', shade: '#bb9275', build: 'slim', top: '#c23f3a', topKind: 'hoodie', inner: '#3c1d1d', pants: '#25303f', hair: { style: 'fringe', color: '#2a1d16' }, headset: '#20262c', item: 'pad', pose: 'game', mirrored: true }
   };
+  SPEC.jorge_celular = { ...SPEC.jorge, name: 'Jorge (no celular)', item: 'phone', pose: 'phone' };
   const ROLE = {
-    jorge_gordo: 'trio', jorge: 'trio', miguel: 'amigo', fred_conquista: 'vilão final antes do Jorge',
+    jorge_gordo: 'trio', jorge: 'trio', jorge_celular: 'trio', miguel: 'amigo', fred_conquista: 'vilão final antes do Jorge',
     c2_ze_taxi: 'aliado', c2_lurdes: 'aliado', c2_mel: 'aliado', c2_biscoito: 'aliado', c2_picole: 'aliado', c2_nando: 'aliado', c2_vo_cida: 'aliado',
     c2_juninho: 'aliado', c2_larissa: 'aliado', c2_gugu: 'aliado', c2_bia: 'aliado', c2_carlinhos: 'aliado',
     c2_creuza: 'vilão 1', c2_tonhao: 'vilão 2', c2_valdomiro: 'vilão 3', c2_kaua_influencer: 'vilão 4', c2_barao: 'vilão 5', c2_breno: 'vilão 6', c2_ryan: 'vilão 7', c2_bryan: 'vilão 7'
@@ -102,6 +104,14 @@
         r(c, -11, -64, 25, 6, col);
         curls.forEach(([xx, yy, rr], i) => { oval(c, xx, yy, rr, rr, i % 3 === 1 ? shadeHex(col, 1.25) : col, 1); r(c, xx - 1, yy - 1, 2, 2, dk); r(c, xx - rr + 1, yy - rr + 1, 2, 1, hl); r(c, xx + rr - 2, yy + 1, 1, 2, hl); });
         r(c, 2, -55, 1, 1, col); r(c, 12, -54, 1, 2, col); // pontinhas dos cachos na testa
+        break;
+      }
+      case 'wavy': { // preto ondulado normal com topetinho pequeno na frente (Fred)
+        const hl = '#46505a', dk = '#07090b';
+        r(c, -13, -65, 28, 10, OUT); r(c, -12, -64, 26, 8, col); r(c, -12, -58, 4, 9, col); r(c, 11, -58, 3, 3, col);
+        poly(c, [[5, -64], [9, -69], [15, -68], [16, -63], [10, -62]], OUT); poly(c, [[6, -64], [9, -68], [14, -67], [15, -63], [10, -63]], col); // topetinho
+        for (let k = 0; k < 3; k++) { r(c, -10 + k * 7, -62 + (k % 2), 4, 1, hl); r(c, -7 + k * 7, -61 + (k % 2), 3, 1, dk); } // ondas
+        r(c, 9, -67, 3, 1, hl); r(c, 2, -57, 10, 2, col); r(c, 4, -55, 2, 1, col); r(c, -11, -55, 2, 1, hl);
         break;
       }
       case 'side': // curto e liso jogado para o lado (Miguel)
