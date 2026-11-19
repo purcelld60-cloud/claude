@@ -54,10 +54,10 @@
     try { window.Interact?.update?.(dt, o); } catch (e) {}
     window.Art.drawScene(c, d.id, cam, t);
     c.save(); c.translate(-Math.round(cam), 0);
-    for (const [px, py, pw] of d.plataformas) if (px + pw > cam - 20 && px < cam + 980) { c.fillStyle = '#3e2a1a'; c.fillRect(px - 2, py, pw + 4, 14); c.fillStyle = '#8d6a45'; c.fillRect(px, py + 2, pw, 10); c.fillStyle = '#c4955c'; c.fillRect(px, py + 2, pw, 2); }
-    window.Interact?.drawBack?.(c, o);
+    for (const pl of d.plataformas) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) window.CampanhaCenarios.plataforma(c, d.id, pl, t);
+    window.Interact?.drawBack?.(c, o); window.CampanhaPlantas?.drawBack?.(c, o);
     window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: !!P.vx && P.ground, grounded: P.ground, vy: P.vy, attack: atkT > 0, attackType: 'paper', attackProgress: 1 - atkT / .32 });
-    window.Interact?.drawFront?.(c, o);
+    window.Interact?.drawFront?.(c, o); window.CampanhaPlantas?.drawFront?.(c, o);
     c.restore();
     if (window.Graphics?.isShader?.()) window.Shader?.apply?.(cv, { scene: d.id, camera: cam, time: t, outdoor: !d.interno });
     title.textContent = (d.id - 11) + '/10 · ' + d.nome.toUpperCase();

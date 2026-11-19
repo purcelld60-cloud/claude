@@ -107,6 +107,33 @@ Por isso os cenários novos têm o mesmo céu realista, a hora do dia, as sombra
   - outros: portas que abrem, poças, capim que pega fogo e churrasqueiras;
   - alavancas com efeitos: luzes de festa, holofotes, irrigador na fazenda e sinal da escola.
 
+**Plataformas de cada cenário** (`CampanhaCenarios.plataforma`, usada pelo `drawPlank` do jogo nas cenas 12 e seguintes):
+
+| Cenário | Plataforma |
+| --- | --- |
+| Aeroporto | Passarela de metal com grade, faixa de segurança e rebites |
+| Bairro | Laje de concreto pintada, com azulejo, ferro aparecendo e vasinho |
+| Centro | Cornija de pedra com molduras, mísulas e pombo |
+| Serra | Ilha de terra com camadas, pedras, raízes, musgo, flores e o cacto da serra |
+| Avenida | Mureta de concreto com faixas refletivas e pichação |
+| Feira | Caixotes de madeira com frutas |
+| Fazenda | Ilha de terra roxa com pés de café |
+| Teatro | Treliça de palco com lâmpadas piscando |
+| Shopping | Vidro com borda cromada e plantas |
+| SESI | Concreto com faixa azul e grama |
+
+**Plantinhas interativas** (`dist/campanha2/plantas.js`): canteiros de capim, flores, samambaias, matinho de calçada com dente-de-leão, pés de café e floreiras.
+- **Ao passar:** as plantas se abrem quando o Da Roça passa e voltam balançando, com som de mato.
+- **O que soltam:** pétalas, folhas, sementes voando e grãos de café.
+- **Golpe:** corta as plantas, e elas crescem de volta.
+- **Cacto da serra:** dá um "AI!", sem tirar vida.
+
+**Objetos de cenário:**
+- **Cidade:** bancos, vasos grandes, sacos de lixo, caixas, cavaletes de promoção, carrinho de pipoca, caixa de correio, cadeiras de plástico, placa de PARE e isopor.
+- **Natureza:** troncos, tocos, pedras, cupinzeiros, carrinho de mão, regador e placas de trilha.
+- **Lugares fechados:** carrinho de bagagem e placa de piso molhado.
+- **Chão da frente:** folhas secas, papéis e pedrinhas.
+
 **Visualizador:** abra o jogo com `?cenarios2` no fim do endereço.
 - **Andar:** setas ou ◀ ▶.
 - **Pular:** espaço.
