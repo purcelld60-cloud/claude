@@ -23,7 +23,7 @@
     17: [['flores', 260, 90], ['mato', 1000, 60], ['capim', 2060, 80], ['flores', 3600, 100], ['mato', 4100, 60]],
     18: [['cafe', 400, 160], ['capim', 900, 160], ['flores', 1300, 100], ['cafe', 2100, 200], ['samambaia', 2900, 80], ['capim', 3400, 200], ['cafe', 4300, 180], ['flores', 4800, 120]],
     19: [['flores', 300, 140], ['capim', 1300, 90], ['flores', 2600, 120], ['samambaia', 3300, 80], ['flores', 3900, 140]],
-    20: [['floreira', 160, 120], ['floreira', 1120, 100], ['floreira', 2900, 130], ['floreira', 3720, 110]],
+    20: [['floreira', 160, 120], ['floreira', 1150, 100], ['floreira', 2960, 120], ['floreira', 4520, 110]],
     21: [['capim', 200, 160], ['flores', 900, 140], ['capim', 1700, 120], ['flores', 2140, 110], ['capim', 3100, 160], ['flores', 4060, 120], ['mato', 4900, 70]]
   };
   const FLOWER = ['#e86a8a', '#f2c94c', '#f6f2ea', '#b86ad8', '#f08a4a', '#e84a4a', '#7ab8f0'];

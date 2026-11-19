@@ -628,93 +628,203 @@
   /* =====================================================================
      20 · SHOPPING
      ===================================================================== */
-  const SHOP = { W: 2000, CINE: 830, LAN: 1340, ELEV: 1228, FONTE: 1290 };
-  const LOJAS = ['MODA', 'GAMES', 'TÊNIS', 'PERFUMES', 'LIVROS', 'CELULAR', 'ÓCULOS', 'BRINQUEDOS', 'RELÓGIOS', 'SAPATOS', 'ESPORTE', 'MÚSICA', 'PRESENTES'];
-  function vitrine(c, x, y, w, h, kind, i) { // o que aparece em cada loja do andar de cima
-    const k = kind, c3 = (j) => pick(['#d9634a', '#3c6aa8', '#f2efe6', '#e8c24c', '#3c8a5a', '#c86ab8', '#2a2a2a'], i * 5 + j);
-    if (k === 'MODA') for (let j = 0; j < 4; j++) { const mx = x + 10 + j * 28; R(c, mx + 3, y + 6, 6, 6, '#e8d8c8'); R(c, mx, y + 12, 12, 14, c3(j)); R(c, mx + 2, y + 26, 3, 8, '#3a4a6a'); R(c, mx + 7, y + 26, 3, 8, '#3a4a6a'); R(c, mx + 5, y + 34, 2, 4, '#8a8a86'); }
-    if (k === 'GAMES') { R(c, x + 8, y + 4, 40, 24, '#1a1c28'); R(c, x + 10, y + 6, 36, 20, '#3c8ae0'); R(c, x + 18, y + 12, 10, 8, '#5ae070'); for (let j = 0; j < 8; j++) R(c, x + 56 + (j % 4) * 14, y + 6 + Math.floor(j / 4) * 16, 11, 14, c3(j)); R(c, x + 10, y + 32, 20, 6, '#2a2a2a'); }
-    if (k === 'TÊNIS' || k === 'SAPATOS' || k === 'ESPORTE') for (let r = 0; r < 3; r++) { R(c, x + 6, y + 10 + r * 11, w - 12, 2, '#b8a48a'); for (let j = 0; j < 6; j++) { R(c, x + 10 + j * 17, y + 5 + r * 11, 12, 5, c3(j + r)); R(c, x + 10 + j * 17, y + 8 + r * 11, 12, 2, '#f2efe6'); } }
-    if (k === 'ESPORTE') { ell(c, x + w - 20, y + 30, 6, 6, '#f2efe6'); R(c, x + w - 22, y + 28, 4, 4, '#2a2a2a'); }
-    if (k === 'PERFUMES') for (let r = 0; r < 2; r++) { R(c, x + 6, y + 18 + r * 16, w - 12, 2, '#d8d0c0'); for (let j = 0; j < 9; j++) { R(c, x + 10 + j * 12, y + 8 + r * 16, 6, 10, pick(['#e8a8c8', '#a8c8e8', '#f2d898', '#c8e8b8', '#d8b8e8'], j + r)); R(c, x + 12 + j * 12, y + 6 + r * 16, 2, 2, '#c8a24a'); } }
-    if (k === 'LIVROS' || k === 'MÚSICA') for (let r = 0; r < 3; r++) { R(c, x + 6, y + 12 + r * 11, w - 12, 2, '#8a6a45'); for (let j = 0; j < 30; j++) R(c, x + 8 + j * 4, y + 4 + r * 11 + (j % 3), 3, 8 - (j % 3), c3(j + r * 3)); }
-    if (k === 'MÚSICA') for (let j = 0; j < 3; j++) { ell(c, x + 30 + j * 30, y + 30, 6, 7, '#c47a35'); R(c, x + 29 + j * 30, y + 6, 2, 22, '#5a3a20'); }
-    if (k === 'CELULAR' || k === 'RELÓGIOS' || k === 'ÓCULOS') { R(c, x + 6, y + 28, w - 12, 8, '#e8e4dc'); for (let j = 0; j < 7; j++) { const px = x + 10 + j * 16; if (k === 'CELULAR') { R(c, px, y + 14, 8, 14, '#1a1a1a'); R(c, px + 1, y + 15, 6, 11, pick(['#3c8ae0', '#e05a8a', '#5ae070', '#f2c94c'], j)); } else if (k === 'RELÓGIOS') { ell(c, px + 4, y + 18, 5, 5, '#c8a24a'); ell(c, px + 4, y + 18, 3, 3, '#f2efe6'); R(c, px + 4, y + 16, 1, 3, '#2a2a2a'); } else { R(c, px, y + 20, 6, 3, '#2a2a2a'); R(c, px + 7, y + 20, 6, 3, '#2a2a2a'); R(c, px + 1, y + 21, 4, 1, '#7ac8e8'); } } }
-    if (k === 'BRINQUEDOS') for (let j = 0; j < 6; j++) { const px = x + 10 + j * 19; ell(c, px + 6, y + 24, 7, 8, c3(j)); ell(c, px + 6, y + 14, 5, 5, c3(j)); R(c, px + 2, y + 9, 3, 3, c3(j)); R(c, px + 8, y + 9, 3, 3, c3(j)); R(c, px + 4, y + 13, 1, 1, '#2a2a2a'); R(c, px + 7, y + 13, 1, 1, '#2a2a2a'); }
-    if (k === 'PRESENTES') for (let j = 0; j < 7; j++) { const px = x + 8 + j * 17, ph = 10 + (j % 3) * 6; R(c, px, y + 36 - ph, 14, ph, c3(j)); R(c, px + 6, y + 36 - ph, 2, ph, '#f2c94c'); R(c, px, y + 36 - ph + 3, 14, 2, '#f2c94c'); }
+  const SHOP = { W: 2400, ESC: 600, FOOD: 720, CINE: 1120, ELEV: 1508, FONTE: 1556, LAN: 1640, MZ: 96, TOP: 114 };
+  const SIGNS = ['#c43c3a', '#2c5a9e', '#e8833a', '#7a3a8a', '#2f7a4a', '#1e2228', '#c8a24a', '#d84a7a'];
+  const SHIRT = ['#3a4a6a', '#7a3a3a', '#4a6a4a', '#5a4a6a', '#c47a35', '#2a3a4a', '#e8c24c', '#3c8ad8'], SKIN = ['#e0b08a', '#9a6440', '#c88a60', '#6a4430', '#f0c8a8'];
+  const hexRGB = (h) => [parseInt(h.slice(1, 3), 16) / 255, parseInt(h.slice(3, 5), 16) / 255, parseInt(h.slice(5, 7), 16) / 255];
+  const lerpC = (a, b, k) => K.css(mix(hexRGB(a), hexRGB(b), cl(k)));
+  function vgrad(c, x, y, w, h, a, b) { for (let k = 0; k < h; k++) R(c, x, y + k, w, 1, lerpC(a, b, k / Math.max(1, h - 1))); }
+  function coluna(c, x, y0, y1, w = 10) { // coluna cilíndrica: faixas de luz e sombra, capitel e base
+    const band = ['#8f8b82', '#b4b0a5', '#d8d4c8', '#f2efe6', '#fbf9f2', '#e6e2d6', '#c4c0b4', '#a09c92'];
+    for (let k = 0; k < w; k++) R(c, x + k, y0, 1, y1 - y0, band[Math.min(band.length - 1, Math.floor(k / w * band.length))]);
+    R(c, x - 2, y0, w + 4, 3, '#f6f2e8'); R(c, x - 2, y0 + 3, w + 4, 1, '#9a968c'); R(c, x - 2, y1 - 4, w + 4, 4, '#dcd8cc'); R(c, x - 2, y1 - 4, w + 4, 1, '#f6f2e8');
   }
+  function reflexo(c, x, y, w, h) { // vidro: brilho no alto e faixas diagonais
+    for (let k = 0; k < Math.round(h * .35); k++) R(c, x, y + k, w, 1, `rgba(255,255,255,${.16 * (1 - k / (h * .35))})`);
+    for (let k = 6; k < w + h; k += 34) { limb(c, [[x + k, y], [x + k - h * .6, y + h]].map(([px, py]) => [Math.max(x, Math.min(x + w - 2, px)), py]), 3, 'rgba(255,255,255,.13)'); limb(c, [[x + k + 6, y], [x + k + 6 - h * .6, y + h]].map(([px, py]) => [Math.max(x, Math.min(x + w - 1, px)), py]), 1, 'rgba(255,255,255,.22)'); }
+  }
+  function pessoa(c, x, y, i) { // gente pequena com sombreado (2 tons) e sacola
+    const sh = SHIRT[i % SHIRT.length], sk = SKIN[i % SKIN.length];
+    R(c, x, y - 6, 2, 6, '#2a2f3a'); R(c, x + 3, y - 6, 2, 6, '#232833'); R(c, x - 1, y - 14, 7, 9, sh); R(c, x + 4, y - 14, 2, 9, shadeHex(sh, .75)); R(c, x - 1, y - 14, 7, 1, shadeHex(sh, 1.2));
+    R(c, x, y - 19, 5, 5, sk); R(c, x + 3, y - 18, 2, 4, shadeHex(sk, .85)); R(c, x, y - 20, 5, 2, pick(['#2a201a', '#4a3226', '#1a1a1a', '#c8a050'], i)); R(c, x - 1, y, 7, 1, 'rgba(0,0,0,.18)');
+    if (i % 3 !== 1) { R(c, x + 6, y - 9, 4, 6, pick(['#c43c3a', '#2c5a9e', '#e8c24c', '#d84a7a', '#f2efe6'], i)); R(c, x + 7, y - 11, 2, 2, '#5a5a5a'); }
+  }
+
+  /* ---------- fundo: o átrio do shopping visto de longe ---------- */
+  let SHOPFAR = null;
+  function buildShopFar() {
+    const T = 964, [cv, c] = mk(T, LH);
+    vgrad(c, 0, 0, T, 125, '#efe9dc', '#e2dbcc');
+    const LV = [{ y: 26, h: 24 }, { y: 55, h: 27 }, { y: 87, h: 30 }];
+    LV.forEach((L, li) => {
+      for (let x = 0, i = 0; x < T; i++) {
+        const w = 28 + Math.round(hash(i * 3 + li * 50) * 18), sig = pick(SIGNS, i + li * 5);
+        R(c, x, L.y, w, L.h, '#5e626a'); R(c, x + 1, L.y + 1, w - 2, 4, sig); R(c, x + 1, L.y + 1, w - 2, 1, '#ffffff55');
+        vgrad(c, x + 2, L.y + 6, w - 4, L.h - 7, '#fff7e4', '#e8dcc2');
+        const tipo = Math.floor(hash(i * 7 + li) * 3);
+        if (tipo === 0) { for (const sy of [L.y + 11, L.y + 17]) { R(c, x + 3, sy, w - 6, 1, '#c8b89c'); for (let k = 0; k < (w - 8) / 6; k++) if (hash(k + i * 5 + sy) > .35) R(c, x + 4 + k * 6, sy - 3, 3, 3, pick(['#c88a6a', '#8aa0b8', '#d8c07a', '#8ab08a'], k + i)); } }
+        else if (tipo === 1) { R(c, x + 3, L.y + 7, w - 6, L.h - 9, '#8a9aa6'); R(c, x + 4, L.y + 8, w - 8, 3, '#b8c8d0'); for (let k = 4; k < w - 8; k += 9) R(c, x + k, L.y + 13, 4, 6, pick(['#d8c8b0', '#c8b8a0', '#e0d0b8'], k)); }
+        else { for (let k = 0; k < w - 4; k += 4) R(c, x + 2 + k, L.y + 5, 4, 3, (k / 4) % 2 ? sig : '#f2efe6'); for (let k = 0; k < 2; k++) R(c, x + 5 + k * (w - 16), L.y + 10, 6, 9, pick(['#c88a6a', '#8aa0b8', '#b88aa0'], k + i)); }
+        R(c, x + Math.round(w / 2) - 4, L.y + L.h - 10, 8, 10, '#3a3630'); R(c, x + Math.round(w / 2) - 3, L.y + L.h - 9, 2, 9, '#5a544a');
+        x += w + 1; if (i % 4 === 3) { coluna(c, x, L.y - 2, L.y + L.h + 4, 6); x += 8; }
+      }
+      R(c, 0, L.y + L.h, T, 3, '#f6f3ec'); R(c, 0, L.y + L.h + 3, T, 2, '#aaa293');
+      R(c, 0, L.y + L.h - 7, T, 7, 'rgba(185,222,234,.55)'); R(c, 0, L.y + L.h - 8, T, 1, '#e2e8ea'); for (let x = 0; x < T; x += 10) R(c, x, L.y + L.h - 7, 1, 7, '#b8c4ca');
+      for (let k = 0; k < 18; k++) { const px = Math.round(hash(k + li * 31) * T), i = k + li; R(c, px, L.y + L.h - 10, 3, 4, pick(SHIRT, i)); R(c, px, L.y + L.h - 12, 3, 2, pick(SKIN, i)); }
+    });
+    // escadas rolantes cruzando o vão entre os andares
+    for (const [ex, y0, y1] of [[160, 84, 54], [610, 84, 54], [380, 54, 28], [820, 54, 28]]) { const n = y0 - y1; for (let k = 0; k <= n; k += 2) { R(c, ex + k, y0 - k, 5, 2, '#b8c0c6'); R(c, ex + k, y0 - k + 2, 5, 1, '#7a848c'); } limb(c, [[ex - 1, y0 - 3], [ex + n - 1, y1 - 3]], 1, '#2a2a2a'); c.fillStyle = 'rgba(185,222,234,.35)'; c.beginPath(); c.moveTo(ex, y0); c.lineTo(ex + n + 5, y1); c.lineTo(ex + n + 5, y1 + 6); c.lineTo(ex + 5, y0 + 4); c.closePath(); c.fill(); }
+    // névoa clara: deixa o átrio lá longe
+    c.fillStyle = 'rgba(242,238,230,.30)'; c.fillRect(0, 0, T, 125);
+    // cobertura de vidro com treliça (o céu aparece entre os vidros)
+    R(c, 0, 0, T, 20, '#c9cfd4'); for (let x = 0; x < T; x += 32) { c.clearRect(x + 2, 0, 28, 14); R(c, x + 2, 0, 28, 14, 'rgba(205,234,248,.30)'); R(c, x + 3, 1, 9, 12, 'rgba(255,255,255,.18)'); R(c, x, 0, 2, 16, '#7f8c96'); }
+    R(c, 0, 14, T, 2, '#7a8892'); R(c, 0, 21, T, 2, '#7a8892'); for (let x = 0; x < T; x += 8) limb(c, [[x, 16], [x + 4, 21], [x + 8, 16]], 1, '#98a4ae');
+    return cv;
+  }
+
+  /* ---------- frente: lojas do térreo ---------- */
+  function produtos(c, kind, x, y, w, h, i) {
+    const P = (j) => pick(['#d9634a', '#3c6aa8', '#e8c24c', '#3c8a5a', '#c86ab8', '#2a2a2a', '#f2efe6', '#e8833a'], i * 7 + j);
+    const prateleira = (yy) => { R(c, x + 3, yy, w - 6, 2, '#b8a48a'); R(c, x + 3, yy + 2, w - 6, 1, '#7a6a52'); };
+    if (kind === 'MODA') {
+      R(c, x + 4, y + 4, w - 8, 1, '#7a7a76'); for (let j = 0; j < (w - 14) / 7; j++) { const gx = x + 6 + j * 7, col = P(j); R(c, gx + 2, y + 2, 1, 3, '#7a7a76'); R(c, gx, y + 5, 6, 15, col); R(c, gx, y + 5, 1, 15, shadeHex(col, 1.25)); R(c, gx + 5, y + 5, 1, 15, shadeHex(col, .72)); R(c, gx, y + 5, 6, 1, shadeHex(col, .8)); }
+      for (const mx of [x + 10, x + w - 22]) { ell(c, mx + 6, y + 26, 3, 4, '#efe2d4'); R(c, mx + 1, y + 30, 10, 16, P(mx)); R(c, mx + 1, y + 30, 2, 16, shadeHex(P(mx), 1.3)); R(c, mx + 9, y + 30, 2, 16, shadeHex(P(mx), .7)); R(c, mx + 3, y + 46, 6, 10, '#3a4a6a'); R(c, mx + 5, y + 56, 2, 4, '#8a8a86'); R(c, mx + 2, y + 60, 8, 2, '#5a5a56'); }
+    }
+    if (kind === 'GAMES') {
+      R(c, x + 6, y + 4, 52, 32, '#14161c'); R(c, x + 8, y + 6, 48, 28, '#6ab4e8'); R(c, x + 8, y + 24, 48, 10, '#5aa04a'); R(c, x + 8, y + 24, 48, 2, '#7ac85a'); ell(c, x + 40, y + 12, 4, 4, '#fff2a0'); R(c, x + 20, y + 16, 5, 8, '#e8433a'); R(c, x + 21, y + 14, 3, 3, '#f0c8a8'); R(c, x + 30, y + 36, 4, 4, '#2a2a2a');
+      for (let j = 0; j < 12; j++) { const bx = x + 64 + (j % 4) * 13, by = y + 4 + Math.floor(j / 4) * 17, col = P(j); R(c, bx, by, 11, 15, col); R(c, bx, by, 11, 3, '#1e1e24'); R(c, bx + 1, by + 5, 9, 6, shadeHex(col, 1.3)); R(c, bx + 10, by, 1, 15, shadeHex(col, .6)); }
+      R(c, x + 10, y + 44, 30, 10, '#1e2026'); R(c, x + 12, y + 46, 26, 2, '#3a3c46'); R(c, x + 16, y + 49, 4, 3, '#2c5a9e'); R(c, x + 30, y + 49, 3, 3, '#c43c3a');
+    }
+    if (kind === 'TÊNIS' || kind === 'LIVROS') for (let r = 0; r < 4; r++) prateleira(y + 14 + r * 13);
+    if (kind === 'TÊNIS') for (let r = 0; r < 4; r++) for (let j = 0; j < (w - 12) / 14; j++) { const sx = x + 6 + j * 14, sy = y + 6 + r * 13, col = P(j + r * 3); R(c, sx, sy + 4, 11, 3, col); R(c, sx + 5, sy + 1, 6, 4, col); R(c, sx, sy + 7, 11, 2, '#f6f4ee'); R(c, sx + 2, sy + 5, 6, 1, '#f6f4ee'); R(c, sx + 9, sy + 1, 2, 2, shadeHex(col, .7)); }
+    if (kind === 'LIVROS') for (let r = 0; r < 4; r++) for (let k = x + 5; k < x + w - 6; k += 3) { const hh = 7 + Math.round(hash(k + r * 7) * 4), col = P(k + r); R(c, k, y + 14 + r * 13 - hh, 3, hh, col); R(c, k, y + 14 + r * 13 - hh, 1, hh, shadeHex(col, 1.3)); R(c, k, y + 16 + r * 13 - hh, 3, 1, '#f2e8c8'); }
+    if (kind === 'PERFUMES') { vgrad(c, x + 4, y + 2, w - 8, h - 6, '#fff8ee', '#f2dccc'); for (let r = 0; r < 3; r++) { R(c, x + 6, y + 20 + r * 17, w - 12, 2, 'rgba(200,230,240,.8)'); R(c, x + 6, y + 22 + r * 17, w - 12, 1, '#c8b8a8'); for (let j = 0; j < (w - 16) / 11; j++) { const bx = x + 9 + j * 11, col = pick(['#e8a8c8', '#a8c8e8', '#f2d898', '#c8e8b8', '#d8b8e8', '#f0b890'], j + r + i); R(c, bx, y + 10 + r * 17, 7, 10, col); R(c, bx + 1, y + 11 + r * 17, 2, 7, 'rgba(255,255,255,.55)'); R(c, bx + 6, y + 10 + r * 17, 1, 10, shadeHex(col, .75)); R(c, bx + 2, y + 7 + r * 17, 3, 3, '#c8a24a'); R(c, bx + 2, y + 7 + r * 17, 1, 3, '#f2d898'); } } }
+    if (kind === 'BRINQUEDOS') { for (let r = 0; r < 2; r++) { prateleira(y + 24 + r * 22); for (let j = 0; j < (w - 14) / 16; j++) { const px = x + 8 + j * 16, py = y + 23 + r * 22, col = P(j + r * 4); ell(c, px + 6, py - 5, 6, 6, col); ell(c, px + 6, py - 13, 5, 5, col); R(c, px + 2, py - 18, 3, 3, col); R(c, px + 8, py - 18, 3, 3, col); ell(c, px + 6, py - 4, 3, 3, shadeHex(col, 1.3)); R(c, px + 4, py - 14, 1, 1, '#1a1a1a'); R(c, px + 8, py - 14, 1, 1, '#1a1a1a'); R(c, px + 5, py - 11, 3, 1, shadeHex(col, .6)); } }
+      const ux = x + w - 34; ell(c, ux + 14, y + 52, 13, 12, '#b8864a'); ell(c, ux + 14, y + 34, 10, 9, '#b8864a'); ell(c, ux + 6, y + 26, 4, 4, '#b8864a'); ell(c, ux + 22, y + 26, 4, 4, '#b8864a'); ell(c, ux + 14, y + 37, 5, 4, '#e8c896'); ell(c, ux + 14, y + 52, 8, 7, '#d8a86a'); R(c, ux + 10, y + 31, 2, 2, '#1a1a1a'); R(c, ux + 17, y + 31, 2, 2, '#1a1a1a'); R(c, ux + 13, y + 35, 3, 2, '#3a2418'); R(c, ux + 6, y + 42, 16, 3, '#c43c3a'); }
+  }
+  function lojaFrente(c, x, w, kind, i) {
+    const top = SHOP.TOP, bot = 210, sig = pick(SIGNS, i + 2);
+    R(c, x, top, w, bot - top, '#454951'); for (let k = 0; k < w * (bot - top) / 10; k++) R(c, x + hash(k + i * 99) * w, top + hash(k * 3 + i) * (bot - top), 1, 1, k % 3 ? '#52565e' : '#3a3e46'); // granito
+    R(c, x, top, w, 1, '#6a6e76'); R(c, x + 3, top + 2, w - 6, 16, '#1c1f24'); vgrad(c, x + 4, top + 3, w - 8, 14, shadeHex(sig, 1.25), shadeHex(sig, .85)); R(c, x + 4, top + 3, w - 8, 1, '#ffffff66'); ell(c, x + 13, top + 10, 5, 5, '#f6f2ea'); ell(c, x + 13, top + 10, 3, 3, sig); R(c, x + 4, top + 18, w - 8, 2, '#fff2c8');
+    const gx = x + 5, gy = top + 22, gw = w - 10, gh = bot - 2 - gy, wall = pick(['#f4ecdc', '#e8eef2', '#f2e6e8', '#eef2e6', '#f6eedc'], i);
+    vgrad(c, gx, gy, gw, gh, '#fffaf0', wall); for (let k = 0; k < gw - 8; k += 16) { R(c, gx + 6 + k, gy + 1, 8, 1, '#fffef4'); for (let j = 0; j < 4; j++) R(c, gx + 4 + k, gy + 2 + j, 12, 1, `rgba(255,248,220,${.3 - j * .07})`); }
+    R(c, gx, gy + gh - 9, gw, 9, '#d8cfbe'); for (let k = 0; k < gw; k += 8) R(c, gx + k, gy + gh - 9 + ((k / 8) % 2) * 4, 4, 4, '#cfc4b0');
+    produtos(c, kind, gx, gy + 2, gw, gh - 10, i);
+    R(c, gx, gy, gw, 2, '#2a2e34'); R(c, gx, gy + gh - 2, gw, 2, '#2a2e34'); R(c, gx - 1, gy, 2, gh, '#2a2e34'); R(c, gx + gw - 1, gy, 2, gh, '#2a2e34');
+    const dx = gx + Math.round(gw / 2) - 14; R(c, dx, gy, 2, gh, '#2a2e34'); R(c, dx + 28, gy, 2, gh, '#2a2e34'); R(c, dx + 12, gy + gh * .45, 2, 8, '#c8ccd0'); R(c, dx + 16, gy + gh * .45, 2, 8, '#c8ccd0');
+    reflexo(c, gx + 1, gy + 2, gw - 2, gh - 4);
+    if (hash(i + 77) > .45) { R(c, gx + gw - 22, gy + 6, 16, 9, '#e8433a'); R(c, gx + gw - 20, gy + 8, 12, 2, '#f2efe6'); R(c, gx + gw - 20, gy + 11, 8, 2, '#f2efe6'); }
+    R(c, x, bot - 2, w, 2, '#c8ccd0'); R(c, x, bot - 2, w, 1, '#eef0f2');
+  }
+  function pracaAlimentacao(c, x0) {
+    const nomes = 3; for (let n = 0; n < nomes; n++) {
+      const x = x0 + n * 130, w = 128, top = SHOP.TOP, col = ['#e8833a', '#c43c3a', '#7a3a8a'][n];
+      azulejo(c, x, top, w, 96, '#f2efe6', '#e0dcd2'); R(c, x, top, w, 1, '#ffffff');
+      R(c, x + 4, top + 3, w - 8, 12, '#1c1f24'); vgrad(c, x + 5, top + 4, w - 10, 10, shadeHex(col, 1.2), shadeHex(col, .85)); R(c, x + 5, top + 4, w - 10, 1, '#ffffff66');
+      R(c, x + 6, top + 18, w - 12, 28, '#14161c'); for (let k = 0; k < 4; k++) { const px = x + 9 + k * 29; vgrad(c, px, top + 20, 26, 18, '#fff4dc', '#f2d8a8');
+        if (n === 0) { ell(c, px + 13, top + 30, 9, 3, '#c47a35'); R(c, px + 5, top + 28, 16, 2, '#5ab040'); R(c, px + 5, top + 30, 16, 2, '#7a3a20'); ell(c, px + 13, top + 26, 9, 3, '#d89a4a'); R(c, px + 8, top + 24, 2, 1, '#f6e8c8'); }
+        if (n === 1) { ell(c, px + 13, top + 31, 10, 5, '#e8b85a'); R(c, px + 3, top + 31, 20, 4, '#f2d898'); for (let j = 0; j < 4; j++) R(c, px + 6 + j * 4, top + 30, 2, 1, '#c8883a'); }
+        if (n === 2) { ell(c, px + 13, top + 31, 9, 5, '#7a2a6a'); R(c, px + 4, top + 31, 18, 4, '#5a1a4a'); for (let j = 0; j < 5; j++) R(c, px + 6 + j * 3, top + 27 + (j % 2), 2, 2, pick(['#e8c24c', '#f2efe6', '#d9634a'], j + k)); }
+        R(c, px + 2, top + 39, 22, 4, '#f2c94c'); R(c, px + 4, top + 40, 10, 2, '#2a2a2a'); }
+      R(c, x + 30, top + 52, 12, 10, '#efe2d0'); R(c, x + 28, top + 50, 16, 3, '#f6f4ee'); R(c, x + 30, top + 62, 12, 8, col); pessoa(c, x + 80, top + 70, n + 4);
+      vgrad(c, x + 2, top + 66, w - 4, 30, '#e2e6ea', '#8a9298'); R(c, x + 2, top + 66, w - 4, 2, '#f6f8fa'); R(c, x + 2, top + 72, w - 4, 3, col); R(c, x + 2, top + 75, w - 4, 1, shadeHex(col, .6)); for (let k = 12; k < w - 4; k += 26) R(c, x + k, top + 70, 1, 26, 'rgba(255,255,255,.4)');
+      R(c, x + 10, top + 62, 18, 4, '#c8ccd0'); R(c, x + 12, top + 58, 4, 4, '#3c8a5a'); R(c, x + 100, top + 58, 10, 8, '#2a2a2a'); R(c, x + 101, top + 59, 8, 4, '#5ae070');
+    }
+  }
+  function cinemaFrente(c, x, w) {
+    const top = SHOP.TOP; R(c, x, top, w, 96, '#231b29'); for (let k = 0; k < w; k += 14) { R(c, x + k, top, 1, 96, '#2e2434'); R(c, x + k + 7, top + 30, 1, 66, '#1c1622'); }
+    R(c, x + 6, top + 2, w - 12, 24, '#c8a24a'); R(c, x + 8, top + 4, w - 16, 20, '#140f18'); R(c, x + 6, top + 2, w - 12, 1, '#f2d898'); R(c, x + 6, top + 25, w - 12, 1, '#8a6a2a');
+    for (let k = 0; k < 4; k++) { const px = x + 18 + k * 92, py = top + 32; R(c, px - 2, py - 2, 62, 50, '#c8a24a'); R(c, px - 2, py - 2, 62, 1, '#f2d898'); const pc = ['#2c4a8a', '#8a2a2a', '#2a6a4a', '#c46a2a'][k];
+      vgrad(c, px, py, 58, 46, shadeHex(pc, 1.5), shadeHex(pc, .55)); ell(c, px + 29, py + 14, 10, 10, shadeHex(pc, 1.9)); R(c, px + 18, py + 22, 22, 18, '#14101a'); ell(c, px + 29, py + 20, 6, 6, '#14101a'); R(c, px + 10, py + 34, 8, 8, '#14101a'); R(c, px + 42, py + 30, 6, 12, '#14101a'); R(c, px + 4, py + 38, 50, 6, 'rgba(0,0,0,.55)'); R(c, px + 8, py + 39, 42, 2, '#f2efe6'); R(c, px + 14, py + 42, 30, 1, '#c8c4bc'); R(c, px, py, 58, 10, 'rgba(255,255,255,.08)'); }
+    const ex = x + 150; R(c, ex, top + 84, 80, 12, '#a82a2a'); R(c, ex, top + 84, 80, 1, '#d84a4a'); for (const sx of [ex - 6, ex + 84]) { R(c, sx, top + 74, 2, 22, '#c8a24a'); ell(c, sx + 1, top + 73, 2, 2, '#f2d898'); } for (let k = 0; k < 20; k++) R(c, ex - 4 + k * 4.5, top + 77 + Math.round(Math.sin(k / 19 * Math.PI) * 3), 3, 2, '#c43c3a');
+    R(c, x + 4, top + 82, 26, 14, '#3a2e40'); R(c, x + 6, top + 84, 22, 8, '#d8eef4'); R(c, x + 12, top + 86, 8, 6, '#f0c8a8');
+  }
+  function lanFrente(c, x, w) {
+    const top = SHOP.TOP; R(c, x, top, w, 96, '#1a1d26'); vgrad(c, x + 6, top + 24, w - 12, 70, '#151820', '#24283a');
+    R(c, x + 4, top + 3, w - 8, 16, '#0e1016'); R(c, x + 4, top + 3, w - 8, 1, '#5ae0d0'); R(c, x + 4, top + 18, w - 8, 1, '#e05a8a');
+    for (let k = 0; k < 6; k++) { const px = x + 14 + k * 58; R(c, px, top + 42, 40, 26, '#0c0e14'); R(c, px + 2, top + 44, 36, 22, '#2a2c38'); R(c, px + 18, top + 68, 4, 6, '#3a3c48'); R(c, px - 2, top + 74, 44, 3, '#3a3c48'); R(c, px - 2, top + 74, 44, 1, '#5a5c68'); R(c, px + 4, top + 72, 10, 2, '#1e1e24');
+      R(c, px + 8, top + 80, 22, 14, '#c43c3a'); R(c, px + 10, top + 70, 18, 12, '#c43c3a'); R(c, px + 12, top + 72, 14, 2, '#2a2a2a'); R(c, px + 8, top + 80, 2, 14, '#8a2a2a'); pessoa(c, px + 15, top + 82, k + 2); }
+    for (let k = 0; k < 3; k++) { const px = x + w - 54 + (k % 2) * 22, py = top + 26 + Math.floor(k / 2) * 0 + k * 4; R(c, px, py, 18, 12, pick(['#7a3a8a', '#c43c3a', '#2c5a9e'], k)); R(c, px + 2, py + 2, 14, 4, '#f2efe6'); }
+    reflexo(c, x + 6, top + 24, w - 12, 70); R(c, x + 6, top + 24, w - 12, 1, '#5ae0d0'); R(c, x + 6, top + 93, w - 12, 1, '#e05a8a');
+  }
+  function paredeMarmore(c, x, w) { const top = 11; vgrad(c, x, top, w, 199, '#ece6da', '#ddd5c6'); for (let y = top + 30; y < 210; y += 40) R(c, x, y, w, 1, '#cbc3b2'); for (let k = 0; k < w * 2; k++) { const vx = x + hash(k + x) * w, vy = top + hash(k * 3 + x) * 199; R(c, vx, vy, 3, 1, 'rgba(160,150,135,.35)'); } }
+
   function buildShop() {
-    const [cv, c] = mk(SHOP.W, LH);
-    // teto com claraboia em arco (o céu aparece) e treliças
-    R(c, 0, 0, SHOP.W, 32, '#d4d8dc'); for (let x = 0; x < SHOP.W; x += 100) { c.clearRect(x + 8, 2, 84, 22); for (let k = 0; k < 84; k += 12) R(c, x + 8 + k, 2, 1, 22, '#8a98a2'); R(c, x + 8, 12, 84, 1, '#8a98a2'); R(c, x + 6, 0, 88, 2, '#7a8892'); R(c, x + 6, 24, 88, 3, '#7a8892'); }
-    R(c, 0, 27, SHOP.W, 5, '#b8c0c6'); for (let x = 20; x < SHOP.W; x += 40) { R(c, x, 30, 6, 3, '#5a6066'); R(c, x + 1, 33, 4, 2, '#fff6d8'); }
-    plaster(c, 0, 35, SHOP.W, 175, '#ece8e0', 2000);
-    // andar de cima: lojas com vitrines diferentes, colunas com anúncios
-    for (let x = 20, i = 0; x < SHOP.W - 100; x += 150, i++) { const kind = LOJAS[i % LOJAS.length], col = pick(['#c43c3a', '#3c6aa8', '#e8833a', '#7a3a8a', '#3c8a5a', '#2a2a2a', '#c8a24a'], i);
-      R(c, x - 1, 39, 132, 62, '#9aa0a6'); R(c, x, 40, 130, 60, '#e2ded6'); R(c, x + 4, 42, 122, 12, col); R(c, x + 4, 42, 122, 2, shadeHex(col, 1.3)); R(c, x + 6, 44, 8, 8, '#f2efe6'); R(c, x + 8, 46, 4, 4, col);
-      R(c, x + 6, 56, 118, 42, '#c4dce4'); vitrine(c, x + 6, 58, 118, 38, kind, i); R(c, x + 6, 56, 118, 42, 'rgba(200,230,240,.18)'); limb(c, [[x + 20, 96], [x + 40, 58]], 1, 'rgba(255,255,255,.5)'); R(c, x + 60, 56, 2, 42, '#9aa0a6');
-      R(c, x + 132, 38, 14, 64, '#d4d0c6'); R(c, x + 134, 50, 10, 24, pick(['#e8c24c', '#3c8ad8', '#c43c3a', '#3c8a5a'], i + 3)); R(c, x + 135, 52, 8, 4, '#f2efe6'); }
-    // guarda-corpo de vidro do andar de cima
-    R(c, 0, 100, SHOP.W, 5, '#a8b0b6'); R(c, 0, 100, SHOP.W, 1, '#e8ecee'); R(c, 0, 105, SHOP.W, 13, 'rgba(180,220,230,.45)'); R(c, 0, 105, SHOP.W, 1, '#f6fafc'); for (let x = 0; x < SHOP.W; x += 40) R(c, x, 105, 1, 13, '#c8d4d8'); R(c, 0, 118, SHOP.W, 3, '#8a9298');
-    // praça de alimentação: balcões com cardápio de fotos e mesas
-    for (let x = 30, i = 0; x < 700; x += 120, i++) { const col = pick(['#e8833a', '#c43c3a', '#e8c24c', '#3c8a5a', '#7a3a8a', '#c4743a'], i);
-      R(c, x, 128, 100, 48, '#d8d4cc'); R(c, x + 4, 130, 92, 12, col); R(c, x + 6, 146, 88, 22, '#1e1e24'); for (let k = 0; k < 4; k++) { R(c, x + 9 + k * 21, 148, 18, 12, '#f2ece0'); R(c, x + 11 + k * 21, 150, 14, 7, pick(['#c4743a', '#e8c24c', '#7a4a2a', '#d9634a', '#7cbf6a'], k + i)); R(c, x + 12 + k * 21, 161, 12, 2, '#f2c94c'); }
-      R(c, x + 6, 168, 88, 8, '#f2ece0'); R(c, x + 20, 162, 8, 6, '#e0b08a'); R(c, x + 18, 160, 12, 3, '#f2efe6'); R(c, x + 10, 176, 80, 34, shadeHex(col, .75)); R(c, x + 10, 176, 80, 3, shadeHex(col, 1.1)); for (let k = 0; k < 3; k++) R(c, x + 16 + k * 24, 184, 14, 2, '#f2efe6'); }
-    for (let k = 0; k < 7; k++) { const mx = 46 + k * 92; mesaBar(c, mx); if (k % 2 === 0) { gente(c, mx - 6, GY - 2, k + 1, false); R(c, mx + 4, GY - 12, 6, 2, '#f2efe6'); R(c, mx + 5, GY - 14, 4, 2, pick(['#c4743a', '#e8c24c', '#d9634a'], k)); } }
-    for (let k = 0; k < 5; k++) { const bx = 500 + k * 6; limb(c, [[bx, 184], [bx + Math.sin(k) * 4, 150 - k * 3]], 1, '#9aa0a6'); ell(c, bx + Math.sin(k) * 4, 146 - k * 3, 4, 5, pick(['#e8433a', '#3c9ad8', '#f2c94c', '#c86ab8', '#7ac85a'], k)); }
-    // escada rolante de verdade: painel lateral, degraus e corrimão
-    for (let k = 0; k <= 44; k++) { const x = 720 + k * 2.2, y = 210 - k * 2.2; R(c, x, y, 6, 8, '#b8c0c6'); R(c, x, y + 8, 6, 4, '#8a949a'); } limb(c, [[718, 196], [818, 98]], 3, '#2a2a2a'); limb(c, [[718, 192], [818, 94]], 1, '#5a5a5a'); R(c, 712, 196, 14, 14, '#8a949a'); R(c, 812, 98, 14, 6, '#8a949a');
-    // cinema: letreiro, cartazes iluminados, telas de horário e pipoqueira
-    const cx = SHOP.CINE; R(c, cx, 120, 380, 90, '#2a2430'); R(c, cx + 10, 124, 360, 20, '#1a1420'); for (let k = 0; k < 4; k++) { R(c, cx + 18 + k * 90, 150, 62, 44, '#d8c08a'); const pc = ['#3c6aa8', '#c43c3a', '#3c8a5a', '#e8833a'][k]; R(c, cx + 21 + k * 90, 153, 56, 38, pc); R(c, cx + 26 + k * 90, 158, 46, 14, '#f2ece0'); ell(c, cx + 49 + k * 90, 180, 8, 6, shadeHex(pc, .6)); R(c, cx + 26 + k * 90, 186, 46, 2, '#f2efe6'); }
-    R(c, cx + 20, 196, 120, 10, '#14101a'); R(c, cx + 240, 150, 26, 44, '#c43c3a'); R(c, cx + 242, 152, 22, 20, '#fff6d0'); R(c, cx + 244, 174, 18, 2, '#f2c94c'); R(c, cx + 150, 196, 80, 14, '#c43c3a');
-    // elevador panorâmico (o tubo; a cabine anda) e fonte com planta
-    R(c, SHOP.ELEV, 34, 40, 176, 'rgba(170,215,230,.35)'); R(c, SHOP.ELEV, 34, 2, 176, '#9aa6ae'); R(c, SHOP.ELEV + 38, 34, 2, 176, '#9aa6ae'); R(c, SHOP.ELEV + 19, 34, 2, 176, '#5a6066');
-    ell(c, SHOP.FONTE + 24, 206, 26, 5, '#8a949a'); ell(c, SHOP.FONTE + 24, 204, 24, 4, '#5aa8c8'); ell(c, SHOP.FONTE + 24, 203, 20, 3, '#8ad0e4'); R(c, SHOP.FONTE + 21, 186, 6, 18, '#c8ccce');
-    // lan house: neon, PCs, cadeiras gamer, cartazes de jogo; máquina de pelúcia e carrinho infantil na porta
-    const lx = SHOP.LAN; R(c, lx, 120, 560, 90, '#14161f'); R(c, lx, 120, 560, 3, '#5ae0d0'); R(c, lx, 207, 560, 3, '#e05a8a');
-    for (let k = 0; k < 6; k++) { const x = lx + 16 + k * 70; R(c, x, 166, 50, 6, '#3a3c48'); R(c, x + 10, 138, 32, 26, '#2a2c38'); R(c, x + 24, 172, 4, 38, '#3a3c48'); R(c, x + 2, 178, 16, 30, '#c43c3a'); R(c, x + 2, 178, 16, 4, '#2a2a2a'); R(c, x + 6, 168, 16, 3, '#5a5c68'); gente(c, x + 6, 198, k + 3, false); R(c, x + 6, 178, 6, 2, '#1a1a1a'); }
-    for (let k = 0; k < 4; k++) { R(c, lx + 440 + (k % 2) * 30, 128 + Math.floor(k / 2) * 22, 24, 18, pick(['#c43c3a', '#3c6aa8', '#e8c24c', '#7a3a8a'], k)); R(c, lx + 444 + (k % 2) * 30, 132 + Math.floor(k / 2) * 22, 16, 6, '#f2efe6'); }
-    R(c, lx + 500, 150, 34, 60, '#e05a8a'); R(c, lx + 503, 154, 28, 26, '#bfe8f0'); for (let k = 0; k < 6; k++) ell(c, lx + 508 + (k % 3) * 8, 174 - Math.floor(k / 3) * 6, 3, 3, pick(['#f2c94c', '#3c9ad8', '#e8433a', '#7ac85a'], k)); R(c, lx + 515, 156, 2, 8, '#8a8a86'); R(c, lx + 512, 164, 8, 3, '#c8a24a');
-    R(c, 1900, 186, 30, 18, '#3c9ad8'); R(c, 1906, 178, 14, 10, '#3c9ad8'); ell(c, 1906, 206, 4, 4, '#1c1c1c'); ell(c, 1924, 206, 4, 4, '#1c1c1c'); R(c, 1908, 180, 10, 4, '#bfe8f0');
-    for (const px of [16, 620, 1960]) { R(c, px, 186, 18, 24, '#8a8a86'); for (let k = 0; k < 8; k++) ell(c, px + 3 + k * 2, 176 - (k % 3) * 8, 4, 6, k % 2 ? '#4f8a3a' : '#5f9a46'); }
-    OBJ.pisoMolhado(c, 560, 0); pisoInterno(c, SHOP.W, '#e9e5dc', '#d6d2c6', 24);
-    for (let x = 0; x < SHOP.W; x += 6) if (hash(x * .7) > .55) R(c, x, 226 + Math.round(hash(x) * 8), 4, 1, 'rgba(255,255,255,.35)'); // reflexo do piso encerado
+    const W = SHOP.W, [cv, c] = mk(W, LH), TOP = SHOP.TOP, MZ = SHOP.MZ;
+    // paredes de mármore onde não tem loja (escada, elevador e fonte)
+    paredeMarmore(c, SHOP.ESC, 120); paredeMarmore(c, SHOP.ELEV - 8, 132); c.clearRect(SHOP.ESC, 11, 120, MZ - 27); c.clearRect(SHOP.ELEV - 8, 11, 132, MZ - 27);
+    R(c, SHOP.ESC + 14, TOP + 8, 46, 30, '#1c1f24'); vgrad(c, SHOP.ESC + 16, TOP + 10, 42, 26, '#5ab8e8', '#2c5a9e'); R(c, SHOP.ESC + 20, TOP + 14, 34, 3, '#f2efe6'); R(c, SHOP.ESC + 20, TOP + 20, 24, 2, '#f2c94c'); R(c, SHOP.ESC + 20, TOP + 26, 30, 2, '#f2efe6');
+    // lojas e espaços do térreo
+    [['MODA', 0], ['GAMES', 150], ['TÊNIS', 300], ['PERFUMES', 450]].forEach(([k, x], i) => lojaFrente(c, x + 2, 146, k, i));
+    pracaAlimentacao(c, SHOP.FOOD); cinemaFrente(c, SHOP.CINE, 380); lanFrente(c, SHOP.LAN, 370);
+    [['LIVROS', 2014], ['BRINQUEDOS', 2164]].forEach(([k, x], i) => lojaFrente(c, x + 2, 146, k, i + 4));
+    paredeMarmore(c, 2316, 84); c.clearRect(2316, 11, 84, MZ - 27);
+    // máquina de pelúcia e carrinho infantil
+    const mx = 2326; R(c, mx, 150, 32, 60, '#d84a7a'); R(c, mx, 150, 32, 2, '#f08ab0'); R(c, mx + 3, 154, 26, 28, '#cfeaf2'); for (let k = 0; k < 7; k++) ell(c, mx + 7 + (k % 4) * 6, 178 - Math.floor(k / 4) * 6, 3, 3, pick(['#f2c94c', '#3c9ad8', '#e8433a', '#7ac85a', '#c86ab8'], k)); R(c, mx + 3, 154, 26, 8, 'rgba(255,255,255,.25)'); R(c, mx + 4, 186, 24, 16, '#b83a64'); R(c, mx + 8, 190, 6, 4, '#f2c94c'); ell(c, mx + 22, 192, 3, 3, '#c43c3a');
+    const kx = 2364; R(c, kx, 196, 30, 12, '#2c5a9e'); vgrad(c, kx + 4, 180, 22, 18, '#5ab8e8', '#3c8ad8'); R(c, kx + 6, 182, 16, 6, '#d8f0f8'); ell(c, kx + 6, 208, 3, 3, '#1c1c1c'); ell(c, kx + 24, 208, 3, 3, '#1c1c1c'); R(c, kx + 2, 194, 26, 2, '#f2c94c');
+    // escada rolante: painel de vidro, degraus e corrimão
+    { const x0 = SHOP.ESC + 6, y0 = 210, x1 = SHOP.ESC + 112, y1 = MZ; c.fillStyle = 'rgba(185,222,234,.45)'; c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1, y1); c.lineTo(x1, y1 + 16); c.lineTo(x0 + 10, y0); c.closePath(); c.fill();
+      for (let k = 0; k <= 52; k++) { const u = k / 52, sx = x0 + (x1 - x0) * u, sy = y0 - (y0 - y1) * u; R(c, sx, sy, 4, 3, '#c4ccd2'); R(c, sx, sy + 3, 4, 2, '#7a848c'); }
+      limb(c, [[x0 - 2, y0 - 12], [x1, y1 - 12]], 3, '#1e1e22'); limb(c, [[x0 - 2, y0 - 13], [x1, y1 - 13]], 1, '#4a4a52'); R(c, x0 - 8, y0 - 14, 10, 14, '#8a949a'); R(c, x0 - 8, y0 - 14, 10, 2, '#c8ccd0'); }
+    // poço do elevador panorâmico
+    { const ex = SHOP.ELEV; R(c, ex, 11, 40, 199, 'rgba(180,220,232,.32)'); R(c, ex, 11, 3, 199, '#8a96a0'); R(c, ex + 37, 11, 3, 199, '#8a96a0'); R(c, ex + 1, 11, 1, 199, '#d8e0e4'); for (let y = 30; y < 210; y += 30) R(c, ex, y, 40, 2, '#9aa6ae'); R(c, ex + 19, 11, 2, 199, '#5a6066'); }
+    // fonte com borda de mármore
+    { const fx = SHOP.FONTE + 32; ell(c, fx, 207, 30, 6, '#7a848a'); ell(c, fx, 205, 28, 5, '#e6e0d4'); ell(c, fx, 204, 25, 4, '#4a9ac0'); ell(c, fx, 203, 22, 3, '#8ad0e8'); R(c, fx - 3, 186, 6, 17, '#d8d4c8'); R(c, fx - 3, 186, 2, 17, '#f6f2e8'); ell(c, fx, 186, 8, 2, '#d8d4c8'); }
+    // colunas (do térreo ao teto, passando pelo mezanino)
+    for (const x of [0, 148, 298, 448, 598, 718, 1110, 1500, 1630, 2012, 2162, 2312]) { coluna(c, x - 5, 11, MZ - 15); coluna(c, x - 5, TOP, 210); }
+    // mezanino: guarda-corpo de vidro com corrimão cromado, laje e spots embaixo
+    R(c, 0, MZ - 14, W, 14, 'rgba(188,226,238,.42)'); for (let x = 0; x < W; x += 24) { R(c, x, MZ - 14, 2, 14, '#9aa6ae'); R(c, x, MZ - 14, 1, 14, '#e2e8ec'); } for (let x = 10; x < W; x += 60) limb(c, [[x, MZ - 1], [x + 10, MZ - 13]], 2, 'rgba(255,255,255,.4)');
+    R(c, 0, MZ - 17, W, 3, '#b8c2c8'); R(c, 0, MZ - 17, W, 1, '#f6fafc'); R(c, 0, MZ - 14, W, 1, '#7a868e');
+    R(c, 0, MZ, W, 12, '#f6f4ee'); R(c, 0, MZ, W, 1, '#ffffff'); R(c, 0, MZ + 8, W, 1, '#dcd8cc'); R(c, 0, MZ + 11, W, 1, '#a8a294');
+    vgrad(c, 0, MZ + 12, W, 6, '#aaa496', '#d6d0c4'); for (let x = 20; x < W; x += 50) { R(c, x, MZ + 12, 6, 2, '#fff6d8'); for (let j = 0; j < 4; j++) R(c, x - j * 2, MZ + 14 + j, 6 + j * 4, 1, `rgba(255,246,216,${.35 - j * .08})`); }
+    // teto: forro com sanca e spots
+    vgrad(c, 0, 0, W, 9, '#f6f2ea', '#d6d0c4'); R(c, 0, 9, W, 2, '#8a8478'); for (let x = 12; x < W; x += 40) { R(c, x, 3, 8, 4, '#5a564e'); R(c, x + 1, 5, 6, 2, '#fff6d8'); }
+    // piso de mármore polido com veios e reflexo das lojas
+    R(c, 0, 210, W, 3, '#6f6a60'); R(c, 0, 210, W, 1, '#a8a294');
+    vgrad(c, 0, 213, W, LH - 213, '#f2ede2', '#ddd6c8');
+    const rows = [213, 218, 224, 232, 243, 257, 270];
+    for (let r = 1; r < rows.length; r++) { R(c, 0, rows[r], W, 1, '#cdc5b4'); const step = 26 + r * 10; for (let x = (r % 2) * step / 2; x < W; x += step) R(c, x, rows[r - 1] + 1, 1, rows[r] - rows[r - 1] - 1, '#d6cfbf'); }
+    for (let i = 0; i < W / 4; i++) { const vx = hash(i * 1.7) * W, vy = 216 + hash(i * 2.9) * 50; limb(c, [[vx, vy], [vx + 4 + hash(i) * 6, vy + hash(i * 5) * 3 - 1]], 1, 'rgba(150,140,125,.28)'); }
+    { const H = LH - 213, [tmp, tc] = mk(W, H); tc.drawImage(cv, 0, 210 - H, W, H, 0, 0, W, H); c.save(); c.globalAlpha = .15; c.translate(0, 213 + H); c.scale(1, -1); c.drawImage(tmp, 0, 0); c.restore(); for (let k = 0; k < H; k++) R(c, 0, 213 + k, W, 1, `rgba(238,233,222,${k / H * .55})`); }
+    OBJ.pisoMolhado(c, 586, 0);
     return cv;
   }
   let shopMid = null;
   function shopping(c, s, t, camL) {
-    if (!shopMid) shopMid = buildShop();
-    sky(c, s, t, camL); c.drawImage(shopMid, camL, 0, LW, LH, 0, 0, LW, LH);
-    // raios de sol entrando pela claraboia
-    if (s.sunT !== null) { const a = .1 * (1 - s.night); c.fillStyle = `rgba(255,248,220,${a})`; for (let x = ((-camL) % 100 + 100) % 100 - 100; x < LW + 100; x += 100) { c.beginPath(); c.moveTo(x + 10, 26); c.lineTo(x + 90, 26); c.lineTo(x + 130, 210); c.lineTo(x + 40, 210); c.closePath(); c.fill(); } }
-    // faixas do Festival de Inverno e plantas penduradas balançando
-    for (let x = 60; x < SHOP.W; x += 300) { const sx = x - camL, sw = Math.round(Math.sin(t * 1.2 + x) * 1); if (!vis(sx, 70)) continue; R(c, sx + sw, 104, 62, 13, '#2c5a8a'); R(c, sx + sw, 104, 62, 2, '#5a8ac0'); for (let k = 0; k < 6; k++) R(c, sx + 4 + k * 11 + sw, 117, 6, 3, '#f2c94c'); R(c, sx + 4 + sw, 108, 6, 4, '#f2efe6'); }
-    for (let x = 210; x < SHOP.W; x += 300) { const sx = x - camL + Math.sin(t * .9 + x) * 1.5; if (!vis(sx, 20)) continue; R(c, sx, 121, 1, 6, '#5a6066'); R(c, sx - 5, 127, 11, 6, '#c47a35'); for (let k = 0; k < 6; k++) R(c, sx - 6 + k * 2, 133 + (k % 3) * 2, 2, 4 + (k % 2) * 4, k % 2 ? '#4f8a3a' : '#6aa64a'); }
-    // gente no andar de cima com sacolas
-    for (let i = 0; i < 9; i++) { const wx = 40 + i * 215 + Math.sin(t * .22 + i) * 70, sx = wx - camL; if (!vis(sx, 20)) continue; gente(c, sx, 100, i + 2, false); R(c, sx + 6, 92, 4, 5, pick(['#c43c3a', '#3c6aa8', '#f2c94c', '#2a2a2a'], i)); }
-    // elevador panorâmico subindo e descendo
-    { const x = SHOP.ELEV - camL; if (vis(x, 60)) { const u = (Math.sin(t * .35) + 1) / 2, y = 40 + u * 136; R(c, x + 2, y, 36, 32, 'rgba(200,235,245,.6)'); R(c, x + 2, y, 36, 2, '#c8ccce'); R(c, x + 2, y + 30, 36, 2, '#8a949a'); gente(c, x + 10, y + 30, 4, false); gente(c, x + 22, y + 30, 7, false); R(c, x + 19, 34, 2, y - 34, '#3a3a3a'); } }
+    if (!shopMid) shopMid = buildShop(); if (!SHOPFAR) SHOPFAR = buildShopFar();
+    sky(c, s, t, camL); tile(c, SHOPFAR, camL * .4);
+    // sol entrando pela cobertura
+    if (s.sunT !== null) { const a = .08 * (1 - s.night); c.fillStyle = `rgba(255,246,214,${a})`; for (let x = wrap(-camL * .4, 128) - 128; x < LW + 128; x += 128) { c.beginPath(); c.moveTo(x, 14); c.lineTo(x + 40, 14); c.lineTo(x + 90, 96); c.lineTo(x + 30, 96); c.closePath(); c.fill(); } }
+    // gente andando no mezanino (atrás do vidro)
+    for (let i = 0; i < 11; i++) { const wx = 30 + i * 220 + Math.sin(t * .2 + i * 1.3) * 80, sx = wx - camL; if (vis(sx, 20)) pessoa(c, sx, SHOP.MZ, i + 3); }
+    // faixas do Festival de Inverno e plantas penduradas no vão
+    for (let x = 60; x < SHOP.W; x += 300) { const sx = x - camL, sw = Math.round(Math.sin(t * 1.1 + x) * 1); if (!vis(sx, 40)) continue; R(c, sx + 8, 11, 1, 6, '#5a6066'); R(c, sx + 26, 11, 1, 6, '#5a6066'); vgrad(c, sx + 4 + sw, 17, 28, 44, '#3c6ab0', '#1d3a70'); R(c, sx + 4 + sw, 17, 28, 2, '#7aa0d8'); for (let k = 0; k < 4; k++) R(c, sx + 5 + k * 7 + sw, 61, 5, 3 + (k % 2) * 2, '#1d3a70'); for (let k = 0; k < 3; k++) { const fy = 26 + k * 9; R(c, sx + 17 + sw, fy, 2, 6, '#f2f6fa'); R(c, sx + 15 + sw, fy + 2, 6, 2, '#f2f6fa'); } R(c, sx + 8 + sw, 55, 20, 2, '#f2c94c'); }
+    for (let x = 210; x < SHOP.W; x += 300) { const sx = x - camL + Math.sin(t * .9 + x) * 1.5; if (!vis(sx, 20)) continue; R(c, sx, 11, 1, 22, '#5a6066'); R(c, sx - 6, 33, 13, 7, '#b86a3a'); R(c, sx - 6, 33, 13, 2, '#d88a4a'); for (let k = 0; k < 7; k++) R(c, sx - 7 + k * 2, 40 + (k % 3) * 2, 2, 5 + (k % 2) * 6, k % 2 ? '#3f7a3c' : '#5f9a46'); }
+    c.drawImage(shopMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    // elevador panorâmico subindo e descendo entre o térreo e o mezanino
+    { const x = SHOP.ELEV - camL; if (vis(x, 60)) { const u = (Math.sin(t * .35) + 1) / 2, y = 62 + u * 116; R(c, x + 3, y, 34, 32, 'rgba(206,236,246,.7)'); R(c, x + 3, y, 34, 2, '#c8ccce'); R(c, x + 3, y + 30, 34, 2, '#7a848c'); R(c, x + 3, y, 2, 32, '#9aa6ae'); R(c, x + 35, y, 2, 32, '#9aa6ae'); pessoa(c, x + 9, y + 30, 4); pessoa(c, x + 22, y + 30, 7); R(c, x + 19, 11, 2, y - 11, '#2a2a2a'); } }
     // escada rolante: degraus andando e gente subindo
-    for (let k = 0; k < 22; k++) { const ph = (t * .18 + k / 22) % 1, x = 720 + ph * 96 - camL, y = 210 - ph * 96; if (vis(x, 10)) { R(c, x, y - 1, 6, 1, '#e2e6ea'); R(c, x, y, 6, 1, '#6a7076'); } }
-    for (let i = 0; i < 2; i++) { const ph = (t * .18 + i * .5) % 1, x = 724 + ph * 96 - camL, y = 208 - ph * 96; if (vis(x, 10)) gente(c, x, y, i + 5, false); }
-    // fonte com jatos d'água
-    { const fx = SHOP.FONTE + 24 - camL; if (vis(fx, 40)) for (let j = 0; j < 5; j++) { const a = (j - 2) / 2; for (let k = 0; k < 10; k++) { const u = k / 9, px = fx + a * 16 * u, py = 186 - Math.sin(u * Math.PI) * (12 - Math.abs(a) * 4) + u * 16; R(c, px, py, 1, 2, (k + Math.floor(t * 8)) % 3 ? '#bfe8f0' : '#ffffff'); } } }
-    // cinema: lâmpadas do letreiro correndo, pipoca estourando e fila
-    { const x = SHOP.CINE + 10 - camL; if (vis(x, 380)) { for (let k = 0; k < 360; k += 6) R(c, x + 2 + k, 140, 3, 3, (Math.floor(t * 5) + k / 6) % 4 ? '#ffe39a' : '#8a6a3a'); const msg = (Math.floor(t * 8) % 60); R(c, x + 10 + msg * 2, 197, 20, 3, '#ff6a3a'); } }
-    { const px = SHOP.CINE + 242 - camL; if (vis(px, 30)) for (let k = 0; k < 6; k++) { const ph = (t * 2 + k / 6) % 1; R(c, px + 2 + k * 3, 168 - ph * 14 + Math.sin(k) * 2, 2, 2, '#fff6d0'); } }
-    for (let i = 0; i < 5; i++) { const sx = SHOP.CINE + 40 + i * 14 - camL; if (vis(sx, 20)) gente(c, sx, 210, i + 1, false); }
-    // lan house: telas mudando, LEDs pulsando e "GG!" de vez em quando
-    for (let k = 0; k < 6; k++) { const x = SHOP.LAN + 26 + k * 70 - camL; if (!vis(x, 30)) continue; R(c, x, 140, 28, 22, ['#3c8ae0', '#5ae070', '#e05a8a', '#f2c94c'][(k + Math.floor(t * 1.5)) % 4]); R(c, x + 2 + (Math.floor(t * 9 + k * 3) % 20), 150, 4, 4, '#f2f2ee'); R(c, x + 4, 156, 6, 2, '#1a1a1a'); }
-    { const lx = SHOP.LAN - camL; if (vis(lx, 600)) { const hue = Math.floor(t * 3) % 3; R(c, lx, 120, 560, 3, ['#5ae0d0', '#e05a8a', '#f2c94c'][hue]); R(c, lx, 207, 560, 3, ['#e05a8a', '#f2c94c', '#5ae0d0'][hue]); const gg = Math.floor(t / 4) % 6; if ((t % 4) < 1.2) { const gx = lx + 30 + gg * 70; R(c, gx, 118 - (t % 4) * 6, 22, 10, '#f2efe6'); R(c, gx + 2, 120 - (t % 4) * 6, 18, 6, '#3c8a5a'); } } }
-    // máquina de pelúcia piscando e carrinho infantil balançando
-    { const x = SHOP.LAN + 500 - camL; if (vis(x, 40)) { R(c, x + 2, 150, 30, 2, Math.sin(t * 6) > 0 ? '#f2c94c' : '#e05a8a'); const gx = x + 8 + Math.sin(t * .8) * 8; R(c, gx, 156, 2, 6 + Math.abs(Math.sin(t * .5)) * 8, '#8a8a86'); } }
-    { const x = 1900 - camL; if (vis(x, 40)) { const rock = Math.round(Math.sin(t * 4) * 1); R(c, x + 2, 184 + rock, 26, 2, Math.sin(t * 5) > 0 ? '#f2c94c' : '#e05a8a'); gente(c, x + 10, 190 + rock, 9, false); } }
-    // faxineiro passando o rodo, segurança e muita gente com sacolas no térreo
-    { const x = 540 - camL + Math.sin(t * 1.5) * 6; if (vis(x, 30)) { gente(c, x, 214, 6, false); R(c, x, 201, 6, 2, '#3c8ad8'); limb(c, [[x + 6, 204], [x + 14, 214]], 1, '#8a6a45'); R(c, x + 10, 213, 10, 2, '#5a5a5a'); } }
-    { const x = 1180 - camL; if (vis(x, 20)) { gente(c, x, 214, 5, false); R(c, x, 201, 6, 8, '#1e1e24'); R(c, x + 1, 198, 4, 2, '#1e1e24'); } }
-    for (let i = 0; i < 18; i++) { const wx = 40 + i * 112 + Math.sin(t * .35 + i * 2) * 50, sx = wx - camL; if (!vis(sx, 20)) continue; gente(c, sx, 216, i, false); if (i % 3 !== 1) { R(c, sx + 6, 206, 4, 6, pick(['#c43c3a', '#3c6aa8', '#f2c94c', '#e86a8a', '#2a2a2a'], i)); R(c, sx + 7, 204, 2, 2, '#5a5a5a'); } }
+    { const x0 = SHOP.ESC + 6, x1 = SHOP.ESC + 112, y0 = 210, y1 = SHOP.MZ; for (let k = 0; k < 26; k++) { const u = (t * .16 + k / 26) % 1, x = x0 + (x1 - x0) * u - camL, y = y0 - (y0 - y1) * u; if (vis(x, 10)) R(c, x, y - 1, 4, 1, '#eef2f4'); }
+      for (let i = 0; i < 2; i++) { const u = (t * .16 + i * .5) % 1, x = x0 + 4 + (x1 - x0) * u - camL, y = y0 - 2 - (y0 - y1) * u; if (vis(x, 10)) pessoa(c, x, y, i + 5); } }
+    // fonte
+    { const fx = SHOP.FONTE + 32 - camL; if (vis(fx, 40)) for (let j = 0; j < 5; j++) { const a = (j - 2) / 2; for (let k = 0; k < 11; k++) { const u = k / 10, px = fx + a * 20 * u, py = 186 - Math.sin(u * Math.PI) * (14 - Math.abs(a) * 4) + u * 17; R(c, px, py, 1, 2, (k + Math.floor(t * 8)) % 3 ? '#bfe8f0' : '#ffffff'); } } }
+    // cinema: lâmpadas correndo em volta do letreiro
+    { const x = SHOP.CINE + 6 - camL, y = SHOP.TOP + 2; if (vis(x, 380)) { for (let k = 0; k < 368; k += 6) { const on = (Math.floor(t * 6) + k / 6) % 4 !== 0; R(c, x + k, y, 2, 2, on ? '#fff2b0' : '#7a5a2a'); R(c, x + k, y + 22, 2, 2, on ? '#fff2b0' : '#7a5a2a'); } } }
+    for (let i = 0; i < 5; i++) { const sx = SHOP.CINE + 40 + i * 13 - camL; if (vis(sx, 20)) pessoa(c, sx, 210, i + 1); }
+    // lan house: telas mudando, LEDs e "GG!"
+    { const lx = SHOP.LAN - camL; if (vis(lx, 380)) { for (let k = 0; k < 6; k++) { const px = lx + 16 + k * 58; R(c, px, SHOP.TOP + 44, 36, 22, ['#3c8ae0', '#5ae070', '#e05a8a', '#f2c94c'][(k + Math.floor(t * 1.4)) % 4]); R(c, px + 2 + (Math.floor(t * 9 + k * 3) % 28), SHOP.TOP + 54, 4, 4, '#f2f2ee'); R(c, px + 4, SHOP.TOP + 60, 28, 2, 'rgba(0,0,0,.25)'); }
+      const hue = Math.floor(t * 3) % 3; R(c, lx + 4, SHOP.TOP + 3, 362, 1, ['#5ae0d0', '#e05a8a', '#f2c94c'][hue]); R(c, lx + 4, SHOP.TOP + 18, 362, 1, ['#e05a8a', '#f2c94c', '#5ae0d0'][hue]);
+      if ((t % 4) < 1.2) { const gx = lx + 22 + (Math.floor(t / 4) % 6) * 58; R(c, gx, SHOP.TOP + 34 - (t % 4) * 6, 22, 10, '#f2efe6'); R(c, gx + 2, SHOP.TOP + 36 - (t % 4) * 6, 18, 6, '#3c8a5a'); } } }
+    // máquina de pelúcia e carrinho infantil
+    { const x = 2326 - camL; if (vis(x, 40)) { R(c, x + 2, 150, 28, 2, Math.sin(t * 6) > 0 ? '#f2c94c' : '#ffffff'); const gx = x + 10 + Math.sin(t * .8) * 8; R(c, gx, 156, 2, 6 + Math.abs(Math.sin(t * .5)) * 8, '#8a8a86'); R(c, gx - 2, 162 + Math.abs(Math.sin(t * .5)) * 8, 6, 2, '#8a8a86'); } }
+    { const x = 2364 - camL; if (vis(x, 40)) { const rock = Math.round(Math.sin(t * 4)); pessoa(c, x + 10, 196 + rock, 9); R(c, x + 2, 194, 26, 2, Math.sin(t * 5) > 0 ? '#f2c94c' : '#e05a8a'); } }
+    // faxineiro, segurança e movimento no térreo
+    { const x = 560 - camL + Math.sin(t * 1.5) * 6; if (vis(x, 30)) { pessoa(c, x, 214, 6); limb(c, [[x + 5, 202], [x + 13, 213]], 1, '#8a6a45'); R(c, x + 9, 212, 10, 2, '#5a5a5a'); } }
+    { const x = 1495 - camL; if (vis(x, 20)) { R(c, x - 1, 200, 7, 9, '#1e1e24'); pessoa(c, x, 214, 2); R(c, x - 1, 200, 7, 7, '#1e1e24'); R(c, x, 194, 5, 1, '#1e1e24'); } }
+    for (let i = 0; i < 20; i++) { const wx = 30 + i * 120 + Math.sin(t * .35 + i * 2) * 50, sx = wx - camL; if (vis(sx, 20)) pessoa(c, sx, 216, i); }
+    for (let k = 0; k < 6; k++) { const mx = SHOP.FOOD + 14 + k * 64 - camL; if (vis(mx, 30)) { mesaBar(c, mx); if (k % 2 === 0) pessoa(c, mx - 4, 210, k + 2); } }
   }
-  function shoppingLights(g, s, t, camL) { for (let x = 20; x < SHOP.W; x += 40) { const sx = x + 3 - camL; if (vis(sx)) lightAdd(sx, 34, .25, 50); } const lx = SHOP.LAN - camL; if (vis(lx, 600)) { g.fillStyle = 'rgba(90,224,208,.12)'; g.fillRect(lx, 120, 560, 94); } const cx = SHOP.CINE - camL; if (vis(cx, 380)) { g.fillStyle = 'rgba(255,227,154,.12)'; g.fillRect(cx, 136, 380, 10); for (let k = 0; k < 4; k++) { g.fillStyle = 'rgba(255,250,230,.14)'; g.fillRect(cx + 21 + k * 90, 153, 56, 38); } } for (let x = 20, i = 0; x < SHOP.W - 100; x += 150, i++) { const sx = x - camL; if (vis(sx, 140)) { g.fillStyle = 'rgba(255,250,235,.10)'; g.fillRect(sx + 6, 56, 118, 42); } } }
+  function shoppingLights(g, s, t, camL) { for (let x = 12; x < SHOP.W; x += 40) { const sx = x + 4 - camL; if (vis(sx)) lightAdd(sx, 6, .22, 50); } const lx = SHOP.LAN - camL; if (vis(lx, 380)) { g.fillStyle = 'rgba(90,224,208,.10)'; g.fillRect(lx, SHOP.TOP, 370, 96); } const cx = SHOP.CINE - camL; if (vis(cx, 380)) { g.fillStyle = 'rgba(255,227,154,.10)'; g.fillRect(cx + 6, SHOP.TOP + 2, 368, 24); } }
 
   /* =====================================================================
      21 · AVENIDA OLÍVIA FLORES E ESCOLA SESI
@@ -795,8 +905,11 @@
       labels: [[195, 132, 'CENTRO DE CULTURA', 8, '#f2efe6'], [CULTURA.TEATRO + 150, 113, 'TEATRO GLAUBER ROCHA', 9, '#ffe39a'], [CULTURA.TEATRO + 150, 125, 'HOJE: BIA DO ARROCHA', 6, '#f2efe6'], [CULTURA.DOME, 168, 'PLANETÁRIO', 8, '#2c3a44'], [1000, 160, 'PIPOCA', 6, '#2a2a2a'], [1120, 160, 'DOGÃO', 6, '#f2efe6'], [CULTURA.TEATRO + 150, 196, 'BILHETERIA', 5, '#2a2a2a']],
       interact: [['lever', 1500, 'party'], ['lever', 3400, 'flood'], ['pot', 900], ['pot', 3800], ['trash', 2300], ['crate', 2700], ['grill', 2100]] },
     { id: 20, key: 'shopping', nome: 'Shopping', lugar: 'Praça de alimentação, cinema e lan house', width: SHOP.W * 2, draw: shopping, lights: shoppingLights, amb: indoor(.8), always: true,
-      labels: [[SHOP.CINE + 190, 134, 'CINEMA PLANALTO', 9, '#ffe39a'], [SHOP.LAN + 230, 128, 'LAN HOUSE PLANALTO · 24H', 8, '#5ae0d0'], [SHOP.CINE + 190, 203, 'BILHETERIA', 5, '#f2efe6'], [SHOP.CINE + 253, 147, 'PIPOCA', 4, '#f2efe6'], [SHOP.LAN + 517, 147, 'PELÚCIA', 4, '#f2efe6'], [SHOP.FONTE + 24, 214, 'JOGUE UMA MOEDA', 4, '#3c5a6a']].concat([60, 360, 660, 960, 1260, 1560, 1860].map((x) => [x + 34, 110, 'FESTIVAL DE INVERNO', 4, '#f2efe6'])).concat(['BURGÃO', 'PASTEL', 'AÇAÍ', 'CAFÉ', 'SUSHI', 'CALDO'].map((n, i) => [80 + i * 120, 136, n, 6, '#f2efe6'])).concat(LOJAS.map((n, i) => [85 + i * 150, 48, n, 6, '#f2efe6'])),
-      interact: [['pot', 300], ['pot', 3700], ['trash', 1400], ['trash', 2600], ['ball', 2200], ['crate', 3400], ['crate', 3428, 1], ['puddle', 1100, 70], ['lever', 1800, 'party']] },
+      labels: [[SHOP.CINE + 190, SHOP.TOP + 14, 'CINEMA PLANALTO', 10, '#ffe39a'], [SHOP.LAN + 185, SHOP.TOP + 11, 'LAN HOUSE PLANALTO · 24H', 8, '#5ae0d0'], [SHOP.CINE + 17, SHOP.TOP + 80, 'BILHETERIA', 4, '#f2d898'], [SHOP.ESC + 37, SHOP.TOP + 18, 'SHOPPING', 5, '#f2efe6'], [SHOP.ESC + 37, SHOP.TOP + 30, 'CONQUISTA', 5, '#f2efe6'], [2342, 147, 'PELÚCIA', 4, '#f2efe6'], [SHOP.FONTE + 32, 216, 'JOGUE UMA MOEDA', 4, '#5a6a72']]
+        .concat([60, 360, 660, 960, 1260, 1560, 1860, 2160].map((x) => [x + 18, 66, 'INVERNO', 4, '#f2c94c']))
+        .concat(['BURGÃO', 'PASTEL & CALDO', 'AÇAÍ DA SERRA'].map((n, i) => [SHOP.FOOD + 64 + i * 130, SHOP.TOP + 9, n, 6, '#f2efe6']))
+        .concat([['MODA', 0], ['GAMES', 150], ['TÊNIS', 300], ['PERFUMES', 450], ['LIVROS', 2014], ['BRINQUEDOS', 2164]].map(([n, x]) => [x + 80, SHOP.TOP + 10, n, 7, '#f6f2ea'])),
+      interact: [['pot', 300], ['pot', 4580], ['trash', 1400], ['trash', 3020], ['ball', 2600], ['crate', 4400], ['crate', 4428, 1], ['puddle', 1700, 70], ['lever', 3200, 'party'], ['bucket', 1180]] },
     { id: 21, key: 'olivia', nome: 'Olívia Flores e Escola SESI', lugar: 'Avenida Olívia Flores · Escola SESI', width: OLIVIA.W * 2, draw: olivia, lights: oliviaLights, always: true,
       labels: [[600, 165, 'AVENIDA OLÍVIA FLORES', 9, '#f2efe6'], [750, 182, 'CICLOVIA', 6, '#2a2a2a'], [OLIVIA.SESI + 120, 92, 'ESCOLA SESI', 10, '#2c5a9e'], [OLIVIA.SESI + 440, 80, 'QUADRA COBERTA', 7, '#2c3a44'], [OLIVIA.SESI + 740, 104, 'AUDITÓRIO', 7, '#2c5a9e'], [OLIVIA.SESI + 990, 104, 'LABORATÓRIO DE INFORMÁTICA', 6, '#2c5a9e'], [OLIVIA.SESI + 935, 157, 'MURAL', 5, '#2a2a2a']],
       interact: [['ball', 3200], ['ball', 3300], ['ball', 3400], ['cone', 3600], ['cone', 3660], ['trash', 2360], ['trash', 3000], ['pot', 2700], ['lever', 3800, 'bell'], ['door', (OLIVIA.SESI + 720) * 2, 80, 120, 'class'], ['crate', 4700], ['puddle', 1600, 70], ['bucket', 4300]] }
@@ -811,7 +924,7 @@
     17: { platforms: [[700, 384, 150], [890, 328, 140], [1700, 384, 150], [2700, 384, 150], [2890, 328, 140], [3080, 272, 140]], gaps: [] },
     18: { platforms: [[900, 384, 150], [1090, 328, 140], [2200, 384, 150], [2390, 320, 140], [2580, 256, 140], [3600, 384, 150], [3790, 328, 140]], gaps: [[1500, 200], [3200, 220]] },
     19: { platforms: [[800, 384, 150], [990, 328, 140], [1180, 272, 140], [2400, 384, 150], [2590, 320, 140], [3500, 384, 150]], gaps: [] },
-    20: { platforms: [[600, 384, 150], [790, 328, 140], [980, 272, 140], [2300, 384, 150], [2490, 328, 140], [3300, 384, 150]], gaps: [] },
+    20: { platforms: [[700, 384, 150], [890, 328, 140], [1080, 272, 140], [2600, 384, 150], [2790, 328, 140], [3500, 384, 150], [4100, 384, 150], [4290, 328, 140]], gaps: [] },
     21: { platforms: [[1100, 384, 150], [2700, 384, 150], [2890, 328, 140], [3080, 272, 140], [3900, 384, 150], [4090, 328, 140]], gaps: [] }
   };
   /* =====================================================================
