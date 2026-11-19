@@ -28,7 +28,7 @@
     if (document.getElementById('c2LojaCss')) return; const s = document.createElement('style'); s.id = 'c2LojaCss';
     s.textContent = `.c2-loja{position:fixed;inset:0;z-index:2147483150;background:#120c08;display:grid;place-items:center;font-family:Pixel,monospace;color:#2a1a10;opacity:0;transition:opacity .3s}.c2-loja.on{opacity:1}.c2-loja[hidden]{display:none}
 .c2-loja .tela{position:relative;width:min(100vw,177.7vh);aspect-ratio:16/9;max-height:100vh}.c2-loja canvas{width:100%;height:100%;image-rendering:pixelated;display:block}
-.c2-loja .perg{position:absolute;right:2.5%;top:6%;width:30%;background:#f2e2b8;border:3px solid #5a3a20;box-shadow:4px 4px 0 #2a1a10;padding:10px 12px;font-size:clamp(8px,1.15vw,12px);line-height:1.5;transform:rotate(1deg)}.c2-loja .perg b{display:block;font-size:1.15em;color:#7a2a1a;margin-bottom:4px}.c2-loja .perg .p{margin-top:6px;font-size:1.1em}
+.c2-loja .perg{position:absolute;right:2.5%;top:12.5%;width:30%;background:#f2e2b8;border:3px solid #5a3a20;box-shadow:4px 4px 0 #2a1a10;padding:10px 12px;font-size:clamp(8px,1.15vw,12px);line-height:1.5;transform:rotate(1deg)}.c2-loja .perg b{display:block;font-size:1.15em;color:#7a2a1a;margin-bottom:4px}.c2-loja .perg .p{margin-top:6px;font-size:1.1em}
 .c2-loja button{font:inherit;font-size:clamp(9px,1.2vw,12px);padding:8px 12px;background:#e8a83a;color:#1c1408;border:3px solid #5a3a20;box-shadow:0 4px 0 #3a2410;cursor:pointer}.c2-loja button:active{transform:translateY(3px);box-shadow:0 1px 0 #3a2410}.c2-loja button[disabled]{opacity:.5;cursor:default}.c2-loja .bts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .c2-loja .sair{position:absolute;left:2%;top:3%;background:#4a3420;color:#f6ead0;border-color:#e8c66a}`;
     document.head.appendChild(s);
@@ -90,7 +90,7 @@
     R(hx - 14, hy + 2, 72, 8, '#d7b665'); R(hx - 14, hy + 2, 72, 2, '#f2d898'); R(hx + 2, hy - 14, 40, 18, '#d7b665'); R(hx + 2, hy - 2, 40, 4, '#c43c3a'); for (let k = 0; k < 40; k += 4) R(hx + 2 + k, hy - 14, 2, 16, '#c8a050'); // chapéu de palha
     if (ri) { c.font = '10px Pixel, monospace'; c.fillStyle = '#ffd98a'; c.fillText('HÉ HÉ!', hx + 50, hy - 4 - humorT * 6); }
   }
-  function balcao() { R(0, 190, LW, 80, '#5a3a20'); R(0, 190, LW, 6, '#8a5a32'); R(0, 196, LW, 2, '#3a2414'); for (let x = 0; x < LW; x += 40) R(x, 198, 2, 72, '#4a2e18'); R(0, 236, LW, 3, '#3a2414'); R(10, 244, 120, 18, '#3a2414'); R(12, 246, 116, 14, '#c8a46a'); c.font = '8px Pixel, monospace'; c.fillStyle = '#3a2414'; c.fillText('GARRAFADAS DO SEU LINDOMAR', 16, 256); }
+  function balcao() { R(0, 190, LW, 80, '#5a3a20'); R(0, 190, LW, 6, '#8a5a32'); R(0, 196, LW, 2, '#3a2414'); for (let x = 0; x < LW; x += 40) R(x, 198, 2, 72, '#4a2e18'); R(0, 236, LW, 3, '#3a2414'); c.font = '8px Pixel, monospace'; const nw = Math.ceil(c.measureText('GARRAFADAS DO SEU LINDOMAR').width); R(10, 244, nw + 14, 18, '#3a2414'); R(12, 246, nw + 10, 14, '#c8a46a'); c.fillStyle = '#3a2414'; c.fillText('GARRAFADAS DO SEU LINDOMAR', 17, 256); }
   function garrafa(i) {
     const p = lista()[i], q = pos(i), tem = PW.estado().desbloqueados.includes(p.id), on = i === sel, sobe = on ? 10 + Math.sin(t * 3) * 2 : Math.sin(t * 2 + i) * .6, x = q.x, y = q.y - sobe, cor = p.cor, forma = GARRAFA[p.id];
     if (on) { const g = c.createRadialGradient(x, y - 18, 2, x, y - 18, 34); g.addColorStop(0, `${cor}aa`); g.addColorStop(1, `${cor}00`); c.fillStyle = g; c.fillRect(x - 40, y - 60, 80, 80); }
