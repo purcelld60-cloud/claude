@@ -361,8 +361,11 @@
 
   const lista = Object.keys(SPEC).map((id) => ({ id, nome: SPEC[id].name, papel: ROLE[id] || '' }));
   lista.splice(lista.findIndex((p) => p.id === 'c2_picole'), 0, { id: 'c2_biscoito', nome: 'Biscoito (cachorro caramelo)', papel: 'aliado' });
+  // outros arquivos da Campanha 2 (2D: personagens novos e moradores) registram mais gente aqui
+  function registrar(id, spec, papel = '') { if (!id || !spec || SPEC[id]) return false; SPEC[id] = spec; ROLE[id] = papel; lista.push({ id, nome: spec.name, papel }); return true; }
   window.CampanhaPersonagens = Object.freeze({
-    lista: Object.freeze(lista),
+    get lista() { return Object.freeze(lista.slice()); },
+    registrar,
     idades: ['crianca_daroca', 'crianca_reeis', 'crianca_jorge', 'pre_daroca', 'pre_reeis', 'pre_jorge'],
     has: (type) => !!SPEC[type] || type === 'c2_biscoito' || /^(crianca|pre)_(daroca|reeis|jorge)$/.test(type || '')
   });

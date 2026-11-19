@@ -220,3 +220,34 @@ Os sete cenários seguem o mesmo padrão dos outros: arte de 482x270 escalada 2x
 | 34 | **Serra do Marçal** | **O vale lá embaixo:** retalhos de plantação, rio e cidadezinhas que acendem à noite. Por cima passa um mar de nuvens.<br>**A encosta:** a estrada em curvas com carros e caminhões descendo e torres eólicas girando.<br>**No mirante:** defensa metálica, barraca de MEL · REQUEIJÃO · CAFÉ, caminhão parado com o caminhoneiro comendo marmita e o cruzeiro com velas.<br>**Voo livre e vento:** a rampa de voo livre tem biruta e um parapente que corre, decola e plana para o vale. Há torres de rádio e vento passando.<br>**Vão:** uma ravina. | ilha de pedra com cactos |
 
 Para os cenários novos, `CampanhaCamadas.configurar` liga a população, o primeiro plano e os trilheiros, e `CampanhaPlantas.adicionar` cria os canteiros de plantinhas. Um vão pode ter cor própria com `vao: { fundo, borda }`: água na lagoa e no riacho.
+
+## Passo 2D · 10 personagens novos e 20 moradores (`dist/campanha2/moradores.js`)
+
+Cada pessoa fica parada no seu canto de um cenário. Quem você ainda não conhece tem um **!** em cima da cabeça: amarelo para os personagens e azul para os moradores. Chegando perto aparece **[E] CONVERSAR COM …** (no celular, o botão **FALAR**).
+
+A caixa de conversa mostra o retrato, o nome, quem a pessoa é e o texto aparecendo aos poucos. Há três assuntos para escolher, com o mouse, com o toque ou pelas teclas de 1 a 4: **Quem é você?**, **Me fala da cidade** e **E a sua história?**, mais **Tchau!**. Os assuntos já lidos ganham ✓.
+
+O **caderninho** conta quantos dos 30 você já conheceu. Ele fica guardado no navegador em `daroca-c2-conhecidos`, separado do save do jogo. Durante a conversa o controle do Da Roça fica pausado.
+
+Os fatos da cidade são gerais e conhecidos: os povos indígenas do planalto, os nomes antigos da cidade, a Rio-Bahia, o café, o frio, Glauber Rocha, Elomar, o Cristo de Mário Cravo, a UESB e o Festival de Inverno. Lenda aparece como lenda ("dizem que…").
+
+**Personagens novos** (têm história mais longa e podem voltar nas missões):
+
+| Personagem | Onde | Quem é |
+| --- | --- | --- |
+| **Professora Lúcia** (`c2n_lucia`) | UESB | Professora de História há mais de 20 anos. Junta fotos antigas da cidade e conta dos povos indígenas, dos nomes antigos e de Glauber e Elomar. Veio da roça e foi a primeira da família na faculdade. |
+| **Seu Bené Engraxate** (`c2n_bene`) | Rodoviária | Engraxa sapato há 40 anos. Chegou com 16 anos, uma mala de papelão e a lata de graxa do pai, "pra ficar uma semana". |
+| **Tainá** (`c2n_taina`) | Monumento ao Índio | Estudante de Antropologia com raiz indígena e guia voluntária. Sonha com um museu vivo. |
+| **Mestre Zé Pandeiro** (`c2n_ze_pandeiro`) | Feira | Sanfoneiro e cantador. Fala do São João, do forró pé de serra e do licor de jenipapo. Ensina a molecada a tocar de graça. |
+| **Doutora Fabi** (`c2n_fabi`) | Parque da Cidade (Parcão) | Veterinária da feira de adoção. O Tripé, cachorro de três patas, foi quem adotou ela. |
+| **Gabi do Voo Livre** (`c2n_gabi`) | Serra do Marçal | Ex-mototaxista com medo de altura que virou instrutora de parapente. |
+| **Dona Zefa do Café** (`c2n_zefa`) | Fazenda de café | Sessenta safras e coador de pano. Replantou o cafezal depois da geada e não vende a terra para o Barão do Café, o vilão. |
+| **Rafa Goleiro** (`c2n_rafa`) | Lomantão | Goleiro supersticioso do Planalto FC. Começou com luva de pano de prato e sonha com a Série A. |
+| **Irmã Celeste** (`c2n_celeste`) | Catedral | Cuida da sopa solidária e escuta heavy metal escondido. Era baterista da banda "Neblina Mortal". |
+| **Kiko do Pedalinho** (`c2n_kiko`) | Lagoa das Bateias | Tem 15 anos e diz que é "gerente" dos cisnes. Conta a lenda da pepita no fundo da lagoa e junta dinheiro para estudar Biologia. |
+
+**Moradores** (só para conversar): Seu Agenor e Dona Neide (Centro); Wellington Mototaxista e Marquinhos do Lava-Jato (Avenida); Lia Ciclista (Olívia Flores); Dona Cotinha da Biscoitaria (Feira); Pedro, estudante de Medicina, e Tia Lourdinha da Cantina (UESB); Josué, segurança do Shopping; Tia Rosa do Acarajé e Vó Dalva (Bairro); Cauã, o menino da pipa (Parque); Seu Toninho Pescador (Lagoa); Jurema da Rodoviária; Beto Taxista, rival do Seu Zé (Aeroporto); Ana Clara, guia do Cristo (Serra do Periperi); Ronaldo, guarda-parque (Poço Escuro); DJ Thiaguinho (Teatro e Festival); Seu Zezinho, colhedor de café (Fazenda); e Marina Fotógrafa (Serra do Marçal).
+
+Os moradores citam uns aos outros e os personagens da campanha: o Fusca do Seu Arlindo, o Tonhão, o Seu Zé do Táxi, a Dona Lurdes e o Barão do Café.
+
+No código: `CampanhaMoradores.conversar(id)`, `lista()`, `conhecidos()` e `esquecer()`. Os desenhos estão em `CampanhaPersonagens.registrar`.
