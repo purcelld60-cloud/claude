@@ -92,8 +92,25 @@ Por isso os cenários novos têm o mesmo céu realista, a hora do dia, as sombra
 | 20 | Shopping | Dois andares de lojas, praça de alimentação, cinema com cartazes, lan house com telas piscando e escada rolante |
 | 21 | Olívia Flores e Escola SESI | Avenida com ciclovia no canteiro central, coqueiros e prédios altos. Na escola: pátio, quadra coberta em arco, auditório e laboratório de informática |
 
+**Versão detalhada:** a primeira versão estava seca. Os cenários foram refeitos no nível dos mapas da campanha principal.
+- **Fundo em camadas:** a serra azulada com antenas e o Cristo bem pequeno. A cidade longe, com caixas-d'água, antenas, faixas coloridas e guindastes. A cidade perto, com varandas, ar-condicionado e casinhas de telhado vermelho. Uma faixa de árvores com ipês roxos e amarelos. Pássaros em bando e pipas.
+- **Fachadas:** reboco com manchas, tijolo, telhas, janelas com grade, veneziana ou vidro, cortinas, plantas na janela, varandas com varal ou vasos, ar-condicionado, caixa-d'água, antena e parabólica.
+- **Rua:**
+  - mobiliário: orelhão, banca de revista, ponto de ônibus, lixeiras, hidrante, placa de rua, postes com transformador e fiação;
+  - comércio: camelôs com guarda-sol, motos, bicicletas e carros;
+  - decoração: bandeirinhas, grafite e cartazes;
+  - vida: gatos, cachorro, pombos, galinhas, gente de casaco e cachecol (faz frio) e trânsito andando;
+  - chão: calçada com meio-fio pintado, faixa de pedestre, bueiro e calçadão de pedra portuguesa.
+- **Interativos:** usam o mesmo sistema da campanha principal, por meio do `Interact.addScene` novo:
+  - quebram: caixotes, vasos, melancias, fardos de feno, barris e cercas;
+  - rolam: lixeiras, cones, bolas, baldes e pneus;
+  - outros: portas que abrem, poças, capim que pega fogo e churrasqueiras;
+  - alavancas com efeitos: luzes de festa, holofotes, irrigador na fazenda e sinal da escola.
+
 **Visualizador:** abra o jogo com `?cenarios2` no fim do endereço.
 - **Andar:** setas ou ◀ ▶.
+- **Pular:** espaço.
+- **Bater:** J. Quebra os objetos e liga as alavancas.
 - **Trocar de cenário:** `[` e `]`, ou os botões.
 - **Trocar a hora:** os botões ou as teclas 1 a 4.
 

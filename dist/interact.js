@@ -17,7 +17,7 @@
   const hash = (n) => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
   const R = (c, x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x / 2) * 2, Math.round(y / 2) * 2, Math.max(2, Math.round(w / 2) * 2), Math.max(2, Math.round(h / 2) * 2)); };
   const lite = () => !!window.Graphics?.isLite?.();
-  const worldW = (scene) => Number(window.WorldData?.widths?.[scene]) || 4800;
+  const worldW = (scene) => Number(window.WorldData?.widths?.[scene]) || Number(window.CampanhaCenarios?.largura?.(scene)) || 4800;
 
   // ------------------------------------------------------------------ lista de objetos por fase
   const SPEC = {
@@ -216,5 +216,7 @@
   function drawFront(c, o) { const S = getSet(o); if (!S || lite()) return; drawEffects(c, S, Number(o.time) || 0, o); }
   // luz do fogo, da brasa e dos efeitos (aditiva, chamada pela camada de luz)
   function platforms(o) { const S = getSet(o); if (!S) return []; return S.plat.map((m) => [Math.round(m.cx), Math.round(m.cy), m.w, m.dx || 0]); }
-  window.Interact = Object.freeze({ update: (dt, o) => { try { update(dt, o || {}); } catch (e) { window.__interactError = e; } }, drawBack: (c, o) => { try { drawBack(c, o || {}); } catch (e) { window.__interactError = e; } }, drawFront: (c, o) => { try { drawFront(c, o || {}); } catch (e) { window.__interactError = e; } }, platforms: (o) => { try { return platforms(o || {}); } catch (e) { return []; } }, shock: (x, power) => { if (cur) shock(cur, x, power || 1, lastT); }, ignite: (x) => { if (cur) igniteNear(cur, x, 12, lastT); }, debug: () => cur });
+  // Fases de fora (Campanha 2, cenas 12+): mesma lista de objetos do SPEC acima. Não muda as fases 0 a 11.
+  function addScene(scene, list) { scene = Number(scene); if (!(scene >= 12) || !Array.isArray(list)) return false; SPEC[scene] = list; if (!OUT.includes(scene)) OUT.push(scene); delete sets['scene:' + scene]; return true; }
+  window.Interact = Object.freeze({ addScene, update: (dt, o) => { try { update(dt, o || {}); } catch (e) { window.__interactError = e; } }, drawBack: (c, o) => { try { drawBack(c, o || {}); } catch (e) { window.__interactError = e; } }, drawFront: (c, o) => { try { drawFront(c, o || {}); } catch (e) { window.__interactError = e; } }, platforms: (o) => { try { return platforms(o || {}); } catch (e) { return []; } }, shock: (x, power) => { if (cur) shock(cur, x, power || 1, lastT); }, ignite: (x) => { if (cur) igniteNear(cur, x, 12, lastT); }, debug: () => cur });
 })();
