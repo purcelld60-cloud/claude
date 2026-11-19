@@ -119,5 +119,6 @@
       ctx.globalAlpha = cl(q.life * 1.5); R(ctx, q.x, q.y, q.kind === 'semente' ? 2 : 4, 2, q.col); if (q.kind === 'semente') R(ctx, q.x - 2, q.y - 2, 6, 2, 'rgba(244,242,234,.6)'); }
     ctx.restore();
   }
-  window.CampanhaPlantas = Object.freeze({ drawBack, drawFront, canteiros: (scene) => (PATCHES[scene] || []).map((p) => p.slice()), stats: () => ({ particulas: parts.length }) });
+  window.CampanhaPlantas = Object.freeze({ drawBack, drawFront, adicionar: (scene, lista) => { PATCHES[scene] = lista.map((p) => p.slice()); delete sets[scene]; }, // cenas novas (2C) trazem os próprios canteiros
+    canteiros: (scene) => (PATCHES[scene] || []).map((p) => p.slice()), stats: () => ({ particulas: parts.length }) });
 })();

@@ -333,14 +333,14 @@
   /* =====================================================================
      FRENTE: mais gente na rua (não interativa)
      ===================================================================== */
-  const POVO = { 12: 12, 13: 12, 14: 20, 16: 16, 17: 18, 19: 16, 21: 14, 15: 3 };
+  const POVO = { 12: 12, 13: 12, 14: 20, 16: 16, 17: 18, 19: 16, 21: 14, 15: 3 }, TRILHA = new Set([15]);
   function populacao(id, c, s, t, camL) {
     const n = POVO[id]; if (!n) return; const W = window.CampanhaCenarios.largura(id) / 2, AIR = A.AIR;
     for (let i = 0; i < n; i++) {
       const dir = (i * 7 + id) % 2 ? 1 : -1, sp = 9 + hash(i * 3 + id) * 9, wx = wrap(hash(i * 11 + id) * W + t * sp * dir, W), sx = wx - camL;
       if (!vis(sx, 20) || (id === 12 && wx > AIR.TAR - 10 && wx < AIR.GR + 10)) continue;
       const y = 216 + (i % 3 === 0 ? 1 : 0), k = i * 5 + id, passo = Math.floor(t * 6 + i) % 2;
-      if (id === 15) { gente(c, sx, y, k, true); R(c, sx + (dir > 0 ? -3 : 6), y - 14, 3, 7, '#c43c3a'); limb(c, [[sx + (dir > 0 ? 7 : -1), y - 9], [sx + (dir > 0 ? 10 : -4), y]], 1, '#6a4a32'); continue; }
+      if (TRILHA.has(id)) { gente(c, sx, y, k, true); R(c, sx + (dir > 0 ? -3 : 6), y - 14, 3, 7, '#c43c3a'); limb(c, [[sx + (dir > 0 ? 7 : -1), y - 9], [sx + (dir > 0 ? 10 : -4), y]], 1, '#6a4a32'); continue; }
       if (i % 3 === 0) pessoa(c, sx, y, k); else gente(c, sx, y, k, true);
       R(c, sx + 1 - passo, y - 1, 2, 1, 'rgba(0,0,0,.2)');
       if (i % 5 === 2 && (s.rain || 0) > .1) { R(c, sx - 3, y - 24, 12, 2, pick(['#2a2a2a', '#c43c3a', '#3c6aa8'], i)); R(c, sx + 2, y - 23, 1, 8, '#5a5a56'); }
@@ -448,12 +448,13 @@
     pilastra: (c, x, y) => { R(c, x, y - 22, 3, 22, '#5a5e64'); R(c, x + 40, y - 22, 3, 22, '#5a5e64'); R(c, x + 3, y - 20, 37, 2, '#2a3a6a'); R(c, x - 2, y - 2, 7, 2, '#3a3e44'); R(c, x + 38, y - 2, 7, 2, '#3a3e44'); },
     vaso: (c, x, y) => { R(c, x, y - 10, 16, 10, '#4a3a2e'); for (let k = 0; k < 6; k++) ell(c, x + 2 + k * 2.4, y - 16 - (k % 3) * 4, 4, 6, k % 2 ? '#24401e' : '#305028'); }
   };
-  let fgCv = null, fgC = null;
+  let fgCv = null, fgC = null; const FGDRAW = {};
   function primeiroPlano(ctx, o) {
-    const id = o.scene, set = FG[FGSET[id]]; if (!set || o.arena || o.room) return;
+    const id = o.scene, set = FG[FGSET[id]] || (FGDRAW[id] ? [] : null); if (!set || o.arena || o.room) return;
     if (!fgCv) [fgCv, fgC] = mk(LW, LH); const c = fgC, cam = Number(o.camera) || 0, camL = cam / 2, t = Number(o.time) || 0, k = 1.45, W = (window.CampanhaCenarios.largura(id) || 4000) / 2 * k;
     c.clearRect(0, 0, LW, LH);
-    for (let i = 0, x = 60; x < W; i++) { const sx = x - camL * k; if (sx > -90 && sx < LW + 10) PEC[pick(set, i * 7 + id)](c, Math.round(sx), LH + 2, i * 13 + id, t); x += 190 + hash(i * 5 + id) * 260; }
+    if (set.length) for (let i = 0, x = 60; x < W; i++) { const sx = x - camL * k; if (sx > -90 && sx < LW + 10) PEC[pick(set, i * 7 + id)](c, Math.round(sx), LH + 2, i * 13 + id, t); x += 190 + hash(i * 5 + id) * 260; }
+    FGDRAW[id]?.(c, camL * k, t);
     const s = window.DayTime?.state?.() || { night: 0 }, a = night(s);
     c.save(); c.globalCompositeOperation = 'source-atop'; c.fillStyle = `rgba(8,12,26,${.25 + a * .5})`; c.fillRect(0, 0, LW, LH); c.restore();
     ctx.save(); ctx.translate(Math.round(cam), 0); ctx.imageSmoothingEnabled = false; ctx.drawImage(fgCv, 0, 0, LW * 2, LH * 2); ctx.restore();
@@ -476,6 +477,9 @@
     engarrafado,
     engarrafamento: (id, v) => { if (!JAM[id]) return false; if (v === null || v === undefined) { delete forcado[id]; return engarrafado(id); } forcado[id] = true; jamOn[id] = !!v; return jamOn[id]; },
     texto: pxText,
+    // para os cenários novos (2C): mais gente e primeiro plano numa cena registrada depois
+    configurar: (id, o = {}) => { if (o.povo) POVO[id] = o.povo; if (o.fg) FGSET[id] = o.fg; if (o.trilha) TRILHA.add(id); if (o.pecas) Object.assign(PEC, o.pecas); if (o.fgLista) { FG['c' + id] = o.fgLista; FGSET[id] = 'c' + id; } if (o.fgDraw) FGDRAW[id] = o.fgDraw; },
+    kit: Object.freeze({ pxText, largura, pessoinha, carrinho, janelaM, lojaM, outdoorM, predioM, arvoreM, nevoa, buildRua, noiteTile, andaRua, scr, wrap, balao, carroG, cabeca, LOJAS_RUA, OUTDOORS, SKIN, ROUPA, T }),
     lojas: () => LOJAS_RUA.map((l) => l[0]),
     cenasComEngarrafamento: () => Object.keys(JAM).map(Number)
   });

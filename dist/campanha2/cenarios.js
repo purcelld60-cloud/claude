@@ -1039,7 +1039,7 @@
   function holes(c, id, camL) {
     const L = LAYOUT[id]; if (!L || !L.gaps.length) return;
     for (const [gx, gw] of L.gaps) { const x = gx / 2 - camL, w = gw / 2; if (!vis(x, w + 20)) continue;
-      const deep = id === 15 ? '#2a2620' : id === 18 ? '#3c6a8a' : '#1c1c1c'; R(c, x, FLOOR, w, LH - FLOOR, deep); R(c, x, FLOOR, w, 3, id === 18 ? '#8ac4d8' : '#3c3a34'); R(c, x - 2, FLOOR, 2, LH - FLOOR, '#4a3a2a'); R(c, x + w, FLOOR, 2, LH - FLOOR, '#4a3a2a');
+      const V = LIST.find((d) => d.id === id)?.vao, deep = V?.fundo || (id === 15 ? '#2a2620' : id === 18 ? '#3c6a8a' : '#1c1c1c'); R(c, x, FLOOR, w, LH - FLOOR, deep); R(c, x, FLOOR, w, 3, V?.borda || (id === 18 ? '#8ac4d8' : '#3c3a34')); R(c, x - 2, FLOOR, 2, LH - FLOOR, '#4a3a2a'); R(c, x + w, FLOOR, 2, LH - FLOOR, '#4a3a2a');
       if (id === 16) for (const cx of [x - 8, x + w + 2]) { R(c, cx, FLOOR - 9, 6, 9, '#f08a24'); R(c, cx + 1, FLOOR - 6, 4, 2, '#f2f2ee'); } }
   }
   const textOf = (d) => (c, camera) => { c.save(); c.translate(-Math.round(camera), 0); for (const lb of (d.labels || []).concat(CAM()?.falas?.(d.id, camera) || [])) { const [x, y, str, size, col] = lb, a = d.labelAlpha ? d.labelAlpha(lb) : 1; if (a <= .01) continue; c.globalAlpha = a; text(c, str, x * 2, y * 2, size, col); } c.restore(); }; // labelAlpha: some com o cenário (ex.: escada da escola)
