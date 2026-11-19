@@ -152,3 +152,24 @@ Por isso os cenários novos têm o mesmo céu realista, a hora do dia, as sombra
 **O que fica para o Passo 5:**
 - ligar as cenas 12 a 21 ao jogo: menu "Campanha 2", portas, missões, inimigos, chefes, save e bloqueio de Itabuna depois do embarque;
 - o clima de chuva e neve nessas cenas. A neblina já vem nos cenários.
+
+## Passo 2A · Ambientes com entrada (`dist/campanha2/ambientes.js`)
+
+O Passo 2 foi dividido em partes:
+- **2A:** ambientes com entrada.
+- **2B:** redesenho dos outros cenários, paródias de lojas, população e engarrafamento.
+- **2C:** 7 cenários novos.
+- **2D:** 10 personagens com história e 20 moradores para conversar.
+
+O Passo 4 passa a ser a forma de locomoção.
+
+| Cena | Ambiente | Como se chega |
+| --- | --- | --- |
+| 22 | Frente do Shopping: fachada com átrio de vidro, porta giratória, marquise, lojas âncora (AMENICANAS, RIACHORRO), cartazes de cinema, totem, estacionamento com cancela, táxis e ponto de ônibus | botão **ENTRAR NO SHOPPING**, que leva ao shopping (cena 20). Lá dentro, **SAIR DO SHOPPING** volta |
+| 23 | Shopping, piso 2: cobertura de vidro em arcos, lojas paródia (RIACHORRO, MAGAZINE LURDES, SENTAURO, O BUTECÁRIO, CACAU CHOU, LIVRARIA CUTUCADA, GAMESTOPA, RI TRISTE, AMENICANAS), escada rolante descendo | **escada rolante interativa**: no térreo, **SUBIR** faz o Da Roça subir os degraus e chegar ao piso 2. No piso 2, **DESCER** volta |
+| 24 | Corredor da pensão: papel de parede, lambri, portas numeradas, arandelas, quadros de Conquista, cabideiro com casacos, guarda-chuvas, telefone, aquecedor, gato dormindo, tapete vermelho e a mesinha vazia com o bilhete "CADÊ MEU RÁDIO? — LURDES" | **ENTRAR NA PENSÃO** no bairro (cena 13) |
+| 25 | Quarto do Da Roça: escrivaninha com computador, cadeira gamer, guarda-roupa, cama com cobertor grosso, aquecedor ligado, janela com neblina e o Cristo, foto do trio, mapa de Conquista e mala aberta | porta **QUARTO 4** do corredor. O **computador abre o Fliperama** com todos os jogos |
+| 26 | Escola SESI por dentro: salas com visor, armários, mural, troféus, bebedouro e extintor | **ENTRAR NA ESCOLA** na Olívia Flores (cena 21). Ao passar pela **porta ESCADA**, a parede fica **transparente**, aparece a escada e o Da Roça sobe andando |
+| 27 | Pátio no 2º andar: cantina, mesas, mural de mosaico, pingue-pongue, cesta de basquete, coleta seletiva e a cidade atrás do guarda-corpo | no alto da escada da escola. A porta **DESCER A ESCADA** volta |
+
+No visualizador, ao chegar perto de uma passagem aparece o balão **[E] …** e o botão grande **ENTRAR / SAIR / SUBIR / DESCER / USAR**.

@@ -699,6 +699,8 @@
     if (kind === 'TÊNIS') for (let r = 0; r < 4; r++) for (let j = 0; j < (w - 12) / 14; j++) { const sx = x + 6 + j * 14, sy = y + 6 + r * 13, col = P(j + r * 3); R(c, sx, sy + 4, 11, 3, col); R(c, sx + 5, sy + 1, 6, 4, col); R(c, sx, sy + 7, 11, 2, '#f6f4ee'); R(c, sx + 2, sy + 5, 6, 1, '#f6f4ee'); R(c, sx + 9, sy + 1, 2, 2, shadeHex(col, .7)); }
     if (kind === 'LIVROS') for (let r = 0; r < 4; r++) for (let k = x + 5; k < x + w - 6; k += 3) { const hh = 7 + Math.round(hash(k + r * 7) * 4), col = P(k + r); R(c, k, y + 14 + r * 13 - hh, 3, hh, col); R(c, k, y + 14 + r * 13 - hh, 1, hh, shadeHex(col, 1.3)); R(c, k, y + 16 + r * 13 - hh, 3, 1, '#f2e8c8'); }
     if (kind === 'PERFUMES') { vgrad(c, x + 4, y + 2, w - 8, h - 6, '#fff8ee', '#f2dccc'); for (let r = 0; r < 3; r++) { R(c, x + 6, y + 20 + r * 17, w - 12, 2, 'rgba(200,230,240,.8)'); R(c, x + 6, y + 22 + r * 17, w - 12, 1, '#c8b8a8'); for (let j = 0; j < (w - 16) / 11; j++) { const bx = x + 9 + j * 11, col = pick(['#e8a8c8', '#a8c8e8', '#f2d898', '#c8e8b8', '#d8b8e8', '#f0b890'], j + r + i); R(c, bx, y + 10 + r * 17, 7, 10, col); R(c, bx + 1, y + 11 + r * 17, 2, 7, 'rgba(255,255,255,.55)'); R(c, bx + 6, y + 10 + r * 17, 1, 10, shadeHex(col, .75)); R(c, bx + 2, y + 7 + r * 17, 3, 3, '#c8a24a'); R(c, bx + 2, y + 7 + r * 17, 1, 3, '#f2d898'); } } }
+    if (kind === 'CHOCOLATE') { for (let r = 0; r < 3; r++) { prateleira(y + 16 + r * 15); for (let j = 0; j < (w - 12) / 10; j++) { const bx = x + 6 + j * 10, by = y + 6 + r * 15, col = pick(['#5a2e1a', '#7a3e22', '#c43c3a', '#e8c24c', '#d84a7a'], j + r); R(c, bx, by, 8, 10, col); R(c, bx + 1, by + 2, 6, 3, '#f2e2c8'); R(c, bx, by, 8, 1, shadeHex(col, 1.3)); } } ell(c, x + w - 22, y + 50, 12, 8, '#c43c3a'); ell(c, x + w - 22, y + 48, 10, 6, '#e84a4a'); R(c, x + w - 23, y + 40, 2, 16, '#f2c94c'); }
+    if (kind === 'ELETRO') { for (let j = 0; j < 3; j++) { const tx = x + 6 + j * 40; R(c, tx, y + 4, 34, 22, '#14161c'); vgrad(c, tx + 2, y + 6, 30, 18, pick(['#5ab8e8', '#e8a83a', '#7ac85a'], j), '#1e2a3a'); R(c, tx + 15, y + 26, 4, 3, '#3a3a40'); } for (let j = 0; j < 3; j++) { const gx = x + 8 + j * 40; R(c, gx, y + 34, 26, 26, '#e8eaec'); R(c, gx, y + 34, 26, 2, '#ffffff'); ell(c, gx + 13, y + 48, 8, 8, '#9aa6ae'); ell(c, gx + 13, y + 48, 6, 6, '#c8e0ea'); R(c, gx + 18, y + 36, 6, 2, '#5ae070'); } }
     if (kind === 'BRINQUEDOS') { for (let r = 0; r < 2; r++) { prateleira(y + 24 + r * 22); for (let j = 0; j < (w - 14) / 16; j++) { const px = x + 8 + j * 16, py = y + 23 + r * 22, col = P(j + r * 4); ell(c, px + 6, py - 5, 6, 6, col); ell(c, px + 6, py - 13, 5, 5, col); R(c, px + 2, py - 18, 3, 3, col); R(c, px + 8, py - 18, 3, 3, col); ell(c, px + 6, py - 4, 3, 3, shadeHex(col, 1.3)); R(c, px + 4, py - 14, 1, 1, '#1a1a1a'); R(c, px + 8, py - 14, 1, 1, '#1a1a1a'); R(c, px + 5, py - 11, 3, 1, shadeHex(col, .6)); } }
       const ux = x + w - 34; ell(c, ux + 14, y + 52, 13, 12, '#b8864a'); ell(c, ux + 14, y + 34, 10, 9, '#b8864a'); ell(c, ux + 6, y + 26, 4, 4, '#b8864a'); ell(c, ux + 22, y + 26, 4, 4, '#b8864a'); ell(c, ux + 14, y + 37, 5, 4, '#e8c896'); ell(c, ux + 14, y + 52, 8, 7, '#d8a86a'); R(c, ux + 10, y + 31, 2, 2, '#1a1a1a'); R(c, ux + 17, y + 31, 2, 2, '#1a1a1a'); R(c, ux + 13, y + 35, 3, 2, '#3a2418'); R(c, ux + 6, y + 42, 16, 3, '#c43c3a'); }
   }
@@ -1035,22 +1037,39 @@
       if (id === 16) for (const cx of [x - 8, x + w + 2]) { R(c, cx, FLOOR - 9, 6, 9, '#f08a24'); R(c, cx + 1, FLOOR - 6, 4, 2, '#f2f2ee'); } }
   }
   const textOf = (d) => (c, camera) => { c.save(); c.translate(-Math.round(camera), 0); for (const [x, y, str, size, col] of d.labels || []) text(c, str, x * 2, y * 2, size, col); c.restore(); };
-  for (const d of LIST) { const draw = d.draw; window.HdMaps.register(d.id, { ...d, text: textOf(d), draw: (c, s, t, camL) => { draw(c, s, t, camL); holes(c, d.id, camL); } }); window.Interact?.addScene?.(d.id, d.interact || []); }
+  const PUBLIC = [];
+  function registrar(d, layout) { // usado aqui e pelos ambientes (cenas 22+)
+    if (layout) LAYOUT[d.id] = layout; if (!LAYOUT[d.id]) LAYOUT[d.id] = { platforms: [], gaps: [] };
+    const draw = d.draw; window.HdMaps.register(d.id, { ...d, always: true, text: textOf(d), draw: (c, s, t, camL) => { draw(c, s, t, camL); holes(c, d.id, camL); } }); window.Interact?.addScene?.(d.id, d.interact || []);
+    const i = LIST.findIndex((x) => x.id === d.id); if (i >= 0) LIST[i] = d; else LIST.push(d);
+    const pub = Object.freeze({ id: d.id, key: d.key, nome: d.nome, lugar: d.lugar, largura: d.width, noite: !!d.noite, interno: !!d.amb, plataformas: LAYOUT[d.id].platforms, vaos: LAYOUT[d.id].gaps, interativos: (d.interact || []).length, grupo: d.grupo || 'cenario' });
+    const j = PUBLIC.findIndex((x) => x.id === d.id); if (j >= 0) PUBLIC[j] = pub; else PUBLIC.push(pub);
+    if (d.plat) PLAT[d.id] = d.plat;
+  }
+  for (const d of LIST.slice()) registrar(d);
 
   // Art.drawScene para as cenas novas (também na qualidade baixa, que não usa o HdMaps nas fases antigas)
   const baseScene = window.Art?.drawScene;
   if (baseScene) window.Art.drawScene = function (c, scene, camera = 0, t = 0) {
-    if (!(scene >= 12 && scene <= 21)) return baseScene(c, scene, camera, t);
+    if (!(scene >= 12 && LIST.some((d) => d.id === scene))) return baseScene(c, scene, camera, t);
     c.save(); c.imageSmoothingEnabled = false; c.beginPath(); c.rect(0, 0, 960, 540); c.clip();
     if (window.HdMaps.draw(c, scene, Number(camera) || 0, Number(t) || 0)) window.HdMaps.finish(c, scene);
     c.restore();
   };
+  // ferramentas de desenho para os outros arquivos da Campanha 2 (mesmo estilo e mesmas peças)
+  const arte = Object.freeze({ K, GY, R, ell, mk, hash, cl, mix, dither, limb, sky, haze, tile, tree, slant, sunInfo, sunWall, board, bench, lampPost, lampGlow, shadeAdd, lightAdd, vis, night, text, shadeHex, pick,
+    plaster, brick, azulejo, roofTiles, janela, ac, caixaDagua, antena, parabolica, varal, gato, cachorro, plantaVaso, grafite, cartaz, bandeirinhas, predio, loja, casa,
+    orelhao, banca, ponto, lixeira, hidrante, placaRua, moto, bike, carro, poste, fios, canteiro, ipe, mesaBar, calcada, asfalto, pedraPortuguesa, pisoInterno, terra,
+    conquistaBack, fog, cityNight, passaros, pipas, gente, pessoa, coluna, reflexo, vgrad, lerpC, produtos, lojaFrente, OBJ, objetos, chaoDetalhe, ilhaTerra, sombra: (c, x, y, w) => sombra(c, x, y, w), Q, QL, concretoBase,
+    shopFar: () => (SHOPFAR || (SHOPFAR = buildShopFar())), SHOP, heroiPos: () => HERO });
 
   window.CampanhaCenarios = Object.freeze({
-    lista: Object.freeze(LIST.map((d) => Object.freeze({ id: d.id, key: d.key, nome: d.nome, lugar: d.lugar, largura: d.width, noite: !!d.noite, interno: !!d.amb, plataformas: LAYOUT[d.id].platforms, vaos: LAYOUT[d.id].gaps, interativos: (d.interact || []).length }))),
+    get lista() { return Object.freeze(PUBLIC.slice()); },
     largura: (id) => LIST.find((d) => d.id === id)?.width || 0,
     layout: (id) => LAYOUT[id] || null,
     plataforma,
-    heroi
+    heroi,
+    registrar,
+    arte
   });
 })();
