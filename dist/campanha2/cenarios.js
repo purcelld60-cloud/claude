@@ -628,38 +628,93 @@
   /* =====================================================================
      20 · SHOPPING
      ===================================================================== */
-  const SHOP = { W: 2000, CINE: 820, LAN: 1320 };
+  const SHOP = { W: 2000, CINE: 830, LAN: 1340, ELEV: 1228, FONTE: 1290 };
+  const LOJAS = ['MODA', 'GAMES', 'TÊNIS', 'PERFUMES', 'LIVROS', 'CELULAR', 'ÓCULOS', 'BRINQUEDOS', 'RELÓGIOS', 'SAPATOS', 'ESPORTE', 'MÚSICA', 'PRESENTES'];
+  function vitrine(c, x, y, w, h, kind, i) { // o que aparece em cada loja do andar de cima
+    const k = kind, c3 = (j) => pick(['#d9634a', '#3c6aa8', '#f2efe6', '#e8c24c', '#3c8a5a', '#c86ab8', '#2a2a2a'], i * 5 + j);
+    if (k === 'MODA') for (let j = 0; j < 4; j++) { const mx = x + 10 + j * 28; R(c, mx + 3, y + 6, 6, 6, '#e8d8c8'); R(c, mx, y + 12, 12, 14, c3(j)); R(c, mx + 2, y + 26, 3, 8, '#3a4a6a'); R(c, mx + 7, y + 26, 3, 8, '#3a4a6a'); R(c, mx + 5, y + 34, 2, 4, '#8a8a86'); }
+    if (k === 'GAMES') { R(c, x + 8, y + 4, 40, 24, '#1a1c28'); R(c, x + 10, y + 6, 36, 20, '#3c8ae0'); R(c, x + 18, y + 12, 10, 8, '#5ae070'); for (let j = 0; j < 8; j++) R(c, x + 56 + (j % 4) * 14, y + 6 + Math.floor(j / 4) * 16, 11, 14, c3(j)); R(c, x + 10, y + 32, 20, 6, '#2a2a2a'); }
+    if (k === 'TÊNIS' || k === 'SAPATOS' || k === 'ESPORTE') for (let r = 0; r < 3; r++) { R(c, x + 6, y + 10 + r * 11, w - 12, 2, '#b8a48a'); for (let j = 0; j < 6; j++) { R(c, x + 10 + j * 17, y + 5 + r * 11, 12, 5, c3(j + r)); R(c, x + 10 + j * 17, y + 8 + r * 11, 12, 2, '#f2efe6'); } }
+    if (k === 'ESPORTE') { ell(c, x + w - 20, y + 30, 6, 6, '#f2efe6'); R(c, x + w - 22, y + 28, 4, 4, '#2a2a2a'); }
+    if (k === 'PERFUMES') for (let r = 0; r < 2; r++) { R(c, x + 6, y + 18 + r * 16, w - 12, 2, '#d8d0c0'); for (let j = 0; j < 9; j++) { R(c, x + 10 + j * 12, y + 8 + r * 16, 6, 10, pick(['#e8a8c8', '#a8c8e8', '#f2d898', '#c8e8b8', '#d8b8e8'], j + r)); R(c, x + 12 + j * 12, y + 6 + r * 16, 2, 2, '#c8a24a'); } }
+    if (k === 'LIVROS' || k === 'MÚSICA') for (let r = 0; r < 3; r++) { R(c, x + 6, y + 12 + r * 11, w - 12, 2, '#8a6a45'); for (let j = 0; j < 30; j++) R(c, x + 8 + j * 4, y + 4 + r * 11 + (j % 3), 3, 8 - (j % 3), c3(j + r * 3)); }
+    if (k === 'MÚSICA') for (let j = 0; j < 3; j++) { ell(c, x + 30 + j * 30, y + 30, 6, 7, '#c47a35'); R(c, x + 29 + j * 30, y + 6, 2, 22, '#5a3a20'); }
+    if (k === 'CELULAR' || k === 'RELÓGIOS' || k === 'ÓCULOS') { R(c, x + 6, y + 28, w - 12, 8, '#e8e4dc'); for (let j = 0; j < 7; j++) { const px = x + 10 + j * 16; if (k === 'CELULAR') { R(c, px, y + 14, 8, 14, '#1a1a1a'); R(c, px + 1, y + 15, 6, 11, pick(['#3c8ae0', '#e05a8a', '#5ae070', '#f2c94c'], j)); } else if (k === 'RELÓGIOS') { ell(c, px + 4, y + 18, 5, 5, '#c8a24a'); ell(c, px + 4, y + 18, 3, 3, '#f2efe6'); R(c, px + 4, y + 16, 1, 3, '#2a2a2a'); } else { R(c, px, y + 20, 6, 3, '#2a2a2a'); R(c, px + 7, y + 20, 6, 3, '#2a2a2a'); R(c, px + 1, y + 21, 4, 1, '#7ac8e8'); } } }
+    if (k === 'BRINQUEDOS') for (let j = 0; j < 6; j++) { const px = x + 10 + j * 19; ell(c, px + 6, y + 24, 7, 8, c3(j)); ell(c, px + 6, y + 14, 5, 5, c3(j)); R(c, px + 2, y + 9, 3, 3, c3(j)); R(c, px + 8, y + 9, 3, 3, c3(j)); R(c, px + 4, y + 13, 1, 1, '#2a2a2a'); R(c, px + 7, y + 13, 1, 1, '#2a2a2a'); }
+    if (k === 'PRESENTES') for (let j = 0; j < 7; j++) { const px = x + 8 + j * 17, ph = 10 + (j % 3) * 6; R(c, px, y + 36 - ph, 14, ph, c3(j)); R(c, px + 6, y + 36 - ph, 2, ph, '#f2c94c'); R(c, px, y + 36 - ph + 3, 14, 2, '#f2c94c'); }
+  }
   function buildShop() {
     const [cv, c] = mk(SHOP.W, LH);
-    R(c, 0, 0, SHOP.W, 30, '#cfd4d8'); for (let x = 0; x < SHOP.W; x += 80) { R(c, x + 10, 4, 60, 22, '#8ab4cc'); R(c, x + 12, 6, 56, 6, '#c4e0ec'); limb(c, [[x + 10, 26], [x + 70, 4]], 1, '#9aa8b0'); }
-    plaster(c, 0, 30, SHOP.W, 180, '#ece8e0', 2000);
-    // piso de cima: lojas com vitrines e manequins atrás do guarda-corpo de vidro
-    for (let x = 20, i = 0; x < SHOP.W - 100; x += 150, i++) { R(c, x, 40, 130, 60, '#d8d4cc'); const col = pick(['#c43c3a', '#3c6aa8', '#e8833a', '#7a3a8a', '#3c8a5a', '#2a2a2a'], i); R(c, x + 4, 44, 122, 12, col); R(c, x + 8, 60, 114, 38, '#9fc4d0'); R(c, x + 8, 60, 114, 10, '#c4e0ec'); for (let k = 0; k < 3; k++) { R(c, x + 20 + k * 34, 70, 6, 6, '#e8d8c8'); R(c, x + 18 + k * 34, 76, 10, 14, pick(['#d9634a', '#3c6aa8', '#f2efe6', '#e8c24c'], i + k)); R(c, x + 22 + k * 34, 90, 2, 8, '#8a8a86'); } }
-    R(c, 0, 100, SHOP.W, 6, '#9aa0a6'); R(c, 0, 106, SHOP.W, 12, 'rgba(180,220,230,.45)'); R(c, 0, 106, SHOP.W, 1, '#f2f6f8'); for (let x = 0; x < SHOP.W; x += 40) R(c, x, 106, 1, 12, '#c8d4d8');
-    // praça de alimentação no térreo
-    for (let x = 30, i = 0; x < 700; x += 120, i++) { const col = pick(['#e8833a', '#c43c3a', '#e8c24c', '#3c8a5a', '#7a3a8a'], i); R(c, x, 130, 100, 44, '#d8d4cc'); R(c, x + 4, 132, 92, 12, col); R(c, x + 6, 148, 88, 26, '#f2ece0'); for (let k = 0; k < 4; k++) R(c, x + 10 + k * 20, 152, 14, 10, pick(['#c4743a', '#e8c24c', '#7a4a2a', '#f2efe6', '#d9634a'], k + i)); R(c, x + 10, 176, 80, 34, '#b8a48a'); R(c, x + 10, 176, 80, 3, '#d8c8a8'); }
-    for (let k = 0; k < 7; k++) mesaBar(c, 50 + k * 90);
-    // cinema e lan house
-    const cx = SHOP.CINE; R(c, cx, 120, 380, 90, '#2a2430'); R(c, cx + 10, 126, 360, 18, '#1a1420'); for (let k = 0; k < 4; k++) { R(c, cx + 20 + k * 90, 150, 60, 50, '#3a3440'); const pc = ['#3c6aa8', '#c43c3a', '#3c8a5a', '#e8833a'][k]; R(c, cx + 23 + k * 90, 153, 54, 44, pc); R(c, cx + 30 + k * 90, 160, 40, 18, '#f2ece0'); R(c, cx + 34 + k * 90, 182, 32, 8, shadeHex(pc, .7)); } R(c, cx + 150, 196, 80, 14, '#c43c3a');
-    const lx = SHOP.LAN; R(c, lx, 120, 560, 90, '#1a1c28'); R(c, lx, 120, 560, 4, '#5ae0d0'); for (let k = 0; k < 7; k++) { const x = lx + 20 + k * 76; R(c, x, 166, 50, 6, '#3a3c48'); R(c, x + 10, 140, 30, 24, '#2a2c38'); R(c, x + 20, 172, 6, 38, '#3a3c48'); R(c, x + 4, 186, 14, 24, '#c43c3a'); R(c, x + 6, 168, 14, 3, '#5a5c68'); } for (let k = 0; k < 3; k++) { R(c, lx + 440 + k * 30, 150, 24, 60, '#2a2c38'); R(c, lx + 443 + k * 30, 154, 18, 14, '#5ae070'); }
-    // quiosques no meio, escada rolante, planta e fonte
-    for (const kx of [740, 1240]) { R(c, kx, 176, 50, 34, '#e8e2d2'); R(c, kx, 170, 50, 8, '#3c6aa8'); for (let k = 0; k < 6; k++) R(c, kx + 4 + k * 7, 182, 5, 8, pick(['#d9634a', '#e8c24c', '#5f9fd0', '#7cbf6a'], k + kx)); }
-    for (let k = 0; k < 40; k++) R(c, 760 + k * 2, 206 - k * 2.2, 4, 2, '#9aa0a6'); limb(c, [[760, 196], [840, 108]], 2, '#5a6066');
-    for (const px of [16, 600, 1880]) { R(c, px, 186, 18, 24, '#8a8a86'); for (let k = 0; k < 8; k++) ell(c, px + 3 + k * 2, 176 - (k % 3) * 8, 4, 6, k % 2 ? '#4f8a3a' : '#5f9a46'); }
-    objetos(c, 20, SHOP.W, 'interno', 1220, 1300, [60, 80]); OBJ.pisoMolhado(c, 560, 0); OBJ.vaso(c, 1900, 1); pisoInterno(c, SHOP.W, '#e6e2d8', '#d2cec2', 24); chaoDetalhe(c, SHOP.W, 'interno');
+    // teto com claraboia em arco (o céu aparece) e treliças
+    R(c, 0, 0, SHOP.W, 32, '#d4d8dc'); for (let x = 0; x < SHOP.W; x += 100) { c.clearRect(x + 8, 2, 84, 22); for (let k = 0; k < 84; k += 12) R(c, x + 8 + k, 2, 1, 22, '#8a98a2'); R(c, x + 8, 12, 84, 1, '#8a98a2'); R(c, x + 6, 0, 88, 2, '#7a8892'); R(c, x + 6, 24, 88, 3, '#7a8892'); }
+    R(c, 0, 27, SHOP.W, 5, '#b8c0c6'); for (let x = 20; x < SHOP.W; x += 40) { R(c, x, 30, 6, 3, '#5a6066'); R(c, x + 1, 33, 4, 2, '#fff6d8'); }
+    plaster(c, 0, 35, SHOP.W, 175, '#ece8e0', 2000);
+    // andar de cima: lojas com vitrines diferentes, colunas com anúncios
+    for (let x = 20, i = 0; x < SHOP.W - 100; x += 150, i++) { const kind = LOJAS[i % LOJAS.length], col = pick(['#c43c3a', '#3c6aa8', '#e8833a', '#7a3a8a', '#3c8a5a', '#2a2a2a', '#c8a24a'], i);
+      R(c, x - 1, 39, 132, 62, '#9aa0a6'); R(c, x, 40, 130, 60, '#e2ded6'); R(c, x + 4, 42, 122, 12, col); R(c, x + 4, 42, 122, 2, shadeHex(col, 1.3)); R(c, x + 6, 44, 8, 8, '#f2efe6'); R(c, x + 8, 46, 4, 4, col);
+      R(c, x + 6, 56, 118, 42, '#c4dce4'); vitrine(c, x + 6, 58, 118, 38, kind, i); R(c, x + 6, 56, 118, 42, 'rgba(200,230,240,.18)'); limb(c, [[x + 20, 96], [x + 40, 58]], 1, 'rgba(255,255,255,.5)'); R(c, x + 60, 56, 2, 42, '#9aa0a6');
+      R(c, x + 132, 38, 14, 64, '#d4d0c6'); R(c, x + 134, 50, 10, 24, pick(['#e8c24c', '#3c8ad8', '#c43c3a', '#3c8a5a'], i + 3)); R(c, x + 135, 52, 8, 4, '#f2efe6'); }
+    // guarda-corpo de vidro do andar de cima
+    R(c, 0, 100, SHOP.W, 5, '#a8b0b6'); R(c, 0, 100, SHOP.W, 1, '#e8ecee'); R(c, 0, 105, SHOP.W, 13, 'rgba(180,220,230,.45)'); R(c, 0, 105, SHOP.W, 1, '#f6fafc'); for (let x = 0; x < SHOP.W; x += 40) R(c, x, 105, 1, 13, '#c8d4d8'); R(c, 0, 118, SHOP.W, 3, '#8a9298');
+    // praça de alimentação: balcões com cardápio de fotos e mesas
+    for (let x = 30, i = 0; x < 700; x += 120, i++) { const col = pick(['#e8833a', '#c43c3a', '#e8c24c', '#3c8a5a', '#7a3a8a', '#c4743a'], i);
+      R(c, x, 128, 100, 48, '#d8d4cc'); R(c, x + 4, 130, 92, 12, col); R(c, x + 6, 146, 88, 22, '#1e1e24'); for (let k = 0; k < 4; k++) { R(c, x + 9 + k * 21, 148, 18, 12, '#f2ece0'); R(c, x + 11 + k * 21, 150, 14, 7, pick(['#c4743a', '#e8c24c', '#7a4a2a', '#d9634a', '#7cbf6a'], k + i)); R(c, x + 12 + k * 21, 161, 12, 2, '#f2c94c'); }
+      R(c, x + 6, 168, 88, 8, '#f2ece0'); R(c, x + 20, 162, 8, 6, '#e0b08a'); R(c, x + 18, 160, 12, 3, '#f2efe6'); R(c, x + 10, 176, 80, 34, shadeHex(col, .75)); R(c, x + 10, 176, 80, 3, shadeHex(col, 1.1)); for (let k = 0; k < 3; k++) R(c, x + 16 + k * 24, 184, 14, 2, '#f2efe6'); }
+    for (let k = 0; k < 7; k++) { const mx = 46 + k * 92; mesaBar(c, mx); if (k % 2 === 0) { gente(c, mx - 6, GY - 2, k + 1, false); R(c, mx + 4, GY - 12, 6, 2, '#f2efe6'); R(c, mx + 5, GY - 14, 4, 2, pick(['#c4743a', '#e8c24c', '#d9634a'], k)); } }
+    for (let k = 0; k < 5; k++) { const bx = 500 + k * 6; limb(c, [[bx, 184], [bx + Math.sin(k) * 4, 150 - k * 3]], 1, '#9aa0a6'); ell(c, bx + Math.sin(k) * 4, 146 - k * 3, 4, 5, pick(['#e8433a', '#3c9ad8', '#f2c94c', '#c86ab8', '#7ac85a'], k)); }
+    // escada rolante de verdade: painel lateral, degraus e corrimão
+    for (let k = 0; k <= 44; k++) { const x = 720 + k * 2.2, y = 210 - k * 2.2; R(c, x, y, 6, 8, '#b8c0c6'); R(c, x, y + 8, 6, 4, '#8a949a'); } limb(c, [[718, 196], [818, 98]], 3, '#2a2a2a'); limb(c, [[718, 192], [818, 94]], 1, '#5a5a5a'); R(c, 712, 196, 14, 14, '#8a949a'); R(c, 812, 98, 14, 6, '#8a949a');
+    // cinema: letreiro, cartazes iluminados, telas de horário e pipoqueira
+    const cx = SHOP.CINE; R(c, cx, 120, 380, 90, '#2a2430'); R(c, cx + 10, 124, 360, 20, '#1a1420'); for (let k = 0; k < 4; k++) { R(c, cx + 18 + k * 90, 150, 62, 44, '#d8c08a'); const pc = ['#3c6aa8', '#c43c3a', '#3c8a5a', '#e8833a'][k]; R(c, cx + 21 + k * 90, 153, 56, 38, pc); R(c, cx + 26 + k * 90, 158, 46, 14, '#f2ece0'); ell(c, cx + 49 + k * 90, 180, 8, 6, shadeHex(pc, .6)); R(c, cx + 26 + k * 90, 186, 46, 2, '#f2efe6'); }
+    R(c, cx + 20, 196, 120, 10, '#14101a'); R(c, cx + 240, 150, 26, 44, '#c43c3a'); R(c, cx + 242, 152, 22, 20, '#fff6d0'); R(c, cx + 244, 174, 18, 2, '#f2c94c'); R(c, cx + 150, 196, 80, 14, '#c43c3a');
+    // elevador panorâmico (o tubo; a cabine anda) e fonte com planta
+    R(c, SHOP.ELEV, 34, 40, 176, 'rgba(170,215,230,.35)'); R(c, SHOP.ELEV, 34, 2, 176, '#9aa6ae'); R(c, SHOP.ELEV + 38, 34, 2, 176, '#9aa6ae'); R(c, SHOP.ELEV + 19, 34, 2, 176, '#5a6066');
+    ell(c, SHOP.FONTE + 24, 206, 26, 5, '#8a949a'); ell(c, SHOP.FONTE + 24, 204, 24, 4, '#5aa8c8'); ell(c, SHOP.FONTE + 24, 203, 20, 3, '#8ad0e4'); R(c, SHOP.FONTE + 21, 186, 6, 18, '#c8ccce');
+    // lan house: neon, PCs, cadeiras gamer, cartazes de jogo; máquina de pelúcia e carrinho infantil na porta
+    const lx = SHOP.LAN; R(c, lx, 120, 560, 90, '#14161f'); R(c, lx, 120, 560, 3, '#5ae0d0'); R(c, lx, 207, 560, 3, '#e05a8a');
+    for (let k = 0; k < 6; k++) { const x = lx + 16 + k * 70; R(c, x, 166, 50, 6, '#3a3c48'); R(c, x + 10, 138, 32, 26, '#2a2c38'); R(c, x + 24, 172, 4, 38, '#3a3c48'); R(c, x + 2, 178, 16, 30, '#c43c3a'); R(c, x + 2, 178, 16, 4, '#2a2a2a'); R(c, x + 6, 168, 16, 3, '#5a5c68'); gente(c, x + 6, 198, k + 3, false); R(c, x + 6, 178, 6, 2, '#1a1a1a'); }
+    for (let k = 0; k < 4; k++) { R(c, lx + 440 + (k % 2) * 30, 128 + Math.floor(k / 2) * 22, 24, 18, pick(['#c43c3a', '#3c6aa8', '#e8c24c', '#7a3a8a'], k)); R(c, lx + 444 + (k % 2) * 30, 132 + Math.floor(k / 2) * 22, 16, 6, '#f2efe6'); }
+    R(c, lx + 500, 150, 34, 60, '#e05a8a'); R(c, lx + 503, 154, 28, 26, '#bfe8f0'); for (let k = 0; k < 6; k++) ell(c, lx + 508 + (k % 3) * 8, 174 - Math.floor(k / 3) * 6, 3, 3, pick(['#f2c94c', '#3c9ad8', '#e8433a', '#7ac85a'], k)); R(c, lx + 515, 156, 2, 8, '#8a8a86'); R(c, lx + 512, 164, 8, 3, '#c8a24a');
+    R(c, 1900, 186, 30, 18, '#3c9ad8'); R(c, 1906, 178, 14, 10, '#3c9ad8'); ell(c, 1906, 206, 4, 4, '#1c1c1c'); ell(c, 1924, 206, 4, 4, '#1c1c1c'); R(c, 1908, 180, 10, 4, '#bfe8f0');
+    for (const px of [16, 620, 1960]) { R(c, px, 186, 18, 24, '#8a8a86'); for (let k = 0; k < 8; k++) ell(c, px + 3 + k * 2, 176 - (k % 3) * 8, 4, 6, k % 2 ? '#4f8a3a' : '#5f9a46'); }
+    OBJ.pisoMolhado(c, 560, 0); pisoInterno(c, SHOP.W, '#e9e5dc', '#d6d2c6', 24);
+    for (let x = 0; x < SHOP.W; x += 6) if (hash(x * .7) > .55) R(c, x, 226 + Math.round(hash(x) * 8), 4, 1, 'rgba(255,255,255,.35)'); // reflexo do piso encerado
     return cv;
   }
   let shopMid = null;
   function shopping(c, s, t, camL) {
     if (!shopMid) shopMid = buildShop();
     sky(c, s, t, camL); c.drawImage(shopMid, camL, 0, LW, LH, 0, 0, LW, LH);
-    for (let k = 0; k < 7; k++) { const x = SHOP.LAN + 32 + k * 76 - camL; if (vis(x, 30)) { R(c, x, 142, 26, 18, ['#3c8ae0', '#5ae070', '#e05a8a'][(k + Math.floor(t * 2)) % 3]); R(c, x + 2, 144 + (Math.floor(t * 6 + k) % 12), 6, 2, '#f2f2ee'); } }
-    { const x = SHOP.CINE + 10 - camL; if (vis(x, 380)) for (let k = 0; k < 360; k += 6) R(c, x + 2 + k, 128, 3, 3, (Math.floor(t * 5) + k / 6) % 4 ? '#ffe39a' : '#8a6a3a'); }
-    for (let k = 0; k < 20; k++) { const ph = (t * .4 + k / 20) % 1, x = 760 + ph * 80 - camL, y = 206 - ph * 88; if (vis(x, 10)) R(c, x, y - 1, 4, 1, '#c8ccce'); }
-    for (let i = 0; i < 16; i++) { const wx = 40 + i * 125 + Math.sin(t * .35 + i * 2) * 50, sx = wx - camL; if (vis(sx, 20)) gente(c, sx, 214, i, false); }
-    for (let i = 0; i < 8; i++) { const wx = 60 + i * 240 + Math.sin(t * .25 + i) * 40, sx = wx - camL; if (vis(sx, 20)) { R(c, sx, 92, 4, 8, pick(['#3a4a6a', '#c43c3a', '#4a6a4a'], i)); R(c, sx, 89, 4, 3, pick(['#e0b08a', '#9a6440'], i)); } }
+    // raios de sol entrando pela claraboia
+    if (s.sunT !== null) { const a = .1 * (1 - s.night); c.fillStyle = `rgba(255,248,220,${a})`; for (let x = ((-camL) % 100 + 100) % 100 - 100; x < LW + 100; x += 100) { c.beginPath(); c.moveTo(x + 10, 26); c.lineTo(x + 90, 26); c.lineTo(x + 130, 210); c.lineTo(x + 40, 210); c.closePath(); c.fill(); } }
+    // faixas do Festival de Inverno e plantas penduradas balançando
+    for (let x = 60; x < SHOP.W; x += 300) { const sx = x - camL, sw = Math.round(Math.sin(t * 1.2 + x) * 1); if (!vis(sx, 70)) continue; R(c, sx + sw, 104, 62, 13, '#2c5a8a'); R(c, sx + sw, 104, 62, 2, '#5a8ac0'); for (let k = 0; k < 6; k++) R(c, sx + 4 + k * 11 + sw, 117, 6, 3, '#f2c94c'); R(c, sx + 4 + sw, 108, 6, 4, '#f2efe6'); }
+    for (let x = 210; x < SHOP.W; x += 300) { const sx = x - camL + Math.sin(t * .9 + x) * 1.5; if (!vis(sx, 20)) continue; R(c, sx, 121, 1, 6, '#5a6066'); R(c, sx - 5, 127, 11, 6, '#c47a35'); for (let k = 0; k < 6; k++) R(c, sx - 6 + k * 2, 133 + (k % 3) * 2, 2, 4 + (k % 2) * 4, k % 2 ? '#4f8a3a' : '#6aa64a'); }
+    // gente no andar de cima com sacolas
+    for (let i = 0; i < 9; i++) { const wx = 40 + i * 215 + Math.sin(t * .22 + i) * 70, sx = wx - camL; if (!vis(sx, 20)) continue; gente(c, sx, 100, i + 2, false); R(c, sx + 6, 92, 4, 5, pick(['#c43c3a', '#3c6aa8', '#f2c94c', '#2a2a2a'], i)); }
+    // elevador panorâmico subindo e descendo
+    { const x = SHOP.ELEV - camL; if (vis(x, 60)) { const u = (Math.sin(t * .35) + 1) / 2, y = 40 + u * 136; R(c, x + 2, y, 36, 32, 'rgba(200,235,245,.6)'); R(c, x + 2, y, 36, 2, '#c8ccce'); R(c, x + 2, y + 30, 36, 2, '#8a949a'); gente(c, x + 10, y + 30, 4, false); gente(c, x + 22, y + 30, 7, false); R(c, x + 19, 34, 2, y - 34, '#3a3a3a'); } }
+    // escada rolante: degraus andando e gente subindo
+    for (let k = 0; k < 22; k++) { const ph = (t * .18 + k / 22) % 1, x = 720 + ph * 96 - camL, y = 210 - ph * 96; if (vis(x, 10)) { R(c, x, y - 1, 6, 1, '#e2e6ea'); R(c, x, y, 6, 1, '#6a7076'); } }
+    for (let i = 0; i < 2; i++) { const ph = (t * .18 + i * .5) % 1, x = 724 + ph * 96 - camL, y = 208 - ph * 96; if (vis(x, 10)) gente(c, x, y, i + 5, false); }
+    // fonte com jatos d'água
+    { const fx = SHOP.FONTE + 24 - camL; if (vis(fx, 40)) for (let j = 0; j < 5; j++) { const a = (j - 2) / 2; for (let k = 0; k < 10; k++) { const u = k / 9, px = fx + a * 16 * u, py = 186 - Math.sin(u * Math.PI) * (12 - Math.abs(a) * 4) + u * 16; R(c, px, py, 1, 2, (k + Math.floor(t * 8)) % 3 ? '#bfe8f0' : '#ffffff'); } } }
+    // cinema: lâmpadas do letreiro correndo, pipoca estourando e fila
+    { const x = SHOP.CINE + 10 - camL; if (vis(x, 380)) { for (let k = 0; k < 360; k += 6) R(c, x + 2 + k, 140, 3, 3, (Math.floor(t * 5) + k / 6) % 4 ? '#ffe39a' : '#8a6a3a'); const msg = (Math.floor(t * 8) % 60); R(c, x + 10 + msg * 2, 197, 20, 3, '#ff6a3a'); } }
+    { const px = SHOP.CINE + 242 - camL; if (vis(px, 30)) for (let k = 0; k < 6; k++) { const ph = (t * 2 + k / 6) % 1; R(c, px + 2 + k * 3, 168 - ph * 14 + Math.sin(k) * 2, 2, 2, '#fff6d0'); } }
+    for (let i = 0; i < 5; i++) { const sx = SHOP.CINE + 40 + i * 14 - camL; if (vis(sx, 20)) gente(c, sx, 210, i + 1, false); }
+    // lan house: telas mudando, LEDs pulsando e "GG!" de vez em quando
+    for (let k = 0; k < 6; k++) { const x = SHOP.LAN + 26 + k * 70 - camL; if (!vis(x, 30)) continue; R(c, x, 140, 28, 22, ['#3c8ae0', '#5ae070', '#e05a8a', '#f2c94c'][(k + Math.floor(t * 1.5)) % 4]); R(c, x + 2 + (Math.floor(t * 9 + k * 3) % 20), 150, 4, 4, '#f2f2ee'); R(c, x + 4, 156, 6, 2, '#1a1a1a'); }
+    { const lx = SHOP.LAN - camL; if (vis(lx, 600)) { const hue = Math.floor(t * 3) % 3; R(c, lx, 120, 560, 3, ['#5ae0d0', '#e05a8a', '#f2c94c'][hue]); R(c, lx, 207, 560, 3, ['#e05a8a', '#f2c94c', '#5ae0d0'][hue]); const gg = Math.floor(t / 4) % 6; if ((t % 4) < 1.2) { const gx = lx + 30 + gg * 70; R(c, gx, 118 - (t % 4) * 6, 22, 10, '#f2efe6'); R(c, gx + 2, 120 - (t % 4) * 6, 18, 6, '#3c8a5a'); } } }
+    // máquina de pelúcia piscando e carrinho infantil balançando
+    { const x = SHOP.LAN + 500 - camL; if (vis(x, 40)) { R(c, x + 2, 150, 30, 2, Math.sin(t * 6) > 0 ? '#f2c94c' : '#e05a8a'); const gx = x + 8 + Math.sin(t * .8) * 8; R(c, gx, 156, 2, 6 + Math.abs(Math.sin(t * .5)) * 8, '#8a8a86'); } }
+    { const x = 1900 - camL; if (vis(x, 40)) { const rock = Math.round(Math.sin(t * 4) * 1); R(c, x + 2, 184 + rock, 26, 2, Math.sin(t * 5) > 0 ? '#f2c94c' : '#e05a8a'); gente(c, x + 10, 190 + rock, 9, false); } }
+    // faxineiro passando o rodo, segurança e muita gente com sacolas no térreo
+    { const x = 540 - camL + Math.sin(t * 1.5) * 6; if (vis(x, 30)) { gente(c, x, 214, 6, false); R(c, x, 201, 6, 2, '#3c8ad8'); limb(c, [[x + 6, 204], [x + 14, 214]], 1, '#8a6a45'); R(c, x + 10, 213, 10, 2, '#5a5a5a'); } }
+    { const x = 1180 - camL; if (vis(x, 20)) { gente(c, x, 214, 5, false); R(c, x, 201, 6, 8, '#1e1e24'); R(c, x + 1, 198, 4, 2, '#1e1e24'); } }
+    for (let i = 0; i < 18; i++) { const wx = 40 + i * 112 + Math.sin(t * .35 + i * 2) * 50, sx = wx - camL; if (!vis(sx, 20)) continue; gente(c, sx, 216, i, false); if (i % 3 !== 1) { R(c, sx + 6, 206, 4, 6, pick(['#c43c3a', '#3c6aa8', '#f2c94c', '#e86a8a', '#2a2a2a'], i)); R(c, sx + 7, 204, 2, 2, '#5a5a5a'); } }
   }
-  function shoppingLights(g, s, t, camL) { for (let x = 0; x < SHOP.W; x += 80) { const sx = x + 40 - camL; if (vis(sx)) lightAdd(sx, 26, .35, 70); } const lx = SHOP.LAN - camL; if (vis(lx, 600)) { g.fillStyle = 'rgba(90,224,208,.12)'; g.fillRect(lx, 120, 560, 94); } }
+  function shoppingLights(g, s, t, camL) { for (let x = 20; x < SHOP.W; x += 40) { const sx = x + 3 - camL; if (vis(sx)) lightAdd(sx, 34, .25, 50); } const lx = SHOP.LAN - camL; if (vis(lx, 600)) { g.fillStyle = 'rgba(90,224,208,.12)'; g.fillRect(lx, 120, 560, 94); } const cx = SHOP.CINE - camL; if (vis(cx, 380)) { g.fillStyle = 'rgba(255,227,154,.12)'; g.fillRect(cx, 136, 380, 10); for (let k = 0; k < 4; k++) { g.fillStyle = 'rgba(255,250,230,.14)'; g.fillRect(cx + 21 + k * 90, 153, 56, 38); } } for (let x = 20, i = 0; x < SHOP.W - 100; x += 150, i++) { const sx = x - camL; if (vis(sx, 140)) { g.fillStyle = 'rgba(255,250,235,.10)'; g.fillRect(sx + 6, 56, 118, 42); } } }
 
   /* =====================================================================
      21 · AVENIDA OLÍVIA FLORES E ESCOLA SESI
@@ -740,7 +795,7 @@
       labels: [[195, 132, 'CENTRO DE CULTURA', 8, '#f2efe6'], [CULTURA.TEATRO + 150, 113, 'TEATRO GLAUBER ROCHA', 9, '#ffe39a'], [CULTURA.TEATRO + 150, 125, 'HOJE: BIA DO ARROCHA', 6, '#f2efe6'], [CULTURA.DOME, 168, 'PLANETÁRIO', 8, '#2c3a44'], [1000, 160, 'PIPOCA', 6, '#2a2a2a'], [1120, 160, 'DOGÃO', 6, '#f2efe6'], [CULTURA.TEATRO + 150, 196, 'BILHETERIA', 5, '#2a2a2a']],
       interact: [['lever', 1500, 'party'], ['lever', 3400, 'flood'], ['pot', 900], ['pot', 3800], ['trash', 2300], ['crate', 2700], ['grill', 2100]] },
     { id: 20, key: 'shopping', nome: 'Shopping', lugar: 'Praça de alimentação, cinema e lan house', width: SHOP.W * 2, draw: shopping, lights: shoppingLights, amb: indoor(.8), always: true,
-      labels: [[SHOP.CINE + 190, 135, 'CINEMA', 9, '#ffe39a'], [SHOP.LAN + 280, 128, 'LAN HOUSE PLANALTO · 24H', 8, '#5ae0d0'], [500, 112, 'SHOPPING CONQUISTA · PONTO DA GALERA', 7, '#2c3a44'], [SHOP.CINE + 190, 203, 'BILHETERIA', 5, '#f2efe6']].concat(['BURGÃO', 'PASTEL', 'AÇAÍ', 'CAFÉ', 'SUSHI', 'CALDO'].map((n, i) => [80 + i * 120, 138, n, 6, '#f2efe6'])).concat(['MODA', 'GAMES', 'TÊNIS', 'PERFUMES', 'LIVROS', 'CELULAR', 'ÓCULOS', 'BRINQUEDOS', 'RELÓGIOS', 'SAPATOS', 'ESPORTE', 'MÚSICA', 'PRESENTES'].map((n, i) => [85 + i * 150, 50, n, 6, '#f2efe6'])),
+      labels: [[SHOP.CINE + 190, 134, 'CINEMA PLANALTO', 9, '#ffe39a'], [SHOP.LAN + 230, 128, 'LAN HOUSE PLANALTO · 24H', 8, '#5ae0d0'], [SHOP.CINE + 190, 203, 'BILHETERIA', 5, '#f2efe6'], [SHOP.CINE + 253, 147, 'PIPOCA', 4, '#f2efe6'], [SHOP.LAN + 517, 147, 'PELÚCIA', 4, '#f2efe6'], [SHOP.FONTE + 24, 214, 'JOGUE UMA MOEDA', 4, '#3c5a6a']].concat([60, 360, 660, 960, 1260, 1560, 1860].map((x) => [x + 34, 110, 'FESTIVAL DE INVERNO', 4, '#f2efe6'])).concat(['BURGÃO', 'PASTEL', 'AÇAÍ', 'CAFÉ', 'SUSHI', 'CALDO'].map((n, i) => [80 + i * 120, 136, n, 6, '#f2efe6'])).concat(LOJAS.map((n, i) => [85 + i * 150, 48, n, 6, '#f2efe6'])),
       interact: [['pot', 300], ['pot', 3700], ['trash', 1400], ['trash', 2600], ['ball', 2200], ['crate', 3400], ['crate', 3428, 1], ['puddle', 1100, 70], ['lever', 1800, 'party']] },
     { id: 21, key: 'olivia', nome: 'Olívia Flores e Escola SESI', lugar: 'Avenida Olívia Flores · Escola SESI', width: OLIVIA.W * 2, draw: olivia, lights: oliviaLights, always: true,
       labels: [[600, 165, 'AVENIDA OLÍVIA FLORES', 9, '#f2efe6'], [750, 182, 'CICLOVIA', 6, '#2a2a2a'], [OLIVIA.SESI + 120, 92, 'ESCOLA SESI', 10, '#2c5a9e'], [OLIVIA.SESI + 440, 80, 'QUADRA COBERTA', 7, '#2c3a44'], [OLIVIA.SESI + 740, 104, 'AUDITÓRIO', 7, '#2c5a9e'], [OLIVIA.SESI + 990, 104, 'LABORATÓRIO DE INFORMÁTICA', 6, '#2c5a9e'], [OLIVIA.SESI + 935, 157, 'MURAL', 5, '#2a2a2a']],

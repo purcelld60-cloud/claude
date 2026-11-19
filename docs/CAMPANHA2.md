@@ -89,7 +89,7 @@ Por isso os cenários novos têm o mesmo céu realista, a hora do dia, as sombra
 | 17 | Feira e biscoitarias | Barracas de lona colorida com frutas e grãos, três biscoitarias com potes de biscoito de polvilho e vapor saindo do forno |
 | 18 | Fazendas de café | Fileiras de café com grãos vermelhos, eucaliptos, sede com varanda, terreiro de secagem, secador girando, descascadora e caixa-d'água. Canais de irrigação |
 | 19 | Teatro e Planetário | Centro de Cultura (bloco cinza), Teatro Glauber Rocha com marquise de lâmpadas e cartazes, cúpula do Planetário, holofotes e estrelas. Fase noturna |
-| 20 | Shopping | Dois andares de lojas, praça de alimentação, cinema com cartazes, lan house com telas piscando e escada rolante |
+| 20 | Shopping | Claraboia com raios de sol, faixas do Festival de Inverno, plantas penduradas. Em cima: cada loja com vitrine própria (manequins, consoles, tênis, perfumes, livros, celulares, pelúcias, presentes) e gente com sacolas. Elevador panorâmico subindo e descendo, escada rolante com degraus andando. Embaixo: praça de alimentação com cardápios e gente comendo, balões, fonte com jatos, cinema com fila e pipoqueira, lan house com gamers, LEDs e "GG!", máquina de pelúcia, carrinho infantil, faxineiro com rodo e segurança |
 | 21 | Olívia Flores e Escola SESI | Avenida com ciclovia no canteiro central, coqueiros e prédios altos. Na escola: pátio, quadra coberta em arco, auditório e laboratório de informática |
 
 **Versão detalhada:** a primeira versão estava seca. Os cenários foram refeitos no nível dos mapas da campanha principal.
