@@ -134,6 +134,12 @@ Por isso os cenários novos têm o mesmo céu realista, a hora do dia, as sombra
 - **Lugares fechados:** carrinho de bagagem e placa de piso molhado.
 - **Chão da frente:** folhas secas, papéis e pedrinhas.
 
+**Fundo vivo:**
+- **Ao longe:** carrinhos na estrada do planalto, com farol à noite. Guindastes girando com o gancho balançando, fumaça subindo da cidade, bandeiras tremulando, árvores balançando com o vento, pássaros e pipas.
+- **Céu:** às vezes passa um avião deixando rastro.
+- **À noite:** janelas acendendo e apagando e as luzes das antenas da serra piscando.
+- **Fios dos postes:** no bairro e no centro há passarinhos que saem voando quando o Da Roça chega perto ou pula, e voltam depois. Para isso, o jogo informa a posição do herói com `CampanhaCenarios.heroi`.
+
 **Visualizador:** abra o jogo com `?cenarios2` no fim do endereço.
 - **Andar:** setas ou ◀ ▶.
 - **Pular:** espaço.

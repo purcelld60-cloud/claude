@@ -1069,7 +1069,7 @@
     ctx.save();ctx.translate(-Math.round(camera),0);
     window.CampaignVfx?.draw?.(ctx,time,'back');
     for(const p of scenePlatforms()){if(p[0]+p[2]<camera-60||p[0]>camera+W+60)continue;if(window.Graphics?.isLite?.()){ctx.fillStyle=scene===2?'#63736a':'#8d724f';ctx.fillRect(p[0],p[1],p[2],12);ctx.fillStyle=scene===0?'#abc378':'#c0ab7f';ctx.fillRect(p[0],p[1],p[2],4);ctx.fillStyle='#263c303d';ctx.fillRect(p[0]+8,p[1]+12,p[2]-16,4);}else drawPlank(p);}
-    window.Interact?.drawBack?.(ctx,{scene,camera,time,arena:!!arena,arenaType:arena?.type,homeX:arena?.homeX,room:!!room});window.Fliperama?.drawWorld?.(ctx,{scene,camera,time,arena:!!arena,room:!!room});window.Trigal?.drawBack?.(ctx,{scene,camera,time,player,arena:!!arena,room:!!room});window.CampanhaPlantas?.drawBack?.(ctx,{scene,camera,time,player,arena:!!arena,room:!!room});
+    window.Interact?.drawBack?.(ctx,{scene,camera,time,arena:!!arena,arenaType:arena?.type,homeX:arena?.homeX,room:!!room});window.Fliperama?.drawWorld?.(ctx,{scene,camera,time,arena:!!arena,room:!!room});window.Trigal?.drawBack?.(ctx,{scene,camera,time,player,arena:!!arena,room:!!room});window.CampanhaPlantas?.drawBack?.(ctx,{scene,camera,time,player,arena:!!arena,room:!!room});if(scene>=12)window.CampanhaCenarios?.heroi?.(player.x,player.y,player.vy);
     if(!arena){
     window.BivoltQuest?.draw?.(ctx,0,time,q,scene);
     if(scene===1)drawSchoolWatch();

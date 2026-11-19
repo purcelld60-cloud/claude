@@ -182,17 +182,56 @@
   // pássaros em bando e pipas (como na favela da campanha principal)
   function passaros(c, t, camL, n = 7, seed = 0) { for (let g = 0; g < 2; g++) { const bx = ((t * (12 + g * 5) + seed * 300 + g * 400 - camL * .1) % 700) - 100, by = 40 + g * 26 + Math.sin(t * .6 + g) * 6; for (let i = 0; i < n; i++) { const x = bx - Math.abs(i - n / 2) * 6, y = by + Math.abs(i - n / 2) * 3, f = Math.sin(t * 9 + i) > 0; R(c, x - 2, y - (f ? 1 : 0), 2, 1, '#3a3a40'); R(c, x + 1, y - (f ? 1 : 0), 2, 1, '#3a3a40'); R(c, x, y, 1, 1, '#3a3a40'); } } }
   function pipas(c, t, camL, seed = 0) { for (let i = 0; i < 3; i++) { const x = ((hash(i + seed) * 600 - camL * .3) % 560 + 560) % 560 - 40, y = 30 + hash(i * 3 + seed) * 50 + Math.sin(t * 1.4 + i) * 5, col = ['#e8433a', '#3c9ad8', '#f2c94c'][i]; const sw = Math.sin(t * 2 + i) * 2; R(c, x + sw, y, 5, 5, col); R(c, x + 1 + sw, y + 1, 3, 3, shadeHex(col, 1.2)); for (let k = 0; k < 8; k++) R(c, x + 2 + sw + Math.sin(t * 3 + k * .7 + i) * 2, y + 5 + k * 2, 1, 1, col); for (let k = 0; k < 40; k += 2) R(c, x + 2 + k * .9, y + 6 + k * 2.6, 1, 1, 'rgba(60,60,60,.45)'); } }
+  /* ---------- fundo vivo: tudo que se mexe lá longe ---------- */
+  const wrap = (v, T = 964) => ((v % T) + T) % T;
+  function aviao(c, s, t, camL) { // a cada ~45 s um avião cruza o céu deixando rastro
+    const per = 45, ph = (t % per) / per; if (ph > .5) return; const k = ph / .5, x = -40 + k * 560 - camL * .01, y = 36 + Math.sin(k * 3) * 4;
+    for (let i = 0; i < 40; i++) { const a = (1 - i / 40) * .35 * (1 - s.night * .6); R(c, x - 4 - i * 3, y + 1, 3, 1, `rgba(255,255,255,${a})`); }
+    R(c, x, y, 9, 2, '#e8ecef'); R(c, x + 2, y - 2, 3, 2, '#c8ced4'); R(c, x + 3, y + 2, 3, 1, '#c8ced4'); if (s.night > .3 && Math.sin(t * 8) > 0) R(c, x + 8, y, 1, 1, '#ff4a3a');
+  }
+  function estradaLonge(c, s, t, camL) { // carrinhos andando na estrada do planalto (com farol à noite)
+    const y = 161, off = camL * .07, nt = night(s); R(c, 0, y + 2, LW, 1, 'rgba(90,96,100,.5)');
+    for (let i = 0; i < 14; i++) { const dir = i % 2 ? 1 : -1, x = wrap(i * 73 + dir * t * (6 + (i % 4) * 2) - off, 560) - 40, col = pick(['#c43c3a', '#f2f2ee', '#3c6aa8', '#2a2a2a', '#e8c24c'], i);
+      R(c, x, y, 4, 2, col); if (nt > .1) { c.save(); c.globalCompositeOperation = 'lighter'; c.globalAlpha = nt; R(c, dir > 0 ? x + 4 : x - 3, y, 3, 1, '#fff2b0'); R(c, dir > 0 ? x - 1 : x + 4, y, 1, 1, '#ff3a2a'); c.restore(); } }
+  }
+  function guindastes(c, s, t, camL) { // guindastes girando devagar com o gancho balançando
+    for (const [gx0, h, sd] of [[210, 68, 1], [760, 60, 2]]) { const x = wrap(gx0 - camL * .05) - 0, top = 160 - h, a = Math.sin(t * .12 + sd * 2) * .9, len = 26;
+      if (x < -40 || x > LW + 40) continue; const ex = x + Math.cos(a) * len, back = x - Math.cos(a) * 10;
+      limb(c, [[back, top], [ex, top]], 1, '#e8a83a'); R(c, back - 2, top, 4, 3, '#8a8a86'); const hk = ex - Math.sin(t * .9 + sd) * 2; limb(c, [[ex - 2, top + 1], [hk, top + 14]], 1, '#5a5a56'); R(c, hk - 1, top + 14, 3, 2, '#5a5a56'); }
+  }
+  function fumacas(c, s, t, camL) { for (const [x0, y0] of [[120, 132], [430, 140], [690, 128]]) { const x = wrap(x0 - camL * .05) - 0; if (x < -20 || x > LW + 20) continue; for (let i = 0; i < 6; i++) { const k = (t * .12 + i / 6) % 1; R(c, x + Math.sin(t * .5 + i) * 3 + k * 10, y0 - k * 30, 2 + k * 5, 2 + k * 2, `rgba(225,228,230,${(1 - k) * .45})`); } } }
+  function bandeiras(c, s, t, camL) { for (let i = 0; i < 6; i++) { const x = wrap(i * 161 + 40 - camL * .12), y = 96 + (i % 3) * 14; if (x > LW + 10) continue; R(c, x, y, 1, 10, '#6a6a66'); for (let k = 0; k < 6; k++) R(c, x + 1 + k, y + Math.round(Math.sin(t * 5 + k * .8 + i) * 1), 1, 4, i % 2 ? (k < 3 ? '#2c8a3a' : '#e8c24c') : (k < 2 ? '#f2f2ee' : k < 4 ? '#c43c3a' : '#3c6aa8')); } }
+  function janelasPiscando(c, s, t, camL) { const a = night(s); if (a < .1) return; c.save(); c.globalCompositeOperation = 'lighter'; for (let i = 0; i < 40; i++) { const slot = Math.floor(t / 3 + hash(i) * 10); if (hash(slot * 7 + i) > .5) continue; const x = wrap(hash(i + 70) * 964 - camL * .12), y = 110 + hash(i + 71) * 58; if (x > LW) continue; R(c, x, y, 2, 3, `rgba(255,214,140,${.8 * a})`); } c.restore(); }
+  function antenasPiscando(c, s, t, camL) { if (Math.sin(t * 2.6) < .2) return; for (const ax of [590, 640, 820]) { const x = wrap(ax - camL * .02); if (x > LW) continue; R(c, x - 1, 108, 3, 3, `rgba(255,70,60,${.5 + night(s) * .5})`); } }
   function conquistaBack(c, s, t, camL, o = {}) {
     if (!FAR) FAR = buildFar();
-    sky(c, s, t, camL);
-    tile(c, FAR.ridge, camL * .02); cityNight(c, s, FAR.nRidge, camL * .02);
+    sky(c, s, t, camL); aviao(c, s, t, camL);
+    tile(c, FAR.ridge, camL * .02); cityNight(c, s, FAR.nRidge, camL * .02); antenasPiscando(c, s, t, camL);
     haze(c, s, t, camL, 100, 165);
-    tile(c, FAR.city, camL * .05); cityNight(c, s, FAR.nCity, camL * .05);
-    if (o.near !== false) { haze(c, s, t, camL, 130, 180); tile(c, FAR.near, camL * .12); cityNight(c, s, FAR.nNear, camL * .12); }
-    if (o.trees !== false) tile(c, FAR.trees, camL * .2);
+    tile(c, FAR.city, camL * .05); cityNight(c, s, FAR.nCity, camL * .05); guindastes(c, s, t, camL); fumacas(c, s, t, camL); estradaLonge(c, s, t, camL);
+    if (o.near !== false) { haze(c, s, t, camL, 130, 180); tile(c, FAR.near, camL * .12); cityNight(c, s, FAR.nNear, camL * .12); janelasPiscando(c, s, t, camL); bandeiras(c, s, t, camL); }
+    if (o.trees !== false) tile(c, FAR.trees, camL * .2 + Math.sin(t * .8) * 1.2); // a copa das árvores balança com o vento
     if (o.birds !== false) passaros(c, t, camL, 7, o.seed || 0);
     if (o.kites) pipas(c, t, camL, o.seed || 0);
   }
+  /* ---------- passarinhos nos fios: saem voando quando Da Roça chega perto ou pula ---------- */
+  let HERO = { x: -9999, y: 440, vy: 0 };
+  const FIOS = { 13: { x0: 41, step: 230, n: 8, y0: 58 }, 14: { x0: 31, step: 260, n: 9, y0: 56 } };
+  const BIRDS = {}; let birdT = 0;
+  function birdsOf(id) { if (BIRDS[id]) return BIRDS[id]; const F = FIOS[id], out = []; if (!F) return out; for (let i = 0; i < F.n; i++) for (let j = 0; j < 3; j++) { if (hash(i * 9 + j + id) < .35) continue; const u = .2 + hash(i * 3 + j * 7 + id) * .6, px = F.x0 + i * F.step + u * F.step, py = F.y0 + Math.round(Math.sin(u * Math.PI) * 9) - 1; out.push({ px, py, x: px, y: py, vx: 0, vy: 0, st: 0, tm: 0, col: pick(['#3a3a40', '#5a4a3a', '#6a6f78'], i + j) }); } return (BIRDS[id] = out); }
+  function passarinhosFio(c, id, t, camL) {
+    const L = birdsOf(id); if (!L.length) return; const dt = Math.max(0, Math.min(.05, t - birdT)); birdT = t; const hx = HERO.x / 2, jumping = HERO.vy < -250;
+    for (const b of L) {
+      const d = Math.abs(b.px - hx);
+      if (b.st === 0 && (d < 70 || (jumping && d < 140))) { b.st = 1; b.vx = (b.px >= hx ? 1 : -1) * (40 + Math.random() * 40); b.vy = -40 - Math.random() * 20; b.tm = 7 + Math.random() * 6; }
+      if (b.st === 1) { b.x += b.vx * dt; b.y += b.vy * dt; b.vy -= 4 * dt; b.tm -= dt; if (b.tm <= 0 && d > 160) b.st = 2; }
+      if (b.st === 2) { b.x += (b.px - b.x) * Math.min(1, dt * 1.5); b.y += (b.py - b.y) * Math.min(1, dt * 1.5); if (Math.abs(b.x - b.px) < 1 && Math.abs(b.y - b.py) < 1) { b.st = 0; b.x = b.px; b.y = b.py; } }
+      const x = b.x - camL; if (x < -10 || x > LW + 10) continue;
+      if (b.st === 0) { const bob = Math.sin(t * 2 + b.px) > .9 ? 1 : 0; R(c, x, b.y - 3 + bob, 3, 3, b.col); R(c, x + 2, b.y - 4 + bob, 2, 2, b.col); R(c, x + 3, b.y - 3 + bob, 1, 1, '#e8a83a'); R(c, x - 1, b.y - 2, 1, 1, b.col); }
+      else { const f = Math.sin(t * 18 + b.px) > 0; R(c, x, b.y, 3, 2, b.col); R(c, x - 2, b.y - (f ? 2 : 0), 2, 1, b.col); R(c, x + 3, b.y - (f ? 2 : 0), 2, 1, b.col); }
+    }
+  }
+  function heroi(x, y, vy) { HERO = { x: Number(x) || -9999, y: Number(y) || 440, vy: Number(vy) || 0 }; }
 
   /* =====================================================================
      12 · AEROPORTOS
@@ -299,6 +338,7 @@
     if (!bairroMid) bairroMid = buildBairro();
     conquistaBack(c, s, t, camL, { kites: true, seed: 3 });
     c.drawImage(bairroMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    passarinhosFio(c, 13, t, camL);
     const sun = sunInfo(s), reach = sun.lean * (12 + Math.abs(sun.lean) * 26), sh = `rgba(14,24,50,${.22 * sun.str})`;
     for (const x of [130, 560, 1080, 1430, 1860]) { const sx = x - camL; if (vis(sx, 80)) { if (sun.str > .04) ell(c, sx + reach, 219, 18, 2.5, sh); if (x === 560 || x === 1860) ipe(c, sx, 214, x === 560 ? '#b86ac8' : '#e8c84a', x); else tree(c, sx, 214, .8, 0, t, x); } }
     for (let i = 0; i < 8; i++) { const wx = 160 + i * 250 + Math.sin(t * .2 + i * 2) * 60, sx = wx - camL; if (vis(sx, 20)) gente(c, sx, 216, i); }
@@ -356,6 +396,7 @@
     if (!centroMid) centroMid = buildCentro();
     conquistaBack(c, s, t, camL, { seed: 5 });
     c.drawImage(centroMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    passarinhosFio(c, 14, t, camL);
     const sun = sunInfo(s), reach = sun.lean * (12 + Math.abs(sun.lean) * 26), sh = `rgba(14,24,50,${.22 * sun.str})`;
     if (sun.str > .04) { const cx = CENTRO.CAT - camL; if (vis(cx, 300)) { slant(c, cx - 4, cx + 282, 210, reach * 1.6, 9, sh); shadeAdd(cx - 4 + reach, cx + 282 + reach, 1); sunWall(c, cx, 110, 92, 100, sun.lean, Math.min(1, Math.abs(sun.lean) * 1.4) * sun.str); } }
     for (const x of [950, 1050, 1500, 1590]) { const sx = x - camL; if (vis(sx, 60)) tree(c, sx, 212, .9, 1, t, x); }
@@ -841,6 +882,7 @@
     lista: Object.freeze(LIST.map((d) => Object.freeze({ id: d.id, key: d.key, nome: d.nome, lugar: d.lugar, largura: d.width, noite: !!d.noite, interno: !!d.amb, plataformas: LAYOUT[d.id].platforms, vaos: LAYOUT[d.id].gaps, interativos: (d.interact || []).length }))),
     largura: (id) => LIST.find((d) => d.id === id)?.width || 0,
     layout: (id) => LAYOUT[id] || null,
-    plataforma
+    plataforma,
+    heroi
   });
 })();

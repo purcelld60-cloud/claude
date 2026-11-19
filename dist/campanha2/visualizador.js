@@ -51,7 +51,7 @@
     cam += ((Math.max(0, Math.min(d.largura - 960, P.x - 360))) - cam) * Math.min(1, dt * 8);
     try { window.DayTime?.force?.(HOURS[hour][1]); } catch (e) {}
     const o = { scene: d.id, camera: cam, time: t, player: P, shots: [], enemies: [], minions: [] };
-    try { window.Interact?.update?.(dt, o); } catch (e) {}
+    try { window.Interact?.update?.(dt, o); } catch (e) {} window.CampanhaCenarios.heroi?.(P.x, P.y, P.vy);
     window.Art.drawScene(c, d.id, cam, t);
     c.save(); c.translate(-Math.round(cam), 0);
     for (const pl of d.plataformas) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) window.CampanhaCenarios.plataforma(c, d.id, pl, t);
