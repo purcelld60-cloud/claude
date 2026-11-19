@@ -283,3 +283,63 @@ O estado fica em `daroca-c2-poderes` até o save da Campanha 2 existir (passo 6)
 **Treino (no visualizador).** O botão **TREINO (P)** coloca três espantalhos de treino com barra de vida e mostra a barra de controles da Campanha 2. São os botões da campanha 1, com estilo e ícones copiados do jogo. Com eles dá para testar o peido, o papel, o dash, o voo (segurar o pulo no ar, com barra de gás) e os dois poderes equipados. O botão **MURAL** e o mural do quarto têm, só no visualizador, **TESTE: LIBERAR TODOS** e **TESTE: UPGRADE DO GUGU**.
 
 **Para o passo 6.** O motor dos poderes não depende do jogo: recebe um "mundo" com o herói, os inimigos e funções de dano, empurrão, atordoar e confundir. Falta ligar `CampanhaPoderes.acionarNoJogo` às lutas da campanha: inimigos de verdade, o soltar do supersoco e a aura bloqueando o dano no `hurt()`.
+
+## Passo 4 · Mapas, táxi e loja de garrafadas (`dist/mapa3d.js`, `dist/mapas.js` e `dist/campanha2/loja.js`)
+
+**Mapa em pixel art com cara de 3D.** `mapa3d.js` desenha um mapa visto de cima e um pouco de frente, como nos RPGs de pixel. Usa blocos de 16 px, com:
+- relevo em níveis: barrancos de terra de dois blocos de altura com sombra;
+- rios com espuma e pontes;
+- ruas de paralelepípedo e asfalto, trilhas de terra e grama com tufos e flores;
+- casas com telhado e fachada, prédios, árvores redondas, cercas, postes, bancos e fontes.
+
+Os objetos são ordenados pela altura (quem está mais embaixo fica na frente).
+
+Ao tocar num lugar:
+- a câmera desliza e dá zoom até ele;
+- o desenho do lugar dá um pulinho;
+- o painel abre com a **prévia ao vivo** do cenário e o botão **IR PARA LÁ**.
+
+O botão **ⓘ** mostra uma descrição com suspense, sem spoiler.
+
+Ao confirmar, o veículo faz o caminho até lá. O carro a gás vai **voando**, em arco; o táxi vai **pelas ruas**, em L. Depois a tela escurece e o jogo leva o jogador ao lugar.
+
+Controles do mapa:
+- arrastar passeia pelo mapa;
+- `+`/`−` dão zoom;
+- setas trocam o lugar;
+- Enter vai;
+- `I` abre a descrição;
+- Esc volta e fecha.
+
+O formato do mapa (`chave`, `terreno`, `objetos`, `locais` com `caixa`, `desenho`, `descricao`...) está no começo de `mapa3d.js`.
+
+**Campanha 1 · Itabuna (carro a gás).** `MapasJogo.abrirCampanha1` substitui a lista antiga de rotas em `ui.js`. A lista continua como reserva se o mapa não carregar. O mapa tem os 12 lugares da campanha 1, cada um desenhado à mão, com o rio, as pontes e a favela no morro. Também tem animações: moinho, fumaça, chafariz, carros, pessoas, luzes do baile, pipa e passarinhos.
+
+Os bloqueios são as mesmas regras do jogo (`Campaign.canTravel`), com o motivo aparecendo no painel. Fora do carro, todos os lugares mostram "Entre no carro a gás (tecla V ou botão CARRO)". A viagem chama `Game.travel`, então a chegada, o save e as cutscenes não mudaram.
+
+**Campanha 2 · Conquista (táxi do Seu Zé).** Na Campanha 2 não tem carro a gás: o jogador anda, e o táxi só existe no **começo e no fim de cada parte**, sempre do lado de fora. Por exemplo, o táxi para na **entrada da Escola SESI**, nunca dentro dela. São 17 pontos (`CampanhaTaxi.pontos`), cada um com a cena e a posição de chegada, e o mapa mostra só esses pontos. O táxi amarelo, com placa no teto e o Seu Zé no volante, aparece no cenário. Chegando perto, surge **CHAMAR O TÁXI DO SEU ZÉ**.
+
+**Loja de garrafadas · Seu Lindomar.** A loja é um vendedor original, um raizeiro com carrinho de madeira na Feira do Planalto (cena 17). A tela é ilustrada e animada:
+- o vendedor pisca, aponta, ri e balança a cabeça;
+- tem prateleiras, lamparina balançando e poeira no ar;
+- cada poção (um poder) tem um frasco diferente.
+
+O cartão de pergaminho mostra o poder e o preço, com **COMPRAR** e **MONTAR BUILD** (abre o mural para equipar). As moedas aparecem no alto e voam ao comprar.
+
+| Garrafada | Preço |
+| --- | --- |
+| Fofoca Confusa | 30 |
+| Buzina Turbo | 40 |
+| Rajada de Biscoito | 45 |
+| Flash do Story | 60 |
+| Cafezão | 70 |
+| Supersoco | 85 |
+| Clone de LAN | 110 |
+| Aura de Amizade | 150 |
+
+As moedas vêm de **inimigos derrotados** (hoje, os espantalhos do treino dão 8 cada). Elas ficam em `daroca-c2-loja` até o save da Campanha 2 (passo 6). API: `CampanhaLoja.abrir`, `moedas`, `ganhar`, `precos`.
+
+**Ainda falta (passo 6).**
+- Inimigos reais soltando moedas.
+- Decidir se cada garrafada só aparece na loja depois de vencer o vilão dela (como no plano original) ou se fica toda à venda.
+- Ligar o táxi à progressão: depois de embarcar não dá para voltar.

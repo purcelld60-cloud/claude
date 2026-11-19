@@ -36,10 +36,11 @@
   function jump() { if (P.ground && !viagem) { P.vy = -620; P.ground = false; } }
   function hit() { if (atkT <= 0 && !viagem) atkT = .32; }
   // usar a passagem mais perto: porta (escurece e troca), escada rolante (sobe/desce andando sozinho) ou computador
-  const cobre = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.()); // telas que cobrem o visualizador
+  const cobre = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.() || window.Mapa3D?.aberto?.() || window.CampanhaLoja?.aberta?.()); // telas que cobrem o visualizador
   const ocupado = () => cobre() || !!window.CampanhaMoradores?.aberto?.(); // e a conversa, que só pausa o controle // Fliperama ou armário abertos por cima
   function usar() {
     if (viagem || !perto) return; const p = perto;
+    if (p.tipo === 'extra') { keys.clear(); if (p.id === 'loja') window.CampanhaLoja?.abrir?.({ teste: true }); else window.CampanhaTaxi?.abrir?.(L[idx].id, (cena, x) => { viagem = null; fade = 0; irPara(cena, x + 120); }); return; }
     if (p.tipo === 'poderes') { keys.clear(); window.CampanhaPoderes?.abrirMural?.({ teste: true }); return; }
     if (p.tipo === 'conversa') { keys.clear(); window.CampanhaMoradores?.conversar?.(p.id); return; }
     if (p.tipo === 'armario') { if (window.DarocaLook?.open) { keys.clear(); window.DarocaLook.open({ title: 'ARMÁRIO DO QUARTO 4', line: 'Escolha a roupa do Da Roça para hoje.' }); } return; }
@@ -87,15 +88,16 @@
     window.Art.drawScene(c, D.id, cam, t);
     c.save(); { const sh = window.CampanhaTreino?.tremor?.() || 0; c.translate(-Math.round(cam) + Math.round((Math.random() - .5) * sh), Math.round((Math.random() - .5) * sh)); }
     for (const pl of D.plataformas) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) window.CampanhaCenarios.plataforma(c, D.id, pl, t);
-    window.Interact?.drawBack?.(c, o); window.CampanhaPlantas?.drawBack?.(c, o); window.CampanhaMoradores?.desenhar?.(c, o);
+    window.Interact?.drawBack?.(c, o); window.CampanhaPlantas?.drawBack?.(c, o); window.CampanhaTaxi?.desenhar?.(c, o); window.CampanhaLoja?.desenhar?.(c, o); window.CampanhaMoradores?.desenhar?.(c, o);
     window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: atkT > 0, attackType: 'paper', attackProgress: 1 - atkT / .32 });
     window.CampanhaTreino?.desenhar?.(c, t);
     window.Interact?.drawFront?.(c, o); window.CampanhaPlantas?.drawFront?.(c, o); window.CampanhaCamadas?.primeiroPlano?.(c, o);
     // passagem mais perto: balão "[E] ..." em cima e o botão grande na tela
-    perto = null; if (!viagem && P.ground) { let best = 1e9; for (const p of portais(D.id)) { if (p.tipo === 'rampa') continue; const dd = Math.abs(p.x - P.x); if (dd < 70 && dd < best) { best = dd; perto = p; } } const m = window.CampanhaMoradores?.perto?.(D.id, P.x); if (m && Math.abs(m.x - P.x) < best) perto = { tipo: 'conversa', id: m.id, x: m.x, rotulo: 'CONVERSAR COM ' + m.nome.toUpperCase() }; }
+    perto = null; if (!viagem && P.ground) { let best = 1e9; for (const p of portais(D.id)) { if (p.tipo === 'rampa') continue; const dd = Math.abs(p.x - P.x); if (dd < 70 && dd < best) { best = dd; perto = p; } } const m = window.CampanhaMoradores?.perto?.(D.id, P.x); if (m && Math.abs(m.x - P.x) < best) perto = { tipo: 'conversa', id: m.id, x: m.x, rotulo: 'CONVERSAR COM ' + m.nome.toUpperCase() };
+      for (const X of [window.CampanhaTaxi, window.CampanhaLoja]) { const e = X?.perto?.(D.id, P.x); if (e && (!perto || Math.abs(e.x - P.x) < Math.abs(perto.x - P.x))) perto = { tipo: 'extra', ...e }; } }
     if (perto) { const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.font = '11px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); }
     c.restore(); window.CampanhaAmbientes?.cobrir?.(c, D.id, cam);
-    entrar.hidden = !perto; if (perto) entrar.textContent = perto.tipo === 'conversa' ? 'FALAR' : perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR';
+    entrar.hidden = !perto; if (perto) entrar.textContent = perto.tipo === 'extra' ? perto.botao : perto.tipo === 'conversa' ? 'FALAR' : perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR';
     if (window.Graphics?.isShader?.()) window.Shader?.apply?.(cv, { scene: D.id, camera: cam, time: t, outdoor: !D.interno });
     if (fade > 0) { c.fillStyle = `rgba(8,10,14,${fade})`; c.fillRect(0, 0, 960, 540); }
     title.textContent = (idx + 1) + '/' + L.length + ' · ' + D.nome.toUpperCase();
