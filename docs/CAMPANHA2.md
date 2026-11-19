@@ -173,3 +173,34 @@ O Passo 4 passa a ser a forma de locomoção.
 | 27 | Pátio no 2º andar: cantina, mesas, mural de mosaico, pingue-pongue, cesta de basquete, coleta seletiva e a cidade atrás do guarda-corpo | no alto da escada da escola. A porta **DESCER A ESCADA** volta |
 
 No visualizador, ao chegar perto de uma passagem aparece o balão **[E] …** e o botão grande **ENTRAR / SAIR / SUBIR / DESCER / USAR**.
+
+## Passo 2B · Camadas, lojas paródia, população e engarrafamento (`dist/campanha2/camadas.js`)
+
+Os nove cenários de rua (12 a 19 e 21) ganharam uma camada do meio entre a cidade lá longe e a rua do Da Roça. Ela tem parallax próprio, gente andando, carros, letreiros e janelas acesas à noite. Também ganharam detalhes no plano das fachadas, mais gente na calçada e um primeiro plano perto da câmera. Os letreiros usam uma fonte pixel 3x5 (`CampanhaCamadas.texto`).
+
+| Cena | Camada do meio | No plano das fachadas e na frente |
+| --- | --- | --- |
+| 12 Aeroportos | Pátio visto pelas vidraças: hangares, torre de controle, aviões parados, caminhão de combustível, trem de bagagem, carro SIGA-ME, avião taxiando e sinaleiro com as varetas | Fila do check-in com malas; poltronas e pilastras com fita em primeiro plano |
+| 13 Bairro | Encosta com casinhas coloridas em quatro degraus, escadarias com gente subindo e descendo, varais, caixas-d'água, igrejinha com sino e campinho de terra com a molecada jogando bola | Dona Lurdes regando as plantas na sacada da pensão (à noite, a silhueta na janela) |
+| 14 Centro | Rua de trás com prédios altos, lojas paródia, outdoors nos telhados e o relógio-termômetro que alterna a hora com a temperatura (de 7 °C a 19 °C, conforme a hora) | Letreiros de caixa de luz nas lojas da frente e placas ABERTO piscando |
+| 15 Serra | Uma serra lá atrás com trilha em zigue-zague, trilheiros de mochila, antena com luz e mirante; parapente voando em círculos | Trilheiros com cajado; capim, pedras e samambaias em primeiro plano |
+| 16 Avenida | Torres de vidro e prédios com lojas paródia, outdoors e um painel de LED que troca de propaganda | Letreiros das lojas; outdoors "MOTOTÁXI? SÓ NO PREÇO JUSTO" e "COMPRE UM CASACO. SÉRIO. AQUI FAZ 12°C" redesenhados |
+| 17 Feira | Mercado Municipal com cobertura em arcos, igrejinha com sino e pombos, comércio com lojas paródia | Feirantes atrás das bancas, mexendo os braços |
+| 18 Café | Dois morros de cafezal com fileiras e grãos vermelhos, árvores de sombra, sede e celeiro, trator levantando poeira na estradinha, colhedores e vacas | Trabalhadores puxando o café no terreiro com o rodo; pés de café em primeiro plano |
+| 19 Teatro (noite) | Festival de Inverno: roda-gigante girando com luzes, fogos de artifício, barracas iluminadas com gambiarra e a faixa do festival | Gambiarra de lâmpadas coloridas entre os postes |
+| 21 Olívia Flores | Torres com sacadas e vidro, academia SMART FAT com gente correndo nas esteiras e farmácia PAGUE MAIS com a cruz piscando | Gente se exercitando na academia ao ar livre |
+
+**Lojas paródia** (só o nome brinca com o original; não há logotipos): CASAS BAIXA, PAGUE MAIS, ESCURO CELULARES, RICARDO ELÉTRICO, INSISTENTE, ÓTICA DIZ-QUE-VÊ, LOTÉRICA SORTE GRANDE, C&Á, PERNAMBUCRANAS, RAVAIANAS, DROGARIA SÃO PAULINHO, HABIBIS, BOBO'S, CHILLI BEIÇO, NATURRA, POLISHOPE, KALUNGO, BANCO DO BRASIU, RENÊ, SUBUÁI, BURGUER QUINGUE, STARBUCHO CAFÉ, ATACAREJÃO, G. BARBUDA, SMART FAT, MAGAZINE LURDES e AMENICANAS. Os outdoors brincam com NETFLIQUIS, o Ubé ("CHEGA QUANDO DER") e o frio de Conquista.
+
+**População:** cada cenário tem de 12 a 20 pessoas a mais andando nos dois sentidos, sem interação. Há gente com sacola, gente olhando o celular, gente passeando com cachorro, mãe de mãos dadas com a criança e guarda-chuva quando chove. A camada do meio tem mais gente pequena e carros na rua de trás.
+
+**Engarrafamento:** a cada chegada na Avenida (16) ou no Centro (14), há 40% de chance de a faixa da frente estar parada.
+- Na frente está o Fusca azul do Seu Arlindo, com o pisca-alerta ligado. Ele parou para comprar biscoito de polvilho do vendedor, que fica com o tabuleiro na janela.
+- Logo atrás vem o carro prata do Ubé, com os dois personagens novos:
+  - **Cleiton do Ubé** (`c2_cleiton`): motorista de aplicativo, de boné e bigode. Buzina sem parar e põe o braço para fora sacudindo o punho porque tem corrida marcada no Shopping.
+  - **Dona Rosilda** (`c2_rosilda`): a sogra dele, de bobes cor-de-rosa e óculos. Vai para a consulta, reclama do Fusca e reclama do Cleiton também ("EU AVISEI PRA IR PELA OLÍVIA!").
+- As falas aparecem em balões, uma de cada vez. Quando o Da Roça chega perto, eles falam com ele ("Ô DA ROÇA! EMPURRA ESSE FUSCA AÍ!") e aparecem os nomes.
+- A fila tem uns 25 carros (hatch, sedã, picape e van), com motoristas na janela, fumaça do escapamento, buzinas "BI-BI!" e uma moto costurando entre os carros. Nenhum carro para em cima de um buraco da pista. A outra faixa continua andando devagar e, à noite, acendem faróis, lanternas e o pisca-alerta.
+- Para testar: `CampanhaCamadas.engarrafamento(16, true)` (ou `false`; `null` volta ao sorteio).
+
+Os dois também estão em `personagens.js`, para as missões. Nada nesta camada é sólido nem interativo, e a campanha 1 não muda.

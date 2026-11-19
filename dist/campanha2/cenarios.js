@@ -19,6 +19,10 @@
   const text = (c, str, x, y, size, col, align = 'center') => { c.font = `${size}px Pixel, monospace`; c.textAlign = align; c.textBaseline = 'middle'; c.fillStyle = col; c.fillText(str, x, y); };
   function shadeHex(hex, k) { if (!/^#[0-9a-f]{6}$/i.test(hex)) return hex; const n = parseInt(hex.slice(1), 16), f = (v) => Math.max(0, Math.min(255, Math.round(v * k))); return '#' + [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => f(v).toString(16).padStart(2, '0')).join(''); }
   const pick = (arr, seed) => arr[Math.floor(hash(seed) * arr.length) % arr.length];
+  // Passo 2B: as camadas extras (rua de trás, lojas paródia, gente, primeiro plano, engarrafamento) ficam em camadas.js
+  let CUR = 0; const LOJAS = {}; const CAM = () => window.CampanhaCamadas;
+  const parado = () => !!CAM()?.engarrafado?.(CUR); // engarrafamento: o trânsito da frente para
+  function drawMid(c, mid, camL, s, t) { c.drawImage(mid, camL, 0, LW, LH, 0, 0, LW, LH); CAM()?.sobre?.(CUR, c, s, t, camL); }
 
   /* =====================================================================
      TEXTURAS
@@ -75,6 +79,7 @@
   }
   // loja no térreo: letreiro, toldo listrado, porta de aço meio aberta e vitrine
   function loja(c, x, w, signCol, a, b, seed) {
+    (LOJAS[CUR] || (LOJAS[CUR] = [])).push([x, w, signCol]);
     R(c, x, GY - 30, w, 30, '#e8e2d2'); R(c, x + 2, GY - 30, w - 4, 9, signCol); R(c, x + 2, GY - 30, w - 4, 1, shadeHex(signCol, 1.3)); R(c, x + 2, GY - 22, w - 4, 1, shadeHex(signCol, .6));
     for (let k = 0; k < w; k += 6) { R(c, x + k, GY - 21, 6, 5, (k / 6) % 2 ? a : b); R(c, x + k, GY - 16, 6, 1, '#00000033'); }
     const dw = Math.round(w * .45); R(c, x + 3, GY - 15, dw, 15, '#7a8086'); for (let k = 0; k < 8; k += 2) R(c, x + 3, GY - 15 + k, dw, 1, '#5a6066'); R(c, x + 3, GY - 7, dw, 7, '#2a2c30');
@@ -213,6 +218,7 @@
     if (o.trees !== false) tile(c, FAR.trees, camL * .2 + Math.sin(t * .8) * 1.2); // a copa das árvores balança com o vento
     if (o.birds !== false) passaros(c, t, camL, 7, o.seed || 0);
     if (o.kites) pipas(c, t, camL, o.seed || 0);
+    CAM()?.meio?.(CUR, c, s, t, camL);
   }
   /* ---------- passarinhos nos fios: saem voando quando Da Roça chega perto ou pula ---------- */
   let HERO = { x: -9999, y: 440, vy: 0 };
@@ -288,7 +294,7 @@
     { const ax = 1110 - camL; if (vis(ax, 420)) { R(c, ax, 118, 300, 34, '#f2f4f6'); R(c, ax + 290, 122, 34, 26, '#f2f4f6'); R(c, ax + 318, 128, 8, 14, '#e8eaec'); R(c, ax - 22, 128, 26, 20, '#f2f4f6'); R(c, ax - 34, 86, 28, 44, '#3c6aa8'); R(c, ax - 30, 90, 6, 30, '#5a8ad0');
       R(c, ax + 110, 144, 130, 9, '#c9ced2'); R(c, ax + 140, 152, 20, 12, '#5a6670'); R(c, ax + 186, 152, 20, 12, '#5a6670'); for (let k = 0; k < 16; k++) R(c, ax + 30 + k * 16, 126, 6, 6, '#3c4a5a'); R(c, ax, 140, 300, 3, '#3c6aa8'); R(c, ax, 143, 300, 1, '#f2c94c'); R(c, ax + 50, 132, 14, 20, '#c8ced4');
       for (let k = 0; k < 9; k++) R(c, ax + 40 + k * 3, 152 + k * 6, 14, 2, '#9aa0a6'); R(c, ax + 36, 152, 2, 58, '#9aa0a6'); R(c, ax + 68, 152, 2, 58, '#9aa0a6'); ell(c, ax + 120, 208, 5, 4, '#1c1c1c'); ell(c, ax + 240, 208, 5, 4, '#1c1c1c'); R(c, ax + 118, 196, 4, 12, '#5a5a56'); R(c, ax + 238, 196, 4, 12, '#5a5a56'); } }
-    c.drawImage(airMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    drawMid(c, airMid, camL, s, t);
     // painel de voos piscando, tela do raio-x mostrando a mala, biruta ao vento e passageiros
     { const x = 300 - camL; if (vis(x, 120)) { R(c, x - 4, 56, 128, 48, '#14202a'); for (let k = 0; k < 5; k++) { R(c, x + 2, 62 + k * 8, 56, 4, '#f2c94c'); R(c, x + 62, 62 + k * 8, 30, 4, '#c8d0d4'); R(c, x + 96, 62 + k * 8, 22, 4, (Math.sin(t * 3 + k) > 0 || k > 1) ? '#5ae070' : '#14202a'); } } }
     { const x = 666 - camL; if (vis(x, 80)) { for (let k = 0; k < 5; k++) R(c, x + 6 + k * 12, 150 + Math.round(Math.sin(t * 2 + k) * 2), 9, 22, '#3a6a9a'); R(c, x + 28, 152, 14, 10, '#c8e8ff'); R(c, x + 30, 154, 3, 6, '#ff5a4a'); } }
@@ -337,12 +343,12 @@
   function bairro(c, s, t, camL) {
     if (!bairroMid) bairroMid = buildBairro();
     conquistaBack(c, s, t, camL, { kites: true, seed: 3 });
-    c.drawImage(bairroMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    drawMid(c, bairroMid, camL, s, t);
     passarinhosFio(c, 13, t, camL);
     const sun = sunInfo(s), reach = sun.lean * (12 + Math.abs(sun.lean) * 26), sh = `rgba(14,24,50,${.22 * sun.str})`;
     for (const x of [130, 560, 1080, 1430, 1860]) { const sx = x - camL; if (vis(sx, 80)) { if (sun.str > .04) ell(c, sx + reach, 219, 18, 2.5, sh); if (x === 560 || x === 1860) ipe(c, sx, 214, x === 560 ? '#b86ac8' : '#e8c84a', x); else tree(c, sx, 214, .8, 0, t, x); } }
     for (let i = 0; i < 8; i++) { const wx = 160 + i * 250 + Math.sin(t * .2 + i * 2) * 60, sx = wx - camL; if (vis(sx, 20)) gente(c, sx, 216, i); }
-    { const cx = ((t * 34) % 2700) - 300 - camL; if (vis(cx, 40)) carro(c, cx, 242, '#c43c3a', 1); const cx2 = 2400 - ((t * 26) % 2700) - camL; if (vis(cx2, 40)) carro(c, cx2, 256, '#3c6aa8', -1); }
+    if (!parado()) { const cx = ((t * 34) % 2700) - 300 - camL; if (vis(cx, 40)) carro(c, cx, 242, '#c43c3a', 1); const cx2 = 2400 - ((t * 26) % 2700) - camL; if (vis(cx2, 40)) carro(c, cx2, 256, '#3c6aa8', -1); }
     // fumaça de pão quente, vapor do bueiro e o cachorro abanando o rabo
     { const x = 1170 - camL; if (vis(x, 40)) for (let i = 0; i < 6; i++) { const k = (t * .3 + i / 6) % 1; R(c, x + Math.sin(t + i) * 3 * k, 150 - k * 34, 3 + k * 4, 2, `rgba(240,240,236,${(1 - k) * .5})`); } }
     { const x = 1640 - camL; if (vis(x, 20)) R(c, x - 3, GY - 9 + Math.round(Math.sin(t * 12) * 1.5), 4, 2, '#c98a43'); }
@@ -395,7 +401,7 @@
   function centro(c, s, t, camL) {
     if (!centroMid) centroMid = buildCentro();
     conquistaBack(c, s, t, camL, { seed: 5 });
-    c.drawImage(centroMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    drawMid(c, centroMid, camL, s, t);
     passarinhosFio(c, 14, t, camL);
     const sun = sunInfo(s), reach = sun.lean * (12 + Math.abs(sun.lean) * 26), sh = `rgba(14,24,50,${.22 * sun.str})`;
     if (sun.str > .04) { const cx = CENTRO.CAT - camL; if (vis(cx, 300)) { slant(c, cx - 4, cx + 282, 210, reach * 1.6, 9, sh); shadeAdd(cx - 4 + reach, cx + 282 + reach, 1); sunWall(c, cx, 110, 92, 100, sun.lean, Math.min(1, Math.abs(sun.lean) * 1.4) * sun.str); } }
@@ -404,7 +410,7 @@
     for (const x of [990, 1440]) { const sx = x - camL; if (vis(sx, 60)) bench(c, sx, 212, 40, '#8a6a45', '#c4955c'); }
     for (let i = 0; i < 14; i++) { const wx = 80 + i * 175 + Math.sin(t * .25 + i) * 50, sx = wx - camL; if (vis(sx, 20)) gente(c, sx, 216, i); }
     for (let i = 0; i < 9; i++) { const bx = 1080 + i * 30, hop = Math.max(0, Math.sin(t * 3 + i * 2)) * 2, sx = bx - camL + Math.sin(t * .7 + i) * 3; if (vis(sx, 10)) { R(c, sx, 214 - hop, 4, 3, '#8a8f98'); R(c, sx + 3, 212 - hop, 2, 2, '#6a6f78'); R(c, sx + 3, 213 - hop, 1, 1, '#3aa04a'); } }
-    { const bx = ((t * 40) % 3000) - 300 - camL; if (vis(bx, 60)) { R(c, bx, 228, 60, 20, '#3c7aa8'); R(c, bx + 2, 230, 56, 7, '#a9ccd8'); R(c, bx, 240, 60, 2, '#f2efe6'); ell(c, bx + 10, 249, 4, 4, '#1c1c1c'); ell(c, bx + 48, 249, 4, 4, '#1c1c1c'); } }
+    if (!parado()) { const bx = ((t * 40) % 3000) - 300 - camL; if (vis(bx, 60)) { R(c, bx, 228, 60, 20, '#3c7aa8'); R(c, bx + 2, 230, 56, 7, '#a9ccd8'); R(c, bx, 240, 60, 2, '#f2efe6'); ell(c, bx + 10, 249, 4, 4, '#1c1c1c'); ell(c, bx + 48, 249, 4, 4, '#1c1c1c'); } }
     fog(c, s, t, camL, .22);
   }
   function centroLights(g, s, t, camL) { const a = night(s); if (a < .03) return; for (let x = 930; x < 1600; x += 110) lampGlow(g, x - camL, 130, a); for (let x = 30; x < CENTRO.W; x += 260) lampGlow(g, x - camL + 14, 84, a * .8);
@@ -441,12 +447,12 @@
   let serraMid = null;
   function serra(c, s, t, camL) {
     if (!serraMid) serraMid = buildSerra(); if (!FAR) FAR = buildFar();
-    sky(c, s, t, camL); tile(c, FAR.ridge, camL * .02);
+    sky(c, s, t, camL); tile(c, FAR.ridge, camL * .02); CAM()?.meio?.(CUR, c, s, t, camL); // a serra continua lá atrás, com a trilha
     c.save(); c.translate(0, 22); tile(c, FAR.city, camL * .05); c.restore(); cityNight(c, s, FAR.nCity, camL * .05, 22);
     c.save(); c.translate(0, 26); tile(c, FAR.near, camL * .1); c.restore(); cityNight(c, s, FAR.nNear, camL * .1, 26); haze(c, s, t, camL, 120, 200);
     // urubus planando em círculos e o vento passando nas nuvens baixas
     for (let i = 0; i < 4; i++) { const a = t * .4 + i * 1.6, x = 240 + Math.cos(a) * (60 + i * 20) - (camL * .15) % 480, y = 50 + Math.sin(a) * 18 + i * 8; R(c, x - 5, y, 4, 1, '#2a2622'); R(c, x + 2, y, 4, 1, '#2a2622'); R(c, x - 1, y, 3, 2, '#2a2622'); R(c, x - 6, y - 1 + Math.round(Math.sin(t * 2 + i)), 1, 1, '#2a2622'); }
-    c.drawImage(serraMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    drawMid(c, serraMid, camL, s, t);
     for (let i = 0; i < 80; i++) { const x = ((i * 31 - camL) % (LW + 40) + LW + 40) % (LW + 40) - 20, sw = Math.round(Math.sin(t * 4 + i) * 2 + 1); R(c, x + sw, FLOOR - 7, 1, 7, '#a4a46a'); R(c, x + 2 + sw, FLOOR - 5, 1, 5, '#8a8a52'); }
     fog(c, s, t * 3, camL, .55);
   }
@@ -495,12 +501,12 @@
       if (i % 4 === 3) { R(c, sx, 172, 56, 18, '#3c7aa8'); R(c, sx + 2, 174, 52, 6, '#a9ccd8'); R(c, sx, 184, 56, 2, '#f2efe6'); ell(c, sx + 8, 192, 3, 3, '#1c1c1c'); ell(c, sx + 46, 192, 3, 3, '#1c1c1c'); }
       else if (i % 3 === 2) { ell(c, sx + 2, 191, 3, 3, '#1c1c1c'); ell(c, sx + 12, 191, 3, 3, '#1c1c1c'); R(c, sx + 2, 185, 11, 4, pick(['#c43c3a', '#f08a24'], i)); R(c, sx + 5, 178, 5, 7, pick(['#c43c3a', '#f08a24'], i)); R(c, sx + 5, 175, 5, 3, '#c43c3a'); }
       else carro(c, sx, dir > 0 ? 192 : 200, pick(['#c43c3a', '#f2f2ee', '#3c6aa8', '#2a2a2a', '#9aa0a6', '#e8c24c'], i), dir); }
-    c.drawImage(aveMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    drawMid(c, aveMid, camL, s, t);
     for (const x of [600, 1200, 1800, 2400]) { const sx = x - camL; if (vis(sx, 20)) { R(c, sx, 118, 3, 92, '#3c4044'); R(c, sx - 3, 110, 9, 22, '#2a2e30'); const ph = Math.floor((t + x) / 4) % 3; ['#d8443a', '#e8c24c', '#4ac07a'].forEach((col, k) => R(c, sx - 1, 112 + k * 6, 5, 4, ph === k ? col : '#3a3a3a')); } }
     for (const x of [1360, 1640]) { const sx = x - camL; if (vis(sx, 60)) tree(c, sx, 204, .75, 1, t, x); }
     for (const x of [700, 2250]) { const sx = x - camL; if (vis(sx, 60)) ipe(c, sx, 210, x === 700 ? '#e8c84a' : '#b86ac8', x, .85); }
     for (let i = 0; i < 10; i++) { const wx = 100 + i * 290 + Math.sin(t * .3 + i) * 40, sx = wx - camL; if (vis(sx, 20)) gente(c, sx, 216, i); }
-    for (let i = 0; i < 4; i++) { const dir = i % 2 ? 1 : -1, wx = ((i * 777 + t * (70 + i * 10) * dir) % 3400 + 3400) % 3400 - 200, sx = wx - camL; if (vis(sx, 40)) carro(c, sx, dir > 0 ? 240 : 258, pick(['#f2f2ee', '#2a2a2a', '#c43c3a', '#3c8a5a'], i + 2), dir); }
+    for (let i = 0; i < (parado() ? 0 : 4); i++) { const dir = i % 2 ? 1 : -1, wx = ((i * 777 + t * (70 + i * 10) * dir) % 3400 + 3400) % 3400 - 200, sx = wx - camL; if (vis(sx, 40)) carro(c, sx, dir > 0 ? 240 : 258, pick(['#f2f2ee', '#2a2a2a', '#c43c3a', '#3c8a5a'], i + 2), dir); }
     fog(c, s, t, camL, .18);
   }
   function avenidaLights(g, s, t, camL) { const a = night(s); if (a < .03) return; for (let x = 150; x < AVENIDA.W; x += 300) lampGlow(g, x - camL + 1, 100, a, '255,210,150', 80); const ix = AVENIDA.INDIO - camL; if (vis(ix, 120)) { const gr = g.createLinearGradient(0, 200, 0, 50); gr.addColorStop(0, `rgba(255,220,150,${.4 * a})`); gr.addColorStop(1, 'rgba(255,220,150,0)'); g.fillStyle = gr; g.fillRect(ix - 30, 50, 60, 150); } for (const bx of [620, 2140]) { const sx = bx - camL; if (vis(sx, 130)) { g.fillStyle = `rgba(255,250,230,${.3 * a})`; g.fillRect(sx + 3, 59, 114, 48); } } }
@@ -537,13 +543,13 @@
   function feira(c, s, t, camL) {
     if (!feiraMid) feiraMid = buildFeira();
     conquistaBack(c, s, t, camL, { seed: 11 });
-    c.drawImage(feiraMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    drawMid(c, feiraMid, camL, s, t);
     for (let i = 0; i < 20; i++) { const wx = 40 + i * 110 + Math.sin(t * .4 + i * 1.7) * 40, sx = wx - camL; if (vis(sx, 20)) { gente(c, sx, 214, i); if (i % 3 === 0) { R(c, sx + 6, 204, 5, 6, '#f2efe6'); R(c, sx + 7, 205, 3, 2, '#7cbf6a'); } } }
     for (const bx of FEIRA.BISC) { const x = bx + 108 - camL; if (!vis(x, 80)) continue; for (let i = 0; i < 6; i++) { const k = (t * .25 + i / 6) % 1; R(c, x - 6 + Math.sin(t + i) * 3, 150 - k * 30, 3 + k * 3, 2, `rgba(255,248,232,${(1 - k) * .5})`); } }
     for (const gx of [700, 1660]) { const sx = gx - camL; if (vis(sx, 30)) for (let k = 0; k < 3; k++) R(c, sx + 6 + k * 8, GY - 12 - (Math.sin(t * 6 + k) > .7 ? 1 : 0), 2, 2, '#c43c3a'); }
     fog(c, s, t, camL, .18);
   }
-  function feiraLights(g, s, t, camL) { const a = night(s); if (a < .03) return; for (let x = 58; x < FEIRA.W; x += 92) { const sx = x - camL; if (vis(sx)) { g.fillStyle = `rgba(255,220,150,${.35 * a})`; g.fillRect(sx - 30, 124, 60, 50); lightAdd(sx, 120, a * .5, 60); } } }
+  function feiraLights(g, s, t, camL) { const a = night(s); if (a < .03) return; for (let x = 58; x < FEIRA.W; x += 92) { const sx = x - camL; if (vis(sx)) { const gr = g.createRadialGradient(sx, 128, 2, sx, 140, 40); gr.addColorStop(0, `rgba(255,220,150,${.3 * a})`); gr.addColorStop(1, 'rgba(255,220,150,0)'); g.fillStyle = gr; g.fillRect(sx - 40, 100, 80, 80); lightAdd(sx, 120, a * .45, 56); } } }
 
   /* =====================================================================
      18 · FAZENDAS DE CAFÉ DO PLANALTO
@@ -575,8 +581,8 @@
   let cafeMid = null;
   function cafe(c, s, t, camL) {
     if (!cafeMid) cafeMid = buildCafe(); if (!FAR) FAR = buildFar();
-    sky(c, s, t, camL); tile(c, FAR.ridge, camL * .02); haze(c, s, t, camL, 100, 160); tile(c, FAR.trees, camL * .08); passaros(c, t, camL, 5, 7);
-    c.drawImage(cafeMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    sky(c, s, t, camL); tile(c, FAR.ridge, camL * .02); haze(c, s, t, camL, 100, 160); tile(c, FAR.trees, camL * .08); CAM()?.meio?.(CUR, c, s, t, camL); passaros(c, t, camL, 5, 7);
+    drawMid(c, cafeMid, camL, s, t);
     { const x = 1400 + 85 - camL; if (vis(x, 80)) for (let k = 0; k < 6; k++) { const a = t * 2 + k; R(c, x + Math.cos(a) * 18, 172 + Math.sin(a) * 8, 3, 3, '#c8d0d4'); } }
     for (let x = ((-camL % 40) + 40) % 40 - 40; x < LW + 40; x += 40) { const wx = x + camL; if (hash(Math.floor(wx / 40)) > .55) { ell(c, x, 212, 10, 9, '#2f5a34'); ell(c, x - 2, 208, 7, 6, '#3f7a44'); for (let k = 0; k < 4; k++) R(c, x - 6 + k * 4, 210 - (k % 2) * 4, 2, 2, '#d8443a'); } }
     for (let i = 0; i < 5; i++) { const wx = 760 + i * 120 + Math.sin(t * .3 + i) * 30, sx = wx - camL; if (vis(sx, 20)) { gente(c, sx, 210, i + 2, false); R(c, sx + 5, 196, 1, 14, '#8a6a45'); R(c, sx + 2, 196, 7, 2, '#8a6a45'); } }
@@ -616,7 +622,7 @@
     if (!culturaMid) culturaMid = buildCultura();
     conquistaBack(c, s, t, camL, { seed: 13 });
     const a = night(s); if (a > .05) for (let i = 0; i < 50; i++) { const x = (hash(i + 400) * 600 - camL * .02) % LW, y = hash(i + 401) * 100; if (Math.sin(t * 2 + i) > -.2) R(c, x, y, 1, 1, `rgba(255,255,240,${a})`); }
-    c.drawImage(culturaMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    drawMid(c, culturaMid, camL, s, t);
     { const tx = CULTURA.TEATRO - camL; if (vis(tx, 340)) for (let k = 0; k < 320; k += 8) R(c, tx - 8 + k, 142, 3, 3, (Math.floor(t * 6) + k / 8) % 3 ? '#ffe39a' : '#8a6a3a'); }
     for (const x of [640, 860]) { const sx = x - camL; if (!vis(sx, 120) || a < .05) continue; const ang = Math.sin(t * .6 + x) * .5; c.fillStyle = `rgba(255,250,220,${.08 * a})`; c.beginPath(); c.moveTo(sx, 140); c.lineTo(sx + Math.sin(ang) * 260 - 20, -10); c.lineTo(sx + Math.sin(ang) * 260 + 20, -10); c.closePath(); c.fill(); }
     for (const x of [420, 1180, 1800]) { const sx = x - camL; if (vis(sx, 60)) tree(c, sx, 214, .85, 1, t, x); }
@@ -858,7 +864,7 @@
   function olivia(c, s, t, camL) {
     if (!oliviaMid) oliviaMid = buildOlivia();
     conquistaBack(c, s, t, camL, { seed: 15 });
-    c.drawImage(oliviaMid, camL, 0, LW, LH, 0, 0, LW, LH);
+    drawMid(c, oliviaMid, camL, s, t);
     for (let i = 0; i < 6; i++) { const dir = i % 2 ? 1 : -1, wx = ((i * 431 + t * (50 + i * 6) * dir) % 2900 + 2900) % 2900 - 200, sx = wx - camL; if (vis(sx, 40) && wx < OLIVIA.SESI) carro(c, sx, dir > 0 ? 172 : 196, pick(['#f2f2ee', '#3c6aa8', '#c43c3a', '#2a2a2a'], i), dir); }
     for (let i = 0; i < 3; i++) { const wx = ((i * 500 + t * 22) % 1300), sx = wx - camL; if (vis(sx, 20) && wx < OLIVIA.SESI) { ell(c, sx + 1, 182, 2, 2, '#1c1c1c'); ell(c, sx + 10, 182, 2, 2, '#1c1c1c'); R(c, sx + 3, 177, 6, 2, '#c43c3a'); R(c, sx + 5, 170, 3, 7, pick(['#3c6aa8', '#e8c24c', '#3c8a5a'], i)); R(c, sx + 5, 167, 3, 3, '#e0b08a'); } }
     for (let x = 40; x < OLIVIA.SESI; x += 110) { const sx = x - camL; if (vis(sx, 60)) tree(c, sx, 178, .75, 1, t, x); }
@@ -895,7 +901,7 @@
       labels: [[200, 174, 'TRILHA DO CRISTO', 5, '#5a3c2a'], [1000, 174, 'MIRANTE · 1.100 m', 5, '#5a3c2a'], [1900, 174, 'CUIDADO: VENTO', 5, '#5a3c2a'], [SERRA.CRISTO, 219, 'CRISTO DE MÁRIO CRAVO', 7, '#3a3a34']],
       interact: [['grass', 300, 260], ['grass', 2200, 300], ['grass', 3500, 240], ['fence', 1200, 90], ['crate', 2000], ['crate', 2028, 1], ['bucket', 3000], ['hay', 4200], ['ball', 1600]] },
     { id: 16, key: 'avenidas', nome: 'Monumento ao Índio', lugar: 'Avenidas e rotatória do Monumento ao Índio', width: AVENIDA.W * 2, draw: avenida, lights: avenidaLights, always: true,
-      labels: [[AVENIDA.INDIO, 180, 'MONUMENTO AO ÍNDIO', 7, '#f2efe6'], [380, 121, 'POSTO DO PLANALTO', 7, '#f2efe6'], [825, 155, 'MOTOTÁXI', 6, '#2a2a2a'], [680, 83, 'MOTOTÁXI? SÓ NO PREÇO JUSTO', 6, '#2a2a2a'], [2200, 83, 'COMPRE UM CASACO. SÉRIO.', 6, '#f2efe6'], [2615, 169, 'BORRACHARIA', 6, '#e8c24c']],
+      labels: [[AVENIDA.INDIO, 180, 'MONUMENTO AO ÍNDIO', 7, '#f2efe6'], [380, 121, 'POSTO DO PLANALTO', 7, '#f2efe6'], [825, 155, 'MOTOTÁXI', 6, '#2a2a2a'], [2615, 169, 'BORRACHARIA', 6, '#e8c24c']],
       interact: [['tire', 5000], ['tire', 5060], ['tire', 1300], ['barrel', 5200], ['cone', 2500], ['cone', 2560], ['cone', 4200], ['trash', 2440], ['trash', 3760], ['lever', 3100, 'flood'], ['puddle', 3400, 80], ['crate', 1700]] },
     { id: 17, key: 'feira', nome: 'Feira e biscoitarias', lugar: 'Feira e biscoitos de polvilho', width: FEIRA.W * 2, draw: feira, lights: feiraLights, always: true,
       labels: [[FEIRA.BISC[0] + 60, 184, 'BISCOITOS DE POLVILHO', 6, '#fff4dc'], [FEIRA.BISC[1] + 60, 184, 'BISCOITARIA DA SERRA', 6, '#fff4dc'], [FEIRA.BISC[2] + 60, 184, 'BISCOITO QUENTINHO', 6, '#fff4dc'], [240, 88, 'FEIRA DO PLANALTO', 10, '#3c5a6a'], [1700, 88, 'BISCOITO CURA TUDO (MENOS O FRIO)', 6, '#3c5a6a']],
@@ -1036,11 +1042,12 @@
       const deep = id === 15 ? '#2a2620' : id === 18 ? '#3c6a8a' : '#1c1c1c'; R(c, x, FLOOR, w, LH - FLOOR, deep); R(c, x, FLOOR, w, 3, id === 18 ? '#8ac4d8' : '#3c3a34'); R(c, x - 2, FLOOR, 2, LH - FLOOR, '#4a3a2a'); R(c, x + w, FLOOR, 2, LH - FLOOR, '#4a3a2a');
       if (id === 16) for (const cx of [x - 8, x + w + 2]) { R(c, cx, FLOOR - 9, 6, 9, '#f08a24'); R(c, cx + 1, FLOOR - 6, 4, 2, '#f2f2ee'); } }
   }
-  const textOf = (d) => (c, camera) => { c.save(); c.translate(-Math.round(camera), 0); for (const lb of d.labels || []) { const [x, y, str, size, col] = lb, a = d.labelAlpha ? d.labelAlpha(lb) : 1; if (a <= .01) continue; c.globalAlpha = a; text(c, str, x * 2, y * 2, size, col); } c.restore(); }; // labelAlpha: some com o cenário (ex.: escada da escola)
+  const textOf = (d) => (c, camera) => { c.save(); c.translate(-Math.round(camera), 0); for (const lb of (d.labels || []).concat(CAM()?.falas?.(d.id, camera) || [])) { const [x, y, str, size, col] = lb, a = d.labelAlpha ? d.labelAlpha(lb) : 1; if (a <= .01) continue; c.globalAlpha = a; text(c, str, x * 2, y * 2, size, col); } c.restore(); }; // labelAlpha: some com o cenário (ex.: escada da escola)
   const PUBLIC = [];
   function registrar(d, layout) { // usado aqui e pelos ambientes (cenas 22+)
     if (layout) LAYOUT[d.id] = layout; if (!LAYOUT[d.id]) LAYOUT[d.id] = { platforms: [], gaps: [] };
-    const draw = d.draw; window.HdMaps.register(d.id, { ...d, always: true, text: textOf(d), draw: (c, s, t, camL) => { draw(c, s, t, camL); holes(c, d.id, camL); } }); window.Interact?.addScene?.(d.id, d.interact || []);
+    const draw = d.draw; window.HdMaps.register(d.id, { ...d, always: true, text: textOf(d), draw: (c, s, t, camL) => { CUR = d.id; CAM()?.entrar?.(d.id); draw(c, s, t, camL); CAM()?.frente?.(d.id, c, s, t, camL); holes(c, d.id, camL); },
+      lights: (g, s, t, camL) => { d.lights?.(g, s, t, camL); CAM()?.luzes?.(d.id, g, s, t, camL); } }); window.Interact?.addScene?.(d.id, d.interact || []);
     const i = LIST.findIndex((x) => x.id === d.id); if (i >= 0) LIST[i] = d; else LIST.push(d);
     const pub = Object.freeze({ id: d.id, key: d.key, nome: d.nome, lugar: d.lugar, largura: d.width, noite: !!d.noite, interno: !!d.amb, plataformas: LAYOUT[d.id].platforms, vaos: LAYOUT[d.id].gaps, interativos: (d.interact || []).length, grupo: d.grupo || 'cenario', limites: d.limites || null });
     const j = PUBLIC.findIndex((x) => x.id === d.id); if (j >= 0) PUBLIC[j] = pub; else PUBLIC.push(pub);
@@ -1061,7 +1068,8 @@
     plaster, brick, azulejo, roofTiles, janela, ac, caixaDagua, antena, parabolica, varal, gato, cachorro, plantaVaso, grafite, cartaz, bandeirinhas, predio, loja, casa,
     orelhao, banca, ponto, lixeira, hidrante, placaRua, moto, bike, carro, poste, fios, canteiro, ipe, mesaBar, calcada, asfalto, pedraPortuguesa, pisoInterno, terra,
     conquistaBack, fog, cityNight, passaros, pipas, gente, pessoa, coluna, reflexo, vgrad, lerpC, produtos, lojaFrente, OBJ, objetos, chaoDetalhe, ilhaTerra, sombra: (c, x, y, w) => sombra(c, x, y, w), Q, QL, concretoBase,
-    shopFar: () => (SHOPFAR || (SHOPFAR = buildShopFar())), SHOP, heroiPos: () => HERO });
+    shopFar: () => (SHOPFAR || (SHOPFAR = buildShopFar())), SHOP, heroiPos: () => HERO,
+    lojas: (id) => (LOJAS[id] || []).slice(), FAR: () => (FAR || (FAR = buildFar())), cenaAtual: () => CUR, BAIRRO, CENTRO, SERRA, AVENIDA, FEIRA, CAFE, CULTURA, OLIVIA, AIR, cathedral, rocha, cactus, barraca, ac });
 
   window.CampanhaCenarios = Object.freeze({
     get lista() { return Object.freeze(PUBLIC.slice()); },

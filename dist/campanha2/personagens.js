@@ -61,14 +61,18 @@
     c2_barao: { name: 'Barão do Café', skin: '#d8a27a', shade: '#a97556', build: 'belly', top: '#f1ece0', topKind: 'vest', vest: '#5a3a24', vestBand: '#7a5236', pants: '#3c2f26', hat: { kind: 'rancher', color: '#6b4a2c', band: '#2c1e14' }, mustache: '#3a2a20', item: 'mug', pose: 'mug', twitch: true },
     c2_breno: { name: 'Breno Pitbull', skin: '#b98258', shade: '#8a5c3c', build: 'strong', top: '#1f2226', topKind: 'tank', pants: '#2a3442', hair: { style: 'buzz', color: '#1b1714' }, chain: '#e8c24c', tattoo: '#3f4b5a', pose: 'fists', mood: 'angry' },
     c2_ryan: { name: 'Ryan', skin: '#e9c2a3', shade: '#bb9275', build: 'slim', top: '#2f6fb5', topKind: 'hoodie', inner: '#1d2a3c', pants: '#25303f', hair: { style: 'fringe', color: '#2a1d16' }, headset: '#20262c', item: 'pad', pose: 'game' },
-    c2_bryan: { name: 'Bryan', skin: '#e9c2a3', shade: '#bb9275', build: 'slim', top: '#c23f3a', topKind: 'hoodie', inner: '#3c1d1d', pants: '#25303f', hair: { style: 'fringe', color: '#2a1d16' }, headset: '#20262c', item: 'pad', pose: 'game', mirrored: true }
+    c2_bryan: { name: 'Bryan', skin: '#e9c2a3', shade: '#bb9275', build: 'slim', top: '#c23f3a', topKind: 'hoodie', inner: '#3c1d1d', pants: '#25303f', hair: { style: 'fringe', color: '#2a1d16' }, headset: '#20262c', item: 'pad', pose: 'game', mirrored: true },
+    // engarrafamento da Avenida (Passo 2B): genro e sogra presos atrás do Fusca do biscoito
+    c2_cleiton: { name: 'Cleiton do Ubé', skin: '#b47a50', shade: '#86583a', build: 'normal', top: '#2e6ea8', topKind: 'polo', sleeve: 'short', pattern: '#245a8c', pants: '#3a3f46', hat: { kind: 'cap', color: '#1e2a36', band: '#e8c24c' }, hair: { style: 'short', color: '#1c1612' }, mustache: '#1c1612', item: 'keys', pose: 'fists', mood: 'angry' },
+    c2_rosilda: { name: 'Dona Rosilda', skin: '#e3b48f', shade: '#b58665', build: 'belly', h: .9, top: '#3f8a6a', topKind: 'cardigan', inner: '#f2e6c8', skirt: '#6a4a5a', hair: { style: 'curlers', color: '#7a4a34', curler: '#f08ab0' }, glasses: '#5a3a8a', item: 'phone', pose: 'hips', mood: 'angry' },
   };
   SPEC.jorge_celular = { ...SPEC.jorge, name: 'Jorge (no celular)', item: 'phone', pose: 'phone' };
   const ROLE = {
     jorge_gordo: 'trio', jorge: 'trio', jorge_celular: 'trio', miguel: 'amigo', fred_conquista: 'vilão final antes do Jorge',
     c2_ze_taxi: 'aliado', c2_lurdes: 'aliado', c2_mel: 'aliado', c2_biscoito: 'aliado', c2_picole: 'aliado', c2_nando: 'aliado', c2_vo_cida: 'aliado',
     c2_juninho: 'aliado', c2_larissa: 'aliado', c2_gugu: 'aliado', c2_bia: 'aliado', c2_carlinhos: 'aliado',
-    c2_creuza: 'vilão 1', c2_tonhao: 'vilão 2', c2_valdomiro: 'vilão 3', c2_kaua_influencer: 'vilão 4', c2_barao: 'vilão 5', c2_breno: 'vilão 6', c2_ryan: 'vilão 7', c2_bryan: 'vilão 7'
+    c2_creuza: 'vilão 1', c2_tonhao: 'vilão 2', c2_valdomiro: 'vilão 3', c2_kaua_influencer: 'vilão 4', c2_barao: 'vilão 5', c2_breno: 'vilão 6', c2_ryan: 'vilão 7', c2_bryan: 'vilão 7',
+    c2_cleiton: 'NPC (engarrafamento)', c2_rosilda: 'NPC (engarrafamento)'
   };
 
   /* ---------- cabelos e chapéus ---------- */

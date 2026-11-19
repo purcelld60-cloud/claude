@@ -81,7 +81,7 @@
     for (const pl of D.plataformas) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) window.CampanhaCenarios.plataforma(c, D.id, pl, t);
     window.Interact?.drawBack?.(c, o); window.CampanhaPlantas?.drawBack?.(c, o);
     window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: atkT > 0, attackType: 'paper', attackProgress: 1 - atkT / .32 });
-    window.Interact?.drawFront?.(c, o); window.CampanhaPlantas?.drawFront?.(c, o);
+    window.Interact?.drawFront?.(c, o); window.CampanhaPlantas?.drawFront?.(c, o); window.CampanhaCamadas?.primeiroPlano?.(c, o);
     // passagem mais perto: balão "[E] ..." em cima e o botão grande na tela
     perto = null; if (!viagem && P.ground) { let best = 1e9; for (const p of portais(D.id)) { if (p.tipo === 'rampa') continue; const dd = Math.abs(p.x - P.x); if (dd < 70 && dd < best) { best = dd; perto = p; } } }
     if (perto) { const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.font = '11px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); }
