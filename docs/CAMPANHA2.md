@@ -251,3 +251,35 @@ Os fatos da cidade são gerais e conhecidos: os povos indígenas do planalto, os
 Os moradores citam uns aos outros e os personagens da campanha: o Fusca do Seu Arlindo, o Tonhão, o Seu Zé do Táxi, a Dona Lurdes e o Barão do Café.
 
 No código: `CampanhaMoradores.conversar(id)`, `lista()`, `conhecidos()` e `esquecer()`. Os desenhos estão em `CampanhaPersonagens.registrar`.
+
+## Passo 3 · Poderes e o sistema de escolher poder (`dist/campanha2/poderes.js` e `treino.js`)
+
+**O que o Da Roça leva para Conquista.** Ficam os botões da campanha 1 que você escolheu: **joystick, FALAR, PULAR/VOAR, PEIDO, BOLINHA DE PAPEL e DASH**, com as mesmas teclas (E, Espaço, K, J e L). **Reeis, Bivolt, Batata e o carro a gás somem** enquanto a Campanha 2 está ativa (cenas 12 em diante), tanto os botões quanto as teclas R, B, T e V. Na campanha 1 nada muda.
+
+**Os dois botões novos.** **PODER 1 (tecla U)** e **PODER 2 (tecla I)** usam o mesmo visual dos botões da campanha 1 (mesma moldura, ícone pixelado e nome dentro). Eles ficam onde estavam o Reeis e o Bivolt. Também aparecem no editor de posição dos controles ("Poder 1/2 (Campanha 2)") e nas configurações de teclas. Uma sombra mostra a recarga.
+
+**Os 8 poderes.** Cada vilão derrotado entrega um poder. O Gugu do Ferro-Velho melhora cada um em até 3 níveis.
+
+| Poder | Quem entrega | O que faz | Nível 1 → 3 |
+| --- | --- | --- | --- |
+| FOFOCA CONFUSA | Dona Creuza | Balões de fofoca ("PSIU", "JURA?"); quem estiver perto fica confuso e bate nos colegas | 4 → 6 s, raio 210 → 300 |
+| BUZINA TURBO | Tonhão | Onda sonora em leque ("FOOOM!") que empurra e machuca | dano 6 → 12, empurrão maior |
+| RAJADA DE BISCOITO | Seu Valdomiro | Leque de biscoitos de polvilho girando, que viram farelo ao acertar | 5 → 9 biscoitos |
+| FLASH DO STORY | Kauã Influencer | Flash de celular que clareia a tela e atordoa com estrelinhas | 2 → 3 s |
+| CAFEZÃO | Barão do Café | Xícara fumegando e aura de café: mais velocidade e mais força | 6 → 10 s, até +60% e +80% |
+| SUPERSOCO | Breno Pitbull | Segure para carregar (barra e punho brilhando) e solte o "POW!" que arremessa | dano 20 → 36, carga mais rápida |
+| CLONE DE LAN | Ryan e Bryan | Um Da Roça digital ciano, com linhas de tela, que segue e joga papel | 8 → 12 s |
+| AURA DE AMIZADE | Fred | Escudo dourado com coraçõezinhos: nenhum golpe passa | 4 → 6 s |
+
+**Onde troca.** No **MURAL DOS PODERES**, a cortiça com cartõezinhos na parede do quarto, em cima da cama. Chegando perto aparece **[E] MURAL DOS PODERES**.
+- **Espaços equipados:** os dois espaços (PODER 1 e PODER 2) ficam no alto.
+- **Sempre com você:** a faixa com os básicos, com os ícones tirados dos próprios botões da campanha 1.
+- **Os oito cartões:** cada um tem o retrato do vilão que entrega o poder. Os bloqueados aparecem como silhueta, com "vença Fulano".
+- **Detalhe do poder:** mostra o nível atual, o próximo (com o Gugu) e a recarga.
+- **Como equipar:** com o mouse, o toque ou o teclado (setas, 1 e 2).
+
+O estado fica em `daroca-c2-poderes` até o save da Campanha 2 existir (passo 6).
+
+**Treino (no visualizador).** O botão **TREINO (P)** coloca três espantalhos de treino com barra de vida e mostra a barra de controles da Campanha 2. São os botões da campanha 1, com estilo e ícones copiados do jogo. Com eles dá para testar o peido, o papel, o dash, o voo (segurar o pulo no ar, com barra de gás) e os dois poderes equipados. O botão **MURAL** e o mural do quarto têm, só no visualizador, **TESTE: LIBERAR TODOS** e **TESTE: UPGRADE DO GUGU**.
+
+**Para o passo 6.** O motor dos poderes não depende do jogo: recebe um "mundo" com o herói, os inimigos e funções de dano, empurrão, atordoar e confundir. Falta ligar `CampanhaPoderes.acionarNoJogo` às lutas da campanha: inimigos de verdade, o soltar do supersoco e a aura bloqueando o dano no `hurt()`.

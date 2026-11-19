@@ -226,6 +226,9 @@
     R(c, bx + 3, f - 6, 25, 4, '#6a4428'); R(c, bx + 3, f - 6, 25, 1, '#8a5a34'); R(c, bx + 4, f - 2, 2, 2, '#4a2e18'); R(c, bx + 25, f - 2, 2, 2, '#4a2e18');
     R(c, bx + 3, f - 10, 25, 4, '#efe8d8'); R(c, bx + 3, f - 10, 25, 1, '#ffffff'); R(c, bx + 20, f - 14, 8, 5, '#f6f2ea'); R(c, bx + 20, f - 14, 8, 1, '#ffffff'); R(c, bx + 20, f - 10, 8, 1, '#c8c0b0');
     for (let x = 0; x < 18; x++) for (let y = 0; y < 6; y++) R(c, bx + 3 + x, f - 12 + y, 1, 1, ((x >> 1) + (y >> 1)) % 2 ? '#b83a3a' : '#8a2424'); R(c, bx + 3, f - 12, 18, 1, '#d85a4a'); R(c, bx + 3, f - 7, 18, 1, '#6a1a1a'); for (let x = 0; x < 18; x += 3) R(c, bx + 4 + x, f - 12, 1, 6, '#e8c24c');
+    // mural dos poderes em cima da cama: cortiça com cartõezinhos presos por tachinhas (troca de poderes)
+    R(c, 300, 146, 28, 22, '#5a3a20'); R(c, 301, 147, 26, 20, '#c8a46a'); for (let i = 0; i < 60; i++) R(c, 302 + hash(i * 3.3) * 24, 148 + hash(i * 7.1) * 18, 1, 1, '#b8945a');
+    for (let k = 0; k < 6; k++) { const cx = 303 + (k % 3) * 8, cy = 150 + Math.floor(k / 3) * 9; R(c, cx, cy, 6, 6, '#f6efd8'); R(c, cx + 1, cy + 2, 4, 2, pick(['#e48fb0', '#f08a24', '#e9d6a8', '#c8d8ff', '#a8743a', '#e8433a'], k)); R(c, cx + 2, cy - 1, 2, 2, pick(['#c43c3a', '#2c5a9e', '#3c8a5a'], k)); }
     // lamparina num banquinho do lado da cama
     R(c, 284, b.floor - 10, 9, 2, '#6a4428'); R(c, 285, b.floor - 8, 2, 8, '#5a3a20'); R(c, 290, b.floor - 8, 2, 8, '#5a3a20'); R(c, 286, b.floor - 18, 6, 8, '#3a3a3a'); R(c, 287, b.floor - 17, 4, 6, '#f6c86a'); R(c, 287, b.floor - 20, 4, 2, '#3a3a3a'); R(c, 288, b.floor - 22, 2, 2, '#3a3a3a');
     return cv;
@@ -381,7 +384,7 @@
     interact: [['ball', 1400], ['ball', 1460], ['trash', 1900], ['pot', 1240], ['cone', 1600]] }, { platforms: [[1300, 384, 150], [1490, 328, 140], [1680, 272, 140]], gaps: [] });
 
   /* ---------- passagens entre as cenas ----------
-     tipo: 'porta' (botão ENTRAR/SAIR), 'rolante' (sobe/desce de escada rolante), 'pc' (abre o Fliperama), 'armario' (abre a personalização),
+     tipo: 'porta' (botão ENTRAR/SAIR), 'rolante' (sobe/desce de escada rolante), 'pc' (abre o Fliperama), 'armario' (abre a personalização), 'poderes' (mural para equipar os poderes),
      'rampa' (escada que se sobe andando; no alto troca de cena). x e y em pixels do mundo. */
   const PORTAIS = [
     { cena: 22, x: FR.ENT * 2, tipo: 'porta', rotulo: 'ENTRAR NO SHOPPING', para: { cena: 20, x: 180 } },
@@ -394,6 +397,7 @@
     { cena: 25, x: (QT.x0 + 10) * 2, tipo: 'porta', rotulo: 'SAIR PARA O CORREDOR', para: { cena: 24, x: (COR.Q[3][0] + 8) * 2 } },
     { cena: 25, x: QT.ARM * 2, tipo: 'armario', rotulo: 'ABRIR O ARMÁRIO (ROUPAS)' },
     { cena: 25, x: QT.PC * 2, tipo: 'pc', rotulo: 'USAR O COMPUTADOR (FLIPERAMA)' },
+    { cena: 25, x: 628, tipo: 'poderes', rotulo: 'MURAL DOS PODERES' },
     { cena: 21, x: (1250 + 720) * 2, tipo: 'porta', rotulo: 'ENTRAR NA ESCOLA', para: { cena: 26, x: 120 } },
     { cena: 26, x: 70, tipo: 'porta', rotulo: 'SAIR DA ESCOLA', para: { cena: 21, x: (1250 + 720) * 2 } },
     { cena: 26, tipo: 'rampa', x0: RAMPA.x0, y0: RAMPA.y0, x1: RAMPA.x1, y1: RAMPA.y1, para: { cena: 27, x: 130 } },

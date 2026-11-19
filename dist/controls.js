@@ -15,6 +15,8 @@
     ['vehicle','Carro a gás','Poderes',['KeyV']],
     ['bivolt','Bivolt','Poderes',['KeyB']],
     ['taunt','Provocar / emote','Combate',['KeyT']],
+    ['poder1','Poder equipado 1 (Campanha 2)','Poderes',['KeyU']],
+    ['poder2','Poder equipado 2 (Campanha 2)','Poderes',['KeyI']],
     ['interact','Conversar / interagir','Aventura',['KeyE','Enter']],
     ['pause','Pausar / voltar','Aventura',['Escape']]
   ];

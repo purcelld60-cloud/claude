@@ -27,7 +27,8 @@
   top.append(btn('◀ CENÁRIO', () => go(-1)), title, btn('CENÁRIO ▶', () => go(1)));
   bot.append(btn('◀', null, 'left'), btn('▶', null, 'right'), btn('PULAR', null, 'jump'), btn('BATER', null, 'hit'));
   HOURS.forEach(([n], i) => bot.append(btn(n, () => { hour = i; })));
-  bot.append(btn('FECHAR', close));
+  bot.append(btn('TREINO (P)', () => alternarTreino()), btn('MURAL', () => window.CampanhaPoderes?.abrirMural?.({ teste: true })), btn('FECHAR', close));
+  function alternarTreino() { const TR = window.CampanhaTreino; if (!TR) return; if (!box.querySelector('.c2-treino-wrap')) TR.montarBarra(box.querySelector('.c2-tela'), (id, down) => { if (TR.acao(id, down, P)) return; if (id === 'jump') { if (down) { keys.add('jump'); jump(); } else keys.delete('jump'); } if (id === 'interact' && down) usar(); }); TR.ligar(undefined, P); }
   const idxOf = (id) => Math.max(0, L.findIndex((d) => d.id === id));
   function go(d) { idx = (idx + d + L.length) % L.length; P.x = 300; P.y = FLOOR; P.vy = 0; cam = 0; viagem = null; if (L[idx].noite) hour = 3; }
   function irPara(id, x) { idx = idxOf(id); P.x = x; P.y = FLOOR; P.vy = 0; P.ground = true; cam = Math.max(0, Math.min(L[idx].largura - 960, x - 360)); if (L[idx].noite) hour = 3; }
@@ -35,10 +36,11 @@
   function jump() { if (P.ground && !viagem) { P.vy = -620; P.ground = false; } }
   function hit() { if (atkT <= 0 && !viagem) atkT = .32; }
   // usar a passagem mais perto: porta (escurece e troca), escada rolante (sobe/desce andando sozinho) ou computador
-  const cobre = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.()); // telas que cobrem o visualizador
+  const cobre = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.()); // telas que cobrem o visualizador
   const ocupado = () => cobre() || !!window.CampanhaMoradores?.aberto?.(); // e a conversa, que só pausa o controle // Fliperama ou armário abertos por cima
   function usar() {
     if (viagem || !perto) return; const p = perto;
+    if (p.tipo === 'poderes') { keys.clear(); window.CampanhaPoderes?.abrirMural?.({ teste: true }); return; }
     if (p.tipo === 'conversa') { keys.clear(); window.CampanhaMoradores?.conversar?.(p.id); return; }
     if (p.tipo === 'armario') { if (window.DarocaLook?.open) { keys.clear(); window.DarocaLook.open({ title: 'ARMÁRIO DO QUARTO 4', line: 'Escolha a roupa do Da Roça para hoje.' }); } return; }
     if (p.tipo === 'pc') { if (window.Fliperama?.open) { keys.clear(); window.Fliperama.open(null, { from: 'quarto' }); } return; }
@@ -47,14 +49,17 @@
   }
   addEventListener('keydown', (e) => { if (!open || ocupado()) return; const k = e.code;
     if (k === 'ArrowLeft' || k === 'KeyA') keys.add('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.add('right');
-    if (k === 'Space' || k === 'KeyW' || k === 'ArrowUp') jump(); if (k === 'KeyJ') hit(); if (k === 'KeyE' || k === 'Enter') usar();
+    const TR = window.CampanhaTreino, treino = TR?.ligado?.(), mapa = { KeyJ: 'paper', KeyK: 'fart', KeyL: 'dash', KeyU: 'poder1', KeyI: 'poder2' };
+    if (k === 'KeyP') alternarTreino(); if (treino && mapa[k] && !e.repeat) TR.acao(mapa[k], true, P);
+    if (k === 'Space' || k === 'KeyW' || k === 'ArrowUp') { keys.add('jump'); jump(); if (treino) TR.acao('jump', true, P); } if (k === 'KeyJ' && !treino) hit(); if (k === 'KeyE' || k === 'Enter') usar();
     if (k === 'BracketLeft') go(-1); if (k === 'BracketRight') go(1); if (/^Digit[1-4]$/.test(k)) hour = Number(k.slice(5)) - 1; if (k === 'Escape') close();
     e.preventDefault(); e.stopImmediatePropagation(); }, true);
-  addEventListener('keyup', (e) => { if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.delete('left'); if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.delete('right'); }, true);
+  addEventListener('keyup', (e) => { const TR = window.CampanhaTreino; if (TR?.ligado?.()) { if (e.code === 'KeyU') TR.acao('poder1', false, P); if (e.code === 'KeyI') TR.acao('poder2', false, P); if (e.code === 'Space' || e.code === 'KeyW' || e.code === 'ArrowUp') TR.acao('jump', false, P); } if (e.code === 'Space' || e.code === 'KeyW' || e.code === 'ArrowUp') keys.delete('jump');
+    if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.delete('left'); if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.delete('right'); }, true);
   // chão, plataformas (só por cima), vãos e rampas (escada da escola)
   function physics(d, dt) {
     const dir = (keys.has('right') ? 1 : 0) - (keys.has('left') ? 1 : 0); if (dir) P.facing = dir;
-    P.vx = dir * 260; const lim = d.limites || [40, d.largura - 40]; P.x = Math.max(lim[0], Math.min(lim[1], P.x + P.vx * dt)); // interiores estilo Terraria têm paredes
+    const TR = window.CampanhaTreino; P.vx = TR?.dashing?.() ? P.vx : dir * 260 * (TR?.velocidade?.() || 1); const lim = d.limites || [40, d.largura - 40]; P.x = Math.max(lim[0], Math.min(lim[1], P.x + P.vx * dt)); // interiores estilo Terraria têm paredes
     const prevY = P.y; P.vy = Math.min(900, P.vy + 1700 * dt); P.y += P.vy * dt; P.ground = false;
     const overGap = d.vaos.some(([gx, gw]) => P.x > gx + 10 && P.x < gx + gw - 10);
     for (const r of portais(d.id)) if (r.tipo === 'rampa' && P.x >= r.x0 && P.x <= r.x1) { const ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0); if (P.vy >= 0 && P.y >= ry - 14 && prevY <= ry + 40) { P.y = ry; P.vy = 0; P.ground = true; } if (P.x >= r.x1 - 4 && P.ground && dir > 0) viagem = { tipo: 'porta', t: 0, para: r.para }; }
@@ -73,22 +78,24 @@
     const dt = Math.min(.05, (now - last) / 1000); last = now;
     const fl = cobre(); if (window.CampanhaMoradores?.aberto?.()) { keys.clear(); P.vx = 0; } box.style.visibility = fl ? 'hidden' : 'visible'; if (fl) { requestAnimationFrame(frame); return; }
     t += dt; const d = L[idx];
+    window.CampanhaTreino?.passo?.(dt, P, { cam, segurandoPulo: keys.has('jump') });
     if (viagem) andarViagem(dt); else physics(d, dt);
     const D = L[idx]; cam += ((Math.max(0, Math.min(D.largura - 960, P.x - 360))) - cam) * Math.min(1, dt * 8);
     try { window.DayTime?.force?.(HOURS[hour][1]); } catch (e) {}
     const o = { scene: D.id, camera: cam, time: t, player: P, shots: [], enemies: [], minions: [] };
     try { window.Interact?.update?.(dt, o); } catch (e) {} window.CampanhaCenarios.heroi?.(P.x, P.y, P.vy);
     window.Art.drawScene(c, D.id, cam, t);
-    c.save(); c.translate(-Math.round(cam), 0);
+    c.save(); { const sh = window.CampanhaTreino?.tremor?.() || 0; c.translate(-Math.round(cam) + Math.round((Math.random() - .5) * sh), Math.round((Math.random() - .5) * sh)); }
     for (const pl of D.plataformas) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) window.CampanhaCenarios.plataforma(c, D.id, pl, t);
     window.Interact?.drawBack?.(c, o); window.CampanhaPlantas?.drawBack?.(c, o); window.CampanhaMoradores?.desenhar?.(c, o);
     window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: atkT > 0, attackType: 'paper', attackProgress: 1 - atkT / .32 });
+    window.CampanhaTreino?.desenhar?.(c, t);
     window.Interact?.drawFront?.(c, o); window.CampanhaPlantas?.drawFront?.(c, o); window.CampanhaCamadas?.primeiroPlano?.(c, o);
     // passagem mais perto: balão "[E] ..." em cima e o botão grande na tela
     perto = null; if (!viagem && P.ground) { let best = 1e9; for (const p of portais(D.id)) { if (p.tipo === 'rampa') continue; const dd = Math.abs(p.x - P.x); if (dd < 70 && dd < best) { best = dd; perto = p; } } const m = window.CampanhaMoradores?.perto?.(D.id, P.x); if (m && Math.abs(m.x - P.x) < best) perto = { tipo: 'conversa', id: m.id, x: m.x, rotulo: 'CONVERSAR COM ' + m.nome.toUpperCase() }; }
     if (perto) { const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.font = '11px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); }
     c.restore(); window.CampanhaAmbientes?.cobrir?.(c, D.id, cam);
-    entrar.hidden = !perto; if (perto) entrar.textContent = perto.tipo === 'conversa' ? 'FALAR' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR';
+    entrar.hidden = !perto; if (perto) entrar.textContent = perto.tipo === 'conversa' ? 'FALAR' : perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR';
     if (window.Graphics?.isShader?.()) window.Shader?.apply?.(cv, { scene: D.id, camera: cam, time: t, outdoor: !D.interno });
     if (fade > 0) { c.fillStyle = `rgba(8,10,14,${fade})`; c.fillRect(0, 0, 960, 540); }
     title.textContent = (idx + 1) + '/' + L.length + ' · ' + D.nome.toUpperCase();
