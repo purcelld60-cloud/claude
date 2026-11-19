@@ -35,13 +35,15 @@
   function jump() { if (P.ground && !viagem) { P.vy = -620; P.ground = false; } }
   function hit() { if (atkT <= 0 && !viagem) atkT = .32; }
   // usar a passagem mais perto: porta (escurece e troca), escada rolante (sobe/desce andando sozinho) ou computador
+  const ocupado = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.()); // Fliperama ou armário abertos por cima
   function usar() {
     if (viagem || !perto) return; const p = perto;
+    if (p.tipo === 'armario') { if (window.DarocaLook?.open) { keys.clear(); window.DarocaLook.open({ title: 'ARMÁRIO DO QUARTO 4', line: 'Escolha a roupa do Da Roça para hoje.' }); } return; }
     if (p.tipo === 'pc') { if (window.Fliperama?.open) { keys.clear(); window.Fliperama.open(null, { from: 'quarto' }); } return; }
     if (p.tipo === 'rolante') { keys.clear(); viagem = { tipo: 'rolante', t: 0, dur: 2.2, de: [P.x, P.y], ini: p.de, fim: p.ate, para: p.para }; return; }
     keys.clear(); viagem = { tipo: 'porta', t: 0, para: p.para };
   }
-  addEventListener('keydown', (e) => { if (!open || window.Fliperama?.isOpen?.()) return; const k = e.code;
+  addEventListener('keydown', (e) => { if (!open || ocupado()) return; const k = e.code;
     if (k === 'ArrowLeft' || k === 'KeyA') keys.add('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.add('right');
     if (k === 'Space' || k === 'KeyW' || k === 'ArrowUp') jump(); if (k === 'KeyJ') hit(); if (k === 'KeyE' || k === 'Enter') usar();
     if (k === 'BracketLeft') go(-1); if (k === 'BracketRight') go(1); if (/^Digit[1-4]$/.test(k)) hour = Number(k.slice(5)) - 1; if (k === 'Escape') close();
@@ -50,7 +52,7 @@
   // chão, plataformas (só por cima), vãos e rampas (escada da escola)
   function physics(d, dt) {
     const dir = (keys.has('right') ? 1 : 0) - (keys.has('left') ? 1 : 0); if (dir) P.facing = dir;
-    P.vx = dir * 260; P.x = Math.max(40, Math.min(d.largura - 40, P.x + P.vx * dt));
+    P.vx = dir * 260; const lim = d.limites || [40, d.largura - 40]; P.x = Math.max(lim[0], Math.min(lim[1], P.x + P.vx * dt)); // interiores estilo Terraria têm paredes
     const prevY = P.y; P.vy = Math.min(900, P.vy + 1700 * dt); P.y += P.vy * dt; P.ground = false;
     const overGap = d.vaos.some(([gx, gw]) => P.x > gx + 10 && P.x < gx + gw - 10);
     for (const r of portais(d.id)) if (r.tipo === 'rampa' && P.x >= r.x0 && P.x <= r.x1) { const ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0); if (P.vy >= 0 && P.y >= ry - 14 && prevY <= ry + 40) { P.y = ry; P.vy = 0; P.ground = true; } if (P.x >= r.x1 - 4 && P.ground && dir > 0) viagem = { tipo: 'porta', t: 0, para: r.para }; }
@@ -67,7 +69,7 @@
   function frame(now) {
     if (!open) return;
     const dt = Math.min(.05, (now - last) / 1000); last = now;
-    const fl = !!window.Fliperama?.isOpen?.(); box.style.visibility = fl ? 'hidden' : 'visible'; if (fl) { requestAnimationFrame(frame); return; }
+    const fl = ocupado(); box.style.visibility = fl ? 'hidden' : 'visible'; if (fl) { requestAnimationFrame(frame); return; }
     t += dt; const d = L[idx];
     if (viagem) andarViagem(dt); else physics(d, dt);
     const D = L[idx]; cam += ((Math.max(0, Math.min(D.largura - 960, P.x - 360))) - cam) * Math.min(1, dt * 8);
@@ -83,8 +85,8 @@
     // passagem mais perto: balão "[E] ..." em cima e o botão grande na tela
     perto = null; if (!viagem && P.ground) { let best = 1e9; for (const p of portais(D.id)) { if (p.tipo === 'rampa') continue; const dd = Math.abs(p.x - P.x); if (dd < 70 && dd < best) { best = dd; perto = p; } } }
     if (perto) { const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.font = '11px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); }
-    c.restore();
-    entrar.hidden = !perto; if (perto) entrar.textContent = perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR';
+    c.restore(); window.CampanhaAmbientes?.cobrir?.(c, D.id, cam);
+    entrar.hidden = !perto; if (perto) entrar.textContent = perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR';
     if (window.Graphics?.isShader?.()) window.Shader?.apply?.(cv, { scene: D.id, camera: cam, time: t, outdoor: !D.interno });
     if (fade > 0) { c.fillStyle = `rgba(8,10,14,${fade})`; c.fillRect(0, 0, 960, 540); }
     title.textContent = (idx + 1) + '/' + L.length + ' · ' + D.nome.toUpperCase();

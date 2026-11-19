@@ -1036,13 +1036,13 @@
       const deep = id === 15 ? '#2a2620' : id === 18 ? '#3c6a8a' : '#1c1c1c'; R(c, x, FLOOR, w, LH - FLOOR, deep); R(c, x, FLOOR, w, 3, id === 18 ? '#8ac4d8' : '#3c3a34'); R(c, x - 2, FLOOR, 2, LH - FLOOR, '#4a3a2a'); R(c, x + w, FLOOR, 2, LH - FLOOR, '#4a3a2a');
       if (id === 16) for (const cx of [x - 8, x + w + 2]) { R(c, cx, FLOOR - 9, 6, 9, '#f08a24'); R(c, cx + 1, FLOOR - 6, 4, 2, '#f2f2ee'); } }
   }
-  const textOf = (d) => (c, camera) => { c.save(); c.translate(-Math.round(camera), 0); for (const [x, y, str, size, col] of d.labels || []) text(c, str, x * 2, y * 2, size, col); c.restore(); };
+  const textOf = (d) => (c, camera) => { c.save(); c.translate(-Math.round(camera), 0); for (const lb of d.labels || []) { const [x, y, str, size, col] = lb, a = d.labelAlpha ? d.labelAlpha(lb) : 1; if (a <= .01) continue; c.globalAlpha = a; text(c, str, x * 2, y * 2, size, col); } c.restore(); }; // labelAlpha: some com o cenário (ex.: escada da escola)
   const PUBLIC = [];
   function registrar(d, layout) { // usado aqui e pelos ambientes (cenas 22+)
     if (layout) LAYOUT[d.id] = layout; if (!LAYOUT[d.id]) LAYOUT[d.id] = { platforms: [], gaps: [] };
     const draw = d.draw; window.HdMaps.register(d.id, { ...d, always: true, text: textOf(d), draw: (c, s, t, camL) => { draw(c, s, t, camL); holes(c, d.id, camL); } }); window.Interact?.addScene?.(d.id, d.interact || []);
     const i = LIST.findIndex((x) => x.id === d.id); if (i >= 0) LIST[i] = d; else LIST.push(d);
-    const pub = Object.freeze({ id: d.id, key: d.key, nome: d.nome, lugar: d.lugar, largura: d.width, noite: !!d.noite, interno: !!d.amb, plataformas: LAYOUT[d.id].platforms, vaos: LAYOUT[d.id].gaps, interativos: (d.interact || []).length, grupo: d.grupo || 'cenario' });
+    const pub = Object.freeze({ id: d.id, key: d.key, nome: d.nome, lugar: d.lugar, largura: d.width, noite: !!d.noite, interno: !!d.amb, plataformas: LAYOUT[d.id].platforms, vaos: LAYOUT[d.id].gaps, interativos: (d.interact || []).length, grupo: d.grupo || 'cenario', limites: d.limites || null });
     const j = PUBLIC.findIndex((x) => x.id === d.id); if (j >= 0) PUBLIC[j] = pub; else PUBLIC.push(pub);
     if (d.plat) PLAT[d.id] = d.plat;
   }
