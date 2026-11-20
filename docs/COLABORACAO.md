@@ -1,0 +1,66 @@
+# Colaboração entre IAs (Claude e ChatGPT)
+
+Este arquivo é o canal de conversa entre as IAs que trabalham neste repositório. A gente não se fala diretamente: tudo passa por aqui e pelos commits. **Leia antes de começar e escreva no mural no fim do seu trabalho.**
+
+O dono do projeto fala português do Brasil. Toda resposta, comentário e documentação são em pt-BR.
+
+## Regras do dono (valem para todos)
+
+- Preserve a campanha principal, os saves (`da-roca-adventure-v1`), os controles e a continuidade do áudio.
+- Tudo em **pixel art**, desenhado em código. Nada de imagens, músicas ou personagens copiados de outros jogos.
+- Não mude a dificuldade nem a jogabilidade da campanha principal sem o dono pedir.
+- **Nunca** peça nem escreva senhas, chaves ou certificados. Diga só o nome do Secret que o dono deve criar.
+- Merge na `main` só quando o dono pedir. O merge gera sozinho o site, o APK e o IPA.
+
+## Branches (para não brigar)
+
+| Quem | Branch | Como entrega |
+| --- | --- | --- |
+| Claude | `claude/game-update-6g517u` | PR para a `main` quando o dono pedir |
+| ChatGPT | sugestão: `chatgpt/<assunto>` | PR para a `main`; avise aqui no mural |
+
+Antes de começar, rode `git fetch` e veja o que mudou nas duas branches. Se for mexer num arquivo que a outra IA mexeu nos últimos commits, escreva no mural primeiro.
+
+## Mapa rápido do projeto
+
+- `dist/` tem o jogo inteiro (HTML/JS/CSS puro, sem build). Para rodar: `python3 tools/dev-server.py` e abra `http://127.0.0.1:8080`.
+- **Campanha 1:** `game.js` (motor e lutas), `art.js` (personagens e cenários), `cinematics.js` e `roteiro.js` (cutscenes) e `roteiros/*.json` (as cutscenes em dados, guia em `docs/ROTEIROS.md`).
+- **Campanha 2** (`dist/campanha2/`, documentada em `docs/CAMPANHA2.md`):
+  - `personagens.js` e `cenarios.js`, mais `camadas.js`, `ambientes.js`, `novos-a.js` e `novos-b.js`: personagens e cenários;
+  - `jogo.js`: o motor do jogo da Campanha 2 (missões, save `daroca-c2-save`, HUD e pausa);
+  - `fases.js`: inimigos, chefes, arena, fases e golpes;
+  - `aliados.js`: missões extras, cachorro companheiro, corrida e ritmo;
+  - `poderes.js` e `treino.js`: poderes e controles; `loja.js`: garrafadas; `oficina.js`: melhorias do Gugu;
+  - `cutscenes.js`: kit das cutscenes, com balão de fala e trilha sintetizada; `../roteiros/c2_*.json`: as 24 cutscenes;
+  - `../mapa3d.js` e `../mapas.js`: os mapas do carro a gás e do táxi;
+  - `dev.js` e `../dev-mode.js`: o modo desenvolvedor (`?dev`).
+- Ao criar um arquivo novo no cliente:
+  1. coloque o `<script>` em `dist/index.html`;
+  2. ponha o arquivo na lista `SHELL` de `dist/sw.js` e suba o número do `CACHE`;
+  3. rode `node --check`.
+- Testes: abra `?campanha2` (jogo da Campanha 2), `?cenarios2` (visualizador de cenários e cutscenes) ou `?dev` (tudo liberado).
+
+## Quem está mexendo em quê agora
+
+| Área | Quem | Situação |
+| --- | --- | --- |
+| Interface estilo roça (botões e menus da Campanha 2) | Claude | em andamento |
+| Efeitos de ataque e qualidade das lutas (Campanha 2) | Claude | em andamento |
+| — livre — | ChatGPT | escreva aqui o que vai pegar |
+
+Ideias que estão livres e seriam ótimas:
+- músicas e sons novos sintetizados (sem copiar nada);
+- mais falas para os moradores;
+- novas atividades na cidade, como a pescaria na lagoa ou o futebol no Lomantão;
+- testes automatizados com Playwright;
+- acessibilidade, com leitores de tela e alto contraste.
+
+## Mural de recados
+
+Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
+
+- **2026-11-20 · Claude:** Campanha 2 inteira jogável:
+  - prólogo, 8 vilões, batalha final, final feliz e créditos;
+  - missões dos aliados e a Oficina do Gugu.
+
+  Agora estou fazendo: interface estilo roça nas telas da Campanha 2 e efeitos de luta melhores (`fases.js`, `treino.js`, `poderes.js`, `jogo.js`). Se precisar mexer nesses arquivos, combine aqui antes. Bem-vindo, ChatGPT!

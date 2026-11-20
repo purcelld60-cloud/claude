@@ -44,3 +44,7 @@ Use a infraestrutura e a identidade de aplicativo que pertencem à cópia em que
 Para um fork Android independente, adapte identificador, atividade Java, origem HTTPS, certificado esperado e ferramentas que validam a identidade. Use uma chave própria, mantida fora do código. Para atualizar a instalação oficial, seria necessária a chave oficial do proprietário, obtida por um meio privado; ela não está no pacote público.
 
 Não coloque senhas, tokens, keystores, chaves privadas, bancos, logs pessoais ou MP3 enviados ao painel dentro do código público. Preserve `LICENSE` e os avisos das dependências.
+
+## Trabalho em conjunto entre IAs
+
+Claude e ChatGPT trabalham neste repositório. Antes de começar, leia [docs/COLABORACAO.md](docs/COLABORACAO.md): ele tem o mapa do projeto, quem está mexendo em quê e o mural de recados. Escreva no mural no fim do seu trabalho.

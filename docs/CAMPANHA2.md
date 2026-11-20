@@ -610,3 +610,17 @@ O save marca a campanha como zerada (`flags.zerou`) e o painel da Campanha 2 pas
 - a MÁQUINA DE TURBINAR, com manômetro, canos e vapor.
 
 Você escolhe um poder e vê o nível de agora e o próximo. O Gugu põe a garrafada na máquina, martela e solda (com faíscas e clarão), o manômetro sobe, a garrafa sai brilhando e o carimbo **TURBINADO!** marca o nível novo. O nível 2 custa 80 moedas e o nível 3 custa 160.
+
+
+## Modo desenvolvedor (`dist/dev-mode.js` e `dist/campanha2/dev.js`)
+
+O modo fica desligado no site e nos apps normais. Há duas formas de ligar:
+- **IPA de desenvolvedor:** no GitHub, abra Actions › "Gerar IPA" › Run workflow e marque **dev**. A Release sai como "DESENVOLVEDOR" (`ios-dev-bN`), com o arquivo `DaRoca-DEV-...ipa`.
+- **No navegador:** abra o jogo com `?dev` no fim do endereço.
+
+Com ele ligado:
+- **🎬 CUTSCENES · DEV** na tela inicial: todas as cutscenes. São 56: as 24 da Campanha 2, os roteiros da campanha 1 e as cenas do motor do jogo.
+- **Terreiro dos Chefes (sandbox)** liberado.
+- **Campanha 2** liberada, com **🛠 ESCOLHER CAPÍTULO**: do prólogo ao pós-final, já com os vilões anteriores vencidos, os poderes deles liberados e 600 moedas.
+- **⚡ LIBERAR TUDO:** os 8 poderes no nível 3, 999 moedas e os extras.
+- Uma etiqueta amarela "MODO DESENVOLVEDOR" no canto da tela.

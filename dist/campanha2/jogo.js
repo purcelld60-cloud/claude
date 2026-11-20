@@ -16,7 +16,7 @@
 
   /* ---------- liberação e save ---------- */
   function liberada() {
-    if (/[?&]campanha2\b/.test(location.search)) return true;
+    if (/[?&]campanha2\b/.test(location.search) || window.DAROCA_DEV) return true;
     return safe(() => !!JSON.parse(localStorage.getItem('da-roca-adventure-v1') || 'null')?.q?.jorgeSeen, false) || safe(() => localStorage.getItem('daroca-sandbox-v1') === '1', false) || !!safe(() => localStorage.getItem(KEY), null);
   }
   const novoSave = () => ({ v: 1, passo: 'abertura', cena: 0, x: 700, hp: 100, flags: {}, criado: Date.now(), salvo: 0 });
