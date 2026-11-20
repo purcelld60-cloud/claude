@@ -45,7 +45,7 @@ Antes de começar, rode `git fetch` e veja o que mudou nas duas branches. Se for
 | Área | Quem | Situação |
 | --- | --- | --- |
 | Menu de pausa estilo roça + OPÇÕES (as duas campanhas) | Claude | feito |
-| Efeitos de luta da Campanha 2 (`impacto.js`) | Claude | feito |
+| Golpes da Campanha 2: o inimigo só pisca (sem efeitos extras) | Claude | feito |
 | — livre — | ChatGPT | escreva aqui o que vai pegar |
 
 Ideias que estão livres e seriam ótimas:
@@ -69,3 +69,6 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **sem onomatopeias** nos golpes ("PÁ!", "TUM!"...); no acerto, o inimigo só pisca;
   - os botões ficam com as **cores e posições antigas**;
   - o menu de pausa novo (placa pendurada) vale nas duas campanhas, com **OPÇÕES** (hora do dia, clima, qualidade e mudar botões de lugar no celular).
+- **2026-11-20 · Claude:** o dono não quer **nenhum efeito extra nos golpes**: nada de onomatopeia, faísca, poeira, câmera lenta ou hitstop. No golpe, **o inimigo só pisca**.
+  - Removi o `impacto.js`.
+  - A Campanha 2 agora abre para todo mundo direto da tela inicial.

@@ -626,19 +626,11 @@ Com ele ligado:
 - Uma etiqueta amarela "MODO DESENVOLVEDOR" no canto da tela.
 
 
-## Lutas, menu de pausa e botões (`impacto.js`, `botoes.js`, `roca-ui.css`)
+## Lutas, menu de pausa e botões (`botoes.js`, `roca-ui.css`)
 
-**Efeitos de luta** (`campanha2/impacto.js`, `window.CampanhaImpacto`)
-- **No golpe:** o inimigo pisca, aparece o número do dano e o jogo dá um tranquinho de tempo (hitstop). **Não tem onomatopeia**: o dono pediu assim.
-- **Outros efeitos:**
-  - poeira ao pular e aterrissar;
-  - fantasmas e linhas de velocidade no dash;
-  - fumaça e moedas quando um inimigo cai;
-  - energia se juntando no chefe antes do golpe;
-  - choque no chão;
-  - câmera lenta no nocaute do chefe.
-- **Projéteis:** bolinha de papel amassado girando e nuvem de peido em pixel.
-- **Modo leve:** no gráfico leve, as partículas diminuem sozinhas.
+**Golpes:** quando apanha, o inimigo (ou o chefe, ou o espantalho do treino) **só pisca** e mostra o número do dano. Não há onomatopeias nem outros efeitos extras: o dono pediu assim. O piscar fica em `treino.js` (`CampanhaTreino.piscando`).
+
+**Campanha 2 aberta para todos:** o botão ❄ CAMPANHA 2 · CONQUISTA da tela inicial já começa a campanha. Não precisa zerar a principal.
 
 **Menu de pausa no estilo roça:** placa pendurada por cordas e botões de madeira nas cores antigas. Vale nas duas campanhas.
 - **Campanha 2:** CONTINUAR, ⚙ OPÇÕES, MISSÕES, SOM e SALVAR E SAIR.
