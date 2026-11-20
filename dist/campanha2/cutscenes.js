@@ -308,18 +308,53 @@
      ANIMAÇÕES EXTRAS (por cima ou em volta do personagem)
      ===================================================================== */
   const cab = (x) => { const S = x.o.scale || 1, alt = (220 - (x.head?.top ?? 150)) * S, fx = x.o.facing < 0 ? -1 : 1; return { S, alt, fx, topo: x.y - alt, olhoX: x.x + fx * ((x.head ? x.head.cx - 100 : 0) * S + 5 * S), olhoY: x.y - alt + 13 * S, boca: x.y - alt + 20 * S }; };
+  function desenhaAgarrado(w, hx, gy, t, d, op) {
+    const INK = '#342d2b', SK = op.pele || '#d29a6c', SKS = '#a8704a', SKL = '#e9b684', SH = op.camisa || '#dc8c47', SHS = '#b06a32', SHL = '#efaa6a', PA = '#455b62', PAS = '#33464c', BO = '#3a2a1e', BOL = '#6a4a34', HA = '#5f4934';
+    const puxa = Math.round(Math.sin(t * 7) * 3 + Math.sin(t * 13) * 1.5), chute = (k) => Math.round(Math.max(0, Math.sin(t * 11 + k * 2.1)) * 6);
+    w.save(); w.translate(Math.round(hx) + puxa, Math.round(gy)); w.scale(d, 1);
+    const r = (x, y, ww, hh, col) => { w.fillStyle = col; w.fillRect(x, y, ww, hh); };
+    const cont = (x, y, ww, hh, col) => { r(x - 1, y - 1, ww + 2, hh + 2, INK); r(x, y, ww, hh, col); };
+    const barra = (x1, y1, x2, y2, esp, col, contorno = true) => { const n = Math.max(1, Math.round(Math.hypot(x2 - x1, y2 - y1))); if (contorno) for (let k = 0; k <= n; k++) r(Math.round(x1 + (x2 - x1) * k / n) - 1, Math.round(y1 + (y2 - y1) * k / n) - 1, esp + 2, esp + 2, INK); for (let k = 0; k <= n; k++) r(Math.round(x1 + (x2 - x1) * k / n), Math.round(y1 + (y2 - y1) * k / n), esp, esp, col); };
+    // sombra no chão
+    w.globalAlpha = .28; r(-92, -2, 90, 4, '#000'); r(-86, -3, 78, 1, '#000'); w.globalAlpha = 1;
+    // poeira de ser arrastado
+    for (let k = 0; k < 5; k++) { const q = (t * 1.6 + k / 5) % 1; w.globalAlpha = (1 - q) * .55; r(-60 - k * 8 - Math.round(q * 18), -4 - Math.round(q * 9), 4 + Math.round(q * 5), 3 + Math.round(q * 3), '#d8d0c0'); } w.globalAlpha = 1;
+    // pernas: coxas no chão e as canelas batendo (joelho dobrado)
+    for (const [k, y0, cor] of [[0, -11, PAS], [1, -7, PA]]) { const jx = -66, jy = y0, lev = chute(k); barra(-50, y0 - 1, jx, jy, 6, cor); barra(jx, jy, -80, y0 - 10 - lev, 6, cor);
+      const px = -80, py = y0 - 10 - lev; r(px - 9, py - 3, 10, 8, INK); r(px - 8, py - 2, 8, 6, BO); r(px - 8, py - 2, 2, 6, BOL); r(px - 10, py + 4, 4, 2, INK); }
+    // cinto e tronco (camisa laranja), deitado de bruços
+    cont(-52, -18, 4, 15, '#5a3a20');
+    cont(-48, -19, 27, 16, SH); r(-48, -6, 27, 3, SHS); r(-48, -19, 27, 2, SHL); r(-44, -12, 6, 1, SHS); r(-36, -10, 7, 1, SHS); r(-28, -13, 1, 6, SHS); r(-23, -17, 3, 12, SHS);
+    // mochila nas costas
+    cont(-46, -29, 19, 10, '#6a7a3a'); r(-46, -29, 19, 2, '#8a9a4a'); r(-44, -24, 15, 1, '#4a5a2a'); r(-38, -27, 4, 3, '#c8b860'); r(-46, -20, 3, 2, '#4a5a2a'); r(-30, -20, 3, 2, '#4a5a2a');
+    // braço de trás (mais escuro), esticado até o tornozelo
+    barra(-24, -18, -2, -16, 4, '#9a6038'); r(-3, -19, 6, 6, INK); r(-2, -18, 4, 4, SKS); r(1, -18, 2, 4, '#8a5030');
+    // cabeça levantada olhando pra cima: cabelo, orelha, olho apertado de esforço e boca gritando
+    r(-21, -22, 8, 6, SKS); // pescoço esticado
+    cont(-25, -37, 16, 16, SK); r(-25, -37, 16, 3, HA); r(-25, -37, 5, 11, HA); r(-21, -29, 3, 4, SKS); r(-20, -28, 1, 2, '#8e5e43'); r(-24, -22, 15, 1, SKS);
+    r(-14, -32, 5, 2, '#f2f2ee'); r(-12, -32, 2, 2, '#252f2b'); r(-15, -35, 5, 1, '#5a3a20'); r(-15, -34, 1, 1, '#5a3a20'); r(-10, -28, 2, 2, SKS); r(-9, -27, 1, 1, '#8e5e43');
+    const grito = Math.floor(t * 5) % 2; r(-15, -25, 6, 2 + grito, '#5a2018'); r(-14, -25, 4, 1, '#f2f2ee'); r(-12, -23 + grito, 2, 1, '#c84a3a');
+    if (op.chorando !== false) { const qq = (t * 1.2) % 1; r(-12, -30, 1, 4, '#8ad0ff'); w.globalAlpha = 1 - qq; r(-12, -26 + Math.round(qq * 8), 1, 2, '#8ad0ff'); w.globalAlpha = 1; }
+    // chapéu de palha torto, quase caindo da cabeça
+    const ch = Math.round(Math.sin(t * 7) * 1); w.save(); w.translate(-24, -38 + ch); w.rotate(-.38); r(-12, -1, 26, 5, INK); r(-11, 0, 24, 3, '#dbb969'); r(-11, 3, 24, 1, '#6e5335'); r(-6, -8, 14, 9, INK); r(-5, -7, 12, 7, '#dfb96a'); r(-5, -2, 12, 2, '#8a5a3b'); r(-4, -8, 8, 1, '#f0ce7e'); w.restore();
+    // braço da frente: manga, braço e a mão fechada no tornozelo (dedos aparecendo do outro lado)
+    barra(-20, -12, -8, -10, 5, SH); barra(-8, -10, 0, -9, 4, SK); r(-1, -12, 7, 8, INK); r(0, -11, 5, 6, SK); r(0, -11, 5, 1, SKL); r(1, -8, 4, 1, '#8e5e43'); r(1, -6, 4, 1, '#8e5e43');
+    // gotas de suor e risquinhos de esforço
+    const q = (t * 1.3) % 1; w.globalAlpha = 1 - q; r(-26, -36 - Math.round(q * 6), 2, 3, '#8ad0ff'); w.globalAlpha = 1;
+    if (Math.floor(t * 4) % 2) { r(-4, -36, 1, 4, '#ffffff'); r(-1, -34, 1, 4, '#ffffff'); r(2, -32, 1, 3, '#ffffff'); }
+    w.restore();
+  }
   const anims = {
     chorando: { depois(w, x) { const h = cab(x); w.fillStyle = '#8ad0ff'; w.fillRect(Math.round(h.olhoX), Math.round(h.olhoY + 2 * h.S), 2, Math.round(9 * h.S)); for (let k = 0; k < 2; k++) { const q = (x.t * 1.3 + k * .5) % 1; w.globalAlpha = 1 - q; w.fillRect(Math.round(h.olhoX + h.fx * 2), Math.round(h.olhoY + 10 * h.S + q * 50 * h.S), 2, 4); } w.globalAlpha = 1; } },
     frio: { antes(w, x) { w.save(); w.translate(Math.round(Math.sin(x.t * 55) * 1.4), 0); }, depois(w, x) { w.restore(); const h = cab(x); for (let k = 0; k < 3; k++) { const q = (x.t * .7 + k / 3) % 1; w.globalAlpha = (1 - q) * .7; circ(w, h.olhoX + h.fx * (8 + q * 26) * h.S, h.boca - q * 18 * h.S, (2 + q * 8) * h.S, '#f4f8ff'); } w.globalAlpha = 1; } },
     treme: { antes(w, x) { w.save(); w.translate(Math.round(Math.sin(x.t * 47) * 2), Math.round(Math.cos(x.t * 31))); }, depois(w) { w.restore(); } },
     deitado: { antes(w, x) { w.save(); w.translate(x.x, x.y); w.rotate(Math.PI / 2 * (x.o.facing < 0 ? -1 : 1)); w.translate(-x.x, -x.y); }, depois(w, x) { w.restore(); const h = cab(x), d = x.o.facing < 0 ? -1 : 1, L = h.alt * .62, x0 = d > 0 ? x.x - 4 : x.x - L + 4; for (let i = 0; i < L; i += 4) for (let j = 0; j < 22; j += 4) P(w, x0 + i, x.y - 2 + j, 4, 4, ((i + j) / 4) % 2 ? '#b83a3a' : '#8a2424'); P(w, x0, x.y - 2, L, 2, '#d85a4a'); } },
-    // Da Roça deitado no chão, agarrado nas pernas de quem está na frente (é arrastado junto quando a pessoa sacode)
+    // Da Roça de bruços no chão, agarrado nos tornozelos de quem está na frente. Desenho próprio (pixel a pixel, mesmas
+    // cores do sprite): o ator fica em x = onde as mãos seguram; ele é arrastado junto a cada sacudida e bate as pernas.
     agarra_pernas: {
-      cabeca: (x) => ({ x: x.x + (x.facing < 0 ? -1 : 1) * x.alto * .82, y: x.y - 14 }),
-      antes(w, x) { const d = x.o.facing < 0 ? -1 : 1, puxa = Math.sin(x.t * 7) * 3 + Math.sin(x.t * 13) * 1.5; w.save(); w.translate(Math.round(puxa), 0); w.save(); w.translate(x.x, x.y); w.rotate(Math.PI / 2 * d); w.translate(-x.x, -x.y); },
-      depois(w, x) { w.restore(); const h = cab(x), d = h.fx, ombro = x.x + d * h.alt * .62, ponta = x.x + d * (h.alt + 10 * h.S), pele = x.a.opts?.pele || '#c68a5e', manga = x.a.opts?.manga || '#d8823a';
-        for (const [k, dy] of [[0, 6], [1, 13]]) { const yy = x.y + dy * h.S - (k ? Math.round(Math.sin(x.t * 9) * 1) : 0); P(w, Math.min(ombro, ponta), yy, Math.abs(ponta - ombro), 5 * h.S, manga); P(w, ponta - (d < 0 ? 6 * h.S : 0), yy - h.S, 7 * h.S, 7 * h.S, pele); P(w, ponta - (d < 0 ? 6 * h.S : 0), yy - h.S, 7 * h.S, 2, '#e8b088'); }
-        for (let k = 0; k < 4; k++) { const q = (x.t * 1.4 + k / 4) % 1; w.globalAlpha = (1 - q) * .5; circ(w, x.x + d * (k * 14) - d * q * 20, x.y - 2 - q * 10, 4 + q * 6, '#d8d0c0', 2 + q * 2); } w.globalAlpha = 1; w.restore(); } },
+      cabeca: (x) => ({ x: x.x - (x.facing < 0 ? -1 : 1) * 17, y: x.y - 34 }),
+      antes(w) { w.save(); w.translate(-1e5, 0); }, // esconde o sprite em pé
+      depois(w, x) { w.restore(); desenhaAgarrado(w, x.x, x.y, x.t, x.o.facing < 0 ? -1 : 1, x.a.opts || {}); } },
     // quem está sendo agarrado: balança, puxa a perna e chuta o ar tentando se soltar
     sacudindo: {
       antes(w, x) { const ang = Math.sin(x.t * 7) * .1 + Math.sin(x.t * 13) * .04, dx = Math.sin(x.t * 7) * 3 + Math.sin(x.t * 13) * 1.5; w.save(); w.translate(Math.round(dx), Math.round(-Math.abs(Math.sin(x.t * 7)) * 3)); w.translate(x.x, x.y); w.rotate(ang); w.translate(-x.x, -x.y); },

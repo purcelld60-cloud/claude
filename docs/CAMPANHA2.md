@@ -446,7 +446,7 @@ No jogo, a caixa de fala antiga fica escondida nesses roteiros, mas o texto cont
 
 **Efeitos novos:** `titulo_c2`, `coracao_partido`, `batimento`, `polaroids`, `foto_trio`, `pensamento`, `neblina`, `frio`, `estrelas`, `pb`, `flashback`, `vs`, `poder`, `fim`, `luz_final`, `barras`, `flash_memoria` e `chat`.
 
-**Animações por cima dos atores** (junte com `+`): `chorando`, `frio`, `treme`, `ajoelhado`, `deitado`, `celular`, `celular_mao`, `zzz`, `exclama`, `pergunta`, `raiva`, `suor`, `coracao`, `coracao_partido`, `brilho`, `chama`, `mao`, `agarra_pernas` (deitado, segurando as pernas de quem está na frente), `sacudindo` (balança e chuta tentando se soltar), `silhueta` e `fantasma`.
+**Animações por cima dos atores** (junte com `+`): `chorando`, `frio`, `treme`, `ajoelhado`, `deitado`, `celular`, `celular_mao`, `zzz`, `exclama`, `pergunta`, `raiva`, `suor`, `coracao`, `coracao_partido`, `brilho`, `chama`, `mao`, `agarra_pernas` (desenho próprio do Da Roça de bruços: cabeça erguida chorando e gritando, chapéu torto, mochila nas costas, pernas batendo e as mãos fechadas nos tornozelos de quem está na frente; o ator fica no x das mãos), `sacudindo` (balança e chuta tentando se soltar), `silhueta` e `fantasma`.
 
 **Sons novos:** `vibrar`, `toque`, `coracao`, `quebra`, `aviao`, `vento`, `desliga`, `vs`, `poder`, `abraco`, `digitar` e `soluco`.
 
