@@ -717,3 +717,11 @@ Os botões são os originais de cada modo, só mudados de lugar. Qualquer botão
   - Parque: parquinho e grafite;
   - Placas da Fazenda, do Lomantão, do Mel da Serra e do Biscoito.
 - **Lugares trancados:** um véu leve por cima. Continuam reconhecíveis, com o cadeado.
+
+**Mapa de Itabuna é uma ilha** (`MAPA1`: `ilha: { margem: 300 }`, `relevo: true`; código em `mapa3d.js`: `fazerIlha` e `relevo`)
+- **Costa:** em volta do mapa, a terra continua até uma costa irregular, com praia, coqueiros, pedras, guarda-sóis e um farol. O rio desemboca no mar.
+- **Mar:** depois da costa vêm água rasa e mar. Dá para afastar a câmera até ver só água em volta.
+- **Animações:** ondas brilhando, espuma batendo na praia, barquinhos à vela dando a volta na ilha, golfinhos pulando e a luz do farol piscando.
+- **Relevo:** morros suaves na grama, com luz vindo de cima à esquerda.
+- **Bigodon:** bigode gigante em cima da barbearia.
+- **Academia do Caleb:** haltere gigante de "200KG" no telhado.

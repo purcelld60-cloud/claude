@@ -279,10 +279,10 @@
       else if (k === 'Enter' || k === ' ') { if (sel >= 0) ir(); } else if (k === 'i' || k === 'I') { if (sel >= 0) mostrarInfo(!info); } else if (k === '+' || k === '=') zoomPara(cam.z * 1.3); else if (k === '-') zoomPara(cam.z / 1.3); else return; e.preventDefault(); e.stopImmediatePropagation(); }, true);
   }
   const celular = () => Math.min(innerWidth, innerHeight) < 560;
-  const zCobre = () => Math.max(cv.clientWidth / M.W, cv.clientHeight / M.H) * 1.0001;
-  const zMin = () => celular() ? Math.min(cv.clientWidth / M.W, cv.clientHeight / M.H) : zCobre(), zMax = 5;
+  const zCobre = () => Math.max(cv.clientWidth / (M.W + 2 * M.PAD), cv.clientHeight / (M.H + 2 * M.PAD)) * 1.0001, zMapa = () => Math.max(cv.clientWidth / M.W, cv.clientHeight / M.H);
+  const zMin = () => celular() ? Math.min(cv.clientWidth / (M.W + 2 * M.PAD), cv.clientHeight / (M.H + 2 * M.PAD)) : zCobre(), zMax = 5;
   function zoomPara(z) { anim = { de: { ...cam }, para: { x: cam.x, y: cam.y, z: Math.max(zMin(), Math.min(zMax, z)) }, t: 0, dur: .35, f: easeOut }; }
-  function limitar() { const hw = cv.clientWidth / 2 / cam.z, hh = cv.clientHeight / 2 / cam.z; cam.x = hw * 2 >= M.W ? M.W / 2 : Math.max(hw, Math.min(M.W - hw, cam.x)); cam.y = hh * 2 >= M.H ? M.H / 2 : Math.max(hh, Math.min(M.H - hh, cam.y)); } // tela maior que o mapa: fica no meio
+  function limitar() { const hw = cv.clientWidth / 2 / cam.z, hh = cv.clientHeight / 2 / cam.z, p = M.PAD || 0, x0 = -p, x1 = M.W + p, y0 = -p, y1 = M.H + p; cam.x = hw * 2 >= x1 - x0 ? M.W / 2 : Math.max(x0 + hw, Math.min(x1 - hw, cam.x)); cam.y = hh * 2 >= y1 - y0 ? M.H / 2 : Math.max(y0 + hh, Math.min(y1 - hh, cam.y)); } // tela maior que o mundo: fica no meio // tela maior que o mapa: fica no meio
 
   /* ---------- luz de dia: clareia, aquece e dá mais cor (uma vez, ao montar) ---------- */
   function luzDeDia(cv) { try { const g = cv.getContext('2d'), im = g.getImageData(0, 0, cv.width, cv.height), d = im.data;
@@ -291,6 +291,45 @@
       r = r * 1.08 + 16; gg = gg * 1.08 + 14; b = b * 1.03 + 8; // mais claro e um pouco mais quente (sol)
       d[i] = r > 255 ? 255 : r < 0 ? 0 : r; d[i + 1] = gg > 255 ? 255 : gg < 0 ? 0 : gg; d[i + 2] = b > 255 ? 255 : b < 0 ? 0 : b; }
     g.putImageData(im, 0, 0); } catch (e) {} }
+  /* ---------- relevo: morros suaves na grama, com luz vindo de cima à esquerda ---------- */
+  function relevo(cv, ox = 0, oy = 0) { try { const g = cv.getContext('2d'), w = cv.width, h = cv.height, im = g.getImageData(0, 0, w, h), d = im.data;
+    const Hh = (x, y) => vn(x / 74, y / 74, 31) * .7 + vn(x / 30, y / 30, 32) * .3;
+    for (let y = 0; y < h; y += 1) for (let x = 0; x < w; x += 1) { const i = (y * w + x) * 4; if (!d[i + 3]) continue; const r = d[i], gg = d[i + 1], b = d[i + 2]; if (!(gg > r + 6 && gg > b + 18)) continue; // só na grama e na mata
+      const wx = x - ox, wy = y - oy, sh = (Hh(wx - 3, wy - 3) - Hh(wx + 3, wy + 3)) * 7, alto = (Hh(wx, wy) - .5) * .16, f = 1 + Math.max(-.16, Math.min(.16, sh)) + alto;
+      d[i] = Math.min(255, r * f); d[i + 1] = Math.min(255, gg * f); d[i + 2] = Math.min(255, b * f); }
+    g.putImageData(im, 0, 0); } catch (e) {} }
+  /* ---------- ilha: a terra continua até uma costa torta, com praia, coqueiros e farol; depois só mar ---------- */
+  function fazerIlha(base, o, d) {
+    const W = base.width, H = base.height, PAD = o.margem || 300, W2 = W + PAD * 2, H2 = H + PAD * 2;
+    const cv = document.createElement('canvas'); cv.width = W2; cv.height = H2; const g = cv.getContext('2d'); g.imageSmoothingEnabled = false;
+    const bd = base.getContext('2d').getImageData(0, 0, W, H).data, im = g.createImageData(W2, H2), out = im.data, cls = new Uint8Array(W2 * H2); // 0 mar, 1 terra, 2 areia, 3 raso
+    const hex = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+    // cor da grama tirada da própria borda do mapa (para não aparecer emenda)
+    let sr = 0, sg = 0, sb = 0, sn = 0; for (let k = 0; k < W; k += 2) for (const yy of [1, 3, 5, H - 2, H - 4, H - 6]) { const j = (yy * W + k) * 4, r = bd[j], gg = bd[j + 1], b = bd[j + 2]; if (gg > r + 6 && gg > b + 18) { sr += r; sg += gg; sb += b; sn++; } }
+    for (let k = 0; k < H; k += 2) for (const xx of [1, 3, 5, W - 2, W - 4, W - 6]) { const j = (k * W + xx) * 4, r = bd[j], gg = bd[j + 1], b = bd[j + 2]; if (gg > r + 6 && gg > b + 18) { sr += r; sg += gg; sb += b; sn++; } }
+    const med = sn ? [sr / sn, sg / sn, sb / sn] : hex('#b4ea6a'), tom = (f) => med.map((v) => Math.max(0, Math.min(255, Math.round(v * f))));
+    const GR = [tom(.95), tom(1), tom(1.05)], AR = ['#f6e6ae', '#eedb98', '#fbefc4'].map(hex), RASO = hex('#8ad8f4'), MEIO = hex('#62bee8');
+    const margem = (cx, cy) => 34 + vn(cx / 58 + 3.1, cy / 58 + 7.7, 41) * 58 + vn(cx / 19, cy / 19, 42) * 10;
+    for (let Y = 0; Y < H2; Y++) for (let X = 0; X < W2; X++) { const x = X - PAD, y = Y - PAD; if (x >= 0 && x < W && y >= 0 && y < H) { cls[Y * W2 + X] = 1; continue; }
+      const cx = x < 0 ? 0 : x >= W ? W - 1 : x, cy = y < 0 ? 0 : y >= H ? H - 1 : y, dd = Math.hypot(x - cx, y - cy), m = margem(cx, cy), i = (Y * W2 + X) * 4; let col = null, k = 0;
+      if (dd < m - 11) { const j = (cy * W + cx) * 4, er = bd[j], eg = bd[j + 1], eb = bd[j + 2]; // o rio continua até o mar; o resto vira grama
+        if (eb > er + 40 && eb > eg - 10) { col = [er, eg, eb]; k = 3; } else { const n = vn(x / 22, y / 22, 43); col = GR[n < .4 ? 0 : n > .62 ? 2 : 1]; k = 1; } }
+      else if (dd < m) { const n = vn(x / 9, y / 9, 44); col = AR[n < .35 ? 1 : n > .7 ? 2 : 0]; if (dd > m - 3) col = AR[1]; k = 2; }
+      else if (dd < m + 13) { col = RASO; k = 3; } else if (dd < m + 30) { col = MEIO; k = 3; out[i + 3] = 150; }
+      if (col) { out[i] = col[0]; out[i + 1] = col[1]; out[i + 2] = col[2]; if (!out[i + 3]) out[i + 3] = 255; cls[Y * W2 + X] = k; } }
+    g.putImageData(im, 0, 0); relevo(cv, PAD, PAD);
+    // espuma da costa (pontos onde a areia encontra a água) e enfeites
+    const costa = [], P = Px(g); g.save(); g.translate(PAD, PAD);
+    for (let Y = 2; Y < H2 - 2; Y += 3) for (let X = 2; X < W2 - 2; X += 3) { if (cls[Y * W2 + X] !== 2) continue; if (cls[Y * W2 + X + 3] === 3 || cls[Y * W2 + X - 3] === 3 || cls[(Y + 3) * W2 + X] === 3 || cls[(Y - 3) * W2 + X] === 3) { const x = X - PAD, y = Y - PAD, cx = Math.max(0, Math.min(W - 1, x)), cy = Math.max(0, Math.min(H - 1, y)), dd = Math.hypot(x - cx, y - cy) || 1; costa.push([x, y, (x - cx) / dd, (y - cy) / dd, hash(X, Y) * 6]); } }
+    let farol = null, melhor = 0;
+    for (let k = 0; k < costa.length; k += 7) { const [x, y, nx, ny] = costa[k], tx = x - nx * 6, ty = y - ny * 6; const h = hash(k, 3);
+      if (h < .55) P.coqueiro(tx, ty); else if (h < .7) P.pedra(tx, ty + 2); else if (h < .78) { P.R(tx - 6, ty - 1, 12, 5, ['#e8433a', '#3c6aa8', '#f2c94c'][k % 3]); P.R(tx - 1, ty - 10, 1, 10, '#7a7a7a'); for (let j = 0; j < 9; j++) P.R(tx - 6 + j * 1.4, ty - 11 + Math.abs(j - 4) * .5, 2, 2, j % 2 ? '#f2f2ee' : '#e8433a'); } // coqueiros, pedras e guarda-sol
+      const cxx = Math.max(0, Math.min(W - 1, x)), cyy = Math.max(0, Math.min(H - 1, y)), dd = Math.hypot(x - cxx, y - cyy); if (dd > melhor && x > W * .5) { melhor = dd; farol = [x - nx * 16, y - ny * 16]; } }
+    for (let k = 0; k < 70; k++) { const x = -PAD + hash(k, 7) * W2, y = -PAD + hash(k, 8) * H2, X = Math.round(x + PAD), Y = Math.round(y + PAD); if (X < 0 || Y < 0 || X >= W2 || Y >= H2 || cls[Y * W2 + X] !== 1 || (x >= -4 && x < W + 4 && y >= -4 && y < H + 4)) continue; P.arvore(x, y, .8 + hash(k, 9) * .4, k % 4 ? 'verde' : 'amarela', k); }
+    if (farol) { const [fx, fy] = farol, R = P.R; P.sombra(fx + 4, fy + 2, 10, 3, .3); R(fx - 7, fy - 4, 14, 6, '#8a9096'); for (let j = 0; j < 7; j++) { const w = 10 - j * .7; R(fx - w / 2, fy - 8 - j * 6, w, 6, j % 2 ? '#f2f2ee' : '#c43c3a'); } R(fx - 5, fy - 52, 10, 8, '#2a3a4a'); R(fx - 3, fy - 50, 6, 4, '#fff2b0'); R(fx - 6, fy - 54, 12, 3, '#c43c3a'); R(fx - 2, fy - 58, 4, 4, '#2a3a4a'); }
+    g.restore();
+    return { cv, pad: PAD, costa, farol };
+  }
   /* ---------- montar o mapa (uma vez) ---------- */
   function montar(d) {
     const Tr = Terreno(d.lajotas[0], d.lajotas[1]); d.terreno(Tr);
@@ -300,10 +339,12 @@
     const locs = d.locais.map((L) => { const [bx0, by0, bw, bh] = L.caixa, [dx, dy] = L.desloc || [0, 0], bx = bx0 + dx, by = by0 + dy, s = document.createElement('canvas'); s.width = bw; s.height = bh; const sc = s.getContext('2d'); sc.imageSmoothingEnabled = false; sc.translate(-bx0, -by0); L.desenho(Px(sc)); const esc = document.createElement('canvas'); esc.width = bw; esc.height = bh; const ec = esc.getContext('2d'); ec.drawImage(s, 0, 0); ec.globalCompositeOperation = 'source-atop'; ec.fillStyle = 'rgba(8,10,26,.62)'; ec.fillRect(0, 0, bw, bh); return { s, esc, bx, by, bw, bh, pulo: null, tremor: 0 }; });
     luzDeDia(base); luzDeDia(obj); for (const L of locs) { luzDeDia(L.s); // trancado: véu leve (o lugar continua reconhecível, com o cadeado em cima)
       const ec = L.esc.getContext('2d'); ec.globalCompositeOperation = 'source-over'; ec.clearRect(0, 0, L.bw, L.bh); ec.drawImage(L.s, 0, 0); ec.globalCompositeOperation = 'source-atop'; ec.fillStyle = 'rgba(40,50,84,.30)'; ec.fillRect(0, 0, L.bw, L.bh); ec.globalCompositeOperation = 'source-over'; }
+    if (d.relevo) relevo(base); const ilha = d.ilha ? fazerIlha(base, d.ilha, d) : null;
     // vida: bandos de passarinhos e borboletas espalhados pelo mapa
     const aves = Array.from({ length: 4 }, (_, k) => ({ x: Math.random() * W, y: 80 + k * (H - 160) / 4, v: 34 + Math.random() * 22, dir: k % 2 ? -1 : 1, n: 4 + (k % 3), fase: Math.random() * 6 }));
     const borbo = Array.from({ length: 14 }, (_, k) => ({ x: Math.random() * W, y: Math.random() * H, fase: Math.random() * 9, cor: ['#ffe14a', '#ff8ad0', '#ffffff', '#8ad8ff', '#ffb04a'][k % 5] }));
-    return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr, aves, borbo };
+    const barcos = ilha ? [0, 1, 2].map((k) => ({ a: k * 2.1, v: .05 + k * .015, cor: ['#e8433a', '#f2c94c', '#3c6aa8'][k] })) : [], golfinhos = ilha ? [0, 1, 2, 3].map((k) => ({ a: k * 1.6 + .7, fase: k * 2.3 })) : [];
+    return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr, aves, borbo, ilha, PAD: ilha ? ilha.pad : 0, barcos, golfinhos };
   }
 
   /* ---------- abrir, selecionar, ir ---------- */
@@ -312,7 +353,7 @@
     ui.querySelector('.t').textContent = d.titulo; ui.querySelector('.s').textContent = d.subtitulo || ''; const bt = ui.querySelector('.teste'); bt.hidden = !d.teste; bt.textContent = d.teste?.rotulo || ''; mostrarTrava(-1);
     ui.hidden = false; requestAnimationFrame(() => ui.classList.add('on')); aberto = true; sel = -1; info = false; viagem = null; faiscas = [];
     resize(); const atual = d.locais.findIndex((L) => L.atual), foco = atual >= 0 ? centro(atual) : { x: M.W / 2, y: M.H / 2 };
-    cam = { x: M.W / 2, y: M.H / 2, z: zMin() }; limitar(); anim = { de: { ...cam }, para: { x: foco.x, y: foco.y, z: celular() ? Math.min(zMax, Math.max(zMin() * 1.15, zCobre() * .9)) : Math.min(zMax, zMin() * 1.9) }, t: -.25, dur: 1.4, f: ease }; montarLugares();
+    cam = { x: M.W / 2, y: M.H / 2, z: zMin() }; limitar(); anim = { de: { ...cam }, para: { x: foco.x, y: foco.y, z: celular() ? Math.min(zMax, Math.max(zMin() * 1.15, zCobre() * .9)) : Math.min(zMax, zMapa() * 1.9) }, t: -.25, dur: 1.4, f: ease }; montarLugares();
     ui.querySelector('.pv').classList.remove('on'); ui.querySelector('.fade').style.opacity = 0; mostrarInfo(false);
     last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(loop);
     window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: true } }));
@@ -373,8 +414,21 @@
       cam.x += (veic.x - cam.x) * Math.min(1, dt * 5); cam.y += (veic.y - cam.y) * Math.min(1, dt * 5); cam.z += (Math.min(zMax, 3.2) - cam.z) * Math.min(1, dt * 2);
       if (v.t > v.dur - .4) ui.querySelector('.fade').style.opacity = 1; if (v.t >= v.dur + .2) { const id = v.id; viagem = null; fechar(); setTimeout(() => def.aoIr?.(id), 60); return; } }
     limitar();
-    c.setTransform(1, 0, 0, 1, 0, 0); c.imageSmoothingEnabled = false; c.fillStyle = '#8ccfe8'; c.fillRect(0, 0, W, H);
+    c.setTransform(1, 0, 0, 1, 0, 0); c.imageSmoothingEnabled = false; c.fillStyle = M.ilha ? '#3a98d8' : '#8ccfe8'; c.fillRect(0, 0, W, H);
     const z = cam.z, ox = Math.round(W / 2 - cam.x * z), oy = Math.round(H / 2 - cam.y * z); c.setTransform(z, 0, 0, z, ox, oy);
+    if (M.ilha) { const vx0 = cam.x - W / 2 / z - 40, vy0 = cam.y - H / 2 / z - 40, vx1 = cam.x + W / 2 / z + 40, vy1 = cam.y + H / 2 / z + 40; // brilho das ondas no mar
+      for (let y = Math.floor(vy0 / 26) * 26; y < vy1; y += 26) for (let x = Math.floor(vx0 / 34) * 34; x < vx1; x += 34) { const ph = (tempo * .7 + hash(x, y) * 6) % 6; if (ph > 1.6) continue; const ox2 = x + hash(y, x) * 20, a = Math.sin(ph / 1.6 * Math.PI); c.globalAlpha = a * .7; c.fillStyle = '#d8f2ff'; c.fillRect(Math.round(ox2), Math.round(y + Math.sin(tempo + x) * 2), 7, 1); c.fillRect(Math.round(ox2 + 2), Math.round(y - 1 + Math.sin(tempo + x) * 2), 3, 1); } c.globalAlpha = 1;
+      c.drawImage(M.ilha.cv, -M.PAD, -M.PAD);
+      c.fillStyle = '#ffffff'; for (const [x, y, nx, ny, f] of M.ilha.costa) { const o = 2 + Math.sin(tempo * 2.2 + f) * 2.2; c.globalAlpha = .55 + Math.sin(tempo * 2.2 + f) * .35; c.fillRect(Math.round(x + nx * o), Math.round(y + ny * o), 2, 2); } c.globalAlpha = 1; // espuma batendo na praia
+      const cx0 = M.W / 2, cy0 = M.H / 2;
+      for (const b of M.barcos) { b.a += b.v * dt * .12; const rx = M.W / 2 + M.PAD * .62, ry = M.H / 2 + M.PAD * .55, bx = cx0 + Math.cos(b.a) * rx, by = cy0 + Math.sin(b.a) * ry, dir = -Math.sin(b.a) >= 0 ? 1 : -1; // barquinhos à vela dando a volta na ilha
+        c.globalAlpha = .5; c.fillStyle = '#ffffff'; for (let k = 1; k < 5; k++) c.fillRect(Math.round(bx - dir * (10 + k * 5)), Math.round(by + 3 + (k % 2)), 4, 1); c.globalAlpha = 1;
+        c.fillStyle = '#6a3a1a'; c.fillRect(Math.round(bx - 9), Math.round(by), 18, 4); c.fillStyle = '#8a5030'; c.fillRect(Math.round(bx - 7), Math.round(by + 4), 14, 2); c.fillStyle = '#5a3a2a'; c.fillRect(Math.round(bx), Math.round(by - 16), 1, 16);
+        c.fillStyle = '#f6f6f0'; for (let k = 0; k < 13; k++) c.fillRect(Math.round(bx + 1), Math.round(by - 15 + k), Math.round((13 - k) * .7) + 1, 1); c.fillStyle = b.cor; c.fillRect(Math.round(bx + 1), Math.round(by - 17), 5, 3); }
+      for (const g of M.golfinhos) { const ciclo = (tempo * .5 + g.fase) % 4; if (ciclo > 1) continue; const rx = M.W / 2 + M.PAD * .78, ry = M.H / 2 + M.PAD * .72, gx = cx0 + Math.cos(g.a) * rx + (ciclo - .5) * 30, gy = cy0 + Math.sin(g.a) * ry - Math.sin(ciclo * Math.PI) * 14; // golfinho pulando
+        c.fillStyle = '#4a6a8a'; c.fillRect(Math.round(gx - 6), Math.round(gy - 2), 12, 4); c.fillRect(Math.round(gx - 1), Math.round(gy - 5), 3, 3); c.fillRect(Math.round(gx + 5), Math.round(gy - 3), 3, 2); c.fillStyle = '#8ab0d0'; c.fillRect(Math.round(gx - 5), Math.round(gy + 1), 9, 1);
+        if (ciclo < .12 || ciclo > .88) { c.fillStyle = '#ffffff'; c.globalAlpha = .8; for (let k = 0; k < 4; k++) c.fillRect(Math.round(gx - 4 + k * 3), Math.round(gy - 2 - k % 2 * 2), 2, 2); c.globalAlpha = 1; } }
+      if (M.ilha.farol && Math.floor(tempo * 1.5) % 2) { const [fx, fy] = M.ilha.farol; c.globalAlpha = .35; c.fillStyle = '#fff2b0'; c.beginPath(); c.moveTo(fx, fy - 48); c.lineTo(fx + 60, fy - 62); c.lineTo(fx + 60, fy - 36); c.fill(); c.globalAlpha = 1; } }
     c.drawImage(M.base, 0, 0);
     const P = Px(c), R = P.R;
     for (const [x, y] of M.agua) { const ph = (tempo * .8 + hash(x, y) * 5) % 5; if (ph < .9) { R(x - 2 + ph * 2, y, Math.max(1, 5 - ph * 5), 1, '#e2f4ff'); if (ph < .3) R(x, y - 1, 1, 1, '#ffffff'); } } // brilho na água
