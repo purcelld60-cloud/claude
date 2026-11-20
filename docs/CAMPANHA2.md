@@ -11,7 +11,7 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 | 3 | Poderes de Da Roça e mural para trocar | feito e aprovado |
 | 4 | Locomoção: mapas, táxi do Seu Zé e loja de garrafadas | feito e aprovado |
 | 5 | Cutscenes | feito e aprovado |
-| 6 | O jogo: 6A prólogo jogável · 6B vilões 1 a 4 · 6C vilões 5 a 8 · 6D Jorge, final e créditos | **6A feito, aguardando aprovação** |
+| 6 | O jogo: 6A prólogo jogável · 6B vilões 1 a 4 · 6C vilões 5 a 8 · 6D Jorge, final e créditos | 6A feito · **6B feito, aguardando aprovação** |
 
 ## Passo 1 · Personagens (`dist/campanha2/personagens.js`)
 
@@ -506,3 +506,37 @@ Na tela ficam:
 9. A manhã no quarto 4, onde o jogo salva.
 
 O próximo objetivo (o bairro e a Dona Creuza) chega no 6B.
+
+
+## Passo 6B · As fases dos vilões 1 a 4 (`dist/campanha2/fases.js`)
+
+Mesmo sistema de fases da campanha 1:
+- **Caminho com inimigos:** cada inimigo derrotado dá 6 moedas e às vezes solta um biscoito.
+- **Biscoitos de polvilho:** curam 20 de vida.
+- **Ponto de controle:** fica antes do chefe.
+- **Arena:** chegando perto do chefe, a cutscene de entrada toca no próprio lugar da luta, deslocada para onde ele está. As barreiras de obra fecham a arena e a placa mostra o nome e o nível.
+- **Chefe com 3 fases:**
+  - na troca de fase a vida renova e ele fica mais forte e mais rápido;
+  - todo golpe tem aviso antes: "!" piscando, faixa vermelha no chão, sombras de onde vai cair ou colunas de luz;
+  - depois de atacar ele fica **ABERTO!** e toma dano cheio; fora disso, defende parte do dano;
+  - a barra no alto tem o nome, o nível e as 3 marcas de fase.
+- **Vitória:** placa **DERROTADO!**, 60 moedas, a cutscene da derrota (pista do Jorge e NOVO PODER) e a garrafada liberada na loja.
+- **Desmaio:** se a vida acaba, você volta no ponto de controle com a vida cheia. O chefe recomeça, mas os inimigos vencidos continuam vencidos.
+
+Também valem os golpes do jogador: papel, peido, dash e os 2 poderes. A Fofoca faz os inimigos brigarem entre si, inclusive contra o chefe, e a Aura bloqueia o dano.
+
+| Fase | Onde | Inimigos | Chefe e golpes |
+| --- | --- | --- | --- |
+| Dona Creuza (nv 3) | Bairro da pensão | Vizinhas fofoqueiras (jogam balões de fofoca), pombos que mergulham | Leque de balões "PSIU", correria, chuva de fofoca, onda e chama as vizinhas |
+| Tonhão (nv 5) | Avenida, depois da rotatória | Mototaxistas que aceleram em cima de você, pombos | Investida de moto, onda da buzina, notas sonoras, chama os mototaxistas |
+| Seu Valdomiro (nv 7) | Feira do Planalto | Feirantes que jogam frutas, pombos | Rajadas de biscoito, chuva de biscoito, investida, onda e chama os feirantes |
+| Kauã (nv 9) | Serra do Periperi, no Cristo | Seguidores com flash de celular (deixam lento), urubus | Colunas de flash, flashes em leque, chuva, investida e chama os seguidores |
+
+**Missões do 6B:**
+1. Do quarto até a Dona Creuza.
+2. Táxi até o Monumento e o Tonhão.
+3. Táxi até a Feira e o Seu Valdomiro.
+4. Táxi até a Trilha do Cristo e o Kauã.
+5. Descansar na pensão.
+
+Depois de cada vitória, a garrafada do poder aparece na banca do Seu Lindomar, na Feira.

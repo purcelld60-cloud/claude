@@ -44,9 +44,17 @@
     portao: { obj: 'Vá até o portão de embarque.', cena: 12, alvo: 1760, hora: 9.4 },
     taxi1: { obj: 'Pegue o táxi do Seu Zé no ponto do desembarque.', cena: 12, alvo: 4000, hora: 7.4 },
     lurdes: { obj: 'Fale com a Dona Lurdes, na porta da pensão.', cena: 13, alvo: 1830, hora: 18.2 },
-    bairro: { obj: 'Saia da pensão e conheça o bairro. Dizem que uma vizinha anda falando de você... (a próxima missão chega no passo 6B)', cena: 13, alvo: 2420, hora: 8.5 }
+    creuza: { obj: 'Saia da pensão e siga pela rua do bairro. Dizem que uma vizinha anda espalhando coisas sobre você...', cena: 13, alvo: 3520, hora: 9.5, fase: 'creuza' },
+    ir_tonhao: { obj: 'Pegue o táxi do Seu Zé (em frente à pensão) até o Monumento ao Índio. Dica: na Feira, o Seu Lindomar já vende a FOFOCA CONFUSA.', cena: 13, alvo: 1500, hora: 12, ir: 16, prox: 'tonhao' },
+    tonhao: { obj: 'Atravesse a avenida. O Tonhão do Mototáxi espera depois da rotatória...', cena: 16, alvo: 5320, hora: 11, fase: 'tonhao' },
+    ir_valdomiro: { obj: 'Volte ao ponto de táxi perto do Monumento e vá até a Feira do Planalto.', cena: 16, alvo: 2700, hora: 12, ir: 17, prox: 'valdomiro' },
+    valdomiro: { obj: 'Atravesse a Feira do Planalto. O chefão dela não gosta de forasteiro...', cena: 17, alvo: 3560, hora: 9, fase: 'valdomiro' },
+    ir_kaua: { obj: 'Pegue o táxi na entrada da Feira e vá até a Trilha do Cristo, na Serra do Periperi.', cena: 17, alvo: 400, hora: 15, ir: 15, prox: 'kaua' },
+    kaua: { obj: 'Suba a Serra do Periperi até o Cristo. Cuidado com os buracos e com os urubus.', cena: 15, alvo: 4520, hora: 16.8, fase: 'kaua' },
+    fim6b: { obj: 'Descanse na pensão (táxi até a Pensão Dona Lurdes). O Barão do Café anda nervoso... (a história continua no passo 6C)', cena: 15, alvo: 300, hora: 17.5 }
   };
-  const PASSO_INICIAL_DA_CENA = { passaporte: 0, lucas: 0, checkin: 12, raiox: 12, portao: 12, taxi1: 12, lurdes: 13, bairro: 13 };
+  const APOS_VITORIA = { creuza: 'ir_tonhao', tonhao: 'ir_valdomiro', valdomiro: 'ir_kaua', kaua: 'fim6b' };
+  const PASSO_INICIAL_DA_CENA = { passaporte: 0, lucas: 0, checkin: 12, raiox: 12, portao: 12, taxi1: 12, lurdes: 13, creuza: 25, ir_tonhao: 13, tonhao: 16, ir_valdomiro: 16, valdomiro: 17, ir_kaua: 17, kaua: 15, fim6b: 15 };
   function passo(id) { S.passo = id; const p = PASSOS[id]; if (p?.obj) objetivoNovo(p.obj); salvar(); }
 
   /* ---------- objetos e pessoas do prólogo (desenhados por cima do cenário) ---------- */
@@ -59,7 +67,7 @@
     { id: 'miguel1', quem: 'miguel', cena: 12, x: 740, quando: ['checkin'], semFala: true },
     { id: 'miguel2', quem: 'miguel', cena: 12, x: 1420, quando: ['raiox'], semFala: true },
     { id: 'miguel3', quem: 'miguel', cena: 12, x: 1840, quando: ['portao'], semFala: true },
-    { id: 'lurdes', quem: 'c2_lurdes', cena: 13, x: 1830, quando: ['lurdes'], rotulo: 'FALAR COM A DONA LURDES', fim: () => tocar('c2_primeira_noite', () => { irPara(25, 450); passo('bairro'); salvar('JOGO SALVO · A CAMA DO QUARTO 4 SALVA E CURA'); }), falas: null }
+    { id: 'lurdes', quem: 'c2_lurdes', cena: 13, x: 1830, quando: ['lurdes'], rotulo: 'FALAR COM A DONA LURDES', fim: () => tocar('c2_primeira_noite', () => { irPara(25, 450); passo('creuza'); salvar('JOGO SALVO · A CAMA DO QUARTO 4 SALVA E CURA'); }), falas: null }
   ];
   const ESTACOES = [
     { id: 'checkin', cena: 12, x: 640, quando: 'checkin', rotulo: 'BALCÃO DE CHECK-IN', botao: 'CHECK-IN', acao: () => minijogo('checkin') },
@@ -97,6 +105,42 @@
   const portais = (id) => safe(() => window.CampanhaAmbientes.portais(id), []) || [];
   const D = () => cenaDef(cenaId);
 
+  /* ---------- FASES (6B): inimigos, chefe, arena, dano, desmaio e ponto de controle ---------- */
+  let fase = null, tremor = 0, clarao = 0, claraoCor = '#ffffff', morto = false;
+  const apiFase = {
+    P, sfx: (n) => sfx(n), tremer: (n) => { tremor = Math.max(tremor, n); }, flash: (cor) => { clarao = .5; claraoCor = cor || '#ffffff'; },
+    ferir: (n, de) => ferir(n, de),
+    entrarArena: () => { const f = fase; S.flags.cp = { cena: cenaId, x: f.F.checkpoint }; salvar(); tocarDeslocado(f.F.intro, f.chefe.x, f.chefe.tipo, () => f.comecarLuta()); },
+    vencer: () => { const f = fase, slug = f.slug; tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => { window.CampanhaTaxi?.vencer?.(slug); S.flags['venceu_' + slug] = 1; delete S.flags.cp; fase = null; passo(APOS_VITORIA[slug]); salvar('JOGO SALVO'); }); }
+  };
+  function ferir(n, de) {
+    if (morto || cut || (P.inv || 0) > 0 || viagem) return; n = window.CampanhaPoderes?.filtrarDano?.(n) ?? n; if (!n) { sfx('plim'); return; }
+    P.hp = Math.max(0, P.hp - n); P.inv = .85; P.vy = -280; P.ground = false; P.x += (P.x < de ? -1 : 1) * 36; tremor = Math.max(tremor, 7); sfx('impacto'); dano.push({ x: P.x, y: P.y - 80, s: '-' + n, t: 0 });
+    if (P.hp <= 0) desmaiar();
+  }
+  const dano = [];
+  function desmaiar() {
+    morto = true; keys.clear(); const el = document.createElement('div'); el.className = 'pausa';
+    el.innerHTML = '<h2>VOCÊ DESMAIOU...</h2><p>O frio de Conquista não perdoa. Respire fundo e tente de novo: você volta no último ponto de controle, com a vida cheia.</p><button type="button" data-a="de-novo">▶ TENTAR DE NOVO</button>';
+    el.addEventListener('click', (e) => { if (e.target.closest('button')) { el.remove(); voltarDoDesmaio(); } }); box.querySelector('.tela').appendChild(el); setTimeout(() => el.querySelector('button')?.focus(), 30);
+  }
+  function voltarDoDesmaio() { morto = false; P.hp = 100; P.inv = 1.5; fase?.reiniciar(); const cp = S.flags.cp; if (cp) irPara(cp.cena, cp.x); else irPara(cenaId, (PASSOS[S.passo]?.fase && fase ? fase.F.checkpoint - 400 : P.x)); salvar(); }
+  function faseAtual() { // cria a fase quando você chega no lugar dela
+    const slug = PASSOS[S?.passo]?.fase, F = slug && window.CampanhaFases?.FASES?.[slug];
+    if (!F || F.cena !== cenaId || S.flags['venceu_' + slug]) { if (fase && (!F || F.cena !== cenaId)) fase = null; return null; }
+    if (!fase || fase.slug !== slug) fase = window.CampanhaFases.criar(slug, apiFase);
+    if (!S.flags.cp || S.flags.cp.cena !== cenaId) { if (P.x > F.checkpoint) { S.flags.cp = { cena: cenaId, x: F.checkpoint }; salvar(); aviso('PONTO DE CONTROLE'); } }
+    return fase;
+  }
+  // a cutscene do vilão toca no lugar da luta: tudo é deslocado para onde o chefe está
+  function tocarDeslocado(id, xChefe, tipo, depois) {
+    const sc = RT()?.get?.(id); if (!sc?.raw) { depois?.(); return; } const raw = JSON.parse(JSON.stringify(sc.raw)); let ref = null;
+    for (const c0 of raw.cenas) { if (c0.fundo) continue; const a = (c0.atores || []).find((q) => q.quem === tipo || (tipo === 'c2_ryan' && q.quem === 'c2_ryan')); if (a) { ref = a.x; break; } }
+    const dx = ref === null ? 0 : Math.round(xChefe - ref);
+    for (const c0 of raw.cenas) { if (c0.fundo) continue; if (c0.camera) for (const k of ['de', 'para']) if (c0.camera[k]) c0.camera[k].x += dx; for (const a of c0.atores || []) { a.x += dx; if (a.ate !== undefined) a.ate += dx; } }
+    raw.id = id + '_jogo'; raw.substituir = true; registrar(raw); tocar(raw.id, depois);
+  }
+
   /* ---------- cutscenes dentro do jogo ---------- */
   function registrar(raw) { safe(() => RT().register(raw, 'campanha2')); }
   function tocar(id, depois) { if (!RT()?.has?.(id)) { depois?.(); return; } keys.clear(); P.vx = 0; window.__somCutscene = som; const s = RT().create(id, {}); s.preview = true; cut = { s, depois, id }; hudVisivel(false); }
@@ -112,7 +156,7 @@
 
   /* ---------- ir de um lugar para outro ---------- */
   function irPara(id, x) { cenaId = id; const d = D(); P.x = clamp(x, d.limites?.[0] ?? 40, d.limites?.[1] ?? d.largura - 40); P.y = FLOOR; P.vy = 0; P.vx = 0; P.ground = true; cam = clamp(P.x - 360, 0, Math.max(0, d.largura - W)); viagem = null; fade = 0; S && (S.cena = id); }
-  const horaAtual = () => { const p = PASSOS[S?.passo]; if (cenaId === 25 || cenaId === 24) return S?.passo === 'bairro' ? 7.5 : 21; return p?.hora ?? 12; };
+  const horaAtual = () => { const p = PASSOS[S?.passo]; if (cenaId === 25 || cenaId === 24) return S?.passo === 'lurdes' ? 21 : 8; return p?.hora ?? 12; };
 
   /* ---------- usar o que está perto ---------- */
   function usar() {
@@ -120,7 +164,7 @@
     if (p.tipo === 'npc') { if (p.npc.falas) conversa(p.npc); else p.npc.fim?.(); return; }
     if (p.tipo === 'estacao') { p.est.acao(); return; }
     if (p.tipo === 'item') { p.acao(); return; }
-    if (p.tipo === 'extra') { if (p.id === 'loja') window.CampanhaLoja?.abrir?.({}); else window.CampanhaTaxi?.abrir?.(cenaId, (cena, x) => { irPara(cena, x + 120); if (S.passo === 'taxi1' && cena === 13) passo('lurdes'); salvar(); }, { liberado: S.passo === 'taxi1' ? (L) => (L.id === 't13' ? { ok: true } : { ok: false, motivo: 'Primeiro, a pensão. Você nem tem onde dormir!' }) : undefined }); return; }
+    if (p.tipo === 'extra') { if (p.id === 'loja') window.CampanhaLoja?.abrir?.({}); else window.CampanhaTaxi?.abrir?.(cenaId, (cena, x) => { irPara(cena, x + 120); if (S.passo === 'taxi1' && cena === 13) passo('lurdes'); else if (PASSOS[S.passo]?.ir === cena) passo(PASSOS[S.passo].prox); salvar(); }, { liberado: S.passo === 'taxi1' ? (L) => (L.id === 't13' ? { ok: true } : { ok: false, motivo: 'Primeiro, a pensão. Você nem tem onde dormir!' }) : undefined }); return; }
     if (p.tipo === 'poderes') { window.CampanhaPoderes?.abrirMural?.({}); return; }
     if (p.tipo === 'conversa') { window.CampanhaMoradores?.conversar?.(p.id); return; }
     if (p.tipo === 'armario') { window.DarocaLook?.open?.({ title: 'ARMÁRIO DO QUARTO 4', line: 'Escolha a roupa do Da Roça para hoje.' }); return; }
@@ -142,7 +186,7 @@
   /* ---------- física (a mesma do visualizador) ---------- */
   function fisica(dt) {
     const d = D(), dir = (keys.has('right') ? 1 : 0) - (keys.has('left') ? 1 : 0) || Math.sign(Math.round(joy * 2)); if (dir) P.facing = dir;
-    P.vx = TR()?.dashing?.() ? P.vx : dir * 260 * (TR()?.velocidade?.() || 1); const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
+    P.vx = TR()?.dashing?.() ? P.vx : dir * 260 * (TR()?.velocidade?.() || 1) * ((P.atordoado || 0) > 0 ? .4 : 1); const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
     const prevY = P.y; P.vy = Math.min(900, P.vy + 1700 * dt); P.y += P.vy * dt; P.ground = false;
     const overGap = (d.vaos || []).some(([gx, gw]) => P.x > gx + 10 && P.x < gx + gw - 10);
     for (const r of portais(d.id)) if (r.tipo === 'rampa' && P.x >= r.x0 && P.x <= r.x1) { const ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0); if (P.vy >= 0 && P.y >= ry - 14 && prevY <= ry + 40) { P.y = ry; P.vy = 0; P.ground = true; } if (P.x >= r.x1 - 4 && P.ground && dir > 0) viagem = { tipo: 'porta', t: 0, para: r.para }; }
@@ -224,6 +268,7 @@
     if (!aberto || coberto() || window.CampanhaMoradores?.aberto?.()) return; const k = e.code;
     if (box.querySelector('.escolha')) { if (/^Digit[1-3]$/.test(k)) box.querySelectorAll('.escolha .ops button')[Number(k.slice(5)) - 1]?.click(); e.stopImmediatePropagation(); return; }
     if (cut) { if (['Space', 'Enter', 'KeyE', 'ArrowRight'].includes(k) && !e.repeat) avancarCut(); if (k === 'Escape') pularCut(); e.preventDefault(); e.stopImmediatePropagation(); return; }
+    if (morto) { e.stopImmediatePropagation(); return; }
     if (k === 'Escape') { pausar(!pausado); e.preventDefault(); e.stopImmediatePropagation(); return; }
     if (pausado) { e.stopImmediatePropagation(); return; }
     if (k === 'ArrowLeft' || k === 'KeyA') keys.add('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.add('right');
@@ -267,23 +312,30 @@
     if (cut) { RT().update(cut.s, dt); if (cut.s.done) { const f = cut.depois; cut = null; hudVisivel(true); try { window.DayTime?.force?.(null); } catch (e) {} f?.(); } else { c.save(); RT().draw(c, cut.s); c.restore(); return; } }
     if (pausado || ocupado()) { keys.clear(); P.vx = 0; }
     t += dt; const d = D();
-    if (!pausado) { TR()?.passo?.(dt, P, { cam, segurandoPulo: keys.has('jump') }); if (viagem) andarViagem(dt); else fisica(dt); }
+    const F = !cut ? faseAtual() : fase; TR()?.inimigos?.(F && !cut ? F.inimigos() : []);
+    if (!pausado && !morto) { P.inv = Math.max(0, (P.inv || 0) - dt); P.atordoado = Math.max(0, (P.atordoado || 0) - dt); TR()?.passo?.(dt, P, { cam, segurandoPulo: keys.has('jump') }); if (viagem) andarViagem(dt); else fisica(dt); if (F) F.update(dt); }
+    tremor = Math.max(0, tremor - dt * 30); clarao = Math.max(0, clarao - dt * 1.6); for (const d0 of dano) d0.t += dt; while (dano.length && dano[0].t > 1) dano.shift();
     cam += (clamp(P.x - 360, 0, Math.max(0, d.largura - W)) - cam) * Math.min(1, dt * 8);
     try { window.DayTime?.force?.(horaAtual()); } catch (e) {}
     const o = { scene: d.id, camera: cam, time: t, player: P, shots: [], enemies: [], minions: [] };
     safe(() => window.Interact?.update?.(dt, o)); safe(() => CC().heroi?.(P.x, P.y, P.vy));
     window.Art.drawScene(c, d.id, cam, t);
-    c.save(); { const sh = TR()?.tremor?.() || 0; c.translate(-Math.round(cam) + Math.round((Math.random() - .5) * sh), Math.round((Math.random() - .5) * sh)); }
+    c.save(); { const sh = Math.max(TR()?.tremor?.() || 0, tremor); c.translate(-Math.round(cam) + Math.round((Math.random() - .5) * sh), Math.round((Math.random() - .5) * sh)); }
     if (d.id >= 12) for (const pl of d.plataformas || []) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) safe(() => CC().plataforma(c, d.id, pl, t));
     safe(() => window.Interact?.drawBack?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawBack?.(c, o)); safe(() => window.CampanhaTaxi?.desenhar?.(c, o)); safe(() => window.CampanhaLoja?.desenhar?.(c, o)); safe(() => window.CampanhaMoradores?.desenhar?.(c, o)); }
     desenharExtras();
-    const at = P.attack || 0; window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: 'paper', attackProgress: 1 - at / .32 });
+    if (F) F.desenhar(c);
+    const at = P.attack || 0; if (!((P.inv || 0) > 0 && Math.floor(t * 16) % 2)) window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: 'paper', attackProgress: 1 - at / .32 });
     safe(() => TR()?.desenhar?.(c, t));
     safe(() => window.Interact?.drawFront?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
     procurarPerto();
     if (perto) { c.font = '11px Pixel, monospace'; const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); c.textAlign = 'left'; }
+    c.font = '16px Pixel, monospace'; c.textAlign = 'center'; for (const d0 of dano) { c.globalAlpha = 1 - d0.t; c.fillStyle = '#2a0808'; c.fillText(d0.s, d0.x + 2, d0.y - d0.t * 40 + 2); c.fillStyle = '#ff5a4a'; c.fillText(d0.s, d0.x, d0.y - d0.t * 40); } c.globalAlpha = 1; c.textAlign = 'left';
     c.restore(); safe(() => window.CampanhaAmbientes?.cobrir?.(c, d.id, cam));
-    setaObjetivo();
+    if (!F?.emArena?.()) setaObjetivo(); if (F) F.desenharTela(c, W);
+    if (clarao > 0) { c.globalAlpha = clarao; c.fillStyle = claraoCor; c.fillRect(0, 0, W, H); c.globalAlpha = 1; }
+    if (P.hp < 30 && !cut) { const a = .18 + Math.sin(t * 6) * .08; const g = c.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 600); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(140,0,10,${a})`); c.fillStyle = g; c.fillRect(0, 0, W, H); }
+    box.querySelector('.obj').style.visibility = F?.emArena?.() ? 'hidden' : 'visible';
     if (window.Graphics?.isShader?.()) safe(() => window.Shader?.apply?.(cv, { scene: d.id, camera: cam, time: t, outdoor: !d.interno }));
     if (fade > 0) { c.fillStyle = `rgba(8,10,14,${fade})`; c.fillRect(0, 0, W, H); }
     hudAtualizar();
@@ -291,7 +343,7 @@
 
   /* ---------- abrir e fechar ---------- */
   function abrir(o = {}) {
-    if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (o.novo) safe(() => localStorage.removeItem(KEY));
+    if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
     aberto = true; box.hidden = false; pausado = false; cut = null; keys.clear(); P.hp = S.hp || 100;
     TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true }));
     if (S.passo === 'abertura') { irPara(0, 700); tocar('c2_abertura', PASSOS.abertura.depois); }
@@ -322,5 +374,5 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', botaoMenu); else botaoMenu();
   window.Campanha2 = Object.freeze({ liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, flags: { ...(S?.flags || {}) } }),
     // testes
-    _ir: (id, x) => irPara(id, x), _pos: (x, y) => { P.x = x; P.y = y; P.vy = 0; P.ground = true; }, _fps: () => fpsMedio, _passo: (id) => passo(id), _usar: usar, _pular: pularCut });
+    _ir: (id, x) => irPara(id, x), _fase: () => fase && { slug: fase.slug, chefe: { st: fase.chefe.st, hp: fase.chefe.hp, fase: fase.chefe.fase, x: Math.round(fase.chefe.x) }, arena: fase.emArena(), inimigos: fase.inimigos().length }, _hp: (n) => { P.hp = n; }, _bater: (n) => { const f = fase; if (f?.chefe) f.chefe.onDano(n, 'teste'); }, _pos: (x, y) => { P.x = x; P.y = y; P.vy = 0; P.ground = true; }, _fps: () => fpsMedio, _passo: (id) => passo(id), _usar: usar, _pular: pularCut });
 })();

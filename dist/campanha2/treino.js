@@ -42,7 +42,7 @@
   let modoJogo = false; // no jogo da Campanha 2: sem bonecos e sem a caixa de ajuda do treino
   function ligar(v, P, o = {}) { on = v ?? !on; modoJogo = !!o.jogo; if (barra) { barra.hidden = !on; const inf = barra.querySelector('.c2-treino-info'), gs = barra.querySelector('.c2-treino-gas'); if (inf) inf.hidden = modoJogo; if (gs) gs.hidden = modoJogo; } if (on) { bonecos = modoJogo ? [] : [novoBoneco(P.x + 170), novoBoneco(P.x + 250), novoBoneco(P.x + 330)]; heroRef = P; } else { bonecos = []; tiros = []; nuvens = []; } return on; }
   const mundo = () => ({ heroi: heroRef, inimigos: () => bonecos, camera: cam,
-    dano: (e, n, tipo, dir) => { if (e.hp <= 0) return; e.hp = Math.max(0, e.hp - n); e.hit = .18; textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - 90, n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); if (e.hp <= 0) { e.morto = 2.2; window.CampanhaLoja?.ganhar?.(8); textos.push({ x: e.x, y: e.y - 120, n: '+8 ●', t: 0, cor: '#ffd24a' }); } }, // inimigo derrotado deixa moedas
+    dano: (e, n, tipo, dir) => { if (e.hp <= 0) return; if (e.onDano) { const r = e.onDano(n, tipo, dir); if (r !== false) textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - (e.alto || 90), n: r || n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); return; } e.hp = Math.max(0, e.hp - n); e.hit = .18; textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - 90, n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); if (e.hp <= 0) { e.morto = 2.2; window.CampanhaLoja?.ganhar?.(8); textos.push({ x: e.x, y: e.y - 120, n: '+8 ●', t: 0, cor: '#ffd24a' }); } }, // inimigo derrotado deixa moedas
     empurrar: (e, vx, vy) => { e.vx = vx; e.vy = vy; }, atordoar: (e, s) => { e.stun = s; }, confundir: (e, s) => { e.conf = s; }, tremer: (n) => { shake = Math.max(shake, n); } });
   function bater(e, n, tipo, dir) { mundo().dano(e, Math.round(n * PW.multiplicadores().forca), tipo, dir); }
 
@@ -51,6 +51,7 @@
     heroRef = P; const dir = P.facing < 0 ? -1 : 1;
     if (id === 'poder1' || id === 'poder2') { const r = PW.usar(id === 'poder1' ? 0 : 1, mundo(), down ? 'down' : 'up'); if (down && !r.ok && r.motivo === 'vazio') aviso('Equipe um poder no Mural dos Poderes (quarto da pensão).'); if (down && !r.ok && r.motivo === 'recarga') aviso(`Recarregando: ${r.falta.toFixed(1).replace('.', ',')} s`); return true; }
     if (!down) { if (id === 'jump') voando = false; return true; }
+    if (modoJogo && (id === 'paper' || id === 'fart')) { if ((cdAtk[id] || 0) > 0) return true; cdAtk[id] = id === 'paper' ? .26 : .9; if (id === 'paper') { P.attack = .32; } }
     if (id === 'paper') { tiros.push({ x: P.x + dir * 22, y: P.y - 52, vx: dir * 620, vy: -90, vida: .8 }); return true; }
     if (id === 'fart') { nuvens.push({ x: P.x - dir * 20, y: P.y - 30, vx: -dir * 60, t: 0, hitou: new Set() }); return true; }
     if (id === 'dash') { if (dashCd <= 0) { dashT = .2; dashCd = 1.1; P.vx = dir * 620; } return true; }
@@ -58,13 +59,14 @@
     if (id === 'interact') return false;
     return false;
   }
+  const cdAtk = {};
   let avisoTxt = '', avisoT = 0; const aviso = (s) => { avisoTxt = s; avisoT = 2.4; };
 
   function passo(dt, P, o) {
-    if (!on) return; heroRef = P; cam = o.cam; PW.atualizar(dt, mundo()); dashCd = Math.max(0, dashCd - dt); shake = Math.max(0, shake - dt * 30); avisoT = Math.max(0, avisoT - dt);
+    if (!on) return; heroRef = P; cam = o.cam; PW.atualizar(dt, mundo()); for (const k in cdAtk) cdAtk[k] = Math.max(0, cdAtk[k] - dt); if (P.attack > 0) P.attack = Math.max(0, P.attack - dt); dashCd = Math.max(0, dashCd - dt); shake = Math.max(0, shake - dt * 30); avisoT = Math.max(0, avisoT - dt);
     if (dashT > 0) { dashT -= dt; P.vx = (P.facing < 0 ? -1 : 1) * 620; }
     if (voando && !P.ground && gas > 0 && o.segurandoPulo) { P.vy = Math.max(-240, P.vy - 1500 * dt); gas = Math.max(0, gas - 38 * dt); } if (P.ground) gas = Math.min(100, gas + 60 * dt);
-    for (const b of bonecos) {
+    if (!modoJogo) for (const b of bonecos) {
       if (b.morto > 0) { b.morto -= dt; if (b.morto <= 0) Object.assign(b, novoBoneco(b.base)); continue; }
       b.hit = Math.max(0, b.hit - dt); b.stun = Math.max(0, b.stun - dt); b.conf = Math.max(0, b.conf - dt); b.golpe = Math.max(0, b.golpe - dt);
       b.x += b.vx * dt; b.vx *= Math.pow(.02, dt); b.vy += 1400 * dt; b.y = Math.min(FLOOR, b.y + b.vy * dt); if (b.y >= FLOOR) b.vy = 0;
@@ -72,8 +74,8 @@
         if (alvo) { const d = alvo.x - b.x; if (Math.abs(d) > 40) b.x += Math.sign(d) * 120 * dt; else if (b.golpe <= 0) { b.golpe = .7; mundo().dano(alvo, 4, 'confuso', Math.sign(d)); alvo.vx = Math.sign(d) * 160; textos.push({ x: b.x, y: b.y - 110, n: 'TOMA!', t: 0, cor: '#e48fb0' }); } } }
       else if (b.stun <= 0) b.x += (b.base - b.x) * Math.min(1, dt * .8); // volta devagar pro lugar
     }
-    tiros = tiros.filter((q) => { q.vida -= dt; q.x += q.vx * dt; q.y += q.vy * dt; q.vy += 300 * dt; for (const b of bonecos) if (b.hp > 0 && Math.abs(b.x - q.x) < 22 && q.y > b.y - 80 && q.y < b.y) { bater(b, 6, 'papel', Math.sign(q.vx)); b.vx = Math.sign(q.vx) * 90; return false; } return q.vida > 0; });
-    nuvens = nuvens.filter((n) => { n.t += dt; n.x += n.vx * dt; for (const b of bonecos) if (b.hp > 0 && !n.hitou.has(b) && Math.abs(b.x - n.x) < 60) { n.hitou.add(b); bater(b, 9, 'peido', 0); } return n.t < 1.1; });
+    tiros = tiros.filter((q) => { q.vida -= dt; q.x += q.vx * dt; q.y += q.vy * dt; q.vy += 300 * dt; for (const b of bonecos) if (b.hp > 0 && !b.intocavel && Math.abs(b.x - q.x) < (b.largura || 22) && q.y > b.y - (b.alto || 80) && q.y < b.y + 4) { bater(b, 6, 'papel', Math.sign(q.vx)); b.vx = Math.sign(q.vx) * 90; return false; } return q.vida > 0; });
+    nuvens = nuvens.filter((n) => { n.t += dt; n.x += n.vx * dt; for (const b of bonecos) if (b.hp > 0 && !b.intocavel && !n.hitou.has(b) && Math.abs(b.x - n.x) < 60 + (b.largura || 22) - 22 && Math.abs((b.y - (b.alto || 80) / 2) - n.y) < 90) { n.hitou.add(b); bater(b, 9, 'peido', 0); } return n.t < 1.1; });
     textos = textos.filter((x) => { x.t += dt; return x.t < .9; });
   }
 
@@ -91,7 +93,7 @@
   }
   function desenhar(c, t) {
     if (!on) return; const P = heroRef;
-    for (const b of bonecos) espantalho(c, b, t);
+    if (!modoJogo) for (const b of bonecos) espantalho(c, b, t);
     for (const n of nuvens) { const a = 1 - n.t / 1.1; for (let k = 0; k < 5; k++) { c.fillStyle = `rgba(150,200,90,${a * .55})`; c.beginPath(); c.arc(n.x + Math.cos(k * 1.3 + n.t * 3) * 18 * (1 + n.t), n.y - 6 + Math.sin(k * 2 + n.t * 2) * 10, 10 + n.t * 16, 0, Math.PI * 2); c.fill(); } }
     for (const q of tiros) { c.fillStyle = '#f6f4ee'; c.fillRect(Math.round(q.x - 5), Math.round(q.y - 5), 10, 10); c.fillStyle = '#d8d4c8'; c.fillRect(Math.round(q.x - 3), Math.round(q.y - 3), 4, 4); }
     PW.desenhar(c, mundo());
