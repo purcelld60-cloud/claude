@@ -694,3 +694,26 @@ Os botões são os originais de cada modo, só mudados de lugar. Qualquer botão
 - O fundo em volta é azul-céu.
 - Vida no mapa: bandos de passarinhos em V batendo as asas, borboletas e raios de sol se mexendo devagar.
 - Grama, mata e plantação em **verde-limão claro** (pedido do dono). A mata fica um tom mais fundo, para ter contraste.
+
+**Lugares do mapa com a cara de cada fase** (`mapas.js`, campo `desenho` de cada lugar). Cada lugar mostra o que tem no cenário da fase.
+- **Campanha 1:**
+  - Caderno do Caos: caderno roxo gigante, lápis e o rabisco-monstro;
+  - Pátio: prédio com faixa azul, bandeirinhas e coqueiro;
+  - Quadra: piso de tijolo com bandeirinhas;
+  - Bigodon: barbearia com toldo, poste de barbeiro e placa de bigode;
+  - Academia CALEB;
+  - Casa da Rayssa: cortinas rosa;
+  - Baile funk: palco, luzes e multidão;
+  - Praça Camacan: coqueiros, placa e quiosque;
+  - Colégio com placa.
+- **Campanha 2:**
+  - Monumento ao Índio: estátua de bronze com arco;
+  - Teatro de tijolo com portas coloridas, mais o Centro de Cultura e o planetário;
+  - Shopping: vidro, placa laranja e estacionamento;
+  - SESI: muro grafitado e quadra;
+  - Rodoviária: plataformas e ônibus;
+  - UESB: ipês e ponto do circular;
+  - Lagoa: pista vermelha com distâncias;
+  - Parque: parquinho e grafite;
+  - Placas da Fazenda, do Lomantão, do Mel da Serra e do Biscoito.
+- **Lugares trancados:** um véu leve por cima. Continuam reconhecíveis, com o cadeado.
