@@ -149,7 +149,7 @@
     for (let y = 0; y < H; y++) { let x = 0; while (x < W) { if (wd[y * W + x] < 0) { x++; continue; } let e = x; while (e < W && wd[y * W + e] >= 0) e++; if (e - x < 5) for (let k = x; k < e; k++) { wd[y * W + k] = -1; sh[y * W + k] = 0; } x = e; } } // lascas finas (beiradas quase verticais) viram só contorno
     const img = c.createImageData(W, H), px = img.data;
     const put = (i, col, f = 1) => { const o = i * 4; px[o] = Math.min(255, col[0] * f); px[o + 1] = Math.min(255, col[1] * f); px[o + 2] = Math.min(255, col[2] * f); px[o + 3] = 255; };
-    const G3 = [pal('#58a638'), pal('#5fae3c'), pal('#67b642')], M3 = [pal('#468c30'), pal('#4f9a34'), pal('#55a238')], CE3 = [pal('#9aa04a'), pal('#a8a854'), pal('#8a9a44')];
+    const G3 = [pal('#9ad450'), pal('#a6dc58'), pal('#b0e262')], M3 = [pal('#7cbc3c'), pal('#86c442'), pal('#8ecc48')], CE3 = [pal('#9aa04a'), pal('#a8a854'), pal('#8a9a44')];
     const AG = { fundo: pal('#3a7ad0'), meio: pal('#4a92e2'), raso: pal('#6ab4f0'), espuma: pal('#e2f4ff'), onda: pal('#7cc2f6') };
     const terraCores = [pal('#c87a4a'), pal('#b86c40'), pal('#d88a56')], terraB = pal('#7a4228'), terraE = pal('#a85e38'), terraC = pal('#e8a06a'), pedrinha = pal('#8a7a6a'), pedrinhaC = pal('#b8a898');
     const agua = (x, y) => lv[Math.max(0, Math.min(H - 1, y)) * W + Math.max(0, Math.min(W - 1, x))] === 0;
@@ -179,13 +179,13 @@
       const tint = 1 + (L - 1) * .035; f *= tint;
       let col;
       switch (t) {
-        case TI.grama: case TI.mata: case TI.cerrado: { const P3 = t === TI.mata ? M3 : t === TI.cerrado ? CE3 : G3, m = vn(x / 36, y / 36, 7); col = P3[m < .38 ? 0 : m > .64 ? 2 : 1]; const q = h2(x >> 1, y >> 1, 8); if (q > .93) col = t === TI.cerrado ? pal('#c8c070') : pal('#7ccc4e'); else if (q < .05) col = t === TI.cerrado ? pal('#7a7a3a') : pal('#4a9030'); break; }
+        case TI.grama: case TI.mata: case TI.cerrado: { const P3 = t === TI.mata ? M3 : t === TI.cerrado ? CE3 : G3, m = vn(x / 36, y / 36, 7); col = P3[m < .38 ? 0 : m > .64 ? 2 : 1]; const q = h2(x >> 1, y >> 1, 8); if (q > .93) col = t === TI.cerrado ? pal('#c8c070') : pal('#c8f07a'); else if (q < .05) col = t === TI.cerrado ? pal('#7a7a3a') : pal('#7cb83c'); break; }
         case TI.pedra: { const r = Math.floor(y / 5), off = (r & 1) * 3, cl = Math.floor((x + off) / 6), lx = (x + off) % 6, ly = y % 5, hv = h2(cl, r, 11); if (lx === 5 || ly === 4) col = pal('#8a9096'); else if (ly === 0 || lx === 0) col = pal(hv > .5 ? '#e2e5e8' : '#d4d8dc'); else if (ly === 3) col = pal('#a8aeb4'); else col = pal(hv > .66 ? '#c4c8cc' : hv > .33 ? '#bcc0c4' : '#b4b9be'); break; }
         case TI.calcada: { const lx = x % 8, ly = y % 8; col = pal(lx === 7 || ly === 7 ? '#b8b0a0' : (Math.floor(x / 8) + Math.floor(y / 8)) % 2 ? '#e6dfd0' : '#ddd5c4'); break; }
         case TI.chao: { col = pal('#d8a06e'); const q = h2(x, y, 12); if (q > .9) col = pal('#c08a5a'); else if (q < .04) col = pal('#e8b888'); if (h2(x >> 2, y >> 2, 14) > .96) col = pal('#a8805a'); break; }
         case TI.asfalto: { col = pal('#5b6066'); const q = h2(x, y, 15); if (q > .88) col = pal('#4c5156'); else if (q < .05) col = pal('#6a7076'); break; }
         case TI.areia: { col = pal(vn(x / 6, y / 3, 16) > .7 ? '#d8c07a' : '#ead69a'); if (h2(x, y, 17) > .94) col = pal('#f6eac0'); break; }
-        case TI.plantacao: { const r = (y + Math.sin(x / 23) * 3) / 5, fr = r - Math.floor(r); col = pal(fr < .35 ? '#6a4228' : fr < .45 ? '#8a5a36' : (x + Math.floor(r) * 2) % 3 ? '#58a83c' : '#9ade6a'); break; }
+        case TI.plantacao: { const r = (y + Math.sin(x / 23) * 3) / 5, fr = r - Math.floor(r); col = pal(fr < .35 ? '#6a4228' : fr < .45 ? '#8a5a36' : (x + Math.floor(r) * 2) % 3 ? '#a6dc58' : '#ccf27e'); break; }
         case TI.trigo: { const r = (y + Math.sin(x / 17) * 2), q = h2(x, Math.floor(r / 3), 18); col = pal((x & 1) ? (q > .5 ? '#e8c25a' : '#d8ae48') : (r % 3 < 1 ? '#f4dc80' : '#c89a3a')); break; }
         case TI.cafe: { const r = (y + Math.sin(x / 37) * 4) / 9, fr = r - Math.floor(r); if (fr < .62) { const b = h2(Math.floor(x / 3), Math.floor(r), 19); col = pal(fr < .12 ? '#2f5e26' : b > .85 && fr > .3 ? '#c43c3a' : (x + Math.floor(fr * 9)) % 4 === 0 ? '#58a83c' : '#3f8a30'); } else col = pal(fr < .7 ? '#6a4228' : '#8a5a36'); break; }
         case TI.campo: col = pal(Math.floor(x / 12) % 2 ? '#5aa046' : '#66ae50'); break;
@@ -198,10 +198,10 @@
       const tu = ty[i - W] ?? t, tb = ty[i + W] ?? t, tl = ty[i - 1] ?? t, tr = ty[i + 1] ?? t;
       if (CAMINHO.has(t)) { if (y > 0 && VERDE.has(tu) && lv[i - W] === L) f *= .74; else if (y > 1 && VERDE.has(ty[i - 2 * W]) && lv[i - 2 * W] === L) f *= .88; else if (VERDE.has(tl) || VERDE.has(tr) || VERDE.has(tb)) f *= .84;
         if (t === TI.asfalto && (tu === TI.pedra || tu === TI.calcada || tb === TI.pedra || tb === TI.calcada || tl === TI.pedra || tr === TI.pedra)) { col = pal('#d8dcdf'); } }
-      else if (VERDE.has(t) && CAMINHO.has(tb) && lv[i + W] === L) col = pal('#3c7a2c');
+      else if (VERDE.has(t) && CAMINHO.has(tb) && lv[i + W] === L) col = pal('#6aa232');
       // beira do platô: risquinho escuro dos lados, e a borda de cima mais clara
-      if (x > 0 && lv[i - 1] < L && wd[i - 1] < 0) { col = pal('#2f5e26'); f = 1; } else if (x < W - 1 && lv[i + 1] < L && wd[i + 1] < 0) { col = pal('#2f5e26'); f = 1; }
-      else if (y > 0 && lv[i - W] < L && wd[i - W] < 0) col = pal('#8ad45a');
+      if (x > 0 && lv[i - 1] < L && wd[i - 1] < 0) { col = pal('#4f8a28'); f = 1; } else if (x < W - 1 && lv[i + 1] < L && wd[i + 1] < 0) { col = pal('#4f8a28'); f = 1; }
+      else if (y > 0 && lv[i - W] < L && wd[i - W] < 0) col = pal('#d2f48a');
       put(i, col, f);
     }
     c.putImageData(img, 0, 0);

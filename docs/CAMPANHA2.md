@@ -693,3 +693,4 @@ Os botões são os originais de cada modo, só mudados de lugar. Qualquer botão
 - As áreas trancadas têm sombra mais suave.
 - O fundo em volta é azul-céu.
 - Vida no mapa: bandos de passarinhos em V batendo as asas, borboletas e raios de sol se mexendo devagar.
+- Grama, mata e plantação em **verde-limão claro** (pedido do dono). A mata fica um tom mais fundo, para ter contraste.
