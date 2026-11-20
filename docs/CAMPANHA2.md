@@ -10,8 +10,8 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 | 2 | Cenários (2A a 2D): ambientes, camadas, 7 cenários novos, moradores | feito e aprovado |
 | 3 | Poderes de Da Roça e mural para trocar | feito e aprovado |
 | 4 | Locomoção: mapas, táxi do Seu Zé e loja de garrafadas | feito e aprovado |
-| 5 | Cutscenes | **feito, aguardando aprovação** |
-| 6 | O resto: menu "Campanha 2", missões, chefes, bloqueio depois do embarque, save e créditos no jogo | — |
+| 5 | Cutscenes | feito e aprovado |
+| 6 | O jogo: 6A prólogo jogável · 6B vilões 1 a 4 · 6C vilões 5 a 8 · 6D Jorge, final e créditos | **6A feito, aguardando aprovação** |
 
 ## Passo 1 · Personagens (`dist/campanha2/personagens.js`)
 
@@ -471,3 +471,38 @@ Nenhuma delas toca sozinha ainda: o passo 6 liga cada uma ao seu momento no jogo
 **Para assistir:** abra `?cenarios2` e clique em **CUTSCENES**. A galeria toca qualquer uma com trilha e sons, mesmo com o som do jogo desligado. Também dá para abrir direto com `?roteiro=c2_abertura`.
 
 **Conserto:** o engarrafamento aleatório (passo 2B) tinha um erro que deixava o cenário preto no centro e na avenida quando a fila aparecia. Está corrigido.
+
+
+## Passo 6A · O jogo da Campanha 2 e o prólogo jogável (`dist/campanha2/jogo.js`)
+
+**Como entra.** Na tela inicial há o botão **❄ CAMPANHA 2 · CONQUISTA**. Ele é liberado quando a campanha principal foi zerada (a ligação do Jorge, `q.jorgeSeen`, a mesma regra do Sandbox dos chefes). Para testar sem zerar, abra o site com `?campanha2`. O painel tem **COMEÇAR** e **CONTINUAR** (quando há save).
+
+**Motor.** É uma tela própria, por cima do jogo, que junta tudo dos passos 1 a 5:
+- os cenários, as portas, a escada rolante e a escada da escola;
+- os moradores, o táxi, a loja e o mural;
+- os botões da campanha 1 sem Reeis, Bivolt e Batata, com voo, peido, papel, dash e os 2 poderes;
+- o joystick no celular;
+- as cutscenes com balão de fala tocando dentro do jogo.
+
+Na tela ficam:
+- o **objetivo** no alto, com uma seta até o lugar (ou na beirada da tela, se o lugar estiver fora);
+- vida em corações, gás do voo e moedas;
+- a **pausa** (☰ ou Esc), com som e **SALVAR E SAIR**;
+- **PULAR CENA** nas cutscenes.
+
+**Save.** O progresso fica em `daroca-c2-save`: a missão, a cena, a posição e a vida. O jogo salva a cada missão e a cada porta, e a cama do quarto 4 salva e cura. O save da campanha principal nunca é tocado.
+
+**O prólogo (6A):**
+1. A cutscene de abertura.
+2. A roça de Itabuna (o mapa da campanha 1, reaproveitado), sem combate:
+   - a despedida opcional de Reeis, Caleb, Mota e Kaua;
+   - o passaporte em cima dos fardos de feno, alcançado pulando de fardo em fardo.
+3. O Lucas na trilha dá carona no carro a gás até o aeroporto.
+4. O minijogo do Miguel. Check-in e raio-X com escolhas: as erradas rendem piada e a certa avança.
+5. O portão com a despedida e o aviso **"Depois de embarcar, você não poderá voltar para Itabuna. Continuar?"**. Depois de embarcar, Itabuna fica fechada (`flags.embarcou`).
+6. As cutscenes do voo e da chegada.
+7. O táxi do Seu Zé até a pensão (a única corrida liberada nessa hora).
+8. A Dona Lurdes e a primeira noite.
+9. A manhã no quarto 4, onde o jogo salva.
+
+O próximo objetivo (o bairro e a Dona Creuza) chega no 6B.

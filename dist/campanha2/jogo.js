@@ -1,0 +1,326 @@
+/* Campanha 2 · Passo 6A: o JOGO da Campanha 2 (Vitória da Conquista).
+   Menu "CAMPANHA 2" na tela inicial (liberado depois de zerar a campanha principal: a ligação do Jorge).
+   Um motor próprio, por cima da tela do jogo, que junta tudo o que foi feito nos passos 1 a 5:
+   cenários, camadas, portas e escadas, moradores, táxi do Seu Zé, loja, mural dos poderes, os botões da
+   campanha 1 (sem Reeis/Bivolt/Batata) e as cutscenes com balão de fala tocando dentro do jogo.
+   Missões em sequência (objetivo no alto da tela e seta até o lugar), save próprio (daroca-c2-save),
+   pausa com SALVAR E SAIR. O save da campanha 1 nunca é tocado.
+   6A: o prólogo inteiro jogável, da ligação até a primeira manhã na pensão. */
+(() => {
+  'use strict';
+  if (window.Campanha2 || !window.CampanhaCenarios || !window.Art) return;
+  const W = 960, H = 540, FLOOR = 440, KEY = 'daroca-c2-save';
+  const CC = () => window.CampanhaCenarios, RT = () => window.Roteiro, TR = () => window.CampanhaTreino;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const safe = (f, d) => { try { return f(); } catch (e) { return d; } };
+
+  /* ---------- liberação e save ---------- */
+  function liberada() {
+    if (/[?&]campanha2\b/.test(location.search)) return true;
+    return safe(() => !!JSON.parse(localStorage.getItem('da-roca-adventure-v1') || 'null')?.q?.jorgeSeen, false) || safe(() => localStorage.getItem('daroca-sandbox-v1') === '1', false) || !!safe(() => localStorage.getItem(KEY), null);
+  }
+  const novoSave = () => ({ v: 1, passo: 'abertura', cena: 0, x: 700, hp: 100, flags: {}, criado: Date.now(), salvo: 0 });
+  let S = null;
+  const temSave = () => !!safe(() => JSON.parse(localStorage.getItem(KEY) || 'null')?.passo, false);
+  function carregar() { const d = safe(() => JSON.parse(localStorage.getItem(KEY) || 'null'), null); return d && d.v === 1 && d.passo ? { ...novoSave(), ...d, flags: { ...(d.flags || {}) } } : null; }
+  function salvar(msg) { if (!S) return; S.cena = cenaId; S.x = Math.round(P.x); S.hp = Math.round(P.hp); S.salvo = Date.now(); safe(() => localStorage.setItem(KEY, JSON.stringify(S))); if (msg) aviso(msg); }
+
+  /* ---------- cenas (as da Campanha 2 e as de Itabuna, reaproveitadas no prólogo) ---------- */
+  const NOMES_C1 = () => window.Campaign?.sceneNames || [];
+  const EXTRA_PLAT = { 0: [[3280, 412, 50], [3330, 384, 50], [3380, 356, 50], [3430, 328, 54]] }; // fardos de feno até o passaporte
+  function cenaDef(id) {
+    if (id >= 12) return CC().lista.find((d) => d.id === id) || CC().lista[0];
+    const w = Number(window.WorldData?.widths?.[id]) || 4800;
+    return { id, nome: NOMES_C1()[id] || 'Itabuna', largura: w, vaos: [], plataformas: EXTRA_PLAT[id] || [], limites: [40, w - 40], itabuna: true };
+  }
+
+  /* ---------- MISSÕES (prólogo) ---------- */
+  const PASSOS = {
+    abertura: { roteiro: 'c2_abertura', depois: () => { irPara(0, 700); passo('passaporte'); } },
+    passaporte: { obj: 'Pegue seu passaporte. Ele ficou em cima dos fardos de feno, perto de casa, no fim da roça.', cena: 0, alvo: 3456, hora: 6.6 },
+    lucas: { obj: 'Despeça-se da turma (se quiser) e encontre o Lucas na trilha, no fim da roça.', cena: 0, alvo: 4560, hora: 7.2 },
+    checkin: { obj: 'Faça o check-in no balcão. O Miguel te explica.', cena: 12, alvo: 640, hora: 9 },
+    raiox: { obj: 'Passe pelo raio-X.', cena: 12, alvo: 1330, hora: 9.2 },
+    portao: { obj: 'Vá até o portão de embarque.', cena: 12, alvo: 1760, hora: 9.4 },
+    taxi1: { obj: 'Pegue o táxi do Seu Zé no ponto do desembarque.', cena: 12, alvo: 4000, hora: 7.4 },
+    lurdes: { obj: 'Fale com a Dona Lurdes, na porta da pensão.', cena: 13, alvo: 1830, hora: 18.2 },
+    bairro: { obj: 'Saia da pensão e conheça o bairro. Dizem que uma vizinha anda falando de você... (a próxima missão chega no passo 6B)', cena: 13, alvo: 2420, hora: 8.5 }
+  };
+  const PASSO_INICIAL_DA_CENA = { passaporte: 0, lucas: 0, checkin: 12, raiox: 12, portao: 12, taxi1: 12, lurdes: 13, bairro: 13 };
+  function passo(id) { S.passo = id; const p = PASSOS[id]; if (p?.obj) objetivoNovo(p.obj); salvar(); }
+
+  /* ---------- objetos e pessoas do prólogo (desenhados por cima do cenário) ---------- */
+  const NPC = [
+    { id: 'reeis', quem: 'reeis', cena: 0, x: 1020, quando: ['passaporte', 'lucas'], rotulo: 'FALAR COM O REEIS', falas: [['reeis', 'Vai mesmo, né? Atrás do Gordo.', 'sad'], ['daroca', 'Vou. Alguém tem que olhar na cara dele.'], ['reeis', 'Então olha por mim também. E traz biscoito de Conquista.', 'friend'], ['reeis', '...E traz ele de volta, tá? O trio é o trio. OOO REEEIS!', 'friend']] },
+    { id: 'caleb', quem: 'caleb', cena: 0, x: 2080, quando: ['passaporte', 'lucas'], rotulo: 'FALAR COM O CALEB', falas: [['caleb', 'Ouvi dizer que em Conquista faz frio de verdade.'], ['caleb', 'Cuidado: músculo encolhe no frio. Faz flexão no avião.'], ['daroca', 'Isso nem é verdade, Caleb.'], ['caleb', 'Tudo é verdade se você acreditar com força.']] },
+    { id: 'mota', quem: 'mota', cena: 0, x: 2640, quando: ['passaporte', 'lucas'], rotulo: 'FALAR COM O MOTA', falas: [['mota', 'Vai viajar sem me chamar? Que feio, Da Roça.'], ['mota', 'Pelo menos o dash você leva. Treinou comigo, então não tem desculpa.'], ['daroca', 'O dash vai comigo pra onde eu for.', 'friend']] },
+    { id: 'kaua', quem: 'kaua', cena: 0, x: 3080, quando: ['passaporte', 'lucas'], rotulo: 'FALAR COM O KAUA', falas: [['kaua', 'Achei teu passaporte mais cedo. Botei em cima do feno pra galinha não comer.'], ['daroca', 'Em cima do FENO?!'], ['kaua', 'Ué. Galinha não pula. Você pula.']] },
+    { id: 'lucas', quem: 'lucas', cena: 0, x: 4560, quando: ['lucas'], rotulo: 'PEDIR CARONA PRO LUCAS', fim: () => caronaLucas(), falas: [['lucas', 'Teu pai deixou eu te levar no carro a gás. Só até o aeroporto, hein!'], ['daroca', 'Ele deixou VOCÊ dirigir o carro dele?'], ['lucas', 'Deixou. Mais ou menos. Ele estava dormindo, mas eu acho que ele deixaria.'], ['daroca', '...Bora logo.']] },
+    { id: 'miguel1', quem: 'miguel', cena: 12, x: 740, quando: ['checkin'], semFala: true },
+    { id: 'miguel2', quem: 'miguel', cena: 12, x: 1420, quando: ['raiox'], semFala: true },
+    { id: 'miguel3', quem: 'miguel', cena: 12, x: 1840, quando: ['portao'], semFala: true },
+    { id: 'lurdes', quem: 'c2_lurdes', cena: 13, x: 1830, quando: ['lurdes'], rotulo: 'FALAR COM A DONA LURDES', fim: () => tocar('c2_primeira_noite', () => { irPara(25, 450); passo('bairro'); salvar('JOGO SALVO · A CAMA DO QUARTO 4 SALVA E CURA'); }), falas: null }
+  ];
+  const ESTACOES = [
+    { id: 'checkin', cena: 12, x: 640, quando: 'checkin', rotulo: 'BALCÃO DE CHECK-IN', botao: 'CHECK-IN', acao: () => minijogo('checkin') },
+    { id: 'raiox', cena: 12, x: 1330, quando: 'raiox', rotulo: 'RAIO-X', botao: 'RAIO-X', acao: () => minijogo('raiox') },
+    { id: 'portao', cena: 12, x: 1760, quando: 'portao', rotulo: 'PORTÃO DE EMBARQUE', botao: 'EMBARCAR', acao: () => minijogo('portao') },
+    { id: 'cama', cena: 25, x: 624, rotulo: 'DORMIR (SALVA E CURA)', botao: 'DORMIR', acao: () => { P.hp = 100; salvar('JOGO SALVO · VIDA CHEIA'); sfx('sino'); } }
+  ];
+  function caronaLucas() { // o carro a gás voando até o aeroporto de Itabuna
+    const raw = { id: 'c2j_carona', titulo: 'A carona', balao: true, substituir: true, trilha: 'flashback', cenas: [
+      { titulo: 'A CAMINHO DO AEROPORTO', cenario: 0, hora: 7.4, duracao: 4.6, camera: { de: { x: 4300, y: 420, zoom: 1.4 }, para: { x: 4600, y: 300, zoom: 1.2 }, tempo: 4.4 }, atores: [{ quem: 'carro', x: 4480, ate: 4800, tempo: [0.6, 4.4], anim: 'voando' }], efeitos: ['raios', { tipo: 'saida', t: 3.6, dur: 1 }], sons: [{ som: 'whoosh', t: .6 }] },
+      { titulo: 'A CAMINHO DO AEROPORTO', fundo: 'preto', duracao: 2.4, efeitos: [{ tipo: 'cartao', texto: 'AEROPORTO DE ITABUNA', sub: 'ALGUNS MINUTOS DEPOIS', t: .2, dur: 2.1 }] }] };
+    registrar(raw); tocar('c2j_carona', () => { irPara(12, 300); tocarParte('c2_aeroporto', 0, 3, () => passo('checkin')); });
+  }
+
+  /* ---------- minijogo do Miguel: check-in, raio-X e portão ---------- */
+  function minijogo(etapa) {
+    if (etapa === 'checkin') escolher('MIGUEL', 'O que você entrega no balcão do check-in?', [
+      { t: 'O passaporte', ok: true, r: 'Isso! Agora pega o cartão de embarque e não perde.' },
+      { t: 'A carteirinha do colégio', r: 'Da Roça... isso aí só abre a cantina.' },
+      { t: 'O boleto do açaí', r: 'BOLETO?! Tu tá devendo açaí até pra companhia aérea?' }], () => { item('CARTÃO DE EMBARQUE'); passo('raiox'); });
+    if (etapa === 'raiox') escolher('MIGUEL', 'O alarme do raio-X apitou. O que você tira?', [
+      { t: 'O cinto', ok: true, r: 'Fivela de metal apita, Da Roça. Pode passar.' },
+      { t: 'O chapéu de palha', r: 'Palha não apita... mas a fila inteira tá rindo do teu chapéu.' },
+      { t: 'Prender o peido', r: 'O raio-X não pega isso. Graças a Deus.' }], () => { sfx('plim'); passo('portao'); });
+    if (etapa === 'portao') tocarParte('c2_aeroporto', 3, 99, () => escolher('AVISO', 'Depois de embarcar, você não poderá voltar para Itabuna. Continuar?', [
+      { t: 'EMBARCAR', ok: true }, { t: 'Ainda não', voltar: true }], () => { S.flags.embarcou = 1; salvar(); tocar('c2_voo', () => tocar('c2_chegada', () => { irPara(12, 3600); passo('taxi1'); })); }, true));
+  }
+
+  /* ---------- estado do jogo ---------- */
+  const P = { x: 700, y: FLOOR, vx: 0, vy: 0, ground: true, facing: 1, attack: 0, hp: 100 };
+  let aberto = false, cenaId = 0, cam = 0, t = 0, last = 0, raf = 0, keys = new Set(), viagem = null, fade = 0, perto = null, cut = null, pausado = false, som = true, joy = 0;
+  let fpsMedio = 60;
+  let box = null, cv = null, c = null, hud = null, objT = 0, avisos = [];
+  const sfx = (n) => { try { window.Roteiro?.sfx?.(n); } catch (e) {} };
+  const portais = (id) => safe(() => window.CampanhaAmbientes.portais(id), []) || [];
+  const D = () => cenaDef(cenaId);
+
+  /* ---------- cutscenes dentro do jogo ---------- */
+  function registrar(raw) { safe(() => RT().register(raw, 'campanha2')); }
+  function tocar(id, depois) { if (!RT()?.has?.(id)) { depois?.(); return; } keys.clear(); P.vx = 0; window.__somCutscene = som; const s = RT().create(id, {}); s.preview = true; cut = { s, depois, id }; hudVisivel(false); }
+  function tocarParte(id, de, ate, depois) { const sc = RT()?.get?.(id); if (!sc?.raw) { depois?.(); return; } const raw = { ...sc.raw, id: id + '_p' + de, substituir: true, cenas: sc.raw.cenas.slice(de, ate) }; registrar(raw); tocar(raw.id, depois); }
+  function avancarCut() { if (cut) RT().advance(cut.s); }
+  function pularCut() { if (!cut) return; let n = 0; while (!cut.s.done && n++ < 999) RT().advance(cut.s); }
+  function conversa(npc) { // conversa rápida com balão, no próprio cenário
+    const fx = P.x < npc.x ? 1 : -1, meio = (P.x + npc.x) / 2;
+    const raw = { id: 'c2j_conversa', titulo: 'Conversa', balao: true, substituir: true, cenas: [{ titulo: '', cenario: cenaId, hora: horaAtual(), camera: { de: { x: meio, y: 420, zoom: 1.7 }, para: { x: meio, y: 420, zoom: 1.85 }, tempo: 6 },
+      atores: [{ quem: 'daroca', x: Math.round(P.x), olhando: fx }, { quem: npc.quem, x: npc.x, olhando: -fx }], falas: npc.falas.map(([q, txt, e]) => ({ quem: q, texto: txt, ...(e ? { emocao: e } : {}) })) }] };
+    registrar(raw); tocar('c2j_conversa', () => { S.flags['falou_' + npc.id] = 1; npc.fim?.(); salvar(); });
+  }
+
+  /* ---------- ir de um lugar para outro ---------- */
+  function irPara(id, x) { cenaId = id; const d = D(); P.x = clamp(x, d.limites?.[0] ?? 40, d.limites?.[1] ?? d.largura - 40); P.y = FLOOR; P.vy = 0; P.vx = 0; P.ground = true; cam = clamp(P.x - 360, 0, Math.max(0, d.largura - W)); viagem = null; fade = 0; S && (S.cena = id); }
+  const horaAtual = () => { const p = PASSOS[S?.passo]; if (cenaId === 25 || cenaId === 24) return S?.passo === 'bairro' ? 7.5 : 21; return p?.hora ?? 12; };
+
+  /* ---------- usar o que está perto ---------- */
+  function usar() {
+    if (viagem || !perto || cut || pausado) return; const p = perto; keys.clear();
+    if (p.tipo === 'npc') { if (p.npc.falas) conversa(p.npc); else p.npc.fim?.(); return; }
+    if (p.tipo === 'estacao') { p.est.acao(); return; }
+    if (p.tipo === 'item') { p.acao(); return; }
+    if (p.tipo === 'extra') { if (p.id === 'loja') window.CampanhaLoja?.abrir?.({}); else window.CampanhaTaxi?.abrir?.(cenaId, (cena, x) => { irPara(cena, x + 120); if (S.passo === 'taxi1' && cena === 13) passo('lurdes'); salvar(); }, { liberado: S.passo === 'taxi1' ? (L) => (L.id === 't13' ? { ok: true } : { ok: false, motivo: 'Primeiro, a pensão. Você nem tem onde dormir!' }) : undefined }); return; }
+    if (p.tipo === 'poderes') { window.CampanhaPoderes?.abrirMural?.({}); return; }
+    if (p.tipo === 'conversa') { window.CampanhaMoradores?.conversar?.(p.id); return; }
+    if (p.tipo === 'armario') { window.DarocaLook?.open?.({ title: 'ARMÁRIO DO QUARTO 4', line: 'Escolha a roupa do Da Roça para hoje.' }); return; }
+    if (p.tipo === 'pc') { window.Fliperama?.open?.(null, { from: 'quarto' }); return; }
+    if (p.tipo === 'rolante') { viagem = { tipo: 'rolante', t: 0, dur: 2.2, de: [P.x, P.y], ini: p.de, fim: p.ate, para: p.para }; return; }
+    viagem = { tipo: 'porta', t: 0, para: p.para };
+  }
+  function procurarPerto() {
+    perto = null; if (viagem || !P.ground) return; let best = 1e9; const d = D(), cand = [];
+    for (const p of portais(d.id)) if (p.tipo !== 'rampa') cand.push(p);
+    for (const n of NPC) if (n.cena === d.id && n.quando.includes(S.passo) && !n.semFala) cand.push({ tipo: 'npc', npc: n, x: n.x, rotulo: n.rotulo + (S.flags['falou_' + n.id] && n.id !== 'lucas' && n.id !== 'lurdes' ? ' ✓' : ''), botao: 'FALAR' });
+    for (const e of ESTACOES) if (e.cena === d.id && (!e.quando || e.quando === S.passo)) cand.push({ tipo: 'estacao', est: e, x: e.x, rotulo: e.rotulo, botao: e.botao });
+    if (d.id === 0 && S.passo === 'passaporte' && P.y < FLOOR - 100) cand.push({ tipo: 'item', x: 3456, rotulo: 'PEGAR O PASSAPORTE', botao: 'PEGAR', acao: () => { item('PASSAPORTE'); sfx('fanfarra'); passo('lucas'); } });
+    if (d.id >= 12) { const m = window.CampanhaMoradores?.perto?.(d.id, P.x); if (m) cand.push({ tipo: 'conversa', id: m.id, x: m.x, rotulo: 'CONVERSAR COM ' + m.nome.toUpperCase(), botao: 'FALAR' });
+      for (const X of [window.CampanhaTaxi, window.CampanhaLoja]) { const e = X?.perto?.(d.id, P.x); if (e) cand.push({ tipo: 'extra', ...e }); } }
+    for (const p of cand) { const dd = Math.abs(p.x - P.x); if (dd < 70 && dd < best) { best = dd; perto = p; } }
+  }
+
+  /* ---------- física (a mesma do visualizador) ---------- */
+  function fisica(dt) {
+    const d = D(), dir = (keys.has('right') ? 1 : 0) - (keys.has('left') ? 1 : 0) || Math.sign(Math.round(joy * 2)); if (dir) P.facing = dir;
+    P.vx = TR()?.dashing?.() ? P.vx : dir * 260 * (TR()?.velocidade?.() || 1); const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
+    const prevY = P.y; P.vy = Math.min(900, P.vy + 1700 * dt); P.y += P.vy * dt; P.ground = false;
+    const overGap = (d.vaos || []).some(([gx, gw]) => P.x > gx + 10 && P.x < gx + gw - 10);
+    for (const r of portais(d.id)) if (r.tipo === 'rampa' && P.x >= r.x0 && P.x <= r.x1) { const ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0); if (P.vy >= 0 && P.y >= ry - 14 && prevY <= ry + 40) { P.y = ry; P.vy = 0; P.ground = true; } if (P.x >= r.x1 - 4 && P.ground && dir > 0) viagem = { tipo: 'porta', t: 0, para: r.para }; }
+    if (P.vy >= 0 && !P.ground) { for (const [px, py, pw] of d.plataformas || []) if (P.x > px - 6 && P.x < px + pw + 6 && prevY <= py + 2 && P.y >= py) { P.y = py; P.vy = 0; P.ground = true; } if (!P.ground && !overGap && P.y >= FLOOR) { P.y = FLOOR; P.vy = 0; P.ground = true; } }
+    if (P.y > 600) { P.x = Math.max(60, P.x - 260); P.y = FLOOR - 200; P.vy = 0; P.hp = Math.max(1, P.hp - 10); aviso('Ai! Cuidado com o buraco.'); }
+  }
+  function andarViagem(dt) {
+    const v = viagem; v.t += dt;
+    if (v.tipo === 'rolante') { const u = Math.min(1, v.t / v.dur), k = u < .15 ? 0 : (u - .15) / .85; P.x = (k <= 0 ? v.de[0] + (v.ini[0] - v.de[0]) * (u / .15) : v.ini[0] + (v.fim[0] - v.ini[0]) * k); P.y = k <= 0 ? FLOOR : v.ini[1] + (v.fim[1] - v.ini[1]) * k; P.facing = v.fim[0] > v.ini[0] ? 1 : -1; P.vx = 0; P.ground = true; fade = Math.max(0, (u - .78) / .22); if (u >= 1) { irPara(v.para.cena, v.para.x); viagem = { tipo: 'chegada', t: 0 }; } return; }
+    if (v.tipo === 'porta') { fade = Math.min(1, v.t / .35); P.vx = 0; if (v.t >= .35) { irPara(v.para.cena, v.para.x); viagem = { tipo: 'chegada', t: 0 }; salvar(); } return; }
+    if (v.tipo === 'chegada') { fade = Math.max(0, 1 - v.t / .35); if (v.t >= .35) { viagem = null; fade = 0; } }
+  }
+  function pular() { if (P.ground && !viagem && !cut) { P.vy = -620; P.ground = false; } }
+
+  /* ---------- desenho do mundo ---------- */
+  function fardo(x, top, n) { for (let k = 0; k < n; k++) { const y = FLOOR - (k + 1) * 28; c.fillStyle = '#3a2a14'; c.fillRect(x - 1, y - 1, 52, 30); c.fillStyle = '#d8b04a'; c.fillRect(x, y, 50, 28); c.fillStyle = '#e8c86a'; c.fillRect(x, y, 50, 4); for (let j = 4; j < 50; j += 6) { c.fillStyle = '#b8902a'; c.fillRect(x + j, y + 6, 2, 20); } c.fillStyle = '#7a4a2a'; c.fillRect(x + 14, y, 3, 28); c.fillRect(x + 33, y, 3, 28); } }
+  function desenharExtras() {
+    const d = D();
+    if (d.id === 0) { // fardos de feno e o passaporte brilhando lá em cima
+      fardo(3280, 412, 1); fardo(3330, 384, 2); fardo(3380, 356, 3); fardo(3430, 328, 4);
+      if (S.passo === 'passaporte') { const b = Math.sin(t * 3) * 3, x = 3448, y = 290 + b; c.fillStyle = '#2a1a3a'; c.fillRect(x - 1, y - 1, 18, 24); c.fillStyle = '#3c3a8a'; c.fillRect(x, y, 16, 22); c.fillStyle = '#e8c24c'; c.fillRect(x + 4, y + 6, 8, 8); c.fillRect(x + 3, y + 16, 10, 2);
+        for (let k = 0; k < 4; k++) if (Math.sin(t * 5 + k * 1.7) > .4) { const sx = x + 8 + Math.cos(k * 1.6 + t) * 20, sy = y + 10 + Math.sin(k * 2 + t) * 16; c.fillStyle = '#fff3a8'; c.fillRect(sx, sy - 3, 2, 8); c.fillRect(sx - 3, sy, 8, 2); } }
+      if (S.passo === 'lucas') { c.save(); c.translate(4640, 0); c.scale(-1, 1); safe(() => window.Art.drawVehicle(c, 0, FLOOR, t)); c.restore(); }
+    }
+    for (const n of NPC) if (n.cena === d.id && n.quando.includes(S.passo)) safe(() => window.Art.drawCharacter(c, n.quem, n.x, FLOOR, { frame: t, facing: P.x < n.x ? -1 : 1, grounded: true }));
+    if (d.id === 12 && ['checkin', 'raiox', 'portao'].includes(S.passo)) { const e = ESTACOES.find((q) => q.quando === S.passo); if (e) { const y = FLOOR - 128 + Math.sin(t * 4) * 4; c.fillStyle = '#ffd24a'; c.beginPath(); c.moveTo(e.x - 10, y - 12); c.lineTo(e.x + 10, y - 12); c.lineTo(e.x, y); c.fill(); } }
+  }
+  function setaObjetivo() {
+    const p = PASSOS[S.passo]; if (!p?.cena && p?.cena !== 0) return; if (p.cena !== cenaId || cut) return;
+    const sx = p.alvo - cam, b = Math.sin(t * 5) * 5;
+    if (sx > 30 && sx < W - 30) { const y = FLOOR - 170 + b; c.fillStyle = '#2a1a10'; c.beginPath(); c.moveTo(sx - 14, y - 18); c.lineTo(sx + 14, y - 18); c.lineTo(sx, y + 2); c.fill(); c.fillStyle = '#ffd24a'; c.beginPath(); c.moveTo(sx - 10, y - 15); c.lineTo(sx + 10, y - 15); c.lineTo(sx, y - 2); c.fill(); }
+    else { const dir = sx < 0 ? -1 : 1, x = dir < 0 ? 24 : W - 24, y = 300; c.fillStyle = '#2a1a10'; c.beginPath(); c.moveTo(x + dir * (8 + b), y); c.lineTo(x - dir * (14 - b), y - 16); c.lineTo(x - dir * (14 - b), y + 16); c.fill(); c.fillStyle = '#ffd24a'; c.beginPath(); c.moveTo(x + dir * (5 + b), y); c.lineTo(x - dir * (10 - b), y - 11); c.lineTo(x - dir * (10 - b), y + 11); c.fill(); }
+  }
+
+  /* ---------- HUD, avisos, escolhas, pausa ---------- */
+  function css() {
+    if (document.getElementById('c2jCss')) return; const st = document.createElement('style'); st.id = 'c2jCss';
+    st.textContent = `.c2j{position:fixed;inset:0;z-index:100000;background:#06080c;display:flex;align-items:center;justify-content:center;font-family:Pixel,monospace;color:#f6ead0;touch-action:none;user-select:none;-webkit-user-select:none}.c2j[hidden]{display:none}
+.c2j .tela{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;max-height:100vh}.c2j canvas.mundo{width:100%;height:100%;display:block;image-rendering:pixelated}
+.c2j .hud{position:absolute;inset:0;pointer-events:none}.c2j .hud>*{pointer-events:auto}
+.c2j .vida{position:absolute;left:1.6%;top:2.4%;display:flex;flex-direction:column;gap:4px;background:#2a1e14e6;border:3px solid #8a6a3a;box-shadow:0 0 0 2px #120c08;padding:6px 8px}
+.c2j .vida .cor{display:flex;gap:3px}.c2j .vida .cor i{width:14px;height:12px;background:#5a2a24;clip-path:polygon(0 25%,25% 0,50% 25%,75% 0,100% 25%,100% 50%,50% 100%,0 50%)}.c2j .vida .cor i.on{background:#e8433a}.c2j .vida .cor i.meio{background:linear-gradient(90deg,#e8433a 50%,#5a2a24 50%)}
+.c2j .vida .gas{height:6px;width:96px;background:#1c1408;border:1px solid #6a5a3a}.c2j .vida .gas b{display:block;height:100%;background:linear-gradient(#9ae06a,#4a9a3a)}.c2j .vida .moedas{font-size:9px;color:#ffd24a}
+.c2j .obj{position:absolute;left:50%;top:2.4%;transform:translateX(-50%);max-width:52%;background:#f2dc9ae8;color:#3a2412;border:3px solid #2a1a10;padding:6px 10px;font:clamp(9px,1.25vw,13px) Space,Arial,sans-serif;line-height:1.35;box-shadow:3px 4px 0 #0006}
+.c2j .obj b{display:block;font:clamp(7px,.8vw,9px) Pixel,monospace;color:#8a4a2a;margin-bottom:2px}.c2j .obj.novo{animation:c2jObj .8s cubic-bezier(.2,1.6,.4,1)}@keyframes c2jObj{from{transform:translateX(-50%) scale(.6);opacity:0}}
+.c2j .menu{position:absolute;right:1.6%;top:2.4%;width:42px;height:42px;font:16px Pixel,monospace;background:#4a3420;color:#f6ead0;border:3px solid #e8c66a;box-shadow:0 4px 0 #2a1a10;cursor:pointer}
+.c2j .entrar{position:absolute;right:3%;bottom:30%;font:12px Pixel,monospace;padding:12px 16px;background:#e8a83a;color:#1c1408;border:3px solid #fff2c8;border-radius:6px;cursor:pointer;box-shadow:0 4px 0 #8a5a1a}
+.c2j .avisos{position:absolute;left:50%;top:18%;transform:translateX(-50%);display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}.c2j .avisos div{background:#1c1408e8;border:2px solid #e8c66a;padding:8px 14px;font-size:10px;color:#ffe9a8;animation:c2jObj .5s}
+.c2j .item{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);background:#2a1e14f2;border:4px solid #ffd24a;box-shadow:0 0 0 4px #120c08,0 0 40px #ffd24a66;padding:16px 26px;text-align:center;animation:c2jObj .6s}.c2j .item small{display:block;font-size:9px;color:#c8b48a;margin-bottom:6px}.c2j .item b{font-size:16px;color:#ffd24a}
+.c2j .escolha{position:absolute;inset:0;background:#0008;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6%}.c2j .escolha .cx{background:#fff6dc;color:#3a2412;border:4px solid #2a1a10;box-shadow:4px 6px 0 #0008;padding:14px 16px;width:min(560px,86%);font:14px Space,Arial,sans-serif;line-height:1.4}
+.c2j .escolha .cx b{display:inline-block;font:9px Pixel,monospace;background:#2c6ab8;color:#fff;padding:3px 7px;margin-bottom:8px}.c2j .escolha .ops{display:flex;flex-direction:column;gap:6px;margin-top:10px}.c2j .escolha button{font:12px Space,Arial,sans-serif;text-align:left;padding:9px 12px;background:#f2dc9a;color:#3a2412;border:3px solid #2a1a10;cursor:pointer}.c2j .escolha button:hover,.c2j .escolha button:focus-visible{background:#ffd24a;outline:none}.c2j .escolha .resp{margin-top:8px;color:#a8341a;min-height:1.4em}
+.c2j .pausa{position:absolute;inset:0;background:#06080cd8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}.c2j .pausa h2{font-size:20px;color:#ffd98a;margin:0 0 6px}.c2j .pausa button{font:12px Pixel,monospace;min-width:240px;padding:12px;background:#4a3420;color:#f6ead0;border:3px solid #e8c66a;box-shadow:0 4px 0 #2a1a10;cursor:pointer}.c2j .pausa button:hover,.c2j .pausa button:focus-visible{background:#e8c66a;color:#2a1e14;outline:none}.c2j .pausa p{font-size:9px;color:#c8b48a;max-width:420px;text-align:center;line-height:1.7}
+.c2j .pular{position:absolute;right:1.6%;bottom:4%;font:10px Pixel,monospace;padding:8px 12px;background:#1c1408cc;color:#f6ead0;border:2px solid #e8c66a;cursor:pointer}
+.c2j .joy{position:absolute;left:3%;bottom:5%;width:min(22vh,130px);aspect-ratio:1;border-radius:50%;background:radial-gradient(#3a2a1a88,#1c1408aa);border:3px solid #e8c66a99;touch-action:none}.c2j .joy i{position:absolute;left:50%;top:50%;width:42%;height:42%;margin:-21% 0 0 -21%;border-radius:50%;background:#e8c66a;border:3px solid #fff2c8;box-shadow:0 4px 0 #8a5a1a}
+@media (pointer:fine){.c2j .joy{display:none}}
+.c2j .c2-treino-ctl{gap:6px!important}.c2j .c2-treino-ctl .touch-btn{width:clamp(40px,6.2vw,60px)!important;height:clamp(40px,6.2vw,60px)!important;min-width:0!important;min-height:0!important;padding:0!important}.c2j .c2-treino-ctl .touch-btn svg{width:46%!important;height:46%!important}.c2j .c2-treino-ctl .touch-btn small{font-size:clamp(5px,.75vw,8px)!important}
+.c2j .entrar{bottom:auto;top:24%;right:3%}`;
+    document.head.appendChild(st);
+  }
+  function montar() {
+    css(); box = document.createElement('div'); box.className = 'c2j'; box.hidden = true;
+    box.innerHTML = `<div class="tela"><canvas class="mundo" width="960" height="540"></canvas><div class="hud"><div class="vida"><div class="cor"></div><div class="gas"><b></b></div><div class="moedas"></div></div><div class="obj"><b>OBJETIVO</b><span></span></div><button type="button" class="menu" aria-label="Pausa">☰</button><button type="button" class="entrar" hidden></button><div class="joy"><i></i></div></div><div class="avisos"></div><button type="button" class="pular" hidden>PULAR CENA ▶▶</button></div>`;
+    document.body.appendChild(box); cv = box.querySelector('canvas.mundo'); c = cv.getContext('2d', { alpha: false }); c.imageSmoothingEnabled = false; hud = box.querySelector('.hud');
+    box.querySelector('.menu').addEventListener('click', () => pausar(true)); box.querySelector('.entrar').addEventListener('click', usar);
+    box.querySelector('.pular').addEventListener('click', (e) => { e.stopPropagation(); pularCut(); });
+    cv.addEventListener('pointerdown', () => { if (cut) avancarCut(); });
+    // joystick (celular): mesmo jeito do da campanha 1
+    const pad = box.querySelector('.joy'), knob = pad.querySelector('i'); let pid = null;
+    const mover = (e) => { if (e.pointerId !== pid) return; const r = pad.getBoundingClientRect(); let x = (e.clientX - (r.left + r.width / 2)) / (r.width * .34); x = clamp(x, -1, 1); joy = Math.abs(x) > .25 ? x : 0; knob.style.transform = `translateX(${x * r.width * .34}px)`; };
+    pad.addEventListener('pointerdown', (e) => { pid = e.pointerId; try { pad.setPointerCapture(pid); } catch (er) {} mover(e); e.preventDefault(); });
+    pad.addEventListener('pointermove', mover); const solta = (e) => { if (e.pointerId !== pid) return; pid = null; joy = 0; knob.style.transform = ''; }; pad.addEventListener('pointerup', solta); pad.addEventListener('pointercancel', solta);
+    // os botões da campanha 1 (FALAR, VOAR, PAPEL, PEIDO, DASH, PODER 1 e 2)
+    TR()?.montarBarra?.(box.querySelector('.tela'), (id, down) => { if (cut) { if (down) avancarCut(); return; } if (pausado) return; if (TR().acao(id, down, P)) return; if (id === 'jump') { if (down) { keys.add('jump'); pular(); } else keys.delete('jump'); } if (id === 'interact' && down) usar(); });
+    addEventListener('keydown', teclaDown, true); addEventListener('keyup', teclaUp, true);
+  }
+  const coberto = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.() || window.Mapa3D?.aberto?.() || window.CampanhaLoja?.aberta?.());
+  const ocupado = () => coberto() || !!window.CampanhaMoradores?.aberto?.() || !!box?.querySelector('.escolha');
+  function teclaDown(e) {
+    if (!aberto || coberto() || window.CampanhaMoradores?.aberto?.()) return; const k = e.code;
+    if (box.querySelector('.escolha')) { if (/^Digit[1-3]$/.test(k)) box.querySelectorAll('.escolha .ops button')[Number(k.slice(5)) - 1]?.click(); e.stopImmediatePropagation(); return; }
+    if (cut) { if (['Space', 'Enter', 'KeyE', 'ArrowRight'].includes(k) && !e.repeat) avancarCut(); if (k === 'Escape') pularCut(); e.preventDefault(); e.stopImmediatePropagation(); return; }
+    if (k === 'Escape') { pausar(!pausado); e.preventDefault(); e.stopImmediatePropagation(); return; }
+    if (pausado) { e.stopImmediatePropagation(); return; }
+    if (k === 'ArrowLeft' || k === 'KeyA') keys.add('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.add('right');
+    const mapa = { KeyJ: 'paper', KeyK: 'fart', KeyL: 'dash', ShiftLeft: 'dash', ShiftRight: 'dash', KeyU: 'poder1', KeyI: 'poder2' };
+    if (mapa[k] && !e.repeat) TR()?.acao?.(mapa[k], true, P);
+    if ((k === 'Space' || k === 'KeyW' || k === 'ArrowUp') && !e.repeat) { keys.add('jump'); pular(); TR()?.acao?.('jump', true, P); }
+    if ((k === 'KeyE' || k === 'Enter') && !e.repeat) usar();
+    e.preventDefault(); e.stopImmediatePropagation();
+  }
+  function teclaUp(e) { if (!aberto) return; const k = e.code; if (k === 'KeyU') TR()?.acao?.('poder1', false, P); if (k === 'KeyI') TR()?.acao?.('poder2', false, P); if (k === 'Space' || k === 'KeyW' || k === 'ArrowUp') { keys.delete('jump'); TR()?.acao?.('jump', false, P); } if (k === 'ArrowLeft' || k === 'KeyA') keys.delete('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.delete('right'); }
+  function hudVisivel(v) { if (hud) hud.style.visibility = v ? 'visible' : 'hidden'; const bar = box?.querySelector('.c2-treino-wrap'); if (bar) bar.style.visibility = v ? 'visible' : 'hidden'; box.querySelector('.pular').hidden = v; }
+  function objetivoNovo(txt) { const o = box?.querySelector('.obj'); if (!o) return; o.querySelector('span').textContent = txt; o.classList.remove('novo'); void o.offsetWidth; o.classList.add('novo'); sfx('plim'); }
+  function aviso(txt) { const a = box?.querySelector('.avisos'); if (!a) return; const d = document.createElement('div'); d.textContent = txt; a.appendChild(d); setTimeout(() => d.remove(), 2600); }
+  function item(nome) { const d = document.createElement('div'); d.className = 'item'; d.innerHTML = `<small>VOCÊ PEGOU</small><b>${nome}</b>`; box.querySelector('.tela').appendChild(d); setTimeout(() => d.remove(), 1800); }
+  function escolher(quem, pergunta, ops, aoAcertar, semResposta) {
+    keys.clear(); const el = document.createElement('div'); el.className = 'escolha';
+    el.innerHTML = `<div class="cx"><b>${quem}</b><div>${pergunta}</div><div class="ops"></div><div class="resp"></div></div>`;
+    const list = el.querySelector('.ops'); ops.forEach((o, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = `${i + 1}. ${o.t}`; b.addEventListener('click', () => {
+      if (o.voltar) { el.remove(); return; } if (o.ok) { if (o.r && !semResposta) { el.querySelector('.resp').style.color = '#2a7a3a'; el.querySelector('.resp').textContent = o.r; sfx('plim'); setTimeout(() => { el.remove(); aoAcertar(); }, 1300); } else { el.remove(); aoAcertar(); } return; }
+      el.querySelector('.resp').textContent = o.r || 'Não...'; sfx('risada'); b.disabled = true; }); list.appendChild(b); });
+    box.querySelector('.tela').appendChild(el); setTimeout(() => list.querySelector('button')?.focus(), 50);
+  }
+  function pausar(v) {
+    pausado = v; keys.clear(); box.querySelector('.pausa')?.remove(); if (!v) return;
+    const el = document.createElement('div'); el.className = 'pausa';
+    el.innerHTML = `<h2>PAUSA</h2><button type="button" data-a="voltar">▶ CONTINUAR</button><button type="button" data-a="som">♪ SOM: ${som ? 'LIGADO' : 'DESLIGADO'}</button><button type="button" data-a="sair">SALVAR E SAIR</button><p>A/D ou setas andam · ESPAÇO pula (segure no ar para voar) · E fala e entra · J papel · K peido · L dash · U/I poderes · ESC pausa</p>`;
+    el.addEventListener('click', (e) => { const a = e.target.closest('button')?.dataset.a; if (a === 'voltar') pausar(false); if (a === 'som') { som = !som; window.__somCutscene = som; pausar(true); } if (a === 'sair') { salvar(); fechar(); } });
+    box.querySelector('.tela').appendChild(el); setTimeout(() => el.querySelector('button')?.focus(), 30);
+  }
+  function hudAtualizar() {
+    const cor = box.querySelector('.vida .cor'), n = 5, hp = clamp(P.hp, 0, 100) / 20; let h = ''; for (let i = 0; i < n; i++) h += `<i class="${hp >= i + 1 ? 'on' : hp > i + .3 ? 'meio' : ''}"></i>`; if (cor.innerHTML !== h) cor.innerHTML = h;
+    box.querySelector('.vida .gas b').style.width = `${clamp(TR()?.gas?.() ?? 100, 0, 100)}%`; box.querySelector('.vida .moedas').textContent = `● ${window.CampanhaLoja?.moedas?.() ?? 0}`;
+    const e = box.querySelector('.entrar'); e.hidden = !perto || !!cut; if (perto) e.textContent = perto.botao || (perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR');
+  }
+
+  /* ---------- quadro a quadro ---------- */
+  function frame(now) {
+    if (!aberto) return; raf = requestAnimationFrame(frame);
+    const dt = Math.min(.05, Math.max(0, (now - last) / 1000)); fpsMedio += ((dt > 0 ? 1 / Math.max(dt, (now - last + 1e-3) / 1000) : 60) - fpsMedio) * .05; last = now;
+    const cob = coberto(); box.style.visibility = cob ? 'hidden' : 'visible'; if (cob) return;
+    if (cut) { RT().update(cut.s, dt); if (cut.s.done) { const f = cut.depois; cut = null; hudVisivel(true); try { window.DayTime?.force?.(null); } catch (e) {} f?.(); } else { c.save(); RT().draw(c, cut.s); c.restore(); return; } }
+    if (pausado || ocupado()) { keys.clear(); P.vx = 0; }
+    t += dt; const d = D();
+    if (!pausado) { TR()?.passo?.(dt, P, { cam, segurandoPulo: keys.has('jump') }); if (viagem) andarViagem(dt); else fisica(dt); }
+    cam += (clamp(P.x - 360, 0, Math.max(0, d.largura - W)) - cam) * Math.min(1, dt * 8);
+    try { window.DayTime?.force?.(horaAtual()); } catch (e) {}
+    const o = { scene: d.id, camera: cam, time: t, player: P, shots: [], enemies: [], minions: [] };
+    safe(() => window.Interact?.update?.(dt, o)); safe(() => CC().heroi?.(P.x, P.y, P.vy));
+    window.Art.drawScene(c, d.id, cam, t);
+    c.save(); { const sh = TR()?.tremor?.() || 0; c.translate(-Math.round(cam) + Math.round((Math.random() - .5) * sh), Math.round((Math.random() - .5) * sh)); }
+    if (d.id >= 12) for (const pl of d.plataformas || []) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) safe(() => CC().plataforma(c, d.id, pl, t));
+    safe(() => window.Interact?.drawBack?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawBack?.(c, o)); safe(() => window.CampanhaTaxi?.desenhar?.(c, o)); safe(() => window.CampanhaLoja?.desenhar?.(c, o)); safe(() => window.CampanhaMoradores?.desenhar?.(c, o)); }
+    desenharExtras();
+    const at = P.attack || 0; window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: 'paper', attackProgress: 1 - at / .32 });
+    safe(() => TR()?.desenhar?.(c, t));
+    safe(() => window.Interact?.drawFront?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
+    procurarPerto();
+    if (perto) { c.font = '11px Pixel, monospace'; const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); c.textAlign = 'left'; }
+    c.restore(); safe(() => window.CampanhaAmbientes?.cobrir?.(c, d.id, cam));
+    setaObjetivo();
+    if (window.Graphics?.isShader?.()) safe(() => window.Shader?.apply?.(cv, { scene: d.id, camera: cam, time: t, outdoor: !d.interno }));
+    if (fade > 0) { c.fillStyle = `rgba(8,10,14,${fade})`; c.fillRect(0, 0, W, H); }
+    hudAtualizar();
+  }
+
+  /* ---------- abrir e fechar ---------- */
+  function abrir(o = {}) {
+    if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (o.novo) safe(() => localStorage.removeItem(KEY));
+    aberto = true; box.hidden = false; pausado = false; cut = null; keys.clear(); P.hp = S.hp || 100;
+    TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true }));
+    if (S.passo === 'abertura') { irPara(0, 700); tocar('c2_abertura', PASSOS.abertura.depois); }
+    else { irPara(S.cena ?? PASSO_INICIAL_DA_CENA[S.passo] ?? 13, S.x ?? 300); objetivoNovo(PASSOS[S.passo]?.obj || ''); hudVisivel(true); }
+    last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
+    window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: true } }));
+  }
+  function fechar() {
+    aberto = false; cancelAnimationFrame(raf); if (box) box.hidden = true; pausado = false; box?.querySelector('.pausa')?.remove();
+    TR()?.ligar?.(false, P); safe(() => window.CampanhaCutscenes?.musica?.parar?.()); window.__somCutscene = false; try { window.DayTime?.force?.(null); } catch (e) {}
+    window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } }));
+  }
+
+  /* ---------- botão na tela inicial ---------- */
+  function painel() {
+    const ok = liberada(); let el = document.getElementById('c2Painel');
+    if (!el) { el = document.createElement('div'); el.id = 'c2Painel'; el.className = 'c2j'; el.style.background = '#06080cdd'; document.body.appendChild(el); css(); }
+    el.hidden = false;
+    el.innerHTML = `<div class="pausa" style="position:relative;background:none"><h2>CAMPANHA 2 · VITÓRIA DA CONQUISTA</h2>${ok ? `<p>Um ano depois. O Jorge ligou... e desligou. Agora o Da Roça vai até Conquista olhar na cara dele.</p>${temSave() ? '<button type="button" data-a="cont">▶ CONTINUAR</button>' : ''}<button type="button" data-a="novo">${temSave() ? 'COMEÇAR DE NOVO' : '▶ COMEÇAR'}</button>` : '<p>🔒 Termine a campanha principal (até a ligação do Jorge) para liberar a Campanha 2.</p>'}<button type="button" data-a="fechar">VOLTAR</button></div>`;
+    el.onclick = (e) => { const a = e.target.closest('button')?.dataset.a; if (!a) return; if (a === 'fechar') el.hidden = true; if (a === 'cont') { el.hidden = true; abrir({}); } if (a === 'novo') { if (temSave() && !confirm('Começar a Campanha 2 de novo? O progresso dela será apagado (a campanha principal não muda).')) return; el.hidden = true; abrir({ novo: true }); } };
+    setTimeout(() => el.querySelector('button')?.focus(), 30);
+  }
+  function botaoMenu() {
+    const lista = document.querySelector('#startScreen .ranch-mode-entries'); if (!lista || lista.querySelector('[data-open-campanha2]')) return;
+    const b = document.createElement('button'); b.type = 'button'; b.dataset.openCampanha2 = ''; b.innerHTML = `<b>❄ CAMPANHA 2 · CONQUISTA</b><small>${liberada() ? 'Um ano depois · a busca pelo Jorge' : 'Complete a história para liberar'}</small>`;
+    b.addEventListener('click', (e) => { e.preventDefault(); painel(); }); lista.appendChild(b);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', botaoMenu); else botaoMenu();
+  window.Campanha2 = Object.freeze({ liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, flags: { ...(S?.flags || {}) } }),
+    // testes
+    _ir: (id, x) => irPara(id, x), _pos: (x, y) => { P.x = x; P.y = y; P.vy = 0; P.ground = true; }, _fps: () => fpsMedio, _passo: (id) => passo(id), _usar: usar, _pular: pularCut });
+})();

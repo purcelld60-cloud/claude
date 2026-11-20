@@ -39,7 +39,8 @@
 
   /* ---------- bonecos de treino ---------- */
   const novoBoneco = (x) => ({ x, y: FLOOR, vx: 0, vy: 0, hp: 60, max: 60, stun: 0, conf: 0, hit: 0, morto: 0, golpe: 0, base: x });
-  function ligar(v, P) { on = v ?? !on; if (barra) barra.hidden = !on; if (on) { bonecos = [novoBoneco(P.x + 170), novoBoneco(P.x + 250), novoBoneco(P.x + 330)]; heroRef = P; } else { bonecos = []; tiros = []; nuvens = []; } return on; }
+  let modoJogo = false; // no jogo da Campanha 2: sem bonecos e sem a caixa de ajuda do treino
+  function ligar(v, P, o = {}) { on = v ?? !on; modoJogo = !!o.jogo; if (barra) { barra.hidden = !on; const inf = barra.querySelector('.c2-treino-info'), gs = barra.querySelector('.c2-treino-gas'); if (inf) inf.hidden = modoJogo; if (gs) gs.hidden = modoJogo; } if (on) { bonecos = modoJogo ? [] : [novoBoneco(P.x + 170), novoBoneco(P.x + 250), novoBoneco(P.x + 330)]; heroRef = P; } else { bonecos = []; tiros = []; nuvens = []; } return on; }
   const mundo = () => ({ heroi: heroRef, inimigos: () => bonecos, camera: cam,
     dano: (e, n, tipo, dir) => { if (e.hp <= 0) return; e.hp = Math.max(0, e.hp - n); e.hit = .18; textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - 90, n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); if (e.hp <= 0) { e.morto = 2.2; window.CampanhaLoja?.ganhar?.(8); textos.push({ x: e.x, y: e.y - 120, n: '+8 ●', t: 0, cor: '#ffd24a' }); } }, // inimigo derrotado deixa moedas
     empurrar: (e, vx, vy) => { e.vx = vx; e.vy = vy; }, atordoar: (e, s) => { e.stun = s; }, confundir: (e, s) => { e.conf = s; }, tremer: (n) => { shake = Math.max(shake, n); } });
@@ -101,5 +102,5 @@
       barra.querySelector('.c2-treino-info').innerHTML = `TREINO DE PODERES · ● ${window.CampanhaLoja?.moedas?.() ?? 0} MOEDAS<br>J PAPEL · K PEIDO · L DASH · ␣ VOAR · U/I PODERES<br>${eq.filter(Boolean).length ? 'Equipados: ' + eq.map((id) => PW.lista().find((p) => p.id === id)?.curto || '—').join(' + ') : 'Sem poder equipado: abra o MURAL'}${m.vel > 1 ? '<br>☕ CAFEZÃO ATIVO' : ''}${PW.escudo() ? '<br>♥ AURA ATIVA' : ''}`;
       [0, 1].forEach((i) => { const id = eq[i], b = barra.querySelector(`[data-acao="poder${i + 1}"] .c2-cd`); if (!b || !id) return; const max = PW.recargaTotal(id), f = Math.min(1, PW.recarga(id) / max); b.style.setProperty('--cd', `${Math.round((1 - f) * 100)}%`); }); }
   }
-  window.CampanhaTreino = Object.freeze({ ligar, ligado: () => on, dashing: () => on && dashT > 0, acao, passo, desenhar, montarBarra, tremor: () => shake, velocidade: () => (on ? PW.multiplicadores().vel : 1) });
+  window.CampanhaTreino = Object.freeze({ ligar, ligado: () => on, gas: () => gas, inimigos: (lista) => { if (Array.isArray(lista)) bonecos = lista; return bonecos; }, dashing: () => on && dashT > 0, acao, passo, desenhar, montarBarra, tremor: () => shake, velocidade: () => (on ? PW.multiplicadores().vel : 1) });
 })();
