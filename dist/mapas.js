@@ -71,35 +71,71 @@
     { id: 1, nome: 'Colégio Adventista', sub: 'Professores e provocações', caixa: [416, 20, 190, 130],
       descricao: 'Corredores compridos, professores de olho em tudo e uma provocação esperando no fim do corredor. Leve o caderno. E coragem.',
       desenho: (P) => { P.predio(430, 34, 162, 106, { topo: '#3c6aa8', parede: '#efebe0', faixa: '#2c5a9e', fachada: 36 }); P.R(480, 112, 60, 10, '#2c5a9e'); P.R(484, 114, 52, 6, '#f2efe6'); P.R(420, 30, 3, 70, '#c8ccd0'); P.R(423, 30, 14, 9, '#3c8a5a'); P.R(423, 33, 14, 2, '#f2c94c');
-        for (const x of [440, 572]) P.arbusto(x, 146, x, '#e86a8a'); } },
+         P.R(470, 136, 80, 9, '#2c5a9e'); txt(P, 'COLÉGIO ADVENTISTA', 510, 138, '#f2efe6');for (const x of [440, 572]) P.arbusto(x, 146, x, '#e86a8a'); } },
     { id: 9, nome: 'Pátio da escola', sub: 'O intervalo mais longo do mundo', caixa: [690, 52, 132, 120],
       descricao: 'Na hora do intervalo tudo pode acontecer. Alguém por ali precisa de ajuda... e outra pessoa está doida por uma revanche.',
-      desenho: (P) => { const R = P.R; R(700, 70, 60, 40, '#c8ccd0'); R(698, 66, 64, 8, '#e8433a'); R(698, 66, 64, 2, '#f26a5a'); for (const x of [702, 754]) R(x, 74, 4, 36, '#9aa0a6'); P.banco(772, 112); P.banco(772, 140); P.banco(720, 150); P.arvore(800, 100, .9, 'amarela', 3); } },
+      desenho: (P) => { const R = P.R; // pátio: prédio branco com faixa azul, piso claro, coqueiro no canteiro, bandeirinhas e bancos
+        R(692, 54, 128, 24, '#efebe0'); R(692, 52, 128, 4, '#3c6aa8'); R(692, 70, 128, 4, '#2c5a9e'); for (let x = 698; x < 816; x += 14) { R(x, 58, 9, 8, '#3a5a8a'); R(x, 58, 3, 2, '#9ac8f0'); } R(750, 62, 12, 12, '#5a6f86'); R(714, 46, 50, 8, '#2c5a9e'); txt(P, 'PÁTIO', 739, 47, '#f2efe6');
+        R(692, 78, 128, 92, '#d8d4cc'); for (let y = 78; y < 170; y += 10) R(692, y, 128, 1, '#c4c0b8'); for (let x = 692; x < 820; x += 16) R(x, 78, 1, 92, '#c4c0b8');
+        R(700, 118, 20, 20, '#8a8478'); R(702, 120, 16, 16, '#6a5a44'); P.coqueiro(710, 132); P.banco(732, 104); P.banco(772, 104); P.banco(752, 150); P.banco(796, 140);
+        for (const x of [696, 816]) R(x, 80, 2, 22, '#7a8086'); for (let k = 0; k < 15; k++) { const x = 698 + k * 8, y = 82 + Math.round(Math.sin(k / 14 * Math.PI) * 5); R(x, y, 5, 4, ['#e8433a', '#f2c94c', '#3c8a5a', '#3c6aa8', '#e86a8a'][k % 5]); R(x + 1, y + 4, 3, 1, '#00000033'); }
+        R(780, 120, 30, 12, '#a8643a'); R(780, 120, 30, 2, '#c8844a'); txt(P, 'SHOW', 795, 123, '#f2e2b8'); pessoa(P, 760, 132, '#e8433a'); pessoa(P, 790, 160, '#3c6aa8'); pessoa(P, 724, 160, '#f2c94c'); } },
     { id: 6, nome: 'Caderno do Caos', sub: 'O monstro gigante', caixa: [432, 186, 150, 104],
       descricao: 'As páginas viraram sozinhas. Os rabiscos ganharam vida. E aquela coisa enorme desenhada na última folha... acordou.',
-      desenho: (P) => { const R = P.R; P.sombra(508, 270, 70, 10, .3); R(444, 218, 64, 52, '#f6f4ee'); R(510, 218, 64, 52, '#f2f0ea'); R(444, 218, 130, 2, '#c8c4bc'); for (let k = 0; k < 7; k++) { R(448, 226 + k * 6, 56, 1, '#8ab8e8'); R(514, 226 + k * 6, 56, 1, '#8ab8e8'); } R(452, 218, 1, 52, '#e88a8a'); for (let k = 0; k < 9; k++) P.circ(509, 222 + k * 6, 2, '#8a9096', 1);
-        R(526, 196, 32, 40, '#7a3a8a'); R(522, 186, 40, 18, '#8a4a9a'); R(530, 192, 8, 6, '#ffffff'); R(546, 192, 8, 6, '#ffffff'); R(533, 194, 3, 3, '#1c1c1c'); R(549, 194, 3, 3, '#1c1c1c'); for (let k = 0; k < 6; k++) R(530 + k * 4, 204, 2, 3, '#ffffff'); R(516, 214, 12, 4, '#7a3a8a'); R(556, 210, 12, 4, '#7a3a8a');
-        for (let k = 0; k < 5; k++) R(460 + k * 8, 248 - (k % 2) * 4, 5, 2, '#2a2a2a'); } },
+      desenho: (P) => { const R = P.R; // caderno roxo gigante aberto, espiral, lápis enormes e o rabisco-monstro
+        P.sombra(510, 286, 72, 8, .3); R(438, 204, 144, 82, '#4a1e6a'); R(438, 204, 144, 3, '#6a3a8a'); R(444, 210, 64, 70, '#f0e8f8'); R(512, 210, 64, 70, '#ebe2f4');
+        for (let k = 0; k < 9; k++) { R(446, 218 + k * 7, 60, 1, '#b89ad8'); R(514, 218 + k * 7, 60, 1, '#b89ad8'); } R(454, 210, 1, 70, '#e86a8a'); for (let k = 0; k < 10; k++) { P.circ(510, 213 + k * 7, 3, '#5a5e64', 2); P.circ(510, 213 + k * 7, 2, '#c8ccd0', 1); }
+        for (let k = 0; k < 5; k++) R(462 + k * 8, 262 - (k % 2) * 4, 6, 2, '#2a2a3a'); R(462, 232, 24, 2, '#2a2a3a'); R(470, 240, 30, 2, '#2a2a3a'); txt(P, 'TEM FOME', 476, 246, '#7a3a8a');
+        for (const [x, cor] of [[446, '#f2c94c'], [566, '#e8433a'], [574, '#3c6aa8']]) { R(x, 188, 6, 44, cor); R(x, 188, 2, 44, '#ffffff55'); R(x, 182, 6, 6, '#f6c8c8'); R(x, 186, 6, 2, '#c8ccd0'); R(x + 1, 232, 4, 4, '#e8d0a8'); R(x + 2, 236, 2, 3, '#2a2a2a'); }
+        R(528, 222, 32, 36, '#7a3a8a'); R(524, 214, 40, 16, '#8a4a9a'); R(532, 219, 8, 6, '#ffffff'); R(548, 219, 8, 6, '#ffffff'); R(535, 221, 3, 3, '#1c1c1c'); R(551, 221, 3, 3, '#1c1c1c'); for (let k = 0; k < 6; k++) R(532 + k * 4, 232, 2, 3, '#ffffff'); R(518, 236, 12, 4, '#7a3a8a'); R(558, 234, 12, 4, '#7a3a8a');
+        for (const [x, y] of [[452, 276], [570, 270], [500, 284]]) P.circ(x, y, 3, '#3a1a4a', 2); } },
     { id: 3, nome: 'A quadra', sub: 'O bolo está por perto', caixa: [656, 336, 132, 100], desloc: [12, 0],
       descricao: 'O som da bola quicando chega até a rua. Tem alguém lá dentro que sabe muito bem onde o bolo foi parar...',
-      desenho: (P) => { const R = P.R; R(672, 352, 112, 2, '#f2f2ee'); R(672, 430, 112, 2, '#f2f2ee'); R(727, 352, 2, 80, '#f2f2ee'); P.circ(728, 392, 12, '#f2f2ee', 9); P.circ(728, 392, 10, '#3c7ab0', 7);
+      desenho: (P) => { const R = P.R; // quadra de piso cor de tijolo com faixas verdes, cestas, alambrado e bandeirinhas
+        R(666, 352, 124, 82, '#c8643a'); R(666, 352, 124, 6, '#3c8a5a'); R(666, 428, 124, 6, '#3c8a5a'); R(672, 358, 112, 1, '#f2f2ee'); R(672, 427, 112, 1, '#f2f2ee'); R(727, 358, 2, 70, '#f2f2ee'); P.circ(728, 392, 12, '#f2f2ee', 9); P.circ(728, 392, 10, '#c8643a', 7);
         for (const x of [676, 776]) { R(x, 380, 3, 26, '#c8ccd0'); R(x - 4, 378, 11, 8, '#f6f6f0'); R(x - 1, 386, 5, 3, '#e8433a'); }
-        for (let k = 0; k <= 120; k += 8) { R(664 + k, 342, 2, 12, '#7a8086'); } R(664, 344, 122, 1, '#9aa0a6'); R(664, 348, 122, 1, '#9aa0a6'); } },
+        for (let k = 0; k <= 120; k += 8) R(664 + k, 340, 2, 14, '#7a8086'); R(664, 342, 122, 1, '#9aa0a6'); R(664, 348, 122, 1, '#9aa0a6');
+        for (let k = 0; k < 15; k++) { const x = 666 + k * 8, y = 336 + Math.round(Math.sin(k / 14 * Math.PI) * 4); R(x, y, 5, 4, ['#e8433a', '#f2c94c', '#3c8a5a', '#3c6aa8'][k % 4]); }
+        R(694, 410, 30, 6, '#a8643a'); R(694, 410, 30, 2, '#c8844a'); P.circ(752, 400, 3, '#e8833a'); R(751, 398, 1, 5, '#7a3a10'); pessoa(P, 704, 404, '#2c5a9e'); } },
     { id: 4, nome: 'Praça Camacan', sub: 'Uma pausa na resenha', caixa: [470, 380, 176, 150], desloc: [-20, 0],
       descricao: 'Banco de praça, sorvete e fofoca fresquinha. Às vezes, uma pausa é tudo de que a resenha precisa.',
-      desenho: (P) => { P.fonte(560, 452); for (const [x, y] of [[494, 412], [626, 412], [494, 512], [626, 512]]) P.arvore(x, y, 1.1, 'verde', x); for (const [x, y] of [[520, 420], [590, 420], [520, 494], [590, 494]]) P.banco(x, y); for (const [x, y] of [[500, 470], [612, 470]]) P.flores(x, y, ['#e86a8a', '#f2c94c', '#ffffff']); P.poste(482, 456); P.poste(636, 456); } },
+      desenho: (P) => { const R = P.R; // praça na beira do rio: fonte, coqueiros, quiosque, placa e mureta
+        P.fonte(560, 452); for (const [x, y] of [[494, 420], [626, 420], [494, 516], [626, 516]]) P.coqueiro(x, y); for (const [x, y] of [[520, 420], [590, 420], [520, 494], [590, 494]]) P.banco(x, y);
+        for (const [x, y] of [[504, 470], [612, 470]]) P.flores(x, y, ['#e86a8a', '#f2c94c', '#ffffff']); P.poste(482, 456); P.poste(636, 456);
+        R(476, 386, 4, 140, '#c8ccd0'); R(476, 386, 1, 140, '#eef0f2'); for (let y = 390; y < 526; y += 10) R(472, y, 4, 2, '#a8aeb4');
+        R(530, 384, 60, 12, '#f2f0e8'); R(530, 384, 60, 2, '#2c5a9e'); txt(P, 'PRAÇA CAMACAN', 560, 388, '#2c5a9e'); R(536, 396, 2, 8, '#7a8086'); R(582, 396, 2, 8, '#7a8086');
+        R(600, 520, 30, 14, '#e8e4dc'); for (let k = 0; k < 30; k += 6) R(600 + k, 512, 3, 8, k % 12 ? '#3c8ab0' : '#f6f6f0'); R(600, 512, 30, 2, '#2c5a9e'); R(606, 524, 18, 6, '#9ad0e8'); pessoa(P, 540, 470, '#e8833a'); pessoa(P, 584, 506, '#7a3a8a'); } },
     { id: 2, nome: 'Academia do Caleb', sub: 'Caleb e o shape', caixa: [856, 196, 120, 100],
       descricao: 'Dizem que ninguém sai de lá do mesmo jeito que entrou. Os reflexos que o digam. E o espelho também.',
-      desenho: (P) => { P.predio(866, 214, 100, 74, { topo: '#3a3f48', parede: '#4a505a', faixa: '#e8433a', fachada: 30, caixa: false }); P.R(890, 206, 52, 6, '#c8ccd0'); P.R(884, 202, 10, 14, '#2a2a2a'); P.R(938, 202, 10, 14, '#2a2a2a'); P.R(896, 260, 40, 8, '#e8433a'); } },
+      desenho: (P) => { const R = P.R; // academia: paredes verde-escuras, janelões com persiana, placa com halter e banco com pesos
+        P.predio(866, 216, 100, 72, { topo: '#2e3a34', parede: '#3f5a4c', fachada: 32, caixa: false, porta: false });
+        for (const x of [872, 904, 936]) { R(x, 258, 24, 18, '#24302a'); R(x + 1, 259, 22, 16, '#9ac8d8'); for (let y = 260; y < 274; y += 3) R(x + 1, y, 22, 1, '#d8e8ec'); }
+        R(906, 278, 16, 10, '#1c2420'); R(907, 279, 14, 9, '#7ab0c0'); R(878, 200, 76, 14, '#1c1c1c'); R(878, 200, 76, 2, '#e8433a'); txt(P, 'CALEB', 906, 204, '#f2c94c');
+        R(934, 205, 14, 2, '#c8ccd0'); R(932, 202, 3, 8, '#5a5e64'); R(947, 202, 3, 8, '#5a5e64'); R(858, 290, 26, 4, '#5a5e64'); for (const x of [856, 880]) { R(x, 286, 4, 10, '#2a2a2a'); } R(944, 288, 6, 8, '#f2f2ee'); R(945, 286, 4, 2, '#3c8ab0'); } },
     { id: 8, nome: 'Bigodon', sub: 'Davi Costa e Vitor', caixa: [856, 372, 100, 80],
       descricao: 'Tesoura afiada, espelho que parece mágico e a melhor conversa da cidade. Você sai de lá com outro visual?',
-      desenho: (P) => { P.casa(868, 384, 76, 60, { telhado: '#2a2a30', parede: '#3a3a42', madeira: false, janelas: [8, 58] }); P.R(892, 404, 30, 8, '#c8a24a'); for (let k = 0; k < 8; k++) P.R(860, 412 + k * 3, 4, 3, k % 2 ? '#e8433a' : '#f2f2ee'); P.R(859, 410, 6, 2, '#c8ccd0'); } },
+      desenho: (P) => { const R = P.R; // barbearia: parede creme e madeira, toldo listrado, placa de bigode, poste de barbeiro e cadeira vermelha na vitrine
+        P.casa(868, 388, 78, 58, { telhado: '#5a3a2a', parede: '#ecd6a8', madeira: true, paredeH: 26, janelas: [8, 58], porta: 34 });
+        for (let k = 0; k < 78; k += 6) R(868 + k, 412, 6, 6, k % 12 ? '#f2f2ee' : '#c43c3a'); R(868, 418, 78, 1, '#00000033');
+        R(882, 374, 52, 13, '#2a1a10'); R(883, 375, 50, 11, '#3a2a1a'); txt(P, 'BIGODON', 908, 377, '#e8c66a'); R(900, 370, 16, 3, '#2a1a10'); R(898, 372, 4, 2, '#2a1a10'); R(914, 372, 4, 2, '#2a1a10');
+        R(858, 404, 6, 30, '#f2f2ee'); for (let k = 0; k < 10; k++) R(858, 404 + k * 3, 6, 2, k % 3 === 0 ? '#c43c3a' : k % 3 === 1 ? '#2c5a9e' : '#f2f2ee'); R(857, 401, 8, 3, '#c8ccd0'); R(857, 434, 8, 3, '#c8ccd0');
+        R(878, 424, 10, 8, '#c43c3a'); R(879, 422, 8, 3, '#e8433a'); R(926, 424, 10, 8, '#c43c3a'); R(927, 422, 8, 3, '#e8433a'); } },
     { id: 10, nome: 'Casa de Rayssa', sub: 'As garotas e a resenha', caixa: [652, 556, 120, 96], desloc: [16, 0],
       descricao: 'Entra, mas limpa o tênis. As garotas estão reunidas e, lá dentro, tem um segredo elétrico esperando por você.',
-      desenho: (P) => { P.casa(670, 570, 80, 62, { telhado: '#c8546a', parede: '#f8d0dc', janelas: [8, 60] }); P.cercaH(660, 646, 104); P.flores(666, 634, ['#e86a8a', '#f2c94c', '#b86ad8']); P.flores(740, 634, ['#e86a8a', '#ffffff']); P.arbusto(760, 620, 4, '#e86a8a'); } },
+      desenho: (P) => { const R = P.R; // casa aconchegante: parede pêssego, janelões com cortina rosa, vasos de planta e jardim
+        P.casa(670, 570, 84, 64, { telhado: '#d06a4a', parede: '#f6d8b8', paredeH: 28, janelas: [6, 62], porta: 36 });
+        for (const x of [676, 732]) { R(x - 1, 608, 18, 14, '#7a4a2a'); R(x, 609, 16, 12, '#bfe0f0'); R(x, 609, 5, 12, '#f29ab8'); R(x + 11, 609, 5, 12, '#f29ab8'); R(x, 609, 16, 2, '#e86a8a'); R(x + 6, 614, 4, 4, '#3c8a5a'); }
+        for (const x of [664, 756]) { R(x, 626, 8, 7, '#c8643a'); R(x, 626, 8, 2, '#e8844a'); P.circ(x + 4, 622, 5, '#3f8a30', 4); P.circ(x + 3, 620, 2, '#58a83c', 2); }
+        P.cercaH(660, 648, 104); P.flores(666, 636, ['#e86a8a', '#f2c94c', '#b86ad8']); P.flores(736, 636, ['#e86a8a', '#ffffff']); R(704, 556, 26, 9, '#f6eadc'); R(704, 556, 26, 1, '#e86a8a'); txt(P, 'RAYSSA', 717, 558, '#c8546a'); } },
     { id: 11, nome: 'Baile funk', sub: 'Ollyan e a perseguição', caixa: [836, 556, 160, 120], desloc: [16, 0],
       descricao: 'O grave treme o chão, as luzes não param e a pista está cheia. E tem um carro por ali que não devia estar no céu...',
-      desenho: (P) => { P.predio(846, 572, 140, 92, { topo: '#2a1a3a', parede: '#3a2a4a', fachada: 34, caixa: false }); for (const x of [854, 966]) { P.R(x, 630, 14, 26, '#14141a'); P.circ(x + 7, 638, 4, '#5a5a66'); P.circ(x + 7, 650, 3, '#5a5a66'); } P.R(886, 624, 60, 10, '#ff3a8a'); } },
+      desenho: (P) => { const R = P.R; // baile de rua: palco com caixas de som, luzes coloridas, varal de lâmpadas e a multidão
+        R(846, 574, 140, 90, '#2a2440'); for (let y = 574; y < 664; y += 6) R(846, y, 140, 1, '#322c4a'); R(856, 578, 120, 18, '#1a1626'); R(856, 578, 120, 2, '#5a4a7a'); R(896, 584, 40, 8, '#3a3a46'); R(900, 586, 32, 4, '#7af0ff');
+        for (const x of [858, 958]) { R(x, 580, 16, 24, '#14141a'); P.circ(x + 8, 587, 4, '#5a5a66'); P.circ(x + 8, 598, 4, '#5a5a66'); P.circ(x + 8, 587, 2, '#2a2a30'); P.circ(x + 8, 598, 2, '#2a2a30'); }
+        R(870, 562, 92, 12, '#1c1626'); R(870, 562, 92, 2, '#ff3a8a'); txt(P, 'BAILE FUNK', 916, 566, '#ff6ab8');
+        P.c.globalAlpha = .28; for (const [x, cor] of [[880, '#ff3a8a'], [916, '#3af0ff'], [952, '#ffe14a']]) { P.c.fillStyle = cor; P.c.beginPath(); P.c.moveTo(x, 596); P.c.lineTo(x - 22, 660); P.c.lineTo(x + 22, 660); P.c.fill(); } P.c.globalAlpha = 1;
+        for (let k = 0; k < 18; k++) { const x = 850 + k * 7.6; R(x, 606 + Math.round(Math.sin(k) * 2), 2, 2, ['#ff3a8a', '#ffe14a', '#3af0ff', '#7af07a'][k % 4]); } R(848, 605, 136, 1, '#5a5a66');
+        for (let k = 0; k < 26; k++) { const x = 856 + (k * 37) % 120, y = 624 + Math.floor(k / 6) * 9 + (k % 2) * 3; pessoa(P, x, y, ['#e8433a', '#f2c94c', '#3c8ab0', '#7af07a', '#ff6ab8', '#f2f2ee'][k % 6]); } } },
     { id: 5, nome: 'Favela do Reeis', sub: 'Do beco ao rei', caixa: [800, 0, 224, 196],
       descricao: 'Becos que sobem, escadas que não acabam, pipa no céu e um nome que todo mundo respeita lá em cima.',
       desenho: (P) => { const cores = [['#f2c4c4', '#c8544a'], ['#f2e2a8', '#d0683a'], ['#c8dcf0', '#8a8e94'], ['#d4ecc8', '#c8544a'], ['#e8c8e8', '#d0683a'], ['#f0d0a0', '#8a8e94'], ['#c8e8e0', '#c8544a']]; let i = 0;
@@ -274,58 +310,89 @@
         for (const y of [160, 190]) { R(498, y, 6, 14, '#5a6f86'); R(510, y, 6, 14, '#5a6f86'); } R(500, 200, 14, 20, '#5a3c28'); P.arvore(470, 226, .9, 'roxa', 1); P.arvore(620, 228, .9, 'amarela', 2); } },
     { id: 't15', cena: 15, x: 300, nome: 'Trilha do Cristo', sub: 'Pé da Serra do Periperi', caixa: [440, 0, 100, 140], desloc: [-60, 0],
       descricao: 'Lá em cima, o Cristo de braços abertos vê a cidade inteira. O vento sopra forte, e dizem que alguém sobe lá só pra ser visto.',
-      desenho: (P) => { const R = P.R; P.sombra(492, 58, 18, 5, .3); R(484, 44, 16, 14, '#8a8478'); R(482, 42, 20, 4, '#a49c90'); R(489, 6, 6, 38, '#a49c90'); R(489, 6, 2, 38, '#c4bcb0'); R(474, 14, 36, 5, '#a49c90'); R(474, 14, 36, 2, '#c4bcb0'); P.circ(492, 6, 3, '#9a8a76');
-        escada(P, 486, 62, 18); } },
+      desenho: (P) => { const R = P.R; // alto da serra: o Cristo de braços abertos, a torre de antena vermelha e branca e a escadaria
+        P.sombra(492, 58, 18, 5, .3); R(484, 44, 16, 14, '#8a8478'); R(482, 42, 20, 4, '#a49c90'); R(489, 6, 6, 38, '#a49c90'); R(489, 6, 2, 38, '#c4bcb0'); R(474, 14, 36, 5, '#a49c90'); R(474, 14, 36, 2, '#c4bcb0'); P.circ(492, 6, 3, '#9a8a76');
+        R(520, 4, 3, 54, '#f2f2ee'); for (let y = 4; y < 58; y += 8) R(520, y, 3, 4, '#c43c3a'); R(516, 56, 11, 3, '#7a8086'); R(519, 2, 5, 3, '#c43c3a'); for (let y = 10; y < 56; y += 10) { R(516, y, 3, 1, '#9aa0a6'); R(523, y + 4, 3, 1, '#9aa0a6'); }
+        escada(P, 486, 62, 18); P.placa(500, 128, '#5a3820'); } },
     { id: 't16', cena: 16, x: 2700, nome: 'Monumento ao Índio', sub: 'Avenidas e rotatória', caixa: [680, 276, 110, 94],
       descricao: 'A rotatória mais famosa da cidade. Trânsito pesado, mototáxi pra todo lado e alguém que cobra caro demais por uma corrida.',
-      desenho: (P) => { const R = P.R; P.circ(734, 332, 40, '#7a8086', 20); P.circ(734, 330, 38, '#5fae3c', 18); P.flores(712, 320, ['#e86a8a', '#f2c94c', '#ffffff']); P.flores(744, 336, ['#b86ad8', '#f2c94c']);
-        R(724, 312, 20, 20, '#8a8478'); R(724, 312, 20, 3, '#b0aa9c'); R(730, 284, 8, 28, '#5e4128'); R(729, 278, 10, 8, '#5e4128'); R(726, 274, 16, 4, '#c9a24a'); R(738, 290, 14, 3, '#5e4128'); P.c.strokeStyle = '#4a3220'; P.c.beginPath(); P.c.arc(752, 292, 9, -1.3, 1.3); P.c.stroke(); } },
+      desenho: (P) => { const R = P.R; // rotatória com canteiro florido e a estátua de bronze do índio com o arco no pedestal
+        P.circ(734, 334, 42, '#6a7076', 22); P.circ(734, 332, 40, '#8a9096', 20); P.circ(734, 330, 36, '#5aa046', 18); P.circ(734, 330, 30, '#7cc458', 15); for (let k = 0; k < 24; k++) { const a = k / 24 * Math.PI * 2; R(734 + Math.cos(a) * 33, 330 + Math.sin(a) * 16, 3, 3, ['#e8433a', '#f2c94c', '#ffffff', '#e86a8a'][k % 4]); }
+        P.sombra(738, 334, 16, 5, .3); R(720, 318, 28, 14, '#8a8478'); R(720, 318, 28, 3, '#b0aa9c'); R(724, 310, 20, 10, '#a49c90'); R(724, 310, 20, 2, '#c4bcb0'); R(726, 324, 16, 4, '#6a6458');
+        R(730, 282, 9, 28, '#7a4a20'); R(731, 282, 3, 28, '#c8904a'); R(729, 276, 11, 9, '#8a5a2a'); R(731, 277, 3, 3, '#c8904a'); for (let k = 0; k < 5; k++) R(727 + k * 3, 268 + Math.abs(k - 2), 2, 8, k % 2 ? '#e8c24c' : '#c43c3a');
+        R(724, 296, 7, 6, '#7a4a20'); R(724, 300, 5, 10, '#7a4a20'); R(739, 288, 16, 3, '#7a4a20'); P.c.strokeStyle = '#5a3418'; P.c.lineWidth = 2; P.c.beginPath(); P.c.arc(754, 290, 11, -1.35, 1.35); P.c.stroke(); P.c.lineWidth = 1; R(752, 279, 1, 22, '#e8dcc0'); R(740, 289, 16, 1, '#e8dcc0'); R(756, 288, 3, 3, '#a8aeb4'); } },
     { id: 't17', cena: 17, x: 400, nome: 'Feira do Planalto', sub: 'Barracas e biscoitarias', caixa: [470, 356, 176, 100],
       descricao: 'Grito de feirante, cheiro de biscoito quente e um senhor que vende garrafadas misteriosas. Tem quem diga que ali se compra até coragem.',
       desenho: (P) => { const R = P.R, cores = ['#3c6aa8', '#e8833a', '#e8c24c', '#3c8a5a', '#c43c3a', '#7a3a8a']; for (let k = 0; k < 6; k++) { const x = 480 + (k % 3) * 54, y = 372 + Math.floor(k / 3) * 40; P.sombra(x + 22, y + 30, 22, 4);
-        R(x, y, 46, 12, cores[k]); for (let j = 0; j < 46; j += 6) R(x + j, y, 3, 12, '#f6f2ea'); R(x + 2, y + 12, 2, 18, '#6a5a44'); R(x + 42, y + 12, 2, 18, '#6a5a44'); R(x + 4, y + 22, 38, 8, '#8a6a45'); for (let j = 0; j < 6; j++) P.circ(x + 8 + j * 6, y + 20, 2, ['#e8c24c', '#7cbf6a', '#d9634a', '#f6ecd0'][(j + k) % 4]); } } },
+        R(x, y, 46, 12, cores[k]); for (let j = 0; j < 46; j += 6) R(x + j, y, 3, 12, '#f6f2ea'); R(x + 2, y + 12, 2, 18, '#6a5a44'); R(x + 42, y + 12, 2, 18, '#6a5a44'); R(x + 4, y + 22, 38, 8, '#8a6a45'); for (let j = 0; j < 6; j++) P.circ(x + 8 + j * 6, y + 20, 2, ['#e8c24c', '#7cbf6a', '#d9634a', '#f6ecd0'][(j + k) % 4]); } for (let k = 0; k < 22; k++) { const x = 476 + k * 8, y = 366 + Math.round(Math.sin(k / 21 * Math.PI) * 5); R(x, y, 5, 4, ['#e8433a', '#f2c94c', '#3c8a5a', '#3c6aa8', '#e86a8a'][k % 5]); } R(600, 440, 30, 12, '#e8d8a8'); R(600, 440, 30, 2, '#a8643a'); txt(P, 'BISCOITO', 615, 443, '#7a3a10'); } },
     { id: 't18', cena: 18, x: 300, nome: 'Fazendas de café', sub: 'Porteira da fazenda', caixa: [970, 560, 140, 100],
       descricao: 'Fileiras de café até onde a vista alcança. O dono da fazenda vizinha anda nervoso... e não é só por causa da cafeína.',
-      desenho: (P) => { P.casa(990, 580, 84, 60, { telhado: '#8a4430', parede: '#f2ece0', paredeH: 22, chamine: true, janelas: [8, 30, 64] }); P.R(1080, 608, 26, 30, '#cfcac0'); for (let k = 0; k < 26; k += 3) P.R(1080 + k, 610, 2, 26, k % 6 < 3 ? '#7a4a2a' : '#5a3420'); P.cercaH(976, 652, 120); } },
+      desenho: (P) => { P.casa(990, 580, 84, 60, { telhado: '#8a4430', parede: '#f2ece0', paredeH: 22, chamine: true, janelas: [8, 30, 64] }); P.R(1080, 608, 26, 30, '#cfcac0'); for (let k = 0; k < 26; k += 3) P.R(1080 + k, 610, 2, 26, k % 6 < 3 ? '#7a4a2a' : '#5a3420');  P.R(1010, 568, 46, 9, '#5a3820'); txt(P, 'FAZENDA', 1033, 570, '#f2e2b8'); for (let k = 0; k < 6; k++) P.R(1084 + (k % 2) * 8, 642 + Math.floor(k / 2) * 3, 3, 2, '#c43c3a');P.cercaH(976, 652, 120); } },
     { id: 't19', cena: 19, x: 300, nome: 'Teatro e Planetário', sub: 'Centro de Cultura', caixa: [730, 120, 150, 110],
       descricao: 'De noite, as luzes do teatro acendem e a cúpula do planetário guarda o céu inteiro. Tem show hoje... e um valentão na plateia.',
-      desenho: (P) => { const R = P.R; P.predio(736, 140, 76, 76, { topo: '#8a6a4a', parede: '#b08a5a', fachada: 34, caixa: false }); R(740, 184, 68, 6, '#3a2a2a'); for (let k = 0; k < 68; k += 6) R(742 + k, 185, 3, 3, '#ffe39a');
-        P.sombra(846, 214, 30, 6); P.circ(846, 200, 30, '#d8dce0', 20); P.circ(846, 196, 28, '#eef0f2', 18); P.circ(838, 188, 12, '#ffffff', 7); R(816, 200, 60, 14, '#d8dce0'); R(838, 204, 16, 10, '#5a6a7a'); } },
+      desenho: (P) => { const R = P.R; // Centro de Cultura (bloco cinza), Teatro de tijolo com portas coloridas e a cúpula do planetário
+        P.predio(734, 140, 54, 62, { topo: '#7a8086', parede: '#9aa0a6', fachada: 26, caixa: false, porta: false }); R(738, 178, 46, 6, '#3a3f44'); txt(P, 'CULTURA', 761, 179, '#e8e4dc'); R(752, 188, 18, 12, '#9ad0e8');
+        P.sombra(824, 216, 34, 5, .25); R(792, 160, 64, 50, '#a8583a'); for (let y = 162; y < 210; y += 4) for (let x = 792 + ((y / 4) % 2) * 4; x < 856; x += 8) R(x, y, 7, 3, '#b86a48'); R(792, 158, 64, 4, '#5a2a1a');
+        R(796, 164, 56, 10, '#3a1a14'); txt(P, 'TEATRO', 824, 166, '#ffe39a'); for (let k = 0; k < 56; k += 5) R(797 + k, 175, 2, 2, '#ffe39a');
+        for (const [k, cor] of [[0, '#e8433a'], [1, '#3c6aa8'], [2, '#f2c94c'], [3, '#9a52c0']]) { R(796 + k * 14, 190, 11, 20, cor); R(796 + k * 14, 190, 11, 2, '#ffffff55'); R(800 + k * 14, 200, 1, 2, '#2a1a10'); }
+        P.circ(866, 198, 14, '#c8ccd0', 10); P.circ(866, 196, 13, '#eef0f2', 9); P.circ(862, 192, 5, '#ffffff', 3); R(852, 200, 28, 10, '#d8dce0'); R(862, 202, 8, 8, '#5a6a7a'); } },
     { id: 't22', cena: 22, x: 1100, nome: 'Frente do Shopping', sub: 'Estacionamento e entrada', caixa: [890, 150, 190, 130],
       descricao: 'Cinema, lan house e gente fugindo do frio. Dizem que lá dentro tem um jogo dentro do jogo... e dois irmãos que não sabem perder.',
-      desenho: (P) => { const R = P.R; P.predio(900, 160, 170, 90, { topo: '#c8ccd0', parede: '#e8e4dc', fachada: 36, faixa: '#2c5a9e' }); R(960, 214, 50, 34, '#5aa0c8'); R(962, 216, 22, 30, '#9ad0e8'); R(986, 216, 22, 30, '#9ad0e8'); R(946, 204, 80, 10, '#2c5a9e');
-        for (let k = 0; k < 5; k++) { R(906 + k * 30, 260, 18, 10, ['#c43c3a', '#f2f2ee', '#3c6aa8', '#e8c24c', '#2a2a2a'][k]); R(906 + k * 30, 268, 4, 2, '#1c1c1c'); R(920 + k * 30, 268, 4, 2, '#1c1c1c'); } } },
+      desenho: (P) => { const R = P.R; // shopping: fachada bege, entrada de vidro com a placa laranja, totem colorido e o estacionamento com carros
+        P.predio(900, 158, 160, 76, { topo: '#c8ccd0', parede: '#ece6d8', fachada: 34, caixa: false, porta: false });
+        R(946, 186, 64, 48, '#5aa0c8'); for (let x = 948; x < 1008; x += 8) R(x, 188, 7, 44, '#9ad0e8'); for (let y = 196; y < 232; y += 10) R(948, y, 60, 1, '#f2f4f6'); R(946, 186, 64, 2, '#f2f4f6');
+        R(950, 176, 56, 10, '#e8833a'); R(950, 176, 56, 2, '#f8a85a'); txt(P, 'SHOPPING', 978, 178, '#fff6e0'); for (const [x, cor] of [[956, '#e8433a'], [972, '#f2c94c'], [988, '#3c6aa8']]) R(x, 214, 6, 8, cor);
+        R(1066, 166, 10, 50, '#2a2a30'); for (let k = 0; k < 6; k++) R(1067, 170 + k * 7, 8, 5, ['#e8833a', '#e8433a', '#f2c94c', '#3c8a5a', '#3c6aa8', '#e86a8a'][k]);
+        R(900, 242, 170, 34, '#5b6066'); for (let x = 904; x < 1068; x += 20) R(x, 244, 1, 30, '#f2f2ee'); for (let k = 0; k < 6; k++) { if (k === 3) continue; carrinho(P, 914 + k * 28, 262, ['#c43c3a', '#f2f2ee', '#3c6aa8', '#e8c24c', '#2a2a2a', '#3c8a5a'][k]); }
+        pessoa(P, 940, 240, '#e86a8a'); pessoa(P, 1014, 240, '#3c8a5a'); } },
     { id: 't21', cena: 21, x: 3700, nome: 'Entrada da Escola SESI', sub: 'Avenida Olívia Flores', caixa: [890, 350, 160, 120],
       descricao: 'O táxi deixa você no portão. Lá dentro tem escada, pátio e alguém que diz que o seu melhor amigo agora é dele.',
-      desenho: (P) => { const R = P.R; P.predio(904, 360, 130, 80, { topo: '#e8e8e4', parede: '#f2f2ee', fachada: 32, faixa: '#2c5a9e' }); for (let x = 896; x < 1046; x += 4) R(x, 446, 1, 14, '#2c5a9e'); R(896, 446, 150, 2, '#2c5a9e'); R(956, 444, 30, 18, '#e8e4dc'); R(958, 446, 26, 16, '#c8ccd0');
-        R(1040, 360, 2, 60, '#8a8a86'); R(1042, 362, 16, 10, '#2c8a3a'); R(1046, 364, 6, 6, '#e8c24c'); } },
+      desenho: (P) => { const R = P.R; // muro branco comprido com grafite colorido, prédio de janelas azuis, quadra verde e o portão
+        P.predio(940, 360, 100, 60, { topo: '#e8e8e4', parede: '#f2f2ee', fachada: 26, faixa: '#2c5a9e' }); R(892, 366, 44, 56, '#3c8a5a'); R(894, 368, 40, 52, '#4a9a5a'); R(894, 393, 40, 1, '#f2f2ee'); R(894, 368, 1, 52, '#f2f2ee'); R(933, 368, 1, 52, '#f2f2ee'); P.circ(914, 393, 6, '#f2f2ee', 5); P.circ(914, 393, 5, '#4a9a5a', 4);
+        R(892, 424, 156, 20, '#f6f6f2'); R(892, 424, 156, 2, '#ffffff'); R(892, 442, 156, 2, '#c8ccd0'); for (let k = 0; k < 22; k++) { const x = 896 + k * 7, cor = ['#e8433a', '#f2c94c', '#3c8a5a', '#3c6aa8', '#9a52c0', '#e8833a'][k % 6]; R(x, 430 + Math.round(Math.sin(k * .9) * 4), 6, 6, cor); R(x + 2, 428 + Math.round(Math.cos(k) * 3), 3, 3, cor); }
+        R(960, 444, 30, 20, '#c8ccd0'); for (let x = 962; x < 990; x += 3) R(x, 446, 1, 16, '#5a5e64'); R(958, 442, 34, 3, '#2c5a9e'); txt(P, 'SESI', 975, 437, '#2c5a9e');
+        for (let x = 896; x < 1046; x += 4) R(x, 452, 1, 12, '#2c5a9e'); R(896, 452, 150, 2, '#2c5a9e'); pessoa(P, 1010, 468, '#2c5a9e'); pessoa(P, 1024, 466, '#e8433a'); } },
     { id: 't28', cena: 28, x: 250, nome: 'Reserva do Poço Escuro', sub: 'Entrada da trilha', caixa: [16, 380, 200, 210],
       descricao: 'Mata fechada dentro da cidade. Água que cai das pedras, saguis curiosos e um silêncio que parece guardar alguma coisa.',
       desenho: (P) => { for (let i = 0; i < 16; i++) { const x = 30 + hash(i, 1) * 170, y = 420 + hash(i, 2) * 150; if (Math.abs(x - 100) < 20 && y > 480 && y < 540) continue; P.arvore(x, y, 1 + hash(i, 3) * .4, i % 3 ? 'escura' : 'verde', i); } P.placa(190, 580); P.R(150, 560, 28, 20, '#8a6a45'); P.R(148, 556, 32, 6, '#6a4a32'); } },
     { id: 't29', cena: 29, x: 250, nome: 'Portão do Lomantão', sub: 'Estádio Lomanto Júnior', caixa: [214, 560, 180, 150],
       descricao: 'Em dia de jogo a cidade para. Torcida cantando, espetinho na porta e um goleiro que conversa com a bola.',
       desenho: (P) => { const R = P.R; P.sombra(304, 690, 84, 12, .3); P.circ(304, 632, 82, '#9aa0a6', 56); P.circ(304, 628, 78, '#c8ccd0', 52); for (let k = 0; k < 40; k++) { const a = k / 40 * Math.PI * 2, r = 70; R(304 + Math.cos(a) * r, 628 + Math.sin(a) * r * .66, 4, 4, ['#e8433a', '#f2efe6', '#2c5a9e', '#e8c24c'][k % 4]); }
-        P.circ(304, 630, 58, '#5aa046', 36); R(256, 628, 96, 1, '#f2f2ee'); P.circ(304, 630, 10, '#f2f2ee', 6); P.circ(304, 630, 9, '#5aa046', 5); for (const [x, y] of [[226, 580], [382, 580]]) { R(x, y - 40, 3, 40, '#6a6e74'); R(x - 6, y - 46, 15, 8, '#f2f2ee'); } R(290, 690, 30, 12, '#2c5a9e'); } },
+        P.circ(304, 630, 58, '#5aa046', 36); R(256, 628, 96, 1, '#f2f2ee'); P.circ(304, 630, 10, '#f2f2ee', 6); P.circ(304, 630, 9, '#5aa046', 5); for (const [x, y] of [[226, 580], [382, 580]]) { R(x, y - 40, 3, 40, '#6a6e74'); R(x - 6, y - 46, 15, 8, '#f2f2ee'); }  P.R(250, 660, 108, 10, '#c43c3a'); txt(P, 'LOMANTÃO', 304, 662, '#f2efe6');R(290, 690, 30, 12, '#2c5a9e'); } },
     { id: 't30', cena: 30, x: 4500, nome: 'Rodoviária', sub: 'Plataformas de embarque', caixa: [730, 560, 170, 116],
       descricao: 'Gente chegando, gente partindo, um engraxate que viu a cidade inteira passar e ônibus pra todo canto do mapa.',
-      desenho: (P) => { const R = P.R; P.predio(740, 570, 70, 70, { topo: '#b8b4aa', parede: '#e2ddd0', fachada: 28 }); R(810, 590, 84, 8, '#b8b4aa'); for (const x of [814, 852, 888]) R(x, 598, 4, 40, '#c8c4ba');
-        for (let k = 0; k < 3; k++) { const x = 816 + k * 26, col = ['#2c5a9e', '#c43c3a', '#3c8a5a'][k]; R(x, 610, 20, 40, col); R(x + 2, 614, 16, 10, '#24303a'); R(x, 636, 20, 3, '#f2c94c'); R(x + 2, 650, 4, 3, '#1c1c1c'); R(x + 14, 650, 4, 3, '#1c1c1c'); } } },
+      desenho: (P) => { const R = P.R; // rodoviária: prédio com placa, cobertura comprida das plataformas e os ônibus Águia Branquinha
+        P.predio(738, 568, 60, 72, { topo: '#b8b4aa', parede: '#e2ddd0', fachada: 28 }); R(740, 570, 56, 10, '#2c5a9e'); txt(P, 'RODOVIÁRIA', 768, 572, '#f2efe6');
+        P.sombra(850, 664, 50, 6, .25); R(802, 584, 94, 10, '#d8dcde'); R(802, 584, 94, 2, '#f2f4f4'); R(802, 593, 94, 2, '#9aa0a6'); for (const x of [806, 836, 866, 892]) R(x, 594, 3, 40, '#a8aeb4');
+        for (let k = 0; k < 3; k++) { const x = 808 + k * 30; R(x, 602, 24, 50, '#f2f4f6'); R(x, 602, 24, 2, '#ffffff'); R(x + 2, 606, 20, 9, '#24303a'); R(x, 622, 24, 4, '#2c5a9e'); R(x, 627, 24, 2, '#e8c24c'); R(x + 3, 646, 5, 4, '#1c1c1c'); R(x + 16, 646, 5, 4, '#1c1c1c'); R(x + 10, 640, 4, 3, '#2c5a9e'); R(x + 2, 652, 20, 3, '#00000033'); R(x + 6, 596, 12, 6, '#9aa0a6'); txt(P, String(k + 1), x + 12, 597, '#f2efe6'); }
+        pessoa(P, 790, 652, '#e8833a'); pessoa(P, 870, 668, '#3c8a5a'); } },
     { id: 't31', cena: 31, x: 4300, nome: 'UESB', sub: 'Ponto do circular', caixa: [920, 16, 220, 130],
       descricao: 'Módulos de aula, cantina, biblioteca e uma professora que guarda a história da cidade em caixas de sapato.',
-      desenho: (P) => { const R = P.R; P.predio(930, 40, 110, 64, { topo: '#c8c4b8', parede: '#efebe0', fachada: 28, faixa: '#2c5a9e' }); P.predio(1050, 30, 80, 80, { topo: '#e8e4dc', parede: '#3a5a6a', fachada: 34 }); R(940, 112, 3, 30, '#9aa0a6'); R(932, 104, 20, 12, '#e8e4dc'); R(932, 104, 20, 2, '#2c5a9e');
-        P.arvore(1020, 140, .9, 'amarela', 5); P.arvore(960, 142, .9, 'roxa', 6); } },
+      desenho: (P) => { const R = P.R; // UESB: módulos baixos e compridos de janelas azuis, ipês roxos e amarelos e o ponto do circular
+        for (const [x, y, w] of [[930, 34, 100], [1046, 30, 88], [960, 82, 120]]) { P.predio(x, y, w, 40, { topo: '#c8c4b8', parede: '#f2efe6', fachada: 18, faixa: '#2c5a9e', caixa: false, porta: false }); }
+        R(1000, 30, 30, 8, '#2c5a9e'); txt(P, 'UESB', 1015, 31, '#f2efe6');
+        for (const [x, y, t] of [[944, 132, 'roxa'], [1092, 136, 'roxa'], [1124, 90, 'amarela'], [924, 92, 'roxa']]) P.arvore(x, y, .85, t, x);
+        R(1024, 128, 34, 3, '#2c5a9e'); R(1024, 131, 34, 2, '#9aa0a6'); R(1026, 131, 2, 12, '#7a8086'); R(1054, 131, 2, 12, '#7a8086'); R(1030, 136, 22, 3, '#a8643a'); R(1060, 118, 18, 9, '#f2c94c'); txt(P, 'CIRC', 1069, 120, '#2a2a2a'); R(1068, 127, 2, 16, '#5a5e62');
+        pessoa(P, 1036, 142, '#9a52c0'); pessoa(P, 1046, 142, '#3c8ab0'); } },
     { id: 't32', cena: 32, x: 300, nome: 'Lagoa das Bateias', sub: 'Pista de caminhada', caixa: [430, 560, 220, 170],
       descricao: 'Garças pescando, pedalinhos de cisne e a lenda de uma pepita no fundo. Um menino jura que ainda vai achar.',
-      desenho: (P) => { const R = P.R; R(600, 650, 40, 8, '#a87a4a'); for (let k = 0; k < 40; k += 5) R(600 + k, 650, 1, 8, '#7a4a2a'); for (const [x, y] of [[470, 612], [520, 640], [560, 600]]) { R(x, y, 14, 7, '#f6f6f0'); R(x + 11, y - 7, 3, 8, '#f6f6f0'); R(x + 12, y - 8, 4, 2, '#f6f6f0'); R(x + 15, y - 7, 2, 1, '#f08a24'); R(x + 3, y - 3, 4, 3, '#e8433a'); }
-        P.coqueiro(444, 700); P.coqueiro(640, 584); P.banco(470, 716); } },
+      desenho: (P) => { const R = P.R; // lagoa: pista vermelha de caminhada com as marcas de distância, garças, pedalinhos de cisne, píer e barras de exercício
+        R(600, 650, 40, 8, '#a87a4a'); for (let k = 0; k < 40; k += 5) R(600 + k, 650, 1, 8, '#7a4a2a'); for (const [x, y] of [[470, 612], [520, 640], [560, 600]]) { R(x, y, 14, 7, '#f6f6f0'); R(x + 11, y - 7, 3, 8, '#f6f6f0'); R(x + 12, y - 8, 4, 2, '#f6f6f0'); R(x + 15, y - 7, 2, 1, '#f08a24'); R(x + 3, y - 3, 4, 3, '#e8433a'); }
+        for (let k = 0; k < 60; k++) { const a = Math.PI * (.08 + k / 59 * .84), x = 540 + Math.cos(a) * 104, y = 640 + Math.sin(a) * 82; R(x - 3, y - 3, 7, 7, '#c8543a'); if (k % 6 === 0) R(x - 1, y - 1, 3, 1, '#f2f2ee'); }
+        for (const [x, y, t] of [[452, 690, '300M'], [540, 716, '700M'], [628, 690, '1100M']]) txt(P, t, x, y, '#f2f2ee');
+        for (const [x, cor] of [[446, '#f2c94c'], [460, '#e8433a']]) { R(x, 650, 2, 14, cor); R(x + 10, 650, 2, 14, cor); R(x, 650, 12, 2, cor); }
+        P.coqueiro(444, 724); P.coqueiro(648, 600); P.banco(600, 728); for (const [x, y] of [[620, 610], [470, 584]]) { R(x, y, 2, 8, '#f2f2ee'); R(x - 1, y - 3, 4, 3, '#f2f2ee'); R(x + 3, y - 2, 2, 1, '#e8c24c'); } } },
     { id: 't33', cena: 33, x: 300, nome: 'Parque da Cidade', sub: 'Portão do parque', caixa: [720, 680, 200, 86],
       descricao: 'Balanço, pista de skate, dominó dos aposentados e cachorro correndo atrás de bolinha. O lugar mais feliz da cidade. Por enquanto.',
-      desenho: (P) => { const R = P.R; R(740, 700, 3, 30, '#e8433a'); R(780, 700, 3, 30, '#e8433a'); R(738, 698, 48, 4, '#f2c94c'); for (const x of [752, 768]) { R(x, 702, 1, 16, '#5a5e62'); R(x - 3, 718, 7, 2, '#3a3a36'); } R(800, 708, 40, 20, '#a8aeb4'); P.circ(820, 718, 18, '#bcc0bc', 8);
-        for (const [x, y] of [[860, 716], [890, 740], [730, 750]]) P.arvore(x, y, .9, 'verde', x); P.flores(840, 744, ['#e86a8a', '#f2c94c']); } },
+      desenho: (P) => { const R = P.R; // parque: parquinho colorido (escorregador, balanço), muro grafitado e árvores
+        R(738, 694, 3, 32, '#e8433a'); R(774, 694, 3, 32, '#e8433a'); R(736, 692, 44, 4, '#f2c94c'); for (const x of [748, 764]) { R(x, 696, 1, 18, '#5a5e62'); R(x - 3, 714, 7, 2, '#3c6aa8'); }
+        R(790, 694, 22, 22, '#3c6aa8'); R(790, 694, 22, 3, '#6a9ad0'); R(792, 690, 18, 5, '#e8433a'); for (let k = 0; k < 6; k++) R(812 + k * 3, 698 + k * 4, 4, 3, '#f2c94c'); R(788, 716, 3, 12, '#3c6aa8'); R(809, 716, 3, 12, '#3c6aa8');
+        R(836, 690, 76, 16, '#c8ccd0'); R(836, 690, 76, 2, '#e8ecef'); for (let k = 0; k < 18; k++) { const x = 838 + k * 4, cor = ['#e8433a', '#e8833a', '#f2c94c', '#3c8a5a', '#3c6aa8', '#9a52c0'][Math.floor(k / 3) % 6]; R(x, 694 + Math.round(Math.sin(k * 1.4) * 4) + 2, 4, 5, cor); }
+        R(800, 732, 28, 12, '#e8d8a8'); R(800, 732, 28, 2, '#a8643a'); for (const [x, y] of [[860, 744], [900, 752], [736, 756], [918, 720]]) P.arvore(x, y, .9, 'verde', x); P.flores(842, 746, ['#e86a8a', '#f2c94c']); pessoa(P, 760, 740, '#e8433a'); } },
     { id: 't34', cena: 34, x: 300, nome: 'Serra do Marçal', sub: 'Mirante na beira da serra', caixa: [0, 588, 200, 120],
       descricao: 'A cidade acaba e o mundo despenca num mar de nuvens. Quem tem coragem pula de parapente. Quem não tem, compra mel.',
       desenho: (P) => { const R = P.R; for (const x of [30, 90]) { R(x, 600, 3, 60, '#e8ecef'); R(x - 1, 598, 5, 4, '#d8dce0'); } R(110, 660, 60, 4, '#a87a4a'); for (let k = 0; k < 60; k += 10) R(110 + k, 664, 3, 10, '#6a4a2a'); R(166, 640, 2, 22, '#9aa0a6');
-        for (let x = 10; x < 190; x += 6) R(x, 690, 4, 3, '#c8ccd0'); P.R(40, 664, 40, 20, '#e8833a'); for (let k = 0; k < 40; k += 8) P.R(40 + k, 664, 4, 20, '#f6ead0'); } }
+        for (let x = 10; x < 190; x += 6) R(x, 690, 4, 3, '#c8ccd0'); P.R(40, 664, 40, 20, '#e8833a');  P.R(36, 650, 48, 10, '#f2e2b8'); P.R(36, 650, 48, 1, '#a8643a'); txt(P, 'MEL DA SERRA', 60, 652, '#7a4a10'); for (let k = 0; k < 4; k++) { P.R(44 + k * 9, 676, 6, 7, '#e8a83a'); P.R(45 + k * 9, 675, 4, 2, '#f6f6f0'); } P.c.globalAlpha = .45; for (let x = 0; x < 200; x += 18) P.circ(x + 9, 700, 12, '#ffffff', 5); P.c.globalAlpha = 1;for (let k = 0; k < 40; k += 8) P.R(40 + k, 664, 4, 20, '#f6ead0'); } }
   ];
   let TR2 = null; const RUAS2 = {};
   const MAPA2 = {

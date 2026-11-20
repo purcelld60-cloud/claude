@@ -298,7 +298,8 @@
     const obj = document.createElement('canvas'); obj.width = W; obj.height = H; const oc = obj.getContext('2d'); oc.imageSmoothingEnabled = false; const lista = []; d.objetos?.((y, f) => lista.push([y, f]), Tr);
     lista.sort((a, b) => a[0] - b[0]); const PO = Px(oc); for (const [, f] of lista) f(PO);
     const locs = d.locais.map((L) => { const [bx0, by0, bw, bh] = L.caixa, [dx, dy] = L.desloc || [0, 0], bx = bx0 + dx, by = by0 + dy, s = document.createElement('canvas'); s.width = bw; s.height = bh; const sc = s.getContext('2d'); sc.imageSmoothingEnabled = false; sc.translate(-bx0, -by0); L.desenho(Px(sc)); const esc = document.createElement('canvas'); esc.width = bw; esc.height = bh; const ec = esc.getContext('2d'); ec.drawImage(s, 0, 0); ec.globalCompositeOperation = 'source-atop'; ec.fillStyle = 'rgba(8,10,26,.62)'; ec.fillRect(0, 0, bw, bh); return { s, esc, bx, by, bw, bh, pulo: null, tremor: 0 }; });
-    luzDeDia(base); luzDeDia(obj); for (const L of locs) luzDeDia(L.s);
+    luzDeDia(base); luzDeDia(obj); for (const L of locs) { luzDeDia(L.s); // trancado: véu leve (o lugar continua reconhecível, com o cadeado em cima)
+      const ec = L.esc.getContext('2d'); ec.globalCompositeOperation = 'source-over'; ec.clearRect(0, 0, L.bw, L.bh); ec.drawImage(L.s, 0, 0); ec.globalCompositeOperation = 'source-atop'; ec.fillStyle = 'rgba(40,50,84,.30)'; ec.fillRect(0, 0, L.bw, L.bh); ec.globalCompositeOperation = 'source-over'; }
     // vida: bandos de passarinhos e borboletas espalhados pelo mapa
     const aves = Array.from({ length: 4 }, (_, k) => ({ x: Math.random() * W, y: 80 + k * (H - 160) / 4, v: 34 + Math.random() * 22, dir: k % 2 ? -1 : 1, n: 4 + (k % 3), fase: Math.random() * 6 }));
     const borbo = Array.from({ length: 14 }, (_, k) => ({ x: Math.random() * W, y: Math.random() * H, fase: Math.random() * 9, cor: ['#ffe14a', '#ff8ad0', '#ffffff', '#8ad8ff', '#ffb04a'][k % 5] }));
