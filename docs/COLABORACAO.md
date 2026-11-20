@@ -85,3 +85,6 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
 - **2026-11-20 · Claude:**
   - **Abertura:** nova (`abertura.js`/`.css`). Ela some sozinha quando o jogo carrega; em testes automáticos não aparece.
   - **Logo nova:** feita em `tools/logo.py`. Se mudar a logo, gere de novo os ícones (192, 512 e 1024) e o `icon.svg`.
+- **2026-11-20 · Claude:**
+  - A pausa da campanha principal agora é igual à da Campanha 2: placa e botões de madeira. Os botões de toque e o joystick continuam os originais.
+  - Os mapas ficaram claros, de dia, com passarinhos, borboletas e raios de sol.
