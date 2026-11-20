@@ -1,0 +1,90 @@
+name: Gerar versão de PC (Windows e Linux)
+
+# Monta o jogo como programa de computador (Electron) a cada push na main (e quando você clicar em "Run workflow")
+# e publica em Releases:
+#   - Windows: instalador (atalho na área de trabalho) e versão portátil (abre sem instalar);
+#   - Linux: AppImage.
+# Não usa senhas nem certificados. Por não ter assinatura paga, o Windows pode mostrar o aviso do SmartScreen
+# ("O Windows protegeu o computador"): clique em "Mais informações" e "Executar assim mesmo".
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['dist/**', 'native/pc/**', '.github/workflows/pc.yml', '.github/scripts/**']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pc-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  montar:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            alvo: --win
+            arquivos: native/pc/saida/*.exe
+          - os: ubuntu-latest
+            alvo: --linux
+            arquivos: native/pc/saida/*.AppImage
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Lista de músicas (dist/musicas)
+        run: python3 .github/scripts/musicas.py || python .github/scripts/musicas.py
+
+      - name: Colocar o jogo e o ícone dentro do programa
+        run: |
+          rm -rf native/pc/jogo && cp -R dist native/pc/jogo
+          cp dist/assets/app-icon-1024.png native/pc/icone.png
+          VERSAO=$(node -p "require('./dist/app-version.json').versionName")
+          echo "VERSAO=$VERSAO" >> "$GITHUB_ENV"
+          cd native/pc && npm pkg set version="$VERSAO"
+
+      - name: Instalar o Electron
+        working-directory: native/pc
+        run: npm install --no-audit --no-fund
+
+      - name: Montar
+        working-directory: native/pc
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npx electron-builder ${{ matrix.alvo }} --publish never
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pc-${{ matrix.os }}
+          path: ${{ matrix.arquivos }}
+
+  publicar:
+    needs: montar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: saida
+          merge-multiple: true
+      - name: Publicar em Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ls -la saida
+          VERSAO=$(node -p "require('./dist/app-version.json').versionName")
+          gh release create "pc-b${{ github.run_number }}" saida/* \
+            --target "${{ github.sha }}" \
+            --title "Da Roça PC ${VERSAO} (build ${{ github.run_number }})" \
+            --notes "Versão de computador. Windows: baixe DaRoca-Instalador (instala com atalho) ou DaRoca-Portatil (abre direto, sem instalar). Linux: baixe o AppImage, dê permissão de execução e abra. F11 ou Alt+Enter liga a tela cheia. Se o Windows mostrar o aviso do SmartScreen, clique em Mais informações > Executar assim mesmo."

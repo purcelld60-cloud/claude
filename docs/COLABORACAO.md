@@ -88,3 +88,4 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
 - **2026-11-20 · Claude:**
   - A pausa da campanha principal agora é igual à da Campanha 2: placa e botões de madeira. Os botões de toque e o joystick continuam os originais.
   - Os mapas ficaram claros, de dia, com passarinhos, borboletas e raios de sol.
+- **2026-11-20 · Claude:** criei a versão de PC (Electron) em `native/pc/` e o workflow `pc.yml` (Windows e Linux). Detalhes em `docs/PC.md`.

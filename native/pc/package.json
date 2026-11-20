@@ -1,0 +1,35 @@
+{
+  "name": "daroca-adventure",
+  "productName": "Da Roça Adventure",
+  "version": "3.13.0",
+  "description": "Da Roça Adventure para PC (Windows e Linux).",
+  "main": "main.js",
+  "author": "Da Roça Adventure",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "electron": "33.2.1",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "com.daroca.adventure",
+    "productName": "Da Roça Adventure",
+    "directories": { "output": "saida" },
+    "files": ["main.js", "jogo/**/*"],
+    "win": {
+      "icon": "icone.png",
+      "target": [{ "target": "nsis", "arch": ["x64"] }, { "target": "portable", "arch": ["x64"] }]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Da Roça Adventure",
+      "artifactName": "DaRoca-Instalador-${version}.${ext}"
+    },
+    "portable": { "artifactName": "DaRoca-Portatil-${version}.${ext}" },
+    "linux": { "icon": "icone.png", "category": "Game", "target": ["AppImage"], "artifactName": "DaRoca-${version}.${ext}" },
+    "publish": null
+  }
+}

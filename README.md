@@ -92,3 +92,8 @@ O projeto iOS exige macOS, Xcode e sua assinatura Apple. Consulte [o README iOS]
 O código original, a documentação e a arte procedural original do projeto usam MIT, salvo indicação específica em outro arquivo. As fontes mantêm suas próprias licenças. MP3 e fotos adicionados separadamente pelos usuários não recebem automaticamente a licença MIT do programa. Veja [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 Um repositório no GitHub é opcional: a licença e o pacote completo permitem modificar o jogo sem ele. Se publicar sua própria cópia em um repositório, mantenha `LICENSE` e os avisos de terceiros junto do código.
+
+
+## Versão para PC
+
+Windows (instalador e portátil) e Linux (AppImage), gerados a cada merge na `main`. Veja [docs/PC.md](docs/PC.md).
