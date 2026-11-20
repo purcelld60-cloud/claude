@@ -1,0 +1,227 @@
+{
+ "id": "c2_chegada",
+ "titulo": "Campanha 2 · Chegada em Conquista",
+ "balao": true,
+ "descricao": "O frio, a neblina e o Seu Zé do Táxi.",
+ "cenas": [
+  {
+   "titulo": "AEROPORTO GLAUBER ROCHA",
+   "cenario": "aeroporto",
+   "hora": 7.2,
+   "duracao": 5,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 3100,
+     "y": 380,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 3360,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4.8
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 3150,
+     "ate": 3360,
+     "tempo": [
+      0.8,
+      3.8
+     ],
+     "anim": "andando+frio"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "entrada",
+     "dur": 1
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.6
+    },
+    {
+     "tipo": "frio"
+    },
+    {
+     "tipo": "letreiro",
+     "texto": "VITÓRIA DA CONQUISTA",
+     "sub": "AEROPORTO GLAUBER ROCHA",
+     "t": 0.5,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vento",
+     "t": 0.2
+    },
+    {
+     "som": "passos",
+     "t": 1
+    }
+   ]
+  },
+  {
+   "titulo": "AEROPORTO GLAUBER ROCHA",
+   "cenario": "aeroporto",
+   "hora": 7.2,
+   "camera": {
+    "de": {
+     "x": 3360,
+     "y": 420,
+     "zoom": 2.0
+    },
+    "para": {
+     "x": 3360,
+     "y": 420,
+     "zoom": 2.3
+    },
+    "tempo": 5
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 3360,
+     "olhando": 1,
+     "anim": "frio+treme"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "neblina",
+     "forca": 0.5
+    },
+    {
+     "tipo": "frio"
+    },
+    {
+     "tipo": "texto",
+     "texto": "BRRRRR",
+     "x": 560,
+     "y": 170,
+     "cor": "#9adcff",
+     "t": 0.3,
+     "dur": 1.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vento",
+     "t": 0.1
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Q-q-q-que frio é esse?!"
+    },
+    {
+     "quem": "daroca",
+     "texto": "NINGUÉM me avisou que a Bahia tinha inverno!"
+    },
+    {
+     "quem": "daroca",
+     "texto": "...O Miguel avisou. Eu não escutei.",
+     "emocao": "embarrassed"
+    }
+   ]
+  },
+  {
+   "titulo": "O TÁXI DO SEU ZÉ",
+   "cenario": "aeroporto",
+   "hora": 7.2,
+   "camera": {
+    "de": {
+     "x": 3420,
+     "y": 420,
+     "zoom": 1.7
+    },
+    "para": {
+     "x": 3460,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "tempo": 8
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 3360,
+     "olhando": 1,
+     "anim": "frio"
+    },
+    {
+     "quem": "c2_ze_taxi",
+     "x": 3700,
+     "ate": 3480,
+     "tempo": [
+      0,
+      1.6
+     ],
+     "anim": "andando",
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "neblina",
+     "forca": 0.4
+    },
+    {
+     "tipo": "frio"
+    }
+   ],
+   "sons": [
+    {
+     "som": "buzina",
+     "t": 0
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_ze_taxi",
+     "texto": "Ô, RAPAZ! De camiseta em Conquista? Você é corajoso ou é de Itabuna?"
+    },
+    {
+     "quem": "daroca",
+     "texto": "...de Itabuna.",
+     "emocao": "embarrassed"
+    },
+    {
+     "quem": "c2_ze_taxi",
+     "texto": "Logo vi! Zé do Táxi, muito prazer. Seu Zé pros íntimos, e aqui todo mundo é íntimo."
+    },
+    {
+     "quem": "c2_ze_taxi",
+     "texto": "Pra onde vai? Hotel? Pensão? Delegacia? Brincadeira, brincadeira!"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Tem alguma pensão barata?"
+    },
+    {
+     "quem": "c2_ze_taxi",
+     "texto": "A da Dona Lurdes! Quarto pequeno, café forte e uma dona que sabe da sua vida antes de você contar."
+    },
+    {
+     "quem": "c2_ze_taxi",
+     "texto": "E no caminho eu te mostro a cidade. Ali é a Serra, ali o Cristo, ali era uma padaria, ali morou minha ex-sogra, ali—"
+    },
+    {
+     "quem": "daroca",
+     "texto": "(ele não vai parar de falar nunca...)",
+     "emocao": "confused"
+    },
+    {
+     "quem": "c2_ze_taxi",
+     "texto": "—e ali tem o melhor biscoito de goma do mundo! Entra, entra! E fecha a janela, que o vento daqui corta."
+    }
+   ]
+  }
+ ]
+}

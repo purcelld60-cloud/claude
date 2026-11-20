@@ -1,0 +1,582 @@
+{
+ "id": "c2_primeira_noite",
+ "titulo": "Campanha 2 · Primeira noite na pensão",
+ "balao": true,
+ "descricao": "Dona Lurdes, o quarto 4 e a descoberta de que os poderes ficaram em Itabuna.",
+ "cenas": [
+  {
+   "titulo": "PENSÃO DONA LURDES",
+   "cenario": "pensao",
+   "hora": 18.3,
+   "duracao": 4.5,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 1500,
+     "y": 380,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 1760,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4.2
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1500,
+     "ate": 1700,
+     "tempo": [
+      0.6,
+      3.6
+     ],
+     "anim": "andando+frio"
+    },
+    {
+     "quem": "c2_lurdes",
+     "x": 1830,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "neblina",
+     "forca": 0.45
+    },
+    {
+     "tipo": "letreiro",
+     "texto": "PENSÃO DONA LURDES",
+     "sub": "BAIRRO · VITÓRIA DA CONQUISTA",
+     "t": 0.4,
+     "dur": 3.4
+    }
+   ]
+  },
+  {
+   "titulo": "PENSÃO DONA LURDES",
+   "cenario": "pensao",
+   "hora": 18.4,
+   "camera": {
+    "de": {
+     "x": 1760,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "para": {
+     "x": 1770,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "tempo": 8
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1700,
+     "olhando": 1,
+     "anim": "frio"
+    },
+    {
+     "quem": "c2_lurdes",
+     "x": 1830,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "neblina",
+     "forca": 0.35
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_lurdes",
+     "texto": "Você é o menino de Itabuna? O Zé ligou. O Zé liga pra tudo."
+    },
+    {
+     "quem": "c2_lurdes",
+     "texto": "Quarto quatro. Banheiro no fim do corredor. Café às seis. Nada de barulho depois das dez."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Sim, senhora!"
+    },
+    {
+     "quem": "c2_lurdes",
+     "texto": "...e veste um casaco, criatura. Tá me dando frio só de olhar."
+    }
+   ]
+  },
+  {
+   "titulo": "QUARTO 4",
+   "cenario": "quarto",
+   "hora": 22.5,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 430,
+     "zoom": 1.8
+    },
+    "para": {
+     "x": 500,
+     "y": 430,
+     "zoom": 2.0
+    },
+    "tempo": 9
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 420,
+     "olhando": 1,
+     "anim": "frio"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "vinheta",
+     "forca": 0.5
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Primeira noite em Conquista."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Cama pequena, janela gelada e uma cidade inteira que não me conhece."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Amanhã eu procuro o Jorge. Amanhã.",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "titulo": "QUARTO 4",
+   "cenario": "quarto",
+   "hora": 23.5,
+   "duracao": 4.5,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 430,
+     "zoom": 2.2
+    },
+    "para": {
+     "x": 480,
+     "y": 430,
+     "zoom": 2.6
+    },
+    "tempo": 4.4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 600,
+     "y": 410,
+     "olhando": 1,
+     "anim": "deitado+zzz"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "vinheta",
+     "forca": 0.6
+    },
+    {
+     "tipo": "saida",
+     "t": 3.4,
+     "dur": 1.1
+    }
+   ],
+   "sons": [
+    {
+     "som": "misterio",
+     "t": 0.4
+    }
+   ]
+  },
+  {
+   "titulo": "NO DIA SEGUINTE",
+   "cenario": "quarto",
+   "hora": 6.8,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 430,
+     "zoom": 1.8
+    },
+    "para": {
+     "x": 480,
+     "y": 430,
+     "zoom": 1.9
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 450,
+     "olhando": 1,
+     "emocao": "friend"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "entrada",
+     "dur": 1
+    },
+    {
+     "tipo": "cartao",
+     "texto": "NO DIA SEGUINTE",
+     "sub": "6:47 DA MANHÃ · 9°C",
+     "t": 0.2,
+     "dur": 2.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "galo",
+     "t": 0.5
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Bom dia, Conquista! Bora acordar os poderes!",
+     "emocao": "friend"
+    },
+    {
+     "quem": "daroca",
+     "texto": "OOO REEEEIS!!!"
+    }
+   ]
+  },
+  {
+   "titulo": "NO DIA SEGUINTE",
+   "cenario": "quarto",
+   "hora": 6.8,
+   "duracao": 2.4,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 430,
+     "zoom": 2.2
+    },
+    "para": {
+     "x": 480,
+     "y": 430,
+     "zoom": 2.2
+    },
+    "tempo": 1
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 450,
+     "olhando": 1,
+     "anim": "ataque"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "texto",
+     "texto": "...",
+     "x": 520,
+     "y": 200,
+     "cor": "#ffffff",
+     "t": 0.4,
+     "dur": 1.8,
+     "tamanho": 48
+    }
+   ]
+  },
+  {
+   "titulo": "NO DIA SEGUINTE",
+   "cenario": "quarto",
+   "hora": 6.8,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 430,
+     "zoom": 2.0
+    },
+    "para": {
+     "x": 480,
+     "y": 430,
+     "zoom": 2.0
+    },
+    "tempo": 1
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 450,
+     "olhando": 1,
+     "anim": "pergunta"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Reeis? REEIS? Cadê o Reeis?!",
+     "emocao": "confused"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Tá. Tudo bem. BIVOLT! ...Cadê minha latinha?"
+    },
+    {
+     "quem": "daroca",
+     "texto": "BATATA! ...ninguém aqui conhece a Batata.",
+     "emocao": "embarrassed"
+    },
+    {
+     "quem": "daroca",
+     "texto": "O carro a gás! ...ficou com meu pai. Em Itabuna.",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "titulo": "O QUE SOBROU",
+   "fundo": "preto",
+   "duracao": 3.5,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "polaroids",
+     "t": 0.2,
+     "intervalo": 0.7,
+     "fotos": [
+      {
+       "quem": [
+        "daroca"
+       ],
+       "legenda": "O PEIDO"
+      },
+      {
+       "quem": [
+        "daroca"
+       ],
+       "legenda": "OS PAPÉIS"
+      },
+      {
+       "quem": [
+        "daroca"
+       ],
+       "legenda": "O DASH"
+      }
+     ]
+    }
+   ],
+   "falas": [
+    {
+     "quem": "narrador",
+     "texto": "Longe de Itabuna, os poderes da primeira aventura ficaram pra trás."
+    },
+    {
+     "quem": "narrador",
+     "texto": "Sobraram três: o peido, os papéis e o dash."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Bom... pelo menos o essencial ficou.",
+     "emocao": "friend"
+    }
+   ]
+  },
+  {
+   "titulo": "O MURAL",
+   "cenario": "quarto",
+   "hora": 7,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 560,
+     "y": 430,
+     "zoom": 1.8
+    },
+    "para": {
+     "x": 600,
+     "y": 400,
+     "zoom": 2.1
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 520,
+     "olhando": 1
+    }
+   ],
+   "falas": [
+    {
+     "quem": "narrador",
+     "texto": "Em Conquista, cada encrenca tem um dono."
+    },
+    {
+     "quem": "narrador",
+     "texto": "Vença os donos das encrencas e o Seu Lindomar, da feira, consegue as garrafadas dos poderes."
+    }
+   ]
+  },
+  {
+   "titulo": "PROCURADOS",
+   "fundo": "preto",
+   "duracao": 6,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "polaroids",
+     "t": 0,
+     "intervalo": 0.45,
+     "fotos": [
+      {
+       "quem": [
+        "c2_creuza"
+       ],
+       "legenda": "A FOFOQUEIRA",
+       "ceu": [
+        "#e8c8d0",
+        "#f2dce0"
+       ],
+       "chao": "#8a6a5a"
+      },
+      {
+       "quem": [
+        "c2_tonhao"
+       ],
+       "legenda": "O DO MOTOTÁXI",
+       "ceu": [
+        "#f2c8a0",
+        "#f8dcc0"
+       ],
+       "chao": "#5a5e66"
+      },
+      {
+       "quem": [
+        "c2_valdomiro"
+       ],
+       "legenda": "O DA FEIRA",
+       "ceu": [
+        "#f2e2b0",
+        "#f8eed0"
+       ],
+       "chao": "#c8a46a"
+      },
+      {
+       "quem": [
+        "c2_kaua_influencer"
+       ],
+       "legenda": "O INFLUENCER",
+       "ceu": [
+        "#c8d8ff",
+        "#e0e8ff"
+       ],
+       "chao": "#8a8a6a"
+      },
+      {
+       "quem": [
+        "c2_barao"
+       ],
+       "legenda": "O DO CAFÉ",
+       "ceu": [
+        "#c8a47a",
+        "#e0c8a0"
+       ],
+       "chao": "#3a6a2a"
+      },
+      {
+       "quem": [
+        "c2_breno"
+       ],
+       "legenda": "O PITBULL",
+       "ceu": [
+        "#e8a0a0",
+        "#f2c0c0"
+       ],
+       "chao": "#4a3a3a"
+      },
+      {
+       "quem": [
+        "c2_ryan",
+        "c2_bryan"
+       ],
+       "legenda": "OS GÊMEOS",
+       "ceu": [
+        "#a0e8e0",
+        "#c0f2ec"
+       ],
+       "chao": "#2a3a4a"
+      },
+      {
+       "quem": [],
+       "legenda": "???",
+       "ceu": [
+        "#2a2a3a",
+        "#3a3a4a"
+       ],
+       "chao": "#1a1a24"
+      }
+     ]
+    }
+   ],
+   "sons": [
+    {
+     "som": "tambor",
+     "t": 0.2
+    },
+    {
+     "som": "tambor",
+     "t": 2.2
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Fofoqueira, mototaxista, chefão de feira, influencer, barão do café, pitbull, gêmeos..."
+    },
+    {
+     "quem": "daroca",
+     "texto": "...e um ponto de interrogação. Que ótimo.",
+     "emocao": "embarrassed"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Segura aí, Jorge. Eu tô chegando.",
+     "emocao": "taunted"
+    }
+   ]
+  }
+ ]
+}

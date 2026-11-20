@@ -1,0 +1,155 @@
+{
+ "id": "c2_vilao_breno",
+ "titulo": "Vilão · Breno Pitbull",
+ "balao": true,
+ "descricao": "Entrada do vilão.",
+ "cenas": [
+  {
+   "titulo": "TEATRO GLAUBER ROCHA",
+   "cenario": "teatro",
+   "hora": 20.5,
+   "trilha": "tensao",
+   "camera": {
+    "de": {
+     "x": 1500,
+     "y": 300,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 1500,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1360,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_breno",
+     "x": 1640,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "TEATRO GLAUBER ROCHA",
+     "sub": "FESTIVAL DE INVERNO",
+     "t": 0.3,
+     "dur": 3
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_breno",
+     "texto": "Tá olhando o quê, forasteiro?"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Nada! Eu só tô procurando um amigo."
+    },
+    {
+     "quem": "c2_breno",
+     "texto": "Amigo? Aqui só tem plateia. E hoje o show é você apanhando."
+    }
+   ]
+  },
+  {
+   "titulo": "TEATRO GLAUBER ROCHA",
+   "cenario": "teatro",
+   "hora": 20.5,
+   "camera": {
+    "de": {
+     "x": 1580,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "para": {
+     "x": 1600,
+     "y": 420,
+     "zoom": 2.4
+    },
+    "tempo": 3
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1440,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_breno",
+     "x": 1640,
+     "olhando": -1,
+     "anim": "chama+raiva"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "batimento",
+     "forca": 0.4
+    },
+    {
+     "tipo": "tremer",
+     "t": 0.4,
+     "forca": 6
+    }
+   ],
+   "sons": [
+    {
+     "som": "impacto",
+     "t": 0.4
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_breno",
+     "texto": "PITBULL NÃO LATE. MORDE.",
+     "emocao": "taunted"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 3.6,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "vs",
+     "vilao": "c2_breno",
+     "nome": "BRENO PITBULL",
+     "titulo": "O VALENTÃO DO TEATRO",
+     "cor": "#e8433a",
+     "t": 0,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vs",
+     "t": 0.35
+    },
+    {
+     "som": "tambor",
+     "t": 1.2
+    }
+   ]
+  }
+ ]
+}

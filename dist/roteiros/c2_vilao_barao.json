@@ -1,0 +1,114 @@
+{
+ "id": "c2_vilao_barao",
+ "titulo": "Vilão · Barão do Café",
+ "balao": true,
+ "descricao": "Entrada do vilão.",
+ "cenas": [
+  {
+   "titulo": "FAZENDAS DE CAFÉ",
+   "cenario": "cafe",
+   "hora": 8,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 600,
+     "y": 400,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 900,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 820,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_barao",
+     "x": 1060,
+     "olhando": -1,
+     "anim": "treme"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "FAZENDAS DE CAFÉ",
+     "sub": "PLANALTO DA CONQUISTA",
+     "t": 0.3,
+     "dur": 3
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_barao",
+     "texto": "QUEM PISOU NO MEU CAFEZAL?!"
+    },
+    {
+     "quem": "daroca",
+     "texto": "O senhor tá bem? O olho do senhor tá..."
+    },
+    {
+     "quem": "c2_barao",
+     "texto": "TREMENDO?! É SÓ O DÉCIMO QUARTO CAFEZINHO DO DIA!"
+    },
+    {
+     "quem": "c2_barao",
+     "texto": "E essa terra toda vai ser minha. Só falta a teimosa da Dona Zefa vender a dela!"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Calma, Barão. Respira."
+    },
+    {
+     "quem": "c2_barao",
+     "texto": "RESPIRAR É PRA QUEM TEM TEMPO! EU TENHO CAFEÍNA!",
+     "emocao": "taunted"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 3.6,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "vs",
+     "vilao": "c2_barao",
+     "nome": "BARÃO DO CAFÉ",
+     "titulo": "MOVIDO A CAFEÍNA",
+     "cor": "#a8743a",
+     "t": 0,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vs",
+     "t": 0.35
+    },
+    {
+     "som": "tambor",
+     "t": 1.2
+    }
+   ]
+  }
+ ]
+}

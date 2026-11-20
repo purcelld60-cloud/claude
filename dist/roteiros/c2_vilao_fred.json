@@ -1,0 +1,367 @@
+{
+ "id": "c2_vilao_fred",
+ "titulo": "Vilão · Fred",
+ "balao": true,
+ "descricao": "Entrada do vilão.",
+ "cenas": [
+  {
+   "titulo": "ESCOLA SESI",
+   "cenario": "patio_sesi",
+   "hora": 10,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 1300,
+     "y": 400,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 1500,
+     "y": 420,
+     "zoom": 1.7
+    },
+    "tempo": 4.5
+   },
+   "atores": [
+    {
+     "quem": "jorge",
+     "x": 1380,
+     "olhando": 1,
+     "emocao": "friend"
+    },
+    {
+     "quem": "fred_conquista",
+     "x": 1460,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "ESCOLA SESI",
+     "sub": "PÁTIO · 2º ANDAR",
+     "t": 0.3,
+     "dur": 3
+    },
+    {
+     "tipo": "chat",
+     "t": 1.4,
+     "dur": 99,
+     "x": 790,
+     "titulo": "FRED & JORGE",
+     "mensagens": [
+      {
+       "de": "Fred",
+       "texto": "CLUBE DO TOPETE!!",
+       "t": 0
+      },
+      {
+       "de": "Jorge",
+       "texto": "o professor de física de novo kkkk",
+       "t": 0.7,
+       "eu": true
+      },
+      {
+       "de": "Fred",
+       "texto": "PÃO DE QUEIJO OU BISCOITO?",
+       "t": 1.4
+      },
+      {
+       "de": "Jorge",
+       "texto": "BISCOITO SEMPRE",
+       "t": 2.1,
+       "eu": true
+      },
+      {
+       "de": "Fred",
+       "texto": "toque secreto amanhã",
+       "t": 2.8
+      }
+     ]
+    }
+   ],
+   "sons": [
+    {
+     "som": "digitar",
+     "t": 1.5
+    },
+    {
+     "som": "digitar",
+     "t": 2.9
+    }
+   ],
+   "falas": [
+    {
+     "quem": "fred_conquista",
+     "texto": "Toca aqui, parceiro!"
+    },
+    {
+     "quem": "jorge",
+     "texto": "Toque secreto: topete, topete...",
+     "emocao": "friend"
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "...PÃO DE QUEIJO!"
+    },
+    {
+     "quem": "jorge",
+     "texto": "KKKKKK é biscoito, Fred! Biscoito!",
+     "emocao": "friend"
+    }
+   ]
+  },
+  {
+   "titulo": "ESCOLA SESI",
+   "cenario": "patio_sesi",
+   "hora": 10,
+   "trilha": "tensao",
+   "camera": {
+    "de": {
+     "x": 1420,
+     "y": 420,
+     "zoom": 1.7
+    },
+    "para": {
+     "x": 1300,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "tempo": 2.4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1180,
+     "olhando": 1
+    },
+    {
+     "quem": "jorge",
+     "x": 1380,
+     "olhando": -1,
+     "anim": "exclama"
+    },
+    {
+     "quem": "fred_conquista",
+     "x": 1460,
+     "olhando": -1
+    }
+   ],
+   "sons": [
+    {
+     "som": "misterio",
+     "t": 0.2
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Jorge."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Gordo... sou eu.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "jorge",
+     "texto": "..."
+    }
+   ]
+  },
+  {
+   "titulo": "ESCOLA SESI",
+   "cenario": "patio_sesi",
+   "hora": 10,
+   "camera": {
+    "de": {
+     "x": 1360,
+     "y": 420,
+     "zoom": 2.0
+    },
+    "para": {
+     "x": 1340,
+     "y": 420,
+     "zoom": 2.3
+    },
+    "tempo": 8
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1220,
+     "olhando": 1,
+     "emocao": "sad"
+    },
+    {
+     "quem": "jorge",
+     "x": 1520,
+     "ate": 1700,
+     "tempo": [
+      1.5,
+      4
+     ],
+     "anim": "andando",
+     "olhando": 1
+    },
+    {
+     "quem": "fred_conquista",
+     "x": 1340,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "vinheta",
+     "forca": 0.6
+    }
+   ],
+   "falas": [
+    {
+     "quem": "fred_conquista",
+     "texto": "Ih, olha quem chegou. O famoso \"trio\". Ou o que sobrou dele.",
+     "emocao": "taunted"
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "O Jorge me contou de você. Contou que você é o passado."
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "Pega a visão, forasteiro."
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "O que eu sou com o Jorge, você nunca vai ser.",
+     "emocao": "taunted"
+    }
+   ]
+  },
+  {
+   "titulo": "ESCOLA SESI",
+   "cenario": "patio_sesi",
+   "hora": 10,
+   "duracao": 3.8,
+   "camera": {
+    "de": {
+     "x": 1240,
+     "y": 420,
+     "zoom": 2.3
+    },
+    "para": {
+     "x": 1240,
+     "y": 420,
+     "zoom": 2.5
+    },
+    "tempo": 3.6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1220,
+     "olhando": 1,
+     "emocao": "sad"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "coracao_partido",
+     "t": 0.2,
+     "dur": 3.4,
+     "escala": 0.75
+    }
+   ],
+   "sons": [
+    {
+     "som": "coracao",
+     "t": 0.1
+    },
+    {
+     "som": "quebra",
+     "t": 1.7
+    }
+   ]
+  },
+  {
+   "titulo": "ESCOLA SESI",
+   "cenario": "patio_sesi",
+   "hora": 10,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 1300,
+     "y": 420,
+     "zoom": 2.0
+    },
+    "para": {
+     "x": 1300,
+     "y": 420,
+     "zoom": 2.2
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1220,
+     "olhando": 1,
+     "anim": "chama"
+    },
+    {
+     "quem": "fred_conquista",
+     "x": 1360,
+     "olhando": -1
+    }
+   ],
+   "falas": [
+    {
+     "quem": "fred_conquista",
+     "texto": "Quer o Jorge? Passa por mim primeiro. E já aviso: eu não sou fofoqueira de bairro."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Então vem, topetudo.",
+     "emocao": "taunted"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 3.6,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "vs",
+     "vilao": "fred_conquista",
+     "nome": "FRED",
+     "titulo": "O NOVO MELHOR AMIGO",
+     "cor": "#ffd24a",
+     "t": 0,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vs",
+     "t": 0.35
+    },
+    {
+     "som": "tambor",
+     "t": 1.2
+    }
+   ]
+  }
+ ]
+}

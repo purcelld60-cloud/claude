@@ -254,7 +254,7 @@
   // ordem dos vilões da Campanha 2 e o lugar de cada um; cada área só abre depois de vencer quem vem antes
   const VILOES = { creuza: 'DONA CREUZA', tonhao: 'TONHÃO DO MOTOTÁXI', valdomiro: 'SEU VALDOMIRO', kaua: 'KAUÃ INFLUENCER', barao: 'BARÃO DO CAFÉ', breno: 'BRENO PITBULL', gemeos: 'RYAN E BRYAN', fred: 'FRED' };
   const VNOME = { creuza: 'a Dona Creuza', tonhao: 'o Tonhão do Mototáxi', valdomiro: 'o Seu Valdomiro', kaua: 'o Kauã Influencer', barao: 'o Barão do Café', breno: 'o Breno Pitbull', gemeos: 'os gêmeos Ryan e Bryan', fred: 'o Fred' };
-  const ORDEM = Object.keys(VILOES), REQUER = { t16: 'creuza', t30: 'creuza', t32: 'creuza', t17: 'tonhao', t28: 'tonhao', t33: 'tonhao', t15: 'valdomiro', t29: 'valdomiro', t18: 'kaua', t31: 'kaua', t19: 'barao', t34: 'barao', t22: 'breno', t21: 'gemeos' };
+  const ORDEM = Object.keys(VILOES), REQUER = { t16: 'creuza', t17: 'creuza', t30: 'creuza', t32: 'creuza', t28: 'tonhao', t33: 'tonhao', t15: 'valdomiro', t29: 'valdomiro', t18: 'kaua', t31: 'kaua', t19: 'barao', t34: 'barao', t22: 'breno', t21: 'gemeos' };
   const KEY_V = 'daroca-c2-vencidos'; let vencidos = []; try { const v = JSON.parse(localStorage.getItem(KEY_V) || '[]'); if (Array.isArray(v)) vencidos = v.filter((x) => ORDEM.includes(x)); } catch (e) {}
   const salvarV = () => { try { localStorage.setItem(KEY_V, JSON.stringify(vencidos)); } catch (e) {} };
   const travaC2 = (L) => { const r = REQUER[L.id]; if (!r || vencidos.includes(r)) return { ok: true }; const nome = VILOES[r], txt = `O Seu Zé não leva ninguém pra lá enquanto ${VNOME[r]} ${r === 'gemeos' ? 'estiverem' : 'estiver'} no caminho.`; return { ok: false, motivo: `Derrote ${nome} para liberar.`, trava: { titulo: 'PRECISA DERROTAR', nomes: [nome], texto: txt } }; };

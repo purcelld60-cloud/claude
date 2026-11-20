@@ -1,0 +1,1521 @@
+{
+ "id": "c2_abertura",
+ "titulo": "Campanha 2 · Abertura: o trio",
+ "balao": true,
+ "trilha": "flashback",
+ "descricao": "Flashback do trio, a ligação recusada e a decisão de ir para Conquista.",
+ "cenas": [
+  {
+   "fundo": "preto",
+   "duracao": 4.5,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "entrada",
+     "dur": 1.5
+    }
+   ],
+   "falas": [
+    {
+     "quem": "narrador",
+     "texto": "Tem amizade que a gente jura que vai durar pra sempre."
+    },
+    {
+     "quem": "narrador",
+     "texto": "A minha começou numa sala de aula em Itabuna... com três moleques e nenhum juízo."
+    }
+   ]
+  },
+  {
+   "titulo": "ITABUNA · ALGUNS ANOS ATRÁS",
+   "cenario": "escola",
+   "hora": 9,
+   "duracao": 5,
+   "camera": {
+    "de": {
+     "x": 380,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "para": {
+     "x": 820,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4.8
+   },
+   "atores": [
+    {
+     "quem": "crianca_daroca",
+     "x": 260,
+     "ate": 1000,
+     "tempo": [
+      0.2,
+      4.6
+     ],
+     "anim": "correndo"
+    },
+    {
+     "quem": "crianca_reeis",
+     "x": 190,
+     "ate": 930,
+     "tempo": [
+      0.3,
+      4.7
+     ],
+     "anim": "correndo"
+    },
+    {
+     "quem": "crianca_jorge",
+     "x": 120,
+     "ate": 860,
+     "tempo": [
+      0.4,
+      4.9
+     ],
+     "anim": "correndo"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "entrada",
+     "dur": 1
+    },
+    {
+     "tipo": "cartao",
+     "texto": "ITABUNA",
+     "sub": "ALGUNS ANOS ATRÁS",
+     "t": 0.6,
+     "dur": 3.4
+    }
+   ],
+   "sons": [
+    {
+     "som": "passos",
+     "t": 0.3
+    },
+    {
+     "som": "passos",
+     "t": 1.4
+    },
+    {
+     "som": "risada",
+     "t": 2.2
+    }
+   ]
+  },
+  {
+   "titulo": "A SALA MAIS BARULHENTA DA ESCOLA",
+   "fundo": "sala_aula",
+   "camera": {
+    "de": {
+     "x": 470,
+     "y": 430,
+     "zoom": 1.75
+    },
+    "para": {
+     "x": 500,
+     "y": 430,
+     "zoom": 1.9
+    },
+    "tempo": 7
+   },
+   "atores": [
+    {
+     "quem": "crianca_daroca",
+     "x": 340,
+     "anim": "ataque",
+     "olhando": 1
+    },
+    {
+     "quem": "crianca_reeis",
+     "x": 410,
+     "anim": "pulando"
+    },
+    {
+     "quem": "crianca_jorge",
+     "x": 480,
+     "emocao": "friend",
+     "olhando": -1
+    },
+    {
+     "quem": "almiro",
+     "x": 660,
+     "olhando": -1,
+     "anim": "raiva",
+     "aparece": 1.2
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "texto",
+     "texto": "SILÊNCIO!",
+     "x": 700,
+     "y": 190,
+     "cor": "#ff6a5a",
+     "t": 1.4,
+     "dur": 1.4,
+     "tamanho": 40
+    },
+    {
+     "tipo": "tremer",
+     "t": 1.4,
+     "forca": 6
+    }
+   ],
+   "sons": [
+    {
+     "som": "whoosh",
+     "t": 0.3
+    },
+    {
+     "som": "impacto",
+     "t": 1.4
+    }
+   ],
+   "falas": [
+    {
+     "quem": "almiro",
+     "texto": "VOCÊS TRÊS! DE NOVO?! Quem jogou a bolinha de papel?",
+     "emocao": "taunted"
+    },
+    {
+     "quem": "crianca_reeis",
+     "texto": "Foi o Jorge, professor!"
+    },
+    {
+     "quem": "crianca_jorge",
+     "texto": "Mentira! Foi o Da Roça!"
+    },
+    {
+     "quem": "crianca_daroca",
+     "texto": "...foi a gente, professor. Sempre é a gente."
+    }
+   ]
+  },
+  {
+   "titulo": "CASTIGO EM TRIO",
+   "fundo": "sala_aula",
+   "camera": {
+    "de": {
+     "x": 470,
+     "y": 430,
+     "zoom": 2.0
+    },
+    "para": {
+     "x": 470,
+     "y": 430,
+     "zoom": 2.2
+    },
+    "tempo": 7
+   },
+   "atores": [
+    {
+     "quem": "crianca_daroca",
+     "x": 410,
+     "olhando": -1,
+     "anim": "suor"
+    },
+    {
+     "quem": "crianca_reeis",
+     "x": 470,
+     "olhando": -1,
+     "anim": "suor"
+    },
+    {
+     "quem": "crianca_jorge",
+     "x": 530,
+     "olhando": -1,
+     "anim": "suor"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "texto",
+     "texto": "KKKKK",
+     "x": 480,
+     "y": 200,
+     "cor": "#ffd166",
+     "t": 3,
+     "dur": 1.6,
+     "tamanho": 30
+    }
+   ],
+   "sons": [
+    {
+     "som": "risada",
+     "t": 3
+    }
+   ],
+   "falas": [
+    {
+     "quem": "narrador",
+     "texto": "A gente levava bronca junto. Ficava de castigo junto. Ria do castigo junto."
+    },
+    {
+     "quem": "crianca_jorge",
+     "texto": "Pelo menos o castigo é em trio. Castigo sozinho é que é castigo."
+    },
+    {
+     "quem": "crianca_reeis",
+     "texto": "OOO REEEIS! O trio não tem castigo, tem PAUSA!"
+    }
+   ]
+  },
+  {
+   "titulo": "ALGUNS ANOS DEPOIS",
+   "cenario": "rayssa",
+   "hora": 16.5,
+   "camera": {
+    "de": {
+     "x": 560,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "para": {
+     "x": 620,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "rayssa",
+     "x": 760,
+     "olhando": -1
+    },
+    {
+     "quem": "analaura",
+     "x": 830,
+     "olhando": -1
+    },
+    {
+     "quem": "giselle",
+     "x": 900,
+     "olhando": -1
+    },
+    {
+     "quem": "pre_daroca",
+     "x": 440,
+     "emocao": "friend"
+    },
+    {
+     "quem": "pre_reeis",
+     "x": 520,
+     "anim": "pulando"
+    },
+    {
+     "quem": "pre_jorge",
+     "x": 600,
+     "emocao": "friend"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "letreiro",
+     "texto": "CASA DE RAYSSA",
+     "sub": "ALGUNS ANOS DEPOIS",
+     "t": 0.3,
+     "dur": 3
+    }
+   ],
+   "falas": [
+    {
+     "quem": "rayssa",
+     "texto": "Vocês três de novo? Não se desgrudam nunca, hein?"
+    },
+    {
+     "quem": "pre_reeis",
+     "texto": "OOO REEEIS! É o TRIO, Rayssa. O TRIO!",
+     "emocao": "friend"
+    },
+    {
+     "quem": "pre_jorge",
+     "texto": "Pode chamar quantas amigas quiser. O trio sempre ganha."
+    },
+    {
+     "quem": "analaura",
+     "texto": "Ganha o quê, gente?!"
+    },
+    {
+     "quem": "pre_daroca",
+     "texto": "Ninguém sabe. Mas ganha.",
+     "emocao": "friend"
+    }
+   ]
+  },
+  {
+   "titulo": "O TRIO",
+   "fundo": "preto",
+   "duracao": 4.6,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "foto_trio",
+     "era": "pre",
+     "t": 0,
+     "dur": 99,
+     "legenda": "O TRIO · PRA SEMPRE"
+    }
+   ],
+   "sons": [
+    {
+     "som": "plim",
+     "t": 0.3
+    }
+   ],
+   "falas": [
+    {
+     "quem": "narrador",
+     "texto": "Da Roça, Reeis e Jorge. O Jorge a gente chamava de Gordo. E ele ria junto."
+    }
+   ]
+  },
+  {
+   "titulo": "A MUDANÇA",
+   "fundo": "rodoviaria",
+   "trilha": "saudade",
+   "camera": {
+    "de": {
+     "x": 400,
+     "y": 440,
+     "zoom": 1.55
+    },
+    "para": {
+     "x": 420,
+     "y": 440,
+     "zoom": 1.7
+    },
+    "tempo": 10
+   },
+   "atores": [
+    {
+     "quem": "pre_daroca",
+     "x": 250,
+     "olhando": 1,
+     "emocao": "sad"
+    },
+    {
+     "quem": "pre_reeis",
+     "x": 320,
+     "olhando": 1,
+     "emocao": "sad"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "pre_jorge",
+     "texto": "Meu pai arrumou trabalho em Vitória da Conquista. Eu vou morar lá.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "pre_reeis",
+     "texto": "Conquista?! Lá é longe, Gordo! É frio! Tu vai virar picolé!"
+    },
+    {
+     "quem": "pre_jorge",
+     "texto": "Eu volto, tá? Nas férias eu volto. Juro pelo trio."
+    },
+    {
+     "quem": "pre_daroca",
+     "texto": "...Jura mesmo?",
+     "emocao": "sad"
+    },
+    {
+     "quem": "pre_jorge",
+     "texto": "Juro."
+    }
+   ]
+  },
+  {
+   "titulo": "A MUDANÇA",
+   "fundo": {
+    "nome": "rodoviaria",
+    "parte": 1.0
+   },
+   "duracao": 5.5,
+   "camera": {
+    "de": {
+     "x": 420,
+     "y": 440,
+     "zoom": 1.7
+    },
+    "para": {
+     "x": 330,
+     "y": 440,
+     "zoom": 1.9
+    },
+    "tempo": 5
+   },
+   "atores": [
+    {
+     "quem": "pre_daroca",
+     "x": 250,
+     "olhando": 1,
+     "emocao": "sad",
+     "anim": "chorando"
+    },
+    {
+     "quem": "pre_reeis",
+     "x": 320,
+     "olhando": 1,
+     "emocao": "sad"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "saida",
+     "t": 4.6,
+     "dur": 0.9
+    }
+   ],
+   "sons": [
+    {
+     "som": "buzina",
+     "t": 0.4
+    },
+    {
+     "som": "whoosh",
+     "t": 1.4
+    }
+   ]
+  },
+  {
+   "titulo": "JANEIRO",
+   "cenario": "praca",
+   "hora": 10,
+   "camera": {
+    "de": {
+     "x": 600,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "para": {
+     "x": 620,
+     "y": 420,
+     "zoom": 1.7
+    },
+    "tempo": 5
+   },
+   "atores": [
+    {
+     "quem": "pre_jorge",
+     "x": 760,
+     "ate": 600,
+     "tempo": [
+      0,
+      1.4
+     ],
+     "anim": "correndo"
+    },
+    {
+     "quem": "pre_daroca",
+     "x": 480,
+     "ate": 560,
+     "tempo": [
+      0.4,
+      1.4
+     ],
+     "emocao": "friend"
+    },
+    {
+     "quem": "pre_reeis",
+     "x": 420,
+     "ate": 520,
+     "tempo": [
+      0.5,
+      1.5
+     ],
+     "anim": "pulando"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "cartao",
+     "texto": "JANEIRO",
+     "sub": "ELE VOLTOU",
+     "t": 0,
+     "dur": 2.2
+    },
+    {
+     "tipo": "coracoes"
+    }
+   ],
+   "sons": [
+    {
+     "som": "fanfarra",
+     "t": 1.6
+    }
+   ],
+   "falas": [
+    {
+     "quem": "pre_jorge",
+     "texto": "FALEI QUE VOLTAVA, NÃO FALEI?!",
+     "emocao": "friend"
+    },
+    {
+     "quem": "pre_daroca",
+     "texto": "O TRIO TÁ DE VOLTA!",
+     "emocao": "friend"
+    },
+    {
+     "quem": "pre_reeis",
+     "texto": "OOO REEEEEEIS!!!",
+     "emocao": "friend"
+    }
+   ]
+  },
+  {
+   "titulo": "JULHO",
+   "cenario": "rayssa",
+   "hora": 17.5,
+   "trilha": "tensao",
+   "camera": {
+    "de": {
+     "x": 720,
+     "y": 420,
+     "zoom": 1.7
+    },
+    "para": {
+     "x": 760,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "rayssa",
+     "x": 820,
+     "olhando": -1
+    },
+    {
+     "quem": "analaura",
+     "x": 890,
+     "olhando": -1
+    },
+    {
+     "quem": "pre_jorge",
+     "x": 740,
+     "emocao": "friend",
+     "olhando": 1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "cartao",
+     "texto": "JULHO",
+     "sub": "ELE VOLTOU DE NOVO",
+     "t": 0,
+     "dur": 2.2
+    },
+    {
+     "tipo": "chuva"
+    }
+   ],
+   "sons": [
+    {
+     "som": "trovao",
+     "t": 0.6
+    }
+   ],
+   "falas": [
+    {
+     "quem": "rayssa",
+     "texto": "JORGE! Que saudade! Conquista é frio mesmo?"
+    },
+    {
+     "quem": "pre_jorge",
+     "texto": "Muito! Vim ver vocês, meninas. Só tenho hoje.",
+     "emocao": "friend"
+    }
+   ]
+  },
+  {
+   "titulo": "JULHO",
+   "cenario": "rayssa",
+   "hora": 17.5,
+   "camera": {
+    "de": {
+     "x": 740,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "para": {
+     "x": 330,
+     "y": 420,
+     "zoom": 2
+    },
+    "tempo": 3.2
+   },
+   "atores": [
+    {
+     "quem": "rayssa",
+     "x": 820,
+     "olhando": -1
+    },
+    {
+     "quem": "analaura",
+     "x": 890,
+     "olhando": -1
+    },
+    {
+     "quem": "pre_jorge",
+     "x": 740,
+     "olhando": 1
+    },
+    {
+     "quem": "pre_daroca",
+     "x": 280,
+     "olhando": 1,
+     "emocao": "sad"
+    },
+    {
+     "quem": "pre_reeis",
+     "x": 350,
+     "olhando": 1,
+     "emocao": "sad"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "chuva"
+    },
+    {
+     "tipo": "vinheta",
+     "forca": 0.7
+    }
+   ],
+   "falas": [
+    {
+     "quem": "pre_reeis",
+     "texto": "...Ele passou do lado da gente.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "pre_daroca",
+     "texto": "Nem olhou.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "pre_reeis",
+     "texto": "Nem um \"e aí\".",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "titulo": "JULHO",
+   "cenario": "rayssa",
+   "hora": 17.5,
+   "duracao": 4.2,
+   "camera": {
+    "de": {
+     "x": 320,
+     "y": 420,
+     "zoom": 2
+    },
+    "para": {
+     "x": 320,
+     "y": 420,
+     "zoom": 2.3
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "pre_daroca",
+     "x": 280,
+     "olhando": 1,
+     "emocao": "sad",
+     "anim": "chorando"
+    },
+    {
+     "quem": "pre_reeis",
+     "x": 350,
+     "olhando": 1,
+     "emocao": "sad"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flashback"
+    },
+    {
+     "tipo": "chuva"
+    },
+    {
+     "tipo": "coracao_partido",
+     "t": 0.3,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "coracao",
+     "t": 0.2
+    },
+    {
+     "som": "coracao",
+     "t": 1.1
+    },
+    {
+     "som": "quebra",
+     "t": 1.8
+    }
+   ]
+  },
+  {
+   "titulo": "CADA UM SEGUIU A SUA VIDA",
+   "fundo": "preto",
+   "trilha": "saudade",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "polaroids",
+     "t": 0,
+     "intervalo": 0.55,
+     "fotos": [
+      {
+       "quem": [
+        "lucas",
+        "daroca"
+       ],
+       "legenda": "LUCAS, O SAPO"
+      },
+      {
+       "quem": [
+        "daroca",
+        "caleb"
+       ],
+       "legenda": "O SHAPE DO CALEB"
+      },
+      {
+       "quem": [
+        "mota",
+        "daroca"
+       ],
+       "legenda": "O DASH DO MOTA"
+      },
+      {
+       "quem": [
+        "daroca",
+        "reeis"
+       ],
+       "legenda": "O REI DO CRIME"
+      },
+      {
+       "quem": [
+        "rayssa",
+        "daroca",
+        "analaura"
+       ],
+       "legenda": "AS GAROTAS"
+      },
+      {
+       "quem": [
+        "almiro",
+        "daroca",
+        "miqueias"
+       ],
+       "legenda": "OS PROFESSORES"
+      },
+      {
+       "quem": [
+        "davi",
+        "daroca",
+        "vitor"
+       ],
+       "legenda": "BIGODON"
+      },
+      {
+       "quem": [
+        "daroca",
+        "ollyan"
+       ],
+       "legenda": "O BAILE"
+      }
+     ]
+    }
+   ],
+   "falas": [
+    {
+     "quem": "narrador",
+     "texto": "Cada um seguiu a sua vida."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Eu fiz amigos novos. Vivi uma aventura inteira em Itabuna. Ri muito."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Mas toda foto boa tinha um espaço vazio do lado.",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "titulo": "ODEIO SENTIR SAUDADE",
+   "fundo": "ceu_noite",
+   "camera": {
+    "de": {
+     "x": 470,
+     "y": 440,
+     "zoom": 1.25
+    },
+    "para": {
+     "x": 470,
+     "y": 440,
+     "zoom": 1.45
+    },
+    "tempo": 9
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 360,
+     "olhando": 1,
+     "emocao": "sad"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "pensamento",
+     "x": 380,
+     "y": 330,
+     "t": 0.6,
+     "quem": [
+      "crianca_daroca",
+      "crianca_reeis",
+      "crianca_jorge"
+     ],
+     "andando": true
+    },
+    {
+     "tipo": "vinheta",
+     "forca": 0.6
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Nada é como antes.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Eu odeio sentir saudade de quem esqueceu de mim...",
+     "emocao": "sad"
+    },
+    {
+     "quem": "daroca",
+     "texto": "...e odeio mais ainda não conseguir odiar ele.",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "titulo": "HOJE",
+   "cenario": "roca",
+   "hora": 21.5,
+   "duracao": 2.6,
+   "trilha": null,
+   "camera": {
+    "de": {
+     "x": 600,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "para": {
+     "x": 600,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "tempo": 2.4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 600,
+     "olhando": 1,
+     "anim": "exclama",
+     "aparece": 0
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "estrelas"
+    },
+    {
+     "tipo": "texto",
+     "texto": "BZZZ",
+     "x": 620,
+     "y": 160,
+     "cor": "#e8ecff",
+     "t": 0.4,
+     "dur": 1.6
+    },
+    {
+     "tipo": "zoom_soco",
+     "t": 0.4
+    }
+   ],
+   "sons": [
+    {
+     "som": "vibrar",
+     "t": 0.3
+    }
+   ]
+  },
+  {
+   "titulo": "HOJE",
+   "fundo": {
+    "nome": "celular",
+    "quem": "JORGE",
+    "foto": "jorge_gordo",
+    "estado": "chamando"
+   },
+   "duracao": 3.8,
+   "trilha": "tensao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 260,
+     "zoom": 1.12
+    },
+    "tempo": 3.8
+   },
+   "sons": [
+    {
+     "som": "vibrar",
+     "t": 0
+    },
+    {
+     "som": "toque",
+     "t": 0.2
+    },
+    {
+     "som": "vibrar",
+     "t": 1.2
+    },
+    {
+     "som": "vibrar",
+     "t": 2.4
+    }
+   ]
+  },
+  {
+   "titulo": "HOJE",
+   "cenario": "roca",
+   "hora": 21.5,
+   "duracao": 2.6,
+   "camera": {
+    "de": {
+     "x": 600,
+     "y": 390,
+     "zoom": 2.6
+    },
+    "para": {
+     "x": 600,
+     "y": 380,
+     "zoom": 3.0
+    },
+    "tempo": 2.4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 600,
+     "olhando": 1,
+     "anim": "treme+exclama"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "zoom_soco",
+     "t": 0.1,
+     "forca": 0.3
+    },
+    {
+     "tipo": "batimento",
+     "forca": 0.6
+    },
+    {
+     "tipo": "flash",
+     "t": 0.05
+    }
+   ],
+   "sons": [
+    {
+     "som": "coracao",
+     "t": 0
+    },
+    {
+     "som": "coracao",
+     "t": 0.9
+    },
+    {
+     "som": "coracao",
+     "t": 1.8
+    }
+   ]
+  },
+  {
+   "titulo": "HOJE",
+   "cenario": "roca",
+   "hora": 21.5,
+   "duracao": 3.4,
+   "camera": {
+    "de": {
+     "x": 600,
+     "y": 420,
+     "zoom": 2.4
+    },
+    "para": {
+     "x": 600,
+     "y": 430,
+     "zoom": 2.0
+    },
+    "tempo": 3
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 600,
+     "olhando": 1,
+     "anim": "ajoelhado+treme"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "texto",
+     "texto": "PLAFT",
+     "x": 560,
+     "y": 420,
+     "cor": "#e8ecff",
+     "t": 0.2,
+     "dur": 1,
+     "tamanho": 26
+    },
+    {
+     "tipo": "batimento",
+     "forca": 0.5
+    },
+    {
+     "tipo": "vinheta",
+     "forca": 0.8
+    }
+   ],
+   "sons": [
+    {
+     "som": "impacto",
+     "t": 0.2
+    }
+   ]
+  },
+  {
+   "titulo": "HOJE",
+   "fundo": {
+    "nome": "celular",
+    "quem": "JORGE",
+    "foto": "jorge_gordo",
+    "estado": "perdida"
+   },
+   "duracao": 2.8,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.15
+    },
+    "para": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.15
+    },
+    "tempo": 1
+   }
+  },
+  {
+   "titulo": "HOJE",
+   "fundo": {
+    "nome": "celular",
+    "quem": "JORGE",
+    "foto": "jorge_gordo",
+    "estado": "ligando"
+   },
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.15
+    },
+    "para": {
+     "x": 480,
+     "y": 280,
+     "zoom": 1.25
+    },
+    "tempo": 6
+   },
+   "sons": [
+    {
+     "som": "toque",
+     "t": 0.3
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Atende... Atende, Gordo...",
+     "emocao": "sad"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Por favor.",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "titulo": "VITÓRIA DA CONQUISTA, AO MESMO TEMPO",
+   "fundo": {
+    "nome": "celular",
+    "quem": "DA ROÇA",
+    "foto": "daroca",
+    "estado": "chamando",
+    "lado": "jorge",
+    "fundo": "quarto",
+    "aperta": 2.6
+   },
+   "duracao": 4.4,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.05
+    },
+    "para": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.12
+    },
+    "tempo": 4.4
+   },
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "VITÓRIA DA CONQUISTA",
+     "sub": "AO MESMO TEMPO",
+     "t": 0,
+     "dur": 2.2
+    }
+   ],
+   "sons": [
+    {
+     "som": "vibrar",
+     "t": 0.1
+    },
+    {
+     "som": "vibrar",
+     "t": 1.3
+    },
+    {
+     "som": "desliga",
+     "t": 2.65
+    }
+   ]
+  },
+  {
+   "titulo": "VITÓRIA DA CONQUISTA, AO MESMO TEMPO",
+   "fundo": "quarto_jorge",
+   "camera": {
+    "de": {
+     "x": 500,
+     "y": 430,
+     "zoom": 1.8
+    },
+    "para": {
+     "x": 490,
+     "y": 430,
+     "zoom": 2.0
+    },
+    "tempo": 8
+   },
+   "atores": [
+    {
+     "quem": "jorge_celular",
+     "x": 470,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "vinheta",
+     "forca": 0.6
+    }
+   ],
+   "falas": [
+    {
+     "quem": "jorge",
+     "texto": "Foi sem querer..."
+    },
+    {
+     "quem": "jorge",
+     "texto": "...nem sei mais quem é esse cara."
+    }
+   ]
+  },
+  {
+   "titulo": "VITÓRIA DA CONQUISTA, AO MESMO TEMPO",
+   "fundo": "quarto_jorge",
+   "duracao": 4.6,
+   "camera": {
+    "de": {
+     "x": 490,
+     "y": 430,
+     "zoom": 2.0
+    },
+    "para": {
+     "x": 508,
+     "y": 228,
+     "zoom": 4.4
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "jorge",
+     "x": 470,
+     "olhando": -1,
+     "some": 0.6
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "vinheta",
+     "forca": 0.7
+    }
+   ],
+   "sons": [
+    {
+     "som": "misterio",
+     "t": 1.2
+    }
+   ]
+  },
+  {
+   "titulo": "A DECISÃO",
+   "fundo": {
+    "nome": "celular",
+    "quem": "JORGE",
+    "foto": "jorge_gordo",
+    "estado": "recusada"
+   },
+   "duracao": 3,
+   "trilha": null,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.25
+    },
+    "para": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.3
+    },
+    "tempo": 3
+   },
+   "efeitos": [
+    {
+     "tipo": "pb",
+     "t": 0.6,
+     "dur": 1.6,
+     "forca": 0.8
+    }
+   ],
+   "sons": [
+    {
+     "som": "desliga",
+     "t": 0
+    }
+   ]
+  },
+  {
+   "titulo": "A DECISÃO",
+   "cenario": "roca",
+   "hora": 4.8,
+   "hora_ate": 6.2,
+   "trilha": "saudade",
+   "camera": {
+    "de": {
+     "x": 600,
+     "y": 420,
+     "zoom": 2.2
+    },
+    "para": {
+     "x": 600,
+     "y": 400,
+     "zoom": 1.7
+    },
+    "tempo": 9
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 600,
+     "olhando": 1,
+     "anim": "chama"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "raios"
+    },
+    {
+     "tipo": "folhas"
+    }
+   ],
+   "sons": [
+    {
+     "som": "vento",
+     "t": 0.2
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Sem querer, é?"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Nem sabe mais quem eu sou?"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Então eu vou até Vitória da Conquista."
+    },
+    {
+     "quem": "daroca",
+     "texto": "E você vai ter que olhar na minha cara, Jorge.",
+     "emocao": "taunted"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 7,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "titulo_c2",
+     "t": 0,
+     "dur": 7
+    }
+   ],
+   "sons": [
+    {
+     "som": "vento",
+     "t": 0.1
+    },
+    {
+     "som": "tambor",
+     "t": 1.6
+    },
+    {
+     "som": "sino",
+     "t": 2.4
+    }
+   ]
+  }
+ ]
+}

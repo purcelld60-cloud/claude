@@ -398,7 +398,7 @@
     for (let i = 0; i < 2; i++) { const wx = wrap(i * 1400 - t * 40, 3000) - 200, sx = wx - camL; if (vis(sx, 60)) carroG(c, sx, 267, pick(CORES, i + 3), i ? 'sedan' : 'hatch', i, t); }
     // a fila: do fim até o carro do Cleiton
     const vaos = (window.CampanhaCenarios.layout(id)?.gaps || []).map(([gx, gw]) => [gx / 2 - 4, (gx + gw) / 2 + 4]);
-    for (let k = 1; k < 26; k++) { const x = cx - k * 64 - Math.round(hash(k + id) * 6), sx = x - camL; if (!vis(sx, 70) || vaos.some(([a, b]) => x + 60 > a && x < b)) continue; // ninguém para em cima do buraco const kind = pick(['hatch', 'sedan', 'pickup', 'van', 'hatch'], k * 3 + id), col = pick(CORES, k + id);
+    for (let k = 1; k < 26; k++) { const x = cx - k * 64 - Math.round(hash(k + id) * 6), sx = x - camL; if (!vis(sx, 70) || vaos.some(([a, b]) => x + 60 > a && x < b)) continue; /* ninguém para em cima do buraco */ const kind = pick(['hatch', 'sedan', 'pickup', 'van', 'hatch'], k * 3 + id), col = pick(CORES, k + id);
       const L = carroG(c, sx, y, col, kind, k, t); if (kind !== 'pickup') cabeca(c, sx + (kind === 'sedan' ? 34 : kind === 'van' ? L - 9 : 28), y - 19, pick(SKIN, k), pick(['#2a201a', '#1a1a1a', '#6a4a2a', '#c8a050'], k));
       for (let i = 0; i < 2; i++) { const q = (t * 1.2 + i / 2 + k * .3) % 1; ell(c, sx - 3 - q * 10, y - 6 - q * 6, 1.5 + q * 3, 1 + q * 2, `rgba(200,200,200,${(1 - q) * .4})`); }
       const slot = Math.floor(t / 1.6 + k * 1.7); if (hash(slot * 13 + k) > .82) pxText(c, hash(slot + k) > .5 ? 'BI-BI!' : 'FOM!', sx + L / 2, y - 34, '#f2c94c', { sombra: '#2a2a2a' }); }

@@ -1,0 +1,91 @@
+{
+ "id": "c2_derrota_kaua",
+ "titulo": "Derrota · Kauã Influencer",
+ "balao": true,
+ "descricao": "Depois da luta: uma pista do Jorge e a garrafada liberada.",
+ "cenas": [
+  {
+   "titulo": "SERRA DO PERIPERI",
+   "cenario": "serra",
+   "hora": 17,
+   "trilha": "saudade",
+   "camera": {
+    "de": {
+     "x": 4320,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "para": {
+     "x": 4320,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 4240,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_kaua_influencer",
+     "x": 4400,
+     "olhando": -1,
+     "anim": "suor"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_kaua_influencer",
+     "texto": "Caiu a live... perdi três seguidores.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "c2_kaua_influencer",
+     "texto": "Ó, teu amigo aparece nos stories do Fred toda semana. Na fazenda de café, no shopping, em tudo."
+    },
+    {
+     "quem": "c2_kaua_influencer",
+     "texto": "Mas tem um story que ele apagou rapidinho. Era ele aqui em cima, sozinho, olhando pro lado de Itabuna."
+    },
+    {
+     "quem": "daroca",
+     "texto": "...Ele sente falta.",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 4.8,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "poder",
+     "poder": "flash",
+     "t": 0,
+     "dur": 4.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "poder",
+     "t": 0.2
+    }
+   ]
+  }
+ ]
+}

@@ -158,3 +158,13 @@ Os sons disponíveis são: `sino`, `plim`, `impacto`, `whoosh`, `passos`, `trova
 - JSON não aceita vírgula depois do último item de uma lista, e todo texto precisa de aspas duplas. Um validador on-line de JSON ajuda a achar o erro.
 - Cada roteiro precisa de um `id` diferente. Se o `id` for igual ao de uma cena do jogo sem `"substituir": true`, o roteiro é ignorado e o aviso aparece no console.
 - Os roteiros marcados como vistos ficam no save, no campo `q.roteiros`. Apagar o save faz eles tocarem de novo. Também dá para criar outra aventura.
+
+## Extensões usadas pela Campanha 2
+
+- `"balao": true` no topo do roteiro desenha as falas em balões em cima de quem fala (grito, pensamento, cochicho e narração têm estilos próprios).
+- `"trilha"` no roteiro ou na cena toca uma trilha sintetizada; `null` para.
+- `"fundo"` aceita fundos pintados com opções, por exemplo `{ "nome": "celular", "quem": "JORGE", "estado": "chamando" }`.
+- `"cenario"` aceita as fases da Campanha 2 pelo número (12 em diante) ou pelo nome (`pensao`, `centro`, `serra`, `feira`, `cafe`, `teatro`, `shopping`, `sesi`, `quarto`, `patio_sesi`...).
+- `anim` aceita várias animações juntas com `+`, por exemplo `"treme+chorando"`.
+
+A lista completa de fundos, efeitos, animações e sons está em `docs/CAMPANHA2.md`, no Passo 5.

@@ -1,0 +1,698 @@
+{
+ "id": "c2_final",
+ "titulo": "Campanha 2 · Final feliz",
+ "balao": true,
+ "descricao": "Da Roça estende a mão, Jorge se emociona, o abraço, a ligação com Reeis e o FIM.",
+ "cenas": [
+  {
+   "titulo": "DEPOIS DA BATALHA",
+   "cenario": "centro",
+   "hora": 22,
+   "duracao": 4.5,
+   "trilha": null,
+   "camera": {
+    "de": {
+     "x": 2200,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "para": {
+     "x": 2220,
+     "y": 420,
+     "zoom": 2.0
+    },
+    "tempo": 4.4
+   },
+   "atores": [
+    {
+     "quem": "jorge",
+     "x": 2300,
+     "olhando": -1,
+     "anim": "ajoelhado+treme"
+    },
+    {
+     "quem": "daroca",
+     "x": 2140,
+     "olhando": 1,
+     "anim": "chama+brilho"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "estrelas"
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    },
+    {
+     "tipo": "entrada",
+     "dur": 1.2
+    },
+    {
+     "tipo": "batimento",
+     "forca": 0.4
+    }
+   ],
+   "sons": [
+    {
+     "som": "vento",
+     "t": 0.3
+    }
+   ]
+  },
+  {
+   "titulo": "DEPOIS DA BATALHA",
+   "cenario": "centro",
+   "hora": 22,
+   "duracao": 3.2,
+   "camera": {
+    "de": {
+     "x": 2160,
+     "y": 400,
+     "zoom": 2.4
+    },
+    "para": {
+     "x": 2160,
+     "y": 400,
+     "zoom": 2.9
+    },
+    "tempo": 3
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 2140,
+     "olhando": 1,
+     "anim": "chama+brilho+ataque"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "estrelas"
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    },
+    {
+     "tipo": "texto",
+     "texto": "...",
+     "x": 520,
+     "y": 180,
+     "cor": "#ffffff",
+     "t": 0.8,
+     "dur": 2,
+     "tamanho": 40
+    }
+   ],
+   "sons": [
+    {
+     "som": "misterio",
+     "t": 0.2
+    }
+   ]
+  },
+  {
+   "titulo": "DEPOIS DA BATALHA",
+   "cenario": "centro",
+   "hora": 22,
+   "duracao": 2.6,
+   "trilha": "final",
+   "camera": {
+    "de": {
+     "x": 2220,
+     "y": 420,
+     "zoom": 2.4
+    },
+    "para": {
+     "x": 2220,
+     "y": 420,
+     "zoom": 2.4
+    },
+    "tempo": 1
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 2140,
+     "olhando": 1
+    },
+    {
+     "quem": "jorge",
+     "x": 2300,
+     "olhando": -1,
+     "anim": "ajoelhado"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "estrelas"
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    },
+    {
+     "tipo": "flash",
+     "t": 0
+    }
+   ],
+   "sons": [
+    {
+     "som": "abraco",
+     "t": 0.3
+    }
+   ]
+  },
+  {
+   "titulo": "A MÃO",
+   "cenario": "centro",
+   "hora": 22,
+   "camera": {
+    "de": {
+     "x": 2220,
+     "y": 420,
+     "zoom": 2.2
+    },
+    "para": {
+     "x": 2220,
+     "y": 420,
+     "zoom": 2.5
+    },
+    "tempo": 10
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 2160,
+     "olhando": 1,
+     "anim": "mao",
+     "opcoes": {
+      "pele": "#c68a5e",
+      "manga": "#c8a24a"
+     }
+    },
+    {
+     "quem": "jorge",
+     "x": 2290,
+     "olhando": -1,
+     "anim": "ajoelhado"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "estrelas"
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    },
+    {
+     "tipo": "luz_final"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Levanta, Gordo."
+    },
+    {
+     "quem": "jorge",
+     "texto": "...Você não vai bater?",
+     "emocao": "sad"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Eu vim de Itabuna até aqui de chinelo, no frio de onze graus..."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Apanhei de uma fofoqueira, de um mototaxista, de um barão, de dois gêmeos e de um topetinho..."
+    },
+    {
+     "quem": "daroca",
+     "texto": "...pra te bater?"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Eu vim buscar meu amigo.",
+     "emocao": "friend"
+    }
+   ]
+  },
+  {
+   "titulo": "A MÃO",
+   "cenario": "centro",
+   "hora": 22,
+   "camera": {
+    "de": {
+     "x": 2290,
+     "y": 400,
+     "zoom": 2.6
+    },
+    "para": {
+     "x": 2290,
+     "y": 400,
+     "zoom": 2.9
+    },
+    "tempo": 10
+   },
+   "atores": [
+    {
+     "quem": "jorge",
+     "x": 2290,
+     "olhando": -1,
+     "anim": "ajoelhado+chorando"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "estrelas"
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    },
+    {
+     "tipo": "flash_memoria",
+     "t": 0.4,
+     "dur": 1.2,
+     "quem": [
+      "crianca_daroca",
+      "crianca_reeis",
+      "crianca_jorge"
+     ],
+     "legenda": "O TRIO"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "jorge",
+     "texto": "Eu... eu tive vergonha, Da Roça.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "jorge",
+     "texto": "Cheguei aqui sozinho. Escola nova, cidade fria, ninguém sabia meu nome.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "jorge",
+     "texto": "Aí eu fiz amigo novo, e achei que se eu olhasse pra trás ia doer demais.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "jorge",
+     "texto": "Então eu fingi que não doía. Fingi que não conhecia vocês.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "daroca",
+     "texto": "E doeu do mesmo jeito, né?"
+    },
+    {
+     "quem": "jorge",
+     "texto": "...Todo dia.",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "titulo": "O ABRAÇO",
+   "cenario": "centro",
+   "hora": 22,
+   "duracao": 7,
+   "camera": {
+    "de": {
+     "x": 2230,
+     "y": 420,
+     "zoom": 2.3
+    },
+    "para": {
+     "x": 2230,
+     "y": 410,
+     "zoom": 2.7
+    },
+    "tempo": 6.8
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 2205,
+     "olhando": 1,
+     "emocao": "friend",
+     "camada": 1
+    },
+    {
+     "quem": "jorge",
+     "x": 2245,
+     "olhando": -1,
+     "anim": "chorando",
+     "emocao": "friend"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "estrelas"
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    },
+    {
+     "tipo": "luz_final"
+    },
+    {
+     "tipo": "coracoes"
+    },
+    {
+     "tipo": "flash_memoria",
+     "t": 1.6,
+     "dur": 1.2,
+     "quem": [
+      "pre_daroca",
+      "pre_reeis",
+      "pre_jorge"
+     ],
+     "legenda": "JANEIRO"
+    },
+    {
+     "tipo": "flash_memoria",
+     "t": 3.6,
+     "dur": 1.2,
+     "quem": [
+      "crianca_daroca",
+      "crianca_reeis",
+      "crianca_jorge"
+     ],
+     "legenda": "O CASTIGO EM TRIO"
+    }
+   ],
+   "sons": [
+    {
+     "som": "abraco",
+     "t": 0.2
+    },
+    {
+     "som": "plim",
+     "t": 1.6
+    },
+    {
+     "som": "plim",
+     "t": 3.6
+    }
+   ]
+  },
+  {
+   "titulo": "O ABRAÇO",
+   "cenario": "centro",
+   "hora": 22,
+   "camera": {
+    "de": {
+     "x": 2280,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "para": {
+     "x": 2300,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "tempo": 8
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 2205,
+     "olhando": 1,
+     "emocao": "friend"
+    },
+    {
+     "quem": "jorge",
+     "x": 2245,
+     "olhando": -1,
+     "emocao": "friend"
+    },
+    {
+     "quem": "fred_conquista",
+     "x": 2420,
+     "olhando": -1,
+     "ate": 2360,
+     "tempo": [
+      0.5,
+      2
+     ]
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "noite"
+    },
+    {
+     "tipo": "estrelas"
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    },
+    {
+     "tipo": "luz_final"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "fred_conquista",
+     "texto": "...Ô, Itabuna."
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "Ele é seu amigo também. Dá pra dividir. A gente ensina o toque secreto pra você."
+    },
+    {
+     "quem": "jorge",
+     "texto": "Topete, topete...",
+     "emocao": "friend"
+    },
+    {
+     "quem": "daroca",
+     "texto": "...BISCOITO!",
+     "emocao": "friend"
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "Kkkkk ele aprende rápido."
+    }
+   ]
+  },
+  {
+   "titulo": "UMA LIGAÇÃO",
+   "fundo": {
+    "nome": "celular",
+    "estado": "video",
+    "foto": "reeis",
+    "quem": "REEIS",
+    "eu": "jorge",
+    "emocao": "friend"
+   },
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.08
+    },
+    "para": {
+     "x": 480,
+     "y": 300,
+     "zoom": 1.15
+    },
+    "tempo": 10
+   },
+   "sons": [
+    {
+     "som": "toque",
+     "t": 0.1
+    }
+   ],
+   "falas": [
+    {
+     "quem": "reeis",
+     "texto": "OOO REEEEEEIS! E aí, Da Roça, achou o Gordo?!",
+     "emocao": "friend"
+    },
+    {
+     "quem": "jorge",
+     "texto": "...Oi, Reeis."
+    },
+    {
+     "quem": "reeis",
+     "texto": "GORDOOOO! Seu traíra! Seu sumido! Seu... ai, saudade, mano.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "jorge",
+     "texto": "Desculpa, Reeis. Desculpa mesmo."
+    },
+    {
+     "quem": "reeis",
+     "texto": "Desculpa nada. Nas férias tu vem pra Itabuna. Tem bolo, tem resenha e tem castigo em trio.",
+     "emocao": "friend"
+    },
+    {
+     "quem": "reeis",
+     "texto": "O TRIO VOLTOU! OOO REEEEIS!",
+     "emocao": "friend"
+    }
+   ]
+  },
+  {
+   "titulo": "O TRIO",
+   "fundo": "preto",
+   "duracao": 6.5,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "foto_trio",
+     "era": "crianca",
+     "t": 0,
+     "dur": 2.2,
+     "giro": -0.08
+    },
+    {
+     "tipo": "foto_trio",
+     "era": "pre",
+     "t": 2.1,
+     "dur": 2.2,
+     "giro": 0.05
+    },
+    {
+     "tipo": "foto_trio",
+     "era": "agora",
+     "t": 4.2,
+     "dur": 99,
+     "giro": -0.03,
+     "legenda": "O TRIO · DE NOVO"
+    }
+   ],
+   "sons": [
+    {
+     "som": "plim",
+     "t": 0.2
+    },
+    {
+     "som": "plim",
+     "t": 2.3
+    },
+    {
+     "som": "fanfarra",
+     "t": 4.4
+    }
+   ]
+  },
+  {
+   "titulo": "O TRIO",
+   "fundo": "preto",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "foto_trio",
+     "era": "agora",
+     "t": -1,
+     "dur": 99,
+     "giro": -0.03,
+     "legenda": "O TRIO · DE NOVO"
+    },
+    {
+     "tipo": "luz_final"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "narrador",
+     "texto": "Tem amizade que a gente jura que vai durar pra sempre."
+    },
+    {
+     "quem": "narrador",
+     "texto": "Às vezes ela some. Às vezes ela esfria. Às vezes ela muda de cidade."
+    },
+    {
+     "quem": "narrador",
+     "texto": "Mas amizade de verdade não acaba. Ela só espera alguém ter coragem de buscar."
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 9,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "fim",
+     "t": 0,
+     "sub": "O TRIO VOLTOU."
+    }
+   ],
+   "sons": [
+    {
+     "som": "sino",
+     "t": 1
+    },
+    {
+     "som": "abraco",
+     "t": 2.4
+    }
+   ]
+  }
+ ]
+}

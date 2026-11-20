@@ -1,0 +1,85 @@
+{
+ "id": "c2_derrota_valdomiro",
+ "titulo": "Derrota · Seu Valdomiro",
+ "balao": true,
+ "descricao": "Depois da luta: uma pista do Jorge e a garrafada liberada.",
+ "cenas": [
+  {
+   "titulo": "FEIRA DO PLANALTO",
+   "cenario": "feira",
+   "hora": 9.5,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 1500,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "para": {
+     "x": 1500,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1420,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_valdomiro",
+     "x": 1580,
+     "olhando": -1,
+     "anim": "suor"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_valdomiro",
+     "texto": "Toma. Um quilo. Por conta da casa. E não conta pra ninguém que eu perdi."
+    },
+    {
+     "quem": "c2_valdomiro",
+     "texto": "Esse teu amigo de Itabuna... ele compra biscoito e fica olhando pro Cristo lá na serra."
+    },
+    {
+     "quem": "c2_valdomiro",
+     "texto": "Com uma cara de saudade que dá dó. Vai lá em cima. O tal do Kauã vive filmando ele."
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 4.8,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "poder",
+     "poder": "biscoito",
+     "t": 0,
+     "dur": 4.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "poder",
+     "t": 0.2
+    }
+   ]
+  }
+ ]
+}

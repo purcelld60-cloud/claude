@@ -1,0 +1,120 @@
+{
+ "id": "c2_vilao_valdomiro",
+ "titulo": "Vilão · Seu Valdomiro",
+ "balao": true,
+ "descricao": "Entrada do vilão.",
+ "cenas": [
+  {
+   "titulo": "FEIRA DO PLANALTO",
+   "cenario": "feira",
+   "hora": 9,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 1300,
+     "y": 400,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 1500,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1360,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_valdomiro",
+     "x": 1620,
+     "olhando": -1
+    },
+    {
+     "quem": "c2m_neide",
+     "x": 1720,
+     "olhando": -1
+    },
+    {
+     "quem": "c2m_toninho",
+     "x": 1180,
+     "olhando": 1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "FEIRA DO PLANALTO",
+     "sub": "BISCOITO DE GOMA",
+     "t": 0.2,
+     "dur": 3
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Moço, me vê um biscoito de goma?"
+    },
+    {
+     "quem": "c2_valdomiro",
+     "texto": "UM?! Um biscoito?! Nessa feira se compra no QUILO!"
+    },
+    {
+     "quem": "c2_valdomiro",
+     "texto": "E ninguém compra nada aqui sem a bênção do Valdomiro. Eu sou o chefão dessa feira desde mil novecentos e—"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Eu só queria um biscoito...",
+     "emocao": "embarrassed"
+    },
+    {
+     "quem": "c2_valdomiro",
+     "texto": "Então vai ter que merecer! Polvilho na cara!",
+     "emocao": "taunted"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 3.6,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "vs",
+     "vilao": "c2_valdomiro",
+     "nome": "SEU VALDOMIRO",
+     "titulo": "O CHEFÃO DA FEIRA",
+     "cor": "#e9d6a8",
+     "t": 0,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vs",
+     "t": 0.35
+    },
+    {
+     "som": "tambor",
+     "t": 1.2
+    }
+   ]
+  }
+ ]
+}

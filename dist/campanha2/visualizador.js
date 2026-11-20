@@ -27,7 +27,7 @@
   top.append(btn('◀ CENÁRIO', () => go(-1)), title, btn('CENÁRIO ▶', () => go(1)));
   bot.append(btn('◀', null, 'left'), btn('▶', null, 'right'), btn('PULAR', null, 'jump'), btn('BATER', null, 'hit'));
   HOURS.forEach(([n], i) => bot.append(btn(n, () => { hour = i; })));
-  bot.append(btn('TREINO (P)', () => alternarTreino()), btn('MURAL', () => window.CampanhaPoderes?.abrirMural?.({ teste: true })), btn('FECHAR', close));
+  bot.append(btn('TREINO (P)', () => alternarTreino()), btn('MURAL', () => window.CampanhaPoderes?.abrirMural?.({ teste: true })), btn('CUTSCENES', () => window.CampanhaCutscenes?.galeria?.()), btn('FECHAR', close));
   function alternarTreino() { const TR = window.CampanhaTreino; if (!TR) return; if (!box.querySelector('.c2-treino-wrap')) TR.montarBarra(box.querySelector('.c2-tela'), (id, down) => { if (TR.acao(id, down, P)) return; if (id === 'jump') { if (down) { keys.add('jump'); jump(); } else keys.delete('jump'); } if (id === 'interact' && down) usar(); }); TR.ligar(undefined, P); }
   const idxOf = (id) => Math.max(0, L.findIndex((d) => d.id === id));
   function go(d) { idx = (idx + d + L.length) % L.length; P.x = 300; P.y = FLOOR; P.vy = 0; cam = 0; viagem = null; if (L[idx].noite) hour = 3; }
@@ -36,7 +36,7 @@
   function jump() { if (P.ground && !viagem) { P.vy = -620; P.ground = false; } }
   function hit() { if (atkT <= 0 && !viagem) atkT = .32; }
   // usar a passagem mais perto: porta (escurece e troca), escada rolante (sobe/desce andando sozinho) ou computador
-  const cobre = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.() || window.Mapa3D?.aberto?.() || window.CampanhaLoja?.aberta?.()); // telas que cobrem o visualizador
+  const cobre = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.() || window.Mapa3D?.aberto?.() || window.CampanhaLoja?.aberta?.() || window.CampanhaCutscenes?.aberta?.()); // telas que cobrem o visualizador
   const ocupado = () => cobre() || !!window.CampanhaMoradores?.aberto?.(); // e a conversa, que só pausa o controle // Fliperama ou armário abertos por cima
   function usar() {
     if (viagem || !perto) return; const p = perto;

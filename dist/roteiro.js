@@ -32,6 +32,11 @@
     freddy: 'Freddy', nicolas: 'Nicolas Carvalho', dede: 'Dedé', aica: 'Aica', ravile: 'Ravile', arthur: 'Arthur', allef: 'Allef', eloisa: 'Eloisa',
     giselle: 'Giselle', rayssa: 'Rayssa', analaura: 'Ana Laura', igor: 'Igor', kaique: 'Kaique', ollyan: 'Ollyan', giant: 'Colosso Six Seven', narrador: 'Narrador'
   };
+  // Extensões (a Campanha 2 usa): mais cenários e nomes, fundos pintados, efeitos, animações extras, sons e ganchos por quadro.
+  const EXT = { cenarios: {}, nomes: {}, fundos: {}, efeitos: {}, anims: {}, sons: {}, ganchos: [] };
+  function estender(o = {}) { for (const k of ['cenarios', 'nomes', 'fundos', 'efeitos', 'anims', 'sons']) if (o[k] && typeof o[k] === 'object') Object.assign(EXT[k], o[k]); if (o.gancho) EXT.ganchos.push(o.gancho); }
+  const sceneOk = (n) => Number.isInteger(n) && n >= 0 && (n <= 11 || (n <= 99 && (window.CampanhaCenarios?.largura?.(n) > 0 || window.CampanhaCenarios?.layout?.(n))));
+  const bgName = (bg) => (bg && typeof bg === 'object' ? String(bg.nome || '') : bg ? String(bg) : '');
   const scripts = Object.create(null);
   let ready = false;
 
@@ -50,8 +55,10 @@
     raw.cenas.forEach((c, i) => {
       if (!c || typeof c !== 'object') throw new Error('a cena ' + (i + 1) + ' não é um objeto');
       let scene = c.cenario ?? shots[i - 1]?.scene ?? 0;
-      if (typeof scene === 'string') scene = SCENES[scene.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')] ?? Number(scene);
-      if (!Number.isInteger(scene) || scene < 0 || scene > 11) throw new Error('cena ' + (i + 1) + ': "cenario" inválido (use 0 a 11 ou um nome como "praca")');
+      if (typeof scene === 'string') { const key = scene.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); scene = SCENES[key] ?? EXT.cenarios[key] ?? Number(scene); }
+      const pintado = !!EXT.fundos[bgName(c.fundo)];
+      if (!pintado && !sceneOk(scene)) throw new Error('cena ' + (i + 1) + ': "cenario" inválido (use 0 a 11, um nome como "praca" ou uma fase da Campanha 2)');
+      if (pintado && !sceneOk(scene)) scene = 0;
       const cam = c.camera || {}, from = camPoint(cam.de || cam, shots[i - 1]?.camTo), to = camPoint(cam.para || cam.de || cam, from);
       const actors = (Array.isArray(c.atores) ? c.atores : []).map((a, k) => {
         const type = String(a.quem || a.tipo || '');
@@ -65,7 +72,7 @@
       const sounds = (Array.isArray(c.sons) ? c.sons : []).map((s) => (typeof s === 'string' ? { som: s, t: 0 } : { som: s.som, t: num(s.t, 0) })).filter((s) => s.som);
       const shot = Object.freeze({ index: i, scene, title: String(c.titulo || raw.titulo || ''), hour: c.hora === undefined ? null : num(c.hora, null), hourTo: c.hora_ate === undefined ? null : num(c.hora_ate, null), camFrom: from, camTo: to,
         camTime: Math.max(.1, num(cam.tempo, num(c.duracao, 4))), camCurve: cam.curva === 'linear' ? 'linear' : 'suave', duration: Math.max(.3, num(c.duracao, 3.5)), actors, fx, sounds,
-        bg: c.fundo || null });
+        bg: c.fundo || null, raw: c });
       shots.push(shot);
       const lines = Array.isArray(c.falas) ? c.falas : [];
       if (!lines.length) beats.push({ shot: i, title: shot.title, speaker: '', who: '', text: '', duration: shot.duration, first: true });
@@ -73,15 +80,15 @@
         if (!f || typeof f !== 'object') throw new Error('cena ' + (i + 1) + ': fala ' + (k + 1) + ' não é um objeto');
         const who = String(f.quem || 'narrador'), text = String(f.texto || '');
         if (!text) throw new Error('cena ' + (i + 1) + ': fala ' + (k + 1) + ' sem "texto"');
-        beats.push({ shot: i, title: String(f.titulo || shot.title), who, speaker: String(f.nome || NAMES[who] || who), text, portrait: f.retrato !== false && who !== 'narrador' && who !== 'nenhum',
+        beats.push({ shot: i, title: String(f.titulo || shot.title), who, speaker: String(f.nome || NAMES[who] || EXT.nomes[who] || who), text, portrait: f.retrato !== false && who !== 'narrador' && who !== 'nenhum',
           emotion: f.emocao, duration: num(f.duracao, Math.round(clamp(text.length / 19 + 1.35, 3, 9) * 100) / 100), first: k === 0 });
       });
     });
     let start = 0;
     for (const b of beats) { b.start = start; start += b.duration; }
     const music = Array.isArray(raw.musica) ? raw.musica.map(String) : raw.musica ? [String(raw.musica)] : [];
-    return Object.freeze({ id, file, title: String(raw.titulo || id), before: raw.antes ? String(raw.antes) : null, after: raw.depois ? String(raw.depois) : null,
-      arrival: raw.chegada === undefined ? null : Number(raw.chegada), once: !!raw.uma_vez, replace: !!raw.substituir, auto: !!raw.automatico, music,
+    return Object.freeze({ id, file, raw, title: String(raw.titulo || id), before: raw.antes ? String(raw.antes) : null, after: raw.depois ? String(raw.depois) : null,
+      arrival: raw.chegada === undefined ? null : Number(raw.chegada), balao: !!raw.balao, once: !!raw.uma_vez, replace: !!raw.substituir, auto: !!raw.automatico, music,
       shots: Object.freeze(shots), beats: Object.freeze(beats.map((b) => Object.freeze(b))), duration: Math.round(start * 100) / 100 });
   }
   function register(raw, file) {
@@ -111,7 +118,7 @@
   /* ---------- sons sintetizados (sem arquivos) ---------- */
   let actx = null;
   function sfx(name) {
-    if (window.Game?.soundOn && !window.Game.soundOn()) return;
+    if (window.Game?.soundOn && !window.Game.soundOn() && !window.__somCutscene) return;
     try {
       actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume();
       const now = actx.currentTime, out = actx.createGain(); out.gain.value = .05 * (window.DarocaAudio?.sfx?.() ?? 1); out.connect(actx.destination);
@@ -130,7 +137,7 @@
         case 'fanfarra': [523, 659, 784, 1046].forEach((f, i) => tone(f, f, .3, 'square', i * .14)); break;
         case 'misterio': tone(220, 200, 1.2, 'triangle'); tone(233, 210, 1.2, 'triangle', .1); break;
         case 'risada': for (let i = 0; i < 4; i++) tone(500 - i * 40, 420 - i * 40, .1, 'square', i * .13); break;
-        default: tone(660, 600, .15, 'square');
+        default: if (EXT.sons[name]) EXT.sons[name]({ tone, noise, actx, out, now }); else tone(660, 600, .15, 'square');
       }
     } catch (e) {}
   }
@@ -220,15 +227,17 @@
     const x = a.to === null ? a.x : lerp(a.x, a.to, clamp(k, 0, 1));
     let y = a.y - (moving && a.jump ? Math.sin(clamp(k, 0, 1) * Math.PI) * a.jump : 0);
     const o = { facing: a.facing ?? (a.to !== null && a.to < a.x ? -1 : 1), frame: t, scale: a.scale, grounded: !(moving && a.jump), moving, emotion: a.emotion, ...a.opts };
+    const anims = a.anim.split('+'); a = { ...a, anim: anims.find((n) => ['pulando', 'andando', 'correndo', 'ataque', 'tremendo', 'voando'].includes(n)) || '' };
     if (a.anim === 'pulando') { y -= Math.abs(Math.sin(t * 5)) * 18; o.grounded = false; o.vy = Math.cos(t * 5) > 0 ? -100 : 100; }
     if (a.anim === 'andando' || a.anim === 'correndo') { o.moving = true; if (a.anim === 'correndo') o.frame = t * 1.8; }
     if (a.anim === 'ataque') { o.attack = true; o.attackProgress = (t * 1.4) % 1; }
     if (a.anim === 'tremendo') o.hit = Math.sin(t * 40) > 0;
     if (a.anim === 'voando') { y -= 40 + Math.sin(t * 2) * 8; o.flight = true; o.grounded = false; }
+    if (anims.includes('tremendo') && a.anim !== 'tremendo') o.hit = Math.sin(t * 40) > 0;
     if (speaking && !o.moving && o.grounded !== false) y -= Math.abs(Math.sin(t * 9)) * 2;
     let alpha = 1; if (a.appear >= 0) alpha = clamp((t - a.appear) / .35, 0, 1); if (t > a.vanish) alpha = Math.min(alpha, clamp(1 - (t - a.vanish) / .35, 0, 1));
     if (alpha < 1) o.opacity = alpha;
-    return { x, y, o, visible: alpha > 0 };
+    return { x, y, o, visible: alpha > 0, extras: anims.filter((n) => EXT.anims[n]), alpha };
   }
   function fxWindow(e, t, def) { const t0 = num(e.t, 0), d = num(e.dur, def); return { on: t >= t0 && t <= t0 + d, k: clamp((t - t0) / d, 0, 1), t0, d }; }
   function drawWorld(c, sc, shot, s, t, b) {
@@ -238,7 +247,9 @@
     for (const e of shot.fx) if (e.tipo === 'zoom_soco') { const t0 = num(e.t, 0); if (t >= t0) zoom += num(e.forca, .18) * Math.exp(-(t - t0) * 7) * (t - t0 < .05 ? (t - t0) / .05 : 1); }
     const camX = Math.round(cam.x - W / 2);
     w.save(); w.imageSmoothingEnabled = false; w.clearRect(0, 0, W, H);
-    if (shot.bg === 'preto') { w.fillStyle = '#0b0d10'; w.fillRect(0, 0, W, H); }
+    const pintor = EXT.fundos[bgName(shot.bg)];
+    if (pintor) { w.save(); w.translate(-camX, 0); try { pintor(w, { t, tt: s.elapsed, shot, s, p: typeof shot.bg === 'object' ? shot.bg : {}, cam, W, H, ajuda }); } catch (e) { w.fillStyle = '#0b0d10'; w.fillRect(camX, 0, W, H); } w.restore(); }
+    else if (shot.bg === 'preto') { w.fillStyle = '#0b0d10'; w.fillRect(0, 0, W, H); }
     else if (window.Art?.drawScene) window.Art.drawScene(w, shot.scene, camX, s.elapsed);
     else { w.fillStyle = '#8ec7e1'; w.fillRect(0, 0, W, H); }
     const list = shot.actors.map((a, i) => ({ a, i, p: actorAt(a, t, b.who === a.type) })).filter((r) => r.p.visible).sort((p, q) => p.a.z - q.a.z || p.p.y - q.p.y || p.i - q.i);
@@ -252,10 +263,15 @@
           const vf = r.p.o.facing < 0 ? -1 : 1, bob = r.p.o.moving ? Math.round(Math.sin(t * 18)) : 0;
           w.save(); w.translate(Math.round(sx), 0); w.scale(vf, 1); window.Art.drawVehicle(w, 0, r.p.y + bob, t); w.restore();
           window.Art.drawCharacter(w, 'daroca', sx + 4 * vf, r.p.y - 22 + bob, { ...r.p.o, moving: false, scale: .8 * r.a.scale });
-        } else window.Art?.drawCharacter?.(w, r.a.type, sx, r.p.y, r.p.o);
+        } else {
+          const ctx = { x: sx, y: r.p.y, t, a: r.a, o: r.p.o, alpha: r.p.alpha, head: headBox(r.a.type), ajuda };
+          for (const n of r.p.extras) EXT.anims[n].antes?.(w, ctx);
+          window.Art?.drawCharacter?.(w, r.a.type, sx, r.p.y, r.p.o);
+          for (const n of r.p.extras.slice().reverse()) EXT.anims[n].depois?.(w, ctx);
+        }
       } catch (e) {}
     }
-    if (shot.bg !== 'preto' && window.HdScene?.drawAmbient && OUTDOOR.includes(shot.scene)) { try { window.HdScene.drawAmbient(w, s.elapsed, W / 2, FLOOR - 40, shot.scene); } catch (e) {} }
+    if (!pintor && shot.bg !== 'preto' && window.HdScene?.drawAmbient && OUTDOOR.includes(shot.scene)) { try { window.HdScene.drawAmbient(w, s.elapsed, W / 2, FLOOR - 40, shot.scene); } catch (e) {} }
     w.restore();
     // câmera: recorte com zoom, mantendo a linha cam.y parada na tela
     let shake = 0;
@@ -297,6 +313,7 @@
       else if (tipo === 'texto') { const f = fxWindow(e, t, 1.2); if (f.on) { const pop = 1 + Math.max(0, .35 - (t - f.t0)) * 1.4; c.save(); c.translate(num(e.x, 480), num(e.y, 200)); c.scale(pop, pop); c.rotate(num(e.giro, -.06)); c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `bold ${num(e.tamanho, 34)}px Pixel, monospace`; c.globalAlpha = Math.min(1, (f.t0 + f.d - t) / .25); c.fillStyle = '#1b130c'; c.fillText(String(e.texto || ''), 4, 4); c.fillStyle = e.cor || '#ffd166'; c.fillText(String(e.texto || ''), 0, 0); c.restore(); } }
       else if (tipo === 'flash') { const f = fxWindow(e, t, .35); if (f.on) { c.fillStyle = `rgba(${e.cor === 'vermelho' ? '255,80,60' : '255,250,235'},${(1 - f.k) * .85})`; c.fillRect(0, 0, W, H); } }
       else if (tipo === 'entrada') { const d = num(e.dur, .9), t0 = num(e.t, 0); if (t < t0 + d) { c.fillStyle = `rgba(8,8,10,${t < t0 ? 1 : 1 - (t - t0) / d})`; c.fillRect(0, 0, W, H); } }
+      else if (EXT.efeitos[tipo]) { try { EXT.efeitos[tipo](c, e, t, { shot, s, W, H, win: (d) => fxWindow(e, t, d), num, P, card, ease, clamp, lerp, hash, ajuda }); } catch (err) {} }
       else if (tipo === 'saida') { const t0 = num(e.t, Math.max(0, shot.duration - .9)), d = num(e.dur, .9); if (t >= t0) { c.fillStyle = `rgba(8,8,10,${clamp((t - t0) / d, 0, 1)})`; c.fillRect(0, 0, W, H); } }
     }
   }
@@ -309,9 +326,11 @@
     c.save(); c.clearRect(0, 0, W, H);
     drawWorld(c, sc, shot, s, t, b);
     drawFx(c, shot, t, s);
+    for (const g of EXT.ganchos) { try { g.quadro?.(s, sc, shot, t); } catch (e) {} }
     // trilhos de cinema finos, como nas outras cenas
     c.fillStyle = '#10241ff0'; c.fillRect(0, 0, W, 24); c.fillStyle = '#10241fe0'; c.fillRect(0, H - 20, W, 20);
     if (b.first && s.time < .25 && !shot.fx.some((e) => e.tipo === 'entrada')) { c.fillStyle = `rgba(13,29,24,${(1 - s.time / .25) * .6})`; c.fillRect(0, 24, W, H - 44); }
+    if (sc.balao && b.text) { try { balao(c, s, sc, shot, b, t); } catch (e) {} }
     c.restore();
     if (!s.preview) syncOverlay(s, b);
   }
@@ -330,11 +349,66 @@
     return { x: left ? clamp(x + 150, 290, 600) : clamp(x - 150, 360, 670), y: 52, width: 500, speakerX: x, speakerY: y, tail: left ? 'left' : 'right' };
   }
 
+  /* ---------- balão de fala desenhado em cima de quem fala ("balao": true no roteiro) ---------- */
+  const CORES_NOME = { daroca: '#b8862a', reeis: '#2f7a46', jorge: '#6a4a98', jorge_gordo: '#6a4a98', jorge_celular: '#6a4a98', miguel: '#2c6ab8', fred_conquista: '#b8902a', narrador: '#5a4a3a' };
+  const corNome = (who) => CORES_NOME[who] || CORES_NOME[String(who).replace(/^(crianca|pre)_/, '')] || ['#a8443a', '#3c6a8a', '#7a4a8a', '#3c7a5a', '#a8642a', '#5a5aa8'][Math.floor(hash(String(who).length * 7.3 + String(who).charCodeAt(0)) * 6)];
+  function falante(sc, shot, b, t) {
+    const alias = { jorge: ['jorge', 'jorge_celular', 'jorge_gordo'], daroca: ['daroca', 'carro'] }, nomes = alias[b.who] || [b.who];
+    const a = shot.actors.find((x) => nomes.includes(x.type)) || shot.actors.find((x) => x.type.replace(/^(crianca|pre)_/, '') === b.who.replace(/^(crianca|pre)_/, ''));
+    if (!a) return null; const p = actorAt(a, t, true); if (!p.visible) return null;
+    const cam = camAt(shot, t), camX = Math.round(cam.x - W / 2), z = cam.zoom, fy = clamp(cam.y, 0, H); let sx = (W - W / z) / 2, sy = fy - fy / z;
+    sx = clamp(sx, Math.min(0, W - W / z), Math.max(0, W - W / z)); sy = clamp(sy, Math.min(0, H - H / z), Math.max(0, H - H / z));
+    const hb = headBox(a.type), alto = (220 - hb.top) * (a.scale || 1), x = (p.x - camX - sx) * z, cabeca = (p.y - alto - sy) * z, boca = (p.y - alto * .72 - sy) * z;
+    return { x, cabeca, boca, fora: x < -20 || x > W + 20 || cabeca > H };
+  }
+  function linhas(c, txt, max) { const out = []; let l = ''; for (const w2 of txt.split(' ')) { const tst = l ? l + ' ' + w2 : w2; if (c.measureText(tst).width > max && l) { out.push(l); l = w2; } else l = tst; } if (l) out.push(l); return out; }
+  function balao(c, s, sc, shot, b, t) {
+    const n = Math.min(b.text.length, Math.floor(s.typed)), texto = b.text.slice(0, n), cheio = b.text;
+    const letras = cheio.replace(/[^A-Za-zÀ-ú]/g, ''), grito = (letras.length > 3 && letras === letras.toUpperCase()) || /!!|\?!|!\?/.test(cheio), pensa = /^\(.*\)$/.test(cheio.trim()), cochicho = /^\.\.\.?$|^…$/.test(cheio.trim()) || cheio.trim() === '...';
+    c.save(); c.imageSmoothingEnabled = false; c.textAlign = 'left'; c.textBaseline = 'alphabetic';
+    const tam = grito ? 18 : 16; c.font = `${grito ? 'bold ' : ''}${tam}px Space, Arial, sans-serif`;
+    if (b.who === 'narrador' || b.who === 'nenhum') { // legenda de narração, estilo quadrinho
+      const ls = linhas(c, cheio, 560), bw = Math.min(600, Math.max(...ls.map((l) => c.measureText(l).width)) + 36), bh = ls.length * 22 + 26, bx = 24, by = 34;
+      c.fillStyle = 'rgba(0,0,0,.35)'; c.fillRect(bx + 4, by + 4, bw, bh); c.fillStyle = '#2a1a10'; c.fillRect(bx - 3, by - 3, bw + 6, bh + 6); c.fillStyle = '#f2dc9a'; c.fillRect(bx, by, bw, bh); c.fillStyle = '#e2c47a'; c.fillRect(bx, by + bh - 4, bw, 4);
+      if (b.speaker && b.speaker !== 'Narrador') { c.font = '10px Pixel, monospace'; c.fillStyle = '#7a4a2a'; c.fillText(b.speaker.toUpperCase(), bx + 14, by + 16); }
+      c.font = `${tam}px Space, Arial, sans-serif`; c.fillStyle = '#3a2412'; c.textBaseline = 'top'; linhas(c, texto, 560).forEach((l, i) => c.fillText(l, bx + 18, by + 13 + (b.speaker && b.speaker !== 'Narrador' ? 8 : 0) + i * 22)); c.restore(); return;
+    }
+    const pos = falante(sc, shot, b, t), max = grito ? 330 : 300, ls = linhas(c, cheio, max), lw = Math.max(80, ...ls.map((l) => c.measureText(l).width)), bw = Math.round(lw + 32), bh = Math.round(ls.length * (tam + 6) + 26);
+    let bx, by, tx, ty, lado = 'baixo';
+    if (pos && !pos.fora) { tx = clamp(pos.x, 10, W - 10); ty = clamp(pos.boca, 40, H - 30); bx = clamp(pos.x - bw / 2 + (pos.x < W / 2 ? 40 : -40), 14, W - bw - 14); by = Math.round(pos.cabeca - 30 - bh);
+      if (by < 30) { by = clamp(Math.round(pos.boca - bh / 2), 30, H - 26 - bh); lado = pos.x < W / 2 ? 'esq' : 'dir'; bx = lado === 'esq' ? Math.min(W - bw - 14, Math.round(pos.x + 46)) : Math.max(14, Math.round(pos.x - 46 - bw)); } }
+    else { bx = Math.round(W / 2 - bw / 2 + 30); by = H - 40 - bh; lado = 'nenhum'; }
+    const tre = grito ? Math.round(Math.sin(t * 50) * 1.5) : 0; bx += tre;
+    const borda = grito ? '#8a1a1a' : '#2a1a10', fundo = pensa ? '#f6f6fa' : '#fff6dc';
+    // rabinho
+    if (lado !== 'nenhum') { c.fillStyle = borda; const ax = clamp(tx, bx + 18, bx + bw - 18);
+      if (pensa) { for (let k = 0; k < 3; k++) { const q = (k + 1) / 4, cx = lerp(ax, tx, q), cy = lerp(by + bh, ty - 10, q), r = 7 - k * 2; c.beginPath(); c.arc(cx, cy, r + 2, 0, Math.PI * 2); c.fill(); c.fillStyle = fundo; c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.fill(); c.fillStyle = borda; } }
+      else { const base = lado === 'baixo' ? [[ax - 12, by + bh - 2], [ax + 12, by + bh - 2]] : lado === 'esq' ? [[bx + 2, by + bh / 2 - 12], [bx + 2, by + bh / 2 + 12]] : [[bx + bw - 2, by + bh / 2 - 12], [bx + bw - 2, by + bh / 2 + 12]], pt = [tx + (lado === 'esq' ? 10 : lado === 'dir' ? -10 : 0), ty - (lado === 'baixo' ? 14 : 0)];
+        c.beginPath(); c.moveTo(base[0][0] - 3, base[0][1]); c.lineTo(pt[0], pt[1] + 3); c.lineTo(base[1][0] + 3, base[1][1]); c.fill(); c.fillStyle = fundo; c.beginPath(); c.moveTo(base[0][0] + 1, base[0][1] - 3); c.lineTo(pt[0], pt[1] - 2); c.lineTo(base[1][0] - 1, base[1][1] - 3); c.fill(); } }
+    // corpo do balão (cantos em degrau, pixelado)
+    const corpo = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(x + 6, y, w - 12, h); c.fillRect(x + 2, y + 2, w - 4, h - 4); c.fillRect(x, y + 6, w, h - 12); };
+    c.fillStyle = 'rgba(0,0,0,.28)'; corpo(bx + 4, by + 5, bw, bh, 'rgba(0,0,0,.28)');
+    corpo(bx - 3, by - 3, bw + 6, bh + 6, borda); corpo(bx, by, bw, bh, fundo);
+    if (grito) { c.fillStyle = borda; for (let k = 0; k < bw; k += 22) { c.beginPath(); c.moveTo(bx + k, by - 2); c.lineTo(bx + k + 8, by - 10); c.lineTo(bx + k + 14, by - 2); c.fill(); c.beginPath(); c.moveTo(bx + k + 6, by + bh + 2); c.lineTo(bx + k + 12, by + bh + 9); c.lineTo(bx + k + 18, by + bh + 2); c.fill(); } }
+    if (cochicho) { c.strokeStyle = '#ffffff'; c.setLineDash([6, 6]); c.lineWidth = 3; c.strokeRect(bx - 2, by - 2, bw + 4, bh + 4); c.setLineDash([]); }
+    c.fillStyle = 'rgba(255,255,255,.55)'; c.fillRect(bx + 8, by + 3, bw - 16, 2);
+    // etiqueta com o nome
+    c.font = '10px Pixel, monospace'; const nome = String(b.speaker || '').toUpperCase(), nw = Math.ceil(c.measureText(nome).width) + 14, cor = corNome(b.who);
+    c.fillStyle = '#2a1a10'; c.fillRect(bx + 10, by - 12, nw + 4, 18); c.fillStyle = cor; c.fillRect(bx + 12, by - 10, nw, 14); c.fillStyle = 'rgba(255,255,255,.25)'; c.fillRect(bx + 12, by - 10, nw, 2); c.fillStyle = '#ffffff'; c.textBaseline = 'middle'; c.fillText(nome, bx + 19, by - 2);
+    if (lado === 'nenhum' && b.portrait) { const pc = retratoCache(b.who, b.emotion, t); c.fillStyle = '#2a1a10'; c.fillRect(bx - 66, by + bh / 2 - 30, 60, 60); c.drawImage(pc, bx - 63, by + bh / 2 - 27, 54, 54); }
+    // texto letra por letra
+    c.font = `${grito ? 'bold ' : ''}${tam}px Space, Arial, sans-serif`; c.fillStyle = grito ? '#7a1010' : pensa ? '#4a4a6a' : '#4a2e1a'; c.textBaseline = 'top';
+    linhas(c, texto, max).forEach((l, i) => c.fillText(l, bx + 16, by + 14 + i * (tam + 6)));
+    if (n >= cheio.length && Math.floor(t * 2.5) % 2) { c.fillStyle = borda; c.beginPath(); c.moveTo(bx + bw - 22, by + bh - 14); c.lineTo(bx + bw - 10, by + bh - 14); c.lineTo(bx + bw - 16, by + bh - 7); c.fill(); }
+    c.restore();
+  }
+  let rcCanvas = null, rcKey = ''; function retratoCache(who, emo, t) { if (!rcCanvas) { rcCanvas = document.createElement('canvas'); rcCanvas.width = rcCanvas.height = 64; } const k = who + emo; if (k !== rcKey) { rcKey = k; drawPortrait(rcCanvas.getContext('2d'), who, 64, 0, emo); } return rcCanvas; }
+
   /* ---------- caixa de fala: retrato e texto letra por letra ---------- */
   let portraitCv = null, lastSync = '';
   function syncOverlay(s, b) {
     const overlay = document.getElementById('cinematicOverlay'); if (!overlay) return;
-    overlay.classList.add('is-roteiro'); overlay.classList.toggle('roteiro-sem-fala', !b.text); overlay.classList.toggle('roteiro-com-retrato', !!(b.text && b.portrait));
+    overlay.classList.add('is-roteiro'); overlay.classList.toggle('roteiro-sem-fala', !b.text); overlay.classList.toggle('roteiro-balao', !!scripts[s.kind]?.balao); overlay.classList.toggle('roteiro-com-retrato', !!(b.text && b.portrait));
     if (b.text && b.portrait) {
       if (!portraitCv) { portraitCv = document.createElement('canvas'); portraitCv.width = 64; portraitCv.height = 64; portraitCv.className = 'roteiro-retrato'; portraitCv.setAttribute('aria-hidden', 'true'); }
       const cap = overlay.querySelector('.cinematic-caption'); if (cap && portraitCv.parentNode !== cap) cap.insertBefore(portraitCv, cap.firstChild);
@@ -342,7 +416,7 @@
     }
     const p = document.getElementById('cinematicText');
     if (p && b.text) { const n = Math.min(b.text.length, Math.floor(s.typed)), key = s.kind + s.index + ':' + n; if (key !== lastSync) { lastSync = key; p.textContent = b.text.slice(0, n); p.setAttribute('aria-label', b.text); } }
-    if (!clearer) clearer = setInterval(() => { if (performance.now() - lastDraw > 300) { overlay.classList.remove('is-roteiro', 'roteiro-sem-fala', 'roteiro-com-retrato'); } }, 250);
+    if (!clearer) clearer = setInterval(() => { if (performance.now() - lastDraw > 300) { overlay.classList.remove('is-roteiro', 'roteiro-sem-fala', 'roteiro-com-retrato', 'roteiro-balao'); } }, 250);
   }
   let clearer = null;
 
@@ -358,8 +432,9 @@
     visto: (id, q) => { if (!q || !scripts[id]) return; if (!q.roteiros || typeof q.roteiros !== 'object') q.roteiros = {}; q.roteiros[id] = 1; },
     musicFor: (id) => scripts[id]?.music || [],
     create, update, advance, beat, draw, timeline, stateAt, timelinePosition: (s) => (s ? (s.done ? scripts[s.kind]?.duration || 0 : s.elapsed) : 0),
-    sfx, load, register, portrait: drawPortrait
+    sfx, load, register, portrait: drawPortrait, estender, cabeca: headBox
   };
+  const ajuda = { portrait: drawPortrait, head: headBox, sfx, hash, ease, clamp, lerp };
 
   // Encaixe em window.Cinematics: roteiros respondem pelos seus ids, o resto segue igual.
   function wrap() {
@@ -395,7 +470,7 @@
       if (stop) return; const dt = Math.min(.1, (now - last) / 1000); last = now;
       if (!s.done) update(s, dt);
       if (!s.done) { draw(c, s); const b = beatOf(s);
-        if (b.text) { const x0 = b.portrait ? 120 : 40; c.fillStyle = 'rgba(16,30,24,.92)'; c.fillRect(30, 388, 900, 120); c.fillStyle = '#bacf82'; c.fillRect(30, 388, 900, 3);
+        if (b.text && !sc.balao) { const x0 = b.portrait ? 120 : 40; c.fillStyle = 'rgba(16,30,24,.92)'; c.fillRect(30, 388, 900, 120); c.fillStyle = '#bacf82'; c.fillRect(30, 388, 900, 3);
           if (b.portrait) { drawPortrait(pc.getContext('2d'), b.who, 64, s.shotTime, b.emotion); c.imageSmoothingEnabled = false; c.drawImage(pc, 44, 404, 64, 64); }
           c.textAlign = 'left'; c.textBaseline = 'top'; c.font = '12px Pixel, monospace'; c.fillStyle = '#d7e7a0'; c.fillText(b.speaker, x0, 402);
           c.font = '16px Arial, sans-serif'; c.fillStyle = '#eff0d9'; const words = b.text.slice(0, Math.floor(s.typed)).split(' '); let line = '', y = 428;

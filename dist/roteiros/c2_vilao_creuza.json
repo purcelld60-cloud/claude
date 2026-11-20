@@ -1,0 +1,185 @@
+{
+ "id": "c2_vilao_creuza",
+ "titulo": "Vilão · Dona Creuza",
+ "balao": true,
+ "descricao": "Entrada do vilão.",
+ "cenas": [
+  {
+   "titulo": "BAIRRO DA PENSÃO",
+   "cenario": "pensao",
+   "hora": 10,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 2300,
+     "y": 420,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 2420,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 2160,
+     "ate": 2340,
+     "tempo": [
+      0.2,
+      2.6
+     ],
+     "anim": "andando+frio"
+    },
+    {
+     "quem": "c2_creuza",
+     "x": 2560,
+     "olhando": -1
+    },
+    {
+     "quem": "c2m_dalva",
+     "x": 2640,
+     "olhando": -1
+    },
+    {
+     "quem": "c2m_agenor",
+     "x": 2700,
+     "olhando": -1
+    },
+    {
+     "quem": "c2_picole",
+     "x": 2760,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_creuza",
+     "texto": "OLHA ELE AÍ! O forasteiro! Chegou ontem e já tá rondando a pensão da Lurdes!",
+     "emocao": "taunted"
+    },
+    {
+     "quem": "c2_creuza",
+     "texto": "Dizem que ele fugiu de Itabuna! Dizem que ele dorme de chinelo! Dizem que ele NÃO USA CASACO!"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Essa última é verdade, mas o resto—",
+     "emocao": "embarrassed"
+    }
+   ]
+  },
+  {
+   "titulo": "BAIRRO DA PENSÃO",
+   "cenario": "pensao",
+   "hora": 10,
+   "camera": {
+    "de": {
+     "x": 2560,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "para": {
+     "x": 2580,
+     "y": 420,
+     "zoom": 2.3
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 2340,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_creuza",
+     "x": 2560,
+     "olhando": -1,
+     "anim": "exclama"
+    },
+    {
+     "quem": "c2m_dalva",
+     "x": 2640,
+     "olhando": -1
+    },
+    {
+     "quem": "c2m_agenor",
+     "x": 2700,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "texto",
+     "texto": "PSIU! PSIU!",
+     "x": 520,
+     "y": 180,
+     "cor": "#e48fb0",
+     "t": 1.2,
+     "dur": 1.4
+    },
+    {
+     "tipo": "zoom_soco",
+     "t": 0.1
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_creuza",
+     "texto": "VIU?! CONFESSOU! Eu sabia! Eu SEMPRE sei!"
+    },
+    {
+     "quem": "c2_creuza",
+     "texto": "Ninguém sai do MEU bairro sem virar assunto, meu filho."
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 3.6,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "vs",
+     "vilao": "c2_creuza",
+     "nome": "DONA CREUZA",
+     "titulo": "A FOFOQUEIRA DO BAIRRO",
+     "cor": "#e48fb0",
+     "t": 0,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vs",
+     "t": 0.35
+    },
+    {
+     "som": "tambor",
+     "t": 1.2
+    }
+   ]
+  }
+ ]
+}

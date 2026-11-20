@@ -7,3 +7,5 @@
 #gameShell .cinematic-overlay.is-roteiro.roteiro-com-retrato .cinematic-caption{padding-left:62px!important;min-height:64px}
 #gameShell .cinematic-overlay.is-roteiro.roteiro-com-retrato .roteiro-retrato{left:7px;top:8px;width:44px;height:44px;border-width:3px}
 }
+
+#gameShell .cinematic-overlay.is-roteiro.roteiro-balao .cinematic-caption{opacity:0!important;pointer-events:none}

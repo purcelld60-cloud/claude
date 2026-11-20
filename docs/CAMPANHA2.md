@@ -7,10 +7,11 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 | Passo | Conteúdo | Situação |
 | --- | --- | --- |
 | 1 | Personagens no mesmo traço | feito e aprovado |
-| 2 | Cenários: os 10 novos e o reuso do mapa de Itabuna | **feito, aguardando aprovação** |
-| 3 | Poderes de Da Roça e sistema de escolher poder no quarto | — |
-| 4 | Cutscenes | — |
-| 5 | O resto: menu "Campanha 2", missões, chefes, bloqueio depois do embarque, save e créditos | — |
+| 2 | Cenários (2A a 2D): ambientes, camadas, 7 cenários novos, moradores | feito e aprovado |
+| 3 | Poderes de Da Roça e mural para trocar | feito e aprovado |
+| 4 | Locomoção: mapas, táxi do Seu Zé e loja de garrafadas | feito e aprovado |
+| 5 | Cutscenes | **feito, aguardando aprovação** |
+| 6 | O resto: menu "Campanha 2", missões, chefes, bloqueio depois do embarque, save e créditos no jogo | — |
 
 ## Passo 1 · Personagens (`dist/campanha2/personagens.js`)
 
@@ -401,3 +402,72 @@ As moedas vêm de **inimigos derrotados** (hoje, os espantalhos do treino dão 8
 - Inimigos reais soltando moedas.
 - Decidir se cada garrafada só aparece na loja depois de vencer o vilão dela (como no plano original) ou se fica toda à venda.
 - Ligar o táxi à progressão: depois de embarcar não dá para voltar.
+
+
+**Garrafada só depois do vilão.** Cada garrafada só chega na banca depois que o vilão dela é vencido, porque o ingrediente está com ele. Antes disso:
+- o frasco aparece escuro, com um cadeado vermelho e preço "???";
+- o Seu Lindomar diz com quem está o ingrediente;
+- o botão mostra **🔒 TRANCADA**.
+
+A Feira, onde fica a banca, abre junto com o Monumento, depois da Dona Creuza.
+
+## Passo 5 · Cutscenes (`dist/campanha2/cutscenes.js` e `dist/roteiros/c2_*.json`)
+
+As cutscenes usam o mesmo motor de roteiros da campanha 1 (`roteiro.js`): mesmos botões, mesma câmera e mesmos personagens. O motor ganhou extensões genéricas, que a campanha 1 não usa:
+- fases 12+;
+- fundos pintados;
+- efeitos, animações e sons extras;
+- ganchos por quadro;
+- **balões de fala**.
+
+**Balão de fala** (`"balao": true` no roteiro):
+- o balão é desenhado em cima de quem fala, com rabinho apontando para a boca e etiqueta colorida com o nome;
+- frases gritadas viram balão vermelho com pontas e tremor;
+- frases entre parênteses viram balão de pensamento (nuvenzinha);
+- "..." ganha borda tracejada;
+- o narrador aparece em legenda de quadrinho no canto;
+- quem fala fora da tela (no celular) ganha balão embaixo, com retratinho.
+
+No jogo, a caixa de fala antiga fica escondida nesses roteiros, mas o texto continua nela para leitores de tela.
+
+**Trilha original sintetizada** (sem arquivos e sem copiar música): `saudade`, `flashback`, `tensao`, `vilao`, `conquista` e `final`. O roteiro escolhe com `"trilha"` (no roteiro ou na cena; `null` para). Se o jogador escolheu uma música própria para a cena no painel, a dele toca no lugar.
+
+**Fundos pintados (closes):**
+
+| Fundo | O que mostra |
+| --- | --- |
+| `celular` | Chamando, ligando, recusada, perdida ou videochamada, com a mão segurando e o polegar recusando a ligação |
+| `aviao_janela` | Decolagem, voo e pouso na neblina, com Da Roça na poltrona e o cafezinho tremendo |
+| `aviao_ceu` | O avião cruzando o céu |
+| `sala_aula` | Sala de aula do flashback |
+| `rodoviaria` | O ônibus levando o Jorge, com ele acenando na janela |
+| `ceu_noite` | O céu da roça |
+| `quarto_jorge` | O quarto em Conquista, com a foto do trio escondida no espelho |
+
+**Efeitos novos:** `titulo_c2`, `coracao_partido`, `batimento`, `polaroids`, `foto_trio`, `pensamento`, `neblina`, `frio`, `estrelas`, `pb`, `flashback`, `vs`, `poder`, `fim`, `luz_final`, `barras`, `flash_memoria` e `chat`.
+
+**Animações por cima dos atores** (junte com `+`): `chorando`, `frio`, `treme`, `ajoelhado`, `deitado`, `celular`, `celular_mao`, `zzz`, `exclama`, `pergunta`, `raiva`, `suor`, `coracao`, `coracao_partido`, `brilho`, `chama`, `mao`, `silhueta` e `fantasma`.
+
+**Sons novos:** `vibrar`, `toque`, `coracao`, `quebra`, `aviao`, `vento`, `desliga`, `vs`, `poder`, `abraco`, `digitar` e `soluco`.
+
+**As 24 cutscenes:**
+
+| Roteiro | O que acontece |
+| --- | --- |
+| `c2_abertura` | Abertura com o trio. Pequenos, correm pelo corredor, fazem bagunça na sala e ficam de castigo juntos. Maiores, aparecem na casa de Rayssa e na foto do trio. Depois vêm a mudança na rodoviária, a volta em janeiro e julho, quando Jorge passa reto na chuva e o coração parte. A montagem de polaroides mostra a vida nova. Na noite na roça, Da Roça pensa no trio e o celular vibra com JORGE (recriando o final da campanha 1). Ele cai de joelhos, liga de volta e Jorge recusa: "Foi sem querer... nem sei mais quem é esse cara". A câmera vai até a foto do trio no espelho dele. Termina com a decisão e o título |
+| `c2_aeroporto` | Miguel aparece no aeroporto de Itabuna, dá a aula de viagem e o portão vira ponto sem volta ("Leva meu casaco." "Casaco? Na Bahia?") |
+| `c2_voo` | Decolagem, voo, "onze graus?!" e o pouso na neblina da Suíça Baiana |
+| `c2_chegada` | O frio no Glauber Rocha e o Seu Zé do Táxi, que não para de falar |
+| `c2_primeira_noite` | Dona Lurdes e a primeira noite no quarto 4. De manhã, OOO REEEIS... e nada: os poderes ficaram em Itabuna. Termina com o mural de procurados |
+| `c2_vilao_*` | Entrada de cada vilão no cenário dele, terminando no cartão **VS** com nome e apelido |
+| `c2_derrota_*` | O vilão vencido dá uma pista do Jorge e a garrafada é liberada (cartão **NOVO PODER!** com o ícone) |
+| `c2_vilao_fred` | Fred e Jorge com o toque secreto e o chat "FRED & JORGE". Jorge vai embora sem responder e Fred diz "O que eu sou com o Jorge, você nunca vai ser". O coração parte |
+| `c2_centro` | A praça da Catedral à noite. Da Roça agarra Jorge, Jorge grita "EU NÃO CONHEÇO ESSE CARA!", a cor some e começa a batalha final |
+| `c2_final` | Da Roça prepara o golpe e para. Estende a mão, Jorge confessa a vergonha e vem o abraço, com flashes do trio. Fred faz as pazes, Reeis aparece em videochamada, as fotos do trio (pequenos, maiores e agora) e o **FIM** |
+| `c2_creditos` | Créditos com todo o elenco |
+
+Nenhuma delas toca sozinha ainda: o passo 6 liga cada uma ao seu momento no jogo. Durante essas cutscenes, o engarrafamento aleatório fica desligado.
+
+**Para assistir:** abra `?cenarios2` e clique em **CUTSCENES**. A galeria toca qualquer uma com trilha e sons, mesmo com o som do jogo desligado. Também dá para abrir direto com `?roteiro=c2_abertura`.
+
+**Conserto:** o engarrafamento aleatório (passo 2B) tinha um erro que deixava o cenário preto no centro e na avenida quando a fila aparecia. Está corrigido.
