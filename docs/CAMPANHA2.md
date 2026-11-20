@@ -630,7 +630,7 @@ Com ele ligado:
 
 **Golpes:** quando apanha, o inimigo (ou o chefe, ou o espantalho do treino) **só pisca** e mostra o número do dano. Não há onomatopeias nem outros efeitos extras: o dono pediu assim. O piscar fica em `treino.js` (`CampanhaTreino.piscando`).
 
-**Campanha 2 aberta para todos:** o botão ❄ CAMPANHA 2 · CONQUISTA da tela inicial já começa a campanha. Não precisa zerar a principal.
+**Quando a Campanha 2 abre:** só depois de terminar a Campanha 1. No modo desenvolvedor ela fica sempre aberta.
 
 **Menu de pausa da Campanha 2 no estilo roça:** placa pendurada por cordas e botões de madeira nas cores antigas.
 - Botões: CONTINUAR, ⚙ OPÇÕES, MISSÕES, SOM e SALVAR E SAIR.
@@ -652,3 +652,19 @@ Com ele ligado:
 - Arraste o joystick e cada botão; ajuste o TAMANHO.
 - RESTAURAR volta ao padrão.
 - Fica salvo no aparelho (`daroca-c2-layout-v1`), fora dos saves.
+
+
+## Menu principal (`dist/menu-inicio.js` e `menu-inicio.css`)
+
+A tela inicial tem só três botões: **JOGAR**, **MULTIPLAYER** e **DIÁRIO E TURMA**.
+- **JOGAR:**
+  - Campanha 1 · Itabuna, com CONTINUAR (se houver save) e NOVA AVENTURA;
+  - Campanha 2 · Vitória da Conquista, com 🔒 até terminar a 1;
+  - **＋ MAIS MODOS:** Dupla online, Terreiro dos Chefes, Fliperama e, no modo dev, 🎬 Cutscenes.
+- **MULTIPLAYER:** Arena online e Modo TV.
+
+Os botões são os originais de cada modo, só mudados de lugar. Qualquer botão novo que outro arquivo puser na tela inicial vai sozinho para o "+".
+
+**A Festa da Roça 3D (party) foi removida do jogo**, junto com o three.js que só ela usava. O jogo abre mais leve.
+
+**Joystick da Campanha 2:** é o mesmo da campanha principal (madeira com botão verde). O estilo é copiado de lá quando o jogo abre.

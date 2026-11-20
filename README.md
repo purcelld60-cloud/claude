@@ -8,7 +8,7 @@
 >
 > Arquivos reconstruídos nesta cópia, porque não vieram no envio: `dist/updates.js` (aviso de nova versão), `dist/music/config.*` (biblioteca vazia), `dist/icon.svg` e os ícones em `dist/assets/`. As fontes Silkscreen e Space Grotesk (SIL OFL 1.1) e a Three.js r159 (MIT) foram obtidas das versões públicas oficiais. Os dois efeitos de voz da Arena (`assets/sfx/biuriful.mp3` e `gugu-dada.mp3`) não estão incluídos; o jogo segue sem eles.
 
-Jogo 2D em pixel art, com campanha, chefes, missões, Arena da Resenha, Dupla online e Festa da Roça 3D. O código original está disponível sob a [licença MIT](LICENSE): você pode estudar, modificar, distribuir e usar comercialmente, mantendo o aviso de copyright e a licença.
+Jogo 2D em pixel art, com campanha, chefes, missões, Arena da Resenha e Dupla online. O código original está disponível sob a [licença MIT](LICENSE): você pode estudar, modificar, distribuir e usar comercialmente, mantendo o aviso de copyright e a licença.
 
 O projeto usa HTML, CSS, JavaScript, Python e um Worker JavaScript. A campanha e o treino da Arena não precisam de uma API de IA, conta do ChatGPT ou credenciais para rodar localmente. GPT, Codex e Claude podem ajudar a editar os mesmos arquivos que você editaria manualmente.
 
@@ -49,7 +49,6 @@ Veja o [guia para modificar com IA](docs/MODIFICAR-COM-IA.md), as [orientações
 | Teclado, joystick, botões e pausa | `dist/controls.js`, `control-settings.js`, `joystick.js`, `campaign-controls.js`, `pause-menu.js` e respectivos CSS |
 | Arena e seus personagens | `dist/arena.js`, `arena-roster.js`, `arena-combat.js`, `arena-motion.js`, `arena-art.js`, `arena-controls.js` |
 | Transporte das salas e Dupla | `dist/arena-net.js`, `network.js`, `coop.js`, `worker/arena.mjs` |
-| Festa 3D | `dist/party*.js`, `party.css`, `dist/vendor/three.min.js` |
 | Músicas, painel e atualizações | `dist/music-player.js`, `music-contexts.js`, `admin.js`, `cutscene-preview.js`, `updates.js` |
 | Servidor, APK automático e validação MP3 | `worker/index.mjs`, `apk.mjs`, `digest-stream.mjs`, `mp3.mjs` |
 | Servidor online próprio (Arena, Dupla e Fliperama online) | `server/server.js`, `dist/online.js`, `dist/servidor.json` (guia em `docs/SERVIDOR-ONLINE.md`) |
@@ -90,6 +89,6 @@ O projeto iOS exige macOS, Xcode e sua assinatura Apple. Consulte [o README iOS]
 
 ## Licenças
 
-O código original, a documentação e a arte procedural original do projeto usam MIT, salvo indicação específica em outro arquivo. Three.js e as fontes mantêm suas próprias licenças. MP3 e fotos adicionados separadamente pelos usuários não recebem automaticamente a licença MIT do programa. Veja [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+O código original, a documentação e a arte procedural original do projeto usam MIT, salvo indicação específica em outro arquivo. As fontes mantêm suas próprias licenças. MP3 e fotos adicionados separadamente pelos usuários não recebem automaticamente a licença MIT do programa. Veja [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 Um repositório no GitHub é opcional: a licença e o pacote completo permitem modificar o jogo sem ele. Se publicar sua própria cópia em um repositório, mantenha `LICENSE` e os avisos de terceiros junto do código.

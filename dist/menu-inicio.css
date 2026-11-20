@@ -1,0 +1,28 @@
+/* Menu principal enxuto: JOGAR, MULTIPLAYER e DIÁRIO E TURMA; o resto fica no painel de escolha. */
+#startScreen .start-menu{flex-wrap:wrap;justify-content:center}
+#startScreen .ranch-mode-entries[hidden]{display:none!important}
+#startScreen .menu-escolha{position:absolute;inset:0;z-index:60;display:grid;place-items:center;background:rgba(20,14,8,.62);padding:10px}
+#startScreen .menu-escolha[hidden]{display:none}
+#startScreen .me-caixa{width:min(560px,96%);max-height:100%;overflow:auto;background:#f4e3b5;border:4px solid #482f20;box-shadow:inset 0 3px #fff5d4,inset 0 -4px #d9bf86,0 6px 0 #2a1a10,0 14px 30px #0008;padding:12px 14px;display:flex;flex-direction:column;gap:10px;color:#3a2412;font-family:Pixel,monospace}
+#startScreen .me-titulo{margin:0;text-align:center;font:16px Pixel,monospace;color:#fff1bb;background:repeating-linear-gradient(0deg,#69432b 0 9px,#714b30 10px 12px);border:3px solid #2a1a10;box-shadow:inset 0 2px #d7ad6a;padding:6px;text-shadow:2px 2px 0 #2a1a10;letter-spacing:1px}
+#startScreen .me-pagina{display:flex;flex-direction:column;gap:10px}
+#startScreen .me-pagina[hidden]{display:none}
+#startScreen .me-camp{border:3px solid #8a6a3a;background:#fbf0cf;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
+#startScreen .me-camp>b{font-size:11px;color:#5a2a14}
+#startScreen .me-camp>small{font:11px Space,Arial,sans-serif;color:#6a4a2a}
+#startScreen .me-camp.travada{opacity:.6}
+#startScreen .me-bts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+#startScreen .me-bts>button,#startScreen .me-extra>button,#startScreen .me-lista>button{flex:1 1 200px;margin:0!important}
+#startScreen .me-bts.ranch-mode-entries,#startScreen .me-extra.ranch-mode-entries,#startScreen .me-lista.ranch-mode-entries{display:flex;flex-wrap:wrap;gap:8px;position:static;margin:0;width:auto;max-width:none;transform:none}
+#startScreen .me-extra[hidden]{display:none!important}
+#startScreen .me-mais,#startScreen .me-voltar{font:11px Pixel,monospace;padding:9px 12px;background:#4a3420;color:#f6ead0;border:3px solid #e8c66a;box-shadow:0 4px 0 #2a1a10;cursor:pointer}
+#startScreen .me-mais:hover,#startScreen .me-mais:focus-visible,#startScreen .me-voltar:hover,#startScreen .me-voltar:focus-visible{background:#e8c66a;color:#2a1e14;outline:none}
+#startScreen .me-mais[hidden]{display:none}
+#startScreen .me-voltar{align-self:center;min-width:180px}
+#startScreen .me-c1 .me-bts>button{flex:0 1 auto;min-width:240px;justify-content:center;gap:10px}
+/* celular deitado: painel compacto, tudo cabe sem rolar */
+@media (max-height:520px){#startScreen .menu-escolha{padding:6px}#startScreen .me-caixa{width:min(680px,98%);padding:6px 8px;gap:6px}#startScreen .me-titulo{font-size:12px;padding:3px}
+#startScreen .me-pagina{gap:6px}#startScreen .me-camp{padding:5px 8px;gap:2px}#startScreen .me-c1>small{display:none}#startScreen .me-camp>b{font-size:10px}
+#startScreen .me-pagina[data-pg="jogar"]{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}#startScreen .me-pagina[data-pg="jogar"][hidden]{display:none}
+#startScreen .me-mais,#startScreen .me-extra{grid-column:1/-1}#startScreen .me-bts>button,#startScreen .me-extra>button,#startScreen .me-lista>button{flex:1 1 150px}
+#startScreen .me-c1 .me-bts>button{min-width:0;flex:1 1 auto}#startScreen .me-mais,#startScreen .me-voltar{padding:6px 10px;font-size:10px}}

@@ -15,10 +15,9 @@
   const safe = (f, d) => { try { return f(); } catch (e) { return d; } };
 
   /* ---------- liberação e save ---------- */
-  function liberada() { // a Campanha 2 fica aberta para todo mundo desde a tela inicial (pedido do dono)
-    return true;
+  function liberada() { // a Campanha 2 só abre depois de terminar a Campanha 1 (no modo desenvolvedor fica aberta)
     if (/[?&]campanha2\b/.test(location.search) || window.DAROCA_DEV) return true;
-    return safe(() => !!JSON.parse(localStorage.getItem('da-roca-adventure-v1') || 'null')?.q?.jorgeSeen, false) || safe(() => localStorage.getItem('daroca-sandbox-v1') === '1', false) || !!safe(() => localStorage.getItem(KEY), null);
+    return safe(() => !!JSON.parse(localStorage.getItem('da-roca-adventure-v1') || 'null')?.q?.jorgeSeen, false) || safe(() => localStorage.getItem('daroca-sandbox-v1') === '1', false);
   }
   const novoSave = () => ({ v: 1, passo: 'abertura', cena: 0, x: 700, hp: 100, flags: {}, criado: Date.now(), salvo: 0 });
   let S = null;
@@ -243,7 +242,11 @@
 
   /* ---------- HUD, avisos, escolhas, pausa ---------- */
   function css() {
-    if (document.getElementById('c2jCss')) return; const st = document.createElement('style'); st.id = 'c2jCss';
+    if (document.getElementById('c2jCss')) return;
+    { let txt = ''; for (const sh of document.styleSheets) { let rules; try { rules = sh.cssRules; } catch (e) { continue; } for (const r of rules || []) { const sel = r.selectorText; if (!sel || !/move-joystick|joystick-knob|joystick-directions/.test(sel) || /arena|\.is-|immersive|engaged-off/.test(sel)) continue;
+        txt += r.cssText.replace(sel, sel.split(',').map((x) => '.c2j ' + x.replace(/#gameShell\s*|\.crafted-controls\s*|\.touch-controls\s*|\.game-shell\s*/g, '').trim()).join(',')) + '\n'; } }
+      const sj = document.createElement('style'); sj.id = 'c2jJoyCss'; sj.textContent = txt + '.c2j .move-joystick{width:102px;height:102px}'; document.head.appendChild(sj); }
+    const st = document.createElement('style'); st.id = 'c2jCss';
     st.textContent = `.c2j{position:fixed;inset:0;z-index:100000;background:#06080c;display:flex;align-items:center;justify-content:center;font-family:Pixel,monospace;color:#f6ead0;touch-action:none;user-select:none;-webkit-user-select:none}.c2j[hidden]{display:none}
 .c2j .tela{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;max-height:100vh}.c2j canvas.mundo{width:100%;height:100%;display:block;image-rendering:pixelated}
 .c2j .hud{position:absolute;inset:0;pointer-events:none}.c2j .hud>*{pointer-events:auto}
@@ -260,7 +263,7 @@
 .c2j .escolha .cx b{display:inline-block;font:9px Pixel,monospace;background:#2c6ab8;color:#fff;padding:3px 7px;margin-bottom:8px}.c2j .escolha .ops{display:flex;flex-direction:column;gap:6px;margin-top:10px}.c2j .escolha button{font:12px Space,Arial,sans-serif;text-align:left;padding:9px 12px;background:#f2dc9a;color:#3a2412;border:3px solid #2a1a10;cursor:pointer}.c2j .escolha button:hover,.c2j .escolha button:focus-visible{background:#ffd24a;outline:none}.c2j .escolha .resp{margin-top:8px;color:#a8341a;min-height:1.4em}
 .c2j .pausa{position:absolute;inset:0;background:#06080cd8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}.c2j .pausa h2{font-size:20px;color:#ffd98a;margin:0 0 6px}.c2j .pausa button{font:12px Pixel,monospace;min-width:240px;padding:12px;background:#4a3420;color:#f6ead0;border:3px solid #e8c66a;box-shadow:0 4px 0 #2a1a10;cursor:pointer}.c2j .pausa button:hover,.c2j .pausa button:focus-visible{background:#e8c66a;color:#2a1e14;outline:none}.c2j .pausa p{font-size:9px;color:#c8b48a;max-width:420px;text-align:center;line-height:1.7}
 .c2j .pular{position:absolute;right:1.6%;bottom:4%;font:10px Pixel,monospace;padding:8px 12px;background:#1c1408cc;color:#f6ead0;border:2px solid #e8c66a;cursor:pointer}
-.c2j .joy{position:absolute;left:3%;bottom:5%;width:min(22vh,130px);aspect-ratio:1;border-radius:50%;background:radial-gradient(#3a2a1a88,#1c1408aa);border:3px solid #e8c66a99;touch-action:none}.c2j .joy i{position:absolute;left:50%;top:50%;width:42%;height:42%;margin:-21% 0 0 -21%;border-radius:50%;background:#e8c66a;border:3px solid #fff2c8;box-shadow:0 4px 0 #8a5a1a}
+.c2j .joy{position:absolute!important;left:3%;bottom:5%;touch-action:none}
 @media (pointer:fine){.c2j .joy{display:none}}
 .c2j .c2-treino-ctl{gap:6px!important}.c2j .c2-treino-ctl .touch-btn{width:clamp(40px,6.2vw,60px)!important;height:clamp(40px,6.2vw,60px)!important;min-width:0!important;min-height:0!important;padding:0!important}.c2j .c2-treino-ctl .touch-btn svg{width:46%!important;height:46%!important}.c2j .c2-treino-ctl .touch-btn small{font-size:clamp(5px,.75vw,8px)!important}
 .c2j .entrar{bottom:auto;top:24%;right:3%}`;
@@ -268,16 +271,17 @@
   }
   function montar() {
     css(); box = document.createElement('div'); box.className = 'c2j'; box.hidden = true;
-    box.innerHTML = `<div class="tela"><canvas class="mundo" width="960" height="540"></canvas><div class="hud"><div class="vida"><div class="cor"></div><div class="gas"><b></b></div><div class="moedas"></div></div><div class="obj"><b>OBJETIVO</b><span></span></div><button type="button" class="menu" aria-label="Pausa">☰</button><button type="button" class="entrar" hidden></button><div class="joy"><i></i></div></div><div class="avisos"></div><button type="button" class="pular" hidden>PULAR CENA ▶▶</button></div>`;
+    box.innerHTML = `<div class="tela"><canvas class="mundo" width="960" height="540"></canvas><div class="hud"><div class="vida"><div class="cor"></div><div class="gas"><b></b></div><div class="moedas"></div></div><div class="obj"><b>OBJETIVO</b><span></span></div><button type="button" class="menu" aria-label="Pausa">☰</button><button type="button" class="entrar" hidden></button><div class="joy move-joystick"><span class="joystick-directions" aria-hidden="true"></span><span class="joystick-knob" aria-hidden="true"><i></i></span></div></div><div class="avisos"></div><button type="button" class="pular" hidden>PULAR CENA ▶▶</button></div>`;
     document.body.appendChild(box); cv = box.querySelector('canvas.mundo'); c = cv.getContext('2d', { alpha: false }); c.imageSmoothingEnabled = false; hud = box.querySelector('.hud');
     box.querySelector('.menu').addEventListener('click', () => pausar(true)); box.querySelector('.entrar').addEventListener('click', usar);
     box.querySelector('.pular').addEventListener('click', (e) => { e.stopPropagation(); pularCut(); });
     cv.addEventListener('pointerdown', () => { if (cut) avancarCut(); });
     // joystick (celular): mesmo jeito do da campanha 1
-    const pad = box.querySelector('.joy'), knob = pad.querySelector('i'); let pid = null;
+    const pad = box.querySelector('.joy'), knob = pad.querySelector('.joystick-knob'); let pid = null;
+    { const orig = document.querySelector('#moveJoystick .joystick-directions'); if (orig) pad.querySelector('.joystick-directions').innerHTML = orig.innerHTML; } // as setinhas iguais às da campanha principal
     const mover = (e) => { if (e.pointerId !== pid) return; const r = pad.getBoundingClientRect(); let x = (e.clientX - (r.left + r.width / 2)) / (r.width * .34); x = clamp(x, -1, 1); joy = Math.abs(x) > .25 ? x : 0; knob.style.transform = `translateX(${x * r.width * .34}px)`; };
-    pad.addEventListener('pointerdown', (e) => { pid = e.pointerId; try { pad.setPointerCapture(pid); } catch (er) {} mover(e); e.preventDefault(); });
-    pad.addEventListener('pointermove', mover); const solta = (e) => { if (e.pointerId !== pid) return; pid = null; joy = 0; knob.style.transform = ''; }; pad.addEventListener('pointerup', solta); pad.addEventListener('pointercancel', solta);
+    pad.addEventListener('pointerdown', (e) => { pid = e.pointerId; pad.classList.add('engaged'); try { pad.setPointerCapture(pid); } catch (er) {} mover(e); e.preventDefault(); });
+    pad.addEventListener('pointermove', mover); const solta = (e) => { if (e.pointerId !== pid) return; pid = null; joy = 0; knob.style.transform = ''; pad.classList.remove('engaged'); }; pad.addEventListener('pointerup', solta); pad.addEventListener('pointercancel', solta);
     // os botões da campanha 1 (FALAR, VOAR, PAPEL, PEIDO, DASH, PODER 1 e 2)
     TR()?.montarBarra?.(box.querySelector('.tela'), (id, down) => { if (cut) { if (down) avancarCut(); return; } if (pausado) return; if (TR().acao(id, down, P)) return; if (id === 'jump') { if (down) { keys.add('jump'); pular(); } else keys.delete('jump'); } if (id === 'interact' && down) usar(); });
     addEventListener('keydown', teclaDown, true); addEventListener('keyup', teclaUp, true);

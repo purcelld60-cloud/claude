@@ -77,3 +77,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - Corrigi a Campanha 2, que deixava os botões dela presos na principal.
   - A principal agora para de desenhar enquanto a Campanha 2 está aberta.
   - O mapa ficou bom no celular.
+- **2026-11-20 · Claude:**
+  - **Menu principal:** agora só tem JOGAR, MULTIPLAYER e DIÁRIO E TURMA (`menu-inicio.js`). Se criar um modo novo, ponha o botão em `.ranch-mode-entries` como antes: ele vai sozinho para o "+ MAIS MODOS".
+  - **Party:** foi removida, a pedido do dono.
+  - **Campanha 2:** só abre depois de terminar a Campanha 1.
+  - **Joystick da Campanha 2:** igual ao da principal.
