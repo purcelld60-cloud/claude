@@ -246,7 +246,14 @@
 .m3d .trava b{display:block;font-size:11px;color:#ff8a7a;margin-bottom:4px}.m3d .trava .t{font-size:8px;color:#f6ead0;opacity:.85}.m3d .trava .n{font-size:12px;color:#ffd98a;margin:3px 0;line-height:1.5}.m3d .trava small{display:block;font-size:8px;color:#e8c8c0;line-height:1.5;margin-top:4px}.m3d .trava:after{content:'';position:absolute;left:50%;bottom:-11px;margin-left:-8px;border:8px solid transparent;border-top-color:#ff5a4a;border-bottom:0}
 @keyframes m3dTrava{from{transform:translate(-50%,-80%) scale(.6)}to{transform:translate(-50%,-100%) scale(1)}}.m3d .topo .teste{background:#3a2a5a;border-color:#b89ae8;font-size:9px}
 .m3d .zoom{position:absolute;left:14px;bottom:44px;display:flex;flex-direction:column;gap:6px}.m3d .zoom button{width:38px;height:38px;padding:0;font-size:16px}
-@media (max-width:760px),(max-height:520px){.m3d .pv{left:10px;right:10px;top:auto;bottom:10px;width:auto;height:50%}.m3d .pv .tela{min-height:70px}.m3d .dica{display:none}.m3d .zoom{bottom:auto;top:60px}}`;
+@media (max-width:760px),(max-height:520px){.m3d .pv{left:10px;right:10px;top:auto;bottom:10px;width:auto;height:50%}.m3d .pv .tela{min-height:70px}.m3d .dica{display:none}.m3d .zoom{bottom:auto;top:60px}}
+/* celular: título compacto, ficha do lugar ao lado (deitado) ou embaixo (em pé) e faixa com todos os lugares */
+.m3d .lugares{display:none}
+@media (max-width:760px),(max-height:520px){.m3d .topo{padding:6px 8px;gap:6px}.m3d .topo b{font-size:11px}.m3d .topo small{display:none}.m3d .topo .fechar{font-size:9px;padding:6px 8px}.m3d .zoom{top:44px;left:8px}.m3d .zoom button{width:34px;height:34px}
+.m3d .lugares{display:flex;position:absolute;left:0;right:0;bottom:0;gap:6px;overflow-x:auto;padding:8px 8px max(8px,env(safe-area-inset-bottom));background:linear-gradient(#0b0f1400,#0b0f14dd 40%);-webkit-overflow-scrolling:touch;scrollbar-width:none}.m3d .lugares::-webkit-scrollbar{display:none}
+.m3d .lugares button{flex:none;font-size:9px;padding:6px 8px;box-shadow:0 3px 0 #2a1a10;white-space:nowrap}.m3d .lugares button.bloq{background:#3a2a24;color:#c8b8a8;border-color:#8a6a5a}.m3d .lugares button.atual{background:#2a4a6a;border-color:#8ac8ff}
+.m3d.ficha-aberta .lugares{display:none}}
+@media (max-height:520px) and (orientation:landscape){.m3d .pv{left:auto;right:8px;top:8px;bottom:8px;width:44%;height:auto}}`;
     document.head.appendChild(st);
   }
   function montarUI() {
@@ -254,22 +261,28 @@
     ui.innerHTML = `<canvas class="gl"></canvas><div class="topo"><div><b class="t"></b><br><small class="s"></small></div><div class="bts"><button type="button" class="teste" hidden></button><button type="button" class="fechar" aria-label="Fechar mapa">✕ FECHAR</button></div></div>
 <div class="zoom"><button type="button" class="zmais" aria-label="Aproximar">+</button><button type="button" class="zmenos" aria-label="Afastar">−</button></div>
 <div class="pv" aria-live="polite"><button type="button" class="x" aria-label="Voltar ao mapa">✕</button><h3></h3><div class="sub"></div><button type="button" class="ib" aria-label="Sobre o lugar" title="Sobre o lugar">ⓘ</button><div class="tela"><canvas class="prev" width="320" height="180"></canvas><div class="desc"></div></div><div class="motivo"></div><button type="button" class="ir">IR PARA LÁ ▶</button></div>
-<div class="trava" aria-live="assertive"><b>🔒 TRANCADO</b><div class="t"></div><div class="n"></div><small></small></div><div class="dica">Arraste para passear · toque num lugar · ← → troca · ENTER vai · ESC fecha</div><div class="fade"></div>`;
+<div class="trava" aria-live="assertive"><b>🔒 TRANCADO</b><div class="t"></div><div class="n"></div><small></small></div><div class="lugares" aria-label="Lugares do mapa"></div><div class="dica">Arraste para passear · toque num lugar · ← → troca · ENTER vai · ESC fecha</div><div class="fade"></div>`;
     document.body.appendChild(ui); cv = ui.querySelector('canvas.gl'); c = cv.getContext('2d');
     ui.querySelector('.fechar').addEventListener('click', fechar); ui.querySelector('.teste').addEventListener('click', () => def?.teste?.acao?.()); ui.querySelector('.x').addEventListener('click', () => selecionar(-1));
     ui.querySelector('.ib').addEventListener('click', () => mostrarInfo(!info)); ui.querySelector('.ir').addEventListener('click', ir);
     ui.querySelector('.zmais').addEventListener('click', () => zoomPara(cam.z * 1.3)); ui.querySelector('.zmenos').addEventListener('click', () => zoomPara(cam.z / 1.3));
-    cv.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y, moveu: false }; cv.setPointerCapture(e.pointerId); });
-    cv.addEventListener('pointermove', (e) => { if (!drag || viagem) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 6) { drag.moveu = true; cv.classList.add('arrasta'); } if (!drag.moveu) return; anim = null; cam.x = drag.cx - dx / cam.z; cam.y = drag.cy - dy / cam.z; limitar(); });
-    cv.addEventListener('pointerup', (e) => { cv.classList.remove('arrasta'); if (drag && !drag.moveu) clique(e); drag = null; });
+    const dedos = new Map(); let pinca = null; // zoom com dois dedos no celular
+    const distDedos = () => { const [a, b] = [...dedos.values()]; return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
+    cv.addEventListener('pointerdown', (e) => { dedos.set(e.pointerId, { x: e.clientX, y: e.clientY }); if (dedos.size === 2) { pinca = { d: distDedos(), z: cam.z }; drag = null; anim = null; return; } drag = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y, moveu: false }; cv.setPointerCapture(e.pointerId); });
+    const soltaDedo = (e) => { dedos.delete(e.pointerId); if (dedos.size < 2) pinca = null; };
+    cv.addEventListener('pointercancel', soltaDedo);
+    cv.addEventListener('pointermove', (e) => { if (dedos.has(e.pointerId)) dedos.set(e.pointerId, { x: e.clientX, y: e.clientY }); if (pinca && dedos.size === 2 && !viagem) { cam.z = Math.max(zMin(), Math.min(zMax, pinca.z * distDedos() / pinca.d)); limitar(); return; } if (!drag || viagem) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 6) { drag.moveu = true; cv.classList.add('arrasta'); } if (!drag.moveu) return; anim = null; cam.x = drag.cx - dx / cam.z; cam.y = drag.cy - dy / cam.z; limitar(); });
+    cv.addEventListener('pointerup', (e) => { const eraPinca = !!pinca; soltaDedo(e); cv.classList.remove('arrasta'); if (drag && !drag.moveu && !eraPinca) clique(e); drag = null; });
     cv.addEventListener('wheel', (e) => { e.preventDefault(); zoomPara(cam.z * (e.deltaY > 0 ? .88 : 1.14)); }, { passive: false });
     addEventListener('keydown', (e) => { if (!aberto) return; const k = e.key;
       if (k === 'Escape') { if (info) mostrarInfo(false); else if (sel >= 0) selecionar(-1); else fechar(); } else if (k === 'ArrowRight' || k === 'ArrowDown') selecionar((sel + 1) % def.locais.length); else if (k === 'ArrowLeft' || k === 'ArrowUp') selecionar((sel - 1 + def.locais.length) % def.locais.length);
       else if (k === 'Enter' || k === ' ') { if (sel >= 0) ir(); } else if (k === 'i' || k === 'I') { if (sel >= 0) mostrarInfo(!info); } else if (k === '+' || k === '=') zoomPara(cam.z * 1.3); else if (k === '-') zoomPara(cam.z / 1.3); else return; e.preventDefault(); e.stopImmediatePropagation(); }, true);
   }
-  const zMin = () => Math.max(cv.clientWidth / M.W, cv.clientHeight / M.H) * 1.0001, zMax = 5;
+  const celular = () => Math.min(innerWidth, innerHeight) < 560;
+  const zCobre = () => Math.max(cv.clientWidth / M.W, cv.clientHeight / M.H) * 1.0001;
+  const zMin = () => celular() ? Math.min(cv.clientWidth / M.W, cv.clientHeight / M.H) : zCobre(), zMax = 5;
   function zoomPara(z) { anim = { de: { ...cam }, para: { x: cam.x, y: cam.y, z: Math.max(zMin(), Math.min(zMax, z)) }, t: 0, dur: .35, f: easeOut }; }
-  function limitar() { const hw = cv.clientWidth / 2 / cam.z, hh = cv.clientHeight / 2 / cam.z; cam.x = Math.max(hw, Math.min(M.W - hw, cam.x)); cam.y = Math.max(hh, Math.min(M.H - hh, cam.y)); }
+  function limitar() { const hw = cv.clientWidth / 2 / cam.z, hh = cv.clientHeight / 2 / cam.z; cam.x = hw * 2 >= M.W ? M.W / 2 : Math.max(hw, Math.min(M.W - hw, cam.x)); cam.y = hh * 2 >= M.H ? M.H / 2 : Math.max(hh, Math.min(M.H - hh, cam.y)); } // tela maior que o mapa: fica no meio
 
   /* ---------- montar o mapa (uma vez) ---------- */
   function montar(d) {
@@ -287,7 +300,7 @@
     ui.querySelector('.t').textContent = d.titulo; ui.querySelector('.s').textContent = d.subtitulo || ''; const bt = ui.querySelector('.teste'); bt.hidden = !d.teste; bt.textContent = d.teste?.rotulo || ''; mostrarTrava(-1);
     ui.hidden = false; requestAnimationFrame(() => ui.classList.add('on')); aberto = true; sel = -1; info = false; viagem = null; faiscas = [];
     resize(); const atual = d.locais.findIndex((L) => L.atual), foco = atual >= 0 ? centro(atual) : { x: M.W / 2, y: M.H / 2 };
-    cam = { x: M.W / 2, y: M.H / 2, z: zMin() }; limitar(); anim = { de: { ...cam }, para: { x: foco.x, y: foco.y, z: Math.min(zMax, zMin() * 1.9) }, t: -.25, dur: 1.4, f: ease };
+    cam = { x: M.W / 2, y: M.H / 2, z: zMin() }; limitar(); anim = { de: { ...cam }, para: { x: foco.x, y: foco.y, z: celular() ? Math.min(zMax, Math.max(zMin() * 1.15, zCobre() * .9)) : Math.min(zMax, zMin() * 1.9) }, t: -.25, dur: 1.4, f: ease }; montarLugares();
     ui.querySelector('.pv').classList.remove('on'); ui.querySelector('.fade').style.opacity = 0; mostrarInfo(false);
     last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(loop);
     window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: true } }));
@@ -298,14 +311,18 @@
   const centro = (i) => { const L = M.locs[i]; return { x: L.bx + L.bw / 2, y: L.by + L.bh * .6 }; };
   function selecionar(i) {
     if (viagem) return; sel = i; const pv = ui.querySelector('.pv'); mostrarInfo(false); clearInterval(previaTimer); mostrarTrava(i >= 0 && def.locais[i].estado?.trava ? i : -1);
-    if (i < 0) { pv.classList.remove('on'); anim = { de: { ...cam }, para: { ...cam, z: Math.max(zMin(), cam.z * .75) }, t: 0, dur: .5, f: ease }; return; }
-    const L = def.locais[i], ok = L.estado?.ok !== false, f = centro(i), largo = innerWidth > 760, z = Math.min(zMax, Math.max(zMin() * 2.2, 3));
-    anim = { de: { ...cam }, para: { x: f.x + (largo ? 170 / z : 0), y: f.y + (largo ? 0 : 110 / z), z }, t: 0, dur: .8, f: ease };
+    if (i < 0) { ui.classList.remove('ficha-aberta'); pv.classList.remove('on'); anim = { de: { ...cam }, para: { ...cam, z: Math.max(zMin(), cam.z * .75) }, t: 0, dur: .5, f: ease }; return; }
+    const L = def.locais[i], ok = L.estado?.ok !== false, f = centro(i), largo = innerWidth > 760, cel = celular(), lado = cel && innerWidth > innerHeight, z = cel ? Math.min(zMax, Math.max(zCobre() * 1.4, 1.6)) : Math.min(zMax, Math.max(zMin() * 2.2, 3));
+    anim = { de: { ...cam }, para: { x: f.x + (largo ? 170 / z : lado ? cv.clientWidth * .22 / z : 0), y: f.y + (largo || lado ? 0 : cel ? cv.clientHeight * .2 / z : 110 / z), z }, t: 0, dur: .8, f: ease }; ui.classList.add('ficha-aberta');
     M.locs[i].pulo = 0; for (let k = 0; k < 26; k++) { const a = Math.random() * Math.PI * 2, v = 30 + Math.random() * 70; faiscas.push({ x: f.x, y: f.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v * .6 - 50, t: 0, cor: ['#ffd24a', '#ffffff', '#ffe9a8'][k % 3] }); }
     pv.querySelector('h3').textContent = L.nome; pv.querySelector('.sub').textContent = L.sub || ''; pv.querySelector('.desc').innerHTML = `<b>${L.nome}</b>${L.descricao || ''}`;
     pv.querySelector('.motivo').textContent = ok ? '' : '🔒 ' + (L.estado?.motivo || L.estado?.reason || 'Ainda não dá para ir.'); const bt = pv.querySelector('.ir'); bt.disabled = !ok || !!L.atual; bt.textContent = L.atual ? 'VOCÊ ESTÁ AQUI' : ok ? (def.botao || 'IR PARA LÁ ▶') : L.estado?.trava ? '🔒 TRANCADO' : 'BLOQUEADO';
     pv.classList.remove('on'); void pv.offsetWidth; pv.classList.add('on');
     const prev = pv.querySelector('canvas.prev'), pc = prev.getContext('2d'); pc.imageSmoothingEnabled = false; const desenha = () => { try { L.previa?.(pc, prev.width, prev.height, performance.now() / 1000); } catch (e) {} if (!ok) { pc.fillStyle = 'rgba(10,8,6,.55)'; pc.fillRect(0, 0, prev.width, prev.height); } if (L.estado?.trava) cadeado(prev.width / 2, prev.height / 2 + 34, 4, 0, pc); }; desenha(); previaTimer = setInterval(desenha, 120);
+  }
+  function montarLugares() { // faixa com todos os lugares (celular): toque e a câmera vai até lá
+    const el = ui.querySelector('.lugares'); el.innerHTML = ''; ui.classList.remove('ficha-aberta');
+    def.locais.forEach((L, i) => { const b = document.createElement('button'); b.type = 'button'; const bloq = L.estado?.ok === false; b.className = bloq ? 'bloq' : L.atual ? 'atual' : ''; b.textContent = (L.atual ? '● ' : bloq ? '🔒 ' : '') + L.nome; b.addEventListener('click', () => selecionar(i)); el.appendChild(b); });
   }
   let travaI = -1, travaAte = 0;
   function mostrarTrava(i) { const el = ui?.querySelector('.trava'); if (!el) return; travaI = i; el.classList.remove('on'); if (i < 0) return; const T = def.locais[i].estado.trava; el.querySelector('.t').textContent = T.titulo || 'PRECISA DERROTAR'; el.querySelector('.n').innerHTML = (T.nomes || []).map((n) => String(n).replace(/[<>&]/g, '')).join('<br>'); el.querySelector('small').textContent = T.texto || ''; void el.offsetWidth; el.classList.add('on'); travaAte = tempo + 5.5; M.locs[i].tremor = 1; }

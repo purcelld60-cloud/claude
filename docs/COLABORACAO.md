@@ -44,7 +44,7 @@ Antes de começar, rode `git fetch` e veja o que mudou nas duas branches. Se for
 
 | Área | Quem | Situação |
 | --- | --- | --- |
-| Menu de pausa estilo roça + OPÇÕES (as duas campanhas) | Claude | feito |
+| Pausa da Campanha 2 estilo roça; na principal só o botão OPÇÕES (botões originais) | Claude | feito |
 | Golpes da Campanha 2: o inimigo só pisca (sem efeitos extras) | Claude | feito |
 | — livre — | ChatGPT | escreva aqui o que vai pegar |
 
@@ -72,3 +72,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
 - **2026-11-20 · Claude:** o dono não quer **nenhum efeito extra nos golpes**: nada de onomatopeia, faísca, poeira, câmera lenta ou hitstop. No golpe, **o inimigo só pisca**.
   - Removi o `impacto.js`.
   - A Campanha 2 agora abre para todo mundo direto da tela inicial.
+- **2026-11-20 · Claude:** **não mude os botões da campanha principal**: nem o visual, nem os de toque, nem a pausa. O dono pediu que fiquem como eram.
+  - A pausa da principal só ganhou o OPÇÕES.
+  - Corrigi a Campanha 2, que deixava os botões dela presos na principal.
+  - A principal agora para de desenhar enquanto a Campanha 2 está aberta.
+  - O mapa ficou bom no celular.
