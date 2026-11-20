@@ -1,4 +1,5 @@
 name: Gerar IPA (iOS, sem assinatura)
+run-name: "Gerar IPA${{ github.event.inputs.dev == 'true' && ' · DESENVOLVEDOR' || '' }} (tentativa ${{ github.event.inputs.tentativa || '1' }})"
 
 # Gera um .ipa SEM assinatura e publica em Releases. Para instalar no iPhone é preciso
 # um instalador que assine ou dispense assinatura (TrollStore, AltStore, SideStore,
@@ -26,7 +27,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: ios-${{ github.ref }}
+  # o IPA normal e o de desenvolvedor ficam em filas separadas: um não cancela o outro
+  group: ios-${{ github.ref }}-${{ github.event.inputs.dev == 'true' && 'dev' || 'normal' }}
   cancel-in-progress: true
 
 jobs:
@@ -116,6 +118,9 @@ jobs:
           TENTATIVA: ${{ github.event.inputs.tentativa || '1' }}
         run: |
           if gh release view "ios-b${{ github.run_number }}" >/dev/null 2>&1 || gh release view "ios-dev-b${{ github.run_number }}" >/dev/null 2>&1; then echo "IPA publicado."; exit 0; fi
+          # se já existe uma execução mais nova na fila (ex.: outro merge), não dispara mais uma
+          NOVAS=$(gh run list --workflow ios.yml --branch main --limit 20 --json databaseId,status -q "[.[] | select(.databaseId > ${{ github.run_id }} and .status != \"completed\")] | length")
+          if [ "${NOVAS:-0}" -gt 0 ]; then echo "Já tem um IPA mais novo sendo gerado."; exit 0; fi
           if [ "$TENTATIVA" -ge 4 ]; then echo "::warning title=IPA::Sem Mac livre depois de 4 tentativas. Rode o workflow de novo mais tarde."; exit 0; fi
           echo "Nenhum Mac livre: tentativa $((TENTATIVA + 1)) de 4."
           gh workflow run ios.yml --ref main -f tentativa=$((TENTATIVA + 1)) -f dev=${{ github.event.inputs.dev || 'false' }}
