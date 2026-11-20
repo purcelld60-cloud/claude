@@ -11,7 +11,7 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 | 3 | Poderes de Da Roça e mural para trocar | feito e aprovado |
 | 4 | Locomoção: mapas, táxi do Seu Zé e loja de garrafadas | feito e aprovado |
 | 5 | Cutscenes | feito e aprovado |
-| 6 | O jogo: 6A prólogo jogável · 6B vilões 1 a 4 · 6C vilões 5 a 8 · 6D Jorge, final e créditos | 6A e 6B feitos · **6C feito, aguardando aprovação** |
+| 6 | O jogo: 6A prólogo jogável · 6B vilões 1 a 4 · 6C vilões 5 a 8 · 6D Jorge, final e créditos (a Campanha 2 inteira jogável) | 6A, 6B e 6C feitos · **6D feito, aguardando aprovação** |
 
 ## Passo 1 · Personagens (`dist/campanha2/personagens.js`)
 
@@ -560,3 +560,29 @@ Mesmo sistema do 6B, com inimigos novos e golpes novos.
 4. Sair do shopping, táxi até a escola, entrar, subir a escada até o pátio e o Fred.
 
 A seta do objetivo também mostra o caminho pelas portas, como a entrada do shopping e a escada da escola. Depois do Fred, a garrafada da Aura de Amizade fica liberada e o objetivo aponta para a praça da Catedral à noite (o 6D).
+
+
+## Passo 6D · A batalha final, o final feliz e os créditos
+
+**O caminho:**
+1. Depois do Fred, descer a escada da escola, sair e pegar o táxi até o Centro.
+2. À noite, andar até a praça da Catedral, passando pela turma nova do Jorge.
+3. Chegando perto, a cutscene do centro toca no próprio lugar da luta: o Jorge finge não conhecer o Da Roça, o Da Roça agarra as pernas dele e começa a batalha final.
+
+**Jorge (nv 20), a luta final.** São **4 fases**, como a Batata da campanha 1, e ele tem mais vida, mais dano, mais velocidade e mais defesa que o Fred. Cada fase faz referência ao passado do trio:
+
+| Fase | Nome | Golpes |
+| --- | --- | --- |
+| 1 | A bagunça da sala | Leque e chuva de bolinhas de papel, investidas |
+| 2 | A bronca do professor | Ondas "BRONCA!" no chão (pule), chuva de carteiras escolares; chama a turma nova |
+| 3 | O apelido | Letras G-O-R-D-O em leque, colunas de luz, combo de ida e volta |
+| 4 | As lembranças | Fotos do trio caindo, flashes de foto em colunas. **Fotos do trio pequeno piscam no céu, atrás da luta** |
+
+As provocações mudam a cada fase: de "EU NÃO TE CONHEÇO!" até "O TRIO... ACABOU... NÉ?". A barra de vida tem 4 marcas e muda de cor a cada fase.
+
+**O final.** Quando o Jorge cai, aparece "JORGE CAIU... E AGORA, DA ROÇA?". Depois vêm:
+- a cutscene do final feliz: a mão estendida, a confissão, o abraço, a videochamada com o Reeis e o FIM;
+- os créditos;
+- a tela **CAMPANHA 2 COMPLETA!**, com CONTINUAR EXPLORANDO ou VOLTAR AO MENU.
+
+O save marca a campanha como zerada (`flags.zerou`) e o painel da Campanha 2 passa a mostrar "✔ Campanha 2 completa".

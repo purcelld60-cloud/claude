@@ -59,10 +59,12 @@
     gemeos: { obj: 'Entre no shopping e vá até a LAN house no fim do corredor. Os gêmeos não sabem perder.', cena: 20, alvo: 3560, hora: 19, fase: 'gemeos', via: { 22: 1360 } },
     ir_fred: { obj: 'Saia do shopping e pegue o táxi até a entrada da Escola SESI. Amanhã de manhã, o Jorge vai estar no pátio.', cena: 22, alvo: 1100, hora: 9.5, ir: 21, prox: 'fred', via: { 20: 90 } },
     fred: { obj: 'Entre na escola e suba a escada até o pátio do 2º andar. O Jorge está lá... e o Fred também.', cena: 27, alvo: 1560, hora: 10, fase: 'fred', via: { 21: 3940, 26: 1560 } },
-    fim6c: { obj: 'Hoje à noite, o Jorge vai estar na praça da Catedral, no centro. (A batalha final chega no passo 6D.)', cena: 27, alvo: 58, hora: 11 }
+    ir_centro: { obj: 'Hoje à noite o Jorge vai estar na praça da Catedral. Desça a escada, saia da escola e pegue o táxi até o Centro.', cena: 27, alvo: 58, hora: 18.5, via: { 26: 70, 21: 3700 }, ir: 14, prox: 'jorge' },
+    jorge: { obj: 'Ande até a praça da Catedral. O Jorge está lá, com a turma nova.', cena: 14, alvo: 2640, hora: 21, fase: 'jorge' },
+    zerou: { obj: 'Você zerou a Campanha 2! O trio voltou. Explore Conquista à vontade: táxi, feira, garrafadas e os moradores.', cena: 14, hora: 21.5 }
   };
-  const APOS_VITORIA = { creuza: 'ir_tonhao', tonhao: 'ir_valdomiro', valdomiro: 'ir_kaua', kaua: 'ir_barao', barao: 'ir_breno', breno: 'ir_gemeos', gemeos: 'ir_fred', fred: 'fim6c' };
-  const PASSO_INICIAL_DA_CENA = { passaporte: 0, lucas: 0, checkin: 12, raiox: 12, portao: 12, taxi1: 12, lurdes: 13, creuza: 25, ir_tonhao: 13, tonhao: 16, ir_valdomiro: 16, valdomiro: 17, ir_kaua: 17, kaua: 15, ir_barao: 15, barao: 18, ir_breno: 18, breno: 19, ir_gemeos: 19, gemeos: 22, ir_fred: 20, fred: 21, fim6c: 27 };
+  const APOS_VITORIA = { creuza: 'ir_tonhao', tonhao: 'ir_valdomiro', valdomiro: 'ir_kaua', kaua: 'ir_barao', barao: 'ir_breno', breno: 'ir_gemeos', gemeos: 'ir_fred', fred: 'ir_centro', jorge: 'zerou' };
+  const PASSO_INICIAL_DA_CENA = { passaporte: 0, lucas: 0, checkin: 12, raiox: 12, portao: 12, taxi1: 12, lurdes: 13, creuza: 25, ir_tonhao: 13, tonhao: 16, ir_valdomiro: 16, valdomiro: 17, ir_kaua: 17, kaua: 15, ir_barao: 15, barao: 18, ir_breno: 18, breno: 19, ir_gemeos: 19, gemeos: 22, ir_fred: 20, fred: 21, ir_centro: 27, jorge: 14, zerou: 14 };
   function passo(id) { S.passo = id; const p = PASSOS[id]; if (p?.obj) objetivoNovo(p.obj); salvar(); }
 
   /* ---------- objetos e pessoas do prólogo (desenhados por cima do cenário) ---------- */
@@ -119,7 +121,9 @@
     P, sfx: (n) => sfx(n), tremer: (n) => { tremor = Math.max(tremor, n); }, flash: (cor) => { clarao = .5; claraoCor = cor || '#ffffff'; },
     ferir: (n, de) => ferir(n, de),
     entrarArena: () => { const f = fase; S.flags.cp = { cena: cenaId, x: f.F.checkpoint }; salvar(); tocarDeslocado(f.F.intro, f.chefe.x, f.chefe.tipo, () => f.comecarLuta()); },
-    vencer: () => { const f = fase, slug = f.slug; tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => { window.CampanhaTaxi?.vencer?.(slug); S.flags['venceu_' + slug] = 1; delete S.flags.cp; fase = null; passo(APOS_VITORIA[slug]); salvar('JOGO SALVO'); }); }
+    vencer: () => { const f = fase, slug = f.slug;
+      if (f.F.final) { tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => tocar('c2_creditos', () => { S.flags.venceu_jorge = 1; S.flags.zerou = 1; delete S.flags.cp; fase = null; passo('zerou'); salvar(); telaFim(); })); return; }
+      tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => { window.CampanhaTaxi?.vencer?.(slug); S.flags['venceu_' + slug] = 1; delete S.flags.cp; fase = null; passo(APOS_VITORIA[slug]); salvar('JOGO SALVO'); }); }
   };
   function ferir(n, de) {
     if (morto || cut || (P.inv || 0) > 0 || viagem) return; n = window.CampanhaPoderes?.filtrarDano?.(n) ?? n; if (!n) { sfx('plim'); return; }
@@ -131,6 +135,12 @@
     morto = true; keys.clear(); const el = document.createElement('div'); el.className = 'pausa';
     el.innerHTML = '<h2>VOCÊ DESMAIOU...</h2><p>O frio de Conquista não perdoa. Respire fundo e tente de novo: você volta no último ponto de controle, com a vida cheia.</p><button type="button" data-a="de-novo">▶ TENTAR DE NOVO</button>';
     el.addEventListener('click', (e) => { if (e.target.closest('button')) { el.remove(); voltarDoDesmaio(); } }); box.querySelector('.tela').appendChild(el); setTimeout(() => el.querySelector('button')?.focus(), 30);
+  }
+  function telaFim() {
+    keys.clear(); const el = document.createElement('div'); el.className = 'pausa';
+    el.innerHTML = '<h2>CAMPANHA 2 COMPLETA!</h2><p>Da Roça foi até Vitória da Conquista de chinelo, enfrentou oito vilões e um ex-melhor amigo... e trouxe o trio de volta.<br><br>Obrigado por jogar!</p><button type="button" data-a="explorar">▶ CONTINUAR EXPLORANDO</button><button type="button" data-a="menu">VOLTAR AO MENU</button>';
+    el.addEventListener('click', (e) => { const a = e.target.closest('button')?.dataset.a; if (!a) return; el.remove(); if (a === 'menu') fechar(); });
+    box.querySelector('.tela').appendChild(el); sfx('fanfarra'); setTimeout(() => el.querySelector('button')?.focus(), 30);
   }
   function voltarDoDesmaio() { morto = false; P.hp = 100; P.inv = 1.5; fase?.reiniciar(); const cp = S.flags.cp; if (cp) irPara(cp.cena, cp.x); else irPara(cenaId, (PASSOS[S.passo]?.fase && fase ? fase.F.checkpoint - 400 : P.x)); salvar(); }
   function faseAtual() { // cria a fase quando você chega no lugar dela
@@ -351,7 +361,7 @@
 
   /* ---------- abrir e fechar ---------- */
   function abrir(o = {}) {
-    if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; if (S.passo === 'fim6b') S.passo = 'ir_barao'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
+    if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; if (S.passo === 'fim6b') S.passo = 'ir_barao'; if (S.passo === 'fim6c') S.passo = 'ir_centro'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
     aberto = true; box.hidden = false; pausado = false; cut = null; keys.clear(); P.hp = S.hp || 100;
     TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true }));
     if (S.passo === 'abertura') { irPara(0, 700); tocar('c2_abertura', PASSOS.abertura.depois); }
@@ -370,7 +380,7 @@
     const ok = liberada(); let el = document.getElementById('c2Painel');
     if (!el) { el = document.createElement('div'); el.id = 'c2Painel'; el.className = 'c2j'; el.style.background = '#06080cdd'; document.body.appendChild(el); css(); }
     el.hidden = false;
-    el.innerHTML = `<div class="pausa" style="position:relative;background:none"><h2>CAMPANHA 2 · VITÓRIA DA CONQUISTA</h2>${ok ? `<p>Um ano depois. O Jorge ligou... e desligou. Agora o Da Roça vai até Conquista olhar na cara dele.</p>${temSave() ? '<button type="button" data-a="cont">▶ CONTINUAR</button>' : ''}<button type="button" data-a="novo">${temSave() ? 'COMEÇAR DE NOVO' : '▶ COMEÇAR'}</button>` : '<p>🔒 Termine a campanha principal (até a ligação do Jorge) para liberar a Campanha 2.</p>'}<button type="button" data-a="fechar">VOLTAR</button></div>`;
+    el.innerHTML = `<div class="pausa" style="position:relative;background:none"><h2>CAMPANHA 2 · VITÓRIA DA CONQUISTA</h2>${ok ? `<p>${safe(() => JSON.parse(localStorage.getItem(KEY) || 'null')?.flags?.zerou, false) ? '✔ Campanha 2 completa: o trio voltou! Continue explorando Conquista.' : 'Um ano depois. O Jorge ligou... e desligou. Agora o Da Roça vai até Conquista olhar na cara dele.'}</p>${temSave() ? '<button type="button" data-a="cont">▶ CONTINUAR</button>' : ''}<button type="button" data-a="novo">${temSave() ? 'COMEÇAR DE NOVO' : '▶ COMEÇAR'}</button>` : '<p>🔒 Termine a campanha principal (até a ligação do Jorge) para liberar a Campanha 2.</p>'}<button type="button" data-a="fechar">VOLTAR</button></div>`;
     el.onclick = (e) => { const a = e.target.closest('button')?.dataset.a; if (!a) return; if (a === 'fechar') el.hidden = true; if (a === 'cont') { el.hidden = true; abrir({}); } if (a === 'novo') { if (temSave() && !confirm('Começar a Campanha 2 de novo? O progresso dela será apagado (a campanha principal não muda).')) return; el.hidden = true; abrir({ novo: true }); } };
     setTimeout(() => el.querySelector('button')?.focus(), 30);
   }

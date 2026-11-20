@@ -96,7 +96,19 @@
         golpes: [['topete', 'leque', 'investida', 'topete', 'chuva'], ['combo', 'topete', 'leque', 'invocar', 'chuva', 'topete'], ['topete', 'combo', 'chuva', 'topete', 'onda', 'leque', 'combo', 'invocar']], minion: 'aluno',
         falas: ['TOPETE, TOPETE...', 'PÃO DE QUEIJO!', 'CLUBE DO TOPETE!', 'O JORGE ME ESCOLHEU!', 'VOCÊ É O PASSADO!', 'ELE NEM FALA DE VOCÊ!', 'O QUE EU SOU COM O JORGE...'] },
       intro: 'c2_vilao_fred', derrota: 'c2_derrota_fred',
-      inimigos: [['aluno', 420], ['pombo', 600], ['aluna', 760], ['aluno', 900]], curas: [700] }
+      inimigos: [['aluno', 420], ['pombo', 600], ['aluna', 760], ['aluno', 900]], curas: [700] },
+    // BATALHA FINAL: 4 fases (como a Batata da campanha 1), mais vida, mais dano e mais rápido; golpes com o passado do trio
+    jorge: { cena: 14, hora: 21, checkpoint: 2080, final: true,
+      chefe: { tipo: 'jorge', nome: 'JORGE', titulo: 'O EX-MELHOR AMIGO', nivel: 20, x: 2640, hp: 520, cor: '#9a7ad8', proj: 'papel', arena: [-420, 420], vel: 1.34, armor: .45, danoMult: 1.35,
+        mult: [1, 1.2, 1.4, 1.65],
+        nomesFase: ['', 'A BRONCA DO PROFESSOR', 'O APELIDO', 'AS LEMBRANÇAS'],
+        porFase: [{ proj: 'papel', chuva: 'papel' }, { proj: 'papel', chuva: 'carteira', onda: 'bronca' }, { proj: 'letra', chuva: 'carteira', onda: 'bronca' }, { proj: 'papel', chuva: 'foto', onda: 'bronca', raio: 'foto' }],
+        golpes: [['leque', 'investida', 'chuva', 'leque', 'investida'], ['onda', 'chuva', 'leque', 'investida', 'onda', 'invocar'], ['leque', 'combo', 'raio', 'chuva', 'onda', 'leque', 'invocar'], ['raio', 'combo', 'chuva', 'onda', 'leque', 'raio', 'investida', 'chuva']], minion: 'aluno',
+        falasFase: [['EU NÃO TE CONHEÇO!', 'SAI DA MINHA VIDA!', 'BOLINHA DE PAPEL, LEMBRA?', 'VOLTA PRA ITABUNA!'], ['SILÊNCIO NA SALA!', 'TODO MUNDO PRO CASTIGO!', 'FOI O DA ROÇA, PROFESSOR!', 'BRONCA EM DOBRO!'],
+          ['NÃO ME CHAMA DE GORDO!', 'G-O-R-D-O, É ISSO?!', 'EU MUDEI!', 'POR QUE VOCÊ VEIO?!'], ['...O CASTIGO EM TRIO...', 'POR QUE VOCÊ NÃO DESISTE?!', 'EU TINHA VERGONHA!', 'O TRIO... ACABOU... NÉ?']],
+        falas: ['EU NÃO TE CONHEÇO!'] },
+      intro: 'c2_centro', derrota: 'c2_final',
+      inimigos: [['aluno', 1960], ['pombo', 2040], ['aluna', 2120]], curas: [1900, 2150] }
   };
   const TIPO = { vizinha: 'c2i_vizinha', vizinha2: 'c2i_vizinha2', motoca: 'c2i_motoca', feirante: 'c2i_feirante', seguidor: 'c2i_seguidor', jagunco: 'c2i_jagunco', valentao: 'c2i_valentao', gamer: 'c2i_gamer', aluno: 'c2i_aluno', aluna: 'c2i_aluna', pombo: null, urubu: null, maritaca: null, morcego: null, drone: null };
   const STATS = { vizinha: { hp: 34, ia: 'tiro', proj: 'balao', dano: 9 }, vizinha2: { hp: 40, ia: 'tiro', proj: 'balao', dano: 10 }, pombo: { hp: 14, ia: 'voa', dano: 8 }, urubu: { hp: 22, ia: 'voa', dano: 11 },
@@ -118,7 +130,7 @@
     B.onDano = (n, tipo) => danoChefe(n, tipo);
     // o segundo gêmeo: divide a vida com o primeiro, fica do outro lado e atira junto
     const B2 = K.dupla ? { tipo: K.dupla.tipo, x: K.x + K.dupla.dx, y: FLOOR, dir: -1, hit: 0, st: 'idle', tt: 2, stun: 0, conf: 0, vx: 0, vy: 0, alto: 96, largura: 30, get hp() { return B.hp; }, set hp(v) {}, onDano: (n, tipo) => danoChefe(n, tipo, B2) } : null;
-    const HPF = [1, 1.25, 1.5].map((m) => Math.round(K.hp * m));
+    const MULT = K.mult || [1, 1.25, 1.5], NF = MULT.length, HPF = MULT.map((m) => Math.round(K.hp * m)), pf = (k) => K.porFase?.[B.fase - 1]?.[k] ?? K[k];
     const arena = { ativa: false, l: K.x + K.arena[0], r: K.x + K.arena[1] };
     let vencido = false;
 
@@ -134,19 +146,19 @@
     function danoChefe(n, tipo, quem = B) {
       if (B.st === 'espera' || B.st === 'troca' || B.st === 'derrotado' || B.st === 'entrada') return false;
       const exposto = B.st === 'recupera' || B.stun > 0, d = Math.max(1, Math.round(n * (exposto ? 1 : B.armor))); B.hp -= d; quem.hit = .14; api.tremer(exposto ? 3 : 1.5);
-      if (B.hp <= 0) { if (B.fase < 3) novaFase(B.fase + 1); else derrotar(); }
+      if (B.hp <= 0) { if (B.fase < NF) novaFase(B.fase + 1); else derrotar(); }
       return exposto ? d + '!' : d;
     }
     function novaFase(f) {
       B.fase = f; B.max = B.hp = HPF[f - 1]; B.st = 'troca'; B.tt = 1.3; B.padrao = 0; B.golpe = null; projs.length = 0; inimigos.forEach((e) => { if (e.invocado) e.hp = 0; });
       P.inv = Math.max(P.inv || 0, 1.3); api.tremer(9); api.flash('#f6d8ff'); api.sfx('vs');
-      placa('FASE ' + f, f === 3 ? 'ÚLTIMA FASE · VIDA RENOVADA' : 'VIDA RENOVADA · ' + (K.nome === 'DONA CREUZA' ? 'ELA FICOU' : K.dupla ? 'ELES FICARAM' : 'ELE FICOU') + ' MAIS FORTE', '#ffb36b', 1.8);
-      fala(K.furia && f === 3 ? 'MODO FÚRIA!!!' : K.tipo === 'fred_conquista' && f === 3 ? 'ELE É MEU MELHOR AMIGO!' : ['AGORA É SÉRIO!', 'VOCÊ VAI VER!', 'AINDA NÃO ACABOU!'][f - 2] || 'AH, É?'); if (K.furia && f === 3) placa('MODO FÚRIA', 'O PITBULL SOLTOU A CORRENTE', '#ff3a2a', 1.8);
+      placa('FASE ' + f, K.nomesFase?.[f - 1] ? K.nomesFase[f - 1] + (f === NF ? ' · ÚLTIMA FASE' : '') : f === NF ? 'ÚLTIMA FASE · VIDA RENOVADA' : 'VIDA RENOVADA · ' + (K.nome === 'DONA CREUZA' ? 'ELA FICOU' : K.dupla ? 'ELES FICARAM' : 'ELE FICOU') + ' MAIS FORTE', '#ffb36b', 1.8);
+      fala(K.nome === 'JORGE' ? ['', 'SILÊNCIO NA SALA!', 'NÃO ME CHAMA DE GORDO!', '...POR QUE VOCÊ NÃO DESISTE?'][f - 1] : K.furia && f === 3 ? 'MODO FÚRIA!!!' : K.tipo === 'fred_conquista' && f === 3 ? 'ELE É MEU MELHOR AMIGO!' : ['AGORA É SÉRIO!', 'VOCÊ VAI VER!', 'AINDA NÃO ACABOU!'][f - 2] || 'AH, É?'); if (K.furia && f === 3) placa('MODO FÚRIA', 'O PITBULL SOLTOU A CORRENTE', '#ff3a2a', 1.8);
     }
     function derrotar() {
       B.hp = 0; B.st = 'derrotado'; B.tt = 2.2; projs.length = 0; inimigos.forEach((e) => { if (e.invocado) e.hp = 0; }); vencido = true;
-      api.tremer(12); api.flash('#fff6d8'); api.sfx('fanfarra'); window.CampanhaLoja?.ganhar?.(60); flutua(B.x, B.y - 120, '+60 ●', '#ffd24a');
-      placa('DERROTAD' + (K.nome === 'DONA CREUZA' ? 'A' : K.dupla ? 'OS' : 'O') + '!', K.nome, '#ffd25a', 2.2);
+      api.tremer(12); api.flash('#fff6d8'); api.sfx(K.nome === 'JORGE' ? 'misterio' : 'fanfarra'); if (K.nome !== 'JORGE') { window.CampanhaLoja?.ganhar?.(60); flutua(B.x, B.y - 120, '+60 ●', '#ffd24a'); }
+      if (K.nome === 'JORGE') placa('JORGE CAIU...', 'E AGORA, DA ROÇA?', '#e8d8ff', 2.2); else placa('DERROTAD' + (K.nome === 'DONA CREUZA' ? 'A' : K.dupla ? 'OS' : 'O') + '!', K.nome, '#ffd25a', 2.2);
     }
     function fala(s) { falaTxt = s; falaVida = 1.6; }
 
@@ -164,14 +176,14 @@
       if (g === 'onda') B.y = FLOOR;
     }
     function solta(g) {
-      const G = B.golpe, d = Math.round((10 + B.fase * 2) * 1);
-      if (g === 'leque') { const n = 1 + B.fase * 2, a0 = Math.atan2(P.y - 40 - (B.y - 50), P.x - B.x); for (let i = 0; i < n; i++) { const a = a0 + (i - (n - 1) / 2) * .17; projs.push({ x: B.x + B.dir * 20, y: B.y - 50, vx: Math.cos(a) * 300 * vel(), vy: Math.sin(a) * 300 * vel(), g: 0, tipo: K.proj, dano: d, vida: 4, rot: 0 }); } api.sfx('whoosh'); }
+      const G = B.golpe, d = Math.round((10 + B.fase * 2) * (K.danoMult || 1));
+      if (g === 'leque') { const n = 1 + B.fase * 2, a0 = Math.atan2(P.y - 40 - (B.y - 50), P.x - B.x); for (let i = 0; i < n; i++) { const a = a0 + (i - (n - 1) / 2) * .17; projs.push({ x: B.x + B.dir * 20, y: B.y - 50, vx: Math.cos(a) * 300 * vel(), vy: Math.sin(a) * 300 * vel(), g: 0, tipo: pf('proj'), dano: d, vida: 4, rot: 0, letra: 'GORDO'[i % 5] }); } api.sfx('whoosh'); if (pf('proj') === 'letra') fala('G-O-R-D-O?!'); }
       if (g === 'investida' || g === 'combo' || g === 'soco') { G.corre = true; api.sfx(K.moto ? 'buzina' : g === 'soco' ? 'impacto' : 'whoosh'); if (g === 'soco') fala('POW!'); }
       if (g === 'topete') { api.sfx('whoosh'); fala('GIRA, TOPETE!'); }
-      if (g === 'chuva') { for (const x of G.pontos) projs.push({ x, y: -30 - rnd(0, 80), vx: 0, vy: 520, g: 0, tipo: K.chuva || K.proj, dano: d + 2, vida: 3, cai: true }); }
-      if (g === 'onda') { for (const s of [-1, 1]) projs.push({ x: B.x + s * 20, y: FLOOR - 4, vx: s * 360 * vel(), vy: 0, g: 0, tipo: 'onda', dano: d, vida: 3, chao: true }); api.tremer(6); api.sfx('impacto'); }
+      if (g === 'chuva') { for (const x of G.pontos) projs.push({ x, y: -30 - rnd(0, 80), vx: 0, vy: 520, g: 0, tipo: pf('chuva') || pf('proj'), dano: d + 2, vida: 3, cai: true }); }
+      if (g === 'onda') { for (const s of [-1, 1]) projs.push({ x: B.x + s * 20, y: FLOOR - 4, vx: s * 360 * vel(), vy: 0, g: 0, tipo: pf('onda') || 'onda', dano: d, vida: 3, chao: true }); api.tremer(6); api.sfx('impacto'); if (pf('onda') === 'bronca') fala('SILÊNCIO!'); }
       if (g === 'invocar') { const vivos = inimigos.filter((e) => e.invocado && e.hp > 0).length; for (let k = vivos; k < 2; k++) { const x = k ? arena.r - 40 : arena.l + 40; inimigos.push(novoInimigo(K.minion, x, { invocado: true, homeX: x })); efeitos.push({ k: 'poeira', x, y: FLOOR, t: 0 }); } fala('VEM, GALERA!'); api.sfx('risada'); }
-      if (g === 'raio') { for (const x of G.pontos) efeitos.push({ k: 'raio', x, t: 0, dano: d + 4 }); api.flash('#ffffff'); api.sfx('impacto'); }
+      if (g === 'raio') { for (const x of G.pontos) efeitos.push({ k: 'raio', x, t: 0, dano: d + 4, foto: pf('raio') === 'foto' }); api.flash(pf('raio') === 'foto' ? '#fff0d0' : '#ffffff'); api.sfx('impacto'); }
     }
 
     /* ----- quadro a quadro ----- */
@@ -245,7 +257,7 @@
       if (B2) atualizaB2(dt);
       if (B.st === 'derrotado') { B.tt -= dt; if (B.tt <= 0 && !B.fim) { B.fim = true; api.vencer(); } return; }
       B.x = clamp(B.x, arena.l + 30, arena.r - 30); B.tt -= dt;
-      falaT -= dt; if (falaT <= 0) { falaT = rnd(4, 6.5); fala(K.falas[Math.floor(rnd(0, K.falas.length))]); }
+      falaT -= dt; if (falaT <= 0) { falaT = rnd(4, 6.5); const L = K.falasFase?.[B.fase - 1] || K.falas; fala(L[Math.floor(rnd(0, L.length))]); }
       if (B.stun > 0) return;
       if (B.st === 'troca') { if (B.tt <= 0) { B.st = 'idle'; B.tt = .6; } return; }
       if (B.st === 'idle') { const dx = P.x - B.x; B.dir = dx < 0 ? -1 : 1; const ideal = 200; if (Math.abs(dx) > ideal + 40) B.x += Math.sign(dx) * 90 * vel() * dt; else if (Math.abs(dx) < ideal - 60) B.x -= Math.sign(dx) * 70 * dt;
@@ -274,11 +286,23 @@
       else if (q.tipo === 'pixel') { for (let k = 0; k < 4; k++) R(c, x - 8 + (k % 2) * 8, y - 8 + (k >> 1) * 8, 7, 7, ['#5ae0d0', '#e85ad0', '#ffe23a', '#2a8ae8'][(k + (Math.abs(x) >> 4)) % 4]); R(c, x - 9, y - 9, 18, 1, '#ffffff88'); }
       else if (q.tipo === 'controle') { c.save(); c.translate(x, y); c.rotate(q.rot * .4); R(c, -12, -6, 24, 12, '#0e1016'); R(c, -11, -5, 22, 10, '#3a3f48'); R(c, -8, -2, 5, 2, '#c8ccd0'); R(c, -7, -3, 2, 5, '#c8ccd0'); R(c, 5, -3, 3, 3, '#e8433a'); R(c, 8, 0, 3, 3, '#5ae0d0'); c.restore(); }
       else if (q.tipo === 'pao') { R(c, x - 9, y - 8, 18, 16, '#5a3a14'); R(c, x - 8, y - 7, 16, 14, '#e8b84a'); R(c, x - 6, y - 7, 10, 4, '#f6d880'); R(c, x - 3, y - 1, 2, 2, '#c8902a'); R(c, x + 2, y + 2, 2, 2, '#c8902a'); }
+      else if (q.tipo === 'papel') { c.save(); c.translate(x, y); c.rotate(q.rot); R(c, -7, -7, 14, 14, '#5a5a62'); R(c, -6, -6, 12, 12, '#f6f4ee'); R(c, -4, -2, 8, 1, '#8ab8e8'); R(c, -2, -5, 1, 9, '#d8d4c8'); c.restore(); }
+      else if (q.tipo === 'carteira') { R(c, x - 20, y - 14, 40, 6, '#3a2414'); R(c, x - 19, y - 13, 38, 4, '#a87a54'); R(c, x - 17, y - 8, 3, 18, '#5a5e62'); R(c, x + 14, y - 8, 3, 18, '#5a5e62'); R(c, x - 17, y + 2, 34, 2, '#5a5e62'); }
+      else if (q.tipo === 'letra') { R(c, x - 11, y - 11, 22, 22, '#2a0a3a'); R(c, x - 10, y - 10, 20, 20, '#c85af0'); txt(c, q.letra || 'G', x, y - 7, '#ffffff', { s: 3 }); }
+      else if (q.tipo === 'foto') { c.save(); c.translate(x, y); c.rotate(Math.sin(q.rot) * .3); R(c, -12, -14, 24, 28, '#3a2a1a'); R(c, -11, -13, 22, 26, '#f6f2e8'); R(c, -9, -11, 18, 14, '#8ac8f0'); R(c, -9, -1, 18, 4, '#6aa850'); R(c, -7, -6, 3, 5, '#c68a5e'); R(c, -2, -6, 3, 5, '#7a4a2e'); R(c, 3, -6, 3, 5, '#e2b48a'); c.restore(); }
+      else if (q.tipo === 'bronca') { const dx = Math.sign(q.vx); R(c, x - 34, y - 30, 68, 30, '#3a0806'); R(c, x - 32, y - 28, 64, 26, '#fff6dc'); txt(c, 'BRONCA!', x, y - 20, '#c43c3a', { s: 2 }); for (let k = 1; k < 4; k++) { c.globalAlpha = .4 / k; R(c, x - dx * (34 + k * 12), y - 26 + k * 2, 8, 22 - k * 4, '#ffffff'); } c.globalAlpha = 1; }
       else if (q.tipo === 'onda') { c.globalAlpha = .9; for (let k = 0; k < 4; k++) R(c, x - 3 - k * Math.sign(q.vx) * 6, y - 24 + k * 5, 6, 24 - k * 5, ['#ffffff', K.cor, K.cor, '#ffffff88'][k]); c.globalAlpha = 1; }
     }
     function personagem(c, tipo, x, y, o) { try { window.Art.drawCharacter(c, tipo, x, y, { frame: t, grounded: true, ...o }); } catch (e) {} }
     function barra(c, x, y, w, f, cor) { R(c, x - w / 2 - 1, y - 1, w + 2, 6, '#1c1408'); R(c, x - w / 2, y, w * clamp(f, 0, 1), 4, cor); }
+    function memorias(c) { // fase 4 do Jorge: fotos do trio piscando atrás da arena
+      if (!(K.nome === 'JORGE' && B.fase === 4 && B.st !== 'espera') || B.st === 'derrotado') return;
+      const quem = [['crianca_daroca', 'crianca_reeis', 'crianca_jorge'], ['pre_daroca', 'pre_reeis', 'pre_jorge'], ['crianca_daroca', 'crianca_reeis', 'crianca_jorge']];
+      for (let i = 0; i < 3; i++) { const fx0 = arena.l + 120 + i * ((arena.r - arena.l - 240) / 2), a = .32 + .22 * Math.max(0, Math.sin(t * 1.3 + i * 2.1)), y0 = FLOOR - 330 + Math.sin(t * .8 + i) * 8;
+        c.save(); c.globalAlpha = a; c.translate(fx0, y0); c.rotate((i - 1) * .08); R(c, -70, -6, 140, 150, '#f6f2e8'); R(c, -62, 2, 124, 110, '#e8c890'); R(c, -62, 80, 124, 32, '#c8a468');
+        quem[i].forEach((q, k) => personagem(c, q, -40 + k * 40, 104, { facing: k === 2 ? -1 : 1, emotion: 'friend', frame: t * 2 })); c.fillStyle = 'rgba(160,110,60,.35)'; c.fillRect(-62, 2, 124, 110); c.restore(); } }
     function desenhar(c) {
+      memorias(c);
       // avisos no chão (chuva e raio) e a faixa da investida
       if (B.st === 'carga') { const G = B.golpe, k = G.t / G.aviso, pis = Math.floor(t * 12) % 2;
         if (G.g === 'chuva' || G.g === 'raio') for (const x of G.pontos) { c.globalAlpha = .35 + k * .5; R(c, x - 26, FLOOR - 3, 52, 6, pis ? '#ff3a2a' : '#ffd24a'); if (G.g === 'raio') { c.globalAlpha = .12 + k * .25; R(c, x - 22, 0, 44, FLOOR, '#ffffff'); } c.globalAlpha = 1; }
@@ -310,7 +334,7 @@
       // chefe
       if (B.st !== 'espera' || Math.abs(P.x - B.x) < 1200) {
         const caido = B.st === 'derrotado', sh = B.st === 'carga' ? Math.round(Math.sin(t * 50) * 2) : 0, aura = B.fase >= 2 && !caido;
-        if (aura) for (let k = 0; k < 10; k++) { const q = (t * 1.5 + k / 10) % 1; c.globalAlpha = (1 - q) * .5; R(c, B.x + Math.sin(k * 2.3) * 22 - 3, B.y - q * 90, 6, 10, B.fase === 3 ? '#ff5a3a' : K.cor); } c.globalAlpha = 1;
+        if (aura) for (let k = 0; k < 10; k++) { const q = (t * 1.5 + k / 10) % 1; c.globalAlpha = (1 - q) * .5; R(c, B.x + Math.sin(k * 2.3) * 22 - 3, B.y - q * 110, 6, 10, B.fase >= 3 ? (B.fase === 4 ? '#f6e0ff' : '#ff5a3a') : K.cor); } c.globalAlpha = 1;
         c.save(); if (caido) { c.translate(B.x, B.y); c.rotate(-B.dir * Math.min(1.5, (2.2 - B.tt) * 3)); c.translate(-B.x, -B.y); }
         if (K.moto && B.st === 'ataque' && B.golpe?.g === 'investida') { moto(c, B.x, B.y, '#c9372f', B.dir, t); personagem(c, B.tipo, B.x - B.dir * 4, B.y - 20, { scale: 1.2, facing: B.dir, hit: B.hit > 0 }); }
         else personagem(c, B.tipo, B.x + sh, B.y, { scale: 1.3, facing: B.dir, moving: B.st === 'idle', hit: B.hit > 0 || (B.st === 'troca' && Math.floor(t * 12) % 2), attack: B.st === 'carga' || B.st === 'ataque', attackProgress: B.st === 'carga' ? .2 : .8 });
@@ -326,7 +350,7 @@
       }
       for (const q of projs) projetil(c, q);
       for (const f of efeitos) { const k = f.t / .5;
-        if (f.k === 'raio') { c.globalAlpha = 1 - k; R(c, f.x - 22, 0, 44, FLOOR, '#ffffff'); R(c, f.x - 10, 0, 20, FLOOR, '#c8d8ff'); c.globalAlpha = 1; }
+        if (f.k === 'raio') { c.globalAlpha = 1 - k; R(c, f.x - 22, 0, 44, FLOOR, '#ffffff'); R(c, f.x - 10, 0, 20, FLOOR, f.foto ? '#ffe8c0' : '#c8d8ff'); c.globalAlpha = 1; }
         if (f.k === 'poeira') { c.globalAlpha = .6 * (1 - f.t / .6); for (let j = 0; j < 4; j++) R(c, f.x - 20 + j * 12 + Math.sin(j) * 4, f.y - 8 - f.t * 30, 10 + f.t * 12, 6 + f.t * 6, '#e8e0d0'); c.globalAlpha = 1; }
         if (f.k === 'flashP') { c.globalAlpha = Math.max(0, 1 - f.t / .4); c.fillStyle = '#ffffff'; c.beginPath(); c.arc(f.x, f.y, 26 + f.t * 120, 0, TAU); c.fill(); c.globalAlpha = 1; } }
       c.font = '14px Pixel, monospace'; c.textAlign = 'center';
@@ -335,9 +359,9 @@
     function desenharTela(c, W) { // barra do chefe e placas (na tela, sem câmera)
       if (arena.ativa && B.st !== 'espera' && B.st !== 'entrada') {
         const w = 420, x = W / 2 - w / 2, y = 30; R(c, x - 4, y - 4, w + 8, 34, '#1c1408'); R(c, x - 2, y - 2, w + 4, 30, '#4a3420');
-        R(c, x, y + 14, w, 10, '#2a1a10'); R(c, x, y + 14, w * clamp(B.hp / B.max, 0, 1), 10, B.fase === 3 ? '#ff5a3a' : B.fase === 2 ? '#f0a03a' : '#e8433a'); R(c, x, y + 14, w * clamp(B.hp / B.max, 0, 1), 3, '#ffffff55');
+        R(c, x, y + 14, w, 10, '#2a1a10'); R(c, x, y + 14, w * clamp(B.hp / B.max, 0, 1), 10, ['#e8433a', '#f0a03a', '#ff5a3a', '#c85af0'][B.fase - 1] || '#e8433a'); R(c, x, y + 14, w * clamp(B.hp / B.max, 0, 1), 3, '#ffffff55');
         c.font = '10px Pixel, monospace'; c.fillStyle = '#ffe9a8'; c.textAlign = 'left'; c.textBaseline = 'top'; c.fillText(K.nome + '  ·  NV ' + K.nivel, x + 4, y + 1);
-        for (let f = 1; f <= 3; f++) { R(c, x + w - 64 + f * 18, y + 1, 12, 10, f <= B.fase ? (f === B.fase ? '#ffd24a' : '#7a6a4a') : '#2a1a10'); }
+        for (let f = 1; f <= NF; f++) { R(c, x + w - 10 - (NF - f + 1) * 18, y + 1, 12, 10, f <= B.fase ? (f === B.fase ? '#ffd24a' : '#7a6a4a') : '#2a1a10'); }
       }
       for (const p of placas) { const k = p.t, a = Math.min(1, k / .2, (p.vida - k) / .3), sc = 1 + Math.max(0, .25 - k) * 2; c.save(); c.globalAlpha = a; c.translate(W / 2, 210); c.scale(sc, sc); c.fillStyle = 'rgba(12,8,6,.75)'; c.fillRect(-300, -46, 600, 92); c.fillStyle = p.cor; c.fillRect(-300, -46, 600, 4); c.fillRect(-300, 42, 600, 4); txt(c, p.titulo, 0, -30, p.cor, { s: 5, sombra: '#2a1006' }); txt(c, p.sub, 0, 14, '#f6ead0', { s: 2 }); c.restore(); }
     }
