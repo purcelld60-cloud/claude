@@ -71,14 +71,14 @@
  const book=document.getElementById('pauseInfoBtn'),home=document.getElementById('mainMenuBtn');
  const oldHelp=modal.querySelector('[data-open-help]');
  const extraButtons=[...modal.querySelectorAll('button')].filter(button=>![resume,story,book,home,oldHelp].includes(button));
- modal.classList.add('ranch-pause');modal.setAttribute('aria-labelledby','ranchPauseTitle');
+ modal.classList.add('ranch-pause','roca-pausa');modal.setAttribute('aria-labelledby','ranchPauseTitle');
  const heading=document.createElement('header');heading.className='rp-header';
- heading.innerHTML='<div class="rp-sky" aria-hidden="true"><i class="rp-sun"></i><i class="rp-cloud"></i><i class="rp-hill"></i><i class="rp-barn"></i><i class="rp-fence"></i><i class="rp-sprig"></i></div><span class="rp-eyebrow">PARADA NA VARANDA</span><h2 id="ranchPauseTitle">SEGURA O GÁS.</h2><p id="ranchPauseLocation">A resenha pode esperar um cadinho.</p>';
+ heading.innerHTML='<h2 id="ranchPauseTitle">PAUSA</h2><p id="ranchPauseLocation">A resenha pode esperar um cadinho.</p>';
  const body=document.createElement('div');body.className='rp-body';
  const resultBanner=document.createElement('p');resultBanner.id='ranchSandboxResult';resultBanner.className='rp-sandbox-result';resultBanner.setAttribute('role','status');resultBanner.hidden=true;
  const mainActions=document.createElement('div');mainActions.className='rp-main-actions';
  if(resume)mainActions.append(labelButton(resume,'CONTINUAR','O bolo não vai se recuperar sozinho.','resume'));
- const controls=makeButton('ranchControlsBtn','CONTROLES','Teclas, resposta e joystick.','controls',()=>{
+ const controls=makeButton('ranchControlsBtn','CONTROLES E TECLAS','Teclas, resposta e joystick.','controls',()=>{
   if(window.ControlSettingsUI?.open)window.ControlSettingsUI.open();else if(window.ControlSettingsPanel?.open)window.ControlSettingsPanel.open();else window.GameView?.openHelp?.();
  });
  mainActions.append(controls);
@@ -109,7 +109,20 @@
  }
  extraButtons.forEach(preserveExtra);
  const footer=document.createElement('footer');footer.className='rp-footer';footer.innerHTML='<span aria-hidden="true">✦</span> CULTIVE O SHAPE. COLHA A VITÓRIA. <span aria-hidden="true">✦</span>';
- body.append(resultBanner,mainActions,difficulty,note,utility);modal.replaceChildren(heading,body,footer);
+ // duas páginas no estilo da Campanha 2: o começo e as OPÇÕES (hora do dia, clima, qualidade, som, dificuldade e botões)
+ const paginaInicio=document.createElement('div');paginaInicio.className='roca-pagina';paginaInicio.dataset.pagina='inicio';
+ const paginaOpcoes=document.createElement('div');paginaOpcoes.className='roca-pagina';paginaOpcoes.dataset.pagina='opcoes';paginaOpcoes.hidden=true;
+ const optionsButton=makeButton('ranchOptionsBtn','OPÇÕES','Hora do dia, clima, qualidade, som e botões.','controls',()=>mostrarPagina('opcoes'));
+ const optionsBack=makeButton('ranchOptionsBackBtn','◀ VOLTAR','Voltar ao menu de pausa.','exit',()=>mostrarPagina('inicio'));
+ const pick=id=>document.getElementById(id)||mainActions.querySelector('#'+id);
+ paginaOpcoes.append(...['ranchDayTimeBtn','ranchWeatherBtn','ranchGraphicsBtn','ranchAudioBtn'].map(pick).filter(Boolean));
+ const volume=mainActions.querySelector('.rp-volume');if(volume)paginaOpcoes.append(volume);
+ paginaOpcoes.append(controls,difficulty,note,optionsBack);
+ const homeButton=utility.querySelector('#mainMenuBtn,#ranchHomeBtn');
+ paginaInicio.append(...[resume,optionsButton,sandboxButton,retryButton,returnButton].filter(Boolean),utility);
+ const fim=document.createElement('div');fim.className='rp-utility';if(homeButton)fim.append(homeButton);paginaInicio.append(fim);
+ function mostrarPagina(nome){paginaInicio.hidden=nome!=='inicio';paginaOpcoes.hidden=nome!=='opcoes';modal.classList.toggle('na-opcoes',nome==='opcoes');heading.querySelector('#ranchPauseTitle').textContent=nome==='opcoes'?'OPÇÕES':'PAUSA';modal.scrollTop=0;requestAnimationFrame(()=>{const alvo=nome==='opcoes'?paginaOpcoes.querySelector('button:not([hidden])'):(resume||optionsButton);alvo?.focus?.({preventScroll:true});});}
+ body.append(resultBanner,paginaInicio,paginaOpcoes);modal.replaceChildren(heading,body,footer);
  // Optional modes may attach their pause entry after this script has loaded.
  new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1&&node.tagName==='BUTTON')preserveExtra(node);}).observe(modal,{childList:true});
  // The help node is kept as an accessible fallback without duplicating the controls action.
@@ -192,10 +205,10 @@
  }
  function open(){window.Game?.pause?.();render();}
  function close(){window.Game?.resume?.();}
- new MutationObserver(()=>{render();if(!screen.hidden&&!document.querySelector('dialog[open]'))requestAnimationFrame(()=>resume?.focus());}).observe(screen,{attributes:true,attributeFilter:['hidden']});
+ new MutationObserver(()=>{if(!screen.hidden)mostrarPagina('inicio');render();if(!screen.hidden&&!document.querySelector('dialog[open]'))requestAnimationFrame(()=>resume?.focus());}).observe(screen,{attributes:true,attributeFilter:['hidden']});
  const start=document.getElementById('startScreen');if(start)new MutationObserver(render).observe(start,{attributes:true,attributeFilter:['hidden']});
  window.addEventListener('difficulty-change',render);window.addEventListener('chapter-ended',()=>{unlock();render();});window.addEventListener('sandbox-change',render);
  document.getElementById('soundBtn')?.addEventListener('click',()=>requestAnimationFrame(render));
  render();
- window.RanchPause=Object.freeze({open,close,render,openSandbox,closeSandbox,isSandboxUnlocked,bosses});
+ window.RanchPause=Object.freeze({open,close,render,mostrarPagina,openSandbox,closeSandbox,isSandboxUnlocked,bosses});
 })();
