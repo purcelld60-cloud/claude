@@ -21,13 +21,21 @@
   reg('c2i_feirante', { name: 'Feirante', skin: '#c48a60', shade: '#956445', build: 'normal', top: '#c84a3a', topKind: 'apron', apron: '#e9dcc0', pants: '#4f4a3e', hat: { kind: 'cap', color: '#3c8a5a' }, hair: { style: 'short', color: '#2a1d16' }, item: 'biscuit', pose: 'offer' });
   reg('c2i_seguidor', { name: 'Seguidor do Kauã', skin: '#e9c2a3', shade: '#bb9275', build: 'slim', top: '#2a2c34', topKind: 'puffer', pants: '#3a4252', hair: { style: 'quiff', color: '#1a1410', tips: '#c8d8ff' }, shades: true, item: 'selfie', pose: 'selfie' });
 
+  reg('c2i_jagunco', { name: 'Capanga do Barão', skin: '#b98258', shade: '#8a5c3c', build: 'strong', top: '#e8e0d0', topKind: 'vest', vest: '#5a3a24', vestBand: '#7a5236', pants: '#3c2f26', hat: { kind: 'rancher', color: '#8a6a3c', band: '#2c1e14' }, mustache: '#2a1d16', pose: 'fists', mood: 'angry' });
+  reg('c2i_valentao', { name: 'Valentão do Teatro', skin: '#a96f48', shade: '#7c4f33', build: 'strong', top: '#3a1f26', topKind: 'tank', pants: '#22262c', hair: { style: 'buzz', color: '#1b1714' }, chain: '#c9ccc4', pose: 'fists', mood: 'angry' });
+  reg('c2i_gamer', { name: 'Gamer da LAN', skin: '#e9c2a3', shade: '#bb9275', build: 'slim', top: '#3a7a5a', topKind: 'hoodie', inner: '#1d2a26', pants: '#25303f', hair: { style: 'fringe', color: '#4a3020' }, headset: '#20262c', item: 'pad', pose: 'game' });
+  reg('c2i_aluno', { name: 'Turma do Fred', skin: '#d9a57f', shade: '#ac7856', build: 'slim', top: '#2c5a9e', topKind: 'tee', sleeve: 'short', print: '#f2f2ee', pants: '#2a3442', hair: { style: 'wavy', color: '#2a1d16' }, pose: 'cocky' });
+  reg('c2i_aluna', { name: 'Turma do Fred', skin: '#b07a52', shade: '#82563a', build: 'slim', h: .95, top: '#2c5a9e', topKind: 'tee', sleeve: 'short', print: '#f2f2ee', skirt: '#2a3442', hair: { style: 'ponytail', color: '#1e1512' }, item: 'phone', pose: 'phone' });
   // pombo e urubu (voam): desenho próprio em pixel
-  function ave(c, x, y, t, urubu, dir, hit) {
-    const R = (a, b, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(a), Math.round(b), w, h); }, asa = Math.sin(t * (urubu ? 9 : 16)) > 0, s = urubu ? 1.5 : 1;
-    const corpo = hit ? '#ffffff' : urubu ? '#1c1a1a' : '#8a9096', claro = urubu ? '#3a3636' : '#b8bec4';
+  const AVES = { pombo: ['#8a9096', '#b8bec4', '#c86a5a', '#e8833a', 1, 16], urubu: ['#1c1a1a', '#3a3636', '#c86a5a', '#d8c8a0', 1.5, 9], maritaca: ['#3c9a3a', '#7ad05a', '#3c9a3a', '#e8c24c', 1, 18], morcego: ['#3a2a4a', '#5a4a6a', '#3a2a4a', '#ff5a5a', 1.2, 20] };
+  function drone(c, x, y, t, dir, hit) { const R = (a, b, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(a), Math.round(b), w, h); }; R(x - 14, y - 4, 28, 8, '#120e0e'); R(x - 12, y - 3, 24, 6, hit ? '#ffffff' : '#3a3f48'); R(x - 4, y - 2, 8, 4, Math.floor(t * 6) % 2 ? '#ff3a3a' : '#5ae0ff'); for (const sx of [-14, 14]) { R(x + sx - 1, y - 8, 2, 5, '#120e0e'); const w = Math.abs(Math.sin(t * 40)) * 10 + 2; R(x + sx - w / 2, y - 9, w, 2, '#c8ccd0'); } }
+  function ave(c, x, y, t, tipo, dir, hit) {
+    if (tipo === 'drone') return drone(c, x, y, t, dir, hit);
+    const A = AVES[tipo] || AVES.pombo, urubu = tipo === 'urubu', R = (a, b, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(a), Math.round(b), w, h); }, asa = Math.sin(t * A[5]) > 0, s = A[4];
+    const corpo = hit ? '#ffffff' : A[0], claro = A[1];
     c.save(); c.translate(x, y); c.scale(dir * s, s);
-    R(-8, -4, 15, 7, '#120e0e'); R(-7, -3, 13, 5, corpo); R(-6, -3, 8, 2, claro); R(5, -7, 6, 6, '#120e0e'); R(6, -6, 4, 4, urubu ? '#c86a5a' : corpo); R(8, -5, 1, 1, '#000');
-    R(10, -4, 3, 2, urubu ? '#d8c8a0' : '#e8833a'); if (!urubu) R(5, -2, 3, 2, '#5aa06a');
+    R(-8, -4, 15, 7, '#120e0e'); R(-7, -3, 13, 5, corpo); R(-6, -3, 8, 2, claro); R(5, -7, 6, 6, '#120e0e'); R(6, -6, 4, 4, urubu ? A[2] : corpo); R(8, -5, 1, 1, tipo === 'morcego' ? '#ff5a5a' : '#000');
+    R(10, -4, 3, 2, A[3]); if (tipo === 'pombo') R(5, -2, 3, 2, '#5aa06a'); if (tipo === 'morcego') { R(5, -9, 2, 3, corpo); R(9, -9, 2, 3, corpo); }
     if (asa) { R(-5, -12, 9, 9, '#120e0e'); R(-4, -11, 7, 7, corpo); } else { R(-5, 2, 9, 7, '#120e0e'); R(-4, 2, 7, 5, corpo); }
     R(-11, -2, 4, 3, corpo); c.restore();
   }
@@ -64,11 +72,37 @@
         golpes: [['raio', 'leque', 'raio', 'investida'], ['raio', 'invocar', 'leque', 'raio', 'chuva'], ['raio', 'chuva', 'raio', 'investida', 'leque', 'invocar', 'raio']], minion: 'seguidor',
         falas: ['DEIXA O LIKE!', 'ATIVA O SININHO!', 'TÁ GRAVANDO!', 'VAI VIRALIZAR!', 'CORTA ESSA PARTE!'] },
       intro: 'c2_vilao_kaua', derrota: 'c2_derrota_kaua',
-      inimigos: [['urubu', 900], ['seguidor', 1240], ['urubu', 1900], ['seguidor', 2200], ['urubu', 2500], ['seguidor', 3150], ['urubu', 3500], ['seguidor', 3900]], curas: [1260, 2350, 3700] }
+      inimigos: [['urubu', 900], ['seguidor', 1240], ['urubu', 1900], ['seguidor', 2200], ['urubu', 2500], ['seguidor', 3150], ['urubu', 3500], ['seguidor', 3900]], curas: [1260, 2350, 3700] },
+    barao: { cena: 18, hora: 8, checkpoint: 4100,
+      chefe: { tipo: 'c2_barao', nome: 'BARÃO DO CAFÉ', titulo: 'MOVIDO A CAFEÍNA', nivel: 11, x: 4600, hp: 420, cor: '#a8743a', proj: 'grao', chuva: 'cafe', arena: [-360, 380], vel: 1.2,
+        golpes: [['leque', 'investida', 'chuva', 'leque'], ['investida', 'leque', 'chuva', 'investida', 'invocar'], ['investida', 'investida', 'chuva', 'onda', 'leque', 'invocar', 'chuva']], minion: 'jagunco',
+        falas: ['DÉCIMO QUINTO CAFEZINHO!', 'RESPIRAR É PRA FRACO!', 'ESSA TERRA É MINHA!', 'CA-FE-Í-NA!', 'MEU OLHO NÃO TÁ TREMENDO!'] },
+      intro: 'c2_vilao_barao', derrota: 'c2_derrota_barao',
+      inimigos: [['jagunco', 900], ['maritaca', 1200], ['jagunco', 2000], ['maritaca', 2450], ['jagunco', 2800], ['jagunco', 3600], ['maritaca', 3850], ['jagunco', 4000]], curas: [1900, 3000, 3950] },
+    breno: { cena: 19, hora: 20.5, checkpoint: 3300,
+      chefe: { tipo: 'c2_breno', nome: 'BRENO PITBULL', titulo: 'O VALENTÃO DO TEATRO', nivel: 12, x: 3800, hp: 470, cor: '#e8433a', proj: 'punho', arena: [-360, 380], vel: 1.24, furia: true,
+        golpes: [['soco', 'leque', 'investida', 'soco'], ['soco', 'onda', 'soco', 'invocar', 'leque'], ['soco', 'soco', 'onda', 'investida', 'soco', 'chuva', 'invocar']], minion: 'valentao',
+        falas: ['PITBULL NÃO LATE!', 'VEM, FORASTEIRO!', 'TÁ COM MEDO?', 'OLHA O BRAÇO!', 'RESPEITA!'] },
+      intro: 'c2_vilao_breno', derrota: 'c2_derrota_breno',
+      inimigos: [['valentao', 1000], ['morcego', 1350], ['valentao', 1900], ['morcego', 2300], ['valentao', 2700], ['valentao', 3100], ['morcego', 3250]], curas: [1700, 2900] },
+    gemeos: { cena: 20, hora: 19, checkpoint: 3080,
+      chefe: { tipo: 'c2_ryan', nome: 'RYAN E BRYAN', titulo: 'OS GÊMEOS DA LAN', nivel: 13, x: 3560, hp: 500, cor: '#5ae0d0', proj: 'pixel', arena: [-320, 420], vel: 1.25, dupla: { tipo: 'c2_bryan', dx: 140 },
+        golpes: [['leque', 'investida', 'raio', 'leque'], ['raio', 'investida', 'leque', 'invocar', 'raio'], ['raio', 'leque', 'investida', 'chuva', 'raio', 'invocar', 'onda']], minion: 'gamer',
+        falas: ['LAG! FOI LAG!', 'GG EZ!', 'PLAYER 3 NOOB!', 'COMBO DUPLO!', 'RESPAWN!'], falas2: ['TÔ NA SUA COSTA!', 'PEGA ELE, RYAN!', 'HEADSHOT!', 'É DOIS CONTRA UM!'] },
+      intro: 'c2_vilao_gemeos', derrota: 'c2_derrota_gemeos',
+      inimigos: [['gamer', 900], ['drone', 1300], ['gamer', 1900], ['drone', 2300], ['gamer', 2650], ['gamer', 2950], ['drone', 3000]], curas: [1650, 2800] },
+    fred: { cena: 27, hora: 10, checkpoint: 1000,
+      chefe: { tipo: 'fred_conquista', nome: 'FRED', titulo: 'O NOVO MELHOR AMIGO', nivel: 15, x: 1560, hp: 560, cor: '#ffd24a', proj: 'pao', arena: [-360, 360], vel: 1.32, armor: .5,
+        golpes: [['topete', 'leque', 'investida', 'topete', 'chuva'], ['combo', 'topete', 'leque', 'invocar', 'chuva', 'topete'], ['topete', 'combo', 'chuva', 'topete', 'onda', 'leque', 'combo', 'invocar']], minion: 'aluno',
+        falas: ['TOPETE, TOPETE...', 'PÃO DE QUEIJO!', 'CLUBE DO TOPETE!', 'O JORGE ME ESCOLHEU!', 'VOCÊ É O PASSADO!', 'ELE NEM FALA DE VOCÊ!', 'O QUE EU SOU COM O JORGE...'] },
+      intro: 'c2_vilao_fred', derrota: 'c2_derrota_fred',
+      inimigos: [['aluno', 420], ['pombo', 600], ['aluna', 760], ['aluno', 900]], curas: [700] }
   };
-  const TIPO = { vizinha: 'c2i_vizinha', vizinha2: 'c2i_vizinha2', motoca: 'c2i_motoca', feirante: 'c2i_feirante', seguidor: 'c2i_seguidor', pombo: null, urubu: null };
+  const TIPO = { vizinha: 'c2i_vizinha', vizinha2: 'c2i_vizinha2', motoca: 'c2i_motoca', feirante: 'c2i_feirante', seguidor: 'c2i_seguidor', jagunco: 'c2i_jagunco', valentao: 'c2i_valentao', gamer: 'c2i_gamer', aluno: 'c2i_aluno', aluna: 'c2i_aluna', pombo: null, urubu: null, maritaca: null, morcego: null, drone: null };
   const STATS = { vizinha: { hp: 34, ia: 'tiro', proj: 'balao', dano: 9 }, vizinha2: { hp: 40, ia: 'tiro', proj: 'balao', dano: 10 }, pombo: { hp: 14, ia: 'voa', dano: 8 }, urubu: { hp: 22, ia: 'voa', dano: 11 },
-    motoca: { hp: 46, ia: 'carga', dano: 13 }, feirante: { hp: 40, ia: 'tiro', proj: 'fruta', dano: 10 }, seguidor: { hp: 42, ia: 'flash', dano: 10 } };
+    motoca: { hp: 46, ia: 'carga', dano: 13 }, feirante: { hp: 40, ia: 'tiro', proj: 'fruta', dano: 10 }, seguidor: { hp: 42, ia: 'flash', dano: 10 },
+    jagunco: { hp: 58, ia: 'corpo', dano: 13 }, maritaca: { hp: 20, ia: 'voa', dano: 10 }, valentao: { hp: 66, ia: 'corpo', dano: 15 }, morcego: { hp: 22, ia: 'voa', dano: 11 },
+    gamer: { hp: 52, ia: 'tiro', proj: 'controle', dano: 12 }, drone: { hp: 28, ia: 'voa', dano: 12 }, aluno: { hp: 64, ia: 'corpo', dano: 15 }, aluna: { hp: 56, ia: 'tiro', proj: 'pao', dano: 13 } };
 
   /* =====================================================================
      uma fase em andamento
@@ -80,8 +114,10 @@
       e.onDano = (n, tipo) => danoInimigo(e, n, tipo); return e; };
     const inimigos = F.inimigos.map(([k, x]) => novoInimigo(k, x));
     const curas = F.curas.map((x) => ({ x, pego: false }));
-    const B = { tipo: K.tipo, x: K.x, y: FLOOR, homeX: K.x, hp: K.hp, max: K.hp, fase: 1, st: 'espera', tt: 0, hit: 0, golpe: null, padrao: 0, dir: -1, vx: 0, vy: 0, stun: 0, conf: 0, alto: 96, largura: 30, armor: .55, morto: 0 };
+    const B = { tipo: K.tipo, x: K.x, y: FLOOR, homeX: K.x, hp: K.hp, max: K.hp, fase: 1, st: 'espera', tt: 0, hit: 0, golpe: null, padrao: 0, dir: -1, vx: 0, vy: 0, stun: 0, conf: 0, alto: 96, largura: 30, armor: K.armor || .55, morto: 0 };
     B.onDano = (n, tipo) => danoChefe(n, tipo);
+    // o segundo gêmeo: divide a vida com o primeiro, fica do outro lado e atira junto
+    const B2 = K.dupla ? { tipo: K.dupla.tipo, x: K.x + K.dupla.dx, y: FLOOR, dir: -1, hit: 0, st: 'idle', tt: 2, stun: 0, conf: 0, vx: 0, vy: 0, alto: 96, largura: 30, get hp() { return B.hp; }, set hp(v) {}, onDano: (n, tipo) => danoChefe(n, tipo, B2) } : null;
     const HPF = [1, 1.25, 1.5].map((m) => Math.round(K.hp * m));
     const arena = { ativa: false, l: K.x + K.arena[0], r: K.x + K.arena[1] };
     let vencido = false;
@@ -95,31 +131,34 @@
       if (e.hp <= 0) { e.hp = 0; e.morto = 1; window.CampanhaLoja?.ganhar?.(6); flutua(e.x, e.y - 100, '+6 ●', '#ffd24a'); api.sfx('plim'); if (Math.random() < .22) curas.push({ x: e.x, pego: false, solta: true }); }
       return n;
     }
-    function danoChefe(n, tipo) {
+    function danoChefe(n, tipo, quem = B) {
       if (B.st === 'espera' || B.st === 'troca' || B.st === 'derrotado' || B.st === 'entrada') return false;
-      const exposto = B.st === 'recupera' || B.stun > 0, d = Math.max(1, Math.round(n * (exposto ? 1 : B.armor))); B.hp -= d; B.hit = .14; api.tremer(exposto ? 3 : 1.5);
+      const exposto = B.st === 'recupera' || B.stun > 0, d = Math.max(1, Math.round(n * (exposto ? 1 : B.armor))); B.hp -= d; quem.hit = .14; api.tremer(exposto ? 3 : 1.5);
       if (B.hp <= 0) { if (B.fase < 3) novaFase(B.fase + 1); else derrotar(); }
       return exposto ? d + '!' : d;
     }
     function novaFase(f) {
       B.fase = f; B.max = B.hp = HPF[f - 1]; B.st = 'troca'; B.tt = 1.3; B.padrao = 0; B.golpe = null; projs.length = 0; inimigos.forEach((e) => { if (e.invocado) e.hp = 0; });
       P.inv = Math.max(P.inv || 0, 1.3); api.tremer(9); api.flash('#f6d8ff'); api.sfx('vs');
-      placa('FASE ' + f, f === 3 ? 'ÚLTIMA FASE · VIDA RENOVADA' : 'VIDA RENOVADA · ' + (/A$/.test(K.nome) || K.nome === 'DONA CREUZA' ? 'ELA' : 'ELE') + ' FICOU MAIS FORTE', '#ffb36b', 1.8);
-      fala(['AGORA É SÉRIO!', 'VOCÊ VAI VER!', 'AINDA NÃO ACABOU!'][f - 2] || 'AH, É?');
+      placa('FASE ' + f, f === 3 ? 'ÚLTIMA FASE · VIDA RENOVADA' : 'VIDA RENOVADA · ' + (K.nome === 'DONA CREUZA' ? 'ELA FICOU' : K.dupla ? 'ELES FICARAM' : 'ELE FICOU') + ' MAIS FORTE', '#ffb36b', 1.8);
+      fala(K.furia && f === 3 ? 'MODO FÚRIA!!!' : K.tipo === 'fred_conquista' && f === 3 ? 'ELE É MEU MELHOR AMIGO!' : ['AGORA É SÉRIO!', 'VOCÊ VAI VER!', 'AINDA NÃO ACABOU!'][f - 2] || 'AH, É?'); if (K.furia && f === 3) placa('MODO FÚRIA', 'O PITBULL SOLTOU A CORRENTE', '#ff3a2a', 1.8);
     }
     function derrotar() {
       B.hp = 0; B.st = 'derrotado'; B.tt = 2.2; projs.length = 0; inimigos.forEach((e) => { if (e.invocado) e.hp = 0; }); vencido = true;
       api.tremer(12); api.flash('#fff6d8'); api.sfx('fanfarra'); window.CampanhaLoja?.ganhar?.(60); flutua(B.x, B.y - 120, '+60 ●', '#ffd24a');
-      placa('DERROTAD' + (K.nome === 'DONA CREUZA' ? 'A' : 'O') + '!', K.nome, '#ffd25a', 2.2);
+      placa('DERROTAD' + (K.nome === 'DONA CREUZA' ? 'A' : K.dupla ? 'OS' : 'O') + '!', K.nome, '#ffd25a', 2.2);
     }
     function fala(s) { falaTxt = s; falaVida = 1.6; }
 
     /* ----- golpes do chefe (sempre com aviso antes) ----- */
-    const vel = () => K.vel * (1 + (B.fase - 1) * .14);
+    const vel = () => K.vel * (1 + (B.fase - 1) * .14) * (K.furia && B.fase === 3 ? 1.12 : 1);
     function escolherGolpe() { const lista = K.golpes[B.fase - 1]; const g = lista[B.padrao % lista.length]; B.padrao++; return g; }
     function prepara(g) {
       B.golpe = { g, t: 0, aviso: Math.max(.45, .85 / vel()) }; B.st = 'carga'; B.dir = P.x < B.x ? -1 : 1;
-      if (g === 'investida') B.golpe.alvo = B.dir < 0 ? arena.l + 30 : arena.r - 30;
+      if (g === 'investida' || g === 'combo') B.golpe.alvo = B.dir < 0 ? arena.l + 30 : arena.r - 30;
+      if (g === 'combo') B.golpe.volta = true;
+      if (g === 'soco') { B.golpe.aviso = Math.max(.7, 1.15 / vel()); B.golpe.alvo = clamp(B.x + B.dir * 300, arena.l + 30, arena.r - 30); }
+      if (g === 'topete') B.golpe.aviso = Math.max(.55, .9 / vel());
       if (g === 'chuva') { const n = 3 + B.fase * 2; B.golpe.pontos = Array.from({ length: n }, (_, i) => clamp(P.x + (i - (n - 1) / 2) * rnd(52, 70) + rnd(-12, 12), arena.l + 20, arena.r - 20)); }
       if (g === 'raio') { const n = 1 + B.fase; B.golpe.pontos = [P.x, ...Array.from({ length: n - 1 }, () => clamp(P.x + rnd(-200, 200), arena.l + 20, arena.r - 20))]; }
       if (g === 'onda') B.y = FLOOR;
@@ -127,8 +166,9 @@
     function solta(g) {
       const G = B.golpe, d = Math.round((10 + B.fase * 2) * 1);
       if (g === 'leque') { const n = 1 + B.fase * 2, a0 = Math.atan2(P.y - 40 - (B.y - 50), P.x - B.x); for (let i = 0; i < n; i++) { const a = a0 + (i - (n - 1) / 2) * .17; projs.push({ x: B.x + B.dir * 20, y: B.y - 50, vx: Math.cos(a) * 300 * vel(), vy: Math.sin(a) * 300 * vel(), g: 0, tipo: K.proj, dano: d, vida: 4, rot: 0 }); } api.sfx('whoosh'); }
-      if (g === 'investida') { G.corre = true; api.sfx(K.moto ? 'buzina' : 'whoosh'); }
-      if (g === 'chuva') { for (const x of G.pontos) projs.push({ x, y: -30 - rnd(0, 80), vx: 0, vy: 520, g: 0, tipo: K.proj, dano: d + 2, vida: 3, cai: true }); }
+      if (g === 'investida' || g === 'combo' || g === 'soco') { G.corre = true; api.sfx(K.moto ? 'buzina' : g === 'soco' ? 'impacto' : 'whoosh'); if (g === 'soco') fala('POW!'); }
+      if (g === 'topete') { api.sfx('whoosh'); fala('GIRA, TOPETE!'); }
+      if (g === 'chuva') { for (const x of G.pontos) projs.push({ x, y: -30 - rnd(0, 80), vx: 0, vy: 520, g: 0, tipo: K.chuva || K.proj, dano: d + 2, vida: 3, cai: true }); }
       if (g === 'onda') { for (const s of [-1, 1]) projs.push({ x: B.x + s * 20, y: FLOOR - 4, vx: s * 360 * vel(), vy: 0, g: 0, tipo: 'onda', dano: d, vida: 3, chao: true }); api.tremer(6); api.sfx('impacto'); }
       if (g === 'invocar') { const vivos = inimigos.filter((e) => e.invocado && e.hp > 0).length; for (let k = vivos; k < 2; k++) { const x = k ? arena.r - 40 : arena.l + 40; inimigos.push(novoInimigo(K.minion, x, { invocado: true, homeX: x })); efeitos.push({ k: 'poeira', x, y: FLOOR, t: 0 }); } fala('VEM, GALERA!'); api.sfx('risada'); }
       if (g === 'raio') { for (const x of G.pontos) efeitos.push({ k: 'raio', x, t: 0, dano: d + 4 }); api.flash('#ffffff'); api.sfx('impacto'); }
@@ -136,7 +176,7 @@
 
     /* ----- quadro a quadro ----- */
     function update(dt) {
-      t += dt; falaVida = Math.max(0, falaVida - dt);
+      t += dt; falaVida = Math.max(0, falaVida - dt); fala2Vida = Math.max(0, fala2Vida - dt);
       // biscoitos (cura)
       for (const q of curas) if (!q.pego && Math.abs(P.x - q.x) < 22 && P.y > FLOOR - 60) { q.pego = true; P.hp = Math.min(100, P.hp + 20); flutua(q.x, FLOOR - 70, '+20 ♥', '#ff8a7a'); api.sfx('plim'); }
       // inimigos comuns
@@ -180,6 +220,11 @@
         else if (e.st === 'mira') { if (e.tt <= 0) { e.st = 'ataca'; e.tt = 1.1; api.sfx('buzina'); } }
         else if (e.st === 'ataca') { e.x += e.dir * 520 * dt; if (Math.abs(P.x - e.x) < 30 && P.y > FLOOR - 40) { api.ferir(st.dano, e.x - e.dir * 20); } if (e.tt <= 0) { e.st = 'patrulha'; e.tt = rnd(1.4, 2.2); } }
         return; }
+      if (st.ia === 'corpo') { // capangas e valentões: chegam perto, armam o golpe e avançam
+        if (e.st === 'patrulha') { if (perto) { if (Math.abs(dx) > 44) e.x += Math.sign(dx) * 105 * dt; if (e.tt <= 0 && Math.abs(dx) < 70) { e.st = 'mira'; e.tt = .55; } } else e.x += (e.homeX - e.x) * dt * .5; }
+        else if (e.st === 'mira') { if (e.tt <= 0) { e.st = 'ataca'; e.tt = .25; e.vx = e.dir * 260; } }
+        else if (e.st === 'ataca') { if (!e.acertou && Math.abs(P.x - e.x) < 46 && Math.abs(P.y - e.y) < 50) { e.acertou = true; api.ferir(st.dano, e.x); } if (e.tt <= 0) { e.st = 'patrulha'; e.tt = rnd(1.1, 1.9); e.acertou = false; } }
+        return; }
       // a pé: tiro (vizinha, feirante) ou flash (seguidor)
       const dist = st.ia === 'tiro' ? 240 : 60;
       if (e.st === 'patrulha') { if (perto) { if (Math.abs(dx) > dist + 30) e.x += Math.sign(dx) * 70 * dt; else if (Math.abs(dx) < dist - 40 && st.ia === 'tiro') e.x -= Math.sign(dx) * 50 * dt; if (e.tt <= 0 && Math.abs(dx) < dist + 60) { e.st = 'mira'; e.tt = st.ia === 'flash' ? .7 : .6; } } else e.x += (e.homeX - e.x) * dt * .5; }
@@ -187,9 +232,17 @@
         if (st.ia === 'tiro') { const vx = clamp(dx * 1.2, -340, 340); projs.push({ x: e.x + e.dir * 12, y: e.y - 52, vx, vy: -330, g: 900, tipo: st.proj, dano: st.dano, vida: 3 }); }
         else { efeitos.push({ k: 'flashP', x: e.x + e.dir * 30, y: e.y - 50, t: 0 }); if (Math.abs(dx) < 90 && Math.abs(P.y - e.y) < 60) { api.ferir(st.dano, e.x); P.atordoado = .5; } api.sfx('plim'); } } }
     }
+    function atualizaB2(dt) {
+      B2.hit = Math.max(0, B2.hit - dt); B2.stun = Math.max(0, B2.stun - dt); B2.x += B2.vx * dt; B2.vx *= Math.pow(.05, dt);
+      if (!['idle', 'carga', 'ataque', 'recupera'].includes(B.st) || B2.stun > 0) return; B2.x = clamp(B2.x, arena.l + 30, arena.r - 30); B2.dir = P.x < B2.x ? -1 : 1; B2.tt -= dt;
+      const alvo = clamp(P.x + (P.x < B.x ? -230 : 230), arena.l + 30, arena.r - 30); if (B2.st === 'idle') { B2.x += clamp(alvo - B2.x, -1, 1) * Math.min(Math.abs(alvo - B2.x), 130 * vel() * dt); if (B2.tt <= 0) { B2.st = 'mira'; B2.tt = .7; } }
+      else if (B2.st === 'mira' && B2.tt <= 0) { const n = 1 + B.fase * 2, a0 = Math.atan2(P.y - 40 - (B2.y - 50), P.x - B2.x); for (let i = 0; i < n; i++) { const a = a0 + (i - (n - 1) / 2) * .2; projs.push({ x: B2.x + B2.dir * 20, y: B2.y - 50, vx: Math.cos(a) * 280 * vel(), vy: Math.sin(a) * 280 * vel(), g: 0, tipo: 'controle', dano: 10 + B.fase * 2, vida: 4 }); } B2.st = 'idle'; B2.tt = rnd(2.4, 3.2) / vel(); api.sfx('whoosh'); if (Math.random() < .35) fala2(K.falas2[Math.floor(rnd(0, K.falas2.length))]); }
+    }
+    let fala2Txt = '', fala2Vida = 0; const fala2 = (s0) => { fala2Txt = s0; fala2Vida = 1.5; };
     function atualizaChefe(dt) {
       B.hit = Math.max(0, B.hit - dt); B.stun = Math.max(0, B.stun - dt); B.conf = Math.max(0, B.conf - dt); B.x += B.vx * dt; B.vx *= Math.pow(.05, dt);
       if (B.st === 'espera' || B.st === 'entrada') return;
+      if (B2) atualizaB2(dt);
       if (B.st === 'derrotado') { B.tt -= dt; if (B.tt <= 0 && !B.fim) { B.fim = true; api.vencer(); } return; }
       B.x = clamp(B.x, arena.l + 30, arena.r - 30); B.tt -= dt;
       falaT -= dt; if (falaT <= 0) { falaT = rnd(4, 6.5); fala(K.falas[Math.floor(rnd(0, K.falas.length))]); }
@@ -199,7 +252,9 @@
         if (B.tt <= 0) prepara(escolherGolpe()); return; }
       if (B.st === 'carga') { const G = B.golpe; G.t += dt; if (G.t >= G.aviso) { solta(G.g); B.st = 'ataque'; G.t = 0; } return; }
       if (B.st === 'ataque') { const G = B.golpe; G.t += dt;
-        if (G.g === 'investida') { const sp = (K.moto ? 640 : 520) * vel(); B.x += B.dir * sp * dt; if (Math.abs(P.x - B.x) < 30 && P.y > FLOOR - 56) api.ferir(16 + B.fase * 2, B.x - B.dir * 30); if ((B.dir > 0 && B.x >= G.alvo) || (B.dir < 0 && B.x <= G.alvo) || G.t > 2) { B.st = 'recupera'; B.tt = 1.2; api.tremer(5); } return; }
+        if (G.g === 'investida' || G.g === 'combo' || G.g === 'soco') { const soco = G.g === 'soco', sp = (soco ? 900 : K.moto ? 640 : 520) * vel(); B.x += B.dir * sp * dt; if (Math.abs(P.x - B.x) < (soco ? 40 : 30) && P.y > FLOOR - 56) api.ferir((soco ? 22 : 16) + B.fase * 2, B.x - B.dir * 30);
+          if ((B.dir > 0 && B.x >= G.alvo) || (B.dir < 0 && B.x <= G.alvo) || G.t > 2) { if (G.volta) { G.volta = false; G.t = 0; B.dir *= -1; G.alvo = B.dir < 0 ? arena.l + 30 : arena.r - 30; api.sfx('whoosh'); return; } B.st = 'recupera'; B.tt = soco ? 1.5 : 1.2; api.tremer(soco ? 10 : 5); if (soco) efeitos.push({ k: 'poeira', x: B.x + B.dir * 30, y: FLOOR, t: 0 }); } return; }
+        if (G.g === 'topete') { B.x += Math.sign(P.x - B.x) * 120 * dt; if (G.t < .75 && Math.hypot(P.x - B.x, (P.y - 40) - (B.y - 50)) < 110 && !G.acertou) { G.acertou = true; api.ferir(18 + B.fase * 2, B.x); } if (G.t > .8) { B.st = 'recupera'; B.tt = Math.max(.7, 1.1 - B.fase * .1); } return; }
         if (G.t > .45) { B.st = 'recupera'; B.tt = Math.max(.75, 1.25 - B.fase * .12); } return; }
       if (B.st === 'recupera') { if (B.tt <= 0) { B.st = 'idle'; B.tt = Math.max(.35, .9 - B.fase * .15); } }
     }
@@ -213,6 +268,12 @@
       else if (q.tipo === 'biscoito') { c.save(); c.translate(x, y); c.rotate(q.rot); c.strokeStyle = '#6a4a2a'; c.lineWidth = 7; c.beginPath(); c.arc(0, 0, 9, 0, TAU); c.stroke(); c.strokeStyle = '#e9d6a8'; c.lineWidth = 4; c.beginPath(); c.arc(0, 0, 9, 0, TAU); c.stroke(); c.restore(); }
       else if (q.tipo === 'fruta') { R(c, x - 7, y - 7, 14, 14, '#3a1a08'); R(c, x - 6, y - 6, 12, 12, (Math.abs(x) >> 3) % 2 ? '#e8833a' : '#c43c3a'); R(c, x - 3, y - 5, 4, 3, '#ffffff66'); R(c, x - 1, y - 10, 2, 4, '#3c8a3a'); }
       else if (q.tipo === 'flash') { const s = 8 + Math.sin(q.rot * 2) * 2; R(c, x - s, y - 2, s * 2, 4, '#ffffff'); R(c, x - 2, y - s, 4, s * 2, '#ffffff'); R(c, x - 4, y - 4, 8, 8, '#c8d8ff'); c.globalAlpha = .3; R(c, x - 14, y - 14, 28, 28, '#ffffff'); c.globalAlpha = 1; }
+      else if (q.tipo === 'grao') { c.save(); c.translate(x, y); c.rotate(q.rot * .5); R(c, -6, -8, 12, 16, '#2a1408'); R(c, -5, -7, 10, 14, '#6a3a1c'); R(c, -1, -6, 2, 12, '#2a1408'); R(c, -4, -6, 3, 3, '#9a5a2c'); c.restore(); }
+      else if (q.tipo === 'cafe') { R(c, x - 5, y - 10, 10, 16, '#1c0e06'); R(c, x - 4, y - 8, 8, 13, '#5a2e12'); R(c, x - 2, y - 12, 4, 4, '#1c0e06'); R(c, x - 2, y - 7, 2, 4, '#c8946a'); }
+      else if (q.tipo === 'punho') { R(c, x - 11, y - 9, 22, 18, '#3a0806'); R(c, x - 10, y - 8, 20, 16, '#e8433a'); R(c, x - 10, y - 8, 20, 4, '#ff8a6a'); for (let k = 0; k < 3; k++) R(c, x - 8 + k * 6, y - 8, 1, 16, '#a82a24'); c.globalAlpha = .4; R(c, x - Math.sign(q.vx || 1) * 24, y - 3, 14, 6, '#ffb08a'); c.globalAlpha = 1; }
+      else if (q.tipo === 'pixel') { for (let k = 0; k < 4; k++) R(c, x - 8 + (k % 2) * 8, y - 8 + (k >> 1) * 8, 7, 7, ['#5ae0d0', '#e85ad0', '#ffe23a', '#2a8ae8'][(k + (Math.abs(x) >> 4)) % 4]); R(c, x - 9, y - 9, 18, 1, '#ffffff88'); }
+      else if (q.tipo === 'controle') { c.save(); c.translate(x, y); c.rotate(q.rot * .4); R(c, -12, -6, 24, 12, '#0e1016'); R(c, -11, -5, 22, 10, '#3a3f48'); R(c, -8, -2, 5, 2, '#c8ccd0'); R(c, -7, -3, 2, 5, '#c8ccd0'); R(c, 5, -3, 3, 3, '#e8433a'); R(c, 8, 0, 3, 3, '#5ae0d0'); c.restore(); }
+      else if (q.tipo === 'pao') { R(c, x - 9, y - 8, 18, 16, '#5a3a14'); R(c, x - 8, y - 7, 16, 14, '#e8b84a'); R(c, x - 6, y - 7, 10, 4, '#f6d880'); R(c, x - 3, y - 1, 2, 2, '#c8902a'); R(c, x + 2, y + 2, 2, 2, '#c8902a'); }
       else if (q.tipo === 'onda') { c.globalAlpha = .9; for (let k = 0; k < 4; k++) R(c, x - 3 - k * Math.sign(q.vx) * 6, y - 24 + k * 5, 6, 24 - k * 5, ['#ffffff', K.cor, K.cor, '#ffffff88'][k]); c.globalAlpha = 1; }
     }
     function personagem(c, tipo, x, y, o) { try { window.Art.drawCharacter(c, tipo, x, y, { frame: t, grounded: true, ...o }); } catch (e) {} }
@@ -222,6 +283,9 @@
       if (B.st === 'carga') { const G = B.golpe, k = G.t / G.aviso, pis = Math.floor(t * 12) % 2;
         if (G.g === 'chuva' || G.g === 'raio') for (const x of G.pontos) { c.globalAlpha = .35 + k * .5; R(c, x - 26, FLOOR - 3, 52, 6, pis ? '#ff3a2a' : '#ffd24a'); if (G.g === 'raio') { c.globalAlpha = .12 + k * .25; R(c, x - 22, 0, 44, FLOOR, '#ffffff'); } c.globalAlpha = 1; }
         if (G.g === 'investida') { const x0 = Math.min(B.x, G.alvo), x1 = Math.max(B.x, G.alvo); c.globalAlpha = .25 + k * .45; R(c, x0, FLOOR - 4, x1 - x0, 8, '#ff3a2a'); for (let x = x0; x < x1; x += 34) R(c, x + (pis ? 0 : 12), FLOOR - 12, 12, 4, '#ff3a2a'); c.globalAlpha = 1; }
+        if (G.g === 'topete') { c.globalAlpha = .25 + k * .45; c.strokeStyle = pis ? '#ff3a2a' : '#ffd24a'; c.lineWidth = 4; c.beginPath(); c.ellipse(B.x, B.y - 50, 110, 70, 0, 0, TAU); c.stroke(); c.lineWidth = 1; c.globalAlpha = 1; }
+        if (G.g === 'soco') { const fx2 = B.x + B.dir * 28, fy = B.y - 58; c.globalAlpha = .35 + k * .5; c.fillStyle = '#ff5a2a'; c.beginPath(); c.arc(fx2, fy, 10 + k * 14 + Math.sin(t * 30) * 2, 0, TAU); c.fill(); c.globalAlpha = .25 + k * .4; R(c, Math.min(B.x, G.alvo), FLOOR - 4, Math.abs(G.alvo - B.x), 8, '#ff3a2a'); c.globalAlpha = 1; }
+        if (G.g === 'combo') { c.globalAlpha = .25 + k * .45; R(c, arena.l, FLOOR - 4, arena.r - arena.l, 8, '#ff3a2a'); c.globalAlpha = 1; }
         if (G.g === 'onda') { c.globalAlpha = .5 * k; c.strokeStyle = K.cor; c.lineWidth = 3; c.beginPath(); c.ellipse(B.x, FLOOR, 30 + k * 60, 8 + k * 6, 0, 0, TAU); c.stroke(); c.globalAlpha = 1; } }
       // barreiras da arena
       if (arena.ativa) for (const x of [arena.l, arena.r]) { // barreira de obra: cavalete listrado, fita e um brilho na cor do chefe
@@ -234,7 +298,7 @@
       // inimigos
       for (const e of inimigos) {
         const st = STATS[e.k], caido = e.hp <= 0; if (caido) c.globalAlpha = Math.max(0, 1 - e.morto / 1.6);
-        if (st.ia === 'voa') ave(c, e.x, e.y + (caido ? e.morto * 120 : 0), t + e.homeX, e.k === 'urubu', e.dir, e.hit > 0);
+        if (st.ia === 'voa') ave(c, e.x, e.y + (caido ? e.morto * 120 : 0), t + e.homeX, e.k, e.dir, e.hit > 0);
         else { c.save(); if (caido) { c.translate(e.x, e.y); c.rotate(-e.dir * Math.min(1.4, e.morto * 4)); c.translate(-e.x, -e.y); }
           if (e.k === 'motoca') { const andando = e.st === 'ataca'; moto(c, e.x, e.y, '#c43c3a', e.dir, t); personagem(c, e.tipo, e.x - e.dir * 4, e.y - 18, { facing: e.dir, moving: false, hit: e.hit > 0 }); if (andando) for (let k = 1; k < 5; k++) { c.globalAlpha = .3; R(c, e.x - e.dir * (30 + k * 14), e.y - 20 + k * 3, 10, 3, '#ffffff'); c.globalAlpha = 1; } }
           else personagem(c, e.tipo, e.x, e.y, { facing: e.dir, moving: Math.abs(e.vx) > 5 || e.st === 'patrulha' && Math.abs(P.x - e.x) < 430, hit: e.hit > 0, attack: e.st === 'mira', attackProgress: .3 });
@@ -251,8 +315,13 @@
         if (K.moto && B.st === 'ataque' && B.golpe?.g === 'investida') { moto(c, B.x, B.y, '#c9372f', B.dir, t); personagem(c, B.tipo, B.x - B.dir * 4, B.y - 20, { scale: 1.2, facing: B.dir, hit: B.hit > 0 }); }
         else personagem(c, B.tipo, B.x + sh, B.y, { scale: 1.3, facing: B.dir, moving: B.st === 'idle', hit: B.hit > 0 || (B.st === 'troca' && Math.floor(t * 12) % 2), attack: B.st === 'carga' || B.st === 'ataque', attackProgress: B.st === 'carga' ? .2 : .8 });
         c.restore();
+        if (B.st === 'ataque' && B.golpe?.g === 'topete') { for (let k = 0; k < 6; k++) { const a = t * 18 + k * TAU / 6; c.strokeStyle = k % 2 ? '#121518' : '#2a2d33'; c.lineWidth = 6; c.beginPath(); c.arc(B.x, B.y - 60, 60 + (k % 3) * 18, a, a + .9); c.stroke(); } c.lineWidth = 1; c.globalAlpha = .4; R(c, B.x - 110, B.y - 100, 220, 4, '#ffffff'); c.globalAlpha = 1; }
+        if (B.st === 'ataque' && B.golpe?.g === 'soco') { c.globalAlpha = .6; c.fillStyle = '#ff5a2a'; c.beginPath(); c.arc(B.x + B.dir * 34, B.y - 58, 18, 0, TAU); c.fill(); c.globalAlpha = 1; }
         if (B.st === 'carga') { const pis = Math.floor(t * 10) % 2; R(c, B.x - 4, B.y - 138, 8, 16, pis ? '#ff3a2a' : '#ffd24a'); R(c, B.x - 4, B.y - 118, 8, 7, pis ? '#ff3a2a' : '#ffd24a'); }
         if (B.st === 'recupera') { for (let k = 0; k < 3; k++) R(c, B.x + Math.cos(t * 7 + k * 2.1) * 16, B.y - 108 + Math.sin(t * 7 + k * 2.1) * 4, 4, 4, '#ffd24a'); txt(c, 'ABERTO!', B.x, B.y - 128, '#7af07a', { sombra: '#1c1408' }); }
+        if (B2 && B.st !== 'espera' && B.st !== 'entrada') { c.save(); if (caido) { c.translate(B2.x, B2.y); c.rotate(B2.dir * Math.min(1.5, (2.2 - B.tt) * 3)); c.translate(-B2.x, -B2.y); } personagem(c, B2.tipo, B2.x, B2.y, { scale: 1.3, facing: B2.dir, moving: B2.st === 'idle', hit: B2.hit > 0, attack: B2.st === 'mira', attackProgress: .3 }); c.restore();
+          if (B2.st === 'mira') { const pis = Math.floor(t * 10) % 2; R(c, B2.x - 4, B2.y - 138, 8, 16, pis ? '#ff3a2a' : '#ffd24a'); R(c, B2.x - 4, B2.y - 118, 8, 7, pis ? '#ff3a2a' : '#ffd24a'); }
+          if (fala2Vida > 0 && !caido) { c.font = 'bold 13px Space, Arial, sans-serif'; const w = c.measureText(fala2Txt).width + 20, x = clamp(B2.x - w / 2, arena.l - 40, arena.r + 40 - w), y = B2.y - 168; R(c, x - 2, y - 2, w + 4, 26, '#1a5a5a'); R(c, x, y, w, 22, '#eafffb'); R(c, B2.x - 4, y + 22, 8, 6, '#1a5a5a'); c.fillStyle = '#0a3a3a'; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText(fala2Txt, x + 10, y + 12); } }
         if (falaVida > 0 && !caido && B.st !== 'espera') { c.font = 'bold 13px Space, Arial, sans-serif'; const w = c.measureText(falaTxt).width + 20, x = clamp(B.x - w / 2, arena.l - 40, arena.r + 40 - w), y = B.y - 168; R(c, x - 2, y - 2, w + 4, 26, '#8a1a1a'); R(c, x, y, w, 22, '#fff6dc'); R(c, B.x - 4, y + 22, 8, 6, '#8a1a1a'); c.fillStyle = '#7a1010'; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText(falaTxt, x + 10, y + 12); }
       }
       for (const q of projs) projetil(c, q);
@@ -273,11 +342,11 @@
       for (const p of placas) { const k = p.t, a = Math.min(1, k / .2, (p.vida - k) / .3), sc = 1 + Math.max(0, .25 - k) * 2; c.save(); c.globalAlpha = a; c.translate(W / 2, 210); c.scale(sc, sc); c.fillStyle = 'rgba(12,8,6,.75)'; c.fillRect(-300, -46, 600, 92); c.fillStyle = p.cor; c.fillRect(-300, -46, 600, 4); c.fillRect(-300, 42, 600, 4); txt(c, p.titulo, 0, -30, p.cor, { s: 5, sombra: '#2a1006' }); txt(c, p.sub, 0, 14, '#f6ead0', { s: 2 }); c.restore(); }
     }
     function reiniciar() { // depois de desmaiar: o chefe volta ao começo, os inimigos vencidos continuam vencidos
-      Object.assign(B, { x: K.x, hp: K.hp, max: K.hp, fase: 1, st: 'espera', tt: 0, golpe: null, padrao: 0, stun: 0, conf: 0, fim: false }); arena.ativa = false; projs.length = 0; efeitos.length = 0; placas.length = 0; vencido = false;
+      Object.assign(B, { x: K.x, hp: K.hp, max: K.hp, fase: 1, st: 'espera', tt: 0, golpe: null, padrao: 0, stun: 0, conf: 0, fim: false }); if (B2) Object.assign(B2, { x: K.x + K.dupla.dx, st: 'idle', tt: 2, stun: 0 }); arena.ativa = false; projs.length = 0; efeitos.length = 0; placas.length = 0; vencido = false;
       for (let i = inimigos.length - 1; i >= 0; i--) if (inimigos[i].invocado) inimigos.splice(i, 1);
     }
     function comecarLuta() { B.st = 'idle'; B.tt = 1.2; P.x = arena.l + 70; placa(K.nome, 'NV ' + K.nivel + ' · ' + K.titulo, K.cor, 2.3); api.sfx('vs'); }
-    return { slug, F, chefe: B, arena, inimigos: () => inimigos.concat(B.st !== 'espera' && B.st !== 'derrotado' && B.st !== 'entrada' ? [B] : []), update, desenhar, desenharTela, reiniciar, comecarLuta, vencida: () => vencido, emArena: () => arena.ativa };
+    return { slug, F, chefe: B, arena, inimigos: () => inimigos.concat(B.st !== 'espera' && B.st !== 'derrotado' && B.st !== 'entrada' ? (B2 ? [B, B2] : [B]) : []), update, desenhar, desenharTela, reiniciar, comecarLuta, vencida: () => vencido, emArena: () => arena.ativa };
   }
 
   window.CampanhaFases = Object.freeze({ FASES, criar, lista: () => Object.keys(FASES) });

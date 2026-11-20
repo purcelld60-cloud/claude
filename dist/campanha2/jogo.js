@@ -51,10 +51,18 @@
     valdomiro: { obj: 'Atravesse a Feira do Planalto. O chefão dela não gosta de forasteiro...', cena: 17, alvo: 3560, hora: 9, fase: 'valdomiro' },
     ir_kaua: { obj: 'Pegue o táxi na entrada da Feira e vá até a Trilha do Cristo, na Serra do Periperi.', cena: 17, alvo: 400, hora: 15, ir: 15, prox: 'kaua' },
     kaua: { obj: 'Suba a Serra do Periperi até o Cristo. Cuidado com os buracos e com os urubus.', cena: 15, alvo: 4520, hora: 16.8, fase: 'kaua' },
-    fim6b: { obj: 'Descanse na pensão (táxi até a Pensão Dona Lurdes). O Barão do Café anda nervoso... (a história continua no passo 6C)', cena: 15, alvo: 300, hora: 17.5 }
+    ir_barao: { obj: 'Volte ao ponto de táxi no pé da serra e vá até as Fazendas de Café. Dizem que o Barão quer a terra de todo mundo...', cena: 15, alvo: 300, hora: 17.5, ir: 18, prox: 'barao' },
+    barao: { obj: 'Atravesse o cafezal. Pule os canais de irrigação e cuidado com os capangas do Barão.', cena: 18, alvo: 4600, hora: 8, fase: 'barao' },
+    ir_breno: { obj: 'Pegue o táxi na porteira da fazenda e vá ao Teatro e Planetário. Hoje tem Festival de Inverno... e um valentão.', cena: 18, alvo: 300, hora: 12, ir: 19, prox: 'breno' },
+    breno: { obj: 'Passe pelo Festival de Inverno. O Breno Pitbull espera depois do Planetário.', cena: 19, alvo: 3800, hora: 20.5, fase: 'breno' },
+    ir_gemeos: { obj: 'Pegue o táxi na entrada do Teatro e vá até a frente do Shopping. Entre e encontre a LAN house.', cena: 19, alvo: 300, hora: 21, ir: 22, prox: 'gemeos' },
+    gemeos: { obj: 'Entre no shopping e vá até a LAN house no fim do corredor. Os gêmeos não sabem perder.', cena: 20, alvo: 3560, hora: 19, fase: 'gemeos', via: { 22: 1360 } },
+    ir_fred: { obj: 'Saia do shopping e pegue o táxi até a entrada da Escola SESI. Amanhã de manhã, o Jorge vai estar no pátio.', cena: 22, alvo: 1100, hora: 9.5, ir: 21, prox: 'fred', via: { 20: 90 } },
+    fred: { obj: 'Entre na escola e suba a escada até o pátio do 2º andar. O Jorge está lá... e o Fred também.', cena: 27, alvo: 1560, hora: 10, fase: 'fred', via: { 21: 3940, 26: 1560 } },
+    fim6c: { obj: 'Hoje à noite, o Jorge vai estar na praça da Catedral, no centro. (A batalha final chega no passo 6D.)', cena: 27, alvo: 58, hora: 11 }
   };
-  const APOS_VITORIA = { creuza: 'ir_tonhao', tonhao: 'ir_valdomiro', valdomiro: 'ir_kaua', kaua: 'fim6b' };
-  const PASSO_INICIAL_DA_CENA = { passaporte: 0, lucas: 0, checkin: 12, raiox: 12, portao: 12, taxi1: 12, lurdes: 13, creuza: 25, ir_tonhao: 13, tonhao: 16, ir_valdomiro: 16, valdomiro: 17, ir_kaua: 17, kaua: 15, fim6b: 15 };
+  const APOS_VITORIA = { creuza: 'ir_tonhao', tonhao: 'ir_valdomiro', valdomiro: 'ir_kaua', kaua: 'ir_barao', barao: 'ir_breno', breno: 'ir_gemeos', gemeos: 'ir_fred', fred: 'fim6c' };
+  const PASSO_INICIAL_DA_CENA = { passaporte: 0, lucas: 0, checkin: 12, raiox: 12, portao: 12, taxi1: 12, lurdes: 13, creuza: 25, ir_tonhao: 13, tonhao: 16, ir_valdomiro: 16, valdomiro: 17, ir_kaua: 17, kaua: 15, ir_barao: 15, barao: 18, ir_breno: 18, breno: 19, ir_gemeos: 19, gemeos: 22, ir_fred: 20, fred: 21, fim6c: 27 };
   function passo(id) { S.passo = id; const p = PASSOS[id]; if (p?.obj) objetivoNovo(p.obj); salvar(); }
 
   /* ---------- objetos e pessoas do prólogo (desenhados por cima do cenário) ---------- */
@@ -215,8 +223,8 @@
     if (d.id === 12 && ['checkin', 'raiox', 'portao'].includes(S.passo)) { const e = ESTACOES.find((q) => q.quando === S.passo); if (e) { const y = FLOOR - 128 + Math.sin(t * 4) * 4; c.fillStyle = '#ffd24a'; c.beginPath(); c.moveTo(e.x - 10, y - 12); c.lineTo(e.x + 10, y - 12); c.lineTo(e.x, y); c.fill(); } }
   }
   function setaObjetivo() {
-    const p = PASSOS[S.passo]; if (!p?.cena && p?.cena !== 0) return; if (p.cena !== cenaId || cut) return;
-    const sx = p.alvo - cam, b = Math.sin(t * 5) * 5;
+    const p = PASSOS[S.passo]; if (!p || cut) return; const alvo = p.cena === cenaId ? p.alvo : p.via?.[cenaId]; if (alvo === undefined) return;
+    const sx = alvo - cam, b = Math.sin(t * 5) * 5;
     if (sx > 30 && sx < W - 30) { const y = FLOOR - 170 + b; c.fillStyle = '#2a1a10'; c.beginPath(); c.moveTo(sx - 14, y - 18); c.lineTo(sx + 14, y - 18); c.lineTo(sx, y + 2); c.fill(); c.fillStyle = '#ffd24a'; c.beginPath(); c.moveTo(sx - 10, y - 15); c.lineTo(sx + 10, y - 15); c.lineTo(sx, y - 2); c.fill(); }
     else { const dir = sx < 0 ? -1 : 1, x = dir < 0 ? 24 : W - 24, y = 300; c.fillStyle = '#2a1a10'; c.beginPath(); c.moveTo(x + dir * (8 + b), y); c.lineTo(x - dir * (14 - b), y - 16); c.lineTo(x - dir * (14 - b), y + 16); c.fill(); c.fillStyle = '#ffd24a'; c.beginPath(); c.moveTo(x + dir * (5 + b), y); c.lineTo(x - dir * (10 - b), y - 11); c.lineTo(x - dir * (10 - b), y + 11); c.fill(); }
   }
@@ -343,7 +351,7 @@
 
   /* ---------- abrir e fechar ---------- */
   function abrir(o = {}) {
-    if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
+    if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; if (S.passo === 'fim6b') S.passo = 'ir_barao'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
     aberto = true; box.hidden = false; pausado = false; cut = null; keys.clear(); P.hp = S.hp || 100;
     TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true }));
     if (S.passo === 'abertura') { irPara(0, 700); tocar('c2_abertura', PASSOS.abertura.depois); }

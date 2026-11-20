@@ -11,7 +11,7 @@ A construção vai passo a passo. Cada passo só começa depois da aprovação d
 | 3 | Poderes de Da Roça e mural para trocar | feito e aprovado |
 | 4 | Locomoção: mapas, táxi do Seu Zé e loja de garrafadas | feito e aprovado |
 | 5 | Cutscenes | feito e aprovado |
-| 6 | O jogo: 6A prólogo jogável · 6B vilões 1 a 4 · 6C vilões 5 a 8 · 6D Jorge, final e créditos | 6A feito · **6B feito, aguardando aprovação** |
+| 6 | O jogo: 6A prólogo jogável · 6B vilões 1 a 4 · 6C vilões 5 a 8 · 6D Jorge, final e créditos | 6A e 6B feitos · **6C feito, aguardando aprovação** |
 
 ## Passo 1 · Personagens (`dist/campanha2/personagens.js`)
 
@@ -540,3 +540,23 @@ Também valem os golpes do jogador: papel, peido, dash e os 2 poderes. A Fofoca 
 5. Descansar na pensão.
 
 Depois de cada vitória, a garrafada do poder aparece na banca do Seu Lindomar, na Feira.
+
+
+## Passo 6C · As fases dos vilões 5 a 8
+
+Mesmo sistema do 6B, com inimigos novos e golpes novos.
+
+| Fase | Onde | Inimigos | O que tem de novo no chefe |
+| --- | --- | --- | --- |
+| Barão do Café (nv 11) | Fazendas de café, pulando os canais de irrigação | Capangas do Barão (corpo a corpo), maritacas | Grãos de café em leque, chuva de café, investidas seguidas e muito rápidas |
+| Breno Pitbull (nv 12) | Festival de Inverno, à noite, depois do Planetário | Valentões, morcegos | **Supersoco**: o punho brilha, uma faixa vermelha mostra o alcance e ele avança. Na fase 3 entra em **MODO FÚRIA**, mais rápido |
+| Ryan e Bryan (nv 13) | LAN house do shopping (entrando pela frente do shopping) | Gamers que jogam controles, drones | **Luta dupla**: os dois dividem a mesma vida. O Ryan ataca e o Bryan fica do outro lado atirando controles, cada um com suas provocações |
+| Fred (nv 15, o mais difícil) | Pátio do 2º andar da Escola SESI | A turma do Fred (alunos e alunas que jogam pão de queijo) | **Giro do topete** (um anel avisa a área), **combo** (investida de ida e volta), pão de queijo em leque e provocações com as piadas internas dele com o Jorge. Defende mais, é o mais rápido e tem mais vida |
+
+**Missões do 6C:**
+1. Táxi até o café e o Barão.
+2. Táxi até o Teatro e o Breno.
+3. Táxi até a frente do shopping, entrar e achar os gêmeos na LAN.
+4. Sair do shopping, táxi até a escola, entrar, subir a escada até o pátio e o Fred.
+
+A seta do objetivo também mostra o caminho pelas portas, como a entrada do shopping e a escada da escola. Depois do Fred, a garrafada da Aura de Amizade fica liberada e o objetivo aponta para a praça da Catedral à noite (o 6D).
