@@ -242,18 +242,21 @@
 .m3d .pv .desc{position:absolute;inset:0;background:#120c08ee;padding:12px;font-size:11px;line-height:1.7;color:#f6ead0;opacity:0;transform:translateY(12px);transition:.3s;pointer-events:none;overflow:auto}.m3d .pv .desc.on{opacity:1;transform:none;pointer-events:auto}.m3d .pv .desc b{color:#ffd98a;display:block;margin-bottom:6px}
 .m3d .pv .ir{font-size:14px;padding:12px;background:#e8a83a;color:#1c1408;border-color:#fff2c8}.m3d .pv .ir:hover{background:#ffd98a}.m3d .pv .motivo{font-size:9px;color:#ff9a8a;line-height:1.5}.m3d .pv .x{position:absolute;left:-14px;top:-14px;width:28px;height:28px;padding:0;font-size:12px}
 .m3d .dica{position:absolute;left:14px;bottom:14px;font-size:9px;color:#fff;background:#0b0f14aa;padding:6px 8px;pointer-events:none}.m3d .fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .45s}
+.m3d .trava{position:absolute;left:0;top:0;transform:translate(-50%,-100%);min-width:170px;max-width:250px;background:#2a1010;border:3px solid #ff5a4a;box-shadow:0 0 0 3px #120606,0 8px 18px #0008;padding:8px 10px;text-align:center;pointer-events:none;opacity:0;transition:opacity .2s}.m3d .trava.on{opacity:1;animation:m3dTrava .35s cubic-bezier(.2,1.6,.4,1)}
+.m3d .trava b{display:block;font-size:11px;color:#ff8a7a;margin-bottom:4px}.m3d .trava .t{font-size:8px;color:#f6ead0;opacity:.85}.m3d .trava .n{font-size:12px;color:#ffd98a;margin:3px 0;line-height:1.5}.m3d .trava small{display:block;font-size:8px;color:#e8c8c0;line-height:1.5;margin-top:4px}.m3d .trava:after{content:'';position:absolute;left:50%;bottom:-11px;margin-left:-8px;border:8px solid transparent;border-top-color:#ff5a4a;border-bottom:0}
+@keyframes m3dTrava{from{transform:translate(-50%,-80%) scale(.6)}to{transform:translate(-50%,-100%) scale(1)}}.m3d .topo .teste{background:#3a2a5a;border-color:#b89ae8;font-size:9px}
 .m3d .zoom{position:absolute;left:14px;bottom:44px;display:flex;flex-direction:column;gap:6px}.m3d .zoom button{width:38px;height:38px;padding:0;font-size:16px}
 @media (max-width:760px),(max-height:520px){.m3d .pv{left:10px;right:10px;top:auto;bottom:10px;width:auto;height:50%}.m3d .pv .tela{min-height:70px}.m3d .dica{display:none}.m3d .zoom{bottom:auto;top:60px}}`;
     document.head.appendChild(st);
   }
   function montarUI() {
     css(); ui = document.createElement('div'); ui.className = 'm3d'; ui.hidden = true; ui.setAttribute('role', 'dialog');
-    ui.innerHTML = `<canvas class="gl"></canvas><div class="topo"><div><b class="t"></b><br><small class="s"></small></div><div class="bts"><button type="button" class="fechar" aria-label="Fechar mapa">✕ FECHAR</button></div></div>
+    ui.innerHTML = `<canvas class="gl"></canvas><div class="topo"><div><b class="t"></b><br><small class="s"></small></div><div class="bts"><button type="button" class="teste" hidden></button><button type="button" class="fechar" aria-label="Fechar mapa">✕ FECHAR</button></div></div>
 <div class="zoom"><button type="button" class="zmais" aria-label="Aproximar">+</button><button type="button" class="zmenos" aria-label="Afastar">−</button></div>
 <div class="pv" aria-live="polite"><button type="button" class="x" aria-label="Voltar ao mapa">✕</button><h3></h3><div class="sub"></div><button type="button" class="ib" aria-label="Sobre o lugar" title="Sobre o lugar">ⓘ</button><div class="tela"><canvas class="prev" width="320" height="180"></canvas><div class="desc"></div></div><div class="motivo"></div><button type="button" class="ir">IR PARA LÁ ▶</button></div>
-<div class="dica">Arraste para passear · toque num lugar · ← → troca · ENTER vai · ESC fecha</div><div class="fade"></div>`;
+<div class="trava" aria-live="assertive"><b>🔒 TRANCADO</b><div class="t"></div><div class="n"></div><small></small></div><div class="dica">Arraste para passear · toque num lugar · ← → troca · ENTER vai · ESC fecha</div><div class="fade"></div>`;
     document.body.appendChild(ui); cv = ui.querySelector('canvas.gl'); c = cv.getContext('2d');
-    ui.querySelector('.fechar').addEventListener('click', fechar); ui.querySelector('.x').addEventListener('click', () => selecionar(-1));
+    ui.querySelector('.fechar').addEventListener('click', fechar); ui.querySelector('.teste').addEventListener('click', () => def?.teste?.acao?.()); ui.querySelector('.x').addEventListener('click', () => selecionar(-1));
     ui.querySelector('.ib').addEventListener('click', () => mostrarInfo(!info)); ui.querySelector('.ir').addEventListener('click', ir);
     ui.querySelector('.zmais').addEventListener('click', () => zoomPara(cam.z * 1.3)); ui.querySelector('.zmenos').addEventListener('click', () => zoomPara(cam.z / 1.3));
     cv.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y, moveu: false }; cv.setPointerCapture(e.pointerId); });
@@ -274,14 +277,14 @@
     const base = pintarTerreno(Tr, d.chao); const W = base.width, H = base.height;
     const obj = document.createElement('canvas'); obj.width = W; obj.height = H; const oc = obj.getContext('2d'); oc.imageSmoothingEnabled = false; const lista = []; d.objetos?.((y, f) => lista.push([y, f]), Tr);
     lista.sort((a, b) => a[0] - b[0]); const PO = Px(oc); for (const [, f] of lista) f(PO);
-    const locs = d.locais.map((L) => { const [bx0, by0, bw, bh] = L.caixa, [dx, dy] = L.desloc || [0, 0], bx = bx0 + dx, by = by0 + dy, s = document.createElement('canvas'); s.width = bw; s.height = bh; const sc = s.getContext('2d'); sc.imageSmoothingEnabled = false; sc.translate(-bx0, -by0); L.desenho(Px(sc)); return { s, bx, by, bw, bh, pulo: null }; });
+    const locs = d.locais.map((L) => { const [bx0, by0, bw, bh] = L.caixa, [dx, dy] = L.desloc || [0, 0], bx = bx0 + dx, by = by0 + dy, s = document.createElement('canvas'); s.width = bw; s.height = bh; const sc = s.getContext('2d'); sc.imageSmoothingEnabled = false; sc.translate(-bx0, -by0); L.desenho(Px(sc)); const esc = document.createElement('canvas'); esc.width = bw; esc.height = bh; const ec = esc.getContext('2d'); ec.drawImage(s, 0, 0); ec.globalCompositeOperation = 'source-atop'; ec.fillStyle = 'rgba(8,10,26,.62)'; ec.fillRect(0, 0, bw, bh); return { s, esc, bx, by, bw, bh, pulo: null, tremor: 0 }; });
     return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr };
   }
 
   /* ---------- abrir, selecionar, ir ---------- */
   function abrir(d) {
     if (!ui) montarUI(); def = d; if (!cache.has(d.chave)) cache.set(d.chave, montar(d)); M = cache.get(d.chave);
-    ui.querySelector('.t').textContent = d.titulo; ui.querySelector('.s').textContent = d.subtitulo || '';
+    ui.querySelector('.t').textContent = d.titulo; ui.querySelector('.s').textContent = d.subtitulo || ''; const bt = ui.querySelector('.teste'); bt.hidden = !d.teste; bt.textContent = d.teste?.rotulo || ''; mostrarTrava(-1);
     ui.hidden = false; requestAnimationFrame(() => ui.classList.add('on')); aberto = true; sel = -1; info = false; viagem = null; faiscas = [];
     resize(); const atual = d.locais.findIndex((L) => L.atual), foco = atual >= 0 ? centro(atual) : { x: M.W / 2, y: M.H / 2 };
     cam = { x: M.W / 2, y: M.H / 2, z: zMin() }; limitar(); anim = { de: { ...cam }, para: { x: foco.x, y: foco.y, z: Math.min(zMax, zMin() * 1.9) }, t: -.25, dur: 1.4, f: ease };
@@ -294,16 +297,18 @@
   function fechar() { if (!aberto) return; aberto = false; ui.classList.remove('on'); setTimeout(() => { if (!aberto) ui.hidden = true; }, 360); cancelAnimationFrame(raf); clearInterval(previaTimer); window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } })); def?.aoFechar?.(); }
   const centro = (i) => { const L = M.locs[i]; return { x: L.bx + L.bw / 2, y: L.by + L.bh * .6 }; };
   function selecionar(i) {
-    if (viagem) return; sel = i; const pv = ui.querySelector('.pv'); mostrarInfo(false); clearInterval(previaTimer);
+    if (viagem) return; sel = i; const pv = ui.querySelector('.pv'); mostrarInfo(false); clearInterval(previaTimer); mostrarTrava(i >= 0 && def.locais[i].estado?.trava ? i : -1);
     if (i < 0) { pv.classList.remove('on'); anim = { de: { ...cam }, para: { ...cam, z: Math.max(zMin(), cam.z * .75) }, t: 0, dur: .5, f: ease }; return; }
     const L = def.locais[i], ok = L.estado?.ok !== false, f = centro(i), largo = innerWidth > 760, z = Math.min(zMax, Math.max(zMin() * 2.2, 3));
     anim = { de: { ...cam }, para: { x: f.x + (largo ? 170 / z : 0), y: f.y + (largo ? 0 : 110 / z), z }, t: 0, dur: .8, f: ease };
     M.locs[i].pulo = 0; for (let k = 0; k < 26; k++) { const a = Math.random() * Math.PI * 2, v = 30 + Math.random() * 70; faiscas.push({ x: f.x, y: f.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v * .6 - 50, t: 0, cor: ['#ffd24a', '#ffffff', '#ffe9a8'][k % 3] }); }
     pv.querySelector('h3').textContent = L.nome; pv.querySelector('.sub').textContent = L.sub || ''; pv.querySelector('.desc').innerHTML = `<b>${L.nome}</b>${L.descricao || ''}`;
-    pv.querySelector('.motivo').textContent = ok ? '' : '🔒 ' + (L.estado?.motivo || L.estado?.reason || 'Ainda não dá para ir.'); const bt = pv.querySelector('.ir'); bt.disabled = !ok || !!L.atual; bt.textContent = L.atual ? 'VOCÊ ESTÁ AQUI' : ok ? (def.botao || 'IR PARA LÁ ▶') : 'BLOQUEADO';
+    pv.querySelector('.motivo').textContent = ok ? '' : '🔒 ' + (L.estado?.motivo || L.estado?.reason || 'Ainda não dá para ir.'); const bt = pv.querySelector('.ir'); bt.disabled = !ok || !!L.atual; bt.textContent = L.atual ? 'VOCÊ ESTÁ AQUI' : ok ? (def.botao || 'IR PARA LÁ ▶') : L.estado?.trava ? '🔒 TRANCADO' : 'BLOQUEADO';
     pv.classList.remove('on'); void pv.offsetWidth; pv.classList.add('on');
-    const prev = pv.querySelector('canvas.prev'), pc = prev.getContext('2d'); pc.imageSmoothingEnabled = false; const desenha = () => { try { L.previa?.(pc, prev.width, prev.height, performance.now() / 1000); } catch (e) {} if (!ok) { pc.fillStyle = 'rgba(10,8,6,.55)'; pc.fillRect(0, 0, prev.width, prev.height); } }; desenha(); previaTimer = setInterval(desenha, 120);
+    const prev = pv.querySelector('canvas.prev'), pc = prev.getContext('2d'); pc.imageSmoothingEnabled = false; const desenha = () => { try { L.previa?.(pc, prev.width, prev.height, performance.now() / 1000); } catch (e) {} if (!ok) { pc.fillStyle = 'rgba(10,8,6,.55)'; pc.fillRect(0, 0, prev.width, prev.height); } if (L.estado?.trava) cadeado(prev.width / 2, prev.height / 2 + 34, 4, 0, pc); }; desenha(); previaTimer = setInterval(desenha, 120);
   }
+  let travaI = -1, travaAte = 0;
+  function mostrarTrava(i) { const el = ui?.querySelector('.trava'); if (!el) return; travaI = i; el.classList.remove('on'); if (i < 0) return; const T = def.locais[i].estado.trava; el.querySelector('.t').textContent = T.titulo || 'PRECISA DERROTAR'; el.querySelector('.n').innerHTML = (T.nomes || []).map((n) => String(n).replace(/[<>&]/g, '')).join('<br>'); el.querySelector('small').textContent = T.texto || ''; void el.offsetWidth; el.classList.add('on'); travaAte = tempo + 5.5; M.locs[i].tremor = 1; }
   function mostrarInfo(v) { info = !!v; ui?.querySelector('.desc')?.classList.toggle('on', info); }
   function ir() {
     if (sel < 0 || viagem) return; const L = def.locais[sel]; if (L.estado?.ok === false || L.atual) return;
@@ -325,6 +330,12 @@
     c.fillStyle = '#2a1a10'; c.fillRect(bx - 2, by - 2, w + 4, h + 4); c.fillStyle = ativo ? '#ffd98a' : estado === 'bloq' ? '#5a5048' : estado === 'atual' ? '#3a6a8a' : '#a8643a'; c.fillRect(bx, by, w, h); c.fillStyle = 'rgba(255,255,255,.25)'; c.fillRect(bx, by, w, 2);
     c.fillStyle = ativo ? '#2a1a10' : '#fff6dc'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(txt, x, y - h / 2 + 1); c.fillStyle = '#2a1a10'; c.fillRect(Math.round(x) - 2, by + h + 2, 4, 5);
   }
+  function cadeado(x, y, k, tremor, cx = c) { const c = cx; // cadeado vermelho em pixel art, com brilho pulsando; treme quando você tenta entrar
+    x = Math.round(x + (tremor > 0 ? Math.sin(tempo * 55) * 4 * tremor : 0)); y = Math.round(y); const P = (px, py, w, h, col) => { c.fillStyle = col; c.fillRect(x + px * k, y + py * k, w * k, h * k); };
+    c.save(); c.globalAlpha = .22 + Math.sin(tempo * 4) * .08 + tremor * .3; c.fillStyle = '#ff2a2a'; c.beginPath(); c.arc(x, y - 6 * k, 10 * k, 0, Math.PI * 2); c.fill(); c.globalAlpha = .35; c.fillStyle = '#000'; c.fillRect(x - 6 * k, y + k, 12 * k, k); c.restore();
+    P(-4, -15, 8, 1, '#2a0808'); P(-5, -14, 1, 6, '#2a0808'); P(4, -14, 1, 6, '#2a0808'); P(-4, -14, 8, 1, '#dde0e3'); P(-4, -13, 2, 5, '#9aa0a6'); P(2, -13, 2, 5, '#9aa0a6'); P(-4, -13, 1, 5, '#c8ccd0'); P(-2, -13, 4, 1, '#2a0808'); P(-2, -12, 1, 4, '#2a0808'); P(1, -12, 1, 4, '#2a0808');
+    P(-6, -9, 12, 10, '#2a0808'); P(-5, -8, 10, 8, '#d83a3a'); P(-5, -8, 10, 1, '#ff8a7a'); P(-5, -7, 1, 6, '#ff6a5a'); P(4, -8, 1, 8, '#a82424'); P(-5, -1, 10, 1, '#8a1a1a'); P(-3, -6, 1, 1, '#ffb0a0');
+    P(-1, -6, 2, 2, '#2a0808'); P(-1, -4, 1, 2, '#2a0808'); P(0, -4, 1, 2, '#3a0a0a'); }
   function loop(now) {
     if (!aberto) return; raf = requestAnimationFrame(loop); const dt = Math.max(0, Math.min(.05, (now - last) / 1000)); last = now; tempo += dt; resize();
     const W = cv.width, H = cv.height;
@@ -340,10 +351,11 @@
     for (const [x, y] of M.agua) { const ph = (tempo * .8 + hash(x, y) * 5) % 5; if (ph < .9) { R(x - 2 + ph * 2, y, Math.max(1, 5 - ph * 5), 1, '#e2f4ff'); if (ph < .3) R(x, y - 1, 1, 1, '#ffffff'); } } // brilho na água
     def.animarChao?.(P, tempo);
     c.drawImage(M.obj, 0, 0);
+    def.locais.forEach((L, i) => { if (!L.estado?.trava) return; const lo = M.locs[i], cx = lo.bx + lo.bw / 2, cy = lo.by + lo.bh * .55; c.save(); c.fillStyle = '#060818'; for (const [k, a] of [[.74, .26], [.62, .24], [.5, .2]]) { c.globalAlpha = a; c.beginPath(); c.ellipse(cx, cy, lo.bw * k, lo.bh * k, 0, 0, Math.PI * 2); c.fill(); } c.restore(); }); // claridade menor nas áreas trancadas
     const ordem = M.locs.map((L, i) => i).sort((a, b) => (M.locs[a].by + M.locs[a].bh) - (M.locs[b].by + M.locs[b].bh));
     for (const i of ordem) { const L = M.locs[i]; let sx = 1, sy = 1; if (L.pulo !== null) { L.pulo += dt; const k = L.pulo, y = k < 1 ? Math.sin(k * 15) * Math.exp(-k * 4.5) * .22 : 0; sy = 1 + y; sx = 1 - y * .6; if (k >= 1) L.pulo = null; }
-      if (i === sel) { c.save(); c.globalAlpha = .35 + Math.sin(tempo * 5) * .15; c.fillStyle = '#fff6c0'; const r = Math.max(L.bw, L.bh) * .62; c.beginPath(); c.ellipse(L.bx + L.bw / 2, L.by + L.bh - 4, r, r * .35, 0, 0, Math.PI * 2); c.fill(); c.restore(); }
-      c.save(); c.translate(L.bx + L.bw / 2, L.by + L.bh); c.scale(sx, sy); c.drawImage(L.s, -L.bw / 2, -L.bh); c.restore(); }
+      if (i === sel) { c.save(); c.globalAlpha = .35 + Math.sin(tempo * 5) * .15; c.fillStyle = def.locais[i].estado?.trava ? '#ff4a3a' : '#fff6c0'; const r = Math.max(L.bw, L.bh) * .62; c.beginPath(); c.ellipse(L.bx + L.bw / 2, L.by + L.bh - 4, r, r * .35, 0, 0, Math.PI * 2); c.fill(); c.restore(); }
+      c.save(); c.translate(L.bx + L.bw / 2, L.by + L.bh); c.scale(sx, sy); c.drawImage(def.locais[i].estado?.trava ? L.esc : L.s, -L.bw / 2, -L.bh); c.restore(); }
     def.animar?.(P, tempo, dt);
     faiscas = faiscas.filter((f) => { f.t += dt; f.vy += 160 * dt; f.x += f.vx * dt; f.y += f.vy * dt; R(f.x, f.y, 2, 2, f.cor); return f.t < .9; });
     if (veic) { c.globalAlpha = .3; P.circ(veic.x, veic.y + 3, 10, '#000', 3); c.globalAlpha = 1; c.save(); c.translate(Math.round(veic.x), Math.round(veic.y - veic.alt)); if (veic.dir < 0) c.scale(-1, 1); def.veiculo?.(P, tempo); c.restore(); }
@@ -352,6 +364,8 @@
     def.locais.forEach((L, i) => { const lo = M.locs[i], sx = ox + (lo.bx + lo.bw / 2) * z, sy = oy + lo.by * z; if (sx < -100 || sx > W + 100 || sy < -60 || sy > H + 80) return; const b = Math.round(Math.sin(tempo * 3 + i) * 3), ativo = i === sel;
       placaNome(sx, sy - 6 + b, (L.atual ? '● ' : '') + L.nome, L.estado?.ok === false ? 'bloq' : L.atual ? 'atual' : 'ok', ativo);
       if (ativo) { c.fillStyle = '#ffd24a'; const ay = sy - 34 + Math.round(Math.sin(tempo * 6) * 4); c.beginPath(); c.moveTo(sx - 8, ay - 10); c.lineTo(sx + 8, ay - 10); c.lineTo(sx, ay); c.fill(); } });
+    def.locais.forEach((L, i) => { if (!L.estado?.trava) return; const lo = M.locs[i], k = Math.max(2, Math.min(4, Math.round(z * .9))), x = ox + (lo.bx + lo.bw / 2) * z, y = oy + (lo.by + lo.bh * .62) * z + Math.round(Math.sin(tempo * 2.2 + i) * 2); if (x < -60 || x > W + 60 || y < -60 || y > H + 80) return;
+      lo.tremor = Math.max(0, lo.tremor - dt * 1.6); cadeado(x, y, k, lo.tremor); if (i === travaI) { const el = ui.querySelector('.trava'), pv = ui.querySelector('.pv'), r = pv.classList.contains('on') ? pv.getBoundingClientRect() : null, meia = el.offsetWidth / 2 + 10, ladoDir = r && r.top < H * .4 ? r.left : W, base = r && r.top >= H * .4 ? r.top : H; el.style.left = Math.round(Math.max(meia, Math.min(ladoDir - meia, x))) + 'px'; el.style.top = Math.round(Math.max(el.offsetHeight + 60, Math.min(base - 16, y - 17 * k - 8))) + 'px'; if (tempo > travaAte) mostrarTrava(-1); } });
   }
 
   window.Mapa3D = Object.freeze({ abrir, fechar, aberto: () => aberto, selecionar: (id) => { const i = def?.locais.findIndex((L) => L.id === id) ?? -1; if (i >= 0) selecionar(i); }, ir, info: mostrarInfo, arte: { Px, COR, shade, hash, TS, curva, trilho, vn } });

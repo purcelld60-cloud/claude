@@ -40,7 +40,7 @@
   const ocupado = () => cobre() || !!window.CampanhaMoradores?.aberto?.(); // e a conversa, que só pausa o controle // Fliperama ou armário abertos por cima
   function usar() {
     if (viagem || !perto) return; const p = perto;
-    if (p.tipo === 'extra') { keys.clear(); if (p.id === 'loja') window.CampanhaLoja?.abrir?.({ teste: true }); else window.CampanhaTaxi?.abrir?.(L[idx].id, (cena, x) => { viagem = null; fade = 0; irPara(cena, x + 120); }); return; }
+    if (p.tipo === 'extra') { keys.clear(); if (p.id === 'loja') window.CampanhaLoja?.abrir?.({ teste: true }); else window.CampanhaTaxi?.abrir?.(L[idx].id, (cena, x) => { viagem = null; fade = 0; irPara(cena, x + 120); }, { teste: true }); return; }
     if (p.tipo === 'poderes') { keys.clear(); window.CampanhaPoderes?.abrirMural?.({ teste: true }); return; }
     if (p.tipo === 'conversa') { keys.clear(); window.CampanhaMoradores?.conversar?.(p.id); return; }
     if (p.tipo === 'armario') { if (window.DarocaLook?.open) { keys.clear(); window.DarocaLook.open({ title: 'ARMÁRIO DO QUARTO 4', line: 'Escolha a roupa do Da Roça para hoje.' }); } return; }

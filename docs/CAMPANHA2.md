@@ -303,6 +303,26 @@ Os objetos são ordenados pela altura (quem está mais embaixo fica na frente).
 - **Carros:** andam pelas curvas nos dois sentidos.
 - **Casas e prédios:** só nascem em terreno livre.
 
+**Áreas trancadas.** O lugar que ainda não foi liberado fica mais escuro, com o chão em volta apagado, e ganha um cadeado vermelho pulsando em cima. Ao tocar nele, o cadeado treme e abre um balão dizendo quem é preciso derrotar. O painel também mostra o cadeado e o botão **🔒 TRANCADO**.
+- **Campanha 1:** usa as regras do jogo (`Campaign.canTravel`):
+  - Caderno do Caos: derrotar o Marco;
+  - Academia: derrotar o Menezes;
+  - Quadra: derrotar o monstro do Caderno do Caos e o Menezes, e fazer o treino do Caleb;
+  - Favela: o desafio do Mota, a missão do Almiro e o English do Miqueias;
+  - antes de consertar o carro com o Lucas, tudo fica trancado.
+  Fora do carro, os lugares liberados não escurecem, só pedem para entrar no carro.
+- **Campanha 2:** cada área abre depois de vencer o vilão anterior:
+  - livres desde o começo: aeroporto, pensão e centro;
+  - depois da Dona Creuza: Monumento, rodoviária e lagoa;
+  - depois do Tonhão: feira, Poço Escuro e parque;
+  - depois do Seu Valdomiro: Cristo e Lomantão;
+  - depois do Kauã: café e UESB;
+  - depois do Barão: teatro e Marçal;
+  - depois do Breno: shopping;
+  - depois de Ryan e Bryan: Escola SESI.
+
+  Os vencidos ficam em `daroca-c2-vencidos` até o save da Campanha 2 (passo 6). API: `CampanhaTaxi.vencer('creuza')`, `vencidos()` e `zerarVencidos()`. No visualizador, o botão **TESTE: VENCER …** no alto do mapa vence o próximo vilão.
+
 **Referências da campanha no mapa de Itabuna:**
 - na roça: a oficina do Lucas com as três peças do carro brilhando na bancada, a árvore do balanço, o espantalho no trigal, as galinhas soltas, o caixote do Kauã com lápis, borracha e clipe, e a barcaça de cacau no morro;
 - no Campo do Mota: o Mota treinando com bola e cones;

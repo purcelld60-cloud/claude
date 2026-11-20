@@ -230,16 +230,34 @@
     veiculo: (P) => { const R = P.R; R(-12, -8, 24, 9, '#3c8a8a'); R(-12, -8, 24, 1, '#7ac8c8'); R(-6, -14, 14, 7, '#4aa0a0'); R(-5, -13, 12, 4, '#9fc4d0'); R(-16, -7, 5, 5, '#c8ccd0'); R(-10, 0, 5, 3, '#1c1c1c'); R(6, 0, 5, 3, '#1c1c1c'); R(11, -6, 2, 2, '#fff2b0'); for (let k = 0; k < 3; k++) R(-20 - k * 4, -4 + Math.sin(k + performance.now() / 90) * 2, 3, 3, 'rgba(220,230,240,.7)'); },
     locais: C1
   };
+  // quem falta derrotar (ou o que falta fazer) para liberar cada lugar da campanha 1, seguindo as regras do jogo
+  function quemC1(id, q) {
+    if (!q.lucas) return { titulo: 'PRECISA PRIMEIRO', nomes: ['CONSERTAR O CARRO COM O LUCAS'] };
+    if (id === 5) return { titulo: 'PRECISA VENCER', nomes: [!q.mota && 'O DESAFIO DO MOTA', !q.almiro && 'A MISSÃO DO ALMIRO', !q.miqueias && 'O ENGLISH DO MIQUEIAS'].filter(Boolean) };
+    if (id === 6) return { titulo: 'PRECISA DERROTAR', nomes: ['MARCO'] };
+    if (id === 2) return { titulo: 'PRECISA DERROTAR', nomes: ['MENEZES'] };
+    if (id === 3) { const d = [!q.giant && 'O MONSTRO DO CADERNO DO CAOS', !q.menezes && 'MENEZES'].filter(Boolean); return { titulo: d.length ? 'PRECISA DERROTAR' : 'PRECISA', nomes: d.concat(q.trained ? [] : [(d.length ? '+ ' : '') + 'O TREINO DO CALEB']) }; }
+    return { titulo: 'AINDA TRANCADO', nomes: [] };
+  }
   function abrirMapa1(preferido) {
     const G = window.Game; if (!G?.getState || !window.Mapa3D) return false; const st = G.getState(), q = st.q || {}, atual = Number(preferido ?? st.scene);
-    const d = { ...MAPA1, locais: C1.map((L) => ({ ...L, atual: L.id === atual, estado: st.vehicle || L.id === atual ? (window.Campaign?.canTravel?.(L.id, q) || { ok: true }) : { ok: false, motivo: 'Entre no carro a gás (tecla V ou botão CARRO) para viajar.' }, previa: previaCena(L.id, L.cam ?? 700) })),
-      aoIr: (id) => G.travel?.(id), aoFechar: () => {} };
+    const estado = (id) => { if (id === atual) return { ok: true }; const r = window.Campaign?.canTravel?.(id, q) || { ok: true }; if (r.ok === false) return { ok: false, motivo: r.reason, trava: { ...quemC1(id, q), texto: r.reason } };
+      return st.vehicle ? { ok: true } : { ok: false, motivo: 'Entre no carro a gás (tecla V ou botão CARRO) para viajar.' }; };
+    const d = { ...MAPA1, locais: C1.map((L) => ({ ...L, atual: L.id === atual, estado: estado(L.id), previa: previaCena(L.id, L.cam ?? 700) })), aoIr: (id) => G.travel?.(id), aoFechar: () => {} };
     return window.Mapa3D.abrir(d);
   }
+
 
   /* =====================================================================
      CAMPANHA 2 · VITÓRIA DA CONQUISTA (só os pontos de táxi, sempre do lado de fora)
      ===================================================================== */
+  // ordem dos vilões da Campanha 2 e o lugar de cada um; cada área só abre depois de vencer quem vem antes
+  const VILOES = { creuza: 'DONA CREUZA', tonhao: 'TONHÃO DO MOTOTÁXI', valdomiro: 'SEU VALDOMIRO', kaua: 'KAUÃ INFLUENCER', barao: 'BARÃO DO CAFÉ', breno: 'BRENO PITBULL', gemeos: 'RYAN E BRYAN', fred: 'FRED' };
+  const VNOME = { creuza: 'a Dona Creuza', tonhao: 'o Tonhão do Mototáxi', valdomiro: 'o Seu Valdomiro', kaua: 'o Kauã Influencer', barao: 'o Barão do Café', breno: 'o Breno Pitbull', gemeos: 'os gêmeos Ryan e Bryan', fred: 'o Fred' };
+  const ORDEM = Object.keys(VILOES), REQUER = { t16: 'creuza', t30: 'creuza', t32: 'creuza', t17: 'tonhao', t28: 'tonhao', t33: 'tonhao', t15: 'valdomiro', t29: 'valdomiro', t18: 'kaua', t31: 'kaua', t19: 'barao', t34: 'barao', t22: 'breno', t21: 'gemeos' };
+  const KEY_V = 'daroca-c2-vencidos'; let vencidos = []; try { const v = JSON.parse(localStorage.getItem(KEY_V) || '[]'); if (Array.isArray(v)) vencidos = v.filter((x) => ORDEM.includes(x)); } catch (e) {}
+  const salvarV = () => { try { localStorage.setItem(KEY_V, JSON.stringify(vencidos)); } catch (e) {} };
+  const travaC2 = (L) => { const r = REQUER[L.id]; if (!r || vencidos.includes(r)) return { ok: true }; const nome = VILOES[r], txt = `O Seu Zé não leva ninguém pra lá enquanto ${VNOME[r]} ${r === 'gemeos' ? 'estiverem' : 'estiver'} no caminho.`; return { ok: false, motivo: `Derrote ${nome} para liberar.`, trava: { titulo: 'PRECISA DERROTAR', nomes: [nome], texto: txt } }; };
   const PONTOS = [
     { id: 't12', cena: 12, x: 4000, nome: 'Aeroporto Glauber Rocha', sub: 'Ponto de táxi do desembarque', caixa: [8, 132, 200, 150],
       descricao: 'Quem desce aqui sente o frio já na escada do avião. Foi onde a história em Conquista começou, e talvez seja onde ela termine.',
@@ -444,10 +462,12 @@
     locais: PONTOS
   };
   function abrirMapa2(cenaAtual, aoIr, opts = {}) {
-    if (!window.Mapa3D) return false; const visto = opts.liberado || (() => ({ ok: true }));
-    const d = { ...MAPA2, locais: PONTOS.map((L) => ({ ...L, atual: L.cena === cenaAtual, estado: visto(L), previa: previaCena(L.cena, Math.max(0, L.x - 360)) })), aoIr: (id) => { const L = PONTOS.find((q) => q.id === id); if (L) aoIr?.(L.cena, L.x); } };
+    if (!window.Mapa3D) return false; const visto = opts.liberado || travaC2;
+    const d = { ...MAPA2, locais: PONTOS.map((L) => ({ ...L, atual: L.cena === cenaAtual, estado: L.cena === cenaAtual ? { ok: true } : visto(L), previa: previaCena(L.cena, Math.max(0, L.x - 360)) })), aoIr: (id) => { const L = PONTOS.find((q) => q.id === id); if (L) aoIr?.(L.cena, L.x); } };
+    if (opts.teste) { const prox = ORDEM.find((v) => !vencidos.includes(v)); d.teste = prox ? { rotulo: 'TESTE: VENCER ' + VILOES[prox], acao: () => { vencidos.push(prox); salvarV(); window.Mapa3D.fechar(); setTimeout(() => abrirMapa2(cenaAtual, aoIr, opts), 380); } } : { rotulo: 'TESTE: ZERAR VILÕES', acao: () => { vencidos = []; salvarV(); window.Mapa3D.fechar(); setTimeout(() => abrirMapa2(cenaAtual, aoIr, opts), 380); } }; }
     return window.Mapa3D.abrir(d);
   }
+
 
   /* ---------- o táxi parado no ponto (desenhado no mundo do jogo, em tamanho real) ---------- */
   function desenharTaxi(c, x, t, perto) {
@@ -467,7 +487,8 @@
     pontos: () => PONTOS.map(({ id, cena, x, nome, sub }) => ({ id, cena, x, nome, sub })),
     perto: (cena, x) => { const p = PONTOS.find((q) => q.cena === cena && Math.abs(q.x - x) < 90); return p ? { id: p.id, x: p.x, rotulo: 'CHAMAR O TÁXI DO SEU ZÉ', botao: 'TÁXI' } : null; },
     desenhar: (c, o) => { const hx = Number(o.player?.x) || -9999, t = Number(o.time) || 0; for (const p of PONTOS) if (p.cena === Number(o.scene) && Math.abs(p.x - (Number(o.camera) || 0) - 480) < 640) desenharTaxi(c, p.x, t, Math.abs(p.x - hx) < 90); },
-    abrir: abrirMapa2
+    abrir: abrirMapa2,
+    vencidos: () => vencidos.slice(), vencer: (v) => { if (ORDEM.includes(v) && !vencidos.includes(v)) { vencidos.push(v); salvarV(); } }, zerarVencidos: () => { vencidos = []; salvarV(); }, viloes: () => ({ ...VILOES })
   };
   window.MapasJogo = Object.freeze({ abrirCampanha1: abrirMapa1, abrirCampanha2: abrirMapa2, campanha1: () => C1.map(({ id, nome, sub, descricao }) => ({ id, nome, sub, descricao })), taxi: CampanhaTaxi });
   window.CampanhaTaxi = Object.freeze(CampanhaTaxi);
