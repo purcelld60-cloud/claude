@@ -22,7 +22,8 @@ targets:
         CFBundleDisplayName: Da Roça
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-        UILaunchScreen: {}
+        UILaunchScreen:
+          UIColorName: LaunchPreto  # tela de lançamento preta, emenda com a abertura do jogo
         UIRequiresFullScreen: true
         UIStatusBarHidden: true
         UIViewControllerBasedStatusBarAppearance: true

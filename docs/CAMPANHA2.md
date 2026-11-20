@@ -668,3 +668,18 @@ Os botões são os originais de cada modo, só mudados de lugar. Qualquer botão
 **A Festa da Roça 3D (party) foi removida do jogo**, junto com o three.js que só ela usava. O jogo abre mais leve.
 
 **Joystick da Campanha 2:** é o mesmo da campanha principal (madeira com botão verde). O estilo é copiado de lá quando o jogo abre.
+
+
+## Abertura e logo (`dist/abertura.js`, `abertura.css` e `tools/logo.py`)
+
+**Abertura**
+- Sequência: tela preta com estrelinhas, logo que pula com brilho atrás, **DA ROÇA ADVENTURE** letra por letra, subtítulo, barra de carregamento em blocos com dicas, **PRONTO!** e então o menu.
+- As animações são de CSS, por isso continuam rodando enquanto o jogo carrega.
+- A abertura só sai depois que o jogo terminou de carregar e passaram ~4 s. Tocar na tela pula assim que estiver pronto.
+- Em testes automáticos ela não aparece. Use `?abertura` para ver.
+- No iPhone, a tela de lançamento do app ficou preta (`LaunchPreto`) para emendar com a abertura.
+
+**Logo nova**
+- Bolo de sapo em pixel art 64×64: sapo de chapéu de palha em cima do bolo de dois andares, vela acesa e pôr do sol.
+- Gerada por `python3 tools/logo.py`.
+- Vira `assets/app-icon-192/512/1024.png` e `icon.svg`. O IPA usa o de 1024 direto, sem borrar.

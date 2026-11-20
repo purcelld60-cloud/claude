@@ -82,3 +82,6 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Party:** foi removida, a pedido do dono.
   - **Campanha 2:** só abre depois de terminar a Campanha 1.
   - **Joystick da Campanha 2:** igual ao da principal.
+- **2026-11-20 · Claude:**
+  - **Abertura:** nova (`abertura.js`/`.css`). Ela some sozinha quando o jogo carrega; em testes automáticos não aparece.
+  - **Logo nova:** feita em `tools/logo.py`. Se mudar a logo, gere de novo os ícones (192, 512 e 1024) e o `icon.svg`.

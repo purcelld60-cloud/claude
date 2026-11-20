@@ -54,7 +54,7 @@ jobs:
       - name: Preparar ícone e projeto
         working-directory: native/ios
         run: |
-          sips -s format png -z 1024 1024 ../../dist/assets/app-icon-512.png --out App/Assets.xcassets/AppIcon.appiconset/icon.png
+          cp ../../dist/assets/app-icon-1024.png App/Assets.xcassets/AppIcon.appiconset/icon.png  # logo em pixel art já em 1024, sem borrar
           which xcodegen || brew install xcodegen
           xcodegen generate
 
