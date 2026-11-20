@@ -358,7 +358,10 @@
     if (!a) return null; const p = actorAt(a, t, true); if (!p.visible) return null;
     const cam = camAt(shot, t), camX = Math.round(cam.x - W / 2), z = cam.zoom, fy = clamp(cam.y, 0, H); let sx = (W - W / z) / 2, sy = fy - fy / z;
     sx = clamp(sx, Math.min(0, W - W / z), Math.max(0, W - W / z)); sy = clamp(sy, Math.min(0, H - H / z), Math.max(0, H - H / z));
-    const hb = headBox(a.type), alto = (220 - hb.top) * (a.scale || 1), x = (p.x - camX - sx) * z, cabeca = (p.y - alto - sy) * z, boca = (p.y - alto * .72 - sy) * z;
+    const hb = headBox(a.type), alto = (220 - hb.top) * (a.scale || 1);
+    let hx = p.x, hy = p.y - alto, by = p.y - alto * .72;
+    for (const nome of String(a.anim || '').split('+')) { const f = EXT.anims[nome]?.cabeca; if (f) { const r = f({ x: p.x, y: p.y, alto, facing: p.o.facing }); hx = r.x; hy = r.y - 10; by = r.y; } } // deitado: a cabeça fica de lado
+    const x = (hx - camX - sx) * z, cabeca = (hy - sy) * z, boca = (by - sy) * z;
     return { x, cabeca, boca, fora: x < -20 || x > W + 20 || cabeca > H };
   }
   function linhas(c, txt, max) { const out = []; let l = ''; for (const w2 of txt.split(' ')) { const tst = l ? l + ' ' + w2 : w2; if (c.measureText(tst).width > max && l) { out.push(l); l = w2; } else l = tst; } if (l) out.push(l); return out; }

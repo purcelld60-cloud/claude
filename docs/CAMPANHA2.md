@@ -446,7 +446,7 @@ No jogo, a caixa de fala antiga fica escondida nesses roteiros, mas o texto cont
 
 **Efeitos novos:** `titulo_c2`, `coracao_partido`, `batimento`, `polaroids`, `foto_trio`, `pensamento`, `neblina`, `frio`, `estrelas`, `pb`, `flashback`, `vs`, `poder`, `fim`, `luz_final`, `barras`, `flash_memoria` e `chat`.
 
-**Animações por cima dos atores** (junte com `+`): `chorando`, `frio`, `treme`, `ajoelhado`, `deitado`, `celular`, `celular_mao`, `zzz`, `exclama`, `pergunta`, `raiva`, `suor`, `coracao`, `coracao_partido`, `brilho`, `chama`, `mao`, `silhueta` e `fantasma`.
+**Animações por cima dos atores** (junte com `+`): `chorando`, `frio`, `treme`, `ajoelhado`, `deitado`, `celular`, `celular_mao`, `zzz`, `exclama`, `pergunta`, `raiva`, `suor`, `coracao`, `coracao_partido`, `brilho`, `chama`, `mao`, `agarra_pernas` (deitado, segurando as pernas de quem está na frente), `sacudindo` (balança e chuta tentando se soltar), `silhueta` e `fantasma`.
 
 **Sons novos:** `vibrar`, `toque`, `coracao`, `quebra`, `aviao`, `vento`, `desliga`, `vs`, `poder`, `abraco`, `digitar` e `soluco`.
 
@@ -462,7 +462,7 @@ No jogo, a caixa de fala antiga fica escondida nesses roteiros, mas o texto cont
 | `c2_vilao_*` | Entrada de cada vilão no cenário dele, terminando no cartão **VS** com nome e apelido |
 | `c2_derrota_*` | O vilão vencido dá uma pista do Jorge e a garrafada é liberada (cartão **NOVO PODER!** com o ícone) |
 | `c2_vilao_fred` | Fred e Jorge com o toque secreto e o chat "FRED & JORGE". Jorge vai embora sem responder e Fred diz "O que eu sou com o Jorge, você nunca vai ser". O coração parte |
-| `c2_centro` | A praça da Catedral à noite. Da Roça agarra Jorge, Jorge grita "EU NÃO CONHEÇO ESSE CARA!", a cor some e começa a batalha final |
+| `c2_centro` | A praça da Catedral à noite. Da Roça se joga no chão e agarra Jorge pelas pernas. Jorge sacode, chuta o ar e tenta se soltar, enquanto Da Roça é arrastado junto sem largar. Jorge grita "EU NÃO CONHEÇO ESSE CARA!", a cor some e começa a batalha final |
 | `c2_final` | Da Roça prepara o golpe e para. Estende a mão, Jorge confessa a vergonha e vem o abraço, com flashes do trio. Fred faz as pazes, Reeis aparece em videochamada, as fotos do trio (pequenos, maiores e agora) e o **FIM** |
 | `c2_creditos` | Créditos com todo o elenco |
 
