@@ -23,13 +23,23 @@
     const P = {
       c, R, circ,
       sombra: (cx, cy, rx, ry, a = .22) => { c.globalAlpha = a; circ(cx, cy, rx, '#0c1a10', ry); c.globalAlpha = 1; },
-      arvore: (cx, by, s = 1, tipo = 'verde', seed = 0) => { // árvore redonda com tronco, raiz e sombra
-        const pal = { verde: ['#2f5e26', '#3f8a30', '#58a83c', '#7cc84e', '#a8e070'], escura: ['#244a20', '#2f6a2a', '#3f8a30', '#58a83c', '#7cc84e'], roxa: ['#4a2a5a', '#7a3a9a', '#a85ac8', '#c88ae0', '#ecc8f8'], amarela: ['#6a5010', '#b8901a', '#e0b828', '#f4d84a', '#fff4a0'], laranja: ['#5a2a10', '#a8501a', '#d8782a', '#f0a04a', '#ffd08a'] }[tipo] || ['#2f5e26', '#3f8a30', '#58a83c', '#7cc84e', '#a8e070'];
-        const r = Math.round(10 * s); P.sombra(cx + 3, by, r + 2, Math.round(r * .45));
-        R(cx - 2, by - 9 * s, 5, 9 * s, '#6a4228'); R(cx - 2, by - 9 * s, 2, 9 * s, '#8a5a36'); R(cx - 4, by - 2, 3, 2, '#6a4228'); R(cx + 2, by - 2, 3, 2, '#5a3820');
-        const cy = by - 9 * s - r * .8; circ(cx, cy, r + 1, pal[0]); circ(cx, cy, r, pal[1]); circ(cx - 1, cy - 1, r - 2, pal[2]); circ(cx - 3, cy - 3, Math.max(2, r - 5), pal[3]);
-        for (let k = 0; k < 6 * s; k++) { const a = hash(seed + k) * 6.28, d = hash(seed * 3 + k) * (r - 3); R(cx + Math.cos(a) * d, cy + Math.sin(a) * d * .8, 2, 1, pal[k % 3 === 0 ? 4 : 3]); }
-        for (let k = 0; k < 4 * s; k++) { const a = 1 + hash(seed + k * 7) * 2.2, d = r - 2; R(cx + Math.cos(a) * d, cy + Math.sin(a) * d * .9, 2, 2, pal[0]); } },
+      arvore: (cx, by, s = 1, tipo = 'verde', seed = 0) => { // árvore de copa fofa (vários tufos), com contorno, luz de cima e sombra no chão
+        const pal = { verde: ['#24501f', '#3a7f2e', '#55a23a', '#79c44c', '#b0e27a'], escura: ['#1c3c1a', '#2a6228', '#3a7f2e', '#55a23a', '#86c95a'], roxa: ['#3e2250', '#6e3490', '#9a52c0', '#c084de', '#ecc8f8'], amarela: ['#5a420c', '#a8841a', '#d8b026', '#f2d448', '#fff4a0'], laranja: ['#4a220c', '#9a4818', '#d0722a', '#ee9c48', '#ffd08a'], rosa: ['#5a2240', '#a84478', '#d86aa0', '#f09ac0', '#ffd8ea'] }[tipo] || ['#24501f', '#3a7f2e', '#55a23a', '#79c44c', '#b0e27a'];
+        const r = Math.max(5, Math.round(9 * s)), cy = by - Math.round(8 * s) - r * .8; P.sombra(cx + 4, by, r + 4, Math.round(r * .42) + 1, .26);
+        R(cx - 2, by - 9 * s, 5, 9 * s, '#5a3820'); R(cx - 1, by - 9 * s, 2, 9 * s, '#8a5a36'); R(cx - 4, by - 2, 3, 2, '#5a3820'); R(cx + 2, by - 2, 3, 2, '#4a2e18');
+        const j = (k) => (hash(seed + k, 5) - .5) * r * .25, tufos = [[0, 0, r], [-r * .62 + j(1), r * .22, r * .66], [r * .62 + j(2), r * .18, r * .64], [j(3), -r * .5, r * .66], [-r * .3, -r * .1, r * .6]];
+        for (const [dx, dy, rr] of tufos) circ(cx + dx, cy + dy + 1, rr + 1, pal[0]);
+        for (const [dx, dy, rr] of tufos) circ(cx + dx, cy + dy, rr, pal[1]);
+        for (const [dx, dy, rr] of tufos) circ(cx + dx - rr * .2, cy + dy - rr * .25, rr * .7, pal[2]);
+        for (const [dx, dy, rr] of tufos) circ(cx + dx - rr * .38, cy + dy - rr * .45, Math.max(1, rr * .32), pal[3]);
+        for (let k = 0; k < 7 * s; k++) { const a = hash(seed + k) * 6.28, d = hash(seed * 3 + k) * (r - 2); R(cx + Math.cos(a) * d, cy + Math.sin(a) * d * .8 - 2, 2, 1, pal[k % 3 === 0 ? 4 : 3]); }
+        for (let k = 0; k < 5 * s; k++) { const a = .6 + hash(seed + k * 7) * 1.9, d = r * .9; R(cx + Math.cos(a) * d, cy + Math.sin(a) * d * .8, 2, 2, pal[0]); } },
+      pinheiro: (cx, by, s = 1, seed = 0) => { P.sombra(cx + 4, by, 9 * s, 3, .26); R(cx - 1, by - 6 * s, 3, 6 * s, '#5a3820');
+        for (let k = 0; k < 4; k++) { const w = (12 - k * 2.6) * s, y = by - 5 * s - k * 6 * s; for (let q = 0; q < 7 * s; q++) { const ww = w * (q / (7 * s)); R(cx - ww, y - 7 * s + q, ww * 2 + 1, 1, q === Math.floor(7 * s) - 1 ? '#1c3c1a' : q < 2 ? '#3a7f2e' : '#2a6228'); } R(cx - w * .5, y - 3 * s, 2, 1, '#55a23a'); } },
+      eucalipto: (cx, by, s = 1, seed = 0) => { P.sombra(cx + 4, by, 8 * s, 3, .24); R(cx - 1, by - 22 * s, 3, 22 * s, '#d8cfc0'); R(cx, by - 22 * s, 1, 22 * s, '#f2ece2'); R(cx - 1, by - 10 * s, 3, 2, '#a89a88');
+        for (const [dx, dy, rr] of [[0, -28, 6], [-5, -22, 5], [5, -21, 5], [0, -17, 4]]) { circ(cx + dx * s, by + dy * s, rr * s + 1, '#3a5a3a'); circ(cx + dx * s, by + dy * s, rr * s, '#5a8a5a'); circ(cx + dx * s - 1, by + dy * s - 1, rr * s * .5, '#8ab48a'); } },
+      cacaueiro: (cx, by, s = 1, seed = 0) => { P.arvore(cx, by, .8 * s, 'escura', seed); for (let k = 0; k < 3; k++) { const x = cx - 5 + k * 4 + Math.round(hash(seed, k) * 2), y = by - 6 - (k % 2) * 3; R(x, y, 3, 4, ['#f2a03a', '#e8c24c', '#c8542a'][(k + seed) % 3]); R(x, y, 1, 4, '#ffffff44'); } },
+      mamoeiro: (cx, by, s = 1) => { P.sombra(cx + 3, by, 6, 2); R(cx - 1, by - 20, 2, 20, '#9a8a6a'); for (let a = 0; a < 6; a++) { const an = a / 6 * Math.PI * 2; for (let k = 0; k < 8; k++) R(cx + Math.cos(an) * k, by - 21 + Math.sin(an) * k * .5 + k * k * .05, 2, 2, k > 5 ? '#3a7f2e' : '#58a83c'); } R(cx - 3, by - 18, 3, 4, '#f2a03a'); R(cx + 1, by - 17, 3, 4, '#e8c24c'); R(cx - 1, by - 15, 3, 4, '#58a83c'); },
       coqueiro: (cx, by) => { P.sombra(cx + 4, by, 9, 3); for (let k = 0; k < 22; k++) R(cx + Math.sin(k * .12) * 3, by - k, 3, 1, k % 3 ? '#9a7040' : '#7a5228'); const tx = cx + Math.sin(22 * .12) * 3 + 1, ty = by - 22;
         for (let a = 0; a < 6; a++) { const an = a / 6 * Math.PI * 2 + .3; for (let k = 0; k < 9; k++) R(tx + Math.cos(an) * k, ty + Math.sin(an) * k * .55 + k * k * .04, 2, 2, k > 6 ? '#3f8a30' : '#58a83c'); } R(tx - 2, ty, 4, 3, '#7a5228'); },
       arbusto: (cx, by, seed = 0, flor) => { P.sombra(cx + 1, by, 7, 2); circ(cx, by - 4, 6, '#2f5e26', 4); circ(cx, by - 4, 5, '#3f8a30', 3); circ(cx - 1, by - 5, 3, '#58a83c', 2); if (flor) for (let k = 0; k < 4; k++) R(cx - 4 + hash(seed + k) * 8, by - 7 + hash(seed * 2 + k) * 4, 2, 2, flor); },
@@ -65,64 +75,152 @@
   }
 
   /* =====================================================================
-     TERRENO EM LAJOTAS: nível (0 = água) e tipo do chão; paredão de terra onde o terreno desce para o sul
+     TERRENO ORGÂNICO
+     O mapa guarda o relevo e o tipo do chão numa grade fina (4 px). Na hora de pintar, cada pixel consulta a grade
+     num ponto levemente deslocado por um ruído suave: assim rios, barrancos, gramados e ruas ganham bordas curvas,
+     sem cara de quadradinho. Paredões de terra aparecem onde o terreno desce para o sul (vista de cima pra frente).
      ===================================================================== */
+  const TIPOS = ['grama', 'mata', 'pedra', 'chao', 'asfalto', 'areia', 'plantacao', 'cafe', 'campo', 'quadra', 'pista', 'nuvem', 'trigo', 'calcada', 'cerrado'];
+  const TI = Object.fromEntries(TIPOS.map((t, i) => [t, i]));
+  const VERDE = new Set([TI.grama, TI.mata, TI.cerrado]), CAMINHO = new Set([TI.pedra, TI.chao, TI.asfalto, TI.areia, TI.quadra, TI.pista, TI.calcada]);
+  const h2 = (x, y, s = 0) => { let h = Math.imul(x | 0, 374761393) + Math.imul(y | 0, 668265263) + Math.imul(s, 2246822519); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
+  const vn = (x, y, s = 0) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf), a = h2(xi, yi, s), b = h2(xi + 1, yi, s), c = h2(xi, yi + 1, s), d = h2(xi + 1, yi + 1, s); return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v; };
+  // curva suave (Catmull-Rom) passando pelos pontos, em pixels; volta pontos a cada ~passo px
+  function curva(pts, passo = 3) {
+    const out = [], G = (i) => pts[Math.max(0, Math.min(pts.length - 1, i))];
+    for (let i = 0; i < pts.length - 1; i++) { const p0 = G(i - 1), p1 = G(i), p2 = G(i + 1), p3 = G(i + 2), n = Math.max(1, Math.ceil(Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) / passo));
+      for (let k = 0; k < n; k++) { const t = k / n, t2 = t * t, t3 = t2 * t, f = (a, b, c, d) => .5 * (2 * b + (-a + c) * t + (2 * a - 5 * b + 4 * c - d) * t2 + (-a + 3 * b - 3 * c + d) * t3); out.push([f(p0[0], p1[0], p2[0], p3[0]), f(p0[1], p1[1], p2[1], p3[1])]); } }
+    out.push([...pts[pts.length - 1]]); return out;
+  }
+  // percorre uma curva (lista de pontos) pela distância: u de 0 a 1 → {x, y, ang}
+  function trilho(pl) { const ac = [0]; for (let k = 1; k < pl.length; k++) ac.push(ac[k - 1] + Math.hypot(pl[k][0] - pl[k - 1][0], pl[k][1] - pl[k - 1][1])); const total = ac[ac.length - 1] || 1;
+    return { total, em: (u) => { const d = ((u % 1) + 1) % 1 * total; let lo = 0, hi = ac.length - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (ac[m] <= d) lo = m; else hi = m; } const a = pl[lo], b = pl[hi], k = (d - ac[lo]) / ((ac[hi] - ac[lo]) || 1); return { x: a[0] + (b[0] - a[0]) * k, y: a[1] + (b[1] - a[1]) * k, ang: Math.atan2(b[1] - a[1], b[0] - a[0]) }; } }; }
+
   function Terreno(W, H) {
-    const nivel = new Int8Array(W * H).fill(1), tipo = new Array(W * H).fill('grama'), i = (x, y) => y * W + x, dentro = (x, y) => x >= 0 && y >= 0 && x < W && y < H;
+    const F = 4, FW = W * F, FH = H * F, nivel = new Int8Array(FW * FH).fill(1), tipo = new Uint8Array(FW * FH), ok = (x, y) => x >= 0 && y >= 0 && x < FW && y < FH;
+    const pinta = (fx, fy, o) => { if (!ok(fx, fy)) return; const i = fy * FW + fx; if (o.nivel !== undefined) nivel[i] = o.nivel; if (o.tipo) tipo[i] = TI[o.tipo] ?? 0; };
+    const ruas = [], eixo = new Map();
     const T = {
-      W, H,
-      niv: (x, y) => (dentro(x, y) ? nivel[i(x, y)] : 1), tip: (x, y) => (dentro(x, y) ? tipo[i(x, y)] : 'grama'),
-      ret: (x, y, w, h, o) => { for (let yy = y; yy < y + h; yy++) for (let xx = x; xx < x + w; xx++) if (dentro(xx, yy)) { if (o.nivel !== undefined) nivel[i(xx, yy)] = o.nivel; if (o.tipo) tipo[i(xx, yy)] = o.tipo; } },
-      oval: (cx, cy, rx, ry, o) => { for (let yy = Math.floor(cy - ry); yy <= cy + ry; yy++) for (let xx = Math.floor(cx - rx); xx <= cx + rx; xx++) if (dentro(xx, yy) && ((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2 <= 1) { if (o.nivel !== undefined) nivel[i(xx, yy)] = o.nivel; if (o.tipo) tipo[i(xx, yy)] = o.tipo; } },
-      linha: (pts, larg, o) => { for (let k = 1; k < pts.length; k++) { const [a, b] = [pts[k - 1], pts[k]], len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1; for (let s = 0; s <= len; s += .3) { const x = a[0] + (b[0] - a[0]) * s / len, y = a[1] + (b[1] - a[1]) * s / len; T.ret(Math.round(x - larg / 2), Math.round(y - larg / 2), larg, larg, o); } } }
+      W, H, ruas,
+      nivPx: (px, py) => { const fx = Math.floor(px / 4), fy = Math.floor(py / 4); return ok(fx, fy) ? nivel[fy * FW + fx] : nivel[Math.max(0, Math.min(FH - 1, fy)) * FW + Math.max(0, Math.min(FW - 1, fx))]; },
+      tipPx: (px, py) => { const fx = Math.max(0, Math.min(FW - 1, Math.floor(px / 4))), fy = Math.max(0, Math.min(FH - 1, Math.floor(py / 4))); return tipo[fy * FW + fx]; },
+      niv: (x, y) => T.nivPx(x * TS + 8, y * TS + 8), tip: (x, y) => TIPOS[T.tipPx(x * TS + 8, y * TS + 8)],
+      // formas (em lajotas; aceita frações)
+      ret: (x, y, w, h, o) => { for (let fy = Math.round(y * F); fy < Math.round((y + h) * F); fy++) for (let fx = Math.round(x * F); fx < Math.round((x + w) * F); fx++) pinta(fx, fy, o); },
+      retR: (x, y, w, h, r, o) => { for (let fy = Math.round(y * F); fy < Math.round((y + h) * F); fy++) for (let fx = Math.round(x * F); fx < Math.round((x + w) * F); fx++) { const cx = (fx + .5) / F, cy = (fy + .5) / F, dx = Math.max(x + r - cx, 0, cx - (x + w - r)), dy = Math.max(y + r - cy, 0, cy - (y + h - r)); if (dx * dx + dy * dy <= r * r) pinta(fx, fy, o); } },
+      oval: (cx, cy, rx, ry, o) => { for (let fy = Math.floor((cy - ry) * F); fy <= (cy + ry) * F; fy++) for (let fx = Math.floor((cx - rx) * F); fx <= (cx + rx) * F; fx++) { const x = (fx + .5) / F, y = (fy + .5) / F; if (((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1) pinta(fx, fy, o); } },
+      poli: (pts, o) => { const sm = curva(pts.concat([pts[0]]).map(([a, b]) => [a * F, b * F]), 2); let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9; for (const [a, b] of sm) { x0 = Math.min(x0, a); y0 = Math.min(y0, b); x1 = Math.max(x1, a); y1 = Math.max(y1, b); }
+        for (let fy = Math.floor(y0); fy <= y1; fy++) for (let fx = Math.floor(x0); fx <= x1; fx++) { const px = fx + .5, py = fy + .5; let dentro = false; for (let i = 0, j = sm.length - 1; i < sm.length; j = i++) { const [xi, yi] = sm[i], [xj, yj] = sm[j]; if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) dentro = !dentro; } if (dentro) pinta(fx, fy, o); } },
+      // faixa ao longo de uma curva suave (rio, rua, trilha). Devolve a curva em pixels.
+      curva: (pts, larg, o, suave = true) => { const pl = suave ? curva(pts.map(([a, b]) => [a * TS, b * TS]), 2) : pts.map(([a, b]) => [a * TS, b * TS]); const r = larg * TS / 2;
+        for (const [px, py] of pl) for (let fy = Math.floor((py - r) / 4); fy <= (py + r) / 4; fy++) for (let fx = Math.floor((px - r) / 4); fx <= (px + r) / 4; fx++) { const dx = fx * 4 + 2 - px, dy = fy * 4 + 2 - py; if (dx * dx + dy * dy <= r * r) pinta(fx, fy, o); }
+        if (o.tipo && ['asfalto', 'pedra', 'chao', 'calcada'].includes(o.tipo)) { // cruzamentos arredondados: onde uma rua encontra outra, abre uma pracinha redonda
+          const id = ruas.length + 1, juntas = [], chave = (x, y) => ((x / 8) | 0) + ',' + ((y / 8) | 0);
+          for (let k = 0; k < pl.length; k += 2) { const [px, py] = pl[k]; let achou = false; for (let dy = -1; dy <= 1 && !achou; dy++) for (let dx = -1; dx <= 1 && !achou; dx++) { const e = eixo.get(chave(px + dx * 8, py + dy * 8)); if (e && e.id !== id && e.tipo === o.tipo) achou = true; } if (achou && !juntas.some(([a, b]) => Math.hypot(a - px, b - py) < 40)) juntas.push([px, py]); }
+          for (const [px, py] of pl) { const k = chave(px, py); if (!eixo.has(k)) eixo.set(k, { id, tipo: o.tipo }); }
+          for (const [px, py] of juntas) { const rr = r * 1.75; for (let fy = Math.floor((py - rr) / 4); fy <= (py + rr) / 4; fy++) for (let fx = Math.floor((px - rr) / 4); fx <= (px + rr) / 4; fx++) { const dx = fx * 4 + 2 - px, dy = fy * 4 + 2 - py; if (dx * dx + dy * dy <= rr * rr && nivel[fy * FW + fx] !== 0) pinta(fx, fy, { tipo: o.tipo }); } }
+          ruas.push({ tipo: o.tipo, larg, pl, juntas }); }
+        return pl; },
+      linha: (pts, larg, o) => T.curva(pts, larg, o, false),
+      livre: () => true
     };
     return T;
   }
+
+  // cores em [r,g,b]
+  const RGB = (hex) => { const n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+  const PAL = {}; const pal = (hex) => PAL[hex] || (PAL[hex] = RGB(hex));
   function pintarTerreno(Tr, extra) {
-    const cv = document.createElement('canvas'); cv.width = Tr.W * TS; cv.height = Tr.H * TS; const c = cv.getContext('2d'); c.imageSmoothingEnabled = false; const P = Px(c), R = P.R;
-    const alto = (x, y) => Tr.niv(x, y);
-    for (let y = 0; y < Tr.H; y++) for (let x = 0; x < Tr.W; x++) {
-      const px = x * TS, py = y * TS, n = alto(x, y), t = Tr.tip(x, y), s = hash(x, y);
-      if (n === 0) { // água: tons, espuma e barranco onde a terra fica ao norte
-        R(px, py, TS, TS, s > .7 ? COR.aguaE : COR.agua); for (let k = 0; k < 3; k++) R(px + hash(x + k, y) * 13, py + hash(y + k, x) * 14, 3, 1, k ? '#5aa2ea' : COR.aguaE);
-        if (alto(x, y - 1) > 0) { R(px, py, TS, 6, COR.terraE); R(px, py, TS, 1, COR.terraB); R(px, py + 3, TS, 1, COR.terra); R(px, py + 6, TS, 2, COR.aguaE); R(px, py + 8, TS, 1, COR.espuma); }
-        if (alto(x - 1, y) > 0) { R(px, py, 3, TS, COR.aguaC); for (let k = 0; k < TS; k += 4) R(px + 3, py + k + (s * 3 | 0), 1, 2, COR.espuma); }
-        if (alto(x + 1, y) > 0) { R(px + TS - 3, py, 3, TS, COR.aguaC); for (let k = 0; k < TS; k += 4) R(px + TS - 4, py + k + 1, 1, 2, COR.espuma); }
-        if (alto(x, y + 1) > 0) { R(px, py + TS - 3, TS, 3, COR.aguaC); for (let k = 0; k < TS; k += 5) R(px + k + (s * 3 | 0), py + TS - 4, 2, 1, COR.espuma); }
-        continue;
-      }
-      const topoParede = alto(x, y - 1) > n, baseParede = !topoParede && alto(x, y - 1) === n && alto(x, y - 2) > n && Tr.tip(x, y - 1) !== 'agua';
-      if (topoParede || baseParede) { // paredão de terra com duas lajotas de altura: o terreno de cima desce aqui
-        R(px, py, TS, TS, COR.terra); for (let k = 3; k < TS; k += 4) { R(px, py + k, TS, 1, COR.terraE); for (let j = ((k + y * 4) % 8) ? 2 : 6; j < TS; j += 8) R(px + j, py + k - 2, 2, 1, COR.terraC); }
-        for (let k = 0; k < 3; k++) if (hash(x * 5 + k, y) > .6) { const sx = px + hash(x, y * 3 + k) * 12, sy = py + 2 + hash(y, x * 3 + k) * 10; R(sx, sy, 4, 3, '#8a7a6a'); R(sx, sy, 3, 1, '#b8a898'); } // pedrinhas na terra
-        if (topoParede) { R(px, py, TS, 3, COR.gramaB); for (let j = 0; j < TS; j += 2) R(px + j, py + 3, 2, 1 + ((j + x) % 3 === 0 ? 3 : (j + x) % 3 === 1 ? 1 : 0), COR.gramaB); R(px, py, TS, 1, COR.gramaE); if (hash(x * 3, y) > .7) { R(px + 5, py + 4, 1, 6, '#5a3820'); R(px + 6, py + 9, 2, 1, '#5a3820'); } }
-        else { R(px, py + TS - 3, TS, 3, COR.terraB); c.globalAlpha = .25; R(px, py + TS, TS, 3, '#0c1a10'); c.globalAlpha = 1; }
-        const ladoE = (alto(x - 1, y - 1) <= n && alto(x - 1, y - (baseParede ? 2 : 1)) <= n) || alto(x - 1, y) > n, ladoD = (alto(x + 1, y - 1) <= n && alto(x + 1, y - (baseParede ? 2 : 1)) <= n) || alto(x + 1, y) > n;
-        if (ladoE) R(px, py, 2, TS, COR.terraB); if (ladoD) R(px + TS - 2, py, 2, TS, COR.terraB);
-        continue;
-      }
-      if (t === 'grama' || t === 'mata') { const mancha = hash(Math.floor(x / 3), Math.floor(y / 3)), base = t === 'mata' ? '#4f9a34' : mancha > .66 ? '#65b440' : mancha < .25 ? '#58a638' : COR.grama; R(px, py, TS, TS, base); // grama com manchas, tufos e florzinhas
-        for (let k = 0; k < 12; k++) R(px + hash(x * 7 + k, y) * 15, py + hash(y * 5 + k, x) * 15, 1 + (k % 3 === 0), 1, k % 2 ? COR.gramaC : COR.gramaE);
-        for (let k = 0; k < (s > .55 ? 2 : 0); k++) { const tx = px + 2 + hash(x + k * 9, y * 2) * 10, ty = py + 4 + hash(y + k * 7, x * 2) * 8; R(tx, ty + 1, 1, 3, COR.gramaB); R(tx + 1, ty, 1, 4, COR.gramaB); R(tx + 2, ty + 1, 1, 3, COR.gramaB); R(tx + 1, ty, 1, 1, '#8ad45a'); }
-        if (s < .06) { R(px + 9, py + 4, 2, 2, '#f6f2ea'); R(px + 10, py + 5, 1, 1, '#f2c94c'); } else if (s > .97) { R(px + 4, py + 9, 2, 2, '#e86a8a'); R(px + 5, py + 10, 1, 1, '#ffe0ea'); } }
-      else if (t === 'pedra') { R(px, py, TS, TS, COR.pedraE); for (let r = 0; r < 4; r++) for (let k = 0; k < 4; k++) { const sx = px + k * 4 + (r % 2) * 2, sy = py + r * 4; R(sx, sy, 3, 3, hash(x * 4 + k, y * 4 + r) > .5 ? COR.pedra : shade(COR.pedra, .94)); R(sx, sy, 2, 1, COR.pedraC); } }
-      else if (t === 'chao') { R(px, py, TS, TS, COR.chao); for (let k = 0; k < 5; k++) R(px + hash(x + k, y * 3) * 14, py + hash(y + k, x * 3) * 14, 2, 1, COR.chaoE); }
-      else if (t === 'asfalto') { R(px, py, TS, TS, COR.asfalto); for (let k = 0; k < 6; k++) R(px + hash(x + k, y * 2) * 15, py + hash(y + k, x * 2) * 15, 1, 1, COR.asfaltoE); }
-      else if (t === 'areia') { R(px, py, TS, TS, COR.areia); for (let k = 0; k < 5; k++) R(px + hash(x + k, y) * 15, py + hash(y + k, x) * 15, 1, 1, '#d8c07a'); }
-      else if (t === 'plantacao') { R(px, py, TS, TS, '#8a5a36'); for (let r = 0; r < 4; r++) { R(px, py + r * 4 + 2, TS, 1, '#6a4228'); for (let k = 1; k < TS; k += 3) { R(px + k, py + r * 4, 1, 2, '#58a83c'); R(px + k, py + r * 4, 1, 1, '#9ade6a'); } } }
-      else if (t === 'cafe') { R(px, py, TS, TS, '#8a5a36'); for (let r = 0; r < 2; r++) for (let k = 0; k < 4; k++) { const cx = px + 2 + k * 4, cy = py + 3 + r * 8; R(cx - 1, cy - 1, 4, 4, '#2f5e26'); R(cx, cy - 1, 2, 2, '#3f8a30'); if (hash(x * 8 + k, y + r) > .6) R(cx + 1, cy + 1, 1, 1, '#c43c3a'); } }
-      else if (t === 'campo') R(px, py, TS, TS, (x % 2) ? '#5aa046' : '#66ae50');
-      else if (t === 'quadra') R(px, py, TS, TS, '#3c7ab0');
-      else if (t === 'pista') R(px, py, TS, TS, '#5b6066');
-      else if (t === 'nuvem') { R(px, py, TS, TS, '#e8f0f6'); for (let k = 0; k < 4; k++) R(px + hash(x + k, y) * 12, py + hash(y + k, x) * 12, 4, 2, '#ffffff'); }
-      else R(px, py, TS, TS, COR.grama);
-      // borda onde o chão encontra a grama (pedra, terra) com grama invadindo um pouco
-      if (t !== 'grama' && t !== 'mata') for (const [dx, dy] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) { const nt = Tr.tip(x + dx, y + dy); if ((nt === 'grama' || nt === 'mata') && alto(x + dx, y + dy) === n) { const col = shade(t === 'pedra' ? COR.pedraB : t === 'asfalto' ? '#8a8e92' : COR.chaoE, .95);
-        if (dy) { R(px, py + (dy < 0 ? 0 : TS - 1), TS, 1, col); for (let k = 0; k < TS; k += 2) if (hash(x * 9 + k, y + dy) > .55) R(px + k, py + (dy < 0 ? 0 : TS - 2), 2, 2, COR.grama); } else { R(px + (dx < 0 ? 0 : TS - 1), py, 1, TS, col); for (let k = 0; k < TS; k += 2) if (hash(x + dx, y * 9 + k) > .55) R(px + (dx < 0 ? 0 : TS - 2), py + k, 2, 2, COR.grama); } } }
-      if (alto(x, y - 1) < n && alto(x, y - 1) > 0) R(px, py, TS, 2, COR.borda);
-      if (alto(x - 1, y) < n) { R(px, py, 2, TS, COR.borda); R(px + 2, py, 1, TS, COR.gramaB); } if (alto(x + 1, y) < n) { R(px + TS - 2, py, 2, TS, COR.borda); R(px + TS - 3, py, 1, TS, COR.gramaB); }
+    const W = Tr.W * TS, H = Tr.H * TS, N = W * H, cv = document.createElement('canvas'); cv.width = W; cv.height = H; const c = cv.getContext('2d'); c.imageSmoothingEnabled = false;
+    const lv = new Int8Array(N), ty = new Uint8Array(N);
+    // 1) relevo e tipo, com as bordas deformadas pelo ruído
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const n1 = vn(x / 28, y / 28, 1) - .5, n2 = vn(x / 28, y / 28, 2) - .5, m1 = vn(x / 9, y / 9, 3) - .5, m2 = vn(x / 9, y / 9, 4) - .5, ax = n1 * 12 + m1 * 3, ay = n2 * 12 + m2 * 3, i = y * W + x;
+      lv[i] = Tr.nivPx(x + ax, y + ay); ty[i] = Tr.tipPx(x + ax * .3, y + ay * .3);
     }
-    extra?.(P, c);
+    // 2) paredões: descendo cada coluna, onde o nível de cima é maior começa a parede de terra (22 px por degrau)
+    const wd = new Int16Array(N).fill(-1), wh = new Int16Array(N), wt = new Uint8Array(N), sh = new Uint8Array(N), WH = 22;
+    for (let x = 0; x < W; x++) { let eY = -1e5, h = 0, eL = -1, eT = 0;
+      for (let y = 0; y < H; y++) { const i = y * W + x, L = lv[i];
+        if (y > 0) { const U = lv[i - W]; if (U > L && wd[i - W] < 0) { const hh = L === 0 ? (U - 1) * WH + 7 : (U - L) * WH; if (y - eY < h) { h = Math.max(h, y - eY + hh); eL = Math.max(eL, U); } else { eY = y; h = hh; eL = U; eT = ty[i - W]; } } }
+        if (L >= eL) eY = -1e5; const d = y - eY;
+        if (d >= 0 && d < h) { wd[i] = d; wh[i] = h; wt[i] = eT; } else if (d >= h && d < h + 6) sh[i] = 6 - (d - h);
+      } }
+    for (let y = 0; y < H; y++) { let x = 0; while (x < W) { if (wd[y * W + x] < 0) { x++; continue; } let e = x; while (e < W && wd[y * W + e] >= 0) e++; if (e - x < 5) for (let k = x; k < e; k++) { wd[y * W + k] = -1; sh[y * W + k] = 0; } x = e; } } // lascas finas (beiradas quase verticais) viram só contorno
+    const img = c.createImageData(W, H), px = img.data;
+    const put = (i, col, f = 1) => { const o = i * 4; px[o] = Math.min(255, col[0] * f); px[o + 1] = Math.min(255, col[1] * f); px[o + 2] = Math.min(255, col[2] * f); px[o + 3] = 255; };
+    const G3 = [pal('#58a638'), pal('#5fae3c'), pal('#67b642')], M3 = [pal('#468c30'), pal('#4f9a34'), pal('#55a238')], CE3 = [pal('#9aa04a'), pal('#a8a854'), pal('#8a9a44')];
+    const AG = { fundo: pal('#3a7ad0'), meio: pal('#4a92e2'), raso: pal('#6ab4f0'), espuma: pal('#e2f4ff'), onda: pal('#7cc2f6') };
+    const terraCores = [pal('#c87a4a'), pal('#b86c40'), pal('#d88a56')], terraB = pal('#7a4228'), terraE = pal('#a85e38'), terraC = pal('#e8a06a'), pedrinha = pal('#8a7a6a'), pedrinhaC = pal('#b8a898');
+    const agua = (x, y) => lv[Math.max(0, Math.min(H - 1, y)) * W + Math.max(0, Math.min(W - 1, x))] === 0;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const i = y * W + x, L = lv[i], t = ty[i];
+      if (wd[i] >= 0) { // ----- paredão de terra -----
+        const d = wd[i], h = wh[i], top = wt[i], lip = 2 + Math.floor(h2(x >> 1, 7) * 3);
+        if (L === 0 && h <= 8) { put(i, d < h - 2 ? (d < 2 ? terraB : terraE) : d === h - 1 ? AG.espuma : AG.raso); continue; }
+        if (d < lip && (VERDE.has(top) || top === TI.campo)) { put(i, d === lip - 1 ? pal('#2f5e26') : d === 0 ? pal('#4f9a34') : pal('#3c7a2c')); continue; }
+        if (d < 2 && CAMINHO.has(top)) { put(i, pal('#7a8086')); continue; }
+        if (d >= h - 2) { put(i, terraB); continue; }
+        const s = d + vn(x / 10, 5, 9) * 5, banda = Math.floor(s / 5), fr = s - banda * 5; let col = terraCores[banda % 3], f = 1 - (d / h) * .16;
+        if (fr < 1 && h2(x >> 2, banda, 3) > .45) col = terraC; else if (fr > 4.2) col = terraE;
+        if (h2(x, 99) < .035 && d > 4 && d < h - 4) col = terraB;
+        const sx = x >> 2, sy = Math.floor((d + (x & 3)) / 3); if (h2(sx, sy + y * 0, 13) > .93) col = (d % 3 === 0) ? pedrinhaC : pedrinha;
+        if (wd[i - 1] < 0 || wd[i + 1] < 0) f *= .72; put(i, col, f); continue;
+      }
+      let f = sh[i] ? 1 - sh[i] * .045 : 1;
+      if (L === 0) { // ----- água -----
+        let col = AG.meio; const prof = vn(x / 40, y / 40, 6);
+        if (prof > .62) col = AG.fundo;
+        if (agua(x - 2, y) + agua(x + 2, y) + agua(x, y - 2) + agua(x, y + 2) < 4) col = AG.espuma;
+        else if (agua(x - 5, y) + agua(x + 5, y) + agua(x, y - 5) + agua(x, y + 5) + agua(x - 4, y - 4) + agua(x + 4, y + 4) < 6) col = AG.raso;
+        else if (h2(x >> 3, y >> 1, 21) > .955 && (y & 1) === 0) col = AG.onda;
+        put(i, col, f); continue;
+      }
+      const tint = 1 + (L - 1) * .035; f *= tint;
+      let col;
+      switch (t) {
+        case TI.grama: case TI.mata: case TI.cerrado: { const P3 = t === TI.mata ? M3 : t === TI.cerrado ? CE3 : G3, m = vn(x / 36, y / 36, 7); col = P3[m < .38 ? 0 : m > .64 ? 2 : 1]; const q = h2(x >> 1, y >> 1, 8); if (q > .93) col = t === TI.cerrado ? pal('#c8c070') : pal('#7ccc4e'); else if (q < .05) col = t === TI.cerrado ? pal('#7a7a3a') : pal('#4a9030'); break; }
+        case TI.pedra: { const r = Math.floor(y / 5), off = (r & 1) * 3, cl = Math.floor((x + off) / 6), lx = (x + off) % 6, ly = y % 5, hv = h2(cl, r, 11); if (lx === 5 || ly === 4) col = pal('#8a9096'); else if (ly === 0 || lx === 0) col = pal(hv > .5 ? '#e2e5e8' : '#d4d8dc'); else if (ly === 3) col = pal('#a8aeb4'); else col = pal(hv > .66 ? '#c4c8cc' : hv > .33 ? '#bcc0c4' : '#b4b9be'); break; }
+        case TI.calcada: { const lx = x % 8, ly = y % 8; col = pal(lx === 7 || ly === 7 ? '#b8b0a0' : (Math.floor(x / 8) + Math.floor(y / 8)) % 2 ? '#e6dfd0' : '#ddd5c4'); break; }
+        case TI.chao: { col = pal('#d8a06e'); const q = h2(x, y, 12); if (q > .9) col = pal('#c08a5a'); else if (q < .04) col = pal('#e8b888'); if (h2(x >> 2, y >> 2, 14) > .96) col = pal('#a8805a'); break; }
+        case TI.asfalto: { col = pal('#5b6066'); const q = h2(x, y, 15); if (q > .88) col = pal('#4c5156'); else if (q < .05) col = pal('#6a7076'); break; }
+        case TI.areia: { col = pal(vn(x / 6, y / 3, 16) > .7 ? '#d8c07a' : '#ead69a'); if (h2(x, y, 17) > .94) col = pal('#f6eac0'); break; }
+        case TI.plantacao: { const r = (y + Math.sin(x / 23) * 3) / 5, fr = r - Math.floor(r); col = pal(fr < .35 ? '#6a4228' : fr < .45 ? '#8a5a36' : (x + Math.floor(r) * 2) % 3 ? '#58a83c' : '#9ade6a'); break; }
+        case TI.trigo: { const r = (y + Math.sin(x / 17) * 2), q = h2(x, Math.floor(r / 3), 18); col = pal((x & 1) ? (q > .5 ? '#e8c25a' : '#d8ae48') : (r % 3 < 1 ? '#f4dc80' : '#c89a3a')); break; }
+        case TI.cafe: { const r = (y + Math.sin(x / 37) * 4) / 9, fr = r - Math.floor(r); if (fr < .62) { const b = h2(Math.floor(x / 3), Math.floor(r), 19); col = pal(fr < .12 ? '#2f5e26' : b > .85 && fr > .3 ? '#c43c3a' : (x + Math.floor(fr * 9)) % 4 === 0 ? '#58a83c' : '#3f8a30'); } else col = pal(fr < .7 ? '#6a4228' : '#8a5a36'); break; }
+        case TI.campo: col = pal(Math.floor(x / 12) % 2 ? '#5aa046' : '#66ae50'); break;
+        case TI.quadra: col = pal('#3c7ab0'); break;
+        case TI.pista: col = pal(h2(x, y, 20) > .9 ? '#4c5156' : '#565b61'); break;
+        case TI.nuvem: { const m = vn(x / 18, y / 10 + 0, 21); col = pal(m > .6 ? '#ffffff' : m > .4 ? '#eef4f8' : '#dde8f0'); break; }
+        default: col = G3[1];
+      }
+      // bordas: onde o chão muda de tipo, a grama faz uma bordinha e joga sombra no caminho
+      const tu = ty[i - W] ?? t, tb = ty[i + W] ?? t, tl = ty[i - 1] ?? t, tr = ty[i + 1] ?? t;
+      if (CAMINHO.has(t)) { if (y > 0 && VERDE.has(tu) && lv[i - W] === L) f *= .74; else if (y > 1 && VERDE.has(ty[i - 2 * W]) && lv[i - 2 * W] === L) f *= .88; else if (VERDE.has(tl) || VERDE.has(tr) || VERDE.has(tb)) f *= .84;
+        if (t === TI.asfalto && (tu === TI.pedra || tu === TI.calcada || tb === TI.pedra || tb === TI.calcada || tl === TI.pedra || tr === TI.pedra)) { col = pal('#d8dcdf'); } }
+      else if (VERDE.has(t) && CAMINHO.has(tb) && lv[i + W] === L) col = pal('#3c7a2c');
+      // beira do platô: risquinho escuro dos lados, e a borda de cima mais clara
+      if (x > 0 && lv[i - 1] < L && wd[i - 1] < 0) { col = pal('#2f5e26'); f = 1; } else if (x < W - 1 && lv[i + 1] < L && wd[i + 1] < 0) { col = pal('#2f5e26'); f = 1; }
+      else if (y > 0 && lv[i - W] < L && wd[i - W] < 0) col = pal('#8ad45a');
+      put(i, col, f);
+    }
+    c.putImageData(img, 0, 0);
+    // 3) enfeites pequenos: tufos, flores, juncos na beira d'água, vitórias-régias, cipós no paredão
+    const P = Px(c), R = P.R, livre = (x, y) => { x = Math.round(x); y = Math.round(y); if (x < 2 || y < 30 || x >= W - 2 || y >= H - 2) return false; const i = y * W + x; return VERDE.has(ty[i]) && wd[i] < 0 && !sh[i] && lv[i] > 0 && lv[i - 26 * W] === lv[i] && wd[i - 26 * W] < 0 && lv[i + 3 * W] === lv[i] && ty[i - 1] === ty[i] && ty[i + 1] === ty[i]; };
+    for (let k = 0; k < N / 120; k++) { const x = Math.floor(h2(k, 1, 31) * W), y = Math.floor(h2(k, 2, 31) * H), i = y * W + x; if (y < 4 || y > H - 2 || !VERDE.has(ty[i]) || wd[i] >= 0 || lv[i] === 0) continue; const q = h2(k, 3, 31), esc = ty[i] === TI.cerrado ? '#7a7a3a' : '#3c7a2c', cla = ty[i] === TI.cerrado ? '#d8d080' : '#8ad45a';
+      if (q < .7) { R(x, y - 2, 1, 3, esc); R(x + 1, y - 3, 1, 4, esc); R(x + 2, y - 2, 1, 3, esc); R(x + 1, y - 3, 1, 1, cla); }
+      else if (q < .86) { const cor = ['#ffffff', '#f2c94c', '#e86a8a', '#b86ad8', '#f6a04a'][Math.floor(h2(k, 4, 31) * 5)]; for (let j = 0; j < 4; j++) { const fx = x + h2(k, j, 33) * 9, fy = y + h2(j, k, 33) * 5; R(fx, fy + 1, 1, 2, '#3f8a30'); R(fx - 1, fy, 3, 1, cor); R(fx, fy - 1, 1, 1, cor); R(fx, fy, 1, 1, '#fff6c0'); } }
+      else if (q < .9) { R(x, y - 2, 4, 3, '#7a8086'); R(x, y - 2, 3, 1, '#b8bcc0'); }
+      else { R(x, y - 1, 3, 2, '#2f5e26'); R(x + 1, y - 2, 1, 1, '#58a83c'); } }
+    for (let k = 0; k < N / 260; k++) { const x = Math.floor(h2(k, 5, 35) * W), y = Math.floor(h2(k, 6, 35) * H), i = y * W + x; if (y < 8 || lv[i] !== 0 || wd[i] >= 0) continue;
+      const beira = !agua(x - 3, y) || !agua(x + 3, y) || !agua(x, y + 3) || !agua(x, y - 3), longe = agua(x - 9, y) && agua(x + 9, y) && agua(x, y - 7) && agua(x, y + 7);
+      if (beira && h2(k, 7, 35) > .45) { for (let j = 0; j < 4; j++) { const hh = 4 + Math.floor(h2(k, j, 37) * 4); R(x + j * 2 - 3, y - hh, 1, hh, j % 2 ? '#3f8a30' : '#58a83c'); if (j === 1) R(x + j * 2 - 3, y - hh - 2, 1, 3, '#7a4a2a'); } }
+      else if (longe && h2(k, 8, 35) > .82) { P.circ(x, y, 4, '#2f7a3a', 2); P.circ(x, y, 3, '#4aa04a', 2); R(x, y - 2, 1, 2, '#3a7ad0'); if (h2(k, 9, 35) > .7) { R(x - 1, y - 1, 3, 2, '#f6c0d8'); R(x, y - 2, 1, 1, '#ffffff'); } } }
+    for (let k = 0; k < W / 3; k++) { const x = Math.floor(h2(k, 10, 39) * W); for (let y = 1; y < H; y++) { const i = y * W + x; if (wd[i] === 0 && wh[i] > 12 && VERDE.has(wt[i]) && wd[i - 3] >= 0 && wd[i + 3] >= 0 && h2(k, y, 41) > .55) { const n = 4 + Math.floor(h2(k, 11, 39) * (wh[i] - 8)); for (let j = 0; j < n; j++) { R(x + Math.round(Math.sin(j * .7 + k) * .6), y + 2 + j, 1, 1, j % 3 ? '#3f8a30' : '#58a83c'); if (j % 3 === 1) R(x + 1, y + 2 + j, 2, 1, '#4f9a34'); } break; } } }
+    Tr.px = { W, H, lv, ty, wd, sh };
+    Tr.livre = livre; Tr.tipoEm = (x, y) => TIPOS[ty[Math.max(0, Math.min(N - 1, Math.round(y) * W + Math.round(x)))]]; Tr.nivelEm = (x, y) => lv[Math.max(0, Math.min(N - 1, Math.round(y) * W + Math.round(x)))];
+    Tr.aguaPontos = []; for (let k = 0; k < N / 300; k++) { const x = Math.floor(h2(k, 12, 43) * W), y = Math.floor(h2(k, 13, 43) * H); if (agua(x, y) && agua(x - 6, y) && agua(x + 6, y) && agua(x, y - 4) && agua(x, y + 4) && wd[y * W + x] < 0) Tr.aguaPontos.push([x, y]); }
+    extra?.(P, c, Tr);
     return cv;
   }
 
@@ -174,11 +272,10 @@
   function montar(d) {
     const Tr = Terreno(d.lajotas[0], d.lajotas[1]); d.terreno(Tr);
     const base = pintarTerreno(Tr, d.chao); const W = base.width, H = base.height;
-    const obj = document.createElement('canvas'); obj.width = W; obj.height = H; const oc = obj.getContext('2d'); oc.imageSmoothingEnabled = false; const lista = []; d.objetos?.((y, f) => lista.push([y, f]));
+    const obj = document.createElement('canvas'); obj.width = W; obj.height = H; const oc = obj.getContext('2d'); oc.imageSmoothingEnabled = false; const lista = []; d.objetos?.((y, f) => lista.push([y, f]), Tr);
     lista.sort((a, b) => a[0] - b[0]); const PO = Px(oc); for (const [, f] of lista) f(PO);
-    const locs = d.locais.map((L) => { const [bx, by, bw, bh] = L.caixa, s = document.createElement('canvas'); s.width = bw; s.height = bh; const sc = s.getContext('2d'); sc.imageSmoothingEnabled = false; sc.translate(-bx, -by); L.desenho(Px(sc)); return { s, bx, by, bw, bh, pulo: null }; });
-    const agua = []; for (let y = 0; y < Tr.H; y++) for (let x = 0; x < Tr.W; x++) if (Tr.niv(x, y) === 0) agua.push([x, y]);
-    return { base, obj, locs, W, H, agua, Tr };
+    const locs = d.locais.map((L) => { const [bx0, by0, bw, bh] = L.caixa, [dx, dy] = L.desloc || [0, 0], bx = bx0 + dx, by = by0 + dy, s = document.createElement('canvas'); s.width = bw; s.height = bh; const sc = s.getContext('2d'); sc.imageSmoothingEnabled = false; sc.translate(-bx0, -by0); L.desenho(Px(sc)); return { s, bx, by, bw, bh, pulo: null }; });
+    return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr };
   }
 
   /* ---------- abrir, selecionar, ir ---------- */
@@ -240,7 +337,7 @@
     const z = cam.z, ox = Math.round(W / 2 - cam.x * z), oy = Math.round(H / 2 - cam.y * z); c.setTransform(z, 0, 0, z, ox, oy);
     c.drawImage(M.base, 0, 0);
     const P = Px(c), R = P.R;
-    for (let k = 0; k < M.agua.length; k += 2) { const [x, y] = M.agua[k], ph = (tempo * .8 + hash(x, y) * 5) % 5; if (ph < .7) R(x * TS + 3 + hash(y, x) * 8, y * TS + 6 + hash(x * 2, y) * 6, 4 - ph * 4, 1, '#e2f4ff'); } // brilho na água
+    for (const [x, y] of M.agua) { const ph = (tempo * .8 + hash(x, y) * 5) % 5; if (ph < .9) { R(x - 2 + ph * 2, y, Math.max(1, 5 - ph * 5), 1, '#e2f4ff'); if (ph < .3) R(x, y - 1, 1, 1, '#ffffff'); } } // brilho na água
     def.animarChao?.(P, tempo);
     c.drawImage(M.obj, 0, 0);
     const ordem = M.locs.map((L, i) => i).sort((a, b) => (M.locs[a].by + M.locs[a].bh) - (M.locs[b].by + M.locs[b].bh));
@@ -257,5 +354,5 @@
       if (ativo) { c.fillStyle = '#ffd24a'; const ay = sy - 34 + Math.round(Math.sin(tempo * 6) * 4); c.beginPath(); c.moveTo(sx - 8, ay - 10); c.lineTo(sx + 8, ay - 10); c.lineTo(sx, ay); c.fill(); } });
   }
 
-  window.Mapa3D = Object.freeze({ abrir, fechar, aberto: () => aberto, selecionar: (id) => { const i = def?.locais.findIndex((L) => L.id === id) ?? -1; if (i >= 0) selecionar(i); }, ir, info: mostrarInfo, arte: { Px, COR, shade, hash, TS } });
+  window.Mapa3D = Object.freeze({ abrir, fechar, aberto: () => aberto, selecionar: (id) => { const i = def?.locais.findIndex((L) => L.id === id) ?? -1; if (i >= 0) selecionar(i); }, ir, info: mostrarInfo, arte: { Px, COR, shade, hash, TS, curva, trilho, vn } });
 })();

@@ -17,8 +17,43 @@
   const escada = (P, x, y, n, larg = 14) => { for (let k = 0; k < n; k++) { P.R(x, y + k * 4, larg, 4, k % 2 ? '#a8aeb4' : '#bcc0c4'); P.R(x, y + k * 4, larg, 1, '#dde0e3'); } P.R(x - 1, y, 1, n * 4, '#7a8086'); P.R(x + larg, y, 1, n * 4, '#7a8086'); };
   const pessoa = (P, x, y, cor, t = 0, anda = true) => { const f = anda ? Math.floor(t * 6) % 2 : 0; P.R(x - 1, y - 2, 2, 2 + f, '#2a2f3a'); P.R(x + 1, y - 2, 2, 3 - f, '#2a2f3a'); P.R(x - 2, y - 8, 5, 6, cor); P.R(x - 1, y - 11, 3, 3, '#d9a57f'); P.R(x - 1, y - 12, 3, 1, '#2a201a'); P.R(x - 3, y, 7, 1, 'rgba(0,0,0,.25)'); };
   const carrinho = (P, x, y, cor, dir = 1, taxi = false) => { const R = P.R; R(x - 9, y + 1, 18, 2, 'rgba(0,0,0,.3)'); R(x - 9, y - 6, 18, 7, cor); R(x - 9, y - 6, 18, 1, '#ffffff55'); R(x - 5 + dir, y - 10, 10, 5, cor); R(x - 4 + dir, y - 9, 8, 3, '#9fc4d0'); R(x - 8, y, 4, 2, '#1c1c1c'); R(x + 4, y, 4, 2, '#1c1c1c'); R(dir > 0 ? x + 8 : x - 9, y - 4, 1, 2, '#fff2b0'); if (taxi) { R(x - 2 + dir, y - 12, 5, 2, '#f6f6f0'); for (let k = 0; k < 9; k++) R(x - 9 + k * 2, y - 3, 1, 1, k % 2 ? '#1c1c1c' : '#f6f6f0'); } };
-  const andar = (P, t, rotas, cores, vel = 18) => { rotas.forEach((r, k) => { const [a, b] = r, len = Math.hypot(b[0] - a[0], b[1] - a[1]); for (let j = 0; j < (r[2] || 2); j++) { const u = ((t * vel / len) + j / (r[2] || 2) + k * .17) % 1, x = a[0] + (b[0] - a[0]) * u, y = a[1] + (b[1] - a[1]) * u; carrinho(P, x, y, cores[(j + k) % cores.length], b[0] >= a[0] ? 1 : -1); } }); };
   const fumaca = (P, x, y, t) => { for (let k = 0; k < 5; k++) { const q = (t * .4 + k / 5) % 1; P.c.globalAlpha = (1 - q) * .55; P.circ(x + Math.sin(t + k) * 3 + q * 6, y - q * 26, 2 + q * 4, '#f2f2ee'); } P.c.globalAlpha = 1; };
+
+  const h = hash;
+  /* ---------- ajudantes do mapa orgânico ---------- */
+  const A = window.Mapa3D.arte, shade = A.shade;
+  const txt = (P, s, x, y, col, o = {}) => { const f = window.CampanhaCamadas?.kit?.pxText; if (f) return f(P.c, s, x, y, col, o); P.c.font = '6px monospace'; P.c.fillStyle = col; P.c.textAlign = 'center'; P.c.fillText(s, x, y + 5); P.c.textAlign = 'left'; return 0; };
+  const caixasDe = (lista) => lista.map((L) => { const [x, y, w, h] = L.caixa, [dx, dy] = L.desloc || [0, 0]; return [x + dx, y + dy, w, h]; });
+  // lado de uma curva (faixa da mão de ida/volta)
+  const faixa = (pl, off, rev) => { const o = pl.map((p, k) => { const a = pl[Math.max(0, k - 1)], b = pl[Math.min(pl.length - 1, k + 1)], dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; return [p[0] - dy / l * off, p[1] + dx / l * off]; }); return rev ? o.reverse() : o; };
+  const cruza = (pl, y) => { let best = pl[0], d = 1e9; for (const p of pl) { const e = Math.abs(p[1] - y); if (e < d) { d = e; best = p; } } return best[0]; };
+  // veículo em qualquer direção (de lado quando anda na horizontal, de frente/costas na vertical)
+  function veiculo(P, x, y, cor, ang, tipo) { const R = P.R, vx = Math.cos(ang), vy = Math.sin(ang); x = Math.round(x); y = Math.round(y);
+    if (tipo === 'moto') { R(x - 4, y, 9, 1, 'rgba(0,0,0,.3)'); R(x - 4, y - 3, 8, 2, '#2a2a2a'); R(x - 4, y - 2, 2, 2, '#1c1c1c'); R(x + 3, y - 2, 2, 2, '#1c1c1c'); R(x - 2, y - 5, 5, 2, cor); R(x - 1, y - 9, 3, 4, '#3c6aa8'); R(x - 1, y - 11, 3, 2, cor); return; }
+    if (tipo === 'bus') { if (Math.abs(vy) > Math.abs(vx) * 1.1) { R(x - 7, y - 1, 15, 3, 'rgba(0,0,0,.3)'); R(x - 7, y - 20, 14, 20, cor); R(x - 6, vy > 0 ? y - 6 : y - 19, 12, 5, '#9fc4d0'); R(x - 7, y - 11, 14, 2, '#f2f2ee'); return; }
+      const d = vx >= 0 ? 1 : -1; R(x - 15, y, 31, 2, 'rgba(0,0,0,.3)'); R(x - 15, y - 13, 30, 13, cor); R(x - 15, y - 13, 30, 1, '#ffffff66'); for (let k = 0; k < 5; k++) R(x - 12 + k * 5, y - 10, 4, 4, '#9fc4d0'); R(x - 15, y - 4, 30, 1, '#f2f2ee'); R(d > 0 ? x + 12 : x - 15, y - 10, 3, 6, '#9fc4d0'); R(x - 11, y, 4, 2, '#1c1c1c'); R(x + 7, y, 4, 2, '#1c1c1c'); return; }
+    if (Math.abs(vy) > Math.abs(vx) * 1.1) { R(x - 6, y - 1, 13, 3, 'rgba(0,0,0,.28)'); R(x - 5, y - 13, 10, 14, cor); R(x - 5, y - 13, 10, 1, '#ffffff66'); R(x - 4, vy > 0 ? y - 4 : y - 12, 8, 3, '#9fc4d0'); R(x - 4, y - 8, 8, 3, shade(cor, .82)); for (const [a, b] of [[-6, -11], [5, -11], [-6, -4], [5, -4]]) R(x + a, y + b, 1, 3, '#1c1c1c');
+      if (vy > 0) { R(x - 4, y, 2, 1, '#fff2b0'); R(x + 2, y, 2, 1, '#fff2b0'); } else { R(x - 4, y - 13, 2, 1, '#e8433a'); R(x + 2, y - 13, 2, 1, '#e8433a'); } if (tipo === 'taxi') R(x - 2, y - 10, 4, 2, '#1c1c1c'); return; }
+    carrinho(P, x, y, cor, vx >= 0 ? 1 : -1, tipo === 'taxi'); }
+  const naRua = (P, t, pl, n, cores, vel = 22, fase = 0, tipo) => { const tr = A.trilho(pl); for (let j = 0; j < n; j++) { const p = tr.em(t * vel / tr.total + j / n + fase); veiculo(P, p.x, p.y + 3, cores[j % cores.length], p.ang, typeof tipo === 'function' ? tipo(j) : tipo); } };
+  // ocupação: o que já foi colocado no mapa, para nada nascer em cima de nada
+  function Lote(Tr, caixas) {
+    const rects = caixas.map(([x, y, w, h]) => [x - 6, y - 6, w + 12, h + 12]), bate = (x, y, w, h) => rects.some(([a, b, c, d]) => x < a + c && x + w > a && y < b + d && y + h > b);
+    return {
+      bate, marca: (x, y, w, h) => rects.push([x, y, w, h]),
+      ponto: (x, y, r = 7, aceita = Tr.livre) => { if (!aceita(x, y) || bate(x - r, y - r * .6, r * 2, r * 1.2)) return false; rects.push([x - r, y - r * .6, r * 2, r * 1.2]); return true; },
+      area: (x, y, w, h, aceita = Tr.livre) => { if (bate(x, y, w, h)) return false; for (let yy = y + h * .45; yy <= y + h; yy += 6) for (let xx = x; xx <= x + w; xx += 6) if (!aceita(xx, yy)) return false; rects.push([x, y, w, h]); return true; }
+    };
+  }
+  const tipoEh = (Tr, ...tipos) => (x, y) => Tr.nivelEm(x, y) > 0 && tipos.includes(Tr.tipoEm(x, y)) && Tr.px.wd[Math.round(y) * Tr.px.W + Math.round(x)] < 0;
+  // peças de referência (desenhadas uma vez)
+  const pecas = {
+    placaTaxi: (P, x, y) => { const R = P.R; R(x, y - 16, 2, 16, '#5a5e62'); R(x - 7, y - 24, 16, 9, '#1c1c1c'); R(x - 6, y - 23, 14, 7, '#f2c94c'); txt(P, 'TAXI', x + 1, y - 22, '#1c1c1c'); R(x - 1, y, 5, 1, 'rgba(0,0,0,.25)'); },
+    outdoor: (P, x, y, s, bg, fg) => { const R = P.R, w = Math.max(40, s.length * 4 + 10); P.sombra(x + w / 2 + 3, y + 1, w / 2, 3, .22); R(x + 6, y - 12, 2, 12, '#5a5e62'); R(x + w - 8, y - 12, 2, 12, '#5a5e62'); R(x - 1, y - 27, w + 2, 17, '#2a2a2a'); R(x, y - 26, w, 15, bg); txt(P, s, x + w / 2, y - 21, fg); },
+    cacto: (P, x, y) => { const R = P.R; P.sombra(x + 1, y, 5, 2); P.circ(x, y - 3, 4, '#3f7a3a', 3); P.circ(x - 1, y - 4, 2, '#5a9a4a', 1); for (let k = -3; k <= 3; k += 2) R(x + k, y - 6, 1, 5, '#2f5e2a'); P.circ(x, y - 6, 2, '#c43c5a', 1); R(x, y - 8, 1, 1, '#ff8aa0'); },
+    antena: (P, x, y) => { const R = P.R; P.sombra(x + 6, y, 8, 2); for (let k = 0; k < 44; k += 4) { const w = Math.round(6 - k / 10); R(x - w, y - k - 4, 1, 4, '#8a9096'); R(x + w, y - k - 4, 1, 4, '#8a9096'); R(x - w, y - k - 2, w * 2 + 1, 1, '#a8aeb4'); } R(x, y - 50, 1, 6, '#5a5e62'); R(x - 3, y - 30, 3, 4, '#e8ecef'); },
+    pessoaG: (P, x, y, roupa, pele = '#d9a57f', cabelo = '#2a201a') => { const R = P.R; R(x - 3, y, 7, 1, 'rgba(0,0,0,.25)'); R(x - 2, y - 3, 2, 3, '#2a2f3a'); R(x + 1, y - 3, 2, 3, '#2a2f3a'); R(x - 3, y - 9, 7, 6, roupa); R(x - 2, y - 13, 5, 4, pele); R(x - 2, y - 14, 5, 2, cabelo); }
+  };
 
   /* =====================================================================
      CAMPANHA 1 · ITABUNA
@@ -45,12 +80,12 @@
       desenho: (P) => { const R = P.R; P.sombra(508, 270, 70, 10, .3); R(444, 218, 64, 52, '#f6f4ee'); R(510, 218, 64, 52, '#f2f0ea'); R(444, 218, 130, 2, '#c8c4bc'); for (let k = 0; k < 7; k++) { R(448, 226 + k * 6, 56, 1, '#8ab8e8'); R(514, 226 + k * 6, 56, 1, '#8ab8e8'); } R(452, 218, 1, 52, '#e88a8a'); for (let k = 0; k < 9; k++) P.circ(509, 222 + k * 6, 2, '#8a9096', 1);
         R(526, 196, 32, 40, '#7a3a8a'); R(522, 186, 40, 18, '#8a4a9a'); R(530, 192, 8, 6, '#ffffff'); R(546, 192, 8, 6, '#ffffff'); R(533, 194, 3, 3, '#1c1c1c'); R(549, 194, 3, 3, '#1c1c1c'); for (let k = 0; k < 6; k++) R(530 + k * 4, 204, 2, 3, '#ffffff'); R(516, 214, 12, 4, '#7a3a8a'); R(556, 210, 12, 4, '#7a3a8a');
         for (let k = 0; k < 5; k++) R(460 + k * 8, 248 - (k % 2) * 4, 5, 2, '#2a2a2a'); } },
-    { id: 3, nome: 'A quadra', sub: 'O bolo está por perto', caixa: [656, 336, 132, 100],
+    { id: 3, nome: 'A quadra', sub: 'O bolo está por perto', caixa: [656, 336, 132, 100], desloc: [12, 0],
       descricao: 'O som da bola quicando chega até a rua. Tem alguém lá dentro que sabe muito bem onde o bolo foi parar...',
       desenho: (P) => { const R = P.R; R(672, 352, 112, 2, '#f2f2ee'); R(672, 430, 112, 2, '#f2f2ee'); R(727, 352, 2, 80, '#f2f2ee'); P.circ(728, 392, 12, '#f2f2ee', 9); P.circ(728, 392, 10, '#3c7ab0', 7);
         for (const x of [676, 776]) { R(x, 380, 3, 26, '#c8ccd0'); R(x - 4, 378, 11, 8, '#f6f6f0'); R(x - 1, 386, 5, 3, '#e8433a'); }
         for (let k = 0; k <= 120; k += 8) { R(664 + k, 342, 2, 12, '#7a8086'); } R(664, 344, 122, 1, '#9aa0a6'); R(664, 348, 122, 1, '#9aa0a6'); } },
-    { id: 4, nome: 'Praça Camacan', sub: 'Uma pausa na resenha', caixa: [470, 380, 176, 150],
+    { id: 4, nome: 'Praça Camacan', sub: 'Uma pausa na resenha', caixa: [470, 380, 176, 150], desloc: [-20, 0],
       descricao: 'Banco de praça, sorvete e fofoca fresquinha. Às vezes, uma pausa é tudo de que a resenha precisa.',
       desenho: (P) => { P.fonte(560, 452); for (const [x, y] of [[494, 412], [626, 412], [494, 512], [626, 512]]) P.arvore(x, y, 1.1, 'verde', x); for (const [x, y] of [[520, 420], [590, 420], [520, 494], [590, 494]]) P.banco(x, y); for (const [x, y] of [[500, 470], [612, 470]]) P.flores(x, y, ['#e86a8a', '#f2c94c', '#ffffff']); P.poste(482, 456); P.poste(636, 456); } },
     { id: 2, nome: 'Academia do Caleb', sub: 'Caleb e o shape', caixa: [856, 196, 120, 100],
@@ -59,47 +94,139 @@
     { id: 8, nome: 'Bigodon', sub: 'Davi Costa e Vitor', caixa: [856, 372, 100, 80],
       descricao: 'Tesoura afiada, espelho que parece mágico e a melhor conversa da cidade. Você sai de lá com outro visual?',
       desenho: (P) => { P.casa(868, 384, 76, 60, { telhado: '#2a2a30', parede: '#3a3a42', madeira: false, janelas: [8, 58] }); P.R(892, 404, 30, 8, '#c8a24a'); for (let k = 0; k < 8; k++) P.R(860, 412 + k * 3, 4, 3, k % 2 ? '#e8433a' : '#f2f2ee'); P.R(859, 410, 6, 2, '#c8ccd0'); } },
-    { id: 10, nome: 'Casa de Rayssa', sub: 'As garotas e a resenha', caixa: [652, 556, 120, 96],
+    { id: 10, nome: 'Casa de Rayssa', sub: 'As garotas e a resenha', caixa: [652, 556, 120, 96], desloc: [16, 0],
       descricao: 'Entra, mas limpa o tênis. As garotas estão reunidas e, lá dentro, tem um segredo elétrico esperando por você.',
       desenho: (P) => { P.casa(670, 570, 80, 62, { telhado: '#c8546a', parede: '#f8d0dc', janelas: [8, 60] }); P.cercaH(660, 646, 104); P.flores(666, 634, ['#e86a8a', '#f2c94c', '#b86ad8']); P.flores(740, 634, ['#e86a8a', '#ffffff']); P.arbusto(760, 620, 4, '#e86a8a'); } },
-    { id: 11, nome: 'Baile funk', sub: 'Ollyan e a perseguição', caixa: [836, 556, 160, 120],
+    { id: 11, nome: 'Baile funk', sub: 'Ollyan e a perseguição', caixa: [836, 556, 160, 120], desloc: [16, 0],
       descricao: 'O grave treme o chão, as luzes não param e a pista está cheia. E tem um carro por ali que não devia estar no céu...',
       desenho: (P) => { P.predio(846, 572, 140, 92, { topo: '#2a1a3a', parede: '#3a2a4a', fachada: 34, caixa: false }); for (const x of [854, 966]) { P.R(x, 630, 14, 26, '#14141a'); P.circ(x + 7, 638, 4, '#5a5a66'); P.circ(x + 7, 650, 3, '#5a5a66'); } P.R(886, 624, 60, 10, '#ff3a8a'); } },
-    { id: 5, nome: 'Favela do Reeis', sub: 'Do beco ao rei', caixa: [800, 0, 224, 184],
+    { id: 5, nome: 'Favela do Reeis', sub: 'Do beco ao rei', caixa: [800, 0, 224, 196],
       descricao: 'Becos que sobem, escadas que não acabam, pipa no céu e um nome que todo mundo respeita lá em cima.',
       desenho: (P) => { const cores = [['#f2c4c4', '#c8544a'], ['#f2e2a8', '#d0683a'], ['#c8dcf0', '#8a8e94'], ['#d4ecc8', '#c8544a'], ['#e8c8e8', '#d0683a'], ['#f0d0a0', '#8a8e94'], ['#c8e8e0', '#c8544a']]; let i = 0;
         for (const [y0, x0, x1] of [[132, 812, 1012], [84, 860, 1012], [36, 920, 1012]]) for (let x = x0; x < x1 - 30; x += 36) { const [par, tel] = cores[i++ % cores.length]; P.casa(x, y0 - (i % 2) * 4, 32, 34, { telhado: tel, parede: par, madeira: false, paredeH: 16, janelas: [4], porta: 18 }); }
-        escada(P, 830, 150, 8); escada(P, 880, 100, 8); escada(P, 940, 52, 8); P.R(990, 10, 2, 26, '#5a5a56'); P.R(992, 10, 14, 9, '#e8433a'); } }
+        escada(P, 830, 152, 10); escada(P, 880, 102, 10); escada(P, 940, 54, 10); for (const [x, y] of [[822, 120], [906, 72], [966, 26], [1000, 120]]) { P.R(x, y, 9, 7, '#3c6aa8'); P.R(x, y, 9, 2, '#6a9ad0'); } P.R(990, 10, 2, 26, '#5a5a56'); P.R(992, 10, 14, 9, '#e8433a'); } }
   ];
+  let RIO1 = [], TR1 = null; const RUAS1 = {};
   const MAPA1 = {
     chave: 'itabuna2d', titulo: 'CARRO A GÁS · MAPA DE ITABUNA', subtitulo: 'Escolha um lugar. O carro do seu pai voa até lá.', lajotas: [64, 44], voa: true,
     terreno: (T) => {
-      T.linha([[22, 0], [21, 9], [24, 19], [23, 30], [26, 44]], 4, { nivel: 0 });
-      T.ret(50, 0, 14, 10, { nivel: 2 }); T.ret(54, 0, 10, 6, { nivel: 3 }); T.ret(58, 0, 6, 2, { nivel: 4 });
-      T.ret(4, 4, 12, 8, { tipo: 'campo' }); T.ret(2, 26, 3, 6, { tipo: 'plantacao' }); T.ret(1, 18, 4, 6, { tipo: 'plantacao' });
-      T.linha([[26, 19.5], [63, 19.5]], 2, { tipo: 'pedra' }); T.linha([[26, 33.5], [63, 33.5]], 2, { tipo: 'pedra' }); T.linha([[37.5, 0], [37.5, 43]], 2, { tipo: 'pedra' }); T.linha([[50.5, 12], [50.5, 43]], 2, { tipo: 'pedra' });
-      T.linha([[20, 19.5], [10, 19.5], [8, 14]], 2, { tipo: 'chao' }); T.linha([[10, 19.5], [9, 25]], 2, { tipo: 'chao' }); T.linha([[20, 33.5], [6, 33.5], [3, 40]], 2, { tipo: 'chao' });
-      T.ret(30, 24, 10, 8, { tipo: 'pedra' }); T.ret(42, 22, 7, 5, { tipo: 'quadra' }); T.ret(44, 4, 6, 6, { tipo: 'pedra' }); T.ret(27, 3, 10, 6, { tipo: 'pedra' });
-      T.ret(53, 12, 9, 2, { tipo: 'chao' });
+      // morro da favela em três degraus, com beiradas tortas
+      T.poli([[51.2, -1.5], [51.6, 3.8], [51, 8.2], [51.4, 10.8], [55, 10.5], [59.5, 11], [65, 10.5], [65, -1.5]], { nivel: 2 });
+      T.poli([[52.9, -1.5], [53.5, 3.5], [53.1, 7.3], [57, 7.6], [61, 7.1], [65, 7.5], [65, -1.5]], { nivel: 3 });
+      T.poli([[57.3, -1.5], [57.7, 2.5], [58.6, 4.4], [62, 4.1], [65, 4.6], [65, -1.5]], { nivel: 4 });
+      // morro do cacau (sudoeste) e mata no alto do campo
+      T.poli([[-1.5, 35.6], [6, 35], [12, 36.6], [17.2, 35.8], [18.6, 40], [17.4, 45.5], [-1.5, 45.5]], { nivel: 2, tipo: 'mata' });
+      T.poli([[-1.5, -1.5], [19, -1.5], [18.4, 2.4], [11, 3.1], [4, 2.2], [-1.5, 3.4]], { tipo: 'mata' });
+      // roça: trigal, horta, açude e o campo do Mota
+      T.poli([[0.4, 15.4], [5, 14.8], [5.8, 19.2], [5.2, 24.6], [0.4, 25]], { tipo: 'trigo' });
+      T.poli([[1, 26.4], [6.6, 26], [7.2, 30.6], [1.4, 31]], { tipo: 'plantacao' });
+      T.oval(13.6, 28.6, 2.6, 1.5, { nivel: 0 });
+      T.retR(4, 4, 12, 8, .8, { tipo: 'campo' });
+      // Rio Cachoeira serpenteando, com prainhas
+      T.curva([[20, 3], [19.8, 5], [22.6, 11], [21.4, 15]], 6.4, { tipo: 'areia' }); T.curva([[22.2, 28], [21.8, 30], [24.6, 36], [23.6, 42]], 6.4, { tipo: 'areia' });
+      RIO1 = T.curva([[21.6, -1.5], [19.8, 5], [22.6, 11], [21, 17], [23.5, 24], [21.8, 30], [24.6, 36], [23.4, 45.5]], 4, { nivel: 0 });
+      // trilhas de terra na roça
+      T.curva([[20.5, 19.75], [16, 19.2], [12.5, 20.4], [10.2, 18.4], [9.6, 14.6], [10, 12.2]], 1.6, { tipo: 'chao' });
+      T.curva([[12.5, 20.4], [12.6, 23.4], [10.6, 25.6], [8.6, 25.6]], 1.4, { tipo: 'chao' });
+      T.curva([[20.5, 33.9], [16, 34.6], [12, 33.2], [8.6, 34.6], [6.6, 37.6], [5, 41], [4, 45.5]], 1.5, { tipo: 'chao' });
+      // ruas de paralelepípedo da cidade (nenhuma é reta)
+      RUAS1.n = T.curva([[19.6, 19.75], [24, 19.1], [28, 19.9], [33, 20.6], [38, 19.6], [42, 19.2], [47, 20.1], [52, 20.6], [57, 19.4], [61, 19.9], [65.5, 20.4]], 1.9, { tipo: 'pedra' });
+      RUAS1.s = T.curva([[19.6, 33.9], [25, 34.6], [30, 33.4], [35, 33.9], [40, 34.6], [45, 33.6], [50, 34], [56, 34.5], [60, 33.6], [65.5, 34]], 1.9, { tipo: 'pedra' });
+      RUAS1.a = T.curva([[41.8, -1.5], [41.6, 4], [40.2, 9.5], [39.2, 13], [40.4, 17], [40.6, 20], [39.4, 24.5], [39.2, 28], [40.4, 32], [41, 37], [40.1, 41.5], [41.2, 45.5]], 1.6, { tipo: 'pedra' });
+      RUAS1.b = T.curva([[52.4, 10.4], [51.2, 14], [50.8, 17.5], [52, 20], [52.3, 23], [51.2, 27], [50.6, 30], [51.6, 34], [52.1, 37], [51.4, 41], [52, 45.5]], 1.6, { tipo: 'pedra' });
+      RUAS1.c = T.curva([[26, 19.6], [26.4, 15], [26, 12.2], [27.4, 10.4]], 1.6, { tipo: 'pedra' });
+      // pátios, praça, quadra e estacionamento do baile
+      T.poli([[26.6, 9.4], [30, 8.7], [36, 8.8], [38.2, 9.6], [37, 11], [31, 11.3], [27.6, 10.9]], { tipo: 'pedra' }); T.poli([[43.4, 4.4], [45.5, 3.4], [48.8, 3.6], [50.2, 5.2], [50, 8.8], [48.4, 10.2], [44.6, 10], [43.2, 8]], { tipo: 'pedra' }); T.oval(33.6, 28.3, 5.6, 4.4, { tipo: 'pedra' });
+      T.curva([[47.6, 10.4], [48.4, 13], [47.4, 16], [48.2, 18.6]], 1.1, { tipo: 'chao' }); T.curva([[30, 32.4], [27.6, 30], [25.6, 27], [26.2, 23.5], [25.2, 21]], 1, { tipo: 'chao' }); T.curva([[37.6, 25.2], [38.6, 23.4]], 1, { tipo: 'chao' });
+      T.retR(42.5, 21.8, 7.4, 5.4, .3, { tipo: 'quadra' }); T.retR(52.9, 41.8, 10.8, 3, .6, { tipo: 'asfalto' });
     },
-    objetos: (add) => {
-      const caixas = C1.map((L) => L.caixa);
-      for (let i = 0; i < 120; i++) { const x = hash(i, 3) * 1010 + 6, y = hash(i, 7) * 690 + 8, tx = Math.floor(x / TS), ty = Math.floor(y / TS); if (!livre(x, y, caixas, 14)) continue; const t = window.Mapa3D.arte; void t;
-        if ([18, 19, 20, 32, 33, 34].includes(ty) && tx > 24) continue; if ([37, 38, 50, 51].includes(tx)) continue; if (Math.abs(tx - (22 + (ty / 44) * 4)) < 4) continue; if (tx >= 50 && ty <= 11) continue;
-        const k = hash(i, 11); add(y, (P) => (k > .85 ? P.arbusto(x, y, i, '#f2c94c') : k > .78 ? P.pedra(x, y) : P.arvore(x, y, .8 + hash(i, 2) * .5, k > .72 ? 'escura' : 'verde', i))); }
-      add(320, (P) => ponte(P, 324, 300, 74)); add(544, (P) => ponte(P, 348, 524, 76));
-      for (let x = 420; x < 1000; x += 64) { add(334, (P) => P.poste(x, 334)); add(556, (P) => P.poste(x + 20, 556)); }
-      add(200, (P) => P.cercaH(408, 200, 30)); for (let x = 260; x < 330; x += 22) add(600, (P) => P.pedra(x, 600));
+    objetos: (add, Tr) => {
+      TR1 = Tr; const caixas = caixasDe(C1), lote = Lote(Tr, caixas), R0 = (f) => f;
+      // pontes onde as ruas cruzam o rio
+      for (const yy of [19.75 * TS, 33.9 * TS]) { const x = cruza(RIO1, yy); lote.marca(x - 48, yy - 20, 96, 40); add(yy + 14, (P) => ponte(P, x - 46, yy - 14, 92, 28)); }
+      // ---- referências da campanha (antes do resto, para garantir o lugar) ----
+      const ref = (x, y, w, h, f) => { lote.marca(x - 4, y - 4, w + 8, h + 8); add(y + h, f); };
+      ref(232, 222, 60, 52, (P) => { const R = P.R, x = 238, y = 236; // oficina do Lucas, com as três peças do carro na bancada
+        P.sombra(x + 26, y + 32, 32, 5, .25); R(x, y, 50, 30, '#a87a54'); for (let k = 0; k < 50; k += 5) R(x + k, y, 1, 30, '#8a5e3a'); R(x + 4, y + 6, 42, 24, '#3a2a1e');
+        R(x + 8, y + 18, 30, 9, '#a85a3a'); R(x + 14, y + 13, 16, 6, '#94503a'); R(x + 15, y + 14, 6, 4, '#7ab0c8'); R(x + 10, y + 26, 5, 3, '#1c1c1c'); R(x + 31, y + 26, 5, 3, '#1c1c1c'); R(x + 38, y + 22, 3, 3, '#fff2b0');
+        R(x - 4, y - 9, 58, 11, '#8a8e94'); for (let k = 0; k < 58; k += 3) R(x - 4 + k, y - 9, 1, 11, '#6a6e74'); R(x - 4, y + 1, 58, 1, '#4a4e54');
+        R(x + 10, y - 18, 30, 9, '#5a3820'); txt(P, 'OFICINA', x + 25, y - 16, '#f2e2b8');
+        for (let k = 0; k < 3; k++) { P.circ(x + 58, y + 26 - k * 5, 5, '#1c1c1c', 3); P.circ(x + 58, y + 26 - k * 5, 2, '#5a5e62', 1); } R(x - 9, y + 14, 7, 13, '#3c6aa8'); R(x - 9, y + 14, 7, 2, '#5a8ac8');
+        R(x + 6, y + 34, 38, 3, '#7a4a2a'); R(x + 8, y + 37, 2, 5, '#5a3820'); R(x + 40, y + 37, 2, 5, '#5a3820');
+        P.circ(x + 13, y + 31, 4, '#8a9096', 3); for (let a = 0; a < 4; a++) R(x + 13 + Math.cos(a * 1.57) * 2, y + 31 + Math.sin(a * 1.57) * 2, 2, 1, '#dde0e3'); // ventoinha
+        R(x + 21, y + 30, 9, 2, '#9aa0a6'); R(x + 28, y + 26, 2, 6, '#9aa0a6'); R(x + 21, y + 30, 9, 1, '#dde0e3'); // cano
+        R(x + 35, y + 28, 2, 5, '#f2f2ee'); R(x + 34, y + 27, 4, 2, '#a8643a'); R(x + 35, y + 33, 2, 1, '#9aa0a6'); }); // vela
+      ref(268, 172, 50, 50, (P) => { P.arvore(282, 214, 1.4, 'verde', 7); P.R(292, 196, 20, 3, '#5a3820'); P.R(292, 196, 20, 1, '#8a5a36'); }); // árvore do balanço
+      ref(40, 330, 24, 30, (P) => { const R = P.R, x = 52, y = 358; P.sombra(x + 2, y, 7, 2); R(x, y - 24, 2, 24, '#7a5228'); R(x - 9, y - 18, 20, 2, '#7a5228'); R(x - 5, y - 18, 12, 9, '#c8544a'); R(x - 5, y - 14, 12, 1, '#a8443a'); R(x - 3, y - 24, 8, 6, '#e8c87a'); R(x - 5, y - 26, 12, 3, '#d8b04a'); R(x - 2, y - 22, 1, 1, '#2a2a2a'); R(x + 2, y - 22, 1, 1, '#2a2a2a'); R(x - 10, y - 17, 2, 3, '#e8c87a'); R(x + 10, y - 17, 2, 3, '#e8c87a'); }); // espantalho
+      ref(130, 452, 44, 26, (P) => { const R = P.R, x = 134, y = 474; P.sombra(x + 20, y, 22, 3); R(x, y - 12, 40, 12, '#a87a54'); R(x, y - 12, 40, 2, '#c89a6a'); for (let k = 0; k < 40; k += 10) R(x + k, y - 10, 1, 10, '#7a5230'); // caixote do Kauã: lápis, borracha e clipe
+        R(x + 3, y - 17, 18, 4, '#f2c94c'); R(x + 3, y - 17, 18, 1, '#ffe39a'); R(x + 21, y - 17, 4, 4, '#e8c8a0'); R(x + 25, y - 16, 2, 2, '#2a2a2a'); R(x + 1, y - 17, 3, 4, '#e86a8a'); R(x + 4, y - 17, 1, 4, '#c8ccd0');
+        R(x + 28, y - 18, 9, 5, '#f29ab0'); R(x + 28, y - 18, 9, 1, '#ffd0de'); R(x + 28, y - 15, 9, 2, '#3c6aa8');
+        P.c.strokeStyle = '#a8aeb4'; P.c.lineWidth = 1; P.c.strokeRect(x + 12.5, y - 23.5, 8, 4); P.c.strokeRect(x + 14.5, y - 22.5, 4, 2); });
+      ref(176, 588, 70, 40, (P) => { const R = P.R, x = 182, y = 596; P.sombra(x + 30, y + 26, 34, 4); R(x, y, 60, 24, '#8a5a36'); for (let k = 0; k < 140; k++) R(x + 2 + h(k, 1) * 55, y + 2 + h(k, 2) * 20, 2, 1, h(k, 3) > .5 ? '#5a3420' : '#7a4a2a'); // barcaça de cacau secando
+        R(x - 2, y + 24, 64, 2, '#5a3820'); R(x + 34, y - 6, 34, 8, '#9a5a3a'); for (let k = 0; k < 34; k += 4) R(x + 34 + k, y - 6, 1, 8, '#7a4228'); R(x + 34, y + 2, 34, 1, '#5a3420'); for (const px of [x - 2, x + 60]) R(px, y - 4, 2, 30, '#6a4228'); R(x + 64, y + 2, 2, 22, '#6a4228'); });
+      ref(244, 280, 40, 18, (P) => { const R = P.R, x = 246, y = 296; R(x + 4, y - 8, 2, 8, '#5a3820'); R(x + 30, y - 8, 2, 8, '#5a3820'); R(x - 1, y - 20, 38, 13, '#5a3820'); R(x, y - 19, 36, 11, '#a8643a'); R(x, y - 19, 36, 1, '#d8a070'); txt(P, 'ITABUNA', x + 18, y - 16, '#fff2c8', { sombra: '#5a3820' }); }); // placa de boas-vindas
+      for (const [x, y] of [[404, 58], [398, 98], [406, 136]]) ref(x - 8, y - 22, 16, 22, (P) => P.mamoeiro(x, y)); // mamoeiros (as papaias do Miqueias)
+      ref(546, 156, 30, 14, (P) => { P.banco(552, 168); for (const [k, cor] of [[0, '#3c6aa8'], [1, '#c43c3a'], [2, '#3c8a5a']]) { P.R(554 + k * 4, 159 - k, 6, 4, cor); P.R(554 + k * 4, 159 - k, 6, 1, '#ffffff88'); } }); // os três cadernos do Almiro
+      ref(668, 172, 24, 18, (P) => P.arbusto(680, 188, 3)); // moita do saruê
+      ref(676, 440, 108, 14, (P) => { const R = P.R; for (let k = 0; k < 3; k++) { R(682 + k * 3, 440 + k * 4, 96 - k * 6, 4, k % 2 ? '#8a9096' : '#a8aeb4'); R(682 + k * 3, 440 + k * 4, 96 - k * 6, 1, '#dde0e3'); } }); // arquibancada da quadra
+      ref(744, 462, 30, 22, (P) => { const R = P.R, x = 748, y = 482; P.sombra(x + 10, y, 12, 2); R(x, y - 8, 22, 3, '#a8643a'); R(x + 2, y - 5, 2, 5, '#5a3820'); R(x + 18, y - 5, 2, 5, '#5a3820'); R(x + 5, y - 15, 12, 7, '#7a4a2a'); R(x + 5, y - 15, 12, 2, '#f29ab0'); R(x + 6, y - 13, 1, 2, '#f29ab0'); R(x + 11, y - 13, 1, 3, '#f29ab0'); R(x + 10, y - 19, 1, 4, '#f2f2ee'); }); // o bolo
+      ref(578, 446, 22, 22, (P) => { const R = P.R, x = 584, y = 466; P.sombra(x + 6, y, 10, 2); R(x, y - 10, 14, 9, '#f2f2ee'); R(x, y - 10, 14, 2, '#e86a8a'); R(x + 1, y - 1, 3, 2, '#1c1c1c'); R(x + 10, y - 1, 3, 2, '#1c1c1c'); R(x + 6, y - 22, 1, 12, '#8a8e94'); }); // carrinho de sorvete
+      ref(470, 448, 26, 18, (P) => { const R = P.R, x = 476, y = 462; R(x, y - 7, 14, 4, '#7a4a2a'); R(x + 6, y - 3, 2, 3, '#5a3820'); for (let k = 0; k < 4; k++) R(x + 2 + k * 3, y - 8, 2, 1, '#f6f6f0'); pecas.pessoaG(P, x - 4, y, '#3c8a5a', '#c99068', '#b8b2a6'); pecas.pessoaG(P, x + 18, y, '#c8544a', '#8a5a3a', '#e0e0e0'); }); // dominó dos aposentados
+      ref(436, 574, 80, 56, (P) => { P.casa(442, 578, 58, 46, { telhado: '#c8543a', parede: '#f2e2a8', madeira: false, janelas: [6], porta: 34 }); P.R(446, 598, 28, 8, '#e8433a'); txt(P, 'LANCHE', 460, 600, '#fff6dc'); const R = P.R; R(504, 602, 12, 22, '#2a2a4a'); R(504, 602, 12, 2, '#5a5a8a'); R(506, 606, 8, 6, '#1c2a3a'); R(506, 615, 8, 2, '#5a5a8a'); R(507, 618, 2, 2, '#e8433a'); R(511, 618, 2, 2, '#f2c94c'); }); // lanchonete com fliperama na porta
+      ref(978, 226, 40, 64, (P) => { const R = P.R; R(992, 280, 24, 2, '#3a3f48'); for (const x of [990, 1016]) { R(x, 276, 3, 8, '#2a2a2a'); } R(990, 279, 29, 2, '#8a9096'); R(984, 286, 6, 3, '#2a2a2a'); R(1000, 286, 6, 3, '#2a2a2a'); R(1004, 236, 2, 30, '#5a5e62'); R(1000, 228, 10, 10, '#1c1c1c'); }); // halteres e o sinal de reflexo do Caleb
+      ref(704, 214, 44, 34, (P) => { const R = P.R, x = 708, y = 244; P.sombra(x + 18, y, 20, 3); R(x, y - 10, 36, 10, '#8a5a36'); R(x + 2, y - 26, 2, 16, '#6a4228'); R(x + 32, y - 26, 2, 16, '#6a4228'); for (let k = 0; k < 40; k += 8) R(x - 2 + k, y - 30, 8, 6, k % 16 ? '#f2f2ee' : '#3c8a5a'); for (let k = 0; k < 6; k++) P.circ(x + 6 + (k % 3) * 11, y - 12 - Math.floor(k / 3) * 3, 4, '#b89a6a', 3); for (let k = 0; k < 5; k++) R(x + 4 + k * 6, y - 15, 3, 2, '#e8c87a'); R(x + 6, y - 6, 24, 5, '#f2e2b8'); txt(P, 'BATATA', x + 18, y - 6, '#7a2a1a'); }); // barraca da BATATA
+      // ---- casinhas da cidade, nos terrenos livres ----
+      const cores = [['#f2e2c0', '#c8543a'], ['#c8dcf0', '#8a4a3a'], ['#f2c4c4', '#a8443a'], ['#d4ecc8', '#c8644a'], ['#f2e2a8', '#9a4a34'], ['#e8c8e8', '#b8644a'], ['#f0d0a0', '#8a8e94']];
+      for (let i = 0; i < 3000; i++) { const w = 26 + Math.floor(h(i, 41) * 3) * 6, hh = 30 + Math.floor(h(i, 42) * 2) * 6, x = 430 + h(i, 43) * 560, y = 6 + h(i, 44) * 660; if (Tr.nivelEm(x, y + hh) > 1) continue; if (!lote.area(x - 4, y - 4, w + 10, hh + 10)) continue; const [par, tel] = cores[i % cores.length]; add(y + hh, (P) => P.casa(x, y, w, hh, { telhado: tel, parede: par, madeira: i % 3 === 0, janelas: w > 34 ? [4, w - 10] : [4], porta: Math.round(w / 2) - 4, chamine: i % 5 === 0 })); }
+      // ---- coqueiros e capivaras na areia do rio ----
+      const areia = tipoEh(Tr, 'areia');
+      for (let i = 0; i < 70; i++) { const x = 280 + h(i, 51) * 180, y = 20 + h(i, 52) * 680; if (!lote.ponto(x, y, 8, areia)) continue; const k = h(i, 53); add(y, (P) => (k > .6 ? P.coqueiro(x, y) : k > .45 ? (P.sombra(x + 1, y, 6, 2), P.R(x - 5, y - 5, 10, 5, '#8a5a3a'), P.R(x + 4, y - 7, 4, 4, '#7a4a2a'), P.R(x - 4, y - 5, 8, 1, '#a87a4a'), P.R(x + 6, y - 6, 1, 1, '#1c1c1c')) : P.pedra(x, y))); }
+      // ---- árvores: mata no norte, cacau no morro, ipês na cidade ----
+      for (let i = 0; i < 900; i++) { const x = 4 + h(i, 61) * 1016, y = 8 + h(i, 62) * 694; if (!lote.ponto(x, y, 8)) continue; const tp = Tr.tipoEm(x, y), lvl = Tr.nivelEm(x, y), k = h(i, 63);
+        if (lvl >= 2 && x < 320) add(y, (P) => P.cacaueiro(x, y, 1, i));
+        else if (tp === 'mata') add(y, (P) => P.arvore(x, y, .9 + k * .5, k > .5 ? 'escura' : 'verde', i));
+        else if (x > 420) { if (k > .55) continue; add(y, (P) => (k > .47 ? P.arvore(x, y, .9, 'amarela', i) : k > .4 ? P.arvore(x, y, .9, 'rosa', i) : k > .3 ? P.arbusto(x, y, i, '#f2c94c') : P.arvore(x, y, .8 + k * .6, 'verde', i))); }
+        else { if (k > .7) continue; add(y, (P) => (k > .6 ? P.arbusto(x, y, i, '#e86a8a') : k > .55 ? P.pedra(x, y) : P.arvore(x, y, .85 + k * .5, k > .3 ? 'escura' : 'verde', i))); } }
+      // ---- postes ao longo das ruas ----
+      for (const pl of [RUAS1.n, RUAS1.s, RUAS1.a, RUAS1.b]) for (let k = 10; k < pl.length; k += 34) { const [x, y] = faixa(pl, 22, false)[k]; if (lote.ponto(x, y, 4)) add(y, (P) => P.poste(x - 2, y)); }
+    },
+    chao: (P) => { void P; },
+    animarChao: (P, t) => { const R = P.R, Tr = TR1; if (!Tr) return; // vento passando no trigal
+      for (let k = 0; k < 14; k++) { const u = (t * .18 + k / 14) % 1, x = 4 + u * 100, y = 244 + (k * 37) % 150; if (Tr.tipoEm(x, y) !== 'trigo') continue; P.c.globalAlpha = .45 * Math.sin(u * Math.PI); R(x, y, 10, 1, '#fff4b0'); R(x + 3, y + 1, 6, 1, '#fff4b0'); P.c.globalAlpha = 1; }
+      for (let k = 0; k < 3; k++) { const a = t * .5 + k * 2.1, x = 218 + Math.cos(a) * 26, y = 458 + Math.sin(a) * 10; R(x - 3, y, 7, 1, '#9fd0f0'); R(x - 2, y - 3, 5, 3, '#f6f6f0'); R(x + (Math.cos(a + 1.6) > 0 ? 2 : -3), y - 5, 2, 2, '#3c8a5a'); R(x + (Math.cos(a + 1.6) > 0 ? 4 : -4), y - 4, 1, 1, '#f2a03a'); } // patos no açude
+      { const tr = A.trilho(RIO1.filter((p) => p[1] > 380 && p[1] < 640)), u = (Math.sin(t * .06) + 1) / 2, p = tr.em(u * .999); const x = Math.round(p.x), y = Math.round(p.y); R(x - 9, y + 1, 19, 2, '#3a7ad0'); R(x - 8, y - 2, 17, 3, '#7a4a2a'); R(x - 8, y - 2, 17, 1, '#a87a4a'); R(x - 1, y - 9, 4, 7, '#c8544a'); R(x - 1, y - 12, 4, 3, '#c99068'); R(x - 2, y - 13, 6, 1, '#d8b04a'); P.c.strokeStyle = '#5a3820'; P.c.beginPath(); P.c.moveTo(x + 3, y - 8); P.c.lineTo(x + 14, y - 16); P.c.lineTo(x + 15 + Math.sin(t * 2), y - 2); P.c.stroke(); } // canoa com pescador
     },
     animar: (P, t) => { const R = P.R;
       { const cx = 82, cy = 306; for (let k = 0; k < 4; k++) { const a = t * 2 + k * Math.PI / 2; for (let j = 4; j < 20; j++) R(cx + Math.cos(a) * j, cy + Math.sin(a) * j, 2, 2, j % 4 ? '#e8e2d0' : '#c8b48a'); } R(cx - 2, cy - 2, 5, 5, '#6a4a2a'); } // moinho
       fumaca(P, 170, 326, t); fumaca(P, 900, 200, t + 1);
-      for (let k = 0; k < 6; k++) { const a = t * 3 + k; R(560 + Math.cos(a) * 3, 438 - (t * 20 + k * 4) % 12, 1, 2, '#c8eaff'); } // fonte
-      andar(P, t, [[[420, 318], [1010, 318], 3], [[1010, 540], [420, 540], 2], [[600, 8], [600, 690], 2]], ['#c43c3a', '#3c6aa8', '#f2f2ee', '#e8c24c']);
-      for (let k = 0; k < 6; k++) { const u = (t * .05 + k / 6) % 1; pessoa(P, 470 + u * 160, 468 + (k % 3) * 18, ['#e86a8a', '#3c6aa8', '#f2c94c', '#7a3a8a'][k % 4], t); }
-      for (let k = 0; k < 4; k++) { const on = Math.floor(t * 4 + k) % 2; R(890 + k * 14, 624, 10, 10, on ? ['#ff3a8a', '#3ae0ff', '#ffe23a', '#8a3aff'][k] : '#3a2a4a'); } // luzes do baile
-      { const x = 1000 + Math.sin(t) * 6, y = 0 + Math.sin(t * 1.4) * 4 + 6; P.c.strokeStyle = '#2a2a2a'; P.c.beginPath(); P.c.moveTo(992, 36); P.c.lineTo(x, y + 18); P.c.stroke(); R(x - 4, y, 9, 9, '#e8433a'); R(x - 1, y + 9, 3, 6, '#f2c94c'); } // pipa
-      for (let k = 0; k < 3; k++) { const x = ((t * 30 + k * 300) % 1100) - 40, y = 60 + k * 70 + Math.sin(t * 2 + k) * 6, f = Math.sin(t * 12 + k) > 0; R(x, y, 3, 1, '#2a2a2a'); R(x - 2, y - (f ? 2 : 0), 2, 1, '#2a2a2a'); R(x + 3, y - (f ? 2 : 0), 2, 1, '#2a2a2a'); } },
+      for (let k = 0; k < 6; k++) { const a = t * 3 + k; R(540 + Math.cos(a) * 3, 438 - (t * 20 + k * 4) % 12, 1, 2, '#c8eaff'); } // chafariz
+      // trânsito nas ruas de pedra (curvas, ida e volta)
+      naRua(P, t, faixa(RUAS1.n, -5, false), 3, ['#c43c3a', '#f2f2ee', '#3c6aa8'], 26); naRua(P, t, faixa(RUAS1.n, 5, true), 2, ['#e8c24c', '#3c8a5a'], 24, .3);
+      naRua(P, t, faixa(RUAS1.s, -5, false), 2, ['#7a3a8a', '#f2f2ee'], 22, .5); naRua(P, t, faixa(RUAS1.s, 5, true), 2, ['#3c6aa8', '#c43c3a'], 25, .1);
+      naRua(P, t, RUAS1.a, 2, ['#f2f2ee', '#e8c24c'], 20, .2); naRua(P, t, [...RUAS1.b].reverse(), 2, ['#c43c3a', '#2a2a2a'], 18, .7, (j) => (j ? 'moto' : null));
+      for (let k = 0; k < 6; k++) { const u = (t * .05 + k / 6) % 1; pessoa(P, 450 + u * 160, 468 + (k % 3) * 18, ['#e86a8a', '#3c6aa8', '#f2c94c', '#7a3a8a'][k % 4], t); } // gente na praça
+      for (let k = 0; k < 5; k++) { const x = 516 + k * 9 + Math.sin(t * .7 + k) * 4, y = 486 + (k % 2) * 5, b = Math.floor(t * 4 + k) % 3 === 0; R(x, y - 3 + (b ? 1 : 0), 4, 3, '#8a9096'); R(x + (b ? 3 : 3), y - 4 + (b ? 2 : 0), 2, 2, '#6a7076'); R(x + 1, y, 1, 1, '#e8833a'); } // pombos
+      { const s = Math.sin(t * 6) > 0; for (let k = 0; k < 3; k++) { const q = (t * .6 + k) % 3; if (q < .25) { R(250 + k * 9, 262 - q * 30, 1, 3, '#fff6c0'); R(249 + k * 9, 263 - q * 30, 3, 1, '#fff6c0'); } } if (s) R(250, 262, 1, 1, '#ffffff'); } // brilho das peças
+      { const a = Math.sin(t * 2.2) * .55, sx = 302 + Math.sin(a) * 18, sy = 199 + Math.cos(a) * 18; P.c.strokeStyle = '#3a2a1a'; P.c.lineWidth = 1; P.c.beginPath(); P.c.moveTo(298, 199); P.c.lineTo(sx - 4, sy); P.c.moveTo(306, 199); P.c.lineTo(sx + 4, sy); P.c.stroke(); R(sx - 5, sy, 11, 2, '#7a4a2a'); } // balanço
+      for (let k = 0; k < 3; k++) { const x = 150 + k * 26 + Math.sin(t * .8 + k * 2) * 10, y = 440 + (k % 2) * 6, b = Math.floor(t * 3 + k) % 4 === 0; R(x, y - 5 + (b ? 2 : 0), 5, 4, '#f6f6f0'); R(x + 4, y - 7 + (b ? 3 : 0), 2, 2, '#c43c3a'); R(x + 1, y - 1, 1, 1, '#f2a03a'); R(x + 3, y - 1, 1, 1, '#f2a03a'); } // galinhas soltas
+      { const u = (Math.sin(t * .7) + 1) / 2, x = 96 + u * 128, y = 156 + Math.sin(t * 1.4) * 10; pessoa(P, x, y, '#2c5a9e', t); const by = Math.abs(Math.sin(t * 6)) * 5; R(x + 4, y - 3 - by, 3, 3, '#ffffff'); R(x + 5, y - 3 - by, 1, 1, '#1c1c1c'); for (let k = 0; k < 4; k++) { R(100 + k * 30, 180, 3, 4, '#f2833a'); R(100 + k * 30, 180, 3, 1, '#ffffff'); } } // Mota treinando com bola e cones
+      { const pisca = Math.floor(t * 1.5) % 7 === 0; R(681, 182 - (pisca ? 0 : 1), 3, 2, '#8a9096'); if (!pisca) { R(681, 181, 1, 1, '#1c1c1c'); R(683, 181, 1, 1, '#1c1c1c'); } R(680, 183, 5, 1, '#f29ab0'); R(684 + Math.round(Math.sin(t * 3)), 186, 4, 1, '#e8c8c8'); } // o saruê espiando
+      for (let k = 0; k < 4; k++) { const u = (t * .12 + k / 4) % 1, x = 540 - u * 40 + Math.sin(u * 12 + k) * 10, y = 150 + u * 90, f = Math.floor(t * 8 + k) % 2; R(x, y, f ? 5 : 3, f ? 3 : 4, '#f6f4ee'); R(x + 1, y + 1, f ? 3 : 1, 1, '#8ab8e8'); } // folhas de caderno voando
+      for (let k = 0; k < 4; k++) { const a = t * .7 + k * 1.57, x = 508 + Math.cos(a) * 74, y = 282 + Math.sin(a) * 8; P.c.strokeStyle = '#1c1c1c'; P.c.beginPath(); for (let j = 0; j < 6; j++) P.c.lineTo(x + Math.sin(t * 9 + j * 2 + k) * 3 + j - 3, y - j * 2); P.c.stroke(); R(x - 1, y - 12, 1, 1, '#e8433a'); R(x + 2, y - 12, 1, 1, '#e8433a'); } // rabiscos do Caderno do Caos
+      { const b = Math.abs(Math.sin(t * 4)) * 14; P.circ(712, 404 - b, 3, '#e8833a'); R(711, 403 - b, 1, 3, '#7a3a1a'); pessoa(P, 718, 410, '#e8433a', t, false); } // basquete na quadra
+      { const on = Math.floor(t * 1.2) % 2; R(1001, 230, 8, 3, on ? '#3ce06a' : '#1c3a24'); R(1001, 234, 8, 3, on ? '#3a1414' : '#e8433a'); const d = Math.abs(Math.sin(t * 3)) * 2; R(988, 278 + d, 10, 3, '#3c6aa8'); R(997, 276 + d, 3, 3, '#c99068'); } // sinal de reflexo e flexões
+      { const k = Math.floor(t * 8) % 6; for (let j = 0; j < 9; j++) R(860, 412 + j * 3, 4, 3, (j + k) % 3 === 0 ? '#e8433a' : (j + k) % 3 === 1 ? '#f2f2ee' : '#3c6aa8'); } // poste do barbeiro girando
+      { const x = 906, y = 395; R(x - 12, y, 10, 3, '#1c1c1c'); R(x + 2, y, 10, 3, '#1c1c1c'); R(x - 14, y - 2, 4, 3, '#1c1c1c'); R(x + 10, y - 2, 4, 3, '#1c1c1c'); R(x - 2, y + 1, 4, 2, '#1c1c1c'); } // bigodão no telhado
+      for (let k = 0; k < 3; k++) { const x = 694 + k * 12, y = 642; R(x, y - 7, 6, 8, ['#2a8ae8', '#e8c24c', '#2ad06a'][k]); R(x, y - 7, 6, 2, '#dde0e3'); R(x + 1, y - 4, 1, 3, '#ffffff'); if (Math.floor(t * 6 + k * 2) % 4 === 0) { R(x + 2, y - 13, 1, 4, '#fff27a'); R(x + 3, y - 15, 1, 3, '#fff27a'); R(x + 1, y - 10, 1, 2, '#fff27a'); } } // latinhas Bivolt
+      for (let k = 0; k < 4; k++) { const on = Math.floor(t * 4 + k) % 2; R(906 + k * 14, 624, 10, 10, on ? ['#ff3a8a', '#3ae0ff', '#ffe23a', '#8a3aff'][k] : '#3a2a4a'); } // luzes do baile
+      for (const sx of [877, 989]) for (let k = 0; k < 3; k++) { const q = (t * 1.6 + k / 3) % 1; P.c.globalAlpha = (1 - q) * .6; P.c.strokeStyle = '#ff6ac0'; P.c.beginPath(); P.c.ellipse(sx, 644, 6 + q * 22, (6 + q * 22) * .5, 0, 0, Math.PI * 2); P.c.stroke(); } P.c.globalAlpha = 1; // som do paredão
+      { const a = t * .9, x = 932 + Math.cos(a) * 70, y = 510 + Math.sin(a * 2) * 16, d = -Math.sin(a) >= 0 ? 1 : -1; for (let k = 1; k < 6; k++) { P.c.globalAlpha = .5 - k * .08; P.circ(932 + Math.cos(a - k * .08) * 70, 513 + Math.sin((a - k * .08) * 2) * 16, 2 + k * .4, '#c1db7b'); } P.c.globalAlpha = 1; R(x - 8, y - 5, 16, 6, '#7a3a8a'); R(x - 4, y - 9, 9, 4, '#7a3a8a'); R(x - 3 + d, y - 8, 7, 2, '#9fc4d0'); R(x - 7, y + 1, 3, 2, '#1c1c1c'); R(x + 4, y + 1, 3, 2, '#1c1c1c'); } // um carro que não devia estar no céu
+      for (const [bx, by, cor] of [[1000, 6, '#e8433a'], [952, 2, '#3c6aa8'], [880, 30, '#f2c94c'], [1010, 70, '#3c8a5a']]) { const x = bx + Math.sin(t + bx) * 6, y = by + Math.sin(t * 1.4 + bx) * 4 + 4; P.c.strokeStyle = '#2a2a2a'; P.c.beginPath(); P.c.moveTo(bx - 8, by + 34); P.c.lineTo(x, y + 9); P.c.stroke(); R(x - 4, y, 9, 9, cor); R(x - 1, y + 9, 3, 6, '#f2f2ee'); R(x, y + 1, 1, 7, '#ffffff66'); } // pipas
+      for (const [x0, y0, n] of [[868, 122, 4], [926, 76, 3], [972, 28, 3]]) { P.c.strokeStyle = '#4a4a4a'; P.c.beginPath(); P.c.moveTo(x0, y0); P.c.lineTo(x0 + n * 7, y0 + 2); P.c.stroke(); for (let k = 0; k < n; k++) { const w = Math.round(Math.sin(t * 3 + k) * 1); R(x0 + 2 + k * 7, y0 + 1, 4, 5 + w, ['#e86a8a', '#3c6aa8', '#f2c94c', '#f6f6f0'][k % 4]); } } // varais da favela
+      txt(P, 'OOO REEEIS', 930, 176, '#ffd24a', { sombra: '#7a2a1a' }); // pichação no paredão
+      for (let k = 0; k < 3; k++) { const x = ((t * 30 + k * 300) % 1100) - 40, y = 60 + k * 70 + Math.sin(t * 2 + k) * 6, f = Math.sin(t * 12 + k) > 0; R(x, y, 3, 1, '#2a2a2a'); R(x - 2, y - (f ? 2 : 0), 2, 1, '#2a2a2a'); R(x + 3, y - (f ? 2 : 0), 2, 1, '#2a2a2a'); }
+      { const on = Math.floor(t * 5) % 2; R(506, 606, 8, 6, on ? '#3ae0ff' : '#ff3a8a'); R(507, 607, 2, 2, '#ffffff'); } // fliperama piscando
+    },
     veiculo: (P) => { const R = P.R; R(-12, -8, 24, 9, '#3c8a8a'); R(-12, -8, 24, 1, '#7ac8c8'); R(-6, -14, 14, 7, '#4aa0a0'); R(-5, -13, 12, 4, '#9fc4d0'); R(-16, -7, 5, 5, '#c8ccd0'); R(-10, 0, 5, 3, '#1c1c1c'); R(6, 0, 5, 3, '#1c1c1c'); R(11, -6, 2, 2, '#fff2b0'); for (let k = 0; k < 3; k++) R(-20 - k * 4, -4 + Math.sin(k + performance.now() / 90) * 2, 3, 3, 'rgba(220,230,240,.7)'); },
     locais: C1
   };
@@ -127,7 +254,7 @@
       desenho: (P) => { const R = P.R; P.casa(520, 150, 90, 70, { telhado: '#cdb98a', parede: '#eedfb6', madeira: false, paredeH: 30, janelas: [10, 70] }); R(490, 120, 32, 100, '#eedfb6'); R(490, 120, 32, 3, '#f8f3e4'); R(488, 210, 36, 10, '#cdb98a');
         for (let k = 0; k < 14; k++) R(506 - (14 - k) * 1.1, 120 - k * 2.6, (14 - k) * 2.2, 3, k % 3 ? '#eedfb6' : '#f8f3e4'); R(505, 78, 2, 10, '#5a5248'); R(501, 81, 10, 2, '#5a5248'); P.circ(506, 140, 6, '#f8f3e4'); P.circ(506, 140, 4, '#f4f0e2'); R(506, 137, 1, 3, '#2a2a2a');
         for (const y of [160, 190]) { R(498, y, 6, 14, '#5a6f86'); R(510, y, 6, 14, '#5a6f86'); } R(500, 200, 14, 20, '#5a3c28'); P.arvore(470, 226, .9, 'roxa', 1); P.arvore(620, 228, .9, 'amarela', 2); } },
-    { id: 't15', cena: 15, x: 300, nome: 'Trilha do Cristo', sub: 'Pé da Serra do Periperi', caixa: [440, 0, 100, 140],
+    { id: 't15', cena: 15, x: 300, nome: 'Trilha do Cristo', sub: 'Pé da Serra do Periperi', caixa: [440, 0, 100, 140], desloc: [-60, 0],
       descricao: 'Lá em cima, o Cristo de braços abertos vê a cidade inteira. O vento sopra forte, e dizem que alguém sobe lá só pra ser visto.',
       desenho: (P) => { const R = P.R; P.sombra(492, 58, 18, 5, .3); R(484, 44, 16, 14, '#8a8478'); R(482, 42, 20, 4, '#a49c90'); R(489, 6, 6, 38, '#a49c90'); R(489, 6, 2, 38, '#c4bcb0'); R(474, 14, 36, 5, '#a49c90'); R(474, 14, 36, 2, '#c4bcb0'); P.circ(492, 6, 3, '#9a8a76');
         escada(P, 486, 62, 18); } },
@@ -182,38 +309,137 @@
       desenho: (P) => { const R = P.R; for (const x of [30, 90]) { R(x, 600, 3, 60, '#e8ecef'); R(x - 1, 598, 5, 4, '#d8dce0'); } R(110, 660, 60, 4, '#a87a4a'); for (let k = 0; k < 60; k += 10) R(110 + k, 664, 3, 10, '#6a4a2a'); R(166, 640, 2, 22, '#9aa0a6');
         for (let x = 10; x < 190; x += 6) R(x, 690, 4, 3, '#c8ccd0'); P.R(40, 664, 40, 20, '#e8833a'); for (let k = 0; k < 40; k += 8) P.R(40 + k, 664, 4, 20, '#f6ead0'); } }
   ];
+  let TR2 = null; const RUAS2 = {};
   const MAPA2 = {
     chave: 'conquista2d', titulo: 'TÁXI DO SEU ZÉ · VITÓRIA DA CONQUISTA', subtitulo: 'O táxi só para nas entradas. Lá dentro, é com você.', lajotas: [72, 48], botao: 'IR DE TÁXI ▶',
     terreno: (T) => {
-      T.ret(8, 0, 48, 5, { nivel: 2 }); T.ret(24, 0, 16, 2, { nivel: 3 }); T.ret(56, 0, 16, 1, { nivel: 2 });
-      T.ret(1, 23, 12, 7, { nivel: 2, tipo: 'mata' }); T.oval(6, 34, 3.2, 2.2, { nivel: 0 }); T.ret(1, 30, 12, 8, { tipo: 'mata' }); T.oval(6, 34, 3.2, 2.2, { nivel: 0 });
-      T.oval(33, 41, 7, 4.5, { nivel: 0 });
-      T.ret(0, 37, 12, 7, { nivel: 2 }); T.ret(0, 44, 13, 4, { tipo: 'nuvem' });
-      T.ret(0, 9, 13, 3, { tipo: 'pista' }); T.ret(0, 12, 13, 6, { tipo: 'pedra' });
-      T.linha([[13, 20.5], [71, 20.5]], 2, { tipo: 'asfalto' }); T.linha([[40, 30.5], [71, 30.5]], 2, { tipo: 'asfalto' }); T.linha([[26.5, 7], [26.5, 47]], 2, { tipo: 'asfalto' }); T.linha([[44.5, 7], [44.5, 47]], 2, { tipo: 'asfalto' }); T.linha([[0, 15], [26, 15]], 2, { tipo: 'asfalto' }); T.linha([[12, 36], [26, 36]], 2, { tipo: 'asfalto' });
-      T.ret(29, 12, 10, 4, { tipo: 'pedra' }); T.ret(29, 23, 11, 6, { tipo: 'pedra' }); T.ret(55, 11, 13, 7, { tipo: 'pedra' }); T.ret(55, 22, 11, 7, { tipo: 'pedra' }); T.ret(45, 35, 12, 7, { tipo: 'pedra' });
-      T.ret(58, 35, 14, 13, { tipo: 'cafe' }); T.ret(57, 1, 14, 8, { tipo: 'pedra' });
-      T.linha([[30, 6], [30, 9]], 1, { tipo: 'chao' }); T.linha([[46, 42], [56, 47]], 2, { tipo: 'chao' }); T.linha([[12, 26], [16, 26], [16, 34]], 1, { tipo: 'chao' });
+      // Serra do Periperi: cerrado em dois degraus, com picos tortos
+      T.poli([[6, -1.5], [7.5, 3.2], [12, 4.4], [18, 5.2], [24, 4.6], [30, 5.4], [37, 4.8], [44, 5.6], [50, 4.9], [56.5, 4.2], [57.2, -1.5]], { nivel: 2, tipo: 'cerrado' });
+      T.poli([[15, -1.5], [16.2, 1.8], [20, 2.6], [23.5, 2.2], [24.2, -1.5]], { nivel: 3, tipo: 'cerrado' });
+      T.poli([[33, -1.5], [34, 2.2], [38, 3], [42, 2.4], [43, -1.5]], { nivel: 3, tipo: 'cerrado' });
+      // Reserva do Poço Escuro (platô de mata com cachoeira) e Serra do Marçal (beirada sobre as nuvens)
+      T.poli([[-1.5, 30], [13, 30], [12.6, 36.4], [-1.5, 36.2]], { tipo: 'mata' });
+      T.poli([[-1.5, 22.8], [7, 22.4], [12.4, 23.4], [12.6, 27], [12.2, 30.4], [8, 30.2], [4, 30.6], [-1.5, 30.4]], { nivel: 2, tipo: 'mata' });
+      T.oval(6, 33.6, 3.2, 2, { nivel: 0 });
+      T.ret(-1.5, 42, 16, 7, { tipo: 'nuvem' });
+      T.poli([[-1.5, 37], [6, 36.6], [12.6, 37.4], [13, 40.4], [12, 43.1], [6, 42.9], [-1.5, 43.3]], { nivel: 3, tipo: 'cerrado' });
+      // aeroporto
+      T.retR(-1, 9.2, 14.5, 2.6, .5, { tipo: 'pista' }); T.retR(-1, 12, 14.2, 5.6, .6, { tipo: 'pedra' });
+      // Lagoa das Bateias com prainha
+      const lag = [[27.4, 38.6], [30, 36.9], [35, 36.7], [39.4, 38.3], [40.2, 41.3], [38.2, 44.2], [33.5, 45], [30.5, 43.6], [28.2, 42.6]];
+      T.poli(lag.map(([x, y]) => [33.8 + (x - 33.8) * 1.14, 40.8 + (y - 40.8) * 1.2]), { tipo: 'areia' }); T.poli(lag, { nivel: 0 });
+      // cafezal (fileiras curvas) com terreiro
+      T.poli([[57.5, 35.2], [64, 34.6], [73.5, 35], [73.5, 49.5], [57, 49.5], [56.6, 42]], { tipo: 'cafe' });
+      T.retR(60.4, 35.4, 9.2, 6.2, .6, { tipo: 'chao' }); T.retR(61, 42.4, 7, 3, .3, { tipo: 'calcada' });
+      // praças, pátios e estacionamentos
+      T.poli([[28.4, 12.2], [31, 11.6], [37, 11.7], [39.6, 12.6], [39, 15], [34, 15.6], [29.4, 15.2]], { tipo: 'pedra' }); T.retR(29.2, 22.4, 11.4, 6.2, .8, { tipo: 'pedra' }); T.poli([[45.8, 8.6], [48, 7.6], [53.6, 7.8], [55.2, 9.4], [54.8, 13.6], [50, 14.4], [46.2, 13.8]], { tipo: 'pedra' });
+      T.retR(55.6, 15.6, 12, 2.6, .4, { tipo: 'asfalto' }); T.retR(55.4, 21.8, 10.4, 6.6, .6, { tipo: 'calcada' }); T.retR(57.4, .8, 13.6, 8.2, .8, { tipo: 'calcada' });
+      T.retR(45.4, 35.2, 11, 7, .6, { tipo: 'asfalto' }); T.retR(14.8, 18.4, 9.4, 1.2, .3, { tipo: 'calcada' }); T.retR(15.2, 45, 8, 4, .5, { tipo: 'asfalto' }); T.retR(15.6, 23.4, 9.6, 9.2, 1, { tipo: 'chao' });
+      // avenidas (asfalto) e a rotatória do Monumento ao Índio
+      T.oval(45.9, 20.75, 3.4, 2.6, { tipo: 'asfalto' });
+      RUAS2.av1 = T.curva([[13, 20.5], [20, 20.9], [28, 20.2], [36, 20.8], [42.5, 20.6]], 1.9, { tipo: 'asfalto' });
+      RUAS2.av1b = T.curva([[49.3, 20.7], [56, 20.2], [64, 20.8], [73.5, 20.4]], 1.9, { tipo: 'asfalto' });
+      RUAS2.av2 = T.curva([[44.2, 30.6], [50, 30.9], [57, 30.3], [64, 30.8], [73.5, 30.5]], 1.9, { tipo: 'asfalto' });
+      RUAS2.nB = T.curva([[45.9, 14.6], [45.9, 18.2]], 1.7, { tipo: 'asfalto' });
+      RUAS2.sB = T.curva([[45.9, 23.3], [45.2, 27], [44.2, 31], [43.3, 35], [43.1, 40], [44.2, 44], [45.8, 49.5]], 1.8, { tipo: 'asfalto' });
+      RUAS2.A = T.curva([[27.2, 8.6], [26.5, 13], [26.9, 20.5], [26.2, 27], [26.6, 31], [25.6, 34.2]], 1.8, { tipo: 'asfalto' });
+      RUAS2.W = T.curva([[13.4, 20.4], [14.4, 26], [14, 31], [14.5, 33.6], [18, 34.3], [22, 34.1], [25.6, 34.2]], 1.7, { tipo: 'asfalto' });
+      RUAS2.aero = T.curva([[12.6, 14.6], [15, 12.4], [20, 11.9], [26.6, 12.6]], 1.6, { tipo: 'asfalto' });
+      T.curva([[12.8, 14.6], [13.2, 20.4]], 1.6, { tipo: 'asfalto' }); RUAS2.C = T.curva([[71, 9.2], [71.4, 15], [70.8, 20.4]], 1.6, { tipo: 'asfalto' });
+      // trilhas de terra: subida do Cristo, parque e beira da lagoa
+      T.curva([[45, 46.5], [50, 45.2], [55, 46.8], [58, 45.5]], 1, { tipo: 'chao' }); T.curva([[3, 23], [5, 26.5], [9, 27.6], [12, 26]], 1, { tipo: 'chao' });
     },
-    objetos: (add) => {
-      const caixas = PONTOS.map((L) => L.caixa);
-      for (let i = 0; i < 70; i++) { const x = hash(i, 13) * 1130 + 10, y = 110 + hash(i, 17) * 540, tx = Math.floor(x / TS), ty = Math.floor(y / TS); if (!livre(x, y, caixas, 20)) continue; if ([19, 20, 21, 22, 29, 30, 31, 32].includes(ty) || [25, 26, 27, 28, 43, 44, 45, 46].includes(tx)) continue; if (tx < 13 && ty < 18) continue; if (tx > 57 && ty > 34) continue; if (Math.hypot(tx - 33, ty - 41) < 8) continue;
-        const k = hash(i, 5), cor = ['#ebe8de', '#e0d6c2', '#dfe6ea', '#e8dcc8', '#f2e2a8'][i % 5]; if (k > .35) add(y, (P) => P.predio(x - 20, y - 50, 40 + (i % 3) * 8, 50 + (i % 4) * 8, { parede: cor, fachada: 18 + (i % 3) * 6, porta: i % 2 === 0 })); else add(y, (P) => P.casa(x - 16, y - 34, 34, 34, { telhado: ['#b8644a', '#9a4a34', '#c8544a'][i % 3], parede: cor, madeira: false, janelas: [4, 24], porta: 13 })); }
-      for (let i = 0; i < 90; i++) { const x = hash(i, 23) * 1140 + 6, y = hash(i, 29) * 760 + 4, tx = Math.floor(x / TS), ty = Math.floor(y / TS); if (!livre(x, y, caixas, 8)) continue; if ([20, 21, 30, 31, 15, 36].includes(ty) && tx > 12) continue; if ([26, 27, 44, 45].includes(tx)) continue; if (Math.hypot(tx - 33, ty - 41) < 8 || (ty >= 44 && tx < 13) || (tx > 57 && ty > 34)) continue;
-        const k = hash(i, 31); add(y, (P) => (ty < 6 ? (k > .5 ? P.pedra(x, y) : P.arvore(x, y, .7, 'escura', i)) : k > .8 ? P.arbusto(x, y, i, '#f2c94c') : P.arvore(x, y, .8 + hash(i, 4) * .4, ['verde', 'escura', 'roxa', 'amarela'][Math.floor(k * 4)], i))); }
-      for (let x = 230; x < 1150; x += 70) { add(318, (P) => P.poste(x, 318)); add(478, (P) => P.poste(x + 30, 478)); }
-      add(560, (P) => { for (let x = 20; x < 180; x += 40) P.arvore(x, 560, 1.1, 'escura', x); });
+    chao: (P, c, Tr) => { const R = P.R; for (const r of Tr.ruas) if (r.tipo === 'asfalto' && r.larg >= 1.8) r.pl.forEach(([x, y], k) => { if (k % 8 < 3) R(x, y, 2, 1, '#f2e2a0'); }); // faixa do meio
+      for (let k = 0; k < 120; k++) R(980 + h(k, 71) * 104, 682 + h(k, 72) * 42, 2, 1, h(k, 73) > .5 ? '#5a3420' : '#7a4a2a'); }, // café secando no terreiro
+    objetos: (add, Tr) => {
+      TR2 = Tr; const caixas = caixasDe(PONTOS), lote = Lote(Tr, caixas), ref = (x, y, w, h, f) => { lote.marca(x - 4, y - 4, w + 8, h + 8); add(y + h, f); };
+      // ---- referências da Campanha 2 ----
+      ref(250, 404, 150, 116, (P) => { const R = P.R; // Ferro-Velho do Gugu
+        for (let k = 0; k <= 150; k += 6) { R(250 + k, 404, 3, 12, '#8a8e94'); R(250 + k, 404, 3, 1, '#c8ccd0'); } R(250, 406, 150, 2, '#6a6e74'); R(250, 412, 150, 1, '#6a6e74');
+        for (const [x, y, s] of [[276, 470, 1], [330, 490, 1.2], [372, 462, .9]]) { P.sombra(x, y + 2, 20 * s, 4); P.circ(x, y - 6 * s, 20 * s, '#6a5a4a', 10 * s); P.circ(x - 3, y - 8 * s, 15 * s, '#8a7a6a', 7 * s); for (let j = 0; j < 10; j++) R(x - 14 * s + h(j, x) * 28 * s, y - 14 * s + h(x, j) * 12 * s, 3, 2, ['#a85a3a', '#c8ccd0', '#3c6aa8', '#5a5e62'][j % 4]); }
+        R(296, 430, 34, 12, '#a85a3a'); R(302, 424, 18, 7, '#94503a'); R(304, 426, 6, 4, '#4a5a6a'); R(298, 440, 5, 4, '#1c1c1c'); R(322, 440, 5, 4, '#1c1c1c'); // carcaça de carro
+        for (let k = 0; k < 4; k++) { P.circ(388, 508 - k * 5, 6, '#1c1c1c', 3); P.circ(388, 508 - k * 5, 2, '#5a5e62', 1); }
+        R(352, 420, 3, 44, '#e8a83a'); R(352, 420, 40, 3, '#e8a83a'); R(348, 460, 12, 6, '#c8962a');
+        R(258, 386, 74, 13, '#2a2a2a'); R(259, 387, 72, 11, '#e8c24c'); txt(P, 'FERRO-VELHO', 295, 390, '#2a1a10'); R(266, 399, 2, 6, '#5a5e62'); R(322, 399, 2, 6, '#5a5e62'); });
+      ref(258, 354, 40, 40, (P) => P.casa(262, 360, 34, 34, { telhado: '#9a4a34', parede: '#f2c4dc', madeira: false, janelas: [4, 24], porta: 13 })); // casa da Dona Creuza (a janela da fofoca)
+      ref(796, 262, 60, 42, (P) => { const R = P.R; // ponto de mototáxi do Tonhão
+        R(800, 266, 2, 26, '#5a5e62'); R(796, 258, 56, 10, '#1c1c1c'); R(797, 259, 54, 8, '#e8833a'); txt(P, 'MOTOTAXI', 824, 261, '#1c1c1c');
+        for (let k = 0; k < 3; k++) { const x = 812 + k * 13, y = 296; R(x - 5, y, 11, 1, 'rgba(0,0,0,.3)'); R(x - 5, y - 4, 10, 3, '#2a2a2a'); R(x - 5, y - 3, 3, 3, '#1c1c1c'); R(x + 3, y - 3, 3, 3, '#1c1c1c'); R(x - 2, y - 7, 6, 3, ['#c43c3a', '#3c6aa8', '#e8c24c'][k]); }
+        pecas.pessoaG(P, 850, 298, '#e8833a', '#a8704a', '#1c1c1c'); P.R(847, 287, 7, 3, '#1c1c1c'); });
+      ref(556, 466, 66, 52, (P) => { P.casa(560, 470, 58, 44, { telhado: '#c8846a', parede: '#f6ead0', madeira: false, janelas: [6], porta: 36 }); const R = P.R; R(564, 490, 28, 9, '#7a4a2a'); txt(P, 'BISCOITO', 578, 492, '#ffe39a'); P.circ(610, 470, 7, '#e8d4a0', 7); P.circ(610, 470, 3, '#c8a46a', 3); }); // biscoitaria do Seu Valdomiro
+      ref(494, 470, 34, 28, (P) => { const R = P.R, x = 496, y = 494; P.sombra(x + 14, y, 16, 3); R(x, y - 12, 28, 10, '#8a5a36'); R(x, y - 12, 28, 2, '#a87a4a'); for (let k = 0; k < 6; k++) { R(x + 2 + k * 4, y - 18 + (k % 2), 3, 6, ['#7a3a2a', '#3c8a5a', '#c8962a', '#5a2a5a'][k % 4]); R(x + 3 + k * 4, y - 20 + (k % 2), 1, 2, '#dde0e3'); } P.circ(x + 4, y - 1, 3, '#3a2414'); P.circ(x + 24, y - 1, 3, '#3a2414'); R(x - 6, y - 10, 6, 2, '#6a4228'); }); // carrinho das garrafadas do Seu Lindomar
+      ref(1040, 272, 30, 30, (P) => { const R = P.R; P.c.strokeStyle = '#f6f6f0'; P.c.lineWidth = 2; P.c.beginPath(); P.c.arc(1046, 280, 6, 0, Math.PI * 2); P.c.stroke(); P.c.lineWidth = 1; R(1045, 286, 2, 14, '#5a5e62'); R(1041, 299, 10, 1, '#5a5e62'); pecas.pessoaG(P, 1060, 300, '#f29ab0', '#c99068', '#e8c24c'); R(1056, 288, 3, 4, '#1c1c1c'); }); // Kauã Influencer e o ring light
+      ref(1066, 356, 74, 60, (P) => { P.predio(1070, 360, 66, 52, { parede: '#2a2a3a', topo: '#4a4a5a', fachada: 26, caixa: false }); const R = P.R; R(1084, 384, 38, 10, '#1c1c1c'); }); // LAN house dos gêmeos
+      ref(828, 518, 52, 40, (P) => { const R = P.R; R(838, 520, 3, 34, '#5a5e62'); R(838, 520, 22, 3, '#5a5e62'); R(856, 523, 1, 6, '#2a2a2a'); R(852, 529, 9, 16, '#c43c3a'); R(852, 529, 9, 2, '#e8635a'); R(830, 553, 30, 2, 'rgba(0,0,0,.2)'); }); // saco de pancada do Breno
+      ref(1100, 680, 46, 66, (P) => { const R = P.R; for (let k = 0; k < 6; k++) { const x = 1104 + (k % 3) * 12, y = 744 - Math.floor(k / 3) * 9; R(x, y - 9, 12, 10, '#c8b48a'); R(x, y - 9, 12, 1, '#e8d8b0'); txt(P, 'B', x + 6, y - 7, '#7a4a2a'); } R(1122, 694, 2, 30, '#5a3820'); R(1108, 672, 30, 22, '#2a1a10'); R(1110, 674, 26, 18, '#f6ead0'); R(1116, 678, 12, 10, '#f2f2ee'); R(1128, 680, 3, 5, '#f2f2ee'); R(1117, 680, 10, 3, '#5a3420'); txt(P, 'BARAO', 1123, 666, '#ffe39a', { sombra: '#2a1a10' }); }); // sacas e a xícara do Barão do Café
+      ref(648, 202, 22, 34, (P) => { const R = P.R; R(658, 210, 2, 24, '#5a5e62'); R(648, 196, 22, 14, '#1c1c1c'); P.sombra(660, 234, 6, 2); }); // relógio-termômetro do centro
+      ref(654, 64, 56, 58, (P) => { const R = P.R; for (const x of [664, 696]) { R(x, 96, 2, 26, '#c8ccd0'); } R(662, 120, 38, 2, '#8a8e94'); P.sombra(681, 122, 22, 3); }); // pé da roda-gigante do festival
+      ref(42, 196, 1, 1, () => {}); // vaga do avião na pista
+      for (const [x, y, s, bg, fg] of [[586, 304, 'SMART FAT', '#1c2a3a', '#7af0c8'], [988, 552, 'PAGUE MAIS', '#c43c3a', '#fff6dc'], [118, 332, 'CASAS BAIXA', '#2c5a9e', '#ffe39a']]) ref(x, y - 28, 60, 30, (P) => pecas.outdoor(P, x, y, s, bg, fg));
+      for (const [x, y] of [[180, 52], [300, 34], [880, 52]]) ref(x - 8, y - 50, 16, 52, (P) => pecas.antena(P, x, y)); // antenas da serra
+      // plaquinhas do ponto de táxi do Seu Zé
+      for (const [bx, by, bw, bh] of caixas) for (const [dx, dy] of [[bw - 8, bh + 12], [8, bh + 12], [bw + 10, bh - 4], [-10, bh - 4]]) { const x = bx + dx, y = by + dy; if (lote.ponto(x, y, 5, (a, b) => Tr.nivelEm(a, b) > 0 && Tr.px.wd[Math.round(b) * Tr.px.W + Math.round(a)] < 0)) { add(y, (P) => pecas.placaTaxi(P, x, y)); break; } }
+      // ---- prédios brancos e bege da cidade ----
+      const paredes = ['#ebe8de', '#e0d6c2', '#dfe6ea', '#e8dcc8', '#f2e2a8', '#d8d0c0', '#f0ece4'];
+      for (let i = 0; i < 4000; i++) { const alto = h(i, 81) > .35, w = alto ? 30 + Math.floor(h(i, 82) * 3) * 6 : 30, hh = alto ? 40 + Math.floor(h(i, 83) * 4) * 6 : 32, x = 210 + h(i, 84) * 930, y = 96 + h(i, 85) * 470; if (Tr.nivelEm(x, y + hh) !== 1) continue; if (!lote.area(x - 3, y - 2, w + 8, hh + 8)) continue; const cor = paredes[i % paredes.length];
+        add(y + hh, (P) => (alto ? P.predio(x, y, w, hh, { parede: cor, fachada: 18 + (i % 3) * 6, porta: i % 2 === 0, faixa: i % 4 === 0 ? '#c8a46a' : null }) : P.casa(x, y, w, hh, { telhado: ['#b8644a', '#9a4a34', '#c8544a'][i % 3], parede: cor, madeira: false, janelas: [4, 22], porta: 13 }))); }
+      // ---- cactos cabeça-de-frade e pedras no cerrado ----
+      const cerrado = tipoEh(Tr, 'cerrado');
+      for (let i = 0; i < 260; i++) { const x = h(i, 91) * 1150, y = h(i, 92) * 768; if (!lote.ponto(x, y, 6, cerrado)) continue; const k = h(i, 93); add(y, (P) => (k > .6 ? pecas.cacto(P, x, y) : k > .35 ? P.pedra(x, y) : P.arbusto(x, y, i, k > .2 ? '#f2c94c' : null))); }
+      // ---- árvores: ipês nas avenidas, eucaliptos no café e na reserva, pinheiros no parque ----
+      for (let i = 0; i < 900; i++) { const x = 4 + h(i, 101) * 1144, y = 8 + h(i, 102) * 756; if (!lote.ponto(x, y, 8)) continue; const tp = Tr.tipoEm(x, y), k = h(i, 103);
+        if (tp === 'mata') add(y, (P) => (k > .75 ? P.eucalipto(x, y, 1, i) : P.arvore(x, y, .9 + k * .5, k > .4 ? 'escura' : 'verde', i)));
+        else if (y > 660 && x > 700 && x < 940) add(y, (P) => (k > .5 ? P.pinheiro(x, y, 1, i) : P.arvore(x, y, .9, 'verde', i)));
+        else if (x > 900 && y > 540) { if (k > .5) continue; add(y, (P) => P.eucalipto(x, y, .9 + k * .3, i)); }
+        else { if (k > .5) continue; add(y, (P) => (k > .38 ? P.arvore(x, y, .9, 'roxa', i) : k > .3 ? P.arvore(x, y, .9, 'amarela', i) : P.arvore(x, y, .8 + k * .6, 'verde', i))); } }
+      for (const pl of [RUAS2.av1, RUAS2.av1b, RUAS2.av2, RUAS2.A]) for (let k = 12; k < pl.length; k += 36) { const [x, y] = faixa(pl, 22, false)[k]; if (lote.ponto(x, y, 4)) add(y, (P) => P.poste(x - 2, y)); }
     },
-    animarChao: (P, t) => { const R = P.R; for (let k = 0; k < 10; k++) { const y = 506 + ((t * 40 + k * 7) % 30); R(92 + (k % 3) * 4, y, 2, 4, '#e2f4ff'); } R(88, 498, 14, 8, '#c8eaff'); // cachoeira do poço escuro
-      for (let k = 0; k < 8; k++) { const x = ((t * 6 + k * 30) % 200) - 10, y = 708 + (k % 3) * 18; P.c.globalAlpha = .7; P.circ(x, y, 14, '#ffffff', 5); P.c.globalAlpha = 1; } },
+    animarChao: (P, t) => { const R = P.R; for (let k = 0; k < 12; k++) { const y = 486 + ((t * 46 + k * 7) % 48); R(90 + (k % 4) * 4, y, 2, 5, k % 3 ? '#e2f4ff' : '#9fd0f0'); } for (let k = 0; k < 5; k++) { const a = t * 3 + k; P.c.globalAlpha = .6; P.circ(98 + Math.cos(a) * 8, 536 + Math.sin(a) * 2, 3, '#ffffff', 1); P.c.globalAlpha = 1; } // cachoeira do Poço Escuro
+      for (let k = 0; k < 9; k++) { const x = ((t * 6 + k * 34) % 240) - 20, y = 742 + (k % 3) * 9; P.c.globalAlpha = .75; P.circ(x, y, 16, '#ffffff', 5); P.c.globalAlpha = 1; } }, // mar de nuvens embaixo do Marçal
     animar: (P, t) => { const R = P.R;
-      andar(P, t, [[[220, 340], [1150, 340], 4], [[1150, 498], [650, 498], 3], [[430, 120], [430, 760], 2], [[718, 760], [718, 120], 2], [[0, 248], [420, 248], 1]], ['#c43c3a', '#3c6aa8', '#f2f2ee', '#e8c24c', '#2a2a2a']);
-      for (const x of [30, 90]) { for (let k = 0; k < 3; k++) { const a = t * 3 + k * 2.1 + x; P.c.strokeStyle = '#f2f4f6'; P.c.lineWidth = 2; P.c.beginPath(); P.c.moveTo(x + 1, 600); P.c.lineTo(x + 1 + Math.cos(a) * 14, 600 + Math.sin(a) * 14); P.c.stroke(); } } P.c.lineWidth = 1; // torres eólicas
-      { const u = (t * .12) % 1, x = 168 + u * 120, y = 640 + u * 60 - Math.sin(u * 6) * 6; for (let k = -5; k <= 5; k++) R(x + k * 2, y - 10 - Math.round(Math.sqrt(1 - (k / 6) ** 2) * 3), 2, 2, k % 2 ? '#3c8ad8' : '#f2c94c'); R(x - 1, y - 2, 3, 4, '#c43c3a'); } // parapente
-      for (let k = 0; k < 3; k++) { const u = (t * .03 + k / 3) % 1, a = u * Math.PI * 2; R(33 * TS + Math.cos(a) * 70, 41 * TS + Math.sin(a) * 36 - 4, 8, 4, '#f6f6f0'); R(33 * TS + Math.cos(a) * 70 + 6, 41 * TS + Math.sin(a) * 36 - 8, 2, 5, '#f6f6f0'); } // pedalinhos
-      for (let k = 0; k < 40; k++) { const on = Math.sin(t * 6 + k) > .5; if (on) R(304 + Math.cos(k / 40 * Math.PI * 2) * 70, 628 + Math.sin(k / 40 * Math.PI * 2) * 46, 3, 3, '#ffffff'); } // torcida agitando
+      // trânsito: avenidas, a rotatória com mototáxis e o engarrafamento na Olívia Flores
+      naRua(P, t, faixa(RUAS2.av1, -5, false), 3, ['#c43c3a', '#3c6aa8', '#f2f2ee'], 26); naRua(P, t, faixa(RUAS2.av1, 5, true), 2, ['#e8c24c', '#2a2a2a'], 24, .4, (j) => (j === 0 ? 'taxi' : null));
+      naRua(P, t, faixa(RUAS2.av2, 5, true), 2, ['#2c5a9e', '#c43c3a', '#3c8a5a'], 18, .2, 'bus'); naRua(P, t, faixa(RUAS2.av2, -5, false), 2, ['#f2f2ee', '#7a3a8a'], 24, .6);
+      naRua(P, t, RUAS2.A, 2, ['#f2f2ee', '#c43c3a'], 20, .1); naRua(P, t, [...RUAS2.sB].reverse(), 2, ['#e8c24c', '#3c6aa8'], 20, .5, (j) => (j === 0 ? 'taxi' : null)); naRua(P, t, RUAS2.W, 1, ['#3c8a5a'], 18, .3); naRua(P, t, RUAS2.aero, 1, ['#e8c24c'], 16, .2, 'taxi');
+      for (let k = 0; k < 4; k++) { const a = t * 1.1 + k * 1.57, x = 734 + Math.cos(a) * 46, y = 334 + Math.sin(a) * 30; veiculo(P, x, y, ['#c43c3a', '#e8833a', '#3c6aa8', '#e8c24c'][k], a + Math.PI / 2, 'moto'); } // mototáxis do Tonhão rodando a rotatória
+      { const fila = A.trilho(faixa(RUAS2.av1b, -5, false)); for (let k = 0; k < 7; k++) { const p = fila.em(.05 + k * .055); veiculo(P, p.x, p.y + 3, ['#f2f2ee', '#c43c3a', '#3c6aa8', '#2a2a2a', '#3c8a5a', '#e8c24c', '#7a3a8a'][k], 0); if (Math.floor(t * 2 + k) % 2) R(p.x - 9, p.y - 1, 1, 2, '#ff3a3a'); }
+        const q = Math.floor(t / 1.6) % 7, p = fila.em(.05 + q * .055), b = (t / 1.6) % 1; if (b < .7) { R(p.x - 12, p.y - 26, 26, 10, '#fff6dc'); R(p.x - 12, p.y - 26, 26, 1, '#2a2a2a'); R(p.x - 12, p.y - 17, 26, 1, '#2a2a2a'); R(p.x - 2, p.y - 16, 3, 3, '#fff6dc'); txt(P, q % 2 ? 'BIII!' : 'FOOM!', p.x + 1, p.y - 24, '#c43c3a'); } } // engarrafamento: Cleiton e Dona Rosilda
+      // avião decolando do Glauber Rocha
+      { const c = (t % 18) / 18; if (c < .55) { const u = c / .55, x = 10 + u * u * 260, sobe = Math.max(0, u - .45) * 120, y = 172 - sobe; P.c.globalAlpha = .25; P.circ(x + 4, 174, 12, '#000', 2); P.c.globalAlpha = 1; R(x - 12, y - 4, 26, 6, '#f2f4f6'); R(x - 12, y - 1, 26, 1, '#c9ced2'); R(x - 14, y - 10, 5, 7, '#3c6aa8'); R(x - 2, y - 2, 10, 3, '#e8ecef'); R(x + 12, y - 3, 3, 3, '#9fc4d0'); for (let k = 0; k < 5; k++) R(x - 6 + k * 3, y - 3, 2, 1, '#3c4a5a'); } }
+      // ônibus saindo da rodoviária e gente na feira, na UESB e no parque
       fumaca(P, 1066, 576, t); for (let k = 0; k < 5; k++) { const u = (t * .04 + k / 5) % 1; pessoa(P, 470 + u * 170, 448 + (k % 2) * 10, ['#e86a8a', '#3c6aa8', '#f2c94c', '#7a3a8a', '#3c8a5a'][k], t); }
-      for (let k = 0; k < 4; k++) { const a = t * .5 + k * 1.6, x = 600 + Math.cos(a) * (40 + k * 12), y = 40 + Math.sin(a) * 10 + k * 8; R(x - 4, y, 3, 1, '#2a2622'); R(x + 2, y, 3, 1, '#2a2622'); R(x - 1, y, 3, 1, '#2a2622'); } },
+      for (let k = 0; k < 4; k++) { const u = (t * .05 + k / 4) % 1; pessoa(P, 936 + u * 190, 140 + (k % 2) * 4, ['#3c6aa8', '#c43c3a', '#3c8a5a', '#f2c94c'][k], t); R(936 + u * 190 + 2, 133 + (k % 2) * 4, 3, 3, '#f6ead0'); }
+      { const a = Math.sin(t * 2.4) * .6; R(760 + Math.sin(a) * 10 - 3, 712 + Math.cos(a) * 6, 7, 2, '#3a3a36'); pessoa(P, 760 + Math.sin(a) * 10, 712 + Math.cos(a) * 6, '#e86a8a', 0, false); const u = (t * .3) % 1, bx = 840 + u * 60, d = Math.abs(Math.sin(u * Math.PI * 3)) * 6; R(bx, 748 - d, 3, 3, '#f2c94c'); R(bx - 12, 748, 8, 4, '#c8a46a'); R(bx - 6, 746, 3, 3, '#c8a46a'); R(bx - 13, 746, 2, 2, '#c8a46a'); } // balanço e cachorro correndo atrás da bolinha
+      // eólicas, parapente, pedalinhos, torcida
+      for (const x of [30, 90]) { for (let k = 0; k < 3; k++) { const a = t * 3 + k * 2.1 + x; P.c.strokeStyle = '#f2f4f6'; P.c.lineWidth = 2; P.c.beginPath(); P.c.moveTo(x + 1, 600); P.c.lineTo(x + 1 + Math.cos(a) * 14, 600 + Math.sin(a) * 14); P.c.stroke(); } } P.c.lineWidth = 1;
+      { const u = (t * .12) % 1, x = 168 + u * 120, y = 640 + u * 80 - Math.sin(u * 6) * 6; for (let k = -5; k <= 5; k++) R(x + k * 2, y - 10 - Math.round(Math.sqrt(1 - (k / 6) ** 2) * 3), 2, 2, k % 2 ? '#3c8ad8' : '#f2c94c'); R(x - 1, y - 2, 3, 4, '#c43c3a'); }
+      for (let k = 0; k < 3; k++) { const u = (t * .03 + k / 3) % 1, a = u * Math.PI * 2, x = 33 * TS + Math.cos(a) * 70, y = 41 * TS + Math.sin(a) * 36 - 4; R(x, y, 8, 4, '#f6f6f0'); R(x + 6, y - 4, 2, 5, '#f6f6f0'); R(x + 7, y - 5, 3, 2, '#f6f6f0'); R(x + 9, y - 4, 1, 1, '#f08a24'); R(x + 1, y + 4, 8, 1, '#9fd0f0'); }
+      for (let k = 0; k < 40; k++) { if (Math.sin(t * 6 + k) > .5) R(304 + Math.cos(k / 40 * Math.PI * 2) * 70, 628 + Math.sin(k / 40 * Math.PI * 2) * 46, 3, 3, '#ffffff'); }
+      { const x = 452, y = 640, g = Math.floor(t * 2) % 5 === 0; pessoa(P, x, y, '#3c8a5a', 0, false); P.circ(x + 6, y - 2, 4, '#7a5a3a', 1); if (g) { R(x + 5, y - 4, 2, 2, '#ffe23a'); R(x + 4, y - 6, 1, 1, '#ffffff'); } } // o menino da bateia procurando a pepita
+      for (const [x, y] of [[620, 610], [600, 700]]) { R(x, y - 8, 3, 5, '#f6f6f0'); R(x + 1, y - 11, 2, 3, '#f6f6f0'); R(x + 3, y - 10, 3, 1, '#e8c24c'); R(x, y - 3, 1, 4, '#2a2a2a'); R(x + 2, y - 3, 1, 4, '#2a2a2a'); } // garças
+      // saguis pulando na reserva
+      for (let k = 0; k < 3; k++) { const u = (t * .25 + k / 3) % 1, x = 40 + k * 50 + u * 30, y = 420 + k * 20 - Math.abs(Math.sin(u * Math.PI * 2)) * 14; R(x, y - 4, 4, 3, '#8a7a6a'); R(x + 3, y - 6, 3, 3, '#a89a88'); R(x + 3, y - 7, 1, 1, '#f6f6f0'); R(x + 5, y - 7, 1, 1, '#f6f6f0'); R(x - 3, y - 3 + Math.round(Math.sin(t * 4 + k)), 3, 1, '#5a4a3a'); }
+      // fofoca da Dona Creuza
+      { const q = (t / 2.2) % 1, fr = ['PSIU', 'JURA?', 'SABIA?'][Math.floor(t / 2.2) % 3]; R(276, 372, 6, 6, '#3a5a8a'); R(277, 373, 4, 4, '#c99068'); if (q < .8) { const y = 352 - q * 8; R(266, y - 9, 30, 10, '#fff6dc'); R(266, y - 9, 30, 1, '#2a2a2a'); R(266, y, 30, 1, '#2a2a2a'); R(278, y + 1, 3, 3, '#fff6dc'); txt(P, fr, 281, y - 7, '#7a2a5a'); } }
+      // Dona Lurdes regando e o varal na laje da pensão
+      { pecas.pessoaG(P, 262, 314, '#7a4a8a', '#c99068', '#d0d0d0'); R(266, 304, 5, 3, '#3c8a5a'); for (let k = 0; k < 3; k++) { const q = (t * 2 + k / 3) % 1; R(272 + q * 3, 305 + q * 8, 1, 2, '#9fd0f0'); } R(276, 310, 8, 5, '#a8643a'); R(277, 306, 2, 4, '#e86a8a'); R(281, 307, 2, 3, '#f2c94c');
+        P.c.strokeStyle = '#4a4a4a'; P.c.beginPath(); P.c.moveTo(284, 236); P.c.lineTo(334, 238); P.c.stroke(); for (let k = 0; k < 5; k++) R(287 + k * 9, 237, 5, 6 + Math.round(Math.sin(t * 3 + k)), ['#e86a8a', '#f6f6f0', '#3c6aa8', '#f2c94c', '#3c8a5a'][k]); }
+      // vapor da biscoitaria, flash do Kauã, LAN dos gêmeos, cachorro do Breno
+      for (let k = 0; k < 4; k++) { const q = (t * .5 + k / 4) % 1; P.c.globalAlpha = (1 - q) * .6; P.circ(590 + Math.sin(t + k) * 4, 470 - q * 22, 2 + q * 3, '#ffffff'); } P.c.globalAlpha = 1;
+      { const f = (t % 2.6) < .12; if (f) { P.c.globalAlpha = .7; P.circ(1057, 290, 12, '#ffffff', 10); P.c.globalAlpha = 1; for (let k = 0; k < 6; k++) { const a = k * 1.05; R(1057 + Math.cos(a) * 14, 290 + Math.sin(a) * 10, 2, 2, '#fff6a0'); } } }
+      { const on = Math.floor(t * 3) % 4 !== 0; txt(P, 'LAN', 1103, 386, on ? '#3ae0ff' : '#1c4a5a', { s: 2 }); for (let k = 0; k < 4; k++) R(1076 + k * 15, 400, 10, 6, Math.floor(t * 5 + k) % 3 ? '#2a6ae8' : '#5ae0ff'); }
+      { const lat = Math.floor(t * 2) % 3 === 0, x = 866 + Math.sin(t * .8) * 6; R(x, 550, 11, 5, '#d8d0c4'); R(x + 9, 547, 5, 5, '#d8d0c4'); R(x + 12, 549, 1, 1, '#1c1c1c'); R(x + 1, 555, 2, 2, '#b8b0a4'); R(x + 8, 555, 2, 2, '#b8b0a4'); R(x - 2, 549, 3, 1, '#d8d0c4'); R(x + 9, 552, 3, 1, '#c43c3a'); if (lat) { R(x + 16, 538, 16, 8, '#fff6dc'); txt(P, 'AU!', x + 24, 540, '#c43c3a'); } }
+      // relógio-termômetro: hora e frio de Conquista
+      { const mostra = Math.floor(t / 2.5) % 2; R(650, 198, 18, 10, '#0c0c0c'); txt(P, mostra ? '12C' : '0740', 659, 200, mostra ? '#5ae0ff' : '#ff9a3a'); }
+      // roda-gigante do festival
+      { const cx = 681, cy = 92, r = 24; P.c.strokeStyle = '#e8ecef'; P.c.beginPath(); P.c.arc(cx, cy, r, 0, Math.PI * 2); P.c.stroke(); for (let k = 0; k < 8; k++) { const a = t * .5 + k * Math.PI / 4, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r; P.c.beginPath(); P.c.moveTo(cx, cy); P.c.lineTo(x, y); P.c.stroke(); R(x - 3, y, 6, 5, ['#e8433a', '#f2c94c', '#3c6aa8', '#3c8a5a'][k % 4]); } R(cx - 2, cy - 2, 4, 4, '#c8ccd0'); }
+      // antenas piscando, urubus no Cristo, abelhas do mel
+      if (Math.floor(t * 1.5) % 2) for (const [x, y] of [[180, 52], [300, 34], [880, 52]]) R(x - 1, y - 52, 3, 3, '#ff3a3a');
+      for (let k = 0; k < 4; k++) { const a = t * .5 + k * 1.6, x = 432 + Math.cos(a) * (40 + k * 12), y = 40 + Math.sin(a) * 10 + k * 8; R(x - 4, y, 3, 1, '#2a2622'); R(x + 2, y, 3, 1, '#2a2622'); R(x - 1, y, 3, 1, '#2a2622'); }
+      for (let k = 0; k < 5; k++) R(60 + Math.sin(t * 5 + k * 2) * 10, 660 + Math.cos(t * 4 + k) * 5, 1, 1, '#f2c94c');
+      // neblina de Conquista passando devagar
+      for (let k = 0; k < 4; k++) { const x = ((t * 5 + k * 330) % 1500) - 200, y = 140 + k * 150; P.c.globalAlpha = .13; P.circ(x, y, 110, '#f4f8fa', 26); P.circ(x + 70, y + 8, 80, '#f4f8fa', 20); P.c.globalAlpha = 1; }
+    },
     veiculo: (P, t) => carrinho(P, 0, 0, '#f2c94c', 1, true),
     locais: PONTOS
   };

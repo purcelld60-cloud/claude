@@ -294,6 +294,44 @@ O estado fica em `daroca-c2-poderes` até o save da Campanha 2 existir (passo 6)
 
 Os objetos são ordenados pela altura (quem está mais embaixo fica na frente).
 
+**Terreno orgânico.** O relevo e o tipo do chão ficam numa grade fina (4 px). Cada pixel é pintado consultando essa grade num ponto deslocado por um ruído suave, por isso rios, barrancos, gramados e ruas têm bordas curvas, sem cara de quadradinho.
+- **Ruas:** são curvas suaves (`T.curva`), e os cruzamentos viram pracinhas redondas.
+- **Barrancos:** têm faixas de terra, pedrinhas, cipós e sombra no pé.
+- **Água:** tem fundo mais escuro, parte rasa, espuma, juncos e vitórias-régias.
+- **Chão:** grama com tufos e flores, cerrado, trigal, cafezal em fileiras curvas, paralelepípedo, calçada e nuvens.
+- **Árvores:** novas árvores de copa fofa (vários tufos), além de eucalipto, cacaueiro, mamoeiro e pinheiro.
+- **Carros:** andam pelas curvas nos dois sentidos.
+- **Casas e prédios:** só nascem em terreno livre.
+
+**Referências da campanha no mapa de Itabuna:**
+- na roça: a oficina do Lucas com as três peças do carro brilhando na bancada, a árvore do balanço, o espantalho no trigal, as galinhas soltas, o caixote do Kauã com lápis, borracha e clipe, e a barcaça de cacau no morro;
+- no Campo do Mota: o Mota treinando com bola e cones;
+- no colégio: os mamoeiros das papaias do Miqueias, os três cadernos do Almiro no banco e o saruê espiando da moita;
+- no Caderno do Caos: folhas voando até ele e rabiscos andando em volta;
+- na quadra: o bolo na mesa;
+- na Praça Camacan: dominó dos aposentados, sorvete e pombos;
+- na Academia do Caleb: o sinal de reflexo verde e vermelho e alguém fazendo flexão;
+- no Bigodon: o poste de barbeiro girando e o bigodão no telhado;
+- na Casa de Rayssa: as latinhas Bivolt soltando faísca;
+- no baile: o som do paredão e um carro roxo voando no céu;
+- na favela: a pichação "OOO REEEIS", a barraca da BATATA, pipas e varais;
+- pela cidade: a lanchonete com fliperama na porta, a canoa com pescador, os patos no açude e a placa ITABUNA.
+
+**Referências da campanha no mapa de Conquista:**
+- o Ferro-Velho do Gugu, com guindaste e carcaças;
+- a janela da Dona Creuza soltando "PSIU" e "JURA?";
+- a Dona Lurdes regando as plantas e o varal na laje da pensão;
+- o ponto de mototáxi do Tonhão, com motos rodando a rotatória;
+- o engarrafamento buzinando na avenida, de Cleiton e Dona Rosilda;
+- a biscoitaria do Seu Valdomiro soltando vapor e o carrinho das garrafadas do Seu Lindomar;
+- o ring light do Kauã Influencer piscando o flash;
+- a LAN house em neon dos gêmeos;
+- o saco de pancada e o cachorro do Breno;
+- as sacas e a xícara do Barão do Café, com o café secando no terreiro;
+- o relógio-termômetro marcando 12 °C e a neblina passando;
+- a roda-gigante do festival, o avião decolando, os ônibus da rodoviária e as antenas da serra piscando;
+- cactos cabeça-de-frade, saguis, garças, o menino da bateia, a criança no balanço, o cachorro com a bolinha, os outdoors (SMART FAT, PAGUE MAIS, CASAS BAIXA) e as plaquinhas de TÁXI em cada ponto do Seu Zé.
+
 Ao tocar num lugar:
 - a câmera desliza e dá zoom até ele;
 - o desenho do lugar dá um pulinho;
