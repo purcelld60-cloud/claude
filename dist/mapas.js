@@ -403,7 +403,7 @@
   ];
   let TR2 = null; const RUAS2 = {};
   const MAPA2 = {
-    chave: 'conquista2d', titulo: 'TÁXI DO SEU ZÉ · VITÓRIA DA CONQUISTA', subtitulo: 'O táxi só para nas entradas. Lá dentro, é com você.', lajotas: [72, 48], botao: 'IR DE TÁXI ▶',
+    chave: 'conquista2d', titulo: 'TÁXI DO SEU ZÉ · VITÓRIA DA CONQUISTA', subtitulo: 'O táxi só para nas entradas. Lá dentro, é com você.', lajotas: [72, 48], botao: 'IR DE TÁXI ▶', ilha: { margem: 300, eolicas: 7, parapentes: 3, balao: true }, relevo: true,
     terreno: (T) => {
       // Serra do Periperi: cerrado em dois degraus, com picos tortos
       T.poli([[6, -1.5], [7.5, 3.2], [12, 4.4], [18, 5.2], [24, 4.6], [30, 5.4], [37, 4.8], [44, 5.6], [50, 4.9], [56.5, 4.2], [57.2, -1.5]], { nivel: 2, tipo: 'cerrado' });

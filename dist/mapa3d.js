@@ -312,6 +312,7 @@
     const margem = (cx, cy) => 34 + vn(cx / 58 + 3.1, cy / 58 + 7.7, 41) * 58 + vn(cx / 19, cy / 19, 42) * 10;
     for (let Y = 0; Y < H2; Y++) for (let X = 0; X < W2; X++) { const x = X - PAD, y = Y - PAD; if (x >= 0 && x < W && y >= 0 && y < H) { cls[Y * W2 + X] = 1; continue; }
       const cx = x < 0 ? 0 : x >= W ? W - 1 : x, cy = y < 0 ? 0 : y >= H ? H - 1 : y, dd = Math.hypot(x - cx, y - cy), m = margem(cx, cy), i = (Y * W2 + X) * 4; let col = null, k = 0;
+      { const j = (cy * W + cx) * 4; if (bd[j] > 215 && bd[j + 1] > 215 && bd[j + 2] > 215) { if (dd < 14) { out[i] = RASO[0]; out[i + 1] = RASO[1]; out[i + 2] = RASO[2]; out[i + 3] = 255 - dd * 6; cls[Y * W2 + X] = 3; } continue; } } // mar de nuvens: encontra o mar direto
       if (dd < m - 11) { const j = (cy * W + cx) * 4, er = bd[j], eg = bd[j + 1], eb = bd[j + 2]; // o rio continua até o mar; o resto vira grama
         if (eb > er + 40 && eb > eg - 10) { col = [er, eg, eb]; k = 3; } else { const n = vn(x / 22, y / 22, 43); col = GR[n < .4 ? 0 : n > .62 ? 2 : 1]; k = 1; } }
       else if (dd < m) { const n = vn(x / 9, y / 9, 44); col = AR[n < .35 ? 1 : n > .7 ? 2 : 0]; if (dd > m - 3) col = AR[1]; k = 2; }
@@ -327,8 +328,10 @@
       const cxx = Math.max(0, Math.min(W - 1, x)), cyy = Math.max(0, Math.min(H - 1, y)), dd = Math.hypot(x - cxx, y - cyy); if (dd > melhor && x > W * .5) { melhor = dd; farol = [x - nx * 16, y - ny * 16]; } }
     for (let k = 0; k < 70; k++) { const x = -PAD + hash(k, 7) * W2, y = -PAD + hash(k, 8) * H2, X = Math.round(x + PAD), Y = Math.round(y + PAD); if (X < 0 || Y < 0 || X >= W2 || Y >= H2 || cls[Y * W2 + X] !== 1 || (x >= -4 && x < W + 4 && y >= -4 && y < H + 4)) continue; P.arvore(x, y, .8 + hash(k, 9) * .4, k % 4 ? 'verde' : 'amarela', k); }
     if (farol) { const [fx, fy] = farol, R = P.R; P.sombra(fx + 4, fy + 2, 10, 3, .3); R(fx - 7, fy - 4, 14, 6, '#8a9096'); for (let j = 0; j < 7; j++) { const w = 10 - j * .7; R(fx - w / 2, fy - 8 - j * 6, w, 6, j % 2 ? '#f2f2ee' : '#c43c3a'); } R(fx - 5, fy - 52, 10, 8, '#2a3a4a'); R(fx - 3, fy - 50, 6, 4, '#fff2b0'); R(fx - 6, fy - 54, 12, 3, '#c43c3a'); R(fx - 2, fy - 58, 4, 4, '#2a3a4a'); }
+    const eolicas = []; for (let k = 0; k < 400 && eolicas.length < (o.eolicas || 0); k++) { const x = -PAD + hash(k, 21) * W2, y = -PAD + hash(k, 22) * H2, X = Math.round(x + PAD), Y = Math.round(y + PAD);
+      if (X < 0 || Y < 0 || X >= W2 || Y >= H2 || cls[Y * W2 + X] !== 1 || (x > -10 && x < W + 10 && y > -10 && y < H + 10) || eolicas.some(([ex, ey]) => Math.hypot(ex - x, ey - y) < 60)) continue; eolicas.push([x, y, hash(k, 23) * 6]); P.sombra(x + 6, y + 1, 9, 3, .28); P.R(x - 4, y - 2, 9, 4, '#a8aeb4'); }
     g.restore();
-    return { cv, pad: PAD, costa, farol };
+    return { cv, pad: PAD, costa, farol, eolicas };
   }
   /* ---------- montar o mapa (uma vez) ---------- */
   function montar(d) {
@@ -343,8 +346,9 @@
     // vida: bandos de passarinhos e borboletas espalhados pelo mapa
     const aves = Array.from({ length: 4 }, (_, k) => ({ x: Math.random() * W, y: 80 + k * (H - 160) / 4, v: 34 + Math.random() * 22, dir: k % 2 ? -1 : 1, n: 4 + (k % 3), fase: Math.random() * 6 }));
     const borbo = Array.from({ length: 14 }, (_, k) => ({ x: Math.random() * W, y: Math.random() * H, fase: Math.random() * 9, cor: ['#ffe14a', '#ff8ad0', '#ffffff', '#8ad8ff', '#ffb04a'][k % 5] }));
+    const parapentes = ilha ? Array.from({ length: d.ilha.parapentes || 0 }, (_, k) => ({ x: W * (.2 + k * .3), y: H * (.3 + (k % 2) * .35), r: 40 + k * 14, fase: k * 2, cor: ['#e8433a', '#f2c94c', '#3c8ab0', '#9a52c0'][k % 4] })) : [], balao = ilha && d.ilha.balao ? { x: -60, y: H * .35 } : null;
     const barcos = ilha ? [0, 1, 2].map((k) => ({ a: k * 2.1, v: .05 + k * .015, cor: ['#e8433a', '#f2c94c', '#3c6aa8'][k] })) : [], golfinhos = ilha ? [0, 1, 2, 3].map((k) => ({ a: k * 1.6 + .7, fase: k * 2.3 })) : [];
-    return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr, aves, borbo, ilha, PAD: ilha ? ilha.pad : 0, barcos, golfinhos };
+    return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr, aves, borbo, ilha, PAD: ilha ? ilha.pad : 0, barcos, golfinhos, parapentes, balao };
   }
 
   /* ---------- abrir, selecionar, ir ---------- */
@@ -419,6 +423,9 @@
     if (M.ilha) { const vx0 = cam.x - W / 2 / z - 40, vy0 = cam.y - H / 2 / z - 40, vx1 = cam.x + W / 2 / z + 40, vy1 = cam.y + H / 2 / z + 40; // brilho das ondas no mar
       for (let y = Math.floor(vy0 / 26) * 26; y < vy1; y += 26) for (let x = Math.floor(vx0 / 34) * 34; x < vx1; x += 34) { const ph = (tempo * .7 + hash(x, y) * 6) % 6; if (ph > 1.6) continue; const ox2 = x + hash(y, x) * 20, a = Math.sin(ph / 1.6 * Math.PI); c.globalAlpha = a * .7; c.fillStyle = '#d8f2ff'; c.fillRect(Math.round(ox2), Math.round(y + Math.sin(tempo + x) * 2), 7, 1); c.fillRect(Math.round(ox2 + 2), Math.round(y - 1 + Math.sin(tempo + x) * 2), 3, 1); } c.globalAlpha = 1;
       c.drawImage(M.ilha.cv, -M.PAD, -M.PAD);
+      for (const [ex, ey, f] of M.ilha.eolicas || []) { const R2 = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), w, h); }; // eólica com as pás girando
+        R2(ex - 1, ey - 40, 3, 40, '#f2f4f6'); R2(ex + 1, ey - 40, 1, 40, '#c8ccd0'); R2(ex - 2, ey - 43, 5, 4, '#e8ecef'); const a0 = tempo * 2.2 + f;
+        for (let k = 0; k < 3; k++) { const a = a0 + k * 2.094; for (let j = 2; j < 18; j++) R2(ex + Math.cos(a) * j, ey - 41 + Math.sin(a) * j, 2, 2, j > 14 ? '#c43c3a' : '#ffffff'); } R2(ex - 1, ey - 42, 3, 3, '#9aa0a6'); }
       c.fillStyle = '#ffffff'; for (const [x, y, nx, ny, f] of M.ilha.costa) { const o = 2 + Math.sin(tempo * 2.2 + f) * 2.2; c.globalAlpha = .55 + Math.sin(tempo * 2.2 + f) * .35; c.fillRect(Math.round(x + nx * o), Math.round(y + ny * o), 2, 2); } c.globalAlpha = 1; // espuma batendo na praia
       const cx0 = M.W / 2, cy0 = M.H / 2;
       for (const b of M.barcos) { b.a += b.v * dt * .12; const rx = M.W / 2 + M.PAD * .62, ry = M.H / 2 + M.PAD * .55, bx = cx0 + Math.cos(b.a) * rx, by = cy0 + Math.sin(b.a) * ry, dir = -Math.sin(b.a) >= 0 ? 1 : -1; // barquinhos à vela dando a volta na ilha
@@ -447,6 +454,11 @@
         R(bx - 3, by - (asa ? 2 : 0), 2, 1, '#2a2a3a'); R(bx - 1, by, 2, 1, '#2a2a3a'); R(bx + 1, by - (asa ? 2 : 0), 2, 1, '#2a2a3a'); c.globalAlpha = .15; R(bx - 2, by + 26, 4, 1, '#000'); c.globalAlpha = 1; } }
     for (const b of M.borbo) { const t2 = tempo + b.fase, bx = b.x + Math.sin(t2 * .7) * 24, by = b.y + Math.sin(t2 * 1.3) * 10, abre = Math.sin(t2 * 14) > 0; // borboletas
       R(bx - (abre ? 2 : 1), by, abre ? 2 : 1, 2, b.cor); R(bx + 1, by, abre ? 2 : 1, 2, b.cor); R(bx, by, 1, 2, '#2a1a10'); }
+    for (const pp of M.parapentes || []) { const a = tempo * .35 + pp.fase, px = pp.x + Math.cos(a) * pp.r, py = pp.y + Math.sin(a) * pp.r * .5 - 30, dir = -Math.sin(a) >= 0 ? 1 : -1; // parapentes planando
+      c.globalAlpha = .18; R(px - 8, py + 46, 16, 3, '#000'); c.globalAlpha = 1; for (let k = 0; k < 9; k++) R(px - 12 + k * 3, py - Math.round(Math.sin(k / 8 * Math.PI) * 5), 3, 4, k % 2 ? pp.cor : '#ffffff'); R(px - 11, py + 3, 1, 9, '#5a5e62'); R(px + 11, py + 3, 1, 9, '#5a5e62'); R(px - 2, py + 11, 4, 5, '#2a3a4a'); R(px - 1, py + 9, 3, 3, '#d9a57f'); R(px + dir * 2, py + 15, 3, 2, '#2a3a4a'); }
+    if (M.balao) { const b = M.balao; b.x += dt * 9; if (b.x > M.W + 80) b.x = -80; const by = b.y + Math.sin(tempo * .6) * 10; // balão colorido flutuando
+      c.globalAlpha = .15; P.circ(b.x + 18, by + 70, 10, '#000', 3); c.globalAlpha = 1; P.circ(b.x, by, 15, '#2a1a10', 17); for (let k = 0; k < 5; k++) { c.fillStyle = ['#e8433a', '#f2c94c', '#3c8ab0', '#3c8a5a', '#9a52c0'][k]; c.fillRect(Math.round(b.x - 14 + k * 6), Math.round(by - 16 + Math.abs(k - 2) * 2), 5, 30 - Math.abs(k - 2) * 4); } P.circ(b.x - 5, by - 7, 3, '#ffffff55', 4);
+      R(b.x - 6, by + 16, 1, 8, '#5a3820'); R(b.x + 5, by + 16, 1, 8, '#5a3820'); R(b.x - 6, by + 24, 12, 7, '#a8643a'); R(b.x - 6, by + 24, 12, 2, '#c8844a'); }
     for (let k = 0; k < 5; k++) { const nx = ((tempo * 8 + k * 260) % (M.W + 300)) - 150, ny = 60 + k * (M.H / 5); c.globalAlpha = .06; P.circ(nx + 24, ny + 46, 34, '#0c1a30', 12); c.globalAlpha = .55; P.circ(nx, ny, 26, '#ffffff', 9); P.circ(nx + 18, ny - 4, 18, '#ffffff', 8); P.circ(nx - 14, ny + 2, 14, '#ffffff', 6); c.globalAlpha = 1; } // nuvens e a sombra delas
     c.setTransform(1, 0, 0, 1, 0, 0);
     { c.save(); c.globalCompositeOperation = 'screen'; const sol = c.createRadialGradient(W * .08, -H * .1, 0, W * .08, -H * .1, Math.max(W, H) * .9); sol.addColorStop(0, 'rgba(255,236,170,.35)'); sol.addColorStop(.5, 'rgba(255,220,150,.10)'); sol.addColorStop(1, 'rgba(255,220,150,0)'); c.fillStyle = sol; c.fillRect(0, 0, W, H);

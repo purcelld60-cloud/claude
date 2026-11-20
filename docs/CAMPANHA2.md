@@ -725,3 +725,11 @@ Os botões são os originais de cada modo, só mudados de lugar. Qualquer botão
 - **Relevo:** morros suaves na grama, com luz vindo de cima à esquerda.
 - **Bigodon:** bigode gigante em cima da barbearia.
 - **Academia do Caleb:** haltere gigante de "200KG" no telhado.
+
+**Mapa de Vitória da Conquista também é ilha** (`MAPA2`: `ilha: { margem: 300, eolicas: 7, parapentes: 3, balao: true }`, `relevo: true`)
+- Tudo o que o mapa de Itabuna tem: costa com praia, farol, mar animado, barcos, golfinhos e relevo.
+- Detalhes de Conquista:
+  - eólicas com as pás girando na costa;
+  - parapentes planando em círculos;
+  - um balão colorido atravessando a cidade;
+  - o "mar de nuvens" da Serra do Marçal cai direto no mar.
