@@ -190,7 +190,7 @@
     function update(dt) {
       t += dt; falaVida = Math.max(0, falaVida - dt); fala2Vida = Math.max(0, fala2Vida - dt);
       // biscoitos (cura)
-      for (const q of curas) if (!q.pego && Math.abs(P.x - q.x) < 22 && P.y > FLOOR - 60) { q.pego = true; P.hp = Math.min(100, P.hp + 20); flutua(q.x, FLOOR - 70, '+20 ♥', '#ff8a7a'); api.sfx('plim'); }
+      for (const q of curas) if (!q.pego && Math.abs(P.x - q.x) < 22 && P.y > FLOOR - 60) { q.pego = true; P.hp = Math.min(P.max || 100, P.hp + 20); flutua(q.x, FLOOR - 70, '+20 ♥', '#ff8a7a'); api.sfx('plim'); }
       // inimigos comuns
       for (const e of inimigos) atualizaInimigo(e, dt);
       for (let i = inimigos.length - 1; i >= 0; i--) if (inimigos[i].hp <= 0 && inimigos[i].morto > 1.6) inimigos.splice(i, 1);

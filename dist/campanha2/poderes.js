@@ -229,7 +229,7 @@
   setInterval(atualizarRecarga, 120);
 
   window.CampanhaPoderes = Object.freeze({
-    lista: () => PODERES.map(({ id, nome, curto, vilao, quem, lugar, desc, cor }) => ({ id, nome, curto, vilao, quem, lugar, desc, cor })),
+    lista: () => PODERES.map(({ id, nome, curto, vilao, quem, lugar, desc, cor, nivel }) => ({ id, nome, curto, vilao, quem, lugar, desc, cor, niveis: nivel ? nivel.slice() : [] })),
     basicos: () => BASICOS.slice(), sairam: () => SAIRAM.slice(),
     estado: estadoPublico, desbloquear, equipar, upgrade, ouvir: (f) => { ouvintes.add(f); return () => ouvintes.delete(f); },
     usar, atualizar, desenhar, filtrarDano, multiplicadores, recarga: (id) => cd[id] || 0, recargaTotal: (id) => (byId(id) ? lv(byId(id), 'recarga') : 1), escudo: () => escudo > 0,

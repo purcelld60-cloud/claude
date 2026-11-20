@@ -586,3 +586,27 @@ As provocações mudam a cada fase: de "EU NÃO TE CONHEÇO!" até "O TRIO... AC
 - a tela **CAMPANHA 2 COMPLETA!**, com CONTINUAR EXPLORANDO ou VOLTAR AO MENU.
 
 O save marca a campanha como zerada (`flags.zerou`) e o painel da Campanha 2 passa a mostrar "✔ Campanha 2 completa".
+
+
+## Extras · Missões dos aliados e a Oficina de melhorias (`dist/campanha2/aliados.js` e `dist/campanha2/oficina.js`)
+
+**Os aliados** ficam espalhados pela cidade. Um "!" em cima indica missão nova, um "?" indica que dá para entregar e um "●" indica loja ou oficina. As missões aparecem em **📜 MISSÕES**, na pausa.
+
+| Aliado | Onde | Missão | Recompensa |
+| --- | --- | --- | --- |
+| Dona Lurdes | Porta da pensão | Achar o radinho roubado (na avenida do Monumento) | +20 de vida máxima (um coração a mais) |
+| Mel | Centro | Juntar os 3 pedaços do mapa do avô (fim do centro, fim da feira, beira da lagoa) | 40 moedas e o mapa verdadeiro: marcas verdes mostram as missões extras |
+| Biscoito (cachorro caramelo) | Rua da pensão | Dar um biscoito de polvilho (comprado com o Tio do Picolé) | Vira companheiro e morde os inimigos nas lutas |
+| Tio do Picolé | Feira | Lojinha | Picolé Sigma (cura 40), Picolé Mega Chad (vida cheia), biscoito do cachorro |
+| Nando Skatista | Centro | Corrida até a bandeira e de volta antes dele | Skate: anda 20% mais rápido |
+| Juninho Mecânico | Avenida | Trazer a corrente (com o Gugu) e o pneu (na rodoviária) | Bicicleta: anda 40% mais rápido |
+| Bia do Arrocha | Teatro | Minijogo de ritmo no palco (← ↓ ↑ → ou D F J K, ou tocar nas trilhas) com 65% ou mais | Moral: +15% de força |
+| Gugu do Ferro-Velho | Fim da rua da pensão (ferro-velho) | **Oficina de melhorias** | Turbina os poderes até o nível 3 |
+| Vó Cida, Larissa (UESB) e Carlinhos (shopping) | — | As 3 pistas do Jorge | 90 moedas |
+
+**A Oficina de melhorias do Gugu** é uma tela própria em pixel art realista:
+- um galpão de zinco enferrujado, com uma lâmpada pendurada que balança e mexe a luz e as sombras;
+- um quadro de ferramentas, prateleiras com potes e latas, pneus, um capô velho e poeira no ar;
+- a MÁQUINA DE TURBINAR, com manômetro, canos e vapor.
+
+Você escolhe um poder e vê o nível de agora e o próximo. O Gugu põe a garrafada na máquina, martela e solda (com faíscas e clarão), o manômetro sobe, a garrafa sai brilhando e o carimbo **TURBINADO!** marca o nível novo. O nível 2 custa 80 moedas e o nível 3 custa 160.

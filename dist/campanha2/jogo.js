@@ -83,7 +83,7 @@
     { id: 'checkin', cena: 12, x: 640, quando: 'checkin', rotulo: 'BALCÃO DE CHECK-IN', botao: 'CHECK-IN', acao: () => minijogo('checkin') },
     { id: 'raiox', cena: 12, x: 1330, quando: 'raiox', rotulo: 'RAIO-X', botao: 'RAIO-X', acao: () => minijogo('raiox') },
     { id: 'portao', cena: 12, x: 1760, quando: 'portao', rotulo: 'PORTÃO DE EMBARQUE', botao: 'EMBARCAR', acao: () => minijogo('portao') },
-    { id: 'cama', cena: 25, x: 624, rotulo: 'DORMIR (SALVA E CURA)', botao: 'DORMIR', acao: () => { P.hp = 100; salvar('JOGO SALVO · VIDA CHEIA'); sfx('sino'); } }
+    { id: 'cama', cena: 25, x: 624, rotulo: 'DORMIR (SALVA E CURA)', botao: 'DORMIR', acao: () => { P.hp = P.max || 100; salvar('JOGO SALVO · VIDA CHEIA'); sfx('sino'); } }
   ];
   function caronaLucas() { // o carro a gás voando até o aeroporto de Itabuna
     const raw = { id: 'c2j_carona', titulo: 'A carona', balao: true, substituir: true, trilha: 'flashback', cenas: [
@@ -142,7 +142,7 @@
     el.addEventListener('click', (e) => { const a = e.target.closest('button')?.dataset.a; if (!a) return; el.remove(); if (a === 'menu') fechar(); });
     box.querySelector('.tela').appendChild(el); sfx('fanfarra'); setTimeout(() => el.querySelector('button')?.focus(), 30);
   }
-  function voltarDoDesmaio() { morto = false; P.hp = 100; P.inv = 1.5; fase?.reiniciar(); const cp = S.flags.cp; if (cp) irPara(cp.cena, cp.x); else irPara(cenaId, (PASSOS[S.passo]?.fase && fase ? fase.F.checkpoint - 400 : P.x)); salvar(); }
+  function voltarDoDesmaio() { morto = false; P.hp = P.max || 100; P.inv = 1.5; fase?.reiniciar(); const cp = S.flags.cp; if (cp) irPara(cp.cena, cp.x); else irPara(cenaId, (PASSOS[S.passo]?.fase && fase ? fase.F.checkpoint - 400 : P.x)); salvar(); }
   function faseAtual() { // cria a fase quando você chega no lugar dela
     const slug = PASSOS[S?.passo]?.fase, F = slug && window.CampanhaFases?.FASES?.[slug];
     if (!F || F.cena !== cenaId || S.flags['venceu_' + slug]) { if (fase && (!F || F.cena !== cenaId)) fase = null; return null; }
@@ -181,7 +181,7 @@
     if (viagem || !perto || cut || pausado) return; const p = perto; keys.clear();
     if (p.tipo === 'npc') { if (p.npc.falas) conversa(p.npc); else p.npc.fim?.(); return; }
     if (p.tipo === 'estacao') { p.est.acao(); return; }
-    if (p.tipo === 'item') { p.acao(); return; }
+    if (p.tipo === 'item' || p.tipo === 'aliado') { p.acao(); return; }
     if (p.tipo === 'extra') { if (p.id === 'loja') window.CampanhaLoja?.abrir?.({}); else window.CampanhaTaxi?.abrir?.(cenaId, (cena, x) => { irPara(cena, x + 120); if (S.passo === 'taxi1' && cena === 13) passo('lurdes'); else if (PASSOS[S.passo]?.ir === cena) passo(PASSOS[S.passo].prox); salvar(); }, { liberado: S.passo === 'taxi1' ? (L) => (L.id === 't13' ? { ok: true } : { ok: false, motivo: 'Primeiro, a pensão. Você nem tem onde dormir!' }) : undefined }); return; }
     if (p.tipo === 'poderes') { window.CampanhaPoderes?.abrirMural?.({}); return; }
     if (p.tipo === 'conversa') { window.CampanhaMoradores?.conversar?.(p.id); return; }
@@ -198,13 +198,14 @@
     if (d.id === 0 && S.passo === 'passaporte' && P.y < FLOOR - 100) cand.push({ tipo: 'item', x: 3456, rotulo: 'PEGAR O PASSAPORTE', botao: 'PEGAR', acao: () => { item('PASSAPORTE'); sfx('fanfarra'); passo('lucas'); } });
     if (d.id >= 12) { const m = window.CampanhaMoradores?.perto?.(d.id, P.x); if (m) cand.push({ tipo: 'conversa', id: m.id, x: m.x, rotulo: 'CONVERSAR COM ' + m.nome.toUpperCase(), botao: 'FALAR' });
       for (const X of [window.CampanhaTaxi, window.CampanhaLoja]) { const e = X?.perto?.(d.id, P.x); if (e) cand.push({ tipo: 'extra', ...e }); } }
+    for (const a of window.CampanhaAliados?.candidatos?.(d.id) || []) cand.push(a);
     for (const p of cand) { const dd = Math.abs(p.x - P.x); if (dd < 70 && dd < best) { best = dd; perto = p; } }
   }
 
   /* ---------- física (a mesma do visualizador) ---------- */
   function fisica(dt) {
     const d = D(), dir = (keys.has('right') ? 1 : 0) - (keys.has('left') ? 1 : 0) || Math.sign(Math.round(joy * 2)); if (dir) P.facing = dir;
-    P.vx = TR()?.dashing?.() ? P.vx : dir * 260 * (TR()?.velocidade?.() || 1) * ((P.atordoado || 0) > 0 ? .4 : 1); const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
+    P.vx = TR()?.dashing?.() ? P.vx : dir * 260 * (TR()?.velocidade?.() || 1) * ((P.atordoado || 0) > 0 ? .4 : 1) * (window.CampanhaAliados?.velocidade?.() || 1); const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
     const prevY = P.y; P.vy = Math.min(900, P.vy + 1700 * dt); P.y += P.vy * dt; P.ground = false;
     const overGap = (d.vaos || []).some(([gx, gw]) => P.x > gx + 10 && P.x < gx + gw - 10);
     for (const r of portais(d.id)) if (r.tipo === 'rampa' && P.x >= r.x0 && P.x <= r.x1) { const ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0); if (P.vy >= 0 && P.y >= ry - 14 && prevY <= ry + 40) { P.y = ry; P.vy = 0; P.ground = true; } if (P.x >= r.x1 - 4 && P.ground && dir > 0) viagem = { tipo: 'porta', t: 0, para: r.para }; }
@@ -280,10 +281,10 @@
     TR()?.montarBarra?.(box.querySelector('.tela'), (id, down) => { if (cut) { if (down) avancarCut(); return; } if (pausado) return; if (TR().acao(id, down, P)) return; if (id === 'jump') { if (down) { keys.add('jump'); pular(); } else keys.delete('jump'); } if (id === 'interact' && down) usar(); });
     addEventListener('keydown', teclaDown, true); addEventListener('keyup', teclaUp, true);
   }
-  const coberto = () => !!(window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.() || window.Mapa3D?.aberto?.() || window.CampanhaLoja?.aberta?.());
+  const coberto = () => !!(window.CampanhaOficina?.aberta?.() || window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.() || window.Mapa3D?.aberto?.() || window.CampanhaLoja?.aberta?.());
   const ocupado = () => coberto() || !!window.CampanhaMoradores?.aberto?.() || !!box?.querySelector('.escolha');
   function teclaDown(e) {
-    if (!aberto || coberto() || window.CampanhaMoradores?.aberto?.()) return; const k = e.code;
+    if (!aberto || coberto() || window.CampanhaMoradores?.aberto?.() || window.CampanhaAliados?.ocupado?.()) return; const k = e.code;
     if (box.querySelector('.escolha')) { if (/^Digit[1-3]$/.test(k)) box.querySelectorAll('.escolha .ops button')[Number(k.slice(5)) - 1]?.click(); e.stopImmediatePropagation(); return; }
     if (cut) { if (['Space', 'Enter', 'KeyE', 'ArrowRight'].includes(k) && !e.repeat) avancarCut(); if (k === 'Escape') pularCut(); e.preventDefault(); e.stopImmediatePropagation(); return; }
     if (morto) { e.stopImmediatePropagation(); return; }
@@ -305,19 +306,25 @@
     keys.clear(); const el = document.createElement('div'); el.className = 'escolha';
     el.innerHTML = `<div class="cx"><b>${quem}</b><div>${pergunta}</div><div class="ops"></div><div class="resp"></div></div>`;
     const list = el.querySelector('.ops'); ops.forEach((o, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = `${i + 1}. ${o.t}`; b.addEventListener('click', () => {
-      if (o.voltar) { el.remove(); return; } if (o.ok) { if (o.r && !semResposta) { el.querySelector('.resp').style.color = '#2a7a3a'; el.querySelector('.resp').textContent = o.r; sfx('plim'); setTimeout(() => { el.remove(); aoAcertar(); }, 1300); } else { el.remove(); aoAcertar(); } return; }
+      if (o.voltar) { el.remove(); return; } if (o.ok) { if (o.r && !semResposta) { el.querySelector('.resp').style.color = '#2a7a3a'; el.querySelector('.resp').textContent = o.r; sfx('plim'); setTimeout(() => { el.remove(); aoAcertar(o); }, 1300); } else { el.remove(); aoAcertar(o); } return; }
       el.querySelector('.resp').textContent = o.r || 'Não...'; sfx('risada'); b.disabled = true; }); list.appendChild(b); });
     box.querySelector('.tela').appendChild(el); setTimeout(() => list.querySelector('button')?.focus(), 50);
   }
   function pausar(v) {
     pausado = v; keys.clear(); box.querySelector('.pausa')?.remove(); if (!v) return;
     const el = document.createElement('div'); el.className = 'pausa';
-    el.innerHTML = `<h2>PAUSA</h2><button type="button" data-a="voltar">▶ CONTINUAR</button><button type="button" data-a="som">♪ SOM: ${som ? 'LIGADO' : 'DESLIGADO'}</button><button type="button" data-a="sair">SALVAR E SAIR</button><p>A/D ou setas andam · ESPAÇO pula (segure no ar para voar) · E fala e entra · J papel · K peido · L dash · U/I poderes · ESC pausa</p>`;
-    el.addEventListener('click', (e) => { const a = e.target.closest('button')?.dataset.a; if (a === 'voltar') pausar(false); if (a === 'som') { som = !som; window.__somCutscene = som; pausar(true); } if (a === 'sair') { salvar(); fechar(); } });
+    el.innerHTML = `<h2>PAUSA</h2><button type="button" data-a="voltar">▶ CONTINUAR</button><button type="button" data-a="missoes">📜 MISSÕES</button><button type="button" data-a="som">♪ SOM: ${som ? 'LIGADO' : 'DESLIGADO'}</button><button type="button" data-a="sair">SALVAR E SAIR</button><p>A/D ou setas andam · ESPAÇO pula (segure no ar para voar) · E fala e entra · J papel · K peido · L dash · U/I poderes · ESC pausa</p>`;
+    el.addEventListener('click', (e) => { const a = e.target.closest('button')?.dataset.a; if (a === 'voltar') pausar(false); if (a === 'som') { som = !som; window.__somCutscene = som; pausar(true); } if (a === 'sair') { salvar(); fechar(); } if (a === 'missoes') diario(); });
     box.querySelector('.tela').appendChild(el); setTimeout(() => el.querySelector('button')?.focus(), 30);
   }
+  function diario() {
+    box.querySelector('.pausa')?.remove(); const el = document.createElement('div'); el.className = 'pausa'; const L = window.CampanhaAliados?.missoes?.() || [], ic = { feita: '✔', ativa: '▶', nova: '!' };
+    el.innerHTML = `<h2>📜 MISSÕES</h2><div style="background:#f2dc9a;color:#3a2412;border:3px solid #2a1a10;padding:10px 14px;width:min(560px,86%);font:12px Space,Arial,sans-serif;line-height:1.5"><b style="font:9px Pixel,monospace;color:#8a4a2a">HISTÓRIA</b><br>${PASSOS[S.passo]?.obj || ''}</div>
+      <div style="background:#2a1e14e8;border:3px solid #8a6a3a;padding:8px 12px;width:min(560px,86%);font:11px Space,Arial,sans-serif;line-height:1.5;max-height:46vh;overflow:auto">${L.map(([n, st, d]) => `<div style="margin:5px 0;opacity:${st === 'feita' ? .55 : 1}"><b style="font:9px Pixel,monospace;color:${st === 'feita' ? '#7af07a' : st === 'ativa' ? '#ffd24a' : '#e8c66a'}">${ic[st]} ${n.toUpperCase()}</b><br><span style="color:#e8dcc0">${st === 'feita' ? 'Concluída!' : d}</span></div>`).join('')}</div><button type="button" data-a="voltar">◀ VOLTAR</button>`;
+    el.addEventListener('click', (e) => { if (e.target.closest('button')) pausar(true); }); box.querySelector('.tela').appendChild(el); setTimeout(() => el.querySelector('button')?.focus(), 30);
+  }
   function hudAtualizar() {
-    const cor = box.querySelector('.vida .cor'), n = 5, hp = clamp(P.hp, 0, 100) / 20; let h = ''; for (let i = 0; i < n; i++) h += `<i class="${hp >= i + 1 ? 'on' : hp > i + .3 ? 'meio' : ''}"></i>`; if (cor.innerHTML !== h) cor.innerHTML = h;
+    const cor = box.querySelector('.vida .cor'), n = Math.round((P.max || 100) / 20), hp = clamp(P.hp, 0, P.max || 100) / 20; let h = ''; for (let i = 0; i < n; i++) h += `<i class="${hp >= i + 1 ? 'on' : hp > i + .3 ? 'meio' : ''}"></i>`; if (cor.innerHTML !== h) cor.innerHTML = h;
     box.querySelector('.vida .gas b').style.width = `${clamp(TR()?.gas?.() ?? 100, 0, 100)}%`; box.querySelector('.vida .moedas').textContent = `● ${window.CampanhaLoja?.moedas?.() ?? 0}`;
     const e = box.querySelector('.entrar'); e.hidden = !perto || !!cut; if (perto) e.textContent = perto.botao || (perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR');
   }
@@ -327,11 +334,12 @@
     if (!aberto) return; raf = requestAnimationFrame(frame);
     const dt = Math.min(.05, Math.max(0, (now - last) / 1000)); fpsMedio += ((dt > 0 ? 1 / Math.max(dt, (now - last + 1e-3) / 1000) : 60) - fpsMedio) * .05; last = now;
     const cob = coberto(); box.style.visibility = cob ? 'hidden' : 'visible'; if (cob) return;
+    P.max = window.CampanhaAliados?.vidaMax?.() || 100; if (window.CampanhaAliados?.ocupado?.()) { window.CampanhaAliados.atualizar(dt, []); return; }
     if (cut) { RT().update(cut.s, dt); if (cut.s.done) { const f = cut.depois; cut = null; hudVisivel(true); try { window.DayTime?.force?.(null); } catch (e) {} f?.(); } else { c.save(); RT().draw(c, cut.s); c.restore(); return; } }
     if (pausado || ocupado()) { keys.clear(); P.vx = 0; }
     t += dt; const d = D();
     const F = !cut ? faseAtual() : fase; TR()?.inimigos?.(F && !cut ? F.inimigos() : []);
-    if (!pausado && !morto) { P.inv = Math.max(0, (P.inv || 0) - dt); P.atordoado = Math.max(0, (P.atordoado || 0) - dt); TR()?.passo?.(dt, P, { cam, segurandoPulo: keys.has('jump') }); if (viagem) andarViagem(dt); else fisica(dt); if (F) F.update(dt); }
+    if (!pausado && !morto) { P.inv = Math.max(0, (P.inv || 0) - dt); P.atordoado = Math.max(0, (P.atordoado || 0) - dt); TR()?.passo?.(dt, P, { cam, segurandoPulo: keys.has('jump') }); if (viagem) andarViagem(dt); else fisica(dt); if (F) F.update(dt); safe(() => window.CampanhaAliados?.atualizar?.(dt, F ? F.inimigos() : [])); }
     tremor = Math.max(0, tremor - dt * 30); clarao = Math.max(0, clarao - dt * 1.6); for (const d0 of dano) d0.t += dt; while (dano.length && dano[0].t > 1) dano.shift();
     cam += (clamp(P.x - 360, 0, Math.max(0, d.largura - W)) - cam) * Math.min(1, dt * 8);
     try { window.DayTime?.force?.(horaAtual()); } catch (e) {}
@@ -342,7 +350,8 @@
     if (d.id >= 12) for (const pl of d.plataformas || []) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) safe(() => CC().plataforma(c, d.id, pl, t));
     safe(() => window.Interact?.drawBack?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawBack?.(c, o)); safe(() => window.CampanhaTaxi?.desenhar?.(c, o)); safe(() => window.CampanhaLoja?.desenhar?.(c, o)); safe(() => window.CampanhaMoradores?.desenhar?.(c, o)); }
     desenharExtras();
-    if (F) F.desenhar(c);
+    safe(() => window.CampanhaAliados?.desenhar?.(c, d.id)); if (F) F.desenhar(c);
+    for (const ax of window.CampanhaAliados?.alvos?.(d.id) || []) { const y = FLOOR - 150 + Math.sin(t * 4 + ax) * 4; c.fillStyle = '#1c1408'; c.fillRect(ax - 7, y - 7, 14, 14); c.fillStyle = '#7af07a'; c.fillRect(ax - 5, y - 5, 10, 10); c.fillStyle = '#1c1408'; c.fillRect(ax - 1, y - 4, 2, 5); c.fillRect(ax - 1, y + 2, 2, 2); }
     const at = P.attack || 0; if (!((P.inv || 0) > 0 && Math.floor(t * 16) % 2)) window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: 'paper', attackProgress: 1 - at / .32 });
     safe(() => TR()?.desenhar?.(c, t));
     safe(() => window.Interact?.drawFront?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
@@ -351,6 +360,7 @@
     c.font = '16px Pixel, monospace'; c.textAlign = 'center'; for (const d0 of dano) { c.globalAlpha = 1 - d0.t; c.fillStyle = '#2a0808'; c.fillText(d0.s, d0.x + 2, d0.y - d0.t * 40 + 2); c.fillStyle = '#ff5a4a'; c.fillText(d0.s, d0.x, d0.y - d0.t * 40); } c.globalAlpha = 1; c.textAlign = 'left';
     c.restore(); safe(() => window.CampanhaAmbientes?.cobrir?.(c, d.id, cam));
     if (!F?.emArena?.()) setaObjetivo(); if (F) F.desenharTela(c, W);
+    { const cr = window.CampanhaAliados?.correndo?.(); if (cr) { const txt = cr.fase === 'contagem' ? String(Math.ceil(cr.cont)) : (Math.max(0, cr.lim - cr.t)).toFixed(1) + ' s'; c.fillStyle = '#1c1408'; c.fillRect(W / 2 - 70, 70, 140, 34); c.fillStyle = '#ffd24a'; c.fillRect(W / 2 - 68, 72, 136, 30); c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#1c1408'; c.fillText('🛹 ' + txt, W / 2, 88); c.textAlign = 'left'; } }
     if (clarao > 0) { c.globalAlpha = clarao; c.fillStyle = claraoCor; c.fillRect(0, 0, W, H); c.globalAlpha = 1; }
     if (P.hp < 30 && !cut) { const a = .18 + Math.sin(t * 6) * .08; const g = c.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 600); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(140,0,10,${a})`); c.fillStyle = g; c.fillRect(0, 0, W, H); }
     box.querySelector('.obj').style.visibility = F?.emArena?.() ? 'hidden' : 'visible';
@@ -363,6 +373,7 @@
   function abrir(o = {}) {
     if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; if (S.passo === 'fim6b') S.passo = 'ir_barao'; if (S.passo === 'fim6c') S.passo = 'ir_centro'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
     aberto = true; box.hidden = false; pausado = false; cut = null; keys.clear(); P.hp = S.hp || 100;
+    window.CampanhaAliados?.ligar?.({ P, S: () => S, salvar: () => salvar(), item, aviso, sfx, conversa: (npc) => conversa(npc), escolher: (q, pg, ops, cb) => escolher(q, pg, ops, cb, true), tela: () => box.querySelector('.tela'), cena: () => cenaId, pausar: (v) => { keys.clear(); hudVisivel(!v); box.querySelector('.pular').hidden = true; } });
     TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true }));
     if (S.passo === 'abertura') { irPara(0, 700); tocar('c2_abertura', PASSOS.abertura.depois); }
     else { irPara(S.cena ?? PASSO_INICIAL_DA_CENA[S.passo] ?? 13, S.x ?? 300); objetivoNovo(PASSOS[S.passo]?.obj || ''); hudVisivel(true); }

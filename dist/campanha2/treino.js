@@ -44,7 +44,7 @@
   const mundo = () => ({ heroi: heroRef, inimigos: () => bonecos, camera: cam,
     dano: (e, n, tipo, dir) => { if (e.hp <= 0) return; if (e.onDano) { const r = e.onDano(n, tipo, dir); if (r !== false) textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - (e.alto || 90), n: r || n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); return; } e.hp = Math.max(0, e.hp - n); e.hit = .18; textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - 90, n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); if (e.hp <= 0) { e.morto = 2.2; window.CampanhaLoja?.ganhar?.(8); textos.push({ x: e.x, y: e.y - 120, n: '+8 ●', t: 0, cor: '#ffd24a' }); } }, // inimigo derrotado deixa moedas
     empurrar: (e, vx, vy) => { e.vx = vx; e.vy = vy; }, atordoar: (e, s) => { e.stun = s; }, confundir: (e, s) => { e.conf = s; }, tremer: (n) => { shake = Math.max(shake, n); } });
-  function bater(e, n, tipo, dir) { mundo().dano(e, Math.round(n * PW.multiplicadores().forca), tipo, dir); }
+  function bater(e, n, tipo, dir) { mundo().dano(e, Math.round(n * PW.multiplicadores().forca * (window.CampanhaAliados?.forca?.() || 1)), tipo, dir); }
 
   /* ---------- ações básicas (as da campanha 1, num jeito simples para o treino) ---------- */
   function acao(id, down, P) {
