@@ -111,15 +111,22 @@
         P.predio(866, 216, 100, 72, { topo: '#2e3a34', parede: '#3f5a4c', fachada: 32, caixa: false, porta: false });
         for (const x of [872, 904, 936]) { R(x, 258, 24, 18, '#24302a'); R(x + 1, 259, 22, 16, '#9ac8d8'); for (let y = 260; y < 274; y += 3) R(x + 1, y, 22, 1, '#d8e8ec'); }
         R(906, 278, 16, 10, '#1c2420'); R(907, 279, 14, 9, '#7ab0c0'); R(878, 200, 76, 14, '#1c1c1c'); R(878, 200, 76, 2, '#e8433a'); txt(P, 'CALEB', 906, 204, '#f2c94c');
-        R(934, 205, 14, 2, '#c8ccd0'); R(932, 202, 3, 8, '#5a5e64'); R(947, 202, 3, 8, '#5a5e64'); R(858, 290, 26, 4, '#5a5e64'); for (const x of [856, 880]) { R(x, 286, 4, 10, '#2a2a2a'); } R(944, 288, 6, 8, '#f2f2ee'); R(945, 286, 4, 2, '#3c8ab0'); } },
-    { id: 8, nome: 'Bigodon', sub: 'Davi Costa e Vitor', caixa: [856, 372, 100, 80],
+        R(934, 205, 14, 2, '#c8ccd0'); R(932, 202, 3, 8, '#5a5e64'); R(947, 202, 3, 8, '#5a5e64'); R(858, 290, 26, 4, '#5a5e64'); for (const x of [856, 880]) { R(x, 286, 4, 10, '#2a2a2a'); } R(944, 288, 6, 8, '#f2f2ee'); R(945, 286, 4, 2, '#3c8ab0');
+        { const y = 236; P.sombra(916, y + 12, 44, 4, .3); R(880, y - 2, 72, 5, '#3a3f44'); R(880, y - 2, 72, 2, '#c8ccd0'); R(880, y + 2, 72, 1, '#2a2e32'); // haltere gigante em cima da academia
+          for (const [x, w, h, cor] of [[872, 8, 26, '#1c1c20'], [864, 7, 20, '#c43c3a'], [952, 8, 26, '#1c1c20'], [960, 7, 20, '#c43c3a']]) { R(x - 1, y - h / 2 - 1, w + 2, h + 2, '#0a0a0c'); R(x, y - h / 2, w, h, cor); R(x, y - h / 2, 2, h, '#ffffff33'); R(x, y - h / 2, w, 2, '#ffffff22'); }
+          R(856, y - 4, 7, 9, '#5a5e64'); R(968, y - 4, 7, 9, '#5a5e64'); txt(P, '200KG', 916, y - 12, '#f2c94c'); } } },
+    { id: 8, nome: 'Bigodon', sub: 'Davi Costa e Vitor', caixa: [848, 340, 116, 112],
       descricao: 'Tesoura afiada, espelho que parece mágico e a melhor conversa da cidade. Você sai de lá com outro visual?',
       desenho: (P) => { const R = P.R; // barbearia: parede creme e madeira, toldo listrado, placa de bigode, poste de barbeiro e cadeira vermelha na vitrine
         P.casa(868, 388, 78, 58, { telhado: '#5a3a2a', parede: '#ecd6a8', madeira: true, paredeH: 26, janelas: [8, 58], porta: 34 });
         for (let k = 0; k < 78; k += 6) R(868 + k, 412, 6, 6, k % 12 ? '#f2f2ee' : '#c43c3a'); R(868, 418, 78, 1, '#00000033');
-        R(882, 374, 52, 13, '#2a1a10'); R(883, 375, 50, 11, '#3a2a1a'); txt(P, 'BIGODON', 908, 377, '#e8c66a'); R(900, 370, 16, 3, '#2a1a10'); R(898, 372, 4, 2, '#2a1a10'); R(914, 372, 4, 2, '#2a1a10');
+        R(882, 344, 52, 13, '#2a1a10'); R(883, 345, 50, 11, '#3a2a1a'); txt(P, 'BIGODON', 908, 347, '#e8c66a'); R(890, 357, 2, 10, '#5a3820'); R(924, 357, 2, 10, '#5a3820');
         R(858, 404, 6, 30, '#f2f2ee'); for (let k = 0; k < 10; k++) R(858, 404 + k * 3, 6, 2, k % 3 === 0 ? '#c43c3a' : k % 3 === 1 ? '#2c5a9e' : '#f2f2ee'); R(857, 401, 8, 3, '#c8ccd0'); R(857, 434, 8, 3, '#c8ccd0');
-        R(878, 424, 10, 8, '#c43c3a'); R(879, 422, 8, 3, '#e8433a'); R(926, 424, 10, 8, '#c43c3a'); R(927, 422, 8, 3, '#e8433a'); } },
+        R(878, 424, 10, 8, '#c43c3a'); R(879, 422, 8, 3, '#e8433a'); R(926, 424, 10, 8, '#c43c3a'); R(927, 422, 8, 3, '#e8433a');
+        { const cx = 907, cy = 380; P.sombra(cx + 4, cy + 12, 44, 5, .35); // bigode gigante em cima da barbearia
+          for (const lado of [-1, 1]) { for (let k = 0; k < 30; k++) { const t = k / 29, x = cx + lado * (2 + t * 42), y = cy - Math.sin(t * Math.PI) * 6 + t * t * 5 - (t > .82 ? (t - .82) * 50 : 0), esp = Math.round(13 * (1 - t * .75)); R(x - 2, y - esp / 2 - 2, 4, esp + 4, '#0e0806'); }
+            for (let k = 0; k < 30; k++) { const t = k / 29, x = cx + lado * (2 + t * 42), y = cy - Math.sin(t * Math.PI) * 6 + t * t * 5 - (t > .82 ? (t - .82) * 50 : 0), esp = Math.round(13 * (1 - t * .75)); R(x - 1, y - esp / 2, 3, esp, '#3a2418'); if (k % 3 === 1) R(x - 1, y - esp / 2 + 1, 3, 2, '#7a5238'); } }
+          R(cx - 4, cy - 7, 8, 13, '#0e0806'); R(cx - 3, cy - 6, 6, 11, '#3a2418'); R(cx - 2, cy - 5, 2, 3, '#7a5238'); } } },
     { id: 10, nome: 'Casa de Rayssa', sub: 'As garotas e a resenha', caixa: [652, 556, 120, 96], desloc: [16, 0],
       descricao: 'Entra, mas limpa o tênis. As garotas estão reunidas e, lá dentro, tem um segredo elétrico esperando por você.',
       desenho: (P) => { const R = P.R; // casa aconchegante: parede pêssego, janelões com cortina rosa, vasos de planta e jardim
@@ -144,7 +151,7 @@
   ];
   let RIO1 = [], TR1 = null; const RUAS1 = {};
   const MAPA1 = {
-    chave: 'itabuna2d', titulo: 'CARRO A GÁS · MAPA DE ITABUNA', subtitulo: 'Escolha um lugar. O carro do seu pai voa até lá.', lajotas: [64, 44], voa: true,
+    chave: 'itabuna2d', titulo: 'CARRO A GÁS · MAPA DE ITABUNA', subtitulo: 'Escolha um lugar. O carro do seu pai voa até lá.', lajotas: [64, 44], voa: true, ilha: { margem: 300 }, relevo: true,
     terreno: (T) => {
       // morro da favela em três degraus, com beiradas tortas
       T.poli([[51.2, -1.5], [51.6, 3.8], [51, 8.2], [51.4, 10.8], [55, 10.5], [59.5, 11], [65, 10.5], [65, -1.5]], { nivel: 2 });
