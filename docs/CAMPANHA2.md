@@ -636,7 +636,10 @@ Com ele ligado:
 - Botões: CONTINUAR, ⚙ OPÇÕES, MISSÕES, SOM e SALVAR E SAIR.
 - Nas OPÇÕES: hora do dia (no automático segue a história), clima, qualidade e MUDAR BOTÕES DE LUGAR.
 
-**Campanha principal: os botões ficam exatamente como eram** (pergaminho, ícone, descrição e grade de duas colunas). A pausa só ganhou o botão **OPÇÕES** no lugar de CONTROLES, que leva para HORA DO DIA, CLIMA, QUALIDADE, CONTROLES, BOTÕES DA CAMPANHA e VOLTAR.
+**Pausa da campanha principal = mesma pausa da Campanha 2:** placa pendurada e botões de madeira com moldura dourada em uma coluna.
+- Botões: ▶ CONTINUAR, ⚙ OPÇÕES, Terreiro, Diário, Rever história, Arena, Dupla local, Fliperama e Menu principal.
+- Nas OPÇÕES: hora do dia, clima, qualidade, som, controles e teclas, mudar botões de lugar e dificuldade.
+- **Os botões de toque e o joystick da principal continuam os originais.**
 
 **Ao sair da Campanha 2**, os botões de toque da campanha principal voltam iguais: Reeis, Bivolt e Carro voltam, e os poderes da Campanha 2 somem. Enquanto a Campanha 2 está aberta, a campanha principal e a animação do título param de desenhar por trás, o que deixa o jogo bem mais leve.
 
@@ -683,3 +686,10 @@ Os botões são os originais de cada modo, só mudados de lugar. Qualquer botão
 - Bolo de sapo em pixel art 64×64: sapo de chapéu de palha em cima do bolo de dois andares, vela acesa e pôr do sol.
 - Gerada por `python3 tools/logo.py`.
 - Vira `assets/app-icon-192/512/1024.png` e `icon.svg`. O IPA usa o de 1024 direto, sem borrar.
+
+
+## Mapa de dia (`mapa3d.js`)
+- Ao montar o mapa, as cores ganham "luz de dia": ficam mais claras, mais quentes e mais saturadas.
+- As áreas trancadas têm sombra mais suave.
+- O fundo em volta é azul-céu.
+- Vida no mapa: bandos de passarinhos em V batendo as asas, borboletas e raios de sol se mexendo devagar.

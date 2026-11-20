@@ -232,9 +232,9 @@
   const cache = new Map();
   function css() {
     if (document.getElementById('mapa3dCss')) return; const st = document.createElement('style'); st.id = 'mapa3dCss';
-    st.textContent = `.m3d{position:fixed;inset:0;z-index:2147483200;background:#16243a;font-family:Pixel,monospace;color:#f6ead0;opacity:0;transition:opacity .35s;touch-action:none;user-select:none;-webkit-user-select:none}.m3d.on{opacity:1}.m3d[hidden]{display:none}
+    st.textContent = `.m3d{position:fixed;inset:0;z-index:2147483200;background:#8ccfe8;font-family:Pixel,monospace;color:#f6ead0;opacity:0;transition:opacity .35s;touch-action:none;user-select:none;-webkit-user-select:none}.m3d.on{opacity:1}.m3d[hidden]{display:none}
 .m3d canvas.gl{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;cursor:grab}.m3d canvas.gl.arrasta{cursor:grabbing}
-.m3d .topo{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(#0b0f14dd,#0b0f1400);pointer-events:none}.m3d .topo b{font-size:15px;color:#ffd98a;text-shadow:2px 2px #2a1a14}.m3d .topo small{font-size:9px;color:#e8eef2;text-shadow:1px 1px #000}.m3d .topo .bts{pointer-events:auto;margin-left:auto;display:flex;gap:6px}
+.m3d .topo{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(#2a1a10b0,#2a1a1000);pointer-events:none}.m3d .topo b{font-size:15px;color:#ffd98a;text-shadow:2px 2px #2a1a14}.m3d .topo small{font-size:9px;color:#e8eef2;text-shadow:1px 1px #000}.m3d .topo .bts{pointer-events:auto;margin-left:auto;display:flex;gap:6px}
 .m3d button{font:inherit;font-size:11px;padding:8px 12px;background:#4a3420;color:#f6ead0;border:3px solid #e8c66a;box-shadow:0 4px 0 #2a1a10;cursor:pointer}.m3d button:hover,.m3d button:focus-visible{background:#e8c66a;color:#2a1e14;outline:none}.m3d button:active{transform:translateY(3px);box-shadow:0 1px 0 #2a1a10}.m3d button[disabled]{opacity:.45;cursor:default}
 .m3d .pv{position:absolute;right:14px;top:56px;bottom:14px;width:min(380px,44vw);background:#2a1e14;border:4px solid #e8c66a;box-shadow:0 0 0 4px #120c08,0 14px 30px #0009;display:flex;flex-direction:column;padding:12px;gap:10px;transform:translateX(120%);transition:transform .45s cubic-bezier(.2,.9,.25,1.15)}.m3d .pv.on{transform:none}
 .m3d .pv h3{margin:0;font-size:14px;color:#ffd98a;padding-right:40px}.m3d .pv .sub{font-size:9px;color:#c8b48a;margin-top:-6px}.m3d .pv .ib{position:absolute;right:10px;top:10px;width:34px;height:34px;padding:0;font-size:16px;border-radius:50%}
@@ -284,6 +284,13 @@
   function zoomPara(z) { anim = { de: { ...cam }, para: { x: cam.x, y: cam.y, z: Math.max(zMin(), Math.min(zMax, z)) }, t: 0, dur: .35, f: easeOut }; }
   function limitar() { const hw = cv.clientWidth / 2 / cam.z, hh = cv.clientHeight / 2 / cam.z; cam.x = hw * 2 >= M.W ? M.W / 2 : Math.max(hw, Math.min(M.W - hw, cam.x)); cam.y = hh * 2 >= M.H ? M.H / 2 : Math.max(hh, Math.min(M.H - hh, cam.y)); } // tela maior que o mapa: fica no meio
 
+  /* ---------- luz de dia: clareia, aquece e dá mais cor (uma vez, ao montar) ---------- */
+  function luzDeDia(cv) { try { const g = cv.getContext('2d'), im = g.getImageData(0, 0, cv.width, cv.height), d = im.data;
+    for (let i = 0; i < d.length; i += 4) { if (!d[i + 3]) continue; let r = d[i], gg = d[i + 1], b = d[i + 2]; const L = .299 * r + .587 * gg + .114 * b;
+      r = L + (r - L) * 1.2; gg = L + (gg - L) * 1.2; b = L + (b - L) * 1.12; // mais cor
+      r = r * 1.08 + 16; gg = gg * 1.08 + 14; b = b * 1.03 + 8; // mais claro e um pouco mais quente (sol)
+      d[i] = r > 255 ? 255 : r < 0 ? 0 : r; d[i + 1] = gg > 255 ? 255 : gg < 0 ? 0 : gg; d[i + 2] = b > 255 ? 255 : b < 0 ? 0 : b; }
+    g.putImageData(im, 0, 0); } catch (e) {} }
   /* ---------- montar o mapa (uma vez) ---------- */
   function montar(d) {
     const Tr = Terreno(d.lajotas[0], d.lajotas[1]); d.terreno(Tr);
@@ -291,7 +298,11 @@
     const obj = document.createElement('canvas'); obj.width = W; obj.height = H; const oc = obj.getContext('2d'); oc.imageSmoothingEnabled = false; const lista = []; d.objetos?.((y, f) => lista.push([y, f]), Tr);
     lista.sort((a, b) => a[0] - b[0]); const PO = Px(oc); for (const [, f] of lista) f(PO);
     const locs = d.locais.map((L) => { const [bx0, by0, bw, bh] = L.caixa, [dx, dy] = L.desloc || [0, 0], bx = bx0 + dx, by = by0 + dy, s = document.createElement('canvas'); s.width = bw; s.height = bh; const sc = s.getContext('2d'); sc.imageSmoothingEnabled = false; sc.translate(-bx0, -by0); L.desenho(Px(sc)); const esc = document.createElement('canvas'); esc.width = bw; esc.height = bh; const ec = esc.getContext('2d'); ec.drawImage(s, 0, 0); ec.globalCompositeOperation = 'source-atop'; ec.fillStyle = 'rgba(8,10,26,.62)'; ec.fillRect(0, 0, bw, bh); return { s, esc, bx, by, bw, bh, pulo: null, tremor: 0 }; });
-    return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr };
+    luzDeDia(base); luzDeDia(obj); for (const L of locs) luzDeDia(L.s);
+    // vida: bandos de passarinhos e borboletas espalhados pelo mapa
+    const aves = Array.from({ length: 4 }, (_, k) => ({ x: Math.random() * W, y: 80 + k * (H - 160) / 4, v: 34 + Math.random() * 22, dir: k % 2 ? -1 : 1, n: 4 + (k % 3), fase: Math.random() * 6 }));
+    const borbo = Array.from({ length: 14 }, (_, k) => ({ x: Math.random() * W, y: Math.random() * H, fase: Math.random() * 9, cor: ['#ffe14a', '#ff8ad0', '#ffffff', '#8ad8ff', '#ffb04a'][k % 5] }));
+    return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr, aves, borbo };
   }
 
   /* ---------- abrir, selecionar, ir ---------- */
@@ -361,14 +372,14 @@
       cam.x += (veic.x - cam.x) * Math.min(1, dt * 5); cam.y += (veic.y - cam.y) * Math.min(1, dt * 5); cam.z += (Math.min(zMax, 3.2) - cam.z) * Math.min(1, dt * 2);
       if (v.t > v.dur - .4) ui.querySelector('.fade').style.opacity = 1; if (v.t >= v.dur + .2) { const id = v.id; viagem = null; fechar(); setTimeout(() => def.aoIr?.(id), 60); return; } }
     limitar();
-    c.setTransform(1, 0, 0, 1, 0, 0); c.imageSmoothingEnabled = false; c.fillStyle = '#16243a'; c.fillRect(0, 0, W, H);
+    c.setTransform(1, 0, 0, 1, 0, 0); c.imageSmoothingEnabled = false; c.fillStyle = '#8ccfe8'; c.fillRect(0, 0, W, H);
     const z = cam.z, ox = Math.round(W / 2 - cam.x * z), oy = Math.round(H / 2 - cam.y * z); c.setTransform(z, 0, 0, z, ox, oy);
     c.drawImage(M.base, 0, 0);
     const P = Px(c), R = P.R;
     for (const [x, y] of M.agua) { const ph = (tempo * .8 + hash(x, y) * 5) % 5; if (ph < .9) { R(x - 2 + ph * 2, y, Math.max(1, 5 - ph * 5), 1, '#e2f4ff'); if (ph < .3) R(x, y - 1, 1, 1, '#ffffff'); } } // brilho na água
     def.animarChao?.(P, tempo);
     c.drawImage(M.obj, 0, 0);
-    def.locais.forEach((L, i) => { if (!L.estado?.trava) return; const lo = M.locs[i], cx = lo.bx + lo.bw / 2, cy = lo.by + lo.bh * .55; c.save(); c.fillStyle = '#060818'; for (const [k, a] of [[.74, .26], [.62, .24], [.5, .2]]) { c.globalAlpha = a; c.beginPath(); c.ellipse(cx, cy, lo.bw * k, lo.bh * k, 0, 0, Math.PI * 2); c.fill(); } c.restore(); }); // claridade menor nas áreas trancadas
+    def.locais.forEach((L, i) => { if (!L.estado?.trava) return; const lo = M.locs[i], cx = lo.bx + lo.bw / 2, cy = lo.by + lo.bh * .55; c.save(); c.fillStyle = '#1a2440'; for (const [k, a] of [[.74, .17], [.62, .15], [.5, .13]]) { c.globalAlpha = a; c.beginPath(); c.ellipse(cx, cy, lo.bw * k, lo.bh * k, 0, 0, Math.PI * 2); c.fill(); } c.restore(); }); // claridade menor nas áreas trancadas
     const ordem = M.locs.map((L, i) => i).sort((a, b) => (M.locs[a].by + M.locs[a].bh) - (M.locs[b].by + M.locs[b].bh));
     for (const i of ordem) { const L = M.locs[i]; let sx = 1, sy = 1; if (L.pulo !== null) { L.pulo += dt; const k = L.pulo, y = k < 1 ? Math.sin(k * 15) * Math.exp(-k * 4.5) * .22 : 0; sy = 1 + y; sx = 1 - y * .6; if (k >= 1) L.pulo = null; }
       if (i === sel) { c.save(); c.globalAlpha = .35 + Math.sin(tempo * 5) * .15; c.fillStyle = def.locais[i].estado?.trava ? '#ff4a3a' : '#fff6c0'; const r = Math.max(L.bw, L.bh) * .62; c.beginPath(); c.ellipse(L.bx + L.bw / 2, L.by + L.bh - 4, r, r * .35, 0, 0, Math.PI * 2); c.fill(); c.restore(); }
@@ -376,8 +387,15 @@
     def.animar?.(P, tempo, dt);
     faiscas = faiscas.filter((f) => { f.t += dt; f.vy += 160 * dt; f.x += f.vx * dt; f.y += f.vy * dt; R(f.x, f.y, 2, 2, f.cor); return f.t < .9; });
     if (veic) { c.globalAlpha = .3; P.circ(veic.x, veic.y + 3, 10, '#000', 3); c.globalAlpha = 1; c.save(); c.translate(Math.round(veic.x), Math.round(veic.y - veic.alt)); if (veic.dir < 0) c.scale(-1, 1); def.veiculo?.(P, tempo); c.restore(); }
-    for (let k = 0; k < 5; k++) { const nx = ((tempo * 8 + k * 260) % (M.W + 300)) - 150, ny = 60 + k * (M.H / 5); c.globalAlpha = .1; P.circ(nx + 24, ny + 46, 34, '#0c1a30', 12); c.globalAlpha = .55; P.circ(nx, ny, 26, '#ffffff', 9); P.circ(nx + 18, ny - 4, 18, '#ffffff', 8); P.circ(nx - 14, ny + 2, 14, '#ffffff', 6); c.globalAlpha = 1; } // nuvens e a sombra delas
+    for (const a of M.aves) { a.x += a.v * a.dir * dt; if (a.x > M.W + 120) a.x = -120; if (a.x < -120) a.x = M.W + 120; // bando em V batendo as asas
+      for (let i = 0; i < a.n; i++) { const lado = i % 2 ? 1 : -1, k = Math.ceil(i / 2), bx = a.x - a.dir * k * 9, by = a.y + lado * k * 6 + Math.sin(tempo * 2 + a.fase) * 6, asa = Math.sin(tempo * 12 + a.fase + i) > 0;
+        R(bx - 3, by - (asa ? 2 : 0), 2, 1, '#2a2a3a'); R(bx - 1, by, 2, 1, '#2a2a3a'); R(bx + 1, by - (asa ? 2 : 0), 2, 1, '#2a2a3a'); c.globalAlpha = .15; R(bx - 2, by + 26, 4, 1, '#000'); c.globalAlpha = 1; } }
+    for (const b of M.borbo) { const t2 = tempo + b.fase, bx = b.x + Math.sin(t2 * .7) * 24, by = b.y + Math.sin(t2 * 1.3) * 10, abre = Math.sin(t2 * 14) > 0; // borboletas
+      R(bx - (abre ? 2 : 1), by, abre ? 2 : 1, 2, b.cor); R(bx + 1, by, abre ? 2 : 1, 2, b.cor); R(bx, by, 1, 2, '#2a1a10'); }
+    for (let k = 0; k < 5; k++) { const nx = ((tempo * 8 + k * 260) % (M.W + 300)) - 150, ny = 60 + k * (M.H / 5); c.globalAlpha = .06; P.circ(nx + 24, ny + 46, 34, '#0c1a30', 12); c.globalAlpha = .55; P.circ(nx, ny, 26, '#ffffff', 9); P.circ(nx + 18, ny - 4, 18, '#ffffff', 8); P.circ(nx - 14, ny + 2, 14, '#ffffff', 6); c.globalAlpha = 1; } // nuvens e a sombra delas
     c.setTransform(1, 0, 0, 1, 0, 0);
+    { c.save(); c.globalCompositeOperation = 'screen'; const sol = c.createRadialGradient(W * .08, -H * .1, 0, W * .08, -H * .1, Math.max(W, H) * .9); sol.addColorStop(0, 'rgba(255,236,170,.35)'); sol.addColorStop(.5, 'rgba(255,220,150,.10)'); sol.addColorStop(1, 'rgba(255,220,150,0)'); c.fillStyle = sol; c.fillRect(0, 0, W, H);
+      c.globalAlpha = .07 + Math.sin(tempo * .5) * .02; c.fillStyle = '#fff2c0'; for (let k = 0; k < 4; k++) { const x0 = ((k * .27 + tempo * .004) % 1.2 - .1) * W; c.beginPath(); c.moveTo(x0, 0); c.lineTo(x0 + W * .06, 0); c.lineTo(x0 + W * .06 + H * .55, H); c.lineTo(x0 + H * .55, H); c.fill(); } c.restore(); } // raios de sol
     def.locais.forEach((L, i) => { const lo = M.locs[i], sx = ox + (lo.bx + lo.bw / 2) * z, sy = oy + lo.by * z; if (sx < -100 || sx > W + 100 || sy < -60 || sy > H + 80) return; const b = Math.round(Math.sin(tempo * 3 + i) * 3), ativo = i === sel;
       placaNome(sx, sy - 6 + b, (L.atual ? '● ' : '') + L.nome, L.estado?.ok === false ? 'bloq' : L.atual ? 'atual' : 'ok', ativo);
       if (ativo) { c.fillStyle = '#ffd24a'; const ay = sy - 34 + Math.round(Math.sin(tempo * 6) * 4); c.beginPath(); c.moveTo(sx - 8, ay - 10); c.lineTo(sx + 8, ay - 10); c.lineTo(sx, ay); c.fill(); } });
