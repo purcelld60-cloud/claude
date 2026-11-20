@@ -69,6 +69,7 @@
   function open(opts = {}) {
     build(); unlocked = true; save(); onClose = opts.onClose || null;
     panel.querySelector('.vp-davi').textContent = opts.line || 'Davi: E aí, Da Roça, vai querer o quê hoje?';
+    panel.querySelector('.vp-head b').textContent = opts.title || 'ESPELHO DA BIGODON'; panel.setAttribute('aria-label', opts.title || 'Espelho da Bigodon'); // o armário do quarto (Campanha 2) usa outro título
     render(); panel.hidden = false; t0 = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(drawPreview);
     window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: true } }));
     setTimeout(() => panel.querySelector('.vp-opt.on')?.focus?.(), 40);

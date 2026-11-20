@@ -1,0 +1,95 @@
+{
+ "id": "c2_derrota_fred",
+ "titulo": "Derrota · Fred",
+ "balao": true,
+ "descricao": "Depois da luta: uma pista do Jorge e a garrafada liberada.",
+ "cenas": [
+  {
+   "titulo": "ESCOLA SESI",
+   "cenario": "patio_sesi",
+   "hora": 10.5,
+   "trilha": "saudade",
+   "camera": {
+    "de": {
+     "x": 1300,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "para": {
+     "x": 1300,
+     "y": 420,
+     "zoom": 2.2
+    },
+    "tempo": 8
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1220,
+     "olhando": 1
+    },
+    {
+     "quem": "fred_conquista",
+     "x": 1380,
+     "olhando": -1,
+     "anim": "ajoelhado"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "fred_conquista",
+     "texto": "Isso... não muda nada. Ele me escolheu."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Ninguém precisa escolher, Fred. Amigo não é vaga de estacionamento."
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "...",
+     "emocao": "sad"
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "Hoje à noite ele vai estar no centro, na praça da Catedral, com a turma."
+    },
+    {
+     "quem": "fred_conquista",
+     "texto": "E ó... ele fala de Itabuna quando acha que ninguém tá ouvindo."
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 4.8,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "poder",
+     "poder": "aura",
+     "t": 0,
+     "dur": 4.6,
+     "texto": "A ÚLTIMA GARRAFADA: AMIZADE"
+    }
+   ],
+   "sons": [
+    {
+     "som": "poder",
+     "t": 0.2
+    }
+   ]
+  }
+ ]
+}

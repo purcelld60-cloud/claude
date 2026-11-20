@@ -1,0 +1,85 @@
+{
+ "id": "c2_derrota_barao",
+ "titulo": "Derrota · Barão do Café",
+ "balao": true,
+ "descricao": "Depois da luta: uma pista do Jorge e a garrafada liberada.",
+ "cenas": [
+  {
+   "titulo": "FAZENDAS DE CAFÉ",
+   "cenario": "cafe",
+   "hora": 8.5,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 940,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "para": {
+     "x": 940,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 860,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_barao",
+     "x": 1020,
+     "olhando": -1,
+     "anim": "zzz"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_barao",
+     "texto": "Preciso... de um descafeinado... e de uma soneca."
+    },
+    {
+     "quem": "c2_barao",
+     "texto": "Tá. A terra da Dona Zefa fica com ela. Prometo."
+    },
+    {
+     "quem": "c2_barao",
+     "texto": "O menino de Itabuna? Vi no Teatro, no Festival de Inverno. Com o tal do Fred e uma turma de valentão."
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 4.8,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "poder",
+     "poder": "cafezao",
+     "t": 0,
+     "dur": 4.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "poder",
+     "t": 0.2
+    }
+   ]
+  }
+ ]
+}

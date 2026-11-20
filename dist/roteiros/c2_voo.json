@@ -1,0 +1,289 @@
+{
+ "id": "c2_voo",
+ "titulo": "Campanha 2 · O voo",
+ "balao": true,
+ "descricao": "Decolagem em Itabuna, o voo e o pouso na neblina de Conquista.",
+ "cenas": [
+  {
+   "titulo": "DECOLAGEM",
+   "fundo": {
+    "nome": "aviao_janela",
+    "fase": "decolagem"
+   },
+   "duracao": 5.5,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.08
+    },
+    "tempo": 5.5
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 150,
+     "y": 566,
+     "escala": 3.4,
+     "olhando": 1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "entrada",
+     "dur": 1
+    }
+   ],
+   "sons": [
+    {
+     "som": "aviao",
+     "t": 0.2
+    }
+   ]
+  },
+  {
+   "titulo": "DECOLAGEM",
+   "fundo": {
+    "nome": "aviao_janela",
+    "fase": "decolagem"
+   },
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.08
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.12
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 150,
+     "y": 566,
+     "escala": 3.4,
+     "olhando": 1
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Olha Itabuna lá embaixo... parece maquete."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Dá pra ver a roça. Dá pra ver o rio. Dá pra ver... tudo que eu tô deixando.",
+     "emocao": "sad"
+    }
+   ]
+  },
+  {
+   "titulo": "ITABUNA → VITÓRIA DA CONQUISTA",
+   "fundo": "aviao_ceu",
+   "duracao": 7,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "VITÓRIA DA CONQUISTA",
+     "sub": "ITABUNA →",
+     "t": 1,
+     "dur": 4
+    }
+   ],
+   "sons": [
+    {
+     "som": "aviao",
+     "t": 0.1
+    },
+    {
+     "som": "vento",
+     "t": 3
+    }
+   ]
+  },
+  {
+   "titulo": "ACIMA DAS NUVENS",
+   "fundo": {
+    "nome": "aviao_janela",
+    "fase": "voo"
+   },
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 260,
+     "zoom": 1.1
+    },
+    "tempo": 10
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 150,
+     "y": 566,
+     "escala": 3.4,
+     "olhando": 1,
+     "emocao": "sad"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Três anos sem falar comigo, Gordo. Três anos.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "daroca",
+     "texto": "E eu aqui, pegando avião por tua causa."
+    },
+    {
+     "quem": "narrador",
+     "texto": "Senhores passageiros, iniciamos a descida para Vitória da Conquista. A temperatura local é de onze graus.",
+     "nome": "Comissária",
+     "retrato": false
+    },
+    {
+     "quem": "daroca",
+     "texto": "ONZE?! ONZE GRAUS?!",
+     "emocao": "confused"
+    }
+   ]
+  },
+  {
+   "titulo": "ACIMA DAS NUVENS",
+   "fundo": {
+    "nome": "aviao_janela",
+    "fase": "voo"
+   },
+   "duracao": 2,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.2
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.25
+    },
+    "tempo": 2
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 150,
+     "y": 566,
+     "escala": 3.4,
+     "olhando": 1,
+     "anim": "treme+exclama"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "texto",
+     "texto": "11°C?!",
+     "x": 480,
+     "y": 200,
+     "cor": "#9adcff",
+     "t": 0.1,
+     "dur": 1.8,
+     "tamanho": 48
+    },
+    {
+     "tipo": "tremer",
+     "t": 0.1,
+     "forca": 10
+    },
+    {
+     "tipo": "frio"
+    }
+   ],
+   "sons": [
+    {
+     "som": "impacto",
+     "t": 0.1
+    }
+   ]
+  },
+  {
+   "titulo": "POUSO",
+   "fundo": {
+    "nome": "aviao_janela",
+    "fase": "pouso"
+   },
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.08
+    },
+    "tempo": 8
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 150,
+     "y": 566,
+     "escala": 3.4,
+     "olhando": 1,
+     "anim": "frio"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "frio"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Que fumaça é essa cobrindo a cidade toda?! Tá pegando fogo?!"
+    },
+    {
+     "quem": "narrador",
+     "texto": "É neblina, senhor. Bem-vindo à Suíça Baiana.",
+     "nome": "Comissária",
+     "retrato": false
+    },
+    {
+     "quem": "daroca",
+     "texto": "...Suíça o quê?",
+     "emocao": "confused"
+    }
+   ]
+  }
+ ]
+}

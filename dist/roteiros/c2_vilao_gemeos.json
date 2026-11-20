@@ -1,0 +1,124 @@
+{
+ "id": "c2_vilao_gemeos",
+ "titulo": "Vilão · Ryan e Bryan",
+ "balao": true,
+ "descricao": "Entrada do vilão.",
+ "cenas": [
+  {
+   "titulo": "LAN HOUSE PLANALTO",
+   "cenario": "shopping",
+   "hora": 15,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 3300,
+     "y": 400,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 3500,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 3360,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_ryan",
+     "x": 3600,
+     "olhando": -1
+    },
+    {
+     "quem": "c2_bryan",
+     "x": 3680,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "LAN HOUSE PLANALTO",
+     "sub": "SHOPPING",
+     "t": 0.3,
+     "dur": 3
+    }
+   ],
+   "sons": [
+    {
+     "som": "plim",
+     "t": 0.5
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_ryan",
+     "texto": "PLAYER 3 ENTROU NA PARTIDA!"
+    },
+    {
+     "quem": "c2_bryan",
+     "texto": "Aqui ninguém passa sem jogar, novato."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Eu só quero saber do Jorge."
+    },
+    {
+     "quem": "c2_ryan",
+     "texto": "O Jorge? Ele jogava com a gente!"
+    },
+    {
+     "quem": "c2_bryan",
+     "texto": "Jogava. Agora só joga em dupla com o Fred."
+    },
+    {
+     "quem": "c2_ryan",
+     "texto": "Ganha da gente e a gente conta tudo. Perde e paga a hora da máquina!",
+     "emocao": "taunted"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 3.6,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "vs",
+     "vilao": "gemeos",
+     "nome": "RYAN E BRYAN",
+     "titulo": "OS GÊMEOS DA LAN",
+     "cor": "#5ae0d0",
+     "t": 0,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vs",
+     "t": 0.35
+    },
+    {
+     "som": "tambor",
+     "t": 1.2
+    }
+   ]
+  }
+ ]
+}

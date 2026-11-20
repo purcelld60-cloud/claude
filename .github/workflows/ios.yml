@@ -13,6 +13,11 @@ on:
         description: 'Número da tentativa (o workflow tenta de novo sozinho até 4 vezes se faltar Mac)'
         required: false
         default: '1'
+      dev:
+        description: 'IPA de DESENVOLVEDOR: tudo liberado (Campanha 2 e capítulos, Terreiro dos Chefes e todas as cutscenes)'
+        type: boolean
+        required: false
+        default: false
   push:
     branches: [main]
     paths: ['dist/**', 'native/ios/**', '.github/workflows/ios.yml', '.github/scripts/**']
@@ -38,6 +43,12 @@ jobs:
       - name: Lista de músicas (dist/musicas)
         run: python3 .github/scripts/musicas.py
 
+      - name: Ligar o modo desenvolvedor (só no IPA dev)
+        if: ${{ github.event.inputs.dev == 'true' }}
+        run: |
+          sed -i '' 's/window.DAROCA_DEV = false;/window.DAROCA_DEV = true;/' dist/dev-mode.js
+          grep -n "DAROCA_DEV = true" dist/dev-mode.js
+
       - name: Preparar ícone e projeto
         working-directory: native/ios
         run: |
@@ -60,7 +71,8 @@ jobs:
         working-directory: native/ios
         run: |
           DATA=$(date -u +%Y%m%d)
-          NOME="DaRoca-${VERSAO}-${DATA}-b${{ github.run_number }}.ipa"
+          SUF=""; if [ "${{ github.event.inputs.dev }}" = "true" ]; then SUF="-DEV"; fi
+          NOME="DaRoca${SUF}-${VERSAO}-${DATA}-b${{ github.run_number }}.ipa"
           rm -rf Payload && mkdir Payload
           cp -R build/Build/Products/Release-iphoneos/DaRoca.app Payload/
           test -f Payload/DaRoca.app/dist/index.html
@@ -79,11 +91,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG="ios-b${{ github.run_number }}"
+          TAG="ios-b${{ github.run_number }}"; TIT="Da Roça iOS ${VERSAO} (build ${{ github.run_number }})"; NOTA="IPA sem assinatura. Instale com o seu instalador de IPA (TrollStore, AltStore, SideStore, Sideloadly, ESign...)."
+          if [ "${{ github.event.inputs.dev }}" = "true" ]; then TAG="ios-dev-b${{ github.run_number }}"; TIT="Da Roça iOS ${VERSAO} · DESENVOLVEDOR (build ${{ github.run_number }})"; NOTA="IPA de DESENVOLVEDOR: tudo liberado (Campanha 2 com escolha de capítulo, Terreiro dos Chefes e o botão 🎬 CUTSCENES com todas as cenas). $NOTA"; fi
           gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" \
-            --target "${{ github.sha }}" \
-            --title "Da Roça iOS ${VERSAO} (build ${{ github.run_number }})" \
-            --notes "IPA sem assinatura. Instale com o seu instalador de IPA (TrollStore, AltStore, SideStore, Sideloadly, ESign...)." || true
+            --target "${{ github.sha }}" --prerelease=${{ github.event.inputs.dev == 'true' }} \
+            --title "$TIT" \
+            --notes "$NOTA" || true
           gh release upload "$TAG" "$NOME" DaRoca.ipa --clobber
 
   # Se nenhum Mac pegou o trabalho (o GitHub cancela depois de ~15 minutos na fila),
@@ -102,7 +115,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           TENTATIVA: ${{ github.event.inputs.tentativa || '1' }}
         run: |
-          if gh release view "ios-b${{ github.run_number }}" >/dev/null 2>&1; then echo "IPA publicado."; exit 0; fi
+          if gh release view "ios-b${{ github.run_number }}" >/dev/null 2>&1 || gh release view "ios-dev-b${{ github.run_number }}" >/dev/null 2>&1; then echo "IPA publicado."; exit 0; fi
           if [ "$TENTATIVA" -ge 4 ]; then echo "::warning title=IPA::Sem Mac livre depois de 4 tentativas. Rode o workflow de novo mais tarde."; exit 0; fi
           echo "Nenhum Mac livre: tentativa $((TENTATIVA + 1)) de 4."
-          gh workflow run ios.yml --ref main -f tentativa=$((TENTATIVA + 1))
+          gh workflow run ios.yml --ref main -f tentativa=$((TENTATIVA + 1)) -f dev=${{ github.event.inputs.dev || 'false' }}

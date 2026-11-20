@@ -1,0 +1,161 @@
+{
+ "id": "c2_vilao_kaua",
+ "titulo": "Vilão · Kauã Influencer",
+ "balao": true,
+ "descricao": "Entrada do vilão.",
+ "cenas": [
+  {
+   "titulo": "SERRA DO PERIPERI",
+   "cenario": "serra",
+   "hora": 16.5,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 4340,
+     "y": 160,
+     "zoom": 1.4
+    },
+    "para": {
+     "x": 4300,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4.5
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 4120,
+     "ate": 4220,
+     "tempo": [
+      0.5,
+      2
+     ],
+     "anim": "andando"
+    },
+    {
+     "quem": "c2_kaua_influencer",
+     "x": 4420,
+     "olhando": -1,
+     "anim": "celular_mao"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "CRISTO DE MÁRIO CRAVO",
+     "sub": "SERRA DO PERIPERI",
+     "t": 0.3,
+     "dur": 3
+    },
+    {
+     "tipo": "neblina",
+     "forca": 0.3
+    }
+   ],
+   "sons": [
+    {
+     "som": "vento",
+     "t": 0.2
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_kaua_influencer",
+     "texto": "E AÍ, GALERA DO KAUÃ! Hoje o vídeo é: HUMILHANDO UM FORASTEIRO NO CRISTO!"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Desliga isso!"
+    },
+    {
+     "quem": "c2_kaua_influencer",
+     "texto": "Ele tá bravo, galera! Deixa o like! Ativa o sininho!"
+    },
+    {
+     "quem": "c2_kaua_influencer",
+     "texto": "Bora ver ele tomar uma surra AO VIVO! Três... dois...",
+     "emocao": "taunted"
+    }
+   ]
+  },
+  {
+   "titulo": "SERRA DO PERIPERI",
+   "cenario": "serra",
+   "hora": 16.5,
+   "duracao": 1.6,
+   "camera": {
+    "de": {
+     "x": 4400,
+     "y": 420,
+     "zoom": 2.4
+    },
+    "para": {
+     "x": 4400,
+     "y": 420,
+     "zoom": 2.4
+    },
+    "tempo": 1
+   },
+   "atores": [
+    {
+     "quem": "c2_kaua_influencer",
+     "x": 4420,
+     "olhando": -1,
+     "anim": "celular_mao"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "flash",
+     "t": 0.5,
+     "dur": 0.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "plim",
+     "t": 0.5
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 3.6,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "vs",
+     "vilao": "c2_kaua_influencer",
+     "nome": "KAUÃ INFLUENCER",
+     "titulo": "2 MILHÕES DE SEGUIDORES (QUASE)",
+     "cor": "#c8d8ff",
+     "t": 0,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vs",
+     "t": 0.35
+    },
+    {
+     "som": "tambor",
+     "t": 1.2
+    }
+   ]
+  }
+ ]
+}

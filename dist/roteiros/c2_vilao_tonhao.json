@@ -1,0 +1,178 @@
+{
+ "id": "c2_vilao_tonhao",
+ "titulo": "Vilão · Tonhão do Mototáxi",
+ "balao": true,
+ "descricao": "Entrada do vilão.",
+ "cenas": [
+  {
+   "titulo": "MONUMENTO AO ÍNDIO",
+   "cenario": "avenidas",
+   "hora": 11,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 1100,
+     "y": 400,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 1400,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "tempo": 4
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1240,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_tonhao",
+     "x": 1560,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "letreiro",
+     "texto": "MONUMENTO AO ÍNDIO",
+     "sub": "AVENIDAS",
+     "t": 0.2,
+     "dur": 3
+    }
+   ],
+   "sons": [
+    {
+     "som": "buzina",
+     "t": 0.8
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_tonhao",
+     "texto": "Corrida, forasteiro? Pra onde? Faço preço!"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Só até a feira."
+    },
+    {
+     "quem": "c2_tonhao",
+     "texto": "Cento e cinquenta reais."
+    },
+    {
+     "quem": "daroca",
+     "texto": "CENTO E CINQUENTA?! A feira é logo ali!",
+     "emocao": "confused"
+    },
+    {
+     "quem": "c2_tonhao",
+     "texto": "Taxa de neblina, taxa de forasteiro, taxa de chinelo e taxa de cara feia."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Eu vou a pé."
+    }
+   ]
+  },
+  {
+   "titulo": "MONUMENTO AO ÍNDIO",
+   "cenario": "avenidas",
+   "hora": 11,
+   "camera": {
+    "de": {
+     "x": 1500,
+     "y": 420,
+     "zoom": 2.0
+    },
+    "para": {
+     "x": 1520,
+     "y": 420,
+     "zoom": 2.3
+    },
+    "tempo": 3
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1400,
+     "olhando": -1
+    },
+    {
+     "quem": "c2_tonhao",
+     "x": 1560,
+     "olhando": -1,
+     "anim": "raiva"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "texto",
+     "texto": "FOOOM!",
+     "x": 560,
+     "y": 170,
+     "cor": "#f08a24",
+     "t": 0.6,
+     "dur": 1.3
+    },
+    {
+     "tipo": "tremer",
+     "t": 0.6,
+     "forca": 8
+    }
+   ],
+   "sons": [
+    {
+     "som": "buzina",
+     "t": 0.5
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_tonhao",
+     "texto": "A PÉ?! Ninguém foge do Tonhão! Ninguém!"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 3.6,
+   "trilha": "vilao",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "vs",
+     "vilao": "c2_tonhao",
+     "nome": "TONHÃO",
+     "titulo": "O REI DO MOTOTÁXI",
+     "cor": "#f08a24",
+     "t": 0,
+     "dur": 3.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "vs",
+     "t": 0.35
+    },
+    {
+     "som": "tambor",
+     "t": 1.2
+    }
+   ]
+  }
+ ]
+}

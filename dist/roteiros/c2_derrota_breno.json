@@ -1,0 +1,85 @@
+{
+ "id": "c2_derrota_breno",
+ "titulo": "Derrota · Breno Pitbull",
+ "balao": true,
+ "descricao": "Depois da luta: uma pista do Jorge e a garrafada liberada.",
+ "cenas": [
+  {
+   "titulo": "TEATRO GLAUBER ROCHA",
+   "cenario": "teatro",
+   "hora": 21,
+   "trilha": "saudade",
+   "camera": {
+    "de": {
+     "x": 1540,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "para": {
+     "x": 1540,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1460,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_breno",
+     "x": 1620,
+     "olhando": -1,
+     "anim": "ajoelhado"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_breno",
+     "texto": "Ninguém nunca me derrubou assim..."
+    },
+    {
+     "quem": "c2_breno",
+     "texto": "Respeito. Sério."
+    },
+    {
+     "quem": "c2_breno",
+     "texto": "Teu amigo vive na lan house do shopping com uns gêmeos. Só que os gêmeos não sabem perder."
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 4.8,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "poder",
+     "poder": "supersoco",
+     "t": 0,
+     "dur": 4.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "poder",
+     "t": 0.2
+    }
+   ]
+  }
+ ]
+}

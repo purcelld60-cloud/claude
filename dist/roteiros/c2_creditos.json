@@ -1,0 +1,418 @@
+{
+ "id": "c2_creditos",
+ "titulo": "Campanha 2 · Créditos",
+ "balao": true,
+ "automatico": true,
+ "descricao": "Créditos com todo o elenco da Campanha 2.",
+ "cenas": [
+  {
+   "titulo": "CRÉDITOS",
+   "fundo": "preto",
+   "duracao": 4.5,
+   "trilha": "final",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "cartao",
+     "texto": "DA ROÇA ADVENTURE",
+     "sub": "CAMPANHA 2 · VITÓRIA DA CONQUISTA",
+     "t": 0.3,
+     "dur": 4
+    }
+   ],
+   "sons": [
+    {
+     "som": "sino",
+     "t": 0.4
+    }
+   ]
+  },
+  {
+   "titulo": "O TRIO",
+   "cenario": "roca",
+   "hora": 17.3,
+   "duracao": 7,
+   "camera": {
+    "de": {
+     "x": 420,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "para": {
+     "x": 600,
+     "y": 420,
+     "zoom": 1.7
+    },
+    "tempo": 6.8,
+    "curva": "linear"
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 480,
+     "olhando": 1,
+     "emocao": "friend"
+    },
+    {
+     "quem": "reeis",
+     "x": 560,
+     "anim": "pulando"
+    },
+    {
+     "quem": "jorge",
+     "x": 640,
+     "olhando": -1,
+     "emocao": "friend"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "coracoes"
+    },
+    {
+     "tipo": "cartao",
+     "texto": "O TRIO",
+     "sub": "DA ROÇA · REEIS · JORGE",
+     "t": 0.8,
+     "dur": 5
+    }
+   ]
+  },
+  {
+   "titulo": "CONQUISTA",
+   "cenario": "pensao",
+   "hora": 9,
+   "duracao": 8,
+   "camera": {
+    "de": {
+     "x": 1500,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "para": {
+     "x": 2100,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "tempo": 7.6,
+    "curva": "linear"
+   },
+   "atores": [
+    {
+     "quem": "c2_ze_taxi",
+     "x": 1380,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_lurdes",
+     "x": 1520,
+     "olhando": 1
+    },
+    {
+     "quem": "miguel",
+     "x": 1640,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_mel",
+     "x": 1760,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_picole",
+     "x": 1880,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_vo_cida",
+     "x": 2000,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_biscoito",
+     "x": 2100,
+     "olhando": -1
+    },
+    {
+     "quem": "c2_nando",
+     "x": 2200,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "cartao",
+     "texto": "A GENTE DE CONQUISTA",
+     "sub": "SEU ZÉ · DONA LURDES · MIGUEL · MEL · TIO DO PICOLÉ · VÓ CIDA · BISCOITO · NANDO",
+     "t": 0.6,
+     "dur": 6.6,
+     "y": 110
+    }
+   ]
+  },
+  {
+   "titulo": "CONQUISTA",
+   "cenario": "feira",
+   "hora": 10,
+   "duracao": 8,
+   "camera": {
+    "de": {
+     "x": 1300,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "para": {
+     "x": 1900,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "tempo": 7.6,
+    "curva": "linear"
+   },
+   "atores": [
+    {
+     "quem": "c2_juninho",
+     "x": 1200,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_larissa",
+     "x": 1320,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_gugu",
+     "x": 1440,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_bia",
+     "x": 1560,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_carlinhos",
+     "x": 1680,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_lindomar",
+     "x": 1800,
+     "olhando": -1
+    },
+    {
+     "quem": "c2_cleiton",
+     "x": 1920,
+     "olhando": -1
+    },
+    {
+     "quem": "c2_rosilda",
+     "x": 2020,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "cartao",
+     "texto": "MAIS GENTE BOA",
+     "sub": "JUNINHO · LARISSA · GUGU · BIA DO ARROCHA · CARLINHOS · SEU LINDOMAR · CLEITON · DONA ROSILDA",
+     "t": 0.6,
+     "dur": 6.6,
+     "y": 110
+    }
+   ]
+  },
+  {
+   "titulo": "OS VILÕES",
+   "cenario": "avenidas",
+   "hora": 17,
+   "duracao": 8.5,
+   "camera": {
+    "de": {
+     "x": 1300,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "para": {
+     "x": 2000,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "tempo": 8,
+    "curva": "linear"
+   },
+   "atores": [
+    {
+     "quem": "c2_creuza",
+     "x": 1180,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_tonhao",
+     "x": 1300,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_valdomiro",
+     "x": 1420,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_kaua_influencer",
+     "x": 1540,
+     "olhando": 1,
+     "anim": "celular_mao"
+    },
+    {
+     "quem": "c2_barao",
+     "x": 1660,
+     "olhando": 1,
+     "anim": "treme"
+    },
+    {
+     "quem": "c2_breno",
+     "x": 1780,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_ryan",
+     "x": 1890,
+     "olhando": -1
+    },
+    {
+     "quem": "c2_bryan",
+     "x": 1960,
+     "olhando": -1
+    },
+    {
+     "quem": "fred_conquista",
+     "x": 2080,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "cartao",
+     "texto": "OS VILÕES (QUE NEM ERAM TÃO VILÕES)",
+     "sub": "CREUZA · TONHÃO · VALDOMIRO · KAUÃ · BARÃO · BRENO · RYAN E BRYAN · FRED",
+     "t": 0.6,
+     "dur": 7,
+     "y": 110
+    }
+   ]
+  },
+  {
+   "titulo": "ITABUNA MANDA LEMBRANÇAS",
+   "cenario": "praca",
+   "hora": 18.4,
+   "duracao": 8,
+   "camera": {
+    "de": {
+     "x": 600,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "para": {
+     "x": 1200,
+     "y": 420,
+     "zoom": 1.5
+    },
+    "tempo": 7.6,
+    "curva": "linear"
+   },
+   "atores": [
+    {
+     "quem": "lucas",
+     "x": 520,
+     "olhando": 1
+    },
+    {
+     "quem": "caleb",
+     "x": 640,
+     "olhando": 1
+    },
+    {
+     "quem": "mota",
+     "x": 760,
+     "olhando": 1
+    },
+    {
+     "quem": "rayssa",
+     "x": 880,
+     "olhando": 1
+    },
+    {
+     "quem": "analaura",
+     "x": 980,
+     "olhando": -1
+    },
+    {
+     "quem": "almiro",
+     "x": 1100,
+     "olhando": -1
+    },
+    {
+     "quem": "nikolas",
+     "x": 1220,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "cartao",
+     "texto": "ITABUNA MANDA LEMBRANÇAS",
+     "sub": "LUCAS · CALEB · MOTA · RAYSSA · ANA LAURA · PROF. ALMIRO · NIKOLAS",
+     "t": 0.6,
+     "dur": 6.6,
+     "y": 110
+    }
+   ]
+  },
+  {
+   "titulo": "OBRIGADO",
+   "fundo": "preto",
+   "duracao": 6,
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "cartao",
+     "texto": "OBRIGADO POR JOGAR!",
+     "sub": "E LIGA PRAQUELE AMIGO. ELE TAMBÉM SENTE SAUDADE.",
+     "t": 0.3,
+     "dur": 5.5
+    },
+    {
+     "tipo": "coracoes"
+    }
+   ],
+   "sons": [
+    {
+     "som": "fanfarra",
+     "t": 0.4
+    }
+   ]
+  }
+ ]
+}

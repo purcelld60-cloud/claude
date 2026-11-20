@@ -1,0 +1,267 @@
+{
+ "id": "c2_aeroporto",
+ "titulo": "Campanha 2 · Aeroporto de Itabuna",
+ "balao": true,
+ "descricao": "Miguel aparece no aeroporto, ensina a viajar e o portão vira ponto sem volta.",
+ "cenas": [
+  {
+   "titulo": "AEROPORTO DE ITABUNA",
+   "cenario": "aeroporto",
+   "hora": 8,
+   "duracao": 5.5,
+   "camera": {
+    "de": {
+     "x": 200,
+     "y": 420,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 560,
+     "y": 420,
+     "zoom": 1.4
+    },
+    "tempo": 5
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 60,
+     "ate": 520,
+     "tempo": [
+      0.4,
+      4.8
+     ],
+     "anim": "andando"
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "entrada",
+     "dur": 1
+    },
+    {
+     "tipo": "letreiro",
+     "texto": "AEROPORTO DE ITABUNA",
+     "sub": "O DIA DA VIAGEM",
+     "t": 0.4,
+     "dur": 3.4
+    }
+   ],
+   "sons": [
+    {
+     "som": "passos",
+     "t": 0.6
+    },
+    {
+     "som": "passos",
+     "t": 2
+    },
+    {
+     "som": "sino",
+     "t": 3.4
+    }
+   ]
+  },
+  {
+   "titulo": "AEROPORTO DE ITABUNA",
+   "cenario": "aeroporto",
+   "hora": 8,
+   "camera": {
+    "de": {
+     "x": 560,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "para": {
+     "x": 600,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 520,
+     "olhando": 1,
+     "anim": "pergunta"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "daroca",
+     "texto": "Passaporte: ok. Mochila: ok. Coragem: mais ou menos."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Agora... como é que pega um avião?",
+     "emocao": "confused"
+    }
+   ]
+  },
+  {
+   "titulo": "AEROPORTO DE ITABUNA",
+   "cenario": "aeroporto",
+   "hora": 8,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 600,
+     "y": 420,
+     "zoom": 1.7
+    },
+    "para": {
+     "x": 640,
+     "y": 420,
+     "zoom": 1.8
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 520,
+     "olhando": 1,
+     "anim": "exclama"
+    },
+    {
+     "quem": "miguel",
+     "x": 820,
+     "ate": 660,
+     "tempo": [
+      0,
+      1.2
+     ],
+     "anim": "andando",
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "texto",
+     "texto": "MIGUEL!",
+     "x": 700,
+     "y": 170,
+     "cor": "#5ac8ff",
+     "t": 1.2,
+     "dur": 1.2
+    }
+   ],
+   "sons": [
+    {
+     "som": "plim",
+     "t": 1.2
+    }
+   ],
+   "falas": [
+    {
+     "quem": "miguel",
+     "texto": "DA ROÇA?! Tu vai viajar SOZINHO? Logo tu, que se perde no corredor da escola?"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Miguel?! O que tu tá fazendo aqui?",
+     "emocao": "friend"
+    },
+    {
+     "quem": "miguel",
+     "texto": "Voltei do intercâmbio semana passada. Vim buscar minha mãe no voo das nove."
+    },
+    {
+     "quem": "miguel",
+     "texto": "Mas pelo visto vou te dar uma aula de viagem. De graça. Só porque gosto de tu."
+    },
+    {
+     "quem": "miguel",
+     "texto": "Três passos: check-in, raio-X, portão. Repete comigo."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Chiquim, raio... raio que o parta, e... portão!"
+    },
+    {
+     "quem": "miguel",
+     "texto": "...Vai ser um longo dia."
+    }
+   ]
+  },
+  {
+   "titulo": "O PORTÃO",
+   "cenario": "aeroporto",
+   "hora": 9.5,
+   "trilha": "saudade",
+   "camera": {
+    "de": {
+     "x": 1700,
+     "y": 420,
+     "zoom": 1.6
+    },
+    "para": {
+     "x": 1740,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "tempo": 9
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1700,
+     "olhando": -1,
+     "emocao": "sad"
+    },
+    {
+     "quem": "miguel",
+     "x": 1780,
+     "olhando": -1
+    }
+   ],
+   "efeitos": [
+    {
+     "tipo": "vinheta",
+     "forca": 0.55
+    },
+    {
+     "tipo": "letreiro",
+     "texto": "PORTÃO DE EMBARQUE",
+     "sub": "SEM VOLTA",
+     "t": 0,
+     "dur": 2.6
+    }
+   ],
+   "falas": [
+    {
+     "quem": "miguel",
+     "texto": "Depois desse portão não tem volta, hein. Itabuna fica."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Eu sei.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "daroca",
+     "texto": "Lucas, Reeis, o pessoal da roça... segura as pontas aí, Itabuna.",
+     "emocao": "sad"
+    },
+    {
+     "quem": "miguel",
+     "texto": "Ô. Leva meu casaco. Conquista não é brincadeira."
+    },
+    {
+     "quem": "daroca",
+     "texto": "Casaco? Na BAHIA? Tu tá doido, Miguel.",
+     "emocao": "friend"
+    },
+    {
+     "quem": "miguel",
+     "texto": "...Depois não diz que eu não avisei."
+    },
+    {
+     "quem": "miguel",
+     "texto": "E Da Roça? Traz o Gordo de volta. Do jeito que der."
+    }
+   ]
+  }
+ ]
+}

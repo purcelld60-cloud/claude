@@ -1,0 +1,95 @@
+{
+ "id": "c2_derrota_gemeos",
+ "titulo": "Derrota · Ryan e Bryan",
+ "balao": true,
+ "descricao": "Depois da luta: uma pista do Jorge e a garrafada liberada.",
+ "cenas": [
+  {
+   "titulo": "LAN HOUSE PLANALTO",
+   "cenario": "shopping",
+   "hora": 15.5,
+   "trilha": "saudade",
+   "camera": {
+    "de": {
+     "x": 3540,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "para": {
+     "x": 3540,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 3440,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_ryan",
+     "x": 3600,
+     "olhando": -1,
+     "anim": "suor"
+    },
+    {
+     "quem": "c2_bryan",
+     "x": 3680,
+     "olhando": -1,
+     "anim": "raiva"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_bryan",
+     "texto": "LAG! FOI LAG! EXIJO REVANCHE!"
+    },
+    {
+     "quem": "c2_ryan",
+     "texto": "...Para, Bryan. Ele ganhou."
+    },
+    {
+     "quem": "c2_ryan",
+     "texto": "O Jorge estuda no SESI, na Olívia Flores. Amanhã tem apresentação no pátio."
+    },
+    {
+     "quem": "c2_ryan",
+     "texto": "O Fred vai estar do lado dele. O Fred sempre está do lado dele."
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 4.8,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "poder",
+     "poder": "clone",
+     "t": 0,
+     "dur": 4.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "poder",
+     "t": 0.2
+    }
+   ]
+  }
+ ]
+}

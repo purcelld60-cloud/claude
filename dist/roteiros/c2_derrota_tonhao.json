@@ -1,0 +1,85 @@
+{
+ "id": "c2_derrota_tonhao",
+ "titulo": "Derrota · Tonhão do Mototáxi",
+ "balao": true,
+ "descricao": "Depois da luta: uma pista do Jorge e a garrafada liberada.",
+ "cenas": [
+  {
+   "titulo": "MONUMENTO AO ÍNDIO",
+   "cenario": "avenidas",
+   "hora": 11.5,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 1480,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "para": {
+     "x": 1480,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 1400,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_tonhao",
+     "x": 1560,
+     "olhando": -1,
+     "anim": "suor"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_tonhao",
+     "texto": "Tá, tá... a corrida é de graça. Só hoje. Não espalha."
+    },
+    {
+     "quem": "c2_tonhao",
+     "texto": "O teu amigo de cachinho? Já levei ele pra feira umas vezes. Pagou certinho, diferente de você."
+    },
+    {
+     "quem": "c2_tonhao",
+     "texto": "Ele compra biscoito com o Valdomiro. Mas cuidado: o Valdomiro é dono da feira inteira."
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 4.8,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "poder",
+     "poder": "buzina",
+     "t": 0,
+     "dur": 4.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "poder",
+     "t": 0.2
+    }
+   ]
+  }
+ ]
+}

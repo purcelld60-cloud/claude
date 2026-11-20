@@ -1,0 +1,90 @@
+{
+ "id": "c2_derrota_creuza",
+ "titulo": "Derrota · Dona Creuza",
+ "balao": true,
+ "descricao": "Depois da luta: uma pista do Jorge e a garrafada liberada.",
+ "cenas": [
+  {
+   "titulo": "BAIRRO DA PENSÃO",
+   "cenario": "pensao",
+   "hora": 10.5,
+   "trilha": "conquista",
+   "camera": {
+    "de": {
+     "x": 2440,
+     "y": 420,
+     "zoom": 1.9
+    },
+    "para": {
+     "x": 2440,
+     "y": 420,
+     "zoom": 2.1
+    },
+    "tempo": 6
+   },
+   "atores": [
+    {
+     "quem": "daroca",
+     "x": 2360,
+     "olhando": 1
+    },
+    {
+     "quem": "c2_creuza",
+     "x": 2520,
+     "olhando": -1,
+     "anim": "suor"
+    }
+   ],
+   "falas": [
+    {
+     "quem": "c2_creuza",
+     "texto": "Tá bom, tá bom! Você não é perigoso. Só é friorento."
+    },
+    {
+     "quem": "c2_creuza",
+     "texto": "Mas que você tá procurando alguém, isso eu sei. Eu sempre sei."
+    },
+    {
+     "quem": "c2_creuza",
+     "texto": "Um menino de cachinho, magrelo, óculos fininho... passa aqui às vezes. Sempre com um topetudo do lado."
+    },
+    {
+     "quem": "daroca",
+     "texto": "O JORGE!",
+     "emocao": "friend"
+    }
+   ]
+  },
+  {
+   "fundo": "preto",
+   "duracao": 4.8,
+   "trilha": "flashback",
+   "camera": {
+    "de": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    },
+    "para": {
+     "x": 480,
+     "y": 270,
+     "zoom": 1.0
+    }
+   },
+   "efeitos": [
+    {
+     "tipo": "poder",
+     "poder": "fofoca",
+     "t": 0,
+     "dur": 4.6
+    }
+   ],
+   "sons": [
+    {
+     "som": "poder",
+     "t": 0.2
+    }
+   ]
+  }
+ ]
+}
