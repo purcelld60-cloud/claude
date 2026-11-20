@@ -5,6 +5,7 @@
   const chapters=[
     {id:'carro',flag:'lucas',scene:0,title:'O carro do pai',description:'Busque três peças nos parkours da roça e leve tudo a Lucas para consertar o carro a gás.'},
     {id:'futebol',flag:'mota',scene:7,title:'Treino de craque',description:'Conheça Gabriel Mota no campo. Vença o desafio de futebol, ganhe experiência e libere o dash.'},
+    {id:'jantar-amanda',flag:'amandaDating',scene:4,title:'Uma mesa para dois',description:'Encontre Amanda perto da entrada da Praça Camacan. Aceite o convite para jantar e encontre o seu ritmo à mesa.'},
     {id:'cadernos',flag:'almiro',scene:1,title:'Operação caderno',description:'Ajude Almiro a recuperar três cadernos nos corredores e plataformas do colégio.'},
     {id:'english',flag:'miqueias',scene:1,title:'English da resenha',description:'Entre na sala de Miqueias e passe pelo desafio de inglês para despertar as bolinhas elementais.'},
     {id:'braco-forte',flag:'freddy',scene:5,title:'O braço forte do Reeis',description:'Suba a favela e desafie Freddy no pátio antes do rei. O capanga mais forte ainda tira onda do próprio chefe.'},
@@ -15,7 +16,7 @@
     {id:'shape',flag:'trained',scene:2,title:'O treino do bolo',description:'Complete o treino de reflexo de Caleb para ficar bombado e preparar a luta final.'},
     {id:'amizade-bolo',flag:'nikolas',scene:3,title:'Um amigo e um bolo',description:'Leve o carro até a quadra, enfrente Nikolas e decida o futuro dessa amizade.'}
   ];
-  const npcEntries={ollyan:{name:'Ollyan · Orelhas ao Vento',scene:11,x:3260,y:440},mota:{name:'Gabriel Mota · craque',scene:7,x:500},davi:{name:'Davi Costa · barbeiro',scene:8,x:520},vitor:{name:'Vitor · ajudante',scene:8,x:850},freddy:{name:'Freddy · braço forte do Reeis',scene:5,x:5680},nicolas:{name:'Nicolas Carvalho',scene:4,x:5350},aica:{name:'Aica',scene:9,x:500},ravile:{name:'Ravile',scene:9,x:670},arthur:{name:'Arthur',scene:9,x:2850},dede:{name:'Dedé · capanga do Reeis',scene:5,x:5000},allef:{name:'Allef · recepção da Bigodon',scene:8,x:240},eloisa:{name:'Eloisa',scene:10,x:450},giselle:{name:'Giselle',scene:10,x:820},rayssa:{name:'Rayssa',scene:10,x:1220},analaura:{name:'Ana Laura',scene:10,x:1580}};
+  const npcEntries={...window.WorldData?.npcEntries,ollyan:{name:'Ollyan · Orelhas ao Vento',scene:11,x:3260,y:440},mota:{name:'Gabriel Mota · craque',scene:7,x:500},davi:{name:'Davi Costa · barbeiro',scene:8,x:520},vitor:{name:'Vitor · ajudante',scene:8,x:850},freddy:{name:'Freddy · braço forte do Reeis',scene:5,x:5680},nicolas:{name:'Nicolas Carvalho',scene:4,x:5350},aica:{name:'Aica',scene:9,x:500},ravile:{name:'Ravile',scene:9,x:670},arthur:{name:'Arthur',scene:9,x:2850},dede:{name:'Dedé · capanga do Reeis',scene:5,x:5000},allef:{name:'Allef · recepção da Bigodon',scene:8,x:240},eloisa:{name:'Eloisa',scene:10,x:450},giselle:{name:'Giselle',scene:10,x:820},rayssa:{name:'Rayssa',scene:10,x:1220},analaura:{name:'Ana Laura',scene:10,x:1580}};
   // Essas resenhas rendem recompensas, mas nunca bloqueiam a busca pelo bolo.
   const sideQuests=[
     {id:'bigodon',flag:'bigodon',scene:8,title:'Na régua da resenha',description:'Visite a Bigodon e converse com Davi Costa para dar uma pausa na aventura e recuperar o fôlego.'},
@@ -38,7 +39,7 @@
     if(n===5){if(!has(q,'mota'))return no('Treine futebol com Mota para liberar o dash antes de subir o morro.');if(!has(q,'almiro'))return no('Ajude Almiro com os três cadernos na primeira sala do colégio.');if(!has(q,'miqueias'))return no('Complete o English da resenha com Miqueias na segunda sala.');return ok();}
     if(n===6)return has(q,'marco')?ok():no('Enfrente Marco no colégio para descobrir a entrada do Caderno do Caos.');
     if(n===2)return has(q,'menezes')?ok():no('Resolva a provocação de Menezes no fim do colégio antes do treino com Caleb.');
-    if(n===3){if(!has(q,'giant'))return no('O monstro gigante do Caderno do Caos ainda está solto!');if(!has(q,'menezes'))return no('Derrote Menezes no fim do colégio antes de buscar Nikolas.');if(!has(q,'trained'))return no('Caleb precisa terminar seu treino de reflexo na academia.');return ok();}
+    if(n===3){if(!has(q,'giant'))return no('O monstro gigante do Caderno do Caos ainda está solto!');if(!has(q,'menezes'))return no('Derrote Menezes no fim do colégio antes de buscar Nikolas.');if(!has(q,'trained'))return no('Caleb precisa terminar seu treino de reflexo na academia.');if(!q.amandaDating&&!q.nikolas)return no('Antes da final, encontre Amanda na entrada da Praça Camacan e conclua o jantar.');return ok();}
     return ok();
   }
   function bossRequirement(type,q={}){
@@ -75,6 +76,7 @@
   function currentQuest(q={},extra={}){
     if(!q.lucas){const parts=Math.min(3,count(q.carParts,count(extra.carParts)));return !q.carMissionAccepted?['O carro não pega','Fale com Lucas na roça. O carro a gás do seu pai precisa de três peças para voltar à aventura.']:parts<3?['Peças pela roça',`${parts}/3 peças encontradas. Atravesse os parkours do pomar, da trilha alta e do riacho. Depois volte a Lucas.`]:['Chave na mão, gás no motor','As três peças estão com você! Volte a Lucas na roça e conserte o carro a gás.'];}
     if(!q.mota)return ['Mota, o craque da escola','Entre no carro e vá ao Campo do Mota. Vença o treino de futebol para ganhar XP e liberar o dash.'];
+    if(!q.amandaDating&&!q.nikolas)return ['Uma mesa para dois',q.amandaInvited?'Amanda guardou a mesa. Volte à entrada da Praça Camacan para retomar o convite.':'Amanda espera perto da entrada da Praça Camacan. Vá de carro e fale com ela para jantar.'];
     if(!q.almiro){const books=Math.min(3,count(q.notebooks,count(extra.notebooks)));if(books>=3)return ['Cadernos recuperados','Volte à primeira sala do colégio e entregue os três cadernos ao professor Almiro.'];return !q.almiroAccepted?['Uma missão com Almiro','No Colégio Adventista, entre na primeira sala com E e converse com Almiro.']:['Operação caderno',`${books}/3 cadernos recuperados. Explore as plataformas e corredores antes de Marco; devolva tudo na sala de Almiro.`];}
     if(!q.miqueias)return ['ALLRIGHT! Hora do English','Entre na segunda sala do colégio e faça o desafio de Miqueias. Ele vai liberar seu poder elemental.'];
     if(!q.reeis&&!q.freddy)return ['Freddy segura a passagem','Suba a Favela do Reeis e desafie Freddy no pátio antes do rei. O braço forte do chefe também é o primeiro a gritar REEEIS!'];
@@ -89,15 +91,15 @@
   }
   // Saves antigos que já recrutaram Reeis mantêm o capítulo e a campanha concluídos.
   function chapterDone(c,q){return !!q[c.flag]||(c.flag==='freddy'&&!!q.reeis);}
-  function chapterState(q={}){return chapters.map((c,index)=>({...c,index:index+1,complete:chapterDone(c,q)}));}
+  function chapterState(q={}){return chapters.map((c,index)=>({...c,index:index+1,complete:chapterDone(c,q),epilogue:c.flag==='amandaDating'&&!!q.nikolas&&!q.amandaDating}));}
   function sideQuestState(q={}){
     const rows=sideQuests.map(c=>({...c,complete:!!q[c.flag],...(c.flag==='arthur'&&q.patioAccepted&&!q.arthur?{description:'Ravile e Aica pediram ajuda. Encontre Arthur no fim do pátio e encerre a confusão sem puxar o cabelo de ninguém.'}:{})}));
     for(const [id,scene,title,description]of [['zefa',0,'O pedido de Dona Zefa','Fale com Dona Zefa, resolva a bomba do pomar, confira o caixote de frutas e volte à quitanda.'],['tonico',8,'Circuito limpo, praça acesa','Converse com Seu Tonico na Bigodon. Conserte as luzes da Camacan, complete a coleta do pátio e volte para receber seus materiais.']])rows.push({id:'vida-'+id,scene,title,description,complete:!!q.worldLife?.quests?.[id]?.done});
     for(const [id,scene,title]of [['pump-roca',0,'Água para o pomar'],['sort-school',1,'Coleta no corredor'],['switch-camacan',4,'Acenda a Praça Camacan'],['pump-campo',7,'Bolas no ponto'],['sort-patio',9,'Mutirão do recreio'],['switch-baile',11,'Luzes para o show']])rows.push({id:'vida-'+id,scene,title,description:'Encontre o objeto com este nome e complete o desafio. A primeira vitória dá XP e materiais; depois, pratique para melhorar seu recorde.',complete:!!q.worldLife?.completed?.[id]});
     return rows;
   }
-  function completion(q={}){return Math.round(chapters.filter(c=>chapterDone(c,q)).length/chapters.length*100);}
-  const rewards={repair:180,football:220,footballReplay:70,almiro:240,miqueias:240,bigodon:120,vitor:60,freddy:420,nicolas:700,arthur:450,dede:340,reeisBoss:550,marco:480,giant:800,menezes:600,training:300,nikolas:1000,rayssaVisit:90,bivoltUnlocked:180,ollyan:700};
+  function completion(q={}){const story=chapterState(q).filter(c=>!c.epilogue);return Math.round(story.filter(c=>c.complete).length/story.length*100);}
+  const rewards={amanda:160,repair:180,football:220,footballReplay:70,almiro:240,miqueias:240,bigodon:120,vitor:60,freddy:420,nicolas:700,arthur:450,dede:340,reeisBoss:550,marco:480,giant:800,menezes:600,training:300,nikolas:1000,rayssaVisit:90,bivoltUnlocked:180,ollyan:700};
   const data={version:'3.4.0',sceneNames,chapters,sideQuests,npcEntries,rewards,canTravel,bossRequirement,currentQuest,chapterState,sideQuestState,completion,repairParts:['fan','pipe','spark'],notebookIds:['caderno-01','caderno-02','caderno-03']};
   function freeze(o){if(o&&typeof o==='object'){Object.values(o).forEach(freeze);Object.freeze(o);}return o;}
   window.Campaign=freeze(data);

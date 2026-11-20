@@ -261,7 +261,7 @@
     Object.freeze(['mota','caleb','almiro','miqueias','kaua']),
     Object.freeze(['freddy','dede','marco','menezes','nicolas']),
     Object.freeze(['aica','ravile','arthur','ravid','giant']),
-    Object.freeze(['allef','eloisa','giselle','rayssa','analaura'])
+    Object.freeze(['allef','eloisa','giselle','rayssa','analaura','amanda'])
   ]);
   const PARTY_CAST=Object.freeze(PARTY_GROUPS.flat());
   function acai(c,x,y,t,scale=1){

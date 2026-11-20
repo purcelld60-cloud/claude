@@ -53,7 +53,7 @@ O [mapa do README](../README.md#onde-alterar-cada-parte) ajuda a selecionar os a
 
 ## O que acompanha a cópia pública
 
-O cliente está em `dist/`, o servidor em `worker/`, o banco em `drizzle/`, os aplicativos em `native/` e as ferramentas em `tools/`. Os MP3 enviados ao painel e fotos pessoais não acompanham o pacote; `dist/music/config.json` começa com a biblioteca vazia. Os efeitos sonoros originais do jogo e suas informações de procedência continuam incluídos.
+O cliente está em `dist/`, o servidor em `worker/`, o banco em `drizzle/`, os aplicativos em `native/` e as ferramentas em `tools/`. O catálogo original fica em `dist/music/config.json`. Depois de clonar, rode `python3 .github/scripts/restaurar_trilhas.py` para recuperar e verificar as 12 músicas. O ZIP de distribuição com trilhas já vem com os arquivos. Fotos pessoais ficam fora do pacote. Os efeitos sonoros originais do jogo e suas informações de procedência continuam incluídos.
 
 O pacote não contém o banco de jogadores, senhas do painel, tokens, arquivos `.env`, keystores, chaves privadas ou a identidade de hospedagem do projeto oficial. Ter o código de autenticação permite adaptá-lo à sua instalação; não concede uma sessão de administrador no serviço original.
 

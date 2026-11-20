@@ -25,6 +25,8 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Recuperar e conferir as trilhas da campanha
+        run: python3 .github/scripts/restaurar_trilhas.py
       - name: Lista de músicas (dist/musicas)
         run: python3 .github/scripts/musicas.py
       - uses: actions/upload-pages-artifact@v3

@@ -43,6 +43,11 @@ jobs:
         with:
           node-version: '20'
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Recuperar e conferir as trilhas da campanha
+        run: python .github/scripts/restaurar_trilhas.py
       - name: Lista de músicas (dist/musicas)
         run: python3 .github/scripts/musicas.py || python .github/scripts/musicas.py
 

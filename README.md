@@ -1,12 +1,13 @@
 # Da Roça Adventure
 
-> **Sobre este repositório:** ele contém a pasta `dist/` (o jogo completo para navegador) e a documentação. As pastas `worker/`, `drizzle/`, `native/` e `tools/` do pacote original ainda não foram incluídas, então por enquanto use a alternativa com `python3 -m http.server` abaixo:
+> Para jogar esta cópia a partir do GitHub, abra um terminal na raiz do projeto e execute os dois comandos abaixo. Depois, abra **http://127.0.0.1:8080**.
 >
 > ```sh
+> python3 .github/scripts/restaurar_trilhas.py
 > python3 -m http.server 8080 --bind 127.0.0.1 --directory dist
 > ```
 >
-> Arquivos reconstruídos nesta cópia, porque não vieram no envio: `dist/updates.js` (aviso de nova versão), `dist/music/config.*` (biblioteca vazia), `dist/icon.svg` e os ícones em `dist/assets/`. As fontes Silkscreen e Space Grotesk (SIL OFL 1.1) e a Three.js r159 (MIT) foram obtidas das versões públicas oficiais. Os dois efeitos de voz da Arena (`assets/sfx/biuriful.mp3` e `gugu-dada.mp3`) não estão incluídos; o jogo segue sem eles.
+> Arquivos reconstruídos nesta cópia, porque não vieram no envio: `dist/updates.js` (aviso de nova versão), `dist/icon.svg` e os ícones em `dist/assets/`. As fontes Silkscreen e Space Grotesk (SIL OFL 1.1) e a Three.js r159 (MIT) foram obtidas das versões públicas oficiais. Os dois efeitos de voz da Arena (`assets/sfx/biuriful.mp3` e `gugu-dada.mp3`) não estão incluídos; o jogo segue sem eles.
 
 Jogo 2D em pixel art, com campanha, chefes, missões, Arena da Resenha e Dupla online. O código original está disponível sob a [licença MIT](LICENSE): você pode estudar, modificar, distribuir e usar comercialmente, mantendo o aviso de copyright e a licença.
 
@@ -43,6 +44,7 @@ Veja o [guia para modificar com IA](docs/MODIFICAR-COM-IA.md), as [orientações
 | Página, menu e aparência | `dist/index.html`, `style.css`, `theme.css`, `menu.js`, `menu.css`, `safari.css` |
 | Campanha, controles de jogo e renderização | `dist/game.js` |
 | Mapas, personagens e progressão | `dist/world.js`, `campaign.js`, `progression.js`, `world-life.js`, `activities.js` |
+| Jantar com Amanda e traje Jaglion | `dist/amanda.js` contém os pratos e as falas. `dist/amanda-art.js` desenha Amanda e o restaurante. A interação na praça e a entrega com Davi ficam em `dist/game.js`, e o espelho em `dist/visual.js`. |
 | Dificuldade e cronômetro | `dist/difficulty.js`, `campaign-run.js` |
 | Pixel art, cenários e efeitos | `dist/art.js`, `scene-details.js`, `campaign-vfx.js` |
 | Cutscenes e final | `dist/cinematics.js`, `epilogue.js`, `easy-ending.js`, `baile.js`; roteiros em dados: `dist/roteiro.js` + `dist/roteiros/*.json` (guia em `docs/ROTEIROS.md`) |
@@ -63,7 +65,7 @@ Os módulos JavaScript usam objetos em `window` e são carregados na ordem de `d
 
 ## Conteúdo do código-fonte público
 
-O pacote inclui o cliente, o painel administrativo, o código do servidor, as migrações, os projetos nativos, ferramentas, documentação e avisos de terceiros. O acervo de MP3 enviado ao site não acompanha o código; a configuração de músicas da cópia pública começa vazia.
+O pacote inclui o cliente, o painel administrativo, o código do servidor, as migrações, os projetos nativos, ferramentas, documentação e avisos de terceiros. O catálogo em `dist/music/config.json` conserva as 12 trilhas originais e as 48 associações da edição 3.12.1. Após clonar o repositório, rode `python3 .github/scripts/restaurar_trilhas.py` para recuperar os MP3 publicados pelo jogo. O ZIP com trilhas e os aplicativos preparados já trazem esses arquivos.
 
 Não fazem parte do pacote: senhas, chaves de assinatura, tokens, dados de jogadores, banco do site, pastas locais de trabalho, identidade de hospedagem da implantação oficial e binários gerados. Isso não impede editar ou executar a campanha. Serviços online e builds assinados usam a configuração da sua própria instalação.
 

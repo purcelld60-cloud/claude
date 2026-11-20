@@ -14,10 +14,18 @@ const style=document.createElement('style');style.id='dialogue-controls-style';s
 #gameShell #dialogControls #dialogNext{min-width:min(180px,calc(100vw - 140px));max-width:calc(100vw - 140px);padding:5px 12px;white-space:normal;text-align:center;font-size:8px;line-height:1.5}
 @media(orientation:landscape) and (max-height:360px){#gameShell #dialogControls button{min-height:38px}#gameShell #dialogControls #dialogNext{font-size:7px}}
 `;document.head.append(style);
-// Respond directly to a touch/pointer press. Safari may suppress its synthetic
-// click after a layout change, so click is only the keyboard/accessibility fallback.
-const pressedAt=new WeakMap();
-function bindControl(button,activate){button.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;e.preventDefault();pressedAt.set(button,performance.now());activate();});button.addEventListener('click',e=>{const at=pressedAt.get(button);if(at!==undefined&&performance.now()-at<700){e.preventDefault();return;}activate();});button.addEventListener('contextmenu',e=>e.preventDefault());}
+// Finish the tap on the original button before replacing the dialogue with the
+// next screen. Otherwise a synthesized click can land on its newly exposed controls.
+function bindControl(button,activate){
+  button.addEventListener('touchend',event=>{
+    if(!event.cancelable)return;
+    event.preventDefault();
+    const touch=event.changedTouches[0];
+    if(!event.touches.length&&touch&&button.contains(document.elementFromPoint(touch.clientX,touch.clientY)))activate();
+  },{passive:false});
+  button.addEventListener('click',event=>{event.preventDefault();activate();});
+  button.addEventListener('contextmenu',event=>event.preventDefault());
+}
 bindControl(next,()=>window.Game?.advanceDialogue?.());bindControl(close,()=>window.Game?.closeDialogue?.(false));
 let prior='';const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 function bounds(){const v=viewport.getBoundingClientRect(),r=canvas.getBoundingClientRect(),contain=getComputedStyle(canvas).objectFit==='contain',scale=contain?Math.min(r.width/960,r.height/540):r.width/960,w=960*scale,h=540*scale;return{v,scale,ox:r.left-v.left+(r.width-w)/2,oy:r.top-v.top+(r.height-h)/2};}

@@ -4,9 +4,11 @@
  const VERSION=1,CONFIG_CACHE='daroca-music-config-cache-v1',PREF='daroca-music-enabled',DAY=86400000;
  const SCENES=['roca','escola','academia','quadra','camacan','favela','caderno','campo','bigodon','patio','rayssa','baile'];
  const SILENCE='data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQQAAACAgICA';
- const isNative=location.protocol==='file:';
- const nativeAndroid=isNative&&new URLSearchParams(location.search).get('native')==='android';
+ const launch=new URLSearchParams(location.search);
+ const nativePC=location.hostname==='127.0.0.1'&&launch.get('native')==='1'&&launch.get('pc')==='1';
+ const isNative=location.hostname==='appassets.androidplatform.net'||nativePC||location.protocol==='file:'||location.protocol==='daroca:';
  const isWeb=['https:','http:'].includes(location.protocol);
+ const packagedIds=new Set((window.DAROCA_MUSIC_CONFIG?.tracks||[]).map(t=>t.id));
  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),number=(v,f)=>Number.isFinite(Number(v))?Number(v):f;
  const now=()=>performance.now();
  const empty=()=>({schema:1,revision:0,masterVolume:.7,defaultFadeMs:1200,categories:[],tracks:[],bindings:Object.create(null)});
@@ -17,7 +19,7 @@
  const arenaPlaylist={open:false,session:0,matchId:null,currentId:null,lastId:null,bag:[],library:'',serial:0,failed:new Set()};
  // A native game can start its bundled soundtrack immediately; an explicit mute
  // remains authoritative on every following launch. Browsers still need a gesture.
- try{const preference=localStorage.getItem(PREF);enabled=preference===null?isNative:preference==='true';}catch{enabled=isNative;}
+ try{enabled=localStorage.getItem(PREF)!=='false';}catch{enabled=true;}
  function normaliseConfig(raw){
   if(!raw||raw.schema!==VERSION||!Array.isArray(raw.tracks)||!raw.bindings||typeof raw.bindings!=='object')throw Error('Configuração de trilhas inválida.');
   const c=empty();c.revision=Math.max(0,Math.floor(number(raw.revision,0)));c.masterVolume=clamp(number(raw.masterVolume,.7),0,1);c.defaultFadeMs=clamp(number(raw.defaultFadeMs,1200),0,10000);
@@ -26,7 +28,7 @@
   for(const t of raw.tracks.slice(0,200)){
    if(!t||typeof t.id!=='string'||!(/^[a-f0-9]{64}$/i.test(t.id))||seen.has(t.id))continue;
    const id=t.id.toLowerCase(),file='music/'+id+'.mp3';if(t.file&&t.file!==file)continue;seen.add(id);
-   c.tracks.push({id,title:String(t.title||'Trilha').slice(0,140),categoryId:String(t.categoryId||'maps').slice(0,80),file,sha256:id,bytes:Math.max(0,number(t.bytes,0)),duration:Math.max(0,number(t.duration,0)),volume:clamp(number(t.volume,1),0,1),loop:t.loop!==false,fadeMs:clamp(number(t.fadeMs,c.defaultFadeMs),0,10000),url:!isNative&&typeof t.url==='string'&&t.url==='/music/'+id+'.mp3'?t.url:undefined});
+   c.tracks.push({id,title:String(t.title||'Trilha').slice(0,140),categoryId:String(t.categoryId||'maps').slice(0,80),file,sha256:id,bytes:Math.max(0,number(t.bytes,0)),duration:Math.max(0,number(t.duration,0)),volume:clamp(number(t.volume,1),0,1),loop:t.loop!==false,fadeMs:clamp(number(t.fadeMs,c.defaultFadeMs),0,10000),url:!isNative&&!packagedIds.has(id)&&t.url==='/music/'+id+'.mp3'?t.url:undefined});
   }
   for(const[id,b]of Object.entries(raw.bindings)){
    if(!/^[a-zA-Z0-9_.-]{1,90}$/.test(id)||!b||typeof b!=='object'||!c.tracks.some(t=>t.id===b.trackId))continue;
@@ -50,11 +52,18 @@
   const generation=++loadGeneration;
   loading=(async()=>{
    let bundled=null;try{if(window.DAROCA_MUSIC_CONFIG)bundled=normaliseConfig(window.DAROCA_MUSIC_CONFIG);else bundled=await fetchConfig('music/config.json');}catch(e){configError='Não foi possível ler a configuração incluída no jogo.';}
-   let local=null;try{local=await window.DarocaMusicas?.load?.();}catch{}if(local)bundled=mergeLocal(bundled||empty(),local);
+   const cached=readCache();
+   const useCache=cached&&(!bundled||cached.revision>=bundled.revision);
+   const base=useCache?cached:bundled,baseSource=useCache?'cache':'bundled';
+   if(!ready&&base)applyConfig(base,baseSource);
+   let local=null;try{local=await window.DarocaMusicas?.load?.();}catch{}
    if(generation!==loadGeneration)return getStatus();
-   const cached=mergeLocal(readCache(),local);if(bundled||cached)applyConfig(cached&&(!bundled||cached.revision>=bundled.revision)?cached:bundled,cached&&(!bundled||cached.revision>=bundled.revision)?'cache':'bundled');
+   if((base||local)&&(!ready||(base?.revision||0)>=config.revision)){
+    const merged=mergeLocal(base||empty(),local);
+    if(merged!==config)applyConfig(merged,baseSource);
+   }
    if(!isNative&&isWeb&&!window.DAROCA_LAN){
-    try{const remote=await fetchConfig('/api/music/config');if(generation===loadGeneration){lastRemoteAt=Date.now();applyConfig(mergeLocal(remote,local),'remote');saveCache(remote);}}
+    try{const remote=await fetchConfig('/api/music/config');if(generation===loadGeneration&&remote.revision>=config.revision){lastRemoteAt=Date.now();applyConfig(mergeLocal(remote,local),'remote');saveCache(remote);}}
     catch(e){if(!ready){ready=true;source='bundled';}configError='A configuração online não respondeu; usando as trilhas disponíveis neste aparelho.';}
    }else if(!ready)ready=true;
    return getStatus();
@@ -87,7 +96,7 @@
  }
  function setEnabled(value,persist=true){enabled=!!value;if(persist)try{localStorage.setItem(PREF,String(enabled));}catch{}if(!enabled){requestGeneration++;lastAttempt='';for(const v of voices){v.cancelMetadata?.();gain(v,0,0);v.audio.pause();}transition=false;}else{lastAttempt='';if(unlocked)syncSelection(true);}return enabled;}
  function normalName(value){return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
- const speakers=[['irmao de clara swift','swift'],['igor','igor'],['kaique','kaique'],['ana laura','analaura'],['nicolas carvalho','nicolas'],['nicolas','nicolas'],['nikolas','nikolas'],['da roca','daroca'],['gabriel mota','mota'],['gabriel reis','reeis'],['reeis','reeis'],['reis','reeis'],['menezes','menezes'],['lucas','lucas'],['caleb','caleb'],['kaua','kaua'],['marco','marco'],['ravid','ravid'],['mota','mota'],['colosso','giant'],['almiro','almiro'],['miqueias','miqueias'],['davi','davi'],['vitor','vitor'],['freddy','freddy'],['dede','dede'],['aica','aica'],['ravile','ravile'],['arthur','arthur'],['allef','allef'],['eloisa','eloisa'],['giselle','giselle'],['rayssa','rayssa']];
+ const speakers=[['amanda','amanda'],['irmao de clara swift','swift'],['igor','igor'],['kaique','kaique'],['ana laura','analaura'],['nicolas carvalho','nicolas'],['nicolas','nicolas'],['nikolas','nikolas'],['da roca','daroca'],['gabriel mota','mota'],['gabriel reis','reeis'],['reeis','reeis'],['reis','reeis'],['menezes','menezes'],['lucas','lucas'],['caleb','caleb'],['kaua','kaua'],['marco','marco'],['ravid','ravid'],['mota','mota'],['colosso','giant'],['almiro','almiro'],['miqueias','miqueias'],['davi','davi'],['vitor','vitor'],['freddy','freddy'],['dede','dede'],['aica','aica'],['ravile','ravile'],['arthur','arthur'],['allef','allef'],['eloisa','eloisa'],['giselle','giselle'],['rayssa','rayssa']];
  function shuffled(ids){const bag=[...ids];for(let i=bag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[bag[i],bag[j]]=[bag[j],bag[i]];}return bag;}
  function refreshArenaLibrary(){
   const ids=config.tracks.map(track=>track.id),signature=[...ids].sort().join('|');
@@ -131,7 +140,7 @@
  function selectArena(){
   const track=config.tracks.find(t=>t.id===arenaPlaylist.currentId);if(!track){matchedContext=null;return null;}
   matchedContext=ARENA_SHUFFLE;
-  return{track,key:ARENA_SHUFFLE,src:isNative?track.file:track.url||track.file,loop:false,volume:clamp(config.masterVolume*track.volume,0,1),fadeMs:track.fadeMs,startSeconds:0,delaySeconds:0,cutscene:false,token:null,elapsed:0,index:null,arenaShuffle:true,cueKey:'arena|'+arenaPlaylist.session+'|'+arenaPlaylist.serial+'|'+track.id};
+  return{track,key:ARENA_SHUFFLE,src:isNative?track.file:track.url||track.file,loop:false,volume:clamp(config.masterVolume*track.volume*(window.DarocaAudio?.music?.()??1),0,1),fadeMs:track.fadeMs,startSeconds:0,delaySeconds:0,cutscene:false,token:null,elapsed:0,index:null,arenaShuffle:true,cueKey:'arena|'+arenaPlaylist.session+'|'+arenaPlaylist.serial+'|'+track.id};
  }
  function candidates(){
   lastAudioState=null;if(override){try{lastAudioState=window.Game?.getAudioState?.()||null;}catch{}return[override];}
@@ -141,11 +150,18 @@
   if(party?.open){if(party.view!=='live')return['party.menu','menu.title'];if(party.phase==='board')return['party.board','party.menu'];if(party.phase==='ceremony')return['party.ceremony','party.menu'];if(party.phase==='results')return['party.results',party.game?'party.'+party.game:'party.menu','party.menu'];return[party.game?'party.'+party.game:'party.menu','party.menu'];}
   try{coop=window.CoopArena?.getStatus?.();}catch{}
   if(coop?.open){if(!coop.stage)return['coop.menu','menu.title'];if(coop.stage==='victory')return['events.celebration','coop.menu'];if(coop.stage==='defeat')return['events.defeat','coop.menu'];return[coop.boss?.type?'coop.'+coop.boss.type:'coop.menu','coop.menu'];}
-  if(window.Fliperama?.isOpen?.()){const g=window.Fliperama.current?.();return[...(g?['minigames.fliperama.'+g]:[]),'minigames.fliperama','activities.memory','menu.title'];};try{state=window.Game?.getAudioState?.();lastAudioState=state||null;}catch{}
-  if(!state)return['menu.title'];
+  if(window.Fliperama?.isOpen?.()){const g=window.Fliperama.current?.();return[...(g?['minigames.fliperama.'+g]:[]),'minigames.fliperama','activities.memory','menu.title'];}
+  // A segunda campanha e sua galeria têm partituras próprias. O tema do menu
+  // não deve ocupar o canal de música enquanto esses modos estão abertos.
+  if(window.Campanha2?.aberto?.()){
+   const id=window.Campanha2.estado().cutscene;
+   return id?['cutscenes.'+id,...(window.Roteiro?.musicFor?.(id)||[])]:[];
+  }
+  if(window.CampanhaCutscenes?.aberta?.())return [];
+  try{state=window.Game?.getAudioState?.();lastAudioState=state||null;}catch{}
+  if(state?.chapterEnded)return['events.chapter_end'];
+  if(!state||!state.started||state.playing===false)return config.bindings['menu.title']?['menu.title']:['menu.title','maps.roca'];
   const map='maps.'+(SCENES[Number(state.scene)]||SCENES[0]);
-  if(state.chapterEnded)return['events.chapter_end'];
-  if(!state.started||state.playing===false)return['menu.title'];
   if(state.cutscene)return['cutscenes.'+String(state.cutscene),...(window.Roteiro?.musicFor?.(state.cutscene)||[]),'events.'+String(state.cutscene),map];
   if(state.paused)return['menu.pause',map];
   if(state.defeated)return['events.defeat',map];
@@ -264,5 +280,6 @@
  document.addEventListener('pointerdown',firstGesture,{capture:true,passive:true});
  document.addEventListener('keydown',firstGesture,{capture:true});
  setInterval(tick,50);reload();
- if(enabled){if(sourceButton&&sourceButton.getAttribute('aria-pressed')!=='true')sourceButton.click();else unlock();}
+ window.Game?.setSoundEnabled?.(enabled);
+ if(enabled&&isNative)unlock();
 })();

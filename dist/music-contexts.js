@@ -3,6 +3,8 @@
  'use strict';
  const contexts=[];
  const add=(id,label,group)=>contexts.push(Object.freeze({id,label,group}));
+ add('characters.amanda','Conversa · Amanda','Personagens');
+ add('activity.dinner','Jantar com Amanda','Desafios');
  add('characters.swift','Conversa · Irmão de Clara Swift','Personagens');
  add('minigames.fliperama','Fliperama da Roça','Minigames');
  for(const[id,name]of[['minhoca','Minhoca do Cafezal'],['pong','Pingue-Pongue do Pátio'],['quebra','Quebra-Caderno'],['cabo','Cabo de Guerra'],['chinelo','Chuva de Chinelo'],['galo','Reflexo do Galo'],['memoria','Memória da Feira'],['tiro','Tiro ao Alvo no Açude'],['corrida','Corrida da Estradinha'],['subida','Subida do Morro']])add('minigames.fliperama.'+id,'Fliperama · '+name,'Minigames');

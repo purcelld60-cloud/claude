@@ -5,3 +5,4 @@ __MACOSX/
 *.jks
 .env
 server/node_modules/
+/dist/music/*.mp3

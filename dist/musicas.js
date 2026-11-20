@@ -14,7 +14,7 @@
   const PLACES = {
     menu: 'menu.title', inicio: 'menu.title', pausa: 'menu.pause', derrota: 'events.defeat', fim: 'events.chapter_end', 'fim-do-capitulo': 'events.chapter_end', comemoracao: 'events.celebration', 'transformacao-reeis': 'events.reeis_transform',
     roca: 'maps.roca', escola: 'maps.escola', academia: 'maps.academia', quadra: 'maps.quadra', praca: 'maps.camacan', camacan: 'maps.camacan', favela: 'maps.favela', caderno: 'maps.caderno', tinta: 'maps.caderno', 'reino-de-tinta': 'maps.caderno', campo: 'maps.campo', bigodon: 'maps.bigodon', patio: 'maps.patio', rayssa: 'maps.rayssa', 'casa-da-rayssa': 'maps.rayssa', baile: 'maps.baile',
-    'sala-almiro': 'rooms.almiro', 'sala-miqueias': 'rooms.miqueias',
+    'jantar-amanda': 'activity.dinner', 'sala-almiro': 'rooms.almiro', 'sala-miqueias': 'rooms.miqueias',
     arena: 'arena.battle', 'arena-menu': 'arena.menu', 'arena-resultado': 'arena.results',
     fliperama: 'minigames.fliperama', dupla: 'coop.menu', 'dupla-menu': 'coop.menu'
   };
