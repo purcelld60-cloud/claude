@@ -1,0 +1,36 @@
+/* Abertura do jogo: tela preta, logo, título letra por letra, barra de carregamento e depois o menu.
+   As animações são de CSS (opacidade e transform) para continuarem rodando enquanto o jogo carrega. */
+#abertura{position:fixed;inset:0;z-index:2147483647;background:#000;display:grid;place-items:center;overflow:hidden;font-family:Pixel,monospace;color:#f6ead0;transition:opacity .55s ease;-webkit-user-select:none;user-select:none;touch-action:manipulation;cursor:default}
+#abertura.ab-sai{opacity:0;pointer-events:none}
+#abertura .ab-centro{display:flex;flex-direction:column;align-items:center;gap:min(2.2vh,14px);padding:16px;text-align:center}
+/* estrelinhas no fundo */
+#abertura:before{content:'';position:absolute;inset:0;background-image:radial-gradient(#fff6d0 1px,transparent 1.5px),radial-gradient(#ffd27a 1px,transparent 1.5px);background-size:97px 89px,151px 137px;background-position:13px 7px,61px 41px;opacity:0;animation:abEstrelas 1.6s .3s ease forwards}
+@keyframes abEstrelas{to{opacity:.35}}
+/* logo com "pulo" e brilho atrás */
+#abertura .ab-logo{position:relative;width:min(36vh,200px);aspect-ratio:1;opacity:0;animation:abLogo .9s .35s cubic-bezier(.3,1.6,.5,1) forwards}
+#abertura .ab-logo img{position:relative;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges;display:block;box-shadow:0 0 0 4px #1a0e08,0 0 0 8px #e8c66a,0 0 0 12px #1a0e08;animation:abFlutua 2.4s 1.3s ease-in-out infinite}
+#abertura .ab-brilho{position:absolute;inset:-45%;background:radial-gradient(circle,#ffd27a66 0,#f08f5033 35%,transparent 65%);animation:abBrilho 2.4s 1.2s ease-in-out infinite}
+@keyframes abLogo{0%{opacity:0;transform:scale(.35) rotate(-8deg)}60%{opacity:1;transform:scale(1.1) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes abFlutua{50%{transform:translateY(-5px)}}
+@keyframes abBrilho{50%{transform:scale(1.12);opacity:.7}}
+/* título letra por letra */
+#abertura .ab-titulo{margin:0;display:flex;flex-direction:column;align-items:center;line-height:1.15}
+#abertura .ab-titulo span{display:block;white-space:nowrap}
+#abertura .ab-l1{font-size:min(7.5vh,46px);color:#ffd98a;text-shadow:3px 3px 0 #7a3a10,6px 6px 0 #1a0e08;letter-spacing:2px}
+#abertura .ab-l2{font-size:min(4.6vh,28px);color:#9ae06a;text-shadow:2px 2px 0 #2a5a1a,4px 4px 0 #1a0e08;letter-spacing:5px}
+#abertura .ab-titulo b{display:inline-block;font-weight:inherit;opacity:0;transform:translateY(14px);animation:abLetra .35s calc(1.05s + var(--i) * .055s) cubic-bezier(.3,1.7,.5,1) forwards}
+@keyframes abLetra{to{opacity:1;transform:none}}
+#abertura .ab-sub{margin:0;font-size:min(1.7vh,10px);letter-spacing:2px;color:#e8c66a;opacity:0;animation:abSurge .6s 2.05s ease forwards}
+@keyframes abSurge{to{opacity:1}}
+/* barra de carregamento em blocos */
+#abertura .ab-barra{position:relative;width:min(70vw,340px);height:18px;border:3px solid #e8c66a;box-shadow:0 0 0 3px #1a0e08,inset 0 0 0 2px #1a0e08;background:#2a1a10;opacity:0;animation:abSurge .4s 2.2s ease forwards;overflow:hidden}
+#abertura .ab-barra i{position:absolute;inset:2px;background:linear-gradient(#b8f07a 0 35%,#6ab83e 35% 75%,#3f7a2a 75%);transform-origin:left;transform:scaleX(0);animation:abEnche 2.2s 2.3s cubic-bezier(.2,.7,.3,1) forwards}
+#abertura .ab-barra:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 14px,#2a1a10 14px 17px);pointer-events:none}
+#abertura.ab-pronto .ab-barra i{animation:none;transform:scaleX(1);transition:transform .35s ease}
+@keyframes abEnche{to{transform:scaleX(.88)}}
+#abertura .ab-dica{margin:0;min-height:1.4em;font:min(1.9vh,12px) Space,Arial,sans-serif;color:#c8b898;opacity:0;animation:abSurge .4s 2.3s ease forwards}
+#abertura.ab-pronto .ab-dica{color:#b8f07a;font-family:Pixel,monospace}
+#abertura .ab-toque{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-size:9px;letter-spacing:2px;color:#8a7a62;opacity:0}
+#abertura.ab-pronto .ab-toque{animation:abPisca 1.2s ease-in-out infinite}
+@keyframes abPisca{50%{opacity:.8}}
+@media (prefers-reduced-motion:reduce){#abertura *,#abertura:before{animation-duration:.01s!important;animation-delay:0s!important}#abertura .ab-barra i{transform:scaleX(.88)}}
