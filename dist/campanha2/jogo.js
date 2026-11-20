@@ -127,7 +127,7 @@
   };
   function ferir(n, de) {
     if (morto || cut || (P.inv || 0) > 0 || viagem) return; n = window.CampanhaPoderes?.filtrarDano?.(n) ?? n; if (!n) { sfx('plim'); return; }
-    P.hp = Math.max(0, P.hp - n); P.inv = .85; P.vy = -280; P.ground = false; P.x += (P.x < de ? -1 : 1) * 36; tremor = Math.max(tremor, 7); sfx('impacto'); dano.push({ x: P.x, y: P.y - 80, s: '-' + n, t: 0 });
+    P.hp = Math.max(0, P.hp - n); P.inv = .85; P.vy = -280; P.ground = false; P.x += (P.x < de ? -1 : 1) * 36; tremor = Math.max(tremor, 7); sfx('impacto'); const IMP = window.CampanhaImpacto; if (IMP) { IMP.heroi(P.x, P.y - 60, P.x < de ? -1 : 1, n); IMP.numero(P.x, P.y - 96, '-' + n, '#ff5a4a', n >= 16); } else dano.push({ x: P.x, y: P.y - 80, s: '-' + n, t: 0 });
     if (P.hp <= 0) desmaiar();
   }
   const dano = [];
@@ -173,8 +173,8 @@
   }
 
   /* ---------- ir de um lugar para outro ---------- */
-  function irPara(id, x) { cenaId = id; const d = D(); P.x = clamp(x, d.limites?.[0] ?? 40, d.limites?.[1] ?? d.largura - 40); P.y = FLOOR; P.vy = 0; P.vx = 0; P.ground = true; cam = clamp(P.x - 360, 0, Math.max(0, d.largura - W)); viagem = null; fade = 0; S && (S.cena = id); }
-  const horaAtual = () => { const p = PASSOS[S?.passo]; if (cenaId === 25 || cenaId === 24) return S?.passo === 'lurdes' ? 21 : 8; return p?.hora ?? 12; };
+  function irPara(id, x) { window.CampanhaImpacto?.limpar?.(); cenaId = id; const d = D(); P.x = clamp(x, d.limites?.[0] ?? 40, d.limites?.[1] ?? d.largura - 40); P.y = FLOOR; P.vy = 0; P.vx = 0; P.ground = true; cam = clamp(P.x - 360, 0, Math.max(0, d.largura - W)); viagem = null; fade = 0; S && (S.cena = id); }
+  const horaAtual = () => { const m = window.DayTime?.mode?.(); if (m && HORAS[m] != null) return HORAS[m]; const p = PASSOS[S?.passo]; if (cenaId === 25 || cenaId === 24) return S?.passo === 'lurdes' ? 21 : 8; return p?.hora ?? 12; };
 
   /* ---------- usar o que está perto ---------- */
   function usar() {
@@ -313,9 +313,29 @@
   function pausar(v) {
     pausado = v; keys.clear(); box.querySelector('.pausa')?.remove(); if (!v) return;
     const el = document.createElement('div'); el.className = 'pausa';
-    el.innerHTML = `<h2>PAUSA</h2><button type="button" data-a="voltar">▶ CONTINUAR</button><button type="button" data-a="missoes">📜 MISSÕES</button><button type="button" data-a="som">♪ SOM: ${som ? 'LIGADO' : 'DESLIGADO'}</button><button type="button" data-a="sair">SALVAR E SAIR</button><p>A/D ou setas andam · ESPAÇO pula (segure no ar para voar) · E fala e entra · J papel · K peido · L dash · U/I poderes · ESC pausa</p>`;
-    el.addEventListener('click', (e) => { const a = e.target.closest('button')?.dataset.a; if (a === 'voltar') pausar(false); if (a === 'som') { som = !som; window.__somCutscene = som; pausar(true); } if (a === 'sair') { salvar(); fechar(); } if (a === 'missoes') diario(); });
+    el.innerHTML = `<h2>PAUSA</h2><button type="button" data-a="voltar">▶ CONTINUAR</button><button type="button" data-a="opcoes">⚙ OPÇÕES</button><button type="button" data-a="missoes">📜 MISSÕES</button><button type="button" data-a="som">♪ SOM: ${som ? 'LIGADO' : 'DESLIGADO'}</button><button type="button" data-a="sair">SALVAR E SAIR</button><p>A/D ou setas andam · ESPAÇO pula (segure no ar para voar) · E fala e entra · J papel · K peido · L dash · U/I poderes · ESC pausa</p>`;
+    el.addEventListener('click', (e) => { const a = e.target.closest('button')?.dataset.a; if (a === 'voltar') pausar(false); if (a === 'som') { som = !som; window.__somCutscene = som; pausar(true); } if (a === 'sair') { salvar(); fechar(); } if (a === 'missoes') diario(); if (a === 'opcoes') opcoes(); });
     box.querySelector('.tela').appendChild(el); setTimeout(() => el.querySelector('button')?.focus(), 30);
+  }
+  // opções: hora do dia, clima, qualidade e posição dos botões no celular
+  const HORAS = { manha: 8.2, tarde: 13.5, por: 17.7, noite: 22 };
+  function opcoes() {
+    box.querySelector('.pausa')?.remove(); const el = document.createElement('div'); el.className = 'pausa';
+    const DT = window.DayTime, WX = window.Weather, GX = window.Graphics;
+    const linhas = () => `<h2>OPÇÕES</h2>
+      ${DT ? `<button type="button" data-o="hora">HORA DO DIA: <span class="val">${DT.mode() === 'auto' ? 'DA HISTÓRIA' : DT.label()}</span></button>` : ''}
+      ${WX ? `<button type="button" data-o="clima">CLIMA: <span class="val">${WX.label()}</span></button>` : ''}
+      ${GX ? `<button type="button" data-o="qualidade">QUALIDADE: <span class="val">${GX.label()}</span></button>` : ''}
+      <button type="button" data-o="botoes">MUDAR BOTÕES DE LUGAR</button>
+      <button type="button" data-o="voltar">◀ VOLTAR</button>
+      <p>${DT?.mode() === 'auto' ? 'Hora do dia: segue a história.' : 'Hora do dia fixa: ' + DT?.label?.() + '.'} ${WX ? 'Clima: ' + WX.describe() : ''}<br>${GX ? 'Qualidade: ' + GX.describe() : ''}</p>`;
+    const desenhar = (foco) => { el.innerHTML = linhas(); setTimeout(() => (el.querySelector(`[data-o="${foco}"]`) || el.querySelector('button'))?.focus(), 20); };
+    el.addEventListener('click', (e) => { const o = e.target.closest('button')?.dataset.o; if (!o) return;
+      if (o === 'voltar') { pausar(true); return; }
+      if (o === 'hora') DT?.next?.(); if (o === 'clima') WX?.next?.(); if (o === 'qualidade') GX?.toggle?.();
+      if (o === 'botoes') { el.hidden = true; hudVisivel(true); window.CampanhaBotoes?.editar?.(box.querySelector('.tela'), () => { el.hidden = false; desenhar('botoes'); }); return; }
+      sfx('plim'); desenhar(o); });
+    desenhar(); box.querySelector('.tela').appendChild(el);
   }
   function diario() {
     box.querySelector('.pausa')?.remove(); const el = document.createElement('div'); el.className = 'pausa'; const L = window.CampanhaAliados?.missoes?.() || [], ic = { feita: '✔', ativa: '▶', nova: '!' };
@@ -337,9 +357,10 @@
     P.max = window.CampanhaAliados?.vidaMax?.() || 100; if (window.CampanhaAliados?.ocupado?.()) { window.CampanhaAliados.atualizar(dt, []); return; }
     if (cut) { RT().update(cut.s, dt); if (cut.s.done) { const f = cut.depois; cut = null; hudVisivel(true); try { window.DayTime?.force?.(null); } catch (e) {} f?.(); } else { c.save(); RT().draw(c, cut.s); c.restore(); return; } }
     if (pausado || ocupado()) { keys.clear(); P.vx = 0; }
-    t += dt; const d = D();
+    const IMP = window.CampanhaImpacto; safe(() => IMP?.atualizar?.(dt)); const dw = dt * (IMP?.tempo?.(dt) ?? 1); // hitstop e câmera lenta só no mundo
+    t += dw; const d = D();
     const F = !cut ? faseAtual() : fase; TR()?.inimigos?.(F && !cut ? F.inimigos() : []);
-    if (!pausado && !morto) { P.inv = Math.max(0, (P.inv || 0) - dt); P.atordoado = Math.max(0, (P.atordoado || 0) - dt); TR()?.passo?.(dt, P, { cam, segurandoPulo: keys.has('jump') }); if (viagem) andarViagem(dt); else fisica(dt); if (F) F.update(dt); safe(() => window.CampanhaAliados?.atualizar?.(dt, F ? F.inimigos() : [])); }
+    if (!pausado && !morto) { P.inv = Math.max(0, (P.inv || 0) - dw); P.atordoado = Math.max(0, (P.atordoado || 0) - dw); TR()?.passo?.(dw, P, { cam, segurandoPulo: keys.has('jump') }); const noAr = !P.ground, vyAntes = P.vy; if (viagem) andarViagem(dt); else fisica(dw); if (IMP && !viagem) { if (noAr && P.ground && vyAntes > 420) IMP.poeira(P.x, P.y, Math.min(1.6, vyAntes / 700)); else if (!noAr && !P.ground && P.vy < -300) IMP.poeira(P.x, P.y, .6); } if (F) F.update(dw); safe(() => window.CampanhaAliados?.atualizar?.(dw, F ? F.inimigos() : [])); }
     tremor = Math.max(0, tremor - dt * 30); clarao = Math.max(0, clarao - dt * 1.6); for (const d0 of dano) d0.t += dt; while (dano.length && dano[0].t > 1) dano.shift();
     cam += (clamp(P.x - 360, 0, Math.max(0, d.largura - W)) - cam) * Math.min(1, dt * 8);
     try { window.DayTime?.force?.(horaAtual()); } catch (e) {}
@@ -350,16 +371,16 @@
     if (d.id >= 12) for (const pl of d.plataformas || []) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) safe(() => CC().plataforma(c, d.id, pl, t));
     safe(() => window.Interact?.drawBack?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawBack?.(c, o)); safe(() => window.CampanhaTaxi?.desenhar?.(c, o)); safe(() => window.CampanhaLoja?.desenhar?.(c, o)); safe(() => window.CampanhaMoradores?.desenhar?.(c, o)); }
     desenharExtras();
-    safe(() => window.CampanhaAliados?.desenhar?.(c, d.id)); if (F) F.desenhar(c);
+    safe(() => window.CampanhaAliados?.desenhar?.(c, d.id)); if (F) F.desenhar(c); safe(() => IMP?.atras?.(c));
     for (const ax of window.CampanhaAliados?.alvos?.(d.id) || []) { const y = FLOOR - 150 + Math.sin(t * 4 + ax) * 4; c.fillStyle = '#1c1408'; c.fillRect(ax - 7, y - 7, 14, 14); c.fillStyle = '#7af07a'; c.fillRect(ax - 5, y - 5, 10, 10); c.fillStyle = '#1c1408'; c.fillRect(ax - 1, y - 4, 2, 5); c.fillRect(ax - 1, y + 2, 2, 2); }
     const at = P.attack || 0; if (!((P.inv || 0) > 0 && Math.floor(t * 16) % 2)) window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: 'paper', attackProgress: 1 - at / .32 });
-    safe(() => TR()?.desenhar?.(c, t));
+    safe(() => TR()?.desenhar?.(c, t)); safe(() => IMP?.frente?.(c));
     safe(() => window.Interact?.drawFront?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
     procurarPerto();
     if (perto) { c.font = '11px Pixel, monospace'; const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); c.textAlign = 'left'; }
     c.font = '16px Pixel, monospace'; c.textAlign = 'center'; for (const d0 of dano) { c.globalAlpha = 1 - d0.t; c.fillStyle = '#2a0808'; c.fillText(d0.s, d0.x + 2, d0.y - d0.t * 40 + 2); c.fillStyle = '#ff5a4a'; c.fillText(d0.s, d0.x, d0.y - d0.t * 40); } c.globalAlpha = 1; c.textAlign = 'left';
     c.restore(); safe(() => window.CampanhaAmbientes?.cobrir?.(c, d.id, cam));
-    if (!F?.emArena?.()) setaObjetivo(); if (F) F.desenharTela(c, W);
+    if (!F?.emArena?.()) setaObjetivo(); safe(() => IMP?.tela?.(c, W, H)); if (F) F.desenharTela(c, W);
     { const cr = window.CampanhaAliados?.correndo?.(); if (cr) { const txt = cr.fase === 'contagem' ? String(Math.ceil(cr.cont)) : (Math.max(0, cr.lim - cr.t)).toFixed(1) + ' s'; c.fillStyle = '#1c1408'; c.fillRect(W / 2 - 70, 70, 140, 34); c.fillStyle = '#ffd24a'; c.fillRect(W / 2 - 68, 72, 136, 30); c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#1c1408'; c.fillText('🛹 ' + txt, W / 2, 88); c.textAlign = 'left'; } }
     if (clarao > 0) { c.globalAlpha = clarao; c.fillStyle = claraoCor; c.fillRect(0, 0, W, H); c.globalAlpha = 1; }
     if (P.hp < 30 && !cut) { const a = .18 + Math.sin(t * 6) * .08; const g = c.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 600); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(140,0,10,${a})`); c.fillStyle = g; c.fillRect(0, 0, W, H); }
@@ -374,7 +395,7 @@
     if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; if (S.passo === 'fim6b') S.passo = 'ir_barao'; if (S.passo === 'fim6c') S.passo = 'ir_centro'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
     aberto = true; box.hidden = false; pausado = false; cut = null; keys.clear(); P.hp = S.hp || 100;
     window.CampanhaAliados?.ligar?.({ P, S: () => S, salvar: () => salvar(), item, aviso, sfx, conversa: (npc) => conversa(npc), escolher: (q, pg, ops, cb) => escolher(q, pg, ops, cb, true), tela: () => box.querySelector('.tela'), cena: () => cenaId, pausar: (v) => { keys.clear(); hudVisivel(!v); box.querySelector('.pular').hidden = true; } });
-    TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true }));
+    TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaBotoes?.aplicar?.(box.querySelector('.tela'))); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true }));
     if (S.passo === 'abertura') { irPara(0, 700); tocar('c2_abertura', PASSOS.abertura.depois); }
     else { irPara(S.cena ?? PASSO_INICIAL_DA_CENA[S.passo] ?? 13, S.x ?? 300); objetivoNovo(PASSOS[S.passo]?.obj || ''); hudVisivel(true); }
     last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);

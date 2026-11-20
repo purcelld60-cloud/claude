@@ -42,7 +42,10 @@
   let modoJogo = false; // no jogo da Campanha 2: sem bonecos e sem a caixa de ajuda do treino
   function ligar(v, P, o = {}) { on = v ?? !on; modoJogo = !!o.jogo; if (barra) { barra.hidden = !on; const inf = barra.querySelector('.c2-treino-info'), gs = barra.querySelector('.c2-treino-gas'); if (inf) inf.hidden = modoJogo; if (gs) gs.hidden = modoJogo; } if (on) { bonecos = modoJogo ? [] : [novoBoneco(P.x + 170), novoBoneco(P.x + 250), novoBoneco(P.x + 330)]; heroRef = P; } else { bonecos = []; tiros = []; nuvens = []; } return on; }
   const mundo = () => ({ heroi: heroRef, inimigos: () => bonecos, camera: cam,
-    dano: (e, n, tipo, dir) => { if (e.hp <= 0) return; if (e.onDano) { const r = e.onDano(n, tipo, dir); if (r !== false) textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - (e.alto || 90), n: r || n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); return; } e.hp = Math.max(0, e.hp - n); e.hit = .18; textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - 90, n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); if (e.hp <= 0) { e.morto = 2.2; window.CampanhaLoja?.ganhar?.(8); textos.push({ x: e.x, y: e.y - 120, n: '+8 ●', t: 0, cor: '#ffd24a' }); } }, // inimigo derrotado deixa moedas
+    dano: (e, n, tipo, dir) => { if (e.hp <= 0) return; const IMP = window.CampanhaImpacto, hx = e.x - (dir || 0) * 6, hy = (e.y ?? FLOOR) - (e.alto || 80) * .6, corN = tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc';
+      const marca = (num) => { IMP?.piscar?.(e); if (IMP) IMP.acerto(hx, hy, { n: num, tipo, dir, critico: /!$/.test(String(num)), corNum: corN }); else textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - (e.alto || 90), n: num, t: 0, cor: corN }); };
+      if (e.onDano) { const r = e.onDano(n, tipo, dir); if (r !== false) marca(r || n); return; }
+      e.hp = Math.max(0, e.hp - n); e.hit = .18; marca(n); if (e.hp <= 0) { e.morto = 2.2; window.CampanhaLoja?.ganhar?.(8); IMP?.morte?.(e.x, e.y - 40, '#e8c24c'); textos.push({ x: e.x, y: e.y - 120, n: '+8 ●', t: 0, cor: '#ffd24a' }); } }, // inimigo derrotado deixa moedas
     empurrar: (e, vx, vy) => { e.vx = vx; e.vy = vy; }, atordoar: (e, s) => { e.stun = s; }, confundir: (e, s) => { e.conf = s; }, tremer: (n) => { shake = Math.max(shake, n); } });
   function bater(e, n, tipo, dir) { mundo().dano(e, Math.round(n * PW.multiplicadores().forca * (window.CampanhaAliados?.forca?.() || 1)), tipo, dir); }
 
@@ -52,9 +55,9 @@
     if (id === 'poder1' || id === 'poder2') { const r = PW.usar(id === 'poder1' ? 0 : 1, mundo(), down ? 'down' : 'up'); if (down && !r.ok && r.motivo === 'vazio') aviso('Equipe um poder no Mural dos Poderes (quarto da pensão).'); if (down && !r.ok && r.motivo === 'recarga') aviso(`Recarregando: ${r.falta.toFixed(1).replace('.', ',')} s`); return true; }
     if (!down) { if (id === 'jump') voando = false; return true; }
     if (modoJogo && (id === 'paper' || id === 'fart')) { if ((cdAtk[id] || 0) > 0) return true; cdAtk[id] = id === 'paper' ? .26 : .9; if (id === 'paper') { P.attack = .32; } }
-    if (id === 'paper') { tiros.push({ x: P.x + dir * 22, y: P.y - 52, vx: dir * 620, vy: -90, vida: .8 }); return true; }
+    if (id === 'paper') { tiros.push({ x: P.x + dir * 22, y: P.y - 52, vx: dir * 620, vy: -90, vida: .8 }); window.CampanhaImpacto?.arco?.(P.x + dir * 14, P.y - 56, dir); return true; }
     if (id === 'fart') { nuvens.push({ x: P.x - dir * 20, y: P.y - 30, vx: -dir * 60, t: 0, hitou: new Set() }); return true; }
-    if (id === 'dash') { if (dashCd <= 0) { dashT = .2; dashCd = 1.1; P.vx = dir * 620; } return true; }
+    if (id === 'dash') { if (dashCd <= 0) { dashT = .2; dashCd = 1.1; P.vx = dir * 620; window.CampanhaImpacto?.dash?.(P); } return true; }
     if (id === 'jump') { voando = true; return false; } // o pulo em si é do visualizador
     if (id === 'interact') return false;
     return false;
@@ -64,7 +67,7 @@
 
   function passo(dt, P, o) {
     if (!on) return; heroRef = P; cam = o.cam; PW.atualizar(dt, mundo()); for (const k in cdAtk) cdAtk[k] = Math.max(0, cdAtk[k] - dt); if (P.attack > 0) P.attack = Math.max(0, P.attack - dt); dashCd = Math.max(0, dashCd - dt); shake = Math.max(0, shake - dt * 30); avisoT = Math.max(0, avisoT - dt);
-    if (dashT > 0) { dashT -= dt; P.vx = (P.facing < 0 ? -1 : 1) * 620; }
+    if (dashT > 0) { dashT -= dt; P.vx = (P.facing < 0 ? -1 : 1) * 620; window.CampanhaImpacto?.rastro?.(P); }
     if (voando && !P.ground && gas > 0 && o.segurandoPulo) { P.vy = Math.max(-240, P.vy - 1500 * dt); gas = Math.max(0, gas - 38 * dt); } if (P.ground) gas = Math.min(100, gas + 60 * dt);
     if (!modoJogo) for (const b of bonecos) {
       if (b.morto > 0) { b.morto -= dt; if (b.morto <= 0) Object.assign(b, novoBoneco(b.base)); continue; }
@@ -82,7 +85,7 @@
   function espantalho(c, b, t) { // boneco de treino: espantalho de palha com camisa e chapéu
     const R = (x, y, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), w, h); };
     const caido = b.hp <= 0, sh = b.hit > 0 ? Math.round(Math.sin(t * 60) * 2) : 0, x = b.x + sh, y = b.y;
-    c.save(); if (caido) { c.translate(x, y); c.rotate(-1.4 * Math.min(1, (2.2 - b.morto) * 4)); c.translate(-x, -y); }
+    c.save(); if (!caido && window.CampanhaImpacto?.piscando?.(b)) c.globalAlpha = .25; if (caido) { c.translate(x, y); c.rotate(-1.4 * Math.min(1, (2.2 - b.morto) * 4)); c.translate(-x, -y); }
     R(x - 2, y - 70, 4, 70, '#6a4a2a'); R(x - 22, y - 62, 44, 4, '#6a4a2a');
     R(x - 14, y - 64, 28, 30, b.hit > 0 ? '#ffffff' : '#c43c3a'); R(x - 14, y - 64, 28, 3, '#e85a4a'); R(x - 3, y - 64, 6, 30, '#2c4a7a');
     for (let k = 0; k < 4; k++) { R(x - 24 + k * 2, y - 61 + k, 2, 4, '#e8c24c'); R(x + 20 + k * 1, y - 61 + k, 2, 4, '#e8c24c'); R(x - 10 + k * 6, y - 34, 2, 6, '#e8c24c'); }
@@ -94,8 +97,9 @@
   function desenhar(c, t) {
     if (!on) return; const P = heroRef;
     if (!modoJogo) for (const b of bonecos) espantalho(c, b, t);
-    for (const n of nuvens) { const a = 1 - n.t / 1.1; for (let k = 0; k < 5; k++) { c.fillStyle = `rgba(150,200,90,${a * .55})`; c.beginPath(); c.arc(n.x + Math.cos(k * 1.3 + n.t * 3) * 18 * (1 + n.t), n.y - 6 + Math.sin(k * 2 + n.t * 2) * 10, 10 + n.t * 16, 0, Math.PI * 2); c.fill(); } }
-    for (const q of tiros) { c.fillStyle = '#f6f4ee'; c.fillRect(Math.round(q.x - 5), Math.round(q.y - 5), 10, 10); c.fillStyle = '#d8d4c8'; c.fillRect(Math.round(q.x - 3), Math.round(q.y - 3), 4, 4); }
+    const IMP = window.CampanhaImpacto;
+    for (const n of nuvens) { if (IMP) { IMP.nuvem(c, n); continue; } const a = 1 - n.t / 1.1; for (let k = 0; k < 5; k++) { c.fillStyle = `rgba(150,200,90,${a * .55})`; c.beginPath(); c.arc(n.x + Math.cos(k * 1.3 + n.t * 3) * 18 * (1 + n.t), n.y - 6 + Math.sin(k * 2 + n.t * 2) * 10, 10 + n.t * 16, 0, Math.PI * 2); c.fill(); } }
+    for (const q of tiros) { if (IMP) { IMP.bolaPapel(c, q, t); continue; } c.fillStyle = '#f6f4ee'; c.fillRect(Math.round(q.x - 5), Math.round(q.y - 5), 10, 10); c.fillStyle = '#d8d4c8'; c.fillRect(Math.round(q.x - 3), Math.round(q.y - 3), 4, 4); }
     PW.desenhar(c, mundo());
     c.font = '14px Pixel, monospace'; c.textAlign = 'center';
     for (const x of textos) { c.globalAlpha = 1 - x.t / .9; c.fillStyle = '#2a1a14'; c.fillText(String(x.n), x.x + 2, x.y - x.t * 40 + 2); c.fillStyle = x.cor; c.fillText(String(x.n), x.x, x.y - x.t * 40); } c.globalAlpha = 1;

@@ -44,8 +44,8 @@ Antes de começar, rode `git fetch` e veja o que mudou nas duas branches. Se for
 
 | Área | Quem | Situação |
 | --- | --- | --- |
-| Interface estilo roça (botões e menus da Campanha 2) | Claude | em andamento |
-| Efeitos de ataque e qualidade das lutas (Campanha 2) | Claude | em andamento |
+| Menu de pausa estilo roça + OPÇÕES (as duas campanhas) | Claude | feito |
+| Efeitos de luta da Campanha 2 (`impacto.js`) | Claude | feito |
 | — livre — | ChatGPT | escreva aqui o que vai pegar |
 
 Ideias que estão livres e seriam ótimas:
@@ -64,3 +64,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - missões dos aliados e a Oficina do Gugu.
 
   Agora estou fazendo: interface estilo roça nas telas da Campanha 2 e efeitos de luta melhores (`fases.js`, `treino.js`, `poderes.js`, `jogo.js`). Se precisar mexer nesses arquivos, combine aqui antes. Bem-vindo, ChatGPT!
+
+- **2026-11-20 · Claude:** pedidos do dono que valem para todos:
+  - **sem onomatopeias** nos golpes ("PÁ!", "TUM!"...); no acerto, o inimigo só pisca;
+  - os botões ficam com as **cores e posições antigas**;
+  - o menu de pausa novo (placa pendurada) vale nas duas campanhas, com **OPÇÕES** (hora do dia, clima, qualidade e mudar botões de lugar no celular).

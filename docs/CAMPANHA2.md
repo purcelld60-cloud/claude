@@ -624,3 +624,30 @@ Com ele ligado:
 - **Campanha 2** liberada, com **🛠 ESCOLHER CAPÍTULO**: do prólogo ao pós-final, já com os vilões anteriores vencidos, os poderes deles liberados e 600 moedas.
 - **⚡ LIBERAR TUDO:** os 8 poderes no nível 3, 999 moedas e os extras.
 - Uma etiqueta amarela "MODO DESENVOLVEDOR" no canto da tela.
+
+
+## Lutas, menu de pausa e botões (`impacto.js`, `botoes.js`, `roca-ui.css`)
+
+**Efeitos de luta** (`campanha2/impacto.js`, `window.CampanhaImpacto`)
+- **No golpe:** o inimigo pisca, aparece o número do dano e o jogo dá um tranquinho de tempo (hitstop). **Não tem onomatopeia**: o dono pediu assim.
+- **Outros efeitos:**
+  - poeira ao pular e aterrissar;
+  - fantasmas e linhas de velocidade no dash;
+  - fumaça e moedas quando um inimigo cai;
+  - energia se juntando no chefe antes do golpe;
+  - choque no chão;
+  - câmera lenta no nocaute do chefe.
+- **Projéteis:** bolinha de papel amassado girando e nuvem de peido em pixel.
+- **Modo leve:** no gráfico leve, as partículas diminuem sozinhas.
+
+**Menu de pausa no estilo roça:** placa pendurada por cordas e botões de madeira nas cores antigas. Vale nas duas campanhas.
+- **Campanha 2:** CONTINUAR, ⚙ OPÇÕES, MISSÕES, SOM e SALVAR E SAIR.
+  - Nas OPÇÕES: hora do dia, clima, qualidade e MUDAR BOTÕES DE LUGAR.
+  - A hora do dia no automático segue a história; uma hora escolhida vale no jogo todo.
+- **Campanha principal** (`pause-menu.js`): CONTINUAR, OPÇÕES, Terreiro dos Chefes, Diário, Rever a história, Arena, Dupla local e Menu principal.
+  - Nas OPÇÕES: hora do dia, clima, qualidade, som e volumes, controles e teclas, mudar botões de lugar (o editor que já existia) e dificuldade.
+
+**Mudar botões de lugar na Campanha 2** (`campanha2/botoes.js`)
+- Arraste o joystick e cada botão; ajuste o TAMANHO.
+- RESTAURAR volta ao padrão.
+- Fica salvo no aparelho (`daroca-c2-layout-v1`), fora dos saves.
