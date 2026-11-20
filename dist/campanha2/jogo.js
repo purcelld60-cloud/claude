@@ -403,7 +403,8 @@
   }
   function fechar() {
     aberto = false; cancelAnimationFrame(raf); if (box) box.hidden = true; pausado = false; box?.querySelector('.pausa')?.remove();
-    TR()?.ligar?.(false, P); safe(() => window.CampanhaCutscenes?.musica?.parar?.()); window.__somCutscene = false; try { window.DayTime?.force?.(null); } catch (e) {}
+    TR()?.ligar?.(false, P); safe(() => window.CampanhaPoderes?.controles?.(false, { forcar: false })); // devolve os botões da campanha principal intactos
+    safe(() => window.CampanhaCutscenes?.musica?.parar?.()); window.__somCutscene = false; try { window.DayTime?.force?.(null); } catch (e) {}
     window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } }));
   }
 

@@ -632,12 +632,21 @@ Com ele ligado:
 
 **Campanha 2 aberta para todos:** o botão ❄ CAMPANHA 2 · CONQUISTA da tela inicial já começa a campanha. Não precisa zerar a principal.
 
-**Menu de pausa no estilo roça:** placa pendurada por cordas e botões de madeira nas cores antigas. Vale nas duas campanhas.
-- **Campanha 2:** CONTINUAR, ⚙ OPÇÕES, MISSÕES, SOM e SALVAR E SAIR.
-  - Nas OPÇÕES: hora do dia, clima, qualidade e MUDAR BOTÕES DE LUGAR.
-  - A hora do dia no automático segue a história; uma hora escolhida vale no jogo todo.
-- **Campanha principal** (`pause-menu.js`): CONTINUAR, OPÇÕES, Terreiro dos Chefes, Diário, Rever a história, Arena, Dupla local e Menu principal.
-  - Nas OPÇÕES: hora do dia, clima, qualidade, som e volumes, controles e teclas, mudar botões de lugar (o editor que já existia) e dificuldade.
+**Menu de pausa da Campanha 2 no estilo roça:** placa pendurada por cordas e botões de madeira nas cores antigas.
+- Botões: CONTINUAR, ⚙ OPÇÕES, MISSÕES, SOM e SALVAR E SAIR.
+- Nas OPÇÕES: hora do dia (no automático segue a história), clima, qualidade e MUDAR BOTÕES DE LUGAR.
+
+**Campanha principal: os botões ficam exatamente como eram** (pergaminho, ícone, descrição e grade de duas colunas). A pausa só ganhou o botão **OPÇÕES** no lugar de CONTROLES, que leva para HORA DO DIA, CLIMA, QUALIDADE, CONTROLES, BOTÕES DA CAMPANHA e VOLTAR.
+
+**Ao sair da Campanha 2**, os botões de toque da campanha principal voltam iguais: Reeis, Bivolt e Carro voltam, e os poderes da Campanha 2 somem. Enquanto a Campanha 2 está aberta, a campanha principal e a animação do título param de desenhar por trás, o que deixa o jogo bem mais leve.
+
+**Mapa no celular** (`mapa3d.js`)
+- Abre mostrando a cidade e dá para afastar até ver o mapa inteiro.
+- Zoom com pinça (dois dedos).
+- Título compacto.
+- Faixa embaixo com todos os lugares (🔒 trancado, ● você está aqui).
+- Com o celular deitado, a ficha do lugar abre ao lado.
+- No computador, nada muda.
 
 **Mudar botões de lugar na Campanha 2** (`campanha2/botoes.js`)
 - Arraste o joystick e cada botão; ajuste o TAMANHO.
