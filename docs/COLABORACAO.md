@@ -130,3 +130,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Ollyan:** magro, bêbado, de orelhonas e copo derramando; feliz e dançando depois de vencido; voando com as orelhas-asa.
   
   O `baile.js` só ganhou ganchos (`BailePixel.*`). A luta, as fases e os golpes continuam iguais.
+- **2026-11-21 · Claude:** **ataques do Ollyan com efeitos novos** (`baile-pixel.js`: `projetil`, `perigo`, `telegrafa` e `antesChefe`):
+  - orelha-bumerangue com rastro rosa; bola de grave com anéis e notinha; cometa lilás com cauda e faíscas;
+  - muralha de nuvens de tempestade com raios e o vão marcado por setas;
+  - nuvem carregando e raio caindo na plataforma; luar cortante com mira e feixe brilhante;
+  - aviso de carga antes de cada golpe; rastro e linhas de velocidade no mergulho; onda de choque ao disparar.
+  
+  Só visual: tamanhos, posições e dano que acertam continuam iguais.
