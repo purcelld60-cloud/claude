@@ -196,3 +196,29 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Painel da Campanha 2** em telas baixas (Android deitado): o VOLTAR ficava fora da tela. Agora o painel rola e fica compacto.
   - **Save da Campanha 2:** `carregar()` corrige passo desconhecido, cena inexistente, posição e vida inválidas e flags que não são objeto.
   - **Sem problema:** cortes nos cenários da principal, quedas no vazio na principal, bordas do mundo, saves corrompidos da principal e 3,5 minutos de teclas aleatórias (C1, luta da C1, C2 e luta da C2).
+- **2026-11-21 · Claude:** **tela inicial nova, "roça viva"** (`tela-inicial.js` + `tela-inicial.css`, classe `.tela-roca` no `#startScreen`):
+  - **Fundo:** troca o `Art.drawTitleScene` por uma cena 480×270 desenhada em código. Tem a casa do Sapo, o celeiro, o moinho, a árvore do balanço, os pés de cacau, a horta, o rio com ponte, as galinhas, o sapo e o Da Roça. O céu segue a hora real, com amanhecer, dia, entardecer e noite com estrelas e vaga-lumes. O `title.js` passou a desenhar a cerca de 30 qps.
+  - **Toques no fundo** (`TelaInicial.tocar(x,y)`):
+    - chão: planta girassol, milho, flores, abóbora, cacau ou couve;
+    - galinha: pula e solta penas;
+    - Da Roça: acena;
+    - sapo: pula;
+    - sol ou lua: muda a hora do dia;
+    - céu: passarinhos de dia, estrela cadente à noite;
+    - nuvem: chove e a chuva faz as plantas crescerem;
+    - rio: pula um peixe;
+    - moinho: dispara;
+    - casa: solta fumaça e acende a luz;
+    - celeiro: espalha feno;
+    - cacau: cai fruto;
+    - árvore e balanço: balançam e soltam folhas.
+  - **Sons curtos** em WebAudio, só com o som ligado (`Game.soundOn`); não mexem na música.
+  - **Logo em canvas** (`.tr-logo`):
+    - letras de "DA ROÇA" e "ADVENTURE" desenhadas à mão, com contorno, relevo, degradê e brilho;
+    - placa de tábuas com trepadeira, faixa verde, milho, girassol, cacau, galinha e sapo;
+    - na entrada as letras caem uma a uma; tocar no logo faz uma onda.
+    - A `.wooden-title` antiga fica escondida, mas continua para leitores de tela.
+  - **Botões:**
+    - tábuas pregadas com veios e ícones em pixel (`.tr-ico`); o JOGAR é pintado de verde e pulsa;
+    - botões dos cantos em blocos de madeira e painel JOGAR/MULTIPLAYER em moldura de madeira;
+    - **ids e funções dos botões não mudaram.**
