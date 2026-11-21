@@ -111,6 +111,9 @@
       inimigos: [['aluno', 1960], ['pombo', 2040], ['aluna', 2120]], curas: [1900, 2150] }
   };
   const TIPO = { vizinha: 'c2i_vizinha', vizinha2: 'c2i_vizinha2', motoca: 'c2i_motoca', feirante: 'c2i_feirante', seguidor: 'c2i_seguidor', jagunco: 'c2i_jagunco', valentao: 'c2i_valentao', gamer: 'c2i_gamer', aluno: 'c2i_aluno', aluna: 'c2i_aluna', pombo: null, urubu: null, maritaca: null, morcego: null, drone: null };
+  /* Balanceamento com o dano da campanha 1 (papel 28, régua +14, estojo +22, peido 55, × força): a vida dos inimigos é multiplicada
+     por ESC para as lutas durarem o mesmo de antes; os chefes seguem também a dificuldade da principal (FÁCIL / NORMAL / DIFÍCIL). */
+  const ESC = 5, DIF = () => window.Difficulty?.getSettings?.() || { hp: 1, windup: 1, recovery: 1, incomingDamage: 1 };
   const STATS = { vizinha: { hp: 34, ia: 'tiro', proj: 'balao', dano: 9 }, vizinha2: { hp: 40, ia: 'tiro', proj: 'balao', dano: 10 }, pombo: { hp: 14, ia: 'voa', dano: 8 }, urubu: { hp: 22, ia: 'voa', dano: 11 },
     motoca: { hp: 46, ia: 'carga', dano: 13 }, feirante: { hp: 40, ia: 'tiro', proj: 'fruta', dano: 10 }, seguidor: { hp: 42, ia: 'flash', dano: 10 },
     jagunco: { hp: 58, ia: 'corpo', dano: 13 }, maritaca: { hp: 20, ia: 'voa', dano: 10 }, valentao: { hp: 66, ia: 'corpo', dano: 15 }, morcego: { hp: 22, ia: 'voa', dano: 11 },
@@ -122,15 +125,16 @@
   function criar(slug, api) {
     const F = FASES[slug]; if (!F) return null; const K = F.chefe, P = api.P;
     const efeitos = [], projs = [], textos = [], placas = []; let t = 0, falaT = 3, falaTxt = '', falaVida = 0;
-    const novoInimigo = (k, x, extra = {}) => { const st = STATS[k]; const e = { k, tipo: TIPO[k], x, homeX: x, y: st.ia === 'voa' ? 300 : FLOOR, hp: st.hp, max: st.hp, dir: -1, st: 'patrulha', tt: rnd(0, 1.5), hit: 0, vx: 0, vy: 0, stun: 0, conf: 0, golpe: 0, alto: st.ia === 'voa' ? 24 : 70, largura: st.ia === 'voa' ? 20 : 22, morto: 0, ...extra };
+    const novoInimigo = (k, x, extra = {}) => { const st = STATS[k]; const e = { k, tipo: TIPO[k], x, homeX: x, y: st.ia === 'voa' ? 300 : FLOOR, hp: Math.round(st.hp * ESC), max: Math.round(st.hp * ESC), dir: -1, st: 'patrulha', tt: rnd(0, 1.5), hit: 0, vx: 0, vy: 0, stun: 0, conf: 0, golpe: 0, alto: st.ia === 'voa' ? 24 : 70, largura: st.ia === 'voa' ? 20 : 22, morto: 0, ...extra };
       e.onDano = (n, tipo) => danoInimigo(e, n, tipo); return e; };
     const inimigos = F.inimigos.map(([k, x]) => novoInimigo(k, x));
     const curas = F.curas.map((x) => ({ x, pego: false }));
-    const B = { tipo: K.tipo, x: K.x, y: FLOOR, homeX: K.x, hp: K.hp, max: K.hp, fase: 1, st: 'espera', tt: 0, hit: 0, golpe: null, padrao: 0, dir: -1, vx: 0, vy: 0, stun: 0, conf: 0, alto: 96, largura: 30, armor: K.armor || .55, morto: 0 };
+    const HPB = Math.round(K.hp * ESC * (DIF().hp || 1)); // vida do chefe na escala da campanha 1, com a dificuldade
+    const B = { tipo: K.tipo, x: K.x, y: FLOOR, homeX: K.x, hp: HPB, max: HPB, fase: 1, st: 'espera', tt: 0, hit: 0, golpe: null, padrao: 0, dir: -1, vx: 0, vy: 0, stun: 0, conf: 0, alto: 96, largura: 30, armor: K.armor || .55, morto: 0 };
     B.onDano = (n, tipo) => danoChefe(n, tipo);
     // o segundo gêmeo: divide a vida com o primeiro, fica do outro lado e atira junto
     const B2 = K.dupla ? { tipo: K.dupla.tipo, x: K.x + K.dupla.dx, y: FLOOR, dir: -1, hit: 0, st: 'idle', tt: 2, stun: 0, conf: 0, vx: 0, vy: 0, alto: 96, largura: 30, get hp() { return B.hp; }, set hp(v) {}, onDano: (n, tipo) => danoChefe(n, tipo, B2) } : null;
-    const MULT = K.mult || [1, 1.25, 1.5], NF = MULT.length, HPF = MULT.map((m) => Math.round(K.hp * m)), pf = (k) => K.porFase?.[B.fase - 1]?.[k] ?? K[k];
+    const MULT = K.mult || [1, 1.25, 1.5], NF = MULT.length, HPF = MULT.map((m) => Math.round(HPB * m)), pf = (k) => K.porFase?.[B.fase - 1]?.[k] ?? K[k];
     const arena = { ativa: false, l: K.x + K.arena[0], r: K.x + K.arena[1] };
     let vencido = false;
 
@@ -166,7 +170,7 @@
     const vel = () => K.vel * (1 + (B.fase - 1) * .14) * (K.furia && B.fase === 3 ? 1.12 : 1);
     function escolherGolpe() { const lista = K.golpes[B.fase - 1]; const g = lista[B.padrao % lista.length]; B.padrao++; return g; }
     function prepara(g) {
-      B.golpe = { g, t: 0, aviso: Math.max(.45, .85 / vel()) }; B.st = 'carga'; B.dir = P.x < B.x ? -1 : 1;
+      B.golpe = { g, t: 0, aviso: Math.max(.45, .85 / vel()) * (DIF().windup || 1) }; // aviso do golpe: mais longo no fácil, mais curto no difícil B.st = 'carga'; B.dir = P.x < B.x ? -1 : 1;
       if (g === 'investida' || g === 'combo') B.golpe.alvo = B.dir < 0 ? arena.l + 30 : arena.r - 30;
       if (g === 'combo') B.golpe.volta = true;
       if (g === 'soco') { B.golpe.aviso = Math.max(.7, 1.15 / vel()); B.golpe.alvo = clamp(B.x + B.dir * 300, arena.l + 30, arena.r - 30); }
@@ -265,9 +269,9 @@
       if (B.st === 'carga') { const G = B.golpe; G.t += dt; if (G.t >= G.aviso) { solta(G.g); B.st = 'ataque'; G.t = 0; } return; }
       if (B.st === 'ataque') { const G = B.golpe; G.t += dt;
         if (G.g === 'investida' || G.g === 'combo' || G.g === 'soco') { const soco = G.g === 'soco', sp = (soco ? 900 : K.moto ? 640 : 520) * vel(); B.x += B.dir * sp * dt; if (Math.abs(P.x - B.x) < (soco ? 40 : 30) && P.y > FLOOR - 56) api.ferir((soco ? 22 : 16) + B.fase * 2, B.x - B.dir * 30);
-          if ((B.dir > 0 && B.x >= G.alvo) || (B.dir < 0 && B.x <= G.alvo) || G.t > 2) { if (G.volta) { G.volta = false; G.t = 0; B.dir *= -1; G.alvo = B.dir < 0 ? arena.l + 30 : arena.r - 30; api.sfx('whoosh'); return; } B.st = 'recupera'; B.tt = soco ? 1.5 : 1.2; api.tremer(soco ? 10 : 5); if (soco) efeitos.push({ k: 'poeira', x: B.x + B.dir * 30, y: FLOOR, t: 0 }); } return; }
-        if (G.g === 'topete') { B.x += Math.sign(P.x - B.x) * 120 * dt; if (G.t < .75 && Math.hypot(P.x - B.x, (P.y - 40) - (B.y - 50)) < 110 && !G.acertou) { G.acertou = true; api.ferir(18 + B.fase * 2, B.x); } if (G.t > .8) { B.st = 'recupera'; B.tt = Math.max(.7, 1.1 - B.fase * .1); } return; }
-        if (G.t > .45) { B.st = 'recupera'; B.tt = Math.max(.75, 1.25 - B.fase * .12); } return; }
+          if ((B.dir > 0 && B.x >= G.alvo) || (B.dir < 0 && B.x <= G.alvo) || G.t > 2) { if (G.volta) { G.volta = false; G.t = 0; B.dir *= -1; G.alvo = B.dir < 0 ? arena.l + 30 : arena.r - 30; api.sfx('whoosh'); return; } B.st = 'recupera'; B.tt = soco ? 1.5 : 1.2 * (DIF().recovery || 1); api.tremer(soco ? 10 : 5); if (soco) efeitos.push({ k: 'poeira', x: B.x + B.dir * 30, y: FLOOR, t: 0 }); } return; }
+        if (G.g === 'topete') { B.x += Math.sign(P.x - B.x) * 120 * dt; if (G.t < .75 && Math.hypot(P.x - B.x, (P.y - 40) - (B.y - 50)) < 110 && !G.acertou) { G.acertou = true; api.ferir(18 + B.fase * 2, B.x); } if (G.t > .8) { B.st = 'recupera'; B.tt = Math.max(.7, 1.1 - B.fase * .1) * (DIF().recovery || 1); } return; }
+        if (G.t > .45) { B.st = 'recupera'; B.tt = Math.max(.75, 1.25 - B.fase * .12) * (DIF().recovery || 1); } return; }
       if (B.st === 'recupera') { if (B.tt <= 0) { B.st = 'idle'; B.tt = Math.max(.35, .9 - B.fase * .15); } }
     }
 
@@ -367,7 +371,7 @@
       for (const p of placas) { const k = p.t, a = Math.min(1, k / .2, (p.vida - k) / .3), sc = 1 + Math.max(0, .25 - k) * 2; c.save(); c.globalAlpha = a; c.translate(W / 2, 210); c.scale(sc, sc); c.fillStyle = 'rgba(12,8,6,.75)'; c.fillRect(-300, -46, 600, 92); c.fillStyle = p.cor; c.fillRect(-300, -46, 600, 4); c.fillRect(-300, 42, 600, 4); txt(c, p.titulo, 0, -30, p.cor, { s: 5, sombra: '#2a1006' }); txt(c, p.sub, 0, 14, '#f6ead0', { s: 2 }); c.restore(); }
     }
     function reiniciar() { // depois de desmaiar: o chefe volta ao começo, os inimigos vencidos continuam vencidos
-      Object.assign(B, { x: K.x, hp: K.hp, max: K.hp, fase: 1, st: 'espera', tt: 0, golpe: null, padrao: 0, stun: 0, conf: 0, fim: false }); if (B2) Object.assign(B2, { x: K.x + K.dupla.dx, st: 'idle', tt: 2, stun: 0 }); arena.ativa = false; projs.length = 0; efeitos.length = 0; placas.length = 0; vencido = false;
+      Object.assign(B, { x: K.x, hp: HPB, max: HPB, fase: 1, st: 'espera', tt: 0, golpe: null, padrao: 0, stun: 0, conf: 0, fim: false }); if (B2) Object.assign(B2, { x: K.x + K.dupla.dx, st: 'idle', tt: 2, stun: 0 }); arena.ativa = false; projs.length = 0; efeitos.length = 0; placas.length = 0; vencido = false;
       for (let i = inimigos.length - 1; i >= 0; i--) if (inimigos[i].invocado) inimigos.splice(i, 1);
     }
     function comecarLuta() { B.st = 'idle'; B.tt = 1.2; P.x = arena.l + 70; placa(K.nome, 'NV ' + K.nivel + ' · ' + K.titulo, K.cor, 2.3); api.sfx('vs'); }

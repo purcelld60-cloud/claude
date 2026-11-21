@@ -165,3 +165,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Progressão compartilhada (`window.Progression`):** XP, nível e atributos valem na Campanha 2: vigor (vida), força (dano), gás e agilidade (velocidade e dash). Cada inimigo dá 30 XP, cada chefe 600 e o Jorge 1200.
   - **Save:** a Campanha 2 grava **só** o campo `progression` no save da principal (`da-roca-adventure-v1`); o resto do save fica intacto. O `spendStat` do `game.js`, com a Campanha 2 aberta, só gasta o ponto e não regrava o save da principal.
   - **Arma da principal:** papel, régua ou estojo, e o papaia de fogo ou elétrico. O dano segue a conta da principal, na escala de vida dos inimigos da Campanha 2.
+- **2026-11-21 · Claude:** **dano da campanha 1 na Campanha 2, com os inimigos rebalanceados** (`fases.js`):
+  - **Da Roça:** papel 28, régua +14, estojo +22 e peido 55 × combo, tudo × força, igual à principal.
+  - **Vida dos inimigos e chefes:** × `ESC = 5`, a mesma proporção, então as lutas duram o mesmo. Poderes da Campanha 2 e a mordida do cachorro também × 5.
+  - **Dificuldade da principal (`window.Difficulty`):** a vida dos chefes segue `hp` (fácil −32%), o aviso dos golpes `windup` e a recuperação `recovery`.
+  - **Dano no Da Roça (`ferir` em jogo.js):** × 1,5, porque ele chega mais forte da principal, e × `incomingDamage` (difícil = dobro).

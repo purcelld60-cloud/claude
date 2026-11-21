@@ -168,7 +168,7 @@
     if (!cao.alvo || cao.alvo.hp <= 0 || !vivos.includes(cao.alvo)) cao.alvo = vivos.sort((a, b) => Math.abs(a.x - cao.x) - Math.abs(b.x - cao.x))[0] || null;
     const destino = cao.alvo ? cao.alvo.x - Math.sign(cao.alvo.x - cao.x) * 18 : P.x - P.facing * 46, dx = destino - cao.x;
     if (Math.abs(dx) > 6) { cao.x += Math.sign(dx) * Math.min(Math.abs(dx), (cao.alvo ? 340 : Math.abs(dx) > 160 ? 420 : 220) * dt); cao.dir = Math.sign(dx); }
-    if (cao.alvo && Math.abs(cao.alvo.x - cao.x) < 30 && cao.cd <= 0) { cao.cd = 2.4; cao.mordeT = .3; cao.alvo.onDano(7, 'mordida'); try { window.Roteiro?.sfx?.('risada'); } catch (e) {} }
+    if (cao.alvo && Math.abs(cao.alvo.x - cao.x) < 30 && cao.cd <= 0) { cao.cd = 2.4; cao.mordeT = .3; cao.alvo.onDano(35, 'mordida'); /* na escala do dano da campanha 1 */ try { window.Roteiro?.sfx?.('risada'); } catch (e) {} }
   }
 
   /* ---------- interface com o jogo ---------- */
