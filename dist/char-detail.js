@@ -11,6 +11,7 @@
   const [spriteC, sprite] = make(), [tintC, tint] = make(), [outC, out] = make();
   const SKIP = new Set(['giant', 'dede']);
   let enabled = true;
+  const CACHE = new Map();
 
   function tinted(color) {
     tint.globalCompositeOperation = 'source-over'; tint.clearRect(0, 0, W, H);
@@ -29,6 +30,9 @@
     const sx = m.a * x + m.c * y + m.e, cw = c.canvas?.width || 960;
     if (sx < -260 || sx > cw + 260) return;
     if ((o.scale || 1) > 1.25) return original(c, type, x, y, o);
+    // Personagens de fundo (o.cache): guarda o resultado pronto por pose e reaproveita — 1 desenho em vez de ~12 por quadro.
+    const ck = o.cache && Math.abs(m.a - 1) < .01 && Math.abs(m.d - 1) < .01 && !m.b && !m.c && !o.hit ? type + '|' + ((o.facing || 1) < 0 ? -1 : 1) + '|' + (((Math.floor((o.frame || 0) * 3) % 6) + 6) % 6) + '|' + (o.scale || 1) : null;
+    if (ck) { const hit = CACHE.get(ck); if (hit) { c.save(); c.imageSmoothingEnabled = false; c.drawImage(hit.cv, Math.round(x) - OX + hit.x0, Math.round(y) - OY + hit.y0); c.restore(); return; } o = { ...o, frame: Math.floor((o.frame || 0) * 3) / 3 }; }
 
     sprite.setTransform(1, 0, 0, 1, 0, 0); sprite.globalAlpha = 1; sprite.globalCompositeOperation = 'source-over';
     sprite.clearRect(0, 0, W, H);
@@ -66,6 +70,8 @@
     out.globalAlpha = .32; out.drawImage(sh, 0, 0); out.globalAlpha = 1;
 
     c.save(); c.imageSmoothingEnabled = false; c.drawImage(outC, Math.round(x) - OX, Math.round(y) - OY); c.restore();
+    if (ck) { try { const d = out.getImageData(0, 0, W, H).data; let x0 = W, y0 = H, x1 = -1, y1 = -1; for (let yy = 0; yy < H; yy++) for (let xx = 0; xx < W; xx++) if (d[(yy * W + xx) * 4 + 3] > 8) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (yy < y0) y0 = yy; if (yy > y1) y1 = yy; }
+      if (x1 >= x0) { const cv = document.createElement('canvas'); cv.width = x1 - x0 + 1; cv.height = y1 - y0 + 1; cv.getContext('2d').drawImage(outC, -x0, -y0); CACHE.set(ck, { cv, x0, y0 }); if (CACHE.size > 260) CACHE.delete(CACHE.keys().next().value); } } catch (e) {} }
   }
 
   window.Art.drawCharacter = detailed;

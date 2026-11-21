@@ -209,7 +209,7 @@
     for (const p of L) {
       if (p.x < cam - 80 || p.x > cam + 1040) continue;
       const perto = Math.abs(p.x - hx) < 160, facing = perto ? (hx > p.x ? 1 : -1) : (p.facing || (p.x % 2 ? 1 : -1));
-      window.Art.drawCharacter(c, p.id, p.x, FLOOR, { frame: t + p.x * .01, facing, moving: false, grounded: true, vy: 0 });
+      window.Art.drawCharacter(c, p.id, p.x, FLOOR, { frame: t + p.x * .01, facing, moving: false, grounded: true, vy: 0, cache: true });
       const novo = !conhecidos.has(p.id), y = FLOOR - 112 + Math.round(Math.sin(t * 3 + p.x) * 2);
       if (novo || perto) { // balãozinho em cima da cabeça: ! (ainda não conhece) ou … (já conhece)
         const col = novo ? (p.tipo === 'personagem' ? '#ffd24a' : '#8ae0ff') : '#f3d89e', bx = Math.round(p.x) - 10, by = y - 12;

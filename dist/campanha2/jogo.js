@@ -230,7 +230,7 @@
         for (let k = 0; k < 4; k++) if (Math.sin(t * 5 + k * 1.7) > .4) { const sx = x + 8 + Math.cos(k * 1.6 + t) * 20, sy = y + 10 + Math.sin(k * 2 + t) * 16; c.fillStyle = '#fff3a8'; c.fillRect(sx, sy - 3, 2, 8); c.fillRect(sx - 3, sy, 8, 2); } }
       if (S.passo === 'lucas') { c.save(); c.translate(4640, 0); c.scale(-1, 1); safe(() => window.Art.drawVehicle(c, 0, FLOOR, t)); c.restore(); }
     }
-    for (const n of NPC) if (n.cena === d.id && n.quando.includes(S.passo)) safe(() => window.Art.drawCharacter(c, n.quem, n.x, FLOOR, { frame: t, facing: P.x < n.x ? -1 : 1, grounded: true }));
+    for (const n of NPC) if (n.cena === d.id && n.quando.includes(S.passo)) safe(() => window.Art.drawCharacter(c, n.quem, n.x, FLOOR, { frame: t, facing: P.x < n.x ? -1 : 1, grounded: true, cache: true }));
     if (d.id === 12 && ['checkin', 'raiox', 'portao'].includes(S.passo)) { const e = ESTACOES.find((q) => q.quando === S.passo); if (e) { const y = FLOOR - 128 + Math.sin(t * 4) * 4; c.fillStyle = '#ffd24a'; c.beginPath(); c.moveTo(e.x - 10, y - 12); c.lineTo(e.x + 10, y - 12); c.lineTo(e.x, y); c.fill(); } }
   }
   function setaObjetivo() {
@@ -377,7 +377,8 @@
     desenharExtras();
     safe(() => window.CampanhaAliados?.desenhar?.(c, d.id)); if (F) F.desenhar(c);
     for (const ax of window.CampanhaAliados?.alvos?.(d.id) || []) { const y = FLOOR - 150 + Math.sin(t * 4 + ax) * 4; c.fillStyle = '#1c1408'; c.fillRect(ax - 7, y - 7, 14, 14); c.fillStyle = '#7af07a'; c.fillRect(ax - 5, y - 5, 10, 10); c.fillStyle = '#1c1408'; c.fillRect(ax - 1, y - 4, 2, 5); c.fillRect(ax - 1, y + 2, 2, 2); }
-    const at = P.attack || 0; if (!((P.inv || 0) > 0 && Math.floor(t * 16) % 2)) window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: 'paper', attackProgress: 1 - at / .32 });
+    safe(() => TR()?.desenharAtras?.(c, t)); // nuvem de gás e rastro do dash atrás do herói (como na campanha 1)
+    const at = P.attack || 0, dur = P.attackDuration || .32; if (!((P.inv || 0) > 0 && Math.floor(t * 16) % 2)) window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: P.attackType || 'paper', attackProgress: 1 - at / dur, attackObject: 'paper', flight: !!TR()?.voandoAgora?.(), dash: !!TR()?.dashing?.(), recoil: at > 0 && (P.attackType || 'paper') === 'paper' ? Math.max(0, 1 - (1 - at / dur) * 3) : 0 });
     safe(() => TR()?.desenhar?.(c, t));
     safe(() => window.Interact?.drawFront?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
     procurarPerto();
