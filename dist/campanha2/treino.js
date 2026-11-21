@@ -47,28 +47,58 @@
     empurrar: (e, vx, vy) => { e.vx = vx; e.vy = vy; }, atordoar: (e, s) => { e.stun = s; }, confundir: (e, s) => { e.conf = s; }, tremer: (n) => { shake = Math.max(shake, n); } });
   function bater(e, n, tipo, dir) { mundo().dano(e, Math.round(n * PW.multiplicadores().forca * (window.CampanhaAliados?.forca?.() || 1)), tipo, dir); }
 
-  /* ---------- ações básicas (as da campanha 1, num jeito simples para o treino) ---------- */
+  /* ---------- ações básicas: EXATAMENTE as da campanha 1 (mesmos números de game.js) ----------
+     papel: reto a 600, mira no inimigo mais perto à frente, 30 de munição (recarrega 1 a cada 1,1 s), segurar = rajada (0,23 s)
+     voo: segurar o pulo no ar sobe até 235 (1050/s), gasta 17 de gás por segundo; gás recarrega 16/s no chão e 6/s no ar
+     dash: 600 por 0,2 s, rastro do Da Roça, poeira e invencível 0,18 s; recarga 1,1 s
+     peido: em volta do Da Roça (raio 155/205/260 no combo de 3), gasta gás 20/17/20, recarga 0,24 entre golpes do combo e 1,5 no fim */
+  const CFG = { mover: 280, pulo: 365, grav: 850, voo: 235, empuxo: 1050, gasVoo: 17, gasChao: 16, gasAr: 6, gasMax: 100, papel: 600, papelVida: 1.5, papelCd: .23, papelMax: 30, dash: 600, dashT: .2, dashCd: 1.1 };
+  let papeis = CFG.papelMax, municao = 0, cdPapel = 0, cdPeido = 0, combo = 0, janela = 0, dashDir = 1, segura = { paper: false, fart: false }, rastro = [], parts = [];
+  let ctxSom = null;
+  function beep(freq = 440, dur = .09, type = 'square', vol = .025) { // o mesmo "bip" da campanha 1
+    try { if (window.Game?.soundOn && !window.Game.soundOn()) return; vol *= window.DarocaAudio?.sfx?.() ?? 1; if (vol <= .0005) return; ctxSom = ctxSom || new (window.AudioContext || window.webkitAudioContext)(); ctxSom.resume();
+      const o = ctxSom.createOscillator(), g = ctxSom.createGain(), t0 = ctxSom.currentTime; o.type = type; o.frequency.setValueAtTime(freq, t0); o.frequency.exponentialRampToValueAtTime(Math.max(35, freq * .5), t0 + dur); g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(.001, t0 + dur); o.connect(g); g.connect(ctxSom.destination); o.start(); o.stop(t0 + dur); } catch (e) {} }
+  function fx(x, y, color, count = 10, power = 90) { const n = Math.min(12, Math.max(0, Math.round(count * .5)), Math.max(0, 96 - parts.length)); for (let i = 0; i < n; i++) parts.push({ x, y, vx: (Math.random() * 2 - 1) * power, vy: -power + Math.random() * power * 1.35, life: .18 + Math.random() * .3, color, size: 2 + Math.random() * 2 }); }
+  function papel(P) {
+    if (cdPapel > 0) return; if (papeis <= 0) { aviso('O papel recarrega sozinho. Use o combo de gás enquanto espera!'); cdPapel = .4; return; }
+    cdPapel = CFG.papelCd; papeis--; shake = Math.max(shake, 1.2); P.attack = .24; P.attackType = 'paper'; P.attackDuration = .24; const dir = P.facing < 0 ? -1 : 1;
+    const alvo = bonecos.filter((b) => b.hp > 0 && !b.intocavel && Math.sign(b.x - P.x) === dir && Math.abs(b.x - P.x) < 650).sort((a, b) => Math.abs(a.x - P.x) - Math.abs(b.x - P.x))[0];
+    const mira = alvo ? Math.max(-.85, Math.min(.85, Math.atan2((alvo.y - (alvo.alto || 80) / 2) - (P.y - 32), Math.abs(alvo.x - P.x)))) : 0;
+    tiros.push({ x: P.x + dir * 28, y: P.y - 32, vx: dir * Math.cos(mira) * CFG.papel, vy: Math.sin(mira) * CFG.papel, vida: CFG.papelVida });
+    VFX()?.emit?.('cast', { x: P.x + dir * 26, y: P.y - 32, dir }); fx(P.x + dir * 30, P.y - 32, '#f8f3da', 4, 35); beep(760, .045);
+  }
+  function peido(P) {
+    if (cdPeido > 0) return; const corrente = janela > 0; combo = corrente ? Math.min(3, combo + 1) : 1; const custo = combo === 3 ? 20 : combo === 2 ? 17 : 20;
+    if (gas < custo) { aviso('Seu gás precisa recarregar. Espere no chão!'); combo = 0; cdPeido = .3; return; }
+    gas -= custo; cdPeido = combo === 3 ? 1.5 : .24; janela = combo < 3 ? .85 : 0; P.attack = .36; P.attackType = 'fart'; P.attackDuration = .36; shake = Math.max(shake, combo === 3 ? 9 : 4); beep(80 - combo * 8, .2, 'sawtooth', .045);
+    const dir = P.facing < 0 ? -1 : 1, raio = combo === 3 ? 260 : combo === 2 ? 205 : 155, mult = combo === 3 ? 1.8 : combo === 2 ? 1.25 : 1;
+    VFX()?.emit?.('gas', { x: P.x + dir * 9, y: P.y - 23, dir, stage: combo, radius: raio }); fx(P.x + dir * 38, P.y - 22, combo === 3 ? '#e0ef82' : '#b9df55', combo === 3 ? 52 : 25, raio * .75);
+    for (const b of bonecos) if (b.hp > 0 && !b.intocavel && Math.abs(b.x - P.x) < raio + ((b.largura || 22) - 22) && Math.abs((b.y || FLOOR) - P.y) < 180) bater(b, Math.round(9 * mult), 'peido', 0);
+  }
   function acao(id, down, P) {
     heroRef = P; const dir = P.facing < 0 ? -1 : 1;
     if (id === 'poder1' || id === 'poder2') { const r = PW.usar(id === 'poder1' ? 0 : 1, mundo(), down ? 'down' : 'up'); if (down && !r.ok && r.motivo === 'vazio') aviso('Equipe um poder no Mural dos Poderes (quarto da pensão).'); if (down && !r.ok && r.motivo === 'recarga') aviso(`Recarregando: ${r.falta.toFixed(1).replace('.', ',')} s`); return true; }
-    if (!down) { if (id === 'jump') voando = false; return true; }
-    if (modoJogo && (id === 'paper' || id === 'fart')) { if ((cdAtk[id] || 0) > 0) return true; cdAtk[id] = id === 'paper' ? .26 : .9; if (id === 'paper') { P.attack = .32; } }
-    if (id === 'paper') { tiros.push({ x: P.x + dir * 22, y: P.y - 52, vx: dir * 620, vy: -90, vida: .8 }); P.attack = .24; P.attackType = 'paper'; P.attackDuration = .24; VFX()?.emit?.('cast', { x: P.x + dir * 26, y: P.y - 52, dir }); return true; }
-    if (id === 'fart') { nuvens.push({ x: P.x - dir * 20, y: P.y - 30, vx: -dir * 60, t: 0, hitou: new Set(), dir }); P.attack = .36; P.attackType = 'fart'; P.attackDuration = .36; shake = Math.max(shake, 4); VFX()?.emit?.('gas', { x: P.x + dir * 9, y: P.y - 23, dir, stage: 1, radius: 155 }); return true; }
-    if (id === 'dash') { if (dashCd <= 0) { dashT = .2; dashCd = 1.1; P.vx = dir * 620; VFX()?.emit?.('dash', { x: P.x, y: P.y - 3, dir }); } return true; }
-    if (id === 'jump') { voando = true; return false; } // o pulo em si é do visualizador
-    if (id === 'interact') return false;
+    if (id === 'paper' || id === 'fart') { segura[id] = !!down; if (down) (id === 'paper' ? papel : peido)(P); return true; } // segurar dispara de novo quando a recarga acaba (como na principal)
+    if (!down) return id !== 'jump' && id !== 'interact';
+    if (id === 'dash') { if (dashCd <= 0) { dashDir = P.facing < 0 ? -1 : 1; dashT = CFG.dashT; dashCd = CFG.dashCd; P.vx = dashDir * CFG.dash; P.inv = Math.max(P.inv || 0, .18); VFX()?.emit?.('dash', { x: P.x, y: P.y - 3, dir: dashDir }); fx(P.x, P.y - 22, '#c0dfb8', 18, 130); beep(310, .08, 'sawtooth'); } return true; }
+    if (id === 'jump') return false; // o pulo (365) e o voo estão na física do jogo e no passo abaixo
     return false;
   }
-  const cdAtk = {}, VFX = () => window.CampaignVfx;
-  let jato = [], voandoAgora = false; // fumacinha de gás do voo de peido (como na campanha 1)
-  let avisoTxt = '', avisoT = 0; const aviso = (s) => { avisoTxt = s; avisoT = 2.4; };
+  const VFX = () => window.CampaignVfx;
+  const musculoso = () => { try { return !!window.Game?.getState?.()?.q?.trained; } catch (e) { return false; } }; // continuação: o Da Roça segue como terminou a campanha 1
+  let voandoAgora = false;
+  let avisoTxt = '', avisoT = 0; const aviso = (s) => { if (modoJogo && window.Campanha2?.aviso) { try { window.Campanha2.aviso(s); return; } catch (e) {} } avisoTxt = s; avisoT = 2.4; };
 
   function passo(dt, P, o) {
-    if (!on) return; heroRef = P; cam = o.cam; PW.atualizar(dt, mundo()); for (const k in cdAtk) cdAtk[k] = Math.max(0, cdAtk[k] - dt); if (P.attack > 0) P.attack = Math.max(0, P.attack - dt); dashCd = Math.max(0, dashCd - dt); shake = Math.max(0, shake - dt * 30); avisoT = Math.max(0, avisoT - dt);
-    if (dashT > 0) { dashT -= dt; P.vx = (P.facing < 0 ? -1 : 1) * 620; }
-    voandoAgora = voando && !P.ground && gas > 0 && !!o.segurandoPulo; if (voandoAgora) { P.vy = Math.max(-240, P.vy - 1500 * dt); gas = Math.max(0, gas - 38 * dt); if (Math.random() < .55) jato.push({ x: P.x - (P.facing < 0 ? -1 : 1) * 6 + (Math.random() - .5) * 8, y: P.y + 2, vx: (Math.random() - .5) * 30, vy: 40 + Math.random() * 50, t: 0, vida: .45 + Math.random() * .25, k: 3 + Math.random() * 3 }); }
-    VFX()?.update?.(dt); jato = jato.filter((q) => { q.t += dt; q.x += q.vx * dt; q.y += q.vy * dt; q.vy *= .92; return q.t < q.vida; }); if (dashT > 0 && Math.random() < .8) jato.push({ x: P.x - (P.facing < 0 ? -1 : 1) * 14, y: P.y - 10 - Math.random() * 40, vx: 0, vy: 0, t: 0, vida: .2, k: 2, risco: true }); if (P.ground) gas = Math.min(100, gas + 60 * dt);
+    if (!on) return; heroRef = P; cam = o.cam; PW.atualizar(dt, mundo());
+    cdPapel = Math.max(0, cdPapel - dt); cdPeido = Math.max(0, cdPeido - dt); janela = Math.max(0, janela - dt); if (P.attack > 0) P.attack = Math.max(0, P.attack - dt); dashCd = Math.max(0, dashCd - dt); shake = Math.max(0, shake - dt * 28); avisoT = Math.max(0, avisoT - dt);
+    municao += dt; if (municao > 1.1) { municao = 0; papeis = Math.min(CFG.papelMax, papeis + 1); }
+    if (segura.paper) papel(P); if (segura.fart) peido(P);
+    if (dashT > 0) { dashT -= dt; P.vx = dashDir * CFG.dash; rastro.push({ x: P.x, y: P.y, facing: P.facing, life: .2 }); }
+    voandoAgora = !P.ground && gas > 0 && !!o.segurandoPulo;
+    if (voandoAgora) { if (P.vy > -CFG.voo) P.vy = Math.max(-CFG.voo, P.vy - CFG.empuxo * dt); gas = Math.max(0, gas - CFG.gasVoo * dt); if (Math.random() < .35) fx(P.x, P.y + 3, '#bed970', 1, 50); }
+    else if (!o.segurandoPulo) gas = Math.min(CFG.gasMax, gas + dt * (P.ground ? CFG.gasChao : CFG.gasAr));
+    VFX()?.update?.(dt); for (const a of rastro) a.life -= dt; rastro = rastro.filter((a) => a.life > 0); for (const q of parts) { q.x += q.vx * dt; q.y += q.vy * dt; q.vy += 180 * dt; q.life -= dt; } parts = parts.filter((q) => q.life > 0);
     if (!modoJogo) for (const b of bonecos) {
       if (b.morto > 0) { b.morto -= dt; if (b.morto <= 0) Object.assign(b, novoBoneco(b.base)); continue; }
       b.hit = Math.max(0, b.hit - dt); b.stun = Math.max(0, b.stun - dt); b.conf = Math.max(0, b.conf - dt); b.golpe = Math.max(0, b.golpe - dt);
@@ -77,8 +107,8 @@
         if (alvo) { const d = alvo.x - b.x; if (Math.abs(d) > 40) b.x += Math.sign(d) * 120 * dt; else if (b.golpe <= 0) { b.golpe = .7; mundo().dano(alvo, 4, 'confuso', Math.sign(d)); alvo.vx = Math.sign(d) * 160; textos.push({ x: b.x, y: b.y - 110, n: 'TOMA!', t: 0, cor: '#e48fb0' }); } } }
       else if (b.stun <= 0) b.x += (b.base - b.x) * Math.min(1, dt * .8); // volta devagar pro lugar
     }
-    tiros = tiros.filter((q) => { q.vida -= dt; q.x += q.vx * dt; q.y += q.vy * dt; q.vy += 300 * dt; for (const b of bonecos) if (b.hp > 0 && !b.intocavel && Math.abs(b.x - q.x) < (b.largura || 22) && q.y > b.y - (b.alto || 80) && q.y < b.y + 4) { bater(b, 6, 'papel', Math.sign(q.vx)); b.vx = Math.sign(q.vx) * 90; return false; } return q.vida > 0; });
-    nuvens = nuvens.filter((n) => { n.t += dt; n.x += n.vx * dt; for (const b of bonecos) if (b.hp > 0 && !b.intocavel && !n.hitou.has(b) && Math.abs(b.x - n.x) < 60 + (b.largura || 22) - 22 && Math.abs((b.y - (b.alto || 80) / 2) - n.y) < 90) { n.hitou.add(b); bater(b, 9, 'peido', 0); } return n.t < 1.1; });
+    tiros = tiros.filter((q) => { q.vida -= dt; q.x += q.vx * dt; q.y += q.vy * dt; for (const b of bonecos) if (b.hp > 0 && !b.intocavel && Math.abs(b.x - q.x) < (b.largura || 22) && q.y > b.y - (b.alto || 80) && q.y < b.y + 4) { bater(b, 6, 'papel', Math.sign(q.vx)); b.vx = Math.sign(q.vx) * 90; return false; } return q.vida > 0; });
+    nuvens = [];
     textos = textos.filter((x) => { x.t += dt; return x.t < .9; });
   }
 
@@ -98,10 +128,7 @@
   function desenhar(c, t) {
     if (!on) return; const P = heroRef;
     if (!modoJogo) for (const b of bonecos) espantalho(c, b, t);
-    const nuvemPx = (x, y, size, cor, luz) => { const k = Math.max(2, Math.round(size / 5)), R2 = (a, b, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(a), Math.round(b), Math.round(w), Math.round(h)); };
-      R2(x - k * 3, y - k, k * 6, k * 3, '#263b42'); R2(x - k * 2, y - k * 2, k * 4, k * 5, '#263b42'); R2(x - k * 3 + 2, y - k + 2, k * 6 - 4, k * 3 - 4, cor); R2(x - k * 2 + 2, y - k * 2 + 2, k * 4 - 4, k * 5 - 4, cor); R2(x - k, y - k * 2 + 3, k * 2, k, luz); };
-    for (const n of nuvens) { const a = Math.max(0, 1 - n.t / 1.1); c.save(); c.globalAlpha = a > .3 ? 1 : a / .3; for (let k = 0; k < 4; k++) nuvemPx(n.x + Math.cos(k * 1.7 + n.t * 2) * 16 * (1 + n.t), n.y - 4 + Math.sin(k * 2.3 + n.t * 2) * 10, 10 + k * 2 + n.t * 8, k % 2 ? '#9ecb4b' : '#bedc69', '#e6ef9c'); c.restore(); }
-    for (const q of jato) { c.save(); c.globalAlpha = Math.max(0, 1 - q.t / q.vida); if (q.risco) { c.fillStyle = '#d8cc9b'; c.fillRect(Math.round(q.x), Math.round(q.y), 10, 2); } else nuvemPx(q.x, q.y, q.k * 2, '#bed970', '#e6ef9c'); c.restore(); }
+    for (const q of parts) { c.globalAlpha = Math.max(0, Math.min(1, q.life * 2)); c.fillStyle = q.color; c.fillRect(Math.round(q.x), Math.round(q.y), q.size, q.size); } c.globalAlpha = 1; // partículas iguais às da principal
     for (const q of tiros) { if (VFX()?.drawProjectile?.(c, { type: 'paper', x: q.x, y: q.y, vx: q.vx, vy: q.vy, owner: 'player' }, t)) continue; c.fillStyle = '#f6f4ee'; c.fillRect(Math.round(q.x - 5), Math.round(q.y - 5), 10, 10); }
     VFX()?.draw?.(c, t, 'front');
     PW.desenhar(c, mundo());
@@ -112,5 +139,5 @@
       barra.querySelector('.c2-treino-info').innerHTML = `TREINO DE PODERES · ● ${window.CampanhaLoja?.moedas?.() ?? 0} MOEDAS<br>J PAPEL · K PEIDO · L DASH · ␣ VOAR · U/I PODERES<br>${eq.filter(Boolean).length ? 'Equipados: ' + eq.map((id) => PW.lista().find((p) => p.id === id)?.curto || '—').join(' + ') : 'Sem poder equipado: abra o MURAL'}${m.vel > 1 ? '<br>☕ CAFEZÃO ATIVO' : ''}${PW.escudo() ? '<br>♥ AURA ATIVA' : ''}`;
       [0, 1].forEach((i) => { const id = eq[i], b = barra.querySelector(`[data-acao="poder${i + 1}"] .c2-cd`); if (!b || !id) return; const max = PW.recargaTotal(id), f = Math.min(1, PW.recarga(id) / max); b.style.setProperty('--cd', `${Math.round((1 - f) * 100)}%`); }); }
   }
-  window.CampanhaTreino = Object.freeze({ dashFalta: () => dashCd, voandoAgora: () => voandoAgora, desenharAtras: (c, t) => { if (on) VFX()?.draw?.(c, t, 'back'); }, piscando, ligar, ligado: () => on, gas: () => gas, inimigos: (lista) => { if (Array.isArray(lista)) bonecos = lista; return bonecos; }, dashing: () => on && dashT > 0, acao, passo, desenhar, montarBarra, tremor: () => shake, velocidade: () => (on ? PW.multiplicadores().vel : 1) });
+  window.CampanhaTreino = Object.freeze({ dashFalta: () => dashCd, voandoAgora: () => voandoAgora, som: (f, d, ty, v) => beep(f, d, ty, v), desenharAtras: (c, t) => { if (!on) return; VFX()?.draw?.(c, t, 'back'); for (const a of rastro) { c.save(); c.globalAlpha = Math.min(1, a.life * 2); try { window.Art?.drawCharacter?.(c, 'daroca', a.x, a.y, { facing: a.facing, frame: t, dash: true, moving: true, muscular: musculoso(), grounded: true }); } catch (e) {} c.restore(); } }, papeis: () => papeis, musculoso: () => musculoso(), piscando, ligar, ligado: () => on, gas: () => gas, inimigos: (lista) => { if (Array.isArray(lista)) bonecos = lista; return bonecos; }, dashing: () => on && dashT > 0, acao, passo, desenhar, montarBarra, tremor: () => shake, velocidade: () => (on ? PW.multiplicadores().vel : 1) });
 })();

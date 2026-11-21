@@ -205,11 +205,15 @@
   /* ---------- física (a mesma do visualizador) ---------- */
   function fisica(dt) {
     const d = D(), dir = (keys.has('right') ? 1 : 0) - (keys.has('left') ? 1 : 0) || Math.sign(Math.round(joy * 2)); if (dir) P.facing = dir;
-    P.vx = TR()?.dashing?.() ? P.vx : dir * 260 * (TR()?.velocidade?.() || 1) * ((P.atordoado || 0) > 0 ? .4 : 1) * (window.CampanhaAliados?.velocidade?.() || 1); const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
-    const prevY = P.y; P.vy = Math.min(900, P.vy + 1700 * dt); P.y += P.vy * dt; P.ground = false;
+    // andar, pular e cair com os MESMOS números da campanha 1 (game.js): velocidade 280 com aceleração, gravidade 850
+    if (!TR()?.dashing?.()) { const alvo = dir * 280 * (TR()?.velocidade?.() || 1) * ((P.atordoado || 0) > 0 ? .4 : 1) * (window.CampanhaAliados?.velocidade?.() || 1), ac = dir ? (P.ground ? 1800 : 1150) : (P.ground ? 2200 : 950);
+      P.vx += clamp(alvo - P.vx, -ac * dt, ac * dt); if (Math.abs(P.vx) < .1) P.vx = 0; }
+    P.anim = (P.anim || 0) + Math.abs(P.vx) * dt / 18.3; const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
+    const prevY = P.y, chao0 = P.ground; P.vy = Math.min(900, P.vy + 850 * dt); P.y += P.vy * dt; P.ground = false; if (P.y < 95) { P.y = 95; P.vy = Math.max(0, P.vy); }
     const overGap = (d.vaos || []).some(([gx, gw]) => P.x > gx + 10 && P.x < gx + gw - 10);
     for (const r of portais(d.id)) if (r.tipo === 'rampa' && P.x >= r.x0 && P.x <= r.x1) { const ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0); if (P.vy >= 0 && P.y >= ry - 14 && prevY <= ry + 40) { P.y = ry; P.vy = 0; P.ground = true; } if (P.x >= r.x1 - 4 && P.ground && dir > 0) viagem = { tipo: 'porta', t: 0, para: r.para }; }
     if (P.vy >= 0 && !P.ground) { for (const [px, py, pw] of d.plataformas || []) if (P.x > px - 6 && P.x < px + pw + 6 && prevY <= py + 2 && P.y >= py) { P.y = py; P.vy = 0; P.ground = true; } if (!P.ground && !overGap && P.y >= FLOOR) { P.y = FLOOR; P.vy = 0; P.ground = true; } }
+    if (!chao0 && P.ground) P.landTimer = .15; P.landTimer = Math.max(0, (P.landTimer || 0) - dt);
     if (P.y > 600) { P.x = Math.max(60, P.x - 260); P.y = FLOOR - 200; P.vy = 0; P.hp = Math.max(1, P.hp - 10); aviso('Ai! Cuidado com o buraco.'); }
   }
   function andarViagem(dt) {
@@ -218,7 +222,7 @@
     if (v.tipo === 'porta') { fade = Math.min(1, v.t / .35); P.vx = 0; if (v.t >= .35) { irPara(v.para.cena, v.para.x); viagem = { tipo: 'chegada', t: 0 }; salvar(); } return; }
     if (v.tipo === 'chegada') { fade = Math.max(0, 1 - v.t / .35); if (v.t >= .35) { viagem = null; fade = 0; } }
   }
-  function pular() { if (P.ground && !viagem && !cut) { P.vy = -620; P.ground = false; } }
+  function pular() { if (P.ground && !viagem && !cut) { P.vy = -365; P.ground = false; TR()?.som?.(320, .06, 'triangle'); } } // pulo da campanha 1
 
   /* ---------- desenho do mundo ---------- */
   function fardo(x, top, n) { for (let k = 0; k < n; k++) { const y = FLOOR - (k + 1) * 28; c.fillStyle = '#3a2a14'; c.fillRect(x - 1, y - 1, 52, 30); c.fillStyle = '#d8b04a'; c.fillRect(x, y, 50, 28); c.fillStyle = '#e8c86a'; c.fillRect(x, y, 50, 4); for (let j = 4; j < 50; j += 6) { c.fillStyle = '#b8902a'; c.fillRect(x + j, y + 6, 2, 20); } c.fillStyle = '#7a4a2a'; c.fillRect(x + 14, y, 3, 28); c.fillRect(x + 33, y, 3, 28); } }
@@ -252,7 +256,7 @@
 .c2j .hud{position:absolute;inset:0;pointer-events:none}.c2j .hud>*{pointer-events:auto}
 .c2j .vida{position:absolute;left:1.6%;top:2.4%;display:flex;flex-direction:column;gap:4px;background:#2a1e14e6;border:3px solid #8a6a3a;box-shadow:0 0 0 2px #120c08;padding:6px 8px}
 .c2j .vida .cor{display:flex;gap:3px}.c2j .vida .cor i{width:14px;height:12px;background:#5a2a24;clip-path:polygon(0 25%,25% 0,50% 25%,75% 0,100% 25%,100% 50%,50% 100%,0 50%)}.c2j .vida .cor i.on{background:#e8433a}.c2j .vida .cor i.meio{background:linear-gradient(90deg,#e8433a 50%,#5a2a24 50%)}
-.c2j .vida .gas{height:6px;width:96px;background:#1c1408;border:1px solid #6a5a3a}.c2j .vida .gas b{display:block;height:100%;background:linear-gradient(#9ae06a,#4a9a3a)}.c2j .vida .moedas{font-size:9px;color:#ffd24a}
+.c2j .vida .gas{height:6px;width:96px;background:#1c1408;border:1px solid #6a5a3a}.c2j .vida .gas b{display:block;height:100%;background:linear-gradient(#9ae06a,#4a9a3a)}.c2j .vida .moedas{font-size:9px;color:#ffd24a}.c2j .vida .papeis{font-size:9px;color:#fff1bf}.c2j.preencher{display:block}.c2j.preencher .tela{position:absolute;left:0;top:0;width:100vw;height:56.25vw;max-height:none;aspect-ratio:auto;top:var(--c2-pan,0px)}.c2j.preencher .tela>.hud,.c2j.preencher .tela>.pular,.c2j.preencher .tela>.pausa,.c2j.preencher .tela>.escolha,.c2j.preencher .tela>.c2-editor{position:fixed}
 .c2j .obj{position:absolute;left:50%;top:2.4%;transform:translateX(-50%);max-width:52%;background:#f2dc9ae8;color:#3a2412;border:3px solid #2a1a10;padding:6px 10px;font:clamp(9px,1.25vw,13px) Space,Arial,sans-serif;line-height:1.35;box-shadow:3px 4px 0 #0006}
 .c2j .obj b{display:block;font:clamp(7px,.8vw,9px) Pixel,monospace;color:#8a4a2a;margin-bottom:2px}.c2j .obj.novo{animation:c2jObj .8s cubic-bezier(.2,1.6,.4,1)}@keyframes c2jObj{from{transform:translateX(-50%) scale(.6);opacity:0}}
 .c2j .menu{position:absolute;right:1.6%;top:2.4%;width:42px;height:42px;font:16px Pixel,monospace;background:#4a3420;color:#f6ead0;border:3px solid #e8c66a;box-shadow:0 4px 0 #2a1a10;cursor:pointer}
@@ -271,7 +275,7 @@
   }
   function montar() {
     css(); box = document.createElement('div'); box.className = 'c2j'; box.hidden = true;
-    box.innerHTML = `<div class="tela"><canvas class="mundo" width="960" height="540"></canvas><div class="hud"><div class="vida"><div class="cor"></div><div class="gas"><b></b></div><div class="moedas"></div></div><div class="obj"><b>OBJETIVO</b><span></span></div><button type="button" class="menu" aria-label="Pausa">☰</button><button type="button" class="entrar" hidden></button><div class="joy move-joystick"><span class="joystick-directions" aria-hidden="true"></span><span class="joystick-knob" aria-hidden="true"><i></i></span></div></div><div class="avisos"></div><button type="button" class="pular" hidden>PULAR CENA ▶▶</button></div>`;
+    box.innerHTML = `<div class="tela"><canvas class="mundo" width="960" height="540"></canvas><div class="hud"><div class="vida"><div class="cor"></div><div class="gas"><b></b></div><div class="moedas"></div><div class="papeis"></div></div><div class="obj"><b>OBJETIVO</b><span></span></div><button type="button" class="menu" aria-label="Pausa">☰</button><button type="button" class="entrar" hidden></button><div class="joy move-joystick"><span class="joystick-directions" aria-hidden="true"></span><span class="joystick-knob" aria-hidden="true"><i></i></span></div></div><div class="avisos"></div><button type="button" class="pular" hidden>PULAR CENA ▶▶</button></div>`;
     document.body.appendChild(box); cv = box.querySelector('canvas.mundo'); c = cv.getContext('2d', { alpha: false }); c.imageSmoothingEnabled = false; hud = box.querySelector('.hud');
     box.querySelector('.menu').addEventListener('click', () => pausar(true)); box.querySelector('.entrar').addEventListener('click', usar);
     box.querySelector('.pular').addEventListener('click', (e) => { e.stopPropagation(); pularCut(); });
@@ -344,7 +348,7 @@
     if ((k === 'KeyE' || k === 'Enter') && !e.repeat) usar();
     e.preventDefault(); e.stopImmediatePropagation();
   }
-  function teclaUp(e) { if (!aberto) return; const k = e.code; if (k === 'KeyU') TR()?.acao?.('poder1', false, P); if (k === 'KeyI') TR()?.acao?.('poder2', false, P); if (k === 'Space' || k === 'KeyW' || k === 'ArrowUp') { keys.delete('jump'); TR()?.acao?.('jump', false, P); } if (k === 'ArrowLeft' || k === 'KeyA') keys.delete('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.delete('right'); }
+  function teclaUp(e) { if (!aberto) return; const k = e.code; if (k === 'KeyJ') TR()?.acao?.('paper', false, P); if (k === 'KeyK') TR()?.acao?.('fart', false, P); if (k === 'KeyU') TR()?.acao?.('poder1', false, P); if (k === 'KeyI') TR()?.acao?.('poder2', false, P); if (k === 'Space' || k === 'KeyW' || k === 'ArrowUp') { keys.delete('jump'); TR()?.acao?.('jump', false, P); } if (k === 'ArrowLeft' || k === 'KeyA') keys.delete('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.delete('right'); }
   function hudVisivel(v) { if (hud) hud.style.visibility = v ? 'visible' : 'hidden'; const bar = box?.querySelector('.c2-treino-wrap'); if (bar) bar.style.visibility = v ? 'visible' : 'hidden'; box.querySelector('.pular').hidden = v; }
   function objetivoNovo(txt) { const o = box?.querySelector('.obj'); if (!o) return; o.querySelector('span').textContent = txt; o.classList.remove('novo'); void o.offsetWidth; o.classList.add('novo'); sfx('plim'); }
   function aviso(txt) { const a = box?.querySelector('.avisos'); if (!a) return; const d = document.createElement('div'); d.textContent = txt; a.appendChild(d); setTimeout(() => d.remove(), 2600); }
@@ -393,23 +397,33 @@
   function hudAtualizar() {
     copiarPoderes();
     const cor = box.querySelector('.vida .cor'), n = Math.round((P.max || 100) / 20), hp = clamp(P.hp, 0, P.max || 100) / 20; let h = ''; for (let i = 0; i < n; i++) h += `<i class="${hp >= i + 1 ? 'on' : hp > i + .3 ? 'meio' : ''}"></i>`; if (cor.innerHTML !== h) cor.innerHTML = h;
-    box.querySelector('.vida .gas b').style.width = `${clamp(TR()?.gas?.() ?? 100, 0, 100)}%`; box.querySelector('.vida .moedas').textContent = `● ${window.CampanhaLoja?.moedas?.() ?? 0}`;
+    box.querySelector('.vida .gas b').style.width = `${clamp(TR()?.gas?.() ?? 100, 0, 100)}%`; box.querySelector('.vida .moedas').textContent = `● ${window.CampanhaLoja?.moedas?.() ?? 0}`; { const pp = box.querySelector('.vida .papeis'), tx = `◆ ${TR()?.papeis?.() ?? 30}`; if (pp && pp.textContent !== tx) pp.textContent = tx; }
     const e = box.querySelector('.entrar'); e.hidden = !perto || !!cut; if (perto) e.textContent = perto.botao || (perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR');
   }
 
+  /* ---------- câmera de perto, como a campanha principal (ui.js followFill) ---------- */
+  let pan = null, preenche = false;
+  function enquadrar(dt) {
+    const shell = document.getElementById('gameShell'), w = innerWidth, h = innerHeight, sc = w / 960;
+    const quer = w / h > 1.79 && !cut && (!shell || shell.classList.contains('screen-fill') || !shell.classList.contains('immersive'));
+    if (quer !== preenche) { preenche = quer; box.classList.toggle('preencher', quer); pan = null; if (!quer) box.querySelector('.tela').style.removeProperty('--c2-pan'); }
+    if (!quer) return;
+    const fundo = Math.min(0, h - 540 * sc), pe = 72 + Math.min(64, 62 * sc) + 24, alvo = Math.min(0, Math.max(fundo, pe - P.y * sc));
+    pan = pan === null ? alvo : pan + (alvo - pan) * Math.min(1, dt * 12); const v = pan.toFixed(1) + 'px', tela = box.querySelector('.tela'); if (tela.style.getPropertyValue('--c2-pan') !== v) tela.style.setProperty('--c2-pan', v);
+  }
   /* ---------- quadro a quadro ---------- */
   function frame(now) {
     if (!aberto) return; raf = requestAnimationFrame(frame);
     const dt = Math.min(.05, Math.max(0, (now - last) / 1000)); fpsMedio += ((dt > 0 ? 1 / Math.max(dt, (now - last + 1e-3) / 1000) : 60) - fpsMedio) * .05; last = now;
     const cob = coberto(); box.style.visibility = cob ? 'hidden' : 'visible'; if (cob) return;
     P.max = window.CampanhaAliados?.vidaMax?.() || 100; if (window.CampanhaAliados?.ocupado?.()) { window.CampanhaAliados.atualizar(dt, []); return; }
-    if (cut) { RT().update(cut.s, dt); if (cut.s.done) { const f = cut.depois; cut = null; hudVisivel(true); try { window.DayTime?.force?.(null); } catch (e) {} f?.(); } else { c.save(); RT().draw(c, cut.s); c.restore(); return; } }
+    if (cut) { RT().update(cut.s, dt); if (cut.s.done) { const f = cut.depois; cut = null; hudVisivel(true); try { window.DayTime?.force?.(null); } catch (e) {} f?.(); } else { safe(() => enquadrar(dt)); c.save(); RT().draw(c, cut.s); c.restore(); return; } } // cutscene: quadro inteiro, como as cenas de história da principal
     if (pausado || ocupado()) { keys.clear(); P.vx = 0; }
     t += dt; const d = D();
     const F = !cut ? faseAtual() : fase; TR()?.inimigos?.(F && !cut ? F.inimigos() : []);
     if (!pausado && !morto) { P.inv = Math.max(0, (P.inv || 0) - dt); P.atordoado = Math.max(0, (P.atordoado || 0) - dt); TR()?.passo?.(dt, P, { cam, segurandoPulo: keys.has('jump') }); if (viagem) andarViagem(dt); else fisica(dt); if (F) F.update(dt); safe(() => window.CampanhaAliados?.atualizar?.(dt, F ? F.inimigos() : [])); }
     tremor = Math.max(0, tremor - dt * 30); clarao = Math.max(0, clarao - dt * 1.6); for (const d0 of dano) d0.t += dt; while (dano.length && dano[0].t > 1) dano.shift();
-    cam += (clamp(P.x - 360, 0, Math.max(0, d.largura - W)) - cam) * Math.min(1, dt * 8);
+    cam += (clamp(P.x - W * .36, 0, Math.max(0, d.largura - W)) - cam) * Math.min(1, dt * 8); safe(() => enquadrar(dt)); // câmera como na principal
     try { window.DayTime?.force?.(horaAtual()); } catch (e) {}
     const o = { scene: d.id, camera: cam, time: t, player: P, shots: [], enemies: [], minions: [] };
     safe(() => window.Interact?.update?.(dt, o)); safe(() => CC().heroi?.(P.x, P.y, P.vy));
@@ -421,7 +435,7 @@
     safe(() => window.CampanhaAliados?.desenhar?.(c, d.id)); if (F) F.desenhar(c);
     for (const ax of window.CampanhaAliados?.alvos?.(d.id) || []) { const y = FLOOR - 150 + Math.sin(t * 4 + ax) * 4; c.fillStyle = '#1c1408'; c.fillRect(ax - 7, y - 7, 14, 14); c.fillStyle = '#7af07a'; c.fillRect(ax - 5, y - 5, 10, 10); c.fillStyle = '#1c1408'; c.fillRect(ax - 1, y - 4, 2, 5); c.fillRect(ax - 1, y + 2, 2, 2); }
     safe(() => TR()?.desenharAtras?.(c, t)); // nuvem de gás e rastro do dash atrás do herói (como na campanha 1)
-    const at = P.attack || 0, dur = P.attackDuration || .32; if (!((P.inv || 0) > 0 && Math.floor(t * 16) % 2)) window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: t, facing: P.facing, moving: (!!P.vx && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: P.attackType || 'paper', attackProgress: 1 - at / dur, attackObject: 'paper', flight: !!TR()?.voandoAgora?.(), dash: !!TR()?.dashing?.(), recoil: at > 0 && (P.attackType || 'paper') === 'paper' ? Math.max(0, 1 - (1 - at / dur) * 3) : 0 });
+    const at = P.attack || 0, dur = P.attackDuration || .32; if (!((P.inv || 0) > 0 && Math.floor(t * 16) % 2)) window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: Math.abs(P.vx) > 8 ? (P.anim || 0) / 9 : t, speed: Math.abs(P.vx), muscular: !!TR()?.musculoso?.(), land: (P.landTimer || 0) / .15, landTimer: P.landTimer || 0, facing: P.facing, moving: (Math.abs(P.vx) > 8 && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: P.attackType || 'paper', attackProgress: 1 - at / dur, attackObject: 'paper', flight: !!TR()?.voandoAgora?.(), dash: !!TR()?.dashing?.(), recoil: at > 0 && (P.attackType || 'paper') === 'paper' ? Math.max(0, 1 - (1 - at / dur) * 3) : 0 });
     safe(() => TR()?.desenhar?.(c, t));
     safe(() => window.Interact?.drawFront?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
     procurarPerto();
@@ -471,7 +485,7 @@
     b.addEventListener('click', (e) => { e.preventDefault(); painel(); }); lista.appendChild(b);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', botaoMenu); else botaoMenu();
-  window.Campanha2 = Object.freeze({ liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, luta: fase?.emArena?.() ? fase.slug : null, chave: D()?.key || window.CampanhaCenarios?.lista?.find?.((d) => d.id === cenaId)?.key || null, flags: { ...(S?.flags || {}) } }),
+  window.Campanha2 = Object.freeze({ aviso: (txt) => aviso(txt), liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, luta: fase?.emArena?.() ? fase.slug : null, chave: D()?.key || window.CampanhaCenarios?.lista?.find?.((d) => d.id === cenaId)?.key || null, flags: { ...(S?.flags || {}) } }),
     // testes
     _ir: (id, x) => irPara(id, x), _fase: () => fase && { slug: fase.slug, chefe: { st: fase.chefe.st, hp: fase.chefe.hp, fase: fase.chefe.fase, x: Math.round(fase.chefe.x) }, arena: fase.emArena(), inimigos: fase.inimigos().length }, _hp: (n) => { P.hp = n; }, _bater: (n) => { const f = fase; if (f?.chefe) f.chefe.onDano(n, 'teste'); }, _pos: (x, y) => { P.x = x; P.y = y; P.vy = 0; P.ground = true; }, _fps: () => fpsMedio, _passo: (id) => passo(id), _usar: usar, _pular: pularCut });
 })();
