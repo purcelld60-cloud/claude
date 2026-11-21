@@ -233,3 +233,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - Valem como diálogo: cutscene, conversa com aliado, morador (`CampanhaMoradores.aberto()`) e pergunta (`.escolha`).
   - Enquanto há diálogo, o `.c2j` ganha a classe `c2-dialogo`. Joystick e botões ficam invisíveis e sem toque; o "PULAR CENA" continua.
   - Tocar em qualquer lugar da tela avança a fala. No fim do diálogo, os botões voltam.
+
+- **2026-11-21 · Codex · `chatgpt/chefes-conquista`.** Os nove chefes da Conquista têm 43 golpes próprios. Tanto o Terreiro quanto a arena de reserva leem as trajetórias, áreas de dano e tempos de `dist/campanha2/combate-chefes.js`. Os adereços, impactos e avisos em pixel art ficam em `dist/campanha2/efeitos-chefes.js`. O campo `kit` da ponte identifica o piso, as plataformas e o perfil numérico da arena.
+  - Jorge tem cinco barras crescentes. O dano excedente termina na barra atual, a troca limpa os golpes pendentes e a quinta derrota leva a `c2_final_jogo`, aos créditos e ao save.
+  - Os chefes têm intervalos de recuperação 6% menores. A vida total de Jorge subiu de 15.000 para 16.000 no Normal. Nos caminhos da segunda campanha, o tempo de patrulha entre tentativas de ataque caiu 5%.
+  - Rode `node --test tests/*.test.cjs`. Com o servidor local aberto, `node tools/varredura/chefes-conquista.js` percorre os golpes no navegador, testa o retorno após perder e acompanha Jorge até os créditos. `TELA_CONQUISTA=celular` exercita o toque em paisagem.

@@ -63,5 +63,8 @@
 #gameShell .boss-hud[data-phase="3"] .boss-phase-caption{color:#e8c8f5}
 #gameShell .boss-hud[data-phase="4"] .boss-phase-caption{color:#ffd0bc}
 @keyframes boss-stage-awakening{0%{filter:brightness(1.45);box-shadow:0 0 18px var(--stage-glow),inset 0 0 12px #fff4cb25}100%{filter:brightness(1);box-shadow:0 0 9px var(--stage-glow),0 2px 9px #10141b35}}
+#gameShell .boss-hud[data-phase="5"]{--stage-start:#654796;--stage-end:#d9abff;--stage-rim:#efcfff;--stage-glow:#a77af64a}
+#gameShell .boss-hud[data-phase="5"] .boss-phase-pips i.active{border-color:#f0d7ff;background:#ca9ced}
+#gameShell .boss-hud[data-phase="5"] .boss-phase-caption{color:#e8c6fa}
 @media(prefers-reduced-motion:no-preference){#gameShell .boss-hud.phase-up{animation:boss-stage-awakening .8s ease-out}}
 @media(orientation:landscape) and (max-height:420px){#gameShell .boss-phase-caption{font-size:6px}}

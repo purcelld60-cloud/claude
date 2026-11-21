@@ -417,12 +417,12 @@
     const e = box.querySelector('.entrar'); e.hidden = !perto || !!cut; if (perto) e.textContent = perto.botao || (perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR');
   }
 
-  /* ---------- luta do vilão no motor da campanha 1 (arena, barra do chefe, golpes iguais) ---------- */
+  /* ---------- luta do vilão no motor da campanha 1 (arena e controles compartilhados, golpes próprios da Conquista) ---------- */
   let emLuta = false;
   function lutaC1(f) {
     const K = f.F.chefe || {}; let ok = false;
-    try { ok = !!window.C2Luta?.iniciar?.({ slug: f.slug, tipo: f.chefe.tipo || K.tipo, nome: K.nome, cena: cenaId, bossX: f.chefe.x }, (r) => voltarDaLuta(f, r)); } catch (e) { ok = false; }
-    if (!ok) { f.comecarLuta(); return; } // sem o motor da principal: luta antiga, para nunca travar
+    try { ok = !!window.C2Luta?.iniciar?.({ slug: f.slug, tipo: f.chefe.tipo || K.tipo, nome: K.nome, cena: cenaId, hora: horaAtual(), bossX: f.chefe.x }, (r) => voltarDaLuta(f, r)); } catch (e) { ok = false; }
+    if (!ok) { f.comecarLuta(); return; } // a arena da própria campanha também executa a coreografia da Conquista
     emLuta = true; aberto = false; cancelAnimationFrame(raf); keys.clear(); joy = 0; devolverTopo(); box.hidden = true; salvarProgressao();
   }
   function voltarDaLuta(f, r) {
