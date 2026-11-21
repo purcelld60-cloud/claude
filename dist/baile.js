@@ -343,6 +343,7 @@
  function getStatus(s){if(!s)return null;return{type:'ollyan',name:'Ollyan · Orelhas ao Vento',hp:s.boss.hp,max:s.boss.max,maxHP:s.boss.max,phase:s.phase,mode:s.mode,phaseHPs:s.phaseHPs.slice(),playerGrounded:!!s.player.grounded,playerX:s.player.x,playerY:s.player.y,playerVY:s.player.vy,phaseName:phases[s.phase-1].name,phases:3,stage:s.stage,time:s.time,stageTime:s.stageTime,active:s.stage==='fight'||s.stage==='transition',done:s.done,success:s.success,playerHP:s.player.hp,playerMaxHP:s.player.maxHP,gas:s.player.gas,maxGas:s.player.maxGas,dashCooldown:s.player.dashCooldown,fartCooldown:s.player.fartCooldown,telegraph:s.boss.state==='windup'?attackNames[s.boss.attack]:'',attack:s.boss.attack,shotCount:s.shots.length,hazardCount:s.hazards.length,recommendedLevel:10};}
  function getAudioState(s){if(!s)return null;return{cutscene:s.stage==='intro'?'ollyan_flight':null,cutsceneElapsed:s.stage==='intro'?s.stageTime:0,cutsceneToken:s.token,cutsceneIndex:s.stage==='intro'?Math.min(2,Math.floor(s.stageTime/3)):0,cutsceneTimed:s.stage==='intro',boss:['fight','transition'].includes(s.stage)?'ollyan':null};}
  function drawProjectile(c,a,t){
+  if(window.BailePixel?.projetil?.(c,a,t))return; // ataques do Ollyan redesenhados (baile-pixel.js)
   c.save();c.translate(Math.round(a.x),Math.round(a.y));if(a.delay>0)c.globalAlpha=.28;
   if(a.type==='paper'){c.rotate(t*8);rect(c,-6,-5,12,10,'#fff1d0');rect(c,-3,-3,5,2,'#cabfae');}
   else if(a.type==='gas'){oval(c,0,0,27,20,'#94bc6999');oval(c,-6,-4,18,15,'#c5e399bb');rect(c,-4,-8,8,4,'#e0efb7');}
@@ -351,6 +352,7 @@
   else{oval(c,0,0,9,9,'#9a7ca9');oval(c,0,0,5,5,'#e4c8e4');rect(c,-2,-3,3,3,'#f6e2e5');}c.restore();
  }
  function hazardDraw(c,h,t){
+  if(window.BailePixel?.perigo?.(c,h,t))return;
   c.save();if(h.type==='gate'){
    const x=h.delay>0?930:h.x,alpha=h.delay>0?.45:1;c.globalAlpha*=alpha;
    for(let yy=90;yy<494;yy+=29){if(Math.abs(yy-h.gapY)<h.gapSize*.5)continue;cloud(c,x,yy,.55,'#a7bed8',.9);line(c,[[x+13,yy-2],[x-8,yy+2],[x-25,yy-1]],'#e2d7e9',2);}
@@ -388,6 +390,7 @@
   if(s.stage!=='transition'&&s.mode==='platform'){skyPlatforms(c,s);parkedVehicle(c,s);}
   for(const h of s.hazards)hazardDraw(c,h,s.time);
   const b=s.boss,p=s.player,scale=1.37+(s.phase-1)*.09,aura=s.phase===3?'#bda7e2':s.phase===2?'#9acbdf':null;
+  window.BailePixel?.antesChefe?.(c,s);
   if(s.stage==='victory'){drawOllyan(c,b.x,b.y+63,s.time,{scale:1.23,flying:true,angle:Math.sin(s.stageTime*5)*.25,cup:false});for(let i=0;i<14;i++){const q=(s.stageTime*.5+i*.11)%1;rect(c,b.x+Math.sin(i*2.2)*q*150,b.y-100+q*180,4,4,['#e4cb8d','#bddecb','#c4b4df'][i%3]);}}
   else drawOllyan(c,b.x,b.y+63,s.time,{scale,flying:true,fast:b.state==='windup'||s.phase===3,hit:b.hit>0,aura,angle:b.state==='swoop'?Math.sin(s.time*8)*.13:0});
   for(const a of s.shots)drawProjectile(c,a,s.time);if(s.stage==='transition')transitionPilot(c,s);else if(s.mode==='platform')onFoot(c,s);else pilot(c,p.x,p.y,s.time,{angle:p.tilt,inv:p.inv,dash:p.dash>0,trained:s.options.trained});
@@ -398,8 +401,8 @@
    const alpha=smooth(Math.min(s.stageTime/.25,(2.05-s.stageTime)/.25));c.save();c.globalAlpha=alpha;rect(c,177,215,606,91,'#17223ee8');rect(c,181,219,598,2,'#cdb3dc');text(c,'FASE '+s.phase+' / 3',480,239,12,'#edce9a');text(c,phases[s.phase-1].name,480,270,21,'#e2d3ee');text(c,s.mode==='platform'?'SAIA DO CARRO · ANDE E PULE PELAS NUVENS':'VOLTE AO CARRO A GÁS · O CÉU É SEU',480,296,10,'#cce8de');c.restore();
   }else if(s.stage==='fight'&&b.state==='windup'){
    const title=attackNames[b.attack];rect(c,480-title.length*3.9,66,title.length*7.8,22,'#142440c9');text(c,title,480,77,11,b.attack==='moonBeam'?'#f6cbab':'#d5e6d5');
-   if(b.attack==='swoop'){c.save();c.globalAlpha=.35;line(c,[[b.x,b.y],[b.targetX,b.targetY]],'#eacfa2',22);c.restore();oval(c,b.targetX,b.targetY,19,19,'#f1d19844');line(c,[[b.targetX-14,b.targetY],[b.targetX+14,b.targetY]],'#edc995',2);}
-   if(b.attack==='moonBeam'){const dx=b.targetX-b.x,dy=b.targetY-b.y,len=Math.hypot(dx,dy)||1;c.save();c.setLineDash([11,8]);line(c,[[b.x,b.y],[b.x+dx/len*1200,b.y+dy/len*1200]],'#e5bfa2',2);c.restore();}
+   if(!window.BailePixel?.telegrafa?.(c,s)){if(b.attack==='swoop'){c.save();c.globalAlpha=.35;line(c,[[b.x,b.y],[b.targetX,b.targetY]],'#eacfa2',22);c.restore();oval(c,b.targetX,b.targetY,19,19,'#f1d19844');line(c,[[b.targetX-14,b.targetY],[b.targetX+14,b.targetY]],'#edc995',2);}
+   if(b.attack==='moonBeam'){const dx=b.targetX-b.x,dy=b.targetY-b.y,len=Math.hypot(dx,dy)||1;c.save();c.setLineDash([11,8]);line(c,[[b.x,b.y],[b.x+dx/len*1200,b.y+dy/len*1200]],'#e5bfa2',2);c.restore();}}
   }
   if(s.stage==='fight'&&(s.time<15||s.mode==='platform')){text(c,s.mode==='platform'?'A / D OU JOYSTICK: ANDAR · ESPAÇO / PULAR: SALTAR · PAPEL / PEIDO / DASH':'VOE EM TODAS AS DIREÇÕES · PAPEL / PEIDO / DASH',480,508,10,'#d2d0df');}
   if(s.stage==='victory'){text(c,'O CÉU FICOU PEQUENO PRA ESSA ORELHA!',480,144,20,'#f5d99b');text(c,'Ollyan: tá bom, véi… agora eu vou de carona.',480,173,12,'#e8d9df');}

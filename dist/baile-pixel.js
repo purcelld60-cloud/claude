@@ -285,5 +285,95 @@
     c.restore(); return true;
   }
 
-  window.BailePixel = Object.freeze({ dancer, ollyan, palco, fx, cenario, VARIANTES });
+
+  /* ---------- efeitos dos ataques do Ollyan (só aparência: tamanhos e posições que acertam continuam os mesmos) ---------- */
+  const ADD = (c, fn) => { c.save(); c.globalCompositeOperation = 'lighter'; try { fn(); } finally { c.restore(); } };
+  function brilho(c, x, y, rr, col, a) { c.save(); c.globalAlpha *= a; const gr = c.createRadialGradient(x, y, 0, x, y, rr); gr.addColorStop(0, col); gr.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = gr; c.fillRect(x - rr, y - rr, rr * 2, rr * 2); c.restore(); }
+  function nuvemPx(c, x, y, k, col, borda) { // nuvem em pixels com contorno
+    const b = (dx, dy, w, h) => { R(c, x + dx * k - 2, y + dy * k - 2, w * k + 4, h * k + 4, borda); };
+    const f = (dx, dy, w, h, cc) => R(c, x + dx * k, y + dy * k, w * k, h * k, cc);
+    b(-14, -2, 30, 8); b(-9, -7, 12, 6); b(0, -9, 12, 8);
+    f(-14, -2, 30, 8, col); f(-9, -7, 12, 6, col); f(0, -9, 12, 8, col); f(-9, -7, 12, 2, '#ffffff55'); f(0, -9, 12, 2, '#ffffff66'); f(-14, 4, 30, 2, '#00000022'); }
+  function raio(c, x0, y0, x1, y1, seed, col) { // raio em zigue-zague
+    const pts = [[x0, y0]]; const n = 9; for (let i = 1; i < n; i++) { const u = i / n; pts.push([x0 + (x1 - x0) * u + (hash(seed + i) - .5) * 34, y0 + (y1 - y0) * u]); } pts.push([x1, y1]);
+    for (const [w, cc, a] of [[10, col, .25], [5, col, .7], [2, '#ffffff', 1]]) { c.save(); c.globalAlpha *= a; c.strokeStyle = cc; c.lineWidth = w; c.lineJoin = 'miter'; c.beginPath(); pts.forEach(([px, py], i) => i ? c.lineTo(px, py) : c.moveTo(px, py)); c.stroke(); c.restore(); } }
+  function mira(c, x, y, t, col, rr = 22) { // retícula girando
+    c.save(); c.translate(Math.round(x), Math.round(y)); c.rotate(t * 2.4); c.strokeStyle = col; c.lineWidth = 2; const k = rr + Math.sin(t * 9) * 3;
+    for (let i = 0; i < 4; i++) { c.rotate(Math.PI / 2); c.beginPath(); c.moveTo(k, -6); c.lineTo(k, -k * .25 - 2); c.moveTo(k, 6); c.lineTo(k, k * .25 + 2); c.stroke(); R(c, k - 1, -1, 3, 3, col); }
+    c.restore(); R(c, x - 2, y - 2, 4, 4, '#ffffff'); }
+  const ORELHA = [[-10, -4], [-4, -12], [8, -12], [12, -3], [6, 10], [-5, 8]];
+  function projetil(c, a, t) {
+    if (a.owner === 'player') return false;
+    const sp = Math.hypot(a.vx, a.vy) || 1, ux = a.vx / sp, uy = a.vy / sp;
+    c.save(); if (a.delay > 0) c.globalAlpha *= .3;
+    if (a.type === 'ear') { // orelha bumerangue com rastro de vento rosa
+      for (let i = 4; i >= 1; i--) { c.save(); c.globalAlpha *= .14 * (5 - i); c.translate(a.x - ux * i * 9, a.y - uy * i * 9); c.rotate((t - i * .03) * 4 * (a.spin || 1)); c.fillStyle = '#ff9ac8'; c.beginPath(); ORELHA.forEach(([px, py], j) => j ? c.lineTo(px, py) : c.moveTo(px, py)); c.closePath(); c.fill(); c.restore(); }
+      ADD(c, () => brilho(c, a.x, a.y, 22, '#ff7ad9', .35));
+      c.translate(Math.round(a.x), Math.round(a.y)); c.rotate(t * 4 * (a.spin || 1));
+      c.fillStyle = '#2a1420'; c.beginPath(); ORELHA.forEach(([px, py], j) => j ? c.lineTo(px * 1.18, py * 1.18) : c.moveTo(px * 1.18, py * 1.18)); c.closePath(); c.fill();
+      c.fillStyle = '#ecc4a8'; c.beginPath(); ORELHA.forEach(([px, py], j) => j ? c.lineTo(px, py) : c.moveTo(px, py)); c.closePath(); c.fill();
+      c.fillStyle = '#f0a0a8'; c.beginPath(); ORELHA.forEach(([px, py], j) => j ? c.lineTo(px * .55, py * .55) : c.moveTo(px * .55, py * .55)); c.closePath(); c.fill(); R(c, -2, -9, 5, 2, '#fff0e0');
+    } else if (a.type === 'pulse') { // bola de grave: anéis pulsando e uma notinha musical
+      const k = (t * 3 + (a.spin || 0)) % 1;
+      ADD(c, () => { brilho(c, a.x, a.y, 26, '#4fd8ff', .4); c.strokeStyle = '#7adfff'; c.lineWidth = 2; c.globalAlpha = 1 - k; c.beginPath(); c.arc(a.x, a.y, 8 + k * 14, 0, TAU); c.stroke(); });
+      for (let i = 1; i <= 3; i++) { c.save(); c.globalAlpha *= .2; R(c, a.x - ux * i * 10 - 3, a.y - uy * i * 10 - 3, 6, 6, '#7adfff'); c.restore(); }
+      c.fillStyle = '#16122a'; c.beginPath(); c.arc(a.x, a.y, 9, 0, TAU); c.fill(); c.fillStyle = '#7adfff'; c.beginPath(); c.arc(a.x, a.y, 7, 0, TAU); c.fill(); c.fillStyle = '#e8fcff'; c.beginPath(); c.arc(a.x - 2, a.y - 2, 3, 0, TAU); c.fill();
+      R(c, a.x + 1, a.y - 5, 2, 8, '#16122a'); R(c, a.x - 2, a.y + 1, 4, 3, '#16122a'); R(c, a.x + 3, a.y - 5, 3, 2, '#16122a'); // ♪
+    } else if (a.type === 'comet') { // cometa lilás com cauda e faíscas
+      ADD(c, () => { const tl = 70; const gr = c.createLinearGradient(a.x, a.y, a.x - ux * tl, a.y - uy * tl); gr.addColorStop(0, 'rgba(200,170,255,.9)'); gr.addColorStop(1, 'rgba(120,80,220,0)'); c.fillStyle = gr; c.beginPath(); c.moveTo(a.x + uy * 11, a.y - ux * 11); c.lineTo(a.x - ux * tl, a.y - uy * tl); c.lineTo(a.x - uy * 11, a.y + ux * 11); c.closePath(); c.fill(); brilho(c, a.x, a.y, 30, '#c8a8ff', .55); });
+      for (let i = 0; i < 5; i++) { const h = hash(i * 13 + Math.floor(t * 12)), d = 14 + h * 50; R(c, a.x - ux * d + (h - .5) * 14, a.y - uy * d + (hash(i + 7) - .5) * 14, 2, 2, h > .5 ? '#ffffff' : '#ffd8f0'); }
+      c.fillStyle = '#2a1a4a'; c.beginPath(); c.arc(a.x, a.y, 12, 0, TAU); c.fill(); c.fillStyle = '#8a6ad8'; c.beginPath(); c.arc(a.x, a.y, 10, 0, TAU); c.fill(); c.fillStyle = '#d8c8ff'; c.beginPath(); c.arc(a.x + ux * 3, a.y + uy * 3, 6, 0, TAU); c.fill(); R(c, a.x + ux * 4 - 2, a.y + uy * 4 - 2, 4, 4, '#ffffff');
+    } else { c.restore(); return false; }
+    c.restore(); return true;
+  }
+  function perigo(c, h, t) {
+    c.save();
+    if (h.type === 'gate') { // muralha de nuvens de tempestade com o vão marcado
+      const x = h.delay > 0 ? 930 : h.x, alerta = h.delay > 0; c.globalAlpha *= alerta ? .5 : 1;
+      for (let yy = 90; yy < 494; yy += 29) { if (Math.abs(yy - h.gapY) < h.gapSize * .5) continue; nuvemPx(c, x - 10 + Math.sin(yy + t * 2) * 3, yy + 4, 2, alerta ? '#b8c8e0' : '#8a98c0', '#2a2a48'); }
+      if (!alerta && hash(Math.floor(t * 7) + h.gapY) > .82) { const yy = 90 + hash(Math.floor(t * 7) * 3) * 380; if (Math.abs(yy - h.gapY) > h.gapSize * .5 + 20) ADD(c, () => raio(c, x - 30, yy - 20, x + 20, yy + 30, Math.floor(t * 7), '#c8d8ff')); }
+      for (let i = 0; i < 6; i++) { const wy = 90 + hash(i * 3 + h.gapY) * 400, wx = x + 40 + ((t * 300 + i * 70) % 160); if (Math.abs(wy - h.gapY) < h.gapSize * .5) continue; c.save(); c.globalAlpha *= .4; R(c, wx, wy, 26, 2, '#e8f0ff'); c.restore(); } // vento
+      if (alerta) { const g0 = h.gapY - h.gapSize * .5, g1 = h.gapY + h.gapSize * .5, pis = Math.sin(t * 12) > 0;
+        c.strokeStyle = pis ? '#9affb0' : '#58c878'; c.lineWidth = 3; c.beginPath(); c.moveTo(884, g0); c.lineTo(906, g0); c.lineTo(906, g1); c.lineTo(884, g1); c.stroke();
+        for (let k = 0; k < 3; k++) { const ax = 840 + ((t * 60 + k * 18) % 54); R(c, ax, h.gapY - 1, 10, 3, '#9affb0'); R(c, ax + 6, h.gapY - 4, 3, 9, '#9affb0'); }
+        c.font = 'bold 11px monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#101a30'; c.fillText('VÃO', 872, h.gapY - 14); c.fillStyle = '#c7efcc'; c.fillText('VÃO', 871, h.gapY - 15); }
+    } else if (h.type === 'cloudStorm') { // nuvem escura carregando e raio caindo na plataforma
+      const carga = h.delay > 0; nuvemPx(c, h.x, 104, 2.2, carga ? '#4a4a6a' : '#2a2a40', '#141428');
+      if (carga) { const pisca = Math.sin(t * (10 + (1.1 - h.delay) * 20)) > 0; c.globalAlpha *= pisca ? .55 : .25; R(c, h.x - 38, h.y + 4, 76, 6, '#ffb040'); R(c, h.x - 38, h.y + 2, 76, 2, '#ffe9a0'); c.globalAlpha = 1;
+        for (let k = 0; k < 4; k++) { const u = (t * 2 + k / 4) % 1; c.save(); c.globalAlpha *= .6 * (1 - u); R(c, h.x - 30 + k * 18, 116 + u * (h.y - 120), 2, 6, '#a8c8ff'); c.restore(); } // chuvinha
+        if (Math.sin(t * 17) > .9) ADD(c, () => brilho(c, h.x, 104, 50, '#c8d8ff', .5)); }
+      else { ADD(c, () => { raio(c, h.x, 116, h.x + (hash(h.x) - .5) * 20, h.y, Math.floor(t * 30) + h.x, '#d8e8ff'); brilho(c, h.x, h.y, 60, '#e8f0ff', .7); });
+        for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI, d = 10 + hash(i + Math.floor(t * 30)) * 30; R(c, h.x + Math.cos(a) * d * (i % 2 ? 1 : -1), h.y - Math.sin(a) * d * .6, 3, 3, '#ffffff'); } }
+    } else if (h.type === 'beam') { // luar cortante
+      const dx = h.tx - h.x, dy = h.ty - h.y, len = Math.hypot(dx, dy) || 1, ex = h.x + dx / len * 1200, ey = h.y + dy / len * 1200;
+      if (h.delay > 0) { c.save(); c.setLineDash([12, 9]); c.lineDashOffset = -t * 60; c.strokeStyle = Math.sin(t * 20) > 0 ? '#ffd0b0' : '#f59a7a'; c.lineWidth = 2; c.beginPath(); c.moveTo(h.x, h.y); c.lineTo(ex, ey); c.stroke(); c.restore(); mira(c, h.tx, h.ty, t, '#ffc8a8', 18 + h.delay * 30);
+        ADD(c, () => brilho(c, h.x, h.y, 20 + (1 - h.delay / .3) * 26, '#e8d8ff', .8)); }
+      else { ADD(c, () => { for (const [w, col, al] of [[64, '#6a3aa8', .35], [40, '#b890e8', .55], [20, '#e8d8ff', .9], [8, '#ffffff', 1]]) { c.save(); c.globalAlpha *= al; c.strokeStyle = col; c.lineWidth = w + Math.sin(t * 40) * 3; c.lineCap = 'round'; c.beginPath(); c.moveTo(h.x, h.y); c.lineTo(ex, ey); c.stroke(); c.restore(); } brilho(c, h.x, h.y, 70, '#f0e0ff', .9); });
+        for (let i = 0; i < 16; i++) { const u = (t * 2.5 + i / 16) % 1, d = u * 900, off = (hash(i) - .5) * 40; R(c, h.x + dx / len * d - dy / len * off, h.y + dy / len * d + dx / len * off, 3, 3, i % 2 ? '#ffffff' : '#e8d0ff'); } }
+    } else if (h.type === 'ringBurst' && h.delay > 0) { // vento girando e se fechando antes da espiral
+      const k = 1 - h.delay / .7;
+      for (let i = 0; i < 18; i++) { const a = i / 18 * TAU + t * 3, d = 120 * (1 - k) + 20; c.save(); c.globalAlpha *= .7; R(c, h.x + Math.cos(a) * d - 3, h.y + Math.sin(a) * d - 1, 6, 2, '#bfe8ff'); c.restore(); }
+      ADD(c, () => brilho(c, h.x, h.y, 30 + k * 40, '#9ad8ff', .5));
+    } else { c.restore(); return false; }
+    c.restore(); return true;
+  }
+  // aviso de carga antes de cada golpe (e rastro no mergulho)
+  function telegrafa(c, st) { const b = st.boss, t = st.time, at = b.attack;
+    if (at === 'earFan') { ADD(c, () => { for (const lado of [-1, 1]) brilho(c, b.x + lado * 80, b.y - 20, 40 + Math.sin(t * 20) * 8, '#ff7ad9', .6); }); for (let i = 0; i < 10; i++) { const a = i / 10 * TAU + t * 5, d = 60 - ((t * 80 + i * 9) % 50); R(c, b.x + Math.cos(a) * d * 1.8, b.y - 20 + Math.sin(a) * d * .6, 3, 3, '#ffb8e0'); } }
+    else if (at === 'pulseRing' || at === 'gustRing') { ADD(c, () => { for (let k = 0; k < 3; k++) { const u = ((t * 1.6 + k / 3) % 1), rr = 140 * (1 - u) + 20; c.globalAlpha = u * .7; c.strokeStyle = at === 'gustRing' ? '#bfe8ff' : '#7adfff'; c.lineWidth = 3; c.beginPath(); c.arc(b.x, b.y, rr, 0, TAU); c.stroke(); } }); }
+    else if (at === 'swoop') { c.save(); c.setLineDash([10, 8]); c.lineDashOffset = -t * 80; c.strokeStyle = '#f2d0a0'; c.lineWidth = 3; c.beginPath(); c.moveTo(b.x, b.y); c.quadraticCurveTo((b.x + b.targetX) / 2, Math.max(b.y, b.targetY) + 60, b.targetX, b.targetY); c.stroke(); c.restore(); mira(c, b.targetX, b.targetY, t, '#ffd8a0', 22); }
+    else if (at === 'moonBeam') { ADD(c, () => brilho(c, b.x, b.y, 30 + Math.sin(t * 15) * 10, '#e8d8ff', .9)); mira(c, b.targetX, b.targetY, t, '#ffc8a8', 26); const dx = b.targetX - b.x, dy = b.targetY - b.y, len = Math.hypot(dx, dy) || 1; c.save(); c.setLineDash([11, 8]); c.strokeStyle = '#e5bfa2'; c.lineWidth = 2; c.beginPath(); c.moveTo(b.x, b.y); c.lineTo(b.x + dx / len * 1200, b.y + dy / len * 1200); c.stroke(); c.restore(); }
+    else if (at === 'cometRain') { for (let i = 0; i < 6; i++) { const x = 310 + i * 91 - 40, pis = Math.sin(t * 14 + i) > 0; ADD(c, () => brilho(c, x, 20, 26, '#c8a8ff', pis ? .7 : .35)); R(c, x - 1, 6, 3, 10, '#f0e0ff'); R(c, x - 5, 10, 11, 3, '#f0e0ff'); } }
+    else if (at === 'cloudGate' || at === 'crosswind') { for (let i = 0; i < 14; i++) { const y = 90 + hash(i * 5) * 400, x = 960 - ((t * 500 + i * 80) % 1100); c.save(); c.globalAlpha *= .35; R(c, x, y, 40 + hash(i) * 40, 2, '#e8f0ff'); c.restore(); } }
+    else return false;
+    return true;
+  }
+  function antesChefe(c, st) { const b = st.boss; if (!b) return;
+    st.__rastro = st.__rastro || []; if (b.state === 'swoop') { st.__rastro.push([b.x, b.y, st.time]); if (st.__rastro.length > 6) st.__rastro.shift(); } else if (st.__rastro.length) st.__rastro.shift();
+    st.__rastro.forEach(([x, y], i) => { c.save(); c.globalAlpha *= .1 + i * .05; ollyan(c, x, y + 63, st.time, { flying: true, scale: 1.37 + (st.phase - 1) * .09 }); c.restore(); });
+    if (b.state === 'swoop') for (let i = 0; i < 8; i++) { c.save(); c.globalAlpha *= .5; R(c, b.x + 60 + ((st.time * 600 + i * 40) % 200), b.y - 60 + i * 16, 30, 2, '#ffffff'); c.restore(); }
+    if (b.state === 'firing') { const k = 1 - Math.max(0, b.stateTime) / .38; ADD(c, () => { c.globalAlpha = 1 - k; c.strokeStyle = '#f0d8ff'; c.lineWidth = 4; c.beginPath(); c.arc(b.x, b.y, 20 + k * 90, 0, TAU); c.stroke(); }); }
+  }
+
+  window.BailePixel = Object.freeze({ dancer, ollyan, palco, fx, cenario, projetil, perigo, telegrafa, antesChefe, VARIANTES });
 })();
