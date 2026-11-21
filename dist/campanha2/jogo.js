@@ -120,7 +120,7 @@
   const apiFase = {
     P, sfx: (n) => sfx(n), tremer: (n) => { tremor = Math.max(tremor, n); }, flash: (cor) => { clarao = .5; claraoCor = cor || '#ffffff'; },
     ferir: (n, de) => ferir(n, de),
-    entrarArena: () => { const f = fase; S.flags.cp = { cena: cenaId, x: f.F.checkpoint }; salvar(); tocarDeslocado(f.F.intro, f.chefe.x, f.chefe.tipo, () => f.comecarLuta()); },
+    entrarArena: () => { const f = fase; S.flags.cp = { cena: cenaId, x: f.F.checkpoint }; salvar(); tocarDeslocado(f.F.intro, f.chefe.x, f.chefe.tipo, () => lutaC1(f)); },
     vencer: () => { const f = fase, slug = f.slug;
       if (f.F.final) { ganharXP(1200, 'c2-chefe-jorge'); tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => tocar('c2_creditos', () => { S.flags.venceu_jorge = 1; S.flags.zerou = 1; delete S.flags.cp; fase = null; passo('zerou'); salvar(); telaFim(); })); return; }
       ganharXP(600, 'c2-chefe-' + slug); tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => { window.CampanhaTaxi?.vencer?.(slug); S.flags['venceu_' + slug] = 1; delete S.flags.cp; fase = null; passo(APOS_VITORIA[slug]); salvar('JOGO SALVO'); }); }
@@ -404,6 +404,20 @@
     const e = box.querySelector('.entrar'); e.hidden = !perto || !!cut; if (perto) e.textContent = perto.botao || (perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR');
   }
 
+  /* ---------- luta do vilão no motor da campanha 1 (arena, barra do chefe, golpes iguais) ---------- */
+  let emLuta = false;
+  function lutaC1(f) {
+    const K = f.F.chefe || {}; let ok = false;
+    try { ok = !!window.C2Luta?.iniciar?.({ slug: f.slug, tipo: f.chefe.tipo || K.tipo, nome: K.nome, cena: cenaId, bossX: f.chefe.x }, (r) => voltarDaLuta(f, r)); } catch (e) { ok = false; }
+    if (!ok) { f.comecarLuta(); return; } // sem o motor da principal: luta antiga, para nunca travar
+    emLuta = true; aberto = false; cancelAnimationFrame(raf); keys.clear(); joy = 0; devolverTopo(); box.hidden = true; salvarProgressao();
+  }
+  function voltarDaLuta(f, r) {
+    emLuta = false; aberto = true; box.hidden = false; keys.clear(); joy = 0; safe(controlesC1); last = performance.now(); raf = requestAnimationFrame(frame);
+    if (r === 'venceu') { P.hp = Math.max(P.hp, Math.round((P.max || 100) * .5)); safe(() => apiFase.vencer()); }
+    else if (r === 'recuou') { safe(() => voltarDoDesmaio()); aviso('Você saiu da arena. Respire e volte quando quiser.'); }
+    else desmaiar();
+  }
   /* ---------- continuação da campanha 1: progressão (XP, nível, atributos), arma, itens e a barra de cima ---------- */
   const SAVE1 = 'da-roca-adventure-v1';
   const save1 = () => { try { return JSON.parse(localStorage.getItem(SAVE1) || 'null'); } catch (e) { return null; } };
@@ -522,7 +536,7 @@
     if (!el) { el = document.createElement('div'); el.id = 'c2Painel'; el.className = 'c2j'; el.style.background = '#06080cdd'; document.body.appendChild(el); css(); }
     el.hidden = false;
     el.innerHTML = `<div class="pausa" style="position:relative;background:none"><h2>CAMPANHA 2 · VITÓRIA DA CONQUISTA</h2>${ok ? `<p>${safe(() => JSON.parse(localStorage.getItem(KEY) || 'null')?.flags?.zerou, false) ? '✔ Campanha 2 completa: o trio voltou! Continue explorando Conquista.' : 'Um ano depois. O Jorge ligou... e desligou. Agora o Da Roça vai até Conquista olhar na cara dele.'}</p>${temSave() ? '<button type="button" data-a="cont">▶ CONTINUAR</button>' : ''}<button type="button" data-a="novo">${temSave() ? 'COMEÇAR DE NOVO' : '▶ COMEÇAR'}</button>` : '<p>🔒 Termine a campanha principal (até a ligação do Jorge) para liberar a Campanha 2.</p>'}<button type="button" data-a="fechar">VOLTAR</button></div>`;
-    el.onclick = (e) => { const a = e.target.closest('button')?.dataset.a; if (!a) return; if (a === 'fechar') el.hidden = true; if (a === 'cont') { el.hidden = true; abrir({}); } if (a === 'novo') { if (temSave() && !confirm('Começar a Campanha 2 de novo? O progresso dela será apagado (a campanha principal não muda).')) return; el.hidden = true; abrir({ novo: true }); } };
+    el.onclick = (e) => { const a = e.target.closest('button')?.dataset.a; if (!a) return; if (a === 'fechar') el.hidden = true; if (a === 'cont') { el.hidden = true; abrir({}); } if (a === 'novo') { const vai = () => { el.hidden = true; abrir({ novo: true }); }; if (!temSave()) return vai(); const pergunta = { titulo: 'COMEÇAR A CAMPANHA 2 DO ZERO?', html: 'Você já tem um save da Campanha 2.<br>Começar de novo <b>apaga todo o progresso dela</b> (vilões vencidos, cenários e itens da campanha 2).<br>A campanha principal, seu nível e atributos não mudam.<br><br>Tem certeza?', sim: 'APAGAR E COMEÇAR', nao: 'CANCELAR' }; if (window.Confirmar) window.Confirmar(pergunta).then((ok) => { if (ok) vai(); }); else if (confirm('Começar a Campanha 2 de novo? O progresso dela será apagado.')) vai(); } };
     setTimeout(() => el.querySelector('button')?.focus(), 30);
   }
   function botaoMenu() {
@@ -531,7 +545,7 @@
     b.addEventListener('click', (e) => { e.preventDefault(); painel(); }); lista.appendChild(b);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', botaoMenu); else botaoMenu();
-  window.Campanha2 = Object.freeze({ ganharXP: (n, id, x, y) => ganharXP(n, id, x, y), aviso: (txt) => aviso(txt), liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, luta: fase?.emArena?.() ? fase.slug : null, chave: D()?.key || window.CampanhaCenarios?.lista?.find?.((d) => d.id === cenaId)?.key || null, flags: { ...(S?.flags || {}) } }),
+  window.Campanha2 = Object.freeze({ emLuta: () => emLuta, ganharXP: (n, id, x, y) => ganharXP(n, id, x, y), aviso: (txt) => aviso(txt), liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, luta: fase?.emArena?.() ? fase.slug : null, chave: D()?.key || window.CampanhaCenarios?.lista?.find?.((d) => d.id === cenaId)?.key || null, flags: { ...(S?.flags || {}) } }),
     // testes
     _ir: (id, x) => irPara(id, x), _fase: () => fase && { slug: fase.slug, chefe: { st: fase.chefe.st, hp: fase.chefe.hp, fase: fase.chefe.fase, x: Math.round(fase.chefe.x) }, arena: fase.emArena(), inimigos: fase.inimigos().length }, _hp: (n) => { P.hp = n; }, _bater: (n) => { const f = fase; if (f?.chefe) f.chefe.onDano(n, 'teste'); }, _pos: (x, y) => { P.x = x; P.y = y; P.vy = 0; P.ground = true; }, _fps: () => fpsMedio, _passo: (id) => passo(id), _usar: usar, _pular: pularCut });
 })();

@@ -48,7 +48,7 @@
     c.restore();
   }
   function overlay(c, type, camera, t, homeX, hd) {
-    const th = THEME[type]; if (!th) return;
+    const th = type && typeof type === 'object' && type.light ? type : THEME[type]; if (!th) return;
     const center = homeX ? homeX - camera : 480;
     c.save();
     if (th.storm) { if (!hd) { const g = c.createLinearGradient(0, 0, 0, 300); g.addColorStop(0, 'rgba(20,40,10,.6)'); g.addColorStop(1, 'rgba(20,40,10,0)'); c.fillStyle = g; c.fillRect(0, 0, 960, 300); }
@@ -74,5 +74,18 @@
     if (window.Graphics?.isLite?.() || window.HdScene?.active?.(type)) return;
     try { overlay(c, typeof type === 'object' ? type.type : type, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); } catch (e) {}
   };
-  window.BossArena = Object.freeze({ themes: Object.keys(THEME) });
+  // Campanha 2 (Vitória da Conquista): o mesmo palco da principal, com luz, torcida e partículas de cada vilão
+  const C2 = {
+    creuza: { light: '255,170,210', crowd: '#3a2430', parts: 'paper', spot: true, chant: false },
+    tonhao: { light: '255,170,90', crowd: '#2a2a32', parts: 'smoke', spot: true, alarm: true },
+    valdomiro: { light: '255,220,150', crowd: '#3a2a1e', parts: 'leaves', spot: true },
+    kaua: { light: '200,220,255', crowd: '#20263a', parts: 'paperstorm', spot: true, rays: true },
+    barao: { light: '230,180,120', crowd: '#2e2218', parts: 'steam', spot: true },
+    breno: { light: '255,110,90', crowd: '#341e1e', parts: 'embers', spot: true },
+    gemeos: { light: '120,240,220', crowd: '#18282a', parts: 'paper', spot: true, alarm: true },
+    fred: { light: '255,230,150', crowd: '#2e2a1a', parts: 'feathers', spot: true, rays: true },
+    jorge: { light: '190,150,255', crowd: null, parts: 'ink', spot: true, rays: true }
+  };
+  function palco(c, tema, camera = 0, t = 0, homeX = 0) { if (window.Graphics?.isLite?.()) return; try { overlay(c, C2[tema] || C2.creuza, Number(camera) || 0, Number(t) || 0, Number(homeX) || 0); } catch (e) {} }
+  window.BossArena = Object.freeze({ themes: Object.keys(THEME), palco, temasC2: Object.keys(C2) });
 })();

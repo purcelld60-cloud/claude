@@ -17,6 +17,24 @@
   const escada = (P, x, y, n, larg = 14) => { for (let k = 0; k < n; k++) { P.R(x, y + k * 4, larg, 4, k % 2 ? '#a8aeb4' : '#bcc0c4'); P.R(x, y + k * 4, larg, 1, '#dde0e3'); } P.R(x - 1, y, 1, n * 4, '#7a8086'); P.R(x + larg, y, 1, n * 4, '#7a8086'); };
   const pessoa = (P, x, y, cor, t = 0, anda = true) => { const f = anda ? Math.floor(t * 6) % 2 : 0; P.R(x - 1, y - 2, 2, 2 + f, '#2a2f3a'); P.R(x + 1, y - 2, 2, 3 - f, '#2a2f3a'); P.R(x - 2, y - 8, 5, 6, cor); P.R(x - 1, y - 11, 3, 3, '#d9a57f'); P.R(x - 1, y - 12, 3, 1, '#2a201a'); P.R(x - 3, y, 7, 1, 'rgba(0,0,0,.25)'); };
   const carrinho = (P, x, y, cor, dir = 1, taxi = false) => { const R = P.R; R(x - 9, y + 1, 18, 2, 'rgba(0,0,0,.3)'); R(x - 9, y - 6, 18, 7, cor); R(x - 9, y - 6, 18, 1, '#ffffff55'); R(x - 5 + dir, y - 10, 10, 5, cor); R(x - 4 + dir, y - 9, 8, 3, '#9fc4d0'); R(x - 8, y, 4, 2, '#1c1c1c'); R(x + 4, y, 4, 2, '#1c1c1c'); R(dir > 0 ? x + 8 : x - 9, y - 4, 1, 2, '#fff2b0'); if (taxi) { R(x - 2 + dir, y - 12, 5, 2, '#f6f6f0'); for (let k = 0; k < 9; k++) R(x - 9 + k * 2, y - 3, 1, 1, k % 2 ? '#1c1c1c' : '#f6f6f0'); } };
+  // carro da viagem no mapa (maior e detalhado): o carro a gás do pai (voa) ou o táxi de Conquista.
+  // o = { alt, roda, voando, parado, vel }; desenhado de lado, virado para +x, rodas em y = 0.
+  const carroViagem = (P, t, o = {}, tipo = 'gas') => { const R = P.R, K = '#14201f', taxi = tipo === 'taxi';
+    const cor = taxi ? ['#f2c94c', '#ffe48a', '#b8901c'] : ['#3c8a8a', '#7ac8c8', '#265e5e'];
+    if (o.voando) for (const [fx, ff] of [[-9, 0], [7, 1.7]]) { const f = 4 + Math.sin(t * 38 + ff) * 2; P.c.globalAlpha = .45; R(fx - 2, 3, 5, f + 3, '#bff0c8'); P.c.globalAlpha = .9; R(fx - 1, 3, 3, f, '#f4fff0'); P.c.globalAlpha = 1; } // jatos de gás por baixo
+    if (!taxi) { R(-20, -10, 7, 8, K); R(-19, -9, 5, 6, '#c8ccd0'); R(-19, -9, 5, 1, '#f2f4f6'); R(-19, -5, 5, 1, '#8a9096'); R(-17, -11, 1, 2, K); } // cilindro de gás no porta-malas
+    R(-16, -10, 32, 11, K); R(-9, -18, 18, 9, K); // contorno
+    R(-15, -9, 30, 9, cor[0]); R(-15, -9, 30, 2, cor[1]); R(-15, -2, 30, 2, cor[2]); R(-15, -9, 1, 7, cor[2]); // carroceria
+    R(-8, -17, 16, 8, cor[0]); R(-8, -17, 16, 1, cor[1]); // cabine
+    R(-7, -16, 6, 6, '#a8d4e2'); R(0, -16, 7, 6, '#8ab8c8'); R(-7, -16, 2, 1, '#ffffff'); R(-6, -15, 1, 2, '#e6f6fc'); R(-1, -16, 1, 7, cor[2]); // vidros com reflexo
+    R(2, -15, 4, 4, '#8a5a36'); R(1, -16, 6, 1, '#e8c86a'); R(2, -17, 4, 1, '#e8c86a'); R(5, -13, 1, 1, '#1c1c1c'); // motorista de chapéu
+    R(-1, -8, 1, 7, cor[2]); R(1, -6, 3, 1, '#d8dce0'); R(-11, -6, 3, 1, '#d8dce0'); // portas
+    if (taxi) { for (let k = 0; k < 15; k++) R(-15 + k * 2, -5, 2, 1, k % 2 ? '#1c1c1c' : '#f6f6f0'); R(-4, -22, 9, 5, K); R(-3, -21, 7, 3, '#f6f6f0'); R(-2, -20, 1, 1, '#1c1c1c'); R(0, -20, 1, 1, '#1c1c1c'); R(2, -20, 1, 1, '#1c1c1c'); }
+    R(-16, 0, 32, 1, '#9aa0a6'); R(14, -7, 2, 3, '#fff2b0'); R(-15, -7, 1, 2, '#e83a3a'); R(15, -3, 1, 2, '#ff9a3a'); // para-choque, farol, lanterna, pisca
+    if (!o.parado && Math.floor(t * 4) % 2 === 0 && !o.voando) R(15, -3, 1, 2, '#ffd36b');
+    for (const wx of [-9, 9]) { R(wx - 4, -2, 8, 6, K); R(wx - 3, -1, 6, 4, '#2a2a2a'); R(wx - 1, 0, 2, 2, '#9aa0a6'); const a = o.roda || 0; for (let k = 0; k < 2; k++) R(wx - 1 + Math.round(Math.cos(a + k * Math.PI) * 2), Math.round(1 + Math.sin(a + k * Math.PI) * 1.5) - 1, 1, 1, '#d8dce0'); } // rodas girando
+    P.c.globalAlpha = .16 + Math.sin(t * 9) * .04; for (let k = 0; k < 9; k++) R(16 + k * 2, -8 - k * .45, 2, 4 + k * .9, '#fff2b0'); P.c.globalAlpha = 1; // facho do farol
+  };
   const fumaca = (P, x, y, t) => { for (let k = 0; k < 5; k++) { const q = (t * .4 + k / 5) % 1; P.c.globalAlpha = (1 - q) * .55; P.circ(x + Math.sin(t + k) * 3 + q * 6, y - q * 26, 2 + q * 4, '#f2f2ee'); } P.c.globalAlpha = 1; };
 
   const h = hash;
@@ -270,7 +288,7 @@
       for (let k = 0; k < 3; k++) { const x = ((t * 30 + k * 300) % 1100) - 40, y = 60 + k * 70 + Math.sin(t * 2 + k) * 6, f = Math.sin(t * 12 + k) > 0; R(x, y, 3, 1, '#2a2a2a'); R(x - 2, y - (f ? 2 : 0), 2, 1, '#2a2a2a'); R(x + 3, y - (f ? 2 : 0), 2, 1, '#2a2a2a'); }
       { const on = Math.floor(t * 5) % 2; R(506, 606, 8, 6, on ? '#3ae0ff' : '#ff3a8a'); R(507, 607, 2, 2, '#ffffff'); } // fliperama piscando
     },
-    veiculo: (P) => { const R = P.R; R(-12, -8, 24, 9, '#3c8a8a'); R(-12, -8, 24, 1, '#7ac8c8'); R(-6, -14, 14, 7, '#4aa0a0'); R(-5, -13, 12, 4, '#9fc4d0'); R(-16, -7, 5, 5, '#c8ccd0'); R(-10, 0, 5, 3, '#1c1c1c'); R(6, 0, 5, 3, '#1c1c1c'); R(11, -6, 2, 2, '#fff2b0'); for (let k = 0; k < 3; k++) R(-20 - k * 4, -4 + Math.sin(k + performance.now() / 90) * 2, 3, 3, 'rgba(220,230,240,.7)'); },
+    veiculo: (P, t, o) => carroViagem(P, t, o, 'gas'),
     locais: C1
   };
   // quem falta derrotar (ou o que falta fazer) para liberar cada lugar da campanha 1, seguindo as regras do jogo
@@ -532,7 +550,7 @@
       // neblina de Conquista passando devagar
       for (let k = 0; k < 4; k++) { const x = ((t * 5 + k * 330) % 1500) - 200, y = 140 + k * 150; P.c.globalAlpha = .13; P.circ(x, y, 110, '#f4f8fa', 26); P.circ(x + 70, y + 8, 80, '#f4f8fa', 20); P.c.globalAlpha = 1; }
     },
-    veiculo: (P, t) => carrinho(P, 0, 0, '#f2c94c', 1, true),
+    veiculo: (P, t, o) => carroViagem(P, t, o, 'taxi'),
     locais: PONTOS
   };
   function abrirMapa2(cenaAtual, aoIr, opts = {}) {

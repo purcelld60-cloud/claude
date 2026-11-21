@@ -373,7 +373,7 @@
   function abrir(d) {
     if (!ui) montarUI(); def = d; if (!cache.has(d.chave)) cache.set(d.chave, montar(d)); M = cache.get(d.chave);
     ui.querySelector('.t').textContent = d.titulo; ui.querySelector('.s').textContent = d.subtitulo || ''; const bt = ui.querySelector('.teste'); bt.hidden = !d.teste; bt.textContent = d.teste?.rotulo || ''; mostrarTrava(-1);
-    ui.hidden = false; requestAnimationFrame(() => ui.classList.add('on')); aberto = true; sel = -1; info = false; viagem = null; faiscas = [];
+    ui.hidden = false; requestAnimationFrame(() => ui.classList.add('on')); aberto = true; sel = -1; info = false; viagem = null; faiscas = []; rastro = [];
     resize(); const atual = d.locais.findIndex((L) => L.atual), foco = atual >= 0 ? centro(atual) : { x: M.W / 2, y: M.H / 2 };
     cam = { x: M.W / 2, y: M.H / 2, z: zMin() }; limitar(); anim = { de: { ...cam }, para: { x: foco.x, y: foco.y, z: celular() ? Math.min(zMax, Math.max(zMin() * 1.15, zCobre() * .9)) : Math.min(zMax, zMapa() * 1.9) }, t: -.25, dur: 1.4, f: ease }; montarLugares();
     ui.querySelector('.pv').classList.remove('on'); ui.querySelector('.fade').style.opacity = 0; mostrarInfo(false);
@@ -405,11 +405,23 @@
   function ir() {
     if (sel < 0 || viagem) return; const L = def.locais[sel]; if (L.estado?.ok === false || L.atual) return;
     const ai = def.locais.findIndex((q) => q.atual), para = centro(sel), de = ai >= 0 ? centro(ai) : { x: para.x - 200, y: para.y + 120 };
-    const rota = def.voa ? [de, { x: (de.x + para.x) / 2, y: Math.min(de.y, para.y) - 60 }, para] : [de, { x: para.x, y: de.y }, para];
-    viagem = { rota, t: 0, dur: 2.1, id: L.id }; ui.querySelector('.pv').classList.remove('on'); clearInterval(previaTimer); anim = null;
+    const rota = montarRota(de, para), dur = Math.max(2, Math.min(3.6, 1.5 + rota.total / 420));
+    viagem = { rota, t: -.38, dur, id: L.id, dir: para.x >= de.x ? 1 : -1, ang: 0, roda: 0, emit: 0, ant: null, spd: 0, pousou: false, sq: 0, treme: 0 }; rastro = []; ui.querySelector('.pv').classList.remove('on'); clearInterval(previaTimer); anim = null;
+    poeira(de.x, de.y, 10, '#d8c8a8'); // o motor pega: um pouco de poeira antes de sair
   }
-  function pontoRota(v, u) { const [a, b, q] = v.rota; if (def.voa) return { x: (1 - u) * (1 - u) * a.x + 2 * (1 - u) * u * b.x + u * u * q.x, y: (1 - u) * (1 - u) * a.y + 2 * (1 - u) * u * b.y + u * u * q.y, alt: Math.sin(u * Math.PI) * 40 };
-    const l1 = Math.hypot(b.x - a.x, b.y - a.y), l2 = Math.hypot(q.x - b.x, q.y - b.y), d = u * (l1 + l2); if (d <= l1) { const k = l1 ? d / l1 : 1; return { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k, alt: 0 }; } const k = l2 ? (d - l1) / l2 : 1; return { x: b.x + (q.x - b.x) * k, y: b.y + (q.y - b.y) * k, alt: 0 }; }
+  // trajeto da viagem como polilinha medida: arco no voo; no chão, anda reto e faz a curva arredondada
+  function montarRota(de, para) {
+    const pts = [], q = (a, b, c2, u) => ({ x: (1 - u) * (1 - u) * a.x + 2 * (1 - u) * u * b.x + u * u * c2.x, y: (1 - u) * (1 - u) * a.y + 2 * (1 - u) * u * b.y + u * u * c2.y });
+    if (def.voa) { const b = { x: (de.x + para.x) / 2, y: Math.min(de.y, para.y) - 60 }; for (let i = 0; i <= 48; i++) pts.push(q(de, b, para, i / 48)); }
+    else { const b = { x: para.x, y: de.y }, l1 = Math.hypot(b.x - de.x, b.y - de.y), l2 = Math.hypot(para.x - b.x, para.y - b.y), r = Math.min(40, l1 * .45, l2 * .45);
+      if (r < 2) pts.push(de, b, para); else { const p1 = { x: b.x - (b.x - de.x) / l1 * r, y: b.y - (b.y - de.y) / l1 * r }, p2 = { x: b.x + (para.x - b.x) / l2 * r, y: b.y + (para.y - b.y) / l2 * r }; pts.push(de, p1); for (let i = 1; i < 12; i++) pts.push(q(p1, b, p2, i / 12)); pts.push(p2, para); } }
+    const acc = [0]; for (let i = 1; i < pts.length; i++) acc.push(acc[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y)); return { pts, acc, total: acc[acc.length - 1] || 1 };
+  }
+  function pontoRota(v, u) { const R = v.rota, d = Math.max(0, Math.min(1, u)) * R.total; let i = 1; while (i < R.acc.length - 1 && R.acc[i] < d) i++;
+    const a = R.pts[i - 1], b = R.pts[i] || a, seg = R.acc[i] - R.acc[i - 1], k = seg ? Math.max(0, Math.min(1, (d - R.acc[i - 1]) / seg)) : 1;
+    return { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k, alt: def.voa ? 48 * Math.pow(Math.sin(Math.PI * Math.max(0, Math.min(1, u))), .55) : 0 }; }
+  let rastro = [];
+  function poeira(x, y, n, cor) { for (let k = 0; k < n; k++) { const a = (k / n) * Math.PI * 2 + Math.random() * .4, v = 18 + Math.random() * 26; rastro.push({ x, y: y + 2, vx: Math.cos(a) * v, vy: Math.sin(a) * v * .35 - 4, t: 0, vida: .55 + Math.random() * .35, r: 2 + Math.random() * 2, cresce: 5, cor, chao: true }); } }
 
   /* ---------- clique ---------- */
   function clique(e) { const r = cv.getBoundingClientRect(), p = { x: cam.x + (e.clientX - r.left - r.width / 2) / cam.z, y: cam.y + (e.clientY - r.top - r.height / 2) / cam.z }; let best = -1, bd = 1e9;
@@ -432,9 +444,24 @@
     if (!aberto) return; raf = requestAnimationFrame(loop); const dt = Math.max(0, Math.min(.05, (now - last) / 1000)); last = now; tempo += dt; resize();
     const W = cv.width, H = cv.height;
     if (anim) { anim.t += dt; const u = anim.f(Math.max(0, Math.min(1, anim.t / anim.dur))); cam.x = anim.de.x + (anim.para.x - anim.de.x) * u; cam.y = anim.de.y + (anim.para.y - anim.de.y) * u; cam.z = anim.de.z + (anim.para.z - anim.de.z) * u; if (anim.t >= anim.dur) anim = null; }
-    let veic = null; if (viagem) { const v = viagem; v.t += dt; const u = ease(Math.min(1, v.t / v.dur)); veic = pontoRota(v, u); const p2 = pontoRota(v, ease(Math.min(1, v.t / v.dur + .02))); veic.dir = p2.x >= veic.x ? 1 : -1;
-      cam.x += (veic.x - cam.x) * Math.min(1, dt * 5); cam.y += (veic.y - cam.y) * Math.min(1, dt * 5); cam.z += (Math.min(zMax, 3.2) - cam.z) * Math.min(1, dt * 2);
-      if (v.t > v.dur - .4) ui.querySelector('.fade').style.opacity = 1; if (v.t >= v.dur + .2) { const id = v.id; viagem = null; fechar(); setTimeout(() => def.aoIr?.(id), 60); return; } }
+    let veic = null; if (viagem) { const v = viagem; v.t += dt; const k = Math.max(0, Math.min(1, v.t / v.dur)), u = ease(k); veic = pontoRota(v, u);
+      const p2 = pontoRota(v, ease(Math.min(1, k + .015))), dx = p2.x - veic.x, dy = (p2.y - p2.alt) - (veic.y - veic.alt); if (Math.abs(dx) > .08) v.dir = dx >= 0 ? 1 : -1;
+      const sx = veic.x, sy = veic.y - veic.alt; v.spd = v.ant && dt ? Math.hypot(sx - v.ant.x, sy - v.ant.y) / dt : 0; v.ant = { x: sx, y: sy }; v.roda += v.spd * dt / 3;
+      const angAlvo = def.voa && v.t > 0 && k < 1 ? Math.max(-.42, Math.min(.42, Math.atan2(dy, Math.abs(dx) + .01))) * .8 : 0; v.ang += (angAlvo - v.ang) * Math.min(1, dt * 7);
+      if (v.t < 0) { veic.y += Math.round(Math.sin(tempo * 60)) * .5; } // motor roncando parado
+      else if (k < 1) veic.y += def.voa ? Math.sin(tempo * 7) * 1.4 * Math.min(1, veic.alt / 12) : -Math.abs(Math.sin(tempo * 16)) * .9; // balanço do voo / buraquinhos da rua
+      if (k >= 1 && !v.pousou) { v.pousou = true; v.sq = 1; v.treme = .22; poeira(veic.x, veic.y, def.voa ? 18 : 10, '#e0d2b4'); }
+      v.sq = Math.max(0, v.sq - dt * 3.2); v.treme = Math.max(0, v.treme - dt);
+      // rastro: gás do carro voador / fumaça do escapamento e poeira das rodas no chão
+      v.emit += dt; const taxa = k >= 1 ? 1e9 : v.t < 0 ? .07 : def.voa ? .028 : .045;
+      while (v.emit > taxa) { v.emit -= taxa; const ex = veic.x - v.dir * 17 * Math.cos(v.ang), ey = veic.y - veic.alt - 3 - Math.sin(v.ang) * 17;
+        if (def.voa) rastro.push({ x: ex, y: ey, vx: -v.dir * (10 + Math.random() * 14), vy: -4 + Math.random() * 8, t: 0, vida: .9 + Math.random() * .5, r: 2 + Math.random() * 1.5, cresce: 7, cor: Math.random() < .5 ? '#d8f2c8' : '#f4f8ee' });
+        else { rastro.push({ x: ex, y: ey + 1, vx: -v.dir * 8, vy: -10 - Math.random() * 6, t: 0, vida: .7, r: 1.5, cresce: 4, cor: '#c8ccd0' }); if (v.spd > 30) rastro.push({ x: veic.x - v.dir * 8, y: veic.y + 2, vx: -v.dir * (6 + Math.random() * 10), vy: -3, t: 0, vida: .45, r: 1.5, cresce: 3, cor: '#d8c8a8', chao: true }); } }
+      const zBase = Math.min(zMax, 3.2), zAlvo = def.voa ? zBase * (1 - .18 * Math.sin(Math.PI * k)) : zBase; // no voo o mapa se abre um pouco
+      const tx = veic.x + (dx || 0) * 6, ty = veic.y - veic.alt * .5 + (dy || 0) * 3; cam.x += (tx - cam.x) * Math.min(1, dt * 5); cam.y += (ty - cam.y) * Math.min(1, dt * 5); cam.z += (zAlvo - cam.z) * Math.min(1, dt * 2);
+      if (v.treme > 0) { cam.x += Math.sin(tempo * 90) * v.treme * 6 / cam.z; cam.y += Math.cos(tempo * 77) * v.treme * 4 / cam.z; }
+      veic.dir = v.dir; veic.ang = v.ang; veic.v = v; veic.k = k;
+      if (v.t > v.dur + .3) ui.querySelector('.fade').style.opacity = 1; if (v.t >= v.dur + .78) { const id = v.id; viagem = null; rastro = []; fechar(); setTimeout(() => def.aoIr?.(id), 60); return; } }
     limitar();
     c.setTransform(1, 0, 0, 1, 0, 0); c.imageSmoothingEnabled = false; c.fillStyle = M.ilha ? '#3a98d8' : '#8ccfe8'; c.fillRect(0, 0, W, H);
     const z = cam.z, ox = Math.round(W / 2 - cam.x * z), oy = Math.round(H / 2 - cam.y * z); c.setTransform(z, 0, 0, z, ox, oy);
@@ -466,7 +493,22 @@
       c.save(); c.translate(L.bx + L.bw / 2, L.by + L.bh); c.scale(sx, sy); c.drawImage(def.locais[i].estado?.trava ? L.esc : L.s, -L.bw / 2, -L.bh); c.restore(); }
     def.animar?.(P, tempo, dt);
     faiscas = faiscas.filter((f) => { f.t += dt; f.vy += 160 * dt; f.x += f.vx * dt; f.y += f.vy * dt; R(f.x, f.y, 2, 2, f.cor); return f.t < .9; });
-    if (veic) { c.globalAlpha = .3; P.circ(veic.x, veic.y + 3, 10, '#000', 3); c.globalAlpha = 1; c.save(); c.translate(Math.round(veic.x), Math.round(veic.y - veic.alt)); if (veic.dir < 0) c.scale(-1, 1); def.veiculo?.(P, tempo); c.restore(); }
+    if (veic) { const v = veic.v, alt = veic.alt;
+      // rota pontilhada até o destino (andando) e o marcador pulsando no lugar escolhido
+      { const R2 = v.rota, d0 = ease(veic.k) * R2.total, passo = 7, desl = (tempo * 26) % passo; let i2 = 1;
+        for (let d = d0 + 10 + desl; d < R2.total - 4; d += passo) { while (i2 < R2.acc.length - 1 && R2.acc[i2] < d) i2++; const a = R2.pts[i2 - 1], b = R2.pts[i2], sg = R2.acc[i2] - R2.acc[i2 - 1], kk = sg ? (d - R2.acc[i2 - 1]) / sg : 0, x = a.x + (b.x - a.x) * kk, y = a.y + (b.y - a.y) * kk;
+          c.globalAlpha = .75; R(x - 1, y, 3, 3, '#2a1a10'); R(x - 1, y - 1, 3, 2, '#fff6c0'); } c.globalAlpha = 1;
+        const fim = R2.pts[R2.pts.length - 1], pul = (tempo * 1.6) % 1; c.save(); c.strokeStyle = '#ffd36b'; c.lineWidth = 2; c.globalAlpha = 1 - pul; c.beginPath(); c.ellipse(fim.x, fim.y + 2, 8 + pul * 22, (8 + pul * 22) * .38, 0, 0, Math.PI * 2); c.stroke(); c.globalAlpha = .55; c.fillStyle = '#ffd36b'; c.beginPath(); c.ellipse(fim.x, fim.y + 2, 7, 2.8, 0, 0, Math.PI * 2); c.fill(); c.restore();
+        if (veic.k < 1) { const by = fim.y - 34 - Math.abs(Math.sin(tempo * 5)) * 6; R(fim.x - 4, by, 9, 3, '#2a1a10'); R(fim.x - 3, by + 3, 7, 2, '#2a1a10'); R(fim.x - 1, by + 5, 3, 2, '#2a1a10'); R(fim.x - 3, by, 7, 2, '#ffd36b'); R(fim.x - 2, by + 2, 5, 2, '#ffd36b'); R(fim.x, by + 4, 1, 2, '#ffd36b'); } }
+      // sombra no chão: menor e mais clara quanto mais alto
+      c.globalAlpha = Math.max(.1, .34 - alt * .004); P.circ(veic.x, veic.y + 3, Math.max(5, 13 - alt * .12), '#000', Math.max(2, 4 - alt * .03)); c.globalAlpha = 1;
+      for (const p of rastro) if (p.chao) { c.globalAlpha = Math.max(0, 1 - p.t / p.vida) * .6; P.circ(p.x, p.y, p.r + p.cresce * p.t / p.vida, p.cor, Math.max(1, (p.r + p.cresce * p.t / p.vida) * .45)); } c.globalAlpha = 1;
+      for (const p of rastro) if (!p.chao) { const q = p.t / p.vida; c.globalAlpha = Math.max(0, 1 - q) * .7; P.circ(p.x, p.y, p.r + p.cresce * q, p.cor); } c.globalAlpha = 1;
+      // linhas de velocidade
+      if (v.spd > 90 && veic.k < 1) { c.globalAlpha = Math.min(.6, (v.spd - 90) / 260); for (let k2 = 0; k2 < 4; k2++) { const ly = veic.y - alt - 12 + k2 * 5 + Math.sin(tempo * 30 + k2) * 1.5, lx = veic.x - veic.dir * (22 + ((tempo * 140 + k2 * 9) % 18)); R(veic.dir > 0 ? lx - 10 : lx, ly, 10, 1, '#ffffff'); } c.globalAlpha = 1; }
+      const e = v.sq > 0 ? Math.sin(v.sq * Math.PI) * v.sq * .22 : 0; c.save(); c.translate(Math.round(veic.x), Math.round(veic.y - alt)); if (veic.dir < 0) c.scale(-1, 1); c.rotate(veic.ang); c.scale(1 + e, 1 - e);
+      def.veiculo?.(P, tempo, { alt, roda: v.roda, voando: alt > 3, parado: v.t < 0 || veic.k >= 1, vel: v.spd }); c.restore(); }
+    rastro = rastro.filter((p) => { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= Math.pow(.25, dt); p.vy *= Math.pow(.4, dt); if (!p.chao) p.vy -= 6 * dt; return p.t < p.vida; });
     for (const a of M.aves) { a.x += a.v * a.dir * dt; if (a.x > M.W + 120) a.x = -120; if (a.x < -120) a.x = M.W + 120; // bando em V batendo as asas
       for (let i = 0; i < a.n; i++) { const lado = i % 2 ? 1 : -1, k = Math.ceil(i / 2), bx = a.x - a.dir * k * 9, by = a.y + lado * k * 6 + Math.sin(tempo * 2 + a.fase) * 6, asa = Math.sin(tempo * 12 + a.fase + i) > 0;
         R(bx - 3, by - (asa ? 2 : 0), 2, 1, '#2a2a3a'); R(bx - 1, by, 2, 1, '#2a2a3a'); R(bx + 1, by - (asa ? 2 : 0), 2, 1, '#2a2a3a'); c.globalAlpha = .15; R(bx - 2, by + 26, 4, 1, '#000'); c.globalAlpha = 1; } }

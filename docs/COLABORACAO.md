@@ -170,3 +170,15 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Vida dos inimigos e chefes:** × `ESC = 5`, a mesma proporção, então as lutas duram o mesmo. Poderes da Campanha 2 e a mordida do cachorro também × 5.
   - **Dificuldade da principal (`window.Difficulty`):** a vida dos chefes segue `hp` (fácil −32%), o aviso dos golpes `windup` e a recuperação `recovery`.
   - **Dano no Da Roça (`ferir` em jogo.js):** × 1,5, porque ele chega mais forte da principal, e × `incomingDamage` (difícil = dobro).
+- **2026-11-21 · Claude:** **lutas dos vilões da Campanha 2 no motor de luta da principal** (`campanha2/luta-c1.js`):
+  - Ao fim da cutscene do vilão, a luta abre no Terreiro dos Chefes do `game.js` (`Game.startSandboxBoss`), com arena, barra do chefe, plaquinha CHEFE · NÍVEL, holofotes, dash, ataques em área e projéteis da principal.
+  - **Cada vilão usa o repertório de golpes do chefe da principal mais parecido** (`KIT` em `luta-c1.js`). Exemplos: Creuza = Dedé, Tonhão = Arthur, Valdomiro = Freddy, Kauã = Menezes, Barão = Reeis, Jorge = Nicolas. A vida cresce × `vida` na ordem da história e o dano no Da Roça é × 1,3.
+  - **Visual:** sprite, nome e cenário de Conquista do vilão. O palco da arena da principal (`BossArena.palco`, tema por vilão em `boss-arena.js`) é desenhado por cima.
+  - **Ganchos no `game.js`, só ativos com `C2Luta.skin`:** `sprite()`, `nomeBoss()`, vida em `engageBoss`, fundo em `draw`, dano em `hurt` e `retreatBoss` (recuar volta ao checkpoint).
+  - Ao vencer, a Campanha 2 segue a história (`apiFase.vencer`). Ao perder, aparece VOCÊ DESMAIOU. Se o motor da principal falhar, cai na luta antiga, para nunca travar.
+- **2026-11-21 · Claude:** **aviso antes de apagar o save** (`confirmar.js`, `window.Confirmar({titulo, html, sim, nao})` → Promise). Aparece no NOVA AVENTURA (quando há save da principal) e no COMEÇAR DE NOVO da Campanha 2 (que usava o `confirm()` do navegador). O foco começa em CANCELAR e o Esc cancela.
+- **2026-11-21 · Claude:** **viagem no mapa** (`mapa3d.js` e `mapas.js` `carroViagem`):
+  - Carro maior e detalhado: o carro a gás com cilindro e jatos de gás, ou o táxi com o letreiro TAXI.
+  - Na viagem, o motor ronca antes de sair e há poeira na partida e no pouso. O veículo deixa rastro de gás ou fumaça e mostra linhas de velocidade. No voo, inclina na subida e na descida, com a sombra encolhendo com a altura. No pouso, amassa e a câmera treme.
+  - Rota pontilhada até o destino, com marcador pulsando. O táxi faz a curva arredondada.
+  - A duração da viagem depende da distância (2 a 3,6 s).
