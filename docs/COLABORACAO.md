@@ -118,3 +118,4 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - ruas que chegam na borda viram trilhas de terra até a praia, em vez de listras de água;
   - o "mar de nuvens" só vale para áreas grandes e bem brancas;
   - a faixa de fora ganhou árvores, cacaueiros, arbustos, flores, pedras e casinhas com cerca.
+- **2026-11-21 · Claude:** os brainrots do Marco ficaram **roxos**, para combinar com ele. A função `roxo()` em `brainrots.js` puxa cada cor para o roxo e mantém luz e sombra; olhos e dentes ficam como estão. A força do roxo se ajusta na constante `ROXO`.
