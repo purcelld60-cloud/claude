@@ -76,7 +76,7 @@
   // cada onomatopeia tem seu som (audio.js); um som por vez a cada 60 ms para não embolar
   const SOUND = { 'CRAC!': 'quebra', 'CRÁS!': 'quebra', 'BLAM!': 'quebra', 'PLAFT!': 'quebra', 'SPLOC!': 'agua', 'TÁC!': 'tac', 'FUFF!': 'fogo', 'LIGOU!': 'alavanca', 'DESLIGOU': 'alavanca' }; let lastSound = 0;
   function sound(name) { const t = performance.now(); if (t - lastSound < 60) return; lastSound = t; try { window.DarocaAudio?.play?.(name); } catch (e) {} }
-  function say(S, x, y, txt, col = '#fff0c4') { S.texts.push({ x, y, txt, col, life: 1.1 }); const snd = SOUND[txt] || (String(txt).startsWith('LIGOU') ? 'alavanca' : null); if (snd) sound(snd); }
+  function say(S, x, y, txt, col = '#fff0c4') { if (!window.Campanha2?.aberto?.()) S.texts.push({ x, y, txt, col, life: 1.1 }); /* na Campanha 2: sem onomatopeias (pedido do dono), só o som */ const snd = SOUND[txt] || (String(txt).startsWith('LIGOU') ? 'alavanca' : null); if (snd) sound(snd); }
   function leaves(S, x, n) { for (let i = 0; i < n; i++) S.fx.push({ k: 'leaf', x: x + (Math.random() - .5) * 260, y: 120 + Math.random() * 140, vx: (Math.random() - .5) * 60, vy: 30 + Math.random() * 40, s: 4, col: ['#6aa850', '#c9a24a', '#a8c060', '#d8783a'][i % 4], life: 2.6 + Math.random(), ph: Math.random() * 6 }); }
 
   // ------------------------------------------------------------------ reações

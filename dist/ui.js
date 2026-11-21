@@ -128,6 +128,7 @@ document.addEventListener('keydown',e=>{if(e.code==='Escape'&&immersive&&!baseGa
 // Follow high jumps in cropped landscape mode instead of losing the player above the screen.
 let fillPan=null;
 function followFill(){
+ if(window.Campanha2?.aberto?.()){requestAnimationFrame(followFill);return;} // com a Campanha 2 aberta não mede nem mexe no layout da principal a cada quadro
  if(immersive&&shell.classList.contains('screen-wide')&&shell.classList.contains('screen-fill')&&shell.classList.contains('screen-crop-safe')&&!shell.classList.contains('screen-story')){
   const viewport=shell.querySelector('.viewport'),w=viewport.clientWidth,h=viewport.clientHeight,scale=w/960;
   const playerY=window.Game?.getViewTarget?.().y??440;

@@ -137,3 +137,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - aviso de carga antes de cada golpe; rastro e linhas de velocidade no mergulho; onda de choque ao disparar.
   
   Só visual: tamanhos, posições e dano que acertam continuam iguais.
+- **2026-11-21 · Claude:** Campanha 2 com os **mesmos efeitos e botões da principal**, e mais leve:
+  - **Botões:** o `copiarEstilo` (treino.js) agora copia também as cores de cada botão (`.jump-btn`, `.paper-btn`, `.fart-btn`, `.dash-btn`...). Os poderes ficaram roxos.
+  - **Efeitos:** papel, peido e dash usam o `CampaignVfx`, como na principal. O voo de peido solta jato de gás e o Da Roça é desenhado com `flight`. O acerto no inimigo continua só piscando.
+  - **Onomatopeias:** sumiram dos objetos quebráveis na Campanha 2 (`interact.js`); o som continua.
+  - **Desempenho:**
+    - o `char-detail.js` guarda pronto o desenho de personagens de fundo (`cache: true`, usado nos moradores e NPCs da Campanha 2);
+    - `ui.js`, `speech.js` e `hud.js` param de trabalhar enquanto a Campanha 2 está aberta.

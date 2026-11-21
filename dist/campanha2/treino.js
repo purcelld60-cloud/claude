@@ -12,9 +12,9 @@
   /* ---------- os botões da campanha 1, com o mesmo estilo ---------- */
   function copiarEstilo() {
     if (document.getElementById('c2TreinoCss')) return; const st = document.createElement('style'); st.id = 'c2TreinoCss'; let txt = '';
-    for (const sh of document.styleSheets) { let rules; try { rules = sh.cssRules; } catch (e) { continue; } for (const r of rules || []) if (r.selectorText && /crafted-controls/.test(r.selectorText) && /touch-btn|control-icon|kbd/.test(r.selectorText)) txt += r.cssText.replace(/#gameShell\s*/g, '').replace(/\.crafted-controls/g, '.c2-treino-ctl') + '\n'; }
+    for (const sh of document.styleSheets) { let rules; try { rules = sh.cssRules; } catch (e) { continue; } for (const r of rules || []) if (r.selectorText && /crafted-controls/.test(r.selectorText) && /touch-btn|control-icon|kbd|-btn\b/.test(r.selectorText)) txt += r.cssText.replace(/#gameShell\s*/g, '').replace(/\.crafted-controls/g, '.c2-treino-ctl') + '\n'; }
     txt += `.c2-treino-ctl{position:absolute;right:2%;bottom:3%;display:grid;grid-template-columns:repeat(4,auto);gap:8px;z-index:3}.c2-treino-ctl .touch-btn{width:54px;height:54px;touch-action:none;user-select:none;-webkit-user-select:none}
-.c2-treino-ctl .touch-btn kbd{position:absolute;top:2px;left:4px;font:6px Pixel,monospace;opacity:.6}.c2-treino-ctl .touch-btn.pressed{transform:translateY(3px);filter:brightness(1.1)}.c2-treino-ctl .c2-poder-btn small{position:static;transform:none;color:inherit}
+.c2-treino-ctl .touch-btn kbd{position:absolute;top:2px;left:4px;font:6px Pixel,monospace;opacity:.6}.c2-treino-ctl .touch-btn.pressed{transform:translateY(3px);filter:brightness(1.1)}.c2-treino-ctl .c2-poder-btn small{position:static;transform:none;color:inherit}.c2-treino-ctl .c2-poder-btn{--key-face:#c8a8e8;--key-edge:#8a6ab8;--key-ink:#4a2a6a;--key-light:#f0e0ff}.c2-treino-ctl .interact-btn{--key-face:#f0dcae;--key-edge:#b8955a;--key-ink:#5a3a1a;--key-light:#fff6d8}
 .c2-treino-ctl .c2-cd{position:absolute;inset:0;background:rgba(10,8,6,.55);clip-path:inset(var(--cd,100%) 0 0 0);pointer-events:none}.c2-treino-ctl .vazio{opacity:.5}
 .c2-treino-info{position:absolute;left:2%;top:3%;font:9px Pixel,monospace;color:#f3d89e;background:rgba(20,14,8,.7);padding:6px 8px;border:2px solid #e8c66a;line-height:1.6;z-index:3;max-width:46%}
 .c2-treino-gas{position:absolute;left:2%;bottom:4%;width:120px;height:10px;background:#1c1408;border:2px solid #e8c66a;z-index:3}.c2-treino-gas i{display:block;height:100%;background:linear-gradient(#9ae06a,#4a9a3a)}`;
@@ -53,20 +53,22 @@
     if (id === 'poder1' || id === 'poder2') { const r = PW.usar(id === 'poder1' ? 0 : 1, mundo(), down ? 'down' : 'up'); if (down && !r.ok && r.motivo === 'vazio') aviso('Equipe um poder no Mural dos Poderes (quarto da pensão).'); if (down && !r.ok && r.motivo === 'recarga') aviso(`Recarregando: ${r.falta.toFixed(1).replace('.', ',')} s`); return true; }
     if (!down) { if (id === 'jump') voando = false; return true; }
     if (modoJogo && (id === 'paper' || id === 'fart')) { if ((cdAtk[id] || 0) > 0) return true; cdAtk[id] = id === 'paper' ? .26 : .9; if (id === 'paper') { P.attack = .32; } }
-    if (id === 'paper') { tiros.push({ x: P.x + dir * 22, y: P.y - 52, vx: dir * 620, vy: -90, vida: .8 }); return true; }
-    if (id === 'fart') { nuvens.push({ x: P.x - dir * 20, y: P.y - 30, vx: -dir * 60, t: 0, hitou: new Set() }); return true; }
-    if (id === 'dash') { if (dashCd <= 0) { dashT = .2; dashCd = 1.1; P.vx = dir * 620; } return true; }
+    if (id === 'paper') { tiros.push({ x: P.x + dir * 22, y: P.y - 52, vx: dir * 620, vy: -90, vida: .8 }); P.attack = .24; P.attackType = 'paper'; P.attackDuration = .24; VFX()?.emit?.('cast', { x: P.x + dir * 26, y: P.y - 52, dir }); return true; }
+    if (id === 'fart') { nuvens.push({ x: P.x - dir * 20, y: P.y - 30, vx: -dir * 60, t: 0, hitou: new Set(), dir }); P.attack = .36; P.attackType = 'fart'; P.attackDuration = .36; shake = Math.max(shake, 4); VFX()?.emit?.('gas', { x: P.x + dir * 9, y: P.y - 23, dir, stage: 1, radius: 155 }); return true; }
+    if (id === 'dash') { if (dashCd <= 0) { dashT = .2; dashCd = 1.1; P.vx = dir * 620; VFX()?.emit?.('dash', { x: P.x, y: P.y - 3, dir }); } return true; }
     if (id === 'jump') { voando = true; return false; } // o pulo em si é do visualizador
     if (id === 'interact') return false;
     return false;
   }
-  const cdAtk = {};
+  const cdAtk = {}, VFX = () => window.CampaignVfx;
+  let jato = [], voandoAgora = false; // fumacinha de gás do voo de peido (como na campanha 1)
   let avisoTxt = '', avisoT = 0; const aviso = (s) => { avisoTxt = s; avisoT = 2.4; };
 
   function passo(dt, P, o) {
     if (!on) return; heroRef = P; cam = o.cam; PW.atualizar(dt, mundo()); for (const k in cdAtk) cdAtk[k] = Math.max(0, cdAtk[k] - dt); if (P.attack > 0) P.attack = Math.max(0, P.attack - dt); dashCd = Math.max(0, dashCd - dt); shake = Math.max(0, shake - dt * 30); avisoT = Math.max(0, avisoT - dt);
     if (dashT > 0) { dashT -= dt; P.vx = (P.facing < 0 ? -1 : 1) * 620; }
-    if (voando && !P.ground && gas > 0 && o.segurandoPulo) { P.vy = Math.max(-240, P.vy - 1500 * dt); gas = Math.max(0, gas - 38 * dt); } if (P.ground) gas = Math.min(100, gas + 60 * dt);
+    voandoAgora = voando && !P.ground && gas > 0 && !!o.segurandoPulo; if (voandoAgora) { P.vy = Math.max(-240, P.vy - 1500 * dt); gas = Math.max(0, gas - 38 * dt); if (Math.random() < .55) jato.push({ x: P.x - (P.facing < 0 ? -1 : 1) * 6 + (Math.random() - .5) * 8, y: P.y + 2, vx: (Math.random() - .5) * 30, vy: 40 + Math.random() * 50, t: 0, vida: .45 + Math.random() * .25, k: 3 + Math.random() * 3 }); }
+    VFX()?.update?.(dt); jato = jato.filter((q) => { q.t += dt; q.x += q.vx * dt; q.y += q.vy * dt; q.vy *= .92; return q.t < q.vida; }); if (dashT > 0 && Math.random() < .8) jato.push({ x: P.x - (P.facing < 0 ? -1 : 1) * 14, y: P.y - 10 - Math.random() * 40, vx: 0, vy: 0, t: 0, vida: .2, k: 2, risco: true }); if (P.ground) gas = Math.min(100, gas + 60 * dt);
     if (!modoJogo) for (const b of bonecos) {
       if (b.morto > 0) { b.morto -= dt; if (b.morto <= 0) Object.assign(b, novoBoneco(b.base)); continue; }
       b.hit = Math.max(0, b.hit - dt); b.stun = Math.max(0, b.stun - dt); b.conf = Math.max(0, b.conf - dt); b.golpe = Math.max(0, b.golpe - dt);
@@ -96,8 +98,12 @@
   function desenhar(c, t) {
     if (!on) return; const P = heroRef;
     if (!modoJogo) for (const b of bonecos) espantalho(c, b, t);
-    for (const n of nuvens) { const a = 1 - n.t / 1.1; for (let k = 0; k < 5; k++) { c.fillStyle = `rgba(150,200,90,${a * .55})`; c.beginPath(); c.arc(n.x + Math.cos(k * 1.3 + n.t * 3) * 18 * (1 + n.t), n.y - 6 + Math.sin(k * 2 + n.t * 2) * 10, 10 + n.t * 16, 0, Math.PI * 2); c.fill(); } }
-    for (const q of tiros) { c.fillStyle = '#f6f4ee'; c.fillRect(Math.round(q.x - 5), Math.round(q.y - 5), 10, 10); c.fillStyle = '#d8d4c8'; c.fillRect(Math.round(q.x - 3), Math.round(q.y - 3), 4, 4); }
+    const nuvemPx = (x, y, size, cor, luz) => { const k = Math.max(2, Math.round(size / 5)), R2 = (a, b, w, h, col) => { c.fillStyle = col; c.fillRect(Math.round(a), Math.round(b), Math.round(w), Math.round(h)); };
+      R2(x - k * 3, y - k, k * 6, k * 3, '#263b42'); R2(x - k * 2, y - k * 2, k * 4, k * 5, '#263b42'); R2(x - k * 3 + 2, y - k + 2, k * 6 - 4, k * 3 - 4, cor); R2(x - k * 2 + 2, y - k * 2 + 2, k * 4 - 4, k * 5 - 4, cor); R2(x - k, y - k * 2 + 3, k * 2, k, luz); };
+    for (const n of nuvens) { const a = Math.max(0, 1 - n.t / 1.1); c.save(); c.globalAlpha = a > .3 ? 1 : a / .3; for (let k = 0; k < 4; k++) nuvemPx(n.x + Math.cos(k * 1.7 + n.t * 2) * 16 * (1 + n.t), n.y - 4 + Math.sin(k * 2.3 + n.t * 2) * 10, 10 + k * 2 + n.t * 8, k % 2 ? '#9ecb4b' : '#bedc69', '#e6ef9c'); c.restore(); }
+    for (const q of jato) { c.save(); c.globalAlpha = Math.max(0, 1 - q.t / q.vida); if (q.risco) { c.fillStyle = '#d8cc9b'; c.fillRect(Math.round(q.x), Math.round(q.y), 10, 2); } else nuvemPx(q.x, q.y, q.k * 2, '#bed970', '#e6ef9c'); c.restore(); }
+    for (const q of tiros) { if (VFX()?.drawProjectile?.(c, { type: 'paper', x: q.x, y: q.y, vx: q.vx, vy: q.vy, owner: 'player' }, t)) continue; c.fillStyle = '#f6f4ee'; c.fillRect(Math.round(q.x - 5), Math.round(q.y - 5), 10, 10); }
+    VFX()?.draw?.(c, t, 'front');
     PW.desenhar(c, mundo());
     c.font = '14px Pixel, monospace'; c.textAlign = 'center';
     for (const x of textos) { c.globalAlpha = 1 - x.t / .9; c.fillStyle = '#2a1a14'; c.fillText(String(x.n), x.x + 2, x.y - x.t * 40 + 2); c.fillStyle = x.cor; c.fillText(String(x.n), x.x, x.y - x.t * 40); } c.globalAlpha = 1;
@@ -106,5 +112,5 @@
       barra.querySelector('.c2-treino-info').innerHTML = `TREINO DE PODERES · ● ${window.CampanhaLoja?.moedas?.() ?? 0} MOEDAS<br>J PAPEL · K PEIDO · L DASH · ␣ VOAR · U/I PODERES<br>${eq.filter(Boolean).length ? 'Equipados: ' + eq.map((id) => PW.lista().find((p) => p.id === id)?.curto || '—').join(' + ') : 'Sem poder equipado: abra o MURAL'}${m.vel > 1 ? '<br>☕ CAFEZÃO ATIVO' : ''}${PW.escudo() ? '<br>♥ AURA ATIVA' : ''}`;
       [0, 1].forEach((i) => { const id = eq[i], b = barra.querySelector(`[data-acao="poder${i + 1}"] .c2-cd`); if (!b || !id) return; const max = PW.recargaTotal(id), f = Math.min(1, PW.recarga(id) / max); b.style.setProperty('--cd', `${Math.round((1 - f) * 100)}%`); }); }
   }
-  window.CampanhaTreino = Object.freeze({ piscando, ligar, ligado: () => on, gas: () => gas, inimigos: (lista) => { if (Array.isArray(lista)) bonecos = lista; return bonecos; }, dashing: () => on && dashT > 0, acao, passo, desenhar, montarBarra, tremor: () => shake, velocidade: () => (on ? PW.multiplicadores().vel : 1) });
+  window.CampanhaTreino = Object.freeze({ voandoAgora: () => voandoAgora, desenharAtras: (c, t) => { if (on) VFX()?.draw?.(c, t, 'back'); }, piscando, ligar, ligado: () => on, gas: () => gas, inimigos: (lista) => { if (Array.isArray(lista)) bonecos = lista; return bonecos; }, dashing: () => on && dashT > 0, acao, passo, desenhar, montarBarra, tremor: () => shake, velocidade: () => (on ? PW.multiplicadores().vel : 1) });
 })();
