@@ -2,3 +2,6 @@ quadros/
 musica.wav
 *.mp4
 __pycache__/
+quadros-tt/
+foco.json
+musica-tt.wav
