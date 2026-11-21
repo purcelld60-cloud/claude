@@ -68,7 +68,7 @@ function fitImmersive(){
  shell.classList.toggle('screen-fill',fillScreen);
  // Extremely wide windows stay framed so upper parkour platforms remain visible.
  shell.classList.toggle('screen-crop-safe',wide&&width/height<=3.2&&height>=280);
- const top=shell.querySelector('.game-topbar').getBoundingClientRect().height+(shell.querySelector('.progress-hud')?.getBoundingClientRect().height||0);
+ const top=(shell.querySelector('.game-topbar')?.getBoundingClientRect().height||0)+(shell.querySelector('.progress-hud')?.getBoundingClientRect().height||0);
  shell.style.setProperty('--screen-hud-height',top+'px');
  const style=getComputedStyle(shell),px=v=>parseFloat(v)||0;
  const availW=shell.clientWidth-px(style.paddingLeft)-px(style.paddingRight),availH=Math.max(120,shell.clientHeight-top-px(style.paddingTop)-px(style.paddingBottom));
