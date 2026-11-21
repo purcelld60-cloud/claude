@@ -22,7 +22,14 @@
   const novoSave = () => ({ v: 1, passo: 'abertura', cena: 0, x: 700, hp: 100, flags: {}, criado: Date.now(), salvo: 0 });
   let S = null;
   const temSave = () => !!safe(() => JSON.parse(localStorage.getItem(KEY) || 'null')?.passo, false);
-  function carregar() { const d = safe(() => JSON.parse(localStorage.getItem(KEY) || 'null'), null); return d && d.v === 1 && d.passo ? { ...novoSave(), ...d, flags: { ...(d.flags || {}) } } : null; }
+  function carregar() { const d = safe(() => JSON.parse(localStorage.getItem(KEY) || 'null'), null); if (!d || typeof d !== 'object' || d.v !== 1 || !d.passo) return null;
+    // save estragado não trava o jogo: flags sempre objeto, passo conhecido, cena que existe, posição e vida numéricas
+    const flags = d.flags && typeof d.flags === 'object' && !Array.isArray(d.flags) ? { ...d.flags } : {}, S2 = { ...novoSave(), ...d, flags };
+    if (!PASSOS[S2.passo] && !['bairro', 'fim6b', 'fim6c'].includes(S2.passo)) { const ordem = ['creuza', 'tonhao', 'valdomiro', 'kaua', 'barao', 'breno', 'gemeos', 'fred', 'jorge']; S2.passo = flags.zerou ? 'zerou' : ordem.find((v) => !flags['venceu_' + v]) || 'zerou'; if (!PASSOS[S2.passo]) S2.passo = 'creuza'; delete S2.cena; delete S2.x; }
+    const cenaOk = Number.isInteger(S2.cena) && ((S2.cena >= 0 && S2.cena <= 11) || (window.CampanhaCenarios?.lista || []).some((q) => q.id === S2.cena)); if (!cenaOk) { delete S2.cena; delete S2.x; }
+    if (S2.x !== undefined && !Number.isFinite(S2.x)) delete S2.x;
+    S2.hp = Number.isFinite(Number(S2.hp)) && Number(S2.hp) > 0 ? Math.min(9999, Number(S2.hp)) : 100;
+    return S2; }
   function salvar(msg) { if (!S) return; S.cena = cenaId; S.x = Math.round(P.x); S.hp = Math.round(P.hp); S.salvo = Date.now(); safe(() => localStorage.setItem(KEY, JSON.stringify(S))); if (msg) aviso(msg); }
 
   /* ---------- cenas (as da Campanha 2 e as de Itabuna, reaproveitadas no prólogo) ---------- */
@@ -174,7 +181,7 @@
   }
 
   /* ---------- ir de um lugar para outro ---------- */
-  function irPara(id, x) { cenaId = id; const d = D(); P.x = clamp(x, d.limites?.[0] ?? 40, d.limites?.[1] ?? d.largura - 40); P.y = FLOOR; P.vy = 0; P.vx = 0; P.ground = true; cam = clamp(P.x - 360, 0, Math.max(0, d.largura - W)); viagem = null; fade = 0; S && (S.cena = id); }
+  function irPara(id, x) { cenaId = id; const d = D(); P.x = clamp(x, d.limites?.[0] ?? 40, d.limites?.[1] ?? d.largura - 40); P.y = FLOOR; P.vy = 0; P.vx = 0; P.ground = true; P.seguroX = P.x; cam = clamp(P.x - 360, 0, Math.max(0, d.largura - W)); viagem = null; fade = 0; S && (S.cena = id); }
   const horaAtual = () => { const m = window.DayTime?.mode?.(); if (m && HORAS[m] != null) return HORAS[m]; const p = PASSOS[S?.passo]; if (cenaId === 25 || cenaId === 24) return S?.passo === 'lurdes' ? 21 : 8; return p?.hora ?? 12; };
 
   /* ---------- usar o que está perto ---------- */
@@ -211,11 +218,16 @@
       P.vx += clamp(alvo - P.vx, -ac * dt, ac * dt); if (Math.abs(P.vx) < .1) P.vx = 0; }
     P.anim = (P.anim || 0) + Math.abs(P.vx) * dt / 18.3; const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
     const prevY = P.y, chao0 = P.ground; P.vy = Math.min(900, P.vy + 850 * dt); P.y += P.vy * dt; P.ground = false; if (P.y < 95) { P.y = 95; P.vy = Math.max(0, P.vy); }
+    if (P.y > FLOOR + 2) for (const [gx, gw] of d.vaos || []) if (P.x > gx && P.x < gx + gw) { P.x = clamp(P.x, gx + 11, gx + gw - 11); if (Math.abs(P.vx) > 0 && (P.x === gx + 11 || P.x === gx + gw - 11)) P.vx = 0; } // dentro do vão as paredes seguram
     const overGap = (d.vaos || []).some(([gx, gw]) => P.x > gx + 10 && P.x < gx + gw - 10);
     for (const r of portais(d.id)) if (r.tipo === 'rampa' && P.x >= r.x0 && P.x <= r.x1) { const ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0); if (P.vy >= 0 && P.y >= ry - 14 && prevY <= ry + 40) { P.y = ry; P.vy = 0; P.ground = true; } if (P.x >= r.x1 - 4 && P.ground && dir > 0) viagem = { tipo: 'porta', t: 0, para: r.para }; }
     if (P.vy >= 0 && !P.ground) { for (const [px, py, pw] of d.plataformas || []) if (P.x > px - 6 && P.x < px + pw + 6 && prevY <= py + 2 && P.y >= py) { P.y = py; P.vy = 0; P.ground = true; } if (!P.ground && !overGap && P.y >= FLOOR) { P.y = FLOOR; P.vy = 0; P.ground = true; } }
     if (!chao0 && P.ground) P.landTimer = .15; P.landTimer = Math.max(0, (P.landTimer || 0) - dt);
-    if (P.y > 600) { P.x = Math.max(60, P.x - 260); P.y = FLOOR - 200; P.vy = 0; P.hp = Math.max(1, P.hp - 10); aviso('Ai! Cuidado com o buraco.'); }
+    if (P.ground && !overGap && P.y >= FLOOR - 1) P.seguroX = P.x; // último chão firme
+    if (P.y > 600) { // caiu no vão: volta para a beirada do lado de onde veio, em pé no chão
+      const g = (d.vaos || []).find(([gx, gw]) => P.x > gx - 20 && P.x < gx + gw + 20), sx = P.seguroX ?? P.x - 260;
+      P.x = g ? (sx <= g[0] + g[1] / 2 ? g[0] - 40 : g[0] + g[1] + 40) : sx; P.x = clamp(P.x, lim[0], lim[1]);
+      P.y = FLOOR; P.vy = 0; P.vx = 0; P.ground = true; P.inv = Math.max(P.inv || 0, 1); P.hp = Math.max(1, P.hp - 10); aviso('Ai! Cuidado com o buraco.'); }
   }
   function andarViagem(dt) {
     const v = viagem; v.t += dt;
@@ -252,7 +264,7 @@
         txt += r.cssText.replace(sel, sel.split(',').map((x) => '.c2j ' + x.replace(/#gameShell\s*|\.crafted-controls\s*|\.touch-controls\s*|\.game-shell\s*/g, '').trim()).join(',')) + '\n'; } }
       const sj = document.createElement('style'); sj.id = 'c2jJoyCss'; sj.textContent = txt + '.c2j .move-joystick{width:102px;height:102px}'; document.head.appendChild(sj); }
     const st = document.createElement('style'); st.id = 'c2jCss';
-    st.textContent = `.c2j{position:fixed;inset:0;z-index:100000;background:#06080c;display:flex;align-items:center;justify-content:center;font-family:Pixel,monospace;color:#f6ead0;touch-action:none;user-select:none;-webkit-user-select:none}.c2j[hidden]{display:none}
+    st.textContent = `.c2j{position:fixed;inset:0;z-index:100000;background:#06080c;display:flex;align-items:center;justify-content:center;font-family:Pixel,monospace;color:#f6ead0;touch-action:none;user-select:none;-webkit-user-select:none}#c2Painel{display:block;overflow-y:auto;touch-action:pan-y;-webkit-overflow-scrolling:touch}#c2Painel .pausa{min-height:100%;box-sizing:border-box;padding:14px 0}@media (max-height:440px){#c2Painel .pausa{gap:6px!important;padding:8px 0}#c2Painel .pausa h2{margin:2px 0}#c2Painel .pausa p{margin:0 0 2px}}.c2j[hidden]{display:none}
 .c2j .tela{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;max-height:100vh}.c2j canvas.mundo{width:100%;height:100%;display:block;image-rendering:pixelated}
 .c2j .hud{position:absolute;inset:0;pointer-events:none}.c2j .hud>*{pointer-events:auto}
 .c2j .vida{position:absolute;left:1.6%;top:2.4%;display:flex;flex-direction:column;gap:4px;background:#2a1e14e6;border:3px solid #8a6a3a;box-shadow:0 0 0 2px #120c08;padding:6px 8px}

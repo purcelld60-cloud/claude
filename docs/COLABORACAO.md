@@ -186,3 +186,13 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - Filmagem quadro a quadro com o relógio do jogo controlado. A trilha é original, em baião, gerada por código.
   - Os cortes seguem o compasso da trilha e as legendas usam a fonte pixel do jogo.
   - Para atualizar o trailer depois de mudanças grandes, rode os três scripts de novo.
+- **2026-11-21 · Claude:** **varredura de bugs** (scripts em `tools/varredura/`, veja o LEIA-ME). O que achei e corrigi:
+  - **Vãos da Campanha 2:**
+    - Quem caía andando para a esquerda reaparecia do outro lado do buraco. Agora volta para a beirada de onde veio (`P.seguroX`).
+    - Nos vãos estreitos dava para "atravessar por baixo". Agora o vão tem paredes.
+    - A ravina de 300 px da Serra do Periperi era impossível de pular; agora tem 240 px e pede pulo com dash.
+  - **Desenho dos vãos da Campanha 2** (`holes` em `cenarios.js`): eram retângulos chapados. Agora têm profundidade e três estilos (`vao.tipo`): `terra` (ravina com raízes), `obra` (vergalhões e fita zebrada) e `agua` (canal ou lago com reflexo).
+  - **Shader:** se o WebGL se perdesse (iPhone indo para segundo plano), a tela ficava em branco para sempre. Agora a camada some, o jogo aparece por baixo e o shader é recriado (`descartar` em `shader.js`).
+  - **Painel da Campanha 2** em telas baixas (Android deitado): o VOLTAR ficava fora da tela. Agora o painel rola e fica compacto.
+  - **Save da Campanha 2:** `carregar()` corrige passo desconhecido, cena inexistente, posição e vida inválidas e flags que não são objeto.
+  - **Sem problema:** cortes nos cenários da principal, quedas no vazio na principal, bordas do mundo, saves corrompidos da principal e 3,5 minutos de teclas aleatórias (C1, luta da C1, C2 e luta da C2).

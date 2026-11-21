@@ -927,7 +927,7 @@
     12: { platforms: [[1260, 384, 150], [2100, 384, 150], [2290, 328, 140], [2480, 384, 150], [3500, 384, 150]], gaps: [] },
     13: { platforms: [[900, 384, 150], [1100, 328, 140], [2700, 384, 150], [2900, 328, 140], [3100, 384, 150]], gaps: [] },
     14: { platforms: [[1300, 384, 150], [1490, 328, 140], [1680, 272, 140], [2900, 384, 150], [3090, 328, 140], [4100, 384, 150]], gaps: [] },
-    15: { platforms: [[600, 384, 150], [790, 320, 140], [980, 256, 140], [1170, 320, 140], [1700, 384, 150], [1890, 320, 140], [2080, 256, 130], [2270, 192, 130], [2460, 256, 140], [3100, 384, 150], [3290, 320, 140], [3480, 256, 140], [3670, 320, 140], [3860, 384, 150]], gaps: [[1420, 220], [2700, 300], [4060, 200]] },
+    15: { platforms: [[600, 384, 150], [790, 320, 140], [980, 256, 140], [1170, 320, 140], [1700, 384, 150], [1890, 320, 140], [2080, 256, 130], [2270, 192, 130], [2460, 256, 140], [3100, 384, 150], [3290, 320, 140], [3480, 256, 140], [3670, 320, 140], [3860, 384, 150]], gaps: [[1420, 220], [2730, 240], [4060, 200]] },
     16: { platforms: [[1000, 384, 150], [1900, 384, 150], [2090, 328, 140], [3500, 384, 150], [3690, 328, 140], [4700, 384, 150]], gaps: [[1400, 180], [4300, 200]] },
     17: { platforms: [[700, 384, 150], [890, 328, 140], [1700, 384, 150], [2700, 384, 150], [2890, 328, 140], [3080, 272, 140]], gaps: [] },
     18: { platforms: [[900, 384, 150], [1090, 328, 140], [2200, 384, 150], [2390, 320, 140], [2580, 256, 140], [3600, 384, 150], [3790, 328, 140]], gaps: [[1500, 200], [3200, 220]] },
@@ -1035,11 +1035,34 @@
   }
   function plataforma(c, scene, p, t) { const f = PLAT[scene]; if (!f) return false; const [x, y, w] = p; c.save(); c.imageSmoothingEnabled = false; f(c, x, y, w, Number(t) || 0, Math.round(x * 7 + y * 3)); c.restore(); return true; }
 
-  // vãos no chão: buraco da obra, ravina da serra e canal de irrigação
+  // vãos no chão: buraco da obra, ravina da serra e canal/lago com água. Desenhados com profundidade
+  // (paredes com textura, degradê até o escuro e beirada), para não parecer um buraco no cenário.
+  const hx = (h) => { const n = parseInt(String(h).slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+  const mixH = (a, b, k) => { const A = hx(a), B = hx(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * k)).join(',')})`; };
   function holes(c, id, camL) {
     const L = LAYOUT[id]; if (!L || !L.gaps.length) return;
-    for (const [gx, gw] of L.gaps) { const x = gx / 2 - camL, w = gw / 2; if (!vis(x, w + 20)) continue;
-      const V = LIST.find((d) => d.id === id)?.vao, deep = V?.fundo || (id === 15 ? '#2a2620' : id === 18 ? '#3c6a8a' : '#1c1c1c'); R(c, x, FLOOR, w, LH - FLOOR, deep); R(c, x, FLOOR, w, 3, V?.borda || (id === 18 ? '#8ac4d8' : '#3c3a34')); R(c, x - 2, FLOOR, 2, LH - FLOOR, '#4a3a2a'); R(c, x + w, FLOOR, 2, LH - FLOOR, '#4a3a2a');
+    const t = performance.now() / 1000, V = LIST.find((d) => d.id === id)?.vao, H = LH - FLOOR;
+    const tipo = V?.tipo || (V?.borda === '#7ac0b8' || id === 18 ? 'agua' : id === 16 ? 'obra' : 'terra');
+    const fundo = V?.fundo || (tipo === 'terra' ? '#3a3024' : tipo === 'agua' ? '#2c5a78' : '#2a2a2c');
+    for (const [gx, gw] of L.gaps) { const x = Math.round(gx / 2 - camL), w = Math.round(gw / 2); if (!vis(x, w + 20)) continue;
+      const parede = tipo === 'obra' ? '#6a6a66' : tipo === 'agua' ? '#5a5a52' : '#5a4430', pw = Math.max(4, Math.round(w * .09)), seed = gx;
+      for (let y = 0; y < H; y += 2) R(c, x, FLOOR + y, w, 2, mixH(fundo, '#060606', Math.min(1, y / (H * .8)))); // fundo: some no escuro
+      for (let y = 0; y < H; y += 2) { const k = Math.min(1, y / (H * .9)), inc = Math.round(y * .18); // paredes inclinadas, iluminadas de cima
+        R(c, x, FLOOR + y, pw + inc, 2, mixH(parede, '#0c0a08', k * .9)); R(c, x + w - pw - inc, FLOOR + y, pw + inc, 2, mixH(parede, '#0c0a08', Math.min(1, k * .9 + .15))); }
+      if (tipo === 'terra') for (let k = 0; k < w * H / 40; k++) { const px = x + hash(seed + k * 3.3) * w, py = FLOOR + hash(seed + k * 7.1) * H * .7; R(c, px, py, 1 + (k % 2), 1, k % 3 ? 'rgba(20,14,8,.35)' : 'rgba(150,120,80,.25)'); } // pedrinhas e terra
+      if (tipo === 'terra') for (let k = 0; k < 5; k++) { const rx = x + 3 + hash(seed + k) * (w - 6); let ry = FLOOR + 2; for (let j = 0; j < 6 + k % 4; j++) { R(c, rx + Math.round(Math.sin(j + k) * 1.5), ry, 1, 2, '#3a2a18'); ry += 2; } } // raízes penduradas
+      if (tipo === 'obra') { for (let y = FLOOR + 6; y < LH; y += 7) for (let xx = x + pw; xx < x + w - pw; xx += 12) R(c, xx + ((y / 7) % 2 ? 6 : 0), y, 10, 1, 'rgba(0,0,0,.25)'); // concreto em placas
+        for (let k = 0; k < 4; k++) { const vx = x + 6 + k * (w - 12) / 3; R(c, vx, FLOOR + 6, 1, H * .5, '#7a4a2a'); R(c, vx, FLOOR + 6, 1, 2, '#c8803a'); } // vergalhões
+        for (let xx = 0; xx < w; xx += 6) R(c, x + xx, FLOOR - 10, Math.min(3, w - xx), 2, (xx / 6) % 2 ? '#1c1c1c' : '#f2c018'); R(c, x - 2, FLOOR - 12, 1, 12, '#8a8a88'); R(c, x + w + 1, FLOOR - 12, 1, 12, '#8a8a88'); } // fita zebrada
+      if (tipo === 'agua') { const ny = FLOOR + 7; R(c, x + 1, ny, w - 2, LH - ny, mixH(fundo, '#0a1a24', .25)); // água com reflexo e ondinhas
+        for (let y = ny + 2; y < LH; y += 3) R(c, x + 1, y, w - 2, 1, `rgba(0,0,0,${Math.min(.5, (y - ny) / H * .6)})`);
+        R(c, x + 1, ny, w - 2, 1, 'rgba(200,240,255,.45)'); for (let k = 0; k < w / 9; k++) { const ox = (k * 9 + t * 8 + hash(seed + k) * 9) % (w - 8); R(c, x + 3 + ox, ny + 3 + (k % 3) * 4, 4 + (k % 2) * 2, 1, 'rgba(220,250,255,.35)'); }
+        R(c, x, FLOOR, 2, ny - FLOOR, '#4a4a44'); R(c, x + w - 2, FLOOR, 2, ny - FLOOR, '#4a4a44'); }
+      // beirada: grama/terra caindo (natureza), meio-fio (cidade) ou pedra (água)
+      const borda = V?.borda || (tipo === 'obra' ? '#9a9a94' : tipo === 'agua' ? '#7ac0b8' : '#5a7a3a');
+      R(c, x - 3, FLOOR, w + 6, 2, borda); R(c, x - 3, FLOOR + 2, w + 6, 1, 'rgba(0,0,0,.45)');
+      if (tipo === 'terra') for (let k = 0; k < w; k += 2) if (hash(seed + k * 1.9) > .55) R(c, x + k, FLOOR + 2, 1, 1 + Math.round(hash(seed + k) * 4), '#4a6a30');
+      R(c, x - 2, FLOOR, 2, H, 'rgba(0,0,0,.35)'); R(c, x + w, FLOOR, 2, H, 'rgba(0,0,0,.35)');
       if (id === 16) for (const cx of [x - 8, x + w + 2]) { R(c, cx, FLOOR - 9, 6, 9, '#f08a24'); R(c, cx + 1, FLOOR - 6, 4, 2, '#f2f2ee'); } }
   }
   const textOf = (d) => (c, camera) => { c.save(); c.translate(-Math.round(camera), 0); for (const lb of (d.labels || []).concat(CAM()?.falas?.(d.id, camera) || [])) { const [x, y, str, size, col] = lb, a = d.labelAlpha ? d.labelAlpha(lb) : 1; if (a <= .01) continue; c.globalAlpha = a; text(c, str, x * 2, y * 2, size, col); } c.restore(); }; // labelAlpha: some com o cenário (ex.: escada da escola)
