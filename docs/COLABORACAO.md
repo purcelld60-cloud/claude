@@ -113,3 +113,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - uma placa de madeira desce mostrando "A CAMINHO DE …".
   
   No `game.js`, o `routeTransition` tem `estrada:true`; quando a estrada acaba, começa a chegada (`chegada:true`). Os itens da fase não são mais desenhados por cima da estrada no modo shader.
+- **2026-11-21 · Claude:** mapas-ilha sem emenda na borda (`fazerIlha` em `mapa3d.js`):
+  - a grama de fora continua a textura do mapa, espelhada;
+  - ruas que chegam na borda viram trilhas de terra até a praia, em vez de listras de água;
+  - o "mar de nuvens" só vale para áreas grandes e bem brancas;
+  - a faixa de fora ganhou árvores, cacaueiros, arbustos, flores, pedras e casinhas com cerca.
