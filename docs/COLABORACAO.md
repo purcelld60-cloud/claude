@@ -107,3 +107,9 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - 8 quadros de animação em cache e, no golpe, o inimigo pisca em branco.
   
   Para criar mais um brainrot, acrescente uma função em `SPRITES`.
+- **2026-11-21 · Claude:** nova **cena da estrada** (`estrada.js`), que vem depois do voo no mapa e antes da chegada animada:
+  - camadas: céu de dia ou de noite, serra, morros, pés de cacau ou prédios da cidade, postes, cerca, vaquinha, placa verde do destino e asfalto;
+  - o carro aparece maior e solta fumacinha de gás;
+  - uma placa de madeira desce mostrando "A CAMINHO DE …".
+  
+  No `game.js`, o `routeTransition` tem `estrada:true`; quando a estrada acaba, começa a chegada (`chegada:true`). Os itens da fase não são mais desenhados por cima da estrada no modo shader.
