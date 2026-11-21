@@ -277,15 +277,57 @@
     box.querySelector('.pular').addEventListener('click', (e) => { e.stopPropagation(); pularCut(); });
     cv.addEventListener('pointerdown', () => { if (cut) avancarCut(); });
     // joystick (celular): mesmo jeito do da campanha 1
-    const pad = box.querySelector('.joy'), knob = pad.querySelector('.joystick-knob'); let pid = null;
-    { const orig = document.querySelector('#moveJoystick .joystick-directions'); if (orig) pad.querySelector('.joystick-directions').innerHTML = orig.innerHTML; } // as setinhas iguais às da campanha principal
-    const mover = (e) => { if (e.pointerId !== pid) return; const r = pad.getBoundingClientRect(); let x = (e.clientX - (r.left + r.width / 2)) / (r.width * .34); x = clamp(x, -1, 1); joy = Math.abs(x) > .25 ? x : 0; knob.style.transform = `translateX(${x * r.width * .34}px)`; };
-    pad.addEventListener('pointerdown', (e) => { pid = e.pointerId; pad.classList.add('engaged'); try { pad.setPointerCapture(pid); } catch (er) {} mover(e); e.preventDefault(); });
-    pad.addEventListener('pointermove', mover); const solta = (e) => { if (e.pointerId !== pid) return; pid = null; joy = 0; knob.style.transform = ''; pad.classList.remove('engaged'); }; pad.addEventListener('pointerup', solta); pad.addEventListener('pointercancel', solta);
-    // os botões da campanha 1 (FALAR, VOAR, PAPEL, PEIDO, DASH, PODER 1 e 2)
-    TR()?.montarBarra?.(box.querySelector('.tela'), (id, down) => { if (cut) { if (down) avancarCut(); return; } if (pausado) return; if (TR().acao(id, down, P)) return; if (id === 'jump') { if (down) { keys.add('jump'); pular(); } else keys.delete('jump'); } if (id === 'interact' && down) usar(); });
+    { const pad = box.querySelector('.joy'), orig = document.querySelector('#moveJoystick .joystick-directions'); if (orig) pad.querySelector('.joystick-directions').innerHTML = orig.innerHTML; ligarJoy(pad); } // reserva, se a principal não tiver os controles
+    TR()?.montarBarra?.(box.querySelector('.tela'), acionarBotao);
     addEventListener('keydown', teclaDown, true); addEventListener('keyup', teclaUp, true);
   }
+  // joystick: mesmo jeito do da campanha 1 (só o eixo de andar)
+  function ligarJoy(pad) {
+    if (!pad || pad.dataset.c2Ligado) return; pad.dataset.c2Ligado = '1'; const knob = pad.querySelector('.joystick-knob'); let pid = null;
+    const mover = (e) => { if (e.pointerId !== pid) return; const r = pad.getBoundingClientRect(); let x = (e.clientX - (r.left + r.width / 2)) / (r.width * .34); x = clamp(x, -1, 1); joy = Math.abs(x) > .25 ? x : 0; if (knob) knob.style.transform = `translateX(${x * r.width * .34}px)`; };
+    pad.addEventListener('pointerdown', (e) => { pid = e.pointerId; pad.classList.add('engaged', 'active'); try { pad.setPointerCapture(pid); } catch (er) {} mover(e); e.preventDefault(); });
+    pad.addEventListener('pointermove', mover); const solta = (e) => { if (e.pointerId !== pid) return; pid = null; joy = 0; if (knob) knob.style.transform = ''; pad.classList.remove('engaged', 'active'); }; pad.addEventListener('pointerup', solta); pad.addEventListener('pointercancel', solta);
+  }
+  function acionarBotao(id, down) { if (cut) { if (down) avancarCut(); return; } if (pausado) return; if (TR().acao(id, down, P)) return; if (id === 'jump') { if (down) { keys.add('jump'); pular(); } else keys.delete('jump'); } if (id === 'interact' && down) usar(); }
+  /* ---------- botões: CÓPIA LITERAL dos controles da campanha 1 (joystick, botões, posições e estilo),
+     sem REEEIS, BIVOLT, CARRO A GÁS e BATATA; no lugar ficam PODER 1 e PODER 2 (como a principal já faz no modo c2-controles). ---------- */
+  const FORA = /^(in-main-menu|is-paused|is-cutscene|is-dialog|is-chapter-ended|is-routing|is-training|is-activity|is-epilogue|is-ollyan-flight|campaign-layout-editing|is-room|is-arena|is-boss)$/;
+  let cssC1 = false;
+  function copiarCssC1() {
+    if (cssC1) return; cssC1 = true; const rel = /touch|joystick|crafted|-btn|c2-poder|c2-controles|campaign-layout/;
+    const conv = (r) => { if (r.selectorText !== undefined) return r.selectorText.includes('#gameShell') && rel.test(r.selectorText) ? r.cssText.replace(/#gameShell/g, '#c2GameShell') + '\n' : '';
+      if (r.cssRules && r.media) { let i = ''; for (const q of r.cssRules) i += conv(q); return i ? `@media ${r.media.mediaText}{${i}}\n` : ''; }
+      if (r.cssRules && r.conditionText !== undefined) { let i = ''; for (const q of r.cssRules) i += conv(q); return i ? `@supports ${r.conditionText}{${i}}\n` : ''; } return ''; };
+    let txt = ''; for (const sh of document.styleSheets) { let rules; try { rules = sh.cssRules; } catch (e) { continue; } for (const r of rules || []) { try { txt += conv(r); } catch (e) {} } }
+    txt += `.c2j>.c2-c1-shell.game-shell{position:fixed!important;inset:0!important;width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;outline:0!important;overflow:visible!important;pointer-events:none!important;z-index:4!important;transform:none!important;filter:none!important}
+.c2j>.c2-c1-shell .touch-controls{pointer-events:auto}.c2j.c1-botoes .c2-treino-ctl,.c2j.c1-botoes .joy{display:none!important}.c2j.c2-editando-c1 .c2-c1-shell .touch-controls{pointer-events:auto}`;
+    const st = document.createElement('style'); st.id = 'c2C1BotoesCss'; st.textContent = txt; document.head.appendChild(st);
+  }
+  function controlesC1() {
+    const tela = box.querySelector('.tela'); box.querySelector('.c2-c1-shell')?.remove(); box.classList.remove('c1-botoes');
+    const shell = document.getElementById('gameShell'), orig = shell?.querySelector('.touch-controls'); if (!orig) return false;
+    copiarCssC1();
+    const w = document.createElement('div'); w.className = [...shell.classList].filter((k) => !FORA.test(k)).join(' ') + ' game-shell c2-c1-shell c2-controles campaign-layout-ready campaign-layout-playable'; w.id = 'c2GameShell'; const est = shell.getAttribute('style'); if (est) w.setAttribute('style', est);
+    const cl = orig.cloneNode(true);
+    // PODER 1 fica onde era o CARRO A GÁS e PODER 2 onde era o BIVOLT (mesma posição e tamanho do layout da principal)
+    for (const [de, para] of [['vehicle', 'poder1'], ['bivolt', 'poder2']]) { const o = cl.querySelector(`[data-action="${de}"]`), p = cl.querySelector(`[data-action="${para}"]`); if (!o || !p) continue;
+      p.setAttribute('style', o.getAttribute('style') || ''); p.classList.add('campaign-layout-target'); if (o.dataset.campaignLayout) p.dataset.campaignLayout = o.dataset.campaignLayout; o.parentNode.insertBefore(p, o); }
+    cl.querySelectorAll('[data-action="reeis"],[data-action="vehicle"],[data-action="taunt"],[data-action="train"],[data-action="activity"],[data-action="bivolt"]').forEach((e) => e.remove());
+    cl.querySelectorAll('[id]').forEach((e) => { e.dataset.c1Id = e.id; e.removeAttribute('id'); }); cl.querySelectorAll('.pressed,.engaged,.active').forEach((e) => e.classList.remove('pressed', 'engaged', 'active'));
+    w.appendChild(cl); box.appendChild(w); box.classList.add('c1-botoes'); // na tela inteira, como a principal
+    for (const b of cl.querySelectorAll('[data-action]')) { const id = b.dataset.action; b.dataset.acao = id;
+      const down = (e) => { e.preventDefault(); b.classList.add('pressed'); acionarBotao(id, true); }, up = () => { if (!b.classList.contains('pressed')) return; b.classList.remove('pressed'); acionarBotao(id, false); };
+      b.addEventListener('pointerdown', down); b.addEventListener('pointerup', up); b.addEventListener('pointerleave', up); b.addEventListener('pointercancel', up); b.addEventListener('contextmenu', (e) => e.preventDefault()); }
+    ligarJoy(cl.querySelector('.move-joystick')); copiarPoderes(true);
+    safe(() => window.CampanhaBotoes?.aplicar?.(tela)); return true;
+  }
+  let ultPoder = 0;
+  function copiarPoderes(ja) { // os botões de poder da principal (atualizados pelo poderes.js) → a cópia
+    const agora = performance.now(); if (!ja && agora - ultPoder < 150) return; ultPoder = agora; const w = box?.querySelector('.c2-c1-shell'); if (!w) return;
+    for (const i of [1, 2]) { const o = document.getElementById('c2Poder' + i), k = w.querySelector(`[data-action="poder${i}"]`); if (!o || !k) continue; if (k.dataset.html !== o.innerHTML) { k.innerHTML = o.innerHTML; k.dataset.html = o.innerHTML; } k.classList.toggle('vazio', o.classList.contains('vazio')); }
+    const dv = w.querySelector('[data-c1-id="dashValue"]'); if (dv) { const f = TR()?.dashFalta?.() || 0; const txt = f > .05 ? f.toFixed(1).replace('.', ',') + 's' : 'PRONTO'; if (dv.textContent !== txt) dv.textContent = txt; }
+  }
+  addEventListener('resize', () => { if (aberto && box) { clearTimeout(window.__c2RecC1); window.__c2RecC1 = setTimeout(() => safe(controlesC1), 250); } });
   const coberto = () => !!(window.CampanhaOficina?.aberta?.() || window.Fliperama?.isOpen?.() || window.DarocaLook?.isOpen?.() || window.CampanhaPoderes?.muralAberto?.() || window.Mapa3D?.aberto?.() || window.CampanhaLoja?.aberta?.());
   const ocupado = () => coberto() || !!window.CampanhaMoradores?.aberto?.() || !!box?.querySelector('.escolha');
   function teclaDown(e) {
@@ -349,6 +391,7 @@
     el.addEventListener('click', (e) => { if (e.target.closest('button')) pausar(true); }); box.querySelector('.tela').appendChild(el); setTimeout(() => el.querySelector('button')?.focus(), 30);
   }
   function hudAtualizar() {
+    copiarPoderes();
     const cor = box.querySelector('.vida .cor'), n = Math.round((P.max || 100) / 20), hp = clamp(P.hp, 0, P.max || 100) / 20; let h = ''; for (let i = 0; i < n; i++) h += `<i class="${hp >= i + 1 ? 'on' : hp > i + .3 ? 'meio' : ''}"></i>`; if (cor.innerHTML !== h) cor.innerHTML = h;
     box.querySelector('.vida .gas b').style.width = `${clamp(TR()?.gas?.() ?? 100, 0, 100)}%`; box.querySelector('.vida .moedas').textContent = `● ${window.CampanhaLoja?.moedas?.() ?? 0}`;
     const e = box.querySelector('.entrar'); e.hidden = !perto || !!cut; if (perto) e.textContent = perto.botao || (perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR');
@@ -400,7 +443,7 @@
     if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; if (S.passo === 'fim6b') S.passo = 'ir_barao'; if (S.passo === 'fim6c') S.passo = 'ir_centro'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
     aberto = true; box.hidden = false; pausado = false; cut = null; keys.clear(); P.hp = S.hp || 100;
     window.CampanhaAliados?.ligar?.({ P, S: () => S, salvar: () => salvar(), item, aviso, sfx, conversa: (npc) => conversa(npc), escolher: (q, pg, ops, cb) => escolher(q, pg, ops, cb, true), tela: () => box.querySelector('.tela'), cena: () => cenaId, pausar: (v) => { keys.clear(); hudVisivel(!v); box.querySelector('.pular').hidden = true; } });
-    TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaBotoes?.aplicar?.(box.querySelector('.tela'))); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true }));
+    TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaBotoes?.aplicar?.(box.querySelector('.tela'))); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true })); safe(controlesC1); dispatchEvent(new Event('c2-controles')); requestAnimationFrame(() => requestAnimationFrame(() => { if (aberto) safe(controlesC1); })); // de novo, com o layout da principal já calculado
     if (S.passo === 'abertura') { irPara(0, 700); tocar('c2_abertura', PASSOS.abertura.depois); }
     else { irPara(S.cena ?? PASSO_INICIAL_DA_CENA[S.passo] ?? 13, S.x ?? 300); objetivoNovo(PASSOS[S.passo]?.obj || ''); hudVisivel(true); }
     last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);

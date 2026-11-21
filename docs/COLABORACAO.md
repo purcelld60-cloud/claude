@@ -144,3 +144,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Desempenho:**
     - o `char-detail.js` guarda pronto o desenho de personagens de fundo (`cache: true`, usado nos moradores e NPCs da Campanha 2);
     - `ui.js`, `speech.js` e `hud.js` param de trabalhar enquanto a Campanha 2 está aberta.
+- **2026-11-21 · Claude:** os **botões da Campanha 2 agora são uma cópia literal dos da Campanha 1**, a pedido do dono (`controlesC1()` em `campanha2/jogo.js`):
+  - **O que é copiado:** o conjunto `#gameShell .touch-controls` inteiro (joystick, botões, posições do layout `--ccl-*` e estilo). As regras de CSS com `#gameShell` são copiadas trocando o id por `#c2GameShell`.
+  - **O que sai:** REEEIS, BIVOLT, CARRO A GÁS e BATATA. O PODER 1 fica no lugar do carro e o PODER 2 no do Bivolt.
+  - **Layout:** o `campaign-controls.js` calcula o layout também com a Campanha 2 aberta (evento `c2-controles`).
+  - **Editor "mudar botões de lugar" da Campanha 2:** funciona com a cópia e salva em `daroca-c2-layout-v2`; o layout antigo foi zerado. Também corrigi o "soltar" do editor, que às vezes continuava arrastando.
+  
+  Se mudar os controles da principal, a Campanha 2 acompanha sozinha.
