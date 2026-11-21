@@ -293,6 +293,7 @@
     box.querySelector('.menu').addEventListener('click', () => pausar(true)); box.querySelector('.entrar').addEventListener('click', usar);
     box.querySelector('.pular').addEventListener('click', (e) => { e.stopPropagation(); pularCut(); });
     cv.addEventListener('pointerdown', () => { if (cut) avancarCut(); });
+    box.addEventListener('pointerdown', (e) => { if (!cut || e.target === cv || e.target.closest?.('button, .escolha, .pausa, input, a')) return; avancarCut(); }); // no diálogo os botões somem: tocar em qualquer lugar avança
     // joystick (celular): mesmo jeito do da campanha 1
     { const pad = box.querySelector('.joy'), orig = document.querySelector('#moveJoystick .joystick-directions'); if (orig) pad.querySelector('.joystick-directions').innerHTML = orig.innerHTML; ligarJoy(pad); } // reserva, se a principal não tiver os controles
     TR()?.montarBarra?.(box.querySelector('.tela'), acionarBotao);
@@ -317,7 +318,7 @@
       if (r.cssRules && r.conditionText !== undefined) { let i = ''; for (const q of r.cssRules) i += conv(q); return i ? `@supports ${r.conditionText}{${i}}\n` : ''; } return ''; };
     let txt = ''; for (const sh of document.styleSheets) { let rules; try { rules = sh.cssRules; } catch (e) { continue; } for (const r of rules || []) { try { txt += conv(r); } catch (e) {} } }
     txt += `.c2j>#c2GameShell.c2-c1-shell.game-shell{position:fixed!important;inset:0!important;width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;outline:0!important;overflow:visible!important;pointer-events:none!important;z-index:4!important;transform:none!important;filter:none!important}
-.c2j>.c2-c1-shell .touch-controls{pointer-events:auto}.c2j.c1-botoes .c2-treino-ctl,.c2j.c1-botoes .joy{display:none!important}.c2j.c2-editando-c1 .c2-c1-shell .touch-controls{pointer-events:auto}`;
+.c2j>.c2-c1-shell .touch-controls{pointer-events:auto}.c2j>.c2-c1-shell .touch-controls,.c2j .c2-treino-ctl,.c2j .joy{transition:opacity .25s}.c2j.c2-dialogo>.c2-c1-shell .touch-controls,.c2j.c2-dialogo .c2-treino-ctl,.c2j.c2-dialogo .joy{opacity:0!important;pointer-events:none!important}.c2j.c2-dialogo>.c2-c1-shell .touch-controls *{pointer-events:none!important}.c2j.c1-botoes .c2-treino-ctl,.c2j.c1-botoes .joy{display:none!important}.c2j.c2-editando-c1 .c2-c1-shell .touch-controls{pointer-events:auto}`;
     const st = document.createElement('style'); st.id = 'c2C1BotoesCss'; st.textContent = txt; document.head.appendChild(st);
   }
   function controlesC1() {
@@ -487,6 +488,8 @@
     if (!aberto) return; raf = requestAnimationFrame(frame);
     const dt = Math.min(.05, Math.max(0, (now - last) / 1000)); fpsMedio += ((dt > 0 ? 1 / Math.max(dt, (now - last + 1e-3) / 1000) : 60) - fpsMedio) * .05; last = now;
     const cob = coberto(); box.style.visibility = cob ? 'hidden' : 'visible'; if (cob) return;
+    // num diálogo (cutscene, conversa, morador ou pergunta) os botões de toque somem para não tampar quem fala; voltam depois
+    const dlg = !!cut || !!box.querySelector('.escolha') || !!window.CampanhaMoradores?.aberto?.(); if (dlg !== box.classList.contains('c2-dialogo')) box.classList.toggle('c2-dialogo', dlg);
     P.max = vidaMax(); if (window.CampanhaAliados?.ocupado?.()) { window.CampanhaAliados.atualizar(dt, []); return; }
     if (cut) { RT().update(cut.s, dt); if (cut.s.done) { const f = cut.depois; cut = null; hudVisivel(true); try { window.DayTime?.force?.(null); } catch (e) {} f?.(); } else { safe(() => enquadrar(dt)); c.save(); RT().draw(c, cut.s); c.restore(); return; } } // cutscene: quadro inteiro, como as cenas de história da principal
     if (pausado || ocupado()) { keys.clear(); P.vx = 0; }
@@ -537,7 +540,7 @@
   }
   function fechar() {
     safe(devolverTopo); salvarProgressao();
-    aberto = false; cancelAnimationFrame(raf); if (box) box.hidden = true; pausado = false; box?.querySelector('.pausa')?.remove();
+    aberto = false; cancelAnimationFrame(raf); if (box) box.hidden = true; pausado = false; box?.querySelector('.pausa')?.remove(); box?.classList.remove('c2-dialogo');
     TR()?.ligar?.(false, P); safe(() => window.CampanhaPoderes?.controles?.(false, { forcar: false })); // devolve os botões da campanha principal intactos
     safe(() => window.CampanhaCutscenes?.musica?.parar?.()); window.__somCutscene = false; try { window.DayTime?.force?.(null); } catch (e) {}
     window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } }));

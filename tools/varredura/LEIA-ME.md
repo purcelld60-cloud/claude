@@ -12,6 +12,7 @@ Scripts em Playwright que procuram bugs no jogo. Suba o servidor (`python3 tools
 | `botoes.js` | Botões fora da tela, cobertos ou pequenos demais, em 6 aparelhos e em todas as telas. |
 | `saves.js` | Saves corrompidos, antigos ou com NaN, nas duas campanhas e em todas as outras chaves. |
 | `luta-c2-real.js` | Entra numa luta da Campanha 2 pelo caminho do jogador e confere se o Da Roça anda (teclado e joystick). |
+| `dialogo-c2.js` | Na Campanha 2, os botões de toque somem nos diálogos e voltam depois; tocar na tela avança a fala. |
 | `macaco.js` | Teclas aleatórias por vários minutos: erros, NaN, quedas e travas. |
 
 `comum.js` abre o jogo com ganchos de teste e dá para teleportar (`__go`, `__c2go`). Os ganchos só existem dentro do teste; o jogo publicado não muda.
