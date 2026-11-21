@@ -91,6 +91,8 @@ void main(){
       // alpha:false e sem preserveDrawingBuffer: a imagem vai direto para a tela (mais leve no iPhone)
       gl = glCanvas.getContext('webgl', { alpha: false, premultipliedAlpha: false, preserveDrawingBuffer: false, antialias: false, powerPreference: 'high-performance' });
       if (!gl) throw Error('no webgl');
+      // o iPhone derruba o WebGL quando o app vai para segundo plano: a camada some (o jogo aparece por baixo) e é recriada depois
+      glCanvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); descartar(); }, false);
       const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw Error(gl.getShaderInfoLog(s)); return s; };
       prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG)); gl.linkProgram(prog);
       if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw Error('link');
@@ -118,8 +120,12 @@ void main(){
   const HOT = { 3: 1, 5: 1, 7: .7 };
 
   // s: {scene, camera, time, outdoor, sun?, arena?}
+  let esperaAte = 0, perdas = 0;
+  function descartar() { hide(); try { glCanvas?.remove(); } catch (e) {} glCanvas = null; gl = null; prog = null; tex = null; target = null; perdas++; esperaAte = performance.now() + 1200; if (perdas > 6) broken = true; }
   function apply(canvas, s = {}) {
     if (broken || !canvas || !window.Graphics?.isShader?.()) return false;
+    if (performance.now() < esperaAte) return false;
+    if (gl && gl.isContextLost?.()) { descartar(); return false; }
     const w = canvas.width, h = canvas.height;
     if (!gl) { if (!init(w, h)) return false; }
     if (glCanvas.width !== w || glCanvas.height !== h) { glCanvas.width = w; glCanvas.height = h; } // o mesmo contexto WebGL, só muda o tamanho
