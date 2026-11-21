@@ -182,3 +182,7 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - Na viagem, o motor ronca antes de sair e há poeira na partida e no pouso. O veículo deixa rastro de gás ou fumaça e mostra linhas de velocidade. No voo, inclina na subida e na descida, com a sombra encolhendo com a altura. No pouso, amassa e a câmera treme.
   - Rota pontilhada até o destino, com marcador pulsando. O táxi faz a curva arredondada.
   - A duração da viagem depende da distância (2 a 3,6 s).
+- **2026-11-21 · Claude:** **trailer em vídeo** gerado do próprio jogo (`tools/trailer/`, veja o LEIA-ME).
+  - Filmagem quadro a quadro com o relógio do jogo controlado. A trilha é original, em baião, gerada por código.
+  - Os cortes seguem o compasso da trilha e as legendas usam a fonte pixel do jogo.
+  - Para atualizar o trailer depois de mudanças grandes, rode os três scripts de novo.
