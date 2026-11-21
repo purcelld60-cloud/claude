@@ -42,7 +42,7 @@
   let modoJogo = false; // no jogo da Campanha 2: sem bonecos e sem a caixa de ajuda do treino
   function ligar(v, P, o = {}) { on = v ?? !on; modoJogo = !!o.jogo; if (barra) { barra.hidden = !on; const inf = barra.querySelector('.c2-treino-info'), gs = barra.querySelector('.c2-treino-gas'); if (inf) inf.hidden = modoJogo; if (gs) gs.hidden = modoJogo; } if (on) { bonecos = modoJogo ? [] : [novoBoneco(P.x + 170), novoBoneco(P.x + 250), novoBoneco(P.x + 330)]; heroRef = P; } else { bonecos = []; tiros = []; nuvens = []; } return on; }
   const mundo = () => ({ heroi: heroRef, inimigos: () => bonecos, camera: cam,
-    dano: (e, n, tipo, dir) => { if (e.hp <= 0) return; e.piscaAte = performance.now() + 400; // no golpe o inimigo pisca
+    dano: (e, n, tipo, dir) => { if (e.hp <= 0) return; if (modoJogo && tipo !== 'papel' && tipo !== 'peido') n = Math.round(n * 5); e.piscaAte = performance.now() + 400; // poderes da Campanha 2 na mesma escala do dano da campanha 1; no golpe o inimigo pisca
       if (e.onDano) { const r = e.onDano(n, tipo, dir); if (r !== false) textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - (e.alto || 90), n: r || n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); return; } e.hp = Math.max(0, e.hp - n); e.hit = .18; textos.push({ x: e.x + (Math.random() - .5) * 20, y: e.y - 90, n, t: 0, cor: tipo === 'soco' ? '#ffd24a' : tipo === 'confuso' ? '#e48fb0' : '#fff6dc' }); if (e.hp <= 0) { e.morto = 2.2; window.CampanhaLoja?.ganhar?.(8); textos.push({ x: e.x, y: e.y - 120, n: '+8 ●', t: 0, cor: '#ffd24a' }); } }, // inimigo derrotado deixa moedas
     empurrar: (e, vx, vy) => { e.vx = vx; e.vy = vy; }, atordoar: (e, s) => { e.stun = s; }, confundir: (e, s) => { e.conf = s; }, tremer: (n) => { shake = Math.max(shake, n); } });
   function bater(e, n, tipo, dir) { mundo().dano(e, Math.max(1, Math.round(n * (bn.damageMultiplier || 1) * PW.multiplicadores().forca * (window.CampanhaAliados?.forca?.() || 1))), tipo, dir); }
@@ -66,7 +66,7 @@
   function papel(P) {
     if (cdPapel > 0) return; if (papeis <= 0) { aviso('O papel recarrega sozinho. Use o combo de gás enquanto espera!'); cdPapel = .4; return; }
     const w = C1.weapon || 0, tier = C1.miqueias ? bn.projectileTier : 0, elemento = tier >= 2 ? 'electric' : tier === 1 ? 'fire' : null, tipo = elemento ? 'papaia' : w === 2 ? 'case' : w === 1 ? 'ruler' : 'paper', vel = w ? 680 : CFG.papel;
-    const dano = ((C1.trained ? 28 : 18) + (w === 1 ? 14 : w === 2 ? 22 : 0)) * 6 / 28; // mesma conta da campanha 1, na escala de vida dos inimigos da Campanha 2
+    const dano = (C1.trained ? 28 : 18) + (w === 1 ? 14 : w === 2 ? 22 : 0); // o mesmo dano da campanha 1 (× força)
     cdPapel = w === 2 ? .31 : CFG.papelCd; papeis--; shake = Math.max(shake, 1.2); P.attack = .24; P.attackType = 'paper'; P.attackDuration = .24; const dir = P.facing < 0 ? -1 : 1;
     const alvo = bonecos.filter((b) => b.hp > 0 && !b.intocavel && Math.sign(b.x - P.x) === dir && Math.abs(b.x - P.x) < 650).sort((a, b) => Math.abs(a.x - P.x) - Math.abs(b.x - P.x))[0];
     const mira = alvo ? Math.max(-.85, Math.min(.85, Math.atan2((alvo.y - (alvo.alto || 80) / 2) - (P.y - 32), Math.abs(alvo.x - P.x)))) : 0;
@@ -79,7 +79,7 @@
     gas -= custo; cdPeido = combo === 3 ? 1.5 : .24; janela = combo < 3 ? .85 : 0; P.attack = .36; P.attackType = 'fart'; P.attackDuration = .36; shake = Math.max(shake, combo === 3 ? 9 : 4); beep(80 - combo * 8, .2, 'sawtooth', .045);
     const dir = P.facing < 0 ? -1 : 1, raio = combo === 3 ? 260 : combo === 2 ? 205 : 155, mult = combo === 3 ? 1.8 : combo === 2 ? 1.25 : 1;
     VFX()?.emit?.('gas', { x: P.x + dir * 9, y: P.y - 23, dir, stage: combo, radius: raio }); fx(P.x + dir * 38, P.y - 22, combo === 3 ? '#e0ef82' : '#b9df55', combo === 3 ? 52 : 25, raio * .75);
-    for (const b of bonecos) if (b.hp > 0 && !b.intocavel && Math.abs(b.x - P.x) < raio + ((b.largura || 22) - 22) && Math.abs((b.y || FLOOR) - P.y) < 180) bater(b, (C1.trained ? 55 : 34) * mult * 9 / 55, 'peido', 0);
+    for (const b of bonecos) if (b.hp > 0 && !b.intocavel && Math.abs(b.x - P.x) < raio + ((b.largura || 22) - 22) && Math.abs((b.y || FLOOR) - P.y) < 180) bater(b, (C1.trained ? 55 : 34) * mult, 'peido', 0);
   }
   function acao(id, down, P) {
     heroRef = P; const dir = P.facing < 0 ? -1 : 1;

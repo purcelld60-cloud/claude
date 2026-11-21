@@ -126,7 +126,8 @@
       ganharXP(600, 'c2-chefe-' + slug); tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => { window.CampanhaTaxi?.vencer?.(slug); S.flags['venceu_' + slug] = 1; delete S.flags.cp; fase = null; passo(APOS_VITORIA[slug]); salvar('JOGO SALVO'); }); }
   };
   function ferir(n, de) {
-    if (morto || cut || (P.inv || 0) > 0 || viagem) return; n = window.CampanhaPoderes?.filtrarDano?.(n) ?? n; if (!n) { sfx('plim'); return; }
+    if (morto || cut || (P.inv || 0) > 0 || viagem) return; n = Math.round(n * 1.5 * (window.Difficulty?.getSettings?.().incomingDamage || 1)); // o Da Roça chega mais forte da campanha 1; no DIFÍCIL os golpes tiram o dobro
+    n = window.CampanhaPoderes?.filtrarDano?.(n) ?? n; if (!n) { sfx('plim'); return; }
     P.hp = Math.max(0, P.hp - n); P.inv = .85; P.vy = -280; P.ground = false; P.x += (P.x < de ? -1 : 1) * 36; tremor = Math.max(tremor, 7); sfx('impacto'); dano.push({ x: P.x, y: P.y - 80, s: '-' + n, t: 0 });
     if (P.hp <= 0) desmaiar();
   }
