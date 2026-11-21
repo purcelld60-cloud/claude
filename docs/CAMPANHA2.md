@@ -519,7 +519,7 @@ Mesmo sistema de fases da campanha 1:
 - **Arena:** chegando perto do chefe, a cutscene de entrada toca no próprio lugar da luta, deslocada para onde ele está. As barreiras de obra fecham a arena e a placa mostra o nome e o nível.
 - **Chefe com 3 fases:**
   - na troca de fase a vida renova e ele fica mais forte e mais rápido;
-  - todo golpe tem aviso antes: "!" piscando, faixa vermelha no chão, sombras de onde vai cair ou colunas de luz;
+  - pontos antecipam a trajetória dos objetos e cantos marcam a área atingida. A mira fica onde o chefe a colocou, dando tempo para sair dela.
   - depois de atacar ele fica **ABERTO!** e toma dano cheio; fora disso, defende parte do dano;
   - a barra no alto tem o nome, o nível e as 3 marcas de fase.
 - **Vitória:** placa **DERROTADO!**, 60 moedas, a cutscene da derrota (pista do Jorge e NOVO PODER) e a garrafada liberada na loja.
@@ -529,10 +529,10 @@ Também valem os golpes do jogador: papel, peido, dash e os 2 poderes. A Fofoca 
 
 | Fase | Onde | Inimigos | Chefe e golpes |
 | --- | --- | --- | --- |
-| Dona Creuza (nv 3) | Bairro da pensão | Vizinhas fofoqueiras (jogam balões de fofoca), pombos que mergulham | Leque de balões "PSIU", correria, chuva de fofoca, onda e chama as vizinhas |
-| Tonhão (nv 5) | Avenida, depois da rotatória | Mototaxistas que aceleram em cima de você, pombos | Investida de moto, onda da buzina, notas sonoras, chama os mototaxistas |
-| Seu Valdomiro (nv 7) | Feira do Planalto | Feirantes que jogam frutas, pombos | Rajadas de biscoito, chuva de biscoito, investida, onda e chama os feirantes |
-| Kauã (nv 9) | Serra do Periperi, no Cristo | Seguidores com flash de celular (deixam lento), urubus | Colunas de flash, flashes em leque, chuva, investida e chama os seguidores |
+| Dona Creuza (nv 3) | Bairro da pensão | Vizinhas fofoqueiras (jogam balões de fofoca), pombos que mergulham | Abre janelas de fofoca em sequência e encaminha áudios que atravessam o bairro e voltam |
+| Tonhão (nv 5) | Avenida, depois da rotatória | Mototaxistas que aceleram em cima de você, pombos | Bandeirada de moto, recibos ondulantes, retorno pela mesma faixa e cones na contramão |
+| Seu Valdomiro (nv 7) | Feira do Planalto | Feirantes que jogam frutas, pombos | Biscoitos de goma que quicam, saco que espalha polvilho e pratos de balança que descem alternados |
+| Kauã (nv 9) | Serra do Periperi, no Cristo | Seguidores com flash de celular (deixam lento), urubus | O visor delimita o corte da live. Curtidas caem em arco e o replay captura a mesma posição duas vezes |
 
 **Missões do 6B:**
 1. Do quarto até a Dona Creuza.
@@ -550,10 +550,10 @@ Mesmo sistema do 6B, com inimigos novos e golpes novos.
 
 | Fase | Onde | Inimigos | O que tem de novo no chefe |
 | --- | --- | --- | --- |
-| Barão do Café (nv 11) | Fazendas de café, pulando os canais de irrigação | Capangas do Barão (corpo a corpo), maritacas | Grãos de café em leque, chuva de café, investidas seguidas e muito rápidas |
-| Breno Pitbull (nv 12) | Festival de Inverno, à noite, depois do Planetário | Valentões, morcegos | **Supersoco**: o punho brilha, uma faixa vermelha mostra o alcance e ele avança. Na fase 3 entra em **MODO FÚRIA**, mais rápido |
-| Ryan e Bryan (nv 13) | LAN house do shopping (entrando pela frente do shopping) | Gamers que jogam controles, drones | **Luta dupla**: os dois dividem a mesma vida. O Ryan ataca e o Bryan fica do outro lado atirando controles, cada um com suas provocações |
-| Fred (nv 15, o mais difícil) | Pátio do 2º andar da Escola SESI | A turma do Fred (alunos e alunas que jogam pão de queijo) | **Giro do topete** (um anel avisa a área), **combo** (investida de ida e volta), pão de queijo em leque e provocações com as piadas internas dele com o Jorge. Defende mais, é o mais rápido e tem mais vida |
+| Barão do Café (nv 11) | Fazendas de café, pulando os canais de irrigação | Capangas do Barão (corpo a corpo), maritacas | O grão cai onde vai nascer o cafeeiro. Na florada, os pés brotam em sequência, e o bule solta vapor rente ao chão |
+| Breno Pitbull (nv 12) | Festival de Inverno, à noite, depois do Planetário | Valentões, morcegos | Refletores marcam o palco, contrapesos caem e uma tábua corre pelo piso. A abertura entre as cortinas antecipa a investida |
+| Ryan e Bryan (nv 13) | LAN house do shopping (entrando pela frente do shopping) | Gamers que jogam controles, drones | Os gêmeos dividem a vida. Ryan manda comandos baixos, Bryan rebate por cima e os cabos dos dois controles se cruzam |
+| Fred (nv 15, o mais difícil) | Pátio do 2º andar da Escola SESI | A turma do Fred (alunos e alunas que jogam pão de queijo) | O pente volta como bumerangue, o pão de queijo quica e a sequência de palmas imita o toque secreto dele com Jorge |
 
 **Missões do 6C:**
 1. Táxi até o café e o Barão.
@@ -571,18 +571,17 @@ A seta do objetivo também mostra o caminho pelas portas, como a entrada do shop
 2. À noite, andar até a praça da Catedral, passando pela turma nova do Jorge.
 3. Chegando perto, a cutscene do centro toca no próprio lugar da luta: o Jorge finge não conhecer o Da Roça, o Da Roça agarra as pernas dele e começa a batalha final.
 
-**Jorge (nv 20), a luta final.** São **4 fases**, como a Batata da campanha 1, e ele tem mais vida, mais dano, mais velocidade e mais defesa que o Fred. Cada fase faz referência ao passado do trio:
+**Jorge (nv 20)** tem cinco barras de vida. Entre elas, os ataques em curso desaparecem e o jogador tem tempo de se reposicionar. No Normal, as barras têm 2.240, 2.720, 3.200, 3.720 e 4.120 PV.
 
-| Fase | Nome | Golpes |
+| Fase | Nome | Como ler o ataque |
 | --- | --- | --- |
-| 1 | A bagunça da sala | Leque e chuva de bolinhas de papel, investidas |
-| 2 | A bronca do professor | Ondas "BRONCA!" no chão (pule), chuva de carteiras escolares; chama a turma nova |
-| 3 | O apelido | Letras G-O-R-D-O em leque, colunas de luz, combo de ida e volta |
-| 4 | As lembranças | Fotos do trio caindo, flashes de foto em colunas. **Fotos do trio pequeno piscam no céu, atrás da luta** |
+| 1 | Eu não te conheço | Acompanhe a dobra dos bilhetes para distinguir a trajetória ondulada do arremesso por cima. |
+| 2 | Silêncio na sala | Saia da marca da lousa. No castigo em trio, as três carteiras caem em sequência. |
+| 3 | O apelido | As letras de GORDO caem uma a uma. A borracha volta por uma altura diferente. |
+| 4 | O retrato do trio | As duas metades da fotografia abrem para os lados. A revelação ocupa o lugar onde elas se separaram. |
+| 5 | A promessa de Itabuna | O telefone cruza a praça. Na última chamada, as fotos convergem, o sinal ocupa o centro e a passagem da rodoviária sai em arco. |
 
-As provocações mudam a cada fase: de "EU NÃO TE CONHEÇO!" até "O TRIO... ACABOU... NÉ?". A barra de vida tem 4 marcas e muda de cor a cada fase.
-
-**O final.** Quando o Jorge cai, aparece "JORGE CAIU... E AGORA, DA ROÇA?". Depois vêm:
+**O final.** Quando o Jorge cai na quinta fase, a história continua.
 - a cutscene do final feliz: a mão estendida, a confissão, o abraço, a videochamada com o Reeis e o FIM;
 - os créditos;
 - a tela **CAMPANHA 2 COMPLETA!**, com CONTINUAR EXPLORANDO ou VOLTAR AO MENU.
