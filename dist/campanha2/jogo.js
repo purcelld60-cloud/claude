@@ -427,7 +427,7 @@
     b.addEventListener('click', (e) => { e.preventDefault(); painel(); }); lista.appendChild(b);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', botaoMenu); else botaoMenu();
-  window.Campanha2 = Object.freeze({ liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, flags: { ...(S?.flags || {}) } }),
+  window.Campanha2 = Object.freeze({ liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, luta: fase?.emArena?.() ? fase.slug : null, chave: D()?.key || window.CampanhaCenarios?.lista?.find?.((d) => d.id === cenaId)?.key || null, flags: { ...(S?.flags || {}) } }),
     // testes
     _ir: (id, x) => irPara(id, x), _fase: () => fase && { slug: fase.slug, chefe: { st: fase.chefe.st, hp: fase.chefe.hp, fase: fase.chefe.fase, x: Math.round(fase.chefe.x) }, arena: fase.emArena(), inimigos: fase.inimigos().length }, _hp: (n) => { P.hp = n; }, _bater: (n) => { const f = fase; if (f?.chefe) f.chefe.onDano(n, 'teste'); }, _pos: (x, y) => { P.x = x; P.y = y; P.vy = 0; P.ground = true; }, _fps: () => fpsMedio, _passo: (id) => passo(id), _usar: usar, _pular: pularCut });
 })();

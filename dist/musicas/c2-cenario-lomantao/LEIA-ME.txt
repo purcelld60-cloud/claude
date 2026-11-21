@@ -1,0 +1,8 @@
+PASTA: c2-cenario-lomantao
+TOCA EM: Campanha 2 · cenário: Estádio Lomanto Júnior
+
+Como usar: coloque aqui músicas .mp3, .ogg ou .m4a (até 15 MB cada).
+Com mais de uma música nesta pasta, o jogo sorteia uma delas.
+Pasta sem música = o jogo continua com a música de sempre.
+
+Hoje este lugar não tem música gravada: toca a trilha feita pelo próprio jogo.

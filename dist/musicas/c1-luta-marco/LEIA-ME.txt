@@ -1,0 +1,12 @@
+PASTA: c1-luta-marco
+TOCA EM: Campanha 1 · luta contra Marco
+
+Como usar: coloque aqui músicas .mp3, .ogg ou .m4a (até 15 MB cada).
+Com mais de uma música nesta pasta, o jogo sorteia uma delas.
+Pasta sem música = o jogo continua com a música de sempre.
+
+Música que o jogo já toca aqui hoje:
+  - Marco luta
+(no ZIP "DaRoca-Pasta-de-Musicas" ela vem nesta pasta com o nome "ORIGINAL - ...".
+ Para trocar, apague o ORIGINAL e ponha a sua. Se deixar o ORIGINAL junto,
+ o jogo sorteia entre ele e as suas.)

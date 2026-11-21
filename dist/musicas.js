@@ -1,4 +1,5 @@
-/* Pasta de músicas (Fase 9): coloque arquivos .mp3, .ogg ou .m4a em dist/musicas/ e diga onde
+/* Pasta de músicas: cada lugar do jogo tem a sua subpasta em dist/musicas (lista em pastas.json);
+   basta pôr a música dentro dela. Também dá para pôr arquivos .mp3, .ogg ou .m4a soltos em dist/musicas/ e dizer onde
    cada um toca em dist/musicas/musicas.txt, uma linha por lugar:
        roca = tema-da-roca.mp3
        chefe-marco = batalha.ogg volume=0.8 fade=2
@@ -63,12 +64,17 @@
       const lj = await getText('musicas/lista.json'); if (lj) { try { list = JSON.parse(lj); } catch (e) {} }
       txt = await getText('musicas/musicas.txt');
       if (!list && pre) list = pre; if (txt === null && pre) txt = pre.txt || '';
-      const files = (list?.arquivos || []).filter((f) => f && typeof f.nome === 'string' && EXT.test(f.nome) && !/[\\/]|\.\./.test(f.nome));
+      // arquivo solto (roca.mp3) ou dentro da pasta do lugar (c1-cenario-roca/minha.mp3); nunca ".." nem mais de uma pasta
+      const files = (list?.arquivos || []).filter((f) => f && typeof f.nome === 'string' && EXT.test(f.nome) && !/\\|\.\./.test(f.nome) && /^[^/]+(\/[^/]+)?$/.test(f.nome));
       const parsed = parseTxt(txt || ''); ambientMap = parsed.ambient; lastWarnings = parsed.warnings.concat(list?.avisos || []);
       const tracks = [], bindings = {}, byName = new Map();
-      const track = (name, meta = {}) => { if (byName.has(name)) return byName.get(name); const id = 'm-' + slug(name).replace(/\./g, '-').slice(0, 60) + '-' + (tracks.length + 1); const t = { id, title: name.replace(EXT, ''), categoryId: 'pasta', file: 'musicas/' + name, sha256: '', bytes: +meta.bytes || 0, duration: +meta.duracao || 0, volume: 1, loop: true, fadeMs: 1200, url: 'musicas/' + encodeURI(name), local: true }; tracks.push(t); byName.set(name, t); return t; };
-      // atalho: arquivo com o nome do lugar
-      for (const f of files) { const place = placeOf(f.nome.replace(EXT, '')); if (place) bindings[place] = { trackId: track(f.nome, f).id, enabled: true }; }
+      const track = (name, meta = {}) => { if (byName.has(name)) return byName.get(name); const id = 'm-' + slug(name).replace(/\./g, '-').slice(0, 60) + '-' + (tracks.length + 1); const t = { id, title: name.replace(EXT, '').replace(/^.*\//, ''), categoryId: 'pasta', file: 'musicas/' + name, sha256: '', bytes: +meta.bytes || 0, duration: +meta.duracao || 0, volume: 1, loop: true, fadeMs: 1200, url: 'musicas/' + encodeURI(name), local: true }; tracks.push(t); byName.set(name, t); return t; };
+      // atalho: arquivo solto com o nome do lugar
+      for (const f of files) { if (f.nome.includes('/')) continue; const place = placeOf(f.nome.replace(EXT, '')); if (place) bindings[place] = { trackId: f.original || track(f.nome, f).id, enabled: true }; }
+      // pastas por lugar (dist/musicas/pastas.json): com várias músicas na pasta, sorteia uma a cada vez que o jogo abre
+      const porLugar = {};
+      for (const f of files) { if (!f.nome.includes('/') || typeof f.lugar !== 'string' || !/^[a-zA-Z0-9_.-]{1,90}$/.test(f.lugar)) continue; (porLugar[f.lugar] ||= []).push(f); }
+      for (const [lugar, fs] of Object.entries(porLugar)) { const f = fs[Math.floor(Math.random() * fs.length)]; bindings[lugar] = { trackId: f.original || track(f.nome, f).id, enabled: true }; }
       // musicas.txt manda mais que o atalho
       for (const l of parsed.lines) { const meta = files.find((f) => f.nome === l.file); if (!meta && files.length) lastWarnings.push('arquivo não encontrado na pasta: ' + l.file); const t = track(l.file, meta || {}); bindings[l.place] = { trackId: t.id, enabled: true, ...l.opts }; }
       if (lastWarnings.length) try { console.warn('Músicas:', lastWarnings.join(' · ')); } catch (e) {}

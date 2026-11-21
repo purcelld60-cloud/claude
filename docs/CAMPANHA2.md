@@ -432,6 +432,8 @@ No jogo, a caixa de fala antiga fica escondida nesses roteiros, mas o texto cont
 
 **Trilha original sintetizada** (sem arquivos e sem copiar música): `saudade`, `flashback`, `tensao`, `vilao`, `conquista` e `final`. O roteiro escolhe com `"trilha"` (no roteiro ou na cena; `null` para). Se o jogador escolheu uma música própria para a cena no painel, a dele toca no lugar.
 
+**Músicas gravadas por lugar:** fora das cutscenes, a Campanha 2 toca a música que estiver nas pastas `dist/musicas/c2-cenario-<chave>` (contexto `c2.maps.<chave>`) e `dist/musicas/c2-luta-<chefe>` (contexto `c2.battles.<chefe>`, enquanto a arena está ativa). As pastas `c2-todos-os-cenarios` e `c2-todas-as-lutas` valem para os lugares sem música própria. Sem nenhuma música nas pastas, tudo fica como antes. Guia: `docs/MUSICAS.md`.
+
 **Fundos pintados (closes):**
 
 | Fundo | O que mostra |

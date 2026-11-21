@@ -96,3 +96,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - As regressões das duas campanhas, do menu, da pausa, dos mapas-ilha e da abertura passam.
   - A missão da Amanda foi conferida no navegador: convite na praça e jantar na Varanda do Cacau.
   - Atenção: o `restaurar_trilhas.py` baixa os MP3 do site original. Num ambiente sem acesso a esse site, o jogo segue sem as músicas, e os builds do GitHub baixam normalmente.
+- **2026-11-21 · Claude:** pedidos do dono feitos:
+  - **Bichos do Marco viraram brainrots** (`brainrots.js`, envolve `Art.drawMinion`): Brr Brr Patapim, Lirili Larilà, Trippi Troppi, Tralalero Tralalà, Tung Tung Tung Sahur, Ballerina Cappuccina, Bombardiro Crocodilo e Chimpanzini Bananini. A jogabilidade não mudou.
+  - **Chegada do carro a gás** (`chegada-carro.js`): depois do voo no mapa, cada fase tem uma chegada própria (paraquedas no colégio, flexões na academia, derrapagem na quadra, bigode na Bigodon...). Ganchos no `game.js`: `travel()`, `arrive()`, update e desenho do herói.
+  - **Balanço da roça** (`balanco.js`): o Da Roça agora fica sentado e impulsiona com as pernas.
+  - **Pastas de música** (`dist/musicas/<lugar>/`, lista em `dist/musicas/pastas.json`): 74 pastas, cada uma com LEIA-ME. O `musicas.py` lê as subpastas, sorteia quando há várias músicas e reconhece cópias das originais pelo SHA-256. A Campanha 2 agora toca as pastas `c2-*` (contextos `c2.maps.<chave>` e `c2.battles.<chefe>`). O workflow `pasta-musicas.yml` publica o ZIP com as músicas originais em cada pasta.

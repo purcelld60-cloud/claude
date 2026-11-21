@@ -1,0 +1,301 @@
+{
+ "_leia": "Lista das pastas de música. Cada pasta toca no lugar indicado. Gerado à mão; o musicas.py usa esta lista.",
+ "pastas": {
+  "geral-menu-inicial": {
+   "lugar": "menu.title",
+   "descricao": "Tela inicial do jogo (menu)"
+  },
+  "geral-pausa": {
+   "lugar": "menu.pause",
+   "descricao": "Menu de pausa"
+  },
+  "geral-derrota": {
+   "lugar": "events.defeat",
+   "descricao": "Quando o Da Roça perde (game over)"
+  },
+  "geral-fim-de-capitulo": {
+   "lugar": "events.chapter_end",
+   "descricao": "Fim de capítulo"
+  },
+  "geral-comemoracao": {
+   "lugar": "events.celebration",
+   "descricao": "Comemoração depois de vencer"
+  },
+  "c1-cenario-roca": {
+   "lugar": "maps.roca",
+   "descricao": "Campanha 1 · cenário: A Roça (casa do Da Roça)"
+  },
+  "c1-cenario-colegio": {
+   "lugar": "maps.escola",
+   "descricao": "Campanha 1 · cenário: Colégio Adventista"
+  },
+  "c1-cenario-academia": {
+   "lugar": "maps.academia",
+   "descricao": "Campanha 1 · cenário: Academia do Caleb"
+  },
+  "c1-cenario-quadra": {
+   "lugar": "maps.quadra",
+   "descricao": "Campanha 1 · cenário: Quadra"
+  },
+  "c1-cenario-praca-camacan": {
+   "lugar": "maps.camacan",
+   "descricao": "Campanha 1 · cenário: Praça Camacan"
+  },
+  "c1-cenario-favela": {
+   "lugar": "maps.favela",
+   "descricao": "Campanha 1 · cenário: Favela do Rato"
+  },
+  "c1-cenario-caderno-reino-de-tinta": {
+   "lugar": "maps.caderno",
+   "descricao": "Campanha 1 · cenário: Caderno do Davi (Reino de Tinta)"
+  },
+  "c1-cenario-campo-do-mota": {
+   "lugar": "maps.campo",
+   "descricao": "Campanha 1 · cenário: Campo do Mota"
+  },
+  "c1-cenario-bigodon": {
+   "lugar": "maps.bigodon",
+   "descricao": "Campanha 1 · cenário: Barbearia Bigodon"
+  },
+  "c1-cenario-patio": {
+   "lugar": "maps.patio",
+   "descricao": "Campanha 1 · cenário: Pátio da escola"
+  },
+  "c1-cenario-casa-da-rayssa": {
+   "lugar": "maps.rayssa",
+   "descricao": "Campanha 1 · cenário: Casa da Rayssa"
+  },
+  "c1-cenario-baile-funk": {
+   "lugar": "maps.baile",
+   "descricao": "Campanha 1 · cenário: Baile funk"
+  },
+  "c1-sala-almiro": {
+   "lugar": "rooms.almiro",
+   "descricao": "Campanha 1 · sala do professor Almiro"
+  },
+  "c1-sala-miqueias": {
+   "lugar": "rooms.miqueias",
+   "descricao": "Campanha 1 · sala do professor Miqueias"
+  },
+  "c1-luta-igor": {
+   "lugar": "battles.igor",
+   "descricao": "Campanha 1 · luta contra Igor"
+  },
+  "c1-luta-kaique": {
+   "lugar": "battles.kaique",
+   "descricao": "Campanha 1 · luta contra Kaique"
+  },
+  "c1-luta-arthur": {
+   "lugar": "battles.arthur",
+   "descricao": "Campanha 1 · luta contra Arthur"
+  },
+  "c1-luta-dede": {
+   "lugar": "battles.dede",
+   "descricao": "Campanha 1 · luta contra Dedé"
+  },
+  "c1-luta-freddy": {
+   "lugar": "battles.freddy",
+   "descricao": "Campanha 1 · luta contra Freddy"
+  },
+  "c1-luta-reeis": {
+   "lugar": "battles.reeisBoss",
+   "descricao": "Campanha 1 · luta contra Reeis"
+  },
+  "c1-luta-marco": {
+   "lugar": "battles.marco",
+   "descricao": "Campanha 1 · luta contra Marco"
+  },
+  "c1-luta-colosso": {
+   "lugar": "battles.giant",
+   "descricao": "Campanha 1 · luta contra Colosso 67"
+  },
+  "c1-luta-nicolas": {
+   "lugar": "battles.nicolas",
+   "descricao": "Campanha 1 · luta contra Nicolas (Carvalho)"
+  },
+  "c1-luta-menezes": {
+   "lugar": "battles.menezes",
+   "descricao": "Campanha 1 · luta contra Menezes"
+  },
+  "c1-luta-ollyan": {
+   "lugar": "battles.ollyan",
+   "descricao": "Campanha 1 · luta contra Ollyan"
+  },
+  "c1-luta-nikolas": {
+   "lugar": "battles.nikolas",
+   "descricao": "Campanha 1 · luta contra Nikolas"
+  },
+  "c1-transformacao-reeis": {
+   "lugar": "events.reeis_transform",
+   "descricao": "Campanha 1 · transformação do Reeis"
+  },
+  "c1-treino-caleb": {
+   "lugar": "activity.caleb",
+   "descricao": "Campanha 1 · treino na academia do Caleb"
+  },
+  "c1-jantar-amanda": {
+   "lugar": "activity.dinner",
+   "descricao": "Campanha 1 · jantar com a Amanda"
+  },
+  "c1-ligacao-do-jorge": {
+   "lugar": "cutscenes.jorge_epilogue",
+   "descricao": "Campanha 1 · cutscene final: a ligação do Jorge"
+  },
+  "c2-cenario-aeroporto": {
+   "lugar": "c2.maps.aeroporto",
+   "descricao": "Campanha 2 · cenário: Aeroportos"
+  },
+  "c2-cenario-bairro": {
+   "lugar": "c2.maps.bairro",
+   "descricao": "Campanha 2 · cenário: Bairro da pensão"
+  },
+  "c2-cenario-corredor-pensao": {
+   "lugar": "c2.maps.corredor-pensao",
+   "descricao": "Campanha 2 · cenário: Corredor da pensão"
+  },
+  "c2-cenario-quarto": {
+   "lugar": "c2.maps.quarto",
+   "descricao": "Campanha 2 · cenário: Quarto do Da Roça"
+  },
+  "c2-cenario-centro": {
+   "lugar": "c2.maps.centro",
+   "descricao": "Campanha 2 · cenário: Centro e Praça da Catedral"
+  },
+  "c2-cenario-serra": {
+   "lugar": "c2.maps.serra",
+   "descricao": "Campanha 2 · cenário: Serra do Periperi (Cristo)"
+  },
+  "c2-cenario-avenidas": {
+   "lugar": "c2.maps.avenidas",
+   "descricao": "Campanha 2 · cenário: Monumento ao Índio"
+  },
+  "c2-cenario-feira": {
+   "lugar": "c2.maps.feira",
+   "descricao": "Campanha 2 · cenário: Feira e biscoitarias"
+  },
+  "c2-cenario-cafe": {
+   "lugar": "c2.maps.cafe",
+   "descricao": "Campanha 2 · cenário: Fazendas de café"
+  },
+  "c2-cenario-cultura": {
+   "lugar": "c2.maps.cultura",
+   "descricao": "Campanha 2 · cenário: Teatro e Planetário"
+  },
+  "c2-cenario-shopping": {
+   "lugar": "c2.maps.shopping",
+   "descricao": "Campanha 2 · cenário: Shopping"
+  },
+  "c2-cenario-frente-shopping": {
+   "lugar": "c2.maps.frente-shopping",
+   "descricao": "Campanha 2 · cenário: Frente do Shopping"
+  },
+  "c2-cenario-shopping-piso2": {
+   "lugar": "c2.maps.shopping-piso2",
+   "descricao": "Campanha 2 · cenário: Shopping · piso 2"
+  },
+  "c2-cenario-olivia": {
+   "lugar": "c2.maps.olivia",
+   "descricao": "Campanha 2 · cenário: Olívia Flores e Escola SESI"
+  },
+  "c2-cenario-escola-terreo": {
+   "lugar": "c2.maps.escola-terreo",
+   "descricao": "Campanha 2 · cenário: Escola SESI · térreo"
+  },
+  "c2-cenario-patio": {
+   "lugar": "c2.maps.patio",
+   "descricao": "Campanha 2 · cenário: Escola SESI · pátio do 2º andar"
+  },
+  "c2-cenario-poco-escuro": {
+   "lugar": "c2.maps.poco-escuro",
+   "descricao": "Campanha 2 · cenário: Reserva do Poço Escuro"
+  },
+  "c2-cenario-lomantao": {
+   "lugar": "c2.maps.lomantao",
+   "descricao": "Campanha 2 · cenário: Estádio Lomanto Júnior"
+  },
+  "c2-cenario-rodoviaria": {
+   "lugar": "c2.maps.rodoviaria",
+   "descricao": "Campanha 2 · cenário: Terminal Rodoviário"
+  },
+  "c2-cenario-uesb": {
+   "lugar": "c2.maps.uesb",
+   "descricao": "Campanha 2 · cenário: UESB"
+  },
+  "c2-cenario-lagoa": {
+   "lugar": "c2.maps.lagoa",
+   "descricao": "Campanha 2 · cenário: Lagoa das Bateias"
+  },
+  "c2-cenario-parque": {
+   "lugar": "c2.maps.parque",
+   "descricao": "Campanha 2 · cenário: Parque da Cidade"
+  },
+  "c2-cenario-serra-marcal": {
+   "lugar": "c2.maps.serra-marcal",
+   "descricao": "Campanha 2 · cenário: Serra do Marçal"
+  },
+  "c2-todos-os-cenarios": {
+   "lugar": "c2.maps",
+   "descricao": "Campanha 2 · qualquer cenário que não tenha pasta com música"
+  },
+  "c2-luta-creuza": {
+   "lugar": "c2.battles.creuza",
+   "descricao": "Campanha 2 · luta contra Dona Creuza"
+  },
+  "c2-luta-tonhao": {
+   "lugar": "c2.battles.tonhao",
+   "descricao": "Campanha 2 · luta contra Tonhão"
+  },
+  "c2-luta-valdomiro": {
+   "lugar": "c2.battles.valdomiro",
+   "descricao": "Campanha 2 · luta contra Valdomiro"
+  },
+  "c2-luta-kaua": {
+   "lugar": "c2.battles.kaua",
+   "descricao": "Campanha 2 · luta contra Kauã"
+  },
+  "c2-luta-barao": {
+   "lugar": "c2.battles.barao",
+   "descricao": "Campanha 2 · luta contra Barão"
+  },
+  "c2-luta-breno": {
+   "lugar": "c2.battles.breno",
+   "descricao": "Campanha 2 · luta contra Breno"
+  },
+  "c2-luta-gemeos": {
+   "lugar": "c2.battles.gemeos",
+   "descricao": "Campanha 2 · luta contra os Gêmeos"
+  },
+  "c2-luta-fred": {
+   "lugar": "c2.battles.fred",
+   "descricao": "Campanha 2 · luta contra Fred"
+  },
+  "c2-luta-jorge": {
+   "lugar": "c2.battles.jorge",
+   "descricao": "Campanha 2 · luta contra Jorge (luta final)"
+  },
+  "c2-todas-as-lutas": {
+   "lugar": "c2.battles",
+   "descricao": "Campanha 2 · qualquer luta que não tenha pasta com música"
+  },
+  "extra-arena-online": {
+   "lugar": "arena.battle",
+   "descricao": "Arena online (luta)"
+  },
+  "extra-arena-menu": {
+   "lugar": "arena.menu",
+   "descricao": "Arena online (menu)"
+  },
+  "extra-arena-resultado": {
+   "lugar": "arena.results",
+   "descricao": "Arena online (resultado)"
+  },
+  "extra-dupla-online": {
+   "lugar": "coop.menu",
+   "descricao": "Dupla online"
+  },
+  "extra-fliperama": {
+   "lugar": "minigames.fliperama",
+   "descricao": "Fliperama"
+  }
+ }
+}

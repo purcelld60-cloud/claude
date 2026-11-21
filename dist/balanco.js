@@ -33,7 +33,7 @@
     if (o.scene !== SCENE || o.arena || o.room) { if (active) leave(); return; }
     const t = Number(o.time) || 0, dt = Math.max(0, Math.min(.05, t - lastT)); lastT = t;
     // pêndulo: sentado, Da Roça "pedala" até uma oscilação gostosa; vazio, só o vento mexe
-    const target = active ? .3 : .04 + Math.sin(t * .4) * .02, amp = Math.abs(theta) + Math.abs(omega) / 3.9;
+    const target = active ? .42 : .04 + Math.sin(t * .4) * .02, amp = Math.abs(theta) + Math.abs(omega) / 3.9;
     omega += (-(9.8 / (ROPE / 40)) * Math.sin(theta)) * dt; omega *= active ? 1 : .995; if (amp < target && Math.sign(omega) === Math.sign(theta) || amp < .02) omega += Math.sign(omega || 1) * .5 * dt; if (amp > target + .05) omega *= .99;
     theta += omega * dt;
     if (Math.abs(o.camera + 480 - AX) > 700) return;
@@ -41,19 +41,27 @@
     const L1 = [sx - HALF * ca, sy + HALF * sa], R1 = [sx + HALF * ca, sy - HALF * sa];
     ctx.save(); ctx.imageSmoothingEnabled = false;
     const rope = (x0, y0, x1, y1) => { const n = Math.ceil(Math.hypot(x1 - x0, y1 - y0) / 2); for (let i = 0; i <= n; i++) { const k = i / n; ctx.fillStyle = i % 3 ? '#e2cc96' : '#a8885a'; ctx.fillRect(Math.round(lerp(x0, x1, k) / 2) * 2, Math.round(lerp(y0, y1, k) / 2) * 2, 2, 2); } };
+    rope(AX - 10, AY, L1[0], L1[1]); rope(AX + 10, AY, R1[0], R1[1]);
     if (active) {
-      const k = Math.min(1, (performance.now() - sitAt) / 600);
-      ctx.save(); ctx.translate(Math.round(sx), Math.round(sy)); ctx.rotate(theta * .9);
-      try { window.Art?.drawCharacter?.(ctx, 'daroca', 2, 22, { facing: 1, frame: t * .3, scale: 1, grounded: true, moving: false }); } catch (e) {}
+      // Da Roça SENTADO: tronco reto no assento, pernas para a frente "pedalando" (esticam indo para a frente,
+      // dobram voltando), corpo inclinando junto e as mãos segurando as cordas.
+      const ida = Math.max(-1, Math.min(1, omega / 1.4)), fi = (68 + ida * 26) * Math.PI / 180, inclina = -ida * .16;
+      ctx.save(); ctx.translate(Math.round(sx), Math.round(sy)); ctx.rotate(-theta);
+      const heroi = (x, y) => { try { window.Art?.drawCharacter?.(ctx, 'daroca', x, y, { facing: 1, frame: 0, scale: 1, grounded: true, moving: false }); } catch (e) {} };
+      ctx.save(); ctx.translate(1, -1); ctx.rotate(-fi); ctx.beginPath(); ctx.rect(-14, 1, 28, 22); ctx.clip(); heroi(-1, 19); ctx.restore(); // pernas para a frente
+      ctx.save(); ctx.rotate(inclina); ctx.beginPath(); ctx.rect(-40, -90, 80, 89); ctx.clip(); heroi(0, 17); ctx.restore(); // tronco, cabeça e chapéu
+      const ombro = (lado) => { const ox = lado * 9 + Math.sin(inclina) * -20, oy = -20, mx = lado * HALF, my = -34; // braço do ombro até a corda
+        for (let k2 = 0; k2 <= 6; k2++) { const q = k2 / 6; ctx.fillStyle = k2 < 3 ? '#d9873a' : '#c98a5a'; ctx.fillRect(Math.round(lerp(ox, mx, q)) - 1, Math.round(lerp(oy, my, q)) - 1, 3, 3); }
+        ctx.fillStyle = '#1b1614'; ctx.fillRect(mx - 2, my - 2, 5, 5); ctx.fillStyle = '#d99a6a'; ctx.fillRect(mx - 1, my - 1, 3, 3); };
+      ombro(-1); ombro(1);
       ctx.restore();
       // tempo correndo para ver o sol se pôr
       hour = (hour + dt * .25) % 24; try { window.DayTime?.force?.(hour); } catch (e) {}
       if (ui) { const h = Math.floor(hour), m = Math.floor((hour - h) * 60); ui.querySelector('.bl-hora').textContent = 'Apreciando a vista · ' + String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0'); }
-      bars = Math.min(1, bars + dt * 1.5); void k;
+      bars = Math.min(1, bars + dt * 1.5);
     } else bars = Math.max(0, bars - dt * 3);
-    rope(AX - 10, AY, L1[0], L1[1]); rope(AX + 10, AY, R1[0], R1[1]);
     // assento de tábua
-    ctx.save(); ctx.translate(Math.round(sx), Math.round(sy)); ctx.rotate(-theta * .1);
+    ctx.save(); ctx.translate(Math.round(sx), Math.round(sy)); ctx.rotate(-theta);
     ctx.fillStyle = '#3e2a18'; ctx.fillRect(-HALF - 3, -3, HALF * 2 + 6, 7); ctx.fillStyle = '#9a6a3a'; ctx.fillRect(-HALF - 2, -2, HALF * 2 + 4, 4); ctx.fillStyle = '#c08a50'; ctx.fillRect(-HALF - 2, -2, HALF * 2 + 4, 1);
     ctx.restore();
     ctx.fillStyle = '#5a4026'; ctx.fillRect(AX - 14, AY - 2, 28, 4);
