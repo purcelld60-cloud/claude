@@ -9,10 +9,10 @@
  phase.classList.add('boss-phase-pips');phase.setAttribute('role','img');
  let phaseCount=0,lastBossType='',lastPhase=0,phaseGlowTimer=0;
  function renderBossPhase(boss){
-  const count=Math.max(1,Math.min(4,Math.floor(Number(boss.phaseCount)||3))),current=Math.max(1,Math.min(count,Math.floor(Number(boss.phase)||1)));
+  const count=Math.max(1,Math.min(5,Math.floor(Number(boss.phaseCount)||3))),current=Math.max(1,Math.min(count,Math.floor(Number(boss.phase)||1)));
   if(count!==phaseCount){phaseCount=count;phase.replaceChildren();for(let n=1;n<=count;n++){const mark=document.createElement('i');mark.dataset.phase=String(n);mark.setAttribute('aria-hidden','true');phase.append(mark);}const caption=document.createElement('span');caption.className='boss-phase-caption';caption.setAttribute('aria-hidden','true');phase.append(caption);}
   phase.querySelector('.boss-phase-caption').textContent=current+'/'+count;
-  phase.setAttribute('aria-label','Fase '+current+' de '+count);phase.title='Fase '+current+' de '+count;
+  phase.setAttribute('aria-label','Fase '+current+' de '+count);phase.title='Fase '+current+' de '+count+(boss.phaseName?' · '+boss.phaseName:'');
   for(const pip of phase.querySelectorAll('i[data-phase]'))pip.classList.toggle('active',Number(pip.dataset.phase)<=current);
   hud.dataset.phase=String(current);hud.dataset.phaseCount=String(count);
   if(lastBossType===boss.type&&current>lastPhase){clearTimeout(phaseGlowTimer);hud.classList.remove('phase-up');void hud.offsetWidth;hud.classList.add('phase-up');phaseGlowTimer=setTimeout(()=>hud.classList.remove('phase-up'),800);}
