@@ -33,7 +33,9 @@
 
   /* ---------- acabamento: luz, sombra e contorno ---------- */
   const mistura = (a, b, k) => [0, 1, 2].map((i) => Math.round(a[i] + (b[i] - a[i]) * k));
-  const LUZ = [255, 246, 216], SOMBRA = [42, 24, 56], BORDA = [26, 16, 32];
+  const LUZ = [255, 236, 255], SOMBRA = [40, 14, 64], BORDA = [30, 8, 44];
+  // tom roxo do Marco: cada cor puxa para o roxo mantendo o claro/escuro (olhos e dentes ficam como estão)
+  const ROXO = .66, roxo = (rgb) => { const L = rgb[0] * .3 + rgb[1] * .55 + rgb[2] * .15; return mistura(rgb, [Math.min(255, L * .82 + 56), Math.min(255, L * .42), Math.min(255, L * .95 + 92)], ROXO); };
   function acabamento(cv) {
     const ctx = cv.getContext('2d'), img = ctx.getImageData(0, 0, W, H), d = img.data, cor = new Int32Array(W * H).fill(-1);
     for (let i = 0; i < W * H; i++) if (d[i * 4 + 3] > 127) cor[i] = (d[i * 4] << 16) | (d[i * 4 + 1] << 8) | d[i * 4 + 2];
@@ -50,6 +52,7 @@
         else if (em(x, y + 2) !== c) rgb = mistura(rgb, SOMBRA, .14);          // meia-sombra
         else if (esq || em(x - 1, y - 1) !== c || em(x, y - 2) !== c) rgb = mistura(rgb, LUZ, .14); // meia-luz
       }
+      if (!plano.has(c)) rgb = roxo(rgb);
       out.set([...rgb, 255], i * 4); }
     img.data.set(out); ctx.putImageData(img, 0, 0);
   }
@@ -160,7 +163,7 @@
     g = cv.getContext('2d', { willReadFrequently: true }); planas = new Set([BRANCO, PRETO]);
     try { SPRITES[nome](f, bravo); acabamento(cv); } catch (err) { try { console.warn('brainrot', nome, err); } catch (e2) {} }
     const branco = document.createElement('canvas'); branco.width = W; branco.height = H; // silhueta branca para o piscar do golpe
-    const b = branco.getContext('2d'); b.drawImage(cv, 0, 0); b.globalCompositeOperation = 'source-in'; b.fillStyle = '#fff8ec'; b.fillRect(0, 0, W, H);
+    const b = branco.getContext('2d'); b.drawImage(cv, 0, 0); b.globalCompositeOperation = 'source-in'; b.fillStyle = '#f6ecff'; b.fillRect(0, 0, W, H);
     q = { cv, branco }; cache.set(chave, q); g = null; return q;
   }
   const VOA = { bombardiro: true };
@@ -168,7 +171,7 @@
     const f = ((Math.floor((t || 0) * 9) % N) + N) % N, q = quadro(nome, f, !!o.angry);
     ctx.save(); ctx.translate(Math.round(x), Math.round(y));
     const a0 = ctx.globalAlpha, sw = VOA[nome] ? 12 : 16; // sombra pixelada no chão
-    ctx.globalAlpha = a0 * (VOA[nome] ? .18 : .28); ctx.fillStyle = '#0c140c'; ctx.fillRect(-sw, -2, sw * 2, 4); ctx.fillRect(-sw + 4, -4, sw * 2 - 8, 2); ctx.globalAlpha = a0;
+    ctx.globalAlpha = a0 * (VOA[nome] ? .18 : .28); ctx.fillStyle = '#2a0f3a'; ctx.fillRect(-sw, -2, sw * 2, 4); ctx.fillRect(-sw + 4, -4, sw * 2 - 8, 2); ctx.globalAlpha = a0;
     if (o.facing < 0) ctx.scale(-1, 1);
     const suave = ctx.imageSmoothingEnabled; ctx.imageSmoothingEnabled = false;
     ctx.drawImage(q.cv, -AX * S, -AY * S, W * S, H * S);
