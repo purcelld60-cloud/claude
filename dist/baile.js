@@ -28,6 +28,7 @@
  function noise(n){return(Math.sin(n*12.9898+78.233)*43758.5453)%1;}
  function cloud(c,x,y,scale=1,color='#c1cfe2',alpha=1){c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale,scale);c.globalAlpha*=alpha;for(const[k,yy,r]of[[-29,5,20],[-8,-5,25],[18,0,23],[39,10,17]]){oval(c,k,yy,r,r*.54,color);}rect(c,-38,9,88,10,color);c.restore();}
  function dancer(c,x,y,t,seed=0,scale=1){
+  if(window.BailePixel?.dancer?.(c,x,y,t,seed,scale))return; // gente redesenhada em pixel art (baile-pixel.js)
   if(!window.Graphics?.isLite?.())return dancerHD(c,x,y,t,seed,scale);
   const sw=Math.sin(t*(2.3+seed%3*.17)+seed)*5,bounce=Math.max(0,Math.sin(t*4+seed))*3,skin=['#8d583f','#e4b596','#b47c55','#6f4838','#eec9ae'][seed%5],shirt=['#7a5f9c','#e49a78','#679fac','#c0b56b','#b46c88','#dde0c8'][seed%6],pants=['#29374c','#3c3a55','#26394a'][seed%3];
   c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale,scale);oval(c,0,0,13,3,'#13192d50');
@@ -76,6 +77,7 @@
  }
  // Show: lasers, LED wall with equalizer, pulsing speakers, stage fog, confetti bursts, strobe.
  function showFx(c,x,t){
+  if(window.BailePixel?.fx?.(c,x,t))return;
   const beat=t*BPM,b=Math.pow(Math.max(0,Math.sin(beat*Math.PI*2)),3),bar=Math.floor(beat/4);
   c.save();c.translate(Math.round(x),0);
   // lasers sweeping the night sky
@@ -98,6 +100,7 @@
  }
  // Ollyan, redrawn thin and drunk for the party (the flying fight keeps the classic, slimmed).
  function drawOllyan(c,x,y,t=0,o={}){
+  if(window.BailePixel?.ollyan?.(c,x,y,t,o))return; // Ollyan redesenhado (baile-pixel.js)
   if(o.flying||isLite()){if(o.flying&&!isLite()){c.save();c.translate(Math.round(x),Math.round(y));c.scale(.84,1.04);drawOllyanClassic(c,0,0,t,o);c.restore();return;}return drawOllyanClassic(c,x,y,t,o);}
   const scale=finite(o.scale,1),face=o.facing===-1?-1:1,skin='#ebc4ab',flush='#e07a74',ink='#121722',hood='#262b38',hoodSh='#181c27';
   // stagger: the body lags behind the hips, feet shuffle to catch the balance
@@ -132,6 +135,7 @@
   const hic=(t*.45)%1;if(hic<.3&&o.cup!==false){c.save();c.globalAlpha=1-hic/.3;text(c,'hic!',x+face*22,y-150-hic*30,11,'#ffd0e0');c.restore();}
  }
  function stage(c,x,t){
+  if(window.BailePixel?.palco?.(c,x,t))return;
   c.save();c.translate(Math.round(x),0);rect(c,-290,200,580,240,'#1b2441');rect(c,-284,205,568,225,'#302c52');rect(c,-289,416,578,24,'#382e4d');rect(c,-296,413,590,5,'#eab78e');
   for(const xx of[-283,279]){rect(c,xx,147,7,267,'#7691a5');for(let y=150;y<405;y+=25)line(c,[[xx,y],[xx+7,y+13],[xx,y+25]],'#b5c7d2',1);}
   rect(c,-286,146,574,8,'#7189a1');for(let xx=-274;xx<275;xx+=28)line(c,[[xx,146],[xx+14,154],[xx+28,146]],'#bfd0d6',1);
@@ -178,7 +182,7 @@
   for(let layer=0;layer<2;layer++){const speed=layer?.21:.11;for(let i=-2;i<18;i++){const xx=i*137-(camera*speed%137),hh=70+(i*i*37+layer*31)%114,yy=330-hh+layer*32;rect(c,xx,yy,127,330-yy,layer?'#24334b':'#1c2845');rect(c,xx+7,yy-5,113,7,layer?'#3b4b61':'#293450');for(let row=0;row<4;row++)for(let col=0;col<6;col++)if((i+row+col+layer)%3!==0)rect(c,xx+12+col*17,yy+15+row*22,7,9,layer?'#948576':'#5a6476');if(i%3===0){rect(c,xx+75,yy-26,3,23,'#576980');line(c,[[xx+57,yy-26],[xx+95,yy-26]],'#65788e',2);}}}
   for(let i=0;i<5;i++){const x=i*1100-camera*.55;line(c,[[x,165],[x+330,190],[x+680,172],[x+1000,186]],'#283442',3);for(let j=0;j<18;j++){const xx=x+j*57,yy=174+Math.sin(j*.42)*10+Math.sin(t*.8+j)*1.5;rect(c,xx,yy,5,8,['#f5d78b','#b3dce8','#eeabd7','#a9ddc1'][j%4]);if(j%3===0)glow(c,xx,yy,15,'#d9bbdb',.075);}}
   rect(c,0,330,W,110,'#59445c');for(let i=0;i<14;i++){const xx=i*95-(camera*.75%95);rect(c,xx,332,66,7,'#75566d');rect(c,xx+12,351,48,3,'#493c56');}rect(c,0,423,W,17,'#292e48');rect(c,0,440,W,100,'#30364e');rect(c,0,440,W,6,'#a18a8b');for(let i=-1;i<20;i++){const xx=i*64-(camera%64);rect(c,xx,451,1,89,'#262b43');rect(c,xx+7,477,40,2,'#4d4e66');rect(c,xx+24,514,31,2,'#43465e');}
-  stage(c,2240-camera,t);if(!isLite())showFx(c,2240-camera,t);
+  stage(c,2240-camera,t);if(!isLite())showFx(c,2240-camera,t);window.BailePixel?.cenario?.(c,camera,t);
   // Two dense, independently animated rows form a full audience in front of the stage.
   // Only visible people are rendered: the 232-person crowd stays light on phones.
   for(let row=0;row<2;row++)for(let i=0;i<116;i++){
