@@ -233,3 +233,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - Valem como diálogo: cutscene, conversa com aliado, morador (`CampanhaMoradores.aberto()`) e pergunta (`.escolha`).
   - Enquanto há diálogo, o `.c2j` ganha a classe `c2-dialogo`. Joystick e botões ficam invisíveis e sem toque; o "PULAR CENA" continua.
   - Tocar em qualquer lugar da tela avança a fala. No fim do diálogo, os botões voltam.
+- **2026-11-21 · Claude:** **animações mais suaves nos botões da tela inicial** (`tela-inicial.css`, `?v=2`):
+  - Ao passar o mouse, o botão sobe com uma mola leve (0,28 s); ao apertar, afunda rápido (0,07 s) e volta com a mola.
+  - O ícone balança mais devagar.
+  - O brilho pulsante do JOGAR fica num `::after`, para não brigar com o efeito de passar o mouse.
+  - Os botões dos cantos ganharam transição.
+  - O painel JOGAR/MULTIPLAYER entra com fade e uma subida leve.
+  - Com `prefers-reduced-motion`, tudo isso fica desligado.
