@@ -302,22 +302,29 @@
   function fazerIlha(base, o, d) {
     const W = base.width, H = base.height, PAD = o.margem || 300, W2 = W + PAD * 2, H2 = H + PAD * 2;
     const cv = document.createElement('canvas'); cv.width = W2; cv.height = H2; const g = cv.getContext('2d'); g.imageSmoothingEnabled = false;
-    const bd = base.getContext('2d').getImageData(0, 0, W, H).data, im = g.createImageData(W2, H2), out = im.data, cls = new Uint8Array(W2 * H2); // 0 mar, 1 terra, 2 areia, 3 raso
+    const bd = base.getContext('2d').getImageData(0, 0, W, H).data, im = g.createImageData(W2, H2), out = im.data, cls = new Uint8Array(W2 * H2), trilha = new Uint8Array(W2 * H2); // 0 mar, 1 terra, 2 areia, 3 raso
     const hex = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
     // cor da grama tirada da própria borda do mapa (para não aparecer emenda)
     let sr = 0, sg = 0, sb = 0, sn = 0; for (let k = 0; k < W; k += 2) for (const yy of [1, 3, 5, H - 2, H - 4, H - 6]) { const j = (yy * W + k) * 4, r = bd[j], gg = bd[j + 1], b = bd[j + 2]; if (gg > r + 6 && gg > b + 18) { sr += r; sg += gg; sb += b; sn++; } }
     for (let k = 0; k < H; k += 2) for (const xx of [1, 3, 5, W - 2, W - 4, W - 6]) { const j = (k * W + xx) * 4, r = bd[j], gg = bd[j + 1], b = bd[j + 2]; if (gg > r + 6 && gg > b + 18) { sr += r; sg += gg; sb += b; sn++; } }
     const med = sn ? [sr / sn, sg / sn, sb / sn] : hex('#b4ea6a'), tom = (f) => med.map((v) => Math.max(0, Math.min(255, Math.round(v * f))));
-    const GR = [tom(.95), tom(1), tom(1.05)], AR = ['#f6e6ae', '#eedb98', '#fbefc4'].map(hex), RASO = hex('#8ad8f4'), MEIO = hex('#62bee8');
+    const GR = [tom(.95), tom(1), tom(1.05)], TERRA = [[214, 180, 128], [200, 164, 112]], rua = (r, g, b) => Math.abs(r - g) < 22 && Math.abs(g - b) < 26 && r > 140 && !(g > r + 6 && g > b + 18), AR = ['#f6e6ae', '#eedb98', '#fbefc4'].map(hex), RASO = hex('#8ad8f4'), MEIO = hex('#62bee8');
     const margem = (cx, cy) => 34 + vn(cx / 58 + 3.1, cy / 58 + 7.7, 41) * 58 + vn(cx / 19, cy / 19, 42) * 10;
     for (let Y = 0; Y < H2; Y++) for (let X = 0; X < W2; X++) { const x = X - PAD, y = Y - PAD; if (x >= 0 && x < W && y >= 0 && y < H) { cls[Y * W2 + X] = 1; continue; }
       const cx = x < 0 ? 0 : x >= W ? W - 1 : x, cy = y < 0 ? 0 : y >= H ? H - 1 : y, dd = Math.hypot(x - cx, y - cy), m = margem(cx, cy), i = (Y * W2 + X) * 4; let col = null, k = 0;
-      { const j = (cy * W + cx) * 4; if (bd[j] > 215 && bd[j + 1] > 215 && bd[j + 2] > 215) { if (dd < 14) { out[i] = RASO[0]; out[i + 1] = RASO[1]; out[i + 2] = RASO[2]; out[i + 3] = 255 - dd * 6; cls[Y * W2 + X] = 3; } continue; } } // mar de nuvens: encontra o mar direto
+      { const br = (xx, yy) => { xx = Math.max(0, Math.min(W - 1, xx)); yy = Math.max(0, Math.min(H - 1, yy)); const q = (yy * W + xx) * 4; return bd[q] > 236 && bd[q + 1] > 236 && bd[q + 2] > 236; }; // mar de nuvens (área grande e bem branca), não ruas claras
+        if (br(cx, cy) && br(cx - 10, cy - 10) && br(cx + 10, cy + 10) && br(cx - 10, cy + 10) && br(cx + 10, cy - 10)) { if (dd < 14) { out[i] = RASO[0]; out[i + 1] = RASO[1]; out[i + 2] = RASO[2]; out[i + 3] = 255 - dd * 6; cls[Y * W2 + X] = 3; } continue; } }
       if (dd < m - 11) { const j = (cy * W + cx) * 4, er = bd[j], eg = bd[j + 1], eb = bd[j + 2]; // o rio continua até o mar; o resto vira grama
-        if (eb > er + 40 && eb > eg - 10) { col = [er, eg, eb]; k = 3; } else { const n = vn(x / 22, y / 22, 43); col = GR[n < .4 ? 0 : n > .62 ? 2 : 1]; k = 1; } }
+        if (eb > er + 40 && eb > eg - 10) { col = [er, eg, eb]; k = 3; }
+        else if (rua(er, eg, eb) && dd < m - 16) { col = TERRA[vn(x / 5, y / 5, 45) < .5 ? 0 : 1]; k = 5; } // rua que chega na borda vira trilha de terra até a praia
+        else { // grama: continua a textura do próprio mapa (espelhada na borda); onde o espelho cai em prédio ou rua, grama com ruído
+          let mx = x < 0 ? -x - 1 : x >= W ? 2 * W - 1 - x : x, my = y < 0 ? -y - 1 : y >= H ? 2 * H - 1 - y : y; mx = Math.max(0, Math.min(W - 1, mx)); my = Math.max(0, Math.min(H - 1, my));
+          const q = (my * W + mx) * 4, mr = bd[q], mg = bd[q + 1], mb = bd[q + 2];
+          if (mg > mr + 6 && mg > mb + 18) col = [mr, mg, mb]; else { const n = vn(x / 22, y / 22, 43), d2 = vn(x / 3, y / 3, 46); col = GR[n < .4 ? 0 : n > .62 ? 2 : 1]; if (d2 > .78) col = tom(.86); else if (d2 < .12) col = tom(1.1); }
+          k = 1; } }
       else if (dd < m) { const n = vn(x / 9, y / 9, 44); col = AR[n < .35 ? 1 : n > .7 ? 2 : 0]; if (dd > m - 3) col = AR[1]; k = 2; }
       else if (dd < m + 13) { col = RASO; k = 3; } else if (dd < m + 30) { col = MEIO; k = 3; out[i + 3] = 150; }
-      if (col) { out[i] = col[0]; out[i + 1] = col[1]; out[i + 2] = col[2]; if (!out[i + 3]) out[i + 3] = 255; cls[Y * W2 + X] = k; } }
+      if (col) { out[i] = col[0]; out[i + 1] = col[1]; out[i + 2] = col[2]; if (!out[i + 3]) out[i + 3] = 255; cls[Y * W2 + X] = k === 5 ? 1 : k; if (k === 5) trilha[Y * W2 + X] = 1; } }
     g.putImageData(im, 0, 0); relevo(cv, PAD, PAD);
     // espuma da costa (pontos onde a areia encontra a água) e enfeites
     const costa = [], P = Px(g); g.save(); g.translate(PAD, PAD);
@@ -326,7 +333,18 @@
     for (let k = 0; k < costa.length; k += 7) { const [x, y, nx, ny] = costa[k], tx = x - nx * 6, ty = y - ny * 6; const h = hash(k, 3);
       if (h < .55) P.coqueiro(tx, ty); else if (h < .7) P.pedra(tx, ty + 2); else if (h < .78) { P.R(tx - 6, ty - 1, 12, 5, ['#e8433a', '#3c6aa8', '#f2c94c'][k % 3]); P.R(tx - 1, ty - 10, 1, 10, '#7a7a7a'); for (let j = 0; j < 9; j++) P.R(tx - 6 + j * 1.4, ty - 11 + Math.abs(j - 4) * .5, 2, 2, j % 2 ? '#f2f2ee' : '#e8433a'); } // coqueiros, pedras e guarda-sol
       const cxx = Math.max(0, Math.min(W - 1, x)), cyy = Math.max(0, Math.min(H - 1, y)), dd = Math.hypot(x - cxx, y - cyy); if (dd > melhor && x > W * .5) { melhor = dd; farol = [x - nx * 16, y - ny * 16]; } }
-    for (let k = 0; k < 70; k++) { const x = -PAD + hash(k, 7) * W2, y = -PAD + hash(k, 8) * H2, X = Math.round(x + PAD), Y = Math.round(y + PAD); if (X < 0 || Y < 0 || X >= W2 || Y >= H2 || cls[Y * W2 + X] !== 1 || (x >= -4 && x < W + 4 && y >= -4 && y < H + 4)) continue; P.arvore(x, y, .8 + hash(k, 9) * .4, k % 4 ? 'verde' : 'amarela', k); }
+    // enfeites na terra em volta do mapa: árvores, cacaueiros, arbustos, flores, pedras e casinhas com cerca (nada encostando no mapa, para não ser cortado)
+    const livre = (x, y, r) => { for (const [dx, dy] of [[0, 0], [-r, 0], [r, 0], [0, -r], [0, 3]]) { const X = Math.round(x + dx + PAD), Y = Math.round(y + dy + PAD); if (X < 0 || Y < 0 || X >= W2 || Y >= H2 || cls[Y * W2 + X] !== 1 || trilha[Y * W2 + X]) return false; } return x < -r - 4 || x > W + r + 4 || y < -4 || y > H + 34; };
+    const ocupados = [];
+    for (let k = 0; k < 1400; k++) { const x = -PAD + hash(k, 7) * W2, y = -PAD + hash(k, 8) * H2, h = hash(k, 9), raio = h < .45 ? 14 : h < .62 ? 12 : h < .66 ? 26 : 7;
+      if (!livre(x, y, raio) || ocupados.some(([ox, oy, or]) => Math.hypot(ox - x, oy - y) < (or + raio) * .9)) continue; ocupados.push([x, y, raio]);
+      if (h < .3) P.arvore(x, y, .8 + hash(k, 10) * .4, k % 5 ? 'verde' : 'amarela', k);
+      else if (h < .45) P.cacaueiro(x, y, .9 + hash(k, 10) * .3, k);
+      else if (h < .55) P.arbusto(x, y, k, hash(k, 11) > .5);
+      else if (h < .62) P.coqueiro(x, y);
+      else if (h < .66) { P.casa(x - 12, y - 20, 24, 20, { parede: ['#f2e6d4', '#d8ecf6', '#f6dede', '#f2ecc0'][k % 4], telhado: ['#d0683a', '#b84a3a', '#c8783a'][k % 3] }); P.cercaH(x - 22, y + 8, 44); }
+      else if (h < .86) P.flores(x - 6, y - 4, [['#ffe14a', '#ffffff'], ['#ff8ab0', '#ffe14a'], ['#c8a0ff', '#ffffff'], ['#ff6a4a', '#ffe14a']][k % 4]);
+      else P.pedra(x, y); }
     if (farol) { const [fx, fy] = farol, R = P.R; P.sombra(fx + 4, fy + 2, 10, 3, .3); R(fx - 7, fy - 4, 14, 6, '#8a9096'); for (let j = 0; j < 7; j++) { const w = 10 - j * .7; R(fx - w / 2, fy - 8 - j * 6, w, 6, j % 2 ? '#f2f2ee' : '#c43c3a'); } R(fx - 5, fy - 52, 10, 8, '#2a3a4a'); R(fx - 3, fy - 50, 6, 4, '#fff2b0'); R(fx - 6, fy - 54, 12, 3, '#c43c3a'); R(fx - 2, fy - 58, 4, 4, '#2a3a4a'); }
     const eolicas = []; for (let k = 0; k < 400 && eolicas.length < (o.eolicas || 0); k++) { const x = -PAD + hash(k, 21) * W2, y = -PAD + hash(k, 22) * H2, X = Math.round(x + PAD), Y = Math.round(y + PAD);
       if (X < 0 || Y < 0 || X >= W2 || Y >= H2 || cls[Y * W2 + X] !== 1 || (x > -10 && x < W + 10 && y > -10 && y < H + 10) || eolicas.some(([ex, ey]) => Math.hypot(ex - x, ey - y) < 60)) continue; eolicas.push([x, y, hash(k, 23) * 6]); P.sombra(x + 6, y + 1, 9, 3, .28); P.R(x - 4, y - 2, 9, 4, '#a8aeb4'); }
