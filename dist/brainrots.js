@@ -33,9 +33,14 @@
 
   /* ---------- acabamento: luz, sombra e contorno ---------- */
   const mistura = (a, b, k) => [0, 1, 2].map((i) => Math.round(a[i] + (b[i] - a[i]) * k));
-  const LUZ = [255, 236, 255], SOMBRA = [40, 14, 64], BORDA = [30, 8, 44];
+  const LUZ = [255, 236, 255], SOMBRA = [40, 14, 64], BORDA = [52, 32, 66];
   // tom roxo do Marco: cada cor puxa para o roxo mantendo o claro/escuro (olhos e dentes ficam como estão)
-  const ROXO = .66, roxo = (rgb) => { const L = rgb[0] * .3 + rgb[1] * .55 + rgb[2] * .15; return mistura(rgb, [Math.min(255, L * .82 + 56), Math.min(255, L * .42), Math.min(255, L * .95 + 92)], ROXO); };
+  const ROXO = .66, DESBOTA = .3, CLAREIA = .24, roxo = (rgb, x, y) => { const L = rgb[0] * .3 + rgb[1] * .55 + rgb[2] * .15;
+    let c = mistura(rgb, [Math.min(255, L * .82 + 56), Math.min(255, L * .42), Math.min(255, L * .95 + 92)], ROXO);
+    const L2 = c[0] * .3 + c[1] * .55 + c[2] * .15; c = mistura(c, [L2, L2, L2], DESBOTA); c = mistura(c, [236, 224, 246], CLAREIA); // mais claro e desbotado (lilás)
+    const h = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453 % 1, k = h < 0 ? h + 1 : h; // desgaste: pixels gastos e manchinhas, sempre nos mesmos lugares
+    if (k > .9) c = mistura(c, [246, 240, 250], .3); else if (k < .06) c = mistura(c, [70, 50, 90], .16);
+    return c; };
   function acabamento(cv) {
     const ctx = cv.getContext('2d'), img = ctx.getImageData(0, 0, W, H), d = img.data, cor = new Int32Array(W * H).fill(-1);
     for (let i = 0; i < W * H; i++) if (d[i * 4 + 3] > 127) cor[i] = (d[i * 4] << 16) | (d[i * 4 + 1] << 8) | d[i * 4 + 2];
@@ -52,7 +57,7 @@
         else if (em(x, y + 2) !== c) rgb = mistura(rgb, SOMBRA, .14);          // meia-sombra
         else if (esq || em(x - 1, y - 1) !== c || em(x, y - 2) !== c) rgb = mistura(rgb, LUZ, .14); // meia-luz
       }
-      if (!plano.has(c)) rgb = roxo(rgb);
+      if (!plano.has(c)) rgb = roxo(rgb, x, y);
       out.set([...rgb, 255], i * 4); }
     img.data.set(out); ctx.putImageData(img, 0, 0);
   }
