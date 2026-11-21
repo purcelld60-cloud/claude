@@ -151,3 +151,12 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Editor "mudar botões de lugar" da Campanha 2:** funciona com a cópia e salva em `daroca-c2-layout-v2`; o layout antigo foi zerado. Também corrigi o "soltar" do editor, que às vezes continuava arrastando.
   
   Se mudar os controles da principal, a Campanha 2 acompanha sozinha.
+- **2026-11-21 · Claude:** a **Campanha 2 joga exatamente como a principal** (é continuação). Números copiados do `game.js`:
+  - **Física (`jogo.js`, `fisica`):** velocidade 280 com aceleração 1800/1150/2200/950, pulo 365, gravidade 850 e teto em y=95; passos animados pela velocidade e pouso.
+  - **Voo (`treino.js`):** segurando o pulo, sobe até 235 (empuxo 1050) e gasta 17 de gás por segundo; recarrega 16/s no chão e 6/s no ar; faíscas verdes iguais às da principal.
+  - **Papel:** reto a 600, mira no inimigo mais perto, 30 de munição (+1 a cada 1,1 s, mostrada no HUD como ◆) e rajada segurando o botão (0,23 s).
+  - **Dash:** 600 por 0,2 s, rastro de imagens do Da Roça, poeira e invencível 0,18 s.
+  - **Peido:** em área, com combo de 3 (raio 155/205/260, gás 20/17/20).
+  - **Dano:** continua o da Campanha 2 (papel 6, peido 9 × combo), para não mexer na dificuldade.
+  - **Câmera de perto como a principal (`enquadrar()`):** com a tela mais larga que 16:9, preenche a largura e acompanha o Da Roça na vertical (mesma conta do `followFill` do `ui.js`). Nas cutscenes mostra o quadro inteiro.
+  - **Visual do Da Roça:** fica musculoso se terminou o treino do Caleb na campanha 1.
