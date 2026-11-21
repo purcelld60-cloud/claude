@@ -425,7 +425,8 @@
     emLuta = true; aberto = false; cancelAnimationFrame(raf); keys.clear(); joy = 0; devolverTopo(); box.hidden = true; salvarProgressao();
   }
   function voltarDaLuta(f, r) {
-    emLuta = false; aberto = true; box.hidden = false; keys.clear(); joy = 0; safe(controlesC1); last = performance.now(); raf = requestAnimationFrame(frame);
+    emLuta = false; aberto = true; box.hidden = false; keys.clear(); joy = 0; safe(controlesC1); last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
+    window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: true } })); // a Campanha 2 volta a ler os controles
     if (r === 'venceu') { P.hp = Math.max(P.hp, Math.round((P.max || 100) * .5)); safe(() => apiFase.vencer()); }
     else if (r === 'recuou') { safe(() => voltarDoDesmaio()); aviso('Você saiu da arena. Respire e volte quando quiser.'); }
     else desmaiar();

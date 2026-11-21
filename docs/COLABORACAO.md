@@ -222,3 +222,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - tábuas pregadas com veios e ícones em pixel (`.tr-ico`); o JOGAR é pintado de verde e pulsa;
     - botões dos cantos em blocos de madeira e painel JOGAR/MULTIPLAYER em moldura de madeira;
     - **ids e funções dos botões não mudaram.**
+- **2026-11-21 · Claude:** **corrigido: Da Roça travado nas lutas da Campanha 2.**
+  - **Causa:** a Campanha 2 manda `controls-capture {active:true}` ao abrir, porque é ela que lê os controles. Ao passar a luta para o motor da principal (`lutaC1`), ela não devolvia os controles. Com `inputCaptured` ligado, o `game.js` ignorava andar, pular e bater.
+  - **Correção:**
+    - `C2Luta.iniciar` manda `controls-capture {active:false}` antes do `startSandboxBoss`;
+    - `voltarDaLuta` manda `{active:true}` de novo quando a luta acaba.
+  - **Atenção para quem mexer aqui:** toda tela que passar o controle para o `game.js` precisa soltar o `controls-capture` antes.
+  - Teste novo: `tools/varredura/luta-c2-real.js` (entra pela tela inicial, anda até a arena, pula a cutscene e tenta andar).

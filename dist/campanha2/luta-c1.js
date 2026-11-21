@@ -26,6 +26,8 @@
     skin = { kit: k.kit, vida: k.vida, dano: 1.3, tipo: o.tipo, nome: o.nome || o.slug, tema: o.slug, cena: o.cena, bossX: o.bossX };
     const larg = window.CampanhaCenarios?.largura?.(o.cena) || 4000; camBase = Math.max(0, Math.min(larg - 960, (Number(o.bossX) || 480) - 480)); cam0 = null; aoFim = fim;
     try { if (localStorage.getItem('daroca-sandbox-v1') !== '1') localStorage.setItem('daroca-sandbox-v1', '1'); } catch (e) {} // quem chegou na Campanha 2 já terminou a principal
+    // a Campanha 2 segura os controles enquanto está aberta (controls-capture); na luta quem joga é o motor da principal
+    try { dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } })); } catch (e) {}
     let ok = false; try { ok = !!window.Game.startSandboxBoss(k.kit); } catch (e) { ok = false; }
     if (!ok) { skin = null; aoFim = null; } return ok;
   }
