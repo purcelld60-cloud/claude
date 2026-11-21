@@ -229,3 +229,7 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - `voltarDaLuta` manda `{active:true}` de novo quando a luta acaba.
   - **Atenção para quem mexer aqui:** toda tela que passar o controle para o `game.js` precisa soltar o `controls-capture` antes.
   - Teste novo: `tools/varredura/luta-c2-real.js` (entra pela tela inicial, anda até a arena, pula a cutscene e tenta andar).
+- **2026-11-21 · Claude:** **Campanha 2: botões de toque somem nos diálogos** (`jogo.js`):
+  - Valem como diálogo: cutscene, conversa com aliado, morador (`CampanhaMoradores.aberto()`) e pergunta (`.escolha`).
+  - Enquanto há diálogo, o `.c2j` ganha a classe `c2-dialogo`. Joystick e botões ficam invisíveis e sem toque; o "PULAR CENA" continua.
+  - Tocar em qualquer lugar da tela avança a fala. No fim do diálogo, os botões voltam.
