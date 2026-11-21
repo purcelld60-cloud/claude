@@ -101,3 +101,9 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Chegada do carro a gás** (`chegada-carro.js`): depois do voo no mapa, cada fase tem uma chegada própria (paraquedas no colégio, flexões na academia, derrapagem na quadra, bigode na Bigodon...). Ganchos no `game.js`: `travel()`, `arrive()`, update e desenho do herói.
   - **Balanço da roça** (`balanco.js`): o Da Roça agora fica sentado e impulsiona com as pernas.
   - **Pastas de música** (`dist/musicas/<lugar>/`, lista em `dist/musicas/pastas.json`): 74 pastas, cada uma com LEIA-ME. O `musicas.py` lê as subpastas, sorteia quando há várias músicas e reconhece cópias das originais pelo SHA-256. A Campanha 2 agora toca as pastas `c2-*` (contextos `c2.maps.<chave>` e `c2.battles.<chefe>`). O workflow `pasta-musicas.yml` publica o ZIP com as músicas originais em cada pasta.
+- **2026-11-21 · Claude:** os brainrots (`brainrots.js`) viraram sprites de pixel art de verdade, a pedido do dono (estilo da imagem de referência dele):
+  - arte em baixa resolução, com 1 pixel da arte valendo 2 do jogo;
+  - contorno escuro, luz em cima e sombra embaixo, gerados sozinhos a partir das cores;
+  - 8 quadros de animação em cache e, no golpe, o inimigo pisca em branco.
+  
+  Para criar mais um brainrot, acrescente uma função em `SPRITES`.
