@@ -122,8 +122,8 @@
     ferir: (n, de) => ferir(n, de),
     entrarArena: () => { const f = fase; S.flags.cp = { cena: cenaId, x: f.F.checkpoint }; salvar(); tocarDeslocado(f.F.intro, f.chefe.x, f.chefe.tipo, () => f.comecarLuta()); },
     vencer: () => { const f = fase, slug = f.slug;
-      if (f.F.final) { tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => tocar('c2_creditos', () => { S.flags.venceu_jorge = 1; S.flags.zerou = 1; delete S.flags.cp; fase = null; passo('zerou'); salvar(); telaFim(); })); return; }
-      tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => { window.CampanhaTaxi?.vencer?.(slug); S.flags['venceu_' + slug] = 1; delete S.flags.cp; fase = null; passo(APOS_VITORIA[slug]); salvar('JOGO SALVO'); }); }
+      if (f.F.final) { ganharXP(1200, 'c2-chefe-jorge'); tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => tocar('c2_creditos', () => { S.flags.venceu_jorge = 1; S.flags.zerou = 1; delete S.flags.cp; fase = null; passo('zerou'); salvar(); telaFim(); })); return; }
+      ganharXP(600, 'c2-chefe-' + slug); tocarDeslocado(f.F.derrota, f.chefe.x, f.chefe.tipo, () => { window.CampanhaTaxi?.vencer?.(slug); S.flags['venceu_' + slug] = 1; delete S.flags.cp; fase = null; passo(APOS_VITORIA[slug]); salvar('JOGO SALVO'); }); }
   };
   function ferir(n, de) {
     if (morto || cut || (P.inv || 0) > 0 || viagem) return; n = window.CampanhaPoderes?.filtrarDano?.(n) ?? n; if (!n) { sfx('plim'); return; }
@@ -206,7 +206,7 @@
   function fisica(dt) {
     const d = D(), dir = (keys.has('right') ? 1 : 0) - (keys.has('left') ? 1 : 0) || Math.sign(Math.round(joy * 2)); if (dir) P.facing = dir;
     // andar, pular e cair com os MESMOS números da campanha 1 (game.js): velocidade 280 com aceleração, gravidade 850
-    if (!TR()?.dashing?.()) { const alvo = dir * 280 * (TR()?.velocidade?.() || 1) * ((P.atordoado || 0) > 0 ? .4 : 1) * (window.CampanhaAliados?.velocidade?.() || 1), ac = dir ? (P.ground ? 1800 : 1150) : (P.ground ? 2200 : 950);
+    if (!TR()?.dashing?.()) { const alvo = dir * (TR()?.bonus?.().moveSpeed || 280) * (TR()?.velocidade?.() || 1) * ((P.atordoado || 0) > 0 ? .4 : 1) * (window.CampanhaAliados?.velocidade?.() || 1), ac = dir ? (P.ground ? 1800 : 1150) : (P.ground ? 2200 : 950);
       P.vx += clamp(alvo - P.vx, -ac * dt, ac * dt); if (Math.abs(P.vx) < .1) P.vx = 0; }
     P.anim = (P.anim || 0) + Math.abs(P.vx) * dt / 18.3; const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
     const prevY = P.y, chao0 = P.ground; P.vy = Math.min(900, P.vy + 850 * dt); P.y += P.vy * dt; P.ground = false; if (P.y < 95) { P.y = 95; P.vy = Math.max(0, P.vy); }
@@ -256,7 +256,7 @@
 .c2j .hud{position:absolute;inset:0;pointer-events:none}.c2j .hud>*{pointer-events:auto}
 .c2j .vida{position:absolute;left:1.6%;top:2.4%;display:flex;flex-direction:column;gap:4px;background:#2a1e14e6;border:3px solid #8a6a3a;box-shadow:0 0 0 2px #120c08;padding:6px 8px}
 .c2j .vida .cor{display:flex;gap:3px}.c2j .vida .cor i{width:14px;height:12px;background:#5a2a24;clip-path:polygon(0 25%,25% 0,50% 25%,75% 0,100% 25%,100% 50%,50% 100%,0 50%)}.c2j .vida .cor i.on{background:#e8433a}.c2j .vida .cor i.meio{background:linear-gradient(90deg,#e8433a 50%,#5a2a24 50%)}
-.c2j .vida .gas{height:6px;width:96px;background:#1c1408;border:1px solid #6a5a3a}.c2j .vida .gas b{display:block;height:100%;background:linear-gradient(#9ae06a,#4a9a3a)}.c2j .vida .moedas{font-size:9px;color:#ffd24a}.c2j .vida .papeis{font-size:9px;color:#fff1bf}.c2j.preencher{display:block}.c2j.preencher .tela{position:absolute;left:0;top:0;width:100vw;height:56.25vw;max-height:none;aspect-ratio:auto;top:var(--c2-pan,0px)}.c2j.preencher .tela>.hud,.c2j.preencher .tela>.pular,.c2j.preencher .tela>.pausa,.c2j.preencher .tela>.escolha,.c2j.preencher .tela>.c2-editor{position:fixed}
+.c2j .vida .gas{height:6px;width:96px;background:#1c1408;border:1px solid #6a5a3a}.c2j .vida .gas b{display:block;height:100%;background:linear-gradient(#9ae06a,#4a9a3a)}.c2j .vida .moedas{font-size:9px;color:#ffd24a}.c2j .vida .papeis{font-size:9px;color:#fff1bf}.c2j.c1-topo .hud .vida,.c2j.c1-topo .hud .menu{display:none!important}.c2j.c1-topo .obj{top:clamp(54px,13%,80px)!important}#c2GameShell .game-topbar{pointer-events:auto}#c2GameShell #travelBtn{display:none!important}.c2j.preencher{display:block}.c2j.preencher .tela{position:absolute;left:0;top:0;width:100vw;height:56.25vw;max-height:none;aspect-ratio:auto;top:var(--c2-pan,0px)}.c2j.preencher .tela>.hud,.c2j.preencher .tela>.pular,.c2j.preencher .tela>.pausa,.c2j.preencher .tela>.escolha,.c2j.preencher .tela>.c2-editor{position:fixed}
 .c2j .obj{position:absolute;left:50%;top:2.4%;transform:translateX(-50%);max-width:52%;background:#f2dc9ae8;color:#3a2412;border:3px solid #2a1a10;padding:6px 10px;font:clamp(9px,1.25vw,13px) Space,Arial,sans-serif;line-height:1.35;box-shadow:3px 4px 0 #0006}
 .c2j .obj b{display:block;font:clamp(7px,.8vw,9px) Pixel,monospace;color:#8a4a2a;margin-bottom:2px}.c2j .obj.novo{animation:c2jObj .8s cubic-bezier(.2,1.6,.4,1)}@keyframes c2jObj{from{transform:translateX(-50%) scale(.6);opacity:0}}
 .c2j .menu{position:absolute;right:1.6%;top:2.4%;width:42px;height:42px;font:16px Pixel,monospace;background:#4a3420;color:#f6ead0;border:3px solid #e8c66a;box-shadow:0 4px 0 #2a1a10;cursor:pointer}
@@ -276,7 +276,7 @@
   function montar() {
     css(); box = document.createElement('div'); box.className = 'c2j'; box.hidden = true;
     box.innerHTML = `<div class="tela"><canvas class="mundo" width="960" height="540"></canvas><div class="hud"><div class="vida"><div class="cor"></div><div class="gas"><b></b></div><div class="moedas"></div><div class="papeis"></div></div><div class="obj"><b>OBJETIVO</b><span></span></div><button type="button" class="menu" aria-label="Pausa">☰</button><button type="button" class="entrar" hidden></button><div class="joy move-joystick"><span class="joystick-directions" aria-hidden="true"></span><span class="joystick-knob" aria-hidden="true"><i></i></span></div></div><div class="avisos"></div><button type="button" class="pular" hidden>PULAR CENA ▶▶</button></div>`;
-    document.body.appendChild(box); cv = box.querySelector('canvas.mundo'); c = cv.getContext('2d', { alpha: false }); c.imageSmoothingEnabled = false; hud = box.querySelector('.hud');
+    document.body.appendChild(box); box.addEventListener('click', interceptarTopo, true); box.addEventListener('pointerdown', interceptarTopo, true); cv = box.querySelector('canvas.mundo'); c = cv.getContext('2d', { alpha: false }); c.imageSmoothingEnabled = false; hud = box.querySelector('.hud');
     box.querySelector('.menu').addEventListener('click', () => pausar(true)); box.querySelector('.entrar').addEventListener('click', usar);
     box.querySelector('.pular').addEventListener('click', (e) => { e.stopPropagation(); pularCut(); });
     cv.addEventListener('pointerdown', () => { if (cut) avancarCut(); });
@@ -298,17 +298,17 @@
   const FORA = /^(in-main-menu|is-paused|is-cutscene|is-dialog|is-chapter-ended|is-routing|is-training|is-activity|is-epilogue|is-ollyan-flight|campaign-layout-editing|is-room|is-arena|is-boss)$/;
   let cssC1 = false;
   function copiarCssC1() {
-    if (cssC1) return; cssC1 = true; const rel = /touch|joystick|crafted|-btn|c2-poder|c2-controles|campaign-layout/;
+    if (cssC1) return; cssC1 = true; const rel = /touch|joystick|crafted|-btn|c2-poder|c2-controles|campaign-layout|topbar|hud-|player-info|gas-|ammo|paper-icon|inventory|weapon|location|pin-icon|game-actions|icon-button|fullscreen|progress|xp-|stats|hearts|miniPortrait|campaign-chapter|statsBtn|levelValue|pointsValue/; // controles, barra de cima e painéis DADOS/INVENTÁRIO
     const conv = (r) => { if (r.selectorText !== undefined) return r.selectorText.includes('#gameShell') && rel.test(r.selectorText) ? r.cssText.replace(/#gameShell/g, '#c2GameShell') + '\n' : '';
       if (r.cssRules && r.media) { let i = ''; for (const q of r.cssRules) i += conv(q); return i ? `@media ${r.media.mediaText}{${i}}\n` : ''; }
       if (r.cssRules && r.conditionText !== undefined) { let i = ''; for (const q of r.cssRules) i += conv(q); return i ? `@supports ${r.conditionText}{${i}}\n` : ''; } return ''; };
     let txt = ''; for (const sh of document.styleSheets) { let rules; try { rules = sh.cssRules; } catch (e) { continue; } for (const r of rules || []) { try { txt += conv(r); } catch (e) {} } }
-    txt += `.c2j>.c2-c1-shell.game-shell{position:fixed!important;inset:0!important;width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;outline:0!important;overflow:visible!important;pointer-events:none!important;z-index:4!important;transform:none!important;filter:none!important}
+    txt += `.c2j>#c2GameShell.c2-c1-shell.game-shell{position:fixed!important;inset:0!important;width:auto!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;outline:0!important;overflow:visible!important;pointer-events:none!important;z-index:4!important;transform:none!important;filter:none!important}
 .c2j>.c2-c1-shell .touch-controls{pointer-events:auto}.c2j.c1-botoes .c2-treino-ctl,.c2j.c1-botoes .joy{display:none!important}.c2j.c2-editando-c1 .c2-c1-shell .touch-controls{pointer-events:auto}`;
     const st = document.createElement('style'); st.id = 'c2C1BotoesCss'; st.textContent = txt; document.head.appendChild(st);
   }
   function controlesC1() {
-    const tela = box.querySelector('.tela'); box.querySelector('.c2-c1-shell')?.remove(); box.classList.remove('c1-botoes');
+    const tela = box.querySelector('.tela'); devolverTopo(); box.querySelector('.c2-c1-shell')?.remove(); box.classList.remove('c1-botoes');
     const shell = document.getElementById('gameShell'), orig = shell?.querySelector('.touch-controls'); if (!orig) return false;
     copiarCssC1();
     const w = document.createElement('div'); w.className = [...shell.classList].filter((k) => !FORA.test(k)).join(' ') + ' game-shell c2-c1-shell c2-controles campaign-layout-ready campaign-layout-playable'; w.id = 'c2GameShell'; const est = shell.getAttribute('style'); if (est) w.setAttribute('style', est);
@@ -322,9 +322,10 @@
     for (const b of cl.querySelectorAll('[data-action]')) { const id = b.dataset.action; b.dataset.acao = id;
       const down = (e) => { e.preventDefault(); b.classList.add('pressed'); acionarBotao(id, true); }, up = () => { if (!b.classList.contains('pressed')) return; b.classList.remove('pressed'); acionarBotao(id, false); };
       b.addEventListener('pointerdown', down); b.addEventListener('pointerup', up); b.addEventListener('pointerleave', up); b.addEventListener('pointercancel', up); b.addEventListener('contextmenu', (e) => e.preventDefault()); }
-    ligarJoy(cl.querySelector('.move-joystick')); copiarPoderes(true);
+    ligarJoy(cl.querySelector('.move-joystick')); copiarPoderes(true); levarTopo(w);
     safe(() => window.CampanhaBotoes?.aplicar?.(tela)); return true;
   }
+  function interceptarTopo(e) { if (!topo || !topo.el.contains(e.target)) return; const b = e.target.closest('#pauseBtn'); if (b) { e.preventDefault(); e.stopImmediatePropagation(); if (e.type === 'click') pausar(!pausado); } }
   let ultPoder = 0;
   function copiarPoderes(ja) { // os botões de poder da principal (atualizados pelo poderes.js) → a cópia
     const agora = performance.now(); if (!ja && agora - ultPoder < 150) return; ultPoder = agora; const w = box?.querySelector('.c2-c1-shell'); if (!w) return;
@@ -396,11 +397,53 @@
   }
   function hudAtualizar() {
     copiarPoderes();
+    topoAtualizar();
     const cor = box.querySelector('.vida .cor'), n = Math.round((P.max || 100) / 20), hp = clamp(P.hp, 0, P.max || 100) / 20; let h = ''; for (let i = 0; i < n; i++) h += `<i class="${hp >= i + 1 ? 'on' : hp > i + .3 ? 'meio' : ''}"></i>`; if (cor.innerHTML !== h) cor.innerHTML = h;
     box.querySelector('.vida .gas b').style.width = `${clamp(TR()?.gas?.() ?? 100, 0, 100)}%`; box.querySelector('.vida .moedas').textContent = `● ${window.CampanhaLoja?.moedas?.() ?? 0}`; { const pp = box.querySelector('.vida .papeis'), tx = `◆ ${TR()?.papeis?.() ?? 30}`; if (pp && pp.textContent !== tx) pp.textContent = tx; }
     const e = box.querySelector('.entrar'); e.hidden = !perto || !!cut; if (perto) e.textContent = perto.botao || (perto.tipo === 'poderes' ? 'PODERES' : perto.tipo === 'pc' ? 'USAR' : perto.tipo === 'armario' ? 'ABRIR' : perto.tipo === 'rolante' ? (perto.ate[1] < FLOOR ? 'SUBIR' : 'DESCER') : /^SAIR|DESCER/.test(perto.rotulo) ? 'SAIR' : 'ENTRAR');
   }
 
+  /* ---------- continuação da campanha 1: progressão (XP, nível, atributos), arma, itens e a barra de cima ---------- */
+  const SAVE1 = 'da-roca-adventure-v1';
+  const save1 = () => { try { return JSON.parse(localStorage.getItem(SAVE1) || 'null'); } catch (e) { return null; } };
+  function carregarC1() {
+    let st = null; try { st = window.Game?.getState?.(); } catch (e) {}
+    if (st?.started) { TR()?.dadosC1?.({ weapon: st.weapon || 0, trained: !!st.q?.trained, miqueias: !!st.q?.miqueias }); return; }
+    const sv = save1(); // a principal ainda não abriu nesta sessão: lê o save dela (sem regravar nada)
+    if (sv) { try { const cur = window.Progression?.getState?.(); if (sv.progression && (!cur || (cur.totalXP || 0) < (sv.progression.totalXP || 0))) window.Progression.restore(sv.progression); } catch (e) {}
+      TR()?.dadosC1?.({ weapon: Number(sv.weapon) || 0, trained: sv.q ? !!sv.q.trained : true, miqueias: !!sv.q?.miqueias }); }
+    else if (S?.progressao) { try { window.Progression?.restore?.(S.progressao); } catch (e) {} }
+  }
+  let tSalvarProg = 0;
+  function salvarProgressao() { clearTimeout(tSalvarProg); tSalvarProg = setTimeout(() => { // grava só a progressão no save da principal (o resto do save fica intacto)
+    const pr = window.Progression?.serialize?.(); if (!pr) return; const sv = save1(); if (sv) { sv.progression = pr; try { localStorage.setItem(SAVE1, JSON.stringify(sv)); } catch (e) {} } if (S) { S.progressao = pr; salvar(); } }, 400); }
+  const xpTxt = [];
+  function ganharXP(n, id, x, y) {
+    const antes = window.Progression?.getState?.()?.level || 1, r = window.Progression?.award?.(n, id); if (!r?.awarded) return r;
+    if (x !== undefined) xpTxt.push({ x, y, s: '+' + r.awarded + ' XP', t: 0 });
+    if ((r.level || antes) > antes) { P.hp = vidaMax(); TR()?.encher?.(); aviso('Nível ' + r.level + '! Abra DADOS → ATRIBUTOS para distribuir seus pontos.'); sfx('fanfarra'); }
+    salvarProgressao(); return r;
+  }
+  const vidaMax = () => Math.round((TR()?.bonus?.().maxHP || 100) * ((window.CampanhaAliados?.vidaMax?.() || 100) / 100));
+  addEventListener('c2-atributo', () => { if (!aberto) return; const antes = P.max || 100; P.max = vidaMax(); if (P.max > antes) P.hp = Math.min(P.max, P.hp + (P.max - antes)); salvarProgressao(); });
+  // barra de cima da campanha 1 (retrato, corações, gás, papel, DADOS, INVENTÁRIO, XP, ATRIBUTOS, som, pausa, tela cheia)
+  let topo = null;
+  function levarTopo(w) {
+    const shell = document.getElementById('gameShell'), bar = topo?.el || shell?.querySelector('.game-topbar'); if (!bar || !w) return;
+    if (!topo) { topo = { el: bar, pai: bar.parentNode, prox: bar.nextSibling, txt: {} }; for (const id of ['hpValue', 'paperValue', 'gasPercent', 'stageName']) { const e = document.getElementById(id); if (e) topo.txt[id] = e.textContent; } topo.gasW = document.getElementById('gasFill')?.style.width || ''; }
+    w.appendChild(bar); box.classList.add('c1-topo'); topoAtualizar(true);
+  }
+  function devolverTopo() {
+    if (!topo) return; try { topo.pai.insertBefore(topo.el, topo.prox && topo.prox.parentNode === topo.pai ? topo.prox : null); } catch (e) { try { topo.pai.appendChild(topo.el); } catch (e2) {} }
+    for (const [id, v] of Object.entries(topo.txt)) { const e = document.getElementById(id); if (e) e.textContent = v; } const gf = document.getElementById('gasFill'); if (gf) gf.style.width = topo.gasW; window.HudMinimal?.close?.(); topo = null; box?.classList.remove('c1-topo');
+  }
+  const pôr = (id, v) => { const e = document.getElementById(id); if (e && e.textContent !== v) e.textContent = v; };
+  function topoAtualizar() {
+    if (!topo) return; const max = P.max || 100, h = clamp(Math.ceil(P.hp / max * 5), 0, 5);
+    pôr('hpValue', ('♥ '.repeat(h) + '♡ '.repeat(5 - h)).trim()); pôr('paperValue', String(TR()?.papeis?.() ?? 30));
+    const g = TR()?.gas?.() ?? 100, gm = TR()?.gasMax?.() || 100, pct = Math.floor(clamp(g / gm, 0, 1) * 100); pôr('gasPercent', pct + '%'); const gf = document.getElementById('gasFill'); if (gf && gf.style.width !== pct + '%') gf.style.width = pct + '%';
+    const nome = (D()?.nome || '').toUpperCase(); if (nome) pôr('stageName', nome);
+  }
   /* ---------- câmera de perto, como a campanha principal (ui.js followFill) ---------- */
   let pan = null, preenche = false;
   function enquadrar(dt) {
@@ -416,7 +459,7 @@
     if (!aberto) return; raf = requestAnimationFrame(frame);
     const dt = Math.min(.05, Math.max(0, (now - last) / 1000)); fpsMedio += ((dt > 0 ? 1 / Math.max(dt, (now - last + 1e-3) / 1000) : 60) - fpsMedio) * .05; last = now;
     const cob = coberto(); box.style.visibility = cob ? 'hidden' : 'visible'; if (cob) return;
-    P.max = window.CampanhaAliados?.vidaMax?.() || 100; if (window.CampanhaAliados?.ocupado?.()) { window.CampanhaAliados.atualizar(dt, []); return; }
+    P.max = vidaMax(); if (window.CampanhaAliados?.ocupado?.()) { window.CampanhaAliados.atualizar(dt, []); return; }
     if (cut) { RT().update(cut.s, dt); if (cut.s.done) { const f = cut.depois; cut = null; hudVisivel(true); try { window.DayTime?.force?.(null); } catch (e) {} f?.(); } else { safe(() => enquadrar(dt)); c.save(); RT().draw(c, cut.s); c.restore(); return; } } // cutscene: quadro inteiro, como as cenas de história da principal
     if (pausado || ocupado()) { keys.clear(); P.vx = 0; }
     t += dt; const d = D();
@@ -440,6 +483,7 @@
     safe(() => window.Interact?.drawFront?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
     procurarPerto();
     if (perto) { c.font = '11px Pixel, monospace'; const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); c.textAlign = 'left'; }
+    c.font = '13px Pixel, monospace'; c.textAlign = 'center'; for (let i = xpTxt.length - 1; i >= 0; i--) { const x0 = xpTxt[i]; x0.t += 1 / 60; if (x0.t > 1.2) { xpTxt.splice(i, 1); continue; } c.globalAlpha = Math.min(1, (1.2 - x0.t) * 2); c.fillStyle = '#2a1a08'; c.fillText(x0.s, x0.x + 2, x0.y - x0.t * 30 + 2); c.fillStyle = '#ffec91'; c.fillText(x0.s, x0.x, x0.y - x0.t * 30); } c.globalAlpha = 1;
     c.font = '16px Pixel, monospace'; c.textAlign = 'center'; for (const d0 of dano) { c.globalAlpha = 1 - d0.t; c.fillStyle = '#2a0808'; c.fillText(d0.s, d0.x + 2, d0.y - d0.t * 40 + 2); c.fillStyle = '#ff5a4a'; c.fillText(d0.s, d0.x, d0.y - d0.t * 40); } c.globalAlpha = 1; c.textAlign = 'left';
     c.restore(); safe(() => window.CampanhaAmbientes?.cobrir?.(c, d.id, cam));
     if (!F?.emArena?.()) setaObjetivo(); if (F) F.desenharTela(c, W);
@@ -457,13 +501,14 @@
     if (!box) montar(); S = (!o.novo && carregar()) || novoSave(); if (S.passo === 'bairro') S.passo = 'creuza'; if (S.passo === 'fim6b') S.passo = 'ir_barao'; if (S.passo === 'fim6c') S.passo = 'ir_centro'; fase = null; morto = false; box.querySelector('.pausa')?.remove(); if (o.novo) safe(() => localStorage.removeItem(KEY));
     aberto = true; box.hidden = false; pausado = false; cut = null; keys.clear(); P.hp = S.hp || 100;
     window.CampanhaAliados?.ligar?.({ P, S: () => S, salvar: () => salvar(), item, aviso, sfx, conversa: (npc) => conversa(npc), escolher: (q, pg, ops, cb) => escolher(q, pg, ops, cb, true), tela: () => box.querySelector('.tela'), cena: () => cenaId, pausar: (v) => { keys.clear(); hudVisivel(!v); box.querySelector('.pular').hidden = true; } });
-    TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaBotoes?.aplicar?.(box.querySelector('.tela'))); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true })); safe(controlesC1); dispatchEvent(new Event('c2-controles')); requestAnimationFrame(() => requestAnimationFrame(() => { if (aberto) safe(controlesC1); })); // de novo, com o layout da principal já calculado
+    TR()?.ligar?.(true, P, { jogo: true }); safe(() => window.CampanhaBotoes?.aplicar?.(box.querySelector('.tela'))); safe(carregarC1); safe(() => window.CampanhaPoderes?.controles?.(true, { forcar: true })); safe(controlesC1); dispatchEvent(new Event('c2-controles')); requestAnimationFrame(() => requestAnimationFrame(() => { if (aberto) safe(controlesC1); })); // de novo, com o layout da principal já calculado
     if (S.passo === 'abertura') { irPara(0, 700); tocar('c2_abertura', PASSOS.abertura.depois); }
     else { irPara(S.cena ?? PASSO_INICIAL_DA_CENA[S.passo] ?? 13, S.x ?? 300); objetivoNovo(PASSOS[S.passo]?.obj || ''); hudVisivel(true); }
     last = performance.now(); cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
     window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: true } }));
   }
   function fechar() {
+    safe(devolverTopo); salvarProgressao();
     aberto = false; cancelAnimationFrame(raf); if (box) box.hidden = true; pausado = false; box?.querySelector('.pausa')?.remove();
     TR()?.ligar?.(false, P); safe(() => window.CampanhaPoderes?.controles?.(false, { forcar: false })); // devolve os botões da campanha principal intactos
     safe(() => window.CampanhaCutscenes?.musica?.parar?.()); window.__somCutscene = false; try { window.DayTime?.force?.(null); } catch (e) {}
@@ -485,7 +530,7 @@
     b.addEventListener('click', (e) => { e.preventDefault(); painel(); }); lista.appendChild(b);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', botaoMenu); else botaoMenu();
-  window.Campanha2 = Object.freeze({ aviso: (txt) => aviso(txt), liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, luta: fase?.emArena?.() ? fase.slug : null, chave: D()?.key || window.CampanhaCenarios?.lista?.find?.((d) => d.id === cenaId)?.key || null, flags: { ...(S?.flags || {}) } }),
+  window.Campanha2 = Object.freeze({ ganharXP: (n, id, x, y) => ganharXP(n, id, x, y), aviso: (txt) => aviso(txt), liberada, abrir, fechar, painel, aberto: () => aberto, estado: () => ({ passo: S?.passo, cena: cenaId, x: Math.round(P.x), y: Math.round(P.y), perto: perto?.rotulo || null, cutscene: cut?.id || null, luta: fase?.emArena?.() ? fase.slug : null, chave: D()?.key || window.CampanhaCenarios?.lista?.find?.((d) => d.id === cenaId)?.key || null, flags: { ...(S?.flags || {}) } }),
     // testes
     _ir: (id, x) => irPara(id, x), _fase: () => fase && { slug: fase.slug, chefe: { st: fase.chefe.st, hp: fase.chefe.hp, fase: fase.chefe.fase, x: Math.round(fase.chefe.x) }, arena: fase.emArena(), inimigos: fase.inimigos().length }, _hp: (n) => { P.hp = n; }, _bater: (n) => { const f = fase; if (f?.chefe) f.chefe.onDano(n, 'teste'); }, _pos: (x, y) => { P.x = x; P.y = y; P.vy = 0; P.ground = true; }, _fps: () => fpsMedio, _passo: (id) => passo(id), _usar: usar, _pular: pularCut });
 })();

@@ -160,3 +160,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Dano:** continua o da Campanha 2 (papel 6, peido 9 × combo), para não mexer na dificuldade.
   - **Câmera de perto como a principal (`enquadrar()`):** com a tela mais larga que 16:9, preenche a largura e acompanha o Da Roça na vertical (mesma conta do `followFill` do `ui.js`). Nas cutscenes mostra o quadro inteiro.
   - **Visual do Da Roça:** fica musculoso se terminou o treino do Caleb na campanha 1.
+- **2026-11-21 · Claude:** a Campanha 2 **mantém todos os sistemas da principal**. Só os poderes antigos saem: Reeis, Bivolt, carro a gás e o mapa ⌘ do carro.
+  - **Barra de cima:** é a da própria principal (`.game-topbar`, com DADOS, INVENTÁRIO, XP, ATRIBUTOS, som, pausa e tela cheia). Fica dentro da cópia `#c2GameShell` enquanto a Campanha 2 está aberta e volta ao `#gameShell` ao fechar. O ⏸ pausa a Campanha 2.
+  - **Progressão compartilhada (`window.Progression`):** XP, nível e atributos valem na Campanha 2: vigor (vida), força (dano), gás e agilidade (velocidade e dash). Cada inimigo dá 30 XP, cada chefe 600 e o Jorge 1200.
+  - **Save:** a Campanha 2 grava **só** o campo `progression` no save da principal (`da-roca-adventure-v1`); o resto do save fica intacto. O `spendStat` do `game.js`, com a Campanha 2 aberta, só gasta o ponto e não regrava o save da principal.
+  - **Arma da principal:** papel, régua ou estojo, e o papaia de fogo ou elétrico. O dano segue a conta da principal, na escala de vida dos inimigos da Campanha 2.

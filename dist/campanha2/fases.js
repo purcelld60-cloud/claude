@@ -140,7 +140,7 @@
     /* ----- dano nos inimigos ----- */
     function danoInimigo(e, n, tipo) {
       if (e.hp <= 0) return false; e.hp -= n; e.hit = .16; e.vx += (P.x < e.x ? 1 : -1) * 60;
-      if (e.hp <= 0) { e.hp = 0; e.morto = 1; window.CampanhaLoja?.ganhar?.(6); flutua(e.x, e.y - 100, '+6 ●', '#ffd24a'); api.sfx('plim'); if (Math.random() < .22) curas.push({ x: e.x, pego: false, solta: true }); }
+      if (e.hp <= 0) { e.hp = 0; e.morto = 1; window.Campanha2?.ganharXP?.(30, null, e.x, e.y - 120); window.CampanhaLoja?.ganhar?.(6); flutua(e.x, e.y - 100, '+6 ●', '#ffd24a'); api.sfx('plim'); if (Math.random() < .22) curas.push({ x: e.x, pego: false, solta: true }); }
       return n;
     }
     function danoChefe(n, tipo, quem = B) {
