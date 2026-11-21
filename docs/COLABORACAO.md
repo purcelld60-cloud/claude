@@ -123,3 +123,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - `DESBOTA` tira um pouco da cor e `CLAREIA` puxa para lilás;
   - pixels gastos e manchinhas aparecem sempre nos mesmos lugares de cada sprite;
   - o contorno ficou roxo acinzentado.
+- **2026-11-21 · Claude:** **baile funk e Ollyan redesenhados** em pixel art (`baile-pixel.js`):
+  - **Galera:** 40 tipos de pessoa (roupas, cabelos, boné, óculos, corrente, brinco) e 7 passos no ritmo: mãos pro alto, passinho, pulo, celular filmando, rebolado, soquinho e bastão de luz.
+  - **Palco:** DJ com fone e toca-discos girando, MC com microfone, dançarinas, telão de LED com três animações, paredão de som pulsando, luzes móveis, faíscas e jatos de fumaça no tempo.
+  - **Rua:** bandeirinhas, carro de paredão e barracas de espetinho (com fumaça), geladinho e açaí.
+  - **Ollyan:** magro, bêbado, de orelhonas e copo derramando; feliz e dançando depois de vencido; voando com as orelhas-asa.
+  
+  O `baile.js` só ganhou ganchos (`BailePixel.*`). A luta, as fases e os golpes continuam iguais.
