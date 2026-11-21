@@ -155,7 +155,11 @@
   // não deve ocupar o canal de música enquanto esses modos estão abertos.
   if(window.Campanha2?.aberto?.()){
    const id=window.Campanha2.estado().cutscene;
-   return id?['cutscenes.'+id,...(window.Roteiro?.musicFor?.(id)||[])]:[];
+   if(id)return['cutscenes.'+id,...(window.Roteiro?.musicFor?.(id)||[])];
+   // pastas de música da Campanha 2 (dist/musicas/c2-*): só toca se alguém pôs música lá
+   let e2=null;try{e2=window.Campanha2.estado();}catch{}
+   if(e2?.luta)return['c2.battles.'+e2.luta,'c2.battles'];
+   return e2?.chave?['c2.maps.'+e2.chave,'c2.maps']:['c2.maps'];
   }
   if(window.CampanhaCutscenes?.aberta?.())return [];
   try{state=window.Game?.getAudioState?.();lastAudioState=state||null;}catch{}

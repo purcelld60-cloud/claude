@@ -16,7 +16,33 @@ O script baixa do site original apenas as gravações ausentes ou danificadas e 
 
 Os fluxos de publicação preparam os mesmos arquivos para o site e os aplicativos. No APK, as faixas tocam direto do pacote. No site, o primeiro toque ou tecla libera o áudio. Ao abrir a versão instalada na Tela de Início com conexão, o jogo guarda as trilhas originais para tocar offline. Uma associação personalizada em `musicas.txt` tem prioridade no lugar escolhido.
 
-## Adicionar uma música, passo a passo (dá para fazer pelo celular)
+## Pasta de músicas por lugar (o jeito mais fácil)
+
+Dentro de **`dist/musicas`** há uma pasta para cada lugar do jogo, com um `LEIA-ME.txt` que diz onde ela toca e qual música o jogo usa lá hoje. São 74 pastas:
+
+| Começo do nome | O que é | Exemplos |
+| --- | --- | --- |
+| `geral-` | menu inicial, pausa, derrota, fim de capítulo, comemoração | `geral-menu-inicial`, `geral-pausa` |
+| `c1-cenario-` | cenários da Campanha 1 | `c1-cenario-roca`, `c1-cenario-baile-funk` |
+| `c1-luta-` | chefes da Campanha 1 | `c1-luta-marco`, `c1-luta-nikolas` |
+| `c1-` (outros) | salas, treino, jantar com Amanda, ligação do Jorge, transformação do Reeis | `c1-ligacao-do-jorge` |
+| `c2-cenario-` | cenários da Campanha 2 | `c2-cenario-feira`, `c2-cenario-lomantao` |
+| `c2-luta-` | chefes da Campanha 2 | `c2-luta-creuza`, `c2-luta-jorge` |
+| `c2-todos-os-cenarios`, `c2-todas-as-lutas` | valem para os lugares da Campanha 2 que não têm música na própria pasta | |
+| `extra-` | arena online, dupla online e fliperama | `extra-fliperama` |
+
+Como usar:
+
+1. Ponha a música (`.mp3`, `.ogg` ou `.m4a`, até 15 MB) dentro da pasta do lugar. O nome do arquivo pode ser qualquer um.
+2. Com **várias músicas na mesma pasta**, o jogo sorteia uma cada vez que abre.
+3. Pasta vazia: o lugar continua com a música de sempre. Na Campanha 2, os cenários e lutas sem música ficam com a trilha feita pelo próprio jogo nas cutscenes.
+4. Envie (GitHub: abra a pasta, **Add file → Upload files**, **Commit changes**). O site, o APK, o IPA e o PC são gerados de novo sozinhos.
+
+**ZIP com as músicas originais:** o workflow **Pasta de músicas (ZIP)** monta o `DaRoca-Pasta-de-Musicas.zip` em Releases (tag `pasta-musicas-bN`). Ele tem todas as pastas, e a música que cada lugar já usa vem dentro da pasta com o nome `ORIGINAL - ...`. Para trocar, apague o ORIGINAL e ponha a sua; se deixar os dois, o jogo sorteia. Uma cópia de um ORIGINAL não pesa no app: o build reconhece a música (pelo SHA-256) e usa a faixa que o jogo já tem. Se ela estiver sozinha na pasta em que já tocava, o build nem a inclui.
+
+A lista das pastas fica em `dist/musicas/pastas.json`. Para criar uma pasta nova, acrescente a linha lá e rode `python3 .github/scripts/musicas.py --criar-pastas`.
+
+## Adicionar uma música solta (jeito antigo, continua valendo)
 
 1. No GitHub, abra a pasta **`dist/musicas`** do repositório.
 2. Toque em **Add file → Upload files** e envie o arquivo: `.mp3`, `.ogg` ou `.m4a`, de preferência com até 15 MB.

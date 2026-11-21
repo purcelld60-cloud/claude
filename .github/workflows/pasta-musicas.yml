@@ -1,0 +1,36 @@
+name: Pasta de músicas (ZIP)
+
+# Monta o ZIP "DaRoca-Pasta-de-Musicas.zip": uma pasta para cada lugar do jogo (cenários, lutas, menus...),
+# cada uma com um LEIA-ME e com as músicas que o jogo já toca lá ("ORIGINAL - ...").
+# Baixe em Releases (tag pasta-musicas-bN), ponha suas músicas nas pastas e envie de volta.
+# Roda quando a lista de pastas muda na main ou quando você clica em "Run workflow".
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['dist/musicas/pastas.json', '.github/scripts/musicas.py', '.github/workflows/pasta-musicas.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pasta-musicas
+  cancel-in-progress: true
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baixar as músicas originais do jogo
+        run: python3 .github/scripts/restaurar_trilhas.py
+      - name: Montar o ZIP
+        run: python3 .github/scripts/musicas.py --zip DaRoca-Pasta-de-Musicas.zip
+      - name: Publicar em Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "pasta-musicas-b${{ github.run_number }}" DaRoca-Pasta-de-Musicas.zip \
+            --target "${{ github.sha }}" \
+            --title "Pasta de músicas do Da Roça (build ${{ github.run_number }})" \
+            --notes "Uma pasta para cada lugar do jogo, com as músicas que ele já usa (ORIGINAL - ...). Ponha suas músicas (.mp3, .ogg ou .m4a) na pasta do lugar; com várias, o jogo sorteia uma. Depois envie as pastas para dist/musicas no GitHub ou mande o ZIP para a IA. Guia: docs/MUSICAS.md."
