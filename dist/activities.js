@@ -1,4 +1,4 @@
-/* Original side activities: Mota's football challenge and Miqueias's English class. */
+/* Campaign activities share one clock, input path and overlay. */
 (() => {
   'use strict';
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -10,12 +10,14 @@
     {prompt:'The bolo is very bom! Choose BOLO in english, ALLRIGHT!',choices:['CAPE','CAKE','CABLE'],answer:1,word:'BOLO',icon:'cake'}
   ]);
   function create(kind,options={}) {
+    if(kind==='dinner')return window.AmandaDinner.create(options);
     if(kind==='quiz')return {kind,options,time:0,done:false,success:false,cancelled:false,score:0,correct:0,attempts:0,questionIndex:0,phase:'question',phaseTime:0,cooldown:0,feedback:'',feedbackGood:true,selected:null,questions:QUESTIONS};
     return {kind:'football',options,time:0,done:false,success:false,cancelled:false,score:0,phase:'aim',phaseTime:0,cooldown:.15,aim:.18,aimDirection:1,aimSpeed:.58,power:.05,powerDirection:1,powerSpeed:1.02,keeper:.5,lockedAim:null,lockedKeeper:null,target:null,shot:null,shots:0,totalShots:0,maxShots:5,goals:0,goalArea:{x:548,y:120,w:320,h:205},feedback:'Mota: mira no canto e manda essa bola pra rede!',feedbackGood:true};
   }
   function bounce(s,key,direction,speed,dt){s[key]+=s[direction]*speed*dt;if(s[key]>1){s[key]=2-s[key];s[direction]=-1;}else if(s[key]<0){s[key]=-s[key];s[direction]=1;}}
   function nextShot(s){s.phase='aim';s.phaseTime=0;s.cooldown=.18;s.aim=(.17+s.shots*.21)%1;s.aimDirection=s.shots%2?-1:1;s.power=.05;s.powerDirection=1;s.lockedAim=null;s.lockedKeeper=null;s.shot=null;s.target=null;s.feedback='Mota: mais uma! Três gols e o treino é seu.';}
   function update(s,dt){
+    if(s?.kind==='dinner')return window.AmandaDinner.update(s,dt);
     if(!s||s.done)return;s.time+=Math.max(0,dt);s.phaseTime+=Math.max(0,dt);s.cooldown=Math.max(0,s.cooldown-dt);
     if(s.kind==='quiz'){
       if(s.phase==='feedback'&&s.phaseTime>=.65){if(s.correct>=3){s.done=true;s.success=true;s.phase='complete';s.feedback='ALLRIGHT! You is aprovado, beleza creuza!';}else{s.questionIndex++;s.phase='question';s.phaseTime=0;s.feedback='';s.selected=null;}}
@@ -32,6 +34,7 @@
     }
   }
   function submit(s,value){
+    if(s?.kind==='dinner')return window.AmandaDinner.submit(s,value);
     if(!s||s.done||s.cooldown>0)return false;
     if(s.kind==='quiz'){
       if(s.phase!=='question')return false;const answer=Number(value),q=QUESTIONS[s.questionIndex%QUESTIONS.length];if(!Number.isInteger(answer)||answer<0||answer>2)return false;s.attempts++;s.selected=answer;s.cooldown=.25;
@@ -48,6 +51,7 @@
     return false;
   }
   function view(s){
+    if(s?.kind==='dinner')return window.AmandaDinner.view(s);
     if(!s)return {title:'',text:'',scoreLabel:'',actionLabel:'',choices:null};
     if(s.kind==='quiz'){const q=QUESTIONS[s.questionIndex%QUESTIONS.length];return {title:'ENGLISH DO MIQUEIAS',text:s.feedback||q.prompt,scoreLabel:`${s.correct} / 3 acertos · ${s.attempts} respostas`,actionLabel:'',choices:q.choices.map((label,value)=>({label,value,disabled:s.phase!=='question'}))};}
     return {title:'FUTEBOL COM GABRIEL MOTA',text:s.feedback,scoreLabel:`${s.goals} / 3 gols · ${s.shots} / ${s.maxShots} chutes · ${s.score} pontos`,actionLabel:s.phase==='aim'?'MIRAR':s.phase==='power'?'CHUTAR!':s.phase==='complete'?'CONCLUÍDO':'A BOLA ESTÁ NO AR…',choices:null};
@@ -88,6 +92,6 @@
     for(let i=0;i<3;i++){rect(c,423+i*40,333,27,9,i<s.correct?'#f6df93':'#629c91');rect(c,423+i*40,333,27,2,i<s.correct?'#fff1bc':'#b4dacb');}
     if(s.phase==='feedback'){line(c,[[703,285],[715,300],[739,268]],'#fff0a0',6);text(c,'ALLRIGHT!',480,306,18,'#fff2bd');}else if(s.feedback&&!s.feedbackGood){line(c,[[707,274],[732,299]],'#ae655c',5);line(c,[[732,274],[707,299]],'#ae655c',5);}
   }
-  function draw(c,s){if(!s)return;c.save();c.imageSmoothingEnabled=false;if(s.kind==='quiz')quiz(c,s);else football(c,s);c.restore();}
+  function draw(c,s){if(!s)return;if(s.kind==='dinner')return window.AmandaArt.drawDinner(c,s);c.save();c.imageSmoothingEnabled=false;if(s.kind==='quiz')quiz(c,s);else football(c,s);c.restore();}
   window.Activities={create,update,submit,view,draw,cancel};
 })();

@@ -89,3 +89,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - A pausa da campanha principal agora é igual à da Campanha 2: placa e botões de madeira. Os botões de toque e o joystick continuam os originais.
   - Os mapas ficaram claros, de dia, com passarinhos, borboletas e raios de sol.
 - **2026-11-20 · Claude:** criei a versão de PC (Electron) em `native/pc/` e o workflow `pc.yml` (Windows e Linux). Detalhes em `docs/PC.md`.
+
+- **2026-11-20 · Codex:** Integrei o jantar com Amanda e a skin Jaglion à edição com os dois mapas do Claude. Recuperei os 12 MP3 e as 48 associações do APK 3.12.1. Para testar depois de clonar, rode `python3 .github/scripts/restaurar_trilhas.py`. Site, Android, iOS e PC executam essa etapa antes do empacotamento. A ligação de Jorge começa no segundo 112. A Campanha 2 conserva suas partituras. A integração está na branch `chatgpt/restaurar-trilhas`.
+- **2026-11-21 · Claude:** conferi e juntei na `main` o trabalho do Codex (PR #30): Amanda, Jaglion e as trilhas originais.
+  - Os testes `tests/*.cjs` passam (9 de 9).
+  - As regressões das duas campanhas, do menu, da pausa, dos mapas-ilha e da abertura passam.
+  - A missão da Amanda foi conferida no navegador: convite na praça e jantar na Varanda do Cacau.
+  - Atenção: o `restaurar_trilhas.py` baixa os MP3 do site original. Num ambiente sem acesso a esse site, o jogo segue sem as músicas, e os builds do GitHub baixam normalmente.

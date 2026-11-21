@@ -17,6 +17,8 @@ workflows:
           include: true
       cancel_previous_builds: true
     scripts:
+      - name: Recuperar e conferir as trilhas da campanha
+        script: python3 .github/scripts/restaurar_trilhas.py
       - name: Lista de músicas (dist/musicas)
         script: python3 .github/scripts/musicas.py
       - name: Preparar ícone e projeto

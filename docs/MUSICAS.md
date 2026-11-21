@@ -2,6 +2,20 @@
 
 Para pôr música no jogo você não precisa mexer em código: basta colocar o arquivo na pasta e dizer onde ele toca.
 
+## Trilha original da campanha
+
+O catálogo da edição 3.12.1 guarda as 12 gravações, os volumes e as 48 associações originais. Entre elas estão as músicas da favela, do pátio, dos chefes e da ligação de Jorge. Na ligação, a faixa começa em 1min52s e continua tocando entre os planos. O menu usa o tema da roça até você configurar uma faixa para `menu`. A Arena sorteia músicas da biblioteca.
+
+Em uma cópia recém-clonada, execute na raiz do projeto:
+
+```sh
+python3 .github/scripts/restaurar_trilhas.py
+```
+
+O script baixa do site original apenas as gravações ausentes ou danificadas e confere tamanho e SHA-256 antes de gravar. Quem já tem o APK 3.12.1 pode usar `python3 .github/scripts/restaurar_trilhas.py --apk caminho/DaRoca.apk` sem internet. O ZIP completo com trilhas já traz os MP3 em `dist/music/`.
+
+Os fluxos de publicação preparam os mesmos arquivos para o site e os aplicativos. No APK, as faixas tocam direto do pacote. No site, o primeiro toque ou tecla libera o áudio. Ao abrir a versão instalada na Tela de Início com conexão, o jogo guarda as trilhas originais para tocar offline. Uma associação personalizada em `musicas.txt` tem prioridade no lugar escolhido.
+
 ## Adicionar uma música, passo a passo (dá para fazer pelo celular)
 
 1. No GitHub, abra a pasta **`dist/musicas`** do repositório.
@@ -30,6 +44,7 @@ Se algo estiver errado (arquivo que não está na pasta, lugar com nome errado),
 | `menu`, `pausa`, `derrota`, `fim`, `comemoracao` | menu inicial, pausa, quando perde, fim do capítulo, festa do açaí |
 | `roca`, `escola`, `academia`, `quadra`, `praca`, `favela`, `caderno`, `campo`, `bigodon`, `patio`, `rayssa`, `baile` | cada fase da campanha (`caderno` é o Reino de Tinta) |
 | `sala-almiro`, `sala-miqueias` | salas de aula |
+| `jantar-amanda`, `conversa-amanda` | jantar na Varanda do Cacau e conversa com Amanda na praça, respectivamente |
 | `chefe-marco`, `chefe-menezes`, `chefe-nikolas`, `chefe-reeis`, `chefe-freddy`, `chefe-nicolas`, `chefe-dede`, `chefe-arthur`, `chefe-colosso`, `chefe-igor`, `chefe-kaique`, `chefe-ollyan` | luta contra cada chefe |
 | `chefe-nikolas-fase2` e outras fases | uma fase específica da luta |
 | `apresentacao-marco` e outros chefes | a cutscene antes de cada chefe |

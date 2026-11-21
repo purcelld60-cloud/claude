@@ -42,6 +42,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Recuperar e conferir as trilhas da campanha
+        run: python3 .github/scripts/restaurar_trilhas.py
       - name: Lista de músicas (dist/musicas)
         run: python3 .github/scripts/musicas.py
 

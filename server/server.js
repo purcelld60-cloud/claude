@@ -194,8 +194,31 @@ function serveFile(req, res, url) {
   let rel = decodeURIComponent(url.pathname); if (rel.endsWith('/')) rel += 'index.html';
   const file = path.resolve(DIST, '.' + rel); if (!file.startsWith(DIST + path.sep) && file !== DIST) return send(res, 403, { error: 'proibido' });
   fs.stat(file, (err, st) => { if (err || !st.isFile()) { res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }); return res.end('Não encontrado'); }
-    res.writeHead(200, { 'Content-Type': TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', 'Cache-Control': /\.(html|json)$/.test(file) || file.endsWith('sw.js') ? 'no-cache' : 'public, max-age=3600', 'X-Content-Type-Options': 'nosniff' });
-    if (req.method === 'HEAD') return res.end(); fs.createReadStream(file).pipe(res); });
+    const mime = TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream';
+    const headers = { 'Content-Type': mime, 'Content-Length': st.size, 'Cache-Control': /\.(html|json)$/.test(file) || file.endsWith('sw.js') ? 'no-cache' : 'public, max-age=3600', 'X-Content-Type-Options': 'nosniff' };
+    let slice;
+    if (mime.startsWith('audio/')) {
+      headers['Accept-Ranges'] = 'bytes';
+      const range = /^bytes=(\d*)-(\d*)$/i.exec(req.headers.range || '');
+      if (range && (range[1] || range[2])) {
+        const start = range[1] ? Number(range[1]) : Math.max(0, st.size - Number(range[2]));
+        const end = range[1] && range[2] ? Math.min(st.size - 1, Number(range[2])) : st.size - 1;
+        if (start >= st.size || end < start) {
+          res.writeHead(416, { 'Content-Range': 'bytes */' + st.size });
+          return res.end();
+        }
+        slice = { start, end };
+        headers['Content-Range'] = 'bytes ' + start + '-' + end + '/' + st.size;
+        headers['Content-Length'] = end - start + 1;
+      }
+    }
+    res.writeHead(slice ? 206 : 200, headers);
+    if (req.method === 'HEAD') return res.end();
+    const body = fs.createReadStream(file, slice);
+    body.on('error', () => res.destroy());
+    res.on('close', () => body.destroy());
+    body.pipe(res);
+  });
 }
 const ipOf = (req) => String(req.headers['fly-client-ip'] || req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
 const server = http.createServer(async (req, res) => {

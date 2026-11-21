@@ -19,7 +19,12 @@
   let look = { ...DEFAULT }, unlocked = false;
   try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && typeof d === 'object') { unlocked = !!d.unlocked; for (const k of Object.keys(DEFAULT)) if (typeof d.look?.[k] === 'string') look[k] = d.look[k]; } } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ unlocked, look })); } catch (e) {} };
-  const isDefault = () => Object.keys(DEFAULT).every((k) => look[k] === DEFAULT[k]);
+  const jaglionStatus = () => window.Game?.getJaglionStatus?.() || 'locked';
+  // A escolha de roupa continua no aparelho. O direito de vestir a juba pertence à campanha.
+  function effectiveLook() {
+    return look.costume === 'jaglion' && jaglionStatus() !== 'ready' ? { ...look, costume: 'normal' } : look;
+  }
+  const isDefault = outfit => Object.keys(DEFAULT).every(k => outfit[k] === DEFAULT[k]);
 
   /* ---------------- painel do espelho ---------------- */
   let panel = null, preview = null, raf = 0, onClose = null, t0 = 0;
@@ -39,23 +44,28 @@
   }
   function render() {
     const rows = panel.querySelector('.vp-rows'); rows.innerHTML = '';
-    const lion = look.costume === 'jaglion';
+    const outfit = effectiveLook(), status = jaglionStatus(), lion = outfit.costume === 'jaglion';
+    const hint = status === 'reserved' ? 'Seu Jaglion está pronto. Fale com Davi na Bigodon para recebê-lo.' :
+      'Para ganhar o Jaglion, encontre Amanda na entrada da Praça Camacan e aceite o jantar.';
     for (const [key, label] of ROWS) {
-      if (key === 'hatColor' && look.hat !== 'bone') continue;
+      if (key === 'hatColor' && outfit.hat !== 'bone') continue;
       const row = document.createElement('div'); row.className = 'vp-row' + (lion && key !== 'costume' ? ' is-off' : ''); row.innerHTML = '<span>' + label + '</span>';
       const list = document.createElement('div'); list.className = 'vp-opts';
       for (const [val, name, light] of OPTIONS[key]) {
         const b = document.createElement('button'); b.type = 'button'; const color = val.startsWith('#');
-        b.className = 'vp-opt' + (color ? ' vp-swatch' : '') + (look[key] === val ? ' on' : ''); b.setAttribute('aria-pressed', look[key] === val ? 'true' : 'false');
+        b.className = 'vp-opt' + (color ? ' vp-swatch' : '') + (outfit[key] === val ? ' on' : ''); b.setAttribute('aria-pressed', outfit[key] === val ? 'true' : 'false');
         if (color) { b.style.setProperty('--sw', val); b.title = name; b.setAttribute('aria-label', label.toLowerCase() + ' ' + name); } else b.textContent = name;
-        if (val === 'jaglion') b.classList.add('vp-lion');
-        b.disabled = lion && key !== 'costume';
+        if (val === 'jaglion') {
+          b.classList.add('vp-lion');
+          if (status !== 'ready') { b.textContent = status === 'reserved' ? 'JAGLION · RESERVADO' : 'JAGLION · BLOQUEADO'; b.title = hint; }
+        }
+        b.disabled = (val === 'jaglion' && status !== 'ready') || (lion && key !== 'costume');
         b.addEventListener('click', () => { look[key] = val; if (key === 'shirt') look.shirtLight = light || look.shirtLight; save(); render(); panel.querySelector(`[data-k="${key}"] .on`)?.focus?.(); });
         list.append(b);
       }
       row.dataset.k = key; row.append(list); rows.append(row);
     }
-    panel.querySelector('.vp-note').textContent = lion ? 'JAGLION: macacão de leão com capuz de juba, patas e rabo, costurado pelo Vitor. Rugido não incluso.' : isDefault() ? 'O Da Roça de sempre.' : 'Visual novo, mesma resenha.';
+    panel.querySelector('.vp-note').textContent = status !== 'ready' ? hint : lion ? 'Capuz de juba, patas e rabo, costurados pelo Vitor. Rugido por sua conta.' : isDefault(outfit) ? 'O Da Roça de sempre.' : 'Visual novo, mesma resenha.';
   }
   function drawPreview(now) {
     if (panel.hidden) return; const c = preview.getContext('2d'), t = (now - t0) / 1000;
@@ -79,7 +89,7 @@
     if (!panel || panel.hidden) return; panel.hidden = true; cancelAnimationFrame(raf); save();
     window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } }));
     document.getElementById('gameCanvas')?.focus?.();
-    const fn = onClose; onClose = null; if (fn) try { fn({ ...look }); } catch (e) {}
+    const fn = onClose; onClose = null; if (fn) try { fn({ ...effectiveLook() }); } catch (e) {}
   }
   // INVENTÁRIO: atalho para o espelho depois da primeira visita ao Davi
   function updateInventory() {
@@ -90,5 +100,10 @@
     row.append(b); inv.append(row);
   }
   setTimeout(updateInventory, 1600);
-  window.DarocaLook = Object.freeze({ get: () => (isDefault() ? null : look), current: () => ({ ...look }), open, close, isOpen: () => !!panel && !panel.hidden, unlocked: () => unlocked, set: (k, v) => { if (k in DEFAULT && typeof v === 'string') { look[k] = v; save(); } }, reset: () => { look = { ...DEFAULT }; save(); } });
+  window.DarocaLook = Object.freeze({
+    get: () => { const outfit = effectiveLook(); return isDefault(outfit) ? null : outfit; },
+    current: () => ({ ...effectiveLook() }), open, close, isOpen: () => !!panel && !panel.hidden, unlocked: () => unlocked,
+    set: (k, v) => { if (k in DEFAULT && typeof v === 'string' && !(k === 'costume' && v === 'jaglion' && jaglionStatus() !== 'ready')) { look[k] = v; save(); } },
+    reset: () => { look = { ...DEFAULT }; save(); }
+  });
 })();

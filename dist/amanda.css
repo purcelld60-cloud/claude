@@ -1,0 +1,111 @@
+.amanda-char {
+  background: linear-gradient(160deg, #48354c, #8f5456 62%, #d6a06f);
+}
+.vp-opt.vp-lion:disabled { color: #604837; opacity: .72; cursor: default; }
+
+#gameShell.is-dinner .touch-controls,
+#gameShell.is-dinner .screen-fit-tools,
+#gameShell.is-dinner .hud-min-left,
+#gameShell.is-dinner .hud-btn,
+#gameShell.is-dinner .game-actions > :not(#pauseBtn),
+#gameShell.is-dinner .toast { visibility: hidden; }
+#gameShell.is-dinner #activityOverlay {
+  align-items: center;
+  padding: max(8px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  box-sizing: border-box;
+}
+#gameShell.is-dinner .activity-heading {
+  align-self: center; flex-direction: column; gap: 2px; padding: 4px 16px 6px;
+  color: #ffe6af; background: #3b2837; border: 1px solid #d6a46f;
+  box-shadow: inset 0 0 0 2px #62434a, 0 3px #322332;
+}
+#gameShell.is-dinner #activityTitle {
+  font: bold clamp(14px, 2.5vh, 24px)/1.05 Georgia, serif; letter-spacing: .035em;
+}
+#gameShell.is-dinner #activityScore {
+  font: 600 clamp(10px, 1.6vh, 13px)/1.2 Space, sans-serif; color: #f0cdb0;
+}
+#gameShell.is-dinner .activity-caption {
+  width: min(660px, 94%); box-sizing: border-box;
+  padding: 10px 18px; color: #372633; background: #ffebc9; text-align: left;
+  border: 2px solid #70434b; outline: 2px solid #edbe88;
+  box-shadow: inset 0 0 0 2px #e7c89e, 3px 4px #392b3b;
+  display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 5px 16px; align-items: center;
+}
+#dinnerSpeaker[hidden], #dinnerBreath[hidden] { display: none !important; }
+#gameShell.is-dinner #dinnerSpeaker {
+  grid-column: 1/-1; color: #823d4e; font: 8px/1.4 Pixel, monospace;
+}
+#gameShell.is-dinner #activityText {
+  grid-column: 1/-1; font: 600 clamp(13px, 1.9vh, 17px)/1.35 Space, sans-serif;
+  color: #3d2938; margin: 0; text-shadow: none;
+}
+#dinnerBreath {
+  position: relative; grid-column: 1/-1; height: 12px; margin: 5px 8px;
+  background: #78575a; border: 2px solid #59414b; box-shadow: 0 1px #fff3d7;
+}
+#dinnerBreath i {
+  position: absolute; left: var(--band-start); right: calc(100% - var(--band-end)); inset-block: 0;
+  background: repeating-linear-gradient(135deg,#ffe3a4 0 5px,#efca89 5px 7px);
+  border-inline: 2px solid #fff1c5;
+}
+#dinnerBreath b {
+  position: absolute; left: var(--marker,0%); top: 50%; transform: translate(-50%,-50%);
+  font: bold 20px/1 Georgia,serif; color: #af3657; text-shadow: 1px 1px #fff2d1,-1px -1px #fff2d1;
+}
+#gameShell.is-dinner .activity-choices {
+  grid-column: 1/-1; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px;
+}
+#gameShell.is-dinner #activityOverlay:not([data-phase="choice"]) .activity-choices { display: none; }
+#gameShell.is-dinner .activity-actions {
+  grid-column: 1/-1; display: flex; justify-content: space-between; gap: 8px;
+}
+#gameShell.is-dinner .activity-choices button, #gameShell.is-dinner #activityMainBtn {
+  padding: 6px 12px; min-width: 0; min-height: 40px; border: 1px solid #5a3444;
+  color: #fff1cf; background: #763d50; box-shadow: inset 0 1px #bf7682, 0 2px #4f3442;
+  font: bold clamp(12px, 1.7vh, 15px)/1.2 Space,sans-serif; text-transform: none;
+}
+#gameShell.is-dinner #activityMainBtn { min-width: 124px; }
+#gameShell.is-dinner #activityMainBtn { --px-green: var(--px-paper); --px-green-h: var(--px-paper-h); }
+#gameShell.is-dinner #gameViewport, #gameShell.is-dinner #gameCanvas { background-color: #382a36; }
+@media (orientation:landscape) and (max-aspect-ratio:27/10) {
+  #gameShell.is-dinner #gameCanvas { object-fit: cover !important; object-position: 50% 48% !important; }
+}
+#gameShell.is-dinner #activityExitBtn {
+  margin-left: auto; padding: 4px 8px; min-height: 36px; border: 0; box-shadow: none;
+  font: 600 12px/1.2 Space,sans-serif; color: #65414a; background: none; text-decoration: underline;
+}
+#gameShell.is-dinner .activity-caption button:focus-visible { outline: 2px solid #264e52; outline-offset: 2px; }
+@media (pointer:fine) {
+  #gameShell.is-dinner .activity-choices button:nth-child(1)::before { content: '1 · '; color: #ffd39f; }
+  #gameShell.is-dinner .activity-choices button:nth-child(2)::before { content: '2 · '; color: #ffd39f; }
+}
+@media (max-height:520px) and (orientation:landscape) {
+  #gameShell.is-dinner .activity-caption { width: min(680px,96%); gap: 3px 12px; padding: 6px 14px; }
+  #gameShell.is-dinner .activity-choices { grid-column: 1; }
+  #gameShell.is-dinner #activityOverlay[data-phase="choice"] .activity-actions { grid-column: 2; }
+  #gameShell.is-dinner .activity-heading { flex-direction: row; gap: 8px; padding: 4px 10px; }
+  #gameShell.is-dinner #dinnerSpeaker { font-size: 7px; }
+  #gameShell.is-dinner .activity-caption button { touch-action: manipulation; }
+}
+@media (max-width:520px) and (orientation:portrait) {
+  #gameShell.is-dinner {
+    --dinner-shot: min(100vw, 44vh);
+    --dinner-shot: min(100vw, 44dvh);
+  }
+  #gameShell.is-dinner #gameViewport { background: linear-gradient(#2d2031,#4b323c 60%,#342637); }
+  #gameShell.is-dinner #gameCanvas {
+    position: absolute; left: 0; top: 44%; width: 100%; height: var(--dinner-shot);
+    transform: translateY(-50%); object-fit: cover !important; object-position: center;
+  }
+  #gameShell.is-dinner #activityOverlay { padding-inline: 6px; }
+  #gameShell.is-dinner .activity-caption {
+    position: absolute; top: calc(44% + var(--dinner-shot) / 2 + 8px);
+    width: 95%; padding: 8px 10px; gap: 3px 8px;
+  }
+  #gameShell.is-dinner .activity-heading {
+    position: absolute; bottom: calc(56% + var(--dinner-shot) / 2 + 8px);
+    flex-direction: column; gap: 3px; padding: 5px 12px; text-align: center;
+  }
+  #gameShell.is-dinner .activity-choices button { padding: 4px; }
+}

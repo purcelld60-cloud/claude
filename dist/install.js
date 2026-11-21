@@ -1,6 +1,6 @@
 (() => {
 'use strict';
-const nativeApp=location.protocol==='file:'||new URLSearchParams(location.search).has('native');
+const nativeApp=location.protocol==='file:'||location.protocol==='daroca:'||new URLSearchParams(location.search).has('native');
 const standalone=()=>matchMedia('(display-mode: standalone)').matches||!!navigator.standalone;
 const isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 const status=document.getElementById('offlineStatus'),buttons=[...document.querySelectorAll('#installAppBtn,[data-install-app]')],guide=document.getElementById('installGuide');let installPrompt=null,guideModal=null,resumeAfterGuide=false;
@@ -26,7 +26,21 @@ async function install(){
  showGuide();
 }
 buttons.forEach(button=>button.addEventListener('click',install));
-window.addEventListener('appinstalled',()=>{installPrompt=null;document.body.classList.add('installed-game');buttons.forEach(button=>button.textContent='INSTALADO NA TELA DE INÍCIO');});
+let installed=standalone()||new URLSearchParams(location.search).has('installed');
+window.addEventListener('appinstalled',()=>{installed=true;installPrompt=null;document.body.classList.add('installed-game');buttons.forEach(button=>button.textContent='INSTALADO NA TELA DE INÍCIO');prepareMusic();});
 const offlineAllowed=!['localhost','127.0.0.1'].includes(location.hostname)||new URLSearchParams(location.search).has('offline-test');
-if(!nativeApp&&offlineAllowed&&'serviceWorker' in navigator&&['https:','http:'].includes(location.protocol))navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(()=>{if(status)status.textContent='Jogo preparado para abrir offline pela Tela de Início.';}).catch(()=>{if(status)status.textContent='Abra conectado para preparar o offline. No Android, o APK inclui o jogo completo.';});
+function prepareMusic(){
+ if(nativeApp||!offlineAllowed||!installed||!navigator.onLine||!navigator.serviceWorker)return;
+ navigator.serviceWorker.ready.then(reg=>reg.active?.postMessage({type:'preparar-trilhas'}));
+}
+if(!nativeApp&&offlineAllowed&&'serviceWorker' in navigator&&['https:','http:'].includes(location.protocol)){
+ navigator.serviceWorker.addEventListener('message',e=>{
+  if(e.data?.type==='trilhas-offline'&&status)status.textContent=e.data.ready?'Jogo e trilhas originais disponíveis offline.':'O jogo está salvo. Abra conectado para terminar de guardar as trilhas.';
+ });
+ window.addEventListener('online',prepareMusic);
+ navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(()=>{
+  if(status)status.textContent='Jogo preparado para abrir offline pela Tela de Início.';
+  prepareMusic();
+ }).catch(()=>{if(status)status.textContent='Abra conectado para preparar o offline. No Android, o APK inclui o jogo completo.';});
+}
 })();

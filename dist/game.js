@@ -10,9 +10,9 @@
   let WORLD=Number(window.WorldData?.widths?.[0])||2600;
   const scenes=window.Campaign?.sceneNames||['A roça','Colégio Adventista','Academia do Caleb','A quadra','Praça Camacan','Favela do Reeis','Caderno do Caos','Campo do Mota','Bigodon · barbearia','Pátio da escola','Casa de Rayssa','Baile funk'];
   const phrases=['da roça poudiaaam','reeeis pouddiaaam','da roça pegou ar','teketeketeketeke','ó pra Ravid falando sozinho'];
-  const npcInfo={swift:{name:'Irmão de Clara Swift',scene:0,x:340},ollyan:{name:'Ollyan · Orelhas ao Vento',scene:11,x:3260},lucas:{name:'Lucas · o Sapo',scene:0,x:480},kaua:{name:'Kauã · inventor',scene:0,x:760},reeis:{name:'Gabriel Reeis',scene:1,x:390},ravid:{name:'Ravid',scene:1,x:930},caleb:{name:'Caleb',scene:2,x:400},mota:{name:'Gabriel Mota',scene:7,x:500},davi:{name:'Davi Costa · barbeiro',scene:8,x:520},vitor:{name:'Vitor · ajudante',scene:8,x:850},freddy:{name:'Freddy · resenha do morro',scene:5,x:5680},nicolas:{name:'Nicolas Carvalho',scene:4,x:5350},dede:{name:'Dedé · Fumacinha',scene:5,x:5000},aica:{name:'Aica',scene:9,x:500},ravile:{name:'Ravile',scene:9,x:670},arthur:{name:'Arthur',scene:9,x:2850},allef:{name:'Allef · recepção',scene:8,x:240},eloisa:{name:'Eloisa',scene:10,x:450},giselle:{name:'Giselle',scene:10,x:820},rayssa:{name:'Rayssa',scene:10,x:1220},analaura:{name:'Ana Laura',scene:10,x:1580}};
+  const npcInfo={...window.Campaign?.npcEntries,swift:{name:'Irmão de Clara Swift',scene:0,x:340},ollyan:{name:'Ollyan · Orelhas ao Vento',scene:11,x:3260},lucas:{name:'Lucas · o Sapo',scene:0,x:480},kaua:{name:'Kauã · inventor',scene:0,x:760},reeis:{name:'Gabriel Reeis',scene:1,x:390},ravid:{name:'Ravid',scene:1,x:930},caleb:{name:'Caleb',scene:2,x:400},mota:{name:'Gabriel Mota',scene:7,x:500},davi:{name:'Davi Costa · barbeiro',scene:8,x:520},vitor:{name:'Vitor · ajudante',scene:8,x:850},freddy:{name:'Freddy · resenha do morro',scene:5,x:5680},nicolas:{name:'Nicolas Carvalho',scene:4,x:5350},dede:{name:'Dedé · Fumacinha',scene:5,x:5000},aica:{name:'Aica',scene:9,x:500},ravile:{name:'Ravile',scene:9,x:670},arthur:{name:'Arthur',scene:9,x:2850},allef:{name:'Allef · recepção',scene:8,x:240},eloisa:{name:'Eloisa',scene:10,x:450},giselle:{name:'Giselle',scene:10,x:820},rayssa:{name:'Rayssa',scene:10,x:1220},analaura:{name:'Ana Laura',scene:10,x:1580}};
   const platforms=window.WorldData?.platforms||[[[790,340,160],[1270,290,160],[1840,330,170]],[[1080,338,150],[1450,285,140],[2100,335,140]],[[850,350,150],[1340,310,140],[1950,350,140]],[[680,340,150],[1180,290,140],[2100,345,150]]];
-  const emptyQuest=()=>({carMissionAccepted:false,carParts:[],almiroAccepted:false,notebooks:[],lucas:false,kaua:false,mota:false,almiro:false,miqueias:false,reeis:false,marco:false,giant:false,menezes:false,training:false,trained:false,nikolas:false,freddy:false,nicolas:false,bigodon:false,vitor:false,dede:false,patioAccepted:false,arthur:false,acai:false,celebrationSeen:false,easyEndingSeen:false,jorgeSeen:false,jorgeStarted:false,rayssaVisit:false,ollyan:false,bivoltAccepted:false,bivoltParts:[],bivoltUnlocked:false,bivoltCharges:0,igor:false,kaique:false,igorSneak:false,kaiqueSneak:false,npcVisits:{}});
+  const emptyQuest=()=>({carMissionAccepted:false,carParts:[],almiroAccepted:false,notebooks:[],lucas:false,kaua:false,mota:false,almiro:false,miqueias:false,reeis:false,marco:false,giant:false,menezes:false,training:false,trained:false,nikolas:false,freddy:false,nicolas:false,bigodon:false,vitor:false,amandaInvited:false,amandaDating:false,jaglionClaimed:false,dede:false,patioAccepted:false,arthur:false,acai:false,celebrationSeen:false,easyEndingSeen:false,jorgeSeen:false,jorgeStarted:false,rayssaVisit:false,ollyan:false,bivoltAccepted:false,bivoltParts:[],bivoltUnlocked:false,bivoltCharges:0,igor:false,kaique:false,igorSneak:false,kaiqueSneak:false,npcVisits:{}});
   let q=emptyQuest(),player,scene=0,camera=0,time=0,playing=false,paused=false,dialog=null,started=false,won=false,sound=false,vehicle=false,transition=0;
   let particles=[],shots=[],enemies=[],pickups=[],targets=[],damageTexts=[],shake=0,hitFlash=0,hazards=[],afterimages=[];
   // Visual-only boss drama: impact freeze, intro plate, phase shockwaves and the defeat burst.
@@ -200,7 +200,7 @@
   function basePlayer(){return {x:230,y:FLOOR,vx:0,vy:0,hp:bonus().maxHP,gas:bonus().maxGas,papers:30,facing:1,ground:true,inv:0,attack:0,attackType:'paper',attackDuration:.22,anim:0,landTimer:0};}
   player=basePlayer();
   function safe(fn){try{return fn();}catch(e){return null;}}
-  function setText(id,t){const e=$(id);if(e)e.textContent=t;}
+  function setText(id,t){const e=$(id);if(e&&e.textContent!==String(t))e.textContent=t;}
   function show(id,yes){const e=$(id);if(e){e.hidden=!yes;e.style.display=yes?'':'none';}}
   function toast(t){setText('toast',t);const e=$('toast');if(e){e.classList.add('show');e.hidden=false;}toastTimer=4;}
   function beep(freq=440,dur=.09,type='square',volume=.025){if(!sound)return;volume*=window.DarocaAudio?.sfx?.()??1;if(volume<=.0005)return;safe(()=>{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.setValueAtTime(freq,audioCtx.currentTime);o.frequency.exponentialRampToValueAtTime(Math.max(35,freq*.5),audioCtx.currentTime+dur);g.gain.setValueAtTime(volume,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+dur);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur);});}
@@ -208,8 +208,15 @@
   function floating(x,y,text,color='#fff4d1'){damageTexts.push({x,y,text,color,life:1.2});}
   function save(){if(!started||sandbox)return;safe(()=>localStorage.setItem(SAVE,JSON.stringify({q,scene,hp:player.hp,papers:player.papers,items,collected,weapon,minionKills,seenBossIntros,position:{x:!room&&!arena?player.x:lastSafeX,scene},progression:window.Progression?.serialize?.(),run:window.CampaignRun?.serialize?.(),campaignVersion:3.9,version:1})));updateContinue();}
   function load(){return safe(()=>{const a=JSON.parse(localStorage.getItem(SAVE));return a&&a.version===1&&a.q?a:null;});}
+  let menuLookQuest=load()?.q;
+  function getJaglionStatus(){
+    const quest=started?q:menuLookQuest;
+    if(!quest?.amandaDating)return 'locked';
+    return quest.jaglionClaimed?'ready':'reserved';
+  }
   function updateContinue(){const b=$('continueBtn');if(b){const yes=!!load();b.hidden=!yes;b.style.display=yes?'':'none';}}
   function mission(){
+    if(scene===8&&getJaglionStatus()==='reserved')return ['A entrega da Amanda','O Jaglion está pronto. Fale com Davi na Bigodon e receba o traje para vestir no espelho.'];
     if(scene===10&&!q.bivoltUnlocked){const s=window.BivoltQuest?.state?.(q);return ['Bivolt · energia da resenha',q.bivoltAccepted?`${s?.collected?.length||0}/3 latas encontradas. Suba as prateleiras e a varanda; depois volte às garotas.`:'Converse com as garotas na Casa de Rayssa para descobrir um energético que fortalece todos os atributos por 10 segundos.'];}
     if(scene===11&&!q.ollyan)return ['Orelhas ao vento','Ollyan está no meio do baile. Use o carro a gás para persegui-lo numa luta aérea de três fases. Invista nos atributos antes de decolar.'];
     if(window.Campaign?.currentQuest){const result=window.Campaign.currentQuest(q,{level:levelState().level,carParts:q.carParts.length,notebooks:q.notebooks.length,activity,training});if(Array.isArray(result))return result;}
@@ -240,8 +247,35 @@
     setText('dashValue',dashCooldown>0?dashCooldown.toFixed(1)+'s':'PRONTO');document.querySelectorAll('[data-action="dash"]').forEach(el=>{el.classList.toggle('cooldown',dashCooldown>0);el.setAttribute('aria-disabled',String(dashCooldown>0||vehicle||!q.mota&&!q.trained));});
     if(shell){shell.classList.toggle('is-epilogue',cutscene?.kind==='jorge_epilogue');shell.classList.toggle('is-chapter-ended',chapterEnded);shell.classList.toggle('is-cutscene',!!cutscene||ollyanEncounter?.stage==='intro');shell.classList.toggle('is-ollyan-flight',!!ollyanEncounter);shell.classList.toggle('is-room',!!room);shell.classList.toggle('is-arena',!!arena);}
     show('chapterEndScreen',chapterEnded);show('cinematicOverlay',(!!cutscene||ollyanEncounter?.stage==='intro')&&!paused);show('roomOverlay',!!room&&!cutscene&&!activity);setText('roomName',room?(room.id==='almiro'?'Sala do Professor Almiro':'Sala do Professor Miqueias'):'');if(cutscene){const beat=window.Cinematics.beat(cutscene);setText('cinematicTitle',beat.title);setText('cinematicName',beat.speaker);setText('cinematicText',beat.text);setText('cinematicCounter',`${beat.index+1} / ${beat.total}`);}const exit=$('roomExitBtn');if(exit)exit.disabled=room?.phase!=='inside';
-    show('activityOverlay',!!activity&&!paused&&!dialog&&!cutscene);if(shell)shell.classList.toggle('is-activity',!!activity);
-    if(activity){const view=window.Activities.view(activity);setText('activityTitle',view.title);setText('activityText',view.text);setText('activityScore',view.scoreLabel??activity.score);setText('activityMainBtn',view.actionLabel||'CHUTAR');show('activityMainBtn',!view.choices?.length);for(let i=0;i<3;i++){const b=$('activityChoice'+i),choice=view.choices?.[i];if(b){b.hidden=!choice;if(choice){b.textContent=choice.label??String(choice);b.dataset.value=String(choice.value??i);}}}}
+    const dinner=activity?.kind==='dinner';
+    show('activityOverlay',!!activity&&!paused&&!dialog&&!cutscene);
+    shell?.classList.toggle('is-activity',!!activity);
+    shell?.classList.toggle('is-dinner',dinner);
+    show('dinnerBreath',dinner&&activity.phase==='breath');
+    show('dinnerSpeaker',dinner);
+    if(activity){
+      const view=window.Activities.view(activity);
+      if(dinner){
+        setText('dinnerSpeaker',view.speaker);
+        $('activityOverlay').dataset.phase=activity.phase;
+      }
+      setText('activityTitle',view.title);
+      setText('activityText',view.text);
+      setText('activityScore',view.scoreLabel??activity.score);
+      setText('activityMainBtn',view.actionLabel||'CHUTAR');
+      setText('activityExitBtn',dinner?'Voltar à praça':'Sair do desafio');
+      show('activityMainBtn',!view.choices?.length);
+      show('activityExitBtn',!(dinner&&activity.phase==='outcome'&&(activity.score<2||activity.options.dating)));
+      for(let i=0;i<3;i++){
+        const button=$('activityChoice'+i),choice=view.choices?.[i];
+        if(!button)continue;
+        button.hidden=!choice;
+        if(choice){
+          setText(button.id,choice.label??String(choice));
+          button.dataset.value=String(choice.value??i);
+        }
+      }
+    }
     const p=$('pauseBtn');if(p)p.setAttribute('aria-label',paused?'Continuar jogo':'Pausar jogo');const nearby=closestBoss();document.querySelectorAll('[data-action=\"interact\"]').forEach(el=>{const label=el.querySelector?.('small');if(label)label.textContent=ollyanEncounter?(ollyanEncounter.stage==='intro'?'AVANÇAR':'RECUAR'):arena&&player.x<=arena.bounds[0]+78?'RECUAR':nearby?(bossAccess(nearby).ok?'DESAFIAR':'MISSÕES'):'FALAR';});
   }
   function populate(){
@@ -331,6 +365,12 @@
     if(!room&&!arena&&!vehicle&&window.WorldLife?.tryInteract?.({scene,player,q},{awardXP,save,updateUI,toast,addItem:(type,count)=>{if(Object.hasOwn(items,type))items[type]=Math.min(999,items[type]+Math.max(0,Math.floor(count)||0));}}))return;
     const found=closestNPC();if(!found){toast(vehicle?'Carro a gás ligado! Escolha uma rota ou dirija com o joystick.':'Chegue perto de alguém e aperte E. O diário mostra a próxima missão.');return;}
     const [id,n]=found;
+    if(id==='amanda'){
+      say(window.AmandaDinner.invitation(q),()=>{
+        if(startActivity('dinner')){q.amandaInvited=true;save();}
+      });
+      return;
+    }
     if(id==='swift'){openSwiftGuide();return;}
     if(id==='ollyan'){if(!q.ollyan)beginOllyanEncounter();else say([{name:n.name,text:'Foi mal, véi… minhas orelhas perderam o compasso. Hoje eu vou de carona e de água.'},{name:'Da Roça',text:'Fechou. Da próxima vez deixa a pilotagem com o carro do meu pai.'}]);return;}
     if(id==='almiro'){
@@ -354,13 +394,17 @@
       {name:n.name,text:'Combinado! Posso pelo menos fazer uma pose dramática de reconciliação?'}]);return;}
     if(id==='dede'){say(visitTalk(id));return;}
     if(id==='davi'){
-      const first=!q.bigodon;
+      const first=!q.bigodon, gift=getJaglionStatus()==='reserved';
+      const wardrobeLine=gift?'Amanda mandou recado! Vitor guardou o Jaglion pra você. Prova ele no espelho, rei da selva.':
+        q.jaglionClaimed?'Teu Jaglion tá no espelho junto dos chapéus. Hoje vai de juba ou de palha?':
+        'O Jaglion ali? A Amanda encomendou. Ela vive na entrada da Praça Camacan. Os outros visuais são da casa.';
+
       say([{name:n.name,text:first?'Chegou na Bigodon! Aqui o degradê é na régua e a resenha é sem limite. Senta aí, Da Roça!':'Olha quem voltou! O único cliente que usa gás de fixador. Aqui a resenha recupera até a energia.'},
         {name:'Da Roça',text:'Só alinha o chapéu. Se cortar meu cabelo, vou perder a aerodinâmica do peido.'},
         {name:n.name,text:'Relaxa! Meu corte é tão alinhado que até o carro do seu pai sai daqui fazendo curva certinha.'},
         {name:'Vitor · ajudante',text:'Davi, a tesoura! Você está penteando o vento de novo.'},
         {name:n.name,text:'É o acabamento premium, pô! Pronto: vida cheia, gás no tanque e autoestima na régua.'},
-        {name:n.name,text:'E olha o espelho ali: troca o chapéu, o cabelo, a cor da camisa... e o Vitor costurou até uma fantasia de leão. O JAGLION!'}],()=>{q.bigodon=true;player.hp=bonus().maxHP;player.gas=bonus().maxGas;if(first)awardXP(120,'side-bigodon');save();updateUI();toast('Resenha na Bigodon: vida e gás recuperados!');window.DarocaLook?.open?.({line:'Davi: Senta na cadeira e escolhe. Aqui o visual é por conta da casa!'});});return;
+        {name:n.name,text:wardrobeLine,actionLabel:gift?'Receber o Jaglion':'Abrir o espelho'}],()=>{if(gift)q.jaglionClaimed=true;q.bigodon=true;player.hp=bonus().maxHP;player.gas=bonus().maxGas;if(first)awardXP(120,'side-bigodon');save();updateUI();toast(gift?'Jaglion recebido na Bigodon!':'Resenha na Bigodon: vida e gás recuperados!');window.DarocaLook?.open?.({line:gift?'Davi: A juba é do Vitor, a ideia é da Amanda. O rugido é contigo!':'Davi: Senta na cadeira e escolhe. Aqui o visual é por conta da casa!'});});return;
     }
     if(id==='vitor'){
       const first=!q.vitor;
@@ -404,6 +448,7 @@
     if(sandbox)exitSandbox();
     window.CampaignRun?.setActive?.(false);if(started)save();resetBivolt();ollyanEncounter=null;ollyanRetryGrace=0;releaseInputs();
     if(activeBoss){activeBoss.hp=activeBoss.max;activeBoss.x=activeBoss.homeX;bossDefaults(activeBoss);}
+    if(started)menuLookQuest=q;
     started=false;playing=false;paused=false;won=false;defeated=false;chapterEnded=false;vehicle=false;
     dialog=null;dialogCallback=null;cutscene=null;cutsceneCallback=null;training=null;activity=null;activityCallback=null;
     room=null;arena=null;activeBoss=null;routeTransition=null;reeisPhase='idle';reeisTimer=0;
@@ -430,14 +475,30 @@
     if(scene!==3){toast('O SARUÊ agora é uma armadilha no chão. Não pise nela perto de Marco!');return false;}
     const nik=enemies.find(e=>e.type==='nikolas'&&e.hp>0&&Math.abs(e.x-player.x)<560);if(!nik){toast('Chegue perto de Nikolas para provocar o nariz de batata.');return false;}if(tauntCooldown>0)return false;tauntCooldown=4;floating(player.x,player.y-115,'Ô NARIZ DE BATATA!','#ffe3ad');floating(nik.x,nik.y-135,'É AERODINÂMICO!','#ecc39b');beep(210,.12,'triangle');return true;
   }
+  const dinnerMeter=$('dinnerBreath');
+  dinnerMeter.style.setProperty('--band-start',(window.AmandaDinner.band.start*100)+'%');
+  dinnerMeter.style.setProperty('--band-end',(window.AmandaDinner.band.end*100)+'%');
   function startActivity(kind){
     if(!window.Activities?.create){toast('Minigame indisponível. Recarregue a atualização.');return false;}
     if(kind==='football'&&scene!==7)return false;if(kind==='quiz'&&room?.id!=='miqueias')return false;
-    releaseInputs();vehicle=false;activity=window.Activities.create(kind,{level:levelState().level});activityCallback=kind;updateUI();return true;
+    if(kind==='dinner'&&(scene!==npcInfo.amanda.scene||closestNPC()?.[0]!=='amanda'))return false;
+    releaseInputs();vehicle=false;activity=window.Activities.create(kind,{level:levelState().level,trained:q.trained,dating:q.amandaDating});activityCallback=kind;updateUI();return true;
   }
   function submitActivity(value){if(!activity||paused||dialog||cutscene)return false;const result=window.Activities.submit(activity,value);if(activity?.done)finishActivity();else updateUI();return result;}
   function finishActivity(){
     if(!activity)return;const result=activity,kind=activityCallback;activity=null;activityCallback=null;releaseInputs();
+    if(kind==='dinner'){
+      if(result.success&&!q.amandaDating){
+        q.amandaDating=true;
+        awardXP(window.Campaign.rewards.amanda,'quest-amanda');
+        save();
+        say(['Quero, uai! Agora eu tenho dois motivos pra dividir a sobremesa.',
+          {name:'Amanda',text:'Um é sua namorada. O outro é o tamanho do seu olho, né?'},
+          {name:'Amanda',text:'Passa na Bigodon. O Davi guardou o Jaglion que eu e o Vitor desenhamos pra você.'}]);
+      }else toast(q.amandaDating?'De volta à praça com Amanda.':'O convite continua de pé. Fale com Amanda para tentar outra vez.');
+      updateUI();
+      return;
+    }
     if(result.success){if(kind==='football'){const first=!q.mota;q.mota=true;awardXP(first?300:70,first?'quest-mota':null);say([{name:'Mota',text:first?'GOOOL! Três gols! Agora o dash é seu: L, Shift ou o botão » pra escapar dos golpes.':'Gol de quem treina! XP ganho. Pode repetir sempre que quiser evoluir.'},'O bolo vai receber um passe de respeito!'],()=>toast('Dash desbloqueado! Distribua seus pontos de nível nos atributos.'));}else{q.miqueias=true;awardXP(260,'quest-miqueias');say([{name:'Professor Miqueias',text:'ALLRIGHT! You win the English, beleza creuza! Your papaias got elemental powers, concorda ou sem corda?'},'A aula melhorou até meu papel!',{name:'Professor Miqueias',text:'Level3 fire, level5 electric! Go level up and visit the favela, é ou não é?'}],()=>toast('Papaias elementais liberadas! Evolua o nível para fortalecer os disparos.'));}}
     else toast(kind==='football'?'Quase! Converse com Mota para tentar os chutes de novo.':'Tente novamente com o professor.');updateUI();save();
   }
@@ -681,7 +742,15 @@
     if(room&&room.phase!=='inside'){updateRoomTransition(dt);updateEffects(dt);return;}
     if(arena&&arena.phase!=='active'){updateArenaTransition(dt);updateEffects(dt);return;}
     if(routeTransition){routeTransition.t+=dt;if(routeTransition.t>=routeTransition.duration){const dest=routeTransition.to;routeTransition=null;arrive(dest);}updateEffects(dt);return;}
-    if(activity){window.Activities.update(activity,dt);if(activity.done)finishActivity();uiTimer+=dt;if(uiTimer>.1){uiTimer=0;updateUI();}return;}
+    if(activity){
+      window.Activities.update(activity,dt);
+      if(activity.kind==='dinner'&&activity.phase==='breath')
+        dinnerMeter.style.setProperty('--marker',(activity.marker*100).toFixed(2)+'%');
+      if(activity.done)finishActivity();
+      uiTimer+=dt;
+      if(uiTimer>.1){uiTimer=0;updateUI();}
+      return;
+    }
     if(training?.active){updateTraining(dt);updateEffects(dt);uiTimer+=dt;if(uiTimer>.12){uiTimer=0;updateUI();}return;}
     if(!ollyanEncounter||ollyanEncounter.stage!=='intro')updateBivolt(dt);
     if(ollyanEncounter){updateOllyan(dt);return;}
@@ -1102,7 +1171,7 @@
     drawEpicWorld();
     ctx.restore();
     if(!started){ctx.fillStyle='#192e301c';ctx.fillRect(0,0,W,H);if(window.Art?.drawVehicle)Art.drawVehicle(ctx,760,FLOOR,time);sprite('daroca',760,FLOOR-20,{facing:1,frame:time,scale:.8});}
-    if(started&&!dialog&&!paused&&!won&&!defeated&&!arena&&!routeTransition&&!training?.active&&!activity){const needPart=pickups.find(p=>p.type==='repair'&&!p.taken),needBook=pickups.find(p=>p.type==='notebook'&&!p.taken);const bivoltTarget=window.BivoltQuest?.parts?.find(p=>!q.bivoltParts.includes(p.id))?.x;const objective=scene===11&&!q.ollyan?3260:scene===10&&!q.bivoltUnlocked?(q.bivoltAccepted?(bivoltTarget??1220):1220):scene===10&&!q.rayssaVisit?450:scene===0&&!q.lucas?(q.carMissionAccepted&&q.carParts.length<3?needPart?.x:480):scene===7&&!q.mota?500:scene===8&&!q.bigodon?520:scene===9&&!q.arthur?(q.patioAccepted?bossHome('arthur',2850):500):scene===4&&!q.nicolas?bossHome('nicolas',5350):scene===1&&!q.almiro?(q.almiroAccepted&&q.notebooks.length<3?needBook?.x:1350):scene===1&&!q.miqueias?2350:scene===5&&!q.freddy&&!q.reeis?bossHome('freddy',5680):scene===5&&!q.reeis?bossHome('reeisBoss',6400):scene===1&&!q.marco?bossHome('marco',3700):scene===6&&!q.giant?bossHome('giant',5650):scene===1&&!q.menezes?bossHome('menezes',5200):scene===2&&!q.trained?400:scene===3&&!q.nikolas?bossHome('nikolas',4300):null;if(objective!==null&&!window.Balanco?.active?.()&&(objective<camera+45||objective>camera+W-45)){const right=objective>camera+W-45;pill(right?'OBJETIVO →':'← OBJETIVO',right?W-83:83,62,'#ffe09b');}
+    if(started&&!dialog&&!paused&&!won&&!defeated&&!arena&&!routeTransition&&!training?.active&&!activity){const needPart=pickups.find(p=>p.type==='repair'&&!p.taken),needBook=pickups.find(p=>p.type==='notebook'&&!p.taken);const bivoltTarget=window.BivoltQuest?.parts?.find(p=>!q.bivoltParts.includes(p.id))?.x;const objective=scene===11&&!q.ollyan?3260:scene===10&&!q.bivoltUnlocked?(q.bivoltAccepted?(bivoltTarget??1220):1220):scene===10&&!q.rayssaVisit?450:scene===0&&!q.lucas?(q.carMissionAccepted&&q.carParts.length<3?needPart?.x:480):scene===7&&!q.mota?500:scene===8&&(!q.bigodon||getJaglionStatus()==='reserved')?npcInfo.davi.x:scene===9&&!q.arthur?(q.patioAccepted?bossHome('arthur',2850):500):scene===npcInfo.amanda.scene&&!q.amandaDating?npcInfo.amanda.x:scene===4&&!q.nicolas?bossHome('nicolas',5350):scene===1&&!q.almiro?(q.almiroAccepted&&q.notebooks.length<3?needBook?.x:1350):scene===1&&!q.miqueias?2350:scene===5&&!q.freddy&&!q.reeis?bossHome('freddy',5680):scene===5&&!q.reeis?bossHome('reeisBoss',6400):scene===1&&!q.marco?bossHome('marco',3700):scene===6&&!q.giant?bossHome('giant',5650):scene===1&&!q.menezes?bossHome('menezes',5200):scene===2&&!q.trained?400:scene===3&&!q.nikolas?bossHome('nikolas',4300):null;if(objective!==null&&!window.Balanco?.active?.()&&(objective<camera+45||objective>camera+W-45)){const right=objective>camera+W-45;pill(right?'OBJETIVO →':'← OBJETIVO',right?W-83:83,62,'#ffe09b');}
       if(vehicle)pill('CARRO A GÁS',W/2,30,'#cfe5a7');if(reeisCooldown>0&&q.reeis)pill('REEIS: '+Math.ceil(reeisCooldown)+'s',W-90,H-25,'#f6cda0');else if(q.reeis)pill('[R] REEIS PRONTO',W-100,H-25,'#d3e8a5');
     }
     if(reeisPhase==='charging'||reeisPhase==='burst'){ctx.save();ctx.globalAlpha=reeisPhase==='burst'?.55:.2;ctx.strokeStyle='#ffe7ab';ctx.lineWidth=2;for(let i=0;i<16;i++){const yy=20+i*33+Math.sin(time*15+i)*12;ctx.beginPath();ctx.moveTo(i%2?0:W,yy);ctx.lineTo(i%2?180:W-180,yy+Math.sin(i)*25);ctx.stroke();}ctx.restore();}
@@ -1128,9 +1197,14 @@
     // Menus keep native Enter/Space activation. Hidden buttons left focused after a
     // conversation, intro, or touch press never own input during active gameplay.
     if(!started||paused||won||defeated||chapterEnded){const button=visibleKeyboardButton(e.target);if(button&&['Enter','Space'].includes(code))keyboardClicks.set(button,performance.now());return;}
+    if(activity?.kind==='dinner'&&activity.phase==='choice'&&['Digit1','Digit2','Numpad1','Numpad2'].includes(code)){
+      e.preventDefault();if(!e.repeat)submitActivity(Number(code.slice(-1))-1);return;
+    }
     if(activity&&confirm){
       // Quiz choices are real buttons; preserve their values and keyboard focus.
-      if(activity.kind==='quiz'&&visibleKeyboardButton(e.target)&&['Enter','Space'].includes(code))return;
+      if((activity.kind==='quiz'||activity.kind==='dinner')&&visibleKeyboardButton(e.target)&&['Enter','Space'].includes(code)){
+        keyboardClicks.set(e.target.closest('button,a'),performance.now());return;
+      }
       e.preventDefault();if(!e.repeat)submitActivity();return;
     }
     if(training?.active&&confirm){e.preventDefault();if(!e.repeat)submitTraining();return;}
@@ -1194,7 +1268,19 @@
   });
   document.querySelectorAll('[data-scene]').forEach(el=>el.addEventListener('click',()=>travel(Number(el.dataset.scene))));
   $('startBtn')?.addEventListener('click',()=>start(false));$('continueBtn')?.addEventListener('click',()=>start(true));$('pauseBtn')?.addEventListener('click',()=>paused?resume():pause());$('resumeBtn')?.addEventListener('click',resume);$('restartBtn')?.addEventListener('click',reset);
-  $('soundBtn')?.addEventListener('click',()=>{sound=!sound;$('soundBtn').classList.toggle('active',sound);$('soundBtn').setAttribute('aria-pressed',String(sound));$('soundBtn').title=sound?'Desligar som':'Ligar som';const label=$('soundState');if(label)label.textContent=sound?'Som ligado':'Som desligado';beep(660,.1,'triangle');});
+  function setSoundEnabled(value){
+    sound=!!value;
+    const button=$('soundBtn');
+    if(button){
+      button.classList.toggle('active',sound);
+      button.classList.toggle('muted',!sound);
+      button.setAttribute('aria-pressed',String(sound));
+      button.title=sound?'Desligar som':'Ligar som';
+      button.textContent=sound?'♫':'♪';
+    }
+    setText('soundState',sound?'Som ligado':'Som desligado');
+  }
+  $('soundBtn')?.addEventListener('click',()=>{setSoundEnabled(!sound);beep(660,.1,'triangle');});
   for(let i=0;i<3;i++)$('activityChoice'+i)?.addEventListener('click',()=>submitActivity(Number($('activityChoice'+i)?.dataset.value??i)));$('activityExitBtn')?.addEventListener('click',cancelActivity);
   $('cutsceneNextBtn')?.addEventListener('click',advanceCutscene);$('cutsceneSkipBtn')?.addEventListener('click',skipCutscene);$('replayIntroBtn')?.addEventListener('click',replayIntro);$('roomExitBtn')?.addEventListener('click',exitRoom);$('trainingExitBtn')?.addEventListener('click',cancelTraining);$('respawnBtn')?.addEventListener('click',respawn);
   function getAudioState(){const flight=ollyanEncounter?window.OllyanEncounter?.getAudioState?.(ollyanEncounter):null;return {started,playing,paused,scene,room:room?.id||null,boss:flight?.boss||activeBoss?.type||null,bossPhase:ollyanEncounter?window.OllyanEncounter.getStatus(ollyanEncounter).phase:activeBoss?.phase||null,cutscene:flight?.cutscene||cutscene?.kind||null,cutsceneToken:flight?.cutsceneToken||cutscene?.audioToken||null,cutsceneElapsed:flight?.cutscene?flight.cutsceneElapsed:cutscene?Math.max(0,Number(window.Cinematics?.timelinePosition?.(cutscene)??cutscene.elapsed??cutscene.audioElapsed)||0):0,cutsceneIndex:flight?.cutscene?flight.cutsceneIndex:cutscene?.index??null,cutsceneTimed:!!flight?.cutsceneTimed||!!cutscene?.options?.musicTimed,training:!!training?.active,activity:activity?.kind||activityCallback||null,dialogue:window.SwiftGuide?.isOpen?.()?'Irmão de Clara Swift':dialog?.lines?.[dialog.index]?.name||null,reeis:reeisPhase,sound,defeated:defeated||ollyanEncounter?.stage==='defeat',chapterEnded};}
@@ -1209,7 +1295,7 @@
     if(!sandbox){window.CampaignRun?.setSuspended?.(true);sandbox={type,result:null,snapshot:copyState({difficultyMode:window.Difficulty?.getMode?.()||'normal',started,playing,paused,won,defeated,chapterEnded,scene,camera,player,q,items,collected,weapon,minionKills,seenBossIntros,killCount,lastSafeX,respawnCheckpoint,vehicle,enemies,minions,pickups,targets,progression:window.Progression?.serialize?.(),reeisCooldown,dashCooldown,attackCooldown,fartCooldown})};}
     const snapshot=sandbox.snapshot;sandbox.type=type;sandbox.result=null;sandbox.difficultyMode=window.Difficulty?.getMode?.()||'normal';
     const saved=!snapshot.started?load():null;q=copyState({...emptyQuest(),...(saved?.q||snapshot.q)});window.Progression?.restore?.(saved?.progression||snapshot.progression);weapon=saved?.weapon??snapshot.weapon;items=copyState(saved?.items||snapshot.items);collected=copyState(saved?.collected||snapshot.collected);
-    for(const flag of ['lucas','mota','almiro','miqueias','reeis','marco','giant','menezes','trained','training','freddy','patioAccepted'])q[flag]=true;
+    for(const flag of ['lucas','mota','almiro','miqueias','reeis','marco','giant','menezes','trained','training','freddy','patioAccepted','amandaDating'])q[flag]=true;
     q[type==='reeisBoss'?'reeis':type]=false;q.bivoltUnlocked=true;q.bivoltCharges=9;
     started=true;playing=true;paused=false;won=false;defeated=false;chapterEnded=false;scene=sandboxScenes[type];room=null;arena=null;activeBoss=null;cutscene=null;cutsceneCallback=null;dialog=null;dialogCallback=null;activity=null;training=null;ollyanEncounter=null;routeTransition=null;resetBivolt();vehicle=false;reeisPhase='idle';reeisTimer=0;reeisCooldown=0;dashTimer=0;dashCooldown=0;attackCooldown=0;fartCooldown=0;seenBossIntros=[...Object.keys(sandboxScenes)];player=basePlayer();populate();minions=[];pickups=[];targets=[];
     for(const id of ['startScreen','pauseScreen','chapterEndScreen','victoryScreen','defeatScreen','dialogBox','dialogControls','cinematicOverlay','activityOverlay','trainingAction'])show(id,false);
@@ -1224,7 +1310,7 @@
     ({started,playing,paused,won,defeated,chapterEnded,scene,camera,player,q,items,collected,weapon,minionKills,seenBossIntros,killCount,lastSafeX,respawnCheckpoint,vehicle,enemies,minions,pickups,targets,reeisCooldown,dashCooldown,attackCooldown,fartCooldown}=prior);window.Progression?.restore?.(prior.progression);resetWorldSize();shots=[];hazards=[];particles=[];damageTexts=[];afterimages=[];reeisPhase='idle';reeisTimer=0;
     for(const id of ['victoryScreen','defeatScreen','dialogBox','dialogControls','cinematicOverlay','activityOverlay','trainingAction'])show(id,false);show('startScreen',!started);show('pauseScreen',started&&paused&&!chapterEnded);updateUI();updateContinue();emitGameEvent('sandbox-change',null);if(started&&!paused&&!chapterEnded)canvas.focus();return true;
   }
-  window.Game={soundOn:()=>sound,openSwiftGuide,startSandboxBoss,retrySandboxBoss,exitSandbox,activateBivolt,beginOllyanEncounter,retreatOllyan,advanceDialogue:nextDialog,closeDialogue,getDialogueView,getAudioState,getBossStatus,continueExploring,replayEpilogue,returnToMenu,getViewTarget:()=>({y:ollyanEncounter?.player?.y??player.y,vehicle:vehicle||!!ollyanEncounter}),getDialogueAnchor,submitActivity,cancelActivity,spendStat,routeReason,advanceCutscene,skipCutscene,replayIntro,enterRoom,exitRoom,retreatBoss,setJoystick,dash,respawn,releaseInputs,start,travel,pause,resume,reset,submitTraining,cancelTraining,taunt,craft,getState:()=>({run:window.CampaignRun?.getState?.()||null,sandbox:sandbox?{type:sandbox.type,result:sandbox.result,difficultyMode:sandbox.difficultyMode}:null,bivolt:{...bivoltStatus()},ollyan:ollyanEncounter?{...window.OllyanEncounter.getStatus(ollyanEncounter),player:{...ollyanEncounter.player}}:null,started,playing,paused,won,chapterEnded,scene,camera,nearBoss:closestBoss()?{type:closestBoss().type,name:bossNames[closestBoss().type],...bossAccess(closestBoss())}:null,q:{...q},player:{...player},enemies:enemies.map(e=>({...e})),targets:targets.map(t=>({...t})),dialog:dialog?{...dialog}:null,items:{...items},materialCount:materialCount(),collected:[...collected],weapon,weaponName:weaponNames[weapon],progression:levelState(),comboStep,seenBossIntros:[...seenBossIntros],activity:activity?{...activity}:null,training:training?{...training}:null,shots:shots.map(s=>({...s})),vehicle,reeisTimer,reeisCooldown,reeisPhase,reeisX,reeisPhaseTimer,joystick:{...joystick},dashTimer,dashCooldown,activeBoss:activeBoss?.type||null,defeated,routeTransition:routeTransition?{...routeTransition}:null,hazards:hazards.map(h=>({...h})),worldWidth:WORLD,room:room?{...room}:null,arena:arena?{...arena}:null,cutscene:cutscene?{...cutscene}:null,minions:minions.map(m=>({...m})),minionKills:[...minionKills],touchActions:Object.keys(touch).filter(a=>touch[a]),activePointers:[...activePointers].map(([pointerId,p])=>({pointerId,action:p.action,pointerType:p.pointerType}))})};
+  window.Game={soundOn:()=>sound,setSoundEnabled,getJaglionStatus,openSwiftGuide,startSandboxBoss,retrySandboxBoss,exitSandbox,activateBivolt,beginOllyanEncounter,retreatOllyan,advanceDialogue:nextDialog,closeDialogue,getDialogueView,getAudioState,getBossStatus,continueExploring,replayEpilogue,returnToMenu,getViewTarget:()=>({y:ollyanEncounter?.player?.y??player.y,vehicle:vehicle||!!ollyanEncounter}),getDialogueAnchor,submitActivity,cancelActivity,spendStat,routeReason,advanceCutscene,skipCutscene,replayIntro,enterRoom,exitRoom,retreatBoss,setJoystick,dash,respawn,releaseInputs,start,travel,pause,resume,reset,submitTraining,cancelTraining,taunt,craft,getState:()=>({run:window.CampaignRun?.getState?.()||null,sandbox:sandbox?{type:sandbox.type,result:sandbox.result,difficultyMode:sandbox.difficultyMode}:null,bivolt:{...bivoltStatus()},ollyan:ollyanEncounter?{...window.OllyanEncounter.getStatus(ollyanEncounter),player:{...ollyanEncounter.player}}:null,started,playing,paused,won,chapterEnded,scene,camera,nearBoss:closestBoss()?{type:closestBoss().type,name:bossNames[closestBoss().type],...bossAccess(closestBoss())}:null,q:{...q},player:{...player},enemies:enemies.map(e=>({...e})),targets:targets.map(t=>({...t})),dialog:dialog?{...dialog}:null,items:{...items},materialCount:materialCount(),collected:[...collected],weapon,weaponName:weaponNames[weapon],progression:levelState(),comboStep,seenBossIntros:[...seenBossIntros],activity:activity?{...activity}:null,training:training?{...training}:null,shots:shots.map(s=>({...s})),vehicle,reeisTimer,reeisCooldown,reeisPhase,reeisX,reeisPhaseTimer,joystick:{...joystick},dashTimer,dashCooldown,activeBoss:activeBoss?.type||null,defeated,routeTransition:routeTransition?{...routeTransition}:null,hazards:hazards.map(h=>({...h})),worldWidth:WORLD,room:room?{...room}:null,arena:arena?{...arena}:null,cutscene:cutscene?{...cutscene}:null,minions:minions.map(m=>({...m})),minionKills:[...minionKills],touchActions:Object.keys(touch).filter(a=>touch[a]),activePointers:[...activePointers].map(([pointerId,p])=>({pointerId,action:p.action,pointerType:p.pointerType}))})};
   window.addEventListener('campaign-run-change',event=>{if(event.detail?.reason==='difficulty'&&started&&!sandbox){save();updateUI();}});
   window.addEventListener('progression-change',()=>{if(!started||!player)return;player.hp=Math.min(player.hp,bonus().maxHP);player.gas=Math.min(player.gas,bonus().maxGas);updateUI();save();});
   show('chapterEndScreen',false);show('pauseScreen',false);show('dialogBox',false);show('victoryScreen',false);show('defeatScreen',false);show('cinematicOverlay',false);show('roomOverlay',false);updateContinue();populate();updateUI();requestAnimationFrame(frame);
