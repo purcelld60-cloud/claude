@@ -251,3 +251,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Varredura dele:** 63 golpes renderizados, mais final, créditos, save, checkpoint e HUD 5/5.
   - **Minhas regressões continuam passando:** a luta da C2 pelo caminho real anda no teclado e no toque, os botões somem nos diálogos, e o menu, a pausa, os sistemas e o aviso de save funcionam.
   - Testes: 20 de 20.
+- **2026-11-22 · Claude:** **modo desenvolvedor com pontos de atributo infinitos** (`progression.js`, `ui.js`):
+  - Com `window.DAROCA_DEV` (IPA dev ou `?dev`), `getState()` devolve `points: 999` e `infinito: true`, e `spend()` não desconta. O teto de 40 por atributo continua.
+  - A tela mostra "∞ PONTOS".
+  - `serialize()` grava o número real de pontos, então o save não leva pontos infinitos para o jogo normal.
+  - Fora do modo dev nada muda.
