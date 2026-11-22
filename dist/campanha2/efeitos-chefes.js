@@ -102,7 +102,7 @@
   }
   function movel(c, o, p, t, cor) {
     const {x,y} = p, dir = o.x1 >= o.x0 ? 1 : -1, w = o.rx * 2, h = o.ry * 2;
-    if (o.corpo) return; // O corpo e a aura já são desenhados na posição que causa dano.
+    if (o.corpo || o.art==='motoTonhao') return; // O corpo e a aura já são desenhados na posição que causa dano.
     if (o.art === 'farpa') {
       P(c,x-o.rx,y-14,w,25,tinta); P(c,x-o.rx+2,y-12,w-4,21,'#722e51');
       P(c,x-o.rx+3,y-12,w-6,2,'#f6b2bd');
@@ -150,9 +150,18 @@
       case 'fratura':
         for(let k=-2;k<=2;k++)risco(c,[[x+k*w*.17-3,bot],[x+k*w*.17,top-3-Math.sin(u*Math.PI)*7],[x+k*w*.17+4,bot]],'#ffe3a7',2);
         break;
+      case 'blitz':
+        for(let k=-1;k<=1;k++){selo(c,'cone',x+k*w*.31,bot-18,25,34);}
+        for(let k=0;k<7;k++){const dx=l+k*w/7, y=top+8+Math.sin(u*12+k*.65)*3;P(c,dx,y,w/7+1,7,k%2?'#473940':'#ffce72');}
+        break;
       case 'oleo':
         P(c,l+5,bot-9,w-10,7,'#302d44'); P(c,l+13,bot-14,w-27,6,'#50455f');
-        for(let i=0;i<4;i++)P(c,l+12+i*w*.19,bot-10-i%2*4,9,2,i%2?'#a1a9b7':'#947e9c'); break;
+        for(let i=0;i<4;i++){
+          const salto=(u*1.7+i*.25)%1, dx=l+12+i*w*.19;
+          P(c,dx,bot-10-i%2*4,9,2,i%2?'#a1a9b7':'#947e9c');
+          const yy=bot-9-4*salto*(1-salto)*(h-11);
+          P(c,dx+9*salto,yy,5,6,'#413b53');P(c,dx+9*salto,yy,3,2,'#afa3b8');
+        }break;
       case 'vapor':
         selo(c,'forma',x,bot-5,w*.92,13);
         for(let i=0;i<3;i++){const xx=x+(i-1)*13;risco(c,[[xx,bot-9],[xx-5,bot-h*.32],[xx+4,bot-h*.59],[xx-3,top+7+i*3]],i%2?'#ecc998':'#ffead1',4);} break;
@@ -207,13 +216,19 @@
     if (o.area) {
       const w=o.rx*2, h=o.ry*2; cantos(c,o.x0,o.y0,w,h,cor);
       P(c,o.x0-o.rx,o.y0+o.ry-4,w,4,tinta); P(c,o.x0-o.rx,o.y0+o.ry-4,w*pct,3,cor);
+      // Os dentes apontam para dentro da área e permanecem visíveis sobre fundos claros.
+      for(const lado of [-1,1]) {
+        const x=o.x0+lado*(o.rx-3),y=o.y0+o.ry-11;
+        risco(c,[[x-lado*8,y-4],[x,y],[x-lado*8,y+4]],tinta,5);
+        risco(c,[[x-lado*8,y-4],[x,y],[x-lado*8,y+4]],cor,2);
+      }
       if(o.art==='visor') { P(c,o.x0-o.rx+7,o.y0-o.ry+8,5,5,'#ff5b74'); texto(c,'REC',o.x0-o.rx+25,o.y0-o.ry+11,cor,9); }
       return;
     }
     // Gotas no próprio arco mostram altura e direção, inclusive a volta dos golpes.
     for(let i=1;i<=8;i++){const pt=combate.ponto(o,i/9);P(c,pt.x-2,pt.y-2,4,4,tinta);P(c,pt.x-1,pt.y-1,3,2,cor);}
-    if(o.corpo){
-      const pe=o.y1+o.corpo;
+    if(o.corpo || o.art==='motoTonhao'){
+      const pe=o.y1+(o.corpo||14);
       for(const lado of [-1,1])risco(c,[[o.x1+lado*9,pe-2],[o.x1+lado*23,pe-2],[o.x1+lado*28,pe-8]],cor,3);
       return;
     }
@@ -282,6 +297,18 @@
       }
     c.restore();
   }
+  function personagem(c,f,tipo,x,y,o) {
+    const dir=o.facing<0?-1:1, u=Math.min(1,f.tempo/(f.dur||1));
+    const carga=f.estado==='windup'?u*u:0;
+    const golpe=f.estado==='firing'?Math.sin(Math.min(1,u*2.1)*Math.PI):0;
+    const repouso=f.estado==='recover'?Math.sin(u*Math.PI)*.028:0;
+    c.save();c.translate(Math.round(x),Math.round(y));
+    c.scale(1+carga*.055-golpe*.035,1-carga*.085+golpe*.052-repouso);
+    c.rotate(dir*(golpe*.095-carga*.060));
+    window.Art.drawCharacter(c,tipo,0,0,{...o,frame:f.idade,attack:carga>0||golpe>0,
+      attackProgress:carga?carga*.24:.25+golpe*.72});
+    c.restore();
+  }
   function desenhar(c,f) {
     if(!f)return;
     c.save(); c.imageSmoothingEnabled=false;
@@ -292,10 +319,20 @@
       if(o.fim||rel < -Math.max(.76,f.estado==='windup'?f.dur:0))continue;
       if(!ativa||rel<0){ aviso(c,o,cor,Math.max(0,Math.min(1,1+rel/(ativa?.76:f.dur)))); continue; }
       const u=Math.min(1,rel/o.dur);
-      if(o.area) zona(c,o,u,cor); else movel(c,o,combate.ponto(o,u),u,cor);
+      if(o.area)zona(c,o,u,cor);
+      else {
+        const p=combate.ponto(o,u);
+        if(!o.corpo && o.art!=='motoTonhao' && u>.02){
+          const a=combate.ponto(o,Math.max(0,u-.035/o.dur));
+          const dx=p.x-a.x,dy=p.y-a.y, comprimento=Math.hypot(dx,dy);
+          if(comprimento>6){const s=Math.min(17,comprimento)/comprimento;
+            risco(c,[[p.x-dx*s,p.y-dy*s],[p.x,p.y]],cor,2);}
+        }
+        movel(c,o,p,u,cor);
+      }
     }
     for(const m of f.marcas) impacto(c,f.slug,m,cor);
     c.restore();
   }
-  window.ConquistaEfeitos = Object.freeze({desenhar,fundo});
+  window.ConquistaEfeitos = Object.freeze({desenhar,fundo,personagem});
 })();

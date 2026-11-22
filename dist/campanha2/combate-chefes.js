@@ -31,7 +31,10 @@
 
   // Gera um pequeno conjunto finito de objetos por golpe. Alturas são medidas a partir do piso.
   function palco(f, p) {
-    const l = f.l + 36, r = f.r - 36, x = clamp(p.x, l, r), d = x < f.x ? -1 : 1;
+    const l = f.l + 36, r = f.r - 36;
+    // Só os golpes que miram no jogador antecipam a corrida. O alvo fica travado no primeiro aviso.
+    const dianteira = clamp((p.vx || 0)*Math.min(.18,(f.fase-1)*.08)/f.avisoModo, -64, 64);
+    const x = clamp(p.x + dianteira, l, r), d = p.x < f.x ? -1 : 1;
     const edge = d < 0 ? l : r;
     const alvo = dx => clamp(x + dx, l, r);
     const mov = (art, x0, h0, x1, h1, dur, op = {}) => ({
@@ -44,7 +47,7 @@
         rx: largura / 2, ry: altura / 2, atraso, dur, dano: 15};
     };
     return {f, l, r, x, d, edge, alvo, mov, area, b: f.x, twin: f.gemeoX, centro: (l + r) / 2,
-      altura: clamp(f.piso - p.y + 27, 25, 270)};
+      setor: dx=>clamp(x,l+140,r-140)+dx, altura: clamp(f.piso - p.y + 27, 25, 270)};
   }
 
   // Cada entrada determina o desenho, a geometria, o ritmo e a abertura do golpe.
@@ -53,50 +56,56 @@
     recado: ['Áudio da vizinha', a => [a.mov('audio', a.b, 68, a.edge, a.altura, 1.05, {onda: 19})]],
     encaminhado: ['Encaminhado de novo', a => [a.mov('balao', a.b, 75, a.edge, 28, .85, {arco: 55}),
       a.mov('audio', a.edge, 28, a.b, 90, 1, {atraso: .88, onda: 20})]],
-    quarteirao: ['O bairro inteiro viu', a => [-112, 0, 112].map((n, i) => a.area('janela', a.alvo(n), 62, 136, i * .28))],
+    quarteirao: ['Todas as janelas!', a => [a.area('janela',a.setor(-120),105,148,0,.75),
+      a.area('janela',a.setor(120),105,148,0,.75),a.area('janela',a.setor(0),115,175,.86,.60)]],
 
-    bandeirada: ['Bandeirada • pule a moto', a => [a.mov('moto', a.b, 25, a.edge, 25, .78, {piloto: true, rx: 35, ry: 22})]],
-    recibo: ['Taxa de chinelo', a => [a.mov('recibo', a.b, 65, a.edge, a.altura, 1.15, {onda: 32, rx: 14})]],
-    retorno: ['Retorno proibido', a => [a.mov('moto', a.b, 25, a.edge, 25, .82, {piloto: true, rx: 35, ry: 22}),
-      a.mov('moto', a.edge, 25, a.b, 25, .82, {piloto: true, atraso: 1.42, rx: 35, ry: 22})]],
-    contramao: ['Faixa de mototáxi', a => [a.mov('cone', a.b, 55, a.x, 15, .63, {arco: 82}),
-      a.mov('moto', a.b, 25, a.edge, 25, .75, {piloto: true, atraso: .8, rx: 35, ry: 22})]],
+    bandeirada: ['Corta a fila!', a => [a.mov('motoTonhao',a.b,65,a.edge,65,.84,{piloto:true,rx:42,ry:19})]],
+    recibo: ['Cobrança em comboio', a => window.PerseguicaoMoto.recibos(a)],
+    retorno: ['Costura e volta', a => [a.mov('motoTonhao',a.b,65,a.edge,65,.82,{piloto:true,rx:41,ry:18}),
+      a.mov('motoTonhao',a.edge,65,a.b,65,.79,{piloto:true,atraso:1.12,rx:41,ry:18})]],
+    contramao: ['Blitz nos bagageiros', a => window.PerseguicaoMoto.setores(a,'blitz',82,true)],
 
     rosquinha: ['Biscoito de goma', a => [a.mov('biscoito', a.b, 58, a.x, 20, .82, {arco: 108}),
       a.mov('biscoito', a.x, 20, a.edge, 17, .78, {arco: 54, atraso: .82})]],
     quilo: ['Só vendo no quilo!', a => [a.mov('saco', a.x, 262, a.x, 20, .64, {rx: 19, ry: 20}),
       a.area('farinha', a.x, 102, 46, .64, .38)]],
     peneira: ['Sai da peneira!', a => [-88, 88].map((dx, i) => a.mov('biscoito', a.b, 70, a.alvo(dx), 17, .92, {arco: 125, atraso: i * .23}))],
-    balanca: ['Balança viciada', a => [-68, 68, -68].map((dx, i) => a.mov('prato', a.alvo(dx), 192, a.alvo(dx), 18, .5, {rx: 32, ry: 12, atraso: i * .52}))],
+    balanca: ['Balança e nuvem de polvilho', a => [-1,1].flatMap((d,i)=>[a.mov('prato',a.setor(d*96),211,a.setor(d*96),19,.54,{rx:27,ry:12,atraso:i*.26}),
+      a.area('farinha',a.setor(d*96),128,76,.57+i*.26,.75)])],
 
     enquadrar: ['Sai do enquadramento!', a => [a.area('visor', a.x, 98, 205)]],
     curtidas: ['Chuva de curtidas', a => [-55, 55].map((dx, i) => a.mov('like', a.alvo(dx), 228, a.alvo(-dx), 18, .96, {onda: 20, atraso: i * .38}))],
     carrossel: ['Arrasta pro lado', a => [-114, 0, 114].map((n, i) => a.area('visor', a.alvo(n), 74, 196, i * .36))],
-    reprise: ['Replay ao vivo', a => [a.area('visor', a.x, 96, 214), a.area('visor', a.x, 96, 214, 1.04),
-      a.mov('like', a.b, 60, a.edge, 65, 1.15, {arco: 55, atraso: .34})]],
+    reprise: ['Replay em tela dividida', a => [a.area('visor',a.setor(-124),118,185,0,.70),
+      a.area('visor',a.setor(124),118,185,0,.70),a.area('visor',a.setor(0),130,215,.88,.57),
+      a.mov('like',a.b,60,a.edge,63,1.1,{arco:55,atraso:.68})]],
 
     semeadura: ['Do grão ao pé de café', a => [a.mov('grao', a.b, 62, a.x, 10, .78, {arco: 103}),
       a.area('cafeeiro', a.x, 62, 125, .9, .52)]],
     coado: ['Café passado na hora', a => [a.mov('bule', a.b, 34, a.edge, 28, 1.28, {onda: 8, rx: 24, ry: 18})]],
     florada: ['Florada do cafezal', a => [-105, 0, 105].map((dx, i) => a.area('cafeeiro', a.alvo(dx), 59, 107 + i * 19, i * .3))],
-    safra: ['Colheita apressada', a => [-74, 74].flatMap((dx, i) => [a.mov('grao', a.b, 60, a.alvo(dx), 10, .65, {arco: 94, atraso: i * .36}),
-      a.area('cafeeiro', a.alvo(dx), 64, 145, .79 + i * .36)])],
+    safra: ['Raízes em fileiras', a => [a.mov('grao',a.b,65,a.setor(-110),12,.61,{arco:86}),
+      a.area('cafeeiro',a.setor(-110),92,138,.65,.74),a.area('cafeeiro',a.setor(110),92,138,.65,.74),
+      a.area('cafeeiro',a.setor(0),108,158,1.54,.52)]],
 
     ribalta: ['Na mira do refletor', a => [a.area('refletor', a.x, 91, 220, 0, .45)]],
     contrapeso: ['Cuidado com o cenário!', a => [a.mov('peso', a.x, 274, a.x, 22, .57, {rx: 23, ry: 22}),
       a.mov('tabua', a.x, 13, a.edge, 13, .76, {atraso: .59, rx: 23, ry: 10})]],
     deixa: ['A deixa do Pitbull', a => [a.area('cortina', a.alvo(-76), 72, 194), a.area('cortina', a.alvo(76), 72, 194, .23),
       a.mov('luva', a.b, 47, a.x, 42, .54, {piloto: true, atraso: .74, rx: 24, ry: 17})]],
-    bis: ['Pediram bis!', a => [a.area('refletor', a.x, 88, 212), a.mov('peso', a.x, 266, a.x, 20, .64, {atraso: .68, ry: 21}),
-      a.mov('tabua', a.x, 13, a.b, 13, .78, {atraso: 1.32, rx: 24, ry: 11})]],
+    bis: ['Último ato!', a => [a.area('refletor',a.setor(0),110,220,0,.63),
+      a.area('cortina',a.setor(-128),96,204,.81,.81),a.area('cortina',a.setor(128),96,204,.81,.81),
+      a.mov('tabua',a.x,14,a.b,14,.76,{atraso:1.65,rx:25,ry:10})]],
 
     player1: ['Ryan • comando baixo', a => [a.mov('controle1', a.b, 44, a.edge, 25, 1.1)]],
     player2: ['Bryan • comando aéreo', a => [a.mov('controle2', a.twin, 80, a.x, 20, .87, {arco: 78}),
       a.mov('controle2', a.x, 20, a.twin, 82, .85, {arco: 43, atraso: .88})]],
     cabolink: ['Cabo link desconectado', a => [a.mov('plug1', a.b, 26, a.twin, 27, 1.12, {rx: 20}),
       a.mov('plug2', a.twin, 96, a.b, 94, 1.12, {atraso: .34, rx: 20})]],
-    coop: ['Combo dos dois controles', a => [a.mov('controle1', a.b, 38, a.x, 25, .82),
-      a.mov('controle2', a.twin, 82, a.x, 26, .90, {arco: 80, atraso: .5}), a.area('checkpoint', a.x, 78, 100, 1.53)]],
+    coop: ['Checkpoint para dois', a => [a.mov('controle1',a.b,40,a.x,27,.80),
+      a.mov('controle2',a.twin,84,a.x,29,.86,{arco:72,atraso:.30}),
+      a.area('checkpoint',a.setor(-116),101,132,1.12,.72),a.area('checkpoint',a.setor(116),101,132,1.12,.72),
+      a.area('checkpoint',a.setor(0),105,116,1.98,.46)]],
 
     pao: ['Pão de queijo ou biscoito?', a => [a.mov('pao', a.b, 66, a.x, 18, .82, {arco: 90}),
       a.mov('pao', a.x, 18, a.edge, 18, .73, {arco: 62, atraso: .82})]],
@@ -104,18 +113,19 @@
       a.mov('pente', a.edge, 38, a.b, 63, .97, {atraso: .95})]],
     toque: ['Topete, topete… toca aqui!', a => [a.area('palma', a.x, 68, 97), a.area('palma', a.alvo(a.d * 96), 68, 111, .36),
       a.mov('pao', a.b, 62, a.x, 23, .78, {arco: 84, atraso: .82})]],
-    clube: ['Clube do Topete', a => [a.area('palma', a.alvo(-80), 65, 118), a.area('palma', a.alvo(80), 65, 118, .22),
-      a.mov('pente', a.b, 44, a.edge, 30, 1.07, {atraso: .59})]],
+    clube: ['Roda do Clube do Topete', a => [a.area('palma',a.setor(-112),109,121,0,.72),
+      a.area('palma',a.setor(112),109,121,0,.72),a.area('palma',a.setor(0),108,145,.88,.57),
+      a.mov('pente',a.b,47,a.edge,37,.96,{atraso:1.16})]],
 
     edicao: ['Edição extra!', a => [a.mov('jornal', a.b, 81, a.x, 20, .81, {arco: 95, rx: 23}),
       a.mov('jornal', a.x, 20, a.edge, 33, .63, {atraso: .82, onda: -16, rx: 23})]],
     varal: ['Roupa suja no varal', a => [-84, 40].map((v,i) => a.mov('pregador', a.alvo(v), 220, a.alvo(v+34), 19, .59, {atraso: i*.38, ry: 21}))],
     interfone: ['Tocou no prédio errado', a => [a.mov('fone', a.b, 64, a.edge, 62, .83, {onda: 28, rx: 22}),
       a.mov('fone', a.edge, 62, a.x, 20, .72, {atraso: .85, arco: 50, rx: 22})]],
-    pneu: ['Pneu sem freio', a => [a.mov('pneu', a.b, 19, a.edge, 19, 1.03, {quiques: 3, arco: 48, rx: 19, ry: 19})]],
-    oleo: ['Vazou no asfalto', a => [-65, 55].map((dx,i) => a.area('oleo', a.alvo(dx), 90, 22, i*.24, .85))],
-    capacete: ['Capacete de carona', a => [a.mov('capacete', a.b, 80, a.x, 45, .61, {arco: 82, rx: 21}),
-      a.mov('capacete', a.x, 45, a.b, 48, .72, {atraso: .64, onda: 16, rx: 21})]],
+    pneu: ['Pneu sem freio', a => [a.mov('pneu',a.b,74,a.edge,73,1.12,{quiques:3,arco:64,rx:19,ry:19})]],
+    oleo: ['Derrapagem • troque de moto', a => window.PerseguicaoMoto.setores(a,'oleo',41,a.f.fase>=3)],
+    capacete: ['Capacete de carona', a => [a.mov('capacete',a.b,113,a.x,a.altura,.72,{arco:76,rx:21}),
+      a.mov('capacete',a.x,a.altura,a.b,100,.68,{atraso:.81,onda:-18,rx:21})]],
     rolo: ['Abre essa massa!', a => [a.mov('rolo', a.b, 14, a.edge, 14, .80, {rx: 29, ry: 11})]],
     fornada: ['Tabuleiro quente', a => [a.mov('forma', a.b, 72, a.x, 15, .76, {arco: 108, rx: 27, ry: 11}),
       a.area('vapor', a.x, 60, 110, .80, .53)]],
@@ -163,31 +173,38 @@
       rx: i.w/2, ry: 7, atraso: 0, dur: .28, dano: 15, area: true
     }))],
     linhaCruzada: ['A última chamada', a => [a.mov('metade1', a.l, 46, a.centro, 135, .93, {arco: 48}),
-      a.mov('metade2', a.r, 46, a.centro, 135, .93, {arco: 48}), a.area('sinal', a.centro, 98, 210, 1.06),
+      a.mov('metade2', a.r, 46, a.centro, 135, .93, {arco: 48}), a.area('sinal',a.setor(-116),108,183,.91,.69),
+      a.area('sinal',a.setor(116),108,183,.91,.69),
       a.mov('passagem', a.centro, 130, a.x, 22, .88, {atraso: 1.35, onda: 18})]]
 
   };
 
   function criar(slug, x, piso, l, r, modo = {}, recuperacao = [1, .9, .8]) {
-    return {slug, x, y: piso, piso, l, r, ceu: null, farpas: 0, gemeoX: slug === 'gemeos' ? l + 43 : null,
+    const f={slug, x, y: piso, piso, l, r, ceu: null, estrada: null, farpas: 0, gemeoX: slug === 'gemeos' ? l + 43 : null,
       fase: 1, indice: 0, estado: 'idle', tempo: 0, dur: 0, idade: 0, objetos: [], marcas: [], golpe: '',
-      destino: x, avisoModo: modo.windup || 1, recuperacao};
+      destino: x, avisoModo: modo.windup || 1, recuperacao, jogadorAnteriorX: null, jogadorAnteriorY: null};
+    if(slug==='tonhao'){ f.estrada=window.PerseguicaoMoto.criar(l,r,piso); f.y=piso-65; window.PerseguicaoMoto.novaFase(f,1); }
+    return f;
+  }
+  function terreno(f) {
+    return f?.estrada ? window.PerseguicaoMoto : f?.ceu ? window.JorgeDuelo : null;
   }
   function preparar(f, p) {
     const lista = chefes[f.slug].fases[f.fase - 1];
     f.golpe = lista[f.indice++ % lista.length];
     f.objetos = golpes[f.golpe][1](palco(f, p));
-    const ritmo = 1.14 + (f.fase - 1) * .04;
+    const ritmo = (1.42 + (f.fase - 1)*.085) / Math.sqrt(f.avisoModo);
     for (const o of f.objetos) { o.dur /= ritmo; o.atraso /= ritmo; }
     f.estado = 'windup'; f.tempo = 0;
-    const aviso = f.golpe === 'ruptura' ? 1.32 : f.golpe === 'saltoBarriga' ? 1.02 : .90 - (f.fase-1)*.04;
-    f.dur = Math.max(f.golpe === 'ruptura' ? 1.10 : .57, aviso*f.avisoModo);
+    const aviso = f.golpe === 'ruptura' ? 1.24 : f.golpe === 'saltoBarriga' ? .91 : .78 - (f.fase-1)*.04;
+    f.dur = Math.max(f.golpe === 'ruptura' ? 1.10 : .52, aviso*f.avisoModo);
   }
   function trocar(f, fase, jogador) {
     if (f.slug === 'jorge') window.JorgeDuelo.mudar(f, fase, jogador);
+    if(f.estrada)window.PerseguicaoMoto.novaFase(f,fase);
     f.fase = fase; f.indice = 0; f.estado = 'phaseChange'; f.tempo = 0;
     f.dur = f.slug === 'jorge' ? 1.65 : 1.05;
-    f.objetos = []; f.marcas = []; f.golpe = '';
+    f.objetos = []; f.marcas = []; f.golpe = ''; f.jogadorAnteriorX=f.jogadorAnteriorY=null;
     return f.dur;
   }
   function ponto(o, t) {
@@ -195,23 +212,50 @@
     return {x: mix(o.x0, o.x1, t), y: mix(o.y0, o.y1, t) - (o.arco || 0) * (o.quiques ? Math.abs(Math.sin(t*Math.PI*o.quiques)) : 4*t*(1-t)) -
       (o.onda || 0) * Math.sin(t * Math.PI * 2)};
   }
+  // Interseção contínua entre o segmento do golpe e a caixa do herói, em movimento relativo.
+  function cruzaCaixa(x0,y0,x1,y1,rx,ry) {
+    const dx=(x1-x0)/2, dy=(y1-y0)/2, cx=x0+dx, cy=y0+dy;
+    return Math.abs(cx)<rx+Math.abs(dx) && Math.abs(cy)<ry+Math.abs(dy) &&
+      Math.abs(cx*dy-cy*dx)<=rx*Math.abs(dy)+ry*Math.abs(dx);
+  }
+  function contatoNoQuadro(o, fim, tempo, dt, p, xAntes, yAntes) {
+    const inicio = Math.max(tempo-dt,o.atraso), termino = Math.min(tempo,o.atraso+o.dur);
+    const fracao = instante => dt>0 ? clamp(1-(tempo-instante)/dt,0,1) : 1;
+    const inicioRel = (inicio-o.atraso)/o.dur, primeiro = ponto(o,inicioRel), u = fracao(inicio);
+    let x0=primeiro.x-mix(xAntes,p.x,u), y0=primeiro.y-mix(yAntes,p.y,u)+26;
+    // Curvas são amostradas até 60 Hz. Um projétil em linha reta precisa de um único segmento.
+    const passos = o.arco||o.onda ? Math.max(1,Math.ceil((termino-inicio)*60)) : 1;
+    for(let i=1;i<=passos;i++){
+      const instante=mix(inicio,termino,i/passos), v=fracao(instante);
+      const pos=i===passos ? fim : ponto(o,(instante-o.atraso)/o.dur);
+      const x1=pos.x-mix(xAntes,p.x,v), y1=pos.y-mix(yAntes,p.y,v)+26;
+      if(cruzaCaixa(x0,y0,x1,y1,o.rx+13,o.ry+26)) return true;
+      x0=x1; y0=y1;
+    }
+    return false;
+  }
   function impacto(f, o, pos) {
     if (f.marcas.length >= 8) f.marcas.shift();
     f.marcas.push({art: o.art, x: pos.x, y: pos.y, idade: 0});
   }
   function atualizar(f, dt, p, ferir, som) {
+    const xAntes=f.jogadorAnteriorX ?? p.x, yAntes=f.jogadorAnteriorY ?? p.y;
+    f.jogadorAnteriorX=p.x; f.jogadorAnteriorY=p.y;
     f.idade += dt; f.tempo += dt;
     if (f.ceu) window.JorgeDuelo.flutuar(f, dt);
     for (let i = f.marcas.length - 1; i >= 0; i--) if ((f.marcas[i].idade += dt) > .28) f.marcas.splice(i, 1);
     if (f.estado === 'idle') { preparar(f, p); return; }
     if (f.estado === 'phaseChange' || f.estado === 'recover') {
-      if (f.estado === 'recover') f.x += clamp(f.destino - f.x, -100 * dt, 100 * dt);
+      if (f.estado === 'recover') {
+        const passo=(128+10*(f.fase-1))*dt;
+        f.x+=clamp(f.destino-f.x,-passo,passo);
+      }
       if (f.tempo >= f.dur) preparar(f, p);
       return;
     }
     if (f.estado === 'windup') {
       if (f.tempo < f.dur) return;
-      f.estado = 'firing'; f.tempo = 0; f.dur = Math.max(...f.objetos.map(o => o.atraso + o.dur));
+      f.tempo -= f.dur; f.estado = 'firing'; f.dur = Math.max(...f.objetos.map(o => o.atraso + o.dur));
       if (f.golpe === 'ruptura') window.JorgeDuelo.romper(f,p);
       som?.(f.slug, f.fase);
     }
@@ -221,18 +265,19 @@
       const pos = ponto(o, t);
       if (o.piloto || o.corpo) f.x = pos.x;
       if (o.corpo) f.y = pos.y + o.corpo;
-      if (!o.acertou && Math.abs(p.x - pos.x) < o.rx + 13 && p.y > pos.y - o.ry && p.y - 52 < pos.y + o.ry) {
+      if (!o.acertou && contatoNoQuadro(o,pos,f.tempo,dt,p,xAntes,yAntes)) {
         o.acertou = true; impacto(f, o, pos); ferir(o.dano, pos.x);
       }
       if (t >= 1) { o.fim = true; if (!o.acertou) impacto(f, o, pos); }
     }
     if (f.tempo < f.dur) return;
     f.estado = 'recover'; f.tempo = 0; f.objetos = [];
-    f.dur = f.recuperacao[Math.min(f.fase - 1, f.recuperacao.length - 1)] * .81;
+    const base = f.recuperacao[Math.min(f.fase-1, f.recuperacao.length-1)];
+    f.dur = Math.max(.30, base*(.70-(f.fase-1)*.015));
     const dir = f.x >= p.x ? 1 : -1;
     f.destino = clamp(p.x + dir * 218, f.l + 52, f.r - 52);
   }
   function capitulo(f) { return f.slug === 'jorge' ? capitulos[f.fase - 1] : null; }
   function titulo(f) { return golpes[f.golpe]?.[0] || ''; }
-  window.ConquistaCombate = Object.freeze({chefes, criar, preparar, trocar, atualizar, ponto, barras, capitulo, titulo});
+  window.ConquistaCombate = Object.freeze({chefes, criar, preparar, trocar, atualizar, ponto, barras, capitulo, titulo, terreno});
 })();

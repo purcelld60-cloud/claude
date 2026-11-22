@@ -256,3 +256,6 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - A tela mostra "∞ PONTOS".
   - `serialize()` grava o número real de pontos, então o save não leva pontos infinitos para o jogo normal.
   - Fora do modo dev nada muda.
+- **2026-11-22 · Codex · `chatgpt/perseguicao-tonhao` · v3.13.1.** Nas três barras do Tonhão, quatro motos servem de plataforma na BR-116. O jogador pula, atira nos cobradores e escolhe outro bagageiro quando aparecem óleo e cones. Os dois motores usam as posições das motos para desenhar, acertar e pousar.
+  - Os nove chefes da Conquista ganharam combinações em área com rotas de fuga, projéteis mais rápidos e recuperação mais curta. A mira dos golpes posteriores antecipa a corrida e trava no aviso. As colisões acompanham a trajetória entre quadros.
+  - Os 26 testes automatizados passaram. A varredura exercitou os 63 golpes, o salto entre motos e o tiro com teclado e toque em paisagem. A arena de reserva devolveu o jogador à missão de Valdomiro depois das três barras. O cliente também recarregou sem rede com as quatro motos.

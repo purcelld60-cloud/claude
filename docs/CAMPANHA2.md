@@ -530,7 +530,7 @@ Também valem os golpes do jogador: papel, peido, dash e os 2 poderes. A Fofoca 
 | Fase | Onde | Inimigos | Chefe e golpes |
 | --- | --- | --- | --- |
 | Dona Creuza (nv 3) | Bairro da pensão | Vizinhas fofoqueiras (jogam balões de fofoca), pombos que mergulham | Abre janelas de fofoca em sequência e encaminha áudios que atravessam o bairro e voltam |
-| Tonhão (nv 5) | Avenida, depois da rotatória | Mototaxistas que aceleram em cima de você, pombos | Bandeirada de moto, recibos ondulantes, retorno pela mesma faixa e cones na contramão |
+| Tonhão (nv 5) | Avenida, depois da rotatória | Mototaxistas que aceleram em cima de você, pombos | Perseguição na BR-116. Pule pelos quatro bagageiros em movimento e atire bolinhas nos cobradores. As três barras de Tonhão trazem ultrapassagens, capacetes, óleo e bloqueios de cones em duas motos. Cair no asfalto custa vida e devolve Da Roça à moto mais próxima. |
 | Seu Valdomiro (nv 7) | Feira do Planalto | Feirantes que jogam frutas, pombos | Biscoitos de goma que quicam, saco que espalha polvilho e pratos de balança que descem alternados |
 | Kauã (nv 9) | Serra do Periperi, no Cristo | Seguidores com flash de celular (deixam lento), urubus | O visor delimita o corte da live. Curtidas caem em arco e o replay captura a mesma posição duas vezes |
 
@@ -541,7 +541,7 @@ Também valem os golpes do jogador: papel, peido, dash e os 2 poderes. A Fofoca 
 4. Táxi até a Trilha do Cristo e o Kauã.
 5. Descansar na pensão.
 
-Os nove chefes de Vitória da Conquista têm sete tipos de ataque cada. Os oito primeiros apresentam três na primeira barra e abrem novos padrões nas seguintes. Dona Creuza joga a edição extra do jornal e os pregadores do varal. Tonhão deixa óleo na pista e perde o pneu. Valdomiro abre a massa com o rolo e deixa escapar vapor do tabuleiro. Kauã faz uma enquete e corta o enquadramento com a tesoura. O Barão gira a moenda e varre o terreiro. Breno solta o lustre que atravessa o palco como um pêndulo. Ryan e Bryan travam o caminho com a tecla ESC e trazem invasores de oito bits. Fred arremessa o convite, a pulseira e os broches do clube.
+Os nove chefes de Vitória da Conquista têm sete tipos de ataque cada. A partir da segunda barra, os golpes de mira antecipam a corrida de Da Roça. Depois do aviso, é possível frear ou inverter a direção para enganar o chefe. Os projéteis aceleram a cada barra e ganham mais velocidade no Difícil. Os oito primeiros apresentam três na primeira barra e abrem novos padrões nas seguintes. Dona Creuza joga a edição extra do jornal e os pregadores do varal. Tonhão marca bagageiros com óleo e solta um pneu que quica entre as motos. Valdomiro abre a massa com o rolo e deixa escapar vapor do tabuleiro. Kauã faz uma enquete e corta o enquadramento com a tesoura. O Barão gira a moenda e varre o terreiro. Breno solta o lustre que atravessa o palco como um pêndulo. Ryan e Bryan travam o caminho com a tecla ESC e trazem invasores de oito bits. Fred arremessa o convite, a pulseira e os broches do clube.
 
 Depois de cada vitória, a garrafada do poder aparece na banca do Seu Lindomar, na Feira.
 
@@ -581,7 +581,7 @@ A seta do objetivo também mostra o caminho pelas portas, como a entrada do shop
 | 2 | O peso da lembrança | Jorge cresce e veste o moletom de pizza do trio. Ele encolhe as pernas antes de saltar com a barriga e emenda um segundo quique, mais curto. Os dois pousos aparecem no chão. |
 | 3 | Palavras que partem | De jaqueta vinho, ele lança farpas como “Nem senti falta.” e “Você ficou pra trás.”. O balão inteiro causa dano. Salte sobre a frase ou passe por baixo. |
 | 4 | O céu se abre | Uma aura azul e violeta leva Jorge até as nuvens. Seis vitrais da Catedral sobem e descem. Depois do primeiro rasante, três recebem rachaduras e setas e caem. Os outros três continuam sólidos. Os pedaços voltam após 2,45 segundos. |
-| 5 | Atende, sou eu | A luta volta à praça. Jorge veste uma jaqueta clara e segura o celular junto ao ouvido. As duas metades da foto se encontram no centro, o sinal toca e ele lança a passagem para Itabuna. |
+| 5 | Atende, sou eu | A luta volta à praça. Jorge veste uma jaqueta clara e segura o celular junto ao ouvido. As duas metades da foto se encontram. Duas faixas de sinal se acendem em lados opostos antes do lançamento da passagem para Itabuna. |
 
 **O final.** Quando o Jorge cai na quinta fase, a história continua.
 - a cutscene do final feliz: a mão estendida, a confissão, o abraço, a videochamada com o Reeis e o FIM;

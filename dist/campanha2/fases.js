@@ -129,6 +129,7 @@
     function novaLuta() {
       const modo = DIF();
       luta = combate.criar(slug, B.x, FLOOR, arena.l, arena.r, modo, [1.1, .99, .88].map(n => n * modo.recovery));
+      if(luta.estrada)projs.length=0;
       if (B2) B2.x = luta.gemeoX;
     }
 
@@ -167,7 +168,7 @@
       // biscoitos (cura)
       for (const q of curas) if (!q.pego && Math.abs(P.x - q.x) < 22 && P.y > FLOOR - 60) { q.pego = true; P.hp = Math.min(P.max || 100, P.hp + 20); flutua(q.x, FLOOR - 70, '+20 ♥', '#ff8a7a'); api.sfx('plim'); }
       // inimigos comuns
-      for (const e of inimigos) atualizaInimigo(e, dt);
+      if(!luta?.estrada)for (const e of inimigos) atualizaInimigo(e, dt);
       for (let i = inimigos.length - 1; i >= 0; i--) if (inimigos[i].hp <= 0 && inimigos[i].morto > 1.6) inimigos.splice(i, 1);
       // chefe
       atualizaChefe(dt);
@@ -265,18 +266,19 @@
     function barra(c, x, y, w, f, cor) { R(c, x - w / 2 - 1, y - 1, w + 2, 6, '#1c1408'); R(c, x - w / 2, y, w * clamp(f, 0, 1), 4, cor); }
     const pisca = (e) => !!window.CampanhaTreino?.piscando?.(e);
     function desenhar(c) {
-      if(luta?.ceu) window.JorgeDuelo.plataformas(c,luta);
+      const percurso=combate.terreno(luta);
+      if(percurso)percurso.plataformas(c,luta);
       if (luta) window.ConquistaEfeitos.fundo(c, luta);
       // barreiras da arena
-      if (arena.ativa && !luta?.ceu) for (const x of [arena.l, arena.r]) { // barreira de obra: cavalete listrado, fita e um brilho na cor do chefe
+      if (arena.ativa && !percurso) for (const x of [arena.l, arena.r]) { // barreira de obra: cavalete listrado, fita e um brilho na cor do chefe
         c.globalAlpha = .16 + Math.sin(t * 4) * .06; R(c, x - 26, FLOOR - 220, 52, 220, K.cor); c.globalAlpha = .3; for (let y = FLOOR - 220; y < FLOOR; y += 22) R(c, x - 26, y + ((t * 40) % 22), 52, 2, '#ffffff'); c.globalAlpha = 1;
         R(c, x - 9, FLOOR - 150, 18, 150, '#1c1408'); for (let y = FLOOR - 148; y < FLOOR; y += 12) R(c, x - 7, y, 14, 6, '#ffd24a'); for (let y = FLOOR - 142; y < FLOOR; y += 12) R(c, x - 7, y, 14, 6, '#2a2a2a');
         R(c, x - 22, FLOOR - 8, 44, 8, '#1c1408'); R(c, x - 20, FLOOR - 6, 40, 5, '#e8833a'); R(c, x - 14, FLOOR - 158, 28, 10, '#1c1408'); R(c, x - 12, FLOOR - 156, 24, 6, Math.floor(t * 3) % 2 ? '#ff3a2a' : '#7a1a1a');
         for (const yy of [FLOOR - 112, FLOOR - 70]) { R(c, x - 40, yy, 80, 6, '#1c1408'); for (let k = 0; k < 80; k += 10) R(c, x - 39 + k, yy + 1, 6, 4, '#ffd24a'); } }
       // biscoitos de cura
-      for (const q of curas) if (!q.pego) { const b = Math.sin(t * 3 + q.x) * 3, x = q.x, y = FLOOR - 18 + b; c.strokeStyle = '#6a4a2a'; c.lineWidth = 6; c.beginPath(); c.arc(x, y, 7, 0, TAU); c.stroke(); c.strokeStyle = '#f2e2b8'; c.lineWidth = 3; c.beginPath(); c.arc(x, y, 7, 0, TAU); c.stroke(); if (Math.sin(t * 5 + q.x) > .6) { R(c, x + 8, y - 12, 2, 6, '#fff3a8'); R(c, x + 6, y - 10, 6, 2, '#fff3a8'); } }
+      if(!luta?.estrada)for (const q of curas) if (!q.pego) { const b = Math.sin(t * 3 + q.x) * 3, x = q.x, y = FLOOR - 18 + b; c.strokeStyle = '#6a4a2a'; c.lineWidth = 6; c.beginPath(); c.arc(x, y, 7, 0, TAU); c.stroke(); c.strokeStyle = '#f2e2b8'; c.lineWidth = 3; c.beginPath(); c.arc(x, y, 7, 0, TAU); c.stroke(); if (Math.sin(t * 5 + q.x) > .6) { R(c, x + 8, y - 12, 2, 6, '#fff3a8'); R(c, x + 6, y - 10, 6, 2, '#fff3a8'); } }
       // inimigos
-      for (const e of inimigos) {
+      if(!luta?.estrada)for (const e of inimigos) {
         const st = STATS[e.k], caido = e.hp <= 0; if (caido) c.globalAlpha = Math.max(0, 1 - e.morto / 1.6); else if (pisca(e)) c.globalAlpha = .25;
         if (st.ia === 'voa') ave(c, e.x, e.y + (caido ? e.morto * 120 : 0), t + e.homeX, e.k, e.dir, e.hit > 0);
         else { c.save(); if (caido) { c.translate(e.x, e.y); c.rotate(-e.dir * Math.min(1.4, e.morto * 4)); c.translate(-e.x, -e.y); }
@@ -294,7 +296,9 @@
         c.save(); if (!caido && pisca(B)) c.globalAlpha = .25; if (caido) { c.translate(B.x, B.y); c.rotate(-B.dir * Math.min(1.5, (2.2 - B.tt) * 3)); c.translate(-B.x, -B.y); }
         const pose = {scale:1.3, facing:B.dir, moving:B.st==='recupera', hit:B.hit>0,
           attack:B.st==='carga'||B.st==='ataque', attackProgress:B.st==='carga'?.2:.8};
-        if(slug==='jorge' && luta)window.JorgeDuelo.personagem(c,luta,pose);
+        if(luta?.estrada)window.PerseguicaoMoto.personagem(c,luta);
+        else if(slug==='jorge' && luta)window.JorgeDuelo.personagem(c,luta,pose);
+        else if(luta)window.ConquistaEfeitos.personagem(c,luta,B.tipo,B.x+sh,B.y,pose);
         else personagem(c, slug==='jorge'&&caido?'jorge_promessa':B.tipo, B.x+sh,B.y,pose);
         c.restore();
         if (B.st === 'carga' && luta) txt(c, combate.titulo(luta), B.x, B.y-124, K.cor, {sombra:'#241d29'});
@@ -327,7 +331,7 @@
       for (let i = inimigos.length - 1; i >= 0; i--) if (inimigos[i].invocado) inimigos.splice(i, 1);
     }
     function comecarLuta() { novaLuta(); B.st = 'idle'; B.tt = 1.2; P.x = arena.l + 70; placa(K.nome, 'NV ' + K.nivel + ' · ' + K.titulo, K.cor, 2.3); api.sfx('vs'); }
-    return { slug, F, chefe: B, arena, get luta(){return luta;}, inimigos: () => inimigos.concat(B.st !== 'espera' && B.st !== 'derrotado' && B.st !== 'entrada' ? (B2 ? [B, B2] : [B]) : []), update, desenhar, desenharTela, reiniciar, comecarLuta, vencida: () => vencido, emArena: () => arena.ativa };
+    return { slug, F, chefe: B, arena, get luta(){return luta;}, inimigos: () => (luta?.estrada?luta.estrada.motos.map(m=>m.rival).filter(r=>r.hp>0):inimigos).concat(B.st !== 'espera' && B.st !== 'derrotado' && B.st !== 'entrada' ? (B2 ? [B, B2] : [B]) : []), update, desenhar, desenharTela, reiniciar, comecarLuta, vencida: () => vencido, emArena: () => arena.ativa };
   }
 
   window.CampanhaFases = Object.freeze({ FASES, criar, lista: () => Object.keys(FASES) });
