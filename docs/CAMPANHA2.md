@@ -541,6 +541,8 @@ Também valem os golpes do jogador: papel, peido, dash e os 2 poderes. A Fofoca 
 4. Táxi até a Trilha do Cristo e o Kauã.
 5. Descansar na pensão.
 
+Os nove chefes de Vitória da Conquista têm sete tipos de ataque cada. Os oito primeiros apresentam três na primeira barra e abrem novos padrões nas seguintes. Dona Creuza joga a edição extra do jornal e os pregadores do varal. Tonhão deixa óleo na pista e perde o pneu. Valdomiro abre a massa com o rolo e deixa escapar vapor do tabuleiro. Kauã faz uma enquete e corta o enquadramento com a tesoura. O Barão gira a moenda e varre o terreiro. Breno solta o lustre que atravessa o palco como um pêndulo. Ryan e Bryan travam o caminho com a tecla ESC e trazem invasores de oito bits. Fred arremessa o convite, a pulseira e os broches do clube.
+
 Depois de cada vitória, a garrafada do poder aparece na banca do Seu Lindomar, na Feira.
 
 
@@ -575,11 +577,11 @@ A seta do objetivo também mostra o caminho pelas portas, como a entrada do shop
 
 | Fase | Nome | Como ler o ataque |
 | --- | --- | --- |
-| 1 | Eu não te conheço | Acompanhe a dobra dos bilhetes para distinguir a trajetória ondulada do arremesso por cima. |
-| 2 | Silêncio na sala | Saia da marca da lousa. No castigo em trio, as três carteiras caem em sequência. |
-| 3 | O apelido | As letras de GORDO caem uma a uma. A borracha volta por uma altura diferente. |
-| 4 | O retrato do trio | As duas metades da fotografia abrem para os lados. A revelação ocupa o lugar onde elas se separaram. |
-| 5 | A promessa de Itabuna | O telefone cruza a praça. Na última chamada, as fotos convergem, o sinal ocupa o centro e a passagem da rodoviária sai em arco. |
+| 1 | Bilhete sem resposta | Jorge chega como na praça. O bilhete atravessa a arena em onda. Quando rasga a foto do trio, as metades caem para lados opostos. |
+| 2 | O peso da lembrança | Jorge cresce e veste o moletom de pizza do trio. Ele encolhe as pernas antes de saltar com a barriga e emenda um segundo quique, mais curto. Os dois pousos aparecem no chão. |
+| 3 | Palavras que partem | De jaqueta vinho, ele lança farpas como “Nem senti falta.” e “Você ficou pra trás.”. O balão inteiro causa dano. Salte sobre a frase ou passe por baixo. |
+| 4 | O céu se abre | Uma aura azul e violeta leva Jorge até as nuvens. Seis vitrais da Catedral sobem e descem. Depois do primeiro rasante, três recebem rachaduras e setas e caem. Os outros três continuam sólidos. Os pedaços voltam após 2,45 segundos. |
+| 5 | Atende, sou eu | A luta volta à praça. Jorge veste uma jaqueta clara e segura o celular junto ao ouvido. As duas metades da foto se encontram no centro, o sinal toca e ele lança a passagem para Itabuna. |
 
 **O final.** Quando o Jorge cai na quinta fase, a história continua.
 - a cutscene do final feliz: a mão estendida, a confissão, o abraço, a videochamada com o Reeis e o FIM;

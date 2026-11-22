@@ -15,6 +15,8 @@ async function instrumentar(p) {
         bater:()=>damageEnemy(activeBoss,1e7,'paper'),
         perder:()=>{player.inv=0;hurt(1e7,player.x+50);},
         passo:(n,proteger=true)=>{for(let i=0;i<n;i++){if(proteger)player.inv=2;update(1/60);updateEpic(1/60);}draw();},
+        get jogador(){return player;},
+        get camera(){return camera;},
         get luta(){return activeBoss?.conquista;}
       };window.Game={`);
     await route.fulfill({response:res,body:js});
@@ -70,6 +72,7 @@ async function main() {
         }
         return [...vistos];
       },slug);
+      assert.equal(vistos.length,7,slug);
       await capturar(p,slug);
       console.log(slug,vistos.length,'golpes renderizados');
       await p.evaluate(s=>{if(s==='fred')Game.exitSandbox();else Game.retreatBoss();window.relogioManual=false;},slug);
@@ -105,6 +108,55 @@ async function main() {
       assert.equal(await p.locator('#bossHudPhase i[data-phase]').count(),5);
       await p.evaluate(()=>{const qa=testeConquista;for(let i=0;i<160&&!(qa.luta.estado==='firing'&&qa.luta.tempo>.29);i++)qa.passo(2);});
       await capturar(p,'jorge-fase-'+i);
+      const forma=await p.evaluate(()=>{const f=testeConquista.luta;return [JorgeDuelo.formas[f.fase-1],f.y,f.piso,!!f.ceu];});
+      assert.equal(forma[0],['jorge','jorge_gordo','jorge_farpas','jorge_aura','jorge_promessa'][i-1]);
+      if(i===2)assert(forma[1]<forma[2]-60,'Jorge precisa sair do chão durante o pulo');
+      if(i===4){
+        assert(forma[3] && forma[1]<forma[2]-40);
+        const antes=await p.evaluate(()=>{
+          const qa=testeConquista,f=qa.luta;
+          for(let k=0;k<700 && !(f.estado==='windup'&&f.golpe==='ruptura'&&f.tempo>.3);k++)qa.passo(1);
+          const ids=f.ceu.ilhas.filter(i=>i.estado==='aviso').map(i=>i.id);
+          if(ids.length!==3)throw Error('Sem três avisos de ruptura');
+          const ilha=f.ceu.ilhas.find(i=>i.estado==='inteira');
+          Object.assign(qa.jogador,{x:ilha.x+ilha.w/2,y:ilha.y,ground:true,vy:0,vx:0});
+          return {ids,apoio:ilha.id,y:ilha.y};
+        });
+        await capturar(p,'ceu-antes-da-quebra');
+        const depois=await p.evaluate(id=>{
+          const qa=testeConquista,f=qa.luta;
+          for(let k=0;k<190 && !f.ceu.ilhas.some(i=>i.estado==='ausente');k++)qa.passo(1);
+          qa.passo(4);const ilha=f.ceu.ilhas[id];
+          return {ids:f.ceu.ilhas.filter(i=>i.estado==='ausente').map(i=>i.id),y:ilha.y,pe:qa.jogador.y,ground:qa.jogador.ground};
+        },antes.apoio);
+        assert.deepEqual(depois.ids,antes.ids);assert(depois.ground&&Math.abs(depois.y-depois.pe)<.1);
+        assert(Math.abs(depois.y-antes.y)>1);
+        await capturar(p,'ceu-depois-da-quebra');
+        assert(await p.evaluate(()=>testeConquista.luta.ceu.ilhas.every(i=>i.x>=testeConquista.camera && i.x+i.w<=testeConquista.camera+960)),'todos os vitrais cabem na câmera');
+        // O salto sai do apoio real depois da ruptura, pelo teclado e pelo botão de toque.
+        const tecla='Space', botao=p.locator('[data-action="jump"]:visible').first();
+        let touch;
+        if(celular){
+          const pos=await botao.boundingBox();assert(pos,'botão de pulo visível no céu');
+          touch=await contexto.newCDPSession(p);
+          await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:pos.x+pos.width/2,y:pos.y+pos.height/2}]});
+        }else await p.keyboard.down(tecla);
+        const salto=await p.evaluate(()=>{const qa=testeConquista,antes=qa.jogador.y;qa.passo(9);return [antes-qa.jogador.y,qa.jogador.ground];});
+        if(touch){await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await touch.detach();}
+        else await p.keyboard.up(tecla);
+        assert(salto[0]>18&&!salto[1],'pulo real a partir do vitral');
+        const cabemNasBordas=await p.evaluate(()=>{
+          const qa=testeConquista,f=qa.luta;
+          return [f.l+6,f.r-6].every(x=>{
+            qa.jogador.x=x;qa.passo(1);
+            return f.ceu.ilhas.every(i=>i.x>=qa.camera&&i.x+i.w<=qa.camera+960);
+          });
+        });
+        assert(cabemNasBordas,'mesmo perto das bordas, os seis apoios ficam no quadro');
+
+      }
+      if(i===5)assert(!forma[3] && forma[1]===forma[2]);
+
       await p.evaluate(()=>testeConquista.bater());
       if(i<5){
         assert.deepEqual(await p.evaluate(()=>{const qa=testeConquista;const hp=Game.getBossStatus().hp;qa.bater();return [qa.luta.estado,qa.luta.objetos.length,qa.luta.marcas.length,hp===Game.getBossStatus().hp];}),['phaseChange',0,0,true]);

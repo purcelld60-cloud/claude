@@ -212,12 +212,20 @@
 
   /* ---------- física (a mesma do visualizador) ---------- */
   function fisica(dt) {
+    const duelo=fase?.luta;
+    if(duelo?.ceu)window.JorgeDuelo.avancar(duelo,dt,P);
     const d = D(), dir = (keys.has('right') ? 1 : 0) - (keys.has('left') ? 1 : 0) || Math.sign(Math.round(joy * 2)); if (dir) P.facing = dir;
     // andar, pular e cair com os MESMOS números da campanha 1 (game.js): velocidade 280 com aceleração, gravidade 850
     if (!TR()?.dashing?.()) { const alvo = dir * (TR()?.bonus?.().moveSpeed || 280) * (TR()?.velocidade?.() || 1) * ((P.atordoado || 0) > 0 ? .4 : 1) * (window.CampanhaAliados?.velocidade?.() || 1), ac = dir ? (P.ground ? 1800 : 1150) : (P.ground ? 2200 : 950);
       P.vx += clamp(alvo - P.vx, -ac * dt, ac * dt); if (Math.abs(P.vx) < .1) P.vx = 0; }
     P.anim = (P.anim || 0) + Math.abs(P.vx) * dt / 18.3; const lim = d.limites || [40, d.largura - 40]; P.x = clamp(P.x + P.vx * dt, lim[0], lim[1]);
     const prevY = P.y, chao0 = P.ground; P.vy = Math.min(900, P.vy + 850 * dt); P.y += P.vy * dt; P.ground = false; if (P.y < 95) { P.y = 95; P.vy = Math.max(0, P.vy); }
+    if(duelo?.ceu) {
+      window.JorgeDuelo.pousar(duelo,P,prevY,ferir);
+      if(!chao0 && P.ground) P.landTimer=.15;
+      P.landTimer=Math.max(0,(P.landTimer||0)-dt);
+      return;
+    }
     if (P.y > FLOOR + 2) for (const [gx, gw] of d.vaos || []) if (P.x > gx && P.x < gx + gw) { P.x = clamp(P.x, gx + 11, gx + gw - 11); if (Math.abs(P.vx) > 0 && (P.x === gx + 11 || P.x === gx + gw - 11)) P.vx = 0; } // dentro do vão as paredes seguram
     const overGap = (d.vaos || []).some(([gx, gw]) => P.x > gx + 10 && P.x < gx + gw - 10);
     for (const r of portais(d.id)) if (r.tipo === 'rampa' && P.x >= r.x0 && P.x <= r.x1) { const ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0); if (P.vy >= 0 && P.y >= ry - 14 && prevY <= ry + 40) { P.y = ry; P.vy = 0; P.ground = true; } if (P.x >= r.x1 - 4 && P.ground && dir > 0) viagem = { tipo: 'porta', t: 0, para: r.para }; }
@@ -500,23 +508,30 @@
     cam += (clamp(P.x - W * .36, 0, Math.max(0, d.largura - W)) - cam) * Math.min(1, dt * 8); safe(() => enquadrar(dt)); // câmera como na principal
     try { window.DayTime?.force?.(horaAtual()); } catch (e) {}
     const o = { scene: d.id, camera: cam, time: t, player: P, shots: [], enemies: [], minions: [] };
-    safe(() => window.Interact?.update?.(dt, o)); safe(() => CC().heroi?.(P.x, P.y, P.vy));
-    window.Art.drawScene(c, d.id, cam, t);
+    const ceu=F?.luta?.ceu;
+    if(ceu)cam=(F.luta.l+F.luta.r-W)/2;
+    else safe(() => window.Interact?.update?.(dt, o));
+    safe(() => CC().heroi?.(P.x, P.y, P.vy));
+    if(!ceu || ceu.tempo<.85)window.Art.drawScene(c, d.id, cam, t);
+    if(ceu)window.JorgeDuelo.fundo(c,F.luta);
     c.save(); { const sh = Math.max(TR()?.tremor?.() || 0, tremor); c.translate(-Math.round(cam) + Math.round((Math.random() - .5) * sh), Math.round((Math.random() - .5) * sh)); }
-    if (d.id >= 12) for (const pl of d.plataformas || []) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) safe(() => CC().plataforma(c, d.id, pl, t));
-    safe(() => window.Interact?.drawBack?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawBack?.(c, o)); safe(() => window.CampanhaTaxi?.desenhar?.(c, o)); safe(() => window.CampanhaLoja?.desenhar?.(c, o)); safe(() => window.CampanhaMoradores?.desenhar?.(c, o)); }
-    desenharExtras();
-    safe(() => window.CampanhaAliados?.desenhar?.(c, d.id)); if (F) F.desenhar(c);
-    for (const ax of window.CampanhaAliados?.alvos?.(d.id) || []) { const y = FLOOR - 150 + Math.sin(t * 4 + ax) * 4; c.fillStyle = '#1c1408'; c.fillRect(ax - 7, y - 7, 14, 14); c.fillStyle = '#7af07a'; c.fillRect(ax - 5, y - 5, 10, 10); c.fillStyle = '#1c1408'; c.fillRect(ax - 1, y - 4, 2, 5); c.fillRect(ax - 1, y + 2, 2, 2); }
+    if(!ceu){
+      if (d.id >= 12) for (const pl of d.plataformas || []) if (pl[0] + pl[2] > cam - 20 && pl[0] < cam + 980) safe(() => CC().plataforma(c, d.id, pl, t));
+      safe(() => window.Interact?.drawBack?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawBack?.(c, o)); safe(() => window.CampanhaTaxi?.desenhar?.(c, o)); safe(() => window.CampanhaLoja?.desenhar?.(c, o)); safe(() => window.CampanhaMoradores?.desenhar?.(c, o)); }
+      desenharExtras();
+      safe(() => window.CampanhaAliados?.desenhar?.(c, d.id));
+    }
+    if (F) F.desenhar(c);
+    if(!ceu)for (const ax of window.CampanhaAliados?.alvos?.(d.id) || []) { const y = FLOOR - 150 + Math.sin(t * 4 + ax) * 4; c.fillStyle = '#1c1408'; c.fillRect(ax - 7, y - 7, 14, 14); c.fillStyle = '#7af07a'; c.fillRect(ax - 5, y - 5, 10, 10); c.fillStyle = '#1c1408'; c.fillRect(ax - 1, y - 4, 2, 5); c.fillRect(ax - 1, y + 2, 2, 2); }
     safe(() => TR()?.desenharAtras?.(c, t)); // nuvem de gás e rastro do dash atrás do herói (como na campanha 1)
     const at = P.attack || 0, dur = P.attackDuration || .32; if (!((P.inv || 0) > 0 && Math.floor(t * 16) % 2)) window.Art.drawCharacter(c, 'daroca', P.x, P.y, { frame: Math.abs(P.vx) > 8 ? (P.anim || 0) / 9 : t, speed: Math.abs(P.vx), muscular: !!TR()?.musculoso?.(), land: (P.landTimer || 0) / .15, landTimer: P.landTimer || 0, facing: P.facing, moving: (Math.abs(P.vx) > 8 && P.ground) || viagem?.tipo === 'porta', grounded: P.ground, vy: P.vy, attack: at > 0, attackType: P.attackType || 'paper', attackProgress: 1 - at / dur, attackObject: 'paper', flight: !!TR()?.voandoAgora?.(), dash: !!TR()?.dashing?.(), recoil: at > 0 && (P.attackType || 'paper') === 'paper' ? Math.max(0, 1 - (1 - at / dur) * 3) : 0 });
     safe(() => TR()?.desenhar?.(c, t));
-    safe(() => window.Interact?.drawFront?.(c, o)); if (d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
+    if(!ceu)safe(() => window.Interact?.drawFront?.(c, o)); if (!ceu && d.id >= 12) { safe(() => window.CampanhaPlantas?.drawFront?.(c, o)); safe(() => window.CampanhaCamadas?.primeiroPlano?.(c, o)); }
     procurarPerto();
     if (perto) { c.font = '11px Pixel, monospace'; const w = perto.rotulo.length * 7.6 + 34, x = perto.x, y = FLOOR - 150; c.fillStyle = '#1c342de8'; c.fillRect(x - w / 2, y - 13, w, 26); c.strokeStyle = '#e8c66a'; c.strokeRect(x - w / 2 + .5, y - 12.5, w - 1, 25); c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#f3d89e'; c.fillText('[E] ' + perto.rotulo, x, y + 1); c.textAlign = 'left'; }
     c.font = '13px Pixel, monospace'; c.textAlign = 'center'; for (let i = xpTxt.length - 1; i >= 0; i--) { const x0 = xpTxt[i]; x0.t += 1 / 60; if (x0.t > 1.2) { xpTxt.splice(i, 1); continue; } c.globalAlpha = Math.min(1, (1.2 - x0.t) * 2); c.fillStyle = '#2a1a08'; c.fillText(x0.s, x0.x + 2, x0.y - x0.t * 30 + 2); c.fillStyle = '#ffec91'; c.fillText(x0.s, x0.x, x0.y - x0.t * 30); } c.globalAlpha = 1;
     c.font = '16px Pixel, monospace'; c.textAlign = 'center'; for (const d0 of dano) { c.globalAlpha = 1 - d0.t; c.fillStyle = '#2a0808'; c.fillText(d0.s, d0.x + 2, d0.y - d0.t * 40 + 2); c.fillStyle = '#ff5a4a'; c.fillText(d0.s, d0.x, d0.y - d0.t * 40); } c.globalAlpha = 1; c.textAlign = 'left';
-    c.restore(); safe(() => window.CampanhaAmbientes?.cobrir?.(c, d.id, cam));
+    c.restore(); if(!ceu)safe(() => window.CampanhaAmbientes?.cobrir?.(c, d.id, cam));
     if (!F?.emArena?.()) setaObjetivo(); if (F) F.desenharTela(c, W);
     { const cr = window.CampanhaAliados?.correndo?.(); if (cr) { const txt = cr.fase === 'contagem' ? String(Math.ceil(cr.cont)) : (Math.max(0, cr.lim - cr.t)).toFixed(1) + ' s'; c.fillStyle = '#1c1408'; c.fillRect(W / 2 - 70, 70, 140, 34); c.fillStyle = '#ffd24a'; c.fillRect(W / 2 - 68, 72, 136, 30); c.font = '16px Pixel, monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#1c1408'; c.fillText('🛹 ' + txt, W / 2, 88); c.textAlign = 'left'; } }
     if (clarao > 0) { c.globalAlpha = clarao; c.fillStyle = claraoCor; c.fillRect(0, 0, W, H); c.globalAlpha = 1; }
