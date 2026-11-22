@@ -244,3 +244,6 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - Os botões dos cantos ganharam transição.
   - O painel JOGAR/MULTIPLAYER entra com fade e uma subida leve.
   - Com `prefers-reduced-motion`, tudo isso fica desligado.
+- **2026-11-22 · Codex · `chatgpt/jorge-sete-golpes`.** Sobre o merge do menu de Claude, a Conquista passou a ter sete tipos de ataque por chefe. Os projéteis percorrem as trajetórias mais depressa e a recuperação caiu de 0,94 para 0,81 do intervalo do chefe. As farpas, o corpo do Jorge no pulo e os golpes no ar compartilham posições com seus efeitos.
+  - `dist/campanha2/jorge-duelo.js` controla as cinco formas e a física dos seis vitrais. Os dois motores usam o mesmo conjunto de plataformas para aviso, transporte, queda e retorno. Na quinta barra, a praça e a ligação fecham a história.
+  - Os 20 testes de `node --test tests/*.test.cjs` passaram. A varredura em Chromium percorreu 63 golpes no desktop e no celular emulado em paisagem, com pulo por teclado e toque, revanche, câmera junto às duas bordas e save depois dos créditos. O jogo também recarregou offline com a nova luta.

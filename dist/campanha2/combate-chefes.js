@@ -3,25 +3,26 @@
   'use strict';
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
   const mix = (a, b, t) => a + (b - a) * t;
-  const tres = (a, b, c, d) => [[a, b], [c, a, b], [d, c, b, a]];
+  const tres = (a, b, c, d, e, f, g) => [[a, b, e], [c, f, a, e, b], [d, g, f, c, e, b, a]];
   const chefes = {
-    creuza: { cor: '#ff96c2', fases: tres('parapeito', 'recado', 'encaminhado', 'quarteirao') },
-    tonhao: { cor: '#ffaf43', fases: tres('bandeirada', 'recibo', 'retorno', 'contramao') },
-    valdomiro: { cor: '#ffcf74', fases: tres('rosquinha', 'quilo', 'peneira', 'balanca') },
-    kaua: { cor: '#76efff', fases: tres('enquadrar', 'curtidas', 'carrossel', 'reprise') },
-    barao: { cor: '#aede70', fases: tres('semeadura', 'coado', 'florada', 'safra') },
-    breno: { cor: '#ff8268', fases: tres('ribalta', 'contrapeso', 'deixa', 'bis') },
-    gemeos: { cor: '#69f1dd', fases: tres('player1', 'player2', 'cabolink', 'coop') },
-    fred: { cor: '#ffcb55', fases: tres('pao', 'pente', 'toque', 'clube') },
+    creuza: { cor: '#ff96c2', fases: tres('parapeito', 'recado', 'encaminhado', 'quarteirao', 'edicao', 'varal', 'interfone') },
+    tonhao: { cor: '#ffaf43', fases: tres('bandeirada', 'recibo', 'retorno', 'contramao', 'pneu', 'oleo', 'capacete') },
+    valdomiro: { cor: '#ffcf74', fases: tres('rosquinha', 'quilo', 'peneira', 'balanca', 'rolo', 'fornada', 'carimbo') },
+    kaua: { cor: '#76efff', fases: tres('enquadrar', 'curtidas', 'carrossel', 'reprise', 'enquete', 'corte', 'tripé') },
+    barao: { cor: '#aede70', fases: tres('semeadura', 'coado', 'florada', 'safra', 'regador', 'moenda', 'terraco') },
+    breno: { cor: '#ff8268', fases: tres('ribalta', 'contrapeso', 'deixa', 'bis', 'roteiro', 'mascara', 'pendulo') },
+    gemeos: { cor: '#69f1dd', fases: tres('player1', 'player2', 'cabolink', 'coop', 'escape', 'invasores', 'cartucho') },
+    fred: { cor: '#ffcb55', fases: tres('pao', 'pente', 'toque', 'clube', 'convite', 'pulseira', 'broche') },
     jorge: { cor: '#d2aaff', fases: [
-      ['descartar', 'carteado'], ['chamada', 'castigo', 'descartar'], ['apelido', 'rasura', 'chamada'],
-      ['retrato', 'negativo', 'rasura'], ['ligacao', 'promessa', 'linhaCruzada', 'retrato']
+      ['descartar', 'retratoPartido'], ['saltoBarriga', 'descartar', 'saltoBarriga', 'retratoPartido'],
+      ['farpa', 'retratoPartido', 'descartar'], ['rasante', 'ruptura', 'rasante', 'farpa'],
+      ['linhaCruzada', 'farpa', 'retratoPartido', 'descartar']
     ] }
   };
   const capitulos = [
-    ['Eu não te conheço', 'bilhete', '#a7d8fb'], ['Silêncio na sala', 'carteira', '#9ee9c6'],
-    ['O apelido', 'letra', '#ff9cab'], ['O retrato do trio', 'foto', '#ffd28f'],
-    ['A promessa de Itabuna', 'telefone', '#d4acff']
+    ['Bilhete sem resposta', 'bilhete', '#b5dffa'], ['O peso da lembrança', 'tenis', '#ffcb79'],
+    ['Palavras que partem', 'coracao', '#ffa2ba'], ['O céu se abre', 'vitral', '#96f6ff'],
+    ['Atende, sou eu', 'telefone', '#ffdb8d']
   ];
   function barras(slug, base) {
     // Jorge tinha 3,75 barras-base no motor principal. Redistribuir em cinco dá só +6,7% de vida total.
@@ -42,7 +43,7 @@
       return {art, area: true, x0: ax, x1: ax, y0: f.piso - altura / 2, y1: f.piso - altura / 2,
         rx: largura / 2, ry: altura / 2, atraso, dur, dano: 15};
     };
-    return {l, r, x, d, edge, alvo, mov, area, b: f.x, twin: f.gemeoX, centro: (l + r) / 2,
+    return {f, l, r, x, d, edge, alvo, mov, area, b: f.x, twin: f.gemeoX, centro: (l + r) / 2,
       altura: clamp(f.piso - p.y + 27, 25, 270)};
   }
 
@@ -106,34 +107,69 @@
     clube: ['Clube do Topete', a => [a.area('palma', a.alvo(-80), 65, 118), a.area('palma', a.alvo(80), 65, 118, .22),
       a.mov('pente', a.b, 44, a.edge, 30, 1.07, {atraso: .59})]],
 
-    descartar: ['Bilhete devolvido', a => [a.mov('bilhete', a.b, 72, a.edge, a.altura, 1.08, {onda: 20})]],
-    carteado: ['Recado de carteira', a => [-74, 74].map((dx, i) => a.mov('bilhete', a.b, 72, a.alvo(dx), 24, .81, {arco: 88, atraso: i * .35}))],
-    chamada: ['O giz do professor', a => [a.area('lousa', a.x, 83, 148), a.mov('giz', a.b, 38, a.edge, 32, 1.05, {atraso: .48})]],
-    castigo: ['Castigo em trio', a => [-115, 0, 115].map((dx, i) => a.mov('carteira', a.alvo(dx), 249, a.alvo(dx), 23, .66,
-      {rx: 25, ry: 22, atraso: i * .33}))],
-    apelido: ['O peso do apelido', a => {
-      const meio=clamp(a.x,a.l+120,a.r-120);
-      return Array.from('GORDO',(letra,i)=>{
-        const x=meio+(i-2)*60;
-        return a.mov('letra',x,223,x,18,.68,{letra,atraso:i*.16,rx:15,ry:17});
-      });
+    edicao: ['Edição extra!', a => [a.mov('jornal', a.b, 81, a.x, 20, .81, {arco: 95, rx: 23}),
+      a.mov('jornal', a.x, 20, a.edge, 33, .63, {atraso: .82, onda: -16, rx: 23})]],
+    varal: ['Roupa suja no varal', a => [-84, 40].map((v,i) => a.mov('pregador', a.alvo(v), 220, a.alvo(v+34), 19, .59, {atraso: i*.38, ry: 21}))],
+    interfone: ['Tocou no prédio errado', a => [a.mov('fone', a.b, 64, a.edge, 62, .83, {onda: 28, rx: 22}),
+      a.mov('fone', a.edge, 62, a.x, 20, .72, {atraso: .85, arco: 50, rx: 22})]],
+    pneu: ['Pneu sem freio', a => [a.mov('pneu', a.b, 19, a.edge, 19, 1.03, {quiques: 3, arco: 48, rx: 19, ry: 19})]],
+    oleo: ['Vazou no asfalto', a => [-65, 55].map((dx,i) => a.area('oleo', a.alvo(dx), 90, 22, i*.24, .85))],
+    capacete: ['Capacete de carona', a => [a.mov('capacete', a.b, 80, a.x, 45, .61, {arco: 82, rx: 21}),
+      a.mov('capacete', a.x, 45, a.b, 48, .72, {atraso: .64, onda: 16, rx: 21})]],
+    rolo: ['Abre essa massa!', a => [a.mov('rolo', a.b, 14, a.edge, 14, .80, {rx: 29, ry: 11})]],
+    fornada: ['Tabuleiro quente', a => [a.mov('forma', a.b, 72, a.x, 15, .76, {arco: 108, rx: 27, ry: 11}),
+      a.area('vapor', a.x, 60, 110, .80, .53)]],
+    carimbo: ['Selo da feira', a => [0, -95, 88].map((dx,i) => a.mov('carimbo', a.alvo(dx), 177, a.alvo(dx), 13, .43, {atraso: i*.36, rx: 23, ry: 13}))],
+    enquete: ['Vota na enquete!', a => [-1,1].map((s,i) => a.mov('voto', s<0?a.l:a.r, 37+i*66, a.x, 37+i*66, .78, {letra: i?'B':'A', rx: 23, atraso: i*.22}))],
+    corte: ['Corta esse take', a => [a.mov('tesoura', a.b, 138, a.edge, 17, .73, {rx: 22}),
+      a.mov('tesoura', a.edge, 17, a.b, 129, .83, {atraso: .82, rx: 22})]],
+    tripé: ['Caiu a câmera!', a => [a.mov('camera', a.x, 224, a.x, 23, .56, {rx: 23, ry: 20}),
+      a.area('visor', a.alvo(a.d*87), 68, 84, .70)]],
+    regador: ['Aguaceiro no talhão', a => [-86,-4,78].map((dx,i) => a.mov('gota', a.alvo(dx-28), 180+i*10, a.alvo(dx), 14, .64, {arco: 25, atraso: i*.19, rx: 10, ry: 17}))],
+    moenda: ['Manivela da moenda', a => [a.mov('moenda', a.b, 35, a.edge, 33, .97, {quiques: 2, arco: 39, rx: 21, ry: 21})]],
+    terraco: ['Rodo do terreiro', a => [a.mov('rodo', a.edge, 19, a.b, 19, .89, {rx: 30, ry: 16}),
+      a.mov('grao', a.b, 24, a.x, 38, .80, {atraso: .92, arco: 82})]],
+    roteiro: ['Página arrancada', a => [a.mov('roteiro', a.b, 77, a.edge, 52, 1, {onda: 46, rx: 19})]],
+    mascara: ['Troca de máscara', a => [-1,1].map((d,i) => a.mov('mascara', i?a.r:a.l, 105-i*65, a.alvo(d*28), 40+i*53, .80, {onda: 20*d, atraso: .28*i, rx: 18, ry: 20}))],
+    pendulo: ['Lustre fora da marca', a => [a.mov('lustre', a.alvo(-140), 145, a.alvo(140), 145, .94, {arco: -100, rx: 30, ry: 19}),
+      a.mov('lustre', a.alvo(140), 145, a.alvo(-140), 145, .89, {arco: -100, atraso: .97, rx: 30, ry: 19})]],
+    escape: ['Cadê o ESC?', a => [-67,67].map((dx,i) => a.mov('tecla', a.alvo(dx), 204, a.alvo(dx), 18, .53, {atraso: i*.36, rx: 22, ry: 17}))],
+    invasores: ['Invasão de oito bits', a => [0,1,2].map(i => a.mov('invasor', i%2?a.twin:a.b, 32+i*36, i%2?a.r:a.l, 32+i*36, .98, {onda: 13, atraso: i*.26, rx: 18}))],
+    cartucho: ['Assopra o cartucho!', a => [a.mov('cartucho', a.b, 63, a.twin, 32, .76, {arco: 70}),
+      a.mov('cartucho', a.twin, 32, a.x, 17, .62, {arco: 55, atraso: .81})]],
+    convite: ['Seu nome ficou de fora', a => [a.mov('convite', a.b, 65, a.x, 22, .83, {onda: 33, rx: 23}),
+      a.mov('convite', a.x, 22, a.edge, 92, .62, {atraso: .84, rx: 23})]],
+    pulseira: ['Pulseira de melhores amigos', a => [a.mov('pulseira', a.b, 37, a.edge, 42, .69, {onda: 16, rx: 23}),
+      a.mov('pulseira', a.edge, 42, a.b, 85, .90, {atraso: .74, arco: 63, rx: 23})]],
+    broche: ['Chuva de distintivos', a => [-90,0,90].map((dx,i) => a.mov('broche', a.alvo(-dx), 220, a.alvo(dx), 18, .89, {atraso: i*.13, rx: 13, ry: 17}))],
+
+    descartar: ['Bilhete devolvido', a => [a.mov('bilhete', a.b, 73, a.edge, a.altura, .91, {onda: 24})]],
+    retratoPartido: ['Rasgou a nossa foto', a => [-1,1].map((d,i) => a.mov(i?'metade2':'metade1', a.x, 190, i?a.r:a.l, 23, .99, {arco: 27, rx: 21, ry: 20}))],
+    saltoBarriga: ['Sai de baixo!', a => {
+      const meio = a.alvo(-a.d*78), final = a.alvo(a.d*34);
+      return [a.mov('barriga', a.b, 52, meio, 52, .79, {corpo: 52, arco: 145, rx: 39, ry: 45, dano: 20}),
+        a.mov('barriga', meio, 52, final, 52, .59, {corpo: 52, arco: 86, atraso: .88, rx: 39, ry: 45, dano: 18})];
     }],
-    rasura: ['Risca esse nome!', a => [a.mov('borracha', a.b, 29, a.edge, 25, .93, {rx: 27}),
-      a.mov('borracha', a.edge, 90, a.b, 78, 1.04, {atraso: 1.18, rx: 27})]],
-    retrato: ['O retrato se partiu', a => [a.mov('metade1', a.x, 195, a.l, 23, 1.04, {arco: 22, rx: 22, ry: 20}),
-      a.mov('metade2', a.x, 195, a.r, 23, 1.04, {arco: 22, rx: 22, ry: 20}), a.area('revelacao', a.x, 78, 155, 1.05)]],
-    negativo: ['Negativos do trio', a => [-110, 0, 110].map((dx, i) => a.area('revelacao', a.alvo(dx), 68, 172, i * .35))],
-    ligacao: ['Ligação de Itabuna', a => [a.mov('telefone', a.b, 67, a.edge, 40, 1.12, {onda: 24}),
-      a.area('sinal', a.x, 78, 148, 1.24)]],
-    promessa: ['A promessa na rodoviária', a => [a.area('sinal', a.alvo(-108), 80, 214), a.area('sinal', a.alvo(108), 80, 214),
-      a.mov('passagem', a.b, 72, a.edge, 38, 1.18, {arco: 86, atraso: .55})]],
+    farpa: ['Palavras que partem', a => {
+      const falas = ['O trio já era.', 'Nem senti falta.', 'Você ficou pra trás.', 'Era só por pena.'];
+      const fala = falas[a.f.farpas++ % falas.length], rx = Math.ceil(fala.length*3.65)+7;
+      const altura = a.f.piso-a.f.y+57;
+      return [a.mov('farpa', clamp(a.b,a.f.l+rx,a.f.r-rx), altura, clamp(a.edge,a.f.l+rx,a.f.r-rx), a.altura, 1.23, {palavra: fala, rx, ry: 15, onda: 13})];
+    }],
+    rasante: ['Rasante da saudade', a => [a.mov('rasante', a.b, a.f.piso-a.f.y+40, a.alvo(a.d*45),
+      clamp(a.altura,62,198), .97, {corpo: 40, arco: -19, rx: 24, ry: 38, dano: 18})]],
+    ruptura: ['Metade do céu vai cair', a => window.JorgeDuelo.marcar(a.f).map(i => ({
+      art: 'fratura', ilha: i.id, x0: i.x+i.w/2, x1: i.x+i.w/2, y0: i.y-5, y1: i.y-5,
+      rx: i.w/2, ry: 7, atraso: 0, dur: .28, dano: 15, area: true
+    }))],
     linhaCruzada: ['A última chamada', a => [a.mov('metade1', a.l, 46, a.centro, 135, .93, {arco: 48}),
       a.mov('metade2', a.r, 46, a.centro, 135, .93, {arco: 48}), a.area('sinal', a.centro, 98, 210, 1.06),
       a.mov('passagem', a.centro, 130, a.x, 22, .88, {atraso: 1.35, onda: 18})]]
+
   };
 
   function criar(slug, x, piso, l, r, modo = {}, recuperacao = [1, .9, .8]) {
-    return {slug, x, piso, l, r, gemeoX: slug === 'gemeos' ? l + 43 : null,
+    return {slug, x, y: piso, piso, l, r, ceu: null, farpas: 0, gemeoX: slug === 'gemeos' ? l + 43 : null,
       fase: 1, indice: 0, estado: 'idle', tempo: 0, dur: 0, idade: 0, objetos: [], marcas: [], golpe: '',
       destino: x, avisoModo: modo.windup || 1, recuperacao};
   }
@@ -141,12 +177,14 @@
     const lista = chefes[f.slug].fases[f.fase - 1];
     f.golpe = lista[f.indice++ % lista.length];
     f.objetos = golpes[f.golpe][1](palco(f, p));
-    const ritmo = 1 + (f.fase - 1) * .02;
+    const ritmo = 1.14 + (f.fase - 1) * .04;
     for (const o of f.objetos) { o.dur /= ritmo; o.atraso /= ritmo; }
     f.estado = 'windup'; f.tempo = 0;
-    f.dur = Math.max(.60, (1.05 - (f.fase - 1) * .055) * f.avisoModo);
+    const aviso = f.golpe === 'ruptura' ? 1.32 : f.golpe === 'saltoBarriga' ? 1.02 : .90 - (f.fase-1)*.04;
+    f.dur = Math.max(f.golpe === 'ruptura' ? 1.10 : .57, aviso*f.avisoModo);
   }
-  function trocar(f, fase) {
+  function trocar(f, fase, jogador) {
+    if (f.slug === 'jorge') window.JorgeDuelo.mudar(f, fase, jogador);
     f.fase = fase; f.indice = 0; f.estado = 'phaseChange'; f.tempo = 0;
     f.dur = f.slug === 'jorge' ? 1.65 : 1.05;
     f.objetos = []; f.marcas = []; f.golpe = '';
@@ -154,7 +192,7 @@
   }
   function ponto(o, t) {
     t = clamp(t, 0, 1);
-    return {x: mix(o.x0, o.x1, t), y: mix(o.y0, o.y1, t) - (o.arco || 0) * 4 * t * (1 - t) -
+    return {x: mix(o.x0, o.x1, t), y: mix(o.y0, o.y1, t) - (o.arco || 0) * (o.quiques ? Math.abs(Math.sin(t*Math.PI*o.quiques)) : 4*t*(1-t)) -
       (o.onda || 0) * Math.sin(t * Math.PI * 2)};
   }
   function impacto(f, o, pos) {
@@ -163,23 +201,26 @@
   }
   function atualizar(f, dt, p, ferir, som) {
     f.idade += dt; f.tempo += dt;
+    if (f.ceu) window.JorgeDuelo.flutuar(f, dt);
     for (let i = f.marcas.length - 1; i >= 0; i--) if ((f.marcas[i].idade += dt) > .28) f.marcas.splice(i, 1);
     if (f.estado === 'idle') { preparar(f, p); return; }
     if (f.estado === 'phaseChange' || f.estado === 'recover') {
-      if (f.estado === 'recover') f.x += clamp(f.destino - f.x, -70 * dt, 70 * dt);
+      if (f.estado === 'recover') f.x += clamp(f.destino - f.x, -100 * dt, 100 * dt);
       if (f.tempo >= f.dur) preparar(f, p);
       return;
     }
     if (f.estado === 'windup') {
       if (f.tempo < f.dur) return;
       f.estado = 'firing'; f.tempo = 0; f.dur = Math.max(...f.objetos.map(o => o.atraso + o.dur));
+      if (f.golpe === 'ruptura') window.JorgeDuelo.romper(f,p);
       som?.(f.slug, f.fase);
     }
     for (const o of f.objetos) {
       const t = (f.tempo - o.atraso) / o.dur;
       if (t < 0 || o.fim) continue;
       const pos = ponto(o, t);
-      if (o.piloto) f.x = pos.x;
+      if (o.piloto || o.corpo) f.x = pos.x;
+      if (o.corpo) f.y = pos.y + o.corpo;
       if (!o.acertou && Math.abs(p.x - pos.x) < o.rx + 13 && p.y > pos.y - o.ry && p.y - 52 < pos.y + o.ry) {
         o.acertou = true; impacto(f, o, pos); ferir(o.dano, pos.x);
       }
@@ -187,7 +228,7 @@
     }
     if (f.tempo < f.dur) return;
     f.estado = 'recover'; f.tempo = 0; f.objetos = [];
-    f.dur = f.recuperacao[Math.min(f.fase - 1, f.recuperacao.length - 1)] * .94;
+    f.dur = f.recuperacao[Math.min(f.fase - 1, f.recuperacao.length - 1)] * .81;
     const dir = f.x >= p.x ? 1 : -1;
     f.destino = clamp(p.x + dir * 218, f.l + 52, f.r - 52);
   }

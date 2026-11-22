@@ -67,6 +67,9 @@
     c2_rosilda: { name: 'Dona Rosilda', skin: '#e3b48f', shade: '#b58665', build: 'belly', h: .9, top: '#3f8a6a', topKind: 'cardigan', inner: '#f2e6c8', skirt: '#6a4a5a', hair: { style: 'curlers', color: '#7a4a34', curler: '#f08ab0' }, glasses: '#5a3a8a', item: 'phone', pose: 'hips', mood: 'angry' },
   };
   SPEC.jorge_celular = { ...SPEC.jorge, name: 'Jorge (no celular)', item: 'phone', pose: 'phone' };
+  SPEC.jorge_farpas = { ...SPEC.jorge, name: 'Jorge das farpas', topKind: 'jacket', top: '#872f51', inner: '#302840', scarf: '#dd939c', pose: 'cocky' };
+  SPEC.jorge_aura = { ...SPEC.jorge, name: 'Jorge do céu', topKind: 'coat', top: '#354d84', inner: '#93cdd6', scarf: '#acdfea', pants: '#384466', pose: 'fists' };
+  SPEC.jorge_promessa = { ...SPEC.jorge_celular, name: 'Jorge da última chamada', topKind: 'jacket', top: '#e4c99c', inner: '#38576b', pants: '#34485a', shoes: '#664b41' };
   const ROLE = {
     jorge_gordo: 'trio', jorge: 'trio', jorge_celular: 'trio', miguel: 'amigo', fred_conquista: 'vilão final antes do Jorge',
     c2_ze_taxi: 'aliado', c2_lurdes: 'aliado', c2_mel: 'aliado', c2_biscoito: 'aliado', c2_picole: 'aliado', c2_nando: 'aliado', c2_vo_cida: 'aliado',
@@ -186,7 +189,7 @@
     const wide = belly ? 18 : strong ? 17 : slim ? 10 : chubby ? 14 : 12, skin = S.skin, shade = S.shade;
     const shiver = S.shiver || o.cold ? Math.round(Math.sin(t * 40)) : 0, twitch = S.twitch && Math.sin(t * 13) > .85 ? 1 : 0;
     const mood = o.emotion || S.mood || '';
-    oval(c, 0, -1, belly ? 23 : strong ? 21 : chubby ? 19 : 17, 3, '#2e433d', 2);
+    if(!o.duelo || !air) oval(c, 0, -1, belly ? 23 : strong ? 21 : chubby ? 19 : 17, 3, '#2e433d', 2);
     if (o.rage || (type === 'c2_breno' && o.powered)) { c.save(); c.globalAlpha *= .3; oval(c, 0, -34, 30 + Math.sin(t * 11) * 3, 42, '#f26154', 3); c.restore(); }
     // pernas
     for (const side of [-1, 1]) {
@@ -221,6 +224,15 @@
       if (p === 'relaxed') { Rh = [wide + 4, -20]; L = [-wide - 3, -20]; }
     }
     if (attack) { Rh = [wide + 10 + Math.round(strike * 12), -34 - Math.round(strike * 6)]; L = [-wide + 1, -34]; }
+    if (o.duelo===2 && attack) {
+      Rh=air?[wide+9,-39]:[wide-3,-25]; L=air?[-wide-9,-38]:[-wide+1,-24];
+    } else if (o.duelo===3 && attack) {
+      Rh=[wide+8+Math.round(7*strike),-41]; L=[0,-43];
+    } else if (o.duelo===4) {
+      Rh=[wide+6+(attack?8:0),attack?-40:-23]; L=[-wide-7,attack?-36:-26];
+    } else if (o.duelo===5) {
+      Rh=[wide+2,-47]; L=attack?[wide+4,-32]:[-wide-3,-22];
+    }
     if (o.charging) { L = [-27, -24]; Rh = [27, -24]; }
     if (o.reach) { Rh = [wide + 22, -32]; } // mão estendida (cutscene final)
     const sleeveSkin = S.sleeve === 'short' || S.topKind === 'tank';

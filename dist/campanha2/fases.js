@@ -92,8 +92,8 @@
     // A luta final e as demais arenas consultam o mesmo repertório de combate-chefes.js.
     jorge: { cena: 14, hora: 21, checkpoint: 2080, final: true,
       chefe: { tipo: 'jorge', nome: 'JORGE', titulo: 'O EX-MELHOR AMIGO', nivel: 20, x: 2640, hp: 520, cor: '#9a7ad8', proj: 'papel', arena: [-420, 420], vel: 1.34, armor: .45, danoMult: 1.35,
-        falasFase: [['EU NÃO TE CONHEÇO!', 'SAI DA MINHA VIDA!', 'BOLINHA DE PAPEL, LEMBRA?', 'VOLTA PRA ITABUNA!'], ['SILÊNCIO NA SALA!', 'TODO MUNDO PRO CASTIGO!', 'FOI O DA ROÇA, PROFESSOR!', 'BRONCA EM DOBRO!'],
-          ['NÃO ME CHAMA DE GORDO!', 'G-O-R-D-O, É ISSO?!', 'EU MUDEI!', 'POR QUE VOCÊ VEIO?!'], ['...O CASTIGO EM TRIO...', 'POR QUE VOCÊ NÃO DESISTE?!', 'EU TINHA VERGONHA!', 'O TRIO... ACABOU... NÉ?'], ['EU LEMBRO DA PROMESSA.', 'AQUELA LIGAÇÃO... ERA PRA VOCÊ.']],
+        falasFase: [['EU NÃO TE CONHEÇO!', 'SAI DA MINHA VIDA!', 'BOLINHA DE PAPEL, LEMBRA?', 'VOLTA PRA ITABUNA!'], ['QUERO VER SEGURAR ESSE PESO!', 'OLHA ONDE EU VOU CAIR!'],
+          ['O TRIO JÁ ERA.', 'NEM SENTI FALTA.', 'VOCÊ FICOU PRA TRÁS.'], ['DAQUI DE CIMA ITABUNA É TÃO PEQUENA.', 'OLHA O VITRAL ANTES DE PULAR!'], ['EU LEMBRO DA PROMESSA.', 'AQUELA LIGAÇÃO... ERA PRA VOCÊ.']],
         falas: ['EU NÃO TE CONHEÇO!'] },
       intro: 'c2_centro', derrota: 'c2_final',
       inimigos: [['aluno', 1960], ['pombo', 2040], ['aluna', 2120]], curas: [1900, 2150] }
@@ -149,7 +149,7 @@
     }
     function novaFase(f) {
       B.fase = f; B.max = B.hp = HPF[f - 1]; B.st = 'troca'; B.tt = 1.3; B.padrao = 0; B.golpe = null; projs.length = 0; inimigos.forEach((e) => { if (e.invocado) e.hp = 0; });
-      B.tt = combate.trocar(luta, f);
+      B.tt = combate.trocar(luta, f, P);
       P.inv = Math.max(P.inv || 0, B.tt); api.sfx('vs');
       if (slug !== 'jorge') placa('FASE ' + f, f === NF ? 'ÚLTIMA FASE · VIDA RENOVADA' : 'VIDA RENOVADA', K.cor, 1.05);
       fala(K.falasFase?.[f - 1]?.[0] || K.falas[0]);
@@ -231,7 +231,9 @@
         api.sfx(slug === 'tonhao' ? 'buzina' : 'whoosh');
         if (B2) { fala2Txt = K.falas2[luta.indice % K.falas2.length]; fala2Vida = 1.3; }
       });
-      B.x = luta.x; B.dir = P.x < B.x ? -1 : 1; B.st = estadosDoChefe[luta.estado]; B.tt = Math.max(0, luta.dur - luta.tempo);
+      B.x = luta.x; B.y = luta.y;
+      if(slug==='jorge'){const corpo=window.JorgeDuelo.corpo(luta); B.alto=corpo.altura; B.largura=corpo.rx;}
+      B.dir = P.x < B.x ? -1 : 1; B.st = estadosDoChefe[luta.estado]; B.tt = Math.max(0, luta.dur - luta.tempo);
       if (B2) { B2.x = luta.gemeoX; B2.dir = P.x < B2.x ? -1 : 1; B2.hit = Math.max(0, B2.hit - dt); }
       falaT -= dt;
       if (falaT <= 0) { falaT = rnd(4, 6.5); const falas = K.falasFase?.[B.fase-1] || K.falas; fala(falas[Math.floor(rnd(0, falas.length))]); }
@@ -261,18 +263,12 @@
     }
     function personagem(c, tipo, x, y, o) { try { window.Art.drawCharacter(c, tipo, x, y, { frame: t, grounded: true, ...o }); } catch (e) {} }
     function barra(c, x, y, w, f, cor) { R(c, x - w / 2 - 1, y - 1, w + 2, 6, '#1c1408'); R(c, x - w / 2, y, w * clamp(f, 0, 1), 4, cor); }
-    function memorias(c) { // fase 4 do Jorge: fotos do trio piscando atrás da arena
-      if (!(K.nome === 'JORGE' && B.fase === 4 && B.st !== 'espera') || B.st === 'derrotado') return;
-      const quem = [['crianca_daroca', 'crianca_reeis', 'crianca_jorge'], ['pre_daroca', 'pre_reeis', 'pre_jorge'], ['crianca_daroca', 'crianca_reeis', 'crianca_jorge']];
-      for (let i = 0; i < 3; i++) { const fx0 = arena.l + 120 + i * ((arena.r - arena.l - 240) / 2), a = .32 + .22 * Math.max(0, Math.sin(t * 1.3 + i * 2.1)), y0 = FLOOR - 330 + Math.sin(t * .8 + i) * 8;
-        c.save(); c.globalAlpha = a; c.translate(fx0, y0); c.rotate((i - 1) * .08); R(c, -70, -6, 140, 150, '#f6f2e8'); R(c, -62, 2, 124, 110, '#e8c890'); R(c, -62, 80, 124, 32, '#c8a468');
-        quem[i].forEach((q, k) => personagem(c, q, -40 + k * 40, 104, { facing: k === 2 ? -1 : 1, emotion: 'friend', frame: t * 2 })); c.fillStyle = 'rgba(160,110,60,.35)'; c.fillRect(-62, 2, 124, 110); c.restore(); } }
     const pisca = (e) => !!window.CampanhaTreino?.piscando?.(e);
     function desenhar(c) {
-      memorias(c);
+      if(luta?.ceu) window.JorgeDuelo.plataformas(c,luta);
       if (luta) window.ConquistaEfeitos.fundo(c, luta);
       // barreiras da arena
-      if (arena.ativa) for (const x of [arena.l, arena.r]) { // barreira de obra: cavalete listrado, fita e um brilho na cor do chefe
+      if (arena.ativa && !luta?.ceu) for (const x of [arena.l, arena.r]) { // barreira de obra: cavalete listrado, fita e um brilho na cor do chefe
         c.globalAlpha = .16 + Math.sin(t * 4) * .06; R(c, x - 26, FLOOR - 220, 52, 220, K.cor); c.globalAlpha = .3; for (let y = FLOOR - 220; y < FLOOR; y += 22) R(c, x - 26, y + ((t * 40) % 22), 52, 2, '#ffffff'); c.globalAlpha = 1;
         R(c, x - 9, FLOOR - 150, 18, 150, '#1c1408'); for (let y = FLOOR - 148; y < FLOOR; y += 12) R(c, x - 7, y, 14, 6, '#ffd24a'); for (let y = FLOOR - 142; y < FLOOR; y += 12) R(c, x - 7, y, 14, 6, '#2a2a2a');
         R(c, x - 22, FLOOR - 8, 44, 8, '#1c1408'); R(c, x - 20, FLOOR - 6, 40, 5, '#e8833a'); R(c, x - 14, FLOOR - 158, 28, 10, '#1c1408'); R(c, x - 12, FLOOR - 156, 24, 6, Math.floor(t * 3) % 2 ? '#ff3a2a' : '#7a1a1a');
@@ -293,11 +289,13 @@
       }
       // chefe
       if (B.st !== 'espera' || Math.abs(P.x - B.x) < 1200) {
-        const caido = B.st === 'derrotado', sh = B.st === 'carga' ? Math.round(Math.sin(t * 50) * 2) : 0, aura = B.fase >= 2 && !caido;
+        const caido = B.st === 'derrotado', sh = B.st === 'carga' ? Math.round(Math.sin(t * 50) * 2) : 0, aura = B.fase >= 2 && !caido && slug!=='jorge';
         if (aura) for (let k = 0; k < 10; k++) { const q = (t * 1.5 + k / 10) % 1; c.globalAlpha = (1 - q) * .5; R(c, B.x + Math.sin(k * 2.3) * 22 - 3, B.y - q * 110, 6, 10, B.fase >= 3 ? (B.fase === 4 ? '#f6e0ff' : '#ff5a3a') : K.cor); } c.globalAlpha = 1;
         c.save(); if (!caido && pisca(B)) c.globalAlpha = .25; if (caido) { c.translate(B.x, B.y); c.rotate(-B.dir * Math.min(1.5, (2.2 - B.tt) * 3)); c.translate(-B.x, -B.y); }
-        personagem(c, B.tipo, B.x + sh, B.y, { scale: 1.3, facing: B.dir, moving: B.st === 'recupera', hit: B.hit > 0,
-          attack: B.st === 'carga' || B.st === 'ataque', attackProgress: B.st === 'carga' ? .2 : .8 });
+        const pose = {scale:1.3, facing:B.dir, moving:B.st==='recupera', hit:B.hit>0,
+          attack:B.st==='carga'||B.st==='ataque', attackProgress:B.st==='carga'?.2:.8};
+        if(slug==='jorge' && luta)window.JorgeDuelo.personagem(c,luta,pose);
+        else personagem(c, slug==='jorge'&&caido?'jorge_promessa':B.tipo, B.x+sh,B.y,pose);
         c.restore();
         if (B.st === 'carga' && luta) txt(c, combate.titulo(luta), B.x, B.y-124, K.cor, {sombra:'#241d29'});
         if (B.st === 'recupera') { for (let k = 0; k < 3; k++) R(c, B.x + Math.cos(t * 7 + k * 2.1) * 16, B.y - 108 + Math.sin(t * 7 + k * 2.1) * 4, 4, 4, '#ffd24a'); txt(c, 'ABERTO!', B.x, B.y - 128, '#7af07a', { sombra: '#1c1408' }); }
@@ -325,11 +323,11 @@
       for (const p of placas) { const k = p.t, a = Math.min(1, k / .2, (p.vida - k) / .3), sc = 1 + Math.max(0, .25 - k) * 2; c.save(); c.globalAlpha = a; c.translate(W / 2, 210); c.scale(sc, sc); c.fillStyle = 'rgba(12,8,6,.75)'; c.fillRect(-300, -46, 600, 92); c.fillStyle = p.cor; c.fillRect(-300, -46, 600, 4); c.fillRect(-300, 42, 600, 4); txt(c, p.titulo, 0, -30, p.cor, { s: 5, sombra: '#2a1006' }); txt(c, p.sub, 0, 14, '#f6ead0', { s: 2 }); c.restore(); }
     }
     function reiniciar() { // depois de desmaiar: o chefe volta ao começo, os inimigos vencidos continuam vencidos
-      luta = null; Object.assign(B, { x: K.x, hp: HPF[0], max: HPF[0], fase: 1, st: 'espera', tt: 0, golpe: null, padrao: 0, stun: 0, conf: 0, fim: false }); if (B2) Object.assign(B2, { x: K.x + K.dupla.dx, st: 'idle', tt: 2, stun: 0 }); arena.ativa = false; projs.length = 0; efeitos.length = 0; placas.length = 0; vencido = false;
+      luta = null; Object.assign(B, { x: K.x, y: FLOOR, alto: 96, largura: 30, vx: 0, hp: HPF[0], max: HPF[0], fase: 1, st: 'espera', tt: 0, golpe: null, padrao: 0, stun: 0, conf: 0, fim: false }); if (B2) Object.assign(B2, { x: K.x + K.dupla.dx, st: 'idle', tt: 2, stun: 0 }); arena.ativa = false; projs.length = 0; efeitos.length = 0; placas.length = 0; vencido = false;
       for (let i = inimigos.length - 1; i >= 0; i--) if (inimigos[i].invocado) inimigos.splice(i, 1);
     }
     function comecarLuta() { novaLuta(); B.st = 'idle'; B.tt = 1.2; P.x = arena.l + 70; placa(K.nome, 'NV ' + K.nivel + ' · ' + K.titulo, K.cor, 2.3); api.sfx('vs'); }
-    return { slug, F, chefe: B, arena, inimigos: () => inimigos.concat(B.st !== 'espera' && B.st !== 'derrotado' && B.st !== 'entrada' ? (B2 ? [B, B2] : [B]) : []), update, desenhar, desenharTela, reiniciar, comecarLuta, vencida: () => vencido, emArena: () => arena.ativa };
+    return { slug, F, chefe: B, arena, get luta(){return luta;}, inimigos: () => inimigos.concat(B.st !== 'espera' && B.st !== 'derrotado' && B.st !== 'entrada' ? (B2 ? [B, B2] : [B]) : []), update, desenhar, desenharTela, reiniciar, comecarLuta, vencida: () => vencido, emArena: () => arena.ativa };
   }
 
   window.CampanhaFases = Object.freeze({ FASES, criar, lista: () => Object.keys(FASES) });
