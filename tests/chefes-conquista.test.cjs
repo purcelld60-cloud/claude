@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 
 global.window = {};
 require('../dist/campanha2/jorge-duelo.js');
+require('../dist/campanha2/perseguicao-moto.js');
 require('../dist/campanha2/combate-chefes.js');
 require('../dist/campanha2/fases.js');
 const c = window.ConquistaCombate;
@@ -48,7 +49,8 @@ test('as 63 coreografias têm aviso, colisão na marca desenhada e um intervalo 
         assert.equal(acertos, 0);
         for(let k=0;k<800 && f.estado!=='recover';k++) c.atualizar(f, 1/120, parado, ferir, () => som++);
         assert(acertos>=1, nome); assert.equal(som, 1); assert.equal(f.estado,'recover');
-        assert(f.dur>.6 && f.dur<=.81);
+        const recBase=[1,.9,.8][Math.min(i,2)];
+        assert(Math.abs(f.dur-recBase*(.70-i*.015))<1e-8,nome);
         const antes=acertos; c.atualizar(f,f.dur/2,parado,ferir); assert.equal(acertos,antes);
       }
     }
@@ -69,6 +71,47 @@ test('fora do visor, acima da moto e durante a virada o jogador não leva dano',
   c.atualizar(j,dur-.01,jogador,assert.fail); assert.equal(j.estado,'phaseChange');
   c.atualizar(j,.02,jogador,assert.fail); assert.equal(j.golpe,'saltoBarriga');
   const novo=criar('jorge');assert.equal(novo.fase,1);assert.deepEqual(novo.objetos,[]);
+});
+
+test('o mesmo golpe acelera a cada barra e respeita o modo de dificuldade', () => {
+  for(const [modo,fator] of [['fácil',1.22],['normal',1],['difícil',.82]]){
+    const tempos=[1,2,3].map(fase=>{
+      const f=criar('creuza',fator); c.trocar(f,fase);
+      f.indice=c.chefes.creuza.fases[fase-1].indexOf('recado');
+      c.preparar(f,jogador);return f.objetos[0].dur;
+    });
+    assert(tempos[2]<tempos[1] && tempos[1]<tempos[0],modo);
+    assert(Math.abs(tempos[0]-1.05*Math.sqrt(fator)/1.42)<1e-8,modo);
+    const f=criar('jorge',fator);c.trocar(f,4);f.indice=1;c.preparar(f,jogador);
+    assert(f.dur>=1.10,'a ruptura sempre avisa antes de romper');
+  }
+});
+
+test('a mira antecipa a corrida só depois da primeira barra e fica no ponto anunciado', () => {
+  for(const fase of [1,2,3]){
+    const f=criar('creuza');c.trocar(f,fase);f.indice=c.chefes.creuza.fases[fase-1].indexOf('parapeito');
+    const p={x:580,y:440,vx:280};c.preparar(f,p);
+    const alvo=f.objetos[0].x0;assert(fase===1?alvo===p.x:alvo>p.x && alvo<=p.x+64);
+    p.vx=-280;p.x-=20;c.atualizar(f,.12,p,assert.fail);
+    assert.equal(f.objetos[0].x0,alvo);
+  }
+});
+
+test('um golpe rápido que cruza o jogador entre quadros acerta, inclusive a 20 FPS', () => {
+  const criarRajada=()=>{
+    const f=criar('gemeos');Object.assign(f,{estado:'firing',dur:.40,tempo:.17,
+      objetos:[{art:'controle1',x0:0,y0:390,x1:800,y1:390,rx:8,ry:8,dur:.40,atraso:0,dano:13}]});
+    return f;
+  };
+  for(const fps of [20,30,60,120]){
+    const f=criarRajada();let dano=0;
+    for(let i=0;i<Math.ceil(fps*.16);i++)c.atualizar(f,1/fps,{x:390,y:420},n=>dano+=n);
+    assert.equal(dano,13,String(fps));
+  }
+  const f=criarRajada(), o=f.objetos[0];
+  Object.assign(o,{x0:500,x1:500,dur:.20});
+  f.jogadorAnteriorX=400;f.jogadorAnteriorY=420;
+  c.atualizar(f,.06,{x:500,y:420},assert.fail); // o herói só entrou depois que o efeito acabou
 });
 
 test('as farpas de Jorge mudam de frase e ficam legíveis junto às duas bordas', () => {
@@ -134,6 +177,44 @@ test('seis ilhas carregam o jogador, só as três sinalizadas cedem, voltam e pe
   assert.equal(new Set(ar.formas).size,5);
 });
 
+test('as motos transportam quem está apoiado e permitem saltar, pousar e recuperar uma queda', () => {
+  const f=criar('tonhao'),p={x:0,y:440,vx:0,vy:0,ground:false,inv:0},moto=c.terreno(f);
+  function andar(dt){
+    moto.avancar(f,dt,p);const antes=p.y;p.x+=p.vx*dt;p.vy+=850*dt;p.y+=p.vy*dt;p.ground=false;
+    moto.pousar(f,p,antes,()=>assert.fail('queda inesperada'));
+  }
+  for(let i=0;i<30;i++)andar(1/60);
+  const e=f.estrada,x=p.x;assert.equal(e.apoio,0);
+  for(let i=0;i<10;i++)andar(1/60);
+  assert.notEqual(p.x,x);assert.equal(p.y,e.motos[0].y);
+  p.vy=-405;p.vx=230;p.ground=false;
+  for(let i=0;i<59;i++)andar(1/60);
+  assert.equal(e.apoio,1);assert.equal(p.y,e.motos[1].y);
+  let dano=0;Object.assign(p,{x:f.l,y:f.piso+7,vy:200,ground:false});
+  moto.pousar(f,p,f.piso,d=>dano=d);assert(dano>0&&p.ground&&p.inv>0);assert.equal(e.apoio,0);
+});
+
+test('derrubar o cobrador interrompe o recibo pendente e a moto continua utilizável', () => {
+  const f=criar('tonhao'),moto=c.terreno(f),p={...jogador,vx:0,vy:0,ground:true,facing:1};
+  moto.avancar(f,.016,p);f.indice=1;c.preparar(f,p);
+  const r=f.estrada.motos[1].rival,cobranca=f.objetos.find(o=>o.cobrador===1);
+  assert(cobranca);assert.equal(moto.alvo(f,p,{x:f.r}),r);
+  assert(moto.acertar(f,{x:r.x,y:r.y-26,damage:r.max}));
+  moto.avancar(f,.016,p);assert.equal(r.hp,0);assert(cobranca.fim);
+  assert.equal(f.estrada.motos.length,4);c.trocar(f,2,p);assert.equal(f.estrada.motos.filter(m=>m.rival.hp>0).length,2);
+});
+
+test('cada chefe tem um ataque com áreas separadas e preserva uma saída', () => {
+  for(const [slug,nome] of Object.entries({creuza:'quarteirao',tonhao:'contramao',valdomiro:'balanca',kaua:'reprise',barao:'safra',breno:'bis',gemeos:'coop',fred:'clube',jorge:'linhaCruzada'})){
+    const f=criar(slug), fase=c.chefes[slug].fases.length;c.trocar(f,fase);
+    f.indice=c.chefes[slug].fases[fase-1].indexOf(nome);c.preparar(f,jogador);
+    const zonas=f.objetos.filter(o=>o.area);assert(zonas.length>=2,slug);
+    assert(new Set(zonas.map(o=>o.x0)).size>=2,slug);
+    for(const z of zonas)assert(z.rx>=30 && z.ry>10 && z.x0-z.rx>=f.l && z.x0+z.rx<=f.r,slug);
+    assert(Array.from({length:32},(_,k)=>f.l+20+(f.r-f.l-40)*k/31).some(x=>zonas.every(o=>Math.abs(x-o.x0)>o.rx+13)),slug);
+  }
+});
+
 test('cinco barras de Jorge respeitam o orçamento de vida e as três dificuldades', () => {
   assert.deepEqual(c.barras('jorge',4000),[2240,2720,3200,3720,4120]);
   for (const base of [2720,4000]) {
@@ -142,7 +223,7 @@ test('cinco barras de Jorge respeitam o orçamento de vida e as três dificuldad
     assert(Math.abs(h.reduce((n,m)=>n+m,0)/(3.75*base)-1.0667)<.001);
   }
   const tempos=[.82,1,1.22].map(m=>{const f=criar('jorge',m);c.trocar(f,5);c.preparar(f,jogador);return f.dur;});
-  assert(tempos[0]>=.6 && tempos[2]>tempos[1] && tempos[1]>tempos[0]);
+  assert.equal(tempos[0],.52); assert(tempos[2]>tempos[1] && tempos[1]>tempos[0]);
   assert.deepEqual(c.barras('fred',100),[100,125,150]);
 });
 

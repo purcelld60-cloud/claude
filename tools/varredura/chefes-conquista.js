@@ -27,6 +27,42 @@ async function capturar(p,nome) {
   const png=await p.locator('#gameCanvas').evaluate(c=>c.toDataURL('image/png').split(',')[1]);
   await fs.writeFile(path.join(pasta,nome+'.png'),Buffer.from(png,'base64'));
 }
+async function testarPerseguicao(p,contexto,celular){
+  await p.waitForFunction(()=>testeConquista.luta?.estrada?.montou && testeConquista.luta.estado==='windup');
+  const inicial=await p.evaluate(()=>{
+    window.relogioManual=true;
+    return testeConquista.luta.estrada.motos[1].rival.hp;
+  });
+  if(celular)await p.locator('[data-action="paper"]:visible').first().tap();
+  else await p.keyboard.press('KeyJ');
+  await p.evaluate(()=>testeConquista.passo(30));
+  assert(await p.evaluate(hp=>testeConquista.luta.estrada.motos[1].rival.hp<hp,inicial),'o papel precisa acertar o cobrador');
+  let touch, toques=[];
+  if(celular){
+    const joy=await p.locator('#moveJoystick:visible').boundingBox(),btn=await p.locator('[data-action="jump"]:visible').first().boundingBox();
+    const centro={id:0,x:joy.x+joy.width/2,y:joy.y+joy.height/2},pulo={id:1,x:btn.x+btn.width/2,y:btn.y+btn.height/2};
+    touch=await contexto.newCDPSession(p);
+    await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[centro,pulo]});
+    toques=[{...centro,x:centro.x+joy.width*.41},pulo];
+    await touch.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:toques});
+  }else{await p.keyboard.down('KeyD');await p.keyboard.down('Space');}
+  const papeis=await p.evaluate(()=>{testeConquista.passo(9);return testeConquista.jogador.papers;});
+  assert(await p.evaluate(()=>!testeConquista.jogador.ground));
+  if(touch){
+    const btn=await p.locator('[data-action="paper"]:visible').first().boundingBox();
+    await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[...toques,{id:2,x:btn.x+btn.width/2,y:btn.y+btn.height/2}]});
+  }else await p.keyboard.press('KeyJ');
+  assert.equal(await p.evaluate(()=>testeConquista.jogador.papers),papeis-1,'Da Roça deve poder atirar durante o salto');
+  await p.evaluate(()=>{testeConquista.passo(13);testeConquista.jogador.inv=0;testeConquista.passo(0);});
+  assert(await p.evaluate(()=>!testeConquista.jogador.ground && testeConquista.jogador.y<testeConquista.luta.estrada.motos[0].y-45));
+  await capturar(p,'tonhao-salto');
+  await p.evaluate(()=>testeConquista.passo(12));
+  if(touch){await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await touch.detach();}
+  else{await p.keyboard.up('Space');await p.keyboard.up('KeyD');}
+  const apoio=await p.evaluate(()=>{testeConquista.passo(33);return testeConquista.luta.estrada.apoio;});
+  assert.equal(apoio,1,'o salto deve alcançar outra moto');
+}
+
 async function main() {
   if(pasta)await fs.mkdir(pasta,{recursive:true});
   const b=await chromium.launch({executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH||undefined});
@@ -55,6 +91,7 @@ async function main() {
         else await p.keyboard.press('KeyJ');
         await p.waitForFunction(antes=>Game.getBossStatus().hp<antes,hp,{timeout:4500});
       }
+      if(slug==='tonhao')await testarPerseguicao(p,contexto,celular);
       const vistos=await p.evaluate(s=>{
         window.relogioManual=true; const qa=window.testeConquista, listas=ConquistaCombate.chefes[s].fases;
         const vistos=new Set();
