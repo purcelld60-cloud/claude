@@ -1006,9 +1006,11 @@
     const skin=type==='reeis'?'#825033':type==='caleb'?'#f0c9af':type==='lucas'?'#efc9b0':type==='menezes'?'#b47d54':type==='marco'?'#f0cdb8':type==='mota'?'#f1ccb4':type==='nikolas'?'#e1b28a':type==='miqueias'?'#f0cbb5':type==='almiro'?'#b47b53':'#d6a071';
     const shadow=type==='reeis'?'#51382c':type==='almiro'?'#8a573d':type==='caleb'||type==='miqueias'||type==='mota'||type==='marco'?'#c3977f':'#a86c4e';
     // Visual escolhido no espelho da Bigodon (visual.js). Sem escolha, Da Roça fica como sempre.
-    const LK=type==='daroca'&&o.look!==false?(o.look||window.DarocaLook?.get?.()||null):null,lion=LK?.costume==='jaglion';
-    const shirt=lion?'#e3a83f':LK?.shirt||{daroca:'#dc8c47',lucas:'#9a9e9e',reeis:'#4d7374',nikolas:'#8c6594',menezes:'#647c84',caleb:'#e1b563',ravid:'#7c93a1',marco:'#222b30',kaua:'#66888a',almiro:'#367cba',miqueias:'#617b70',mota:'#1b4677'}[type]||'#dc8c47';
-    const pants=lion?'#d39a36':LK?.pants||(type==='marco'?'#2b353e':type==='nikolas'?'#423e59':type==='caleb'?'#564d3e':type==='almiro'||type==='lucas'?'#1e3355':type==='miqueias'?'#354c53':type==='mota'?'#1c3558':'#455b62');
+    const LK=type==='daroca'&&o.look!==false?(o.look||window.DarocaLook?.get?.()||null):null,lion=LK?.costume==='jaglion',jeg=LK?.costume==='dajegue',cai=LK?.costume==='caipira',far=LK?.costume==='farda',kig=lion||jeg;
+    // Trajes ganhos em missões: Da Jegue (fantasia de burro), Caipira (festa junina) e Farda da escola
+    const trajeLuz=lion?'#f3c766':jeg?'#aaa397':far?'#ffffff':cai?'#e2685a':null;
+    const shirt=lion?'#e3a83f':jeg?'#8f887d':far?'#f1f1ea':cai?'#c2392d':LK?.shirt||{daroca:'#dc8c47',lucas:'#9a9e9e',reeis:'#4d7374',nikolas:'#8c6594',menezes:'#647c84',caleb:'#e1b563',ravid:'#7c93a1',marco:'#222b30',kaua:'#66888a',almiro:'#367cba',miqueias:'#617b70',mota:'#1b4677'}[type]||'#dc8c47';
+    const pants=lion?'#d39a36':jeg?'#7b746a':far?'#1d2d58':cai?'#7a5636':LK?.pants||(type==='marco'?'#2b353e':type==='nikolas'?'#423e59':type==='caleb'?'#564d3e':type==='almiro'||type==='lucas'?'#1e3355':type==='miqueias'?'#354c53':type==='mota'?'#1c3558':'#455b62');
     // Feet travel through contact, passing and lifted swing poses; knees bend separately.
     function leg(front){
       const sign=front?1:-1, swing=front?walk:-walk;
@@ -1022,8 +1024,10 @@
       if(type==='daroca'&&attackOn&&attackType==='paper'){footX+=front?Math.round(strike*3):-Math.round(strike*2);}
       const kneeX=air?footX-5:Math.round((footX+hipX)/2)+(front?2:-2)-Math.round(squat*.7),kneeY=-12-bob+Math.round(squat*.7)-lift*.45;
       const pts=[[hipX,hipY],[kneeX,kneeY],[footX,footY-4]];
-      limb(c,pts,type==='mota'||type==='marco'?7:9,P.ink);limb(c,pts,type==='mota'||type==='marco'?4:5,front?pants:lion?'#b8862e':(type==='lucas'||type==='almiro'||type==='mota'?'#17283e':'#374a50'));
-      const shoe=lion?'#e3a83f':type==='lucas'?'#f4f7f3':type==='almiro'?'#9ef13d':type==='mota'?'#18394d':'#343b35';r(c,footX-4,footY-5,12,5,shoe);r(c,footX-3,footY-2,11,2,type==='lucas'?'#bac6cd':type==='almiro'?'#d1ff77':type==='mota'?'#f1ede3':front?'#bba784':'#8e8c70');if(lion){r(c,footX-4,footY-6,12,2,'#f0c25a');r(c,footX+1,footY-4,1,3,'#b8802a');r(c,footX+4,footY-4,1,3,'#b8802a');r(c,footX-3,footY-1,10,1,'#8a4a2a');}if(type==='mota')for(let i=0;i<3;i++)r(c,footX-3+i*4,footY,2,2,'#dbe4d7');
+      limb(c,pts,type==='mota'||type==='marco'?7:9,P.ink);limb(c,pts,type==='mota'||type==='marco'?4:5,front?pants:lion?'#b8862e':jeg?'#665f56':far?'#16234a':cai?'#62452b':(type==='lucas'||type==='almiro'||type==='mota'?'#17283e':'#374a50'));
+      if(far&&front)limb(c,pts.map(p=>[p[0]+1,p[1]]),2,'#6fb0e6'); // listra azul-clara numa perna da calça da farda
+      if(cai){if(front){r(c,kneeX-3,kneeY-2,6,5,'#c9a24a');r(c,kneeX-2,kneeY-1,1,1,'#5a3a20');r(c,kneeX+1,kneeY+1,1,1,'#5a3a20');}r(c,footX-4,footY-8,11,3,front?'#9a7448':'#7d5c38');}
+      const shoe=lion?'#e3a83f':jeg?'#3b332c':cai?'#5a3a22':far?'#1a1a1e':type==='lucas'?'#f4f7f3':type==='almiro'?'#9ef13d':type==='mota'?'#18394d':'#343b35';r(c,footX-4,footY-5,12,5,shoe);r(c,footX-3,footY-2,11,2,type==='lucas'?'#bac6cd':type==='almiro'?'#d1ff77':type==='mota'?'#f1ede3':front?'#bba784':'#8e8c70');if(lion){r(c,footX-4,footY-6,12,2,'#f0c25a');r(c,footX+1,footY-4,1,3,'#b8802a');r(c,footX+4,footY-4,1,3,'#b8802a');r(c,footX-3,footY-1,10,1,'#8a4a2a');}if(type==='mota')for(let i=0;i<3;i++)r(c,footX-3+i*4,footY,2,2,'#dbe4d7');
     }
     leg(false);leg(true);
     c.translate(lean,-bob+squat+Math.round(recoil*2));if(type==='daroca'&&attackOn&&attackType==='paper')c.rotate(progress<.3?-.035*Math.sin(progress/.3*Math.PI*.5):Math.sin((progress-.3)/.7*Math.PI)*.045);
@@ -1064,7 +1068,7 @@
       limb(c,[should,elbow,hand],muscular?13:slim?6:8,P.ink);
       limb(c,[should,elbow],muscular?9:slim?4:5,muscular&&!lion?skin:shirt);
       if(heroStrong)limb(c,[should,[should[0]*.86,-33]],11,shirt);
-      limb(c,[elbow,hand],muscular?8:slim?4:5,type==='marco'||lion?shirt:skin);r(c,hand[0]-3,hand[1]-3,muscular?9:slim?5:6,muscular?8:slim?5:6,lion?'#f0c25a':skin);if(lion){r(c,hand[0]-4,hand[1]-4,muscular?11:8,2,P.ink);r(c,hand[0]-1,hand[1],3,2,'#8a4a2a');r(c,hand[0]-2,hand[1]-2,1,1,'#8a4a2a');r(c,hand[0]+2,hand[1]-2,1,1,'#8a4a2a');}
+      limb(c,[elbow,hand],muscular?8:slim?4:5,type==='marco'||lion||jeg||cai?shirt:skin);r(c,hand[0]-3,hand[1]-3,muscular?9:slim?5:6,muscular?8:slim?5:6,lion?'#f0c25a':jeg?'#4a4139':skin);if(lion){r(c,hand[0]-4,hand[1]-4,muscular?11:8,2,P.ink);r(c,hand[0]-1,hand[1],3,2,'#8a4a2a');r(c,hand[0]-2,hand[1]-2,1,1,'#8a4a2a');r(c,hand[0]+2,hand[1]-2,1,1,'#8a4a2a');}
       if(muscular){r(c,elbow[0]-2,elbow[1]-4,4,2,type==='reeis'?'#a26c45':'#f5d8bb');r(c,elbow[0]-3,elbow[1]+2,5,2,shadow);}
     }
     arm(false);
@@ -1079,13 +1083,13 @@
       poly(c,[[-8,-37],[9,-37],[8,-28],[6,-19],[-6,-19],[-8,-28]],shirt);
     }else{
       const broad=fart?(progress<.32?Math.round(Math.sin(progress/.32*Math.PI*.5)*2):progress<.65?-1:0):0;
-      r(c,-13-broad,-39,27+broad*2,23,P.ink);r(c,-11-broad,-38,23+broad*2,19,shirt);r(c,-10,-35,3,12,type==='lucas'?'#c3c9c7':type==='almiro'?'#80b2dc':lion?'#f3c766':LK?.shirtLight||'#e7ac65');if(lion){r(c,-7,-36,14,16,'#f6e0b0');r(c,-8,-33,1,10,'#f6e0b0');r(c,7,-33,1,10,'#f6e0b0');r(c,0,-38,1,19,'#c9a050');r(c,-1,-38,3,2,'#c9a050');}if(type==='miqueias'){oval(c,3,-26,18,13,P.ink,2);oval(c,3,-27,16,11,shirt,2);r(c,-10,-30,27,2,'#8aa498');r(c,-8,-21,23,2,'#344e45');}
+      r(c,-13-broad,-39,27+broad*2,23,P.ink);r(c,-11-broad,-38,23+broad*2,19,shirt);r(c,-10,-35,3,12,type==='lucas'?'#c3c9c7':type==='almiro'?'#80b2dc':trajeLuz||LK?.shirtLight||'#e7ac65');if(lion){r(c,-7,-36,14,16,'#f6e0b0');r(c,-8,-33,1,10,'#f6e0b0');r(c,7,-33,1,10,'#f6e0b0');r(c,0,-38,1,19,'#c9a050');r(c,-1,-38,3,2,'#c9a050');}if(type==='miqueias'){oval(c,3,-26,18,13,P.ink,2);oval(c,3,-27,16,11,shirt,2);r(c,-10,-30,27,2,'#8aa498');r(c,-8,-21,23,2,'#344e45');}
     }
     arm(true);
     r(c,-5,-43,12,7,P.ink);r(c,-4,-43,9,8,skin);r(c,-11,-59,24,19,P.ink);r(c,-10,-58,22,17,skin);r(c,-11,-54,3,10,shadow);r(c,11,-51,5,6,skin);r(c,4,-51,3,3,'#302f2c');r(c,11,-47,4,2,shadow);r(c,3,-43,7,2,shadow);
     if(type==='daroca'){
-      const hairC=LK?.hairColor||'#5f4934',hs=LK?.hairStyle||'curto',hat=lion?'jaglion':LK?.hat||'palha';
-      if(!lion){r(c,-12,-59,25,6,hairC);r(c,-9,-57,4,4,hairC);
+      const hairC=LK?.hairColor||'#5f4934',hs=LK?.hairStyle||'curto',hat=lion?'jaglion':jeg?'dajegue':cai?'caipira':LK?.hat||'palha';
+      if(!kig){r(c,-12,-59,25,6,hairC);r(c,-9,-57,4,4,hairC);
         if(hat==='sem'){ // sem chapéu: o penteado aparece inteiro
           if(hs==='curto'){r(c,-12,-63,25,6,hairC);r(c,-10,-65,20,3,hairC);r(c,-6,-66,12,2,'rgba(255,255,255,.18)');}
           else if(hs==='black'){r(c,-17,-72,35,16,P.ink);r(c,-16,-71,33,15,hairC);r(c,-14,-74,29,4,hairC);r(c,-18,-64,4,10,hairC);r(c,14,-64,4,10,hairC);r(c,-10,-72,8,2,'rgba(255,255,255,.18)');}
@@ -1117,15 +1121,34 @@
         r(c,-7,-74,3,3,'#1e1410');r(c,-6,-74,1,1,'#ffffff');r(c,6,-74,3,3,'#1e1410');r(c,7,-74,1,1,'#ffffff');r(c,-8,-76,5,1,'#b8802a');r(c,5,-76,5,1,'#b8802a');
         r(c,-4,-70,12,6,'#f6e0b0');r(c,-1,-71,6,3,'#6a2a1a');r(c,0,-72,4,1,'#8a3a2a');r(c,1,-68,2,2,'#6a2a1a');r(c,-2,-66,2,1,'#6a2a1a');r(c,4,-66,2,1,'#6a2a1a');
         r(c,-3,-69,1,1,'#b8802a');r(c,-3,-67,1,1,'#b8802a');r(c,7,-69,1,1,'#b8802a');r(c,7,-67,1,1,'#b8802a');}
+      else if(hat==='dajegue'){ // Da Jegue: fantasia de burro, capuz cinza com orelhonas em pé, crina escura e focinho bordado
+        const sw=Math.round(Math.sin(frame*2.2));
+        for(const [ex,tl] of [[-11,-1],[6,1]]){r(c,ex-1,-100+sw*tl,10,27,P.ink);r(c,ex,-99+sw*tl,8,25,'#8f887d');r(c,ex+2,-95+sw*tl,4,18,'#e2aeb0');r(c,ex,-99+sw*tl,8,4,'#4a4139');}
+        r(c,-13,-77,28,36,P.ink);r(c,-12,-76,26,34,'#8f887d');r(c,-11,-76,24,2,'#aaa397');r(c,-13,-61,3,17,'#7b746a');
+        for(let i=0;i<6;i++)r(c,-9+i*4,-81+(i%2),4,6,'#3e352e');r(c,-15,-74,3,22,'#3e352e');
+        r(c,-9,-58,21,16,P.ink);r(c,-8,-57,19,14,skin);r(c,-8,-54,2,9,shadow);r(c,4,-52,3,3,'#302f2c');r(c,1,-54,8,1,'#855b3d');r(c,3,-45,7,1,'#8e5e43');r(c,4,-44,5,1,'#e9b684');r(c,12,-52,3,5,skin);
+        r(c,-7,-74,3,3,'#1e1814');r(c,-6,-74,1,1,'#ffffff');r(c,6,-74,3,3,'#1e1814');r(c,7,-74,1,1,'#ffffff');
+        r(c,-5,-70,14,7,P.ink);r(c,-4,-69,12,5,'#d9d3c6');r(c,-2,-67,2,2,'#4a4139');r(c,4,-67,2,2,'#4a4139');r(c,-3,-64,10,1,'#b8b0a2');}
+      else if(hat==='caipira'){ // Caipira original: chapéu de palha desfiado com remendo e girassol; sardas e bigodinho pintados
+        r(c,-22,-61,45,5,'#6e5335');r(c,-21,-65,43,5,'#e2c070');for(let x=-22;x<23;x+=3)r(c,x,-56,2,2+((x+30)%2),'#c9a24a');
+        r(c,-11,-75,25,12,'#a98045');r(c,-9,-75,21,9,'#e6c474');r(c,-10,-67,23,3,'#c43a2e');
+        r(c,3,-73,6,5,'#b8902e');r(c,4,-72,1,1,'#6e5335');r(c,7,-70,1,1,'#6e5335');
+        r(c,-10,-73,5,9,'#f2c230');r(c,-12,-71,9,5,'#f2c230');r(c,-11,-72,7,7,'#e8a820');r(c,-9,-70,3,3,'#6a3a12');
+        r(c,7,-48,1,1,'#6a3a22');r(c,9,-49,1,1,'#6a3a22');r(c,8,-47,1,1,'#6a3a22');r(c,2,-46,8,1,'#3a2418');}
       c.restore();
       if(lion){ // rabo de leão comprido, curvado para cima, com tufo escuro na ponta
         const sw=Math.round(Math.sin(frame*3.5)*2),pts=[[-13,-22],[-19,-21],[-24,-24+sw],[-27,-29+sw],[-28,-35+sw*2]];limb(c,pts,6,P.ink);limb(c,pts,3,'#d39a36');
         r(c,-33,-44+sw*2,10,10,P.ink);r(c,-32,-43+sw*2,8,8,'#7a3a12');r(c,-30,-43+sw*2,3,3,'#9a4a18');}
+      if(jeg){ // rabo de burro: fino, caído, com tufo escuro
+        const sw=Math.round(Math.sin(frame*3)*2),pts=[[-12,-22],[-16,-18],[-18,-11]];limb(c,pts,5,P.ink);limb(c,pts,2,'#7b746a');r(c,-22,-13+sw,7,9,P.ink);r(c,-21,-12+sw,5,7,'#3e352e');}
       c.save();c.translate(moving?Math.round(-walk*2):0,moving?Math.round(Math.abs(walk)*2):flight?-2:0);
       r(c,-17,-37,5,18,'#5f6041');r(c,-20,-35,6,15,'#8d814a');r(c,-19,-33,3,7,'#b1a262');
       c.restore();
       r(c,3,-36,5,3,'#f4cf81');r(c,-4,-20,8,3,'#b5814a');
-      r(c,-9,-28,7,2,lion?'#b8802a':LK?.shirt?'rgba(0,0,0,.22)':'#bd7135');r(c,4,-30,6,2,lion?'#f6d68b':LK?.shirtLight||'#f0ab59');r(c,-11,-21,23,4,'#6e5339');r(c,-2,-22,6,5,'#d7bb72');r(c,0,-21,2,3,'#6d573a');
+      r(c,-9,-28,7,2,lion?'#b8802a':LK?.shirt?'rgba(0,0,0,.22)':'#bd7135');r(c,4,-30,6,2,lion?'#f6d68b':trajeLuz||LK?.shirtLight||'#f0ab59');r(c,-11,-21,23,4,'#6e5339');r(c,-2,-22,6,5,'#d7bb72');r(c,0,-21,2,3,'#6d573a');
+      if(jeg){r(c,-7,-36,14,14,'#d9d3c6');r(c,-6,-36,12,1,'#ece8de');}
+      if(far){r(c,2,-38,4,17,'#1f3a7a');r(c,3,-38,1,17,'#2e4f98');r(c,-11,-38,23,2,'#ffffff');r(c,-8,-35,5,5,'#1f3a7a');r(c,-7,-34,3,3,'#f2d36a');} // camisa branca com listra vertical azul-escura no peito
+      if(cai){for(let y=-36;y<-22;y+=5)r(c,-11,y,23,1,'#f2e6d6');for(let x=-9;x<12;x+=5)r(c,x,-38,1,17,'#f2e6d6');poly(c,[[-7,-40],[9,-40],[1,-31]],P.ink);poly(c,[[-6,-40],[8,-40],[1,-32]],'#d8342a');r(c,-2,-38,1,1,'#fff');r(c,3,-38,1,1,'#fff');r(c,1,-35,1,1,'#fff');} // xadrez de festa junina e lenço no pescoço
     }else if(type==='reeis'){
       if(o.transformed||o.powered||o.charging){
         c.save();if(o.charging)c.globalAlpha*=.7+Math.sin(frame*18)*.15;

@@ -284,3 +284,13 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - Golpes de assinatura na troca de fase: sol (Nicolas), explosão de tinta (Marco e gigante), impacto no chão (Freddy, Menezes, Igor, Kaique), fumaça (Dedé), catarro (Nikolas), plasma dourado (Reeis), penas (Arthur).
   - `FxPixel.derrota(e)`: fogos sobre o chefe vencido.
   - Disparos dos chefes (evento `cast` com `kind`) ganham um clarão na cor do golpe, no máximo um a cada 180 ms. No acerto o inimigo continua só piscando.
+- **2026-11-26 · Claude:** **trajes ganhos em missões** (`art.js`, `visual.js`, `farda.js` novo, `game.js`, `campanha2/aliados.js`, `campanha2/personagens.js`).
+  - **Espelho** (`DarocaLook`): ganhou os trajes DA JEGUE (fantasia de burro), CAIPIRA (festa junina, original) e FARDA da escola.
+    - Missões chamam `DarocaLook.ganhar(id)` e consultam com `DarocaLook.tem(id)`.
+    - Os trajes ganhos ficam em `daroca-visual-v1.trajes`, valem nas duas campanhas, e no modo dev todos ficam liberados.
+  - **Farda nova** (C1, Pátio do Colégio Adventista, `dist/farda.js`): Tia Neide da secretaria (NPC `neide`, desenhado pelo `CampanhaPersonagens.registrar`) pede as três peças espalhadas pelo pátio.
+    - Estado no save da C1: `q.fardaAceita`, `q.fardaPecas`, `q.fardaFeita`.
+    - Ganchos no `game.js`: conversa, coleta, desenho, objetivo e seta.
+  - **Caipira no Shopping** (C2): Dona Fátima das Fantasias (`c2_fatima`, piso 2 do shopping, x 1720) pede chapéu (estacionamento, cena 22), lenço (térreo, cena 20) e girassol (piso 2, cena 23). Flag `extra.fatima`.
+  - O pedido do dono era um cosplay de personagem de desenho conhecido. Como é personagem protegido, fiz uma fantasia caipira original.
+  - **Da Jegue** sai no concurso de fantasia do baile funk (próximo pacote, junto com o baile em local fechado).

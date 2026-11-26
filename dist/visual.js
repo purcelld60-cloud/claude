@@ -1,5 +1,6 @@
-/* Espelho da Bigodon: muda o visual de Da Roça (chapéu, cabelo, camisa, calça) e veste o traje
-   especial JAGLION, uma fantasia de leão. Abre depois de conversar com Davi Costa na Bigodon e,
+/* Espelho da Bigodon: muda o visual de Da Roça (chapéu, cabelo, camisa, calça) e veste os trajes
+   especiais, cada um ganho numa missão: JAGLION (leão, jantar da Amanda), DA JEGUE (burro, concurso do baile funk),
+   CAIPIRA (Campanha 2, "Caipira no Shopping") e FARDA da escola (Colégio Adventista, "Farda nova"). Abre depois de conversar com Davi Costa na Bigodon e,
    a partir daí, também pelo INVENTÁRIO. Só aparência: não muda vida, dano nem dificuldade.
    O visual fica salvo neste aparelho ('daroca-visual-v1'); "PADRÃO" volta ao Da Roça de sempre. */
 (() => {
@@ -8,7 +9,7 @@
   const KEY = 'daroca-visual-v1';
   const DEFAULT = { costume: 'normal', hat: 'palha', hatColor: '#c0392b', hairStyle: 'curto', hairColor: '#5f4934', shirt: '#dc8c47', shirtLight: '#e7ac65', pants: '#455b62' };
   const OPTIONS = {
-    costume: [['normal', 'NORMAL'], ['jaglion', 'JAGLION']],
+    costume: [['normal', 'NORMAL'], ['jaglion', 'JAGLION'], ['dajegue', 'DA JEGUE'], ['caipira', 'CAIPIRA'], ['farda', 'FARDA']],
     hat: [['palha', 'PALHA'], ['sem', 'SEM CHAPÉU'], ['bone', 'BONÉ'], ['couro', 'COURO'], ['preto', 'PRETO']],
     hairStyle: [['curto', 'CURTO'], ['black', 'BLACK'], ['moicano', 'MOICANO'], ['raspado', 'RASPADO'], ['comprido', 'COMPRIDO']],
     hairColor: [['#5f4934', 'castanho'], ['#1e1a18', 'preto'], ['#d8b45a', 'loiro'], ['#b5502a', 'ruivo'], ['#e6e2da', 'platinado'], ['#3a6ad0', 'azul'], ['#d0508a', 'rosa']],
@@ -16,14 +17,24 @@
     pants: [['#455b62', 'jeans'], ['#22252a', 'preta'], ['#b8a074', 'bege'], ['#5a6a3a', 'oliva'], ['#8a2a2a', 'vinho']],
     hatColor: [['#c0392b', 'vermelho'], ['#2a5ad0', 'azul'], ['#2a8a4a', 'verde'], ['#1e1a18', 'preto'], ['#e8c23a', 'amarelo']]
   };
-  let look = { ...DEFAULT }, unlocked = false;
-  try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && typeof d === 'object') { unlocked = !!d.unlocked; for (const k of Object.keys(DEFAULT)) if (typeof d.look?.[k] === 'string') look[k] = d.look[k]; } } catch (e) {}
-  const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ unlocked, look })); } catch (e) {} };
+  let look = { ...DEFAULT }, unlocked = false, trajes = {};
+  try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && typeof d === 'object') { unlocked = !!d.unlocked; if (d.trajes && typeof d.trajes === 'object') for (const k of ['dajegue', 'caipira', 'farda']) trajes[k] = d.trajes[k] === true; for (const k of Object.keys(DEFAULT)) if (typeof d.look?.[k] === 'string') look[k] = d.look[k]; } } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ unlocked, look, trajes })); } catch (e) {} };
   const jaglionStatus = () => window.Game?.getJaglionStatus?.() || 'locked';
-  // A escolha de roupa continua no aparelho. O direito de vestir a juba pertence à campanha.
+  // Cada traje especial é ganho numa missão. Os trajes ganhos ficam neste aparelho (valem nas duas campanhas).
+  const TRAJES = {
+    jaglion: { nota: 'Capuz de juba, patas e rabo, costurados pelo Vitor. Rugido por sua conta.' },
+    dajegue: { nota: 'Orelhonas, crina e rabo de burro. O baile inteiro gritou: DA JEGUE!', dica: 'DA JEGUE: vença o concurso de fantasia no baile funk do Ollyan.' },
+    caipira: { nota: 'Chapéu desfiado, xadrez e lenço. Arraiá no meio do shopping.', dica: 'CAIPIRA: na Campanha 2, ajude Dona Fátima no Shopping Conquista (missão "Caipira no Shopping").' },
+    farda: { nota: 'Farda do colégio: camisa branca com listra azul e calça com listra clara.', dica: 'FARDA: no Colégio Adventista, fale com o Allef na recepção (missão "Farda nova").' }
+  };
+  const statusTraje = (id) => id === 'normal' ? 'ready' : id === 'jaglion' ? jaglionStatus() : trajes[id] || window.DAROCA_DEV ? 'ready' : 'locked';
+  // A escolha de roupa continua no aparelho. O direito de vestir o traje pertence à missão.
   function effectiveLook() {
-    return look.costume === 'jaglion' && jaglionStatus() !== 'ready' ? { ...look, costume: 'normal' } : look;
+    return look.costume !== 'normal' && statusTraje(look.costume) !== 'ready' ? { ...look, costume: 'normal' } : look;
   }
+  // linhas do espelho que o traje cobre (fantasias inteiras cobrem tudo)
+  const cobre = (traje, key) => key !== 'costume' && (traje === 'jaglion' || traje === 'dajegue' || (traje === 'caipira' && ['hat', 'hatColor', 'shirt', 'pants'].includes(key)) || (traje === 'farda' && ['shirt', 'pants'].includes(key)));
   const isDefault = outfit => Object.keys(DEFAULT).every(k => outfit[k] === DEFAULT[k]);
 
   /* ---------------- painel do espelho ---------------- */
@@ -44,12 +55,12 @@
   }
   function render() {
     const rows = panel.querySelector('.vp-rows'); rows.innerHTML = '';
-    const outfit = effectiveLook(), status = jaglionStatus(), lion = outfit.costume === 'jaglion';
+    const outfit = effectiveLook(), status = jaglionStatus(), traje = outfit.costume;
     const hint = status === 'reserved' ? 'Seu Jaglion está pronto. Fale com Davi na Bigodon para recebê-lo.' :
       'Para ganhar o Jaglion, encontre Amanda na entrada da Praça Camacan e aceite o jantar.';
     for (const [key, label] of ROWS) {
       if (key === 'hatColor' && outfit.hat !== 'bone') continue;
-      const row = document.createElement('div'); row.className = 'vp-row' + (lion && key !== 'costume' ? ' is-off' : ''); row.innerHTML = '<span>' + label + '</span>';
+      const row = document.createElement('div'); row.className = 'vp-row' + (cobre(traje, key) ? ' is-off' : ''); row.innerHTML = '<span>' + label + '</span>';
       const list = document.createElement('div'); list.className = 'vp-opts';
       for (const [val, name, light] of OPTIONS[key]) {
         const b = document.createElement('button'); b.type = 'button'; const color = val.startsWith('#');
@@ -58,14 +69,18 @@
         if (val === 'jaglion') {
           b.classList.add('vp-lion');
           if (status !== 'ready') { b.textContent = status === 'reserved' ? 'JAGLION · RESERVADO' : 'JAGLION · BLOQUEADO'; b.title = hint; }
+        } else if (key === 'costume' && val !== 'normal') {
+          b.classList.add('vp-lion');
+          if (statusTraje(val) !== 'ready') { b.textContent = name + ' · BLOQUEADO'; b.title = TRAJES[val].dica; }
         }
-        b.disabled = (val === 'jaglion' && status !== 'ready') || (lion && key !== 'costume');
+        b.disabled = (key === 'costume' && statusTraje(val) !== 'ready') || cobre(traje, key);
         b.addEventListener('click', () => { look[key] = val; if (key === 'shirt') look.shirtLight = light || look.shirtLight; save(); render(); panel.querySelector(`[data-k="${key}"] .on`)?.focus?.(); });
         list.append(b);
       }
       row.dataset.k = key; row.append(list); rows.append(row);
     }
-    panel.querySelector('.vp-note').textContent = status !== 'ready' ? hint : lion ? 'Capuz de juba, patas e rabo, costurados pelo Vitor. Rugido por sua conta.' : isDefault(outfit) ? 'O Da Roça de sempre.' : 'Visual novo, mesma resenha.';
+    const falta = ['dajegue', 'caipira', 'farda'].find((k) => statusTraje(k) !== 'ready');
+    panel.querySelector('.vp-note').textContent = TRAJES[traje] ? TRAJES[traje].nota : status !== 'ready' ? hint : falta ? TRAJES[falta].dica : isDefault(outfit) ? 'O Da Roça de sempre.' : 'Visual novo, mesma resenha.';
   }
   function drawPreview(now) {
     if (panel.hidden) return; const c = preview.getContext('2d'), t = (now - t0) / 1000;
@@ -103,7 +118,10 @@
   window.DarocaLook = Object.freeze({
     get: () => { const outfit = effectiveLook(); return isDefault(outfit) ? null : outfit; },
     current: () => ({ ...effectiveLook() }), open, close, isOpen: () => !!panel && !panel.hidden, unlocked: () => unlocked,
-    set: (k, v) => { if (k in DEFAULT && typeof v === 'string' && !(k === 'costume' && v === 'jaglion' && jaglionStatus() !== 'ready')) { look[k] = v; save(); } },
+    set: (k, v) => { if (k in DEFAULT && typeof v === 'string' && !(k === 'costume' && statusTraje(v) !== 'ready')) { look[k] = v; save(); } },
+    // missões chamam ganhar('dajegue' | 'caipira' | 'farda'); o traje fica no espelho para sempre neste aparelho
+    ganhar: (id) => { if (!TRAJES[id] || id === 'jaglion' || trajes[id]) return false; trajes[id] = true; unlocked = true; save(); try { dispatchEvent(new CustomEvent('daroca-traje', { detail: { id } })); } catch (e) {} return true; },
+    tem: (id) => statusTraje(id) === 'ready', trajes: () => ({ ...trajes }),
     reset: () => { look = { ...DEFAULT }; save(); }
   });
 })();

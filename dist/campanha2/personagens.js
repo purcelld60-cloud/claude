@@ -52,6 +52,7 @@
     c2_larissa: { name: 'Larissa da Biblioteca', skin: '#efc6a9', shade: '#c2977c', build: 'slim', h: .95, top: '#c99a3a', topKind: 'cardigan', inner: '#f2ecda', skirt: '#4a5a6c', hair: { style: 'ponytail', color: '#3b2620' }, glasses: '#a8443c', item: 'book', pose: 'read' },
     c2_gugu: { name: 'Gugu do Ferro-Velho', skin: '#b07a52', shade: '#82563a', build: 'belly', top: '#6f6a5c', topKind: 'tank', pants: '#3f4a3c', hair: { style: 'buzz', color: '#2a231d' }, beard: '#2a231d', goggles: '#86c8d0', gloves: '#b38a3c', item: 'gadget', pose: 'carry' },
     c2_bia: { name: 'Bia do Arrocha', skin: '#7c4f35', shade: '#55362a', build: 'slim', h: .95, top: '#d94a9a', topKind: 'tee', sleeve: 'short', sparkle: true, skirt: '#2a2a3c', hair: { style: 'curlyBig', color: '#1e1512' }, earrings: '#f2cf5b', item: 'mic', pose: 'sing' },
+    c2_fatima: { name: 'Dona Fátima das Fantasias', skin: '#c48a62', shade: '#93613f', build: 'normal', h: .93, top: '#d8452f', topKind: 'apron', apron: '#f2e6c8', skirt: '#2f5f8a', hat: { kind: 'straw', color: '#e2c070' }, hair: { style: 'long', color: '#3a2a20' }, earrings: '#f2c230', scarf: '#f2c230', item: 'map', pose: 'offer' },
     c2_carlinhos: { name: 'Carlinhos', skin: '#e8bf9f', shade: '#bb9277', build: 'slim', top: '#7d8590', topKind: 'hoodie', inner: '#4d5560', pants: '#2c3646', hair: { style: 'short', color: '#5a3f2c' }, pose: 'pockets', mood: 'sad' },
     // vilões
     c2_creuza: { name: 'Dona Creuza Fofoqueira', skin: '#e0ae8b', shade: '#b38163', build: 'normal', h: .94, top: '#e48fb0', topKind: 'robe', robeDots: '#f6d3df', pants: '#e48fb0', hair: { style: 'curlers', color: '#6a3d2c', curler: '#7cc7d8' }, lipstick: '#c4384e', item: 'phone', pose: 'phone' },
@@ -73,7 +74,7 @@
   const ROLE = {
     jorge_gordo: 'trio', jorge: 'trio', jorge_celular: 'trio', miguel: 'amigo', fred_conquista: 'vilão final antes do Jorge',
     c2_ze_taxi: 'aliado', c2_lurdes: 'aliado', c2_mel: 'aliado', c2_biscoito: 'aliado', c2_picole: 'aliado', c2_nando: 'aliado', c2_vo_cida: 'aliado',
-    c2_juninho: 'aliado', c2_larissa: 'aliado', c2_gugu: 'aliado', c2_bia: 'aliado', c2_carlinhos: 'aliado',
+    c2_juninho: 'aliado', c2_larissa: 'aliado', c2_gugu: 'aliado', c2_bia: 'aliado', c2_carlinhos: 'aliado', c2_fatima: 'aliado',
     c2_creuza: 'vilão 1', c2_tonhao: 'vilão 2', c2_valdomiro: 'vilão 3', c2_kaua_influencer: 'vilão 4', c2_barao: 'vilão 5', c2_breno: 'vilão 6', c2_ryan: 'vilão 7', c2_bryan: 'vilão 7',
     c2_cleiton: 'NPC (engarrafamento)', c2_rosilda: 'NPC (engarrafamento)'
   };
