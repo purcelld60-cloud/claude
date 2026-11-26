@@ -365,14 +365,20 @@
     if (morto) { e.stopImmediatePropagation(); return; }
     if (k === 'Escape') { pausar(!pausado); e.preventDefault(); e.stopImmediatePropagation(); return; }
     if (pausado) { e.stopImmediatePropagation(); return; }
-    if (k === 'ArrowLeft' || k === 'KeyA') keys.add('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.add('right');
-    const mapa = { KeyJ: 'paper', KeyK: 'fart', KeyL: 'dash', ShiftLeft: 'dash', ShiftRight: 'dash', KeyU: 'poder1', KeyI: 'poder2' };
-    if (mapa[k] && !e.repeat) TR()?.acao?.(mapa[k], true, P);
-    if ((k === 'Space' || k === 'KeyW' || k === 'ArrowUp') && !e.repeat) { keys.add('jump'); pular(); TR()?.acao?.('jump', true, P); }
-    if ((k === 'KeyE' || k === 'Enter') && !e.repeat) usar();
+    // as MESMAS teclas da campanha 1 (inclusive as que você trocou em CONTROLES E TECLAS); o carro vira PODER 1 e o Bivolt vira PODER 2
+    for (const a of acoesDaTecla(k)) {
+      if (a === 'left' || a === 'right') { keys.add(a); continue; }
+      if (e.repeat) continue;
+      if (a === 'jump') { keys.add('jump'); pular(); TR()?.acao?.('jump', true, P); }
+      else if (a === 'interact') usar();
+      else TR()?.acao?.(a, true, P);
+    }
     e.preventDefault(); e.stopImmediatePropagation();
   }
-  function teclaUp(e) { if (!aberto) return; const k = e.code; if (k === 'KeyJ') TR()?.acao?.('paper', false, P); if (k === 'KeyK') TR()?.acao?.('fart', false, P); if (k === 'KeyU') TR()?.acao?.('poder1', false, P); if (k === 'KeyI') TR()?.acao?.('poder2', false, P); if (k === 'Space' || k === 'KeyW' || k === 'ArrowUp') { keys.delete('jump'); TR()?.acao?.('jump', false, P); } if (k === 'ArrowLeft' || k === 'KeyA') keys.delete('left'); if (k === 'ArrowRight' || k === 'KeyD') keys.delete('right'); }
+  const TECLAS_PADRAO = { ArrowLeft: ['left'], KeyA: ['left'], ArrowRight: ['right'], KeyD: ['right'], Space: ['jump'], KeyW: ['jump'], ArrowUp: ['jump'], KeyJ: ['paper'], KeyK: ['fart'], KeyL: ['dash'], ShiftLeft: ['dash'], ShiftRight: ['dash'], KeyE: ['interact'], Enter: ['interact'], KeyU: ['poder1'], KeyI: ['poder2'] };
+  const DA_C1 = { up: 'jump', vehicle: 'poder1', bivolt: 'poder2' }, USADAS = new Set(['left', 'right', 'jump', 'paper', 'fart', 'dash', 'interact', 'poder1', 'poder2']);
+  function acoesDaTecla(k) { let a = []; try { a = window.ControlSettings?.getActionsForCode?.(k) || []; } catch (e) { a = []; } a = a.map((x) => DA_C1[x] || x).filter((x) => USADAS.has(x)); if (k === 'KeyU' || k === 'KeyI') a.push(TECLAS_PADRAO[k][0]); if (!a.length && !window.ControlSettings) a = TECLAS_PADRAO[k] || []; return [...new Set(a)]; }
+  function teclaUp(e) { if (!aberto) return; const k = e.code; for (const a of acoesDaTecla(k)) { if (a === 'left' || a === 'right') keys.delete(a); else if (a === 'jump') { keys.delete('jump'); TR()?.acao?.('jump', false, P); } else if (a === 'paper' || a === 'fart' || a === 'poder1' || a === 'poder2') TR()?.acao?.(a, false, P); } }
   function hudVisivel(v) { if (hud) hud.style.visibility = v ? 'visible' : 'hidden'; const bar = box?.querySelector('.c2-treino-wrap'); if (bar) bar.style.visibility = v ? 'visible' : 'hidden'; box.querySelector('.pular').hidden = v; }
   function objetivoNovo(txt) { const o = box?.querySelector('.obj'); if (!o) return; o.querySelector('span').textContent = txt; o.classList.remove('novo'); void o.offsetWidth; o.classList.add('novo'); sfx('plim'); }
   function aviso(txt) { const a = box?.querySelector('.avisos'); if (!a) return; const d = document.createElement('div'); d.textContent = txt; a.appendChild(d); setTimeout(() => d.remove(), 2600); }

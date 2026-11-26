@@ -1,0 +1,20 @@
+explosions/smoke-bomb explosions/small-explosion explosions/plasma-explosion explosions/implosion explosions/firework-burst explosions/firework-rocket explosions/dirt-explosion explosions/big-explosion
+nature/poison-cloud nature/spore-burst nature/leaf-storm nature/quake nature/earth-spike nature/tornado nature/toxic-puddle nature/boulder nature/acid-splash nature/healing-bloom nature/root-snare
+spawn/poof spawn/soul-rise spawn/respawn-beam spawn/summon-rise spawn/spawn-portal spawn/coin-drop spawn/dissolve-burn
+fire/fireball fire/fire-ring fire/candle fire/flame-pillar fire/fire-tornado fire/meteor fire/spirit-flame fire/fire-breath
+lightning/lightning-strike lightning/chain-lightning lightning/charge-up lightning/electrified lightning/thunderclap lightning/ball-lightning lightning/spark-arc lightning/storm-cloud
+impacts/ground-slam impacts/heavy-landing impacts/impact-frame impacts/shield-block
+melee/double-slash melee/spin-slash melee/whip-crack melee/uppercut melee/heavy-cleave melee/hammer-smash
+arcane/mana-burst arcane/magic-circle-cast arcane/star-fall arcane/portal arcane/blink-in arcane/blink-out arcane/spell-charge arcane/rune-circle arcane/time-stop
+holy/holy-pillar holy/sunburst holy/feather-burst holy/smite holy/halo holy/resurrection holy/blessing
+shadow/dark-explosion shadow/shadow-tendrils shadow/curse shadow/black-hole shadow/void-orb shadow/eclipse
+status/confused status/stunned status/sleep status/haste status/rage status/burning status/poisoned status/charmed
+weather/god-rays weather/fireflies weather/shooting-stars weather/storm weather/falling-leaves weather/aurora weather/fog
+scifi/tractor-beam scifi/warp-in scifi/warp-out scifi/glitch scifi/hologram scifi/force-field scifi/emp-blast
+water/splash water/geyser water/wave-crash water/ripples
+ice/frost-nova ice/snowflake-burst
+projectiles/magic-missile projectiles/energy-disc projectiles/plasma-shot
+ui/level-up ui/achievement ui/quest-complete ui/confetti ui/coin-collect
+pickups/loot-beam pickups/collect-burst pickups/power-star pickups/chest-open
+transitions/iris transitions/star-iris transitions/slash-wipe transitions/burn-away transitions/pixel-dissolve transitions/diamond-wipe
+critters/bird critters/butterfly critters/wisp critters/bat
