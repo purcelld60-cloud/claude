@@ -39,7 +39,7 @@
   }
  }
  function drawProjectile(c,s,t=0){
-  if(!s||s.delay>0||!['paper','ruler','case','reeis','papaia','enemyBullet','slime','inkBlade','smoke','astral','confetti','word'].includes(s.type))return false;
+  if(!s||s.delay>0||!['paper','ruler','case','reeis','papaia','enemyBullet','slime','inkBlade','smoke','bituca','astral','confetti','word'].includes(s.type))return false;
   c.save();c.imageSmoothingEnabled=false;c.translate(Math.round(s.x),Math.round(s.y));const angle=Math.atan2(Number(s.vy)||0,Number(s.vx)||1),color=s.element==='electric'?'#a0ebf4':s.element==='fire'?'#f6b152':'#f5e2b2';
   if(['paper','ruler','case','reeis','papaia','enemyBullet'].includes(s.type)){
    c.rotate(angle);if(s.type!=='ruler'&&s.type!=='case'){rect(c,-21,-1,8,2,s.type==='enemyBullet'||s.type==='reeis'?'#dcb56c':color);rect(c,-31,3,5,1,s.type==='papaia'?'#f8d878':'#e3dcc1');}
@@ -52,7 +52,16 @@
    c.rotate(angle*.15);poly(c,[[-13,-4],[-8,-9],[4,-11],[12,-5],[15,3],[8,9],[-7,8],[-14,3]],'#416b39');poly(c,[[-11,-3],[-6,-7],[3,-8],[9,-4],[11,2],[6,6],[-6,5],[-11,2]],'#a9cf63');rect(c,-5,-6,7,3,'#e4f4a0');rect(c,8,6,4,3,'#86b44d');for(let i=0;i<2;i++)rect(c,-15-i*9,3+i*4,4-i,3,'#b2cf70');
   }else if(s.type==='inkBlade'){
    c.rotate(t*9);for(let i=0;i<4;i++){c.rotate(Math.PI/2);poly(c,[[-3,-1],[-7,-15],[0,-25],[6,-13],[3,1]],INK);poly(c,[[-1,-3],[-4,-14],[0,-21],[3,-12],[1,-1]],'#9d6ec7');rect(c,0,-19,2,11,'#e6c6f5');}rect(c,-4,-4,8,8,'#f6dfef');
-  }else if(s.type==='smoke'){c.globalAlpha*=.78;cloud(c,0,0,14,'#9eaeb2','#d7e3df');rect(c,-15,5,5,3,'#b8c5c2');}
+  }else if(s.type==='smoke'){ // anel de fumaça do Dedé: um O que gira devagar, com rastro de fumaça atrás
+   const base=c.globalAlpha,w=Math.sin(t*7+(s.variant||0))*1.5;c.rotate(angle);
+   for(let i=1;i<=3;i++){c.globalAlpha=base*(.42-i*.11);cloud(c,-12-i*9,Math.sin(t*5+i)*3,7-i,'#8e9c9f','#c9d4d0');}
+   c.globalAlpha=base*.9;for(let k=0;k<20;k++){const a=k/20*Math.PI*2,x=Math.cos(a)*(8+w*.4),y=Math.sin(a)*(13+w);rect(c,x-2,y-2,4,4,'#7f8c8f');}
+   for(let k=0;k<20;k++){const a=k/20*Math.PI*2,x=Math.cos(a)*(7+w*.4),y=Math.sin(a)*(11+w);rect(c,x-1,y-1,3,3,a>Math.PI*.9&&a<Math.PI*1.8?'#eef3ec':'#c3cfcb');}
+  }else if(s.type==='bituca'){ // bituca acesa girando, com brasa e fiapo de fumaça
+   const base=c.globalAlpha;c.save();c.rotate(-angle);for(let i=1;i<=4;i++){c.globalAlpha=base*(.36-i*.07);rect(c,-(s.vx||0)*.018*i-2,-(s.vy||0)*.018*i-2-i*2,5-i*.6,5-i*.6,'#b9c3c0');}c.restore();
+   c.globalAlpha=base;c.rotate((s.spin||0)+t*13);c.globalAlpha=base*(.25+.15*Math.sin(t*30));rect(c,5,-5,9,9,'#ff8a30');c.globalAlpha=base;
+   rect(c,-9,-3,19,6,INK);rect(c,-8,-2,6,4,'#d9953f');rect(c,-7,-2,2,1,'#f2c27a');rect(c,-2,-2,9,4,'#f4f0e4');rect(c,-2,1,9,1,'#c9c3b4');rect(c,7,-2,2,4,'#ff6a24');rect(c,8,-1,1,2,'#ffe08a');
+  }
   else if(s.type==='astral'){c.rotate(t*2);poly(c,[[0,-18],[5,-5],[17,0],[5,5],[0,18],[-5,5],[-17,0],[-5,-5]],'#386c9a');poly(c,[[0,-14],[3,-3],[13,0],[3,3],[0,14],[-3,3],[-13,0],[-3,-3]],'#9de5ec');rect(c,-3,-3,6,6,'#fff0ac');}
   else if(s.type==='confetti'){c.rotate(t*5);rect(c,-7,-6,14,12,INK);rect(c,-5,-4,10,8,'#e3a7cf');rect(c,-4,-4,4,2,'#ffe3b6');rect(c,3,1,3,2,'#c17cba');}
   else if(s.type==='word'){const value=String(s.text||'POUDI'),w=Math.min(220,value.length*7+18);poly(c,[[-w/2-2,-13],[w/2,-13],[w/2+5,8],[w/2-1,15],[-w/2,15],[-w/2-5,-7]],INK);rect(c,-w/2,-10,w,22,'#f0cfdb');rect(c,-w/2+2,10,w-4,3,'#a76795');c.font='bold 12px monospace';c.textAlign='center';c.textBaseline='middle';c.fillStyle=s.echo?'#315d79':'#623950';c.fillText(value,0,1);}

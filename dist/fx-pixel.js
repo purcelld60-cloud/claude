@@ -2,7 +2,7 @@
    - A biblioteca (vendor/pixelfx.js) carrega depois da tela inicial, sem atrasar a abertura.
    - Os efeitos são desenhados em meia resolução (480x270), a mesma densidade de pixel dos personagens, e acompanham a câmera.
    - Golpes do Da Roça (peidão, dash, papel elemental) e ataques de área dos chefes ganham efeitos. No acerto o inimigo continua só piscando.
-   API: FxPixel.tocar(id, { x, y, dono, mundo, flip, palette, seed, light, opcoes, seguir }), FxPixel.desenhar(ctx, { dono, camada, camera, tempo }),
+   API: FxPixel.tocar(id, { x, y, dono, mundo, flip, palette, seed, light, opcoes, seguir, atraso, avancar, duracao }) (avancar: pula o começo; duracao: some depois de N s), FxPixel.desenhar(ctx, { dono, camada, camera, tempo }),
         FxPixel.perigo(h, chefe), FxPixel.limpar(dono), FxPixel.pronto(). */
 (() => {
   'use strict';
@@ -25,7 +25,7 @@
     if (lib) return Promise.resolve(lib);
     if (carregando) return carregando;
     carregando = new Promise((ok) => {
-      const s = document.createElement('script'); s.src = 'vendor/pixelfx.js?v=1'; s.async = true;
+      const s = document.createElement('script'); s.src = 'vendor/pixelfx.js?v=2'; s.async = true;
       s.onload = () => { lib = window.PixelFXLib || null; if (lib) { frame = lib.createFrame(FW, FH); tela = document.createElement('canvas'); tela.width = FW; tela.height = FH; tctx = tela.getContext('2d'); img = tctx.createImageData(FW, FH); } ok(lib); };
       s.onerror = () => ok(null); document.head.appendChild(s);
     });
@@ -45,8 +45,9 @@
     if (meus.length >= limite()) { const velho = meus[0]; ativos.splice(ativos.indexOf(velho), 1); }
     const op = { ...(o.opcoes || {}), seed: o.seed ?? ((Math.random() * 1e6) | 0) };
     if (o.palette) op.palette = o.palette; if (o.flip) op.flip = true; if (o.light !== undefined) op.light = o.light;
-    let fx; try { fx = lib.createFx(mod, op); } catch (e) { return null; }
-    const a = { fx, dono, mundo: o.mundo !== false, x: o.x || 0, y: o.y || 0, seguir: o.seguir || null, atraso: o.atraso || 0 };
+    let fx; try { fx = lib.createFx(mod, op); for (let k = 0; k < (o.avancar || 0) * 60; k++) fx.update(1 / 60); } catch (e) { return null; }
+    // duracao: some suavemente depois de N segundos (efeitos em laço param sozinhos em 4 s, para nada ficar preso na tela)
+    const a = { fx, dono, mundo: o.mundo !== false, x: o.x || 0, y: o.y || 0, seguir: o.seguir || null, atraso: o.atraso || 0, vida: 0, duracao: o.duracao || (mod.meta?.loop ? 4 : 0) };
     ativos.push(a); return { parar: () => fx.stop(), get feito() { return fx.done(); } };
   }
 
@@ -58,7 +59,7 @@
     if (camada === 'back' || o.atualizar) { // o passo do tempo acontece uma vez por quadro (na camada de trás)
       const t = Number(o.tempo); let dt = 1 / 60;
       if (Number.isFinite(t)) { const u = ultimo[dono]; dt = u === undefined ? 1 / 60 : Math.max(0, Math.min(.1, t - u)); ultimo[dono] = t; }
-      for (const a of meus) { if (a.atraso > 0) { a.atraso -= dt; continue; } a.fx.update(dt); }
+      for (const a of meus) { if (a.atraso > 0) { a.atraso -= dt; continue; } a.fx.update(dt); a.vida += dt; if (a.duracao && a.vida >= a.duracao) a.fx.stop(); }
       for (let i = ativos.length - 1; i >= 0; i--) if (ativos[i].dono === dono && ativos[i].fx.done()) ativos.splice(i, 1);
     }
     lib.clearFrame(frame); let algum = false;
@@ -102,7 +103,9 @@
     if (!h) return; const x = h.x, y = (h.y || 0) + 8;
     if (h.type === 'astral' || h.astral) tocar('arcane/star-fall', { x, y });
     else if (h.type === 'slime') tocar('nature/acid-splash', { x, y });
-    else if (h.type === 'smoke') { tocar('spawn/poof', { x, y, palette: PAL.fumaca }); tocar('explosions/smoke-bomb', { x, y: y + 4, palette: PAL.fumaca, atraso: 0 }); }
+    else if (h.type === 'smoke' && h.brasa) { const ag = performance.now(); if (ag - (ultimo.__brasa || 0) > 280) { ultimo.__brasa = ag; tocar('spawn/poof', { x, y, palette: PAL.fumaca, opcoes: { stars: PAL.brasa.slice(3) } }); } }
+    else if (h.type === 'smoke') { tocar('spawn/poof', { x, y, palette: PAL.fumaca }); tocar('explosions/smoke-bomb', { x, y: y + 4, palette: PAL.fumaca, avancar: .9, duracao: 1.6, opcoes: { semLata: true } }); }
+    else if (h.type === 'ring' && h.smoke) tocar('spawn/poof', { x, y, palette: PAL.fumaca });
     else if (h.ink || h.type === 'ink') tocar('shadow/dark-explosion', { x, y, palette: PAL.tinta });
     else if (h.type === 'provoke') tocar('arcane/magic-circle-cast', { x, y, palette: PAL.ouro });
     else if (h.type === 'ring') tocar('impacts/ground-slam', { x, y, palette: PAL.choque });
