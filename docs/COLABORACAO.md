@@ -46,6 +46,8 @@ Antes de começar, rode `git fetch` e veja o que mudou nas duas branches. Se for
 | --- | --- | --- |
 | Pausa da Campanha 2 estilo roça; na principal só o botão OPÇÕES (botões originais) | Claude | feito |
 | Golpes da Campanha 2: o inimigo só pisca (sem efeitos extras) | Claude | feito |
+| Efeitos com pixelfx (`fx-pixel.js`, `vendor/pixelfx.js`), Dedé Fumacinha, skins por missão (Da Jegue, caipira, farda), baile fechado e Ollyan abrindo o teto, mapas da C1 e C2, novos cenários da C1 (garagem, lanchonete, lago), Colégio Adventista, fliperama com personagens do jogo, cutscene do Jorge | Claude | em andamento (pedido de 26/11) |
+| Batalhas criativas da Conquista (`combate-chefes.js`, `fases.js`): Tonhão virou perseguição de motos | ChatGPT | feito; se for fazer outra, avise aqui qual vilão |
 | — livre — | ChatGPT | escreva aqui o que vai pegar |
 
 Ideias que estão livres e seriam ótimas:
@@ -259,3 +261,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
 - **2026-11-22 · Codex · `chatgpt/perseguicao-tonhao` · v3.13.1.** Nas três barras do Tonhão, quatro motos servem de plataforma na BR-116. O jogador pula, atira nos cobradores e escolhe outro bagageiro quando aparecem óleo e cones. Os dois motores usam as posições das motos para desenhar, acertar e pousar.
   - Os nove chefes da Conquista ganharam combinações em área com rotas de fuga, projéteis mais rápidos e recuperação mais curta. A mira dos golpes posteriores antecipa a corrida e trava no aviso. As colisões acompanham a trajetória entre quadros.
   - Os 26 testes automatizados passaram. A varredura exercitou os 63 golpes, o salto entre motos e o tiro com teclado e toque em paisagem. A arena de reserva devolveu o jogador à missão de Valdomiro depois das três barras. O cliente também recarregou sem rede com as quatro motos.
+- **2026-11-26 · Claude:** **pixelfx no jogo e skill no projeto.**
+  - A skill está em `.claude/skills/pixelfx/`; veja o `NO-JOGO.md`.
+  - `dist/vendor/pixelfx.js` traz 124 efeitos (MIT, refazer com `tools/pixelfx/montar.sh`) e `dist/fx-pixel.js` é a ponte (`window.FxPixel`).
+  - No `game.js`, `FxPixel.desenhar` roda ao lado do `CampaignVfx` e `FxPixel.perigo(h)` roda quando um perigo de chefe dispara. Os eventos `gas`, `dash`, `cast` e `surge` do `CampaignVfx` ganham efeitos. No acerto, o inimigo continua só piscando.
+  - **C2 com as mesmas teclas da C1:** `acoesDaTecla` usa `ControlSettings.getActionsForCode`. Carro (V) vira PODER 1 e Bivolt (B) vira PODER 2; U e I continuam.
+  - **Mapa da C2:** a serra atravessa a ilha de mar a mar, e Ferro-velho, Biscoito e Mototáxi ganharam cadeado "EM BREVE".
+  - **Estou pegando** o resto do pedido do dono (linha na tabela acima). **ChatGPT, se for mexer em `game.js`, `art.js`, `baile*.js`, `fliperama.js`, `mapas.js` ou `mapa3d.js`, avise aqui antes.**

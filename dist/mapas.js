@@ -420,11 +420,18 @@
         for (let x = 10; x < 190; x += 6) R(x, 690, 4, 3, '#c8ccd0'); P.R(40, 664, 40, 20, '#e8833a');  P.R(36, 650, 48, 10, '#f2e2b8'); P.R(36, 650, 48, 1, '#a8643a'); txt(P, 'MEL DA SERRA', 60, 652, '#7a4a10'); for (let k = 0; k < 4; k++) { P.R(44 + k * 9, 676, 6, 7, '#e8a83a'); P.R(45 + k * 9, 675, 4, 2, '#f6f6f0'); } P.c.globalAlpha = .45; for (let x = 0; x < 200; x += 18) P.circ(x + 9, 700, 12, '#ffffff', 5); P.c.globalAlpha = 1;for (let k = 0; k < 40; k += 8) P.R(40 + k, 664, 4, 20, '#f6ead0'); } }
   ];
   let TR2 = null; const RUAS2 = {};
+  // cadeado cinza "EM BREVE": lugares desenhados no mapa que ainda não são pontos de parada
+  function emBreve(P, t, lista) { const R = P.R;
+    for (const [x, y] of lista) { const b = Math.round(Math.sin(t * 2 + x) * 1), X = x - 4, Y = y - 22 + b;
+      P.c.globalAlpha = .35; P.circ(x, y - 15 + b, 9, '#1c1c24', 9); P.c.globalAlpha = 1;
+      R(X + 1, Y - 5, 6, 1, '#2a2a30'); R(X, Y - 4, 1, 5, '#2a2a30'); R(X + 7, Y - 4, 1, 5, '#2a2a30'); R(X + 1, Y - 4, 1, 4, '#c8ccd0'); R(X + 6, Y - 4, 1, 4, '#9aa0a6');
+      R(X - 1, Y, 10, 9, '#2a2a30'); R(X, Y + 1, 8, 7, '#8a8e96'); R(X, Y + 1, 8, 1, '#b8bcc4'); R(X + 3, Y + 3, 2, 3, '#2a2a30');
+      R(X - 9, Y + 11, 26, 7, '#2a2a30'); R(X - 8, Y + 12, 24, 5, '#d8d4c8'); txt(P, 'EM BREVE', x, Y + 12, '#4a4a52'); } }
   const MAPA2 = {
     chave: 'conquista2d', titulo: 'TÁXI DO SEU ZÉ · VITÓRIA DA CONQUISTA', subtitulo: 'O táxi só para nas entradas. Lá dentro, é com você.', lajotas: [72, 48], botao: 'IR DE TÁXI ▶', ilha: { margem: 300, eolicas: 7, parapentes: 3, balao: true }, relevo: true,
     terreno: (T) => {
       // Serra do Periperi: cerrado em dois degraus, com picos tortos
-      T.poli([[6, -1.5], [7.5, 3.2], [12, 4.4], [18, 5.2], [24, 4.6], [30, 5.4], [37, 4.8], [44, 5.6], [50, 4.9], [56.5, 4.2], [57.2, -1.5]], { nivel: 2, tipo: 'cerrado' });
+      T.poli([[-1.5, -1.5], [-1.5, 3.9], [2.4, 4.5], [5, 3.6], [7.5, 3.2], [12, 4.4], [18, 5.2], [24, 4.6], [30, 5.4], [37, 4.8], [44, 5.6], [50, 4.9], [56.5, 4.2], [60.5, 4.7], [64.5, 4.3], [68.5, 4.9], [73.5, 4.5], [73.5, -1.5]], { nivel: 2, tipo: 'cerrado' }); // a serra atravessa a ilha de mar a mar
       T.poli([[15, -1.5], [16.2, 1.8], [20, 2.6], [23.5, 2.2], [24.2, -1.5]], { nivel: 3, tipo: 'cerrado' });
       T.poli([[33, -1.5], [34, 2.2], [38, 3], [42, 2.4], [43, -1.5]], { nivel: 3, tipo: 'cerrado' });
       // Reserva do Poço Escuro (platô de mata com cachoeira) e Serra do Marçal (beirada sobre as nuvens)
@@ -506,7 +513,7 @@
     },
     animarChao: (P, t) => { const R = P.R; for (let k = 0; k < 12; k++) { const y = 486 + ((t * 46 + k * 7) % 48); R(90 + (k % 4) * 4, y, 2, 5, k % 3 ? '#e2f4ff' : '#9fd0f0'); } for (let k = 0; k < 5; k++) { const a = t * 3 + k; P.c.globalAlpha = .6; P.circ(98 + Math.cos(a) * 8, 536 + Math.sin(a) * 2, 3, '#ffffff', 1); P.c.globalAlpha = 1; } // cachoeira do Poço Escuro
       for (let k = 0; k < 9; k++) { const x = ((t * 6 + k * 34) % 240) - 20, y = 742 + (k % 3) * 9; P.c.globalAlpha = .75; P.circ(x, y, 16, '#ffffff', 5); P.c.globalAlpha = 1; } }, // mar de nuvens embaixo do Marçal
-    animar: (P, t) => { const R = P.R;
+    animar: (P, t) => { const R = P.R; emBreve(P, t, [[295, 384, 'FERRO-VELHO'], [578, 486, 'BISCOITO'], [824, 255, 'MOTOTÁXI']]);
       // trânsito: avenidas, a rotatória com mototáxis e o engarrafamento na Olívia Flores
       naRua(P, t, faixa(RUAS2.av1, -5, false), 3, ['#c43c3a', '#3c6aa8', '#f2f2ee'], 26); naRua(P, t, faixa(RUAS2.av1, 5, true), 2, ['#e8c24c', '#2a2a2a'], 24, .4, (j) => (j === 0 ? 'taxi' : null));
       naRua(P, t, faixa(RUAS2.av2, 5, true), 2, ['#2c5a9e', '#c43c3a', '#3c8a5a'], 18, .2, 'bus'); naRua(P, t, faixa(RUAS2.av2, -5, false), 2, ['#f2f2ee', '#7a3a8a'], 24, .6);
