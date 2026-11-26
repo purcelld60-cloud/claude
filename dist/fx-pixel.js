@@ -3,7 +3,7 @@
    - Os efeitos são desenhados em meia resolução (480x270), a mesma densidade de pixel dos personagens, e acompanham a câmera.
    - Golpes do Da Roça (peidão, dash, papel elemental) e ataques de área dos chefes ganham efeitos. No acerto o inimigo continua só piscando.
    API: FxPixel.tocar(id, { x, y, dono, mundo, flip, palette, seed, light, opcoes, seguir, atraso, avancar, duracao }) (avancar: pula o começo; duracao: some depois de N s), FxPixel.desenhar(ctx, { dono, camada, camera, tempo }),
-        FxPixel.perigo(h, chefe), FxPixel.limpar(dono), FxPixel.pronto(). */
+        FxPixel.perigo(h, chefe), FxPixel.chefe(e) (a cada quadro), FxPixel.fase(e), FxPixel.derrota(e), FxPixel.limpar(dono), FxPixel.pronto(). */
 (() => {
   'use strict';
   if (window.FxPixel) return;
@@ -86,6 +86,7 @@
       if (st >= 2) tocar('spawn/poof', { x: d.x + dir * 70, y: d.y + 26, palette: PAL.peido, atraso: .08 });
       if (st >= 3) { tocar('nature/acid-splash', { x: d.x + dir * 60, y: d.y + 30, palette: PAL.peido, atraso: .12 }); tocar('spawn/poof', { x: d.x + dir * 125, y: d.y + 26, palette: PAL.peido, atraso: .16 }); }
     } else if (tipo === 'dash') { tocar('spawn/poof', { x: d.x - dir * 14, y: d.y + 4, palette: PAL.poeira, flip: dir < 0 }); }
+    else if (tipo === 'cast' && d.kind) disparo(d);
     else if (tipo === 'cast' && !d.kind) { // papel/papaia elemental
       if (d.element === 'fire') tocar('arcane/mana-burst', { x: d.x, y: d.y + 10, palette: PAL.brasa });
       else if (d.element === 'electric') tocar('arcane/mana-burst', { x: d.x, y: d.y + 10, palette: PAL.eletrico });
@@ -112,5 +113,39 @@
     else tocar('nature/quake', { x, y });
   }
 
-  window.FxPixel = Object.freeze({ pronto: () => !!lib, carregar, tocar, desenhar, perigo, limpar, ativos: () => ativos.length, PAL, aoEvento });
+  /* ---------- chefes: troca de fase, investida, disparo e derrota ---------- */
+  const COR = { nicolas: 'ouro', reeisBoss: 'ouro', arthur: 'ouro', marco: 'tinta', giant: 'tinta', nikolas: 'peido', dede: 'fumaca', freddy: 'brasa', menezes: 'poeira', igor: 'eletrico', kaique: 'eletrico' };
+  const corDe = (e) => PAL[COR[e?.type]] || PAL.ouro;
+  function fase(e) { // círculo de poder no chão que vira coluna de luz, mais o golpe de assinatura de cada chefe
+    if (!e) return; const x = e.x, y = e.y, t = e.type;
+    tocar('arcane/magic-circle-cast', { x, y, palette: corDe(e) });
+    if (t === 'nicolas') tocar('holy/sunburst', { x, y: y - 70, palette: PAL.ouro, duracao: 1.3 });
+    else if (t === 'marco' || t === 'giant') tocar('shadow/dark-explosion', { x, y, palette: PAL.tinta });
+    else if (t === 'freddy' || t === 'menezes' || t === 'igor' || t === 'kaique') tocar('impacts/ground-slam', { x, y, palette: t === 'igor' || t === 'kaique' ? PAL.eletrico : PAL.choque });
+    else if (t === 'dede') tocar('explosions/smoke-bomb', { x, y, palette: PAL.fumaca, avancar: .9, duracao: 1.8, opcoes: { semLata: true } });
+    else if (t === 'nikolas') tocar('nature/acid-splash', { x, y });
+    else if (t === 'reeisBoss') tocar('explosions/plasma-explosion', { x, y: y - 30, palette: PAL.ouro });
+    else if (t === 'arthur') tocar('holy/feather-burst', { x, y: y - 50 });
+  }
+  function derrota(e) { // fogos sobre o chefe vencido
+    if (!e) return; const x = e.x, y = e.y;
+    tocar('explosions/firework-burst', { x, y: y - 150, palette: PAL.ouro });
+    tocar('explosions/firework-burst', { x: x - 110, y: y - 120, atraso: .35 });
+    tocar('explosions/firework-burst', { x: x + 110, y: y - 135, palette: corDe(e), atraso: .7 });
+    tocar('spawn/poof', { x, y, palette: PAL.poeira });
+  }
+  const estados = new WeakMap();
+  function chefe(e) { // chamado a cada quadro para o chefe ativo: reage quando o estado muda
+    if (!e || !lib) return; const antes = estados.get(e), agora = e.conquista ? e.conquista.estado : e.state; if (antes === agora) return; estados.set(e, agora);
+    if (agora === 'dashing') { const d = e.dashDir < 0 ? -1 : 1; tocar('spawn/poof', { x: e.x - d * 22, y: e.y, palette: PAL.poeira, flip: d < 0 }); }
+    else if (agora === 'phaseChange' && antes !== undefined) fase(e);
+  }
+  // disparo de chefe: um clarão pequeno na cor do golpe
+  const DISPARO = { smoke: 'fumaca', astral: 'eletrico', slime: 'peido', doodle: 'tinta', inkBlade: 'tinta', enemyBullet: 'choque', gangFan: 'ouro', confetti: 'ouro', word: 'ouro' };
+  function disparo(d) {
+    const pal = PAL[DISPARO[d.kind]]; if (!pal) return; const ag = performance.now(); if (ag - (ultimo.__disparo || 0) < 180) return; ultimo.__disparo = ag;
+    if (d.kind === 'smoke') tocar('spawn/poof', { x: d.x, y: d.y + 10, palette: pal }); else tocar('arcane/mana-burst', { x: d.x, y: d.y + 10, palette: pal });
+  }
+
+  window.FxPixel = Object.freeze({ pronto: () => !!lib, carregar, tocar, desenhar, perigo, limpar, ativos: () => ativos.length, PAL, aoEvento, fase, derrota, chefe });
 })();
