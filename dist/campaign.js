@@ -32,7 +32,8 @@
   const no=reason=>({ok:false,reason});
   function has(q,key){return !!q?.[key];}
   function canTravel(scene,q={}){
-    const n=Number(scene);if(!Number.isInteger(n)||n<0||n>=sceneNames.length)return no('Essa rota ainda não existe.');
+    const n=Number(scene);if(window.LugaresC1?.tem?.(n))return has(q,'lucas')?ok():no('O carro está quebrado! Colete as três peças na roça e entregue a Lucas.'); // lugares novos de Itabuna (lugares-c1.js)
+    if(!Number.isInteger(n)||n<0||n>=sceneNames.length)return no('Essa rota ainda não existe.');
     if(n===0)return ok();
     if(!has(q,'lucas'))return no('O carro está quebrado! Colete as três peças na roça e entregue a Lucas.');
     if([1,4,7,8,9,10,11].includes(n))return ok();

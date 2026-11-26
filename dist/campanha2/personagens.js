@@ -290,6 +290,7 @@
     if (S.strap) { limb(c, [[-wide + 2, -41], [wide - 3, -20]], 3, S.strap); }
     if (S.bag) { limb(c, [[wide - 2, -41], [-wide + 3, -24]], 2, S.bag); r(c, -wide - 1, -26, 8, 7, S.bag); }
     if (S.chain) { r(c, -5, -40, 12, 1, S.chain); r(c, -3, -39, 8, 2, S.chain); r(c, 0, -37, 3, 3, S.chain); }
+    if (S.collar) { const cc = S.collar; poly(c, [[-7, -42], [0, -42], [-1, -37], [-5, -38]], cc); poly(c, [[1, -42], [8, -42], [6, -38], [2, -37]], cc); r(c, 0, -37, 1, 17, shadeHex(S.top, .8)); for (const yb of [-35, -30, -25]) r(c, 1, yb, 1, 1, '#f6f6f0'); } // camisa social: gola e botões
     if (S.skirt) { poly(c, [[-wide, -21], [wide, -21], [wide + 4, -10], [-wide - 4, -10]], OUT); poly(c, [[-wide + 1, -20], [wide - 1, -20], [wide + 2, -11], [-wide - 2, -11]], S.skirt); }
     // cabeça (mesmas medidas dos personagens atuais)
     r(c, -4, -45, 10, 8, shade); r(c, -3, -45, 8, 8, skin);
@@ -315,6 +316,7 @@
     else r(c, 2, -44, 8, 2, mouthC);
     if (S.lipstick) r(c, 3, -45, 7, 1, S.lipstick);
     if (S.mustache) { r(c, 3, -48, 11, 3, S.mustache); r(c, 2, -46, 3, 2, S.mustache); }
+    if (S.goatee) { r(c, 3, -42, 8, 3, S.goatee); r(c, 4, -39, 6, 2, S.goatee); } // cavanhaque
     if (S.beard) { r(c, -9, -50, 6, 9, S.beard); r(c, -4, -44, 18, 4, S.beard); r(c, 1, -47, 12, 2, S.beard); r(c, 3, -45, 7, 1, '#7a4a3a'); }
     if (S.earrings) { r(c, -9, -50, 3, 4, S.earrings); }
     hairFront(c, S, t); hat(c, S);

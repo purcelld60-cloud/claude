@@ -655,6 +655,18 @@
     for (let x = 1350; x < W - 100; x += 235) { bench(c, x, 205, 29, '#977343', '#bb9560'); bush(c, x + 57, 24); }
     const ex = W - 75; R(c, ex - 1, 141, 51, 75, '#2f4a44'); R(c, ex, 142, 49, 73, '#52736a'); R(c, ex + 2, 146, 44, 66, '#8ba997'); R(c, ex + 24, 146, 1, 66, '#52736a'); R(c, ex + 19, 180, 2, 3, '#f1d896'); R(c, ex + 27, 180, 2, 3, '#f1d896'); R(c, ex + 6, 150, 36, 11, '#3d5a52');
     paving(c, W, '#97856e', '#8a7862', '#7a6a56', '#c4b08a', 40);
+    // --- o Colégio Adventista de Itabuna de verdade: Rua Almirante Barroso, 261, Centro (endereço dos diretórios escolares) ---
+    // placa de rua azul na calçada, ao lado da entrada
+    R(c, 140, 150, 2, 66, '#4a5a68'); R(c, 116, 142, 50, 16, '#f2f2ee'); R(c, 117, 143, 48, 14, '#1f4fa8'); R(c, 117, 143, 48, 1, '#5a8ad8'); R(c, 115, 160, 52, 8, '#f2f2ee'); R(c, 116, 161, 50, 6, '#2a2a2a');
+    // quadra coberta: o arco de metal aparece por cima do prédio
+    for (let x = 1700; x <= 2000; x++) { const u = (x - 1700) / 300, y = Math.round(107 - Math.sin(u * Math.PI) * 34); R(c, x, y, 1, 107 - y, (x % 12) < 1 ? '#8a96a4' : '#b8c4d0'); R(c, x, y, 1, 1, '#e8eef4'); }
+    R(c, 1800, 82, 100, 12, '#183a5e'); R(c, 1801, 83, 98, 10, '#24507a');
+    // placas das salas que o colégio tem: biblioteca, laboratório, auditório e sala de leitura
+    for (const x of [2508, 2688, 2868, 3018]) { if (x + 56 > W) continue; R(c, x - 6, 121, 58, 11, '#0e2a44'); R(c, x - 5, 122, 56, 9, '#183c62'); R(c, x - 5, 122, 56, 1, '#7fb4cf'); }
+    // parquinho: escorregador e balanço coloridos
+    { const x = 2620; R(c, x, 168, 3, 52, '#c43c3a'); R(c, x + 14, 168, 3, 52, '#c43c3a'); for (let y = 172; y < 218; y += 7) R(c, x, y, 17, 2, '#e8c24a'); R(c, x - 2, 166, 22, 4, '#3a7ad0');
+      for (let k = 0; k < 40; k++) R(c, x + 18 + k, 168 + k * 1.2, 2, 4, '#e8c24a'); R(c, x + 56, 214, 10, 4, '#e8c24a'); }
+    { const x = 2856; R(c, x, 166, 3, 54, '#3a7ad0'); R(c, x + 58, 166, 3, 54, '#3a7ad0'); R(c, x, 164, 61, 4, '#2a5aa8'); for (const sx of [x + 14, x + 38]) { R(c, sx, 168, 1, 28, '#7a8086'); R(c, sx + 8, 168, 1, 28, '#7a8086'); R(c, sx - 1, 196, 11, 3, '#c43c3a'); } }
     return [cv, lv];
   }
   function school(c, s, t, camL) {
@@ -668,7 +680,11 @@
   }
   function schoolText(c, camera) { const W = worldW(1); c.save(); c.translate(-Math.round(camera), 0); c.textAlign = 'center'; c.textBaseline = 'middle'; const vis = (x) => x > camera - 260 && x < camera + 1220;
     c.font = '16px Pixel, monospace'; c.fillStyle = '#f8fbfc'; c.fillText('COLÉGIO ADVENTISTA', 382, 258); c.fillStyle = '#52766b'; if (vis(2096)) c.fillText('BEM-VINDOS', 2096, 314); c.fillStyle = '#dfe6bb'; if (vis((W - 51) * 2)) c.fillText('SAÍDA', (W - 51) * 2, 312);
-    c.font = '8px Pixel, monospace'; c.fillStyle = '#b27857'; if (vis(2096)) c.fillText('AQUI ATÉ A PAREDE TEM HISTÓRIA.', 2096, 334); c.fillStyle = '#54735f'; c.fillText('A PAREDE ESCUTA', 1066, 342); c.fillText('MAIS DO QUE FALA.', 1066, 356); c.fillStyle = '#fff1cb'; for (const [x, en] of SC_DOORS) if (vis(x * 2)) c.fillText(en ? 'SALA · MIQUEIAS' : 'SALA · ALMIRO', x * 2, 254);
+    c.font = '8px Pixel, monospace'; c.fillStyle = '#b27857'; if (vis(2096)) c.fillText('AQUI ATÉ A PAREDE TEM HISTÓRIA.', 2096, 334);
+    c.font = '8px Pixel, monospace'; c.fillStyle = '#ffffff'; if (vis(282)) { c.font = '7px Pixel, monospace'; c.fillText('R. ALMIRANTE BARROSO', 282, 300); c.fillText('261 · CENTRO', 282, 328); c.font = '8px Pixel, monospace'; }
+    c.fillStyle = '#f2f2ee'; if (vis(3700)) c.fillText('QUADRA COBERTA', 3700, 176);
+    for (const [x, nome] of [[2508, 'BIBLIOTECA'], [2688, 'LABORATÓRIO'], [2868, 'AUDITÓRIO'], [3018, 'SALA DE LEITURA']]) if (vis(x * 2) && x + 56 <= W) c.fillText(nome, (x + 23) * 2, 253);
+    c.fillStyle = '#183c62'; if (vis(5300)) c.fillText('PARQUINHO', 5300, 358); c.fillStyle = '#54735f'; c.fillText('A PAREDE ESCUTA', 1066, 342); c.fillText('MAIS DO QUE FALA.', 1066, 356); c.fillStyle = '#fff1cb'; for (const [x, en] of SC_DOORS) if (vis(x * 2)) c.fillText(en ? 'SALA · MIQUEIAS' : 'SALA · ALMIRO', x * 2, 254);
     SC_SKETCH.forEach((x, i) => { if (!vis(x * 2)) return; c.fillStyle = '#675975'; c.fillText(SC_CAPS[i], x * 2 - 2, 374); if (window.Art?.drawDoodle) { c.save(); c.translate(x * 2 - 2, 318); c.scale(1.2, 1.2); try { window.Art.drawDoodle(c, 0, 0, i % 3, lastT * .35 + i, false); } catch (e) {} c.restore(); } });
     SC_BOARDS.forEach((x, i) => { if (!vis(x * 2)) return; c.fillStyle = '#e8f4ee'; const words = SC_PHRASES[i].split(' '); let line = '', yy = 300; for (const w of words) { if ((line + w).length > 14) { c.fillText(line.trim().toUpperCase(), (x + 43) * 2, yy); line = ''; yy += 18; } line += w + ' '; } c.fillText(line.trim().toUpperCase(), (x + 43) * 2, yy); });
     c.restore(); }

@@ -1,76 +1,86 @@
-/* Missão "Farda nova" no Pátio do Colégio Adventista (Campanha 1).
-   Tia Neide, da secretaria, avisa que chegou a farda nova do Da Roça. A caixa abriu no portão e as três peças
-   (camisa, calça e crachá) se espalharam pelo pátio. Entregando as três, o traje FARDA vai para o espelho
-   (DarocaLook.ganhar('farda')): camisa branca com listra vertical azul-escura no peito e calça azul-escura
-   com listra azul-clara numa das pernas.
-   O estado fica no save da campanha 1 (q.fardaAceita, q.fardaPecas, q.fardaFeita). Sem DOM. */
+/* Missão "Achados e perdidos" no Pátio do Colégio Adventista (Campanha 1).
+   A Tia Ana, da secretaria (cabelo branco, óculos, camisa social azul-clara e saia bege), tem a caixa de achados e
+   perdidos cheia. Da Roça entrega a cada aluno o que ele esqueceu na escola: o estojo do Caio, a garrafinha da Lara
+   e o casaco do Theo. De volta à Tia Ana, ganha a FARDA da escola no espelho (DarocaLook.ganhar('farda')).
+   O estado fica no save da campanha 1 (q.fardaAceita, q.achados, q.fardaFeita). Sem DOM. */
 (() => {
   'use strict';
   if (window.MissaoFarda) return;
   const SCENE = 9, FLOOR = 440;
-  const NPC = Object.freeze({ id: 'neide', name: 'Tia Neide · secretaria', x: 1060 });
-  const PECAS = Object.freeze([
-    Object.freeze({ id: 'camisa', x: 1480, y: FLOOR - 32, nome: 'Camisa branca com listra azul' }),
-    Object.freeze({ id: 'calca', x: 1990, y: FLOOR - 32, nome: 'Calça azul com listra clara' }),
-    Object.freeze({ id: 'cracha', x: 3720, y: FLOOR - 32, nome: 'Crachá do colégio' })
-  ]);
-  // a secretária usa o mesmo desenhista dos personagens da Campanha 2
-  window.CampanhaPersonagens?.registrar?.('neide', { name: 'Tia Neide da secretaria', skin: '#b98258', shade: '#8a5c3c', build: 'normal', h: .93, top: '#1f3a7a', topKind: 'cardigan', inner: '#f2f2ea', skirt: '#2a3448', hair: { style: 'bun', color: '#2a1d16', gray: '#7a7068' }, glasses: '#7a3a2a', item: 'book', pose: 'read' }, 'NPC (Colégio Adventista)');
+  const NPCS = Object.freeze({
+    tia_ana: { name: 'Tia Ana · secretaria', scene: SCENE, x: 1060 },
+    aluno_caio: { name: 'Caio · 6º ano', scene: SCENE, x: 1480 },
+    aluna_lara: { name: 'Lara · 7º ano', scene: SCENE, x: 2010 },
+    aluno_theo: { name: 'Theo · 5º ano', scene: SCENE, x: 3720 }
+  });
+  const ITENS = Object.freeze({
+    aluno_caio: { item: 'estojo com adesivo de foguete', curto: 'ESTOJO', cor: '#3a6ad0' },
+    aluna_lara: { item: 'garrafinha roxa de unicórnio', curto: 'GARRAFINHA', cor: '#9a5ad8' },
+    aluno_theo: { item: 'casaco azul do colégio', curto: 'CASACO', cor: '#1f3a7a' }
+  });
+  // gente do colégio, no mesmo desenhista detalhado dos personagens da Campanha 2
+  const farda = { top: '#f1f1ea', pants: '#1d2d58', shoes: '#1a1a1e' };
+  const GENTE = {
+    tia_ana: { name: 'Tia Ana da secretaria', skin: '#f2d4c0', shade: '#d4ab94', build: 'normal', h: .93, top: '#a8cff0', collar: '#e4f2fc', skirt: '#d8c8a0', hair: { style: 'bun', color: '#f2f2ee', gray: '#d8d8d2' }, glasses: '#5a6a7a', item: 'book', pose: 'talk' },
+    aluno_caio: { name: 'Caio', skin: '#c48a62', shade: '#93613f', build: 'slim', h: .82, ...farda, hair: { style: 'short', color: '#2a1d16' }, pose: 'pockets', mood: 'sad' },
+    aluna_lara: { name: 'Lara', skin: '#e8bf9f', shade: '#bb9277', build: 'slim', h: .84, top: '#f1f1ea', skirt: '#1d2d58', hair: { style: 'ponytail', color: '#5a3a22' }, earrings: '#9a5ad8', pose: 'hips', mood: 'sad' },
+    aluno_theo: { name: 'Theo', skin: '#7a4a2e', shade: '#55331f', build: 'slim', h: .78, ...farda, hair: { style: 'curlyBig', color: '#121010' }, pose: 'relaxed', mood: 'sad' }
+  };
+  const registrar = () => { const CP = window.CampanhaPersonagens; if (!CP?.registrar) return false; for (const [id, sp] of Object.entries(GENTE)) CP.registrar(id, sp, 'NPC (Colégio Adventista)'); return true; };
+  if (!registrar()) addEventListener('DOMContentLoaded', registrar, { once: true });
 
-  const achadas = (q) => new Set((Array.isArray(q?.fardaPecas) ? q.fardaPecas : []).filter((id) => PECAS.some((p) => p.id === id)));
+  const ALUNOS = Object.keys(ITENS);
+  const entregues = (q) => new Set((Array.isArray(q?.achados) ? q.achados : []).filter((id) => ALUNOS.includes(id)));
   const fala = (name, text, actionLabel) => (actionLabel ? { name, text, actionLabel } : { name, text });
   function estado(q) {
     if (!q || typeof q !== 'object') return 'nova';
     if (q.fardaFeita) return 'feita';
     if (!q.fardaAceita) return 'nova';
-    return achadas(q).size >= PECAS.length ? 'entregar' : 'ativa';
+    return entregues(q).size >= ALUNOS.length ? 'entregar' : 'ativa';
   }
-  function falar(q) {
-    const st = estado(q), n = achadas(q).size, N = NPC.name;
-    if (st === 'nova') return { acao: 'aceitar', lines: [
-      fala(N, 'Da Roça, meu filho! Chegou a sua farda nova do colégio: camisa branca com a listra azul no peito e calça com a listra do lado.'),
-      fala(N, 'Só que o motoboy tropeçou no portão e a caixa abriu. A camisa, a calça e o crachá voaram pelo pátio todinho!'),
-      fala('Da Roça', 'Deixa comigo, tia. Eu acho tudo antes do sinal bater.', 'Aceitar a missão')] };
-    if (st === 'ativa') return { acao: null, lines: [fala(N, `Achou ${n} de 3. A camisa caiu perto dos bancos, a calça foi parar no meio do pátio e o crachá voou lá pro fundo, depois da quadra do Arthur.`)] };
-    if (st === 'entregar') return { acao: 'entregar', lines: [
-      fala('Da Roça', 'Camisa, calça e crachá. Tá tudo aqui, tia!'),
-      fala(N, 'Que beleza! Vai lá no espelho e veste. Farda nova, aluno novo!'),
-      fala(N, 'E nada de rabiscar a camisa no último dia de aula, viu?', 'Receber a farda')] };
-    return { acao: null, lines: [fala(N, 'A farda ficou bonita em você. Agora só falta chegar no horário!')] };
-  }
-  function concluir(q, acao) {
-    if (acao === 'aceitar' && estado(q) === 'nova') { q.fardaAceita = true; q.fardaPecas = []; return { message: 'Missão Farda nova: ache a camisa, a calça e o crachá no pátio.' }; }
-    if (acao === 'entregar' && estado(q) === 'entregar') { q.fardaFeita = true; window.DarocaLook?.ganhar?.('farda'); return { message: 'FARDA DA ESCOLA no espelho! Abra em INVENTÁRIO › ESPELHO.', xp: 150 }; }
-    return null;
-  }
-  function coletar(q, player, scene) {
-    if (Number(scene) !== SCENE || estado(q) !== 'ativa' || !player || !Number.isFinite(player.x) || !Number.isFinite(player.y)) return null;
-    const a = achadas(q), p = PECAS.find((pc) => !a.has(pc.id) && Math.abs(player.x - pc.x) <= 30 && Math.abs((player.y - 30) - pc.y) <= 40);
-    if (!p) return null; a.add(p.id); q.fardaPecas = [...a];
-    return { count: a.size, message: a.size >= PECAS.length ? 'Farda 3/3! Volte à Tia Neide, perto da entrada do pátio.' : `${p.nome} · ${a.size}/3` };
+  function falar(id, q, api) {
+    const st = estado(q), N = NPCS[id]?.name || id;
+    if (id === 'tia_ana') {
+      if (st === 'nova') { api.say([
+        fala(N, 'Da Roça, meu filho! Me ajuda? A caixa de ACHADOS E PERDIDOS da secretaria tá transbordando.'),
+        fala(N, 'O Caio esqueceu o estojo do foguete, a Lara deixou a garrafinha roxa e o Theo largou o casaco do colégio na quadra.'),
+        fala(N, 'Eles estão aqui no pátio. Entrega pra cada um e volta aqui que eu tenho uma surpresa da secretaria pra você.'),
+        fala('Da Roça', 'Pode deixar, Tia Ana. Entregador oficial do Colégio Adventista!', 'Pegar a caixa')], () => { q.fardaAceita = true; q.achados = []; api.toast('Achados e perdidos: entregue o estojo do Caio, a garrafinha da Lara e o casaco do Theo.'); api.save(); }); return; }
+      if (st === 'ativa') { const falta = ALUNOS.filter((a) => !entregues(q).has(a)).map((a) => NPCS[a].name.split(' ·')[0]); api.say([fala(N, `Ainda falta entregar pro ${falta.join(', pra ')}. Eles estão espalhados pelo pátio, olha lá no fundo também!`)]); return; }
+      if (st === 'entregar') { api.say([
+        fala('Da Roça', 'Caixa vazia, Tia Ana! Estojo, garrafinha e casaco: tudo com os donos.'),
+        fala(N, 'Que menino prestativo! A secretaria guardou isso pra você: a FARDA nova do colégio.'),
+        fala(N, 'Camisa branca com a listra azul no peito e calça com a listra do lado. Vai no espelho e veste!', 'Receber a farda')], () => { q.fardaFeita = true; window.DarocaLook?.ganhar?.('farda'); api.xp(150, 'side-farda'); api.toast('FARDA DA ESCOLA no espelho! Abra em INVENTÁRIO › ESPELHO.'); api.save(); }); return; }
+      api.say([fala(N, 'Os meninos não param de falar do entregador de chapéu. Obrigada, viu? E a farda ficou linda em você!')]); return;
+    }
+    const I = ITENS[id]; if (!I) return;
+    if (entregues(q).has(id) || q?.fardaFeita) { api.say([fala(N, 'Valeu de novo, Da Roça! Agora eu não esqueço mais nada... acho.')]); return; }
+    if (!q?.fardaAceita) { api.say([fala(N, `Ai, perdi meu ${I.item}... Será que a Tia Ana, da secretaria, guardou?`)]); return; }
+    api.say([fala('Da Roça', `Ó, achei teu ${I.item} na caixa de achados e perdidos!`), fala(N, 'MEU ' + I.curto + '! Valeu demais, Da Roça! Achei que tinha perdido pra sempre.')], () => {
+      const e = entregues(q); e.add(id); q.achados = [...e]; api.xp(30, 'achado-' + id);
+      api.toast(e.size >= ALUNOS.length ? 'Achados e perdidos 3/3! Volte à Tia Ana, perto da entrada do pátio.' : `${I.curto} entregue · ${e.size}/3`); api.save(); });
   }
   // para onde a seta aponta (só depois de aceitar, para não tirar a vez da história principal)
   function alvo(q, scene) {
     if (Number(scene) !== SCENE) return null; const st = estado(q);
-    if (st === 'ativa') { const a = achadas(q); return PECAS.find((p) => !a.has(p.id))?.x ?? NPC.x; }
-    return st === 'entregar' ? NPC.x : null;
+    if (st === 'ativa') { const e = entregues(q); const prox = ALUNOS.find((a) => !e.has(a)); return prox ? NPCS[prox].x : NPCS.tia_ana.x; }
+    return st === 'entregar' ? NPCS.tia_ana.x : null;
   }
   function objetivo(q, scene) {
     if (Number(scene) !== SCENE) return null; const st = estado(q);
-    if (st === 'ativa') return ['Farda nova', `${achadas(q).size}/3 peças achadas no pátio. Depois volte à Tia Neide.`];
-    if (st === 'entregar') return ['Farda nova', 'Leve as três peças para a Tia Neide, perto da entrada do pátio.'];
+    if (st === 'ativa') return ['Achados e perdidos', `${entregues(q).size}/3 itens devolvidos aos alunos. Depois volte à Tia Ana.`];
+    if (st === 'entregar') return ['Achados e perdidos', 'Tudo entregue! Volte à Tia Ana, perto da entrada do pátio.'];
     return null;
   }
+  // balãozinho com o item esquecido em cima de cada aluno que ainda espera
   const R = (c, x, y, w, h, cor) => { c.fillStyle = cor; c.fillRect(Math.round(x), Math.round(y), w, h); };
   function desenhar(c, t, q, scene) {
-    if (Number(scene) !== SCENE || estado(q) !== 'ativa') return; const a = achadas(q);
-    for (const p of PECAS) {
-      if (a.has(p.id)) continue; const x = p.x, y = p.y + Math.sin(t * 3 + x) * 4;
-      c.save(); c.globalCompositeOperation = 'lighter'; c.globalAlpha = .3 + Math.sin(t * 5) * .12; c.fillStyle = '#6fb0e6'; c.beginPath(); c.arc(x, y, 20, 0, Math.PI * 2); c.fill(); c.restore();
-      if (p.id === 'camisa') { R(c, x - 13, y - 9, 26, 18, '#263b42'); R(c, x - 12, y - 8, 24, 16, '#f1f1ea'); R(c, x - 16, y - 8, 5, 8, '#f1f1ea'); R(c, x + 11, y - 8, 5, 8, '#f1f1ea'); R(c, x + 2, y - 8, 4, 16, '#1f3a7a'); R(c, x - 3, y - 9, 6, 3, '#d8d8cc'); R(c, x - 9, y - 5, 4, 4, '#1f3a7a'); }
-      else if (p.id === 'calca') { R(c, x - 10, y - 11, 20, 23, '#263b42'); R(c, x - 9, y - 10, 18, 5, '#1d2d58'); R(c, x - 9, y - 5, 8, 16, '#1d2d58'); R(c, x + 1, y - 5, 8, 16, '#1d2d58'); R(c, x + 4, y - 5, 2, 16, '#6fb0e6'); }
-      else { R(c, x - 8, y - 11, 16, 21, '#263b42'); R(c, x - 7, y - 10, 14, 19, '#f2f2ea'); R(c, x - 7, y - 10, 14, 5, '#1f3a7a'); R(c, x - 4, y - 3, 8, 6, '#c9a27a'); R(c, x - 5, y + 5, 10, 1, '#7a8a9a'); R(c, x - 1, y - 15, 2, 5, '#6fb0e6'); }
-    }
+    if (Number(scene) !== SCENE || estado(q) !== 'ativa') return; const e = entregues(q);
+    for (const id of ALUNOS) { if (e.has(id)) continue; const I = ITENS[id], x = NPCS[id].x + 18, y = FLOOR - 118 + Math.sin(t * 3 + x) * 3;
+      R(c, x - 14, y - 12, 28, 22, '#263b42'); R(c, x - 13, y - 11, 26, 20, '#f6f4ea'); R(c, x - 6, y + 9, 4, 4, '#f6f4ea'); R(c, x - 9, y + 13, 3, 3, '#f6f4ea');
+      if (id === 'aluno_caio') { R(c, x - 9, y - 5, 18, 9, I.cor); R(c, x - 9, y - 5, 18, 2, '#6a9af0'); R(c, x + 2, y - 3, 4, 5, '#f2f2ee'); R(c, x + 3, y - 4, 2, 1, '#e8433a'); }
+      else if (id === 'aluna_lara') { R(c, x - 3, y - 8, 6, 15, I.cor); R(c, x - 2, y - 10, 4, 2, '#f2f2ee'); R(c, x - 1, y - 4, 2, 4, '#ffd0f0'); }
+      else { R(c, x - 9, y - 6, 18, 13, I.cor); R(c, x - 12, y - 6, 4, 10, I.cor); R(c, x + 8, y - 6, 4, 10, I.cor); R(c, x - 1, y - 6, 2, 13, '#f2f2ee'); } }
   }
-  window.MissaoFarda = Object.freeze({ SCENE, NPC, PECAS, estado, falar, concluir, coletar, alvo, objetivo, desenhar });
+  window.MissaoFarda = Object.freeze({ SCENE, npcs: NPCS, ehNpc: (id) => !!NPCS[id], estado, falar, alvo, objetivo, desenhar, coletar: () => null });
 })();

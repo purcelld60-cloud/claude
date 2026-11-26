@@ -165,7 +165,17 @@
       descricao: 'Becos que sobem, escadas que não acabam, pipa no céu e um nome que todo mundo respeita lá em cima.',
       desenho: (P) => { const cores = [['#f2c4c4', '#c8544a'], ['#f2e2a8', '#d0683a'], ['#c8dcf0', '#8a8e94'], ['#d4ecc8', '#c8544a'], ['#e8c8e8', '#d0683a'], ['#f0d0a0', '#8a8e94'], ['#c8e8e0', '#c8544a']]; let i = 0;
         for (const [y0, x0, x1] of [[132, 812, 1012], [84, 860, 1012], [36, 920, 1012]]) for (let x = x0; x < x1 - 30; x += 36) { const [par, tel] = cores[i++ % cores.length]; P.casa(x, y0 - (i % 2) * 4, 32, 34, { telhado: tel, parede: par, madeira: false, paredeH: 16, janelas: [4], porta: 18 }); }
-        escada(P, 830, 152, 10); escada(P, 880, 102, 10); escada(P, 940, 54, 10); for (const [x, y] of [[822, 120], [906, 72], [966, 26], [1000, 120]]) { P.R(x, y, 9, 7, '#3c6aa8'); P.R(x, y, 9, 2, '#6a9ad0'); } P.R(990, 10, 2, 26, '#5a5a56'); P.R(992, 10, 14, 9, '#e8433a'); } }
+        escada(P, 830, 152, 10); escada(P, 880, 102, 10); escada(P, 940, 54, 10); for (const [x, y] of [[822, 120], [906, 72], [966, 26], [1000, 120]]) { P.R(x, y, 9, 7, '#3c6aa8'); P.R(x, y, 9, 2, '#6a9ad0'); } P.R(990, 10, 2, 26, '#5a5a56'); P.R(992, 10, 14, 9, '#e8433a'); } },
+    // lugares que já estavam desenhados no mapa e agora têm cena própria (lugares-c1.js)
+    { id: 40, nome: 'Oficina do Lucas', sub: 'Garagem e ferramentas', caixa: [222, 210, 82, 72], cam: 200,
+      descricao: 'Onde o carro a gás do seu pai nasceu. O Tio Juca perdeu as ferramentas nas prateleiras e o gato da oficina não ajuda.',
+      desenho: () => {} },
+    { id: 41, nome: 'Lanchonete do Zito', sub: 'Coxinha, pastel e suco de cacau', caixa: [428, 566, 96, 70], cam: 500,
+      descricao: 'Coxinha quentinha, acarajé e suco de cacau da roça. Herói de Itabuna come de graça e sai com a vida e o gás cheios.',
+      desenho: () => {} },
+    { id: 42, nome: 'Açude da Roça', sub: 'Píer, capivaras e pescaria', caixa: [172, 430, 92, 56], cam: 900,
+      descricao: 'Água parada, capivara folgada, fogueira acesa e o Seu Vagner no píer, esperando alguém com paciência para pescar.',
+      desenho: () => {} }
   ];
   let RIO1 = [], TR1 = null; const RUAS1 = {};
   const MAPA1 = {
