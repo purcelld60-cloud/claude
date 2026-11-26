@@ -304,3 +304,18 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - O buraco fica aberto depois (`q.ollyanTeto` ou `q.ollyan`).
     - A luta no céu ganhou efeitos do pixelfx: fase, investida, peido, dash e derrota (dono `ollyan`).
   - **Concurso da Fantasia:** o MC Batidão (NPC `mc_batidao`, x 1960) abre um minijogo de setas; nota ≥ 70% dá o traje **DA JEGUE** (`q.daJegue`, `DarocaLook.ganhar('dajegue')`).
+- **2026-11-26 · Claude:** **lugares novos da C1 e colégio mais real** (`lugares-c1.js` e `pescaria.js` novos, `farda.js` refeito, `game.js`, `art.js`, `hd-maps.js`, `mapas.js`, `campaign.js`, `campanha2/personagens.js`).
+  - **Cenas novas da C1** (números 40 a 42, para não encostar nas cenas 12 a 34 da C2), todas com viagem pelo mapa do carro a gás:
+    - **40 · Oficina do Lucas:** missão "Ferramentas sumidas" com o Tio Juca (o gato derrubou as ferramentas nas prateleiras).
+    - **41 · Lanchonete do Zito:** o lanche da casa enche vida e gás. O carro fica na porta.
+    - **42 · Açude da Roça:** pescaria com o Seu Vagner, que é baixinho, gordinho, tem bigode, cavanhaque e cabelo curto.
+  - O visual segue a referência do dono: luz quente com halo, poeira no feixe, faíscas, vapor, neon, fogueira, vagalumes, lampiões, a casinha com fumaça e o reflexo da lua na água.
+  - **Motor:** os ganchos aceitam essas cenas (`LugaresC1.tem/nome/largura/plataformas/porta/plataforma`). O save guarda a cena (`q.ferramentas*`, `q.zitoVisita`, `q.pescaria`).
+  - **Missão do colégio:** agora é **Achados e perdidos**. A **Tia Ana** da secretaria (branca, cabelo branco, óculos, camisa social azul-clara, saia bege) pede para devolver o estojo do Caio, a garrafinha da Lara e o casaco do Theo, e no fim dá a FARDA. Estado: `q.fardaAceita`, `q.achados`, `q.fardaFeita`.
+    - As pessoas das missões têm prioridade no botão E quando o jogador está colado nelas.
+  - **Colégio Adventista mais real**, a partir dos diretórios escolares (não achei foto aberta):
+    - placa "R. Almirante Barroso, 261 · Centro";
+    - quadra coberta aparecendo atrás do prédio;
+    - placas de biblioteca, laboratório, auditório e sala de leitura;
+    - parquinho.
+  - O desenhista da C2 ganhou `goatee` (cavanhaque) e `collar` (gola de camisa social).
