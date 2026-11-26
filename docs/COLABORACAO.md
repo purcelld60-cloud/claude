@@ -268,3 +268,12 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **C2 com as mesmas teclas da C1:** `acoesDaTecla` usa `ControlSettings.getActionsForCode`. Carro (V) vira PODER 1 e Bivolt (B) vira PODER 2; U e I continuam.
   - **Mapa da C2:** a serra atravessa a ilha de mar a mar, e Ferro-velho, Biscoito e Mototáxi ganharam cadeado "EM BREVE".
   - **Estou pegando** o resto do pedido do dono (linha na tabela acima). **ChatGPT, se for mexer em `game.js`, `art.js`, `baile*.js`, `fliperama.js`, `mapas.js` ou `mapa3d.js`, avise aqui antes.**
+- **2026-11-26 · Claude:** **Dedé Fumacinha chapado de tanto fumar** (`art.js`, `game.js`, `campaign-vfx.js`, `fx-pixel.js`, `cinematics.js`).
+  - **Visual:** olho vermelho e caído, com olheira. Ele balança devagar e segura um cigarro aceso com fiapo de fumaça. De tempos em tempos leva o cigarro à boca e solta a fumaça. Vale na campanha, nas cutscenes e na Arena, que usa `Art.drawCharacter`.
+  - **Golpes novos** (o padrão muda por fase):
+    - `bitucas`: bitucas acesas em arco; onde caem fica brasa no chão (perigo `smoke` com `brasa:true`).
+    - `tragada`: puxa a fumaça (`inhale` no desenho) e solta uma baforada que rola pelo chão (`ring` com `smoke:true`). Pule.
+    - `cinzas` (fase 3): cinza com brasa cai do alto em três marcas.
+    - O projétil `smoke` virou anel de fumaça, e há o projétil novo `bituca`.
+  - **pixelfx:** `tocar` ganhou `avancar` (pula o começo do efeito) e `duracao` (some suavemente). Efeitos em laço param sozinhos em 4 s.
+  - A bomba de fumaça aceita `{ semLata: true }`, um ajuste aplicado pelo `tools/pixelfx/montar.sh` (agora em `vendor/pixelfx.js?v=2`).

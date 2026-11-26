@@ -750,8 +750,11 @@
       r(c,footX-4,-5-footY,12,5,type==='dede'?'#26363b':'#e8e4d5');r(c,footX-3,-2-footY,11,2,type==='dede'?'#aab5a4':'#98afb0');
     }
     c.translate((o.dash?5:walk)+hip,-bob+(helping?16:0));
+    // Dedé chapado: balança devagar e, de tempos em tempos, leva o cigarro à boca (tragada) e solta a fumaça
+    const dedeCiclo=(t*.3)%1,dedeTrago=type==='dede'&&!moving&&!attack?(dedeCiclo<.2?Math.sin(dedeCiclo/.2*Math.PI):0):0;
+    if(type==='dede'&&!moving&&!o.dash)c.translate(Math.round(Math.sin(t*1.1)*1.6),Math.round(Math.max(0,Math.sin(t*.55))*1));
     let leftHand=[-16+walk*7,-19],rightHand=[17-walk*7,-19];
-    if(type==='dede'){leftHand=[-22,-29];rightHand=[26,-35+Math.sin(t*3)*3];}
+    if(type==='dede'){leftHand=[-13+Math.round(Math.sin(t*1.1)*2),-19];rightHand=[Math.round(21-dedeTrago*9),Math.round(-28-dedeTrago*15)];}
     if(type==='aica'&&!moving){leftHand=[-11,-21];rightHand=[20,-26+Math.sin(t*2)*2];}
     if(helping){leftHand=[-12,-13];rightHand=[35,-15];}
     if(type==='ravile'&&!moving){leftHand=[-13,-20];rightHand=[19,-24];}
@@ -759,6 +762,7 @@
     if(type==='arthur'&&moving){leftHand=[-13+walk*10,-27+Math.cos(t*4)*5];rightHand=[18-walk*8,-30-Math.cos(t*4)*6];}
     if(attack){rightHand=type==='arthur'?[27+strike*20,-37-strike*5]:[27+strike*12,-35-strike*11];leftHand=[-13,-34];}
     if(o.charging&&type==='dede'){leftHand=[-28,-30];rightHand=[29,-35];}
+    if(o.inhale&&type==='dede'){leftHand=[-17,-26];rightHand=[12,-43];}
     if(earPull){rightHand=[59,-53];leftHand=[-11,-25];}
     if(earPulled){leftHand=[-17,-49];rightHand=[-6,-42];}
     function arm(side){const end=side>0?rightHand:leftHand,elbow=[side>0?(slim?15:18):-(slim?14:17),-29+walk*side*3];limb(c,[[side*bodyHalf,-36],elbow,end],slim?6:8,'#293a40');limb(c,[[side*bodyHalf,-36],elbow],slim?3:5,coat);limb(c,[elbow,end],slim?3:5,type==='dede'?coat:skin);r(c,end[0]-3,end[1]-3,6,6,skin);}
@@ -777,7 +781,18 @@
       // Short upward dark tufts and a clear smile make his braces readable at game scale.
       r(c,-12,-63,25,7,'#252f2d');poly(c,[[-11,-61],[-11,-66],[-7,-64],[-6,-68],[-2,-65],[1,-70],[4,-65],[8,-68],[10,-64],[14,-66],[13,-60]],'#26322d');r(c,-8,-64,6,2,'#465044');r(c,2,-65,5,2,'#414c40');r(c,-12,-57,4,6,'#252f2d');r(c,10,-58,4,5,'#252f2d');
       r(c,0,-46,12,5,'#78513e');r(c,1,-46,10,4,'#f3e2c4');r(c,1,-44,10,1,'#858e92');for(let j=0;j<3;j++){r(c,2+j*3,-45,2,2,'#c6d8dc');r(c,2+j*3,-44,1,1,'#5e7c8c');}r(c,2,-41,8,1,'#a66f51');
-      if(o.smoke!==false){const hx=rightHand[0],hy=rightHand[1];smokePuffs(c,hx+4,hy-4,t,1);for(let i=0;i<3;i++){const a=t*2+i*2,xx=hx+Math.cos(a)*13,yy=hy-5+Math.sin(a)*8;r(c,xx,yy,3,2,'#a2d2cf');}}
+      // Olho vermelho e caído, com pálpebra pesada e olheira: o Dedé fuma tanto que vive grogue.
+      const pisca=(t*.23)%1<.06;r(c,1,-56,9,7,skin);r(c,2,-54,6,3,'#e7b3a9');r(c,2,-53,1,1,'#cf4f47');r(c,7,-53,1,1,'#cf4f47');r(c,4,-53,2,2,'#2f2622');
+      r(c,1,-56,8,pisca?5:3,'#8d5c46');r(c,1,pisca?-52:-54,8,1,'#3e2a24');r(c,2,-50,6,1,'#7f5248');r(c,3,-49,4,1,'#9c6c5c');r(c,0,-58,9,1,'#2c2a26');
+      // Cigarro aceso entre os dedos (no arremesso a bituca sai voando e outro aparece)
+      const hx=rightHand[0],hy=rightHand[1],brilho=o.inhale?1:dedeTrago;
+      if(!attack||progress<.32||progress>.85){r(c,hx+1,hy-3,3,2,'#d9953f');r(c,hx+4,hy-3,6,2,'#f3efe2');r(c,hx+4,hy-2,6,1,'#cfc8b8');r(c,hx+10,hy-3,1,2,'#8f8c84');
+        r(c,hx+11,hy-3,2,2,brilho>.3?'#ff7a2a':'#c8401f');if(brilho>.3||Math.sin(t*5)>.6)r(c,hx+12,hy-4,1,1,'#ffd27a');
+        if(brilho>.3){c.save();c.globalAlpha*=.3*brilho;r(c,hx+9,hy-6,7,7,'#ff8a30');c.restore();}
+        if(o.smoke!==false){c.save();const base=c.globalAlpha;for(let i=0;i<9;i++){const k=(t*.55+i/9)%1;c.globalAlpha=base*(1-k)*.7;r(c,hx+12+Math.sin(t*2.2+k*7)*k*5,hy-5-k*34,k>.5?2:1,2,k>.4?'#c9d3cf':'#e6ece6');}c.restore();}}
+      // Depois da tragada, a fumaça sai pela boca em bolinhas que sobem
+      if(o.smoke!==false&&!moving&&dedeCiclo>.21&&dedeCiclo<.46){const k=(dedeCiclo-.21)/.25;c.save();const base=c.globalAlpha;for(let i=0;i<5;i++){const kk=Math.min(1,k*1.3-i*.08);if(kk<=0)continue;c.globalAlpha=base*(1-kk)*.8;oval(c,14+kk*24+i*3,-44-kk*14-i*2,3+kk*6,2+kk*4,i%2?'#c6d1cd':'#e4ebe4',2);}c.restore();}
+      if(o.inhale){c.save();const base=c.globalAlpha;for(let i=0;i<8;i++){const k=1-((t*1.8+i/8)%1);c.globalAlpha=base*(1-k)*.8;r(c,14+Math.cos(i*.8)*k*40,-44+Math.sin(i*.8)*k*26,2,2,'#dfe6e0');}c.restore();}
     }else{
       const hair=type==='aica'?'#4d392f':'#362f2b';r(c,-13,-64,28,9,hair);r(c,-10,-67,22,5,hair);r(c,-13,-59,5,26,hair);r(c,11,-58,4,32,hair);r(c,-9,-63,7,2,type==='aica'?'#77573d':'#65503a');r(c,6,-63,7,2,type==='aica'?'#77573d':'#65503a');
       r(c,-1,-55,9,1,'#624635');r(c,2,-45,9,2,'#8b5b42');r(c,4,-45,5,1,'#ebc7a7');if(type==='aica'&&o.shouting){r(c,0,-45,12,6,'#774a3d');r(c,2,-45,8,2,'#f5dac0');}

@@ -21,14 +21,14 @@
   const EXTRA = Object.freeze({
     boss_dede: Object.freeze([
       {title:'MAIS UM CAPANGA NA SUBIDA',speaker:'Dedé',text:'SEU GILÓ HOMI! Sou Dedé. Antes do Freddy, você ainda vai passar pela minha fumaça!'},
-      {title:'CADÊ A VISTA DO MORRO?',speaker:'Da Roça',text:'Dedé, isso é uma arena ou uma máquina de fazer neblina?'},
-      {title:'O GUARDA DA ÚLTIMA PASSAGEM',speaker:'Dedé',text:'O Reeis mandou segurar a entrada. Mas eu mesmo inventei esse visual de chefão misterioso.'},
+      {title:'CADÊ A VISTA DO MORRO?',speaker:'Da Roça',text:'Dedé, teu olho tá mais vermelho que a brasa desse cigarro. Isso é arena ou máquina de neblina?'},
+      {title:'O GUARDA DA ÚLTIMA PASSAGEM',speaker:'Dedé',text:'O Reeis mandou segurar a entrada. Eu acendi um... depois outro... e agora o morro todo virou fumaça. Mistério, homi.'},
       {title:'VENTILAÇÃO DA ROÇA',speaker:'Da Roça',text:'Então abre uma janela, porque eu trouxe papel e uma ventilação movida a gás.'}
     ]),
     dede_defeat: Object.freeze([
       {title:'A NEBLINA BAIXOU',speaker:'Dedé',text:'SEU GILÓ HOMI! A fumaça baixou e o chapéu me venceu. Não espalha essa resenha!'},
       {title:'CAMINHO ABERTO PARA O REI',speaker:'Da Roça',text:'Meu papel venceu a névoa. E o bolo continua me esperando.'},
-      {title:'NÃO ESPALHA ESSA RESENHA',speaker:'Dedé',text:'Vai lá. Só não conta pro Freddy: ele transforma derrota em notícia do bairro.'}
+      {title:'NÃO ESPALHA ESSA RESENHA',speaker:'Dedé',text:'Vai lá. Acho que vou largar esse cigarro: perdi pro chapéu tossindo. Só não conta pro Freddy.'}
     ]),
     boss_arthur: Object.freeze([
       {title:'A RESENHA PASSOU DO LIMITE',speaker:'Aica',text:'Aff veyr juro! Arthur puxou o cabelo dela. Bestaiado, você se passou! Da Roça, ajuda!'},
