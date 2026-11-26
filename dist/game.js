@@ -586,7 +586,7 @@
       }
       finishSandbox('won');return;
     }
-    if(e.hp<=0){e.hp=0;shake=12;epicFreeze(.3);epic.flash=.75;epic.flashColor='#fff6d8';epicRing(e.x,e.y-60,'#ffe08b',1.6);epicRing(e.x,e.y-60,'#ff9b6a',1.1);epicPlate('DERROTADO!',(nomeBoss(e.type)||'').toUpperCase(),'#ffd25a',2.2);killCount++;const type=e.type;leaveArena(true);activeBoss=null;hazards=[];shots=shots.filter(a=>a.owner!=='enemy');
+    if(e.hp<=0){e.hp=0;window.FxPixel?.derrota?.(e);shake=12;epicFreeze(.3);epic.flash=.75;epic.flashColor='#fff6d8';epicRing(e.x,e.y-60,'#ffe08b',1.6);epicRing(e.x,e.y-60,'#ff9b6a',1.1);epicPlate('DERROTADO!',(nomeBoss(e.type)||'').toUpperCase(),'#ffd25a',2.2);killCount++;const type=e.type;leaveArena(true);activeBoss=null;hazards=[];shots=shots.filter(a=>a.owner!=='enemy');
       awardXP(type==='nikolas'?900:type==='giant'?750:type==='nicolas'?700:type==='reeisBoss'?600:type==='menezes'?650:type==='freddy'?400:type==='dede'?320:type==='arthur'?450:type==='igor'?360:type==='kaique'?420:480,'boss-'+type);
       if(type==='arthur'){q.arthur=true;startCutscene('arthur_revenge',()=>{toast('Paz no pátio! Ravile levantou e Arthur aprendeu a respeitar o cabelo dos outros.');save();updateUI();});}
       else if(type==='igor'||type==='kaique'){q[type]=true;q[type+'Sneak']=true;say(type==='igor'?[{name:'Igor · monitor',text:'Oxe, véi... tu passou mesmo! Achou um pão de queijo, fortalece o pai aqui, viu?'},{name:'Da Roça',text:'Tua barriga fez mais chamada que o professor, pô! Bora que meu bolo não se acha sozinho.'}]:[{name:'Kaique · monitor',text:'Vai, se pique logo, véi! Hoje tu passou... mas se eu achar outra bolinha, já sabe, né?'},{name:'Da Roça',text:'Qual foi, Kaique? Era só um trabalho de física voando, pô!'}]);}
@@ -1242,6 +1242,7 @@
     }
     for(const trap of window.WorldData?.sarueTraps||[])if(trap.scene===scene&&(!arena||arena.type==='marco')&&window.Art?.drawSarueTrap)Art.drawSarueTrap(ctx,trap.x,FLOOR,time,marcoTrapTriggered);
     for(const e of enemies){if(e.hp<=0||arena&&e.type!==arena.type)continue;
+      if(e===activeBoss)window.FxPixel?.chefe?.(e);
       if(e.conquista){
         const f=e.conquista, ataca=f.estado==='firing', prepara=f.estado==='windup';
         const opt={frame:time,grounded:true,facing:player.x<e.x?-1:1,hit:e.hit>0,attack:ataca||prepara,

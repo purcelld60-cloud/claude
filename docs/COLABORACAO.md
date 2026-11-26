@@ -277,3 +277,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - O projétil `smoke` virou anel de fumaça, e há o projétil novo `bituca`.
   - **pixelfx:** `tocar` ganhou `avancar` (pula o começo do efeito) e `duracao` (some suavemente). Efeitos em laço param sozinhos em 4 s.
   - A bomba de fumaça aceita `{ semLata: true }`, um ajuste aplicado pelo `tools/pixelfx/montar.sh` (agora em `vendor/pixelfx.js?v=2`).
+- **2026-11-26 · Claude:** **efeitos do pixelfx em todas as lutas de chefe** (`fx-pixel.js`, 2 ganchos no `game.js`).
+  - `FxPixel.chefe(e)` roda a cada quadro para o chefe ativo e reage quando o estado muda:
+    - investida (`dashing`): poeira;
+    - troca de fase (`phaseChange`): `FxPixel.fase(e)`, com círculo de poder na cor do chefe e o golpe de assinatura de cada um.
+  - Golpes de assinatura na troca de fase: sol (Nicolas), explosão de tinta (Marco e gigante), impacto no chão (Freddy, Menezes, Igor, Kaique), fumaça (Dedé), catarro (Nikolas), plasma dourado (Reeis), penas (Arthur).
+  - `FxPixel.derrota(e)`: fogos sobre o chefe vencido.
+  - Disparos dos chefes (evento `cast` com `kind`) ganham um clarão na cor do golpe, no máximo um a cada 180 ms. No acerto o inimigo continua só piscando.
