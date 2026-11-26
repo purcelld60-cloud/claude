@@ -9,6 +9,7 @@
    - Bia do Arrocha: minijogo de ritmo no palco do teatro → MORAL: +15% de força.
    - Gugu do Ferro-Velho: a OFICINA DE MELHORIAS dos poderes (campanha2/oficina.js).
    - Vó Cida, Larissa e Carlinhos: as PISTAS DO JORGE (as três juntas dão 90 moedas e um diário).
+   - Dona Fátima das Fantasias: CAIPIRA NO SHOPPING (chapéu, lenço e girassol espalhados pelo shopping) → traje CAIPIRA no espelho.
    - Seu Zé: o táxi (já existe).
    O estado fica no save da Campanha 2 (flags.extra). API usada pelo jogo: candidatos, atualizar, desenhar, velocidade,
    vidaMax, forca, missoes, alvos. */
@@ -28,10 +29,14 @@
     { id: 'mapa1', cena: 14, x: 4300, nome: 'PEDAÇO DO MAPA (1/3)', quando: () => X().mel === 'ativa', cor: '#e8c24c' },
     { id: 'mapa2', cena: 17, x: 3980, nome: 'PEDAÇO DO MAPA', quando: () => X().mel === 'ativa', cor: '#e8c24c' },
     { id: 'mapa3', cena: 32, x: 2400, nome: 'PEDAÇO DO MAPA', quando: () => X().mel === 'ativa', cor: '#e8c24c' },
-    { id: 'pneu', cena: 30, x: 2300, nome: 'PNEU DE BICICLETA', quando: () => X().juninho === 'ativa', cor: '#3a3a3a' }
+    { id: 'pneu', cena: 30, x: 2300, nome: 'PNEU DE BICICLETA', quando: () => X().juninho === 'ativa', cor: '#3a3a3a' },
+    { id: 'chapeu', cena: 22, x: 2050, nome: 'CHAPÉU DE PALHA DESFIADO', quando: () => X().fatima === 'ativa', cor: '#e2c070' },
+    { id: 'lenco', cena: 20, x: 1250, nome: 'LENÇO VERMELHO DE BOLINHA', quando: () => X().fatima === 'ativa', cor: '#d8342a' },
+    { id: 'girassol', cena: 23, x: 2780, nome: 'GIRASSOL DE PANO', quando: () => X().fatima === 'ativa', cor: '#f2c230' }
   ];
   const pegou = (id) => !!X()['item_' + id];
   const pedacos = () => ['mapa1', 'mapa2', 'mapa3'].filter(pegou).length;
+  const pecasCaipira = () => ['chapeu', 'lenco', 'girassol'].filter(pegou).length;
 
   /* ---------- os aliados ---------- */
   const ALIADOS = [
@@ -90,6 +95,13 @@
       falas: (st) => st === 'nova' ? [F('c2_larissa', 'Psiu, biblioteca! ...Ah, você procura o Jorge?'), F('c2_larissa', 'Ele vinha aqui ler sobre Itabuna. Pegou o mesmo livro de história do cacau umas cinco vezes.'), F('c2_larissa', 'Na última página tem um desenho de três bonequinhos. Não fui eu que fiz.', 'sad')]
         : [F('c2_larissa', 'Boa leitura. E boa sorte com o seu amigo.', 'friend')],
       fim: (st) => { if (st === 'nova') { marca('pista_larissa'); pistas(); } } },
+    { id: 'fatima', quem: 'c2_fatima', nome: 'Dona Fátima', cena: 23, x: 1720,
+      estado: () => (X().fatima === 'feita' ? 'ok' : X().fatima === 'ativa' ? (pecasCaipira() >= 3 ? 'entregar' : 'andando') : 'nova'),
+      falas: (st) => st === 'nova' ? [F('c2_fatima', 'Ô meu filho, socorro! Hoje tem o Arraiá do Shopping e o meu manequim caipira ficou pelado!', 'sad'), F('daroca', 'Pelado como? Cadê a roupa dele?'), F('c2_fatima', 'Os meninos da lan house brincaram de pega-pega com as peças. Sumiu o chapéu, o lenço e o girassol.'), F('c2_fatima', 'O chapéu voou lá pro estacionamento, o lenço ficou no térreo e o girassol tá aqui em cima, no fim do corredor.'), F('daroca', 'Caipira no shopping? Isso é comigo. Eu sou da roça!', 'friend'), F('c2_fatima', 'Então acha as três peças. Se servir em você, a fantasia é sua!', 'friend')]
+        : st === 'andando' ? [F('c2_fatima', `Achou ${pecasCaipira()} de 3. Chapéu no estacionamento, lenço no térreo e girassol no fim deste corredor!`)]
+          : st === 'entregar' ? [F('daroca', 'Chapéu, lenço e girassol. Tudo aqui, Dona Fátima!'), F('c2_fatima', 'Agora veste aí pra eu ver... AI QUE CAIPIRA MAIS ARRETADO!', 'friend'), F('c2_fatima', 'A fantasia é sua. Camisa xadrez, remendo no joelho e bigodinho pintado. Arraiá em pleno shopping!', 'friend'), F('narrador', 'O traje CAIPIRA está no armário do quarto e no espelho do inventário.')]
+            : [F('c2_fatima', 'O manequim agora tá com inveja de você. Volta no Arraiá, viu?', 'friend')],
+      fim: (st) => { if (st === 'nova') marca('fatima', 'ativa'); if (st === 'entregar') { marca('fatima', 'feita'); window.DarocaLook?.ganhar?.('caipira'); ganhar(30); api.item('TRAJE CAIPIRA · VISTA NO ARMÁRIO OU NO ESPELHO'); api.sfx('fanfarra'); } } },
     { id: 'carlinhos', quem: 'c2_carlinhos', nome: 'Carlinhos', cena: 20, x: 2080, pista: true,
       estado: () => (tem('pista_carlinhos') ? 'ok' : 'nova'),
       falas: (st) => st === 'nova' ? [F('c2_carlinhos', 'Eu andava com o Jorge antes do Fred aparecer. Depois, ele só andava grudado no Fred.', 'sad'), F('c2_carlinhos', 'Mas sabe? Ele falava de Itabuna quando achava que ninguém tava ouvindo.'), F('c2_carlinhos', 'Ele não admite. Mas sente falta. Muita.', 'sad')]
@@ -177,7 +189,7 @@
     for (const a of ALIADOS) { if (a.cena !== cena || (a.cao && tem('cao'))) continue; const st = a.estado();
       out.push({ tipo: 'aliado', x: a.x, rotulo: (a.loja ? 'COMPRAR COM ' : a.oficina && st !== 'entregar' ? 'OFICINA DO ' : 'FALAR COM ') + a.nome.toUpperCase(), botao: a.loja ? 'COMPRAR' : a.oficina && st !== 'entregar' ? 'OFICINA' : 'FALAR',
         acao: () => { const fl = a.falas(st); if (fl) api.conversa({ id: 'al_' + a.id, quem: a.quem, x: a.x, falas: fl, fim: () => a.fim(st) }); else a.fim(st); } }); }
-    for (const it of ITENS) if (it.cena === cena && it.quando() && !pegou(it.id)) out.push({ tipo: 'item', x: it.x, rotulo: 'PEGAR: ' + it.nome, botao: 'PEGAR', acao: () => { marca('item_' + it.id); api.item(it.id.startsWith('mapa') ? `PEDAÇO DO MAPA (${pedacos()}/3)` : it.nome); api.sfx('plim'); } });
+    for (const it of ITENS) if (it.cena === cena && it.quando() && !pegou(it.id)) out.push({ tipo: 'item', x: it.x, rotulo: 'PEGAR: ' + it.nome, botao: 'PEGAR', acao: () => { marca('item_' + it.id); api.item(it.id.startsWith('mapa') ? `PEDAÇO DO MAPA (${pedacos()}/3)` : ['chapeu', 'lenco', 'girassol'].includes(it.id) ? `${it.nome} (${pecasCaipira()}/3)` : it.nome); api.sfx('plim'); } });
     if (cena === 14 && corrida) return out.filter((o) => o.tipo !== 'aliado');
     return out;
   }
@@ -191,6 +203,9 @@
     for (const it of ITENS) if (it.cena === cena && it.quando() && !pegou(it.id)) { const y = FLOOR - 20 + Math.sin(t * 3 + it.x) * 4; c.save(); c.globalCompositeOperation = 'lighter'; c.globalAlpha = .35 + Math.sin(t * 5) * .15; c.fillStyle = it.cor; c.beginPath(); c.arc(it.x, y, 18, 0, TAU); c.fill(); c.restore();
       if (it.id === 'radio') { R(it.x - 10, y - 8, 20, 14, '#1c1408'); R(it.x - 9, y - 7, 18, 12, '#c43c3a'); R(it.x - 7, y - 5, 7, 7, '#2a2a2a'); R(it.x + 2, y - 4, 5, 2, '#e8c24c'); R(it.x + 6, y - 14, 1, 7, '#9aa0a6'); }
       else if (it.id === 'pneu') { c.strokeStyle = '#1c1c1c'; c.lineWidth = 4; c.beginPath(); c.arc(it.x, y, 10, 0, TAU); c.stroke(); c.lineWidth = 1; }
+      else if (it.id === 'chapeu') { R(it.x - 16, y + 1, 32, 4, '#6e5335'); R(it.x - 15, y - 2, 30, 4, '#e2c070'); for (let k = -16; k < 16; k += 3) R(it.x + k, y + 5, 2, 2, '#c9a24a'); R(it.x - 8, y - 10, 17, 9, '#a98045'); R(it.x - 7, y - 10, 15, 7, '#e6c474'); R(it.x - 7, y - 4, 15, 2, '#c43a2e'); }
+      else if (it.id === 'lenco') { c.fillStyle = '#1c1408'; c.beginPath(); c.moveTo(it.x - 13, y - 7); c.lineTo(it.x + 13, y - 7); c.lineTo(it.x, y + 9); c.closePath(); c.fill(); c.fillStyle = '#d8342a'; c.beginPath(); c.moveTo(it.x - 11, y - 6); c.lineTo(it.x + 11, y - 6); c.lineTo(it.x, y + 7); c.closePath(); c.fill(); R(it.x - 5, y - 4, 2, 2, '#fff'); R(it.x + 3, y - 4, 2, 2, '#fff'); R(it.x - 1, y + 1, 2, 2, '#fff'); }
+      else if (it.id === 'girassol') { R(it.x - 1, y + 2, 2, 12, '#3a7a2a'); R(it.x + 1, y + 6, 5, 3, '#4a9a3a'); for (let k = 0; k < 8; k++) { const a = k / 8 * TAU + t; R(it.x + Math.cos(a) * 7 - 3, y - 4 + Math.sin(a) * 7 - 3, 6, 6, k % 2 ? '#f2c230' : '#e8a820'); } R(it.x - 4, y - 8, 8, 8, '#6a3a12'); R(it.x - 2, y - 6, 2, 2, '#8a5a22'); }
       else { R(it.x - 9, y - 7, 18, 14, '#5a3a14'); R(it.x - 8, y - 6, 16, 12, '#f2e2b8'); R(it.x - 5, y - 3, 8, 1, '#a87a4a'); R(it.x - 2, y, 6, 1, '#c43c3a'); } }
     if (cao && cao.cena === cena) { try { window.Art.drawCharacter(c, 'c2_biscoito', cao.x, FLOOR, { frame: t * 1.6, facing: cao.dir, moving: true, grounded: true, attack: cao.mordeT > 0 }); } catch (e) {} if (cao.mordeT > 0) window.CampanhaCamadas?.kit?.pxText?.(c, 'NHAC!', cao.x, FLOOR - 50, '#ffd24a', { sombra: '#000' }); }
     if (corrida && cena === 14) { // bandeira, Nando no skate e o relógio
@@ -216,6 +231,7 @@
     L.push(['Corrida do Nando', tem('skate') ? 'feita' : 'nova', 'Vença a corrida de skate no centro.']);
     L.push(['A bicicleta do Juninho', st('juninho'), `Corrente com o Gugu ${tem('corrente') ? '✔' : ''} · pneu na rodoviária ${pegou('pneu') ? '✔' : ''}.`]);
     L.push(['O show da Bia', tem('moral') ? 'feita' : 'nova', 'Dance arrocha no palco do teatro.']);
+    L.push(['Caipira no Shopping', st('fatima'), `Ache as peças da Dona Fátima (shopping, piso 2): ${pecasCaipira()}/3.`]);
     L.push(['As pistas do Jorge', tem('pistas_ok') ? 'feita' : ['pista_vocida', 'pista_larissa', 'pista_carlinhos'].some(tem) ? 'ativa' : 'nova', 'Vó Cida (rua da pensão), Larissa (UESB) e Carlinhos (shopping).']);
     return L;
   }
