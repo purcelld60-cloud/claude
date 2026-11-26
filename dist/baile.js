@@ -8,8 +8,8 @@
  const palette={ink:'#171d32',night:'#111b39',pink:'#eb84b3',cyan:'#7ed6e4',gold:'#f1cf87',mint:'#a3e4ba'};
  const INTRO=Object.freeze([
   Object.freeze({id:'dance',start:0,duration:3,label:'O baile virou perseguição',speaker:'Ollyan',text:'Ô, chapéu… eu tô é tonto! Tu tá rindo da minha orelha, véi?'}),
-  Object.freeze({id:'ears',start:3,duration:3,label:'Orelhas abertas, pista liberada',speaker:'Da Roça',text:'Oxe! O cara ligou o ventilador na própria cabeça!'}),
-  Object.freeze({id:'chase',start:6,duration:3,label:'O carro a gás decola',speaker:'Da Roça',text:'Bora, carro do meu pai! Esse voo aí não tem passagem de volta! '})
+  Object.freeze({id:'ears',start:3,duration:3,label:'Orelhas no teto',speaker:'Da Roça',text:'Oxe! O cara ligou o ventilador na cabeça e furou o teto do baile!'}),
+  Object.freeze({id:'chase',start:6,duration:3,label:'O carro a gás decola pelo buraco',speaker:'Da Roça',text:'Bora, carro do meu pai! Sobe pelo buraco que a lua tá chamando!'})
  ]);
  const phases=Object.freeze([
   Object.freeze({name:'ORELHAS AO VENTO',attacks:['earFan','pulseRing','swoop'],windup:1.1,recover:.95,speed:1}),
@@ -177,7 +177,9 @@
   rect(c,-11,-80,4,2,'#30262b');rect(c,-7,-78,4,2,'#30262b');rect(c,3,-78,4,2,'#30262b');rect(c,7,-80,4,2,'#30262b');rect(c,-10,-75,7,4,'#f2e4d7');rect(c,3,-75,7,4,'#f2e4d7');rect(c,-5,-75,2,4,'#222938');rect(c,3,-75,2,4,'#222938');rect(c,-1,-73,3,7,shadow);rect(c,-4,-65,9,2,'#6f4047');rect(c,-2,-63,7,2,'#f4dfcd');rect(c,-10,-69,4,2,'#d79b91');rect(c,8,-69,3,2,'#d79b91');if(o.hit){c.globalAlpha=.25;rect(c,-18,-95,36,72,'#fff3d9');}c.restore();
  }
  function world(c,camera=0,t=0,opts={}){
-  c.save();c.imageSmoothingEnabled=false;const sky=c.createLinearGradient(0,0,0,440);sky.addColorStop(0,'#0b1330');sky.addColorStop(.55,'#28325a');sky.addColorStop(1,'#71536e');c.fillStyle=sky;c.fillRect(0,0,W,H);
+  c.save();c.imageSmoothingEnabled=false;
+  if(window.BaileGalpao?.draw?.(c,camera,t,opts)){ollyanNoBaile(c,camera,t,opts);c.restore();return;} // baile em local fechado (baile-galpao.js)
+  const sky=c.createLinearGradient(0,0,0,440);sky.addColorStop(0,'#0b1330');sky.addColorStop(.55,'#28325a');sky.addColorStop(1,'#71536e');c.fillStyle=sky;c.fillRect(0,0,W,H);
   for(let i=0;i<70;i++){const xx=((i*113.7-camera*.035)%1050+1050)%1050,yy=18+(i*47)%221;rect(c,xx,yy,i%7===0?2:1,i%7===0?2:1,'#cbd0e7');}glow(c,810-camera*.018,85,90,'#d5cdec',.14);oval(c,810-camera*.018,85,29,29,'#e5dbdc');oval(c,819-camera*.018,77,27,26,'#182144');
   for(let layer=0;layer<2;layer++){const speed=layer?.21:.11;for(let i=-2;i<18;i++){const xx=i*137-(camera*speed%137),hh=70+(i*i*37+layer*31)%114,yy=330-hh+layer*32;rect(c,xx,yy,127,330-yy,layer?'#24334b':'#1c2845');rect(c,xx+7,yy-5,113,7,layer?'#3b4b61':'#293450');for(let row=0;row<4;row++)for(let col=0;col<6;col++)if((i+row+col+layer)%3!==0)rect(c,xx+12+col*17,yy+15+row*22,7,9,layer?'#948576':'#5a6476');if(i%3===0){rect(c,xx+75,yy-26,3,23,'#576980');line(c,[[xx+57,yy-26],[xx+95,yy-26]],'#65788e',2);}}}
   for(let i=0;i<5;i++){const x=i*1100-camera*.55;line(c,[[x,165],[x+330,190],[x+680,172],[x+1000,186]],'#283442',3);for(let j=0;j<18;j++){const xx=x+j*57,yy=174+Math.sin(j*.42)*10+Math.sin(t*.8+j)*1.5;rect(c,xx,yy,5,8,['#f5d78b','#b3dce8','#eeabd7','#a9ddc1'][j%4]);if(j%3===0)glow(c,xx,yy,15,'#d9bbdb',.075);}}
@@ -193,8 +195,11 @@
   for(const wx of[230,1000,2850,4070,4620]){const xx=wx-camera;if(xx<-100||xx>W+100)continue;rect(c,xx,203,8,237,'#293b54');rect(c,xx-20,197,49,15,'#526278');rect(c,xx-14,212,38,6,'#efc994');glow(c,xx+5,236,76,'#e3b083',.09);}
   for(let i=0;i<21;i++){const xx=(i*227-camera*.35+t*(4+i%3))%W,yy=210+(i*41)%190;rect(c,xx,yy,2,2,i%2?'#c4b6d7':'#a7dcd8');}
   const signs=[{x:430,txt:'BAILE FUNK'},{x:1350,txt:'PISTA DA RESENHA'},{x:2970,txt:'VAI COM CALMA, VÉI'},{x:4300,txt:'ITABUNA NO RITMO'}];for(const s of signs){const xx=s.x-camera;if(xx<-220||xx>W+220)continue;rect(c,xx-124,258,248,34,'#25304b');rect(c,xx-120,262,240,26,'#3c3556');text(c,s.txt,xx,276,12,'#e9b6d3');}
+  ollyanNoBaile(c,camera,t,opts);c.restore();
+ }
+ function ollyanNoBaile(c,camera,t,opts){
   if(!opts.hideOllyan&&!opts.defeated&&NPC_X-camera>-100&&NPC_X-camera<W+100){drawOllyan(c,NPC_X-camera,FLOOR,t,{cup:true});text(c,'OLLYAN',NPC_X-camera,FLOOR-(isLite()?106:158),11,'#f4dca7');if(Math.sin(t*.7)>.25)text(c,'Ô, chapéu… qual foi?',NPC_X-camera,FLOOR-(isLite()?124:176),10,'#d8c4e6');}
-  if(opts.defeated&&NPC_X-camera>-100&&NPC_X-camera<W+100){drawOllyan(c,NPC_X-camera,FLOOR,t,{cup:false});text(c,'OLLYAN · AGORA É SÓ DANÇA',NPC_X-camera,FLOOR-(isLite()?108:158),10,'#bfe5c7');}c.restore();
+  if(opts.defeated&&NPC_X-camera>-100&&NPC_X-camera<W+100){drawOllyan(c,NPC_X-camera,FLOOR,t,{cup:false});text(c,'OLLYAN · AGORA É SÓ DANÇA',NPC_X-camera,FLOOR-(isLite()?108:158),10,'#bfe5c7');}
  }
  function sky(c,t,phase=1){
   const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,phase===3?'#16162e':'#111e3c');g.addColorStop(.53,phase===3?'#5d355c':'#304d74');g.addColorStop(1,'#ae7890');c.fillStyle=g;c.fillRect(0,0,W,H);
@@ -217,11 +222,23 @@
  function drawIntro(c,seconds=0,options={}){
   const t=clamp(finite(seconds,0),0,9),index=Math.min(2,Math.floor(t/3)),local=t-index*3;
   c.save();c.imageSmoothingEnabled=false;
-  if(index<2){world(c,NPC_X-535,t,{hideOllyan:true});rect(c,0,0,W,H,'#11152d35');const rise=index===1?smooth(local/2.65):0;
-   const approach=index===0?535-smooth(local/2.65)*75:460+rise*65;drawOllyan(c,approach+Math.sin(t*3)*6,440-rise*235,t,{scale:1+rise*.08,facing:-1,flying:index===1&&local>.25,cup:index===0,fast:true,angle:index===0?Math.sin(t*3)*.08:0});
+  const G=window.BaileGalpao,tetoY=G?G.TETO:70;
+  if(index<2){
+   // Ollyan sobe girando as orelhas, rasga o teto de zinco e a luz da lua entra no galpão
+   const sobe=index===1?smooth(local/1.5):0,fura=index===1?smooth((local-1.3)/.45):0,saiu=index===1?smooth((local-1.55)/.9):0;
+   const tremor=index===1&&local>1.25&&local<1.9?Math.sin(t*90)*3:0;c.save();c.translate(Math.round(tremor),Math.round(tremor*.5));
+   world(c,NPC_X-535,t,{hideOllyan:true,rombo:G?fura:undefined});rect(c,0,0,W,H,'#11152d22');
+   const approach=index===0?535-smooth(local/2.65)*75:460+sobe*75,oy=index===0?440:440-sobe*(440-tetoY-30)-saiu*200;
+   drawOllyan(c,approach+Math.sin(t*3)*6,oy,t,{scale:1+sobe*.08,facing:-1,flying:index===1&&local>.25,cup:index===0,fast:true,angle:index===0?Math.sin(t*3)*.08:0});
    if(window.Art?.drawCharacter)window.Art.drawCharacter(c,'daroca',315,440,{frame:t,facing:1,muscular:!!options.trained});else{rect(c,303,383,24,57,'#dda05d');rect(c,293,376,44,6,'#dbc589');}
-   if(index===1){for(let i=0;i<12;i++){const q=(t*1.1+i*.13)%1,xx=535+Math.cos(i*2.4)*q*130,yy=435-q*120;rect(c,xx,yy,4,3,'#dbd2e4');}line(c,[[486,430],[481,422],[494,417]],'#bce6df',2);line(c,[[575,429],[583,419],[571,413]],'#d7c4ec',2);}
-  }else{sky(c,t,1);const chase=smooth(local/3);drawOllyan(c,750+Math.sin(t*4)*5,190-Math.sin(t*2)*15,t,{scale:1.25,flying:true,fast:true});pilot(c,150+chase*200,330-chase*72,t,{trained:options.trained,dash:true});for(let i=0;i<9;i++){const xx=(i*143-t*260)%1100;rect(c,xx,130+(i*43)%270,40,2,'#ddd9e444');}}
+   if(index===1){for(let i=0;i<12;i++){const q=(t*1.1+i*.13)%1,xx=535+Math.cos(i*2.4)*q*130,yy=oy-5-q*120;rect(c,xx,yy,4,3,'#dbd2e4');}
+    // pedaços de telha caindo depois do estouro
+    if(fura>0)for(let i=0;i<14;i++){const q=clamp(local-1.3-i*.03,0,2),xx=535+(i-7)*14+Math.sin(i)*20,yy=tetoY+q*q*260+q*40;if(yy<440)rect(c,xx,yy,6+(i%3)*3,3,i%2?'#4a4e60':'#6a6e80');}}
+   c.restore();
+  }else if(local<1){
+   // o carro a gás sobe pelo buraco atrás do Ollyan
+   const u=smooth(local);world(c,NPC_X-535,t,{hideOllyan:true,rombo:G?1:undefined});rect(c,0,0,W,H,'#11152d22');pilot(c,520,430-u*470,t,{trained:options.trained,dash:true});
+  }else{sky(c,t,1);const chase=smooth((local-1)/2);drawOllyan(c,750+Math.sin(t*4)*5,190-Math.sin(t*2)*15,t,{scale:1.25,flying:true,fast:true});pilot(c,150+chase*200,330-chase*72,t,{trained:options.trained,dash:true});for(let i=0;i<9;i++){const xx=(i*143-t*260)%1100;rect(c,xx,130+(i*43)%270,40,2,'#ddd9e444');}}
   rect(c,0,0,W,25,'#0b1122');rect(c,0,532,W,8,'#0b1122');text(c,index===2?'CARRO A GÁS · PERSEGUIÇÃO NO CÉU':'BAILE FUNK · O CÉU VIROU PISTA',480,13,10,'#d9cfdf');caption(c,INTRO[index].speaker,INTRO[index].text);c.restore();
  }
  function renderIntro(canvasOrContext,seconds=0,options={}){

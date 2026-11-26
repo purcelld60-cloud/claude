@@ -294,3 +294,13 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Caipira no Shopping** (C2): Dona Fátima das Fantasias (`c2_fatima`, piso 2 do shopping, x 1720) pede chapéu (estacionamento, cena 22), lenço (térreo, cena 20) e girassol (piso 2, cena 23). Flag `extra.fatima`.
   - O pedido do dono era um cosplay de personagem de desenho conhecido. Como é personagem protegido, fiz uma fantasia caipira original.
   - **Da Jegue** sai no concurso de fantasia do baile funk (próximo pacote, junto com o baile em local fechado).
+- **2026-11-26 · Claude:** **baile em local fechado, concurso do Da Jegue e Ollyan furando o teto** (`baile-galpao.js` e `baile-concurso.js` novos, `baile.js`, `game.js`).
+  - **Galpão do Ollyan:** a cena 11 virou um galpão.
+    - Lado de fora: rua, fila com corda, segurança, neon e placa "carro só até aqui".
+    - Lado de dentro: teto de zinco com treliça, moving heads na fumaça, lasers, globo espelhado, bar (refri, água, açaí), grafites, fita de LED, pista que acende no ritmo e as plataformas como camarotes de metal.
+    - `baile.js world()` delega para `BaileGalpao.draw` quando ele existe.
+  - **Carro só até a porta:** com o carro dentro do galpão (x > `PORTA`−70), ele estaciona sozinho, e lá dentro não dá para ligar o carro. A luta do Ollyan continua usando o carro.
+  - **Ollyan fura o teto:** na cutscene ele sobe girando as orelhas e rasga o zinco. Entra luz da lua com feixe, poeira, poça no chão e `weather/god-rays` do pixelfx, e o carro sobe pelo buraco.
+    - O buraco fica aberto depois (`q.ollyanTeto` ou `q.ollyan`).
+    - A luta no céu ganhou efeitos do pixelfx: fase, investida, peido, dash e derrota (dono `ollyan`).
+  - **Concurso da Fantasia:** o MC Batidão (NPC `mc_batidao`, x 1960) abre um minijogo de setas; nota ≥ 70% dá o traje **DA JEGUE** (`q.daJegue`, `DarocaLook.ganhar('dajegue')`).
