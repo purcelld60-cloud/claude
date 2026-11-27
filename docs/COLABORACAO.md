@@ -363,3 +363,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - o texto fica escondido mesmo com `!important` de id.
   - **`teste/sessao.lua`:** ações `chefe:<tipo>`, `chamar:Objeto.metodo`, `estado:` e `quem:x,y`.
   - **`golpes.js`** entrou na lista de scripts convertidos.
+- **27/11 · Claude:** **peidão menor e mais leve; nada de caixas na tela** (`golpes.js`, `game.js`).
+  - Raio do combo: 100 / 130 / 165 px (era 155 / 205 / 260). A área de dano acompanha a nuvem.
+  - A nuvem virou bolinhas transparentes, sem o disco sólido, e some mais rápido.
+  - O aviso antes dos golpes agora é só o chão rachando e brilhando na largura exata, sem contorno de caixa.
+  - As caixas de acerto não aparecem mais pela tecla H; só com `?hitbox` no endereço, para testes.

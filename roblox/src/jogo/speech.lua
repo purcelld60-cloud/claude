@@ -14,8 +14,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(viewport) or not __t(canvas)
-    __O[2415] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2415] else not __t(normal)) then
+    __O[2410] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[2410] else not __t(normal)) then
         return
     end
     local controls = window.document:getElementById("dialogControls")
@@ -60,10 +60,10 @@ local __O = {};
                 local ____t_6 = __t
                 local ____t_4 = __t
                 local ____temp_3 = not __t(__len(event.touches))
-                __O[2416] = ____temp_3
-                local ____temp_5 = if ____t_4(____temp_3) then touch else __O[2416]
-                __O[2417] = ____temp_5
-                if ____t_7(if ____t_6(____temp_5) then button:contains(window.document:elementFromPoint(touch.clientX, touch.clientY)) else __O[2417]) then
+                __O[2411] = ____temp_3
+                local ____temp_5 = if ____t_4(____temp_3) then touch else __O[2411]
+                __O[2412] = ____temp_5
+                if ____t_7(if ____t_6(____temp_5) then button:contains(window.document:elementFromPoint(touch.clientX, touch.clientY)) else __O[2412]) then
                     activate(nil)
                 end
             end,
@@ -142,8 +142,8 @@ local __O = {};
         local gutter = if __t(onLeft) then leftGutter else rightGutter
         local ____t_21 = __t
         local ____temp_20 = if __t(cinematic) then vh < 280 else cinematic
-        __O[2418] = ____temp_20
-        local sideBalloon = if ____t_21(____temp_20) then gutter >= 200 else __O[2418]
+        __O[2413] = ____temp_20
+        local sideBalloon = if ____t_21(____temp_20) then gutter >= 200 else __O[2413]
         local wanted = if __t(anchor.width) then anchor.width else 380 * b.scale
         local width = if __t(sideBalloon) then math.min(230, gutter - 18) else clamp(
             nil,
@@ -182,8 +182,8 @@ local __O = {};
         local ____t_31 = __t
         local ____opt_28 = window.document:querySelector(".cinematic-heading")
         local ____temp_30 = ____opt_28 and ____opt_28:getBoundingClientRect().height
-        __O[2419] = ____temp_30
-        local header = if __t(cinematic) then if ____t_31(____temp_30) then __O[2419] else 20 else 0
+        __O[2414] = ____temp_30
+        local header = if __t(cinematic) then if ____t_31(____temp_30) then __O[2414] else 20 else 0
         local controlsSpace = if __t(cinematic) then 47 else math.max(
             47,
             controls:getBoundingClientRect().height + 22
@@ -240,8 +240,8 @@ local __O = {};
         local ____el_dataset_39 = el.dataset
         local ____t_38 = __t
         local ____temp_37 = if __t(anchor.type) then anchor.type else anchor.speaker
-        __O[2420] = ____temp_37
-        ____el_dataset_39.speaker = if ____t_38(____temp_37) then __O[2420] else ""
+        __O[2415] = ____temp_37
+        ____el_dataset_39.speaker = if ____t_38(____temp_37) then __O[2415] else ""
     end
     local function tick(self)
         local ____t_51 = __t
@@ -254,7 +254,7 @@ local __O = {};
         if ____opt_42 ~= nil then
             ____opt_result_44 = ____opt_42(____opt_42)
         end
-        __O[2421] = ____opt_result_44
+        __O[2416] = ____opt_result_44
         local ____opt_48 = window.Fliperama
         if ____opt_48 ~= nil then
             ____opt_48 = ____opt_48.isOpen
@@ -263,7 +263,7 @@ local __O = {};
         if ____opt_48 ~= nil then
             ____opt_result_50 = ____opt_48(____opt_48)
         end
-        if ____t_51(if ____t_45(____opt_result_44) then __O[2421] else ____opt_result_50) then
+        if ____t_51(if ____t_45(____opt_result_44) then __O[2416] else ____opt_result_50) then
             window:requestAnimationFrame(tick)
             return
         end
@@ -276,7 +276,7 @@ local __O = {};
         if ____opt_54 ~= nil then
             ____opt_result_56 = ____opt_54(____opt_54)
         end
-        __O[2422] = ____opt_result_56
+        __O[2417] = ____opt_result_56
         local ____opt_60 = window.Game
         if ____opt_60 ~= nil then
             ____opt_60 = ____opt_60.getState
@@ -285,12 +285,12 @@ local __O = {};
         if ____opt_60 ~= nil then
             ____opt_result_62 = ____opt_60(____opt_60)
         end
-        local state = if ____t_57(____opt_result_56) then __O[2422] else ____opt_result_62
+        local state = if ____t_57(____opt_result_56) then __O[2417] else ____opt_result_62
         if __t(state) then
             local ____t_64 = __t
             local ____temp_63 = not not __t(state.dialog) and not __t(state.paused)
-            __O[2423] = ____temp_63
-            local active = if ____t_64(____temp_63) then not __t(state.cutscene) else __O[2423]
+            __O[2418] = ____temp_63
+            local active = if ____t_64(____temp_63) then not __t(state.cutscene) else __O[2418]
             normal.hidden = not __t(active)
             controls.hidden = not __t(active)
             if __t(active) then
@@ -301,15 +301,15 @@ local __O = {};
                 if ____opt_65 ~= nil then
                     ____opt_65 = ____opt_65(____this_66)
                 end
-                __O[2424] = ____opt_65
-                local a = if ____t_67(____opt_65) then __O[2424] else {x = 480, y = 300, speakerX = 480}
+                __O[2419] = ____opt_65
+                local a = if ____t_67(____opt_65) then __O[2419] else {x = 480, y = 300, speakerX = 480}
                 position(nil, normal, a, false)
             end
             local ____t_70 = __t
             local ____t_69 = __t
             local ____temp_68 = if __t(film) then state.cutscene else film
-            __O[2425] = ____temp_68
-            if ____t_70(if ____t_69(____temp_68) then not __t(state.paused) else __O[2425]) then
+            __O[2420] = ____temp_68
+            if ____t_70(if ____t_69(____temp_68) then not __t(state.paused) else __O[2420]) then
                 local ____t_76 = __t
                 local ____opt_73 = window.Cinematics
                 if ____opt_73 ~= nil then
@@ -319,8 +319,8 @@ local __O = {};
                 if ____opt_73 ~= nil then
                     ____opt_result_75 = ____opt_73(____opt_73, state.cutscene)
                 end
-                __O[2426] = ____opt_result_75
-                local a = if ____t_76(____opt_result_75) then __O[2426] else {x = 300, y = 65, width = 400, speakerX = 300}
+                __O[2421] = ____opt_result_75
+                local a = if ____t_76(____opt_result_75) then __O[2421] else {x = 300, y = 65, width = 400, speakerX = 300}
                 position(nil, film, a, true)
             end
             local key = __add(if __t(active) then "d" else "", if __t(if __t(state.cutscene) then not __t(state.paused) else state.cutscene) then "c" else "")

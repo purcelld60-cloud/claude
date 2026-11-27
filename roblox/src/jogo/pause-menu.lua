@@ -29,8 +29,8 @@ local __O = {};
                 if ____opt_11 ~= nil then
                     ____opt_result_13 = ____opt_11(____opt_11)
                 end
-                __O[2986] = ____opt_result_13
-                return true, if ____t_14(____opt_result_13) then __O[2986] else {}
+                __O[2981] = ____opt_result_13
+                return true, if ____t_14(____opt_result_13) then __O[2981] else {}
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch()
@@ -66,8 +66,8 @@ local __O = {};
                 local ____self_20_parse_21 = ____self_20.parse
                 local ____t_19 = __t
                 local ____temp_18 = window.localStorage:getItem(SAVE_KEY)
-                __O[2987] = ____temp_18
-                local saved = ____self_20_parse_21(____self_20, if ____t_19(____temp_18) then __O[2987] else "null")
+                __O[2982] = ____temp_18
+                local saved = ____self_20_parse_21(____self_20, if ____t_19(____temp_18) then __O[2982] else "null")
                 local ____t_28 = __t
                 local ____opt_result_26
                 if saved ~= nil then
@@ -162,12 +162,12 @@ local __O = {};
         local ____t_111 = __t
         local ____t_109 = __t
         local ____temp_108 = if __t(state.started) then not __t(state.paused) else state.started
-        __O[2991] = ____temp_108
-        local ____temp_110 = if ____t_109(____temp_108) then not __t(state.won) else __O[2991]
-        __O[2992] = ____temp_110
-        local ____temp_112 = if ____t_111(____temp_110) then not __t(state.defeated) else __O[2992]
-        __O[2993] = ____temp_112
-        resumeAfterSandbox = not not ____t_114(if ____t_113(____temp_112) then not __t(state.chapterEnded) else __O[2993])
+        __O[2986] = ____temp_108
+        local ____temp_110 = if ____t_109(____temp_108) then not __t(state.won) else __O[2986]
+        __O[2987] = ____temp_110
+        local ____temp_112 = if ____t_111(____temp_110) then not __t(state.defeated) else __O[2987]
+        __O[2988] = ____temp_112
+        resumeAfterSandbox = not not ____t_114(if ____t_113(____temp_112) then not __t(state.chapterEnded) else __O[2988])
         local ____opt_117 = window.Game
         if ____opt_117 ~= nil then
             ____opt_117 = ____opt_117.releaseInputs
@@ -225,8 +225,8 @@ local __O = {};
             if result ~= nil then
                 ____opt_result_132 = result.error
             end
-            __O[2994] = ____opt_result_132
-            ____temp_134.textContent = if ____t_133(____opt_result_132) then __O[2994] else "Termine a conversa, cena ou desafio atual antes de começar a revanche."
+            __O[2989] = ____opt_result_132
+            ____temp_134.textContent = if ____t_133(____opt_result_132) then __O[2989] else "Termine a conversa, cena ou desafio atual antes de começar a revanche."
         end
         render(nil)
     end
@@ -242,8 +242,8 @@ local __O = {};
         if ____opt_165 ~= nil then
             ____opt_result_167 = ____opt_165(____opt_165)
         end
-        __O[2998] = ____opt_result_167
-        local selected = if ____t_168(____opt_result_167) then __O[2998] else "normal"
+        __O[2993] = ____opt_result_167
+        local selected = if ____t_168(____opt_result_167) then __O[2993] else "normal"
         local ____opt_171 = window.Difficulty
         if ____opt_171 ~= nil then
             ____opt_171 = ____opt_171.getSettings
@@ -278,16 +278,16 @@ local __O = {};
             if settings ~= nil then
                 ____opt_result_182 = settings.description
             end
-            __O[2999] = ____opt_result_182
-            description.textContent = if ____t_183(____opt_result_182) then __O[2999] else "A receita original do desafio."
+            __O[2994] = ____opt_result_182
+            description.textContent = if ____t_183(____opt_result_182) then __O[2994] else "A receita original do desafio."
         end
         local ____t_187 = __t
         local ____opt_result_186
         if settings ~= nil then
             ____opt_result_186 = settings.label
         end
-        __O[3000] = ____opt_result_186
-        local modeLabel = if ____t_187(____opt_result_186) then __O[3000] else "NORMAL"
+        __O[2995] = ____opt_result_186
+        local modeLabel = if ____t_187(____opt_result_186) then __O[2995] else "NORMAL"
         sandbox:querySelector("#ranchSandboxDifficulty").textContent = __add("DIFICULDADE ", modeLabel)
         local noteText = if __t(if __t(state.activeBoss) then state.activeBoss else state.ollyan) then "A escolha vale no próximo confronto. A luta atual mantém a dificuldade do início." else "A dificuldade vale nos próximos confrontos. Seus atributos e seu progresso continuam iguais."
         note.textContent = if __t(easyLocked) then "FÁCIL TRAVADO NESTE SAVE · Para mudar de dificuldade, crie uma nova aventura." else noteText
@@ -304,7 +304,7 @@ local __O = {};
         if ____opt_192 ~= nil then
             ____opt_192 = ____opt_192.level
         end
-        __O[3001] = ____opt_192
+        __O[2996] = ____opt_192
         local ____opt_199 = window.Progression
         if ____opt_199 ~= nil then
             ____opt_199 = ____opt_199.getState
@@ -317,14 +317,14 @@ local __O = {};
         if ____opt_result_201 ~= nil then
             ____opt_result_202 = ____opt_result_201.level
         end
-        local ____temp_203 = if ____t_194(____opt_192) then __O[3001] else ____opt_result_202
-        __O[3002] = ____temp_203
-        local level = if ____t_204(____temp_203) then __O[3002] else 1
+        local ____temp_203 = if ____t_194(____opt_192) then __O[2996] else ____opt_result_202
+        __O[2997] = ____temp_203
+        local level = if ____t_204(____temp_203) then __O[2997] else 1
         local ____t_208 = __t
         local ____opt_205 = window.document:getElementById("stageName")
         local ____temp_207 = ____opt_205 and ____opt_205.textContent
-        __O[3003] = ____temp_207
-        local stage = if ____t_208(____temp_207) then __O[3003] else "A roça"
+        __O[2998] = ____temp_207
+        local stage = if ____t_208(____temp_207) then __O[2998] else "A roça"
         heading:querySelector("#ranchPauseLocation").textContent = __add(
             __add(
                 __add(if __t(state.sandbox) then "SANDBOX · " else "", stage),
@@ -373,8 +373,8 @@ local __O = {};
     local ____t_4 = __t
     local ____t_3 = __t
     local ____temp_2 = not __t(shell) or not __t(screen)
-    __O[2984] = ____temp_2
-    if ____t_4(if ____t_3(____temp_2) then __O[2984] else not __t(modal)) then
+    __O[2979] = ____temp_2
+    if ____t_4(if ____t_3(____temp_2) then __O[2979] else not __t(modal)) then
         return
     end
     UNLOCK_KEY = "daroca-sandbox-v1"
@@ -506,9 +506,9 @@ local __O = {};
         local ____add_7 = __add
         local ____t_6 = __t
         local ____get_result_5 = __get(icons, name)
-        __O[2985] = ____get_result_5
+        __O[2980] = ____get_result_5
         return ____add_8(
-            ____add_7("<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\">", if ____t_6(____get_result_5) then __O[2985] else icons.book),
+            ____add_7("<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\">", if ____t_6(____get_result_5) then __O[2980] else icons.book),
             "</svg>"
         )
     end
@@ -767,8 +767,8 @@ local __O = {};
     if ____opt_47 ~= nil then
         ____opt_result_49 = ____opt_47(____opt_47)
     end
-    __O[2988] = ____opt_result_49
-    local ____add_51_result_62 = ____add_51("QUALIDADE: ", if ____t_50(____opt_result_49) then __O[2988] else "MÉDIA")
+    __O[2983] = ____opt_result_49
+    local ____add_51_result_62 = ____add_51("QUALIDADE: ", if ____t_50(____opt_result_49) then __O[2983] else "MÉDIA")
     local ____t_57 = __t
     local ____opt_54 = window.Graphics
     if ____opt_54 ~= nil then
@@ -778,12 +778,12 @@ local __O = {};
     if ____opt_54 ~= nil then
         ____opt_result_56 = ____opt_54(____opt_54)
     end
-    __O[2989] = ____opt_result_56
+    __O[2984] = ____opt_result_56
     gfx = ____makeButton_63(
         nil,
         "ranchGraphicsBtn",
         ____add_51_result_62,
-        if ____t_57(____opt_result_56) then __O[2989] else "Cenário vivo, luz e partículas.",
+        if ____t_57(____opt_result_56) then __O[2984] else "Cenário vivo, luz e partículas.",
         "controls",
         function()
             local ____opt_60 = window.Graphics
@@ -1055,8 +1055,8 @@ local __O = {};
     local function pick(____, id)
         local ____t_98 = __t
         local ____temp_97 = window.document:getElementById(id)
-        __O[2990] = ____temp_97
-        return if ____t_98(____temp_97) then __O[2990] else mainActions:querySelector(__add("#", id))
+        __O[2985] = ____temp_97
+        return if ____t_98(____temp_97) then __O[2985] else mainActions:querySelector(__add("#", id))
     end
     paginaOpcoes:append(__TS__Spread(__iter(__call(
         __call(
@@ -1184,7 +1184,7 @@ local __O = {};
             if previousFocus ~= nil then
                 ____opt_result_145 = previousFocus.isConnected
             end
-            __O[2995] = ____opt_result_145
+            __O[2990] = ____opt_result_145
             local ____t_149 = __t
             local ____this_148
             ____this_148 = previousFocus
@@ -1192,7 +1192,7 @@ local __O = {};
             if ____opt_147 ~= nil then
                 ____opt_147 = ____opt_147(____this_148, "[hidden]")
             end
-            if ____t_150(if ____t_146(____opt_result_145) then not ____t_149(____opt_147) else __O[2995]) then
+            if ____t_150(if ____t_146(____opt_result_145) then not ____t_149(____opt_147) else __O[2990]) then
                 previousFocus:focus()
             end
         end
@@ -1208,10 +1208,10 @@ local __O = {};
             local ____t_154 = __t
             local ____t_152 = __t
             local ____temp_151 = event.clientX < r.left or event.clientX > r.right
-            __O[2996] = ____temp_151
-            local ____temp_153 = if ____t_152(____temp_151) then __O[2996] else event.clientY < r.top
-            __O[2997] = ____temp_153
-            if ____t_155(if ____t_154(____temp_153) then __O[2997] else event.clientY > r.bottom) then
+            __O[2991] = ____temp_151
+            local ____temp_153 = if ____t_152(____temp_151) then __O[2991] else event.clientY < r.top
+            __O[2992] = ____temp_153
+            if ____t_155(if ____t_154(____temp_153) then __O[2992] else event.clientY > r.bottom) then
                 closeSandbox(nil)
             end
         end

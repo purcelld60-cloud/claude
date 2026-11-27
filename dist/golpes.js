@@ -2,8 +2,8 @@
    - Corpos medidos dos sprites (herói, chefes, capangas): caixa do corpo, sem aura, fumaça ou objeto na mão.
    - Cada golpe tem uma forma (círculo, caixa ou elipse) igual ao desenho dele; o acerto é "a forma encostou no corpo".
    - Os efeitos dos golpes (ondas de choque, erupções, fumaça, feixe, nuvem do peidão) são desenhados aqui, em pixel,
-     dentro dessas mesmas formas, sem efeitos prontos da pixelfx. O aviso antes do golpe mostra a área exata.
-   - Modo desenvolvedor: tecla H (ou ?hitbox no endereço) mostra as caixas por cima do jogo. */
+     dentro dessas mesmas formas, sem efeitos prontos da pixelfx. O aviso antes do golpe é o chão rachando na largura exata.
+   - Só para testes: ?hitbox no endereço mostra as caixas (nunca aparece no jogo normal nem nos apps). */
 (() => {
   'use strict';
   if (window.Golpes) return;
@@ -63,17 +63,15 @@
   };
   function paleta(h, pal) { return h.catarro || h.type === 'slime' ? PAL.gosma : h.brasa ? PAL.brasa : h.ink || h.type === 'ink' ? PAL.tinta : h.type === 'smoke' || h.smoke ? PAL.fumaca : h.type === 'astral' || h.astral ? PAL.astral : h.type === 'provoke' ? PAL.provoca : (pal || PAL.tinta); }
 
-  // aviso: mostra exatamente onde vai doer (contorno piscando + sombra no chão)
+  // aviso: o chão rachando e brilhando na largura exata do golpe (sem desenhar caixa)
   function aviso(h, t, pal, lite) {
-    const chao = chaoDo(h), pisca = .35 + .35 * Math.abs(Math.sin(t * 12));
+    const chao = chaoDo(h), pisca = .45 + .35 * Math.abs(Math.sin(t * 12));
     ctx.save();
     for (const b of perigoCaixas(h, chao)) {
-      const y0 = Math.max(b.y0, 0), w = b.x1 - b.x0;
-      ctx.globalAlpha = pisca * .22; px(b.x0, y0, w, chao - y0, pal[2]);
-      ctx.globalAlpha = pisca; px(b.x0, chao - 2, w, 3, pal[3]);
-      for (let y = chao - 4; y > y0; y -= 8) { px(b.x0, y, 2, 4, pal[2]); px(b.x1 - 2, y, 2, 4, pal[2]); }
-      px(b.x0, y0, w, 2, pal[2]);
-      if (!lite) for (let i = 0; i < 6; i++) { const k = (t * 1.4 + hsh(i + b.x0)) % 1; ctx.globalAlpha = (1 - k) * pisca; px(b.x0 + hsh(i * 7 + b.x0) * (w - 3), chao - 6 - k * Math.min(60, chao - y0 - 8), 3, 3, i % 2 ? pal[2] : pal[3]); }
+      const w = b.x1 - b.x0;
+      ctx.globalAlpha = pisca;
+      for (let x = b.x0; x < b.x1; x += 4) { const y = chao - 3 + Math.round(Math.sin(x * .37) * 1.2); px(x, y, 4, 2, pal[2]); if (hsh(x) > .78) px(x + 1, y - 2, 2, 2, pal[3]); }
+      if (!lite) for (let i = 0; i < 4; i++) { const k = (t * 1.5 + hsh(i + b.x0)) % 1; ctx.globalAlpha = (1 - k) * pisca * .8; px(b.x0 + hsh(i * 7 + b.x0) * (w - 2), chao - 5 - k * 14, 2, 2, pal[3]); }
     }
     ctx.restore();
   }
@@ -172,43 +170,32 @@
 
   // ---------- peidão: a nuvem é a área ----------
   let gases = [];
-  function gas(x, y, raio, estagio, dir) { gases.push({ ...areaGas(x, y, raio), estagio: estagio || 1, dir: dir < 0 ? -1 : 1, idade: 0, vida: .5 + (estagio || 1) * .08, seed: Math.random() * 100 }); if (gases.length > 6) gases.shift(); }
+  function gas(x, y, raio, estagio, dir) { gases.push({ ...areaGas(x, y, raio), estagio: estagio || 1, dir: dir < 0 ? -1 : 1, idade: 0, vida: .4 + (estagio || 1) * .05, seed: Math.random() * 100 }); if (gases.length > 6) gases.shift(); }
   function atualizar(dt) { for (const g of gases) g.idade += dt; gases = gases.filter((g) => g.idade < g.vida); }
-  const VERDE = ['#2f4a16', '#6f9a2e', '#9cc845', '#cde67a', '#f2f9c0'];
+  const VERDE = ['#4f7a24', '#8fbf3c', '#bfe06a', '#eaf6b0'];
   function desenharGas(c, t) {
     ctx = c;
     for (const g of gases) {
-      const p = g.idade / g.vida, abre = 1 - Math.pow(1 - clamp(g.idade / .16, 0, 1), 3), some = p > .55 ? 1 - (p - .55) / .45 : 1;
+      const p = g.idade / g.vida, abre = 1 - Math.pow(1 - clamp(g.idade / .12, 0, 1), 3), some = p > .4 ? 1 - (p - .4) / .6 : 1;
       const rx = g.rx * abre, ry = g.ry * abre; if (rx < 4) continue;
       c.save();
-      if (CHAO != null) { c.beginPath(); c.rect(g.cx - g.rx - 40, g.cy - g.ry - 60, g.rx * 2 + 80, CHAO - (g.cy - g.ry - 60)); c.clip(); }
-      // o volume da área (a nuvem inteira machuca)
-      c.globalAlpha = .32 * some; c.fillStyle = VERDE[2]; c.beginPath(); c.ellipse(g.cx, g.cy, rx, ry, 0, 0, Math.PI * 2); c.fill();
-      c.globalAlpha = (g.estagio === 3 ? .95 : .85) * some;
-      const base = Math.min(rx, ry) * .3 + 5, nb = Math.round(12 + g.rx / 12), enc = p > .55 ? 1 - (p - .55) * .9 : 1;
-      // bolhas da borda: a beirada da nuvem é a beirada da área
-      for (let i = 0; i < nb; i++) {
-        const an = i / nb * Math.PI * 2 + g.seed, br = base * (.75 + .5 * hsh(i + g.seed)) * enc, bal = Math.sin(t * 5 + i) * 1.5;
-        const x = g.cx + Math.cos(an) * (rx - br) + bal, y = g.cy + Math.sin(an) * (ry - br);
-        bolha(x, y, br, Math.sin(an) > .2 ? VERDE[1] : VERDE[2], VERDE[0]);
+      if (CHAO != null) { c.beginPath(); c.rect(g.cx - g.rx - 30, g.cy - g.ry - 40, g.rx * 2 + 60, CHAO - (g.cy - g.ry - 40)); c.clip(); }
+      // bolinhas soltas e transparentes: a borda delas é a borda da área, mas o cenário continua aparecendo
+      const n = Math.round(8 + g.rx / 18), base = ry * .38 + 3;
+      for (let i = 0; i < n; i++) {
+        const an = i / n * Math.PI * 2 + g.seed, br = base * (.7 + .45 * hsh(i + g.seed)) * (1 - p * .25), sobe = p * 8;
+        const x = g.cx + Math.cos(an) * (rx - br), y = g.cy + Math.sin(an) * (ry - br) - sobe;
+        c.globalAlpha = some * .5; bolha(x, y, br, Math.sin(an) > .2 ? VERDE[1] : VERDE[2]);
+        c.globalAlpha = some * .6; bolha(x - br * .25, y - br * .3, br * .3, VERDE[3]);
       }
-      // miolo
-      for (let anel = 0; anel < 2; anel++) for (let i = 0; i < nb - 4; i++) {
-        const an = i / (nb - 4) * Math.PI * 2 + g.seed + anel * .4, f = anel ? .3 : .62, br = base * (.8 + .4 * hsh(i * 3 + anel)) * enc;
-        const x = g.cx + Math.cos(an) * (rx - br) * f, y = g.cy + Math.sin(an) * (ry - br) * f;
-        bolha(x, y, br, Math.sin(an) > .3 ? VERDE[2] : VERDE[3]);
-      }
-      // brilho em cima de cada bolha da borda de cima
-      for (let i = 0; i < nb; i++) { const an = i / nb * Math.PI * 2 + g.seed; if (Math.sin(an) > -.2) continue; const br = base * (.75 + .5 * hsh(i + g.seed)) * enc, x = g.cx + Math.cos(an) * (rx - br), y = g.cy + Math.sin(an) * (ry - br); bolha(x - br * .25, y - br * .35, br * .35, VERDE[4]); }
-      // pontinhos subindo (no combo 3, faíscas douradas)
-      for (let i = 0; i < 10; i++) { const k = (t * 1.4 + i / 10) % 1, x = g.cx + (hsh(i + g.seed) - .5) * rx * 1.5, y = g.cy + (hsh(i * 3 + g.seed) - .5) * ry * 1.2 - k * 14; if (((x - g.cx) / rx) ** 2 + ((y - g.cy) / ry) ** 2 < .9) px(x, y, 3, 3, g.estagio === 3 && i % 2 ? '#ffe08a' : VERDE[4]); }
+      for (let i = 0; i < 4; i++) { const an = i / 4 * Math.PI * 2 + g.seed + .6, br = base * .8, x = g.cx + Math.cos(an) * rx * .35, y = g.cy + Math.sin(an) * ry * .35 - p * 6; c.globalAlpha = some * .35; bolha(x, y, br, VERDE[2]); }
+      if (g.estagio === 3) for (let i = 0; i < 6; i++) { const k = (t * 1.6 + i / 6) % 1, x = g.cx + (hsh(i + g.seed) - .5) * rx * 1.4, y = g.cy + (hsh(i * 3 + g.seed) - .5) * ry - k * 10; c.globalAlpha = some * (1 - k); px(x, y, 2, 2, '#ffe08a'); }
       c.restore();
     }
   }
 
   // ---------- caixas de acerto na tela (modo desenvolvedor) ----------
   let mostrar = /[?&]hitbox\b/.test(location.search);
-  addEventListener('keydown', (ev) => { if ((ev.key === 'h' || ev.key === 'H') && window.DAROCA_DEV && !ev.repeat && !/input|textarea/i.test(ev.target?.tagName || '')) mostrar = !mostrar; });
   function contorno(c, b, cor) { c.strokeStyle = cor; c.lineWidth = 1; c.strokeRect(Math.round(b.x0) + .5, Math.round(b.y0) + .5, Math.round(b.x1 - b.x0), Math.round(b.y1 - b.y0)); }
   function desenharCaixas(c, s) {
     if (!mostrar || !c || !s) return;
