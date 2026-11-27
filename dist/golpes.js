@@ -127,12 +127,16 @@
     px(h.x - h.r, chao - 3, L, 3, pal[0]);
     if (!lite) for (let i = 0; i < 6; i++) { const k = (t * 2.2 + i / 6) % 1; ctx.globalAlpha = 1 - k; px(h.x - h.r + hsh(i * 3 + h.x) * (L - 3), chao - 10 - k * (alt - 14), 3, 3, pal[3]); ctx.globalAlpha = 1; }
   }
-  function nuvemChao(h, chao, t, pal) { // nuvem de fumaça enchendo [x-r, x+r] x [chao-80, chao]
-    const alt = ALT.chao, cols = Math.max(2, Math.round(h.r / 16)), linhas = 3;
-    for (let j = 0; j < linhas; j++) for (let i = 0; i < cols; i++) {
-      const r = Math.min(h.r / cols + 4, alt / (linhas * 2) + 4), x = h.x - h.r + r + i * ((h.r * 2 - 2 * r) / Math.max(1, cols - 1)), y = chao - r - j * ((alt - 2 * r) / (linhas - 1)) + Math.sin(t * 3 + i + j) * 2;
-      bolha(x, y, r, pal[1], pal[0]); bolha(x - 2, y - 3, r * .55, pal[2]); px(x - r * .4, y - r * .5, 3, 3, pal[3]);
+  function nuvemChao(h, chao, t, pal) { // fumaça do Dedé: rolos desencontrados, base escura, topo claro, cinza e brasa
+    const alt = ALT.chao, f = Q(t, 8), n = Math.max(3, Math.round(h.r / 13));
+    for (let j = 0; j < 4; j++) for (let i = 0; i <= n - (j % 2); i++) {
+      const u = (i + (j % 2 ? .5 : 0)) / Math.max(1, n), r = Math.min(h.r / n + 4, 15) * (.75 + .35 * hsh(i * 7 + j * 3)) * (1 - j * .14);
+      const x = h.x - h.r + r + u * (h.r * 2 - 2 * r) + Math.sin(t * 2 + i + j) * 1.5, y = chao - r - j * (alt - 2 * r) / 3.4 - ((f + i * 2 + j) % 3);
+      if (y - r < chao - alt || x - r < h.x - h.r - 1 || x + r > h.x + h.r + 1) continue;
+      bolha(x, y, r, j < 2 ? pal[1] : pal[2], j === 0 ? pal[0] : null);
+      bolha(x - r * .3, y - r * .35, r * .42, j < 2 ? pal[2] : pal[3]);
     }
+    for (let i = 0; i < 6; i++) { const k = (t * .7 + i / 6) % 1, x = h.x - h.r + 4 + hsh(i * 5) * (h.r * 2 - 8), y = chao - 6 - k * (alt - 10); px(x, y, 2, 2, i % 3 ? '#9a948c' : '#ff8a30'); }
   }
   function brasas(h, chao, t, pal) { // chão em brasa com labaredas até 40 px
     const n = Math.max(4, Math.round(h.r / 5));
@@ -154,17 +158,171 @@
     px(h.x - h.r, chao - ALT.chao, h.r * 2, 2, pal[3]); px(h.x - h.r, chao - 3, h.r * 2, 3, pal[1]);
     for (let i = 0; i < 6; i++) { const x = h.x - h.r + 12 + i * (h.r * 2 - 24) / 5, y = chao - 10 - ((t * 90 + i * 23) % (ALT.chao - 20)); px(x - 1, y, 3, 10, pal[3]); px(x - 4, y + 2, 9, 2, pal[3]); px(x - 3, y + 1, 7, 1, pal[3]); }
   }
-  function desenharPerigo(c, h, t, lite, pal) {
+  // ======================================================================
+  // ESTILO DE CADA PERSONAGEM (forma e cor do poder dele; sempre dentro da área do golpe)
+  // Regras: forma reconhecível mesmo sem cor; clarão curto no impacto, forma forte, resto que some
+  // com pouco contraste; animação em degraus (~12 quadros/s), como pixel art de verdade.
+  // ======================================================================
+  const Q = (t, fps = 12) => Math.floor(t * fps);
+  const DONO = { freddy: 'soco', igor: 'comida', arthur: 'tapa', marco: 'tinta', giant: 'papel', menezes: 'esgoto', nicolas: 'astral', reeisBoss: 'ouro', kaique: 'laser', dede: 'fumaca', nikolas: 'gosma' };
+  function estiloDe(h, dono) {
+    if (h.catarro || h.type === 'slime') return 'gosma';
+    if (h.smoke || h.type === 'smoke') return 'fumaca';
+    if (h.astral || h.type === 'astral') return 'astral';
+    if (h.ink || h.type === 'ink') return dono === 'giant' ? 'papel' : 'tinta';
+    return DONO[h.dono || dono] || 'pedra';
+  }
+  const COR = {
+    soco: ['#2e2824', '#5e544c', '#948a7e', '#d6ccbe', '#ff9a3a'], poeira: ['#7a6448', '#b09a78', '#dcc8a4'],
+    comida: ['#5a2e14', '#a85a24', '#e8a040', '#fff0b0'], tapa: ['#5a7aa8', '#a8c8f0', '#e8f4ff', '#ffffff'],
+    tinta: ['#140a22', '#3a1e5a', '#7a4ab8', '#d6b8f8'], papel: ['#2a3a6a', '#c8d4ea', '#f4f2ea', '#e05a5a'],
+    esgoto: ['#1e2614', '#3e4a22', '#6a7a36', '#c8d8a0'], astral: ['#1c3a68', '#3f7fc0', '#9de5ec', '#fffbe0'],
+    ouro: ['#5a3a08', '#b8860b', '#f2c94c', '#fff6c0'], laser: ['#3a0612', '#e02a4a', '#ff8aa0', '#bff6ff']
+  };
+  // clarão do impacto: os primeiros instantes do golpe (só dentro da área)
+  function clarao(b, idade, cor) { const a = 1 - idade / .1; if (a <= 0) return; ctx.save(); ctx.globalAlpha = a * .75; px(b.x0, b.y0, b.x1 - b.x0, b.y1 - b.y0, cor); ctx.restore(); }
+  function lasca(x, y, w, h, cores, seed) { // pedra angulosa em degraus
+    for (let yy = 0; yy < h; yy += 3) { const k = yy / h, ww = Math.max(2, w * (1 - k * .8) + (hsh(seed + yy) - .5) * 3); px(x - ww / 2 + (hsh(seed * 3 + yy) - .5) * 2, y - yy - 3, ww, 3, k < .2 ? cores[0] : k < .55 ? cores[1] : k < .85 ? cores[2] : cores[3]); }
+  }
+  function pizza(x, y, s, giro) { // fatia de pizza (forma de triângulo, mesmo sem cor)
+    const pontos = giro % 2 ? [[0, -s], [s, s], [-s, s]] : [[-s, -s], [s, -s], [0, s]];
+    ctx.fillStyle = '#e8a040'; ctx.beginPath(); pontos.forEach((p, i) => i ? ctx.lineTo(x + p[0], y + p[1]) : ctx.moveTo(x + p[0], y + p[1])); ctx.closePath(); ctx.fill();
+    px(x - 1, y - 1, 2, 2, '#c83a2a'); px(x + 1, y + 1, 1, 1, '#c83a2a'); px(x - s, y + (giro % 2 ? s - 1 : -s), s * 2, 1, '#a85a24');
+  }
+  function coxinha(x, y, s) { bolha(x, y + 1, s, '#c8641e', '#5a2e14'); px(x - 1, y - s - 1, 2, 2, '#e8a040'); px(x - s * .4, y - s * .3, 2, 1, '#fff0b0'); }
+  function moeda(x, y, giro) { const w = [5, 3, 1, 3][giro % 4]; px(x - w, y - 4, w * 2 + 1, 8, '#b8860b'); px(x - w + 1, y - 3, Math.max(1, w * 2 - 1), 6, '#f2c94c'); if (w > 2) px(x - 1, y - 2, 1, 3, '#fff6c0'); }
+  function brilho4(x, y, r, cor) { px(x - r, y, r * 2 + 1, 1, cor); px(x, y - r, 1, r * 2 + 1, cor); px(x - 1, y - 1, 3, 3, cor); }
+  function ratinho(x, y, dir) { px(x - 4, y - 3, 8, 3, '#4a4448'); px(x + dir * 3, y - 4, 3, 2, '#5a5458'); px(x + dir * 5, y - 3, 1, 1, '#e88a9a'); px(x - dir * 6, y - 2, 3, 1, '#e88a9a'); }
+
+  // cristas (onda que corre pelo chão): [cx-13, cx+13] x [chao-58, chao]
+  const CRISTA = {
+    soco(h, cx, dir, chao, t, lite) { // soco do Freddy: o chão de cimento racha e lascas sobem, com poeira
+      const M = ONDA.meia, A = ONDA.alt, f = Q(t), C = COR.soco, P = COR.poeira;
+      const alt = [.55, 1, .72], larg = [9, 11, 8];
+      for (let i = 0; i < 3; i++) { const x = cx + (i - 1) * 8 * dir; lasca(x, chao, larg[i], A * alt[i] * (.92 + .08 * ((f + i) % 2)), C, i * 7 + Math.round(h.r)); }
+      px(cx + dir * (M - 3), chao - A * .7, 2, A * .5, C[4]); // borda quente do impacto
+      for (let i = 0; i < 3; i++) { const yy = chao - 8 - ((f * 5 + i * 13) % 22); bolha(cx - dir * (4 + i * 3), yy, 4 + (f + i) % 2, P[1], P[0]); }
+      if (!lite) for (let i = 0; i < 4; i++) { const k = ((t * 2.5 + i / 4) % 1), y = chao - 6 - Math.sin(k * Math.PI) * (A - 10); px(cx + (hsh(i + f) - .5) * 2 * (M - 2), y, 3, 3, C[(i % 2) + 1]); }
+    },
+    comida(h, cx, dir, chao, t, lite) { // barriga do Igor: o chão balança como gelatina e a comida pula
+      const M = ONDA.meia, A = ONDA.alt, f = Q(t), C = COR.comida, bal = Math.sin(t * 22) * 4;
+      for (let x = -M; x < M; x += 3) { const k = 1 - Math.abs(x) / M, a = Math.max(3, (A * .45) * k + bal * k); for (let y = 0; y < a; y += 3) px(cx + x, chao - y - 3, 3, 3, y < 4 ? C[0] : y / a < .6 ? C[1] : C[2]); }
+      const itens = lite ? 2 : 3;
+      for (let i = 0; i < itens; i++) { const k = ((t * 1.8 + i / itens) % 1), y = chao - A * .45 - Math.sin(k * Math.PI) * (A * .5), x = cx + (i - 1) * 7 * dir; if (i % 2) pizza(x, y, 4, f + i); else coxinha(x, y, 3); }
+      for (let i = 0; i < 4; i++) px(cx + (hsh(i * 3 + f) - .5) * 2 * M, chao - 4 - hsh(i + f) * (A - 8), 2, 2, C[3]);
+    },
+    tapa(h, cx, dir, chao, t) { // tapa do Arthur: arcos de ar empurrados (forma de lua crescente)
+      const A = ONDA.alt, f = Q(t), C = COR.tapa;
+      for (let j = 0; j < 3; j++) {
+        const alt = A * (1 - j * .22), off = (2 - j) * 4 * dir;
+        for (let y = 0; y < alt; y += 2) { const u = y / alt, bulge = Math.sin(u * Math.PI) * 7; ctx.globalAlpha = .95 - j * .25; px(cx + off + dir * bulge - 1, chao - y - 2, 2, 2, j ? C[2] : C[3]); }
+      }
+      ctx.globalAlpha = 1;
+      for (let i = 0; i < 3; i++) { const y = chao - 10 - ((f * 6 + i * 17) % (A - 14)); px(cx - dir * 8, y, 4, 1, C[1]); }
+    },
+    tinta(h, cx, dir, chao, t, lite) { // rabiscos do Marco: onda de tinta com riscos de lápis
+      const M = ONDA.meia, A = ONDA.alt, f = Q(t), C = COR.tinta;
+      for (let x = -M; x < M; x += 3) { const k = (x * dir + M) / (2 * M), a = A * (.35 + .65 * Math.sin(k * Math.PI * .5)) * (.94 + .06 * ((f + x) % 2)); for (let y = 0; y < a; y += 3) px(cx + x, chao - y - 3, 3, 3, y / a < .3 ? C[0] : y / a < .8 ? C[1] : C[2]); }
+      ctx.strokeStyle = C[3]; ctx.lineWidth = 1; ctx.beginPath(); for (let i = 0; i < 6; i++) { const y = chao - 8 - i * 8, x0 = cx - M + 3 + ((f + i) % 3); ctx.moveTo(x0, y); ctx.lineTo(x0 + 7, y - 4); ctx.lineTo(x0 + 13, y + 1); ctx.lineTo(x0 + 20, y - 3); } ctx.stroke();
+      if (!lite) for (let i = 0; i < 3; i++) { const y = chao - A + 2 + ((f * 4 + i * 9) % 16); bolha(cx + (i - 1) * 7, y, 2, C[1]); }
+    },
+    papel(h, cx, dir, chao, t) { // Caderno do Caos: folhas de caderno rasgadas subindo
+      const A = ONDA.alt, f = Q(t), C = COR.papel;
+      for (let i = 0; i < 4; i++) { const k = ((t * 1.6 + i / 4) % 1), y = chao - 6 - k * (A - 14), x = cx + (hsh(i * 5) - .5) * 14, w = 9, hh = 11, inc = ((f + i) % 3) - 1;
+        px(x - w / 2, y - hh, w, hh, C[2]); for (let l = 2; l < hh; l += 3) px(x - w / 2, y - hh + l, w, 1, C[1]); px(x - w / 2 + 2, y - hh, 1, hh, C[3]); px(x - w / 2 + inc, y - hh - 1, w, 1, C[0]); }
+      lasca(cx, chao, 12, A * .45, [C[0], '#4a4a6a', C[1], C[2]], 3);
+    },
+    esgoto(h, cx, dir, chao, t, lite) { // Menezes: onda de esgoto com espuma (e um rato surfando)
+      const M = ONDA.meia, A = ONDA.alt, f = Q(t), C = COR.esgoto;
+      for (let x = -M; x < M; x += 3) { const k = (x * dir + M) / (2 * M), a = A * .85 * Math.pow(Math.sin(k * Math.PI * .5), .8) * (.95 + .05 * ((f + x) % 2)); for (let y = 0; y < a; y += 3) px(cx + x, chao - y - 3, 3, 3, y / a < .3 ? C[0] : y / a < .75 ? C[1] : C[2]); }
+      for (let s2 = 0; s2 < 5; s2++) px(cx + dir * (M - 5 - s2 * 2), chao - A * .85 - (s2 % 2) * 2, 3, 2, C[3]); // espuma na crista
+      ratinho(cx - dir * 2, chao - A * .85 - 4, dir);
+      if (!lite) for (let i = 0; i < 3; i++) { const yy = chao - 8 - ((t * 30 + i * 13) % (A * .6)); bolha(cx + (i - 1) * 6, yy, 1.5, C[3]); }
+    },
+    astral(h, cx, dir, chao, t) { // Nicolas: parede de luz das estrelas
+      const M = ONDA.meia, A = ONDA.alt, f = Q(t), C = COR.astral;
+      for (let x = -M; x < M; x += 3) { const k = 1 - Math.abs(x + 1.5) / M; for (let y = 0; y < A; y += 3) px(cx + x, chao - y - 3, 3, 3, k > .75 ? C[3] : k > .45 ? C[2] : k > .2 ? C[1] : C[0]); }
+      for (let i = 0; i < 4; i++) { const y = chao - 8 - ((f * 5 + i * 13) % (A - 12)), x = cx + (hsh(i + 2) - .5) * (2 * M - 8); brilho4(x, y, 1 + (f + i) % 2, '#ffffff'); }
+    },
+    ouro(h, cx, dir, chao, t) { // Reeis: onda de ouro com moedas girando
+      const M = ONDA.meia, A = ONDA.alt, f = Q(t), C = COR.ouro;
+      for (let x = -M; x < M; x += 3) { const k = 1 - Math.abs(x) / M, a = A * .5 * k + 6; for (let y = 0; y < a; y += 3) px(cx + x, chao - y - 3, 3, 3, y < 4 ? C[0] : y / a < .7 ? C[1] : C[2]); }
+      for (let i = 0; i < 3; i++) { const k = ((t * 1.5 + i / 3) % 1), y = chao - A * .5 - Math.sin(k * Math.PI) * (A * .45); moeda(cx + (i - 1) * 7, y, f + i); }
+      brilho4(cx + dir * 4, chao - A + 6 + (f % 3) * 3, 2, C[3]);
+    },
+    laser(h, cx, dir, chao, t) { // Kaique (monitor): varredura de laser com linhas de leitura
+      const M = ONDA.meia, A = ONDA.alt, f = Q(t, 16), C = COR.laser;
+      for (let x = -M; x < M; x += 4) { const forte = (x + M + f * 4) % 12 < 4; px(cx + x, chao - A, 2, A, forte ? C[1] : C[0]); if (forte) px(cx + x, chao - A, 1, A, C[2]); }
+      for (let y = chao - A; y < chao; y += 6) px(cx - M, y + (f % 2) * 3, 2 * M, 1, C[3]);
+      px(cx - M, chao - A, 2 * M, 2, C[2]);
+    }
+  };
+  // erupções no chão por estilo: [x-r, x+r] x [chao-alt, chao]
+  const CHAO_ESTILO = {
+    tinta(h, chao, t, alt, lite) { // lápis do Marco furando o chão, com pingos de tinta
+      const n = Math.max(3, Math.round(h.r * 2 / 14)), f = Q(t);
+      for (let i = 0; i < n; i++) { const x = h.x - h.r + 7 + i * (h.r * 2 - 14) / Math.max(1, n - 1), a = alt * (i % 2 ? .82 : 1) * (.95 + .05 * ((f + i) % 2)), w = 6;
+        px(x - w / 2, chao - a + 10, w, a - 10, '#f2c94c'); px(x - w / 2, chao - a + 10, 2, a - 10, '#c89a2a'); px(x - w / 2, chao - 8, w, 4, '#9aa0a6'); px(x - w / 2, chao - 4, w, 4, '#e88a9a');
+        for (let k = 0; k < 7; k++) px(x - (w / 2) * (1 - k / 7), chao - a + 10 - k, w * (1 - k / 7), 1, k < 4 ? '#e8c8a0' : '#2a2a2a'); }
+      px(h.x - h.r, chao - 3, h.r * 2, 3, COR.tinta[0]);
+      if (!lite) for (let i = 0; i < 5; i++) bolha(h.x - h.r + hsh(i * 7 + f) * h.r * 2, chao - 4 - hsh(i + f) * 14, 2, COR.tinta[1]);
+    },
+    papel(h, chao, t, alt) { // páginas do caderno saltando do chão
+      const n = Math.max(3, Math.round(h.r * 2 / 16)), f = Q(t), C = COR.papel;
+      for (let i = 0; i < n; i++) { const x = h.x - h.r + 8 + i * (h.r * 2 - 16) / Math.max(1, n - 1), a = alt * (i % 2 ? .78 : 1), w = 12, inc = ((f + i) % 3) - 1;
+        px(x - w / 2 + inc, chao - a, w, a, C[2]); for (let l = 4; l < a; l += 4) px(x - w / 2 + inc, chao - a + l, w, 1, C[1]); px(x - w / 2 + 2 + inc, chao - a, 1, a, C[3]); px(x - w / 2 + inc, chao - a, w, 1, C[0]); }
+    },
+    esgoto(h, chao, t, alt, lite) { // bueiro estourando: tampa de ferro e coluna de esgoto
+      const f = Q(t), C = COR.esgoto;
+      for (let x = h.x - h.r; x < h.x + h.r; x += 3) { const k = 1 - Math.abs(x + 1.5 - h.x) / h.r, a = alt * (.55 + .45 * k) * (.94 + .06 * ((f + x) % 2)); for (let y = 0; y < a; y += 3) px(x, chao - y - 3, 3, 3, y / a < .25 ? C[0] : y / a < .7 ? C[1] : y / a < .92 ? C[2] : C[3]); }
+      px(h.x - 12, chao - 4, 24, 4, '#2a2a2e'); px(h.x - 10, chao - 3, 20, 1, '#5a5a62');
+      ratinho(h.x - h.r + 8 + ((f * 3) % Math.max(1, h.r * 2 - 16)), chao - alt + 6, 1);
+      if (!lite) for (let i = 0; i < 6; i++) { const k = (t * 2 + i / 6) % 1; bolha(h.x + (hsh(i) - .5) * h.r * 1.6, chao - alt + 4 + k * 10, 2, C[3]); }
+    },
+    comida(h, chao, t, alt) { // comida brotando do chão (barriga do Igor)
+      const f = Q(t), n = Math.max(3, Math.round(h.r * 2 / 14));
+      for (let i = 0; i < n; i++) { const x = h.x - h.r + 7 + i * (h.r * 2 - 14) / Math.max(1, n - 1); lasca(x, chao, 10, alt * (i % 2 ? .7 : .95), COR.comida, i * 3); if (i % 2) pizza(x, chao - alt * .7 - 4, 4, f + i); else coxinha(x, chao - alt * .95 - 3, 3); }
+    },
+    ouro(h, chao, t, alt) { // pilha de ouro e moedas
+      const f = Q(t), C = COR.ouro;
+      for (let x = h.x - h.r; x < h.x + h.r; x += 3) { const k = 1 - Math.abs(x + 1.5 - h.x) / h.r, a = alt * (.3 + .7 * k); for (let y = 0; y < a; y += 3) px(x, chao - y - 3, 3, 3, y / a < .3 ? C[0] : y / a < .8 ? C[1] : C[2]); }
+      for (let i = 0; i < 4; i++) moeda(h.x + (hsh(i * 3) - .5) * h.r * 1.4, chao - alt * .5 - ((t * 40 + i * 11) % (alt * .45)), f + i);
+    },
+    laser(h, chao, t, alt) { // grade de laser subindo do chão
+      const f = Q(t, 16), C = COR.laser;
+      for (let x = h.x - h.r; x < h.x + h.r; x += 6) { px(x, chao - alt, 2, alt, ((x + f * 6) % 18) < 6 ? C[1] : C[0]); }
+      for (let y = chao - alt; y < chao; y += 8) px(h.x - h.r, y + (f % 2) * 4, h.r * 2, 1, C[2]);
+      px(h.x - h.r, chao - alt, h.r * 2, 2, C[3]);
+    },
+    soco(h, chao, t, alt) { // lascas de cimento (soco no chão)
+      const n = Math.max(3, Math.round(h.r * 2 / 12));
+      for (let i = 0; i < n; i++) { const x = h.x - h.r + 6 + i * (h.r * 2 - 12) / Math.max(1, n - 1); lasca(x, chao, 12, alt * (i % 2 ? .75 : 1), COR.soco, i * 5); }
+    }
+  };
+
+  function desenharPerigo(c, h, t, lite, pal, dono) {
     if (!c || !h) return false;
     if (h.height && h.type !== 'astral' && h.delay <= 0) return false; // pilares de palavras: o desenho do jogo já é a área exata
     ctx = c; const p = paleta(h, pal), chao = chaoDo(h);
+    if (dono && !h.dono) h.dono = dono;
     if (h.delay > 0) { aviso(h, t, p, lite); return true; }
-    if (h.type === 'ring') { for (const dir of [-1, 1]) { rastro(h, dir, chao, p); crista(h, h.x + dir * h.r, dir, chao, t, p, lite); } return true; }
+    if (h.__t0 == null) h.__t0 = t;
+    const idade = t - h.__t0, estilo = estiloDe(h, dono);
+    if (h.type === 'ring') {
+      for (const dir of [-1, 1]) {
+        rastro(h, dir, chao, p);
+        const cx = h.x + dir * h.r, f = CRISTA[estilo];
+        if (f) f(h, cx, dir, chao, t, lite); else crista(h, cx, dir, chao, t, p, lite);
+        clarao(caixa(cx - ONDA.meia, chao - ONDA.alt, cx + ONDA.meia, chao), idade, '#ffffff');
+      }
+      return true;
+    }
     if (h.type === 'astral') feixe(h, chao, t, p);
     else if (h.brasa) brasas(h, chao, t, p);
     else if (h.type === 'smoke') nuvemChao(h, chao, t, p);
     else if (h.type === 'provoke') zonaProvoca(h, chao, t, p);
-    else erupcao(h, chao, t, p, lite);
+    else { const f = CHAO_ESTILO[estilo]; if (f) f(h, chao, t, h.height || ALT.chao, lite); else erupcao(h, chao, t, p, lite); }
+    for (const b of perigoCaixas(h, chao)) clarao({ x0: b.x0, y0: Math.max(0, b.y0), x1: b.x1, y1: b.y1 - 2 }, idade, '#ffffff');
     return true;
   }
 

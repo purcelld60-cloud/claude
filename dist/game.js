@@ -739,7 +739,7 @@
   function spike(x,base,h,pal,seed){const w=6+(seed%2)*2;for(let yy=0;yy<h;yy+=4){const k=1-yy/h,ww=Math.max(2,Math.round(w*k));px(x-ww/2,base-yy-4,ww,4,yy<4?pal[0]:k<.35?pal[3]:k<.7?pal[2]:pal[1]);}px(x-1,base-h-2,2,2,pal[3]);}
   function crack(x0,x1,pal,a){ctx.save();ctx.globalAlpha=a;let y=FLOOR-3;for(let x=x0;x<x1;x+=4){y=FLOOR-3+Math.round(Math.sin(x*.37)*1.4);px(x,y,4,2,pal[2]);if(hsh(x)>.8)px(x+1,y-2,2,2,pal[3]);}ctx.restore();}
   function drawHazardPixel(h){
-    const pal=hazPal(h),t=time,lite=!!window.Graphics?.isLite?.();if(window.Golpes?.desenharPerigo?.(ctx,h,t,lite,pal))return;
+    const pal=hazPal(h),t=time,lite=!!window.Graphics?.isLite?.();if(window.Golpes?.desenharPerigo?.(ctx,h,t,lite,pal,activeBoss?.type))return;
     if(h.delay>0){ // warning: pulsing ground cracks + rising embers
       const blink=.45+.35*Math.abs(Math.sin(t*14));
       if(h.type==='ring'){crack(h.x-46,h.x+46,pal,blink);}
