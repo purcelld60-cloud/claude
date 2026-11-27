@@ -22,8 +22,10 @@ falas, menus e botões. Não é uma adaptação: o código do jogo (`dist/*.js`)
 
 ## Controles
 
-Ao abrir, aparece a página **COMO JOGAR** com cada botão no PC, no Xbox e no PlayStation (botão `?` no canto ou
-**Exibir/Share** no controle para ver de novo).
+Antes de jogar aparece um **guia do aparelho que o jogador está usando**: teclado (PC), controle de Xbox ou controle
+de PlayStation (o Roblox informa os nomes dos botões; no PlayStation aparecem ✕ ○ □ △). Se o jogador ligar um controle
+no meio do jogo, o guia do controle aparece uma vez. Para ver de novo: **F1** no PC, **View/Share** no controle ou o
+botão `?` no canto. No celular não aparece guia: os botões de toque são os do próprio jogo.
 
 | Ação | PC | Xbox | PlayStation |
 | --- | --- | --- | --- |

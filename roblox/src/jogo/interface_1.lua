@@ -3,6 +3,10 @@ local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
 --!nocheck
+local __JSR = require(script.Parent.Parent.runtime.js)
+local window = __JSR.window
+local tostring = __JSR.__str
+--!nocheck
 return function(I)
 I.pc["#gameShell"] = {x=0,y=0,w=960,h=540,o=3,z=1,op=1,tag="section",est="inicio",px=0,py=0,pw=960,ph=540,pele=1,estados={inicio={0,0,960,540},jogar={0,0,960,540},cena={0,0,960,540},jogo={0,0,960,540},dialogo={0,0,960,540},pausa={0,0,960,540},dados={0,0,960,540},inventario={0,0,960,540},viagem={0,0,960,540},opcoes={0,0,960,540}},vis="1111111111"}
 I.pc["#gameViewport"] = {x=0,y=8,w=960,h=532,o=22,z=0,op=1,tag="div",est="viagem",px=0,py=8,pw=960,ph=532,pele=2,estados={inicio={0,0,960,540},jogar={0,0,960,540},cena={0,0,960,540},jogo={0,0,960,540},dialogo={0,0,960,540},pausa={0,8,960,532},dados={0,8,960,532},inventario={0,0,960,540},viagem={0,8,960,532},opcoes={0,8,960,532}},vis="1111111111"}
