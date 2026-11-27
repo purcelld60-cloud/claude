@@ -11,6 +11,10 @@ local Fonte = require(script and script.Parent and script.Parent:FindFirstChild(
 local floor, ceil, max, min, sqrt, abs, cos, sin, pi, huge = math.floor, math.ceil, math.max, math.min, math.sqrt, math.abs, math.cos, math.sin, math.pi, math.huge
 local criarTabela = table.create or function(n, v) local t = {}; for i = 1, n do t[i] = v end; return t end
 local C = {}
+-- Pausa durante o carregamento: o Roblox derruba um script que passa ~10 s sem pausar ("Script timeout").
+-- O hospedeiro põe em C.ceder uma função que pausa um quadro se já faz tempo (só enquanto carrega).
+local contaPausa = 0
+local function pausa() contaPausa = contaPausa + 1; if contaPausa >= 48 then contaPausa = 0; local f = C.ceder; if f then f() end end end
 -- listas de pixels do getImageData (o navegador simulado troca por Uint8ClampedArray)
 C.novaLista = function(n) local d = {}; for k = 1, n do d[k] = 0 end; return d end
 local OPACO = 4278190080 -- 255 * 16777216
@@ -392,7 +396,7 @@ function C.contexto(cv)
     api.moveTo(x + r, y); api.lineTo(x + w - r, y); arco(x + w - r, y + r, r, r, 0, -pi / 2, 0); api.lineTo(x + w, y + h - r); arco(x + w - r, y + h - r, r, r, 0, 0, pi / 2)
     api.lineTo(x + r, y + h); arco(x + r, y + h - r, r, r, 0, pi / 2, pi); api.lineTo(x, y + r); arco(x + r, y + r, r, r, 0, pi, 3 * pi / 2); api.closePath() end
   local function poligonosDoCaminho() local polys = {}; for _, s in ipairs(caminho) do if #s >= 3 then polys[#polys + 1] = s end end; return polys end
-  ctx.fill = function(a, b) local regra = type(a) == "string" and a or (type(b) == "string" and b or "nonzero"); preencherPoligonos(poligonosDoCaminho(), estiloDe(ctx.fillStyle), regra) end
+  ctx.fill = function(a, b) pausa(); local regra = type(a) == "string" and a or (type(b) == "string" and b or "nonzero"); preencherPoligonos(poligonosDoCaminho(), estiloDe(ctx.fillStyle), regra) end
 
   -- pinta uma máscara (pixels marcados) com um estilo
   local function pintarMascara(alvo, e)
@@ -414,6 +418,7 @@ function C.contexto(cv)
   end
   -- traço: cada segmento vira um quadrilátero; todos entram numa máscara e pintam uma vez só
   ctx.stroke = function()
+    pausa()
     local lw = (tonumber(ctx.lineWidth) or 1) * escalaAtual() / 2; if lw <= 0 then return end
     local alvo = {}
     local cap, join = ctx.lineCap, ctx.lineJoin
@@ -456,7 +461,7 @@ function C.contexto(cv)
       preencherPoligonos({ p }, estilo, "nonzero")
     end
   end
-  ctx.fillRect = function(x, y, w, h) retangulo(tonumber(x) or 0, tonumber(y) or 0, tonumber(w) or 0, tonumber(h) or 0, estiloDe(ctx.fillStyle)) end
+  ctx.fillRect = function(x, y, w, h) pausa(); retangulo(tonumber(x) or 0, tonumber(y) or 0, tonumber(w) or 0, tonumber(h) or 0, estiloDe(ctx.fillStyle)) end
   ctx.clearRect = function(x, y, w, h) retangulo(tonumber(x) or 0, tonumber(y) or 0, tonumber(w) or 0, tonumber(h) or 0, nil, true) end
   ctx.strokeRect = function(x, y, w, h) local c0, s0 = caminho, sub; api.beginPath(); api.rect(x, y, w, h); api.stroke(); caminho = c0; sub = s0 end
 
@@ -499,6 +504,7 @@ function C.contexto(cv)
 
   -- imagens entre canvas (vizinho mais próximo, como o jogo usa)
   ctx.drawImage = function(img, a1, a2, a3, a4, a5, a6, a7, a8)
+    pausa()
     if type(img) ~= "table" or not img._ then return end
     local S = img._; local sw0, sh0 = S.w, S.h; if sw0 == 0 or sh0 == 0 then return end
     local sx, sy, sw, sh, dx, dy, dw, dh
@@ -580,6 +586,7 @@ function C.contexto(cv)
   -- pixels crus (pixelfx e alguns efeitos usam isto)
   ctx.createImageData = function(w, h) if type(w) == "table" then w, h = w.width, w.height end; w, h = floor(w), floor(h); local d = C.novaLista(w * h * 4); return { width = w, height = h, data = d, colorSpace = "srgb" } end
   ctx.getImageData = function(x, y, w, h)
+    pausa()
     x, y, w, h = floor(n0(x, 0)), floor(n0(y, 0)), floor(n0(w, 0)), floor(n0(h, 0))
     local d, W, px = C.novaLista(w * h * 4), P.w, P.px
     local k = 1
@@ -590,6 +597,7 @@ function C.contexto(cv)
     return { width = w, height = h, data = d, colorSpace = "srgb" }
   end
   ctx.putImageData = function(img, x, y)
+    pausa()
     local d, W, w, px = img.data, P.w, img.width, P.px
     x, y = floor(n0(x, 0)), floor(n0(y, 0))
     for yy = 0, img.height - 1 do for xx = 0, w - 1 do local X, Y = x + xx, y + yy

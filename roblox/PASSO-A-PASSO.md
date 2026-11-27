@@ -160,6 +160,7 @@ A **qualidade gráfica do Roblox** (menu do Roblox → Configurações → Quali
 | O jogo fica lento | Diminua a qualidade gráfica do Roblox para 1 a 3 (qualidade BAIXA do jogo). |
 | Sem som | Confira os 5 IDs no `sons` (Passo 6). Sons recém-enviados podem levar alguns minutos para tocar. |
 | O save não volta no Studio | Ligue **Enable Studio Access to API Services**. No jogo publicado o save funciona sozinho. |
+| "Script timeout: exhausted allowed execution time" | Baixe o `.rbxlx` mais novo (build 4 em diante): o carregamento agora pausa sozinho e o problema foi corrigido. |
 | Aparece erro em vermelho na janela **Output** | Copie o texto do Output (Exibir → Output) e me mande; eu corrijo. |
 | O Roblox barrou o jogo | Por causa do Dedé fumando ou do Ollyan bêbado. Me peça a versão do Roblox com esses trechos suavizados. |
 
