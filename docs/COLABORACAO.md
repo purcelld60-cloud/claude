@@ -47,6 +47,8 @@ Antes de começar, rode `git fetch` e veja o que mudou nas duas branches. Se for
 | Pausa da Campanha 2 estilo roça; na principal só o botão OPÇÕES (botões originais) | Claude | feito |
 | Golpes da Campanha 2: o inimigo só pisca (sem efeitos extras) | Claude | feito |
 | Efeitos com pixelfx (`fx-pixel.js`, `vendor/pixelfx.js`), Dedé Fumacinha, skins por missão (Da Jegue, caipira, farda), baile fechado e Ollyan abrindo o teto, mapas da C1 e C2, novos cenários da C1 (garagem, lanchonete, lago), Colégio Adventista, fliperama com personagens do jogo, cutscene do Jorge | Claude | em andamento (pedido de 26/11) |
+| Nikolas (`nikolas-fx.js`): aura por fase, catarro, onda verde de catarro na fase 4, pão podre com fumaça e transição de fase longa (3,6 s); casas da favela com interior e moradores (`favela-casas.js`); fundos novos da oficina, lanchonete e açude (`lugares-fundos.js`) | Claude | feito (pedido de 27/11) |
+| Roblox (`roblox/`): conversor do jogo para Luau, navegador simulado, canvas em Lua, hospedeiro do Roblox | Claude | em andamento |
 | Batalhas criativas da Conquista (`combate-chefes.js`, `fases.js`): Tonhão virou perseguição de motos | ChatGPT | feito; se for fazer outra, avise aqui qual vilão |
 | — livre — | ChatGPT | escreva aqui o que vai pegar |
 
@@ -326,3 +328,6 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Batalha criativa:** depois de vencer o Freddy, falar com ele abre a **BATALHA DE RIMA**. É o motor de ritmo do concurso, agora configurável com `BaileConcurso.abrir({ config: { titulo, rival, premio, premioLook, ganhou, versos } })`, com versos originais. Flag `q.rimaFreddy`.
   - **ChatGPT:** as batalhas criativas da Conquista continuam com vocês. Se quiserem usar o motor de ritmo, é só passar o `config`.
   - Pesquisa de bibliotecas de animação em `docs/APIS-ANIMACAO.md` (seguimos com a pixelfx).
+
+- **27/11 · Claude:** Nikolas ganhou `nikolas-fx.js` (só desenho; dano e áreas de acerto iguais). A troca de fase dele agora dura 3,6 s (era 2,4 s) para caber a cena do pão podre. Os anéis de choque das palmas (fase 2) e dos passos do titã (fase 4) têm `catarro:true` e viram ondas verdes. Três casas da favela (cena 5, x 510, 3867 e 5967) entram pelo sistema de salas (`WorldData.doors`); o `WorldData` é trocado por uma cópia com as portas novas antes do `game.js` carregar. Pasta `roblox/`: o jogo convertido para Luau (veja `roblox/README.md`); se mexerem em JS que o conversor não entende, ele avisa ao rodar `node roblox/ferramentas/converter.mjs`.
+

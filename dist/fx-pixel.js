@@ -18,7 +18,8 @@
     choque: ['#2a1712', '#5e2c1c', '#a4502a', '#e8893a', '#ffc764', '#fff0b4', '#ffffff'],
     tinta: ['#140a1c', '#2c1640', '#4a2a68', '#6e4296', '#9a6ec4', '#c8a4e6', '#f2e4ff'],
     ouro: ['#2a1a06', '#5a3a0a', '#9a6a14', '#d8a028', '#ffd25a', '#fff0a8', '#ffffff'],
-    eletrico: ['#06101c', '#0c2a44', '#14507a', '#2a8ac0', '#6ac8f0', '#bff0ff', '#ffffff']
+    eletrico: ['#06101c', '#0c2a44', '#14507a', '#2a8ac0', '#6ac8f0', '#bff0ff', '#ffffff'],
+    catarro: ['#101806', '#22320c', '#3e5a14', '#69922a', '#a2c946', '#d8ee8c', '#f6ffd6']
   };
 
   function carregar() {
@@ -107,6 +108,8 @@
     else if (h.type === 'smoke' && h.brasa) { const ag = performance.now(); if (ag - (ultimo.__brasa || 0) > 280) { ultimo.__brasa = ag; tocar('spawn/poof', { x, y, palette: PAL.fumaca, opcoes: { stars: PAL.brasa.slice(3) } }); } }
     else if (h.type === 'smoke') { tocar('spawn/poof', { x, y, palette: PAL.fumaca }); tocar('explosions/smoke-bomb', { x, y: y + 4, palette: PAL.fumaca, avancar: .9, duracao: 1.6, opcoes: { semLata: true } }); }
     else if (h.type === 'ring' && h.smoke) tocar('spawn/poof', { x, y, palette: PAL.fumaca });
+    else if (h.type === 'ring' && h.catarro) { tocar('water/wave-crash', { x: x - 30, y, palette: PAL.catarro, flip: true }); tocar('water/wave-crash', { x: x + 30, y, palette: PAL.catarro }); tocar('nature/acid-splash', { x, y, palette: PAL.catarro, atraso: .05 }); }
+    else if (h.type === 'slime') tocar('nature/acid-splash', { x, y, palette: PAL.catarro });
     else if (h.ink || h.type === 'ink') tocar('shadow/dark-explosion', { x, y, palette: PAL.tinta });
     else if (h.type === 'provoke') tocar('arcane/magic-circle-cast', { x, y, palette: PAL.ouro });
     else if (h.type === 'ring') tocar('impacts/ground-slam', { x, y, palette: PAL.choque });
@@ -114,7 +117,7 @@
   }
 
   /* ---------- chefes: troca de fase, investida, disparo e derrota ---------- */
-  const COR = { nicolas: 'ouro', reeisBoss: 'ouro', arthur: 'ouro', marco: 'tinta', giant: 'tinta', nikolas: 'peido', dede: 'fumaca', freddy: 'brasa', menezes: 'poeira', igor: 'eletrico', kaique: 'eletrico' };
+  const COR = { nicolas: 'ouro', reeisBoss: 'ouro', arthur: 'ouro', marco: 'tinta', giant: 'tinta', nikolas: 'catarro', dede: 'fumaca', freddy: 'brasa', menezes: 'poeira', igor: 'eletrico', kaique: 'eletrico' };
   const corDe = (e) => PAL[COR[e?.type]] || PAL.ouro;
   function fase(e) { // círculo de poder no chão que vira coluna de luz, mais o golpe de assinatura de cada chefe
     if (!e) return; const x = e.x, y = e.y, t = e.type;
@@ -123,7 +126,6 @@
     else if (t === 'marco' || t === 'giant') tocar('shadow/dark-explosion', { x, y, palette: PAL.tinta });
     else if (t === 'freddy' || t === 'menezes' || t === 'igor' || t === 'kaique') tocar('impacts/ground-slam', { x, y, palette: t === 'igor' || t === 'kaique' ? PAL.eletrico : PAL.choque });
     else if (t === 'dede') tocar('explosions/smoke-bomb', { x, y, palette: PAL.fumaca, avancar: .9, duracao: 1.8, opcoes: { semLata: true } });
-    else if (t === 'nikolas') tocar('nature/acid-splash', { x, y });
     else if (t === 'reeisBoss') tocar('explosions/plasma-explosion', { x, y: y - 30, palette: PAL.ouro });
     else if (t === 'arthur') tocar('holy/feather-burst', { x, y: y - 50 });
   }
@@ -141,7 +143,7 @@
     else if (agora === 'phaseChange' && antes !== undefined) fase(e);
   }
   // disparo de chefe: um clarão pequeno na cor do golpe
-  const DISPARO = { smoke: 'fumaca', astral: 'eletrico', slime: 'peido', doodle: 'tinta', inkBlade: 'tinta', enemyBullet: 'choque', gangFan: 'ouro', confetti: 'ouro', word: 'ouro' };
+  const DISPARO = { smoke: 'fumaca', astral: 'eletrico', slime: 'catarro', doodle: 'tinta', inkBlade: 'tinta', enemyBullet: 'choque', gangFan: 'ouro', confetti: 'ouro', word: 'ouro' };
   function disparo(d) {
     const pal = PAL[DISPARO[d.kind]]; if (!pal) return; const ag = performance.now(); if (ag - (ultimo.__disparo || 0) < 180) return; ultimo.__disparo = ag;
     if (d.kind === 'smoke') tocar('spawn/poof', { x: d.x, y: d.y + 10, palette: pal }); else tocar('arcane/mana-burst', { x: d.x, y: d.y + 10, palette: pal });
