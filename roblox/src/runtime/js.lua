@@ -469,6 +469,26 @@ function AM.at(a, i) local n = alen(a); i = floor(tonum(i) or 0); if i < 0 then 
 function AM.keys(a) local out = {}; for i = 1, alen(a) do out[i] = i - 1 end; return JS.__arrL(out, alen(a)) end
 function AM.values(a) return AM.slice(a) end
 function AM.entries(a) local out = {}; for i = 1, alen(a) do out[i] = JS.__arrL({ i - 1, a[i] }, 2) end; return JS.__arrL(out, alen(a)) end
+-- métodos de objeto comuns (quando o objeto não tem o seu)
+function AM.hasOwnProperty(o, k)
+  if type(o) ~= "table" then return false end
+  if ehLista(o) then local i = tonumber(k); if i then return rawget(o, i + 1) ~= nil end; return k == "length" or rawget(o, k) ~= nil end
+  if type(k) == "number" then k = numkey(k) end
+  if rawget(o, k) ~= nil then return true end
+  local mt = getmetatable(o); local props = mt and rawget(mt, "__props")
+  return props ~= nil and props[k] ~= nil
+end
+AM.propertyIsEnumerable = AM.hasOwnProperty
+-- Array.prototype.x / Object.prototype.x usados com .call(obj, ...): o próprio obj chega como 1º parâmetro
+function JS.__hasOwnV(o, k) return AM.hasOwnProperty(o, k) end
+function JS.__sliceV(o, a, b) return AM.slice(o, a, b) end
+function JS.__forEachV(o, f, e) return AM.forEach(o, f, e) end
+function JS.__mapV(o, f, e) return AM.map(o, f, e) end
+function JS.__filterV(o, f, e) return AM.filter(o, f, e) end
+function JS.__indexOfV(o, v, d) return AM.indexOf(o, v, d) end
+function JS.__pushV(o, ...) return AM.push(o, ...) end
+function JS.__toStringV(o) if ehLista(o) then return "[object Array]" end; if o == nil then return "[object Undefined]" end; return "[object Object]" end
+function AM.isPrototypeOf() return false end
 -- listas tipadas
 function AM.set(a, src, off) off = floor(tonum(off or 0)); for i = 1, JS.__len(src) do JS.__set(a, off + i - 1, JS.__get(src, i - 1)) end end
 function AM.subarray(a, s, e) return AM.slice(a, s, e) end

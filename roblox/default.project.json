@@ -1,18 +1,33 @@
 {
-  "name": "DaRocaAdventure",
+  "name": "Da Roça Adventure",
   "tree": {
     "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "DaRoca": {
+        "$className": "Folder",
+        "runtime": { "$path": "src/runtime" },
+        "jogo": { "$path": "src/jogo" }
+      }
+    },
     "ServerScriptService": {
       "$className": "ServerScriptService",
-      "Mundo": { "$path": "src/server/Mundo.server.lua" },
-      "Combate": { "$path": "src/server/Combate.server.lua" }
+      "DaRocaServidor": { "$path": "src/servidor/DaRoca.server.lua" }
     },
     "StarterPlayer": {
       "$className": "StarterPlayer",
+      "$properties": {
+        "DevTouchMovementMode": "Scriptable",
+        "DevComputerMovementMode": "Scriptable"
+      },
       "StarterPlayerScripts": {
         "$className": "StarterPlayerScripts",
-        "Cliente": { "$path": "src/client/Cliente.client.lua" }
+        "DaRocaCliente": { "$path": "src/cliente/DaRoca.client.lua" }
       }
+    },
+    "Players": {
+      "$className": "Players",
+      "$properties": { "CharacterAutoLoads": false }
     }
   }
 }

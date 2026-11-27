@@ -578,11 +578,38 @@ function C.contexto(cv)
         px[Y * W + X + 1] = floor(r) + floor(g) * 256 + floor(b) * 65536 + floor(a) * 16777216 end end end
   end
 
-  -- texto em fonte de pixel
+  -- texto: com as letras reais das fontes do jogo (C.fontes, vindas de fontes.lua) ou, sem elas, a fonte 5x7
   local function tamanhoFonte() local s = tostring(ctx.font or ""); local n = tonumber(s:match("(%d+%.?%d*)px")) or 10; local negrito = s:find("bold") ~= nil or s:find("[6789]00") ~= nil; return n, negrito end
-  ctx.measureText = function(t) local n = tamanhoFonte(); local w = Fonte.largura(tostring(t), n); return { width = w, actualBoundingBoxAscent = n * .8, actualBoundingBoxDescent = n * .2, actualBoundingBoxLeft = 0, actualBoundingBoxRight = w, fontBoundingBoxAscent = n * .8, fontBoundingBoxDescent = n * .2 } end
+  local function famDe() local f = tostring(ctx.font or ""); return C.fontes.familia(f, f:find("bold") and "bold" or f:match("([6789]00)")) end
+  local function espaco() return tonumber(tostring(ctx.letterSpacing or "0"):match("(-?[%d%.]+)")) or 0 end
+  ctx.measureText = function(t)
+    local n = tamanhoFonte(); t = tostring(t)
+    if C.fontes then local fam = famDe(); local w = C.fontes.medir(fam, n, t, espaco()); local a, d = C.fontes.metricas(fam, n)
+      return { width = w, actualBoundingBoxAscent = a, actualBoundingBoxDescent = d, actualBoundingBoxLeft = 0, actualBoundingBoxRight = w, fontBoundingBoxAscent = a, fontBoundingBoxDescent = d } end
+    local w = Fonte.largura(t, n); return { width = w, actualBoundingBoxAscent = n * .8, actualBoundingBoxDescent = n * .2, actualBoundingBoxLeft = 0, actualBoundingBoxRight = w, fontBoundingBoxAscent = n * .8, fontBoundingBoxDescent = n * .2 }
+  end
   local function texto(t, x, y, estilo, maxW)
-    t = tostring(t); local n, negrito = tamanhoFonte(); local w = Fonte.largura(t, n); local esc = Fonte.escala(n)
+    t = tostring(t); local n, negrito = tamanhoFonte()
+    if C.fontes then
+      local fam = famDe(); local esp = espaco()
+      local w = C.fontes.medir(fam, n, t, esp); local asc, desc = C.fontes.metricas(fam, n)
+      local k = 1; if maxW and tonumber(maxW) and w > tonumber(maxW) and w > 0 then k = tonumber(maxW) / w end
+      local al = ctx.textAlign; if al == "center" then x = x - w * k / 2 elseif al == "right" or al == "end" then x = x - w * k end
+      local bl = ctx.textBaseline
+      if bl == "top" or bl == "hanging" then y = y + asc elseif bl == "middle" then y = y + (asc - desc) / 2 elseif bl == "bottom" or bl == "ideographic" then y = y - desc end
+      local niveis = {}
+      local grad = estilo.__grad
+      Fonte.semUso = nil
+      C.fontes.escrever(fam, n, t, x, y, function(px, py, pw, ph, a)
+        local nivel = floor(a * 15 + .5); if nivel <= 0 then return end
+        local e = estilo
+        if not grad then e = niveis[nivel]; if not e then e = { estilo[1], estilo[2], estilo[3], estilo[4] * nivel / 15 }; niveis[nivel] = e end end
+        if k ~= 1 then px = x + (px - x) * k; pw = pw * k end
+        retangulo(px, py, pw, ph, e)
+      end, esp)
+      return
+    end
+    local w = Fonte.largura(t, n); local esc = Fonte.escala(n)
     local al = ctx.textAlign; if al == "center" then x = x - w / 2 elseif al == "right" or al == "end" then x = x - w end
     local bl = ctx.textBaseline; local alto = 7 * esc
     if bl == "middle" then y = y - alto / 2 elseif bl == "top" or bl == "hanging" then y = y elseif bl == "bottom" or bl == "ideographic" then y = y - alto else y = y - alto + esc end

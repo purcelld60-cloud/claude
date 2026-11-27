@@ -60,7 +60,9 @@ difficulty.js
 campaign-run.js
 bivolt.js
 farda.js
+lugares-fundos.js
 lugares-c1.js
+favela-casas.js
 pescaria.js
 baile.js
 baile-pixel.js
@@ -71,6 +73,7 @@ world-life.js
 swift.js
 campaign-vfx.js
 fx-pixel.js
+nikolas-fx.js
 critters.js
 scene-life.js
 jorge-anime.js

@@ -33,7 +33,7 @@ const METODOS = new Set(('push pop shift unshift slice splice map filter forEach
 const GLOBAIS_FIXOS = new Set(['Math', 'Object', 'Array', 'JSON', 'Number', 'String', 'console', 'Promise', 'Date', 'Symbol', 'Reflect']);
 const NEW_RUNTIME = new Set(['Date', 'ArrayBuffer', 'MouseEvent', 'PointerEvent', 'Worker', 'OffscreenCanvas', 'Image', 'Audio', 'WebSocket', 'ResizeObserver', 'IntersectionObserver', 'BroadcastChannel', 'CustomEvent', 'KeyboardEvent', 'Event', 'ImageData',
   'Uint8Array', 'Uint8ClampedArray', 'Int16Array', 'Int32Array', 'Uint16Array', 'Uint32Array', 'Float32Array', 'Float64Array', 'Array', 'AudioContext', 'OfflineAudioContext', 'DOMMatrix', 'Path2D', 'FontFace', 'MutationObserver', 'URLSearchParams', 'URL', 'Blob', 'FileReader', 'TextEncoder', 'TextDecoder', 'AbortController']);
-const AJUDANTES = ['__NumberV', '__StringV', '__BooleanV', '__identV', '__fcall', '__fapply', '__lt', '__le', '__gt', '__ge', '__isFiniteV', '__isIntegerV', '__isNaNV', '__imul', '__cbrt', '__objCreate', '__getProto', '__defProp', '__defProps', '__defPropV', '__isSafeInteger', '__isFiniteN', '__isInteger', '__getq', '__lenq', '__callq', '__mod', '__pk', '__ord', '__arrL', '__fromCharCode', '__iterar', '__t', '__get', '__set', '__inc', '__del', '__arr', '__len', '__setlen', '__call', '__add', '__new', '__iter', '__keys', '__values', '__entries', '__assign', '__isArray', '__arrayFrom', '__arrayOf',
+const AJUDANTES = ['__hasOwnV', '__sliceV', '__forEachV', '__mapV', '__filterV', '__indexOfV', '__pushV', '__toStringV', '__NumberV', '__StringV', '__BooleanV', '__identV', '__fcall', '__fapply', '__lt', '__le', '__gt', '__ge', '__isFiniteV', '__isIntegerV', '__isNaNV', '__imul', '__cbrt', '__objCreate', '__getProto', '__defProp', '__defProps', '__defPropV', '__isSafeInteger', '__isFiniteN', '__isInteger', '__getq', '__lenq', '__callq', '__mod', '__pk', '__ord', '__arrL', '__fromCharCode', '__iterar', '__t', '__get', '__set', '__inc', '__del', '__arr', '__len', '__setlen', '__call', '__add', '__new', '__iter', '__keys', '__values', '__entries', '__assign', '__isArray', '__arrayFrom', '__arrayOf',
   '__bor', '__band', '__bxor', '__shl', '__shr', '__ushr', '__bnot', '__hypot', '__getters', '__re', '__re_test', '__re_replace', '__re_split', '__re_match', '__re_exec'];
 
 
@@ -365,6 +365,10 @@ const fabrica = (checker) => (ctx) => {
       if (nomes.length >= 2 && profFuncoes(n) <= 1) obj = chama('__ord', [obj, f.createStringLiteral(nomes.join(','))]);
       return obj;
     }
+    if (ts.isPropertyAccessExpression(n) && ts.isPropertyAccessExpression(n.expression) && ts.isIdentifier(n.expression.expression) && n.expression.name.text === 'prototype') {
+      const v = { 'Object.hasOwnProperty': '__hasOwnV', 'Array.slice': '__sliceV', 'Array.forEach': '__forEachV', 'Array.map': '__mapV', 'Array.filter': '__filterV', 'Array.indexOf': '__indexOfV', 'Array.push': '__pushV', 'Object.toString': '__toStringV' }[n.expression.expression.text + '.' + n.name.text];
+      if (v) return id(v);
+    }
     if (ts.isPropertyAccessExpression(n) && ts.isIdentifier(n.expression) && !(n.parent && ts.isCallExpression(n.parent) && n.parent.expression === n)) {
       const v = { 'Object.defineProperty': '__defPropV', 'Object.freeze': '__identV', 'Number.isFinite': '__isFiniteV', 'Number.isInteger': '__isIntegerV', 'Number.isNaN': '__isNaNV' }[n.expression.text + '.' + n.name.text];
       if (v) return id(v);
@@ -409,7 +413,9 @@ const fabrica = (checker) => (ctx) => {
     return f.updateSourceFile(novo, [decl, ...novo.statements]); };
 };
 
-fs.rmSync(TMP, { recursive: true, force: true }); fs.mkdirSync(TMP, { recursive: true }); fs.rmSync(SAIDA, { recursive: true, force: true }); fs.mkdirSync(SAIDA, { recursive: true });
+fs.rmSync(TMP, { recursive: true, force: true }); fs.mkdirSync(TMP, { recursive: true }); fs.mkdirSync(SAIDA, { recursive: true });
+// apaga a saída antiga, menos o que vem do capturar.mjs (fontes e interface)
+for (const f of fs.readdirSync(SAIDA)) if (!/^(fontes|interface(_\d+)?)\.lua$/.test(f)) fs.rmSync(path.join(SAIDA, f), { recursive: true, force: true });
 const PRE = path.join(TMP, 'pre'); fs.mkdirSync(PRE, { recursive: true });
 const origem = arquivos.map((rel) => { const src = fs.readFileSync(path.join(RAIZ, 'dist', rel), 'utf8');
   const sf0 = ts.createSourceFile(rel, src, ts.ScriptTarget.ESNext, true, ts.ScriptKind.JS);

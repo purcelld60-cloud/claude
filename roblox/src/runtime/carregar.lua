@@ -9,6 +9,11 @@ function Carregar.iniciar(op)
   N.Promise = LL.__TS__Promise
   Canvas.novaLista = function(n) return JS.tipada("Uint8ClampedArray", n) end
   N.arquivos = op.exigir("arquivos")
+  N.JS = JS
+  -- interface fotografada e fontes reais do jogo (ferramentas/capturar.mjs)
+  local okI, interface = pcall(op.exigir, "interface")
+  local okF, fontes = pcall(op.exigir, "fontes")
+  if okI and okF and op.Desenhista then Carregar.desenhista = op.Desenhista.iniciar({ N = N, Canvas = Canvas, interface = interface, fontes = fontes }) end
   local pag = op.exigir("pagina")
   rawset(document, "title", pag.titulo)
   document.body.className = pag.classe
