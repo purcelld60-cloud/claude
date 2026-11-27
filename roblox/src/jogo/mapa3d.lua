@@ -2284,6 +2284,7 @@ local __O = {};
             if __t(__ge(v.t, 0) and not __t(v.decolou)) then
                 v.decolou = true
                 v.sq = 0.7
+                v.impulso = 1
                 poeira(
                     nil,
                     veic.x,
@@ -2347,8 +2348,9 @@ local __O = {};
             end
             v.sq = math.max(0, v.sq - dt * 3.2)
             v.treme = math.max(0, v.treme - dt)
+            v.impulso = math.max(0, if __t(v.impulso) then v.impulso else 0 - dt * 1.6)
             v.emit = v.emit + dt
-            local taxa = if k >= 1 then 1000000000 else if __lt(v.t, 0) then 0.07 else if __t(def.voa) then 0.028 else 0.045
+            local taxa = if k >= 1 then 1000000000 else if __lt(v.t, 0) then 0.09 else if __t(def.voa) then 0.06 else 0.05
             while __gt(v.emit, taxa) do
                 v.emit = v.emit - taxa
                 local ex = veic.x - v.dir * 17 * math.cos(v.ang)
@@ -2360,13 +2362,13 @@ local __O = {};
                         {
                             x = ex,
                             y = ey,
-                            vx = __TS__Number(-v.dir) * (10 + math.random() * 14),
-                            vy = -4 + math.random() * 8,
+                            vx = __TS__Number(-v.dir) * (8 + math.random() * 10),
+                            vy = 2 + math.random() * 6,
                             t = 0,
-                            vida = 0.9 + math.random() * 0.5,
-                            r = 2 + math.random() * 1.5,
-                            cresce = 7,
-                            cor = if math.random() < 0.5 then "#d8f2c8" else "#f4f8ee"
+                            vida = 0.55 + math.random() * 0.3,
+                            r = 1.5 + math.random(),
+                            cresce = 4,
+                            cor = if math.random() < 0.5 then "#c8f0d8" else "#eef8f0"
                         }
                     )
                 else
@@ -3067,31 +3069,11 @@ local __O = {};
             for ____, p in __iterar((rastro)) do
                 if not __t(p.chao) then
                     local q = p.t / p.vida
-                    c.globalAlpha = math.max(0, 1 - q) * 0.7
+                    c.globalAlpha = math.max(0, 1 - q) * 0.45
                     P:circ(p.x, p.y, p.r + p.cresce * q, p.cor)
                 end
             end
             c.globalAlpha = 1
-            if __t(__gt(v.spd, 90) and __lt(veic.k, 1)) then
-                c.globalAlpha = math.min(0.6, (v.spd - 90) / 260)
-                do
-                    local k2 = 0
-                    while k2 < 4 do
-                        local ly = veic.y - alt - 12 + k2 * 5 + math.sin(tempo * 30 + k2) * 1.5
-                        local lx = veic.x - veic.dir * (22 + __mod(tempo * 140 + k2 * 9, 18))
-                        R(
-                            nil,
-                            if __gt(veic.dir, 0) then lx - 10 else lx,
-                            ly,
-                            10,
-                            1,
-                            "#ffffff"
-                        )
-                        k2 = k2 + 1
-                    end
-                end
-                c.globalAlpha = 1
-            end
             if __t(v.marca) then
                 local ____v_marca_306, ____t_307 = v.marca, "t"
                 ____v_marca_306[____t_307] = ____v_marca_306[____t_307] + dt
@@ -3111,57 +3093,6 @@ local __O = {};
                     c.globalAlpha = 1
                 end
             end
-            local ____t_310 = __t
-            local ____t_309 = __t
-            local ____temp_308 = if __t(def.voa) then alt > 18 else def.voa
-            __O[603] = ____temp_308
-            if ____t_310(if ____t_309(____temp_308) then __lt(veic.k, 1) else __O[603]) then
-                do
-                    local k2 = 0
-                    while k2 < 3 do
-                        local u = __mod(tempo * 0.9 + k2 / 3, 1)
-                        local cx2 = veic.x + veic.dir * (30 - u * 70)
-                        local cy2 = veic.y - alt * 0.45 + 6 + k2 * 4
-                        c.globalAlpha = math.sin(u * math.pi) * 0.55
-                        P:circ(cx2, cy2, 4 + k2, "#ffffff")
-                        P:circ(cx2 + 5, cy2 + 1, 3 + k2 * 0.6, "#f2f6fa")
-                        P:circ(cx2 - 5, cy2 + 1, 3, "#e8eef4")
-                        c.globalAlpha = 1
-                        k2 = k2 + 1
-                    end
-                end
-            end
-            if __t(__gt(v.spd, 140) and __lt(veic.k, 1)) then
-                do
-                    local j = 3
-                    while j >= 1 do
-                        c:save()
-                        c.globalAlpha = 0.14 * (4 - j) / 3
-                        c:translate(
-                            math.floor(veic.x - veic.dir * j * 8 + 0.5),
-                            math.floor(veic.y - alt + j * math.sin(veic.ang) * 3 + 0.5)
-                        )
-                        if __lt(veic.dir, 0) then
-                            c:scale(-1, 1)
-                        end
-                        c:rotate(veic.ang)
-                        local ____this_312
-                        ____this_312 = def
-                        local ____opt_311 = ____this_312.veiculo
-                        if ____opt_311 ~= nil then
-                            ____opt_311(____this_312, P, tempo, {
-                                alt = alt,
-                                roda = v.roda,
-                                voando = alt > 3,
-                                parado = false,
-                                vel = v.spd
-                            })
-                        end
-                        c:restore()
-                        j = j - 1
-                    end
-                end
-            end
             local e = if __gt(v.sq, 0) then math.sin(v.sq * math.pi) * v.sq * 0.22 else 0
             c:save()
             c:translate(
@@ -3173,12 +3104,12 @@ local __O = {};
             end
             c:rotate(veic.ang)
             c:scale(1 + e, 1 - e)
-            local ____this_314
-            ____this_314 = def
-            local ____opt_313 = ____this_314.veiculo
-            if ____opt_313 ~= nil then
-                ____opt_313(
-                    ____this_314,
+            local ____this_309
+            ____this_309 = def
+            local ____opt_308 = ____this_309.veiculo
+            if ____opt_308 ~= nil then
+                ____opt_308(
+                    ____this_309,
                     P,
                     tempo,
                     {
@@ -3186,7 +3117,9 @@ local __O = {};
                         roda = v.roda,
                         voando = alt > 3,
                         parado = __lt(v.t, 0) or __ge(veic.k, 1),
-                        vel = v.spd
+                        vel = v.spd,
+                        impulso = if __t(v.impulso) then v.impulso else 0,
+                        carregando = if __lt(v.t, 0) then 1 + v.t / 0.38 else 0
                     }
                 )
             end
@@ -3533,31 +3466,31 @@ local __O = {};
                 local lo = __get(M.locs, i)
                 local sx = ox + (lo.bx + lo.bw / 2) * z
                 local sy = oy + lo.by * z
-                local ____t_319 = __t
-                local ____t_318 = __t
-                local ____t_316 = __t
-                local ____temp_315 = sx < -100 or __gt(sx, W + 100)
-                __O[604] = ____temp_315
-                local ____temp_317 = if ____t_316(____temp_315) then __O[604] else sy < -60
-                __O[605] = ____temp_317
-                if ____t_319(if ____t_318(____temp_317) then __O[605] else __gt(sy, H + 80)) then
+                local ____t_314 = __t
+                local ____t_313 = __t
+                local ____t_311 = __t
+                local ____temp_310 = sx < -100 or __gt(sx, W + 100)
+                __O[603] = ____temp_310
+                local ____temp_312 = if ____t_311(____temp_310) then __O[603] else sy < -60
+                __O[604] = ____temp_312
+                if ____t_314(if ____t_313(____temp_312) then __O[604] else __gt(sy, H + 80)) then
                     return
                 end
                 local b = math.floor(math.sin(tempo * 3 + i) * 3 + 0.5)
                 local ativo = i == sel
-                local ____placaNome_324 = placaNome
-                local ____temp_322 = sy - 6 + b
-                local ____add_result_323 = __add(if __t(L.atual) then "● " else "", L.nome)
-                local ____opt_320 = L.estado
-                if ____opt_320 ~= nil then
-                    ____opt_320 = ____opt_320.ok
+                local ____placaNome_319 = placaNome
+                local ____temp_317 = sy - 6 + b
+                local ____add_result_318 = __add(if __t(L.atual) then "● " else "", L.nome)
+                local ____opt_315 = L.estado
+                if ____opt_315 ~= nil then
+                    ____opt_315 = ____opt_315.ok
                 end
-                ____placaNome_324(
+                ____placaNome_319(
                     nil,
                     sx,
-                    ____temp_322,
-                    ____add_result_323,
-                    if ____opt_320 == false then "bloq" else if __t(L.atual) then "atual" else "ok",
+                    ____temp_317,
+                    ____add_result_318,
+                    if ____opt_315 == false then "bloq" else if __t(L.atual) then "atual" else "ok",
                     ativo
                 )
                 if __t(ativo) then
@@ -3575,12 +3508,12 @@ local __O = {};
             def.locais,
             "forEach",
             function(____, L, i)
-                local ____t_327 = __t
-                local ____opt_325 = L.estado
-                if ____opt_325 ~= nil then
-                    ____opt_325 = ____opt_325.trava
+                local ____t_322 = __t
+                local ____opt_320 = L.estado
+                if ____opt_320 ~= nil then
+                    ____opt_320 = ____opt_320.trava
                 end
-                if not ____t_327(____opt_325) then
+                if not ____t_322(____opt_320) then
                     return
                 end
                 local lo = __get(M.locs, i)
@@ -3593,14 +3526,14 @@ local __O = {};
                 )
                 local x = ox + (lo.bx + lo.bw / 2) * z
                 local y = oy + (lo.by + lo.bh * 0.62) * z + math.floor(math.sin(tempo * 2.2 + i) * 2 + 0.5)
-                local ____t_332 = __t
-                local ____t_331 = __t
-                local ____t_329 = __t
-                local ____temp_328 = x < -60 or __gt(x, W + 60)
-                __O[606] = ____temp_328
-                local ____temp_330 = if ____t_329(____temp_328) then __O[606] else y < -60
-                __O[607] = ____temp_330
-                if ____t_332(if ____t_331(____temp_330) then __O[607] else __gt(y, H + 80)) then
+                local ____t_327 = __t
+                local ____t_326 = __t
+                local ____t_324 = __t
+                local ____temp_323 = x < -60 or __gt(x, W + 60)
+                __O[605] = ____temp_323
+                local ____temp_325 = if ____t_324(____temp_323) then __O[605] else y < -60
+                __O[606] = ____temp_325
+                if ____t_327(if ____t_326(____temp_325) then __O[606] else __gt(y, H + 80)) then
                     return
                 end
                 lo.tremor = math.max(0, lo.tremor - dt * 1.6)
@@ -6814,20 +6747,20 @@ local __O = {};
             fechar = fechar,
             aberto = function() return aberto end,
             selecionar = function(____, id)
-                local ____callq_336 = __callq
-                local ____opt_result_335
+                local ____callq_331 = __callq
+                local ____opt_result_330
                 if def ~= nil then
-                    ____opt_result_335 = def.locais
+                    ____opt_result_330 = def.locais
                 end
-                local ____callq_336_result_337 = ____callq_336(
-                    ____opt_result_335,
+                local ____callq_331_result_332 = ____callq_331(
+                    ____opt_result_330,
                     "findIndex",
                     function(____, L) return L.id == id end
                 )
-                if ____callq_336_result_337 == nil then
-                    ____callq_336_result_337 = -1
+                if ____callq_331_result_332 == nil then
+                    ____callq_331_result_332 = -1
                 end
-                local i = ____callq_336_result_337
+                local i = ____callq_331_result_332
                 if __ge(i, 0) then
                     selecionar(nil, i)
                 end

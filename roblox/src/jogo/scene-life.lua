@@ -94,8 +94,8 @@ local __O = {};
     local function dustColor(self, scene)
         local ____t_1 = __t
         local ____get_result_0 = __get(DUST, scene)
-        __O[1510] = ____get_result_0
-        return if ____t_1(____get_result_0) then __O[1510] else "#bdb4a2"
+        __O[1509] = ____get_result_0
+        return if ____t_1(____get_result_0) then __O[1509] else "#bdb4a2"
     end
     local function puff(self, x, y, vx, vy, size, color, life)
         local ____t_8 = __t
@@ -108,8 +108,8 @@ local __O = {};
         if ____opt_4 ~= nil then
             ____opt_result_6 = ____opt_4(____opt_4)
         end
-        __O[1511] = ____opt_result_6
-        if ____t_8(if ____t_7(____opt_result_6) then __len(particles) > 14 or math.random() < 0.5 else __O[1511]) then
+        __O[1510] = ____opt_result_6
+        if ____t_8(if ____t_7(____opt_result_6) then __len(particles) > 14 or math.random() < 0.5 else __O[1510]) then
             return
         end
         if __len(particles) > 70 then
@@ -129,8 +129,8 @@ local __O = {};
     local function update(self, dt, s)
         local ____t_10 = __t
         local ____TS__Number_result_9 = __TS__Number(dt)
-        __O[1512] = ____TS__Number_result_9
-        dt = clamp(nil, if ____t_10(____TS__Number_result_9) then __O[1512] else 0, 0, 0.05)
+        __O[1511] = ____TS__Number_result_9
+        dt = clamp(nil, if ____t_10(____TS__Number_result_9) then __O[1511] else 0, 0, 0.05)
         local p = s.player
         if __t(not __t(p) or not __isFiniteN(p.x)) then
             return
@@ -148,20 +148,20 @@ local __O = {};
         local color = dustColor(nil, s.scene)
         local ____t_12 = __t
         local ____TS__Number_result_11 = __TS__Number(p.anim)
-        __O[1513] = ____TS__Number_result_11
-        local step = math.floor(if ____t_12(____TS__Number_result_11) then __O[1513] else 0 / math.pi)
+        __O[1512] = ____TS__Number_result_11
+        local step = math.floor(if ____t_12(____TS__Number_result_11) then __O[1512] else 0 / math.pi)
         local ____t_17 = __t
         local ____t_16 = __t
         local ____t_14 = __t
         local ____temp_13 = if __t(onGround) then moving else onGround
-        __O[1514] = ____temp_13
-        local ____temp_15 = if ____t_14(____temp_13) then lastStep ~= nil else __O[1514]
-        __O[1515] = ____temp_15
-        if ____t_17(if ____t_16(____temp_15) then step ~= lastStep else __O[1515]) then
+        __O[1513] = ____temp_13
+        local ____temp_15 = if ____t_14(____temp_13) then lastStep ~= nil else __O[1513]
+        __O[1514] = ____temp_15
+        if ____t_17(if ____t_16(____temp_15) then step ~= lastStep else __O[1514]) then
             local ____t_19 = __t
             local ____temp_18 = -__TS__MathSign(p.vx)
-            __O[1516] = ____temp_18
-            local back = if ____t_19(____temp_18) then __O[1516] else __TS__Number(-p.facing)
+            __O[1515] = ____temp_18
+            local back = if ____t_19(____temp_18) then __O[1515] else __TS__Number(-p.facing)
             local fast = math.abs(p.vx) > 200
             do
                 local i = 0
@@ -185,10 +185,10 @@ local __O = {};
         local ____t_23 = __t
         local ____t_21 = __t
         local ____temp_20 = if __t(wasGround) then not __t(p.ground) else wasGround
-        __O[1517] = ____temp_20
-        local ____temp_22 = if ____t_21(____temp_20) then __lt(p.vy, -150) else __O[1517]
-        __O[1518] = ____temp_22
-        if ____t_24(if ____t_23(____temp_22) then not __t(s.vehicle) else __O[1518]) then
+        __O[1516] = ____temp_20
+        local ____temp_22 = if ____t_21(____temp_20) then __lt(p.vy, -150) else __O[1516]
+        __O[1517] = ____temp_22
+        if ____t_24(if ____t_23(____temp_22) then not __t(s.vehicle) else __O[1517]) then
             do
                 local i = 0
                 while i < 6 do
@@ -212,8 +212,8 @@ local __O = {};
         local ____t_27 = __t
         local ____t_26 = __t
         local ____temp_25 = not __t(wasGround)
-        __O[1519] = ____temp_25
-        if ____t_27(if ____t_26(____temp_25) then p.ground else __O[1519]) then
+        __O[1518] = ____temp_25
+        if ____t_27(if ____t_26(____temp_25) then p.ground else __O[1518]) then
             local impact = clamp(nil, lastVy / 520, 0.25, 1.2)
             do
                 local i = 0
@@ -359,8 +359,8 @@ local __O = {};
         end
         local ____t_33 = __t
         local ____get_result_32 = __get(MEADOW, s.scene)
-        __O[1520] = ____get_result_32
-        local meadow = if ____t_33(____get_result_32) then not __t(s.arena) else __O[1520]
+        __O[1519] = ____get_result_32
+        local meadow = if ____t_33(____get_result_32) then not __t(s.arena) else __O[1519]
         if __t(meadow) then
             local near = if __t(onGround) then math.abs(p.y - FLOOR) < 6 else onGround
             local from = math.floor((p.x - 60) / 6)
@@ -388,8 +388,8 @@ local __O = {};
                 local ____t_36 = __t
                 local ____t_35 = __t
                 local ____temp_34 = math.abs(dx) > 90 and math.abs(sp.d) < 0.01
-                __O[1521] = ____temp_34
-                if ____t_36(if ____t_35(____temp_34) then math.abs(sp.v) < 0.01 else __O[1521]) then
+                __O[1520] = ____temp_34
+                if ____t_36(if ____t_35(____temp_34) then math.abs(sp.v) < 0.01 else __O[1520]) then
                     __call(springs, "delete", i)
                 end
             end
@@ -400,10 +400,10 @@ local __O = {};
         local ____t_40 = __t
         local ____t_38 = __t
         local ____temp_37 = not __t(p)
-        __O[1522] = ____temp_37
-        local ____temp_39 = if ____t_38(____temp_37) then __O[1522] else vehicle
-        __O[1523] = ____temp_39
-        if ____t_41(if ____t_40(____temp_39) then __O[1523] else calm) then
+        __O[1521] = ____temp_37
+        local ____temp_39 = if ____t_38(____temp_37) then __O[1521] else vehicle
+        __O[1522] = ____temp_39
+        if ____t_41(if ____t_40(____temp_39) then __O[1522] else calm) then
             return {sx = 1, sy = 1}
         end
         local sy = 1 + squash
@@ -472,12 +472,12 @@ local __O = {};
     local function drawFront(self, c, s)
         local ____t_47 = __t
         local ____TS__Number_result_46 = __TS__Number(s.time)
-        __O[1524] = ____TS__Number_result_46
-        local t = if ____t_47(____TS__Number_result_46) then __O[1524] else 0
+        __O[1523] = ____TS__Number_result_46
+        local t = if ____t_47(____TS__Number_result_46) then __O[1523] else 0
         local ____t_49 = __t
         local ____TS__Number_result_48 = __TS__Number(s.camera)
-        __O[1525] = ____TS__Number_result_48
-        local cam = if ____t_49(____TS__Number_result_48) then __O[1525] else 0
+        __O[1524] = ____TS__Number_result_48
+        local cam = if ____t_49(____TS__Number_result_48) then __O[1524] else 0
         local ____t_55 = __t
         local ____opt_52 = window.Graphics
         if ____opt_52 ~= nil then
@@ -607,8 +607,8 @@ local __O = {};
             "includes",
             s.scene
         )
-        __O[1526] = ____call_result_56
-        if ____t_58(if ____t_57(____call_result_56) then not __t(s.arena) else __O[1526]) then
+        __O[1525] = ____call_result_56
+        if ____t_58(if ____t_57(____call_result_56) then not __t(s.arena) else __O[1525]) then
             do
                 local i = 0
                 while i < 22 do
@@ -691,8 +691,8 @@ local __O = {};
             local ____t_61 = __t
             local ____t_60 = __t
             local ____get_result_59 = __get(WEEDS, s.scene)
-            __O[1527] = ____get_result_59
-            if ____t_61(if ____t_60(____get_result_59) then not __t(s.arena) else __O[1527]) then
+            __O[1526] = ____get_result_59
+            if ____t_61(if ____t_60(____get_result_59) then not __t(s.arena) else __O[1526]) then
                 local from = math.floor(cam / 37) - 1
                 local to = math.ceil((cam + 960) / 37) + 1
                 do
@@ -708,11 +708,11 @@ local __O = {};
                         local ____t_64 = __t
                         local ____t_63 = __t
                         local ____temp_62 = if __t(s.player) then math.abs(s.player.x - bx) < 18 else s.player
-                        __O[1528] = ____temp_62
+                        __O[1527] = ____temp_62
                         local ____t_66 = __t
                         local ____temp_65 = bx - s.player.x
-                        __O[1529] = ____temp_65
-                        local near = if ____t_64(if ____t_63(____temp_62) then s.player.ground else __O[1528]) then __TS__MathSign(if ____t_66(____temp_65) then __O[1529] else 1) * 2 else 0
+                        __O[1528] = ____temp_65
+                        local near = if ____t_64(if ____t_63(____temp_62) then s.player.ground else __O[1527]) then __TS__MathSign(if ____t_66(____temp_65) then __O[1528] else 1) * 2 else 0
                         do
                             local j = 0
                             while j < 3 do

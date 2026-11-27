@@ -19,21 +19,32 @@
   const carrinho = (P, x, y, cor, dir = 1, taxi = false) => { const R = P.R; R(x - 9, y + 1, 18, 2, 'rgba(0,0,0,.3)'); R(x - 9, y - 6, 18, 7, cor); R(x - 9, y - 6, 18, 1, '#ffffff55'); R(x - 5 + dir, y - 10, 10, 5, cor); R(x - 4 + dir, y - 9, 8, 3, '#9fc4d0'); R(x - 8, y, 4, 2, '#1c1c1c'); R(x + 4, y, 4, 2, '#1c1c1c'); R(dir > 0 ? x + 8 : x - 9, y - 4, 1, 2, '#fff2b0'); if (taxi) { R(x - 2 + dir, y - 12, 5, 2, '#f6f6f0'); for (let k = 0; k < 9; k++) R(x - 9 + k * 2, y - 3, 1, 1, k % 2 ? '#1c1c1c' : '#f6f6f0'); } };
   // carro da viagem no mapa (maior e detalhado): o carro a gás do pai (voa) ou o táxi de Conquista.
   // o = { alt, roda, voando, parado, vel }; desenhado de lado, virado para +x, rodas em y = 0.
-  const carroViagem = (P, t, o = {}, tipo = 'gas') => { const R = P.R, K = '#14201f', taxi = tipo === 'taxi';
+  const carroViagem = (P, t, o = {}, tipo = 'gas') => { const R = P.R, K = '#14201f', taxi = tipo === 'taxi', c = P.c;
     const cor = taxi ? ['#f2c94c', '#ffe48a', '#b8901c'] : ['#3c8a8a', '#7ac8c8', '#265e5e'];
-    if (o.voando) for (const [fx, ff] of [[-9, 0], [7, 1.7]]) { const f = 4 + Math.sin(t * 38 + ff) * 2; P.c.globalAlpha = .45; R(fx - 2, 3, 5, f + 3, '#bff0c8'); P.c.globalAlpha = .9; R(fx - 1, 3, 3, f, '#f4fff0'); P.c.globalAlpha = 1; } // jatos de gás por baixo
-    if (!taxi) { R(-20, -10, 7, 8, K); R(-19, -9, 5, 6, '#c8ccd0'); R(-19, -9, 5, 1, '#f2f4f6'); R(-19, -5, 5, 1, '#8a9096'); R(-17, -11, 1, 2, K); } // cilindro de gás no porta-malas
+    const voa = !!o.voando, imp = o.impulso || 0, carga = o.carregando || 0;
+    // jatos de gás por baixo: bicos escuros e chama em camadas (miolo claro, verde-água, borda), mais longa no impulso
+    if (voa || carga > .2) for (const [fx, ff] of [[-9, 0], [8, 1.9]]) {
+      const pisca = Math.sin(t * 42 + ff) * 1.4 + Math.sin(t * 23 + ff * 2) * .8, L = Math.max(2, (voa ? 7 : 3 * carga) + imp * 9 + Math.min(3, (o.vel || 0) / 90) + pisca);
+      c.globalAlpha = .35; for (let y = 0; y < L + 3; y++) { const w = Math.max(1, 5 - y * 4 / (L + 3)); R(fx - w / 2, 4 + y, w, 1, '#3cc8a0'); }
+      c.globalAlpha = .8; for (let y = 0; y < L; y++) { const w = Math.max(1, 3 - y * 2.4 / L); R(fx - w / 2, 4 + y, w, 1, y < L * .4 ? '#f4fff0' : '#9ef0c8'); }
+      c.globalAlpha = 1; R(fx - 2, 2, 4, 2, '#2a3436'); R(fx - 1, 2, 2, 1, '#5a6668');
+    }
+    if (!taxi) { R(-20, -10, 7, 8, K); R(-19, -9, 5, 6, '#c8ccd0'); R(-19, -9, 5, 1, '#f2f4f6'); R(-19, -5, 5, 1, '#8a9096'); R(-17, -11, 1, 2, K); // cilindro de gás no porta-malas
+      if (voa || carga > .2) { c.globalAlpha = .5 + .3 * Math.sin(t * 20); R(-18, -13, 2, 2, '#bff0d0'); c.globalAlpha = 1; } } // respiro do gás
     R(-16, -10, 32, 11, K); R(-9, -18, 18, 9, K); // contorno
     R(-15, -9, 30, 9, cor[0]); R(-15, -9, 30, 2, cor[1]); R(-15, -2, 30, 2, cor[2]); R(-15, -9, 1, 7, cor[2]); // carroceria
     R(-8, -17, 16, 8, cor[0]); R(-8, -17, 16, 1, cor[1]); // cabine
     R(-7, -16, 6, 6, '#a8d4e2'); R(0, -16, 7, 6, '#8ab8c8'); R(-7, -16, 2, 1, '#ffffff'); R(-6, -15, 1, 2, '#e6f6fc'); R(-1, -16, 1, 7, cor[2]); // vidros com reflexo
-    R(2, -15, 4, 4, '#8a5a36'); R(1, -16, 6, 1, '#e8c86a'); R(2, -17, 4, 1, '#e8c86a'); R(5, -13, 1, 1, '#1c1c1c'); // motorista de chapéu
+    const balanca = voa && Math.sin(t * 6) > .5 ? -1 : 0; // o chapéu do Da Roça balança no voo
+    R(2, -15, 4, 4, '#8a5a36'); R(1, -16 + balanca, 6, 1, '#e8c86a'); R(2, -17 + balanca, 4, 1, '#e8c86a'); R(5, -13, 1, 1, '#1c1c1c'); // motorista de chapéu
     R(-1, -8, 1, 7, cor[2]); R(1, -6, 3, 1, '#d8dce0'); R(-11, -6, 3, 1, '#d8dce0'); // portas
     if (taxi) { for (let k = 0; k < 15; k++) R(-15 + k * 2, -5, 2, 1, k % 2 ? '#1c1c1c' : '#f6f6f0'); R(-4, -22, 9, 5, K); R(-3, -21, 7, 3, '#f6f6f0'); R(-2, -20, 1, 1, '#1c1c1c'); R(0, -20, 1, 1, '#1c1c1c'); R(2, -20, 1, 1, '#1c1c1c'); }
     R(-16, 0, 32, 1, '#9aa0a6'); R(14, -7, 2, 3, '#fff2b0'); R(-15, -7, 1, 2, '#e83a3a'); R(15, -3, 1, 2, '#ff9a3a'); // para-choque, farol, lanterna, pisca
-    if (!o.parado && Math.floor(t * 4) % 2 === 0 && !o.voando) R(15, -3, 1, 2, '#ffd36b');
-    for (const wx of [-9, 9]) { R(wx - 4, -2, 8, 6, K); R(wx - 3, -1, 6, 4, '#2a2a2a'); R(wx - 1, 0, 2, 2, '#9aa0a6'); const a = o.roda || 0; for (let k = 0; k < 2; k++) R(wx - 1 + Math.round(Math.cos(a + k * Math.PI) * 2), Math.round(1 + Math.sin(a + k * Math.PI) * 1.5) - 1, 1, 1, '#d8dce0'); } // rodas girando
-    P.c.globalAlpha = .16 + Math.sin(t * 9) * .04; for (let k = 0; k < 9; k++) R(16 + k * 2, -8 - k * .45, 2, 4 + k * .9, '#fff2b0'); P.c.globalAlpha = 1; // facho do farol
+    if (!o.parado && Math.floor(t * 4) % 2 === 0 && !voa) R(15, -3, 1, 2, '#ffd36b');
+    // rodas: giram no chão; no ar a suspensão estica 1 px e elas param
+    const desce = voa ? 1 : 0, a = voa ? .6 : (o.roda || 0);
+    for (const wx of [-9, 9]) { R(wx - 4, -2 + desce, 8, 6, K); R(wx - 3, -1 + desce, 6, 4, '#2a2a2a'); R(wx - 1, desce, 2, 2, '#9aa0a6'); for (let k = 0; k < 2; k++) R(wx - 1 + Math.round(Math.cos(a + k * Math.PI) * 2), Math.round(1 + Math.sin(a + k * Math.PI) * 1.5) - 1 + desce, 1, 1, '#d8dce0'); }
+    c.globalAlpha = .16 + Math.sin(t * 9) * .04; for (let k = 0; k < 9; k++) R(16 + k * 2, -8 - k * .45, 2, 4 + k * .9, '#fff2b0'); c.globalAlpha = 1; // facho do farol
   };
   const fumaca = (P, x, y, t) => { for (let k = 0; k < 5; k++) { const q = (t * .4 + k / 5) % 1; P.c.globalAlpha = (1 - q) * .55; P.circ(x + Math.sin(t + k) * 3 + q * 6, y - q * 26, 2 + q * 4, '#f2f2ee'); } P.c.globalAlpha = 1; };
 

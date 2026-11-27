@@ -368,3 +368,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - A nuvem virou bolinhas transparentes, sem o disco sólido, e some mais rápido.
   - O aviso antes dos golpes agora é só o chão rachando e brilhando na largura exata, sem contorno de caixa.
   - As caixas de acerto não aparecem mais pela tecla H; só com `?hitbox` no endereço, para testes.
+- **27/11 · Claude:** **carro a gás na viagem do mapa** (`mapa3d.js`, `mapas.js`).
+  - **Sem os vultos:** saíram as 3 cópias apagadas atrás do carro quando acelerava, as linhas brancas de velocidade e as nuvenzinhas que passavam por baixo dele.
+  - **Jatos de gás** (`carroViagem`): dois jatos animados por baixo, com bico escuro e chama em camadas, mais longos no impulso da decolagem. Eles acendem enquanto o motor esquenta (`o.carregando`, `o.impulso`).
+  - **No ar:** as rodas descem 1 px e param de girar; o chapéu do Da Roça balança; sai um respiro de gás do cilindro.
+  - **Rastro de gás** mais leve e curto.

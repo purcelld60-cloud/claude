@@ -82,14 +82,14 @@ local __O = {};
         local ____t_3 = __t
         local ____t_1 = __t
         local ____temp_0 = not not __t(a) and not not __t(b)
-        __O[1560] = ____temp_0
-        local ____temp_2 = if ____t_1(____temp_0) then __lt(a.x0, b.x1) else __O[1560]
-        __O[1561] = ____temp_2
-        local ____temp_4 = if ____t_3(____temp_2) then __gt(a.x1, b.x0) else __O[1561]
-        __O[1562] = ____temp_4
-        local ____temp_6 = if ____t_5(____temp_4) then __lt(a.y0, b.y1) else __O[1562]
-        __O[1563] = ____temp_6
-        return if ____t_7(____temp_6) then __gt(a.y1, b.y0) else __O[1563]
+        __O[1559] = ____temp_0
+        local ____temp_2 = if ____t_1(____temp_0) then __lt(a.x0, b.x1) else __O[1559]
+        __O[1560] = ____temp_2
+        local ____temp_4 = if ____t_3(____temp_2) then __gt(a.x1, b.x0) else __O[1560]
+        __O[1561] = ____temp_4
+        local ____temp_6 = if ____t_5(____temp_4) then __lt(a.y0, b.y1) else __O[1561]
+        __O[1562] = ____temp_6
+        return if ____t_7(____temp_6) then __gt(a.y1, b.y0) else __O[1562]
     end
     local function circuloCaixa(self, cx, cy, r, b)
         local qx = clamp(nil, cx, b.x0, b.x1)
@@ -117,7 +117,7 @@ local __O = {};
         local ____t_10 = __t
         local ____t_9 = __t
         local ____temp_8 = e.type == "marco"
-        __O[1564] = ____temp_8
+        __O[1563] = ____temp_8
         return if e.type == "nikolas" then __add(
             "nikolas",
             clamp(
@@ -126,7 +126,7 @@ local __O = {};
                 1,
                 4
             )
-        ) else if ____t_10(if ____t_9(____temp_8) then e.rage else __O[1564]) then "marcoRage" else e.type
+        ) else if ____t_10(if ____t_9(____temp_8) then e.rage else __O[1563]) then "marcoRage" else e.type
     end
     local function chefe(self, e)
         local ____t_12 = __t
@@ -134,12 +134,12 @@ local __O = {};
             CORPO,
             chaveChefe(nil, e)
         )
-        __O[1565] = ____get_result_11
-        local b = if ____t_12(____get_result_11) then __O[1565] else __arrL({20, 70}, 2)
+        __O[1564] = ____get_result_11
+        local b = if ____t_12(____get_result_11) then __O[1564] else __arrL({20, 70}, 2)
         local ____t_14 = __t
         local ____TS__Number_result_13 = __TS__Number(e.escalaCorpo)
-        __O[1566] = ____TS__Number_result_13
-        local s = if ____t_14(____TS__Number_result_13) then __O[1566] else 1
+        __O[1565] = ____TS__Number_result_13
+        local s = if ____t_14(____TS__Number_result_13) then __O[1565] else 1
         return caixa(
             nil,
             e.x - __get(b, 0) * s,
@@ -152,8 +152,8 @@ local __O = {};
         local k = if m.type == "rat" then "rat" else if __t(m.type == "thug" or m.kind == "thug") then "thug" else if m.design == "sixseven" then "sixseven" else __add("k", if __t(m.kind) then m.kind else 0)
         local ____t_16 = __t
         local ____get_result_15 = __get(CAPANGA, k)
-        __O[1567] = ____get_result_15
-        local b = if ____t_16(____get_result_15) then __O[1567] else __arrL({20, 60}, 2)
+        __O[1566] = ____get_result_15
+        local b = if ____t_16(____get_result_15) then __O[1566] else __arrL({20, 60}, 2)
         return caixa(
             nil,
             m.x - __get(b, 0),
@@ -181,8 +181,8 @@ local __O = {};
         end
         local ____t_18 = __t
         local ____get_result_17 = __get(TIRO, s.type)
-        __O[1568] = ____get_result_17
-        return {r = if ____t_18(____get_result_17) then __O[1568] else 10}
+        __O[1567] = ____get_result_17
+        return {r = if ____t_18(____get_result_17) then __O[1567] else 10}
     end
     local function tiroAcerta(self, s, b)
         local f = formaTiro(nil, s)
@@ -233,8 +233,8 @@ local __O = {};
     local function chaoDo(____, h)
         local ____t_20 = __t
         local ____TS__Number_result_19 = __TS__Number(h.y)
-        __O[1569] = ____TS__Number_result_19
-        return if CHAO ~= nil then CHAO else if ____t_20(____TS__Number_result_19) then __O[1569] else 0 + if h.type == "ring" then 5 else 6
+        __O[1568] = ____TS__Number_result_19
+        return if CHAO ~= nil then CHAO else if ____t_20(____TS__Number_result_19) then __O[1568] else 0 + if h.type == "ring" then 5 else 6
     end
     local function perigoAcerta(self, h, b)
         local c = chaoDo(nil, h)
@@ -352,12 +352,12 @@ local __O = {};
         local ____t_23 = __t
         local ____t_22 = __t
         local ____temp_21 = h.type == "smoke"
-        __O[1570] = ____temp_21
+        __O[1569] = ____temp_21
         local ____t_26 = __t
         local ____t_25 = __t
         local ____temp_24 = h.type == "astral"
-        __O[1571] = ____temp_24
-        return if __t(if __t(h.catarro) then h.catarro else h.type == "slime") then PAL.gosma else if __t(h.brasa) then PAL.brasa else if __t(if __t(h.ink) then h.ink else h.type == "ink") then PAL.tinta else if ____t_23(if ____t_22(____temp_21) then __O[1570] else h.smoke) then PAL.fumaca else if ____t_26(if ____t_25(____temp_24) then __O[1571] else h.astral) then PAL.astral else if h.type == "provoke" then PAL.provoca else if __t(pal) then pal else PAL.tinta
+        __O[1570] = ____temp_24
+        return if __t(if __t(h.catarro) then h.catarro else h.type == "slime") then PAL.gosma else if __t(h.brasa) then PAL.brasa else if __t(if __t(h.ink) then h.ink else h.type == "ink") then PAL.tinta else if ____t_23(if ____t_22(____temp_21) then __O[1569] else h.smoke) then PAL.fumaca else if ____t_26(if ____t_25(____temp_24) then __O[1570] else h.astral) then PAL.astral else if h.type == "provoke" then PAL.provoca else if __t(pal) then pal else PAL.tinta
     end
     local function aviso(self, h, t, pal, lite)
         local chao = chaoDo(nil, h)
@@ -981,8 +981,8 @@ local __O = {};
         local ____t_29 = __t
         local ____t_28 = __t
         local ____temp_27 = if __t(h.height) then h.type ~= "astral" else h.height
-        __O[1572] = ____temp_27
-        if ____t_29(if ____t_28(____temp_27) then __le(h.delay, 0) else __O[1572]) then
+        __O[1571] = ____temp_27
+        if ____t_29(if ____t_28(____temp_27) then __le(h.delay, 0) else __O[1571]) then
             return false
         end
         ctx = c
@@ -1201,8 +1201,8 @@ local __O = {};
         local ____t_32 = __t
         local ____t_31 = __t
         local ____temp_30 = not __t(mostrar) or not __t(c)
-        __O[1573] = ____temp_30
-        if ____t_32(if ____t_31(____temp_30) then __O[1573] else not __t(s)) then
+        __O[1572] = ____temp_30
+        if ____t_32(if ____t_31(____temp_30) then __O[1572] else not __t(s)) then
             return
         end
         c:save()
@@ -1218,8 +1218,8 @@ local __O = {};
             local ____t_35 = __t
             local ____t_34 = __t
             local ____temp_33 = __gt(e.hp, 0) and not __t(e.conquista)
-            __O[1574] = ____temp_33
-            if ____t_35(if ____t_34(____temp_33) then e.type ~= "igor" else __O[1574]) then
+            __O[1573] = ____temp_33
+            if ____t_35(if ____t_34(____temp_33) then e.type ~= "igor" else __O[1573]) then
                 contorno(
                     nil,
                     c,

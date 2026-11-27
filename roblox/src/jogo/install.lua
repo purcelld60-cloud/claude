@@ -17,12 +17,12 @@ local __O = {};
         local ____t_45 = __t
         local ____t_43 = __t
         local ____temp_42 = if __t(nativeApp) then nativeApp else not __t(offlineAllowed)
-        __O[2436] = ____temp_42
-        local ____temp_44 = if ____t_43(____temp_42) then __O[2436] else not __t(installed)
-        __O[2437] = ____temp_44
-        local ____temp_46 = if ____t_45(____temp_44) then __O[2437] else not __t(window.navigator.onLine)
-        __O[2438] = ____temp_46
-        if ____t_48(if ____t_47(____temp_46) then __O[2438] else not __t(window.navigator.serviceWorker)) then
+        __O[2435] = ____temp_42
+        local ____temp_44 = if ____t_43(____temp_42) then __O[2435] else not __t(installed)
+        __O[2436] = ____temp_44
+        local ____temp_46 = if ____t_45(____temp_44) then __O[2436] else not __t(window.navigator.onLine)
+        __O[2437] = ____temp_46
+        if ____t_48(if ____t_47(____temp_46) then __O[2437] else not __t(window.navigator.serviceWorker)) then
             return
         end
         local ____self_51 = window.navigator.serviceWorker.ready
@@ -37,8 +37,8 @@ local __O = {};
     local ____ = "use strict"
     local ____t_1 = __t
     local ____temp_0 = window.location.protocol == "file:" or window.location.protocol == "daroca:"
-    __O[2425] = ____temp_0
-    nativeApp = if ____t_1(____temp_0) then __O[2425] else __call(
+    __O[2424] = ____temp_0
+    nativeApp = if ____t_1(____temp_0) then __O[2424] else __call(
         __new("URLSearchParams", window.location.search),
         "has",
         "native"
@@ -46,16 +46,16 @@ local __O = {};
     local function standalone()
         local ____t_3 = __t
         local ____table_matches_2 = window:matchMedia("(display-mode: standalone)").matches
-        __O[2426] = ____table_matches_2
-        return if ____t_3(____table_matches_2) then __O[2426] else not not __t(window.navigator.standalone)
+        __O[2425] = ____table_matches_2
+        return if ____t_3(____table_matches_2) then __O[2425] else not not __t(window.navigator.standalone)
     end
     local ____t_5 = __t
     local ____re_test_result_4 = __re_test(
         __re("iPhone|iPad|iPod", ""),
         window.navigator.userAgent
     )
-    __O[2427] = ____re_test_result_4
-    local isIOS = if ____t_5(____re_test_result_4) then __O[2427] else window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
+    __O[2426] = ____re_test_result_4
+    local isIOS = if ____t_5(____re_test_result_4) then __O[2426] else window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
     local status = window.document:getElementById("offlineStatus")
     local buttons = __arr(__TS__Spread(__iter(window.document:querySelectorAll("#installAppBtn,[data-install-app]"))))
     local guide = window.document:getElementById("installGuide")
@@ -78,8 +78,8 @@ local __O = {};
             guideModal.innerHTML = if __t(isIOS) then "<h2 id=\"phoneInstallHeading\">A ROÇA NA TELA TODA</h2><p>O Safari controla as barras do navegador. Para jogar sem essas barras:</p><ol><li>Toque em <b>Compartilhar</b> no Safari: o quadrado com uma seta para cima.</li><li>Escolha <b>Adicionar à Tela de Início</b> e confirme em <b>Adicionar</b>.</li><li>Abra o ícone <b>Da Roça</b> na Tela de Início e deite o iPhone.</li></ol><p>Abra conectado uma vez para preparar o jogo offline. O jogo salva o progresso no aparelho. A Tela de Início pode ter um save separado do Safari.</p><button type=\"button\" class=\"primary-btn\">ENTENDI · VOLTAR AO JOGO</button>" else "<h2 id=\"phoneInstallHeading\">LEVE A AVENTURA COM VOCÊ</h2><p>No menu do navegador, escolha <b>Instalar app</b> ou <b>Adicionar à Tela de Início</b>. Abra o ícone Da Roça para jogar sem as barras do navegador.</p><p>Essa opção instala a versão do site. O APK continua disponível para instalação direta.</p><button type=\"button\" class=\"primary-btn\">ENTENDI · VOLTAR AO JOGO</button>"
             local ____t_9 = __t
             local ____temp_8 = window.document:getElementById("gameShell")
-            __O[2428] = ____temp_8
-            if ____t_9(____temp_8) then __O[2428] else window.document.body:append(guideModal)
+            __O[2427] = ____temp_8
+            if ____t_9(____temp_8) then __O[2427] else window.document.body:append(guideModal)
             guideModal:querySelector("button"):addEventListener(
                 "click",
                 function() return guideModal:close() end
@@ -93,10 +93,10 @@ local __O = {};
                         local ____t_13 = __t
                         local ____t_11 = __t
                         local ____temp_10 = __lt(e.clientX, b.left) or __gt(e.clientX, b.right)
-                        __O[2429] = ____temp_10
-                        local ____temp_12 = if ____t_11(____temp_10) then __O[2429] else __lt(e.clientY, b.top)
-                        __O[2430] = ____temp_12
-                        if ____t_14(if ____t_13(____temp_12) then __O[2430] else __gt(e.clientY, b.bottom)) then
+                        __O[2428] = ____temp_10
+                        local ____temp_12 = if ____t_11(____temp_10) then __O[2428] else __lt(e.clientY, b.top)
+                        __O[2429] = ____temp_12
+                        if ____t_14(if ____t_13(____temp_12) then __O[2429] else __gt(e.clientY, b.bottom)) then
                             guideModal:close()
                         end
                     end
@@ -134,12 +134,12 @@ local __O = {};
         if state ~= nil then
             ____opt_result_23 = state.started
         end
-        __O[2431] = ____opt_result_23
-        local ____temp_25 = if ____t_24(____opt_result_23) then not __t(state.paused) else __O[2431]
-        __O[2432] = ____temp_25
-        local ____temp_27 = if ____t_26(____temp_25) then not __t(state.won) else __O[2432]
-        __O[2433] = ____temp_27
-        resumeAfterGuide = not not ____t_29(if ____t_28(____temp_27) then not __t(state.defeated) else __O[2433])
+        __O[2430] = ____opt_result_23
+        local ____temp_25 = if ____t_24(____opt_result_23) then not __t(state.paused) else __O[2430]
+        __O[2431] = ____temp_25
+        local ____temp_27 = if ____t_26(____temp_25) then not __t(state.won) else __O[2431]
+        __O[2432] = ____temp_27
+        resumeAfterGuide = not not ____t_29(if ____t_28(____temp_27) then not __t(state.defeated) else __O[2432])
         local ____opt_32 = window.Game
         if ____opt_32 ~= nil then
             ____opt_32 = ____opt_32.releaseInputs
@@ -197,8 +197,8 @@ local __O = {};
     )
     local ____t_39 = __t
     local ____standalone_result_38 = standalone(nil)
-    __O[2434] = ____standalone_result_38
-    installed = if ____t_39(____standalone_result_38) then __O[2434] else __call(
+    __O[2433] = ____standalone_result_38
+    installed = if ____t_39(____standalone_result_38) then __O[2433] else __call(
         __new("URLSearchParams", window.location.search),
         "has",
         "installed"
@@ -226,8 +226,8 @@ local __O = {};
         "includes",
         window.location.hostname
     ))
-    __O[2435] = ____temp_40
-    offlineAllowed = if ____t_41(____temp_40) then __O[2435] else __call(
+    __O[2434] = ____temp_40
+    offlineAllowed = if ____t_41(____temp_40) then __O[2434] else __call(
         __new("URLSearchParams", window.location.search),
         "has",
         "offline-test"
@@ -237,16 +237,16 @@ local __O = {};
     local ____t_55 = __t
     local ____t_53 = __t
     local ____temp_52 = not __t(nativeApp)
-    __O[2439] = ____temp_52
-    local ____temp_54 = if ____t_53(____temp_52) then offlineAllowed else __O[2439]
-    __O[2440] = ____temp_54
-    local ____temp_56 = if ____t_55(____temp_54) then window.navigator.serviceWorker ~= nil else __O[2440]
-    __O[2441] = ____temp_56
+    __O[2438] = ____temp_52
+    local ____temp_54 = if ____t_53(____temp_52) then offlineAllowed else __O[2438]
+    __O[2439] = ____temp_54
+    local ____temp_56 = if ____t_55(____temp_54) then window.navigator.serviceWorker ~= nil else __O[2439]
+    __O[2440] = ____temp_56
     if ____t_58(if ____t_57(____temp_56) then __call(
         __arrL({"https:", "http:"}, 2),
         "includes",
         window.location.protocol
-    ) else __O[2441]) then
+    ) else __O[2440]) then
         window.navigator.serviceWorker:addEventListener(
             "message",
             function(____, e)
@@ -257,8 +257,8 @@ local __O = {};
                     ____opt_59 = ____opt_59.type
                 end
                 local ____temp_61 = ____opt_59 == "trilhas-offline"
-                __O[2442] = ____temp_61
-                if ____t_63(if ____t_62(____temp_61) then status else __O[2442]) then
+                __O[2441] = ____temp_61
+                if ____t_63(if ____t_62(____temp_61) then status else __O[2441]) then
                     status.textContent = if __t(e.data.ready) then "Jogo e trilhas originais disponíveis offline." else "O jogo está salvo. Abra conectado para terminar de guardar as trilhas."
                 end
             end

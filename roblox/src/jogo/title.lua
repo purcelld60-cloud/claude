@@ -21,9 +21,9 @@ local __O = {};
         local ____t_3 = __t
         local ____t_1 = __t
         local ____temp_0 = not __t(panel.hidden) and panel.style.display ~= "none"
-        __O[2422] = ____temp_0
-        local ____temp_2 = if ____t_1(____temp_0) then not __t(window.document.hidden) else __O[2422]
-        __O[2423] = ____temp_2
+        __O[2421] = ____temp_0
+        local ____temp_2 = if ____t_1(____temp_0) then not __t(window.document.hidden) else __O[2421]
+        __O[2422] = ____temp_2
         local ____t_9 = __t
         local ____opt_6 = window.Campanha2
         if ____opt_6 ~= nil then
@@ -33,9 +33,9 @@ local __O = {};
         if ____opt_6 ~= nil then
             ____opt_result_8 = ____opt_6(____opt_6)
         end
-        local ____temp_10 = if ____t_3(____temp_2) then not ____t_9(____opt_result_8) else __O[2423]
-        __O[2424] = ____temp_10
-        if ____t_12(if ____t_11(____temp_10) then now - last > 31 else __O[2424]) then
+        local ____temp_10 = if ____t_3(____temp_2) then not ____t_9(____opt_result_8) else __O[2422]
+        __O[2423] = ____temp_10
+        if ____t_12(if ____t_11(____temp_10) then now - last > 31 else __O[2423]) then
             last = now
             ctx:clearRect(0, 0, 960, 540)
             local ____opt_15 = window.Art

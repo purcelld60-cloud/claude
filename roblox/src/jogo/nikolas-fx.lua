@@ -175,10 +175,10 @@ local __O = {};
                         local ____t_22 = __t
                         local ____t_20 = __t
                         local ____temp_19 = __gt(mordidas, 0) and cx == W - 1 - comido
-                        __O[1476] = ____temp_19
-                        local ____temp_21 = if ____t_20(____temp_19) then cy > curva else __O[1476]
-                        __O[1477] = ____temp_21
-                        if ____t_23(if ____t_22(____temp_21) then cy < H - 1 else __O[1477]) then
+                        __O[1475] = ____temp_19
+                        local ____temp_21 = if ____t_20(____temp_19) then cy > curva else __O[1475]
+                        __O[1476] = ____temp_21
+                        if ____t_23(if ____t_22(____temp_21) then cy < H - 1 else __O[1476]) then
                             c = C.miolo
                         end
                         if __t(cy == curva + 1 and __mod(cx, 5) == 2) then
@@ -191,8 +191,8 @@ local __O = {};
                         local ____t_26 = __t
                         local ____t_25 = __t
                         local ____temp_24 = m > 0.76 and m <= 0.82
-                        __O[1478] = ____temp_24
-                        if ____t_26(if ____t_25(____temp_24) then cy < 5 else __O[1478]) then
+                        __O[1477] = ____temp_24
+                        if ____t_26(if ____t_25(____temp_24) then cy < 5 else __O[1477]) then
                             c = C.mofo3
                         end
                         px(
@@ -704,10 +704,10 @@ local __O = {};
         if ____opt_13 ~= nil then
             ____opt_result_15 = ____opt_13(____opt_13, f)
         end
-        __O[1474] = ____opt_result_15
-        local ____temp_17 = if ____t_16(____opt_result_15) then __O[1474] else __get(BOUNDS, f)
-        __O[1475] = ____temp_17
-        return if ____t_18(____temp_17) then __O[1475] else __get(BOUNDS, 1)
+        __O[1473] = ____opt_result_15
+        local ____temp_17 = if ____t_16(____opt_result_15) then __O[1473] else __get(BOUNDS, f)
+        __O[1474] = ____temp_17
+        return if ____t_18(____temp_17) then __O[1474] else __get(BOUNDS, 1)
     end
     local function corpo(self, e)
         local f = if __t(e.phase) then e.phase else 1
@@ -1054,16 +1054,16 @@ local __O = {};
         ctx = c
         local ____t_28 = __t
         local ____TS__Number_result_27 = __TS__Number(s.vx)
-        __O[1479] = ____TS__Number_result_27
-        local vx = if ____t_28(____TS__Number_result_27) then __O[1479] else -1
+        __O[1478] = ____TS__Number_result_27
+        local vx = if ____t_28(____TS__Number_result_27) then __O[1478] else -1
         local ____t_30 = __t
         local ____TS__Number_result_29 = __TS__Number(s.vy)
-        __O[1480] = ____TS__Number_result_29
-        local vy = if ____t_30(____TS__Number_result_29) then __O[1480] else 0
+        __O[1479] = ____TS__Number_result_29
+        local vy = if ____t_30(____TS__Number_result_29) then __O[1479] else 0
         local ____t_32 = __t
         local ____hypot_result_31 = __hypot(vx, vy)
-        __O[1481] = ____hypot_result_31
-        local sp = if ____t_32(____hypot_result_31) then __O[1481] else 1
+        __O[1480] = ____hypot_result_31
+        local sp = if ____t_32(____hypot_result_31) then __O[1480] else 1
         local ux = vx / sp
         local uy = vy / sp
         local ____s_34 = s
@@ -1178,8 +1178,8 @@ local __O = {};
         ctx = c
         local ____t_36 = __t
         local ____TS__Number_result_35 = __TS__Number(h.y)
-        __O[1482] = ____TS__Number_result_35
-        local chao = if ____t_36(____TS__Number_result_35) then __O[1482] else 0 + 5
+        __O[1481] = ____TS__Number_result_35
+        local chao = if ____t_36(____TS__Number_result_35) then __O[1481] else 0 + 5
         local vida = math.max(0, if __t(h.life) then h.life else 0)
         local grande = __ge(h.maxR, 900)
         local H = if __t(grande) then 62 else 42

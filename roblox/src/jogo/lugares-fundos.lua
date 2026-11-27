@@ -144,15 +144,15 @@ local __O = {};
                         local ____t_2 = __t
                         local ____t_1 = __t
                         local ____temp_0 = incl < -1.2 and prof > 0.3
-                        __O[1308] = ____temp_0
-                        if ____t_2(if ____t_1(____temp_0) then __mod(x + y, 2) == 0 else __O[1308]) then
+                        __O[1307] = ____temp_0
+                        if ____t_2(if ____t_1(____temp_0) then __mod(x + y, 2) == 0 else __O[1307]) then
                             cor = medio
                         end
                         local ____t_5 = __t
                         local ____t_4 = __t
                         local ____temp_3 = incl > 1.2 and prof > 0.45
-                        __O[1309] = ____temp_3
-                        if ____t_5(if ____t_4(____temp_3) then __mod(x + y, 2) == 0 else __O[1309]) then
+                        __O[1308] = ____temp_3
+                        if ____t_5(if ____t_4(____temp_3) then __mod(x + y, 2) == 0 else __O[1308]) then
                             cor = medio
                         end
                         local ____t_10 = __t
@@ -162,10 +162,10 @@ local __O = {};
                             math.floor(y + math.sin(x * 0.05) * 3 + 0.5),
                             9
                         ) == 0 and prof > 0.12
-                        __O[1310] = ____temp_6
-                        local ____temp_8 = if ____t_7(____temp_6) then prof < 0.7 else __O[1310]
-                        __O[1311] = ____temp_8
-                        if ____t_10(if ____t_9(____temp_8) then __mod(x + y, 3) ~= 0 else __O[1311]) then
+                        __O[1309] = ____temp_6
+                        local ____temp_8 = if ____t_7(____temp_6) then prof < 0.7 else __O[1309]
+                        __O[1310] = ____temp_8
+                        if ____t_10(if ____t_9(____temp_8) then __mod(x + y, 3) ~= 0 else __O[1310]) then
                             cor = escuro
                         end
                         if y - topo < 2 then
@@ -249,8 +249,8 @@ local __O = {};
                         local ____t_13 = __t
                         local ____t_12 = __t
                         local ____temp_11 = faixa == 0 and __mod(x, 4) == 0
-                        __O[1312] = ____temp_11
-                        if ____t_13(if ____t_12(____temp_11) then __mod(y, 4) == 0 else __O[1312]) then
+                        __O[1311] = ____temp_11
+                        if ____t_13(if ____t_12(____temp_11) then __mod(y, 4) == 0 else __O[1311]) then
                             cor = tom(nil, "#2f6a34", noite)
                         end
                         if __t(faixa == 3 and __mod(x + y, 3) == 0) then

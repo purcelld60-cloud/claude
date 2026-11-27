@@ -82,13 +82,13 @@ local __O = {};
                     x,
                     __add(bx, bw) + m
                 )
-                __O[608] = ____temp_9
-                local ____temp_11 = if ____t_10(____temp_9) then __gt(y, by - m) else __O[608]
-                __O[609] = ____temp_11
+                __O[607] = ____temp_9
+                local ____temp_11 = if ____t_10(____temp_9) then __gt(y, by - m) else __O[607]
+                __O[608] = ____temp_11
                 return if ____t_12(____temp_11) then __lt(
                     y,
                     __add(by, bh) + m
-                ) else __O[609]
+                ) else __O[608]
             end
         ))
     end
@@ -381,37 +381,75 @@ local __O = {};
         local R = P.R
         local K = "#14201f"
         local taxi = tipo == "taxi"
+        local c = P.c
         local cor = if __t(taxi) then __arrL({"#f2c94c", "#ffe48a", "#b8901c"}, 3) else __arrL({"#3c8a8a", "#7ac8c8", "#265e5e"}, 3)
-        if __t(o.voando) then
+        local voa = not not __t(o.voando)
+        local imp = if __t(o.impulso) then o.impulso else 0
+        local carga = if __t(o.carregando) then o.carregando else 0
+        if __t(if __t(voa) then voa else __gt(carga, 0.2)) then
             for ____, ____value in __iterar((__arrL(
                 {
                     __arrL({-9, 0}, 2),
-                    __arrL({7, 1.7}, 2)
+                    __arrL({8, 1.9}, 2)
                 },
                 2
             ))) do
                 local fx = ____value[1]
                 local ff = ____value[2]
-                local f = 4 + math.sin(t * 38 + ff) * 2
-                P.c.globalAlpha = 0.45
+                local pisca = math.sin(t * 42 + ff) * 1.4 + math.sin(t * 23 + ff * 2) * 0.8
+                local L = math.max(
+                    2,
+                    if __t(voa) then 7 else 3 * carga + imp * 9 + math.min(3, if __t(o.vel) then o.vel else 0 / 90) + pisca
+                )
+                c.globalAlpha = 0.35
+                do
+                    local y = 0
+                    while y < L + 3 do
+                        local w = math.max(1, 5 - y * 4 / (L + 3))
+                        R(
+                            nil,
+                            fx - w / 2,
+                            4 + y,
+                            w,
+                            1,
+                            "#3cc8a0"
+                        )
+                        y = y + 1
+                    end
+                end
+                c.globalAlpha = 0.8
+                do
+                    local y = 0
+                    while y < L do
+                        local w = math.max(1, 3 - y * 2.4 / L)
+                        R(
+                            nil,
+                            fx - w / 2,
+                            4 + y,
+                            w,
+                            1,
+                            if y < L * 0.4 then "#f4fff0" else "#9ef0c8"
+                        )
+                        y = y + 1
+                    end
+                end
+                c.globalAlpha = 1
                 R(
                     nil,
                     fx - 2,
-                    3,
-                    5,
-                    f + 3,
-                    "#bff0c8"
+                    2,
+                    4,
+                    2,
+                    "#2a3436"
                 )
-                P.c.globalAlpha = 0.9
                 R(
                     nil,
                     fx - 1,
-                    3,
-                    3,
-                    f,
-                    "#f4fff0"
+                    2,
+                    2,
+                    1,
+                    "#5a6668"
                 )
-                P.c.globalAlpha = 1
             end
         end
         if not __t(taxi) then
@@ -455,6 +493,18 @@ local __O = {};
                 2,
                 K
             )
+            if __t(if __t(voa) then voa else __gt(carga, 0.2)) then
+                c.globalAlpha = 0.5 + 0.3 * math.sin(t * 20)
+                R(
+                    nil,
+                    -18,
+                    -13,
+                    2,
+                    2,
+                    "#bff0d0"
+                )
+                c.globalAlpha = 1
+            end
         end
         R(
             nil,
@@ -560,6 +610,7 @@ local __O = {};
             7,
             __get(cor, 2)
         )
+        local balanca = if __t(if __t(voa) then math.sin(t * 6) > 0.5 else voa) then -1 else 0
         R(
             nil,
             2,
@@ -571,7 +622,7 @@ local __O = {};
         R(
             nil,
             1,
-            -16,
+            -16 + balanca,
             6,
             1,
             "#e8c86a"
@@ -579,7 +630,7 @@ local __O = {};
         R(
             nil,
             2,
-            -17,
+            -17 + balanca,
             4,
             1,
             "#e8c86a"
@@ -710,8 +761,8 @@ local __O = {};
             math.floor(t * 4),
             2
         ) == 0
-        __O[610] = ____temp_13
-        if ____t_15(if ____t_14(____temp_13) then not __t(o.voando) else __O[610]) then
+        __O[609] = ____temp_13
+        if ____t_15(if ____t_14(____temp_13) then not __t(voa) else __O[609]) then
             R(
                 nil,
                 15,
@@ -721,11 +772,13 @@ local __O = {};
                 "#ffd36b"
             )
         end
+        local desce = if __t(voa) then 1 else 0
+        local a = if __t(voa) then 0.6 else if __t(o.roda) then o.roda else 0
         for ____, wx in __iterar((__arrL({-9, 9}, 2))) do
             R(
                 nil,
                 wx - 4,
-                -2,
+                -2 + desce,
                 8,
                 6,
                 K
@@ -733,7 +786,7 @@ local __O = {};
             R(
                 nil,
                 wx - 3,
-                -1,
+                -1 + desce,
                 6,
                 4,
                 "#2a2a2a"
@@ -741,19 +794,18 @@ local __O = {};
             R(
                 nil,
                 wx - 1,
-                0,
+                desce,
                 2,
                 2,
                 "#9aa0a6"
             )
-            local a = if __t(o.roda) then o.roda else 0
             do
                 local k = 0
                 while k < 2 do
                     R(
                         nil,
                         wx - 1 + math.floor(math.cos(a + k * math.pi) * 2 + 0.5),
-                        math.floor(1 + math.sin(a + k * math.pi) * 1.5 + 0.5) - 1,
+                        math.floor(1 + math.sin(a + k * math.pi) * 1.5 + 0.5) - 1 + desce,
                         1,
                         1,
                         "#d8dce0"
@@ -762,7 +814,7 @@ local __O = {};
                 end
             end
         end
-        P.c.globalAlpha = 0.16 + math.sin(t * 9) * 0.04
+        c.globalAlpha = 0.16 + math.sin(t * 9) * 0.04
         do
             local k = 0
             while k < 9 do
@@ -777,7 +829,7 @@ local __O = {};
                 k = k + 1
             end
         end
-        P.c.globalAlpha = 1
+        c.globalAlpha = 1
     end
     local function fumaca(____, P, x, y, t)
         do
@@ -869,8 +921,8 @@ local __O = {};
                 local dy = __get(b, 1) - __get(a, 1)
                 local ____t_22 = __t
                 local ____hypot_result_21 = __hypot(dx, dy)
-                __O[611] = ____hypot_result_21
-                local l = if ____t_22(____hypot_result_21) then __O[611] else 1
+                __O[610] = ____hypot_result_21
+                local l = if ____t_22(____hypot_result_21) then __O[610] else 1
                 return __arrL(
                     {
                         __get(p, 0) - dy / l * off,
@@ -1255,16 +1307,16 @@ local __O = {};
                         __add(x, w),
                         a
                     )
-                    __O[612] = ____temp_23
+                    __O[611] = ____temp_23
                     local ____temp_25 = if ____t_24(____temp_23) then __lt(
                         y,
                         __add(b, d)
-                    ) else __O[612]
-                    __O[613] = ____temp_25
+                    ) else __O[611]
+                    __O[612] = ____temp_25
                     return if ____t_26(____temp_25) then __gt(
                         __add(y, h),
                         b
-                    ) else __O[613]
+                    ) else __O[612]
                 end
             )
         end
@@ -1285,8 +1337,8 @@ local __O = {};
                 local ____t_29 = __t
                 local ____t_28 = __t
                 local ____temp_27 = not __t(aceita(nil, x, y))
-                __O[614] = ____temp_27
-                if ____t_29(if ____t_28(____temp_27) then __O[614] else bate(
+                __O[613] = ____temp_27
+                if ____t_29(if ____t_28(____temp_27) then __O[613] else bate(
                     nil,
                     x - r,
                     y - r * 0.6,
@@ -1354,20 +1406,20 @@ local __O = {};
                 Tr:nivelEm(x, y),
                 0
             )
-            __O[615] = ____gt_result_30
+            __O[614] = ____gt_result_30
             local ____temp_32 = if ____t_31(____gt_result_30) then __call(
                 tipos,
                 "includes",
                 Tr:tipoEm(x, y)
-            ) else __O[615]
-            __O[616] = ____temp_32
+            ) else __O[614]
+            __O[615] = ____temp_32
             return if ____t_33(____temp_32) then __lt(
                 __get(
                     Tr.px.wd,
                     math.floor(y + 0.5) * Tr.px.W + math.floor(x + 0.5)
                 ),
                 0
-            ) else __O[616]
+            ) else __O[615]
         end
     end
     local pecas = __ord(
@@ -6704,19 +6756,19 @@ local __O = {};
             local ____arrL_45 = __arrL
             local ____t_38 = __t
             local ____temp_37 = not __t(q.mota)
-            __O[617] = ____temp_37
-            local ____temp_43 = if ____t_38(____temp_37) then "O DESAFIO DO MOTA" else __O[617]
+            __O[616] = ____temp_37
+            local ____temp_43 = if ____t_38(____temp_37) then "O DESAFIO DO MOTA" else __O[616]
             local ____t_40 = __t
             local ____temp_39 = not __t(q.almiro)
-            __O[618] = ____temp_39
-            local ____temp_44 = if ____t_40(____temp_39) then "A MISSÃO DO ALMIRO" else __O[618]
+            __O[617] = ____temp_39
+            local ____temp_44 = if ____t_40(____temp_39) then "A MISSÃO DO ALMIRO" else __O[617]
             local ____t_42 = __t
             local ____temp_41 = not __t(q.miqueias)
-            __O[619] = ____temp_41
+            __O[618] = ____temp_41
             return {
                 titulo = "PRECISA VENCER",
                 nomes = ____call_46(
-                    ____arrL_45({____temp_43, ____temp_44, if ____t_42(____temp_41) then "O ENGLISH DO MIQUEIAS" else __O[619]}, 3),
+                    ____arrL_45({____temp_43, ____temp_44, if ____t_42(____temp_41) then "O ENGLISH DO MIQUEIAS" else __O[618]}, 3),
                     "filter",
                     window.Boolean
                 )
@@ -6739,13 +6791,13 @@ local __O = {};
             local ____arrL_52 = __arrL
             local ____t_48 = __t
             local ____temp_47 = not __t(q.giant)
-            __O[620] = ____temp_47
-            local ____temp_51 = if ____t_48(____temp_47) then "O MONSTRO DO CADERNO DO CAOS" else __O[620]
+            __O[619] = ____temp_47
+            local ____temp_51 = if ____t_48(____temp_47) then "O MONSTRO DO CADERNO DO CAOS" else __O[619]
             local ____t_50 = __t
             local ____temp_49 = not __t(q.menezes)
-            __O[621] = ____temp_49
+            __O[620] = ____temp_49
             local d = ____call_53(
-                ____arrL_52({____temp_51, if ____t_50(____temp_49) then "MENEZES" else __O[621]}, 2),
+                ____arrL_52({____temp_51, if ____t_50(____temp_49) then "MENEZES" else __O[620]}, 2),
                 "filter",
                 window.Boolean
             )
@@ -6793,8 +6845,8 @@ local __O = {};
             if ____opt_62 ~= nil then
                 ____opt_result_64 = ____opt_62(____opt_62, id, q)
             end
-            __O[622] = ____opt_result_64
-            local r = if ____t_65(____opt_result_64) then __O[622] else {ok = true}
+            __O[621] = ____opt_result_64
+            local r = if ____t_65(____opt_result_64) then __O[621] else {ok = true}
             if r.ok == false then
                 return {
                     ok = false,
@@ -6895,8 +6947,8 @@ local __O = {};
             local ____self_77_parse_78 = ____self_77.parse
             local ____t_76 = __t
             local ____temp_75 = window.localStorage:getItem(KEY_V)
-            __O[623] = ____temp_75
-            local v = ____self_77_parse_78(____self_77, if ____t_76(____temp_75) then __O[623] else "[]")
+            __O[622] = ____temp_75
+            local v = ____self_77_parse_78(____self_77, if ____t_76(____temp_75) then __O[622] else "[]")
             if __isArray(v) then
                 vencidos = __call(
                     v,
@@ -6921,8 +6973,8 @@ local __O = {};
         local ____t_81 = __t
         local ____t_80 = __t
         local ____temp_79 = not __t(r)
-        __O[624] = ____temp_79
-        if ____t_81(if ____t_80(____temp_79) then __O[624] else __call(vencidos, "includes", r)) then
+        __O[623] = ____temp_79
+        if ____t_81(if ____t_80(____temp_79) then __O[623] else __call(vencidos, "includes", r)) then
             return {ok = true}
         end
         local nome = __get(VILOES, r)
@@ -8465,8 +8517,8 @@ local __O = {};
                                 local ____t_84 = __t
                                 local ____t_83 = __t
                                 local ____temp_82 = math.abs(x - 100) < 20 and y > 480
-                                __O[625] = ____temp_82
-                                if ____t_84(if ____t_83(____temp_82) then y < 540 else __O[625]) then
+                                __O[624] = ____temp_82
+                                if ____t_84(if ____t_83(____temp_82) then y < 540 else __O[624]) then
                                     continue
                                 end
                                 P:arvore(
@@ -11151,8 +11203,8 @@ local __O = {};
                             local ____t_87 = __t
                             local ____t_86 = __t
                             local ____temp_85 = y > 660 and x > 700
-                            __O[626] = ____temp_85
-                            if ____t_87(if ____t_86(____temp_85) then x < 940 else __O[626]) then
+                            __O[625] = ____temp_85
+                            if ____t_87(if ____t_86(____temp_85) then x < 940 else __O[625]) then
                                 add(
                                     nil,
                                     y,
@@ -12762,12 +12814,12 @@ local __O = {};
                     ____opt_90 = ____opt_90.x
                 end
                 local ____TS__Number_result_92 = __TS__Number(____opt_90)
-                __O[627] = ____TS__Number_result_92
-                local hx = if ____t_93(____TS__Number_result_92) then __O[627] else -9999
+                __O[626] = ____TS__Number_result_92
+                local hx = if ____t_93(____TS__Number_result_92) then __O[626] else -9999
                 local ____t_95 = __t
                 local ____TS__Number_result_94 = __TS__Number(o.time)
-                __O[628] = ____TS__Number_result_94
-                local t = if ____t_95(____TS__Number_result_94) then __O[628] else 0
+                __O[627] = ____TS__Number_result_94
+                local t = if ____t_95(____TS__Number_result_94) then __O[627] else 0
                 for ____, p in __iterar((PONTOS)) do
                     local ____t_100 = __t
                     local ____temp_99 = p.cena == __TS__Number(o.scene)
@@ -12775,8 +12827,8 @@ local __O = {};
                         local ____p_x_98 = p.x
                         local ____t_97 = __t
                         local ____TS__Number_result_96 = __TS__Number(o.camera)
-                        __O[629] = ____TS__Number_result_96
-                        ____temp_99 = math.abs(____p_x_98 - if ____t_97(____TS__Number_result_96) then __O[629] else 0 - 480) < 640
+                        __O[628] = ____TS__Number_result_96
+                        ____temp_99 = math.abs(____p_x_98 - if ____t_97(____TS__Number_result_96) then __O[628] else 0 - 480) < 640
                     end
                     if ____t_100(____temp_99) then
                         desenharTaxi(
@@ -12795,8 +12847,8 @@ local __O = {};
                 local ____t_103 = __t
                 local ____t_102 = __t
                 local ____call_result_101 = __call(ORDEM, "includes", v)
-                __O[630] = ____call_result_101
-                if ____t_103(if ____t_102(____call_result_101) then not __t(__call(vencidos, "includes", v)) else __O[630]) then
+                __O[629] = ____call_result_101
+                if ____t_103(if ____t_102(____call_result_101) then not __t(__call(vencidos, "includes", v)) else __O[629]) then
                     __call(vencidos, "push", v)
                     salvarV(nil)
                 end

@@ -36,8 +36,8 @@ local __O = {};
                     local ____t_21 = __t
                     local ____t_20 = __t
                     local ____temp_19 = id == "interact"
-                    __O[633] = ____temp_19
-                    if ____t_21(if ____t_20(____temp_19) then down else __O[633]) then
+                    __O[632] = ____temp_19
+                    if ____t_21(if ____t_20(____temp_19) then down else __O[632]) then
                         usar(nil)
                     end
                 end
@@ -209,8 +209,8 @@ local __O = {};
         __re("[?&]cenarios2\\b", ""),
         window.location.search
     ) or not __t(window.CampanhaCenarios)
-    __O[631] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[631] else not __t(window.Art)) then
+    __O[630] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[630] else not __t(window.Art)) then
         return
     end
     L = window.CampanhaCenarios.lista
@@ -254,8 +254,8 @@ local __O = {};
         if ____opt_5 ~= nil then
             ____opt_result_7 = ____opt_5(____opt_5, id)
         end
-        __O[632] = ____opt_result_7
-        return if ____t_8(____opt_result_7) then __O[632] else __arrL({}, 0)
+        __O[631] = ____opt_result_7
+        return if ____t_8(____opt_result_7) then __O[631] else __arrL({}, 0)
     end
     box = window.document:createElement("div")
     box.style.cssText = "position:fixed;inset:0;z-index:100000;background:#0b0f14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font:12px Pixel,monospace;color:#f2efe6;touch-action:none"
@@ -395,7 +395,7 @@ local __O = {};
         if ____opt_28 ~= nil then
             ____opt_result_30 = ____opt_28(____opt_28)
         end
-        __O[634] = ____opt_result_30
+        __O[633] = ____opt_result_30
         local ____opt_34 = window.DarocaLook
         if ____opt_34 ~= nil then
             ____opt_34 = ____opt_34.isOpen
@@ -404,8 +404,8 @@ local __O = {};
         if ____opt_34 ~= nil then
             ____opt_result_36 = ____opt_34(____opt_34)
         end
-        local ____temp_37 = if ____t_31(____opt_result_30) then __O[634] else ____opt_result_36
-        __O[635] = ____temp_37
+        local ____temp_37 = if ____t_31(____opt_result_30) then __O[633] else ____opt_result_36
+        __O[634] = ____temp_37
         local ____opt_41 = window.CampanhaPoderes
         if ____opt_41 ~= nil then
             ____opt_41 = ____opt_41.muralAberto
@@ -414,8 +414,8 @@ local __O = {};
         if ____opt_41 ~= nil then
             ____opt_result_43 = ____opt_41(____opt_41)
         end
-        local ____temp_44 = if ____t_38(____temp_37) then __O[635] else ____opt_result_43
-        __O[636] = ____temp_44
+        local ____temp_44 = if ____t_38(____temp_37) then __O[634] else ____opt_result_43
+        __O[635] = ____temp_44
         local ____opt_48 = window.Mapa3D
         if ____opt_48 ~= nil then
             ____opt_48 = ____opt_48.aberto
@@ -424,8 +424,8 @@ local __O = {};
         if ____opt_48 ~= nil then
             ____opt_result_50 = ____opt_48(____opt_48)
         end
-        local ____temp_51 = if ____t_45(____temp_44) then __O[636] else ____opt_result_50
-        __O[637] = ____temp_51
+        local ____temp_51 = if ____t_45(____temp_44) then __O[635] else ____opt_result_50
+        __O[636] = ____temp_51
         local ____opt_55 = window.CampanhaLoja
         if ____opt_55 ~= nil then
             ____opt_55 = ____opt_55.aberta
@@ -434,8 +434,8 @@ local __O = {};
         if ____opt_55 ~= nil then
             ____opt_result_57 = ____opt_55(____opt_55)
         end
-        local ____temp_58 = if ____t_52(____temp_51) then __O[637] else ____opt_result_57
-        __O[638] = ____temp_58
+        local ____temp_58 = if ____t_52(____temp_51) then __O[636] else ____opt_result_57
+        __O[637] = ____temp_58
         local ____opt_62 = window.CampanhaCutscenes
         if ____opt_62 ~= nil then
             ____opt_62 = ____opt_62.aberta
@@ -444,12 +444,12 @@ local __O = {};
         if ____opt_62 ~= nil then
             ____opt_result_64 = ____opt_62(____opt_62)
         end
-        return not not ____t_65(if ____t_59(____temp_58) then __O[638] else ____opt_result_64)
+        return not not ____t_65(if ____t_59(____temp_58) then __O[637] else ____opt_result_64)
     end
     local function ocupado()
         local ____t_67 = __t
         local ____cobre_result_66 = cobre(nil)
-        __O[639] = ____cobre_result_66
+        __O[638] = ____cobre_result_66
         local ____t_73 = __t
         local ____opt_70 = window.CampanhaMoradores
         if ____opt_70 ~= nil then
@@ -459,7 +459,7 @@ local __O = {};
         if ____opt_70 ~= nil then
             ____opt_result_72 = ____opt_70(____opt_70)
         end
-        return if ____t_67(____cobre_result_66) then __O[639] else not not ____t_73(____opt_result_72)
+        return if ____t_67(____cobre_result_66) then __O[638] else not not ____t_73(____opt_result_72)
     end
     window:addEventListener(
         "keydown",
@@ -467,8 +467,8 @@ local __O = {};
             local ____t_98 = __t
             local ____t_97 = __t
             local ____temp_96 = not __t(open)
-            __O[640] = ____temp_96
-            if ____t_98(if ____t_97(____temp_96) then __O[640] else ocupado(nil)) then
+            __O[639] = ____temp_96
+            if ____t_98(if ____t_97(____temp_96) then __O[639] else ocupado(nil)) then
                 return
             end
             local k = e.code
@@ -501,8 +501,8 @@ local __O = {};
             local ____t_107 = __t
             local ____t_106 = __t
             local ____temp_105 = if __t(treino) then __get(mapa, k) else treino
-            __O[641] = ____temp_105
-            if ____t_107(if ____t_106(____temp_105) then not __t(e["repeat"]) else __O[641]) then
+            __O[640] = ____temp_105
+            if ____t_107(if ____t_106(____temp_105) then not __t(e["repeat"]) else __O[640]) then
                 TR:acao(
                     __get(mapa, k),
                     true,
@@ -512,8 +512,8 @@ local __O = {};
             local ____t_110 = __t
             local ____t_109 = __t
             local ____temp_108 = k == "Space" or k == "KeyW"
-            __O[642] = ____temp_108
-            if ____t_110(if ____t_109(____temp_108) then __O[642] else k == "ArrowUp") then
+            __O[641] = ____temp_108
+            if ____t_110(if ____t_109(____temp_108) then __O[641] else k == "ArrowUp") then
                 __call(keys, "add", "jump")
                 jump(nil)
                 if __t(treino) then
@@ -569,16 +569,16 @@ local __O = {};
                 local ____t_120 = __t
                 local ____t_119 = __t
                 local ____temp_118 = e.code == "Space" or e.code == "KeyW"
-                __O[643] = ____temp_118
-                if ____t_120(if ____t_119(____temp_118) then __O[643] else e.code == "ArrowUp") then
+                __O[642] = ____temp_118
+                if ____t_120(if ____t_119(____temp_118) then __O[642] else e.code == "ArrowUp") then
                     TR:acao("jump", false, P)
                 end
             end
             local ____t_123 = __t
             local ____t_122 = __t
             local ____temp_121 = e.code == "Space" or e.code == "KeyW"
-            __O[644] = ____temp_121
-            if ____t_123(if ____t_122(____temp_121) then __O[644] else e.code == "ArrowUp") then
+            __O[643] = ____temp_121
+            if ____t_123(if ____t_122(____temp_121) then __O[643] else e.code == "ArrowUp") then
                 __call(keys, "delete", "jump")
             end
             if __t(e.code == "ArrowLeft" or e.code == "KeyA") then
@@ -615,8 +615,8 @@ local __O = {};
         if ____opt_result_135 ~= nil then
             ____opt_result_136 = ____opt_result_135(TR)
         end
-        __O[645] = ____opt_result_136
-        P.vx = if ____t_130(____opt_result_129) then P.vx else ____temp_138 * if ____t_137(____opt_result_136) then __O[645] else 1
+        __O[644] = ____opt_result_136
+        P.vx = if ____t_130(____opt_result_129) then P.vx else ____temp_138 * if ____t_137(____opt_result_136) then __O[644] else 1
         local lim = if __t(d.limites) then d.limites else __arrL({40, d.largura - 40}, 2)
         P.x = math.max(
             __get(lim, 0),
@@ -644,14 +644,14 @@ local __O = {};
             local ____t_141 = __t
             local ____t_140 = __t
             local ____temp_139 = r.tipo == "rampa" and __ge(P.x, r.x0)
-            __O[646] = ____temp_139
-            if ____t_141(if ____t_140(____temp_139) then __le(P.x, r.x1) else __O[646]) then
+            __O[645] = ____temp_139
+            if ____t_141(if ____t_140(____temp_139) then __le(P.x, r.x1) else __O[645]) then
                 local ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0)
                 local ____t_144 = __t
                 local ____t_143 = __t
                 local ____temp_142 = P.vy >= 0 and P.y >= ry - 14
-                __O[647] = ____temp_142
-                if ____t_144(if ____t_143(____temp_142) then __le(prevY, ry + 40) else __O[647]) then
+                __O[646] = ____temp_142
+                if ____t_144(if ____t_143(____temp_142) then __le(prevY, ry + 40) else __O[646]) then
                     P.y = ry
                     P.vy = 0
                     P.ground = true
@@ -660,10 +660,10 @@ local __O = {};
                 local ____t_148 = __t
                 local ____t_146 = __t
                 local ____temp_145 = P.x >= r.x1 - 4
-                __O[648] = ____temp_145
-                local ____temp_147 = if ____t_146(____temp_145) then P.ground else __O[648]
-                __O[649] = ____temp_147
-                if ____t_149(if ____t_148(____temp_147) then dir > 0 else __O[649]) then
+                __O[647] = ____temp_145
+                local ____temp_147 = if ____t_146(____temp_145) then P.ground else __O[647]
+                __O[648] = ____temp_147
+                if ____t_149(if ____t_148(____temp_147) then dir > 0 else __O[648]) then
                     viagem = {tipo = "porta", t = 0, para = r.para}
                 end
             end
@@ -680,10 +680,10 @@ local __O = {};
                     P.x,
                     __add(px, pw) + 6
                 )
-                __O[650] = ____temp_150
-                local ____temp_152 = if ____t_151(____temp_150) then __le(prevY, py + 2) else __O[650]
-                __O[651] = ____temp_152
-                if ____t_154(if ____t_153(____temp_152) then __ge(P.y, py) else __O[651]) then
+                __O[649] = ____temp_150
+                local ____temp_152 = if ____t_151(____temp_150) then __le(prevY, py + 2) else __O[649]
+                __O[650] = ____temp_152
+                if ____t_154(if ____t_153(____temp_152) then __ge(P.y, py) else __O[650]) then
                     P.y = py
                     P.vy = 0
                     P.ground = true
@@ -692,8 +692,8 @@ local __O = {};
             local ____t_157 = __t
             local ____t_156 = __t
             local ____temp_155 = not __t(P.ground) and not __t(overGap)
-            __O[652] = ____temp_155
-            if ____t_157(if ____t_156(____temp_155) then P.y >= FLOOR else __O[652]) then
+            __O[651] = ____temp_155
+            if ____t_157(if ____t_156(____temp_155) then P.y >= FLOOR else __O[651]) then
                 P.y = FLOOR
                 P.vy = 0
                 P.ground = true
@@ -852,8 +852,8 @@ local __O = {};
             if ____opt_180 ~= nil then
                 ____opt_result_182 = ____opt_180(____opt_180)
             end
-            __O[653] = ____opt_result_182
-            local sh = if ____t_183(____opt_result_182) then __O[653] else 0
+            __O[652] = ____opt_result_182
+            local sh = if ____t_183(____opt_result_182) then __O[652] else 0
             c:translate(
                 -math.floor(cam + 0.5) + math.floor((math.random() - 0.5) * sh + 0.5),
                 math.floor((math.random() - 0.5) * sh + 0.5)
@@ -917,9 +917,9 @@ local __O = {};
         local ____t_207 = __t
         local ____t_205 = __t
         local ____temp_204 = not not __t(P.vx)
-        __O[654] = ____temp_204
-        local ____temp_206 = if ____t_205(____temp_204) then P.ground else __O[654]
-        __O[655] = ____temp_206
+        __O[653] = ____temp_204
+        local ____temp_206 = if ____t_205(____temp_204) then P.ground else __O[653]
+        __O[654] = ____temp_206
         local ____opt_result_210
         if viagem ~= nil then
             ____opt_result_210 = viagem.tipo
@@ -933,7 +933,7 @@ local __O = {};
             {
                 frame = ____t_211,
                 facing = ____P_facing_212,
-                moving = if ____t_207(____temp_206) then __O[655] else ____opt_result_210 == "porta",
+                moving = if ____t_207(____temp_206) then __O[654] else ____opt_result_210 == "porta",
                 grounded = P.ground,
                 vy = P.vy,
                 attack = atkT > 0,
@@ -973,8 +973,8 @@ local __O = {};
         local ____t_235 = __t
         local ____t_234 = __t
         local ____temp_233 = not __t(viagem)
-        __O[656] = ____temp_233
-        if ____t_235(if ____t_234(____temp_233) then P.ground else __O[656]) then
+        __O[655] = ____temp_233
+        if ____t_235(if ____t_234(____temp_233) then P.ground else __O[655]) then
             local best = 1000000000
             for ____, p in __iterar((portais(nil, D.id))) do
                 if p.tipo == "rampa" then
@@ -1141,15 +1141,15 @@ local __O = {};
                 if viagem ~= nil then
                     ____opt_result_263 = viagem.tipo
                 end
-                __O[657] = ____opt_result_263
-                local ____temp_270 = if ____t_264(____opt_result_263) then __O[657] else nil
+                __O[656] = ____opt_result_263
+                local ____temp_270 = if ____t_264(____opt_result_263) then __O[656] else nil
                 local ____t_268 = __t
                 local ____opt_result_267
                 if perto ~= nil then
                     ____opt_result_267 = perto.rotulo
                 end
-                __O[658] = ____opt_result_267
-                return {cena = ____get_result_id_269, viagem = ____temp_270, perto = if ____t_268(____opt_result_267) then __O[658] else nil}
+                __O[657] = ____opt_result_267
+                return {cena = ____get_result_id_269, viagem = ____temp_270, perto = if ____t_268(____opt_result_267) then __O[657] else nil}
             end
         },
         "go,cena,hora,ir,bater,usar,fechar,jogador,estado"

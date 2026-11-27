@@ -15,8 +15,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art)
-    __O[2671] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2671] else window.SceneDetails) then
+    __O[2670] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[2670] else window.SceneDetails) then
         return
     end
     local art = window.Art
@@ -32,10 +32,10 @@ local __O = {};
         local ____b_7 = b
         local ____t_6 = __t
         local ____TS__Number_result_5 = __TS__Number(n)
-        __O[2672] = ____TS__Number_result_5
+        __O[2671] = ____TS__Number_result_5
         return math.max(
             ____a_8,
-            math.min(____b_7, if ____t_6(____TS__Number_result_5) then __O[2672] else 0)
+            math.min(____b_7, if ____t_6(____TS__Number_result_5) then __O[2671] else 0)
         )
     end
     local function hash(____, n)
@@ -114,8 +114,8 @@ local __O = {};
     local function time(self, t)
         local ____t_12 = __t
         local ____TS__Number_result_11 = __TS__Number(t)
-        __O[2673] = ____TS__Number_result_11
-        return if __t(reduced and reduced.matches) then 0 else if ____t_12(____TS__Number_result_11) then __O[2673] else 0
+        __O[2672] = ____TS__Number_result_11
+        return if __t(reduced and reduced.matches) then 0 else if ____t_12(____TS__Number_result_11) then __O[2672] else 0
     end
     local function sceneAllowed(self)
         do
@@ -566,8 +566,8 @@ local __O = {};
     local function groundTexture(self, c, scene, camera)
         local ____t_34 = __t
         local ____get_result_33 = __get(palettes, scene)
-        __O[2674] = ____get_result_33
-        local pal = if ____t_34(____get_result_33) then __O[2674] else __get(palettes, 0)
+        __O[2673] = ____get_result_33
+        local pal = if ____t_34(____get_result_33) then __O[2673] else __get(palettes, 0)
         local start = math.floor(camera / 256)
         do
             local chunk = start
@@ -733,8 +733,8 @@ local __O = {};
                     ____opt_35 = ____opt_35.gaps
                 end
                 local ____getq_37_result_38 = ____getq_37(____opt_35, scene)
-                __O[2675] = ____getq_37_result_38
-                local gaps = if ____t_39(____getq_37_result_38) then __O[2675] else __arrL({}, 0)
+                __O[2674] = ____getq_37_result_38
+                local gaps = if ____t_39(____getq_37_result_38) then __O[2674] else __arrL({}, 0)
                 c:save()
                 c:beginPath()
                 local cursor = worldX
@@ -1491,8 +1491,8 @@ local __O = {};
             ____opt_result_48 = camera.x
         end
         local ____TS__Number_result_49 = __TS__Number(____opt_result_48)
-        __O[2676] = ____TS__Number_result_49
-        local pan = if ____t_50(____TS__Number_result_49) then __O[2676] else 640
+        __O[2675] = ____TS__Number_result_49
+        local pan = if ____t_50(____TS__Number_result_49) then __O[2675] else 640
         local fade = math.min(
             24,
             math.floor(cap / 4)
@@ -1755,8 +1755,8 @@ local __O = {};
                 if camera ~= nil then
                     ____opt_result_53 = camera.x
                 end
-                __O[2677] = ____opt_result_53
-                local x = ____mod_56(____temp_55 - if ____t_54(____opt_result_53) then __O[2677] else 0 * 0.09 + W + 140, W + 140) - 70
+                __O[2676] = ____opt_result_53
+                local x = ____mod_56(____temp_55 - if ____t_54(____opt_result_53) then __O[2676] else 0 * 0.09 + W + 140, W + 140) - 70
                 local y = H * 0.2 + i * 19 + math.sin(t * 0.4 + i) * 3
                 local wing = math.floor(math.sin(t * 4 + i) * 2 + 0.5)
                 line(
@@ -1805,16 +1805,16 @@ local __O = {};
         for ____, p in __iterar((if __t(platforms) then platforms else __arrL({}, 0))) do
             local ____t_58 = __t
             local ____TS__Number_result_57 = __TS__Number(p.x)
-            __O[2678] = ____TS__Number_result_57
-            local x = if ____t_58(____TS__Number_result_57) then __O[2678] else 0
+            __O[2677] = ____TS__Number_result_57
+            local x = if ____t_58(____TS__Number_result_57) then __O[2677] else 0
             local ____t_60 = __t
             local ____TS__Number_result_59 = __TS__Number(p.y)
-            __O[2679] = ____TS__Number_result_59
-            local y = if ____t_60(____TS__Number_result_59) then __O[2679] else 0
+            __O[2678] = ____TS__Number_result_59
+            local y = if ____t_60(____TS__Number_result_59) then __O[2678] else 0
             local ____t_62 = __t
             local ____TS__Number_result_61 = __TS__Number(p.w)
-            __O[2680] = ____TS__Number_result_61
-            local w = if ____t_62(____TS__Number_result_61) then __O[2680] else 0
+            __O[2679] = ____TS__Number_result_61
+            local w = if ____t_62(____TS__Number_result_61) then __O[2679] else 0
             if w < 30 then
                 continue
             end
@@ -1941,12 +1941,12 @@ local __O = {};
         local ____TS__Number_result_72 = __TS__Number(scene)
         local ____t_70 = __t
         local ____TS__Number_result_69 = __TS__Number(camera)
-        __O[2681] = ____TS__Number_result_69
+        __O[2680] = ____TS__Number_result_69
         ____campaign_73(
             nil,
             ____c_71,
             ____TS__Number_result_72,
-            if ____t_70(____TS__Number_result_69) then __O[2681] else 0,
+            if ____t_70(____TS__Number_result_69) then __O[2680] else 0,
             t
         )
     end

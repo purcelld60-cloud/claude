@@ -131,11 +131,11 @@ local __O = {};
             __re("^chefe-([a-z]+)(?:-fase-?(\\d))?$", "")
         )
         local ____m_0 = m
-        __O[2282] = ____m_0
+        __O[2281] = ____m_0
         if ____t_2(if ____t_1(____m_0) then __get(
             BOSS,
             __get(m, 1)
-        ) else __O[2282]) then
+        ) else __O[2281]) then
             return __add(
                 __add(
                     "battles.",
@@ -157,11 +157,11 @@ local __O = {};
             __re("^apresentacao-([a-z]+)$", "")
         )
         local ____m_3 = m
-        __O[2283] = ____m_3
+        __O[2282] = ____m_3
         if ____t_5(if ____t_4(____m_3) then __get(
             BOSS,
             __get(m, 1)
-        ) else __O[2283]) then
+        ) else __O[2282]) then
             return __add("events.boss_", if __get(m, 1) == "reeis" then "reeis" else __get(
                 BOSS,
                 __get(m, 1)
@@ -237,11 +237,11 @@ local __O = {};
             __re("^dupla-([a-z]+)$", "")
         )
         local ____m_11 = m
-        __O[2284] = ____m_11
+        __O[2283] = ____m_11
         if ____t_13(if ____t_12(____m_11) then __get(
             BOSS,
             __get(m, 1)
-        ) else __O[2284]) then
+        ) else __O[2283]) then
             return __add(
                 "coop.",
                 __get(
@@ -323,10 +323,10 @@ local __O = {};
                 local ____re_split_16 = __re_split
                 local ____t_15 = __t
                 local ____get_result_14 = __get(fm, 2)
-                __O[2285] = ____get_result_14
+                __O[2284] = ____get_result_14
                 for ____, tok in __TS__Iterator(____iter_18(____call_17(
                     ____re_split_16(
-                        if ____t_15(____get_result_14) then __O[2285] else "",
+                        if ____t_15(____get_result_14) then __O[2284] else "",
                         __re("\\s+", "")
                     ),
                     "filter",
@@ -478,15 +478,15 @@ local __O = {};
                 local ____t_21 = __t
                 local ____t_20 = __t
                 local ____temp_19 = not __t(list)
-                __O[2286] = ____temp_19
-                if ____t_21(if ____t_20(____temp_19) then pre else __O[2286]) then
+                __O[2285] = ____temp_19
+                if ____t_21(if ____t_20(____temp_19) then pre else __O[2285]) then
                     list = pre
                 end
                 local ____t_24 = __t
                 local ____t_23 = __t
                 local ____temp_22 = txt == nil
-                __O[2287] = ____temp_22
-                if ____t_24(if ____t_23(____temp_22) then pre else __O[2287]) then
+                __O[2286] = ____temp_22
+                if ____t_24(if ____t_23(____temp_22) then pre else __O[2286]) then
                     txt = if __t(pre.txt) then pre.txt else ""
                 end
                 local ____call_35 = __call
@@ -495,27 +495,27 @@ local __O = {};
                 if list ~= nil then
                     ____opt_result_27 = list.arquivos
                 end
-                __O[2288] = ____opt_result_27
+                __O[2287] = ____opt_result_27
                 local files = ____call_35(
-                    if ____t_28(____opt_result_27) then __O[2288] else __arrL({}, 0),
+                    if ____t_28(____opt_result_27) then __O[2287] else __arrL({}, 0),
                     "filter",
                     function(____, f)
                         local ____t_34 = __t
                         local ____t_32 = __t
                         local ____t_30 = __t
                         local ____temp_29 = if __t(f) then type(f.nome) == "string" else f
-                        __O[2289] = ____temp_29
-                        local ____temp_31 = if ____t_30(____temp_29) then EXT:test(f.nome) else __O[2289]
-                        __O[2290] = ____temp_31
+                        __O[2288] = ____temp_29
+                        local ____temp_31 = if ____t_30(____temp_29) then EXT:test(f.nome) else __O[2288]
+                        __O[2289] = ____temp_31
                         local ____temp_33 = if ____t_32(____temp_31) then not __re_test(
                             __re("\\\\|\\.\\.", ""),
                             f.nome
-                        ) else __O[2290]
-                        __O[2291] = ____temp_33
+                        ) else __O[2289]
+                        __O[2290] = ____temp_33
                         return if ____t_34(____temp_33) then __re_test(
                             __re("^[^/]+(\\/[^/]+)?$", ""),
                             f.nome
-                        ) else __O[2291]
+                        ) else __O[2290]
                     end
                 )
                 local parsed = parseTxt(nil, if __t(txt) then txt else "")
@@ -527,8 +527,8 @@ local __O = {};
                 if list ~= nil then
                     ____opt_result_38 = list.avisos
                 end
-                __O[2292] = ____opt_result_38
-                lastWarnings = ____call_41(____parsed_warnings_40, "concat", if ____t_39(____opt_result_38) then __O[2292] else __arrL({}, 0))
+                __O[2291] = ____opt_result_38
+                lastWarnings = ____call_41(____parsed_warnings_40, "concat", if ____t_39(____opt_result_38) then __O[2291] else __arrL({}, 0))
                 local tracks = __arrL({}, 0)
                 local bindings = {}
                 local byName = __TS__New(Map)
@@ -567,11 +567,11 @@ local __O = {};
                     local ____add_result_48 = __add("musicas/", name)
                     local ____t_43 = __t
                     local ____TS__Number_result_42 = __TS__Number(meta.bytes)
-                    __O[2293] = ____TS__Number_result_42
-                    local ____temp_49 = if ____t_43(____TS__Number_result_42) then __O[2293] else 0
+                    __O[2292] = ____TS__Number_result_42
+                    local ____temp_49 = if ____t_43(____TS__Number_result_42) then __O[2292] else 0
                     local ____t_45 = __t
                     local ____TS__Number_result_44 = __TS__Number(meta.duracao)
-                    __O[2294] = ____TS__Number_result_44
+                    __O[2293] = ____TS__Number_result_44
                     local t = {
                         id = ____id_46,
                         title = ____re_replace_result_47,
@@ -579,7 +579,7 @@ local __O = {};
                         file = ____add_result_48,
                         sha256 = "",
                         bytes = ____temp_49,
-                        duration = if ____t_45(____TS__Number_result_44) then __O[2294] else 0,
+                        duration = if ____t_45(____TS__Number_result_44) then __O[2293] else 0,
                         volume = 1,
                         loop = true,
                         fadeMs = 1200,
@@ -610,8 +610,8 @@ local __O = {};
                     local ____t_52 = __t
                     local ____t_51 = __t
                     local ____temp_50 = not __t(__call(f.nome, "includes", "/")) or type(f.lugar) ~= "string"
-                    __O[2295] = ____temp_50
-                    if ____t_52(if ____t_51(____temp_50) then __O[2295] else not __re_test(
+                    __O[2294] = ____temp_50
+                    if ____t_52(if ____t_51(____temp_50) then __O[2294] else not __re_test(
                         __re("^[a-zA-Z0-9_.-]{1,90}$", ""),
                         f.lugar
                     )) then
@@ -619,12 +619,12 @@ local __O = {};
                     end
                     local ____call_53 = __call
                     do
-                        __O[2296] = porLugar
-                        __O[2297] = f.lugar
+                        __O[2295] = porLugar
+                        __O[2296] = f.lugar
                     end
-                    ____call_53(if __t(__get(__O[2296], __O[2297])) then __get(__O[2296], __O[2297]) else __set(
+                    ____call_53(if __t(__get(__O[2295], __O[2296])) then __get(__O[2295], __O[2296]) else __set(
+                        __O[2295],
                         __O[2296],
-                        __O[2297],
                         __arrL({}, 0)
                     ), "push", f)
                 end
@@ -646,8 +646,8 @@ local __O = {};
                     local ____t_56 = __t
                     local ____t_55 = __t
                     local ____temp_54 = not __t(meta)
-                    __O[2298] = ____temp_54
-                    if ____t_56(if ____t_55(____temp_54) then __len(files) else __O[2298]) then
+                    __O[2297] = ____temp_54
+                    if ____t_56(if ____t_55(____temp_54) then __len(files) else __O[2297]) then
                         __call(
                             lastWarnings,
                             "push",

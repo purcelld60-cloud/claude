@@ -16,10 +16,10 @@ local __O = {};
     function count(self, value)
         local ____t_7 = __t
         local ____TS__Number_result_6 = __TS__Number(value)
-        __O[1416] = ____TS__Number_result_6
+        __O[1415] = ____TS__Number_result_6
         return clamp(
             nil,
-            math.floor(if ____t_7(____TS__Number_result_6) then __O[1416] else 0),
+            math.floor(if ____t_7(____TS__Number_result_6) then __O[1415] else 0),
             0,
             999999
         )
@@ -111,8 +111,8 @@ local __O = {};
         local p = vendorPlan(nil, s)
         local ____t_66 = __t
         local ____get_result_65 = __get(s.progress.quests, p.id)
-        __O[1421] = ____get_result_65
-        local quest = if ____t_66(____get_result_65) then __O[1421] else {}
+        __O[1420] = ____get_result_65
+        local quest = if ____t_66(____get_result_65) then __O[1420] else {}
         s.plan = p
         if __t(quest.done) then
             text(
@@ -154,8 +154,8 @@ local __O = {};
                 function(____, id)
                     local ____t_68 = __t
                     local ____get_result_67 = __get(s.progress.completed, id)
-                    __O[1422] = ____get_result_67
-                    return if ____t_68(____get_result_67) then __O[1422] else __get(s.progress.inspected, id)
+                    __O[1421] = ____get_result_67
+                    return if ____t_68(____get_result_67) then __O[1421] else __get(s.progress.inspected, id)
                 end
             )
             local ready = __len(done) == __len(p.requirements)
@@ -239,8 +239,8 @@ local __O = {};
             local p = s.plan
             local ____t_74 = __t
             local ____get_result_73 = __get(s.progress.quests, p.id)
-            __O[1423] = ____get_result_73
-            local quest = if ____t_74(____get_result_73) then __O[1423] else {}
+            __O[1422] = ____get_result_73
+            local quest = if ____t_74(____get_result_73) then __O[1422] else {}
             if not __t(quest.accepted) then
                 __set(s.progress.quests, p.id, {accepted = true, done = false})
                 save(nil)
@@ -250,17 +250,17 @@ local __O = {};
                 local ____t_79 = __t
                 local ____t_76 = __t
                 local ____temp_75 = not __t(quest.done)
-                __O[1425] = ____temp_75
+                __O[1424] = ____temp_75
                 if ____t_79(if ____t_76(____temp_75) then __call(
                     p.requirements,
                     "every",
                     function(____, id)
                         local ____t_78 = __t
                         local ____get_result_77 = __get(s.progress.completed, id)
-                        __O[1424] = ____get_result_77
-                        return if ____t_78(____get_result_77) then __O[1424] else __get(s.progress.inspected, id)
+                        __O[1423] = ____get_result_77
+                        return if ____t_78(____get_result_77) then __O[1423] else __get(s.progress.inspected, id)
                     end
-                ) else __O[1425]) then
+                ) else __O[1424]) then
                     quest.done = true
                     reward(
                         nil,
@@ -446,8 +446,8 @@ local __O = {};
         local ____t_86 = __t
         local ____t_85 = __t
         local ____temp_84 = not __t(s) or s.stage ~= "live"
-        __O[1426] = ____temp_84
-        if ____t_86(if ____t_85(____temp_84) then __O[1426] else s.kind ~= "pump") then
+        __O[1425] = ____temp_84
+        if ____t_86(if ____t_85(____temp_84) then __O[1425] else s.kind ~= "pump") then
             return
         end
         local good = math.abs(s.cursor - s.target) <= 0.125
@@ -942,11 +942,11 @@ local __O = {};
             if ____opt_93 ~= nil then
                 ____opt_93 = ____opt_93.name
             end
-            __O[1427] = ____opt_93
+            __O[1426] = ____opt_93
             ____label_96(
                 nil,
                 c,
-                if ____t_95(____opt_93) then __O[1427] else "UM PÁTIO SEM BAGUNÇA",
+                if ____t_95(____opt_93) then __O[1426] else "UM PÁTIO SEM BAGUNÇA",
                 320,
                 40,
                 20
@@ -1038,7 +1038,7 @@ local __O = {};
             ____opt_result_102 = ____opt_result_101.completed
         end
         local ____getq_103_result_104 = ____getq_103(____opt_result_102, p.id)
-        __O[1428] = ____getq_103_result_104
+        __O[1427] = ____getq_103_result_104
         local ____getq_112 = __getq
         local ____opt_result_110
         if q ~= nil then
@@ -1048,7 +1048,7 @@ local __O = {};
         if ____opt_result_110 ~= nil then
             ____opt_result_111 = ____opt_result_110.inspected
         end
-        local done = not not ____t_113(if ____t_105(____getq_103_result_104) then __O[1428] else ____getq_112(____opt_result_111, p.id))
+        local done = not not ____t_113(if ____t_105(____getq_103_result_104) then __O[1427] else ____getq_112(____opt_result_111, p.id))
         c:save()
         c:translate(
             math.floor(x + 0.5),
@@ -2128,8 +2128,8 @@ local __O = {};
         local ____t_2 = __t
         local ____t_1 = __t
         local ____temp_0 = not __t(q.worldLife) or type(q.worldLife) ~= "table"
-        __O[1414] = ____temp_0
-        if ____t_2(if ____t_1(____temp_0) then __O[1414] else __isArray(q.worldLife)) then
+        __O[1413] = ____temp_0
+        if ____t_2(if ____t_1(____temp_0) then __O[1413] else __isArray(q.worldLife)) then
             q.worldLife = {}
         end
         local value = q.worldLife
@@ -2143,8 +2143,8 @@ local __O = {};
             local ____t_5 = __t
             local ____t_4 = __t
             local ____temp_3 = not __t(__get(value, key)) or type(__get(value, key)) ~= "table"
-            __O[1415] = ____temp_3
-            if ____t_5(if ____t_4(____temp_3) then __O[1415] else __isArray(__get(value, key))) then
+            __O[1414] = ____temp_3
+            if ____t_5(if ____t_4(____temp_3) then __O[1414] else __isArray(__get(value, key))) then
                 __set(value, key, {})
             end
         end
@@ -2210,14 +2210,14 @@ local __O = {};
                     ____opt_result_14 = session.stage
                 end
                 local ____temp_15 = ____opt_result_14 == "live" and session.kind == "pump"
-                __O[1418] = ____temp_15
+                __O[1417] = ____temp_15
                 local ____t_18 = __t
                 local ____call_result_17 = __call(
                     __arrL({"Space", "Enter"}, 2),
                     "includes",
                     e.code
                 )
-                __O[1417] = ____call_result_17
+                __O[1416] = ____call_result_17
                 local ____opt_21 = window.ControlSettings
                 if ____opt_21 ~= nil then
                     ____opt_21 = ____opt_21.matches
@@ -2226,7 +2226,7 @@ local __O = {};
                 if ____opt_21 ~= nil then
                     ____opt_result_23 = ____opt_21(____opt_21, "interact", e.code)
                 end
-                if ____t_24(if ____t_16(____temp_15) then if ____t_18(____call_result_17) then __O[1417] else ____opt_result_23 else __O[1418]) then
+                if ____t_24(if ____t_16(____temp_15) then if ____t_18(____call_result_17) then __O[1416] else ____opt_result_23 else __O[1417]) then
                     e:preventDefault()
                     e:stopPropagation()
                     pumpHit(nil)
@@ -2238,7 +2238,7 @@ local __O = {};
                         ____opt_result_27 = session.stage
                     end
                     local ____temp_28 = ____opt_result_27 == "live"
-                    __O[1419] = ____temp_28
+                    __O[1418] = ____temp_28
                     if ____t_30(if ____t_29(____temp_28) then __call(
                         __arrL({
                             "Digit1",
@@ -2252,7 +2252,7 @@ local __O = {};
                         }, 8),
                         "includes",
                         e.code
-                    ) else __O[1419]) then
+                    ) else __O[1418]) then
                         e:preventDefault()
                         e:stopPropagation()
                         choice(
@@ -2286,8 +2286,8 @@ local __O = {};
         if ____opt_41 ~= nil then
             ____opt_result_43 = ____opt_41(____opt_41)
         end
-        __O[1420] = ____opt_result_43
-        local gameState = if ____t_44(____opt_result_43) then __O[1420] else {}
+        __O[1419] = ____opt_result_43
+        local gameState = if ____t_44(____opt_result_43) then __O[1419] else {}
         local wasPaused = not not __t(gameState.paused)
         local ____opt_47 = window.Game
         if ____opt_47 ~= nil then
@@ -2367,14 +2367,14 @@ local __O = {};
         if ____opt_114 ~= nil then
             ____opt_114 = ____opt_114.width
         end
-        __O[1429] = ____opt_114
-        local width = if ____t_116(____opt_114) then __O[1429] else 960
+        __O[1428] = ____opt_114
+        local width = if ____t_116(____opt_114) then __O[1428] else 960
         for ____, p in __iterar((objects)) do
             local ____t_119 = __t
             local ____t_118 = __t
             local ____temp_117 = p.scene ~= __TS__Number(scene) or p.x < camera - 90
-            __O[1430] = ____temp_117
-            if ____t_119(if ____t_118(____temp_117) then __O[1430] else __gt(
+            __O[1429] = ____temp_117
+            if ____t_119(if ____t_118(____temp_117) then __O[1429] else __gt(
                 p.x,
                 __add(camera, width) + 90
             )) then
@@ -2384,24 +2384,24 @@ local __O = {};
             local ____c_124 = c
             local ____t_121 = __t
             local ____TS__Number_result_120 = __TS__Number(t)
-            __O[1431] = ____TS__Number_result_120
-            local ____temp_125 = if ____t_121(____TS__Number_result_120) then __O[1431] else 0
+            __O[1430] = ____TS__Number_result_120
+            local ____temp_125 = if ____t_121(____TS__Number_result_120) then __O[1430] else 0
             local ____t_123 = __t
             local ____TS__Number_result_122 = __TS__Number(camera)
-            __O[1432] = ____TS__Number_result_122
+            __O[1431] = ____TS__Number_result_122
             ____drawProp_126(
                 nil,
                 ____c_124,
                 p,
                 ____temp_125,
-                if ____t_123(____TS__Number_result_122) then __O[1432] else 0,
+                if ____t_123(____TS__Number_result_122) then __O[1431] else 0,
                 q
             )
             local ____t_129 = __t
             local ____t_128 = __t
             local ____temp_127 = if __t(player) then math.abs(player.x - p.x) < 90 else player
-            __O[1433] = ____temp_127
-            if ____t_129(if ____t_128(____temp_127) then math.abs(player.y - FLOOR) < 85 else __O[1433]) then
+            __O[1432] = ____temp_127
+            if ____t_129(if ____t_128(____temp_127) then math.abs(player.y - FLOOR) < 85 else __O[1432]) then
                 local x = p.x - camera
                 local y = FLOOR - 104 + math.sin(t * 3) * 2
                 c:save()
@@ -2416,7 +2416,7 @@ local __O = {};
                     ____opt_result_135 = ____opt_result_134.completed
                 end
                 local ____getq_136_result_137 = ____getq_136(____opt_result_135, p.id)
-                __O[1434] = ____getq_136_result_137
+                __O[1433] = ____getq_136_result_137
                 local ____getq_145 = __getq
                 local ____opt_result_143
                 if q ~= nil then
@@ -2426,7 +2426,7 @@ local __O = {};
                 if ____opt_result_143 ~= nil then
                     ____opt_result_144 = ____opt_result_143.inspected
                 end
-                local finished = if ____t_138(____getq_136_result_137) then __O[1434] else ____getq_145(____opt_result_144, p.id)
+                local finished = if ____t_138(____getq_136_result_137) then __O[1433] else ____getq_145(____opt_result_144, p.id)
                 local labelValue = __add(
                     if __t(finished) then "✓ " else "E · ",
                     __get(
@@ -2474,8 +2474,8 @@ local __O = {};
         local ____t_148 = __t
         local ____t_147 = __t
         local ____temp_146 = not __t(player) or not __t(q)
-        __O[1435] = ____temp_146
-        if ____t_148(if ____t_147(____temp_146) then __O[1435] else math.abs(player.y - FLOOR) > 85) then
+        __O[1434] = ____temp_146
+        if ____t_148(if ____t_147(____temp_146) then __O[1434] else math.abs(player.y - FLOOR) > 85) then
             return false
         end
         if __t(session) then
@@ -2517,7 +2517,7 @@ local __O = {};
         if ____opt_149 ~= nil then
             ____opt_149 = ____opt_149.name
         end
-        __O[1436] = ____opt_149
+        __O[1435] = ____opt_149
         return if __t(s) then {
             open = true,
             id = ____s_prop_id_152,
@@ -2532,7 +2532,7 @@ local __O = {};
             sequence = ____temp_161,
             cursor = ____s_cursor_162,
             target = ____s_target_163,
-            card = if ____t_151(____opt_149) then __O[1436] else nil
+            card = if ____t_151(____opt_149) then __O[1435] else nil
         } else {open = false}
     end
     window.WorldLife = __ord({

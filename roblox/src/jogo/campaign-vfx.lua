@@ -23,10 +23,10 @@ local __O = {};
         local ____b_2 = b
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(v)
-        __O[1452] = ____TS__Number_result_0
+        __O[1451] = ____TS__Number_result_0
         return math.max(
             ____a_3,
-            math.min(____b_2, if ____t_1(____TS__Number_result_0) then __O[1452] else 0)
+            math.min(____b_2, if ____t_1(____TS__Number_result_0) then __O[1451] else 0)
         )
     end
     local function rect(self, c, x, y, w, h, color)
@@ -154,8 +154,8 @@ local __O = {};
         local ____type_6 = ____type
         local ____t_5 = __t
         local ____get_result_4 = __get(history, ____type)
-        __O[1453] = ____get_result_4
-        ____set_7(history, ____type_6, if ____t_5(____get_result_4) then __O[1453] else 0 + 1)
+        __O[1452] = ____get_result_4
+        ____set_7(history, ____type_6, if ____t_5(____get_result_4) then __O[1452] else 0 + 1)
         local ____assign_10 = __assign
         local ____temp_8 = {}
         local ____data_9 = data
@@ -327,14 +327,14 @@ local __O = {};
             local ____t_13 = __t
             local ____t_12 = __t
             local ____temp_11 = e.type == "gas"
-            __O[1454] = ____temp_11
-            if ____t_13(if ____t_12(____temp_11) then window.Golpes else __O[1454]) then
+            __O[1453] = ____temp_11
+            if ____t_13(if ____t_12(____temp_11) then window.Golpes else __O[1453]) then
                 continue
             end
             local ____t_15 = __t
             local ____temp_14 = e.type == "gas" or e.type == "surge"
-            __O[1455] = ____temp_14
-            local back = if ____t_15(____temp_14) then __O[1455] else e.type == "dash"
+            __O[1454] = ____temp_14
+            local back = if ____t_15(____temp_14) then __O[1454] else e.type == "dash"
             if layer == "back" ~= back then
                 continue
             end
@@ -483,8 +483,8 @@ local __O = {};
         local ____t_18 = __t
         local ____t_17 = __t
         local ____temp_16 = not __t(s) or __gt(s.delay, 0)
-        __O[1456] = ____temp_16
-        if ____t_18(if ____t_17(____temp_16) then __O[1456] else not __t(__call(
+        __O[1455] = ____temp_16
+        if ____t_18(if ____t_17(____temp_16) then __O[1455] else not __t(__call(
             __arrL({
                 "paper",
                 "ruler",
@@ -513,12 +513,12 @@ local __O = {};
         )
         local ____t_20 = __t
         local ____TS__Number_result_19 = __TS__Number(s.vy)
-        __O[1457] = ____TS__Number_result_19
-        local ____temp_23 = if ____t_20(____TS__Number_result_19) then __O[1457] else 0
+        __O[1456] = ____TS__Number_result_19
+        local ____temp_23 = if ____t_20(____TS__Number_result_19) then __O[1456] else 0
         local ____t_22 = __t
         local ____TS__Number_result_21 = __TS__Number(s.vx)
-        __O[1458] = ____TS__Number_result_21
-        local angle = math.atan2(____temp_23, if ____t_22(____TS__Number_result_21) then __O[1458] else 1)
+        __O[1457] = ____TS__Number_result_21
+        local angle = math.atan2(____temp_23, if ____t_22(____TS__Number_result_21) then __O[1457] else 1)
         local color = if s.element == "electric" then "#a0ebf4" else if s.element == "fire" then "#f6b152" else "#f5e2b2"
         if __t(__call(
             __arrL({

@@ -14,8 +14,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Cinematics)
-    __O[1535] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[1535] else window.CinemaFx) then
+    __O[1534] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[1534] else window.CinemaFx) then
         return
     end
     local orig = window.Cinematics.draw
@@ -357,8 +357,8 @@ local __O = {};
                     )
                     local ____t_10 = __t
                     local ____temp_9 = __mod(st, 3.3) < 0.09
-                    __O[1536] = ____temp_9
-                    local flash = if ____t_10(____temp_9) then __O[1536] else __mod(st, 3.3) > 0.18 and __mod(st, 3.3) < 0.24
+                    __O[1535] = ____temp_9
+                    local flash = if ____t_10(____temp_9) then __O[1535] else __mod(st, 3.3) > 0.18 and __mod(st, 3.3) < 0.24
                     if __t(if __t(flash) then not __t(calm) else flash) then
                         c:save()
                         c.globalAlpha = 0.22
@@ -400,8 +400,8 @@ local __O = {};
         local ____t_13 = __t
         local ____t_12 = __t
         local ____temp_11 = not __t(c) or not __t(s)
-        __O[1537] = ____temp_11
-        if ____t_13(if ____t_12(____temp_11) then __O[1537] else lite(nil)) then
+        __O[1536] = ____temp_11
+        if ____t_13(if ____t_12(____temp_11) then __O[1536] else lite(nil)) then
             return orig(nil, c, s)
         end
         local jorge = s.kind == "jorge_epilogue"
@@ -414,8 +414,8 @@ local __O = {};
             local ____c_16 = c
             local ____t_15 = __t
             local ____TS__Number_result_14 = __TS__Number(s.elapsed)
-            __O[1538] = ____TS__Number_result_14
-            ____grain_17(nil, ____c_16, if ____t_15(____TS__Number_result_14) then __O[1538] else 0, 0.45)
+            __O[1537] = ____TS__Number_result_14
+            ____grain_17(nil, ____c_16, if ____t_15(____TS__Number_result_14) then __O[1537] else 0, 0.45)
             return
         end
         local ____opt_20 = window.JorgeEpilogue
@@ -434,19 +434,19 @@ local __O = {};
         local shot = ____opt_result_25
         local ____t_27 = __t
         local ____TS__Number_result_26 = __TS__Number(s.time)
-        __O[1539] = ____TS__Number_result_26
-        local st = if ____t_27(____TS__Number_result_26) then __O[1539] else 0
+        __O[1538] = ____TS__Number_result_26
+        local st = if ____t_27(____TS__Number_result_26) then __O[1538] else 0
         local ____t_31 = __t
         local ____opt_result_30
         if b ~= nil then
             ____opt_result_30 = b.duration
         end
-        __O[1540] = ____opt_result_30
-        local dur = if ____t_31(____opt_result_30) then __O[1540] else 8
+        __O[1539] = ____opt_result_30
+        local dur = if ____t_31(____opt_result_30) then __O[1539] else 8
         local ____t_33 = __t
         local ____TS__Number_result_32 = __TS__Number(s.elapsed)
-        __O[1541] = ____TS__Number_result_32
-        local total = if ____t_33(____TS__Number_result_32) then __O[1541] else st
+        __O[1540] = ____TS__Number_result_32
+        local total = if ____t_33(____TS__Number_result_32) then __O[1540] else st
         local k = if __t(jorge) then clamp(nil, st / dur) else __mod(st, 10) / 10
         local zoom = 1.012 + if __t(jorge) then 0.03 else 0.02 * smooth(nil, k)
         local amp = if __t(calm) then 0 else if __t(jorge) then if shot == "tremor" then 3.2 else if shot == "recognition" then 2 else 1.1 else 0.6

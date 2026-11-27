@@ -2029,8 +2029,8 @@ local __O = {};
             combate:capitulo(f),
             2
         )
-        __O[913] = ____getq_result_1
-        local cor = if ____t_2(____getq_result_1) then __O[913] else __get(combate.chefes, f.slug).cor
+        __O[912] = ____getq_result_1
+        local cor = if ____t_2(____getq_result_1) then __O[912] else __get(combate.chefes, f.slug).cor
         if f.estado == "phaseChange" then
             virada(nil, c, f)
         end
@@ -2067,8 +2067,8 @@ local __O = {};
                 local ____t_5 = __t
                 local ____t_4 = __t
                 local ____temp_3 = not __t(o.corpo) and o.art ~= "motoTonhao"
-                __O[914] = ____temp_3
-                if ____t_5(if ____t_4(____temp_3) then u > 0.02 else __O[914]) then
+                __O[913] = ____temp_3
+                if ____t_5(if ____t_4(____temp_3) then u > 0.02 else __O[913]) then
                     local a = combate:ponto(
                         o,
                         math.max(0, u - 0.035 / o.dur)
