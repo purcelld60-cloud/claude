@@ -5206,7 +5206,11 @@ local __O = {};
     )
     __L1.ARVORE = __ord({x = 172, y = 196, cx = 176, cy = 122}, "x,y,cx,cy")
     __L1.BALANCO = __ord({x = 200, y = 141, L = 34}, "x,y,L")
-    __L1:montarFixo()
+    if __t(window.DAROCA_ROBLOX) then
+        window:requestAnimationFrame(function() return __L1:montarFixo() end)
+    else
+        __L1:montarFixo()
+    end
     __L1.hora = (__new("Date"):getHours() + __new("Date"):getMinutes() / 60) / 24
     __L1.horaAlvo = nil
     __L1.pas = 0
@@ -5567,7 +5571,11 @@ local __O = {};
     logoCv:setAttribute("aria-label", "Da Roça Adventure")
     __L1.L = __L1:pinta(lc)
     __L1.LB = __L1:bola(lc)
-    __L1:montarPlaca()
+    if __t(window.DAROCA_ROBLOX) then
+        window:requestAnimationFrame(function() return __L1:montarPlaca() end)
+    else
+        __L1:montarPlaca()
+    end
     local ____opt_111 = window.document.fonts
     local ____opt_108 = ____opt_111 and ____opt_111.load
     if ____opt_108 ~= nil then

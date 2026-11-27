@@ -380,3 +380,8 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - `canvas.lua` chama `C.ceder` a cada 48 desenhos;
     - o cliente pausa um quadro (`task.wait`) se já passou 0,5 s, e só durante o carregamento.
   - **`vendor__pixelfx`** não usa mais `--!native` e é carregado na tela de carregamento, não no meio do jogo.
+- **27/11 · Claude:** **Roblox: quadros num laço próprio que pode pausar** (`roblox/src/cliente/DaRoca.client.lua`).
+  - Os quadros não rodam mais presos ao `RenderStepped`: rodam num `task.spawn` com `RenderStepped:Wait()`, um de cada vez.
+  - `Canvas.ceder` fica sempre ligado: se um quadro passa de 0,25 s, ele pausa e continua no quadro seguinte. Assim nenhum quadro pesado bate o limite de 10 s do Roblox.
+  - Teclas, toques e texto que chegam durante a pausa ficam numa fila e são entregues no fim do quadro.
+  - **`tela-inicial.js`:** com `DAROCA_ROBLOX`, o fundo fixo e a placa são montados no primeiro quadro, e não no carregamento.
