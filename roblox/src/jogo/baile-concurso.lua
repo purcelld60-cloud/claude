@@ -55,8 +55,8 @@ local __O = {};
         local ____t_11 = __t
         local ____t_10 = __t
         local ____temp_9 = not __t(jogo)
-        __O[1396] = ____temp_9
-        if ____t_11(if ____t_10(____temp_9) then __O[1396] else jogo.fim) then
+        __O[1397] = ____temp_9
+        if ____t_11(if ____t_10(____temp_9) then __O[1397] else jogo.fim) then
             return
         end
         __set(jogo.trilha, lane, 0.18)
@@ -651,8 +651,8 @@ local __O = {};
                 local ____t_2 = __t
                 local ____t_1 = __t
                 local ____temp_0 = __mod(compasso, 2) == 1 and __mod(b, 2) == 1
-                __O[1395] = ____temp_0
-                if ____t_2(if ____t_1(____temp_0) then rnd(nil) < 0.55 else __O[1395]) then
+                __O[1396] = ____temp_0
+                if ____t_2(if ____t_1(____temp_0) then rnd(nil) < 0.55 else __O[1396]) then
                     __call(
                         notas,
                         "push",

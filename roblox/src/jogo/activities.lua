@@ -183,8 +183,8 @@ local __O = {};
         local ____t_5 = __t
         local ____t_4 = __t
         local ____temp_3 = not __t(s)
-        __O[1253] = ____temp_3
-        if ____t_5(if ____t_4(____temp_3) then __O[1253] else s.done) then
+        __O[1254] = ____temp_3
+        if ____t_5(if ____t_4(____temp_3) then __O[1254] else s.done) then
             return
         end
         s.time = s.time + math.max(0, dt)
@@ -272,10 +272,10 @@ local __O = {};
         local ____t_12 = __t
         local ____t_10 = __t
         local ____temp_9 = not __t(s)
-        __O[1254] = ____temp_9
-        local ____temp_11 = if ____t_10(____temp_9) then __O[1254] else s.done
-        __O[1255] = ____temp_11
-        if ____t_13(if ____t_12(____temp_11) then __O[1255] else __gt(s.cooldown, 0)) then
+        __O[1255] = ____temp_9
+        local ____temp_11 = if ____t_10(____temp_9) then __O[1255] else s.done
+        __O[1256] = ____temp_11
+        if ____t_13(if ____t_12(____temp_11) then __O[1256] else __gt(s.cooldown, 0)) then
             return false
         end
         if s.kind == "quiz" then
@@ -293,8 +293,8 @@ local __O = {};
             local ____t_16 = __t
             local ____t_15 = __t
             local ____temp_14 = not __isInteger(answer) or answer < 0
-            __O[1256] = ____temp_14
-            if ____t_16(if ____t_15(____temp_14) then __O[1256] else answer > 2) then
+            __O[1257] = ____temp_14
+            if ____t_16(if ____t_15(____temp_14) then __O[1257] else answer > 2) then
                 return false
             end
             s.attempts = s.attempts + 1
@@ -342,11 +342,11 @@ local __O = {};
             local ____aim_24 = aim
             local ____t_20 = __t
             local ____temp_19 = if __t(goodPower) then inside else goodPower
-            __O[1257] = ____temp_19
-            local ____temp_25 = if ____t_20(____temp_19) then not __t(blocked) else __O[1257]
+            __O[1258] = ____temp_19
+            local ____temp_25 = if ____t_20(____temp_19) then not __t(blocked) else __O[1258]
             local ____t_22 = __t
             local ____temp_21 = if __t(goodPower) then inside else goodPower
-            __O[1258] = ____temp_21
+            __O[1259] = ____temp_21
             ____s_26.shot = {
                 startX = 236,
                 startY = 319,
@@ -355,7 +355,7 @@ local __O = {};
                 power = ____s_power_23,
                 aim = ____aim_24,
                 goal = ____temp_25,
-                blocked = if ____t_22(____temp_21) then blocked else __O[1258],
+                blocked = if ____t_22(____temp_21) then blocked else __O[1259],
                 rotation = 0
             }
             s.phase = "flight"
@@ -415,8 +415,8 @@ local __O = {};
         local ____t_32 = __t
         local ____t_31 = __t
         local ____temp_30 = not __t(s)
-        __O[1259] = ____temp_30
-        if ____t_32(if ____t_31(____temp_30) then __O[1259] else s.done) then
+        __O[1260] = ____temp_30
+        if ____t_32(if ____t_31(____temp_30) then __O[1260] else s.done) then
             return
         end
         s.done = true
@@ -863,8 +863,8 @@ local __O = {};
         local ____t_38 = __t
         local ____t_37 = __t
         local ____temp_36 = s.lockedKeeper ~= nil
-        __O[1260] = ____temp_36
-        local keeper = if ____t_38(if ____t_37(____temp_36) then s.phase == "flight" or s.phase == "result" else __O[1260]) then s.lockedKeeper else s.keeper
+        __O[1261] = ____temp_36
+        local keeper = if ____t_38(if ____t_37(____temp_36) then s.phase == "flight" or s.phase == "result" else __O[1261]) then s.lockedKeeper else s.keeper
         local kx = g.x + keeper * g.w
         rect(
             nil,

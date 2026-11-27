@@ -151,12 +151,12 @@ local __O = {};
                         if desired ~= nil then
                             ____opt_result_87 = desired.arenaShuffle
                         end
-                        __O[2315] = ____opt_result_87
-                        local ____temp_89 = if ____t_88(____opt_result_87) then arenaPlaylist.open else __O[2315]
-                        __O[2316] = ____temp_89
-                        local ____temp_91 = if ____t_90(____temp_89) then active == v.index else __O[2316]
-                        __O[2317] = ____temp_91
-                        if ____t_93(if ____t_92(____temp_91) then v.cueKey == desired.cueKey else __O[2317]) then
+                        __O[2342] = ____opt_result_87
+                        local ____temp_89 = if ____t_88(____opt_result_87) then arenaPlaylist.open else __O[2342]
+                        __O[2343] = ____temp_89
+                        local ____temp_91 = if ____t_90(____temp_89) then active == v.index else __O[2343]
+                        __O[2344] = ____temp_91
+                        if ____t_93(if ____t_92(____temp_91) then v.cueKey == desired.cueKey else __O[2344]) then
                             nextArenaTrack(nil)
                             lastAttempt = ""
                             syncSelection(nil, true)
@@ -166,12 +166,12 @@ local __O = {};
                             local ____t_97 = __t
                             local ____t_95 = __t
                             local ____temp_94 = if __t(v.loop) then enabled else v.loop
-                            __O[2318] = ____temp_94
-                            local ____temp_96 = if ____t_95(____temp_94) then unlocked else __O[2318]
-                            __O[2319] = ____temp_96
-                            local ____temp_98 = if ____t_97(____temp_96) then not __t(suspended(nil)) else __O[2319]
-                            __O[2320] = ____temp_98
-                            if ____t_100(if ____t_99(____temp_98) then active == v.index else __O[2320]) then
+                            __O[2345] = ____temp_94
+                            local ____temp_96 = if ____t_95(____temp_94) then unlocked else __O[2345]
+                            __O[2346] = ____temp_96
+                            local ____temp_98 = if ____t_97(____temp_96) then not __t(suspended(nil)) else __O[2346]
+                            __O[2347] = ____temp_98
+                            if ____t_100(if ____t_99(____temp_98) then active == v.index else __O[2347]) then
                                 lastAttempt = ""
                                 syncSelection(nil, true)
                             end
@@ -199,9 +199,9 @@ local __O = {};
                             if ____opt_101 ~= nil then
                                 ____opt_101 = ____opt_101.title
                             end
-                            __O[2321] = ____opt_101
+                            __O[2348] = ____opt_101
                             lastError = ____add_105(
-                                ____add_104("Não foi possível reproduzir “", if ____t_103(____opt_101) then __O[2321] else "esta trilha"),
+                                ____add_104("Não foi possível reproduzir “", if ____t_103(____opt_101) then __O[2348] else "esta trilha"),
                                 "”."
                             )
                             if active == v.index then
@@ -214,10 +214,10 @@ local __O = {};
                             if desired ~= nil then
                                 ____opt_result_108 = desired.arenaShuffle
                             end
-                            __O[2322] = ____opt_result_108
-                            local ____temp_110 = if ____t_109(____opt_result_108) then arenaPlaylist.open else __O[2322]
-                            __O[2323] = ____temp_110
-                            if ____t_112(if ____t_111(____temp_110) then arenaPlaylist.currentId == v.id else __O[2323]) then
+                            __O[2349] = ____opt_result_108
+                            local ____temp_110 = if ____t_109(____opt_result_108) then arenaPlaylist.open else __O[2349]
+                            __O[2350] = ____temp_110
+                            if ____t_112(if ____t_111(____temp_110) then arenaPlaylist.currentId == v.id else __O[2350]) then
                                 __call(arenaPlaylist.failed, "add", v.id)
                                 nextArenaTrack(nil)
                                 lastAttempt = ""
@@ -234,8 +234,8 @@ local __O = {};
     function suspended(self)
         local ____t_114 = __t
         local ____temp_113 = if __t(nativePaused) then nativePaused else gamePaused
-        __O[2324] = ____temp_113
-        return if ____t_114(____temp_113) then __O[2324] else not not __t(window.document.hidden)
+        __O[2351] = ____temp_113
+        return if ____t_114(____temp_113) then __O[2351] else not not __t(window.document.hidden)
     end
     function normalName(self, value)
         return __call(
@@ -266,7 +266,7 @@ local __O = {};
                 local j = math.floor(math.random() * (i + 1))
                 do
                     do
-                        __O[2326] = __iter(__arrL(
+                        __O[2353] = __iter(__arrL(
                             {
                                 __get(bag, j),
                                 __get(bag, i)
@@ -276,16 +276,16 @@ local __O = {};
                         __set(
                             bag,
                             i,
-                            __get(__O[2326], 0)
+                            __get(__O[2353], 0)
                         )
                     end
                     __set(
                         bag,
                         j,
-                        __get(__O[2326], 1)
+                        __get(__O[2353], 1)
                     )
                 end
-                local ____ = __O[2326]
+                local ____ = __O[2353]
                 i = i - 1
             end
         end
@@ -359,7 +359,7 @@ local __O = {};
             if alternative >= 0 then
                 do
                     do
-                        __O[2327] = __iter(__arrL(
+                        __O[2354] = __iter(__arrL(
                             {
                                 __get(arenaPlaylist.bag, alternative),
                                 __get(arenaPlaylist.bag, 0)
@@ -369,16 +369,16 @@ local __O = {};
                         __set(
                             arenaPlaylist.bag,
                             0,
-                            __get(__O[2327], 0)
+                            __get(__O[2354], 0)
                         )
                     end
                     __set(
                         arenaPlaylist.bag,
                         alternative,
-                        __get(__O[2327], 1)
+                        __get(__O[2354], 1)
                     )
                 end
-                local ____ = __O[2327]
+                local ____ = __O[2354]
             else
                 arenaPlaylist.bag = __arrL({}, 0)
                 return nextArenaTrack(nil)
@@ -404,8 +404,8 @@ local __O = {};
                 if ____opt_131 ~= nil then
                     ____opt_result_133 = ____opt_131(____opt_131)
                 end
-                __O[2328] = ____opt_result_133
-                return true, if ____t_134(____opt_result_133) then __O[2328] else nil
+                __O[2355] = ____opt_result_133
+                return true, if ____t_134(____opt_result_133) then __O[2355] else nil
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch()
@@ -431,8 +431,8 @@ local __O = {};
         local ____t_141 = __t
         local ____t_140 = __t
         local ____temp_139 = type(arena.matchId) == "string"
-        __O[2329] = ____temp_139
-        local matchId = if ____t_141(if ____t_140(____temp_139) then arena.matchId else __O[2329]) then arena.matchId else nil
+        __O[2356] = ____temp_139
+        local matchId = if ____t_141(if ____t_140(____temp_139) then arena.matchId else __O[2356]) then arena.matchId else nil
         if not __t(arenaPlaylist.open) then
             arenaPlaylist.open = true
             arenaPlaylist.session = arenaPlaylist.session + 1
@@ -520,8 +520,8 @@ local __O = {};
                     if ____opt_153 ~= nil then
                         ____opt_result_155 = ____opt_153(____opt_153)
                     end
-                    __O[2330] = ____opt_result_155
-                    lastAudioState = if ____t_156(____opt_result_155) then __O[2330] else nil
+                    __O[2357] = ____opt_result_155
+                    lastAudioState = if ____t_156(____opt_result_155) then __O[2357] else nil
                 end)
             end
             return __arrL({override}, 1)
@@ -565,12 +565,12 @@ local __O = {};
                 if challenge ~= nil then
                     ____opt_result_169 = challenge.open
                 end
-                __O[2331] = ____opt_result_169
+                __O[2358] = ____opt_result_169
                 if ____t_171(if ____t_170(____opt_result_169) then __call(
                     __arrL({"pump", "memory", "sort"}, 3),
                     "includes",
                     challenge.kind
-                ) else __O[2331]) then
+                ) else __O[2358]) then
                     local ____opt_174 = window.Game
                     if ____opt_174 ~= nil then
                         ____opt_174 = ____opt_174.getAudioState
@@ -591,11 +591,11 @@ local __O = {};
                         ____opt_result_179 = game.scene
                     end
                     local ____get_180_result_181 = ____get_180(SCENES, ____opt_result_179)
-                    __O[2332] = ____get_180_result_181
+                    __O[2359] = ____get_180_result_181
                     return true, ____arrL_185(
                         {
                             ____add_result_184,
-                            ____add_183("maps.", if ____t_182(____get_180_result_181) then __O[2332] else "roca"),
+                            ____add_183("maps.", if ____t_182(____get_180_result_181) then __O[2359] else "roca"),
                             "menu.title"
                         },
                         3
@@ -711,10 +711,10 @@ local __O = {};
                 if ____opt_221 ~= nil then
                     ____opt_result_223 = ____opt_221(____opt_221, id)
                 end
-                __O[2333] = ____opt_result_223
+                __O[2360] = ____opt_result_223
                 return ____arr_227(
                     ____add_result_226,
-                    __TS__Spread(____iter_225(if ____t_224(____opt_result_223) then __O[2333] else __arrL({}, 0)))
+                    __TS__Spread(____iter_225(if ____t_224(____opt_result_223) then __O[2360] else __arrL({}, 0)))
                 )
             end
             local e2 = nil
@@ -787,8 +787,8 @@ local __O = {};
         local ____t_253 = __t
         local ____t_252 = __t
         local ____temp_251 = not __t(state) or not __t(state.started)
-        __O[2334] = ____temp_251
-        if ____t_253(if ____t_252(____temp_251) then __O[2334] else state.playing == false) then
+        __O[2361] = ____temp_251
+        if ____t_253(if ____t_252(____temp_251) then __O[2361] else state.playing == false) then
             return if __t(config.bindings["menu.title"]) then __arrL({"menu.title"}, 1) else __arrL({"menu.title", "maps.roca"}, 2)
         end
         local ____add_256 = __add
@@ -797,8 +797,8 @@ local __O = {};
             SCENES,
             __TS__Number(state.scene)
         )
-        __O[2335] = ____get_result_254
-        local map = ____add_256("maps.", if ____t_255(____get_result_254) then __O[2335] else __get(SCENES, 0))
+        __O[2362] = ____get_result_254
+        local map = ____add_256("maps.", if ____t_255(____get_result_254) then __O[2362] else __get(SCENES, 0))
         if __t(state.cutscene) then
             local ____arr_265 = __arr
             local ____array_264 = __TS__SparseArrayNew(__add(
@@ -815,10 +815,10 @@ local __O = {};
             if ____opt_259 ~= nil then
                 ____opt_result_261 = ____opt_259(____opt_259, state.cutscene)
             end
-            __O[2336] = ____opt_result_261
+            __O[2363] = ____opt_result_261
             __TS__SparseArrayPush(
                 ____array_264,
-                __TS__Spread(____iter_263(if ____t_262(____opt_result_261) then __O[2336] else __arrL({}, 0)))
+                __TS__Spread(____iter_263(if ____t_262(____opt_result_261) then __O[2363] else __arrL({}, 0)))
             )
             __TS__SparseArrayPush(
                 ____array_264,
@@ -901,14 +901,14 @@ local __O = {};
                     local ____t_271 = __t
                     local ____t_269 = __t
                     local ____temp_268 = name == alias
-                    __O[2337] = ____temp_268
-                    local ____temp_270 = if ____t_269(____temp_268) then __O[2337] else __call(
+                    __O[2364] = ____temp_268
+                    local ____temp_270 = if ____t_269(____temp_268) then __O[2364] else __call(
                         name,
                         "startsWith",
                         __add(alias, " ")
                     )
-                    __O[2338] = ____temp_270
-                    return if ____t_271(____temp_270) then __O[2338] else __call(
+                    __O[2365] = ____temp_270
+                    return if ____t_271(____temp_270) then __O[2365] else __call(
                         name,
                         "endsWith",
                         __add(" ", alias)
@@ -937,8 +937,8 @@ local __O = {};
         local list = candidates(nil)
         local ____t_280 = __t
         local ____get_result_279 = __get(list, 0)
-        __O[2340] = ____get_result_279
-        context = if ____t_280(____get_result_279) then __O[2340] else "menu.title"
+        __O[2367] = ____get_result_279
+        context = if ____t_280(____get_result_279) then __O[2367] else "menu.title"
         if context == ARENA_SHUFFLE then
             return selectArena(nil)
         end
@@ -962,13 +962,13 @@ local __O = {};
             local cutsceneKind = ____opt_result_283
             local ____t_285 = __t
             local ____temp_284 = key == __add("events.", cutsceneKind)
-            __O[2341] = ____temp_284
-            local legacyCue = if ____t_285(____temp_284) then binding.startSeconds ~= nil or binding.delaySeconds ~= nil else __O[2341]
+            __O[2368] = ____temp_284
+            local legacyCue = if ____t_285(____temp_284) then binding.startSeconds ~= nil or binding.delaySeconds ~= nil else __O[2368]
             local ____t_288 = __t
             local ____t_287 = __t
             local ____temp_286 = key == __add("cutscenes.", cutsceneKind)
-            __O[2342] = ____temp_286
-            local cutscene = not not ____t_288(if __t(cutsceneKind) then if ____t_287(____temp_286) then __O[2342] else legacyCue else cutsceneKind) or not not __t(if __t(override) then __call(key, "startsWith", "cutscenes.") else override)
+            __O[2369] = ____temp_286
+            local cutscene = not not ____t_288(if __t(cutsceneKind) then if ____t_287(____temp_286) then __O[2369] else legacyCue else cutsceneKind) or not not __t(if __t(override) then __call(key, "startsWith", "cutscenes.") else override)
             local startSeconds = if __t(binding.startSeconds) then binding.startSeconds else 0
             local delaySeconds = if __t(cutscene) then if __t(binding.delaySeconds) then binding.delaySeconds else 0 else 0
             local ____opt_result_291
@@ -1076,13 +1076,13 @@ local __O = {};
         local time = now(nil)
         local ____t_323 = __t
         local ____temp_322 = not __t(nativePaused) and not __t(window.document.hidden)
-        __O[2343] = ____temp_322
+        __O[2370] = ____temp_322
         local ____t_327 = __t
         local ____opt_result_326
         if lastAudioState ~= nil then
             ____opt_result_326 = lastAudioState.paused
         end
-        local running = if ____t_323(____temp_322) then not ____t_327(____opt_result_326) else __O[2343]
+        local running = if ____t_323(____temp_322) then not ____t_327(____opt_result_326) else __O[2370]
         if __t(not __t(filmClock) or filmClock.key ~= selection.cueKey) then
             filmClock = {key = selection.cueKey, elapsed = selection.elapsed, lastAt = time, running = running}
         else
@@ -1154,12 +1154,12 @@ local __O = {};
                     local ____t_337 = __t
                     local ____t_335 = __t
                     local ____temp_334 = if __t(ok) then generation == requestGeneration else ok
-                    __O[2344] = ____temp_334
-                    local ____temp_336 = if ____t_335(____temp_334) then v.pending == generation else __O[2344]
-                    __O[2345] = ____temp_336
-                    local ____temp_338 = if ____t_337(____temp_336) then not __t(suspended(nil)) else __O[2345]
-                    __O[2346] = ____temp_338
-                    ____resolve_340(nil, if ____t_339(____temp_338) then enabled else __O[2346])
+                    __O[2371] = ____temp_334
+                    local ____temp_336 = if ____t_335(____temp_334) then v.pending == generation else __O[2371]
+                    __O[2372] = ____temp_336
+                    local ____temp_338 = if ____t_337(____temp_336) then not __t(suspended(nil)) else __O[2372]
+                    __O[2373] = ____temp_338
+                    ____resolve_340(nil, if ____t_339(____temp_338) then enabled else __O[2373])
                 end
                 loaded = function() return finish(nil, true) end
                 failed = function() return finish(nil, false) end
@@ -1207,26 +1207,26 @@ local __O = {};
             local ____t_348 = __t
             local ____t_346 = __t
             local ____temp_345 = not __t(same)
-            __O[2347] = ____temp_345
-            local ____temp_347 = if ____t_346(____temp_345) then __O[2347] else seek
-            __O[2348] = ____temp_347
-            local ____temp_349 = if ____t_348(____temp_347) then __O[2348] else v.cueKey ~= selection.cueKey
-            __O[2349] = ____temp_349
-            local needsSeek = if ____t_350(____temp_349) then __O[2349] else if __t(v.ended) then selection.loop else v.ended
+            __O[2374] = ____temp_345
+            local ____temp_347 = if ____t_346(____temp_345) then __O[2374] else seek
+            __O[2375] = ____temp_347
+            local ____temp_349 = if ____t_348(____temp_347) then __O[2375] else v.cueKey ~= selection.cueKey
+            __O[2376] = ____temp_349
+            local needsSeek = if ____t_350(____temp_349) then __O[2376] else if __t(v.ended) then selection.loop else v.ended
             local ____t_355 = __t
             local ____t_354 = __t
             local ____t_352 = __t
             local ____temp_351 = if __t(selection.cutscene) then selection.cutscene else selection.arenaShuffle
-            __O[2350] = ____temp_351
-            local ____temp_353 = if ____t_352(____temp_351) then __O[2350] else __gt(selection.startSeconds, 0)
-            __O[2351] = ____temp_353
-            if ____t_355(if __t(needsSeek) then if ____t_354(____temp_353) then __O[2351] else __callq(v.cueKey, "startsWith", "offset|") else needsSeek) then
+            __O[2377] = ____temp_351
+            local ____temp_353 = if ____t_352(____temp_351) then __O[2377] else __gt(selection.startSeconds, 0)
+            __O[2378] = ____temp_353
+            if ____t_355(if __t(needsSeek) then if ____t_354(____temp_353) then __O[2378] else __callq(v.cueKey, "startsWith", "offset|") else needsSeek) then
                 if not __t(__TS__Await(waitMetadata(nil, v, generation))) then
                     local ____t_358 = __t
                     local ____t_357 = __t
                     local ____temp_356 = generation == requestGeneration and not __t(suspended(nil))
-                    __O[2352] = ____temp_356
-                    if ____t_358(if ____t_357(____temp_356) then enabled else __O[2352]) then
+                    __O[2379] = ____temp_356
+                    if ____t_358(if ____t_357(____temp_356) then enabled else __O[2379]) then
                         lastError = "Não foi possível carregar o trecho da música. Toque no som para tentar novamente."
                     end
                     return ____awaiter_resolve(nil, false)
@@ -1235,21 +1235,21 @@ local __O = {};
                 local ____t_362 = __t
                 local ____t_360 = __t
                 local ____temp_359 = generation ~= requestGeneration or v.pending ~= generation
-                __O[2353] = ____temp_359
-                local ____temp_361 = if ____t_360(____temp_359) then __O[2353] else not __t(enabled)
-                __O[2354] = ____temp_361
-                if ____t_363(if ____t_362(____temp_361) then __O[2354] else suspended(nil)) then
+                __O[2380] = ____temp_359
+                local ____temp_361 = if ____t_360(____temp_359) then __O[2380] else not __t(enabled)
+                __O[2381] = ____temp_361
+                if ____t_363(if ____t_362(____temp_361) then __O[2381] else suspended(nil)) then
                     return ____awaiter_resolve(nil, false)
                 end
                 selection = timelineSelection(nil, selection)
                 local ____selection_startSeconds_366 = selection.startSeconds
                 local ____t_365 = __t
                 local ____temp_364 = if __t(v.audio.duration) then v.audio.duration else selection.track.duration
-                __O[2355] = ____temp_364
+                __O[2382] = ____temp_364
                 local target = if __t(if __t(v.ended) then selection.loop else v.ended) then {
                     seconds = math.min(
                         ____selection_startSeconds_366,
-                        math.max(0, if ____t_365(____temp_364) then __O[2355] else math.huge - 0.01)
+                        math.max(0, if ____t_365(____temp_364) then __O[2382] else math.huge - 0.01)
                     ),
                     ended = false
                 } else targetPosition(nil, selection, v.audio)
@@ -1309,10 +1309,10 @@ local __O = {};
                 local ____t_370 = __t
                 local ____t_368 = __t
                 local ____temp_367 = generation ~= requestGeneration or v.pending ~= generation
-                __O[2356] = ____temp_367
-                local ____temp_369 = if ____t_368(____temp_367) then __O[2356] else not __t(enabled)
-                __O[2357] = ____temp_369
-                if ____t_371(if ____t_370(____temp_369) then __O[2357] else suspended(nil)) then
+                __O[2383] = ____temp_367
+                local ____temp_369 = if ____t_368(____temp_367) then __O[2383] else not __t(enabled)
+                __O[2384] = ____temp_369
+                if ____t_371(if ____t_370(____temp_369) then __O[2384] else suspended(nil)) then
                     ____hasReturned = true
                     ____returnValue = false
                     return
@@ -1323,8 +1323,8 @@ local __O = {};
                 local ____t_374 = __t
                 local ____t_373 = __t
                 local ____temp_372 = generation ~= requestGeneration or not __t(enabled)
-                __O[2358] = ____temp_372
-                if ____t_374(if ____t_373(____temp_372) then __O[2358] else suspended(nil)) then
+                __O[2385] = ____temp_372
+                if ____t_374(if ____t_373(____temp_372) then __O[2385] else suspended(nil)) then
                     if __t(active ~= v.index and v.pending == generation) then
                         gain(nil, v, 0, 0)
                         v.audio:pause()
@@ -1403,8 +1403,8 @@ local __O = {};
         if lastAudioState ~= nil then
             ____opt_result_382 = lastAudioState.cutscene
         end
-        __O[2359] = ____opt_result_382
-        local nextPaused = not not ____t_384(if ____t_383(____opt_result_382) then lastAudioState.paused else __O[2359])
+        __O[2386] = ____opt_result_382
+        local nextPaused = not not ____t_384(if ____t_383(____opt_result_382) then lastAudioState.paused else __O[2386])
         if nextPaused ~= gamePaused then
             gamePaused = nextPaused
             if __t(gamePaused) then
@@ -1429,10 +1429,10 @@ local __O = {};
         local ____t_393 = __t
         local ____t_391 = __t
         local ____temp_390 = not __t(ready) or not __t(enabled)
-        __O[2360] = ____temp_390
-        local ____temp_392 = if ____t_391(____temp_390) then __O[2360] else not __t(unlocked)
-        __O[2361] = ____temp_392
-        if ____t_394(if ____t_393(____temp_392) then __O[2361] else suspended(nil)) then
+        __O[2387] = ____temp_390
+        local ____temp_392 = if ____t_391(____temp_390) then __O[2387] else not __t(unlocked)
+        __O[2388] = ____temp_392
+        if ____t_394(if ____t_393(____temp_392) then __O[2388] else suspended(nil)) then
             return
         end
         makeVoices(nil)
@@ -1471,16 +1471,16 @@ local __O = {};
         )
         local ____t_396 = __t
         local ____temp_395 = selection.cueKey ~= nil and same.cueKey ~= selection.cueKey
-        __O[2363] = ____temp_395
+        __O[2390] = ____temp_395
         local ____t_398 = __t
         local ____temp_397 = selection.cueKey == nil
-        __O[2362] = ____temp_397
-        local cueChanged = if __t(same) then if ____t_396(____temp_395) then __O[2363] else if ____t_398(____temp_397) then __callq(same.cueKey, "startsWith", "offset|") else __O[2362] else same
+        __O[2389] = ____temp_397
+        local cueChanged = if __t(same) then if ____t_396(____temp_395) then __O[2390] else if ____t_398(____temp_397) then __callq(same.cueKey, "startsWith", "offset|") else __O[2389] else same
         local ____t_401 = __t
         local ____t_400 = __t
         local ____temp_399 = if __t(selection.cutscene) then not __t(same) or same.cueKey ~= selection.cueKey else selection.cutscene
-        __O[2364] = ____temp_399
-        if ____t_401(if ____t_400(____temp_399) then targetPosition(nil, selection, {duration = selection.track.duration}).ended else __O[2364]) then
+        __O[2391] = ____temp_399
+        if ____t_401(if ____t_400(____temp_399) then targetPosition(nil, selection, {duration = selection.track.duration}).ended else __O[2391]) then
             silenceSelection(
                 nil,
                 __add("end|", selection.cueKey),
@@ -1492,10 +1492,10 @@ local __O = {};
         local ____t_405 = __t
         local ____t_403 = __t
         local ____temp_402 = if __t(same) then active == same.index else same
-        __O[2365] = ____temp_402
-        local ____temp_404 = if ____t_403(____temp_402) then not __t(same.audio.paused) else __O[2365]
-        __O[2366] = ____temp_404
-        if ____t_406(if ____t_405(____temp_404) then not __t(cueChanged) else __O[2366]) then
+        __O[2392] = ____temp_402
+        local ____temp_404 = if ____t_403(____temp_402) then not __t(same.audio.paused) else __O[2392]
+        __O[2393] = ____temp_404
+        if ____t_406(if ____t_405(____temp_404) then not __t(cueChanged) else __O[2393]) then
             same.cueKey = selection.cueKey
             same.cutsceneIndex = selection.index
             same.loop = selection.loop
@@ -1559,12 +1559,12 @@ local __O = {};
         if same ~= nil then
             ____opt_result_412 = same.ended
         end
-        __O[2367] = ____opt_result_412
-        local ____temp_414 = if ____t_413(____opt_result_412) then not __t(selection.loop) else __O[2367]
-        __O[2368] = ____temp_414
-        local ____temp_416 = if ____t_415(____temp_414) then same.cueKey == selection.cueKey else __O[2368]
-        __O[2369] = ____temp_416
-        if ____t_418(if ____t_417(____temp_416) then not __t(cueChanged) else __O[2369]) then
+        __O[2394] = ____opt_result_412
+        local ____temp_414 = if ____t_413(____opt_result_412) then not __t(selection.loop) else __O[2394]
+        __O[2395] = ____temp_414
+        local ____temp_416 = if ____t_415(____temp_414) then same.cueKey == selection.cueKey else __O[2395]
+        __O[2396] = ____temp_416
+        if ____t_418(if ____t_417(____temp_416) then not __t(cueChanged) else __O[2396]) then
             lastAttempt = attempt
             return
         end
@@ -1647,24 +1647,24 @@ local __O = {};
         local ____t_456 = __t
         local ____t_454 = __t
         local ____temp_453 = if __t(enabled) then unlocked else enabled
-        __O[2374] = ____temp_453
-        local ____temp_455 = if ____t_454(____temp_453) then not __t(suspended(nil)) else __O[2374]
-        __O[2375] = ____temp_455
-        local ____temp_457 = if ____t_456(____temp_455) then not __t(audioContext) or audioContext.state == "running" else __O[2375]
-        __O[2377] = ____temp_457
+        __O[2401] = ____temp_453
+        local ____temp_455 = if ____t_454(____temp_453) then not __t(suspended(nil)) else __O[2401]
+        __O[2402] = ____temp_455
+        local ____temp_457 = if ____t_456(____temp_455) then not __t(audioContext) or audioContext.state == "running" else __O[2402]
+        __O[2404] = ____temp_457
         return if ____t_458(____temp_457) then __call(
             voices,
             "some",
             function(____, v)
                 local ____t_460 = __t
                 local ____temp_459 = not __t(v.audio.paused) and not __t(v.audio.ended)
-                __O[2376] = ____temp_459
+                __O[2403] = ____temp_459
                 return if ____t_460(____temp_459) then __gt(
                     currentVolume(nil, v),
                     0.0001
-                ) else __O[2376]
+                ) else __O[2403]
             end
-        ) else __O[2377]
+        ) else __O[2404]
     end
     function getStatus(self)
         local ____ready_495 = ready
@@ -1679,29 +1679,29 @@ local __O = {};
         if desired ~= nil then
             ____opt_result_463 = desired.track.id
         end
-        __O[2378] = ____opt_result_463
-        local ____temp_502 = if ____t_464(____opt_result_463) then __O[2378] else nil
+        __O[2405] = ____opt_result_463
+        local ____temp_502 = if ____t_464(____opt_result_463) then __O[2405] else nil
         local ____t_468 = __t
         local ____opt_result_467
         if desired ~= nil then
             ____opt_result_467 = desired.track.title
         end
-        __O[2379] = ____opt_result_467
-        local ____temp_503 = if ____t_468(____opt_result_467) then __O[2379] else nil
+        __O[2406] = ____opt_result_467
+        local ____temp_503 = if ____t_468(____opt_result_467) then __O[2406] else nil
         local ____t_472 = __t
         local ____opt_result_471
         if desired ~= nil then
             ____opt_result_471 = desired.startSeconds
         end
-        __O[2380] = ____opt_result_471
-        local ____temp_504 = if ____t_472(____opt_result_471) then __O[2380] else 0
+        __O[2407] = ____opt_result_471
+        local ____temp_504 = if ____t_472(____opt_result_471) then __O[2407] else 0
         local ____t_476 = __t
         local ____opt_result_475
         if desired ~= nil then
             ____opt_result_475 = desired.delaySeconds
         end
-        __O[2381] = ____opt_result_475
-        local ____temp_505 = if ____t_476(____opt_result_475) then __O[2381] else 0
+        __O[2408] = ____opt_result_475
+        local ____temp_505 = if ____t_476(____opt_result_475) then __O[2408] else 0
         local ____opt_result_479
         if desired ~= nil then
             ____opt_result_479 = desired.token
@@ -1724,7 +1724,7 @@ local __O = {};
         if desired ~= nil then
             ____opt_result_487 = desired.cutscene
         end
-        __O[2382] = ____opt_result_487
+        __O[2409] = ____opt_result_487
         return {
             ready = ____ready_495,
             enabled = ____enabled_496,
@@ -1740,7 +1740,7 @@ local __O = {};
             delaySeconds = ____temp_505,
             cutsceneToken = ____opt_result_479_480,
             cutsceneElapsed = ____opt_result_483_484,
-            waiting = not not ____t_489(if ____t_488(____opt_result_487) then __lt(desired.elapsed, desired.delaySeconds) else __O[2382]),
+            waiting = not not ____t_489(if ____t_488(____opt_result_487) then __lt(desired.elapsed, desired.delaySeconds) else __O[2409]),
             playing = isPlaying(nil),
             transitioning = transition,
             error = if __t(lastError) then lastError else nil,
@@ -1766,12 +1766,12 @@ local __O = {};
                     ))
                     local ____t_491 = __t
                     local ____TS__Number_result_490 = __TS__Number(v.audio.currentTime)
-                    __O[2383] = ____TS__Number_result_490
+                    __O[2410] = ____TS__Number_result_490
                     return {
                         trackId = ____v_id_492,
                         playing = ____temp_493,
                         volume = ____TS__Number_result_494,
-                        currentTime = if ____t_491(____TS__Number_result_490) then __O[2383] else 0,
+                        currentTime = if ____t_491(____TS__Number_result_490) then __O[2410] else 0,
                         duration = if __isFiniteN(v.audio.duration) then v.audio.duration else 0,
                         loop = v.loop,
                         loads = v.loads,
@@ -1806,18 +1806,18 @@ local __O = {};
     local launch = __new("URLSearchParams", window.location.search)
     local ____t_1 = __t
     local ____temp_0 = window.location.hostname == "127.0.0.1" and __call(launch, "get", "native") == "1"
-    __O[2294] = ____temp_0
-    local nativePC = if ____t_1(____temp_0) then __call(launch, "get", "pc") == "1" else __O[2294]
+    __O[2321] = ____temp_0
+    local nativePC = if ____t_1(____temp_0) then __call(launch, "get", "pc") == "1" else __O[2321]
     local ____t_7 = __t
     local ____t_5 = __t
     local ____t_3 = __t
     local ____temp_2 = window.location.hostname == "appassets.androidplatform.net"
-    __O[2295] = ____temp_2
-    local ____temp_4 = if ____t_3(____temp_2) then __O[2295] else nativePC
-    __O[2296] = ____temp_4
-    local ____temp_6 = if ____t_5(____temp_4) then __O[2296] else window.location.protocol == "file:"
-    __O[2297] = ____temp_6
-    isNative = if ____t_7(____temp_6) then __O[2297] else window.location.protocol == "daroca:"
+    __O[2322] = ____temp_2
+    local ____temp_4 = if ____t_3(____temp_2) then __O[2322] else nativePC
+    __O[2323] = ____temp_4
+    local ____temp_6 = if ____t_5(____temp_4) then __O[2323] else window.location.protocol == "file:"
+    __O[2324] = ____temp_6
+    isNative = if ____t_7(____temp_6) then __O[2324] else window.location.protocol == "daroca:"
     local isWeb = __call(
         __arrL({"https:", "http:"}, 2),
         "includes",
@@ -1830,11 +1830,11 @@ local __O = {};
     if ____opt_8 ~= nil then
         ____opt_8 = ____opt_8.tracks
     end
-    __O[2298] = ____opt_8
+    __O[2325] = ____opt_8
     local packagedIds = __TS__New(
         ____Set_12,
         ____call_11(
-            if ____t_10(____opt_8) then __O[2298] else __arrL({}, 0),
+            if ____t_10(____opt_8) then __O[2325] else __arrL({}, 0),
             "map",
             function(____, t) return t.id end
         )
@@ -1917,12 +1917,12 @@ local __O = {};
         local ____t_16 = __t
         local ____t_14 = __t
         local ____temp_13 = not __t(raw) or raw.schema ~= VERSION
-        __O[2299] = ____temp_13
-        local ____temp_15 = if ____t_14(____temp_13) then __O[2299] else not __isArray(raw.tracks)
-        __O[2300] = ____temp_15
-        local ____temp_17 = if ____t_16(____temp_15) then __O[2300] else not __t(raw.bindings)
-        __O[2301] = ____temp_17
-        if ____t_19(if ____t_18(____temp_17) then __O[2301] else type(raw.bindings) ~= "table") then
+        __O[2326] = ____temp_13
+        local ____temp_15 = if ____t_14(____temp_13) then __O[2326] else not __isArray(raw.tracks)
+        __O[2327] = ____temp_15
+        local ____temp_17 = if ____t_16(____temp_15) then __O[2327] else not __t(raw.bindings)
+        __O[2328] = ____temp_17
+        if ____t_19(if ____t_18(____temp_17) then __O[2328] else type(raw.bindings) ~= "table") then
             error(
                 Error(nil, "Configuração de trilhas inválida."),
                 0
@@ -1953,8 +1953,8 @@ local __O = {};
                     function(____, x)
                         local ____t_21 = __t
                         local ____temp_20 = if __t(x) then type(x.id) == "string" else x
-                        __O[2302] = ____temp_20
-                        return if ____t_21(____temp_20) then type(x.name) == "string" else __O[2302]
+                        __O[2329] = ____temp_20
+                        return if ____t_21(____temp_20) then type(x.name) == "string" else __O[2329]
                     end
                 ),
                 "slice",
@@ -1973,13 +1973,13 @@ local __O = {};
             local ____t_25 = __t
             local ____t_23 = __t
             local ____temp_22 = not __t(t) or type(t.id) ~= "string"
-            __O[2303] = ____temp_22
-            local ____temp_24 = if ____t_23(____temp_22) then __O[2303] else not __re_test(
+            __O[2330] = ____temp_22
+            local ____temp_24 = if ____t_23(____temp_22) then __O[2330] else not __re_test(
                 __re("^[a-f0-9]{64}$", "i"),
                 t.id
             )
-            __O[2304] = ____temp_24
-            if ____t_26(if ____t_25(____temp_24) then __O[2304] else __call(seen, "has", t.id)) then
+            __O[2331] = ____temp_24
+            if ____t_26(if ____t_25(____temp_24) then __O[2331] else __call(seen, "has", t.id)) then
                 continue
             end
             local id = __call(t.id, "toLowerCase")
@@ -2031,7 +2031,7 @@ local __O = {};
             local ____t_29 = __t
             local ____t_28 = __t
             local ____temp_27 = not __t(isNative) and not __t(__call(packagedIds, "has", id))
-            __O[2305] = ____temp_27
+            __O[2332] = ____temp_27
             ____call_40(____c_tracks_39, "push", {
                 id = ____id_30,
                 title = ____call_result_31,
@@ -2046,7 +2046,7 @@ local __O = {};
                 url = if ____t_29(if ____t_28(____temp_27) then t.url == __add(
                     __add("/music/", id),
                     ".mp3"
-                ) else __O[2305]) then t.url else nil
+                ) else __O[2332]) then t.url else nil
             })
         end
         for ____, ____value in __iterar((__entries(raw.bindings))) do
@@ -2059,10 +2059,10 @@ local __O = {};
                 __re("^[a-zA-Z0-9_.-]{1,90}$", ""),
                 id
             ) or not __t(b)
-            __O[2306] = ____temp_41
-            local ____temp_43 = if ____t_42(____temp_41) then __O[2306] else type(b) ~= "table"
-            __O[2307] = ____temp_43
-            if ____t_45(if ____t_44(____temp_43) then __O[2307] else not __t(__call(
+            __O[2333] = ____temp_41
+            local ____temp_43 = if ____t_42(____temp_41) then __O[2333] else type(b) ~= "table"
+            __O[2334] = ____temp_43
+            if ____t_45(if ____t_44(____temp_43) then __O[2334] else not __t(__call(
                 c.tracks,
                 "some",
                 function(____, t) return t.id == b.trackId end
@@ -2112,8 +2112,8 @@ local __O = {};
         local ____t_48 = __t
         local ____t_47 = __t
         local ____temp_46 = not __t(____local) or not __t(c)
-        __O[2308] = ____temp_46
-        if ____t_48(if ____t_47(____temp_46) then __O[2308] else not __t(__len(____local.tracks)) and not __t(__len(__keys(____local.bindings)))) then
+        __O[2335] = ____temp_46
+        if ____t_48(if ____t_47(____temp_46) then __O[2335] else not __t(__len(____local.tracks)) and not __t(__len(__keys(____local.bindings)))) then
             return c
         end
         local out = __assign(
@@ -2155,8 +2155,8 @@ local __O = {};
                 local ____self_51_parse_52 = ____self_51.parse
                 local ____t_50 = __t
                 local ____temp_49 = window.localStorage:getItem(CONFIG_CACHE)
-                __O[2309] = ____temp_49
-                local cached = ____self_51_parse_52(____self_51, if ____t_50(____temp_49) then __O[2309] else "null")
+                __O[2336] = ____temp_49
+                local cached = ____self_51_parse_52(____self_51, if ____t_50(____temp_49) then __O[2336] else "null")
                 return true, if __t(if __t(cached) then window.Date:now() - cached.at < DAY else cached) then normaliseConfig(nil, cached.config) else nil
             end)
             if not ____try then
@@ -2289,8 +2289,8 @@ local __O = {};
                     local ____t_64 = __t
                     local ____t_63 = __t
                     local ____temp_62 = not __t(ready)
-                    __O[2310] = ____temp_62
-                    if ____t_64(if ____t_63(____temp_62) then base else __O[2310]) then
+                    __O[2337] = ____temp_62
+                    if ____t_64(if ____t_63(____temp_62) then base else __O[2337]) then
                         applyConfig(nil, base, baseSource)
                     end
                     local ____local = nil
@@ -2322,7 +2322,7 @@ local __O = {};
                     local ____t_77 = __t
                     local ____t_71 = __t
                     local ____temp_70 = if __t(base) then base else ____local
-                    __O[2312] = ____temp_70
+                    __O[2339] = ____temp_70
                     local ____temp_76 = not __t(ready)
                     if not ____temp_76 then
                         local ____t_75 = __t
@@ -2330,10 +2330,10 @@ local __O = {};
                         if base ~= nil then
                             ____opt_result_74 = base.revision
                         end
-                        __O[2311] = ____opt_result_74
-                        ____temp_76 = if ____t_75(____opt_result_74) then __O[2311] else 0 >= config.revision
+                        __O[2338] = ____opt_result_74
+                        ____temp_76 = if ____t_75(____opt_result_74) then __O[2338] else 0 >= config.revision
                     end
-                    if ____t_77(if ____t_71(____temp_70) then ____temp_76 else __O[2312]) then
+                    if ____t_77(if ____t_71(____temp_70) then ____temp_76 else __O[2339]) then
                         local merged = mergeLocal(nil, if __t(base) then base else empty(nil), ____local)
                         if merged ~= config then
                             applyConfig(nil, merged, baseSource)
@@ -2343,10 +2343,10 @@ local __O = {};
                     local ____t_81 = __t
                     local ____t_79 = __t
                     local ____temp_78 = not __t(isNative)
-                    __O[2313] = ____temp_78
-                    local ____temp_80 = if ____t_79(____temp_78) then isWeb else __O[2313]
-                    __O[2314] = ____temp_80
-                    if ____t_82(if ____t_81(____temp_80) then not __t(window.DAROCA_LAN) else __O[2314]) then
+                    __O[2340] = ____temp_78
+                    local ____temp_80 = if ____t_79(____temp_78) then isWeb else __O[2340]
+                    __O[2341] = ____temp_80
+                    if ____t_82(if ____t_81(____temp_80) then not __t(window.DAROCA_LAN) else __O[2341]) then
                         local ____try = __TS__AsyncAwaiter(function()
                             local remote = __TS__Await(fetchConfig(nil, "/api/music/config"))
                             if __t(generation == loadGeneration and remote.revision >= config.revision) then
@@ -2423,8 +2423,8 @@ local __O = {};
                                 local ____t_122 = __t
                                 local ____t_121 = __t
                                 local ____temp_120 = if __t(v.warming) then not __t(v.id) else v.warming
-                                __O[2325] = ____temp_120
-                                if ____t_122(if ____t_121(____temp_120) then generation == requestGeneration else __O[2325]) then
+                                __O[2352] = ____temp_120
+                                if ____t_122(if ____t_121(____temp_120) then generation == requestGeneration else __O[2352]) then
                                     v.audio:pause()
                                 end
                             end
@@ -2528,12 +2528,12 @@ local __O = {};
         local ____t_278 = __t
         local ____t_277 = __t
         local ____temp_276 = if __t(b) then b.enabled ~= false else b
-        __O[2339] = ____temp_276
+        __O[2366] = ____temp_276
         return not not ____t_278(if ____t_277(____temp_276) then __call(
             config.tracks,
             "some",
             function(____, t) return t.id == b.trackId end
-        ) else __O[2339])
+        ) else __O[2366])
     end
     local function control(self)
         local party = false
@@ -2585,10 +2585,10 @@ local __O = {};
                 local ____t_429 = __t
                 local ____t_427 = __t
                 local ____temp_426 = v.volume == 0 and active ~= v.index
-                __O[2370] = ____temp_426
-                local ____temp_428 = if ____t_427(____temp_426) then not __t(v.pending) else __O[2370]
-                __O[2371] = ____temp_428
-                if ____t_430(if ____t_429(____temp_428) then not __t(v.audio.paused) else __O[2371]) then
+                __O[2397] = ____temp_426
+                local ____temp_428 = if ____t_427(____temp_426) then not __t(v.pending) else __O[2397]
+                __O[2398] = ____temp_428
+                if ____t_430(if ____t_429(____temp_428) then not __t(v.audio.paused) else __O[2398]) then
                     v.audio:pause()
                 end
             end
@@ -2618,10 +2618,10 @@ local __O = {};
         local ____t_446 = __t
         local ____t_444 = __t
         local ____suspended_result_443 = suspended(nil)
-        __O[2372] = ____suspended_result_443
-        local ____temp_445 = if ____t_444(____suspended_result_443) then __O[2372] else not __t(enabled)
-        __O[2373] = ____temp_445
-        if ____t_447(if ____t_446(____temp_445) then __O[2373] else not __t(unlocked)) then
+        __O[2399] = ____suspended_result_443
+        local ____temp_445 = if ____t_444(____suspended_result_443) then __O[2399] else not __t(enabled)
+        __O[2400] = ____temp_445
+        if ____t_447(if ____t_446(____temp_445) then __O[2400] else not __t(unlocked)) then
             return
         end
         lastAttempt = ""
@@ -2649,8 +2649,8 @@ local __O = {};
         local ____t_508 = __t
         local ____t_507 = __t
         local ____temp_506 = type(id) == "string"
-        __O[2384] = ____temp_506
-        override = if ____t_508(if ____t_507(____temp_506) then id else __O[2384]) then id else nil
+        __O[2411] = ____temp_506
+        override = if ____t_508(if ____t_507(____temp_506) then id else __O[2411]) then id else nil
         overrideSerial = overrideSerial + 1
         lastAttempt = ""
         syncSelection(nil, true)
@@ -2751,10 +2751,10 @@ local __O = {};
     local ____t_518 = __t
     local ____t_516 = __t
     local ____temp_515 = if __t(title) then sourceButton else title
-    __O[2385] = ____temp_515
-    local ____temp_517 = if ____t_516(____temp_515) then type(title.append) == "function" else __O[2385]
-    __O[2386] = ____temp_517
-    if ____t_519(if ____t_518(____temp_517) then not __t(window.document:getElementById("menuMusicBtn")) else __O[2386]) then
+    __O[2412] = ____temp_515
+    local ____temp_517 = if ____t_516(____temp_515) then type(title.append) == "function" else __O[2412]
+    __O[2413] = ____temp_517
+    if ____t_519(if ____t_518(____temp_517) then not __t(window.document:getElementById("menuMusicBtn")) else __O[2413]) then
         local button = window.document:createElement("button")
         button.id = "menuMusicBtn"
         button.type = "button"
@@ -2822,8 +2822,8 @@ local __O = {};
         local ____t_526 = __t
         local ____t_525 = __t
         local ____temp_524 = if __t(event.isTrusted) then enabled else event.isTrusted
-        __O[2387] = ____temp_524
-        if ____t_526(if ____t_525(____temp_524) then not __t(unlocked) or not __t(isPlaying(nil)) else __O[2387]) then
+        __O[2414] = ____temp_524
+        if ____t_526(if ____t_525(____temp_524) then not __t(unlocked) or not __t(isPlaying(nil)) else __O[2414]) then
             unlock(nil)
         end
     end

@@ -59,6 +59,7 @@ const ESTADOS = [
   { nome: 'inventario', fazer: async (p) => { await p.keyboard.press('Escape'); await p.waitForTimeout(300); await p.evaluate(() => { document.querySelector('dialog[open]')?.close?.(); [...document.querySelectorAll('button')].find((b) => /INVENT/i.test(b.textContent) && b.offsetWidth > 0)?.click(); }); await p.waitForTimeout(600); } },
   { nome: 'viagem', fazer: async (p) => { await p.keyboard.press('Escape'); await p.waitForTimeout(300); await p.evaluate(() => { document.querySelector('dialog[open]')?.close?.(); document.getElementById('travelBtn')?.click(); }); await p.waitForTimeout(800); } },
   { nome: 'opcoes', fazer: async (p) => { await p.keyboard.press('Escape'); await p.waitForTimeout(300); await p.keyboard.press('Escape'); await p.waitForTimeout(500); await p.evaluate(() => [...document.querySelectorAll('button')].find((b) => /OP(Ç|C)ÕES|OPCOES/i.test(b.textContent) && b.offsetWidth > 0)?.click()); await p.waitForTimeout(600); } },
+  { nome: 'luta', fazer: async (p) => { await p.keyboard.press('Escape'); await p.waitForTimeout(300); await p.evaluate(() => { document.querySelectorAll('dialog[open]').forEach((d) => d.close?.()); try { Game.resume?.(); } catch (e) {} localStorage.setItem('daroca-sandbox-v1', '1'); try { Game.startSandboxBoss('freddy'); } catch (e) {} }); await p.waitForTimeout(3500); } },
 ];
 
 async function capturarModo(browser, modo) {
@@ -66,7 +67,7 @@ async function capturarModo(browser, modo) {
   const p = await ctx.newPage();
   await p.addInitScript(() => { try { localStorage.setItem('daroca-graphics-v1', 'medium'); } catch (e) {} });
   await p.goto(URL0); await p.waitForTimeout(1500);
-  await p.addStyleTag({ content: `.__cap *{visibility:hidden!important;animation:none!important;transition:none!important}.__cap .__alvo{visibility:visible!important;color:transparent!important;text-shadow:none!important;caret-color:transparent!important}.__cap canvas{visibility:hidden!important}.__cap,.__cap body{background:transparent!important;background-color:transparent!important}` });
+  await p.addStyleTag({ content: `.__cap *{visibility:hidden!important;animation:none!important;transition:none!important}.__cap .__alvo{visibility:visible!important;color:transparent!important;text-shadow:none!important;caret-color:transparent!important}.__cap .__alvo:not(#__nada):not(#__nada2){color:transparent!important;-webkit-text-fill-color:transparent!important;text-shadow:none!important}.__cap canvas{visibility:hidden!important}.__cap,.__cap body{background:transparent!important;background-color:transparent!important}` });
   const elementos = {}, estados = [];
   for (const est of ESTADOS) {
     await est.fazer(p);
@@ -106,13 +107,15 @@ async function capturarModo(browser, modo) {
       // pele: só o próprio elemento (fundo, borda, sombra, ::before/::after), sem texto e sem filhos
       const ok = await p.evaluate((k) => { const ach = (k) => { if (k.startsWith('#')) { const i = k.indexOf('>'); const base = document.getElementById((i < 0 ? k : k.slice(0, i)).slice(1)); if (i < 0) return base; return seguir(base, k.slice(i + 1)); } if (k === 'html') return document.documentElement; if (k === 'body') return document.body; if (k.startsWith('body>')) return seguir(document.body, k.slice(5)); if (k.startsWith('html>')) return seguir(document.documentElement, k.slice(5)); return null; };
         const seguir = (el, resto) => { for (const passo of resto.split('>')) { if (!el) return null; const [tag, n] = passo.split(':'); let i = 0, achou = null; for (const f of el.children) if (f.tagName.toLowerCase() === tag) { if (i === Number(n)) { achou = f; break; } i++; } el = achou; } return el; };
-        const el = ach(k); if (!el) return false; document.querySelectorAll('.__alvo').forEach((e) => e.classList.remove('__alvo')); el.classList.add('__alvo'); document.documentElement.classList.add('__cap'); return true; }, r.k);
+        const el = ach(k); if (!el) return false; document.querySelectorAll('.__alvo').forEach((e) => e.classList.remove('__alvo')); document.documentElement.classList.remove('__cap'); if (el instanceof SVGElement && !el.dataset.capCor) { const cs = getComputedStyle(el); el.dataset.capCor = '1'; el.style.setProperty('fill', cs.fill, 'important'); el.style.setProperty('stroke', cs.stroke, 'important'); } /* ícones em SVG usam currentColor: fixa a cor real (sem a captura ligada) antes de esconder o texto */ el.classList.add('__alvo'); document.documentElement.classList.add('__cap'); return true; }, r.k);
       if (!ok) continue;
       const clip = { x: Math.max(0, Math.floor(r.x)), y: Math.max(0, Math.floor(r.y)) }; clip.width = Math.min(W, Math.ceil(r.x + r.w)) - clip.x; clip.height = Math.min(H, Math.ceil(r.y + r.h)) - clip.y;
       if (clip.width <= 0 || clip.height <= 0) continue;
       const png = await p.screenshot({ clip, omitBackground: true });
       const img = lerPNG(png);
       if (process.env.DAROCA_DEBUG_KEY === r.k) fs.writeFileSync(path.join(process.env.DAROCA_DEBUG_DIR || '.', `debug-${modo}-${est.nome}.png`), png);
+      // foto vazia (o aviso sumiu antes da foto, por exemplo) não apaga uma pele boa de outro estado
+      if (vazio(img) && ja && ja.pele) { ja.estados = { ...(ja.estados || {}), [est.nome]: [r.x, r.y, r.w, r.h] }; continue; }
       elementos[r.k] = { ...r, est: est.nome, px: clip.x, py: clip.y, pw: img.w, ph: img.h, pele: vazio(img) ? '' : codificar(img), estados: { ...(ja?.estados || {}), [est.nome]: [r.x, r.y, r.w, r.h] } };
       fotos++;
     }
@@ -124,7 +127,7 @@ async function capturarModo(browser, modo) {
   let fontes = null;
   if (modo === 'pc') fontes = await p.evaluate(async () => {
     await document.fonts.ready;
-    const letras = [...new Set((String.fromCharCode(...Array.from({ length: 95 }, (_, i) => 32 + i)) + 'ÁÀÂÃÉÊÍÓÔÕÚÜÇáàâãéêíóôõúüçÑñ•·…→←↑↓★☆♥♡✕✖✔✓◆●○■□▶◀▲▼✂ºª°×÷–—“”‘’«»€£¿¡⏱⚡🔥').split(''))];
+    const letras = [...new Set((String.fromCharCode(...Array.from({ length: 95 }, (_, i) => 32 + i)) + 'ÁÀÂÃÉÊÍÓÔÕÚÜÇáàâãéêíóôõúüçÑñ•·…→←↑↓★☆♥♡✕✖✔✓◆●○■□▶◀▲▼✂ºª°×÷–—“”‘’«»€£¿¡⏱⚡🔥↗✦⌂＋−🔒›∞↻⌘ⓘ◎↵♪🎬♫❧⚔⚑⚙📺🕹🛠📜␣®✎⚒⌖▯♜⛶♧⚠👥－¥✿🔧☰🛹❄☕').split(''))];
     const FAM = { pixel: ['Pixel, monospace', [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 24, 26, 28, 32, 36, 40, 48]], space: ['Space, Arial, sans-serif', [9, 10, 11, 12, 13, 14, 16, 18, 20, 24, 28, 32]],
       mono: ['monospace', [8, 9, 10, 11, 12, 13, 14, 16]], arial: ['Arial, sans-serif', [9, 10, 11, 12, 13, 14, 16, 18]] };
     const cv = document.createElement('canvas'); cv.width = 128; cv.height = 128; const c = cv.getContext('2d', { willReadFrequently: true });

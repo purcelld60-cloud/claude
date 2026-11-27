@@ -51,16 +51,16 @@ local __O = {};
         local ____t_24 = __t
         local ____t_23 = __t
         local ____tem_result_22 = tem(nil, "biscoito_cao")
-        __O[851] = ____tem_result_22
-        local ____temp_27 = if ____t_24(if ____t_23(____tem_result_22) then __O[851] else tem(nil, "cao")) then "Biscoito do cachorro (já comprado)" else "Biscoito de polvilho pro cachorro · ● 10"
+        __O[852] = ____tem_result_22
+        local ____temp_27 = if ____t_24(if ____t_23(____tem_result_22) then __O[852] else tem(nil, "cao")) then "Biscoito do cachorro (já comprado)" else "Biscoito de polvilho pro cachorro · ● 10"
         local function ____temp_28()
             marca(nil, "biscoito_cao")
             api:item("BISCOITO DE POLVILHO")
         end
         local ____t_26 = __t
         local ____tem_result_25 = tem(nil, "biscoito_cao")
-        __O[852] = ____tem_result_25
-        local ops = ____arrL_31({____temp_29, ____temp_30, {t = ____temp_27, preco = 10, f = ____temp_28, usado = if ____t_26(____tem_result_25) then __O[852] else tem(nil, "cao")}, {t = "Só olhando", sair = true}}, 4)
+        __O[853] = ____tem_result_25
+        local ops = ____arrL_31({____temp_29, ____temp_30, {t = ____temp_27, preco = 10, f = ____temp_28, usado = if ____t_26(____tem_result_25) then __O[853] else tem(nil, "cao")}, {t = "Só olhando", sair = true}}, 4)
         api:escolher(
             "TIO DO PICOLÉ",
             "Picolé com nome de meme! O que vai ser?",
@@ -79,10 +79,10 @@ local __O = {};
                 local ____t_38 = __t
                 local ____t_36 = __t
                 local ____temp_35 = not __t(p)
-                __O[853] = ____temp_35
-                local ____temp_37 = if ____t_36(____temp_35) then __O[853] else p.sair
-                __O[854] = ____temp_37
-                if ____t_39(if ____t_38(____temp_37) then __O[854] else p.usado) then
+                __O[854] = ____temp_35
+                local ____temp_37 = if ____t_36(____temp_35) then __O[854] else p.sair
+                __O[855] = ____temp_37
+                if ____t_39(if ____t_38(____temp_37) then __O[855] else p.usado) then
                     return
                 end
                 if __lt(
@@ -223,8 +223,8 @@ local __O = {};
             local ____t_45 = __t
             local ____t_44 = __t
             local ____temp_43 = n.ok == nil and n.lane == i
-            __O[856] = ____temp_43
-            if ____t_45(if ____t_44(____temp_43) then math.abs(n.t - r.t) < d else __O[856]) then
+            __O[857] = ____temp_43
+            if ____t_45(if ____t_44(____temp_43) then math.abs(n.t - r.t) < d else __O[857]) then
                 d = math.abs(n.t - r.t)
                 best = n
             end
@@ -800,8 +800,8 @@ local __O = {};
                         local ____t_13 = __t
                         local ____t_12 = __t
                         local ____pegou_result_11 = pegou(nil, "pneu")
-                        __O[850] = ____pegou_result_11
-                        return if X(nil).juninho == "feita" then "ok" else if X(nil).juninho == "ativa" then if ____t_13(if ____t_12(____pegou_result_11) then tem(nil, "corrente") else __O[850]) then "entregar" else "andando" else "nova"
+                        __O[851] = ____pegou_result_11
+                        return if X(nil).juninho == "feita" then "ok" else if X(nil).juninho == "ativa" then if ____t_13(if ____t_12(____pegou_result_11) then tem(nil, "corrente") else __O[851]) then "entregar" else "andando" else "nova"
                     end,
                     falas = function(____, st) return if st == "nova" then __arrL(
                         {
@@ -1095,8 +1095,8 @@ local __O = {};
         local ____t_42 = __t
         local ____t_41 = __t
         local ____temp_40 = if __t(c0.nIda) then __le(c0.nando, c0.volta + 1) else c0.nIda
-        __O[855] = ____temp_40
-        if ____t_42(if ____t_41(____temp_40) then __O[855] else __gt(c0.t, c0.lim)) then
+        __O[856] = ____temp_40
+        if ____t_42(if ____t_41(____temp_40) then __O[856] else __gt(c0.t, c0.lim)) then
             corrida = nil
             api:aviso("O Nando chegou primeiro! Fala com ele de novo pra revanche.")
             api:sfx("risada")
@@ -1404,24 +1404,24 @@ local __O = {};
                 local ____t_62 = __t
                 local ____t_60 = __t
                 local ____gt_result_59 = __gt(e.hp, 0)
-                __O[857] = ____gt_result_59
-                local ____temp_61 = if ____t_60(____gt_result_59) then e.onDano else __O[857]
-                __O[858] = ____temp_61
-                local ____temp_63 = if ____t_62(____temp_61) then math.abs(e.x - P.x) < 340 else __O[858]
-                __O[859] = ____temp_63
+                __O[858] = ____gt_result_59
+                local ____temp_61 = if ____t_60(____gt_result_59) then e.onDano else __O[858]
+                __O[859] = ____temp_61
+                local ____temp_63 = if ____t_62(____temp_61) then math.abs(e.x - P.x) < 340 else __O[859]
+                __O[860] = ____temp_63
                 local ____gt_66 = __gt
                 local ____e_y_65 = e.y
                 if ____e_y_65 == nil then
                     ____e_y_65 = FLOOR
                 end
-                return if ____t_64(____temp_63) then ____gt_66(____e_y_65, FLOOR - 40) else __O[859]
+                return if ____t_64(____temp_63) then ____gt_66(____e_y_65, FLOOR - 40) else __O[860]
             end
         )
         local ____t_69 = __t
         local ____t_68 = __t
         local ____temp_67 = not __t(cao.alvo) or __le(cao.alvo.hp, 0)
-        __O[860] = ____temp_67
-        if ____t_69(if ____t_68(____temp_67) then __O[860] else not __t(__call(vivos, "includes", cao.alvo))) then
+        __O[861] = ____temp_67
+        if ____t_69(if ____t_68(____temp_67) then __O[861] else not __t(__call(vivos, "includes", cao.alvo))) then
             local ____cao_72 = cao
             local ____t_71 = __t
             local ____get_result_70 = __get(
@@ -1432,8 +1432,8 @@ local __O = {};
                 ),
                 0
             )
-            __O[861] = ____get_result_70
-            ____cao_72.alvo = if ____t_71(____get_result_70) then __O[861] else nil
+            __O[862] = ____get_result_70
+            ____cao_72.alvo = if ____t_71(____get_result_70) then __O[862] else nil
         end
         local destino = if __t(cao.alvo) then cao.alvo.x - __TS__MathSign(cao.alvo.x - cao.x) * 18 else P.x - P.facing * 46
         local dx = destino - cao.x
@@ -1447,8 +1447,8 @@ local __O = {};
         local ____t_75 = __t
         local ____t_74 = __t
         local ____temp_73 = if __t(cao.alvo) then math.abs(cao.alvo.x - cao.x) < 30 else cao.alvo
-        __O[862] = ____temp_73
-        if ____t_75(if ____t_74(____temp_73) then __le(cao.cd, 0) else __O[862]) then
+        __O[863] = ____temp_73
+        if ____t_75(if ____t_74(____temp_73) then __le(cao.cd, 0) else __O[863]) then
             cao.cd = 2.4
             cao.mordeT = 0.3
             cao.alvo:onDano(35, "mordida")
@@ -1474,8 +1474,8 @@ local __O = {};
             local ____t_82 = __t
             local ____t_81 = __t
             local ____temp_80 = a.cena ~= cena
-            __O[863] = ____temp_80
-            if ____t_82(if ____t_81(____temp_80) then __O[863] else if __t(a.cao) then tem(nil, "cao") else a.cao) then
+            __O[864] = ____temp_80
+            if ____t_82(if ____t_81(____temp_80) then __O[864] else if __t(a.cao) then tem(nil, "cao") else a.cao) then
                 continue
             end
             local st = a:estado()
@@ -1512,10 +1512,10 @@ local __O = {};
             local ____t_86 = __t
             local ____t_84 = __t
             local ____temp_83 = it.cena == cena
-            __O[864] = ____temp_83
-            local ____temp_85 = if ____t_84(____temp_83) then it:quando() else __O[864]
-            __O[865] = ____temp_85
-            if ____t_87(if ____t_86(____temp_85) then not __t(pegou(nil, it.id)) else __O[865]) then
+            __O[865] = ____temp_83
+            local ____temp_85 = if ____t_84(____temp_83) then it:quando() else __O[865]
+            __O[866] = ____temp_85
+            if ____t_87(if ____t_86(____temp_85) then not __t(pegou(nil, it.id)) else __O[866]) then
                 __call(
                     out,
                     "push",
@@ -1543,8 +1543,8 @@ local __O = {};
         local ____t_90 = __t
         local ____t_89 = __t
         local ____temp_88 = cena == 14
-        __O[866] = ____temp_88
-        if ____t_90(if ____t_89(____temp_88) then corrida else __O[866]) then
+        __O[867] = ____temp_88
+        if ____t_90(if ____t_89(____temp_88) then corrida else __O[867]) then
             return __call(
                 out,
                 "filter",
@@ -1587,8 +1587,8 @@ local __O = {};
             local ____t_93 = __t
             local ____t_92 = __t
             local ____temp_91 = a.cena ~= cena
-            __O[867] = ____temp_91
-            if ____t_93(if ____t_92(____temp_91) then __O[867] else if __t(a.cao) then tem(nil, "cao") else a.cao) then
+            __O[868] = ____temp_91
+            if ____t_93(if ____t_92(____temp_91) then __O[868] else if __t(a.cao) then tem(nil, "cao") else a.cao) then
                 continue
             end
             local st = a:estado()
@@ -1649,10 +1649,10 @@ local __O = {};
             local ____t_104 = __t
             local ____t_102 = __t
             local ____temp_101 = it.cena == cena
-            __O[868] = ____temp_101
-            local ____temp_103 = if ____t_102(____temp_101) then it:quando() else __O[868]
-            __O[869] = ____temp_103
-            if ____t_105(if ____t_104(____temp_103) then not __t(pegou(nil, it.id)) else __O[869]) then
+            __O[869] = ____temp_101
+            local ____temp_103 = if ____t_102(____temp_101) then it:quando() else __O[869]
+            __O[870] = ____temp_103
+            if ____t_105(if ____t_104(____temp_103) then not __t(pegou(nil, it.id)) else __O[870]) then
                 local y = FLOOR - 20 + math.sin(t * 3 + it.x) * 4
                 c:save()
                 c.globalCompositeOperation = "lighter"
@@ -2107,12 +2107,12 @@ local __O = {};
                     function(____, a)
                         local ____t_121 = __t
                         local ____temp_120 = a.cena == cena
-                        __O[870] = ____temp_120
+                        __O[871] = ____temp_120
                         return if ____t_121(____temp_120) then __call(
                             __arrL({"nova", "entregar"}, 2),
                             "includes",
                             a:estado()
-                        ) else __O[870]
+                        ) else __O[871]
                     end
                 ),
                 "map",
@@ -2127,10 +2127,10 @@ local __O = {};
                         local ____t_125 = __t
                         local ____t_123 = __t
                         local ____temp_122 = i.cena == cena
-                        __O[871] = ____temp_122
-                        local ____temp_124 = if ____t_123(____temp_122) then i:quando() else __O[871]
-                        __O[872] = ____temp_124
-                        return if ____t_125(____temp_124) then not __t(pegou(nil, i.id)) else __O[872]
+                        __O[872] = ____temp_122
+                        local ____temp_124 = if ____t_123(____temp_122) then i:quando() else __O[872]
+                        __O[873] = ____temp_124
+                        return if ____t_125(____temp_124) then not __t(pegou(nil, i.id)) else __O[873]
                     end
                 ),
                 "map",

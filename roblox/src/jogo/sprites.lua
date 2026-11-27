@@ -23,8 +23,8 @@ local __O = {};
         local ____t_2 = __t
         local ____t_1 = __t
         local ____temp_0 = not __t(def) or type(def.arquivo) ~= "string"
-        __O[261] = ____temp_0
-        if ____t_2(if ____t_1(____temp_0) then __O[261] else __re_test(
+        __O[262] = ____temp_0
+        if ____t_2(if ____t_1(____temp_0) then __O[262] else __re_test(
             __re("^[a-z]+:|^\\/|\\.\\.", "i"),
             def.arquivo
         )) then
@@ -56,8 +56,8 @@ local __O = {};
             if data ~= nil then
                 ____opt_result_5 = data.sprites
             end
-            __O[262] = ____opt_result_5
-            for ____, ____value in __TS__Iterator(____iter_8(____entries_7(if ____t_6(____opt_result_5) then __O[262] else {}))) do
+            __O[263] = ____opt_result_5
+            for ____, ____value in __TS__Iterator(____iter_8(____entries_7(if ____t_6(____opt_result_5) then __O[263] else {}))) do
                 local name = ____value[1]
                 local def = ____value[2]
                 add(nil, name, def)
@@ -82,12 +82,12 @@ local __O = {};
         local d = e.def
         local ____t_12 = __t
         local ____getq_result_11 = __getq(d.quadro, 0)
-        __O[263] = ____getq_result_11
-        local fw = if ____t_12(____getq_result_11) then __O[263] else e.img.width
+        __O[264] = ____getq_result_11
+        local fw = if ____t_12(____getq_result_11) then __O[264] else e.img.width
         local ____t_14 = __t
         local ____getq_result_13 = __getq(d.quadro, 1)
-        __O[264] = ____getq_result_13
-        local fh = if ____t_14(____getq_result_13) then __O[264] else e.img.height
+        __O[265] = ____getq_result_13
+        local fh = if ____t_14(____getq_result_13) then __O[265] else e.img.height
         local cols = math.max(
             1,
             math.floor(e.img.width / fw)
@@ -95,30 +95,30 @@ local __O = {};
         local ____t_20 = __t
         local ____t_16 = __t
         local ____getq_result_15 = __getq(d.animacoes, o.anim)
-        __O[265] = ____getq_result_15
+        __O[266] = ____getq_result_15
         local ____opt_17 = d.animacoes
         if ____opt_17 ~= nil then
             ____opt_17 = ____opt_17.parado
         end
-        local ____temp_19 = if ____t_16(____getq_result_15) then __O[265] else ____opt_17
-        __O[266] = ____temp_19
-        local frames = if ____t_20(____temp_19) then __O[266] else __arrL({0}, 1)
+        local ____temp_19 = if ____t_16(____getq_result_15) then __O[266] else ____opt_17
+        __O[267] = ____temp_19
+        local frames = if ____t_20(____temp_19) then __O[267] else __arrL({0}, 1)
         local fps = if __t(d.fps) then d.fps else 8
         local ____t_26 = __t
         local ____get_24 = __get
         local ____mod_23 = __mod
         local ____t_22 = __t
         local ____TS__Number_result_21 = __TS__Number(o.time)
-        __O[267] = ____TS__Number_result_21
+        __O[268] = ____TS__Number_result_21
         local ____get_24_result_25 = ____get_24(
             frames,
             ____mod_23(
-                math.floor(if ____t_22(____TS__Number_result_21) then __O[267] else 0 * fps),
+                math.floor(if ____t_22(____TS__Number_result_21) then __O[268] else 0 * fps),
                 __len(frames)
             )
         )
-        __O[268] = ____get_24_result_25
-        local idx = if ____t_26(____get_24_result_25) then __O[268] else 0
+        __O[269] = ____get_24_result_25
+        local idx = if ____t_26(____get_24_result_25) then __O[269] else 0
         local scale = if __t(d.escala) then d.escala else 2 * if __t(o.scale) then o.scale else 1
         local ____getq_result_27 = __getq(d.ancora, 0)
         if ____getq_result_27 == nil then
@@ -174,8 +174,8 @@ local __O = {};
                 local ____t_31 = __t
                 local ____t_30 = __t
                 local ____temp_29 = if __t(o.attack) then o.attack else o.attacking
-                __O[269] = ____temp_29
-                local anim = if __t(o.hit) then "dano" else if ____t_31(if ____t_30(____temp_29) then __O[269] else o.punch) then "ataque" else if o.grounded == false then "pulo" else if __t(o.moving) then "andar" else "parado"
+                __O[270] = ____temp_29
+                local anim = if __t(o.hit) then "dano" else if ____t_31(if ____t_30(____temp_29) then __O[270] else o.punch) then "ataque" else if o.grounded == false then "pulo" else if __t(o.moving) then "andar" else "parado"
                 if __t(draw(
                     nil,
                     c,

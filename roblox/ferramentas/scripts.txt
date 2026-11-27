@@ -79,6 +79,7 @@ scene-life.js
 jorge-anime.js
 cinema-fx.js
 boss-fx.js
+golpes.js
 game.js
 joystick.js
 ui.js

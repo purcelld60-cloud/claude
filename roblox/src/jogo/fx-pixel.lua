@@ -300,8 +300,8 @@ local __O = {};
         local camada = if o.camada == "back" then "back" else "front"
         local ____t_21 = __t
         local ____TS__Number_result_20 = __TS__Number(o.camera)
-        __O[1457] = ____TS__Number_result_20
-        local cam = if ____t_21(____TS__Number_result_20) then __O[1457] else 0
+        __O[1459] = ____TS__Number_result_20
+        local cam = if ____t_21(____TS__Number_result_20) then __O[1459] else 0
         local meus = __call(
             ativos,
             "filter",
@@ -313,8 +313,8 @@ local __O = {};
         local ____t_24 = __t
         local ____t_23 = __t
         local ____temp_22 = camada == "back"
-        __O[1458] = ____temp_22
-        if ____t_24(if ____t_23(____temp_22) then __O[1458] else o.atualizar) then
+        __O[1460] = ____temp_22
+        if ____t_24(if ____t_23(____temp_22) then __O[1460] else o.atualizar) then
             local t = __TS__Number(o.tempo)
             local dt = 1 / 60
             if __isFiniteN(t) then
@@ -342,8 +342,8 @@ local __O = {};
                     local ____t_27 = __t
                     local ____t_26 = __t
                     local ____temp_25 = __get(ativos, i).dono == dono
-                    __O[1459] = ____temp_25
-                    if ____t_27(if ____t_26(____temp_25) then __get(ativos, i).fx:done() else __O[1459]) then
+                    __O[1461] = ____temp_25
+                    if ____t_27(if ____t_26(____temp_25) then __get(ativos, i).fx:done() else __O[1461]) then
                         __call(ativos, "splice", i, 1)
                     end
                     i = i - 1
@@ -356,8 +356,8 @@ local __O = {};
             local ____t_30 = __t
             local ____t_29 = __t
             local ____gt_result_28 = __gt(a.atraso, 0)
-            __O[1460] = ____gt_result_28
-            if ____t_30(if ____t_29(____gt_result_28) then __O[1460] else a.fx:done()) then
+            __O[1462] = ____gt_result_28
+            if ____t_30(if ____t_29(____gt_result_28) then __O[1462] else a.fx:done()) then
                 continue
             end
             local p = if __t(a.seguir) then a:seguir() else a
@@ -414,11 +414,14 @@ local __O = {};
         end
     end
     local function aoEvento(self, tipo, d)
+        if __t(window.Golpes) then
+            return
+        end
         local ____t_33 = __t
         local ____t_32 = __t
         local ____temp_31 = not __t(d) or not __isFiniteN(d.x)
-        __O[1461] = ____temp_31
-        if ____t_33(if ____t_32(____temp_31) then __O[1461] else not __isFiniteN(d.y)) then
+        __O[1463] = ____temp_31
+        if ____t_33(if ____t_32(____temp_31) then __O[1463] else not __isFiniteN(d.y)) then
             return
         end
         local dir = if __lt(d.dir, 0) then -1 else 1
@@ -441,8 +444,8 @@ local __O = {};
             local ____t_36 = __t
             local ____t_35 = __t
             local ____temp_34 = tipo == "cast"
-            __O[1462] = ____temp_34
-            if ____t_36(if ____t_35(____temp_34) then d.kind else __O[1462]) then
+            __O[1464] = ____temp_34
+            if ____t_36(if ____t_35(____temp_34) then d.kind else __O[1464]) then
                 disparo(nil, d)
             elseif __t(tipo == "cast" and not __t(d.kind)) then
                 if d.element == "fire" then
@@ -460,8 +463,8 @@ local __O = {};
         local ____t_39 = __t
         local ____t_38 = __t
         local ____temp_37 = not __t(o)
-        __O[1463] = ____temp_37
-        if ____t_39(if ____t_38(____temp_37) then __O[1463] else o.__pixel) then
+        __O[1465] = ____temp_37
+        if ____t_39(if ____t_38(____temp_37) then __O[1465] else o.__pixel) then
             return false
         end
         window.CampaignVfx = __assign(
@@ -486,25 +489,29 @@ local __O = {};
         window:addEventListener("DOMContentLoaded", ligarCampaignVfx, {once = true})
     end
     local function perigo(self, h, chefe)
-        if not __t(h) then
+        local ____t_42 = __t
+        local ____t_41 = __t
+        local ____temp_40 = not __t(h)
+        __O[1466] = ____temp_40
+        if ____t_42(if ____t_41(____temp_40) then __O[1466] else window.Golpes) then
             return
         end
         local x = h.x
         local y = if __t(h.y) then h.y else 0 + 8
-        local ____t_42 = __t
-        local ____t_41 = __t
-        local ____temp_40 = h.type == "astral"
-        __O[1464] = ____temp_40
-        if ____t_42(if ____t_41(____temp_40) then __O[1464] else h.astral) then
+        local ____t_45 = __t
+        local ____t_44 = __t
+        local ____temp_43 = h.type == "astral"
+        __O[1467] = ____temp_43
+        if ____t_45(if ____t_44(____temp_43) then __O[1467] else h.astral) then
             tocar(nil, "arcane/star-fall", {x = x, y = y})
         elseif h.type == "slime" then
             tocar(nil, "nature/acid-splash", {x = x, y = y})
         else
-            local ____t_45 = __t
-            local ____t_44 = __t
-            local ____temp_43 = h.type == "smoke"
-            __O[1465] = ____temp_43
-            if ____t_45(if ____t_44(____temp_43) then h.brasa else __O[1465]) then
+            local ____t_48 = __t
+            local ____t_47 = __t
+            local ____temp_46 = h.type == "smoke"
+            __O[1468] = ____temp_46
+            if ____t_48(if ____t_47(____temp_46) then h.brasa else __O[1468]) then
                 local ag = window.performance:now()
                 if ag - if __t(ultimo.__brasa) then ultimo.__brasa else 0 > 280 then
                     ultimo.__brasa = ag
@@ -530,18 +537,18 @@ local __O = {};
                     opcoes = {semLata = true}
                 })
             else
-                local ____t_48 = __t
-                local ____t_47 = __t
-                local ____temp_46 = h.type == "ring"
-                __O[1466] = ____temp_46
-                if ____t_48(if ____t_47(____temp_46) then h.smoke else __O[1466]) then
+                local ____t_51 = __t
+                local ____t_50 = __t
+                local ____temp_49 = h.type == "ring"
+                __O[1469] = ____temp_49
+                if ____t_51(if ____t_50(____temp_49) then h.smoke else __O[1469]) then
                     tocar(nil, "spawn/poof", {x = x, y = y, palette = PAL.fumaca})
                 else
-                    local ____t_51 = __t
-                    local ____t_50 = __t
-                    local ____temp_49 = h.type == "ring"
-                    __O[1467] = ____temp_49
-                    if ____t_51(if ____t_50(____temp_49) then h.catarro else __O[1467]) then
+                    local ____t_54 = __t
+                    local ____t_53 = __t
+                    local ____temp_52 = h.type == "ring"
+                    __O[1470] = ____temp_52
+                    if ____t_54(if ____t_53(____temp_52) then h.catarro else __O[1470]) then
                         tocar(nil, "water/wave-crash", {x = x - 30, y = y, palette = PAL.catarro, flip = true})
                         tocar(nil, "water/wave-crash", {x = x + 30, y = y, palette = PAL.catarro})
                         tocar(nil, "nature/acid-splash", {x = x, y = y, palette = PAL.catarro, atraso = 0.05})
@@ -574,19 +581,19 @@ local __O = {};
         kaique = "eletrico"
     }, "nicolas,reeisBoss,arthur,marco,giant,nikolas,dede,freddy,menezes,igor,kaique")
     local function corDe(____, e)
-        local ____t_58 = __t
-        local ____get_56 = __get
-        local ____get_55 = __get
-        local ____opt_result_54
+        local ____t_61 = __t
+        local ____get_59 = __get
+        local ____get_58 = __get
+        local ____opt_result_57
         if e ~= nil then
-            ____opt_result_54 = e.type
+            ____opt_result_57 = e.type
         end
-        local ____get_56_result_57 = ____get_56(
+        local ____get_59_result_60 = ____get_59(
             PAL,
-            ____get_55(COR, ____opt_result_54)
+            ____get_58(COR, ____opt_result_57)
         )
-        __O[1468] = ____get_56_result_57
-        return if ____t_58(____get_56_result_57) then __O[1468] else PAL.ouro
+        __O[1471] = ____get_59_result_60
+        return if ____t_61(____get_59_result_60) then __O[1471] else PAL.ouro
     end
     local function fase(self, e)
         if not __t(e) then
@@ -609,14 +616,14 @@ local __O = {};
         elseif __t(t == "marco" or t == "giant") then
             tocar(nil, "shadow/dark-explosion", {x = x, y = y, palette = PAL.tinta})
         else
+            local ____t_66 = __t
+            local ____t_65 = __t
             local ____t_63 = __t
-            local ____t_62 = __t
-            local ____t_60 = __t
-            local ____temp_59 = t == "freddy" or t == "menezes"
-            __O[1469] = ____temp_59
-            local ____temp_61 = if ____t_60(____temp_59) then __O[1469] else t == "igor"
-            __O[1470] = ____temp_61
-            if ____t_63(if ____t_62(____temp_61) then __O[1470] else t == "kaique") then
+            local ____temp_62 = t == "freddy" or t == "menezes"
+            __O[1472] = ____temp_62
+            local ____temp_64 = if ____t_63(____temp_62) then __O[1472] else t == "igor"
+            __O[1473] = ____temp_64
+            if ____t_66(if ____t_65(____temp_64) then __O[1473] else t == "kaique") then
                 tocar(nil, "impacts/ground-slam", {x = x, y = y, palette = if __t(t == "igor" or t == "kaique") then PAL.eletrico else PAL.choque})
             elseif t == "dede" then
                 tocar(nil, "explosions/smoke-bomb", {
@@ -665,7 +672,7 @@ local __O = {};
             return
         end
         __call(estados, "set", e, agora)
-        if agora == "dashing" then
+        if __t(agora == "dashing" and not __t(window.Golpes)) then
             local d = if __lt(e.dashDir, 0) then -1 else 1
             tocar(nil, "spawn/poof", {x = e.x - d * 22, y = e.y, palette = PAL.poeira, flip = d < 0})
         elseif __t(agora == "phaseChange" and antes ~= nil) then

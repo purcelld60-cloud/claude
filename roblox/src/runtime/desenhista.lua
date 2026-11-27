@@ -136,6 +136,7 @@ function D.iniciar(op)
     return Canvas.cor(s)
   end
 
+  local ehJanela, desenharJanela
   -- o que foi desenhado no último quadro (para o toque achar o elemento)
   local desenhados = {}
   local caixas = setmetatable({}, { __mode = "k" })
@@ -147,6 +148,7 @@ function D.iniciar(op)
     if el == document.body or el == document.documentElement then return { x = 0, y = 0, width = 960, height = 540 } end
     return nil
   end
+  D.todosEm = function(x, y) local out = {}; for i = #desenhados, 1, -1 do local d = desenhados[i]; if x >= d.x and y >= d.y and x < d.x + d.w and y < d.y + d.h then out[#out + 1] = chave(d.el) end end; return out end
   N.elementoEm = function(x, y)
     for i = #desenhados, 1, -1 do local d = desenhados[i]; if x >= d.x and y >= d.y and x < d.x + d.w and y < d.y + d.h then return d.el end end
     return document.body
@@ -160,17 +162,118 @@ function D.iniciar(op)
     end
   end
 
+  -- Janelas que a captura não fotografou (avisos e confirmações criados na hora, como o "Tá difícil demais?"):
+  -- são desenhadas automaticamente num painel no estilo do jogo, com os textos e os botões clicáveis,
+  -- para nenhuma janela aberta ficar invisível travando o jogo.
+  ehJanela = function(el)
+    if el._tag == "dialog" then return el._attr.open ~= nil end
+    local role = el._attr.role
+    return role == "dialog" or role == "alertdialog" or el._attr["aria-modal"] == "true"
+  end
+  local function limpo(t) return (tostring(t or ""):gsub("%s+", " "):gsub("^ ", ""):gsub(" $", "")) end
+  local function coletar(el, out)
+    if el.nodeType ~= 1 or escondido(el) then return end
+    local tag = el._tag
+    if tag == "svg" or tag == "style" or tag == "script" or tag == "template" then return end
+    if tag == "button" or el._attr.role == "button" or (tag == "a" and el._attr.href) then
+      local t = limpo(N.textoDe(el)); if t == "" then t = limpo(el._attr["aria-label"] or el._attr.title) end
+      if t ~= "" then out[#out + 1] = { tipo = "botao", el = el, texto = t } end
+      return
+    end
+    if tag == "input" or tag == "textarea" or tag == "select" then out[#out + 1] = { tipo = "campo", el = el }; return end
+    if tag == "canvas" then if el._ and el.width > 0 then out[#out + 1] = { tipo = "canvas", el = el } end; return end
+    local proprio = ""
+    for _, f in ipairs(el._filhos) do if f.nodeType == 3 then proprio = proprio .. f._texto end end
+    proprio = limpo(proprio)
+    if proprio ~= "" then out[#out + 1] = { tipo = "texto", texto = proprio, titulo = tag == "h1" or tag == "h2" or tag == "h3" or tag == "strong", pequeno = tag == "small" } end
+    for _, f in ipairs(el._filhos) do coletar(f, out) end
+  end
+  local function quebrar(fam, s, texto, larg)
+    local linhas, linha = {}, ""
+    for palavra in texto:gmatch("%S+") do
+      local teste = linha == "" and palavra or (linha .. " " .. palavra)
+      if linha ~= "" and D.medir(fam, s, teste) > larg then linhas[#linhas + 1] = linha; linha = palavra else linha = teste end
+    end
+    if linha ~= "" then linhas[#linhas + 1] = linha end
+    return linhas
+  end
+  desenharJanela = function(el)
+    local itens = {}
+    for _, f in ipairs(el._filhos) do coletar(f, itens) end
+    local L, pad = N.toque and 620 or 560, 22
+    local famT, famN = familia("space", "bold"), familia("space")
+    local larg = L - pad * 2
+    local alt = pad
+    for _, it in ipairs(itens) do
+      it.canto = it.tipo == "botao" and #it.texto <= 3 -- "×", "?", "<": botão pequeno no canto do painel
+      if it.canto then it.h = 0
+      elseif it.tipo == "texto" then
+        it.s = it.titulo and 18 or it.pequeno and 11 or 14; it.fam = it.titulo and famT or famN
+        it.linhas = quebrar(it.fam, it.s, it.texto, larg); it.h = #it.linhas * math.floor(it.s * 1.4) + 6
+      elseif it.tipo == "botao" then it.h = 44
+      elseif it.tipo == "campo" then it.h = 40
+      else it.k = math.min(1, 110 / math.max(1, it.el.height), larg / math.max(1, it.el.width)); it.h = math.floor(it.el.height * it.k) + 8 end
+      alt = alt + it.h
+    end
+    alt = math.min(510, alt + pad)
+    local x0, y0 = math.floor((960 - L) / 2), math.floor((540 - alt) / 2)
+    ctx.globalAlpha = .6; ctx.fillStyle = "#0c141b"; ctx:fillRect(0, 0, 960, 540)
+    ctx.globalAlpha = 1
+    ctx.fillStyle = "#3e2816"; ctx:fillRect(x0 - 4, y0 - 4, L + 8, alt + 8)
+    ctx.fillStyle = "#f3e3bf"; ctx:fillRect(x0, y0, L, alt)
+    ctx.fillStyle = "#2f5a3e"; ctx:fillRect(x0, y0, L, 5)
+    caixas[el] = { x = x0, y = y0, width = L, height = alt }
+    desenhados[#desenhados + 1] = { el = el, x = x0, y = y0, w = L, h = alt }
+    local y = y0 + pad
+    local cantoX = x0 + L - 40
+    for _, it in ipairs(itens) do
+      if y + it.h > y0 + alt then break end
+      ctx.globalAlpha = 1
+      if it.canto then
+        local bx, by = cantoX, y0 + 10
+        ctx.fillStyle = "#6a4a2a"; ctx:fillRect(bx, by, 30, 30); ctx.fillStyle = "#f8edd2"; ctx:fillRect(bx + 2, by + 2, 26, 26)
+        local tl = D.medir(famT, 16, it.texto); D.escrever(famT, 16, it.texto, bx + 15 - tl / 2, by + 21, pixelDe("#3e2816", 1))
+        caixas[it.el] = { x = bx, y = by, width = 30, height = 30 }
+        desenhados[#desenhados + 1] = { el = it.el, x = bx, y = by, w = 30, h = 30 }
+        cantoX = cantoX - 36
+      elseif it.tipo == "texto" then
+        local asc = D.metricas(it.fam, it.s)
+        for i, linha in ipairs(it.linhas) do D.escrever(it.fam, it.s, linha, x0 + pad, y + (i - 1) * math.floor(it.s * 1.4) + asc, pixelDe(it.titulo and "#2f4a36" or "#3a2a1a", 1)) end
+      elseif it.tipo == "botao" then
+        local bx, by, bw, bh = x0 + pad, y + 3, larg, 36
+        ctx.fillStyle = "#8ba353"; ctx:fillRect(bx, by, bw, bh)
+        ctx.fillStyle = "#c6dd86"; ctx:fillRect(bx, by, bw, bh - 4)
+        local tl = D.medir(famT, 13, it.texto)
+        D.escrever(famT, 13, it.texto, bx + bw / 2 - tl / 2, by + 23, pixelDe("#1d3021", 1))
+        caixas[it.el] = { x = bx, y = by, width = bw, height = bh }
+        desenhados[#desenhados + 1] = { el = it.el, x = bx, y = by, w = bw, h = bh }
+      elseif it.tipo == "campo" then
+        local bx, by, bw, bh = x0 + pad, y + 4, larg, 30
+        ctx.fillStyle = "#6a5a40"; ctx:fillRect(bx, by, bw, bh); ctx.fillStyle = "#fffaf0"; ctx:fillRect(bx + 2, by + 2, bw - 4, bh - 4)
+        D.escrever(famN, 14, tostring(it.el.value or ""), bx + 8, by + 20, pixelDe("#2a2a2a", 1))
+        caixas[it.el] = { x = bx, y = by, width = bw, height = bh }
+        desenhados[#desenhados + 1] = { el = it.el, x = bx, y = by, w = bw, h = bh }
+      else
+        local w, h = math.floor(it.el.width * it.k), math.floor(it.el.height * it.k)
+        ctx:drawImage(it.el, x0 + pad, y + 4, w, h)
+      end
+      ctx.globalAlpha = 1
+      y = y + it.h
+    end
+  end
+
   -- desenha a página inteira no canvas da tela
   function D.desenhar()
     ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"
     ctx.fillStyle = "#000000"; ctx:fillRect(0, 0, 960, 540)
     local tab, idx = I[modo()], estadoAtual()
     local nomeEstado = I.estados[modo()][idx] and I.estados[modo()][idx].nome
-    local lista = {}
+    local lista, janelas = {}, {}
     local function andar(el, zPai, opPai)
       if el.nodeType ~= 1 then return end
       if escondido(el) then return end
       local r = tab[chave(el)]
+      if not r and ehJanela(el) then janelas[#janelas + 1] = el; return end
       local z = zPai
       if r then
         local v = r.vis and r.vis:sub(idx, idx) or "-"
@@ -194,8 +297,58 @@ function D.iniciar(op)
       -- largura em % mudando (barras de vida, gás, xp)
       local sw = el.style and rawget(el.style, "width")
       if sw and tostring(sw):match("%%$") then local pai = rawget(el, "_pai"); local rp = pai and tab[chave(pai)]; if rp then w = rp.w * (tonumber(tostring(sw):match("^([%d%.]+)")) or 100) / 100 end end
-      caixas[el] = { x = x, y = y, width = w, height = h }
+      -- texto maior que o da foto (avisos e etiquetas com texto novo): a caixa estica para caber, sem deformar as bordas
+      local estica
+      if r.pele and r.pele ~= "" and r.textos and #r.textos == 1 and r.pw and r.pw > 24 and r.ph > 16 then
+        local so
+        for _, f in ipairs(el._filhos) do if f.nodeType == 3 and f._texto:match("%S") then if so then so = nil; break end; so = f end end
+        if so then
+          local tr = r.textos[1]
+          local t = so._texto:gsub("%s+", " "):gsub("^ ", ""):gsub(" $", "")
+          if r.maiusc then t = N.JS and N.JS.upper(t) or t:upper() end
+          local fam = familia(r.fonte, r.peso)
+          local larg = D.medir(fam, r.tam or 12, t, r.esp)
+          local folga = r.w - tr.w
+          if larg > tr.w * (tr.linhas or 1) + 2 or math.abs(w - r.w) > 1 then
+            local w2 = math.min(900, math.max(w, math.min(larg + folga, 860)))
+            local linhas = math.max(1, math.ceil(larg / math.max(40, w2 - folga)))
+            local altLinha = (tr.h / (tr.linhas or 1))
+            local h2 = r.h + (linhas - (tr.linhas or 1)) * altLinha
+            local cx = x + w / 2
+            estica = { x = math.floor(cx - w2 / 2), y = y, w = w2, h = h2, t = t, fam = fam, linhas = linhas, altLinha = altLinha, folga = folga }
+          end
+        end
+      end
+      caixas[el] = estica and { x = estica.x, y = estica.y, width = estica.w, height = estica.h } or { x = x, y = y, width = w, height = h }
       local op = r.op or 1
+      if estica then
+        local p = pele(r.pele, r.pw, r.ph)
+        local bx, by = r.px + dx - x, r.py + dy - y -- sombra/borda que a pele tem fora da caixa
+        local W2, H2 = r.pw + (estica.w - r.w), r.ph + (estica.h - r.h)
+        local c = math.min(12, math.floor(r.pw / 3), math.floor(r.ph / 3))
+        local ox, oy = estica.x + bx, estica.y + by
+        ctx.globalAlpha = 1
+        -- 9 pedaços: cantos do mesmo tamanho, meio e lados esticados
+        local sxs, dxs, sws, dws = { 0, c, r.pw - c }, { 0, c, W2 - c }, { c, r.pw - 2 * c, c }, { c, W2 - 2 * c, c }
+        local sys, dys, shs, dhs = { 0, c, r.ph - c }, { 0, c, H2 - c }, { c, r.ph - 2 * c, c }, { c, H2 - 2 * c, c }
+        for i = 1, 3 do for j = 1, 3 do if sws[i] > 0 and shs[j] > 0 and dws[i] > 0 and dhs[j] > 0 then ctx:drawImage(p, sxs[i], sys[j], sws[i], shs[j], ox + dxs[i], oy + dys[j], dws[i], dhs[j]) end end end
+        local cor = (el.style and rawget(el.style, "color")) or r.cor or "#ffffff"
+        local asc = D.metricas(estica.fam, r.tam or 12)
+        local tr = r.textos[1]
+        local larguraTexto = estica.w - estica.folga
+        local tx0 = estica.x + (tr.x - x)
+        local ly = estica.y + (tr.y - y) + (estica.altLinha - (r.tam or 12)) / 2 + asc * .95
+        local linha = ""
+        local function escreveLinha(l) local lw = D.medir(estica.fam, r.tam or 12, l, r.esp); local lx = (r.alinha == "center") and (tx0 + larguraTexto / 2 - lw / 2) or tx0; D.escrever(estica.fam, r.tam or 12, l, lx, ly, pixelDe(cor, op), r.esp); ly = ly + estica.altLinha end
+        for palavra in estica.t:gmatch("%S+") do
+          local teste = linha == "" and palavra or (linha .. " " .. palavra)
+          if linha ~= "" and D.medir(estica.fam, r.tam or 12, teste, r.esp) > larguraTexto + 1 then escreveLinha(linha); linha = palavra else linha = teste end
+        end
+        if linha ~= "" then escreveLinha(linha) end
+        desenhados[#desenhados + 1] = { el = el, x = estica.x, y = estica.y, w = estica.w, h = estica.h }
+        jaDesenhou = true
+      end
+      if not estica then -- desenho normal (a pele e os textos como na foto)
       if r.pele and r.pw and r.pw > 0 then
         local p = pele(r.pele, r.pw, r.ph)
         ctx.globalAlpha = 1
@@ -252,7 +405,9 @@ function D.iniciar(op)
         D.escrever(fam, r.tam or 12, tostring(el.value or ""), x + 4, y + h / 2 + (r.tam or 12) * .35, pixelDe(r.cor or "#ffffff", 1))
       end
       desenhados[#desenhados + 1] = { el = el, x = x, y = y, w = w, h = h }
+      end
     end
+    for _, el in ipairs(janelas) do desenharJanela(el) end
     ctx.globalAlpha = 1
     return tela
   end

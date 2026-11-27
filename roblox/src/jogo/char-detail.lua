@@ -16,8 +16,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawCharacter)
-    __O[658] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[658] else window.CharDetail) then
+    __O[659] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[659] else window.CharDetail) then
         return
     end
     local original = window.Art.drawCharacter
@@ -75,7 +75,7 @@ local __O = {};
         local ____t_11 = __t
         local ____t_4 = __t
         local ____temp_3 = not __t(enabled)
-        __O[659] = ____temp_3
+        __O[660] = ____temp_3
         local ____opt_7 = window.Graphics
         if ____opt_7 ~= nil then
             ____opt_7 = ____opt_7.isLite
@@ -84,15 +84,15 @@ local __O = {};
         if ____opt_7 ~= nil then
             ____opt_result_9 = ____opt_7(____opt_7)
         end
-        local ____temp_10 = if ____t_4(____temp_3) then __O[659] else ____opt_result_9
-        __O[660] = ____temp_10
-        local ____temp_12 = if ____t_11(____temp_10) then __O[660] else __call(SKIP, "has", ____type)
-        __O[661] = ____temp_12
-        local ____temp_14 = if ____t_13(____temp_12) then __O[661] else ____type == "nikolas" and __TS__Number(o.bossPhase) >= 2
-        __O[662] = ____temp_14
-        local ____temp_16 = if ____t_15(____temp_14) then __O[662] else ____type == "reeisBoss"
-        __O[663] = ____temp_16
-        if ____t_18(if ____t_17(____temp_16) then __O[663] else if __t(o.transformed) then ____type == "reeis" else o.transformed) then
+        local ____temp_10 = if ____t_4(____temp_3) then __O[660] else ____opt_result_9
+        __O[661] = ____temp_10
+        local ____temp_12 = if ____t_11(____temp_10) then __O[661] else __call(SKIP, "has", ____type)
+        __O[662] = ____temp_12
+        local ____temp_14 = if ____t_13(____temp_12) then __O[662] else ____type == "nikolas" and __TS__Number(o.bossPhase) >= 2
+        __O[663] = ____temp_14
+        local ____temp_16 = if ____t_15(____temp_14) then __O[663] else ____type == "reeisBoss"
+        __O[664] = ____temp_16
+        if ____t_18(if ____t_17(____temp_16) then __O[664] else if __t(o.transformed) then ____type == "reeis" else o.transformed) then
             return original(
                 nil,
                 c,
@@ -141,8 +141,8 @@ local __O = {};
         if ____opt_19 ~= nil then
             ____opt_19 = ____opt_19.width
         end
-        __O[664] = ____opt_19
-        local cw = if ____t_21(____opt_19) then __O[664] else 960
+        __O[665] = ____opt_19
+        local cw = if ____t_21(____opt_19) then __O[665] else 960
         if __t(__lt(sx, -260) or __gt(sx, cw + 260)) then
             return
         end
@@ -162,14 +162,14 @@ local __O = {};
         local ____t_25 = __t
         local ____t_23 = __t
         local ____temp_22 = if __t(o.cache) then math.abs(m.a - 1) < 0.01 else o.cache
-        __O[665] = ____temp_22
-        local ____temp_24 = if ____t_23(____temp_22) then math.abs(m.d - 1) < 0.01 else __O[665]
-        __O[666] = ____temp_24
-        local ____temp_26 = if ____t_25(____temp_24) then not __t(m.b) else __O[666]
-        __O[667] = ____temp_26
-        local ____temp_28 = if ____t_27(____temp_26) then not __t(m.c) else __O[667]
-        __O[668] = ____temp_28
-        local ck = if ____t_30(if ____t_29(____temp_28) then not __t(o.hit) else __O[668]) then __add(
+        __O[666] = ____temp_22
+        local ____temp_24 = if ____t_23(____temp_22) then math.abs(m.d - 1) < 0.01 else __O[666]
+        __O[667] = ____temp_24
+        local ____temp_26 = if ____t_25(____temp_24) then not __t(m.b) else __O[667]
+        __O[668] = ____temp_26
+        local ____temp_28 = if ____t_27(____temp_26) then not __t(m.c) else __O[668]
+        __O[669] = ____temp_28
+        local ck = if ____t_30(if ____t_29(____temp_28) then not __t(o.hit) else __O[669]) then __add(
             __add(
                 __add(
                     __add(

@@ -33,18 +33,18 @@ local __O = {};
         local ____t_3 = __t
         local ____t_1 = __t
         local ____isSafeInteger_result_0 = __isSafeInteger(n)
-        __O[2702] = ____isSafeInteger_result_0
-        local ____temp_2 = if ____t_1(____isSafeInteger_result_0) then __ge(n, 0) else __O[2702]
-        __O[2703] = ____temp_2
-        return if ____t_3(____temp_2) then __le(n, 2147483647) else __O[2703]
+        __O[2729] = ____isSafeInteger_result_0
+        local ____temp_2 = if ____t_1(____isSafeInteger_result_0) then __ge(n, 0) else __O[2729]
+        __O[2730] = ____temp_2
+        return if ____t_3(____temp_2) then __le(n, 2147483647) else __O[2730]
     end
     local function nonce()
         local ____t_9 = __t
         local ____opt_6 = window.crypto
         local ____opt_4 = ____opt_6 and ____opt_6.randomUUID
         local ____temp_8 = ____opt_4 and ____opt_4(____opt_6)
-        __O[2704] = ____temp_8
-        return if ____t_9(____temp_8) then __O[2704] else __add(
+        __O[2731] = ____temp_8
+        return if ____t_9(____temp_8) then __O[2731] else __add(
             __add(
                 __add(
                     "rtc_",
@@ -72,10 +72,10 @@ local __O = {};
         local ____t_13 = __t
         local ____t_11 = __t
         local ____temp_10 = not __t(value) or type(value) ~= "table"
-        __O[2705] = ____temp_10
-        local ____temp_12 = if ____t_11(____temp_10) then __O[2705] else __isArray(value)
-        __O[2706] = ____temp_12
-        if ____t_14(if ____t_13(____temp_12) then __O[2706] else not __t(seq(nil, value.seq))) then
+        __O[2732] = ____temp_10
+        local ____temp_12 = if ____t_11(____temp_10) then __O[2732] else __isArray(value)
+        __O[2733] = ____temp_12
+        if ____t_14(if ____t_13(____temp_12) then __O[2733] else not __t(seq(nil, value.seq))) then
             return false
         end
         for ____, ____value in __iterar((__entries(value))) do
@@ -85,8 +85,8 @@ local __O = {};
                 local ____t_17 = __t
                 local ____t_16 = __t
                 local ____temp_15 = type(item) ~= "number" or not __isFiniteN(item)
-                __O[2707] = ____temp_15
-                if ____t_17(if ____t_16(____temp_15) then __O[2707] else math.abs(item) > 1) then
+                __O[2734] = ____temp_15
+                if ____t_17(if ____t_16(____temp_15) then __O[2734] else math.abs(item) > 1) then
                     return false
                 end
             elseif key == "response" then
@@ -94,10 +94,10 @@ local __O = {};
                 local ____t_21 = __t
                 local ____t_19 = __t
                 local ____temp_18 = type(item) ~= "number" or not __isFiniteN(item)
-                __O[2708] = ____temp_18
-                local ____temp_20 = if ____t_19(____temp_18) then __O[2708] else item < 0.5
-                __O[2709] = ____temp_20
-                if ____t_22(if ____t_21(____temp_20) then __O[2709] else item > 2) then
+                __O[2735] = ____temp_18
+                local ____temp_20 = if ____t_19(____temp_18) then __O[2735] else item < 0.5
+                __O[2736] = ____temp_20
+                if ____t_22(if ____t_21(____temp_20) then __O[2736] else item > 2) then
                     return false
                 end
             elseif key == "jump" then
@@ -108,8 +108,8 @@ local __O = {};
                 local ____t_25 = __t
                 local ____t_24 = __t
                 local ____temp_23 = not __isInteger(item) or __lt(item, 0)
-                __O[2710] = ____temp_23
-                if ____t_25(if ____t_24(____temp_23) then __O[2710] else __gt(item, 4)) then
+                __O[2737] = ____temp_23
+                if ____t_25(if ____t_24(____temp_23) then __O[2737] else __gt(item, 4)) then
                     return false
                 end
             elseif __t(not __t(__call(
@@ -208,12 +208,12 @@ local __O = {};
                     end
                     ____temp_48 = ____ge_47(____opt_result_46, 400)
                 end
-                __O[2715] = ____temp_48
+                __O[2742] = ____temp_48
                 local ____opt_result_52
                 if data ~= nil then
                     ____opt_result_52 = data.error
                 end
-                if ____t_53(if ____t_49(____temp_48) then __O[2715] else ____opt_result_52) then
+                if ____t_53(if ____t_49(____temp_48) then __O[2742] else ____opt_result_52) then
                     local ____Error_57 = Error
                     local ____opt_result_56
                     if data ~= nil then
@@ -295,11 +295,11 @@ local __O = {};
                                         "includes",
                                         ____error.status
                                     )
-                                    __O[2716] = ____call_result_61
+                                    __O[2743] = ____call_result_61
                                     local ____item_63, ____attempts_64 = item, "attempts"
                                     local ____item_attempts_65 = ____item_63[____attempts_64] + 1
                                     ____item_63[____attempts_64] = ____item_attempts_65
-                                    if ____t_66(if ____t_62(____call_result_61) then __O[2716] else ____item_attempts_65 >= 3) then
+                                    if ____t_66(if ____t_62(____call_result_61) then __O[2743] else ____item_attempts_65 >= 3) then
                                         status(nil)
                                         ____hasContinued = true
                                         return
@@ -377,8 +377,8 @@ local __O = {};
             if __t(again) then
                 local ____t_73 = __t
                 local ____call_result_72 = __call(retry, "get", id)
-                __O[2717] = ____call_result_72
-                local old = if ____t_73(____call_result_72) then __O[2717] else {tries = 0}
+                __O[2744] = ____call_result_72
+                local old = if ____t_73(____call_result_72) then __O[2744] else {tries = 0}
                 __call(
                     retry,
                     "set",
@@ -400,8 +400,8 @@ local __O = {};
             local ____t_76 = __t
             local ____t_75 = __t
             local ____temp_74 = if __t(closed) then closed else __call(peers, "get", peer.id) ~= peer
-            __O[2718] = ____temp_74
-            if ____t_76(if ____t_75(____temp_74) then __O[2718] else not __t(peer.descriptionQueued)) then
+            __O[2745] = ____temp_74
+            if ____t_76(if ____t_75(____temp_74) then __O[2745] else not __t(peer.descriptionQueued)) then
                 return
             end
             while __t(__len(peer.outgoingIce)) do
@@ -475,12 +475,12 @@ local __O = {};
                 local ____t_89 = __t
                 local ____t_87 = __t
                 local ____temp_86 = if __t(closed) then closed else __call(peers, "get", peer.id) ~= peer
-                __O[2719] = ____temp_86
-                local ____temp_88 = if ____t_87(____temp_86) then __O[2719] else not __t(__call(roster, "has", peer.id))
-                __O[2720] = ____temp_88
-                local ____temp_90 = if ____t_89(____temp_88) then __O[2720] else type(event.data) ~= "string"
-                __O[2721] = ____temp_90
-                if ____t_92(if ____t_91(____temp_90) then __O[2721] else __gt(
+                __O[2746] = ____temp_86
+                local ____temp_88 = if ____t_87(____temp_86) then __O[2746] else not __t(__call(roster, "has", peer.id))
+                __O[2747] = ____temp_88
+                local ____temp_90 = if ____t_89(____temp_88) then __O[2747] else type(event.data) ~= "string"
+                __O[2748] = ____temp_90
+                if ____t_92(if ____t_91(____temp_90) then __O[2748] else __gt(
                     __len(event.data),
                     32768
                 )) then
@@ -512,10 +512,10 @@ local __O = {};
                 local ____t_99 = __t
                 local ____t_97 = __t
                 local ____temp_96 = packet.kind == "ping"
-                __O[2722] = ____temp_96
-                local ____temp_98 = if ____t_97(____temp_96) then seq(nil, packet.n) else __O[2722]
-                __O[2723] = ____temp_98
-                if ____t_100(if ____t_99(____temp_98) then __isFiniteN(packet.t) else __O[2723]) then
+                __O[2749] = ____temp_96
+                local ____temp_98 = if ____t_97(____temp_96) then seq(nil, packet.n) else __O[2749]
+                __O[2750] = ____temp_98
+                if ____t_100(if ____t_99(____temp_98) then __isFiniteN(packet.t) else __O[2750]) then
                     do
                         pcall(function()
                             channel:send(window.JSON:stringify({v = 1, kind = "pong", n = packet.n, t = packet.t}))
@@ -528,8 +528,8 @@ local __O = {};
                     local ____t_103 = __t
                     local ____t_102 = __t
                     local ____temp_101 = if __t(sent) then packet.n == sent.n else sent
-                    __O[2724] = ____temp_101
-                    if ____t_103(if ____t_102(____temp_101) then packet.t == sent.t else __O[2724]) then
+                    __O[2751] = ____temp_101
+                    if ____t_103(if ____t_102(____temp_101) then packet.t == sent.t else __O[2751]) then
                         local elapsed = window.performance:now() - sent.t
                         if __t(elapsed >= 0 and elapsed < 10000) then
                             peer.ping = if __isFiniteN(peer.ping) then peer.ping * 0.7 + elapsed * 0.3 else elapsed
@@ -546,10 +546,10 @@ local __O = {};
                 local ____t_107 = __t
                 local ____t_105 = __t
                 local ____temp_104 = if __t(isHost) then packet.kind == "input" else isHost
-                __O[2725] = ____temp_104
-                local ____temp_106 = if ____t_105(____temp_104) then validInput(nil, packet.value) else __O[2725]
-                __O[2726] = ____temp_106
-                if ____t_108(if ____t_107(____temp_106) then __gt(packet.value.seq, peer.inputSeq) else __O[2726]) then
+                __O[2752] = ____temp_104
+                local ____temp_106 = if ____t_105(____temp_104) then validInput(nil, packet.value) else __O[2752]
+                __O[2753] = ____temp_106
+                if ____t_108(if ____t_107(____temp_106) then __gt(packet.value.seq, peer.inputSeq) else __O[2753]) then
                     peer.inputSeq = packet.value.seq
                     safeCall(nil, "onInput", peer.id, packet.value)
                 else
@@ -558,12 +558,12 @@ local __O = {};
                     local ____t_112 = __t
                     local ____t_110 = __t
                     local ____temp_109 = not __t(isHost) and peer.id == hostId
-                    __O[2727] = ____temp_109
-                    local ____temp_111 = if ____t_110(____temp_109) then packet.kind == "state" else __O[2727]
-                    __O[2728] = ____temp_111
-                    local ____temp_113 = if ____t_112(____temp_111) then seq(nil, packet.value.seq) else __O[2728]
-                    __O[2729] = ____temp_113
-                    if ____t_115(if ____t_114(____temp_113) then __gt(packet.value.seq, peer.stateSeq) else __O[2729]) then
+                    __O[2754] = ____temp_109
+                    local ____temp_111 = if ____t_110(____temp_109) then packet.kind == "state" else __O[2754]
+                    __O[2755] = ____temp_111
+                    local ____temp_113 = if ____t_112(____temp_111) then seq(nil, packet.value.seq) else __O[2755]
+                    __O[2756] = ____temp_113
+                    if ____t_115(if ____t_114(____temp_113) then __gt(packet.value.seq, peer.stateSeq) else __O[2756]) then
                         peer.stateSeq = packet.value.seq
                         safeCall(nil, "onState", packet.value)
                     end
@@ -608,8 +608,8 @@ local __O = {};
                 local ____t_118 = __t
                 local ____t_117 = __t
                 local ____temp_116 = if __t(closed) then closed else __call(peers, "get", id) ~= peer
-                __O[2730] = ____temp_116
-                if ____t_118(if ____t_117(____temp_116) then __O[2730] else peer.candidateKeys.size >= 48) then
+                __O[2757] = ____temp_116
+                if ____t_118(if ____t_117(____temp_116) then __O[2757] else peer.candidateKeys.size >= 48) then
                     return
                 end
                 local value = if type(event.candidate.toJSON) == "function" then event.candidate:toJSON() else event.candidate
@@ -680,14 +680,14 @@ local __O = {};
                 local ____t_126 = __t
                 local ____t_125 = __t
                 local ____temp_124 = if __t(closed) then closed else __call(peers, "has", id)
-                __O[2731] = ____temp_124
-                if ____t_126(if ____t_125(____temp_124) then __O[2731] else not __t(__call(roster, "has", id))) then
+                __O[2758] = ____temp_124
+                if ____t_126(if ____t_125(____temp_124) then __O[2758] else not __t(__call(roster, "has", id))) then
                     return ____awaiter_resolve(nil)
                 end
                 local ____t_128 = __t
                 local ____call_result_127 = __call(retry, "get", id)
-                __O[2732] = ____call_result_127
-                local history = if ____t_128(____call_result_127) then __O[2732] else {tries = 0, nextAt = 0}
+                __O[2759] = ____call_result_127
+                local history = if ____t_128(____call_result_127) then __O[2759] else {tries = 0, nextAt = 0}
                 if __t(__ge(history.tries, 4) or __gt(
                     history.nextAt,
                     window.performance:now()
@@ -742,8 +742,8 @@ local __O = {};
                 local ____iter_131 = __iter
                 local ____t_130 = __t
                 local ____call_result_129 = __call(pendingIce, "get", key)
-                __O[2733] = ____call_result_129
-                local ____array_132 = __TS__SparseArrayNew(__TS__Spread(____iter_131(if ____t_130(____call_result_129) then __O[2733] else __arrL({}, 0))))
+                __O[2760] = ____call_result_129
+                local ____array_132 = __TS__SparseArrayNew(__TS__Spread(____iter_131(if ____t_130(____call_result_129) then __O[2760] else __arrL({}, 0))))
                 __TS__SparseArrayPush(
                     ____array_132,
                     __TS__Spread(__iter(peer.ice))
@@ -778,21 +778,21 @@ local __O = {};
                     ____opt_result_136 = item.to
                 end
                 local ____temp_137 = if __t(closed) then closed else ____opt_result_136 ~= myId
-                __O[2734] = ____temp_137
-                local ____temp_139 = if ____t_138(____temp_137) then __O[2734] else not __t(__call(roster, "has", item.from))
-                __O[2735] = ____temp_139
-                local ____temp_141 = if ____t_140(____temp_139) then __O[2735] else item.from == myId
-                __O[2736] = ____temp_141
-                local ____temp_143 = if ____t_142(____temp_141) then __O[2736] else not __t(item.data)
-                __O[2737] = ____temp_143
-                if ____t_145(if ____t_144(____temp_143) then __O[2737] else type(item.data.session) ~= "string") then
+                __O[2761] = ____temp_137
+                local ____temp_139 = if ____t_138(____temp_137) then __O[2761] else not __t(__call(roster, "has", item.from))
+                __O[2762] = ____temp_139
+                local ____temp_141 = if ____t_140(____temp_139) then __O[2762] else item.from == myId
+                __O[2763] = ____temp_141
+                local ____temp_143 = if ____t_142(____temp_141) then __O[2763] else not __t(item.data)
+                __O[2764] = ____temp_143
+                if ____t_145(if ____t_144(____temp_143) then __O[2764] else type(item.data.session) ~= "string") then
                     return ____awaiter_resolve(nil)
                 end
                 local ____t_148 = __t
                 local ____t_147 = __t
                 local ____temp_146 = if __t(isHost) then item.from == hostId else isHost
-                __O[2738] = ____temp_146
-                if ____t_148(if ____t_147(____temp_146) then __O[2738] else not __t(isHost) and item.from ~= hostId) then
+                __O[2765] = ____temp_146
+                if ____t_148(if ____t_147(____temp_146) then __O[2765] else not __t(isHost) and item.from ~= hostId) then
                     return ____awaiter_resolve(nil)
                 end
                 local data = item.data
@@ -808,8 +808,8 @@ local __O = {};
                         ____opt_result_151 = peer.session
                     end
                     local ____temp_152 = ____opt_result_151 == data.session
-                    __O[2739] = ____temp_152
-                    if ____t_154(if ____t_153(____temp_152) then peer.pc.remoteDescription else __O[2739]) then
+                    __O[2766] = ____temp_152
+                    if ____t_154(if ____t_153(____temp_152) then peer.pc.remoteDescription else __O[2766]) then
                         return ____awaiter_resolve(nil)
                     end
                     if __t(peer) then
@@ -852,10 +852,10 @@ local __O = {};
                     local ____t_158 = __t
                     local ____t_156 = __t
                     local ____temp_155 = not __t(isHost) or not __t(peer)
-                    __O[2740] = ____temp_155
-                    local ____temp_157 = if ____t_156(____temp_155) then __O[2740] else peer.session ~= data.session
-                    __O[2741] = ____temp_157
-                    if ____t_159(if ____t_158(____temp_157) then __O[2741] else peer.pc.remoteDescription) then
+                    __O[2767] = ____temp_155
+                    local ____temp_157 = if ____t_156(____temp_155) then __O[2767] else peer.session ~= data.session
+                    __O[2768] = ____temp_157
+                    if ____t_159(if ____t_158(____temp_157) then __O[2768] else peer.pc.remoteDescription) then
                         return ____awaiter_resolve(nil)
                     end
                     local ____try = __TS__AsyncAwaiter(function()
@@ -883,8 +883,8 @@ local __O = {};
                         local ____t_162 = __t
                         local ____t_161 = __t
                         local ____temp_160 = not __t(c) or type(c.candidate) ~= "string"
-                        __O[2742] = ____temp_160
-                        if ____t_162(if ____t_161(____temp_160) then __O[2742] else __gt(
+                        __O[2769] = ____temp_160
+                        if ____t_162(if ____t_161(____temp_160) then __O[2769] else __gt(
                             __len(c.candidate),
                             2048
                         )) then
@@ -932,8 +932,8 @@ local __O = {};
                             end
                             local ____t_167 = __t
                             local ____call_result_166 = __call(pendingIce, "get", key)
-                            __O[2743] = ____call_result_166
-                            local list = if ____t_167(____call_result_166) then __O[2743] else __arrL({}, 0)
+                            __O[2770] = ____call_result_166
+                            local list = if ____t_167(____call_result_166) then __O[2770] else __arrL({}, 0)
                             if __lt(
                                 __len(list),
                                 48
@@ -965,8 +965,8 @@ local __O = {};
                 local ____t_170 = __t
                 local ____t_169 = __t
                 local ____temp_168 = if __t(closed) then closed else not __t(enabled)
-                __O[2744] = ____temp_168
-                if ____t_170(if ____t_169(____temp_168) then __O[2744] else polling) then
+                __O[2771] = ____temp_168
+                if ____t_170(if ____t_169(____temp_168) then __O[2771] else polling) then
                     return ____awaiter_resolve(nil)
                 end
                 polling = true
@@ -996,8 +996,8 @@ local __O = {};
                     local ____t_173 = __t
                     local ____t_172 = __t
                     local ____isSafeInteger_result_171 = __isSafeInteger(data.cursor)
-                    __O[2745] = ____isSafeInteger_result_171
-                    if ____t_173(if ____t_172(____isSafeInteger_result_171) then __ge(data.cursor, cursor) else __O[2745]) then
+                    __O[2772] = ____isSafeInteger_result_171
+                    if ____t_173(if ____t_172(____isSafeInteger_result_171) then __ge(data.cursor, cursor) else __O[2772]) then
                         cursor = data.cursor
                     end
                 end)
@@ -1028,8 +1028,8 @@ local __O = {};
                                 local value = getStatus(nil)
                                 local ____t_175 = __t
                                 local ____temp_174 = value.total == 0 or value.connected == value.total
-                                __O[2746] = ____temp_174
-                                local idle = if ____t_175(____temp_174) then __O[2746] else window.performance:now() - lastNegotiationAt > 25000
+                                __O[2773] = ____temp_174
+                                local idle = if ____t_175(____temp_174) then __O[2773] else window.performance:now() - lastNegotiationAt > 25000
                                 schedulePoll(nil, if __t(pollSoon) then 0 else math.max(
                                     0,
                                     if __t(idle) then 3000 else 250 - (window.performance:now() - started)
@@ -1054,8 +1054,8 @@ local __O = {};
                 local ____t_178 = __t
                 local ____t_177 = __t
                 local ____temp_176 = not __t(__call(roster, "has", id))
-                __O[2747] = ____temp_176
-                if ____t_178(if ____t_177(____temp_176) then __O[2747] else not __t(isHost) and id ~= hostId) then
+                __O[2774] = ____temp_176
+                if ____t_178(if ____t_177(____temp_176) then __O[2774] else not __t(isHost) and id ~= hostId) then
                     remove(nil, id)
                 elseif __t(not __t(connected(nil, peer)) and window.performance:now() - peer.createdAt > 25000) then
                     remove(nil, id, isHost)
@@ -1108,17 +1108,17 @@ local __O = {};
         local ____t_29 = __t
         local ____t_27 = __t
         local ____supported_result_26 = supported(nil)
-        __O[2711] = ____supported_result_26
+        __O[2738] = ____supported_result_26
         local ____temp_28 = if ____t_27(____supported_result_26) then __re_test(
             __re("^[A-Z0-9]{6}$", ""),
             if __t(code) then code else ""
-        ) else __O[2711]
-        __O[2712] = ____temp_28
-        local ____temp_30 = if ____t_29(____temp_28) then type(myId) == "string" else __O[2712]
-        __O[2713] = ____temp_30
-        local ____temp_32 = if ____t_31(____temp_30) then type(hostId) == "string" else __O[2713]
-        __O[2714] = ____temp_32
-        enabled = if ____t_33(____temp_32) then type(options.request) == "function" else __O[2714]
+        ) else __O[2738]
+        __O[2739] = ____temp_28
+        local ____temp_30 = if ____t_29(____temp_28) then type(myId) == "string" else __O[2739]
+        __O[2740] = ____temp_30
+        local ____temp_32 = if ____t_31(____temp_30) then type(hostId) == "string" else __O[2740]
+        __O[2741] = ____temp_32
+        enabled = if ____t_33(____temp_32) then type(options.request) == "function" else __O[2741]
         endpoint = __add(
             __add("/api/arena/rooms/", code),
             "/signal"
@@ -1215,12 +1215,12 @@ local __O = {};
             local ____t_185 = __t
             local ____t_183 = __t
             local ____temp_182 = if __t(closed) then closed else not __t(enabled)
-            __O[2748] = ____temp_182
-            local ____temp_184 = if ____t_183(____temp_182) then __O[2748] else not __t(value)
-            __O[2749] = ____temp_184
-            local ____temp_186 = if ____t_185(____temp_184) then __O[2749] else not __t(seq(nil, value.seq))
-            __O[2750] = ____temp_186
-            if ____t_188(if ____t_187(____temp_186) then __O[2750] else kind == "input" and not __t(validInput(nil, value))) then
+            __O[2775] = ____temp_182
+            local ____temp_184 = if ____t_183(____temp_182) then __O[2775] else not __t(value)
+            __O[2776] = ____temp_184
+            local ____temp_186 = if ____t_185(____temp_184) then __O[2776] else not __t(seq(nil, value.seq))
+            __O[2777] = ____temp_186
+            if ____t_188(if ____t_187(____temp_186) then __O[2777] else kind == "input" and not __t(validInput(nil, value))) then
                 return false
             end
             local data
@@ -1246,8 +1246,8 @@ local __O = {};
                 local ____t_191 = __t
                 local ____t_190 = __t
                 local ____connected_result_189 = connected(nil, peer)
-                __O[2751] = ____connected_result_189
-                if ____t_191(if ____t_190(____connected_result_189) then __lt(peer.channel.bufferedAmount, 65536) else __O[2751]) then
+                __O[2778] = ____connected_result_189
+                if ____t_191(if ____t_190(____connected_result_189) then __lt(peer.channel.bufferedAmount, 65536) else __O[2778]) then
                     do
                         pcall(function()
                             peer.channel:send(data)

@@ -16,8 +16,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.DAROCA_DEV)
-    __O[1060] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[1060] else window.DarocaDev) then
+    __O[1061] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[1061] else window.DarocaDev) then
         return
     end
     do
@@ -333,8 +333,8 @@ local __O = {};
         if ____opt_40 ~= nil then
             ____opt_result_42 = ____opt_40(____opt_40)
         end
-        __O[1061] = ____opt_result_42
-        for ____, p in __TS__Iterator(____iter_44(if ____t_43(____opt_result_42) then __O[1061] else __arrL({}, 0))) do
+        __O[1062] = ____opt_result_42
+        for ____, p in __TS__Iterator(____iter_44(if ____t_43(____opt_result_42) then __O[1062] else __arrL({}, 0))) do
             window.CampanhaPoderes:desbloquear(p.id)
             while __t(window.CampanhaPoderes:upgrade(p.id)) do
             end
@@ -361,8 +361,8 @@ local __O = {};
                 local ____self_55_parse_56 = ____self_55.parse
                 local ____t_54 = __t
                 local ____temp_53 = window.localStorage:getItem("daroca-c2-save")
-                __O[1062] = ____temp_53
-                local s = ____self_55_parse_56(____self_55, if ____t_54(____temp_53) then __O[1062] else "null")
+                __O[1063] = ____temp_53
+                local s = ____self_55_parse_56(____self_55, if ____t_54(____temp_53) then __O[1063] else "null")
                 if __t(s) then
                     s.flags = if __t(s.flags) then s.flags else {}
                     s.flags.extra = __assign({}, if __t(s.flags.extra) then s.flags.extra else {}, {
@@ -480,8 +480,8 @@ local __O = {};
             local ____t_61 = __t
             local ____t_60 = __t
             local ____temp_59 = not __t(C:advance(s))
-            __O[1063] = ____temp_59
-            if ____t_61(if ____t_60(____temp_59) then __O[1063] else s.done) then
+            __O[1064] = ____temp_59
+            if ____t_61(if ____t_60(____temp_59) then __O[1064] else s.done) then
                 fim(nil)
             end
         end
@@ -595,9 +595,9 @@ local __O = {};
         if ____opt_66 ~= nil then
             ____opt_66 = ____opt_66.metadata
         end
-        __O[1064] = ____opt_66
+        __O[1065] = ____opt_66
         local cinema = ____call_70(
-            ____keys_69(if ____t_68(____opt_66) then __O[1064] else {}),
+            ____keys_69(if ____t_68(____opt_66) then __O[1065] else {}),
             "filter",
             function(____, k) return not __t(__callq(R, "has", k)) or not __re_test(
                 __re("^c2_|^chegada_|^abertura$|^creditos$", ""),
@@ -614,9 +614,9 @@ local __O = {};
         if ____opt_result_75 ~= nil then
             ____opt_result_76 = ____opt_result_75(R)
         end
-        __O[1065] = ____opt_result_76
+        __O[1066] = ____opt_result_76
         local roteiros1 = ____call_78(
-            if ____t_77(____opt_result_76) then __O[1065] else __arrL({}, 0),
+            if ____t_77(____opt_result_76) then __O[1066] else __arrL({}, 0),
             "filter",
             function(____, id) return not __re_test(
                 __re("^c2", ""),
@@ -633,9 +633,9 @@ local __O = {};
         if ____opt_81 ~= nil then
             ____opt_result_83 = ____opt_81(____opt_81)
         end
-        __O[1066] = ____opt_result_83
+        __O[1067] = ____opt_result_83
         local roteiros2 = ____call_85(
-            if ____t_84(____opt_result_83) then __O[1066] else __arrL({}, 0),
+            if ____t_84(____opt_result_83) then __O[1067] else __arrL({}, 0),
             "filter",
             function(____, id) return __callq(R, "has", id) end
         )
@@ -653,9 +653,9 @@ local __O = {};
                         if ____opt_86 ~= nil then
                             ____opt_86 = ____opt_86.title
                         end
-                        __O[1067] = ____opt_86
+                        __O[1068] = ____opt_86
                         return ((((((("<button type=\"button\" data-t=\"" .. tostring(____tipo_90)) .. "\" data-id=\"") .. tostring(____id_91)) .. "\">") .. tostring(____re_replace_89(
-                            if ____t_88(____opt_86) then __O[1067] else id,
+                            if ____t_88(____opt_86) then __O[1068] else id,
                             __re("[<>&]", "g"),
                             ""
                         ))) .. "<small>") .. tostring(id)) .. "</small></button>"
@@ -719,8 +719,8 @@ local __O = {};
         local ____t_98 = __t
         local ____t_97 = __t
         local ____temp_96 = not __t(lista)
-        __O[1068] = ____temp_96
-        if ____t_98(if ____t_97(____temp_96) then __O[1068] else lista:querySelector("[data-dev-cut]")) then
+        __O[1069] = ____temp_96
+        if ____t_98(if ____t_97(____temp_96) then __O[1069] else lista:querySelector("[data-dev-cut]")) then
             return
         end
         local b = window.document:createElement("button")

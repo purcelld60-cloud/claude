@@ -1120,8 +1120,8 @@ local __O = {};
                             local ____t_5 = __t
                             local ____t_4 = __t
                             local ____temp_3 = f < 0.5
-                            __O[288] = ____temp_3
-                            if ____t_5(if ____t_4(____temp_3) then __band(x + d, 1) else __O[288]) then
+                            __O[289] = ____temp_3
+                            if ____t_5(if ____t_4(____temp_3) then __band(x + d, 1) else __O[289]) then
                                 continue
                             end
                             c.fillStyle = if __t(lit) then ("rgba(255,244,196," .. tostring(0.42 * k * f)) .. ")" else ("rgba(18,34,70," .. tostring(0.36 * k * f)) .. ")"
@@ -2726,8 +2726,8 @@ local __O = {};
         })
         local ____t_7 = __t
         local ____call_result_6 = __call(__L1.RUSTLE, "get", seed)
-        __O[289] = ____call_result_6
-        local shake = if ____t_7(____call_result_6) then __O[289] else 0
+        __O[290] = ____call_result_6
+        local shake = if ____t_7(____call_result_6) then __O[290] else 0
         local ____t_16 = __t
         local ____opt_12 = window.Weather
         if ____opt_12 ~= nil then
@@ -2741,8 +2741,8 @@ local __O = {};
         if ____opt_result_14 ~= nil then
             ____opt_result_15 = ____opt_result_14.cover
         end
-        __O[290] = ____opt_result_15
-        local snow = if ____t_16(____opt_result_15) then __O[290] else 0
+        __O[291] = ____opt_result_15
+        local snow = if ____t_16(____opt_result_15) then __O[291] else 0
         if kind == 1 then
             do
                 local k = 0
@@ -3257,8 +3257,8 @@ local __O = {};
             if ____opt_result_23 ~= nil then
                 ____opt_result_24 = ____opt_result_23.cover
             end
-            __O[293] = ____opt_result_24
-            local snow = if ____t_25(____opt_result_24) then __O[293] else 0
+            __O[294] = ____opt_result_24
+            local snow = if ____t_25(____opt_result_24) then __O[294] else 0
             if __gt(snow, 0.05) then
                 local a = math.min(1, snow * 1.3)
                 for ____, hx in __iterar((__L1.FARM_HOUSES)) do
@@ -3430,8 +3430,8 @@ local __O = {};
                         local ____t_28 = __t
                         local ____t_27 = __t
                         local ____temp_26 = f < 0.4
-                        __O[294] = ____temp_26
-                        if ____t_28(if ____t_27(____temp_26) then __band(k, 1) else __O[294]) then
+                        __O[295] = ____temp_26
+                        if ____t_28(if ____t_27(____temp_26) then __band(k, 1) else __O[295]) then
                             continue
                         end
                         c.fillStyle = ("rgba(255,240,190," .. tostring(0.3 * a * f)) .. ")"
@@ -7958,8 +7958,8 @@ local __O = {};
                 local ____t_31 = __t
                 local ____t_30 = __t
                 local ____temp_29 = f < 0.4
-                __O[295] = ____temp_29
-                if ____t_31(if ____t_30(____temp_29) then __band(k, 1) else __O[295]) then
+                __O[296] = ____temp_29
+                if ____t_31(if ____t_30(____temp_29) then __band(k, 1) else __O[296]) then
                     continue
                 end
                 c.fillStyle = ("rgba(255,240,190," .. tostring(0.28 * a * f)) .. ")"
@@ -12134,8 +12134,8 @@ local __O = {};
         local ____t_34 = __t
         local ____t_33 = __t
         local ____temp_32 = __lt(a, 0.02) or __lt(sx, -140)
-        __O[296] = ____temp_32
-        if ____t_34(if ____t_33(____temp_32) then __O[296] else __gt(sx, __L1.LW + 140)) then
+        __O[297] = ____temp_32
+        if ____t_34(if ____t_33(____temp_32) then __O[297] else __gt(sx, __L1.LW + 140)) then
             return
         end
         __L1:lightAdd(sx, top, a, reach)
@@ -12346,8 +12346,8 @@ local __O = {};
                     ) and __lt(x, b)
                 end
             )
-            __O[297] = ____call_result_35
-            return if ____t_36(____call_result_35) then __O[297] else __gt(
+            __O[298] = ____call_result_35
+            return if ____t_36(____call_result_35) then __O[298] else __gt(
                 __add(x, w),
                 W - 82
             )
@@ -13496,8 +13496,8 @@ local __O = {};
             local ____t_39 = __t
             local ____t_38 = __t
             local ____vis_result_37 = vis(nil, x * 2)
-            __O[298] = ____vis_result_37
-            if ____t_39(if ____t_38(____vis_result_37) then __le(x + 56, W) else __O[298]) then
+            __O[299] = ____vis_result_37
+            if ____t_39(if ____t_38(____vis_result_37) then __le(x + 56, W) else __O[299]) then
                 c:fillText(nome, (x + 23) * 2, 253)
             end
         end
@@ -15948,8 +15948,8 @@ local __O = {};
             local ____t_48 = __t
             local ____t_47 = __t
             local ____temp_46 = wx < __TS__Number(-w.w) - 120 or wx > __L1.LW + 120
-            __O[299] = ____temp_46
-            if ____t_48(if ____t_47(____temp_46) then __O[299] else __gt(w.x, W)) then
+            __O[300] = ____temp_46
+            if ____t_48(if ____t_47(____temp_46) then __O[300] else __gt(w.x, W)) then
                 continue
             end
             local gaps = __call(
@@ -16047,8 +16047,8 @@ local __O = {};
         local ____t_51 = __t
         local ____t_50 = __t
         local ____temp_49 = __lt(a, 0.02) or __lt(x, -60)
-        __O[300] = ____temp_49
-        if ____t_51(if ____t_50(____temp_49) then __O[300] else __gt(x, __L1.LW + 60)) then
+        __O[301] = ____temp_49
+        if ____t_51(if ____t_50(____temp_49) then __O[301] else __gt(x, __L1.LW + 60)) then
             return
         end
         local b = g:createRadialGradient(
@@ -16077,8 +16077,8 @@ local __O = {};
         local ____t_54 = __t
         local ____t_53 = __t
         local ____temp_52 = __lt(a, 0.02) or __lt(x, -90)
-        __O[301] = ____temp_52
-        if ____t_54(if ____t_53(____temp_52) then __O[301] else __gt(x, __L1.LW + 90)) then
+        __O[302] = ____temp_52
+        if ____t_54(if ____t_53(____temp_52) then __O[302] else __gt(x, __L1.LW + 90)) then
             return
         end
         g:save()
@@ -17449,8 +17449,8 @@ local __O = {};
                     "some",
                     function(____, s2) return math.abs(x - s2) < 70 end
                 )
-                __O[302] = ____call_result_55
-                if ____t_57(if ____t_56(____call_result_55) then __O[302] else __call(
+                __O[303] = ____call_result_55
+                if ____t_57(if ____t_56(____call_result_55) then __O[303] else __call(
                     __L1.BG_ST,
                     "some",
                     function(____, s2) return x > s2 - 12 and __lt(x, s2 + 118) end
@@ -20488,8 +20488,8 @@ local __O = {};
         if ____opt_60 ~= nil then
             ____opt_result_62 = ____opt_60(____opt_60)
         end
-        __O[303] = ____opt_result_62
-        if ____t_64(if ____t_63(____opt_result_62) then __O[303] else not __t(window.DayTime)) then
+        __O[304] = ____opt_result_62
+        if ____t_64(if ____t_63(____opt_result_62) then __O[304] else not __t(window.DayTime)) then
             return false
         end
         local en = id == "miqueias"
@@ -20951,8 +20951,8 @@ local __O = {};
         local ____t_75 = __t
         local ____t_74 = __t
         local ____temp_73 = not __ge(scene, 12) or not __t(def)
-        __O[309] = ____temp_73
-        if ____t_75(if ____t_74(____temp_73) then __O[309] else type(def.draw) ~= "function") then
+        __O[310] = ____temp_73
+        if ____t_75(if ____t_74(____temp_73) then __O[310] else type(def.draw) ~= "function") then
             return false
         end
         __set(__L1.MAPS, scene, def)
@@ -21018,8 +21018,8 @@ local __O = {};
         if ____opt_80 ~= nil then
             ____opt_result_82 = ____opt_80(____opt_80)
         end
-        __O[310] = ____opt_result_82
-        local wx = if ____t_83(____opt_result_82) then __O[310] else {}
+        __O[311] = ____opt_result_82
+        local wx = if ____t_83(____opt_result_82) then __O[311] else {}
         local cloud = __L1:cl(1 - if __t(wx.rain) then wx.rain else 0 * 0.8 - if __t(wx.snow) then wx.snow else 0 * 0.4 - if __t(wx.dust) then wx.dust else 0 * 0.2)
         local up = math.sin(s.sunT * math.pi)
         local gold = __L1:cl(1 - up * 1.7)
@@ -21186,8 +21186,8 @@ local __O = {};
             ____opt_90 = ____opt_90.widths
         end
         local ____TS__Number_result_93 = __TS__Number(____getq_92(____opt_90, scene))
-        __O[287] = ____TS__Number_result_93
-        return math.ceil(if ____t_94(____TS__Number_result_93) then __O[287] else 4800 / 2)
+        __O[288] = ____TS__Number_result_93
+        return math.ceil(if ____t_94(____TS__Number_result_93) then __O[288] else 4800 / 2)
     end
     skyCv, sk = table.unpack(
         __L1:mk(__L1.LW, 196),
@@ -21297,8 +21297,8 @@ local __O = {};
         local ____t_97 = __t
         local ____t_96 = __t
         local ____temp_95 = __gt(a, 0.04) and __gt(x, -160)
-        __O[291] = ____temp_95
-        if ____t_97(if ____t_96(____temp_95) then __lt(x, __L1.LW + 160) else __O[291]) then
+        __O[292] = ____temp_95
+        if ____t_97(if ____t_96(____temp_95) then __lt(x, __L1.LW + 160) else __O[292]) then
             __call(__L1.LIGHTS, "push", {x = x, top = top, a = a, reach = reach})
         end
     end
@@ -21306,8 +21306,8 @@ local __O = {};
         local ____t_100 = __t
         local ____t_99 = __t
         local ____temp_98 = __gt(a, 0.03) and __gt(x1, -60)
-        __O[292] = ____temp_98
-        if ____t_100(if ____t_99(____temp_98) then __lt(x0, __L1.LW + 60) else __O[292]) then
+        __O[293] = ____temp_98
+        if ____t_100(if ____t_99(____temp_98) then __lt(x0, __L1.LW + 60) else __O[293]) then
             __call(
                 __L1.LIGHTS,
                 "push",
@@ -27691,7 +27691,7 @@ local __O = {};
         local ____t_116 = __t
         local ____t_108 = __t
         local ____call_result_107 = __call(__L1.ARENA_TYPES, "includes", ____type)
-        __O[304] = ____call_result_107
+        __O[305] = ____call_result_107
         local ____t_114 = __t
         local ____opt_111 = window.Graphics
         if ____opt_111 ~= nil then
@@ -27701,9 +27701,9 @@ local __O = {};
         if ____opt_111 ~= nil then
             ____opt_result_113 = ____opt_111(____opt_111)
         end
-        local ____temp_115 = if ____t_108(____call_result_107) then not ____t_114(____opt_result_113) else __O[304]
-        __O[305] = ____temp_115
-        return if ____t_116(____temp_115) then not not __t(window.DayTime) else __O[305]
+        local ____temp_115 = if ____t_108(____call_result_107) then not ____t_114(____opt_result_113) else __O[305]
+        __O[306] = ____temp_115
+        return if ____t_116(____temp_115) then not not __t(window.DayTime) else __O[306]
     end
     __L1.MAPS = {
         ["0"] = __ord({draw = __L1.farm, text = __L1.farmText, lights = __L1.farmLights}, "draw,text,lights"),
@@ -27746,10 +27746,10 @@ local __O = {};
         local ____t_128 = __t
         local ____t_118 = __t
         local ____temp_117 = not not __t(__get(__L1.MAPS, scene))
-        __O[307] = ____temp_117
+        __O[308] = ____temp_117
         local ____t_120 = __t
         local ____get_result_always_119 = __get(__L1.MAPS, scene).always
-        __O[306] = ____get_result_always_119
+        __O[307] = ____get_result_always_119
         local ____t_126 = __t
         local ____opt_123 = window.Graphics
         if ____opt_123 ~= nil then
@@ -27759,9 +27759,9 @@ local __O = {};
         if ____opt_123 ~= nil then
             ____opt_result_125 = ____opt_123(____opt_123)
         end
-        local ____temp_127 = if ____t_118(____temp_117) then if ____t_120(____get_result_always_119) then __O[306] else not ____t_126(____opt_result_125) else __O[307]
-        __O[308] = ____temp_127
-        return if ____t_128(____temp_127) then not not __t(window.DayTime) else __O[308]
+        local ____temp_127 = if ____t_118(____temp_117) then if ____t_120(____get_result_always_119) then __O[307] else not ____t_126(____opt_result_125) else __O[308]
+        __O[309] = ____temp_127
+        return if ____t_128(____temp_127) then not not __t(window.DayTime) else __O[309]
     end
     __L1.kit = __ord(
         {
@@ -27826,20 +27826,20 @@ local __O = {};
                         local ____array_138 = __TS__SparseArrayNew(__TS__Number(scene))
                         local ____t_131 = __t
                         local ____TS__Number_result_130 = __TS__Number(x)
-                        __O[311] = ____TS__Number_result_130
-                        __TS__SparseArrayPush(____array_138, if ____t_131(____TS__Number_result_130) then __O[311] else 0)
+                        __O[312] = ____TS__Number_result_130
+                        __TS__SparseArrayPush(____array_138, if ____t_131(____TS__Number_result_130) then __O[312] else 0)
                         local ____t_133 = __t
                         local ____TS__Number_result_132 = __TS__Number(y)
-                        __O[312] = ____TS__Number_result_132
-                        __TS__SparseArrayPush(____array_138, if ____t_133(____TS__Number_result_132) then __O[312] else 0)
+                        __O[313] = ____TS__Number_result_132
+                        __TS__SparseArrayPush(____array_138, if ____t_133(____TS__Number_result_132) then __O[313] else 0)
                         local ____t_135 = __t
                         local ____TS__Number_result_134 = __TS__Number(vx)
-                        __O[313] = ____TS__Number_result_134
-                        __TS__SparseArrayPush(____array_138, if ____t_135(____TS__Number_result_134) then __O[313] else 0)
+                        __O[314] = ____TS__Number_result_134
+                        __TS__SparseArrayPush(____array_138, if ____t_135(____TS__Number_result_134) then __O[314] else 0)
                         local ____t_137 = __t
                         local ____TS__Number_result_136 = __TS__Number(vy)
-                        __O[314] = ____TS__Number_result_136
-                        __TS__SparseArrayPush(____array_138, if ____t_137(____TS__Number_result_136) then __O[314] else 0)
+                        __O[315] = ____TS__Number_result_136
+                        __TS__SparseArrayPush(____array_138, if ____t_137(____TS__Number_result_136) then __O[315] else 0)
                         ____L1_touch_139(
                             __L1,
                             __TS__SparseArraySpread(____array_138)
@@ -27857,8 +27857,8 @@ local __O = {};
                         local ____TS__Number_result_142 = __TS__Number(scene)
                         local ____t_141 = __t
                         local ____TS__Number_result_140 = __TS__Number(x)
-                        __O[315] = ____TS__Number_result_140
-                        return true, ____L1_lightsAt_143(__L1, ____TS__Number_result_142, if ____t_141(____TS__Number_result_140) then __O[315] else 0)
+                        __O[316] = ____TS__Number_result_140
+                        return true, ____L1_lightsAt_143(__L1, ____TS__Number_result_142, if ____t_141(____TS__Number_result_140) then __O[316] else 0)
                     end)
                     if not ____try then
                         ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -27878,8 +27878,8 @@ local __O = {};
                         local ____TS__Number_result_146 = __TS__Number(scene)
                         local ____t_145 = __t
                         local ____TS__Number_result_144 = __TS__Number(x)
-                        __O[316] = ____TS__Number_result_144
-                        return true, ____L1_shadeAt_147(__L1, ____TS__Number_result_146, if ____t_145(____TS__Number_result_144) then __O[316] else 0)
+                        __O[317] = ____TS__Number_result_144
+                        return true, ____L1_shadeAt_147(__L1, ____TS__Number_result_146, if ____t_145(____TS__Number_result_144) then __O[317] else 0)
                     end)
                     if not ____try then
                         ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -27917,8 +27917,8 @@ local __O = {};
                         local ____id_151 = id
                         local ____t_149 = __t
                         local ____TS__Number_result_148 = __TS__Number(t)
-                        __O[317] = ____TS__Number_result_148
-                        return true, ____L1_drawRoom_152(__L1, ____c_150, ____id_151, if ____t_149(____TS__Number_result_148) then __O[317] else 0)
+                        __O[318] = ____TS__Number_result_148
+                        return true, ____L1_drawRoom_152(__L1, ____c_150, ____id_151, if ____t_149(____TS__Number_result_148) then __O[318] else 0)
                     end)
                     if not ____try then
                         ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -27940,16 +27940,16 @@ local __O = {};
                         local ____array_159 = __TS__SparseArrayNew(c, ____type)
                         local ____t_154 = __t
                         local ____TS__Number_result_153 = __TS__Number(camera)
-                        __O[318] = ____TS__Number_result_153
-                        __TS__SparseArrayPush(____array_159, if ____t_154(____TS__Number_result_153) then __O[318] else 0)
+                        __O[319] = ____TS__Number_result_153
+                        __TS__SparseArrayPush(____array_159, if ____t_154(____TS__Number_result_153) then __O[319] else 0)
                         local ____t_156 = __t
                         local ____TS__Number_result_155 = __TS__Number(t)
-                        __O[319] = ____TS__Number_result_155
-                        __TS__SparseArrayPush(____array_159, if ____t_156(____TS__Number_result_155) then __O[319] else 0)
+                        __O[320] = ____TS__Number_result_155
+                        __TS__SparseArrayPush(____array_159, if ____t_156(____TS__Number_result_155) then __O[320] else 0)
                         local ____t_158 = __t
                         local ____TS__Number_result_157 = __TS__Number(homeX)
-                        __O[320] = ____TS__Number_result_157
-                        __TS__SparseArrayPush(____array_159, if ____t_158(____TS__Number_result_157) then __O[320] else 0)
+                        __O[321] = ____TS__Number_result_157
+                        __TS__SparseArrayPush(____array_159, if ____t_158(____TS__Number_result_157) then __O[321] else 0)
                         ____L1_drawArena_160(
                             __L1,
                             __TS__SparseArraySpread(____array_159)
@@ -27974,16 +27974,16 @@ local __O = {};
                         local ____array_167 = __TS__SparseArrayNew(c, ____type)
                         local ____t_162 = __t
                         local ____TS__Number_result_161 = __TS__Number(camera)
-                        __O[321] = ____TS__Number_result_161
-                        __TS__SparseArrayPush(____array_167, if ____t_162(____TS__Number_result_161) then __O[321] else 0)
+                        __O[322] = ____TS__Number_result_161
+                        __TS__SparseArrayPush(____array_167, if ____t_162(____TS__Number_result_161) then __O[322] else 0)
                         local ____t_164 = __t
                         local ____TS__Number_result_163 = __TS__Number(t)
-                        __O[322] = ____TS__Number_result_163
-                        __TS__SparseArrayPush(____array_167, if ____t_164(____TS__Number_result_163) then __O[322] else 0)
+                        __O[323] = ____TS__Number_result_163
+                        __TS__SparseArrayPush(____array_167, if ____t_164(____TS__Number_result_163) then __O[323] else 0)
                         local ____t_166 = __t
                         local ____TS__Number_result_165 = __TS__Number(homeX)
-                        __O[323] = ____TS__Number_result_165
-                        __TS__SparseArrayPush(____array_167, if ____t_166(____TS__Number_result_165) then __O[323] else 0, blend)
+                        __O[324] = ____TS__Number_result_165
+                        __TS__SparseArrayPush(____array_167, if ____t_166(____TS__Number_result_165) then __O[324] else 0, blend)
                         ____L1_arenaFront_168(
                             __L1,
                             __TS__SparseArraySpread(____array_167)
@@ -28005,20 +28005,20 @@ local __O = {};
                         )
                         local ____t_170 = __t
                         local ____TS__Number_result_169 = __TS__Number(camera)
-                        __O[324] = ____TS__Number_result_169
-                        __TS__SparseArrayPush(____array_177, if ____t_170(____TS__Number_result_169) then __O[324] else 0)
+                        __O[325] = ____TS__Number_result_169
+                        __TS__SparseArrayPush(____array_177, if ____t_170(____TS__Number_result_169) then __O[325] else 0)
                         local ____t_172 = __t
                         local ____TS__Number_result_171 = __TS__Number(t)
-                        __O[325] = ____TS__Number_result_171
-                        __TS__SparseArrayPush(____array_177, if ____t_172(____TS__Number_result_171) then __O[325] else 0)
+                        __O[326] = ____TS__Number_result_171
+                        __TS__SparseArrayPush(____array_177, if ____t_172(____TS__Number_result_171) then __O[326] else 0)
                         local ____t_174 = __t
                         local ____TS__Number_result_173 = __TS__Number(hx)
-                        __O[326] = ____TS__Number_result_173
-                        __TS__SparseArrayPush(____array_177, if ____t_174(____TS__Number_result_173) then __O[326] else 0)
+                        __O[327] = ____TS__Number_result_173
+                        __TS__SparseArrayPush(____array_177, if ____t_174(____TS__Number_result_173) then __O[327] else 0)
                         local ____t_176 = __t
                         local ____TS__Number_result_175 = __TS__Number(hy)
-                        __O[327] = ____TS__Number_result_175
-                        __TS__SparseArrayPush(____array_177, if ____t_176(____TS__Number_result_175) then __O[327] else 0, facing)
+                        __O[328] = ____TS__Number_result_175
+                        __TS__SparseArrayPush(____array_177, if ____t_176(____TS__Number_result_175) then __O[328] else 0, facing)
                         ____L1_darkness_178(
                             __L1,
                             __TS__SparseArraySpread(____array_177)
@@ -28040,12 +28040,12 @@ local __O = {};
                         )
                         local ____t_180 = __t
                         local ____TS__Number_result_179 = __TS__Number(camera)
-                        __O[328] = ____TS__Number_result_179
-                        __TS__SparseArrayPush(____array_183, if ____t_180(____TS__Number_result_179) then __O[328] else 0)
+                        __O[329] = ____TS__Number_result_179
+                        __TS__SparseArrayPush(____array_183, if ____t_180(____TS__Number_result_179) then __O[329] else 0)
                         local ____t_182 = __t
                         local ____TS__Number_result_181 = __TS__Number(t)
-                        __O[329] = ____TS__Number_result_181
-                        __TS__SparseArrayPush(____array_183, if ____t_182(____TS__Number_result_181) then __O[329] else 0)
+                        __O[330] = ____TS__Number_result_181
+                        __TS__SparseArrayPush(____array_183, if ____t_182(____TS__Number_result_181) then __O[330] else 0)
                         return true, ____L1_draw_184(
                             __L1,
                             __TS__SparseArraySpread(____array_183)

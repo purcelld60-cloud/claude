@@ -435,8 +435,8 @@ local __O = {};
     local function identity(self, id)
         local ____t_1 = __t
         local ____callq_result_0 = __callq(window.ArenaRoster, "get", id)
-        __O[2463] = ____callq_result_0
-        return if ____t_1(____callq_result_0) then __O[2463] else {
+        __O[2490] = ____callq_result_0
+        return if ____t_1(____callq_result_0) then __O[2490] else {
             id = "daroca",
             physical = "Cotovelada do chapéu",
             ranged = "Papel propulsor",
@@ -486,8 +486,8 @@ local __O = {};
     local function physical(self, id, dir, options)
         local ____t_3 = __t
         local ____get_result_2 = __get(profile, id)
-        __O[2464] = ____get_result_2
-        local def = if ____t_3(____get_result_2) then __O[2464] else profile.daroca
+        __O[2491] = ____get_result_2
+        local def = if ____t_3(____get_result_2) then __O[2491] else profile.daroca
         local p = def.physical
         local d = base(nil, id, "physical", dir)
         d.damage = __get(p, 0)
@@ -589,8 +589,8 @@ local __O = {};
     local function ranged(self, id, dir, options)
         local ____t_5 = __t
         local ____get_result_4 = __get(profile, id)
-        __O[2465] = ____get_result_4
-        local def = if ____t_5(____get_result_4) then __O[2465] else profile.daroca
+        __O[2492] = ____get_result_4
+        local def = if ____t_5(____get_result_4) then __O[2492] else profile.daroca
         local p = def.ranged
         local d = base(nil, id, "ranged", dir)
         d.damage = __get(p, 0)
@@ -619,8 +619,8 @@ local __O = {};
         local ____t_8 = __t
         local ____t_7 = __t
         local ____temp_6 = __get(p, 4) == "arc" and dir ~= "up"
-        __O[2466] = ____temp_6
-        if ____t_8(if ____t_7(____temp_6) then dir ~= "down" else __O[2466]) then
+        __O[2493] = ____temp_6
+        if ____t_8(if ____t_7(____temp_6) then dir ~= "down" else __O[2493]) then
             d.angle = -0.22
         end
         if __get(p, 4) == "return" then
@@ -763,8 +763,8 @@ local __O = {};
     local function combo(self, id, dir, options)
         local ____t_17 = __t
         local ____get_result_16 = __get(profile, id)
-        __O[2467] = ____get_result_16
-        local def = if ____t_17(____get_result_16) then __O[2467] else profile.daroca
+        __O[2494] = ____get_result_16
+        local def = if ____t_17(____get_result_16) then __O[2494] else profile.daroca
         local d = base(nil, id, "combo", dir)
         d.damage = 32
         d.knockback = 745
@@ -1246,8 +1246,8 @@ local __O = {};
             for ____, h in __iterar((f.hits)) do
                 local ____t_19 = __t
                 local ____math_abs_result_18 = math.abs(h.dx)
-                __O[2468] = ____math_abs_result_18
-                local reach = if ____t_19(____math_abs_result_18) then __O[2468] else 51
+                __O[2495] = ____math_abs_result_18
+                local reach = if ____t_19(____math_abs_result_18) then __O[2495] else 51
                 h.dx = 0
                 h.dy = -35 + vertical * reach
                 h.angle = if dir == "up" then -math.pi / 2 else math.pi / 2
@@ -1288,8 +1288,8 @@ local __O = {};
     local function damageColor(self, damage)
         local ____t_21 = __t
         local ____TS__Number_result_20 = __TS__Number(damage)
-        __O[2469] = ____TS__Number_result_20
-        local n = math.max(0, if ____t_21(____TS__Number_result_20) then __O[2469] else 0)
+        __O[2496] = ____TS__Number_result_20
+        local n = math.max(0, if ____t_21(____TS__Number_result_20) then __O[2496] else 0)
         local stops = __arrL(
             {
                 __arrL(

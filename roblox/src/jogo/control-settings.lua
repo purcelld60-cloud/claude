@@ -79,7 +79,7 @@ local __O = {};
         local ____t_25 = __t
         local ____t_20 = __t
         local ____temp_19 = if __t(code) then not __t(fixed) else code
-        __O[2441] = ____temp_19
+        __O[2468] = ____temp_19
         local ____gt_24 = __gt
         local ____len_23 = __len
         local ____t_22 = __t
@@ -87,11 +87,11 @@ local __O = {};
             api:getState().bindings,
             action
         )
-        __O[2440] = ____get_result_21
+        __O[2467] = ____get_result_21
         if ____t_25(if ____t_20(____temp_19) then ____gt_24(
-            ____len_23(if ____t_22(____get_result_21) then __O[2440] else __arrL({}, 0)),
+            ____len_23(if ____t_22(____get_result_21) then __O[2467] else __arrL({}, 0)),
             1
-        ) else __O[2441]) then
+        ) else __O[2468]) then
             local clear = window.document:createElement("button")
             clear.type = "button"
             clear.className = "controls-key-clear"
@@ -151,8 +151,8 @@ local __O = {};
                 local note = window.document:createElement("small")
                 local ____t_30 = __t
                 local ____get_result_29 = __get(descriptions, action)
-                __O[2442] = ____get_result_29
-                note.textContent = if ____t_30(____get_result_29) then __O[2442] else ""
+                __O[2469] = ____get_result_29
+                note.textContent = if ____t_30(____get_result_29) then __O[2469] else ""
                 copy:append(title, note)
                 local slots = window.document:createElement("div")
                 slots.className = "controls-key-slots"
@@ -241,8 +241,8 @@ local __O = {};
                     local ____t_33 = __t
                     local ____t_32 = __t
                     local ____get_result_31 = __get(barActions, index)
-                    __O[2443] = ____get_result_31
-                    if ____t_33(if ____t_32(____get_result_31) then __get(keys, 0) else __O[2443]) then
+                    __O[2470] = ____get_result_31
+                    if ____t_33(if ____t_32(____get_result_31) then __get(keys, 0) else __O[2470]) then
                         __get(keys, 0).textContent = api:getLabel(__get(barActions, index))
                         hint.title = actionKeys(
                             nil,
@@ -295,8 +295,8 @@ local __O = {};
                     local ____t_36 = __t
                     local ____t_35 = __t
                     local ____get_result_34 = __get(keys, 0)
-                    __O[2444] = ____get_result_34
-                    if ____t_36(if ____t_35(____get_result_34) then __get(helpActions, index) else __O[2444]) then
+                    __O[2471] = ____get_result_34
+                    if ____t_36(if ____t_35(____get_result_34) then __get(helpActions, index) else __O[2471]) then
                         __get(keys, 0).textContent = if __get(helpActions, index) == "training" then __add(
                             __add(
                                 api:getLabel("interact"),
@@ -334,8 +334,8 @@ local __O = {};
                 end
                 local ____t_38 = __t
                 local ____get_result_37 = __get(descriptions, action)
-                __O[2445] = ____get_result_37
-                local label = if ____t_38(____get_result_37) then __O[2445] else actionName(nil, action)
+                __O[2472] = ____get_result_37
+                local label = if ____t_38(____get_result_37) then __O[2472] else actionName(nil, action)
                 button:setAttribute(
                     "aria-label",
                     __add(
@@ -531,8 +531,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(api) or not __t(shell)
-    __O[2434] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2434] else window.ControlSettingsUI) then
+    __O[2461] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[2461] else window.ControlSettingsUI) then
         return
     end
     canvas = window.document:getElementById("gameCanvas")
@@ -542,9 +542,9 @@ local __O = {};
         local ____add_5 = __add
         local ____t_4 = __t
         local ____get_result_3 = __get(icons, name)
-        __O[2435] = ____get_result_3
+        __O[2462] = ____get_result_3
         return ____add_6(
-            ____add_5("<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" shape-rendering=\"crispEdges\">", if ____t_4(____get_result_3) then __O[2435] else icons.pad),
+            ____add_5("<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" shape-rendering=\"crispEdges\">", if ____t_4(____get_result_3) then __O[2462] else icons.pad),
             "</svg>"
         )
     end
@@ -666,7 +666,7 @@ local __O = {};
         local ____t_12 = __t
         local ____t_8 = __t
         local ____get_result_7 = __get(labels, id)
-        __O[2436] = ____get_result_7
+        __O[2463] = ____get_result_7
         local ____opt_9 = __call(
             api.actions,
             "find",
@@ -675,9 +675,9 @@ local __O = {};
         if ____opt_9 ~= nil then
             ____opt_9 = ____opt_9.label
         end
-        local ____temp_11 = if ____t_8(____get_result_7) then __O[2436] else ____opt_9
-        __O[2437] = ____temp_11
-        return if ____t_12(____temp_11) then __O[2437] else id
+        local ____temp_11 = if ____t_8(____get_result_7) then __O[2463] else ____opt_9
+        __O[2464] = ____temp_11
+        return if ____t_12(____temp_11) then __O[2464] else id
     end
     codeLabel = function(____, code) return if __t(code) then api:labelForCode(code) else "Adicionar" end
     actionKeys = function(____, id, separator)
@@ -692,14 +692,14 @@ local __O = {};
             api:getState().bindings,
             id
         )
-        __O[2438] = ____get_result_13
+        __O[2465] = ____get_result_13
         local ____call_16_result_17 = ____call_16(
-            ____call_15(if ____t_14(____get_result_13) then __O[2438] else __arrL({}, 0), "map", codeLabel),
+            ____call_15(if ____t_14(____get_result_13) then __O[2465] else __arrL({}, 0), "map", codeLabel),
             "join",
             separator
         )
-        __O[2439] = ____call_16_result_17
-        return if ____t_18(____call_16_result_17) then __O[2439] else "Sem tecla"
+        __O[2466] = ____call_16_result_17
+        return if ____t_18(____call_16_result_17) then __O[2466] else "Sem tecla"
     end
     local function selectTab(self, next)
         stopCapture(nil)
@@ -743,8 +743,8 @@ local __O = {};
             if __t(other) then
                 local ____t_58 = __t
                 local ____temp_57 = __len(result.conflicts) == 1 and not not __t(oldCode)
-                __O[2446] = ____temp_57
-                local canSwap = if ____t_58(____temp_57) then not __t(other.action == "pause" and other.slot == 0) else __O[2446]
+                __O[2473] = ____temp_57
+                local canSwap = if ____t_58(____temp_57) then not __t(other.action == "pause" and other.slot == 0) else __O[2473]
                 captureCopy.textContent = __add(
                     __add(
                         __add(
@@ -835,16 +835,16 @@ local __O = {};
         if state ~= nil then
             ____opt_result_65 = state.started
         end
-        __O[2447] = ____opt_result_65
-        local ____temp_67 = if ____t_66(____opt_result_65) then not __t(state.paused) else __O[2447]
-        __O[2448] = ____temp_67
-        local ____temp_69 = if ____t_68(____temp_67) then not __t(state.won) else __O[2448]
-        __O[2449] = ____temp_69
-        local ____temp_71 = if ____t_70(____temp_69) then not __t(state.defeated) else __O[2449]
-        __O[2450] = ____temp_71
-        local ____temp_73 = if ____t_72(____temp_71) then not __t(state.chapterEnded) else __O[2450]
-        __O[2451] = ____temp_73
-        resumeAfterClose = not not ____t_75(if ____t_74(____temp_73) then not __t(window.document:querySelector("dialog[open]")) else __O[2451])
+        __O[2474] = ____opt_result_65
+        local ____temp_67 = if ____t_66(____opt_result_65) then not __t(state.paused) else __O[2474]
+        __O[2475] = ____temp_67
+        local ____temp_69 = if ____t_68(____temp_67) then not __t(state.won) else __O[2475]
+        __O[2476] = ____temp_69
+        local ____temp_71 = if ____t_70(____temp_69) then not __t(state.defeated) else __O[2476]
+        __O[2477] = ____temp_71
+        local ____temp_73 = if ____t_72(____temp_71) then not __t(state.chapterEnded) else __O[2477]
+        __O[2478] = ____temp_73
+        resumeAfterClose = not not ____t_75(if ____t_74(____temp_73) then not __t(window.document:querySelector("dialog[open]")) else __O[2478])
         local ____opt_78 = window.Game
         if ____opt_78 ~= nil then
             ____opt_78 = ____opt_78.releaseInputs
@@ -913,10 +913,10 @@ local __O = {};
                 if state ~= nil then
                     ____opt_result_98 = state.started
                 end
-                __O[2452] = ____opt_result_98
-                local ____temp_100 = if ____t_99(____opt_result_98) then not __t(state.paused) else __O[2452]
-                __O[2453] = ____temp_100
-                if ____t_102(if ____t_101(____temp_100) then not __t(window.document:querySelector("dialog[open]")) else __O[2453]) then
+                __O[2479] = ____opt_result_98
+                local ____temp_100 = if ____t_99(____opt_result_98) then not __t(state.paused) else __O[2479]
+                __O[2480] = ____temp_100
+                if ____t_102(if ____t_101(____temp_100) then not __t(window.document:querySelector("dialog[open]")) else __O[2480]) then
                     if canvas ~= nil then
                         canvas:focus({preventScroll = true})
                     end
@@ -927,8 +927,8 @@ local __O = {};
                     if returnFocus ~= nil then
                         ____opt_result_107 = returnFocus.isConnected
                     end
-                    __O[2454] = ____opt_result_107
-                    if ____t_109(if ____t_108(____opt_result_107) then __len(returnFocus:getClientRects()) else __O[2454]) then
+                    __O[2481] = ____opt_result_107
+                    if ____t_109(if ____t_108(____opt_result_107) then __len(returnFocus:getClientRects()) else __O[2481]) then
                         returnFocus:focus({preventScroll = true})
                     end
                 end
@@ -957,10 +957,10 @@ local __O = {};
             local ____t_113 = __t
             local ____t_111 = __t
             local ____temp_110 = event.clientX < r.left or event.clientX > r.right
-            __O[2455] = ____temp_110
-            local ____temp_112 = if ____t_111(____temp_110) then __O[2455] else event.clientY < r.top
-            __O[2456] = ____temp_112
-            if ____t_114(if ____t_113(____temp_112) then __O[2456] else event.clientY > r.bottom) then
+            __O[2482] = ____temp_110
+            local ____temp_112 = if ____t_111(____temp_110) then __O[2482] else event.clientY < r.top
+            __O[2483] = ____temp_112
+            if ____t_114(if ____t_113(____temp_112) then __O[2483] else event.clientY > r.bottom) then
                 if __t(capturing) then
                     stopCapture(nil)
                 else
@@ -1145,12 +1145,12 @@ local __O = {};
             if ____opt_128 ~= nil then
                 ____opt_128 = ____opt_128(____this_129, "[data-control-tab]")
             end
-            __O[2457] = ____opt_128
+            __O[2484] = ____opt_128
             if ____t_131(if ____t_130(____opt_128) then __call(
                 __arrL({"ArrowLeft", "ArrowRight", "Home", "End"}, 4),
                 "includes",
                 event.key
-            ) else __O[2457]) then
+            ) else __O[2484]) then
                 event:preventDefault()
                 local next = if event.key == "Home" then "keys" else if event.key == "End" then "feel" else if tab == "keys" then "feel" else "keys"
                 selectTab(nil, next)
@@ -1216,8 +1216,8 @@ local __O = {};
         local ____t_137 = __t
         local ____opt_134 = help:querySelector(".help-grid")
         local ____temp_136 = ____opt_134 and ____opt_134:insertAdjacentElement("beforebegin", button)
-        __O[2458] = ____temp_136
-        local ____ = if ____t_137(____temp_136) then __O[2458] else help:append(button)
+        __O[2485] = ____temp_136
+        local ____ = if ____t_137(____temp_136) then __O[2485] else help:append(button)
     end
     window.ControlSettingsUI = __ord(
         {

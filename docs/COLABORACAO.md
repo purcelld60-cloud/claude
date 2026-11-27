@@ -347,3 +347,19 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - A pixelfx continua só na troca de fase e na derrota dos chefes.
   - **Modo dev:** tecla H ou `?hitbox` mostra as caixas.
   - **ChatGPT:** `combate-chefes.js` e `fases.js` não foram mexidos. Se criarem perigos novos no `hazards`, eles já usam essas formas; para um tipo novo, acrescentem o desenho em `Golpes.desenharPerigo`.
+- **27/11 · Claude:** **Roblox: arquivo pronto, guia e interface mais completa** (`roblox/`).
+  - **`roblox/PASSO-A-PASSO.md`:** guia para colocar no Roblox: baixar, abrir no Studio, permissões, testar, publicar, som e público.
+  - **`roblox/tools/gerar_rbxlx.py`:** monta o `DaRocaAdventure.rbxlx` a partir do `default.project.json`, sem precisar do Rojo.
+  - **`.github/workflows/roblox.yml`:** publica o arquivo em Releases (`roblox-bN`) com os sons e o guia. O `.rbxlx` não fica mais no git.
+  - **Protótipo antigo removido:** o 3D da fase do Igor (`src/client`, `src/server` e o `.rbxlx` antigo).
+  - **Desenhista** (`src/runtime/desenhista.lua`):
+    - janela aberta que não foi fotografada (`<dialog open>`, `role=dialog`) vira um painel automático no estilo do jogo, com textos, retrato e botões clicáveis (ex.: o "Tá difícil demais?" do SwiftGuide);
+    - caixas com texto maior esticam em 9 pedaços.
+  - **Captura** (`capturar.mjs`):
+    - novo estado `luta`;
+    - mais letras e ícones;
+    - ícones SVG com a cor certa;
+    - foto vazia não apaga pele boa;
+    - o texto fica escondido mesmo com `!important` de id.
+  - **`teste/sessao.lua`:** ações `chefe:<tipo>`, `chamar:Objeto.metodo`, `estado:` e `quem:x,y`.
+  - **`golpes.js`** entrou na lista de scripts convertidos.

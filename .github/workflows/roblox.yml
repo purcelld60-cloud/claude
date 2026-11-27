@@ -1,0 +1,42 @@
+name: Gerar o lugar do Roblox
+
+# Monta o DaRocaAdventure.rbxlx (o jogo inteiro dentro do Roblox) a cada push na main que mexa em roblox/
+# (e quando você clicar em "Run workflow") e publica em Releases. Abra o arquivo no Roblox Studio
+# (Arquivo > Abrir) e publique; o passo a passo está em roblox/PASSO-A-PASSO.md.
+# Não usa senhas nem a sua conta do Roblox.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['roblox/**', '.github/workflows/roblox.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: roblox-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lugar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Montar o DaRocaAdventure.rbxlx
+        run: |
+          mkdir -p saida
+          python3 roblox/tools/gerar_rbxlx.py saida/DaRocaAdventure.rbxlx
+          cp roblox/PASSO-A-PASSO.md saida/PASSO-A-PASSO.md
+          (cd roblox && zip -qr ../saida/DaRoca-sons-do-roblox.zip audio)
+      - name: Publicar em Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSAO=$(node -p "require('./dist/app-version.json').versionName")
+          gh release create "roblox-b${{ github.run_number }}" saida/* \
+            --target "${{ github.sha }}" \
+            --title "Da Roça no Roblox ${VERSAO} (build ${{ github.run_number }})" \
+            --notes "O jogo inteiro dentro do Roblox. Baixe o DaRocaAdventure.rbxlx e abra no Roblox Studio (Arquivo > Abrir). O DaRoca-sons-do-roblox.zip tem os 5 sons base para enviar à sua conta. Siga o PASSO-A-PASSO.md."

@@ -24,8 +24,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art)
-    __O[669] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[669] else window.Art.__brainrots) then
+    __O[670] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[670] else window.Art.__brainrots) then
         return
     end
     local original = window.Art.drawMinion
@@ -125,8 +125,8 @@ local __O = {};
                         local ____t_5 = __t
                         local ____t_4 = __t
                         local ____temp_3 = __le(ay, yc) and __gt(by, yc)
-                        __O[670] = ____temp_3
-                        if ____t_5(if ____t_4(____temp_3) then __O[670] else __le(by, yc) and __gt(ay, yc)) then
+                        __O[671] = ____temp_3
+                        if ____t_5(if ____t_4(____temp_3) then __O[671] else __le(by, yc) and __gt(ay, yc)) then
                             __call(xs, "push", ax + (yc - ay) / (by - ay) * (bx - ax))
                         end
                         i = i + 1
@@ -325,10 +325,10 @@ local __O = {};
             local ____t_9 = __t
             local ____t_7 = __t
             local ____temp_6 = __lt(x, 0) or __lt(y, 0)
-            __O[671] = ____temp_6
-            local ____temp_8 = if ____t_7(____temp_6) then __O[671] else __ge(x, W)
-            __O[672] = ____temp_8
-            return if ____t_10(if ____t_9(____temp_8) then __O[672] else __ge(y, H)) then -1 else __get(cor, y * W + x)
+            __O[672] = ____temp_6
+            local ____temp_8 = if ____t_7(____temp_6) then __O[672] else __ge(x, W)
+            __O[673] = ____temp_8
+            return if ____t_10(if ____t_9(____temp_8) then __O[673] else __ge(y, H)) then -1 else __get(cor, y * W + x)
         end
         local plano = __TS__New(
             Set,
@@ -358,10 +358,10 @@ local __O = {};
                             local ____t_14 = __t
                             local ____t_12 = __t
                             local ____temp_11 = em(nil, x - 1, y) >= 0 or em(nil, x + 1, y) >= 0
-                            __O[673] = ____temp_11
-                            local ____temp_13 = if ____t_12(____temp_11) then __O[673] else em(nil, x, y - 1) >= 0
-                            __O[674] = ____temp_13
-                            if ____t_15(if ____t_14(____temp_13) then __O[674] else em(nil, x, y + 1) >= 0) then
+                            __O[674] = ____temp_11
+                            local ____temp_13 = if ____t_12(____temp_11) then __O[674] else em(nil, x, y - 1) >= 0
+                            __O[675] = ____temp_13
+                            if ____t_15(if ____t_14(____temp_13) then __O[675] else em(nil, x, y + 1) >= 0) then
                                 local ____call_18 = __call
                                 local ____arr_17 = __arr
                                 local ____array_16 = __TS__SparseArrayNew(__TS__Spread(__iter(BORDA)))
@@ -404,8 +404,8 @@ local __O = {};
                                 local ____t_21 = __t
                                 local ____t_20 = __t
                                 local ____temp_19 = if __t(esq) then esq else em(nil, x - 1, y - 1) ~= c
-                                __O[675] = ____temp_19
-                                if ____t_21(if ____t_20(____temp_19) then __O[675] else em(nil, x, y - 2) ~= c) then
+                                __O[676] = ____temp_19
+                                if ____t_21(if ____t_20(____temp_19) then __O[676] else em(nil, x, y - 2) ~= c) then
                                     rgb = mistura(nil, rgb, LUZ, 0.14)
                                 end
                             end
@@ -2097,33 +2097,33 @@ local __O = {};
         local ____t_28 = __t
         local ____t_26 = __t
         local ____temp_25 = if __t(o.design) then o.design else o.variant
-        __O[676] = ____temp_25
-        local ____temp_27 = if ____t_26(____temp_25) then __O[676] else if __t(if __t(o.type) then o.type ~= "doodle" else o.type) then o.type else ""
-        __O[677] = ____temp_27
-        local design = tostring(if ____t_28(____temp_27) then __O[677] else "")
+        __O[677] = ____temp_25
+        local ____temp_27 = if ____t_26(____temp_25) then __O[677] else if __t(if __t(o.type) then o.type ~= "doodle" else o.type) then o.type else ""
+        __O[678] = ____temp_27
+        local design = tostring(if ____t_28(____temp_27) then __O[678] else "")
         local nome = __get(DESENHOS, design)
         local ____t_35 = __t
         local ____t_30 = __t
         local ____temp_29 = not __t(nome)
-        __O[680] = ____temp_29
+        __O[681] = ____temp_29
         local ____t_34 = __t
         local ____t_32 = __t
         local ____temp_31 = design == "" or design == "ink"
-        __O[678] = ____temp_31
-        local ____temp_33 = if ____t_32(____temp_31) then __O[678] else design == "doodle"
-        __O[679] = ____temp_33
-        if ____t_35(if ____t_30(____temp_29) then if ____t_34(____temp_33) then __O[679] else __re_test(
+        __O[679] = ____temp_31
+        local ____temp_33 = if ____t_32(____temp_31) then __O[679] else design == "doodle"
+        __O[680] = ____temp_33
+        if ____t_35(if ____t_30(____temp_29) then if ____t_34(____temp_33) then __O[680] else __re_test(
             __re("^\\d$", ""),
             design
-        ) else __O[680]) then
+        ) else __O[681]) then
             local ____get_39 = __get
             local ____mod_38 = __mod
             local ____t_37 = __t
             local ____TS__Number_result_36 = __TS__Number(kind)
-            __O[681] = ____TS__Number_result_36
+            __O[682] = ____TS__Number_result_36
             nome = ____get_39(
                 RABISCOS,
-                ____mod_38(if ____t_37(____TS__Number_result_36) then __O[681] else 0, 3)
+                ____mod_38(if ____t_37(____TS__Number_result_36) then __O[682] else 0, 3)
             )
         end
         if not __t(nome) then
@@ -2149,8 +2149,8 @@ local __O = {};
         local ____temp_42 = if __t(t) then t else 0
         local ____t_41 = __t
         local ____TS__Number_result_40 = __TS__Number(kind)
-        __O[682] = ____TS__Number_result_40
-        __TS__SparseArrayPush(____array_43, ____temp_42 + if ____t_41(____TS__Number_result_40) then __O[682] else 0 * 0.37, o)
+        __O[683] = ____TS__Number_result_40
+        __TS__SparseArrayPush(____array_43, ____temp_42 + if ____t_41(____TS__Number_result_40) then __O[683] else 0 * 0.37, o)
         ____pintar_44(__TS__SparseArraySpread(____array_43))
     end
     window.Art.drawMinion = desenhar

@@ -82,6 +82,7 @@ return {
   { "jorge-anime.js", "jorge-anime" },
   { "cinema-fx.js", "cinema-fx" },
   { "boss-fx.js", "boss-fx" },
+  { "golpes.js", "golpes" },
   { "game.js", "game" },
   { "joystick.js", "joystick" },
   { "ui.js", "ui" },

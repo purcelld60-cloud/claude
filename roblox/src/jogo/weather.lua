@@ -127,14 +127,14 @@ local __O = {};
                     local ____t_16 = __t
                     local ____t_14 = __t
                     local ____temp_13 = if __t(pl) then pl.ground else pl
-                    __O[50] = ____temp_13
-                    local ____temp_15 = if ____t_14(____temp_13) then math.abs(pl.y - FLOOR) < 3 else __O[50]
-                    __O[51] = ____temp_15
-                    local ____temp_17 = if ____t_16(____temp_15) then math.abs(pl.x - wx) < w / 2 else __O[51]
-                    __O[52] = ____temp_17
-                    local ____temp_19 = if ____t_18(____temp_17) then math.abs(pl.vx) > 40 else __O[52]
-                    __O[53] = ____temp_19
-                    if ____t_21(if ____t_20(____temp_19) then t - lastSplash > 0.18 else __O[53]) then
+                    __O[51] = ____temp_13
+                    local ____temp_15 = if ____t_14(____temp_13) then math.abs(pl.y - FLOOR) < 3 else __O[51]
+                    __O[52] = ____temp_15
+                    local ____temp_17 = if ____t_16(____temp_15) then math.abs(pl.x - wx) < w / 2 else __O[52]
+                    __O[53] = ____temp_17
+                    local ____temp_19 = if ____t_18(____temp_17) then math.abs(pl.vx) > 40 else __O[53]
+                    __O[54] = ____temp_19
+                    if ____t_21(if ____t_20(____temp_19) then t - lastSplash > 0.18 else __O[54]) then
                         lastSplash = t
                         do
                             local j = 0
@@ -464,18 +464,18 @@ local __O = {};
         if ____opt_2 ~= nil then
             ____opt_result_4 = ____opt_2(____opt_2)
         end
-        __O[46] = ____opt_result_4
-        local prof = if ____t_5(____opt_result_4) then __O[46] else {particles = 1, weather = true}
+        __O[47] = ____opt_result_4
+        local prof = if ____t_5(____opt_result_4) then __O[47] else {particles = 1, weather = true}
         local scene = __TS__Number(o.scene)
         local ____t_7 = __t
         local ____TS__Number_result_6 = __TS__Number(o.time)
-        __O[47] = ____TS__Number_result_6
-        local t = if ____t_7(____TS__Number_result_6) then __O[47] else 0
+        __O[48] = ____TS__Number_result_6
+        local t = if ____t_7(____TS__Number_result_6) then __O[48] else 0
         local ____t_10 = __t
         local ____t_9 = __t
         local ____temp_8 = not __t(prof.weather) or not __t(__call(OUTDOOR, "includes", scene))
-        __O[48] = ____temp_8
-        if ____t_10(if ____t_9(____temp_8) then __O[48] else not __t(o.outdoor)) then
+        __O[49] = ____temp_8
+        if ____t_10(if ____t_9(____temp_8) then __O[49] else not __t(o.outdoor)) then
             lastT = t
             return
         end
@@ -483,8 +483,8 @@ local __O = {};
         local k = prof.particles
         local ____t_12 = __t
         local ____TS__Number_result_11 = __TS__Number(o.camera)
-        __O[49] = ____TS__Number_result_11
-        local cam = if ____t_12(____TS__Number_result_11) then __O[49] else 0
+        __O[50] = ____TS__Number_result_11
+        local cam = if ____t_12(____TS__Number_result_11) then __O[50] else 0
         local wind = st.wind * (math.sin(t * 0.3) * 0.3 + 0.7)
         local lean = 0.25 + wind * 0.55
         c:save()
@@ -837,8 +837,8 @@ local __O = {};
             "find",
             function(____, m) return m.id == mode end
         )
-        __O[54] = ____call_result_26
-        return if ____t_27(____call_result_26) then __O[54] else __get(MODES, 0)
+        __O[55] = ____call_result_26
+        return if ____t_27(____call_result_26) then __O[55] else __get(MODES, 0)
     end
     window.Weather = __ord(
         {

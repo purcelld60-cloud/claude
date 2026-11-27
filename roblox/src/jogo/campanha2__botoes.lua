@@ -23,8 +23,8 @@ local __O = {};
             local ____self_2_parse_3 = ____self_2.parse
             local ____t_1 = __t
             local ____temp_0 = window.localStorage:getItem(KEY)
-            __O[873] = ____temp_0
-            local r = ____self_2_parse_3(____self_2, if ____t_1(____temp_0) then __O[873] else "null")
+            __O[874] = ____temp_0
+            local r = ____self_2_parse_3(____self_2, if ____t_1(____temp_0) then __O[874] else "null")
             if __t(if __t(r) then type(r) == "table" else r) then
                 L = r
             end
@@ -60,8 +60,8 @@ local __O = {};
         if ____opt_4 ~= nil then
             ____opt_4 = ____opt_4:querySelector(".c2-c1-shell")
         end
-        __O[874] = ____opt_4
-        local c1 = if ____t_6(____opt_4) then __O[874] else tela:querySelector(".c2-c1-shell")
+        __O[875] = ____opt_4
+        local c1 = if ____t_6(____opt_4) then __O[875] else tela:querySelector(".c2-c1-shell")
         if __t(c1) then
             return __call(
                 __arr(
@@ -125,8 +125,8 @@ local __O = {};
                 local ____el_dataset_11 = el.dataset
                 local ____t_10 = __t
                 local ____temp_9 = el:getAttribute("style")
-                __O[875] = ____temp_9
-                ____el_dataset_11.c1Style = if ____t_10(____temp_9) then __O[875] else ""
+                __O[876] = ____temp_9
+                ____el_dataset_11.c1Style = if ____t_10(____temp_9) then __O[876] else ""
             end
             if __t(not __t(tem) or not __t(v)) then
                 el.classList:remove("c2-livre")
@@ -154,15 +154,15 @@ local __O = {};
                 if ____opt_12 ~= nil then
                     ____opt_12 = ____opt_12:getBoundingClientRect()
                 end
-                __O[876] = ____opt_12
-                local lay = if ____t_14(____opt_12) then __O[876] else {left = 0, top = 0}
+                __O[877] = ____opt_12
+                local lay = if ____t_14(____opt_12) then __O[877] else {left = 0, top = 0}
                 local ____t_18 = __t
                 local ____t_16 = __t
                 local ____TS__ParseFloat_result_15 = __TS__ParseFloat(window:getComputedStyle(el):getPropertyValue("--ccl-size"))
-                __O[877] = ____TS__ParseFloat_result_15
-                local ____temp_17 = if ____t_16(____TS__ParseFloat_result_15) then __O[877] else el:getBoundingClientRect().width
-                __O[878] = ____temp_17
-                local base = if ____t_18(____temp_17) then __O[878] else 50
+                __O[878] = ____TS__ParseFloat_result_15
+                local ____temp_17 = if ____t_16(____TS__ParseFloat_result_15) then __O[878] else el:getBoundingClientRect().width
+                __O[879] = ____temp_17
+                local base = if ____t_18(____temp_17) then __O[879] else 50
                 el.style:setProperty(
                     "--ccl-x",
                     __add(
@@ -220,8 +220,8 @@ local __O = {};
             if ____opt_22 ~= nil then
                 ____opt_22 = ____opt_22.s
             end
-            __O[879] = ____opt_22
-            ____set_28(novo, ____id_27, {x = ____TS__Number_result_25, y = ____TS__Number_result_26, s = if ____t_24(____opt_22) then __O[879] else 1})
+            __O[880] = ____opt_22
+            ____set_28(novo, ____id_27, {x = ____TS__Number_result_25, y = ____TS__Number_result_26, s = if ____t_24(____opt_22) then __O[880] else 1})
         end
         L = novo
         aplicar(nil, tela)
@@ -230,8 +230,8 @@ local __O = {};
         local ____t_31 = __t
         local ____t_30 = __t
         local ____temp_29 = not __t(tela)
-        __O[880] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then __O[880] else tela:querySelector(".c2-editor")) then
+        __O[881] = ____temp_29
+        if ____t_31(if ____t_30(____temp_29) then __O[881] else tela:querySelector(".c2-editor")) then
             return
         end
         local joy = tela:querySelector(".joy")
@@ -265,9 +265,9 @@ local __O = {};
             local ____call_37 = __call
             local ____t_36 = __t
             local ____get_result_35 = __get(NOMES, sel)
-            __O[881] = ____get_result_35
+            __O[882] = ____get_result_35
             nome.textContent = ____add_38(
-                ____call_37(if ____t_36(____get_result_35) then __O[881] else sel, "toUpperCase"),
+                ____call_37(if ____t_36(____get_result_35) then __O[882] else sel, "toUpperCase"),
                 ":"
             )
             local ____t_41 = __t
@@ -275,8 +275,8 @@ local __O = {};
             if ____opt_39 ~= nil then
                 ____opt_39 = ____opt_39.s
             end
-            __O[882] = ____opt_39
-            range.value = math.floor(if ____t_41(____opt_39) then __O[882] else 1 * 100 + 0.5)
+            __O[883] = ____opt_39
+            range.value = math.floor(if ____t_41(____opt_39) then __O[883] else 1 * 100 + 0.5)
         end
         range:addEventListener(
             "input",
@@ -354,8 +354,8 @@ local __O = {};
         end
         local ____t_46 = __t
         local ____temp_45 = tela:closest(".c2j")
-        __O[883] = ____temp_45
-        local raiz = if ____t_46(____temp_45) then __O[883] else tela
+        __O[884] = ____temp_45
+        local raiz = if ____t_46(____temp_45) then __O[884] else tela
         raiz:addEventListener("pointerdown", baixo, true)
         window:addEventListener("pointermove", move)
         window:addEventListener("pointerup", cima, true)

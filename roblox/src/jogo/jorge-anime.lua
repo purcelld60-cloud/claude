@@ -203,8 +203,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.JorgeEpilogue)
-    __O[1527] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[1527] else window.JorgeAnime) then
+    __O[1530] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[1530] else window.JorgeAnime) then
         return
     end
     if not __t(window.CanvasRenderingContext2D.prototype.roundRect) then
@@ -3213,8 +3213,8 @@ local __O = {};
         local flashT = __mod(t, 3.3)
         local ____t_21 = __t
         local ____temp_20 = flashT < 0.08
-        __O[1528] = ____temp_20
-        local flash = if ____t_21(____temp_20) then __O[1528] else flashT > 0.16 and flashT < 0.22
+        __O[1531] = ____temp_20
+        local flash = if ____t_21(____temp_20) then __O[1531] else flashT > 0.16 and flashT < 0.22
         if __t(flash) then
             c.fillStyle = "rgba(120,80,200,.35)"
             c:fillRect(0, 0, W, H)
@@ -3519,94 +3519,33 @@ local __O = {};
         kneeling = kneeling,
         eyes = eyes
     }, "afterglow,empty,vibration,reach,caller,recognition,tremor,falling,kneeling,eyes")
-    local ultimaCena = nil
-    local function efeitos(self, c, id, t)
-        local F = window.FxPixel
-        local ____t_25 = __t
-        local ____opt_result_24
-        if F ~= nil then
-            ____opt_result_24 = F.tocar
-        end
-        if not ____t_25(____opt_result_24) then
-            return
-        end
-        if id ~= ultimaCena then
-            ultimaCena = id
-            F:limpar("jorge")
-            local o = {dono = "jorge", mundo = false}
-            if id == "empty" then
-                F:tocar(
-                    "weather/fog",
-                    __assign({}, o, {x = 480, y = 540, duracao = 7, palette = F.PAL.fumaca})
-                )
-            elseif id == "tremor" then
-                F:tocar(
-                    "shadow/shadow-tendrils",
-                    __assign({}, o, {x = 300, y = 520})
-                )
-                F:tocar(
-                    "shadow/shadow-tendrils",
-                    __assign({}, o, {x = 660, y = 520, atraso = 0.5, flip = true})
-                )
-            elseif id == "falling" then
-                F:tocar(
-                    "spawn/poof",
-                    __assign({}, o, {x = 480, y = 500, palette = F.PAL.fumaca, atraso = 2.4})
-                )
-            elseif id == "eyes" then
-                F:tocar(
-                    "shadow/eclipse",
-                    __assign({}, o, {x = 790, y = 110, duracao = 8})
-                )
-            end
-        end
-        F:desenhar(
-            c,
-            {
-                dono = "jorge",
-                camada = "back",
-                mundo = false,
-                tempo = window.performance:now() / 1000
-            }
-        )
-        F:desenhar(
-            c,
-            {
-                dono = "jorge",
-                camada = "front",
-                mundo = false,
-                tempo = window.performance:now() / 1000
-            }
-        )
-    end
     local function draw(self, c, s)
         if __t(not __t(c) or not __t(s)) then
             return
         end
-        local ____t_27 = __t
-        local ____TS__Number_result_26 = __TS__Number(s.index)
-        __O[1529] = ____TS__Number_result_26
+        local ____t_23 = __t
+        local ____TS__Number_result_22 = __TS__Number(s.index)
+        __O[1532] = ____TS__Number_result_22
         local index = clamp(
             nil,
-            math.floor(if ____t_27(____TS__Number_result_26) then __O[1529] else 0),
+            math.floor(if ____t_23(____TS__Number_result_22) then __O[1532] else 0),
             0,
             __len(SHOTS) - 1
         )
         local shot = __get(SHOTS, index)
-        local ____t_29 = __t
-        local ____TS__Number_result_28 = __TS__Number(s.time)
-        __O[1530] = ____TS__Number_result_28
-        local t = math.max(0, if ____t_29(____TS__Number_result_28) then __O[1530] else 0)
+        local ____t_25 = __t
+        local ____TS__Number_result_24 = __TS__Number(s.time)
+        __O[1533] = ____TS__Number_result_24
+        local t = math.max(0, if ____t_25(____TS__Number_result_24) then __O[1533] else 0)
         local p = clamp(nil, t / shot.duration)
         c:save()
         c.imageSmoothingEnabled = true
         c.fillStyle = "#000"
         c:fillRect(0, 0, W, H)
-        local ____t_31 = __t
-        local ____get_result_30 = __get(RENDER, shot.id)
-        __O[1531] = ____get_result_30
-        if ____t_31(____get_result_30) then __O[1531] else eyes(nil, c, t, p)
-        efeitos(nil, c, shot.id, t)
+        local ____t_27 = __t
+        local ____get_result_26 = __get(RENDER, shot.id)
+        __O[1534] = ____get_result_26
+        if ____t_27(____get_result_26) then __O[1534] else eyes(nil, c, t, p)
         local fadeIn = 1 - smooth(nil, t / 0.25)
         if __t(fadeIn > 0 and index > 0) then
             c.fillStyle = ("rgba(0,0,0," .. tostring(fadeIn)) .. ")"

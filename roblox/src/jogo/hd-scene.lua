@@ -19,8 +19,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawArena)
-    __O[270] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[270] else window.HdScene) then
+    __O[271] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[271] else window.HdScene) then
         return
     end
     local orig = window.Art.drawArena
@@ -133,8 +133,8 @@ local __O = {};
             end
             ____temp_14 = not ____t_13(____opt_result_12)
         end
-        __O[271] = ____temp_14
-        return if ____t_15(____temp_14) then not not __t(window.DayTime) else __O[271]
+        __O[272] = ____temp_14
+        return if ____t_15(____temp_14) then not not __t(window.DayTime) else __O[272]
     end
     local WINS = __ord(
         {
@@ -3374,8 +3374,8 @@ local __O = {};
         if ____opt_18 ~= nil then
             ____opt_result_20 = ____opt_18(____opt_18)
         end
-        __O[272] = ____opt_result_20
-        if ____t_22(if ____t_21(____opt_result_20) then __O[272] else not __t(window.DayTime)) then
+        __O[273] = ____opt_result_20
+        if ____t_22(if ____t_21(____opt_result_20) then __O[273] else not __t(window.DayTime)) then
             return false
         end
         local s = window.DayTime:state()
@@ -3569,15 +3569,15 @@ local __O = {};
         if ____opt_25 ~= nil then
             ____opt_result_27 = ____opt_25(____opt_25)
         end
-        __O[273] = ____opt_result_27
-        if ____t_29(if ____t_28(____opt_result_27) then __O[273] else not __t(window.DayTime)) then
+        __O[274] = ____opt_result_27
+        if ____t_29(if ____t_28(____opt_result_27) then __O[274] else not __t(window.DayTime)) then
             return
         end
         local s = window.DayTime:state()
         local ____t_34 = __t
         local ____t_31 = __t
         local ____le_result_30 = __le(s.night, 0.2)
-        __O[275] = ____le_result_30
+        __O[276] = ____le_result_30
         local ____t_33 = __t
         local ____temp_32 = __gt(
             __get(s.amb, 0),
@@ -3586,11 +3586,11 @@ local __O = {};
             __get(s.amb, 1),
             0.995
         )
-        __O[274] = ____temp_32
+        __O[275] = ____temp_32
         if ____t_34(if ____t_31(____le_result_30) then if __t(selfLit) then selfLit else if ____t_33(____temp_32) then __gt(
             __get(s.amb, 2),
             0.995
-        ) else __O[274] else __O[275]) then
+        ) else __O[275] else __O[276]) then
             return
         end
         c:save()
@@ -3677,16 +3677,16 @@ local __O = {};
                 local ____array_41 = __TS__SparseArrayNew(nil, c, if type(____type) == "table" then ____type.type else ____type)
                 local ____t_36 = __t
                 local ____TS__Number_result_35 = __TS__Number(camera)
-                __O[276] = ____TS__Number_result_35
-                __TS__SparseArrayPush(____array_41, if ____t_36(____TS__Number_result_35) then __O[276] else 0)
+                __O[277] = ____TS__Number_result_35
+                __TS__SparseArrayPush(____array_41, if ____t_36(____TS__Number_result_35) then __O[277] else 0)
                 local ____t_38 = __t
                 local ____TS__Number_result_37 = __TS__Number(t)
-                __O[277] = ____TS__Number_result_37
-                __TS__SparseArrayPush(____array_41, if ____t_38(____TS__Number_result_37) then __O[277] else 0)
+                __O[278] = ____TS__Number_result_37
+                __TS__SparseArrayPush(____array_41, if ____t_38(____TS__Number_result_37) then __O[278] else 0)
                 local ____t_40 = __t
                 local ____TS__Number_result_39 = __TS__Number(homeX)
-                __O[278] = ____TS__Number_result_39
-                __TS__SparseArrayPush(____array_41, if ____t_40(____TS__Number_result_39) then __O[278] else 0)
+                __O[279] = ____TS__Number_result_39
+                __TS__SparseArrayPush(____array_41, if ____t_40(____TS__Number_result_39) then __O[279] else 0)
                 ____back_42(__TS__SparseArraySpread(____array_41))
             end)
             if not ____try then
@@ -3710,12 +3710,12 @@ local __O = {};
                         local ____c_47 = c
                         local ____t_44 = __t
                         local ____TS__Number_result_43 = __TS__Number(t)
-                        __O[279] = ____TS__Number_result_43
-                        local ____temp_48 = if ____t_44(____TS__Number_result_43) then __O[279] else 0
+                        __O[280] = ____TS__Number_result_43
+                        local ____temp_48 = if ____t_44(____TS__Number_result_43) then __O[280] else 0
                         local ____t_46 = __t
                         local ____TS__Number_result_45 = __TS__Number(camera)
-                        __O[280] = ____TS__Number_result_45
-                        return true, ____sky_49(nil, ____c_47, ____temp_48, if ____t_46(____TS__Number_result_45) then __O[280] else 0)
+                        __O[281] = ____TS__Number_result_45
+                        return true, ____sky_49(nil, ____c_47, ____temp_48, if ____t_46(____TS__Number_result_45) then __O[281] else 0)
                     end)
                     if not ____try then
                         ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -3732,16 +3732,16 @@ local __O = {};
                         local ____array_62 = __TS__SparseArrayNew(nil, c)
                         local ____t_51 = __t
                         local ____TS__Number_result_50 = __TS__Number(t)
-                        __O[281] = ____TS__Number_result_50
-                        __TS__SparseArrayPush(____array_62, if ____t_51(____TS__Number_result_50) then __O[281] else 0)
+                        __O[282] = ____TS__Number_result_50
+                        __TS__SparseArrayPush(____array_62, if ____t_51(____TS__Number_result_50) then __O[282] else 0)
                         local ____t_53 = __t
                         local ____TS__Number_result_52 = __TS__Number(hx)
-                        __O[282] = ____TS__Number_result_52
-                        __TS__SparseArrayPush(____array_62, if ____t_53(____TS__Number_result_52) then __O[282] else 480)
+                        __O[283] = ____TS__Number_result_52
+                        __TS__SparseArrayPush(____array_62, if ____t_53(____TS__Number_result_52) then __O[283] else 480)
                         local ____t_55 = __t
                         local ____TS__Number_result_54 = __TS__Number(hy)
-                        __O[283] = ____TS__Number_result_54
-                        __TS__SparseArrayPush(____array_62, if ____t_55(____TS__Number_result_54) then __O[283] else 440)
+                        __O[284] = ____TS__Number_result_54
+                        __TS__SparseArrayPush(____array_62, if ____t_55(____TS__Number_result_54) then __O[284] else 440)
                         local ____t_61 = __t
                         local ____opt_58 = window.HdMaps
                         if ____opt_58 ~= nil then
@@ -3769,16 +3769,16 @@ local __O = {};
                         local ____array_70 = __TS__SparseArrayNew(nil, c, ____type)
                         local ____t_65 = __t
                         local ____TS__Number_result_64 = __TS__Number(camera)
-                        __O[284] = ____TS__Number_result_64
-                        __TS__SparseArrayPush(____array_70, if ____t_65(____TS__Number_result_64) then __O[284] else 0)
+                        __O[285] = ____TS__Number_result_64
+                        __TS__SparseArrayPush(____array_70, if ____t_65(____TS__Number_result_64) then __O[285] else 0)
                         local ____t_67 = __t
                         local ____TS__Number_result_66 = __TS__Number(t)
-                        __O[285] = ____TS__Number_result_66
-                        __TS__SparseArrayPush(____array_70, if ____t_67(____TS__Number_result_66) then __O[285] else 0)
+                        __O[286] = ____TS__Number_result_66
+                        __TS__SparseArrayPush(____array_70, if ____t_67(____TS__Number_result_66) then __O[286] else 0)
                         local ____t_69 = __t
                         local ____TS__Number_result_68 = __TS__Number(homeX)
-                        __O[286] = ____TS__Number_result_68
-                        __TS__SparseArrayPush(____array_70, if ____t_69(____TS__Number_result_68) then __O[286] else 0, blend)
+                        __O[287] = ____TS__Number_result_68
+                        __TS__SparseArrayPush(____array_70, if ____t_69(____TS__Number_result_68) then __O[287] else 0, blend)
                         ____front_71(__TS__SparseArraySpread(____array_70))
                     end)
                 end
