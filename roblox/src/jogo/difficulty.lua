@@ -272,8 +272,8 @@ local __O = {};
         end
         local ____t_1 = __t
         local ____get_result_0 = __get(modes, selected)
-        __O[1262] = ____get_result_0
-        return if ____t_1(____get_result_0) then __O[1262] else modes.normal
+        __O[1261] = ____get_result_0
+        return if ____t_1(____get_result_0) then __O[1261] else modes.normal
     end
     local function setMode(self, next)
         local ____t_8 = __t
@@ -325,10 +325,10 @@ local __O = {};
         local ____get_11 = __get
         local ____t_10 = __t
         local ____get_result_9 = __get(scaled, selected)
-        __O[1263] = ____get_result_9
-        local ____get_11_result_12 = ____get_11(if ____t_10(____get_result_9) then __O[1263] else scaled.normal, ____type)
-        __O[1264] = ____get_11_result_12
-        return if ____t_13(____get_11_result_12) then __O[1264] else nil
+        __O[1262] = ____get_result_9
+        local ____get_11_result_12 = ____get_11(if ____t_10(____get_result_9) then __O[1262] else scaled.normal, ____type)
+        __O[1263] = ____get_11_result_12
+        return if ____t_13(____get_11_result_12) then __O[1263] else nil
     end
     local function scaleIncomingDamage(self, damage, selected)
         if selected == nil then

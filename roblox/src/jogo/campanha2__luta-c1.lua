@@ -41,23 +41,23 @@ local __O = {};
         local ____t_3 = __t
         local ____t_1 = __t
         local ____temp_0 = not __t(k)
-        __O[945] = ____temp_0
-        local ____temp_2 = if ____t_1(____temp_0) then __O[945] else skin
-        __O[946] = ____temp_2
+        __O[944] = ____temp_0
+        local ____temp_2 = if ____t_1(____temp_0) then __O[944] else skin
+        __O[945] = ____temp_2
         local ____t_6 = __t
         local ____opt_4 = window.Game
         if ____opt_4 ~= nil then
             ____opt_4 = ____opt_4.startSandboxBoss
         end
-        local ____temp_7 = if ____t_3(____temp_2) then __O[946] else not ____t_6(____opt_4)
-        __O[947] = ____temp_7
+        local ____temp_7 = if ____t_3(____temp_2) then __O[945] else not ____t_6(____opt_4)
+        __O[946] = ____temp_7
         local ____t_12 = __t
         local ____getq_11 = __getq
         local ____opt_9 = window.ConquistaCombate
         if ____opt_9 ~= nil then
             ____opt_9 = ____opt_9.chefes
         end
-        if ____t_13(if ____t_8(____temp_7) then __O[947] else not ____t_12(____getq_11(____opt_9, o.slug))) then
+        if ____t_13(if ____t_8(____temp_7) then __O[946] else not ____t_12(____getq_11(____opt_9, o.slug))) then
             return false
         end
         local fase = __get(window.CampanhaFases.FASES, o.slug)
@@ -96,15 +96,15 @@ local __O = {};
         if ____opt_21 ~= nil then
             ____opt_result_23 = ____opt_21(____opt_21, o.cena)
         end
-        __O[948] = ____opt_result_23
-        local larg = if ____t_24(____opt_result_23) then __O[948] else 4000
+        __O[947] = ____opt_result_23
+        local larg = if ____t_24(____opt_result_23) then __O[947] else 4000
         local ____temp_27 = larg - 960
         local ____t_26 = __t
         local ____TS__Number_result_25 = __TS__Number(o.bossX)
-        __O[949] = ____TS__Number_result_25
+        __O[948] = ____TS__Number_result_25
         camBase = math.max(
             0,
-            math.min(____temp_27, if ____t_26(____TS__Number_result_25) then __O[949] else 480 - 480)
+            math.min(____temp_27, if ____t_26(____TS__Number_result_25) then __O[948] else 480 - 480)
         )
         cam0 = nil
         aoFim = fim
@@ -168,8 +168,8 @@ local __O = {};
             local ____t_35 = __t
             local ____t_34 = __t
             local ____temp_33 = not __t(skin) or not __t(aoFim)
-            __O[950] = ____temp_33
-            if ____t_35(if ____t_34(____temp_33) then __O[950] else entrando) then
+            __O[949] = ____temp_33
+            if ____t_35(if ____t_34(____temp_33) then __O[949] else entrando) then
                 return
             end
             if not __t(d) then
@@ -231,8 +231,8 @@ local __O = {};
         if ____opt_48 ~= nil then
             ____opt_result_50 = ____opt_48(____opt_48, skin.cena)
         end
-        __O[951] = ____opt_result_50
-        local larg = if ____t_51(____opt_result_50) then __O[951] else 4000
+        __O[950] = ____opt_result_50
+        local larg = if ____t_51(____opt_result_50) then __O[950] else 4000
         local cx = math.max(
             0,
             math.min(larg - 960, camBase + (camera - cam0))

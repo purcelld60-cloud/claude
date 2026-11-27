@@ -449,14 +449,14 @@
       const sx = veic.x, sy = veic.y - veic.alt; v.spd = v.ant && dt ? Math.hypot(sx - v.ant.x, sy - v.ant.y) / dt : 0; v.ant = { x: sx, y: sy }; v.roda += v.spd * dt / 3;
       const angAlvo = def.voa && v.t > 0 && k < 1 ? Math.max(-.42, Math.min(.42, Math.atan2(dy, Math.abs(dx) + .01))) * .8 : 0; v.ang += (angAlvo - v.ang) * Math.min(1, dt * 7);
       if (v.t < 0) { veic.y += Math.round(Math.sin(tempo * 60)) * .5; } // motor roncando parado
-      if (v.t >= 0 && !v.decolou) { v.decolou = true; v.sq = .7; poeira(veic.x, veic.y, def.voa ? 16 : 8, '#e0d2b4'); for (let k2 = 0; k2 < 12; k2++) faiscas.push({ x: veic.x - v.dir * 14, y: veic.y - 2, vx: -v.dir * (30 + Math.random() * 60), vy: -40 - Math.random() * 50, t: 0, cor: k2 % 2 ? '#ffd36b' : '#ff8a3a' }); }
+      if (v.t >= 0 && !v.decolou) { v.decolou = true; v.sq = .7; v.impulso = 1; poeira(veic.x, veic.y, def.voa ? 16 : 8, '#e0d2b4'); for (let k2 = 0; k2 < 12; k2++) faiscas.push({ x: veic.x - v.dir * 14, y: veic.y - 2, vx: -v.dir * (30 + Math.random() * 60), vy: -40 - Math.random() * 50, t: 0, cor: k2 % 2 ? '#ffd36b' : '#ff8a3a' }); }
       else if (k < 1) veic.y += def.voa ? Math.sin(tempo * 7) * 1.4 * Math.min(1, veic.alt / 12) : -Math.abs(Math.sin(tempo * 16)) * .9; // balanço do voo / buraquinhos da rua
       if (k >= 1 && !v.pousou) { v.pousou = true; v.sq = 1; v.treme = .22; poeira(veic.x, veic.y, def.voa ? 18 : 10, '#e0d2b4'); for (const wx of [-9, 9]) for (let k2 = 0; k2 < 6; k2++) faiscas.push({ x: veic.x + wx, y: veic.y + 2, vx: v.dir * (20 + Math.random() * 50), vy: -30 - Math.random() * 40, t: 0, cor: k2 % 2 ? '#fff2b0' : '#ffb040' }); v.marca = { x: veic.x, y: veic.y + 3, dir: v.dir, t: 0 }; }
-      v.sq = Math.max(0, v.sq - dt * 3.2); v.treme = Math.max(0, v.treme - dt);
+      v.sq = Math.max(0, v.sq - dt * 3.2); v.treme = Math.max(0, v.treme - dt); v.impulso = Math.max(0, (v.impulso || 0) - dt * 1.6);
       // rastro: gás do carro voador / fumaça do escapamento e poeira das rodas no chão
-      v.emit += dt; const taxa = k >= 1 ? 1e9 : v.t < 0 ? .07 : def.voa ? .028 : .045;
+      v.emit += dt; const taxa = k >= 1 ? 1e9 : v.t < 0 ? .09 : def.voa ? .06 : .05;
       while (v.emit > taxa) { v.emit -= taxa; const ex = veic.x - v.dir * 17 * Math.cos(v.ang), ey = veic.y - veic.alt - 3 - Math.sin(v.ang) * 17;
-        if (def.voa) rastro.push({ x: ex, y: ey, vx: -v.dir * (10 + Math.random() * 14), vy: -4 + Math.random() * 8, t: 0, vida: .9 + Math.random() * .5, r: 2 + Math.random() * 1.5, cresce: 7, cor: Math.random() < .5 ? '#d8f2c8' : '#f4f8ee' });
+        if (def.voa) rastro.push({ x: ex, y: ey, vx: -v.dir * (8 + Math.random() * 10), vy: 2 + Math.random() * 6, t: 0, vida: .55 + Math.random() * .3, r: 1.5 + Math.random(), cresce: 4, cor: Math.random() < .5 ? '#c8f0d8' : '#eef8f0' });
         else { rastro.push({ x: ex, y: ey + 1, vx: -v.dir * 8, vy: -10 - Math.random() * 6, t: 0, vida: .7, r: 1.5, cresce: 4, cor: '#c8ccd0' }); if (v.spd > 30) rastro.push({ x: veic.x - v.dir * 8, y: veic.y + 2, vx: -v.dir * (6 + Math.random() * 10), vy: -3, t: 0, vida: .45, r: 1.5, cresce: 3, cor: '#d8c8a8', chao: true }); } }
       const zBase = Math.min(zMax, 3.2), zAlvo = def.voa ? zBase * (1 - .18 * Math.sin(Math.PI * k)) : zBase; // no voo o mapa se abre um pouco
       const tx = veic.x + (dx || 0) * 6, ty = veic.y - veic.alt * .5 + (dy || 0) * 3; cam.x += (tx - cam.x) * Math.min(1, dt * 5); cam.y += (ty - cam.y) * Math.min(1, dt * 5); cam.z += (zAlvo - cam.z) * Math.min(1, dt * 2);
@@ -504,14 +504,10 @@
       // sombra no chão: menor e mais clara quanto mais alto
       c.globalAlpha = Math.max(.1, .34 - alt * .004); P.circ(veic.x, veic.y + 3, Math.max(5, 13 - alt * .12), '#000', Math.max(2, 4 - alt * .03)); c.globalAlpha = 1;
       for (const p of rastro) if (p.chao) { c.globalAlpha = Math.max(0, 1 - p.t / p.vida) * .6; P.circ(p.x, p.y, p.r + p.cresce * p.t / p.vida, p.cor, Math.max(1, (p.r + p.cresce * p.t / p.vida) * .45)); } c.globalAlpha = 1;
-      for (const p of rastro) if (!p.chao) { const q = p.t / p.vida; c.globalAlpha = Math.max(0, 1 - q) * .7; P.circ(p.x, p.y, p.r + p.cresce * q, p.cor); } c.globalAlpha = 1;
-      // linhas de velocidade
-      if (v.spd > 90 && veic.k < 1) { c.globalAlpha = Math.min(.6, (v.spd - 90) / 260); for (let k2 = 0; k2 < 4; k2++) { const ly = veic.y - alt - 12 + k2 * 5 + Math.sin(tempo * 30 + k2) * 1.5, lx = veic.x - veic.dir * (22 + ((tempo * 140 + k2 * 9) % 18)); R(veic.dir > 0 ? lx - 10 : lx, ly, 10, 1, '#ffffff'); } c.globalAlpha = 1; }
+      for (const p of rastro) if (!p.chao) { const q = p.t / p.vida; c.globalAlpha = Math.max(0, 1 - q) * .45; P.circ(p.x, p.y, p.r + p.cresce * q, p.cor); } c.globalAlpha = 1;
       if (v.marca) { v.marca.t += dt; const a = Math.max(0, 1 - v.marca.t / 2.2); if (a > 0) { c.globalAlpha = a * .5; for (const off of [-9, 9]) R(v.marca.x + off - (v.marca.dir > 0 ? 18 : 0), v.marca.y, 18, 1, '#3a2a1a'); c.globalAlpha = 1; } }
-      if (def.voa && alt > 18 && veic.k < 1) for (let k2 = 0; k2 < 3; k2++) { const u = ((tempo * .9 + k2 / 3) % 1), cx2 = veic.x + veic.dir * (30 - u * 70), cy2 = veic.y - alt * .45 + 6 + k2 * 4; c.globalAlpha = Math.sin(u * Math.PI) * .55; P.circ(cx2, cy2, 4 + k2, '#ffffff'); P.circ(cx2 + 5, cy2 + 1, 3 + k2 * .6, '#f2f6fa'); P.circ(cx2 - 5, cy2 + 1, 3, '#e8eef4'); c.globalAlpha = 1; }
-      if (v.spd > 140 && veic.k < 1) for (let j = 3; j >= 1; j--) { c.save(); c.globalAlpha = .14 * (4 - j) / 3; c.translate(Math.round(veic.x - veic.dir * j * 8), Math.round(veic.y - alt + j * Math.sin(veic.ang) * 3)); if (veic.dir < 0) c.scale(-1, 1); c.rotate(veic.ang); def.veiculo?.(P, tempo, { alt, roda: v.roda, voando: alt > 3, parado: false, vel: v.spd }); c.restore(); }
       const e = v.sq > 0 ? Math.sin(v.sq * Math.PI) * v.sq * .22 : 0; c.save(); c.translate(Math.round(veic.x), Math.round(veic.y - alt)); if (veic.dir < 0) c.scale(-1, 1); c.rotate(veic.ang); c.scale(1 + e, 1 - e);
-      def.veiculo?.(P, tempo, { alt, roda: v.roda, voando: alt > 3, parado: v.t < 0 || veic.k >= 1, vel: v.spd }); c.restore(); }
+      def.veiculo?.(P, tempo, { alt, roda: v.roda, voando: alt > 3, parado: v.t < 0 || veic.k >= 1, vel: v.spd, impulso: v.impulso || 0, carregando: v.t < 0 ? 1 + v.t / .38 : 0 }); c.restore(); }
     rastro = rastro.filter((p) => { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= Math.pow(.25, dt); p.vy *= Math.pow(.4, dt); if (!p.chao) p.vy -= 6 * dt; return p.t < p.vida; });
     for (const a of M.aves) { a.x += a.v * a.dir * dt; if (a.x > M.W + 120) a.x = -120; if (a.x < -120) a.x = M.W + 120; // bando em V batendo as asas
       for (let i = 0; i < a.n; i++) { const lado = i % 2 ? 1 : -1, k = Math.ceil(i / 2), bx = a.x - a.dir * k * 9, by = a.y + lado * k * 6 + Math.sin(tempo * 2 + a.fase) * 6, asa = Math.sin(tempo * 12 + a.fase + i) > 0;

@@ -583,8 +583,8 @@ local __O = {};
                 if ____opt_result_8 ~= nil then
                     ____opt_result_9 = ____opt_result_8.night
                 end
-                __O[689] = ____opt_result_9
-                noite = clamp(nil, if ____t_10(____opt_result_9) then __O[689] else 0, 0, 1)
+                __O[688] = ____opt_result_9
+                noite = clamp(nil, if ____t_10(____opt_result_9) then __O[688] else 0, 0, 1)
             end)
         end
         if para == 11 then
@@ -875,9 +875,9 @@ local __O = {};
         local ____call_13 = __call
         local ____t_12 = __t
         local ____get_result_11 = __get(nomes, para)
-        __O[690] = ____get_result_11
+        __O[689] = ____get_result_11
         local nome = ____call_13(
-            tostring(if ____t_12(____get_result_11) then __O[690] else "Destino"),
+            tostring(if ____t_12(____get_result_11) then __O[689] else "Destino"),
             "toUpperCase"
         )
         local px = W + 60 - (t - 0.55) * 640 * 0.78

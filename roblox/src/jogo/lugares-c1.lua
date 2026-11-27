@@ -276,10 +276,10 @@ local __O = {};
             ____opt_result_8 = s.night
         end
         local ____TS__Number_result_9 = __TS__Number(____opt_result_8)
-        __O[1313] = ____TS__Number_result_9
+        __O[1312] = ____TS__Number_result_9
         return math.max(
             0,
-            math.min(1, if ____t_10(____TS__Number_result_9) then __O[1313] else 0)
+            math.min(1, if ____t_10(____TS__Number_result_9) then __O[1312] else 0)
         )
     end
     local function dith(____, c, x, y, w, h, cor, k)
@@ -4986,8 +4986,8 @@ local __O = {};
         if ____opt_66 ~= nil then
             ____opt_66 = ____opt_66.name
         end
-        __O[1314] = ____opt_66
-        local N = if ____t_68(____opt_66) then __O[1314] else id
+        __O[1313] = ____opt_66
+        local N = if ____t_68(____opt_66) then __O[1313] else id
         if id == "tio_juca" then
             if __t(q.ferramentasFeita) then
                 api:say(__arrL(
@@ -5119,10 +5119,10 @@ local __O = {};
             end
             ____temp_77 = not ____t_76(____opt_result_75)
         end
-        __O[1315] = ____temp_77
-        local ____temp_79 = if ____t_78(____temp_77) then __O[1315] else q.ferramentasFeita
-        __O[1316] = ____temp_79
-        if ____t_81(if ____t_80(____temp_79) then __O[1316] else not __t(player)) then
+        __O[1314] = ____temp_77
+        local ____temp_79 = if ____t_78(____temp_77) then __O[1314] else q.ferramentasFeita
+        __O[1315] = ____temp_79
+        if ____t_81(if ____t_80(____temp_79) then __O[1315] else not __t(player)) then
             return nil
         end
         local a = achadas(nil, q)
@@ -5132,8 +5132,8 @@ local __O = {};
             function(____, p)
                 local ____t_83 = __t
                 local ____temp_82 = not __t(__call(a, "has", p.id)) and math.abs(player.x - p.x) <= 34
-                __O[1317] = ____temp_82
-                return if ____t_83(____temp_82) then math.abs(player.y - 30 - p.y) <= 44 else __O[1317]
+                __O[1316] = ____temp_82
+                return if ____t_83(____temp_82) then math.abs(player.y - 30 - p.y) <= 44 else __O[1316]
             end
         )
         if not __t(f) then
@@ -5155,8 +5155,8 @@ local __O = {};
             end
             ____temp_88 = not ____t_87(____opt_result_86)
         end
-        __O[1318] = ____temp_88
-        if ____t_90(if ____t_89(____temp_88) then __O[1318] else q.ferramentasFeita) then
+        __O[1317] = ____temp_88
+        if ____t_90(if ____t_89(____temp_88) then __O[1317] else q.ferramentasFeita) then
             return
         end
         local a = achadas(nil, q)
@@ -5272,14 +5272,14 @@ local __O = {};
         local ____t_97 = __t
         local ____t_92 = __t
         local ____temp_91 = __TS__Number(scene) == 40
-        __O[1319] = ____temp_91
+        __O[1318] = ____temp_91
         local ____opt_result_95
         if q ~= nil then
             ____opt_result_95 = q.ferramentasAceita
         end
-        local ____temp_96 = if ____t_92(____temp_91) then ____opt_result_95 else __O[1319]
-        __O[1320] = ____temp_96
-        if ____t_98(if ____t_97(____temp_96) then not __t(q.ferramentasFeita) else __O[1320]) then
+        local ____temp_96 = if ____t_92(____temp_91) then ____opt_result_95 else __O[1318]
+        __O[1319] = ____temp_96
+        if ____t_98(if ____t_97(____temp_96) then not __t(q.ferramentasFeita) else __O[1319]) then
             local n = achadas(nil, q).size
             return __arrL({"Ferramentas sumidas", if n >= 3 then "Leve as três ferramentas ao Tio Juca." else tostring(n) .. "/3 ferramentas achadas nas prateleiras da oficina."}, 2)
         end
@@ -5309,8 +5309,8 @@ local __O = {};
             end
             ____temp_103 = not ____t_102(____opt_result_101)
         end
-        __O[1321] = ____temp_103
-        if ____t_105(if ____t_104(____temp_103) then __O[1321] else q.ferramentasFeita) then
+        __O[1320] = ____temp_103
+        if ____t_105(if ____t_104(____temp_103) then __O[1320] else q.ferramentasFeita) then
             return nil
         end
         local a = achadas(nil, q)
@@ -5348,8 +5348,8 @@ local __O = {};
                 if ____opt_109 ~= nil then
                     ____opt_109 = ____opt_109.nome
                 end
-                __O[1322] = ____opt_109
-                return if ____t_111(____opt_109) then __O[1322] else ""
+                __O[1321] = ____opt_109
+                return if ____t_111(____opt_109) then __O[1321] else ""
             end,
             sub = function(____, n)
                 local ____t_114 = __t
@@ -5360,8 +5360,8 @@ local __O = {};
                 if ____opt_112 ~= nil then
                     ____opt_112 = ____opt_112.sub
                 end
-                __O[1323] = ____opt_112
-                return if ____t_114(____opt_112) then __O[1323] else ""
+                __O[1322] = ____opt_112
+                return if ____t_114(____opt_112) then __O[1322] else ""
             end,
             largura = function(____, n)
                 local ____t_117 = __t
@@ -5372,8 +5372,8 @@ local __O = {};
                 if ____opt_115 ~= nil then
                     ____opt_115 = ____opt_115.largura
                 end
-                __O[1324] = ____opt_115
-                return if ____t_117(____opt_115) then __O[1324] else 0
+                __O[1323] = ____opt_115
+                return if ____t_117(____opt_115) then __O[1323] else 0
             end,
             plataformas = function(____, n)
                 local ____call_121 = __call
@@ -5385,9 +5385,9 @@ local __O = {};
                 if ____opt_118 ~= nil then
                     ____opt_118 = ____opt_118.plataformas
                 end
-                __O[1325] = ____opt_118
+                __O[1324] = ____opt_118
                 return ____call_121(
-                    if ____t_120(____opt_118) then __O[1325] else __arrL({}, 0),
+                    if ____t_120(____opt_118) then __O[1324] else __arrL({}, 0),
                     "map",
                     function(____, p) return __call(p, "slice") end
                 )

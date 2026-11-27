@@ -11,8 +11,8 @@ local __O = {};
         local ____t_2 = __t
         local ____t_1 = __t
         local ____temp_0 = not __t(j)
-        __O[1335] = ____temp_0
-        if ____t_2(if ____t_1(____temp_0) then __O[1335] else j.fim) then
+        __O[1334] = ____temp_0
+        if ____t_2(if ____t_1(____temp_0) then __O[1334] else j.fim) then
             return
         end
         if j.fase == "mordeu" then
@@ -309,8 +309,8 @@ local __O = {};
             if j ~= nil then
                 ____opt_result_21 = j.peixes
             end
-            __O[1338] = ____opt_result_21
-            ____fechar_23(nil, if ____t_22(____opt_result_21) then __O[1338] else 0)
+            __O[1337] = ____opt_result_21
+            ____fechar_23(nil, if ____t_22(____opt_result_21) then __O[1337] else 0)
             return
         end
         if __t(__call(
@@ -427,8 +427,8 @@ local __O = {};
                 "includes",
                 j.fase
             )
-            __O[1336] = ____call_result_3
-            if ____t_5(if ____t_4(____call_result_3) then __ge(j.tf, 1.3) else __O[1336]) then
+            __O[1335] = ____call_result_3
+            if ____t_5(if ____t_4(____call_result_3) then __ge(j.tf, 1.3) else __O[1335]) then
                 j.tent = j.tent + 1
                 if __ge(j.tent, TENTATIVAS) then
                     j.fim = true
@@ -440,8 +440,8 @@ local __O = {};
                             if j ~= nil then
                                 ____opt_result_8 = j.peixes
                             end
-                            __O[1337] = ____opt_result_8
-                            return ____fechar_10(nil, if ____t_9(____opt_result_8) then __O[1337] else 0)
+                            __O[1336] = ____opt_result_8
+                            return ____fechar_10(nil, if ____t_9(____opt_result_8) then __O[1336] else 0)
                         end,
                         1400
                     )
@@ -501,8 +501,8 @@ local __O = {};
                 if j ~= nil then
                     ____opt_result_26 = j.peixes
                 end
-                __O[1339] = ____opt_result_26
-                return ____fechar_28(nil, if ____t_27(____opt_result_26) then __O[1339] else 0)
+                __O[1338] = ____opt_result_26
+                return ____fechar_28(nil, if ____t_27(____opt_result_26) then __O[1338] else 0)
             end
         )
         box:append(s)

@@ -39,8 +39,8 @@ local __O = {};
                     PW:estado().niveis,
                     p.id
                 )
-                __O[835] = ____get_result_9
-                local n = if ____t_10(____get_result_9) then __O[835] else 1
+                __O[834] = ____get_result_9
+                local n = if ____t_10(____get_result_9) then __O[834] else 1
                 local b = window.document:createElement("button")
                 b.type = "button"
                 b.className = if i == sel then "on" else ""
@@ -67,30 +67,30 @@ local __O = {};
             PW:estado().niveis,
             p.id
         )
-        __O[836] = ____get_result_11
-        local n = if ____t_12(____get_result_11) then __O[836] else 1
+        __O[835] = ____get_result_11
+        local n = if ____t_12(____get_result_11) then __O[835] else 1
         local ____t_14 = __t
         local ____get_result_13 = __get(PRECO, n)
-        __O[837] = ____get_result_13
-        local preco = if ____t_14(____get_result_13) then __O[837] else 0
+        __O[836] = ____get_result_13
+        local preco = if ____t_14(____get_result_13) then __O[836] else 0
         local max = __ge(n, 3)
         local ____t_16 = __t
         local ____temp_15 = not __t(max) and __ge(
             moedas(nil),
             preco
         )
-        __O[838] = ____temp_15
-        local pode = if ____t_16(____temp_15) then not __t(anim) else __O[838]
+        __O[837] = ____temp_15
+        local pode = if ____t_16(____temp_15) then not __t(anim) else __O[837]
         local ____p_nome_22 = p.nome
         local ____t_18 = __t
         local ____get_result_17 = __get(p.niveis, n - 1)
-        __O[839] = ____get_result_17
-        local ____temp_23 = if ____t_18(____get_result_17) then __O[839] else p.desc
+        __O[838] = ____get_result_17
+        local ____temp_23 = if ____t_18(____get_result_17) then __O[838] else p.desc
         local ____temp_21 = n + 1
         local ____t_20 = __t
         local ____get_result_19 = __get(p.niveis, n)
-        __O[840] = ____get_result_19
-        f.innerHTML = ((((((((((((("<b>" .. tostring(____p_nome_22)) .. "</b><span class=\"n\"><i>AGORA · NÍVEL ") .. tostring(n)) .. "</i>") .. tostring(____temp_23)) .. "</span>") .. if __t(max) then "<span class=\"n\"><i>NO TALO</i>Nível máximo. Mais que isso, só com outra garrafada.</span>" else ((("<span class=\"n\"><i>DEPOIS · NÍVEL " .. tostring(____temp_21)) .. "</i>") .. tostring(if ____t_20(____get_result_19) then __O[840] else "")) .. "</span>") .. "<div class=\"p\">") .. if __t(max) then "★ NÍVEL MÁXIMO" else (("CUSTO: ● " .. tostring(preco)) .. "  ·  VOCÊ TEM: ● ") .. tostring(moedas(nil))) .. "</div><button type=\"button\" ") .. if __t(pode) then "" else "disabled") .. ">") .. if __t(max) then "NO TALO" else if __t(anim) then "TURBINANDO..." else "🔧 TURBINAR") .. "</button>"
+        __O[839] = ____get_result_19
+        f.innerHTML = ((((((((((((("<b>" .. tostring(____p_nome_22)) .. "</b><span class=\"n\"><i>AGORA · NÍVEL ") .. tostring(n)) .. "</i>") .. tostring(____temp_23)) .. "</span>") .. if __t(max) then "<span class=\"n\"><i>NO TALO</i>Nível máximo. Mais que isso, só com outra garrafada.</span>" else ((("<span class=\"n\"><i>DEPOIS · NÍVEL " .. tostring(____temp_21)) .. "</i>") .. tostring(if ____t_20(____get_result_19) then __O[839] else "")) .. "</span>") .. "<div class=\"p\">") .. if __t(max) then "★ NÍVEL MÁXIMO" else (("CUSTO: ● " .. tostring(preco)) .. "  ·  VOCÊ TEM: ● ") .. tostring(moedas(nil))) .. "</div><button type=\"button\" ") .. if __t(pode) then "" else "disabled") .. ">") .. if __t(max) then "NO TALO" else if __t(anim) then "TURBINANDO..." else "🔧 TURBINAR") .. "</button>"
         f:querySelector("button"):addEventListener("click", turbinar)
     end
     function escolher(self, i)
@@ -98,8 +98,8 @@ local __O = {};
         local ____t_26 = __t
         local ____t_25 = __t
         local ____temp_24 = not __t(__len(L))
-        __O[841] = ____temp_24
-        if ____t_26(if ____t_25(____temp_24) then __O[841] else anim) then
+        __O[840] = ____temp_24
+        if ____t_26(if ____t_25(____temp_24) then __O[840] else anim) then
             return
         end
         sel = __mod(
@@ -123,8 +123,8 @@ local __O = {};
         local ____t_29 = __t
         local ____t_28 = __t
         local ____temp_27 = not __t(__len(L))
-        __O[842] = ____temp_27
-        if ____t_29(if ____t_28(____temp_27) then __O[842] else anim) then
+        __O[841] = ____temp_27
+        if ____t_29(if ____t_28(____temp_27) then __O[841] else anim) then
             return
         end
         local p = __get(L, sel)
@@ -133,8 +133,8 @@ local __O = {};
             PW:estado().niveis,
             p.id
         )
-        __O[843] = ____get_result_30
-        local n = if ____t_31(____get_result_30) then __O[843] else 1
+        __O[842] = ____get_result_30
+        local n = if ____t_31(____get_result_30) then __O[842] else 1
         if __ge(n, 3) then
             falar(
                 nil,
@@ -307,8 +307,8 @@ local __O = {};
                     local ____t_8 = __t
                     local ____t_7 = __t
                     local ____temp_6 = k == "Enter" or k == "KeyE"
-                    __O[834] = ____temp_6
-                    if ____t_8(if ____t_7(____temp_6) then __O[834] else k == "Space") then
+                    __O[833] = ____temp_6
+                    if ____t_8(if ____t_7(____temp_6) then __O[833] else k == "Space") then
                         turbinar(nil)
                     else
                         return
@@ -1013,8 +1013,8 @@ local __O = {};
         local ____t_56 = __t
         local ____t_55 = __t
         local ____temp_54 = if __t(anim) then __gt(anim.t, 0.6) else anim
-        __O[844] = ____temp_54
-        local treme = if ____t_56(if ____t_55(____temp_54) then __lt(anim.t, 1.9) else __O[844]) then math.floor(math.sin(t * 60) + 0.5) else 0
+        __O[843] = ____temp_54
+        local treme = if ____t_56(if ____t_55(____temp_54) then __lt(anim.t, 1.9) else __O[843]) then math.floor(math.sin(t * 60) + 0.5) else 0
         x = x + treme
         R(
             nil,
@@ -1310,8 +1310,8 @@ local __O = {};
             local ____t_59 = __t
             local ____t_58 = __t
             local ____temp_57 = __gt(anim.t, 0.6) and __lt(anim.t, 1.9)
-            __O[845] = ____temp_57
-            if ____t_59(if ____t_58(____temp_57) then math.random() < 0.5 else __O[845]) then
+            __O[844] = ____temp_57
+            if ____t_59(if ____t_58(____temp_57) then math.random() < 0.5 else __O[844]) then
                 __call(
                     vapor,
                     "push",
@@ -1330,8 +1330,8 @@ local __O = {};
         local ____t_62 = __t
         local ____t_61 = __t
         local ____temp_60 = if __t(anim) then __gt(anim.t, 0.5) else anim
-        __O[846] = ____temp_60
-        if ____t_62(if ____t_61(____temp_60) then __lt(anim.t, 1.8) else __O[846]) then
+        __O[845] = ____temp_60
+        if ____t_62(if ____t_61(____temp_60) then __lt(anim.t, 1.8) else __O[845]) then
             o = __assign(
                 {},
                 o,
@@ -1345,8 +1345,8 @@ local __O = {};
             local ____t_65 = __t
             local ____t_64 = __t
             local ____temp_63 = falaT < 1.2
-            __O[847] = ____temp_63
-            if ____t_65(if ____t_64(____temp_63) then falaTxt else __O[847]) then
+            __O[846] = ____temp_63
+            if ____t_65(if ____t_64(____temp_63) then falaTxt else __O[846]) then
                 o = __assign({}, o, {moving = false})
             end
         end
@@ -1655,8 +1655,8 @@ local __O = {};
         local ____t_68 = __t
         local ____t_67 = __t
         local ____temp_66 = if __t(anim) then __gt(anim.t, 0.7) else anim
-        __O[848] = ____temp_66
-        if ____t_68(if ____t_67(____temp_66) then __lt(anim.t, 1.8) else __O[848]) then
+        __O[847] = ____temp_66
+        if ____t_68(if ____t_67(____temp_66) then __lt(anim.t, 1.8) else __O[847]) then
             do
                 local i = 0
                 while i < 4 do
@@ -1700,8 +1700,8 @@ local __O = {};
         local ____t_71 = __t
         local ____t_70 = __t
         local ____temp_69 = if __t(anim) then __gt(anim.t, 0.7) else anim
-        __O[849] = ____temp_69
-        if ____t_71(if ____t_70(____temp_69) then __lt(anim.t, 1.8) else __O[849]) then
+        __O[848] = ____temp_69
+        if ____t_71(if ____t_70(____temp_69) then __lt(anim.t, 1.8) else __O[848]) then
             c:save()
             c.globalCompositeOperation = "lighter"
             c.globalAlpha = 0.25 + math.random() * 0.25
@@ -1759,8 +1759,8 @@ local __O = {};
                     )).width,
                     150
                 )
-                __O[850] = ____gt_result_72
-                if ____t_74(if ____t_73(____gt_result_72) then l else __O[850]) then
+                __O[849] = ____gt_result_72
+                if ____t_74(if ____t_73(____gt_result_72) then l else __O[849]) then
                     __call(ls, "push", l)
                     l = w
                 else

@@ -153,8 +153,8 @@ local __O = {};
                 local ____t_2 = __t
                 local ____t_1 = __t
                 local ____temp_0 = i.estado ~= "ausente"
-                __O[899] = ____temp_0
-                return if ____t_2(if ____t_1(____temp_0) then not __t(melhor) or math.abs(meio(nil, i) - x) < math.abs(meio(nil, melhor) - x) else __O[899]) then i else melhor
+                __O[898] = ____temp_0
+                return if ____t_2(if ____t_1(____temp_0) then not __t(melhor) or math.abs(meio(nil, i) - x) < math.abs(meio(nil, melhor) - x) else __O[898]) then i else melhor
             end,
             nil
         )
@@ -208,12 +208,12 @@ local __O = {};
             local ____t_6 = __t
             local ____t_4 = __t
             local ____temp_3 = if __t(p.ground) then __ge(p.vy, 0) else p.ground
-            __O[900] = ____temp_3
-            local ____temp_5 = if ____t_4(____temp_3) then i.estado ~= "ausente" else __O[900]
-            __O[901] = ____temp_5
-            local ____temp_7 = if ____t_6(____temp_5) then sob(nil, i, p.x) else __O[901]
-            __O[902] = ____temp_7
-            local levando = if ____t_8(____temp_7) then math.abs(p.y - i.y) < 2 else __O[902]
+            __O[899] = ____temp_3
+            local ____temp_5 = if ____t_4(____temp_3) then i.estado ~= "ausente" else __O[899]
+            __O[900] = ____temp_5
+            local ____temp_7 = if ____t_6(____temp_5) then sob(nil, i, p.x) else __O[900]
+            __O[901] = ____temp_7
+            local levando = if ____t_8(____temp_7) then math.abs(p.y - i.y) < 2 else __O[901]
             i.anterior = i.y
             i.y = f.piso - subida * (74 + 25 * math.sin(ceu.tempo * 1.12 + i.id * 0.94))
             if __t(levando) then
@@ -241,13 +241,13 @@ local __O = {};
                 local ____t_13 = __t
                 local ____t_11 = __t
                 local ____temp_10 = i.estado == "ausente" or not __t(sob(nil, i, p.x))
-                __O[903] = ____temp_10
-                local ____temp_12 = if ____t_11(____temp_10) then __O[903] else __gt(
+                __O[902] = ____temp_10
+                local ____temp_12 = if ____t_11(____temp_10) then __O[902] else __gt(
                     antes,
                     math.max(i.y, i.anterior) + 2
                 )
-                __O[904] = ____temp_12
-                if ____t_14(if ____t_13(____temp_12) then __O[904] else __lt(p.y, i.y)) then
+                __O[903] = ____temp_12
+                if ____t_14(if ____t_13(____temp_12) then __O[903] else __lt(p.y, i.y)) then
                     continue
                 end
                 p.y = i.y
@@ -302,10 +302,10 @@ local __O = {};
                 if p ~= nil then
                     ____opt_result_22 = p.ground
                 end
-                __O[905] = ____opt_result_22
-                local ____temp_24 = if ____t_23(____opt_result_22) then sob(nil, i, p.x) else __O[905]
-                __O[906] = ____temp_24
-                if ____t_26(if ____t_25(____temp_24) then math.abs(i.y - p.y) < 3 else __O[906]) then
+                __O[904] = ____opt_result_22
+                local ____temp_24 = if ____t_23(____opt_result_22) then sob(nil, i, p.x) else __O[904]
+                __O[905] = ____temp_24
+                if ____t_26(if ____t_25(____temp_24) then math.abs(i.y - p.y) < 3 else __O[905]) then
                     p.ground = false
                 end
                 i.estado = "ausente"
@@ -317,8 +317,8 @@ local __O = {};
         local ____t_29 = __t
         local ____t_28 = __t
         local ____temp_27 = f.golpe == "rasante"
-        __O[907] = ____temp_27
-        if ____t_29(if ____t_28(____temp_27) then f.estado == "firing" or f.estado == "windup" else __O[907]) then
+        __O[906] = ____temp_27
+        if ____t_29(if ____t_28(____temp_27) then f.estado == "firing" or f.estado == "windup" else __O[906]) then
             return
         end
         local subida = clamp(nil, f.ceu.tempo / 1.18, 0, 1)
@@ -338,8 +338,8 @@ local __O = {};
             __add(y, ry),
             f.y - c.altura
         )
-        __O[908] = ____temp_30
-        return if ____t_31(____temp_30) then __lt(y - ry, f.y) else __O[908]
+        __O[907] = ____temp_30
+        return if ____t_31(____temp_30) then __lt(y - ry, f.y) else __O[907]
     end
     rect = function(____, c, x, y, w, h, cor)
         c.fillStyle = cor

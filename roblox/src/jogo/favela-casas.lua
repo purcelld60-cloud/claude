@@ -248,9 +248,9 @@ local __O = {};
         local ____mod_15 = __mod
         local ____t_14 = __t
         local ____TS__Number_result_13 = __TS__Number(__get(q.lendasReeis, id))
-        __O[1326] = ____TS__Number_result_13
+        __O[1325] = ____TS__Number_result_13
         local i = ____mod_15(
-            if ____t_14(____TS__Number_result_13) then __O[1326] else 0,
+            if ____t_14(____TS__Number_result_13) then __O[1325] else 0,
             __len(lista)
         )
         __set(q.lendasReeis, id, i + 1)
@@ -359,10 +359,10 @@ local __O = {};
                     ____opt_result_33 = ____opt_result_32.night
                 end
                 local ____TS__Number_result_34 = __TS__Number(____opt_result_33)
-                __O[1327] = ____TS__Number_result_34
+                __O[1326] = ____TS__Number_result_34
                 return true, math.max(
                     0,
-                    math.min(1, if ____t_35(____TS__Number_result_34) then __O[1327] else 0)
+                    math.min(1, if ____t_35(____TS__Number_result_34) then __O[1326] else 0)
                 )
             end)
             if not ____try then
@@ -2846,12 +2846,12 @@ local __O = {};
         if not __t(tela) then
             do
                 do
-                    __O[1328] = __iter(mk(nil, LW, LH))
-                    tela = __get(__O[1328], 0)
+                    __O[1327] = __iter(mk(nil, LW, LH))
+                    tela = __get(__O[1327], 0)
                 end
-                tctx = __get(__O[1328], 1)
+                tctx = __get(__O[1327], 1)
             end
-            local ____ = __O[1328]
+            local ____ = __O[1327]
         end
         local n = noite(nil)
         tctx.globalAlpha = 1
@@ -2866,8 +2866,8 @@ local __O = {};
         local ____tctx_38 = tctx
         local ____t_37 = __t
         local ____TS__Number_result_36 = __TS__Number(t)
-        __O[1329] = ____TS__Number_result_36
-        ____get_result_39(nil, ____tctx_38, if ____t_37(____TS__Number_result_36) then __O[1329] else 0, n)
+        __O[1328] = ____TS__Number_result_36
+        ____get_result_39(nil, ____tctx_38, if ____t_37(____TS__Number_result_36) then __O[1328] else 0, n)
         if n > 0 then
             tctx.globalAlpha = n * 0.25
             R(
@@ -2905,8 +2905,8 @@ local __O = {};
             local ____ctx_42 = ctx
             local ____t_41 = __t
             local ____TS__Number_result_40 = __TS__Number(t)
-            __O[1330] = ____TS__Number_result_40
-            ____ctx_42.globalAlpha = 0.55 + 0.1 * math.sin(if ____t_41(____TS__Number_result_40) then __O[1330] else 0 * 3 + x)
+            __O[1329] = ____TS__Number_result_40
+            ____ctx_42.globalAlpha = 0.55 + 0.1 * math.sin(if ____t_41(____TS__Number_result_40) then __O[1329] else 0 * 3 + x)
             ctx.fillStyle = "#ffd88a"
             ctx:fillRect(x + 6, base - 58, 6, 56)
             ctx.globalAlpha = 0.18
@@ -2926,8 +2926,8 @@ local __O = {};
         if ____opt_43 ~= nil then
             ____opt_43 = ____opt_43.nome
         end
-        __O[1331] = ____opt_43
-        return if ____t_45(____opt_43) then __O[1331] else ""
+        __O[1330] = ____opt_43
+        return if ____t_45(____opt_43) then __O[1330] else ""
     end
     local function npcDe(____, id)
         local ____t_48 = __t
@@ -2935,8 +2935,8 @@ local __O = {};
         if ____opt_46 ~= nil then
             ____opt_46 = ____opt_46.npc
         end
-        __O[1332] = ____opt_46
-        return if ____t_48(____opt_46) then __O[1332] else ""
+        __O[1331] = ____opt_46
+        return if ____t_48(____opt_46) then __O[1331] else ""
     end
     local function falante(____, id, norm)
         local n = __call(
@@ -2953,7 +2953,7 @@ local __O = {};
         )
         local ____t_50 = __t
         local ____temp_49 = not not __t(n)
-        __O[1333] = ____temp_49
+        __O[1332] = ____temp_49
         return if ____t_50(____temp_49) then __call(
             norm,
             "includes",
@@ -2962,7 +2962,7 @@ local __O = {};
                 __re("^(dona|seu) ", ""),
                 ""
             )
-        ) else __O[1333]
+        ) else __O[1332]
     end
     window.FavelaCasas = __ord(
         {
@@ -2979,8 +2979,8 @@ local __O = {};
                 if ____opt_51 ~= nil then
                     ____opt_51 = ____opt_51.morador
                 end
-                __O[1334] = ____opt_51
-                return if ____t_53(____opt_51) then __O[1334] else nil
+                __O[1333] = ____opt_51
+                return if ____t_53(____opt_51) then __O[1333] else nil
             end,
             falante = falante,
             LENDAS = LENDAS
