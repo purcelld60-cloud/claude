@@ -454,7 +454,7 @@ for (const arq of fs.readdirSync(SAIDA)) {
   if (alvo === 'Luau') lua = lua.split('require("lualib_bundle")').join('require(script.Parent.lualib_bundle)');
   const usados = AJUDANTES.filter((h) => new RegExp('\\b' + h + '\\b').test(lua) || (h === '__iterar' && lua.includes('__iterar')));
   // módulos que mais desenham ganham código nativo no Roblox (--!native; o Roblox volta ao normal se não couber)
-  const NATIVOS = /^(art|hd-maps|hd-scene|campanha2__(personagens|cenarios|camadas|novos-a|novos-b|ambientes|plantas)|tela-inicial|lugares-fundos|lugares-c1|nikolas-fx|fx-pixel|vendor__pixelfx|hero-shadow|daytime|weather|cinema-fx|boss-fx|campaign-vfx|scene-life|critters|world-life|baile-pixel|baile-galpao|game|graphics|shader|mapa3d|estrada|chegada-carro|brainrots|char-detail|amanda-art|arena-art|arena-fx|trigal|balanco)\.lua$/;
+  const NATIVOS = /^(art|hd-maps|hd-scene|campanha2__(personagens|cenarios|camadas|novos-a|novos-b|ambientes|plantas)|tela-inicial|lugares-fundos|lugares-c1|nikolas-fx|fx-pixel|hero-shadow|daytime|weather|cinema-fx|boss-fx|campaign-vfx|scene-life|critters|world-life|baile-pixel|baile-galpao|game|graphics|shader|mapa3d|estrada|chegada-carro|brainrots|char-detail|amanda-art|arena-art|arena-fx|trigal|balanco)\.lua$/;
   const cab = [(alvo === 'Luau' ? (NATIVOS.test(arq) ? '--!native\n' : '') + '--!nocheck\n' : '') + `local __JSR = ${caminhoJs}`, 'local window = __JSR.window', 'local tostring = __JSR.__str'];
   for (let i = 0; i < usados.length; i += 12) { const g = usados.slice(i, i + 12); cab.push(`local ${g.join(', ')} = ${g.map((h) => '__JSR.' + h).join(', ')}`); }
   fs.writeFileSync(p, cab.join('\n') + '\n' + lua);

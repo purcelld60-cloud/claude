@@ -373,3 +373,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - **Jatos de gás** (`carroViagem`): dois jatos animados por baixo, com bico escuro e chama em camadas, mais longos no impulso da decolagem. Eles acendem enquanto o motor esquenta (`o.carregando`, `o.impulso`).
   - **No ar:** as rodas descem 1 px e param de girar; o chapéu do Da Roça balança; sai um respiro de gás do cilindro.
   - **Rastro de gás** mais leve e curto.
+- **27/11 · Claude:** **Roblox: "Script timeout" ao carregar.** No Studio o carregamento passava de 10 s sem pausar, e o Roblox derrubava o script.
+  - **`ui.js`:** com `window.DAROCA_ROBLOX` (posto pelo `carregar.lua`), pula as miniaturas dos cenários e os retratos do elenco da página do site, que não aparecem no Roblox. No Lua 5.3, o carregamento caiu de 8,2 s para 1 s.
+  - **Pausas no carregamento:**
+    - `carregar.lua` chama `op.ceder()` entre os scripts e eventos;
+    - `canvas.lua` chama `C.ceder` a cada 48 desenhos;
+    - o cliente pausa um quadro (`task.wait`) se já passou 0,5 s, e só durante o carregamento.
+  - **`vendor__pixelfx`** não usa mais `--!native` e é carregado na tela de carregamento, não no meio do jogo.

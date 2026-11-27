@@ -326,7 +326,12 @@ local __O = {};
     __call(
         window.document:querySelectorAll("[data-portrait]"),
         "forEach",
-        function(____, c) return portrait(nil, c, c.dataset.portrait) end
+        function(____, c)
+            if __t(if __t(window.DAROCA_ROBLOX) then not __t(c:closest("#gameShell")) else window.DAROCA_ROBLOX) then
+                return
+            end
+            portrait(nil, c, c.dataset.portrait)
+        end
     )
     local mini = window.document:getElementById("miniPortrait")
     if __t(if __t(window.Art) then mini else window.Art) then
@@ -340,24 +345,26 @@ local __O = {};
             __ord({facing = 1, frame = 0, scale = 0.55}, "facing,frame,scale")
         )
     end
-    __call(
-        window.document:querySelectorAll(".map-image"),
-        "forEach",
-        function(____, el, i)
-            local ____opt_24 = el:querySelector("span")
-            if ____opt_24 ~= nil then
-                ____opt_24:remove()
+    if not __t(window.DAROCA_ROBLOX) then
+        __call(
+            window.document:querySelectorAll(".map-image"),
+            "forEach",
+            function(____, el, i)
+                local ____opt_24 = el:querySelector("span")
+                if ____opt_24 ~= nil then
+                    ____opt_24:remove()
+                end
+                local c = window.document:createElement("canvas")
+                c.width = 240
+                c.height = 135
+                local ctx = c:getContext("2d")
+                ctx.imageSmoothingEnabled = false
+                ctx:scale(0.25, 0.25)
+                window.Art:drawScene(ctx, i, 0, 0)
+                el:append(c)
             end
-            local c = window.document:createElement("canvas")
-            c.width = 240
-            c.height = 135
-            local ctx = c:getContext("2d")
-            ctx.imageSmoothingEnabled = false
-            ctx:scale(0.25, 0.25)
-            window.Art:drawScene(ctx, i, 0, 0)
-            el:append(c)
-        end
-    )
+        )
+    end
     shell = window.document:querySelector(".game-shell")
     shell.id = "gameShell"
     local fullscreenBtn = window.document:getElementById("fullscreenBtn")

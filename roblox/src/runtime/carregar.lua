@@ -6,6 +6,8 @@ function Carregar.iniciar(op)
   local JS, N, Canvas, LL = op.JS, op.N, op.Canvas, op.lualib
   local window, document = N.window, N.document
   N.Canvas = Canvas
+  window.DAROCA_ROBLOX = true -- o jogo pula desenhos da página do site que não aparecem aqui
+  local ceder = op.ceder or function() end
   N.Promise = LL.__TS__Promise
   Canvas.novaLista = function(n) return JS.tipada("Uint8ClampedArray", n) end
   N.arquivos = op.exigir("arquivos")
@@ -21,6 +23,7 @@ function Carregar.iniciar(op)
   document.body.className = pag.classe
   N.carregandoPagina = true
   N.lerHTML(pag.html, document.body)
+  ceder()
   N.carregandoPagina = false
   rawset(document, "readyState", "loading")
   local carregados = {}
@@ -42,10 +45,12 @@ function Carregar.iniciar(op)
       window.setTimeout(nil, function() local ok = rodarScript(src); N.despachar(no, N.novoEvento(ok and "load" or "error")) end, 0)
     end
   end
-  for _, s in ipairs(op.exigir("ordem")) do rodarScript(s[1]) end
+  for _, s in ipairs(op.exigir("ordem")) do rodarScript(s[1]); ceder() end
   rawset(document, "readyState", "interactive")
   N.despachar(document, N.novoEvento("readystatechange"))
+  ceder()
   N.despachar(document, N.novoEvento("DOMContentLoaded", { bubbles = true }))
+  ceder()
   rawset(document, "readyState", "complete")
   N.despachar(document, N.novoEvento("readystatechange"))
   N.despachar(window, N.novoEvento("load"))
