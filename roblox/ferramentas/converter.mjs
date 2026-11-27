@@ -450,6 +450,7 @@ for (const arq of fs.readdirSync(SAIDA)) {
   if (!arq.endsWith('.lua') || arq === 'lualib_bundle.lua') continue;
   const p = path.join(SAIDA, arq);
   let lua = fs.readFileSync(p, 'utf8');
+  if (lua.slice(0, 400).includes('local __JSR = ')) continue; // arquivos gerados pelo capturar.mjs já têm o cabeçalho (não repetir a cada conversão)
   lua = lua.split('__TS__Iterator(__iter(').join('__iterar((');
   if (alvo === 'Luau') lua = lua.split('require("lualib_bundle")').join('require(script.Parent.lualib_bundle)');
   const usados = AJUDANTES.filter((h) => new RegExp('\\b' + h + '\\b').test(lua) || (h === '__iterar' && lua.includes('__iterar')));

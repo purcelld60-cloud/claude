@@ -403,3 +403,27 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - Dedé: fumaça em rolos com cinza e brasa;
     - Nikolas: gosma.
   - Para chefe novo, basta pôr o tipo dele em `DONO` com um estilo.
+- **27/11 · Claude:** **oficina, lanchonete e açude com muito mais detalhe em pixel** (`lugares-fundos.js` e `lugares-c1.js`).
+  - **Oficina:**
+    - janelas e porta de enrolar vazadas: o céu e a rua aparecem de verdade, com casa do vizinho, mangueira e galinha;
+    - teto com telhas translúcidas (feixes de sol com poeira de dia, escuras à noite) e tesoura de aço;
+    - quadro de luz, macaco jacaré, carretel de mangueira, extintor, prateleira de tintas, correias penduradas;
+    - motor no cavalete, carrinho de ferramentas, máquina de solda com cilindro, tambor de estopa, vassoura;
+    - relógio, foto antiga, estante de aço, placa de saída, exaustor girando, aranha na teia, compressor que liga;
+    - faixa amarela em volta do elevador, área zebrada, serragem no óleo, porcas e chave no chão.
+  - **Lanchonete:**
+    - piso de ladrilho hidráulico (dois desenhos alternados), faixa de azulejo azul e branco, rodapé verde;
+    - passa-prato com cozinheiro animado, prateleiras de dendê, pimenta, doce, farinha e potes de bala;
+    - placa "FIADO SÓ AMANHÃ", relógio, banquetas, mesas com ketchup e suco de cacau, pinguim na geladeira;
+    - samambaias, camisa do time do bairro, mural de bilhetes, ventilador de parede e mais um de teto;
+    - rua de paralelepípedo, moto, orelhão, lixeira, cachorro caramelo, gente passando, fitinhas do Bonfim.
+    - Carro e bicicleta não atravessam mais o salão: ficam recortados na rua.
+  - **Açude:**
+    - mata ao longe com ipês floridos e palmeiras, cata-vento girando ao lado da casinha;
+    - barranco com terra molhada, seixos, raízes, aguapés e flores; capim que balança em três quadros;
+    - chão com trilha batida, pegadas, pedras, folhas secas, cogumelos, poças e formigas;
+    - patos nadando em fila, folhas boiando, linha e boia da vara do Seu Vagner; píer com pregos, musgo e corda.
+  - **Custo no Roblox:** o chão e o barranco do açude viraram imagens guardadas (desenhadas uma vez). O quadro ficou
+    igual ou mais leve que antes no teste em Lua 5.3; só a primeira entrada no açude monta mais coisa (~0,3 s a mais).
+  - `teste/sessao.lua` ganhou `cena:<n>:<câmera>:<tempo>[:noite]`. O `converter.mjs` não repete mais o cabeçalho
+    nos arquivos do `capturar.mjs`.

@@ -1,6 +1,6 @@
 -- Sessão de teste (Lua 5.3): liga o jogo, executa ações e grava telas.
 -- Uso (na pasta roblox): lua5.3 teste/sessao.lua <pasta_saida> ação1 ação2 ...
---   chefe:<tipo>  estado:  quadros:N  clique:<seletor>  tecla:<code>  segurar:<code>:N  soltar:<code>  foto:<nome>  html:<seletor>  graficos:low|medium
+--   cena:<n>:<câmera>:<tempo>[:noite]  chefe:<tipo>  estado:  quadros:N  clique:<seletor>  tecla:<code>  segurar:<code>:N  soltar:<code>  foto:<nome>  html:<seletor>  graficos:low|medium
 package.path = "./src/runtime/?.lua;./teste/jogo/?.lua;" .. package.path
 local JS = require("js")
 local Canvas = require("canvas")
@@ -51,6 +51,14 @@ for i = 2, #arg do
   elseif tipo == "estado" then
     local ok, st = pcall(N.window.Game.getState, N.window.Game)
     if ok and st then local p = st.player; print(("estado: x=%.0f y=%.0f hp=%s chefe=%s perigos=%d tiros=%d"):format(p.x, p.y, tostring(p.hp), tostring(st.activeBoss), #st.hazards, #st.shots)) else print("estado: erro " .. tostring(st)) end
+  elseif tipo == "cena" then -- cena:<n>:<câmera>:<tempo>[:noite] desenha um cenário direto (Art.drawScene) e grava a tela
+    local n, cam, tt, noite = v:match("^(%d+):(%d+):([%d%.]+):?(%a*)$")
+    local DT = N.window.DayTime; if DT then pcall(DT.force, DT, noite == "noite" and 22 or 11) end
+    local cv = N.document:createElement("canvas"); cv.width = 960; cv.height = 540; local ctx = cv:getContext("2d")
+    local t1 = os.clock(); local ok, e = pcall(N.window.Art.drawScene, N.window.Art, ctx, tonumber(n), tonumber(cam), tonumber(tt)); local d1 = os.clock() - t1
+    t1 = os.clock(); pcall(N.window.Art.drawScene, N.window.Art, ctx, tonumber(n), tonumber(cam) + 2, tonumber(tt) + .1); local d2 = os.clock() - t1
+    Canvas.ppm(cv, pasta .. "/cena-" .. n .. "-" .. cam .. (noite ~= "" and "-noite" or "") .. ".ppm")
+    print(("cena %s câmera %s: %s, primeira %.2fs, depois %.3fs por quadro"):format(n, cam, ok and "ok" or tostring(e), d1, d2))
   elseif tipo == "html" then local el = N.document:querySelector(v); print(el and (el.outerHTML:sub(1, 600)) or ("sem " .. v))
   elseif tipo == "visiveis" then
     N.percorrer(N.document.body, function(e) if e._tag == "button" and visivel(e) then print("  botão visível:", e.id, e.className, (N.textoDe(e):gsub("%s+", " ")):sub(1, 40)) end end)
