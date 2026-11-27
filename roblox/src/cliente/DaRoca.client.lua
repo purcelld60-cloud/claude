@@ -199,6 +199,7 @@ UIS.InputBegan:Connect(function(input, processado)
     if input.UserInputType == Enum.UserInputType.Keyboard or input.UserInputType.Name:match("^Gamepad") or input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then paginaControles.Visible = false; return end
   end
   if input.UserInputType == Enum.UserInputType.Keyboard then
+    if input.KeyCode == Enum.KeyCode.F1 then paginaControles.Visible = true; return end
     local code, key = codigoDe(input.KeyCode); if code then apertar(code, key) end
   elseif input.UserInputType.Name:match("^Gamepad") then
     if input.KeyCode == Enum.KeyCode.ButtonSelect then if paginaControles then paginaControles.Visible = true end; return end
@@ -239,49 +240,97 @@ UIS.LastInputTypeChanged:Connect(function(tipo)
   if toque ~= N.toque then N.toque = toque; window.navigator.maxTouchPoints = toque and 5 or 0; N.redimensionar(W, H) end
 end)
 
--- ===== página "Como jogar" (PC, Xbox e PlayStation) =====
+-- ===== guia de controles antes de jogar: PC, Xbox ou PlayStation, conforme o aparelho detectado =====
 local ACOES = {
-  { "Andar", "A / D ou ← →", "Alavanca esquerda ou setas", "Alavanca esquerda ou setas" },
-  { "Pular", "Espaço", "A", "✕" },
-  { "Jogar papel", "J", "X", "□" },
-  { "Peidão", "K", "B", "○" },
-  { "Dash", "L ou Shift", "RB", "R1" },
-  { "Falar, entrar e pegar", "E ou Enter", "Y", "△" },
-  { "Chamar o Reeis", "R", "LB", "L1" },
-  { "Bivolt", "B", "RT", "R2" },
-  { "Provocar", "T", "LT", "L2" },
-  { "Carro a gás", "V", "Apertar a alavanca (L3)", "Apertar a alavanca (L3)" },
-  { "Pausa e menu", "Esc", "Menu (☰)", "Options" },
-  { "Esta página", "—", "Exibir (⧉)", "Share / Create" },
+  -- ação,              PC,             Xbox,     PlayStation
+  { "Andar",            "A  D",         "LS",     "LS" },
+  { "Pular",            "ESPAÇO",       "A",      "✕" },
+  { "Jogar papel",      "J",            "X",      "□" },
+  { "Peidão",           "K",            "B",      "○" },
+  { "Dash",             "L",            "RB",     "R1" },
+  { "Falar e entrar",   "E",            "Y",      "△" },
+  { "Chamar o Reeis",   "R",            "LB",     "L1" },
+  { "Bivolt",           "B",            "RT",     "R2" },
+  { "Provocar",         "T",            "LT",     "L2" },
+  { "Carro a gás",      "V",            "L3",     "L3" },
+  { "Pausa e menu",     "ESC",          "MENU",   "OPTIONS" },
+  { "Este guia",        "F1",           "VIEW",   "SHARE" },
 }
-local function criarPagina()
-  local p = Instance.new("Frame"); p.Name = "ComoJogar"; p.Size = UDim2.fromScale(1, 1); p.BackgroundColor3 = Color3.fromRGB(28, 18, 10); p.BackgroundTransparency = .08; p.ZIndex = 10; p.Parent = gui
-  local caixa = Instance.new("Frame"); caixa.AnchorPoint = Vector2.new(.5, .5); caixa.Position = UDim2.fromScale(.5, .5); caixa.Size = UDim2.fromScale(.92, .9); caixa.BackgroundColor3 = Color3.fromRGB(138, 90, 50); caixa.ZIndex = 11; caixa.Parent = p
-  local borda = Instance.new("UIStroke"); borda.Color = Color3.fromRGB(74, 46, 24); borda.Thickness = 4; borda.Parent = caixa
-  local canto = Instance.new("UICorner"); canto.CornerRadius = UDim.new(0, 6); canto.Parent = caixa
-  local titulo = Instance.new("TextLabel"); titulo.Size = UDim2.new(1, 0, .1, 0); titulo.BackgroundTransparency = 1; titulo.FontFace = PIXEL; titulo.TextScaled = true; titulo.TextColor3 = Color3.fromRGB(255, 233, 168); titulo.Text = "COMO JOGAR"; titulo.ZIndex = 12; titulo.Parent = caixa
-  local colunas = { "AÇÃO", "PC", "XBOX", "PLAYSTATION" }
-  local larg = { .3, .22, .24, .24 }
-  local x = .0
-  for c, nome in ipairs(colunas) do
-    local cab = Instance.new("TextLabel"); cab.Position = UDim2.fromScale(x, .11); cab.Size = UDim2.fromScale(larg[c], .06); cab.BackgroundColor3 = Color3.fromRGB(74, 46, 24); cab.FontFace = PIXEL; cab.TextScaled = true; cab.TextColor3 = Color3.fromRGB(242, 201, 76); cab.Text = nome; cab.ZIndex = 12; cab.Parent = caixa
-    for i, a in ipairs(ACOES) do
-      local t = Instance.new("TextLabel"); t.Position = UDim2.fromScale(x, .17 + (i - 1) * .063); t.Size = UDim2.fromScale(larg[c], .06)
-      t.BackgroundColor3 = i % 2 == 0 and Color3.fromRGB(122, 78, 42) or Color3.fromRGB(150, 100, 58); t.BorderSizePixel = 0
-      t.Font = c == 1 and Enum.Font.Arcade or Enum.Font.GothamBold; t.TextScaled = true; t.TextColor3 = Color3.fromRGB(255, 246, 220); t.Text = a[c]; t.ZIndex = 12; t.Parent = caixa
-      local pad = Instance.new("UIPadding"); pad.PaddingLeft = UDim.new(0, 6); pad.PaddingRight = UDim.new(0, 6); pad.Parent = t
-    end
-    x = x + larg[c]
+local CORES = {
+  xbox = { A = Color3.fromRGB(96, 176, 64), B = Color3.fromRGB(210, 64, 56), X = Color3.fromRGB(56, 120, 220), Y = Color3.fromRGB(232, 190, 40) },
+  ps = { ["✕"] = Color3.fromRGB(110, 150, 230), ["○"] = Color3.fromRGB(230, 90, 90), ["□"] = Color3.fromRGB(220, 120, 200), ["△"] = Color3.fromRGB(70, 190, 160) },
+}
+local function aparelho()
+  local ultimo = UIS:GetLastInputType()
+  local controle = ultimo.Name:match("^Gamepad") ~= nil or (UIS.GamepadEnabled and not UIS.KeyboardEnabled and not UIS.TouchEnabled)
+  if controle then
+    local nome = ""
+    pcall(function() nome = UIS:GetStringForKeyCode(Enum.KeyCode.ButtonA) .. UIS:GetStringForKeyCode(Enum.KeyCode.ButtonX) end)
+    if nome:match("Cross") or nome:match("Square") then return "ps" end
+    return "xbox"
   end
-  local rodape = Instance.new("TextLabel"); rodape.Position = UDim2.fromScale(0, .93); rodape.Size = UDim2.fromScale(1, .06); rodape.BackgroundTransparency = 1; rodape.FontFace = PIXEL; rodape.TextScaled = true; rodape.TextColor3 = Color3.fromRGB(255, 233, 168)
-  rodape.Text = N.toque and "No celular, use os botões do próprio jogo. Toque para jogar." or "Aperte qualquer tecla ou botão para jogar"; rodape.ZIndex = 12; rodape.Parent = caixa
-  return p
+  if UIS.TouchEnabled and not UIS.KeyboardEnabled then return "toque" end
+  return "pc"
 end
-paginaControles = criarPagina()
--- botão "?" para abrir a página de novo
+local guia
+local function botaoDesenho(pai, texto, tipo)
+  -- tecla do PC (tecla de madeira), botão redondo colorido (A B X Y / ✕ ○ □ △) ou gatilho/ombro (retângulo)
+  local f = Instance.new("TextLabel"); f.BorderSizePixel = 0; f.ZIndex = 13; f.Text = texto; f.TextScaled = true; f.FontFace = PIXEL; f.Parent = pai
+  local canto = Instance.new("UICorner"); canto.Parent = f
+  local cor = CORES[tipo] and CORES[tipo][texto]
+  if cor then f.Size = UDim2.fromScale(.11, .9); f.SizeConstraint = Enum.SizeConstraint.RelativeYY; f.BackgroundColor3 = Color3.fromRGB(34, 30, 28); f.TextColor3 = cor; canto.CornerRadius = UDim.new(1, 0)
+    local borda = Instance.new("UIStroke"); borda.Color = cor; borda.Thickness = 2; borda.Parent = f
+  elseif tipo == "pc" then f.Size = UDim2.fromScale(math.max(.12, #texto * .035), .85); f.BackgroundColor3 = Color3.fromRGB(242, 226, 190); f.TextColor3 = Color3.fromRGB(60, 36, 18); canto.CornerRadius = UDim.new(0, 4)
+    local borda = Instance.new("UIStroke"); borda.Color = Color3.fromRGB(120, 80, 40); borda.Thickness = 2; borda.Parent = f
+  else f.Size = UDim2.fromScale(math.max(.12, #texto * .04), .8); f.BackgroundColor3 = Color3.fromRGB(46, 42, 40); f.TextColor3 = Color3.fromRGB(240, 236, 228); canto.CornerRadius = UDim.new(0, 8) end
+  local pad = Instance.new("UIPadding"); pad.PaddingLeft = UDim.new(0, 4); pad.PaddingRight = UDim.new(0, 4); pad.Parent = f
+  return f
+end
+local function mostrarGuia(tipo)
+  if guia then guia:Destroy(); guia = nil end
+  tipo = tipo or aparelho()
+  if tipo == "toque" then return end
+  local coluna = tipo == "pc" and 2 or tipo == "xbox" and 3 or 4
+  local titulo = tipo == "pc" and "TECLADO E MOUSE" or tipo == "xbox" and "CONTROLE DE XBOX" or "CONTROLE DE PLAYSTATION"
+  local p = Instance.new("Frame"); p.Name = "Guia"; p.Size = UDim2.fromScale(1, 1); p.BackgroundColor3 = Color3.fromRGB(20, 14, 8); p.BackgroundTransparency = .1; p.ZIndex = 10; p.Parent = gui
+  local caixa = Instance.new("Frame"); caixa.AnchorPoint = Vector2.new(.5, .5); caixa.Position = UDim2.fromScale(.5, .5); caixa.Size = UDim2.fromScale(.9, .9); caixa.BackgroundColor3 = Color3.fromRGB(138, 90, 50); caixa.ZIndex = 11; caixa.Parent = p
+  local prop = Instance.new("UIAspectRatioConstraint"); prop.AspectRatio = 16 / 9; prop.Parent = caixa
+  local b1 = Instance.new("UIStroke"); b1.Color = Color3.fromRGB(74, 46, 24); b1.Thickness = 5; b1.Parent = caixa
+  local c1 = Instance.new("UICorner"); c1.CornerRadius = UDim.new(0, 10); c1.Parent = caixa
+  -- tábuas de madeira no fundo
+  for k = 0, 5 do local t = Instance.new("Frame"); t.BorderSizePixel = 0; t.Position = UDim2.fromScale(0, k / 6); t.Size = UDim2.new(1, 0, 0, 2); t.BackgroundColor3 = Color3.fromRGB(100, 64, 34); t.ZIndex = 11; t.Parent = caixa end
+  local t1 = Instance.new("TextLabel"); t1.BackgroundTransparency = 1; t1.Position = UDim2.fromScale(.04, .03); t1.Size = UDim2.fromScale(.92, .09); t1.FontFace = PIXEL; t1.TextScaled = true; t1.TextColor3 = Color3.fromRGB(255, 233, 168); t1.Text = "GUIA · " .. titulo; t1.ZIndex = 12; t1.Parent = caixa
+  local t2 = Instance.new("TextLabel"); t2.BackgroundTransparency = 1; t2.Position = UDim2.fromScale(.04, .12); t2.Size = UDim2.fromScale(.92, .05); t2.Font = Enum.Font.GothamBold; t2.TextScaled = true; t2.TextColor3 = Color3.fromRGB(250, 236, 200)
+  t2.Text = tipo == "pc" and "Também vale: setas para andar, Shift para o dash e Enter para falar." or "As setas do direcional também andam e escolhem nos menus."; t2.ZIndex = 12; t2.Parent = caixa
+  for i, a in ipairs(ACOES) do
+    local col = (i - 1) % 2; local lin = math.floor((i - 1) / 2)
+    local linha = Instance.new("Frame"); linha.BackgroundColor3 = lin % 2 == 0 and Color3.fromRGB(150, 100, 58) or Color3.fromRGB(122, 78, 42); linha.BorderSizePixel = 0
+    linha.Position = UDim2.fromScale(.04 + col * .47, .2 + lin * .115); linha.Size = UDim2.fromScale(.45, .1); linha.ZIndex = 12; linha.Parent = caixa
+    local cl = Instance.new("UICorner"); cl.CornerRadius = UDim.new(0, 6); cl.Parent = linha
+    local lista = Instance.new("UIListLayout"); lista.FillDirection = Enum.FillDirection.Horizontal; lista.VerticalAlignment = Enum.VerticalAlignment.Center; lista.Padding = UDim.new(0, 8); lista.Parent = linha
+    local pad = Instance.new("UIPadding"); pad.PaddingLeft = UDim.new(0, 8); pad.Parent = linha
+    botaoDesenho(linha, a[coluna], tipo)
+    local nome = Instance.new("TextLabel"); nome.BackgroundTransparency = 1; nome.Size = UDim2.fromScale(.7, .7); nome.Font = Enum.Font.GothamBold; nome.TextScaled = true; nome.TextXAlignment = Enum.TextXAlignment.Left
+    nome.TextColor3 = Color3.fromRGB(255, 246, 220); nome.Text = a[1]; nome.ZIndex = 13; nome.Parent = linha
+  end
+  local rod = Instance.new("TextLabel"); rod.BackgroundTransparency = 1; rod.Position = UDim2.fromScale(.04, .91); rod.Size = UDim2.fromScale(.92, .06); rod.FontFace = PIXEL; rod.TextScaled = true; rod.TextColor3 = Color3.fromRGB(255, 233, 168)
+  rod.Text = tipo == "pc" and "APERTE QUALQUER TECLA PARA JOGAR" or "APERTE QUALQUER BOTÃO PARA JOGAR"; rod.ZIndex = 12; rod.Parent = caixa
+  guia = p
+end
+paginaControles = setmetatable({}, { __index = function(_, k) if k == "Visible" then return guia ~= nil end end,
+  __newindex = function(_, k, v) if k == "Visible" then if v then mostrarGuia() elseif guia then guia:Destroy(); guia = nil end end end })
+mostrarGuia()
+-- se o jogador trocar de aparelho (ligar um controle, por exemplo), mostra o guia do aparelho novo uma vez
+local jaMostrado = { [aparelho()] = true }
+UIS.LastInputTypeChanged:Connect(function()
+  local a = aparelho()
+  if not jaMostrado[a] and a ~= "toque" then jaMostrado[a] = true; task.defer(mostrarGuia, a) end
+end)
+-- botão "?" para abrir o guia de novo
 local ajuda = Instance.new("TextButton"); ajuda.AnchorPoint = Vector2.new(1, 1); ajuda.Position = UDim2.new(1, -8, 1, -8); ajuda.Size = UDim2.fromOffset(34, 34)
 ajuda.BackgroundColor3 = Color3.fromRGB(138, 90, 50); ajuda.FontFace = PIXEL; ajuda.TextSize = 16; ajuda.TextColor3 = Color3.fromRGB(255, 233, 168); ajuda.Text = "?"; ajuda.ZIndex = 9; ajuda.Parent = fundo
-ajuda.Activated:Connect(function() paginaControles.Visible = true end)
+ajuda.Visible = not N.toque
+ajuda.Activated:Connect(function() mostrarGuia() end)
 
 -- ===== laço principal: avança o jogo, desenha a página e copia para a imagem =====
 local writeu32 = buffer.writeu32

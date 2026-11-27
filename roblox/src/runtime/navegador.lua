@@ -78,7 +78,7 @@ function N.passo(ms)
   if N.aoPasso then N.aoPasso() end
 end
 -- as promessas do conversor (lualib) resolvem na hora; nada a fazer aqui, mas o gancho fica
-function N.microtarefas() end
+function N.microtarefas() if N.avisarObservadores then N.avisarObservadores() end end
 
 -- console --------------------------------------------------------------------------------------------------
 local function juntar(...) local t = {}; for i = 1, select("#", ...) do t[i] = str((select(i, ...))) end; return table.concat(t, " ") end
@@ -837,7 +837,25 @@ CRIAR.Image = function(w, h)
   return img
 end
 CRIAR.Audio = function(src) local a = criarElemento("audio"); if src then a._attr.src = str(src) end; rawset(a, "paused", true); rawset(a, "volume", 1); rawset(a, "currentTime", 0); rawset(a, "loop", false); rawset(a, "muted", false); rawset(a, "readyState", 4); return a end
-CRIAR.MutationObserver = function(cb) return { observe = function() end, disconnect = function() end, takeRecords = function() return lista({}) end } end
+-- MutationObserver: avisa o jogo quando a página mudou (o jogo usa para trocar telas e classes)
+local observadores = setmetatable({}, { __mode = "k" })
+CRIAR.MutationObserver = function(cb)
+  local o = { _alvos = {}, _versao = versaoDom }
+  o.observe = function(_, alvo, op) if alvo then o._alvos[#o._alvos + 1] = { alvo = alvo, op = op or {} }; o._versao = versaoDom; observadores[o] = cb end end
+  o.disconnect = function() o._alvos = {}; observadores[o] = nil end
+  o.takeRecords = function() return lista({}) end
+  return o
+end
+function N.avisarObservadores()
+  for o, cb in pairs(observadores) do
+    if o._versao ~= versaoDom and #o._alvos > 0 then
+      o._versao = versaoDom
+      local regs = {}
+      for _, a in ipairs(o._alvos) do regs[#regs + 1] = { type = (a.op.attributes or a.op.attributeFilter) and "attributes" or "childList", target = a.alvo, attributeName = a.op.attributeFilter and JS.__get(a.op.attributeFilter, 0) or nil, addedNodes = lista({}), removedNodes = lista({}) } end
+      chamar("MutationObserver", cb, nil, lista(regs, #regs), o)
+    end
+  end
+end
 CRIAR.ResizeObserver = function(cb) return { observe = function() end, unobserve = function() end, disconnect = function() end } end
 CRIAR.IntersectionObserver = CRIAR.ResizeObserver
 CRIAR.AbortController = function() local s = { aborted = false }; s.addEventListener = function() end; local c = { signal = s }; c.abort = function() s.aborted = true; for _, f in ipairs(s._ouvintes or {}) do f() end end; return c end
@@ -942,6 +960,7 @@ function N.tecla(tipo, code, key, repetida)
     shiftKey = teclasPresas.ShiftLeft or teclasPresas.ShiftRight or false, ctrlKey = false, altKey = false, metaKey = false, isComposing = false })
   if tipo == "keydown" then teclasPresas[code] = true else teclasPresas[code] = nil end
   despachar(alvo, ev)
+  N.microtarefas()
   -- digitação em <input>/<textarea> com foco (o navegador faria sozinho)
   if tipo == "keydown" and not ev.defaultPrevented and alvo ~= body and (alvo._tag == "input" or alvo._tag == "textarea") then
     local v = tostring(GET.value(alvo) or "")

@@ -133,7 +133,10 @@
   function cake(c,x,y,scale=1){c.save();c.translate(Math.round(x),Math.round(y));c.scale(scale,scale);if(window.Art?.drawCake)Art.drawCake(c,0,0);else{rect(c,-24,-28,48,28,'#78503c');rect(c,-26,-32,52,9,'#b98b65');}c.restore();}
   function bench(c,x,y){rect(c,x-116,y-40,232,10,'#79573d');rect(c,x-116,y-75,232,11,'#a37a4c');rect(c,x-116,y-59,232,10,'#bd945c');rect(c,x-105,y-37,11,37,'#4c5040');rect(c,x+94,y-37,11,37,'#4c5040');}
   function table(c,x,y){rect(c,x-70,y-41,140,12,'#77503b');rect(c,x-74,y-47,148,9,'#d0a16c');rect(c,x-61,y-29,11,53,'#71513b');rect(c,x+50,y-29,11,53,'#71513b');}
-  function backdrop(c,state,scene=0,camera=0){if(window.Art?.drawScene)Art.drawScene(c,scene,camera+Math.round(Math.sin(state.time*.35)*8),state.time*.7+state.index*2);else{rect(c,0,0,960,540,'#8bc4e4');}rect(c,0,0,960,540,state.kind==='intro'&&state.index<2?'#f4d5a414':'#0e29191c');rect(c,0,374,960,50,'#687a43');rect(c,0,374,960,5,'#b7c974');for(let i=0;i<25;i++)rect(c,i*43-12,391+(i%3)*7,19,3,'#7d8d4a');}
+  // O chão de verdade do cenário fica em y=440; os personagens das cenas foram posicionados para y=378.
+  // Em vez da faixa verde lisa antiga (que não combinava com o cenário), o fundo desce os personagens até o chão do cenário.
+  const PISO_CINE=62;let pisoAplicado=false;
+  function backdrop(c,state,scene=0,camera=0){if(pisoAplicado){c.translate(0,-PISO_CINE);pisoAplicado=false;}if(window.Art?.drawScene)Art.drawScene(c,scene,camera+Math.round(Math.sin(state.time*.35)*8),state.time*.7+state.index*2);else{rect(c,0,0,960,540,'#8bc4e4');}rect(c,0,0,960,540,state.kind==='intro'&&state.index<2?'#f4d5a414':'#0e29191c');c.translate(0,PISO_CINE);pisoAplicado=true;}
   function stomach(c,x,y,t){const pulse=Math.sin(t*11)*4;line(c,[[x-27,y],[x-33-pulse,y-5],[x-28,y-13]],3,'#edc96f');line(c,[[x+27,y],[x+33+pulse,y-5],[x+28,y-13]],3,'#edc96f');if(Math.sin(t*4)>.1)word(c,'GRRRR…',x,y-37,14,'#ffe296');}
   function intro(c,s){const t=s.time,i=s.index;backdrop(c,s,i===1?1:0,i===1?180:0);
     if(i===0){bench(c,470,390);const e=ease(t/1.1);actor(c,'daroca',330+e*60,378,t,{facing:1,moving:t<1.1,speed:t<1.1?80:0,pose:t>=1.1?'fistbump':undefined,emotion:'friend'});actor(c,'nikolas',590-e*80,378,t,{facing:-1,moving:t<1.1,speed:t<1.1?80:0,pose:t>=1.1?'fistbump':undefined,emotion:'friend'});if(t>1.1)sparkle(c,450,301,t,2);heart(c,460,220+Math.sin(t*2)*4,1.3,false,t);}
@@ -422,7 +425,7 @@
     if(!c||!s)return;if(isEpilogue(s)){if(window.JorgeEpilogue)JorgeEpilogue.draw(c,s);else{c.fillStyle='#000';c.fillRect(0,0,960,540);}return;}c.save();c.imageSmoothingEnabled=false;c.clearRect(0,0,960,540);
     rect(c,0,0,960,540,s.kind==='boss_giant'?'#25263b':s.kind==='boss_nicolas'&&s.index>=2?'#223647':'#8ec7e1');
     c.save();c.translate(Math.round(Math.sin(s.time*.4)*4),30);
-    if(s.kind==='outro')outro(c,s);else if(EXTRA[s.kind])bossFilm(c,s);else intro(c,s);
+    pisoAplicado=false;if(s.kind==='outro')outro(c,s);else if(EXTRA[s.kind])bossFilm(c,s);else intro(c,s);
     c.restore();
     // Small cinema rails replace the former 127px opaque dialogue slab.
     rect(c,0,0,960,24,'#10241ff0');rect(c,0,520,960,20,'#10241fe0');

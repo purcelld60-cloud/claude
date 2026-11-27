@@ -656,12 +656,18 @@ local __O = {};
             "#71513b"
         )
     end
+    local PISO_CINE = 62
+    local pisoAplicado = false
     local function backdrop(self, c, state, scene, camera)
         if scene == nil then
             scene = 0
         end
         if camera == nil then
             camera = 0
+        end
+        if __t(pisoAplicado) then
+            c:translate(0, -PISO_CINE)
+            pisoAplicado = false
         end
         local ____t_8 = __t
         local ____opt_6 = window.Art
@@ -695,39 +701,8 @@ local __O = {};
             540,
             if __t(state.kind == "intro" and __lt(state.index, 2)) then "#f4d5a414" else "#0e29191c"
         )
-        rect(
-            nil,
-            c,
-            0,
-            374,
-            960,
-            50,
-            "#687a43"
-        )
-        rect(
-            nil,
-            c,
-            0,
-            374,
-            960,
-            5,
-            "#b7c974"
-        )
-        do
-            local i = 0
-            while i < 25 do
-                rect(
-                    nil,
-                    c,
-                    i * 43 - 12,
-                    391 + __mod(i, 3) * 7,
-                    19,
-                    3,
-                    "#7d8d4a"
-                )
-                i = i + 1
-            end
-        end
+        c:translate(0, PISO_CINE)
+        pisoAplicado = true
     end
     local function stomach(self, c, x, y, t)
         local pulse = math.sin(t * 11) * 4
@@ -5186,6 +5161,7 @@ local __O = {};
             math.floor(math.sin(s.time * 0.4) * 4 + 0.5),
             30
         )
+        pisoAplicado = false
         if s.kind == "outro" then
             outro(nil, c, s)
         elseif __t(__get(EXTRA, s.kind)) then
