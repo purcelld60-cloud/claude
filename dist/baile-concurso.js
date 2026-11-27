@@ -10,7 +10,9 @@
   const TECLAS = { ArrowLeft: 0, KeyA: 0, ArrowDown: 1, KeyS: 1, ArrowUp: 2, KeyW: 2, ArrowRight: 3, KeyD: 3 };
   const R = (c, x, y, w, h, cor) => { c.fillStyle = cor; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); };
   const lx = (i) => 300 + i * 40;
-  let box = null, cv = null, ctx = null, raf = 0, jogo = null, aoFim = null, audio = null;
+  let box = null, cv = null, ctx = null, raf = 0, jogo = null, aoFim = null, audio = null, cfg = {};
+  // o mesmo motor serve para outras disputas no ritmo (ex.: a batalha de rima do Freddy): cfg muda título, rival, prêmio e versos
+  const PADRAO = { titulo: 'CONCURSO DA FANTASIA', rival: 'mc_batidao', premio: 'DA JEGUE', premioLook: 'dajegue', ganhou: 'O BAILE GRITOU: DA JEGUE!', perdeu: 'FALTOU POUCO!', versos: null };
 
   function mapa() { // o "tamborzão": notas nos tempos e contratempos, com trilhas que dançam em padrões
     const notas = []; let seed = 7; const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
@@ -47,16 +49,17 @@
     const g = c.createLinearGradient(0, 0, 0, LH); g.addColorStop(0, '#0a0618'); g.addColorStop(1, '#2a1438'); c.fillStyle = g; c.fillRect(0, 0, LW, LH);
     // palco do concurso: feixes, telão e o prêmio no manequim
     c.save(); c.globalCompositeOperation = 'lighter'; for (let i = 0; i < 5; i++) { const x = 30 + i * 55, a = Math.sin(t * .9 + i) * .4; c.globalAlpha = .12; c.fillStyle = CORES[(i + beat) % 4]; c.beginPath(); c.moveTo(x, 0); c.lineTo(x + Math.sin(a) * 260 - 30, 230); c.lineTo(x + Math.sin(a) * 260 + 30, 230); c.closePath(); c.fill(); } c.restore();
-    R(c, 20, 18, 230, 26, '#120e1e'); c.strokeStyle = '#ff4fa8'; c.lineWidth = 1; c.strokeRect(20.5, 18.5, 229, 25); c.font = 'bold 12px monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#ffd24a'; c.fillText('CONCURSO DA FANTASIA', 135, 31);
+    R(c, 20, 18, 230, 26, '#120e1e'); c.strokeStyle = '#ff4fa8'; c.lineWidth = 1; c.strokeRect(20.5, 18.5, 229, 25); c.font = 'bold 12px monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#ffd24a'; c.fillText(cfg.titulo, 135, 31);
     R(c, 0, 230, 280, 40, '#1a1428'); for (let x = 0; x < 280; x += 20) R(c, x, 230, 19, 4, (x / 20 + beat) % 3 ? '#2a2040' : CORES[(x / 20 + beat) % 4]);
     try {
-      window.Art?.drawCharacter?.(c, 'mc_batidao', 52, 230, { frame: t * 2, facing: 1, grounded: true, scale: .9 });
+      window.Art?.drawCharacter?.(c, cfg.rival, 52, 230, { frame: t * 2, facing: 1, grounded: true, scale: .9, attack: cfg.versos && Math.floor(t / (BEAT * 8)) % 2 === 0, attackProgress: (t % BEAT) / BEAT });
       const pula = Math.abs(Math.sin(t * Math.PI / BEAT)) * 6 + jogo.pulo * 14;
       window.Art?.drawCharacter?.(c, 'daroca', 138, 230 - pula, { frame: t * 2.2, facing: beat % 2 ? 1 : -1, moving: true, grounded: pula < 2, scale: 1 });
-      R(c, 212, 160, 4, 70, '#8a7a5a'); R(c, 200, 228, 28, 4, '#6a5a3a');
-      window.Art?.drawCharacter?.(c, 'daroca', 214, 226, { frame: 0, facing: -1, grounded: true, scale: .82, look: { costume: 'dajegue', hat: 'palha', hatColor: '#c0392b', hairStyle: 'curto', hairColor: '#5f4934', shirt: '#dc8c47', shirtLight: '#e7ac65', pants: '#455b62' } });
+      if (cfg.premioLook) { R(c, 212, 160, 4, 70, '#8a7a5a'); R(c, 200, 228, 28, 4, '#6a5a3a');
+      window.Art?.drawCharacter?.(c, 'daroca', 214, 226, { frame: 0, facing: -1, grounded: true, scale: .82, look: { costume: cfg.premioLook, hat: 'palha', hatColor: '#c0392b', hairStyle: 'curto', hairColor: '#5f4934', shirt: '#dc8c47', shirtLight: '#e7ac65', pants: '#455b62' } }); }
     } catch (e) {}
-    c.font = 'bold 8px monospace'; c.fillStyle = '#ffd24a'; c.fillText('PRÊMIO: DA JEGUE', 214, 246);
+    c.font = 'bold 8px monospace'; c.fillStyle = '#ffd24a'; if (cfg.premio) c.fillText('PRÊMIO: ' + cfg.premio, 214, 246);
+    if (cfg.versos) { const i = Math.floor(Math.max(0, t) / (BEAT * 8)), seu = i % 2 === 1, v = cfg.versos[i % cfg.versos.length]; R(c, 14, 54, 252, 30, 'rgba(10,6,20,.75)'); c.font = 'bold 9px monospace'; c.textAlign = 'left'; c.fillStyle = seu ? '#7af0ff' : '#ff9ad0'; c.fillText((seu ? 'DA ROÇA: ' : 'FREDDY: ') + v[0], 20, 64); c.fillStyle = '#f2f2ea'; c.fillText(v[1], 20, 76); c.textAlign = 'center'; }
     for (let k = 0; k < 14; k++) { const x = 8 + k * 20, y = 262 - Math.abs(Math.sin(t * 4 + k)) * 5; c.fillStyle = '#05030a'; c.beginPath(); c.arc(x, y, 7, 0, Math.PI * 2); c.fill(); R(c, x - 8, y + 3, 16, 10, '#05030a'); }
     // trilhas
     for (let i = 0; i < 4; i++) { R(c, lx(i) - 15, 0, 30, LH, 'rgba(10,6,20,.6)'); R(c, lx(i) - 16, LINHA - 2, 32, 4, jogo.trilha[i] > 0 ? CORES[i] : '#3a2a4a'); seta(lx(i), LINHA, i, jogo.trilha[i] > 0 ? '#ffffff' : '#5a4a6a', 1); }
@@ -66,7 +69,7 @@
     if (jogo.msgT > 0) { c.font = 'bold 14px monospace'; c.fillStyle = jogo.msg === 'FORA DO RITMO' ? '#ff5a4a' : '#7af07a'; c.fillText(jogo.msg, 360, 130); }
     const prog = Math.min(1, t / DURACAO); R(c, 290, 262, 160, 4, '#2a2040'); R(c, 290, 262, 160 * prog, 4, '#ff4fa8');
     if (jogo.t < 2) { c.font = 'bold 16px monospace'; c.fillStyle = '#ffffff'; c.fillText(jogo.t < 1 ? 'PREPARA...' : 'VAI!', 360, 100); }
-    if (jogo.fim) { R(c, 0, 100, LW, 60, 'rgba(0,0,0,.7)'); c.font = 'bold 18px monospace'; c.fillStyle = pct >= META ? '#7af07a' : '#ffd24a'; c.fillText(pct >= META ? `NOTA ${pct}%! O BAILE GRITOU: DA JEGUE!` : `NOTA ${pct}%. FALTOU POUCO!`, LW / 2, 130); }
+    if (jogo.fim) { R(c, 0, 100, LW, 60, 'rgba(0,0,0,.7)'); c.font = 'bold 18px monospace'; c.fillStyle = pct >= META ? '#7af07a' : '#ffd24a'; c.fillText(pct >= META ? `NOTA ${pct}%! ${cfg.ganhou}` : `NOTA ${pct}%. FALTOU POUCO!`, LW / 2, 130); }
   }
   function seta(x, y, i, cor, esc) {
     const c = ctx; c.save(); c.translate(Math.round(x), Math.round(y)); c.scale(esc, esc); c.rotate([Math.PI, Math.PI / 2, -Math.PI / 2, 0][i]);
@@ -89,7 +92,7 @@
     document.body.append(box); addEventListener('keydown', tecla, true);
   }
   function abrir(o = {}) {
-    if (box) return false; aoFim = o.onFim || null; montar(); jogo = { t: -1, notas: mapa(), combo: 0, melhorCombo: 0, msg: '', msgT: 0, pulo: 0, trilha: [0, 0, 0, 0], fim: false, ultimo: 0 };
+    if (box) return false; aoFim = o.onFim || null; cfg = { ...PADRAO, ...(o.config || {}) }; montar(); jogo = { t: -1, notas: mapa(), combo: 0, melhorCombo: 0, msg: '', msgT: 0, pulo: 0, trilha: [0, 0, 0, 0], fim: false, ultimo: 0 };
     window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: true } })); cancelAnimationFrame(raf); raf = requestAnimationFrame(quadro); return true;
   }
   function fechar(ok, pct, desistiu = false) {

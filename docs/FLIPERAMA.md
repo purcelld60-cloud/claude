@@ -11,7 +11,7 @@ Minigames 2D em pixel art, para jogar sozinho ou em dupla no mesmo aparelho. O c
 
 Enquanto o fliperama está aberto, a campanha fica parada e o cronômetro não conta. O progresso do fliperama fica salvo só neste aparelho (`daroca-fliperama-v1`) e não muda o save da campanha.
 
-## Os 10 minigames
+## Os 11 minigames
 
 | Jogo | Inspirado em | Sozinho | Dupla |
 | --- | --- | --- | --- |
@@ -25,6 +25,7 @@ Enquanto o fliperama está aberto, a campanha fica parada e o cronômetro não c
 | Tiro ao Alvo no Açude | tiro ao alvo | 60 s; lata, balão, pato e galinha dourada; a vaca tira pontos | contra: cada um com sua mira |
 | Corrida da Estradinha | corrida | estrada de terra vista de cima; turbo gasta gás, galões reabastecem | contra: estradas iguais lado a lado, chegada em 2500 m |
 | Subida do Morro | plataforma | pule de laje em laje antes da lama subir; telhas quebram e varais andam | juntos: vidas em comum, quem cai volta ao lado do parceiro |
+| Igor Comilão | achar e entregar (referência ao Igor da campanha) | 75 s para catar comida nas bancas da feira e enfiar na boca do Igor; combo por entregas seguidas; meia, pedra e pimenta deixam ele bravo; a barriga esvazia | juntos: todo mundo alimenta o mesmo Igor |
 
 No celular, as cartas da memória e os alvos do tiro também podem ser tocados direto na tela.
 

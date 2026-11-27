@@ -553,6 +553,78 @@
     }
   });
 
+  // 11. IGOR COMILÃO (referência ao Igor da campanha, o da barriga): ache a comida na feira e enfie na boca dele antes do tempo acabar
+  const COMIDAS = [['COXINHA', '#d88a3a', '#f2b860'], ['PASTEL', '#e8c060', '#fff0a8'], ['ACARAJÉ', '#c8602a', '#f2a050'], ['CACAU', '#c8742a', '#f2c060'], ['PÃO DE QUEIJO', '#e8c070', '#fff2c0'], ['BANANA', '#f2d040', '#fff6a0'], ['AÇAÍ', '#5a1a5a', '#9a3a8a']];
+  const RUINS = [['MEIA FEDIDA', '#e8e8e0', '#9aa0a6'], ['PEDRA', '#7a7a7a', '#a8a8a8'], ['PIMENTA', '#d8242c', '#ff7a6a']];
+  GAMES.push({
+    id: 'igor', name: 'IGOR COMILÃO', sub: 'Ache a comida na feira e enche a barriga do Igor.', color: '#f0a050', duo: 'coop', max: 4, medals: [1200, 2600, 4200],
+    rules: ['Corra e pule pelas bancas para pegar a comida (só cabe uma na mão).', 'Leve até a boca do Igor, no canto direito. Entregas seguidas fazem combo.', 'Cuidado: meia, pedra e pimenta deixam o Igor bravo e gastam a fome.', 'A barriga vai esvaziando: se a fome zerar ou o tempo acabar, fim.'],
+    rulesDuo: ['Todo mundo alimenta o mesmo Igor e soma os pontos.', 'Cada um carrega uma comida por vez.', 'Combine quem busca em cima e quem busca embaixo!'],
+    controls: ['Esquerda e direita: correr', 'A: pular', 'B: largar o que está na mão'],
+    init(st) {
+      st.pl = (st.mode === 'duo' ? [[120, 200], [90, 170, 250], [70, 140, 210, 280]][NP(st) - 2] : [160]).map((x, i) => ({ x, y: 0, vy: 0, face: 1, i, mao: null }));
+      st.bancas = [{ x: 40, y: 196, w: 90 }, { x: 170, y: 164, w: 100 }, { x: 60, y: 120, w: 80 }, { x: 250, y: 108, w: 90 }, { x: 150, y: 70, w: 70 }];
+      st.itens = []; st.vem = .4; st.tempo = 75; st.fome = 1; st.combo = 0; st.comboT = 0; st.come = 0; st.bravo = 0; st.comeu = 0; st.migalha = [];
+    },
+    novo(st) { const lugares = [{ x: rnd(20, 320), y: 248 }, ...st.bancas.map((b) => ({ x: rnd(b.x + 8, b.x + b.w - 8), y: b.y }))], L = lugares[irnd(0, lugares.length - 1)], ruim = Math.random() < .22;
+      const tipo = ruim ? RUINS[irnd(0, RUINS.length - 1)] : COMIDAS[irnd(0, COMIDAS.length - 1)]; st.itens.push({ x: L.x, y: L.y, tipo, ruim, vida: 9 + rnd(0, 4), pisca: 0 }); },
+    chao(st, p) { const py = 248 - p.y; for (const b of st.bancas) if (p.vy <= 0 && p.x > b.x - 4 && p.x < b.x + b.w + 4 && Math.abs(py - b.y) <= 4) return 248 - b.y; return 0; },
+    update(st, dt) {
+      st.tempo -= dt; st.fome = Math.max(0, st.fome - dt * .018 * (1 + st.t / 90)); st.come = Math.max(0, st.come - dt); st.bravo = Math.max(0, st.bravo - dt); st.comboT -= dt; if (st.comboT <= 0) st.combo = 0;
+      st.vem -= dt; if (st.vem <= 0 && st.itens.length < 6) { st.vem = rnd(.7, 1.4); this.novo(st); }
+      for (const it of st.itens) { it.vida -= dt; }
+      st.itens = st.itens.filter((it) => it.vida > 0 || it.mao);
+      st.pl.forEach((p) => { const i = p.i; p.x = clamp(p.x + P[i].x * 160 * dt, 10, 372); if (P[i].x) p.face = P[i].x;
+        const base = this.chao(st, p); if (P[i].ap && (p.y === base || p.y === 0)) { p.vy = 260; sfx('bounce'); }
+        p.vy -= 640 * dt; const ny = p.y + p.vy * dt; let pouso = 0; for (const b of st.bancas) { const top = 248 - b.y; if (p.vy <= 0 && p.y >= top && ny <= top && p.x > b.x - 4 && p.x < b.x + b.w + 4) pouso = Math.max(pouso, top); } p.y = Math.max(pouso, ny); if (p.y === pouso) p.vy = Math.max(0, p.vy);
+        if (P[i].bp && p.mao) { st.itens.push({ ...p.mao, x: p.x, y: 248 - p.y, vida: 6 }); p.mao = null; }
+        if (!p.mao) { const k = st.itens.findIndex((it) => Math.abs(it.x - p.x) < 12 && Math.abs(it.y - (248 - p.y)) < 16); if (k >= 0) { p.mao = st.itens[k]; st.itens.splice(k, 1); sfx('pick'); } }
+        if (p.mao && p.x > 352 && p.y < 120) { const it = p.mao; p.mao = null; // entregou na boca do Igor
+          if (it.ruim) { st.bravo = 1.2; st.fome = Math.max(0, st.fome - .15); st.combo = 0; sfx('hit'); st.shake = .3; st.pop.push({ x: 410, y: 120, s: 'ECA! ' + it.tipo[0], t: 0 }); }
+          else { st.combo++; st.comboT = 4; st.come = .8; st.comeu++; st.fome = Math.min(1, st.fome + .12); const pts = 100 * Math.min(5, st.combo); st.score[0] += pts; sfx('power'); st.pop.push({ x: 410, y: 120, s: '+' + pts + (st.combo > 1 ? ' x' + st.combo : ''), t: 0 }); for (let k = 0; k < 8; k++) st.migalha.push({ x: 415 + rnd(-8, 8), y: 150, vx: rnd(-40, 40), vy: rnd(-60, -20), t: 0, cor: it.tipo[2] }); } } });
+      for (const m of st.migalha) { m.t += dt; m.x += m.vx * dt; m.vy += 300 * dt; m.y += m.vy * dt; } st.migalha = st.migalha.filter((m) => m.t < 1);
+      if (st.tempo <= 0 || st.fome <= 0) { sfx(st.fome <= 0 ? 'lose' : 'win'); st.end({ score: Math.round(st.score[0]), text: st.fome <= 0 ? `O Igor ficou com fome e foi embora. Comeu ${st.comeu} vezes.` : `Tempo! O Igor comeu ${st.comeu} vezes e pediu sobremesa.` }); }
+    },
+    drawLow(g, st) {
+      // feira coberta: lona listrada, varal de bandeirinhas e o piso de terra batida
+      for (let i = 0; i < 12; i++) R(g, 0, i * 6, LW, 6, i % 2 ? '#e8d8b0' : '#c84a3a'); R(g, 0, 72, LW, 178, '#f0e2c0'); for (let y = 76; y < 250; y += 12) R(g, 0, y, LW, 1, '#e2d0a8');
+      for (let k = 0; k < 24; k++) { const x = k * 20 + 4; R(g, x, 76 + (k % 2) * 2, 8, 6, ['#e86a8a', '#7ad1ff', '#ffd75a', '#8ad070'][k % 4]); }
+      R(g, 0, 248, LW, 22, '#9a7a52'); R(g, 0, 248, LW, 2, '#b89a6a'); for (let x = 0; x < LW; x += 14) R(g, x, 256 + (x % 28 ? 0 : 4), 6, 2, '#8a6a42');
+      for (const b of st.bancas) { R(g, b.x, b.y, b.w, 5, '#8a5a32'); R(g, b.x, b.y, b.w, 2, '#b8844e'); R(g, b.x + 3, b.y + 5, 3, 248 - b.y - 5, '#6a4224'); R(g, b.x + b.w - 6, b.y + 5, 3, 248 - b.y - 5, '#6a4224'); for (let x = b.x + 4; x < b.x + b.w - 6; x += 9) R(g, x, b.y - 4, 7, 4, ['#f2c94c', '#3c8a5a', '#e8433a', '#c8742a'][(x / 9 | 0) % 4]); }
+      // comida e porcaria espalhadas (piscam antes de sumir)
+      for (const it of st.itens) { if (it.vida < 2 && Math.floor(st.t * 10) % 2) continue; const [, c1, c2] = it.tipo, x = it.x, y = it.y - 6; R(g, x - 5, y - 4, 10, 8, '#2a1a10'); R(g, x - 4, y - 3, 8, 6, c1); R(g, x - 3, y - 3, 4, 2, c2); if (it.ruim) { R(g, x - 1, y - 9, 2, 3, '#7ad070'); R(g, x + 3, y - 11, 2, 3, '#7ad070'); } else { c_brilho(g, x, y, st.t); } }
+      // o Igor: rosto grande de boca aberta no canto direito
+      igorRosto(g, 424, 150, st);
+      for (const m of st.migalha) R(g, m.x, m.y, 2, 2, m.cor);
+      // barriga (fome) e o tempo
+      R(g, 8, 6, 124, 10, '#2a1a10'); R(g, 10, 8, 120 * st.fome, 6, st.fome > .35 ? '#7ad070' : '#e84a3a'); R(g, 10, 8, 120 * st.fome, 2, '#ffffff55');
+    },
+    drawMain(c, st) {
+      st.pl.forEach((p) => { hero(c, PLAYER_TYPES[p.i], p.x * 2, 500 - p.y * 2, { facing: p.face, moving: Math.abs(P[p.i].x) > 0, frame: st.t * 1.5, grounded: p.vy === 0 });
+        if (p.mao) { const [nome] = p.mao.tipo; txt(c, nome, p.x * 2, 500 - p.y * 2 - 110, 10, p.mao.ruim ? '#ff8a7a' : '#fff6c8'); } });
+      txt(c, 'BARRIGA', 140, 46, 10, '#2a1a10'); txt(c, 'PONTOS ' + Math.round(st.score[0]), W / 2, 18, 14); txt(c, '⏱ ' + Math.max(0, Math.ceil(st.tempo)), W - 300, 18, 14, st.tempo < 10 ? '#ff6a5a' : '#fffaf0', 'right');
+      if (st.combo > 1) txt(c, 'COMBO x' + st.combo, W / 2, 46, 12, '#ffd75a');
+    }
+  });
+  function c_brilho(g, x, y, t) { if (Math.floor(t * 4 + x) % 6 === 0) { R(g, x + 4, y - 6, 1, 3, '#ffffff'); R(g, x + 3, y - 5, 3, 1, '#ffffff'); } }
+  // retrato do Igor em pixel art: bochechas, franja, olhos arregalados e a boca que abre conforme a comida chega perto
+  function igorRosto(g, cx, cy, st) {
+    const perto = st.pl.some((p) => p.mao && p.x > 300), mastiga = st.come > 0, bravo = st.bravo > 0;
+    const abre = mastiga ? (Math.sin(st.t * 30) > 0 ? .25 : .7) : perto ? 1 : .55 + Math.sin(st.t * 3) * .1, pele = bravo ? '#e86a5a' : '#e7a079', sombra = bravo ? '#b8443a' : '#c07a58';
+    R(g, cx - 30, cy + 64, 60, 30, '#1a4a78'); R(g, cx - 34, cy + 70, 68, 30, '#287eb8'); R(g, cx - 8, cy + 64, 16, 8, '#f2f2ea'); // camisa azul
+    for (let y = -58; y <= 58; y++) { const w = Math.round(Math.sqrt(Math.max(0, 1 - (y / 60) ** 2)) * 50); R(g, cx - w - 2, cy + y, w * 2 + 4, 1, '#3a2418'); R(g, cx - w, cy + y, w * 2, 1, y > 20 ? sombra : pele); }
+    for (const s of [-1, 1]) { R(g, cx + s * 52 - 4, cy - 6, 8, 16, pele); R(g, cx + s * 52 - 2, cy - 2, 4, 8, sombra); } // orelhas
+    R(g, cx - 46, cy - 60, 92, 22, '#3a2418'); for (let k = 0; k < 9; k++) R(g, cx - 44 + k * 10, cy - 40 + (k % 2) * 4, 8, 6, '#3a2418'); R(g, cx - 40, cy - 58, 30, 3, '#5a3a28'); // franja
+    for (const s of [-1, 1]) { const ex = cx + s * 20; R(g, ex - 8, cy - 22, 16, 13, '#ffffff'); R(g, ex - 8, cy - 22, 16, 1, '#3a2418'); const ol = perto ? 2 : 0; R(g, ex - 3 + ol, cy - 19, 7, 8, '#3a2418'); R(g, ex - 2 + ol, cy - 18, 2, 2, '#ffffff');
+      R(g, ex - 10, cy - 30 - (bravo ? (s > 0 ? -3 : 3) : perto ? 4 : 0), 20, 3, '#3a2418'); ell2(g, ex + s * 6, cy + 8, 9, 5, bravo ? '#c83a3a' : '#f08a7a'); }
+    R(g, cx - 4, cy - 8, 8, 10, sombra); R(g, cx - 2, cy - 2, 4, 3, pele); // nariz
+    const mh = Math.round(8 + abre * 30), mw = 34; R(g, cx - mw / 2 - 2, cy + 14, mw + 4, mh + 4, '#3a1210'); R(g, cx - mw / 2, cy + 16, mw, mh, '#6a1a1a');
+    if (abre > .4) { R(g, cx - mw / 2 + 2, cy + 16, mw - 4, 5, '#f6f4ea'); for (let k = 0; k < 6; k++) R(g, cx - mw / 2 + 4 + k * 5, cy + 21, 1, 2, '#c8c4b8'); ell2(g, cx, cy + 16 + mh - 6, 12, 5, '#e86a7a'); }
+    if (!mastiga && abre > .5) { const b = (st.t * .8) % 1; R(g, cx + 12, cy + 16 + mh, 2, 4 + b * 10, '#bfe8f0'); }
+    if (bravo) for (let k = 0; k < 3; k++) { const u = (st.t * 1.5 + k / 3) % 1; R(g, cx + 30 + k * 6, cy - 50 - u * 20, 3, 3, '#f2f2f2'); }
+  }
+  function ell2(g, x, y, rx, ry, cor) { for (let yy = -ry; yy <= ry; yy++) { const w = Math.round(Math.sqrt(Math.max(0, 1 - (yy / ry) ** 2)) * rx); R(g, x - w, y + yy, w * 2, 1, cor); } }
+
   /* ---------------- telas: menu, regras, jogo, fim ---------------- */
   let shopSel = 0, shopMsg = null, open = false, screen = 'menu', sel = 0, modeSel = 0, st = null, game = null, cd = 0, from = null, t = 0, last = 0, raf = 0, clicks = [], initials = null, overSel = 0, paused = false, pauseSel = 0;
   function startGame(gm, mode) {

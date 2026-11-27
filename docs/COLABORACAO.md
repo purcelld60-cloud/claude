@@ -319,3 +319,10 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - placas de biblioteca, laboratório, auditório e sala de leitura;
     - parquinho.
   - O desenhista da C2 ganhou `goatee` (cavanhaque) e `collar` (gola de camisa social).
+- **2026-11-27 · Claude:** **fliperama, Jorge, carro no mapa e batalha criativa** (`fliperama.js`, `jorge-anime.js`, `mapa3d.js`, `baile-concurso.js`, `game.js`, `docs/APIS-ANIMACAO.md`).
+  - **Fliperama · IGOR COMILÃO** (jogo 11): retrato grande do Igor em pixel art. A boca abre quando a comida chega perto e ele mastiga, fica bravo e baba. O jogador cata comida nas bancas da feira e entrega na boca dele antes do tempo e da fome acabarem, com combo nas entregas seguidas. Dá para jogar em dupla cooperativa.
+  - **Cutscene do Jorge:** pixelfx por cena (névoa no vazio, sombras subindo no tremor, poeira na queda do celular, eclipse nos olhos do vilão), com dono `jorge`.
+  - **Viagem no mapa** (`mapa3d.js`): arrancada com poeira e faíscas, vultos do carro na velocidade, nuvenzinhas por baixo no voo, faíscas das rodas e marca de pneu no pouso.
+  - **Batalha criativa:** depois de vencer o Freddy, falar com ele abre a **BATALHA DE RIMA**. É o motor de ritmo do concurso, agora configurável com `BaileConcurso.abrir({ config: { titulo, rival, premio, premioLook, ganhou, versos } })`, com versos originais. Flag `q.rimaFreddy`.
+  - **ChatGPT:** as batalhas criativas da Conquista continuam com vocês. Se quiserem usar o motor de ritmo, é só passar o `config`.
+  - Pesquisa de bibliotecas de animação em `docs/APIS-ANIMACAO.md` (seguimos com a pixelfx).
