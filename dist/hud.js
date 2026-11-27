@@ -36,7 +36,7 @@
   }
   const footer=document.createElement('p');footer.className='stats-ranch-note';footer.textContent='Cada ponto é semente. Cultive o seu jeito de vencer.';statsModal.querySelector('.primary-btn')?.before(footer);
  }
- function updateRanchStats(){const state=window.Progression?.getState?.();if(!state||!statsModal)return;statsModal.dataset.available=state.points>0?'true':'false';for(const stat of ['vigor','forca','gas','agilidade']){const row=statsModal.querySelector('[data-stat="'+stat+'"]'),level=Number(state.stats?.[stat])||0;row?.style.setProperty('--stat-growth',Math.min(100,level/40*100)+'%');row?.classList.toggle('at-cap',level>=40);}}
+ function updateRanchStats(){const state=window.Progression?.getState?.();if(!state||!statsModal)return;statsModal.dataset.available=state.points>0?'true':'false';for(const stat of ['vigor','forca','gas','agilidade']){const row=statsModal.querySelector('[data-stat="'+stat+'"]'),level=Number(state.stats?.[stat])||0;const teto=state.teto||0;row?.style.setProperty('--stat-growth',(teto?Math.min(100,level/teto*100):100)+'%');row?.classList.toggle('at-cap',!!teto&&level>=teto);}}
  ranchStats();updateRanchStats();window.addEventListener('progression-change',updateRanchStats);
 
  document.getElementById('endingMenuBtn').addEventListener('click',()=>window.Game?.returnToMenu?.());
