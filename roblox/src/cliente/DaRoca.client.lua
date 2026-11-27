@@ -126,7 +126,7 @@ print("[Da Roça] versão " .. VERSAO)
 -- pausa um quadro quando já faz um tempo sem pausar: o Roblox derruba scripts que ficam ~10 s sem pausar
 local ultimaPausa = os.clock()
 local function ceder()
-  if os.clock() - ultimaPausa > .5 and coroutine.isyieldable() then task.wait(); ultimaPausa = os.clock() end
+  if os.clock() - ultimaPausa > .25 and coroutine.isyieldable() then task.wait(); ultimaPausa = os.clock() end
 end
 Canvas.ceder = ceder
 local ok, erro = pcall(function()
@@ -149,7 +149,8 @@ local ok, erro = pcall(function()
   local fx = jogoPasta:FindFirstChild("vendor__pixelfx")
   if fx then ceder(); pcall(require, fx); ceder() end
 end)
-Canvas.ceder = nil -- depois de carregar, cada quadro roda inteiro (sem pausas no meio)
+-- Canvas.ceder continua ligado: um quadro pesado (ex.: o primeiro da tela inicial, que monta os fundos) pausa no meio
+-- em vez de passar de 10 s; o laço de quadros abaixo roda um quadro de cada vez, então nada se mistura.
 if not ok then aviso.Text = "ERRO AO CARREGAR (" .. VERSAO .. "): " .. tostring(erro); warn(erro); return end
 print("[Da Roça] carregou")
 local desenhista = Carregar.desenhista
@@ -179,6 +180,16 @@ imagem.ImageContent = Content.fromObject(ei)
 local quadro = buffer.create(W * H * 4)
 local tamanho = Vector2.new(W, H)
 aviso.Visible = false
+
+-- ===== entradas chegam enquanto um quadro pesado está pausado: guarda e entrega depois do quadro =====
+local emQuadro, filaEntradas = false, {}
+for _, nome in ipairs({ "tecla", "ponteiro", "digitar" }) do
+  local original = N[nome]
+  N[nome] = function(...)
+    if emQuadro then local a = table.pack(...); filaEntradas[#filaEntradas + 1] = function() original(table.unpack(a, 1, a.n)) end
+    else return original(...) end
+  end
+end
 
 -- ===== entrada: teclado =====
 local TECLAS = { Left = "ArrowLeft", Right = "ArrowRight", Up = "ArrowUp", Down = "ArrowDown", Space = "Space", Return = "Enter", KeypadEnter = "Enter", Escape = "Escape",
@@ -361,12 +372,26 @@ ajuda.Activated:Connect(function() mostrarGuia() end)
 
 -- ===== laço principal: avança o jogo, desenha a página e copia para a imagem =====
 local writeu32 = buffer.writeu32
-RunService.RenderStepped:Connect(function()
+local function umQuadro()
+  emQuadro = true
   N.passo(os.clock() * 1000)
   local tela = desenhista and desenhista.desenhar() or window.document:getElementById("gameCanvas")
-  if not tela then return end
-  -- os pixels da tela já são um buffer RGBA do tamanho certo: vão direto para a imagem
-  local px = tela._.px
-  if tela.width == W and tela.height == H then ei:WritePixelsBuffer(Vector2.zero, tamanho, px)
-  else local RD = Canvas.RD; for i = 0, W * H - 1 do writeu32(quadro, i * 4, RD(px, i * 4)) end; ei:WritePixelsBuffer(Vector2.zero, tamanho, quadro) end
+  emQuadro = false
+  if tela then
+    -- os pixels da tela já são um buffer RGBA do tamanho certo: vão direto para a imagem
+    local px = tela._.px
+    if tela.width == W and tela.height == H then ei:WritePixelsBuffer(Vector2.zero, tamanho, px)
+    else local RD = Canvas.RD; for i = 0, W * H - 1 do writeu32(quadro, i * 4, RD(px, i * 4)) end; ei:WritePixelsBuffer(Vector2.zero, tamanho, quadro) end
+  end
+  local fila = filaEntradas; filaEntradas = {}
+  for _, f in ipairs(fila) do pcall(f) end
+end
+-- um quadro de cada vez, num laço próprio (pode pausar no meio de um quadro pesado sem o Roblox derrubar o script)
+task.spawn(function()
+  while true do
+    ultimaPausa = os.clock()
+    local ok, e = pcall(umQuadro)
+    if not ok then emQuadro = false; warn("[Da Roça] quadro: " .. tostring(e)) end
+    RunService.RenderStepped:Wait()
+  end
 end)

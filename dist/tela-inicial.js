@@ -133,7 +133,8 @@
     // florzinhas espalhadas no capim
     for (let i = 0; i < 70; i++) { const x = hash(i * 13.1) * LW, y = 200 + hash(i * 3.3) * 66; if (naTrilha(x, y) || noRio(x - 4, y) || noRio(x + 4, y) || (x < 180 && y > 210)) continue; R(x, y, 1, 2, '#4f9a32'); R(x, y - 1, 2, 1, ['#f8f4ea', '#f8d040', '#e87aa8', '#a87ae8'][i % 4]); }
   }
-  montarFixo();
+  // no Roblox o carregamento não pode pausar no meio de um script: o fundo fixo é montado no primeiro quadro
+  if (window.DAROCA_ROBLOX) requestAnimationFrame(() => montarFixo()); else montarFixo();
 
   /* --- estado do mundo --- */
   let hora = (new Date().getHours() + new Date().getMinutes() / 60) / 24, horaAlvo = null; // 0 = meia-noite, .5 = meio-dia
@@ -363,7 +364,8 @@
     // limpa o serrilhado do texto da fonte (deixa pixel puro)
     const d = pc.getImageData(bx, 2, tw + 16, 12); for (let i = 3; i < d.data.length; i += 4) if (d.data[i] > 0 && d.data[i] < 255) { if (d.data[i] > 110) d.data[i] = 255; } pc.putImageData(d, bx, 2);
   }
-  montarPlaca(); document.fonts?.load?.('8px Pixel').then(montarPlaca).catch(() => {});
+  if (window.DAROCA_ROBLOX) requestAnimationFrame(() => montarPlaca()); else montarPlaca();
+  document.fonts?.load?.('8px Pixel').then(montarPlaca).catch(() => {});
   let logo0 = null, onda = 0;
   const easeBounce = (u) => { if (u < 1 / 2.75) return 7.5625 * u * u; if (u < 2 / 2.75) return 7.5625 * (u -= 1.5 / 2.75) * u + .75; if (u < 2.5 / 2.75) return 7.5625 * (u -= 2.25 / 2.75) * u + .9375; return 7.5625 * (u -= 2.625 / 2.75) * u + .984375; };
   const easeBack = (u) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(u - 1, 3) + c1 * Math.pow(u - 1, 2); };
