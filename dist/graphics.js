@@ -46,8 +46,9 @@
   }
   function set(next) {
     next = OLD[next] || next;
+    const autoDe = /^auto-(low|medium|high)$/.exec(String(next)); // 'auto-low': automático começando na BAIXA (Roblox)
     mode = LEVELS.includes(next) ? next : 'auto';
-    if (mode === 'auto') autoLevel = device.level;
+    if (mode === 'auto') autoLevel = autoDe ? autoDe[1] : device.level;
     write(mode === 'auto' ? 'auto' : mode);
     apply();
   }

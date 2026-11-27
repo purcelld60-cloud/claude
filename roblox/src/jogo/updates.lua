@@ -89,13 +89,13 @@ local __O = {};
         local ____esc_2 = esc
         local ____t_1 = __t
         local ____temp_0 = if __t(cur.versionName) then cur.versionName else cur.versionCode
-        __O[3180] = ____temp_0
+        __O[3182] = ____temp_0
         box.innerHTML = ____add_7(
             ____add_6(
                 ____add_5(
                     ____add_4(
                         ____add_result_3,
-                        ____esc_2(nil, if ____t_1(____temp_0) then __O[3180] else "?")
+                        ____esc_2(nil, if ____t_1(____temp_0) then __O[3182] else "?")
                     ),
                     ". Seu progresso fica salvo.</small>"
                 ),
@@ -135,8 +135,8 @@ local __O = {};
                 local ____re_result_11 = __re("json", "")
                 local ____t_10 = __t
                 local ____call_result_9 = __call(r.headers, "get", "content-type")
-                __O[3181] = ____call_result_9
-                return if ____t_13(if __t(r.ok) then ____re_test_12(____re_result_11, if ____t_10(____call_result_9) then __O[3181] else "") else r.ok) then r:json() else nil
+                __O[3183] = ____call_result_9
+                return if ____t_13(if __t(r.ok) then ____re_test_12(____re_result_11, if ____t_10(____call_result_9) then __O[3183] else "") else r.ok) then r:json() else nil
             end
         )
         ____self_8["then"](

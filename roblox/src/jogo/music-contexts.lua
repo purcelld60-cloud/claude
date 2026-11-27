@@ -435,11 +435,11 @@ local __O = {};
             local ____t_9 = __t
             local ____t_8 = __t
             local ____call_result_7 = __call(kinds, "has", kind)
-            __O[2332] = ____call_result_7
+            __O[2334] = ____call_result_7
             return if ____t_9(if ____t_8(____call_result_7) then __re_test(
                 __re("^(?:cutscenes|events)\\.", ""),
                 context.id
-            ) else __O[2332]) then __assign({}, context, {previewKind = kind}) else context
+            ) else __O[2334]) then __assign({}, context, {previewKind = kind}) else context
         end
     )
 end)(nil)

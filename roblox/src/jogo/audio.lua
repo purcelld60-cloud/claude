@@ -993,13 +993,13 @@ local __O = {};
         if ____opt_7 ~= nil then
             ____opt_result_9 = ____opt_7(____opt_7)
         end
-        __O[2316] = ____opt_result_9
-        local map = if ____t_10(____opt_result_9) then __O[2316] else {}
+        __O[2318] = ____opt_result_9
+        local map = if ____t_10(____opt_result_9) then __O[2318] else {}
         local p = __get(PROFILES, scene)
         local ____t_12 = __t
         local ____get_result_11 = __get(map, p.name)
-        __O[2317] = ____get_result_11
-        return if __t(p) then if ____t_12(____get_result_11) then __O[2317] else nil else nil
+        __O[2319] = ____get_result_11
+        return if __t(p) then if ____t_12(____get_result_11) then __O[2319] else nil else nil
     end
     local function tick(self)
         local st = nil
@@ -1035,24 +1035,24 @@ local __O = {};
         local ____t_26 = __t
         local ____t_24 = __t
         local ____temp_23 = not not __t(st)
-        __O[2318] = ____temp_23
-        local ____temp_25 = if ____t_24(____temp_23) then st.started else __O[2318]
-        __O[2319] = ____temp_25
-        local ____temp_27 = if ____t_26(____temp_25) then st.playing ~= false else __O[2319]
-        __O[2320] = ____temp_27
-        local ____temp_29 = if ____t_28(____temp_27) then not __t(st.paused) else __O[2320]
-        __O[2321] = ____temp_29
-        local ____temp_31 = if ____t_30(____temp_29) then not __t(st.cutscene) else __O[2321]
-        __O[2322] = ____temp_31
-        local ____temp_33 = if ____t_32(____temp_31) then not __t(st.room) else __O[2322]
-        __O[2323] = ____temp_33
-        local ____temp_35 = if ____t_34(____temp_33) then not __t(fl) else __O[2323]
-        __O[2324] = ____temp_35
-        local ____temp_37 = if ____t_36(____temp_35) then soundOn(nil) else __O[2324]
-        __O[2325] = ____temp_37
-        local ____temp_39 = if ____t_38(____temp_37) then vol.ambient else __O[2325]
-        __O[2326] = ____temp_39
-        local live = if ____t_40(____temp_39) then vol.sfx > 0 else __O[2326]
+        __O[2320] = ____temp_23
+        local ____temp_25 = if ____t_24(____temp_23) then st.started else __O[2320]
+        __O[2321] = ____temp_25
+        local ____temp_27 = if ____t_26(____temp_25) then st.playing ~= false else __O[2321]
+        __O[2322] = ____temp_27
+        local ____temp_29 = if ____t_28(____temp_27) then not __t(st.paused) else __O[2322]
+        __O[2323] = ____temp_29
+        local ____temp_31 = if ____t_30(____temp_29) then not __t(st.cutscene) else __O[2323]
+        __O[2324] = ____temp_31
+        local ____temp_33 = if ____t_32(____temp_31) then not __t(st.room) else __O[2324]
+        __O[2325] = ____temp_33
+        local ____temp_35 = if ____t_34(____temp_33) then not __t(fl) else __O[2325]
+        __O[2326] = ____temp_35
+        local ____temp_37 = if ____t_36(____temp_35) then soundOn(nil) else __O[2326]
+        __O[2327] = ____temp_37
+        local ____temp_39 = if ____t_38(____temp_37) then vol.ambient else __O[2327]
+        __O[2328] = ____temp_39
+        local live = if ____t_40(____temp_39) then vol.sfx > 0 else __O[2328]
         local scene = if __t(live) then __TS__Number(st.scene) else -1
         local ____opt_43 = window.DayTime
         if ____opt_43 ~= nil then
@@ -1097,10 +1097,10 @@ local __O = {};
         local ____t_51 = __t
         local ____t_49 = __t
         local ____temp_48 = not __t(file)
-        __O[2327] = ____temp_48
-        local ____temp_50 = if ____t_49(____temp_48) then live else __O[2327]
-        __O[2328] = ____temp_50
-        local key = if ____t_52(if ____t_51(____temp_50) then __get(PROFILES, scene) else __O[2328]) then __add(scene, "") else ""
+        __O[2329] = ____temp_48
+        local ____temp_50 = if ____t_49(____temp_48) then live else __O[2329]
+        __O[2330] = ____temp_50
+        local key = if ____t_52(if ____t_51(____temp_50) then __get(PROFILES, scene) else __O[2330]) then __add(scene, "") else ""
         if key ~= lastKey then
             lastKey = key
             stopAmb(nil)
@@ -1130,8 +1130,8 @@ local __O = {};
             if ____opt_result_64 ~= nil then
                 ____opt_result_65 = ____opt_result_64.rain
             end
-            __O[2329] = ____opt_result_65
-            local rain = if ____t_66(____opt_result_65) then __O[2329] else 0
+            __O[2331] = ____opt_result_65
+            local rain = if ____t_66(____opt_result_65) then __O[2331] else 0
             if __t(__gt(rain, 0.15) and not __t(amb.rain)) then
                 local s2 = ctx:createBufferSource()
                 s2.buffer = noiseBuffer(nil, ctx)
@@ -1168,8 +1168,8 @@ local __O = {};
                 local ____t_69 = __t
                 local ____t_68 = __t
                 local ____lenq_result_67 = __lenq(ev)
-                __O[2330] = ____lenq_result_67
-                if ____t_69(if ____t_68(____lenq_result_67) then math.random() < 0.8 else __O[2330]) then
+                __O[2332] = ____lenq_result_67
+                if ____t_69(if ____t_68(____lenq_result_67) then math.random() < 0.8 else __O[2332]) then
                     ambEvent(
                         nil,
                         __get(
@@ -1244,8 +1244,8 @@ local __O = {};
                 if ctx ~= nil then
                     ____opt_result_78 = ctx.state
                 end
-                __O[2331] = ____opt_result_78
-                return {ambiente = ____temp_80, chuva = ____temp_81, contexto = if ____t_79(____opt_result_78) then __O[2331] else "sem áudio"}
+                __O[2333] = ____opt_result_78
+                return {ambiente = ____temp_80, chuva = ____temp_81, contexto = if ____t_79(____opt_result_78) then __O[2333] else "sem áudio"}
             end
         },
         "music,sfx,ambientOn,setMusic,setSfx,setAmbient,onChange,play,status"

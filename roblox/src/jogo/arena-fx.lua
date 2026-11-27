@@ -18,8 +18,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(A)
-    __O[2713] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2713] else window.ArenaFx) then
+    __O[2715] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[2715] else window.ArenaFx) then
         return
     end
     local function lite()
@@ -54,8 +54,8 @@ local __O = {};
             ____opt_result_11 = camera.x
         end
         local ____TS__Number_result_12 = __TS__Number(____opt_result_11)
-        __O[2714] = ____TS__Number_result_12
-        local cx = if ____t_13(____TS__Number_result_12) then __O[2714] else 640
+        __O[2716] = ____TS__Number_result_12
+        local cx = if ____t_13(____TS__Number_result_12) then __O[2716] else 640
         local sunX = W * 0.76 - (cx - 640) * 0.006
         local sunY = H * 0.17
         c:save()
@@ -263,16 +263,16 @@ local __O = {};
         for ____, p in __iterar((if __t(platforms) then platforms else __arrL({}, 0))) do
             local ____t_15 = __t
             local ____TS__Number_result_14 = __TS__Number(p.x)
-            __O[2715] = ____TS__Number_result_14
-            local x = if ____t_15(____TS__Number_result_14) then __O[2715] else 0
+            __O[2717] = ____TS__Number_result_14
+            local x = if ____t_15(____TS__Number_result_14) then __O[2717] else 0
             local ____t_17 = __t
             local ____TS__Number_result_16 = __TS__Number(p.y)
-            __O[2716] = ____TS__Number_result_16
-            local y = if ____t_17(____TS__Number_result_16) then __O[2716] else 0
+            __O[2718] = ____TS__Number_result_16
+            local y = if ____t_17(____TS__Number_result_16) then __O[2718] else 0
             local ____t_19 = __t
             local ____TS__Number_result_18 = __TS__Number(p.w)
-            __O[2717] = ____TS__Number_result_18
-            local w = if ____t_19(____TS__Number_result_18) then __O[2717] else 100
+            __O[2719] = ____TS__Number_result_18
+            local w = if ____t_19(____TS__Number_result_18) then __O[2719] else 100
             local main = not not __t(p.main)
             do
                 local gx = x + 4
@@ -311,8 +311,8 @@ local __O = {};
                     local ____temp_22 = i * (w - 40)
                     local ____t_21 = __t
                     local ____temp_20 = math.floor(w / 70) - 1
-                    __O[2718] = ____temp_20
-                    local vx = ____temp_23 + ____temp_22 / math.max(1, if ____t_21(____temp_20) then __O[2718] else 1)
+                    __O[2720] = ____temp_20
+                    local vx = ____temp_23 + ____temp_22 / math.max(1, if ____t_21(____temp_20) then __O[2720] else 1)
                     local len = 18 + rnd(nil, vx) * if __t(main) then 60 else 26
                     do
                         local k = 0
@@ -497,13 +497,13 @@ local __O = {};
     local function smear(self, c, p, color)
         local ____t_25 = __t
         local ____TS__Number_result_24 = __TS__Number(p.attackProgress)
-        __O[2719] = ____TS__Number_result_24
-        local prog = if ____t_25(____TS__Number_result_24) then __O[2719] else 0
+        __O[2721] = ____TS__Number_result_24
+        local prog = if ____t_25(____TS__Number_result_24) then __O[2721] else 0
         local ____t_28 = __t
         local ____t_27 = __t
         local ____temp_26 = not __gt(p.attackAnim, 0) or prog < 0.16
-        __O[2720] = ____temp_26
-        if ____t_28(if ____t_27(____temp_26) then __O[2720] else prog > 0.72) then
+        __O[2722] = ____temp_26
+        if ____t_28(if ____t_27(____temp_26) then __O[2722] else prog > 0.72) then
             return
         end
         local k = (prog - 0.16) / 0.56
@@ -529,8 +529,8 @@ local __O = {};
         local ____t_31 = __t
         local ____t_30 = __t
         local ____temp_29 = face < 0 and dir ~= "up"
-        __O[2721] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then dir ~= "down" else __O[2721]) then
+        __O[2723] = ____temp_29
+        if ____t_31(if ____t_30(____temp_29) then dir ~= "down" else __O[2723]) then
             a0 = math.pi - 1
             a1 = math.pi + 1.1
         end
@@ -562,15 +562,15 @@ local __O = {};
         local ____t_34 = __t
         local ____t_33 = __t
         local ____temp_32 = not __t(p) or p.stocks == 0
-        __O[2722] = ____temp_32
-        if ____t_34(if ____t_33(____temp_32) then __O[2722] else p.eliminated) then
+        __O[2724] = ____temp_32
+        if ____t_34(if ____t_33(____temp_32) then __O[2724] else p.eliminated) then
             return A:drawFighter(c, p, t)
         end
         local id = if __t(p.id) then p.id else p.character
         local ____t_36 = __t
         local ____call_result_35 = __call(hist, "get", id)
-        __O[2723] = ____call_result_35
-        local h = if ____t_36(____call_result_35) then __O[2723] else {
+        __O[2725] = ____call_result_35
+        local h = if ____t_36(____call_result_35) then __O[2725] else {
             ghosts = __arrL({}, 0),
             spin = 0,
             lastT = t,
@@ -584,41 +584,41 @@ local __O = {};
         h.lastT = t
         local ____t_38 = __t
         local ____TS__Number_result_37 = __TS__Number(p.vx)
-        __O[2724] = ____TS__Number_result_37
-        local vx = if ____t_38(____TS__Number_result_37) then __O[2724] else 0
+        __O[2726] = ____TS__Number_result_37
+        local vx = if ____t_38(____TS__Number_result_37) then __O[2726] else 0
         local ____t_40 = __t
         local ____TS__Number_result_39 = __TS__Number(p.vy)
-        __O[2725] = ____TS__Number_result_39
-        local vy = if ____t_40(____TS__Number_result_39) then __O[2725] else 0
+        __O[2727] = ____TS__Number_result_39
+        local vy = if ____t_40(____TS__Number_result_39) then __O[2727] else 0
         local speed = __hypot(vx, vy)
         local air = not __t(p.ground)
         local ____t_42 = __t
         local ____temp_41 = if __t(air) then __gt(if __t(p.launch) then p.launch else 0, 0) or __gt(if __t(p.stun) then p.stun else 0, 0) else air
-        __O[2726] = ____temp_41
-        local launched = if ____t_42(____temp_41) then speed > 330 else __O[2726]
+        __O[2728] = ____temp_41
+        local launched = if ____t_42(____temp_41) then speed > 330 else __O[2728]
         local motion = if __t(p.motion) then p.motion else "idle"
         local ____t_44 = __t
         local ____TS__Number_result_43 = __TS__Number(p.motionTime)
-        __O[2727] = ____TS__Number_result_43
-        local mt = if ____t_44(____TS__Number_result_43) then __O[2727] else 0
+        __O[2729] = ____TS__Number_result_43
+        local mt = if ____t_44(____TS__Number_result_43) then __O[2729] else 0
         local ____t_47 = __t
         local ____opt_45 = __callq(window.ArenaRoster, "get", p.character)
         if ____opt_45 ~= nil then
             ____opt_45 = ____opt_45.color
         end
-        __O[2728] = ____opt_45
-        local color = if ____t_47(____opt_45) then __O[2728] else "#ffd27a"
+        __O[2730] = ____opt_45
+        local color = if ____t_47(____opt_45) then __O[2730] else "#ffd27a"
         local ____t_52 = __t
         local ____t_51 = __t
         local ____t_49 = __t
         local ____temp_48 = motion == "dash"
-        __O[2729] = ____temp_48
-        local ____temp_50 = if ____t_49(____temp_48) then __O[2729] else launched
-        __O[2730] = ____temp_50
+        __O[2731] = ____temp_48
+        local ____temp_50 = if ____t_49(____temp_48) then __O[2731] else launched
+        __O[2732] = ____temp_50
         if ____t_52(if ____t_51(____temp_50) then not __t(__len(h.ghosts)) or t - __get(
             h.ghosts,
             __len(h.ghosts) - 1
-        ).t > 0.035 else __O[2730]) then
+        ).t > 0.035 else __O[2732]) then
             __call(
                 h.ghosts,
                 "push",
@@ -723,8 +723,8 @@ local __O = {};
             local ____t_55 = __t
             local ____t_54 = __t
             local ____temp_53 = if __t(air) then not __t(launched) else air
-            __O[2731] = ____temp_53
-            if ____t_55(if ____t_54(____temp_53) then vy < -150 else __O[2731]) then
+            __O[2733] = ____temp_53
+            if ____t_55(if ____t_54(____temp_53) then vy < -150 else __O[2733]) then
                 sy = 1.07
                 sx = 0.95
             elseif motion == "run" then
@@ -794,12 +794,12 @@ local __O = {};
                                 local ____camera_59 = camera
                                 local ____t_57 = __t
                                 local ____TS__Number_result_56 = __TS__Number(t)
-                                __O[2732] = ____TS__Number_result_56
+                                __O[2734] = ____TS__Number_result_56
                                 ____sky_60(
                                     nil,
                                     ____c_58,
                                     ____camera_59,
-                                    if ____t_57(____TS__Number_result_56) then __O[2732] else 0,
+                                    if ____t_57(____TS__Number_result_56) then __O[2734] else 0,
                                     W,
                                     H
                                 )
@@ -817,8 +817,8 @@ local __O = {};
                                 local ____platforms_64 = platforms
                                 local ____t_62 = __t
                                 local ____TS__Number_result_61 = __TS__Number(t)
-                                __O[2733] = ____TS__Number_result_61
-                                ____stage_65(nil, ____c_63, ____platforms_64, if ____t_62(____TS__Number_result_61) then __O[2733] else 0)
+                                __O[2735] = ____TS__Number_result_61
+                                ____stage_65(nil, ____c_63, ____platforms_64, if ____t_62(____TS__Number_result_61) then __O[2735] else 0)
                             end)
                         end
                     end
@@ -837,8 +837,8 @@ local __O = {};
                             local ____p_69 = p
                             local ____t_67 = __t
                             local ____TS__Number_result_66 = __TS__Number(t)
-                            __O[2734] = ____TS__Number_result_66
-                            ____fighter_70(nil, ____c_68, ____p_69, if ____t_67(____TS__Number_result_66) then __O[2734] else 0)
+                            __O[2736] = ____TS__Number_result_66
+                            ____fighter_70(nil, ____c_68, ____p_69, if ____t_67(____TS__Number_result_66) then __O[2736] else 0)
                         end)
                         if not ____try then
                             ____catch(____hasReturned)

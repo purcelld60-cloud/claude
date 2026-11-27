@@ -522,8 +522,8 @@ local __O = {};
             get = function(____, id)
                 local ____t_1 = __t
                 local ____call_result_0 = __call(byId, "get", id)
-                __O[2501] = ____call_result_0
-                return if ____t_1(____call_result_0) then __O[2501] else __get(kits, 0)
+                __O[2503] = ____call_result_0
+                return if ____t_1(____call_result_0) then __O[2503] else __get(kits, 0)
             end
         },
         "version,all,get"

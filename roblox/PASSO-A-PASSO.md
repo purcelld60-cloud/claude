@@ -148,7 +148,7 @@ A **qualidade gráfica do Roblox** (menu do Roblox → Configurações → Quali
 - 1 a 3 → **BAIXA**;
 - 4 a 7 → **MÉDIA**;
 - 8 a 10 → **ALTA**;
-- Automático → **AUTOMÁTICA**.
+- Automático → **AUTOMÁTICA**, começando na **BAIXA** (o jogo desenha tudo no processador do aparelho).
 
 ---
 
@@ -161,6 +161,9 @@ A **qualidade gráfica do Roblox** (menu do Roblox → Configurações → Quali
 | Sem som | Confira os 5 IDs no `sons` (Passo 6). Sons recém-enviados podem levar alguns minutos para tocar. |
 | O save não volta no Studio | Ligue **Enable Studio Access to API Services**. No jogo publicado o save funciona sozinho. |
 | "Script timeout: exhausted allowed execution time" | Baixe o `.rbxlx` mais novo (build 4 em diante): o carregamento agora pausa sozinho e o problema foi corrigido. |
+| O carregamento para em "tela-inicial" e não sai mais | Baixe o `.rbxlx` mais novo. Agora, se o Roblox não deixar desenhar a tela, aparece uma mensagem dizendo o que ligar (Passo 3). A tela inicial também ficou bem mais leve. |
+| Aparece "O ROBLOX NÃO DEIXOU DESENHAR A TELA DO JOGO" | Faça o Passo 3: **Allow Mesh / Image APIs** ligado (publique antes, se o botão estiver cinza) e a conta dona com 13+ e verificação de idade/ID. |
+| Aparece "DEU ERRO AO DESENHAR A TELA" | Tire uma foto dessa tela e da janela **Output** e me mande. |
 | Aparece erro em vermelho na janela **Output** | Copie o texto do Output (Exibir → Output) e me mande; eu corrijo. |
 | O Roblox barrou o jogo | Por causa do Dedé fumando ou do Ollyan bêbado. Me peça a versão do Roblox com esses trechos suavizados. |
 

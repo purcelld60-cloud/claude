@@ -27,8 +27,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(tela)
-    __O[3186] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[3186] else window.MenuInicio) then
+    __O[3188] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[3188] else window.MenuInicio) then
         return
     end
     local menu = tela:querySelector(".start-menu")
@@ -61,8 +61,8 @@ local __O = {};
         local ____t_5 = __t
         local ____t_4 = __t
         local ____temp_3 = b == jogar or b == multi
-        __O[3187] = ____temp_3
-        if ____t_5(if ____t_4(____temp_3) then __O[3187] else b.id == "adventureInfoBtn") then
+        __O[3189] = ____temp_3
+        if ____t_5(if ____t_4(____temp_3) then __O[3189] else b.id == "adventureInfoBtn") then
             return menu
         end
         if __t(b.id == "startBtn" or b.id == "continueBtn") then
@@ -74,8 +74,8 @@ local __O = {};
         local ____t_8 = __t
         local ____t_7 = __t
         local ____temp_6 = b:hasAttribute("data-open-arena")
-        __O[3188] = ____temp_6
-        if ____t_8(if ____t_7(____temp_6) then __O[3188] else b:hasAttribute("data-open-tv")) then
+        __O[3190] = ____temp_6
+        if ____t_8(if ____t_7(____temp_6) then __O[3190] else b:hasAttribute("data-open-tv")) then
             return multiLista
         end
         if b.id == "partyEntryBtn" then
@@ -118,8 +118,8 @@ local __O = {};
                     local ____t_15 = __t
                     local ____t_14 = __t
                     local ____temp_13 = if __t(chave) then b.parentElement ~= d else chave
-                    __O[3189] = ____temp_13
-                    if ____t_15(if ____t_14(____temp_13) then painel:querySelector(("[" .. tostring(chave)) .. "]") else __O[3189]) then
+                    __O[3191] = ____temp_13
+                    if ____t_15(if ____t_14(____temp_13) then painel:querySelector(("[" .. tostring(chave)) .. "]") else __O[3191]) then
                         b:remove()
                         continue
                     end
@@ -143,10 +143,10 @@ local __O = {};
                 local ____t_22 = __t
                 local ____t_20 = __t
                 local ____temp_19 = if __t(cont) then ini else cont
-                __O[3190] = ____temp_19
-                local ____temp_21 = if ____t_20(____temp_19) then cont.parentElement == c1 else __O[3190]
-                __O[3191] = ____temp_21
-                if ____t_23(if ____t_22(____temp_21) then cont.nextElementSibling ~= ini else __O[3191]) then
+                __O[3192] = ____temp_19
+                local ____temp_21 = if ____t_20(____temp_19) then cont.parentElement == c1 else __O[3192]
+                __O[3193] = ____temp_21
+                if ____t_23(if ____t_22(____temp_21) then cont.nextElementSibling ~= ini else __O[3193]) then
                     c1:insertBefore(cont, ini)
                 end
                 if __t(if __t(listaVelha) then not __t(listaVelha.hidden) else listaVelha) then

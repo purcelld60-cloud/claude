@@ -38,6 +38,31 @@ local PIXEL = Font.new("rbxasset://fonts/families/PressStart2P.json")
 local aviso = Instance.new("TextLabel")
 aviso.Size = UDim2.fromScale(1, 1); aviso.BackgroundTransparency = 1; aviso.TextColor3 = Color3.fromRGB(255, 233, 168); aviso.FontFace = PIXEL; aviso.TextSize = 18
 aviso.Text = "CARREGANDO DA ROÇA ADVENTURE..."; aviso.Parent = fundo
+aviso.TextWrapped = true
+
+-- ===== imagem da tela (EditableImage): criada antes de carregar o jogo =====
+-- Se o Roblox não deixar criar (opção "Allow Mesh / Image APIs" desligada, lugar não publicado, conta sem verificação
+-- ou memória de imagem cheia), o script parava aqui calado e a tela de carregamento ficava congelada. Agora explica.
+local W, H = 960, 540
+local ei, erroImagem
+do
+  local okE, r = pcall(function() return AssetService:CreateEditableImage({ Size = Vector2.new(W, H) }) end)
+  if okE and r then
+    local okC, eC = pcall(function() imagem.ImageContent = Content.fromObject(r) end)
+    if okC then ei = r else erroImagem = eC end
+  else erroImagem = okE and "o Roblox devolveu nil (memória de imagem cheia)" or r end
+end
+if not ei then
+  aviso.TextSize = 14
+  aviso.Text = "O ROBLOX NÃO DEIXOU DESENHAR A TELA DO JOGO.\n\n"
+    .. "No Studio: aba Home > Game Settings > Security > ligue \"Allow Mesh / Image APIs\" e clique em Save.\n"
+    .. "Se o botão estiver cinza, publique antes (File > Publish to Roblox) e volte lá.\n\n"
+    .. "A conta dona do jogo precisa ter 13 anos ou mais e a verificação de idade/ID feita.\n\n"
+    .. "Detalhe: " .. tostring(erroImagem)
+  warn("[Da Roça] EditableImage: " .. tostring(erroImagem))
+  return
+end
+print("[Da Roça] imagem da tela criada")
 
 -- ===== save: o localStorage do jogo vai para o DataStore pelo servidor =====
 local remoto = RS:WaitForChild("DaRocaSave", 30)
@@ -64,7 +89,8 @@ window.localStorage._carregar(salvosIniciais)
 local configuracoes = UserSettings():GetService("UserGameSettings")
 local function nivelDoRoblox()
   local q = configuracoes.SavedQualityLevel
-  if q == Enum.SavedQualitySetting.Automatic then return "auto" end
+  -- Automático começa na BAIXA (o jogo desenha tudo no processador); o automático do jogo continua valendo dali
+  if q == Enum.SavedQualitySetting.Automatic then return "auto-low" end
   local n = tonumber(tostring(q):match("(%d+)$")) or 5
   if n <= 3 then return "low" elseif n <= 7 then return "medium" end
   return "high"
@@ -147,7 +173,12 @@ local ok, erro = pcall(function()
     aoCarregar = function() end })
   -- a biblioteca de efeitos (4 MB) carrega aqui, na tela de carregamento, e não no meio do jogo
   local fx = jogoPasta:FindFirstChild("vendor__pixelfx")
-  if fx then ceder(); pcall(require, fx); ceder() end
+  if fx then
+    aviso.Text = ("CARREGANDO... 99%%\n\nefeitos especiais\n%s"):format(VERSAO)
+    if coroutine.isyieldable() then task.wait(); ultimaPausa = os.clock() end
+    local t0 = os.clock(); local okFx, eFx = pcall(require, fx)
+    print(("[Da Roça] efeitos: %s em %.1f s"):format(okFx and "ok" or tostring(eFx), os.clock() - t0)); ceder()
+  end
 end)
 -- Canvas.ceder continua ligado: um quadro pesado (ex.: o primeiro da tela inicial, que monta os fundos) pausa no meio
 -- em vez de passar de 10 s; o laço de quadros abaixo roda um quadro de cada vez, então nada se mistura.
@@ -174,12 +205,9 @@ task.spawn(function()
 end)
 
 -- ===== imagem da tela =====
-local W, H = 960, 540
-local ei = AssetService:CreateEditableImage({ Size = Vector2.new(W, H) })
-imagem.ImageContent = Content.fromObject(ei)
 local quadro = buffer.create(W * H * 4)
 local tamanho = Vector2.new(W, H)
-aviso.Visible = false
+aviso.Text = "ABRINDO A TELA INICIAL...\n\n" .. VERSAO
 
 -- ===== entradas chegam enquanto um quadro pesado está pausado: guarda e entrega depois do quadro =====
 local emQuadro, filaEntradas = false, {}
@@ -387,11 +415,19 @@ local function umQuadro()
   for _, f in ipairs(fila) do pcall(f) end
 end
 -- um quadro de cada vez, num laço próprio (pode pausar no meio de um quadro pesado sem o Roblox derrubar o script)
+local primeiro, errosSeguidos, inicioQuadros = true, 0, os.clock()
 task.spawn(function()
   while true do
     ultimaPausa = os.clock()
     local ok, e = pcall(umQuadro)
-    if not ok then emQuadro = false; warn("[Da Roça] quadro: " .. tostring(e)) end
+    if not ok then
+      emQuadro = false; errosSeguidos = errosSeguidos + 1; warn("[Da Roça] quadro: " .. tostring(e))
+      if errosSeguidos >= 3 then aviso.Visible = true; aviso.TextSize = 14
+        aviso.Text = "DEU ERRO AO DESENHAR A TELA (" .. VERSAO .. ")\n\n" .. tostring(e):sub(1, 300) .. "\n\nTire uma foto desta tela e da janela Output e mande." end
+    else
+      errosSeguidos = 0
+      if primeiro then primeiro = false; aviso.Visible = false; print(("[Da Roça] primeiro quadro em %.1f s"):format(os.clock() - inicioQuadros)) end
+    end
     RunService.RenderStepped:Wait()
   end
 end)

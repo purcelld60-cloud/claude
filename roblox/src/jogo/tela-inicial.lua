@@ -91,8 +91,8 @@ local __O = {};
                 if ____opt_0 ~= nil then
                     ____opt_0 = ____opt_0.soundOn
                 end
-                __O[3197] = ____opt_0
-                if ____t_3(if ____t_2(____opt_0) then not __t(window.Game:soundOn()) else __O[3197]) then
+                __O[3199] = ____opt_0
+                if ____t_3(if ____t_2(____opt_0) then not __t(window.Game:soundOn()) else __O[3199]) then
                     return true
                 end
                 __L1.ac = if __t(__L1.ac) then __L1.ac else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
@@ -1594,12 +1594,12 @@ local __O = {};
                 local ____t_11 = __t
                 local ____t_9 = __t
                 local ____temp_8 = __L1:naTrilha(x, y)
-                __O[3199] = ____temp_8
-                local ____temp_10 = if ____t_9(____temp_8) then __O[3199] else __L1:noRio(x - 4, y)
-                __O[3200] = ____temp_10
-                local ____temp_12 = if ____t_11(____temp_10) then __O[3200] else __L1:noRio(x + 4, y)
-                __O[3201] = ____temp_12
-                if ____t_14(if ____t_13(____temp_12) then __O[3201] else x < 180 and y > 210) then
+                __O[3201] = ____temp_8
+                local ____temp_10 = if ____t_9(____temp_8) then __O[3201] else __L1:noRio(x - 4, y)
+                __O[3202] = ____temp_10
+                local ____temp_12 = if ____t_11(____temp_10) then __O[3202] else __L1:noRio(x + 4, y)
+                __O[3203] = ____temp_12
+                if ____t_14(if ____t_13(____temp_12) then __O[3203] else x < 180 and y > 210) then
                     continue
                 end
                 R(
@@ -2662,8 +2662,8 @@ local __O = {};
             local ____t_17 = __t
             local ____t_16 = __t
             local ____temp_15 = gal.z > 0
-            __O[3202] = ____temp_15
-            if ____t_17(if ____t_16(____temp_15) then __O[3202] else gal.vz) then
+            __O[3204] = ____temp_15
+            if ____t_17(if ____t_16(____temp_15) then __O[3204] else gal.vz) then
                 gal.vz = gal.vz + 300 * dt
                 gal.z = gal.z - gal.vz * dt
                 if gal.z <= 0 then
@@ -2724,8 +2724,8 @@ local __O = {};
         local ____t_22 = __t
         local ____t_21 = __t
         local ____temp_20 = __L1.sapo.z > 0
-        __O[3203] = ____temp_20
-        if ____t_22(if ____t_21(____temp_20) then __O[3203] else __L1.sapo.vz) then
+        __O[3205] = ____temp_20
+        if ____t_22(if ____t_21(____temp_20) then __O[3205] else __L1.sapo.vz) then
             local ____L1_sapo_23, ____vz_24 = __L1.sapo, "vz"
             ____L1_sapo_23[____vz_24] = ____L1_sapo_23[____vz_24] + 320 * dt
             local ____L1_sapo_25, ____z_26 = __L1.sapo, "z"
@@ -2919,8 +2919,8 @@ local __O = {};
                 local ____t_29 = __t
                 local ____t_28 = __t
                 local ____get_result_fim_27 = __get(__L1.plantas, i).fim
-                __O[3204] = ____get_result_fim_27
-                if ____t_29(if ____t_28(____get_result_fim_27) then __L1.tempo - __get(__L1.plantas, i).fim > 0.8 else __O[3204]) then
+                __O[3206] = ____get_result_fim_27
+                if ____t_29(if ____t_28(____get_result_fim_27) then __L1.tempo - __get(__L1.plantas, i).fim > 0.8 else __O[3206]) then
                     __call(__L1.plantas, "splice", i, 1)
                 end
                 i = i - 1
@@ -3586,8 +3586,8 @@ local __O = {};
             local ____t_38 = __t
             local ____t_37 = __t
             local ____temp_36 = math.abs(gal.x - x) < 8 and __gt(y, gal.y - 14 - gal.z)
-            __O[3205] = ____temp_36
-            if ____t_38(if ____t_37(____temp_36) then __lt(y, gal.y + 3) else __O[3205]) then
+            __O[3207] = ____temp_36
+            if ____t_38(if ____t_37(____temp_36) then __lt(y, gal.y + 3) else __O[3207]) then
                 gal.vz = -110
                 gal.z = 0.1
                 gal.susto = 1.6
@@ -3629,8 +3629,8 @@ local __O = {};
         local ____t_41 = __t
         local ____t_40 = __t
         local ____temp_39 = math.abs(__L1.roca.x - x) < 8 and __gt(y, __L1.roca.y - 30)
-        __O[3206] = ____temp_39
-        if ____t_41(if ____t_40(____temp_39) then __lt(y, __L1.roca.y + 2) else __O[3206]) then
+        __O[3208] = ____temp_39
+        if ____t_41(if ____t_40(____temp_39) then __lt(y, __L1.roca.y + 2) else __O[3208]) then
             __L1.roca.aceno = 1.6
             __L1.roca.vChapeu = 70
             __L1:P({
@@ -3646,8 +3646,8 @@ local __O = {};
         local ____t_44 = __t
         local ____t_43 = __t
         local ____temp_42 = math.abs(__L1.sapo.x - x) < 9 and math.abs(__L1.sapo.y - 3 - y) < 8
-        __O[3207] = ____temp_42
-        if ____t_44(if ____t_43(____temp_42) then __L1.sapo.z == 0 else __O[3207]) then
+        __O[3209] = ____temp_42
+        if ____t_44(if ____t_43(____temp_42) then __L1.sapo.z == 0 else __O[3209]) then
             __L1.sapo.vz = -120
             __L1.sapo.z = 0.1
             __L1.sapo.papo = 1
@@ -3659,10 +3659,10 @@ local __O = {};
             local ____t_48 = __t
             local ____t_46 = __t
             local ____temp_45 = not __t(p.fim) and math.abs(p.x - x) < 5
-            __O[3208] = ____temp_45
-            local ____temp_47 = if ____t_46(____temp_45) then __lt(y, p.y + 2) else __O[3208]
-            __O[3209] = ____temp_47
-            if ____t_49(if ____t_48(____temp_47) then __gt(y, p.y - 24) else __O[3209]) then
+            __O[3210] = ____temp_45
+            local ____temp_47 = if ____t_46(____temp_45) then __lt(y, p.y + 2) else __O[3210]
+            __O[3211] = ____temp_47
+            if ____t_49(if ____t_48(____temp_47) then __gt(y, p.y - 24) else __O[3211]) then
                 __L1:brilho(p.x, p.y - 12, 6)
                 if __L1.tempo - p.t0 > 1.2 then
                     p.fim = __L1.tempo
@@ -3712,14 +3712,14 @@ local __O = {};
         local ____t_58 = __t
         local ____t_53 = __t
         local ____temp_52 = __hypot(x - mx, y - my) < 38
-        __O[3212] = ____temp_52
+        __O[3214] = ____temp_52
         local ____t_57 = __t
         local ____t_55 = __t
         local ____temp_54 = __gt(x, __L1.MOINHO.x0) and __lt(x, __L1.MOINHO.x1)
-        __O[3210] = ____temp_54
-        local ____temp_56 = if ____t_55(____temp_54) then __gt(y, 98) else __O[3210]
-        __O[3211] = ____temp_56
-        if ____t_58(if ____t_53(____temp_52) then __O[3212] else if ____t_57(____temp_56) then __lt(y, 192) else __O[3211]) then
+        __O[3212] = ____temp_54
+        local ____temp_56 = if ____t_55(____temp_54) then __gt(y, 98) else __O[3212]
+        __O[3213] = ____temp_56
+        if ____t_58(if ____t_53(____temp_52) then __O[3214] else if ____t_57(____temp_56) then __lt(y, 192) else __O[3213]) then
             __L1.pasVel = 7
             __L1:folhas(
                 mx,
@@ -3734,10 +3734,10 @@ local __O = {};
         local ____t_62 = __t
         local ____t_60 = __t
         local ____temp_59 = __gt(x, __L1.CASA.x0) and __lt(x, __L1.CASA.x1)
-        __O[3213] = ____temp_59
-        local ____temp_61 = if ____t_60(____temp_59) then __gt(y, __L1.CASA.y0) else __O[3213]
-        __O[3214] = ____temp_61
-        if ____t_63(if ____t_62(____temp_61) then __lt(y, __L1.CASA.y1) else __O[3214]) then
+        __O[3215] = ____temp_59
+        local ____temp_61 = if ____t_60(____temp_59) then __gt(y, __L1.CASA.y0) else __O[3215]
+        __O[3216] = ____temp_61
+        if ____t_63(if ____t_62(____temp_61) then __lt(y, __L1.CASA.y1) else __O[3216]) then
             __L1.fumacaExtra = 1.4
             __L1.luzCasa = 3
             __L1:brilho(
@@ -3753,10 +3753,10 @@ local __O = {};
         local ____t_67 = __t
         local ____t_65 = __t
         local ____temp_64 = __gt(x, __L1.CELEIRO.x0) and __lt(x, __L1.CELEIRO.x1)
-        __O[3215] = ____temp_64
-        local ____temp_66 = if ____t_65(____temp_64) then __gt(y, __L1.CELEIRO.y0) else __O[3215]
-        __O[3216] = ____temp_66
-        if ____t_68(if ____t_67(____temp_66) then __lt(y, __L1.CELEIRO.y1) else __O[3216]) then
+        __O[3217] = ____temp_64
+        local ____temp_66 = if ____t_65(____temp_64) then __gt(y, __L1.CELEIRO.y0) else __O[3217]
+        __O[3218] = ____temp_66
+        if ____t_68(if ____t_67(____temp_66) then __lt(y, __L1.CELEIRO.y1) else __O[3218]) then
             do
                 local i = 0
                 while i < 10 do
@@ -3782,8 +3782,8 @@ local __O = {};
             local ____t_71 = __t
             local ____t_70 = __t
             local ____temp_69 = math.abs(x - cxx) < 10 and __gt(y, cyy - 28)
-            __O[3217] = ____temp_69
-            if ____t_71(if ____t_70(____temp_69) then __lt(y, cyy) else __O[3217]) then
+            __O[3219] = ____temp_69
+            if ____t_71(if ____t_70(____temp_69) then __lt(y, cyy) else __O[3219]) then
                 __L1:P({
                     x = cxx + __L1:rnd(-3, 3),
                     y = cyy - 8,
@@ -3802,14 +3802,14 @@ local __O = {};
         local ____t_78 = __t
         local ____t_73 = __t
         local ____temp_72 = __hypot(x - __L1.ARVORE.cx, y - __L1.ARVORE.cy) < 34
-        __O[3220] = ____temp_72
+        __O[3222] = ____temp_72
         local ____t_77 = __t
         local ____t_75 = __t
         local ____temp_74 = __gt(x, 2) and __lt(x, 40)
-        __O[3218] = ____temp_74
-        local ____temp_76 = if ____t_75(____temp_74) then __gt(y, 86) else __O[3218]
-        __O[3219] = ____temp_76
-        if ____t_78(if ____t_73(____temp_72) then __O[3220] else if ____t_77(____temp_76) then __lt(y, 140) else __O[3219]) then
+        __O[3220] = ____temp_74
+        local ____temp_76 = if ____t_75(____temp_74) then __gt(y, 86) else __O[3220]
+        __O[3221] = ____temp_76
+        if ____t_78(if ____t_73(____temp_72) then __O[3222] else if ____t_77(____temp_76) then __lt(y, 140) else __O[3221]) then
             __L1:folhas(x, y, 9)
             __L1.balancoV = __L1.balancoV + 1
             __L1:som("vento")
@@ -3939,10 +3939,10 @@ local __O = {};
             local ____t_82 = __t
             local ____t_80 = __t
             local ____temp_79 = __ge(x, 0) and __ge(y, 0)
-            __O[3221] = ____temp_79
-            local ____temp_81 = if ____t_80(____temp_79) then __lt(x, W) else __O[3221]
-            __O[3222] = ____temp_81
-            return if ____t_83(if ____t_82(____temp_81) then __lt(y, H) else __O[3222]) then __get(m, y * W + x) else 0
+            __O[3223] = ____temp_79
+            local ____temp_81 = if ____t_80(____temp_79) then __lt(x, W) else __O[3223]
+            __O[3224] = ____temp_81
+            return if ____t_83(if ____t_82(____temp_81) then __lt(y, H) else __O[3224]) then __get(m, y * W + x) else 0
         end
         __call(
             gl,
@@ -4009,8 +4009,8 @@ local __O = {};
                         local ____t_86 = __t
                         local ____t_85 = __t
                         local ____get_result_84 = __get(m, y * W + x)
-                        __O[3223] = ____get_result_84
-                        if ____t_86(if ____t_85(____get_result_84) then __O[3223] else __get(ext, y * W + x)) then
+                        __O[3225] = ____get_result_84
+                        if ____t_86(if ____t_85(____get_result_84) then __O[3225] else __get(ext, y * W + x)) then
                             continue
                         end
                         local perto = false
@@ -4033,15 +4033,15 @@ local __O = {};
                                         local ____t_90 = __t
                                         local ____t_88 = __t
                                         local ____temp_87 = xx >= 0 and yy >= 0
-                                        __O[3224] = ____temp_87
-                                        local ____temp_89 = if ____t_88(____temp_87) then xx < W else __O[3224]
-                                        __O[3225] = ____temp_89
-                                        local ____temp_91 = if ____t_90(____temp_89) then __lt(yy, H) else __O[3225]
-                                        __O[3227] = ____temp_91
+                                        __O[3226] = ____temp_87
+                                        local ____temp_89 = if ____t_88(____temp_87) then xx < W else __O[3226]
+                                        __O[3227] = ____temp_89
+                                        local ____temp_91 = if ____t_90(____temp_89) then __lt(yy, H) else __O[3227]
+                                        __O[3229] = ____temp_91
                                         local ____t_94 = __t
                                         local ____get_result_93 = __get(m, yy * W + xx)
-                                        __O[3226] = ____get_result_93
-                                        if ____t_95(if ____t_92(____temp_91) then if ____t_94(____get_result_93) then __O[3226] else __get(ext, yy * W + xx) else __O[3227]) then
+                                        __O[3228] = ____get_result_93
+                                        if ____t_95(if ____t_92(____temp_91) then if ____t_94(____get_result_93) then __O[3228] else __get(ext, yy * W + xx) else __O[3229]) then
                                             perto = true
                                             break
                                         end
@@ -4740,10 +4740,10 @@ local __O = {};
                                     local ____t_99 = __t
                                     local ____t_97 = __t
                                     local ____temp_96 = y == y0 or y == y0 + h2 - 1
-                                    __O[3228] = ____temp_96
-                                    local ____temp_98 = if ____t_97(____temp_96) then __O[3228] else k == 27
-                                    __O[3229] = ____temp_98
-                                    local borda = if ____t_99(____temp_98) then __O[3229] else math.abs(math.abs(y - mid) - v * 1.2) < 1
+                                    __O[3230] = ____temp_96
+                                    local ____temp_98 = if ____t_97(____temp_96) then __O[3230] else k == 27
+                                    __O[3231] = ____temp_98
+                                    local borda = if ____t_99(____temp_98) then __O[3231] else math.abs(math.abs(y - mid) - v * 1.2) < 1
                                     __L1:L(
                                         xx,
                                         y,
@@ -4946,8 +4946,8 @@ local __O = {};
             local ____t_102 = __t
             local ____t_101 = __t
             local ____temp_100 = not __t(b)
-            __O[3230] = ____temp_100
-            if ____t_102(if ____t_101(____temp_100) then __O[3230] else b:querySelector(".tr-ico")) then
+            __O[3232] = ____temp_100
+            if ____t_102(if ____t_101(____temp_100) then __O[3232] else b:querySelector(".tr-ico")) then
                 return
             end
             local i = window.document:createElement("i")
@@ -5021,8 +5021,8 @@ local __O = {};
     local ____t_105 = __t
     local ____t_104 = __t
     local ____temp_103 = not __t(__L1.tela) or not __t(__L1.cvFundo)
-    __O[3196] = ____temp_103
-    if ____t_105(if ____t_104(____temp_103) then __O[3196] else window.TelaInicial) then
+    __O[3198] = ____temp_103
+    if ____t_105(if ____t_104(____temp_103) then __O[3198] else window.TelaInicial) then
         return
     end
     __call(__L1.tela.classList, "add", "tela-roca")
@@ -5158,11 +5158,11 @@ local __O = {};
             x,
             __L1:rioL(y)
         )
-        __O[3198] = ____temp_106
+        __O[3200] = ____temp_106
         return if ____t_107(____temp_106) then __lt(
             x,
             __L1:rioR(y)
-        ) else __O[3198]
+        ) else __O[3200]
     end
     __L1.trilhaC = function(____, y) return __L1:lerp(
         238,
@@ -6001,13 +6001,13 @@ local __O = {};
             local ____t_118 = __t
             local ____t_114 = __t
             local ____temp_113 = alvo ~= __L1.tela and alvo ~= __L1.cvFundo
-            __O[3231] = ____temp_113
+            __O[3233] = ____temp_113
             local ____t_117 = __t
             local ____opt_115 = alvo.classList
             if ____opt_115 ~= nil then
                 ____opt_115 = ____opt_115:contains("start-content")
             end
-            if ____t_118(if ____t_114(____temp_113) then not ____t_117(____opt_115) else __O[3231]) then
+            if ____t_118(if ____t_114(____temp_113) then not ____t_117(____opt_115) else __O[3233]) then
                 return
             end
             local x, y = table.unpack(
@@ -6019,10 +6019,10 @@ local __O = {};
             local ____t_122 = __t
             local ____t_120 = __t
             local ____temp_119 = x < 0 or y < 0
-            __O[3232] = ____temp_119
-            local ____temp_121 = if ____t_120(____temp_119) then __O[3232] else x > __L1.LW
-            __O[3233] = ____temp_121
-            if ____t_123(if ____t_122(____temp_121) then __O[3233] else y > __L1.LH) then
+            __O[3234] = ____temp_119
+            local ____temp_121 = if ____t_120(____temp_119) then __O[3234] else x > __L1.LW
+            __O[3235] = ____temp_121
+            if ____t_123(if ____t_122(____temp_121) then __O[3235] else y > __L1.LH) then
                 return
             end
             __L1:tocar(x, y)
@@ -6042,8 +6042,8 @@ local __O = {};
             local ____t_126 = __t
             local ____t_125 = __t
             local ____temp_124 = e.pointerType ~= "mouse"
-            __O[3234] = ____temp_124
-            if ____t_126(if ____t_125(____temp_124) then __O[3234] else e.target ~= __L1.cvFundo and e.target ~= __L1.tela) then
+            __O[3236] = ____temp_124
+            if ____t_126(if ____t_125(____temp_124) then __O[3236] else e.target ~= __L1.cvFundo and e.target ~= __L1.tela) then
                 return
             end
             if window.performance:now() - __L1.rastro < 45 then

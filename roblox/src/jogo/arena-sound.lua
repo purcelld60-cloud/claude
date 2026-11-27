@@ -91,8 +91,8 @@ local __O = {};
         local ____t_16 = __t
         local ____t_15 = __t
         local ____temp_14 = not __t(enabled(nil))
-        __O[2735] = ____temp_14
-        if ____t_16(if ____t_15(____temp_14) then __O[2735] else window.document.hidden) then
+        __O[2737] = ____temp_14
+        if ____t_16(if ____t_15(____temp_14) then __O[2737] else window.document.hidden) then
             return false
         end
         local id = options.id
@@ -138,8 +138,8 @@ local __O = {};
             )
             local ____t_21 = __t
             local ____TS__Number_result_20 = __TS__Number(options.volume)
-            __O[2736] = ____TS__Number_result_20
-            local ____temp_28 = if ____t_21(____TS__Number_result_20) then __O[2736] else 0.72
+            __O[2738] = ____TS__Number_result_20
+            local ____temp_28 = if ____t_21(____TS__Number_result_20) then __O[2738] else 0.72
             local ____opt_24 = window.DarocaAudio
             if ____opt_24 ~= nil then
                 ____opt_24 = ____opt_24.sfx
@@ -158,10 +158,10 @@ local __O = {};
             )
             local ____t_30 = __t
             local ____TS__Number_result_29 = __TS__Number(options.pitch)
-            __O[2737] = ____TS__Number_result_29
+            __O[2739] = ____TS__Number_result_29
             audio.playbackRate = math.max(
                 0.8,
-                math.min(1.3, if ____t_30(____TS__Number_result_29) then __O[2737] else 1)
+                math.min(1.3, if ____t_30(____TS__Number_result_29) then __O[2739] else 1)
             )
             __TS__Promise.resolve(audio:play()):catch(function()
             end)
@@ -180,8 +180,8 @@ local __O = {};
         }
         local ____t_32 = __t
         local ____get_result_31 = __get(frequencies, name)
-        __O[2738] = ____get_result_31
-        local values = if ____t_32(____get_result_31) then __O[2738] else frequencies.hit
+        __O[2740] = ____get_result_31
+        local values = if ____t_32(____get_result_31) then __O[2740] else frequencies.hit
         do
             local function ____catch()
                 return true, false
@@ -218,12 +218,12 @@ local __O = {};
                 end
                 local ____t_40 = __t
                 local ____TS__Number_result_39 = __TS__Number(options.volume)
-                __O[2739] = ____TS__Number_result_39
+                __O[2741] = ____TS__Number_result_39
                 ____self_41_setValueAtTime_42(
                     ____self_41,
                     math.max(
                         0.001,
-                        ____opt_result_37_38 * math.min(0.12, if ____t_40(____TS__Number_result_39) then __O[2739] else 0.055)
+                        ____opt_result_37_38 * math.min(0.12, if ____t_40(____TS__Number_result_39) then __O[2741] else 0.055)
                     ),
                     at
                 )
@@ -282,8 +282,8 @@ local __O = {};
             if ____opt_43 ~= nil then
                 ____opt_43 = ____opt_43.name
             end
-            __O[2740] = ____opt_43
-            return ____sound_46(nil, if ____t_45(____opt_43) then __O[2740] else "hit", if __t(event.detail) then event.detail else {})
+            __O[2742] = ____opt_43
+            return ____sound_46(nil, if ____t_45(____opt_43) then __O[2742] else "hit", if __t(event.detail) then event.detail else {})
         end
     )
     window:addEventListener(

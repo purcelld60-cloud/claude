@@ -443,3 +443,14 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     barra em gomos.
   - **Roblox** (`desenhista.lua`): janela com canvas de minigame vira telão grande, com os botões numa fileira embaixo.
     As setas Unicode viram `< v ^ >`.
+- **27/11 · Claude:** **Roblox: a tela de carregamento parava em "tela-inicial".**
+  - **Cliente** (`DaRoca.client.lua`):
+    - a imagem da tela (`EditableImage`) é criada antes de carregar o jogo, dentro de `pcall`. Se o Roblox não deixar,
+      a tela mostra o que ligar (Allow Mesh / Image APIs, publicar, verificação de idade/ID). Antes, o script morria
+      calado depois de carregar e o texto "tela-inicial" ficava congelado;
+    - mostra "efeitos especiais" enquanto carrega o `vendor__pixelfx`, e "ABRINDO A TELA INICIAL…" até o primeiro quadro;
+    - três erros seguidos nos quadros aparecem na tela.
+  - **`game.js`:** com `DAROCA_ROBLOX`, enquanto a tela inicial está aberta o mundo escondido atrás dela não é desenhado.
+    Em Lua 5.3, o quadro da tela inicial caiu de 1,09 s para 0,07 s.
+  - **Qualidade:** o "Automático" do Roblox começa na BAIXA. `Graphics.set('auto-low')` passou a ser aceito.
+    Em Lua 5.3 o jogo fica a 0,36 s por quadro na BAIXA e a 0,85 s na MÉDIA.
