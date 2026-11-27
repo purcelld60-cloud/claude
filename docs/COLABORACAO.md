@@ -385,3 +385,21 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
   - `Canvas.ceder` fica sempre ligado: se um quadro passa de 0,25 s, ele pausa e continua no quadro seguinte. Assim nenhum quadro pesado bate o limite de 10 s do Roblox.
   - Teclas, toques e texto que chegam durante a pausa ficam numa fila e são entregues no fim do quadro.
   - **`tela-inicial.js`:** com `DAROCA_ROBLOX`, o fundo fixo e a placa são montados no primeiro quadro, e não no carregamento.
+- **27/11 · Claude:** **efeitos de golpe por personagem** (`golpes.js`; o `game.js` passa `activeBoss.type`).
+  - **Base da pesquisa** (guia de VFX do League of Legends e linguagem de formas por elemento):
+    - cada poder tem forma e cor próprias, e dá para ler mesmo sem a cor;
+    - clarão curto no impacto, depois a forma forte, depois um resto fraco;
+    - animação em degraus de ~12 quadros/s.
+  - **Estilos** (`DONO` → `CRISTA` e `CHAO_ESTILO`), sempre dentro da área de acerto:
+    - Freddy: lascas de cimento e poeira;
+    - Igor: chão de gelatina com pizza e coxinha;
+    - Arthur: arcos de vento;
+    - Marco: onda de tinta riscada e lápis furando o chão;
+    - Caderno do Caos: folhas de caderno;
+    - Menezes: onda de esgoto com rato e bueiro estourando;
+    - Nicolas: parede de estrelas;
+    - Reeis: ouro e moedas;
+    - Kaique: grade de laser;
+    - Dedé: fumaça em rolos com cinza e brasa;
+    - Nikolas: gosma.
+  - Para chefe novo, basta pôr o tipo dele em `DONO` com um estilo.

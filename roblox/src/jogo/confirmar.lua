@@ -72,8 +72,8 @@ local __O = {};
                     local ____t_4 = __t
                     local ____t_3 = __t
                     local ____temp_2 = e.key == "Tab" or e.key == "ArrowLeft"
-                    __O[3174] = ____temp_2
-                    if ____t_4(if ____t_3(____temp_2) then __O[3174] else e.key == "ArrowRight") then
+                    __O[3176] = ____temp_2
+                    if ____t_4(if ____t_3(____temp_2) then __O[3176] else e.key == "ArrowRight") then
                         e:preventDefault()
                         local n, s = table.unpack(
                             el:querySelectorAll("button"),
@@ -129,8 +129,8 @@ local __O = {};
                 local ____self_9_parse_10 = ____self_9.parse
                 local ____t_8 = __t
                 local ____temp_7 = window.localStorage:getItem(SAVE)
-                __O[3175] = ____temp_7
-                local d = ____self_9_parse_10(____self_9, if ____t_8(____temp_7) then __O[3175] else "null")
+                __O[3177] = ____temp_7
+                local d = ____self_9_parse_10(____self_9, if ____t_8(____temp_7) then __O[3177] else "null")
                 return true, not not __t(if __t(d) then d.q else d)
             end)
             if not ____try then
@@ -156,10 +156,10 @@ local __O = {};
             local ____t_16 = __t
             local ____t_14 = __t
             local ____temp_13 = not __t(b)
-            __O[3176] = ____temp_13
-            local ____temp_15 = if ____t_14(____temp_13) then __O[3176] else liberado
-            __O[3177] = ____temp_15
-            if ____t_17(if ____t_16(____temp_15) then __O[3177] else not __t(temSave(nil))) then
+            __O[3178] = ____temp_13
+            local ____temp_15 = if ____t_14(____temp_13) then __O[3178] else liberado
+            __O[3179] = ____temp_15
+            if ____t_17(if ____t_16(____temp_15) then __O[3179] else not __t(temSave(nil))) then
                 return
             end
             e:preventDefault()

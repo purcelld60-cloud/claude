@@ -10,6 +10,7 @@ local __TS__Iterator = ____lualib.__TS__Iterator
 local ____exports = {}
 local __O = {};
 (function()
+    local Q
     local ____ = "use strict"
     if __t(window.Golpes) then
         return
@@ -780,47 +781,67 @@ local __O = {};
     end
     local function nuvemChao(self, h, chao, t, pal)
         local alt = ALT.chao
-        local cols = math.max(
-            2,
-            math.floor(h.r / 16 + 0.5)
+        local f = Q(nil, t, 8)
+        local n = math.max(
+            3,
+            math.floor(h.r / 13 + 0.5)
         )
-        local linhas = 3
         do
             local j = 0
-            while j < linhas do
+            while j < 4 do
                 do
                     local i = 0
-                    while i < cols do
-                        local r = math.min(h.r / cols + 4, alt / (linhas * 2) + 4)
-                        local x = h.x - h.r + r + i * ((h.r * 2 - 2 * r) / math.max(1, cols - 1))
-                        local y = chao - r - j * ((alt - 2 * r) / (linhas - 1)) + math.sin(t * 3 + i + j) * 2
+                    while i <= n - __mod(j, 2) do
+                        local u = (i + if __t(__mod(j, 2)) then 0.5 else 0) / math.max(1, n)
+                        local r = math.min(h.r / n + 4, 15) * (0.75 + 0.35 * hsh(nil, i * 7 + j * 3)) * (1 - j * 0.14)
+                        local x = h.x - h.r + r + u * (h.r * 2 - 2 * r) + math.sin(t * 2 + i + j) * 1.5
+                        local y = chao - r - j * (alt - 2 * r) / 3.4 - __mod(f + i * 2 + j, 3)
+                        local ____t_29 = __t
+                        local ____t_28 = __t
+                        local ____temp_27 = y - r < chao - alt or x - r < h.x - h.r - 1
+                        __O[1571] = ____temp_27
+                        if ____t_29(if ____t_28(____temp_27) then __O[1571] else __gt(
+                            x + r,
+                            __add(h.x, h.r) + 1
+                        )) then
+                            continue
+                        end
                         bolha(
                             nil,
                             x,
                             y,
                             r,
-                            __get(pal, 1),
-                            __get(pal, 0)
+                            if j < 2 then __get(pal, 1) else __get(pal, 2),
+                            if j == 0 then __get(pal, 0) else nil
                         )
                         bolha(
                             nil,
-                            x - 2,
-                            y - 3,
-                            r * 0.55,
-                            __get(pal, 2)
-                        )
-                        px(
-                            nil,
-                            x - r * 0.4,
-                            y - r * 0.5,
-                            3,
-                            3,
-                            __get(pal, 3)
+                            x - r * 0.3,
+                            y - r * 0.35,
+                            r * 0.42,
+                            if j < 2 then __get(pal, 2) else __get(pal, 3)
                         )
                         i = i + 1
                     end
                 end
                 j = j + 1
+            end
+        end
+        do
+            local i = 0
+            while i < 6 do
+                local k = __mod(t * 0.7 + i / 6, 1)
+                local x = h.x - h.r + 4 + hsh(nil, i * 5) * (h.r * 2 - 8)
+                local y = chao - 6 - k * (alt - 10)
+                px(
+                    nil,
+                    x,
+                    y,
+                    2,
+                    2,
+                    if __t(__mod(i, 3)) then "#9a948c" else "#ff8a30"
+                )
+                i = i + 1
             end
         end
     end
@@ -974,20 +995,1199 @@ local __O = {};
             end
         end
     end
-    local function desenharPerigo(self, c, h, t, lite, pal)
+    Q = function(____, t, fps)
+        if fps == nil then
+            fps = 12
+        end
+        return math.floor(t * fps)
+    end
+    local DONO = __ord({
+        freddy = "soco",
+        igor = "comida",
+        arthur = "tapa",
+        marco = "tinta",
+        giant = "papel",
+        menezes = "esgoto",
+        nicolas = "astral",
+        reeisBoss = "ouro",
+        kaique = "laser",
+        dede = "fumaca",
+        nikolas = "gosma"
+    }, "freddy,igor,arthur,marco,giant,menezes,nicolas,reeisBoss,kaique,dede,nikolas")
+    local function estiloDe(self, h, dono)
+        if __t(if __t(h.catarro) then h.catarro else h.type == "slime") then
+            return "gosma"
+        end
+        if __t(if __t(h.smoke) then h.smoke else h.type == "smoke") then
+            return "fumaca"
+        end
+        if __t(if __t(h.astral) then h.astral else h.type == "astral") then
+            return "astral"
+        end
+        if __t(if __t(h.ink) then h.ink else h.type == "ink") then
+            return if dono == "giant" then "papel" else "tinta"
+        end
+        local ____t_31 = __t
+        local ____get_result_30 = __get(DONO, if __t(h.dono) then h.dono else dono)
+        __O[1572] = ____get_result_30
+        return if ____t_31(____get_result_30) then __O[1572] else "pedra"
+    end
+    local COR = __ord(
+        {
+            soco = __arrL({
+                "#2e2824",
+                "#5e544c",
+                "#948a7e",
+                "#d6ccbe",
+                "#ff9a3a"
+            }, 5),
+            poeira = __arrL({"#7a6448", "#b09a78", "#dcc8a4"}, 3),
+            comida = __arrL({"#5a2e14", "#a85a24", "#e8a040", "#fff0b0"}, 4),
+            tapa = __arrL({"#5a7aa8", "#a8c8f0", "#e8f4ff", "#ffffff"}, 4),
+            tinta = __arrL({"#140a22", "#3a1e5a", "#7a4ab8", "#d6b8f8"}, 4),
+            papel = __arrL({"#2a3a6a", "#c8d4ea", "#f4f2ea", "#e05a5a"}, 4),
+            esgoto = __arrL({"#1e2614", "#3e4a22", "#6a7a36", "#c8d8a0"}, 4),
+            astral = __arrL({"#1c3a68", "#3f7fc0", "#9de5ec", "#fffbe0"}, 4),
+            ouro = __arrL({"#5a3a08", "#b8860b", "#f2c94c", "#fff6c0"}, 4),
+            laser = __arrL({"#3a0612", "#e02a4a", "#ff8aa0", "#bff6ff"}, 4)
+        },
+        "soco,poeira,comida,tapa,tinta,papel,esgoto,astral,ouro,laser"
+    )
+    local function clarao(self, b, idade, cor)
+        local a = 1 - idade / 0.1
+        if a <= 0 then
+            return
+        end
+        ctx:save()
+        ctx.globalAlpha = a * 0.75
+        px(
+            nil,
+            b.x0,
+            b.y0,
+            b.x1 - b.x0,
+            b.y1 - b.y0,
+            cor
+        )
+        ctx:restore()
+    end
+    local function lasca(self, x, y, w, h, cores, seed)
+        do
+            local yy = 0
+            while __lt(yy, h) do
+                local k = yy / h
+                local ww = math.max(
+                    2,
+                    w * (1 - k * 0.8) + (hsh(nil, seed + yy) - 0.5) * 3
+                )
+                px(
+                    nil,
+                    x - ww / 2 + (hsh(nil, seed * 3 + yy) - 0.5) * 2,
+                    y - yy - 3,
+                    ww,
+                    3,
+                    if k < 0.2 then __get(cores, 0) else if k < 0.55 then __get(cores, 1) else if k < 0.85 then __get(cores, 2) else __get(cores, 3)
+                )
+                yy = yy + 3
+            end
+        end
+    end
+    local function pizza(self, x, y, s, giro)
+        local pontos = if __t(__mod(giro, 2)) then __arrL(
+            {
+                __arrL(
+                    {
+                        0,
+                        __TS__Number(-s)
+                    },
+                    2
+                ),
+                __arrL({s, s}, 2),
+                __arrL(
+                    {
+                        __TS__Number(-s),
+                        s
+                    },
+                    2
+                )
+            },
+            3
+        ) else __arrL(
+            {
+                __arrL(
+                    {
+                        __TS__Number(-s),
+                        __TS__Number(-s)
+                    },
+                    2
+                ),
+                __arrL(
+                    {
+                        s,
+                        __TS__Number(-s)
+                    },
+                    2
+                ),
+                __arrL({0, s}, 2)
+            },
+            3
+        )
+        ctx.fillStyle = "#e8a040"
+        ctx:beginPath()
+        __call(
+            pontos,
+            "forEach",
+            function(____, p, i) return if __t(i) then ctx:lineTo(
+                __add(
+                    x,
+                    __get(p, 0)
+                ),
+                __add(
+                    y,
+                    __get(p, 1)
+                )
+            ) else ctx:moveTo(
+                __add(
+                    x,
+                    __get(p, 0)
+                ),
+                __add(
+                    y,
+                    __get(p, 1)
+                )
+            ) end
+        )
+        ctx:closePath()
+        __call(ctx, "fill")
+        px(
+            nil,
+            x - 1,
+            y - 1,
+            2,
+            2,
+            "#c83a2a"
+        )
+        px(
+            nil,
+            x + 1,
+            y + 1,
+            1,
+            1,
+            "#c83a2a"
+        )
+        px(
+            nil,
+            x - s,
+            y + if __t(__mod(giro, 2)) then s - 1 else __TS__Number(-s),
+            s * 2,
+            1,
+            "#a85a24"
+        )
+    end
+    local function coxinha(self, x, y, s)
+        bolha(
+            nil,
+            x,
+            y + 1,
+            s,
+            "#c8641e",
+            "#5a2e14"
+        )
+        px(
+            nil,
+            x - 1,
+            y - s - 1,
+            2,
+            2,
+            "#e8a040"
+        )
+        px(
+            nil,
+            x - s * 0.4,
+            y - s * 0.3,
+            2,
+            1,
+            "#fff0b0"
+        )
+    end
+    local function moeda(self, x, y, giro)
+        local w = __get(
+            __arrL({5, 3, 1, 3}, 4),
+            __mod(giro, 4)
+        )
+        px(
+            nil,
+            x - w,
+            y - 4,
+            w * 2 + 1,
+            8,
+            "#b8860b"
+        )
+        px(
+            nil,
+            x - w + 1,
+            y - 3,
+            math.max(1, w * 2 - 1),
+            6,
+            "#f2c94c"
+        )
+        if w > 2 then
+            px(
+                nil,
+                x - 1,
+                y - 2,
+                1,
+                3,
+                "#fff6c0"
+            )
+        end
+    end
+    local function brilho4(self, x, y, r, cor)
+        px(
+            nil,
+            x - r,
+            y,
+            r * 2 + 1,
+            1,
+            cor
+        )
+        px(
+            nil,
+            x,
+            y - r,
+            1,
+            r * 2 + 1,
+            cor
+        )
+        px(
+            nil,
+            x - 1,
+            y - 1,
+            3,
+            3,
+            cor
+        )
+    end
+    local function ratinho(self, x, y, dir)
+        px(
+            nil,
+            x - 4,
+            y - 3,
+            8,
+            3,
+            "#4a4448"
+        )
+        px(
+            nil,
+            x + dir * 3,
+            y - 4,
+            3,
+            2,
+            "#5a5458"
+        )
+        px(
+            nil,
+            x + dir * 5,
+            y - 3,
+            1,
+            1,
+            "#e88a9a"
+        )
+        px(
+            nil,
+            x - dir * 6,
+            y - 2,
+            3,
+            1,
+            "#e88a9a"
+        )
+    end
+    local CRISTA = __ord(
+        {
+            soco = function(self, h, cx, dir, chao, t, lite)
+                local M = ONDA.meia
+                local A = ONDA.alt
+                local f = Q(nil, t)
+                local C = COR.soco
+                local P = COR.poeira
+                local alt = __arrL({0.55, 1, 0.72}, 3)
+                local larg = __arrL({9, 11, 8}, 3)
+                do
+                    local i = 0
+                    while i < 3 do
+                        local x = cx + (i - 1) * 8 * dir
+                        lasca(
+                            nil,
+                            x,
+                            chao,
+                            __get(larg, i),
+                            A * __get(alt, i) * (0.92 + 0.08 * __mod(f + i, 2)),
+                            C,
+                            i * 7 + math.floor(h.r + 0.5)
+                        )
+                        i = i + 1
+                    end
+                end
+                px(
+                    nil,
+                    cx + dir * (M - 3),
+                    chao - A * 0.7,
+                    2,
+                    A * 0.5,
+                    __get(C, 4)
+                )
+                do
+                    local i = 0
+                    while i < 3 do
+                        local yy = chao - 8 - __mod(f * 5 + i * 13, 22)
+                        bolha(
+                            nil,
+                            cx - dir * (4 + i * 3),
+                            yy,
+                            4 + __mod(f + i, 2),
+                            __get(P, 1),
+                            __get(P, 0)
+                        )
+                        i = i + 1
+                    end
+                end
+                if not __t(lite) then
+                    do
+                        local i = 0
+                        while i < 4 do
+                            local k = __mod(t * 2.5 + i / 4, 1)
+                            local y = chao - 6 - math.sin(k * math.pi) * (A - 10)
+                            px(
+                                nil,
+                                cx + (hsh(nil, i + f) - 0.5) * 2 * (M - 2),
+                                y,
+                                3,
+                                3,
+                                __get(
+                                    C,
+                                    __mod(i, 2) + 1
+                                )
+                            )
+                            i = i + 1
+                        end
+                    end
+                end
+            end,
+            comida = function(self, h, cx, dir, chao, t, lite)
+                local M = ONDA.meia
+                local A = ONDA.alt
+                local f = Q(nil, t)
+                local C = COR.comida
+                local bal = math.sin(t * 22) * 4
+                do
+                    local x = __TS__Number(-M)
+                    while x < M do
+                        local k = 1 - math.abs(x) / M
+                        local a = math.max(3, A * 0.45 * k + bal * k)
+                        do
+                            local y = 0
+                            while y < a do
+                                px(
+                                    nil,
+                                    cx + x,
+                                    chao - y - 3,
+                                    3,
+                                    3,
+                                    if y < 4 then __get(C, 0) else if y / a < 0.6 then __get(C, 1) else __get(C, 2)
+                                )
+                                y = y + 3
+                            end
+                        end
+                        x = x + 3
+                    end
+                end
+                local itens = if __t(lite) then 2 else 3
+                do
+                    local i = 0
+                    while i < itens do
+                        local k = __mod(t * 1.8 + i / itens, 1)
+                        local y = chao - A * 0.45 - math.sin(k * math.pi) * (A * 0.5)
+                        local x = cx + (i - 1) * 7 * dir
+                        if __t(__mod(i, 2)) then
+                            pizza(
+                                nil,
+                                x,
+                                y,
+                                4,
+                                f + i
+                            )
+                        else
+                            coxinha(nil, x, y, 3)
+                        end
+                        i = i + 1
+                    end
+                end
+                do
+                    local i = 0
+                    while i < 4 do
+                        px(
+                            nil,
+                            cx + (hsh(nil, i * 3 + f) - 0.5) * 2 * M,
+                            chao - 4 - hsh(nil, i + f) * (A - 8),
+                            2,
+                            2,
+                            __get(C, 3)
+                        )
+                        i = i + 1
+                    end
+                end
+            end,
+            tapa = function(self, h, cx, dir, chao, t)
+                local A = ONDA.alt
+                local f = Q(nil, t)
+                local C = COR.tapa
+                do
+                    local j = 0
+                    while j < 3 do
+                        local alt = A * (1 - j * 0.22)
+                        local off = (2 - j) * 4 * dir
+                        do
+                            local y = 0
+                            while y < alt do
+                                local u = y / alt
+                                local bulge = math.sin(u * math.pi) * 7
+                                ctx.globalAlpha = 0.95 - j * 0.25
+                                px(
+                                    nil,
+                                    cx + off + dir * bulge - 1,
+                                    chao - y - 2,
+                                    2,
+                                    2,
+                                    if __t(j) then __get(C, 2) else __get(C, 3)
+                                )
+                                y = y + 2
+                            end
+                        end
+                        j = j + 1
+                    end
+                end
+                ctx.globalAlpha = 1
+                do
+                    local i = 0
+                    while i < 3 do
+                        local y = chao - 10 - __mod(f * 6 + i * 17, A - 14)
+                        px(
+                            nil,
+                            cx - dir * 8,
+                            y,
+                            4,
+                            1,
+                            __get(C, 1)
+                        )
+                        i = i + 1
+                    end
+                end
+            end,
+            tinta = function(self, h, cx, dir, chao, t, lite)
+                local M = ONDA.meia
+                local A = ONDA.alt
+                local f = Q(nil, t)
+                local C = COR.tinta
+                do
+                    local x = __TS__Number(-M)
+                    while x < M do
+                        local k = (x * dir + M) / (2 * M)
+                        local a = A * (0.35 + 0.65 * math.sin(k * math.pi * 0.5)) * (0.94 + 0.06 * __mod(f + x, 2))
+                        do
+                            local y = 0
+                            while y < a do
+                                px(
+                                    nil,
+                                    cx + x,
+                                    chao - y - 3,
+                                    3,
+                                    3,
+                                    if y / a < 0.3 then __get(C, 0) else if y / a < 0.8 then __get(C, 1) else __get(C, 2)
+                                )
+                                y = y + 3
+                            end
+                        end
+                        x = x + 3
+                    end
+                end
+                ctx.strokeStyle = __get(C, 3)
+                ctx.lineWidth = 1
+                ctx:beginPath()
+                do
+                    local i = 0
+                    while i < 6 do
+                        local y = chao - 8 - i * 8
+                        local x0 = cx - M + 3 + __mod(f + i, 3)
+                        ctx:moveTo(x0, y)
+                        ctx:lineTo(x0 + 7, y - 4)
+                        ctx:lineTo(x0 + 13, y + 1)
+                        ctx:lineTo(x0 + 20, y - 3)
+                        i = i + 1
+                    end
+                end
+                ctx:stroke()
+                if not __t(lite) then
+                    do
+                        local i = 0
+                        while i < 3 do
+                            local y = chao - A + 2 + __mod(f * 4 + i * 9, 16)
+                            bolha(
+                                nil,
+                                cx + (i - 1) * 7,
+                                y,
+                                2,
+                                __get(C, 1)
+                            )
+                            i = i + 1
+                        end
+                    end
+                end
+            end,
+            papel = function(self, h, cx, dir, chao, t)
+                local A = ONDA.alt
+                local f = Q(nil, t)
+                local C = COR.papel
+                do
+                    local i = 0
+                    while i < 4 do
+                        local k = __mod(t * 1.6 + i / 4, 1)
+                        local y = chao - 6 - k * (A - 14)
+                        local x = cx + (hsh(nil, i * 5) - 0.5) * 14
+                        local w = 9
+                        local hh = 11
+                        local inc = __mod(f + i, 3) - 1
+                        px(
+                            nil,
+                            x - w / 2,
+                            y - hh,
+                            w,
+                            hh,
+                            __get(C, 2)
+                        )
+                        do
+                            local l = 2
+                            while l < hh do
+                                px(
+                                    nil,
+                                    x - w / 2,
+                                    y - hh + l,
+                                    w,
+                                    1,
+                                    __get(C, 1)
+                                )
+                                l = l + 3
+                            end
+                        end
+                        px(
+                            nil,
+                            x - w / 2 + 2,
+                            y - hh,
+                            1,
+                            hh,
+                            __get(C, 3)
+                        )
+                        px(
+                            nil,
+                            x - w / 2 + inc,
+                            y - hh - 1,
+                            w,
+                            1,
+                            __get(C, 0)
+                        )
+                        i = i + 1
+                    end
+                end
+                lasca(
+                    nil,
+                    cx,
+                    chao,
+                    12,
+                    A * 0.45,
+                    __arrL(
+                        {
+                            __get(C, 0),
+                            "#4a4a6a",
+                            __get(C, 1),
+                            __get(C, 2)
+                        },
+                        4
+                    ),
+                    3
+                )
+            end,
+            esgoto = function(self, h, cx, dir, chao, t, lite)
+                local M = ONDA.meia
+                local A = ONDA.alt
+                local f = Q(nil, t)
+                local C = COR.esgoto
+                do
+                    local x = __TS__Number(-M)
+                    while x < M do
+                        local k = (x * dir + M) / (2 * M)
+                        local a = A * 0.85 * math.sin(k * math.pi * 0.5) ^ 0.8 * (0.95 + 0.05 * __mod(f + x, 2))
+                        do
+                            local y = 0
+                            while y < a do
+                                px(
+                                    nil,
+                                    cx + x,
+                                    chao - y - 3,
+                                    3,
+                                    3,
+                                    if y / a < 0.3 then __get(C, 0) else if y / a < 0.75 then __get(C, 1) else __get(C, 2)
+                                )
+                                y = y + 3
+                            end
+                        end
+                        x = x + 3
+                    end
+                end
+                do
+                    local s2 = 0
+                    while s2 < 5 do
+                        px(
+                            nil,
+                            cx + dir * (M - 5 - s2 * 2),
+                            chao - A * 0.85 - __mod(s2, 2) * 2,
+                            3,
+                            2,
+                            __get(C, 3)
+                        )
+                        s2 = s2 + 1
+                    end
+                end
+                ratinho(nil, cx - dir * 2, chao - A * 0.85 - 4, dir)
+                if not __t(lite) then
+                    do
+                        local i = 0
+                        while i < 3 do
+                            local yy = chao - 8 - __mod(t * 30 + i * 13, A * 0.6)
+                            bolha(
+                                nil,
+                                cx + (i - 1) * 6,
+                                yy,
+                                1.5,
+                                __get(C, 3)
+                            )
+                            i = i + 1
+                        end
+                    end
+                end
+            end,
+            astral = function(self, h, cx, dir, chao, t)
+                local M = ONDA.meia
+                local A = ONDA.alt
+                local f = Q(nil, t)
+                local C = COR.astral
+                do
+                    local x = __TS__Number(-M)
+                    while x < M do
+                        local k = 1 - math.abs(x + 1.5) / M
+                        do
+                            local y = 0
+                            while y < A do
+                                px(
+                                    nil,
+                                    cx + x,
+                                    chao - y - 3,
+                                    3,
+                                    3,
+                                    if k > 0.75 then __get(C, 3) else if k > 0.45 then __get(C, 2) else if k > 0.2 then __get(C, 1) else __get(C, 0)
+                                )
+                                y = y + 3
+                            end
+                        end
+                        x = x + 3
+                    end
+                end
+                do
+                    local i = 0
+                    while i < 4 do
+                        local y = chao - 8 - __mod(f * 5 + i * 13, A - 12)
+                        local x = cx + (hsh(nil, i + 2) - 0.5) * (2 * M - 8)
+                        brilho4(
+                            nil,
+                            x,
+                            y,
+                            1 + __mod(f + i, 2),
+                            "#ffffff"
+                        )
+                        i = i + 1
+                    end
+                end
+            end,
+            ouro = function(self, h, cx, dir, chao, t)
+                local M = ONDA.meia
+                local A = ONDA.alt
+                local f = Q(nil, t)
+                local C = COR.ouro
+                do
+                    local x = __TS__Number(-M)
+                    while x < M do
+                        local k = 1 - math.abs(x) / M
+                        local a = A * 0.5 * k + 6
+                        do
+                            local y = 0
+                            while y < a do
+                                px(
+                                    nil,
+                                    cx + x,
+                                    chao - y - 3,
+                                    3,
+                                    3,
+                                    if y < 4 then __get(C, 0) else if y / a < 0.7 then __get(C, 1) else __get(C, 2)
+                                )
+                                y = y + 3
+                            end
+                        end
+                        x = x + 3
+                    end
+                end
+                do
+                    local i = 0
+                    while i < 3 do
+                        local k = __mod(t * 1.5 + i / 3, 1)
+                        local y = chao - A * 0.5 - math.sin(k * math.pi) * (A * 0.45)
+                        moeda(nil, cx + (i - 1) * 7, y, f + i)
+                        i = i + 1
+                    end
+                end
+                brilho4(
+                    nil,
+                    cx + dir * 4,
+                    chao - A + 6 + __mod(f, 3) * 3,
+                    2,
+                    __get(C, 3)
+                )
+            end,
+            laser = function(self, h, cx, dir, chao, t)
+                local M = ONDA.meia
+                local A = ONDA.alt
+                local f = Q(nil, t, 16)
+                local C = COR.laser
+                do
+                    local x = __TS__Number(-M)
+                    while x < M do
+                        local forte = __mod(x + M + f * 4, 12) < 4
+                        px(
+                            nil,
+                            cx + x,
+                            chao - A,
+                            2,
+                            A,
+                            if __t(forte) then __get(C, 1) else __get(C, 0)
+                        )
+                        if __t(forte) then
+                            px(
+                                nil,
+                                cx + x,
+                                chao - A,
+                                1,
+                                A,
+                                __get(C, 2)
+                            )
+                        end
+                        x = x + 4
+                    end
+                end
+                do
+                    local y = chao - A
+                    while __lt(y, chao) do
+                        px(
+                            nil,
+                            cx - M,
+                            y + __mod(f, 2) * 3,
+                            2 * M,
+                            1,
+                            __get(C, 3)
+                        )
+                        y = y + 6
+                    end
+                end
+                px(
+                    nil,
+                    cx - M,
+                    chao - A,
+                    2 * M,
+                    2,
+                    __get(C, 2)
+                )
+            end
+        },
+        "soco,comida,tapa,tinta,papel,esgoto,astral,ouro,laser"
+    )
+    local CHAO_ESTILO = __ord(
+        {
+            tinta = function(self, h, chao, t, alt, lite)
+                local n = math.max(
+                    3,
+                    math.floor(h.r * 2 / 14 + 0.5)
+                )
+                local f = Q(nil, t)
+                do
+                    local i = 0
+                    while i < n do
+                        local x = h.x - h.r + 7 + i * (h.r * 2 - 14) / math.max(1, n - 1)
+                        local a = alt * if __t(__mod(i, 2)) then 0.82 else 1 * (0.95 + 0.05 * __mod(f + i, 2))
+                        local w = 6
+                        px(
+                            nil,
+                            x - w / 2,
+                            chao - a + 10,
+                            w,
+                            a - 10,
+                            "#f2c94c"
+                        )
+                        px(
+                            nil,
+                            x - w / 2,
+                            chao - a + 10,
+                            2,
+                            a - 10,
+                            "#c89a2a"
+                        )
+                        px(
+                            nil,
+                            x - w / 2,
+                            chao - 8,
+                            w,
+                            4,
+                            "#9aa0a6"
+                        )
+                        px(
+                            nil,
+                            x - w / 2,
+                            chao - 4,
+                            w,
+                            4,
+                            "#e88a9a"
+                        )
+                        do
+                            local k = 0
+                            while k < 7 do
+                                px(
+                                    nil,
+                                    x - w / 2 * (1 - k / 7),
+                                    chao - a + 10 - k,
+                                    w * (1 - k / 7),
+                                    1,
+                                    if k < 4 then "#e8c8a0" else "#2a2a2a"
+                                )
+                                k = k + 1
+                            end
+                        end
+                        i = i + 1
+                    end
+                end
+                px(
+                    nil,
+                    h.x - h.r,
+                    chao - 3,
+                    h.r * 2,
+                    3,
+                    __get(COR.tinta, 0)
+                )
+                if not __t(lite) then
+                    do
+                        local i = 0
+                        while i < 5 do
+                            bolha(
+                                nil,
+                                h.x - h.r + hsh(nil, i * 7 + f) * h.r * 2,
+                                chao - 4 - hsh(nil, i + f) * 14,
+                                2,
+                                __get(COR.tinta, 1)
+                            )
+                            i = i + 1
+                        end
+                    end
+                end
+            end,
+            papel = function(self, h, chao, t, alt)
+                local n = math.max(
+                    3,
+                    math.floor(h.r * 2 / 16 + 0.5)
+                )
+                local f = Q(nil, t)
+                local C = COR.papel
+                do
+                    local i = 0
+                    while i < n do
+                        local x = h.x - h.r + 8 + i * (h.r * 2 - 16) / math.max(1, n - 1)
+                        local a = alt * if __t(__mod(i, 2)) then 0.78 else 1
+                        local w = 12
+                        local inc = __mod(f + i, 3) - 1
+                        px(
+                            nil,
+                            x - w / 2 + inc,
+                            chao - a,
+                            w,
+                            a,
+                            __get(C, 2)
+                        )
+                        do
+                            local l = 4
+                            while l < a do
+                                px(
+                                    nil,
+                                    x - w / 2 + inc,
+                                    chao - a + l,
+                                    w,
+                                    1,
+                                    __get(C, 1)
+                                )
+                                l = l + 4
+                            end
+                        end
+                        px(
+                            nil,
+                            x - w / 2 + 2 + inc,
+                            chao - a,
+                            1,
+                            a,
+                            __get(C, 3)
+                        )
+                        px(
+                            nil,
+                            x - w / 2 + inc,
+                            chao - a,
+                            w,
+                            1,
+                            __get(C, 0)
+                        )
+                        i = i + 1
+                    end
+                end
+            end,
+            esgoto = function(self, h, chao, t, alt, lite)
+                local f = Q(nil, t)
+                local C = COR.esgoto
+                do
+                    local x = h.x - h.r
+                    while __lt(
+                        x,
+                        __add(h.x, h.r)
+                    ) do
+                        local k = 1 - math.abs(x + 1.5 - h.x) / h.r
+                        local a = alt * (0.55 + 0.45 * k) * (0.94 + 0.06 * __mod(f + x, 2))
+                        do
+                            local y = 0
+                            while y < a do
+                                px(
+                                    nil,
+                                    x,
+                                    chao - y - 3,
+                                    3,
+                                    3,
+                                    if y / a < 0.25 then __get(C, 0) else if y / a < 0.7 then __get(C, 1) else if y / a < 0.92 then __get(C, 2) else __get(C, 3)
+                                )
+                                y = y + 3
+                            end
+                        end
+                        x = x + 3
+                    end
+                end
+                px(
+                    nil,
+                    h.x - 12,
+                    chao - 4,
+                    24,
+                    4,
+                    "#2a2a2e"
+                )
+                px(
+                    nil,
+                    h.x - 10,
+                    chao - 3,
+                    20,
+                    1,
+                    "#5a5a62"
+                )
+                ratinho(
+                    nil,
+                    h.x - h.r + 8 + __mod(
+                        f * 3,
+                        math.max(1, h.r * 2 - 16)
+                    ),
+                    chao - alt + 6,
+                    1
+                )
+                if not __t(lite) then
+                    do
+                        local i = 0
+                        while i < 6 do
+                            local k = __mod(t * 2 + i / 6, 1)
+                            bolha(
+                                nil,
+                                h.x + (hsh(nil, i) - 0.5) * h.r * 1.6,
+                                chao - alt + 4 + k * 10,
+                                2,
+                                __get(C, 3)
+                            )
+                            i = i + 1
+                        end
+                    end
+                end
+            end,
+            comida = function(self, h, chao, t, alt)
+                local f = Q(nil, t)
+                local n = math.max(
+                    3,
+                    math.floor(h.r * 2 / 14 + 0.5)
+                )
+                do
+                    local i = 0
+                    while i < n do
+                        local x = h.x - h.r + 7 + i * (h.r * 2 - 14) / math.max(1, n - 1)
+                        lasca(
+                            nil,
+                            x,
+                            chao,
+                            10,
+                            alt * if __t(__mod(i, 2)) then 0.7 else 0.95,
+                            COR.comida,
+                            i * 3
+                        )
+                        if __t(__mod(i, 2)) then
+                            pizza(
+                                nil,
+                                x,
+                                chao - alt * 0.7 - 4,
+                                4,
+                                f + i
+                            )
+                        else
+                            coxinha(nil, x, chao - alt * 0.95 - 3, 3)
+                        end
+                        i = i + 1
+                    end
+                end
+            end,
+            ouro = function(self, h, chao, t, alt)
+                local f = Q(nil, t)
+                local C = COR.ouro
+                do
+                    local x = h.x - h.r
+                    while __lt(
+                        x,
+                        __add(h.x, h.r)
+                    ) do
+                        local k = 1 - math.abs(x + 1.5 - h.x) / h.r
+                        local a = alt * (0.3 + 0.7 * k)
+                        do
+                            local y = 0
+                            while y < a do
+                                px(
+                                    nil,
+                                    x,
+                                    chao - y - 3,
+                                    3,
+                                    3,
+                                    if y / a < 0.3 then __get(C, 0) else if y / a < 0.8 then __get(C, 1) else __get(C, 2)
+                                )
+                                y = y + 3
+                            end
+                        end
+                        x = x + 3
+                    end
+                end
+                do
+                    local i = 0
+                    while i < 4 do
+                        moeda(
+                            nil,
+                            h.x + (hsh(nil, i * 3) - 0.5) * h.r * 1.4,
+                            chao - alt * 0.5 - __mod(t * 40 + i * 11, alt * 0.45),
+                            f + i
+                        )
+                        i = i + 1
+                    end
+                end
+            end,
+            laser = function(self, h, chao, t, alt)
+                local f = Q(nil, t, 16)
+                local C = COR.laser
+                do
+                    local x = h.x - h.r
+                    while __lt(
+                        x,
+                        __add(h.x, h.r)
+                    ) do
+                        px(
+                            nil,
+                            x,
+                            chao - alt,
+                            2,
+                            alt,
+                            if __mod(x + f * 6, 18) < 6 then __get(C, 1) else __get(C, 0)
+                        )
+                        x = x + 6
+                    end
+                end
+                do
+                    local y = chao - alt
+                    while __lt(y, chao) do
+                        px(
+                            nil,
+                            h.x - h.r,
+                            y + __mod(f, 2) * 4,
+                            h.r * 2,
+                            1,
+                            __get(C, 2)
+                        )
+                        y = y + 8
+                    end
+                end
+                px(
+                    nil,
+                    h.x - h.r,
+                    chao - alt,
+                    h.r * 2,
+                    2,
+                    __get(C, 3)
+                )
+            end,
+            soco = function(self, h, chao, t, alt)
+                local n = math.max(
+                    3,
+                    math.floor(h.r * 2 / 12 + 0.5)
+                )
+                do
+                    local i = 0
+                    while i < n do
+                        local x = h.x - h.r + 6 + i * (h.r * 2 - 12) / math.max(1, n - 1)
+                        lasca(
+                            nil,
+                            x,
+                            chao,
+                            12,
+                            alt * if __t(__mod(i, 2)) then 0.75 else 1,
+                            COR.soco,
+                            i * 5
+                        )
+                        i = i + 1
+                    end
+                end
+            end
+        },
+        "tinta,papel,esgoto,comida,ouro,laser,soco"
+    )
+    local function desenharPerigo(self, c, h, t, lite, pal, dono)
         if __t(not __t(c) or not __t(h)) then
             return false
         end
-        local ____t_29 = __t
-        local ____t_28 = __t
-        local ____temp_27 = if __t(h.height) then h.type ~= "astral" else h.height
-        __O[1571] = ____temp_27
-        if ____t_29(if ____t_28(____temp_27) then __le(h.delay, 0) else __O[1571]) then
+        local ____t_34 = __t
+        local ____t_33 = __t
+        local ____temp_32 = if __t(h.height) then h.type ~= "astral" else h.height
+        __O[1573] = ____temp_32
+        if ____t_34(if ____t_33(____temp_32) then __le(h.delay, 0) else __O[1573]) then
             return false
         end
         ctx = c
         local p = paleta(nil, h, pal)
         local chao = chaoDo(nil, h)
+        if __t(if __t(dono) then not __t(h.dono) else dono) then
+            h.dono = dono
+        end
         if __gt(h.delay, 0) then
             aviso(
                 nil,
@@ -998,6 +2198,11 @@ local __O = {};
             )
             return true
         end
+        if h.__t0 == nil then
+            h.__t0 = t
+        end
+        local idade = t - h.__t0
+        local estilo = estiloDe(nil, h, dono)
         if h.type == "ring" then
             for ____, dir in __iterar((__arrL({-1, 1}, 2))) do
                 rastro(
@@ -1007,15 +2212,41 @@ local __O = {};
                     chao,
                     p
                 )
-                crista(
+                local cx = h.x + dir * h.r
+                local f = __get(CRISTA, estilo)
+                if __t(f) then
+                    f(
+                        nil,
+                        h,
+                        cx,
+                        dir,
+                        chao,
+                        t,
+                        lite
+                    )
+                else
+                    crista(
+                        nil,
+                        h,
+                        cx,
+                        dir,
+                        chao,
+                        t,
+                        p,
+                        lite
+                    )
+                end
+                clarao(
                     nil,
-                    h,
-                    h.x + dir * h.r,
-                    dir,
-                    chao,
-                    t,
-                    p,
-                    lite
+                    caixa(
+                        nil,
+                        cx - ONDA.meia,
+                        chao - ONDA.alt,
+                        cx + ONDA.meia,
+                        chao
+                    ),
+                    idade,
+                    "#ffffff"
                 )
             end
             return true
@@ -1053,13 +2284,38 @@ local __O = {};
                 p
             )
         else
-            erupcao(
+            local f = __get(CHAO_ESTILO, estilo)
+            if __t(f) then
+                f(
+                    nil,
+                    h,
+                    chao,
+                    t,
+                    if __t(h.height) then h.height else ALT.chao,
+                    lite
+                )
+            else
+                erupcao(
+                    nil,
+                    h,
+                    chao,
+                    t,
+                    p,
+                    lite
+                )
+            end
+        end
+        for ____, b in __iterar((perigoCaixas(nil, h, chao))) do
+            clarao(
                 nil,
-                h,
-                chao,
-                t,
-                p,
-                lite
+                {
+                    x0 = b.x0,
+                    y0 = math.max(0, b.y0),
+                    x1 = b.x1,
+                    y1 = b.y1 - 2
+                },
+                idade,
+                "#ffffff"
             )
         end
         return true
@@ -1198,11 +2454,11 @@ local __O = {};
         )
     end
     local function desenharCaixas(self, c, s)
-        local ____t_32 = __t
-        local ____t_31 = __t
-        local ____temp_30 = not __t(mostrar) or not __t(c)
-        __O[1572] = ____temp_30
-        if ____t_32(if ____t_31(____temp_30) then __O[1572] else not __t(s)) then
+        local ____t_37 = __t
+        local ____t_36 = __t
+        local ____temp_35 = not __t(mostrar) or not __t(c)
+        __O[1574] = ____temp_35
+        if ____t_37(if ____t_36(____temp_35) then __O[1574] else not __t(s)) then
             return
         end
         c:save()
@@ -1215,11 +2471,11 @@ local __O = {};
             )
         end
         for ____, e in __iterar((if __t(s.enemies) then s.enemies else __arrL({}, 0))) do
-            local ____t_35 = __t
-            local ____t_34 = __t
-            local ____temp_33 = __gt(e.hp, 0) and not __t(e.conquista)
-            __O[1573] = ____temp_33
-            if ____t_35(if ____t_34(____temp_33) then e.type ~= "igor" else __O[1573]) then
+            local ____t_40 = __t
+            local ____t_39 = __t
+            local ____temp_38 = __gt(e.hp, 0) and not __t(e.conquista)
+            __O[1575] = ____temp_38
+            if ____t_40(if ____t_39(____temp_38) then e.type ~= "igor" else __O[1575]) then
                 contorno(
                     nil,
                     c,
