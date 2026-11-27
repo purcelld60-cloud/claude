@@ -383,8 +383,8 @@ local __O = {};
         end
         local ____t_14 = __t
         local ____get_result_13 = __get(AVES, tipo)
-        __O[914] = ____get_result_13
-        local A = if ____t_14(____get_result_13) then __O[914] else AVES.pombo
+        __O[924] = ____get_result_13
+        local A = if ____t_14(____get_result_13) then __O[924] else AVES.pombo
         local urubu = tipo == "urubu"
         local function R(____, a, b, w, h, col)
             c.fillStyle = col
@@ -1074,8 +1074,8 @@ local __O = {};
         if ____opt_17 ~= nil then
             ____opt_result_19 = ____opt_17(____opt_17)
         end
-        __O[915] = ____opt_result_19
-        return if ____t_20(____opt_result_19) then __O[915] else {hp = 1, windup = 1, recovery = 1, incomingDamage = 1}
+        __O[925] = ____opt_result_19
+        return if ____t_20(____opt_result_19) then __O[925] else {hp = 1, windup = 1, recovery = 1, incomingDamage = 1}
     end
     local STATS = __ord(
         {
@@ -1179,10 +1179,10 @@ local __O = {};
             local ____t_35 = __t
             local ____t_33 = __t
             local ____temp_32 = B.st == "espera" or B.st == "troca"
-            __O[917] = ____temp_32
-            local ____temp_34 = if ____t_33(____temp_32) then __O[917] else B.st == "derrotado"
-            __O[918] = ____temp_34
-            if ____t_36(if ____t_35(____temp_34) then __O[918] else B.st == "entrada") then
+            __O[927] = ____temp_32
+            local ____temp_34 = if ____t_33(____temp_32) then __O[927] else B.st == "derrotado"
+            __O[928] = ____temp_34
+            if ____t_36(if ____t_35(____temp_34) then __O[928] else B.st == "entrada") then
                 return false
             end
             local exposto = B.st == "recupera" or B.stun > 0
@@ -1239,8 +1239,8 @@ local __O = {};
                 __getq(K.falasFase, f - 1),
                 0
             )
-            __O[919] = ____getq_result_38
-            ____fala_40(nil, if ____t_39(____getq_result_38) then __O[919] else __get(K.falas, 0))
+            __O[929] = ____getq_result_38
+            ____fala_40(nil, if ____t_39(____getq_result_38) then __O[929] else __get(K.falas, 0))
         end
         function derrotar(self)
             luta = nil
@@ -1324,8 +1324,8 @@ local __O = {};
             local ____t_66 = __t
             local ____t_65 = __t
             local ____temp_64 = if __t(arena.ativa) then not __t(e.invocado) else arena.ativa
-            __O[925] = ____temp_64
-            if ____t_66(if ____t_65(____temp_64) then __gt(e.x, arena.l - 40) and __lt(e.x, arena.r + 40) else __O[925]) then
+            __O[935] = ____temp_64
+            if ____t_66(if ____t_65(____temp_64) then __gt(e.x, arena.l - 40) and __lt(e.x, arena.r + 40) else __O[935]) then
                 e.x = if __lt(
                     e.x,
                     __add(arena.l, arena.r) / 2
@@ -1350,15 +1350,15 @@ local __O = {};
                     ),
                     0
                 )
-                __O[926] = ____get_result_67
-                local alvo = if ____t_68(____get_result_67) then __O[926] else if __t(B.st ~= "espera" and __gt(B.hp, 0)) then B else nil
+                __O[936] = ____get_result_67
+                local alvo = if ____t_68(____get_result_67) then __O[936] else if __t(B.st ~= "espera" and __gt(B.hp, 0)) then B else nil
                 if __t(alvo) then
                     local d = alvo.x - e.x
                     local ____e_71 = e
                     local ____t_70 = __t
                     local ____TS__MathSign_result_69 = __TS__MathSign(d)
-                    __O[927] = ____TS__MathSign_result_69
-                    ____e_71.dir = if ____t_70(____TS__MathSign_result_69) then __O[927] else 1
+                    __O[937] = ____TS__MathSign_result_69
+                    ____e_71.dir = if ____t_70(____TS__MathSign_result_69) then __O[937] else 1
                     if math.abs(d) > 36 then
                         e.x = e.x + e.dir * 120 * dt
                     elseif __le(e.golpe, 0) then
@@ -1402,8 +1402,8 @@ local __O = {};
                     local ay = __get(e.alvo, 1) - e.y
                     local ____t_73 = __t
                     local ____hypot_result_72 = __hypot(ax, ay)
-                    __O[928] = ____hypot_result_72
-                    local d = if ____t_73(____hypot_result_72) then __O[928] else 1
+                    __O[938] = ____hypot_result_72
+                    local d = if ____t_73(____hypot_result_72) then __O[938] else 1
                     e.x = e.x + ax / d * 420 * dt
                     e.y = e.y + ay / d * 420 * dt
                     if __t(math.abs(P.x - e.x) < 20 and math.abs(P.y - 30 - e.y) < 30) then
@@ -1429,8 +1429,8 @@ local __O = {};
                     local ____t_76 = __t
                     local ____t_75 = __t
                     local ____temp_74 = if __t(perto) then math.abs(dx) < 380 else perto
-                    __O[929] = ____temp_74
-                    if ____t_76(if ____t_75(____temp_74) then __le(e.tt, 0) else __O[929]) then
+                    __O[939] = ____temp_74
+                    if ____t_76(if ____t_75(____temp_74) then __le(e.tt, 0) else __O[939]) then
                         e.st = "mira"
                         e.tt = 0.85
                         e.dir = __TS__MathSign(dx)
@@ -1477,8 +1477,8 @@ local __O = {};
                     local ____t_79 = __t
                     local ____t_78 = __t
                     local ____temp_77 = not __t(e.acertou) and math.abs(P.x - e.x) < 46
-                    __O[930] = ____temp_77
-                    if ____t_79(if ____t_78(____temp_77) then math.abs(P.y - e.y) < 50 else __O[930]) then
+                    __O[940] = ____temp_77
+                    if ____t_79(if ____t_78(____temp_77) then math.abs(P.y - e.y) < 50 else __O[940]) then
                         e.acertou = true
                         api:ferir(st.dano, e.x)
                     end
@@ -1592,8 +1592,8 @@ local __O = {};
                 falaT = rnd(nil, 4, 6.5)
                 local ____t_81 = __t
                 local ____getq_result_80 = __getq(K.falasFase, B.fase - 1)
-                __O[931] = ____getq_result_80
-                local falas = if ____t_81(____getq_result_80) then __O[931] else K.falas
+                __O[941] = ____getq_result_80
+                local falas = if ____t_81(____getq_result_80) then __O[941] else K.falas
                 fala(
                     nil,
                     __get(
@@ -1673,8 +1673,8 @@ local __O = {};
         local ____temp_23 = K.hp * ESC
         local ____t_22 = __t
         local ____DIF_result_hp_21 = DIF(nil).hp
-        __O[916] = ____DIF_result_hp_21
-        local HPB = math.floor(____temp_23 * if ____t_22(____DIF_result_hp_21) then __O[916] else 1 + 0.5)
+        __O[926] = ____DIF_result_hp_21
+        local HPB = math.floor(____temp_23 * if ____t_22(____DIF_result_hp_21) then __O[926] else 1 + 0.5)
         combate = window.ConquistaCombate
         HPF = combate:barras(slug, if slug == "jorge" then HPB * 1.4 else HPB)
         NF = __len(HPF)
@@ -1766,8 +1766,8 @@ local __O = {};
                 local ____t_47 = __t
                 local ____t_46 = __t
                 local ____temp_45 = not __t(q.pego) and math.abs(P.x - q.x) < 22
-                __O[920] = ____temp_45
-                if ____t_47(if ____t_46(____temp_45) then __gt(P.y, FLOOR - 60) else __O[920]) then
+                __O[930] = ____temp_45
+                if ____t_47(if ____t_46(____temp_45) then __gt(P.y, FLOOR - 60) else __O[930]) then
                     q.pego = true
                     P.hp = math.min(if __t(P.max) then P.max else 100, P.hp + 20)
                     flutua(
@@ -1827,8 +1827,8 @@ local __O = {};
                 local ____t_54 = __t
                 local ____t_53 = __t
                 local ____temp_52 = math.abs(P.x - q.x) < if __t(q.chao) then 16 else 18 and __lt(P.y - 60, q.y + 6)
-                __O[921] = ____temp_52
-                if ____t_54(if ____t_53(____temp_52) then __gt(P.y, q.y - alto + if __t(q.chao) then 0 else -6) else __O[921]) then
+                __O[931] = ____temp_52
+                if ____t_54(if ____t_53(____temp_52) then __gt(P.y, q.y - alto + if __t(q.chao) then 0 else -6) else __O[931]) then
                     if __t(if __t(q.chao) then __gt(P.y, FLOOR - 22) else true) then
                         api:ferir(q.dano, q.x)
                         q.vida = 0
@@ -1847,8 +1847,8 @@ local __O = {};
                         __get(projs, i).x,
                         arena.l - 900
                     )
-                    __O[922] = ____temp_55
-                    if ____t_57(if ____t_56(____temp_55) then __O[922] else __gt(
+                    __O[932] = ____temp_55
+                    if ____t_57(if ____t_56(____temp_55) then __O[932] else __gt(
                         __get(projs, i).x,
                         arena.r + 900
                     )) then
@@ -1862,8 +1862,8 @@ local __O = {};
                 local ____t_60 = __t
                 local ____t_59 = __t
                 local ____temp_58 = f.k == "raio" and not __t(f.feito)
-                __O[923] = ____temp_58
-                if ____t_60(if ____t_59(____temp_58) then __gt(f.t, 0.05) else __O[923]) then
+                __O[933] = ____temp_58
+                if ____t_60(if ____t_59(____temp_58) then __gt(f.t, 0.05) else __O[933]) then
                     f.feito = true
                     if math.abs(P.x - f.x) < 26 then
                         api:ferir(f.dano, f.x)
@@ -1915,8 +1915,8 @@ local __O = {};
             local ____t_63 = __t
             local ____t_62 = __t
             local ____temp_61 = B.st == "espera" and __gt(P.x, arena.l + 60)
-            __O[924] = ____temp_61
-            if ____t_63(if ____t_62(____temp_61) then not __t(vencido) else __O[924]) then
+            __O[934] = ____temp_61
+            if ____t_63(if ____t_62(____temp_61) then not __t(vencido) else __O[934]) then
                 arena.ativa = true
                 B.st = "entrada"
                 api:entrarArena()
@@ -2998,12 +2998,12 @@ local __O = {};
                             local ____e_dir_98 = e.dir
                             local ____t_97 = __t
                             local ____temp_96 = math.abs(e.vx) > 5
-                            __O[932] = ____temp_96
+                            __O[942] = ____temp_96
                             __TS__SparseArrayPush(
                                 ____array_99,
                                 {
                                     facing = ____e_dir_98,
-                                    moving = if ____t_97(____temp_96) then __O[932] else e.st == "patrulha" and math.abs(P.x - e.x) < 430,
+                                    moving = if ____t_97(____temp_96) then __O[942] else e.st == "patrulha" and math.abs(P.x - e.x) < 430,
                                     hit = __gt(e.hit, 0),
                                     attack = e.st == "mira",
                                     attackProgress = 0.3
@@ -3085,8 +3085,8 @@ local __O = {};
                 local sh = if B.st == "carga" then math.floor(math.sin(t * 50) * 2 + 0.5) else 0
                 local ____t_102 = __t
                 local ____temp_101 = B.fase >= 2 and not __t(caido)
-                __O[933] = ____temp_101
-                local aura = if ____t_102(____temp_101) then slug ~= "jorge" else __O[933]
+                __O[943] = ____temp_101
+                local aura = if ____t_102(____temp_101) then slug ~= "jorge" else __O[943]
                 if __t(aura) then
                     do
                         local k = 0
@@ -3111,8 +3111,8 @@ local __O = {};
                 local ____t_105 = __t
                 local ____t_104 = __t
                 local ____temp_103 = not __t(caido)
-                __O[934] = ____temp_103
-                if ____t_105(if ____t_104(____temp_103) then pisca(nil, B) else __O[934]) then
+                __O[944] = ____temp_103
+                if ____t_105(if ____t_104(____temp_103) then pisca(nil, B) else __O[944]) then
                     c.globalAlpha = 0.25
                 end
                 if __t(caido) then
@@ -3142,8 +3142,8 @@ local __O = {};
                     local ____t_112 = __t
                     local ____t_111 = __t
                     local ____temp_110 = slug == "jorge"
-                    __O[935] = ____temp_110
-                    if ____t_112(if ____t_111(____temp_110) then luta else __O[935]) then
+                    __O[945] = ____temp_110
+                    if ____t_112(if ____t_111(____temp_110) then luta else __O[945]) then
                         window.JorgeDuelo:personagem(c, luta, pose)
                     elseif __t(luta) then
                         window.ConquistaEfeitos:personagem(
@@ -3160,11 +3160,11 @@ local __O = {};
                         local ____t_115 = __t
                         local ____t_114 = __t
                         local ____temp_113 = slug == "jorge"
-                        __O[936] = ____temp_113
+                        __O[946] = ____temp_113
                         ____personagem_117(
                             nil,
                             ____c_116,
-                            if ____t_115(if ____t_114(____temp_113) then caido else __O[936]) then "jorge_promessa" else B.tipo,
+                            if ____t_115(if ____t_114(____temp_113) then caido else __O[946]) then "jorge_promessa" else B.tipo,
                             B.x + sh,
                             B.y,
                             pose
@@ -3175,8 +3175,8 @@ local __O = {};
                 local ____t_120 = __t
                 local ____t_119 = __t
                 local ____temp_118 = B.st == "carga"
-                __O[937] = ____temp_118
-                if ____t_120(if ____t_119(____temp_118) then luta else __O[937]) then
+                __O[947] = ____temp_118
+                if ____t_120(if ____t_119(____temp_118) then luta else __O[947]) then
                     txt(
                         nil,
                         c,
@@ -3216,8 +3216,8 @@ local __O = {};
                 local ____t_123 = __t
                 local ____t_122 = __t
                 local ____temp_121 = if __t(B2) then B.st ~= "espera" else B2
-                __O[938] = ____temp_121
-                if ____t_123(if ____t_122(____temp_121) then B.st ~= "entrada" else __O[938]) then
+                __O[948] = ____temp_121
+                if ____t_123(if ____t_122(____temp_121) then B.st ~= "entrada" else __O[948]) then
                     c:save()
                     if __t(caido) then
                         c:translate(B2.x, B2.y)
@@ -3230,8 +3230,8 @@ local __O = {};
                     local ____t_126 = __t
                     local ____t_125 = __t
                     local ____temp_124 = not __t(caido)
-                    __O[939] = ____temp_124
-                    if ____t_126(if ____t_125(____temp_124) then pisca(nil, B2) else __O[939]) then
+                    __O[949] = ____temp_124
+                    if ____t_126(if ____t_125(____temp_124) then pisca(nil, B2) else __O[949]) then
                         c.globalAlpha = 0.25
                     end
                     personagem(
@@ -3315,8 +3315,8 @@ local __O = {};
                 local ____t_129 = __t
                 local ____t_128 = __t
                 local ____temp_127 = falaVida > 0 and not __t(caido)
-                __O[940] = ____temp_127
-                if ____t_129(if ____t_128(____temp_127) then B.st ~= "espera" else __O[940]) then
+                __O[950] = ____temp_127
+                if ____t_129(if ____t_128(____temp_127) then B.st ~= "espera" else __O[950]) then
                     c.font = "bold 13px Space, Arial, sans-serif"
                     local w = c:measureText(falaTxt).width + 20
                     local x = clamp(nil, B.x - w / 2, arena.l - 40, arena.r + 40 - w)
@@ -3434,8 +3434,8 @@ local __O = {};
             local ____t_132 = __t
             local ____t_131 = __t
             local ____temp_130 = if __t(arena.ativa) then B.st ~= "espera" else arena.ativa
-            __O[941] = ____temp_130
-            if ____t_132(if ____t_131(____temp_130) then B.st ~= "entrada" else __O[941]) then
+            __O[951] = ____temp_130
+            if ____t_132(if ____t_131(____temp_130) then B.st ~= "entrada" else __O[951]) then
                 local w = 420
                 local x = W / 2 - w / 2
                 local y = 30
@@ -3485,8 +3485,8 @@ local __O = {};
                     }, 5),
                     B.fase - 1
                 )
-                __O[942] = ____get_result_133
-                __TS__SparseArrayPush(____array_135, if ____t_134(____get_result_133) then __O[942] else "#e8433a")
+                __O[952] = ____get_result_133
+                __TS__SparseArrayPush(____array_135, if ____t_134(____get_result_133) then __O[952] else "#e8433a")
                 R(__TS__SparseArraySpread(____array_135))
                 R(
                     nil,
@@ -3652,8 +3652,8 @@ local __O = {};
                     local ____t_142 = __t
                     local ____t_141 = __t
                     local ____temp_140 = B.st ~= "espera" and B.st ~= "derrotado"
-                    __O[943] = ____temp_140
-                    return ____call_144(____temp_143, "concat", if ____t_142(if ____t_141(____temp_140) then B.st ~= "entrada" else __O[943]) then if __t(B2) then __arrL({B, B2}, 2) else __arrL({B}, 1) else __arrL({}, 0))
+                    __O[953] = ____temp_140
+                    return ____call_144(____temp_143, "concat", if ____t_142(if ____t_141(____temp_140) then B.st ~= "entrada" else __O[953]) then if __t(B2) then __arrL({B, B2}, 2) else __arrL({B}, 1) else __arrL({}, 0))
                 end,
                 update = update,
                 desenhar = desenhar,

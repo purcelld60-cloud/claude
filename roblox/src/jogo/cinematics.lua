@@ -67,10 +67,10 @@ local __O = {};
         end
         local ____t_45 = __t
         local ____TS__Number_result_44 = __TS__Number(s.index)
-        __O[701] = ____TS__Number_result_44
+        __O[711] = ____TS__Number_result_44
         local index = clamp(
             nil,
-            math.floor(if ____t_45(____TS__Number_result_44) then __O[701] else 0),
+            math.floor(if ____t_45(____TS__Number_result_44) then __O[711] else 0),
             0,
             __len(timing.shots) - 1
         )
@@ -78,10 +78,10 @@ local __O = {};
         local ____shot_start_48 = shot.start
         local ____t_47 = __t
         local ____TS__Number_result_46 = __TS__Number(s.time)
-        __O[702] = ____TS__Number_result_46
+        __O[712] = ____TS__Number_result_46
         return clamp(
             nil,
-            ____shot_start_48 + math.max(0, if ____t_47(____TS__Number_result_46) then __O[702] else 0),
+            ____shot_start_48 + math.max(0, if ____t_47(____TS__Number_result_46) then __O[712] else 0),
             0,
             timing.duration
         )
@@ -1524,7 +1524,7 @@ local __O = {};
         local ____c_17 = c
         local ____t_16 = __t
         local ____get_result_15 = __get(floorColors, ____type)
-        __O[697] = ____get_result_15
+        __O[707] = ____get_result_15
         ____rect_18(
             nil,
             ____c_17,
@@ -1532,7 +1532,7 @@ local __O = {};
             378,
             960,
             35,
-            if ____t_16(____get_result_15) then __O[697] else "#4d6250"
+            if ____t_16(____get_result_15) then __O[707] else "#4d6250"
         )
         rect(
             nil,
@@ -2170,7 +2170,7 @@ local __O = {};
         local ____temp_28 = if __t(defeat) then 2 else 2.12
         local ____t_26 = __t
         local ____temp_25 = not __t(defeat) and i == 0
-        __O[698] = ____temp_25
+        __O[708] = ____temp_25
         ____actor_30(
             nil,
             ____c_29,
@@ -2181,7 +2181,7 @@ local __O = {};
             {
                 facing = ____temp_27,
                 scale = ____temp_28,
-                moving = if ____t_26(____temp_25) then __lt(t, 1.1) else __O[698],
+                moving = if ____t_26(____temp_25) then __lt(t, 1.1) else __O[708],
                 speed = 180,
                 recoil = if __t(if __t(defeat) then i == 0 else defeat) then 0.6 else 0,
                 attack = not __t(defeat) and i == 2,
@@ -2194,10 +2194,10 @@ local __O = {};
         local ____t_34 = __t
         local ____t_32 = __t
         local ____temp_31 = not __t(defeat) and i == 0
-        __O[699] = ____temp_31
-        local ____temp_33 = if ____t_32(____temp_31) then __O[699] else not __t(defeat) and i == 3
-        __O[700] = ____temp_33
-        if ____t_35(if ____t_34(____temp_33) then __O[700] else if __t(defeat) then i == 2 else defeat) then
+        __O[709] = ____temp_31
+        local ____temp_33 = if ____t_32(____temp_31) then __O[709] else not __t(defeat) and i == 3
+        __O[710] = ____temp_33
+        if ____t_35(if ____t_34(____temp_33) then __O[710] else if __t(defeat) then i == 2 else defeat) then
             word(
                 nil,
                 c,
@@ -4780,8 +4780,8 @@ local __O = {};
         end
         local ____t_50 = __t
         local ____TS__Number_result_49 = __TS__Number(seconds)
-        __O[703] = ____TS__Number_result_49
-        local elapsed = clamp(nil, if ____t_50(____TS__Number_result_49) then __O[703] else 0, 0, timing.duration)
+        __O[713] = ____TS__Number_result_49
+        local elapsed = clamp(nil, if ____t_50(____TS__Number_result_49) then __O[713] else 0, 0, timing.duration)
         local last = __len(timing.shots) - 1
         local index = __call(
             timing.shots,
@@ -4816,8 +4816,8 @@ local __O = {};
             if ____opt_51 ~= nil then
                 ____opt_51 = ____opt_51:create(options)
             end
-            __O[704] = ____opt_51
-            return if ____t_53(____opt_51) then __O[704] else {
+            __O[714] = ____opt_51
+            return if ____t_53(____opt_51) then __O[714] else {
                 kind = kind,
                 index = 0,
                 time = 0,
@@ -4829,9 +4829,9 @@ local __O = {};
         local ____t_56 = __t
         local ____t_55 = __t
         local ____temp_54 = kind == "outro"
-        __O[705] = ____temp_54
+        __O[715] = ____temp_54
         return {
-            kind = if ____t_56(if ____t_55(____temp_54) then __O[705] else __fcall(__hasOwnV, EXTRA, kind)) then kind else "intro",
+            kind = if ____t_56(if ____t_55(____temp_54) then __O[715] else __fcall(__hasOwnV, EXTRA, kind)) then kind else "intro",
             index = 0,
             time = 0,
             elapsed = 0,
@@ -4845,11 +4845,11 @@ local __O = {};
         if ____opt_57 ~= nil then
             ____opt_57 = ____opt_57.shots
         end
-        __O[706] = ____opt_57
+        __O[716] = ____opt_57
         local ____t_61 = __t
         local ____get_result_60 = __get(EXTRA, s.kind)
-        __O[707] = ____get_result_60
-        return if __t(isEpilogue(nil, s)) then if ____t_59(____opt_57) then __O[706] else __arrL({}, 0) else if ____t_61(____get_result_60) then __O[707] else if s.kind == "outro" then OUTRO else INTRO
+        __O[717] = ____get_result_60
+        return if __t(isEpilogue(nil, s)) then if ____t_59(____opt_57) then __O[716] else __arrL({}, 0) else if ____t_61(____get_result_60) then __O[717] else if s.kind == "outro" then OUTRO else INTRO
     end
     local function beat(self, s)
         if not __t(s) then
@@ -4861,8 +4861,8 @@ local __O = {};
             if ____opt_62 ~= nil then
                 ____opt_62 = ____opt_62:beat(s)
             end
-            __O[708] = ____opt_62
-            return if ____t_64(____opt_62) then __O[708] else {
+            __O[718] = ____opt_62
+            return if ____t_64(____opt_62) then __O[718] else {
                 index = 0,
                 number = 1,
                 total = 1,
@@ -4874,10 +4874,10 @@ local __O = {};
         local beats = list(nil, s)
         local ____t_66 = __t
         local ____TS__Number_result_65 = __TS__Number(s.index)
-        __O[709] = ____TS__Number_result_65
+        __O[719] = ____TS__Number_result_65
         local index = clamp(
             nil,
-            math.floor(if ____t_66(____TS__Number_result_65) then __O[709] else 0),
+            math.floor(if ____t_66(____TS__Number_result_65) then __O[719] else 0),
             0,
             __len(beats) - 1
         )
@@ -4895,8 +4895,8 @@ local __O = {};
         local ____t_69 = __t
         local ____t_68 = __t
         local ____temp_67 = not __t(s)
-        __O[710] = ____temp_67
-        if ____t_69(if ____t_68(____temp_67) then __O[710] else s.done) then
+        __O[720] = ____temp_67
+        if ____t_69(if ____t_68(____temp_67) then __O[720] else s.done) then
             return
         end
         if __t(isEpilogue(nil, s)) then
@@ -4909,8 +4909,8 @@ local __O = {};
         end
         local ____t_71 = __t
         local ____TS__Number_result_70 = __TS__Number(dt)
-        __O[711] = ____TS__Number_result_70
-        dt = clamp(nil, if ____t_71(____TS__Number_result_70) then __O[711] else 0, 0, 0.1)
+        __O[721] = ____TS__Number_result_70
+        dt = clamp(nil, if ____t_71(____TS__Number_result_70) then __O[721] else 0, 0, 0.1)
         s.time = __add(s.time, dt)
         s.elapsed = __add(if __t(s.elapsed) then s.elapsed else 0, dt)
         local ____t_74 = __t
@@ -4946,8 +4946,8 @@ local __O = {};
         local ____t_77 = __t
         local ____t_76 = __t
         local ____temp_75 = not __t(s)
-        __O[712] = ____temp_75
-        if ____t_77(if ____t_76(____temp_75) then __O[712] else s.done) then
+        __O[722] = ____temp_75
+        if ____t_77(if ____t_76(____temp_75) then __O[722] else s.done) then
             return false
         end
         if __t(isEpilogue(nil, s)) then
@@ -5004,15 +5004,15 @@ local __O = {};
         local i = s.index
         local ____t_82 = __t
         local ____TS__Number_result_81 = __TS__Number(s.time)
-        __O[713] = ____TS__Number_result_81
-        local t = if ____t_82(____TS__Number_result_81) then __O[713] else 0
+        __O[723] = ____TS__Number_result_81
+        local t = if ____t_82(____TS__Number_result_81) then __O[723] else 0
         local ____t_86 = __t
         local ____opt_result_85
         if b ~= nil then
             ____opt_result_85 = b.speaker
         end
-        __O[714] = ____opt_result_85
-        local who = if ____t_86(____opt_result_85) then __O[714] else ""
+        __O[724] = ____opt_result_85
+        local who = if ____t_86(____opt_result_85) then __O[724] else ""
         local actorX = if __t(__call(who, "includes", "Da Roça")) then 265 else if __t(__call(who, "includes", "Nikolas")) then 645 else if __t(__call(who, "includes", "Lucas")) then 190 else if __t(__call(who, "includes", "Reeis")) then 650 else if __t(__call(who, "includes", "Menezes")) then 690 else if __t(__call(who, "includes", "Marco")) then 635 else 452
         local actorY = if __t(__call(who, "includes", "Lucas")) then 322 else if __t(__call(who, "includes", "Monstro")) then 165 else if __t(__call(who, "includes", "Armadilha")) then 380 else 278
         if __t(__call(who, "includes", "Freddy")) then
@@ -5050,67 +5050,67 @@ local __O = {};
             }, 7)
             local ____t_88 = __t
             local ____get_result_87 = __get(partySpeakers, i)
-            __O[715] = ____get_result_87
-            actorX = if ____t_88(____get_result_87) then __O[715] else 315
+            __O[725] = ____get_result_87
+            actorX = if ____t_88(____get_result_87) then __O[725] else 315
             actorY = 290
         end
         if s.kind == "intro" then
             local ____t_91 = __t
             local ____t_90 = __t
             local ____temp_89 = i == 0
-            __O[716] = ____temp_89
-            if ____t_91(if ____t_90(____temp_89) then __call(who, "includes", "Da Roça") else __O[716]) then
+            __O[726] = ____temp_89
+            if ____t_91(if ____t_90(____temp_89) then __call(who, "includes", "Da Roça") else __O[726]) then
                 actorX = 330 + ease(nil, t / 1.1) * 60
             end
             local ____t_94 = __t
             local ____t_93 = __t
             local ____temp_92 = i == 1
-            __O[717] = ____temp_92
-            if ____t_94(if ____t_93(____temp_92) then __call(who, "includes", "Nikolas") else __O[717]) then
+            __O[727] = ____temp_92
+            if ____t_94(if ____t_93(____temp_92) then __call(who, "includes", "Nikolas") else __O[727]) then
                 actorX = 610 + math.sin(t * 2) * 5
             end
             local ____t_97 = __t
             local ____t_96 = __t
             local ____temp_95 = i == 2
-            __O[718] = ____temp_95
-            if ____t_97(if ____t_96(____temp_95) then __call(who, "includes", "Lucas") else __O[718]) then
+            __O[728] = ____temp_95
+            if ____t_97(if ____t_96(____temp_95) then __call(who, "includes", "Lucas") else __O[728]) then
                 actorX = 160
             end
             local ____t_100 = __t
             local ____t_99 = __t
             local ____temp_98 = i == 3
-            __O[719] = ____temp_98
-            if ____t_100(if ____t_99(____temp_98) then __call(who, "includes", "Nikolas") else __O[719]) then
+            __O[729] = ____temp_98
+            if ____t_100(if ____t_99(____temp_98) then __call(who, "includes", "Nikolas") else __O[729]) then
                 actorX = 647 - ease(nil, t / 3) * 35
                 actorY = 268
             end
             local ____t_103 = __t
             local ____t_102 = __t
             local ____temp_101 = i == 5
-            __O[720] = ____temp_101
-            if ____t_103(if ____t_102(____temp_101) then __call(who, "includes", "Nikolas") else __O[720]) then
+            __O[730] = ____temp_101
+            if ____t_103(if ____t_102(____temp_101) then __call(who, "includes", "Nikolas") else __O[730]) then
                 actorX = 575 + ease(nil, t / 2.4) * 240
             end
             local ____t_106 = __t
             local ____t_105 = __t
             local ____temp_104 = i == 6
-            __O[721] = ____temp_104
-            if ____t_106(if ____t_105(____temp_104) then __call(who, "includes", "Da Roça") else __O[721]) then
+            __O[731] = ____temp_104
+            if ____t_106(if ____t_105(____temp_104) then __call(who, "includes", "Da Roça") else __O[731]) then
                 actorX = 360
             end
         elseif s.kind == "outro" then
             local ____t_109 = __t
             local ____t_108 = __t
             local ____temp_107 = i == 5
-            __O[722] = ____temp_107
-            if ____t_109(if ____t_108(____temp_107) then __call(who, "includes", "Reeis") else __O[722]) then
+            __O[732] = ____temp_107
+            if ____t_109(if ____t_108(____temp_107) then __call(who, "includes", "Reeis") else __O[732]) then
                 actorX = 805
             end
             local ____t_112 = __t
             local ____t_111 = __t
             local ____temp_110 = i == 3
-            __O[723] = ____temp_110
-            if ____t_112(if ____t_111(____temp_110) then __call(who, "includes", "Lucas") else __O[723]) then
+            __O[733] = ____temp_110
+            if ____t_112(if ____t_111(____temp_110) then __call(who, "includes", "Lucas") else __O[733]) then
                 actorX = 220
             end
         end
@@ -5226,7 +5226,7 @@ local __O = {};
     if ____opt_113 ~= nil then
         ____opt_113 = ____opt_113.shots
     end
-    __O[724] = ____opt_113
+    __O[734] = ____opt_113
     ____window_133.Cinematics = ____ord_132(
         {
             create = ____create_122,
@@ -5246,7 +5246,7 @@ local __O = {};
                         intro = ____call_result_117,
                         outro = ____call_result_118,
                         jorge_epilogue = ____call_116(
-                            if ____t_115(____opt_113) then __O[724] else __arrL({}, 0),
+                            if ____t_115(____opt_113) then __O[734] else __arrL({}, 0),
                             "map",
                             function(____, x) return __assign({}, x) end
                         )

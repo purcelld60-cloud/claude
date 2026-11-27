@@ -5976,8 +5976,8 @@ local __O = {};
                 local ____t_6 = __t
                 local ____t_5 = __t
                 local ____vis_result_4 = vis(nil, sx, 20)
-                __O[421] = ____vis_result_4
-                if ____t_6(if ____t_5(____vis_result_4) then wx < ESC.Z0 - 10 or wx > ESC.Z1 + 10 else __O[421]) then
+                __O[431] = ____vis_result_4
+                if ____t_6(if ____t_5(____vis_result_4) then wx < ESC.Z0 - 10 or wx > ESC.Z1 + 10 else __O[431]) then
                     pessoa(
                         nil,
                         c,

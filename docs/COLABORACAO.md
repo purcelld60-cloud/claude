@@ -427,3 +427,19 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     igual ou mais leve que antes no teste em Lua 5.3; só a primeira entrada no açude monta mais coisa (~0,3 s a mais).
   - `teste/sessao.lua` ganhou `cena:<n>:<câmera>:<tempo>[:noite]`. O `converter.mjs` não repete mais o cabeçalho
     nos arquivos do `capturar.mjs`.
+- **27/11 · Claude:** **minigames da campanha 1 em pixel art**, com um kit comum: `pixel-kit.js` (`window.PixelKit`).
+  - O kit tem fonte Pixel com sombra dura, painéis com cantos em degrau, barras em gomos e setas desenhadas pixel a pixel.
+    Tem também peixes por espécie e gente de plateia. Tudo é retângulo inteiro ou imagem guardada, porque o Roblox não
+    tem `createPattern`.
+  - **Pescaria** (`pescaria.js`):
+    - fundo guardado (céu em faixas, serra, mata, casinha, píer com balde e lata de minhoca);
+    - reflexo tremendo, boia com "!", peixe de pixel por espécie e placar de peixinhos.
+  - **Concurso e batalha de rima** (`baile-concurso.js`):
+    - palco guardado com treliça, telão com equalizador, caixas de som pulsando e plateia pulando;
+    - setas do kit com estouro no acerto; os versos ficam no telão.
+  - **Pênaltis do Mota e quiz do Miqueias** (`activities.js`): estádio com torcida em dois quadros, placas, rede que
+    treme no gol e placar eletrônico; lousa de giz com bandeja e ícones em giz.
+  - **Treino do Caleb** (`game.js`, `drawTrainingPixel`): saco de pancada que balança no acerto, luva como marcador e
+    barra em gomos.
+  - **Roblox** (`desenhista.lua`): janela com canvas de minigame vira telão grande, com os botões numa fileira embaixo.
+    As setas Unicode viram `< v ^ >`.

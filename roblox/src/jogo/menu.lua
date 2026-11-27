@@ -81,18 +81,18 @@ local __O = {};
                         __re("iPhone|iPad|iPod", ""),
                         window.navigator.userAgent
                     )
-                    __O[2444] = ____re_test_result_17
-                    local ios = if ____t_18(____re_test_result_17) then __O[2444] else window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
+                    __O[2460] = ____re_test_result_17
+                    local ios = if ____t_18(____re_test_result_17) then __O[2460] else window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
                     local ____t_24 = __t
                     local ____t_22 = __t
                     local ____t_20 = __t
                     local ____temp_19 = not not __t(window.navigator.standalone)
-                    __O[2445] = ____temp_19
-                    local ____temp_21 = if ____t_20(____temp_19) then __O[2445] else window:matchMedia("(display-mode: standalone)").matches
-                    __O[2446] = ____temp_21
-                    local ____temp_23 = if ____t_22(____temp_21) then __O[2446] else window.location.protocol == "file:"
-                    __O[2447] = ____temp_23
-                    local installed = if ____t_24(____temp_23) then __O[2447] else __call(
+                    __O[2461] = ____temp_19
+                    local ____temp_21 = if ____t_20(____temp_19) then __O[2461] else window:matchMedia("(display-mode: standalone)").matches
+                    __O[2462] = ____temp_21
+                    local ____temp_23 = if ____t_22(____temp_21) then __O[2462] else window.location.protocol == "file:"
+                    __O[2463] = ____temp_23
+                    local installed = if ____t_24(____temp_23) then __O[2463] else __call(
                         __new("URLSearchParams", window.location.search),
                         "has",
                         "native"
@@ -100,7 +100,7 @@ local __O = {};
                     local ____t_33 = __t
                     local ____t_26 = __t
                     local ____temp_25 = if __t(ios) then not __t(installed) else ios
-                    __O[2448] = ____temp_25
+                    __O[2464] = ____temp_25
                     local ____t_32 = __t
                     local ____opt_29 = window.GameView
                     if ____opt_29 ~= nil then
@@ -110,7 +110,7 @@ local __O = {};
                     if ____opt_29 ~= nil then
                         ____opt_result_31 = ____opt_29(____opt_29)
                     end
-                    if ____t_33(if ____t_26(____temp_25) then not ____t_32(____opt_result_31) else __O[2448]) then
+                    if ____t_33(if ____t_26(____temp_25) then not ____t_32(____opt_result_31) else __O[2464]) then
                         local ____opt_36 = window.GameInstall
                         if ____opt_36 ~= nil then
                             ____opt_36 = ____opt_36.showGuide
@@ -188,12 +188,12 @@ local __O = {};
         if state ~= nil then
             ____opt_result_42 = state.started
         end
-        __O[2449] = ____opt_result_42
-        local ____temp_44 = if ____t_43(____opt_result_42) then not __t(state.paused) else __O[2449]
-        __O[2450] = ____temp_44
-        local ____temp_46 = if ____t_45(____temp_44) then not __t(state.won) else __O[2450]
-        __O[2451] = ____temp_46
-        resumeAfterInfo = not not ____t_48(if ____t_47(____temp_46) then not __t(state.defeated) else __O[2451])
+        __O[2465] = ____opt_result_42
+        local ____temp_44 = if ____t_43(____opt_result_42) then not __t(state.paused) else __O[2465]
+        __O[2466] = ____temp_44
+        local ____temp_46 = if ____t_45(____temp_44) then not __t(state.won) else __O[2466]
+        __O[2467] = ____temp_46
+        resumeAfterInfo = not not ____t_48(if ____t_47(____temp_46) then not __t(state.defeated) else __O[2467])
         local ____opt_51 = window.Game
         if ____opt_51 ~= nil then
             ____opt_51 = ____opt_51.releaseInputs
@@ -247,10 +247,10 @@ local __O = {};
                 local ____t_68 = __t
                 local ____t_66 = __t
                 local ____temp_65 = event.clientX < r.left or event.clientX > r.right
-                __O[2452] = ____temp_65
-                local ____temp_67 = if ____t_66(____temp_65) then __O[2452] else event.clientY < r.top
-                __O[2453] = ____temp_67
-                if ____t_69(if ____t_68(____temp_67) then __O[2453] else event.clientY > r.bottom) then
+                __O[2468] = ____temp_65
+                local ____temp_67 = if ____t_66(____temp_65) then __O[2468] else event.clientY < r.top
+                __O[2469] = ____temp_67
+                if ____t_69(if ____t_68(____temp_67) then __O[2469] else event.clientY > r.bottom) then
                     closeInfo(nil)
                 end
             end
@@ -341,16 +341,16 @@ local __O = {};
             local ____t_86 = __t
             local ____t_84 = __t
             local ____temp_83 = if __t(state.activeBoss) then state.activeBoss else state.room
-            __O[2454] = ____temp_83
-            local ____temp_85 = if ____t_84(____temp_83) then __O[2454] else state.cutscene
-            __O[2455] = ____temp_85
-            local ____temp_87 = if ____t_86(____temp_85) then __O[2455] else state.activity
-            __O[2456] = ____temp_87
+            __O[2470] = ____temp_83
+            local ____temp_85 = if ____t_84(____temp_83) then __O[2470] else state.cutscene
+            __O[2471] = ____temp_85
+            local ____temp_87 = if ____t_86(____temp_85) then __O[2471] else state.activity
+            __O[2472] = ____temp_87
             local ____opt_89 = state.training
             if ____opt_89 ~= nil then
                 ____opt_89 = ____opt_89.active
             end
-            if ____t_91(if ____t_88(____temp_87) then __O[2456] else ____opt_89) then
+            if ____t_91(if ____t_88(____temp_87) then __O[2472] else ____opt_89) then
                 window.document:getElementById("infoNotice").textContent = "Retome a exploração fora da luta, sala ou desafio para escolher uma viagem."
                 return
             end

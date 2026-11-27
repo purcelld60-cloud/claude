@@ -250,10 +250,10 @@ local __O = {};
                         local ____t_3 = __t
                         local ____t_1 = __t
                         local ____validCode_result_0 = validCode(nil, code)
-                        __O[1397] = ____validCode_result_0
-                        local ____temp_2 = if ____t_1(____validCode_result_0) then code ~= "Escape" else __O[1397]
-                        __O[1398] = ____temp_2
-                        if ____t_4(if ____t_3(____temp_2) then not __t(__call(used, "has", code)) else __O[1398]) then
+                        __O[1413] = ____validCode_result_0
+                        local ____temp_2 = if ____t_1(____validCode_result_0) then code ~= "Escape" else __O[1413]
+                        __O[1414] = ____temp_2
+                        if ____t_4(if ____t_3(____temp_2) then not __t(__call(used, "has", code)) else __O[1414]) then
                             __call(codes, "push", code)
                             __call(used, "add", code)
                         end
@@ -273,8 +273,8 @@ local __O = {};
                 local ____t_10 = __t
                 local ____t_9 = __t
                 local ____validCode_result_8 = validCode(nil, pauseExtra)
-                __O[1399] = ____validCode_result_8
-                if ____t_10(if ____t_9(____validCode_result_8) then not __t(__call(used, "has", pauseExtra)) else __O[1399]) then
+                __O[1415] = ____validCode_result_8
+                if ____t_10(if ____t_9(____validCode_result_8) then not __t(__call(used, "has", pauseExtra)) else __O[1415]) then
                     __call(fallback.bindings.pause, "push", pauseExtra)
                 end
                 if __t(__call(
@@ -377,8 +377,8 @@ local __O = {};
         local code = canonicalCode(nil, raw)
         local ____t_12 = __t
         local ____get_result_11 = __get(labels, code)
-        __O[1400] = ____get_result_11
-        return if ____t_12(____get_result_11) then __O[1400] else if __re_test(
+        __O[1416] = ____get_result_11
+        return if ____t_12(____get_result_11) then __O[1416] else if __re_test(
             __re("^Key[A-Z]$", ""),
             code
         ) then __call(code, "slice", 3) else if __re_test(
@@ -437,10 +437,10 @@ local __O = {};
         local ____t_16 = __t
         local ____t_14 = __t
         local ____temp_13 = not __t(__get(state.bindings, action)) or not __isInteger(slot)
-        __O[1401] = ____temp_13
-        local ____temp_15 = if ____t_14(____temp_13) then __O[1401] else slot < 0
-        __O[1402] = ____temp_15
-        if ____t_17(if ____t_16(____temp_15) then __O[1402] else slot > 1) then
+        __O[1417] = ____temp_13
+        local ____temp_15 = if ____t_14(____temp_13) then __O[1417] else slot < 0
+        __O[1418] = ____temp_15
+        if ____t_17(if ____t_16(____temp_15) then __O[1418] else slot > 1) then
             return fail(nil, "Ação ou posição de tecla inválida.")
         end
         local code = canonicalCode(nil, raw)
@@ -450,11 +450,11 @@ local __O = {};
         local ____t_22 = __t
         local ____t_19 = __t
         local ____temp_18 = code == "Escape" and action ~= "pause"
-        __O[1404] = ____temp_18
+        __O[1420] = ____temp_18
         local ____t_21 = __t
         local ____temp_20 = action == "pause" and slot == 0
-        __O[1403] = ____temp_20
-        if ____t_22(if ____t_19(____temp_18) then __O[1404] else if ____t_21(____temp_20) then code ~= "Escape" else __O[1403]) then
+        __O[1419] = ____temp_20
+        if ____t_22(if ____t_19(____temp_18) then __O[1420] else if ____t_21(____temp_20) then code ~= "Escape" else __O[1419]) then
             return fail(nil, "Esc fica reservado para pausar e sair dos menus.")
         end
         if __get(
@@ -495,8 +495,8 @@ local __O = {};
         local ____t_25 = __t
         local ____t_24 = __t
         local ____temp_23 = if __t(__len(conflicts)) then not __t(options.replaceConflicts) else __len(conflicts)
-        __O[1405] = ____temp_23
-        if ____t_25(if ____t_24(____temp_23) then not __t(options.swapConflicts) else __O[1405]) then
+        __O[1421] = ____temp_23
+        if ____t_25(if ____t_24(____temp_23) then not __t(options.swapConflicts) else __O[1421]) then
             return {ok = false, conflicts = conflicts, message = "Essa tecla já está em uso. Confirme a troca ou escolha outra."}
         end
         if __t(if __t(__len(conflicts)) then options.swapConflicts else __len(conflicts)) then
@@ -563,10 +563,10 @@ local __O = {};
         local ____t_29 = __t
         local ____t_27 = __t
         local ____temp_26 = not __t(__get(state.bindings, action)) or not __isInteger(slot)
-        __O[1406] = ____temp_26
-        local ____temp_28 = if ____t_27(____temp_26) then __O[1406] else slot < 0
-        __O[1407] = ____temp_28
-        if ____t_30(if ____t_29(____temp_28) then __O[1407] else slot > 1) then
+        __O[1422] = ____temp_26
+        local ____temp_28 = if ____t_27(____temp_26) then __O[1422] else slot < 0
+        __O[1423] = ____temp_28
+        if ____t_30(if ____t_29(____temp_28) then __O[1423] else slot > 1) then
             return fail(nil, "Ação ou posição de tecla inválida.")
         end
         if __t(action == "pause" and slot == 0) then
@@ -615,23 +615,23 @@ local __O = {};
             function(____, code)
                 local ____t_32 = __t
                 local ____get_result_31 = __get(keys, code)
-                __O[1409] = ____get_result_31
+                __O[1425] = ____get_result_31
                 local ____t_34 = __t
                 local ____temp_33 = code == "ShiftLeft"
-                __O[1408] = ____temp_33
-                return if ____t_32(____get_result_31) then __O[1409] else if ____t_34(____temp_33) then keys.ShiftRight else __O[1408]
+                __O[1424] = ____temp_33
+                return if ____t_32(____get_result_31) then __O[1425] else if ____t_34(____temp_33) then keys.ShiftRight else __O[1424]
             end
         ))
     end
     local function transformJoystick(self, x, y)
         local ____t_36 = __t
         local ____TS__Number_result_35 = __TS__Number(x)
-        __O[1410] = ____TS__Number_result_35
-        x = clamp(nil, if ____t_36(____TS__Number_result_35) then __O[1410] else 0, -1, 1)
+        __O[1426] = ____TS__Number_result_35
+        x = clamp(nil, if ____t_36(____TS__Number_result_35) then __O[1426] else 0, -1, 1)
         local ____t_38 = __t
         local ____TS__Number_result_37 = __TS__Number(y)
-        __O[1411] = ____TS__Number_result_37
-        y = clamp(nil, if ____t_38(____TS__Number_result_37) then __O[1411] else 0, -1, 1)
+        __O[1427] = ____TS__Number_result_37
+        y = clamp(nil, if ____t_38(____TS__Number_result_37) then __O[1427] else 0, -1, 1)
         local magnitude = __hypot(x, y)
         if magnitude <= state.deadzone then
             return {x = 0, y = 0}
@@ -651,9 +651,9 @@ local __O = {};
                 local ____call_41 = __call
                 local ____t_40 = __t
                 local ____get_result_39 = __get(state.bindings, action)
-                __O[1412] = ____get_result_39
+                __O[1428] = ____get_result_39
                 return if slot == nil then ____call_42(
-                    ____call_41(if ____t_40(____get_result_39) then __O[1412] else __arrL({}, 0), "map", labelForCode),
+                    ____call_41(if ____t_40(____get_result_39) then __O[1428] else __arrL({}, 0), "map", labelForCode),
                     "join",
                     " / "
                 ) else labelForCode(

@@ -1580,8 +1580,8 @@ local __O = {};
                     local ____t_2 = __t
                     local ____t_1 = __t
                     local ____temp_0 = gap > 300 and gap < 500
-                    __O[143] = ____temp_0
-                    if ____t_2(if ____t_1(____temp_0) then __O[143] else gap > 960 and gap < 1130) then
+                    __O[153] = ____temp_0
+                    if ____t_2(if ____t_1(____temp_0) then __O[153] else gap > 960 and gap < 1130) then
                         continue
                     end
                     if not __t(vis(nil, gap)) then
@@ -2258,10 +2258,10 @@ local __O = {};
         local ____t_11 = __t
         local ____t_9 = __t
         local ____temp_8 = scene == 2 or scene == 6
-        __O[144] = ____temp_8
-        local ____temp_10 = if ____t_9(____temp_8) then __O[144] else scene == 8
-        __O[145] = ____temp_10
-        if ____t_12(if ____t_11(____temp_10) then __O[145] else scene == 10) then
+        __O[154] = ____temp_8
+        local ____temp_10 = if ____t_9(____temp_8) then __O[154] else scene == 8
+        __O[155] = ____temp_10
+        if ____t_12(if ____t_11(____temp_10) then __O[155] else scene == 10) then
             __L1:r(
                 c,
                 0,
@@ -2406,10 +2406,10 @@ local __O = {};
         local ____t_22 = __t
         local ____t_20 = __t
         local ____temp_19 = scene == 1 or scene == 4
-        __O[146] = ____temp_19
-        local ____temp_21 = if ____t_20(____temp_19) then __O[146] else scene == 7
-        __O[147] = ____temp_21
-        if ____t_23(if ____t_22(____temp_21) then __O[147] else scene == 9) then
+        __O[156] = ____temp_19
+        local ____temp_21 = if ____t_20(____temp_19) then __O[156] else scene == 7
+        __O[157] = ____temp_21
+        if ____t_23(if ____t_22(____temp_21) then __O[157] else scene == 9) then
             local sk = __L1:skyline(scene)
             local o = __mod(
                 __mod(camera * 0.1, 1920) + 1920,
@@ -3200,8 +3200,8 @@ local __O = {};
             }
             local ____t_25 = __t
             local ____get_result_24 = __get(palettes, scene)
-            __O[148] = ____get_result_24
-            local p = if ____t_25(____get_result_24) then __O[148] else __get(palettes, 4)
+            __O[158] = ____get_result_24
+            local p = if ____t_25(____get_result_24) then __O[158] else __get(palettes, 4)
             __L1:r(
                 c,
                 0,
@@ -7631,12 +7631,12 @@ local __O = {};
         c:clip()
         local ____t_27 = __t
         local ____TS__Number_result_26 = __TS__Number(camera)
-        __O[149] = ____TS__Number_result_26
-        camera = if ____t_27(____TS__Number_result_26) then __O[149] else 0
+        __O[159] = ____TS__Number_result_26
+        camera = if ____t_27(____TS__Number_result_26) then __O[159] else 0
         local ____t_29 = __t
         local ____TS__Number_result_28 = __TS__Number(t)
-        __O[150] = ____TS__Number_result_28
-        t = if ____t_29(____TS__Number_result_28) then __O[150] else 0
+        __O[160] = ____TS__Number_result_28
+        t = if ____t_29(____TS__Number_result_28) then __O[160] else 0
         __L1.animT = t
         __L1.animCam = 0
         local ____t_35 = __t
@@ -7689,7 +7689,7 @@ local __O = {};
         local ____t_46 = __t
         local ____t_40 = __t
         local ____temp_39 = not __t(__L1.liteNow) or __ge(scene, 40)
-        __O[151] = ____temp_39
+        __O[161] = ____temp_39
         local ____opt_43 = window.HdMaps
         if ____opt_43 ~= nil then
             ____opt_43 = ____opt_43.draw
@@ -7704,7 +7704,7 @@ local __O = {};
                 t
             )
         end
-        if ____t_46(if ____t_40(____temp_39) then ____opt_result_45 else __O[151]) then
+        if ____t_46(if ____t_40(____temp_39) then ____opt_result_45 else __O[161]) then
             __L1:groundBridges(c, scene, camera, t)
             window.HdMaps:finish(c, scene)
             c:restore()
@@ -7737,8 +7737,8 @@ local __O = {};
         local ____t_49 = __t
         local ____t_48 = __t
         local ____temp_47 = scene ~= 2 and scene ~= 8
-        __O[152] = ____temp_47
-        if ____t_49(if ____t_48(____temp_47) then scene ~= 10 else __O[152]) then
+        __O[162] = ____temp_47
+        if ____t_49(if ____t_48(____temp_47) then scene ~= 10 else __O[162]) then
             do
                 local i = 0
                 while i < 13 do
@@ -8020,8 +8020,8 @@ local __O = {};
             ____opt_50 = ____opt_50.gaps
         end
         local ____getq_52_result_53 = ____getq_52(____opt_50, scene)
-        __O[153] = ____getq_52_result_53
-        local gaps = if ____t_54(____getq_52_result_53) then __O[153] else __arrL({}, 0)
+        __O[163] = ____getq_52_result_53
+        local gaps = if ____t_54(____getq_52_result_53) then __O[163] else __arrL({}, 0)
         if not __t(__len(gaps)) then
             return
         end
@@ -8038,12 +8038,12 @@ local __O = {};
             local ____t_58 = __t
             local ____t_56 = __t
             local ____temp_55 = not __isFiniteN(x) or not __isFiniteN(w)
-            __O[154] = ____temp_55
-            local ____temp_57 = if ____t_56(____temp_55) then __O[154] else w <= 0
-            __O[155] = ____temp_57
-            local ____temp_59 = if ____t_58(____temp_57) then __O[155] else x + w < camera - 25
-            __O[156] = ____temp_59
-            if ____t_61(if ____t_60(____temp_59) then __O[156] else __gt(x, camera + 985)) then
+            __O[164] = ____temp_55
+            local ____temp_57 = if ____t_56(____temp_55) then __O[164] else w <= 0
+            __O[165] = ____temp_57
+            local ____temp_59 = if ____t_58(____temp_57) then __O[165] else x + w < camera - 25
+            __O[166] = ____temp_59
+            if ____t_61(if ____t_60(____temp_59) then __O[166] else __gt(x, camera + 985)) then
                 continue
             end
             __L1:woodenBridge(
@@ -8361,18 +8361,18 @@ local __O = {};
         c.imageSmoothingEnabled = false
         local ____t_63 = __t
         local ____TS__Number_result_62 = __TS__Number(time)
-        __O[157] = ____TS__Number_result_62
-        local t = if ____t_63(____TS__Number_result_62) then __O[157] else 0
+        __O[167] = ____TS__Number_result_62
+        local t = if ____t_63(____TS__Number_result_62) then __O[167] else 0
         local ____c_69 = c
         local ____c_scale_70 = c.scale
         local ____t_65 = __t
         local ____TS__Number_result_64 = __TS__Number(width)
-        __O[158] = ____TS__Number_result_64
-        local ____temp_68 = if ____t_65(____TS__Number_result_64) then __O[158] else 960 / 960
+        __O[168] = ____TS__Number_result_64
+        local ____temp_68 = if ____t_65(____TS__Number_result_64) then __O[168] else 960 / 960
         local ____t_67 = __t
         local ____TS__Number_result_66 = __TS__Number(height)
-        __O[159] = ____TS__Number_result_66
-        ____c_scale_70(____c_69, ____temp_68, if ____t_67(____TS__Number_result_66) then __O[159] else 540 / 540)
+        __O[169] = ____TS__Number_result_66
+        ____c_scale_70(____c_69, ____temp_68, if ____t_67(____TS__Number_result_66) then __O[169] else 540 / 540)
         __L1:r(
             c,
             0,
@@ -8959,8 +8959,8 @@ local __O = {};
                 local ____t_73 = __t
                 local ____t_72 = __t
                 local ____temp_71 = xx > 342 and xx < 581
-                __O[160] = ____temp_71
-                if ____t_73(if ____t_72(____temp_71) then __O[160] else xx > 760 and xx < 955) then
+                __O[170] = ____temp_71
+                if ____t_73(if ____t_72(____temp_71) then __O[170] else xx > 760 and xx < 955) then
                     continue
                 end
                 __L1:grass(c, xx, yy, i)
@@ -9151,14 +9151,14 @@ local __O = {};
         )
         local ____t_75 = __t
         local ____TS__Number_result_74 = __TS__Number(o.scale)
-        __O[161] = ____TS__Number_result_74
-        local s = if ____t_75(____TS__Number_result_74) then __O[161] else 1
+        __O[171] = ____TS__Number_result_74
+        local s = if ____t_75(____TS__Number_result_74) then __O[171] else 1
         local ____t_77 = __t
         local ____TS__Number_result_76 = __TS__Number(o.intensity)
-        __O[162] = ____TS__Number_result_76
+        __O[172] = ____TS__Number_result_76
         local intensity = math.max(
             0.15,
-            math.min(1, if ____t_77(____TS__Number_result_76) then __O[162] else 0.7)
+            math.min(1, if ____t_77(____TS__Number_result_76) then __O[172] else 0.7)
         )
         c:scale(s, s)
         local red = not not __t(o.red) or type(o.color) == "string"
@@ -9561,8 +9561,8 @@ local __O = {};
         end
         local ____t_85 = __t
         local ____TS__Number_result_84 = __TS__Number(o.frame)
-        __O[163] = ____TS__Number_result_84
-        local t = if ____t_85(____TS__Number_result_84) then __O[163] else 0
+        __O[173] = ____TS__Number_result_84
+        local t = if ____t_85(____TS__Number_result_84) then __O[173] else 0
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
         local walk = if __t(moving) then math.sin(t * 9) else 0
         local bob = if __t(moving) then math.floor(math.abs(math.cos(t * 9)) * 2 + 0.5) else math.floor(math.sin(t * 2) * 0.7 + 0.5)
@@ -9571,8 +9571,8 @@ local __O = {};
             local ____t_88 = __t
             local ____t_87 = __t
             local ____temp_86 = if __t(o.supreme) then o.supreme else o.powered
-            __O[164] = ____temp_86
-            ____temp_89 = not not ____t_88(if ____t_87(____temp_86) then __O[164] else o.transformed)
+            __O[174] = ____temp_86
+            ____temp_89 = not not ____t_88(if ____t_87(____temp_86) then __O[174] else o.transformed)
         end
         local supreme = ____temp_89
         local attack = not not __t(o.attack)
@@ -10715,8 +10715,8 @@ local __O = {};
         end
         local ____t_91 = __t
         local ____TS__Number_result_90 = __TS__Number(o.frame)
-        __O[165] = ____TS__Number_result_90
-        local t = if ____t_91(____TS__Number_result_90) then __O[165] else 0
+        __O[175] = ____TS__Number_result_90
+        local t = if ____t_91(____TS__Number_result_90) then __O[175] else 0
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
         local walk = if __t(moving) then math.sin(t * 8) else 0
         local bob = if __t(moving) then math.floor(math.abs(math.cos(t * 8)) * 2 + 0.5) else math.floor(math.sin(t * 2) * 0.7 + 0.5)
@@ -12402,8 +12402,8 @@ local __O = {};
         end
         local ____t_93 = __t
         local ____TS__Number_result_92 = __TS__Number(o.frame)
-        __O[166] = ____TS__Number_result_92
-        local t = if ____t_93(____TS__Number_result_92) then __O[166] else 0
+        __O[176] = ____TS__Number_result_92
+        local t = if ____t_93(____TS__Number_result_92) then __O[176] else 0
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
         local walk = if __t(moving) then math.sin(t * 8) else 0
         local bob = if __t(moving) then math.floor(math.abs(math.sin(t * 8)) * 2 + 0.5) else math.floor(math.sin(t * 2) * 0.7 + 0.5)
@@ -12415,16 +12415,16 @@ local __O = {};
         local pants = if ____type == "dede" then "#3a434d" else "#2c435c"
         local ____t_95 = __t
         local ____temp_94 = ____type == "aica"
-        __O[167] = ____temp_94
-        local helping = if ____t_95(____temp_94) then if __t(o.helping) then o.helping else o.pose == "helping" else __O[167]
+        __O[177] = ____temp_94
+        local helping = if ____t_95(____temp_94) then if __t(o.helping) then o.helping else o.pose == "helping" else __O[177]
         local ____t_97 = __t
         local ____temp_96 = ____type == "ravile"
-        __O[168] = ____temp_96
-        local earPull = if ____t_97(____temp_96) then o.pose == "earpull" or o.gesture == "earpull" else __O[168]
+        __O[178] = ____temp_96
+        local earPull = if ____t_97(____temp_96) then o.pose == "earpull" or o.gesture == "earpull" else __O[178]
         local ____t_99 = __t
         local ____temp_98 = ____type == "arthur"
-        __O[169] = ____temp_98
-        local earPulled = if ____t_99(____temp_98) then o.pose == "earpulled" or o.gesture == "earpulled" else __O[169]
+        __O[179] = ____temp_98
+        local earPulled = if ____t_99(____temp_98) then o.pose == "earpulled" or o.gesture == "earpulled" else __O[179]
         local attack = not not __t(o.attack)
         local progress = if __isFiniteN(o.attackProgress) then math.max(
             0,
@@ -12443,10 +12443,10 @@ local __O = {};
             local ____t_103 = __t
             local ____t_101 = __t
             local ____temp_100 = if __t(o.smoking) then o.smoking else o.smoke
-            __O[170] = ____temp_100
-            local ____temp_102 = if ____t_101(____temp_100) then __O[170] else o.charging
-            __O[171] = ____temp_102
-            if ____t_104(if ____t_103(____temp_102) then __O[171] else o.hiddenInSmoke) then
+            __O[180] = ____temp_100
+            local ____temp_102 = if ____t_101(____temp_100) then __O[180] else o.charging
+            __O[181] = ____temp_102
+            if ____t_104(if ____t_103(____temp_102) then __O[181] else o.hiddenInSmoke) then
                 __L1:smokePuffs(
                     c,
                     24,
@@ -12468,8 +12468,8 @@ local __O = {};
         local ____t_107 = __t
         local ____t_106 = __t
         local ____temp_105 = ____type == "ravile"
-        __O[172] = ____temp_105
-        if ____t_107(if ____t_106(____temp_105) then if __t(o.injured) then o.injured else o.fallen else __O[172]) then
+        __O[182] = ____temp_105
+        if ____t_107(if ____t_106(____temp_105) then if __t(o.injured) then o.injured else o.fallen else __O[182]) then
             __L1:r(
                 c,
                 -41,
@@ -12684,8 +12684,8 @@ local __O = {};
         local ____t_110 = __t
         local ____t_109 = __t
         local ____temp_108 = ____type == "dede"
-        __O[173] = ____temp_108
-        if ____t_110(if ____t_109(____temp_108) then o.hiddenInSmoke else __O[173]) then
+        __O[183] = ____temp_108
+        if ____t_110(if ____t_109(____temp_108) then o.hiddenInSmoke else __O[183]) then
             c.globalAlpha = c.globalAlpha * 0.66
         end
         local hip = if ____type == "arthur" then math.sin(t * if __t(moving) then 4 else 2) * 2.3 else 0
@@ -12821,13 +12821,13 @@ local __O = {};
         local ____t_113 = __t
         local ____t_112 = __t
         local ____temp_111 = ____type == "dede" and not __t(moving)
-        __O[174] = ____temp_111
-        local dedeTrago = if ____t_113(if ____t_112(____temp_111) then not __t(attack) else __O[174]) then if dedeCiclo < 0.2 then math.sin(dedeCiclo / 0.2 * math.pi) else 0 else 0
+        __O[184] = ____temp_111
+        local dedeTrago = if ____t_113(if ____t_112(____temp_111) then not __t(attack) else __O[184]) then if dedeCiclo < 0.2 then math.sin(dedeCiclo / 0.2 * math.pi) else 0 else 0
         local ____t_116 = __t
         local ____t_115 = __t
         local ____temp_114 = ____type == "dede" and not __t(moving)
-        __O[175] = ____temp_114
-        if ____t_116(if ____t_115(____temp_114) then not __t(o.dash) else __O[175]) then
+        __O[185] = ____temp_114
+        if ____t_116(if ____t_115(____temp_114) then not __t(o.dash) else __O[185]) then
             c:translate(
                 math.floor(math.sin(t * 1.1) * 1.6 + 0.5),
                 math.floor(math.max(
@@ -12885,8 +12885,8 @@ local __O = {};
         local ____t_119 = __t
         local ____t_118 = __t
         local ____temp_117 = ____type == "arthur"
-        __O[176] = ____temp_117
-        if ____t_119(if ____t_118(____temp_117) then moving else __O[176]) then
+        __O[186] = ____temp_117
+        if ____t_119(if ____t_118(____temp_117) then moving else __O[186]) then
             leftHand = __arrL(
                 {
                     -13 + walk * 10,
@@ -13571,8 +13571,8 @@ local __O = {};
             local ____t_122 = __t
             local ____t_121 = __t
             local ____temp_120 = not __t(attack) or progress < 0.32
-            __O[177] = ____temp_120
-            if ____t_122(if ____t_121(____temp_120) then __O[177] else progress > 0.85) then
+            __O[187] = ____temp_120
+            if ____t_122(if ____t_121(____temp_120) then __O[187] else progress > 0.85) then
                 __L1:r(
                     c,
                     hx + 1,
@@ -13662,10 +13662,10 @@ local __O = {};
             local ____t_126 = __t
             local ____t_124 = __t
             local ____temp_123 = o.smoke ~= false and not __t(moving)
-            __O[178] = ____temp_123
-            local ____temp_125 = if ____t_124(____temp_123) then dedeCiclo > 0.21 else __O[178]
-            __O[179] = ____temp_125
-            if ____t_127(if ____t_126(____temp_125) then dedeCiclo < 0.46 else __O[179]) then
+            __O[188] = ____temp_123
+            local ____temp_125 = if ____t_124(____temp_123) then dedeCiclo > 0.21 else __O[188]
+            __O[189] = ____temp_125
+            if ____t_127(if ____t_126(____temp_125) then dedeCiclo < 0.46 else __O[189]) then
                 local k = (dedeCiclo - 0.21) / 0.25
                 c:save()
                 local base = c.globalAlpha
@@ -13789,8 +13789,8 @@ local __O = {};
             local ____t_130 = __t
             local ____t_129 = __t
             local ____temp_128 = ____type == "aica"
-            __O[180] = ____temp_128
-            if ____t_130(if ____t_129(____temp_128) then o.shouting else __O[180]) then
+            __O[190] = ____temp_128
+            if ____t_130(if ____t_129(____temp_128) then o.shouting else __O[190]) then
                 __L1:r(
                     c,
                     0,
@@ -15464,8 +15464,8 @@ local __O = {};
         c:scale(if __lt(o.facing, 0) then -1 else 1 * if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
         local ____t_132 = __t
         local ____TS__Number_result_131 = __TS__Number(o.frame)
-        __O[181] = ____TS__Number_result_131
-        local t = if ____t_132(____TS__Number_result_131) then __O[181] else 0
+        __O[191] = ____TS__Number_result_131
+        local t = if ____t_132(____TS__Number_result_131) then __O[191] else 0
         local moving = not not __t(o.moving)
         local walk = if __t(moving) then math.sin(t * 7) * 4 else 0
         local skin = if ____type == "igor" then "#e7a079" else "#f0cbb4"
@@ -15482,8 +15482,8 @@ local __O = {};
         local ____t_135 = __t
         local ____t_134 = __t
         local ____temp_133 = ____type == "igor"
-        __O[182] = ____temp_133
-        if ____t_135(if ____t_134(____temp_133) then o.bellyRolling else __O[182]) then
+        __O[192] = ____temp_133
+        if ____t_135(if ____t_134(____temp_133) then o.bellyRolling else __O[192]) then
             c:translate(0, -36)
             c:rotate(if __t(o.rollAngle) then o.rollAngle else 0)
             __L1:oval(
@@ -16584,25 +16584,25 @@ local __O = {};
         end
         local ____t_138 = __t
         local ____TS__Number_result_137 = __TS__Number(o.bossPhase)
-        __O[184] = ____TS__Number_result_137
+        __O[194] = ____TS__Number_result_137
         local phase = math.max(
             2,
             math.min(
                 4,
-                math.floor(if ____t_138(____TS__Number_result_137) then __O[184] else 2)
+                math.floor(if ____t_138(____TS__Number_result_137) then __O[194] else 2)
             )
         )
         local ____t_140 = __t
         local ____TS__Number_result_139 = __TS__Number(o.frame)
-        __O[185] = ____TS__Number_result_139
-        local t = if ____t_140(____TS__Number_result_139) then __O[185] else 0
+        __O[195] = ____TS__Number_result_139
+        local t = if ____t_140(____TS__Number_result_139) then __O[195] else 0
         local changing = not not __t(o.phaseChanging) or o.state == "phaseChange"
         local ____t_142 = __t
         local ____TS__Number_result_141 = __TS__Number(o.transformProgress)
-        __O[186] = ____TS__Number_result_141
+        __O[196] = ____TS__Number_result_141
         local p = if __t(changing) then math.max(
             0,
-            math.min(1, if ____t_142(____TS__Number_result_141) then __O[186] else 0)
+            math.min(1, if ____t_142(____TS__Number_result_141) then __O[196] else 0)
         ) else 1
         local function ease(____, v)
             return v * v * (3 - 2 * v)
@@ -16625,10 +16625,10 @@ local __O = {};
         local ____t_146 = __t
         local ____t_144 = __t
         local ____temp_143 = phase == 2
-        __O[187] = ____temp_143
-        local ____temp_145 = if ____t_144(____temp_143) then changing else __O[187]
-        __O[188] = ____temp_145
-        if ____t_147(if ____t_146(____temp_145) then p < 0.34 else __O[188]) then
+        __O[197] = ____temp_143
+        local ____temp_145 = if ____t_144(____temp_143) then changing else __O[197]
+        __O[198] = ____temp_145
+        if ____t_147(if ____t_146(____temp_145) then p < 0.34 else __O[198]) then
             __L1:character(
                 c,
                 "nikolas",
@@ -16653,8 +16653,8 @@ local __O = {};
         local ____t_150 = __t
         local ____t_149 = __t
         local ____temp_148 = phase == 2
-        __O[189] = ____temp_148
-        if ____t_150(if ____t_149(____temp_148) then changing else __O[189]) then
+        __O[199] = ____temp_148
+        if ____t_150(if ____t_149(____temp_148) then changing else __O[199]) then
             scale = scale * (0.78 + 0.22 * ease(
                 nil,
                 math.max(0, (p - 0.34) / 0.66)
@@ -16671,8 +16671,8 @@ local __O = {};
         local breath = math.floor(math.sin(t * 2.5) * 0.7 + 0.5)
         local ____t_152 = __t
         local ____temp_151 = not not __t(o.attack) or o.state == "windup"
-        __O[190] = ____temp_151
-        local attack = if ____t_152(____temp_151) then __O[190] else o.state == "firing"
+        __O[200] = ____temp_151
+        local attack = if ____t_152(____temp_151) then __O[200] else o.state == "firing"
         local charge = if __t(changing) then changing else o.charging
         c:translate(0, breath)
         __L1:r(
@@ -16778,8 +16778,8 @@ local __O = {};
         local noseX = if o.view == "front" then 5 else 23
         local ____t_154 = __t
         local ____temp_153 = o.noseRub ~= false and not __t(attack)
-        __O[191] = ____temp_153
-        local rubbing = if ____t_154(____temp_153) then not __t(charge) else __O[191]
+        __O[201] = ____temp_153
+        local rubbing = if ____t_154(____temp_153) then not __t(charge) else __O[201]
         if __t(charge) then
             backElbow = __arrL({-48, -59}, 2)
             backHand = __arrL({-38, -38}, 2)
@@ -17380,8 +17380,8 @@ local __O = {};
         local ____t_157 = __t
         local ____t_156 = __t
         local ____temp_155 = if __t(changing) then p > 0.31 else changing
-        __O[192] = ____temp_155
-        if ____t_157(if ____t_156(____temp_155) then p < 0.44 else __O[192]) then
+        __O[202] = ____temp_155
+        if ____t_157(if ____t_156(____temp_155) then p < 0.44 else __O[202]) then
             c:save()
             c.globalAlpha = c.globalAlpha * (math.sin((p - 0.31) / 0.13 * math.pi) * 0.78)
             __L1:oval(
@@ -17426,19 +17426,19 @@ local __O = {};
         local ____t_162 = __t
         local ____t_159 = __t
         local ____temp_158 = ____type == "ollyan"
-        __O[193] = ____temp_158
+        __O[203] = ____temp_158
         local ____opt_160 = window.BaileWorld
         if ____opt_160 ~= nil then
             ____opt_160 = ____opt_160.drawOllyan
         end
-        if ____t_162(if ____t_159(____temp_158) then ____opt_160 else __O[193]) then
+        if ____t_162(if ____t_159(____temp_158) then ____opt_160 else __O[203]) then
             local ____self_166 = window.BaileWorld
             local ____self_166_drawOllyan_167 = ____self_166.drawOllyan
             local ____array_165 = __TS__SparseArrayNew(c, x, y)
             local ____t_164 = __t
             local ____TS__Number_result_163 = __TS__Number(o.frame)
-            __O[194] = ____TS__Number_result_163
-            __TS__SparseArrayPush(____array_165, if ____t_164(____TS__Number_result_163) then __O[194] else 0, o)
+            __O[204] = ____TS__Number_result_163
+            __TS__SparseArrayPush(____array_165, if ____t_164(____TS__Number_result_163) then __O[204] else 0, o)
             ____self_166_drawOllyan_167(
                 ____self_166,
                 __TS__SparseArraySpread(____array_165)
@@ -17508,8 +17508,8 @@ local __O = {};
             local ____array_170 = __TS__SparseArrayNew(c, x, y)
             local ____t_169 = __t
             local ____TS__Number_result_168 = __TS__Number(o.frame)
-            __O[195] = ____TS__Number_result_168
-            __TS__SparseArrayPush(____array_170, if ____t_169(____TS__Number_result_168) then __O[195] else 0, o)
+            __O[205] = ____TS__Number_result_168
+            __TS__SparseArrayPush(____array_170, if ____t_169(____TS__Number_result_168) then __O[205] else 0, o)
             ____L1_giant_171(
                 __L1,
                 __TS__SparseArraySpread(____array_170)
@@ -17521,8 +17521,8 @@ local __O = {};
             local ____array_174 = __TS__SparseArrayNew(c, x, y)
             local ____t_173 = __t
             local ____TS__Number_result_172 = __TS__Number(o.frame)
-            __O[196] = ____TS__Number_result_172
-            __TS__SparseArrayPush(____array_174, if ____t_173(____TS__Number_result_172) then __O[196] else 0, o)
+            __O[206] = ____TS__Number_result_172
+            __TS__SparseArrayPush(____array_174, if ____t_173(____TS__Number_result_172) then __O[206] else 0, o)
             ____L1_thug_175(
                 __L1,
                 __TS__SparseArraySpread(____array_174)
@@ -17550,28 +17550,28 @@ local __O = {};
         end
         local ____t_177 = __t
         local ____TS__Number_result_176 = __TS__Number(o.frame)
-        __O[197] = ____TS__Number_result_176
-        local frame = if ____t_177(____TS__Number_result_176) then __O[197] else 0
+        __O[207] = ____TS__Number_result_176
+        local frame = if ____t_177(____TS__Number_result_176) then __O[207] else 0
         local rawPhase = frame * 9
         local inferred = if __t(if __t(o.attack) then o.attackType == "fart" else o.attack) then "fart" else if __t(if __t(o.attack) then not __t(o.attackType) or o.attackType == "paper" else o.attack) then "paper" else if __TS__Number(o.land) > 0 then "land" else if __t(o.dash) then "dash" else if __t(o.flight) then "flight" else if o.grounded == false then if __TS__Number(o.vy) < 0 then "jump" else "fall" else if __t(if __t(o.moving) then o.moving else __TS__Number(o.speed) > 8) then "walk" else "idle"
         local ____t_180 = __t
         local ____t_179 = __t
         local ____temp_178 = ____type == "daroca"
-        __O[198] = ____temp_178
-        local heroAnim = if ____t_180(if ____t_179(____temp_178) then __get(__L1.heroFrameCatalog, if __t(o.animation) then o.animation else inferred) else __O[198]) then if __t(o.animation) then o.animation else inferred else ""
+        __O[208] = ____temp_178
+        local heroAnim = if ____t_180(if ____t_179(____temp_178) then __get(__L1.heroFrameCatalog, if __t(o.animation) then o.animation else inferred) else __O[208]) then if __t(o.animation) then o.animation else inferred else ""
         local ____t_182 = __t
         local ____get_result_181 = __get(__L1.heroFrameCatalog, heroAnim)
-        __O[199] = ____get_result_181
-        local count = if ____t_182(____get_result_181) then __O[199] else 1
+        __O[209] = ____get_result_181
+        local count = if ____t_182(____get_result_181) then __O[209] else 1
         local ____t_184 = __t
         local ____TS__Number_result_183 = __TS__Number(o.attackProgress)
-        __O[200] = ____TS__Number_result_183
+        __O[210] = ____TS__Number_result_183
         local ____t_186 = __t
         local ____TS__Number_result_185 = __TS__Number(o.vy)
-        __O[201] = ____TS__Number_result_185
-        local naturalIndex = if __t(heroAnim == "walk" or heroAnim == "dash") then math.floor(rawPhase / (math.pi * 2) * count) else if __t(heroAnim == "paper" or heroAnim == "fart") then math.floor(if ____t_184(____TS__Number_result_183) then __O[200] else 0 * (count - 1) + 0.5) else if __t(heroAnim == "jump" or heroAnim == "fall") then math.min(
+        __O[211] = ____TS__Number_result_185
+        local naturalIndex = if __t(heroAnim == "walk" or heroAnim == "dash") then math.floor(rawPhase / (math.pi * 2) * count) else if __t(heroAnim == "paper" or heroAnim == "fart") then math.floor(if ____t_184(____TS__Number_result_183) then __O[210] else 0 * (count - 1) + 0.5) else if __t(heroAnim == "jump" or heroAnim == "fall") then math.min(
             2,
-            math.floor(math.abs(if ____t_186(____TS__Number_result_185) then __O[201] else 0) / 150)
+            math.floor(math.abs(if ____t_186(____TS__Number_result_185) then __O[211] else 0) / 150)
         ) else math.floor(frame * 4)
         local poseIndex = if __isFiniteN(o.spriteFrame) then __mod(
             __mod(
@@ -17587,10 +17587,10 @@ local __O = {};
         local ____t_190 = __t
         local ____t_188 = __t
         local ____temp_187 = o.moving == true or __TS__Number(o.speed) > 8
-        __O[202] = ____temp_187
-        local ____temp_189 = if ____t_188(____temp_187) then __O[202] else heroAnim == "walk"
-        __O[203] = ____temp_189
-        local moving = if ____t_190(____temp_189) then __O[203] else heroAnim == "dash"
+        __O[212] = ____temp_187
+        local ____temp_189 = if ____t_188(____temp_187) then __O[212] else heroAnim == "walk"
+        __O[213] = ____temp_189
+        local moving = if ____t_190(____temp_189) then __O[213] else heroAnim == "dash"
         local grounded = if __t(__call(
             __arrL({"jump", "fall", "flight"}, 3),
             "includes",
@@ -17603,21 +17603,21 @@ local __O = {};
         local hit = o.hit
         local ____t_192 = __t
         local ____TS__Number_result_191 = __TS__Number(o.recoil)
-        __O[204] = ____TS__Number_result_191
+        __O[214] = ____TS__Number_result_191
         local recoil = math.max(
             0,
-            math.min(1, if ____t_192(____TS__Number_result_191) then __O[204] else if __t(hit) then 0.6 else 0)
+            math.min(1, if ____t_192(____TS__Number_result_191) then __O[214] else if __t(hit) then 0.6 else 0)
         )
         local ____t_196 = __t
         local ____t_194 = __t
         local ____temp_193 = not not __t(o.attack) or heroAnim == "paper"
-        __O[205] = ____temp_193
-        local ____temp_195 = if ____t_194(____temp_193) then __O[205] else heroAnim == "fart"
-        __O[207] = ____temp_195
+        __O[215] = ____temp_193
+        local ____temp_195 = if ____t_194(____temp_193) then __O[215] else heroAnim == "fart"
+        __O[217] = ____temp_195
         local ____t_198 = __t
         local ____temp_197 = if __t(o.attackType) then __TS__Number(o.attackProgress) > 0 else o.attackType
-        __O[206] = ____temp_197
-        local attackOn = if ____t_196(____temp_195) then __O[207] else if ____t_198(____temp_197) then __TS__Number(o.attackProgress) < 1 else __O[206]
+        __O[216] = ____temp_197
+        local attackOn = if ____t_196(____temp_195) then __O[217] else if ____t_198(____temp_197) then __TS__Number(o.attackProgress) < 1 else __O[216]
         local progress = if __t(__isFiniteN(o.attackProgress) and not __isFiniteN(o.spriteFrame)) then math.max(
             0,
             math.min(1, o.attackProgress)
@@ -17630,10 +17630,10 @@ local __O = {};
         local fart = if __t(attackOn) then attackType == "fart" else attackOn
         local ____t_200 = __t
         local ____TS__Number_result_199 = __TS__Number(o.land)
-        __O[208] = ____TS__Number_result_199
+        __O[218] = ____TS__Number_result_199
         local landAmount = if __t(heroAnim == "land" and __isFiniteN(o.spriteFrame)) then 1 - poseIndex / 2 else math.max(
             0,
-            math.min(1, if ____t_200(____TS__Number_result_199) then __O[208] else 0)
+            math.min(1, if ____t_200(____TS__Number_result_199) then __O[218] else 0)
         )
         local squat = if __t(fart) then math.floor(if progress < 0.28 then math.sin(progress / 0.28 * math.pi * 0.5) * 5 else if progress < 0.5 then 5 * (1 - (progress - 0.28) / 0.22) - 3 * math.sin((progress - 0.28) / 0.22 * math.pi) else -2 * (1 - (progress - 0.5) / 0.5) + 0.5) else if __t(landAmount) then math.floor(landAmount * 6 + 0.5) else if __t(o.charging) then 4 + math.floor(math.sin(frame * 16) + 0.5) else if __t(if __t(o.dash) then o.dash else heroAnim == "dash") then 3 else 0
         local bob = if heroAnim == "idle" then __get(
@@ -17644,17 +17644,17 @@ local __O = {};
         local ____t_209 = __t
         local ____t_202 = __t
         local ____temp_201 = ____type == "reeis"
-        __O[212] = ____temp_201
+        __O[222] = ____temp_201
         local ____t_208 = __t
         local ____t_206 = __t
         local ____t_204 = __t
         local ____temp_203 = if __t(o.transformed) then o.transformed else o.charging
-        __O[209] = ____temp_203
-        local ____temp_205 = if ____t_204(____temp_203) then __O[209] else o.powered
-        __O[210] = ____temp_205
-        local ____temp_207 = if ____t_206(____temp_205) then __O[210] else o.aura
-        __O[211] = ____temp_207
-        if ____t_209(if ____t_202(____temp_201) then if ____t_208(____temp_207) then __O[211] else o.energy else __O[212]) then
+        __O[219] = ____temp_203
+        local ____temp_205 = if ____t_204(____temp_203) then __O[219] else o.powered
+        __O[220] = ____temp_205
+        local ____temp_207 = if ____t_206(____temp_205) then __O[220] else o.aura
+        __O[221] = ____temp_207
+        if ____t_209(if ____t_202(____temp_201) then if ____t_208(____temp_207) then __O[221] else o.energy else __O[222]) then
             __L1:energyAura(
                 c,
                 0,
@@ -17666,8 +17666,8 @@ local __O = {};
         local ____t_212 = __t
         local ____t_211 = __t
         local ____temp_210 = ____type == "marco"
-        __O[213] = ____temp_210
-        if ____t_212(if ____t_211(____temp_210) then if __t(o.angry) then o.angry else o.rage else __O[213]) then
+        __O[223] = ____temp_210
+        if ____t_212(if ____t_211(____temp_210) then if __t(o.angry) then o.angry else o.rage else __O[223]) then
             __L1:energyAura(
                 c,
                 0,
@@ -17727,8 +17727,8 @@ local __O = {};
         local ____t_215 = __t
         local ____t_214 = __t
         local ____temp_213 = ____type == "reeis"
-        __O[214] = ____temp_213
-        if ____t_215(if ____t_214(____temp_213) then o.transformed else __O[214]) then
+        __O[224] = ____temp_213
+        if ____t_215(if ____t_214(____temp_213) then o.transformed else __O[224]) then
             c:scale(1.9, 1.75)
         end
         local skin = if ____type == "reeis" then "#825033" else if ____type == "caleb" then "#f0c9af" else if ____type == "lucas" then "#efc9b0" else if ____type == "menezes" then "#b47d54" else if ____type == "marco" then "#f0cdb8" else if ____type == "mota" then "#f1ccb4" else if ____type == "nikolas" then "#e1b28a" else if ____type == "miqueias" then "#f0cbb5" else if ____type == "almiro" then "#b47b53" else "#d6a071"
@@ -17736,14 +17736,14 @@ local __O = {};
         local ____t_219 = __t
         local ____t_217 = __t
         local ____temp_216 = ____type == "caleb" or ____type == "miqueias"
-        __O[215] = ____temp_216
-        local ____temp_218 = if ____t_217(____temp_216) then __O[215] else ____type == "mota"
-        __O[216] = ____temp_218
-        local shadow = if ____type == "reeis" then "#51382c" else if ____type == "almiro" then "#8a573d" else if ____t_220(if ____t_219(____temp_218) then __O[216] else ____type == "marco") then "#c3977f" else "#a86c4e"
+        __O[225] = ____temp_216
+        local ____temp_218 = if ____t_217(____temp_216) then __O[225] else ____type == "mota"
+        __O[226] = ____temp_218
+        local shadow = if ____type == "reeis" then "#51382c" else if ____type == "almiro" then "#8a573d" else if ____t_220(if ____t_219(____temp_218) then __O[226] else ____type == "marco") then "#c3977f" else "#a86c4e"
         local ____t_222 = __t
         local ____temp_221 = if __t(o.look) then o.look else __callq(window.DarocaLook, "get")
-        __O[217] = ____temp_221
-        local LK = if __t(____type == "daroca" and o.look ~= false) then if ____t_222(____temp_221) then __O[217] else nil else nil
+        __O[227] = ____temp_221
+        local LK = if __t(____type == "daroca" and o.look ~= false) then if ____t_222(____temp_221) then __O[227] else nil else nil
         local ____opt_result_225
         if LK ~= nil then
             ____opt_result_225 = LK.costume
@@ -17772,8 +17772,8 @@ local __O = {};
         if LK ~= nil then
             ____opt_result_237 = LK.shirt
         end
-        __O[218] = ____opt_result_237
-        local ____temp_239 = if ____t_238(____opt_result_237) then __O[218] else __get({
+        __O[228] = ____opt_result_237
+        local ____temp_239 = if ____t_238(____opt_result_237) then __O[228] else __get({
             daroca = "#dc8c47",
             lucas = "#9a9e9e",
             reeis = "#4d7374",
@@ -17787,15 +17787,15 @@ local __O = {};
             miqueias = "#617b70",
             mota = "#1b4677"
         }, ____type)
-        __O[219] = ____temp_239
-        local shirt = if __t(lion) then "#e3a83f" else if __t(jeg) then "#8f887d" else if __t(far) then "#f1f1ea" else if __t(cai) then "#c2392d" else if ____t_240(____temp_239) then __O[219] else "#dc8c47"
+        __O[229] = ____temp_239
+        local shirt = if __t(lion) then "#e3a83f" else if __t(jeg) then "#8f887d" else if __t(far) then "#f1f1ea" else if __t(cai) then "#c2392d" else if ____t_240(____temp_239) then __O[229] else "#dc8c47"
         local ____t_244 = __t
         local ____opt_result_243
         if LK ~= nil then
             ____opt_result_243 = LK.pants
         end
-        __O[220] = ____opt_result_243
-        local pants = if __t(lion) then "#d39a36" else if __t(jeg) then "#7b746a" else if __t(far) then "#1d2d58" else if __t(cai) then "#7a5636" else if ____t_244(____opt_result_243) then __O[220] else if ____type == "marco" then "#2b353e" else if ____type == "nikolas" then "#423e59" else if ____type == "caleb" then "#564d3e" else if __t(____type == "almiro" or ____type == "lucas") then "#1e3355" else if ____type == "miqueias" then "#354c53" else if ____type == "mota" then "#1c3558" else "#455b62"
+        __O[230] = ____opt_result_243
+        local pants = if __t(lion) then "#d39a36" else if __t(jeg) then "#7b746a" else if __t(far) then "#1d2d58" else if __t(cai) then "#7a5636" else if ____t_244(____opt_result_243) then __O[230] else if ____type == "marco" then "#2b353e" else if ____type == "nikolas" then "#423e59" else if ____type == "caleb" then "#564d3e" else if __t(____type == "almiro" or ____type == "lucas") then "#1e3355" else if ____type == "miqueias" then "#354c53" else if ____type == "mota" then "#1c3558" else "#455b62"
         local function leg(self, front)
             local sign = if __t(front) then 1 else -1
             local swing = if __t(front) then walk else -walk
@@ -17841,10 +17841,10 @@ local __O = {};
             local ____t_248 = __t
             local ____t_246 = __t
             local ____temp_245 = ____type == "daroca"
-            __O[221] = ____temp_245
-            local ____temp_247 = if ____t_246(____temp_245) then attackOn else __O[221]
-            __O[222] = ____temp_247
-            if ____t_249(if ____t_248(____temp_247) then attackType == "paper" else __O[222]) then
+            __O[231] = ____temp_245
+            local ____temp_247 = if ____t_246(____temp_245) then attackOn else __O[231]
+            __O[232] = ____temp_247
+            if ____t_249(if ____t_248(____temp_247) then attackType == "paper" else __O[232]) then
                 footX = footX + if __t(front) then math.floor(strike * 3 + 0.5) else -math.floor(strike * 2 + 0.5)
             end
             local kneeX = if __t(air) then footX - 5 else math.floor((footX + hipX) / 2 + 0.5) + if __t(front) then 2 else -2 - math.floor(squat * 0.7 + 0.5)
@@ -17864,13 +17864,13 @@ local __O = {};
             local ____t_252 = __t
             local ____t_251 = __t
             local ____temp_250 = ____type == "lucas" or ____type == "almiro"
-            __O[223] = ____temp_250
+            __O[233] = ____temp_250
             ____L1_limb_255(
                 __L1,
                 ____c_253,
                 pts,
                 ____temp_254,
-                if __t(front) then pants else if __t(lion) then "#b8862e" else if __t(jeg) then "#665f56" else if __t(far) then "#16234a" else if __t(cai) then "#62452b" else if ____t_252(if ____t_251(____temp_250) then __O[223] else ____type == "mota") then "#17283e" else "#374a50"
+                if __t(front) then pants else if __t(lion) then "#b8862e" else if __t(jeg) then "#665f56" else if __t(far) then "#16234a" else if __t(cai) then "#62452b" else if ____t_252(if ____t_251(____temp_250) then __O[233] else ____type == "mota") then "#17283e" else "#374a50"
             )
             if __t(if __t(far) then front else far) then
                 __L1:limb(
@@ -18004,29 +18004,29 @@ local __O = {};
         local ____t_259 = __t
         local ____t_257 = __t
         local ____temp_256 = ____type == "daroca"
-        __O[224] = ____temp_256
-        local ____temp_258 = if ____t_257(____temp_256) then attackOn else __O[224]
-        __O[225] = ____temp_258
-        if ____t_260(if ____t_259(____temp_258) then attackType == "paper" else __O[225]) then
+        __O[234] = ____temp_256
+        local ____temp_258 = if ____t_257(____temp_256) then attackOn else __O[234]
+        __O[235] = ____temp_258
+        if ____t_260(if ____t_259(____temp_258) then attackType == "paper" else __O[235]) then
             c:rotate(if progress < 0.3 then -0.035 * math.sin(progress / 0.3 * math.pi * 0.5) else math.sin((progress - 0.3) / 0.7 * math.pi) * 0.045)
         end
         local ____t_266 = __t
         local ____t_262 = __t
         local ____temp_261 = ____type == "caleb"
-        __O[227] = ____temp_261
+        __O[237] = ____temp_261
         local ____t_264 = __t
         local ____temp_263 = ____type == "reeis"
-        __O[226] = ____temp_263
-        local ____temp_265 = if ____t_262(____temp_261) then __O[227] else if ____t_264(____temp_263) then o.transformed else __O[226]
-        __O[229] = ____temp_265
+        __O[236] = ____temp_263
+        local ____temp_265 = if ____t_262(____temp_261) then __O[237] else if ____t_264(____temp_263) then o.transformed else __O[236]
+        __O[239] = ____temp_265
         local ____t_268 = __t
         local ____temp_267 = ____type == "daroca"
-        __O[228] = ____temp_267
-        local muscular = if ____t_266(____temp_265) then __O[229] else if ____t_268(____temp_267) then o.muscular else __O[228]
+        __O[238] = ____temp_267
+        local muscular = if ____t_266(____temp_265) then __O[239] else if ____t_268(____temp_267) then o.muscular else __O[238]
         local ____t_270 = __t
         local ____temp_269 = ____type == "daroca"
-        __O[230] = ____temp_269
-        local heroStrong = if ____t_270(____temp_269) then o.muscular else __O[230]
+        __O[240] = ____temp_269
+        local heroStrong = if ____t_270(____temp_269) then o.muscular else __O[240]
         local slim = ____type == "mota" or ____type == "marco"
         local shoulder = if __t(muscular) then 20 else if __t(slim) then 9 else 12
         local gesture = if __t(moving) then 0 else if heroAnim == "idle" then __get(
@@ -18064,11 +18064,11 @@ local __O = {};
         local ____t_275 = __t
         local ____t_272 = __t
         local ____temp_271 = ____type == "ravid"
-        __O[232] = ____temp_271
+        __O[242] = ____temp_271
         local ____t_274 = __t
         local ____temp_273 = not __t(moving)
-        __O[231] = ____temp_273
-        if ____t_275(if ____t_272(____temp_271) then if ____t_274(____temp_273) then __O[231] else o.talking else __O[232]) then
+        __O[241] = ____temp_273
+        if ____t_275(if ____t_272(____temp_271) then if ____t_274(____temp_273) then __O[241] else o.talking else __O[242]) then
             frontElbow = __arrL({22, -33}, 2)
             frontHand = __arrL(
                 {
@@ -18082,8 +18082,8 @@ local __O = {};
         local ____t_278 = __t
         local ____t_277 = __t
         local ____temp_276 = ____type == "almiro" or ____type == "miqueias"
-        __O[233] = ____temp_276
-        if ____t_278(if ____t_277(____temp_276) then not __t(moving) else __O[233]) then
+        __O[243] = ____temp_276
+        if ____t_278(if ____t_277(____temp_276) then not __t(moving) else __O[243]) then
             frontElbow = __arrL({18, -28}, 2)
             frontHand = __arrL(
                 {
@@ -18178,8 +18178,8 @@ local __O = {};
                 local ____t_281 = __t
                 local ____t_280 = __t
                 local ____temp_279 = ____type == "reeis" or ____type == "caleb"
-                __O[234] = ____temp_279
-                if ____t_281(if ____t_280(____temp_279) then __O[234] else attackType == "punch") then
+                __O[244] = ____temp_279
+                if ____t_281(if ____t_280(____temp_279) then __O[244] else attackType == "punch") then
                     frontElbow = __arrL({16 + strike * 9, -31 - strike * 3}, 2)
                     frontHand = __arrL({20 + strike * 20, -27 - strike * 9}, 2)
                     backElbow = __arrL({-16, -37}, 2)
@@ -18206,17 +18206,17 @@ local __O = {};
         local ____t_287 = __t
         local ____t_283 = __t
         local ____temp_282 = ____type == "nikolas"
-        __O[236] = ____temp_282
+        __O[246] = ____temp_282
         local ____t_285 = __t
         local ____temp_284 = o.noseRub ~= false
-        __O[235] = ____temp_284
-        local ____temp_286 = if ____t_283(____temp_282) then if ____t_285(____temp_284) then __O[235] else attackOn else __O[236]
-        __O[237] = ____temp_286
+        __O[245] = ____temp_284
+        local ____temp_286 = if ____t_283(____temp_282) then if ____t_285(____temp_284) then __O[245] else attackOn else __O[246]
+        __O[247] = ____temp_286
         local noseRubbing = if ____t_287(____temp_286) then not __t(__call(
             __arrL({"fistbump", "offer", "steal"}, 3),
             "includes",
             if __t(o.pose) then o.pose else o.gesture
-        )) else __O[237]
+        )) else __O[247]
         if __t(noseRubbing) then
             frontElbow = __arrL({22, -37}, 2)
             frontHand = __arrL(
@@ -18234,8 +18234,8 @@ local __O = {};
             local ____t_290 = __t
             local ____t_289 = __t
             local ____temp_288 = ____type == "daroca"
-            __O[238] = ____temp_288
-            if ____t_290(if ____t_289(____temp_288) then attackOn else __O[238]) then
+            __O[248] = ____temp_288
+            if ____t_290(if ____t_289(____temp_288) then attackOn else __O[248]) then
                 local upper = if __t(muscular) then 14 else 11
                 local lower = if __t(muscular) then 15 else 12
                 local dx = __get(hand, 0) - __get(should, 0)
@@ -18317,12 +18317,12 @@ local __O = {};
             local ____t_294 = __t
             local ____t_292 = __t
             local ____temp_291 = ____type == "marco"
-            __O[239] = ____temp_291
-            local ____temp_293 = if ____t_292(____temp_291) then __O[239] else lion
-            __O[240] = ____temp_293
-            local ____temp_295 = if ____t_294(____temp_293) then __O[240] else jeg
-            __O[241] = ____temp_295
-            __TS__SparseArrayPush(____array_298, if ____t_297(if ____t_296(____temp_295) then __O[241] else cai) then shirt else skin)
+            __O[249] = ____temp_291
+            local ____temp_293 = if ____t_292(____temp_291) then __O[249] else lion
+            __O[250] = ____temp_293
+            local ____temp_295 = if ____t_294(____temp_293) then __O[250] else jeg
+            __O[251] = ____temp_295
+            __TS__SparseArrayPush(____array_298, if ____t_297(if ____t_296(____temp_295) then __O[251] else cai) then shirt else skin)
             ____L1_limb_299(
                 __L1,
                 __TS__SparseArraySpread(____array_298)
@@ -18550,8 +18550,8 @@ local __O = {};
                 ____opt_result_302 = LK.shirtLight
             end
             local ____temp_303 = if __t(trajeLuz) then trajeLuz else ____opt_result_302
-            __O[242] = ____temp_303
-            __TS__SparseArrayPush(____array_305, if ____type == "lucas" then "#c3c9c7" else if ____type == "almiro" then "#80b2dc" else if ____t_304(____temp_303) then __O[242] else "#e7ac65")
+            __O[252] = ____temp_303
+            __TS__SparseArrayPush(____array_305, if ____type == "lucas" then "#c3c9c7" else if ____type == "almiro" then "#80b2dc" else if ____t_304(____temp_303) then __O[252] else "#e7ac65")
             ____L1_r_306(
                 __L1,
                 __TS__SparseArraySpread(____array_305)
@@ -18714,22 +18714,22 @@ local __O = {};
             if LK ~= nil then
                 ____opt_result_309 = LK.hairColor
             end
-            __O[243] = ____opt_result_309
-            local hairC = if ____t_310(____opt_result_309) then __O[243] else "#5f4934"
+            __O[253] = ____opt_result_309
+            local hairC = if ____t_310(____opt_result_309) then __O[253] else "#5f4934"
             local ____t_314 = __t
             local ____opt_result_313
             if LK ~= nil then
                 ____opt_result_313 = LK.hairStyle
             end
-            __O[244] = ____opt_result_313
-            local hs = if ____t_314(____opt_result_313) then __O[244] else "curto"
+            __O[254] = ____opt_result_313
+            local hs = if ____t_314(____opt_result_313) then __O[254] else "curto"
             local ____t_318 = __t
             local ____opt_result_317
             if LK ~= nil then
                 ____opt_result_317 = LK.hat
             end
-            __O[245] = ____opt_result_317
-            local hat = if __t(lion) then "jaglion" else if __t(jeg) then "dajegue" else if __t(cai) then "caipira" else if ____t_318(____opt_result_317) then __O[245] else "palha"
+            __O[255] = ____opt_result_317
+            local hat = if __t(lion) then "jaglion" else if __t(jeg) then "dajegue" else if __t(cai) then "caipira" else if ____t_318(____opt_result_317) then __O[255] else "palha"
             if not __t(kig) then
                 __L1:r(
                     c,
@@ -19057,8 +19057,8 @@ local __O = {};
                 if LK ~= nil then
                     ____opt_result_321 = LK.hatColor
                 end
-                __O[246] = ____opt_result_321
-                local bc = if ____t_322(____opt_result_321) then __O[246] else "#c0392b"
+                __O[256] = ____opt_result_321
+                local bc = if ____t_322(____opt_result_321) then __O[256] else "#c0392b"
                 __L1:r(
                     c,
                     -13,
@@ -20148,7 +20148,7 @@ local __O = {};
                 ____opt_result_331 = LK.shirtLight
             end
             local ____temp_332 = if __t(trajeLuz) then trajeLuz else ____opt_result_331
-            __O[247] = ____temp_332
+            __O[257] = ____temp_332
             ____L1_r_336(
                 __L1,
                 ____c_334,
@@ -20156,7 +20156,7 @@ local __O = {};
                 ____temp_335,
                 6,
                 2,
-                if __t(lion) then "#f6d68b" else if ____t_333(____temp_332) then __O[247] else "#f0ab59"
+                if __t(lion) then "#f6d68b" else if ____t_333(____temp_332) then __O[257] else "#f0ab59"
             )
             __L1:r(
                 c,
@@ -20324,8 +20324,8 @@ local __O = {};
             local ____t_339 = __t
             local ____t_338 = __t
             local ____temp_337 = if __t(o.transformed) then o.transformed else o.powered
-            __O[248] = ____temp_337
-            if ____t_339(if ____t_338(____temp_337) then __O[248] else o.charging) then
+            __O[258] = ____temp_337
+            if ____t_339(if ____t_338(____temp_337) then __O[258] else o.charging) then
                 c:save()
                 if __t(o.charging) then
                     c.globalAlpha = c.globalAlpha * (0.7 + math.sin(frame * 18) * 0.15)
@@ -20490,8 +20490,8 @@ local __O = {};
                 local ____t_342 = __t
                 local ____t_341 = __t
                 local ____temp_340 = if __t(attackOn) then progress > 0.34 else attackOn
-                __O[249] = ____temp_340
-                if ____t_342(if ____t_341(____temp_340) then progress < 0.56 else __O[249]) then
+                __O[259] = ____temp_340
+                if ____t_342(if ____t_341(____temp_340) then progress < 0.56 else __O[259]) then
                     __L1:poly(
                         c,
                         __arrL(
@@ -22525,8 +22525,8 @@ local __O = {};
         local ____t_345 = __t
         local ____t_344 = __t
         local ____temp_343 = if __t(attackOn) then ____type == "daroca" else attackOn
-        __O[250] = ____temp_343
-        if ____t_345(if ____t_344(____temp_343) then attackType == "paper" else __O[250]) then
+        __O[260] = ____temp_343
+        if ____t_345(if ____t_344(____temp_343) then attackType == "paper" else __O[260]) then
             if progress < 0.5 then
                 local hx = __get(frontHand, 0)
                 local hy = __get(frontHand, 1)
@@ -22690,14 +22690,14 @@ local __O = {};
         local ____t_352 = __t
         local ____t_347 = __t
         local ____temp_346 = if __t(attackOn) then strike > 0.5 else attackOn
-        __O[253] = ____temp_346
+        __O[263] = ____temp_346
         local ____t_351 = __t
         local ____t_349 = __t
         local ____temp_348 = attackType == "punch"
-        __O[251] = ____temp_348
-        local ____temp_350 = if ____t_349(____temp_348) then __O[251] else ____type == "reeis" and not __t(o.transformed)
-        __O[252] = ____temp_350
-        if ____t_352(if ____t_347(____temp_346) then if ____t_351(____temp_350) then __O[252] else ____type == "caleb" else __O[253]) then
+        __O[261] = ____temp_348
+        local ____temp_350 = if ____t_349(____temp_348) then __O[261] else ____type == "reeis" and not __t(o.transformed)
+        __O[262] = ____temp_350
+        if ____t_352(if ____t_347(____temp_346) then if ____t_351(____temp_350) then __O[262] else ____type == "caleb" else __O[263]) then
             __L1:limb(
                 c,
                 __arrL(
@@ -23222,15 +23222,15 @@ local __O = {};
         local ____mod_355 = __mod
         local ____t_354 = __t
         local ____TS__Number_result_353 = __TS__Number(variant)
-        __O[254] = ____TS__Number_result_353
+        __O[264] = ____TS__Number_result_353
         local v = ____mod_356(
-            ____mod_355(if ____t_354(____TS__Number_result_353) then __O[254] else 0, 3) + 3,
+            ____mod_355(if ____t_354(____TS__Number_result_353) then __O[264] else 0, 3) + 3,
             3
         )
         local ____t_358 = __t
         local ____TS__Number_result_357 = __TS__Number(time)
-        __O[255] = ____TS__Number_result_357
-        local t = if ____t_358(____TS__Number_result_357) then __O[255] else 0
+        __O[265] = ____TS__Number_result_357
+        local t = if ____t_358(____TS__Number_result_357) then __O[265] else 0
         local wiggle = math.floor(math.sin(t * 13 + v) * 2 + 0.5)
         local ink = if __t(enraged) then "#692f42" else "#3d354c"
         local edge = if __t(enraged) then "#db7467" else "#9e84ac"
@@ -24519,8 +24519,8 @@ local __O = {};
         }
         local ____t_360 = __t
         local ____get_result_359 = __get(colors, kind)
-        __O[256] = ____get_result_359
-        local pal = if ____t_360(____get_result_359) then __O[256] else colors.wood
+        __O[266] = ____get_result_359
+        local pal = if ____t_360(____get_result_359) then __O[266] else colors.wood
         c:save()
         __L1:r(
             c,
@@ -26852,15 +26852,15 @@ local __O = {};
         c:scale(if __lt(o.facing, 0) then -1 else 1, 1)
         local ____t_362 = __t
         local ____TS__Number_result_361 = __TS__Number(o.scale)
-        __O[257] = ____TS__Number_result_361
-        local scale = if ____t_362(____TS__Number_result_361) then __O[257] else 1
+        __O[267] = ____TS__Number_result_361
+        local scale = if ____t_362(____TS__Number_result_361) then __O[267] else 1
         c:scale(scale, scale)
         local ____t_364 = __t
         local ____TS__Number_result_363 = __TS__Number(o.tier)
-        __O[258] = ____TS__Number_result_363
+        __O[268] = ____TS__Number_result_363
         local tier = math.max(
             1,
-            math.min(4, if ____t_364(____TS__Number_result_363) then __O[258] else 1)
+            math.min(4, if ____t_364(____TS__Number_result_363) then __O[268] else 1)
         )
         local walking = o.moving ~= false
         local step = if __t(walking) then math.sin(t * 9) * 7 else 0
@@ -27243,8 +27243,8 @@ local __O = {};
         c:scale(if __lt(o.facing, 0) then -1 else 1, 1)
         local ____t_366 = __t
         local ____TS__Number_result_365 = __TS__Number(o.scale)
-        __O[259] = ____TS__Number_result_365
-        local size = if ____t_366(____TS__Number_result_365) then __O[259] else 1
+        __O[269] = ____TS__Number_result_365
+        local size = if ____t_366(____TS__Number_result_365) then __O[269] else 1
         c:scale(size, size)
         local pulse = math.floor(math.sin(t * 3) * 3 + 0.5)
         local attack = not not __t(o.attack)
@@ -28592,8 +28592,8 @@ local __O = {};
         end
         local ____t_368 = __t
         local ____temp_367 = if __t(o.design) then o.design else o.variant
-        __O[260] = ____temp_367
-        local design = tostring(if ____t_368(____temp_367) then __O[260] else if __t(if __t(o.type) then o.type ~= "doodle" else o.type) then o.type else kind)
+        __O[270] = ____temp_367
+        local design = tostring(if ____t_368(____temp_367) then __O[270] else if __t(if __t(o.type) then o.type ~= "doodle" else o.type) then o.type else kind)
         if __t(__call(
             __arrL({"spindle", "wobbler", "pasta"}, 3),
             "includes",
@@ -28638,8 +28638,8 @@ local __O = {};
         c:scale(if __lt(o.facing, 0) then -1 else 1, 1)
         local ____t_370 = __t
         local ____TS__Number_result_369 = __TS__Number(kind)
-        __O[261] = ____TS__Number_result_369
-        local k = if ____t_370(____TS__Number_result_369) then __O[261] else 0
+        __O[271] = ____TS__Number_result_369
+        local k = if ____t_370(____TS__Number_result_369) then __O[271] else 0
         local bob = if o.moving == false then 0 else math.floor(math.sin(t * 9 + k) * 2 + 0.5)
         __L1:oval(
             c,
@@ -28796,8 +28796,8 @@ local __O = {};
             ____opt_371 = ____opt_371.widths
         end
         local ____TS__Number_result_374 = __TS__Number(____getq_373(____opt_371, scene))
-        __O[141] = ____TS__Number_result_374
-        local ____temp_376 = if ____t_375(____TS__Number_result_374) then __O[141] else __get(
+        __O[151] = ____TS__Number_result_374
+        local ____temp_376 = if ____t_375(____TS__Number_result_374) then __O[151] else __get(
             __arrL({
                 4800,
                 6200,
@@ -28814,8 +28814,8 @@ local __O = {};
             }, 12),
             scene
         )
-        __O[142] = ____temp_376
-        return if ____t_377(____temp_376) then __O[142] else 4800
+        __O[152] = ____temp_376
+        return if ____t_377(____temp_376) then __O[152] else 4800
     end
     __L1.r = function(____, c, x, y, w, h, color)
         c.fillStyle = color
@@ -28986,14 +28986,14 @@ local __O = {};
         local ____L1_nikolasFormGeometry_380 = __L1.nikolasFormGeometry
         local ____t_379 = __t
         local ____TS__Number_result_378 = __TS__Number(phase)
-        __O[183] = ____TS__Number_result_378
+        __O[193] = ____TS__Number_result_378
         return ____get_381(
             ____L1_nikolasFormGeometry_380,
             math.max(
                 1,
                 math.min(
                     4,
-                    math.floor(if ____t_379(____TS__Number_result_378) then __O[183] else 1)
+                    math.floor(if ____t_379(____TS__Number_result_378) then __O[193] else 1)
                 )
             )
         )

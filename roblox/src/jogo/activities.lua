@@ -2,10 +2,11 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __le, __gt, __ge, __isInteger, __mod, __ord, __arrL, __t, __get, __set, __len = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isInteger, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len
-local __call, __add, __assign = __JSR.__call, __JSR.__add, __JSR.__assign
+local __lt, __le, __gt, __ge, __isInteger, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isInteger, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
+local __len, __call, __add, __assign, __bor = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__assign, __JSR.__bor
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
+local __TS__Iterator = ____lualib.__TS__Iterator
 local ____exports = {}
 local __O = {};
 (function()
@@ -183,8 +184,8 @@ local __O = {};
         local ____t_5 = __t
         local ____t_4 = __t
         local ____temp_3 = not __t(s)
-        __O[1253] = ____temp_3
-        if ____t_5(if ____t_4(____temp_3) then __O[1253] else s.done) then
+        __O[1263] = ____temp_3
+        if ____t_5(if ____t_4(____temp_3) then __O[1263] else s.done) then
             return
         end
         s.time = s.time + math.max(0, dt)
@@ -272,10 +273,10 @@ local __O = {};
         local ____t_12 = __t
         local ____t_10 = __t
         local ____temp_9 = not __t(s)
-        __O[1254] = ____temp_9
-        local ____temp_11 = if ____t_10(____temp_9) then __O[1254] else s.done
-        __O[1255] = ____temp_11
-        if ____t_13(if ____t_12(____temp_11) then __O[1255] else __gt(s.cooldown, 0)) then
+        __O[1264] = ____temp_9
+        local ____temp_11 = if ____t_10(____temp_9) then __O[1264] else s.done
+        __O[1265] = ____temp_11
+        if ____t_13(if ____t_12(____temp_11) then __O[1265] else __gt(s.cooldown, 0)) then
             return false
         end
         if s.kind == "quiz" then
@@ -293,8 +294,8 @@ local __O = {};
             local ____t_16 = __t
             local ____t_15 = __t
             local ____temp_14 = not __isInteger(answer) or answer < 0
-            __O[1256] = ____temp_14
-            if ____t_16(if ____t_15(____temp_14) then __O[1256] else answer > 2) then
+            __O[1266] = ____temp_14
+            if ____t_16(if ____t_15(____temp_14) then __O[1266] else answer > 2) then
                 return false
             end
             s.attempts = s.attempts + 1
@@ -342,11 +343,11 @@ local __O = {};
             local ____aim_24 = aim
             local ____t_20 = __t
             local ____temp_19 = if __t(goodPower) then inside else goodPower
-            __O[1257] = ____temp_19
-            local ____temp_25 = if ____t_20(____temp_19) then not __t(blocked) else __O[1257]
+            __O[1267] = ____temp_19
+            local ____temp_25 = if ____t_20(____temp_19) then not __t(blocked) else __O[1267]
             local ____t_22 = __t
             local ____temp_21 = if __t(goodPower) then inside else goodPower
-            __O[1258] = ____temp_21
+            __O[1268] = ____temp_21
             ____s_26.shot = {
                 startX = 236,
                 startY = 319,
@@ -355,7 +356,7 @@ local __O = {};
                 power = ____s_power_23,
                 aim = ____aim_24,
                 goal = ____temp_25,
-                blocked = if ____t_22(____temp_21) then blocked else __O[1258],
+                blocked = if ____t_22(____temp_21) then blocked else __O[1268],
                 rotation = 0
             }
             s.phase = "flight"
@@ -415,8 +416,8 @@ local __O = {};
         local ____t_32 = __t
         local ____t_31 = __t
         local ____temp_30 = not __t(s)
-        __O[1259] = ____temp_30
-        if ____t_32(if ____t_31(____temp_30) then __O[1259] else s.done) then
+        __O[1269] = ____temp_30
+        if ____t_32(if ____t_31(____temp_30) then __O[1269] else s.done) then
             return
         end
         s.done = true
@@ -619,261 +620,632 @@ local __O = {};
             "#314b33"
         )
     end
-    local function football(self, c, s)
-        rect(
+    local function P(____, c, x, y, w, h, col)
+        return rect(
             nil,
+            c,
+            x * 2,
+            y * 2,
+            w * 2,
+            h * 2,
+            col
+        )
+    end
+    local ROUPAS = __arrL({
+        "#e8433a",
+        "#3a6aa8",
+        "#f2c94c",
+        "#3c8a5a",
+        "#c84a8a",
+        "#f2f2ee",
+        "#e8843a",
+        "#2a2a3a"
+    }, 8)
+    local PELES = __arrL({
+        "#f0c8a0",
+        "#c48a62",
+        "#8a5a3c",
+        "#5a3a28",
+        "#e8b88a"
+    }, 5)
+    local campos = {}
+    local function campo(self, quadro)
+        if __t(__get(campos, quadro)) then
+            return __get(campos, quadro)
+        end
+        local PK = window.PixelKit
+        local cv = window.document:createElement("canvas")
+        cv.width = 480
+        cv.height = 270
+        local c = cv:getContext("2d")
+        c.imageSmoothingEnabled = false
+        local R = PK.R
+        local h = PK.hash
+        PK:faixas(
             c,
             0,
             0,
-            960,
-            540,
-            "#77bfe7"
+            480,
+            30,
+            __arrL({"#4a92da", "#5aa0e0", "#6eb0e8", "#86c2ee"}, 4)
         )
-        rect(
-            nil,
-            c,
-            0,
-            76,
-            960,
-            70,
-            "#cadede"
-        )
-        rect(
-            nil,
-            c,
-            0,
-            110,
-            960,
-            430,
-            "#367f44"
-        )
-        do
-            local i = 0
-            while i < 8 do
-                rect(
-                    nil,
-                    c,
-                    0,
-                    110 + i * 54,
-                    960,
-                    27,
-                    if __t(__mod(i, 2)) then "#388647" else "#3c8d49"
-                )
-                i = i + 1
+        for ____, x in __iterar((__arrL({10, 452}, 2))) do
+            R(
+                nil,
+                c,
+                x + 6,
+                4,
+                4,
+                52,
+                "#5a646e"
+            )
+            R(
+                nil,
+                c,
+                x + 7,
+                4,
+                1,
+                52,
+                "#8a949e"
+            )
+            R(
+                nil,
+                c,
+                x,
+                2,
+                16,
+                8,
+                "#3a444e"
+            )
+            do
+                local k = 0
+                while k < 4 do
+                    do
+                        local j = 0
+                        while j < 2 do
+                            R(
+                                nil,
+                                c,
+                                x + 1 + k * 4,
+                                3 + j * 3,
+                                3,
+                                2,
+                                "#fff6c8"
+                            )
+                            j = j + 1
+                        end
+                    end
+                    k = k + 1
+                end
             end
         end
+        R(
+            nil,
+            c,
+            0,
+            14,
+            480,
+            6,
+            "#5a646e"
+        )
+        R(
+            nil,
+            c,
+            0,
+            14,
+            480,
+            1,
+            "#8a949e"
+        )
         do
-            local i = 0
-            while i < 32 do
-                local x = i * 33 - 12
-                rect(
+            local x = 0
+            while x < 480 do
+                R(
                     nil,
                     c,
                     x,
-                    83,
-                    20,
-                    34,
-                    "#25516a"
+                    15,
+                    1,
+                    5,
+                    "#3a444e"
                 )
-                rect(
+                x = x + 12
+            end
+        end
+        do
+            local fila = 0
+            while fila < 4 do
+                local y = 20 + fila * 9
+                R(
                     nil,
                     c,
-                    x + 3,
-                    80,
-                    14,
+                    0,
+                    y + 7,
+                    480,
+                    2,
+                    "#9aa0a6"
+                )
+                R(
+                    nil,
+                    c,
+                    0,
+                    y,
+                    480,
+                    7,
+                    if __t(__mod(fila, 2)) then "#5a6470" else "#4a545e"
+                )
+                do
+                    local k = 0
+                    while k < 70 do
+                        local x = k * 7 + __mod(fila, 2) * 3 + math.floor(h(nil, k + fila * 70) * 2 + 0.5)
+                        local pula = quadro == 1 and __mod(k + fila, 3) == 0
+                        local braco = __mod(k * 7 + fila, 5) == 0
+                        if __lt(
+                            h(nil, k * 3 + fila),
+                            0.12
+                        ) then
+                            continue
+                        end
+                        PK:pessoa(
+                            c,
+                            x,
+                            y - 1,
+                            __get(
+                                PELES,
+                                __mod(k + fila, 5)
+                            ),
+                            __get(
+                                ROUPAS,
+                                __mod(k * 3 + fila, 8)
+                            ),
+                            "#1c1410",
+                            pula,
+                            if __t(braco) then quadro == 1 else braco
+                        )
+                        k = k + 1
+                    end
+                end
+                fila = fila + 1
+            end
+        end
+        local placas = __arrL(
+            {
+                __arrL({"CACAU DA ROÇA", "#c43c3a", "#fff2c0"}, 3),
+                __arrL({"ITABUNA", "#2c5a9e", "#ffffff"}, 3),
+                __arrL({"GÁS DO PAI", "#f2c94c", "#3a2a0a"}, 3),
+                __arrL({"ESCOLA", "#3c8a5a", "#ffffff"}, 3)
+            },
+            4
+        )
+        do
+            local k = 0
+            while k < 6 do
+                local txt, f, cor = table.unpack(
+                    __get(
+                        placas,
+                        __mod(k, 4)
+                    ),
+                    1,
+                    3
+                )
+                local x = k * 80
+                R(
+                    nil,
+                    c,
+                    x,
+                    56,
+                    79,
                     8,
-                    if __t(__mod(i, 3)) then "#e9d7a7" else "#885c43"
+                    f
                 )
-                rect(
+                R(
                     nil,
                     c,
-                    x + 4,
-                    93,
-                    12,
-                    16,
-                    if __t(__mod(i, 2)) then "#244875" else "#ecefe3"
+                    x,
+                    56,
+                    79,
+                    1,
+                    "rgba(255,255,255,.35)"
+                )
+                R(
+                    nil,
+                    c,
+                    x + 79,
+                    56,
+                    1,
+                    8,
+                    "#1c1c1c"
+                )
+                PK:texto(
+                    c,
+                    txt,
+                    x + 40,
+                    60,
+                    8,
+                    cor,
+                    "center",
+                    nil
+                )
+                k = k + 1
+            end
+        end
+        do
+            local y = 64
+            while y < 270 do
+                local k = math.floor((y - 64) / 10)
+                R(
+                    nil,
+                    c,
+                    0,
+                    y,
+                    480,
+                    10,
+                    if __t(__mod(k, 2)) then "#3a8a48" else "#348042"
+                )
+                y = y + 10
+            end
+        end
+        do
+            local i = 0
+            while i < 2600 do
+                local x = h(nil, i * 0.77) * 480
+                local y = 64 + h(nil, i * 1.31) * 206
+                R(
+                    nil,
+                    c,
+                    x,
+                    y,
+                    1,
+                    1,
+                    if __t(__mod(i, 3)) then "#2c7038" else "#4a9a54"
                 )
                 i = i + 1
             end
         end
-        rect(
-            nil,
-            c,
-            70,
-            25,
-            300,
-            44,
-            "#183d4c"
-        )
-        rect(
-            nil,
-            c,
-            75,
-            30,
-            290,
-            34,
-            "#265268"
-        )
-        text(
-            nil,
-            c,
-            "MOTA · TREINO DE CRAQUE",
-            220,
-            47,
-            14,
-            "#e6f1cd"
-        )
-        line(
-            nil,
-            c,
-            __arrL(
-                {
-                    __arrL({40, 302}, 2),
-                    __arrL({920, 302}, 2),
-                    __arrL({920, 420}, 2),
-                    __arrL({40, 420}, 2),
-                    __arrL({40, 302}, 2)
-                },
-                5
-            ),
-            "#d0e7ad",
-            3
-        )
-        line(
-            nil,
-            c,
-            __arrL(
-                {
-                    __arrL({490, 305}, 2),
-                    __arrL({490, 420}, 2)
-                },
-                2
-            ),
-            "#d0e7ad",
-            3
-        )
-        local g = s.goalArea
-        rect(
-            nil,
-            c,
-            g.x - 9,
-            g.y - 9,
-            g.w + 18,
-            g.h + 16,
-            "#1c5145"
-        )
-        rect(
-            nil,
-            c,
-            g.x,
-            g.y,
-            g.w,
-            g.h,
-            "#49715f"
-        )
         do
-            local x = g.x
-            while __le(
-                x,
-                __add(g.x, g.w)
-            ) do
-                line(
+            local i = 0
+            while i < 90 do
+                local x = h(nil, i * 4.1) * 480
+                local y = 70 + h(nil, i * 2.7) * 196
+                R(
                     nil,
                     c,
-                    __arrL(
-                        {
-                            __arrL({x, g.y}, 2),
-                            __arrL(
-                                {
-                                    x,
-                                    __add(g.y, g.h)
-                                },
-                                2
-                            )
-                        },
-                        2
-                    ),
-                    "#a5c2a275",
-                    1
+                    x,
+                    y - 2,
+                    1,
+                    2,
+                    "#5aaa5a"
                 )
-                x = x + 23
-            end
-        end
-        do
-            local y = g.y
-            while __le(
-                y,
-                __add(g.y, g.h)
-            ) do
-                line(
+                R(
                     nil,
                     c,
-                    __arrL(
-                        {
-                            __arrL({g.x, y}, 2),
-                            __arrL(
-                                {
-                                    __add(g.x, g.w),
-                                    y
-                                },
-                                2
-                            )
-                        },
-                        2
-                    ),
-                    "#a5c2a275",
-                    1
+                    x + 1,
+                    y - 1,
+                    1,
+                    1,
+                    "#5aaa5a"
                 )
-                y = y + 20
+                i = i + 1
             end
         end
-        line(
+        local function giz(____, x, y, w, hh)
+            do
+                local xx = 0
+                while __lt(xx, w) do
+                    do
+                        local yy = 0
+                        while __lt(yy, hh) do
+                            if __gt(
+                                h(nil, x + xx + (y + yy) * 7),
+                                0.12
+                            ) then
+                                R(
+                                    nil,
+                                    c,
+                                    x + xx,
+                                    y + yy,
+                                    1,
+                                    1,
+                                    "#e8f2d8"
+                                )
+                            end
+                            yy = yy + 1
+                        end
+                    end
+                    xx = xx + 1
+                end
+            end
+        end
+        giz(
+            nil,
+            20,
+            151,
+            440,
+            1
+        )
+        giz(
+            nil,
+            20,
+            210,
+            440,
+            1
+        )
+        giz(
+            nil,
+            20,
+            151,
+            1,
+            60
+        )
+        giz(
+            nil,
+            459,
+            151,
+            1,
+            60
+        )
+        giz(
+            nil,
+            245,
+            152,
+            1,
+            58
+        )
+        R(
             nil,
             c,
-            __arrL(
-                {
-                    __arrL(
-                        {
-                            g.x - 6,
-                            __add(g.y, g.h)
-                        },
-                        2
-                    ),
-                    __arrL({g.x - 6, g.y - 7}, 2),
-                    __arrL(
-                        {
-                            __add(g.x, g.w) + 6,
-                            g.y - 7
-                        },
-                        2
-                    ),
-                    __arrL(
-                        {
-                            __add(g.x, g.w) + 6,
-                            __add(g.y, g.h)
-                        },
-                        2
+            116,
+            161,
+            3,
+            1,
+            "#e8f2d8"
+        )
+        return __set(campos, quadro, cv)
+    end
+    local redeCv = nil
+    local function rede(self)
+        if __t(redeCv) then
+            return redeCv
+        end
+        local PK = window.PixelKit
+        redeCv = window.document:createElement("canvas")
+        redeCv.width = 160
+        redeCv.height = 103
+        local c = redeCv:getContext("2d")
+        c.imageSmoothingEnabled = false
+        do
+            local y = 0
+            while y < 103 do
+                do
+                    local x = 0
+                    while x < 160 do
+                        if __t(__mod(x + y, 6) == 0 or __mod(x - y + 600, 6) == 0) then
+                            PK:R(
+                                c,
+                                x,
+                                y,
+                                1,
+                                1,
+                                "rgba(235,240,230,.55)"
+                            )
+                        end
+                        x = x + 1
+                    end
+                end
+                y = y + 1
+            end
+        end
+        return redeCv
+    end
+    local function football(self, c, s)
+        local PK = window.PixelKit
+        if not __t(PK) then
+            rect(
+                nil,
+                c,
+                0,
+                0,
+                960,
+                540,
+                "#367f44"
+            )
+            return
+        end
+        c:drawImage(
+            campo(
+                nil,
+                __mod(
+                    math.floor(s.time * 2.5),
+                    2
+                )
+            ),
+            0,
+            0,
+            480,
+            270,
+            0,
+            0,
+            960,
+            540
+        )
+        do
+            local k = 0
+            while k < 4 do
+                local ph = __mod(s.time * 1.3 + k * 0.37, 1)
+                if ph < 0.06 then
+                    P(
+                        nil,
+                        c,
+                        math.floor(PK:hash(k + math.floor(s.time * 1.3)) * 470 + 0.5),
+                        22 + math.floor(PK:hash(k * 3 + math.floor(s.time * 1.3)) * 30 + 0.5),
+                        2,
+                        2,
+                        "#ffffff"
                     )
-                },
-                4
-            ),
-            "#f8f5d9",
-            7
-        )
-        local ____t_38 = __t
+                end
+                k = k + 1
+            end
+        end
+        for ____, fx in __iterar((__arrL({60, 410}, 2))) do
+            P(
+                nil,
+                c,
+                fx,
+                24,
+                1,
+                14,
+                "#c8c8c0"
+            )
+            do
+                local y = 0
+                while y < 6 do
+                    P(
+                        nil,
+                        c,
+                        fx + 1,
+                        24 + y,
+                        8 + math.floor(math.sin(s.time * 6 + y * 0.6) * 1.5 + 0.5),
+                        1,
+                        if y < 3 then "#2c5a9e" else "#f2c94c"
+                    )
+                    y = y + 1
+                end
+            end
+        end
+        local g = s.goalArea
+        local gx = g.x / 2
+        local gy = g.y / 2
+        local gw = g.w / 2
+        local gh = g.h / 2
+        local ____t_40 = __t
         local ____t_37 = __t
-        local ____temp_36 = s.lockedKeeper ~= nil
-        __O[1260] = ____temp_36
-        local keeper = if ____t_38(if ____t_37(____temp_36) then s.phase == "flight" or s.phase == "result" else __O[1260]) then s.lockedKeeper else s.keeper
+        local ____temp_36 = s.phase == "result"
+        __O[1270] = ____temp_36
+        local ____opt_38 = s.shot
+        if ____opt_38 ~= nil then
+            ____opt_38 = ____opt_38.goal
+        end
+        local tremendo = if ____t_40(if ____t_37(____temp_36) then ____opt_38 else __O[1270]) then math.max(0, 1 - s.phaseTime * 1.6) else 0
+        P(
+            nil,
+            c,
+            gx - 2,
+            gy - 2,
+            gw + 4,
+            gh + 3,
+            "rgba(10,30,20,.25)"
+        )
+        if tremendo > 0 then
+            do
+                local k = 0
+                while k < 8 do
+                    local y0 = math.floor(gh * k / 8)
+                    local hh = math.ceil(gh / 8)
+                    local dx = math.floor(math.sin(s.phaseTime * 30 + k) * 3 * tremendo + 0.5)
+                    c:drawImage(
+                        rede(nil),
+                        0,
+                        y0,
+                        160,
+                        hh,
+                        (gx + dx) * 2,
+                        (gy + y0) * 2,
+                        320,
+                        hh * 2
+                    )
+                    k = k + 1
+                end
+            end
+        else
+            c:drawImage(
+                rede(nil),
+                0,
+                0,
+                160,
+                103,
+                gx * 2,
+                gy * 2,
+                320,
+                206
+            )
+        end
+        P(
+            nil,
+            c,
+            gx - 4,
+            gy - 4,
+            3,
+            gh + 4,
+            "#f2f2ee"
+        )
+        P(
+            nil,
+            c,
+            gx - 2,
+            gy - 4,
+            1,
+            gh + 4,
+            "#c8c8c0"
+        )
+        P(
+            nil,
+            c,
+            gx + gw + 1,
+            gy - 4,
+            3,
+            gh + 4,
+            "#f2f2ee"
+        )
+        P(
+            nil,
+            c,
+            gx + gw + 3,
+            gy - 4,
+            1,
+            gh + 4,
+            "#c8c8c0"
+        )
+        P(
+            nil,
+            c,
+            gx - 4,
+            gy - 4,
+            gw + 8,
+            3,
+            "#f2f2ee"
+        )
+        P(
+            nil,
+            c,
+            gx - 4,
+            gy - 2,
+            gw + 8,
+            1,
+            "#c8c8c0"
+        )
+        P(
+            nil,
+            c,
+            gx - 3,
+            gy + gh,
+            gw + 6,
+            1,
+            "rgba(0,0,0,.25)"
+        )
+        local ____t_43 = __t
+        local ____t_42 = __t
+        local ____temp_41 = s.lockedKeeper ~= nil
+        __O[1271] = ____temp_41
+        local keeper = if ____t_43(if ____t_42(____temp_41) then s.phase == "flight" or s.phase == "result" else __O[1271]) then s.lockedKeeper else s.keeper
         local kx = g.x + keeper * g.w
         rect(
             nil,
             c,
             kx - 20,
-            306,
+            312,
             40,
-            7,
-            "#1b493340"
+            6,
+            "#1b493355"
         )
         actor(
             nil,
@@ -889,23 +1261,41 @@ local __O = {};
                 speed = 60
             }
         )
-        rect(
+        P(
             nil,
             c,
-            kx - 31,
-            260,
-            14,
-            11,
+            (kx - 31) / 2,
+            130,
+            7,
+            6,
             "#f7f2d2"
         )
-        rect(
+        P(
             nil,
             c,
-            kx + 16,
-            260,
-            14,
-            11,
+            (kx - 31) / 2,
+            130,
+            7,
+            1,
+            "#ffffff"
+        )
+        P(
+            nil,
+            c,
+            (kx + 16) / 2,
+            130,
+            7,
+            6,
             "#f7f2d2"
+        )
+        P(
+            nil,
+            c,
+            (kx + 16) / 2,
+            130,
+            7,
+            1,
+            "#ffffff"
         )
         actor(
             nil,
@@ -923,43 +1313,92 @@ local __O = {};
                 attackProgress = 0.6
             }
         )
-        local ____s_lockedAim_39 = s.lockedAim
-        if ____s_lockedAim_39 == nil then
-            ____s_lockedAim_39 = s.aim
+        local ____s_lockedAim_44 = s.lockedAim
+        if ____s_lockedAim_44 == nil then
+            ____s_lockedAim_44 = s.aim
         end
-        local aim = ____s_lockedAim_39
-        local tx = g.x + aim * g.w
-        local ty = g.y + 101
-        local cross = if s.phase == "aim" then "#e0efad" else "#f8d786"
-        line(
+        local aim = ____s_lockedAim_44
+        local tx = math.floor((g.x + aim * g.w) / 2 + 0.5)
+        local ty = math.floor((g.y + 101) / 2 + 0.5)
+        local cm = if s.phase == "aim" then "#e0ff8a" else "#ffd24a"
+        P(
             nil,
             c,
-            __arrL(
-                {
-                    __arrL({tx - 12, ty}, 2),
-                    __arrL({tx + 12, ty}, 2)
-                },
-                2
-            ),
-            cross,
-            2
+            tx - 6,
+            ty,
+            4,
+            1,
+            cm
         )
-        line(
+        P(
             nil,
             c,
-            __arrL(
-                {
-                    __arrL({tx, ty - 12}, 2),
-                    __arrL({tx, ty + 12}, 2)
-                },
-                2
-            ),
-            cross,
-            2
+            tx + 3,
+            ty,
+            4,
+            1,
+            cm
         )
+        P(
+            nil,
+            c,
+            tx,
+            ty - 6,
+            1,
+            4,
+            cm
+        )
+        P(
+            nil,
+            c,
+            tx,
+            ty + 3,
+            1,
+            4,
+            cm
+        )
+        for ____, ____value in __iterar((__arrL(
+            {
+                __arrL({-5, -5}, 2),
+                __arrL({4, -5}, 2),
+                __arrL({-5, 4}, 2),
+                __arrL({4, 4}, 2)
+            },
+            4
+        ))) do
+            local dx = ____value[1]
+            local dy = ____value[2]
+            P(
+                nil,
+                c,
+                tx + dx,
+                ty + dy,
+                2,
+                1,
+                cm
+            )
+            P(
+                nil,
+                c,
+                tx + dx + if dx < 0 then 0 else 1,
+                ty + dy + if dy < 0 then 0 else 0,
+                1,
+                2,
+                cm
+            )
+        end
         if __t(s.phase == "flight" or s.phase == "result") then
             local b = s.shot
             if __t(b) then
+                P(
+                    nil,
+                    c,
+                    math.floor(b.x / 2 + 0.5) - 4,
+                    math.floor(math.max(b.y, b.startY) / 2 + 0.5) + 5,
+                    8,
+                    2,
+                    "rgba(0,0,0,.25)"
+                )
                 ball(
                     nil,
                     c,
@@ -970,6 +1409,15 @@ local __O = {};
                 )
             end
         else
+            P(
+                nil,
+                c,
+                114,
+                164,
+                8,
+                2,
+                "rgba(0,0,0,.25)"
+            )
             ball(
                 nil,
                 c,
@@ -979,325 +1427,707 @@ local __O = {};
                 1.15
             )
         end
-        text(
-            nil,
+        PK:painel(
             c,
-            "MIRA: procure o canto livre",
-            160,
-            332,
-            11,
-            "#d5e7b5",
-            "left"
+            20,
+            14,
+            408,
+            44,
+            {u = 2, fundo = "#13283a", borda = "#e8d8a0", rebite = "#c8a848"}
         )
-        meter(
-            nil,
+        PK:texto(
             c,
-            160,
-            348,
-            630,
-            aim,
-            "#7cbb76"
+            "MOTA · TREINO DE CRAQUE",
+            224,
+            36,
+            16,
+            "#fff2c0"
         )
-        rect(
-            nil,
+        PK:painel(
             c,
-            160 + clamp(nil, keeper - 0.135, 0, 1) * 630,
-            348,
-            math.min(
-                0.27,
-                1 - clamp(nil, keeper - 0.135, 0, 1)
-            ) * 630,
-            15,
-            "#d08d77"
+            696,
+            10,
+            248,
+            72,
+            {u = 2, fundo = "#0a0a12", borda = "#5a646e", rebite = "#9aa0a6"}
         )
-        rect(
-            nil,
+        PK:texto(
             c,
-            160 + aim * 630 - 3,
-            342,
-            6,
-            27,
-            "#fff7d2"
+            "GOLS",
+            758,
+            32,
+            16,
+            "#9aa0a6"
         )
-        text(
-            nil,
+        PK:texto(
             c,
-            "FORÇA: acerte no verde",
-            160,
-            385,
-            11,
-            "#d5e7b5",
-            "left"
+            tostring(s.goals) .. "/3",
+            758,
+            58,
+            24,
+            "#ffd24a"
         )
-        meter(
-            nil,
+        PK:texto(
             c,
-            430,
-            377,
-            360,
-            s.power,
-            "#aa7861",
-            0.35,
-            0.85
+            "CHUTE",
+            878,
+            32,
+            16,
+            "#9aa0a6"
         )
-        text(
-            nil,
+        PK:texto(
             c,
-            tostring(s.goals) .. " / 3 GOLS",
-            805,
-            56,
-            17,
-            "#f7f0bd"
+            (tostring(math.min(s.shots + 1, s.maxShots)) .. "/") .. tostring(s.maxShots),
+            878,
+            58,
+            24,
+            "#7af07a"
         )
-        text(
-            nil,
+        do
+            local k = 0
+            while __lt(k, s.maxShots) do
+                local feito = __lt(k, s.shots)
+                P(
+                    nil,
+                    c,
+                    363 + k * 5,
+                    36,
+                    3,
+                    3,
+                    if __t(feito) then "#f2f2ee" else "#2a2a3a"
+                )
+                k = k + 1
+            end
+        end
+        PK:painel(
             c,
-            (("CHUTE " .. tostring(math.min(s.shots + 1, s.maxShots))) .. " / ") .. tostring(s.maxShots),
-            805,
+            140,
+            326,
+            680,
             80,
-            11,
-            "#e1e5bf"
+            {u = 2, fundo = "#14281e", borda = "#a8c878", sombra = true}
         )
-        if s.phase == "result" then
-            text(
-                nil,
+        PK:texto(
+            c,
+            "MIRA",
+            158,
+            349,
+            16,
+            "#d5e7b5",
+            "left"
+        )
+        local kz = __arrL(
+            {
+                math.max(0, keeper - 0.135),
+                math.min(1, keeper + 0.135)
+            },
+            2
+        )
+        PK:barra(
+            c,
+            252,
+            340,
+            548,
+            16,
+            aim,
+            {
+                u = 2,
+                gomos = 40,
+                ruim = kz,
+                ruimCor = "#c86a5a",
+                vazio = "#3a6a4a",
+                marcador = "#fff7d2"
+            }
+        )
+        PK:texto(
+            c,
+            "FORÇA",
+            158,
+            385,
+            16,
+            "#d5e7b5",
+            "left"
+        )
+        PK:barra(
+            c,
+            252,
+            376,
+            548,
+            16,
+            s.power,
+            {
+                u = 2,
+                gomos = 40,
+                zona = __arrL({0.35, 0.85}, 2),
+                zonaCor = "#8ad86a",
+                vazio = "#7a4a3a",
+                marcador = "#fff7d2"
+            }
+        )
+        local ____t_47 = __t
+        local ____t_46 = __t
+        local ____temp_45 = s.phase == "result"
+        __O[1272] = ____temp_45
+        if ____t_47(if ____t_46(____temp_45) then s.shot else __O[1272]) then
+            local txt = if __t(s.shot.goal) then "GOLAÇO!" else if __t(s.shot.blocked) then "DEFENDEU!" else "PRA FORA!"
+            PK:contorno(
                 c,
-                if __t(s.shot.goal) then "GOLAÇO!" else if __t(s.shot.blocked) then "DEFENDEU!" else "PRA FORA!",
-                475,
-                92,
-                34,
-                if __t(s.shot.goal) then "#fff0a0" else "#f4baa1"
+                txt,
+                480,
+                100,
+                32,
+                if __t(s.shot.goal) then "#fff0a0" else "#f4baa1",
+                "#1c1410"
             )
             if __t(s.shot.goal) then
-                local shake = math.sin(s.phaseTime * 35) * 4
                 do
                     local i = 0
-                    while i < 22 do
+                    while i < 26 do
                         local xx = 430 + __mod(i * 47 + s.phaseTime * 24, 490)
                         local yy = 112 + __mod(i * 31 + s.phaseTime * 55, 188)
-                        rect(
+                        P(
                             nil,
                             c,
-                            xx,
-                            yy,
-                            4,
-                            4,
+                            math.floor(xx / 2 + 0.5),
+                            math.floor(yy / 2 + 0.5),
+                            2,
+                            2,
                             __get(
-                                __arrL({"#f4dd87", "#c8eb99", "#efb5b5"}, 3),
-                                __mod(i, 3)
+                                __arrL({"#f4dd87", "#c8eb99", "#efb5b5", "#9ad0ff"}, 4),
+                                __mod(i, 4)
                             )
                         )
                         i = i + 1
                     end
                 end
-                line(
+            end
+        end
+    end
+    local lousaCv = nil
+    local function lousa(self)
+        if __t(lousaCv) then
+            return lousaCv
+        end
+        local PK = window.PixelKit
+        local R = PK.R
+        local h = PK.hash
+        lousaCv = window.document:createElement("canvas")
+        lousaCv.width = 304
+        lousaCv.height = 172
+        local c = lousaCv:getContext("2d")
+        c.imageSmoothingEnabled = false
+        R(
+            nil,
+            c,
+            0,
+            0,
+            304,
+            164,
+            "#5a3a22"
+        )
+        do
+            local x = 0
+            while x < 304 do
+                if __gt(
+                    h(nil, x * 1.7),
+                    0.55
+                ) then
+                    R(
+                        nil,
+                        c,
+                        x,
+                        1 + h(nil, x) * 3,
+                        2,
+                        1,
+                        "#7a5232"
+                    )
+                end
+                x = x + 3
+            end
+        end
+        R(
+            nil,
+            c,
+            0,
+            0,
+            304,
+            1,
+            "#8a5a36"
+        )
+        R(
+            nil,
+            c,
+            4,
+            4,
+            296,
+            152,
+            "#2a4636"
+        )
+        do
+            local i = 0
+            while i < 1400 do
+                R(
                     nil,
                     c,
-                    __arrL(
-                        {
-                            __arrL({g.x - 6, g.y - 7}, 2),
-                            __arrL(
-                                {
-                                    __add(g.x, g.w) + 6,
-                                    g.y - 7 + shake
-                                },
-                                2
-                            )
-                        },
-                        2
-                    ),
-                    "#f8f5d9",
-                    5
+                    4 + h(nil, i * 0.91) * 295,
+                    4 + h(nil, i * 1.73) * 151,
+                    1,
+                    1,
+                    if __t(__mod(i, 3)) then "#304e3e" else "#26402f"
                 )
+                i = i + 1
+            end
+        end
+        do
+            local k = 0
+            while k < 9 do
+                local x = 20 + h(nil, k * 5.1) * 250
+                local y = 14 + h(nil, k * 2.3) * 120
+                local w = 20 + h(nil, k) * 40
+                do
+                    local j = 0
+                    while j < 4 do
+                        do
+                            local xx = 0
+                            while xx < w do
+                                if __gt(
+                                    h(nil, xx + j * 9 + k),
+                                    0.5
+                                ) then
+                                    R(
+                                        nil,
+                                        c,
+                                        x + xx,
+                                        y + j * 2,
+                                        2,
+                                        1,
+                                        "rgba(200,220,210,.10)"
+                                    )
+                                end
+                                xx = xx + 2
+                            end
+                        end
+                        j = j + 1
+                    end
+                end
+                k = k + 1
+            end
+        end
+        R(
+            nil,
+            c,
+            0,
+            156,
+            304,
+            8,
+            "#7a5232"
+        )
+        R(
+            nil,
+            c,
+            0,
+            156,
+            304,
+            1,
+            "#9a7248"
+        )
+        R(
+            nil,
+            c,
+            2,
+            164,
+            300,
+            4,
+            "#4a2c18"
+        )
+        for ____, ____value in __iterar((__arrL(
+            {
+                __arrL({40, "#f2f2ee"}, 2),
+                __arrL({52, "#f2e27a"}, 2),
+                __arrL({61, "#f2a8c8"}, 2),
+                __arrL({250, "#f2f2ee"}, 2)
+            },
+            4
+        ))) do
+            local x = ____value[1]
+            local cor = ____value[2]
+            R(
+                nil,
+                c,
+                x,
+                153,
+                8,
+                3,
+                cor
+            )
+        end
+        R(
+            nil,
+            c,
+            210,
+            151,
+            22,
+            5,
+            "#8a6a4a"
+        )
+        R(
+            nil,
+            c,
+            210,
+            154,
+            22,
+            2,
+            "#d8d0c0"
+        )
+        return lousaCv
+    end
+    local function giz(self, c, x, y, w, h, cor)
+        if cor == nil then
+            cor = "rgba(245,248,240,.92)"
+        end
+        local PK = window.PixelKit
+        do
+            local xx = 0
+            while __lt(xx, w) do
+                do
+                    local yy = 0
+                    while __lt(yy, h) do
+                        if __gt(
+                            PK:hash((x + xx) * 3.1 + (y + yy) * 7.7),
+                            0.14
+                        ) then
+                            P(
+                                nil,
+                                c,
+                                x + xx,
+                                y + yy,
+                                1,
+                                1,
+                                cor
+                            )
+                        end
+                        yy = yy + 1
+                    end
+                end
+                xx = xx + 1
             end
         end
     end
     local function quizIcon(self, c, kind, x, y, t)
+        x = math.floor(x / 2 + 0.5)
+        y = math.floor(y / 2 + 0.5)
         if kind == "book" then
-            rect(
+            giz(
                 nil,
                 c,
-                x - 35,
-                y - 32,
-                70,
-                60,
-                "#264c62"
+                x - 16,
+                y - 12,
+                32,
+                1
             )
-            rect(
+            giz(
                 nil,
                 c,
-                x - 31,
-                y - 28,
-                28,
-                52,
-                "#e8ead2"
+                x - 16,
+                y + 10,
+                32,
+                1
             )
-            rect(
+            giz(
                 nil,
                 c,
-                x + 3,
-                y - 28,
-                28,
-                52,
-                "#f5efd3"
+                x - 16,
+                y - 12,
+                1,
+                23
             )
-            rect(
+            giz(
                 nil,
                 c,
-                x - 2,
-                y - 32,
-                4,
-                63,
-                "#7397a0"
+                x + 15,
+                y - 12,
+                1,
+                23
+            )
+            giz(
+                nil,
+                c,
+                x,
+                y - 12,
+                1,
+                23
             )
             do
                 local j = 0
                 while j < 4 do
-                    rect(
+                    giz(
                         nil,
                         c,
-                        x - 26,
-                        y - 18 + j * 10,
-                        18,
-                        2,
-                        "#a0b3aa"
+                        x - 12,
+                        y - 7 + j * 4,
+                        9,
+                        1,
+                        "rgba(245,248,240,.6)"
                     )
-                    rect(
+                    giz(
                         nil,
                         c,
-                        x + 8,
-                        y - 18 + j * 10,
-                        18,
-                        2,
-                        "#a0b3aa"
+                        x + 4,
+                        y - 7 + j * 4,
+                        9,
+                        1,
+                        "rgba(245,248,240,.6)"
                     )
                     j = j + 1
                 end
             end
         elseif kind == "goal" then
-            line(
+            giz(
                 nil,
                 c,
-                __arrL(
-                    {
-                        __arrL({x - 39, y + 27}, 2),
-                        __arrL({x - 39, y - 29}, 2),
-                        __arrL({x + 39, y - 29}, 2),
-                        __arrL({x + 39, y + 27}, 2)
-                    },
-                    4
-                ),
-                "#eaf2dd",
-                5
+                x - 18,
+                y - 12,
+                1,
+                24
+            )
+            giz(
+                nil,
+                c,
+                x + 17,
+                y - 12,
+                1,
+                24
+            )
+            giz(
+                nil,
+                c,
+                x - 18,
+                y - 12,
+                36,
+                1
             )
             do
-                local i = -25
-                while i <= 25 do
-                    line(
+                local i = -12
+                while i <= 12 do
+                    giz(
                         nil,
                         c,
-                        __arrL(
-                            {
-                                __arrL({x + i, y - 25}, 2),
-                                __arrL({x + i, y + 25}, 2)
-                            },
-                            2
-                        ),
-                        "#a0bcb0",
-                        1
+                        x + i,
+                        y - 10,
+                        1,
+                        21,
+                        "rgba(245,248,240,.45)"
                     )
-                    i = i + 13
+                    i = i + 6
                 end
             end
             ball(
                 nil,
                 c,
-                x + math.sin(t * 2) * 21,
-                y + 4,
+                (x + math.sin(t * 2) * 10) * 2,
+                (y + 4) * 2,
                 t,
-                1.4
+                1.2
             )
         elseif kind == "friend" then
-            actor(
+            for ____, dx in __iterar((__arrL({-10, 10}, 2))) do
+                giz(
+                    nil,
+                    c,
+                    x + dx - 2,
+                    y - 12,
+                    5,
+                    5
+                )
+                giz(
+                    nil,
+                    c,
+                    x + dx,
+                    y - 7,
+                    1,
+                    10
+                )
+                giz(
+                    nil,
+                    c,
+                    x + dx - 4,
+                    y - 4,
+                    9,
+                    1
+                )
+                giz(
+                    nil,
+                    c,
+                    x + dx - 3,
+                    y + 3,
+                    1,
+                    6
+                )
+                giz(
+                    nil,
+                    c,
+                    x + dx + 3,
+                    y + 3,
+                    1,
+                    6
+                )
+            end
+            P(
                 nil,
                 c,
-                "daroca",
-                x - 25,
-                y + 35,
-                {scale = 0.85}
+                x - 2,
+                y - 14,
+                2,
+                2,
+                "#f2a8c8"
             )
-            actor(
+            P(
                 nil,
                 c,
-                "reeis",
-                x + 26,
-                y + 35,
-                {scale = 0.85, facing = -1}
+                x + 1,
+                y - 14,
+                2,
+                2,
+                "#f2a8c8"
             )
-            rect(
+            P(
                 nil,
                 c,
-                x - 5,
-                y - 30,
-                10,
-                10,
-                "#efb0ad"
+                x - 2,
+                y - 12,
+                5,
+                2,
+                "#f2a8c8"
             )
-            rect(
+            P(
+                nil,
+                c,
+                x - 1,
+                y - 10,
+                3,
+                1,
+                "#f2a8c8"
+            )
+        elseif kind == "blue" then
+            do
+                local yy = -11
+                while yy <= 11 do
+                    giz(
+                        nil,
+                        c,
+                        x - 14,
+                        y + yy,
+                        28,
+                        1,
+                        "rgba(110,160,230,.9)"
+                    )
+                    yy = yy + 2
+                end
+            end
+            giz(
+                nil,
+                c,
+                x - 14,
+                y - 12,
+                28,
+                1
+            )
+        else
+            giz(
+                nil,
+                c,
+                x - 14,
+                y - 2,
+                28,
+                1
+            )
+            giz(
+                nil,
+                c,
+                x - 14,
+                y + 10,
+                28,
+                1
+            )
+            giz(
+                nil,
+                c,
+                x - 14,
+                y - 2,
+                1,
+                13
+            )
+            giz(
+                nil,
+                c,
+                x + 13,
+                y - 2,
+                1,
+                13
+            )
+            giz(
                 nil,
                 c,
                 x - 10,
-                y - 34,
-                9,
-                8,
-                "#efb0ad"
+                y - 8,
+                20,
+                1
             )
-            rect(
+            giz(
                 nil,
                 c,
-                x + 2,
-                y - 34,
-                9,
-                8,
-                "#efb0ad"
+                x - 10,
+                y - 8,
+                1,
+                6
             )
-        elseif kind == "blue" then
-            rect(
+            giz(
                 nil,
                 c,
-                x - 31,
-                y - 30,
-                62,
-                60,
-                "#487fcb"
+                x + 9,
+                y - 8,
+                1,
+                6
             )
-            rect(
+            giz(
                 nil,
                 c,
-                x - 24,
-                y - 24,
-                17,
-                9,
-                "#80b9ec"
+                x - 14,
+                y + 4,
+                28,
+                1,
+                "rgba(242,168,200,.9)"
             )
-        else
-            local ____t_42 = __t
-            local ____opt_40 = window.Art
-            if ____opt_40 ~= nil then
-                ____opt_40 = ____opt_40.drawCake
-            end
-            if ____t_42(____opt_40) then
-                window.Art:drawCake(c, x, y + 22)
+            giz(
+                nil,
+                c,
+                x,
+                y - 14,
+                1,
+                6,
+                "rgba(242,226,122,.95)"
+            )
+            if math.sin(t * 8) > 0 then
+                P(
+                    nil,
+                    c,
+                    x,
+                    y - 16,
+                    1,
+                    2,
+                    "#ffb040"
+                )
             end
         end
     end
     local function quiz(self, c, s)
-        local ____t_45 = __t
-        local ____opt_43 = window.Art
-        if ____opt_43 ~= nil then
-            ____opt_43 = ____opt_43.drawClassroom
+        local PK = window.PixelKit
+        local ____t_50 = __t
+        local ____opt_48 = window.Art
+        if ____opt_48 ~= nil then
+            ____opt_48 = ____opt_48.drawClassroom
         end
-        if ____t_45(____opt_43) then
+        if ____t_50(____opt_48) then
             window.Art:drawClassroom(c, "miqueias", s.time)
         else
             rect(
@@ -1309,15 +2139,6 @@ local __O = {};
                 540,
                 "#e5e9dd"
             )
-            rect(
-                nil,
-                c,
-                60,
-                70,
-                840,
-                310,
-                "#8cc1b8"
-            )
         end
         rect(
             nil,
@@ -1326,69 +2147,30 @@ local __O = {};
             0,
             960,
             540,
-            "#142f294f"
+            "#142f2940"
         )
-        rect(
-            nil,
-            c,
-            180,
-            55,
-            600,
-            335,
-            "#204a46"
-        )
-        rect(
-            nil,
-            c,
-            188,
-            63,
-            584,
-            319,
-            "#85bcb1"
-        )
-        rect(
-            nil,
-            c,
-            193,
-            68,
-            574,
-            309,
-            "#9bcfc2"
-        )
-        rect(
-            nil,
-            c,
-            201,
-            76,
-            558,
-            3,
-            "#c5e3d6"
-        )
-        line(
-            nil,
-            c,
-            __arrL(
-                {
-                    __arrL({215, 95}, 2),
-                    __arrL({310, 75}, 2)
-                },
-                2
-            ),
-            "#d7e9df77",
-            9
-        )
-        line(
-            nil,
-            c,
-            __arrL(
-                {
-                    __arrL({232, 121}, 2),
-                    __arrL({360, 92}, 2)
-                },
-                2
-            ),
-            "#d7e9df45",
-            5
+        if not __t(PK) then
+            rect(
+                nil,
+                c,
+                180,
+                55,
+                600,
+                335,
+                "#204a46"
+            )
+            return
+        end
+        c:drawImage(
+            lousa(nil),
+            0,
+            0,
+            304,
+            172,
+            176,
+            46,
+            608,
+            344
         )
         actor(
             nil,
@@ -1417,116 +2199,168 @@ local __O = {};
                 __len(QUESTIONS)
             )
         )
-        text(
-            nil,
+        PK:texto(
             c,
             "ENGLISH DO MIQUEIAS",
             480,
-            98,
-            22,
-            "#174a47"
+            88,
+            16,
+            "#f2f2ea",
+            "center",
+            "#1a2e24"
         )
-        text(
-            nil,
+        PK:texto(
             c,
-            "How you say…",
+            "How you say...",
             480,
-            134,
-            13,
-            "#36665c"
+            124,
+            16,
+            "#b8d8c8",
+            "center",
+            "#1a2e24"
         )
-        text(
-            nil,
+        PK:texto(
             c,
             __add(q.word, "?"),
             480,
-            171,
-            27,
-            "#fff5d4"
+            162,
+            32,
+            "#f2e27a",
+            "center",
+            "#1a2e24"
         )
         quizIcon(
             nil,
             c,
             q.icon,
             480,
-            240,
+            244,
             s.time
         )
         do
             local i = 0
             while i < 3 do
-                rect(
+                local x = 228 + i * 14
+                local y = 166
+                local on = __lt(i, s.correct)
+                local cor = if __t(on) then "#f2e27a" else "rgba(245,248,240,.35)"
+                P(
                     nil,
                     c,
-                    423 + i * 40,
-                    333,
-                    27,
-                    9,
-                    if __lt(i, s.correct) then "#f6df93" else "#629c91"
+                    x,
+                    y - 3,
+                    1,
+                    7,
+                    cor
                 )
-                rect(
+                P(
                     nil,
                     c,
-                    423 + i * 40,
-                    333,
-                    27,
-                    2,
-                    if __lt(i, s.correct) then "#fff1bc" else "#b4dacb"
+                    x - 3,
+                    y,
+                    7,
+                    1,
+                    cor
+                )
+                P(
+                    nil,
+                    c,
+                    x - 1,
+                    y - 1,
+                    3,
+                    3,
+                    cor
+                )
+                P(
+                    nil,
+                    c,
+                    x - 2,
+                    y - 2,
+                    1,
+                    1,
+                    cor
+                )
+                P(
+                    nil,
+                    c,
+                    x + 2,
+                    y - 2,
+                    1,
+                    1,
+                    cor
+                )
+                P(
+                    nil,
+                    c,
+                    x - 2,
+                    y + 2,
+                    1,
+                    1,
+                    cor
+                )
+                P(
+                    nil,
+                    c,
+                    x + 2,
+                    y + 2,
+                    1,
+                    1,
+                    cor
                 )
                 i = i + 1
             end
         end
         if s.phase == "feedback" then
-            line(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({703, 285}, 2),
-                        __arrL({715, 300}, 2),
-                        __arrL({739, 268}, 2)
-                    },
-                    3
-                ),
-                "#fff0a0",
-                6
-            )
-            text(
-                nil,
+            do
+                local k = 0
+                while k < 8 do
+                    P(
+                        nil,
+                        c,
+                        352 + k,
+                        __bor(146 + if k < 3 then k else 3 - (k - 3) * 1.6, 0),
+                        2,
+                        2,
+                        "#9aff9a"
+                    )
+                    k = k + 1
+                end
+            end
+            PK:texto(
                 c,
                 "ALLRIGHT!",
                 480,
-                306,
-                18,
-                "#fff2bd"
+                314,
+                16,
+                "#9aff9a",
+                "center",
+                "#1a2e24"
             )
         elseif __t(if __t(s.feedback) then not __t(s.feedbackGood) else s.feedback) then
-            line(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({707, 274}, 2),
-                        __arrL({732, 299}, 2)
-                    },
-                    2
-                ),
-                "#ae655c",
-                5
-            )
-            line(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({732, 274}, 2),
-                        __arrL({707, 299}, 2)
-                    },
-                    2
-                ),
-                "#ae655c",
-                5
-            )
+            do
+                local k = 0
+                while k < 12 do
+                    P(
+                        nil,
+                        c,
+                        350 + k,
+                        136 + k,
+                        2,
+                        2,
+                        "#ff9a8a"
+                    )
+                    P(
+                        nil,
+                        c,
+                        361 - k,
+                        136 + k,
+                        2,
+                        2,
+                        "#ff9a8a"
+                    )
+                    k = k + 1
+                end
+            end
         end
     end
     local function draw(self, c, s)

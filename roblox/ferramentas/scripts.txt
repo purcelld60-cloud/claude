@@ -12,6 +12,7 @@ interact.js
 visual.js
 amanda-art.js
 amanda.js
+pixel-kit.js
 art.js
 sprites.js
 hd-scene.js

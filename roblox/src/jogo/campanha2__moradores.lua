@@ -114,8 +114,8 @@ local __O = {};
         local ____t_24 = __t
         local ____t_23 = __t
         local ____temp_22 = not __t(box)
-        __O[451] = ____temp_22
-        if ____t_24(if ____t_23(____temp_22) then __O[451] else box.hidden) then
+        __O[461] = ____temp_22
+        if ____t_24(if ____t_23(____temp_22) then __O[461] else box.hidden) then
             return
         end
         window:clearInterval(typing)
@@ -138,13 +138,13 @@ local __O = {};
         ____opt_0 = ____opt_0.registrar
     end
     local ____temp_3 = if __t(window.CampanhaMoradores) then window.CampanhaMoradores else not ____t_2(____opt_0)
-    __O[446] = ____temp_3
+    __O[456] = ____temp_3
     local ____t_7 = __t
     local ____opt_5 = window.Art
     if ____opt_5 ~= nil then
         ____opt_5 = ____opt_5.drawCharacter
     end
-    if ____t_8(if ____t_4(____temp_3) then __O[446] else not ____t_7(____opt_5)) then
+    if ____t_8(if ____t_4(____temp_3) then __O[456] else not ____t_7(____opt_5)) then
         return
     end
     local CP = window.CampanhaPersonagens
@@ -1409,10 +1409,10 @@ local __O = {};
             local ____self_11_parse_12 = ____self_11.parse
             local ____t_10 = __t
             local ____temp_9 = window.localStorage:getItem(KEY)
-            __O[447] = ____temp_9
+            __O[457] = ____temp_9
             conhecidos = __TS__New(
                 ____Set_13,
-                ____self_11_parse_12(____self_11, if ____t_10(____temp_9) then __O[447] else "[]")
+                ____self_11_parse_12(____self_11, if ____t_10(____temp_9) then __O[457] else "[]")
             )
         end)
         if not ____try then
@@ -1446,20 +1446,20 @@ local __O = {};
         end
         local ____t_15 = __t
         local ____TS__Number_result_14 = __TS__Number(o.time)
-        __O[448] = ____TS__Number_result_14
-        local t = if ____t_15(____TS__Number_result_14) then __O[448] else 0
+        __O[458] = ____TS__Number_result_14
+        local t = if ____t_15(____TS__Number_result_14) then __O[458] else 0
         local ____t_19 = __t
         local ____opt_16 = o.player
         if ____opt_16 ~= nil then
             ____opt_16 = ____opt_16.x
         end
         local ____TS__Number_result_18 = __TS__Number(____opt_16)
-        __O[449] = ____TS__Number_result_18
-        local hx = if ____t_19(____TS__Number_result_18) then __O[449] else -9999
+        __O[459] = ____TS__Number_result_18
+        local hx = if ____t_19(____TS__Number_result_18) then __O[459] else -9999
         local ____t_21 = __t
         local ____TS__Number_result_20 = __TS__Number(o.camera)
-        __O[450] = ____TS__Number_result_20
-        local cam = if ____t_21(____TS__Number_result_20) then __O[450] else 0
+        __O[460] = ____TS__Number_result_20
+        local cam = if ____t_21(____TS__Number_result_20) then __O[460] else 0
         for ____, p in __iterar((L)) do
             if __t(p.x < cam - 80 or p.x > cam + 1040) then
                 continue
@@ -1619,8 +1619,8 @@ local __O = {};
             local ____t_29 = __t
             local ____t_28 = __t
             local ____temp_27 = not __t(box)
-            __O[452] = ____temp_27
-            if ____t_29(if ____t_28(____temp_27) then __O[452] else box.hidden) then
+            __O[462] = ____temp_27
+            if ____t_29(if ____t_28(____temp_27) then __O[462] else box.hidden) then
                 return
             end
             local k = e.key
@@ -1643,8 +1643,8 @@ local __O = {};
                 local ____t_32 = __t
                 local ____t_31 = __t
                 local ____temp_30 = k == "Enter" or k == " "
-                __O[453] = ____temp_30
-                if ____t_32(if ____t_31(____temp_30) then __O[453] else __call(k, "toLowerCase") == "e") then
+                __O[463] = ____temp_30
+                if ____t_32(if ____t_31(____temp_30) then __O[463] else __call(k, "toLowerCase") == "e") then
                     if modo == "menu" then
                         local i = __call(
                             cur.temas,

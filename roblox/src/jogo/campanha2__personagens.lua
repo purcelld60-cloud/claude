@@ -2323,8 +2323,8 @@ local __O = {};
         end
         local ____t_4 = __t
         local ____TS__Number_result_3 = __TS__Number(o.frame)
-        __O[363] = ____TS__Number_result_3
-        local t = if ____t_4(____TS__Number_result_3) then __O[363] else 0
+        __O[373] = ____TS__Number_result_3
+        local t = if ____t_4(____TS__Number_result_3) then __O[373] else 0
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
         local air = o.grounded == false
         local walk = if __t(if __t(moving) then not __t(air) else moving) then math.sin(t * 9) else 0
@@ -2345,8 +2345,8 @@ local __O = {};
         local twitch = if __t(if __t(S.twitch) then math.sin(t * 13) > 0.85 else S.twitch) then 1 else 0
         local ____t_6 = __t
         local ____temp_5 = if __t(o.emotion) then o.emotion else S.mood
-        __O[364] = ____temp_5
-        local mood = if ____t_6(____temp_5) then __O[364] else ""
+        __O[374] = ____temp_5
+        local mood = if ____t_6(____temp_5) then __O[374] else ""
         if __t(not __t(o.duelo) or not __t(air)) then
             oval(
                 nil,
@@ -2362,8 +2362,8 @@ local __O = {};
         local ____t_9 = __t
         local ____t_8 = __t
         local ____temp_7 = ____type == "c2_breno"
-        __O[365] = ____temp_7
-        if ____t_9(if __t(o.rage) then o.rage else if ____t_8(____temp_7) then o.powered else __O[365]) then
+        __O[375] = ____temp_7
+        if ____t_9(if __t(o.rage) then o.rage else if ____t_8(____temp_7) then o.powered else __O[375]) then
             c:save()
             c.globalAlpha = c.globalAlpha * 0.3
             oval(
@@ -2564,16 +2564,16 @@ local __O = {};
         local ____t_12 = __t
         local ____t_11 = __t
         local ____temp_10 = o.duelo == 2
-        __O[366] = ____temp_10
-        if ____t_12(if ____t_11(____temp_10) then attack else __O[366]) then
+        __O[376] = ____temp_10
+        if ____t_12(if ____t_11(____temp_10) then attack else __O[376]) then
             Rh = if __t(air) then __arrL({wide + 9, -39}, 2) else __arrL({wide - 3, -25}, 2)
             L = if __t(air) then __arrL({-wide - 9, -38}, 2) else __arrL({-wide + 1, -24}, 2)
         else
             local ____t_15 = __t
             local ____t_14 = __t
             local ____temp_13 = o.duelo == 3
-            __O[367] = ____temp_13
-            if ____t_15(if ____t_14(____temp_13) then attack else __O[367]) then
+            __O[377] = ____temp_13
+            if ____t_15(if ____t_14(____temp_13) then attack else __O[377]) then
                 Rh = __arrL(
                     {
                         wide + 8 + math.floor(7 * strike + 0.5),
@@ -3676,7 +3676,7 @@ local __O = {};
             if ____opt_16 ~= nil then
                 ____opt_16 = ____opt_16.color
             end
-            __O[368] = ____opt_16
+            __O[378] = ____opt_16
             r(
                 nil,
                 ____c_20,
@@ -3684,7 +3684,7 @@ local __O = {};
                 ____temp_21,
                 6,
                 1,
-                ____shadeHex_19(nil, if ____t_18(____opt_16) then __O[368] else "#3a2a20", 1)
+                ____shadeHex_19(nil, if ____t_18(____opt_16) then __O[378] else "#3a2a20", 1)
             )
         else
             r(
@@ -3847,10 +3847,10 @@ local __O = {};
         local ____t_25 = __t
         local ____t_23 = __t
         local ____temp_22 = mood == "happy" or mood == "smug"
-        __O[369] = ____temp_22
-        local ____temp_24 = if ____t_23(____temp_22) then __O[369] else S.pose == "cocky"
-        __O[370] = ____temp_24
-        if ____t_26(if ____t_25(____temp_24) then __O[370] else S.pose == "sing") then
+        __O[379] = ____temp_22
+        local ____temp_24 = if ____t_23(____temp_22) then __O[379] else S.pose == "cocky"
+        __O[380] = ____temp_24
+        if ____t_26(if ____t_25(____temp_24) then __O[380] else S.pose == "sing") then
             r(
                 nil,
                 c,
@@ -4153,10 +4153,10 @@ local __O = {};
         local ____t_30 = __t
         local ____t_28 = __t
         local ____temp_27 = if __t(S.item) then not __t(attack) else S.item
-        __O[371] = ____temp_27
-        local ____temp_29 = if ____t_28(____temp_27) then not __t(o.reach) else __O[371]
-        __O[372] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then o.item ~= false else __O[372]) then
+        __O[381] = ____temp_27
+        local ____temp_29 = if ____t_28(____temp_27) then not __t(o.reach) else __O[381]
+        __O[382] = ____temp_29
+        if ____t_31(if ____t_30(____temp_29) then o.item ~= false else __O[382]) then
             item(
                 nil,
                 c,
@@ -4213,8 +4213,8 @@ local __O = {};
         c:scale(if __lt(o.facing, 0) then -1 else 1 * if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
         local ____t_33 = __t
         local ____TS__Number_result_32 = __TS__Number(o.frame)
-        __O[373] = ____TS__Number_result_32
-        local t = if ____t_33(____TS__Number_result_32) then __O[373] else 0
+        __O[383] = ____TS__Number_result_32
+        local t = if ____t_33(____TS__Number_result_32) then __O[383] else 0
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
         local run = if __t(moving) then math.sin(t * 12) else 0
         local wag = math.sin(t * if __t(moving) then 14 else 9) * 4
@@ -4444,8 +4444,8 @@ local __O = {};
         local ____t_36 = __t
         local ____t_35 = __t
         local ____temp_34 = o.emotion == "happy"
-        __O[374] = ____temp_34
-        if ____t_36(if ____t_35(____temp_34) then __O[374] else moving) then
+        __O[384] = ____temp_34
+        if ____t_36(if ____t_35(____temp_34) then __O[384] else moving) then
             r(
                 nil,
                 c,
@@ -4560,8 +4560,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawCharacter)
-    __O[362] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[362] else window.CampanhaPersonagens) then
+    __O[372] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[372] else window.CampanhaPersonagens) then
         return
     end
     base = window.Art.drawCharacter
@@ -5131,8 +5131,8 @@ local __O = {};
             local ____get_result_name_40 = __get(SPEC, id).name
             local ____t_38 = __t
             local ____get_result_37 = __get(ROLE, id)
-            __O[375] = ____get_result_37
-            return {id = ____id_39, nome = ____get_result_name_40, papel = if ____t_38(____get_result_37) then __O[375] else ""}
+            __O[385] = ____get_result_37
+            return {id = ____id_39, nome = ____get_result_name_40, papel = if ____t_38(____get_result_37) then __O[385] else ""}
         end
     )
     __call(
@@ -5153,8 +5153,8 @@ local __O = {};
         local ____t_43 = __t
         local ____t_42 = __t
         local ____temp_41 = not __t(id) or not __t(spec)
-        __O[376] = ____temp_41
-        if ____t_43(if ____t_42(____temp_41) then __O[376] else __get(SPEC, id)) then
+        __O[386] = ____temp_41
+        if ____t_43(if ____t_42(____temp_41) then __O[386] else __get(SPEC, id)) then
             return false
         end
         __set(SPEC, id, spec)
@@ -5177,8 +5177,8 @@ local __O = {};
                 has = function(____, ____type)
                     local ____t_45 = __t
                     local ____temp_44 = not not __t(__get(SPEC, ____type)) or ____type == "c2_biscoito"
-                    __O[377] = ____temp_44
-                    return if ____t_45(____temp_44) then __O[377] else __re_test(
+                    __O[387] = ____temp_44
+                    return if ____t_45(____temp_44) then __O[387] else __re_test(
                         __re("^(crianca|pre)_(daroca|reeis|jorge)$", ""),
                         if __t(____type) then ____type else ""
                     )

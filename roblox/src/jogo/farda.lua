@@ -173,8 +173,8 @@ local __O = {};
         if ____opt_10 ~= nil then
             ____opt_10 = ____opt_10.name
         end
-        __O[1305] = ____opt_10
-        local N = if ____t_12(____opt_10) then __O[1305] else id
+        __O[1317] = ____opt_10
+        local N = if ____t_12(____opt_10) then __O[1317] else id
         if id == "tia_ana" then
             if st == "nova" then
                 api:say(
@@ -270,12 +270,12 @@ local __O = {};
             "has",
             id
         )
-        __O[1306] = ____call_result_17
+        __O[1318] = ____call_result_17
         local ____opt_result_21
         if q ~= nil then
             ____opt_result_21 = q.fardaFeita
         end
-        if ____t_22(if ____t_18(____call_result_17) then __O[1306] else ____opt_result_21) then
+        if ____t_22(if ____t_18(____call_result_17) then __O[1318] else ____opt_result_21) then
             api:say(__arrL(
                 {fala(nil, N, "Valeu de novo, Da Roça! Agora eu não esqueço mais nada... acho.")},
                 1

@@ -2034,8 +2034,8 @@ local __O = {};
             math.abs(cy),
             ry + math.abs(dy)
         )
-        __O[908] = ____temp_20
-        return if ____t_21(____temp_20) then math.abs(cx * dy - cy * dx) <= rx * math.abs(dy) + ry * math.abs(dx) else __O[908]
+        __O[918] = ____temp_20
+        return if ____t_21(____temp_20) then math.abs(cx * dy - cy * dx) <= rx * math.abs(dy) + ry * math.abs(dx) else __O[918]
     end
     local function contatoNoQuadro(self, o, fim, tempo, dt, p, xAntes, yAntes)
         local inicio = math.max(tempo - dt, o.atraso)
@@ -2160,8 +2160,8 @@ local __O = {};
             local ____t_30 = __t
             local ____t_29 = __t
             local ____temp_28 = t < 0
-            __O[909] = ____temp_28
-            if ____t_30(if ____t_29(____temp_28) then __O[909] else o.fim) then
+            __O[919] = ____temp_28
+            if ____t_30(if ____t_29(____temp_28) then __O[919] else o.fim) then
                 continue
             end
             local pos = ponto(nil, o, t)
@@ -2174,7 +2174,7 @@ local __O = {};
             local ____t_33 = __t
             local ____t_32 = __t
             local ____temp_31 = not __t(o.acertou)
-            __O[910] = ____temp_31
+            __O[920] = ____temp_31
             if ____t_33(if ____t_32(____temp_31) then contatoNoQuadro(
                 nil,
                 o,
@@ -2184,7 +2184,7 @@ local __O = {};
                 p,
                 xAntes,
                 yAntes
-            ) else __O[910]) then
+            ) else __O[920]) then
                 o.acertou = true
                 impacto(nil, f, o, pos)
                 ferir(nil, o.dano, pos.x)
@@ -2222,8 +2222,8 @@ local __O = {};
             __get(golpes, f.golpe),
             0
         )
-        __O[911] = ____getq_result_34
-        return if ____t_35(____getq_result_34) then __O[911] else ""
+        __O[921] = ____getq_result_34
+        return if ____t_35(____getq_result_34) then __O[921] else ""
     end
     window.ConquistaCombate = __ord({
         chefes = chefes,

@@ -15,6 +15,7 @@ return {
   { "visual.js", "visual" },
   { "amanda-art.js", "amanda-art" },
   { "amanda.js", "amanda" },
+  { "pixel-kit.js", "pixel-kit" },
   { "art.js", "art" },
   { "sprites.js", "sprites" },
   { "hd-scene.js", "hd-scene" },

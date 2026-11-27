@@ -92,10 +92,10 @@ local __O = {};
             local ____t_12 = __t
             local ____t_10 = __t
             local ____temp_9 = window.document:getElementById("gameViewport")
-            __O[340] = ____temp_9
-            local ____temp_11 = if ____t_10(____temp_9) then __O[340] else window.document:getElementById("gameShell")
-            __O[341] = ____temp_11
-            if ____t_12(____temp_11) then __O[341] else window.document.body:append(ui)
+            __O[350] = ____temp_9
+            local ____temp_11 = if ____t_10(____temp_9) then __O[350] else window.document:getElementById("gameShell")
+            __O[351] = ____temp_11
+            if ____t_12(____temp_11) then __O[351] else window.document.body:append(ui)
         end
         ui.hidden = false
         do
@@ -149,10 +149,10 @@ local __O = {};
         local ____t_30 = __t
         local ____t_28 = __t
         local ____temp_27 = o.scene ~= SCENE
-        __O[342] = ____temp_27
-        local ____temp_29 = if ____t_28(____temp_27) then __O[342] else o.arena
-        __O[343] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then __O[343] else o.room) then
+        __O[352] = ____temp_27
+        local ____temp_29 = if ____t_28(____temp_27) then __O[352] else o.arena
+        __O[353] = ____temp_29
+        if ____t_31(if ____t_30(____temp_29) then __O[353] else o.room) then
             if __t(active) then
                 leave(nil)
             end
@@ -160,8 +160,8 @@ local __O = {};
         end
         local ____t_33 = __t
         local ____TS__Number_result_32 = __TS__Number(o.time)
-        __O[344] = ____TS__Number_result_32
-        local t = if ____t_33(____TS__Number_result_32) then __O[344] else 0
+        __O[354] = ____TS__Number_result_32
+        local t = if ____t_33(____TS__Number_result_32) then __O[354] else 0
         local dt = math.max(
             0,
             math.min(0.05, t - lastT)
@@ -174,8 +174,8 @@ local __O = {};
         local ____t_36 = __t
         local ____t_35 = __t
         local ____temp_34 = amp < target and __TS__MathSign(omega) == __TS__MathSign(theta)
-        __O[345] = ____temp_34
-        if ____t_36(if ____t_35(____temp_34) then __O[345] else amp < 0.02) then
+        __O[355] = ____temp_34
+        if ____t_36(if ____t_35(____temp_34) then __O[355] else amp < 0.02) then
             omega = omega + __TS__MathSign(if __t(omega) then omega else 1) * 0.5 * dt
         end
         if amp > target + 0.05 then

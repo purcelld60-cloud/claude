@@ -203,8 +203,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.JorgeEpilogue)
-    __O[1529] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[1529] else window.JorgeAnime) then
+    __O[1545] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[1545] else window.JorgeAnime) then
         return
     end
     if not __t(window.CanvasRenderingContext2D.prototype.roundRect) then
@@ -3213,8 +3213,8 @@ local __O = {};
         local flashT = __mod(t, 3.3)
         local ____t_21 = __t
         local ____temp_20 = flashT < 0.08
-        __O[1530] = ____temp_20
-        local flash = if ____t_21(____temp_20) then __O[1530] else flashT > 0.16 and flashT < 0.22
+        __O[1546] = ____temp_20
+        local flash = if ____t_21(____temp_20) then __O[1546] else flashT > 0.16 and flashT < 0.22
         if __t(flash) then
             c.fillStyle = "rgba(120,80,200,.35)"
             c:fillRect(0, 0, W, H)
@@ -3525,18 +3525,18 @@ local __O = {};
         end
         local ____t_23 = __t
         local ____TS__Number_result_22 = __TS__Number(s.index)
-        __O[1531] = ____TS__Number_result_22
+        __O[1547] = ____TS__Number_result_22
         local index = clamp(
             nil,
-            math.floor(if ____t_23(____TS__Number_result_22) then __O[1531] else 0),
+            math.floor(if ____t_23(____TS__Number_result_22) then __O[1547] else 0),
             0,
             __len(SHOTS) - 1
         )
         local shot = __get(SHOTS, index)
         local ____t_25 = __t
         local ____TS__Number_result_24 = __TS__Number(s.time)
-        __O[1532] = ____TS__Number_result_24
-        local t = math.max(0, if ____t_25(____TS__Number_result_24) then __O[1532] else 0)
+        __O[1548] = ____TS__Number_result_24
+        local t = math.max(0, if ____t_25(____TS__Number_result_24) then __O[1548] else 0)
         local p = clamp(nil, t / shot.duration)
         c:save()
         c.imageSmoothingEnabled = true
@@ -3544,8 +3544,8 @@ local __O = {};
         c:fillRect(0, 0, W, H)
         local ____t_27 = __t
         local ____get_result_26 = __get(RENDER, shot.id)
-        __O[1533] = ____get_result_26
-        if ____t_27(____get_result_26) then __O[1533] else eyes(nil, c, t, p)
+        __O[1549] = ____get_result_26
+        if ____t_27(____get_result_26) then __O[1549] else eyes(nil, c, t, p)
         local fadeIn = 1 - smooth(nil, t / 0.25)
         if __t(fadeIn > 0 and index > 0) then
             c.fillStyle = ("rgba(0,0,0," .. tostring(fadeIn)) .. ")"

@@ -1315,9 +1315,9 @@ local __O = {};
         local ____call_6 = __call
         local ____t_5 = __t
         local ____get_result_4 = __get(__L1.LOJAS, __L1.CUR)
-        __O[379] = ____get_result_4
+        __O[389] = ____get_result_4
         ____call_6(
-            if ____t_5(____get_result_4) then __O[379] else __set(
+            if ____t_5(____get_result_4) then __O[389] else __set(
                 __L1.LOJAS,
                 __L1.CUR,
                 __arrL({}, 0)
@@ -4247,11 +4247,11 @@ local __O = {};
             local ____t_15 = __t
             local ____t_12 = __t
             local ____temp_11 = b.st == 0
-            __O[381] = ____temp_11
+            __O[391] = ____temp_11
             local ____t_14 = __t
             local ____temp_13 = d < 70
-            __O[380] = ____temp_13
-            if ____t_15(if ____t_12(____temp_11) then if ____t_14(____temp_13) then __O[380] else if __t(jumping) then d < 140 else jumping else __O[381]) then
+            __O[390] = ____temp_13
+            if ____t_15(if ____t_12(____temp_11) then if ____t_14(____temp_13) then __O[390] else if __t(jumping) then d < 140 else jumping else __O[391]) then
                 b.st = 1
                 b.vx = if __ge(b.px, hx) then 1 else -1 * (40 + math.random() * 40)
                 b.vy = -40 - math.random() * 20
@@ -4352,16 +4352,16 @@ local __O = {};
     __L1.heroi = function(self, x, y, vy)
         local ____t_17 = __t
         local ____TS__Number_result_16 = __TS__Number(x)
-        __O[382] = ____TS__Number_result_16
-        local ____temp_22 = if ____t_17(____TS__Number_result_16) then __O[382] else -9999
+        __O[392] = ____TS__Number_result_16
+        local ____temp_22 = if ____t_17(____TS__Number_result_16) then __O[392] else -9999
         local ____t_19 = __t
         local ____TS__Number_result_18 = __TS__Number(y)
-        __O[383] = ____TS__Number_result_18
-        local ____temp_23 = if ____t_19(____TS__Number_result_18) then __O[383] else 440
+        __O[393] = ____TS__Number_result_18
+        local ____temp_23 = if ____t_19(____TS__Number_result_18) then __O[393] else 440
         local ____t_21 = __t
         local ____TS__Number_result_20 = __TS__Number(vy)
-        __O[384] = ____TS__Number_result_20
-        __L1.HERO = {x = ____temp_22, y = ____temp_23, vy = if ____t_21(____TS__Number_result_20) then __O[384] else 0}
+        __O[394] = ____TS__Number_result_20
+        __L1.HERO = {x = ____temp_22, y = ____temp_23, vy = if ____t_21(____TS__Number_result_20) then __O[394] else 0}
     end
     __L1.buildAir = function(self)
         local cv, c = table.unpack(
@@ -5993,8 +5993,8 @@ local __O = {};
                 local ____t_26 = __t
                 local ____t_25 = __t
                 local ____temp_24 = __L1:vis(x, 20)
-                __O[385] = ____temp_24
-                if ____t_26(if ____t_25(____temp_24) then wx < __L1.AIR.TAR or wx > __L1.AIR.GR else __O[385]) then
+                __O[395] = ____temp_24
+                if ____t_26(if ____t_25(____temp_24) then wx < __L1.AIR.TAR or wx > __L1.AIR.GR else __O[395]) then
                     __L1:gente(c, x, __L1.GY, i)
                     R(
                         nil,
@@ -6075,8 +6075,8 @@ local __O = {};
                 local ____t_29 = __t
                 local ____t_28 = __t
                 local ____temp_27 = __L1:vis(sx)
-                __O[386] = ____temp_27
-                if ____t_29(if ____t_28(____temp_27) then __gt(a, 0.05) else __O[386]) then
+                __O[396] = ____temp_27
+                if ____t_29(if ____t_28(____temp_27) then __gt(a, 0.05) else __O[396]) then
                     g.fillStyle = ("rgba(255,246,216," .. tostring(0.25 * a)) .. ")"
                     g:fillRect(sx - 20, 66, 40, 144)
                     lightAdd(
@@ -6629,11 +6629,11 @@ local __O = {};
                 local ____t_32 = __t
                 local ____t_31 = __t
                 local ____temp_30 = __L1:vis(sx)
-                __O[387] = ____temp_30
+                __O[397] = ____temp_30
                 if ____t_32(if ____t_31(____temp_30) then __gt(
                     hash(nil, k + 9),
                     0.3
-                ) else __O[387]) then
+                ) else __O[397]) then
                     g.fillStyle = ("rgba(255,214,140," .. tostring(0.55 * a)) .. ")"
                     g:fillRect(sx - 6, 110, 12, 14)
                 end
@@ -8614,8 +8614,8 @@ local __O = {};
             local ____t_39 = __t
             local ____t_38 = __t
             local ____temp_37 = __L1:vis(sx)
-            __O[388] = ____temp_37
-            if ____t_39(if ____t_38(____temp_37) then math.sin(t * 3) > 0 else __O[388]) then
+            __O[398] = ____temp_37
+            if ____t_39(if ____t_38(____temp_37) then math.sin(t * 3) > 0 else __O[398]) then
                 g.fillStyle = ("rgba(255,80,60," .. tostring(a)) .. ")"
                 g:fillRect(sx - 1, 32, 5, 5)
             end
@@ -8660,8 +8660,8 @@ local __O = {};
                 local ____t_42 = __t
                 local ____t_41 = __t
                 local ____temp_40 = math.abs(x + w / 2 - __L1.AVENIDA.INDIO) < 280
-                __O[389] = ____temp_40
-                if ____t_42(if ____t_41(____temp_40) then __O[389] else x > 280 and x < 480) then
+                __O[399] = ____temp_40
+                if ____t_42(if ____t_41(____temp_40) then __O[399] else x > 280 and x < 480) then
                     x = x + (w + 30)
                     continue
                 end
@@ -16852,8 +16852,8 @@ local __O = {};
                 local ____t_49 = __t
                 local ____t_48 = __t
                 local ____temp_47 = __L1:vis(sx, 40)
-                __O[390] = ____temp_47
-                if ____t_49(if ____t_48(____temp_47) then wx < __L1.OLIVIA.SESI else __O[390]) then
+                __O[400] = ____temp_47
+                if ____t_49(if ____t_48(____temp_47) then wx < __L1.OLIVIA.SESI else __O[400]) then
                     __L1:carro(
                         c,
                         sx,
@@ -16876,8 +16876,8 @@ local __O = {};
                 local ____t_52 = __t
                 local ____t_51 = __t
                 local ____temp_50 = __L1:vis(sx, 20)
-                __O[391] = ____temp_50
-                if ____t_52(if ____t_51(____temp_50) then wx < __L1.OLIVIA.SESI else __O[391]) then
+                __O[401] = ____temp_50
+                if ____t_52(if ____t_51(____temp_50) then wx < __L1.OLIVIA.SESI else __O[401]) then
                     ell(
                         nil,
                         c,
@@ -17726,10 +17726,10 @@ local __O = {};
         )
         local ____t_54 = __t
         local ____TS__Number_result_53 = __TS__Number(t)
-        __O[392] = ____TS__Number_result_53
+        __O[402] = ____TS__Number_result_53
         __TS__SparseArrayPush(
             ____array_55,
-            if ____t_54(____TS__Number_result_53) then __O[392] else 0,
+            if ____t_54(____TS__Number_result_53) then __O[402] else 0,
             math.floor(x * 7 + y * 3 + 0.5)
         )
         f(__TS__SparseArraySpread(____array_55))
@@ -17757,20 +17757,20 @@ local __O = {};
         if V ~= nil then
             ____opt_result_60 = V.tipo
         end
-        __O[393] = ____opt_result_60
+        __O[403] = ____opt_result_60
         local ____t_65 = __t
         local ____opt_result_64
         if V ~= nil then
             ____opt_result_64 = V.borda
         end
-        local tipo = if ____t_61(____opt_result_60) then __O[393] else if ____t_65(____opt_result_64 == "#7ac0b8" or id == 18) then "agua" else if id == 16 then "obra" else "terra"
+        local tipo = if ____t_61(____opt_result_60) then __O[403] else if ____t_65(____opt_result_64 == "#7ac0b8" or id == 18) then "agua" else if id == 16 then "obra" else "terra"
         local ____t_69 = __t
         local ____opt_result_68
         if V ~= nil then
             ____opt_result_68 = V.fundo
         end
-        __O[394] = ____opt_result_68
-        local fundo = if ____t_69(____opt_result_68) then __O[394] else if tipo == "terra" then "#3a3024" else if tipo == "agua" then "#2c5a78" else "#2a2a2c"
+        __O[404] = ____opt_result_68
+        local fundo = if ____t_69(____opt_result_68) then __O[404] else if tipo == "terra" then "#3a3024" else if tipo == "agua" then "#2c5a78" else "#2a2a2c"
         for ____, ____value in __iterar((L.gaps)) do
             local gx = ____value[1]
             local gw = ____value[2]
@@ -18038,8 +18038,8 @@ local __O = {};
             if V ~= nil then
                 ____opt_result_72 = V.borda
             end
-            __O[395] = ____opt_result_72
-            local borda = if ____t_73(____opt_result_72) then __O[395] else if tipo == "obra" then "#9a9a94" else if tipo == "agua" then "#7ac0b8" else "#5a7a3a"
+            __O[405] = ____opt_result_72
+            local borda = if ____t_73(____opt_result_72) then __O[405] else if tipo == "obra" then "#9a9a94" else if tipo == "agua" then "#7ac0b8" else "#5a7a3a"
             R(
                 nil,
                 c,
@@ -18262,8 +18262,8 @@ local __O = {};
         ____opt_92 = ____opt_92.register
     end
     local ____temp_95 = if __t(window.CampanhaCenarios) then window.CampanhaCenarios else not ____t_94(____opt_92)
-    __O[378] = ____temp_95
-    if ____t_97(if ____t_96(____temp_95) then __O[378] else not __t(window.HdMaps.kit)) then
+    __O[388] = ____temp_95
+    if ____t_97(if ____t_96(____temp_95) then __O[388] else not __t(window.HdMaps.kit)) then
         return
     end
     __L1.K = window.HdMaps.kit
@@ -21393,8 +21393,8 @@ local __O = {};
         if ____opt_107 ~= nil then
             ____opt_result_109 = ____opt_107(____opt_107, d.id, camera)
         end
-        __O[396] = ____opt_result_109
-        for ____, lb in __TS__Iterator(____iter_113(____call_112(____temp_111, "concat", if ____t_110(____opt_result_109) then __O[396] else __arrL({}, 0)))) do
+        __O[406] = ____opt_result_109
+        for ____, lb in __TS__Iterator(____iter_113(____call_112(____temp_111, "concat", if ____t_110(____opt_result_109) then __O[406] else __arrL({}, 0)))) do
             local x, y, str, size, col = table.unpack(lb, 1, 5)
             local a = if __t(d.labelAlpha) then d:labelAlpha(lb) else 1
             if __le(a, 0.01) then
@@ -21432,12 +21432,12 @@ local __O = {};
             local ____t_118 = __t
             local ____t_117 = __t
             local ____ge_result_116 = __ge(scene, 12)
-            __O[397] = ____ge_result_116
+            __O[407] = ____ge_result_116
             if not ____t_118(if ____t_117(____ge_result_116) then __call(
                 __L1.LIST,
                 "some",
                 function(____, d) return d.id == scene end
-            ) else __O[397]) then
+            ) else __O[407]) then
                 return __L1:baseScene(c, scene, camera, t)
             end
             c:save()
@@ -21451,12 +21451,12 @@ local __O = {};
             local ____array_123 = __TS__SparseArrayNew(c, scene)
             local ____t_120 = __t
             local ____TS__Number_result_119 = __TS__Number(camera)
-            __O[398] = ____TS__Number_result_119
-            __TS__SparseArrayPush(____array_123, if ____t_120(____TS__Number_result_119) then __O[398] else 0)
+            __O[408] = ____TS__Number_result_119
+            __TS__SparseArrayPush(____array_123, if ____t_120(____TS__Number_result_119) then __O[408] else 0)
             local ____t_122 = __t
             local ____TS__Number_result_121 = __TS__Number(t)
-            __O[399] = ____TS__Number_result_121
-            __TS__SparseArrayPush(____array_123, if ____t_122(____TS__Number_result_121) then __O[399] else 0)
+            __O[409] = ____TS__Number_result_121
+            __TS__SparseArrayPush(____array_123, if ____t_122(____TS__Number_result_121) then __O[409] else 0)
             if ____t_126(____self_124_draw_125(
                 ____self_124,
                 __TS__SparseArraySpread(____array_123)
@@ -21566,8 +21566,8 @@ local __O = {};
                 local ____call_130 = __call
                 local ____t_129 = __t
                 local ____get_result_128 = __get(__L1.LOJAS, id)
-                __O[400] = ____get_result_128
-                return ____call_130(if ____t_129(____get_result_128) then __O[400] else __arrL({}, 0), "slice")
+                __O[410] = ____get_result_128
+                return ____call_130(if ____t_129(____get_result_128) then __O[410] else __arrL({}, 0), "slice")
             end,
             FAR = function()
                 local ____temp_131 = __L1:buildFar()
@@ -21605,14 +21605,14 @@ local __O = {};
                     if ____opt_132 ~= nil then
                         ____opt_132 = ____opt_132.width
                     end
-                    __O[401] = ____opt_132
-                    return if ____t_134(____opt_132) then __O[401] else 0
+                    __O[411] = ____opt_132
+                    return if ____t_134(____opt_132) then __O[411] else 0
                 end,
                 layout = function(____, id)
                     local ____t_136 = __t
                     local ____get_result_135 = __get(__L1.LAYOUT, id)
-                    __O[402] = ____get_result_135
-                    return if ____t_136(____get_result_135) then __O[402] else nil
+                    __O[412] = ____get_result_135
+                    return if ____t_136(____get_result_135) then __O[412] else nil
                 end,
                 plataforma = __L1.plataforma,
                 heroi = __L1.heroi,

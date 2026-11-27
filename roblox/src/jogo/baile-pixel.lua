@@ -121,8 +121,8 @@ local __O = {};
                         local ____t_2 = __t
                         local ____t_1 = __t
                         local ____temp_0 = __le(ay, yc) and __gt(by, yc)
-                        __O[1366] = ____temp_0
-                        if ____t_2(if ____t_1(____temp_0) then __O[1366] else __le(by, yc) and __gt(ay, yc)) then
+                        __O[1381] = ____temp_0
+                        if ____t_2(if ____t_1(____temp_0) then __O[1381] else __le(by, yc) and __gt(ay, yc)) then
                             __call(xs, "push", ax + (yc - ay) / (by - ay) * (bx - ax))
                         end
                         i = i + 1
@@ -158,8 +158,8 @@ local __O = {};
         local dy = y1 - y0
         local ____t_4 = __t
         local ____hypot_result_3 = __hypot(dx, dy)
-        __O[1367] = ____hypot_result_3
-        local L = if ____t_4(____hypot_result_3) then __O[1367] else 1
+        __O[1382] = ____hypot_result_3
+        local L = if ____t_4(____hypot_result_3) then __O[1382] else 1
         local nx = -dy / L * w / 2
         local ny = dx / L * w / 2
         poly(
@@ -229,10 +229,10 @@ local __O = {};
             local ____t_8 = __t
             local ____t_6 = __t
             local ____temp_5 = __lt(x, 0) or __lt(y, 0)
-            __O[1368] = ____temp_5
-            local ____temp_7 = if ____t_6(____temp_5) then __O[1368] else __ge(x, W)
-            __O[1369] = ____temp_7
-            return if ____t_9(if ____t_8(____temp_7) then __O[1369] else __ge(y, H)) then -1 else __get(cor, y * W + x)
+            __O[1383] = ____temp_5
+            local ____temp_7 = if ____t_6(____temp_5) then __O[1383] else __ge(x, W)
+            __O[1384] = ____temp_7
+            return if ____t_9(if ____t_8(____temp_7) then __O[1384] else __ge(y, H)) then -1 else __get(cor, y * W + x)
         end
         local plano = __TS__New(
             Set,
@@ -262,10 +262,10 @@ local __O = {};
                             local ____t_13 = __t
                             local ____t_11 = __t
                             local ____temp_10 = em(nil, x - 1, y) >= 0 or em(nil, x + 1, y) >= 0
-                            __O[1370] = ____temp_10
-                            local ____temp_12 = if ____t_11(____temp_10) then __O[1370] else em(nil, x, y - 1) >= 0
-                            __O[1371] = ____temp_12
-                            if ____t_14(if ____t_13(____temp_12) then __O[1371] else em(nil, x, y + 1) >= 0) then
+                            __O[1385] = ____temp_10
+                            local ____temp_12 = if ____t_11(____temp_10) then __O[1385] else em(nil, x, y - 1) >= 0
+                            __O[1386] = ____temp_12
+                            if ____t_14(if ____t_13(____temp_12) then __O[1386] else em(nil, x, y + 1) >= 0) then
                                 local ____call_17 = __call
                                 local ____arr_16 = __arr
                                 local ____array_15 = __TS__SparseArrayNew(__TS__Spread(__iter(CONTORNO)))
@@ -831,8 +831,8 @@ local __O = {};
         local ____t_23 = __t
         local ____t_22 = __t
         local ____temp_21 = T.topo == 1 or T.topo == 2
-        __O[1372] = ____temp_21
-        local manga = if ____t_23(if ____t_22(____temp_21) then __O[1372] else T.topo == 4) then if T.topo == 4 then T.baixo else T.top else pele
+        __O[1387] = ____temp_21
+        local manga = if ____t_23(if ____t_22(____temp_21) then __O[1387] else T.topo == 4) then if T.topo == 4 then T.baixo else T.top else pele
         for ____, ____value in __iterar((__arrL(
             {
                 __arrL({ombE, cE, mE}, 3),
@@ -2169,8 +2169,8 @@ local __O = {};
             local ____c_rotate_27 = c.rotate
             local ____t_25 = __t
             local ____TS__Number_result_24 = __TS__Number(o.angle)
-            __O[1373] = ____TS__Number_result_24
-            ____c_rotate_27(____c_26, if ____t_25(____TS__Number_result_24) then __O[1373] else 0)
+            __O[1388] = ____TS__Number_result_24
+            ____c_rotate_27(____c_26, if ____t_25(____TS__Number_result_24) then __O[1388] else 0)
             if __t(o.aura) then
                 c:save()
                 c.globalAlpha = c.globalAlpha * 0.22
@@ -2790,8 +2790,8 @@ local __O = {};
                             local ____t_30 = __t
                             local ____t_29 = __t
                             local ____temp_28 = k > -1 and k < 1.5
-                            __O[1374] = ____temp_28
-                            if ____t_30(if ____t_29(____temp_28) then __O[1374] else k > 7) then
+                            __O[1389] = ____temp_28
+                            if ____t_30(if ____t_29(____temp_28) then __O[1389] else k > 7) then
                                 col = __get(
                                     __arrL({"#ff4fd8", "#4fd8ff", "#7dff6a"}, 3),
                                     __mod(
@@ -3947,8 +3947,8 @@ local __O = {};
         end
         local ____t_32 = __t
         local ____hypot_result_31 = __hypot(a.vx, a.vy)
-        __O[1375] = ____hypot_result_31
-        local sp = if ____t_32(____hypot_result_31) then __O[1375] else 1
+        __O[1390] = ____hypot_result_31
+        local sp = if ____t_32(____hypot_result_31) then __O[1390] else 1
         local ux = a.vx / sp
         local uy = a.vy / sp
         c:save()
@@ -4487,8 +4487,8 @@ local __O = {};
             local dy = h.ty - h.y
             local ____t_34 = __t
             local ____hypot_result_33 = __hypot(dx, dy)
-            __O[1376] = ____hypot_result_33
-            local len = if ____t_34(____hypot_result_33) then __O[1376] else 1
+            __O[1391] = ____hypot_result_33
+            local len = if ____t_34(____hypot_result_33) then __O[1391] else 1
             local ex = h.x + dx / len * 1200
             local ey = h.y + dy / len * 1200
             if __gt(h.delay, 0) then
@@ -4742,8 +4742,8 @@ local __O = {};
             local dy = b.targetY - b.y
             local ____t_36 = __t
             local ____hypot_result_35 = __hypot(dx, dy)
-            __O[1377] = ____hypot_result_35
-            local len = if ____t_36(____hypot_result_35) then __O[1377] else 1
+            __O[1392] = ____hypot_result_35
+            local len = if ____t_36(____hypot_result_35) then __O[1392] else 1
             c:save()
             c:setLineDash(__arrL({11, 8}, 2))
             c.strokeStyle = "#e5bfa2"

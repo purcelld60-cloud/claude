@@ -554,13 +554,40 @@
   function submitTraining(){
     if(!training?.active||paused||dialog||training.cooldown>0)return false;
     const t=training;t.cooldown=.3;
-    if(t.marker>=t.zoneStart&&t.marker<=t.zoneEnd){t.hits++;t.totalHits++;t.combo++;t.bestCombo=Math.max(t.bestCombo,t.combo);const center=(t.zoneStart+t.zoneEnd)/2,perfect=Math.abs(t.marker-center)<.045;t.score+=(perfect?150:100)+Math.min(5,t.combo)*20;t.feedback=perfect?'PERFEITO! REFLEXO DE CAMPEÃO!':'BOA! MANDOU BEM!';t.feedbackGood=true;beep(perfect?930:720,.12,'triangle');fx(player.x,player.y-50,'#c9e799',12,110);
+    if(t.marker>=t.zoneStart&&t.marker<=t.zoneEnd){t.golpeEm=time;t.hits++;t.totalHits++;t.combo++;t.bestCombo=Math.max(t.bestCombo,t.combo);const center=(t.zoneStart+t.zoneEnd)/2,perfect=Math.abs(t.marker-center)<.045;t.score+=(perfect?150:100)+Math.min(5,t.combo)*20;t.feedback=perfect?'PERFEITO! REFLEXO DE CAMPEÃO!':'BOA! MANDOU BEM!';t.feedbackGood=true;beep(perfect?930:720,.12,'triangle');fx(player.x,player.y-50,'#c9e799',12,110);
       if(t.hits>=2){if(t.round>=3){finishTraining();return true;}t.round++;t.hits=0;t.cooldown=.65;t.feedback=`RODADA ${t.round}! A FAIXA MUDOU DE LUGAR.`;setTrainingZone();}
     }else{t.misses++;t.combo=0;t.feedback='QUASE! ESPERE O VERDE E TENTE DE NOVO.';t.feedbackGood=false;beep(170,.1,'triangle');}
     updateUI();return true;
   }
   function finishTraining(){const score=training.score,combo=training.bestCombo;training.active=false;q.trained=true;awardXP(380,'quest-caleb');emitGameEvent('player-trained');player.hp=bonus().maxHP;player.gas=bonus().maxGas;player.papers=30;releaseInputs();updateUI();save();say([{name:'Caleb',text:`TREINO PAGO! ${score} pontos, combo ${combo}! Esse braço saiu do tamanho de um lápis pra um bolo de três andares. Agora sim, shape de respeito!`},{name:'Da Roça',text:'Agora é papel mais forte, gás potente e reflexo afiado. Da academia direto pro bolo!'},{name:'Caleb',text:'A quadra tá liberada! Entre no carro do seu pai com V e escolha a rota. Contra Nikolas: dash no aviso laranja, ataque quando ficar vulnerável. Se apertar, chama o Reeis — suplemento de amizade!'}],()=>toast('Treino concluído! Seus ataques estão mais fortes. Vá à quadra.'));}
+  // treino do Caleb em pixel art: saco de pancada que balança a cada acerto, rodadas em placas e barra em gomos
+  function drawTrainingPixel(){
+    const t=training,PK=window.PixelKit,P=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x)*2,Math.round(y)*2,Math.round(w)*2,Math.round(h)*2);};
+    ctx.fillStyle='#0a1612d0';ctx.fillRect(0,0,W,H);
+    PK.painel(ctx,70,52,820,380,{u:2,fundo:'#16261f',borda:'#d7bf7e',rebite:'#a88a48'});
+    for(let y=34;y<212;y+=6)for(let x=38;x<442;x+=12)P(x+((y/6)%2)*6,y,11,1,'rgba(0,0,0,.18)');
+    PK.painel(ctx,300,64,360,36,{u:2,fundo:'#2a1e12',borda:'#e8c24a',sombra:false});PK.texto(ctx,'ACADEMIA DO CALEB',480,82,16,'#ffe9a8');
+    PK.contorno(ctx,'TREINO DE REFLEXO',480,128,24,'#fff0bd','#1c1410');
+    // saco de pancada pendurado na corrente (balança mais logo depois do acerto)
+    const dt=time-(t.golpeEm||-9),bal=Math.sin(dt*9)*Math.max(0,1-dt*1.2)*10,bx=58+Math.round(bal*.6),by=112;
+    for(let k=0;k<6;k++)P(58+Math.round(bal*k/12),96+k*3,2,2,k%2?'#9aa0a6':'#6a7078');
+    P(bx-9,by,18,4,'#3a3a3a');P(bx-10,by+4,20,40,'#b8322a');P(bx-10,by+4,4,40,'#d8524a');P(bx+6,by+4,4,40,'#8a1e1a');for(const yy of [by+12,by+34])P(bx-10,yy,20,2,'#3a3a3a');P(bx-8,by+44,16,3,'#3a3a3a');P(bx-3,by+20,6,6,'#f2f2ee');P(bx-2,by+21,4,4,'#c43c3a');
+    if(dt<.18)for(let k=0;k<6;k++){const a=k/6*Math.PI*2;P(bx+Math.cos(a)*(14+dt*40),by+24+Math.sin(a)*(14+dt*40),2,2,'#ffd24a');}
+    // halteres no canto direito
+    for(let k=0;k<3;k++){const x=404,y=136+k*10;P(x,y,26,2,'#9aa0a6');P(x-2,y-3,5,8,'#2a2a2a');P(x+23,y-3,5,8,'#2a2a2a');}P(400,164,36,3,'#5a3a22');
+    // rodada, pontos e combo em placas
+    const placas=[[`RODADA ${t.round}/3`,'#e1d29d',200],[`PONTOS ${t.score}`,'#d5e4ad',480],[`COMBO x${t.combo}`,'#d9b7df',760]];
+    for(const [txt,cor,x] of placas){PK.painel(ctx,x-104,152,208,34,{u:2,fundo:'#0e1c16',borda:'#4a6a52',sombra:false});PK.texto(ctx,txt,x,169,16,cor);}
+    for(let i=0;i<6;i++){const on=i<t.totalHits;P(205+i*13,99,10,4,on?'#c9dd87':'#2e4232');if(on)P(205+i*13,99,10,1,'#f2ffc8');}
+    // barra de reflexo em gomos: o verde é a hora certa; a luva é o marcador
+    PK.barra(ctx,170,262,620,36,t.marker,{u:2,gomos:62,zona:[t.zoneStart,t.zoneEnd],zonaCor:'#8ad86a',vazio:'#7a3e38',borda:'#0a1410'});
+    const mx=Math.round((170+t.marker*620)/2);P(mx-1,124,2,28,'#0a1410');P(mx-6,118,12,8,'#c43c3a');P(mx-6,118,12,2,'#e86a5a');P(mx-7,120,2,5,'#a82a2a');P(mx-4,126,8,3,'#f2f2ee');P(mx-5,129,10,1,'#0a1410');
+    PK.texto(ctx,t.feedback,480,334,16,t.feedbackGood?'#d8ecae':'#f0b6a0');
+    PK.texto(ctx,'E / ESPAÇO / ACERTAR: quando a luva estiver no verde',480,372,8,'#e4d7b2');PK.texto(ctx,'2 acertos por rodada. Erros não apagam seus acertos.',480,396,8,'#9fb6a3');
+    return true;
+  }
   function drawTraining(){
+    if(window.PixelKit&&drawTrainingPixel())return;
     const t=training;ctx.fillStyle='#132923c9';ctx.fillRect(0,0,W,H);ctx.fillStyle='#203b32';ctx.fillRect(85,70,790,350);ctx.strokeStyle='#d7bf7e';ctx.lineWidth=3;ctx.strokeRect(86.5,71.5,787,347);ctx.fillStyle='#314f3f';ctx.fillRect(102,87,756,6);
     text('ACADEMIA DO CALEB',480,117,13,'#dbcf9f');text('TREINO DE REFLEXO',480,154,30,'#fff0bd');text(`RODADA ${t.round} / 3`,235,199,17,'#e1d29d');text(`PONTOS ${t.score}`,480,199,17,'#d5e4ad');text(`COMBO ×${t.combo}`,725,199,17,'#d9b7df');
     for(let i=0;i<6;i++){ctx.fillStyle=i<t.totalHits?'#c9dd87':'#526b50';ctx.fillRect(410+i*26,225,17,8);}
