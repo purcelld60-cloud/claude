@@ -361,75 +361,52 @@ local __O = {};
     end
     local function aviso(self, h, t, pal, lite)
         local chao = chaoDo(nil, h)
-        local pisca = 0.35 + 0.35 * math.abs(math.sin(t * 12))
+        local pisca = 0.45 + 0.35 * math.abs(math.sin(t * 12))
         ctx:save()
         for ____, b in __iterar((perigoCaixas(nil, h, chao))) do
-            local y0 = math.max(b.y0, 0)
             local w = b.x1 - b.x0
-            ctx.globalAlpha = pisca * 0.22
-            px(
-                nil,
-                b.x0,
-                y0,
-                w,
-                chao - y0,
-                __get(pal, 2)
-            )
             ctx.globalAlpha = pisca
-            px(
-                nil,
-                b.x0,
-                chao - 2,
-                w,
-                3,
-                __get(pal, 3)
-            )
             do
-                local y = chao - 4
-                while y > y0 do
+                local x = b.x0
+                while __lt(x, b.x1) do
+                    local y = chao - 3 + math.floor(math.sin(x * 0.37) * 1.2 + 0.5)
                     px(
                         nil,
-                        b.x0,
+                        x,
                         y,
-                        2,
                         4,
+                        2,
                         __get(pal, 2)
                     )
-                    px(
-                        nil,
-                        b.x1 - 2,
-                        y,
-                        2,
-                        4,
-                        __get(pal, 2)
-                    )
-                    y = y - 8
+                    if hsh(nil, x) > 0.78 then
+                        px(
+                            nil,
+                            x + 1,
+                            y - 2,
+                            2,
+                            2,
+                            __get(pal, 3)
+                        )
+                    end
+                    x = x + 4
                 end
             end
-            px(
-                nil,
-                b.x0,
-                y0,
-                w,
-                2,
-                __get(pal, 2)
-            )
             if not __t(lite) then
                 do
                     local i = 0
-                    while i < 6 do
+                    while i < 4 do
                         local k = __mod(
-                            t * 1.4 + hsh(nil, i + b.x0),
+                            t * 1.5 + hsh(nil, i + b.x0),
                             1
                         )
-                        ctx.globalAlpha = (1 - k) * pisca
+                        ctx.globalAlpha = (1 - k) * pisca * 0.8
                         px(
                             nil,
-                            b.x0 + hsh(nil, i * 7 + b.x0) * (w - 3),
-                            chao - 6 - k * math.min(60, chao - y0 - 8),
-                            3,
-                            3,
-                            if __t(__mod(i, 2)) then __get(pal, 2) else __get(pal, 3)
+                            b.x0 + hsh(nil, i * 7 + b.x0) * (w - 2),
+                            chao - 5 - k * 14,
+                            2,
+                            2,
+                            __get(pal, 3)
                         )
                         i = i + 1
                     end
@@ -1099,7 +1076,7 @@ local __O = {};
                     estagio = if __t(estagio) then estagio else 1,
                     dir = if __lt(dir, 0) then -1 else 1,
                     idade = 0,
-                    vida = 0.5 + if __t(estagio) then estagio else 1 * 0.08,
+                    vida = 0.4 + if __t(estagio) then estagio else 1 * 0.05,
                     seed = math.random() * 100
                 }
             )
@@ -1118,19 +1095,13 @@ local __O = {};
             function(____, g) return __lt(g.idade, g.vida) end
         )
     end
-    local VERDE = __arrL({
-        "#2f4a16",
-        "#6f9a2e",
-        "#9cc845",
-        "#cde67a",
-        "#f2f9c0"
-    }, 5)
+    local VERDE = __arrL({"#4f7a24", "#8fbf3c", "#bfe06a", "#eaf6b0"}, 4)
     local function desenharGas(self, c, t)
         ctx = c
         for ____, g in __iterar((gases)) do
             local p = g.idade / g.vida
-            local abre = 1 - (1 - clamp(nil, g.idade / 0.16, 0, 1)) ^ 3
-            local some = if p > 0.55 then 1 - (p - 0.55) / 0.45 else 1
+            local abre = 1 - (1 - clamp(nil, g.idade / 0.12, 0, 1)) ^ 3
+            local some = if p > 0.4 then 1 - (p - 0.4) / 0.6 else 1
             local rx = g.rx * abre
             local ry = g.ry * abre
             if rx < 4 then
@@ -1139,111 +1110,74 @@ local __O = {};
             c:save()
             if CHAO ~= nil then
                 c:beginPath()
-                c:rect(g.cx - g.rx - 40, g.cy - g.ry - 60, g.rx * 2 + 80, CHAO - (g.cy - g.ry - 60))
+                c:rect(g.cx - g.rx - 30, g.cy - g.ry - 40, g.rx * 2 + 60, CHAO - (g.cy - g.ry - 40))
                 c:clip()
             end
-            c.globalAlpha = 0.32 * some
-            c.fillStyle = __get(VERDE, 2)
-            c:beginPath()
-            c:ellipse(
-                g.cx,
-                g.cy,
-                rx,
-                ry,
-                0,
-                0,
-                math.pi * 2
-            )
-            __call(c, "fill")
-            c.globalAlpha = if g.estagio == 3 then 0.95 else 0.85 * some
-            local base = math.min(rx, ry) * 0.3 + 5
-            local nb = math.floor(12 + g.rx / 12 + 0.5)
-            local enc = if p > 0.55 then 1 - (p - 0.55) * 0.9 else 1
+            local n = math.floor(8 + g.rx / 18 + 0.5)
+            local base = ry * 0.38 + 3
             do
                 local i = 0
-                while i < nb do
-                    local an = i / nb * math.pi * 2 + g.seed
-                    local br = base * (0.75 + 0.5 * hsh(nil, i + g.seed)) * enc
-                    local bal = math.sin(t * 5 + i) * 1.5
-                    local x = g.cx + math.cos(an) * (rx - br) + bal
-                    local y = g.cy + math.sin(an) * (ry - br)
+                while i < n do
+                    local an = i / n * math.pi * 2 + g.seed
+                    local br = base * (0.7 + 0.45 * hsh(nil, i + g.seed)) * (1 - p * 0.25)
+                    local sobe = p * 8
+                    local x = g.cx + math.cos(an) * (rx - br)
+                    local y = g.cy + math.sin(an) * (ry - br) - sobe
+                    c.globalAlpha = some * 0.5
                     bolha(
                         nil,
                         x,
                         y,
                         br,
-                        if math.sin(an) > 0.2 then __get(VERDE, 1) else __get(VERDE, 2),
-                        __get(VERDE, 0)
+                        if math.sin(an) > 0.2 then __get(VERDE, 1) else __get(VERDE, 2)
                     )
-                    i = i + 1
-                end
-            end
-            do
-                local anel = 0
-                while anel < 2 do
-                    do
-                        local i = 0
-                        while i < nb - 4 do
-                            local an = i / (nb - 4) * math.pi * 2 + g.seed + anel * 0.4
-                            local f = if __t(anel) then 0.3 else 0.62
-                            local br = base * (0.8 + 0.4 * hsh(nil, i * 3 + anel)) * enc
-                            local x = g.cx + math.cos(an) * (rx - br) * f
-                            local y = g.cy + math.sin(an) * (ry - br) * f
-                            bolha(
-                                nil,
-                                x,
-                                y,
-                                br,
-                                if math.sin(an) > 0.3 then __get(VERDE, 2) else __get(VERDE, 3)
-                            )
-                            i = i + 1
-                        end
-                    end
-                    anel = anel + 1
-                end
-            end
-            do
-                local i = 0
-                while i < nb do
-                    local an = i / nb * math.pi * 2 + g.seed
-                    if math.sin(an) > -0.2 then
-                        continue
-                    end
-                    local br = base * (0.75 + 0.5 * hsh(nil, i + g.seed)) * enc
-                    local x = g.cx + math.cos(an) * (rx - br)
-                    local y = g.cy + math.sin(an) * (ry - br)
+                    c.globalAlpha = some * 0.6
                     bolha(
                         nil,
                         x - br * 0.25,
-                        y - br * 0.35,
-                        br * 0.35,
-                        __get(VERDE, 4)
+                        y - br * 0.3,
+                        br * 0.3,
+                        __get(VERDE, 3)
                     )
                     i = i + 1
                 end
             end
             do
                 local i = 0
-                while i < 10 do
-                    local k = __mod(t * 1.4 + i / 10, 1)
-                    local x = g.cx + (hsh(nil, i + g.seed) - 0.5) * rx * 1.5
-                    local y = g.cy + (hsh(nil, i * 3 + g.seed) - 0.5) * ry * 1.2 - k * 14
-                    if ((x - g.cx) / rx) ^ 2 + ((y - g.cy) / ry) ^ 2 < 0.9 then
-                        local ____px_33 = px
-                        local ____t_32 = __t
-                        local ____t_31 = __t
-                        local ____temp_30 = g.estagio == 3
-                        __O[1573] = ____temp_30
-                        ____px_33(
+                while i < 4 do
+                    local an = i / 4 * math.pi * 2 + g.seed + 0.6
+                    local br = base * 0.8
+                    local x = g.cx + math.cos(an) * rx * 0.35
+                    local y = g.cy + math.sin(an) * ry * 0.35 - p * 6
+                    c.globalAlpha = some * 0.35
+                    bolha(
+                        nil,
+                        x,
+                        y,
+                        br,
+                        __get(VERDE, 2)
+                    )
+                    i = i + 1
+                end
+            end
+            if g.estagio == 3 then
+                do
+                    local i = 0
+                    while i < 6 do
+                        local k = __mod(t * 1.6 + i / 6, 1)
+                        local x = g.cx + (hsh(nil, i + g.seed) - 0.5) * rx * 1.4
+                        local y = g.cy + (hsh(nil, i * 3 + g.seed) - 0.5) * ry - k * 10
+                        c.globalAlpha = some * (1 - k)
+                        px(
                             nil,
                             x,
                             y,
-                            3,
-                            3,
-                            if ____t_32(if ____t_31(____temp_30) then __mod(i, 2) else __O[1573]) then "#ffe08a" else __get(VERDE, 4)
+                            2,
+                            2,
+                            "#ffe08a"
                         )
+                        i = i + 1
                     end
-                    i = i + 1
                 end
             end
             c:restore()
@@ -1252,30 +1186,6 @@ local __O = {};
     local mostrar = __re_test(
         __re("[?&]hitbox\\b", ""),
         window.location.search
-    )
-    window:addEventListener(
-        "keydown",
-        function(____, ev)
-            local ____t_46 = __t
-            local ____t_39 = __t
-            local ____t_37 = __t
-            local ____t_35 = __t
-            local ____temp_34 = ev.key == "h" or ev.key == "H"
-            __O[1574] = ____temp_34
-            local ____temp_36 = if ____t_35(____temp_34) then window.DAROCA_DEV else __O[1574]
-            __O[1575] = ____temp_36
-            local ____temp_38 = if ____t_37(____temp_36) then not __t(ev["repeat"]) else __O[1575]
-            __O[1577] = ____temp_38
-            local ____re_test_45 = __re_test
-            local ____re_result_44 = __re("input|textarea", "i")
-            local ____t_43 = __t
-            local ____opt_40 = ev.target
-            local ____temp_42 = ____opt_40 and ____opt_40.tagName
-            __O[1576] = ____temp_42
-            if ____t_46(if ____t_39(____temp_38) then not ____re_test_45(____re_result_44, if ____t_43(____temp_42) then __O[1576] else "") else __O[1577]) then
-                mostrar = not __t(mostrar)
-            end
-        end
     )
     local function contorno(self, c, b, cor)
         c.strokeStyle = cor
@@ -1288,11 +1198,11 @@ local __O = {};
         )
     end
     local function desenharCaixas(self, c, s)
-        local ____t_49 = __t
-        local ____t_48 = __t
-        local ____temp_47 = not __t(mostrar) or not __t(c)
-        __O[1578] = ____temp_47
-        if ____t_49(if ____t_48(____temp_47) then __O[1578] else not __t(s)) then
+        local ____t_32 = __t
+        local ____t_31 = __t
+        local ____temp_30 = not __t(mostrar) or not __t(c)
+        __O[1573] = ____temp_30
+        if ____t_32(if ____t_31(____temp_30) then __O[1573] else not __t(s)) then
             return
         end
         c:save()
@@ -1305,11 +1215,11 @@ local __O = {};
             )
         end
         for ____, e in __iterar((if __t(s.enemies) then s.enemies else __arrL({}, 0))) do
-            local ____t_52 = __t
-            local ____t_51 = __t
-            local ____temp_50 = __gt(e.hp, 0) and not __t(e.conquista)
-            __O[1579] = ____temp_50
-            if ____t_52(if ____t_51(____temp_50) then e.type ~= "igor" else __O[1579]) then
+            local ____t_35 = __t
+            local ____t_34 = __t
+            local ____temp_33 = __gt(e.hp, 0) and not __t(e.conquista)
+            __O[1574] = ____temp_33
+            if ____t_35(if ____t_34(____temp_33) then e.type ~= "igor" else __O[1574]) then
                 contorno(
                     nil,
                     c,

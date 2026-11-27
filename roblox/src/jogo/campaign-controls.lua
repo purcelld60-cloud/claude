@@ -24,10 +24,10 @@ local __O = {};
     local ____t_5 = __t
     local ____t_3 = __t
     local ____temp_2 = not __t(shell) or not __t(layer)
-    __O[3004] = ____temp_2
-    local ____temp_4 = if ____t_3(____temp_2) then __O[3004] else not __t(joystick)
-    __O[3005] = ____temp_4
-    if ____t_6(if ____t_5(____temp_4) then __O[3005] else window.CampaignControls) then
+    __O[2999] = ____temp_2
+    local ____temp_4 = if ____t_3(____temp_2) then __O[2999] else not __t(joystick)
+    __O[3000] = ____temp_4
+    if ____t_6(if ____t_5(____temp_4) then __O[3000] else window.CampaignControls) then
         return
     end
     local KEY = "daroca-campaign-layout-v1"
@@ -94,8 +94,8 @@ local __O = {};
         if ____opt_9 ~= nil then
             ____opt_result_11 = ____opt_9(____opt_9)
         end
-        __O[3006] = ____opt_result_11
-        return if ____t_12(____opt_result_11) then __O[3006] else {}
+        __O[3001] = ____opt_result_11
+        return if ____t_12(____opt_result_11) then __O[3001] else {}
     end
     local function otherMode()
         local ____t_31 = __t
@@ -109,7 +109,7 @@ local __O = {};
         if ____opt_15 ~= nil then
             ____opt_result_17 = ____opt_15(____opt_15)
         end
-        __O[3007] = ____opt_result_17
+        __O[3002] = ____opt_result_17
         local ____opt_21 = window.CoopArena
         if ____opt_21 ~= nil then
             ____opt_21 = ____opt_21.getStatus
@@ -118,8 +118,8 @@ local __O = {};
         if ____opt_21 ~= nil then
             ____opt_result_23 = ____opt_21(____opt_21).open
         end
-        local ____temp_24 = if ____t_18(____opt_result_17) then __O[3007] else ____opt_result_23
-        __O[3008] = ____temp_24
+        local ____temp_24 = if ____t_18(____opt_result_17) then __O[3002] else ____opt_result_23
+        __O[3003] = ____temp_24
         local ____opt_28 = window.PartyGame
         if ____opt_28 ~= nil then
             ____opt_28 = ____opt_28.getStatus
@@ -128,7 +128,7 @@ local __O = {};
         if ____opt_28 ~= nil then
             ____opt_result_30 = ____opt_28(____opt_28).open
         end
-        return not not ____t_31(if ____t_25(____temp_24) then __O[3008] else ____opt_result_30)
+        return not not ____t_31(if ____t_25(____temp_24) then __O[3003] else ____opt_result_30)
     end
     local layouts = {}
     local editing = false
@@ -147,8 +147,8 @@ local __O = {};
             local ____self_34_parse_35 = ____self_34.parse
             local ____t_33 = __t
             local ____temp_32 = window.localStorage:getItem(KEY)
-            __O[3009] = ____temp_32
-            local record = ____self_34_parse_35(____self_34, if ____t_33(____temp_32) then __O[3009] else "null")
+            __O[3004] = ____temp_32
+            local record = ____self_34_parse_35(____self_34, if ____t_33(____temp_32) then __O[3004] else "null")
             local ____t_45 = __t
             local ____t_44 = __t
             local ____t_42 = __t
@@ -158,12 +158,12 @@ local __O = {};
                 ____opt_result_38 = record.schema
             end
             local ____temp_39 = ____opt_result_38 == 1
-            __O[3010] = ____temp_39
-            local ____temp_41 = if ____t_40(____temp_39) then record.layouts else __O[3010]
-            __O[3011] = ____temp_41
-            local ____temp_43 = if ____t_42(____temp_41) then type(record.layouts) == "table" else __O[3011]
-            __O[3012] = ____temp_43
-            if ____t_45(if ____t_44(____temp_43) then not __isArray(record.layouts) else __O[3012]) then
+            __O[3005] = ____temp_39
+            local ____temp_41 = if ____t_40(____temp_39) then record.layouts else __O[3005]
+            __O[3006] = ____temp_41
+            local ____temp_43 = if ____t_42(____temp_41) then type(record.layouts) == "table" else __O[3006]
+            __O[3007] = ____temp_43
+            if ____t_45(if ____t_44(____temp_43) then not __isArray(record.layouts) else __O[3007]) then
                 layouts = record.layouts
             end
         end)
@@ -188,8 +188,8 @@ local __O = {};
             __get(defaults, orientation),
             id
         )
-        __O[3013] = ____get_result_46
-        local base = if ____t_47(____get_result_46) then __O[3013] else __get(defaults, orientation).paper
+        __O[3008] = ____get_result_46
+        local base = if ____t_47(____get_result_46) then __O[3008] else __get(defaults, orientation).paper
         local record = __getq(
             __get(layouts, orientation),
             id
@@ -263,22 +263,22 @@ local __O = {};
         local progress = ____opt_66 and ____opt_66:getBoundingClientRect()
         local ____t_69 = __t
         local ____temp_68 = shell.classList:contains("immersive")
-        __O[3014] = ____temp_68
-        local immersive = if ____t_69(____temp_68) then __O[3014] else window.document.body.classList:contains("shell-experience")
+        __O[3009] = ____temp_68
+        local immersive = if ____t_69(____temp_68) then __O[3009] else window.document.body.classList:contains("shell-experience")
         local ____t_77 = __t
         local ____temp_76 = canvas and canvas.top
-        __O[3015] = ____temp_76
-        local top = if __t(immersive) then math.max(0, if __t(hud and hud.height) then hud.bottom else rect.top - rect.top, if __t(progress and progress.height) then progress.bottom else rect.top - rect.top) else math.max(0, if ____t_77(____temp_76) then __O[3015] else rect.top - rect.top)
+        __O[3010] = ____temp_76
+        local top = if __t(immersive) then math.max(0, if __t(hud and hud.height) then hud.bottom else rect.top - rect.top, if __t(progress and progress.height) then progress.bottom else rect.top - rect.top) else math.max(0, if ____t_77(____temp_76) then __O[3010] else rect.top - rect.top)
         local ____top_82 = top
         local ____math_max_result_83 = math.max(1, rect.width)
         local ____t_81 = __t
         local ____temp_80 = canvas and canvas.height
-        __O[3016] = ____temp_80
+        __O[3011] = ____temp_80
         plane = {
             left = 0,
             top = ____top_82,
             width = ____math_max_result_83,
-            height = math.max(120, if __t(immersive) then rect.height - top else if ____t_81(____temp_80) then __O[3016] else rect.height - top)
+            height = math.max(120, if __t(immersive) then rect.height - top else if ____t_81(____temp_80) then __O[3011] else rect.height - top)
         }
         layer.style:setProperty(
             "--ccl-left",
@@ -310,11 +310,11 @@ local __O = {};
             local ____set_86 = __set
             local ____t_85 = __t
             local ____TS__ParseFloat_result_84 = __TS__ParseFloat(style:getPropertyValue(__add("--ccl-safe-", side)))
-            __O[3017] = ____TS__ParseFloat_result_84
+            __O[3012] = ____TS__ParseFloat_result_84
             ____set_86(
                 safe,
                 side,
-                math.max(7, if ____t_85(____TS__ParseFloat_result_84) then __O[3017] else 0 + 7)
+                math.max(7, if ____t_85(____TS__ParseFloat_result_84) then __O[3012] else 0 + 7)
             )
         end
         for ____, ____value in __iterar((targets)) do
@@ -346,8 +346,8 @@ local __O = {};
         local ____t_89 = __t
         local ____t_88 = __t
         local ____temp_87 = not __t(__get(layouts, orientation)) or type(__get(layouts, orientation)) ~= "table"
-        __O[3018] = ____temp_87
-        if ____t_89(if ____t_88(____temp_87) then __O[3018] else __isArray(__get(layouts, orientation))) then
+        __O[3013] = ____temp_87
+        if ____t_89(if ____t_88(____temp_87) then __O[3013] else __isArray(__get(layouts, orientation))) then
             __set(layouts, orientation, {})
         end
         __set(
@@ -410,12 +410,12 @@ local __O = {};
         local ____t_99 = __t
         local ____t_97 = __t
         local ____temp_96 = not not __t(s.started) and not __t(s.won)
-        __O[3019] = ____temp_96
-        local ____temp_98 = if ____t_97(____temp_96) then not __t(s.defeated) else __O[3019]
-        __O[3020] = ____temp_98
-        local ____temp_100 = if ____t_99(____temp_98) then not __t(s.chapterEnded) else __O[3020]
-        __O[3021] = ____temp_100
-        local active = if __t(c2) then c2 else if ____t_101(____temp_100) then not __t(otherMode(nil)) else __O[3021]
+        __O[3014] = ____temp_96
+        local ____temp_98 = if ____t_97(____temp_96) then not __t(s.defeated) else __O[3014]
+        __O[3015] = ____temp_98
+        local ____temp_100 = if ____t_99(____temp_98) then not __t(s.chapterEnded) else __O[3015]
+        __O[3016] = ____temp_100
+        local active = if __t(c2) then c2 else if ____t_101(____temp_100) then not __t(otherMode(nil)) else __O[3016]
         local ready = if __t(active) then active else editing
         local ____t_114 = __t
         local ____t_109 = __t
@@ -423,21 +423,21 @@ local __O = {};
         local ____t_105 = __t
         local ____t_103 = __t
         local ____temp_102 = if __t(active) then not __t(s.paused) else active
-        __O[3022] = ____temp_102
-        local ____temp_104 = if ____t_103(____temp_102) then not __t(s.dialog) else __O[3022]
-        __O[3023] = ____temp_104
-        local ____temp_106 = if ____t_105(____temp_104) then not __t(s.cutscene) else __O[3023]
-        __O[3024] = ____temp_106
-        local ____temp_108 = if ____t_107(____temp_106) then not __t(s.activity) else __O[3024]
-        __O[3025] = ____temp_108
+        __O[3017] = ____temp_102
+        local ____temp_104 = if ____t_103(____temp_102) then not __t(s.dialog) else __O[3017]
+        __O[3018] = ____temp_104
+        local ____temp_106 = if ____t_105(____temp_104) then not __t(s.cutscene) else __O[3018]
+        __O[3019] = ____temp_106
+        local ____temp_108 = if ____t_107(____temp_106) then not __t(s.activity) else __O[3019]
+        __O[3020] = ____temp_108
         local ____t_112 = __t
         local ____opt_110 = s.training
         if ____opt_110 ~= nil then
             ____opt_110 = ____opt_110.active
         end
-        local ____temp_113 = if ____t_109(____temp_108) then not ____t_112(____opt_110) else __O[3025]
-        __O[3026] = ____temp_113
-        local playable = if ____t_114(____temp_113) then not __t(s.routeTransition) else __O[3026]
+        local ____temp_113 = if ____t_109(____temp_108) then not ____t_112(____opt_110) else __O[3020]
+        __O[3021] = ____temp_113
+        local playable = if ____t_114(____temp_113) then not __t(s.routeTransition) else __O[3021]
         for ____, ____value in __iterar((__arrL(
             {
                 __arrL({"campaign-layout-ready", ready}, 2),
@@ -462,18 +462,18 @@ local __O = {};
             local ____t_118 = __t
             local ____t_116 = __t
             local ____temp_115 = if __t(s.dialog) then s.dialog else s.cutscene
-            __O[3027] = ____temp_115
-            local ____temp_117 = if ____t_116(____temp_115) then __O[3027] else s.activity
-            __O[3028] = ____temp_117
+            __O[3022] = ____temp_115
+            local ____temp_117 = if ____t_116(____temp_115) then __O[3022] else s.activity
+            __O[3023] = ____temp_117
             local ____opt_119 = s.training
             if ____opt_119 ~= nil then
                 ____opt_119 = ____opt_119.active
             end
-            local ____temp_121 = if ____t_118(____temp_117) then __O[3028] else ____opt_119
-            __O[3029] = ____temp_121
-            local ____temp_123 = if ____t_122(____temp_121) then __O[3029] else s.routeTransition
-            __O[3030] = ____temp_123
-            entry.disabled = not not ____t_125(if ____t_124(____temp_123) then __O[3030] else otherMode(nil))
+            local ____temp_121 = if ____t_118(____temp_117) then __O[3023] else ____opt_119
+            __O[3024] = ____temp_121
+            local ____temp_123 = if ____t_122(____temp_121) then __O[3024] else s.routeTransition
+            __O[3025] = ____temp_123
+            entry.disabled = not not ____t_125(if ____t_124(____temp_123) then __O[3025] else otherMode(nil))
             settingsEntry.disabled = entry.disabled
         end
     end
@@ -519,26 +519,26 @@ local __O = {};
         local ____t_137 = __t
         local ____t_135 = __t
         local ____otherMode_result_134 = otherMode(nil)
-        __O[3031] = ____otherMode_result_134
-        local ____temp_136 = if ____t_135(____otherMode_result_134) then __O[3031] else s.dialog
-        __O[3032] = ____temp_136
-        local ____temp_138 = if ____t_137(____temp_136) then __O[3032] else s.cutscene
-        __O[3033] = ____temp_138
-        local ____temp_140 = if ____t_139(____temp_138) then __O[3033] else s.activity
-        __O[3034] = ____temp_140
+        __O[3026] = ____otherMode_result_134
+        local ____temp_136 = if ____t_135(____otherMode_result_134) then __O[3026] else s.dialog
+        __O[3027] = ____temp_136
+        local ____temp_138 = if ____t_137(____temp_136) then __O[3027] else s.cutscene
+        __O[3028] = ____temp_138
+        local ____temp_140 = if ____t_139(____temp_138) then __O[3028] else s.activity
+        __O[3029] = ____temp_140
         local ____opt_142 = s.training
         if ____opt_142 ~= nil then
             ____opt_142 = ____opt_142.active
         end
-        local ____temp_144 = if ____t_141(____temp_140) then __O[3034] else ____opt_142
-        __O[3035] = ____temp_144
-        local ____temp_146 = if ____t_145(____temp_144) then __O[3035] else s.routeTransition
-        __O[3036] = ____temp_146
-        local ____temp_148 = if ____t_147(____temp_146) then __O[3036] else s.defeated
-        __O[3037] = ____temp_148
-        local ____temp_150 = if ____t_149(____temp_148) then __O[3037] else s.won
-        __O[3038] = ____temp_150
-        if ____t_152(if ____t_151(____temp_150) then __O[3038] else s.chapterEnded) then
+        local ____temp_144 = if ____t_141(____temp_140) then __O[3029] else ____opt_142
+        __O[3030] = ____temp_144
+        local ____temp_146 = if ____t_145(____temp_144) then __O[3030] else s.routeTransition
+        __O[3031] = ____temp_146
+        local ____temp_148 = if ____t_147(____temp_146) then __O[3031] else s.defeated
+        __O[3032] = ____temp_148
+        local ____temp_150 = if ____t_149(____temp_148) then __O[3032] else s.won
+        __O[3033] = ____temp_150
+        if ____t_152(if ____t_151(____temp_150) then __O[3033] else s.chapterEnded) then
             return false
         end
         if __t(window.document:querySelector("dialog[open]")) then
@@ -589,8 +589,8 @@ local __O = {};
         local ____t_161 = __t
         local ____t_160 = __t
         local ____temp_159 = if __t(resume) then state(nil).started else resume
-        __O[3039] = ____temp_159
-        if ____t_161(if ____t_160(____temp_159) then not __t(window.document:querySelector("dialog[open]")) else __O[3039]) then
+        __O[3034] = ____temp_159
+        if ____t_161(if ____t_160(____temp_159) then not __t(window.document:querySelector("dialog[open]")) else __O[3034]) then
             local ____opt_164 = window.Game
             if ____opt_164 ~= nil then
                 ____opt_164 = ____opt_164.resume
@@ -604,8 +604,8 @@ local __O = {};
             local ____t_168 = __t
             local ____t_167 = __t
             local ____state_result_started_166 = state(nil).started
-            __O[3040] = ____state_result_started_166
-            if ____t_168(if ____t_167(____state_result_started_166) then not __t(state(nil).paused) else __O[3040]) then
+            __O[3035] = ____state_result_started_166
+            if ____t_168(if ____t_167(____state_result_started_166) then not __t(state(nil).paused) else __O[3035]) then
                 local ____opt_169 = window.document:getElementById("gameCanvas")
                 if ____opt_169 ~= nil then
                     ____opt_169:focus({preventScroll = true})
@@ -653,9 +653,9 @@ local __O = {};
     local ____t_184 = __t
     local ____opt_181 = window.document:getElementById("ranchControlsBtn")
     local ____temp_183 = ____opt_181 and ____opt_181:insertAdjacentElement("afterend", entry)
-    __O[3041] = ____temp_183
+    __O[3036] = ____temp_183
     local ____opt_185 = window.document:querySelector("#pauseScreen .game-modal")
-    local ____ = if ____t_184(____temp_183) then __O[3041] else ____opt_185 and ____opt_185:append(entry)
+    local ____ = if ____t_184(____temp_183) then __O[3036] else ____opt_185 and ____opt_185:append(entry)
     settingsEntry = window.document:createElement("button")
     settingsEntry.id = "campaignLayoutSettingsBtn"
     settingsEntry.type = "button"
@@ -782,12 +782,12 @@ local __O = {};
                     "includes",
                     event.type
                 )
-                __O[3042] = ____call_result_203
+                __O[3037] = ____call_result_203
                 local ____opt_result_207
                 if pointer ~= nil then
                     ____opt_result_207 = pointer.id
                 end
-                if ____t_208(if ____t_204(____call_result_203) then ____opt_result_207 == event.pointerId else __O[3042]) then
+                if ____t_208(if ____t_204(____call_result_203) then ____opt_result_207 == event.pointerId else __O[3037]) then
                     pointer = nil
                     persist(nil)
                 end
@@ -831,8 +831,8 @@ local __O = {};
                     function(____, e)
                         local ____t_210 = __t
                         local ____temp_209 = not __t(e.hidden) and not __t(e.disabled)
-                        __O[3043] = ____temp_209
-                        return if ____t_210(____temp_209) then __len(e:getClientRects()) else __O[3043]
+                        __O[3038] = ____temp_209
+                        return if ____t_210(____temp_209) then __len(e:getClientRects()) else __O[3038]
                     end
                 )
                 local first = __get(list, 0)
