@@ -1,83 +1,108 @@
-# Da Roça Adventure no Roblox (protótipo)
+# Da Roça Adventure no Roblox
 
-Esta pasta contém uma primeira versão jogável do Da Roça Adventure para o Roblox. Ela foi reescrita em Luau, a linguagem do Roblox, porque o Roblox não roda o código do jogo do navegador.
+Esta pasta coloca **o jogo original** dentro do Roblox, em 2D, com o mesmo pixel, os mesmos cenários, personagens,
+falas, menus e botões. Não é uma adaptação: o código do jogo (`dist/*.js`) é convertido automaticamente para Luau
+(a linguagem do Roblox) e roda lá dentro. Ele desenha cada quadro pixel a pixel numa imagem do tamanho do jogo
+(960 × 540), mostrada na tela do jogador.
 
-## O que já tem
+## Como funciona
 
-- **Câmera lateral** como no jogo 2D: todo mundo anda numa pista só, para a esquerda e para a direita.
-- **Fase completa em blocos:**
-  - **Roça:** casinha com fumaça na chaminé, cerca, milharal, vacas, árvores e galinhas.
-  - **Rio:** tábuas e uma balsa que vai e volta. Quem cai na água volta para a última bandeira.
-  - **Estrada:** postes e ponto de ônibus.
-  - **Praça:** prédios com janelas acesas, chafariz, bancos, postes com luz, pombos e caixotes.
-  - **Escola:** arquibancada com torcida pulando e holofotes.
-- **Luz de fim de tarde** com névoa, brilho e raios de sol.
-- **Cenário vivo:**
-  - Galinhas e pombos bicam o chão e fogem voando quando você chega perto.
-  - Folhas e mato balançam com o vento.
-- **Controles:**
-  - Pulo duplo, com anel de ar no segundo pulo.
-  - Soco com rastro de luz e faíscas ao acertar.
-- **Valentões** que patrulham, perseguem e batem. Cada um aguenta 3 socos e volta depois de um tempo.
-- **Igor, o chefe:**
-  - Pulo de barriga com as mesmas poses da campanha: agacha com os braços para trás, solta os braços na subida, abre na descida e pousa amortecendo.
-  - Antes do pulo, uma sombra em pixels marca onde ele vai cair.
-  - No pouso, uma onda de blocos do chão se levanta para os dois lados e o chão racha.
-  - Com metade da vida, ele fica **furioso**: dá dois pulos seguidos e às vezes rola como uma bola de barriga. Use o pulo duplo para passar por cima.
-- **Barra de vida do chefe**, faixa de apresentação, tela de vitória com confete e bandeiras de ponto de controle.
-- **Multijogador:** vários jogadores podem enfrentar o Igor juntos.
-
-## Como abrir e testar (precisa de um computador)
-
-O Roblox Studio só existe para Windows e Mac. Não dá para criar jogos de Roblox pelo celular.
-
-1. Instale o **Roblox Studio** pelo site oficial do Roblox (create.roblox.com) e entre com sua conta.
-2. Baixe o arquivo [`DaRocaAdventure.rbxlx`](DaRocaAdventure.rbxlx) desta pasta. No GitHub, abra o arquivo e use o botão de baixar (*Download raw file*).
-3. No Roblox Studio, use **File → Open from File** e escolha o arquivo baixado.
-4. Aperte **Play** (ou F5). O mapa é montado na hora em que o jogo começa.
-
-**Controles:**
-- No computador: **A/D** para andar, **Espaço** para pular (aperte de novo no ar para o pulo duplo), **F** ou **clique** para socar.
-- No celular: analógico, botão de pulo e botão **SOCO**.
-
-**Para testar com mais de uma pessoa:** use a aba **Test → Clients and Servers**, com 2 jogadores.
-
-## Publicar no Roblox
-
-1. Com o lugar aberto, use **File → Publish to Roblox**.
-2. Dê nome e descrição e escolha o gênero.
-3. Em **Game Settings**:
-   - Libere **Phone/Tablet**.
-   - Em **Permissions**, deixe o jogo **Public** quando quiser que outras pessoas joguem.
-4. O Roblox vai pedir o **questionário de maturidade** (Experience Questionnaire). Responda com sinceridade. Este protótipo tem só socos com estilo de desenho, sem sangue e sem armas.
-
-**Cuidados com as regras do Roblox:**
-- Não use nomes, fotos ou o rosto de pessoas reais sem a permissão delas.
-- Não coloque bebidas alcoólicas nem armas de fogo.
-- Por isso o baile e alguns itens do jogo do navegador não foram trazidos.
-
-## Como mudar
-
-Os scripts ficam em `src/`:
-
-| Arquivo | O que faz |
+| Peça | O que faz |
 | --- | --- |
-| `src/server/Mundo.server.lua` | Monta o mapa, a luz, as bandeiras e o nascimento. |
-| `src/server/Combate.server.lua` | Cuida do soco, dos valentões e do Igor (vida, ataques e poses). |
-| `src/client/Cliente.client.lua` | Câmera, pulo duplo, efeitos, aves, torcida, balsa e tela. |
+| `ferramentas/converter.mjs` | Converte os 118 scripts do jogo para Luau (`src/jogo`) e para Lua 5.3 (`teste/jogo`, usado nos testes). Usa o TypeScriptToLua (licença MIT) e regras próprias para o jeito do JavaScript (0 e texto vazio são falsos, listas começam no 0, `+` junta texto etc.). |
+| `ferramentas/empacotar.mjs` | Guarda a página (`index.html`), os roteiros e listas em JSON e a ordem dos scripts. |
+| `ferramentas/capturar.mjs` | Abre o jogo no navegador e fotografa a interface (HUD, menus, botões) em vários momentos, mais as letras reais das fontes do jogo. O Roblox não tem HTML/CSS; com essas fotos, o Lua redesenha a interface igual. |
+| `src/runtime/js.lua` | As regras do JavaScript em Lua: listas, textos, números, JSON, datas, expressões regulares (`regex.lua`). |
+| `src/runtime/canvas.lua` | O "canvas" do navegador em Lua: retângulos, caminhos, degradês, transparência, modos de mistura, imagens e texto. |
+| `src/runtime/navegador.lua` | Um navegador simulado: `document`, elementos, seletores CSS, eventos de clique/toque/teclado, temporizadores, `localStorage`. |
+| `src/runtime/desenhista.lua` | Junta tudo numa tela só: os canvas do jogo e a interface fotografada, com o texto atual. |
+| `src/cliente/DaRoca.client.lua` | O script do jogador: mostra a imagem, lê teclado, mouse, toque e controle, e liga a qualidade do Roblox à do jogo. |
+| `src/servidor/DaRoca.server.lua` | Guarda o save de cada jogador no DataStore. |
 
-Depois de mudar um script, gere o arquivo de novo:
+## Controles
 
-```sh
-python3 roblox/tools/gerar_rbxlx.py
+Ao abrir, aparece a página **COMO JOGAR** com cada botão no PC, no Xbox e no PlayStation (botão `?` no canto ou
+**Exibir/Share** no controle para ver de novo).
+
+| Ação | PC | Xbox | PlayStation |
+| --- | --- | --- | --- |
+| Andar | A / D ou ← → | Alavanca esquerda ou setas | Alavanca esquerda ou setas |
+| Pular | Espaço | A | ✕ |
+| Jogar papel | J | X | □ |
+| Peidão | K | B | ○ |
+| Dash | L ou Shift | RB | R1 |
+| Falar, entrar e pegar | E ou Enter | Y | △ |
+| Chamar o Reeis | R | LB | L1 |
+| Bivolt | B | RT | R2 |
+| Provocar | T | LT | L2 |
+| Carro a gás | V | Apertar a alavanca (L3) | Apertar a alavanca (L3) |
+| Pausa e menu | Esc | Menu | Options |
+
+No celular, os botões são os do próprio jogo (o mesmo layout do celular).
+
+## Qualidade gráfica
+
+A qualidade que o jogador escolhe no menu do Roblox (**Configurações → Qualidade gráfica**) vira a qualidade do jogo:
+
+- 1 a 3 → **BAIXA** · 4 a 7 → **MÉDIA** · 8 a 10 → **ALTA** · Automático → **AUTOMÁTICA** do jogo.
+
+A ALTA do navegador usa WebGL, que o Roblox não tem; no Roblox ela fica igual à MÉDIA. A AUTOMÁTICA desce
+sozinha para a BAIXA se o jogo ficar lento, como no navegador.
+
+## O que só você pode fazer (conta e publicação)
+
+1. **Conta no Roblox e o Roblox Studio** (Windows ou Mac). O Studio é grátis.
+2. **Rojo** (programa grátis que leva estes arquivos para o Studio): instale o Rojo e o plugin do Rojo no Studio,
+   rode `rojo serve` nesta pasta (`roblox/`) e clique em **Connect** no plugin. Sem o Rojo, dá para arrastar os
+   arquivos para o Studio seguindo o `default.project.json`, mas é bem mais trabalhoso.
+3. Os arquivos do jogo em Luau (`src/jogo`) **já vêm prontos** nesta pasta. Só se o jogo mudar e você quiser
+   atualizar a versão do Roblox, gere de novo (precisa de Node.js):
+   ```
+   cd roblox
+   npm install
+   npm run converter
+   # com o jogo aberto em http://127.0.0.1:8080 (python3 -m http.server 8080 dentro de dist/):
+   node ferramentas/capturar.mjs
+   ```
+4. **Imagem editável (EditableImage)**: o jogo desenha na tela com ela. Para funcionar num jogo publicado, o Roblox
+   exige que o dono da experiência tenha **13 anos ou mais e verificação de idade e de identidade (ID)** na conta.
+   Também é preciso ligar **Game Settings → Security → Allow Mesh / Image APIs**.
+5. **Save**: ligue **Game Settings → Security → Enable Studio Access to API Services** para testar o save no Studio.
+   No jogo publicado o DataStore funciona sozinho.
+6. **Publicar**: **File → Publish to Roblox**, depois deixe o jogo público na página da experiência.
+
+## Atenção às regras do Roblox
+
+O Roblox não permite referências a drogas e é rígido com cigarro e bebida. No jogo há o **Dedé Fumacinha** (fuma e
+tem golpes de fumaça), o **Ollyan bêbado** no baile e a lenda do Seu Tião sobre o Dedé. Na versão do Roblox, essa
+fala do Seu Tião já troca a droga por doce de leite automaticamente; o resto continua igual ao jogo e **pode ser
+barrado pela moderação**. Se acontecer, me peça uma versão do Roblox com esses trechos suavizados.
+
+## Limites conhecidos (versão de teste)
+
+- **Velocidade**: tudo é desenhado pixel a pixel em Luau. Nos testes em Lua 5.3 (mais lento que o Luau do
+  Roblox), um quadro do jogo leva de 0,6 a 0,9 s. No Roblox deve ficar várias vezes mais rápido, mas ainda abaixo
+  dos 60 quadros do navegador; a qualidade BAIXA ajuda bastante. Só dá para medir de verdade no Studio.
+- **Som**: o jogo usa o som do navegador (WebAudio e MP3), que o Roblox não tem. Por enquanto o jogo fica sem som
+  no Roblox. Para ter música, as faixas teriam que ser enviadas ao Roblox como áudio da sua conta.
+- **Interface**: telas que não foram fotografadas pelo `capturar.mjs` (a captura passa pela tela inicial, painel
+  JOGAR, abertura, jogo, diálogo, pausa e DADOS) podem aparecer sem a moldura. Para incluir mais telas, acrescente
+  estados na lista `ESTADOS` do `capturar.mjs`.
+- **Tamanho**: alguns módulos convertidos são grandes (o `vendor__pixelfx` tem cerca de 4 MB). O Studio pode
+  demorar para abrir o lugar na primeira vez.
+- **Online e multiplayer**: o modo online do navegador não funciona dentro do Roblox; a campanha é para um jogador.
+
+## Testar fora do Roblox
+
+Com o Lua 5.3 instalado (`apt install lua5.3`):
+
+```
+cd roblox
+npm run converter:teste
+lua5.3 teste/sessao.lua /tmp quadros:5 clique:#menuJogarBtn quadros:3 clique:#startBtn quadros:60 tela:jogo
 ```
 
-Quem usa o [Rojo](https://rojo.space) pode sincronizar a pasta direto com o Studio usando `default.project.json`.
+Isso liga o jogo inteiro em Lua, aperta os botões e grava a tela em `/tmp/jogo.ppm`.
 
-## O que ainda falta
-
-- **Sons:** o Roblox só toca áudios enviados para a plataforma, então as músicas do jogo precisam ser enviadas por você.
-- Os outros chefes, as cutscenes e a Arena.
-- **Animações próprias do herói:** por enquanto, o soco move o braço do avatar do jogador.
-
-Este protótipo ainda não foi testado dentro do Roblox Studio, porque não há Roblox Studio onde ele foi escrito. Se aparecer um erro vermelho na janela **Output** do Studio, mande uma foto do erro que eu corrijo.
+Fontes consultadas: documentação do Roblox sobre EditableImage (requisitos de idade e ID e a opção Allow Mesh /
+Image APIs), DataStoreService, UserInputService e UserGameSettings; TypeScriptToLua (licença MIT).

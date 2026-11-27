@@ -1,0 +1,4 @@
+# gerados por ferramentas/converter.mjs para os testes em Lua 5.3 (rode de novo para recriar)
+.conversao/
+teste/jogo/
+node_modules
