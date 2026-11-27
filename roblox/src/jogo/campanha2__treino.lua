@@ -2,11 +2,10 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __set, __len = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len
-local __call, __add, __assign, __isArray, __re, __re_test, __re_replace = __JSR.__call, __JSR.__add, __JSR.__assign, __JSR.__isArray, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
+local __newExpr, __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
+local __len, __call, __add, __assign, __isArray, __re, __re_test, __re_replace = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__assign, __JSR.__isArray, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
-local __TS__New = ____lualib.__TS__New
 local __TS__MathSign = ____lualib.__TS__MathSign
 local __TS__Number = ____lualib.__TS__Number
 local ____exports = {}
@@ -458,7 +457,7 @@ local __O = {};
                 if vol <= 0.0005 then
                     return true
                 end
-                ctxSom = if __t(ctxSom) then ctxSom else __TS__New(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                ctxSom = if __t(ctxSom) then ctxSom else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
                 ctxSom:resume()
                 local o = ctxSom:createOscillator()
                 local g = ctxSom:createGain()

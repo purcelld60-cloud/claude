@@ -1,3 +1,4 @@
+--!native
 --[[ Canvas 2D em Lua puro: desenha, pixel por pixel, o que o jogo manda (a mesma API do navegador).
   Suporta: fillRect/clearRect/strokeRect, caminhos (moveTo, lineTo, rect, arc, ellipse, curvas, roundRect), fill/stroke,
   clip, transformações (save/restore, translate, scale, rotate, setTransform, transform), globalAlpha,
@@ -5,7 +6,7 @@
   degradês linear e radial, drawImage entre canvas (vizinho mais próximo, como o jogo usa), getImageData,
   putImageData, createImageData e texto em fonte de pixel (runtime/fonte.lua).
   Cada pixel é um número só: R + G*256 + B*65536 + A*16777216 (a mesma ordem de bytes do EditableImage do Roblox),
-  guardado em canvas._.px[1..w*h]. Funciona igual no Luau (Roblox) e no Lua 5.3 (testes). ]]
+  guardado em canvas._.px (buffer no Roblox, tabela nos testes; ler com Canvas.RD). Funciona igual no Luau (Roblox) e no Lua 5.3 (testes). ]]
 local Fonte = require(script and script.Parent and script.Parent:FindFirstChild("fonte") or "fonte")
 local floor, ceil, max, min, sqrt, abs, cos, sin, pi, huge = math.floor, math.ceil, math.max, math.min, math.sqrt, math.abs, math.cos, math.sin, math.pi, math.huge
 local criarTabela = table.create or function(n, v) local t = {}; for i = 1, n do t[i] = v end; return t end
@@ -13,6 +14,25 @@ local C = {}
 -- listas de pixels do getImageData (o navegador simulado troca por Uint8ClampedArray)
 C.novaLista = function(n) local d = {}; for k = 1, n do d[k] = 0 end; return d end
 local OPACO = 4278190080 -- 255 * 16777216
+-- pixels: no Roblox (Luau) um buffer com 4 bytes por pixel (4x menos memória e vai direto para o EditableImage);
+-- nos testes em Lua 5.3, uma tabela. RD/WR recebem a posição em bytes (pixel i = (i - 1) * 4).
+local RD, WR, novosPixels
+if buffer then
+  RD, WR = buffer.readu32, buffer.writeu32
+  novosPixels = function(n) return buffer.create(math.max(1, n) * 4) end
+else
+  RD = function(t, o) return t[o // 4 + 1] end
+  WR = function(t, o, v) t[o // 4 + 1] = v end
+  novosPixels = function(n) return criarTabela(n, 0) end
+end
+C.RD, C.WR, C.novosPixels = RD, WR, novosPixels
+-- cópia direta de um canvas inteiro para outro do mesmo tamanho (no Roblox é uma cópia de memória só)
+function C.copiar(destino, origem)
+  local D, O = destino._, origem._
+  if D.w ~= O.w or D.h ~= O.h then return false end
+  if buffer then buffer.copy(D.px, 0, O.px, 0, D.w * D.h * 4) else local a, b = D.px, O.px; for i = 1, D.w * D.h do a[i] = b[i] end end
+  return true
+end
 
 -- cores: "#rgb", "#rrggbb", "#rrggbbaa", "rgb()", "rgba()", "hsl()", nomes; guardadas em cache como {r, g, b, a(0..1)}
 local NOMES = { white = "#ffffff", black = "#000000", red = "#ff0000", green = "#008000", blue = "#0000ff", yellow = "#ffff00", orange = "#ffa500", purple = "#800080", pink = "#ffc0cb",
@@ -205,7 +225,7 @@ end
 -- cria um canvas (largura/altura mudam pelo próprio objeto, como no navegador)
 function C.novo(w, h)
   local cv, priv = {}, { w = max(0, floor(tonumber(w) or 300)), h = max(0, floor(tonumber(h) or 150)) }
-  local function limpar() priv.px = criarTabela(priv.w * priv.h, 0) end
+  local function limpar() priv.px = novosPixels(priv.w * priv.h) end
   limpar(); priv.limpar = limpar
   priv.versao = 0
   setmetatable(cv, {
@@ -255,7 +275,7 @@ function C.contexto(cv)
           if not cm or cm[i] then
             local k = floor(t * 255 + .5); if k < 0 then k = 0 elseif k > 255 then k = 255 end
             local a = LA[k] * ga
-            if a > 0 then px[i] = mx(px[i], LR[k], LG[k], LB[k], a) end
+            if a > 0 then WR(px, (i - 1) * 4, mx(RD(px, (i - 1) * 4), LR[k], LG[k], LB[k], a)) end
           end
           t = t + dt
         end
@@ -266,7 +286,7 @@ function C.contexto(cv)
             local ex, ey = ux - cx, uy - cy
             local k = floor((sqrt(ex * ex + ey * ey) - r0) / dr * 255 + .5); if k < 0 then k = 0 elseif k > 255 then k = 255 end
             local a = LA[k] * ga
-            if a > 0 then px[i] = mx(px[i], LR[k], LG[k], LB[k], a) end
+            if a > 0 then WR(px, (i - 1) * 4, mx(RD(px, (i - 1) * 4), LR[k], LG[k], LB[k], a)) end
           end
           ux = ux + dux; uy = uy + duy
         end
@@ -277,8 +297,8 @@ function C.contexto(cv)
     if a <= 0 and op ~= "copy" and op ~= "destination-in" then return end
     if not op and a >= 1 then
       local col = r + g * 256 + b * 65536 + OPACO
-      if cm then for x = x0, x1 do local i = base + x; if cm[i] then px[i] = col end end
-      else for i = base + x0, base + x1 do px[i] = col end end
+      if cm then for x = x0, x1 do local i = base + x; if cm[i] then WR(px, (i - 1) * 4, col) end end
+      else for o = (base + x0 - 1) * 4, (base + x1 - 1) * 4, 4 do WR(px, o, col) end end
       return
     end
     local o = op or "source-over"
@@ -287,16 +307,16 @@ function C.contexto(cv)
       local k = 1 - a; local ra, ga2, ba = r * a, g * a, b * a
       for x = x0, x1 do local i = base + x
         if not cm or cm[i] then
-          local v = px[i]
+          local v = RD(px, (i - 1) * 4)
           if v >= OPACO then
-            px[i] = floor(ra + (v % 256) * k + .5) + floor(ga2 + (v // 256 % 256) * k + .5) * 256 + floor(ba + (v // 65536 % 256) * k + .5) * 65536 + OPACO
-          else px[i] = misturar(o, v, r, g, b, a) end
+            WR(px, (i - 1) * 4, floor(ra + (v % 256) * k + .5) + floor(ga2 + (v // 256 % 256) * k + .5) * 256 + floor(ba + (v // 65536 % 256) * k + .5) * 65536 + OPACO)
+          else WR(px, (i - 1) * 4, misturar(o, v, r, g, b, a)) end
         end
       end
       return
     end
     local mx = modoDe(op)
-    for x = x0, x1 do local i = base + x; if not cm or cm[i] then px[i] = mx(px[i], r, g, b, a) end end
+    for x = x0, x1 do local i = base + x; if not cm or cm[i] then WR(px, (i - 1) * 4, mx(RD(px, (i - 1) * 4), r, g, b, a)) end end
   end
   local function estiloDe(s) if type(s) == "table" and s.__grad then return s end; return cor(s) or { 0, 0, 0, 1 } end
 
@@ -387,7 +407,7 @@ function C.contexto(cv)
         else r, g, b, a = e[1], e[2], e[3], e[4] end
         a = a * ga
         if a > 0 then
-          px[i] = misturarOp(op, px[i], r, g, b, a)
+          WR(px, (i - 1) * 4, misturarOp(op, RD(px, (i - 1) * 4), r, g, b, a))
         end
       end
     end
@@ -422,8 +442,8 @@ function C.contexto(cv)
         if cr then ax = max(ax, cr[1]); bx = min(bx, cr[3] - 1); ay = max(ay, cr[2]); by = min(by, cr[4] - 1) end
         ax = max(0, ax); bx = min(W - 1, bx)
         for yy = max(0, ay), min(P.h - 1, by) do local base = yy * W + 1
-          if cm then for xx = ax, bx do local i = base + xx; if cm[i] then px[i] = 0 end end
-          else for i = base + ax, base + bx do px[i] = 0 end end
+          if cm then for xx = ax, bx do local i = base + xx; if cm[i] then WR(px, (i - 1) * 4, 0) end end
+          else for o = (base + ax - 1) * 4, (base + bx - 1) * 4, 4 do WR(px, o, 0) end end
         end
         return
       end
@@ -432,7 +452,7 @@ function C.contexto(cv)
       for yy = ay, by do faixa(yy, ax, bx, estilo, ga, im, op) end
     else
       local p = { pt(x, y), pt(x + w, y), pt(x + w, y + h), pt(x, y + h) }
-      if apagar then local alvo = {}; preencherPoligonos({ p }, nil, "nonzero", alvo); local px = P.px; for i in pairs(alvo) do if not clipMask or clipMask[i] then px[i] = 0 end end return end
+      if apagar then local alvo = {}; preencherPoligonos({ p }, nil, "nonzero", alvo); local px = P.px; for i in pairs(alvo) do if not clipMask or clipMask[i] then WR(px, (i - 1) * 4, 0) end end return end
       preencherPoligonos({ p }, estilo, "nonzero")
     end
   end
@@ -514,16 +534,16 @@ function C.contexto(cv)
           local base = y * W + 1
           if not op and ga >= 1 then
             for x = ax, bx do local c = colunas[x]
-              if c >= 0 then local s = SP[lin + c]
-                if s >= OPACO then local i = base + x; if not cm or cm[i] then px[i] = s end
-                elseif s >= 16777216 then local i = base + x; if not cm or cm[i] then px[i] = sobre(px[i], s % 256, s // 256 % 256, s // 65536 % 256, (s // 16777216) / 255) end end
+              if c >= 0 then local s = RD(SP, (lin + c - 1) * 4)
+                if s >= OPACO then local i = base + x; if not cm or cm[i] then WR(px, (i - 1) * 4, s) end
+                elseif s >= 16777216 then local i = base + x; if not cm or cm[i] then WR(px, (i - 1) * 4, sobre(RD(px, (i - 1) * 4), s % 256, s // 256 % 256, s // 65536 % 256, (s // 16777216) / 255)) end end
               end
             end
           else
             for x = ax, bx do local c = colunas[x]
-              if c >= 0 then local s = SP[lin + c]
+              if c >= 0 then local s = RD(SP, (lin + c - 1) * 4)
                 if s >= 16777216 or o == "copy" or o == "destination-in" then local i = base + x
-                  if not cm or cm[i] then px[i] = (o == "copy" or o == "destination-in") and misturar(o, px[i], s % 256, s // 256 % 256, s // 65536 % 256, (s // 16777216) / 255 * ga) or misturarOp(op, px[i], s % 256, s // 256 % 256, s // 65536 % 256, (s // 16777216) / 255 * ga) end end
+                  if not cm or cm[i] then WR(px, (i - 1) * 4, (o == "copy" or o == "destination-in") and misturar(o, RD(px, (i - 1) * 4), s % 256, s // 256 % 256, s // 65536 % 256, (s // 16777216) / 255 * ga) or misturarOp(op, RD(px, (i - 1) * 4), s % 256, s // 256 % 256, s // 65536 % 256, (s // 16777216) / 255 * ga)) end end
               end
             end
           end
@@ -545,10 +565,10 @@ function C.contexto(cv)
           local ux, uy = im[1] * (x + .5) + im[3] * (y + .5) + im[5], im[2] * (x + .5) + im[4] * (y + .5) + im[6]
           local u, v = (ux - dx) * kx + sx, (uy - dy) * ky + sy
           if u >= sx and v >= sy and u < sx + sw and v < sy + sh then local ix, iy = floor(u), floor(v)
-            if ix >= 0 and iy >= 0 and ix < sw0 and iy < sh0 then local s = SP[iy * sw0 + ix + 1]
+            if ix >= 0 and iy >= 0 and ix < sw0 and iy < sh0 then local s = RD(SP, (iy * sw0 + ix) * 4)
               if s >= 16777216 then
-                if not op and ga >= 1 and s >= OPACO then px[i] = s
-                else px[i] = misturarOp(op, px[i], s % 256, s // 256 % 256, s // 65536 % 256, (s // 16777216) / 255 * ga) end
+                if not op and ga >= 1 and s >= OPACO then WR(px, (i - 1) * 4, s)
+                else WR(px, (i - 1) * 4, misturarOp(op, RD(px, (i - 1) * 4), s % 256, s // 256 % 256, s // 65536 % 256, (s // 16777216) / 255 * ga)) end
               end
             end
           end
@@ -564,7 +584,7 @@ function C.contexto(cv)
     local d, W, px = C.novaLista(w * h * 4), P.w, P.px
     local k = 1
     for yy = y, y + h - 1 do for xx = x, x + w - 1 do
-      if xx >= 0 and yy >= 0 and xx < W and yy < P.h then local v = px[yy * W + xx + 1]; rawset(d, k, v % 256); rawset(d, k + 1, v // 256 % 256); rawset(d, k + 2, v // 65536 % 256); rawset(d, k + 3, v // 16777216)
+      if xx >= 0 and yy >= 0 and xx < W and yy < P.h then local v = RD(px, (yy * W + xx) * 4); rawset(d, k, v % 256); rawset(d, k + 1, v // 256 % 256); rawset(d, k + 2, v // 65536 % 256); rawset(d, k + 3, v // 16777216)
       else rawset(d, k, 0); rawset(d, k + 1, 0); rawset(d, k + 2, 0); rawset(d, k + 3, 0) end
       k = k + 4 end end
     return { width = w, height = h, data = d, colorSpace = "srgb" }
@@ -575,7 +595,7 @@ function C.contexto(cv)
     for yy = 0, img.height - 1 do for xx = 0, w - 1 do local X, Y = x + xx, y + yy
       if X >= 0 and Y >= 0 and X < W and Y < P.h then local k = (yy * w + xx) * 4 + 1
         local r, g, b, a = rawget(d, k) or 0, rawget(d, k + 1) or 0, rawget(d, k + 2) or 0, rawget(d, k + 3) or 0
-        px[Y * W + X + 1] = floor(r) + floor(g) * 256 + floor(b) * 65536 + floor(a) * 16777216 end end end
+        WR(px, (Y * W + X) * 4, floor(r) + floor(g) * 256 + floor(b) * 65536 + floor(a) * 16777216) end end end
   end
 
   -- texto: com as letras reais das fontes do jogo (C.fontes, vindas de fontes.lua) ou, sem elas, a fonte 5x7
@@ -627,7 +647,7 @@ end
 function C.ppm(cv, arquivo)
   local P = cv._; local f = assert(io.open(arquivo, "wb")); f:write(("P6\n%d %d\n255\n"):format(P.w, P.h))
   local partes, px = {}, P.px
-  for i = 1, P.w * P.h do local v = px[i]; local a = v // 16777216 / 255
+  for i = 1, P.w * P.h do local v = RD(px, (i - 1) * 4); local a = v // 16777216 / 255
     partes[#partes + 1] = string.char(floor((v % 256) * a + .5), floor((v // 256 % 256) * a + .5), floor((v // 65536 % 256) * a + .5))
     if #partes >= 4096 then f:write(table.concat(partes)); partes = {} end end
   f:write(table.concat(partes)); f:close()

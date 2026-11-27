@@ -1,3 +1,4 @@
+--!native
 --[[ Regras do JavaScript para o código do Da Roça convertido para Lua/Luau (roblox/ferramentas/converter.mjs).
   O conversor troca tudo o que no JS depende do tipo por chamadas a este arquivo:
   - __t: verdade do JS (0, '', NaN, nil e false são falsos);
@@ -930,10 +931,24 @@ function JS.__cbrt(x) x = tonum(x); if x < 0 then return -((-x) ^ (1 / 3)) end; 
 function JS.__isFiniteN(x) return type(x) == "number" and x == x and x ~= huge and x ~= -huge end
 function JS.__isInteger(x) return JS.__isFiniteN(x) and x == floor(x) end
 function JS.__identV(_, x) return x end
+-- new de um valor qualquer: classe do conversor (prototype), função construtora do runtime ou nome conhecido
+function JS.__newExpr(alvo, ...)
+  if type(alvo) == "table" and type(alvo.prototype) == "table" and alvo.prototype.____constructor then local inst = setmetatable({}, alvo.prototype); inst:____constructor(...); return inst end
+  if type(alvo) == "function" then return alvo(nil, ...) end
+  if type(alvo) == "table" and type(alvo.__call) == "function" then return alvo:__call(...) end
+  if type(alvo) == "table" and getmetatable(alvo) and getmetatable(alvo).__call then return alvo(nil, ...) end
+  error("TypeError: o valor não é um construtor", 2)
+end
 function JS.__NumberV(_, x) if x == nil then return 0 end; return tonum(x) end
 function JS.__StringV(_, x) return str(x) end
 function JS.__BooleanV(_, x) return truthy(x) end
 function JS.__fcall(fn, este, ...) if type(fn) == "function" then return fn(este, ...) end; if type(fn) == "table" and fn.call then return fn:call(este, ...) end; error("TypeError: call de algo que não é função", 2) end
+function JS.__fbind(fn, este, ...)
+  local pre, np = { ... }, select("#", ...)
+  if type(fn) == "function" then return function(_, ...) local args, n = { unpack(pre, 1, np) }, np; for i = 1, select("#", ...) do n = n + 1; args[n] = (select(i, ...)) end; return fn(este, unpack(args, 1, n)) end end
+  if type(fn) == "table" and fn.bind then return fn:bind(este, ...) end
+  error("TypeError: bind de algo que não é função", 2)
+end
 function JS.__fapply(fn, este, args) local t, n = {}, 0; if args ~= nil then t, n = paraLista(args) end; if type(fn) == "function" then return fn(este, unpack(t, 1, n)) end; if type(fn) == "table" and fn.apply then return fn:apply(este, args) end; error("TypeError: apply de algo que não é função", 2) end
 local function cmpNum(a, b) local ta, tb = type(a), type(b); if (ta == "number" and tb == "number") or (ta == "string" and tb == "string") then return a, b end; return tonum(a), tonum(b) end
 function JS.__lt(a, b) a, b = cmpNum(a, b); return a < b end

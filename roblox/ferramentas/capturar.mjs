@@ -51,11 +51,14 @@ const pularCenas = async (p) => { for (let k = 0; k < 8; k++) { for (const rx of
 const ESTADOS = [
   { nome: 'inicio', fazer: async (p) => { await p.waitForTimeout(2200); } },
   { nome: 'jogar', fazer: async (p) => { await p.evaluate(() => document.getElementById('menuJogarBtn')?.click()); await p.waitForTimeout(500); } },
-  { nome: 'cena', fazer: async (p) => { await p.click('#startBtn').catch(() => {}); await p.waitForTimeout(2500); } },
+  { nome: 'cena', fazer: async (p) => { await p.click('#startBtn').catch(() => {}); await p.waitForTimeout(4200); } },
   { nome: 'jogo', fazer: async (p) => { await pularCenas(p); await p.waitForTimeout(600); } },
   { nome: 'dialogo', fazer: async (p) => { await p.evaluate(() => { try { Game.say?.([{ name: 'Da Roça', text: 'Teste de diálogo para a captura.' }]); } catch (e) {} }); await p.keyboard.press('KeyE'); await p.waitForTimeout(500); } },
   { nome: 'pausa', fazer: async (p) => { await p.evaluate(() => { try { Game.closeDialogue?.(); } catch (e) {} }); await p.keyboard.press('Escape'); await p.waitForTimeout(600); } },
   { nome: 'dados', fazer: async (p) => { await p.keyboard.press('Escape'); await p.waitForTimeout(300); await p.evaluate(() => document.getElementById('statsBtn')?.click()); await p.waitForTimeout(600); } },
+  { nome: 'inventario', fazer: async (p) => { await p.keyboard.press('Escape'); await p.waitForTimeout(300); await p.evaluate(() => { document.querySelector('dialog[open]')?.close?.(); [...document.querySelectorAll('button')].find((b) => /INVENT/i.test(b.textContent) && b.offsetWidth > 0)?.click(); }); await p.waitForTimeout(600); } },
+  { nome: 'viagem', fazer: async (p) => { await p.keyboard.press('Escape'); await p.waitForTimeout(300); await p.evaluate(() => { document.querySelector('dialog[open]')?.close?.(); document.getElementById('travelBtn')?.click(); }); await p.waitForTimeout(800); } },
+  { nome: 'opcoes', fazer: async (p) => { await p.keyboard.press('Escape'); await p.waitForTimeout(300); await p.keyboard.press('Escape'); await p.waitForTimeout(500); await p.evaluate(() => [...document.querySelectorAll('button')].find((b) => /OP(Ç|C)ÕES|OPCOES/i.test(b.textContent) && b.offsetWidth > 0)?.click()); await p.waitForTimeout(600); } },
 ];
 
 async function capturarModo(browser, modo) {

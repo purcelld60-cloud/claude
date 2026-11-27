@@ -16,6 +16,7 @@ falas, menus e botões. Não é uma adaptação: o código do jogo (`dist/*.js`)
 | `src/runtime/canvas.lua` | O "canvas" do navegador em Lua: retângulos, caminhos, degradês, transparência, modos de mistura, imagens e texto. |
 | `src/runtime/navegador.lua` | Um navegador simulado: `document`, elementos, seletores CSS, eventos de clique/toque/teclado, temporizadores, `localStorage`. |
 | `src/runtime/desenhista.lua` | Junta tudo numa tela só: os canvas do jogo e a interface fotografada, com o texto atual. |
+| `src/runtime/audio.lua` + `src/runtime/sons.lua` | O som do jogo: imita o WebAudio (osciladores, ganho, ruído) e toca no Roblox com 5 sons base em laço (`audio/onda_*.ogg`), mudando a altura pela velocidade. |
 | `src/cliente/DaRoca.client.lua` | O script do jogador: mostra a imagem, lê teclado, mouse, toque e controle, e liga a qualidade do Roblox à do jogo. |
 | `src/servidor/DaRoca.server.lua` | Guarda o save de cada jogador no DataStore. |
 
@@ -70,6 +71,9 @@ sozinha para a BAIXA se o jogo ficar lento, como no navegador.
 5. **Save**: ligue **Game Settings → Security → Enable Studio Access to API Services** para testar o save no Studio.
    No jogo publicado o DataStore funciona sozinho.
 6. **Publicar**: **File → Publish to Roblox**, depois deixe o jogo público na página da experiência.
+7. **Som**: no Studio, abra **Asset Manager → Import** (ou **Bulk Import**) e envie os 5 arquivos da pasta
+   `roblox/audio` (`onda_seno`, `onda_quadrada`, `onda_serra`, `onda_triangulo`, `onda_ruido`). Copie o ID de cada
+   um (botão direito → Copy ID) e cole em `roblox/src/runtime/sons.lua`. Sem isso o jogo funciona, mas sem som.
 
 ## Atenção às regras do Roblox
 
@@ -80,13 +84,18 @@ barrado pela moderação**. Se acontecer, me peça uma versão do Roblox com ess
 
 ## Limites conhecidos (versão de teste)
 
+- **Memória**: no Roblox os pixels ficam em `buffer` (4 bytes por pixel), 4 vezes menos que numa tabela, e a
+  tela vai direto para a imagem sem cópia. Os módulos que mais desenham usam código nativo (`--!native`).
 - **Velocidade**: tudo é desenhado pixel a pixel em Luau. Nos testes em Lua 5.3 (mais lento que o Luau do
   Roblox), um quadro do jogo leva de 0,6 a 0,9 s. No Roblox deve ficar várias vezes mais rápido, mas ainda abaixo
   dos 60 quadros do navegador; a qualidade BAIXA ajuda bastante. Só dá para medir de verdade no Studio.
-- **Som**: o jogo usa o som do navegador (WebAudio e MP3), que o Roblox não tem. Por enquanto o jogo fica sem som
-  no Roblox. Para ter música, as faixas teriam que ser enviadas ao Roblox como áudio da sua conta.
+- **Som**: os efeitos do jogo (pulos, golpes, menus, chefes) já tocam no Roblox, imitando o som sintetizado do
+  navegador, **depois que você enviar os 5 arquivos `roblox/audio/onda_*.ogg`** para a sua conta (passo 7 acima).
+  As músicas em MP3 que você coloca em `dist/musicas` precisam ser enviadas uma a uma e ligadas pelo nome no
+  `sons.lua` (envie só músicas que são suas ou que você tem direito de usar).
 - **Interface**: telas que não foram fotografadas pelo `capturar.mjs` (a captura passa pela tela inicial, painel
-  JOGAR, abertura, jogo, diálogo, pausa e DADOS) podem aparecer sem a moldura. Para incluir mais telas, acrescente
+  JOGAR, abertura, jogo, diálogo, pausa, DADOS, inventário, viagem e opções) podem aparecer sem a moldura.
+- **Campos de texto**: no PC, digite normalmente; no celular, tocar num campo abre o teclado do Roblox. Para incluir mais telas, acrescente
   estados na lista `ESTADOS` do `capturar.mjs`.
 - **Tamanho**: alguns módulos convertidos são grandes (o `vendor__pixelfx` tem cerca de 4 MB). O Studio pode
   demorar para abrir o lugar na primeira vez.

@@ -2,9 +2,9 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __hasOwnV, __StringV, __fcall, __lt, __le, __gt, __ge, __objCreate, __isFiniteN, __isInteger, __mod, __ord = __JSR.__hasOwnV, __JSR.__StringV, __JSR.__fcall, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__objCreate, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__mod, __JSR.__ord
-local __arrL, __iterar, __t, __get, __set, __len, __call, __add, __new, __iter, __keys, __values = __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__values
-local __assign, __isArray, __bor, __re, __re_test, __re_replace = __JSR.__assign, __JSR.__isArray, __JSR.__bor, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
+local __newExpr, __hasOwnV, __StringV, __fcall, __lt, __le, __gt, __ge, __objCreate, __isFiniteN, __isInteger, __mod = __JSR.__newExpr, __JSR.__hasOwnV, __JSR.__StringV, __JSR.__fcall, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__objCreate, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__mod
+local __ord, __arrL, __iterar, __t, __get, __set, __len, __call, __add, __new, __iter, __keys = __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys
+local __values, __assign, __isArray, __bor, __re, __re_test, __re_replace = __JSR.__values, __JSR.__assign, __JSR.__isArray, __JSR.__bor, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__Number = ____lualib.__TS__Number
@@ -1589,7 +1589,7 @@ local __O = {};
         end
         do
             pcall(function()
-                actx = if __t(actx) then actx else __TS__New(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                actx = if __t(actx) then actx else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
                 if actx.state == "suspended" then
                     actx:resume()
                 end

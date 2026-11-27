@@ -1,3 +1,4 @@
+--!native
 --[[ Desenha a página do jogo (HTML) dentro de um canvas de 960 x 540, igual ao navegador, a partir da
   "fotografia" da interface feita por ferramentas/capturar.mjs (interface.lua):
   - cada elemento visível tem a sua pele (fundo, borda, ícones) e o lugar dos textos;
@@ -49,7 +50,7 @@ function D.iniciar(op)
     for parte in (I.peles[id] or ""):gmatch("[^,]+") do
       local n, v = parte:match("^(%w+)%*(%w+)$")
       if n then n = tonumber(n, 36); v = tonumber(v, 36) else n = 1; v = tonumber(parte, 36) end
-      for _ = 1, n do px[i] = v; i = i + 1 end
+      for _ = 1, n do Canvas.WR(px, (i - 1) * 4, v); i = i + 1 end
     end
     peles[id] = cv
     return cv
@@ -182,6 +183,7 @@ function D.iniciar(op)
     andar(document.documentElement, 0, 1)
     table.sort(lista, function(a, b) if a.z ~= b.z then return a.z < b.z end; return a.n < b.n end)
     desenhados = {}
+    local jaDesenhou = false
     for _, item in ipairs(lista) do
       local el, r = item.el, item.r
       local x, y, w, h = r.x, r.y, r.w, r.h
@@ -203,10 +205,15 @@ function D.iniciar(op)
         else ctx:drawImage(p, r.px + dx, r.py + dy) end
       end
       if r.canvas and el._ then
-        ctx.globalAlpha = op
-        ctx:drawImage(el, x, y, w, h)
-        ctx.globalAlpha = 1
+        if not jaDesenhou and op >= 1 and x == 0 and y == 0 and w == 960 and h == 540 and el.width == 960 and el.height == 540 then
+          Canvas.copiar(tela, el) -- a cena do jogo ocupa a tela toda: cópia direta, sem misturar pixel a pixel
+        else
+          ctx.globalAlpha = op
+          ctx:drawImage(el, x, y, w, h)
+          ctx.globalAlpha = 1
+        end
       end
+      if r.pele or r.canvas then jaDesenhou = true end
       if r.textos then
         local fam = familia(r.fonte, r.peso)
         local cor = (el.style and rawget(el.style, "color")) or r.cor or "#ffffff"

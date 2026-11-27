@@ -10,6 +10,8 @@ function Carregar.iniciar(op)
   Canvas.novaLista = function(n) return JS.tipada("Uint8ClampedArray", n) end
   N.arquivos = op.exigir("arquivos")
   N.JS = JS
+  -- som (WebAudio imitado; o hospedeiro toca no Roblox)
+  if op.Audio then local A = op.Audio.iniciar(N, JS); N.aoPasso = A.passo end
   -- interface fotografada e fontes reais do jogo (ferramentas/capturar.mjs)
   local okI, interface = pcall(op.exigir, "interface")
   local okF, fontes = pcall(op.exigir, "fontes")

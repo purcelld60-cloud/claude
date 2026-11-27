@@ -2,8 +2,8 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __gt, __isFiniteN, __lenq, __ord, __arrL, __iterar, __t, __get, __set, __len, __call, __add = __JSR.__gt, __JSR.__isFiniteN, __JSR.__lenq, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call, __JSR.__add
-local __new, __assign, __bor = __JSR.__new, __JSR.__assign, __JSR.__bor
+local __newExpr, __gt, __isFiniteN, __lenq, __ord, __arrL, __iterar, __t, __get, __set, __len, __call = __JSR.__newExpr, __JSR.__gt, __JSR.__isFiniteN, __JSR.__lenq, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call
+local __add, __new, __assign, __bor = __JSR.__add, __JSR.__new, __JSR.__assign, __JSR.__bor
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
 local Set = ____lualib.Set
@@ -94,7 +94,7 @@ local __O = {};
                     return true, nil
                 end
                 local ____try, ____hasReturned, ____returnValue = pcall(function()
-                    ctx = __TS__New(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                    ctx = __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
                     master = ctx:createGain()
                     master:connect(ctx.destination)
                 end)

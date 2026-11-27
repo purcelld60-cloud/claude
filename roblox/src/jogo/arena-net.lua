@@ -2,8 +2,8 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __le, __gt, __ge, __isSafeInteger, __isFiniteN, __isInteger, __ord, __arrL, __iterar, __t, __get = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isSafeInteger, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get
-local __arr, __len, __call, __add, __iter, __entries, __isArray, __re, __re_test = __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__entries, __JSR.__isArray, __JSR.__re, __JSR.__re_test
+local __newExpr, __lt, __le, __gt, __ge, __isSafeInteger, __isFiniteN, __isInteger, __ord, __arrL, __iterar, __t = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isSafeInteger, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t
+local __get, __arr, __len, __call, __add, __iter, __entries, __isArray, __re, __re_test = __JSR.__get, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__entries, __JSR.__isArray, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
 local Map = ____lualib.Map
@@ -572,7 +572,7 @@ local __O = {};
         end
         function makePeer(self, id, session)
             lastNegotiationAt = window.performance:now()
-            local pc = __TS__New(
+            local pc = __newExpr(
                 window.RTCPeerConnection,
                 {
                     iceServers = __arrL({{urls = "stun:stun.cloudflare.com:3478"}, {urls = "stun:stun.l.google.com:19302"}}, 2),
@@ -627,7 +627,18 @@ local __O = {};
                     return
                 end
                 __call(peer.candidateKeys, "add", key)
-                __call(peer.outgoingIce, "push", {candidate = value.candidate, sdpMid = value.sdpMid or nil, sdpMLineIndex = value.sdpMLineIndex or nil})
+                local ____call_123 = __call
+                local ____peer_outgoingIce_122 = peer.outgoingIce
+                local ____value_candidate_121 = value.candidate
+                local ____value_sdpMid_119 = value.sdpMid
+                if ____value_sdpMid_119 == nil then
+                    ____value_sdpMid_119 = nil
+                end
+                local ____value_sdpMLineIndex_120 = value.sdpMLineIndex
+                if ____value_sdpMLineIndex_120 == nil then
+                    ____value_sdpMLineIndex_120 = nil
+                end
+                ____call_123(____peer_outgoingIce_122, "push", {candidate = ____value_candidate_121, sdpMid = ____value_sdpMid_119, sdpMLineIndex = ____value_sdpMLineIndex_120})
                 if __len(peer.outgoingIce) >= 16 then
                     flushLocalIce(nil, peer)
                 elseif not __t(peer.iceTimer) then
@@ -666,17 +677,17 @@ local __O = {};
         end
         function offer(self, id)
             return __TS__AsyncAwaiter(function(____awaiter_resolve)
-                local ____t_121 = __t
-                local ____t_120 = __t
-                local ____temp_119 = if __t(closed) then closed else __call(peers, "has", id)
-                __O[2731] = ____temp_119
-                if ____t_121(if ____t_120(____temp_119) then __O[2731] else not __t(__call(roster, "has", id))) then
+                local ____t_126 = __t
+                local ____t_125 = __t
+                local ____temp_124 = if __t(closed) then closed else __call(peers, "has", id)
+                __O[2731] = ____temp_124
+                if ____t_126(if ____t_125(____temp_124) then __O[2731] else not __t(__call(roster, "has", id))) then
                     return ____awaiter_resolve(nil)
                 end
-                local ____t_123 = __t
-                local ____call_result_122 = __call(retry, "get", id)
-                __O[2732] = ____call_result_122
-                local history = if ____t_123(____call_result_122) then __O[2732] else {tries = 0, nextAt = 0}
+                local ____t_128 = __t
+                local ____call_result_127 = __call(retry, "get", id)
+                __O[2732] = ____call_result_127
+                local history = if ____t_128(____call_result_127) then __O[2732] else {tries = 0, nextAt = 0}
                 if __t(__ge(history.tries, 4) or __gt(
                     history.nextAt,
                     window.performance:now()
@@ -727,17 +738,17 @@ local __O = {};
                     __add(peer.id, "|"),
                     peer.session
                 )
-                local ____arr_128 = __arr
-                local ____iter_126 = __iter
-                local ____t_125 = __t
-                local ____call_result_124 = __call(pendingIce, "get", key)
-                __O[2733] = ____call_result_124
-                local ____array_127 = __TS__SparseArrayNew(__TS__Spread(____iter_126(if ____t_125(____call_result_124) then __O[2733] else __arrL({}, 0))))
+                local ____arr_133 = __arr
+                local ____iter_131 = __iter
+                local ____t_130 = __t
+                local ____call_result_129 = __call(pendingIce, "get", key)
+                __O[2733] = ____call_result_129
+                local ____array_132 = __TS__SparseArrayNew(__TS__Spread(____iter_131(if ____t_130(____call_result_129) then __O[2733] else __arrL({}, 0))))
                 __TS__SparseArrayPush(
-                    ____array_127,
+                    ____array_132,
                     __TS__Spread(__iter(peer.ice))
                 )
-                local candidates = ____arr_128(__TS__SparseArraySpread(____array_127))
+                local candidates = ____arr_133(__TS__SparseArraySpread(____array_132))
                 __call(pendingIce, "delete", key)
                 peer.ice = __arrL({}, 0)
                 for ____, value in __iterar((candidates)) do
@@ -757,31 +768,31 @@ local __O = {};
         end
         function accept(self, item)
             return __TS__AsyncAwaiter(function(____awaiter_resolve)
+                local ____t_145 = __t
+                local ____t_144 = __t
+                local ____t_142 = __t
                 local ____t_140 = __t
-                local ____t_139 = __t
-                local ____t_137 = __t
-                local ____t_135 = __t
-                local ____t_133 = __t
-                local ____opt_result_131
+                local ____t_138 = __t
+                local ____opt_result_136
                 if item ~= nil then
-                    ____opt_result_131 = item.to
+                    ____opt_result_136 = item.to
                 end
-                local ____temp_132 = if __t(closed) then closed else ____opt_result_131 ~= myId
-                __O[2734] = ____temp_132
-                local ____temp_134 = if ____t_133(____temp_132) then __O[2734] else not __t(__call(roster, "has", item.from))
-                __O[2735] = ____temp_134
-                local ____temp_136 = if ____t_135(____temp_134) then __O[2735] else item.from == myId
-                __O[2736] = ____temp_136
-                local ____temp_138 = if ____t_137(____temp_136) then __O[2736] else not __t(item.data)
-                __O[2737] = ____temp_138
-                if ____t_140(if ____t_139(____temp_138) then __O[2737] else type(item.data.session) ~= "string") then
+                local ____temp_137 = if __t(closed) then closed else ____opt_result_136 ~= myId
+                __O[2734] = ____temp_137
+                local ____temp_139 = if ____t_138(____temp_137) then __O[2734] else not __t(__call(roster, "has", item.from))
+                __O[2735] = ____temp_139
+                local ____temp_141 = if ____t_140(____temp_139) then __O[2735] else item.from == myId
+                __O[2736] = ____temp_141
+                local ____temp_143 = if ____t_142(____temp_141) then __O[2736] else not __t(item.data)
+                __O[2737] = ____temp_143
+                if ____t_145(if ____t_144(____temp_143) then __O[2737] else type(item.data.session) ~= "string") then
                     return ____awaiter_resolve(nil)
                 end
-                local ____t_143 = __t
-                local ____t_142 = __t
-                local ____temp_141 = if __t(isHost) then item.from == hostId else isHost
-                __O[2738] = ____temp_141
-                if ____t_143(if ____t_142(____temp_141) then __O[2738] else not __t(isHost) and item.from ~= hostId) then
+                local ____t_148 = __t
+                local ____t_147 = __t
+                local ____temp_146 = if __t(isHost) then item.from == hostId else isHost
+                __O[2738] = ____temp_146
+                if ____t_148(if ____t_147(____temp_146) then __O[2738] else not __t(isHost) and item.from ~= hostId) then
                     return ____awaiter_resolve(nil)
                 end
                 local data = item.data
@@ -790,15 +801,15 @@ local __O = {};
                     if __t(isHost) then
                         return ____awaiter_resolve(nil)
                     end
-                    local ____t_149 = __t
-                    local ____t_148 = __t
-                    local ____opt_result_146
+                    local ____t_154 = __t
+                    local ____t_153 = __t
+                    local ____opt_result_151
                     if peer ~= nil then
-                        ____opt_result_146 = peer.session
+                        ____opt_result_151 = peer.session
                     end
-                    local ____temp_147 = ____opt_result_146 == data.session
-                    __O[2739] = ____temp_147
-                    if ____t_149(if ____t_148(____temp_147) then peer.pc.remoteDescription else __O[2739]) then
+                    local ____temp_152 = ____opt_result_151 == data.session
+                    __O[2739] = ____temp_152
+                    if ____t_154(if ____t_153(____temp_152) then peer.pc.remoteDescription else __O[2739]) then
                         return ____awaiter_resolve(nil)
                     end
                     if __t(peer) then
@@ -837,14 +848,14 @@ local __O = {};
                     return ____awaiter_resolve(nil)
                 end
                 if item.kind == "answer" then
-                    local ____t_154 = __t
-                    local ____t_153 = __t
-                    local ____t_151 = __t
-                    local ____temp_150 = not __t(isHost) or not __t(peer)
-                    __O[2740] = ____temp_150
-                    local ____temp_152 = if ____t_151(____temp_150) then __O[2740] else peer.session ~= data.session
-                    __O[2741] = ____temp_152
-                    if ____t_154(if ____t_153(____temp_152) then __O[2741] else peer.pc.remoteDescription) then
+                    local ____t_159 = __t
+                    local ____t_158 = __t
+                    local ____t_156 = __t
+                    local ____temp_155 = not __t(isHost) or not __t(peer)
+                    __O[2740] = ____temp_155
+                    local ____temp_157 = if ____t_156(____temp_155) then __O[2740] else peer.session ~= data.session
+                    __O[2741] = ____temp_157
+                    if ____t_159(if ____t_158(____temp_157) then __O[2741] else peer.pc.remoteDescription) then
                         return ____awaiter_resolve(nil)
                     end
                     local ____try = __TS__AsyncAwaiter(function()
@@ -869,26 +880,26 @@ local __O = {};
                         return ____awaiter_resolve(nil)
                     end
                     for ____, c in __iterar((candidates)) do
-                        local ____t_157 = __t
-                        local ____t_156 = __t
-                        local ____temp_155 = not __t(c) or type(c.candidate) ~= "string"
-                        __O[2742] = ____temp_155
-                        if ____t_157(if ____t_156(____temp_155) then __O[2742] else __gt(
+                        local ____t_162 = __t
+                        local ____t_161 = __t
+                        local ____temp_160 = not __t(c) or type(c.candidate) ~= "string"
+                        __O[2742] = ____temp_160
+                        if ____t_162(if ____t_161(____temp_160) then __O[2742] else __gt(
                             __len(c.candidate),
                             2048
                         )) then
                             continue
                         end
-                        local ____c_candidate_160 = c.candidate
-                        local ____c_sdpMid_158 = c.sdpMid
-                        if ____c_sdpMid_158 == nil then
-                            ____c_sdpMid_158 = nil
+                        local ____c_candidate_165 = c.candidate
+                        local ____c_sdpMid_163 = c.sdpMid
+                        if ____c_sdpMid_163 == nil then
+                            ____c_sdpMid_163 = nil
                         end
-                        local ____c_sdpMLineIndex_159 = c.sdpMLineIndex
-                        if ____c_sdpMLineIndex_159 == nil then
-                            ____c_sdpMLineIndex_159 = nil
+                        local ____c_sdpMLineIndex_164 = c.sdpMLineIndex
+                        if ____c_sdpMLineIndex_164 == nil then
+                            ____c_sdpMLineIndex_164 = nil
                         end
-                        local candidate = {candidate = ____c_candidate_160, sdpMid = ____c_sdpMid_158, sdpMLineIndex = ____c_sdpMLineIndex_159}
+                        local candidate = {candidate = ____c_candidate_165, sdpMid = ____c_sdpMid_163, sdpMLineIndex = ____c_sdpMLineIndex_164}
                         if __t(if __t(peer) then peer.session == data.session else peer) then
                             if __t(peer.pc.remoteDescription) then
                                 local ____try = __TS__AsyncAwaiter(function()
@@ -919,10 +930,10 @@ local __O = {};
                             if __t(pendingIce.size >= 12 and not __t(__call(pendingIce, "has", key))) then
                                 continue
                             end
-                            local ____t_162 = __t
-                            local ____call_result_161 = __call(pendingIce, "get", key)
-                            __O[2743] = ____call_result_161
-                            local list = if ____t_162(____call_result_161) then __O[2743] else __arrL({}, 0)
+                            local ____t_167 = __t
+                            local ____call_result_166 = __call(pendingIce, "get", key)
+                            __O[2743] = ____call_result_166
+                            local list = if ____t_167(____call_result_166) then __O[2743] else __arrL({}, 0)
                             if __lt(
                                 __len(list),
                                 48
@@ -951,11 +962,11 @@ local __O = {};
         end
         function poll(self)
             return __TS__AsyncAwaiter(function(____awaiter_resolve)
-                local ____t_165 = __t
-                local ____t_164 = __t
-                local ____temp_163 = if __t(closed) then closed else not __t(enabled)
-                __O[2744] = ____temp_163
-                if ____t_165(if ____t_164(____temp_163) then __O[2744] else polling) then
+                local ____t_170 = __t
+                local ____t_169 = __t
+                local ____temp_168 = if __t(closed) then closed else not __t(enabled)
+                __O[2744] = ____temp_168
+                if ____t_170(if ____t_169(____temp_168) then __O[2744] else polling) then
                     return ____awaiter_resolve(nil)
                 end
                 polling = true
@@ -982,11 +993,11 @@ local __O = {};
                         )
                         __TS__Await(____try)
                     end
-                    local ____t_168 = __t
-                    local ____t_167 = __t
-                    local ____isSafeInteger_result_166 = __isSafeInteger(data.cursor)
-                    __O[2745] = ____isSafeInteger_result_166
-                    if ____t_168(if ____t_167(____isSafeInteger_result_166) then __ge(data.cursor, cursor) else __O[2745]) then
+                    local ____t_173 = __t
+                    local ____t_172 = __t
+                    local ____isSafeInteger_result_171 = __isSafeInteger(data.cursor)
+                    __O[2745] = ____isSafeInteger_result_171
+                    if ____t_173(if ____t_172(____isSafeInteger_result_171) then __ge(data.cursor, cursor) else __O[2745]) then
                         cursor = data.cursor
                     end
                 end)
@@ -1015,10 +1026,10 @@ local __O = {};
                             if not __t(closed) then
                                 reconcile(nil)
                                 local value = getStatus(nil)
-                                local ____t_170 = __t
-                                local ____temp_169 = value.total == 0 or value.connected == value.total
-                                __O[2746] = ____temp_169
-                                local idle = if ____t_170(____temp_169) then __O[2746] else window.performance:now() - lastNegotiationAt > 25000
+                                local ____t_175 = __t
+                                local ____temp_174 = value.total == 0 or value.connected == value.total
+                                __O[2746] = ____temp_174
+                                local idle = if ____t_175(____temp_174) then __O[2746] else window.performance:now() - lastNegotiationAt > 25000
                                 schedulePoll(nil, if __t(pollSoon) then 0 else math.max(
                                     0,
                                     if __t(idle) then 3000 else 250 - (window.performance:now() - started)
@@ -1040,11 +1051,11 @@ local __O = {};
             for ____, ____value in __iterar((peers)) do
                 local id = ____value[1]
                 local peer = ____value[2]
-                local ____t_173 = __t
-                local ____t_172 = __t
-                local ____temp_171 = not __t(__call(roster, "has", id))
-                __O[2747] = ____temp_171
-                if ____t_173(if ____t_172(____temp_171) then __O[2747] else not __t(isHost) and id ~= hostId) then
+                local ____t_178 = __t
+                local ____t_177 = __t
+                local ____temp_176 = not __t(__call(roster, "has", id))
+                __O[2747] = ____temp_176
+                if ____t_178(if ____t_177(____temp_176) then __O[2747] else not __t(isHost) and id ~= hostId) then
                     remove(nil, id)
                 elseif __t(not __t(connected(nil, peer)) and window.performance:now() - peer.createdAt > 25000) then
                     remove(nil, id, isHost)
@@ -1153,11 +1164,11 @@ local __O = {};
                         if __isArray(players) then players else __arrL({}, 0),
                         "map",
                         function(____, p)
-                            local ____opt_result_176
+                            local ____opt_result_181
                             if p ~= nil then
-                                ____opt_result_176 = p.id
+                                ____opt_result_181 = p.id
                             end
-                            return if type(p) == "string" then p else ____opt_result_176
+                            return if type(p) == "string" then p else ____opt_result_181
                         end
                     ),
                     "filter",
@@ -1199,17 +1210,17 @@ local __O = {};
             end
         end
         local function transmit(self, kind, value)
+            local ____t_188 = __t
+            local ____t_187 = __t
+            local ____t_185 = __t
             local ____t_183 = __t
-            local ____t_182 = __t
-            local ____t_180 = __t
-            local ____t_178 = __t
-            local ____temp_177 = if __t(closed) then closed else not __t(enabled)
-            __O[2748] = ____temp_177
-            local ____temp_179 = if ____t_178(____temp_177) then __O[2748] else not __t(value)
-            __O[2749] = ____temp_179
-            local ____temp_181 = if ____t_180(____temp_179) then __O[2749] else not __t(seq(nil, value.seq))
-            __O[2750] = ____temp_181
-            if ____t_183(if ____t_182(____temp_181) then __O[2750] else kind == "input" and not __t(validInput(nil, value))) then
+            local ____temp_182 = if __t(closed) then closed else not __t(enabled)
+            __O[2748] = ____temp_182
+            local ____temp_184 = if ____t_183(____temp_182) then __O[2748] else not __t(value)
+            __O[2749] = ____temp_184
+            local ____temp_186 = if ____t_185(____temp_184) then __O[2749] else not __t(seq(nil, value.seq))
+            __O[2750] = ____temp_186
+            if ____t_188(if ____t_187(____temp_186) then __O[2750] else kind == "input" and not __t(validInput(nil, value))) then
                 return false
             end
             local data
@@ -1232,11 +1243,11 @@ local __O = {};
             end
             local sent = false
             for ____, peer in __iterar((__call(peers, "values"))) do
-                local ____t_186 = __t
-                local ____t_185 = __t
-                local ____connected_result_184 = connected(nil, peer)
-                __O[2751] = ____connected_result_184
-                if ____t_186(if ____t_185(____connected_result_184) then __lt(peer.channel.bufferedAmount, 65536) else __O[2751]) then
+                local ____t_191 = __t
+                local ____t_190 = __t
+                local ____connected_result_189 = connected(nil, peer)
+                __O[2751] = ____connected_result_189
+                if ____t_191(if ____t_190(____connected_result_189) then __lt(peer.channel.bufferedAmount, 65536) else __O[2751]) then
                     do
                         pcall(function()
                             peer.channel:send(data)

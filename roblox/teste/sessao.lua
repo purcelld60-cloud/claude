@@ -8,10 +8,13 @@ local N = require("navegador")
 local LL = require("lualib_bundle")
 local Carregar = require("carregar")
 local Desenhista = require("desenhista")
+local Audio = require("audio")
+local sonsTocados = 0
+N.som = { tocar = function() sonsTocados = sonsTocados + 1 end, ajustar = function() end, parar = function() end, musica = function() end }
 local pasta = arg[1] or "."
 for i = 2, #arg do local g = arg[i]:match("^graficos:(.*)$"); if g then N.window.localStorage:setItem("daroca-graphics-v1", g) end end
 local t0 = os.clock()
-Carregar.iniciar({ JS = JS, N = N, Canvas = Canvas, lualib = LL, exigir = require, Desenhista = Desenhista })
+Carregar.iniciar({ JS = JS, N = N, Canvas = Canvas, lualib = LL, exigir = require, Desenhista = Desenhista, Audio = Audio })
 print(("carregou em %.2fs"):format(os.clock() - t0))
 local ms = 0
 local function rodar(n) local t = os.clock(); for _ = 1, n do ms = ms + 1000 / 60; N.passo(ms) end; return (os.clock() - t) / n end
@@ -31,6 +34,10 @@ for i = 2, #arg do
     local t0 = os.clock(); local cv = Carregar.desenhista.desenhar(); print(("tela desenhada em %.3fs"):format(os.clock() - t0))
     Canvas.ppm(cv, pasta .. "/" .. v .. ".ppm"); print("tela " .. v)
   elseif tipo == "toque" then N.toque = (v == "sim")
+  elseif tipo == "botao" then
+    local achou
+    N.percorrer(N.document.body, function(e) if not achou and e._tag == "button" and visivel(e) and N.textoDe(e):upper():find(v:upper(), 1, true) then achou = e; return true end end)
+    if achou then achou:click(); print("botão " .. v) else print("sem botão " .. v) end
   elseif tipo == "cliquexy" then local x, y = v:match("^(%d+),(%d+)$"); N.ponteiro("pointerdown", tonumber(x), tonumber(y), 1, N.toque); rodar(2); N.ponteiro("pointerup", tonumber(x), tonumber(y), 1, N.toque); print("clicou em " .. v .. " (" .. tostring(N.elementoEm(tonumber(x), tonumber(y)).id) .. ")")
   elseif tipo == "html" then local el = N.document:querySelector(v); print(el and (el.outerHTML:sub(1, 600)) or ("sem " .. v))
   elseif tipo == "visiveis" then
@@ -38,4 +45,5 @@ for i = 2, #arg do
   end
 end
 local vistos = {}
+print("sons tocados: " .. sonsTocados)
 for _, e in ipairs(N.erros) do if not vistos[e] then vistos[e] = true; print("ERRO: " .. e:sub(1, 400)) end end

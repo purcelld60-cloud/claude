@@ -2,7 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __mod, __ord, __arrL, __iterar, __t, __get, __len, __call, __add, __new, __arrayFrom = __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__arrayFrom
+local __newExpr, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call, __add, __new, __arrayFrom = __JSR.__newExpr, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__arrayFrom
 local ____lualib = require(script.Parent.lualib_bundle)
 local Map = ____lualib.Map
 local __TS__New = ____lualib.__TS__New
@@ -56,7 +56,7 @@ local __O = {};
             pcall(function()
                 local Context = if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext
                 if __t(Context) then
-                    context = __TS__New(Context)
+                    context = __newExpr(Context)
                     local ____opt_8 = context:resume()
                     if ____opt_8 ~= nil then
                         ____opt_8:catch(function()
