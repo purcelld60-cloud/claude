@@ -1,4 +1,3 @@
---!native
 --!nocheck
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
@@ -4153,6 +4152,33 @@ local __O = {};
         end
         return {cv = cv, w = W, h = H, pad = pad}
     end
+    __L1.montarLetras = function(self, max)
+        local feitas = 0
+        while __t(__len(__L1.BIG) < __len(__L1.TEXTO_G) and __lt(feitas, max)) do
+            local ch = __get(
+                __L1.TEXTO_G,
+                __len(__L1.BIG)
+            )
+            __call(__L1.BIG, "push", if ch == " " then nil else __L1:letra(ch, 3, __L1.ESTILO_G))
+            feitas = feitas + 1
+        end
+        while __t(__len(__L1.SMALL) < __len(__L1.TEXTO_P) and __lt(feitas, max)) do
+            __call(
+                __L1.SMALL,
+                "push",
+                __L1:letra(
+                    __get(
+                        __L1.TEXTO_P,
+                        __len(__L1.SMALL)
+                    ),
+                    1,
+                    __L1.ESTILO_P
+                )
+            )
+            feitas = feitas + 1
+        end
+        return __len(__L1.BIG) == __len(__L1.TEXTO_G) and __len(__L1.SMALL) == __len(__L1.TEXTO_P)
+    end
     __L1.montarPlaca = function(self)
         local R = __L1:pinta(pc)
         pc:clearRect(0, 0, __L1.LOGW, __L1.LOGH)
@@ -4406,6 +4432,9 @@ local __O = {};
         pc:putImageData(d, bx, 2)
     end
     __L1.desenharLogo = function(self, t)
+        if not __t(__L1:montarLetras(3)) then
+            return
+        end
         if __L1.logo0 == nil then
             __L1.logo0 = t
         end
@@ -5539,16 +5568,13 @@ local __O = {};
         },
         "borda,ext,contorno,extCor,extFundo,grad,luz,fundo,textura"
     )
-    __L1.BIG = __call(
-        __arr(__TS__Spread(__iter("DA ROÇA"))),
-        "map",
-        function(____, ch) return if ch == " " then nil else __L1:letra(ch, 3, __L1.ESTILO_G) end
-    )
-    __L1.SMALL = __call(
-        __arr(__TS__Spread(__iter("ADVENTURE"))),
-        "map",
-        function(____, ch) return __L1:letra(ch, 1, __L1.ESTILO_P) end
-    )
+    __L1.TEXTO_G = __arr(__TS__Spread(__iter("DA ROÇA")))
+    __L1.TEXTO_P = __arr(__TS__Spread(__iter("ADVENTURE")))
+    __L1.BIG = __arrL({}, 0)
+    __L1.SMALL = __arrL({}, 0)
+    if not __t(window.DAROCA_ROBLOX) then
+        __L1:montarLetras(99)
+    end
     __L1.LOGW = 340
     __L1.LOGH = 168
     logoCv, lc = table.unpack(
@@ -5576,12 +5602,14 @@ local __O = {};
     else
         __L1:montarPlaca()
     end
-    local ____opt_111 = window.document.fonts
-    local ____opt_108 = ____opt_111 and ____opt_111.load
-    if ____opt_108 ~= nil then
-        local ____self_109 = ____opt_108(____opt_111, "8px Pixel")
-        ____self_109["then"](____self_109, __L1.montarPlaca):catch(function()
-        end)
+    if not __t(window.DAROCA_ROBLOX) then
+        local ____opt_111 = window.document.fonts
+        local ____opt_108 = ____opt_111 and ____opt_111.load
+        if ____opt_108 ~= nil then
+            local ____self_109 = ____opt_108(____opt_111, "8px Pixel")
+            ____self_109["then"](____self_109, __L1.montarPlaca):catch(function()
+            end)
+        end
     end
     __L1.logo0 = nil
     __L1.onda = 0

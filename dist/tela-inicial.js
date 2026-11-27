@@ -341,7 +341,15 @@
   }
   const ESTILO_G = { borda: 2, ext: 4, contorno: '#2a1408', extCor: '#8a4a1c', extFundo: '#5a2c10', grad: [[0, '#fff8dc'], [.25, '#ffe48a'], [.6, '#f6b840'], [1, '#d8802a']], luz: '#ffffff', fundo: '#b8641e', textura: true };
   const ESTILO_P = { borda: 1, ext: 2, contorno: '#1a3410', extCor: '#2a5a1c', extFundo: '#1a3410', grad: [[0, '#fffbe8'], [.6, '#fff0c8'], [1, '#f0d8a0']], luz: '#ffffff', fundo: '#d8bc84', textura: false };
-  const BIG = [...'DA ROÇA'].map((ch) => (ch === ' ' ? null : letra(ch, 3, ESTILO_G))), SMALL = [...'ADVENTURE'].map((ch) => letra(ch, 1, ESTILO_P));
+  // letras do logo: no navegador saem todas na hora; no Roblox uma por quadro (montar tudo no carregamento passava de 10 s)
+  const TEXTO_G = [...'DA ROÇA'], TEXTO_P = [...'ADVENTURE'], BIG = [], SMALL = [];
+  function montarLetras(max) {
+    let feitas = 0;
+    while (BIG.length < TEXTO_G.length && feitas < max) { const ch = TEXTO_G[BIG.length]; BIG.push(ch === ' ' ? null : letra(ch, 3, ESTILO_G)); feitas++; }
+    while (SMALL.length < TEXTO_P.length && feitas < max) { SMALL.push(letra(TEXTO_P[SMALL.length], 1, ESTILO_P)); feitas++; }
+    return BIG.length === TEXTO_G.length && SMALL.length === TEXTO_P.length;
+  }
+  if (!window.DAROCA_ROBLOX) montarLetras(99);
   const LOGW = 340, LOGH = 168, [logoCv, lc] = mk(LOGW, LOGH), [letrasCv, lt] = mk(LOGW, LOGH), [placaCv, pc] = mk(LOGW, LOGH);
   logoCv.className = 'tr-logo'; logoCv.setAttribute('role', 'img'); logoCv.setAttribute('aria-label', 'Da Roça Adventure');
   const L = pinta(lc), LB = bola(lc);
@@ -365,11 +373,12 @@
     const d = pc.getImageData(bx, 2, tw + 16, 12); for (let i = 3; i < d.data.length; i += 4) if (d.data[i] > 0 && d.data[i] < 255) { if (d.data[i] > 110) d.data[i] = 255; } pc.putImageData(d, bx, 2);
   }
   if (window.DAROCA_ROBLOX) requestAnimationFrame(() => montarPlaca()); else montarPlaca();
-  document.fonts?.load?.('8px Pixel').then(montarPlaca).catch(() => {});
+  if (!window.DAROCA_ROBLOX) document.fonts?.load?.('8px Pixel').then(montarPlaca).catch(() => {}); // no Roblox a promessa resolve na hora e redesenhava a placa no carregamento
   let logo0 = null, onda = 0;
   const easeBounce = (u) => { if (u < 1 / 2.75) return 7.5625 * u * u; if (u < 2 / 2.75) return 7.5625 * (u -= 1.5 / 2.75) * u + .75; if (u < 2.5 / 2.75) return 7.5625 * (u -= 2.25 / 2.75) * u + .9375; return 7.5625 * (u -= 2.625 / 2.75) * u + .984375; };
   const easeBack = (u) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(u - 1, 3) + c1 * Math.pow(u - 1, 2); };
   function desenharLogo(t) {
+    if (!montarLetras(3)) return; // Roblox: o logo aparece quando as letras ficam prontas (3 por quadro)
     if (logo0 === null) logo0 = t; const e = reduzido ? 9 : t - logo0; onda = Math.max(0, onda - 1 / 60 * 1.2);
     lc.clearRect(0, 0, LOGW, LOGH);
     const placaY = Math.round((1 - easeBack(clamp(e / .45, 0, 1))) * -140); const flut = e > 2 ? Math.round(Math.sin(t * 1.4) * 1) : 0;
