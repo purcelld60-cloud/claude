@@ -1,11 +1,12 @@
+--!native
 --!nocheck
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __le, __gt, __ge, __callq, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
-local __arr, __len, __call, __add, __new, __iter, __assign, __arrayFrom, __bor, __band, __shr, __hypot = __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__assign, __JSR.__arrayFrom, __JSR.__bor, __JSR.__band, __JSR.__shr, __JSR.__hypot
+local __newExpr, __lt, __le, __gt, __ge, __callq, __mod, __ord, __arrL, __iterar, __t, __get = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get
+local __set, __arr, __len, __call, __add, __new, __iter, __assign, __arrayFrom, __bor, __band, __shr = __JSR.__set, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__assign, __JSR.__arrayFrom, __JSR.__bor, __JSR.__band, __JSR.__shr
+local __hypot = __JSR.__hypot
 local ____lualib = require(script.Parent.lualib_bundle)
-local __TS__New = ____lualib.__TS__New
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__MathSign = ____lualib.__TS__MathSign
@@ -94,7 +95,7 @@ local __O = {};
                 if ____t_3(if ____t_2(____opt_0) then not __t(window.Game:soundOn()) else __O[3158]) then
                     return true
                 end
-                __L1.ac = if __t(__L1.ac) then __L1.ac else __TS__New(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                __L1.ac = if __t(__L1.ac) then __L1.ac else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
                 if __L1.ac.state == "suspended" then
                     __L1.ac:resume()
                 end

@@ -1,3 +1,4 @@
+--!native
 --[[ Expressões regulares do JavaScript em Lua (o Lua tem "patterns", que não têm |, grupos com quantificador, etc.).
   Motor pequeno de retrocesso (backtracking) sobre pontos de código Unicode, com o que o jogo usa:
   | ( ) (?: ) (?= ) (?! ) [ ] [^ ] . ^ $ \b \B \d \D \w \W \s \S \uXXXX \xXX, * + ? {n} {n,} {n,m} (e versões preguiçosas),

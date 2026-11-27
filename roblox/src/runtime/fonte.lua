@@ -1,3 +1,4 @@
+--!native
 --[[ Fonte de pixel 5x7 para os textos do jogo no Roblox (o navegador usa a fonte do sistema; aqui tudo vira pixel).
   Cada letra tem 7 linhas de 5 pontos. Acentos do português são desenhados por cima da letra-base. ]]
 local F = {}

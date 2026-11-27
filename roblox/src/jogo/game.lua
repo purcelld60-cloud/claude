@@ -1,21 +1,22 @@
+--!native
 --!nocheck
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __le, __gt, __ge, __isFiniteV, __isFiniteN, __isInteger, __getq, __lenq, __callq, __mod, __ord = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isFiniteV, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__getq, __JSR.__lenq, __JSR.__callq, __JSR.__mod, __JSR.__ord
-local __arrL, __iterar, __t, __get, __set, __inc, __arr, __len, __call, __add, __new, __iter = __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter
-local __keys, __entries, __assign, __isArray, __arrayFrom, __bor, __hypot, __re, __re_replace, __re_split = __JSR.__keys, __JSR.__entries, __JSR.__assign, __JSR.__isArray, __JSR.__arrayFrom, __JSR.__bor, __JSR.__hypot, __JSR.__re, __JSR.__re_replace, __JSR.__re_split
+local __newExpr, __lt, __le, __gt, __ge, __isFiniteV, __isFiniteN, __isInteger, __getq, __lenq, __callq, __mod = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isFiniteV, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__getq, __JSR.__lenq, __JSR.__callq, __JSR.__mod
+local __ord, __arrL, __iterar, __t, __get, __set, __inc, __arr, __len, __call, __add, __new = __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new
+local __iter, __keys, __entries, __assign, __isArray, __arrayFrom, __bor, __hypot, __re, __re_replace, __re_split = __JSR.__iter, __JSR.__keys, __JSR.__entries, __JSR.__assign, __JSR.__isArray, __JSR.__arrayFrom, __JSR.__bor, __JSR.__hypot, __JSR.__re, __JSR.__re_replace, __JSR.__re_split
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__Number = ____lualib.__TS__Number
 local __TS__MathSign = ____lualib.__TS__MathSign
-local __TS__New = ____lualib.__TS__New
 local __TS__Delete = ____lualib.__TS__Delete
 local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
 local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
 local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local Set = ____lualib.Set
+local __TS__New = ____lualib.__TS__New
 local Map = ____lualib.Map
 local WeakMap = ____lualib.WeakMap
 local ____exports = {}
@@ -2393,7 +2394,7 @@ local __O = {};
             return
         end
         __L1:safe(function()
-            __L1.audioCtx = if __t(__L1.audioCtx) then __L1.audioCtx else __TS__New(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+            __L1.audioCtx = if __t(__L1.audioCtx) then __L1.audioCtx else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
             __L1.audioCtx:resume()
             local o = __L1.audioCtx:createOscillator()
             local g = __L1.audioCtx:createGain()

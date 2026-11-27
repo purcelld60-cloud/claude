@@ -2,9 +2,9 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __le, __gt, __ge, __objCreate, __isFiniteN, __isInteger, __callq, __mod, __ord, __arrL, __iterar = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__objCreate, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar
-local __t, __get, __set, __arr, __len, __call, __add, __new, __iter, __keys, __entries, __assign = __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__entries, __JSR.__assign
-local __isArray, __re, __re_test, __re_replace = __JSR.__isArray, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
+local __newExpr, __lt, __le, __gt, __ge, __objCreate, __isFiniteN, __isInteger, __callq, __mod, __ord, __arrL = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__objCreate, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL
+local __iterar, __t, __get, __set, __arr, __len, __call, __add, __new, __iter, __keys, __entries = __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__entries
+local __assign, __isArray, __re, __re_test, __re_replace = __JSR.__assign, __JSR.__isArray, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
 local Set = ____lualib.Set
 local __TS__New = ____lualib.__TS__New
@@ -79,7 +79,7 @@ local __O = {};
             end
             local ____try = pcall(function()
                 if __t(if __t(Context) then not __t(window.nativeAndroid) else Context) then
-                    audioContext = __TS__New(Context)
+                    audioContext = __newExpr(Context)
                 end
             end)
             if not ____try then

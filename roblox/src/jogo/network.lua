@@ -2,7 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __t, __len, __call, __add, __new, __assign, __re, __re_test = __JSR.__t, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__assign, __JSR.__re, __JSR.__re_test
+local __newExpr, __t, __len, __call, __add, __new, __assign, __re, __re_test = __JSR.__newExpr, __JSR.__t, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__assign, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
 local Map = ____lualib.Map
 local __TS__New = ____lualib.__TS__New
@@ -86,7 +86,7 @@ local __O = {};
                 local id = ____add_9(____add_result_8, serial)
                 local ____t_11 = __t
                 local ____call_result_10 = __call(
-                    __TS__New(window.Headers, if __t(options.headers) then options.headers else {}),
+                    __newExpr(window.Headers, if __t(options.headers) then options.headers else {}),
                     "get",
                     "Authorization"
                 )
@@ -150,17 +150,18 @@ local __O = {};
             end
             __call(pending, "delete", detail.id)
             window:clearTimeout(entry.timer)
-            local ____entry_resolve_19 = entry.resolve
-            local ____window_Response_18 = window.Response
-            local ____temp_17 = if __t(detail.body) then detail.body else "{}"
+            local ____entry_resolve_20 = entry.resolve
+            local ____newExpr_19 = __newExpr
+            local ____window_Response_17 = window.Response
+            local ____temp_18 = if __t(detail.body) then detail.body else "{}"
             local ____t_16 = __t
             local ____TS__Number_result_15 = __TS__Number(detail.status)
             __O[2461] = ____TS__Number_result_15
-            ____entry_resolve_19(
+            ____entry_resolve_20(
                 entry,
-                __TS__New(
-                    ____window_Response_18,
-                    ____temp_17,
+                ____newExpr_19(
+                    ____window_Response_17,
+                    ____temp_18,
                     {
                         status = math.max(
                             200,

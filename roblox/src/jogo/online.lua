@@ -2,8 +2,8 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __ord, __arrL, __t, __get, __set, __call, __add, __new, __assign, __getters, __re, __re_test = __JSR.__ord, __JSR.__arrL, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__assign, __JSR.__getters, __JSR.__re, __JSR.__re_test
-local __re_replace = __JSR.__re_replace
+local __fbind, __ord, __arrL, __t, __get, __set, __call, __add, __new, __assign, __getters, __re = __JSR.__fbind, __JSR.__ord, __JSR.__arrL, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__assign, __JSR.__getters, __JSR.__re
+local __re_test, __re_replace = __JSR.__re_test, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
 local Error = ____lualib.Error
@@ -15,7 +15,6 @@ local URIError = ____lualib.URIError
 local __TS__New = ____lualib.__TS__New
 local __TS__Promise = ____lualib.__TS__Promise
 local __TS__PromiseRace = ____lualib.__TS__PromiseRace
-local __TS__FunctionBind = ____lualib.__TS__FunctionBind
 local __TS__AsyncAwaiter = ____lualib.__TS__AsyncAwaiter
 local __TS__Await = ____lualib.__TS__Await
 local ____exports = {}
@@ -111,7 +110,7 @@ local __O = {};
             2
         ))
     end
-    local origFetch = __TS__FunctionBind(window.fetch, window)
+    local origFetch = __fbind(window.fetch, window)
     local function probe(self, origin)
         return __TS__AsyncAwaiter(function(____awaiter_resolve)
             local ____hasReturned, ____returnValue

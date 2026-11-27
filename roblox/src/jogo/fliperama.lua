@@ -2,11 +2,10 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __le, __gt, __ge, __getq, __callq, __mod, __ord, __arrL, __iterar, __t, __get = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get
-local __set, __inc, __arr, __len, __call, __add, __new, __iter, __keys, __assign, __isArray, __arrayFrom = __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__assign, __JSR.__isArray, __JSR.__arrayFrom
-local __bor, __hypot, __getters, __re, __re_replace = __JSR.__bor, __JSR.__hypot, __JSR.__getters, __JSR.__re, __JSR.__re_replace
+local __newExpr, __lt, __le, __gt, __ge, __getq, __callq, __mod, __ord, __arrL, __iterar, __t = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t
+local __get, __set, __inc, __arr, __len, __call, __add, __new, __iter, __keys, __assign, __isArray = __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__assign, __JSR.__isArray
+local __arrayFrom, __bor, __hypot, __getters, __re, __re_replace = __JSR.__arrayFrom, __JSR.__bor, __JSR.__hypot, __JSR.__getters, __JSR.__re, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
-local __TS__New = ____lualib.__TS__New
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
@@ -15,6 +14,7 @@ local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local __TS__Number = ____lualib.__TS__Number
 local __TS__Promise = ____lualib.__TS__Promise
 local Set = ____lualib.Set
+local __TS__New = ____lualib.__TS__New
 local ____exports = {}
 local __O = {};
 (function()
@@ -38,7 +38,7 @@ local __O = {};
         end
         do
             pcall(function()
-                __L1.actx = if __t(__L1.actx) then __L1.actx else __TS__New(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                __L1.actx = if __t(__L1.actx) then __L1.actx else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
                 if __L1.actx.state == "suspended" then
                     __L1.actx:resume()
                 end

@@ -52,6 +52,7 @@ local Canvas = require(runtime.canvas)
 local N = require(runtime.navegador)
 local Carregar = require(runtime.carregar)
 local Desenhista = require(runtime.desenhista)
+local Audio = require(runtime.audio)
 local LL = require(jogoPasta.lualib_bundle)
 local window = N.window
 window.DAROCA_ROBLOX = true
@@ -70,9 +71,56 @@ local function nivelDoRoblox()
 end
 window.localStorage:setItem("daroca-graphics-v1", nivelDoRoblox())
 
+-- ===== som: WebAudio imitado (runtime/audio.lua) tocado com Sounds em laço =====
+local SoundService = game:GetService("SoundService")
+local okS, IDS = pcall(require, runtime:FindFirstChild("sons"))
+if not okS or type(IDS) ~= "table" then IDS = {} end
+local VOLUME = tonumber(IDS.volume) or 3
+local tocando, livres = {}, {}
+local function pegarSom(tipo)
+  local lista = livres[tipo]; if lista and #lista > 0 then return table.remove(lista) end
+  local id = IDS[tipo]; if not id or id == "" then return nil end
+  local snd = Instance.new("Sound"); snd.SoundId = id; snd.Looped = true; snd.Parent = SoundService
+  return snd
+end
+N.som = {
+  tocar = function(id, tipo, taxa, vol, duracao)
+    local snd = pegarSom(tipo) or pegarSom("sine"); if not snd then return end
+    snd.PlaybackSpeed = math.clamp(taxa, .02, 20); snd.Volume = math.clamp(vol * VOLUME, 0, 4)
+    snd.TimePosition = 0; snd:Play(); tocando[id] = { snd, tipo }
+    -- sons curtos (bipes) param sozinhos na hora certa, mesmo se o jogo estiver lento
+    if duracao then task.delay(duracao, function() local t = tocando[id]; if t and t[1] == snd then N.som.parar(id) end end) end
+  end,
+  ajustar = function(id, taxa, vol) local t = tocando[id]; if t then t[1].PlaybackSpeed = math.clamp(taxa, .02, 20); t[1].Volume = math.clamp(vol * VOLUME, 0, 4) end end,
+  parar = function(id) local t = tocando[id]; if t then t[1]:Stop(); livres[t[2]] = livres[t[2]] or {}; table.insert(livres[t[2]], t[1]); tocando[id] = nil end end,
+  musica = (function()
+    local atual
+    return function(el, tocar)
+      local src = tostring(el._attr and el._attr.src or ""):gsub("[?#].*$", ""):gsub("^.*musicas/", ""):gsub("^.*music/", "")
+      local id = IDS.musicas and IDS.musicas[src]
+      if not tocar then if atual and atual.el == el then atual.snd:Stop() end; return end
+      if not id then return end
+      if not atual then atual = { snd = Instance.new("Sound") }; atual.snd.Parent = SoundService end
+      atual.el = el; atual.snd.SoundId = id; atual.snd.Looped = el.loop == true; atual.snd.Volume = math.clamp((tonumber(el.volume) or 1) * 1.5, 0, 3); atual.snd:Play()
+    end
+  end)(),
+}
+
+-- ===== campo de texto no celular: abre o teclado do Roblox =====
+local caixaTexto = Instance.new("TextBox")
+caixaTexto.Size = UDim2.new(.6, 0, 0, 44); caixaTexto.AnchorPoint = Vector2.new(.5, 0); caixaTexto.Position = UDim2.new(.5, 0, 0, 20)
+caixaTexto.BackgroundColor3 = Color3.fromRGB(242, 230, 200); caixaTexto.TextColor3 = Color3.fromRGB(40, 24, 12); caixaTexto.Font = Enum.Font.GothamBold; caixaTexto.TextSize = 20
+caixaTexto.Visible = false; caixaTexto.ZIndex = 20; caixaTexto.ClearTextOnFocus = false; caixaTexto.Parent = gui
+local campoAtual
+N.aoFocarCampo = function(el)
+  if not N.toque then return end
+  campoAtual = el; caixaTexto.Text = tostring(el.value or ""); caixaTexto.PlaceholderText = tostring(el._attr.placeholder or ""); caixaTexto.Visible = true; caixaTexto:CaptureFocus()
+end
+caixaTexto.FocusLost:Connect(function() if campoAtual then N.digitar(campoAtual, caixaTexto.Text); campoAtual = nil end; caixaTexto.Visible = false end)
+
 local carregados = 0
 local ok, erro = pcall(function()
-  Carregar.iniciar({ JS = JS, N = N, Canvas = Canvas, lualib = LL, Desenhista = Desenhista,
+  Carregar.iniciar({ JS = JS, N = N, Canvas = Canvas, lualib = LL, Desenhista = Desenhista, Audio = Audio,
     exigir = function(nome) local m = jogoPasta:FindFirstChild(nome); if not m then error("módulo " .. nome .. " não encontrado") end; local r = require(m); carregados = carregados + 1; aviso.Text = ("CARREGANDO... %d"):format(carregados); task.wait(); return r end,
     aoCarregar = function() end })
 end)
@@ -241,7 +289,8 @@ RunService.RenderStepped:Connect(function()
   N.passo(os.clock() * 1000)
   local tela = desenhista and desenhista.desenhar() or window.document:getElementById("gameCanvas")
   if not tela then return end
+  -- os pixels da tela já são um buffer RGBA do tamanho certo: vão direto para a imagem
   local px = tela._.px
-  for i = 1, W * H do writeu32(quadro, (i - 1) * 4, px[i] or 0) end
-  ei:WritePixelsBuffer(Vector2.zero, tamanho, quadro)
+  if tela.width == W and tela.height == H then ei:WritePixelsBuffer(Vector2.zero, tamanho, px)
+  else local RD = Canvas.RD; for i = 0, W * H - 1 do writeu32(quadro, i * 4, RD(px, i * 4)) end; ei:WritePixelsBuffer(Vector2.zero, tamanho, quadro) end
 end)

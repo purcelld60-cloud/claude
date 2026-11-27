@@ -1,3 +1,4 @@
+--!native
 --!nocheck
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window

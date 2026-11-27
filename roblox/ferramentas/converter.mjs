@@ -33,7 +33,7 @@ const METODOS = new Set(('push pop shift unshift slice splice map filter forEach
 const GLOBAIS_FIXOS = new Set(['Math', 'Object', 'Array', 'JSON', 'Number', 'String', 'console', 'Promise', 'Date', 'Symbol', 'Reflect']);
 const NEW_RUNTIME = new Set(['Date', 'ArrayBuffer', 'MouseEvent', 'PointerEvent', 'Worker', 'OffscreenCanvas', 'Image', 'Audio', 'WebSocket', 'ResizeObserver', 'IntersectionObserver', 'BroadcastChannel', 'CustomEvent', 'KeyboardEvent', 'Event', 'ImageData',
   'Uint8Array', 'Uint8ClampedArray', 'Int16Array', 'Int32Array', 'Uint16Array', 'Uint32Array', 'Float32Array', 'Float64Array', 'Array', 'AudioContext', 'OfflineAudioContext', 'DOMMatrix', 'Path2D', 'FontFace', 'MutationObserver', 'URLSearchParams', 'URL', 'Blob', 'FileReader', 'TextEncoder', 'TextDecoder', 'AbortController']);
-const AJUDANTES = ['__hasOwnV', '__sliceV', '__forEachV', '__mapV', '__filterV', '__indexOfV', '__pushV', '__toStringV', '__NumberV', '__StringV', '__BooleanV', '__identV', '__fcall', '__fapply', '__lt', '__le', '__gt', '__ge', '__isFiniteV', '__isIntegerV', '__isNaNV', '__imul', '__cbrt', '__objCreate', '__getProto', '__defProp', '__defProps', '__defPropV', '__isSafeInteger', '__isFiniteN', '__isInteger', '__getq', '__lenq', '__callq', '__mod', '__pk', '__ord', '__arrL', '__fromCharCode', '__iterar', '__t', '__get', '__set', '__inc', '__del', '__arr', '__len', '__setlen', '__call', '__add', '__new', '__iter', '__keys', '__values', '__entries', '__assign', '__isArray', '__arrayFrom', '__arrayOf',
+const AJUDANTES = ['__fbind', '__newExpr', '__hasOwnV', '__sliceV', '__forEachV', '__mapV', '__filterV', '__indexOfV', '__pushV', '__toStringV', '__NumberV', '__StringV', '__BooleanV', '__identV', '__fcall', '__fapply', '__lt', '__le', '__gt', '__ge', '__isFiniteV', '__isIntegerV', '__isNaNV', '__imul', '__cbrt', '__objCreate', '__getProto', '__defProp', '__defProps', '__defPropV', '__isSafeInteger', '__isFiniteN', '__isInteger', '__getq', '__lenq', '__callq', '__mod', '__pk', '__ord', '__arrL', '__fromCharCode', '__iterar', '__t', '__get', '__set', '__inc', '__del', '__arr', '__len', '__setlen', '__call', '__add', '__new', '__iter', '__keys', '__values', '__entries', '__assign', '__isArray', '__arrayFrom', '__arrayOf',
   '__bor', '__band', '__bxor', '__shl', '__shr', '__ushr', '__bnot', '__hypot', '__getters', '__re', '__re_test', '__re_replace', '__re_split', '__re_match', '__re_exec'];
 
 
@@ -339,6 +339,13 @@ const fabrica = (checker) => (ctx) => {
       if (n.elements.some((e) => ts.isSpreadElement(e) || ts.isOmittedExpression(e) || e.kind === K.NullKeyword || (ts.isIdentifier(e) && e.text === 'undefined'))) return chama('__arr', els);
       return chama('__arrL', [f.createArrayLiteralExpression(els, n.elements.length > 6), f.createNumericLiteral(els.length)]);
     }
+    // new de algo que não é classe do jogo nem do conversor (ex.: new (window.AudioContext || window.webkitAudioContext)()): o runtime resolve
+    if (ts.isNewExpression(n) && !(ts.isIdentifier(n.expression) && (NEW_RUNTIME.has(n.expression.text) || MANTER.has(n.expression.text)))) {
+      const sym = ts.isIdentifier(n.expression) ? checker.getSymbolAtLocation(n.expression) : null;
+      const ds = (sym && sym.declarations) || [];
+      const classeDoJogo = ds.some((d) => (ts.isClassDeclaration(d) || ts.isClassExpression(d) || (ts.isVariableDeclaration(d) && d.initializer && ts.isClassExpression(d.initializer))) && !ehLib(d));
+      if (!classeDoJogo) return chama('__newExpr', [ts.visitNode(n.expression, visit), ...(n.arguments || []).map((a) => ts.visitNode(a, visit))]);
+    }
     if (ts.isNewExpression(n) && ts.isIdentifier(n.expression) && NEW_RUNTIME.has(n.expression.text)) return chama('__new', [f.createStringLiteral(n.expression.text), ...(n.arguments || []).map((a) => ts.visitNode(a, visit))]);
     if (ts.isRegularExpressionLiteral(n)) { const t = n.text, i = t.lastIndexOf('/'); return chama('__re', [f.createStringLiteral(t.slice(1, i)), f.createStringLiteral(t.slice(i + 1))]); }
     if (ts.isObjectLiteralExpression(n)) {
@@ -402,6 +409,7 @@ const fabrica = (checker) => (ctx) => {
       }
       if ((nome === 'replace' || nome === 'split' || nome === 'match' || nome === 'replaceAll') && a0 && ts.isRegularExpressionLiteral(a0)) return chama('__re_' + (nome === 'replaceAll' ? 'replace' : nome), [ts.visitNode(recv, visit), ...args()]);
       if ((nome === 'test' || nome === 'exec') && ts.isRegularExpressionLiteral(recv)) return chama('__re_' + nome, [ts.visitNode(recv, visit), ...args()]);
+      if (nome === 'bind' && !opcional(n) && !(ts.isIdentifier(recv) && MANTER.has(recv.text))) return chama('__fbind', [ts.visitNode(recv, visit), ...args()]);
       if (nome === 'call' && !opcional(n)) return chama('__fcall', [ts.visitNode(recv, visit), ...args()]);
       if (nome === 'apply' && !opcional(n)) return chama('__fapply', [ts.visitNode(recv, visit), ...args()]);
       if (METODOS.has(nome)) return chama(opcional(n) || opcional(n.expression) ? '__callq' : '__call', [ts.visitNode(recv, visit), f.createStringLiteral(nome), ...args()]);
@@ -445,7 +453,9 @@ for (const arq of fs.readdirSync(SAIDA)) {
   lua = lua.split('__TS__Iterator(__iter(').join('__iterar((');
   if (alvo === 'Luau') lua = lua.split('require("lualib_bundle")').join('require(script.Parent.lualib_bundle)');
   const usados = AJUDANTES.filter((h) => new RegExp('\\b' + h + '\\b').test(lua) || (h === '__iterar' && lua.includes('__iterar')));
-  const cab = [(alvo === 'Luau' ? '--!nocheck\n' : '') + `local __JSR = ${caminhoJs}`, 'local window = __JSR.window', 'local tostring = __JSR.__str'];
+  // módulos que mais desenham ganham código nativo no Roblox (--!native; o Roblox volta ao normal se não couber)
+  const NATIVOS = /^(art|hd-maps|hd-scene|campanha2__(personagens|cenarios|camadas|novos-a|novos-b|ambientes|plantas)|tela-inicial|lugares-fundos|lugares-c1|nikolas-fx|fx-pixel|vendor__pixelfx|hero-shadow|daytime|weather|cinema-fx|boss-fx|campaign-vfx|scene-life|critters|world-life|baile-pixel|baile-galpao|game|graphics|shader|mapa3d|estrada|chegada-carro|brainrots|char-detail|amanda-art|arena-art|arena-fx|trigal|balanco)\.lua$/;
+  const cab = [(alvo === 'Luau' ? (NATIVOS.test(arq) ? '--!native\n' : '') + '--!nocheck\n' : '') + `local __JSR = ${caminhoJs}`, 'local window = __JSR.window', 'local tostring = __JSR.__str'];
   for (let i = 0; i < usados.length; i += 12) { const g = usados.slice(i, i + 12); cab.push(`local ${g.join(', ')} = ${g.map((h) => '__JSR.' + h).join(', ')}`); }
   fs.writeFileSync(p, cab.join('\n') + '\n' + lua);
 }

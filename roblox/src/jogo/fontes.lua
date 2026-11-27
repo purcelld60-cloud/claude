@@ -1,4 +1,8 @@
 --!nocheck
+local __JSR = require(script.Parent.Parent.runtime.js)
+local window = __JSR.window
+local tostring = __JSR.__str
+--!nocheck
 -- letras das fontes do jogo (gerado por ferramentas/capturar.mjs): F[família][tamanho] = {asc, desc, g = {[letra] = {avanço, dx, dy, w, h, alfa em hex}}}
 local F = {}
 F.pixel = {}

@@ -1,3 +1,4 @@
+--!native
 --[[ Navegador simulado para o Da Roça no Roblox: window, document e os elementos HTML que o jogo cria e procura.
   - Elementos com classes, atributos, dataset, style, filhos, textContent/innerHTML (HTML é lido de verdade);
   - seletores CSS do jogo (#id, .classe, tag, [atributo], [atributo="valor"], :not(), descendente e ">");
@@ -74,6 +75,7 @@ function N.passo(ms)
   table.sort(ids)
   for _, id in ipairs(ids) do chamar("quadro", lista0[id], nil, agoraMs) end
   N.microtarefas()
+  if N.aoPasso then N.aoPasso() end
 end
 -- as promessas do conversor (lualib) resolvem na hora; nada a fazer aqui, mas o gancho fica
 function N.microtarefas() end
@@ -834,7 +836,7 @@ CRIAR.Image = function(w, h)
   rawset(img, "width", w or 0); rawset(img, "height", h or 0); rawset(img, "naturalWidth", 0); rawset(img, "naturalHeight", 0); rawset(img, "complete", false)
   return img
 end
-CRIAR.Audio = function(src) local a = criarElemento("audio"); if src then a._attr.src = str(src) end; return a end
+CRIAR.Audio = function(src) local a = criarElemento("audio"); if src then a._attr.src = str(src) end; rawset(a, "paused", true); rawset(a, "volume", 1); rawset(a, "currentTime", 0); rawset(a, "loop", false); rawset(a, "muted", false); rawset(a, "readyState", 4); return a end
 CRIAR.MutationObserver = function(cb) return { observe = function() end, disconnect = function() end, takeRecords = function() return lista({}) end } end
 CRIAR.ResizeObserver = function(cb) return { observe = function() end, unobserve = function() end, disconnect = function() end } end
 CRIAR.IntersectionObserver = CRIAR.ResizeObserver
@@ -863,6 +865,17 @@ CRIAR.Path2D = function() return { _cmds = {}, moveTo = function() end, lineTo =
 CRIAR.FontFace = function() return { load = function() return N.Promise.resolve(nil) end } end
 CRIAR.OffscreenCanvas = function(w, h) return N.criarCanvas(w, h) end
 N.CRIAR = CRIAR
+-- os construtores também ficam no window (para new window.X(...) e new (a || b)(...))
+for nome, f in pairs(CRIAR) do
+  if window[nome] == nil then
+    local tipada = nome:match("Array$") and nome ~= "Array"
+    window[nome] = setmetatable({
+      prototype = {}, BYTES_PER_ELEMENT = tipada and (nome:match("8") and 1 or nome:match("16") and 2 or nome:match("64") and 8 or 4) or nil,
+      from = tipada and function(_, a, fm) return JS.tipada(nome, JS.__arrayFrom(a, fm)) end or nil,
+      of = tipada and function(_, ...) return JS.tipada(nome, JS.__arr(...)) end or nil,
+    }, { __call = function(_, _este, ...) return f(...) end })
+  end
+end
 function JS.__new(nome, ...)
   local f = CRIAR[nome]
   if f then return f(...) end
@@ -929,6 +942,15 @@ function N.tecla(tipo, code, key, repetida)
     shiftKey = teclasPresas.ShiftLeft or teclasPresas.ShiftRight or false, ctrlKey = false, altKey = false, metaKey = false, isComposing = false })
   if tipo == "keydown" then teclasPresas[code] = true else teclasPresas[code] = nil end
   despachar(alvo, ev)
+  -- digitação em <input>/<textarea> com foco (o navegador faria sozinho)
+  if tipo == "keydown" and not ev.defaultPrevented and alvo ~= body and (alvo._tag == "input" or alvo._tag == "textarea") then
+    local v = tostring(GET.value(alvo) or "")
+    if key == "Backspace" then v = v:gsub("[%z\1-\127\194-\244][\128-\191]*$", "")
+    elseif type(key) == "string" and #key >= 1 and (#key == 1 or utf8.len(key) == 1) then v = v .. key
+    else return ev end
+    SET.value(alvo, v)
+    despachar(alvo, novoEvento("input", { bubbles = true, data = key, inputType = key == "Backspace" and "deleteContentBackward" or "insertText" }))
+  end
   return ev
 end
 -- ponteiro (mouse ou dedo) em coordenadas da tela do jogo (window.innerWidth x innerHeight)
@@ -941,7 +963,13 @@ function N.ponteiro(tipo, x, y, id, toque)
     button = 0, buttons = (tipo == "pointerup" or tipo == "pointercancel") and 0 or 1, width = 1, height = 1, pressure = 0.5 }
   local ev = novoEvento(tipo, init)
   despachar(alvo, ev)
-  if tipo == "pointerdown" then ponteiros[id] = alvo end
+  if tipo == "pointerdown" then
+    ponteiros[id] = alvo
+    -- foco em campo de texto ou botão tocado
+    local f = alvo
+    while f and f ~= body and f.nodeType == 1 and f._tag ~= "input" and f._tag ~= "textarea" and f._tag ~= "button" and f._tag ~= "select" do f = rawget(f, "_pai") end
+    if f and f ~= body and f.nodeType == 1 and f._tag then EL.focus(f); if (f._tag == "input" or f._tag == "textarea") and N.aoFocarCampo then N.aoFocarCampo(f) end end
+  end
   if tipo == "pointerup" or tipo == "pointercancel" then
     local inicio = ponteiros[id]; ponteiros[id] = nil
     if tipo == "pointerup" and inicio and (inicio == alvo or EL.contains(inicio, alvo) or EL.contains(alvo, inicio)) and not ev.defaultPrevented then
@@ -960,6 +988,12 @@ function N.ponteiro(tipo, x, y, id, toque)
     end
   end
   return ev
+end
+-- texto digitado de uma vez (teclado do celular no Roblox)
+function N.digitar(el, texto)
+  SET.value(el, texto)
+  despachar(el, novoEvento("input", { bubbles = true, data = texto, inputType = "insertText" }))
+  despachar(el, novoEvento("change", { bubbles = true }))
 end
 function N.redimensionar(w, h)
   window.innerWidth, window.innerHeight, window.outerWidth, window.outerHeight = w, h, w, h

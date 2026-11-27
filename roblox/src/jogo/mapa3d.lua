@@ -1,10 +1,11 @@
+--!native
 --!nocheck
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __le, __gt, __ge, __imul, __callq, __mod, __ord, __arrL, __iterar, __t, __get = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__imul, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get
-local __set, __arr, __len, __call, __add, __new, __iter, __assign, __arrayFrom, __bor, __band, __bxor = __JSR.__set, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__assign, __JSR.__arrayFrom, __JSR.__bor, __JSR.__band, __JSR.__bxor
-local __shr, __ushr, __hypot, __re, __re_test, __re_replace = __JSR.__shr, __JSR.__ushr, __JSR.__hypot, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
+local __newExpr, __lt, __le, __gt, __ge, __imul, __callq, __mod, __ord, __arrL, __iterar, __t = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__imul, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t
+local __get, __set, __arr, __len, __call, __add, __new, __iter, __assign, __arrayFrom, __bor, __band = __JSR.__get, __JSR.__set, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__assign, __JSR.__arrayFrom, __JSR.__bor, __JSR.__band
+local __bxor, __shr, __ushr, __hypot, __re, __re_test, __re_replace = __JSR.__bxor, __JSR.__shr, __JSR.__ushr, __JSR.__hypot, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__ParseInt = ____lualib.__TS__ParseInt
 local __TS__Number = ____lualib.__TS__Number
@@ -3968,7 +3969,7 @@ local __O = {};
         local FW = W * F
         local FH = H * F
         local nivel = __call(
-            __TS__New(window.Int8Array, FW * FH),
+            __newExpr(window.Int8Array, FW * FH),
             "fill",
             1
         )
@@ -4383,7 +4384,7 @@ local __O = {};
         cv.height = H
         local c = cv:getContext("2d")
         c.imageSmoothingEnabled = false
-        local lv = __TS__New(window.Int8Array, N)
+        local lv = __newExpr(window.Int8Array, N)
         local ty = __new("Uint8Array", N)
         do
             local y = 0
