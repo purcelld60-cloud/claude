@@ -61,8 +61,8 @@ local __O = {};
     local function color(____, e)
         local ____t_7 = __t
         local ____get_result_6 = __get(COLORS, e.type)
-        __O[1541] = ____get_result_6
-        return if ____t_7(____get_result_6) then __O[1541] else "#ffe08b"
+        __O[1557] = ____get_result_6
+        return if ____t_7(____get_result_6) then __O[1557] else "#ffe08b"
     end
     local function headY(____, e)
         return e.y - if e.type == "giant" then 205 else if e.type == "igor" then 92 * if __t(e.igorScale) then e.igorScale else 1 else if __t(e.type == "nikolas" and __ge(e.phase, 4)) then 230 else if __t(e.rage) then 130 else 100
@@ -87,8 +87,8 @@ local __O = {};
     local function update(self, dt, s)
         local ____t_9 = __t
         local ____TS__Number_result_8 = __TS__Number(dt)
-        __O[1542] = ____TS__Number_result_8
-        dt = clamp(nil, if ____t_9(____TS__Number_result_8) then __O[1542] else 0, 0, 0.05)
+        __O[1558] = ____TS__Number_result_8
+        dt = clamp(nil, if ____t_9(____TS__Number_result_8) then __O[1558] else 0, 0, 0.05)
         local e = s.boss
         if __t(not __t(e) or __le(e.hp, 0)) then
             return
@@ -202,10 +202,10 @@ local __O = {};
             local ____t_29 = __t
             local ____t_27 = __t
             local ____temp_26 = e.state == "bellyRolling"
-            __O[1543] = ____temp_26
-            local ____temp_28 = if ____t_27(____temp_26) then full else __O[1543]
-            __O[1544] = ____temp_28
-            if ____t_30(if ____t_29(____temp_28) then math.random() < 0.6 else __O[1544]) then
+            __O[1559] = ____temp_26
+            local ____temp_28 = if ____t_27(____temp_26) then full else __O[1559]
+            __O[1560] = ____temp_28
+            if ____t_30(if ____t_29(____temp_28) then math.random() < 0.6 else __O[1560]) then
                 local ____opt_33 = window.SceneLife
                 if ____opt_33 ~= nil then
                     ____opt_33 = ____opt_33.burst
@@ -227,8 +227,8 @@ local __O = {};
             local ____t_37 = __t
             local ____t_36 = __t
             local ____temp_35 = e.state == "firing"
-            __O[1545] = ____temp_35
-            if ____t_37(if ____t_36(____temp_35) then full else __O[1545]) then
+            __O[1561] = ____temp_35
+            if ____t_37(if ____t_36(____temp_35) then full else __O[1561]) then
                 __call(
                     m.rings,
                     "push",
@@ -249,13 +249,13 @@ local __O = {};
         local ____t_41 = __t
         local ____t_39 = __t
         local ____temp_38 = e.state == "windup"
-        __O[1546] = ____temp_38
-        local ____temp_40 = if ____t_39(____temp_38) then full else __O[1546]
-        __O[1547] = ____temp_40
+        __O[1562] = ____temp_38
+        local ____temp_40 = if ____t_39(____temp_38) then full else __O[1562]
+        __O[1563] = ____temp_40
         if ____t_42(if ____t_41(____temp_40) then __lt(
             __len(m.motes),
             26
-        ) else __O[1547]) then
+        ) else __O[1563]) then
             local a = math.random() * math.pi * 2
             local r = 70 + math.random() * 40
             __call(
@@ -283,10 +283,10 @@ local __O = {};
         local ____t_46 = __t
         local ____t_44 = __t
         local ____temp_43 = e.state == "dashing" or e.state == "bellyRolling"
-        __O[1548] = ____temp_43
-        local ____temp_45 = if ____t_44(____temp_43) then __le(m.ghostT, 0) else __O[1548]
-        __O[1549] = ____temp_45
-        if ____t_47(if ____t_46(____temp_45) then full else __O[1549]) then
+        __O[1564] = ____temp_43
+        local ____temp_45 = if ____t_44(____temp_43) then __le(m.ghostT, 0) else __O[1564]
+        __O[1565] = ____temp_45
+        if ____t_47(if ____t_46(____temp_45) then full else __O[1565]) then
             __call(m.ghosts, "push", {x = e.x, y = e.y, face = if __t(if __t(s.player) then __lt(s.player.x, e.x) else s.player) then -1 else 1, life = 0.22})
             m.ghostT = 0.045
             if __gt(
@@ -342,8 +342,8 @@ local __O = {};
         local ____t_54 = __t
         local ____t_53 = __t
         local ____temp_52 = not __t(e) or __le(e.hp, 0)
-        __O[1550] = ____temp_52
-        if ____t_54(if ____t_53(____temp_52) then __O[1550] else e.state == "underground") then
+        __O[1566] = ____temp_52
+        if ____t_54(if ____t_53(____temp_52) then __O[1566] else e.state == "underground") then
             return nil
         end
         local m = state(nil, e)
@@ -376,8 +376,8 @@ local __O = {};
                 local k = clamp(nil, 1 - if __t(e.stateTimer) then e.stateTimer else 0 / if __t(e.bellyDuration) then e.bellyDuration else 1, 0, 1)
                 local ____t_56 = __t
                 local ____TS__MathSign_result_55 = __TS__MathSign(if __t(e.bellyTo) then e.bellyTo else e.x - if __t(e.bellyFrom) then e.bellyFrom else e.x)
-                __O[1551] = ____TS__MathSign_result_55
-                local dir = if ____t_56(____TS__MathSign_result_55) then __O[1551] else 1
+                __O[1567] = ____TS__MathSign_result_55
+                local dir = if ____t_56(____TS__MathSign_result_55) then __O[1567] else 1
                 local ____ = dir
                 if k < 0.25 then
                     sy = 1.18 - k * 0.7
@@ -413,8 +413,8 @@ local __O = {};
                 local ____t_59 = __t
                 local ____t_58 = __t
                 local ____temp_57 = e.state == "firing" and m.clap ~= nil
-                __O[1552] = ____temp_57
-                if ____t_59(if ____t_58(____temp_57) then __lt(m.clap, 0.5) else __O[1552]) then
+                __O[1568] = ____temp_57
+                if ____t_59(if ____t_58(____temp_57) then __lt(m.clap, 0.5) else __O[1568]) then
                     local k = m.clap
                     sx = 1 + 0.18 * math.exp(__TS__Number(-k) * 8) + jig(nil, k, 34) * 0.06
                     sy = 1 - 0.12 * math.exp(__TS__Number(-k) * 8)
@@ -452,10 +452,10 @@ local __O = {};
         local ____t_63 = __t
         local ____t_61 = __t
         local ____temp_60 = sx == 1 and sy == 1
-        __O[1553] = ____temp_60
-        local ____temp_62 = if ____t_61(____temp_60) then dx == 0 else __O[1553]
-        __O[1554] = ____temp_62
-        if ____t_64(if ____t_63(____temp_62) then not __t(rot) else __O[1554]) then
+        __O[1569] = ____temp_60
+        local ____temp_62 = if ____t_61(____temp_60) then dx == 0 else __O[1569]
+        __O[1570] = ____temp_62
+        if ____t_64(if ____t_63(____temp_62) then not __t(rot) else __O[1570]) then
             return nil
         end
         return {
@@ -529,10 +529,10 @@ local __O = {};
         local ____t_71 = __t
         local ____t_69 = __t
         local ____temp_68 = e.type == "igor" and m.landed ~= nil
-        __O[1555] = ____temp_68
-        local ____temp_70 = if ____t_69(____temp_68) then __lt(m.landed, 1.1) else __O[1555]
-        __O[1556] = ____temp_70
-        if ____t_72(if ____t_71(____temp_70) then m.crackX ~= nil else __O[1556]) then
+        __O[1571] = ____temp_68
+        local ____temp_70 = if ____t_69(____temp_68) then __lt(m.landed, 1.1) else __O[1571]
+        __O[1572] = ____temp_70
+        if ____t_72(if ____t_71(____temp_70) then m.crackX ~= nil else __O[1572]) then
             local a = 1 - m.landed / 1.1
             c:save()
             c.globalAlpha = a
@@ -566,8 +566,8 @@ local __O = {};
         local ____t_75 = __t
         local ____t_74 = __t
         local ____temp_73 = e.type == "igor" and e.state == "bellyRolling"
-        __O[1557] = ____temp_73
-        if ____t_75(if ____t_74(____temp_73) then full else __O[1557]) then
+        __O[1573] = ____temp_73
+        if ____t_75(if ____t_74(____temp_73) then full else __O[1573]) then
             c:save()
             c.globalAlpha = 0.5
             c.fillStyle = "#fff4d4"
@@ -757,8 +757,8 @@ local __O = {};
         local ____t_78 = __t
         local ____t_77 = __t
         local ____temp_76 = not __t(e) or e.type ~= "igor"
-        __O[1558] = ____temp_76
-        if ____t_78(if ____t_77(____temp_76) then __O[1558] else lite(nil)) then
+        __O[1574] = ____temp_76
+        if ____t_78(if ____t_77(____temp_76) then __O[1574] else lite(nil)) then
             return nil
         end
         local m = state(nil, e)

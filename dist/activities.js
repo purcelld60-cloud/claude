@@ -63,34 +63,93 @@
   function ball(c,x,y,t=0,scale=1){c.save();c.translate(x,y);c.rotate(t);c.scale(scale,scale);rect(c,-7,-5,14,10,'#fcf6db');rect(c,-5,-7,10,14,'#fcf6db');rect(c,-3,-3,6,6,'#2e4241');rect(c,-7,-1,3,3,'#2e4241');rect(c,4,-3,3,3,'#2e4241');rect(c,-1,4,3,3,'#2e4241');c.restore();}
   function actor(c,type,x,y,options={}){if(window.Art?.drawCharacter)window.Art.drawCharacter(c,type,x,y,{frame:0,facing:1,grounded:true,...options});else{rect(c,x-12,y-48,24,48,type==='daroca'?'#e2a04c':'#83a0ba');}}
   function meter(c,x,y,w,value,color,greenStart,greenEnd){rect(c,x-3,y-3,w+6,21,'#18382a');rect(c,x,y,w,15,color);if(greenStart!==undefined)rect(c,x+greenStart*w,y,(greenEnd-greenStart)*w,15,'#b9dd7f');rect(c,x+value*w-3,y-6,6,27,'#fff6cf');rect(c,x+value*w-1,y-3,2,21,'#314b33');}
-  function football(c,s){
-    rect(c,0,0,960,540,'#77bfe7');rect(c,0,76,960,70,'#cadede');rect(c,0,110,960,430,'#367f44');for(let i=0;i<8;i++)rect(c,0,110+i*54,960,27,i%2?'#388647':'#3c8d49');
-    for(let i=0;i<32;i++){const x=i*33-12;rect(c,x,83,20,34,'#25516a');rect(c,x+3,80,14,8,i%3?'#e9d7a7':'#885c43');rect(c,x+4,93,12,16,i%2?'#244875':'#ecefe3');}
-    rect(c,70,25,300,44,'#183d4c');rect(c,75,30,290,34,'#265268');text(c,'MOTA · TREINO DE CRAQUE',220,47,14,'#e6f1cd');
-    line(c,[[40,302],[920,302],[920,420],[40,420],[40,302]],'#d0e7ad',3);line(c,[[490,305],[490,420]],'#d0e7ad',3);
-    const g=s.goalArea;rect(c,g.x-9,g.y-9,g.w+18,g.h+16,'#1c5145');rect(c,g.x,g.y,g.w,g.h,'#49715f');for(let x=g.x;x<=g.x+g.w;x+=23)line(c,[[x,g.y],[x,g.y+g.h]],'#a5c2a275',1);for(let y=g.y;y<=g.y+g.h;y+=20)line(c,[[g.x,y],[g.x+g.w,y]],'#a5c2a275',1);line(c,[[g.x-6,g.y+g.h],[g.x-6,g.y-7],[g.x+g.w+6,g.y-7],[g.x+g.w+6,g.y+g.h]],'#f8f5d9',7);
-    const keeper=s.lockedKeeper!==null&&(s.phase==='flight'||s.phase==='result')?s.lockedKeeper:s.keeper,kx=g.x+keeper*g.w;rect(c,kx-20,306,40,7,'#1b493340');actor(c,'mota',kx,315,{frame:s.time,scale:1.18,facing:-1,moving:s.phase==='aim'||s.phase==='power',speed:60});rect(c,kx-31,260,14,11,'#f7f2d2');rect(c,kx+16,260,14,11,'#f7f2d2');
-    actor(c,'daroca',193,325,{frame:s.time,muscular:!!s.options.trained,animation:s.phase==='flight'?'paper':'idle',spriteFrame:s.phase==='flight'?3:0,attack:s.phase==='flight',attackType:'paper',attackProgress:.6});
-    const aim=s.lockedAim??s.aim,tx=g.x+aim*g.w,ty=g.y+101;const cross=s.phase==='aim'?'#e0efad':'#f8d786';line(c,[[tx-12,ty],[tx+12,ty]],cross,2);line(c,[[tx,ty-12],[tx,ty+12]],cross,2);
-    if(s.phase==='flight'||s.phase==='result'){const b=s.shot;if(b)ball(c,b.x,b.y,b.rotation,1.15);}else ball(c,236,319,s.time*.4,1.15);
-    text(c,'MIRA: procure o canto livre',160,332,11,'#d5e7b5','left');meter(c,160,348,630,aim,'#7cbb76');rect(c,160+clamp(keeper-.135,0,1)*630,348,Math.min(.27,1-clamp(keeper-.135,0,1))*630,15,'#d08d77');rect(c,160+aim*630-3,342,6,27,'#fff7d2');
-    text(c,'FORÇA: acerte no verde',160,385,11,'#d5e7b5','left');meter(c,430,377,360,s.power,'#aa7861',.35,.85);
-    text(c,`${s.goals} / 3 GOLS`,805,56,17,'#f7f0bd');text(c,`CHUTE ${Math.min(s.shots+1,s.maxShots)} / ${s.maxShots}`,805,80,11,'#e1e5bf');
-    if(s.phase==='result'){text(c,s.shot.goal?'GOLAÇO!':s.shot.blocked?'DEFENDEU!':'PRA FORA!',475,92,34,s.shot.goal?'#fff0a0':'#f4baa1');if(s.shot.goal){const shake=Math.sin(s.phaseTime*35)*4;for(let i=0;i<22;i++){const xx=430+(i*47+s.phaseTime*24)%490,yy=112+(i*31+s.phaseTime*55)%188;rect(c,xx,yy,4,4,['#f4dd87','#c8eb99','#efb5b5'][i%3]);}line(c,[[g.x-6,g.y-7],[g.x+g.w+6,g.y-7+shake]],'#f8f5d9',5);}}
+  // ======== pixel art (1 pixel de arte = 2 pixels da tela) ========
+  const P=(c,x,y,w,h,col)=>rect(c,x*2,y*2,w*2,h*2,col);
+  const ROUPAS=['#e8433a','#3a6aa8','#f2c94c','#3c8a5a','#c84a8a','#f2f2ee','#e8843a','#2a2a3a'],PELES=['#f0c8a0','#c48a62','#8a5a3c','#5a3a28','#e8b88a'];
+  const campos={};
+  // estádio do Mota: céu, torres de luz, arquibancada lotada (dois quadros da torcida), placas e gramado listrado
+  function campo(quadro){
+    if(campos[quadro])return campos[quadro];const PK=window.PixelKit,cv=document.createElement('canvas');cv.width=480;cv.height=270;const c=cv.getContext('2d');c.imageSmoothingEnabled=false;const R=PK.R,h=PK.hash;
+    PK.faixas(c,0,0,480,30,['#4a92da','#5aa0e0','#6eb0e8','#86c2ee']);
+    for(const x of [10,452]){R(c,x+6,4,4,52,'#5a646e');R(c,x+7,4,1,52,'#8a949e');R(c,x,2,16,8,'#3a444e');for(let k=0;k<4;k++)for(let j=0;j<2;j++)R(c,x+1+k*4,3+j*3,3,2,'#fff6c8');}
+    R(c,0,14,480,6,'#5a646e');R(c,0,14,480,1,'#8a949e');for(let x=0;x<480;x+=12)R(c,x,15,1,5,'#3a444e');
+    for(let fila=0;fila<4;fila++){const y=20+fila*9;R(c,0,y+7,480,2,'#9aa0a6');R(c,0,y,480,7,fila%2?'#5a6470':'#4a545e');
+      for(let k=0;k<70;k++){const x=k*7+(fila%2)*3+Math.round(h(k+fila*70)*2),pula=quadro===1&&(k+fila)%3===0,braco=(k*7+fila)%5===0;if(h(k*3+fila)<.12)continue;PK.pessoa(c,x,y-1,PELES[(k+fila)%5],ROUPAS[(k*3+fila)%8],'#1c1410',pula,braco&&quadro===1);}}
+    const placas=[['CACAU DA ROÇA','#c43c3a','#fff2c0'],['ITABUNA','#2c5a9e','#ffffff'],['GÁS DO PAI','#f2c94c','#3a2a0a'],['ESCOLA','#3c8a5a','#ffffff']];
+    for(let k=0;k<6;k++){const [txt,f,cor]=placas[k%4],x=k*80;R(c,x,56,79,8,f);R(c,x,56,79,1,'rgba(255,255,255,.35)');R(c,x+79,56,1,8,'#1c1c1c');PK.texto(c,txt,x+40,60,8,cor,'center',null);}
+    for(let y=64;y<270;y+=10){const k=Math.floor((y-64)/10);R(c,0,y,480,10,k%2?'#3a8a48':'#348042');}
+    for(let i=0;i<2600;i++){const x=h(i*.77)*480,y=64+h(i*1.31)*206;R(c,x,y,1,1,i%3?'#2c7038':'#4a9a54');}
+    for(let i=0;i<90;i++){const x=h(i*4.1)*480,y=70+h(i*2.7)*196;R(c,x,y-2,1,2,'#5aaa5a');R(c,x+1,y-1,1,1,'#5aaa5a');}
+    // linhas de cal da grande área e a marca do pênalti (giz meio gasto)
+    const giz=(x,y,w,hh)=>{for(let xx=0;xx<w;xx++)for(let yy=0;yy<hh;yy++)if(h(x+xx+(y+yy)*7)>.12)R(c,x+xx,y+yy,1,1,'#e8f2d8');};
+    giz(20,151,440,1);giz(20,210,440,1);giz(20,151,1,60);giz(459,151,1,60);giz(245,152,1,58);R(c,116,161,3,1,'#e8f2d8');
+    return(campos[quadro]=cv);
   }
+  let redeCv=null;
+  function rede(){if(redeCv)return redeCv;const PK=window.PixelKit;redeCv=document.createElement('canvas');redeCv.width=160;redeCv.height=103;const c=redeCv.getContext('2d');c.imageSmoothingEnabled=false;
+    for(let y=0;y<103;y++)for(let x=0;x<160;x++){if((x+y)%6===0||(x-y+600)%6===0)PK.R(c,x,y,1,1,'rgba(235,240,230,.55)');}
+    return redeCv;}
+  function football(c,s){
+    const PK=window.PixelKit;if(!PK){rect(c,0,0,960,540,'#367f44');return;}
+    c.drawImage(campo(Math.floor(s.time*2.5)%2),0,0,480,270,0,0,960,540);
+    // flashes de foto na arquibancada e bandeirinhas
+    for(let k=0;k<4;k++){const ph=(s.time*1.3+k*.37)%1;if(ph<.06)P(c,Math.round(PK.hash(k+Math.floor(s.time*1.3))*470),22+Math.round(PK.hash(k*3+Math.floor(s.time*1.3))*30),2,2,'#ffffff');}
+    for(const fx of [60,410]){P(c,fx,24,1,14,'#c8c8c0');for(let y=0;y<6;y++)P(c,fx+1,24+y,8+Math.round(Math.sin(s.time*6+y*.6)*1.5),1,y<3?'#2c5a9e':'#f2c94c');}
+    const g=s.goalArea,gx=g.x/2,gy=g.y/2,gw=g.w/2,gh=g.h/2;
+    // gol: rede quadriculada em diagonal (treme no golaço), traves brancas com sombra
+    const tremendo=s.phase==='result'&&s.shot?.goal?Math.max(0,1-s.phaseTime*1.6):0;
+    P(c,gx-2,gy-2,gw+4,gh+3,'rgba(10,30,20,.25)');
+    if(tremendo>0){for(let k=0;k<8;k++){const y0=Math.floor(gh*k/8),hh=Math.ceil(gh/8),dx=Math.round(Math.sin(s.phaseTime*30+k)*3*tremendo);c.drawImage(rede(),0,y0,160,hh,(gx+dx)*2,(gy+y0)*2,320,hh*2);}}else c.drawImage(rede(),0,0,160,103,gx*2,gy*2,320,206);
+    P(c,gx-4,gy-4,3,gh+4,'#f2f2ee');P(c,gx-2,gy-4,1,gh+4,'#c8c8c0');P(c,gx+gw+1,gy-4,3,gh+4,'#f2f2ee');P(c,gx+gw+3,gy-4,1,gh+4,'#c8c8c0');P(c,gx-4,gy-4,gw+8,3,'#f2f2ee');P(c,gx-4,gy-2,gw+8,1,'#c8c8c0');P(c,gx-3,gy+gh,gw+6,1,'rgba(0,0,0,.25)');
+    const keeper=s.lockedKeeper!==null&&(s.phase==='flight'||s.phase==='result')?s.lockedKeeper:s.keeper,kx=g.x+keeper*g.w;rect(c,kx-20,312,40,6,'#1b493355');actor(c,'mota',kx,315,{frame:s.time,scale:1.18,facing:-1,moving:s.phase==='aim'||s.phase==='power',speed:60});P(c,(kx-31)/2,130,7,6,'#f7f2d2');P(c,(kx-31)/2,130,7,1,'#ffffff');P(c,(kx+16)/2,130,7,6,'#f7f2d2');P(c,(kx+16)/2,130,7,1,'#ffffff');
+    actor(c,'daroca',193,325,{frame:s.time,muscular:!!s.options.trained,animation:s.phase==='flight'?'paper':'idle',spriteFrame:s.phase==='flight'?3:0,attack:s.phase==='flight',attackType:'paper',attackProgress:.6});
+    // mira em pixel (cruz com cantos) e a bola com sombra
+    const aim=s.lockedAim??s.aim,tx=Math.round((g.x+aim*g.w)/2),ty=Math.round((g.y+101)/2),cm=s.phase==='aim'?'#e0ff8a':'#ffd24a';
+    P(c,tx-6,ty,4,1,cm);P(c,tx+3,ty,4,1,cm);P(c,tx,ty-6,1,4,cm);P(c,tx,ty+3,1,4,cm);for(const [dx,dy] of [[-5,-5],[4,-5],[-5,4],[4,4]]){P(c,tx+dx,ty+dy,2,1,cm);P(c,tx+dx+(dx<0?0:1),ty+dy+(dy<0?0:0),1,2,cm);}
+    if(s.phase==='flight'||s.phase==='result'){const b=s.shot;if(b){P(c,Math.round(b.x/2)-4,Math.round(Math.max(b.y,b.startY)/2)+5,8,2,'rgba(0,0,0,.25)');ball(c,b.x,b.y,b.rotation,1.15);}}else{P(c,114,164,8,2,'rgba(0,0,0,.25)');ball(c,236,319,s.time*.4,1.15);}
+    // placa do treino e placar eletrônico
+    PK.painel(c,20,14,408,44,{u:2,fundo:'#13283a',borda:'#e8d8a0',rebite:'#c8a848'});PK.texto(c,'MOTA · TREINO DE CRAQUE',224,36,16,'#fff2c0');
+    PK.painel(c,696,10,248,72,{u:2,fundo:'#0a0a12',borda:'#5a646e',rebite:'#9aa0a6'});PK.texto(c,'GOLS',758,32,16,'#9aa0a6');PK.texto(c,`${s.goals}/3`,758,58,24,'#ffd24a');PK.texto(c,'CHUTE',878,32,16,'#9aa0a6');PK.texto(c,`${Math.min(s.shots+1,s.maxShots)}/${s.maxShots}`,878,58,24,'#7af07a');
+    for(let k=0;k<s.maxShots;k++){const feito=k<s.shots;P(c,363+k*5,36,3,3,feito?'#f2f2ee':'#2a2a3a');}
+    // medidores em gomos: mira (vermelho = onde o goleiro está) e força (verde = boa)
+    PK.painel(c,140,326,680,80,{u:2,fundo:'#14281e',borda:'#a8c878',sombra:true});
+    PK.texto(c,'MIRA',158,349,16,'#d5e7b5','left');const kz=[Math.max(0,keeper-.135),Math.min(1,keeper+.135)];PK.barra(c,252,340,548,16,aim,{u:2,gomos:40,ruim:kz,ruimCor:'#c86a5a',vazio:'#3a6a4a',marcador:'#fff7d2'});
+    PK.texto(c,'FORÇA',158,385,16,'#d5e7b5','left');PK.barra(c,252,376,548,16,s.power,{u:2,gomos:40,zona:[.35,.85],zonaCor:'#8ad86a',vazio:'#7a4a3a',marcador:'#fff7d2'});
+    if(s.phase==='result'&&s.shot){const txt=s.shot.goal?'GOLAÇO!':s.shot.blocked?'DEFENDEU!':'PRA FORA!';PK.contorno(c,txt,480,100,32,s.shot.goal?'#fff0a0':'#f4baa1','#1c1410');
+      if(s.shot.goal)for(let i=0;i<26;i++){const xx=430+(i*47+s.phaseTime*24)%490,yy=112+(i*31+s.phaseTime*55)%188;P(c,Math.round(xx/2),Math.round(yy/2),2,2,['#f4dd87','#c8eb99','#efb5b5','#9ad0ff'][i%4]);}}
+  }
+  // quadro-negro do Miqueias: moldura de madeira, giz meio apagado, bandeja com giz e apagador
+  let lousaCv=null;
+  function lousa(){if(lousaCv)return lousaCv;const PK=window.PixelKit,R=PK.R,h=PK.hash;lousaCv=document.createElement('canvas');lousaCv.width=304;lousaCv.height=172;const c=lousaCv.getContext('2d');c.imageSmoothingEnabled=false;
+    R(c,0,0,304,164,'#5a3a22');for(let x=0;x<304;x+=3)if(h(x*1.7)>.55)R(c,x,1+h(x)*3,2,1,'#7a5232');R(c,0,0,304,1,'#8a5a36');
+    R(c,4,4,296,152,'#2a4636');for(let i=0;i<1400;i++)R(c,4+h(i*.91)*295,4+h(i*1.73)*151,1,1,i%3?'#304e3e':'#26402f');
+    for(let k=0;k<9;k++){const x=20+h(k*5.1)*250,y=14+h(k*2.3)*120,w=20+h(k)*40;for(let j=0;j<4;j++)for(let xx=0;xx<w;xx+=2)if(h(xx+j*9+k)>.5)R(c,x+xx,y+j*2,2,1,'rgba(200,220,210,.10)');}
+    R(c,0,156,304,8,'#7a5232');R(c,0,156,304,1,'#9a7248');R(c,2,164,300,4,'#4a2c18');
+    for(const [x,cor] of [[40,'#f2f2ee'],[52,'#f2e27a'],[61,'#f2a8c8'],[250,'#f2f2ee']])R(c,x,153,8,3,cor);R(c,210,151,22,5,'#8a6a4a');R(c,210,154,22,2,'#d8d0c0');
+    return lousaCv;}
+  // desenhos de giz: traço de pixel meio falhado
+  function giz(c,x,y,w,h,cor='rgba(245,248,240,.92)'){const PK=window.PixelKit;for(let xx=0;xx<w;xx++)for(let yy=0;yy<h;yy++)if(PK.hash((x+xx)*3.1+(y+yy)*7.7)>.14)P(c,x+xx,y+yy,1,1,cor);}
   function quizIcon(c,kind,x,y,t){
-    if(kind==='book'){rect(c,x-35,y-32,70,60,'#264c62');rect(c,x-31,y-28,28,52,'#e8ead2');rect(c,x+3,y-28,28,52,'#f5efd3');rect(c,x-2,y-32,4,63,'#7397a0');for(let j=0;j<4;j++){rect(c,x-26,y-18+j*10,18,2,'#a0b3aa');rect(c,x+8,y-18+j*10,18,2,'#a0b3aa');}}
-    else if(kind==='goal'){line(c,[[x-39,y+27],[x-39,y-29],[x+39,y-29],[x+39,y+27]],'#eaf2dd',5);for(let i=-25;i<=25;i+=13)line(c,[[x+i,y-25],[x+i,y+25]],'#a0bcb0',1);ball(c,x+Math.sin(t*2)*21,y+4,t,1.4);}
-    else if(kind==='friend'){actor(c,'daroca',x-25,y+35,{scale:.85});actor(c,'reeis',x+26,y+35,{scale:.85,facing:-1});rect(c,x-5,y-30,10,10,'#efb0ad');rect(c,x-10,y-34,9,8,'#efb0ad');rect(c,x+2,y-34,9,8,'#efb0ad');}
-    else if(kind==='blue'){rect(c,x-31,y-30,62,60,'#487fcb');rect(c,x-24,y-24,17,9,'#80b9ec');}
-    else if(window.Art?.drawCake)window.Art.drawCake(c,x,y+22);
+    x=Math.round(x/2);y=Math.round(y/2);
+    if(kind==='book'){giz(c,x-16,y-12,32,1);giz(c,x-16,y+10,32,1);giz(c,x-16,y-12,1,23);giz(c,x+15,y-12,1,23);giz(c,x,y-12,1,23);for(let j=0;j<4;j++){giz(c,x-12,y-7+j*4,9,1,'rgba(245,248,240,.6)');giz(c,x+4,y-7+j*4,9,1,'rgba(245,248,240,.6)');}}
+    else if(kind==='goal'){giz(c,x-18,y-12,1,24);giz(c,x+17,y-12,1,24);giz(c,x-18,y-12,36,1);for(let i=-12;i<=12;i+=6)giz(c,x+i,y-10,1,21,'rgba(245,248,240,.45)');ball(c,(x+Math.sin(t*2)*10)*2,(y+4)*2,t,1.2);}
+    else if(kind==='friend'){for(const dx of [-10,10]){giz(c,x+dx-2,y-12,5,5);giz(c,x+dx,y-7,1,10);giz(c,x+dx-4,y-4,9,1);giz(c,x+dx-3,y+3,1,6);giz(c,x+dx+3,y+3,1,6);}P(c,x-2,y-14,2,2,'#f2a8c8');P(c,x+1,y-14,2,2,'#f2a8c8');P(c,x-2,y-12,5,2,'#f2a8c8');P(c,x-1,y-10,3,1,'#f2a8c8');}
+    else if(kind==='blue'){for(let yy=-11;yy<=11;yy+=2)giz(c,x-14,y+yy,28,1,'rgba(110,160,230,.9)');giz(c,x-14,y-12,28,1);}
+    else{giz(c,x-14,y-2,28,1);giz(c,x-14,y+10,28,1);giz(c,x-14,y-2,1,13);giz(c,x+13,y-2,1,13);giz(c,x-10,y-8,20,1);giz(c,x-10,y-8,1,6);giz(c,x+9,y-8,1,6);giz(c,x-14,y+4,28,1,'rgba(242,168,200,.9)');giz(c,x,y-14,1,6,'rgba(242,226,122,.95)');if(Math.sin(t*8)>0)P(c,x,y-16,1,2,'#ffb040');}
   }
   function quiz(c,s){
-    if(window.Art?.drawClassroom)window.Art.drawClassroom(c,'miqueias',s.time);else{rect(c,0,0,960,540,'#e5e9dd');rect(c,60,70,840,310,'#8cc1b8');}
-    rect(c,0,0,960,540,'#142f294f');rect(c,180,55,600,335,'#204a46');rect(c,188,63,584,319,'#85bcb1');rect(c,193,68,574,309,'#9bcfc2');rect(c,201,76,558,3,'#c5e3d6');line(c,[[215,95],[310,75]],'#d7e9df77',9);line(c,[[232,121],[360,92]],'#d7e9df45',5);
-    actor(c,'miqueias',105,360,{frame:s.time,scale:1.1,talking:true});actor(c,'daroca',861,360,{frame:s.time,scale:1.05,muscular:!!s.options.trained});const q=QUESTIONS[s.questionIndex%QUESTIONS.length];text(c,'ENGLISH DO MIQUEIAS',480,98,22,'#174a47');text(c,'How you say…',480,134,13,'#36665c');text(c,q.word+'?',480,171,27,'#fff5d4');quizIcon(c,q.icon,480,240,s.time);
-    for(let i=0;i<3;i++){rect(c,423+i*40,333,27,9,i<s.correct?'#f6df93':'#629c91');rect(c,423+i*40,333,27,2,i<s.correct?'#fff1bc':'#b4dacb');}
-    if(s.phase==='feedback'){line(c,[[703,285],[715,300],[739,268]],'#fff0a0',6);text(c,'ALLRIGHT!',480,306,18,'#fff2bd');}else if(s.feedback&&!s.feedbackGood){line(c,[[707,274],[732,299]],'#ae655c',5);line(c,[[732,274],[707,299]],'#ae655c',5);}
+    const PK=window.PixelKit;
+    if(window.Art?.drawClassroom)window.Art.drawClassroom(c,'miqueias',s.time);else rect(c,0,0,960,540,'#e5e9dd');
+    rect(c,0,0,960,540,'#142f2940');
+    if(!PK){rect(c,180,55,600,335,'#204a46');return;}
+    c.drawImage(lousa(),0,0,304,172,176,46,608,344);
+    actor(c,'miqueias',105,360,{frame:s.time,scale:1.1,talking:true});actor(c,'daroca',861,360,{frame:s.time,scale:1.05,muscular:!!s.options.trained});
+    const q=QUESTIONS[s.questionIndex%QUESTIONS.length];
+    PK.texto(c,'ENGLISH DO MIQUEIAS',480,88,16,'#f2f2ea','center','#1a2e24');PK.texto(c,'How you say...',480,124,16,'#b8d8c8','center','#1a2e24');PK.texto(c,q.word+'?',480,162,32,'#f2e27a','center','#1a2e24');
+    quizIcon(c,q.icon,480,244,s.time);
+    for(let i=0;i<3;i++){const x=228+i*14,y=166,on=i<s.correct;const cor=on?'#f2e27a':'rgba(245,248,240,.35)';P(c,x,y-3,1,7,cor);P(c,x-3,y,7,1,cor);P(c,x-1,y-1,3,3,cor);P(c,x-2,y-2,1,1,cor);P(c,x+2,y-2,1,1,cor);P(c,x-2,y+2,1,1,cor);P(c,x+2,y+2,1,1,cor);}
+    if(s.phase==='feedback'){for(let k=0;k<8;k++)P(c,352+k,146+(k<3?k:3-(k-3)*1.6)|0,2,2,'#9aff9a');PK.texto(c,'ALLRIGHT!',480,314,16,'#9aff9a','center','#1a2e24');}
+    else if(s.feedback&&!s.feedbackGood){for(let k=0;k<12;k++){P(c,350+k,136+k,2,2,'#ff9a8a');P(c,361-k,136+k,2,2,'#ff9a8a');}}
   }
   function draw(c,s){if(!s)return;if(s.kind==='dinner')return window.AmandaArt.drawDinner(c,s);c.save();c.imageSmoothingEnabled=false;if(s.kind==='quiz')quiz(c,s);else football(c,s);c.restore();}
   window.Activities={create,update,submit,view,draw,cancel};

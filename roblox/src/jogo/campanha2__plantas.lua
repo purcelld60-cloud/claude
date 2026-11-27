@@ -188,8 +188,8 @@ local __O = {};
         local ____iter_2 = __iter
         local ____t_1 = __t
         local ____get_result_0 = __get(PATCHES, scene)
-        __O[403] = ____get_result_0
-        for ____, ____value in __TS__Iterator(____iter_2(if ____t_1(____get_result_0) then __O[403] else __arrL({}, 0))) do
+        __O[413] = ____get_result_0
+        for ____, ____value in __TS__Iterator(____iter_2(if ____t_1(____get_result_0) then __O[413] else __arrL({}, 0))) do
             local ____type = ____value[1]
             local x0 = ____value[2]
             local w = ____value[3]
@@ -253,11 +253,11 @@ local __O = {};
         local ____call_5 = __call
         local ____t_4 = __t
         local ____get_result_3 = __get(PATCHES, scene)
-        __O[404] = ____get_result_3
+        __O[414] = ____get_result_3
         return {
             stems = out,
             pots = ____call_5(
-                if ____t_4(____get_result_3) then __O[404] else __arrL({}, 0),
+                if ____t_4(____get_result_3) then __O[414] else __arrL({}, 0),
                 "filter",
                 function(____, p) return __get(p, 0) == "floreira" end
             )
@@ -343,20 +343,20 @@ local __O = {};
         local p = if __t(o.player) then o.player else {}
         local ____t_13 = __t
         local ____TS__Number_result_12 = __TS__Number(p.x)
-        __O[405] = ____TS__Number_result_12
-        local px = if ____t_13(____TS__Number_result_12) then __O[405] else 0
+        __O[415] = ____TS__Number_result_12
+        local px = if ____t_13(____TS__Number_result_12) then __O[415] else 0
         local ____t_15 = __t
         local ____TS__Number_result_14 = __TS__Number(p.y)
-        __O[406] = ____TS__Number_result_14
-        local py = if ____t_15(____TS__Number_result_14) then __O[406] else FLOOR
+        __O[416] = ____TS__Number_result_14
+        local py = if ____t_15(____TS__Number_result_14) then __O[416] else FLOOR
         local ____t_17 = __t
         local ____TS__Number_result_16 = __TS__Number(p.vx)
-        __O[407] = ____TS__Number_result_16
-        local vx = if ____t_17(____TS__Number_result_16) then __O[407] else 0
+        __O[417] = ____TS__Number_result_16
+        local vx = if ____t_17(____TS__Number_result_16) then __O[417] else 0
         local ____t_19 = __t
         local ____TS__Number_result_18 = __TS__Number(o.time)
-        __O[408] = ____TS__Number_result_18
-        local t = if ____t_19(____TS__Number_result_18) then __O[408] else 0
+        __O[418] = ____TS__Number_result_18
+        local t = if ____t_19(____TS__Number_result_18) then __O[418] else 0
         local atk = __TS__Number(p.attack) > 0
         local face = if __lt(p.facing, 0) then -1 else 1
         local ____t_29 = __t
@@ -373,8 +373,8 @@ local __O = {};
             ____opt_result_27 = ____opt_result_26.wind
         end
         local ____TS__Number_result_28 = __TS__Number(____opt_result_27)
-        __O[409] = ____TS__Number_result_28
-        local wind = if ____t_29(____TS__Number_result_28) then __O[409] else 0.25 * 0.6 + 0.15
+        __O[419] = ____TS__Number_result_28
+        local wind = if ____t_29(____TS__Number_result_28) then __O[419] else 0.25 * 0.6 + 0.15
         local touched = false
         for ____, s in __iterar((S.stems)) do
             if math.abs(s.x - (o.camera + 480)) > 620 then
@@ -411,14 +411,14 @@ local __O = {};
             local ____t_33 = __t
             local ____t_31 = __t
             local ____temp_30 = if __t(atk) then __lt(s.cut, 0.5) else atk
-            __O[410] = ____temp_30
-            local ____temp_32 = if ____t_31(____temp_30) then __TS__MathSign(d) == face else __O[410]
-            __O[411] = ____temp_32
-            local ____temp_34 = if ____t_33(____temp_32) then math.abs(d) < 90 else __O[411]
-            __O[412] = ____temp_34
-            local ____temp_36 = if ____t_35(____temp_34) then py > s.base - 60 else __O[412]
-            __O[413] = ____temp_36
-            if ____t_38(if ____t_37(____temp_36) then s.type ~= "cacto" else __O[413]) then
+            __O[420] = ____temp_30
+            local ____temp_32 = if ____t_31(____temp_30) then __TS__MathSign(d) == face else __O[420]
+            __O[421] = ____temp_32
+            local ____temp_34 = if ____t_33(____temp_32) then math.abs(d) < 90 else __O[421]
+            __O[422] = ____temp_34
+            local ____temp_36 = if ____t_35(____temp_34) then py > s.base - 60 else __O[422]
+            __O[423] = ____temp_36
+            if ____t_38(if ____t_37(____temp_36) then s.type ~= "cacto" else __O[423]) then
                 s.cut = 1
                 s.w = s.w + face * 8
                 burst(nil, s, 4, if __t(s.type == "flores" or s.type == "floreira") then "petala" else if __t(s.seeds) then "semente" else if s.type == "cafe" then "grao" else "folha")
@@ -432,8 +432,8 @@ local __O = {};
         local ____t_41 = __t
         local ____t_40 = __t
         local ____temp_39 = if __t(touched) then math.abs(vx) > 60 else touched
-        __O[414] = ____temp_39
-        if ____t_41(if ____t_40(____temp_39) then t - lastSound > 0.22 else __O[414]) then
+        __O[424] = ____temp_39
+        if ____t_41(if ____t_40(____temp_39) then t - lastSound > 0.22 else __O[424]) then
             lastSound = t
             do
                 pcall(function()
@@ -902,8 +902,8 @@ local __O = {};
     local function visible(____, o)
         local ____t_47 = __t
         local ____temp_46 = __ge(o.scene, 12) and not __t(o.arena)
-        __O[415] = ____temp_46
-        return if ____t_47(____temp_46) then not __t(o.room) else __O[415]
+        __O[425] = ____temp_46
+        return if ____t_47(____temp_46) then not __t(o.room) else __O[425]
     end
     local function drawBack(self, ctx, o)
         if not __t(visible(nil, o)) then
@@ -915,8 +915,8 @@ local __O = {};
         end
         local ____t_49 = __t
         local ____TS__Number_result_48 = __TS__Number(o.time)
-        __O[416] = ____TS__Number_result_48
-        local t = if ____t_49(____TS__Number_result_48) then __O[416] else 0
+        __O[426] = ____TS__Number_result_48
+        local t = if ____t_49(____TS__Number_result_48) then __O[426] else 0
         local dt = math.max(
             0,
             math.min(0.05, t - lastT)
@@ -939,8 +939,8 @@ local __O = {};
             local ____t_52 = __t
             local ____t_51 = __t
             local ____temp_50 = __lt(s.base, FLOOR) and __gt(s.x, o.camera - 40)
-            __O[417] = ____temp_50
-            if ____t_52(if ____t_51(____temp_50) then __lt(s.x, o.camera + 1000) else __O[417]) then
+            __O[427] = ____temp_50
+            if ____t_52(if ____t_51(____temp_50) then __lt(s.x, o.camera + 1000) else __O[427]) then
                 stem(nil, ctx, s, t)
             end
         end
@@ -956,16 +956,16 @@ local __O = {};
         end
         local ____t_54 = __t
         local ____TS__Number_result_53 = __TS__Number(o.time)
-        __O[418] = ____TS__Number_result_53
-        local t = if ____t_54(____TS__Number_result_53) then __O[418] else 0
+        __O[428] = ____TS__Number_result_53
+        local t = if ____t_54(____TS__Number_result_53) then __O[428] else 0
         ctx:save()
         ctx.imageSmoothingEnabled = false
         for ____, s in __iterar((S.stems)) do
             local ____t_57 = __t
             local ____t_56 = __t
             local ____temp_55 = __ge(s.base, FLOOR) and __gt(s.x, o.camera - 40)
-            __O[419] = ____temp_55
-            if ____t_57(if ____t_56(____temp_55) then __lt(s.x, o.camera + 1000) else __O[419]) then
+            __O[429] = ____temp_55
+            if ____t_57(if ____t_56(____temp_55) then __lt(s.x, o.camera + 1000) else __O[429]) then
                 stem(nil, ctx, s, t)
             end
         end
@@ -1024,9 +1024,9 @@ local __O = {};
                 local ____call_60 = __call
                 local ____t_59 = __t
                 local ____get_result_58 = __get(PATCHES, scene)
-                __O[420] = ____get_result_58
+                __O[430] = ____get_result_58
                 return ____call_60(
-                    if ____t_59(____get_result_58) then __O[420] else __arrL({}, 0),
+                    if ____t_59(____get_result_58) then __O[430] else __arrL({}, 0),
                     "map",
                     function(____, p) return __call(p, "slice") end
                 )

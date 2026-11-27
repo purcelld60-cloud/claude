@@ -108,8 +108,8 @@ local __O = {};
             ____opt_0 = ____opt_0.widths
         end
         local ____TS__Number_result_3 = __TS__Number(____getq_2(____opt_0, sc))
-        __O[1482] = ____TS__Number_result_3
-        local ____temp_5 = if ____t_4(____TS__Number_result_3) then __O[1482] else __get(
+        __O[1498] = ____TS__Number_result_3
+        local ____temp_5 = if ____t_4(____TS__Number_result_3) then __O[1498] else __get(
             __arrL({
                 4800,
                 6200,
@@ -126,8 +126,8 @@ local __O = {};
             }, 12),
             sc
         )
-        __O[1483] = ____temp_5
-        worldW = if ____t_6(____temp_5) then __O[1483] else 4800
+        __O[1499] = ____temp_5
+        worldW = if ____t_6(____temp_5) then __O[1499] else 4800
         local plan = __get(PLAN, sc)
         if not __t(plan) then
             return
@@ -200,45 +200,45 @@ local __O = {};
     local function update(self, dt, s)
         local ____t_14 = __t
         local ____TS__Number_result_13 = __TS__Number(dt)
-        __O[1484] = ____TS__Number_result_13
-        dt = clamp(nil, if ____t_14(____TS__Number_result_13) then __O[1484] else 0, 0, 0.05)
+        __O[1500] = ____TS__Number_result_13
+        dt = clamp(nil, if ____t_14(____TS__Number_result_13) then __O[1500] else 0, 0, 0.05)
         if s.scene ~= scene then
             build(nil, s.scene)
         end
         local ____t_17 = __t
         local ____t_16 = __t
         local ____temp_15 = not __t(__len(list))
-        __O[1485] = ____temp_15
-        if ____t_17(if ____t_16(____temp_15) then __O[1485] else s.arena) then
+        __O[1501] = ____temp_15
+        if ____t_17(if ____t_16(____temp_15) then __O[1501] else s.arena) then
             return
         end
         local p = s.player
         local ____t_19 = __t
         local ____TS__Number_result_18 = __TS__Number(s.time)
-        __O[1486] = ____TS__Number_result_18
-        local t = if ____t_19(____TS__Number_result_18) then __O[1486] else 0
+        __O[1502] = ____TS__Number_result_18
+        local t = if ____t_19(____TS__Number_result_18) then __O[1502] else 0
         local ____t_21 = __t
         local ____temp_20 = if __t(p) then p.ground else p
-        __O[1487] = ____temp_20
-        local onFloor = if ____t_21(____temp_20) then math.abs(p.y - FLOOR) < 8 else __O[1487]
+        __O[1503] = ____temp_20
+        local onFloor = if ____t_21(____temp_20) then math.abs(p.y - FLOOR) < 8 else __O[1503]
         for ____, c in __iterar((list)) do
             local dx = if __t(p) then c.x - p.x else 999
             local near = math.abs(dx)
             local ____t_25 = __t
             local ____t_23 = __t
             local ____temp_22 = if __t(p) then near < 85 else p
-            __O[1488] = ____temp_22
-            local ____temp_24 = if ____t_23(____temp_22) then math.abs(p.vx) > 60 or near < 34 else __O[1488]
-            __O[1489] = ____temp_24
-            local threat = if ____t_25(____temp_24) then math.abs(p.y - c.y) < 90 else __O[1489]
+            __O[1504] = ____temp_22
+            local ____temp_24 = if ____t_23(____temp_22) then math.abs(p.vx) > 60 or near < 34 else __O[1504]
+            __O[1505] = ____temp_24
+            local threat = if ____t_25(____temp_24) then math.abs(p.y - c.y) < 90 else __O[1505]
             c.timer = c.timer - dt
             if c.type == "chicken" then
                 if __t(if __t(threat) then c.state ~= "flee" else threat) then
                     c.state = "flee"
                     local ____t_27 = __t
                     local ____TS__MathSign_result_26 = __TS__MathSign(dx)
-                    __O[1490] = ____TS__MathSign_result_26
-                    c.face = if ____t_27(____TS__MathSign_result_26) then __O[1490] else 1
+                    __O[1506] = ____TS__MathSign_result_26
+                    c.face = if ____t_27(____TS__MathSign_result_26) then __O[1506] else 1
                     c.vx = c.face * (150 + hash(nil, c.seed) * 60)
                     c.vy = -160 - hash(nil, c.seed + 4) * 90
                     c.timer = 1.1
@@ -271,8 +271,8 @@ local __O = {};
                 local fear = if c.type == "sparrow" then 70 else 60 + hash(nil, c.seed + 9) * 70
                 local ____t_29 = __t
                 local ____temp_28 = if __t(p) then near < fear else p
-                __O[1491] = ____temp_28
-                local scared = if ____t_29(____temp_28) then math.abs(p.y - c.y) < 110 else __O[1491]
+                __O[1507] = ____temp_28
+                local scared = if ____t_29(____temp_28) then math.abs(p.y - c.y) < 110 else __O[1507]
                 if c.state == "fly" then
                     c.vy = c.vy - 60 * dt
                     c.x = c.x + c.vx * dt
@@ -285,8 +285,8 @@ local __O = {};
                     local ____t_32 = __t
                     local ____t_31 = __t
                     local ____le_result_30 = __le(c.timer, 0)
-                    __O[1492] = ____le_result_30
-                    if ____t_32(if ____t_31(____le_result_30) then not __t(p) or math.abs(p.x - c.hx) > 520 else __O[1492]) then
+                    __O[1508] = ____le_result_30
+                    if ____t_32(if ____t_31(____le_result_30) then not __t(p) or math.abs(p.x - c.hx) > 520 else __O[1508]) then
                         c.state = "idle"
                         c.x = c.hx
                         c.y = FLOOR
@@ -296,8 +296,8 @@ local __O = {};
                         c.state = "fly"
                         local ____t_34 = __t
                         local ____TS__MathSign_result_33 = __TS__MathSign(dx)
-                        __O[1493] = ____TS__MathSign_result_33
-                        c.face = if ____t_34(____TS__MathSign_result_33) then __O[1493] else 1
+                        __O[1509] = ____TS__MathSign_result_33
+                        c.face = if ____t_34(____TS__MathSign_result_33) then __O[1509] else 1
                         c.vx = c.face * if c.type == "sparrow" then 170 + hash(nil, c.seed) * 110 else 120 + hash(nil, c.seed) * 80
                         c.vy = -if c.type == "sparrow" then 200 else 170 - hash(nil, c.seed + 3) * 90
                     elseif c.state == "hop" then
@@ -354,8 +354,8 @@ local __O = {};
                     c.state = "wag"
                     local ____t_36 = __t
                     local ____temp_35 = -__TS__MathSign(dx)
-                    __O[1494] = ____temp_35
-                    c.face = if ____t_36(____temp_35) then __O[1494] else 1
+                    __O[1510] = ____temp_35
+                    c.face = if ____t_36(____temp_35) then __O[1510] else 1
                     c.timer = 2
                 elseif __le(c.timer, 0) then
                     c.state = if c.state == "walk" then "sit" else "walk"
@@ -373,8 +373,8 @@ local __O = {};
                     c.state = "run"
                     local ____t_38 = __t
                     local ____TS__MathSign_result_37 = __TS__MathSign(dx)
-                    __O[1495] = ____TS__MathSign_result_37
-                    c.face = if ____t_38(____TS__MathSign_result_37) then __O[1495] else 1
+                    __O[1511] = ____TS__MathSign_result_37
+                    c.face = if ____t_38(____TS__MathSign_result_37) then __O[1511] else 1
                     c.timer = 1.4
                 end
                 if c.state == "run" then
@@ -386,8 +386,8 @@ local __O = {};
                     local ____t_41 = __t
                     local ____t_40 = __t
                     local ____temp_39 = __le(c.timer, 0) and math.abs(c.x - c.hx) > 200
-                    __O[1496] = ____temp_39
-                    if ____t_41(if ____t_40(____temp_39) then not __t(p) or math.abs(p.x - c.hx) > 520 else __O[1496]) then
+                    __O[1512] = ____temp_39
+                    if ____t_41(if ____t_40(____temp_39) then not __t(p) or math.abs(p.x - c.hx) > 520 else __O[1512]) then
                         c.x = c.hx
                         c.state = "sit"
                     end
@@ -399,12 +399,12 @@ local __O = {};
                 local ____t_45 = __t
                 local ____t_43 = __t
                 local ____temp_42 = if __t(p) then near < 16 + r else p
-                __O[1497] = ____temp_42
-                local ____temp_44 = if ____t_43(____temp_42) then math.abs(p.y - c.y) < 34 else __O[1497]
-                __O[1498] = ____temp_44
-                local ____temp_46 = if ____t_45(____temp_44) then math.abs(p.vx) > 30 else __O[1498]
-                __O[1499] = ____temp_46
-                if ____t_48(if ____t_47(____temp_46) then __le(c.timer, 0) else __O[1499]) then
+                __O[1513] = ____temp_42
+                local ____temp_44 = if ____t_43(____temp_42) then math.abs(p.y - c.y) < 34 else __O[1513]
+                __O[1514] = ____temp_44
+                local ____temp_46 = if ____t_45(____temp_44) then math.abs(p.vx) > 30 else __O[1514]
+                __O[1515] = ____temp_46
+                if ____t_48(if ____t_47(____temp_46) then __le(c.timer, 0) else __O[1515]) then
                     local kick = if c.type == "ball" then 1.5 else 1.15
                     c.vx = p.vx * kick + __TS__MathSign(p.vx) * 40
                     c.vy = -(120 + math.abs(p.vx) * if c.type == "ball" then 0.7 else 0.4)
@@ -443,14 +443,14 @@ local __O = {};
             local ____t_56 = __t
             local ____t_54 = __t
             local ____temp_53 = c.type ~= "kite" and c.type ~= "ball"
-            __O[1500] = ____temp_53
-            local ____temp_55 = if ____t_54(____temp_53) then c.type ~= "can" else __O[1500]
-            __O[1501] = ____temp_55
-            local ____temp_57 = if ____t_56(____temp_55) then c.type ~= "butterfly" else __O[1501]
-            __O[1502] = ____temp_57
-            local ____temp_59 = if ____t_58(____temp_57) then c.state ~= "fly" else __O[1502]
-            __O[1503] = ____temp_59
-            if ____t_61(if ____t_60(____temp_59) then c.state ~= "away" else __O[1503]) then
+            __O[1516] = ____temp_53
+            local ____temp_55 = if ____t_54(____temp_53) then c.type ~= "can" else __O[1516]
+            __O[1517] = ____temp_55
+            local ____temp_57 = if ____t_56(____temp_55) then c.type ~= "butterfly" else __O[1517]
+            __O[1518] = ____temp_57
+            local ____temp_59 = if ____t_58(____temp_57) then c.state ~= "fly" else __O[1518]
+            __O[1519] = ____temp_59
+            if ____t_61(if ____t_60(____temp_59) then c.state ~= "away" else __O[1519]) then
                 c.x = clamp(nil, c.x, c.hx - 260, c.hx + 260)
             end
         end
@@ -1373,18 +1373,18 @@ local __O = {};
         local ____t_64 = __t
         local ____t_63 = __t
         local ____temp_62 = not __t(__len(list))
-        __O[1504] = ____temp_62
-        if ____t_64(if ____t_63(____temp_62) then __O[1504] else s.arena) then
+        __O[1520] = ____temp_62
+        if ____t_64(if ____t_63(____temp_62) then __O[1520] else s.arena) then
             return
         end
         local ____t_66 = __t
         local ____TS__Number_result_65 = __TS__Number(s.time)
-        __O[1505] = ____TS__Number_result_65
-        local t = if ____t_66(____TS__Number_result_65) then __O[1505] else 0
+        __O[1521] = ____TS__Number_result_65
+        local t = if ____t_66(____TS__Number_result_65) then __O[1521] else 0
         local ____t_68 = __t
         local ____TS__Number_result_67 = __TS__Number(s.camera)
-        __O[1506] = ____TS__Number_result_67
-        local cam = if ____t_68(____TS__Number_result_67) then __O[1506] else 0
+        __O[1522] = ____TS__Number_result_67
+        local cam = if ____t_68(____TS__Number_result_67) then __O[1522] else 0
         for ____, k in __iterar((list)) do
             if __t(__lt(k.x, cam - 80) or __gt(k.x, cam + 1040)) then
                 continue
@@ -1396,10 +1396,10 @@ local __O = {};
             local ____t_72 = __t
             local ____t_70 = __t
             local ____temp_69 = if __t(s.gapAt) then __ge(k.y, FLOOR - 1) else s.gapAt
-            __O[1507] = ____temp_69
-            local ____temp_71 = if ____t_70(____temp_69) then s:gapAt(k.x) else __O[1507]
-            __O[1508] = ____temp_71
-            if ____t_73(if ____t_72(____temp_71) then k.type ~= "kite" else __O[1508]) then
+            __O[1523] = ____temp_69
+            local ____temp_71 = if ____t_70(____temp_69) then s:gapAt(k.x) else __O[1523]
+            __O[1524] = ____temp_71
+            if ____t_73(if ____t_72(____temp_71) then k.type ~= "kite" else __O[1524]) then
                 continue
             end
             repeat

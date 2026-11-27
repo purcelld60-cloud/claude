@@ -9,7 +9,7 @@ local __TS__Iterator = ____lualib.__TS__Iterator
 local ____exports = {}
 local __O = {};
 (function()
-    local som, apertar, nota, parcial, desenhar, seta, tecla, fechar, LW, LH, BEAT, DURACAO, LINHA, VEL, META, CORES, TECLAS, R, lx, box, ctx, raf, jogo, aoFim, audio, cfg
+    local som, apertar, nota, parcial, fundo, desenhar, tecla, fechar, LW, LH, BEAT, DURACAO, LINHA, VEL, META, CORES, TECLAS, R, lx, TAU, box, ctx, raf, jogo, aoFim, audio, cfg, fundoCv, ROUPAS, PELES
     function som(self, f, d, tipo, vol)
         if d == nil then
             d = 0.07
@@ -55,8 +55,8 @@ local __O = {};
         local ____t_11 = __t
         local ____t_10 = __t
         local ____temp_9 = not __t(jogo)
-        __O[1396] = ____temp_9
-        if ____t_11(if ____t_10(____temp_9) then __O[1396] else jogo.fim) then
+        __O[1411] = ____temp_9
+        if ____t_11(if ____t_10(____temp_9) then __O[1411] else jogo.fim) then
             return
         end
         __set(jogo.trilha, lane, 0.18)
@@ -73,6 +73,10 @@ local __O = {};
             end
         end
         if __t(if __t(melhor) then dist <= 0.16 else melhor) then
+            local ____set_13 = __set
+            local ____temp_12 = if __t(jogo.acerto) then jogo.acerto else __arrL({0, 0, 0, 0}, 4)
+            jogo.acerto = ____temp_12
+            ____set_13(____temp_12, lane, 0.3)
             melhor.ok = if dist <= 0.06 then 1 else 0.7
             jogo.combo = jogo.combo + 1
             jogo.melhorCombo = math.max(jogo.melhorCombo, jogo.combo)
@@ -115,11 +119,328 @@ local __O = {};
             0
         ) / __len(n) * 100 + 0.5) else 100
     end
+    function fundo(self)
+        if __t(fundoCv) then
+            return fundoCv
+        end
+        local PK = window.PixelKit
+        fundoCv = window.document:createElement("canvas")
+        fundoCv.width = LW
+        fundoCv.height = LH
+        local c = fundoCv:getContext("2d")
+        c.imageSmoothingEnabled = false
+        PK:faixas(
+            c,
+            0,
+            0,
+            LW,
+            LH,
+            __arrL({
+                "#0a0614",
+                "#0e0818",
+                "#120a1e",
+                "#160c24",
+                "#1a0e2a",
+                "#1e1030",
+                "#221236",
+                "#26143a"
+            }, 8)
+        )
+        do
+            local y = 16
+            while y < 230 do
+                do
+                    local x = __mod(y / 6, 2) * 6
+                    while x < 280 do
+                        R(
+                            nil,
+                            c,
+                            x,
+                            y,
+                            11,
+                            1,
+                            "rgba(0,0,0,.35)"
+                        )
+                        R(
+                            nil,
+                            c,
+                            x + 11,
+                            y,
+                            1,
+                            6,
+                            "rgba(0,0,0,.3)"
+                        )
+                        x = x + 12
+                    end
+                end
+                y = y + 6
+            end
+        end
+        R(
+            nil,
+            c,
+            0,
+            2,
+            282,
+            2,
+            "#5a5a6a"
+        )
+        R(
+            nil,
+            c,
+            0,
+            12,
+            282,
+            2,
+            "#5a5a6a"
+        )
+        do
+            local x = 0
+            while x < 282 do
+                do
+                    local k = 0
+                    while k < 9 do
+                        R(
+                            nil,
+                            c,
+                            x + k / 2,
+                            12 - k,
+                            1,
+                            1,
+                            "#4a4a58"
+                        )
+                        R(
+                            nil,
+                            c,
+                            x + 9 - k / 2,
+                            12 - k,
+                            1,
+                            1,
+                            "#4a4a58"
+                        )
+                        k = k + 1
+                    end
+                end
+                x = x + 10
+            end
+        end
+        for ____, x in __iterar((__arrL({
+            30,
+            85,
+            140,
+            195,
+            250
+        }, 5))) do
+            R(
+                nil,
+                c,
+                x - 4,
+                14,
+                9,
+                7,
+                "#2a2a34"
+            )
+            R(
+                nil,
+                c,
+                x - 3,
+                20,
+                7,
+                2,
+                "#5a5a6a"
+            )
+            R(
+                nil,
+                c,
+                x - 2,
+                21,
+                5,
+                1,
+                "#e8e8f0"
+            )
+            R(
+                nil,
+                c,
+                x,
+                13,
+                1,
+                2,
+                "#3a3a44"
+            )
+        end
+        PK:painel(
+            c,
+            12,
+            46,
+            256,
+            106,
+            {fundo = "#05030a", borda = "#3a3048", luz = "rgba(255,255,255,.12)", sombra = false}
+        )
+        do
+            local y = 50
+            while y < 148 do
+                R(
+                    nil,
+                    c,
+                    16,
+                    y,
+                    248,
+                    1,
+                    "rgba(255,255,255,.03)"
+                )
+                y = y + 2
+            end
+        end
+        for ____, x0 in __iterar((__arrL({0, 260}, 2))) do
+            do
+                local k = 0
+                while k < 3 do
+                    local y = 156 + k * 25
+                    R(
+                        nil,
+                        c,
+                        x0,
+                        y,
+                        22,
+                        24,
+                        "#16121e"
+                    )
+                    R(
+                        nil,
+                        c,
+                        x0,
+                        y,
+                        22,
+                        1,
+                        "#3a3448"
+                    )
+                    R(
+                        nil,
+                        c,
+                        x0 + 1,
+                        y + 1,
+                        1,
+                        22,
+                        "#2a2436"
+                    )
+                    do
+                        local yy = -6
+                        while yy <= 6 do
+                            local w = math.floor(math.sqrt(36 - yy * yy) + 0.5)
+                            R(
+                                nil,
+                                c,
+                                x0 + 11 - w,
+                                y + 12 + yy,
+                                w * 2,
+                                1,
+                                "#0a080e"
+                            )
+                            yy = yy + 1
+                        end
+                    end
+                    do
+                        local yy = -3
+                        while yy <= 3 do
+                            local w = math.floor(math.sqrt(9 - yy * yy) + 0.5)
+                            R(
+                                nil,
+                                c,
+                                x0 + 11 - w,
+                                y + 12 + yy,
+                                w * 2,
+                                1,
+                                "#2a2436"
+                            )
+                            yy = yy + 1
+                        end
+                    end
+                    R(
+                        nil,
+                        c,
+                        x0 + 10,
+                        y + 11,
+                        2,
+                        2,
+                        "#5a5468"
+                    )
+                    k = k + 1
+                end
+            end
+        end
+        R(
+            nil,
+            c,
+            0,
+            228,
+            282,
+            2,
+            "#5a4a6a"
+        )
+        R(
+            nil,
+            c,
+            0,
+            230,
+            282,
+            14,
+            "#1a1428"
+        )
+        do
+            local x = 0
+            while x < 282 do
+                R(
+                    nil,
+                    c,
+                    x,
+                    231,
+                    19,
+                    12,
+                    "#221a32"
+                )
+                x = x + 20
+            end
+        end
+        PK:painel(
+            c,
+            282,
+            2,
+            196,
+            266,
+            {fundo = "#0a0614", borda = "#4a2a5a", luz = "rgba(255,255,255,.1)", sombra = false}
+        )
+        do
+            local i = 0
+            while i < 4 do
+                R(
+                    nil,
+                    c,
+                    lx(nil, i) - 15,
+                    6,
+                    30,
+                    258,
+                    "rgba(255,255,255,.025)"
+                )
+                R(
+                    nil,
+                    c,
+                    lx(nil, i) - 16,
+                    6,
+                    1,
+                    258,
+                    "#1e1430"
+                )
+                i = i + 1
+            end
+        end
+        return fundoCv
+    end
     function desenhar(self)
         local c = ctx
         local t = jogo.t
         local beat = math.floor(t / BEAT)
         local fase = __mod(t, BEAT) / BEAT
+        local PK = window.PixelKit
         c:setTransform(
             1,
             0,
@@ -129,11 +450,57 @@ local __O = {};
             0
         )
         c.imageSmoothingEnabled = false
-        local g = c:createLinearGradient(0, 0, 0, LH)
-        g:addColorStop(0, "#0a0618")
-        g:addColorStop(1, "#2a1438")
-        c.fillStyle = g
-        c:fillRect(0, 0, LW, LH)
+        if not __t(PK) then
+            R(
+                nil,
+                c,
+                0,
+                0,
+                LW,
+                LH,
+                "#0a0618"
+            )
+            return
+        end
+        c:drawImage(
+            fundo(nil),
+            0,
+            0
+        )
+        do
+            local k = 0
+            while k < 30 do
+                local h = math.floor((math.abs(math.sin(t * 3 + k * 0.7)) * 0.6 + (1 - fase) * 0.4) * (20 + PK:hash(k + beat) * 46) + 0.5)
+                do
+                    local y = 0
+                    while y < h do
+                        R(
+                            nil,
+                            c,
+                            20 + k * 8,
+                            146 - y,
+                            6,
+                            2,
+                            if y > 50 then "#ff4fa8" else if y > 30 then "#ffd24a" else __get(
+                                CORES,
+                                __mod(k + beat, 4)
+                            )
+                        )
+                        y = y + 3
+                    end
+                end
+                k = k + 1
+            end
+        end
+        PK:contorno(
+            c,
+            cfg.titulo,
+            140,
+            if __t(cfg.versos) then 60 else 64,
+            8,
+            "#ffffff",
+            "#3a1a4a"
+        )
         c:save()
         c.globalCompositeOperation = "lighter"
         do
@@ -141,19 +508,20 @@ local __O = {};
             while i < 5 do
                 local x = 30 + i * 55
                 local a = math.sin(t * 0.9 + i) * 0.4
-                c.globalAlpha = 0.12
+                c.globalAlpha = 0.1
                 c.fillStyle = __get(
                     CORES,
                     __mod(i + beat, 4)
                 )
                 c:beginPath()
-                c:moveTo(x, 0)
+                c:moveTo(x - 2, 22)
+                c:lineTo(x + 2, 22)
                 c:lineTo(
-                    x + math.sin(a) * 260 - 30,
+                    x + math.sin(a) * 200 + 26,
                     230
                 )
                 c:lineTo(
-                    x + math.sin(a) * 260 + 30,
+                    x + math.sin(a) * 200 - 26,
                     230
                 )
                 c:closePath()
@@ -162,59 +530,70 @@ local __O = {};
             end
         end
         c:restore()
-        R(
-            nil,
-            c,
-            20,
-            18,
-            230,
-            26,
-            "#120e1e"
-        )
-        c.strokeStyle = "#ff4fa8"
-        c.lineWidth = 1
-        c:strokeRect(20.5, 18.5, 229, 25)
-        c.font = "bold 12px monospace"
-        c.textAlign = "center"
-        c.textBaseline = "middle"
-        c.fillStyle = "#ffd24a"
-        c:fillText(cfg.titulo, 135, 31)
-        R(
-            nil,
-            c,
-            0,
-            230,
-            280,
-            40,
-            "#1a1428"
-        )
+        if fase < 0.2 then
+            for ____, x0 in __iterar((__arrL({0, 260}, 2))) do
+                do
+                    local k = 0
+                    while k < 3 do
+                        local y = 168 + k * 25
+                        do
+                            local a = 0
+                            while a < 16 do
+                                R(
+                                    nil,
+                                    c,
+                                    x0 + 11 + math.cos(a / 16 * TAU) * 7,
+                                    y + math.sin(a / 16 * TAU) * 7,
+                                    1,
+                                    1,
+                                    "#ff4fa8"
+                                )
+                                a = a + 1
+                            end
+                        end
+                        k = k + 1
+                    end
+                end
+            end
+        end
         do
             local x = 0
-            while x < 280 do
-                R(
-                    nil,
-                    c,
-                    x,
-                    230,
-                    19,
-                    4,
-                    if __t(__mod(x / 20 + beat, 3)) then "#2a2040" else __get(
-                        CORES,
-                        __mod(x / 20 + beat, 4)
+            while x < 282 do
+                if __mod(x / 20 + beat, 3) == 0 then
+                    R(
+                        nil,
+                        c,
+                        x,
+                        231,
+                        19,
+                        12,
+                        __get(
+                            CORES,
+                            __mod(x / 20 + beat, 4)
+                        )
                     )
-                )
+                    R(
+                        nil,
+                        c,
+                        x,
+                        231,
+                        19,
+                        2,
+                        "#ffffff"
+                    )
+                end
                 x = x + 20
             end
         end
         do
             pcall(function()
-                local ____opt_14 = window.Art
-                if ____opt_14 ~= nil then
-                    ____opt_14 = ____opt_14.drawCharacter
+                local ____opt_16 = window.Art
+                if ____opt_16 ~= nil then
+                    ____opt_16 = ____opt_16.drawCharacter
                 end
-                if ____opt_14 ~= nil then
-                    ____opt_14(
-                        ____opt_14,
+                if ____opt_16 ~= nil then
+                    ____opt_16(
+                        ____opt_16,
                         c,
                         cfg.rival,
                         52,
@@ -233,13 +612,13 @@ local __O = {};
                     )
                 end
                 local pula = math.abs(math.sin(t * math.pi / BEAT)) * 6 + jogo.pulo * 14
-                local ____opt_18 = window.Art
-                if ____opt_18 ~= nil then
-                    ____opt_18 = ____opt_18.drawCharacter
+                local ____opt_20 = window.Art
+                if ____opt_20 ~= nil then
+                    ____opt_20 = ____opt_20.drawCharacter
                 end
-                if ____opt_18 ~= nil then
-                    ____opt_18(
-                        ____opt_18,
+                if ____opt_20 ~= nil then
+                    ____opt_20(
+                        ____opt_20,
                         c,
                         "daroca",
                         138,
@@ -272,13 +651,13 @@ local __O = {};
                         4,
                         "#6a5a3a"
                     )
-                    local ____opt_22 = window.Art
-                    if ____opt_22 ~= nil then
-                        ____opt_22 = ____opt_22.drawCharacter
+                    local ____opt_24 = window.Art
+                    if ____opt_24 ~= nil then
+                        ____opt_24 = ____opt_24.drawCharacter
                     end
-                    if ____opt_22 ~= nil then
-                        ____opt_22(
-                            ____opt_22,
+                    if ____opt_24 ~= nil then
+                        ____opt_24(
+                            ____opt_24,
                             c,
                             "daroca",
                             214,
@@ -304,13 +683,22 @@ local __O = {};
                 end
             end)
         end
-        c.font = "bold 8px monospace"
-        c.fillStyle = "#ffd24a"
         if __t(cfg.premio) then
-            c:fillText(
-                __add("PRÊMIO: ", cfg.premio),
+            PK:painel(
+                c,
+                176,
+                236,
+                76,
+                14,
+                {fundo = "#2a1a08", borda = "#ffd24a", sombra = false}
+            )
+            PK:texto(
+                c,
+                cfg.premio,
                 214,
-                246
+                243,
+                8,
+                "#ffe9a8"
             )
         end
         if __t(cfg.versos) then
@@ -323,96 +711,215 @@ local __O = {};
                     __len(cfg.versos)
                 )
             )
-            R(
-                nil,
+            PK:painel(
                 c,
-                14,
-                54,
-                252,
-                30,
-                "rgba(10,6,20,.75)"
+                16,
+                74,
+                248,
+                32,
+                {fundo = "#0e0818", borda = if __t(seu) then "#3fe0ff" else "#ff4fa8", sombra = false}
             )
-            c.font = "bold 9px monospace"
-            c.textAlign = "left"
-            c.fillStyle = if __t(seu) then "#7af0ff" else "#ff9ad0"
-            c:fillText(
+            PK:texto(
+                c,
                 __add(
                     if __t(seu) then "DA ROÇA: " else "FREDDY: ",
                     __get(v, 0)
                 ),
-                20,
-                64
+                22,
+                83,
+                8,
+                if __t(seu) then "#9af4ff" else "#ffb0d8",
+                "left"
             )
-            c.fillStyle = "#f2f2ea"
-            c:fillText(
+            PK:texto(
+                c,
                 __get(v, 1),
-                20,
-                76
+                22,
+                95,
+                8,
+                "#f2f2ea",
+                "left"
             )
-            c.textAlign = "center"
+            local px = if __t(seu) then 138 else 52
+            do
+                local k = 0
+                while k < 2 do
+                    local u = __mod(t * 0.8 + k / 2, 1)
+                    local nx = math.floor(px + 12 + k * 6 + math.sin(t * 3 + k) * 2 + 0.5)
+                    local ny = math.floor(168 - u * 30 + 0.5)
+                    local cor = if __t(seu) then "#3fe0ff" else "#ff4fa8"
+                    c.globalAlpha = 1 - u
+                    R(
+                        nil,
+                        c,
+                        nx + 2,
+                        ny,
+                        1,
+                        6,
+                        cor
+                    )
+                    R(
+                        nil,
+                        c,
+                        nx,
+                        ny + 5,
+                        3,
+                        2,
+                        cor
+                    )
+                    R(
+                        nil,
+                        c,
+                        nx + 3,
+                        ny,
+                        2,
+                        1,
+                        cor
+                    )
+                    R(
+                        nil,
+                        c,
+                        nx + 4,
+                        ny + 1,
+                        1,
+                        1,
+                        cor
+                    )
+                    c.globalAlpha = 1
+                    k = k + 1
+                end
+            end
         end
         do
             local k = 0
-            while k < 14 do
-                local x = 8 + k * 20
-                local y = 262 - math.abs(math.sin(t * 4 + k)) * 5
-                c.fillStyle = "#05030a"
-                c:beginPath()
-                c:arc(
+            while k < 24 do
+                local x = 2 + k * 11.5
+                local grupo = __mod(k + beat, 3)
+                local pula = grupo == 0 and fase < 0.5
+                local y = 250 + __mod(k, 2) * 4
+                local ____PK_pessoa_30 = PK.pessoa
+                local ____get_result_28 = __get(
+                    PELES,
+                    __mod(k, 5)
+                )
+                local ____get_result_29 = __get(
+                    ROUPAS,
+                    __mod(k, 8)
+                )
+                local ____t_27 = __t
+                local ____temp_26 = __mod(k, 4) == 1
+                __O[1412] = ____temp_26
+                ____PK_pessoa_30(
+                    PK,
+                    c,
                     x,
                     y,
-                    7,
-                    0,
-                    math.pi * 2
+                    ____get_result_28,
+                    ____get_result_29,
+                    "#1c1410",
+                    pula,
+                    if ____t_27(____temp_26) then __O[1412] else if __t(pula) then __mod(k, 2) == 0 else pula
                 )
-                __call(c, "fill")
-                R(
-                    nil,
-                    c,
-                    x - 8,
-                    y + 3,
-                    16,
-                    10,
-                    "#05030a"
-                )
+                if __mod(k, 6) == 2 then
+                    R(
+                        nil,
+                        c,
+                        x + 7,
+                        y - 6,
+                        2,
+                        3,
+                        "#e8e8f0"
+                    )
+                    if fase < 0.5 then
+                        R(
+                            nil,
+                            c,
+                            x + 7,
+                            y - 7,
+                            2,
+                            1,
+                            "#ffffff"
+                        )
+                    end
+                end
                 k = k + 1
             end
         end
         do
             local i = 0
             while i < 4 do
-                R(
-                    nil,
-                    c,
-                    lx(nil, i) - 15,
-                    0,
-                    30,
-                    LH,
-                    "rgba(10,6,20,.6)"
+                local on = __gt(
+                    __get(jogo.trilha, i),
+                    0
                 )
+                if __t(on) then
+                    c.globalAlpha = 0.25
+                    R(
+                        nil,
+                        c,
+                        lx(nil, i) - 14,
+                        6,
+                        28,
+                        LINHA,
+                        __get(CORES, i)
+                    )
+                    c.globalAlpha = 1
+                end
                 R(
                     nil,
                     c,
                     lx(nil, i) - 16,
-                    LINHA - 2,
+                    LINHA - 1,
                     32,
-                    4,
-                    if __gt(
-                        __get(jogo.trilha, i),
-                        0
-                    ) then __get(CORES, i) else "#3a2a4a"
+                    2,
+                    if __t(on) then __get(CORES, i) else "#3a2a4a"
                 )
-                seta(
-                    nil,
-                    lx(nil, i),
-                    LINHA,
-                    i,
-                    if __gt(
-                        __get(jogo.trilha, i),
-                        0
-                    ) then "#ffffff" else "#5a4a6a",
-                    1
-                )
+                if __t(on) then
+                    PK:seta(
+                        c,
+                        lx(nil, i),
+                        LINHA,
+                        i,
+                        "#ffffff",
+                        2,
+                        __get(CORES, i)
+                    )
+                else
+                    PK:alvo(
+                        c,
+                        lx(nil, i),
+                        LINHA,
+                        i,
+                        "#8a7a9a",
+                        2
+                    )
+                end
+                local ac = if __t(jogo.acerto) then __get(jogo.acerto, i) else 0
+                if __gt(ac, 0) then
+                    local r = math.floor(6 + (1 - ac / 0.3) * 14 + 0.5)
+                    do
+                        local a = 0
+                        while a < 12 do
+                            R(
+                                nil,
+                                c,
+                                lx(nil, i) + math.cos(a / 12 * TAU) * r,
+                                LINHA + math.sin(a / 12 * TAU) * r,
+                                2,
+                                2,
+                                __get(CORES, i)
+                            )
+                            a = a + 1
+                        end
+                    end
+                    PK:brilho4(
+                        c,
+                        lx(nil, i),
+                        LINHA,
+                        5,
+                        "#ffffff"
+                    )
+                end
                 i = i + 1
             end
         end
@@ -424,112 +931,100 @@ local __O = {};
             if __t(y < -14 or y > LH + 14) then
                 continue
             end
-            seta(
-                nil,
+            PK:seta(
+                c,
                 lx(nil, n.lane),
                 y,
                 n.lane,
                 if n.ok == 0 then "#5a3a3a" else __get(CORES, n.lane),
-                1 + if math.abs(n.t - t) < 0.1 then 0.15 else 0
+                2
             )
         end
         local pct = if __t(jogo.fim) then nota(nil) else parcial(nil)
-        c.font = "bold 11px monospace"
-        c.textAlign = "center"
-        c.fillStyle = if pct >= META then "#ffe9a8" else "#ff9a7a"
-        c:fillText(
-            ((("ACERTO " .. tostring(pct)) .. "% · META ") .. tostring(META)) .. "%",
-            360,
-            10
+        PK:painel(
+            c,
+            290,
+            4,
+            180,
+            16,
+            {fundo = "#120a1e", borda = if pct >= META then "#7af07a" else "#ff9a7a", sombra = false}
+        )
+        PK:texto(
+            c,
+            ((("ACERTO " .. tostring(pct)) .. "%  META ") .. tostring(META)) .. "%",
+            380,
+            12,
+            8,
+            if pct >= META then "#c8ffc8" else "#ffd0c0"
         )
         if __gt(jogo.combo, 2) then
-            c.font = "bold 14px monospace"
-            c.fillStyle = "#ffd24a"
-            c:fillText(
+            PK:contorno(
+                c,
                 __add("COMBO ", jogo.combo),
                 360,
-                252
+                240,
+                if __gt(jogo.pulo, 0.15) then 16 else 8,
+                "#ffd24a",
+                "#3a1a0a"
             )
         end
         if __gt(jogo.msgT, 0) then
-            c.font = "bold 14px monospace"
-            c.fillStyle = if jogo.msg == "FORA DO RITMO" then "#ff5a4a" else "#7af07a"
-            c:fillText(jogo.msg, 360, 130)
+            PK:contorno(
+                c,
+                jogo.msg,
+                360,
+                130,
+                8,
+                if jogo.msg == "FORA DO RITMO" then "#ff7a6a" else "#9aff9a",
+                "#0a0614"
+            )
         end
-        local prog = math.min(1, t / DURACAO)
-        R(
-            nil,
+        PK:barra(
             c,
-            290,
-            262,
-            160,
-            4,
-            "#2a2040"
-        )
-        R(
-            nil,
-            c,
-            290,
-            262,
-            160 * prog,
-            4,
-            "#ff4fa8"
+            292,
+            258,
+            156,
+            5,
+            math.min(1, t / DURACAO),
+            {gomos = 26, cheio = "#ff4fa8", vazio = "#2a2040", borda = "#0a0614"}
         )
         if __lt(jogo.t, 2) then
-            c.font = "bold 16px monospace"
-            c.fillStyle = "#ffffff"
-            c:fillText(if __lt(jogo.t, 1) then "PREPARA..." else "VAI!", 360, 100)
+            PK:contorno(
+                c,
+                if __lt(jogo.t, 1) then "PREPARA..." else "VAI!",
+                360,
+                100,
+                16,
+                "#ffffff",
+                "#3a1a4a"
+            )
         end
         if __t(jogo.fim) then
-            R(
-                nil,
+            PK:painel(
                 c,
-                0,
+                40,
                 100,
-                LW,
-                60,
-                "rgba(0,0,0,.7)"
+                400,
+                64,
+                {fundo = "#0e0818", borda = if pct >= META then "#7af07a" else "#ffd24a", rebite = "#ff4fa8"}
             )
-            c.font = "bold 18px monospace"
-            c.fillStyle = if pct >= META then "#7af07a" else "#ffd24a"
-            c:fillText(if pct >= META then (("NOTA " .. tostring(pct)) .. "%! ") .. tostring(cfg.ganhou) else ("NOTA " .. tostring(pct)) .. "%. FALTOU POUCO!", LW / 2, 130)
+            PK:texto(
+                c,
+                ("NOTA " .. tostring(pct)) .. "%",
+                LW / 2,
+                120,
+                16,
+                if pct >= META then "#b8ffb8" else "#ffe9a8"
+            )
+            PK:texto(
+                c,
+                if pct >= META then cfg.ganhou else "FALTOU POUCO!",
+                LW / 2,
+                144,
+                8,
+                "#fff6dc"
+            )
         end
-    end
-    function seta(self, x, y, i, cor, esc)
-        local c = ctx
-        c:save()
-        c:translate(
-            math.floor(x + 0.5),
-            math.floor(y + 0.5)
-        )
-        c:scale(esc, esc)
-        c:rotate(__get(
-            __arrL({math.pi, math.pi / 2, -math.pi / 2, 0}, 4),
-            i
-        ))
-        c.fillStyle = "#05030a"
-        c:beginPath()
-        c:moveTo(12, 0)
-        c:lineTo(0, -12)
-        c:lineTo(0, -5)
-        c:lineTo(-11, -5)
-        c:lineTo(-11, 5)
-        c:lineTo(0, 5)
-        c:lineTo(0, 12)
-        c:closePath()
-        __call(c, "fill")
-        c.fillStyle = cor
-        c:beginPath()
-        c:moveTo(9, 0)
-        c:lineTo(1, -8)
-        c:lineTo(1, -3)
-        c:lineTo(-9, -3)
-        c:lineTo(-9, 3)
-        c:lineTo(1, 3)
-        c:lineTo(1, 8)
-        c:closePath()
-        __call(c, "fill")
-        c:restore()
     end
     function tecla(self, e)
         if not __t(box) then
@@ -564,10 +1059,10 @@ local __O = {};
         box = nil
         jogo = nil
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-        local ____opt_26 = window.document:getElementById("gameCanvas")
-        local ____opt_24 = ____opt_26 and ____opt_26.focus
-        if ____opt_24 ~= nil then
-            ____opt_24(____opt_26)
+        local ____opt_33 = window.document:getElementById("gameCanvas")
+        local ____opt_31 = ____opt_33 and ____opt_33.focus
+        if ____opt_31 ~= nil then
+            ____opt_31(____opt_33)
         end
         local fn = aoFim
         aoFim = nil
@@ -618,6 +1113,7 @@ local __O = {};
         )
     end
     lx = function(____, i) return 300 + i * 40 end
+    TAU = math.pi * 2
     box = nil
     local cv = nil
     ctx = nil
@@ -651,8 +1147,8 @@ local __O = {};
                 local ____t_2 = __t
                 local ____t_1 = __t
                 local ____temp_0 = __mod(compasso, 2) == 1 and __mod(b, 2) == 1
-                __O[1395] = ____temp_0
-                if ____t_2(if ____t_1(____temp_0) then rnd(nil) < 0.55 else __O[1395]) then
+                __O[1410] = ____temp_0
+                if ____t_2(if ____t_1(____temp_0) then rnd(nil) < 0.55 else __O[1410]) then
                     __call(
                         notas,
                         "push",
@@ -711,6 +1207,16 @@ local __O = {};
                         __get(jogo.trilha, i) - dt
                     )
                 )
+                if __t(jogo.acerto) then
+                    __set(
+                        jogo.acerto,
+                        i,
+                        math.max(
+                            0,
+                            __get(jogo.acerto, i) - dt
+                        )
+                    )
+                end
                 i = i + 1
             end
         end
@@ -731,6 +1237,24 @@ local __O = {};
         end
         raf = window:requestAnimationFrame(quadro)
     end
+    fundoCv = nil
+    ROUPAS = __arrL({
+        "#e8433a",
+        "#3a6aa8",
+        "#f2c94c",
+        "#3c8a5a",
+        "#c84a8a",
+        "#f2f2ee",
+        "#e8843a",
+        "#6a4ac8"
+    }, 8)
+    PELES = __arrL({
+        "#f0c8a0",
+        "#c48a62",
+        "#8a5a3c",
+        "#5a3a28",
+        "#e8b88a"
+    }, 5)
     local function montar(self)
         if __t(box) then
             return
@@ -738,7 +1262,7 @@ local __O = {};
         if not __t(window.document:getElementById("bcEstilo")) then
             local st = window.document:createElement("style")
             st.id = "bcEstilo"
-            st.textContent = ".bc-overlay{position:fixed;inset:0;z-index:9000;background:rgba(6,4,14,.86);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-family:monospace;touch-action:none;user-select:none}.bc-overlay canvas{width:min(96vw,calc(78vh*16/9),960px);aspect-ratio:16/9;image-rendering:pixelated;border:2px solid #ff4fa8;border-radius:6px;background:#0a0618}.bc-botoes{display:flex;gap:10px}.bc-botoes button{width:64px;height:56px;font:bold 26px monospace;color:#fff;background:#2a1438;border:2px solid #5a3a6a;border-radius:10px}.bc-botoes button:active{background:#5a2a6a}.bc-sair{font:bold 12px monospace;color:#ffd24a;background:transparent;border:1px solid #ffd24a;border-radius:6px;padding:6px 12px}"
+            st.textContent = ".bc-overlay{position:fixed;inset:0;z-index:9000;background:rgba(6,4,14,.86);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-family:monospace;touch-action:none;user-select:none}.bc-overlay canvas{width:min(96vw,calc(78vh*16/9),960px);aspect-ratio:16/9;image-rendering:pixelated;border:4px solid #2a1438;box-shadow:0 0 0 2px #ff4fa8,0 0 18px #ff4fa866;border-radius:0;background:#0a0618}.bc-botoes{display:flex;gap:10px}.bc-botoes button{width:64px;height:56px;font:24px Pixel,monospace;color:#fff;background:#2a1438;border:0;border-radius:0;box-shadow:0 0 0 3px currentColor,inset 0 -5px 0 #14081e,inset 0 3px 0 #5a3a6a;text-shadow:2px 2px 0 #0a0614}.bc-botoes button:active{background:#5a2a6a;transform:translateY(2px)}.bc-sair{font:8px Pixel,monospace;color:#ffd24a;background:#1a0e24;border:0;border-radius:0;padding:8px 14px;box-shadow:0 0 0 2px #ffd24a}"
             window.document.head:append(st)
         end
         box = window.document:createElement("div")
@@ -759,7 +1283,7 @@ local __O = {};
                 local b = window.document:createElement("button")
                 b.type = "button"
                 b.textContent = s
-                b.style.borderColor = __get(CORES, i)
+                b.style.color = __get(CORES, i)
                 b:setAttribute(
                     "aria-label",
                     __add(

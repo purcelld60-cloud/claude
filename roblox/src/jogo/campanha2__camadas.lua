@@ -1166,8 +1166,8 @@ local __O = {};
             local ____t_10 = __t
             local ____t_9 = __t
             local ____temp_8 = if __t(cfg.outdoors) then __mod(i, cfg.outdoors) == 2 else cfg.outdoors
-            __O[422] = ____temp_8
-            if ____t_10(if ____t_9(____temp_8) then w > 30 else __O[422]) then
+            __O[432] = ____temp_8
+            if ____t_10(if ____t_9(____temp_8) then w > 30 else __O[432]) then
                 local ____outdoorM_15 = outdoorM
                 local ____array_14 = __TS__SparseArrayNew(
                     nil,
@@ -1423,8 +1423,8 @@ local __O = {};
     local function lazy(____, id, fn)
         local ____t_26 = __t
         local ____get_result_25 = __get(MEIO, id)
-        __O[423] = ____get_result_25
-        return if ____t_26(____get_result_25) then __O[423] else __set(
+        __O[433] = ____get_result_25
+        return if ____t_26(____get_result_25) then __O[433] else __set(
             MEIO,
             id,
             fn(nil)
@@ -4343,11 +4343,11 @@ local __O = {};
                 local ____t_30 = __t
                 local ____t_29 = __t
                 local ____temp_28 = __mod(i, 3) == 1
-                __O[424] = ____temp_28
+                __O[434] = ____temp_28
                 if ____t_30(if ____t_29(____temp_28) then __mod(
                     math.floor(t * 1.5 + i),
                     4
-                ) else __O[424]) then
+                ) else __O[434]) then
                     local nx = sx + w - 26
                     R(
                         nil,
@@ -4886,11 +4886,11 @@ local __O = {};
                                 local ____t_33 = __t
                                 local ____t_32 = __t
                                 local ____gt_result_31 = __gt(nt, 0.2)
-                                __O[425] = ____gt_result_31
+                                __O[435] = ____gt_result_31
                                 __TS__SparseArrayPush(____array_34, if ____t_33(if ____t_32(____gt_result_31) then __mod(
                                     math.floor(t * 2) + math.floor(x - x0 + 0.5) / 12,
                                     3
-                                ) else __O[425]) then pick(
+                                ) else __O[435]) then pick(
                                     nil,
                                     __arrL({"#ffe39a", "#ff9a9a", "#9ad8ff", "#b8f0a0"}, 4),
                                     math.floor(x - x0 + 0.5) / 12
@@ -4940,11 +4940,11 @@ local __O = {};
                 local ____t_40 = __t
                 local ____t_37 = __t
                 local ____temp_36 = not __t(vis(nil, sx, 20))
-                __O[427] = ____temp_36
+                __O[437] = ____temp_36
                 local ____t_39 = __t
                 local ____temp_38 = id == 12 and wx > AIR.TAR - 10
-                __O[426] = ____temp_38
-                if ____t_40(if ____t_37(____temp_36) then __O[427] else if ____t_39(____temp_38) then __lt(wx, AIR.GR + 10) else __O[426]) then
+                __O[436] = ____temp_38
+                if ____t_40(if ____t_37(____temp_36) then __O[437] else if ____t_39(____temp_38) then __lt(wx, AIR.GR + 10) else __O[436]) then
                     continue
                 end
                 local y = 216 + if __mod(i, 3) == 0 then 1 else 0
@@ -5123,8 +5123,8 @@ local __O = {};
             local ____t_43 = __t
             local ____t_42 = __t
             local ____get_result_41 = __get(JAM, id)
-            __O[428] = ____get_result_41
-            if ____t_43(if ____t_42(____get_result_41) then not __t(__get(forcado, id)) else __O[428]) then
+            __O[438] = ____get_result_41
+            if ____t_43(if ____t_42(____get_result_41) then not __t(__get(forcado, id)) else __O[438]) then
                 __set(
                     jamOn,
                     id,
@@ -5139,8 +5139,8 @@ local __O = {};
         local ____t_46 = __t
         local ____t_45 = __t
         local ____get_result_44 = __get(JAM, id)
-        __O[429] = ____get_result_44
-        return not not ____t_46(if ____t_45(____get_result_44) then __get(jamOn, id) else __O[429])
+        __O[439] = ____get_result_44
+        return not not ____t_46(if ____t_45(____get_result_44) then __get(jamOn, id) else __O[439])
     end
     local CORES = __arrL({
         "#c43c3a",
@@ -5706,8 +5706,8 @@ local __O = {};
                 ),
                 "trim"
             )) > 17
-            __O[430] = ____temp_47
-            if ____t_49(if ____t_48(____temp_47) then cur else __O[430]) then
+            __O[440] = ____temp_47
+            if ____t_49(if ____t_48(____temp_47) then cur else __O[440]) then
                 __call(lines, "push", cur)
                 cur = w
             else
@@ -5895,9 +5895,9 @@ local __O = {};
         if ____opt_50 ~= nil then
             ____opt_50 = ____opt_50.gaps
         end
-        __O[431] = ____opt_50
+        __O[441] = ____opt_50
         local vaos = ____call_53(
-            if ____t_52(____opt_50) then __O[431] else __arrL({}, 0),
+            if ____t_52(____opt_50) then __O[441] else __arrL({}, 0),
             "map",
             function(____, ____bindingPattern0)
                 local gw
@@ -5921,8 +5921,8 @@ local __O = {};
                 local ____t_56 = __t
                 local ____t_55 = __t
                 local ____temp_54 = not __t(vis(nil, sx, 70))
-                __O[432] = ____temp_54
-                if ____t_56(if ____t_55(____temp_54) then __O[432] else __call(
+                __O[442] = ____temp_54
+                if ____t_56(if ____t_55(____temp_54) then __O[442] else __call(
                     vaos,
                     "some",
                     function(____, ____bindingPattern0)
@@ -6194,11 +6194,11 @@ local __O = {};
             local ____t_59 = __t
             local ____t_58 = __t
             local ____temp_57 = quem == "c"
-            __O[433] = ____temp_57
+            __O[443] = ____temp_57
             if ____t_59(if ____t_58(____temp_57) then __mod(
                 math.floor(t * 5),
                 2
-            ) else __O[433]) then
+            ) else __O[443]) then
                 do
                     local k = 0
                     while k < 3 do
@@ -6851,43 +6851,43 @@ local __O = {};
             FG,
             __get(FGSET, id)
         )
-        __O[434] = ____get_result_60
-        local set = if ____t_61(____get_result_60) then __O[434] else if __t(__get(FGDRAW, id)) then __arrL({}, 0) else nil
+        __O[444] = ____get_result_60
+        local set = if ____t_61(____get_result_60) then __O[444] else if __t(__get(FGDRAW, id)) then __arrL({}, 0) else nil
         local ____t_66 = __t
         local ____t_65 = __t
         local ____t_63 = __t
         local ____temp_62 = not __t(set)
-        __O[435] = ____temp_62
-        local ____temp_64 = if ____t_63(____temp_62) then __O[435] else o.arena
-        __O[436] = ____temp_64
-        if ____t_66(if ____t_65(____temp_64) then __O[436] else o.room) then
+        __O[445] = ____temp_62
+        local ____temp_64 = if ____t_63(____temp_62) then __O[445] else o.arena
+        __O[446] = ____temp_64
+        if ____t_66(if ____t_65(____temp_64) then __O[446] else o.room) then
             return
         end
         if not __t(fgCv) then
             do
                 do
-                    __O[437] = __iter(mk(nil, LW, LH))
-                    fgCv = __get(__O[437], 0)
+                    __O[447] = __iter(mk(nil, LW, LH))
+                    fgCv = __get(__O[447], 0)
                 end
-                fgC = __get(__O[437], 1)
+                fgC = __get(__O[447], 1)
             end
-            local ____ = __O[437]
+            local ____ = __O[447]
         end
         local c = fgC
         local ____t_68 = __t
         local ____TS__Number_result_67 = __TS__Number(o.camera)
-        __O[438] = ____TS__Number_result_67
-        local cam = if ____t_68(____TS__Number_result_67) then __O[438] else 0
+        __O[448] = ____TS__Number_result_67
+        local cam = if ____t_68(____TS__Number_result_67) then __O[448] else 0
         local camL = cam / 2
         local ____t_70 = __t
         local ____TS__Number_result_69 = __TS__Number(o.time)
-        __O[439] = ____TS__Number_result_69
-        local t = if ____t_70(____TS__Number_result_69) then __O[439] else 0
+        __O[449] = ____TS__Number_result_69
+        local t = if ____t_70(____TS__Number_result_69) then __O[449] else 0
         local k = 1.45
         local ____t_72 = __t
         local ____temp_71 = window.CampanhaCenarios:largura(id)
-        __O[440] = ____temp_71
-        local W = if ____t_72(____temp_71) then __O[440] else 4000 / 2 * k
+        __O[450] = ____temp_71
+        local W = if ____t_72(____temp_71) then __O[450] else 4000 / 2 * k
         c:clearRect(0, 0, LW, LH)
         if __t(__len(set)) then
             do
@@ -6926,8 +6926,8 @@ local __O = {};
         if ____opt_77 ~= nil then
             ____opt_result_79 = ____opt_77(____opt_77)
         end
-        __O[441] = ____opt_result_79
-        local s = if ____t_80(____opt_result_79) then __O[441] else {night = 0}
+        __O[451] = ____opt_result_79
+        local s = if ____t_80(____opt_result_79) then __O[451] else {night = 0}
         local a = night(nil, s)
         c:save()
         c.globalCompositeOperation = "source-atop"

@@ -149,8 +149,8 @@ local __O = {};
         local ____t_21 = __t
         local ____t_20 = __t
         local ____temp_19 = not __t(name) or not __t(q)
-        __O[1286] = ____temp_19
-        if ____t_21(if ____t_20(____temp_19) then __O[1286] else type(q) ~= "table") then
+        __O[1298] = ____temp_19
+        if ____t_21(if ____t_20(____temp_19) then __O[1298] else type(q) ~= "table") then
             return nil
         end
         local s = state(nil, q)
@@ -250,14 +250,14 @@ local __O = {};
         local ____t_25 = __t
         local ____t_23 = __t
         local ____temp_22 = not __t(q) or type(q) ~= "table"
-        __O[1287] = ____temp_22
-        local ____temp_24 = if ____t_23(____temp_22) then __O[1287] else not __t(plan)
-        __O[1288] = ____temp_24
-        local ____temp_26 = if ____t_25(____temp_24) then __O[1288] else type(plan) ~= "table"
-        __O[1289] = ____temp_26
-        local ____temp_28 = if ____t_27(____temp_26) then __O[1289] else not __t(__call(issued, "has", plan))
-        __O[1290] = ____temp_28
-        if ____t_30(if ____t_29(____temp_28) then __O[1290] else __call(completed, "has", plan)) then
+        __O[1299] = ____temp_22
+        local ____temp_24 = if ____t_23(____temp_22) then __O[1299] else not __t(plan)
+        __O[1300] = ____temp_24
+        local ____temp_26 = if ____t_25(____temp_24) then __O[1300] else type(plan) ~= "table"
+        __O[1301] = ____temp_26
+        local ____temp_28 = if ____t_27(____temp_26) then __O[1301] else not __t(__call(issued, "has", plan))
+        __O[1302] = ____temp_28
+        if ____t_30(if ____t_29(____temp_28) then __O[1302] else __call(completed, "has", plan)) then
             return {ok = false, changed = false, message = "Essa conversa não tem uma entrega pendente."}
         end
         __call(completed, "add", plan)
@@ -275,10 +275,10 @@ local __O = {};
             local ____t_34 = __t
             local ____t_32 = __t
             local ____temp_31 = not __t(s.accepted)
-            __O[1291] = ____temp_31
-            local ____temp_33 = if ____t_32(____temp_31) then __O[1291] else s.unlocked
-            __O[1292] = ____temp_33
-            if ____t_35(if ____t_34(____temp_33) then __O[1292] else s.needed ~= 0) then
+            __O[1303] = ____temp_31
+            local ____temp_33 = if ____t_32(____temp_31) then __O[1303] else s.unlocked
+            __O[1304] = ____temp_33
+            if ____t_35(if ____t_34(____temp_33) then __O[1304] else s.needed ~= 0) then
                 return {ok = false, changed = false, message = "Recolha as três latas antes de receber o Bivolt."}
             end
             q.bivoltUnlocked = true
@@ -297,10 +297,10 @@ local __O = {};
             local ____t_39 = __t
             local ____t_37 = __t
             local ____temp_36 = not __t(s.unlocked) or s.charges >= MAX_CHARGES
-            __O[1293] = ____temp_36
-            local ____temp_38 = if ____t_37(____temp_36) then __O[1293] else not __t(bag)
-            __O[1294] = ____temp_38
-            if ____t_40(if ____t_39(____temp_38) then __O[1294] else materials(nil, bag) < 3) then
+            __O[1305] = ____temp_36
+            local ____temp_38 = if ____t_37(____temp_36) then __O[1305] else not __t(bag)
+            __O[1306] = ____temp_38
+            if ____t_40(if ____t_39(____temp_38) then __O[1306] else materials(nil, bag) < 3) then
                 return {ok = false, changed = false, message = "Separe três materiais escolares e um espaço para a lata."}
             end
             local needed = 3
@@ -353,14 +353,14 @@ local __O = {};
             end
             ____temp_45 = not ____t_44(____opt_result_43)
         end
-        __O[1295] = ____temp_45
-        local ____temp_47 = if ____t_46(____temp_45) then __O[1295] else q.bivoltUnlocked
-        __O[1296] = ____temp_47
-        local ____temp_49 = if ____t_48(____temp_47) then __O[1296] else not __t(player)
-        __O[1297] = ____temp_49
-        local ____temp_51 = if ____t_50(____temp_49) then __O[1297] else not __isFiniteN(player.x)
-        __O[1298] = ____temp_51
-        if ____t_53(if ____t_52(____temp_51) then __O[1298] else not __isFiniteN(player.y)) then
+        __O[1307] = ____temp_45
+        local ____temp_47 = if ____t_46(____temp_45) then __O[1307] else q.bivoltUnlocked
+        __O[1308] = ____temp_47
+        local ____temp_49 = if ____t_48(____temp_47) then __O[1308] else not __t(player)
+        __O[1309] = ____temp_49
+        local ____temp_51 = if ____t_50(____temp_49) then __O[1309] else not __isFiniteN(player.x)
+        __O[1310] = ____temp_51
+        if ____t_53(if ____t_52(____temp_51) then __O[1310] else not __isFiniteN(player.y)) then
             return nil
         end
         local collected = found(nil, q)
@@ -370,8 +370,8 @@ local __O = {};
             function(____, p)
                 local ____t_55 = __t
                 local ____temp_54 = not __t(__call(collected, "has", p.id)) and math.abs(player.x - p.x) <= 29
-                __O[1299] = ____temp_54
-                return if ____t_55(____temp_54) then math.abs(player.y - 30 - p.y) <= 35 else __O[1299]
+                __O[1311] = ____temp_54
+                return if ____t_55(____temp_54) then math.abs(player.y - 30 - p.y) <= 35 else __O[1311]
             end
         )
         if not __t(part) then
@@ -428,15 +428,15 @@ local __O = {};
         local ____t_63 = __t
         local ____t_57 = __t
         local ____temp_56 = not __t(c) or __TS__Number(scene) ~= SCENE
-        __O[1300] = ____temp_56
+        __O[1312] = ____temp_56
         local ____t_61 = __t
         local ____opt_result_60
         if q ~= nil then
             ____opt_result_60 = q.bivoltAccepted
         end
-        local ____temp_62 = if ____t_57(____temp_56) then __O[1300] else not ____t_61(____opt_result_60)
-        __O[1301] = ____temp_62
-        if ____t_64(if ____t_63(____temp_62) then __O[1301] else q.bivoltUnlocked) then
+        local ____temp_62 = if ____t_57(____temp_56) then __O[1312] else not ____t_61(____opt_result_60)
+        __O[1313] = ____temp_62
+        if ____t_64(if ____t_63(____temp_62) then __O[1313] else q.bivoltUnlocked) then
             return
         end
         local collected = found(nil, q)
@@ -445,10 +445,10 @@ local __O = {};
         local ____c_translate_68 = c.translate
         local ____t_66 = __t
         local ____TS__Number_result_65 = __TS__Number(camera)
-        __O[1302] = ____TS__Number_result_65
+        __O[1314] = ____TS__Number_result_65
         ____c_translate_68(
             ____c_67,
-            __TS__Number(-if ____t_66(____TS__Number_result_65) then __O[1302] else 0),
+            __TS__Number(-if ____t_66(____TS__Number_result_65) then __O[1314] else 0),
             0
         )
         for ____, p in __iterar((parts)) do
@@ -569,16 +569,16 @@ local __O = {};
         local ____t_72 = __t
         local ____t_70 = __t
         local ____temp_69 = if __t(s.unlocked) then s.charges > 0 else s.unlocked
-        __O[1303] = ____temp_69
-        local ____temp_71 = if ____t_70(____temp_69) then not __t(active) else __O[1303]
-        __O[1304] = ____temp_71
+        __O[1315] = ____temp_69
+        local ____temp_71 = if ____t_70(____temp_69) then not __t(active) else __O[1315]
+        __O[1316] = ____temp_71
         return ____assign_77(____temp_76, s, {
             active = ____active_73,
             remaining = ____remaining_74,
             cooldown = ____cooldown_75,
             duration = DURATION,
             cooldownDuration = COOLDOWN,
-            ready = if ____t_72(____temp_71) then cooldown == 0 else __O[1304],
+            ready = if ____t_72(____temp_71) then cooldown == 0 else __O[1316],
             remainingRatio = remaining / DURATION,
             cooldownRatio = cooldown / COOLDOWN,
             label = if __t(active) then ("BIVOLT " .. tostring(__call(remaining, "toFixed", 1))) .. "s" else if cooldown > 0 then ("BIVOLT " .. tostring(math.ceil(cooldown))) .. "s" else "BIVOLT ×" .. tostring(s.charges)

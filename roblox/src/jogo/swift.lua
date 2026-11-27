@@ -157,8 +157,8 @@ local __O = {};
         if modal ~= nil then
             ____opt_result_34 = modal.open
         end
-        __O[1439] = ____opt_result_34
-        if ____t_36(if ____t_35(____opt_result_34) then __O[1439] else not __t(session)) then
+        __O[1455] = ____opt_result_34
+        if ____t_36(if ____t_35(____opt_result_34) then __O[1455] else not __t(session)) then
             return
         end
         local prior = session
@@ -225,8 +225,8 @@ local __O = {};
         end
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(options.frame)
-        __O[1436] = ____TS__Number_result_0
-        local t = if ____t_1(____TS__Number_result_0) then __O[1436] else 0
+        __O[1452] = ____TS__Number_result_0
+        local t = if ____t_1(____TS__Number_result_0) then __O[1452] else 0
         local bob = math.floor(math.sin(t * 2.4) * 1.2)
         local talk = options.talking
         c:save()
@@ -487,8 +487,8 @@ local __O = {};
         modal.innerHTML = "<div class=\"swift-heading\"><span>NA ENTRADA DA ROÇA</span><button class=\"swift-close\" type=\"button\" aria-label=\"Fechar conversa\">×</button></div><div class=\"swift-content\"><div class=\"swift-speaker\"><canvas width=\"80\" height=\"90\" aria-label=\"Irmão de Clara Swift: moreno, magro, cabelo preto curto e olhos abertos\"></canvas><div><h2 id=\"swiftGuideName\"></h2><div class=\"swift-current\"></div></div></div><p class=\"swift-question\" id=\"swiftGuideQuestion\"></p><div class=\"swift-choices\"></div><button class=\"swift-back\" type=\"button\" hidden>← VOLTAR À PERGUNTA</button><p class=\"swift-hint\">Normal e Difícil podem ser trocados. Escolher Fácil trava esta aventura; para mudar, crie um novo save.</p></div>"
         local ____t_3 = __t
         local ____temp_2 = window.document:getElementById("gameShell")
-        __O[1437] = ____temp_2
-        if ____t_3(____temp_2) then __O[1437] else window.document.body:append(modal)
+        __O[1453] = ____temp_2
+        if ____t_3(____temp_2) then __O[1453] else window.document.body:append(modal)
         modal:querySelector("h2").textContent = npc.name
         local portrait = modal:querySelector("canvas")
         draw(
@@ -526,8 +526,8 @@ local __O = {};
         if ____opt_6 ~= nil then
             ____opt_result_8 = ____opt_6(____opt_6)
         end
-        __O[1438] = ____opt_result_8
-        return if ____t_9(____opt_result_8) then __O[1438] else {id = "normal", label = "NORMAL"}
+        __O[1454] = ____opt_result_8
+        return if ____t_9(____opt_result_8) then __O[1454] else {id = "normal", label = "NORMAL"}
     end
     local function open(self, api)
         if api == nil then
@@ -560,32 +560,32 @@ local __O = {};
             ____opt_result_64 = state.started
         end
         local ____temp_66 = if __t(session) then session else not ____t_65(____opt_result_64)
-        __O[1440] = ____temp_66
-        local ____temp_68 = if ____t_67(____temp_66) then __O[1440] else state.sandbox
-        __O[1441] = ____temp_68
-        local ____temp_70 = if ____t_69(____temp_68) then __O[1441] else state.cutscene
-        __O[1442] = ____temp_70
-        local ____temp_72 = if ____t_71(____temp_70) then __O[1442] else state.dialog
-        __O[1443] = ____temp_72
-        local ____temp_74 = if ____t_73(____temp_72) then __O[1443] else state.activeBoss
-        __O[1444] = ____temp_74
-        local ____temp_76 = if ____t_75(____temp_74) then __O[1444] else state.room
-        __O[1445] = ____temp_76
-        local ____temp_78 = if ____t_77(____temp_76) then __O[1445] else state.activity
-        __O[1446] = ____temp_78
+        __O[1456] = ____temp_66
+        local ____temp_68 = if ____t_67(____temp_66) then __O[1456] else state.sandbox
+        __O[1457] = ____temp_68
+        local ____temp_70 = if ____t_69(____temp_68) then __O[1457] else state.cutscene
+        __O[1458] = ____temp_70
+        local ____temp_72 = if ____t_71(____temp_70) then __O[1458] else state.dialog
+        __O[1459] = ____temp_72
+        local ____temp_74 = if ____t_73(____temp_72) then __O[1459] else state.activeBoss
+        __O[1460] = ____temp_74
+        local ____temp_76 = if ____t_75(____temp_74) then __O[1460] else state.room
+        __O[1461] = ____temp_76
+        local ____temp_78 = if ____t_77(____temp_76) then __O[1461] else state.activity
+        __O[1462] = ____temp_78
         local ____opt_80 = state.training
         if ____opt_80 ~= nil then
             ____opt_80 = ____opt_80.active
         end
-        local ____temp_82 = if ____t_79(____temp_78) then __O[1446] else ____opt_80
-        __O[1447] = ____temp_82
-        local ____temp_84 = if ____t_83(____temp_82) then __O[1447] else state.defeated
-        __O[1448] = ____temp_84
-        local ____temp_86 = if ____t_85(____temp_84) then __O[1448] else state.won
-        __O[1449] = ____temp_86
-        local ____temp_88 = if ____t_87(____temp_86) then __O[1449] else state.chapterEnded
-        __O[1450] = ____temp_88
-        if ____t_90(if ____t_89(____temp_88) then __O[1450] else window.document:querySelector("dialog[open]")) then
+        local ____temp_82 = if ____t_79(____temp_78) then __O[1462] else ____opt_80
+        __O[1463] = ____temp_82
+        local ____temp_84 = if ____t_83(____temp_82) then __O[1463] else state.defeated
+        __O[1464] = ____temp_84
+        local ____temp_86 = if ____t_85(____temp_84) then __O[1464] else state.won
+        __O[1465] = ____temp_86
+        local ____temp_88 = if ____t_87(____temp_86) then __O[1465] else state.chapterEnded
+        __O[1466] = ____temp_88
+        if ____t_90(if ____t_89(____temp_88) then __O[1466] else window.document:querySelector("dialog[open]")) then
             return false
         end
         ensureModal(nil)

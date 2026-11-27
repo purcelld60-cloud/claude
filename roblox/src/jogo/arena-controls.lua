@@ -81,10 +81,10 @@ local __O = {};
                     ____opt_result_2 = data.schema
                 end
                 local ____temp_3 = ____opt_result_2 == 1
-                __O[2775] = ____temp_3
-                local ____temp_5 = if ____t_4(____temp_3) then data.layouts else __O[2775]
-                __O[2776] = ____temp_5
-                if ____t_7(if ____t_6(____temp_5) then type(data.layouts) == "table" else __O[2776]) then
+                __O[2793] = ____temp_3
+                local ____temp_5 = if ____t_4(____temp_3) then data.layouts else __O[2793]
+                __O[2794] = ____temp_5
+                if ____t_7(if ____t_6(____temp_5) then type(data.layouts) == "table" else __O[2794]) then
                     return true, data.layouts
                 end
             end)
@@ -213,11 +213,11 @@ local __O = {};
                 local ____set_28 = __set
                 local ____t_27 = __t
                 local ____TS__ParseFloat_result_26 = __TS__ParseFloat(style:getPropertyValue(__add("--arena-safe-", side)))
-                __O[2777] = ____TS__ParseFloat_result_26
+                __O[2795] = ____TS__ParseFloat_result_26
                 ____set_28(
                     safe,
                     side,
-                    math.max(8, if ____t_27(____TS__ParseFloat_result_26) then __O[2777] else 0 + 8)
+                    math.max(8, if ____t_27(____TS__ParseFloat_result_26) then __O[2795] else 0 + 8)
                 )
             end
             for ____, ____value in __iterar((targets)) do
@@ -458,10 +458,10 @@ local __O = {};
         query = function(____, s) return panel:querySelector(s) end
         local function put(self, id, values)
             do
-                __O[2778] = layouts
-                __O[2779] = orientation
+                __O[2796] = layouts
+                __O[2797] = orientation
             end
-            local ____ = if __t(__get(__O[2778], __O[2779])) then __get(__O[2778], __O[2779]) else __set(__O[2778], __O[2779], {})
+            local ____ = if __t(__get(__O[2796], __O[2797])) then __get(__O[2796], __O[2797]) else __set(__O[2796], __O[2797], {})
             __set(
                 __get(layouts, orientation),
                 id,
@@ -510,10 +510,10 @@ local __O = {};
                     local ____t_35 = __t
                     local ____t_33 = __t
                     local ____temp_32 = not __t(getState(nil).playing)
-                    __O[2780] = ____temp_32
-                    local ____temp_34 = if ____t_33(____temp_32) then __O[2780] else getState(nil).eliminated
-                    __O[2781] = ____temp_34
-                    if ____t_36(if ____t_35(____temp_34) then __O[2781] else target.disabled) then
+                    __O[2798] = ____temp_32
+                    local ____temp_34 = if ____t_33(____temp_32) then __O[2798] else getState(nil).eliminated
+                    __O[2799] = ____temp_34
+                    if ____t_36(if ____t_35(____temp_34) then __O[2799] else target.disabled) then
                         return
                     end
                     event:preventDefault()

@@ -311,8 +311,8 @@ local __O = {};
                         local ____t_19 = __t
                         local ____t_18 = __t
                         local ____temp_17 = __gt(wx, 1700) and __lt(wx, 2800)
-                        __O[1378] = ____temp_17
-                        if ____t_19(if ____t_18(____temp_17) then not __t(lite(nil)) else __O[1378]) then
+                        __O[1393] = ____temp_17
+                        if ____t_19(if ____t_18(____temp_17) then not __t(lite(nil)) else __O[1393]) then
                             local on = __mod(i + j + beat, 4) == 0 or __mod(i * 3 + j + beat, 7) == 0
                             if __t(on) then
                                 c:save()
@@ -1408,11 +1408,11 @@ local __O = {};
                 local ____t_24 = __t
                 local ____t_21 = __t
                 local ____temp_20 = x < -400 or x > W + 400
-                __O[1380] = ____temp_20
+                __O[1395] = ____temp_20
                 local ____t_23 = __t
                 local ____lite_result_22 = lite(nil)
-                __O[1379] = ____lite_result_22
-                if ____t_24(if ____t_21(____temp_20) then __O[1380] else if ____t_23(____lite_result_22) then __mod(i, 2) else __O[1379]) then
+                __O[1394] = ____lite_result_22
+                if ____t_24(if ____t_21(____temp_20) then __O[1395] else if ____t_23(____lite_result_22) then __mod(i, 2) else __O[1394]) then
                     continue
                 end
                 R(
@@ -1486,13 +1486,13 @@ local __O = {};
         local ____t_28 = __t
         local ____t_26 = __t
         local ____temp_25 = not __t(lite(nil)) and px0 > -900
-        __O[1381] = ____temp_25
-        local ____temp_27 = if ____t_26(____temp_25) then px0 < W + 900 else __O[1381]
-        __O[1382] = ____temp_27
+        __O[1396] = ____temp_25
+        local ____temp_27 = if ____t_26(____temp_25) then px0 < W + 900 else __O[1396]
+        __O[1397] = ____temp_27
         if ____t_29(if ____t_28(____temp_27) then __mod(
             math.floor(t / (BEAT * 4)),
             2
-        ) == 0 else __O[1382]) then
+        ) == 0 else __O[1397]) then
             c.globalAlpha = 0.55
             do
                 local k = 0
@@ -1598,18 +1598,18 @@ local __O = {};
                             local ____t_33 = __t
                             local ____t_31 = __t
                             local ____temp_30 = wx < ini or x < -45
-                            __O[1383] = ____temp_30
-                            local ____temp_32 = if ____t_31(____temp_30) then __O[1383] else x > W + 45
-                            __O[1385] = ____temp_32
+                            __O[1398] = ____temp_30
+                            local ____temp_32 = if ____t_31(____temp_30) then __O[1398] else x > W + 45
+                            __O[1400] = ____temp_32
                             local ____t_35 = __t
                             local ____temp_34 = row == 0 and wx > 1900
-                            __O[1384] = ____temp_34
-                            local ____temp_36 = if ____t_33(____temp_32) then __O[1385] else if ____t_35(____temp_34) then wx < 2560 else __O[1384]
-                            __O[1387] = ____temp_36
+                            __O[1399] = ____temp_34
+                            local ____temp_36 = if ____t_33(____temp_32) then __O[1400] else if ____t_35(____temp_34) then wx < 2560 else __O[1399]
+                            __O[1402] = ____temp_36
                             local ____t_39 = __t
                             local ____temp_38 = wx > 1100 and wx < 1530
-                            __O[1386] = ____temp_38
-                            if ____t_40(if ____t_37(____temp_36) then __O[1387] else if ____t_39(____temp_38) then row == 0 else __O[1386]) then
+                            __O[1401] = ____temp_38
+                            if ____t_40(if ____t_37(____temp_36) then __O[1402] else if ____t_39(____temp_38) then row == 0 else __O[1401]) then
                                 continue
                             end
                             dancarino(
@@ -1642,12 +1642,12 @@ local __O = {};
                 local ____t_44 = __t
                 local ____t_42 = __t
                 local ____temp_41 = wx < ini or x < -50
-                __O[1388] = ____temp_41
-                local ____temp_43 = if ____t_42(____temp_41) then __O[1388] else x > W + 50
-                __O[1389] = ____temp_43
-                local ____temp_45 = if ____t_44(____temp_43) then __O[1389] else math.abs(wx - NPC_X) < 90
-                __O[1390] = ____temp_45
-                if ____t_47(if ____t_46(____temp_45) then __O[1390] else math.abs(wx - MC_X) < 70) then
+                __O[1403] = ____temp_41
+                local ____temp_43 = if ____t_42(____temp_41) then __O[1403] else x > W + 50
+                __O[1404] = ____temp_43
+                local ____temp_45 = if ____t_44(____temp_43) then __O[1404] else math.abs(wx - NPC_X) < 90
+                __O[1405] = ____temp_45
+                if ____t_47(if ____t_46(____temp_45) then __O[1405] else math.abs(wx - MC_X) < 70) then
                     continue
                 end
                 dancarino(
@@ -1934,8 +1934,8 @@ local __O = {};
             local ____t_57 = __t
             local ____t_56 = __t
             local ____temp_55 = not __t(raios)
-            __O[1391] = ____temp_55
-            if ____t_57(if ____t_56(____temp_55) then __O[1391] else raios.feito) then
+            __O[1406] = ____temp_55
+            if ____t_57(if ____t_56(____temp_55) then __O[1406] else raios.feito) then
                 raios = F:tocar("weather/god-rays", {
                     dono = "baile",
                     x = NPC_X + 40,
@@ -2000,18 +2000,18 @@ local __O = {};
         end
         local ____t_63 = __t
         local ____TS__Number_result_62 = __TS__Number(camera)
-        __O[1392] = ____TS__Number_result_62
-        local cam = if ____t_63(____TS__Number_result_62) then __O[1392] else 0
+        __O[1407] = ____TS__Number_result_62
+        local cam = if ____t_63(____TS__Number_result_62) then __O[1407] else 0
         local ____t_65 = __t
         local ____TS__Number_result_64 = __TS__Number(t)
-        __O[1393] = ____TS__Number_result_64
-        t = if ____t_65(____TS__Number_result_64) then __O[1393] else 0
+        __O[1408] = ____TS__Number_result_64
+        t = if ____t_65(____TS__Number_result_64) then __O[1408] else 0
         local k = if __isFiniteN(opts.rombo) then clamp(nil, opts.rombo, 0, 1) else if __t(telhadoAberto) then 1 else 0
         local ____t_68 = __t
         local ____t_67 = __t
         local ____temp_66 = k > 0 and ultimoRombo <= 0
-        __O[1394] = ____temp_66
-        if ____t_68(if ____t_67(____temp_66) then __isFiniteN(opts.rombo) else __O[1394]) then
+        __O[1409] = ____temp_66
+        if ____t_68(if ____t_67(____temp_66) then __isFiniteN(opts.rombo) else __O[1409]) then
             estouro(nil, cam)
         end
         ultimoRombo = k

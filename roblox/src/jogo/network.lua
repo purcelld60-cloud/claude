@@ -42,7 +42,7 @@ local __O = {};
         if ____opt_0 ~= nil then
             ____opt_0 = ____opt_0.request
         end
-        __O[2482] = ____opt_0
+        __O[2500] = ____opt_0
         local ____opt_5 = window.webkit
         if ____opt_5 ~= nil then
             ____opt_5 = ____opt_5.messageHandlers
@@ -51,7 +51,7 @@ local __O = {};
         if ____opt_5 ~= nil then
             ____opt_result_7 = ____opt_5.arenaRequest
         end
-        local native = if ____t_2(____opt_0) then __O[2482] else ____opt_result_7
+        local native = if ____t_2(____opt_0) then __O[2500] else ____opt_result_7
         if not __t(native) then
             return window:fetch(
                 path,
@@ -90,8 +90,8 @@ local __O = {};
                     "get",
                     "Authorization"
                 )
-                __O[2483] = ____call_result_10
-                local authorization = if ____t_11(____call_result_10) then __O[2483] else ""
+                __O[2501] = ____call_result_10
+                local authorization = if ____t_11(____call_result_10) then __O[2501] else ""
                 local timer = window:setTimeout(
                     function()
                         __call(pending, "delete", id)
@@ -156,7 +156,7 @@ local __O = {};
             local ____temp_18 = if __t(detail.body) then detail.body else "{}"
             local ____t_16 = __t
             local ____TS__Number_result_15 = __TS__Number(detail.status)
-            __O[2484] = ____TS__Number_result_15
+            __O[2502] = ____TS__Number_result_15
             ____entry_resolve_20(
                 entry,
                 ____newExpr_19(
@@ -165,7 +165,7 @@ local __O = {};
                     {
                         status = math.max(
                             200,
-                            math.min(599, if ____t_16(____TS__Number_result_15) then __O[2484] else 503)
+                            math.min(599, if ____t_16(____TS__Number_result_15) then __O[2502] else 503)
                         ),
                         headers = {["Content-Type"] = "application/json"}
                     }

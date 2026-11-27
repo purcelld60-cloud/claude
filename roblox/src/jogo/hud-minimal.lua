@@ -17,16 +17,16 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(bar)
-    __O[3166] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[3166] else bar.dataset.minimal) then
+    __O[3184] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[3184] else bar.dataset.minimal) then
         return
     end
     bar.dataset.minimal = "1"
     local function _____24(____, s)
         local ____t_4 = __t
         local ____temp_3 = bar:querySelector(s)
-        __O[3167] = ____temp_3
-        return if ____t_4(____temp_3) then __O[3167] else window.document:querySelector(s)
+        __O[3185] = ____temp_3
+        return if ____t_4(____temp_3) then __O[3185] else window.document:querySelector(s)
     end
     local function el(____, tag, cls, html)
         local e = window.document:createElement(tag)
@@ -51,8 +51,8 @@ local __O = {};
     local ____t_13 = __t
     local ____t_12 = __t
     local ____temp_11 = not __t(hearts) or not __t(ammo)
-    __O[3168] = ____temp_11
-    if ____t_13(if ____t_12(____temp_11) then __O[3168] else not __t(actions)) then
+    __O[3186] = ____temp_11
+    if ____t_13(if ____t_12(____temp_11) then __O[3186] else not __t(actions)) then
         return
     end
     local left = el(nil, "div", "hud-min-left")
@@ -182,8 +182,8 @@ local __O = {};
         local function sync()
             local ____t_23 = __t
             local ____TS__ParseFloat_result_22 = __TS__ParseFloat(gasPct.textContent)
-            __O[3169] = ____TS__ParseFloat_result_22
-            local v = if ____t_23(____TS__ParseFloat_result_22) then __O[3169] else 0
+            __O[3187] = ____TS__ParseFloat_result_22
+            local v = if ____t_23(____TS__ParseFloat_result_22) then __O[3187] else 0
             mini.style.width = __add(
                 math.max(
                     0,

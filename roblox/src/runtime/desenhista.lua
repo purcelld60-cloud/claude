@@ -197,9 +197,45 @@ function D.iniciar(op)
     if linha ~= "" then linhas[#linhas + 1] = linha end
     return linhas
   end
+  -- minigame (janela com um canvas): o canvas vira um telão grande e os botões ficam numa fileira embaixo
+  local function desenharTelao(el, itens)
+    local famT = familia("space", "bold")
+    local cvs, botoes = nil, {}
+    for _, it in ipairs(itens) do if it.tipo == "canvas" and not cvs then cvs = it elseif it.tipo == "botao" then botoes[#botoes + 1] = it end end
+    local cw, ch = cvs.el.width, cvs.el.height
+    local altB = #botoes > 0 and 46 or 0
+    local k = math.min(920 / math.max(1, cw), (540 - altB - 24) / math.max(1, ch))
+    local w, h = math.floor(cw * k), math.floor(ch * k)
+    local x0, y0 = math.floor((960 - w) / 2), math.floor((540 - altB - h) / 2)
+    ctx.globalAlpha = .92; ctx.fillStyle = "#07060c"; ctx:fillRect(0, 0, 960, 540); ctx.globalAlpha = 1
+    ctx.fillStyle = "#e8c24a"; ctx:fillRect(x0 - 3, y0 - 3, w + 6, h + 6); ctx.fillStyle = "#2a1a0e"; ctx:fillRect(x0 - 1, y0 - 1, w + 2, h + 2)
+    ctx:drawImage(cvs.el, x0, y0, w, h)
+    caixas[el] = { x = 0, y = 0, width = 960, height = 540 }
+    desenhados[#desenhados + 1] = { el = el, x = 0, y = 0, w = 960, h = 540 }
+    if #botoes == 0 then return end
+    local gap = 8
+    local bw = math.min(170, math.floor((920 - gap * (#botoes - 1)) / #botoes))
+    local total = bw * #botoes + gap * (#botoes - 1)
+    local bx, by = math.floor((960 - total) / 2), y0 + h + 10
+    for _, it in ipairs(botoes) do
+      ctx.fillStyle = "#0a0614"; ctx:fillRect(bx - 2, by - 2, bw + 4, 40)
+      ctx.fillStyle = "#3a2a4a"; ctx:fillRect(bx, by, bw, 36)
+      ctx.fillStyle = "#5a4a6a"; ctx:fillRect(bx, by, bw, 3)
+      ctx.fillStyle = "#1e1428"; ctx:fillRect(bx, by + 32, bw, 4)
+      local SETAS = { ["←"] = "<", ["↓"] = "v", ["↑"] = "^", ["→"] = ">" } -- as setas Unicode não estão nas letras capturadas
+      local texto = SETAS[it.texto] or it.texto
+      local tam = #texto <= 3 and 18 or 13
+      local tl = D.medir(famT, tam, texto)
+      D.escrever(famT, tam, texto, bx + bw / 2 - tl / 2, by + 24, pixelDe("#fff6dc", 1))
+      caixas[it.el] = { x = bx, y = by, width = bw, height = 36 }
+      desenhados[#desenhados + 1] = { el = it.el, x = bx, y = by, w = bw, h = 36 }
+      bx = bx + bw + gap
+    end
+  end
   desenharJanela = function(el)
     local itens = {}
     for _, f in ipairs(el._filhos) do coletar(f, itens) end
+    for _, it in ipairs(itens) do if it.tipo == "canvas" and it.el.width >= 200 then return desenharTelao(el, itens) end end
     local L, pad = N.toque and 620 or 560, 22
     local famT, famN = familia("space", "bold"), familia("space")
     local larg = L - pad * 2

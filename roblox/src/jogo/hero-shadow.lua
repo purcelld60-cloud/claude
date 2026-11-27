@@ -78,8 +78,8 @@ local __O = {};
         if ____opt_2 ~= nil then
             ____opt_result_4 = ____opt_2(____opt_2)
         end
-        __O[331] = ____opt_result_4
-        local s = if ____t_5(____opt_result_4) then __O[331] else {lean = 0.3, str = 0.8}
+        __O[341] = ____opt_result_4
+        local s = if ____t_5(____opt_result_4) then __O[341] else {lean = 0.3, str = 0.8}
         local ____t_14 = __t
         local ____opt_10 = window.Weather
         if ____opt_10 ~= nil then
@@ -93,8 +93,8 @@ local __O = {};
         if ____opt_result_12 ~= nil then
             ____opt_result_13 = ____opt_result_12.rain
         end
-        __O[332] = ____opt_result_13
-        local rain = if ____t_14(____opt_result_13) then __O[332] else 0
+        __O[342] = ____opt_result_13
+        local rain = if ____t_14(____opt_result_13) then __O[342] else 0
         local ____t_23 = __t
         local ____opt_19 = window.Weather
         if ____opt_19 ~= nil then
@@ -108,8 +108,8 @@ local __O = {};
         if ____opt_result_21 ~= nil then
             ____opt_result_22 = ____opt_result_21.snow
         end
-        __O[333] = ____opt_result_22
-        local snow = if ____t_23(____opt_result_22) then __O[333] else 0
+        __O[343] = ____opt_result_22
+        local snow = if ____t_23(____opt_result_22) then __O[343] else 0
         return {lean = s.lean, str = s.str * (1 - rain * 0.6) * (1 - snow * 0.3), indoor = false}
     end
     local function paintFigure(self, o)
@@ -208,7 +208,7 @@ local __O = {};
         local ____t_26 = __t
         local ____t_25 = __t
         local ____temp_24 = if __t(L.indoor) then not __t(__get(OUTDOOR, o.scene)) else L.indoor
-        __O[334] = ____temp_24
+        __O[344] = ____temp_24
         local ____t_32 = __t
         local ____opt_29 = window.HdMaps
         if ____opt_29 ~= nil then
@@ -218,8 +218,8 @@ local __O = {};
         if ____opt_29 ~= nil then
             ____opt_result_31 = ____opt_29(____opt_29, o.scene, o.x)
         end
-        __O[335] = ____opt_result_31
-        local lamps = if __t(if __t(o.arena) then o.arena else o.room) then __arrL({}, 0) else if ____t_26(if ____t_25(____temp_24) then __O[334] else not __t(L.indoor)) then if ____t_32(____opt_result_31) then __O[335] else __arrL({}, 0) else __arrL({}, 0)
+        __O[345] = ____opt_result_31
+        local lamps = if __t(if __t(o.arena) then o.arena else o.room) then __arrL({}, 0) else if ____t_26(if ____t_25(____temp_24) then __O[344] else not __t(L.indoor)) then if ____t_32(____opt_result_31) then __O[345] else __arrL({}, 0) else __arrL({}, 0)
         lastLamps = lamps
         local k = if __t(L.indoor) then L.lean else L.lean * (0.4 + 0.74 * math.abs(L.lean))
         local d = if __t(L.indoor) then 0.16 else 0.14 + 0.07 * (1 - math.min(
@@ -330,8 +330,8 @@ local __O = {};
             if ____opt_35 ~= nil then
                 ____opt_result_37 = ____opt_35(____opt_35, o.scene, o.x)
             end
-            __O[336] = ____opt_result_37
-            local r = if ____t_38(____opt_result_37) then __O[336] else {k = 0}
+            __O[346] = ____opt_result_37
+            local r = if ____t_38(____opt_result_37) then __O[346] else {k = 0}
             k = r.k * math.min(1, L.str)
             leaves = r.leaves
         end
@@ -467,7 +467,7 @@ local __O = {};
         local ____t_41 = __t
         local ____t_40 = __t
         local ____temp_39 = not __t(L.indoor) and not __t(o.room)
-        __O[337] = ____temp_39
+        __O[347] = ____temp_39
         local ____t_47 = __t
         local ____opt_44 = window.Weather
         if ____opt_44 ~= nil then
@@ -477,8 +477,8 @@ local __O = {};
         if ____opt_44 ~= nil then
             ____opt_result_46 = ____opt_44(____opt_44)
         end
-        __O[338] = ____opt_result_46
-        local wx = if ____t_41(if ____t_40(____temp_39) then not __t(o.arena) else __O[337]) then if ____t_47(____opt_result_46) then __O[338] else {} else {}
+        __O[348] = ____opt_result_46
+        local wx = if ____t_41(if ____t_40(____temp_39) then not __t(o.arena) else __O[347]) then if ____t_47(____opt_result_46) then __O[348] else {} else {}
         local cover = if shadeNow > 0.45 then 0.3 else 1
         wet = math.max(
             0,
@@ -573,7 +573,7 @@ local __O = {};
         local ____t_55 = __t
         local ____t_49 = __t
         local ____temp_48 = not __t(o) or type(o.draw) ~= "function"
-        __O[339] = ____temp_48
+        __O[349] = ____temp_48
         local ____opt_52 = window.Graphics
         if ____opt_52 ~= nil then
             ____opt_52 = ____opt_52.isLite
@@ -582,7 +582,7 @@ local __O = {};
         if ____opt_52 ~= nil then
             ____opt_result_54 = ____opt_52(____opt_52)
         end
-        if ____t_55(if ____t_49(____temp_48) then __O[339] else ____opt_result_54) then
+        if ____t_55(if ____t_49(____temp_48) then __O[349] else ____opt_result_54) then
             return false
         end
         do

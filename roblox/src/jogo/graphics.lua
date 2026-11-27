@@ -3,7 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __ord, __arrL, __iterar, __t, __get, __call, __add, __re, __re_test = __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__re, __JSR.__re_test
+local __ord, __arrL, __iterar, __t, __get, __call, __add, __re, __re_test, __re_exec = __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__re, __JSR.__re_test, __JSR.__re_exec
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
 local Set = ____lualib.Set
@@ -161,9 +161,13 @@ local __O = {};
         local ____get_result_18 = __get(OLD, next)
         __O[19] = ____get_result_18
         next = if ____t_19(____get_result_18) then __O[19] else next
+        local autoDe = __re_exec(
+            __re("^auto-(low|medium|high)$", ""),
+            tostring(next)
+        )
         mode = if __t(__call(LEVELS, "includes", next)) then next else "auto"
         if mode == "auto" then
-            autoLevel = device.level
+            autoLevel = if __t(autoDe) then __get(autoDe, 1) else device.level
         end
         write(nil, if mode == "auto" then "auto" else mode)
         apply(nil)
