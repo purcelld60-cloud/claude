@@ -1,0 +1,14 @@
+{
+  "name": "daroca-roblox",
+  "private": true,
+  "description": "Ferramentas que convertem o Da Roça Adventure (dist/) para Luau, para rodar dentro do Roblox",
+  "type": "module",
+  "scripts": {
+    "converter": "node ferramentas/converter.mjs luau $(cat ferramentas/scripts.txt)",
+    "converter:teste": "node ferramentas/converter.mjs 5.3 $(cat ferramentas/scripts.txt)"
+  },
+  "devDependencies": {
+    "typescript": "6.0.2",
+    "typescript-to-lua": "1.37.3"
+  }
+}
