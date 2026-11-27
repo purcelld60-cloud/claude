@@ -79,6 +79,7 @@
 
   /* ---------- golpes do Da Roça (eventos que o game.js já manda para o CampaignVfx) ---------- */
   function aoEvento(tipo, d) {
+    if (window.Golpes) return; // os golpes agora têm efeitos próprios, do tamanho da área que acerta (golpes.js)
     if (!d || !Number.isFinite(d.x) || !Number.isFinite(d.y)) return;
     const dir = d.dir < 0 ? -1 : 1;
     if (tipo === 'gas') { // peidão: nuvem verde que estoura do lado; no combo, mais nuvens
@@ -102,7 +103,7 @@
 
   /* ---------- ataques de área dos chefes: no instante em que o perigo dispara ---------- */
   function perigo(h, chefe) {
-    if (!h) return; const x = h.x, y = (h.y || 0) + 8;
+    if (!h || window.Golpes) return; const x = h.x, y = (h.y || 0) + 8;
     if (h.type === 'astral' || h.astral) tocar('arcane/star-fall', { x, y });
     else if (h.type === 'slime') tocar('nature/acid-splash', { x, y });
     else if (h.type === 'smoke' && h.brasa) { const ag = performance.now(); if (ag - (ultimo.__brasa || 0) > 280) { ultimo.__brasa = ag; tocar('spawn/poof', { x, y, palette: PAL.fumaca, opcoes: { stars: PAL.brasa.slice(3) } }); } }
@@ -139,7 +140,7 @@
   const estados = new WeakMap();
   function chefe(e) { // chamado a cada quadro para o chefe ativo: reage quando o estado muda
     if (!e || !lib) return; const antes = estados.get(e), agora = e.conquista ? e.conquista.estado : e.state; if (antes === agora) return; estados.set(e, agora);
-    if (agora === 'dashing') { const d = e.dashDir < 0 ? -1 : 1; tocar('spawn/poof', { x: e.x - d * 22, y: e.y, palette: PAL.poeira, flip: d < 0 }); }
+    if (agora === 'dashing' && !window.Golpes) { const d = e.dashDir < 0 ? -1 : 1; tocar('spawn/poof', { x: e.x - d * 22, y: e.y, palette: PAL.poeira, flip: d < 0 }); }
     else if (agora === 'phaseChange' && antes !== undefined) fase(e);
   }
   // disparo de chefe: um clarão pequeno na cor do golpe

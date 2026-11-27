@@ -19,13 +19,13 @@ local __O = {};
         ____opt_0 = ____opt_0.arte
     end
     local ____temp_3 = if __t(window.CampanhaNovos) then window.CampanhaNovos else not ____t_2(____opt_0)
-    __O[441] = ____temp_3
+    __O[442] = ____temp_3
     local ____t_7 = __t
     local ____opt_5 = window.CampanhaCamadas
     if ____opt_5 ~= nil then
         ____opt_5 = ____opt_5.kit
     end
-    if ____t_8(if ____t_4(____temp_3) then __O[441] else not ____t_7(____opt_5)) then
+    if ____t_8(if ____t_4(____temp_3) then __O[442] else not ____t_7(____opt_5)) then
         return
     end
     local CC = window.CampanhaCenarios
@@ -1727,11 +1727,11 @@ local __O = {};
                 local ____t_11 = __t
                 local ____t_10 = __t
                 local ____vis_result_9 = vis(nil, x, 10)
-                __O[442] = ____vis_result_9
+                __O[443] = ____vis_result_9
                 if ____t_11(if ____t_10(____vis_result_9) then __mod(
                     math.floor(t * 0.7 + ax),
                     5
-                ) else __O[442]) then
+                ) else __O[443]) then
                     R(
                         nil,
                         c,

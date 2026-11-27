@@ -2120,8 +2120,8 @@ local __O = {};
         local dy = __get(b, 1) - __get(a, 1)
         local ____t_19 = __t
         local ____hypot_result_18 = __hypot(dx, dy)
-        __O[690] = ____hypot_result_18
-        local len = if ____t_19(____hypot_result_18) then __O[690] else 1
+        __O[691] = ____hypot_result_18
+        local len = if ____t_19(____hypot_result_18) then __O[691] else 1
         local nx = -dy / len
         local ny = dx / len
         local function edge(____, p, w, side)
@@ -2890,14 +2890,14 @@ local __O = {};
         )
         local ____t_21 = __t
         local ____TS__Number_result_20 = __TS__Number(s.time)
-        __O[691] = ____TS__Number_result_20
-        local t = math.max(0, if ____t_21(____TS__Number_result_20) then __O[691] else 0)
+        __O[692] = ____TS__Number_result_20
+        local t = math.max(0, if ____t_21(____TS__Number_result_20) then __O[692] else 0)
         local p = clamp(nil, t / shot.duration)
         local u = smooth(nil, p)
         local ____t_23 = __t
         local ____TS__Number_result_22 = __TS__Number(s.elapsed)
-        __O[692] = ____TS__Number_result_22
-        local elapsed = if ____t_23(____TS__Number_result_22) then __O[692] else t
+        __O[693] = ____TS__Number_result_22
+        local elapsed = if ____t_23(____TS__Number_result_22) then __O[693] else t
         if shot.id == "eyes" then
             drawEnd(nil, c, t)
             c:restore()
@@ -3213,10 +3213,10 @@ local __O = {};
             ____opt_result_26 = s.index
         end
         local ____TS__Number_result_27 = __TS__Number(____opt_result_26)
-        __O[693] = ____TS__Number_result_27
+        __O[694] = ____TS__Number_result_27
         local index = clamp(
             nil,
-            math.floor(if ____t_28(____TS__Number_result_27) then __O[693] else 0),
+            math.floor(if ____t_28(____TS__Number_result_27) then __O[694] else 0),
             0,
             __len(SHOTS) - 1
         )
@@ -3235,8 +3235,8 @@ local __O = {};
         local ____t_31 = __t
         local ____t_30 = __t
         local ____temp_29 = not __t(s)
-        __O[694] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then __O[694] else s.done) then
+        __O[695] = ____temp_29
+        if ____t_31(if ____t_30(____temp_29) then __O[695] else s.done) then
             return false
         end
         if __ge(
@@ -3254,14 +3254,14 @@ local __O = {};
         local ____t_34 = __t
         local ____t_33 = __t
         local ____temp_32 = not __t(s)
-        __O[695] = ____temp_32
-        if ____t_34(if ____t_33(____temp_32) then __O[695] else s.done) then
+        __O[696] = ____temp_32
+        if ____t_34(if ____t_33(____temp_32) then __O[696] else s.done) then
             return
         end
         local ____t_36 = __t
         local ____TS__Number_result_35 = __TS__Number(dt)
-        __O[696] = ____TS__Number_result_35
-        dt = clamp(nil, if ____t_36(____TS__Number_result_35) then __O[696] else 0, 0, 0.1)
+        __O[697] = ____TS__Number_result_35
+        dt = clamp(nil, if ____t_36(____TS__Number_result_35) then __O[697] else 0, 0, 0.1)
         s.time = __add(s.time, dt)
         s.elapsed = __add(if __t(s.elapsed) then s.elapsed else 0, dt)
         while __t(__ge(

@@ -66,10 +66,10 @@ local __O = {};
         local ____b_2 = b
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(n)
-        __O[1246] = ____TS__Number_result_0
+        __O[1247] = ____TS__Number_result_0
         return math.max(
             ____a_3,
-            math.min(____b_2, if ____t_1(____TS__Number_result_0) then __O[1246] else 0)
+            math.min(____b_2, if ____t_1(____TS__Number_result_0) then __O[1247] else 0)
         )
     end
     local function ease(____, n)
@@ -102,10 +102,10 @@ local __O = {};
         local ____get_result_start_9 = __get(shots, index).start
         local ____t_8 = __t
         local ____TS__Number_result_7 = __TS__Number(s.time)
-        __O[1247] = ____TS__Number_result_7
+        __O[1248] = ____TS__Number_result_7
         return clamp(
             nil,
-            ____get_result_start_9 + math.max(0, if ____t_8(____TS__Number_result_7) then __O[1247] else 0),
+            ____get_result_start_9 + math.max(0, if ____t_8(____TS__Number_result_7) then __O[1248] else 0),
             0,
             total
         )
@@ -162,10 +162,10 @@ local __O = {};
             ____opt_11 = ____opt_11.preview
         end
         local ____temp_13 = if __t(s.sfxPlayed) then s.sfxPlayed else ____opt_11
-        __O[1248] = ____temp_13
-        local ____temp_15 = if ____t_14(____temp_13) then __O[1248] else s.index ~= 2
-        __O[1249] = ____temp_15
-        if ____t_17(if ____t_16(____temp_15) then __O[1249] else __lt(s.time, 0.08)) then
+        __O[1249] = ____temp_13
+        local ____temp_15 = if ____t_14(____temp_13) then __O[1249] else s.index ~= 2
+        __O[1250] = ____temp_15
+        if ____t_17(if ____t_16(____temp_15) then __O[1250] else __lt(s.time, 0.08)) then
             return
         end
         s.sfxPlayed = true
@@ -190,8 +190,8 @@ local __O = {};
         local ____t_26 = __t
         local ____t_25 = __t
         local ____temp_24 = not __t(s)
-        __O[1250] = ____temp_24
-        if ____t_26(if ____t_25(____temp_24) then __O[1250] else s.done) then
+        __O[1251] = ____temp_24
+        if ____t_26(if ____t_25(____temp_24) then __O[1251] else s.done) then
             return
         end
         s.time = s.time + clamp(nil, dt, 0, 0.1)
@@ -217,8 +217,8 @@ local __O = {};
         local ____t_29 = __t
         local ____t_28 = __t
         local ____temp_27 = not __t(s)
-        __O[1251] = ____temp_27
-        if ____t_29(if ____t_28(____temp_27) then __O[1251] else s.done) then
+        __O[1252] = ____temp_27
+        if ____t_29(if ____t_28(____temp_27) then __O[1252] else s.done) then
             return false
         end
         if __ge(
@@ -829,8 +829,8 @@ local __O = {};
         backdrop(nil, c, s)
         local ____t_31 = __t
         local ____TS__Number_result_30 = __TS__Number(s.time)
-        __O[1252] = ____TS__Number_result_30
-        local t = if ____t_31(____TS__Number_result_30) then __O[1252] else 0
+        __O[1253] = ____TS__Number_result_30
+        local t = if ____t_31(____TS__Number_result_30) then __O[1253] else 0
         local i = clamp(nil, s.index, 0, 2)
         local globalTime = position(nil, s)
         local bouncing = if i == 2 then math.abs(math.sin(t * 5.1)) * 11 else 0

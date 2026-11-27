@@ -35,8 +35,8 @@ local __O = {};
                 local ____t_14 = __t
                 local ____t_13 = __t
                 local ____temp_12 = math.abs(x - p.x) < 15 and __gt(y, p.y - 50)
-                __O[498] = ____temp_12
-                if ____t_14(if ____t_13(____temp_12) then __lt(y, p.y + 22) else __O[498]) then
+                __O[499] = ____temp_12
+                if ____t_14(if ____t_13(____temp_12) then __lt(y, p.y + 22) else __O[499]) then
                     return i
                 end
                 i = i + 1
@@ -117,8 +117,8 @@ local __O = {};
         local livre = liberada(nil, p.id)
         local ____t_16 = __t
         local ____temp_15 = __ge(st.moedas, preco) and not __t(tem)
-        __O[499] = ____temp_15
-        local pode = if ____t_16(____temp_15) then livre else __O[499]
+        __O[500] = ____temp_15
+        local pode = if ____t_16(____temp_15) then livre else __O[500]
         box:querySelector(".perg").innerHTML = ((((((((("<b>GARRAFADA DE " .. tostring(p.nome)) .. "</b>") .. tostring(if __t(if __t(livre) then livre else tem) then p.desc else ("<span class=\"tranca\">🔒 Ainda não chegou na banca. Derrote " .. tostring(__call(
             __re_replace(
                 __get(
@@ -882,8 +882,8 @@ local __O = {};
         local y = q.y - sobe
         local ____t_20 = __t
         local ____liberada_result_19 = liberada(nil, p.id)
-        __O[500] = ____liberada_result_19
-        local livre = if ____t_20(____liberada_result_19) then __O[500] else tem
+        __O[501] = ____liberada_result_19
+        local livre = if ____t_20(____liberada_result_19) then __O[501] else tem
         local cor = if __t(livre) then p.cor else "#2a1e16"
         local forma = __get(GARRAFA, p.id)
         if __t(on) then
@@ -1600,8 +1600,8 @@ local __O = {};
             local ____self_2_parse_3 = ____self_2.parse
             local ____t_1 = __t
             local ____temp_0 = window.localStorage:getItem(KEY)
-            __O[497] = ____temp_0
-            local s = ____self_2_parse_3(____self_2, if ____t_1(____temp_0) then __O[497] else "null")
+            __O[498] = ____temp_0
+            local s = ____self_2_parse_3(____self_2, if ____t_1(____temp_0) then __O[498] else "null")
             if __t(if __t(s) then __isFiniteN(s.moedas) else s) then
                 st = s
             end
@@ -1821,8 +1821,8 @@ local __O = {};
         local y = 440
         local ____t_26 = __t
         local ____TS__Number_result_25 = __TS__Number(o.time)
-        __O[501] = ____TS__Number_result_25
-        local t2 = if ____t_26(____TS__Number_result_25) then __O[501] else 0
+        __O[502] = ____TS__Number_result_25
+        local t2 = if ____t_26(____TS__Number_result_25) then __O[502] else 0
         local function R2(____, a, b, w, h, col)
             c2.fillStyle = col
             c2:fillRect(
@@ -1834,8 +1834,8 @@ local __O = {};
         end
         local ____t_28 = __t
         local ____TS__Number_result_27 = __TS__Number(o.camera)
-        __O[502] = ____TS__Number_result_27
-        if math.abs(x - if ____t_28(____TS__Number_result_27) then __O[502] else 0 - 480) > 640 then
+        __O[503] = ____TS__Number_result_27
+        if math.abs(x - if ____t_28(____TS__Number_result_27) then __O[503] else 0 - 480) > 640 then
             return
         end
         R2(
@@ -2001,8 +2001,8 @@ local __O = {};
             ____opt_33 = ____opt_33.x
         end
         local ____TS__Number_result_35 = __TS__Number(____opt_33)
-        __O[503] = ____TS__Number_result_35
-        local hx = if ____t_36(____TS__Number_result_35) then __O[503] else -9999
+        __O[504] = ____TS__Number_result_35
+        local hx = if ____t_36(____TS__Number_result_35) then __O[504] else -9999
         if math.abs(hx - x) < 110 then
             local dy = math.floor(math.sin(t2 * 5) * 3 + 0.5)
             R2(

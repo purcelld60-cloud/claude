@@ -1889,10 +1889,10 @@ local __O = {};
         local ____t_58 = __t
         local ____t_56 = __t
         local ____temp_55 = not __t(opts.hideOllyan) and not __t(opts.defeated)
-        __O[1342] = ____temp_55
-        local ____temp_57 = if ____t_56(____temp_55) then NPC_X - camera > -100 else __O[1342]
-        __O[1343] = ____temp_57
-        if ____t_59(if ____t_58(____temp_57) then NPC_X - camera < W + 100 else __O[1343]) then
+        __O[1343] = ____temp_55
+        local ____temp_57 = if ____t_56(____temp_55) then NPC_X - camera > -100 else __O[1343]
+        __O[1344] = ____temp_57
+        if ____t_59(if ____t_58(____temp_57) then NPC_X - camera < W + 100 else __O[1344]) then
             drawOllyan(
                 nil,
                 c,
@@ -1925,8 +1925,8 @@ local __O = {};
         local ____t_62 = __t
         local ____t_61 = __t
         local ____temp_60 = if __t(opts.defeated) then NPC_X - camera > -100 else opts.defeated
-        __O[1344] = ____temp_60
-        if ____t_62(if ____t_61(____temp_60) then NPC_X - camera < W + 100 else __O[1344]) then
+        __O[1345] = ____temp_60
+        if ____t_62(if ____t_61(____temp_60) then NPC_X - camera < W + 100 else __O[1345]) then
             drawOllyan(
                 nil,
                 c,
@@ -3578,11 +3578,11 @@ local __O = {};
                         local ____t_51 = __t
                         local ____t_48 = __t
                         local ____temp_47 = xx < -45 or xx > W + 45
-                        __O[1340] = ____temp_47
+                        __O[1341] = ____temp_47
                         local ____t_50 = __t
                         local ____temp_49 = row == 0 and wx > 1900
-                        __O[1339] = ____temp_49
-                        if ____t_51(if ____t_48(____temp_47) then __O[1340] else if ____t_50(____temp_49) then wx < 2560 else __O[1339]) then
+                        __O[1340] = ____temp_49
+                        if ____t_51(if ____t_48(____temp_47) then __O[1341] else if ____t_50(____temp_49) then wx < 2560 else __O[1340]) then
                             continue
                         end
                         local yy = if row == 0 then 401 + __mod(i, 3) * 5 else 438 + __mod(i, 2) * 3
@@ -3611,8 +3611,8 @@ local __O = {};
                     local ____t_54 = __t
                     local ____t_53 = __t
                     local ____temp_52 = xx < -50 or xx > W + 50
-                    __O[1341] = ____temp_52
-                    if ____t_54(if ____t_53(____temp_52) then __O[1341] else math.abs(wx - 3260) < 90) then
+                    __O[1342] = ____temp_52
+                    if ____t_54(if ____t_53(____temp_52) then __O[1342] else math.abs(wx - 3260) < 90) then
                         continue
                     end
                     c:save()
@@ -4117,8 +4117,8 @@ local __O = {};
             local ____t_71 = __t
             local ____t_70 = __t
             local ____temp_69 = index == 1 and ____local > 1.25
-            __O[1345] = ____temp_69
-            local tremor = if ____t_71(if ____t_70(____temp_69) then ____local < 1.9 else __O[1345]) then math.sin(t * 90) * 3 else 0
+            __O[1346] = ____temp_69
+            local tremor = if ____t_71(if ____t_70(____temp_69) then ____local < 1.9 else __O[1346]) then math.sin(t * 90) * 3 else 0
             c:save()
             c:translate(
                 math.floor(tremor + 0.5),
@@ -4557,8 +4557,8 @@ local __O = {};
         local ____t_78 = __t
         local ____t_77 = __t
         local ____temp_76 = not __t(s)
-        __O[1346] = ____temp_76
-        if ____t_78(if ____t_77(____temp_76) then __O[1346] else s.done) then
+        __O[1347] = ____temp_76
+        if ____t_78(if ____t_77(____temp_76) then __O[1347] else s.done) then
             return false
         end
         if __t(values.maxHP ~= nil or values.maxGas ~= nil) then
@@ -4594,8 +4594,8 @@ local __O = {};
         local ____t_85 = __t
         local ____t_84 = __t
         local ____temp_83 = s.stage ~= "fight" or __gt(s.player.inv, 0)
-        __O[1347] = ____temp_83
-        if ____t_85(if ____t_84(____temp_83) then __O[1347] else __le(s.player.hp, 0)) then
+        __O[1348] = ____temp_83
+        if ____t_85(if ____t_84(____temp_83) then __O[1348] else __le(s.player.hp, 0)) then
             return false
         end
         local value = math.max(
@@ -4633,8 +4633,8 @@ local __O = {};
         local ____t_88 = __t
         local ____t_87 = __t
         local ____temp_86 = s.stage ~= "fight" or __gt(s.boss.inv, 0)
-        __O[1348] = ____temp_86
-        if ____t_88(if ____t_87(____temp_86) then __O[1348] else __le(s.boss.hp, 0)) then
+        __O[1349] = ____temp_86
+        if ____t_88(if ____t_87(____temp_86) then __O[1349] else __le(s.boss.hp, 0)) then
             return false
         end
         s.boss.hp = math.max(
@@ -4972,10 +4972,10 @@ local __O = {};
         local ____t_92 = __t
         local ____t_90 = __t
         local ____temp_89 = not __t(s) or s.stage ~= "fight"
-        __O[1349] = ____temp_89
-        local ____temp_91 = if ____t_90(____temp_89) then __O[1349] else s.done
-        __O[1350] = ____temp_91
-        if ____t_93(if ____t_92(____temp_91) then __O[1350] else __le(s.player.hp, 0)) then
+        __O[1350] = ____temp_89
+        local ____temp_91 = if ____t_90(____temp_89) then __O[1350] else s.done
+        __O[1351] = ____temp_91
+        if ____t_93(if ____t_92(____temp_91) then __O[1351] else __le(s.player.hp, 0)) then
             return false
         end
         local p = s.player
@@ -5153,10 +5153,10 @@ local __O = {};
                     p.x,
                     __add(platform.x, platform.w) + 7
                 )
-                __O[1351] = ____temp_94
-                local ____temp_96 = if ____t_95(____temp_94) then __le(wasY, platform.y + 1) else __O[1351]
-                __O[1352] = ____temp_96
-                if ____t_98(if ____t_97(____temp_96) then __ge(p.y, platform.y) else __O[1352]) then
+                __O[1352] = ____temp_94
+                local ____temp_96 = if ____t_95(____temp_94) then __le(wasY, platform.y + 1) else __O[1352]
+                __O[1353] = ____temp_96
+                if ____t_98(if ____t_97(____temp_96) then __ge(p.y, platform.y) else __O[1353]) then
                     p.y = platform.y
                     p.vy = 0
                     p.grounded = true
@@ -5211,8 +5211,8 @@ local __O = {};
         local ____t_101 = __t
         local ____t_100 = __t
         local ____temp_99 = not __t(s)
-        __O[1353] = ____temp_99
-        if ____t_101(if ____t_100(____temp_99) then __O[1353] else s.done) then
+        __O[1354] = ____temp_99
+        if ____t_101(if ____t_100(____temp_99) then __O[1354] else s.done) then
             return
         end
         setBonuses(nil, s, bonuses)
@@ -5388,7 +5388,7 @@ local __O = {};
         local ____t_104 = __t
         local ____t_103 = __t
         local ____temp_102 = b.state == "swoop"
-        __O[1354] = ____temp_102
+        __O[1355] = ____temp_102
         if ____t_104(if ____t_103(____temp_102) then circleEllipse(
             nil,
             center.x,
@@ -5398,7 +5398,7 @@ local __O = {};
             48,
             62,
             if s.mode == "platform" then 16 else 22
-        ) else __O[1354]) then
+        ) else __O[1355]) then
             damagePlayer(nil, s, 17, b.x)
         end
         for ____, a in __iterar((s.shots)) do
@@ -5427,14 +5427,14 @@ local __O = {};
                     59 + s.phase * 3,
                     a.r
                 )
-                __O[1355] = ____circleEllipse_result_105
+                __O[1356] = ____circleEllipse_result_105
                 if ____t_107(if ____t_106(____circleEllipse_result_105) then damageBoss(
                     nil,
                     s,
                     a.damage,
                     a.x,
                     a.y
-                ) else __O[1355]) then
+                ) else __O[1356]) then
                     a.life = 0
                 end
             elseif __t(circleEllipse(
@@ -5460,12 +5460,12 @@ local __O = {};
                 local ____t_111 = __t
                 local ____t_109 = __t
                 local ____temp_108 = __gt(a.life, 0) and __gt(a.x, -100)
-                __O[1356] = ____temp_108
-                local ____temp_110 = if ____t_109(____temp_108) then __lt(a.x, 1110) else __O[1356]
-                __O[1357] = ____temp_110
-                local ____temp_112 = if ____t_111(____temp_110) then __gt(a.y, -180) else __O[1357]
-                __O[1358] = ____temp_112
-                return if ____t_113(____temp_112) then __lt(a.y, 690) else __O[1358]
+                __O[1357] = ____temp_108
+                local ____temp_110 = if ____t_109(____temp_108) then __lt(a.x, 1110) else __O[1357]
+                __O[1358] = ____temp_110
+                local ____temp_112 = if ____t_111(____temp_110) then __gt(a.y, -180) else __O[1358]
+                __O[1359] = ____temp_112
+                return if ____t_113(____temp_112) then __lt(a.y, 690) else __O[1359]
             end
         )
         for ____, h in __iterar((s.hazards)) do
@@ -5507,8 +5507,8 @@ local __O = {};
                 local dy = h.ty - h.y
                 local ____t_115 = __t
                 local ____hypot_result_114 = __hypot(dx, dy)
-                __O[1359] = ____hypot_result_114
-                local L = if ____t_115(____hypot_result_114) then __O[1359] else 1
+                __O[1360] = ____hypot_result_114
+                local L = if ____t_115(____hypot_result_114) then __O[1360] else 1
                 local ex = h.x + dx / L * 1200
                 local ey = h.y + dy / L * 1200
                 if pointSegment(
@@ -5532,8 +5532,8 @@ local __O = {};
             function(____, h)
                 local ____t_117 = __t
                 local ____gt_result_116 = __gt(h.life, 0)
-                __O[1360] = ____gt_result_116
-                return if ____t_117(____gt_result_116) then h.type ~= "gate" or __gt(h.x, -70) else __O[1360]
+                __O[1361] = ____gt_result_116
+                return if ____t_117(____gt_result_116) then h.type ~= "gate" or __gt(h.x, -70) else __O[1361]
             end
         )
     end
@@ -5541,8 +5541,8 @@ local __O = {};
         local ____t_120 = __t
         local ____t_119 = __t
         local ____temp_118 = not __t(s)
-        __O[1361] = ____temp_118
-        if ____t_120(if ____t_119(____temp_118) then __O[1361] else s.done) then
+        __O[1362] = ____temp_118
+        if ____t_120(if ____t_119(____temp_118) then __O[1362] else s.done) then
             return false
         end
         if s.stage == "intro" then
@@ -5571,8 +5571,8 @@ local __O = {};
         local ____t_123 = __t
         local ____t_122 = __t
         local ____temp_121 = not __t(s)
-        __O[1362] = ____temp_121
-        if ____t_123(if ____t_122(____temp_121) then __O[1362] else s.done) then
+        __O[1363] = ____temp_121
+        if ____t_123(if ____t_122(____temp_121) then __O[1363] else s.done) then
             return false
         end
         s.done = true
@@ -5955,8 +5955,8 @@ local __O = {};
             local dy = h.ty - h.y
             local ____t_137 = __t
             local ____hypot_result_136 = __hypot(dx, dy)
-            __O[1363] = ____hypot_result_136
-            local len = if ____t_137(____hypot_result_136) then __O[1363] else 1
+            __O[1364] = ____hypot_result_136
+            local len = if ____t_137(____hypot_result_136) then __O[1364] else 1
             local ex = h.x + dx / len * 1200
             local ey = h.y + dy / len * 1200
             if __gt(h.delay, 0) then
@@ -6630,8 +6630,8 @@ local __O = {};
                     local dy = b.targetY - b.y
                     local ____t_155 = __t
                     local ____hypot_result_154 = __hypot(dx, dy)
-                    __O[1364] = ____hypot_result_154
-                    local len = if ____t_155(____hypot_result_154) then __O[1364] else 1
+                    __O[1365] = ____hypot_result_154
+                    local len = if ____t_155(____hypot_result_154) then __O[1365] else 1
                     c:save()
                     c:setLineDash(__arrL({11, 8}, 2))
                     line(
@@ -6654,8 +6654,8 @@ local __O = {};
         local ____t_158 = __t
         local ____t_157 = __t
         local ____temp_156 = s.stage == "fight"
-        __O[1365] = ____temp_156
-        if ____t_158(if ____t_157(____temp_156) then __lt(s.time, 15) or s.mode == "platform" else __O[1365]) then
+        __O[1366] = ____temp_156
+        if ____t_158(if ____t_157(____temp_156) then __lt(s.time, 15) or s.mode == "platform" else __O[1366]) then
             text(
                 nil,
                 c,

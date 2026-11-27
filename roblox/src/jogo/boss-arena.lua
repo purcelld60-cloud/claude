@@ -16,8 +16,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawArena)
-    __O[2660] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2660] else window.BossArena) then
+    __O[2687] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[2687] else window.BossArena) then
         return
     end
     local orig = window.Art.drawArena
@@ -491,8 +491,8 @@ local __O = {};
         local ____t_5 = __t
         local ____t_4 = __t
         local ____temp_3 = if __t(____type) then type(____type) == "table" else ____type
-        __O[2661] = ____temp_3
-        local th = if ____t_5(if ____t_4(____temp_3) then ____type.light else __O[2661]) then ____type else __get(THEME, ____type)
+        __O[2688] = ____temp_3
+        local th = if ____t_5(if ____t_4(____temp_3) then ____type.light else __O[2688]) then ____type else __get(THEME, ____type)
         if not __t(th) then
             return
         end
@@ -708,30 +708,30 @@ local __O = {};
         if ____opt_8 ~= nil then
             ____opt_result_10 = ____opt_8(____opt_8, ____type)
         end
-        __O[2662] = ____opt_result_10
+        __O[2689] = ____opt_result_10
         if ____t_12(if ____t_11(____opt_result_10) then window.HdMaps:drawArena(
             c,
             ____type,
             camera,
             t,
             homeX
-        ) else __O[2662]) then
+        ) else __O[2689]) then
             do
                 pcall(function()
                     local ____overlay_20 = overlay
                     local ____array_19 = __TS__SparseArrayNew(nil, c, if type(____type) == "table" then ____type.type else ____type)
                     local ____t_14 = __t
                     local ____TS__Number_result_13 = __TS__Number(camera)
-                    __O[2663] = ____TS__Number_result_13
-                    __TS__SparseArrayPush(____array_19, if ____t_14(____TS__Number_result_13) then __O[2663] else 0)
+                    __O[2690] = ____TS__Number_result_13
+                    __TS__SparseArrayPush(____array_19, if ____t_14(____TS__Number_result_13) then __O[2690] else 0)
                     local ____t_16 = __t
                     local ____TS__Number_result_15 = __TS__Number(t)
-                    __O[2664] = ____TS__Number_result_15
-                    __TS__SparseArrayPush(____array_19, if ____t_16(____TS__Number_result_15) then __O[2664] else 0)
+                    __O[2691] = ____TS__Number_result_15
+                    __TS__SparseArrayPush(____array_19, if ____t_16(____TS__Number_result_15) then __O[2691] else 0)
                     local ____t_18 = __t
                     local ____TS__Number_result_17 = __TS__Number(homeX)
-                    __O[2665] = ____TS__Number_result_17
-                    __TS__SparseArrayPush(____array_19, if ____t_18(____TS__Number_result_17) then __O[2665] else 0, true)
+                    __O[2692] = ____TS__Number_result_17
+                    __TS__SparseArrayPush(____array_19, if ____t_18(____TS__Number_result_17) then __O[2692] else 0, true)
                     ____overlay_20(__TS__SparseArraySpread(____array_19))
                 end)
             end
@@ -755,7 +755,7 @@ local __O = {};
         if ____opt_23 ~= nil then
             ____opt_result_25 = ____opt_23(____opt_23)
         end
-        __O[2666] = ____opt_result_25
+        __O[2693] = ____opt_result_25
         local ____opt_29 = window.HdScene
         if ____opt_29 ~= nil then
             ____opt_29 = ____opt_29.active
@@ -764,7 +764,7 @@ local __O = {};
         if ____opt_29 ~= nil then
             ____opt_result_31 = ____opt_29(____opt_29, ____type)
         end
-        if ____t_32(if ____t_26(____opt_result_25) then __O[2666] else ____opt_result_31) then
+        if ____t_32(if ____t_26(____opt_result_25) then __O[2693] else ____opt_result_31) then
             return
         end
         do
@@ -773,16 +773,16 @@ local __O = {};
                 local ____array_39 = __TS__SparseArrayNew(nil, c, if type(____type) == "table" then ____type.type else ____type)
                 local ____t_34 = __t
                 local ____TS__Number_result_33 = __TS__Number(camera)
-                __O[2667] = ____TS__Number_result_33
-                __TS__SparseArrayPush(____array_39, if ____t_34(____TS__Number_result_33) then __O[2667] else 0)
+                __O[2694] = ____TS__Number_result_33
+                __TS__SparseArrayPush(____array_39, if ____t_34(____TS__Number_result_33) then __O[2694] else 0)
                 local ____t_36 = __t
                 local ____TS__Number_result_35 = __TS__Number(t)
-                __O[2668] = ____TS__Number_result_35
-                __TS__SparseArrayPush(____array_39, if ____t_36(____TS__Number_result_35) then __O[2668] else 0)
+                __O[2695] = ____TS__Number_result_35
+                __TS__SparseArrayPush(____array_39, if ____t_36(____TS__Number_result_35) then __O[2695] else 0)
                 local ____t_38 = __t
                 local ____TS__Number_result_37 = __TS__Number(homeX)
-                __O[2669] = ____TS__Number_result_37
-                __TS__SparseArrayPush(____array_39, if ____t_38(____TS__Number_result_37) then __O[2669] else 0)
+                __O[2696] = ____TS__Number_result_37
+                __TS__SparseArrayPush(____array_39, if ____t_38(____TS__Number_result_37) then __O[2696] else 0)
                 ____overlay_40(__TS__SparseArraySpread(____array_39))
             end)
         end
@@ -865,20 +865,20 @@ local __O = {};
                 local ____array_55 = __TS__SparseArrayNew(nil, c)
                 local ____t_48 = __t
                 local ____get_result_47 = __get(C2, tema)
-                __O[2670] = ____get_result_47
-                __TS__SparseArrayPush(____array_55, if ____t_48(____get_result_47) then __O[2670] else C2.creuza)
+                __O[2697] = ____get_result_47
+                __TS__SparseArrayPush(____array_55, if ____t_48(____get_result_47) then __O[2697] else C2.creuza)
                 local ____t_50 = __t
                 local ____TS__Number_result_49 = __TS__Number(camera)
-                __O[2671] = ____TS__Number_result_49
-                __TS__SparseArrayPush(____array_55, if ____t_50(____TS__Number_result_49) then __O[2671] else 0)
+                __O[2698] = ____TS__Number_result_49
+                __TS__SparseArrayPush(____array_55, if ____t_50(____TS__Number_result_49) then __O[2698] else 0)
                 local ____t_52 = __t
                 local ____TS__Number_result_51 = __TS__Number(t)
-                __O[2672] = ____TS__Number_result_51
-                __TS__SparseArrayPush(____array_55, if ____t_52(____TS__Number_result_51) then __O[2672] else 0)
+                __O[2699] = ____TS__Number_result_51
+                __TS__SparseArrayPush(____array_55, if ____t_52(____TS__Number_result_51) then __O[2699] else 0)
                 local ____t_54 = __t
                 local ____TS__Number_result_53 = __TS__Number(homeX)
-                __O[2673] = ____TS__Number_result_53
-                __TS__SparseArrayPush(____array_55, if ____t_54(____TS__Number_result_53) then __O[2673] else 0)
+                __O[2700] = ____TS__Number_result_53
+                __TS__SparseArrayPush(____array_55, if ____t_54(____TS__Number_result_53) then __O[2700] else 0)
                 ____overlay_56(__TS__SparseArraySpread(____array_55))
             end)
         end

@@ -5,6 +5,10 @@ falas, menus e botões. Não é uma adaptação: o código do jogo (`dist/*.js`)
 (a linguagem do Roblox) e roda lá dentro. Ele desenha cada quadro pixel a pixel numa imagem do tamanho do jogo
 (960 × 540), mostrada na tela do jogador.
 
+> **Para colocar no Roblox, siga o [PASSO-A-PASSO.md](PASSO-A-PASSO.md).** Ele usa o arquivo pronto
+> **DaRocaAdventure.rbxlx** que sai em **Releases** ("Da Roça no Roblox"): é só abrir no Roblox Studio e publicar,
+> sem instalar o Rojo.
+
 ## Como funciona
 
 | Peça | O que faz |
@@ -19,6 +23,7 @@ falas, menus e botões. Não é uma adaptação: o código do jogo (`dist/*.js`)
 | `src/runtime/audio.lua` + `src/runtime/sons.lua` | O som do jogo: imita o WebAudio (osciladores, ganho, ruído) e toca no Roblox com 5 sons base em laço (`audio/onda_*.ogg`), mudando a altura pela velocidade. |
 | `src/cliente/DaRoca.client.lua` | O script do jogador: mostra a imagem, lê teclado, mouse, toque e controle, e liga a qualidade do Roblox à do jogo. |
 | `src/servidor/DaRoca.server.lua` | Guarda o save de cada jogador no DataStore. |
+| `tools/gerar_rbxlx.py` | Monta o `DaRocaAdventure.rbxlx` (o lugar do Roblox com tudo dentro, igual ao `default.project.json`). O GitHub roda isso sozinho e publica em Releases (`roblox.yml`). |
 
 ## Controles
 
@@ -95,8 +100,10 @@ barrado pela moderação**. Se acontecer, me peça uma versão do Roblox com ess
   navegador, **depois que você enviar os 5 arquivos `roblox/audio/onda_*.ogg`** para a sua conta (passo 7 acima).
   As músicas em MP3 que você coloca em `dist/musicas` precisam ser enviadas uma a uma e ligadas pelo nome no
   `sons.lua` (envie só músicas que são suas ou que você tem direito de usar).
-- **Interface**: telas que não foram fotografadas pelo `capturar.mjs` (a captura passa pela tela inicial, painel
-  JOGAR, abertura, jogo, diálogo, pausa, DADOS, inventário, viagem e opções) podem aparecer sem a moldura.
+- **Interface**: a captura fotografa a tela inicial, o painel JOGAR, a abertura, o jogo, o diálogo, a pausa, DADOS,
+  o inventário, a viagem, as opções e a luta contra chefe. Janelas que não estão nas fotos (avisos e confirmações
+  criadas na hora) aparecem num painel automático no estilo do jogo, com o texto e os botões funcionando; caixas
+  de aviso com texto maior esticam para caber.
 - **Campos de texto**: no PC, digite normalmente; no celular, tocar num campo abre o teclado do Roblox. Para incluir mais telas, acrescente
   estados na lista `ESTADOS` do `capturar.mjs`.
 - **Tamanho**: alguns módulos convertidos são grandes (o `vendor__pixelfx` tem cerca de 4 MB). O Studio pode
@@ -111,6 +118,8 @@ Com o Lua 5.3 instalado (`apt install lua5.3`):
 cd roblox
 npm run converter:teste
 lua5.3 teste/sessao.lua /tmp quadros:5 clique:#menuJogarBtn quadros:3 clique:#startBtn quadros:60 tela:jogo
+# luta contra um chefe e o aviso de dificuldade:
+lua5.3 teste/sessao.lua /tmp quadros:3 clique:#menuJogarBtn clique:#startBtn quadros:10 chefe:freddy quadros:60 tela:luta chamar:SwiftGuide.open tela:aviso
 ```
 
 Isso liga o jogo inteiro em Lua, aperta os botões e grava a tela em `/tmp/jogo.ppm`.

@@ -36,6 +36,11 @@ local __O = {};
     local function dev()
         return not not __t(window.DAROCA_DEV)
     end
+    local TETO = 40
+    local TETO_DEV = 1000000000
+    local function teto()
+        return if __t(dev(nil)) then TETO_DEV else TETO
+    end
     local function need(____, level)
         return if __ge(level, 50) then 0 else math.floor(60 + level * 35 + level ^ 1.5 * 12)
     end
@@ -46,6 +51,7 @@ local __O = {};
             totalXP = state.totalXP,
             points = if __t(dev(nil)) then 999 else state.points,
             infinito = dev(nil),
+            teto = if __t(dev(nil)) then nil else TETO,
             nextXP = need(nil, state.level),
             stats = __assign({}, state.stats)
         }
@@ -131,7 +137,7 @@ local __O = {};
                         nil,
                         math.floor(if ____t_13(____TS__Number_result_12) then __O[42] else 0),
                         0,
-                        40
+                        teto(nil)
                     )
                 )
             end
@@ -217,10 +223,13 @@ local __O = {};
             {levelsGained = gained, awarded = amount}
         )
     end
-    local function spend(self, stat)
+    local function spend(self, stat, qtd)
+        if qtd == nil then
+            qtd = 1
+        end
         if __t(not __t(__call(keys, "includes", stat)) or __ge(
             __get(state.stats, stat),
-            40
+            teto(nil)
         )) then
             return false
         end
@@ -229,8 +238,29 @@ local __O = {};
                 return false
             end
             state.points = state.points - 1
+            __inc(state.stats, stat, 1, true)
+        else
+            local ____set_27 = __set
+            local ____state_stats_25 = state.stats
+            local ____stat_26 = stat
+            local ____get_result_24 = __get(state.stats, stat)
+            local ____t_23 = __t
+            local ____TS__Number_result_22 = __TS__Number(qtd)
+            __O[45] = ____TS__Number_result_22
+            ____set_27(
+                ____state_stats_25,
+                ____stat_26,
+                math.min(
+                    TETO_DEV,
+                    ____get_result_24 + clamp(
+                        nil,
+                        math.floor(if ____t_23(____TS__Number_result_22) then __O[45] else 1),
+                        1,
+                        1000000
+                    )
+                )
+            )
         end
-        __inc(state.stats, stat, 1, true)
         emit(nil, 0, "spend")
         return true
     end
@@ -254,6 +284,7 @@ local __O = {};
             {
                 points = state.points,
                 infinito = nil,
+                teto = nil,
                 stats = __assign({}, state.stats),
                 rewards = __arr(__TS__Spread(__iter(state.rewards)))
             }

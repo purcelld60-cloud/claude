@@ -187,8 +187,8 @@ local __O = {};
             "find",
             function(____, m) return m.id == mode end
         )
-        __O[45] = ____call_result_0
-        return if ____t_1(____call_result_0) then __O[45] else __get(MODES, 0)
+        __O[46] = ____call_result_0
+        return if ____t_1(____call_result_0) then __O[46] else __get(MODES, 0)
     end
     local function hour(self)
         if forced ~= nil then

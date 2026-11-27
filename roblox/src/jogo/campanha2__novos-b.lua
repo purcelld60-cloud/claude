@@ -14,8 +14,8 @@ local __O = {};
     local ____t_2 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(window.CampanhaNovos)
-    __O[443] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[443] else window.CampanhaNovos.b) then
+    __O[444] = ____temp_0
+    if ____t_2(if ____t_1(____temp_0) then __O[444] else window.CampanhaNovos.b) then
         return
     end
     local CC = window.CampanhaCenarios
@@ -3920,8 +3920,8 @@ local __O = {};
         local ____t_6 = __t
         local ____t_5 = __t
         local ____vis_result_4 = vis(nil, tw, 100)
-        __O[444] = ____vis_result_4
-        if ____t_6(if ____t_5(____vis_result_4) then math.sin(t * 3) > 0 else __O[444]) then
+        __O[445] = ____vis_result_4
+        if ____t_6(if ____t_5(____vis_result_4) then math.sin(t * 3) > 0 else __O[445]) then
             lightAdd(
                 nil,
                 tw + 1,

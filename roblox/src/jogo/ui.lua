@@ -20,15 +20,15 @@ local __O = {};
         end
         local q = window.Game:getState().q
         local rows = window.Campaign:chapterState(q)
-        local ____t_222 = __t
-        local ____this_221
-        ____this_221 = window.Campaign
-        local ____opt_220 = ____this_221.sideQuestState
-        if ____opt_220 ~= nil then
-            ____opt_220 = ____opt_220(____this_221, q)
+        local ____t_225 = __t
+        local ____this_224
+        ____this_224 = window.Campaign
+        local ____opt_223 = ____this_224.sideQuestState
+        if ____opt_223 ~= nil then
+            ____opt_223 = ____opt_223(____this_224, q)
         end
-        __O[2259] = ____opt_220
-        local sideRows = if ____t_222(____opt_220) then __O[2259] else __arrL({}, 0)
+        __O[2286] = ____opt_223
+        local sideRows = if ____t_225(____opt_223) then __O[2286] else __arrL({}, 0)
         local signature = __add(
             __add(
                 __call(
@@ -70,12 +70,12 @@ local __O = {};
         list:replaceChildren()
         for ____, row in __iterar((rows)) do
             local li = window.document:createElement("li")
-            local ____row_id_226 = row.id
-            local ____opt_result_225
+            local ____row_id_229 = row.id
+            local ____opt_result_228
             if current ~= nil then
-                ____opt_result_225 = current.id
+                ____opt_result_228 = current.id
             end
-            li.className = if __t(row.complete) then "complete" else if ____row_id_226 == ____opt_result_225 then "current" else ""
+            li.className = if __t(row.complete) then "complete" else if ____row_id_229 == ____opt_result_228 then "current" else ""
             local n = window.document:createElement("span")
             n.textContent = if __t(row.complete) then "✓" else if __t(row.epilogue) then "✦" else __call(
                 tostring(row.index),
@@ -188,12 +188,12 @@ local __O = {};
         if state ~= nil then
             ____opt_result_4 = state.started
         end
-        __O[2210] = ____opt_result_4
-        local ____temp_6 = if ____t_5(____opt_result_4) then not __t(state.paused) else __O[2210]
-        __O[2211] = ____temp_6
-        local ____temp_8 = if ____t_7(____temp_6) then not __t(state.won) else __O[2211]
-        __O[2212] = ____temp_8
-        modalWasRunning = not not ____t_10(if ____t_9(____temp_8) then not __t(state.defeated) else __O[2212])
+        __O[2236] = ____opt_result_4
+        local ____temp_6 = if ____t_5(____opt_result_4) then not __t(state.paused) else __O[2236]
+        __O[2237] = ____temp_6
+        local ____temp_8 = if ____t_7(____temp_6) then not __t(state.won) else __O[2237]
+        __O[2238] = ____temp_8
+        modalWasRunning = not not ____t_10(if ____t_9(____temp_8) then not __t(state.defeated) else __O[2238])
         if __t(modalWasRunning) then
             window.Game:pause()
         end
@@ -246,10 +246,10 @@ local __O = {};
                         local ____t_14 = __t
                         local ____t_12 = __t
                         local ____temp_11 = e.clientX < b.left or e.clientX > b.right
-                        __O[2213] = ____temp_11
-                        local ____temp_13 = if ____t_12(____temp_11) then __O[2213] else e.clientY < b.top
-                        __O[2214] = ____temp_13
-                        if ____t_15(if ____t_14(____temp_13) then __O[2214] else e.clientY > b.bottom) then
+                        __O[2239] = ____temp_11
+                        local ____temp_13 = if ____t_12(____temp_11) then __O[2239] else e.clientY < b.top
+                        __O[2240] = ____temp_13
+                        if ____t_15(if ____t_14(____temp_13) then __O[2240] else e.clientY > b.bottom) then
                             closeModal(nil, el)
                         end
                     end
@@ -372,23 +372,23 @@ local __O = {};
         __re("iPhone|iPad|iPod", ""),
         window.navigator.userAgent
     )
-    __O[2215] = ____re_test_result_26
-    local isIOS = if ____t_27(____re_test_result_26) then __O[2215] else window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
+    __O[2241] = ____re_test_result_26
+    local isIOS = if ____t_27(____re_test_result_26) then __O[2241] else window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
     local function standalone()
         local ____t_33 = __t
         local ____t_31 = __t
         local ____t_29 = __t
         local ____temp_28 = window.location.protocol == "file:"
-        __O[2216] = ____temp_28
-        local ____temp_30 = if ____t_29(____temp_28) then __O[2216] else __call(
+        __O[2242] = ____temp_28
+        local ____temp_30 = if ____t_29(____temp_28) then __O[2242] else __call(
             __new("URLSearchParams", window.location.search),
             "has",
             "native"
         )
-        __O[2217] = ____temp_30
-        local ____temp_32 = if ____t_31(____temp_30) then __O[2217] else window:matchMedia("(display-mode: standalone)").matches
-        __O[2218] = ____temp_32
-        return if ____t_33(____temp_32) then __O[2218] else not not __t(window.navigator.standalone)
+        __O[2243] = ____temp_30
+        local ____temp_32 = if ____t_31(____temp_30) then __O[2243] else window:matchMedia("(display-mode: standalone)").matches
+        __O[2244] = ____temp_32
+        return if ____t_33(____temp_32) then __O[2244] else not not __t(window.navigator.standalone)
     end
     local function isNative()
         return window.document.fullscreenElement == shell or window.document.webkitFullscreenElement == shell
@@ -412,8 +412,8 @@ local __O = {};
     iosHelp:setAttribute("aria-haspopup", "dialog")
     local ____t_35 = __t
     local ____temp_34 = not __t(isIOS)
-    __O[2219] = ____temp_34
-    iosHelp.hidden = if ____t_35(____temp_34) then __O[2219] else standalone(nil)
+    __O[2245] = ____temp_34
+    iosHelp.hidden = if ____t_35(____temp_34) then __O[2245] else standalone(nil)
     fitTools:append(fitButton, iosHelp)
     shell:append(fitTools)
     local function fitImmersive(self)
@@ -423,12 +423,12 @@ local __O = {};
         local vv = window.visualViewport
         local ____t_39 = __t
         local ____temp_38 = vv and vv.width
-        __O[2220] = ____temp_38
-        local width = math.floor(if ____t_39(____temp_38) then __O[2220] else window.innerWidth + 0.5)
+        __O[2246] = ____temp_38
+        local width = math.floor(if ____t_39(____temp_38) then __O[2246] else window.innerWidth + 0.5)
         local ____t_43 = __t
         local ____temp_42 = vv and vv.height
-        __O[2221] = ____temp_42
-        local height = math.floor(if ____t_43(____temp_42) then __O[2221] else window.innerHeight + 0.5)
+        __O[2247] = ____temp_42
+        local height = math.floor(if ____t_43(____temp_42) then __O[2247] else window.innerHeight + 0.5)
         shell.style:setProperty(
             "--visible-width",
             __add(width, "px")
@@ -442,29 +442,29 @@ local __O = {};
         local ____add_48 = __add
         local ____t_47 = __t
         local ____temp_46 = vv and vv.offsetLeft
-        __O[2222] = ____temp_46
+        __O[2248] = ____temp_46
         ____self_49_setProperty_50(
             ____self_49,
             "--visible-left",
-            ____add_48(if __t(isNative(nil)) then 0 else if ____t_47(____temp_46) then __O[2222] else 0, "px")
+            ____add_48(if __t(isNative(nil)) then 0 else if ____t_47(____temp_46) then __O[2248] else 0, "px")
         )
         local ____self_56 = shell.style
         local ____self_56_setProperty_57 = ____self_56.setProperty
         local ____add_55 = __add
         local ____t_54 = __t
         local ____temp_53 = vv and vv.offsetTop
-        __O[2223] = ____temp_53
+        __O[2249] = ____temp_53
         ____self_56_setProperty_57(
             ____self_56,
             "--visible-top",
-            ____add_55(if __t(isNative(nil)) then 0 else if ____t_54(____temp_53) then __O[2223] else 0, "px")
+            ____add_55(if __t(isNative(nil)) then 0 else if ____t_54(____temp_53) then __O[2249] else 0, "px")
         )
         local wide = width > height and height < 700
         shell.classList:toggle("screen-wide", wide)
         local ____t_59 = __t
         local ____temp_58 = not __t(window.document:getElementById("startScreen").hidden)
-        __O[2224] = ____temp_58
-        local story = if ____t_59(____temp_58) then __O[2224] else __call(
+        __O[2250] = ____temp_58
+        local story = if ____t_59(____temp_58) then __O[2250] else __call(
             __arrL({
                 "is-dialog",
                 "is-cutscene",
@@ -485,18 +485,18 @@ local __O = {};
         local ____self_62_toggle_63 = ____self_62.toggle
         local ____t_61 = __t
         local ____temp_60 = if __t(wide) then width / height <= 3.2 else wide
-        __O[2225] = ____temp_60
-        ____self_62_toggle_63(____self_62, "screen-crop-safe", if ____t_61(____temp_60) then height >= 280 else __O[2225])
+        __O[2251] = ____temp_60
+        ____self_62_toggle_63(____self_62, "screen-crop-safe", if ____t_61(____temp_60) then height >= 280 else __O[2251])
         local ____t_67 = __t
         local ____opt_64 = shell:querySelector(".game-topbar")
         local ____temp_66 = ____opt_64 and ____opt_64:getBoundingClientRect().height
-        __O[2226] = ____temp_66
-        local ____temp_72 = if ____t_67(____temp_66) then __O[2226] else 0
+        __O[2252] = ____temp_66
+        local ____temp_72 = if ____t_67(____temp_66) then __O[2252] else 0
         local ____t_71 = __t
         local ____opt_68 = shell:querySelector(".progress-hud")
         local ____temp_70 = ____opt_68 and ____opt_68:getBoundingClientRect().height
-        __O[2227] = ____temp_70
-        local top = ____temp_72 + if ____t_71(____temp_70) then __O[2227] else 0
+        __O[2253] = ____temp_70
+        local top = ____temp_72 + if ____t_71(____temp_70) then __O[2253] else 0
         shell.style:setProperty(
             "--screen-hud-height",
             __add(top, "px")
@@ -505,8 +505,8 @@ local __O = {};
         local function px(____, v)
             local ____t_74 = __t
             local ____TS__ParseFloat_result_73 = __TS__ParseFloat(v)
-            __O[2228] = ____TS__ParseFloat_result_73
-            return if ____t_74(____TS__ParseFloat_result_73) then __O[2228] else 0
+            __O[2254] = ____TS__ParseFloat_result_73
+            return if ____t_74(____TS__ParseFloat_result_73) then __O[2254] else 0
         end
         local availW = shell.clientWidth - px(nil, style.paddingLeft) - px(nil, style.paddingRight)
         local availH = math.max(
@@ -534,18 +534,18 @@ local __O = {};
         local ____t_78 = __t
         local ____t_76 = __t
         local ____temp_75 = not __t(isIOS)
-        __O[2229] = ____temp_75
-        local ____temp_77 = if ____t_76(____temp_75) then __O[2229] else standalone(nil)
-        __O[2230] = ____temp_77
-        iosHelp.hidden = if ____t_78(____temp_77) then __O[2230] else isNative(nil)
+        __O[2255] = ____temp_75
+        local ____temp_77 = if ____t_76(____temp_75) then __O[2255] else standalone(nil)
+        __O[2256] = ____temp_77
+        iosHelp.hidden = if ____t_78(____temp_77) then __O[2256] else isNative(nil)
         local ____t_80 = __t
         local ____temp_79 = if __t(rotationDismissed) then rotationDismissed else height <= width
-        __O[2232] = ____temp_79
+        __O[2258] = ____temp_79
         local ____t_83 = __t
         local ____t_82 = __t
         local ____table_matches_81 = window:matchMedia("(pointer: coarse)").matches
-        __O[2231] = ____table_matches_81
-        rotateHint.hidden = if ____t_80(____temp_79) then __O[2232] else not ____t_83(if ____t_82(____table_matches_81) then __O[2231] else width < 800)
+        __O[2257] = ____table_matches_81
+        rotateHint.hidden = if ____t_80(____temp_79) then __O[2258] else not ____t_83(if ____t_82(____table_matches_81) then __O[2257] else width < 800)
     end
     local function baseGameShell()
         return window.document.body.classList:contains("shell-experience")
@@ -625,15 +625,15 @@ local __O = {};
                     local ____t_100 = __t
                     local ____t_99 = __t
                     local ____temp_98 = not __t(standalone(nil))
-                    __O[2233] = ____temp_98
-                    if ____t_100(if ____t_99(____temp_98) then shell.requestFullscreen else __O[2233]) then
+                    __O[2259] = ____temp_98
+                    if ____t_100(if ____t_99(____temp_98) then shell.requestFullscreen else __O[2259]) then
                         __TS__Await(shell:requestFullscreen({navigationUI = "hide"}))
                     else
                         local ____t_103 = __t
                         local ____t_102 = __t
                         local ____temp_101 = not __t(standalone(nil))
-                        __O[2234] = ____temp_101
-                        if ____t_103(if ____t_102(____temp_101) then shell.webkitRequestFullscreen else __O[2234]) then
+                        __O[2260] = ____temp_101
+                        if ____t_103(if ____t_102(____temp_101) then shell.webkitRequestFullscreen else __O[2260]) then
                             __TS__Await(shell:webkitRequestFullscreen())
                         end
                     end
@@ -815,14 +815,14 @@ local __O = {};
             local ____t_134 = __t
             local ____t_132 = __t
             local ____temp_131 = e.code == "Escape"
-            __O[2235] = ____temp_131
-            local ____temp_133 = if ____t_132(____temp_131) then immersive else __O[2235]
-            __O[2236] = ____temp_133
-            local ____temp_135 = if ____t_134(____temp_133) then not __t(baseGameShell(nil)) else __O[2236]
-            __O[2237] = ____temp_135
-            local ____temp_137 = if ____t_136(____temp_135) then not __t(isNative(nil)) else __O[2237]
-            __O[2238] = ____temp_137
-            if ____t_139(if ____t_138(____temp_137) then not __t(window.document:querySelector("dialog[open]")) else __O[2238]) then
+            __O[2261] = ____temp_131
+            local ____temp_133 = if ____t_132(____temp_131) then immersive else __O[2261]
+            __O[2262] = ____temp_133
+            local ____temp_135 = if ____t_134(____temp_133) then not __t(baseGameShell(nil)) else __O[2262]
+            __O[2263] = ____temp_135
+            local ____temp_137 = if ____t_136(____temp_135) then not __t(isNative(nil)) else __O[2263]
+            __O[2264] = ____temp_137
+            if ____t_139(if ____t_138(____temp_137) then not __t(window.document:querySelector("dialog[open]")) else __O[2264]) then
                 exitImmersive(nil)
             end
         end
@@ -847,12 +847,12 @@ local __O = {};
         local ____t_149 = __t
         local ____t_147 = __t
         local ____temp_146 = if __t(immersive) then shell.classList:contains("screen-wide") else immersive
-        __O[2239] = ____temp_146
-        local ____temp_148 = if ____t_147(____temp_146) then shell.classList:contains("screen-fill") else __O[2239]
-        __O[2240] = ____temp_148
-        local ____temp_150 = if ____t_149(____temp_148) then shell.classList:contains("screen-crop-safe") else __O[2240]
-        __O[2241] = ____temp_150
-        if ____t_152(if ____t_151(____temp_150) then not __t(shell.classList:contains("screen-story")) else __O[2241]) then
+        __O[2265] = ____temp_146
+        local ____temp_148 = if ____t_147(____temp_146) then shell.classList:contains("screen-fill") else __O[2265]
+        __O[2266] = ____temp_148
+        local ____temp_150 = if ____t_149(____temp_148) then shell.classList:contains("screen-crop-safe") else __O[2266]
+        __O[2267] = ____temp_150
+        if ____t_152(if ____t_151(____temp_150) then not __t(shell.classList:contains("screen-story")) else __O[2267]) then
             local viewport = shell:querySelector(".viewport")
             local w = viewport.clientWidth
             local h = viewport.clientHeight
@@ -872,12 +872,12 @@ local __O = {};
             local playerY = ____opt_result_157_158
             local ____t_160 = __t
             local ____TS__ParseFloat_result_159 = __TS__ParseFloat(shell.style:getPropertyValue("--screen-hud-height"))
-            __O[2242] = ____TS__ParseFloat_result_159
-            local hud = if ____t_160(____TS__ParseFloat_result_159) then __O[2242] else 72
+            __O[2268] = ____TS__ParseFloat_result_159
+            local hud = if ____t_160(____TS__ParseFloat_result_159) then __O[2268] else 72
             local ____t_162 = __t
             local ____TS__ParseFloat_result_161 = __TS__ParseFloat(window:getComputedStyle(shell).paddingTop)
-            __O[2243] = ____TS__ParseFloat_result_161
-            local safeTop = if ____t_162(____TS__ParseFloat_result_161) then __O[2243] else 0
+            __O[2269] = ____TS__ParseFloat_result_161
+            local safeTop = if ____t_162(____TS__ParseFloat_result_161) then __O[2269] else 0
             local minFoot = hud + safeTop + math.min(64, 62 * scale) + 24
             local bottom = math.min(0, h - 540 * scale)
             local target = math.min(
@@ -924,8 +924,8 @@ local __O = {};
                 if ____opt_166 ~= nil then
                     ____opt_166 = ____opt_166:canTravel(n, state.q)
                 end
-                __O[2244] = ____opt_166
-                local gate = if ____t_168(____opt_166) then __O[2244] else {ok = true, reason = ""}
+                __O[2270] = ____opt_166
+                local gate = if ____t_168(____opt_166) then __O[2270] else {ok = true, reason = ""}
                 b.classList:toggle(
                     "locked",
                     not __t(gate.ok)
@@ -955,26 +955,26 @@ local __O = {};
         local ____t_174 = __t
         local ____t_170 = __t
         local ____temp_169 = if __t(state.defeated) then state.defeated else state.won
-        __O[2245] = ____temp_169
+        __O[2271] = ____temp_169
         local ____opt_171 = state.training
         if ____opt_171 ~= nil then
             ____opt_171 = ____opt_171.active
         end
-        local ____temp_173 = if ____t_170(____temp_169) then __O[2245] else ____opt_171
-        __O[2246] = ____temp_173
-        local ____temp_175 = if ____t_174(____temp_173) then __O[2246] else state.activity
-        __O[2247] = ____temp_175
-        local ____temp_177 = if ____t_176(____temp_175) then __O[2247] else state.dialog
-        __O[2248] = ____temp_177
-        local ____temp_179 = if ____t_178(____temp_177) then __O[2248] else state.paused
-        __O[2249] = ____temp_179
-        local ____temp_181 = if ____t_180(____temp_179) then __O[2249] else state.activeBoss
-        __O[2250] = ____temp_181
-        local ____temp_183 = if ____t_182(____temp_181) then __O[2250] else state.routeTransition
-        __O[2251] = ____temp_183
-        local ____temp_185 = if ____t_184(____temp_183) then __O[2251] else state.cutscene
-        __O[2252] = ____temp_185
-        if ____t_187(if ____t_186(____temp_185) then __O[2252] else state.room) then
+        local ____temp_173 = if ____t_170(____temp_169) then __O[2271] else ____opt_171
+        __O[2272] = ____temp_173
+        local ____temp_175 = if ____t_174(____temp_173) then __O[2272] else state.activity
+        __O[2273] = ____temp_175
+        local ____temp_177 = if ____t_176(____temp_175) then __O[2273] else state.dialog
+        __O[2274] = ____temp_177
+        local ____temp_179 = if ____t_178(____temp_177) then __O[2274] else state.paused
+        __O[2275] = ____temp_179
+        local ____temp_181 = if ____t_180(____temp_179) then __O[2275] else state.activeBoss
+        __O[2276] = ____temp_181
+        local ____temp_183 = if ____t_182(____temp_181) then __O[2276] else state.routeTransition
+        __O[2277] = ____temp_183
+        local ____temp_185 = if ____t_184(____temp_183) then __O[2277] else state.cutscene
+        __O[2278] = ____temp_185
+        if ____t_187(if ____t_186(____temp_185) then __O[2278] else state.room) then
             return
         end
         local ____t_193 = __t
@@ -1070,20 +1070,20 @@ local __O = {};
             local ____t_204 = __t
             local ____t_202 = __t
             local ____temp_201 = if __t(st.paused) then st.paused else st.defeated
-            __O[2253] = ____temp_201
-            local ____temp_203 = if ____t_202(____temp_201) then __O[2253] else st.dialog
-            __O[2254] = ____temp_203
+            __O[2279] = ____temp_201
+            local ____temp_203 = if ____t_202(____temp_201) then __O[2279] else st.dialog
+            __O[2280] = ____temp_203
             local ____opt_205 = st.training
             if ____opt_205 ~= nil then
                 ____opt_205 = ____opt_205.active
             end
-            local ____temp_207 = if ____t_204(____temp_203) then __O[2254] else ____opt_205
-            __O[2255] = ____temp_207
-            local ____temp_209 = if ____t_208(____temp_207) then __O[2255] else st.activity
-            __O[2256] = ____temp_209
-            local ____temp_211 = if ____t_210(____temp_209) then __O[2256] else st.cutscene
-            __O[2257] = ____temp_211
-            if ____t_213(if ____t_212(____temp_211) then __O[2257] else st.room) then
+            local ____temp_207 = if ____t_204(____temp_203) then __O[2280] else ____opt_205
+            __O[2281] = ____temp_207
+            local ____temp_209 = if ____t_208(____temp_207) then __O[2281] else st.activity
+            __O[2282] = ____temp_209
+            local ____temp_211 = if ____t_210(____temp_209) then __O[2282] else st.cutscene
+            __O[2283] = ____temp_211
+            if ____t_213(if ____t_212(____temp_211) then __O[2283] else st.room) then
                 closeTravel(nil)
             end
         end
@@ -1161,14 +1161,14 @@ local __O = {};
                 __len(e.touches),
                 1
             )
-            __O[2258] = ____gt_result_214
+            __O[2284] = ____gt_result_214
             local ____this_217
             ____this_217 = e.target
             local ____opt_216 = ____this_217.closest
             if ____opt_216 ~= nil then
                 ____opt_216 = ____opt_216(____this_217, ".touch-controls,#gameCanvas,.training-action")
             end
-            if ____t_218(if ____t_215(____gt_result_214) then __O[2258] else ____opt_216) then
+            if ____t_218(if ____t_215(____gt_result_214) then __O[2284] else ____opt_216) then
                 preventGesture(nil, e)
             end
         end,
@@ -1204,21 +1204,56 @@ local __O = {};
             ),
             if __t(p.infinito) then "∞ pontos (modo desenvolvedor)" else __add(p.points, " pontos disponíveis")
         )
+        local function curto(____, n)
+            local function d(____, v, u)
+                return __add(if __lt(v, 10) then __call(
+                    __call(
+                        __call(v, "toFixed", 1),
+                        "replace",
+                        ".",
+                        ","
+                    ),
+                    "replace",
+                    ",0",
+                    ""
+                ) else tostring(math.floor(v)), u)
+            end
+            return if __lt(n, 1000) then tostring(n) else if __lt(n, 1000000) then d(nil, n / 1000, "K") else if __lt(n, 1000000000) then d(nil, n / 1000000, "M") else d(nil, n / 1000000000, "B")
+        end
         for ____, stat in __iterar((__arrL({"vigor", "forca", "gas", "agilidade"}, 4))) do
-            window.document:getElementById(__add("stat-", stat)).textContent = __get(p.stats, stat)
+            local el = window.document:getElementById(__add("stat-", stat))
+            local v = __get(p.stats, stat)
+            local t = curto(nil, v)
+            el.textContent = t
+            el.title = __call(v, "toLocaleString", "pt-BR")
+            el.style.fontSize = if __gt(
+                __len(t),
+                3
+            ) then "11px" else ""
         end
         __call(
             window.document:querySelectorAll("[data-spend-stat]"),
             "forEach",
             function(____, b)
-                local ____temp_219 = __lt(p.points, 1) or __ge(
+                local ____b_221 = b
+                local ____t_220 = __t
+                local ____lt_result_219 = __lt(p.points, 1)
+                __O[2285] = ____lt_result_219
+                local ____temp_222 = if ____t_220(____lt_result_219) then __O[2285] else not not __t(p.teto) and __ge(
                     __get(p.stats, b.dataset.spendStat),
-                    40
+                    p.teto
                 )
-                b.disabled = ____temp_219
-                return ____temp_219
+                ____b_221.disabled = ____temp_222
+                return ____temp_222
             end
         )
+        local function num(____, n)
+            return __call(
+                math.floor(n + 0.5),
+                "toLocaleString",
+                "pt-BR"
+            )
+        end
         window.document:getElementById("statsBonuses").textContent = __add(
             __add(
                 __add(
@@ -1229,16 +1264,19 @@ local __O = {};
                                     __add(
                                         __add(
                                             __add(
-                                                __add(bonus.maxHP, " de vida · "),
-                                                bonus.maxGas
+                                                __add(
+                                                    num(nil, bonus.maxHP),
+                                                    " de vida · "
+                                                ),
+                                                num(nil, bonus.maxGas)
                                             ),
                                             " de gás · "
                                         ),
-                                        math.floor((bonus.damageMultiplier - 1) * 100 + 0.5)
+                                        num(nil, (bonus.damageMultiplier - 1) * 100)
                                     ),
                                     "% de dano extra · velocidade "
                                 ),
-                                math.floor(bonus.moveSpeed + 0.5)
+                                num(nil, bonus.moveSpeed)
                             ),
                             " · dash a cada "
                         ),
@@ -1273,25 +1311,85 @@ local __O = {};
             )
         end
     )
+    local function upar(____, stat, qtd)
+        if qtd == nil then
+            qtd = 1
+        end
+        local ____t_232 = __t
+        local ____opt_230 = window.Game
+        if ____opt_230 ~= nil then
+            ____opt_230 = ____opt_230.spendStat
+        end
+        if ____t_232(____opt_230) then
+            window.Game:spendStat(stat, qtd)
+        else
+            window.Progression:spend(stat, qtd)
+        end
+        updateProgress(nil)
+    end
     __call(
         window.document:querySelectorAll("[data-spend-stat]"),
         "forEach",
-        function(____, b) return b:addEventListener(
-            "click",
-            function()
-                local ____t_229 = __t
-                local ____opt_227 = window.Game
-                if ____opt_227 ~= nil then
-                    ____opt_227 = ____opt_227.spendStat
-                end
-                if ____t_229(____opt_227) then
-                    window.Game:spendStat(b.dataset.spendStat)
-                else
-                    window.Progression:spend(b.dataset.spendStat)
-                end
-                updateProgress(nil)
+        function(____, b)
+            local timer = 0
+            local repeticoes = 0
+            local segurou = false
+            local function parar()
+                window:clearTimeout(timer)
+                timer = 0
             end
-        ) end
+            local passo
+            passo = function()
+                repeticoes = repeticoes + 1
+                segurou = true
+                upar(nil, b.dataset.spendStat, if repeticoes < 12 then 1 else if repeticoes < 30 then 10 else if repeticoes < 55 then 100 else 1000)
+                timer = window:setTimeout(passo, if repeticoes < 12 then 110 else 70)
+            end
+            b:addEventListener(
+                "pointerdown",
+                function(____, e)
+                    if __t(not __t(window.DAROCA_DEV) or __gt(e.button, 0)) then
+                        return
+                    end
+                    parar(nil)
+                    repeticoes = 0
+                    segurou = false
+                    timer = window:setTimeout(passo, 380)
+                end
+            )
+            b:addEventListener(
+                "pointerup",
+                function()
+                    parar(nil)
+                    window:setTimeout(
+                        function()
+                            segurou = false
+                        end,
+                        0
+                    )
+                end
+            )
+            for ____, ev in __iterar((__arrL({"pointerleave", "pointercancel", "blur"}, 3))) do
+                b:addEventListener(
+                    ev,
+                    function()
+                        parar(nil)
+                        segurou = false
+                    end
+                )
+            end
+            b:addEventListener(
+                "click",
+                function()
+                    parar(nil)
+                    if __t(segurou) then
+                        segurou = false
+                        return
+                    end
+                    upar(nil, b.dataset.spendStat)
+                end
+            )
+        end
     )
     window:addEventListener("progression-change", updateProgress)
     updateProgress(nil)

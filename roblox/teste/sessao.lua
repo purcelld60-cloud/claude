@@ -1,6 +1,6 @@
 -- Sessão de teste (Lua 5.3): liga o jogo, executa ações e grava telas.
 -- Uso (na pasta roblox): lua5.3 teste/sessao.lua <pasta_saida> ação1 ação2 ...
---   quadros:N  clique:<seletor>  tecla:<code>  segurar:<code>:N  soltar:<code>  foto:<nome>  html:<seletor>  graficos:low|medium
+--   chefe:<tipo>  estado:  quadros:N  clique:<seletor>  tecla:<code>  segurar:<code>:N  soltar:<code>  foto:<nome>  html:<seletor>  graficos:low|medium
 package.path = "./src/runtime/?.lua;./teste/jogo/?.lua;" .. package.path
 local JS = require("js")
 local Canvas = require("canvas")
@@ -39,6 +39,18 @@ for i = 2, #arg do
     N.percorrer(N.document.body, function(e) if not achou and e._tag == "button" and visivel(e) and N.textoDe(e):upper():find(v:upper(), 1, true) then achou = e; return true end end)
     if achou then achou:click(); print("botão " .. v) else print("sem botão " .. v) end
   elseif tipo == "cliquexy" then local x, y = v:match("^(%d+),(%d+)$"); N.ponteiro("pointerdown", tonumber(x), tonumber(y), 1, N.toque); rodar(2); N.ponteiro("pointerup", tonumber(x), tonumber(y), 1, N.toque); print("clicou em " .. v .. " (" .. tostring(N.elementoEm(tonumber(x), tonumber(y)).id) .. ")")
+  elseif tipo == "chefe" then -- abre a revanche contra um chefe (Terreiro dos Chefes)
+    local G = N.window.Game
+    for _ = 1, 6 do pcall(G.skipCutscene, G); pcall(G.closeDialogue, G); rodar(2) end
+    N.window.localStorage:setItem("daroca-sandbox-v1", "1")
+    local ok, r = pcall(G.startSandboxBoss, G, v); print("chefe " .. v .. ": " .. tostring(ok and r or r))
+  elseif tipo == "chamar" then -- chamar:Objeto.metodo (ex.: chamar:SwiftGuide.open)
+    local o, m = v:match("^(%w+)%.(%w+)$"); local obj = N.window[o]
+    local ok, r = pcall(obj and obj[m], obj); print("chamou " .. v .. ": " .. tostring(ok) .. " " .. tostring(r))
+  elseif tipo == "quem" then local x, y = v:match("^(%d+),(%d+)$"); print("em " .. v .. ": " .. table.concat(Carregar.desenhista.todosEm(tonumber(x), tonumber(y)), " | "))
+  elseif tipo == "estado" then
+    local ok, st = pcall(N.window.Game.getState, N.window.Game)
+    if ok and st then local p = st.player; print(("estado: x=%.0f y=%.0f hp=%s chefe=%s perigos=%d tiros=%d"):format(p.x, p.y, tostring(p.hp), tostring(st.activeBoss), #st.hazards, #st.shots)) else print("estado: erro " .. tostring(st)) end
   elseif tipo == "html" then local el = N.document:querySelector(v); print(el and (el.outerHTML:sub(1, 600)) or ("sem " .. v))
   elseif tipo == "visiveis" then
     N.percorrer(N.document.body, function(e) if e._tag == "button" and visivel(e) then print("  botão visível:", e.id, e.className, (N.textoDe(e):gsub("%s+", " ")):sub(1, 40)) end end)

@@ -40,9 +40,9 @@ local __O = {};
     local function iniciar(self, cena)
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(cena)
-        __O[683] = ____TS__Number_result_0
+        __O[684] = ____TS__Number_result_0
         ch = {
-            cena = if ____t_1(____TS__Number_result_0) then __O[683] else 0,
+            cena = if ____t_1(____TS__Number_result_0) then __O[684] else 0,
             t = 0,
             parts = __arrL({}, 0)
         }
@@ -210,8 +210,8 @@ local __O = {};
                 local ____t_4 = __t
                 local ____t_3 = __t
                 local ____temp_2 = f > 0.45 and f < 0.5
-                __O[684] = ____temp_2
-                if ____t_4(if ____t_3(____temp_2) then math.random() < 0.8 else __O[684]) then
+                __O[685] = ____temp_2
+                if ____t_4(if ____t_3(____temp_2) then math.random() < 0.8 else __O[685]) then
                     do
                         local i = 0
                         while i < 3 do
@@ -654,8 +654,8 @@ local __O = {};
         local y1 = o.y
         local ____t_6 = __t
         local ____get_result_5 = __get(ANIM, ch.cena)
-        __O[685] = ____get_result_5
-        local fn = if ____t_6(____get_result_5) then __O[685] else __get(ANIM, 0)
+        __O[686] = ____get_result_5
+        local fn = if ____t_6(____get_result_5) then __O[686] else __get(ANIM, 0)
         local ____t_8 = __t
         local ____fn_result_7 = fn(
             nil,
@@ -664,8 +664,8 @@ local __O = {};
             y1,
             if __t(o.time) then o.time else 0
         )
-        __O[686] = ____fn_result_7
-        local a = if ____t_8(____fn_result_7) then __O[686] else {}
+        __O[687] = ____fn_result_7
+        local a = if ____t_8(____fn_result_7) then __O[687] else {}
         ctx:save()
         for ____, p in __iterar((ch.parts)) do
             if __t(p.chao) then
@@ -793,8 +793,8 @@ local __O = {};
                 local ____t_25 = __t
                 local ____t_24 = __t
                 local ____temp_23 = p.cor == "#e8dcc0" or p.cor == "#d8c098"
-                __O[687] = ____temp_23
-                local tam = ____p_tam_26 * if ____t_25(if ____t_24(____temp_23) then __O[687] else p.cor == "#e8e8e8") then 1 + p.t * 1.5 else 1
+                __O[688] = ____temp_23
+                local tam = ____p_tam_26 * if ____t_25(if ____t_24(____temp_23) then __O[688] else p.cor == "#e8e8e8") then 1 + p.t * 1.5 else 1
                 ctx:fillRect(
                     math.floor(p.x - tam / 2 + 0.5),
                     math.floor(p.y - tam / 2 + 0.5),

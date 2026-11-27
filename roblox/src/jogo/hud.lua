@@ -2,7 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __gt, __getq, __callq, __ord, __arrL, __iterar, __t, __get, __call, __add, __new = __JSR.__gt, __JSR.__getq, __JSR.__callq, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__new
+local __gt, __ge, __getq, __callq, __ord, __arrL, __iterar, __t, __get, __call, __add, __new = __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__callq, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__new
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
 local __TS__Iterator = ____lualib.__TS__Iterator
@@ -18,10 +18,10 @@ local __O = {};
     local ____t_3 = __t
     local ____t_1 = __t
     local ____temp_0 = not __t(shell) or not __t(hud)
-    __O[3017] = ____temp_0
-    local ____temp_2 = if ____t_1(____temp_0) then __O[3017] else not __t(ending)
-    __O[3018] = ____temp_2
-    if ____t_4(if ____t_3(____temp_2) then __O[3018] else not __t(endCanvas)) then
+    __O[3044] = ____temp_0
+    local ____temp_2 = if ____t_1(____temp_0) then __O[3044] else not __t(ending)
+    __O[3045] = ____temp_2
+    if ____t_4(if ____t_3(____temp_2) then __O[3045] else not __t(endCanvas)) then
         return
     end
     local fill = window.document:getElementById("bossHudFill")
@@ -48,22 +48,22 @@ local __O = {};
     local function renderBossPhase(self, boss)
         local ____t_8 = __t
         local ____TS__Number_result_7 = __TS__Number(boss.phaseCount)
-        __O[3019] = ____TS__Number_result_7
+        __O[3046] = ____TS__Number_result_7
         local count = math.max(
             1,
             math.min(
                 5,
-                math.floor(if ____t_8(____TS__Number_result_7) then __O[3019] else 3)
+                math.floor(if ____t_8(____TS__Number_result_7) then __O[3046] else 3)
             )
         )
         local ____t_10 = __t
         local ____TS__Number_result_9 = __TS__Number(boss.phase)
-        __O[3020] = ____TS__Number_result_9
+        __O[3047] = ____TS__Number_result_9
         local current = math.max(
             1,
             math.min(
                 count,
-                math.floor(if ____t_10(____TS__Number_result_9) then __O[3020] else 1)
+                math.floor(if ____t_10(____TS__Number_result_9) then __O[3047] else 1)
             )
         )
         if count ~= phaseCount then
@@ -135,8 +135,8 @@ local __O = {};
         local ____t_13 = __t
         local ____t_12 = __t
         local ____temp_11 = not __t(statsModal)
-        __O[3021] = ____temp_11
-        if ____t_13(if ____t_12(____temp_11) then __O[3021] else statsModal.dataset.ranchReady) then
+        __O[3048] = ____temp_11
+        if ____t_13(if ____t_12(____temp_11) then __O[3048] else statsModal.dataset.ranchReady) then
             return
         end
         statsModal.dataset.ranchReady = "true"
@@ -212,19 +212,20 @@ local __O = {};
             ))
             local ____t_29 = __t
             local ____TS__Number_result_28 = __TS__Number(__getq(state.stats, stat))
-            __O[3022] = ____TS__Number_result_28
-            local level = if ____t_29(____TS__Number_result_28) then __O[3022] else 0
+            __O[3049] = ____TS__Number_result_28
+            local level = if ____t_29(____TS__Number_result_28) then __O[3049] else 0
+            local teto = if __t(state.teto) then state.teto else 0
             if row ~= nil then
                 row.style:setProperty(
                     "--stat-growth",
-                    __add(
-                        math.min(100, level / 40 * 100),
-                        "%"
-                    )
+                    __add(if __t(teto) then math.min(100, level / teto * 100) else 100, "%")
                 )
             end
             if row ~= nil then
-                row.classList:toggle("at-cap", level >= 40)
+                row.classList:toggle(
+                    "at-cap",
+                    not not __t(teto) and __ge(level, teto)
+                )
             end
         end
     end
@@ -383,14 +384,14 @@ local __O = {};
             local ____t_84 = __t
             local ____t_82 = __t
             local ____temp_81 = shell.classList:contains("in-main-menu")
-            __O[3023] = ____temp_81
-            local ____temp_83 = if ____t_82(____temp_81) then __O[3023] else shell.classList:contains("is-cutscene")
-            __O[3024] = ____temp_83
-            local ____temp_85 = if ____t_84(____temp_83) then __O[3024] else shell.classList:contains("is-dialog")
-            __O[3025] = ____temp_85
-            local ____temp_87 = if ____t_86(____temp_85) then __O[3025] else shell.classList:contains("is-paused")
-            __O[3026] = ____temp_87
-            local hidden = if ____t_88(____temp_87) then __O[3026] else shell.classList:contains("is-chapter-ended")
+            __O[3050] = ____temp_81
+            local ____temp_83 = if ____t_82(____temp_81) then __O[3050] else shell.classList:contains("is-cutscene")
+            __O[3051] = ____temp_83
+            local ____temp_85 = if ____t_84(____temp_83) then __O[3051] else shell.classList:contains("is-dialog")
+            __O[3052] = ____temp_85
+            local ____temp_87 = if ____t_86(____temp_85) then __O[3052] else shell.classList:contains("is-paused")
+            __O[3053] = ____temp_87
+            local hidden = if ____t_88(____temp_87) then __O[3053] else shell.classList:contains("is-chapter-ended")
             local ____opt_91 = window.Game
             if ____opt_91 ~= nil then
                 ____opt_91 = ____opt_91.getBossStatus
@@ -404,15 +405,15 @@ local __O = {};
             if __t(boss) then
                 local ____t_95 = __t
                 local ____TS__Number_result_94 = __TS__Number(boss.hp)
-                __O[3027] = ____TS__Number_result_94
-                local hp = math.max(0, if ____t_95(____TS__Number_result_94) then __O[3027] else 0)
+                __O[3054] = ____TS__Number_result_94
+                local hp = math.max(0, if ____t_95(____TS__Number_result_94) then __O[3054] else 0)
                 local ____t_99 = __t
                 local ____t_97 = __t
                 local ____TS__Number_result_96 = __TS__Number(boss.phaseMaxHp)
-                __O[3028] = ____TS__Number_result_96
-                local ____temp_98 = if ____t_97(____TS__Number_result_96) then __O[3028] else __TS__Number(boss.max)
-                __O[3029] = ____temp_98
-                local max = math.max(1, if ____t_99(____temp_98) then __O[3029] else 1)
+                __O[3055] = ____TS__Number_result_96
+                local ____temp_98 = if ____t_97(____TS__Number_result_96) then __O[3055] else __TS__Number(boss.max)
+                __O[3056] = ____temp_98
+                local max = math.max(1, if ____t_99(____temp_98) then __O[3056] else 1)
                 local ratio = math.max(
                     0,
                     math.min(1, hp / max)
@@ -464,8 +465,8 @@ local __O = {};
                     dashing = "INVESTIDA",
                     firing = "DESVIE!"
                 }, boss.state)
-                __O[3030] = ____get_result_100
-                cue.textContent = if ____t_101(____get_result_100) then __O[3030] else "CHEFÃO"
+                __O[3057] = ____get_result_100
+                cue.textContent = if ____t_101(____get_result_100) then __O[3057] else "CHEFÃO"
             end
             local film = if __t(shell.classList:contains("is-epilogue")) then "jorge" else ""
             if film ~= lastFilm then

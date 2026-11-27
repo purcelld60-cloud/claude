@@ -92,11 +92,11 @@ local __O = {};
                     __re("crafted-controls", ""),
                     r.selectorText
                 ) else r.selectorText
-                __O[479] = ____temp_0
+                __O[480] = ____temp_0
                 if ____t_2(if ____t_1(____temp_0) then __re_test(
                     __re("touch-btn|control-icon|kbd|-btn\\b", ""),
                     r.selectorText
-                ) else __O[479]) then
+                ) else __O[480]) then
                     txt = __add(
                         txt,
                         __add(
@@ -158,9 +158,9 @@ local __O = {};
                 local ____t_8 = __t
                 local ____opt_3 = orig and orig:querySelector("svg")
                 local ____temp_7 = ____opt_3 and ____opt_3.outerHTML
-                __O[480] = ____temp_7
+                __O[481] = ____temp_7
                 b.innerHTML = ____add_9(
-                    if ____t_8(____temp_7) then __O[480] else "",
+                    if ____t_8(____temp_7) then __O[481] else "",
                     ("<small>" .. tostring(nome)) .. "</small>"
                 )
             end
@@ -256,8 +256,8 @@ local __O = {};
                 local ____t_13 = __t
                 local ____t_12 = __t
                 local ____temp_11 = if __t(modoJogo) then tipo ~= "papel" else modoJogo
-                __O[481] = ____temp_11
-                if ____t_13(if ____t_12(____temp_11) then tipo ~= "peido" else __O[481]) then
+                __O[482] = ____temp_11
+                if ____t_13(if ____t_12(____temp_11) then tipo ~= "peido" else __O[482]) then
                     n = math.floor(n * 5 + 0.5)
                 end
                 e.piscaAte = window.performance:now() + 400
@@ -338,13 +338,13 @@ local __O = {};
         if ____opt_20 ~= nil then
             ____opt_result_22 = ____opt_20(____opt_20)
         end
-        __O[482] = ____opt_result_22
+        __O[483] = ____opt_result_22
         ____self_26_dano_27(
             ____self_26,
             ____e_25,
             math.max(
                 1,
-                math.floor(____temp_24 * if ____t_23(____opt_result_22) then __O[482] else 1 + 0.5)
+                math.floor(____temp_24 * if ____t_23(____opt_result_22) then __O[483] else 1 + 0.5)
             ),
             tipo,
             dir
@@ -379,8 +379,8 @@ local __O = {};
                 if ____opt_30 ~= nil then
                     ____opt_result_32 = ____opt_30(____opt_30)
                 end
-                __O[483] = ____opt_result_32
-                bn = ____assign_35(____temp_34, BONUS0, if ____t_33(____opt_result_32) then __O[483] else {})
+                __O[484] = ____opt_result_32
+                bn = ____assign_35(____temp_34, BONUS0, if ____t_33(____opt_result_32) then __O[484] else {})
             end)
             if not ____try then
                 ____catch(____hasReturned)
@@ -437,8 +437,8 @@ local __O = {};
                 if ____opt_36 ~= nil then
                     ____opt_36 = ____opt_36.soundOn
                 end
-                __O[484] = ____opt_36
-                if ____t_39(if ____t_38(____opt_36) then not __t(window.Game:soundOn()) else __O[484]) then
+                __O[485] = ____opt_36
+                if ____t_39(if ____t_38(____opt_36) then not __t(window.Game:soundOn()) else __O[485]) then
                     return true
                 end
                 local ____opt_42 = window.DarocaAudio
@@ -549,10 +549,10 @@ local __O = {};
                         local ____t_49 = __t
                         local ____t_47 = __t
                         local ____temp_46 = __gt(b.hp, 0) and not __t(b.intocavel)
-                        __O[485] = ____temp_46
-                        local ____temp_48 = if ____t_47(____temp_46) then __TS__MathSign(b.x - P.x) == dir else __O[485]
-                        __O[486] = ____temp_48
-                        return if ____t_49(____temp_48) then math.abs(b.x - P.x) < 650 else __O[486]
+                        __O[486] = ____temp_46
+                        local ____temp_48 = if ____t_47(____temp_46) then __TS__MathSign(b.x - P.x) == dir else __O[486]
+                        __O[487] = ____temp_48
+                        return if ____t_49(____temp_48) then math.abs(b.x - P.x) < 650 else __O[487]
                     end
                 ),
                 "sort",
@@ -659,10 +659,10 @@ local __O = {};
             local ____t_61 = __t
             local ____t_59 = __t
             local ____temp_58 = __gt(b.hp, 0) and not __t(b.intocavel)
-            __O[487] = ____temp_58
-            local ____temp_60 = if ____t_59(____temp_58) then math.abs(b.x - P.x) < raio + (if __t(b.largura) then b.largura else 22 - 22) else __O[487]
-            __O[488] = ____temp_60
-            if ____t_62(if ____t_61(____temp_60) then math.abs(if __t(b.y) then b.y else FLOOR - P.y) < 180 else __O[488]) then
+            __O[488] = ____temp_58
+            local ____temp_60 = if ____t_59(____temp_58) then math.abs(b.x - P.x) < raio + (if __t(b.largura) then b.largura else 22 - 22) else __O[488]
+            __O[489] = ____temp_60
+            if ____t_62(if ____t_61(____temp_60) then math.abs(if __t(b.y) then b.y else FLOOR - P.y) < 180 else __O[489]) then
                 bater(
                     nil,
                     b,
@@ -685,15 +685,15 @@ local __O = {};
             local ____t_65 = __t
             local ____t_64 = __t
             local ____temp_63 = if __t(down) then not __t(r.ok) else down
-            __O[489] = ____temp_63
-            if ____t_65(if ____t_64(____temp_63) then r.motivo == "vazio" else __O[489]) then
+            __O[490] = ____temp_63
+            if ____t_65(if ____t_64(____temp_63) then r.motivo == "vazio" else __O[490]) then
                 aviso(nil, "Equipe um poder no Mural dos Poderes (quarto da pensão).")
             end
             local ____t_68 = __t
             local ____t_67 = __t
             local ____temp_66 = if __t(down) then not __t(r.ok) else down
-            __O[490] = ____temp_66
-            if ____t_68(if ____t_67(____temp_66) then r.motivo == "recarga" else __O[490]) then
+            __O[491] = ____temp_66
+            if ____t_68(if ____t_67(____temp_66) then r.motivo == "recarga" else __O[491]) then
                 aviso(
                     nil,
                     ("Recarregando: " .. tostring(__call(
@@ -854,8 +854,8 @@ local __O = {};
         end
         local ____t_89 = __t
         local ____temp_88 = not __t(P.ground) and gas > 0
-        __O[491] = ____temp_88
-        voandoAgora = if ____t_89(____temp_88) then not not __t(o.segurandoPulo) else __O[491]
+        __O[492] = ____temp_88
+        voandoAgora = if ____t_89(____temp_88) then not not __t(o.segurandoPulo) else __O[492]
         if __t(voandoAgora) then
             if __gt(
                 P.vy,
@@ -982,15 +982,15 @@ local __O = {};
                     local ____t_97 = __t
                     local ____t_95 = __t
                     local ____temp_94 = __gt(b.hp, 0) and not __t(b.intocavel)
-                    __O[492] = ____temp_94
+                    __O[493] = ____temp_94
                     local ____temp_96 = if ____t_95(____temp_94) then __lt(
                         math.abs(b.x - q.x),
                         if __t(b.largura) then b.largura else 22
-                    ) else __O[492]
-                    __O[493] = ____temp_96
-                    local ____temp_98 = if ____t_97(____temp_96) then __gt(q.y, b.y - if __t(b.alto) then b.alto else 80) else __O[493]
-                    __O[494] = ____temp_98
-                    if ____t_100(if ____t_99(____temp_98) then __lt(q.y, b.y + 4) else __O[494]) then
+                    ) else __O[493]
+                    __O[494] = ____temp_96
+                    local ____temp_98 = if ____t_97(____temp_96) then __gt(q.y, b.y - if __t(b.alto) then b.alto else 80) else __O[494]
+                    __O[495] = ____temp_98
+                    if ____t_100(if ____t_99(____temp_98) then __lt(q.y, b.y + 4) else __O[495]) then
                         bater(
                             nil,
                             b,
@@ -1042,8 +1042,8 @@ local __O = {};
         local ____t_103 = __t
         local ____t_102 = __t
         local ____temp_101 = not __t(caido)
-        __O[495] = ____temp_101
-        if ____t_103(if ____t_102(____temp_101) then piscando(nil, b) else __O[495]) then
+        __O[496] = ____temp_101
+        if ____t_103(if ____t_102(____temp_101) then piscando(nil, b) else __O[496]) then
             c.globalAlpha = 0.25
         end
         if __t(caido) then
@@ -1333,8 +1333,8 @@ local __O = {};
                             if ____opt_120 ~= nil then
                                 ____opt_120 = ____opt_120.curto
                             end
-                            __O[496] = ____opt_120
-                            return if ____t_122(____opt_120) then __O[496] else "—"
+                            __O[497] = ____opt_120
+                            return if ____t_122(____opt_120) then __O[497] else "—"
                         end
                     ),
                     "join",

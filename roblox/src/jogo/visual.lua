@@ -25,8 +25,8 @@ local __O = {};
         panel.innerHTML = "<div class=\"vp-box\"><div class=\"vp-head\"><b>ESPELHO DA BIGODON</b><span class=\"vp-davi\"></span></div><div class=\"vp-body\"><div class=\"vp-mirror\"><canvas width=\"200\" height=\"230\" aria-hidden=\"true\"></canvas><small class=\"vp-note\"></small></div><div class=\"vp-rows\"></div></div><div class=\"vp-actions\"><button type=\"button\" class=\"vp-reset\">PADRÃO</button><button type=\"button\" class=\"vp-done primary-btn\">PRONTO</button></div></div>"
         local ____t_20 = __t
         local ____temp_19 = window.document:getElementById("gameShell")
-        __O[135] = ____temp_19
-        if ____t_20(____temp_19) then __O[135] else window.document.body:append(panel)
+        __O[136] = ____temp_19
+        if ____t_20(____temp_19) then __O[136] else window.document.body:append(panel)
         preview = panel:querySelector("canvas")
         panel:querySelector(".vp-done"):addEventListener("click", close)
         panel:querySelector(".vp-reset"):addEventListener(
@@ -113,8 +113,8 @@ local __O = {};
                 end
                 local ____t_22 = __t
                 local ____temp_21 = key == "costume" and statusTraje(nil, val) ~= "ready"
-                __O[136] = ____temp_21
-                b.disabled = if ____t_22(____temp_21) then __O[136] else cobre(nil, traje, key)
+                __O[137] = ____temp_21
+                b.disabled = if ____t_22(____temp_21) then __O[137] else cobre(nil, traje, key)
                 b:addEventListener(
                     "click",
                     function()
@@ -229,8 +229,8 @@ local __O = {};
         local ____t_38 = __t
         local ____t_37 = __t
         local ____temp_36 = not __t(panel)
-        __O[137] = ____temp_36
-        if ____t_38(if ____t_37(____temp_36) then __O[137] else panel.hidden) then
+        __O[138] = ____temp_36
+        if ____t_38(if ____t_37(____temp_36) then __O[138] else panel.hidden) then
             return
         end
         panel.hidden = true
@@ -424,8 +424,8 @@ local __O = {};
         if ____opt_2 ~= nil then
             ____opt_result_4 = ____opt_2(____opt_2)
         end
-        __O[128] = ____opt_result_4
-        return if ____t_5(____opt_result_4) then __O[128] else "locked"
+        __O[129] = ____opt_result_4
+        return if ____t_5(____opt_result_4) then __O[129] else "locked"
     end
     TRAJES = __ord(
         {
@@ -440,34 +440,34 @@ local __O = {};
         local ____t_8 = __t
         local ____t_7 = __t
         local ____get_result_6 = __get(trajes, id)
-        __O[129] = ____get_result_6
-        return if id == "normal" then "ready" else if id == "jaglion" then jaglionStatus(nil) else if ____t_8(if ____t_7(____get_result_6) then __O[129] else window.DAROCA_DEV) then "ready" else "locked"
+        __O[130] = ____get_result_6
+        return if id == "normal" then "ready" else if id == "jaglion" then jaglionStatus(nil) else if ____t_8(if ____t_7(____get_result_6) then __O[130] else window.DAROCA_DEV) then "ready" else "locked"
     end
     cobre = function(____, traje, key)
         local ____t_10 = __t
         local ____temp_9 = key ~= "costume"
-        __O[134] = ____temp_9
+        __O[135] = ____temp_9
         local ____t_16 = __t
         local ____t_12 = __t
         local ____temp_11 = traje == "jaglion" or traje == "dajegue"
-        __O[131] = ____temp_11
+        __O[132] = ____temp_11
         local ____t_14 = __t
         local ____temp_13 = traje == "caipira"
-        __O[130] = ____temp_13
-        local ____temp_15 = if ____t_12(____temp_11) then __O[131] else if ____t_14(____temp_13) then __call(
+        __O[131] = ____temp_13
+        local ____temp_15 = if ____t_12(____temp_11) then __O[132] else if ____t_14(____temp_13) then __call(
             __arrL({"hat", "hatColor", "shirt", "pants"}, 4),
             "includes",
             key
-        ) else __O[130]
-        __O[133] = ____temp_15
+        ) else __O[131]
+        __O[134] = ____temp_15
         local ____t_18 = __t
         local ____temp_17 = traje == "farda"
-        __O[132] = ____temp_17
-        return if ____t_10(____temp_9) then if ____t_16(____temp_15) then __O[133] else if ____t_18(____temp_17) then __call(
+        __O[133] = ____temp_17
+        return if ____t_10(____temp_9) then if ____t_16(____temp_15) then __O[134] else if ____t_18(____temp_17) then __call(
             __arrL({"shirt", "pants"}, 2),
             "includes",
             key
-        ) else __O[132] else __O[134]
+        ) else __O[133] else __O[135]
     end
     isDefault = function(____, outfit) return __call(
         __keys(DEFAULT),
@@ -510,8 +510,8 @@ local __O = {};
                 local ____t_45 = __t
                 local ____t_44 = __t
                 local ____temp_43 = DEFAULT[k] ~= nil and type(v) == "string"
-                __O[138] = ____temp_43
-                if ____t_45(if ____t_44(____temp_43) then not __t(k == "costume" and statusTraje(nil, v) ~= "ready") else __O[138]) then
+                __O[139] = ____temp_43
+                if ____t_45(if ____t_44(____temp_43) then not __t(k == "costume" and statusTraje(nil, v) ~= "ready") else __O[139]) then
                     __set(look, k, v)
                     save(nil)
                 end
@@ -520,8 +520,8 @@ local __O = {};
                 local ____t_48 = __t
                 local ____t_47 = __t
                 local ____temp_46 = not __t(__get(TRAJES, id)) or id == "jaglion"
-                __O[139] = ____temp_46
-                if ____t_48(if ____t_47(____temp_46) then __O[139] else __get(trajes, id)) then
+                __O[140] = ____temp_46
+                if ____t_48(if ____t_47(____temp_46) then __O[140] else __get(trajes, id)) then
                     return false
                 end
                 __set(trajes, id, true)

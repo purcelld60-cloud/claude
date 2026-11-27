@@ -90,16 +90,16 @@ local __O = {};
             local ____t_5 = __t
             local ____t_1 = __t
             local ____temp_0 = fase == 1 and m.id == 1
-            __O[885] = ____temp_0
+            __O[886] = ____temp_0
             local ____t_3 = __t
             local ____temp_2 = fase == 2
-            __O[884] = ____temp_2
-            local ____temp_4 = if ____t_1(____temp_0) then __O[885] else if ____t_3(____temp_2) then m.id == 1 or m.id == 3 else __O[884]
-            __O[887] = ____temp_4
+            __O[885] = ____temp_2
+            local ____temp_4 = if ____t_1(____temp_0) then __O[886] else if ____t_3(____temp_2) then m.id == 1 or m.id == 3 else __O[885]
+            __O[888] = ____temp_4
             local ____t_7 = __t
             local ____temp_6 = fase == 3
-            __O[886] = ____temp_6
-            if ____t_8(if ____t_5(____temp_4) then __O[887] else if ____t_7(____temp_6) then m.id == 1 or m.id == 2 else __O[886]) then
+            __O[887] = ____temp_6
+            if ____t_8(if ____t_5(____temp_4) then __O[888] else if ____t_7(____temp_6) then m.id == 1 or m.id == 2 else __O[887]) then
                 m.rival.max = 42 + fase * 10
                 m.rival.hp = m.rival.max
                 m.rival.ejetado = 0
@@ -142,10 +142,10 @@ local __O = {};
             local ____t_13 = __t
             local ____t_11 = __t
             local ____temp_10 = e.apoio == m.id
-            __O[888] = ____temp_10
-            local ____temp_12 = if ____t_11(____temp_10) then p.ground else __O[888]
-            __O[889] = ____temp_12
-            if ____t_14(if ____t_13(____temp_12) then __ge(p.vy, 0) else __O[889]) then
+            __O[889] = ____temp_10
+            local ____temp_12 = if ____t_11(____temp_10) then p.ground else __O[889]
+            __O[890] = ____temp_12
+            if ____t_14(if ____t_13(____temp_12) then __ge(p.vy, 0) else __O[890]) then
                 p.x = p.x + (m.x - m.anteriorX)
                 p.y = p.y + (m.y - m.anteriorY)
             end
@@ -171,11 +171,11 @@ local __O = {};
             local ____t_21 = __t
             local ____t_18 = __t
             local ____temp_17 = o.cobrador ~= nil and not __t(__get(e.motos, o.cobrador).rival.hp)
-            __O[891] = ____temp_17
+            __O[892] = ____temp_17
             local ____t_20 = __t
             local ____temp_19 = f.estado == "windup"
-            __O[890] = ____temp_19
-            if ____t_21(if ____t_18(____temp_17) then if ____t_20(____temp_19) then __O[890] else f.estado == "firing" and __lt(f.tempo, o.atraso) else __O[891]) then
+            __O[891] = ____temp_19
+            if ____t_21(if ____t_18(____temp_17) then if ____t_20(____temp_19) then __O[891] else f.estado == "firing" and __lt(f.tempo, o.atraso) else __O[892]) then
                 o.fim = true
             end
         end
@@ -192,8 +192,8 @@ local __O = {};
                     antes,
                     math.max(m.y, m.anteriorY) + 3
                 )
-                __O[892] = ____temp_22
-                if ____t_24(if ____t_23(____temp_22) then __O[892] else __lt(p.y, m.y)) then
+                __O[893] = ____temp_22
+                if ____t_24(if ____t_23(____temp_22) then __O[893] else __lt(p.y, m.y)) then
                     continue
                 end
                 if ultimo ~= m.id then
@@ -298,8 +298,8 @@ local __O = {};
             local ____t_29 = __t
             local ____t_28 = __t
             local ____temp_27 = __gt(r.hp, 0) and d > 0
-            __O[893] = ____temp_27
-            if ____t_29(if ____t_28(____temp_27) then d < dist else __O[893]) then
+            __O[894] = ____temp_27
+            if ____t_29(if ____t_28(____temp_27) then d < dist else __O[894]) then
                 dist = d
                 escolhido = r
             end
@@ -316,10 +316,10 @@ local __O = {};
                 math.abs(s.x - r.x),
                 r.largura + 7
             )
-            __O[894] = ____temp_30
-            local ____temp_32 = if ____t_31(____temp_30) then __gt(s.y, r.y - r.alto - 6) else __O[894]
-            __O[895] = ____temp_32
-            if ____t_34(if ____t_33(____temp_32) then __lt(s.y, r.y + 5) else __O[895]) then
+            __O[895] = ____temp_30
+            local ____temp_32 = if ____t_31(____temp_30) then __gt(s.y, r.y - r.alto - 6) else __O[895]
+            __O[896] = ____temp_32
+            if ____t_34(if ____t_33(____temp_32) then __lt(s.y, r.y + 5) else __O[896]) then
                 r:onDano(s.damage)
                 return true
             end
@@ -1305,10 +1305,10 @@ local __O = {};
             )
             local ____t_39 = __t
             local ____temp_38 = f.golpe == "recibo"
-            __O[896] = ____temp_38
+            __O[897] = ____temp_38
             __TS__SparseArrayPush(
                 ____array_40,
-                if ____t_39(____temp_38) then f.estado == "windup" or f.estado == "firing" else __O[896],
+                if ____t_39(____temp_38) then f.estado == "windup" or f.estado == "firing" else __O[897],
                 t,
                 __gt(rival.hit, 0)
             )
@@ -1358,8 +1358,8 @@ local __O = {};
         local ____t_44 = __t
         local ____t_43 = __t
         local ____temp_42 = not __t(chefe) and __gt(rival.hp, 0)
-        __O[897] = ____temp_42
-        if ____t_44(if ____t_43(____temp_42) then __lt(rival.hp, rival.max) else __O[897]) then
+        __O[898] = ____temp_42
+        if ____t_44(if ____t_43(____temp_42) then __lt(rival.hp, rival.max) else __O[898]) then
             px(
                 nil,
                 c,

@@ -25,7 +25,7 @@
   if(fire&&p<.7)for(let i=0;i<3;i++)rect(c,(i-1)*8,-14-p*14-i%2*4,3,5,'#f7a33e');
  }
  function draw(c,time=0,layer='front'){
-  for(const e of events){const back=e.type==='gas'||e.type==='surge'||e.type==='dash';if((layer==='back')!==back)continue;const p=clamp(e.age/e.duration,0,1);c.save();c.translate(Math.round(e.x),Math.round(e.y));c.globalAlpha*=p>.7?(1-p)/.3:1;
+  for(const e of events){if(e.type==='gas'&&window.Golpes)continue; /* a nuvem do peidão é desenhada pelo golpes.js no tamanho exato da área */const back=e.type==='gas'||e.type==='surge'||e.type==='dash';if((layer==='back')!==back)continue;const p=clamp(e.age/e.duration,0,1);c.save();c.translate(Math.round(e.x),Math.round(e.y));c.globalAlpha*=p>.7?(1-p)/.3:1;
    if(e.type==='gas'){
     c.scale(e.dir,1);const reach=Math.min(185,Math.max(80,e.radius||120));for(let i=0;i<4;i++){const q=i/3,travel=10+p*reach*(.35+q*.65),yy=Math.sin(i*2.4)*11+p*(i%2?-9:5),size=(10+e.stage*2+q*7)*(1-p*.3);cloud(c,travel,yy,size,i%2?'#9ecb4b':'#bedc69','#e6ef9c');}for(let i=0;i<3;i++)rect(c,8+p*(38+i*14),-12+i*10,6,2,'#e3ef9a');
    }else if(e.type==='surge'){
