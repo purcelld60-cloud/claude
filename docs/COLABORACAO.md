@@ -454,3 +454,14 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     Em Lua 5.3, o quadro da tela inicial caiu de 1,09 s para 0,07 s.
   - **Qualidade:** o "Automático" do Roblox começa na BAIXA. `Graphics.set('auto-low')` passou a ser aceito.
     Em Lua 5.3 o jogo fica a 0,36 s por quadro na BAIXA e a 0,85 s na MÉDIA.
+- **27/11 · Claude:** **Roblox: "carregar:48: Script timeout" depois de "CARREGANDO… 82% tela-inicial"** (foto da build 8).
+  - **O que dizia a foto:** o tempo estourava ao carregar a `tela-inicial`, o último script. Em Lua 5.3 ela carrega em
+    0,2 s. O que só existe no Roblox é a compilação em código nativo (`--!native`), feita na hora do `require`, sem
+    pausa possível.
+  - **O que mudou:**
+    - `tela-inicial` saiu da lista `NATIVOS` do `converter.mjs`;
+    - no Roblox, as letras do logo são montadas 3 por quadro (`montarLetras`), e não no carregamento;
+    - no Roblox, o `document.fonts.load().then(montarPlaca)` não roda: a promessa resolvia na hora e a placa era
+      redesenhada no carregamento.
+  - **Resultado em Lua 5.3:** a tela-inicial carrega em 0,02 s (antes 0,21 s) e o logo fica pronto em ~20 quadros.
+  - O cliente avisa no Output qualquer módulo que leve mais de 0,5 s para carregar.

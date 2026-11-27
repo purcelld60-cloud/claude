@@ -165,7 +165,7 @@ local ok, erro = pcall(function()
       local t0 = os.clock()
       local r = require(m)
       local dt = os.clock() - t0
-      if dt > 1 then warn(("[Da Roça] %s levou %.1f s para carregar"):format(nome, dt)) end
+      if dt > .5 then warn(("[Da Roça] %s levou %.1f s para carregar"):format(nome, dt)) end
       carregados = carregados + 1
       ceder()
       return r
