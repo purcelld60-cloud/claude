@@ -349,11 +349,24 @@
   }
   const RENDER = { afterglow, empty, vibration, reach, caller, recognition, tremor, falling, kneeling, eyes };
 
+  // pixelfx por cima de cada cena (dono 'jorge', em coordenadas da tela): névoa no vazio, sombras subindo no tremor,
+  // poeira quando o celular cai e um eclipse no céu quando os olhos do vilão abrem (a chuva da cena ajoelhado já é desenhada)
+  let ultimaCena = null;
+  function efeitos(c, id, t) {
+    const F = window.FxPixel; if (!F?.tocar) return;
+    if (id !== ultimaCena) { ultimaCena = id; F.limpar('jorge'); const o = { dono: 'jorge', mundo: false };
+      if (id === 'empty') F.tocar('weather/fog', { ...o, x: 480, y: 540, duracao: 7, palette: F.PAL.fumaca });
+      else if (id === 'tremor') { F.tocar('shadow/shadow-tendrils', { ...o, x: 300, y: 520 }); F.tocar('shadow/shadow-tendrils', { ...o, x: 660, y: 520, atraso: .5, flip: true }); }
+      else if (id === 'falling') F.tocar('spawn/poof', { ...o, x: 480, y: 500, palette: F.PAL.fumaca, atraso: 2.4 });
+      else if (id === 'eyes') F.tocar('shadow/eclipse', { ...o, x: 790, y: 110, duracao: 8 }); }
+    F.desenhar(c, { dono: 'jorge', camada: 'back', mundo: false, tempo: performance.now() / 1000 }); F.desenhar(c, { dono: 'jorge', camada: 'front', mundo: false, tempo: performance.now() / 1000 });
+  }
   function draw(c, s) {
     if (!c || !s) return;
     const index = clamp(Math.floor(Number(s.index) || 0), 0, SHOTS.length - 1), shot = SHOTS[index], t = Math.max(0, Number(s.time) || 0), p = clamp(t / shot.duration);
     c.save(); c.imageSmoothingEnabled = true; c.fillStyle = '#000'; c.fillRect(0, 0, W, H);
     (RENDER[shot.id] || eyes)(c, t, p);
+    efeitos(c, shot.id, t);
     // cut-in fade from black on every shot, like an edited sequence
     const fadeIn = 1 - smooth(t / .25); if (fadeIn > 0 && index > 0) { c.fillStyle = `rgba(0,0,0,${fadeIn})`; c.fillRect(0, 0, W, H); }
     c.restore();

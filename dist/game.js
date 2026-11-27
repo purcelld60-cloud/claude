@@ -446,7 +446,14 @@
         {name:n.name,text:'E na favela tem Freddy, o mais forte do Reeis. Ele tira onda do chefe: “Ô REEEIS, tá se achando rei?”'},
         {name:'Da Roça',text:'Um corte de cabelo e duas fofocas. Melhor parada do carro do meu pai!'}],()=>{q.vitor=true;if(first)awardXP(60,'side-vitor');save();toast('Dica do Vitor: Nicolas fica no fim da Praça Camacan; Freddy está antes de Reeis.');});return;
     }
-    if(id==='freddy'){say(visitTalk(id));return;}
+    if(id==='freddy'){ // batalha criativa: revanche na rima, no ritmo, sem soco
+      if(!window.BaileConcurso?.abrir){say(visitTalk(id));return;}
+      const N=n.name,ja=!!q.rimaFreddy;
+      say([{name:N,text:ja?'Tu me venceu no soco e na rima. Quer mais uma rodada pra galera ver?':'Perdi no braço, mas no microfone ninguém me cala! Batalha de rima, chapéu. Aqui no morro.'},{name:N,text:'Eu mando um verso, tu responde no compasso. A galera decide pela nota. Setinha na linha, rima na ponta da língua!'},{name:'Da Roça',text:'Pode vir, Freddy. Rima de roça tem raiz!',actionLabel:'Batalha de rima'}],()=>{
+        releaseInputs();window.BaileConcurso.abrir({config:{titulo:'BATALHA DE RIMA',rival:'freddy',premio:null,premioLook:null,ganhou:'O MORRO TODO GRITOU: DA ROÇA!',versos:[['Lá do alto do morro eu mando a real,','teu chapéu de palha não passa do quintal!'],['Meu chapéu é de palha, mas a rima é de aço,','eu planto no compasso e colho no espaço!'],['Tu é da roça, eu sou do asfalto,','no meu microfone o grave vem mais alto!'],['No terreiro eu aprendi a ter paciência,','teu grave é barulho, o meu tem ciência!']]},onFim:(ok,nota,desistiu)=>{releaseInputs();
+          if(ok){const first=!q.rimaFreddy;q.rimaFreddy=true;if(first)awardXP(200,'side-rima-freddy');toast('Batalha de rima vencida! Nota '+nota+'%. O Freddy pediu bis.'+(first?' +200 XP':''));save();updateUI();}
+          else if(!desistiu)toast('Nota '+nota+'%. O Freddy levou essa. Fala com ele pra revanche!');}});});
+      return;}
     if(id==='nicolas'){say([{name:n.name,text:'Você viu minha aura suprema? Eu quase parti o céu. Só parei porque a praça tem horário de silêncio.'},
       {name:'Da Roça',text:'Nicolas, tu tava parado fazendo “vush, pá, bum” com a boca. O pombo foi o único que saiu voando.'},
       {name:n.name,text:'Foi uma batalha em outra dimensão! Você ainda não desbloqueou a câmera de protagonista.'},
