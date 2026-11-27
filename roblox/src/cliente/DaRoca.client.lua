@@ -120,6 +120,9 @@ caixaTexto.FocusLost:Connect(function() if campoAtual then N.digitar(campoAtual,
 
 local carregados = 0
 local totalModulos = #jogoPasta:GetChildren()
+local versaoValor = pasta:FindFirstChild("Versao")
+local VERSAO = versaoValor and versaoValor.Value or "local"
+print("[Da Roça] versão " .. VERSAO)
 -- pausa um quadro quando já faz um tempo sem pausar: o Roblox derruba scripts que ficam ~10 s sem pausar
 local ultimaPausa = os.clock()
 local function ceder()
@@ -128,14 +131,27 @@ end
 Canvas.ceder = ceder
 local ok, erro = pcall(function()
   Carregar.iniciar({ JS = JS, N = N, Canvas = Canvas, lualib = LL, Desenhista = Desenhista, Audio = Audio, ceder = ceder,
-    exigir = function(nome) local m = jogoPasta:FindFirstChild(nome); if not m then error("módulo " .. nome .. " não encontrado") end; ceder(); local r = require(m); carregados = carregados + 1; aviso.Text = ("CARREGANDO... %d%%"):format(math.min(99, math.floor(carregados / math.max(1, totalModulos) * 100))); ceder(); return r end,
+    exigir = function(nome)
+      local m = jogoPasta:FindFirstChild(nome); if not m then error("módulo " .. nome .. " não encontrado") end
+      -- mostra qual parte está carregando (se travar, a foto da tela diz onde) e começa cada parte com o tempo zerado
+      aviso.Text = ("CARREGANDO... %d%%\n\n%s\n%s"):format(math.min(99, math.floor(carregados / math.max(1, totalModulos) * 100)), nome, VERSAO)
+      if coroutine.isyieldable() then task.wait(); ultimaPausa = os.clock() end
+      local t0 = os.clock()
+      local r = require(m)
+      local dt = os.clock() - t0
+      if dt > 1 then warn(("[Da Roça] %s levou %.1f s para carregar"):format(nome, dt)) end
+      carregados = carregados + 1
+      ceder()
+      return r
+    end,
     aoCarregar = function() end })
   -- a biblioteca de efeitos (4 MB) carrega aqui, na tela de carregamento, e não no meio do jogo
   local fx = jogoPasta:FindFirstChild("vendor__pixelfx")
   if fx then ceder(); pcall(require, fx); ceder() end
 end)
 Canvas.ceder = nil -- depois de carregar, cada quadro roda inteiro (sem pausas no meio)
-if not ok then aviso.Text = "ERRO AO CARREGAR: " .. tostring(erro); warn(erro); return end
+if not ok then aviso.Text = "ERRO AO CARREGAR (" .. VERSAO .. "): " .. tostring(erro); warn(erro); return end
+print("[Da Roça] carregou")
 local desenhista = Carregar.desenhista
 N.aoErro = function(msg) warn("[Da Roça] " .. msg) end
 

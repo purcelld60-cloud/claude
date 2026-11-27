@@ -12,6 +12,7 @@ e as propriedades de serviço do projeto (movimento "Scriptable" e personagem qu
 Uso (na raiz do repositório):  python3 roblox/tools/gerar_rbxlx.py [saida.rbxlx]
 """
 import json
+import os
 import sys
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -72,11 +73,16 @@ def pasta(caminho: Path, nome: str):
     return item("Folder", nome, "", "".join(filhos))
 
 
+VERSAO = os.environ.get("DAROCA_VERSAO", "local")
+
+
 def no(nome, d):
     """Um nó do default.project.json."""
     caminho = d.get("$path")
     props = "".join(propriedade(k, v) for k, v in d.get("$properties", {}).items())
     filhos = "".join(no(k, v) for k, v in d.items() if not k.startswith("$"))
+    if nome == "DaRoca":  # número da versão, mostrado na tela de carregamento
+        filhos += item("StringValue", "Versao", f'<string name="Value">{escape(VERSAO)}</string>')
     if caminho:
         alvo = RAIZ / caminho
         if alvo.is_dir():

@@ -28,7 +28,7 @@ jobs:
       - name: Montar o DaRocaAdventure.rbxlx
         run: |
           mkdir -p saida
-          python3 roblox/tools/gerar_rbxlx.py saida/DaRocaAdventure.rbxlx
+          DAROCA_VERSAO="roblox-b${{ github.run_number }}" python3 roblox/tools/gerar_rbxlx.py saida/DaRocaAdventure.rbxlx
           cp roblox/PASSO-A-PASSO.md saida/PASSO-A-PASSO.md
           (cd roblox && zip -qr ../saida/DaRoca-sons-do-roblox.zip audio)
       - name: Publicar em Releases
