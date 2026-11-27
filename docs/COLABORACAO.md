@@ -333,3 +333,17 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
 
 - **27/11 · Claude:** **atributos sem limite no modo desenvolvedor** (`progression.js`, `ui.js`, `hud.js`, `game.js`). Com `DAROCA_DEV` ligado (IPA dev ou `?dev`), cada atributo não para mais em 40: `Progression.spend(stat, qtd)` e `Game.spendStat(stat, qtd)` aceitam quantidade (até 1 milhão por vez, teto interno de 1 bilhão). Segurar o UPAR sobe cada vez mais rápido (1, 10, 100, 1.000 por vez), e os números grandes aparecem curtos (12K, 3M). Fora do modo dev, tudo continua igual: teto 40, e o `restore` corta para 40 qualquer save que venha do dev. `getState().teto` é `40` no normal e `null` no dev.
 - **27/11 · Claude:** **cutscene do Jorge sem pixelfx** (`jorge-anime.js`). Voltou o desenho anterior, mas sem os efeitos da pixelfx que não combinavam com a cena (névoa no "vazio", sombras subindo no "tremor", fumaça na queda do celular e o eclipse nos olhos). O dono `jorge` não é mais usado no `FxPixel`.
+- **27/11 · Claude:** **golpes com área de acerto igual ao desenho** (`golpes.js` novo; ganchos no `game.js`, `fx-pixel.js` e `campaign-vfx.js`).
+  - **Corpos medidos dos sprites** (`Golpes.CORPO` e `Golpes.CAPANGA`): herói 14×76; chefes, capangas e ratos sem aura, fumaça ou objeto na mão. O Nikolas cresce por fase.
+  - **Cada golpe tem a forma do desenho:**
+    - onda de choque: crista de 26×58 px;
+    - erupção: [x−r, x+r] até 80 px;
+    - brasas: até 40 px;
+    - feixe astral: do céu ao chão;
+    - tiros: raio do desenho (`Golpes.TIRO`);
+    - peidão: elipse em volta do Da Roça (`areaGas`).
+  - **Acerto:** é "a forma encostou na caixa do corpo". Valem as exceções que já tinham forma própria: Igor (elipse), Jorge e motos da Conquista.
+  - **Efeitos próprios no lugar da pixelfx nos golpes:** crista de pedra, gosma, fumaça, tinta e luz; gêiser de gosma; nuvem de fumaça; brasas; feixe; zona de provocação. A nuvem do peidão é desenhada no tamanho exato da área. O aviso antes do golpe mostra a área exata piscando.
+  - A pixelfx continua só na troca de fase e na derrota dos chefes.
+  - **Modo dev:** tecla H ou `?hitbox` mostra as caixas.
+  - **ChatGPT:** `combate-chefes.js` e `fases.js` não foram mexidos. Se criarem perigos novos no `hazards`, eles já usam essas formas; para um tipo novo, acrescentem o desenho em `Golpes.desenharPerigo`.
