@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __gt, __getq, __lenq, __callq, __ord, __arrL, __iterar, __t, __get, __arr, __len, __call = __JSR.__gt, __JSR.__getq, __JSR.__lenq, __JSR.__callq, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__arr, __JSR.__len, __JSR.__call
 local __add, __new, __assign = __JSR.__add, __JSR.__new, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -88,7 +89,7 @@ local __O = {};
             action
         )
         __O[2481] = ____get_result_21
-        if ____t_25(if ____t_20(____temp_19) then ____gt_24(
+        __D[1] = if ____t_25(if ____t_20(____temp_19) then ____gt_24(
             ____len_23(if ____t_22(____get_result_21) then __O[2481] else __arrL({}, 0)),
             1
         ) else __O[2482]) then
@@ -779,7 +780,7 @@ local __O = {};
                     function(____, el) return el.classList:remove("is-listening") end
                 )
                 window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-                if __t(canSwap) then swapButton else cancelCapture:focus({preventScroll = true})
+                __D[1] = if __t(canSwap) then swapButton else cancelCapture:focus({preventScroll = true})
             else
                 captureCopy.textContent = if __t(result.message) then result.message else "Escolha outra tecla. Escape continua reservado para sair."
                 swapButton.hidden = true
@@ -1146,7 +1147,7 @@ local __O = {};
                 ____opt_128 = ____opt_128(____this_129, "[data-control-tab]")
             end
             __O[2498] = ____opt_128
-            if ____t_131(if ____t_130(____opt_128) then __call(
+            __D[1] = if ____t_131(if ____t_130(____opt_128) then __call(
                 __arrL({"ArrowLeft", "ArrowRight", "Home", "End"}, 4),
                 "includes",
                 event.key

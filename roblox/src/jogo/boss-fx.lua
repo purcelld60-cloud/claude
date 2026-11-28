@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call
 local __add = __JSR.__add
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -252,7 +253,7 @@ local __O = {};
         __O[1562] = ____temp_38
         local ____temp_40 = if ____t_39(____temp_38) then full else __O[1562]
         __O[1563] = ____temp_40
-        if ____t_42(if ____t_41(____temp_40) then __lt(
+        __D[1] = if ____t_42(if ____t_41(____temp_40) then __lt(
             __len(m.motes),
             26
         ) else __O[1563]) then

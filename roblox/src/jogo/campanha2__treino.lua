@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __newExpr, __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
 local __len, __call, __add, __assign, __isArray, __re, __re_test, __re_replace = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__assign, __JSR.__isArray, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -93,7 +94,7 @@ local __O = {};
                     r.selectorText
                 ) else r.selectorText
                 __O[490] = ____temp_0
-                if ____t_2(if ____t_1(____temp_0) then __re_test(
+                __D[1] = if ____t_2(if ____t_1(____temp_0) then __re_test(
                     __re("touch-btn|control-icon|kbd|-btn\\b", ""),
                     r.selectorText
                 ) else __O[490]) then
@@ -713,7 +714,7 @@ local __O = {};
                 not not __t(down)
             )
             if __t(down) then
-                if id == "paper" then papel else peido(nil, P)
+                __D[1] = if id == "paper" then papel else peido(nil, P)
             end
             return true
         end

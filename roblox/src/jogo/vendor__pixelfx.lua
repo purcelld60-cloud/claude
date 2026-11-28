@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __fbind, __newExpr, __fcall, __lt, __le, __gt, __ge, __imul, __cbrt, __objCreate, __getProto, __defPropV = __JSR.__fbind, __JSR.__newExpr, __JSR.__fcall, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__imul, __JSR.__cbrt, __JSR.__objCreate, __JSR.__getProto, __JSR.__defPropV
 local __getq, __lenq, __mod, __ord, __arrL, __iterar, __t, __get, __set, __inc, __arr, __len = __JSR.__getq, __JSR.__lenq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len
 local __setlen, __call, __add, __new, __iter, __keys, __values, __entries, __assign, __isArray, __arrayFrom, __bor = __JSR.__setlen, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__values, __JSR.__entries, __JSR.__assign, __JSR.__isArray, __JSR.__arrayFrom, __JSR.__bor
@@ -10275,7 +10276,7 @@ local __O = {};
                 __get(__L1.yi, k)
             )
             __O[3547] = ____temp_672
-            if ____t_674(if ____t_673(____temp_672) then __O[3547] else __lt(u, 1) and __gt(
+            __D[1] = if ____t_674(if ____t_673(____temp_672) then __O[3547] else __lt(u, 1) and __gt(
                 __get(__L1.El, k),
                 u + (__L1:X(m, 77) - 0.5) * 0.07
             )) then
@@ -27417,7 +27418,7 @@ local __O = {};
                     -3
                 )
                 __O[3893] = ____temp_1474
-                if ____t_1476(if ____t_1475(____temp_1474) then __O[3893] else __lt(
+                __D[1] = if ____t_1476(if ____t_1475(____temp_1474) then __O[3893] else __lt(
                     __get(e, 1),
                     __L1.Vn + 6
                 )) then
@@ -27695,7 +27696,7 @@ local __O = {};
                             x - v
                         )
                         __O[3897] = ____temp_1483
-                        if ____t_1485(if ____t_1484(____temp_1483) then __lt(
+                        __D[1] = if ____t_1485(if ____t_1484(____temp_1483) then __lt(
                             __L1:X(o.seed, k, 6),
                             0.5
                         ) else __O[3897]) then
@@ -28137,7 +28138,7 @@ local __O = {};
                     do
                         local O = 0
                         while O < __len(E) - 1 do
-                            if __t(if __t(S) then __ge(
+                            __D[1] = if __t(if __t(S) then __ge(
                                 x,
                                 __get(y, O)
                             ) else S) then
@@ -28501,7 +28502,7 @@ local __O = {};
                     local ____t_1525 = __t
                     local ____get_result_1524 = __get(c, M)
                     __O[3914] = ____get_result_1524
-                    if ____t_1526(if ____t_1525(____get_result_1524) then __lt(
+                    __D[1] = if ____t_1526(if ____t_1525(____get_result_1524) then __lt(
                         g,
                         __L1:He(M)
                     ) else __O[3914]) then
@@ -32879,7 +32880,7 @@ local __O = {};
                 while __lt(m, y) do
                     local v = m / y * __L1.L + n:range(-0.1, 0.1)
                     local k = n:range(x, p)
-                    if math.sin(v) < 0 then r else i:spawn(
+                    __D[1] = if math.sin(v) < 0 then r else i:spawn(
                         __L1.H.DUST,
                         math.cos(v) * 4,
                         math.sin(v) * 0.7 - 1,
@@ -32923,7 +32924,7 @@ local __O = {};
             while y < 12 do
                 local x = n:sign()
                 local p = y < 6
-                if __t(__mod(y, 2)) then i else r:spawn(
+                __D[1] = if __t(__mod(y, 2)) then i else r:spawn(
                     __L1.H.DUST,
                     x * n:range(2, 10),
                     __TS__Number(-n:range(1, 4)),
@@ -45832,7 +45833,7 @@ local __O = {};
                         local ____t_2260 = __t
                         local ____get_result_2259 = __get(N.gone, F)
                         __O[4224] = ____get_result_2259
-                        if ____t_2261(if ____t_2260(____get_result_2259) then __O[4224] else __lt(
+                        __D[1] = if ____t_2261(if ____t_2260(____get_result_2259) then __O[4224] else __lt(
                             p,
                             __get(N.off, F)
                         )) then
@@ -52232,7 +52233,7 @@ local __O = {};
             local ____t_2658 = __t
             local ____gt_result_2657 = __gt(g, 0)
             __O[4411] = ____gt_result_2657
-            if ____t_2659(if ____t_2658(____gt_result_2657) then __O[4411] else __mod(
+            __D[1] = if ____t_2659(if ____t_2658(____gt_result_2657) then __O[4411] else __mod(
                 f + __shr(i, 1),
                 3
             )) then
@@ -53414,7 +53415,7 @@ local __O = {};
                         end
                         m = m + math.sin(v)
                     end
-                    if not ____t_2708(if ____t_2707(____lt_result_2706) then not not __t(n:on(
+                    __D[1] = if not ____t_2708(if ____t_2707(____lt_result_2706) then not not __t(n:on(
                         math.floor(b + 0.5),
                         math.floor(m + 0.5)
                     )) else __O[4426]) then
@@ -60838,7 +60839,7 @@ local __O = {};
                 local ____t_3105 = __t
                 local ____temp_3104 = if __t(k) then math.abs(A) > 2 else k
                 __O[4591] = ____temp_3104
-                if ____t_3106(if ____t_3105(____temp_3104) then __lt(
+                __D[1] = if ____t_3106(if ____t_3105(____temp_3104) then __lt(
                     __L1:X(s, c, m),
                     0.6
                 ) else __O[4591]) then
@@ -76082,7 +76083,7 @@ local __O = {};
                                         __add(__L1.it, __L1.Hc)
                                     )
                                     __O[4981] = ____temp_4048
-                                    if not ____t_4050(if ____t_4049(____temp_4048) then __O[4981] else __gt(
+                                    __D[1] = if not ____t_4050(if ____t_4049(____temp_4048) then __O[4981] else __gt(
                                         z,
                                         __add(__L1.yt, __L1.Hc)
                                     )) then
@@ -81932,7 +81933,7 @@ local __O = {};
             local ____temp_4328 = not __t(n)
             __O[3270] = ____temp_4328
             e = e * self.fade
-            if ____t_4330(if ____t_4329(____temp_4328) then __O[3270] else e < 1 and __le(
+            __D[1] = if ____t_4330(if ____t_4329(____temp_4328) then __O[3270] else e < 1 and __le(
                 e,
                 __get(
                     __L1.Nm,

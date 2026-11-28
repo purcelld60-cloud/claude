@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __gt, __ge, __isFiniteN, __getq, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__lt, __JSR.__gt, __JSR.__ge, __JSR.__isFiniteN, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
 local __arr, __len, __call, __add, __iter, __assign, __isArray, __arrayFrom = __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__assign, __JSR.__isArray, __JSR.__arrayFrom
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -251,7 +252,7 @@ local __O = {};
                 local ____t_76 = __t
                 local ____temp_75 = not __t(quest.done)
                 __O[1440] = ____temp_75
-                if ____t_79(if ____t_76(____temp_75) then __call(
+                __D[1] = if ____t_79(if ____t_76(____temp_75) then __call(
                     p.requirements,
                     "every",
                     function(____, id)
@@ -2239,7 +2240,7 @@ local __O = {};
                     end
                     local ____temp_28 = ____opt_result_27 == "live"
                     __O[1434] = ____temp_28
-                    if ____t_30(if ____t_29(____temp_28) then __call(
+                    __D[1] = if ____t_30(if ____t_29(____temp_28) then __call(
                         __arrL({
                             "Digit1",
                             "Digit2",
@@ -2374,7 +2375,7 @@ local __O = {};
             local ____t_118 = __t
             local ____temp_117 = p.scene ~= __TS__Number(scene) or p.x < camera - 90
             __O[1445] = ____temp_117
-            if ____t_119(if ____t_118(____temp_117) then __O[1445] else __gt(
+            __D[1] = if ____t_119(if ____t_118(____temp_117) then __O[1445] else __gt(
                 p.x,
                 __add(camera, width) + 90
             )) then

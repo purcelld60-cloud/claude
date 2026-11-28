@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __newExpr, __hasOwnV, __StringV, __fcall, __lt, __le, __gt, __ge, __objCreate, __isFiniteN, __isInteger, __mod = __JSR.__newExpr, __JSR.__hasOwnV, __JSR.__StringV, __JSR.__fcall, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__objCreate, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__mod
 local __ord, __arrL, __iterar, __t, __get, __set, __len, __call, __add, __new, __iter, __keys = __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys
 local __values, __assign, __isArray, __bor, __re, __re_test, __re_replace = __JSR.__values, __JSR.__assign, __JSR.__isArray, __JSR.__bor, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
@@ -749,7 +750,7 @@ local __O = {};
             __len(cheio)
         )
         __O[778] = ____ge_result_196
-        if ____t_198(if ____t_197(____ge_result_196) then __mod(
+        __D[1] = if ____t_198(if ____t_197(____ge_result_196) then __mod(
             math.floor(t * 2.5),
             2
         ) else __O[778]) then
@@ -2032,7 +2033,7 @@ local __O = {};
             return false
         end
         local b = beatOf(nil, s)
-        if __t(if __t(b.text) then __lt(
+        __D[1] = if __t(if __t(b.text) then __lt(
             s.typed,
             __len(b.text)
         ) else b.text) then
@@ -2913,7 +2914,7 @@ local __O = {};
         local ____t_169 = __t
         local ____temp_168 = if __t(b.first) then __lt(s.time, 0.25) else b.first
         __O[768] = ____temp_168
-        if ____t_170(if ____t_169(____temp_168) then not __t(__call(
+        __D[1] = if ____t_170(if ____t_169(____temp_168) then not __t(__call(
             shot.fx,
             "some",
             function(____, e) return e.tipo == "entrada" end

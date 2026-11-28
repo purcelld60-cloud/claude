@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __ge, __getq, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
 local __del, __len, __call, __add, __isArray, __arrayFrom, __bor = __JSR.__del, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__isArray, __JSR.__arrayFrom, __JSR.__bor
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -98,7 +99,7 @@ local __O = {};
             local ____t_66 = __t
             local ____temp_65 = p.type == "grass" and __gt(x, p.x - r)
             __O[67] = ____temp_65
-            if ____t_67(if ____t_66(____temp_65) then __lt(
+            __D[1] = if ____t_67(if ____t_66(____temp_65) then __lt(
                 x,
                 __add(
                     __add(p.x, p.w),
@@ -601,7 +602,7 @@ local __O = {};
                 local ____t_38 = __t
                 local ____gt_result_37 = __gt(x, 200)
                 __O[62] = ____gt_result_37
-                if ____t_39(if ____t_38(____gt_result_37) then free(
+                __D[1] = if ____t_39(if ____t_38(____gt_result_37) then free(
                     nil,
                     x,
                     70,
@@ -1338,7 +1339,7 @@ local __O = {};
                     local ____t_125 = __t
                     local ____temp_124 = q.type == "puddle" and __gt(p.x, q.x)
                     __O[89] = ____temp_124
-                    if ____t_126(if ____t_125(____temp_124) then __lt(
+                    __D[1] = if ____t_126(if ____t_125(____temp_124) then __lt(
                         p.x,
                         __add(q.x, q.w)
                     ) else __O[89]) then

@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __mod, __ord, __arrL, __iterar, __t, __get, __call, __add, __keys = __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__keys
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
@@ -709,7 +710,7 @@ local __O = {};
             ____opt_result_10 = ____opt_8(____opt_8, ____type)
         end
         __O[2703] = ____opt_result_10
-        if ____t_12(if ____t_11(____opt_result_10) then window.HdMaps:drawArena(
+        __D[1] = if ____t_12(if ____t_11(____opt_result_10) then window.HdMaps:drawArena(
             c,
             ____type,
             camera,

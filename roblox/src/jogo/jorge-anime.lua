@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __mod, __ord, __arrL, __iterar, __t, __get, __arr, __len, __call = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__arr, __JSR.__len, __JSR.__call
 local __add, __iter, __assign = __JSR.__add, __JSR.__iter, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -3545,7 +3546,7 @@ local __O = {};
         local ____t_27 = __t
         local ____get_result_26 = __get(RENDER, shot.id)
         __O[1549] = ____get_result_26
-        if ____t_27(____get_result_26) then __O[1549] else eyes(nil, c, t, p)
+        __D[1] = if ____t_27(____get_result_26) then __O[1549] else eyes(nil, c, t, p)
         local fadeIn = 1 - smooth(nil, t / 0.25)
         if __t(fadeIn > 0 and index > 0) then
             c.fillStyle = ("rgba(0,0,0," .. tostring(fadeIn)) .. ")"

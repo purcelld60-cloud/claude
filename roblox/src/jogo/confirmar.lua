@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __t = __JSR.__t
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Promise = ____lualib.__TS__Promise
@@ -80,7 +81,7 @@ local __O = {};
                             1,
                             2
                         )
-                        if window.document.activeElement == n then s else n:focus()
+                        __D[1] = if window.document.activeElement == n then s else n:focus()
                     end
                 end
             end,

@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __gt, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call, __add = __JSR.__lt, __JSR.__gt, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call, __JSR.__add
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
@@ -1728,7 +1729,7 @@ local __O = {};
                 local ____t_10 = __t
                 local ____vis_result_9 = vis(nil, x, 10)
                 __O[453] = ____vis_result_9
-                if ____t_11(if ____t_10(____vis_result_9) then __mod(
+                __D[1] = if ____t_11(if ____t_10(____vis_result_9) then __mod(
                     math.floor(t * 0.7 + ax),
                     5
                 ) else __O[453]) then
@@ -3468,7 +3469,7 @@ local __O = {};
                         i
                     )
                 )
-                if __t(if __t(P.gol) then P.gol else __gt(
+                __D[1] = if __t(if __t(P.gol) then P.gol else __gt(
                     hash(nil, i),
                     0.8
                 )) then

@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __NumberV, __lt, __gt, __mod, __ord, __arrL, __iterar, __t, __get, __set, __del, __len = __JSR.__NumberV, __JSR.__lt, __JSR.__gt, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__del, __JSR.__len
 local __call, __add, __iter, __keys, __assign, __re, __re_replace = __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__keys, __JSR.__assign, __JSR.__re, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -466,7 +467,7 @@ local __O = {};
                 )
             )
         end
-        if __t(if __t(n) then __gt(
+        __D[1] = if __t(if __t(n) then __gt(
             hash(nil, seed * 1.7 + 3),
             aceso
         ) else n) then
@@ -849,7 +850,7 @@ local __O = {};
                                 fh - 2,
                                 "#3f5a68"
                             )
-                            if __t(if __t(n) then __gt(
+                            __D[1] = if __t(if __t(n) then __gt(
                                 hash(nil, seed + f * 7 + k),
                                 0.55
                             ) else n) then
@@ -1029,7 +1030,7 @@ local __O = {};
                 end
             end
         end
-        if __t(if __t(n) then __gt(
+        __D[1] = if __t(if __t(n) then __gt(
             hash(nil, seed + 35),
             0.6
         ) else n) then
@@ -4344,7 +4345,7 @@ local __O = {};
                 local ____t_29 = __t
                 local ____temp_28 = __mod(i, 3) == 1
                 __O[434] = ____temp_28
-                if ____t_30(if ____t_29(____temp_28) then __mod(
+                __D[1] = if ____t_30(if ____t_29(____temp_28) then __mod(
                     math.floor(t * 1.5 + i),
                     4
                 ) else __O[434]) then
@@ -5922,7 +5923,7 @@ local __O = {};
                 local ____t_55 = __t
                 local ____temp_54 = not __t(vis(nil, sx, 70))
                 __O[442] = ____temp_54
-                if ____t_56(if ____t_55(____temp_54) then __O[442] else __call(
+                __D[1] = if ____t_56(if ____t_55(____temp_54) then __O[442] else __call(
                     vaos,
                     "some",
                     function(____, ____bindingPattern0)
@@ -6195,7 +6196,7 @@ local __O = {};
             local ____t_58 = __t
             local ____temp_57 = quem == "c"
             __O[443] = ____temp_57
-            if ____t_59(if ____t_58(____temp_57) then __mod(
+            __D[1] = if ____t_59(if ____t_58(____temp_57) then __mod(
                 math.floor(t * 5),
                 2
             ) else __O[443]) then

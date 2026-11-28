@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __ge, __getq, __ord, __arrL, __iterar, __t, __get, __set, __inc, __arr, __call, __new = __JSR.__ge, __JSR.__getq, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__call, __JSR.__new
 local __iter, __assign, __isArray = __JSR.__iter, __JSR.__assign, __JSR.__isArray
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -183,7 +184,7 @@ local __O = {};
         local ____t_20 = __t
         local ____temp_19 = not __t(amount)
         __O[44] = ____temp_19
-        if ____t_21(if ____t_20(____temp_19) then __O[44] else if __t(sourceId) then __call(
+        __D[1] = if ____t_21(if ____t_20(____temp_19) then __O[44] else if __t(sourceId) then __call(
             state.rewards,
             "includes",
             tostring(sourceId)

@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __newExpr, __lt, __le, __gt, __ge, __imul, __callq, __mod, __ord, __arrL, __iterar, __t = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__imul, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t
 local __get, __set, __arr, __len, __call, __add, __new, __iter, __assign, __arrayFrom, __bor, __band = __JSR.__get, __JSR.__set, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__assign, __JSR.__arrayFrom, __JSR.__bor, __JSR.__band
 local __bxor, __shr, __ushr, __hypot, __re, __re_test, __re_replace = __JSR.__bxor, __JSR.__shr, __JSR.__ushr, __JSR.__hypot, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
@@ -1966,7 +1967,7 @@ local __O = {};
                 __O[610] = ____temp_280
                 local ____temp_282 = if ____t_281(____temp_280) then p.y > L.by - 30 else __O[610]
                 __O[611] = ____temp_282
-                if ____t_284(if ____t_283(____temp_282) then __lt(
+                __D[1] = if ____t_284(if ____t_283(____temp_282) then __lt(
                     p.y,
                     __add(L.by, L.bh) + 6
                 ) else __O[611]) then
@@ -2718,7 +2719,7 @@ local __O = {};
                     c.globalAlpha = 1
                 end
             end
-            if __t(if __t(M.ilha.farol) then __mod(
+            __D[1] = if __t(if __t(M.ilha.farol) then __mod(
                 math.floor(tempo * 1.5),
                 2
             ) else M.ilha.farol) then
@@ -4166,7 +4167,7 @@ local __O = {};
                         end
                     end
                 end
-                if __t(if __t(o.tipo) then __call(
+                __D[1] = if __t(if __t(o.tipo) then __call(
                     __arrL({"asfalto", "pedra", "chao", "calcada"}, 4),
                     "includes",
                     o.tipo
@@ -4218,7 +4219,7 @@ local __O = {};
                                     dy = dy + 1
                                 end
                             end
-                            if __t(if __t(achou) then not __t(__call(
+                            __D[1] = if __t(if __t(achou) then not __t(__call(
                                 juntas,
                                 "some",
                                 function(____, ____bindingPattern0)
@@ -6242,7 +6243,7 @@ local __O = {};
                 local ____t_202 = __t
                 local ____temp_201 = not __t(livre(nil, x, y, raio))
                 __O[593] = ____temp_201
-                if ____t_203(if ____t_202(____temp_201) then __O[593] else __call(
+                __D[1] = if ____t_203(if ____t_202(____temp_201) then __O[593] else __call(
                     ocupados,
                     "some",
                     function(____, ____bindingPattern0)
@@ -6426,7 +6427,7 @@ local __O = {};
                 __O[598] = ____temp_214
                 local ____temp_216 = if ____t_211(____temp_210) then __O[599] else if ____t_215(____temp_214) then __lt(y, H + 10) else __O[598]
                 __O[600] = ____temp_216
-                if ____t_218(if ____t_217(____temp_216) then __O[600] else __call(
+                __D[1] = if ____t_218(if ____t_217(____temp_216) then __O[600] else __call(
                     eolicas,
                     "some",
                     function(____, ____bindingPattern0)

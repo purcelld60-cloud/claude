@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __newExpr, __lt, __le, __gt, __ge, __objCreate, __isFiniteN, __isInteger, __callq, __mod, __ord, __arrL = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__objCreate, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL
 local __iterar, __t, __get, __set, __arr, __len, __call, __add, __new, __iter, __keys, __entries = __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__entries
 local __assign, __isArray, __re, __re_test, __re_replace = __JSR.__assign, __JSR.__isArray, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
@@ -566,7 +567,7 @@ local __O = {};
                     ____opt_result_169 = challenge.open
                 end
                 __O[2372] = ____opt_result_169
-                if ____t_171(if ____t_170(____opt_result_169) then __call(
+                __D[1] = if ____t_171(if ____t_170(____opt_result_169) then __call(
                     __arrL({"pump", "memory", "sort"}, 3),
                     "includes",
                     challenge.kind
@@ -855,7 +856,7 @@ local __O = {};
             )
             return ____arr_267(__TS__SparseArraySpread(____array_266))
         end
-        if __t(if __t(state.reeis) then __call(
+        __D[1] = if __t(if __t(state.reeis) then __call(
             __arrL({
                 "running",
                 "charging",
@@ -2062,7 +2063,7 @@ local __O = {};
             __O[2347] = ____temp_41
             local ____temp_43 = if ____t_42(____temp_41) then __O[2347] else type(b) ~= "table"
             __O[2348] = ____temp_43
-            if ____t_45(if ____t_44(____temp_43) then __O[2348] else not __t(__call(
+            __D[1] = if ____t_45(if ____t_44(____temp_43) then __O[2348] else not __t(__call(
                 c.tracks,
                 "some",
                 function(____, t) return t.id == b.trackId end

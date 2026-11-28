@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __callq, __mod, __ord, __arrL, __t, __get, __call, __add, __new, __hypot = __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__hypot
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
@@ -95,7 +96,7 @@ local __O = {};
             __O[350] = ____temp_9
             local ____temp_11 = if ____t_10(____temp_9) then __O[350] else window.document:getElementById("gameShell")
             __O[351] = ____temp_11
-            if ____t_12(____temp_11) then __O[351] else window.document.body:append(ui)
+            __D[1] = if ____t_12(____temp_11) then __O[351] else window.document.body:append(ui)
         end
         ui.hidden = false
         do

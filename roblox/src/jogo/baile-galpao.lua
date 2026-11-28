@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __isFiniteN, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__isFiniteN, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call
 local __add, __entries, __assign = __JSR.__add, __JSR.__entries, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -1489,7 +1490,7 @@ local __O = {};
         __O[1396] = ____temp_25
         local ____temp_27 = if ____t_26(____temp_25) then px0 < W + 900 else __O[1396]
         __O[1397] = ____temp_27
-        if ____t_29(if ____t_28(____temp_27) then __mod(
+        __D[1] = if ____t_29(if ____t_28(____temp_27) then __mod(
             math.floor(t / (BEAT * 4)),
             2
         ) == 0 else __O[1397]) then

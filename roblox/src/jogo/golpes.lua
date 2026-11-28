@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __isFiniteN, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__isFiniteN, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call
 local __add, __assign, __re, __re_test = __JSR.__add, __JSR.__assign, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -800,7 +801,7 @@ local __O = {};
                         local ____t_28 = __t
                         local ____temp_27 = y - r < chao - alt or x - r < h.x - h.r - 1
                         __O[1587] = ____temp_27
-                        if ____t_29(if ____t_28(____temp_27) then __O[1587] else __gt(
+                        __D[1] = if ____t_29(if ____t_28(____temp_27) then __O[1587] else __gt(
                             x + r,
                             __add(h.x, h.r) + 1
                         )) then

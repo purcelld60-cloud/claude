@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __ge, __isFiniteN, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isFiniteN, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
 local __len, __setlen, __call, __add, __iter, __assign, __hypot = __JSR.__len, __JSR.__setlen, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__assign, __JSR.__hypot
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -5389,7 +5390,7 @@ local __O = {};
         local ____t_103 = __t
         local ____temp_102 = b.state == "swoop"
         __O[1369] = ____temp_102
-        if ____t_104(if ____t_103(____temp_102) then circleEllipse(
+        __D[1] = if ____t_104(if ____t_103(____temp_102) then circleEllipse(
             nil,
             center.x,
             center.y,
@@ -5428,7 +5429,7 @@ local __O = {};
                     a.r
                 )
                 __O[1370] = ____circleEllipse_result_105
-                if ____t_107(if ____t_106(____circleEllipse_result_105) then damageBoss(
+                __D[1] = if ____t_107(if ____t_106(____circleEllipse_result_105) then damageBoss(
                     nil,
                     s,
                     a.damage,

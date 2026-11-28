@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __gt, __arrL, __t, __arr, __call, __new, __iter, __re, __re_test = __JSR.__lt, __JSR.__gt, __JSR.__arrL, __JSR.__t, __JSR.__arr, __JSR.__call, __JSR.__new, __JSR.__iter, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Spread = ____lualib.__TS__Spread
@@ -79,7 +80,7 @@ local __O = {};
             local ____t_9 = __t
             local ____temp_8 = window.document:getElementById("gameShell")
             __O[2447] = ____temp_8
-            if ____t_9(____temp_8) then __O[2447] else window.document.body:append(guideModal)
+            __D[1] = if ____t_9(____temp_8) then __O[2447] else window.document.body:append(guideModal)
             guideModal:querySelector("button"):addEventListener(
                 "click",
                 function() return guideModal:close() end
@@ -242,7 +243,7 @@ local __O = {};
     __O[2459] = ____temp_54
     local ____temp_56 = if ____t_55(____temp_54) then window.navigator.serviceWorker ~= nil else __O[2459]
     __O[2460] = ____temp_56
-    if ____t_58(if ____t_57(____temp_56) then __call(
+    __D[1] = if ____t_58(if ____t_57(____temp_56) then __call(
         __arrL({"https:", "http:"}, 2),
         "includes",
         window.location.protocol

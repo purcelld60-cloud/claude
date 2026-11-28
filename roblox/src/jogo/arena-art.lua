@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __isFiniteN, __callq, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__isFiniteN, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
 local __len, __call, __add, __assign, __bor, __shl, __hypot, __re, __re_test = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__assign, __JSR.__bor, __JSR.__shl, __JSR.__hypot, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -4421,7 +4422,7 @@ local __O = {};
                 local ____t_150 = __t
                 local ____temp_149 = pose.kind == "ranged"
                 __O[2560] = ____temp_149
-                if ____t_151(if ____t_150(____temp_149) then __call(
+                __D[1] = if ____t_151(if ____t_150(____temp_149) then __call(
                     __arrL({"reeis", "kaique"}, 2),
                     "includes",
                     id
@@ -4453,7 +4454,7 @@ local __O = {};
                 local ____t_153 = __t
                 local ____temp_152 = pose.kind == "ranged"
                 __O[2561] = ____temp_152
-                if ____t_154(if ____t_153(____temp_152) then __call(
+                __D[1] = if ____t_154(if ____t_153(____temp_152) then __call(
                     __arrL({"reeis", "kaique"}, 2),
                     "includes",
                     id
@@ -4895,7 +4896,7 @@ local __O = {};
         local ____t_167 = __t
         local ____temp_166 = not __t(ranged)
         __O[2566] = ____temp_166
-        if ____t_168(if ____t_167(____temp_166) then __call(
+        __D[1] = if ____t_168(if ____t_167(____temp_166) then __call(
             __arrL({"arthur", "almiro", "allef"}, 3),
             "includes",
             id

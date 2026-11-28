@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __fapply, __lt, __getq, __mod, __ord, __arrL, __t, __get, __len, __call, __add, __new = __JSR.__fapply, __JSR.__lt, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new
 local __iter, __entries, __re, __re_test = __JSR.__iter, __JSR.__entries, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -24,7 +25,7 @@ local __O = {};
         local ____t_1 = __t
         local ____temp_0 = not __t(def) or type(def.arquivo) ~= "string"
         __O[272] = ____temp_0
-        if ____t_2(if ____t_1(____temp_0) then __O[272] else __re_test(
+        __D[1] = if ____t_2(if ____t_1(____temp_0) then __O[272] else __re_test(
             __re("^[a-z]+:|^\\/|\\.\\.", "i"),
             def.arquivo
         )) then

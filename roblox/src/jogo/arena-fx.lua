@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __gt, __callq, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call, __assign = __JSR.__lt, __JSR.__gt, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call, __JSR.__assign
 local __hypot = __JSR.__hypot
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -615,7 +616,7 @@ local __O = {};
         __O[2731] = ____temp_48
         local ____temp_50 = if ____t_49(____temp_48) then __O[2731] else launched
         __O[2732] = ____temp_50
-        if ____t_52(if ____t_51(____temp_50) then not __t(__len(h.ghosts)) or t - __get(
+        __D[1] = if ____t_52(if ____t_51(____temp_50) then not __t(__len(h.ghosts)) or t - __get(
             h.ghosts,
             __len(h.ghosts) - 1
         ).t > 0.035 else __O[2732]) then

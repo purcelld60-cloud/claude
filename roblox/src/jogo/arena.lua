@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __ge, __isSafeInteger, __isFiniteN, __getq, __lenq, __callq, __mod, __ord, __arrL = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isSafeInteger, __JSR.__isFiniteN, __JSR.__getq, __JSR.__lenq, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL
 local __iterar, __t, __get, __set, __inc, __arr, __len, __call, __add, __new, __iter, __assign = __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__assign
 local __isArray, __hypot, __re, __re_test, __re_replace = __JSR.__isArray, __JSR.__hypot, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
@@ -70,7 +71,7 @@ local __O = {};
         local ____t_4 = __t
         local ____temp_3 = if __t(window.document.fullscreenElement) then window.document.fullscreenElement else window.document:getElementById("gameShell")
         __O[2832] = ____temp_3
-        if ____t_4(____temp_3) then __O[2832] else window.document.body:append(__L1.screen)
+        __D[1] = if ____t_4(____temp_3) then __O[2832] else window.document.body:append(__L1.screen)
         local headerActions = window.document:createElement("div")
         headerActions.className = "arena-header-actions"
         local sound = window.document:createElement("button")
@@ -1601,7 +1602,7 @@ local __O = {};
             2
         )
         __O[2858] = ____temp_247
-        if ____t_249(if ____t_248(____temp_247) then __O[2858] else not __t(__call(
+        __D[1] = if ____t_249(if ____t_248(____temp_247) then __O[2858] else not __t(__call(
             __L1.room.players,
             "every",
             function(____, p) return if p.id == __L1:localId() then __L1.ready else p.ready end
@@ -1965,7 +1966,7 @@ local __O = {};
             local ____t_321 = __t
             local ____temp_320 = not __t(__L1:isHost())
             __O[2886] = ____temp_320
-            if ____t_322(if ____t_321(____temp_320) then __call(
+            __D[1] = if ____t_322(if ____t_321(____temp_320) then __call(
                 __arrL({"attack", "special", "ultimate"}, 3),
                 "includes",
                 action
@@ -2072,7 +2073,7 @@ local __O = {};
         if ____opt_348 ~= nil then
             ____opt_348 = ____opt_348.players
         end
-        if ____t_352(if ____t_347(____temp_346) then __O[2889] else not ____t_351(____callq_350(
+        __D[1] = if ____t_352(if ____t_347(____temp_346) then __O[2889] else not ____t_351(____callq_350(
             ____opt_348,
             "some",
             function(____, p) return p.id == id end
@@ -2256,7 +2257,7 @@ local __O = {};
             "includes",
             ____type
         )
-        if __t(if __t(primary) then __len(__call(
+        __D[1] = if __t(if __t(primary) then __len(__call(
             __L1.effectFrames,
             "filter",
             function(____, e) return e.type ~= "spark" end
@@ -3329,7 +3330,7 @@ local __O = {};
                     a.r + 17
                 ) else __O[2938]
                 __O[2939] = ____temp_574
-                if ____t_576(if ____t_575(____temp_574) then __lt(
+                __D[1] = if ____t_576(if ____t_575(____temp_574) then __lt(
                     math.abs(p.y - 34 - a.y),
                     a.r + 31
                 ) else __O[2939]) then

@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __fcall, __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__fcall, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
 local __arr, __len, __call, __add, __new, __iter, __keys, __bor, __band, __shl, __shr, __re = __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__bor, __JSR.__band, __JSR.__shl, __JSR.__shr, __JSR.__re
 local __re_test = __JSR.__re_test
@@ -2060,7 +2061,7 @@ local __O = {};
             W * S,
             H * S
         )
-        if __t(if __t(o.hit) then __mod(
+        __D[1] = if __t(if __t(o.hit) then __mod(
             math.floor(if __t(t) then t else 0 * 18),
             2
         ) == 0 else o.hit) then
@@ -2112,7 +2113,7 @@ local __O = {};
         __O[688] = ____temp_31
         local ____temp_33 = if ____t_32(____temp_31) then __O[688] else design == "doodle"
         __O[689] = ____temp_33
-        if ____t_35(if ____t_30(____temp_29) then if ____t_34(____temp_33) then __O[689] else __re_test(
+        __D[1] = if ____t_35(if ____t_30(____temp_29) then if ____t_34(____temp_33) then __O[689] else __re_test(
             __re("^\\d$", ""),
             design
         ) else __O[690]) then

@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __ge, __isSafeInteger, __isFiniteN, __isInteger, __getq, __lenq, __callq, __mod, __ord = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isSafeInteger, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__getq, __JSR.__lenq, __JSR.__callq, __JSR.__mod, __JSR.__ord
 local __arrL, __iterar, __t, __get, __set, __inc, __arr, __len, __call, __add, __new, __iter = __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter
 local __keys, __assign, __isArray, __hypot, __re, __re_test, __re_replace = __JSR.__keys, __JSR.__assign, __JSR.__isArray, __JSR.__hypot, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
@@ -1487,7 +1488,7 @@ local __O = {};
         local ____t_291 = __t
         local ____temp_290 = __L1.role ~= "host" or not __t(__L1:isConnected())
         __O[3136] = ____temp_290
-        if ____t_292(if ____t_291(____temp_290) then __O[3136] else __call(
+        __D[1] = if ____t_292(if ____t_291(____temp_290) then __O[3136] else __call(
             __L1.room.players,
             "some",
             function(____, p) return if p.id == __L1.credentials.playerId then not __t(__L1.ready) else not __t(p.ready) end
@@ -2773,7 +2774,7 @@ local __O = {};
                     local ____t_430 = __t
                     local ____gt_result_429 = __gt(p.inv, 0)
                     __O[3167] = ____gt_result_429
-                    if ____t_431(if ____t_430(____gt_result_429) then __mod(
+                    __D[1] = if ____t_431(if ____t_430(____gt_result_429) then __mod(
                         math.floor(w.time * 14),
                         2
                     ) else __O[3167]) then

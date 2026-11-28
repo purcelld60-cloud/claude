@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __gt, __ge, __getq, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call = __JSR.__lt, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call
 local __add, __iter, __assign = __JSR.__add, __JSR.__iter, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -2175,7 +2176,7 @@ local __O = {};
             local ____t_32 = __t
             local ____temp_31 = not __t(o.acertou)
             __O[920] = ____temp_31
-            if ____t_33(if ____t_32(____temp_31) then contatoNoQuadro(
+            __D[1] = if ____t_33(if ____t_32(____temp_31) then contatoNoQuadro(
                 nil,
                 o,
                 pos,

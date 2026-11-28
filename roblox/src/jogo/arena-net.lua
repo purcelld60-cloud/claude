@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __newExpr, __lt, __le, __gt, __ge, __isSafeInteger, __isFiniteN, __isInteger, __ord, __arrL, __iterar, __t = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isSafeInteger, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t
 local __get, __arr, __len, __call, __add, __iter, __entries, __isArray, __re, __re_test = __JSR.__get, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__entries, __JSR.__isArray, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -415,7 +416,7 @@ local __O = {};
                     local ____arr_78 = __arr
                     local ____array_77 = __TS__SparseArrayNew(__TS__Spread(__iter(candidates)))
                     __TS__SparseArrayPush(____array_77, value)
-                    if ____t_82(if __t(__len(candidates)) then ____len_81(____self_79_stringify_80(
+                    __D[1] = if ____t_82(if __t(__len(candidates)) then ____len_81(____self_79_stringify_80(
                         ____self_79,
                         ____arr_78(__TS__SparseArraySpread(____array_77))
                     )) > 22000 else __len(candidates)) then
@@ -480,7 +481,7 @@ local __O = {};
                 __O[2761] = ____temp_88
                 local ____temp_90 = if ____t_89(____temp_88) then __O[2761] else type(event.data) ~= "string"
                 __O[2762] = ____temp_90
-                if ____t_92(if ____t_91(____temp_90) then __O[2762] else __gt(
+                __D[1] = if ____t_92(if ____t_91(____temp_90) then __O[2762] else __gt(
                     __len(event.data),
                     32768
                 )) then
@@ -884,7 +885,7 @@ local __O = {};
                         local ____t_161 = __t
                         local ____temp_160 = not __t(c) or type(c.candidate) ~= "string"
                         __O[2783] = ____temp_160
-                        if ____t_162(if ____t_161(____temp_160) then __O[2783] else __gt(
+                        __D[1] = if ____t_162(if ____t_161(____temp_160) then __O[2783] else __gt(
                             __len(c.candidate),
                             2048
                         )) then

@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __ord, __arrL, __iterar, __t, __get, __set, __len, __call, __add, __iter, __entries, __assign = __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__entries, __JSR.__assign
 local __re, __re_test, __re_replace, __re_split, __re_match = __JSR.__re, __JSR.__re_test, __JSR.__re_replace, __JSR.__re_split, __JSR.__re_match
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -132,7 +133,7 @@ local __O = {};
         )
         local ____m_0 = m
         __O[2301] = ____m_0
-        if ____t_2(if ____t_1(____m_0) then __get(
+        __D[1] = if ____t_2(if ____t_1(____m_0) then __get(
             BOSS,
             __get(m, 1)
         ) else __O[2301]) then
@@ -158,7 +159,7 @@ local __O = {};
         )
         local ____m_3 = m
         __O[2302] = ____m_3
-        if ____t_5(if ____t_4(____m_3) then __get(
+        __D[1] = if ____t_5(if ____t_4(____m_3) then __get(
             BOSS,
             __get(m, 1)
         ) else __O[2302]) then
@@ -238,7 +239,7 @@ local __O = {};
         )
         local ____m_11 = m
         __O[2303] = ____m_11
-        if ____t_13(if ____t_12(____m_11) then __get(
+        __D[1] = if ____t_13(if ____t_12(____m_11) then __get(
             BOSS,
             __get(m, 1)
         ) else __O[2303]) then
@@ -611,7 +612,7 @@ local __O = {};
                     local ____t_51 = __t
                     local ____temp_50 = not __t(__call(f.nome, "includes", "/")) or type(f.lugar) ~= "string"
                     __O[2314] = ____temp_50
-                    if ____t_52(if ____t_51(____temp_50) then __O[2314] else not __re_test(
+                    __D[1] = if ____t_52(if ____t_51(____temp_50) then __O[2314] else not __re_test(
                         __re("^[a-zA-Z0-9_.-]{1,90}$", ""),
                         f.lugar
                     )) then

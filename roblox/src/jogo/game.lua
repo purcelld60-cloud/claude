@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __newExpr, __lt, __le, __gt, __ge, __isFiniteV, __isFiniteN, __isInteger, __getq, __lenq, __callq, __mod = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isFiniteV, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__getq, __JSR.__lenq, __JSR.__callq, __JSR.__mod
 local __ord, __arrL, __iterar, __t, __get, __set, __inc, __arr, __len, __call, __add, __new = __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new
 local __iter, __keys, __entries, __assign, __isArray, __arrayFrom, __bor, __hypot, __re, __re_replace, __re_split = __JSR.__iter, __JSR.__keys, __JSR.__entries, __JSR.__assign, __JSR.__isArray, __JSR.__arrayFrom, __JSR.__bor, __JSR.__hypot, __JSR.__re, __JSR.__re_replace, __JSR.__re_split
@@ -707,7 +708,7 @@ local __O = {};
             ____opt_result_173 = ____opt_171(____opt_171, xp, id)
         end
         local r = ____opt_result_173
-        if __t(if __t(r) then __gt(
+        __D[1] = if __t(if __t(r) then __gt(
             __L1:levelState().level,
             before
         ) else r) then
@@ -1247,7 +1248,7 @@ local __O = {};
                 __L1.player.y - 2
             ) else __O[1669]
             __O[1670] = ____temp_309
-            if ____t_311(if ____t_310(____temp_309) then best == nil or __lt(
+            __D[1] = if ____t_311(if ____t_310(____temp_309) then best == nil or __lt(
                 __get(p, 1),
                 best
             ) else __O[1670]) then
@@ -2035,7 +2036,7 @@ local __O = {};
                     m.vy = 0
                 end
             end
-            if __t(if __t(window.Golpes) then window.Golpes:cruza(
+            __D[1] = if __t(if __t(window.Golpes) then window.Golpes:cruza(
                 window.Golpes:capanga(m),
                 window.Golpes:heroi(__L1.player)
             ) else math.abs(m.x - __L1.player.x) < if m.type == "rat" then 24 else 30 and math.abs(m.y - __L1.player.y) < if m.type == "rat" then 42 else 52) then
@@ -2253,7 +2254,7 @@ local __O = {};
                     __get(p, 1) + 3
                 ) else __O[1718]
                 __O[1719] = ____temp_525
-                if ____t_527(if ____t_526(____temp_525) then __ge(
+                __D[1] = if ____t_527(if ____t_526(____temp_525) then __ge(
                     __L1.player.y,
                     __get(p, 1)
                 ) else __O[1719]) then
@@ -3939,7 +3940,7 @@ local __O = {};
             local ____t_880 = __t
             local ____temp_879 = __L1.ollyanEncounter.stage == "intro"
             __O[1777] = ____temp_879
-            if ____t_881(if ____t_880(____temp_879) then __O[1777] else __call(
+            __D[1] = if ____t_881(if ____t_880(____temp_879) then __O[1777] else __call(
                 __arrL({"victory", "defeat"}, 2),
                 "includes",
                 __L1.ollyanEncounter.stage
@@ -5469,7 +5470,7 @@ local __O = {};
         local ____t_1232 = __t
         local ____temp_1231 = kind == "dinner"
         __O[1843] = ____temp_1231
-        if ____t_1233(if ____t_1232(____temp_1231) then __L1.scene ~= __L1.npcInfo.amanda.scene or __getq(
+        __D[1] = if ____t_1233(if ____t_1232(____temp_1231) then __L1.scene ~= __L1.npcInfo.amanda.scene or __getq(
             __L1:closestNPC(),
             0
         ) ~= "amanda" else __O[1843]) then
@@ -6422,7 +6423,7 @@ local __O = {};
             end
             local ____temp_1318 = if ____t_1315(____temp_1314) then __O[1853] else ____opt_1316 ~= nil and math.abs(e.conquista.gemeoX - __L1.player.x) < radius
             __O[1854] = ____temp_1318
-            if ____t_1320(if ____t_1311(if ____t_1310(____temp_1309) then e.type ~= "igor" else __O[1852]) then window.Golpes:gasAcerta(
+            __D[1] = if ____t_1320(if ____t_1311(if ____t_1310(____temp_1309) then e.type ~= "igor" else __O[1852]) then window.Golpes:gasAcerta(
                 areaG,
                 window.Golpes:chefe(e)
             ) else if ____opt_1312 == "jorge" then window.JorgeDuelo:toca(
@@ -6452,7 +6453,7 @@ local __O = {};
             local ____t_1322 = __t
             local ____temp_1321 = not __t(m.dead)
             __O[1855] = ____temp_1321
-            if ____t_1323(if ____t_1322(____temp_1321) then if __t(areaG) then window.Golpes:gasAcerta(
+            __D[1] = if ____t_1323(if ____t_1322(____temp_1321) then if __t(areaG) then window.Golpes:gasAcerta(
                 areaG,
                 window.Golpes:capanga(m)
             ) else math.abs(m.x - __L1.player.x) < radius and math.abs(m.y - __L1.player.y) < 150 else __O[1855]) then
@@ -9065,7 +9066,7 @@ local __O = {};
             ____opt_1737 = ____opt_1737.iraciTraps
         end
         __O[1958] = ____opt_1737
-        if ____t_1741(if ____t_1736(____temp_1735) then ____call_1740(
+        __D[1] = if ____t_1741(if ____t_1736(____temp_1735) then ____call_1740(
             if ____t_1739(____opt_1737) then __O[1958] else __arrL({}, 0),
             "some",
             function(____, t) return math.abs(__L1.player.x - t.x) < t.width / 2 end
@@ -9202,7 +9203,7 @@ local __O = {};
             ____opt_1769 = ____opt_1769.iraciTraps
         end
         __O[1972] = ____opt_1769
-        if ____t_1773(if __t(kaique) then ____call_1772(
+        __D[1] = if ____t_1773(if __t(kaique) then ____call_1772(
             if ____t_1771(____opt_1769) then __O[1972] else __arrL({}, 0),
             "some",
             function(____, t) return math.abs(__L1.player.x - t.x) < t.width / 2 and __gt(__L1.player.y, __L1.FLOOR - 18) end
@@ -11036,7 +11037,7 @@ local __O = {};
             return
         end
         local corpo = if __t(f.gemeoX ~= nil and math.abs(__L1.player.x - f.gemeoX) < math.abs(__L1.player.x - e.x)) then f.gemeoX else e.x
-        if __t(if f.slug == "jorge" then window.JorgeDuelo:toca(
+        __D[1] = if __t(if f.slug == "jorge" then window.JorgeDuelo:toca(
             f,
             __L1.player.x,
             __L1.player.y - 26,
@@ -11292,7 +11293,7 @@ local __O = {};
             e.state
         ))
         __O[2011] = ____temp_1955
-        if ____t_1957(if ____t_1956(____temp_1955) then if e.type == "igor" then __L1:igorContains(
+        __D[1] = if ____t_1957(if ____t_1956(____temp_1955) then if e.type == "igor" then __L1:igorContains(
             e,
             __L1.player.x,
             __L1.player.y - 27,
@@ -11966,7 +11967,7 @@ local __O = {};
             h.life = h.life - dt
             if h.type == "ring" then
                 h.r = h.r + h.speed * dt
-                if __t(if __t(window.Golpes) then window.Golpes:perigoAcerta(
+                __D[1] = if __t(if __t(window.Golpes) then window.Golpes:perigoAcerta(
                     h,
                     window.Golpes:heroi(__L1.player)
                 ) else math.abs(math.abs(__L1.player.x - h.x) - h.r) < 27 and __gt(__L1.player.y, __L1.FLOOR - 57)) then
@@ -11986,7 +11987,7 @@ local __O = {};
                 local ____t_2007 = __t
                 local ____temp_2006 = h.type == "astral"
                 __O[2019] = ____temp_2006
-                if ____t_2008(if __t(window.Golpes) then window.Golpes:perigoAcerta(
+                __D[1] = if ____t_2008(if __t(window.Golpes) then window.Golpes:perigoAcerta(
                     h,
                     window.Golpes:heroi(__L1.player)
                 ) else if ____t_2005(____lt_result_2004) then if ____t_2007(____temp_2006) then __O[2019] else if __t(h.height) then __gt(__L1.player.y, __L1.FLOOR - h.height) else __gt(__L1.player.y, __L1.FLOOR - 80) else __O[2020]) then
@@ -12193,7 +12194,7 @@ local __O = {};
                     end
                     local ____temp_2042 = if ____t_2039(____temp_2038) then __O[2026] else ____opt_2040 ~= nil and math.abs(s.x - e.conquista.gemeoX) < 35
                     __O[2027] = ____temp_2042
-                    if ____t_2044(if ____t_2035(____temp_2034) then if ____opt_2036 == "jorge" then window.JorgeDuelo:toca(
+                    __D[1] = if ____t_2044(if ____t_2035(____temp_2034) then if ____opt_2036 == "jorge" then window.JorgeDuelo:toca(
                         e.conquista,
                         s.x,
                         s.y,
@@ -12226,7 +12227,7 @@ local __O = {};
                         local ____t_2046 = __t
                         local ____temp_2045 = not __t(m.dead)
                         __O[2029] = ____temp_2045
-                        if ____t_2047(if ____t_2046(____temp_2045) then if __t(window.Golpes) then window.Golpes:tiroAcerta(
+                        __D[1] = if ____t_2047(if ____t_2046(____temp_2045) then if __t(window.Golpes) then window.Golpes:tiroAcerta(
                             s,
                             window.Golpes:capanga(m)
                         ) else math.abs(s.x - m.x) < 28 and math.abs(s.y - (m.y - 22)) < 28 else __O[2029]) then
@@ -13495,7 +13496,7 @@ local __O = {};
                     end
                     local ____temp_2267 = if ____t_2264(____temp_2263) then ____opt_2265 else __O[2059]
                     __O[2060] = ____temp_2267
-                    if ____t_2269(if ____t_2268(____temp_2267) then __gt(
+                    __D[1] = if ____t_2269(if ____t_2268(____temp_2267) then __gt(
                         __get(p, 0),
                         if __t(window.BaileGalpao.PORTA) then window.BaileGalpao.PORTA else 760
                     ) else __O[2060]) then
@@ -14258,7 +14259,7 @@ local __O = {};
         end
         local ____temp_2537 = ____opt_2535 == "active" and not __t(__L1.dialog)
         __O[2094] = ____temp_2537
-        if ____t_2539(if ____t_2538(____temp_2537) then not __t(percurso) or __le(
+        __D[1] = if ____t_2539(if ____t_2538(____temp_2537) then not __t(percurso) or __le(
             __L1.player.x,
             __get(__L1.arena.bounds, 0) + 78
         ) else __O[2094]) then
@@ -14313,7 +14314,7 @@ local __O = {};
         if __t(__L1.started) then
             __L1:drawBivoltAura(__L1.ctx, __L1.player.x, __L1.player.y - 40)
         end
-        if __t(if __t(__L1.started) then __le(__L1.player.inv, 0) or __mod(
+        __D[1] = if __t(if __t(__L1.started) then __le(__L1.player.inv, 0) or __mod(
             math.floor(__L1.time * 15),
             2
         ) == 0 else __L1.started) then
@@ -14893,7 +14894,7 @@ local __O = {};
             __O[2100] = ____temp_2665
             local ____temp_2667 = if ____t_2666(____temp_2665) then window.HdScene else __O[2100]
             __O[2101] = ____temp_2667
-            if ____t_2669(if ____t_2668(____temp_2667) then __call(
+            __D[1] = if ____t_2669(if ____t_2668(____temp_2667) then __call(
                 __arrL({
                     0,
                     1,
@@ -17221,7 +17222,7 @@ local __O = {};
             __O[2170] = ____temp_3368
             if ____t_3370(if ____t_3369(____temp_3368) then __O[2170] else __L1.chapterEnded) then
                 local button = __L1:visibleKeyboardButton(e.target)
-                if __t(if __t(button) then __call(
+                __D[1] = if __t(if __t(button) then __call(
                     __arrL({"Enter", "Space"}, 2),
                     "includes",
                     code
@@ -17243,7 +17244,7 @@ local __O = {};
             end
             local ____temp_3373 = ____opt_3371 == "dinner" and __L1.activity.phase == "choice"
             __O[2171] = ____temp_3373
-            if ____t_3375(if ____t_3374(____temp_3373) then __call(
+            __D[1] = if ____t_3375(if ____t_3374(____temp_3373) then __call(
                 __arrL({"Digit1", "Digit2", "Numpad1", "Numpad2"}, 4),
                 "includes",
                 code
@@ -17262,7 +17263,7 @@ local __O = {};
                 __O[2172] = ____temp_3376
                 local ____temp_3378 = if ____t_3377(____temp_3376) then __L1:visibleKeyboardButton(e.target) else __O[2172]
                 __O[2173] = ____temp_3378
-                if ____t_3380(if ____t_3379(____temp_3378) then __call(
+                __D[1] = if ____t_3380(if ____t_3379(____temp_3378) then __call(
                     __arrL({"Enter", "Space"}, 2),
                     "includes",
                     code

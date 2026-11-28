@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __getq, __ord, __arrL, __iterar, __t, __get, __set, __call, __add, __new, __keys, __assign = __JSR.__getq, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__keys, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
@@ -26,7 +27,7 @@ local __O = {};
         local ____t_20 = __t
         local ____temp_19 = window.document:getElementById("gameShell")
         __O[136] = ____temp_19
-        if ____t_20(____temp_19) then __O[136] else window.document.body:append(panel)
+        __D[1] = if ____t_20(____temp_19) then __O[136] else window.document.body:append(panel)
         preview = panel:querySelector("canvas")
         panel:querySelector(".vp-done"):addEventListener("click", close)
         panel:querySelector(".vp-reset"):addEventListener(

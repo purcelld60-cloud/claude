@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __mod, __arrL, __t, __get, __len, __call, __new, __re, __re_test = __JSR.__mod, __JSR.__arrL, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call, __JSR.__new, __JSR.__re, __JSR.__re_test
 local ____exports = {}
 local __O = {};
@@ -11,7 +12,7 @@ local __O = {};
     if not __t(el) then
         return
     end
-    if __t(if __t(window.navigator.webdriver) then not __re_test(
+    __D[1] = if __t(if __t(window.navigator.webdriver) then not __re_test(
         __re("[?&]abertura\\b", ""),
         window.location.search
     ) else window.navigator.webdriver) then

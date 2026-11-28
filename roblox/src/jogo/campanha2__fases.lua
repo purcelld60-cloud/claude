@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __ge, __getq, __mod, __ord, __arrL, __iterar, __t, __get, __len = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len
 local __setlen, __call, __add, __keys, __assign, __shr, __hypot, __getters = __JSR.__setlen, __JSR.__call, __JSR.__add, __JSR.__keys, __JSR.__assign, __JSR.__shr, __JSR.__hypot, __JSR.__getters
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -1848,7 +1849,7 @@ local __O = {};
                         arena.l - 900
                     )
                     __O[932] = ____temp_55
-                    if ____t_57(if ____t_56(____temp_55) then __O[932] else __gt(
+                    __D[1] = if ____t_57(if ____t_56(____temp_55) then __O[932] else __gt(
                         __get(projs, i).x,
                         arena.r + 900
                     )) then

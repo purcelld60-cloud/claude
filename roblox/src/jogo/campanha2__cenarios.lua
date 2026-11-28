@@ -3,6 +3,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __set, __len = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len
 local __call, __add, __iter, __assign, __band, __shr, __hypot, __getters, __re, __re_test = __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__assign, __JSR.__band, __JSR.__shr, __JSR.__hypot, __JSR.__getters, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -6630,7 +6631,7 @@ local __O = {};
                 local ____t_31 = __t
                 local ____temp_30 = __L1:vis(sx)
                 __O[397] = ____temp_30
-                if ____t_32(if ____t_31(____temp_30) then __gt(
+                __D[1] = if ____t_32(if ____t_31(____temp_30) then __gt(
                     hash(nil, k + 9),
                     0.3
                 ) else __O[397]) then
@@ -17624,7 +17625,7 @@ local __O = {};
                 i = i + 1
             end
         end
-        if __t(if __t(o.cacto) then __gt(
+        __D[1] = if __t(if __t(o.cacto) then __gt(
             hash(nil, sd),
             0.4
         ) else o.cacto) then
@@ -21433,7 +21434,7 @@ local __O = {};
             local ____t_117 = __t
             local ____ge_result_116 = __ge(scene, 12)
             __O[407] = ____ge_result_116
-            if not ____t_118(if ____t_117(____ge_result_116) then __call(
+            __D[1] = if not ____t_118(if ____t_117(____ge_result_116) then __call(
                 __L1.LIST,
                 "some",
                 function(____, d) return d.id == scene end

@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __newExpr, __lt, __le, __gt, __ge, __getq, __callq, __mod, __ord, __arrL, __iterar, __t = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t
 local __get, __set, __inc, __arr, __len, __call, __add, __new, __iter, __keys, __assign, __isArray = __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__assign, __JSR.__isArray
 local __arrayFrom, __bor, __hypot, __getters, __re, __re_replace = __JSR.__arrayFrom, __JSR.__bor, __JSR.__hypot, __JSR.__getters, __JSR.__re, __JSR.__re_replace
@@ -24,7 +25,7 @@ local __O = {};
         local ____t_1 = __t
         local ____temp_0 = if __t(__L1.net) then __L1.net.role == "host" else __L1.net
         __O[1081] = ____temp_0
-        if ____t_2(if ____t_1(____temp_0) then __lt(
+        __D[1] = if ____t_2(if ____t_1(____temp_0) then __lt(
             __len(__L1.net.sfx),
             20
         ) else __O[1081]) then
@@ -247,7 +248,7 @@ local __O = {};
                     name
                 )
                 __O[1082] = ____get_result_10
-                if ____t_11(____get_result_10) then __O[1082] else function() return tone(nil, 500, 500, 0.05) end(nil)
+                __D[1] = if ____t_11(____get_result_10) then __O[1082] else function() return tone(nil, 500, 500, 0.05) end(nil)
             end)
         end
     end
@@ -5423,7 +5424,7 @@ local __O = {};
         local ____t_375 = __t
         local ____temp_374 = window.document:getElementById("gameShell")
         __O[1239] = ____temp_374
-        if ____t_375(____temp_374) then __O[1239] else window.document.body:append(__L1.root)
+        __D[1] = if ____t_375(____temp_374) then __O[1239] else window.document.body:append(__L1.root)
         __L1.cv:addEventListener(
             "pointerdown",
             function(____, e)
@@ -5465,7 +5466,7 @@ local __O = {};
                     __O[1242] = ____temp_386
                     local ____temp_388 = if ____t_387(____temp_386) then __ge(y, k.y) else __O[1242]
                     __O[1243] = ____temp_388
-                    if ____t_390(if ____t_389(____temp_388) then __le(
+                    __D[1] = if ____t_390(if ____t_389(____temp_388) then __le(
                         y,
                         __add(k.y, k.h)
                     ) else __O[1243]) then
@@ -7154,7 +7155,7 @@ local __O = {};
                     local ____t_488 = __t
                     local ____gt_result_487 = __gt(b.wait, 0)
                     __O[1121] = ____gt_result_487
-                    if not ____t_489(if ____t_488(____gt_result_487) then __mod(
+                    __D[1] = if not ____t_489(if ____t_488(____gt_result_487) then __mod(
                         math.floor(st.t * 8),
                         2
                     ) else __O[1121]) then
@@ -7469,7 +7470,7 @@ local __O = {};
                             __O[1132] = ____temp_514
                             local ____temp_516 = if ____t_515(____temp_514) then __gt(b.y, k.y - 2) else __O[1132]
                             __O[1133] = ____temp_516
-                            if ____t_518(if ____t_517(____temp_516) then __lt(
+                            __D[1] = if ____t_518(if ____t_517(____temp_516) then __lt(
                                 b.y,
                                 __add(k.y, k.h) + 2
                             ) else __O[1133]) then
@@ -8859,7 +8860,7 @@ local __O = {};
                             local ____t_536 = __t
                             local ____gt_result_535 = __gt(p.inv, 0)
                             __O[1140] = ____gt_result_535
-                            if ____t_537(if ____t_536(____gt_result_535) then __mod(
+                            __D[1] = if ____t_537(if ____t_536(____gt_result_535) then __mod(
                                 math.floor(st.t * 14),
                                 2
                             ) else __O[1140]) then
@@ -9547,7 +9548,7 @@ local __O = {};
                     __O[1147] = ____temp_553
                     local ____temp_555 = if ____t_554(____temp_553) then __O[1147] else c.done
                     __O[1148] = ____temp_555
-                    if ____t_557(if ____t_556(____temp_555) then __O[1148] else __ge(
+                    __D[1] = if ____t_557(if ____t_556(____temp_555) then __O[1148] else __ge(
                         __len(st.open),
                         2
                     )) then
@@ -11764,7 +11765,7 @@ local __O = {};
                             local ____t_614 = __t
                             local ____gt_result_613 = __gt(p.inv, 0)
                             __O[1167] = ____gt_result_613
-                            if ____t_615(if ____t_612(____gt_result_611) then __O[1168] else if ____t_614(____gt_result_613) then __mod(
+                            __D[1] = if ____t_615(if ____t_612(____gt_result_611) then __O[1168] else if ____t_614(____gt_result_613) then __mod(
                                 math.floor(st.t * 14),
                                 2
                             ) else __O[1167]) then
@@ -12034,7 +12035,7 @@ local __O = {};
                                 __O[1174] = ____temp_628
                                 local ____temp_630 = if ____t_629(____temp_628) then __gt(p.x, b.x - 4) else __O[1174]
                                 __O[1175] = ____temp_630
-                                if ____t_632(if ____t_631(____temp_630) then __lt(
+                                __D[1] = if ____t_632(if ____t_631(____temp_630) then __lt(
                                     p.x,
                                     __add(b.x, b.w) + 4
                                 ) else __O[1175]) then
@@ -12312,7 +12313,7 @@ local __O = {};
                         local ____t_640 = __t
                         local ____lt_result_639 = __lt(it.vida, 2)
                         __O[1178] = ____lt_result_639
-                        if ____t_641(if ____t_640(____lt_result_639) then __mod(
+                        __D[1] = if ____t_641(if ____t_640(____lt_result_639) then __mod(
                             math.floor(st.t * 10),
                             2
                         ) else __O[1178]) then
@@ -12569,7 +12570,7 @@ local __O = {};
                 local ____t_652 = __t
                 local ____temp_651 = if __t(gm) then gm.id else gm
                 __O[1255] = ____temp_651
-                if ____t_653(if ____t_652(____temp_651) then not __t(__call(
+                __D[1] = if ____t_653(if ____t_652(____temp_651) then not __t(__call(
                     __L1.GAMES,
                     "some",
                     function(____, x) return x.id == gm.id end

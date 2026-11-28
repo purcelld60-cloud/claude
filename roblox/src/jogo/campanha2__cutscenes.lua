@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __newExpr, __hasOwnV, __fcall, __lt, __le, __gt, __ge, __getq, __mod, __ord, __arrL, __iterar = __JSR.__newExpr, __JSR.__hasOwnV, __JSR.__fcall, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar
 local __t, __get, __set, __len, __call, __add, __new, __iter, __keys, __assign, __isArray, __band = __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__assign, __JSR.__isArray, __JSR.__band
 local __shr, __hypot, __re, __re_test, __re_replace, __re_exec = __JSR.__shr, __JSR.__hypot, __JSR.__re, __JSR.__re_test, __JSR.__re_replace, __JSR.__re_exec
@@ -267,7 +268,7 @@ local __O = {};
                 local ____t_18 = __t
                 local ____temp_17 = if __t(d.key) then not (cenarios[d.key] ~= nil) else d.key
                 __O[793] = ____temp_17
-                if ____t_19(if ____t_18(____temp_17) then not __t(__call(
+                __D[1] = if ____t_19(if ____t_18(____temp_17) then not __t(__call(
                     __arrL({"patio"}, 1),
                     "includes",
                     d.key

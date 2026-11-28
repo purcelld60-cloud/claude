@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __ord, __arrL, __iterar, __t, __call, __add = __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__call, __JSR.__add
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
@@ -488,7 +489,7 @@ local __O = {};
         local ____t_3 = __t
         local ____temp_2 = window.document:getElementById("gameShell")
         __O[1453] = ____temp_2
-        if ____t_3(____temp_2) then __O[1453] else window.document.body:append(modal)
+        __D[1] = if ____t_3(____temp_2) then __O[1453] else window.document.body:append(modal)
         modal:querySelector("h2").textContent = npc.name
         local portrait = modal:querySelector("canvas")
         draw(

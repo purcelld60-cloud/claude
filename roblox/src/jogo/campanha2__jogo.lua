@@ -2,6 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
+local __D = {}
 local __lt, __le, __gt, __ge, __isFiniteN, __isInteger, __getq, __callq, __mod, __ord, __arrL, __iterar = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isFiniteN, __JSR.__isInteger, __JSR.__getq, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar
 local __t, __get, __set, __arr, __len, __call, __add, __new, __iter, __entries, __assign, __isArray = __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__entries, __JSR.__assign, __JSR.__isArray
 local __re, __re_test, __re_replace = __JSR.__re, __JSR.__re_test, __JSR.__re_replace
@@ -503,7 +504,7 @@ local __O = {};
         local ____t_99 = __t
         local ____temp_98 = not __t(F) or F.cena ~= __L1.cenaId
         __O[984] = ____temp_98
-        if ____t_100(if ____t_99(____temp_98) then __O[984] else __get(
+        __D[1] = if ____t_100(if ____t_99(____temp_98) then __O[984] else __get(
             __L1.S.flags,
             __add("venceu_", slug)
         )) then
@@ -1433,7 +1434,7 @@ local __O = {};
         local ____t_285 = __t
         local ____temp_284 = d.id == 12
         __O[1012] = ____temp_284
-        if ____t_286(if ____t_285(____temp_284) then __call(
+        __D[1] = if ____t_286(if ____t_285(____temp_284) then __call(
             __arrL({"checkin", "raiox", "portao"}, 3),
             "includes",
             __L1.S.passo
@@ -1534,7 +1535,7 @@ local __O = {};
                         sel
                     )
                     __O[1014] = ____temp_290
-                    if ____t_292(if ____t_291(____temp_290) then __O[1014] else __re_test(
+                    __D[1] = if ____t_292(if ____t_291(____temp_290) then __O[1014] else __re_test(
                         __re("arena|\\.is-|immersive|engaged-off", ""),
                         sel
                     )) then
@@ -3481,7 +3482,7 @@ local __O = {};
         local ____t_707 = __t
         local ____gt_result_706 = __gt(if __t(__L1.P.inv) then __L1.P.inv else 0, 0)
         __O[1057] = ____gt_result_706
-        if not ____t_708(if ____t_707(____gt_result_706) then __mod(
+        __D[1] = if not ____t_708(if ____t_707(____gt_result_706) then __mod(
             math.floor(__L1.t * 16),
             2
         ) else __O[1057]) then
