@@ -32,35 +32,41 @@ local __O = {};
         return x - math.floor(x)
     end
     local function hx(____, c)
-        return if __get(c, 0) == "#" then __arrL(
-            {
-                __TS__ParseInt(
-                    __call(c, "slice", 1, 3),
-                    16
-                ),
-                __TS__ParseInt(
-                    __call(c, "slice", 3, 5),
-                    16
-                ),
-                __TS__ParseInt(
-                    __call(c, "slice", 5, 7),
-                    16
-                )
-            },
-            3
-        ) else __call(
-            __call(
-                __re_match(
-                    c,
-                    __re("\\d+", "g")
-                ),
-                "slice",
-                0,
+        local ____temp_0
+        if __get(c, 0) == "#" then
+            ____temp_0 = __arrL(
+                {
+                    __TS__ParseInt(
+                        __call(c, "slice", 1, 3),
+                        16
+                    ),
+                    __TS__ParseInt(
+                        __call(c, "slice", 3, 5),
+                        16
+                    ),
+                    __TS__ParseInt(
+                        __call(c, "slice", 5, 7),
+                        16
+                    )
+                },
                 3
-            ),
-            "map",
-            __NumberV
-        )
+            )
+        else
+            ____temp_0 = __call(
+                __call(
+                    __re_match(
+                        c,
+                        __re("\\d+", "g")
+                    ),
+                    "slice",
+                    0,
+                    3
+                ),
+                "map",
+                __NumberV
+            )
+        end
+        return ____temp_0
     end
     local function mix(____, a, b, k)
         local A = hx(nil, a)
@@ -240,7 +246,7 @@ local __O = {};
             y - 19,
             6,
             6,
-            if __gt(noite, 0.4) then "#ffd880" else mix(nil, "#bfe4ff", "#304060", noite)
+            __gt(noite, 0.4) and "#ffd880" or mix(nil, "#bfe4ff", "#304060", noite)
         )
         R(
             nil,
@@ -248,7 +254,7 @@ local __O = {};
             y - 19,
             6,
             6,
-            if __gt(noite, 0.4) then "#ffd880" else mix(nil, "#bfe4ff", "#304060", noite)
+            __gt(noite, 0.4) and "#ffd880" or mix(nil, "#bfe4ff", "#304060", noite)
         )
     end
     local function predio(self, x, y, w, h, i, noite)
@@ -286,18 +292,26 @@ local __O = {};
                         __add(x, w) - 6
                     ) do
                         local aceso = hash(nil, wx * 7 + wy) > 0.45
-                        R(
-                            nil,
-                            wx,
-                            wy,
-                            5,
-                            6,
-                            if __gt(noite, 0.35) then if __t(aceso) then "#ffd870" else "#2a2a40" else mix(
+                        local ____wx_2 = wx
+                        local ____wy_3 = wy
+                        local ____gt_result_1
+                        if __gt(noite, 0.35) then
+                            ____gt_result_1 = __t(aceso) and "#ffd870" or "#2a2a40"
+                        else
+                            ____gt_result_1 = mix(
                                 nil,
                                 "#8ac0e0",
                                 "#5a7a90",
                                 hash(nil, wx + wy) * 0.5
                             )
+                        end
+                        R(
+                            nil,
+                            ____wx_2,
+                            ____wy_3,
+                            5,
+                            6,
+                            ____gt_result_1
                         )
                         wx = wx + 9
                     end
@@ -547,44 +561,92 @@ local __O = {};
     end
     local function desenhar(self, ctx, o)
         c = ctx
-        local W = if __t(o.W) then o.W else 960
-        local H = if __t(o.H) then o.H else 540
-        local t = if __t(o.t) then o.t else 0
-        local dur = if __t(o.dur) then o.dur else DUR
+        local ____t_result_4
+        if __t(o.W) then
+            ____t_result_4 = o.W
+        else
+            ____t_result_4 = 960
+        end
+        local W = ____t_result_4
+        local ____t_result_5
+        if __t(o.H) then
+            ____t_result_5 = o.H
+        else
+            ____t_result_5 = 540
+        end
+        local H = ____t_result_5
+        local ____t_result_6
+        if __t(o.t) then
+            ____t_result_6 = o.t
+        else
+            ____t_result_6 = 0
+        end
+        local t = ____t_result_6
+        local ____t_result_7
+        if __t(o.dur) then
+            ____t_result_7 = o.dur
+        else
+            ____t_result_7 = DUR
+        end
+        local dur = ____t_result_7
         local u = clamp(nil, t / dur, 0, 1)
         local s = t * 660
-        local time = if __t(o.time) then o.time else t
-        local ____o_de_0 = o.de
-        if ____o_de_0 == nil then
-            ____o_de_0 = 0
+        local ____t_result_8
+        if __t(o.time) then
+            ____t_result_8 = o.time
+        else
+            ____t_result_8 = t
         end
-        local de = ____o_de_0
-        local ____o_para_1 = o.para
-        if ____o_para_1 == nil then
-            ____o_para_1 = 0
+        local time = ____t_result_8
+        local ____o_de_9 = o.de
+        if ____o_de_9 == nil then
+            ____o_de_9 = 0
         end
-        local para = ____o_para_1
-        local nomes = if __t(o.nomes) then o.nomes else __arrL({}, 0)
-        local urb = if __t(__call(CIDADE, "has", para)) then ease(nil, (u - 0.15) / 0.55) else 0
-        local roca = if __t(para == 0 or para == 7) then 1 else 1 - urb
+        local de = ____o_de_9
+        local ____o_para_10 = o.para
+        if ____o_para_10 == nil then
+            ____o_para_10 = 0
+        end
+        local para = ____o_para_10
+        local ____t_result_11
+        if __t(o.nomes) then
+            ____t_result_11 = o.nomes
+        else
+            ____t_result_11 = __arrL({}, 0)
+        end
+        local nomes = ____t_result_11
+        local ____t_result_12
+        if __t(__call(CIDADE, "has", para)) then
+            ____t_result_12 = ease(nil, (u - 0.15) / 0.55)
+        else
+            ____t_result_12 = 0
+        end
+        local urb = ____t_result_12
+        local roca = __t(para == 0 or para == 7) and 1 or 1 - urb
         local noite = 0
         do
             pcall(function()
-                local ____t_10 = __t
-                local ____opt_6 = window.DayTime
-                if ____opt_6 ~= nil then
-                    ____opt_6 = ____opt_6.state
+                local ____t_result_22
+                local ____t_21 = __t
+                local ____opt_17 = window.DayTime
+                if ____opt_17 ~= nil then
+                    ____opt_17 = ____opt_17.state
                 end
-                local ____opt_result_8
-                if ____opt_6 ~= nil then
-                    ____opt_result_8 = ____opt_6(____opt_6)
+                local ____opt_result_19
+                if ____opt_17 ~= nil then
+                    ____opt_result_19 = ____opt_17(____opt_17)
                 end
-                local ____opt_result_9
-                if ____opt_result_8 ~= nil then
-                    ____opt_result_9 = ____opt_result_8.night
+                local ____opt_result_20
+                if ____opt_result_19 ~= nil then
+                    ____opt_result_20 = ____opt_result_19.night
                 end
-                __O[698] = ____opt_result_9
-                noite = clamp(nil, if ____t_10(____opt_result_9) then __O[698] else 0, 0, 1)
+                __O[716] = ____opt_result_20
+                if ____t_21(____opt_result_20) then
+                    ____t_result_22 = __O[716]
+                else
+                    ____t_result_22 = 0
+                end
+                noite = clamp(nil, ____t_result_22, 0, 1)
             end)
         end
         if para == 11 then
@@ -688,10 +750,10 @@ local __O = {};
                             hash(nil, i * 7) * 220,
                             2,
                             2,
-                            if __t(__mod(
+                            __t(__mod(
                                 math.floor(time * 3 + i),
                                 5
-                            )) then "#ffffff" else "#ffe8a0"
+                            )) and "#ffffff" or "#ffe8a0"
                         )
                     end
                     i = i + 1
@@ -866,18 +928,29 @@ local __O = {};
                 while __le(x, W) do
                     local ph = mod(nil, x + s * 0.75 - 90, 300) / 300
                     local y = ROAD - 115 + dy + math.sin(ph * math.pi) * 14
-                    local ____ = if __t(x) then c:lineTo(x, y) else c:moveTo(x, y)
+                    local ____t_result_23
+                    if __t(x) then
+                        ____t_result_23 = c:lineTo(x, y)
+                    else
+                        ____t_result_23 = c:moveTo(x, y)
+                    end
                     x = x + 8
                 end
             end
             c:stroke()
         end
-        local ____call_13 = __call
-        local ____t_12 = __t
-        local ____get_result_11 = __get(nomes, para)
-        __O[699] = ____get_result_11
-        local nome = ____call_13(
-            tostring(if ____t_12(____get_result_11) then __O[699] else "Destino"),
+        local ____call_27 = __call
+        local ____t_result_26
+        local ____t_25 = __t
+        local ____get_result_24 = __get(nomes, para)
+        __O[717] = ____get_result_24
+        if ____t_25(____get_result_24) then
+            ____t_result_26 = __O[717]
+        else
+            ____t_result_26 = "Destino"
+        end
+        local nome = ____call_27(
+            tostring(____t_result_26),
             "toUpperCase"
         )
         local px = W + 60 - (t - 0.55) * 640 * 0.78
@@ -961,7 +1034,7 @@ local __O = {};
             end
         end
         local cx = 300 + ease(nil, u) * 80 + math.sin(t * 1.7) * 8
-        local buraco = if math.abs(math.sin(t * 9)) > 0.97 then -3 else 0
+        local buraco = math.abs(math.sin(t * 9)) > 0.97 and -3 or 0
         local cy = ROAD + 66 + math.floor(math.sin(t * 22) + 0.5) + buraco
         do
             local k = 0
@@ -1014,11 +1087,11 @@ local __O = {};
         ctx:translate(-cx, -cy)
         do
             pcall(function()
-                local ____this_15
-                ____this_15 = o
-                local ____opt_14 = ____this_15.carro
-                if ____opt_14 ~= nil then
-                    ____opt_14(____this_15, ctx, cx, cy)
+                local ____this_29
+                ____this_29 = o
+                local ____opt_28 = ____this_29.carro
+                if ____opt_28 ~= nil then
+                    ____opt_28(____this_29, ctx, cx, cy)
                 end
             end)
         end
@@ -1247,7 +1320,19 @@ local __O = {};
             "#141018"
         )
         c:restore()
-        local fade = if __lt(t, 0.35) then 1 - t / 0.35 else if u > 0.86 then (u - 0.86) / 0.14 else 0
+        local ____lt_result_31
+        if __lt(t, 0.35) then
+            ____lt_result_31 = 1 - t / 0.35
+        else
+            local ____temp_30
+            if u > 0.86 then
+                ____temp_30 = (u - 0.86) / 0.14
+            else
+                ____temp_30 = 0
+            end
+            ____lt_result_31 = ____temp_30
+        end
+        local fade = ____lt_result_31
         if fade > 0 then
             c.globalAlpha = clamp(nil, fade, 0, 1)
             R(

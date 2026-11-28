@@ -6,6 +6,9 @@ local __lt, __le, __gt, __ge, __getq, __mod, __ord, __arrL, __iterar, __t, __get
 local __len, __call, __add, __keys = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__keys
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local ____exports = {}
 local __O = {};
 (function()
@@ -114,11 +117,41 @@ local __O = {};
         if tema == nil then
             tema = {}
         end
-        local u = if __t(tema.u) then tema.u else 1
-        local borda = if __t(tema.borda) then tema.borda else "#e8d8a0"
-        local fundo = if __t(tema.fundo) then tema.fundo else "#1a2030"
-        local luz = if __t(tema.luz) then tema.luz else "rgba(255,255,255,.22)"
-        local escuro = if __t(tema.escuro) then tema.escuro else "rgba(0,0,0,.35)"
+        local ____t_result_0
+        if __t(tema.u) then
+            ____t_result_0 = tema.u
+        else
+            ____t_result_0 = 1
+        end
+        local u = ____t_result_0
+        local ____t_result_1
+        if __t(tema.borda) then
+            ____t_result_1 = tema.borda
+        else
+            ____t_result_1 = "#e8d8a0"
+        end
+        local borda = ____t_result_1
+        local ____t_result_2
+        if __t(tema.fundo) then
+            ____t_result_2 = tema.fundo
+        else
+            ____t_result_2 = "#1a2030"
+        end
+        local fundo = ____t_result_2
+        local ____t_result_3
+        if __t(tema.luz) then
+            ____t_result_3 = tema.luz
+        else
+            ____t_result_3 = "rgba(255,255,255,.22)"
+        end
+        local luz = ____t_result_3
+        local ____t_result_4
+        if __t(tema.escuro) then
+            ____t_result_4 = tema.escuro
+        else
+            ____t_result_4 = "rgba(0,0,0,.35)"
+        end
+        local escuro = ____t_result_4
         x = math.floor(x + 0.5)
         y = math.floor(y + 0.5)
         w = math.floor(w + 0.5)
@@ -252,64 +285,137 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local u = if __t(o.u) then o.u else 1
-        local n = if __t(o.gomos) then o.gomos else math.max(
-            6,
-            math.floor(w / (6 * u) + 0.5)
-        )
+        local ____t_result_5
+        if __t(o.u) then
+            ____t_result_5 = o.u
+        else
+            ____t_result_5 = 1
+        end
+        local u = ____t_result_5
+        local ____t_result_6
+        if __t(o.gomos) then
+            ____t_result_6 = o.gomos
+        else
+            ____t_result_6 = math.max(
+                6,
+                math.floor(w / (6 * u) + 0.5)
+            )
+        end
+        local n = ____t_result_6
         local gw = (w - 2 * u) / n
-        R(
+        local ____array_8 = __TS__SparseArrayNew(
             nil,
             c,
             x - u,
             y - u,
             w + 2 * u,
-            h + 2 * u,
-            if __t(o.borda) then o.borda else "#0a0a14"
+            h + 2 * u
         )
-        R(
+        local ____t_result_7
+        if __t(o.borda) then
+            ____t_result_7 = o.borda
+        else
+            ____t_result_7 = "#0a0a14"
+        end
+        __TS__SparseArrayPush(____array_8, ____t_result_7)
+        R(__TS__SparseArraySpread(____array_8))
+        local ____array_10 = __TS__SparseArrayNew(
             nil,
             c,
             x,
             y,
             w,
-            h,
-            if __t(o.fundo) then o.fundo else "#2a2438"
+            h
         )
+        local ____t_result_9
+        if __t(o.fundo) then
+            ____t_result_9 = o.fundo
+        else
+            ____t_result_9 = "#2a2438"
+        end
+        __TS__SparseArrayPush(____array_10, ____t_result_9)
+        R(__TS__SparseArraySpread(____array_10))
         do
             local i = 0
             while __lt(i, n) do
                 local a = i / n
                 local b = (i + 1) / n
                 local gx = __add(x, u) + i * gw
-                local cor = if __t(o.vazio) then o.vazio else "#3a3450"
-                local ____t_2 = __t
-                local ____t_1 = __t
-                local ____temp_0 = if __t(o.ruim) then __gt(
-                    b,
-                    __get(o.ruim, 0)
-                ) else o.ruim
-                __O[141] = ____temp_0
-                if ____t_2(if ____t_1(____temp_0) then __lt(
-                    a,
-                    __get(o.ruim, 1)
-                ) else __O[141]) then
-                    cor = if __t(o.ruimCor) then o.ruimCor else "#a84a4a"
+                local ____t_result_11
+                if __t(o.vazio) then
+                    ____t_result_11 = o.vazio
+                else
+                    ____t_result_11 = "#3a3450"
                 end
-                local ____t_5 = __t
-                local ____t_4 = __t
-                local ____temp_3 = if __t(o.zona) then __gt(
-                    b,
-                    __get(o.zona, 0)
-                ) else o.zona
-                __O[142] = ____temp_3
-                if ____t_5(if ____t_4(____temp_3) then __lt(
-                    a,
-                    __get(o.zona, 1)
-                ) else __O[142]) then
-                    cor = if __t(o.zonaCor) then o.zonaCor else "#6ad86a"
+                local cor = ____t_result_11
+                local ____t_15 = __t
+                local ____t_result_14
+                local ____t_13 = __t
+                local ____t_result_12
+                if __t(o.ruim) then
+                    ____t_result_12 = __gt(
+                        b,
+                        __get(o.ruim, 0)
+                    )
+                else
+                    ____t_result_12 = o.ruim
                 end
-                if __t(if __t(o.cheio) then __ge(valor, b) else o.cheio) then
+                __O[141] = ____t_result_12
+                if ____t_13(____t_result_12) then
+                    ____t_result_14 = __lt(
+                        a,
+                        __get(o.ruim, 1)
+                    )
+                else
+                    ____t_result_14 = __O[141]
+                end
+                if ____t_15(____t_result_14) then
+                    local ____t_result_16
+                    if __t(o.ruimCor) then
+                        ____t_result_16 = o.ruimCor
+                    else
+                        ____t_result_16 = "#a84a4a"
+                    end
+                    cor = ____t_result_16
+                end
+                local ____t_20 = __t
+                local ____t_result_19
+                local ____t_18 = __t
+                local ____t_result_17
+                if __t(o.zona) then
+                    ____t_result_17 = __gt(
+                        b,
+                        __get(o.zona, 0)
+                    )
+                else
+                    ____t_result_17 = o.zona
+                end
+                __O[142] = ____t_result_17
+                if ____t_18(____t_result_17) then
+                    ____t_result_19 = __lt(
+                        a,
+                        __get(o.zona, 1)
+                    )
+                else
+                    ____t_result_19 = __O[142]
+                end
+                if ____t_20(____t_result_19) then
+                    local ____t_result_21
+                    if __t(o.zonaCor) then
+                        ____t_result_21 = o.zonaCor
+                    else
+                        ____t_result_21 = "#6ad86a"
+                    end
+                    cor = ____t_result_21
+                end
+                local ____t_23 = __t
+                local ____t_result_22
+                if __t(o.cheio) then
+                    ____t_result_22 = __ge(valor, b)
+                else
+                    ____t_result_22 = o.cheio
+                end
+                if ____t_23(____t_result_22) then
                     cor = o.cheio
                 end
                 R(
@@ -522,11 +628,17 @@ local __O = {};
                 do
                     local x = 0
                     while x < N do
-                        local ____t_8 = __t
-                        local ____t_7 = __t
-                        local ____on_result_6 = on(nil, x, y)
-                        __O[143] = ____on_result_6
-                        if ____t_8(if ____t_7(____on_result_6) then not __t(on(nil, x - 1, y)) or not __t(on(nil, x, y - 1)) else __O[143]) then
+                        local ____t_27 = __t
+                        local ____t_result_26
+                        local ____t_25 = __t
+                        local ____on_result_24 = on(nil, x, y)
+                        __O[143] = ____on_result_24
+                        if ____t_25(____on_result_24) then
+                            ____t_result_26 = not __t(on(nil, x - 1, y)) or not __t(on(nil, x, y - 1))
+                        else
+                            ____t_result_26 = __O[143]
+                        end
+                        if ____t_27(____t_result_26) then
                             R(
                                 nil,
                                 c,
@@ -579,19 +691,35 @@ local __O = {};
         local N = base.width
         local d = base:getContext("2d"):getImageData(0, 0, N, N).data
         local function cheio(____, x, y)
-            local ____t_14 = __t
-            local ____t_12 = __t
-            local ____t_10 = __t
-            local ____temp_9 = __ge(x, 0) and __ge(y, 0)
-            __O[144] = ____temp_9
-            local ____temp_11 = if ____t_10(____temp_9) then __lt(x, N) else __O[144]
-            __O[145] = ____temp_11
-            local ____temp_13 = if ____t_12(____temp_11) then __lt(y, N) else __O[145]
-            __O[146] = ____temp_13
-            return if ____t_14(____temp_13) then __gt(
-                __get(d, (y * N + x) * 4 + 3),
-                0
-            ) else __O[146]
+            local ____t_result_34
+            local ____t_33 = __t
+            local ____t_result_32
+            local ____t_31 = __t
+            local ____t_result_30
+            local ____t_29 = __t
+            local ____temp_28 = __ge(x, 0) and __ge(y, 0)
+            __O[144] = ____temp_28
+            if ____t_29(____temp_28) then
+                ____t_result_30 = __lt(x, N)
+            else
+                ____t_result_30 = __O[144]
+            end
+            __O[145] = ____t_result_30
+            if ____t_31(____t_result_30) then
+                ____t_result_32 = __lt(y, N)
+            else
+                ____t_result_32 = __O[145]
+            end
+            __O[146] = ____t_result_32
+            if ____t_33(____t_result_32) then
+                ____t_result_34 = __gt(
+                    __get(d, (y * N + x) * 4 + 3),
+                    0
+                )
+            else
+                ____t_result_34 = __O[146]
+            end
+            return ____t_result_34
         end
         do
             local y = 0
@@ -599,17 +727,34 @@ local __O = {};
                 do
                     local x = 0
                     while __lt(x, N) do
-                        local ____t_21 = __t
-                        local ____t_16 = __t
-                        local ____cheio_result_15 = cheio(nil, x, y)
-                        __O[149] = ____cheio_result_15
-                        local ____t_20 = __t
-                        local ____t_18 = __t
-                        local ____temp_17 = not __t(cheio(nil, x - 1, y)) or not __t(cheio(nil, x + 1, y))
-                        __O[147] = ____temp_17
-                        local ____temp_19 = if ____t_18(____temp_17) then __O[147] else not __t(cheio(nil, x, y - 1))
-                        __O[148] = ____temp_19
-                        if ____t_21(if ____t_16(____cheio_result_15) then if ____t_20(____temp_19) then __O[148] else not __t(cheio(nil, x, y + 1)) else __O[149]) then
+                        local ____t_43 = __t
+                        local ____t_result_42
+                        local ____t_36 = __t
+                        local ____cheio_result_35 = cheio(nil, x, y)
+                        __O[149] = ____cheio_result_35
+                        if ____t_36(____cheio_result_35) then
+                            local ____t_result_41
+                            local ____t_40 = __t
+                            local ____t_result_39
+                            local ____t_38 = __t
+                            local ____temp_37 = not __t(cheio(nil, x - 1, y)) or not __t(cheio(nil, x + 1, y))
+                            __O[147] = ____temp_37
+                            if ____t_38(____temp_37) then
+                                ____t_result_39 = __O[147]
+                            else
+                                ____t_result_39 = not __t(cheio(nil, x, y - 1))
+                            end
+                            __O[148] = ____t_result_39
+                            if ____t_40(____t_result_39) then
+                                ____t_result_41 = __O[148]
+                            else
+                                ____t_result_41 = not __t(cheio(nil, x, y + 1))
+                            end
+                            ____t_result_42 = ____t_result_41
+                        else
+                            ____t_result_42 = __O[149]
+                        end
+                        if ____t_43(____t_result_42) then
                             R(
                                 nil,
                                 c,
@@ -764,10 +909,16 @@ local __O = {};
         if __t(__get(cache, k)) then
             return __get(cache, k)
         end
-        local ____t_23 = __t
-        local ____get_result_22 = __get(ESPECIES, tipo)
-        __O[150] = ____get_result_22
-        local o, l, e, marca = table.unpack(if ____t_23(____get_result_22) then __O[150] else ESPECIES["TILÁPIA"], 1, 4)
+        local ____t_result_46
+        local ____t_45 = __t
+        local ____get_result_44 = __get(ESPECIES, tipo)
+        __O[150] = ____get_result_44
+        if ____t_45(____get_result_44) then
+            ____t_result_46 = __O[150]
+        else
+            ____t_result_46 = ESPECIES["TILÁPIA"]
+        end
+        local o, l, e, marca = table.unpack(____t_result_46, 1, 4)
         local cv, c = table.unpack(
             mk(nil, 16, 9),
             1,
@@ -780,19 +931,34 @@ local __O = {};
                 do
                     local x = 0
                     while x < 16 do
-                        local ch = __get(row, x)
-                        if ch == "." then
-                            continue
+                        do
+                            local ch = __get(row, x)
+                            if ch == "." then
+                                do x = x + 1 continue end
+                            end
+                            local ____array_49 = __TS__SparseArrayNew(
+                                nil,
+                                c,
+                                x,
+                                y,
+                                1,
+                                1
+                            )
+                            local ____temp_48
+                            if ch == "#" then
+                                ____temp_48 = e
+                            else
+                                local ____temp_47
+                                if ch == "l" then
+                                    ____temp_47 = l
+                                else
+                                    ____temp_47 = ch == "b" and "#e8e8dc" or (ch == "e" and "#1c1c1c" or o)
+                                end
+                                ____temp_48 = ____temp_47
+                            end
+                            __TS__SparseArrayPush(____array_49, ____temp_48)
+                            R(__TS__SparseArraySpread(____array_49))
                         end
-                        R(
-                            nil,
-                            c,
-                            x,
-                            y,
-                            1,
-                            1,
-                            if ch == "#" then e else if ch == "l" then l else if ch == "b" then "#e8e8dc" else if ch == "e" then "#1c1c1c" else o
-                        )
                         x = x + 1
                     end
                 end
@@ -915,7 +1081,7 @@ local __O = {};
         c:restore()
     end
     local function pessoa(self, c, x, y, pele, roupa, cabelo, pula, braco)
-        local dy = if __t(pula) then -1 else 0
+        local dy = __t(pula) and -1 or 0
         R(
             nil,
             c,

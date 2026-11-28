@@ -369,8 +369,74 @@
     return { base, obj, locs, W, H, agua: Tr.aguaPontos || [], Tr, aves, borbo, ilha, PAD: ilha ? ilha.pad : 0, barcos, golfinhos, parapentes, balao };
   }
 
+  /* ---------- modo simples (Roblox): montar o mapa pixel a pixel leva mais de um minuto lá e o Roblox derruba o
+     script; então o mapa vira um quadro leve com a lista dos lugares, os mesmos cadeados e o mesmo "ir" ---------- */
+  const SIMPLES = !!window.DAROCA_ROBLOX;
+  let LS = null;
+  function abrirSimples(d) {
+    def = d;
+    if (!LS) {
+      const el = document.createElement('div'); el.className = 'm3d-lista'; el.hidden = true; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true');
+      el.innerHTML = '<canvas width="480" height="270"></canvas><button type="button" class="ant" aria-label="Lugar anterior">&lt;</button><button type="button" class="prox" aria-label="Próximo lugar">&gt;</button><button type="button" class="ir">IR PARA LÁ</button><button type="button" class="teste" hidden></button><button type="button" class="fechar">FECHAR</button>';
+      document.body.appendChild(el); LS = { el, cv: el.querySelector('canvas'), sel: 0, aviso: 0 }; LS.g = LS.cv.getContext('2d');
+      el.querySelector('.ant').addEventListener('click', () => moverSimples(-1)); el.querySelector('.prox').addEventListener('click', () => moverSimples(1));
+      el.querySelector('.ir').addEventListener('click', () => irSimples()); el.querySelector('.fechar').addEventListener('click', fechar); el.querySelector('.teste').addEventListener('click', () => def?.teste?.acao?.());
+      addEventListener('keydown', (e) => { if (!aberto || !SIMPLES) return; const k = e.key, cols = colsSimples();
+        if (k === 'Escape') fechar(); else if (k === 'ArrowRight') moverSimples(1); else if (k === 'ArrowLeft') moverSimples(-1); else if (k === 'ArrowDown') moverSimples(cols); else if (k === 'ArrowUp') moverSimples(-cols);
+        else if (k === 'Enter' || k === ' ') irSimples(); else return; e.preventDefault(); e.stopImmediatePropagation(); }, true);
+    }
+    const atual = d.locais.findIndex((L) => L.atual); LS.sel = Math.max(0, atual); LS.aviso = 0;
+    const bt = LS.el.querySelector('.teste'); bt.hidden = !d.teste; bt.textContent = d.teste?.rotulo || '';
+    LS.el.querySelector('.ir').textContent = String(d.botao || 'IR PARA LÁ').replace(/[▶►]/g, '').trim();
+    aberto = true; sel = LS.sel; viagem = null; LS.el.hidden = false; desenharSimples();
+    window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: true } }));
+    return true;
+  }
+  const colsSimples = () => (def && def.locais.length > 12 ? 3 : 2);
+  function moverSimples(dv) { if (!aberto || !def) return; const n = def.locais.length; LS.sel = ((LS.sel + dv) % n + n) % n; sel = LS.sel; LS.aviso = 0; desenharSimples(); }
+  function irSimples() {
+    if (!aberto || !def) return; const L = def.locais[LS.sel]; if (!L) return;
+    if (L.atual || L.estado?.ok === false) { LS.aviso = 1; desenharSimples(); return; }
+    const id = L.id; fechar(); setTimeout(() => def.aoIr?.(id), 60);
+  }
+  function desenharSimples() {
+    const g = LS.g, W = 480, H = 270, n = def.locais.length, cols = colsSimples(), lin = Math.ceil(n / cols), cw = Math.floor((W - 24) / cols);
+    const R = (x, y, w, h, cor) => { g.fillStyle = cor; g.fillRect(x, y, w, h); };
+    const txt = (t, x, y, cor, tam = 9, al = 'left') => { g.font = tam + 'px Pixel, monospace'; g.textAlign = al; g.textBaseline = 'alphabetic'; g.fillStyle = cor; g.fillText(t, x, y); };
+    // moldura de madeira e papel de mapa com quadriculado
+    R(0, 0, W, H, '#2a1a10'); R(3, 3, W - 6, H - 6, '#8a5a32'); R(6, 6, W - 12, H - 12, '#f3e3bf');
+    for (let x = 6; x < W - 6; x += 24) R(x, 6, 1, H - 12, '#ead6aa'); for (let y = 6; y < H - 6; y += 24) R(6, y, W - 12, 1, '#ead6aa');
+    R(6, 6, W - 12, 26, '#5a3a20'); R(6, 30, W - 12, 2, '#3a2412'); txt(String(def.titulo || 'MAPA'), W / 2, 23, '#ffe9a8', 10, 'center');
+    const topo = 40, alt = Math.min(20, Math.floor((176 - topo + 40) / lin));
+    def.locais.forEach((L, i) => {
+      const cx = 12 + (i % cols) * cw, cy = topo + Math.floor(i / cols) * alt, ativo = i === LS.sel, bloq = L.estado?.ok === false;
+      if (ativo) { R(cx - 2, cy - 1, cw - 4, alt - 2, '#2a1a10'); R(cx - 1, cy, cw - 6, alt - 4, '#ffd98a'); }
+      const mx = cx + 3, my = cy + Math.floor((alt - 4) / 2) - 3; // marcador: verde livre, azul onde você está, cadeado vermelho trancado
+      if (L.atual) { R(mx, my, 7, 7, '#1c3a52'); R(mx + 1, my + 1, 5, 5, '#3a8ad8'); }
+      else if (bloq) { R(mx + 1, my - 2, 5, 1, '#2a0808'); R(mx + 1, my - 1, 1, 2, '#2a0808'); R(mx + 5, my - 1, 1, 2, '#2a0808'); R(mx, my + 1, 7, 6, '#2a0808'); R(mx + 1, my + 2, 5, 4, '#d83a3a'); R(mx + 3, my + 3, 1, 2, '#2a0808'); }
+      else { R(mx, my, 7, 7, '#1e3a14'); R(mx + 1, my + 1, 5, 5, '#5ab83a'); }
+      let nome = String(L.nome || ''); g.font = '9px Pixel, monospace'; while (nome.length > 4 && g.measureText(nome).width > cw - 22) nome = nome.slice(0, -2) + '…';
+      txt(nome, cx + 14, cy + Math.floor((alt - 4) / 2) + 4, ativo ? '#2a1a10' : bloq ? '#7a6a5a' : '#3a2412');
+    });
+    // ficha do lugar escolhido
+    const L = def.locais[LS.sel] || {}, ok = L.estado?.ok !== false, fy = 186;
+    R(6, fy, W - 12, H - fy - 6, '#5a3a20'); R(8, fy + 2, W - 16, H - fy - 10, '#fff6dc');
+    txt(String(L.nome || ''), 16, fy + 16, '#2a1a10', 11); if (L.sub) txt(String(L.sub), W - 16, fy + 16, '#8a5a32', 8, 'right');
+    let linha = L.atual ? 'VOCÊ ESTÁ AQUI.' : ok ? 'Livre para ir. ENTER ou ' + String(def.botao || 'IR PARA LÁ').replace(/[▶►]/g, '').trim() + '.' : String(L.estado?.motivo || L.estado?.reason || 'Ainda não dá para ir.');
+    const T = !ok && L.estado?.trava; if (T && T.nomes?.length) linha = (T.titulo || 'PRECISA DERROTAR') + ': ' + T.nomes.join(' ').replace(/\s+/g, ' ');
+    const cor = L.atual ? '#2c5a9e' : ok ? '#2e6a1e' : '#b8261e';
+    g.font = '9px Pixel, monospace'; const pal = linha.split(' '); let l1 = '', l2 = '';
+    for (const p of pal) { if (!l2 && g.measureText((l1 ? l1 + ' ' : '') + p).width <= W - 40) l1 = (l1 ? l1 + ' ' : '') + p; else l2 = (l2 ? l2 + ' ' : '') + p; }
+    if (l2 && g.measureText(l2).width > W - 40) { while (l2.length > 4 && g.measureText(l2 + '…').width > W - 40) l2 = l2.slice(0, -1); l2 += '…'; }
+    if (LS.aviso) { R(12, fy + 21, W - 24, l2 ? 30 : 17, '#ffe0d8'); }
+    txt(l1, 16, fy + 33, cor); if (l2) txt(l2, 16, fy + 46, cor);
+    txt('< > ESCOLHE · ENTER VAI · ESC FECHA', W / 2, H - 12, '#8a5a32', 8, 'center');
+    const bt = LS.el.querySelector('.ir'); bt.disabled = !ok || !!L.atual;
+  }
+
   /* ---------- abrir, selecionar, ir ---------- */
   function abrir(d) {
+    if (SIMPLES) return abrirSimples(d);
     if (!ui) montarUI(); def = d; if (!cache.has(d.chave)) cache.set(d.chave, montar(d)); M = cache.get(d.chave);
     ui.querySelector('.t').textContent = d.titulo; ui.querySelector('.s').textContent = d.subtitulo || ''; const bt = ui.querySelector('.teste'); bt.hidden = !d.teste; bt.textContent = d.teste?.rotulo || ''; mostrarTrava(-1);
     ui.hidden = false; requestAnimationFrame(() => ui.classList.add('on')); aberto = true; sel = -1; info = false; viagem = null; faiscas = []; rastro = [];
@@ -382,7 +448,7 @@
     if (atual >= 0) setTimeout(() => aberto && sel < 0 && selecionar(atual), 1500);
     return true;
   }
-  function fechar() { if (!aberto) return; aberto = false; ui.classList.remove('on'); setTimeout(() => { if (!aberto) ui.hidden = true; }, 360); cancelAnimationFrame(raf); clearInterval(previaTimer); window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } })); def?.aoFechar?.(); }
+  function fechar() { if (!aberto) return; aberto = false; if (SIMPLES) { if (LS) LS.el.hidden = true; window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } })); def?.aoFechar?.(); return; } ui.classList.remove('on'); setTimeout(() => { if (!aberto) ui.hidden = true; }, 360); cancelAnimationFrame(raf); clearInterval(previaTimer); window.dispatchEvent(new CustomEvent('controls-capture', { detail: { active: false } })); def?.aoFechar?.(); }
   const centro = (i) => { const L = M.locs[i]; return { x: L.bx + L.bw / 2, y: L.by + L.bh * .6 }; };
   function selecionar(i) {
     if (viagem) return; sel = i; const pv = ui.querySelector('.pv'); mostrarInfo(false); clearInterval(previaTimer); mostrarTrava(i >= 0 && def.locais[i].estado?.trava ? i : -1);
@@ -530,5 +596,5 @@
       lo.tremor = Math.max(0, lo.tremor - dt * 1.6); cadeado(x, y, k, lo.tremor); if (i === travaI) { const el = ui.querySelector('.trava'), pv = ui.querySelector('.pv'), r = pv.classList.contains('on') ? pv.getBoundingClientRect() : null, meia = el.offsetWidth / 2 + 10, ladoDir = r && r.top < H * .4 ? r.left : W, base = r && r.top >= H * .4 ? r.top : H; el.style.left = Math.round(Math.max(meia, Math.min(ladoDir - meia, x))) + 'px'; el.style.top = Math.round(Math.max(el.offsetHeight + 60, Math.min(base - 16, y - 17 * k - 8))) + 'px'; if (tempo > travaAte) mostrarTrava(-1); } });
   }
 
-  window.Mapa3D = Object.freeze({ abrir, fechar, aberto: () => aberto, selecionar: (id) => { const i = def?.locais.findIndex((L) => L.id === id) ?? -1; if (i >= 0) selecionar(i); }, ir, info: mostrarInfo, arte: { Px, COR, shade, hash, TS, curva, trilho, vn } });
+  window.Mapa3D = Object.freeze({ abrir, fechar, aberto: () => aberto, selecionar: (id) => { const i = def?.locais.findIndex((L) => L.id === id) ?? -1; if (i < 0) return; if (SIMPLES) moverSimples(i - LS.sel); else selecionar(i); }, ir: () => (SIMPLES ? irSimples() : ir()), info: (v) => (SIMPLES ? null : mostrarInfo(v)), simples: SIMPLES, arte: { Px, COR, shade, hash, TS, curva, trilho, vn } });
 })();

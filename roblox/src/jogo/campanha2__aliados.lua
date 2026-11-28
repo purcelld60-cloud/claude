@@ -8,6 +8,9 @@ local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__MathSign = ____lualib.__TS__MathSign
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local ____exports = {}
 local __O = {};
 (function()
@@ -28,8 +31,8 @@ local __O = {};
         end
     end
     function lojaPicole(self)
-        local ____arrL_31 = __arrL
-        local ____temp_29 = {
+        local ____arrL_65 = __arrL
+        local ____temp_63 = {
             t = "Picolé Sigma (cura 40) · ● 15",
             preco = 15,
             f = function()
@@ -40,7 +43,7 @@ local __O = {};
                 api:aviso("+40 DE VIDA · SIGMA DEMAIS")
             end
         }
-        local ____temp_30 = {
+        local ____temp_64 = {
             t = "Picolé Mega Chad (cura tudo) · ● 40",
             preco = 40,
             f = function()
@@ -48,19 +51,31 @@ local __O = {};
                 api:aviso("VIDA CHEIA · CHAD SUPREMO")
             end
         }
-        local ____t_24 = __t
-        local ____t_23 = __t
-        local ____tem_result_22 = tem(nil, "biscoito_cao")
-        __O[861] = ____tem_result_22
-        local ____temp_27 = if ____t_24(if ____t_23(____tem_result_22) then __O[861] else tem(nil, "cao")) then "Biscoito do cachorro (já comprado)" else "Biscoito de polvilho pro cachorro · ● 10"
-        local function ____temp_28()
+        local ____t_57 = __t
+        local ____t_result_56
+        local ____t_55 = __t
+        local ____tem_result_54 = tem(nil, "biscoito_cao")
+        __O[880] = ____tem_result_54
+        if ____t_55(____tem_result_54) then
+            ____t_result_56 = __O[880]
+        else
+            ____t_result_56 = tem(nil, "cao")
+        end
+        local ____temp_61 = ____t_57(____t_result_56) and "Biscoito do cachorro (já comprado)" or "Biscoito de polvilho pro cachorro · ● 10"
+        local function ____temp_62()
             marca(nil, "biscoito_cao")
             api:item("BISCOITO DE POLVILHO")
         end
-        local ____t_26 = __t
-        local ____tem_result_25 = tem(nil, "biscoito_cao")
-        __O[862] = ____tem_result_25
-        local ops = ____arrL_31({____temp_29, ____temp_30, {t = ____temp_27, preco = 10, f = ____temp_28, usado = if ____t_26(____tem_result_25) then __O[862] else tem(nil, "cao")}, {t = "Só olhando", sair = true}}, 4)
+        local ____t_result_60
+        local ____t_59 = __t
+        local ____tem_result_58 = tem(nil, "biscoito_cao")
+        __O[881] = ____tem_result_58
+        if ____t_59(____tem_result_58) then
+            ____t_result_60 = __O[881]
+        else
+            ____t_result_60 = tem(nil, "cao")
+        end
+        local ops = ____arrL_65({____temp_63, ____temp_64, {t = ____temp_61, preco = 10, f = ____temp_62, usado = ____t_result_60}, {t = "Só olhando", sair = true}}, 4)
         api:escolher(
             "TIO DO PICOLÉ",
             "Picolé com nome de meme! O que vai ser?",
@@ -70,19 +85,30 @@ local __O = {};
                 function(____, o) return {t = o.t, ok = true, f = o} end
             ),
             function(____, o)
-                local ____opt_result_34
+                local ____opt_result_68
                 if o ~= nil then
-                    ____opt_result_34 = o.f
+                    ____opt_result_68 = o.f
                 end
-                local p = ____opt_result_34
-                local ____t_39 = __t
-                local ____t_38 = __t
-                local ____t_36 = __t
-                local ____temp_35 = not __t(p)
-                __O[863] = ____temp_35
-                local ____temp_37 = if ____t_36(____temp_35) then __O[863] else p.sair
-                __O[864] = ____temp_37
-                if ____t_39(if ____t_38(____temp_37) then __O[864] else p.usado) then
+                local p = ____opt_result_68
+                local ____t_74 = __t
+                local ____t_result_73
+                local ____t_72 = __t
+                local ____t_result_71
+                local ____t_70 = __t
+                local ____temp_69 = not __t(p)
+                __O[882] = ____temp_69
+                if ____t_70(____temp_69) then
+                    ____t_result_71 = __O[882]
+                else
+                    ____t_result_71 = p.sair
+                end
+                __O[883] = ____t_result_71
+                if ____t_72(____t_result_71) then
+                    ____t_result_73 = __O[883]
+                else
+                    ____t_result_73 = p.usado
+                end
+                if ____t_74(____t_result_73) then
                     return
                 end
                 if __lt(
@@ -141,7 +167,7 @@ local __O = {};
                     notas,
                     "push",
                     {
-                        t = 2 + i * beat * if __mod(i, 7) == 6 then 1 else 0.75 + if __mod(i, 3) == 0 then 0.25 else 0,
+                        t = 2 + i * beat * (__mod(i, 7) == 6 and 1 or 0.75 + (__mod(i, 3) == 0 and 0.25 or 0)),
                         lane = __get(
                             __arrL({
                                 0,
@@ -187,7 +213,13 @@ local __O = {};
             c = cv:getContext("2d")
         }
         local function tecla(____, e)
-            local i = if __call(LANES, "indexOf", e.code) >= 0 then __call(LANES, "indexOf", e.code) else __call(ALT, "indexOf", e.code)
+            local ____temp_81
+            if __call(LANES, "indexOf", e.code) >= 0 then
+                ____temp_81 = __call(LANES, "indexOf", e.code)
+            else
+                ____temp_81 = __call(ALT, "indexOf", e.code)
+            end
+            local i = ____temp_81
             if __t(i < 0 or not __t(ritmo)) then
                 return
             end
@@ -220,28 +252,34 @@ local __O = {};
         local best = nil
         local d = 0.26
         for ____, n in __iterar((r.notas)) do
-            local ____t_45 = __t
-            local ____t_44 = __t
-            local ____temp_43 = n.ok == nil and n.lane == i
-            __O[866] = ____temp_43
-            if ____t_45(if ____t_44(____temp_43) then math.abs(n.t - r.t) < d else __O[866]) then
+            local ____t_85 = __t
+            local ____t_result_84
+            local ____t_83 = __t
+            local ____temp_82 = n.ok == nil and n.lane == i
+            __O[885] = ____temp_82
+            if ____t_83(____temp_82) then
+                ____t_result_84 = math.abs(n.t - r.t) < d
+            else
+                ____t_result_84 = __O[885]
+            end
+            if ____t_85(____t_result_84) then
                 d = math.abs(n.t - r.t)
                 best = n
             end
         end
         if __t(best) then
-            best.ok = if d < 0.12 then 2 else 1
-            r.acertos = r.acertos + if best.ok == 2 then 1 else 0.7
+            best.ok = d < 0.12 and 2 or 1
+            r.acertos = r.acertos + (best.ok == 2 and 1 or 0.7)
             r.combo = r.combo + 1
-            r.msg = if best.ok == 2 then "PERFEITO!" else "BOM!"
+            r.msg = best.ok == 2 and "PERFEITO!" or "BOM!"
             do
                 pcall(function()
-                    local ____opt_48 = window.Roteiro
-                    if ____opt_48 ~= nil then
-                        ____opt_48 = ____opt_48.sfx
+                    local ____opt_88 = window.Roteiro
+                    if ____opt_88 ~= nil then
+                        ____opt_88 = ____opt_88.sfx
                     end
-                    if ____opt_48 ~= nil then
-                        ____opt_48(____opt_48, "plim")
+                    if ____opt_88 ~= nil then
+                        ____opt_88(____opt_88, "plim")
                     end
                 end)
             end
@@ -281,7 +319,7 @@ local __O = {};
                     FLOOR - 120,
                     2,
                     120,
-                    if __t(__mod(x, 8)) then "#5a6068" else "#3a4048"
+                    __t(__mod(x, 8)) and "#5a6068" or "#3a4048"
                 )
                 x = x + 4
             end
@@ -346,17 +384,17 @@ local __O = {};
             26,
             "#c8a24a"
         )
-        local ____opt_117 = window.CampanhaCamadas
-        if ____opt_117 ~= nil then
-            ____opt_117 = ____opt_117.kit
+        local ____opt_204 = window.CampanhaCamadas
+        if ____opt_204 ~= nil then
+            ____opt_204 = ____opt_204.kit
         end
-        local ____opt_result_119
-        if ____opt_117 ~= nil then
-            ____opt_result_119 = ____opt_117.pxText
+        local ____opt_result_206
+        if ____opt_204 ~= nil then
+            ____opt_result_206 = ____opt_204.pxText
         end
-        if ____opt_result_119 ~= nil then
-            ____opt_result_119(
-                ____opt_117,
+        if ____opt_result_206 ~= nil then
+            ____opt_result_206(
+                ____opt_204,
                 c,
                 "FERRO-VELHO DO GUGU",
                 x0 + 130,
@@ -420,7 +458,7 @@ local __O = {};
         end
     end
     function vidaMax(self)
-        return 100 + if X(nil).lurdes == "feita" then 20 else 0
+        return 100 + (X(nil).lurdes == "feita" and 20 or 0)
     end
     local ____ = "use strict"
     if __t(window.CampanhaAliados) then
@@ -439,7 +477,14 @@ local __O = {};
     ritmo = nil
     X = function()
         local S = api:S()
-        S.flags.extra = if __t(S.flags.extra) then S.flags.extra else {}
+        local ____S_flags_1 = S.flags
+        local ____t_result_0
+        if __t(S.flags.extra) then
+            ____t_result_0 = S.flags.extra
+        else
+            ____t_result_0 = {}
+        end
+        ____S_flags_1.extra = ____t_result_0
         return S.flags.extra
     end
     tem = function(____, k) return not not __t(__get(
@@ -458,30 +503,30 @@ local __O = {};
         api:salvar()
     end
     moedas = function()
-        local ____opt_2 = window.CampanhaLoja
-        if ____opt_2 ~= nil then
-            ____opt_2 = ____opt_2.moedas
+        local ____opt_4 = window.CampanhaLoja
+        if ____opt_4 ~= nil then
+            ____opt_4 = ____opt_4.moedas
         end
-        local ____opt_result_4
-        if ____opt_2 ~= nil then
-            ____opt_result_4 = ____opt_2(____opt_2)
+        local ____opt_result_6
+        if ____opt_4 ~= nil then
+            ____opt_result_6 = ____opt_4(____opt_4)
         end
-        local ____opt_result_4_5 = ____opt_result_4
-        if ____opt_result_4_5 == nil then
-            ____opt_result_4_5 = 0
+        local ____opt_result_6_7 = ____opt_result_6
+        if ____opt_result_6_7 == nil then
+            ____opt_result_6_7 = 0
         end
-        return ____opt_result_4_5
+        return ____opt_result_6_7
     end
     ganhar = function(____, n)
-        local ____opt_8 = window.CampanhaLoja
-        if ____opt_8 ~= nil then
-            ____opt_8 = ____opt_8.ganhar
+        local ____opt_10 = window.CampanhaLoja
+        if ____opt_10 ~= nil then
+            ____opt_10 = ____opt_10.ganhar
         end
-        local ____opt_result_10
-        if ____opt_8 ~= nil then
-            ____opt_result_10 = ____opt_8(____opt_8, n)
+        local ____opt_result_12
+        if ____opt_10 ~= nil then
+            ____opt_result_12 = ____opt_10(____opt_10, n)
         end
-        return ____opt_result_10
+        return ____opt_result_12
     end
     local function F(____, quem, texto, emo)
         return __arrL({quem, texto, emo}, 3)
@@ -608,29 +653,63 @@ local __O = {};
                     nome = "Dona Lurdes",
                     cena = 13,
                     x = 1980,
-                    estado = function() return if X(nil).lurdes == "feita" then "ok" else if X(nil).lurdes == "ativa" then if __t(pegou(nil, "radio")) then "entregar" else "andando" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_lurdes", "Ô menino, me ajuda? Roubaram meu radinho de pilha. Trinta anos ouvindo a rádio da cidade nele!", "sad"),
-                            F(nil, "daroca", "Quem levaria um radinho?"),
-                            F(nil, "c2_lurdes", "Um moleque de bicicleta. Saiu correndo pro lado do Monumento ao Índio."),
-                            F(nil, "c2_lurdes", "Se achar, eu faço um café que levanta até defunto.", "friend")
-                        },
-                        4
-                    ) else if st == "andando" then __arrL(
-                        {F(nil, "c2_lurdes", "O moleque foi pro lado do Monumento ao Índio. Procura na avenida!")},
-                        1
-                    ) else if st == "entregar" then __arrL(
-                        {
-                            F(nil, "daroca", "Achei, Dona Lurdes! Tava largado na calçada da avenida."),
-                            F(nil, "c2_lurdes", "MEU RADINHO! Ai, que alegria!", "friend"),
-                            F(nil, "c2_lurdes", "Toma esse café passado na hora. Daqui pra frente, você aguenta muito mais pancada.", "friend")
-                        },
-                        3
-                    ) else __arrL(
-                        {F(nil, "c2_lurdes", "O radinho tá tocando arrocha o dia inteiro. Obrigada de novo, meu filho.", "friend")},
-                        1
-                    ) end,
+                    estado = function()
+                        local ____temp_14
+                        if X(nil).lurdes == "feita" then
+                            ____temp_14 = "ok"
+                        else
+                            local ____temp_13
+                            if X(nil).lurdes == "ativa" then
+                                ____temp_13 = __t(pegou(nil, "radio")) and "entregar" or "andando"
+                            else
+                                ____temp_13 = "nova"
+                            end
+                            ____temp_14 = ____temp_13
+                        end
+                        return ____temp_14
+                    end,
+                    falas = function(____, st)
+                        local ____temp_17
+                        if st == "nova" then
+                            ____temp_17 = __arrL(
+                                {
+                                    F(nil, "c2_lurdes", "Ô menino, me ajuda? Roubaram meu radinho de pilha. Trinta anos ouvindo a rádio da cidade nele!", "sad"),
+                                    F(nil, "daroca", "Quem levaria um radinho?"),
+                                    F(nil, "c2_lurdes", "Um moleque de bicicleta. Saiu correndo pro lado do Monumento ao Índio."),
+                                    F(nil, "c2_lurdes", "Se achar, eu faço um café que levanta até defunto.", "friend")
+                                },
+                                4
+                            )
+                        else
+                            local ____temp_16
+                            if st == "andando" then
+                                ____temp_16 = __arrL(
+                                    {F(nil, "c2_lurdes", "O moleque foi pro lado do Monumento ao Índio. Procura na avenida!")},
+                                    1
+                                )
+                            else
+                                local ____temp_15
+                                if st == "entregar" then
+                                    ____temp_15 = __arrL(
+                                        {
+                                            F(nil, "daroca", "Achei, Dona Lurdes! Tava largado na calçada da avenida."),
+                                            F(nil, "c2_lurdes", "MEU RADINHO! Ai, que alegria!", "friend"),
+                                            F(nil, "c2_lurdes", "Toma esse café passado na hora. Daqui pra frente, você aguenta muito mais pancada.", "friend")
+                                        },
+                                        3
+                                    )
+                                else
+                                    ____temp_15 = __arrL(
+                                        {F(nil, "c2_lurdes", "O radinho tá tocando arrocha o dia inteiro. Obrigada de novo, meu filho.", "friend")},
+                                        1
+                                    )
+                                end
+                                ____temp_16 = ____temp_15
+                            end
+                            ____temp_17 = ____temp_16
+                        end
+                        return ____temp_17
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             marca(nil, "lurdes", "ativa")
@@ -652,34 +731,68 @@ local __O = {};
                     nome = "Mel",
                     cena = 14,
                     x = 960,
-                    estado = function() return if X(nil).mel == "feita" then "ok" else if X(nil).mel == "ativa" then if pedacos(nil) >= 3 then "entregar" else "andando" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_mel", "Mapa da cidade! Só cinco reais! Com todos os atalhos secretos!"),
-                            F(nil, "daroca", "Esse mapa tem o desenho de um castelo."),
-                            F(nil, "c2_mel", "...É um mapa artístico.", "embarrassed"),
-                            F(nil, "c2_mel", "Tá bom, é falso. O verdadeiro, do meu avô, rasgou em três. Um pedaço voou pro fim do centro, outro pra feira e outro pra lagoa."),
-                            F(nil, "c2_mel", "Se você achar os três, eu monto o mapa verdadeiro pra você. De graça!", "friend")
-                        },
-                        5
-                    ) else if st == "andando" then __arrL(
-                        {F(
-                            nil,
-                            "c2_mel",
-                            ("Já achou " .. tostring(pedacos(nil))) .. " de 3 pedaços. Fim do centro, fim da feira e a beira da lagoa!"
-                        )},
-                        1
-                    ) else if st == "entregar" then __arrL(
-                        {
-                            F(nil, "c2_mel", "Os três! Deixa eu colar...", "friend"),
-                            F(nil, "c2_mel", "Pronto: o mapa do meu avô. Ele marca tudo que tem pra fazer na cidade."),
-                            F(nil, "c2_mel", "Agora a sua seta mostra também onde tem gente precisando de ajuda.", "friend")
-                        },
-                        3
-                    ) else __arrL(
-                        {F(nil, "c2_mel", "Quer um mapa falso de lembrança? Brincadeira!", "friend")},
-                        1
-                    ) end,
+                    estado = function()
+                        local ____temp_19
+                        if X(nil).mel == "feita" then
+                            ____temp_19 = "ok"
+                        else
+                            local ____temp_18
+                            if X(nil).mel == "ativa" then
+                                ____temp_18 = pedacos(nil) >= 3 and "entregar" or "andando"
+                            else
+                                ____temp_18 = "nova"
+                            end
+                            ____temp_19 = ____temp_18
+                        end
+                        return ____temp_19
+                    end,
+                    falas = function(____, st)
+                        local ____temp_22
+                        if st == "nova" then
+                            ____temp_22 = __arrL(
+                                {
+                                    F(nil, "c2_mel", "Mapa da cidade! Só cinco reais! Com todos os atalhos secretos!"),
+                                    F(nil, "daroca", "Esse mapa tem o desenho de um castelo."),
+                                    F(nil, "c2_mel", "...É um mapa artístico.", "embarrassed"),
+                                    F(nil, "c2_mel", "Tá bom, é falso. O verdadeiro, do meu avô, rasgou em três. Um pedaço voou pro fim do centro, outro pra feira e outro pra lagoa."),
+                                    F(nil, "c2_mel", "Se você achar os três, eu monto o mapa verdadeiro pra você. De graça!", "friend")
+                                },
+                                5
+                            )
+                        else
+                            local ____temp_21
+                            if st == "andando" then
+                                ____temp_21 = __arrL(
+                                    {F(
+                                        nil,
+                                        "c2_mel",
+                                        ("Já achou " .. tostring(pedacos(nil))) .. " de 3 pedaços. Fim do centro, fim da feira e a beira da lagoa!"
+                                    )},
+                                    1
+                                )
+                            else
+                                local ____temp_20
+                                if st == "entregar" then
+                                    ____temp_20 = __arrL(
+                                        {
+                                            F(nil, "c2_mel", "Os três! Deixa eu colar...", "friend"),
+                                            F(nil, "c2_mel", "Pronto: o mapa do meu avô. Ele marca tudo que tem pra fazer na cidade."),
+                                            F(nil, "c2_mel", "Agora a sua seta mostra também onde tem gente precisando de ajuda.", "friend")
+                                        },
+                                        3
+                                    )
+                                else
+                                    ____temp_20 = __arrL(
+                                        {F(nil, "c2_mel", "Quer um mapa falso de lembrança? Brincadeira!", "friend")},
+                                        1
+                                    )
+                                end
+                                ____temp_21 = ____temp_20
+                            end
+                            ____temp_22 = ____temp_21
+                        end
+                        return ____temp_22
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             marca(nil, "mel", "ativa")
@@ -702,31 +815,51 @@ local __O = {};
                     cena = 13,
                     x = 640,
                     cao = true,
-                    estado = function() return if __t(tem(nil, "cao")) then "ok" else if __t(tem(nil, "biscoito_cao")) then "entregar" else if __t(X(nil).cao_visto) then "andando" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_biscoito", "Au... (ele olha pra você com cara de fome)", "sad"),
-                            F(nil, "daroca", "Tá com fome, caramelo? Eu não tenho nada..."),
-                            F(nil, "narrador", "Dizem que o Tio do Picolé, na feira, vende biscoito de polvilho. Cachorro caramelo nenhum resiste.")
-                        },
-                        3
-                    ) else if st == "andando" then __arrL(
-                        {
-                            F(nil, "c2_biscoito", "Au? (ele cheira o seu bolso vazio)", "sad"),
-                            F(nil, "narrador", "Biscoito de polvilho: na banca do Tio do Picolé, na feira.")
-                        },
-                        2
-                    ) else if st == "entregar" then __arrL(
-                        {
-                            F(nil, "daroca", "Toma, caramelo. Biscoito de polvilho."),
-                            F(nil, "c2_biscoito", "AU! AU AU!", "friend"),
-                            F(nil, "narrador", "O Biscoito agora vai com você. Nas brigas, ele morde quem chegar perto.")
-                        },
-                        3
-                    ) else __arrL(
-                        {F(nil, "c2_biscoito", "AU! (abana o rabo)", "friend")},
-                        1
-                    ) end,
+                    estado = function() return __t(tem(nil, "cao")) and "ok" or (__t(tem(nil, "biscoito_cao")) and "entregar" or (__t(X(nil).cao_visto) and "andando" or "nova")) end,
+                    falas = function(____, st)
+                        local ____temp_25
+                        if st == "nova" then
+                            ____temp_25 = __arrL(
+                                {
+                                    F(nil, "c2_biscoito", "Au... (ele olha pra você com cara de fome)", "sad"),
+                                    F(nil, "daroca", "Tá com fome, caramelo? Eu não tenho nada..."),
+                                    F(nil, "narrador", "Dizem que o Tio do Picolé, na feira, vende biscoito de polvilho. Cachorro caramelo nenhum resiste.")
+                                },
+                                3
+                            )
+                        else
+                            local ____temp_24
+                            if st == "andando" then
+                                ____temp_24 = __arrL(
+                                    {
+                                        F(nil, "c2_biscoito", "Au? (ele cheira o seu bolso vazio)", "sad"),
+                                        F(nil, "narrador", "Biscoito de polvilho: na banca do Tio do Picolé, na feira.")
+                                    },
+                                    2
+                                )
+                            else
+                                local ____temp_23
+                                if st == "entregar" then
+                                    ____temp_23 = __arrL(
+                                        {
+                                            F(nil, "daroca", "Toma, caramelo. Biscoito de polvilho."),
+                                            F(nil, "c2_biscoito", "AU! AU AU!", "friend"),
+                                            F(nil, "narrador", "O Biscoito agora vai com você. Nas brigas, ele morde quem chegar perto.")
+                                        },
+                                        3
+                                    )
+                                else
+                                    ____temp_23 = __arrL(
+                                        {F(nil, "c2_biscoito", "AU! (abana o rabo)", "friend")},
+                                        1
+                                    )
+                                end
+                                ____temp_24 = ____temp_23
+                            end
+                            ____temp_25 = ____temp_24
+                        end
+                        return ____temp_25
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             marca(nil, "cao_visto")
@@ -768,19 +901,27 @@ local __O = {};
                     nome = "Nando Skatista",
                     cena = 14,
                     x = 3520,
-                    estado = function() return if __t(tem(nil, "skate")) then "ok" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_nando", "Aí, forasteiro! Aposta uma corrida? Até a bandeira lá no fim do centro e de volta aqui."),
-                            F(nil, "c2_nando", "Se você chegar antes de mim, o skate reserva é seu. Ele te deixa bem mais rápido."),
-                            F(nil, "daroca", "Fechou. Mas eu vou a pé."),
-                            F(nil, "c2_nando", "Kkkk aí que tá a graça!", "friend")
-                        },
-                        4
-                    ) else __arrL(
-                        {F(nil, "c2_nando", "O skate tá rodando bonito, hein? Cuidado com os buracos da avenida.", "friend")},
-                        1
-                    ) end,
+                    estado = function() return __t(tem(nil, "skate")) and "ok" or "nova" end,
+                    falas = function(____, st)
+                        local ____temp_26
+                        if st == "nova" then
+                            ____temp_26 = __arrL(
+                                {
+                                    F(nil, "c2_nando", "Aí, forasteiro! Aposta uma corrida? Até a bandeira lá no fim do centro e de volta aqui."),
+                                    F(nil, "c2_nando", "Se você chegar antes de mim, o skate reserva é seu. Ele te deixa bem mais rápido."),
+                                    F(nil, "daroca", "Fechou. Mas eu vou a pé."),
+                                    F(nil, "c2_nando", "Kkkk aí que tá a graça!", "friend")
+                                },
+                                4
+                            )
+                        else
+                            ____temp_26 = __arrL(
+                                {F(nil, "c2_nando", "O skate tá rodando bonito, hein? Cuidado com os buracos da avenida.", "friend")},
+                                1
+                            )
+                        end
+                        return ____temp_26
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             iniciarCorrida(nil)
@@ -797,32 +938,74 @@ local __O = {};
                     cena = 16,
                     x = 2420,
                     estado = function()
-                        local ____t_13 = __t
-                        local ____t_12 = __t
-                        local ____pegou_result_11 = pegou(nil, "pneu")
-                        __O[860] = ____pegou_result_11
-                        return if X(nil).juninho == "feita" then "ok" else if X(nil).juninho == "ativa" then if ____t_13(if ____t_12(____pegou_result_11) then tem(nil, "corrente") else __O[860]) then "entregar" else "andando" else "nova"
+                        local ____temp_32
+                        if X(nil).juninho == "feita" then
+                            ____temp_32 = "ok"
+                        else
+                            local ____temp_31
+                            if X(nil).juninho == "ativa" then
+                                local ____t_30 = __t
+                                local ____t_result_29
+                                local ____t_28 = __t
+                                local ____pegou_result_27 = pegou(nil, "pneu")
+                                __O[879] = ____pegou_result_27
+                                if ____t_28(____pegou_result_27) then
+                                    ____t_result_29 = tem(nil, "corrente")
+                                else
+                                    ____t_result_29 = __O[879]
+                                end
+                                ____temp_31 = ____t_30(____t_result_29) and "entregar" or "andando"
+                            else
+                                ____temp_31 = "nova"
+                            end
+                            ____temp_32 = ____temp_31
+                        end
+                        return ____temp_32
                     end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_juninho", "Tá vendo essa bicicleta? Era do meu avô. Falta só uma corrente e um pneu."),
-                            F(nil, "c2_juninho", "Corrente, o Gugu do ferro-velho tem (no fim da rua da pensão). Pneu, vi um largado na rodoviária."),
-                            F(nil, "c2_juninho", "Traz os dois que eu monto e te empresto. De bicicleta você atravessa a cidade voando!", "friend")
-                        },
-                        3
-                    ) else if st == "andando" then __arrL(
-                        {F(nil, "c2_juninho", (("Falta: " .. if __t(tem(nil, "corrente")) then "" else "a corrente (com o Gugu) ") .. if __t(pegou(nil, "pneu")) then "" else "o pneu (na rodoviária)") .. ".")},
-                        1
-                    ) else if st == "entregar" then __arrL(
-                        {
-                            F(nil, "c2_juninho", "Corrente e pneu! Deixa comigo...", "friend"),
-                            F(nil, "c2_juninho", "Pronto! Pedala com cuidado. E freia antes da rotatória.", "friend")
-                        },
-                        2
-                    ) else __arrL(
-                        {F(nil, "c2_juninho", "E a bicicleta, tá rodando bem? Se furar, já sabe.", "friend")},
-                        1
-                    ) end,
+                    falas = function(____, st)
+                        local ____temp_35
+                        if st == "nova" then
+                            ____temp_35 = __arrL(
+                                {
+                                    F(nil, "c2_juninho", "Tá vendo essa bicicleta? Era do meu avô. Falta só uma corrente e um pneu."),
+                                    F(nil, "c2_juninho", "Corrente, o Gugu do ferro-velho tem (no fim da rua da pensão). Pneu, vi um largado na rodoviária."),
+                                    F(nil, "c2_juninho", "Traz os dois que eu monto e te empresto. De bicicleta você atravessa a cidade voando!", "friend")
+                                },
+                                3
+                            )
+                        else
+                            local ____temp_34
+                            if st == "andando" then
+                                ____temp_34 = __arrL(
+                                    {F(
+                                        nil,
+                                        "c2_juninho",
+                                        (("Falta: " .. (__t(tem(nil, "corrente")) and "" or "a corrente (com o Gugu) ")) .. (__t(pegou(nil, "pneu")) and "" or "o pneu (na rodoviária)")) .. "."
+                                    )},
+                                    1
+                                )
+                            else
+                                local ____temp_33
+                                if st == "entregar" then
+                                    ____temp_33 = __arrL(
+                                        {
+                                            F(nil, "c2_juninho", "Corrente e pneu! Deixa comigo...", "friend"),
+                                            F(nil, "c2_juninho", "Pronto! Pedala com cuidado. E freia antes da rotatória.", "friend")
+                                        },
+                                        2
+                                    )
+                                else
+                                    ____temp_33 = __arrL(
+                                        {F(nil, "c2_juninho", "E a bicicleta, tá rodando bem? Se furar, já sabe.", "friend")},
+                                        1
+                                    )
+                                end
+                                ____temp_34 = ____temp_33
+                            end
+                            ____temp_35 = ____temp_34
+                        end
+                        return ____temp_35
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             marca(nil, "juninho", "ativa")
@@ -844,18 +1027,26 @@ local __O = {};
                     nome = "Bia do Arrocha",
                     cena = 19,
                     x = 1720,
-                    estado = function() return if __t(tem(nil, "moral")) then "ok" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_bia", "Ei, você! Meu dançarino faltou e o show começa agora. Sabe dançar arrocha?"),
-                            F(nil, "daroca", "Eu sei peidar no ritmo. Serve?"),
-                            F(nil, "c2_bia", "...Serve. Sobe no palco! Aperta as setas quando elas chegarem na linha.", "friend")
-                        },
-                        3
-                    ) else __arrL(
-                        {F(nil, "c2_bia", "Ainda falam do seu show. O forasteiro que dança arrocha!", "friend")},
-                        1
-                    ) end,
+                    estado = function() return __t(tem(nil, "moral")) and "ok" or "nova" end,
+                    falas = function(____, st)
+                        local ____temp_36
+                        if st == "nova" then
+                            ____temp_36 = __arrL(
+                                {
+                                    F(nil, "c2_bia", "Ei, você! Meu dançarino faltou e o show começa agora. Sabe dançar arrocha?"),
+                                    F(nil, "daroca", "Eu sei peidar no ritmo. Serve?"),
+                                    F(nil, "c2_bia", "...Serve. Sobe no palco! Aperta as setas quando elas chegarem na linha.", "friend")
+                                },
+                                3
+                            )
+                        else
+                            ____temp_36 = __arrL(
+                                {F(nil, "c2_bia", "Ainda falam do seu show. O forasteiro que dança arrocha!", "friend")},
+                                1
+                            )
+                        end
+                        return ____temp_36
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             iniciarRitmo(nil)
@@ -872,25 +1063,33 @@ local __O = {};
                     cena = 13,
                     x = 4040,
                     oficina = true,
-                    estado = function() return if __t(X(nil).juninho == "ativa" and not __t(tem(nil, "corrente"))) then "entregar" else "loja" end,
-                    falas = function(____, st) return if st == "entregar" then __arrL(
-                        {
-                            F(nil, "c2_gugu", "Corrente de bicicleta pro Juninho? Tenho uma aqui, já lubrificada."),
-                            F(nil, "c2_gugu", "Leva. E volta pra turbinar essas garrafadas na minha oficina!", "friend")
-                        },
-                        2
-                    ) else nil end,
+                    estado = function() return __t(X(nil).juninho == "ativa" and not __t(tem(nil, "corrente"))) and "entregar" or "loja" end,
+                    falas = function(____, st)
+                        local ____temp_37
+                        if st == "entregar" then
+                            ____temp_37 = __arrL(
+                                {
+                                    F(nil, "c2_gugu", "Corrente de bicicleta pro Juninho? Tenho uma aqui, já lubrificada."),
+                                    F(nil, "c2_gugu", "Leva. E volta pra turbinar essas garrafadas na minha oficina!", "friend")
+                                },
+                                2
+                            )
+                        else
+                            ____temp_37 = nil
+                        end
+                        return ____temp_37
+                    end,
                     fim = function(____, st)
                         if st == "entregar" then
                             marca(nil, "corrente")
                             api:item("CORRENTE DE BICICLETA")
                         else
-                            local ____opt_16 = window.CampanhaOficina
-                            if ____opt_16 ~= nil then
-                                ____opt_16 = ____opt_16.abrir
+                            local ____opt_40 = window.CampanhaOficina
+                            if ____opt_40 ~= nil then
+                                ____opt_40 = ____opt_40.abrir
                             end
-                            if ____opt_16 ~= nil then
-                                ____opt_16(____opt_16, {})
+                            if ____opt_40 ~= nil then
+                                ____opt_40(____opt_40, {})
                             end
                         end
                     end
@@ -905,19 +1104,27 @@ local __O = {};
                     cena = 13,
                     x = 1080,
                     pista = true,
-                    estado = function() return if __t(tem(nil, "pista_vocida")) then "ok" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_vo_cida", "Você é o amigo de Itabuna, né? Do menino de cachinhos."),
-                            F(nil, "c2_vo_cida", "Quando ele chegou aqui, sentava na minha calçada todo fim de tarde. Sozinho.", "sad"),
-                            F(nil, "c2_vo_cida", "Uma vez perguntei se ele tinha amigos. Ele disse: \"tinha dois. Os melhores do mundo.\"", "sad"),
-                            F(nil, "daroca", "...Tinha.", "sad")
-                        },
-                        4
-                    ) else __arrL(
-                        {F(nil, "c2_vo_cida", "Vai com Deus, menino. E não desiste dele.", "friend")},
-                        1
-                    ) end,
+                    estado = function() return __t(tem(nil, "pista_vocida")) and "ok" or "nova" end,
+                    falas = function(____, st)
+                        local ____temp_42
+                        if st == "nova" then
+                            ____temp_42 = __arrL(
+                                {
+                                    F(nil, "c2_vo_cida", "Você é o amigo de Itabuna, né? Do menino de cachinhos."),
+                                    F(nil, "c2_vo_cida", "Quando ele chegou aqui, sentava na minha calçada todo fim de tarde. Sozinho.", "sad"),
+                                    F(nil, "c2_vo_cida", "Uma vez perguntei se ele tinha amigos. Ele disse: \"tinha dois. Os melhores do mundo.\"", "sad"),
+                                    F(nil, "daroca", "...Tinha.", "sad")
+                                },
+                                4
+                            )
+                        else
+                            ____temp_42 = __arrL(
+                                {F(nil, "c2_vo_cida", "Vai com Deus, menino. E não desiste dele.", "friend")},
+                                1
+                            )
+                        end
+                        return ____temp_42
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             marca(nil, "pista_vocida")
@@ -935,18 +1142,26 @@ local __O = {};
                     cena = 31,
                     x = 3400,
                     pista = true,
-                    estado = function() return if __t(tem(nil, "pista_larissa")) then "ok" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_larissa", "Psiu, biblioteca! ...Ah, você procura o Jorge?"),
-                            F(nil, "c2_larissa", "Ele vinha aqui ler sobre Itabuna. Pegou o mesmo livro de história do cacau umas cinco vezes."),
-                            F(nil, "c2_larissa", "Na última página tem um desenho de três bonequinhos. Não fui eu que fiz.", "sad")
-                        },
-                        3
-                    ) else __arrL(
-                        {F(nil, "c2_larissa", "Boa leitura. E boa sorte com o seu amigo.", "friend")},
-                        1
-                    ) end,
+                    estado = function() return __t(tem(nil, "pista_larissa")) and "ok" or "nova" end,
+                    falas = function(____, st)
+                        local ____temp_43
+                        if st == "nova" then
+                            ____temp_43 = __arrL(
+                                {
+                                    F(nil, "c2_larissa", "Psiu, biblioteca! ...Ah, você procura o Jorge?"),
+                                    F(nil, "c2_larissa", "Ele vinha aqui ler sobre Itabuna. Pegou o mesmo livro de história do cacau umas cinco vezes."),
+                                    F(nil, "c2_larissa", "Na última página tem um desenho de três bonequinhos. Não fui eu que fiz.", "sad")
+                                },
+                                3
+                            )
+                        else
+                            ____temp_43 = __arrL(
+                                {F(nil, "c2_larissa", "Boa leitura. E boa sorte com o seu amigo.", "friend")},
+                                1
+                            )
+                        end
+                        return ____temp_43
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             marca(nil, "pista_larissa")
@@ -963,48 +1178,82 @@ local __O = {};
                     nome = "Dona Fátima",
                     cena = 23,
                     x = 1720,
-                    estado = function() return if X(nil).fatima == "feita" then "ok" else if X(nil).fatima == "ativa" then if pecasCaipira(nil) >= 3 then "entregar" else "andando" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_fatima", "Ô meu filho, socorro! Hoje tem o Arraiá do Shopping e o meu manequim caipira ficou pelado!", "sad"),
-                            F(nil, "daroca", "Pelado como? Cadê a roupa dele?"),
-                            F(nil, "c2_fatima", "Os meninos da lan house brincaram de pega-pega com as peças. Sumiu o chapéu, o lenço e o girassol."),
-                            F(nil, "c2_fatima", "O chapéu voou lá pro estacionamento, o lenço ficou no térreo e o girassol tá aqui em cima, no fim do corredor."),
-                            F(nil, "daroca", "Caipira no shopping? Isso é comigo. Eu sou da roça!", "friend"),
-                            F(nil, "c2_fatima", "Então acha as três peças. Se servir em você, a fantasia é sua!", "friend")
-                        },
-                        6
-                    ) else if st == "andando" then __arrL(
-                        {F(
-                            nil,
-                            "c2_fatima",
-                            ("Achou " .. tostring(pecasCaipira(nil))) .. " de 3. Chapéu no estacionamento, lenço no térreo e girassol no fim deste corredor!"
-                        )},
-                        1
-                    ) else if st == "entregar" then __arrL(
-                        {
-                            F(nil, "daroca", "Chapéu, lenço e girassol. Tudo aqui, Dona Fátima!"),
-                            F(nil, "c2_fatima", "Agora veste aí pra eu ver... AI QUE CAIPIRA MAIS ARRETADO!", "friend"),
-                            F(nil, "c2_fatima", "A fantasia é sua. Camisa xadrez, remendo no joelho e bigodinho pintado. Arraiá em pleno shopping!", "friend"),
-                            F(nil, "narrador", "O traje CAIPIRA está no armário do quarto e no espelho do inventário.")
-                        },
-                        4
-                    ) else __arrL(
-                        {F(nil, "c2_fatima", "O manequim agora tá com inveja de você. Volta no Arraiá, viu?", "friend")},
-                        1
-                    ) end,
+                    estado = function()
+                        local ____temp_45
+                        if X(nil).fatima == "feita" then
+                            ____temp_45 = "ok"
+                        else
+                            local ____temp_44
+                            if X(nil).fatima == "ativa" then
+                                ____temp_44 = pecasCaipira(nil) >= 3 and "entregar" or "andando"
+                            else
+                                ____temp_44 = "nova"
+                            end
+                            ____temp_45 = ____temp_44
+                        end
+                        return ____temp_45
+                    end,
+                    falas = function(____, st)
+                        local ____temp_48
+                        if st == "nova" then
+                            ____temp_48 = __arrL(
+                                {
+                                    F(nil, "c2_fatima", "Ô meu filho, socorro! Hoje tem o Arraiá do Shopping e o meu manequim caipira ficou pelado!", "sad"),
+                                    F(nil, "daroca", "Pelado como? Cadê a roupa dele?"),
+                                    F(nil, "c2_fatima", "Os meninos da lan house brincaram de pega-pega com as peças. Sumiu o chapéu, o lenço e o girassol."),
+                                    F(nil, "c2_fatima", "O chapéu voou lá pro estacionamento, o lenço ficou no térreo e o girassol tá aqui em cima, no fim do corredor."),
+                                    F(nil, "daroca", "Caipira no shopping? Isso é comigo. Eu sou da roça!", "friend"),
+                                    F(nil, "c2_fatima", "Então acha as três peças. Se servir em você, a fantasia é sua!", "friend")
+                                },
+                                6
+                            )
+                        else
+                            local ____temp_47
+                            if st == "andando" then
+                                ____temp_47 = __arrL(
+                                    {F(
+                                        nil,
+                                        "c2_fatima",
+                                        ("Achou " .. tostring(pecasCaipira(nil))) .. " de 3. Chapéu no estacionamento, lenço no térreo e girassol no fim deste corredor!"
+                                    )},
+                                    1
+                                )
+                            else
+                                local ____temp_46
+                                if st == "entregar" then
+                                    ____temp_46 = __arrL(
+                                        {
+                                            F(nil, "daroca", "Chapéu, lenço e girassol. Tudo aqui, Dona Fátima!"),
+                                            F(nil, "c2_fatima", "Agora veste aí pra eu ver... AI QUE CAIPIRA MAIS ARRETADO!", "friend"),
+                                            F(nil, "c2_fatima", "A fantasia é sua. Camisa xadrez, remendo no joelho e bigodinho pintado. Arraiá em pleno shopping!", "friend"),
+                                            F(nil, "narrador", "O traje CAIPIRA está no armário do quarto e no espelho do inventário.")
+                                        },
+                                        4
+                                    )
+                                else
+                                    ____temp_46 = __arrL(
+                                        {F(nil, "c2_fatima", "O manequim agora tá com inveja de você. Volta no Arraiá, viu?", "friend")},
+                                        1
+                                    )
+                                end
+                                ____temp_47 = ____temp_46
+                            end
+                            ____temp_48 = ____temp_47
+                        end
+                        return ____temp_48
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             marca(nil, "fatima", "ativa")
                         end
                         if st == "entregar" then
                             marca(nil, "fatima", "feita")
-                            local ____opt_20 = window.DarocaLook
-                            if ____opt_20 ~= nil then
-                                ____opt_20 = ____opt_20.ganhar
+                            local ____opt_51 = window.DarocaLook
+                            if ____opt_51 ~= nil then
+                                ____opt_51 = ____opt_51.ganhar
                             end
-                            if ____opt_20 ~= nil then
-                                ____opt_20(____opt_20, "caipira")
+                            if ____opt_51 ~= nil then
+                                ____opt_51(____opt_51, "caipira")
                             end
                             ganhar(nil, 30)
                             api:item("TRAJE CAIPIRA · VISTA NO ARMÁRIO OU NO ESPELHO")
@@ -1022,18 +1271,26 @@ local __O = {};
                     cena = 20,
                     x = 2080,
                     pista = true,
-                    estado = function() return if __t(tem(nil, "pista_carlinhos")) then "ok" else "nova" end,
-                    falas = function(____, st) return if st == "nova" then __arrL(
-                        {
-                            F(nil, "c2_carlinhos", "Eu andava com o Jorge antes do Fred aparecer. Depois, ele só andava grudado no Fred.", "sad"),
-                            F(nil, "c2_carlinhos", "Mas sabe? Ele falava de Itabuna quando achava que ninguém tava ouvindo."),
-                            F(nil, "c2_carlinhos", "Ele não admite. Mas sente falta. Muita.", "sad")
-                        },
-                        3
-                    ) else __arrL(
-                        {F(nil, "c2_carlinhos", "Se você conseguir falar com ele... fala que eu mandei um oi.", "sad")},
-                        1
-                    ) end,
+                    estado = function() return __t(tem(nil, "pista_carlinhos")) and "ok" or "nova" end,
+                    falas = function(____, st)
+                        local ____temp_53
+                        if st == "nova" then
+                            ____temp_53 = __arrL(
+                                {
+                                    F(nil, "c2_carlinhos", "Eu andava com o Jorge antes do Fred aparecer. Depois, ele só andava grudado no Fred.", "sad"),
+                                    F(nil, "c2_carlinhos", "Mas sabe? Ele falava de Itabuna quando achava que ninguém tava ouvindo."),
+                                    F(nil, "c2_carlinhos", "Ele não admite. Mas sente falta. Muita.", "sad")
+                                },
+                                3
+                            )
+                        else
+                            ____temp_53 = __arrL(
+                                {F(nil, "c2_carlinhos", "Se você conseguir falar com ele... fala que eu mandei um oi.", "sad")},
+                                1
+                            )
+                        end
+                        return ____temp_53
+                    end,
                     fim = function(____, st)
                         if st == "nova" then
                             marca(nil, "pista_carlinhos")
@@ -1085,18 +1342,36 @@ local __O = {};
             api:sfx("plim")
             api:aviso("BANDEIRA! AGORA VOLTA!")
         end
-        if __t(if __t(c0.ida) then __le(P.x, c0.volta + 30) else c0.ida) then
+        local ____t_76 = __t
+        local ____t_result_75
+        if __t(c0.ida) then
+            ____t_result_75 = __le(P.x, c0.volta + 30)
+        else
+            ____t_result_75 = c0.ida
+        end
+        if ____t_76(____t_result_75) then
             corrida = nil
             marca(nil, "skate")
             api:item("VOCÊ GANHOU! SKATE · ANDA MAIS RÁPIDO")
             api:sfx("fanfarra")
             return
         end
-        local ____t_42 = __t
-        local ____t_41 = __t
-        local ____temp_40 = if __t(c0.nIda) then __le(c0.nando, c0.volta + 1) else c0.nIda
-        __O[865] = ____temp_40
-        if ____t_42(if ____t_41(____temp_40) then __O[865] else __gt(c0.t, c0.lim)) then
+        local ____t_80 = __t
+        local ____t_result_79
+        local ____t_78 = __t
+        local ____t_result_77
+        if __t(c0.nIda) then
+            ____t_result_77 = __le(c0.nando, c0.volta + 1)
+        else
+            ____t_result_77 = c0.nIda
+        end
+        __O[884] = ____t_result_77
+        if ____t_78(____t_result_77) then
+            ____t_result_79 = __O[884]
+        else
+            ____t_result_79 = __gt(c0.t, c0.lim)
+        end
+        if ____t_80(____t_result_79) then
             corrida = nil
             api:aviso("O Nando chegou primeiro! Fala com ele de novo pra revanche.")
             api:sfx("risada")
@@ -1110,7 +1385,13 @@ local __O = {};
         local H = 270
         r.t = __add(r.t, dt)
         r.msgT = r.msgT - dt
-        r.laneT = if __t(r.laneT) then r.laneT else 0 - dt
+        local ____t_result_90
+        if __t(r.laneT) then
+            ____t_result_90 = r.laneT
+        else
+            ____t_result_90 = 0
+        end
+        r.laneT = ____t_result_90 - dt
         for ____, n in __iterar((r.notas)) do
             if __t(n.ok == nil and r.t - n.t > 0.26) then
                 n.ok = 0
@@ -1123,12 +1404,12 @@ local __O = {};
             r.ultBat = math.floor(r.t / (60 / 112))
             do
                 pcall(function()
-                    local ____opt_52 = window.Roteiro
-                    if ____opt_52 ~= nil then
-                        ____opt_52 = ____opt_52.sfx
+                    local ____opt_93 = window.Roteiro
+                    if ____opt_93 ~= nil then
+                        ____opt_93 = ____opt_93.sfx
                     end
-                    if ____opt_52 ~= nil then
-                        ____opt_52(____opt_52, "tambor")
+                    if ____opt_93 ~= nil then
+                        ____opt_93(____opt_93, "tambor")
                     end
                 end)
             end
@@ -1138,9 +1419,22 @@ local __O = {};
         do
             local x = 0
             while x < W do
-                c.fillStyle = if __t(__mod(x, 12)) then "#6a1a2a" else "#5a1424"
+                c.fillStyle = __t(__mod(x, 12)) and "#6a1a2a" or "#5a1424"
                 c:fillRect(x, 0, 6, 40)
-                c:fillRect(if __t(x < 80 or x > 400) then x else -10, 0, 6, if __t(x < 80 or x > 400) then 200 else 0)
+                local ____c_fillRect_96 = c.fillRect
+                local ____t_result_95
+                if __t(x < 80 or x > 400) then
+                    ____t_result_95 = x
+                else
+                    ____t_result_95 = -10
+                end
+                ____c_fillRect_96(
+                    c,
+                    ____t_result_95,
+                    0,
+                    6,
+                    __t(x < 80 or x > 400) and 200 or 0
+                )
                 x = x + 6
             end
         end
@@ -1241,7 +1535,13 @@ local __O = {};
                     22,
                     170
                 )
-                c.fillStyle = if __t(__gt(r.laneT, 0) and r.lane == i) then __get(CORES, i) else "#3a2a4a"
+                local ____t_result_97
+                if __t(__gt(r.laneT, 0) and r.lane == i) then
+                    ____t_result_97 = __get(CORES, i)
+                else
+                    ____t_result_97 = "#3a2a4a"
+                end
+                c.fillStyle = ____t_result_97
                 c:fillRect(
                     lx(nil, i) - 12,
                     ly - 2,
@@ -1294,30 +1594,32 @@ local __O = {};
             end
         end
         for ____, n in __iterar((r.notas)) do
-            if __t(n.ok) then
-                continue
+            do
+                if __t(n.ok) then
+                    continue
+                end
+                local y = ly - (n.t - r.t) * 120
+                if __t(y < 10 or y > 200) then
+                    continue
+                end
+                seta(
+                    nil,
+                    lx(nil, n.lane),
+                    y,
+                    n.lane,
+                    n.ok == 0 and "#5a3a3a" or __get(CORES, n.lane)
+                )
             end
-            local y = ly - (n.t - r.t) * 120
-            if __t(y < 10 or y > 200) then
-                continue
-            end
-            seta(
-                nil,
-                lx(nil, n.lane),
-                y,
-                n.lane,
-                if n.ok == 0 then "#5a3a3a" else __get(CORES, n.lane)
-            )
         end
-        local ____opt_56 = window.CampanhaCamadas
-        if ____opt_56 ~= nil then
-            ____opt_56 = ____opt_56.kit
+        local ____opt_100 = window.CampanhaCamadas
+        if ____opt_100 ~= nil then
+            ____opt_100 = ____opt_100.kit
         end
-        local ____opt_result_58
-        if ____opt_56 ~= nil then
-            ____opt_result_58 = ____opt_56.pxText
+        local ____opt_result_102
+        if ____opt_100 ~= nil then
+            ____opt_result_102 = ____opt_100.pxText
         end
-        local tx = ____opt_result_58
+        local tx = ____opt_result_102
         local pct = math.floor(r.acertos / __len(r.notas) * 100 + 0.5)
         if __t(tx) then
             tx(
@@ -1350,7 +1652,7 @@ local __O = {};
                     r.msg,
                     240,
                     120,
-                    if r.msg == "ERROU!" then "#ff5a4a" else "#7af07a",
+                    r.msg == "ERROU!" and "#ff5a4a" or "#7af07a",
                     {s = 3, sombra = "#000"}
                 )
             end
@@ -1396,35 +1698,65 @@ local __O = {};
         end
         cao.cd = cao.cd - dt
         cao.mordeT = cao.mordeT - dt
-        local vivos = __call(
-            if __t(inimigos) then inimigos else __arrL({}, 0),
+        local ____call_113 = __call
+        local ____t_result_103
+        if __t(inimigos) then
+            ____t_result_103 = inimigos
+        else
+            ____t_result_103 = __arrL({}, 0)
+        end
+        local vivos = ____call_113(
+            ____t_result_103,
             "filter",
             function(____, e)
-                local ____t_64 = __t
-                local ____t_62 = __t
-                local ____t_60 = __t
-                local ____gt_result_59 = __gt(e.hp, 0)
-                __O[867] = ____gt_result_59
-                local ____temp_61 = if ____t_60(____gt_result_59) then e.onDano else __O[867]
-                __O[868] = ____temp_61
-                local ____temp_63 = if ____t_62(____temp_61) then math.abs(e.x - P.x) < 340 else __O[868]
-                __O[869] = ____temp_63
-                local ____gt_66 = __gt
-                local ____e_y_65 = e.y
-                if ____e_y_65 == nil then
-                    ____e_y_65 = FLOOR
+                local ____t_result_112
+                local ____t_109 = __t
+                local ____t_result_108
+                local ____t_107 = __t
+                local ____t_result_106
+                local ____t_105 = __t
+                local ____gt_result_104 = __gt(e.hp, 0)
+                __O[886] = ____gt_result_104
+                if ____t_105(____gt_result_104) then
+                    ____t_result_106 = e.onDano
+                else
+                    ____t_result_106 = __O[886]
                 end
-                return if ____t_64(____temp_63) then ____gt_66(____e_y_65, FLOOR - 40) else __O[869]
+                __O[887] = ____t_result_106
+                if ____t_107(____t_result_106) then
+                    ____t_result_108 = math.abs(e.x - P.x) < 340
+                else
+                    ____t_result_108 = __O[887]
+                end
+                __O[888] = ____t_result_108
+                if ____t_109(____t_result_108) then
+                    local ____gt_111 = __gt
+                    local ____e_y_110 = e.y
+                    if ____e_y_110 == nil then
+                        ____e_y_110 = FLOOR
+                    end
+                    ____t_result_112 = ____gt_111(____e_y_110, FLOOR - 40)
+                else
+                    ____t_result_112 = __O[888]
+                end
+                return ____t_result_112
             end
         )
-        local ____t_69 = __t
-        local ____t_68 = __t
-        local ____temp_67 = not __t(cao.alvo) or __le(cao.alvo.hp, 0)
-        __O[870] = ____temp_67
-        if ____t_69(if ____t_68(____temp_67) then __O[870] else not __t(__call(vivos, "includes", cao.alvo))) then
-            local ____cao_72 = cao
-            local ____t_71 = __t
-            local ____get_result_70 = __get(
+        local ____t_117 = __t
+        local ____t_result_116
+        local ____t_115 = __t
+        local ____temp_114 = not __t(cao.alvo) or __le(cao.alvo.hp, 0)
+        __O[889] = ____temp_114
+        if ____t_115(____temp_114) then
+            ____t_result_116 = __O[889]
+        else
+            ____t_result_116 = not __t(__call(vivos, "includes", cao.alvo))
+        end
+        if ____t_117(____t_result_116) then
+            local ____cao_121 = cao
+            local ____t_result_120
+            local ____t_119 = __t
+            local ____get_result_118 = __get(
                 __call(
                     vivos,
                     "sort",
@@ -1432,34 +1764,56 @@ local __O = {};
                 ),
                 0
             )
-            __O[871] = ____get_result_70
-            ____cao_72.alvo = if ____t_71(____get_result_70) then __O[871] else nil
+            __O[890] = ____get_result_118
+            if ____t_119(____get_result_118) then
+                ____t_result_120 = __O[890]
+            else
+                ____t_result_120 = nil
+            end
+            ____cao_121.alvo = ____t_result_120
         end
-        local destino = if __t(cao.alvo) then cao.alvo.x - __TS__MathSign(cao.alvo.x - cao.x) * 18 else P.x - P.facing * 46
+        local ____t_result_122
+        if __t(cao.alvo) then
+            ____t_result_122 = cao.alvo.x - __TS__MathSign(cao.alvo.x - cao.x) * 18
+        else
+            ____t_result_122 = P.x - P.facing * 46
+        end
+        local destino = ____t_result_122
         local dx = destino - cao.x
         if math.abs(dx) > 6 then
             cao.x = cao.x + __TS__MathSign(dx) * math.min(
                 math.abs(dx),
-                if __t(cao.alvo) then 340 else if math.abs(dx) > 160 then 420 else 220 * dt
+                (__t(cao.alvo) and 340 or (math.abs(dx) > 160 and 420 or 220)) * dt
             )
             cao.dir = __TS__MathSign(dx)
         end
-        local ____t_75 = __t
-        local ____t_74 = __t
-        local ____temp_73 = if __t(cao.alvo) then math.abs(cao.alvo.x - cao.x) < 30 else cao.alvo
-        __O[872] = ____temp_73
-        if ____t_75(if ____t_74(____temp_73) then __le(cao.cd, 0) else __O[872]) then
+        local ____t_126 = __t
+        local ____t_result_125
+        local ____t_124 = __t
+        local ____t_result_123
+        if __t(cao.alvo) then
+            ____t_result_123 = math.abs(cao.alvo.x - cao.x) < 30
+        else
+            ____t_result_123 = cao.alvo
+        end
+        __O[891] = ____t_result_123
+        if ____t_124(____t_result_123) then
+            ____t_result_125 = __le(cao.cd, 0)
+        else
+            ____t_result_125 = __O[891]
+        end
+        if ____t_126(____t_result_125) then
             cao.cd = 2.4
             cao.mordeT = 0.3
             cao.alvo:onDano(35, "mordida")
             do
                 pcall(function()
-                    local ____opt_78 = window.Roteiro
-                    if ____opt_78 ~= nil then
-                        ____opt_78 = ____opt_78.sfx
+                    local ____opt_129 = window.Roteiro
+                    if ____opt_129 ~= nil then
+                        ____opt_129 = ____opt_129.sfx
                     end
-                    if ____opt_78 ~= nil then
-                        ____opt_78(____opt_78, "risada")
+                    if ____opt_129 ~= nil then
+                        ____opt_129(____opt_129, "risada")
                     end
                 end)
             end
@@ -1471,51 +1825,106 @@ local __O = {};
         end
         local out = __arrL({}, 0)
         for ____, a in __iterar((ALIADOS)) do
-            local ____t_82 = __t
-            local ____t_81 = __t
-            local ____temp_80 = a.cena ~= cena
-            __O[873] = ____temp_80
-            if ____t_82(if ____t_81(____temp_80) then __O[873] else if __t(a.cao) then tem(nil, "cao") else a.cao) then
-                continue
-            end
-            local st = a:estado()
-            __call(
-                out,
-                "push",
-                {
-                    tipo = "aliado",
-                    x = a.x,
-                    rotulo = __add(
-                        if __t(a.loja) then "COMPRAR COM " else if __t(if __t(a.oficina) then st ~= "entregar" else a.oficina) then "OFICINA DO " else "FALAR COM ",
-                        __call(a.nome, "toUpperCase")
-                    ),
-                    botao = if __t(a.loja) then "COMPRAR" else if __t(if __t(a.oficina) then st ~= "entregar" else a.oficina) then "OFICINA" else "FALAR",
-                    acao = function()
-                        local fl = a:falas(st)
-                        if __t(fl) then
-                            api:conversa({
-                                id = __add("al_", a.id),
-                                quem = a.quem,
-                                x = a.x,
-                                falas = fl,
-                                fim = function() return a:fim(st) end
-                            })
-                        else
-                            a:fim(st)
-                        end
+            do
+                local ____t_135 = __t
+                local ____t_result_134
+                local ____t_132 = __t
+                local ____temp_131 = a.cena ~= cena
+                __O[892] = ____temp_131
+                if ____t_132(____temp_131) then
+                    ____t_result_134 = __O[892]
+                else
+                    local ____t_result_133
+                    if __t(a.cao) then
+                        ____t_result_133 = tem(nil, "cao")
+                    else
+                        ____t_result_133 = a.cao
                     end
-                }
-            )
+                    ____t_result_134 = ____t_result_133
+                end
+                if ____t_135(____t_result_134) then
+                    continue
+                end
+                local st = a:estado()
+                local ____call_145 = __call
+                local ____a_x_143 = a.x
+                local ____add_139 = __add
+                local ____t_result_138
+                if __t(a.loja) then
+                    ____t_result_138 = "COMPRAR COM "
+                else
+                    local ____t_137 = __t
+                    local ____t_result_136
+                    if __t(a.oficina) then
+                        ____t_result_136 = st ~= "entregar"
+                    else
+                        ____t_result_136 = a.oficina
+                    end
+                    ____t_result_138 = ____t_137(____t_result_136) and "OFICINA DO " or "FALAR COM "
+                end
+                local ____add_139_result_144 = ____add_139(
+                    ____t_result_138,
+                    __call(a.nome, "toUpperCase")
+                )
+                local ____t_result_142
+                if __t(a.loja) then
+                    ____t_result_142 = "COMPRAR"
+                else
+                    local ____t_141 = __t
+                    local ____t_result_140
+                    if __t(a.oficina) then
+                        ____t_result_140 = st ~= "entregar"
+                    else
+                        ____t_result_140 = a.oficina
+                    end
+                    ____t_result_142 = ____t_141(____t_result_140) and "OFICINA" or "FALAR"
+                end
+                ____call_145(
+                    out,
+                    "push",
+                    {
+                        tipo = "aliado",
+                        x = ____a_x_143,
+                        rotulo = ____add_139_result_144,
+                        botao = ____t_result_142,
+                        acao = function()
+                            local fl = a:falas(st)
+                            if __t(fl) then
+                                api:conversa({
+                                    id = __add("al_", a.id),
+                                    quem = a.quem,
+                                    x = a.x,
+                                    falas = fl,
+                                    fim = function() return a:fim(st) end
+                                })
+                            else
+                                a:fim(st)
+                            end
+                        end
+                    }
+                )
+            end
         end
         for ____, it in __iterar((ITENS)) do
-            local ____t_87 = __t
-            local ____t_86 = __t
-            local ____t_84 = __t
-            local ____temp_83 = it.cena == cena
-            __O[874] = ____temp_83
-            local ____temp_85 = if ____t_84(____temp_83) then it:quando() else __O[874]
-            __O[875] = ____temp_85
-            if ____t_87(if ____t_86(____temp_85) then not __t(pegou(nil, it.id)) else __O[875]) then
+            local ____t_151 = __t
+            local ____t_result_150
+            local ____t_149 = __t
+            local ____t_result_148
+            local ____t_147 = __t
+            local ____temp_146 = it.cena == cena
+            __O[893] = ____temp_146
+            if ____t_147(____temp_146) then
+                ____t_result_148 = it:quando()
+            else
+                ____t_result_148 = __O[893]
+            end
+            __O[894] = ____t_result_148
+            if ____t_149(____t_result_148) then
+                ____t_result_150 = not __t(pegou(nil, it.id))
+            else
+                ____t_result_150 = __O[894]
+            end
+            if ____t_151(____t_result_150) then
                 __call(
                     out,
                     "push",
@@ -1529,22 +1938,42 @@ local __O = {};
                                 nil,
                                 __add("item_", it.id)
                             )
-                            api:item(if __t(__call(it.id, "startsWith", "mapa")) then ("PEDAÇO DO MAPA (" .. tostring(pedacos(nil))) .. "/3)" else if __t(__call(
-                                __arrL({"chapeu", "lenco", "girassol"}, 3),
-                                "includes",
-                                it.id
-                            )) then ((tostring(it.nome) .. " (") .. tostring(pecasCaipira(nil))) .. "/3)" else it.nome)
+                            local ____api_154 = api
+                            local ____api_item_155 = api.item
+                            local ____t_result_153
+                            if __t(__call(it.id, "startsWith", "mapa")) then
+                                ____t_result_153 = ("PEDAÇO DO MAPA (" .. tostring(pedacos(nil))) .. "/3)"
+                            else
+                                local ____t_result_152
+                                if __t(__call(
+                                    __arrL({"chapeu", "lenco", "girassol"}, 3),
+                                    "includes",
+                                    it.id
+                                )) then
+                                    ____t_result_152 = ((tostring(it.nome) .. " (") .. tostring(pecasCaipira(nil))) .. "/3)"
+                                else
+                                    ____t_result_152 = it.nome
+                                end
+                                ____t_result_153 = ____t_result_152
+                            end
+                            ____api_item_155(____api_154, ____t_result_153)
                             api:sfx("plim")
                         end
                     }
                 )
             end
         end
-        local ____t_90 = __t
-        local ____t_89 = __t
-        local ____temp_88 = cena == 14
-        __O[876] = ____temp_88
-        if ____t_90(if ____t_89(____temp_88) then corrida else __O[876]) then
+        local ____t_159 = __t
+        local ____t_result_158
+        local ____t_157 = __t
+        local ____temp_156 = cena == 14
+        __O[895] = ____temp_156
+        if ____t_157(____temp_156) then
+            ____t_result_158 = corrida
+        else
+            ____t_result_158 = __O[895]
+        end
+        if ____t_159(____t_result_158) then
             return __call(
                 out,
                 "filter",
@@ -1584,75 +2013,137 @@ local __O = {};
             ferroVelho(nil, c)
         end
         for ____, a in __iterar((ALIADOS)) do
-            local ____t_93 = __t
-            local ____t_92 = __t
-            local ____temp_91 = a.cena ~= cena
-            __O[877] = ____temp_91
-            if ____t_93(if ____t_92(____temp_91) then __O[877] else if __t(a.cao) then tem(nil, "cao") else a.cao) then
-                continue
-            end
-            local st = a:estado()
             do
-                pcall(function()
-                    window.Art:drawCharacter(
-                        c,
-                        a.quem,
-                        a.x,
-                        FLOOR,
-                        {frame = t + a.x, facing = if __lt(P.x, a.x) then -1 else 1, grounded = true, emotion = if __t(if __t(a.cao) then st ~= "ok" else a.cao) then "sad" else nil}
-                    )
-                end)
-            end
-            local marcaTxt = if st == "nova" then "!" else if st == "entregar" then "?" else if __t(if __t(a.loja) then a.loja else a.oficina) then "●" else ""
-            if __t(marcaTxt) then
-                local y = FLOOR - if __t(a.cao) then 52 else 96 + math.sin(t * 4 + a.x) * 3
-                local cor = if marcaTxt == "!" then "#ffd24a" else if marcaTxt == "?" then "#7af07a" else "#e8c66a"
-                R(
-                    nil,
-                    a.x - 8,
-                    y - 18,
-                    16,
-                    20,
-                    "#1c1408"
-                )
-                R(
-                    nil,
-                    a.x - 6,
-                    y - 16,
-                    12,
-                    16,
-                    cor
-                )
-                local ____opt_98 = window.CampanhaCamadas
-                if ____opt_98 ~= nil then
-                    ____opt_98 = ____opt_98.kit
+                local ____t_164 = __t
+                local ____t_result_163
+                local ____t_161 = __t
+                local ____temp_160 = a.cena ~= cena
+                __O[896] = ____temp_160
+                if ____t_161(____temp_160) then
+                    ____t_result_163 = __O[896]
+                else
+                    local ____t_result_162
+                    if __t(a.cao) then
+                        ____t_result_162 = tem(nil, "cao")
+                    else
+                        ____t_result_162 = a.cao
+                    end
+                    ____t_result_163 = ____t_result_162
                 end
-                local ____opt_result_100
-                if ____opt_98 ~= nil then
-                    ____opt_result_100 = ____opt_98.pxText
+                if ____t_164(____t_result_163) then
+                    continue
                 end
-                if ____opt_result_100 ~= nil then
-                    ____opt_result_100(
-                        ____opt_98,
-                        c,
-                        marcaTxt,
-                        a.x,
-                        y - 13,
-                        "#1c1408",
-                        {s = 2}
+                local st = a:estado()
+                do
+                    pcall(function()
+                        local ____self_170 = window.Art
+                        local ____self_170_drawCharacter_171 = ____self_170.drawCharacter
+                        local ____array_169 = __TS__SparseArrayNew(c, a.quem, a.x, FLOOR)
+                        local ____temp_167 = t + a.x
+                        local ____temp_168 = __lt(P.x, a.x) and -1 or 1
+                        local ____t_166 = __t
+                        local ____t_result_165
+                        if __t(a.cao) then
+                            ____t_result_165 = st ~= "ok"
+                        else
+                            ____t_result_165 = a.cao
+                        end
+                        __TS__SparseArrayPush(
+                            ____array_169,
+                            {
+                                frame = ____temp_167,
+                                facing = ____temp_168,
+                                grounded = true,
+                                emotion = ____t_166(____t_result_165) and "sad" or nil
+                            }
+                        )
+                        ____self_170_drawCharacter_171(
+                            ____self_170,
+                            __TS__SparseArraySpread(____array_169)
+                        )
+                    end)
+                end
+                local ____temp_175
+                if st == "nova" then
+                    ____temp_175 = "!"
+                else
+                    local ____temp_174
+                    if st == "entregar" then
+                        ____temp_174 = "?"
+                    else
+                        local ____t_173 = __t
+                        local ____t_result_172
+                        if __t(a.loja) then
+                            ____t_result_172 = a.loja
+                        else
+                            ____t_result_172 = a.oficina
+                        end
+                        ____temp_174 = ____t_173(____t_result_172) and "●" or ""
+                    end
+                    ____temp_175 = ____temp_174
+                end
+                local marcaTxt = ____temp_175
+                if __t(marcaTxt) then
+                    local y = FLOOR - (__t(a.cao) and 52 or 96) + math.sin(t * 4 + a.x) * 3
+                    local cor = marcaTxt == "!" and "#ffd24a" or (marcaTxt == "?" and "#7af07a" or "#e8c66a")
+                    R(
+                        nil,
+                        a.x - 8,
+                        y - 18,
+                        16,
+                        20,
+                        "#1c1408"
                     )
+                    R(
+                        nil,
+                        a.x - 6,
+                        y - 16,
+                        12,
+                        16,
+                        cor
+                    )
+                    local ____opt_180 = window.CampanhaCamadas
+                    if ____opt_180 ~= nil then
+                        ____opt_180 = ____opt_180.kit
+                    end
+                    local ____opt_result_182
+                    if ____opt_180 ~= nil then
+                        ____opt_result_182 = ____opt_180.pxText
+                    end
+                    if ____opt_result_182 ~= nil then
+                        ____opt_result_182(
+                            ____opt_180,
+                            c,
+                            marcaTxt,
+                            a.x,
+                            y - 13,
+                            "#1c1408",
+                            {s = 2}
+                        )
+                    end
                 end
             end
         end
         for ____, it in __iterar((ITENS)) do
-            local ____t_105 = __t
-            local ____t_104 = __t
-            local ____t_102 = __t
-            local ____temp_101 = it.cena == cena
-            __O[878] = ____temp_101
-            local ____temp_103 = if ____t_102(____temp_101) then it:quando() else __O[878]
-            __O[879] = ____temp_103
-            if ____t_105(if ____t_104(____temp_103) then not __t(pegou(nil, it.id)) else __O[879]) then
+            local ____t_188 = __t
+            local ____t_result_187
+            local ____t_186 = __t
+            local ____t_result_185
+            local ____t_184 = __t
+            local ____temp_183 = it.cena == cena
+            __O[897] = ____temp_183
+            if ____t_184(____temp_183) then
+                ____t_result_185 = it:quando()
+            else
+                ____t_result_185 = __O[897]
+            end
+            __O[898] = ____t_result_185
+            if ____t_186(____t_result_185) then
+                ____t_result_187 = not __t(pegou(nil, it.id))
+            else
+                ____t_result_187 = __O[898]
+            end
+            if ____t_188(____t_result_187) then
                 local y = FLOOR - 20 + math.sin(t * 3 + it.x) * 4
                 c:save()
                 c.globalCompositeOperation = "lighter"
@@ -1843,7 +2334,7 @@ local __O = {};
                                 y - 4 + math.sin(a) * 7 - 3,
                                 6,
                                 6,
-                                if __t(__mod(k, 2)) then "#f2c230" else "#e8a820"
+                                __t(__mod(k, 2)) and "#f2c230" or "#e8a820"
                             )
                             k = k + 1
                         end
@@ -1900,7 +2391,14 @@ local __O = {};
                 end
             end
         end
-        if __t(if __t(cao) then cao.cena == cena else cao) then
+        local ____t_190 = __t
+        local ____t_result_189
+        if __t(cao) then
+            ____t_result_189 = cao.cena == cena
+        else
+            ____t_result_189 = cao
+        end
+        if ____t_190(____t_result_189) then
             do
                 pcall(function()
                     window.Art:drawCharacter(
@@ -1919,17 +2417,17 @@ local __O = {};
                 end)
             end
             if __gt(cao.mordeT, 0) then
-                local ____opt_110 = window.CampanhaCamadas
-                if ____opt_110 ~= nil then
-                    ____opt_110 = ____opt_110.kit
+                local ____opt_195 = window.CampanhaCamadas
+                if ____opt_195 ~= nil then
+                    ____opt_195 = ____opt_195.kit
                 end
-                local ____opt_result_112
-                if ____opt_110 ~= nil then
-                    ____opt_result_112 = ____opt_110.pxText
+                local ____opt_result_197
+                if ____opt_195 ~= nil then
+                    ____opt_result_197 = ____opt_195.pxText
                 end
-                if ____opt_result_112 ~= nil then
-                    ____opt_result_112(
-                        ____opt_110,
+                if ____opt_result_197 ~= nil then
+                    ____opt_result_197(
+                        ____opt_195,
                         c,
                         "NHAC!",
                         cao.x,
@@ -1940,7 +2438,14 @@ local __O = {};
                 end
             end
         end
-        if __t(if __t(corrida) then cena == 14 else corrida) then
+        local ____t_199 = __t
+        local ____t_result_198
+        if __t(corrida) then
+            ____t_result_198 = cena == 14
+        else
+            ____t_result_198 = corrida
+        end
+        if ____t_199(____t_result_198) then
             R(
                 nil,
                 corrida.fim - 2,
@@ -1961,7 +2466,7 @@ local __O = {};
                                 FLOOR - 90 + j * 6,
                                 6,
                                 6,
-                                if __t(__mod(k + j, 2)) then "#1c1c1c" else "#f6f6f0"
+                                __t(__mod(k + j, 2)) and "#1c1c1c" or "#f6f6f0"
                             )
                             j = j + 1
                         end
@@ -1976,7 +2481,11 @@ local __O = {};
                         "c2_nando",
                         corrida.nando,
                         FLOOR - 6,
-                        {frame = t, facing = if __t(corrida.nIda) then -1 else 1, grounded = true}
+                        {
+                            frame = t,
+                            facing = __t(corrida.nIda) and -1 or 1,
+                            grounded = true
+                        }
                     )
                 end)
             end
@@ -2007,10 +2516,10 @@ local __O = {};
         end
     end
     local function velocidade(self)
-        return if __t(tem(nil, "bike")) then 1.4 else if __t(tem(nil, "skate")) then 1.2 else 1
+        return __t(tem(nil, "bike")) and 1.4 or (__t(tem(nil, "skate")) and 1.2 or 1)
     end
     local function forca(self)
-        return if __t(tem(nil, "moral")) then 1.15 else 1
+        return __t(tem(nil, "moral")) and 1.15 or 1
     end
     local function missoes(self)
         if not __t(api) then
@@ -2018,7 +2527,7 @@ local __O = {};
         end
         local x = X(nil)
         local function st(____, k)
-            return if __get(x, k) == "feita" then "feita" else if __get(x, k) == "ativa" then "ativa" else "nova"
+            return __get(x, k) == "feita" and "feita" or (__get(x, k) == "ativa" and "ativa" or "nova")
         end
         local L = __arrL({}, 0)
         __call(
@@ -2048,12 +2557,26 @@ local __O = {};
         __call(
             L,
             "push",
-            __arrL({"Um amigo caramelo", if __t(tem(nil, "cao")) then "feita" else if __t(x.cao_visto) then "ativa" else "nova", "Compre biscoito de polvilho com o Tio do Picolé (feira) e dê ao Biscoito (rua da pensão)."}, 3)
+            __arrL(
+                {
+                    "Um amigo caramelo",
+                    __t(tem(nil, "cao")) and "feita" or (__t(x.cao_visto) and "ativa" or "nova"),
+                    "Compre biscoito de polvilho com o Tio do Picolé (feira) e dê ao Biscoito (rua da pensão)."
+                },
+                3
+            )
         )
         __call(
             L,
             "push",
-            __arrL({"Corrida do Nando", if __t(tem(nil, "skate")) then "feita" else "nova", "Vença a corrida de skate no centro."}, 3)
+            __arrL(
+                {
+                    "Corrida do Nando",
+                    __t(tem(nil, "skate")) and "feita" or "nova",
+                    "Vença a corrida de skate no centro."
+                },
+                3
+            )
         )
         __call(
             L,
@@ -2062,7 +2585,7 @@ local __O = {};
                 {
                     "A bicicleta do Juninho",
                     st(nil, "juninho"),
-                    ((("Corrente com o Gugu " .. if __t(tem(nil, "corrente")) then "✔" else "") .. " · pneu na rodoviária ") .. if __t(pegou(nil, "pneu")) then "✔" else "") .. "."
+                    ((("Corrente com o Gugu " .. (__t(tem(nil, "corrente")) and "✔" or "")) .. " · pneu na rodoviária ") .. (__t(pegou(nil, "pneu")) and "✔" or "")) .. "."
                 },
                 3
             )
@@ -2070,7 +2593,14 @@ local __O = {};
         __call(
             L,
             "push",
-            __arrL({"O show da Bia", if __t(tem(nil, "moral")) then "feita" else "nova", "Dance arrocha no palco do teatro."}, 3)
+            __arrL(
+                {
+                    "O show da Bia",
+                    __t(tem(nil, "moral")) and "feita" or "nova",
+                    "Dance arrocha no palco do teatro."
+                },
+                3
+            )
         )
         __call(
             L,
@@ -2087,11 +2617,18 @@ local __O = {};
         __call(
             L,
             "push",
-            __arrL({"As pistas do Jorge", if __t(tem(nil, "pistas_ok")) then "feita" else if __t(__call(
-                __arrL({"pista_vocida", "pista_larissa", "pista_carlinhos"}, 3),
-                "some",
-                tem
-            )) then "ativa" else "nova", "Vó Cida (rua da pensão), Larissa (UESB) e Carlinhos (shopping)."}, 3)
+            __arrL(
+                {
+                    "As pistas do Jorge",
+                    __t(tem(nil, "pistas_ok")) and "feita" or (__t(__call(
+                        __arrL({"pista_vocida", "pista_larissa", "pista_carlinhos"}, 3),
+                        "some",
+                        tem
+                    )) and "ativa" or "nova"),
+                    "Vó Cida (rua da pensão), Larissa (UESB) e Carlinhos (shopping)."
+                },
+                3
+            )
         )
         return L
     end
@@ -2105,14 +2642,20 @@ local __O = {};
                     ALIADOS,
                     "filter",
                     function(____, a)
-                        local ____t_121 = __t
-                        local ____temp_120 = a.cena == cena
-                        __O[880] = ____temp_120
-                        return if ____t_121(____temp_120) then __call(
-                            __arrL({"nova", "entregar"}, 2),
-                            "includes",
-                            a:estado()
-                        ) else __O[880]
+                        local ____t_result_209
+                        local ____t_208 = __t
+                        local ____temp_207 = a.cena == cena
+                        __O[899] = ____temp_207
+                        if ____t_208(____temp_207) then
+                            ____t_result_209 = __call(
+                                __arrL({"nova", "entregar"}, 2),
+                                "includes",
+                                a:estado()
+                            )
+                        else
+                            ____t_result_209 = __O[899]
+                        end
+                        return ____t_result_209
                     end
                 ),
                 "map",
@@ -2124,13 +2667,24 @@ local __O = {};
                     ITENS,
                     "filter",
                     function(____, i)
-                        local ____t_125 = __t
-                        local ____t_123 = __t
-                        local ____temp_122 = i.cena == cena
-                        __O[881] = ____temp_122
-                        local ____temp_124 = if ____t_123(____temp_122) then i:quando() else __O[881]
-                        __O[882] = ____temp_124
-                        return if ____t_125(____temp_124) then not __t(pegou(nil, i.id)) else __O[882]
+                        local ____t_result_214
+                        local ____t_213 = __t
+                        local ____t_result_212
+                        local ____t_211 = __t
+                        local ____temp_210 = i.cena == cena
+                        __O[900] = ____temp_210
+                        if ____t_211(____temp_210) then
+                            ____t_result_212 = i:quando()
+                        else
+                            ____t_result_212 = __O[900]
+                        end
+                        __O[901] = ____t_result_212
+                        if ____t_213(____t_result_212) then
+                            ____t_result_214 = not __t(pegou(nil, i.id))
+                        else
+                            ____t_result_214 = __O[901]
+                        end
+                        return ____t_result_214
                     end
                 ),
                 "map",
@@ -2154,7 +2708,15 @@ local __O = {};
             missoes = missoes,
             alvos = alvos,
             ocupado = function() return not not __t(ritmo) end,
-            correndo = function() return if __t(corrida) then {t = corrida.t, lim = corrida.lim, cont = corrida.cont, fase = corrida.fase} else corrida end
+            correndo = function()
+                local ____t_result_215
+                if __t(corrida) then
+                    ____t_result_215 = {t = corrida.t, lim = corrida.lim, cont = corrida.cont, fase = corrida.fase}
+                else
+                    ____t_result_215 = corrida
+                end
+                return ____t_result_215
+            end
         },
         "ligar,candidatos,atualizar,desenhar,velocidade,vidaMax,forca,missoes,alvos,ocupado,correndo"
     )

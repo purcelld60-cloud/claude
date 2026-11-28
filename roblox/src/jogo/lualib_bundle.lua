@@ -648,7 +648,7 @@ do
     end
     local function doNothing(self)
     end
-    local ____pcall = _G.pcall
+    local ____pcall = pcall
     __TS__Promise = __TS__Class()
     __TS__Promise.name = "__TS__Promise"
     function __TS__Promise.prototype.____constructor(self, executor)
@@ -795,7 +795,7 @@ end
 
 local __TS__AsyncAwaiter, __TS__Await
 do
-    local ____coroutine = _G.coroutine or ({})
+    local ____coroutine = coroutine or ({})
     local cocreate = ____coroutine.create
     local coresume = ____coroutine.resume
     local costatus = ____coroutine.status
@@ -942,8 +942,8 @@ end
 
 local __TS__DescriptorGet
 do
-    local getmetatable = _G.getmetatable
-    local ____rawget = _G.rawget
+    local getmetatable = getmetatable
+    local ____rawget = rawget
     function __TS__DescriptorGet(self, metatable, key)
         while metatable do
             local rawResult = ____rawget(metatable, key)
@@ -967,9 +967,9 @@ end
 
 local __TS__DescriptorSet
 do
-    local getmetatable = _G.getmetatable
-    local ____rawget = _G.rawget
-    local rawset = _G.rawset
+    local getmetatable = getmetatable
+    local ____rawget = rawget
+    local rawset = rawset
     function __TS__DescriptorSet(self, metatable, key, value)
         while metatable do
             local descriptors = ____rawget(metatable, "_descriptors")
@@ -998,7 +998,7 @@ end
 
 local __TS__SetDescriptor
 do
-    local getmetatable = _G.getmetatable
+    local getmetatable = getmetatable
     local function descriptorIndex(self, key)
         return __TS__DescriptorGet(
             self,
@@ -1115,7 +1115,7 @@ end
 local Error, RangeError, ReferenceError, SyntaxError, TypeError, URIError
 do
     local function getErrorStack(self, constructor)
-        if debug == nil then
+        if debug == nil or debug.getinfo == nil then
             return nil
         end
         local level = 1
@@ -1143,7 +1143,7 @@ do
     local function wrapErrorToString(self, getDescription)
         return function(self)
             local description = getDescription(self)
-            local caller = debug.getinfo(3, "f")
+            local caller = debug.getinfo and debug.getinfo(3, "f")
             local isClassicLua = __TS__StringIncludes(_VERSION, "Lua 5.0")
             if isClassicLua or caller and caller.func ~= error then
                 return description

@@ -187,7 +187,19 @@ local __O = {};
         end
     )
     local function canonicalCode(____, code)
-        return if code == "ShiftRight" then "ShiftLeft" else tostring(if __t(code) then code else "")
+        local ____temp_1
+        if code == "ShiftRight" then
+            ____temp_1 = "ShiftLeft"
+        else
+            local ____t_result_0
+            if __t(code) then
+                ____t_result_0 = code
+            else
+                ____t_result_0 = ""
+            end
+            ____temp_1 = tostring(____t_result_0)
+        end
+        return ____temp_1
     end
     local function validCode(____, code)
         return __re_test(
@@ -239,42 +251,67 @@ local __O = {};
                 )
                 for ____, ____value in __iterar((actions)) do
                     local id = ____value.id
-                    if id == "pause" then
-                        continue
-                    end
-                    local candidates = if __isArray(__getq(saved.bindings, id)) then __get(saved.bindings, id) else __get(fallback.bindings, id)
-                    local codes = __arrL({}, 0)
-                    for ____, raw in __iterar((__call(candidates, "slice", 0, 2))) do
-                        local code = canonicalCode(nil, raw)
-                        local ____t_4 = __t
-                        local ____t_3 = __t
-                        local ____t_1 = __t
-                        local ____validCode_result_0 = validCode(nil, code)
-                        __O[1413] = ____validCode_result_0
-                        local ____temp_2 = if ____t_1(____validCode_result_0) then code ~= "Escape" else __O[1413]
-                        __O[1414] = ____temp_2
-                        if ____t_4(if ____t_3(____temp_2) then not __t(__call(used, "has", code)) else __O[1414]) then
-                            __call(codes, "push", code)
-                            __call(used, "add", code)
+                    do
+                        if id == "pause" then
+                            continue
                         end
+                        local ____isArray_result_2
+                        if __isArray(__getq(saved.bindings, id)) then
+                            ____isArray_result_2 = __get(saved.bindings, id)
+                        else
+                            ____isArray_result_2 = __get(fallback.bindings, id)
+                        end
+                        local candidates = ____isArray_result_2
+                        local codes = __arrL({}, 0)
+                        for ____, raw in __iterar((__call(candidates, "slice", 0, 2))) do
+                            local code = canonicalCode(nil, raw)
+                            local ____t_8 = __t
+                            local ____t_result_7
+                            local ____t_6 = __t
+                            local ____t_result_5
+                            local ____t_4 = __t
+                            local ____validCode_result_3 = validCode(nil, code)
+                            __O[1432] = ____validCode_result_3
+                            if ____t_4(____validCode_result_3) then
+                                ____t_result_5 = code ~= "Escape"
+                            else
+                                ____t_result_5 = __O[1432]
+                            end
+                            __O[1433] = ____t_result_5
+                            if ____t_6(____t_result_5) then
+                                ____t_result_7 = not __t(__call(used, "has", code))
+                            else
+                                ____t_result_7 = __O[1433]
+                            end
+                            if ____t_8(____t_result_7) then
+                                __call(codes, "push", code)
+                                __call(used, "add", code)
+                            end
+                        end
+                        __set(fallback.bindings, id, codes)
                     end
-                    __set(fallback.bindings, id, codes)
                 end
-                local ____getq_7 = __getq
-                local ____opt_5 = saved.bindings
-                if ____opt_5 ~= nil then
-                    ____opt_5 = ____opt_5.pause
+                local ____getq_11 = __getq
+                local ____opt_9 = saved.bindings
+                if ____opt_9 ~= nil then
+                    ____opt_9 = ____opt_9.pause
                 end
                 local pauseExtra = canonicalCode(
                     nil,
-                    ____getq_7(____opt_5, 1)
+                    ____getq_11(____opt_9, 1)
                 )
                 fallback.bindings.pause = __arrL({"Escape"}, 1)
-                local ____t_10 = __t
-                local ____t_9 = __t
-                local ____validCode_result_8 = validCode(nil, pauseExtra)
-                __O[1415] = ____validCode_result_8
-                if ____t_10(if ____t_9(____validCode_result_8) then not __t(__call(used, "has", pauseExtra)) else __O[1415]) then
+                local ____t_15 = __t
+                local ____t_result_14
+                local ____t_13 = __t
+                local ____validCode_result_12 = validCode(nil, pauseExtra)
+                __O[1434] = ____validCode_result_12
+                if ____t_13(____validCode_result_12) then
+                    ____t_result_14 = not __t(__call(used, "has", pauseExtra))
+                else
+                    ____t_result_14 = __O[1434]
+                end
+                if ____t_15(____t_result_14) then
                     __call(fallback.bindings.pause, "push", pauseExtra)
                 end
                 if __t(__call(
@@ -375,22 +412,52 @@ local __O = {};
     }, "Space,ArrowLeft,ArrowRight,ArrowUp,ArrowDown,Escape,Enter,ShiftLeft,Backspace,Delete,Insert,Home,End,PageUp,PageDown,Minus,Equal,BracketLeft,BracketRight,Backslash,Semicolon,Quote,Backquote,Comma,Period,Slash,IntlBackslash,IntlRo,IntlYen,NumpadAdd,NumpadSubtract,NumpadMultiply,NumpadDivide,NumpadDecimal,NumpadEnter")
     local function labelForCode(____, raw)
         local code = canonicalCode(nil, raw)
-        local ____t_12 = __t
-        local ____get_result_11 = __get(labels, code)
-        __O[1416] = ____get_result_11
-        return if ____t_12(____get_result_11) then __O[1416] else if __re_test(
-            __re("^Key[A-Z]$", ""),
-            code
-        ) then __call(code, "slice", 3) else if __re_test(
-            __re("^Digit[0-9]$", ""),
-            code
-        ) then __call(code, "slice", 5) else if __re_test(
-            __re("^Numpad[0-9]$", ""),
-            code
-        ) then __add(
-            "Num ",
-            __call(code, "slice", 6)
-        ) else if __t(code) then code else "Sem tecla"
+        local ____t_result_22
+        local ____t_17 = __t
+        local ____get_result_16 = __get(labels, code)
+        __O[1435] = ____get_result_16
+        if ____t_17(____get_result_16) then
+            ____t_result_22 = __O[1435]
+        else
+            local ____re_test_result_21
+            if __re_test(
+                __re("^Key[A-Z]$", ""),
+                code
+            ) then
+                ____re_test_result_21 = __call(code, "slice", 3)
+            else
+                local ____re_test_result_20
+                if __re_test(
+                    __re("^Digit[0-9]$", ""),
+                    code
+                ) then
+                    ____re_test_result_20 = __call(code, "slice", 5)
+                else
+                    local ____re_test_result_19
+                    if __re_test(
+                        __re("^Numpad[0-9]$", ""),
+                        code
+                    ) then
+                        ____re_test_result_19 = __add(
+                            "Num ",
+                            __call(code, "slice", 6)
+                        )
+                    else
+                        local ____t_result_18
+                        if __t(code) then
+                            ____t_result_18 = code
+                        else
+                            ____t_result_18 = "Sem tecla"
+                        end
+                        ____re_test_result_19 = ____t_result_18
+                    end
+                    ____re_test_result_20 = ____re_test_result_19
+                end
+                ____re_test_result_21 = ____re_test_result_20
+            end
+            ____t_result_22 = ____re_test_result_21
+        end
+        return ____t_result_22
     end
     local function persist(self)
         local saved = true
@@ -433,28 +500,51 @@ local __O = {};
         if options == nil then
             options = {}
         end
-        local ____t_17 = __t
-        local ____t_16 = __t
-        local ____t_14 = __t
-        local ____temp_13 = not __t(__get(state.bindings, action)) or not __isInteger(slot)
-        __O[1417] = ____temp_13
-        local ____temp_15 = if ____t_14(____temp_13) then __O[1417] else slot < 0
-        __O[1418] = ____temp_15
-        if ____t_17(if ____t_16(____temp_15) then __O[1418] else slot > 1) then
+        local ____t_28 = __t
+        local ____t_result_27
+        local ____t_26 = __t
+        local ____t_result_25
+        local ____t_24 = __t
+        local ____temp_23 = not __t(__get(state.bindings, action)) or not __isInteger(slot)
+        __O[1436] = ____temp_23
+        if ____t_24(____temp_23) then
+            ____t_result_25 = __O[1436]
+        else
+            ____t_result_25 = slot < 0
+        end
+        __O[1437] = ____t_result_25
+        if ____t_26(____t_result_25) then
+            ____t_result_27 = __O[1437]
+        else
+            ____t_result_27 = slot > 1
+        end
+        if ____t_28(____t_result_27) then
             return fail(nil, "Ação ou posição de tecla inválida.")
         end
         local code = canonicalCode(nil, raw)
         if not __t(validCode(nil, code)) then
             return fail(nil, "Escolha uma tecla de jogo. Tab, Ctrl, Alt, Windows e atalhos do navegador ficam livres.")
         end
-        local ____t_22 = __t
-        local ____t_19 = __t
-        local ____temp_18 = code == "Escape" and action ~= "pause"
-        __O[1420] = ____temp_18
-        local ____t_21 = __t
-        local ____temp_20 = action == "pause" and slot == 0
-        __O[1419] = ____temp_20
-        if ____t_22(if ____t_19(____temp_18) then __O[1420] else if ____t_21(____temp_20) then code ~= "Escape" else __O[1419]) then
+        local ____t_35 = __t
+        local ____t_result_34
+        local ____t_30 = __t
+        local ____temp_29 = code == "Escape" and action ~= "pause"
+        __O[1439] = ____temp_29
+        if ____t_30(____temp_29) then
+            ____t_result_34 = __O[1439]
+        else
+            local ____t_result_33
+            local ____t_32 = __t
+            local ____temp_31 = action == "pause" and slot == 0
+            __O[1438] = ____temp_31
+            if ____t_32(____temp_31) then
+                ____t_result_33 = code ~= "Escape"
+            else
+                ____t_result_33 = __O[1438]
+            end
+            ____t_result_34 = ____t_result_33
+        end
+        if ____t_35(____t_result_34) then
             return fail(nil, "Esc fica reservado para pausar e sair dos menus.")
         end
         if __get(
@@ -492,14 +582,32 @@ local __O = {};
             __get(state.bindings, action),
             slot
         )
-        local ____t_25 = __t
-        local ____t_24 = __t
-        local ____temp_23 = if __t(__len(conflicts)) then not __t(options.replaceConflicts) else __len(conflicts)
-        __O[1421] = ____temp_23
-        if ____t_25(if ____t_24(____temp_23) then not __t(options.swapConflicts) else __O[1421]) then
+        local ____t_39 = __t
+        local ____t_result_38
+        local ____t_37 = __t
+        local ____t_result_36
+        if __t(__len(conflicts)) then
+            ____t_result_36 = not __t(options.replaceConflicts)
+        else
+            ____t_result_36 = __len(conflicts)
+        end
+        __O[1440] = ____t_result_36
+        if ____t_37(____t_result_36) then
+            ____t_result_38 = not __t(options.swapConflicts)
+        else
+            ____t_result_38 = __O[1440]
+        end
+        if ____t_39(____t_result_38) then
             return {ok = false, conflicts = conflicts, message = "Essa tecla já está em uso. Confirme a troca ou escolha outra."}
         end
-        if __t(if __t(__len(conflicts)) then options.swapConflicts else __len(conflicts)) then
+        local ____t_41 = __t
+        local ____t_result_40
+        if __t(__len(conflicts)) then
+            ____t_result_40 = options.swapConflicts
+        else
+            ____t_result_40 = __len(conflicts)
+        end
+        if ____t_41(____t_result_40) then
             if __t(__len(conflicts) ~= 1 or not __t(previous)) then
                 return fail(nil, "Escolha uma tecla livre para adicionar uma alternativa.")
             end
@@ -559,14 +667,25 @@ local __O = {};
         if slot == nil then
             slot = 0
         end
-        local ____t_30 = __t
-        local ____t_29 = __t
-        local ____t_27 = __t
-        local ____temp_26 = not __t(__get(state.bindings, action)) or not __isInteger(slot)
-        __O[1422] = ____temp_26
-        local ____temp_28 = if ____t_27(____temp_26) then __O[1422] else slot < 0
-        __O[1423] = ____temp_28
-        if ____t_30(if ____t_29(____temp_28) then __O[1423] else slot > 1) then
+        local ____t_47 = __t
+        local ____t_result_46
+        local ____t_45 = __t
+        local ____t_result_44
+        local ____t_43 = __t
+        local ____temp_42 = not __t(__get(state.bindings, action)) or not __isInteger(slot)
+        __O[1441] = ____temp_42
+        if ____t_43(____temp_42) then
+            ____t_result_44 = __O[1441]
+        else
+            ____t_result_44 = slot < 0
+        end
+        __O[1442] = ____t_result_44
+        if ____t_45(____t_result_44) then
+            ____t_result_46 = __O[1442]
+        else
+            ____t_result_46 = slot > 1
+        end
+        if ____t_47(____t_result_46) then
             return fail(nil, "Ação ou posição de tecla inválida.")
         end
         if __t(action == "pause" and slot == 0) then
@@ -613,25 +732,49 @@ local __O = {};
             __get(state.bindings, action),
             "some",
             function(____, code)
-                local ____t_32 = __t
-                local ____get_result_31 = __get(keys, code)
-                __O[1425] = ____get_result_31
-                local ____t_34 = __t
-                local ____temp_33 = code == "ShiftLeft"
-                __O[1424] = ____temp_33
-                return if ____t_32(____get_result_31) then __O[1425] else if ____t_34(____temp_33) then keys.ShiftRight else __O[1424]
+                local ____t_result_53
+                local ____t_49 = __t
+                local ____get_result_48 = __get(keys, code)
+                __O[1444] = ____get_result_48
+                if ____t_49(____get_result_48) then
+                    ____t_result_53 = __O[1444]
+                else
+                    local ____t_result_52
+                    local ____t_51 = __t
+                    local ____temp_50 = code == "ShiftLeft"
+                    __O[1443] = ____temp_50
+                    if ____t_51(____temp_50) then
+                        ____t_result_52 = keys.ShiftRight
+                    else
+                        ____t_result_52 = __O[1443]
+                    end
+                    ____t_result_53 = ____t_result_52
+                end
+                return ____t_result_53
             end
         ))
     end
     local function transformJoystick(self, x, y)
-        local ____t_36 = __t
-        local ____TS__Number_result_35 = __TS__Number(x)
-        __O[1426] = ____TS__Number_result_35
-        x = clamp(nil, if ____t_36(____TS__Number_result_35) then __O[1426] else 0, -1, 1)
-        local ____t_38 = __t
-        local ____TS__Number_result_37 = __TS__Number(y)
-        __O[1427] = ____TS__Number_result_37
-        y = clamp(nil, if ____t_38(____TS__Number_result_37) then __O[1427] else 0, -1, 1)
+        local ____t_result_56
+        local ____t_55 = __t
+        local ____TS__Number_result_54 = __TS__Number(x)
+        __O[1445] = ____TS__Number_result_54
+        if ____t_55(____TS__Number_result_54) then
+            ____t_result_56 = __O[1445]
+        else
+            ____t_result_56 = 0
+        end
+        x = clamp(nil, ____t_result_56, -1, 1)
+        local ____t_result_59
+        local ____t_58 = __t
+        local ____TS__Number_result_57 = __TS__Number(y)
+        __O[1446] = ____TS__Number_result_57
+        if ____t_58(____TS__Number_result_57) then
+            ____t_result_59 = __O[1446]
+        else
+            ____t_result_59 = 0
+        end
+        y = clamp(nil, ____t_result_59, -1, 1)
         local magnitude = __hypot(x, y)
         if magnitude <= state.deadzone then
             return {x = 0, y = 0}
@@ -647,22 +790,34 @@ local __O = {};
             canonicalCode = canonicalCode,
             labelForCode = labelForCode,
             getLabel = function(____, action, slot)
-                local ____call_42 = __call
-                local ____call_41 = __call
-                local ____t_40 = __t
-                local ____get_result_39 = __get(state.bindings, action)
-                __O[1428] = ____get_result_39
-                return if slot == nil then ____call_42(
-                    ____call_41(if ____t_40(____get_result_39) then __O[1428] else __arrL({}, 0), "map", labelForCode),
-                    "join",
-                    " / "
-                ) else labelForCode(
-                    nil,
-                    __getq(
-                        __get(state.bindings, action),
-                        slot
+                local ____temp_65
+                if slot == nil then
+                    local ____call_64 = __call
+                    local ____call_63 = __call
+                    local ____t_result_62
+                    local ____t_61 = __t
+                    local ____get_result_60 = __get(state.bindings, action)
+                    __O[1447] = ____get_result_60
+                    if ____t_61(____get_result_60) then
+                        ____t_result_62 = __O[1447]
+                    else
+                        ____t_result_62 = __arrL({}, 0)
+                    end
+                    ____temp_65 = ____call_64(
+                        ____call_63(____t_result_62, "map", labelForCode),
+                        "join",
+                        " / "
                     )
-                )
+                else
+                    ____temp_65 = labelForCode(
+                        nil,
+                        __getq(
+                            __get(state.bindings, action),
+                            slot
+                        )
+                    )
+                end
+                return ____temp_65
             end,
             matches = matches,
             pressed = pressed,

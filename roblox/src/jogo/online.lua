@@ -30,15 +30,27 @@ local __O = {};
             local q = __new("URLSearchParams", window.location.search)
             local port = __TS__Number(__call(q, "get", "tvport"))
             if __t(port > 0 and port < 65536) then
-                local ____window_6 = window
-                local ____ord_5 = __ord
-                local ____port_4 = port
-                local ____re_test_3 = __re_test
-                local ____re_result_2 = __re("^[0-9.]{7,15}$", "")
+                local ____window_8 = window
+                local ____ord_7 = __ord
+                local ____port_6 = port
+                local ____re_test_result_5
+                local ____re_test_4 = __re_test
+                local ____re_result_3 = __re("^[0-9.]{7,15}$", "")
+                local ____t_result_2
                 local ____t_1 = __t
                 local ____call_result_0 = __call(q, "get", "tvip")
                 __O[2] = ____call_result_0
-                ____window_6.DAROCA_TV = ____ord_5({port = ____port_4, ip = if ____re_test_3(____re_result_2, if ____t_1(____call_result_0) then __O[2] else "") then __call(q, "get", "tvip") else ""}, "port,ip")
+                if ____t_1(____call_result_0) then
+                    ____t_result_2 = __O[2]
+                else
+                    ____t_result_2 = ""
+                end
+                if ____re_test_4(____re_result_3, ____t_result_2) then
+                    ____re_test_result_5 = __call(q, "get", "tvip")
+                else
+                    ____re_test_result_5 = ""
+                end
+                ____window_8.DAROCA_TV = ____ord_7({port = ____port_6, ip = ____re_test_result_5}, "port,ip")
             end
         end)
     end
@@ -48,17 +60,31 @@ local __O = {};
                 return true, ""
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local x = __new(
+                local ____new_11 = __new
+                local ____call_10 = __call
+                local ____t_result_9
+                if __t(u) then
+                    ____t_result_9 = u
+                else
+                    ____t_result_9 = ""
+                end
+                local x = ____new_11(
                     "URL",
-                    __call(
-                        tostring(if __t(u) then u else ""),
+                    ____call_10(
+                        tostring(____t_result_9),
                         "trim"
                     )
                 )
-                return true, if __re_test(
+                local ____re_test_result_12
+                if __re_test(
                     __re("^https?:$", ""),
                     x.protocol
-                ) then x.origin else ""
+                ) then
+                    ____re_test_result_12 = x.origin
+                else
+                    ____re_test_result_12 = ""
+                end
+                return true, ____re_test_result_12
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -86,10 +112,16 @@ local __O = {};
                     window.localStorage:removeItem(KEY)
                 end
             end
-            local ____t_8 = __t
-            local ____temp_7 = window.localStorage:getItem(KEY)
-            __O[3] = ____temp_7
-            configured = if ____t_8(____temp_7) then __O[3] else ""
+            local ____t_result_15
+            local ____t_14 = __t
+            local ____temp_13 = window.localStorage:getItem(KEY)
+            __O[3] = ____temp_13
+            if ____t_14(____temp_13) then
+                ____t_result_15 = __O[3]
+            else
+                ____t_result_15 = ""
+            end
+            configured = ____t_result_15
         end)
     end
     local function withTimeout(____, p, ms)
@@ -130,8 +162,14 @@ local __O = {};
                     return
                 end
                 local j = __TS__Await(r:json())
+                local ____t_result_16
+                if __t(j) then
+                    ____t_result_16 = j.server == "daroca"
+                else
+                    ____t_result_16 = j
+                end
                 ____hasReturned = true
-                ____returnValue = if __t(j) then j.server == "daroca" else j
+                ____returnValue = ____t_result_16
                 return
             end)
             ____try = ____try.catch(
@@ -152,14 +190,20 @@ local __O = {};
     end
     local ready = (function()
         return __TS__AsyncAwaiter(function(____awaiter_resolve)
-            local ____t_11 = __t
-            local ____t_10 = __t
-            local ____re_test_result_9 = __re_test(
+            local ____t_20 = __t
+            local ____t_result_19
+            local ____t_18 = __t
+            local ____re_test_result_17 = __re_test(
                 __re("^https?:$", ""),
                 window.location.protocol
             )
-            __O[4] = ____re_test_result_9
-            if ____t_11(if ____t_10(____re_test_result_9) then __TS__Await(probe(nil, "")) else __O[4]) then
+            __O[4] = ____re_test_result_17
+            if ____t_18(____re_test_result_17) then
+                ____t_result_19 = __TS__Await(probe(nil, ""))
+            else
+                ____t_result_19 = __O[4]
+            end
+            if ____t_20(____t_result_19) then
                 sameOrigin = true
                 base = ""
                 return ____awaiter_resolve(nil, base)
@@ -187,7 +231,13 @@ local __O = {};
                 )
                 __TS__Await(____try)
             end
-            base = if __t(configured) then configured else ""
+            local ____t_result_21
+            if __t(configured) then
+                ____t_result_21 = configured
+            else
+                ____t_result_21 = ""
+            end
+            base = ____t_result_21
             return ____awaiter_resolve(nil, base)
         end)
     end)(nil)
@@ -196,20 +246,26 @@ local __O = {};
         return ready["then"](
             ready,
             function(____, b)
-                local ____t_14 = __t
-                local ____t_13 = __t
-                local ____temp_12 = not __t(b)
-                __O[5] = ____temp_12
-                if ____t_14(if ____t_13(____temp_12) then __O[5] else awake) then
+                local ____t_25 = __t
+                local ____t_result_24
+                local ____t_23 = __t
+                local ____temp_22 = not __t(b)
+                __O[5] = ____temp_22
+                if ____t_23(____temp_22) then
+                    ____t_result_24 = __O[5]
+                else
+                    ____t_result_24 = awake
+                end
+                if ____t_25(____t_result_24) then
                     return
                 end
-                local ____self_15 = origFetch(
+                local ____self_26 = origFetch(
                     nil,
                     __add(b, "/api/health"),
                     {cache = "no-store", mode = "cors", credentials = "omit"}
                 )
-                ____self_15["then"](
-                    ____self_15,
+                ____self_26["then"](
+                    ____self_26,
                     function(____, r)
                         awake = r.ok
                     end
@@ -229,25 +285,56 @@ local __O = {};
         10 * 60 * 1000
     )
     window.fetch = function(self, input, init)
-        local ____t_20 = __t
-        local ____t_19 = __t
-        local ____t_17 = __t
-        local ____temp_16 = type(input) == "string"
-        __O[6] = ____temp_16
-        local ____temp_18 = if ____t_17(____temp_16) then __call(input, "startsWith", "/api/arena") else __O[6]
-        __O[7] = ____temp_18
-        if ____t_20(if ____t_19(____temp_18) then base else __O[7]) then
+        local ____t_32 = __t
+        local ____t_result_31
+        local ____t_30 = __t
+        local ____t_result_29
+        local ____t_28 = __t
+        local ____temp_27 = type(input) == "string"
+        __O[6] = ____temp_27
+        if ____t_28(____temp_27) then
+            ____t_result_29 = __call(input, "startsWith", "/api/arena")
+        else
+            ____t_result_29 = __O[6]
+        end
+        __O[7] = ____t_result_29
+        if ____t_30(____t_result_29) then
+            ____t_result_31 = base
+        else
+            ____t_result_31 = __O[7]
+        end
+        if ____t_32(____t_result_31) then
             input = __add(base, input)
-            init = __assign({}, if __t(init) then init else {}, {mode = "cors", credentials = "omit"})
+            local ____assign_35 = __assign
+            local ____temp_34 = {}
+            local ____t_result_33
+            if __t(init) then
+                ____t_result_33 = init
+            else
+                ____t_result_33 = {}
+            end
+            init = ____assign_35(____temp_34, ____t_result_33, {mode = "cors", credentials = "omit"})
         end
         return origFetch(nil, input, init)
     end
     local function wsUrl(self)
-        local ____t_23 = __t
-        local ____t_22 = __t
-        local ____temp_21 = base == ""
-        __O[8] = ____temp_21
-        local b = if ____t_23(if ____t_22(____temp_21) then sameOrigin else __O[8]) then window.location.origin else base
+        local ____t_result_40
+        local ____t_39 = __t
+        local ____t_result_38
+        local ____t_37 = __t
+        local ____temp_36 = base == ""
+        __O[8] = ____temp_36
+        if ____t_37(____temp_36) then
+            ____t_result_38 = sameOrigin
+        else
+            ____t_result_38 = __O[8]
+        end
+        if ____t_39(____t_result_38) then
+            ____t_result_40 = window.location.origin
+        else
+            ____t_result_40 = base
+        end
+        local b = ____t_result_40
         if not __t(b) then
             return ""
         end
@@ -272,7 +359,7 @@ local __O = {};
             end)
         end
         configured = n
-        base = if __t(sameOrigin) then "" else n
+        base = __t(sameOrigin) and "" or n
         return n
     end
     local function connect(self, opts)
@@ -281,21 +368,40 @@ local __O = {};
         end
         local send, open, retry, kick, close, emit, ws, tok, closed, tries, pingT, ping, timer, pending, api
         function send(self, m)
-            if __t(if __t(ws) then ws.readyState == 1 else ws) then
+            local ____t_52 = __t
+            local ____t_result_51
+            if __t(ws) then
+                ____t_result_51 = ws.readyState == 1
+            else
+                ____t_result_51 = ws
+            end
+            if ____t_52(____t_result_51) then
                 ws:send(window.JSON:stringify(m))
                 return true
             end
-            local ____t_34 = __t
-            local ____t_33 = __t
-            local ____temp_32 = m.t ~= "input" and m.t ~= "state"
-            __O[11] = ____temp_32
-            if ____t_34(if ____t_33(____temp_32) then m.t ~= "ping" else __O[11]) then
+            local ____t_56 = __t
+            local ____t_result_55
+            local ____t_54 = __t
+            local ____temp_53 = m.t ~= "input" and m.t ~= "state"
+            __O[11] = ____temp_53
+            if ____t_54(____temp_53) then
+                ____t_result_55 = m.t ~= "ping"
+            else
+                ____t_result_55 = __O[11]
+            end
+            if ____t_56(____t_result_55) then
                 __call(pending, "push", m)
             end
             return false
         end
         function open(self)
-            local url = if __t(opts.url) then opts.url else wsUrl(nil)
+            local ____t_result_57
+            if __t(opts.url) then
+                ____t_result_57 = opts.url
+            else
+                ____t_result_57 = wsUrl(nil)
+            end
+            local url = ____t_result_57
             if not __t(url) then
                 emit(nil, "error", {m = "Nenhum servidor online configurado. Veja como em docs/SERVIDOR-ONLINE.md.", fatal = true})
                 return
@@ -316,13 +422,33 @@ local __O = {};
             end
             ws.onopen = function()
                 tries = 0
-                ws:send(window.JSON:stringify({
-                    t = "hello",
-                    v = 1,
-                    name = if __t(opts.name) then opts.name else "Jogador",
-                    avatar = opts.avatar,
-                    token = if __t(tok) then tok else nil
-                }))
+                local ____ws_63 = ws
+                local ____ws_send_64 = ws.send
+                local ____self_61 = window.JSON
+                local ____self_61_stringify_62 = ____self_61.stringify
+                local ____t_result_58
+                if __t(opts.name) then
+                    ____t_result_58 = opts.name
+                else
+                    ____t_result_58 = "Jogador"
+                end
+                local ____opts_avatar_60 = opts.avatar
+                local ____t_result_59
+                if __t(tok) then
+                    ____t_result_59 = tok
+                else
+                    ____t_result_59 = nil
+                end
+                ____ws_send_64(
+                    ____ws_63,
+                    ____self_61_stringify_62(____self_61, {
+                        t = "hello",
+                        v = 1,
+                        name = ____t_result_58,
+                        avatar = ____opts_avatar_60,
+                        token = ____t_result_59
+                    })
+                )
                 emit(nil, "status", {online = true})
                 window:clearInterval(pingT)
                 pingT = window:setInterval(
@@ -360,7 +486,13 @@ local __O = {};
                     __call(q, "forEach", send)
                 end
                 if m.t == "pong" then
-                    ping = math.floor(if ping == nil then window.performance:now() - m.c else ping * 0.7 + (window.performance:now() - m.c) * 0.3 + 0.5)
+                    local ____temp_65
+                    if ping == nil then
+                        ____temp_65 = window.performance:now() - m.c
+                    else
+                        ____temp_65 = ping * 0.7 + (window.performance:now() - m.c) * 0.3
+                    end
+                    ping = math.floor(____temp_65 + 0.5)
                 end
                 emit(nil, m.t, m)
             end
@@ -407,7 +539,14 @@ local __O = {};
             window:clearInterval(pingT)
             do
                 pcall(function()
-                    if __t(if __t(ws) then ws.readyState == 1 else ws) then
+                    local ____t_69 = __t
+                    local ____t_result_68
+                    if __t(ws) then
+                        ____t_result_68 = ws.readyState == 1
+                    else
+                        ____t_result_68 = ws
+                    end
+                    if ____t_69(____t_result_68) then
                         ws:send(window.JSON:stringify({t = "leave"}))
                     end
                     if ws ~= nil then
@@ -418,26 +557,38 @@ local __O = {};
         end
         local handlers = {}
         local function on(____, t, fn)
-            local ____call_28 = __call
-            local ____set_27 = __set
-            local ____t_26 = t
-            local ____t_25 = __t
-            local ____get_result_24 = __get(handlers, t)
-            __O[9] = ____get_result_24
-            ____call_28(
-                ____set_27(handlers, ____t_26, if ____t_25(____get_result_24) then __O[9] else __arrL({}, 0)),
+            local ____call_46 = __call
+            local ____set_45 = __set
+            local ____t_44 = t
+            local ____t_result_43
+            local ____t_42 = __t
+            local ____get_result_41 = __get(handlers, t)
+            __O[9] = ____get_result_41
+            if ____t_42(____get_result_41) then
+                ____t_result_43 = __O[9]
+            else
+                ____t_result_43 = __arrL({}, 0)
+            end
+            ____call_46(
+                ____set_45(handlers, ____t_44, ____t_result_43),
                 "push",
                 fn
             )
             return api
         end
         emit = function(____, t, m)
-            local ____call_31 = __call
-            local ____t_30 = __t
-            local ____get_result_29 = __get(handlers, t)
-            __O[10] = ____get_result_29
-            return ____call_31(
-                if ____t_30(____get_result_29) then __O[10] else __arrL({}, 0),
+            local ____call_50 = __call
+            local ____t_result_49
+            local ____t_48 = __t
+            local ____get_result_47 = __get(handlers, t)
+            __O[10] = ____get_result_47
+            if ____t_48(____get_result_47) then
+                ____t_result_49 = __O[10]
+            else
+                ____t_result_49 = __arrL({}, 0)
+            end
+            return ____call_50(
+                ____t_result_49,
                 "forEach",
                 function(____, fn)
                     do
@@ -487,14 +638,25 @@ local __O = {};
             local join = window.document:getElementById("arenaJoin")
             local create = window.document:getElementById("arenaCreate")
             local codeIn = window.document:getElementById("arenaCode")
-            local ____t_43 = __t
-            local ____t_42 = __t
-            local ____t_40 = __t
-            local ____temp_39 = not __t(join) or not __t(create)
-            __O[12] = ____temp_39
-            local ____temp_41 = if ____t_40(____temp_39) then __O[12] else not __t(codeIn)
-            __O[13] = ____temp_41
-            if ____t_43(if ____t_42(____temp_41) then __O[13] else window.document:getElementById("arenaQuick")) then
+            local ____t_77 = __t
+            local ____t_result_76
+            local ____t_75 = __t
+            local ____t_result_74
+            local ____t_73 = __t
+            local ____temp_72 = not __t(join) or not __t(create)
+            __O[12] = ____temp_72
+            if ____t_73(____temp_72) then
+                ____t_result_74 = __O[12]
+            else
+                ____t_result_74 = not __t(codeIn)
+            end
+            __O[13] = ____t_result_74
+            if ____t_75(____t_result_74) then
+                ____t_result_76 = __O[13]
+            else
+                ____t_result_76 = window.document:getElementById("arenaQuick")
+            end
+            if ____t_77(____t_result_76) then
                 return
             end
             local b = window.document:createElement("button")
@@ -552,7 +714,16 @@ local __O = {};
             wsUrl = wsUrl,
             set = set,
             connect = connect,
-            hasServer = function() return not not __t(if __t(base) then base else sameOrigin) end
+            hasServer = function()
+                local ____t_79 = __t
+                local ____t_result_78
+                if __t(base) then
+                    ____t_result_78 = base
+                else
+                    ____t_result_78 = sameOrigin
+                end
+                return not not ____t_79(____t_result_78)
+            end
         },
         "ready,base,configured,sameOrigin,wsUrl,set,connect,hasServer"
     )

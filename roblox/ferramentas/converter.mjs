@@ -442,28 +442,76 @@ for (const rel of arquivos) {
 fs.writeFileSync(path.join(TMP, '__ajudantes.d.ts'), AJUDANTES.map((n) => `declare function ${n}(this: void, ...a: any[]): any;`).join('\n') + '\ndeclare const __O: any[];\n');
 nomesTs.push(path.join(TMP, '__ajudantes.d.ts'));
 const opcoes = { target: ts.ScriptTarget.ESNext, lib: ['lib.esnext.d.ts', 'lib.dom.d.ts'], strict: false, noImplicitAny: false, allowJs: true, checkJs: false, skipLibCheck: true, noEmitOnError: false,
-  rootDir: TMP, outDir: SAIDA, luaTarget: alvo, luaLibImport: 'require', noHeader: true };
+  // O Roblox também usa a saída 5.3 (a mesma testada em teste/jogo). O alvo "Luau" do TSTL tinha um defeito: tirava de
+  // dentro de "a ? b : c" pedaços que só deviam rodar num dos lados (ex.: lia room.id sem haver room) e soltava
+  // "if-expressões" como instrução, que o Roblox nem compila. Da saída 5.3 só muda o goto do continue (abaixo).
+  rootDir: TMP, outDir: SAIDA, luaTarget: '5.3', luaLibImport: 'require', noHeader: true };
 const res = tstl.transpileFiles(nomesTs, opcoes);
 // cabeçalho de cada módulo: o runtime e os ajudantes como variáveis locais (no Roblox cada ModuleScript tem o próprio ambiente)
 const caminhoJs = alvo === 'Luau' ? 'require(script.Parent.Parent.runtime.js)' : 'require("js")';
+// Luau (Roblox) não aceita a forma "if c then a else b" sozinha numa linha: ela é só expressão (o TSTL gera isso para
+// `a || b()` e `c ? x : y()` usados como instrução). O teste em Lua 5.3 não pega porque lá sai if comum.
+// Aqui ela vira uma atribuição descartada (__D[1] = if ...), que o Luau aceita e faz o mesmo.
+// O lualib também usava _G.pcall etc.; no Roblox _G é só uma tabela compartilhada, sem as funções globais.
+const CONTINUA = /(\(|,|\{|\[|=|\.\.|[+\-*/%^<>]|\band|\bor|\bnot|\breturn|\bin)\s*$/;
+function trocarContinue(lua) {
+  const linhas = lua.split('\n'), recuo = (l) => l.length - l.trimStart().length, incremento = {};
+  for (let i = 0; i < linhas.length; i++) {
+    const m = /^([ \t]*)::(__continue\d+)::[ \t]*$/.exec(linhas[i]); if (!m) continue;
+    const r = m[1].length, cauda = [];
+    for (let j = i + 1; j < linhas.length; j++) { const l = linhas[j]; if (!l.trim()) continue; if (recuo(l) < r) break; cauda.push(l.trim().replace(/\s+--.*$/, '')); }
+    incremento[m[2]] = cauda.join(' '); linhas[i] = null;
+  }
+  return linhas.filter((l) => l !== null).join('\n').replace(/\bgoto (__continue\d+)\b/g, (_, nome) => {
+    if (!(nome in incremento)) throw new Error('rótulo de continue não achado: ' + nome);
+    return incremento[nome] ? `do ${incremento[nome]} continue end` : 'continue';
+  });
+}
+function consertarLuau(lua, arq) {
+  // continue do JavaScript: o 5.3 usa "goto __continueN" até o rótulo no fim do laço; o Luau tem continue de verdade
+  // Atenção: no for do JavaScript o 5.3 põe o rótulo ANTES do incremento (::__continueN:: / i = i + 1 / end).
+  // Um continue puro pularia o incremento e o laço não acabaria; por isso o incremento vai junto: do i = i + 1 continue end
+  lua = trocarContinue(lua);
+  if (/\bgoto\b\s+[A-Za-z_]/.test(lua.replace(/"(?:[^"\\]|\\.)*"/g, '""'))) contaGotoSobrando++;
+  const linhas = lua.split('\n');
+  let anterior = '', n = 0;
+  for (let i = 0; i < linhas.length; i++) {
+    const l = linhas[i], m = /^(\s*)if (.+?) then (.+)$/.exec(l);
+    if (m && !/\bthen\s*$/.test(l) && !/\bend\s*$/.test(m[3]) && !CONTINUA.test(anterior)) { linhas[i] = m[1] + '__D[1] = ' + l.slice(m[1].length); n++; }
+    if (l.trim()) anterior = l.replace(/--.*$/, '').trimEnd();
+  }
+  if (n) contaIfSolto += n;
+  let out = linhas.join('\n');
+  if (arq === 'lualib_bundle.lua') {
+    out = out.replace(/_G\.(pcall|getmetatable|rawget|rawset|coroutine)\b/g, '$1');
+    // new Error() procura a pilha com debug.getinfo, que não existe no Luau (lá é debug.info): sem ela, fica sem pilha
+    out = out.split('if debug == nil then').join('if debug == nil or debug.getinfo == nil then');
+    out = out.split('local caller = debug.getinfo(3, "f")').join('local caller = debug.getinfo and debug.getinfo(3, "f")');
+  }
+  return out;
+}
+let contaIfSolto = 0, contaGotoSobrando = 0;
 for (const arq of fs.readdirSync(SAIDA)) {
   if (!arq.endsWith('.lua') || arq === 'lualib_bundle.lua') continue;
   const p = path.join(SAIDA, arq);
   let lua = fs.readFileSync(p, 'utf8');
   if (lua.slice(0, 400).includes('local __JSR = ')) continue; // arquivos gerados pelo capturar.mjs já têm o cabeçalho (não repetir a cada conversão)
   lua = lua.split('__TS__Iterator(__iter(').join('__iterar((');
+  if (alvo === 'Luau') lua = consertarLuau(lua, arq);
   if (alvo === 'Luau') lua = lua.split('require("lualib_bundle")').join('require(script.Parent.lualib_bundle)');
   const usados = AJUDANTES.filter((h) => new RegExp('\\b' + h + '\\b').test(lua) || (h === '__iterar' && lua.includes('__iterar')));
   // módulos que mais desenham ganham código nativo no Roblox (--!native; o Roblox volta ao normal se não couber).
   // A tela-inicial ficou de fora: compilar ela em nativo no carregamento estourava o limite de 10 s do Roblox Studio.
   const NATIVOS = /^(art|hd-maps|hd-scene|campanha2__(personagens|cenarios|camadas|novos-a|novos-b|ambientes|plantas)|lugares-fundos|lugares-c1|nikolas-fx|fx-pixel|hero-shadow|daytime|weather|cinema-fx|boss-fx|campaign-vfx|scene-life|critters|world-life|baile-pixel|baile-galpao|game|graphics|shader|mapa3d|estrada|chegada-carro|brainrots|char-detail|amanda-art|arena-art|arena-fx|trigal|balanco)\.lua$/;
   const cab = [(alvo === 'Luau' ? (NATIVOS.test(arq) ? '--!native\n' : '') + '--!nocheck\n' : '') + `local __JSR = ${caminhoJs}`, 'local window = __JSR.window', 'local tostring = __JSR.__str'];
+  if (alvo === 'Luau' && lua.includes('__D[1] = ')) cab.push('local __D = {}');
   for (let i = 0; i < usados.length; i += 12) { const g = usados.slice(i, i + 12); cab.push(`local ${g.join(', ')} = ${g.map((h) => '__JSR.' + h).join(', ')}`); }
   fs.writeFileSync(p, cab.join('\n') + '\n' + lua);
 }
+if (alvo === 'Luau') { const lb = path.join(SAIDA, 'lualib_bundle.lua'); if (fs.existsSync(lb)) fs.writeFileSync(lb, consertarLuau(fs.readFileSync(lb, 'utf8'), 'lualib_bundle.lua')); }
 const erros = res.diagnostics.filter((d) => d.category === ts.DiagnosticCategory.Error && d.source === 'typescript-to-lua');
 const msgs = new Map(); for (const d of erros) { const m = ts.flattenDiagnosticMessageText(d.messageText, ' '); msgs.set(m, (msgs.get(m) || 0) + 1); }
-console.log(`alvo ${alvo}: ${arquivos.length} arquivo(s) → ${path.relative(RAIZ, SAIDA)}`);
+console.log(`alvo ${alvo}: ${arquivos.length} arquivo(s) → ${path.relative(RAIZ, SAIDA)}` + (alvo === 'Luau' ? ` · ${contaIfSolto} if-expressões soltas consertadas · ${contaGotoSobrando} arquivos ainda com goto` : ''));
 for (const [m, n] of [...msgs].sort((a, b) => b[1] - a[1]).slice(0, 25)) console.log(`  ${n}× ${m}`);
 // dados do jogo (página, arquivos do fetch, ordem dos scripts)
 import('node:child_process').then(({ execFileSync }) => { execFileSync(process.execPath, [path.join(AQUI, 'empacotar.mjs'), alvo === 'Luau' ? 'luau' : '5.3'], { stdio: 'inherit' }); });

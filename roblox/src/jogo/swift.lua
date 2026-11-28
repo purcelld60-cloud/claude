@@ -32,16 +32,16 @@ local __O = {};
     end
     function renderQuestion(self)
         updateCurrent(nil)
-        local ____t_15 = __t
-        local ____opt_12 = window.Difficulty
-        if ____opt_12 ~= nil then
-            ____opt_12 = ____opt_12.isLocked
+        local ____t_23 = __t
+        local ____opt_20 = window.Difficulty
+        if ____opt_20 ~= nil then
+            ____opt_20 = ____opt_20.isLocked
         end
-        local ____opt_result_14
-        if ____opt_12 ~= nil then
-            ____opt_result_14 = ____opt_12(____opt_12)
+        local ____opt_result_22
+        if ____opt_20 ~= nil then
+            ____opt_result_22 = ____opt_20(____opt_20)
         end
-        if ____t_15(____opt_result_14) then
+        if ____t_23(____opt_result_22) then
             modal:querySelector(".swift-question").textContent = "Fácil escolhido, chapéu! Essa aventura ficou no modo bebezinho. Só criando um novo save pra trocar, viu?"
             modal:querySelector(".swift-choices"):replaceChildren()
             modal:querySelector(".swift-back").hidden = true
@@ -98,26 +98,26 @@ local __O = {};
                 "aria-pressed",
                 tostring(settings(nil).id == id)
             )
-            local ____t_21 = __t
-            local ____opt_18 = window.Difficulty
-            if ____opt_18 ~= nil then
-                ____opt_18 = ____opt_18.isLocked
+            local ____t_29 = __t
+            local ____opt_26 = window.Difficulty
+            if ____opt_26 ~= nil then
+                ____opt_26 = ____opt_26.isLocked
             end
-            local ____opt_result_20
-            if ____opt_18 ~= nil then
-                ____opt_result_20 = ____opt_18(____opt_18)
+            local ____opt_result_28
+            if ____opt_26 ~= nil then
+                ____opt_result_28 = ____opt_26(____opt_26)
             end
-            button.disabled = not not ____t_21(____opt_result_20) and id ~= "easy"
+            button.disabled = not not ____t_29(____opt_result_28) and id ~= "easy"
         end
-        local ____opt_22 = modal:querySelector(__add(
+        local ____opt_30 = modal:querySelector(__add(
             __add(
                 "[data-swift-choice=\"",
                 settings(nil).id
             ),
             "\"]"
         ))
-        if ____opt_22 ~= nil then
-            ____opt_22:focus({preventScroll = true})
+        if ____opt_30 ~= nil then
+            ____opt_30:focus({preventScroll = true})
         end
     end
     function choose(self, mode)
@@ -128,21 +128,21 @@ local __O = {};
         ))) then
             return false
         end
-        local ____t_29 = __t
-        local ____opt_26 = window.Difficulty
-        if ____opt_26 ~= nil then
-            ____opt_26 = ____opt_26.setMode
+        local ____t_37 = __t
+        local ____opt_34 = window.Difficulty
+        if ____opt_34 ~= nil then
+            ____opt_34 = ____opt_34.setMode
         end
-        local ____opt_result_28
-        if ____opt_26 ~= nil then
-            ____opt_result_28 = ____opt_26(____opt_26, mode)
+        local ____opt_result_36
+        if ____opt_34 ~= nil then
+            ____opt_result_36 = ____opt_34(____opt_34, mode)
         end
-        if not ____t_29(____opt_result_28) then
-            local ____this_31
-            ____this_31 = session.api
-            local ____opt_30 = ____this_31.toast
-            if ____opt_30 ~= nil then
-                ____opt_30(____this_31, "O modo Fácil ficou travado neste save. Crie uma nova aventura para mudar.")
+        if not ____t_37(____opt_result_36) then
+            local ____this_39
+            ____this_39 = session.api
+            local ____opt_38 = ____this_39.toast
+            if ____opt_38 ~= nil then
+                ____opt_38(____this_39, "O modo Fácil ficou travado neste save. Crie uma nova aventura para mudar.")
             end
             return false
         end
@@ -151,66 +151,72 @@ local __O = {};
         return true
     end
     function finishSession(self)
-        local ____t_36 = __t
-        local ____t_35 = __t
-        local ____opt_result_34
+        local ____t_45 = __t
+        local ____t_result_44
+        local ____t_43 = __t
+        local ____opt_result_42
         if modal ~= nil then
-            ____opt_result_34 = modal.open
+            ____opt_result_42 = modal.open
         end
-        __O[1455] = ____opt_result_34
-        if ____t_36(if ____t_35(____opt_result_34) then __O[1455] else not __t(session)) then
+        __O[1474] = ____opt_result_42
+        if ____t_43(____opt_result_42) then
+            ____t_result_44 = __O[1474]
+        else
+            ____t_result_44 = not __t(session)
+        end
+        if ____t_45(____t_result_44) then
             return
         end
         local prior = session
         session = nil
-        local ____opt_39 = window.Game
-        if ____opt_39 ~= nil then
-            ____opt_39 = ____opt_39.releaseInputs
+        local ____opt_48 = window.Game
+        if ____opt_48 ~= nil then
+            ____opt_48 = ____opt_48.releaseInputs
         end
-        if ____opt_39 ~= nil then
-            ____opt_39(____opt_39)
+        if ____opt_48 ~= nil then
+            ____opt_48(____opt_48)
         end
         if __t(prior.resumeAfter) then
-            local ____opt_43 = window.Game
-            if ____opt_43 ~= nil then
-                ____opt_43 = ____opt_43.resume
+            local ____opt_52 = window.Game
+            if ____opt_52 ~= nil then
+                ____opt_52 = ____opt_52.resume
             end
-            if ____opt_43 ~= nil then
-                ____opt_43(____opt_43)
+            if ____opt_52 ~= nil then
+                ____opt_52(____opt_52)
             end
         end
-        local ____opt_47 = window.CampaignRun
-        if ____opt_47 ~= nil then
-            ____opt_47 = ____opt_47.confirmInitialMode
+        local ____opt_56 = window.CampaignRun
+        if ____opt_56 ~= nil then
+            ____opt_56 = ____opt_56.confirmInitialMode
         end
-        if ____opt_47 ~= nil then
-            ____opt_47(____opt_47)
+        if ____opt_56 ~= nil then
+            ____opt_56(____opt_56)
         end
         if __t(prior.result) then
             local mode = prior.result
-            local ____this_50
-            ____this_50 = prior.api
-            local ____opt_49 = ____this_50.say
-            if ____opt_49 ~= nil then
-                ____opt_49(
-                    ____this_50,
-                    __arrL({{name = npc.name, text = if mode == "easy" then "Frouxo! Bebezinho, não aguenta nem o normal, pô!" else if mode == "hard" then "Aí sim, Da Roça! No difícil é reflexo afiado e atributo em dia. Respeito!" else "Normal? Fechou, Da Roça! Desafio de respeito. Agora vai buscar teu bolo!"}}, 1)
+            local ____this_59
+            ____this_59 = prior.api
+            local ____opt_58 = ____this_59.say
+            if ____opt_58 ~= nil then
+                ____opt_58(
+                    ____this_59,
+                    __arrL({{name = npc.name, text = mode == "easy" and "Frouxo! Bebezinho, não aguenta nem o normal, pô!" or (mode == "hard" and "Aí sim, Da Roça! No difícil é reflexo afiado e atributo em dia. Respeito!" or "Normal? Fechou, Da Roça! Desafio de respeito. Agora vai buscar teu bolo!")}}, 1)
                 )
             end
         else
-            local ____opt_51 = window.document:getElementById("gameCanvas")
-            if ____opt_51 ~= nil then
-                ____opt_51:focus({preventScroll = true})
+            local ____opt_60 = window.document:getElementById("gameCanvas")
+            if ____opt_60 ~= nil then
+                ____opt_60:focus({preventScroll = true})
             end
         end
     end
     function finish(self)
-        local ____t_56 = __t
-        local ____opt_result_55
+        local ____t_65 = __t
+        local ____opt_result_64
         if modal ~= nil then
-            ____opt_result_55 = modal.open
+            ____opt_result_64 = modal.open
         end
-        if ____t_56(____opt_result_55) then
+        if ____t_65(____opt_result_64) then
             modal:close()
             finishSession(nil)
         end
@@ -223,10 +229,16 @@ local __O = {};
         if options == nil then
             options = {}
         end
+        local ____t_result_2
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(options.frame)
-        __O[1452] = ____TS__Number_result_0
-        local t = if ____t_1(____TS__Number_result_0) then __O[1452] else 0
+        __O[1471] = ____TS__Number_result_0
+        if ____t_1(____TS__Number_result_0) then
+            ____t_result_2 = __O[1471]
+        else
+            ____t_result_2 = 0
+        end
+        local t = ____t_result_2
         local bob = math.floor(math.sin(t * 2.4) * 1.2)
         local talk = options.talking
         c:save()
@@ -234,8 +246,22 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if options.facing == -1 then -1 else 1, 1)
-        c:scale(if __t(options.scale) then options.scale else 1, if __t(options.scale) then options.scale else 1)
+        c:scale(options.facing == -1 and -1 or 1, 1)
+        local ____c_5 = c
+        local ____c_scale_6 = c.scale
+        local ____t_result_3
+        if __t(options.scale) then
+            ____t_result_3 = options.scale
+        else
+            ____t_result_3 = 1
+        end
+        local ____t_result_4
+        if __t(options.scale) then
+            ____t_result_4 = options.scale
+        else
+            ____t_result_4 = 1
+        end
+        ____c_scale_6(____c_5, ____t_result_3, ____t_result_4)
         c.imageSmoothingEnabled = false
         local function r(____, xx, yy, w, h, color)
             c.fillStyle = color
@@ -330,7 +356,13 @@ local __O = {};
             19,
             "#b78056"
         )
-        local hand = if __t(talk) then math.floor(math.sin(t * 5) * 3) else 0
+        local ____t_result_7
+        if __t(talk) then
+            ____t_result_7 = math.floor(math.sin(t * 5) * 3)
+        else
+            ____t_result_7 = 0
+        end
+        local hand = ____t_result_7
         r(
             nil,
             9,
@@ -409,7 +441,7 @@ local __O = {};
             -6,
             -57,
             5,
-            if __t(blink) then 1 else 6,
+            __t(blink) and 1 or 6,
             "#f5ebcf"
         )
         r(
@@ -417,7 +449,7 @@ local __O = {};
             3,
             -57,
             5,
-            if __t(blink) then 1 else 6,
+            __t(blink) and 1 or 6,
             "#f5ebcf"
         )
         if not __t(blink) then
@@ -466,9 +498,9 @@ local __O = {};
             nil,
             -3,
             -46,
-            if __t(talk) then 7 else 6,
-            if __t(talk) then 3 else 2,
-            if __t(talk) then "#623c32" else "#794737"
+            __t(talk) and 7 or 6,
+            __t(talk) and 3 or 2,
+            __t(talk) and "#623c32" or "#794737"
         )
         c:restore()
     end
@@ -485,10 +517,16 @@ local __O = {};
         modal:setAttribute("aria-labelledby", "swiftGuideName")
         modal:setAttribute("aria-describedby", "swiftGuideQuestion")
         modal.innerHTML = "<div class=\"swift-heading\"><span>NA ENTRADA DA ROÇA</span><button class=\"swift-close\" type=\"button\" aria-label=\"Fechar conversa\">×</button></div><div class=\"swift-content\"><div class=\"swift-speaker\"><canvas width=\"80\" height=\"90\" aria-label=\"Irmão de Clara Swift: moreno, magro, cabelo preto curto e olhos abertos\"></canvas><div><h2 id=\"swiftGuideName\"></h2><div class=\"swift-current\"></div></div></div><p class=\"swift-question\" id=\"swiftGuideQuestion\"></p><div class=\"swift-choices\"></div><button class=\"swift-back\" type=\"button\" hidden>← VOLTAR À PERGUNTA</button><p class=\"swift-hint\">Normal e Difícil podem ser trocados. Escolher Fácil trava esta aventura; para mudar, crie um novo save.</p></div>"
-        local ____t_3 = __t
-        local ____temp_2 = window.document:getElementById("gameShell")
-        __O[1453] = ____temp_2
-        if ____t_3(____temp_2) then __O[1453] else window.document.body:append(modal)
+        local ____t_result_10
+        local ____t_9 = __t
+        local ____temp_8 = window.document:getElementById("gameShell")
+        __O[1472] = ____temp_8
+        if ____t_9(____temp_8) then
+            ____t_result_10 = __O[1472]
+        else
+            ____t_result_10 = window.document.body
+        end
+        ____t_result_10:append(modal)
         modal:querySelector("h2").textContent = npc.name
         local portrait = modal:querySelector("canvas")
         draw(
@@ -517,75 +555,142 @@ local __O = {};
         return modal
     end
     settings = function()
-        local ____t_9 = __t
-        local ____opt_6 = window.Difficulty
-        if ____opt_6 ~= nil then
-            ____opt_6 = ____opt_6.getSettings
+        local ____t_result_17
+        local ____t_16 = __t
+        local ____opt_13 = window.Difficulty
+        if ____opt_13 ~= nil then
+            ____opt_13 = ____opt_13.getSettings
         end
-        local ____opt_result_8
-        if ____opt_6 ~= nil then
-            ____opt_result_8 = ____opt_6(____opt_6)
+        local ____opt_result_15
+        if ____opt_13 ~= nil then
+            ____opt_result_15 = ____opt_13(____opt_13)
         end
-        __O[1454] = ____opt_result_8
-        return if ____t_9(____opt_result_8) then __O[1454] else {id = "normal", label = "NORMAL"}
+        __O[1473] = ____opt_result_15
+        if ____t_16(____opt_result_15) then
+            ____t_result_17 = __O[1473]
+        else
+            ____t_result_17 = {id = "normal", label = "NORMAL"}
+        end
+        return ____t_result_17
     end
     local function open(self, api)
         if api == nil then
             api = {}
         end
-        local ____opt_59 = window.Game
-        if ____opt_59 ~= nil then
-            ____opt_59 = ____opt_59.getState
+        local ____opt_68 = window.Game
+        if ____opt_68 ~= nil then
+            ____opt_68 = ____opt_68.getState
         end
-        local ____opt_result_61
-        if ____opt_59 ~= nil then
-            ____opt_result_61 = ____opt_59(____opt_59)
+        local ____opt_result_70
+        if ____opt_68 ~= nil then
+            ____opt_result_70 = ____opt_68(____opt_68)
         end
-        local state = ____opt_result_61
-        local ____t_90 = __t
-        local ____t_89 = __t
-        local ____t_87 = __t
-        local ____t_85 = __t
-        local ____t_83 = __t
-        local ____t_79 = __t
-        local ____t_77 = __t
-        local ____t_75 = __t
-        local ____t_73 = __t
-        local ____t_71 = __t
-        local ____t_69 = __t
-        local ____t_67 = __t
-        local ____t_65 = __t
-        local ____opt_result_64
-        if state ~= nil then
-            ____opt_result_64 = state.started
+        local state = ____opt_result_70
+        local ____t_100 = __t
+        local ____t_result_99
+        local ____t_98 = __t
+        local ____t_result_97
+        local ____t_96 = __t
+        local ____t_result_95
+        local ____t_94 = __t
+        local ____t_result_93
+        local ____t_92 = __t
+        local ____t_result_91
+        local ____t_88 = __t
+        local ____t_result_87
+        local ____t_86 = __t
+        local ____t_result_85
+        local ____t_84 = __t
+        local ____t_result_83
+        local ____t_82 = __t
+        local ____t_result_81
+        local ____t_80 = __t
+        local ____t_result_79
+        local ____t_78 = __t
+        local ____t_result_77
+        local ____t_76 = __t
+        local ____t_result_75
+        if __t(session) then
+            ____t_result_75 = session
+        else
+            local ____t_74 = __t
+            local ____opt_result_73
+            if state ~= nil then
+                ____opt_result_73 = state.started
+            end
+            ____t_result_75 = not ____t_74(____opt_result_73)
         end
-        local ____temp_66 = if __t(session) then session else not ____t_65(____opt_result_64)
-        __O[1456] = ____temp_66
-        local ____temp_68 = if ____t_67(____temp_66) then __O[1456] else state.sandbox
-        __O[1457] = ____temp_68
-        local ____temp_70 = if ____t_69(____temp_68) then __O[1457] else state.cutscene
-        __O[1458] = ____temp_70
-        local ____temp_72 = if ____t_71(____temp_70) then __O[1458] else state.dialog
-        __O[1459] = ____temp_72
-        local ____temp_74 = if ____t_73(____temp_72) then __O[1459] else state.activeBoss
-        __O[1460] = ____temp_74
-        local ____temp_76 = if ____t_75(____temp_74) then __O[1460] else state.room
-        __O[1461] = ____temp_76
-        local ____temp_78 = if ____t_77(____temp_76) then __O[1461] else state.activity
-        __O[1462] = ____temp_78
-        local ____opt_80 = state.training
-        if ____opt_80 ~= nil then
-            ____opt_80 = ____opt_80.active
+        __O[1475] = ____t_result_75
+        if ____t_76(____t_result_75) then
+            ____t_result_77 = __O[1475]
+        else
+            ____t_result_77 = state.sandbox
         end
-        local ____temp_82 = if ____t_79(____temp_78) then __O[1462] else ____opt_80
-        __O[1463] = ____temp_82
-        local ____temp_84 = if ____t_83(____temp_82) then __O[1463] else state.defeated
-        __O[1464] = ____temp_84
-        local ____temp_86 = if ____t_85(____temp_84) then __O[1464] else state.won
-        __O[1465] = ____temp_86
-        local ____temp_88 = if ____t_87(____temp_86) then __O[1465] else state.chapterEnded
-        __O[1466] = ____temp_88
-        if ____t_90(if ____t_89(____temp_88) then __O[1466] else window.document:querySelector("dialog[open]")) then
+        __O[1476] = ____t_result_77
+        if ____t_78(____t_result_77) then
+            ____t_result_79 = __O[1476]
+        else
+            ____t_result_79 = state.cutscene
+        end
+        __O[1477] = ____t_result_79
+        if ____t_80(____t_result_79) then
+            ____t_result_81 = __O[1477]
+        else
+            ____t_result_81 = state.dialog
+        end
+        __O[1478] = ____t_result_81
+        if ____t_82(____t_result_81) then
+            ____t_result_83 = __O[1478]
+        else
+            ____t_result_83 = state.activeBoss
+        end
+        __O[1479] = ____t_result_83
+        if ____t_84(____t_result_83) then
+            ____t_result_85 = __O[1479]
+        else
+            ____t_result_85 = state.room
+        end
+        __O[1480] = ____t_result_85
+        if ____t_86(____t_result_85) then
+            ____t_result_87 = __O[1480]
+        else
+            ____t_result_87 = state.activity
+        end
+        __O[1481] = ____t_result_87
+        if ____t_88(____t_result_87) then
+            ____t_result_91 = __O[1481]
+        else
+            local ____opt_89 = state.training
+            if ____opt_89 ~= nil then
+                ____opt_89 = ____opt_89.active
+            end
+            ____t_result_91 = ____opt_89
+        end
+        __O[1482] = ____t_result_91
+        if ____t_92(____t_result_91) then
+            ____t_result_93 = __O[1482]
+        else
+            ____t_result_93 = state.defeated
+        end
+        __O[1483] = ____t_result_93
+        if ____t_94(____t_result_93) then
+            ____t_result_95 = __O[1483]
+        else
+            ____t_result_95 = state.won
+        end
+        __O[1484] = ____t_result_95
+        if ____t_96(____t_result_95) then
+            ____t_result_97 = __O[1484]
+        else
+            ____t_result_97 = state.chapterEnded
+        end
+        __O[1485] = ____t_result_97
+        if ____t_98(____t_result_97) then
+            ____t_result_99 = __O[1485]
+        else
+            ____t_result_99 = window.document:querySelector("dialog[open]")
+        end
+        if ____t_100(____t_result_99) then
             return false
         end
         ensureModal(nil)
@@ -594,27 +699,27 @@ local __O = {};
             resumeAfter = not __t(state.paused),
             result = nil
         }
-        local ____opt_93 = window.Game
-        if ____opt_93 ~= nil then
-            ____opt_93 = ____opt_93.releaseInputs
+        local ____opt_103 = window.Game
+        if ____opt_103 ~= nil then
+            ____opt_103 = ____opt_103.releaseInputs
         end
-        if ____opt_93 ~= nil then
-            ____opt_93(____opt_93)
+        if ____opt_103 ~= nil then
+            ____opt_103(____opt_103)
         end
         if __t(session.resumeAfter) then
-            local ____opt_97 = window.Game
-            if ____opt_97 ~= nil then
-                ____opt_97 = ____opt_97.pause
+            local ____opt_107 = window.Game
+            if ____opt_107 ~= nil then
+                ____opt_107 = ____opt_107.pause
             end
-            if ____opt_97 ~= nil then
-                ____opt_97(____opt_97)
+            if ____opt_107 ~= nil then
+                ____opt_107(____opt_107)
             end
         end
         renderQuestion(nil)
         modal:showModal()
-        local ____opt_99 = modal:querySelector("[data-swift-choice]")
-        if ____opt_99 ~= nil then
-            ____opt_99:focus({preventScroll = true})
+        local ____opt_109 = modal:querySelector("[data-swift-choice]")
+        if ____opt_109 ~= nil then
+            ____opt_109:focus({preventScroll = true})
         end
         return true
     end
@@ -626,12 +731,12 @@ local __O = {};
             firstPrompt = open,
             close = finish,
             isOpen = function()
-                local ____t_104 = __t
-                local ____opt_result_103
+                local ____t_114 = __t
+                local ____opt_result_113
                 if modal ~= nil then
-                    ____opt_result_103 = modal.open
+                    ____opt_result_113 = modal.open
                 end
-                return not not ____t_104(____opt_result_103)
+                return not not ____t_114(____opt_result_113)
             end
         },
         "npc,draw,open,firstPrompt,close,isOpen"

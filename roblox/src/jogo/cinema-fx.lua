@@ -11,11 +11,17 @@ local ____exports = {}
 local __O = {};
 (function()
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Cinematics)
-    __O[1550] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[1550] else window.CinemaFx) then
+    __O[1569] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[1569]
+    else
+        ____t_result_2 = window.CinemaFx
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     local orig = window.Cinematics.draw
@@ -36,16 +42,16 @@ local __O = {};
         return v * v * (3 - 2 * v)
     end
     local function lite()
-        local ____t_8 = __t
-        local ____opt_5 = window.Graphics
-        if ____opt_5 ~= nil then
-            ____opt_5 = ____opt_5.isLite
+        local ____t_9 = __t
+        local ____opt_6 = window.Graphics
+        if ____opt_6 ~= nil then
+            ____opt_6 = ____opt_6.isLite
         end
-        local ____opt_result_7
-        if ____opt_5 ~= nil then
-            ____opt_result_7 = ____opt_5(____opt_5)
+        local ____opt_result_8
+        if ____opt_6 ~= nil then
+            ____opt_result_8 = ____opt_6(____opt_6)
         end
-        return not not ____t_8(____opt_result_7)
+        return not not ____t_9(____opt_result_8)
     end
     local calm = (function()
         do
@@ -85,7 +91,11 @@ local __O = {};
                             __set(img.data, i + 2, v)
                         )
                     )
-                    __set(img.data, i + 3, if math.random() < 0.5 then 22 else 0)
+                    __set(
+                        img.data,
+                        i + 3,
+                        math.random() < 0.5 and 22 or 0
+                    )
                     i = i + 4
                 end
             end
@@ -321,13 +331,22 @@ local __O = {};
             end
             ____cond21 = ____cond21 or (____switch21 == "falling" or ____switch21 == "kneeling")
             if ____cond21 then
-                spot(
+                local ____spot_13 = spot
+                local ____c_11 = c
+                local ____temp_12 = -40
+                local ____temp_10
+                if shot == "kneeling" then
+                    ____temp_10 = 0.1 * (1 - smooth(nil, (st - 2.4) / 3.1))
+                else
+                    ____temp_10 = 0.12
+                end
+                ____spot_13(
                     nil,
-                    c,
+                    ____c_11,
                     470,
-                    -40,
+                    ____temp_12,
                     380,
-                    if shot == "kneeling" then 0.1 * (1 - smooth(nil, (st - 2.4) / 3.1)) else 0.12,
+                    ____temp_10,
                     total
                 )
                 radial(
@@ -355,11 +374,24 @@ local __O = {};
                         0.22 + 0.1 * math.sin(st * 3),
                         "screen"
                     )
-                    local ____t_10 = __t
-                    local ____temp_9 = __mod(st, 3.3) < 0.09
-                    __O[1551] = ____temp_9
-                    local flash = if ____t_10(____temp_9) then __O[1551] else __mod(st, 3.3) > 0.18 and __mod(st, 3.3) < 0.24
-                    if __t(if __t(flash) then not __t(calm) else flash) then
+                    local ____t_result_16
+                    local ____t_15 = __t
+                    local ____temp_14 = __mod(st, 3.3) < 0.09
+                    __O[1570] = ____temp_14
+                    if ____t_15(____temp_14) then
+                        ____t_result_16 = __O[1570]
+                    else
+                        ____t_result_16 = __mod(st, 3.3) > 0.18 and __mod(st, 3.3) < 0.24
+                    end
+                    local flash = ____t_result_16
+                    local ____t_18 = __t
+                    local ____t_result_17
+                    if __t(flash) then
+                        ____t_result_17 = not __t(calm)
+                    else
+                        ____t_result_17 = flash
+                    end
+                    if ____t_18(____t_result_17) then
                         c:save()
                         c.globalAlpha = 0.22
                         c.fillStyle = "#b48cff"
@@ -382,7 +414,10 @@ local __O = {};
                             g:addColorStop(1, "rgba(120,80,180,0)")
                             c.fillStyle = g
                             c:fillRect(
-                                __mod(st * 20 * if __t(__mod(i, 2)) then 1 else -1, 200) - 200,
+                                __mod(
+                                    st * 20 * (__t(__mod(i, 2)) and 1 or -1),
+                                    200
+                                ) - 200,
                                 y,
                                 1400,
                                 40
@@ -397,63 +432,124 @@ local __O = {};
         until true
     end
     local function draw(self, c, s)
-        local ____t_13 = __t
-        local ____t_12 = __t
-        local ____temp_11 = not __t(c) or not __t(s)
-        __O[1552] = ____temp_11
-        if ____t_13(if ____t_12(____temp_11) then __O[1552] else lite(nil)) then
+        local ____t_22 = __t
+        local ____t_result_21
+        local ____t_20 = __t
+        local ____temp_19 = not __t(c) or not __t(s)
+        __O[1571] = ____temp_19
+        if ____t_20(____temp_19) then
+            ____t_result_21 = __O[1571]
+        else
+            ____t_result_21 = lite(nil)
+        end
+        if ____t_22(____t_result_21) then
             return orig(nil, c, s)
         end
         local jorge = s.kind == "jorge_epilogue"
-        if __t(if __t(jorge) then window.JorgeAnime else jorge) then
+        local ____t_24 = __t
+        local ____t_result_23
+        if __t(jorge) then
+            ____t_result_23 = window.JorgeAnime
+        else
+            ____t_result_23 = jorge
+        end
+        if ____t_24(____t_result_23) then
             window.JorgeAnime:draw(c, s)
             c.fillStyle = "#000"
             c:fillRect(0, 0, 960, 26)
             c:fillRect(0, 514, 960, 26)
-            local ____grain_17 = grain
-            local ____c_16 = c
-            local ____t_15 = __t
-            local ____TS__Number_result_14 = __TS__Number(s.elapsed)
-            __O[1553] = ____TS__Number_result_14
-            ____grain_17(nil, ____c_16, if ____t_15(____TS__Number_result_14) then __O[1553] else 0, 0.45)
+            local ____grain_29 = grain
+            local ____c_28 = c
+            local ____t_result_27
+            local ____t_26 = __t
+            local ____TS__Number_result_25 = __TS__Number(s.elapsed)
+            __O[1572] = ____TS__Number_result_25
+            if ____t_26(____TS__Number_result_25) then
+                ____t_result_27 = __O[1572]
+            else
+                ____t_result_27 = 0
+            end
+            ____grain_29(nil, ____c_28, ____t_result_27, 0.45)
             return
         end
-        local ____opt_20 = window.JorgeEpilogue
-        if ____opt_20 ~= nil then
-            ____opt_20 = ____opt_20.beat
+        local ____t_result_35
+        if __t(jorge) then
+            local ____opt_32 = window.JorgeEpilogue
+            if ____opt_32 ~= nil then
+                ____opt_32 = ____opt_32.beat
+            end
+            local ____opt_result_34
+            if ____opt_32 ~= nil then
+                ____opt_result_34 = ____opt_32(____opt_32, s)
+            end
+            ____t_result_35 = ____opt_result_34
+        else
+            ____t_result_35 = nil
         end
-        local ____opt_result_22
-        if ____opt_20 ~= nil then
-            ____opt_result_22 = ____opt_20(____opt_20, s)
-        end
-        local b = if __t(jorge) then ____opt_result_22 else nil
-        local ____opt_result_25
+        local b = ____t_result_35
+        local ____opt_result_38
         if b ~= nil then
-            ____opt_result_25 = b.id
+            ____opt_result_38 = b.id
         end
-        local shot = ____opt_result_25
-        local ____t_27 = __t
-        local ____TS__Number_result_26 = __TS__Number(s.time)
-        __O[1554] = ____TS__Number_result_26
-        local st = if ____t_27(____TS__Number_result_26) then __O[1554] else 0
-        local ____t_31 = __t
-        local ____opt_result_30
+        local shot = ____opt_result_38
+        local ____t_result_41
+        local ____t_40 = __t
+        local ____TS__Number_result_39 = __TS__Number(s.time)
+        __O[1573] = ____TS__Number_result_39
+        if ____t_40(____TS__Number_result_39) then
+            ____t_result_41 = __O[1573]
+        else
+            ____t_result_41 = 0
+        end
+        local st = ____t_result_41
+        local ____t_result_46
+        local ____t_45 = __t
+        local ____opt_result_44
         if b ~= nil then
-            ____opt_result_30 = b.duration
+            ____opt_result_44 = b.duration
         end
-        __O[1555] = ____opt_result_30
-        local dur = if ____t_31(____opt_result_30) then __O[1555] else 8
-        local ____t_33 = __t
-        local ____TS__Number_result_32 = __TS__Number(s.elapsed)
-        __O[1556] = ____TS__Number_result_32
-        local total = if ____t_33(____TS__Number_result_32) then __O[1556] else st
-        local k = if __t(jorge) then clamp(nil, st / dur) else __mod(st, 10) / 10
-        local zoom = 1.012 + if __t(jorge) then 0.03 else 0.02 * smooth(nil, k)
-        local amp = if __t(calm) then 0 else if __t(jorge) then if shot == "tremor" then 3.2 else if shot == "recognition" then 2 else 1.1 else 0.6
+        __O[1574] = ____opt_result_44
+        if ____t_45(____opt_result_44) then
+            ____t_result_46 = __O[1574]
+        else
+            ____t_result_46 = 8
+        end
+        local dur = ____t_result_46
+        local ____t_result_49
+        local ____t_48 = __t
+        local ____TS__Number_result_47 = __TS__Number(s.elapsed)
+        __O[1575] = ____TS__Number_result_47
+        if ____t_48(____TS__Number_result_47) then
+            ____t_result_49 = __O[1575]
+        else
+            ____t_result_49 = st
+        end
+        local total = ____t_result_49
+        local ____t_result_50
+        if __t(jorge) then
+            ____t_result_50 = clamp(nil, st / dur)
+        else
+            ____t_result_50 = __mod(st, 10) / 10
+        end
+        local k = ____t_result_50
+        local zoom = 1.012 + (__t(jorge) and 0.03 or 0.02) * smooth(nil, k)
+        local ____t_result_52
+        if __t(calm) then
+            ____t_result_52 = 0
+        else
+            local ____t_result_51
+            if __t(jorge) then
+                ____t_result_51 = shot == "tremor" and 3.2 or (shot == "recognition" and 2 or 1.1)
+            else
+                ____t_result_51 = 0.6
+            end
+            ____t_result_52 = ____t_result_51
+        end
+        local amp = ____t_result_52
         local hx = (math.sin(total * 1.3) + math.sin(total * 2.9) * 0.5) * amp
         local hy = (math.cos(total * 1.1) + math.sin(total * 3.7) * 0.4) * amp
         local rot = amp * 0.0012 * math.sin(total * 0.9)
-        local py = if __t(jorge) then 220 else 270
+        local py = __t(jorge) and 220 or 270
         c:save()
         c:translate(480 + hx, py + hy)
         c:rotate(rot)

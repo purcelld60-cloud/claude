@@ -20,10 +20,15 @@ local __O = {};
     end
     local CENA = 5
     local function ROBLOX()
-        return __re_test(
-            __re("Roblox", "i"),
-            if __t(window.navigator.userAgent) then window.navigator.userAgent else ""
-        ) or not not __t(window.DAROCA_ROBLOX)
+        local ____re_test_2 = __re_test
+        local ____re_result_1 = __re("Roblox", "i")
+        local ____t_result_0
+        if __t(window.navigator.userAgent) then
+            ____t_result_0 = window.navigator.userAgent
+        else
+            ____t_result_0 = ""
+        end
+        return ____re_test_2(____re_result_1, ____t_result_0) or not not __t(window.DAROCA_ROBLOX)
     end
     local CASAS = __ord(
         {
@@ -110,12 +115,12 @@ local __O = {};
     )
     local function registrar()
         local CP = window.CampanhaPersonagens
-        local ____t_3 = __t
-        local ____opt_result_2
+        local ____t_6 = __t
+        local ____opt_result_5
         if CP ~= nil then
-            ____opt_result_2 = CP.registrar
+            ____opt_result_5 = CP.registrar
         end
-        if not ____t_3(____opt_result_2) then
+        if not ____t_6(____opt_result_5) then
             return false
         end
         for ____, ____value in __iterar((__entries(GENTE))) do
@@ -130,12 +135,12 @@ local __O = {};
     end
     local function porPortas()
         local W = window.WorldData
-        local ____t_7 = __t
-        local ____opt_result_6
+        local ____t_10 = __t
+        local ____opt_result_9
         if W ~= nil then
-            ____opt_result_6 = W.doors
+            ____opt_result_9 = W.doors
         end
-        if not ____t_7(____opt_result_6) then
+        if not ____t_10(____opt_result_9) then
             return false
         end
         local novas = __call(
@@ -178,19 +183,19 @@ local __O = {};
                 return true, false
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____window_12 = window
-                local ____assign_11 = __assign
-                local ____temp_10 = {}
-                local ____arr_9 = __arr
-                local ____array_8 = __TS__SparseArrayNew(__TS__Spread(__iter(W.doors)))
+                local ____window_15 = window
+                local ____assign_14 = __assign
+                local ____temp_13 = {}
+                local ____arr_12 = __arr
+                local ____array_11 = __TS__SparseArrayNew(__TS__Spread(__iter(W.doors)))
                 __TS__SparseArrayPush(
-                    ____array_8,
+                    ____array_11,
                     __TS__Spread(__iter(novas))
                 )
-                ____window_12.WorldData = ____assign_11(
-                    ____temp_10,
+                ____window_15.WorldData = ____assign_14(
+                    ____temp_13,
                     W,
-                    {doors = ____arr_9(__TS__SparseArraySpread(____array_8))}
+                    {doors = ____arr_12(__TS__SparseArraySpread(____array_11))}
                 )
             end)
             if not ____try then
@@ -219,7 +224,15 @@ local __O = {};
             ),
             casa_tiao = __arrL(
                 {
-                    function(____, n) return if __t(ROBLOX(nil)) then __arrL({{name = n, text = "Conhece o Dedé Fumacinha? Uma noite o Reeis trouxe tanto doce de leite pro Dedé que ele comeu tudo e caiu duro no chão da laje."}, {name = n, text = "Ficou três horas olhando pro céu, jurando que as nuvens eram algodão doce."}, {name = n, text = "Quando acordou, pediu mais. O Reeis só falou: \"Fecha a conta, Dedé.\""}}, 3) else __arrL({{name = n, text = "Conhece o Dedé Fumacinha? Uma noite o Reeis trouxe tanta maconha pro Dedé que ele deu duas tragadas e caiu duro no chão da laje."}, {name = n, text = "Ficou três horas olhando pro céu, jurando que as nuvens eram algodão doce."}, {name = n, text = "Quando acordou, pediu mais. O Reeis só falou: \"Fecha a conta, Dedé.\""}}, 3) end,
+                    function(____, n)
+                        local ____t_result_16
+                        if __t(ROBLOX(nil)) then
+                            ____t_result_16 = __arrL({{name = n, text = "Conhece o Dedé Fumacinha? Uma noite o Reeis trouxe tanto doce de leite pro Dedé que ele comeu tudo e caiu duro no chão da laje."}, {name = n, text = "Ficou três horas olhando pro céu, jurando que as nuvens eram algodão doce."}, {name = n, text = "Quando acordou, pediu mais. O Reeis só falou: \"Fecha a conta, Dedé.\""}}, 3)
+                        else
+                            ____t_result_16 = __arrL({{name = n, text = "Conhece o Dedé Fumacinha? Uma noite o Reeis trouxe tanta maconha pro Dedé que ele deu duas tragadas e caiu duro no chão da laje."}, {name = n, text = "Ficou três horas olhando pro céu, jurando que as nuvens eram algodão doce."}, {name = n, text = "Quando acordou, pediu mais. O Reeis só falou: \"Fecha a conta, Dedé.\""}}, 3)
+                        end
+                        return ____t_result_16
+                    end,
                     function(____, n) return __arrL({{name = n, text = "Uma vez a viatura cercou o morro inteiro. Sabe o que o Reeis fez? Fugiu pulando de laje em laje..."}, {name = n, text = "...com uma geladeira nas costas! Era da Dona Dalva, ele tava devolvendo do conserto."}, {name = DR, text = "E a geladeira?"}, {name = n, text = "Chegou gelando. A polícia é que chegou suando."}}, 4) end,
                     function(____, n) return __arrL({{name = n, text = "O Reeis empinou a moto da escadaria do beco até a pracinha lá de cima. Duzentos degraus."}, {name = n, text = "A moto chegou sem pneu. Ele chegou rindo e ainda deu carona pra minha sogra na volta."}}, 2) end,
                     function(____, n) return __arrL({{name = n, text = "Dizem que ele ganhou do Bigodon no dominó valendo o comando da rua."}, {name = n, text = "Bateu de carroça na última pedra. O Bigodon chorou e o Reeis pagou a cerveja dele, pra não humilhar."}, {name = DR, text = "Respeito até no dominó."}}, 3) end
@@ -243,33 +256,53 @@ local __O = {};
         if not __t(c) then
             return false
         end
-        q.lendasReeis = if __t(if __t(q.lendasReeis) then type(q.lendasReeis) == "table" else q.lendasReeis) then q.lendasReeis else {}
+        local ____q_20 = q
+        local ____t_result_19
+        local ____t_18 = __t
+        local ____t_result_17
+        if __t(q.lendasReeis) then
+            ____t_result_17 = type(q.lendasReeis) == "table"
+        else
+            ____t_result_17 = q.lendasReeis
+        end
+        if ____t_18(____t_result_17) then
+            ____t_result_19 = q.lendasReeis
+        else
+            ____t_result_19 = {}
+        end
+        ____q_20.lendasReeis = ____t_result_19
         local lista = __get(LENDAS, id)
-        local ____mod_15 = __mod
-        local ____t_14 = __t
-        local ____TS__Number_result_13 = __TS__Number(__get(q.lendasReeis, id))
-        __O[1337] = ____TS__Number_result_13
-        local i = ____mod_15(
-            if ____t_14(____TS__Number_result_13) then __O[1337] else 0,
+        local ____mod_24 = __mod
+        local ____t_result_23
+        local ____t_22 = __t
+        local ____TS__Number_result_21 = __TS__Number(__get(q.lendasReeis, id))
+        __O[1356] = ____TS__Number_result_21
+        if ____t_22(____TS__Number_result_21) then
+            ____t_result_23 = __O[1356]
+        else
+            ____t_result_23 = 0
+        end
+        local i = ____mod_24(
+            ____t_result_23,
             __len(lista)
         )
         __set(q.lendasReeis, id, i + 1)
-        local ____opt_result_20
+        local ____opt_result_29
         if api ~= nil then
-            ____opt_result_20 = api.say
+            ____opt_result_29 = api.say
         end
-        if ____opt_result_20 ~= nil then
-            ____opt_result_20(
+        if ____opt_result_29 ~= nil then
+            ____opt_result_29(
                 api,
                 __get(lista, i)(nil, c.npc)
             )
         end
-        local ____opt_result_25
+        local ____opt_result_34
         if api ~= nil then
-            ____opt_result_25 = api.save
+            ____opt_result_34 = api.save
         end
-        if ____opt_result_25 ~= nil then
-            ____opt_result_25(api)
+        if ____opt_result_34 ~= nil then
+            ____opt_result_34(api)
         end
         return true
     end
@@ -345,24 +378,30 @@ local __O = {};
                 return true, 0
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____t_35 = __t
-                local ____opt_30 = window.DayTime
-                if ____opt_30 ~= nil then
-                    ____opt_30 = ____opt_30.state
+                local ____t_result_45
+                local ____t_44 = __t
+                local ____opt_39 = window.DayTime
+                if ____opt_39 ~= nil then
+                    ____opt_39 = ____opt_39.state
                 end
-                local ____opt_result_32
-                if ____opt_30 ~= nil then
-                    ____opt_result_32 = ____opt_30(____opt_30)
+                local ____opt_result_41
+                if ____opt_39 ~= nil then
+                    ____opt_result_41 = ____opt_39(____opt_39)
                 end
-                local ____opt_result_33
-                if ____opt_result_32 ~= nil then
-                    ____opt_result_33 = ____opt_result_32.night
+                local ____opt_result_42
+                if ____opt_result_41 ~= nil then
+                    ____opt_result_42 = ____opt_result_41.night
                 end
-                local ____TS__Number_result_34 = __TS__Number(____opt_result_33)
-                __O[1338] = ____TS__Number_result_34
+                local ____TS__Number_result_43 = __TS__Number(____opt_result_42)
+                __O[1357] = ____TS__Number_result_43
+                if ____t_44(____TS__Number_result_43) then
+                    ____t_result_45 = __O[1357]
+                else
+                    ____t_result_45 = 0
+                end
                 return true, math.max(
                     0,
-                    math.min(1, if ____t_35(____TS__Number_result_34) then __O[1338] else 0)
+                    math.min(1, ____t_result_45)
                 )
             end)
             if not ____try then
@@ -474,7 +513,7 @@ local __O = {};
                                     by + j * 4,
                                     4,
                                     3,
-                                    if __t(__mod(i + j, 3)) then "#a8634a" else "#b8735a"
+                                    __t(__mod(i + j, 3)) and "#a8634a" or "#b8735a"
                                 )
                                 R(
                                     nil,
@@ -628,8 +667,14 @@ local __O = {};
             0,
             __add(y, h)
         )
-        g:addColorStop(0, if __gt(n, 0.5) then "#0e1430" else "#6aa8e0")
-        g:addColorStop(1, if __gt(n, 0.5) then "#2a2a50" else "#bcdcf0")
+        g:addColorStop(
+            0,
+            __gt(n, 0.5) and "#0e1430" or "#6aa8e0"
+        )
+        g:addColorStop(
+            1,
+            __gt(n, 0.5) and "#2a2a50" or "#bcdcf0"
+        )
         c.fillStyle = g
         c:fillRect(x, y, w, h)
         do
@@ -644,7 +689,7 @@ local __O = {};
                     __add(y, h) - bh,
                     w / 6 + 1,
                     bh,
-                    if __gt(n, 0.5) then "#3a2a3a" else __get(
+                    __gt(n, 0.5) and "#3a2a3a" or __get(
                         __arrL({"#c86a4a", "#d89a6a", "#b85a3a"}, 3),
                         __mod(i, 3)
                     )
@@ -707,14 +752,19 @@ local __O = {};
             h,
             fundo
         )
-        local ____ = if __t(desenho) then desenho(
-            nil,
-            c,
-            x,
-            y,
-            w,
-            h
-        ) else desenho
+        local ____t_result_46
+        if __t(desenho) then
+            ____t_result_46 = desenho(
+                nil,
+                c,
+                x,
+                y,
+                w,
+                h
+            )
+        else
+            ____t_result_46 = desenho
+        end
         R(
             nil,
             c,
@@ -750,7 +800,7 @@ local __O = {};
             x,
             __add(ytop, comp) + 5,
             3,
-            if __t(acesa) then "#fff2b8" else "#c8c0a8"
+            __t(acesa) and "#fff2b8" or "#c8c0a8"
         )
     end
     local function salaDalva(self, c)
@@ -1352,7 +1402,7 @@ local __O = {};
                     GY + 8,
                     2,
                     6,
-                    if __mod(x / 2, 4) < 2 then "#c8a24a" else "#b8441a"
+                    __mod(x / 2, 4) < 2 and "#c8a24a" or "#b8441a"
                 )
                 x = x + 2
             end
@@ -1387,14 +1437,21 @@ local __O = {};
             do
                 local k = 0
                 while k < 6 do
-                    disco(
+                    local ____array_48 = __TS__SparseArrayNew(
                         nil,
                         c,
                         x + 6 + math.floor(math.sin(k * 2) * 6 + 0.5),
                         186 - k * 4,
-                        4,
-                        if __t(__mod(k, 2)) then cor else "#6aaa4a"
+                        4
                     )
+                    local ____t_result_47
+                    if __t(__mod(k, 2)) then
+                        ____t_result_47 = cor
+                    else
+                        ____t_result_47 = "#6aaa4a"
+                    end
+                    __TS__SparseArrayPush(____array_48, ____t_result_47)
+                    disco(__TS__SparseArraySpread(____array_48))
                     k = k + 1
                 end
             end
@@ -1652,7 +1709,7 @@ local __O = {};
                                 y + 2,
                                 12,
                                 4,
-                                if hsh(nil, x + y) > 0.5 then "#b8704a" else "#985030"
+                                hsh(nil, x + y) > 0.5 and "#b8704a" or "#985030"
                             )
                         end
                         x = x + 18
@@ -1944,7 +2001,7 @@ local __O = {};
                             y,
                             4,
                             4,
-                            if __t(__mod((x + y) / 4, 2)) then "#c83a3a" else "#2a4a8a"
+                            __t(__mod((x + y) / 4, 2)) and "#c83a3a" or "#2a4a8a"
                         )
                         y = y + 4
                     end
@@ -2598,10 +2655,10 @@ local __O = {};
                     nil,
                     c,
                     x,
-                    GY + 10 + if __mod(x, 4) == 0 then 1 else 0,
+                    GY + 10 + (__mod(x, 4) == 0 and 1 or 0),
                     2,
                     6,
-                    if __t(__mod(x, 6)) then "#f2b8d8" else "#e8a0c8"
+                    __t(__mod(x, 6)) and "#f2b8d8" or "#e8a0c8"
                 )
                 x = x + 2
             end
@@ -2650,7 +2707,7 @@ local __O = {};
                     y,
                     2,
                     2,
-                    if __t(on) then "#fff2b8" else "#a89a6a"
+                    __t(on) and "#fff2b8" or "#a89a6a"
                 )
                 if __t(on) then
                     glow(
@@ -2666,7 +2723,7 @@ local __O = {};
                 k = k + 1
             end
         end
-        local b = if math.abs(math.sin(t * 9)) > 0.7 then 1 else 0
+        local b = math.abs(math.sin(t * 9)) > 0.7 and 1 or 0
         disco(
             nil,
             c,
@@ -2706,10 +2763,10 @@ local __O = {};
             156,
             3,
             3,
-            if __t(__mod(
+            __t(__mod(
                 math.floor(t * 6),
                 2
-            )) then "#4af24a" else "#1a5a1a"
+            )) and "#4af24a" or "#1a5a1a"
         )
         if __t(__mod(
             math.floor(t * 0.5),
@@ -2846,12 +2903,12 @@ local __O = {};
         if not __t(tela) then
             do
                 do
-                    __O[1339] = __iter(mk(nil, LW, LH))
-                    tela = __get(__O[1339], 0)
+                    __O[1358] = __iter(mk(nil, LW, LH))
+                    tela = __get(__O[1358], 0)
                 end
-                tctx = __get(__O[1339], 1)
+                tctx = __get(__O[1358], 1)
             end
-            local ____ = __O[1339]
+            local ____ = __O[1358]
         end
         local n = noite(nil)
         tctx.globalAlpha = 1
@@ -2862,12 +2919,18 @@ local __O = {};
             0,
             0
         )
-        local ____get_result_39 = __get(s, 1)
-        local ____tctx_38 = tctx
-        local ____t_37 = __t
-        local ____TS__Number_result_36 = __TS__Number(t)
-        __O[1340] = ____TS__Number_result_36
-        ____get_result_39(nil, ____tctx_38, if ____t_37(____TS__Number_result_36) then __O[1340] else 0, n)
+        local ____get_result_53 = __get(s, 1)
+        local ____tctx_52 = tctx
+        local ____t_result_51
+        local ____t_50 = __t
+        local ____TS__Number_result_49 = __TS__Number(t)
+        __O[1359] = ____TS__Number_result_49
+        if ____t_50(____TS__Number_result_49) then
+            ____t_result_51 = __O[1359]
+        else
+            ____t_result_51 = 0
+        end
+        ____get_result_53(nil, ____tctx_52, ____t_result_51, n)
         if n > 0 then
             tctx.globalAlpha = n * 0.25
             R(
@@ -2902,11 +2965,17 @@ local __O = {};
             local x = c.x
             local base = 440
             ctx:save()
-            local ____ctx_42 = ctx
-            local ____t_41 = __t
-            local ____TS__Number_result_40 = __TS__Number(t)
-            __O[1341] = ____TS__Number_result_40
-            ____ctx_42.globalAlpha = 0.55 + 0.1 * math.sin(if ____t_41(____TS__Number_result_40) then __O[1341] else 0 * 3 + x)
+            local ____ctx_57 = ctx
+            local ____t_result_56
+            local ____t_55 = __t
+            local ____TS__Number_result_54 = __TS__Number(t)
+            __O[1360] = ____TS__Number_result_54
+            if ____t_55(____TS__Number_result_54) then
+                ____t_result_56 = __O[1360]
+            else
+                ____t_result_56 = 0
+            end
+            ____ctx_57.globalAlpha = 0.55 + 0.1 * math.sin(____t_result_56 * 3 + x)
             ctx.fillStyle = "#ffd88a"
             ctx:fillRect(x + 6, base - 58, 6, 56)
             ctx.globalAlpha = 0.18
@@ -2921,22 +2990,34 @@ local __O = {};
         end
     end
     local function nomeDe(____, id)
-        local ____t_45 = __t
-        local ____opt_43 = __get(CASAS, id)
-        if ____opt_43 ~= nil then
-            ____opt_43 = ____opt_43.nome
+        local ____t_result_61
+        local ____t_60 = __t
+        local ____opt_58 = __get(CASAS, id)
+        if ____opt_58 ~= nil then
+            ____opt_58 = ____opt_58.nome
         end
-        __O[1342] = ____opt_43
-        return if ____t_45(____opt_43) then __O[1342] else ""
+        __O[1361] = ____opt_58
+        if ____t_60(____opt_58) then
+            ____t_result_61 = __O[1361]
+        else
+            ____t_result_61 = ""
+        end
+        return ____t_result_61
     end
     local function npcDe(____, id)
-        local ____t_48 = __t
-        local ____opt_46 = __get(CASAS, id)
-        if ____opt_46 ~= nil then
-            ____opt_46 = ____opt_46.npc
+        local ____t_result_65
+        local ____t_64 = __t
+        local ____opt_62 = __get(CASAS, id)
+        if ____opt_62 ~= nil then
+            ____opt_62 = ____opt_62.npc
         end
-        __O[1343] = ____opt_46
-        return if ____t_48(____opt_46) then __O[1343] else ""
+        __O[1362] = ____opt_62
+        if ____t_64(____opt_62) then
+            ____t_result_65 = __O[1362]
+        else
+            ____t_result_65 = ""
+        end
+        return ____t_result_65
     end
     local function falante(____, id, norm)
         local n = __call(
@@ -2951,18 +3032,24 @@ local __O = {};
             ),
             "toLowerCase"
         )
-        local ____t_50 = __t
-        local ____temp_49 = not not __t(n)
-        __O[1344] = ____temp_49
-        return if ____t_50(____temp_49) then __call(
-            norm,
-            "includes",
-            __re_replace(
-                n,
-                __re("^(dona|seu) ", ""),
-                ""
+        local ____t_result_68
+        local ____t_67 = __t
+        local ____temp_66 = not not __t(n)
+        __O[1363] = ____temp_66
+        if ____t_67(____temp_66) then
+            ____t_result_68 = __call(
+                norm,
+                "includes",
+                __re_replace(
+                    n,
+                    __re("^(dona|seu) ", ""),
+                    ""
+                )
             )
-        ) else __O[1344]
+        else
+            ____t_result_68 = __O[1363]
+        end
+        return ____t_result_68
     end
     window.FavelaCasas = __ord(
         {
@@ -2974,13 +3061,19 @@ local __O = {};
             nome = nomeDe,
             nomeNpc = npcDe,
             morador = function(____, id)
-                local ____t_53 = __t
-                local ____opt_51 = __get(CASAS, id)
-                if ____opt_51 ~= nil then
-                    ____opt_51 = ____opt_51.morador
+                local ____t_result_72
+                local ____t_71 = __t
+                local ____opt_69 = __get(CASAS, id)
+                if ____opt_69 ~= nil then
+                    ____opt_69 = ____opt_69.morador
                 end
-                __O[1345] = ____opt_51
-                return if ____t_53(____opt_51) then __O[1345] else nil
+                __O[1364] = ____opt_69
+                if ____t_71(____opt_69) then
+                    ____t_result_72 = __O[1364]
+                else
+                    ____t_result_72 = nil
+                end
+                return ____t_result_72
             end,
             falante = falante,
             LENDAS = LENDAS

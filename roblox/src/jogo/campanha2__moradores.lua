@@ -50,7 +50,7 @@ local __O = {};
                 q = ____bindingPattern0[1]
                 local b = window.document:createElement("button")
                 b.type = "button"
-                b.textContent = ((tostring(i + 1) .. ". ") .. tostring(q)) .. if __t(__call(lidos, "has", i)) then " ✓" else ""
+                b.textContent = ((tostring(i + 1) .. ". ") .. tostring(q)) .. (__t(__call(lidos, "has", i)) and " ✓" or "")
                 if __t(__call(lidos, "has", i)) then
                     b.className = "lido"
                 end
@@ -111,11 +111,17 @@ local __O = {};
         end
     end
     function fechar(self)
-        local ____t_24 = __t
-        local ____t_23 = __t
-        local ____temp_22 = not __t(box)
-        __O[461] = ____temp_22
-        if ____t_24(if ____t_23(____temp_22) then __O[461] else box.hidden) then
+        local ____t_36 = __t
+        local ____t_result_35
+        local ____t_34 = __t
+        local ____temp_33 = not __t(box)
+        __O[474] = ____temp_33
+        if ____t_34(____temp_33) then
+            ____t_result_35 = __O[474]
+        else
+            ____t_result_35 = box.hidden
+        end
+        if ____t_36(____t_result_35) then
             return
         end
         window:clearInterval(typing)
@@ -130,21 +136,32 @@ local __O = {};
         end
     end
     local ____ = "use strict"
-    local ____t_8 = __t
+    local ____t_9 = __t
+    local ____t_result_8
     local ____t_4 = __t
-    local ____t_2 = __t
-    local ____opt_0 = window.CampanhaPersonagens
-    if ____opt_0 ~= nil then
-        ____opt_0 = ____opt_0.registrar
+    local ____t_result_3
+    if __t(window.CampanhaMoradores) then
+        ____t_result_3 = window.CampanhaMoradores
+    else
+        local ____t_2 = __t
+        local ____opt_0 = window.CampanhaPersonagens
+        if ____opt_0 ~= nil then
+            ____opt_0 = ____opt_0.registrar
+        end
+        ____t_result_3 = not ____t_2(____opt_0)
     end
-    local ____temp_3 = if __t(window.CampanhaMoradores) then window.CampanhaMoradores else not ____t_2(____opt_0)
-    __O[456] = ____temp_3
-    local ____t_7 = __t
-    local ____opt_5 = window.Art
-    if ____opt_5 ~= nil then
-        ____opt_5 = ____opt_5.drawCharacter
+    __O[469] = ____t_result_3
+    if ____t_4(____t_result_3) then
+        ____t_result_8 = __O[469]
+    else
+        local ____t_7 = __t
+        local ____opt_5 = window.Art
+        if ____opt_5 ~= nil then
+            ____opt_5 = ____opt_5.drawCharacter
+        end
+        ____t_result_8 = not ____t_7(____opt_5)
     end
-    if ____t_8(if ____t_4(____temp_3) then __O[456] else not ____t_7(____opt_5)) then
+    if ____t_9(____t_result_8) then
         return
     end
     local CP = window.CampanhaPersonagens
@@ -1395,7 +1412,7 @@ local __O = {};
         CP:registrar(
             p.id,
             __assign({}, {name = p.nome}, p.spec),
-            if p.tipo == "personagem" then "personagem (2D)" else "morador"
+            p.tipo == "personagem" and "personagem (2D)" or "morador"
         )
     end
     local conhecidos = __TS__New(Set)
@@ -1404,15 +1421,21 @@ local __O = {};
             conhecidos = __TS__New(Set)
         end
         local ____try, ____hasReturned = pcall(function()
-            local ____Set_13 = Set
-            local ____self_11 = window.JSON
-            local ____self_11_parse_12 = ____self_11.parse
-            local ____t_10 = __t
-            local ____temp_9 = window.localStorage:getItem(KEY)
-            __O[457] = ____temp_9
+            local ____Set_15 = Set
+            local ____self_13 = window.JSON
+            local ____self_13_parse_14 = ____self_13.parse
+            local ____t_result_12
+            local ____t_11 = __t
+            local ____temp_10 = window.localStorage:getItem(KEY)
+            __O[470] = ____temp_10
+            if ____t_11(____temp_10) then
+                ____t_result_12 = __O[470]
+            else
+                ____t_result_12 = "[]"
+            end
             conhecidos = __TS__New(
-                ____Set_13,
-                ____self_11_parse_12(____self_11, if ____t_10(____temp_9) then __O[457] else "[]")
+                ____Set_15,
+                ____self_13_parse_14(____self_13, ____t_result_12)
             )
         end)
         if not ____try then
@@ -1444,64 +1467,109 @@ local __O = {};
         if not __t(__len(L)) then
             return
         end
-        local ____t_15 = __t
-        local ____TS__Number_result_14 = __TS__Number(o.time)
-        __O[458] = ____TS__Number_result_14
-        local t = if ____t_15(____TS__Number_result_14) then __O[458] else 0
-        local ____t_19 = __t
-        local ____opt_16 = o.player
-        if ____opt_16 ~= nil then
-            ____opt_16 = ____opt_16.x
+        local ____t_result_18
+        local ____t_17 = __t
+        local ____TS__Number_result_16 = __TS__Number(o.time)
+        __O[471] = ____TS__Number_result_16
+        if ____t_17(____TS__Number_result_16) then
+            ____t_result_18 = __O[471]
+        else
+            ____t_result_18 = 0
         end
-        local ____TS__Number_result_18 = __TS__Number(____opt_16)
-        __O[459] = ____TS__Number_result_18
-        local hx = if ____t_19(____TS__Number_result_18) then __O[459] else -9999
-        local ____t_21 = __t
-        local ____TS__Number_result_20 = __TS__Number(o.camera)
-        __O[460] = ____TS__Number_result_20
-        local cam = if ____t_21(____TS__Number_result_20) then __O[460] else 0
+        local t = ____t_result_18
+        local ____t_result_23
+        local ____t_22 = __t
+        local ____opt_19 = o.player
+        if ____opt_19 ~= nil then
+            ____opt_19 = ____opt_19.x
+        end
+        local ____TS__Number_result_21 = __TS__Number(____opt_19)
+        __O[472] = ____TS__Number_result_21
+        if ____t_22(____TS__Number_result_21) then
+            ____t_result_23 = __O[472]
+        else
+            ____t_result_23 = -9999
+        end
+        local hx = ____t_result_23
+        local ____t_result_26
+        local ____t_25 = __t
+        local ____TS__Number_result_24 = __TS__Number(o.camera)
+        __O[473] = ____TS__Number_result_24
+        if ____t_25(____TS__Number_result_24) then
+            ____t_result_26 = __O[473]
+        else
+            ____t_result_26 = 0
+        end
+        local cam = ____t_result_26
         for ____, p in __iterar((L)) do
-            if __t(p.x < cam - 80 or p.x > cam + 1040) then
-                continue
-            end
-            local perto = math.abs(p.x - hx) < 160
-            local facing = if __t(perto) then if hx > p.x then 1 else -1 else if __t(p.facing) then p.facing else if __t(__mod(p.x, 2)) then 1 else -1
-            window.Art:drawCharacter(
-                c,
-                p.id,
-                p.x,
-                FLOOR,
-                {
-                    frame = t + p.x * 0.01,
-                    facing = facing,
-                    moving = false,
-                    grounded = true,
-                    vy = 0,
-                    cache = true
-                }
-            )
-            local novo = not __t(__call(conhecidos, "has", p.id))
-            local y = FLOOR - 112 + math.floor(math.sin(t * 3 + p.x) * 2 + 0.5)
-            if __t(if __t(novo) then novo else perto) then
-                local col = if __t(novo) then if p.tipo == "personagem" then "#ffd24a" else "#8ae0ff" else "#f3d89e"
-                local bx = math.floor(p.x + 0.5) - 10
-                local by = y - 12
-                c.fillStyle = "#2a1a14"
-                c:fillRect(bx - 2, by - 2, 24, 22)
-                c:fillRect(bx + 8, by + 20, 6, 4)
-                c.fillStyle = col
-                c:fillRect(bx, by, 20, 18)
-                c:fillRect(bx + 10, by + 18, 2, 2)
-                c.fillStyle = "#2a1a14"
-                if __t(novo) then
-                    c:fillRect(bx + 8, by + 3, 4, 8)
-                    c:fillRect(bx + 8, by + 13, 4, 3)
+            do
+                if __t(p.x < cam - 80 or p.x > cam + 1040) then
+                    continue
+                end
+                local perto = math.abs(p.x - hx) < 160
+                local ____t_result_28
+                if __t(perto) then
+                    ____t_result_28 = hx > p.x and 1 or -1
                 else
-                    do
-                        local k = 0
-                        while k < 3 do
-                            c:fillRect(bx + 3 + k * 6, by + 8, 3, 3)
-                            k = k + 1
+                    local ____t_result_27
+                    if __t(p.facing) then
+                        ____t_result_27 = p.facing
+                    else
+                        ____t_result_27 = __t(__mod(p.x, 2)) and 1 or -1
+                    end
+                    ____t_result_28 = ____t_result_27
+                end
+                local facing = ____t_result_28
+                window.Art:drawCharacter(
+                    c,
+                    p.id,
+                    p.x,
+                    FLOOR,
+                    {
+                        frame = t + p.x * 0.01,
+                        facing = facing,
+                        moving = false,
+                        grounded = true,
+                        vy = 0,
+                        cache = true
+                    }
+                )
+                local novo = not __t(__call(conhecidos, "has", p.id))
+                local y = FLOOR - 112 + math.floor(math.sin(t * 3 + p.x) * 2 + 0.5)
+                local ____t_30 = __t
+                local ____t_result_29
+                if __t(novo) then
+                    ____t_result_29 = novo
+                else
+                    ____t_result_29 = perto
+                end
+                if ____t_30(____t_result_29) then
+                    local ____t_result_31
+                    if __t(novo) then
+                        ____t_result_31 = p.tipo == "personagem" and "#ffd24a" or "#8ae0ff"
+                    else
+                        ____t_result_31 = "#f3d89e"
+                    end
+                    local col = ____t_result_31
+                    local bx = math.floor(p.x + 0.5) - 10
+                    local by = y - 12
+                    c.fillStyle = "#2a1a14"
+                    c:fillRect(bx - 2, by - 2, 24, 22)
+                    c:fillRect(bx + 8, by + 20, 6, 4)
+                    c.fillStyle = col
+                    c:fillRect(bx, by, 20, 18)
+                    c:fillRect(bx + 10, by + 18, 2, 2)
+                    c.fillStyle = "#2a1a14"
+                    if __t(novo) then
+                        c:fillRect(bx + 8, by + 3, 4, 8)
+                        c:fillRect(bx + 8, by + 13, 4, 3)
+                    else
+                        do
+                            local k = 0
+                            while k < 3 do
+                                c:fillRect(bx + 3 + k * 6, by + 8, 3, 3)
+                                k = k + 1
+                            end
                         end
                     end
                 end
@@ -1597,14 +1665,20 @@ local __O = {};
         end
         cur = p
         lidos = __TS__New(Set)
-        onClose = if __t(opts.onClose) then opts.onClose else nil
+        local ____t_result_32
+        if __t(opts.onClose) then
+            ____t_result_32 = opts.onClose
+        else
+            ____t_result_32 = nil
+        end
+        onClose = ____t_result_32
         fila = __arrL({}, 0)
         local novo = not __t(__call(conhecidos, "has", id))
         __call(conhecidos, "add", id)
         salvar(nil)
         box:querySelector(".c2m-nome").textContent = __call(p.nome, "toUpperCase")
         box:querySelector(".c2m-papel").textContent = p.papel
-        box:querySelector(".c2m-cad").textContent = (((("CADERNINHO: " .. tostring(conhecidos.size)) .. "/") .. tostring(__len(TODOS))) .. " conhecidos") .. if __t(novo) then " · NOVO!" else ""
+        box:querySelector(".c2m-cad").textContent = (((("CADERNINHO: " .. tostring(conhecidos.size)) .. "/") .. tostring(__len(TODOS))) .. " conhecidos") .. (__t(novo) and " · NOVO!" or "")
         box:querySelector(".c2m-ops").innerHTML = ""
         box.hidden = false
         retrato(nil)
@@ -1616,11 +1690,17 @@ local __O = {};
     window:addEventListener(
         "keydown",
         function(____, e)
-            local ____t_29 = __t
-            local ____t_28 = __t
-            local ____temp_27 = not __t(box)
-            __O[462] = ____temp_27
-            if ____t_29(if ____t_28(____temp_27) then __O[462] else box.hidden) then
+            local ____t_42 = __t
+            local ____t_result_41
+            local ____t_40 = __t
+            local ____temp_39 = not __t(box)
+            __O[475] = ____temp_39
+            if ____t_40(____temp_39) then
+                ____t_result_41 = __O[475]
+            else
+                ____t_result_41 = box.hidden
+            end
+            if ____t_42(____t_result_41) then
                 return
             end
             local k = e.key
@@ -1640,11 +1720,17 @@ local __O = {};
                     fechar(nil)
                 end
             else
-                local ____t_32 = __t
-                local ____t_31 = __t
-                local ____temp_30 = k == "Enter" or k == " "
-                __O[463] = ____temp_30
-                if ____t_32(if ____t_31(____temp_30) then __O[463] else __call(k, "toLowerCase") == "e") then
+                local ____t_46 = __t
+                local ____t_result_45
+                local ____t_44 = __t
+                local ____temp_43 = k == "Enter" or k == " "
+                __O[476] = ____temp_43
+                if ____t_44(____temp_43) then
+                    ____t_result_45 = __O[476]
+                else
+                    ____t_result_45 = __call(k, "toLowerCase") == "e"
+                end
+                if ____t_46(____t_result_45) then
                     if modo == "menu" then
                         local i = __call(
                             cur.temas,

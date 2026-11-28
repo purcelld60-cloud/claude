@@ -39,19 +39,30 @@ local __O = {};
     local TETO = 40
     local TETO_DEV = 1000000000
     local function teto()
-        return if __t(dev(nil)) then TETO_DEV else TETO
+        return __t(dev(nil)) and TETO_DEV or TETO
     end
     local function need(____, level)
-        return if __ge(level, 50) then 0 else math.floor(60 + level * 35 + level ^ 1.5 * 12)
+        return __ge(level, 50) and 0 or math.floor(60 + level * 35 + level ^ 1.5 * 12)
     end
     local function getState(self)
+        local ____state_level_1 = state.level
+        local ____state_xp_2 = state.xp
+        local ____state_totalXP_3 = state.totalXP
+        local ____temp_4 = __t(dev(nil)) and 999 or state.points
+        local ____dev_result_5 = dev(nil)
+        local ____t_result_0
+        if __t(dev(nil)) then
+            ____t_result_0 = nil
+        else
+            ____t_result_0 = TETO
+        end
         return {
-            level = state.level,
-            xp = state.xp,
-            totalXP = state.totalXP,
-            points = if __t(dev(nil)) then 999 else state.points,
-            infinito = dev(nil),
-            teto = if __t(dev(nil)) then nil else TETO,
+            level = ____state_level_1,
+            xp = ____state_xp_2,
+            totalXP = ____state_totalXP_3,
+            points = ____temp_4,
+            infinito = ____dev_result_5,
+            teto = ____t_result_0,
             nextXP = need(nil, state.level),
             stats = __assign({}, state.stats)
         }
@@ -83,76 +94,120 @@ local __O = {};
     end
     local function restore(self, data)
         state = defaults(nil)
-        if __t(if __t(data) then type(data) == "table" else data) then
-            local ____state_2 = state
-            local ____t_1 = __t
-            local ____TS__Number_result_0 = __TS__Number(data.level)
-            __O[38] = ____TS__Number_result_0
-            ____state_2.level = clamp(
+        local ____t_7 = __t
+        local ____t_result_6
+        if __t(data) then
+            ____t_result_6 = type(data) == "table"
+        else
+            ____t_result_6 = data
+        end
+        if ____t_7(____t_result_6) then
+            local ____state_11 = state
+            local ____t_result_10
+            local ____t_9 = __t
+            local ____TS__Number_result_8 = __TS__Number(data.level)
+            __O[38] = ____TS__Number_result_8
+            if ____t_9(____TS__Number_result_8) then
+                ____t_result_10 = __O[38]
+            else
+                ____t_result_10 = 1
+            end
+            ____state_11.level = clamp(
                 nil,
-                math.floor(if ____t_1(____TS__Number_result_0) then __O[38] else 1),
+                math.floor(____t_result_10),
                 1,
                 50
             )
-            local ____state_5 = state
-            local ____t_4 = __t
-            local ____TS__Number_result_3 = __TS__Number(data.xp)
-            __O[39] = ____TS__Number_result_3
-            ____state_5.xp = clamp(
+            local ____state_15 = state
+            local ____t_result_14
+            local ____t_13 = __t
+            local ____TS__Number_result_12 = __TS__Number(data.xp)
+            __O[39] = ____TS__Number_result_12
+            if ____t_13(____TS__Number_result_12) then
+                ____t_result_14 = __O[39]
+            else
+                ____t_result_14 = 0
+            end
+            ____state_15.xp = clamp(
                 nil,
-                math.floor(if ____t_4(____TS__Number_result_3) then __O[39] else 0),
+                math.floor(____t_result_14),
                 0,
                 100000
             )
-            local ____state_8 = state
-            local ____t_7 = __t
-            local ____TS__Number_result_6 = __TS__Number(data.totalXP)
-            __O[40] = ____TS__Number_result_6
-            ____state_8.totalXP = clamp(
+            local ____state_19 = state
+            local ____t_result_18
+            local ____t_17 = __t
+            local ____TS__Number_result_16 = __TS__Number(data.totalXP)
+            __O[40] = ____TS__Number_result_16
+            if ____t_17(____TS__Number_result_16) then
+                ____t_result_18 = __O[40]
+            else
+                ____t_result_18 = 0
+            end
+            ____state_19.totalXP = clamp(
                 nil,
-                math.floor(if ____t_7(____TS__Number_result_6) then __O[40] else 0),
+                math.floor(____t_result_18),
                 0,
                 10000000
             )
-            local ____state_11 = state
-            local ____t_10 = __t
-            local ____TS__Number_result_9 = __TS__Number(data.points)
-            __O[41] = ____TS__Number_result_9
-            ____state_11.points = clamp(
+            local ____state_23 = state
+            local ____t_result_22
+            local ____t_21 = __t
+            local ____TS__Number_result_20 = __TS__Number(data.points)
+            __O[41] = ____TS__Number_result_20
+            if ____t_21(____TS__Number_result_20) then
+                ____t_result_22 = __O[41]
+            else
+                ____t_result_22 = 0
+            end
+            ____state_23.points = clamp(
                 nil,
-                math.floor(if ____t_10(____TS__Number_result_9) then __O[41] else 0),
+                math.floor(____t_result_22),
                 0,
                 250
             )
             for ____, k in __iterar((keys)) do
-                local ____set_15 = __set
-                local ____state_stats_14 = state.stats
-                local ____t_13 = __t
-                local ____TS__Number_result_12 = __TS__Number(__getq(data.stats, k))
-                __O[42] = ____TS__Number_result_12
-                ____set_15(
-                    ____state_stats_14,
+                local ____set_28 = __set
+                local ____state_stats_27 = state.stats
+                local ____t_result_26
+                local ____t_25 = __t
+                local ____TS__Number_result_24 = __TS__Number(__getq(data.stats, k))
+                __O[42] = ____TS__Number_result_24
+                if ____t_25(____TS__Number_result_24) then
+                    ____t_result_26 = __O[42]
+                else
+                    ____t_result_26 = 0
+                end
+                ____set_28(
+                    ____state_stats_27,
                     k,
                     clamp(
                         nil,
-                        math.floor(if ____t_13(____TS__Number_result_12) then __O[42] else 0),
+                        math.floor(____t_result_26),
                         0,
                         teto(nil)
                     )
                 )
             end
-            state.rewards = if __isArray(data.rewards) then __call(
-                __arr(__TS__Spread(__iter(__TS__New(
-                    Set,
-                    __call(
-                        data.rewards,
-                        "filter",
-                        function(____, x) return type(x) == "string" end
-                    )
-                )))),
-                "slice",
-                -2500
-            ) else __arrL({}, 0)
+            local ____state_30 = state
+            local ____isArray_result_29
+            if __isArray(data.rewards) then
+                ____isArray_result_29 = __call(
+                    __arr(__TS__Spread(__iter(__TS__New(
+                        Set,
+                        __call(
+                            data.rewards,
+                            "filter",
+                            function(____, x) return type(x) == "string" end
+                        )
+                    )))),
+                    "slice",
+                    -2500
+                )
+            else
+                ____isArray_result_29 = __arrL({}, 0)
+            end
+            ____state_30.rewards = ____isArray_result_29
             while __t(state.level < 50 and state.xp >= need(nil, state.level)) do
                 state.xp = state.xp - need(nil, state.level)
                 state.level = state.level + 1
@@ -162,32 +217,50 @@ local __O = {};
         if state.level == 50 then
             state.xp = 0
         end
-        local ____self_16 = __TS__Promise.resolve()
-        ____self_16["then"](
-            ____self_16,
+        local ____self_31 = __TS__Promise.resolve()
+        ____self_31["then"](
+            ____self_31,
             function() return emit(nil, 0, "restore") end
         )
         return getState(nil)
     end
     local function award(self, xp, sourceId)
-        local ____t_18 = __t
-        local ____TS__Number_result_17 = __TS__Number(xp)
-        __O[43] = ____TS__Number_result_17
+        local ____t_result_34
+        local ____t_33 = __t
+        local ____TS__Number_result_32 = __TS__Number(xp)
+        __O[43] = ____TS__Number_result_32
+        if ____t_33(____TS__Number_result_32) then
+            ____t_result_34 = __O[43]
+        else
+            ____t_result_34 = 0
+        end
         local amount = clamp(
             nil,
-            math.floor(if ____t_18(____TS__Number_result_17) then __O[43] else 0),
+            math.floor(____t_result_34),
             0,
             10000
         )
-        local ____t_21 = __t
-        local ____t_20 = __t
-        local ____temp_19 = not __t(amount)
-        __O[44] = ____temp_19
-        if ____t_21(if ____t_20(____temp_19) then __O[44] else if __t(sourceId) then __call(
-            state.rewards,
-            "includes",
-            tostring(sourceId)
-        ) else sourceId) then
+        local ____t_39 = __t
+        local ____t_result_38
+        local ____t_36 = __t
+        local ____temp_35 = not __t(amount)
+        __O[44] = ____temp_35
+        if ____t_36(____temp_35) then
+            ____t_result_38 = __O[44]
+        else
+            local ____t_result_37
+            if __t(sourceId) then
+                ____t_result_37 = __call(
+                    state.rewards,
+                    "includes",
+                    tostring(sourceId)
+                )
+            else
+                ____t_result_37 = sourceId
+            end
+            ____t_result_38 = ____t_result_37
+        end
+        if ____t_39(____t_result_38) then
             return __assign(
                 {},
                 getState(nil),
@@ -240,21 +313,27 @@ local __O = {};
             state.points = state.points - 1
             __inc(state.stats, stat, 1, true)
         else
-            local ____set_27 = __set
-            local ____state_stats_25 = state.stats
-            local ____stat_26 = stat
-            local ____get_result_24 = __get(state.stats, stat)
-            local ____t_23 = __t
-            local ____TS__Number_result_22 = __TS__Number(qtd)
-            __O[45] = ____TS__Number_result_22
-            ____set_27(
-                ____state_stats_25,
-                ____stat_26,
+            local ____set_46 = __set
+            local ____state_stats_44 = state.stats
+            local ____stat_45 = stat
+            local ____get_result_43 = __get(state.stats, stat)
+            local ____t_result_42
+            local ____t_41 = __t
+            local ____TS__Number_result_40 = __TS__Number(qtd)
+            __O[45] = ____TS__Number_result_40
+            if ____t_41(____TS__Number_result_40) then
+                ____t_result_42 = __O[45]
+            else
+                ____t_result_42 = 1
+            end
+            ____set_46(
+                ____state_stats_44,
+                ____stat_45,
                 math.min(
                     TETO_DEV,
-                    ____get_result_24 + clamp(
+                    ____get_result_43 + clamp(
                         nil,
-                        math.floor(if ____t_23(____TS__Number_result_22) then __O[45] else 1),
+                        math.floor(____t_result_42),
                         1,
                         1000000
                     )
@@ -272,7 +351,7 @@ local __O = {};
             damageMultiplier = 1 + s.forca * 0.11 + (state.level - 1) * 0.005,
             moveSpeed = 280 + s.agilidade * 8 + (state.level - 1),
             dashCooldown = math.max(0.48, 1.1 - s.agilidade * 0.055),
-            projectileTier = if state.level >= 7 then 2 else if state.level >= 3 then 1 else 0,
+            projectileTier = state.level >= 7 and 2 or (state.level >= 3 and 1 or 0),
             gasRegen = 16 + s.gas * 1.2,
             airGasRegen = 6 + s.gas * 0.35
         }

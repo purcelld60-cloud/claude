@@ -38,11 +38,17 @@ local __O = {};
         return x - math.floor(x)
     end
     local function iniciar(self, cena)
+        local ____t_result_2
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(cena)
-        __O[693] = ____TS__Number_result_0
+        __O[711] = ____TS__Number_result_0
+        if ____t_1(____TS__Number_result_0) then
+            ____t_result_2 = __O[711]
+        else
+            ____t_result_2 = 0
+        end
         ch = {
-            cena = if ____t_1(____TS__Number_result_0) then __O[693] else 0,
+            cena = ____t_result_2,
             t = 0,
             parts = __arrL({}, 0)
         }
@@ -69,7 +75,14 @@ local __O = {};
             p.t = __add(p.t, dt)
             p.x = p.x + p.vx * dt
             p.y = p.y + p.vy * dt
-            p.vy = p.vy + if __t(p.g) then p.g else 0 * dt
+            local ____p_4, ____vy_5 = p, "vy"
+            local ____t_result_3
+            if __t(p.g) then
+                ____t_result_3 = p.g
+            else
+                ____t_result_3 = 0
+            end
+            ____p_4[____vy_5] = ____p_4[____vy_5] + ____t_result_3 * dt
         end
         ch.parts = __call(
             ch.parts,
@@ -136,7 +149,19 @@ local __O = {};
                     }
                 )
             end
-            return {x = x, y = y1 - if k < 1 then math.abs(math.sin(u * 34)) * 3 else 0, rot = if __t(freio) then 0.08 else 0}
+            local ____x_8 = x
+            local ____y1_7 = y1
+            local ____temp_6
+            if k < 1 then
+                ____temp_6 = math.abs(math.sin(u * 34)) * 3
+            else
+                ____temp_6 = 0
+            end
+            return {
+                x = ____x_8,
+                y = ____y1_7 - ____temp_6,
+                rot = __t(freio) and 0.08 or 0
+            }
         end,
         ["1"] = function(____, u, x1, y1)
             local k = clamp(nil, u / 0.8, 0, 1)
@@ -155,7 +180,13 @@ local __O = {};
                     if __t(k >= 1 and __gt(u, 0.92)) then
                         return
                     end
-                    local a = if k >= 1 then 1 - (u - 0.8) / 0.2 else 1
+                    local ____temp_9
+                    if k >= 1 then
+                        ____temp_9 = 1 - (u - 0.8) / 0.2
+                    else
+                        ____temp_9 = 1
+                    end
+                    local a = ____temp_9
                     c.globalAlpha = clamp(nil, a, 0, 1)
                     local px = x1
                     local py = y - 120
@@ -207,11 +238,17 @@ local __O = {};
                 local f = __mod(r, 1)
                 sy = 1 - math.sin(f * math.pi) * 0.22
                 dy = 0
-                local ____t_4 = __t
-                local ____t_3 = __t
-                local ____temp_2 = f > 0.45 and f < 0.5
-                __O[694] = ____temp_2
-                if ____t_4(if ____t_3(____temp_2) then math.random() < 0.8 else __O[694]) then
+                local ____t_13 = __t
+                local ____t_result_12
+                local ____t_11 = __t
+                local ____temp_10 = f > 0.45 and f < 0.5
+                __O[712] = ____temp_10
+                if ____t_11(____temp_10) then
+                    ____t_result_12 = math.random() < 0.8
+                else
+                    ____t_result_12 = __O[712]
+                end
+                if ____t_13(____t_result_12) then
                     do
                         local i = 0
                         while i < 3 do
@@ -280,7 +317,13 @@ local __O = {};
                 x1,
                 ease(nil, k)
             )
-            local voo = if k < 1 then (1 - ease(nil, k)) * 60 else 0
+            local ____temp_14
+            if k < 1 then
+                ____temp_14 = (1 - ease(nil, k)) * 60
+            else
+                ____temp_14 = 0
+            end
+            local voo = ____temp_14
             if __t(k >= 1 and __lt(u, 0.74)) then
                 do
                     local i = 0
@@ -293,7 +336,7 @@ local __O = {};
                                 vx = (math.random() - 0.5) * 160,
                                 vy = -120 - math.random() * 160,
                                 g = 600,
-                                cor = if __t(__mod(i, 2)) then "#7ad0f0" else "#d8f2ff",
+                                cor = __t(__mod(i, 2)) and "#7ad0f0" or "#d8f2ff",
                                 vida = 0.9,
                                 tam = 3
                             }
@@ -302,7 +345,7 @@ local __O = {};
                     end
                 end
             end
-            return {x = x, y = y1 - voo, rot = if k < 1 then -0.08 else 0}
+            return {x = x, y = y1 - voo, rot = k < 1 and -0.08 or 0}
         end,
         ["5"] = function(____, u, x1, y1)
             local k = clamp(nil, u / 0.85, 0, 1)
@@ -337,7 +380,7 @@ local __O = {};
                                 vx = (math.random() - 0.5) * 100,
                                 vy = -60 - math.random() * 60,
                                 g = 400,
-                                cor = if __t(__mod(i, 2)) then "#c8543a" else "#a87a5a",
+                                cor = __t(__mod(i, 2)) and "#c8543a" or "#a87a5a",
                                 vida = 0.6,
                                 tam = 3
                             }
@@ -346,10 +389,28 @@ local __O = {};
                     end
                 end
             end
+            local ____temp_15
+            if k >= 1 then
+                ____temp_15 = x1
+            else
+                ____temp_15 = x
+            end
+            local ____temp_16
+            if k >= 1 then
+                ____temp_16 = y1
+            else
+                ____temp_16 = y
+            end
+            local ____temp_17
+            if k < 1 then
+                ____temp_17 = math.sin(f * math.pi) * 0.2
+            else
+                ____temp_17 = 0
+            end
             return {
-                x = if k >= 1 then x1 else x,
-                y = if k >= 1 then y1 else y,
-                rot = if k < 1 then math.sin(f * math.pi) * 0.2 else 0,
+                x = ____temp_15,
+                y = ____temp_16,
+                rot = ____temp_17,
                 poeira = k >= 1 and __lt(u, 0.9)
             }
         end,
@@ -400,8 +461,20 @@ local __O = {};
                 x1,
                 ease(nil, k)
             )
-            local bx = if k < 1 then x + 46 else x1 + 46 + (u - 0.7) / 0.3 * 260
-            local by = if k < 1 then y1 - 8 - math.abs(math.sin(u * 20)) * 6 else y1 - 8 - math.sin(clamp(nil, (u - 0.7) / 0.3, 0, 1) * math.pi) * 160
+            local ____temp_18
+            if k < 1 then
+                ____temp_18 = x + 46
+            else
+                ____temp_18 = x1 + 46 + (u - 0.7) / 0.3 * 260
+            end
+            local bx = ____temp_18
+            local ____temp_19
+            if k < 1 then
+                ____temp_19 = y1 - 8 - math.abs(math.sin(u * 20)) * 6
+            else
+                ____temp_19 = y1 - 8 - math.sin(clamp(nil, (u - 0.7) / 0.3, 0, 1) * math.pi) * 160
+            end
+            local by = ____temp_19
             if __t(k >= 1 and __lt(u, 0.74)) then
                 do
                     local i = 0
@@ -474,7 +547,7 @@ local __O = {};
                 x = x1,
                 y = y1,
                 alpha = a,
-                sx = if math.cos(gira * 3) >= 0 then 1 else -1,
+                sx = math.cos(gira * 3) >= 0 and 1 or -1,
                 antes = function(____, c)
                     if __gt(u, 0.8) then
                         return
@@ -508,9 +581,20 @@ local __O = {};
                             local k2 = 0
                             while k2 < 10 do
                                 local q = k2 / 9
-                                c:fillRect(
-                                    math.floor(cx + l * q * 12 * s + 0.5),
-                                    math.floor(cy - math.sin(q * math.pi) * 3 + q * q * 2 - if q > 0.8 then (q - 0.8) * 14 else 0 + 0.5),
+                                local ____c_23 = c
+                                local ____c_fillRect_24 = c.fillRect
+                                local ____math_floor_result_22 = math.floor(cx + l * q * 12 * s + 0.5)
+                                local ____temp_21 = cy - math.sin(q * math.pi) * 3 + q * q * 2
+                                local ____temp_20
+                                if q > 0.8 then
+                                    ____temp_20 = (q - 0.8) * 14
+                                else
+                                    ____temp_20 = 0
+                                end
+                                ____c_fillRect_24(
+                                    ____c_23,
+                                    ____math_floor_result_22,
+                                    math.floor(____temp_21 - ____temp_20 + 0.5),
                                     2,
                                     math.max(
                                         1,
@@ -531,7 +615,13 @@ local __O = {};
                 y = lerp(nil, y1 - 380, y1, (k / 0.45) ^ 2)
             else
                 local f = (k - 0.45) / 0.55
-                local b = if f < 0.55 then math.sin(f / 0.55 * math.pi) * 70 else math.sin((f - 0.55) / 0.45 * math.pi) * 22
+                local ____temp_25
+                if f < 0.55 then
+                    ____temp_25 = math.sin(f / 0.55 * math.pi) * 70
+                else
+                    ____temp_25 = math.sin((f - 0.55) / 0.45 * math.pi) * 22
+                end
+                local b = ____temp_25
                 y = y1 - b
             end
             if __t(k > 0.44 and k < 0.47) then
@@ -565,7 +655,7 @@ local __O = {};
                     end
                 end
             end
-            local sq = if __t(k > 0.44 and k < 0.52) then 0.2 else 0
+            local sq = __t(k > 0.44 and k < 0.52) and 0.2 or 0
             return {x = x1, y = y, sy = 1 - sq, sx = 1 + sq}
         end,
         ["10"] = function(____, u, x1, y1, t)
@@ -584,7 +674,7 @@ local __O = {};
                         y = y1 - 50,
                         vx = (math.random() - 0.5) * 20,
                         vy = -50,
-                        cor = if math.random() < 0.5 then "#e86a8a" else "#f29ab8",
+                        cor = math.random() < 0.5 and "#e86a8a" or "#f29ab8",
                         vida = 1.4,
                         tam = 6,
                         coracao = true
@@ -608,10 +698,10 @@ local __O = {};
                 x = x,
                 y = y1,
                 antes = function(____, c)
-                    local cor = if __t(__mod(
+                    local cor = __t(__mod(
                         math.floor(t * 6),
                         2
-                    )) then "#ff3a8a" else "#3af0ff"
+                    )) and "#ff3a8a" or "#3af0ff"
                     c.globalAlpha = 0.5
                     c.fillStyle = cor
                     c:fillRect(x - 44, y1 - 4, 88, 6)
@@ -623,7 +713,7 @@ local __O = {};
                             while i < 3 do
                                 local r = __mod((u - 0.65) * 3 + i / 3, 1)
                                 c.globalAlpha = (1 - r) * 0.6
-                                c.strokeStyle = if __t(__mod(i, 2)) then "#ff3a8a" else "#3af0ff"
+                                c.strokeStyle = __t(__mod(i, 2)) and "#ff3a8a" or "#3af0ff"
                                 c.lineWidth = 3
                                 c:beginPath()
                                 c:ellipse(
@@ -652,20 +742,38 @@ local __O = {};
         local u = clamp(nil, ch.t / DUR, 0, 1)
         local x1 = o.x
         local y1 = o.y
-        local ____t_6 = __t
-        local ____get_result_5 = __get(ANIM, ch.cena)
-        __O[695] = ____get_result_5
-        local fn = if ____t_6(____get_result_5) then __O[695] else __get(ANIM, 0)
-        local ____t_8 = __t
-        local ____fn_result_7 = fn(
+        local ____t_result_28
+        local ____t_27 = __t
+        local ____get_result_26 = __get(ANIM, ch.cena)
+        __O[713] = ____get_result_26
+        if ____t_27(____get_result_26) then
+            ____t_result_28 = __O[713]
+        else
+            ____t_result_28 = __get(ANIM, 0)
+        end
+        local fn = ____t_result_28
+        local ____t_result_32
+        local ____t_31 = __t
+        local ____t_result_29
+        if __t(o.time) then
+            ____t_result_29 = o.time
+        else
+            ____t_result_29 = 0
+        end
+        local ____fn_result_30 = fn(
             nil,
             u,
             x1,
             y1,
-            if __t(o.time) then o.time else 0
+            ____t_result_29
         )
-        __O[696] = ____fn_result_7
-        local a = if ____t_8(____fn_result_7) then __O[696] else {}
+        __O[714] = ____fn_result_30
+        if ____t_31(____fn_result_30) then
+            ____t_result_32 = __O[714]
+        else
+            ____t_result_32 = {}
+        end
+        local a = ____t_result_32
         ctx:save()
         for ____, p in __iterar((ch.parts)) do
             if __t(p.chao) then
@@ -682,9 +790,9 @@ local __O = {};
         ctx.globalAlpha = 1
         do
             pcall(function()
-                local ____opt_9 = a.antes
-                if ____opt_9 ~= nil then
-                    ____opt_9(a, ctx)
+                local ____opt_33 = a.antes
+                if ____opt_33 ~= nil then
+                    ____opt_33(a, ctx)
                 end
             end)
         end
@@ -712,22 +820,22 @@ local __O = {};
             end
         end
         ctx:save()
-        local ____ctx_12 = ctx
-        local ____a_alpha_11 = a.alpha
-        if ____a_alpha_11 == nil then
-            ____a_alpha_11 = 1
+        local ____ctx_36 = ctx
+        local ____a_alpha_35 = a.alpha
+        if ____a_alpha_35 == nil then
+            ____a_alpha_35 = 1
         end
-        ____ctx_12.globalAlpha = ____a_alpha_11
-        local ____a_x_13 = a.x
-        if ____a_x_13 == nil then
-            ____a_x_13 = x1
+        ____ctx_36.globalAlpha = ____a_alpha_35
+        local ____a_x_37 = a.x
+        if ____a_x_37 == nil then
+            ____a_x_37 = x1
         end
-        local px = ____a_x_13
-        local ____a_y_14 = a.y
-        if ____a_y_14 == nil then
-            ____a_y_14 = y1
+        local px = ____a_x_37
+        local ____a_y_38 = a.y
+        if ____a_y_38 == nil then
+            ____a_y_38 = y1
         end
-        local py = ____a_y_14
+        local py = ____a_y_38
         ctx:translate(
             math.floor(px + 0.5),
             math.floor(py - 14 + 0.5)
@@ -735,72 +843,86 @@ local __O = {};
         if __t(a.rot) then
             ctx:rotate(a.rot)
         end
-        local ____ctx_17 = ctx
-        local ____ctx_scale_18 = ctx.scale
-        local ____a_sx_15 = a.sx
-        if ____a_sx_15 == nil then
-            ____a_sx_15 = 1
+        local ____ctx_41 = ctx
+        local ____ctx_scale_42 = ctx.scale
+        local ____a_sx_39 = a.sx
+        if ____a_sx_39 == nil then
+            ____a_sx_39 = 1
         end
-        local ____a_sy_16 = a.sy
-        if ____a_sy_16 == nil then
-            ____a_sy_16 = 1
+        local ____a_sy_40 = a.sy
+        if ____a_sy_40 == nil then
+            ____a_sy_40 = 1
         end
-        ____ctx_scale_18(____ctx_17, ____a_sx_15, ____a_sy_16)
+        ____ctx_scale_42(____ctx_41, ____a_sx_39, ____a_sy_40)
         ctx:translate(
             -math.floor(px + 0.5),
             -math.floor(py - 14 + 0.5)
         )
         do
             pcall(function()
-                local ____this_20
-                ____this_20 = o
-                local ____opt_19 = ____this_20.pintar
-                if ____opt_19 ~= nil then
-                    ____opt_19(____this_20, ctx, px, py)
+                local ____this_44
+                ____this_44 = o
+                local ____opt_43 = ____this_44.pintar
+                if ____opt_43 ~= nil then
+                    ____opt_43(____this_44, ctx, px, py)
                 end
             end)
         end
         ctx:restore()
         do
             pcall(function()
-                local ____opt_21 = a.depois
-                if ____opt_21 ~= nil then
-                    ____opt_21(a, ctx)
+                local ____opt_45 = a.depois
+                if ____opt_45 ~= nil then
+                    ____opt_45(a, ctx)
                 end
             end)
         end
         for ____, p in __iterar((ch.parts)) do
-            if __t(p.chao) then
-                continue
-            end
-            local al = math.max(0, 1 - p.t / p.vida)
-            ctx.globalAlpha = al
-            ctx.fillStyle = p.cor
-            if __t(p.coracao) then
-                local s = 2
-                ctx:fillRect(p.x - 2 * s, p.y - s, 2 * s, 2 * s)
-                ctx:fillRect(p.x, p.y - s, 2 * s, 2 * s)
-                ctx:fillRect(p.x - s * 1.5, p.y, 3 * s, s * 1.5)
-                ctx:fillRect(p.x - s * 0.5, p.y + s, s, s)
-            elseif __t(p.bandeira) then
-                ctx:beginPath()
-                ctx:moveTo(p.x, p.y)
-                ctx:lineTo(p.x + 6, p.y)
-                ctx:lineTo(p.x + 3, p.y + 6)
-                __call(ctx, "fill")
-            else
-                local ____p_tam_26 = p.tam
-                local ____t_25 = __t
-                local ____t_24 = __t
-                local ____temp_23 = p.cor == "#e8dcc0" or p.cor == "#d8c098"
-                __O[697] = ____temp_23
-                local tam = ____p_tam_26 * if ____t_25(if ____t_24(____temp_23) then __O[697] else p.cor == "#e8e8e8") then 1 + p.t * 1.5 else 1
-                ctx:fillRect(
-                    math.floor(p.x - tam / 2 + 0.5),
-                    math.floor(p.y - tam / 2 + 0.5),
-                    math.floor(tam + 0.5),
-                    math.floor(tam + 0.5)
-                )
+            do
+                if __t(p.chao) then
+                    continue
+                end
+                local al = math.max(0, 1 - p.t / p.vida)
+                ctx.globalAlpha = al
+                ctx.fillStyle = p.cor
+                if __t(p.coracao) then
+                    local s = 2
+                    ctx:fillRect(p.x - 2 * s, p.y - s, 2 * s, 2 * s)
+                    ctx:fillRect(p.x, p.y - s, 2 * s, 2 * s)
+                    ctx:fillRect(p.x - s * 1.5, p.y, 3 * s, s * 1.5)
+                    ctx:fillRect(p.x - s * 0.5, p.y + s, s, s)
+                elseif __t(p.bandeira) then
+                    ctx:beginPath()
+                    ctx:moveTo(p.x, p.y)
+                    ctx:lineTo(p.x + 6, p.y)
+                    ctx:lineTo(p.x + 3, p.y + 6)
+                    __call(ctx, "fill")
+                else
+                    local ____p_tam_52 = p.tam
+                    local ____t_result_51
+                    local ____t_50 = __t
+                    local ____t_result_49
+                    local ____t_48 = __t
+                    local ____temp_47 = p.cor == "#e8dcc0" or p.cor == "#d8c098"
+                    __O[715] = ____temp_47
+                    if ____t_48(____temp_47) then
+                        ____t_result_49 = __O[715]
+                    else
+                        ____t_result_49 = p.cor == "#e8e8e8"
+                    end
+                    if ____t_50(____t_result_49) then
+                        ____t_result_51 = 1 + p.t * 1.5
+                    else
+                        ____t_result_51 = 1
+                    end
+                    local tam = ____p_tam_52 * ____t_result_51
+                    ctx:fillRect(
+                        math.floor(p.x - tam / 2 + 0.5),
+                        math.floor(p.y - tam / 2 + 0.5),
+                        math.floor(tam + 0.5),
+                        math.floor(tam + 0.5)
+                    )
+                end
             end
         end
         ctx:restore()

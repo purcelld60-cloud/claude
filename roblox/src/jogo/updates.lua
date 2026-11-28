@@ -9,7 +9,13 @@ local ____exports = {}
 local __O = {};
 (function(self)
     local ____ = "use strict"
-    local cur = if __t(window.DAROCA_APP_VERSION) then window.DAROCA_APP_VERSION else {}
+    local ____t_result_0
+    if __t(window.DAROCA_APP_VERSION) then
+        ____t_result_0 = window.DAROCA_APP_VERSION
+    else
+        ____t_result_0 = {}
+    end
+    local cur = ____t_result_0
     local LATER = "daroca-update-later"
     if __t(not __t(cur.updateUrl) or window.location.protocol == "file:") then
         return
@@ -20,7 +26,13 @@ local __O = {};
                 return true, nil
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                return true, if __t(get) then window.localStorage:getItem(k) else window.localStorage:setItem(k, v)
+                local ____t_result_1
+                if __t(get) then
+                    ____t_result_1 = window.localStorage:getItem(k)
+                else
+                    ____t_result_1 = window.localStorage:setItem(k, v)
+                end
+                return true, ____t_result_1
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -51,55 +63,88 @@ local __O = {};
         box.className = "app-update-notice"
         box:setAttribute("role", "dialog")
         box:setAttribute("aria-label", "Nova versão")
-        local url = if __t(type(info.url) == "string" and __re_test(
+        local ____t_result_2
+        if __t(type(info.url) == "string" and __re_test(
             __re("^(https:\\/\\/|\\/)", ""),
             info.url
-        )) then info.url else ""
+        )) then
+            ____t_result_2 = info.url
+        else
+            ____t_result_2 = ""
+        end
+        local url = ____t_result_2
+        local ____add_20 = __add
+        local ____add_19 = __add
+        local ____add_18 = __add
+        local ____add_17 = __add
+        local ____add_11 = __add
+        local ____add_10 = __add
         local ____add_7 = __add
         local ____add_6 = __add
-        local ____add_5 = __add
-        local ____add_4 = __add
-        local ____add_result_3 = __add(
-            __add(
-                __add(
-                    __add(
-                        __add("<span>ATUALIZAÇÃO DISPONÍVEL</span><button class=\"app-update-close\" type=\"button\" aria-label=\"Fechar\">×</button>", "<h2>Versão "),
-                        esc(nil, if __t(info.versionName) then info.versionName else info.versionCode)
-                    ),
-                    "</h2>"
-                ),
-                if __t(info.notes) then __add(
-                    __add(
-                        "<p>",
-                        esc(
-                            nil,
-                            __call(
-                                tostring(info.notes),
-                                "slice",
-                                0,
-                                400
-                            )
-                        )
-                    ),
-                    "</p>"
-                ) else ""
+        local ____add_result_5 = __add("<span>ATUALIZAÇÃO DISPONÍVEL</span><button class=\"app-update-close\" type=\"button\" aria-label=\"Fechar\">×</button>", "<h2>Versão ")
+        local ____esc_4 = esc
+        local ____t_result_3
+        if __t(info.versionName) then
+            ____t_result_3 = info.versionName
+        else
+            ____t_result_3 = info.versionCode
+        end
+        local ____add_7_result_9 = ____add_7(
+            ____add_6(
+                ____add_result_5,
+                ____esc_4(nil, ____t_result_3)
             ),
+            "</h2>"
+        )
+        local ____t_result_8
+        if __t(info.notes) then
+            ____t_result_8 = __add(
+                __add(
+                    "<p>",
+                    esc(
+                        nil,
+                        __call(
+                            tostring(info.notes),
+                            "slice",
+                            0,
+                            400
+                        )
+                    )
+                ),
+                "</p>"
+            )
+        else
+            ____t_result_8 = ""
+        end
+        local ____add_11_result_16 = ____add_11(
+            ____add_10(____add_7_result_9, ____t_result_8),
             "<small>Você está na versão "
         )
-        local ____esc_2 = esc
-        local ____t_1 = __t
-        local ____temp_0 = if __t(cur.versionName) then cur.versionName else cur.versionCode
-        __O[3182] = ____temp_0
-        box.innerHTML = ____add_7(
-            ____add_6(
-                ____add_5(
-                    ____add_4(
-                        ____add_result_3,
-                        ____esc_2(nil, if ____t_1(____temp_0) then __O[3182] else "?")
+        local ____esc_15 = esc
+        local ____t_result_14
+        local ____t_13 = __t
+        local ____t_result_12
+        if __t(cur.versionName) then
+            ____t_result_12 = cur.versionName
+        else
+            ____t_result_12 = cur.versionCode
+        end
+        __O[3213] = ____t_result_12
+        if ____t_13(____t_result_12) then
+            ____t_result_14 = __O[3213]
+        else
+            ____t_result_14 = "?"
+        end
+        box.innerHTML = ____add_20(
+            ____add_19(
+                ____add_18(
+                    ____add_17(
+                        ____add_11_result_16,
+                        ____esc_15(nil, ____t_result_14)
                     ),
                     ". Seu progresso fica salvo.</small>"
                 ),
-                if __t(url) then "<button class=\"app-update-download\" type=\"button\">BAIXAR</button>" else "<button class=\"app-update-download\" type=\"button\">RECARREGAR</button>"
+                __t(url) and "<button class=\"app-update-download\" type=\"button\">BAIXAR</button>" or "<button class=\"app-update-download\" type=\"button\">RECARREGAR</button>"
             ),
             "<button class=\"app-update-later\" type=\"button\">DEPOIS</button>"
         )
@@ -126,23 +171,53 @@ local __O = {};
         window.document.body:appendChild(box)
     end
     local function check(self)
-        local ____self_14 = window:fetch(cur.updateUrl, {cache = "no-store"})
-        local ____self_8 = ____self_14["then"](
-            ____self_14,
+        local ____self_34 = window:fetch(cur.updateUrl, {cache = "no-store"})
+        local ____self_25 = ____self_34["then"](
+            ____self_34,
             function(____, r)
-                local ____t_13 = __t
-                local ____re_test_12 = __re_test
-                local ____re_result_11 = __re("json", "")
-                local ____t_10 = __t
-                local ____call_result_9 = __call(r.headers, "get", "content-type")
-                __O[3183] = ____call_result_9
-                return if ____t_13(if __t(r.ok) then ____re_test_12(____re_result_11, if ____t_10(____call_result_9) then __O[3183] else "") else r.ok) then r:json() else nil
+                local ____t_result_33
+                local ____t_32 = __t
+                local ____t_result_31
+                if __t(r.ok) then
+                    local ____re_test_30 = __re_test
+                    local ____re_result_29 = __re("json", "")
+                    local ____t_result_28
+                    local ____t_27 = __t
+                    local ____call_result_26 = __call(r.headers, "get", "content-type")
+                    __O[3214] = ____call_result_26
+                    if ____t_27(____call_result_26) then
+                        ____t_result_28 = __O[3214]
+                    else
+                        ____t_result_28 = ""
+                    end
+                    ____t_result_31 = ____re_test_30(____re_result_29, ____t_result_28)
+                else
+                    ____t_result_31 = r.ok
+                end
+                if ____t_32(____t_result_31) then
+                    ____t_result_33 = r:json()
+                else
+                    ____t_result_33 = nil
+                end
+                return ____t_result_33
             end
         )
-        ____self_8["then"](
-            ____self_8,
+        ____self_25["then"](
+            ____self_25,
             function(____, info)
-                if __t(not __t(info) or not (__TS__Number(info.versionCode) > __TS__Number(if __t(cur.versionCode) then cur.versionCode else 0))) then
+                local ____t_24 = __t
+                local ____temp_23 = not __t(info)
+                if not ____temp_23 then
+                    local ____TS__Number_result_22 = __TS__Number(info.versionCode)
+                    local ____t_result_21
+                    if __t(cur.versionCode) then
+                        ____t_result_21 = cur.versionCode
+                    else
+                        ____t_result_21 = 0
+                    end
+                    ____temp_23 = not (____TS__Number_result_22 > __TS__Number(____t_result_21))
+                end
+                if ____t_24(____temp_23) then
                     return
                 end
                 if store(nil, true, LATER) == tostring(info.versionCode) then

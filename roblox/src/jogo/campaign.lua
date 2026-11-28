@@ -235,13 +235,25 @@ local __O = {};
             ____opt_result_9 = ____opt_7(____opt_7, n)
         end
         if ____t_10(____opt_result_9) then
-            return if __t(has(nil, q, "lucas")) then ok(nil) else no(nil, "O carro está quebrado! Colete as três peças na roça e entregue a Lucas.")
+            local ____t_result_11
+            if __t(has(nil, q, "lucas")) then
+                ____t_result_11 = ok(nil)
+            else
+                ____t_result_11 = no(nil, "O carro está quebrado! Colete as três peças na roça e entregue a Lucas.")
+            end
+            return ____t_result_11
         end
+        local ____t_15 = __t
+        local ____t_result_14
         local ____t_13 = __t
-        local ____t_12 = __t
-        local ____temp_11 = not __isInteger(n) or n < 0
-        __O[33] = ____temp_11
-        if ____t_13(if ____t_12(____temp_11) then __O[33] else n >= __len(sceneNames)) then
+        local ____temp_12 = not __isInteger(n) or n < 0
+        __O[33] = ____temp_12
+        if ____t_13(____temp_12) then
+            ____t_result_14 = __O[33]
+        else
+            ____t_result_14 = n >= __len(sceneNames)
+        end
+        if ____t_15(____t_result_14) then
             return no(nil, "Essa rota ainda não existe.")
         end
         if n == 0 then
@@ -278,10 +290,22 @@ local __O = {};
             return ok(nil)
         end
         if n == 6 then
-            return if __t(has(nil, q, "marco")) then ok(nil) else no(nil, "Enfrente Marco no colégio para descobrir a entrada do Caderno do Caos.")
+            local ____t_result_16
+            if __t(has(nil, q, "marco")) then
+                ____t_result_16 = ok(nil)
+            else
+                ____t_result_16 = no(nil, "Enfrente Marco no colégio para descobrir a entrada do Caderno do Caos.")
+            end
+            return ____t_result_16
         end
         if n == 2 then
-            return if __t(has(nil, q, "menezes")) then ok(nil) else no(nil, "Resolva a provocação de Menezes no fim do colégio antes do treino com Caleb.")
+            local ____t_result_17
+            if __t(has(nil, q, "menezes")) then
+                ____t_result_17 = ok(nil)
+            else
+                ____t_result_17 = no(nil, "Resolva a provocação de Menezes no fim do colégio antes do treino com Caleb.")
+            end
+            return ____t_result_17
         end
         if n == 3 then
             if not __t(has(nil, q, "giant")) then
@@ -305,10 +329,22 @@ local __O = {};
             q = {}
         end
         if ____type == "ollyan" then
-            return if __t(has(nil, q, "lucas")) then ok(nil) else no(nil, "Conserte o carro a gás com Lucas antes de perseguir Ollyan no céu.")
+            local ____t_result_18
+            if __t(has(nil, q, "lucas")) then
+                ____t_result_18 = ok(nil)
+            else
+                ____t_result_18 = no(nil, "Conserte o carro a gás com Lucas antes de perseguir Ollyan no céu.")
+            end
+            return ____t_result_18
         end
         if ____type == "arthur" then
-            return if __t(has(nil, q, "patioAccepted")) then ok(nil) else no(nil, "Converse com Ravile ou Aica na entrada do Pátio da escola para entender a confusão antes de enfrentar Arthur.")
+            local ____t_result_19
+            if __t(has(nil, q, "patioAccepted")) then
+                ____t_result_19 = ok(nil)
+            else
+                ____t_result_19 = no(nil, "Converse com Ravile ou Aica na entrada do Pátio da escola para entender a confusão antes de enfrentar Arthur.")
+            end
+            return ____t_result_19
         end
         if ____type == "dede" then
             if not __t(has(nil, q, "mota")) then
@@ -320,7 +356,13 @@ local __O = {};
             return ok(nil)
         end
         if ____type == "nicolas" then
-            return if __t(has(nil, q, "mota")) then ok(nil) else no(nil, "Aprenda o dash com Mota no campo de futebol antes de desafiar a aura suprema de Nicolas na Praça Camacan.")
+            local ____t_result_20
+            if __t(has(nil, q, "mota")) then
+                ____t_result_20 = ok(nil)
+            else
+                ____t_result_20 = no(nil, "Aprenda o dash com Mota no campo de futebol antes de desafiar a aura suprema de Nicolas na Praça Camacan.")
+            end
+            return ____t_result_20
         end
         if ____type == "freddy" then
             if not __t(has(nil, q, "mota")) then
@@ -353,7 +395,13 @@ local __O = {};
             return ok(nil)
         end
         if ____type == "giant" then
-            return if __t(has(nil, q, "marco")) then ok(nil) else no(nil, "Derrote Marco para entrar no desafio do monstro gigante.")
+            local ____t_result_21
+            if __t(has(nil, q, "marco")) then
+                ____t_result_21 = ok(nil)
+            else
+                ____t_result_21 = no(nil, "Derrote Marco para entrar no desafio do monstro gigante.")
+            end
+            return ____t_result_21
         end
         if ____type == "menezes" then
             if not __t(has(nil, q, "marco")) then
@@ -376,10 +424,22 @@ local __O = {};
         if fallback == nil then
             fallback = 0
         end
-        return if __isArray(value) then __TS__New(Set, value).size else if type(value) == "number" then math.max(
-            0,
-            math.floor(value)
-        ) else fallback
+        local ____isArray_result_23
+        if __isArray(value) then
+            ____isArray_result_23 = __TS__New(Set, value).size
+        else
+            local ____temp_22
+            if type(value) == "number" then
+                ____temp_22 = math.max(
+                    0,
+                    math.floor(value)
+                )
+            else
+                ____temp_22 = fallback
+            end
+            ____isArray_result_23 = ____temp_22
+        end
+        return ____isArray_result_23
     end
     local function currentQuest(self, q, extra)
         if q == nil then
@@ -397,19 +457,37 @@ local __O = {};
                     count(nil, extra.carParts)
                 )
             )
-            return if not __t(q.carMissionAccepted) then __arrL({"O carro não pega", "Fale com Lucas na roça. O carro a gás do seu pai precisa de três peças para voltar à aventura."}, 2) else if parts < 3 then __arrL(
-                {
-                    "Peças pela roça",
-                    tostring(parts) .. "/3 peças encontradas. Atravesse os parkours do pomar, da trilha alta e do riacho. Depois volte a Lucas."
-                },
-                2
-            ) else __arrL({"Chave na mão, gás no motor", "As três peças estão com você! Volte a Lucas na roça e conserte o carro a gás."}, 2)
+            local ____temp_25
+            if not __t(q.carMissionAccepted) then
+                ____temp_25 = __arrL({"O carro não pega", "Fale com Lucas na roça. O carro a gás do seu pai precisa de três peças para voltar à aventura."}, 2)
+            else
+                local ____temp_24
+                if parts < 3 then
+                    ____temp_24 = __arrL(
+                        {
+                            "Peças pela roça",
+                            tostring(parts) .. "/3 peças encontradas. Atravesse os parkours do pomar, da trilha alta e do riacho. Depois volte a Lucas."
+                        },
+                        2
+                    )
+                else
+                    ____temp_24 = __arrL({"Chave na mão, gás no motor", "As três peças estão com você! Volte a Lucas na roça e conserte o carro a gás."}, 2)
+                end
+                ____temp_25 = ____temp_24
+            end
+            return ____temp_25
         end
         if not __t(q.mota) then
             return __arrL({"Mota, o craque da escola", "Entre no carro e vá ao Campo do Mota. Vença o treino de futebol para ganhar XP e liberar o dash."}, 2)
         end
         if __t(not __t(q.amandaDating) and not __t(q.nikolas)) then
-            return __arrL({"Uma mesa para dois", if __t(q.amandaInvited) then "Amanda guardou a mesa. Volte à entrada da Praça Camacan para retomar o convite." else "Amanda espera perto da entrada da Praça Camacan. Vá de carro e fale com ela para jantar."}, 2)
+            return __arrL(
+                {
+                    "Uma mesa para dois",
+                    __t(q.amandaInvited) and "Amanda guardou a mesa. Volte à entrada da Praça Camacan para retomar o convite." or "Amanda espera perto da entrada da Praça Camacan. Vá de carro e fale com ela para jantar."
+                },
+                2
+            )
         end
         if not __t(q.almiro) then
             local books = math.min(
@@ -423,13 +501,19 @@ local __O = {};
             if books >= 3 then
                 return __arrL({"Cadernos recuperados", "Volte à primeira sala do colégio e entregue os três cadernos ao professor Almiro."}, 2)
             end
-            return if not __t(q.almiroAccepted) then __arrL({"Uma missão com Almiro", "No Colégio Adventista, entre na primeira sala com E e converse com Almiro."}, 2) else __arrL(
-                {
-                    "Operação caderno",
-                    tostring(books) .. "/3 cadernos recuperados. Explore as plataformas e corredores antes de Marco; devolva tudo na sala de Almiro."
-                },
-                2
-            )
+            local ____temp_26
+            if not __t(q.almiroAccepted) then
+                ____temp_26 = __arrL({"Uma missão com Almiro", "No Colégio Adventista, entre na primeira sala com E e converse com Almiro."}, 2)
+            else
+                ____temp_26 = __arrL(
+                    {
+                        "Operação caderno",
+                        tostring(books) .. "/3 cadernos recuperados. Explore as plataformas e corredores antes de Marco; devolva tudo na sala de Almiro."
+                    },
+                    2
+                )
+            end
+            return ____temp_26
         end
         if not __t(q.miqueias) then
             return __arrL({"ALLRIGHT! Hora do English", "Entre na segunda sala do colégio e faça o desafio de Miqueias. Ele vai liberar seu poder elemental."}, 2)
@@ -450,7 +534,13 @@ local __O = {};
             return __arrL({"A provocação tem endereço", "Volte ao final do colégio e enfrente Menezes. Pule as ondas, desvie dos ecos e encontre as brechas nas paredes de palavras."}, 2)
         end
         if not __t(q.trained) then
-            return __arrL({"Caleb vai cobrar esse treino", if __t(q.training) then "Retome o treino na academia: acerte o marcador na faixa verde em três rodadas para ganhar seu novo shape." else "Vá à academia e converse com Caleb. O treino de reflexo vai deixar Da Roça bombado para o confronto final."}, 2)
+            return __arrL(
+                {
+                    "Caleb vai cobrar esse treino",
+                    __t(q.training) and "Retome o treino na academia: acerte o marcador na faixa verde em três rodadas para ganhar seu novo shape." or "Vá à academia e converse com Caleb. O treino de reflexo vai deixar Da Roça bombado para o confronto final."
+                },
+                2
+            )
         end
         if not __t(q.nikolas) then
             return __arrL({"O último pedaço do bolo", "A quadra está liberada. Entre no carro, enfrente Nikolas e use o que aprendeu: dash, combos, bolinhas elementais e OHHHH REEEEIS!"}, 2)
@@ -461,10 +551,16 @@ local __O = {};
         return __arrL({"O bolo e a resenha voltaram", "O bolo voltou e o açaí de quarta-feira está garantido. Explore os doze lugares e visite a Casa de Rayssa; depois da festa, uma ligação muda a resenha."}, 2)
     end
     local function chapterDone(self, c, q)
-        local ____t_15 = __t
-        local ____temp_14 = not not __t(__get(q, c.flag))
-        __O[34] = ____temp_14
-        return if ____t_15(____temp_14) then __O[34] else c.flag == "freddy" and not not __t(q.reeis)
+        local ____t_result_29
+        local ____t_28 = __t
+        local ____temp_27 = not not __t(__get(q, c.flag))
+        __O[34] = ____temp_27
+        if ____t_28(____temp_27) then
+            ____t_result_29 = __O[34]
+        else
+            ____t_result_29 = c.flag == "freddy" and not not __t(q.reeis)
+        end
+        return ____t_result_29
     end
     local function chapterState(self, q)
         if q == nil then
@@ -474,15 +570,21 @@ local __O = {};
             chapters,
             "map",
             function(____, c, index)
-                local ____assign_22 = __assign
-                local ____temp_20 = {}
-                local ____c_21 = c
-                local ____temp_18 = index + 1
-                local ____chapterDone_result_19 = chapterDone(nil, c, q)
-                local ____t_17 = __t
-                local ____temp_16 = c.flag == "amandaDating" and not not __t(q.nikolas)
-                __O[35] = ____temp_16
-                return ____assign_22(____temp_20, ____c_21, {index = ____temp_18, complete = ____chapterDone_result_19, epilogue = if ____t_17(____temp_16) then not __t(q.amandaDating) else __O[35]})
+                local ____assign_37 = __assign
+                local ____temp_35 = {}
+                local ____c_36 = c
+                local ____temp_33 = index + 1
+                local ____chapterDone_result_34 = chapterDone(nil, c, q)
+                local ____t_result_32
+                local ____t_31 = __t
+                local ____temp_30 = c.flag == "amandaDating" and not not __t(q.nikolas)
+                __O[35] = ____temp_30
+                if ____t_31(____temp_30) then
+                    ____t_result_32 = not __t(q.amandaDating)
+                else
+                    ____t_result_32 = __O[35]
+                end
+                return ____assign_37(____temp_35, ____c_36, {index = ____temp_33, complete = ____chapterDone_result_34, epilogue = ____t_result_32})
             end
         )
     end
@@ -494,21 +596,38 @@ local __O = {};
             sideQuests,
             "map",
             function(____, c)
-                local ____assign_29 = __assign
-                local ____array_28 = __TS__SparseArrayNew(
+                local ____assign_46 = __assign
+                local ____array_45 = __TS__SparseArrayNew(
                     {},
                     c,
                     {complete = not not __t(__get(q, c.flag))}
                 )
-                local ____t_27 = __t
-                local ____t_26 = __t
-                local ____t_24 = __t
-                local ____temp_23 = c.flag == "arthur"
-                __O[36] = ____temp_23
-                local ____temp_25 = if ____t_24(____temp_23) then q.patioAccepted else __O[36]
-                __O[37] = ____temp_25
-                __TS__SparseArrayPush(____array_28, if ____t_27(if ____t_26(____temp_25) then not __t(q.arthur) else __O[37]) then {description = "Ravile e Aica pediram ajuda. Encontre Arthur no fim do pátio e encerre a confusão sem puxar o cabelo de ninguém."} else {})
-                return ____assign_29(__TS__SparseArraySpread(____array_28))
+                local ____t_result_44
+                local ____t_43 = __t
+                local ____t_result_42
+                local ____t_41 = __t
+                local ____t_result_40
+                local ____t_39 = __t
+                local ____temp_38 = c.flag == "arthur"
+                __O[36] = ____temp_38
+                if ____t_39(____temp_38) then
+                    ____t_result_40 = q.patioAccepted
+                else
+                    ____t_result_40 = __O[36]
+                end
+                __O[37] = ____t_result_40
+                if ____t_41(____t_result_40) then
+                    ____t_result_42 = not __t(q.arthur)
+                else
+                    ____t_result_42 = __O[37]
+                end
+                if ____t_43(____t_result_42) then
+                    ____t_result_44 = {description = "Ravile e Aica pediram ajuda. Encontre Arthur no fim do pátio e encerre a confusão sem puxar o cabelo de ninguém."}
+                else
+                    ____t_result_44 = {}
+                end
+                __TS__SparseArrayPush(____array_45, ____t_result_44)
+                return ____assign_46(__TS__SparseArraySpread(____array_45))
             end
         )
         for ____, ____value in __iterar((__arrL(
@@ -522,30 +641,30 @@ local __O = {};
             local scene = ____value[2]
             local title = ____value[3]
             local description = ____value[4]
-            local ____call_40 = __call
-            local ____add_result_36 = __add("vida-", id)
-            local ____scene_37 = scene
-            local ____title_38 = title
-            local ____description_39 = description
-            local ____t_35 = __t
-            local ____getq_34 = __getq
-            local ____opt_32 = q.worldLife
-            if ____opt_32 ~= nil then
-                ____opt_32 = ____opt_32.quests
+            local ____call_57 = __call
+            local ____add_result_53 = __add("vida-", id)
+            local ____scene_54 = scene
+            local ____title_55 = title
+            local ____description_56 = description
+            local ____t_52 = __t
+            local ____getq_51 = __getq
+            local ____opt_49 = q.worldLife
+            if ____opt_49 ~= nil then
+                ____opt_49 = ____opt_49.quests
             end
-            local ____opt_30 = ____getq_34(____opt_32, id)
-            if ____opt_30 ~= nil then
-                ____opt_30 = ____opt_30.done
+            local ____opt_47 = ____getq_51(____opt_49, id)
+            if ____opt_47 ~= nil then
+                ____opt_47 = ____opt_47.done
             end
-            ____call_40(
+            ____call_57(
                 rows,
                 "push",
                 {
-                    id = ____add_result_36,
-                    scene = ____scene_37,
-                    title = ____title_38,
-                    description = ____description_39,
-                    complete = not not ____t_35(____opt_30)
+                    id = ____add_result_53,
+                    scene = ____scene_54,
+                    title = ____title_55,
+                    description = ____description_56,
+                    complete = not not ____t_52(____opt_47)
                 }
             )
         end
@@ -563,25 +682,25 @@ local __O = {};
             local id = ____value[1]
             local scene = ____value[2]
             local title = ____value[3]
-            local ____call_48 = __call
-            local ____add_result_45 = __add("vida-", id)
-            local ____scene_46 = scene
-            local ____title_47 = title
-            local ____t_44 = __t
-            local ____getq_43 = __getq
-            local ____opt_41 = q.worldLife
-            if ____opt_41 ~= nil then
-                ____opt_41 = ____opt_41.completed
+            local ____call_65 = __call
+            local ____add_result_62 = __add("vida-", id)
+            local ____scene_63 = scene
+            local ____title_64 = title
+            local ____t_61 = __t
+            local ____getq_60 = __getq
+            local ____opt_58 = q.worldLife
+            if ____opt_58 ~= nil then
+                ____opt_58 = ____opt_58.completed
             end
-            ____call_48(
+            ____call_65(
                 rows,
                 "push",
                 {
-                    id = ____add_result_45,
-                    scene = ____scene_46,
-                    title = ____title_47,
+                    id = ____add_result_62,
+                    scene = ____scene_63,
+                    title = ____title_64,
                     description = "Encontre o objeto com este nome e complete o desafio. A primeira vitória dá XP e materiais; depois, pratique para melhorar seu recorde.",
-                    complete = not not ____t_44(____getq_43(____opt_41, id))
+                    complete = not not ____t_61(____getq_60(____opt_58, id))
                 }
             )
         end
@@ -645,7 +764,14 @@ local __O = {};
         "version,sceneNames,chapters,sideQuests,npcEntries,rewards,canTravel,bossRequirement,currentQuest,chapterState,sideQuestState,completion,repairParts,notebookIds"
     )
     local function freeze(self, o)
-        if __t(if __t(o) then type(o) == "table" else o) then
+        local ____t_67 = __t
+        local ____t_result_66
+        if __t(o) then
+            ____t_result_66 = type(o) == "table"
+        else
+            ____t_result_66 = o
+        end
+        if ____t_67(____t_result_66) then
             __call(
                 __values(o),
                 "forEach",

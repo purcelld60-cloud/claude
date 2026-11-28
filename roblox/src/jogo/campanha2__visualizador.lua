@@ -33,11 +33,17 @@ local __O = {};
                             __call(keys, "delete", "jump")
                         end
                     end
-                    local ____t_21 = __t
-                    local ____t_20 = __t
-                    local ____temp_19 = id == "interact"
-                    __O[642] = ____temp_19
-                    if ____t_21(if ____t_20(____temp_19) then down else __O[642]) then
+                    local ____t_24 = __t
+                    local ____t_result_23
+                    local ____t_22 = __t
+                    local ____temp_21 = id == "interact"
+                    __O[660] = ____temp_21
+                    if ____t_22(____temp_21) then
+                        ____t_result_23 = down
+                    else
+                        ____t_result_23 = __O[660]
+                    end
+                    if ____t_24(____t_result_23) then
                         usar(nil)
                     end
                 end
@@ -84,18 +90,25 @@ local __O = {};
         box:remove()
         do
             pcall(function()
-                local ____opt_24 = window.DayTime
-                if ____opt_24 ~= nil then
-                    ____opt_24 = ____opt_24.force
+                local ____opt_27 = window.DayTime
+                if ____opt_27 ~= nil then
+                    ____opt_27 = ____opt_27.force
                 end
-                if ____opt_24 ~= nil then
-                    ____opt_24(____opt_24, nil)
+                if ____opt_27 ~= nil then
+                    ____opt_27(____opt_27, nil)
                 end
             end)
         end
     end
     function jump(self)
-        if __t(if __t(P.ground) then not __t(viagem) else P.ground) then
+        local ____t_30 = __t
+        local ____t_result_29
+        if __t(P.ground) then
+            ____t_result_29 = not __t(viagem)
+        else
+            ____t_result_29 = P.ground
+        end
+        if ____t_30(____t_result_29) then
             P.vy = -620
             P.ground = false
         end
@@ -106,28 +119,35 @@ local __O = {};
         end
     end
     function usar(self)
-        if __t(if __t(viagem) then viagem else not __t(perto)) then
+        local ____t_82 = __t
+        local ____t_result_81
+        if __t(viagem) then
+            ____t_result_81 = viagem
+        else
+            ____t_result_81 = not __t(perto)
+        end
+        if ____t_82(____t_result_81) then
             return
         end
         local p = perto
         if p.tipo == "extra" then
             __call(keys, "clear")
             if p.id == "loja" then
-                local ____opt_76 = window.CampanhaLoja
-                if ____opt_76 ~= nil then
-                    ____opt_76 = ____opt_76.abrir
+                local ____opt_85 = window.CampanhaLoja
+                if ____opt_85 ~= nil then
+                    ____opt_85 = ____opt_85.abrir
                 end
-                if ____opt_76 ~= nil then
-                    ____opt_76(____opt_76, {teste = true})
+                if ____opt_85 ~= nil then
+                    ____opt_85(____opt_85, {teste = true})
                 end
             else
-                local ____opt_80 = window.CampanhaTaxi
-                if ____opt_80 ~= nil then
-                    ____opt_80 = ____opt_80.abrir
+                local ____opt_89 = window.CampanhaTaxi
+                if ____opt_89 ~= nil then
+                    ____opt_89 = ____opt_89.abrir
                 end
-                if ____opt_80 ~= nil then
-                    ____opt_80(
-                        ____opt_80,
+                if ____opt_89 ~= nil then
+                    ____opt_89(
+                        ____opt_89,
                         __get(L, idx).id,
                         function(____, cena, x)
                             viagem = nil
@@ -142,45 +162,45 @@ local __O = {};
         end
         if p.tipo == "poderes" then
             __call(keys, "clear")
-            local ____opt_84 = window.CampanhaPoderes
-            if ____opt_84 ~= nil then
-                ____opt_84 = ____opt_84.abrirMural
+            local ____opt_93 = window.CampanhaPoderes
+            if ____opt_93 ~= nil then
+                ____opt_93 = ____opt_93.abrirMural
             end
-            if ____opt_84 ~= nil then
-                ____opt_84(____opt_84, {teste = true})
+            if ____opt_93 ~= nil then
+                ____opt_93(____opt_93, {teste = true})
             end
             return
         end
         if p.tipo == "conversa" then
             __call(keys, "clear")
-            local ____opt_88 = window.CampanhaMoradores
-            if ____opt_88 ~= nil then
-                ____opt_88 = ____opt_88.conversar
+            local ____opt_97 = window.CampanhaMoradores
+            if ____opt_97 ~= nil then
+                ____opt_97 = ____opt_97.conversar
             end
-            if ____opt_88 ~= nil then
-                ____opt_88(____opt_88, p.id)
+            if ____opt_97 ~= nil then
+                ____opt_97(____opt_97, p.id)
             end
             return
         end
         if p.tipo == "armario" then
-            local ____t_92 = __t
-            local ____opt_90 = window.DarocaLook
-            if ____opt_90 ~= nil then
-                ____opt_90 = ____opt_90.open
+            local ____t_101 = __t
+            local ____opt_99 = window.DarocaLook
+            if ____opt_99 ~= nil then
+                ____opt_99 = ____opt_99.open
             end
-            if ____t_92(____opt_90) then
+            if ____t_101(____opt_99) then
                 __call(keys, "clear")
                 window.DarocaLook:open({title = "ARMÁRIO DO QUARTO 4", line = "Escolha a roupa do Da Roça para hoje."})
             end
             return
         end
         if p.tipo == "pc" then
-            local ____t_95 = __t
-            local ____opt_93 = window.Fliperama
-            if ____opt_93 ~= nil then
-                ____opt_93 = ____opt_93.open
+            local ____t_104 = __t
+            local ____opt_102 = window.Fliperama
+            if ____opt_102 ~= nil then
+                ____opt_102 = ____opt_102.open
             end
-            if ____t_95(____opt_93) then
+            if ____t_104(____opt_102) then
                 __call(keys, "clear")
                 window.Fliperama:open(nil, {from = "quarto"})
             end
@@ -203,14 +223,20 @@ local __O = {};
         viagem = {tipo = "porta", t = 0, para = p.para}
     end
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __re_test(
         __re("[?&]cenarios2\\b", ""),
         window.location.search
     ) or not __t(window.CampanhaCenarios)
-    __O[640] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[640] else not __t(window.Art)) then
+    __O[658] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[658]
+    else
+        ____t_result_2 = not __t(window.Art)
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     L = window.CampanhaCenarios.lista
@@ -245,17 +271,23 @@ local __O = {};
     fade = 0
     perto = nil
     local function portais(____, id)
-        local ____t_8 = __t
-        local ____opt_5 = window.CampanhaAmbientes
-        if ____opt_5 ~= nil then
-            ____opt_5 = ____opt_5.portais
+        local ____t_result_10
+        local ____t_9 = __t
+        local ____opt_6 = window.CampanhaAmbientes
+        if ____opt_6 ~= nil then
+            ____opt_6 = ____opt_6.portais
         end
-        local ____opt_result_7
-        if ____opt_5 ~= nil then
-            ____opt_result_7 = ____opt_5(____opt_5, id)
+        local ____opt_result_8
+        if ____opt_6 ~= nil then
+            ____opt_result_8 = ____opt_6(____opt_6, id)
         end
-        __O[641] = ____opt_result_7
-        return if ____t_8(____opt_result_7) then __O[641] else __arrL({}, 0)
+        __O[659] = ____opt_result_8
+        if ____t_9(____opt_result_8) then
+            ____t_result_10 = __O[659]
+        else
+            ____t_result_10 = __arrL({}, 0)
+        end
+        return ____t_result_10
     end
     box = window.document:createElement("div")
     box.style.cssText = "position:fixed;inset:0;z-index:100000;background:#0b0f14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font:12px Pixel,monospace;color:#f2efe6;touch-action:none"
@@ -344,30 +376,30 @@ local __O = {};
             nil,
             "MURAL",
             function()
-                local ____opt_11 = window.CampanhaPoderes
-                if ____opt_11 ~= nil then
-                    ____opt_11 = ____opt_11.abrirMural
+                local ____opt_13 = window.CampanhaPoderes
+                if ____opt_13 ~= nil then
+                    ____opt_13 = ____opt_13.abrirMural
                 end
-                local ____opt_result_13
-                if ____opt_11 ~= nil then
-                    ____opt_result_13 = ____opt_11(____opt_11, {teste = true})
+                local ____opt_result_15
+                if ____opt_13 ~= nil then
+                    ____opt_result_15 = ____opt_13(____opt_13, {teste = true})
                 end
-                return ____opt_result_13
+                return ____opt_result_15
             end
         ),
         btn(
             nil,
             "CUTSCENES",
             function()
-                local ____opt_16 = window.CampanhaCutscenes
-                if ____opt_16 ~= nil then
-                    ____opt_16 = ____opt_16.galeria
+                local ____opt_18 = window.CampanhaCutscenes
+                if ____opt_18 ~= nil then
+                    ____opt_18 = ____opt_18.galeria
                 end
-                local ____opt_result_18
-                if ____opt_16 ~= nil then
-                    ____opt_result_18 = ____opt_16(____opt_16)
+                local ____opt_result_20
+                if ____opt_18 ~= nil then
+                    ____opt_result_20 = ____opt_18(____opt_18)
                 end
-                return ____opt_result_18
+                return ____opt_result_20
             end
         ),
         btn(nil, "FECHAR", close)
@@ -381,94 +413,132 @@ local __O = {};
         )
     ) end
     local function cobre()
-        local ____t_65 = __t
-        local ____t_59 = __t
-        local ____t_52 = __t
-        local ____t_45 = __t
-        local ____t_38 = __t
-        local ____t_31 = __t
-        local ____opt_28 = window.Fliperama
-        if ____opt_28 ~= nil then
-            ____opt_28 = ____opt_28.isOpen
+        local ____t_71 = __t
+        local ____t_result_70
+        local ____t_64 = __t
+        local ____t_result_63
+        local ____t_57 = __t
+        local ____t_result_56
+        local ____t_50 = __t
+        local ____t_result_49
+        local ____t_43 = __t
+        local ____t_result_42
+        local ____t_36 = __t
+        local ____opt_33 = window.Fliperama
+        if ____opt_33 ~= nil then
+            ____opt_33 = ____opt_33.isOpen
         end
-        local ____opt_result_30
-        if ____opt_28 ~= nil then
-            ____opt_result_30 = ____opt_28(____opt_28)
+        local ____opt_result_35
+        if ____opt_33 ~= nil then
+            ____opt_result_35 = ____opt_33(____opt_33)
         end
-        __O[643] = ____opt_result_30
-        local ____opt_34 = window.DarocaLook
-        if ____opt_34 ~= nil then
-            ____opt_34 = ____opt_34.isOpen
+        __O[661] = ____opt_result_35
+        if ____t_36(____opt_result_35) then
+            ____t_result_42 = __O[661]
+        else
+            local ____opt_39 = window.DarocaLook
+            if ____opt_39 ~= nil then
+                ____opt_39 = ____opt_39.isOpen
+            end
+            local ____opt_result_41
+            if ____opt_39 ~= nil then
+                ____opt_result_41 = ____opt_39(____opt_39)
+            end
+            ____t_result_42 = ____opt_result_41
         end
-        local ____opt_result_36
-        if ____opt_34 ~= nil then
-            ____opt_result_36 = ____opt_34(____opt_34)
+        __O[662] = ____t_result_42
+        if ____t_43(____t_result_42) then
+            ____t_result_49 = __O[662]
+        else
+            local ____opt_46 = window.CampanhaPoderes
+            if ____opt_46 ~= nil then
+                ____opt_46 = ____opt_46.muralAberto
+            end
+            local ____opt_result_48
+            if ____opt_46 ~= nil then
+                ____opt_result_48 = ____opt_46(____opt_46)
+            end
+            ____t_result_49 = ____opt_result_48
         end
-        local ____temp_37 = if ____t_31(____opt_result_30) then __O[643] else ____opt_result_36
-        __O[644] = ____temp_37
-        local ____opt_41 = window.CampanhaPoderes
-        if ____opt_41 ~= nil then
-            ____opt_41 = ____opt_41.muralAberto
+        __O[663] = ____t_result_49
+        if ____t_50(____t_result_49) then
+            ____t_result_56 = __O[663]
+        else
+            local ____opt_53 = window.Mapa3D
+            if ____opt_53 ~= nil then
+                ____opt_53 = ____opt_53.aberto
+            end
+            local ____opt_result_55
+            if ____opt_53 ~= nil then
+                ____opt_result_55 = ____opt_53(____opt_53)
+            end
+            ____t_result_56 = ____opt_result_55
         end
-        local ____opt_result_43
-        if ____opt_41 ~= nil then
-            ____opt_result_43 = ____opt_41(____opt_41)
+        __O[664] = ____t_result_56
+        if ____t_57(____t_result_56) then
+            ____t_result_63 = __O[664]
+        else
+            local ____opt_60 = window.CampanhaLoja
+            if ____opt_60 ~= nil then
+                ____opt_60 = ____opt_60.aberta
+            end
+            local ____opt_result_62
+            if ____opt_60 ~= nil then
+                ____opt_result_62 = ____opt_60(____opt_60)
+            end
+            ____t_result_63 = ____opt_result_62
         end
-        local ____temp_44 = if ____t_38(____temp_37) then __O[644] else ____opt_result_43
-        __O[645] = ____temp_44
-        local ____opt_48 = window.Mapa3D
-        if ____opt_48 ~= nil then
-            ____opt_48 = ____opt_48.aberto
+        __O[665] = ____t_result_63
+        if ____t_64(____t_result_63) then
+            ____t_result_70 = __O[665]
+        else
+            local ____opt_67 = window.CampanhaCutscenes
+            if ____opt_67 ~= nil then
+                ____opt_67 = ____opt_67.aberta
+            end
+            local ____opt_result_69
+            if ____opt_67 ~= nil then
+                ____opt_result_69 = ____opt_67(____opt_67)
+            end
+            ____t_result_70 = ____opt_result_69
         end
-        local ____opt_result_50
-        if ____opt_48 ~= nil then
-            ____opt_result_50 = ____opt_48(____opt_48)
-        end
-        local ____temp_51 = if ____t_45(____temp_44) then __O[645] else ____opt_result_50
-        __O[646] = ____temp_51
-        local ____opt_55 = window.CampanhaLoja
-        if ____opt_55 ~= nil then
-            ____opt_55 = ____opt_55.aberta
-        end
-        local ____opt_result_57
-        if ____opt_55 ~= nil then
-            ____opt_result_57 = ____opt_55(____opt_55)
-        end
-        local ____temp_58 = if ____t_52(____temp_51) then __O[646] else ____opt_result_57
-        __O[647] = ____temp_58
-        local ____opt_62 = window.CampanhaCutscenes
-        if ____opt_62 ~= nil then
-            ____opt_62 = ____opt_62.aberta
-        end
-        local ____opt_result_64
-        if ____opt_62 ~= nil then
-            ____opt_result_64 = ____opt_62(____opt_62)
-        end
-        return not not ____t_65(if ____t_59(____temp_58) then __O[647] else ____opt_result_64)
+        return not not ____t_71(____t_result_70)
     end
     local function ocupado()
-        local ____t_67 = __t
-        local ____cobre_result_66 = cobre(nil)
-        __O[648] = ____cobre_result_66
+        local ____t_result_80
         local ____t_73 = __t
-        local ____opt_70 = window.CampanhaMoradores
-        if ____opt_70 ~= nil then
-            ____opt_70 = ____opt_70.aberto
+        local ____cobre_result_72 = cobre(nil)
+        __O[666] = ____cobre_result_72
+        if ____t_73(____cobre_result_72) then
+            ____t_result_80 = __O[666]
+        else
+            local ____t_79 = __t
+            local ____opt_76 = window.CampanhaMoradores
+            if ____opt_76 ~= nil then
+                ____opt_76 = ____opt_76.aberto
+            end
+            local ____opt_result_78
+            if ____opt_76 ~= nil then
+                ____opt_result_78 = ____opt_76(____opt_76)
+            end
+            ____t_result_80 = not not ____t_79(____opt_result_78)
         end
-        local ____opt_result_72
-        if ____opt_70 ~= nil then
-            ____opt_result_72 = ____opt_70(____opt_70)
-        end
-        return if ____t_67(____cobre_result_66) then __O[648] else not not ____t_73(____opt_result_72)
+        return ____t_result_80
     end
     window:addEventListener(
         "keydown",
         function(____, e)
-            local ____t_98 = __t
-            local ____t_97 = __t
-            local ____temp_96 = not __t(open)
-            __O[649] = ____temp_96
-            if ____t_98(if ____t_97(____temp_96) then __O[649] else ocupado(nil)) then
+            local ____t_108 = __t
+            local ____t_result_107
+            local ____t_106 = __t
+            local ____temp_105 = not __t(open)
+            __O[667] = ____temp_105
+            if ____t_106(____temp_105) then
+                ____t_result_107 = __O[667]
+            else
+                ____t_result_107 = ocupado(nil)
+            end
+            if ____t_108(____t_result_107) then
                 return
             end
             local k = e.code
@@ -479,15 +549,15 @@ local __O = {};
                 __call(keys, "add", "right")
             end
             local TR = window.CampanhaTreino
-            local ____opt_result_103
+            local ____opt_result_113
             if TR ~= nil then
-                ____opt_result_103 = TR.ligado
+                ____opt_result_113 = TR.ligado
             end
-            local ____opt_result_104
-            if ____opt_result_103 ~= nil then
-                ____opt_result_104 = ____opt_result_103(TR)
+            local ____opt_result_114
+            if ____opt_result_113 ~= nil then
+                ____opt_result_114 = ____opt_result_113(TR)
             end
-            local treino = ____opt_result_104
+            local treino = ____opt_result_114
             local mapa = {
                 KeyJ = "paper",
                 KeyK = "fart",
@@ -498,22 +568,39 @@ local __O = {};
             if k == "KeyP" then
                 alternarTreino(nil)
             end
-            local ____t_107 = __t
-            local ____t_106 = __t
-            local ____temp_105 = if __t(treino) then __get(mapa, k) else treino
-            __O[650] = ____temp_105
-            if ____t_107(if ____t_106(____temp_105) then not __t(e["repeat"]) else __O[650]) then
+            local ____t_118 = __t
+            local ____t_result_117
+            local ____t_116 = __t
+            local ____t_result_115
+            if __t(treino) then
+                ____t_result_115 = __get(mapa, k)
+            else
+                ____t_result_115 = treino
+            end
+            __O[668] = ____t_result_115
+            if ____t_116(____t_result_115) then
+                ____t_result_117 = not __t(e["repeat"])
+            else
+                ____t_result_117 = __O[668]
+            end
+            if ____t_118(____t_result_117) then
                 TR:acao(
                     __get(mapa, k),
                     true,
                     P
                 )
             end
-            local ____t_110 = __t
-            local ____t_109 = __t
-            local ____temp_108 = k == "Space" or k == "KeyW"
-            __O[651] = ____temp_108
-            if ____t_110(if ____t_109(____temp_108) then __O[651] else k == "ArrowUp") then
+            local ____t_122 = __t
+            local ____t_result_121
+            local ____t_120 = __t
+            local ____temp_119 = k == "Space" or k == "KeyW"
+            __O[669] = ____temp_119
+            if ____t_120(____temp_119) then
+                ____t_result_121 = __O[669]
+            else
+                ____t_result_121 = k == "ArrowUp"
+            end
+            if ____t_122(____t_result_121) then
                 __call(keys, "add", "jump")
                 jump(nil)
                 if __t(treino) then
@@ -550,35 +637,47 @@ local __O = {};
         "keyup",
         function(____, e)
             local TR = window.CampanhaTreino
-            local ____t_117 = __t
-            local ____opt_result_115
+            local ____t_129 = __t
+            local ____opt_result_127
             if TR ~= nil then
-                ____opt_result_115 = TR.ligado
+                ____opt_result_127 = TR.ligado
             end
-            local ____opt_result_116
-            if ____opt_result_115 ~= nil then
-                ____opt_result_116 = ____opt_result_115(TR)
+            local ____opt_result_128
+            if ____opt_result_127 ~= nil then
+                ____opt_result_128 = ____opt_result_127(TR)
             end
-            if ____t_117(____opt_result_116) then
+            if ____t_129(____opt_result_128) then
                 if e.code == "KeyU" then
                     TR:acao("poder1", false, P)
                 end
                 if e.code == "KeyI" then
                     TR:acao("poder2", false, P)
                 end
-                local ____t_120 = __t
-                local ____t_119 = __t
-                local ____temp_118 = e.code == "Space" or e.code == "KeyW"
-                __O[652] = ____temp_118
-                if ____t_120(if ____t_119(____temp_118) then __O[652] else e.code == "ArrowUp") then
+                local ____t_133 = __t
+                local ____t_result_132
+                local ____t_131 = __t
+                local ____temp_130 = e.code == "Space" or e.code == "KeyW"
+                __O[670] = ____temp_130
+                if ____t_131(____temp_130) then
+                    ____t_result_132 = __O[670]
+                else
+                    ____t_result_132 = e.code == "ArrowUp"
+                end
+                if ____t_133(____t_result_132) then
                     TR:acao("jump", false, P)
                 end
             end
-            local ____t_123 = __t
-            local ____t_122 = __t
-            local ____temp_121 = e.code == "Space" or e.code == "KeyW"
-            __O[653] = ____temp_121
-            if ____t_123(if ____t_122(____temp_121) then __O[653] else e.code == "ArrowUp") then
+            local ____t_137 = __t
+            local ____t_result_136
+            local ____t_135 = __t
+            local ____temp_134 = e.code == "Space" or e.code == "KeyW"
+            __O[671] = ____temp_134
+            if ____t_135(____temp_134) then
+                ____t_result_136 = __O[671]
+            else
+                ____t_result_136 = e.code == "ArrowUp"
+            end
+            if ____t_137(____t_result_136) then
                 __call(keys, "delete", "jump")
             end
             if __t(e.code == "ArrowLeft" or e.code == "KeyA") then
@@ -591,33 +690,51 @@ local __O = {};
         true
     )
     local function physics(self, d, dt)
-        local dir = if __t(__call(keys, "has", "right")) then 1 else 0 - if __t(__call(keys, "has", "left")) then 1 else 0
+        local dir = (__t(__call(keys, "has", "right")) and 1 or 0) - (__t(__call(keys, "has", "left")) and 1 or 0)
         if __t(dir) then
             P.facing = dir
         end
         local TR = window.CampanhaTreino
-        local ____t_130 = __t
-        local ____opt_result_128
+        local ____t_result_154
+        local ____t_144 = __t
+        local ____opt_result_142
         if TR ~= nil then
-            ____opt_result_128 = TR.dashing
+            ____opt_result_142 = TR.dashing
         end
-        local ____opt_result_129
-        if ____opt_result_128 ~= nil then
-            ____opt_result_129 = ____opt_result_128(TR)
+        local ____opt_result_143
+        if ____opt_result_142 ~= nil then
+            ____opt_result_143 = ____opt_result_142(TR)
         end
-        local ____temp_138 = dir * 260
-        local ____t_137 = __t
-        local ____opt_result_135
-        if TR ~= nil then
-            ____opt_result_135 = TR.velocidade
+        if ____t_144(____opt_result_143) then
+            ____t_result_154 = P.vx
+        else
+            local ____temp_153 = dir * 260
+            local ____t_result_152
+            local ____t_151 = __t
+            local ____opt_result_149
+            if TR ~= nil then
+                ____opt_result_149 = TR.velocidade
+            end
+            local ____opt_result_150
+            if ____opt_result_149 ~= nil then
+                ____opt_result_150 = ____opt_result_149(TR)
+            end
+            __O[672] = ____opt_result_150
+            if ____t_151(____opt_result_150) then
+                ____t_result_152 = __O[672]
+            else
+                ____t_result_152 = 1
+            end
+            ____t_result_154 = ____temp_153 * ____t_result_152
         end
-        local ____opt_result_136
-        if ____opt_result_135 ~= nil then
-            ____opt_result_136 = ____opt_result_135(TR)
+        P.vx = ____t_result_154
+        local ____t_result_155
+        if __t(d.limites) then
+            ____t_result_155 = d.limites
+        else
+            ____t_result_155 = __arrL({40, d.largura - 40}, 2)
         end
-        __O[654] = ____opt_result_136
-        P.vx = if ____t_130(____opt_result_129) then P.vx else ____temp_138 * if ____t_137(____opt_result_136) then __O[654] else 1
-        local lim = if __t(d.limites) then d.limites else __arrL({40, d.largura - 40}, 2)
+        local lim = ____t_result_155
         P.x = math.max(
             __get(lim, 0),
             math.min(
@@ -641,29 +758,52 @@ local __O = {};
             end
         )
         for ____, r in __iterar((portais(nil, d.id))) do
-            local ____t_141 = __t
-            local ____t_140 = __t
-            local ____temp_139 = r.tipo == "rampa" and __ge(P.x, r.x0)
-            __O[655] = ____temp_139
-            if ____t_141(if ____t_140(____temp_139) then __le(P.x, r.x1) else __O[655]) then
+            local ____t_159 = __t
+            local ____t_result_158
+            local ____t_157 = __t
+            local ____temp_156 = r.tipo == "rampa" and __ge(P.x, r.x0)
+            __O[673] = ____temp_156
+            if ____t_157(____temp_156) then
+                ____t_result_158 = __le(P.x, r.x1)
+            else
+                ____t_result_158 = __O[673]
+            end
+            if ____t_159(____t_result_158) then
                 local ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0)
-                local ____t_144 = __t
-                local ____t_143 = __t
-                local ____temp_142 = P.vy >= 0 and P.y >= ry - 14
-                __O[656] = ____temp_142
-                if ____t_144(if ____t_143(____temp_142) then __le(prevY, ry + 40) else __O[656]) then
+                local ____t_163 = __t
+                local ____t_result_162
+                local ____t_161 = __t
+                local ____temp_160 = P.vy >= 0 and P.y >= ry - 14
+                __O[674] = ____temp_160
+                if ____t_161(____temp_160) then
+                    ____t_result_162 = __le(prevY, ry + 40)
+                else
+                    ____t_result_162 = __O[674]
+                end
+                if ____t_163(____t_result_162) then
                     P.y = ry
                     P.vy = 0
                     P.ground = true
                 end
-                local ____t_149 = __t
-                local ____t_148 = __t
-                local ____t_146 = __t
-                local ____temp_145 = P.x >= r.x1 - 4
-                __O[657] = ____temp_145
-                local ____temp_147 = if ____t_146(____temp_145) then P.ground else __O[657]
-                __O[658] = ____temp_147
-                if ____t_149(if ____t_148(____temp_147) then dir > 0 else __O[658]) then
+                local ____t_169 = __t
+                local ____t_result_168
+                local ____t_167 = __t
+                local ____t_result_166
+                local ____t_165 = __t
+                local ____temp_164 = P.x >= r.x1 - 4
+                __O[675] = ____temp_164
+                if ____t_165(____temp_164) then
+                    ____t_result_166 = P.ground
+                else
+                    ____t_result_166 = __O[675]
+                end
+                __O[676] = ____t_result_166
+                if ____t_167(____t_result_166) then
+                    ____t_result_168 = dir > 0
+                else
+                    ____t_result_168 = __O[676]
+                end
+                if ____t_169(____t_result_168) then
                     viagem = {tipo = "porta", t = 0, para = r.para}
                 end
             end
@@ -673,27 +813,44 @@ local __O = {};
                 local px = ____value[1]
                 local py = ____value[2]
                 local pw = ____value[3]
-                local ____t_154 = __t
-                local ____t_153 = __t
-                local ____t_151 = __t
-                local ____temp_150 = P.x > px - 6 and __lt(
+                local ____t_175 = __t
+                local ____t_result_174
+                local ____t_173 = __t
+                local ____t_result_172
+                local ____t_171 = __t
+                local ____temp_170 = P.x > px - 6 and __lt(
                     P.x,
                     __add(px, pw) + 6
                 )
-                __O[659] = ____temp_150
-                local ____temp_152 = if ____t_151(____temp_150) then __le(prevY, py + 2) else __O[659]
-                __O[660] = ____temp_152
-                if ____t_154(if ____t_153(____temp_152) then __ge(P.y, py) else __O[660]) then
+                __O[677] = ____temp_170
+                if ____t_171(____temp_170) then
+                    ____t_result_172 = __le(prevY, py + 2)
+                else
+                    ____t_result_172 = __O[677]
+                end
+                __O[678] = ____t_result_172
+                if ____t_173(____t_result_172) then
+                    ____t_result_174 = __ge(P.y, py)
+                else
+                    ____t_result_174 = __O[678]
+                end
+                if ____t_175(____t_result_174) then
                     P.y = py
                     P.vy = 0
                     P.ground = true
                 end
             end
-            local ____t_157 = __t
-            local ____t_156 = __t
-            local ____temp_155 = not __t(P.ground) and not __t(overGap)
-            __O[661] = ____temp_155
-            if ____t_157(if ____t_156(____temp_155) then P.y >= FLOOR else __O[661]) then
+            local ____t_179 = __t
+            local ____t_result_178
+            local ____t_177 = __t
+            local ____temp_176 = not __t(P.ground) and not __t(overGap)
+            __O[679] = ____temp_176
+            if ____t_177(____temp_176) then
+                ____t_result_178 = P.y >= FLOOR
+            else
+                ____t_result_178 = __O[679]
+            end
+            if ____t_179(____t_result_178) then
                 P.y = FLOOR
                 P.vy = 0
                 P.ground = true
@@ -712,13 +869,19 @@ local __O = {};
         v.t = __add(v.t, dt)
         if v.tipo == "rolante" then
             local u = math.min(1, v.t / v.dur)
-            local k = if u < 0.15 then 0 else (u - 0.15) / 0.85
-            P.x = if k <= 0 then __get(v.de, 0) + (__get(v.ini, 0) - __get(v.de, 0)) * (u / 0.15) else __get(v.ini, 0) + (__get(v.fim, 0) - __get(v.ini, 0)) * k
-            P.y = if k <= 0 then FLOOR else __get(v.ini, 1) + (__get(v.fim, 1) - __get(v.ini, 1)) * k
-            P.facing = if __gt(
+            local k = u < 0.15 and 0 or (u - 0.15) / 0.85
+            local ____temp_180
+            if k <= 0 then
+                ____temp_180 = __get(v.de, 0) + (__get(v.ini, 0) - __get(v.de, 0)) * (u / 0.15)
+            else
+                ____temp_180 = __get(v.ini, 0) + (__get(v.fim, 0) - __get(v.ini, 0)) * k
+            end
+            P.x = ____temp_180
+            P.y = k <= 0 and FLOOR or __get(v.ini, 1) + (__get(v.fim, 1) - __get(v.ini, 1)) * k
+            P.facing = __gt(
                 __get(v.fim, 0),
                 __get(v.ini, 0)
-            ) then 1 else -1
+            ) and 1 or -1
             P.vx = 0
             P.ground = true
             fade = math.max(0, (u - 0.78) / 0.22)
@@ -752,33 +915,33 @@ local __O = {};
         local dt = math.min(0.05, (now - last) / 1000)
         last = now
         local fl = cobre(nil)
-        local ____t_163 = __t
-        local ____opt_160 = window.CampanhaMoradores
-        if ____opt_160 ~= nil then
-            ____opt_160 = ____opt_160.aberto
+        local ____t_186 = __t
+        local ____opt_183 = window.CampanhaMoradores
+        if ____opt_183 ~= nil then
+            ____opt_183 = ____opt_183.aberto
         end
-        local ____opt_result_162
-        if ____opt_160 ~= nil then
-            ____opt_result_162 = ____opt_160(____opt_160)
+        local ____opt_result_185
+        if ____opt_183 ~= nil then
+            ____opt_result_185 = ____opt_183(____opt_183)
         end
-        if ____t_163(____opt_result_162) then
+        if ____t_186(____opt_result_185) then
             __call(keys, "clear")
             P.vx = 0
         end
-        box.style.visibility = if __t(fl) then "hidden" else "visible"
+        box.style.visibility = __t(fl) and "hidden" or "visible"
         if __t(fl) then
             window:requestAnimationFrame(frame)
             return
         end
         t = t + dt
         local d = __get(L, idx)
-        local ____opt_166 = window.CampanhaTreino
-        if ____opt_166 ~= nil then
-            ____opt_166 = ____opt_166.passo
+        local ____opt_189 = window.CampanhaTreino
+        if ____opt_189 ~= nil then
+            ____opt_189 = ____opt_189.passo
         end
-        if ____opt_166 ~= nil then
-            ____opt_166(
-                ____opt_166,
+        if ____opt_189 ~= nil then
+            ____opt_189(
+                ____opt_189,
                 dt,
                 P,
                 {
@@ -799,13 +962,13 @@ local __O = {};
         ) - cam) * math.min(1, dt * 8)
         do
             pcall(function()
-                local ____opt_170 = window.DayTime
-                if ____opt_170 ~= nil then
-                    ____opt_170 = ____opt_170.force
+                local ____opt_193 = window.DayTime
+                if ____opt_193 ~= nil then
+                    ____opt_193 = ____opt_193.force
                 end
-                if ____opt_170 ~= nil then
-                    ____opt_170(
-                        ____opt_170,
+                if ____opt_193 ~= nil then
+                    ____opt_193(
+                        ____opt_193,
                         __get(
                             __get(HOURS, hour),
                             1
@@ -825,35 +988,41 @@ local __O = {};
         }
         do
             pcall(function()
-                local ____opt_174 = window.Interact
-                if ____opt_174 ~= nil then
-                    ____opt_174 = ____opt_174.update
+                local ____opt_197 = window.Interact
+                if ____opt_197 ~= nil then
+                    ____opt_197 = ____opt_197.update
                 end
-                if ____opt_174 ~= nil then
-                    ____opt_174(____opt_174, dt, o)
+                if ____opt_197 ~= nil then
+                    ____opt_197(____opt_197, dt, o)
                 end
             end)
         end
-        local ____this_177
-        ____this_177 = window.CampanhaCenarios
-        local ____opt_176 = ____this_177.heroi
-        if ____opt_176 ~= nil then
-            ____opt_176(____this_177, P.x, P.y, P.vy)
+        local ____this_200
+        ____this_200 = window.CampanhaCenarios
+        local ____opt_199 = ____this_200.heroi
+        if ____opt_199 ~= nil then
+            ____opt_199(____this_200, P.x, P.y, P.vy)
         end
         window.Art:drawScene(c, D.id, cam, t)
         c:save()
         do
-            local ____t_183 = __t
-            local ____opt_180 = window.CampanhaTreino
-            if ____opt_180 ~= nil then
-                ____opt_180 = ____opt_180.tremor
+            local ____t_result_207
+            local ____t_206 = __t
+            local ____opt_203 = window.CampanhaTreino
+            if ____opt_203 ~= nil then
+                ____opt_203 = ____opt_203.tremor
             end
-            local ____opt_result_182
-            if ____opt_180 ~= nil then
-                ____opt_result_182 = ____opt_180(____opt_180)
+            local ____opt_result_205
+            if ____opt_203 ~= nil then
+                ____opt_result_205 = ____opt_203(____opt_203)
             end
-            __O[662] = ____opt_result_182
-            local sh = if ____t_183(____opt_result_182) then __O[662] else 0
+            __O[680] = ____opt_result_205
+            if ____t_206(____opt_result_205) then
+                ____t_result_207 = __O[680]
+            else
+                ____t_result_207 = 0
+            end
+            local sh = ____t_result_207
             c:translate(
                 -math.floor(cam + 0.5) + math.floor((math.random() - 0.5) * sh + 0.5),
                 math.floor((math.random() - 0.5) * sh + 0.5)
@@ -873,67 +1042,78 @@ local __O = {};
                 window.CampanhaCenarios:plataforma(c, D.id, pl, t)
             end
         end
-        local ____opt_186 = window.Interact
-        if ____opt_186 ~= nil then
-            ____opt_186 = ____opt_186.drawBack
+        local ____opt_210 = window.Interact
+        if ____opt_210 ~= nil then
+            ____opt_210 = ____opt_210.drawBack
         end
-        if ____opt_186 ~= nil then
-            ____opt_186(____opt_186, c, o)
+        if ____opt_210 ~= nil then
+            ____opt_210(____opt_210, c, o)
         end
-        local ____opt_190 = window.CampanhaPlantas
-        if ____opt_190 ~= nil then
-            ____opt_190 = ____opt_190.drawBack
+        local ____opt_214 = window.CampanhaPlantas
+        if ____opt_214 ~= nil then
+            ____opt_214 = ____opt_214.drawBack
         end
-        if ____opt_190 ~= nil then
-            ____opt_190(____opt_190, c, o)
+        if ____opt_214 ~= nil then
+            ____opt_214(____opt_214, c, o)
         end
-        local ____opt_194 = window.CampanhaTaxi
-        if ____opt_194 ~= nil then
-            ____opt_194 = ____opt_194.desenhar
+        local ____opt_218 = window.CampanhaTaxi
+        if ____opt_218 ~= nil then
+            ____opt_218 = ____opt_218.desenhar
         end
-        if ____opt_194 ~= nil then
-            ____opt_194(____opt_194, c, o)
+        if ____opt_218 ~= nil then
+            ____opt_218(____opt_218, c, o)
         end
-        local ____opt_198 = window.CampanhaLoja
-        if ____opt_198 ~= nil then
-            ____opt_198 = ____opt_198.desenhar
+        local ____opt_222 = window.CampanhaLoja
+        if ____opt_222 ~= nil then
+            ____opt_222 = ____opt_222.desenhar
         end
-        if ____opt_198 ~= nil then
-            ____opt_198(____opt_198, c, o)
+        if ____opt_222 ~= nil then
+            ____opt_222(____opt_222, c, o)
         end
-        local ____opt_202 = window.CampanhaMoradores
-        if ____opt_202 ~= nil then
-            ____opt_202 = ____opt_202.desenhar
+        local ____opt_226 = window.CampanhaMoradores
+        if ____opt_226 ~= nil then
+            ____opt_226 = ____opt_226.desenhar
         end
-        if ____opt_202 ~= nil then
-            ____opt_202(____opt_202, c, o)
+        if ____opt_226 ~= nil then
+            ____opt_226(____opt_226, c, o)
         end
-        local ____self_215 = window.Art
-        local ____self_215_drawCharacter_216 = ____self_215.drawCharacter
-        local ____P_x_213 = P.x
-        local ____P_y_214 = P.y
-        local ____t_211 = t
-        local ____P_facing_212 = P.facing
-        local ____t_207 = __t
-        local ____t_205 = __t
-        local ____temp_204 = not not __t(P.vx)
-        __O[663] = ____temp_204
-        local ____temp_206 = if ____t_205(____temp_204) then P.ground else __O[663]
-        __O[664] = ____temp_206
-        local ____opt_result_210
-        if viagem ~= nil then
-            ____opt_result_210 = viagem.tipo
+        local ____self_240 = window.Art
+        local ____self_240_drawCharacter_241 = ____self_240.drawCharacter
+        local ____P_x_238 = P.x
+        local ____P_y_239 = P.y
+        local ____t_236 = t
+        local ____P_facing_237 = P.facing
+        local ____t_result_235
+        local ____t_231 = __t
+        local ____t_result_230
+        local ____t_229 = __t
+        local ____temp_228 = not not __t(P.vx)
+        __O[681] = ____temp_228
+        if ____t_229(____temp_228) then
+            ____t_result_230 = P.ground
+        else
+            ____t_result_230 = __O[681]
         end
-        ____self_215_drawCharacter_216(
-            ____self_215,
+        __O[682] = ____t_result_230
+        if ____t_231(____t_result_230) then
+            ____t_result_235 = __O[682]
+        else
+            local ____opt_result_234
+            if viagem ~= nil then
+                ____opt_result_234 = viagem.tipo
+            end
+            ____t_result_235 = ____opt_result_234 == "porta"
+        end
+        ____self_240_drawCharacter_241(
+            ____self_240,
             c,
             "daroca",
-            ____P_x_213,
-            ____P_y_214,
+            ____P_x_238,
+            ____P_y_239,
             {
-                frame = ____t_211,
-                facing = ____P_facing_212,
-                moving = if ____t_207(____temp_206) then __O[664] else ____opt_result_210 == "porta",
+                frame = ____t_236,
+                facing = ____P_facing_237,
+                moving = ____t_result_235,
                 grounded = P.ground,
                 vy = P.vy,
                 attack = atkT > 0,
@@ -941,61 +1121,76 @@ local __O = {};
                 attackProgress = 1 - atkT / 0.32
             }
         )
-        local ____opt_219 = window.CampanhaTreino
-        if ____opt_219 ~= nil then
-            ____opt_219 = ____opt_219.desenhar
+        local ____opt_244 = window.CampanhaTreino
+        if ____opt_244 ~= nil then
+            ____opt_244 = ____opt_244.desenhar
         end
-        if ____opt_219 ~= nil then
-            ____opt_219(____opt_219, c, t)
+        if ____opt_244 ~= nil then
+            ____opt_244(____opt_244, c, t)
         end
-        local ____opt_223 = window.Interact
-        if ____opt_223 ~= nil then
-            ____opt_223 = ____opt_223.drawFront
+        local ____opt_248 = window.Interact
+        if ____opt_248 ~= nil then
+            ____opt_248 = ____opt_248.drawFront
         end
-        if ____opt_223 ~= nil then
-            ____opt_223(____opt_223, c, o)
+        if ____opt_248 ~= nil then
+            ____opt_248(____opt_248, c, o)
         end
-        local ____opt_227 = window.CampanhaPlantas
-        if ____opt_227 ~= nil then
-            ____opt_227 = ____opt_227.drawFront
+        local ____opt_252 = window.CampanhaPlantas
+        if ____opt_252 ~= nil then
+            ____opt_252 = ____opt_252.drawFront
         end
-        if ____opt_227 ~= nil then
-            ____opt_227(____opt_227, c, o)
+        if ____opt_252 ~= nil then
+            ____opt_252(____opt_252, c, o)
         end
-        local ____opt_231 = window.CampanhaCamadas
-        if ____opt_231 ~= nil then
-            ____opt_231 = ____opt_231.primeiroPlano
+        local ____opt_256 = window.CampanhaCamadas
+        if ____opt_256 ~= nil then
+            ____opt_256 = ____opt_256.primeiroPlano
         end
-        if ____opt_231 ~= nil then
-            ____opt_231(____opt_231, c, o)
+        if ____opt_256 ~= nil then
+            ____opt_256(____opt_256, c, o)
         end
         perto = nil
-        local ____t_235 = __t
-        local ____t_234 = __t
-        local ____temp_233 = not __t(viagem)
-        __O[665] = ____temp_233
-        if ____t_235(if ____t_234(____temp_233) then P.ground else __O[665]) then
+        local ____t_261 = __t
+        local ____t_result_260
+        local ____t_259 = __t
+        local ____temp_258 = not __t(viagem)
+        __O[683] = ____temp_258
+        if ____t_259(____temp_258) then
+            ____t_result_260 = P.ground
+        else
+            ____t_result_260 = __O[683]
+        end
+        if ____t_261(____t_result_260) then
             local best = 1000000000
             for ____, p in __iterar((portais(nil, D.id))) do
-                if p.tipo == "rampa" then
-                    continue
+                do
+                    if p.tipo == "rampa" then
+                        continue
+                    end
+                    local dd = math.abs(p.x - P.x)
+                    if __t(dd < 70 and dd < best) then
+                        best = dd
+                        perto = p
+                    end
                 end
-                local dd = math.abs(p.x - P.x)
-                if __t(dd < 70 and dd < best) then
-                    best = dd
-                    perto = p
-                end
             end
-            local ____opt_238 = window.CampanhaMoradores
-            if ____opt_238 ~= nil then
-                ____opt_238 = ____opt_238.perto
+            local ____opt_264 = window.CampanhaMoradores
+            if ____opt_264 ~= nil then
+                ____opt_264 = ____opt_264.perto
             end
-            local ____opt_result_240
-            if ____opt_238 ~= nil then
-                ____opt_result_240 = ____opt_238(____opt_238, D.id, P.x)
+            local ____opt_result_266
+            if ____opt_264 ~= nil then
+                ____opt_result_266 = ____opt_264(____opt_264, D.id, P.x)
             end
-            local m = ____opt_result_240
-            if __t(if __t(m) then math.abs(m.x - P.x) < best else m) then
+            local m = ____opt_result_266
+            local ____t_268 = __t
+            local ____t_result_267
+            if __t(m) then
+                ____t_result_267 = math.abs(m.x - P.x) < best
+            else
+                ____t_result_267 = m
+            end
+            if ____t_268(____t_result_267) then
                 perto = {
                     tipo = "conversa",
                     id = m.id,
@@ -1007,16 +1202,23 @@ local __O = {};
                 }
             end
             for ____, X in __iterar((__arrL({window.CampanhaTaxi, window.CampanhaLoja}, 2))) do
-                local ____opt_result_245
+                local ____opt_result_273
                 if X ~= nil then
-                    ____opt_result_245 = X.perto
+                    ____opt_result_273 = X.perto
                 end
-                local ____opt_result_246
-                if ____opt_result_245 ~= nil then
-                    ____opt_result_246 = ____opt_result_245(X, D.id, P.x)
+                local ____opt_result_274
+                if ____opt_result_273 ~= nil then
+                    ____opt_result_274 = ____opt_result_273(X, D.id, P.x)
                 end
-                local e = ____opt_result_246
-                if __t(if __t(e) then not __t(perto) or math.abs(e.x - P.x) < math.abs(perto.x - P.x) else e) then
+                local e = ____opt_result_274
+                local ____t_276 = __t
+                local ____t_result_275
+                if __t(e) then
+                    ____t_result_275 = not __t(perto) or math.abs(e.x - P.x) < math.abs(perto.x - P.x)
+                else
+                    ____t_result_275 = e
+                end
+                if ____t_276(____t_result_275) then
                     perto = __assign({}, {tipo = "extra"}, e)
                 end
             end
@@ -1040,40 +1242,76 @@ local __O = {};
             )
         end
         c:restore()
-        local ____opt_249 = window.CampanhaAmbientes
-        if ____opt_249 ~= nil then
-            ____opt_249 = ____opt_249.cobrir
+        local ____opt_279 = window.CampanhaAmbientes
+        if ____opt_279 ~= nil then
+            ____opt_279 = ____opt_279.cobrir
         end
-        if ____opt_249 ~= nil then
-            ____opt_249(____opt_249, c, D.id, cam)
+        if ____opt_279 ~= nil then
+            ____opt_279(____opt_279, c, D.id, cam)
         end
         entrar.hidden = not __t(perto)
         if __t(perto) then
-            entrar.textContent = if perto.tipo == "extra" then perto.botao else if perto.tipo == "conversa" then "FALAR" else if perto.tipo == "poderes" then "PODERES" else if perto.tipo == "pc" then "USAR" else if perto.tipo == "armario" then "ABRIR" else if perto.tipo == "rolante" then if __lt(
-                __get(perto.ate, 1),
-                FLOOR
-            ) then "SUBIR" else "DESCER" else if __re_test(
-                __re("^SAIR|DESCER", ""),
-                perto.rotulo
-            ) then "SAIR" else "ENTRAR"
-        end
-        local ____t_256 = __t
-        local ____opt_253 = window.Graphics
-        if ____opt_253 ~= nil then
-            ____opt_253 = ____opt_253.isShader
-        end
-        local ____opt_result_255
-        if ____opt_253 ~= nil then
-            ____opt_result_255 = ____opt_253(____opt_253)
-        end
-        if ____t_256(____opt_result_255) then
-            local ____opt_259 = window.Shader
-            if ____opt_259 ~= nil then
-                ____opt_259 = ____opt_259.apply
+            local ____temp_286
+            if perto.tipo == "extra" then
+                ____temp_286 = perto.botao
+            else
+                local ____temp_285
+                if perto.tipo == "conversa" then
+                    ____temp_285 = "FALAR"
+                else
+                    local ____temp_284
+                    if perto.tipo == "poderes" then
+                        ____temp_284 = "PODERES"
+                    else
+                        local ____temp_283
+                        if perto.tipo == "pc" then
+                            ____temp_283 = "USAR"
+                        else
+                            local ____temp_282
+                            if perto.tipo == "armario" then
+                                ____temp_282 = "ABRIR"
+                            else
+                                local ____temp_281
+                                if perto.tipo == "rolante" then
+                                    ____temp_281 = __lt(
+                                        __get(perto.ate, 1),
+                                        FLOOR
+                                    ) and "SUBIR" or "DESCER"
+                                else
+                                    ____temp_281 = __re_test(
+                                        __re("^SAIR|DESCER", ""),
+                                        perto.rotulo
+                                    ) and "SAIR" or "ENTRAR"
+                                end
+                                ____temp_282 = ____temp_281
+                            end
+                            ____temp_283 = ____temp_282
+                        end
+                        ____temp_284 = ____temp_283
+                    end
+                    ____temp_285 = ____temp_284
+                end
+                ____temp_286 = ____temp_285
             end
-            if ____opt_259 ~= nil then
-                ____opt_259(
-                    ____opt_259,
+            entrar.textContent = ____temp_286
+        end
+        local ____t_292 = __t
+        local ____opt_289 = window.Graphics
+        if ____opt_289 ~= nil then
+            ____opt_289 = ____opt_289.isShader
+        end
+        local ____opt_result_291
+        if ____opt_289 ~= nil then
+            ____opt_result_291 = ____opt_289(____opt_289)
+        end
+        if ____t_292(____opt_result_291) then
+            local ____opt_295 = window.Shader
+            if ____opt_295 ~= nil then
+                ____opt_295 = ____opt_295.apply
+            end
+            if ____opt_295 ~= nil then
+                ____opt_295(
+                    ____opt_295,
                     cv,
                     {
                         scene = D.id,
@@ -1135,21 +1373,32 @@ local __O = {};
             fechar = close,
             jogador = function() return __assign({}, P) end,
             estado = function()
-                local ____get_result_id_269 = __get(L, idx).id
-                local ____t_264 = __t
-                local ____opt_result_263
+                local ____get_result_id_307 = __get(L, idx).id
+                local ____t_result_301
+                local ____t_300 = __t
+                local ____opt_result_299
                 if viagem ~= nil then
-                    ____opt_result_263 = viagem.tipo
+                    ____opt_result_299 = viagem.tipo
                 end
-                __O[666] = ____opt_result_263
-                local ____temp_270 = if ____t_264(____opt_result_263) then __O[666] else nil
-                local ____t_268 = __t
-                local ____opt_result_267
+                __O[684] = ____opt_result_299
+                if ____t_300(____opt_result_299) then
+                    ____t_result_301 = __O[684]
+                else
+                    ____t_result_301 = nil
+                end
+                local ____t_result_306
+                local ____t_305 = __t
+                local ____opt_result_304
                 if perto ~= nil then
-                    ____opt_result_267 = perto.rotulo
+                    ____opt_result_304 = perto.rotulo
                 end
-                __O[667] = ____opt_result_267
-                return {cena = ____get_result_id_269, viagem = ____temp_270, perto = if ____t_268(____opt_result_267) then __O[667] else nil}
+                __O[685] = ____opt_result_304
+                if ____t_305(____opt_result_304) then
+                    ____t_result_306 = __O[685]
+                else
+                    ____t_result_306 = nil
+                end
+                return {cena = ____get_result_id_307, viagem = ____t_result_301, perto = ____t_result_306}
             end
         },
         "go,cena,hora,ir,bater,usar,fechar,jogador,estado"

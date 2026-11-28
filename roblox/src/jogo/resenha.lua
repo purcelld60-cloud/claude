@@ -184,14 +184,24 @@ local ____exports = {};
             return nil
         end
         if not __isArray(pools) then
-            pools = __get(pools, if __t(q.arthur) then "after" else if __t(q.patioAccepted) then "active" else "before")
+            pools = __get(
+                pools,
+                __t(q.arthur) and "after" or (__t(q.patioAccepted) and "active" or "before")
+            )
         end
         local number = __TS__Number(visit)
-        local index = __mod(
-            if __isFiniteN(number) then math.max(
+        local ____mod_1 = __mod
+        local ____isFiniteN_result_0
+        if __isFiniteN(number) then
+            ____isFiniteN_result_0 = math.max(
                 0,
                 math.floor(number)
-            ) else 0,
+            )
+        else
+            ____isFiniteN_result_0 = 0
+        end
+        local index = ____mod_1(
+            ____isFiniteN_result_0,
             __len(pools)
         )
         return __call(
@@ -204,7 +214,14 @@ local ____exports = {};
         )
     end
     local function freeze(self, value)
-        if __t(if __t(value) then type(value) == "table" else value) then
+        local ____t_3 = __t
+        local ____t_result_2
+        if __t(value) then
+            ____t_result_2 = type(value) == "table"
+        else
+            ____t_result_2 = value
+        end
+        if ____t_3(____t_result_2) then
             __call(
                 __values(value),
                 "forEach",

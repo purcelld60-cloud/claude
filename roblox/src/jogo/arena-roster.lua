@@ -497,13 +497,13 @@ local __O = {};
                 comboStyle = comboStyle,
                 skill = style,
                 superSkill = comboStyle,
-                speed = if id == "lucas" then 1.08 else 1,
+                speed = id == "lucas" and 1.08 or 1,
                 health = 1,
                 weight = 1,
-                renderHeight = if id == "lucas" then 60 else 70,
-                hitbox = {w = 34, h = if id == "lucas" then 60 else 70},
-                emote = {id = emote, text = if id == "mota" then "FARMANDO AURA" else quote, duration = 1.8},
-                dance = {id = dance, text = if id == "menezes" then "TEKETEKETEKE" else if id == "mota" then "OLHA O DOMÍNIO" else if id == "caleb" then "CARDIO DO SHAPE" else "PASSINHO DA RESENHA", duration = 3}
+                renderHeight = id == "lucas" and 60 or 70,
+                hitbox = {w = 34, h = id == "lucas" and 60 or 70},
+                emote = {id = emote, text = id == "mota" and "FARMANDO AURA" or quote, duration = 1.8},
+                dance = {id = dance, text = id == "menezes" and "TEKETEKETEKE" or (id == "mota" and "OLHA O DOMÍNIO" or (id == "caleb" and "CARDIO DO SHAPE" or "PASSINHO DA RESENHA")), duration = 3}
             }
         end
     )
@@ -520,10 +520,16 @@ local __O = {};
             version = 2,
             all = kits,
             get = function(____, id)
+                local ____t_result_2
                 local ____t_1 = __t
                 local ____call_result_0 = __call(byId, "get", id)
-                __O[2503] = ____call_result_0
-                return if ____t_1(____call_result_0) then __O[2503] else __get(kits, 0)
+                __O[2534] = ____call_result_0
+                if ____t_1(____call_result_0) then
+                    ____t_result_2 = __O[2534]
+                else
+                    ____t_result_2 = __get(kits, 0)
+                end
+                return ____t_result_2
             end
         },
         "version,all,get"

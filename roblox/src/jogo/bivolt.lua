@@ -53,37 +53,49 @@ local __O = {};
         )
     end
     local function count(____, value)
-        return if __isFiniteN(__TS__Number(value)) then clamp(
-            nil,
-            math.floor(__TS__Number(value)),
-            0,
-            999
-        ) else 0
+        local ____isFiniteN_result_0
+        if __isFiniteN(__TS__Number(value)) then
+            ____isFiniteN_result_0 = clamp(
+                nil,
+                math.floor(__TS__Number(value)),
+                0,
+                999
+            )
+        else
+            ____isFiniteN_result_0 = 0
+        end
+        return ____isFiniteN_result_0
     end
     local function charges(____, q)
-        local ____opt_result_2
+        local ____opt_result_3
         if q ~= nil then
-            ____opt_result_2 = q.bivoltCharges
+            ____opt_result_3 = q.bivoltCharges
         end
         return clamp(
             nil,
-            count(nil, ____opt_result_2),
+            count(nil, ____opt_result_3),
             0,
             MAX_CHARGES
         )
     end
     local function found(____, q)
-        local ____Set_8 = Set
-        local ____call_7 = __call
-        local ____isArray_6 = __isArray
-        local ____opt_result_5
+        local ____Set_10 = Set
+        local ____call_9 = __call
+        local ____isArray_result_8
+        local ____isArray_7 = __isArray
+        local ____opt_result_6
         if q ~= nil then
-            ____opt_result_5 = q.bivoltParts
+            ____opt_result_6 = q.bivoltParts
+        end
+        if ____isArray_7(____opt_result_6) then
+            ____isArray_result_8 = q.bivoltParts
+        else
+            ____isArray_result_8 = __arrL({}, 0)
         end
         return __TS__New(
-            ____Set_8,
-            ____call_7(
-                if ____isArray_6(____opt_result_5) then q.bivoltParts else __arrL({}, 0),
+            ____Set_10,
+            ____call_9(
+                ____isArray_result_8,
                 "filter",
                 function(____, id) return __call(
                     parts,
@@ -110,9 +122,9 @@ local __O = {};
     local remaining = 0
     local cooldown = 0
     local function action(____, ____type)
-        local ____type_9 = ____type
+        local ____type_11 = ____type
         sequence = sequence + 1
-        local value = {type = ____type_9, id = sequence}
+        local value = {type = ____type_11, id = sequence}
         __call(issued, "add", value)
         return value
     end
@@ -121,20 +133,20 @@ local __O = {};
     end
     local function state(self, q)
         local collected = __arr(__TS__Spread(__iter(found(nil, q))))
-        local ____t_13 = __t
-        local ____opt_result_12
+        local ____t_15 = __t
+        local ____opt_result_14
         if q ~= nil then
-            ____opt_result_12 = q.bivoltAccepted
+            ____opt_result_14 = q.bivoltAccepted
         end
-        local ____temp_18 = not not ____t_13(____opt_result_12)
-        local ____t_17 = __t
-        local ____opt_result_16
+        local ____temp_20 = not not ____t_15(____opt_result_14)
+        local ____t_19 = __t
+        local ____opt_result_18
         if q ~= nil then
-            ____opt_result_16 = q.bivoltUnlocked
+            ____opt_result_18 = q.bivoltUnlocked
         end
         return {
-            accepted = ____temp_18,
-            unlocked = not not ____t_17(____opt_result_16),
+            accepted = ____temp_20,
+            unlocked = not not ____t_19(____opt_result_18),
             charges = charges(nil, q),
             collected = collected,
             needed = math.max(
@@ -146,11 +158,17 @@ local __O = {};
     end
     local function interact(self, npcId, q, bag)
         local name = __get(girls, npcId)
-        local ____t_21 = __t
-        local ____t_20 = __t
-        local ____temp_19 = not __t(name) or not __t(q)
-        __O[1298] = ____temp_19
-        if ____t_21(if ____t_20(____temp_19) then __O[1298] else type(q) ~= "table") then
+        local ____t_24 = __t
+        local ____t_result_23
+        local ____t_22 = __t
+        local ____temp_21 = not __t(name) or not __t(q)
+        __O[1317] = ____temp_21
+        if ____t_22(____temp_21) then
+            ____t_result_23 = __O[1317]
+        else
+            ____t_result_23 = type(q) ~= "table"
+        end
+        if ____t_24(____t_result_23) then
             return nil
         end
         local s = state(nil, q)
@@ -169,7 +187,14 @@ local __O = {};
                 action = action(nil, "accept")
             }
         end
-        if __t(if __t(s.accepted) then not __t(s.unlocked) else s.accepted) then
+        local ____t_26 = __t
+        local ____t_result_25
+        if __t(s.accepted) then
+            ____t_result_25 = not __t(s.unlocked)
+        else
+            ____t_result_25 = s.accepted
+        end
+        if ____t_26(____t_result_25) then
             if s.needed == 0 then
                 return {
                     lines = __arrL(
@@ -191,7 +216,7 @@ local __O = {};
                         line(
                             nil,
                             name,
-                            ((("Ainda " .. tostring(if s.needed == 1 then "falta uma lata" else __add(
+                            ((("Ainda " .. tostring(s.needed == 1 and "falta uma lata" or __add(
                                 __add("faltam ", s.needed),
                                 " latas"
                             ))) .. "! Você já pegou ") .. tostring(__len(s.collected))) .. "/3. Confere a prateleira baixa, a de cima e a varanda. Aff veyr juro, não me volta só com o lacre!"
@@ -221,7 +246,7 @@ local __O = {};
                         line(
                             nil,
                             name,
-                            ((("Aff veyr juro! Você tem " .. tostring(s.charges)) .. " ") .. if s.charges == 1 then "lata" else "latas") .. ". Troco três materiais escolares por UMA carga nova. Lápis, borracha ou clipe: a resenha aceita os três."
+                            ((("Aff veyr juro! Você tem " .. tostring(s.charges)) .. " ") .. (s.charges == 1 and "lata" or "latas")) .. ". Troco três materiais escolares por UMA carga nova. Lápis, borracha ou clipe: a resenha aceita os três."
                         ),
                         line(nil, "Da Roça", "Fechado. Meu estojo virou patrocinador do Bivolt!"),
                         line(nil, name, "Aff veyr juro, patrocinador de papel, né? Uma lata por troca. E continua gastando seus pontos de nível, porque energético não faz milagre.")
@@ -236,7 +261,7 @@ local __O = {};
                 {line(
                     nil,
                     name,
-                    ((("Aff veyr juro! Você tá com " .. tostring(s.charges)) .. " ") .. if s.charges == 1 then "carga" else "cargas") .. " de Bivolt. Traz três materiais escolares pra eu te dar mais uma. Por enquanto, dez segundos de boost e trinta entre uma lata e outra!"
+                    ((("Aff veyr juro! Você tá com " .. tostring(s.charges)) .. " ") .. (s.charges == 1 and "carga" or "cargas")) .. " de Bivolt. Traz três materiais escolares pra eu te dar mais uma. Por enquanto, dez segundos de boost e trinta entre uma lata e outra!"
                 )},
                 1
             ),
@@ -244,26 +269,54 @@ local __O = {};
         }
     end
     local function complete(self, q, plan, bag)
+        local ____t_36 = __t
+        local ____t_result_35
+        local ____t_34 = __t
+        local ____t_result_33
+        local ____t_32 = __t
+        local ____t_result_31
         local ____t_30 = __t
-        local ____t_29 = __t
-        local ____t_27 = __t
-        local ____t_25 = __t
-        local ____t_23 = __t
-        local ____temp_22 = not __t(q) or type(q) ~= "table"
-        __O[1299] = ____temp_22
-        local ____temp_24 = if ____t_23(____temp_22) then __O[1299] else not __t(plan)
-        __O[1300] = ____temp_24
-        local ____temp_26 = if ____t_25(____temp_24) then __O[1300] else type(plan) ~= "table"
-        __O[1301] = ____temp_26
-        local ____temp_28 = if ____t_27(____temp_26) then __O[1301] else not __t(__call(issued, "has", plan))
-        __O[1302] = ____temp_28
-        if ____t_30(if ____t_29(____temp_28) then __O[1302] else __call(completed, "has", plan)) then
+        local ____t_result_29
+        local ____t_28 = __t
+        local ____temp_27 = not __t(q) or type(q) ~= "table"
+        __O[1318] = ____temp_27
+        if ____t_28(____temp_27) then
+            ____t_result_29 = __O[1318]
+        else
+            ____t_result_29 = not __t(plan)
+        end
+        __O[1319] = ____t_result_29
+        if ____t_30(____t_result_29) then
+            ____t_result_31 = __O[1319]
+        else
+            ____t_result_31 = type(plan) ~= "table"
+        end
+        __O[1320] = ____t_result_31
+        if ____t_32(____t_result_31) then
+            ____t_result_33 = __O[1320]
+        else
+            ____t_result_33 = not __t(__call(issued, "has", plan))
+        end
+        __O[1321] = ____t_result_33
+        if ____t_34(____t_result_33) then
+            ____t_result_35 = __O[1321]
+        else
+            ____t_result_35 = __call(completed, "has", plan)
+        end
+        if ____t_36(____t_result_35) then
             return {ok = false, changed = false, message = "Essa conversa não tem uma entrega pendente."}
         end
         __call(completed, "add", plan)
         local s = state(nil, q)
         if plan.type == "accept" then
-            if __t(if __t(s.accepted) then s.accepted else s.unlocked) then
+            local ____t_38 = __t
+            local ____t_result_37
+            if __t(s.accepted) then
+                ____t_result_37 = s.accepted
+            else
+                ____t_result_37 = s.unlocked
+            end
+            if ____t_38(____t_result_37) then
                 return {ok = false, changed = false, message = "A missão do Bivolt já foi aceita."}
             end
             q.bivoltAccepted = true
@@ -271,14 +324,25 @@ local __O = {};
             return {ok = true, changed = true, accepted = true, message = "Missão Bivolt: encontre as três latas na Casa de Rayssa e volte às garotas."}
         end
         if plan.type == "unlock" then
-            local ____t_35 = __t
-            local ____t_34 = __t
-            local ____t_32 = __t
-            local ____temp_31 = not __t(s.accepted)
-            __O[1303] = ____temp_31
-            local ____temp_33 = if ____t_32(____temp_31) then __O[1303] else s.unlocked
-            __O[1304] = ____temp_33
-            if ____t_35(if ____t_34(____temp_33) then __O[1304] else s.needed ~= 0) then
+            local ____t_44 = __t
+            local ____t_result_43
+            local ____t_42 = __t
+            local ____t_result_41
+            local ____t_40 = __t
+            local ____temp_39 = not __t(s.accepted)
+            __O[1322] = ____temp_39
+            if ____t_40(____temp_39) then
+                ____t_result_41 = __O[1322]
+            else
+                ____t_result_41 = s.unlocked
+            end
+            __O[1323] = ____t_result_41
+            if ____t_42(____t_result_41) then
+                ____t_result_43 = __O[1323]
+            else
+                ____t_result_43 = s.needed ~= 0
+            end
+            if ____t_44(____t_result_43) then
                 return {ok = false, changed = false, message = "Recolha as três latas antes de receber o Bivolt."}
             end
             q.bivoltUnlocked = true
@@ -293,14 +357,25 @@ local __O = {};
             }
         end
         if plan.type == "refill" then
-            local ____t_40 = __t
-            local ____t_39 = __t
-            local ____t_37 = __t
-            local ____temp_36 = not __t(s.unlocked) or s.charges >= MAX_CHARGES
-            __O[1305] = ____temp_36
-            local ____temp_38 = if ____t_37(____temp_36) then __O[1305] else not __t(bag)
-            __O[1306] = ____temp_38
-            if ____t_40(if ____t_39(____temp_38) then __O[1306] else materials(nil, bag) < 3) then
+            local ____t_50 = __t
+            local ____t_result_49
+            local ____t_48 = __t
+            local ____t_result_47
+            local ____t_46 = __t
+            local ____temp_45 = not __t(s.unlocked) or s.charges >= MAX_CHARGES
+            __O[1324] = ____temp_45
+            if ____t_46(____temp_45) then
+                ____t_result_47 = __O[1324]
+            else
+                ____t_result_47 = not __t(bag)
+            end
+            __O[1325] = ____t_result_47
+            if ____t_48(____t_result_47) then
+                ____t_result_49 = __O[1325]
+            else
+                ____t_result_49 = materials(nil, bag) < 3
+            end
+            if ____t_50(____t_result_49) then
                 return {ok = false, changed = false, message = "Separe três materiais escolares e um espaço para a lata."}
             end
             local needed = 3
@@ -339,28 +414,49 @@ local __O = {};
         return {ok = false, changed = false, message = "Entrega de Bivolt desconhecida."}
     end
     local function collect(self, q, player, scene)
-        local ____t_53 = __t
-        local ____t_52 = __t
-        local ____t_50 = __t
-        local ____t_48 = __t
-        local ____t_46 = __t
-        local ____temp_45 = __TS__Number(scene) ~= SCENE
-        if not ____temp_45 then
-            local ____t_44 = __t
-            local ____opt_result_43
+        local ____t_64 = __t
+        local ____t_result_63
+        local ____t_62 = __t
+        local ____t_result_61
+        local ____t_60 = __t
+        local ____t_result_59
+        local ____t_58 = __t
+        local ____t_result_57
+        local ____t_56 = __t
+        local ____temp_55 = __TS__Number(scene) ~= SCENE
+        if not ____temp_55 then
+            local ____t_54 = __t
+            local ____opt_result_53
             if q ~= nil then
-                ____opt_result_43 = q.bivoltAccepted
+                ____opt_result_53 = q.bivoltAccepted
             end
-            ____temp_45 = not ____t_44(____opt_result_43)
+            ____temp_55 = not ____t_54(____opt_result_53)
         end
-        __O[1307] = ____temp_45
-        local ____temp_47 = if ____t_46(____temp_45) then __O[1307] else q.bivoltUnlocked
-        __O[1308] = ____temp_47
-        local ____temp_49 = if ____t_48(____temp_47) then __O[1308] else not __t(player)
-        __O[1309] = ____temp_49
-        local ____temp_51 = if ____t_50(____temp_49) then __O[1309] else not __isFiniteN(player.x)
-        __O[1310] = ____temp_51
-        if ____t_53(if ____t_52(____temp_51) then __O[1310] else not __isFiniteN(player.y)) then
+        __O[1326] = ____temp_55
+        if ____t_56(____temp_55) then
+            ____t_result_57 = __O[1326]
+        else
+            ____t_result_57 = q.bivoltUnlocked
+        end
+        __O[1327] = ____t_result_57
+        if ____t_58(____t_result_57) then
+            ____t_result_59 = __O[1327]
+        else
+            ____t_result_59 = not __t(player)
+        end
+        __O[1328] = ____t_result_59
+        if ____t_60(____t_result_59) then
+            ____t_result_61 = __O[1328]
+        else
+            ____t_result_61 = not __isFiniteN(player.x)
+        end
+        __O[1329] = ____t_result_61
+        if ____t_62(____t_result_61) then
+            ____t_result_63 = __O[1329]
+        else
+            ____t_result_63 = not __isFiniteN(player.y)
+        end
+        if ____t_64(____t_result_63) then
             return nil
         end
         local collected = found(nil, q)
@@ -368,10 +464,16 @@ local __O = {};
             parts,
             "find",
             function(____, p)
-                local ____t_55 = __t
-                local ____temp_54 = not __t(__call(collected, "has", p.id)) and math.abs(player.x - p.x) <= 29
-                __O[1311] = ____temp_54
-                return if ____t_55(____temp_54) then math.abs(player.y - 30 - p.y) <= 35 else __O[1311]
+                local ____t_result_67
+                local ____t_66 = __t
+                local ____temp_65 = not __t(__call(collected, "has", p.id)) and math.abs(player.x - p.x) <= 29
+                __O[1330] = ____temp_65
+                if ____t_66(____temp_65) then
+                    ____t_result_67 = math.abs(player.y - 30 - p.y) <= 35
+                else
+                    ____t_result_67 = __O[1330]
+                end
+                return ____t_result_67
             end
         )
         if not __t(part) then
@@ -384,14 +486,14 @@ local __O = {};
             id = part.id,
             count = collected.size,
             total = __len(parts),
-            message = if collected.size == __len(parts) then "Bivolt 3/3! Volte às garotas para receber suas três cargas." else ((("Bivolt " .. tostring(collected.size)) .. "/3 · ") .. tostring(part.label)) .. "."
+            message = collected.size == __len(parts) and "Bivolt 3/3! Volte às garotas para receber suas três cargas." or ((("Bivolt " .. tostring(collected.size)) .. "/3 · ") .. tostring(part.label)) .. "."
         }
     end
     local function can(self, c, x, y, t, color, small)
         if small == nil then
             small = false
         end
-        local u = if __t(small) then 0.72 else 1
+        local u = __t(small) and 0.72 or 1
         c:save()
         c:translate(
             math.floor(x + 0.5),
@@ -424,62 +526,81 @@ local __O = {};
         c:restore()
     end
     local function draw(self, c, camera, t, q, scene)
-        local ____t_64 = __t
-        local ____t_63 = __t
-        local ____t_57 = __t
-        local ____temp_56 = not __t(c) or __TS__Number(scene) ~= SCENE
-        __O[1312] = ____temp_56
-        local ____t_61 = __t
-        local ____opt_result_60
-        if q ~= nil then
-            ____opt_result_60 = q.bivoltAccepted
+        local ____t_77 = __t
+        local ____t_result_76
+        local ____t_75 = __t
+        local ____t_result_74
+        local ____t_69 = __t
+        local ____temp_68 = not __t(c) or __TS__Number(scene) ~= SCENE
+        __O[1331] = ____temp_68
+        if ____t_69(____temp_68) then
+            ____t_result_74 = __O[1331]
+        else
+            local ____t_73 = __t
+            local ____opt_result_72
+            if q ~= nil then
+                ____opt_result_72 = q.bivoltAccepted
+            end
+            ____t_result_74 = not ____t_73(____opt_result_72)
         end
-        local ____temp_62 = if ____t_57(____temp_56) then __O[1312] else not ____t_61(____opt_result_60)
-        __O[1313] = ____temp_62
-        if ____t_64(if ____t_63(____temp_62) then __O[1313] else q.bivoltUnlocked) then
+        __O[1332] = ____t_result_74
+        if ____t_75(____t_result_74) then
+            ____t_result_76 = __O[1332]
+        else
+            ____t_result_76 = q.bivoltUnlocked
+        end
+        if ____t_77(____t_result_76) then
             return
         end
         local collected = found(nil, q)
         c:save()
-        local ____c_67 = c
-        local ____c_translate_68 = c.translate
-        local ____t_66 = __t
-        local ____TS__Number_result_65 = __TS__Number(camera)
-        __O[1314] = ____TS__Number_result_65
-        ____c_translate_68(
-            ____c_67,
-            __TS__Number(-if ____t_66(____TS__Number_result_65) then __O[1314] else 0),
+        local ____c_81 = c
+        local ____c_translate_82 = c.translate
+        local ____t_result_80
+        local ____t_79 = __t
+        local ____TS__Number_result_78 = __TS__Number(camera)
+        __O[1333] = ____TS__Number_result_78
+        if ____t_79(____TS__Number_result_78) then
+            ____t_result_80 = __O[1333]
+        else
+            ____t_result_80 = 0
+        end
+        ____c_translate_82(
+            ____c_81,
+            __TS__Number(-____t_result_80),
             0
         )
         for ____, p in __iterar((parts)) do
-            if __t(__call(collected, "has", p.id)) then
-                continue
+            do
+                if __t(__call(collected, "has", p.id)) then
+                    continue
+                end
+                local pulse = 0.5 + 0.5 * math.sin(t * 3 + p.x)
+                c.globalAlpha = 0.13 + pulse * 0.1
+                c.fillStyle = p.color
+                c:beginPath()
+                c:arc(
+                    p.x,
+                    p.y,
+                    24 + pulse * 4,
+                    0,
+                    math.pi * 2
+                )
+                __call(c, "fill")
+                c.globalAlpha = 1
+                can(
+                    nil,
+                    c,
+                    p.x,
+                    p.y,
+                    t,
+                    p.color
+                )
+                c.fillStyle = "#efe3aa"
+                c.font = "bold 9px monospace"
+                c.textAlign = "center"
+                c:fillText("BIVOLT", p.x, p.y - 24)
             end
-            local pulse = 0.5 + 0.5 * math.sin(t * 3 + p.x)
-            c.globalAlpha = 0.13 + pulse * 0.1
-            c.fillStyle = p.color
-            c:beginPath()
-            c:arc(
-                p.x,
-                p.y,
-                24 + pulse * 4,
-                0,
-                math.pi * 2
-            )
-            __call(c, "fill")
-            c.globalAlpha = 1
-            can(
-                nil,
-                c,
-                p.x,
-                p.y,
-                t,
-                p.color
-            )
-            c.fillStyle = "#efe3aa"
-            c.font = "bold 9px monospace"
-            c.textAlign = "center"
-            c:fillText("BIVOLT", p.x, p.y - 24)
         end
         c:restore()
     end
@@ -513,7 +634,13 @@ local __O = {};
         }
     end
     local function update(self, dt)
-        local delta = if __isFiniteN(dt) then math.max(0, dt) else 0
+        local ____isFiniteN_result_83
+        if __isFiniteN(dt) then
+            ____isFiniteN_result_83 = math.max(0, dt)
+        else
+            ____isFiniteN_result_83 = 0
+        end
+        local delta = ____isFiniteN_result_83
         local was = remaining > 0
         remaining = math.max(0, remaining - delta)
         cooldown = math.max(0, cooldown - delta)
@@ -523,7 +650,14 @@ local __O = {};
         if cooldown < 1e-8 then
             cooldown = 0
         end
-        return {active = remaining > 0, expired = if __t(was) then remaining == 0 else was, remaining = remaining, cooldown = cooldown}
+        local ____temp_85 = remaining > 0
+        local ____t_result_84
+        if __t(was) then
+            ____t_result_84 = remaining == 0
+        else
+            ____t_result_84 = was
+        end
+        return {active = ____temp_85, expired = ____t_result_84, remaining = remaining, cooldown = cooldown}
     end
     local function reset(self)
         remaining = 0
@@ -538,7 +672,13 @@ local __O = {};
             return value
         end
         local function numeric(____, key, fallback)
-            return if __isFiniteN(__TS__Number(__get(base, key))) then __TS__Number(__get(base, key)) else fallback
+            local ____isFiniteN_result_86
+            if __isFiniteN(__TS__Number(__get(base, key))) then
+                ____isFiniteN_result_86 = __TS__Number(__get(base, key))
+            else
+                ____isFiniteN_result_86 = fallback
+            end
+            return ____isFiniteN_result_86
         end
         return __assign(
             {},
@@ -561,27 +701,57 @@ local __O = {};
     local function getStatus(self, q)
         local s = state(nil, q)
         local active = remaining > 0
-        local ____assign_77 = __assign
-        local ____temp_76 = {}
-        local ____active_73 = active
-        local ____remaining_74 = remaining
-        local ____cooldown_75 = cooldown
-        local ____t_72 = __t
-        local ____t_70 = __t
-        local ____temp_69 = if __t(s.unlocked) then s.charges > 0 else s.unlocked
-        __O[1315] = ____temp_69
-        local ____temp_71 = if ____t_70(____temp_69) then not __t(active) else __O[1315]
-        __O[1316] = ____temp_71
-        return ____assign_77(____temp_76, s, {
-            active = ____active_73,
-            remaining = ____remaining_74,
-            cooldown = ____cooldown_75,
+        local ____assign_100 = __assign
+        local ____temp_99 = {}
+        local ____active_94 = active
+        local ____remaining_95 = remaining
+        local ____cooldown_96 = cooldown
+        local ____t_result_91
+        local ____t_90 = __t
+        local ____t_result_89
+        local ____t_88 = __t
+        local ____t_result_87
+        if __t(s.unlocked) then
+            ____t_result_87 = s.charges > 0
+        else
+            ____t_result_87 = s.unlocked
+        end
+        __O[1334] = ____t_result_87
+        if ____t_88(____t_result_87) then
+            ____t_result_89 = not __t(active)
+        else
+            ____t_result_89 = __O[1334]
+        end
+        __O[1335] = ____t_result_89
+        if ____t_90(____t_result_89) then
+            ____t_result_91 = cooldown == 0
+        else
+            ____t_result_91 = __O[1335]
+        end
+        local ____temp_97 = remaining / DURATION
+        local ____temp_98 = cooldown / COOLDOWN
+        local ____t_result_93
+        if __t(active) then
+            ____t_result_93 = ("BIVOLT " .. tostring(__call(remaining, "toFixed", 1))) .. "s"
+        else
+            local ____temp_92
+            if cooldown > 0 then
+                ____temp_92 = ("BIVOLT " .. tostring(math.ceil(cooldown))) .. "s"
+            else
+                ____temp_92 = "BIVOLT ×" .. tostring(s.charges)
+            end
+            ____t_result_93 = ____temp_92
+        end
+        return ____assign_100(____temp_99, s, {
+            active = ____active_94,
+            remaining = ____remaining_95,
+            cooldown = ____cooldown_96,
             duration = DURATION,
             cooldownDuration = COOLDOWN,
-            ready = if ____t_72(____temp_71) then cooldown == 0 else __O[1316],
-            remainingRatio = remaining / DURATION,
-            cooldownRatio = cooldown / COOLDOWN,
-            label = if __t(active) then ("BIVOLT " .. tostring(__call(remaining, "toFixed", 1))) .. "s" else if cooldown > 0 then ("BIVOLT " .. tostring(math.ceil(cooldown))) .. "s" else "BIVOLT ×" .. tostring(s.charges)
+            ready = ____t_result_91,
+            remainingRatio = ____temp_97,
+            cooldownRatio = ____temp_98,
+            label = ____t_result_93
         })
     end
     local function iconSVG()

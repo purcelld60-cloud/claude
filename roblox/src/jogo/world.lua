@@ -1338,7 +1338,7 @@ local ____exports = {};
                 range = 45,
                 damage = 6 + math.floor(i / 2),
                 xp = 25 + i * 3,
-                design = if __t(__mod(i, 2)) then "brainrot" else "ink",
+                design = __t(__mod(i, 2)) and "brainrot" or "ink",
                 provocation = __get(
                     doodlePhrases,
                     __mod(
@@ -1372,7 +1372,25 @@ local ____exports = {};
         "forEach",
         function(____, x, i)
             local tier = 1 + math.floor(i / 4)
-            local weapon = if tier == 1 then "pistol" else if tier == 2 then if __t(__mod(i, 2)) then "scatter" else "pistol" else if tier == 3 then if __t(__mod(i, 2)) then "carbine" else "scatter" else if __t(__mod(i, 3)) then "carbine" else "scatter"
+            local ____temp_13
+            if tier == 1 then
+                ____temp_13 = "pistol"
+            else
+                local ____temp_12
+                if tier == 2 then
+                    ____temp_12 = __t(__mod(i, 2)) and "scatter" or "pistol"
+                else
+                    local ____temp_11
+                    if tier == 3 then
+                        ____temp_11 = __t(__mod(i, 2)) and "carbine" or "scatter"
+                    else
+                        ____temp_11 = __t(__mod(i, 3)) and "carbine" or "scatter"
+                    end
+                    ____temp_12 = ____temp_11
+                end
+                ____temp_13 = ____temp_12
+            end
+            local weapon = ____temp_13
             __call(
                 minions,
                 "push",
@@ -1398,7 +1416,7 @@ local ____exports = {};
                         __arrL({38, 58, 84, 116}, 4),
                         tier - 1
                     ),
-                    range = if i == 15 then 35 else 45,
+                    range = i == 15 and 35 or 45,
                     damage = __get(
                         __arrL({8, 10, 13, 16}, 4),
                         tier - 1
@@ -1574,7 +1592,7 @@ local ____exports = {};
                     scene = scene,
                     x = x,
                     y = y,
-                    type = if __t(__mod(i, 2)) then "paper" else "gas"
+                    type = __t(__mod(i, 2)) and "paper" or "gas"
                 }
             )
         end
@@ -1754,7 +1772,14 @@ local ____exports = {};
         landmarks = landmarks
     }, "version,floor,widths,platforms,gaps,gapCheckpoints,checkpoints,doors,bosses,minions,arenaPlatforms,arenaBounds,parkourZones,foreshadow,collectibles,questPickups,sarueTraps,iraciTraps,schoolCovers,rageMinions,sceneNames,npcEntries,landmarks")
     local function freeze(self, value)
-        if __t(if __t(value) then type(value) == "table" else value) then
+        local ____t_15 = __t
+        local ____t_result_14
+        if __t(value) then
+            ____t_result_14 = type(value) == "table"
+        else
+            ____t_result_14 = value
+        end
+        if ____t_15(____t_result_14) then
             __call(
                 __values(value),
                 "forEach",

@@ -23,13 +23,21 @@ local __O = {};
         __call(
             pts,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) else c:moveTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) end
+            function(____, p, i)
+                local ____t_result_4
+                if __t(i) then
+                    ____t_result_4 = c:lineTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                else
+                    ____t_result_4 = c:moveTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                end
+                return ____t_result_4
+            end
         )
         if __t(close) then
             c:closePath()
@@ -200,11 +208,17 @@ local __O = {};
         c:restore()
     end
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.JorgeEpilogue)
-    __O[1545] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[1545] else window.JorgeAnime) then
+    __O[1564] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[1564]
+    else
+        ____t_result_2 = window.JorgeAnime
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     if not __t(window.CanvasRenderingContext2D.prototype.roundRect) then
@@ -407,7 +421,12 @@ local __O = {};
                 local tw = 0.4 + 0.6 * math.abs(math.sin(t * (1 + rnd(nil, i)) + i))
                 c.globalAlpha = tw * (0.5 + rnd(nil, i * 11) * 0.5)
                 c.fillStyle = "#f4f0ff"
-                c:fillRect(x, y, if rnd(nil, i) > 0.9 then 2 else 1, if rnd(nil, i) > 0.9 then 2 else 1)
+                c:fillRect(
+                    x,
+                    y,
+                    rnd(nil, i) > 0.9 and 2 or 1,
+                    rnd(nil, i) > 0.9 and 2 or 1
+                )
                 i = i + 1
             end
         end
@@ -640,14 +659,26 @@ local __O = {};
     end
     local function animeEye(self, c, x, y, side, o, t)
         local w = 25
-        local ____o_open_3 = o.open
-        if ____o_open_3 == nil then
-            ____o_open_3 = 1
+        local ____o_open_5 = o.open
+        if ____o_open_5 == nil then
+            ____o_open_5 = 1
         end
-        local open = ____o_open_3
+        local open = ____o_open_5
         local h = 11 * open
-        local lx = if __t(o.look) then o.look else 0 * 4
-        local tr = if __t(o.tremble) then math.sin(t * 70) * 1 else 0
+        local ____t_result_6
+        if __t(o.look) then
+            ____t_result_6 = o.look
+        else
+            ____t_result_6 = 0
+        end
+        local lx = ____t_result_6 * 4
+        local ____t_result_7
+        if __t(o.tremble) then
+            ____t_result_7 = math.sin(t * 70) * 1
+        else
+            ____t_result_7 = 0
+        end
+        local tr = ____t_result_7
         local function shape()
             c:beginPath()
             c:moveTo(x - w, y + 2)
@@ -675,7 +706,7 @@ local __O = {};
         __call(c, "fill")
         c:save()
         c:clip()
-        local ir = 10.5 * if __lt(o.pupil, 0.35) then 0.8 else 1
+        local ir = 10.5 * (__lt(o.pupil, 0.35) and 0.8 or 1)
         local ix = x + lx + tr + side * 2
         local iy = y + 1
         local g = c:createRadialGradient(
@@ -686,8 +717,14 @@ local __O = {};
             iy,
             ir
         )
-        g:addColorStop(0, if __t(o.empty) then "#4a3428" else "#b07a42")
-        g:addColorStop(0.7, if __t(o.empty) then "#2a1c16" else "#6a3c1c")
+        g:addColorStop(
+            0,
+            __t(o.empty) and "#4a3428" or "#b07a42"
+        )
+        g:addColorStop(
+            0.7,
+            __t(o.empty) and "#2a1c16" or "#6a3c1c"
+        )
         g:addColorStop(1, "#1a0e08")
         c.fillStyle = g
         c:beginPath()
@@ -718,18 +755,18 @@ local __O = {};
                 k = k + 1
             end
         end
-        local ____circ_6 = circ
-        local ____c_5 = c
-        local ____o_pupil_4 = o.pupil
-        if ____o_pupil_4 == nil then
-            ____o_pupil_4 = 0.6
+        local ____circ_10 = circ
+        local ____c_9 = c
+        local ____o_pupil_8 = o.pupil
+        if ____o_pupil_8 == nil then
+            ____o_pupil_8 = 0.6
         end
-        ____circ_6(
+        ____circ_10(
             nil,
-            ____c_5,
+            ____c_9,
             ix,
             iy,
-            math.max(1.4, 5.5 * ____o_pupil_4),
+            math.max(1.4, 5.5 * ____o_pupil_8),
             "#090505"
         )
         if not __t(o.empty) then
@@ -839,7 +876,15 @@ local __O = {};
         c:save()
         c:translate(x, y)
         c:scale(s, s)
-        c:rotate(if __t(o.tilt) then o.tilt else 0)
+        local ____c_12 = c
+        local ____c_rotate_13 = c.rotate
+        local ____t_result_11
+        if __t(o.tilt) then
+            ____t_result_11 = o.tilt
+        else
+            ____t_result_11 = 0
+        end
+        ____c_rotate_13(____c_12, ____t_result_11)
         fill(
             nil,
             c,
@@ -1073,7 +1118,12 @@ local __O = {};
         c:quadraticCurveTo(2, 72, -22, 66)
         __call(c, "fill")
         c.fillStyle = "rgba(28,14,18,.5)"
-        c:fillRect(-90, -90, 180, if __t(o.empty) then 82 else 30)
+        c:fillRect(
+            -90,
+            -90,
+            180,
+            __t(o.empty) and 82 or 30
+        )
         if __t(o.empty) then
             local gg = c:createLinearGradient(0, -8, 0, 26)
             gg:addColorStop(0, "rgba(20,10,20,.55)")
@@ -1195,7 +1245,7 @@ local __O = {};
             ),
             "#1a1216"
         )
-        local bw = if o.mouth == "gasp" then -7 else if __t(o.empty) then 3 else 2
+        local bw = o.mouth == "gasp" and -7 or (__t(o.empty) and 3 or 2)
         fill(
             nil,
             c,
@@ -1241,44 +1291,44 @@ local __O = {};
             "rgba(90,45,30,.55)",
             1.8
         )
-        local ____animeEye_12 = animeEye
-        local ____array_11 = __TS__SparseArrayNew(
+        local ____animeEye_19 = animeEye
+        local ____array_18 = __TS__SparseArrayNew(
             nil,
             c,
             -36,
             -6,
             -1
         )
-        local ____assign_10 = __assign
-        local ____temp_8 = {}
-        local ____o_9 = o
-        local ____o_open_7 = o.open
-        if ____o_open_7 == nil then
-            ____o_open_7 = 1
+        local ____assign_17 = __assign
+        local ____temp_15 = {}
+        local ____o_16 = o
+        local ____o_open_14 = o.open
+        if ____o_open_14 == nil then
+            ____o_open_14 = 1
         end
         __TS__SparseArrayPush(
-            ____array_11,
-            ____assign_10(____temp_8, ____o_9, {open = ____o_open_7 * 0.8}),
+            ____array_18,
+            ____assign_17(____temp_15, ____o_16, {open = ____o_open_14 * 0.8}),
             t
         )
-        ____animeEye_12(__TS__SparseArraySpread(____array_11))
-        local ____animeEye_19 = animeEye
-        local ____c_17 = c
-        local ____temp_18 = -7
-        local ____assign_16 = __assign
-        local ____temp_14 = {}
-        local ____o_15 = o
-        local ____o_open_13 = o.open
-        if ____o_open_13 == nil then
-            ____o_open_13 = 1
+        ____animeEye_19(__TS__SparseArraySpread(____array_18))
+        local ____animeEye_26 = animeEye
+        local ____c_24 = c
+        local ____temp_25 = -7
+        local ____assign_23 = __assign
+        local ____temp_21 = {}
+        local ____o_22 = o
+        local ____o_open_20 = o.open
+        if ____o_open_20 == nil then
+            ____o_open_20 = 1
         end
-        ____animeEye_19(
+        ____animeEye_26(
             nil,
-            ____c_17,
+            ____c_24,
             36,
-            ____temp_18,
+            ____temp_25,
             1,
-            ____assign_16(____temp_14, ____o_15, {open = ____o_open_13 * 0.8}),
+            ____assign_23(____temp_21, ____o_22, {open = ____o_open_20 * 0.8}),
             t
         )
         fill(
@@ -1347,7 +1397,13 @@ local __O = {};
             2.4,
             "#f0c08e"
         )
-        local tr = if __t(o.tremble) then math.sin(t * 40) * 1.2 else 0
+        local ____t_result_27
+        if __t(o.tremble) then
+            ____t_result_27 = math.sin(t * 40) * 1.2
+        else
+            ____t_result_27 = 0
+        end
+        local tr = ____t_result_27
         if o.mouth == "gasp" then
             oval(
                 nil,
@@ -1676,7 +1732,7 @@ local __O = {};
             local k = 0
             while k < 4 do
                 local y = -18 + k * 44
-                local len = if k == 3 then 30 else 40
+                local len = k == 3 and 30 or 40
                 c:beginPath()
                 c:moveTo(132, y - 16)
                 c:bezierCurveTo(
@@ -1697,7 +1753,7 @@ local __O = {};
                 )
                 c:lineTo(132, y + 16)
                 c:closePath()
-                c.fillStyle = if __t(__mod(k, 2)) then SKIN else SKIN_HI
+                c.fillStyle = __t(__mod(k, 2)) and SKIN or SKIN_HI
                 __call(c, "fill")
                 c.lineWidth = 3.6
                 c.strokeStyle = INK
@@ -1763,29 +1819,31 @@ local __O = {};
             local fx = ____value[2]
             local fy = ____value[3]
             local col = ____value[4]
-            local k = clamp(nil, (t - ft) / 2.4)
-            if __t(k <= 0 or k >= 1) then
-                continue
-            end
-            c:save()
-            c.globalAlpha = (1 - k) * 0.9
             do
-                local i = 0
-                while i < 26 do
-                    local a = i / 26 * math.pi * 2
-                    local r = ease(nil, k) * 70
-                    circ(
-                        nil,
-                        c,
-                        fx + math.cos(a) * r,
-                        fy + math.sin(a) * r + k * k * 30,
-                        2,
-                        col
-                    )
-                    i = i + 1
+                local k = clamp(nil, (t - ft) / 2.4)
+                if __t(k <= 0 or k >= 1) then
+                    continue
                 end
+                c:save()
+                c.globalAlpha = (1 - k) * 0.9
+                do
+                    local i = 0
+                    while i < 26 do
+                        local a = i / 26 * math.pi * 2
+                        local r = ease(nil, k) * 70
+                        circ(
+                            nil,
+                            c,
+                            fx + math.cos(a) * r,
+                            fy + math.sin(a) * r + k * k * 30,
+                            2,
+                            col
+                        )
+                        i = i + 1
+                    end
+                end
+                c:restore()
             end
-            c:restore()
         end
         c.fillStyle = "#120f22"
         path(
@@ -1810,7 +1868,7 @@ local __O = {};
         do
             local i = 0
             while i < 40 do
-                c.fillStyle = if rnd(nil, i) > 0.5 then "#ffd27a" else "#ffb35a"
+                c.fillStyle = rnd(nil, i) > 0.5 and "#ffd27a" or "#ffb35a"
                 c.globalAlpha = 0.5 + 0.5 * math.sin(t * 2 + i)
                 c:fillRect(
                     rnd(nil, i * 3) * W,
@@ -2055,7 +2113,7 @@ local __O = {};
                     60 + rnd(nil, i * 3) * 380 + math.sin(t * 2 + i) * 14
                 )
                 c:rotate(t * 2 + i)
-                c.fillStyle = if __t(__mod(i, 3)) then "#f2e6d0" else "#ffd0d8"
+                c.fillStyle = __t(__mod(i, 3)) and "#f2e6d0" or "#ffd0d8"
                 c.globalAlpha = 0.7
                 c:fillRect(-5, -3, 10, 6)
                 c:restore()
@@ -2108,7 +2166,7 @@ local __O = {};
         )
     end
     local function vibration(self, c, t, p)
-        local buzz = if math.abs(math.sin(t * 22)) > 0.4 then 1 else 0
+        local buzz = math.abs(math.sin(t * 22)) > 0.4 and 1 or 0
         c:save()
         shake(nil, c, buzz * 2.5, t)
         vgrad(
@@ -2125,7 +2183,7 @@ local __O = {};
         do
             local y = 0
             while y < H do
-                c.fillStyle = if __t(__mod(y, 12)) then "#22325e" else "#1a2850"
+                c.fillStyle = __t(__mod(y, 12)) and "#22325e" or "#1a2850"
                 c:fillRect(0, y, W, 3)
                 y = y + 6
             end
@@ -2337,7 +2395,15 @@ local __O = {};
         c:fillText("CHAMADA RECEBIDA", 0, -118)
         c.fillStyle = "#ffffff"
         c.font = "800 38px Space,Arial,sans-serif"
-        c:fillText(if __t(o.name) then o.name else "JORGE", 0, -76)
+        local ____c_29 = c
+        local ____c_fillText_30 = c.fillText
+        local ____t_result_28
+        if __t(o.name) then
+            ____t_result_28 = o.name
+        else
+            ____t_result_28 = "JORGE"
+        end
+        ____c_fillText_30(____c_29, ____t_result_28, 0, -76)
         circ(
             nil,
             c,
@@ -2624,7 +2690,13 @@ local __O = {};
         c:restore()
     end
     local function recognition(self, c, t, p)
-        local impact = if __lt(t, 0.5) then clamp(nil, (t - 0.28) / 0.06) * (1 - clamp(nil, (t - 0.36) / 0.12)) else 0
+        local ____lt_result_31
+        if __lt(t, 0.5) then
+            ____lt_result_31 = clamp(nil, (t - 0.28) / 0.06) * (1 - clamp(nil, (t - 0.36) / 0.12))
+        else
+            ____lt_result_31 = 0
+        end
+        local impact = ____lt_result_31
         local shrink = smooth(nil, (t - 0.3) / 0.25)
         vgrad(
             nil,
@@ -2956,7 +3028,13 @@ local __O = {};
         )
         local contact = 1.95
         local fall = clamp(nil, t / contact)
-        local slow = if fall < 0.8 then fall * 0.7 else 0.56 + (fall - 0.8) * 2.2
+        local ____temp_32
+        if fall < 0.8 then
+            ____temp_32 = fall * 0.7
+        else
+            ____temp_32 = 0.56 + (fall - 0.8) * 2.2
+        end
+        local slow = ____temp_32
         do
             local i = 0
             while i < 30 do
@@ -3211,10 +3289,16 @@ local __O = {};
         c.fillStyle = "#020106"
         c:fillRect(0, 0, W, H)
         local flashT = __mod(t, 3.3)
-        local ____t_21 = __t
-        local ____temp_20 = flashT < 0.08
-        __O[1546] = ____temp_20
-        local flash = if ____t_21(____temp_20) then __O[1546] else flashT > 0.16 and flashT < 0.22
+        local ____t_result_35
+        local ____t_34 = __t
+        local ____temp_33 = flashT < 0.08
+        __O[1565] = ____temp_33
+        if ____t_34(____temp_33) then
+            ____t_result_35 = __O[1565]
+        else
+            ____t_result_35 = flashT > 0.16 and flashT < 0.22
+        end
+        local flash = ____t_result_35
         if __t(flash) then
             c.fillStyle = "rgba(120,80,200,.35)"
             c:fillRect(0, 0, W, H)
@@ -3523,29 +3607,47 @@ local __O = {};
         if __t(not __t(c) or not __t(s)) then
             return
         end
-        local ____t_23 = __t
-        local ____TS__Number_result_22 = __TS__Number(s.index)
-        __O[1547] = ____TS__Number_result_22
+        local ____t_result_38
+        local ____t_37 = __t
+        local ____TS__Number_result_36 = __TS__Number(s.index)
+        __O[1566] = ____TS__Number_result_36
+        if ____t_37(____TS__Number_result_36) then
+            ____t_result_38 = __O[1566]
+        else
+            ____t_result_38 = 0
+        end
         local index = clamp(
             nil,
-            math.floor(if ____t_23(____TS__Number_result_22) then __O[1547] else 0),
+            math.floor(____t_result_38),
             0,
             __len(SHOTS) - 1
         )
         local shot = __get(SHOTS, index)
-        local ____t_25 = __t
-        local ____TS__Number_result_24 = __TS__Number(s.time)
-        __O[1548] = ____TS__Number_result_24
-        local t = math.max(0, if ____t_25(____TS__Number_result_24) then __O[1548] else 0)
+        local ____t_result_41
+        local ____t_40 = __t
+        local ____TS__Number_result_39 = __TS__Number(s.time)
+        __O[1567] = ____TS__Number_result_39
+        if ____t_40(____TS__Number_result_39) then
+            ____t_result_41 = __O[1567]
+        else
+            ____t_result_41 = 0
+        end
+        local t = math.max(0, ____t_result_41)
         local p = clamp(nil, t / shot.duration)
         c:save()
         c.imageSmoothingEnabled = true
         c.fillStyle = "#000"
         c:fillRect(0, 0, W, H)
-        local ____t_27 = __t
-        local ____get_result_26 = __get(RENDER, shot.id)
-        __O[1549] = ____get_result_26
-        if ____t_27(____get_result_26) then __O[1549] else eyes(nil, c, t, p)
+        local ____t_result_44
+        local ____t_43 = __t
+        local ____get_result_42 = __get(RENDER, shot.id)
+        __O[1568] = ____get_result_42
+        if ____t_43(____get_result_42) then
+            ____t_result_44 = __O[1568]
+        else
+            ____t_result_44 = eyes
+        end
+        ____t_result_44(nil, c, t, p)
         local fadeIn = 1 - smooth(nil, t / 0.25)
         if __t(fadeIn > 0 and index > 0) then
             c.fillStyle = ("rgba(0,0,0," .. tostring(fadeIn)) .. ")"

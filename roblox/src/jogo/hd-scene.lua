@@ -4,23 +4,29 @@ local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
 local __fapply, __lt, __le, __gt, __callq, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__fapply, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
-local __len, __call, __add, __keys, __band = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__keys, __JSR.__band
+local __len, __call, __add, __iter, __keys, __band = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__keys, __JSR.__band
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__ParseInt = ____lualib.__TS__ParseInt
-local __TS__Iterator = ____lualib.__TS__Iterator
-local __TS__Number = ____lualib.__TS__Number
 local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
 local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
 local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
+local __TS__Iterator = ____lualib.__TS__Iterator
+local __TS__Number = ____lualib.__TS__Number
 local ____exports = {}
 local __O = {};
 (function()
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawArena)
     __O[281] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[281] else window.HdScene) then
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[281]
+    else
+        ____t_result_2 = window.HdScene
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     local orig = window.Art.drawArena
@@ -71,7 +77,13 @@ local __O = {};
                 __get(v, 2)
             )
         ) * 255 + 0.5))
-        return if a == nil then ("rgb(" .. s) .. ")" else ((("rgba(" .. s) .. ",") .. tostring(a)) .. ")"
+        local ____temp_4
+        if a == nil then
+            ____temp_4 = ("rgb(" .. s) .. ")"
+        else
+            ____temp_4 = ((("rgba(" .. s) .. ",") .. tostring(a)) .. ")"
+        end
+        return ____temp_4
     end
     local function hex(____, h)
         return __arrL(
@@ -113,28 +125,40 @@ local __O = {};
         )
     end
     local function active(____, ____type)
-        local ____t_15 = __t
-        local ____t_7 = __t
-        local ____get_6 = __get
-        local ____opt_result_5
-        if ____type ~= nil then
-            ____opt_result_5 = ____type.type
-        end
-        local ____temp_14 = not not ____t_7(____get_6(HANDLED, if type(____type) == "table" then ____opt_result_5 else ____type))
-        if ____temp_14 then
-            local ____t_13 = __t
-            local ____opt_10 = window.Graphics
-            if ____opt_10 ~= nil then
-                ____opt_10 = ____opt_10.isLite
+        local ____t_result_19
+        local ____t_18 = __t
+        local ____t_10 = __t
+        local ____get_9 = __get
+        local ____temp_8
+        if type(____type) == "table" then
+            local ____opt_result_7
+            if ____type ~= nil then
+                ____opt_result_7 = ____type.type
             end
-            local ____opt_result_12
-            if ____opt_10 ~= nil then
-                ____opt_result_12 = ____opt_10(____opt_10)
-            end
-            ____temp_14 = not ____t_13(____opt_result_12)
+            ____temp_8 = ____opt_result_7
+        else
+            ____temp_8 = ____type
         end
-        __O[282] = ____temp_14
-        return if ____t_15(____temp_14) then not not __t(window.DayTime) else __O[282]
+        local ____temp_17 = not not ____t_10(____get_9(HANDLED, ____temp_8))
+        if ____temp_17 then
+            local ____t_16 = __t
+            local ____opt_13 = window.Graphics
+            if ____opt_13 ~= nil then
+                ____opt_13 = ____opt_13.isLite
+            end
+            local ____opt_result_15
+            if ____opt_13 ~= nil then
+                ____opt_result_15 = ____opt_13(____opt_13)
+            end
+            ____temp_17 = not ____t_16(____opt_result_15)
+        end
+        __O[282] = ____temp_17
+        if ____t_18(____temp_17) then
+            ____t_result_19 = not not __t(window.DayTime)
+        else
+            ____t_result_19 = __O[282]
+        end
+        return ____t_result_19
     end
     local WINS = __ord(
         {
@@ -172,7 +196,13 @@ local __O = {};
     local WIN = WINS.igor
     local cur = "igor"
     local function use(____, ____type)
-        cur = if __t(__get(HANDLED, ____type)) then ____type else "igor"
+        local ____t_result_20
+        if __t(__get(HANDLED, ____type)) then
+            ____t_result_20 = ____type
+        else
+            ____t_result_20 = "igor"
+        end
+        cur = ____t_result_20
         WIN = __get(WINS, cur)
     end
     local TUBES = __call(
@@ -233,7 +263,7 @@ local __O = {};
                     14 + hash(nil, i + 0.5) * 130,
                     1,
                     1,
-                    if hash(nil, i * 3) > 0.5 then "#d8ccae" else "#ede4cb"
+                    hash(nil, i * 3) > 0.5 and "#d8ccae" or "#ede4cb"
                 )
                 i = i + 1
             end
@@ -255,7 +285,7 @@ local __O = {};
                             1,
                             "#bfb291"
                         )
-                        x = x + if hash(nil, i * 9 + k) > 0.5 then 1 else -1
+                        x = x + (hash(nil, i * 9 + k) > 0.5 and 1 or -1)
                         y = y + 1
                         k = k + 1
                     end
@@ -444,7 +474,7 @@ local __O = {};
                     156,
                     8,
                     8,
-                    if __t(__mod(tx, 2)) then "#e9dfc0" else "#d79a4a"
+                    __t(__mod(tx, 2)) and "#e9dfc0" or "#d79a4a"
                 )
                 R(
                     nil,
@@ -453,7 +483,7 @@ local __O = {};
                     156,
                     8,
                     1,
-                    if __t(__mod(tx, 2)) then "#fff8e0" else "#eab768"
+                    __t(__mod(tx, 2)) and "#fff8e0" or "#eab768"
                 )
                 R(
                     nil,
@@ -462,7 +492,7 @@ local __O = {};
                     156,
                     1,
                     8,
-                    if __t(__mod(tx, 2)) then "#bdb18f" else "#a8722f"
+                    __t(__mod(tx, 2)) and "#bdb18f" or "#a8722f"
                 )
                 R(
                     nil,
@@ -471,7 +501,7 @@ local __O = {};
                     163,
                     8,
                     1,
-                    if __t(__mod(tx, 2)) then "#bdb18f" else "#a8722f"
+                    __t(__mod(tx, 2)) and "#bdb18f" or "#a8722f"
                 )
                 tx = tx + 1
             end
@@ -543,14 +573,17 @@ local __O = {};
                         local x = mid + k * tw
                         local light = __band(k + r, 1)
                         local shade = r / 5
-                        R(
+                        local ____array_22 = __TS__SparseArrayNew(
                             nil,
                             c,
                             x,
                             fy,
                             tw,
-                            rh,
-                            if __t(light) then css(
+                            rh
+                        )
+                        local ____t_result_21
+                        if __t(light) then
+                            ____t_result_21 = css(
                                 nil,
                                 mix(
                                     nil,
@@ -558,7 +591,9 @@ local __O = {};
                                     hex(nil, "#d2ddd4"),
                                     shade
                                 )
-                            ) else css(
+                            )
+                        else
+                            ____t_result_21 = css(
                                 nil,
                                 mix(
                                     nil,
@@ -567,7 +602,9 @@ local __O = {};
                                     shade
                                 )
                             )
-                        )
+                        end
+                        __TS__SparseArrayPush(____array_22, ____t_result_21)
+                        R(__TS__SparseArraySpread(____array_22))
                         R(
                             nil,
                             c,
@@ -575,7 +612,7 @@ local __O = {};
                             fy,
                             tw,
                             1,
-                            if __t(light) then "#dfe8df" else "#b5c5bf"
+                            __t(light) and "#dfe8df" or "#b5c5bf"
                         )
                         R(
                             nil,
@@ -734,7 +771,7 @@ local __O = {};
                         w.y,
                         3,
                         3,
-                        if __t(red) then "#c9473d" else "#f3ead6"
+                        __t(red) and "#c9473d" or "#f3ead6"
                     )
                     R(
                         nil,
@@ -743,7 +780,7 @@ local __O = {};
                         w.y + 3,
                         3,
                         3,
-                        if __t(red) then "#f3ead6" else "#c9473d"
+                        __t(red) and "#f3ead6" or "#c9473d"
                     )
                     R(
                         nil,
@@ -751,8 +788,8 @@ local __O = {};
                         w.x + k,
                         w.y + 6,
                         3,
-                        if __mod(k / 3, 4) < 2 then 2 else 1,
-                        if __t(red) then "#a8362e" else "#d9cfb8"
+                        __mod(k / 3, 4) < 2 and 2 or 1,
+                        __t(red) and "#a8362e" or "#d9cfb8"
                     )
                     k = k + 3
                 end
@@ -1195,7 +1232,7 @@ local __O = {};
                         144,
                         7,
                         4,
-                        if __t(__mod(k, 2)) then "#e2c27a" else "#c98a4a"
+                        __t(__mod(k, 2)) and "#e2c27a" or "#c98a4a"
                     )
                     R(
                         nil,
@@ -1443,7 +1480,7 @@ local __O = {};
                         149 - __mod(k, 2),
                         4,
                         6 + __mod(k, 2),
-                        if __t(__mod(k, 2)) then "#e9e2c8" else "#c9dfe6"
+                        __t(__mod(k, 2)) and "#e9e2c8" or "#c9dfe6"
                     )
                     k = k + 1
                 end
@@ -1898,7 +1935,7 @@ local __O = {};
                         64 + hash(nil, i + 910) * 68,
                         2,
                         1,
-                        if hash(nil, i) > 0.5 then "#3a705a" else "#295442"
+                        hash(nil, i) > 0.5 and "#3a705a" or "#295442"
                     )
                     i = i + 1
                 end
@@ -2084,26 +2121,33 @@ local __O = {};
             "#39464c"
         )
         c.fillStyle = "rgba(15,30,36,.25)"
-        for ____, ____value in __iterar((if ____type == "igor" then __arrL(
-            {
-                __arrL({OFF + 30, 109}, 2),
-                __arrL({OFF + 345, 74}, 2),
-                __arrL({FRIDGE.x - 2, FRIDGE.w + 4}, 2),
-                __arrL({OFF + 3, 16}, 2),
-                __arrL({OFF + 461, 14}, 2)
-            },
-            5
-        ) else __arrL(
-            {
-                __arrL({OFF + 21, 83}, 2),
-                __arrL({OFF + 377, 83}, 2),
-                __arrL({OFF + 3, 16}, 2),
-                __arrL({OFF + 461, 14}, 2),
-                __arrL({OFF + 149, 18}, 2),
-                __arrL({OFF + 321, 18}, 2)
-            },
-            6
-        ))) do
+        local ____iter_24 = __iter
+        local ____temp_23
+        if ____type == "igor" then
+            ____temp_23 = __arrL(
+                {
+                    __arrL({OFF + 30, 109}, 2),
+                    __arrL({OFF + 345, 74}, 2),
+                    __arrL({FRIDGE.x - 2, FRIDGE.w + 4}, 2),
+                    __arrL({OFF + 3, 16}, 2),
+                    __arrL({OFF + 461, 14}, 2)
+                },
+                5
+            )
+        else
+            ____temp_23 = __arrL(
+                {
+                    __arrL({OFF + 21, 83}, 2),
+                    __arrL({OFF + 377, 83}, 2),
+                    __arrL({OFF + 3, 16}, 2),
+                    __arrL({OFF + 461, 14}, 2),
+                    __arrL({OFF + 149, 18}, 2),
+                    __arrL({OFF + 321, 18}, 2)
+                },
+                6
+            )
+        end
+        for ____, ____value in __TS__Iterator(____iter_24(____temp_23)) do
             local x0 = ____value[1]
             local w0 = ____value[2]
             c:fillRect(x0, FLOOR, w0, 2)
@@ -2454,7 +2498,14 @@ local __O = {};
                             local wx = 2
                             while wx < bw - 2 do
                                 local lit = hash(nil, i * 31 + wx * 7 + wy) > 0.55
-                                if __t(if __t(lit) then __gt(s.night, 0.3) else lit) then
+                                local ____t_26 = __t
+                                local ____t_result_25
+                                if __t(lit) then
+                                    ____t_result_25 = __gt(s.night, 0.3)
+                                else
+                                    ____t_result_25 = lit
+                                end
+                                if ____t_26(____t_result_25) then
                                     R(
                                         nil,
                                         c,
@@ -2500,7 +2551,10 @@ local __O = {};
                     nil,
                     mul(
                         nil,
-                        hex(nil, if __t(__mod(i, 2)) then "#3f7a45" else "#4f8f4a"),
+                        hex(
+                            nil,
+                            __t(__mod(i, 2)) and "#3f7a45" or "#4f8f4a"
+                        ),
                         light
                     )
                 )
@@ -2639,157 +2693,159 @@ local __O = {};
                 do
                     local k = 0
                     while k < 4 do
-                        local n = i * 7 + k
-                        local px = w.x - OFF + ox + 4 + k * 15 + math.floor(hash(nil, n + 110) * 4 + 0.5)
-                        local bob = math.floor(math.max(
-                            0,
-                            math.sin(t * (4.5 + hash(nil, n) * 2) + n * 1.9)
-                        ) * 3 + 0.5)
-                        local py = __add(w.y, w.h) - 14 - math.floor(hash(nil, n + 120) * 6 + 0.5) - bob
-                        if __t(__lt(px, -16) or __gt(px, LW + 4)) then
-                            continue
-                        end
-                        local skin = css(
-                            nil,
-                            pre(
+                        do
+                            local n = i * 7 + k
+                            local px = w.x - OFF + ox + 4 + k * 15 + math.floor(hash(nil, n + 110) * 4 + 0.5)
+                            local bob = math.floor(math.max(
+                                0,
+                                math.sin(t * (4.5 + hash(nil, n) * 2) + n * 1.9)
+                            ) * 3 + 0.5)
+                            local py = __add(w.y, w.h) - 14 - math.floor(hash(nil, n + 120) * 6 + 0.5) - bob
+                            if __t(__lt(px, -16) or __gt(px, LW + 4)) then
+                                do k = k + 1 continue end
+                            end
+                            local skin = css(
                                 nil,
-                                mul(
+                                pre(
                                     nil,
-                                    hex(
+                                    mul(
                                         nil,
-                                        __get(
-                                            SKIN,
-                                            __mod(n, 5)
-                                        )
-                                    ),
-                                    light
+                                        hex(
+                                            nil,
+                                            __get(
+                                                SKIN,
+                                                __mod(n, 5)
+                                            )
+                                        ),
+                                        light
+                                    )
                                 )
                             )
-                        )
-                        local hair = css(
-                            nil,
-                            pre(
+                            local hair = css(
                                 nil,
-                                mul(
+                                pre(
                                     nil,
-                                    hex(
+                                    mul(
                                         nil,
-                                        __get(
-                                            HAIR,
-                                            __mod(n * 3, 5)
-                                        )
-                                    ),
-                                    light
+                                        hex(
+                                            nil,
+                                            __get(
+                                                HAIR,
+                                                __mod(n * 3, 5)
+                                            )
+                                        ),
+                                        light
+                                    )
                                 )
                             )
-                        )
-                        local shirt = css(
-                            nil,
-                            pre(
+                            local shirt = css(
                                 nil,
-                                mul(
+                                pre(
                                     nil,
-                                    hex(
+                                    mul(
                                         nil,
-                                        __get(
-                                            SHIRT,
-                                            __mod(n * 5, 6)
-                                        )
-                                    ),
-                                    light
+                                        hex(
+                                            nil,
+                                            __get(
+                                                SHIRT,
+                                                __mod(n * 5, 6)
+                                            )
+                                        ),
+                                        light
+                                    )
                                 )
                             )
-                        )
-                        R(
-                            nil,
-                            c,
-                            px - 2,
-                            py + 10,
-                            14,
-                            30,
-                            shirt
-                        )
-                        R(
-                            nil,
-                            c,
-                            px,
-                            py,
-                            10,
-                            10,
-                            skin
-                        )
-                        R(
-                            nil,
-                            c,
-                            px,
-                            py - 2,
-                            10,
-                            4,
-                            hair
-                        )
-                        R(
-                            nil,
-                            c,
-                            px - 1,
-                            py,
-                            1,
-                            5,
-                            hair
-                        )
-                        R(
-                            nil,
-                            c,
-                            px + 2,
-                            py + 5,
-                            1,
-                            2,
-                            "#1c1c22"
-                        )
-                        R(
-                            nil,
-                            c,
-                            px + 6,
-                            py + 5,
-                            1,
-                            2,
-                            "#1c1c22"
-                        )
-                        if __mod(
-                            n + math.floor(t * 2),
-                            5
-                        ) == 0 then
                             R(
                                 nil,
                                 c,
-                                px + 3,
-                                py + 8,
-                                4,
-                                1,
-                                "#5a2a2a"
-                            )
-                        end
-                        if __mod(
-                            n + math.floor(t * 1.5),
-                            4
-                        ) == 0 then
-                            R(
-                                nil,
-                                c,
-                                px + 11,
-                                py - 6 - bob,
-                                3,
+                                px - 2,
+                                py + 10,
                                 14,
+                                30,
+                                shirt
+                            )
+                            R(
+                                nil,
+                                c,
+                                px,
+                                py,
+                                10,
+                                10,
                                 skin
                             )
                             R(
                                 nil,
                                 c,
-                                px + 10,
-                                py - 9 - bob,
-                                5,
+                                px,
+                                py - 2,
+                                10,
                                 4,
-                                skin
+                                hair
                             )
+                            R(
+                                nil,
+                                c,
+                                px - 1,
+                                py,
+                                1,
+                                5,
+                                hair
+                            )
+                            R(
+                                nil,
+                                c,
+                                px + 2,
+                                py + 5,
+                                1,
+                                2,
+                                "#1c1c22"
+                            )
+                            R(
+                                nil,
+                                c,
+                                px + 6,
+                                py + 5,
+                                1,
+                                2,
+                                "#1c1c22"
+                            )
+                            if __mod(
+                                n + math.floor(t * 2),
+                                5
+                            ) == 0 then
+                                R(
+                                    nil,
+                                    c,
+                                    px + 3,
+                                    py + 8,
+                                    4,
+                                    1,
+                                    "#5a2a2a"
+                                )
+                            end
+                            if __mod(
+                                n + math.floor(t * 1.5),
+                                4
+                            ) == 0 then
+                                R(
+                                    nil,
+                                    c,
+                                    px + 11,
+                                    py - 6 - bob,
+                                    3,
+                                    14,
+                                    skin
+                                )
+                                R(
+                                    nil,
+                                    c,
+                                    px + 10,
+                                    py - 9 - bob,
+                                    5,
+                                    4,
+                                    skin
+                                )
+                            end
                         end
                         k = k + 1
                     end
@@ -2812,7 +2868,13 @@ local __O = {};
     local function back(self, c, ____type, camera, t, homeX)
         use(nil, ____type)
         local s = window.DayTime:state()
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_27
+        if __t(homeX) then
+            ____t_result_27 = homeX - camera
+        else
+            ____t_result_27 = 480
+        end
+        local center = ____t_result_27
         local ox = math.floor((center - 480) / 2 + 0.5)
         lc:clearRect(0, 0, LW, LH)
         R(
@@ -2864,7 +2926,7 @@ local __O = {};
                     ky - math.floor(math.cos(i / 6 * math.pi) * 7 + 0.5),
                     1,
                     1,
-                    if __t(__mod(i, 3)) then "#9aa39c" else "#2a3840"
+                    __t(__mod(i, 3)) and "#9aa39c" or "#2a3840"
                 )
                 i = i + 1
             end
@@ -2902,18 +2964,25 @@ local __O = {};
             1,
             "#1f2a31"
         )
-        lampFlicker = if hash(
+        lampFlicker = hash(
             nil,
             math.floor(t * 14)
-        ) > 0.9 then 0.35 else 1
+        ) > 0.9 and 0.35 or 1
         __call(
             TUBES,
             "forEach",
             function(____, x, i)
-                local on = math.max(
+                local ____math_max_result_29 = math.max(
                     0,
                     math.min(1, (s.night - 0.15) * 2)
-                ) * if i == 2 then lampFlicker else 1
+                )
+                local ____temp_28
+                if i == 2 then
+                    ____temp_28 = lampFlicker
+                else
+                    ____temp_28 = 1
+                end
+                local on = ____math_max_result_29 * ____temp_28
                 R(
                     nil,
                     lc,
@@ -3006,7 +3075,7 @@ local __O = {};
                         t * 0.8 + hash(nil, i + 600),
                         1
                     )
-                    local jx = ox + 347 + if __t(__mod(i, 2)) then 26 else 8 + 3 + math.floor(hash(nil, i + 610) * 7 + 0.5)
+                    local jx = ox + 347 + (__t(__mod(i, 2)) and 26 or 8) + 3 + math.floor(hash(nil, i + 610) * 7 + 0.5)
                     lc.fillStyle = "rgba(255,255,255,.55)"
                     lc:fillRect(
                         jx,
@@ -3026,7 +3095,7 @@ local __O = {};
                 44,
                 10,
                 6,
-                if __t(on) then "#ff4a3a" else "#7a1a1a"
+                __t(on) and "#ff4a3a" or "#7a1a1a"
             )
             if __t(on) then
                 R(
@@ -3154,9 +3223,21 @@ local __O = {};
         if not __t(active(nil, ____type)) then
             return
         end
-        use(nil, if type(____type) == "table" then ____type.type else ____type)
+        local ____temp_30
+        if type(____type) == "table" then
+            ____temp_30 = ____type.type
+        else
+            ____temp_30 = ____type
+        end
+        use(nil, ____temp_30)
         local s = window.DayTime:state()
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_31
+        if __t(homeX) then
+            ____t_result_31 = homeX - camera
+        else
+            ____t_result_31 = 480
+        end
+        local center = ____t_result_31
         local ox = math.floor((center - 480) / 2 + 0.5)
         local b = math.max(
             0,
@@ -3175,76 +3256,102 @@ local __O = {};
         )
         c:fillRect(-40, -40, 1040, 620)
         lg:clearRect(0, 0, LW, LH)
-        local T = if s.sunT ~= nil then s.sunT else s.moonT
-        local str = if s.sunT ~= nil then math.min(
-            1,
-            math.sin(s.sunT * math.pi) * 1.6 + 0.25
-        ) else if s.moonT ~= nil then 0.45 * math.sin(s.moonT * math.pi) else 0
+        local ____temp_32
+        if s.sunT ~= nil then
+            ____temp_32 = s.sunT
+        else
+            ____temp_32 = s.moonT
+        end
+        local T = ____temp_32
+        local ____temp_34
+        if s.sunT ~= nil then
+            ____temp_34 = math.min(
+                1,
+                math.sin(s.sunT * math.pi) * 1.6 + 0.25
+            )
+        else
+            local ____temp_33
+            if s.moonT ~= nil then
+                ____temp_33 = 0.45 * math.sin(s.moonT * math.pi)
+            else
+                ____temp_33 = 0
+            end
+            ____temp_34 = ____temp_33
+        end
+        local str = ____temp_34
         if __t(T ~= nil and str > 0.02) then
-            local col = if s.sunT ~= nil then s.sun else __arrL({0.6, 0.7, 1}, 3)
+            local ____temp_35
+            if s.sunT ~= nil then
+                ____temp_35 = s.sun
+            else
+                ____temp_35 = __arrL({0.6, 0.7, 1}, 3)
+            end
+            local col = ____temp_35
             local lean = (T - 0.5) * 2
             local skew = lean * 62
             local reach = 20 + math.abs(lean) * 30
             for ____, w in __iterar((WIN)) do
-                local x = w.x - OFF + ox
-                if __t(x > LW + 90 or __lt(x + w.w, -90)) then
-                    continue
-                end
-                quad(
-                    nil,
-                    lg,
-                    __arrL(
-                        {
-                            __arrL({x, w.y}, 2),
-                            __arrL({x + w.w, w.y}, 2),
-                            __arrL({x + w.w + skew * 0.55, FLOOR + 1}, 2),
-                            __arrL({x + skew * 0.55, FLOOR + 1}, 2)
-                        },
-                        4
-                    ),
-                    css(nil, col, 0.11 * str),
-                    css(nil, col, 0.04 * str),
-                    w.y,
-                    FLOOR
-                )
-                quad(
-                    nil,
-                    lg,
-                    __arrL(
-                        {
-                            __arrL({x + skew * 0.55, FLOOR + 1}, 2),
-                            __arrL({x + w.w + skew * 0.55, FLOOR + 1}, 2),
-                            __arrL({x + w.w + skew + 8, FLOOR + 1 + reach}, 2),
-                            __arrL({x + skew - 8, FLOOR + 1 + reach}, 2)
-                        },
-                        4
-                    ),
-                    css(nil, col, 0.3 * str),
-                    css(nil, col, 0),
-                    FLOOR,
-                    FLOOR + reach
-                )
                 do
-                    local i = 0
-                    while i < 5 do
-                        local k = __mod(
-                            t * 0.12 + hash(nil, i + w.x),
-                            1
-                        )
-                        local mx = x + hash(nil, i * 3 + w.x) * w.w + skew * 0.55 * k
-                        local my = w.y + k * (FLOOR - w.y)
-                        lg.fillStyle = css(
-                            nil,
-                            col,
-                            0.5 * str * (0.5 + 0.5 * math.sin(t * 3 + i + w.x))
-                        )
-                        lg:fillRect(
-                            math.floor(mx + 0.5),
-                            math.floor(my + 0.5),
-                            1,
-                            1
-                        )
-                        i = i + 1
+                    local x = w.x - OFF + ox
+                    if __t(x > LW + 90 or __lt(x + w.w, -90)) then
+                        continue
+                    end
+                    quad(
+                        nil,
+                        lg,
+                        __arrL(
+                            {
+                                __arrL({x, w.y}, 2),
+                                __arrL({x + w.w, w.y}, 2),
+                                __arrL({x + w.w + skew * 0.55, FLOOR + 1}, 2),
+                                __arrL({x + skew * 0.55, FLOOR + 1}, 2)
+                            },
+                            4
+                        ),
+                        css(nil, col, 0.11 * str),
+                        css(nil, col, 0.04 * str),
+                        w.y,
+                        FLOOR
+                    )
+                    quad(
+                        nil,
+                        lg,
+                        __arrL(
+                            {
+                                __arrL({x + skew * 0.55, FLOOR + 1}, 2),
+                                __arrL({x + w.w + skew * 0.55, FLOOR + 1}, 2),
+                                __arrL({x + w.w + skew + 8, FLOOR + 1 + reach}, 2),
+                                __arrL({x + skew - 8, FLOOR + 1 + reach}, 2)
+                            },
+                            4
+                        ),
+                        css(nil, col, 0.3 * str),
+                        css(nil, col, 0),
+                        FLOOR,
+                        FLOOR + reach
+                    )
+                    do
+                        local i = 0
+                        while i < 5 do
+                            local k = __mod(
+                                t * 0.12 + hash(nil, i + w.x),
+                                1
+                            )
+                            local mx = x + hash(nil, i * 3 + w.x) * w.w + skew * 0.55 * k
+                            local my = w.y + k * (FLOOR - w.y)
+                            lg.fillStyle = css(
+                                nil,
+                                col,
+                                0.5 * str * (0.5 + 0.5 * math.sin(t * 3 + i + w.x))
+                            )
+                            lg:fillRect(
+                                math.floor(mx + 0.5),
+                                math.floor(my + 0.5),
+                                1,
+                                1
+                            )
+                            i = i + 1
+                        end
                     end
                 end
             end
@@ -3259,7 +3366,13 @@ local __O = {};
                 "forEach",
                 function(____, tx, i)
                     local x = tx - OFF + ox + 22
-                    local a = lamp * if i == 2 then lampFlicker else 1
+                    local ____temp_36
+                    if i == 2 then
+                        ____temp_36 = lampFlicker
+                    else
+                        ____temp_36 = 1
+                    end
+                    local a = lamp * ____temp_36
                     if __t(x < -120 or x > LW + 120) then
                         return
                     end
@@ -3364,18 +3477,24 @@ local __O = {};
         c:restore()
     end
     local function sky(self, c, t, camera)
-        local ____t_22 = __t
-        local ____t_21 = __t
-        local ____opt_18 = window.Graphics
-        if ____opt_18 ~= nil then
-            ____opt_18 = ____opt_18.isLite
+        local ____t_44 = __t
+        local ____t_result_43
+        local ____t_42 = __t
+        local ____opt_39 = window.Graphics
+        if ____opt_39 ~= nil then
+            ____opt_39 = ____opt_39.isLite
         end
-        local ____opt_result_20
-        if ____opt_18 ~= nil then
-            ____opt_result_20 = ____opt_18(____opt_18)
+        local ____opt_result_41
+        if ____opt_39 ~= nil then
+            ____opt_result_41 = ____opt_39(____opt_39)
         end
-        __O[283] = ____opt_result_20
-        if ____t_22(if ____t_21(____opt_result_20) then __O[283] else not __t(window.DayTime)) then
+        __O[283] = ____opt_result_41
+        if ____t_42(____opt_result_41) then
+            ____t_result_43 = __O[283]
+        else
+            ____t_result_43 = not __t(window.DayTime)
+        end
+        if ____t_44(____t_result_43) then
             return false
         end
         local s = window.DayTime:state()
@@ -3559,38 +3678,62 @@ local __O = {};
         return true
     end
     local function ambient(self, c, t, hx, hy, selfLit)
-        local ____t_29 = __t
-        local ____t_28 = __t
-        local ____opt_25 = window.Graphics
-        if ____opt_25 ~= nil then
-            ____opt_25 = ____opt_25.isLite
+        local ____t_52 = __t
+        local ____t_result_51
+        local ____t_50 = __t
+        local ____opt_47 = window.Graphics
+        if ____opt_47 ~= nil then
+            ____opt_47 = ____opt_47.isLite
         end
-        local ____opt_result_27
-        if ____opt_25 ~= nil then
-            ____opt_result_27 = ____opt_25(____opt_25)
+        local ____opt_result_49
+        if ____opt_47 ~= nil then
+            ____opt_result_49 = ____opt_47(____opt_47)
         end
-        __O[284] = ____opt_result_27
-        if ____t_29(if ____t_28(____opt_result_27) then __O[284] else not __t(window.DayTime)) then
+        __O[284] = ____opt_result_49
+        if ____t_50(____opt_result_49) then
+            ____t_result_51 = __O[284]
+        else
+            ____t_result_51 = not __t(window.DayTime)
+        end
+        if ____t_52(____t_result_51) then
             return
         end
         local s = window.DayTime:state()
-        local ____t_34 = __t
-        local ____t_31 = __t
-        local ____le_result_30 = __le(s.night, 0.2)
-        __O[286] = ____le_result_30
-        local ____t_33 = __t
-        local ____temp_32 = __gt(
-            __get(s.amb, 0),
-            0.995
-        ) and __gt(
-            __get(s.amb, 1),
-            0.995
-        )
-        __O[285] = ____temp_32
-        if ____t_34(if ____t_31(____le_result_30) then if __t(selfLit) then selfLit else if ____t_33(____temp_32) then __gt(
-            __get(s.amb, 2),
-            0.995
-        ) else __O[285] else __O[286]) then
+        local ____t_60 = __t
+        local ____t_result_59
+        local ____t_54 = __t
+        local ____le_result_53 = __le(s.night, 0.2)
+        __O[286] = ____le_result_53
+        if ____t_54(____le_result_53) then
+            local ____t_result_58
+            if __t(selfLit) then
+                ____t_result_58 = selfLit
+            else
+                local ____t_result_57
+                local ____t_56 = __t
+                local ____temp_55 = __gt(
+                    __get(s.amb, 0),
+                    0.995
+                ) and __gt(
+                    __get(s.amb, 1),
+                    0.995
+                )
+                __O[285] = ____temp_55
+                if ____t_56(____temp_55) then
+                    ____t_result_57 = __gt(
+                        __get(s.amb, 2),
+                        0.995
+                    )
+                else
+                    ____t_result_57 = __O[285]
+                end
+                ____t_result_58 = ____t_result_57
+            end
+            ____t_result_59 = ____t_result_58
+        else
+            ____t_result_59 = __O[286]
+        end
+        if ____t_60(____t_result_59) then
             return
         end
         c:save()
@@ -3673,21 +3816,49 @@ local __O = {};
                 return true, __fapply(orig, self, __args)
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____back_42 = back
-                local ____array_41 = __TS__SparseArrayNew(nil, c, if type(____type) == "table" then ____type.type else ____type)
-                local ____t_36 = __t
-                local ____TS__Number_result_35 = __TS__Number(camera)
-                __O[287] = ____TS__Number_result_35
-                __TS__SparseArrayPush(____array_41, if ____t_36(____TS__Number_result_35) then __O[287] else 0)
-                local ____t_38 = __t
-                local ____TS__Number_result_37 = __TS__Number(t)
-                __O[288] = ____TS__Number_result_37
-                __TS__SparseArrayPush(____array_41, if ____t_38(____TS__Number_result_37) then __O[288] else 0)
-                local ____t_40 = __t
-                local ____TS__Number_result_39 = __TS__Number(homeX)
-                __O[289] = ____TS__Number_result_39
-                __TS__SparseArrayPush(____array_41, if ____t_40(____TS__Number_result_39) then __O[289] else 0)
-                ____back_42(__TS__SparseArraySpread(____array_41))
+                local ____back_72 = back
+                local ____c_71 = c
+                local ____temp_61
+                if type(____type) == "table" then
+                    ____temp_61 = ____type.type
+                else
+                    ____temp_61 = ____type
+                end
+                local ____t_result_64
+                local ____t_63 = __t
+                local ____TS__Number_result_62 = __TS__Number(camera)
+                __O[287] = ____TS__Number_result_62
+                if ____t_63(____TS__Number_result_62) then
+                    ____t_result_64 = __O[287]
+                else
+                    ____t_result_64 = 0
+                end
+                local ____t_result_67
+                local ____t_66 = __t
+                local ____TS__Number_result_65 = __TS__Number(t)
+                __O[288] = ____TS__Number_result_65
+                if ____t_66(____TS__Number_result_65) then
+                    ____t_result_67 = __O[288]
+                else
+                    ____t_result_67 = 0
+                end
+                local ____t_result_70
+                local ____t_69 = __t
+                local ____TS__Number_result_68 = __TS__Number(homeX)
+                __O[289] = ____TS__Number_result_68
+                if ____t_69(____TS__Number_result_68) then
+                    ____t_result_70 = __O[289]
+                else
+                    ____t_result_70 = 0
+                end
+                ____back_72(
+                    nil,
+                    ____c_71,
+                    ____temp_61,
+                    ____t_result_64,
+                    ____t_result_67,
+                    ____t_result_70
+                )
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -3706,16 +3877,27 @@ local __O = {};
                         return true, false
                     end
                     local ____try, ____hasReturned, ____returnValue = pcall(function()
-                        local ____sky_49 = sky
-                        local ____c_47 = c
-                        local ____t_44 = __t
-                        local ____TS__Number_result_43 = __TS__Number(t)
-                        __O[290] = ____TS__Number_result_43
-                        local ____temp_48 = if ____t_44(____TS__Number_result_43) then __O[290] else 0
-                        local ____t_46 = __t
-                        local ____TS__Number_result_45 = __TS__Number(camera)
-                        __O[291] = ____TS__Number_result_45
-                        return true, ____sky_49(nil, ____c_47, ____temp_48, if ____t_46(____TS__Number_result_45) then __O[291] else 0)
+                        local ____sky_80 = sky
+                        local ____c_79 = c
+                        local ____t_result_75
+                        local ____t_74 = __t
+                        local ____TS__Number_result_73 = __TS__Number(t)
+                        __O[290] = ____TS__Number_result_73
+                        if ____t_74(____TS__Number_result_73) then
+                            ____t_result_75 = __O[290]
+                        else
+                            ____t_result_75 = 0
+                        end
+                        local ____t_result_78
+                        local ____t_77 = __t
+                        local ____TS__Number_result_76 = __TS__Number(camera)
+                        __O[291] = ____TS__Number_result_76
+                        if ____t_77(____TS__Number_result_76) then
+                            ____t_result_78 = __O[291]
+                        else
+                            ____t_result_78 = 0
+                        end
+                        return true, ____sky_80(nil, ____c_79, ____t_result_75, ____t_result_78)
                     end)
                     if not ____try then
                         ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -3728,58 +3910,100 @@ local __O = {};
             drawAmbient = function(____, c, t, hx, hy, scene)
                 do
                     pcall(function()
-                        local ____ambient_63 = ambient
-                        local ____array_62 = __TS__SparseArrayNew(nil, c)
-                        local ____t_51 = __t
-                        local ____TS__Number_result_50 = __TS__Number(t)
-                        __O[292] = ____TS__Number_result_50
-                        __TS__SparseArrayPush(____array_62, if ____t_51(____TS__Number_result_50) then __O[292] else 0)
-                        local ____t_53 = __t
-                        local ____TS__Number_result_52 = __TS__Number(hx)
-                        __O[293] = ____TS__Number_result_52
-                        __TS__SparseArrayPush(____array_62, if ____t_53(____TS__Number_result_52) then __O[293] else 480)
-                        local ____t_55 = __t
-                        local ____TS__Number_result_54 = __TS__Number(hy)
-                        __O[294] = ____TS__Number_result_54
-                        __TS__SparseArrayPush(____array_62, if ____t_55(____TS__Number_result_54) then __O[294] else 440)
-                        local ____t_61 = __t
-                        local ____opt_58 = window.HdMaps
-                        if ____opt_58 ~= nil then
-                            ____opt_58 = ____opt_58.handles
+                        local ____ambient_97 = ambient
+                        local ____c_96 = c
+                        local ____t_result_83
+                        local ____t_82 = __t
+                        local ____TS__Number_result_81 = __TS__Number(t)
+                        __O[292] = ____TS__Number_result_81
+                        if ____t_82(____TS__Number_result_81) then
+                            ____t_result_83 = __O[292]
+                        else
+                            ____t_result_83 = 0
                         end
-                        local ____opt_result_60
-                        if ____opt_58 ~= nil then
-                            ____opt_result_60 = ____opt_58(
-                                ____opt_58,
+                        local ____t_result_86
+                        local ____t_85 = __t
+                        local ____TS__Number_result_84 = __TS__Number(hx)
+                        __O[293] = ____TS__Number_result_84
+                        if ____t_85(____TS__Number_result_84) then
+                            ____t_result_86 = __O[293]
+                        else
+                            ____t_result_86 = 480
+                        end
+                        local ____t_result_89
+                        local ____t_88 = __t
+                        local ____TS__Number_result_87 = __TS__Number(hy)
+                        __O[294] = ____TS__Number_result_87
+                        if ____t_88(____TS__Number_result_87) then
+                            ____t_result_89 = __O[294]
+                        else
+                            ____t_result_89 = 440
+                        end
+                        local ____t_95 = __t
+                        local ____opt_92 = window.HdMaps
+                        if ____opt_92 ~= nil then
+                            ____opt_92 = ____opt_92.handles
+                        end
+                        local ____opt_result_94
+                        if ____opt_92 ~= nil then
+                            ____opt_result_94 = ____opt_92(
+                                ____opt_92,
                                 __TS__Number(scene)
                             )
                         end
-                        __TS__SparseArrayPush(
-                            ____array_62,
-                            not not ____t_61(____opt_result_60)
+                        ____ambient_97(
+                            nil,
+                            ____c_96,
+                            ____t_result_83,
+                            ____t_result_86,
+                            ____t_result_89,
+                            not not ____t_95(____opt_result_94)
                         )
-                        ____ambient_63(__TS__SparseArraySpread(____array_62))
                     end)
                 end
             end,
             drawFront = function(____, c, ____type, camera, t, homeX, blend)
                 do
                     pcall(function()
-                        local ____front_71 = front
-                        local ____array_70 = __TS__SparseArrayNew(nil, c, ____type)
-                        local ____t_65 = __t
-                        local ____TS__Number_result_64 = __TS__Number(camera)
-                        __O[295] = ____TS__Number_result_64
-                        __TS__SparseArrayPush(____array_70, if ____t_65(____TS__Number_result_64) then __O[295] else 0)
-                        local ____t_67 = __t
-                        local ____TS__Number_result_66 = __TS__Number(t)
-                        __O[296] = ____TS__Number_result_66
-                        __TS__SparseArrayPush(____array_70, if ____t_67(____TS__Number_result_66) then __O[296] else 0)
-                        local ____t_69 = __t
-                        local ____TS__Number_result_68 = __TS__Number(homeX)
-                        __O[297] = ____TS__Number_result_68
-                        __TS__SparseArrayPush(____array_70, if ____t_69(____TS__Number_result_68) then __O[297] else 0, blend)
-                        ____front_71(__TS__SparseArraySpread(____array_70))
+                        local ____front_109 = front
+                        local ____c_107 = c
+                        local ____type_108 = ____type
+                        local ____t_result_100
+                        local ____t_99 = __t
+                        local ____TS__Number_result_98 = __TS__Number(camera)
+                        __O[295] = ____TS__Number_result_98
+                        if ____t_99(____TS__Number_result_98) then
+                            ____t_result_100 = __O[295]
+                        else
+                            ____t_result_100 = 0
+                        end
+                        local ____t_result_103
+                        local ____t_102 = __t
+                        local ____TS__Number_result_101 = __TS__Number(t)
+                        __O[296] = ____TS__Number_result_101
+                        if ____t_102(____TS__Number_result_101) then
+                            ____t_result_103 = __O[296]
+                        else
+                            ____t_result_103 = 0
+                        end
+                        local ____t_result_106
+                        local ____t_105 = __t
+                        local ____TS__Number_result_104 = __TS__Number(homeX)
+                        __O[297] = ____TS__Number_result_104
+                        if ____t_105(____TS__Number_result_104) then
+                            ____t_result_106 = __O[297]
+                        else
+                            ____t_result_106 = 0
+                        end
+                        ____front_109(
+                            nil,
+                            ____c_107,
+                            ____type_108,
+                            ____t_result_100,
+                            ____t_result_103,
+                            ____t_result_106,
+                            blend
+                        )
                     end)
                 end
             end,

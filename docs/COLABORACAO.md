@@ -465,3 +465,98 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
       redesenhada no carregamento.
   - **Resultado em Lua 5.3:** a tela-inicial carrega em 0,02 s (antes 0,21 s) e o logo fica pronto em ~20 quadros.
   - O cliente avisa no Output qualquer módulo que leve mais de 0,5 s para carregar.
+- **28/11 · Claude:** **Roblox testado de verdade num servidor do Roblox (Open Cloud) e publicado.**
+  - **Ferramentas:** `roblox/ferramentas/nuvem.py` publica uma versão no lugar e roda um script Luau nela (Luau Execution).
+    A chave da API não fica no repositório. Os testes ficam em `roblox/teste/nuvem-*.lua`:
+    - `nuvem-jogo.lua`: título → JOGAR → história → lutas, com o tempo de cada método do canvas;
+    - `nuvem-cenas.lua`: todos os cenários, minigames da C1, os dois mapas e a campanha 2 (com `MODO = "fliperama"`,
+      os 11 jogos do fliperama).
+  - **Conversão** (`converter.mjs`): o alvo Luau do TSTL tira de dentro dos `if` o que vem antes de um `?.`. Agora sai em
+    Lua 5.3 e passa por um ajuste para Luau:
+    - `goto __continue` vira `continue`, levando o incremento do `for`;
+    - o lualib perde o `_G.pcall` e o `debug.getinfo`, que não existem no Roblox.
+  - **Mapa** (`mapa3d.js`): montar o mapa pixel a pixel passava de 70 s no Roblox e derrubava o script. Com
+    `DAROCA_ROBLOX`, `Mapa3D.abrir` mostra um quadro leve (`abrirSimples`): lista dos lugares, cadeados, motivo e
+    "ir". No navegador nada muda.
+  - **Lutas** (`game.js`, `fundoDaArena`): com a arena aberta, a câmera fica parada. O cenário de trás é desenhado uma
+    vez e depois copiado com `ctx.copiarTela`, que só existe no canvas do Roblox. No servidor, a luta na BAIXA caiu de
+    0,16 s para 0,01 s por quadro.
+  - **Canvas** (`canvas.lua`):
+    - retângulo opaco e `clearRect` usam `buffer.fill`/`buffer.copy`;
+    - a mistura translúcida guarda o último fundo e o resultado (pixel art repete cor), com imagem idêntica;
+    - `copiarTela` copia a tela inteira.
+  - **Página** (`desenhista.lua`): frases viram imagem guardada; a pele é colada por faixas.
+  - **Medido no servidor:**
+    - jogando na BAIXA ≈ 0,09 s por quadro;
+    - MÉDIA ≈ 0,30 s;
+    - o que sobra é a lógica de `art`/`game`/`hd-maps`, grandes demais para o código nativo do Roblox.
+- **28/11 · Claude:** **Roblox liso: a tela virou camadas na placa de vídeo.**
+  - **Por que travava:** no servidor do Roblox, o cenário levava 92 dos 108 ms de cada quadro (tudo desenhado pixel a
+    pixel em Luau).
+  - **`hd-maps.js` (`HdMaps.camadas`):**
+    - desenha o cenário HD num quadro 2×96 px mais largo que a tela (`LW` virou `let` durante esse desenho);
+    - céu (`sky`) e névoa (`haze`) vão para imagens próprias;
+    - os fundos que se repetem (`tile`, agora com o fator de parallax como 4º argumento) ficam só anotados;
+    - a luz da hora é aplicada no quadro do meio: multiplica pela cor ambiente e soma as luzes;
+    - se algo já foi desenhado no meio antes de um céu/névoa/tile (cenário com céu próprio), eles seguem no meio.
+  - **`game.js`:** com `DAROCA_CAMADAS` e um cenário que `HdMaps.camadas.pode(cena)`, o canvas do jogo não desenha o
+    cenário.
+    - Fica só o que se mexe, mais as placas e as pontes; à noite as pontes recebem a mesma luz (`frenteCamadas`).
+    - Publica `DAROCA_QUADRO_CAMADAS/CAMERA/TEMPO/TREMOR_X/Y` para o Roblox.
+  - **Roblox:**
+    - `runtime/camadas.lua` diz onde cada camada fica para a câmera atual;
+    - o cliente desenha o cenário numa rotina à parte, em fatias de 5 ms por quadro, e só troca as imagens quando o
+      desenho termina;
+    - a placa de vídeo desliza as camadas a cada quadro;
+    - a interface vira outra imagem, enviada só quando o que aparece muda (`desenhista` compara um resumo da página);
+    - F2 liga e desliga o modo em camadas.
+  - **Medido no servidor:** andando na BAIXA, 19 ms por quadro (antes 108 ms).
+  - **Ainda falta:**
+    - cenários da campanha 2, oficina/lanchonete/açude e baile continuam no desenho direto;
+    - a MÉDIA ainda pesa (acabamento dos personagens, ~130 ms por quadro), por isso as qualidades 1 a 7 do Roblox
+      usam a BAIXA;
+    - a luz direcional do sol (`dirLight`) não entra nas camadas.
+- **28/11 · Claude:** **Roblox: o aparelho do jogador não tem código nativo, então medi sem ele e cortei o que pesava.**
+  - **Medir como no aparelho:** o Roblox só compila `--!native` no servidor e no Studio
+    ([docs](https://create.roblox.com/docs/luau/native-code-gen)). `DAROCA_SEM_NATIVO=1` no `gerar_rbxlx.py` gera
+    uma versão de teste sem nativo, para medir no servidor como roda no aparelho.
+  - **Canvas da página viram camadas:**
+    - todo canvas visível da página (jogo, fundo da tela inicial, logo, telão dos minigames) vira uma imagem
+      própria no Roblox, enviada só quando o canvas muda (`P.versao`);
+    - `ctx.usarFonte(cv)`: a tela inicial mostra a roça 480×270 ampliada pela placa de vídeo;
+    - `ctx.camadaAbaixo(cv, sx, sy, sw, sh, dx, dy, somar)`: as cenas do roteiro passam o mundo (personagens) e os
+      efeitos parados (vinheta, noite, memória) como imagens embaixo do canvas, com o zoom feito pela placa de
+      vídeo (`DAROCA_QUADRO_ZOOM`).
+  - **Cenas de história:**
+    - `Cinematics` (`DAROCA_FUNDO_CAMADAS`) e `roteiro.js` (`DAROCA_FUNDO_MUNDO`) usam o cenário em camadas;
+    - a hora travada da cena vai junto (`DAROCA_QUADRO_HORA`).
+  - **Canvas mais rápido:**
+    - canvas de uma cor só pinta uma camada de cor inteira de uma vez (`P.uniforme`);
+    - mistura sobre pixel transparente vai direto (antes caía na `misturar` genérica, pixel a pixel);
+    - correção: modo de mistura sobre fundo transparente dá a cor do desenho, como no navegador.
+  - **Arena:** no Roblox entra em 0,08 s (`ARENA_FADE`), sem a mistura de 0,6 s.
+  - **Painel F3 no cliente:** quadros por segundo e milissegundos de cada parte.
+  - **Medido sem nativo, na BAIXA:**
+
+    | Parte | Antes | Agora |
+    | --- | --- | --- |
+    | Tela inicial | 85 ms | 25 ms |
+    | Abertura | 180 ms | 49 ms + cenário |
+    | Roça andando | 28 ms | 22 ms |
+    | Luta entrando | 312 ms | 40 ms |
+    | Campanha 2 | 86 ms | 15 ms |
+- **28/11 · Claude:** **Roblox no celular (iPhone): nada respondia ao toque.**
+  - **Causa 1 (desenhista):** estados capturados com as mesmas classes (inicio/jogar; jogo/diálogo/inventário;
+    pausa/dados/viagem/opções) empatavam e sempre ganhava o primeiro.
+    - O painel JOGAR (`menu-escolha`) abria no jogo, mas nunca aparecia na tela (no PC também).
+    - Agora o empate é decidido pelos elementos que aparecem num estado e não no outro (`desempatar`/`porChave`).
+  - **Causa 2:** o direcional e os botões de toque do jogo não estão na captura da interface.
+    - O cliente agora tem controles de toque próprios do Roblox, só no celular e só com o jogo rolando (jogo,
+      conversa, luta).
+    - O direcional aparece onde o polegar encosta; os botões são PULAR, PAPEL, PEIDÃO, DASH, FALAR, REEIS, BIVOLT e
+      CARRO, cada um a mesma tecla do PC.
+    - Toques nesses controles não vão para a página.
+    - O direcional/pulo padrão do Roblox foi desligado (`GuiService.TouchControlsEnabled`).
+  - **Teste local** (`toque.lua`): tocar JOGAR → NOVA AVENTURA começa o jogo, pular a história, pausar e continuar,
+    conversa aparece.
+

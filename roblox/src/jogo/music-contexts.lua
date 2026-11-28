@@ -195,7 +195,7 @@ local __O = {};
         if id ~= "ollyan" then
             add(
                 nil,
-                __add("events.boss_", if id == "reeisBoss" then "reeis" else id),
+                __add("events.boss_", id == "reeisBoss" and "reeis" or id),
                 __add("Apresentação · ", name),
                 "Cenas e eventos"
             )
@@ -269,32 +269,38 @@ local __O = {};
         local name = ____value[2]
         do
             local phase = 1
-            while phase <= if id == "nikolas" then 4 else 3 do
+            while phase <= (id == "nikolas" and 4 or 3) do
+                local ____add_result_10 = __add(
+                    __add(
+                        __add("battles.", id),
+                        ".phase"
+                    ),
+                    phase
+                )
+                local ____add_9 = __add
+                local ____add_result_8 = __add(
+                    __add(
+                        __add("Batalha · ", name),
+                        " · Fase "
+                    ),
+                    phase
+                )
+                local ____t_result_7
+                if __t(__get(phaseNames, id)) then
+                    ____t_result_7 = __add(
+                        " · ",
+                        __get(
+                            __get(phaseNames, id),
+                            phase - 1
+                        )
+                    )
+                else
+                    ____t_result_7 = ""
+                end
                 add(
                     nil,
-                    __add(
-                        __add(
-                            __add("battles.", id),
-                            ".phase"
-                        ),
-                        phase
-                    ),
-                    __add(
-                        __add(
-                            __add(
-                                __add("Batalha · ", name),
-                                " · Fase "
-                            ),
-                            phase
-                        ),
-                        if __t(__get(phaseNames, id)) then __add(
-                            " · ",
-                            __get(
-                                __get(phaseNames, id),
-                                phase - 1
-                            )
-                        ) else ""
-                    ),
+                    ____add_result_10,
+                    ____add_9(____add_result_8, ____t_result_7),
                     "Batalhas"
                 )
                 phase = phase + 1
@@ -432,14 +438,26 @@ local __O = {};
                 __re("^(?:cutscenes|events)\\.", ""),
                 ""
             )
-            local ____t_9 = __t
-            local ____t_8 = __t
-            local ____call_result_7 = __call(kinds, "has", kind)
-            __O[2334] = ____call_result_7
-            return if ____t_9(if ____t_8(____call_result_7) then __re_test(
-                __re("^(?:cutscenes|events)\\.", ""),
-                context.id
-            ) else __O[2334]) then __assign({}, context, {previewKind = kind}) else context
+            local ____t_result_15
+            local ____t_14 = __t
+            local ____t_result_13
+            local ____t_12 = __t
+            local ____call_result_11 = __call(kinds, "has", kind)
+            __O[2365] = ____call_result_11
+            if ____t_12(____call_result_11) then
+                ____t_result_13 = __re_test(
+                    __re("^(?:cutscenes|events)\\.", ""),
+                    context.id
+                )
+            else
+                ____t_result_13 = __O[2365]
+            end
+            if ____t_14(____t_result_13) then
+                ____t_result_15 = __assign({}, context, {previewKind = kind})
+            else
+                ____t_result_15 = context
+            end
+            return ____t_result_15
         end
     )
 end)(nil)

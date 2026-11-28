@@ -13,11 +13,17 @@ local ____exports = {}
 local __O = {};
 (function()
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.DAROCA_DEV)
-    __O[1070] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[1070] else window.DarocaDev) then
+    __O[1089] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[1089]
+    else
+        ____t_result_2 = window.DarocaDev
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     do
@@ -217,7 +223,7 @@ local __O = {};
             1,
             5
         )
-        local flags = {embarcou = if __t(passo ~= "abertura" and passo ~= "checkin") then 1 else 0}
+        local flags = {embarcou = __t(passo ~= "abertura" and passo ~= "checkin") and 1 or 0}
         for ____, v in __iterar((venc)) do
             __set(
                 flags,
@@ -250,122 +256,149 @@ local __O = {};
                 )
             end)
         end
-        local ____opt_5 = window.CampanhaTaxi
-        if ____opt_5 ~= nil then
-            ____opt_5 = ____opt_5.zerarVencidos
+        local ____opt_6 = window.CampanhaTaxi
+        if ____opt_6 ~= nil then
+            ____opt_6 = ____opt_6.zerarVencidos
         end
-        if ____opt_5 ~= nil then
-            ____opt_5(____opt_5)
+        if ____opt_6 ~= nil then
+            ____opt_6(____opt_6)
         end
         for ____, v in __iterar((venc)) do
-            local ____opt_9 = window.CampanhaTaxi
-            if ____opt_9 ~= nil then
-                ____opt_9 = ____opt_9.vencer
+            local ____opt_10 = window.CampanhaTaxi
+            if ____opt_10 ~= nil then
+                ____opt_10 = ____opt_10.vencer
             end
-            if ____opt_9 ~= nil then
-                ____opt_9(____opt_9, v)
+            if ____opt_10 ~= nil then
+                ____opt_10(____opt_10, v)
             end
-            local ____opt_13 = window.CampanhaPoderes
-            if ____opt_13 ~= nil then
-                ____opt_13 = ____opt_13.desbloquear
+            local ____opt_14 = window.CampanhaPoderes
+            if ____opt_14 ~= nil then
+                ____opt_14 = ____opt_14.desbloquear
             end
-            if ____opt_13 ~= nil then
-                ____opt_13(
-                    ____opt_13,
+            if ____opt_14 ~= nil then
+                ____opt_14(
+                    ____opt_14,
                     __get(PODER_DE, v)
                 )
             end
         end
-        local ____lt_21 = __lt
-        local ____opt_17 = window.CampanhaLoja
-        if ____opt_17 ~= nil then
-            ____opt_17 = ____opt_17.moedas
+        local ____lt_22 = __lt
+        local ____opt_18 = window.CampanhaLoja
+        if ____opt_18 ~= nil then
+            ____opt_18 = ____opt_18.moedas
         end
-        local ____opt_result_19
-        if ____opt_17 ~= nil then
-            ____opt_result_19 = ____opt_17(____opt_17)
+        local ____opt_result_20
+        if ____opt_18 ~= nil then
+            ____opt_result_20 = ____opt_18(____opt_18)
         end
-        local ____opt_result_19_20 = ____opt_result_19
-        if ____opt_result_19_20 == nil then
-            ____opt_result_19_20 = 0
+        local ____opt_result_20_21 = ____opt_result_20
+        if ____opt_result_20_21 == nil then
+            ____opt_result_20_21 = 0
         end
-        if ____lt_21(____opt_result_19_20, 600) then
-            local ____opt_30 = window.CampanhaLoja
-            if ____opt_30 ~= nil then
-                ____opt_30 = ____opt_30.ganhar
+        if ____lt_22(____opt_result_20_21, 600) then
+            local ____opt_31 = window.CampanhaLoja
+            if ____opt_31 ~= nil then
+                ____opt_31 = ____opt_31.ganhar
             end
-            if ____opt_30 ~= nil then
-                local ____opt_25 = window.CampanhaLoja
-                if ____opt_25 ~= nil then
-                    ____opt_25 = ____opt_25.moedas
+            if ____opt_31 ~= nil then
+                local ____opt_26 = window.CampanhaLoja
+                if ____opt_26 ~= nil then
+                    ____opt_26 = ____opt_26.moedas
                 end
-                local ____opt_result_27
-                if ____opt_25 ~= nil then
-                    ____opt_result_27 = ____opt_25(____opt_25)
+                local ____opt_result_28
+                if ____opt_26 ~= nil then
+                    ____opt_result_28 = ____opt_26(____opt_26)
                 end
-                local ____opt_result_27_28 = ____opt_result_27
-                if ____opt_result_27_28 == nil then
-                    ____opt_result_27_28 = 0
+                local ____opt_result_28_29 = ____opt_result_28
+                if ____opt_result_28_29 == nil then
+                    ____opt_result_28_29 = 0
                 end
-                ____opt_30(____opt_30, 600 - ____opt_result_27_28)
+                ____opt_31(____opt_31, 600 - ____opt_result_28_29)
             end
         end
-        local ____opt_32 = window.document:getElementById("c2Painel")
-        if ____opt_32 ~= nil then
-            ____opt_32:setAttribute("hidden", "")
+        local ____opt_33 = window.document:getElementById("c2Painel")
+        if ____opt_33 ~= nil then
+            ____opt_33:setAttribute("hidden", "")
         end
-        local ____opt_36 = window.Campanha2
-        if ____opt_36 ~= nil then
-            ____opt_36 = ____opt_36.abrir
+        local ____opt_37 = window.Campanha2
+        if ____opt_37 ~= nil then
+            ____opt_37 = ____opt_37.abrir
         end
-        if ____opt_36 ~= nil then
-            ____opt_36(____opt_36, {})
+        if ____opt_37 ~= nil then
+            ____opt_37(____opt_37, {})
         end
     end
     local function liberarTudo(self)
-        local ____iter_44 = __iter
-        local ____t_43 = __t
-        local ____opt_40 = window.CampanhaPoderes
-        if ____opt_40 ~= nil then
-            ____opt_40 = ____opt_40.lista
+        local ____iter_46 = __iter
+        local ____t_result_45
+        local ____t_44 = __t
+        local ____opt_41 = window.CampanhaPoderes
+        if ____opt_41 ~= nil then
+            ____opt_41 = ____opt_41.lista
         end
-        local ____opt_result_42
-        if ____opt_40 ~= nil then
-            ____opt_result_42 = ____opt_40(____opt_40)
+        local ____opt_result_43
+        if ____opt_41 ~= nil then
+            ____opt_result_43 = ____opt_41(____opt_41)
         end
-        __O[1071] = ____opt_result_42
-        for ____, p in __TS__Iterator(____iter_44(if ____t_43(____opt_result_42) then __O[1071] else __arrL({}, 0))) do
+        __O[1090] = ____opt_result_43
+        if ____t_44(____opt_result_43) then
+            ____t_result_45 = __O[1090]
+        else
+            ____t_result_45 = __arrL({}, 0)
+        end
+        for ____, p in __TS__Iterator(____iter_46(____t_result_45)) do
             window.CampanhaPoderes:desbloquear(p.id)
             while __t(window.CampanhaPoderes:upgrade(p.id)) do
             end
         end
-        local ____opt_47 = window.CampanhaLoja
-        if ____opt_47 ~= nil then
-            ____opt_47 = ____opt_47.ganhar
+        local ____opt_49 = window.CampanhaLoja
+        if ____opt_49 ~= nil then
+            ____opt_49 = ____opt_49.ganhar
         end
-        if ____opt_47 ~= nil then
-            ____opt_47(____opt_47, 999)
+        if ____opt_49 ~= nil then
+            ____opt_49(____opt_49, 999)
         end
         for ____, v in __iterar((__keys(PODER_DE))) do
-            local ____opt_51 = window.CampanhaTaxi
-            if ____opt_51 ~= nil then
-                ____opt_51 = ____opt_51.vencer
+            local ____opt_53 = window.CampanhaTaxi
+            if ____opt_53 ~= nil then
+                ____opt_53 = ____opt_53.vencer
             end
-            if ____opt_51 ~= nil then
-                ____opt_51(____opt_51, v)
+            if ____opt_53 ~= nil then
+                ____opt_53(____opt_53, v)
             end
         end
         do
             pcall(function()
-                local ____self_55 = window.JSON
-                local ____self_55_parse_56 = ____self_55.parse
-                local ____t_54 = __t
-                local ____temp_53 = window.localStorage:getItem("daroca-c2-save")
-                __O[1072] = ____temp_53
-                local s = ____self_55_parse_56(____self_55, if ____t_54(____temp_53) then __O[1072] else "null")
+                local ____self_58 = window.JSON
+                local ____self_58_parse_59 = ____self_58.parse
+                local ____t_result_57
+                local ____t_56 = __t
+                local ____temp_55 = window.localStorage:getItem("daroca-c2-save")
+                __O[1091] = ____temp_55
+                if ____t_56(____temp_55) then
+                    ____t_result_57 = __O[1091]
+                else
+                    ____t_result_57 = "null"
+                end
+                local s = ____self_58_parse_59(____self_58, ____t_result_57)
                 if __t(s) then
-                    s.flags = if __t(s.flags) then s.flags else {}
-                    s.flags.extra = __assign({}, if __t(s.flags.extra) then s.flags.extra else {}, {
+                    local ____t_result_60
+                    if __t(s.flags) then
+                        ____t_result_60 = s.flags
+                    else
+                        ____t_result_60 = {}
+                    end
+                    s.flags = ____t_result_60
+                    local ____s_flags_64 = s.flags
+                    local ____assign_63 = __assign
+                    local ____temp_62 = {}
+                    local ____t_result_61
+                    if __t(s.flags.extra) then
+                        ____t_result_61 = s.flags.extra
+                    else
+                        ____t_result_61 = {}
+                    end
+                    ____s_flags_64.extra = ____assign_63(____temp_62, ____t_result_61, {
                         mel = "feita",
                         lurdes = "feita",
                         cao = 1,
@@ -424,8 +457,8 @@ local __O = {};
         window.document.body:appendChild(el)
         window:setTimeout(
             function()
-                local ____opt_57 = el:querySelector("button")
-                return ____opt_57 and ____opt_57:focus()
+                local ____opt_65 = el:querySelector("button")
+                return ____opt_65 and ____opt_65:focus()
             end,
             30
         )
@@ -434,7 +467,14 @@ local __O = {};
         "MutationObserver",
         function()
             local p = window.document:querySelector("#c2Painel .pausa")
-            if __t(if __t(p) then not __t(p:querySelector("[data-dev]")) else p) then
+            local ____t_68 = __t
+            local ____t_result_67
+            if __t(p) then
+                ____t_result_67 = not __t(p:querySelector("[data-dev]"))
+            else
+                ____t_result_67 = p
+            end
+            if ____t_68(____t_result_67) then
                 local b = window.document:createElement("button")
                 b.type = "button"
                 b.dataset.dev = ""
@@ -477,11 +517,17 @@ local __O = {};
             window:removeEventListener("keydown", tecla, true)
         end
         local function passo()
-            local ____t_61 = __t
-            local ____t_60 = __t
-            local ____temp_59 = not __t(C:advance(s))
-            __O[1073] = ____temp_59
-            if ____t_61(if ____t_60(____temp_59) then __O[1073] else s.done) then
+            local ____t_72 = __t
+            local ____t_result_71
+            local ____t_70 = __t
+            local ____temp_69 = not __t(C:advance(s))
+            __O[1092] = ____temp_69
+            if ____t_70(____temp_69) then
+                ____t_result_71 = __O[1092]
+            else
+                ____t_result_71 = s.done
+            end
+            if ____t_72(____t_result_71) then
                 fim(nil)
             end
         end
@@ -528,12 +574,12 @@ local __O = {};
                     end
                     C:draw(c, s)
                     local b = C:beat(s)
-                    local ____t_65 = __t
-                    local ____opt_result_64
+                    local ____t_76 = __t
+                    local ____opt_result_75
                     if b ~= nil then
-                        ____opt_result_64 = b.text
+                        ____opt_result_75 = b.text
                     end
-                    if ____t_65(____opt_result_64) then
+                    if ____t_76(____opt_result_75) then
                         c.fillStyle = "rgba(20,14,8,.9)"
                         c:fillRect(30, 404, 900, 110)
                         c.fillStyle = "#e8c66a"
@@ -542,7 +588,14 @@ local __O = {};
                         c.fillStyle = "#ffd98a"
                         c.textAlign = "left"
                         c.textBaseline = "top"
-                        c:fillText(if __t(b.speaker) then b.speaker else "", 46, 416)
+                        local ____c_fillText_78 = c.fillText
+                        local ____t_result_77
+                        if __t(b.speaker) then
+                            ____t_result_77 = b.speaker
+                        else
+                            ____t_result_77 = ""
+                        end
+                        ____c_fillText_78(c, ____t_result_77, 46, 416)
                         c.font = "16px Arial, sans-serif"
                         c.fillStyle = "#f6ead0"
                         local l = ""
@@ -588,54 +641,72 @@ local __O = {};
         local el = window.document:createElement("div")
         el.className = "c2-galeria"
         local R = window.Roteiro
-        local ____call_70 = __call
-        local ____keys_69 = __keys
-        local ____t_68 = __t
-        local ____opt_66 = window.Cinematics
-        if ____opt_66 ~= nil then
-            ____opt_66 = ____opt_66.metadata
+        local ____call_84 = __call
+        local ____keys_83 = __keys
+        local ____t_result_82
+        local ____t_81 = __t
+        local ____opt_79 = window.Cinematics
+        if ____opt_79 ~= nil then
+            ____opt_79 = ____opt_79.metadata
         end
-        __O[1074] = ____opt_66
-        local cinema = ____call_70(
-            ____keys_69(if ____t_68(____opt_66) then __O[1074] else {}),
+        __O[1093] = ____opt_79
+        if ____t_81(____opt_79) then
+            ____t_result_82 = __O[1093]
+        else
+            ____t_result_82 = {}
+        end
+        local cinema = ____call_84(
+            ____keys_83(____t_result_82),
             "filter",
             function(____, k) return not __t(__callq(R, "has", k)) or not __re_test(
                 __re("^c2_|^chegada_|^abertura$|^creditos$", ""),
                 k
             ) end
         )
-        local ____call_78 = __call
-        local ____t_77 = __t
-        local ____opt_result_75
+        local ____call_93 = __call
+        local ____t_result_92
+        local ____t_91 = __t
+        local ____opt_result_89
         if R ~= nil then
-            ____opt_result_75 = R.list
+            ____opt_result_89 = R.list
         end
-        local ____opt_result_76
-        if ____opt_result_75 ~= nil then
-            ____opt_result_76 = ____opt_result_75(R)
+        local ____opt_result_90
+        if ____opt_result_89 ~= nil then
+            ____opt_result_90 = ____opt_result_89(R)
         end
-        __O[1075] = ____opt_result_76
-        local roteiros1 = ____call_78(
-            if ____t_77(____opt_result_76) then __O[1075] else __arrL({}, 0),
+        __O[1094] = ____opt_result_90
+        if ____t_91(____opt_result_90) then
+            ____t_result_92 = __O[1094]
+        else
+            ____t_result_92 = __arrL({}, 0)
+        end
+        local roteiros1 = ____call_93(
+            ____t_result_92,
             "filter",
             function(____, id) return not __re_test(
                 __re("^c2", ""),
                 id
             ) end
         )
-        local ____call_85 = __call
-        local ____t_84 = __t
-        local ____opt_81 = window.CampanhaCutscenes
-        if ____opt_81 ~= nil then
-            ____opt_81 = ____opt_81.ordem
+        local ____call_101 = __call
+        local ____t_result_100
+        local ____t_99 = __t
+        local ____opt_96 = window.CampanhaCutscenes
+        if ____opt_96 ~= nil then
+            ____opt_96 = ____opt_96.ordem
         end
-        local ____opt_result_83
-        if ____opt_81 ~= nil then
-            ____opt_result_83 = ____opt_81(____opt_81)
+        local ____opt_result_98
+        if ____opt_96 ~= nil then
+            ____opt_result_98 = ____opt_96(____opt_96)
         end
-        __O[1076] = ____opt_result_83
-        local roteiros2 = ____call_85(
-            if ____t_84(____opt_result_83) then __O[1076] else __arrL({}, 0),
+        __O[1095] = ____opt_result_98
+        if ____t_99(____opt_result_98) then
+            ____t_result_100 = __O[1095]
+        else
+            ____t_result_100 = __arrL({}, 0)
+        end
+        local roteiros2 = ____call_101(
+            ____t_result_100,
             "filter",
             function(____, id) return __callq(R, "has", id) end
         )
@@ -645,17 +716,23 @@ local __O = {};
                     ids,
                     "map",
                     function(____, id)
-                        local ____tipo_90 = tipo
-                        local ____id_91 = id
-                        local ____re_replace_89 = __re_replace
-                        local ____t_88 = __t
-                        local ____opt_86 = __callq(R, "get", id)
-                        if ____opt_86 ~= nil then
-                            ____opt_86 = ____opt_86.title
+                        local ____tipo_107 = tipo
+                        local ____id_108 = id
+                        local ____re_replace_106 = __re_replace
+                        local ____t_result_105
+                        local ____t_104 = __t
+                        local ____opt_102 = __callq(R, "get", id)
+                        if ____opt_102 ~= nil then
+                            ____opt_102 = ____opt_102.title
                         end
-                        __O[1077] = ____opt_86
-                        return ((((((("<button type=\"button\" data-t=\"" .. tostring(____tipo_90)) .. "\" data-id=\"") .. tostring(____id_91)) .. "\">") .. tostring(____re_replace_89(
-                            if ____t_88(____opt_86) then __O[1077] else id,
+                        __O[1096] = ____opt_102
+                        if ____t_104(____opt_102) then
+                            ____t_result_105 = __O[1096]
+                        else
+                            ____t_result_105 = id
+                        end
+                        return ((((((("<button type=\"button\" data-t=\"" .. tostring(____tipo_107)) .. "\" data-id=\"") .. tostring(____id_108)) .. "\">") .. tostring(____re_replace_106(
+                            ____t_result_105,
                             __re("[<>&]", "g"),
                             ""
                         ))) .. "<small>") .. tostring(id)) .. "</small></button>"
@@ -667,12 +744,12 @@ local __O = {};
         end
         el.innerHTML = (("<button type=\"button\" class=\"x\">✕ FECHAR</button><h2>🎬 TODAS AS CUTSCENES · DEV</h2><p>Clique para assistir. Clique ou Enter avança, Esc fecha.</p>" .. grupo(nil, "CAMPANHA 2 · VITÓRIA DA CONQUISTA", roteiros2, "r")) .. grupo(nil, "CAMPANHA 1 · ROTEIROS", roteiros1, "r")) .. grupo(nil, "CAMPANHA 1 · CENAS DO JOGO", cinema, "c")
         if not __t(window.document:querySelector(".c2-galeria:not([data-dev])")) then
-            local ____opt_94 = window.CampanhaCutscenes
-            if ____opt_94 ~= nil then
-                ____opt_94 = ____opt_94.galeria
+            local ____opt_111 = window.CampanhaCutscenes
+            if ____opt_111 ~= nil then
+                ____opt_111 = ____opt_111.galeria
             end
-            if ____opt_94 ~= nil then
-                ____opt_94(____opt_94)
+            if ____opt_111 ~= nil then
+                ____opt_111(____opt_111)
             end
         end
         __call(
@@ -716,11 +793,17 @@ local __O = {};
     end
     local function botaoTitulo(self)
         local lista = window.document:querySelector("#startScreen .ranch-mode-entries")
-        local ____t_98 = __t
-        local ____t_97 = __t
-        local ____temp_96 = not __t(lista)
-        __O[1078] = ____temp_96
-        if ____t_98(if ____t_97(____temp_96) then __O[1078] else lista:querySelector("[data-dev-cut]")) then
+        local ____t_116 = __t
+        local ____t_result_115
+        local ____t_114 = __t
+        local ____temp_113 = not __t(lista)
+        __O[1097] = ____temp_113
+        if ____t_114(____temp_113) then
+            ____t_result_115 = __O[1097]
+        else
+            ____t_result_115 = lista:querySelector("[data-dev-cut]")
+        end
+        if ____t_116(____t_result_115) then
             return
         end
         local b = window.document:createElement("button")

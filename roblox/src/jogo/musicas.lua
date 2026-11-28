@@ -20,13 +20,25 @@ local __O = {};
     end
     local EXT = __re("\\.(mp3|ogg|m4a|wav)$", "i")
     local function slug(____, s)
-        return __re_replace(
-            __re_replace(
-                __re_replace(
-                    __re_replace(
-                        __call(
-                            __call(
-                                tostring(if __t(s) then s else ""),
+        local ____re_replace_6 = __re_replace
+        local ____re_replace_5 = __re_replace
+        local ____re_replace_4 = __re_replace
+        local ____re_replace_3 = __re_replace
+        local ____call_2 = __call
+        local ____call_1 = __call
+        local ____t_result_0
+        if __t(s) then
+            ____t_result_0 = s
+        else
+            ____t_result_0 = ""
+        end
+        return ____re_replace_6(
+            ____re_replace_5(
+                ____re_replace_4(
+                    ____re_replace_3(
+                        ____call_2(
+                            ____call_1(
+                                tostring(____t_result_0),
                                 "toLowerCase"
                             ),
                             "normalize",
@@ -115,64 +127,90 @@ local __O = {};
             return nil
         end
         if __t(__call(k, "includes", ".")) then
-            return if __re_test(
+            local ____re_test_result_7
+            if __re_test(
                 __re("^[a-zA-Z0-9_.-]{1,90}$", ""),
                 __call(key, "trim")
-            ) then __call(key, "trim") else nil
+            ) then
+                ____re_test_result_7 = __call(key, "trim")
+            else
+                ____re_test_result_7 = nil
+            end
+            return ____re_test_result_7
         end
         if __t(__get(PLACES, k)) then
             return __get(PLACES, k)
         end
         local m
-        local ____t_2 = __t
-        local ____t_1 = __t
+        local ____t_11 = __t
+        local ____t_result_10
+        local ____t_9 = __t
         m = __re_match(
             k,
             __re("^chefe-([a-z]+)(?:-fase-?(\\d))?$", "")
         )
-        local ____m_0 = m
-        __O[2301] = ____m_0
-        if ____t_2(if ____t_1(____m_0) then __get(
-            BOSS,
-            __get(m, 1)
-        ) else __O[2301]) then
-            return __add(
-                __add(
-                    "battles.",
-                    __get(
-                        BOSS,
-                        __get(m, 1)
-                    )
-                ),
-                if __t(__get(m, 2)) then __add(
+        local ____m_8 = m
+        __O[2332] = ____m_8
+        if ____t_9(____m_8) then
+            ____t_result_10 = __get(
+                BOSS,
+                __get(m, 1)
+            )
+        else
+            ____t_result_10 = __O[2332]
+        end
+        if ____t_11(____t_result_10) then
+            local ____add_14 = __add
+            local ____add_result_13 = __add(
+                "battles.",
+                __get(
+                    BOSS,
+                    __get(m, 1)
+                )
+            )
+            local ____t_result_12
+            if __t(__get(m, 2)) then
+                ____t_result_12 = __add(
                     ".phase",
                     __get(m, 2)
-                ) else ""
-            )
+                )
+            else
+                ____t_result_12 = ""
+            end
+            return ____add_14(____add_result_13, ____t_result_12)
         end
-        local ____t_5 = __t
-        local ____t_4 = __t
+        local ____t_18 = __t
+        local ____t_result_17
+        local ____t_16 = __t
         m = __re_match(
             k,
             __re("^apresentacao-([a-z]+)$", "")
         )
-        local ____m_3 = m
-        __O[2302] = ____m_3
-        if ____t_5(if ____t_4(____m_3) then __get(
-            BOSS,
-            __get(m, 1)
-        ) else __O[2302]) then
-            return __add("events.boss_", if __get(m, 1) == "reeis" then "reeis" else __get(
+        local ____m_15 = m
+        __O[2333] = ____m_15
+        if ____t_16(____m_15) then
+            ____t_result_17 = __get(
                 BOSS,
                 __get(m, 1)
-            ))
+            )
+        else
+            ____t_result_17 = __O[2333]
         end
-        local ____t_6 = __t
+        if ____t_18(____t_result_17) then
+            return __add(
+                "events.boss_",
+                __get(m, 1) == "reeis" and "reeis" or __get(
+                    BOSS,
+                    __get(m, 1)
+                )
+            )
+        end
+        local ____t_19 = __t
         m = __re_match(
             k,
             __re("^cutscene-([a-z0-9_-]+)$", "")
         )
-        if ____t_6(m) then
+        if ____t_19(m) then
             return __add(
                 "cutscenes.",
                 __re_replace(
@@ -182,45 +220,45 @@ local __O = {};
                 )
             )
         end
-        local ____t_7 = __t
+        local ____t_20 = __t
         m = __re_match(
             k,
             __re("^conversa-([a-z]+)$", "")
         )
-        if ____t_7(m) then
+        if ____t_20(m) then
             return __add(
                 "characters.",
                 __get(m, 1)
             )
         end
-        local ____t_8 = __t
+        local ____t_21 = __t
         m = __re_match(
             k,
             __re("^fliperama-([a-z]+)$", "")
         )
-        if ____t_8(m) then
+        if ____t_21(m) then
             return __add(
                 "minigames.fliperama.",
                 __get(m, 1)
             )
         end
-        local ____t_9 = __t
+        local ____t_22 = __t
         m = __re_match(
             k,
             __re("^minigame-([a-z]+)$", "")
         )
-        if ____t_9(m) then
+        if ____t_22(m) then
             return __add(
                 "activities.",
                 __get(m, 1)
             )
         end
-        local ____t_10 = __t
+        local ____t_23 = __t
         m = __re_match(
             k,
             __re("^evento-([a-z0-9_-]+)$", "")
         )
-        if ____t_10(m) then
+        if ____t_23(m) then
             return __add(
                 "events.",
                 __re_replace(
@@ -230,18 +268,24 @@ local __O = {};
                 )
             )
         end
-        local ____t_13 = __t
-        local ____t_12 = __t
+        local ____t_27 = __t
+        local ____t_result_26
+        local ____t_25 = __t
         m = __re_match(
             k,
             __re("^dupla-([a-z]+)$", "")
         )
-        local ____m_11 = m
-        __O[2303] = ____m_11
-        if ____t_13(if ____t_12(____m_11) then __get(
-            BOSS,
-            __get(m, 1)
-        ) else __O[2303]) then
+        local ____m_24 = m
+        __O[2334] = ____m_24
+        if ____t_25(____m_24) then
+            ____t_result_26 = __get(
+                BOSS,
+                __get(m, 1)
+            )
+        else
+            ____t_result_26 = __O[2334]
+        end
+        if ____t_27(____t_result_26) then
             return __add(
                 "coop.",
                 __get(
@@ -256,9 +300,17 @@ local __O = {};
         local lines = __arrL({}, 0)
         local warnings = __arrL({}, 0)
         local ambient = {}
-        __call(
-            __re_split(
-                tostring(if __t(text) then text else ""),
+        local ____call_36 = __call
+        local ____re_split_29 = __re_split
+        local ____t_result_28
+        if __t(text) then
+            ____t_result_28 = text
+        else
+            ____t_result_28 = ""
+        end
+        ____call_36(
+            ____re_split_29(
+                tostring(____t_result_28),
                 __re("\\r?\\n", "")
             ),
             "forEach",
@@ -318,15 +370,21 @@ local __O = {};
                     ""
                 )
                 local opts = {}
-                local ____iter_18 = __iter
-                local ____call_17 = __call
-                local ____re_split_16 = __re_split
-                local ____t_15 = __t
-                local ____get_result_14 = __get(fm, 2)
-                __O[2304] = ____get_result_14
-                for ____, tok in __TS__Iterator(____iter_18(____call_17(
-                    ____re_split_16(
-                        if ____t_15(____get_result_14) then __O[2304] else "",
+                local ____iter_35 = __iter
+                local ____call_34 = __call
+                local ____re_split_33 = __re_split
+                local ____t_result_32
+                local ____t_31 = __t
+                local ____get_result_30 = __get(fm, 2)
+                __O[2335] = ____get_result_30
+                if ____t_31(____get_result_30) then
+                    ____t_result_32 = __O[2335]
+                else
+                    ____t_result_32 = ""
+                end
+                for ____, tok in __TS__Iterator(____iter_35(____call_34(
+                    ____re_split_33(
+                        ____t_result_32,
                         __re("\\s+", "")
                     ),
                     "filter",
@@ -375,7 +433,7 @@ local __O = {};
                 end
                 local s = slug(nil, key)
                 if __t(__call(s, "startsWith", "ambiente-")) then
-                    local where = if __call(s, "slice", 9) == "camacan" then "praca" else if __call(s, "slice", 9) == "tinta" then "caderno" else __call(s, "slice", 9)
+                    local where = __call(s, "slice", 9) == "camacan" and "praca" or (__call(s, "slice", 9) == "tinta" and "caderno" or __call(s, "slice", 9))
                     if __t(__call(AMBIENT, "includes", where)) then
                         __set(
                             ambient,
@@ -431,8 +489,14 @@ local __O = {};
             local ____hasReturned, ____returnValue
             local ____try = __TS__AsyncAwaiter(function()
                 local r = __TS__Await(window:fetch(url, {cache = "no-cache"}))
+                local ____t_result_37
+                if __t(r.ok) then
+                    ____t_result_37 = __TS__Await(r:text())
+                else
+                    ____t_result_37 = nil
+                end
                 ____hasReturned = true
-                ____returnValue = if __t(r.ok) then __TS__Await(r:text()) else nil
+                ____returnValue = ____t_result_37
                 return
             end)
             ____try = ____try.catch(
@@ -457,7 +521,13 @@ local __O = {};
         end
         loaded = (function()
             return __TS__AsyncAwaiter(function(____awaiter_resolve)
-                local pre = if __t(window.DAROCA_MUSICAS) then window.DAROCA_MUSICAS else nil
+                local ____t_result_38
+                if __t(window.DAROCA_MUSICAS) then
+                    ____t_result_38 = window.DAROCA_MUSICAS
+                else
+                    ____t_result_38 = nil
+                end
+                local pre = ____t_result_38
                 local list = nil
                 local txt = nil
                 local lj = __TS__Await(getText(nil, "musicas/lista.json"))
@@ -475,60 +545,118 @@ local __O = {};
                     __TS__Await(____try)
                 end
                 txt = __TS__Await(getText(nil, "musicas/musicas.txt"))
-                local ____t_21 = __t
-                local ____t_20 = __t
-                local ____temp_19 = not __t(list)
-                __O[2305] = ____temp_19
-                if ____t_21(if ____t_20(____temp_19) then pre else __O[2305]) then
+                local ____t_42 = __t
+                local ____t_result_41
+                local ____t_40 = __t
+                local ____temp_39 = not __t(list)
+                __O[2336] = ____temp_39
+                if ____t_40(____temp_39) then
+                    ____t_result_41 = pre
+                else
+                    ____t_result_41 = __O[2336]
+                end
+                if ____t_42(____t_result_41) then
                     list = pre
                 end
-                local ____t_24 = __t
-                local ____t_23 = __t
-                local ____temp_22 = txt == nil
-                __O[2306] = ____temp_22
-                if ____t_24(if ____t_23(____temp_22) then pre else __O[2306]) then
-                    txt = if __t(pre.txt) then pre.txt else ""
+                local ____t_46 = __t
+                local ____t_result_45
+                local ____t_44 = __t
+                local ____temp_43 = txt == nil
+                __O[2337] = ____temp_43
+                if ____t_44(____temp_43) then
+                    ____t_result_45 = pre
+                else
+                    ____t_result_45 = __O[2337]
                 end
-                local ____call_35 = __call
-                local ____t_28 = __t
-                local ____opt_result_27
+                if ____t_46(____t_result_45) then
+                    local ____t_result_47
+                    if __t(pre.txt) then
+                        ____t_result_47 = pre.txt
+                    else
+                        ____t_result_47 = ""
+                    end
+                    txt = ____t_result_47
+                end
+                local ____call_60 = __call
+                local ____t_result_52
+                local ____t_51 = __t
+                local ____opt_result_50
                 if list ~= nil then
-                    ____opt_result_27 = list.arquivos
+                    ____opt_result_50 = list.arquivos
                 end
-                __O[2307] = ____opt_result_27
-                local files = ____call_35(
-                    if ____t_28(____opt_result_27) then __O[2307] else __arrL({}, 0),
+                __O[2338] = ____opt_result_50
+                if ____t_51(____opt_result_50) then
+                    ____t_result_52 = __O[2338]
+                else
+                    ____t_result_52 = __arrL({}, 0)
+                end
+                local files = ____call_60(
+                    ____t_result_52,
                     "filter",
                     function(____, f)
-                        local ____t_34 = __t
-                        local ____t_32 = __t
-                        local ____t_30 = __t
-                        local ____temp_29 = if __t(f) then type(f.nome) == "string" else f
-                        __O[2308] = ____temp_29
-                        local ____temp_31 = if ____t_30(____temp_29) then EXT:test(f.nome) else __O[2308]
-                        __O[2309] = ____temp_31
-                        local ____temp_33 = if ____t_32(____temp_31) then not __re_test(
-                            __re("\\\\|\\.\\.", ""),
-                            f.nome
-                        ) else __O[2309]
-                        __O[2310] = ____temp_33
-                        return if ____t_34(____temp_33) then __re_test(
-                            __re("^[^/]+(\\/[^/]+)?$", ""),
-                            f.nome
-                        ) else __O[2310]
+                        local ____t_result_59
+                        local ____t_58 = __t
+                        local ____t_result_57
+                        local ____t_56 = __t
+                        local ____t_result_55
+                        local ____t_54 = __t
+                        local ____t_result_53
+                        if __t(f) then
+                            ____t_result_53 = type(f.nome) == "string"
+                        else
+                            ____t_result_53 = f
+                        end
+                        __O[2339] = ____t_result_53
+                        if ____t_54(____t_result_53) then
+                            ____t_result_55 = EXT:test(f.nome)
+                        else
+                            ____t_result_55 = __O[2339]
+                        end
+                        __O[2340] = ____t_result_55
+                        if ____t_56(____t_result_55) then
+                            ____t_result_57 = not __re_test(
+                                __re("\\\\|\\.\\.", ""),
+                                f.nome
+                            )
+                        else
+                            ____t_result_57 = __O[2340]
+                        end
+                        __O[2341] = ____t_result_57
+                        if ____t_58(____t_result_57) then
+                            ____t_result_59 = __re_test(
+                                __re("^[^/]+(\\/[^/]+)?$", ""),
+                                f.nome
+                            )
+                        else
+                            ____t_result_59 = __O[2341]
+                        end
+                        return ____t_result_59
                     end
                 )
-                local parsed = parseTxt(nil, if __t(txt) then txt else "")
-                ambientMap = parsed.ambient
-                local ____call_41 = __call
-                local ____parsed_warnings_40 = parsed.warnings
-                local ____t_39 = __t
-                local ____opt_result_38
-                if list ~= nil then
-                    ____opt_result_38 = list.avisos
+                local ____parseTxt_62 = parseTxt
+                local ____t_result_61
+                if __t(txt) then
+                    ____t_result_61 = txt
+                else
+                    ____t_result_61 = ""
                 end
-                __O[2311] = ____opt_result_38
-                lastWarnings = ____call_41(____parsed_warnings_40, "concat", if ____t_39(____opt_result_38) then __O[2311] else __arrL({}, 0))
+                local parsed = ____parseTxt_62(nil, ____t_result_61)
+                ambientMap = parsed.ambient
+                local ____call_69 = __call
+                local ____parsed_warnings_68 = parsed.warnings
+                local ____t_result_67
+                local ____t_66 = __t
+                local ____opt_result_65
+                if list ~= nil then
+                    ____opt_result_65 = list.avisos
+                end
+                __O[2342] = ____opt_result_65
+                if ____t_66(____opt_result_65) then
+                    ____t_result_67 = __O[2342]
+                else
+                    ____t_result_67 = __arrL({}, 0)
+                end
+                lastWarnings = ____call_69(____parsed_warnings_68, "concat", ____t_result_67)
                 local tracks = __arrL({}, 0)
                 local bindings = {}
                 local byName = __TS__New(Map)
@@ -558,28 +686,39 @@ local __O = {};
                         ),
                         __len(tracks) + 1
                     )
-                    local ____id_46 = id
-                    local ____re_replace_result_47 = __re_replace(
+                    local ____id_76 = id
+                    local ____re_replace_result_77 = __re_replace(
                         __call(name, "replace", EXT, ""),
                         __re("^.*\\/", ""),
                         ""
                     )
-                    local ____add_result_48 = __add("musicas/", name)
-                    local ____t_43 = __t
-                    local ____TS__Number_result_42 = __TS__Number(meta.bytes)
-                    __O[2312] = ____TS__Number_result_42
-                    local ____temp_49 = if ____t_43(____TS__Number_result_42) then __O[2312] else 0
-                    local ____t_45 = __t
-                    local ____TS__Number_result_44 = __TS__Number(meta.duracao)
-                    __O[2313] = ____TS__Number_result_44
+                    local ____add_result_78 = __add("musicas/", name)
+                    local ____t_result_72
+                    local ____t_71 = __t
+                    local ____TS__Number_result_70 = __TS__Number(meta.bytes)
+                    __O[2343] = ____TS__Number_result_70
+                    if ____t_71(____TS__Number_result_70) then
+                        ____t_result_72 = __O[2343]
+                    else
+                        ____t_result_72 = 0
+                    end
+                    local ____t_result_75
+                    local ____t_74 = __t
+                    local ____TS__Number_result_73 = __TS__Number(meta.duracao)
+                    __O[2344] = ____TS__Number_result_73
+                    if ____t_74(____TS__Number_result_73) then
+                        ____t_result_75 = __O[2344]
+                    else
+                        ____t_result_75 = 0
+                    end
                     local t = {
-                        id = ____id_46,
-                        title = ____re_replace_result_47,
+                        id = ____id_76,
+                        title = ____re_replace_result_77,
                         categoryId = "pasta",
-                        file = ____add_result_48,
+                        file = ____add_result_78,
                         sha256 = "",
-                        bytes = ____temp_49,
-                        duration = if ____t_45(____TS__Number_result_44) then __O[2313] else 0,
+                        bytes = ____t_result_72,
+                        duration = ____t_result_75,
                         volume = 1,
                         loop = true,
                         fadeMs = 1200,
@@ -594,39 +733,62 @@ local __O = {};
                     return t
                 end
                 for ____, f in __iterar((files)) do
-                    if __t(__call(f.nome, "includes", "/")) then
-                        continue
-                    end
-                    local place = placeOf(
-                        nil,
-                        __call(f.nome, "replace", EXT, "")
-                    )
-                    if __t(place) then
-                        __set(bindings, place, {trackId = if __t(f.original) then f.original else track(nil, f.nome, f).id, enabled = true})
+                    do
+                        if __t(__call(f.nome, "includes", "/")) then
+                            continue
+                        end
+                        local place = placeOf(
+                            nil,
+                            __call(f.nome, "replace", EXT, "")
+                        )
+                        if __t(place) then
+                            local ____set_80 = __set
+                            local ____t_result_79
+                            if __t(f.original) then
+                                ____t_result_79 = f.original
+                            else
+                                ____t_result_79 = track(nil, f.nome, f).id
+                            end
+                            ____set_80(bindings, place, {trackId = ____t_result_79, enabled = true})
+                        end
                     end
                 end
                 local porLugar = {}
                 for ____, f in __iterar((files)) do
-                    local ____t_52 = __t
-                    local ____t_51 = __t
-                    local ____temp_50 = not __t(__call(f.nome, "includes", "/")) or type(f.lugar) ~= "string"
-                    __O[2314] = ____temp_50
-                    if ____t_52(if ____t_51(____temp_50) then __O[2314] else not __re_test(
-                        __re("^[a-zA-Z0-9_.-]{1,90}$", ""),
-                        f.lugar
-                    )) then
-                        continue
-                    end
-                    local ____call_53 = __call
                     do
-                        __O[2315] = porLugar
-                        __O[2316] = f.lugar
+                        local ____t_84 = __t
+                        local ____t_result_83
+                        local ____t_82 = __t
+                        local ____temp_81 = not __t(__call(f.nome, "includes", "/")) or type(f.lugar) ~= "string"
+                        __O[2345] = ____temp_81
+                        if ____t_82(____temp_81) then
+                            ____t_result_83 = __O[2345]
+                        else
+                            ____t_result_83 = not __re_test(
+                                __re("^[a-zA-Z0-9_.-]{1,90}$", ""),
+                                f.lugar
+                            )
+                        end
+                        if ____t_84(____t_result_83) then
+                            continue
+                        end
+                        local ____call_86 = __call
+                        do
+                            __O[2346] = porLugar
+                            __O[2347] = f.lugar
+                        end
+                        local ____t_result_85
+                        if __t(__get(__O[2346], __O[2347])) then
+                            ____t_result_85 = __get(__O[2346], __O[2347])
+                        else
+                            ____t_result_85 = __set(
+                                __O[2346],
+                                __O[2347],
+                                __arrL({}, 0)
+                            )
+                        end
+                        ____call_86(____t_result_85, "push", f)
                     end
-                    ____call_53(if __t(__get(__O[2315], __O[2316])) then __get(__O[2315], __O[2316]) else __set(
-                        __O[2315],
-                        __O[2316],
-                        __arrL({}, 0)
-                    ), "push", f)
                 end
                 for ____, ____value in __iterar((__entries(porLugar))) do
                     local lugar = ____value[1]
@@ -635,7 +797,15 @@ local __O = {};
                         fs,
                         math.floor(math.random() * __len(fs))
                     )
-                    __set(bindings, lugar, {trackId = if __t(f.original) then f.original else track(nil, f.nome, f).id, enabled = true})
+                    local ____set_89 = __set
+                    local ____lugar_88 = lugar
+                    local ____t_result_87
+                    if __t(f.original) then
+                        ____t_result_87 = f.original
+                    else
+                        ____t_result_87 = track(nil, f.nome, f).id
+                    end
+                    ____set_89(bindings, ____lugar_88, {trackId = ____t_result_87, enabled = true})
                 end
                 for ____, l in __iterar((parsed.lines)) do
                     local meta = __call(
@@ -643,18 +813,31 @@ local __O = {};
                         "find",
                         function(____, f) return f.nome == l.file end
                     )
-                    local ____t_56 = __t
-                    local ____t_55 = __t
-                    local ____temp_54 = not __t(meta)
-                    __O[2317] = ____temp_54
-                    if ____t_56(if ____t_55(____temp_54) then __len(files) else __O[2317]) then
+                    local ____t_93 = __t
+                    local ____t_result_92
+                    local ____t_91 = __t
+                    local ____temp_90 = not __t(meta)
+                    __O[2348] = ____temp_90
+                    if ____t_91(____temp_90) then
+                        ____t_result_92 = __len(files)
+                    else
+                        ____t_result_92 = __O[2348]
+                    end
+                    if ____t_93(____t_result_92) then
                         __call(
                             lastWarnings,
                             "push",
                             __add("arquivo não encontrado na pasta: ", l.file)
                         )
                     end
-                    local t = track(nil, l.file, if __t(meta) then meta else {})
+                    local ____l_file_95 = l.file
+                    local ____t_result_94
+                    if __t(meta) then
+                        ____t_result_94 = meta
+                    else
+                        ____t_result_94 = {}
+                    end
+                    local t = track(nil, ____l_file_95, ____t_result_94)
                     __set(
                         bindings,
                         l.place,

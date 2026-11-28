@@ -39,17 +39,23 @@ local __O = {};
     end
     function place(self, el, cv)
         local cs = window:getComputedStyle(cv)
-        local ____t_44 = __t
-        local ____t_43 = __t
-        local ____temp_42 = not __t(cv.offsetWidth) or cs.display == "none"
-        __O[29] = ____temp_42
-        if ____t_44(if ____t_43(____temp_42) then __O[29] else cs.visibility == "hidden") then
+        local ____t_121 = __t
+        local ____t_result_120
+        local ____t_119 = __t
+        local ____temp_118 = not __t(cv.offsetWidth) or cs.display == "none"
+        __O[29] = ____temp_118
+        if ____t_119(____temp_118) then
+            ____t_result_120 = __O[29]
+        else
+            ____t_result_120 = cs.visibility == "hidden"
+        end
+        if ____t_121(____t_result_120) then
             el.style.display = "none"
             return
         end
         el.style.cssText = __add(
             ((((((("position:absolute;left:" .. tostring(cv.offsetLeft)) .. "px;top:") .. tostring(cv.offsetTop)) .. "px;width:") .. tostring(cv.offsetWidth)) .. "px;height:") .. tostring(cv.offsetHeight)) .. "px;margin:0;padding:0;border:0;pointer-events:none;",
-            (((((((((((("object-fit:" .. cs.objectFit) .. ";object-position:") .. cs.objectPosition) .. ";image-rendering:") .. cs.imageRendering) .. ";transform:") .. if cs.transform == "none" then "none" else cs.transform) .. ";transform-origin:") .. cs.transformOrigin) .. ";border-radius:") .. cs.borderRadius) .. ";opacity:") .. cs.opacity
+            (((((((((((("object-fit:" .. cs.objectFit) .. ";object-position:") .. cs.objectPosition) .. ";image-rendering:") .. cs.imageRendering) .. ";transform:") .. (cs.transform == "none" and "none" or cs.transform)) .. ";transform-origin:") .. cs.transformOrigin) .. ";border-radius:") .. cs.borderRadius) .. ";opacity:") .. cs.opacity
         )
     end
     function show(self, canvas, w, h)
@@ -68,11 +74,17 @@ local __O = {};
             itemsCtx:clearRect(0, 0, w, h)
         end
         itemsUsed = false
-        local ____t_47 = __t
-        local ____t_46 = __t
-        local ____temp_45 = target ~= canvas or glCanvas.nextSibling ~= itemsCv
-        __O[30] = ____temp_45
-        if ____t_47(if ____t_46(____temp_45) then __O[30] else canvas.nextSibling ~= glCanvas) then
+        local ____t_125 = __t
+        local ____t_result_124
+        local ____t_123 = __t
+        local ____temp_122 = target ~= canvas or glCanvas.nextSibling ~= itemsCv
+        __O[30] = ____temp_122
+        if ____t_123(____temp_122) then
+            ____t_result_124 = __O[30]
+        else
+            ____t_result_124 = canvas.nextSibling ~= glCanvas
+        end
+        if ____t_125(____t_result_124) then
             target = canvas
             canvas:after(glCanvas)
             glCanvas:after(itemsCv)
@@ -276,10 +288,16 @@ local __O = {};
         if not __t(s) then
             return nil
         end
+        local ____t_result_7
         local ____t_6 = __t
         local ____TS__Number_result_5 = __TS__Number(camera)
         __O[21] = ____TS__Number_result_5
-        local camL = math.floor(if ____t_6(____TS__Number_result_5) then __O[21] else 0 / 2)
+        if ____t_6(____TS__Number_result_5) then
+            ____t_result_7 = __O[21]
+        else
+            ____t_result_7 = 0
+        end
+        local camL = math.floor(____t_result_7 / 2)
         if s.sunT ~= nil then
             return {
                 s = s,
@@ -317,33 +335,50 @@ local __O = {};
         if s == nil then
             s = {}
         end
-        local ____t_17 = __t
-        local ____t_10 = __t
-        local ____temp_9 = if __t(broken) then broken else not __t(canvas)
-        __O[22] = ____temp_9
-        local ____t_16 = __t
-        local ____opt_13 = window.Graphics
-        if ____opt_13 ~= nil then
-            ____opt_13 = ____opt_13.isShader
+        local ____t_19 = __t
+        local ____t_result_18
+        local ____t_11 = __t
+        local ____t_result_10
+        if __t(broken) then
+            ____t_result_10 = broken
+        else
+            ____t_result_10 = not __t(canvas)
         end
-        local ____opt_result_15
-        if ____opt_13 ~= nil then
-            ____opt_result_15 = ____opt_13(____opt_13)
+        __O[22] = ____t_result_10
+        if ____t_11(____t_result_10) then
+            ____t_result_18 = __O[22]
+        else
+            local ____t_17 = __t
+            local ____opt_14 = window.Graphics
+            if ____opt_14 ~= nil then
+                ____opt_14 = ____opt_14.isShader
+            end
+            local ____opt_result_16
+            if ____opt_14 ~= nil then
+                ____opt_result_16 = ____opt_14(____opt_14)
+            end
+            ____t_result_18 = not ____t_17(____opt_result_16)
         end
-        if ____t_17(if ____t_10(____temp_9) then __O[22] else not ____t_16(____opt_result_15)) then
+        if ____t_19(____t_result_18) then
             return false
         end
         if window.performance:now() < esperaAte then
             return false
         end
-        local ____t_20 = __t
-        local ____this_19
-        ____this_19 = gl
-        local ____opt_18 = ____this_19.isContextLost
-        if ____opt_18 ~= nil then
-            ____opt_18 = ____opt_18(____this_19)
+        local ____t_23 = __t
+        local ____t_result_22
+        if __t(gl) then
+            local ____this_21
+            ____this_21 = gl
+            local ____opt_20 = ____this_21.isContextLost
+            if ____opt_20 ~= nil then
+                ____opt_20 = ____opt_20(____this_21)
+            end
+            ____t_result_22 = ____opt_20
+        else
+            ____t_result_22 = gl
         end
-        if ____t_20(if __t(gl) then ____opt_18 else gl) then
+        if ____t_23(____t_result_22) then
             descartar(nil)
             return false
         end
@@ -378,27 +413,114 @@ local __O = {};
                 )
                 local scene = __TS__Number(s.scene)
                 local outdoor = not not __t(s.outdoor)
-                local ____t_22 = __t
-                local ____TS__Number_result_21 = __TS__Number(s.time)
-                __O[23] = ____TS__Number_result_21
-                local t = if ____t_22(____TS__Number_result_21) then __O[23] else 0
-                local k = if __t(s.sun) then nil else sky(nil, s.camera)
-                local night = if __t(k) then k.s.night else 0
-                local ____t_28 = __t
-                local ____opt_25 = window.Weather
-                if ____opt_25 ~= nil then
-                    ____opt_25 = ____opt_25.state
+                local ____t_result_26
+                local ____t_25 = __t
+                local ____TS__Number_result_24 = __TS__Number(s.time)
+                __O[23] = ____TS__Number_result_24
+                if ____t_25(____TS__Number_result_24) then
+                    ____t_result_26 = __O[23]
+                else
+                    ____t_result_26 = 0
                 end
-                local ____opt_result_27
-                if ____opt_25 ~= nil then
-                    ____opt_result_27 = ____opt_25(____opt_25)
+                local t = ____t_result_26
+                local ____t_result_27
+                if __t(s.sun) then
+                    ____t_result_27 = nil
+                else
+                    ____t_result_27 = sky(nil, s.camera)
                 end
-                __O[24] = ____opt_result_27
-                local wx = if ____t_28(____opt_result_27) then __O[24] else {}
-                local sunX = if __t(s.sun) then __get(s.sun, 0) else if __t(k) then k.x else 0.76
-                local sunY = if __t(s.sun) then __get(s.sun, 1) else if __t(k) then k.y else 0.18
-                local rays = if __t(outdoor) then if __t(if __t(k) then k.y < 0 else k) then 0 else if __t(if __t(k) then k.moon else k) then 0.45 else if scene == 3 then 1.15 else 1 else 0
-                rays = rays * (1 - if __t(wx.rain) then wx.rain else 0 * 0.85 - if __t(wx.snow) then wx.snow else 0 * 0.5)
+                local k = ____t_result_27
+                local ____t_result_28
+                if __t(k) then
+                    ____t_result_28 = k.s.night
+                else
+                    ____t_result_28 = 0
+                end
+                local night = ____t_result_28
+                local ____t_result_35
+                local ____t_34 = __t
+                local ____opt_31 = window.Weather
+                if ____opt_31 ~= nil then
+                    ____opt_31 = ____opt_31.state
+                end
+                local ____opt_result_33
+                if ____opt_31 ~= nil then
+                    ____opt_result_33 = ____opt_31(____opt_31)
+                end
+                __O[24] = ____opt_result_33
+                if ____t_34(____opt_result_33) then
+                    ____t_result_35 = __O[24]
+                else
+                    ____t_result_35 = {}
+                end
+                local wx = ____t_result_35
+                local ____t_result_37
+                if __t(s.sun) then
+                    ____t_result_37 = __get(s.sun, 0)
+                else
+                    local ____t_result_36
+                    if __t(k) then
+                        ____t_result_36 = k.x
+                    else
+                        ____t_result_36 = 0.76
+                    end
+                    ____t_result_37 = ____t_result_36
+                end
+                local sunX = ____t_result_37
+                local ____t_result_39
+                if __t(s.sun) then
+                    ____t_result_39 = __get(s.sun, 1)
+                else
+                    local ____t_result_38
+                    if __t(k) then
+                        ____t_result_38 = k.y
+                    else
+                        ____t_result_38 = 0.18
+                    end
+                    ____t_result_39 = ____t_result_38
+                end
+                local sunY = ____t_result_39
+                local ____t_result_45
+                if __t(outdoor) then
+                    local ____t_result_44
+                    local ____t_41 = __t
+                    local ____t_result_40
+                    if __t(k) then
+                        ____t_result_40 = k.y < 0
+                    else
+                        ____t_result_40 = k
+                    end
+                    if ____t_41(____t_result_40) then
+                        ____t_result_44 = 0
+                    else
+                        local ____t_43 = __t
+                        local ____t_result_42
+                        if __t(k) then
+                            ____t_result_42 = k.moon
+                        else
+                            ____t_result_42 = k
+                        end
+                        ____t_result_44 = ____t_43(____t_result_42) and 0.45 or (scene == 3 and 1.15 or 1)
+                    end
+                    ____t_result_45 = ____t_result_44
+                else
+                    ____t_result_45 = 0
+                end
+                local rays = ____t_result_45
+                local ____t_result_46
+                if __t(wx.rain) then
+                    ____t_result_46 = wx.rain
+                else
+                    ____t_result_46 = 0
+                end
+                local ____temp_48 = 1 - ____t_result_46 * 0.85
+                local ____t_result_47
+                if __t(wx.snow) then
+                    ____t_result_47 = wx.snow
+                else
+                    ____t_result_47 = 0
+                end
+                rays = rays * (____temp_48 - ____t_result_47 * 0.5)
                 gl:uniform1i(loc.img, 0)
                 gl:uniform2f(loc.res, w, h)
                 gl:uniform2f(loc.sun, sunX, sunY)
@@ -406,35 +528,147 @@ local __O = {};
                     loc.rays,
                     math.max(0, rays)
                 )
-                local ____t_33 = __t
-                local ____t_32 = __t
-                local ____t_30 = __t
-                local ____temp_29 = if __t(outdoor) then k else outdoor
-                __O[25] = ____temp_29
-                local ____temp_31 = if ____t_30(____temp_29) then not __t(k.moon) else __O[25]
-                __O[26] = ____temp_31
-                local golden = if ____t_33(if ____t_32(____temp_31) then k.y >= 0 else __O[26]) then math.max(
-                    0,
-                    math.min(1, 1 - k.up * 1.7)
-                ) * (1 - if __t(wx.rain) then wx.rain else 0 * 0.8) * (1 - if __t(wx.snow) then wx.snow else 0 * 0.5) else 0
+                local ____t_result_59
+                local ____t_54 = __t
+                local ____t_result_53
+                local ____t_52 = __t
+                local ____t_result_51
+                local ____t_50 = __t
+                local ____t_result_49
+                if __t(outdoor) then
+                    ____t_result_49 = k
+                else
+                    ____t_result_49 = outdoor
+                end
+                __O[25] = ____t_result_49
+                if ____t_50(____t_result_49) then
+                    ____t_result_51 = not __t(k.moon)
+                else
+                    ____t_result_51 = __O[25]
+                end
+                __O[26] = ____t_result_51
+                if ____t_52(____t_result_51) then
+                    ____t_result_53 = k.y >= 0
+                else
+                    ____t_result_53 = __O[26]
+                end
+                if ____t_54(____t_result_53) then
+                    local ____math_max_result_56 = math.max(
+                        0,
+                        math.min(1, 1 - k.up * 1.7)
+                    )
+                    local ____t_result_55
+                    if __t(wx.rain) then
+                        ____t_result_55 = wx.rain
+                    else
+                        ____t_result_55 = 0
+                    end
+                    local ____temp_58 = ____math_max_result_56 * (1 - ____t_result_55 * 0.8)
+                    local ____t_result_57
+                    if __t(wx.snow) then
+                        ____t_result_57 = wx.snow
+                    else
+                        ____t_result_57 = 0
+                    end
+                    ____t_result_59 = ____temp_58 * (1 - ____t_result_57 * 0.5)
+                else
+                    ____t_result_59 = 0
+                end
+                local golden = ____t_result_59
                 gl:uniform1f(loc.golden, golden)
-                local ____gl_40 = gl
-                local ____gl_uniform1f_41 = gl.uniform1f
-                local ____loc_rim_39 = loc.rim
-                local ____t_38 = __t
-                local ____t_37 = __t
-                local ____t_35 = __t
-                local ____temp_34 = if __t(outdoor) then k else outdoor
-                __O[27] = ____temp_34
-                local ____temp_36 = if ____t_35(____temp_34) then not __t(k.moon) else __O[27]
-                __O[28] = ____temp_36
-                ____gl_uniform1f_41(____gl_40, ____loc_rim_39, if ____t_38(if ____t_37(____temp_36) then k.y >= 0 else __O[28]) then (0.35 + golden * 0.65) * math.min(1, k.up * 3 + 0.2) * (1 - if __t(wx.rain) then wx.rain else 0 * 0.8) * (1 - if __t(wx.snow) then wx.snow else 0 * 0.4) else 0)
-                gl:uniform1f(loc.warm, if scene == 6 then 0.3 else 0.7 * (1 - night * 0.6))
+                local ____gl_72 = gl
+                local ____gl_uniform1f_73 = gl.uniform1f
+                local ____loc_rim_71 = loc.rim
+                local ____t_result_70
+                local ____t_65 = __t
+                local ____t_result_64
+                local ____t_63 = __t
+                local ____t_result_62
+                local ____t_61 = __t
+                local ____t_result_60
+                if __t(outdoor) then
+                    ____t_result_60 = k
+                else
+                    ____t_result_60 = outdoor
+                end
+                __O[27] = ____t_result_60
+                if ____t_61(____t_result_60) then
+                    ____t_result_62 = not __t(k.moon)
+                else
+                    ____t_result_62 = __O[27]
+                end
+                __O[28] = ____t_result_62
+                if ____t_63(____t_result_62) then
+                    ____t_result_64 = k.y >= 0
+                else
+                    ____t_result_64 = __O[28]
+                end
+                if ____t_65(____t_result_64) then
+                    local ____temp_67 = (0.35 + golden * 0.65) * math.min(1, k.up * 3 + 0.2)
+                    local ____t_result_66
+                    if __t(wx.rain) then
+                        ____t_result_66 = wx.rain
+                    else
+                        ____t_result_66 = 0
+                    end
+                    local ____temp_69 = ____temp_67 * (1 - ____t_result_66 * 0.8)
+                    local ____t_result_68
+                    if __t(wx.snow) then
+                        ____t_result_68 = wx.snow
+                    else
+                        ____t_result_68 = 0
+                    end
+                    ____t_result_70 = ____temp_69 * (1 - ____t_result_68 * 0.4)
+                else
+                    ____t_result_70 = 0
+                end
+                ____gl_uniform1f_73(____gl_72, ____loc_rim_71, ____t_result_70)
+                gl:uniform1f(loc.warm, (scene == 6 and 0.3 or 0.7) * (1 - night * 0.6))
                 gl:uniform1f(loc.t, t)
-                local lean = if __t(k) then k.lean else -0.4
-                gl:uniform2f(loc.ldir, -lean * 0.9, -0.55 - if __t(k) then k.up else 0.5 * 0.35)
-                gl:uniform1f(loc.relief, if s.arena == "menu" then 0 else if __t(outdoor) then 0.32 else 0.22 * if __t(if __t(k) then k.moon else k) then 0.55 else 1)
-                local fog = if __t(k) then k.s.bot else __arrL({0.8, 0.85, 0.9}, 3)
+                local ____t_result_74
+                if __t(k) then
+                    ____t_result_74 = k.lean
+                else
+                    ____t_result_74 = -0.4
+                end
+                local lean = ____t_result_74
+                local ____gl_79 = gl
+                local ____gl_uniform2f_80 = gl.uniform2f
+                local ____loc_ldir_77 = loc.ldir
+                local ____temp_78 = -lean * 0.9
+                local ____temp_76 = -0.55
+                local ____t_result_75
+                if __t(k) then
+                    ____t_result_75 = k.up
+                else
+                    ____t_result_75 = 0.5
+                end
+                ____gl_uniform2f_80(____gl_79, ____loc_ldir_77, ____temp_78, ____temp_76 - ____t_result_75 * 0.35)
+                local ____gl_86 = gl
+                local ____gl_uniform1f_87 = gl.uniform1f
+                local ____loc_relief_85 = loc.relief
+                local ____temp_84
+                if s.arena == "menu" then
+                    ____temp_84 = 0
+                else
+                    local ____temp_83 = __t(outdoor) and 0.32 or 0.22
+                    local ____t_82 = __t
+                    local ____t_result_81
+                    if __t(k) then
+                        ____t_result_81 = k.moon
+                    else
+                        ____t_result_81 = k
+                    end
+                    ____temp_84 = ____temp_83 * (____t_82(____t_result_81) and 0.55 or 1)
+                end
+                ____gl_uniform1f_87(____gl_86, ____loc_relief_85, ____temp_84)
+                local ____t_result_88
+                if __t(k) then
+                    ____t_result_88 = k.s.bot
+                else
+                    ____t_result_88 = __arrL({0.8, 0.85, 0.9}, 3)
+                end
+                local fog = ____t_result_88
                 gl:uniform3f(
                     loc.fogCol,
                     __get(fog, 0),
@@ -442,14 +676,112 @@ local __O = {};
                     __get(fog, 2)
                 )
                 gl:uniform1f(loc.fogY, 0.56)
-                gl:uniform1f(loc.fogAmt, if __t(outdoor) then 0.1 + if __t(wx.rain) then wx.rain else 0 * 0.2 + if __t(wx.snow) then wx.snow else 0 * 0.25 else 0)
-                local wa = if __t(outdoor) then __get(WATER, scene) else outdoor
-                gl:uniform3f(loc.water, if __t(wa) then 1 else 0, if __t(wa) then __get(wa, 0) else 0, if __t(wa) then __get(wa, 1) else 0)
-                local midday = if __t(if __t(k) then not __t(k.moon) else k) then math.max(0, k.up - 0.55) * 2.2 else 0
-                gl:uniform1f(loc.heat, if __t(if __t(outdoor) then __get(HOT, scene) else outdoor) then __get(HOT, scene) * midday * (1 - if __t(wx.rain) then wx.rain else 0) else 0)
+                local ____gl_94 = gl
+                local ____gl_uniform1f_95 = gl.uniform1f
+                local ____loc_fogAmt_93 = loc.fogAmt
+                local ____t_result_92
+                if __t(outdoor) then
+                    local ____t_result_89
+                    if __t(wx.rain) then
+                        ____t_result_89 = wx.rain
+                    else
+                        ____t_result_89 = 0
+                    end
+                    local ____temp_91 = 0.1 + ____t_result_89 * 0.2
+                    local ____t_result_90
+                    if __t(wx.snow) then
+                        ____t_result_90 = wx.snow
+                    else
+                        ____t_result_90 = 0
+                    end
+                    ____t_result_92 = ____temp_91 + ____t_result_90 * 0.25
+                else
+                    ____t_result_92 = 0
+                end
+                ____gl_uniform1f_95(____gl_94, ____loc_fogAmt_93, ____t_result_92)
+                local ____t_result_96
+                if __t(outdoor) then
+                    ____t_result_96 = __get(WATER, scene)
+                else
+                    ____t_result_96 = outdoor
+                end
+                local wa = ____t_result_96
+                local ____gl_101 = gl
+                local ____gl_uniform3f_102 = gl.uniform3f
+                local ____loc_water_99 = loc.water
+                local ____temp_100 = __t(wa) and 1 or 0
+                local ____t_result_97
+                if __t(wa) then
+                    ____t_result_97 = __get(wa, 0)
+                else
+                    ____t_result_97 = 0
+                end
+                local ____t_result_98
+                if __t(wa) then
+                    ____t_result_98 = __get(wa, 1)
+                else
+                    ____t_result_98 = 0
+                end
+                ____gl_uniform3f_102(
+                    ____gl_101,
+                    ____loc_water_99,
+                    ____temp_100,
+                    ____t_result_97,
+                    ____t_result_98
+                )
+                local ____t_result_105
+                local ____t_104 = __t
+                local ____t_result_103
+                if __t(k) then
+                    ____t_result_103 = not __t(k.moon)
+                else
+                    ____t_result_103 = k
+                end
+                if ____t_104(____t_result_103) then
+                    ____t_result_105 = math.max(0, k.up - 0.55) * 2.2
+                else
+                    ____t_result_105 = 0
+                end
+                local midday = ____t_result_105
+                local ____gl_112 = gl
+                local ____gl_uniform1f_113 = gl.uniform1f
+                local ____loc_heat_111 = loc.heat
+                local ____t_result_110
+                local ____t_107 = __t
+                local ____t_result_106
+                if __t(outdoor) then
+                    ____t_result_106 = __get(HOT, scene)
+                else
+                    ____t_result_106 = outdoor
+                end
+                if ____t_107(____t_result_106) then
+                    local ____temp_109 = __get(HOT, scene) * midday
+                    local ____t_result_108
+                    if __t(wx.rain) then
+                        ____t_result_108 = wx.rain
+                    else
+                        ____t_result_108 = 0
+                    end
+                    ____t_result_110 = ____temp_109 * (1 - ____t_result_108)
+                else
+                    ____t_result_110 = 0
+                end
+                ____gl_uniform1f_113(____gl_112, ____loc_heat_111, ____t_result_110)
                 gl:uniform1f(loc.night, night)
-                gl:uniform1f(loc.wet, if __t(wx.rain) then wx.rain else 0)
-                gl:uniform1f(loc.dof, if __t(outdoor) then 0.35 else 0)
+                local ____gl_116 = gl
+                local ____gl_uniform1f_117 = gl.uniform1f
+                local ____loc_wet_115 = loc.wet
+                local ____t_result_114
+                if __t(wx.rain) then
+                    ____t_result_114 = wx.rain
+                else
+                    ____t_result_114 = 0
+                end
+                ____gl_uniform1f_117(____gl_116, ____loc_wet_115, ____t_result_114)
+                gl:uniform1f(
+                    loc.dof,
+                    __t(outdoor) and 0.35 or 0
+                )
                 gl:drawArrays(gl.TRIANGLE_STRIP, 0, 4)
                 return true, true
             end)
@@ -475,14 +807,25 @@ local __O = {};
         end
     )
     local function items(self)
-        local ____t_52 = __t
-        local ____t_51 = __t
-        local ____t_49 = __t
-        local ____temp_48 = not __t(itemsCtx) or not __t(gl)
-        __O[31] = ____temp_48
-        local ____temp_50 = if ____t_49(____temp_48) then __O[31] else window.performance:now() - lastApply > 50
-        __O[32] = ____temp_50
-        if ____t_52(if ____t_51(____temp_50) then __O[32] else itemsCv.style.display == "none") then
+        local ____t_131 = __t
+        local ____t_result_130
+        local ____t_129 = __t
+        local ____t_result_128
+        local ____t_127 = __t
+        local ____temp_126 = not __t(itemsCtx) or not __t(gl)
+        __O[31] = ____temp_126
+        if ____t_127(____temp_126) then
+            ____t_result_128 = __O[31]
+        else
+            ____t_result_128 = window.performance:now() - lastApply > 50
+        end
+        __O[32] = ____t_result_128
+        if ____t_129(____t_result_128) then
+            ____t_result_130 = __O[32]
+        else
+            ____t_result_130 = itemsCv.style.display == "none"
+        end
+        if ____t_131(____t_result_130) then
             return nil
         end
         itemsUsed = true
@@ -510,11 +853,11 @@ local __O = {};
                             local t = window.document:createElement("canvas")
                             local x = t:getContext("webgl")
                             canGL = not not __t(x)
-                            local ____opt_57 = x and x.getExtension
-                            local ____opt_55 = ____opt_57 and ____opt_57(x, "WEBGL_lose_context")
-                            local ____opt_53 = ____opt_55 and ____opt_55.loseContext
-                            if ____opt_53 ~= nil then
-                                ____opt_53(____opt_55)
+                            local ____opt_136 = x and x.getExtension
+                            local ____opt_134 = ____opt_136 and ____opt_136(x, "WEBGL_lose_context")
+                            local ____opt_132 = ____opt_134 and ____opt_134.loseContext
+                            if ____opt_132 ~= nil then
+                                ____opt_132(____opt_134)
                             end
                         end)
                         if not ____try then

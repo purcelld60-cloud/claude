@@ -6,18 +6,21 @@ local __mod, __ord, __arrL, __iterar, __t, __get, __call, __add, __keys = __JSR.
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
 local __TS__Iterator = ____lualib.__TS__Iterator
-local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
-local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
-local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local ____exports = {}
 local __O = {};
 (function()
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawArena)
-    __O[2701] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2701] else window.BossArena) then
+    __O[2732] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[2732]
+    else
+        ____t_result_2 = window.BossArena
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     local orig = window.Art.drawArena
@@ -105,101 +108,109 @@ local __O = {};
         do
             local i = 0
             while i < 46 do
-                local x = __mod(
-                    i * 23 + __mod(i, 3) * 7,
-                    1000
-                ) - 20
-                local depth = __mod(i, 2)
-                local y = 440 - if __t(depth) then 6 else 0
-                local h = 44 + rnd(nil, i) * 16 - depth * 6
-                local jump = math.max(
-                    0,
-                    math.sin(beat * math.pi + i * 1.7)
-                ) * if __t(cheer) then 7 else 3
-                if __t(math.abs(x - center) < 150 and not __t(depth)) then
-                    continue
-                end
-                local yy = y - jump
-                local shade = if __t(depth) then col else __add(col, "ee")
-                R(
-                    nil,
-                    c,
-                    x - 7,
-                    yy - h,
-                    14,
-                    h,
-                    shade
-                )
-                R(
-                    nil,
-                    c,
-                    x - 6,
-                    yy - h - 12,
-                    12,
-                    12,
-                    shade
-                )
-                local up = __mod(
-                    i + math.floor(beat),
-                    3
-                ) == 0
-                R(
-                    nil,
-                    c,
-                    x - 11,
-                    yy - h + if __t(up) then -20 else 2,
-                    4,
-                    if __t(up) then 22 else 16,
-                    shade
-                )
-                R(
-                    nil,
-                    c,
-                    x + 7,
-                    yy - h + if __t(up) then -22 else 4,
-                    4,
-                    if __t(up) then 24 else 14,
-                    shade
-                )
-                if rnd(
-                    nil,
-                    i * 3 + math.floor(t * 3)
-                ) > 0.985 then
-                    c:save()
-                    c.globalAlpha = 0.9
+                do
+                    local x = __mod(
+                        i * 23 + __mod(i, 3) * 7,
+                        1000
+                    ) - 20
+                    local depth = __mod(i, 2)
+                    local y = 440 - (__t(depth) and 6 or 0)
+                    local h = 44 + rnd(nil, i) * 16 - depth * 6
+                    local jump = math.max(
+                        0,
+                        math.sin(beat * math.pi + i * 1.7)
+                    ) * (__t(cheer) and 7 or 3)
+                    if __t(math.abs(x - center) < 150 and not __t(depth)) then
+                        do i = i + 1 continue end
+                    end
+                    local yy = y - jump
+                    local ____t_result_4
+                    if __t(depth) then
+                        ____t_result_4 = col
+                    else
+                        ____t_result_4 = __add(col, "ee")
+                    end
+                    local shade = ____t_result_4
                     R(
                         nil,
                         c,
-                        x + 6,
-                        yy - h - 30,
-                        5,
-                        7,
-                        "#ffffff"
+                        x - 7,
+                        yy - h,
+                        14,
+                        h,
+                        shade
                     )
-                    c.globalCompositeOperation = "lighter"
-                    local g = c:createRadialGradient(
-                        x + 8,
-                        yy - h - 27,
-                        1,
-                        x + 8,
-                        yy - h - 27,
-                        22
-                    )
-                    g:addColorStop(0, "rgba(255,255,255,.6)")
-                    g:addColorStop(1, "rgba(255,255,255,0)")
-                    c.fillStyle = g
-                    c:fillRect(x - 14, yy - h - 49, 44, 44)
-                    c:restore()
-                elseif __mod(i, 5) == 0 then
                     R(
                         nil,
                         c,
-                        x + 6,
-                        yy - h - 26,
+                        x - 6,
+                        yy - h - 12,
+                        12,
+                        12,
+                        shade
+                    )
+                    local up = __mod(
+                        i + math.floor(beat),
+                        3
+                    ) == 0
+                    R(
+                        nil,
+                        c,
+                        x - 11,
+                        yy - h + (__t(up) and -20 or 2),
                         4,
-                        6,
-                        "#9fd0ff"
+                        __t(up) and 22 or 16,
+                        shade
                     )
+                    R(
+                        nil,
+                        c,
+                        x + 7,
+                        yy - h + (__t(up) and -22 or 4),
+                        4,
+                        __t(up) and 24 or 14,
+                        shade
+                    )
+                    if rnd(
+                        nil,
+                        i * 3 + math.floor(t * 3)
+                    ) > 0.985 then
+                        c:save()
+                        c.globalAlpha = 0.9
+                        R(
+                            nil,
+                            c,
+                            x + 6,
+                            yy - h - 30,
+                            5,
+                            7,
+                            "#ffffff"
+                        )
+                        c.globalCompositeOperation = "lighter"
+                        local g = c:createRadialGradient(
+                            x + 8,
+                            yy - h - 27,
+                            1,
+                            x + 8,
+                            yy - h - 27,
+                            22
+                        )
+                        g:addColorStop(0, "rgba(255,255,255,.6)")
+                        g:addColorStop(1, "rgba(255,255,255,0)")
+                        c.fillStyle = g
+                        c:fillRect(x - 14, yy - h - 49, 44, 44)
+                        c:restore()
+                    elseif __mod(i, 5) == 0 then
+                        R(
+                            nil,
+                            c,
+                            x + 6,
+                            yy - h - 26,
+                            4,
+                            6,
+                            "#9fd0ff"
+                        )
+                    end
                 end
                 i = i + 1
             end
@@ -230,17 +241,29 @@ local __O = {};
             end
         end
         if __t(kind == "paper" or kind == "paperstorm") then
-            local n = if kind == "paper" then 16 else 60
+            local n = kind == "paper" and 16 or 60
             do
                 local i = 0
                 while i < n do
-                    local sp = if kind == "paper" then 40 else 160
-                    local a = t * if kind == "paper" then 0.3 else 1.4 + i
-                    local x = if kind == "paper" then __mod(
-                        rnd(nil, i) * 1100 + t * sp,
-                        1100
-                    ) - 70 else center + math.cos(a) * (120 + rnd(nil, i) * 300)
-                    local y = if kind == "paper" then 80 + rnd(nil, i * 3) * 300 + math.sin(t * 2 + i) * 20 else 260 + math.sin(a * 1.3) * (60 + rnd(nil, i * 5) * 150)
+                    local sp = kind == "paper" and 40 or 160
+                    local a = t * (kind == "paper" and 0.3 or 1.4) + i
+                    local ____temp_5
+                    if kind == "paper" then
+                        ____temp_5 = __mod(
+                            rnd(nil, i) * 1100 + t * sp,
+                            1100
+                        ) - 70
+                    else
+                        ____temp_5 = center + math.cos(a) * (120 + rnd(nil, i) * 300)
+                    end
+                    local x = ____temp_5
+                    local ____temp_6
+                    if kind == "paper" then
+                        ____temp_6 = 80 + rnd(nil, i * 3) * 300 + math.sin(t * 2 + i) * 20
+                    else
+                        ____temp_6 = 260 + math.sin(a * 1.3) * (60 + rnd(nil, i * 5) * 150)
+                    end
+                    local y = ____temp_6
                     c:save()
                     c:translate(x, y)
                     c:rotate(a * 2)
@@ -313,8 +336,14 @@ local __O = {};
                 local i = 0
                 while i < 4 do
                     local x = __mod(t * (120 + i * 30) + i * 300, 1200) - 120
-                    local dir = if __t(__mod(i, 2)) then 1 else -1
-                    local xx = if dir > 0 then x else 960 - x
+                    local dir = __t(__mod(i, 2)) and 1 or -1
+                    local ____temp_7
+                    if dir > 0 then
+                        ____temp_7 = x
+                    else
+                        ____temp_7 = 960 - x
+                    end
+                    local xx = ____temp_7
                     R(
                         nil,
                         c,
@@ -393,7 +422,7 @@ local __O = {};
                         440 - k * 380,
                         3,
                         3,
-                        if __t(__mod(i, 3)) then "#ffb347" else "#ffe08a"
+                        __t(__mod(i, 3)) and "#ffb347" or "#ffe08a"
                     )
                     i = i + 1
                 end
@@ -479,7 +508,7 @@ local __O = {};
                         k * 440,
                         5,
                         3,
-                        if __t(__mod(i, 2)) then "#7aa84a" else "#c9a24a"
+                        __t(__mod(i, 2)) and "#7aa84a" or "#c9a24a"
                     )
                     i = i + 1
                 end
@@ -488,15 +517,38 @@ local __O = {};
         c:restore()
     end
     local function overlay(self, c, ____type, camera, t, homeX, hd)
-        local ____t_5 = __t
-        local ____t_4 = __t
-        local ____temp_3 = if __t(____type) then type(____type) == "table" else ____type
-        __O[2702] = ____temp_3
-        local th = if ____t_5(if ____t_4(____temp_3) then ____type.light else __O[2702]) then ____type else __get(THEME, ____type)
+        local ____t_result_12
+        local ____t_11 = __t
+        local ____t_result_10
+        local ____t_9 = __t
+        local ____t_result_8
+        if __t(____type) then
+            ____t_result_8 = type(____type) == "table"
+        else
+            ____t_result_8 = ____type
+        end
+        __O[2733] = ____t_result_8
+        if ____t_9(____t_result_8) then
+            ____t_result_10 = ____type.light
+        else
+            ____t_result_10 = __O[2733]
+        end
+        if ____t_11(____t_result_10) then
+            ____t_result_12 = ____type
+        else
+            ____t_result_12 = __get(THEME, ____type)
+        end
+        local th = ____t_result_12
         if not __t(th) then
             return
         end
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_13
+        if __t(homeX) then
+            ____t_result_13 = homeX - camera
+        else
+            ____t_result_13 = 480
+        end
+        local center = ____t_result_13
         c:save()
         if __t(th.storm) then
             if not __t(hd) then
@@ -508,7 +560,7 @@ local __O = {};
             end
             do
                 local i = 0
-                while i < if __t(hd) then 0 else 6 do
+                while i < (__t(hd) and 0 or 6) do
                     c.globalAlpha = 0.35
                     c.fillStyle = "#1e2e14"
                     c:beginPath()
@@ -617,7 +669,7 @@ local __O = {};
                 92,
                 20,
                 10,
-                if a > 0.5 then "#ff3a3a" else "#7a1a1a"
+                a > 0.5 and "#ff3a3a" or "#7a1a1a"
             )
         end
         particles(
@@ -627,7 +679,14 @@ local __O = {};
             t,
             center
         )
-        if __t(if __t(th.crowd) then not __t(hd) else th.crowd) then
+        local ____t_15 = __t
+        local ____t_result_14
+        if __t(th.crowd) then
+            ____t_result_14 = not __t(hd)
+        else
+            ____t_result_14 = th.crowd
+        end
+        if ____t_15(____t_result_14) then
             crowd(
                 nil,
                 c,
@@ -698,41 +757,76 @@ local __O = {};
         if homeX == nil then
             homeX = 0
         end
-        local ____t_12 = __t
-        local ____t_11 = __t
-        local ____opt_8 = window.HdMaps
-        if ____opt_8 ~= nil then
-            ____opt_8 = ____opt_8.arenaHandles
+        local ____t_23 = __t
+        local ____t_result_22
+        local ____t_21 = __t
+        local ____opt_18 = window.HdMaps
+        if ____opt_18 ~= nil then
+            ____opt_18 = ____opt_18.arenaHandles
         end
-        local ____opt_result_10
-        if ____opt_8 ~= nil then
-            ____opt_result_10 = ____opt_8(____opt_8, ____type)
+        local ____opt_result_20
+        if ____opt_18 ~= nil then
+            ____opt_result_20 = ____opt_18(____opt_18, ____type)
         end
-        __O[2703] = ____opt_result_10
-        if ____t_12(if ____t_11(____opt_result_10) then window.HdMaps:drawArena(
-            c,
-            ____type,
-            camera,
-            t,
-            homeX
-        ) else __O[2703]) then
+        __O[2734] = ____opt_result_20
+        if ____t_21(____opt_result_20) then
+            ____t_result_22 = window.HdMaps:drawArena(
+                c,
+                ____type,
+                camera,
+                t,
+                homeX
+            )
+        else
+            ____t_result_22 = __O[2734]
+        end
+        if ____t_23(____t_result_22) then
             do
                 pcall(function()
-                    local ____overlay_20 = overlay
-                    local ____array_19 = __TS__SparseArrayNew(nil, c, if type(____type) == "table" then ____type.type else ____type)
-                    local ____t_14 = __t
-                    local ____TS__Number_result_13 = __TS__Number(camera)
-                    __O[2704] = ____TS__Number_result_13
-                    __TS__SparseArrayPush(____array_19, if ____t_14(____TS__Number_result_13) then __O[2704] else 0)
-                    local ____t_16 = __t
-                    local ____TS__Number_result_15 = __TS__Number(t)
-                    __O[2705] = ____TS__Number_result_15
-                    __TS__SparseArrayPush(____array_19, if ____t_16(____TS__Number_result_15) then __O[2705] else 0)
-                    local ____t_18 = __t
-                    local ____TS__Number_result_17 = __TS__Number(homeX)
-                    __O[2706] = ____TS__Number_result_17
-                    __TS__SparseArrayPush(____array_19, if ____t_18(____TS__Number_result_17) then __O[2706] else 0, true)
-                    ____overlay_20(__TS__SparseArraySpread(____array_19))
+                    local ____overlay_35 = overlay
+                    local ____c_34 = c
+                    local ____temp_24
+                    if type(____type) == "table" then
+                        ____temp_24 = ____type.type
+                    else
+                        ____temp_24 = ____type
+                    end
+                    local ____t_result_27
+                    local ____t_26 = __t
+                    local ____TS__Number_result_25 = __TS__Number(camera)
+                    __O[2735] = ____TS__Number_result_25
+                    if ____t_26(____TS__Number_result_25) then
+                        ____t_result_27 = __O[2735]
+                    else
+                        ____t_result_27 = 0
+                    end
+                    local ____t_result_30
+                    local ____t_29 = __t
+                    local ____TS__Number_result_28 = __TS__Number(t)
+                    __O[2736] = ____TS__Number_result_28
+                    if ____t_29(____TS__Number_result_28) then
+                        ____t_result_30 = __O[2736]
+                    else
+                        ____t_result_30 = 0
+                    end
+                    local ____t_result_33
+                    local ____t_32 = __t
+                    local ____TS__Number_result_31 = __TS__Number(homeX)
+                    __O[2737] = ____TS__Number_result_31
+                    if ____t_32(____TS__Number_result_31) then
+                        ____t_result_33 = __O[2737]
+                    else
+                        ____t_result_33 = 0
+                    end
+                    ____overlay_35(
+                        nil,
+                        ____c_34,
+                        ____temp_24,
+                        ____t_result_27,
+                        ____t_result_30,
+                        ____t_result_33,
+                        true
+                    )
                 end)
             end
             return
@@ -745,45 +839,79 @@ local __O = {};
             t,
             homeX
         )
-        local ____t_32 = __t
-        local ____t_26 = __t
-        local ____opt_23 = window.Graphics
-        if ____opt_23 ~= nil then
-            ____opt_23 = ____opt_23.isLite
+        local ____t_48 = __t
+        local ____t_result_47
+        local ____t_41 = __t
+        local ____opt_38 = window.Graphics
+        if ____opt_38 ~= nil then
+            ____opt_38 = ____opt_38.isLite
         end
-        local ____opt_result_25
-        if ____opt_23 ~= nil then
-            ____opt_result_25 = ____opt_23(____opt_23)
+        local ____opt_result_40
+        if ____opt_38 ~= nil then
+            ____opt_result_40 = ____opt_38(____opt_38)
         end
-        __O[2707] = ____opt_result_25
-        local ____opt_29 = window.HdScene
-        if ____opt_29 ~= nil then
-            ____opt_29 = ____opt_29.active
+        __O[2738] = ____opt_result_40
+        if ____t_41(____opt_result_40) then
+            ____t_result_47 = __O[2738]
+        else
+            local ____opt_44 = window.HdScene
+            if ____opt_44 ~= nil then
+                ____opt_44 = ____opt_44.active
+            end
+            local ____opt_result_46
+            if ____opt_44 ~= nil then
+                ____opt_result_46 = ____opt_44(____opt_44, ____type)
+            end
+            ____t_result_47 = ____opt_result_46
         end
-        local ____opt_result_31
-        if ____opt_29 ~= nil then
-            ____opt_result_31 = ____opt_29(____opt_29, ____type)
-        end
-        if ____t_32(if ____t_26(____opt_result_25) then __O[2707] else ____opt_result_31) then
+        if ____t_48(____t_result_47) then
             return
         end
         do
             pcall(function()
-                local ____overlay_40 = overlay
-                local ____array_39 = __TS__SparseArrayNew(nil, c, if type(____type) == "table" then ____type.type else ____type)
-                local ____t_34 = __t
-                local ____TS__Number_result_33 = __TS__Number(camera)
-                __O[2708] = ____TS__Number_result_33
-                __TS__SparseArrayPush(____array_39, if ____t_34(____TS__Number_result_33) then __O[2708] else 0)
-                local ____t_36 = __t
-                local ____TS__Number_result_35 = __TS__Number(t)
-                __O[2709] = ____TS__Number_result_35
-                __TS__SparseArrayPush(____array_39, if ____t_36(____TS__Number_result_35) then __O[2709] else 0)
-                local ____t_38 = __t
-                local ____TS__Number_result_37 = __TS__Number(homeX)
-                __O[2710] = ____TS__Number_result_37
-                __TS__SparseArrayPush(____array_39, if ____t_38(____TS__Number_result_37) then __O[2710] else 0)
-                ____overlay_40(__TS__SparseArraySpread(____array_39))
+                local ____overlay_60 = overlay
+                local ____c_59 = c
+                local ____temp_49
+                if type(____type) == "table" then
+                    ____temp_49 = ____type.type
+                else
+                    ____temp_49 = ____type
+                end
+                local ____t_result_52
+                local ____t_51 = __t
+                local ____TS__Number_result_50 = __TS__Number(camera)
+                __O[2739] = ____TS__Number_result_50
+                if ____t_51(____TS__Number_result_50) then
+                    ____t_result_52 = __O[2739]
+                else
+                    ____t_result_52 = 0
+                end
+                local ____t_result_55
+                local ____t_54 = __t
+                local ____TS__Number_result_53 = __TS__Number(t)
+                __O[2740] = ____TS__Number_result_53
+                if ____t_54(____TS__Number_result_53) then
+                    ____t_result_55 = __O[2740]
+                else
+                    ____t_result_55 = 0
+                end
+                local ____t_result_58
+                local ____t_57 = __t
+                local ____TS__Number_result_56 = __TS__Number(homeX)
+                __O[2741] = ____TS__Number_result_56
+                if ____t_57(____TS__Number_result_56) then
+                    ____t_result_58 = __O[2741]
+                else
+                    ____t_result_58 = 0
+                end
+                ____overlay_60(
+                    nil,
+                    ____c_59,
+                    ____temp_49,
+                    ____t_result_52,
+                    ____t_result_55,
+                    ____t_result_58
+                )
             end)
         end
     end
@@ -847,39 +975,66 @@ local __O = {};
         if homeX == nil then
             homeX = 0
         end
-        local ____t_46 = __t
-        local ____opt_43 = window.Graphics
-        if ____opt_43 ~= nil then
-            ____opt_43 = ____opt_43.isLite
+        local ____t_66 = __t
+        local ____opt_63 = window.Graphics
+        if ____opt_63 ~= nil then
+            ____opt_63 = ____opt_63.isLite
         end
-        local ____opt_result_45
-        if ____opt_43 ~= nil then
-            ____opt_result_45 = ____opt_43(____opt_43)
+        local ____opt_result_65
+        if ____opt_63 ~= nil then
+            ____opt_result_65 = ____opt_63(____opt_63)
         end
-        if ____t_46(____opt_result_45) then
+        if ____t_66(____opt_result_65) then
             return
         end
         do
             pcall(function()
-                local ____overlay_56 = overlay
-                local ____array_55 = __TS__SparseArrayNew(nil, c)
-                local ____t_48 = __t
-                local ____get_result_47 = __get(C2, tema)
-                __O[2711] = ____get_result_47
-                __TS__SparseArrayPush(____array_55, if ____t_48(____get_result_47) then __O[2711] else C2.creuza)
-                local ____t_50 = __t
-                local ____TS__Number_result_49 = __TS__Number(camera)
-                __O[2712] = ____TS__Number_result_49
-                __TS__SparseArrayPush(____array_55, if ____t_50(____TS__Number_result_49) then __O[2712] else 0)
-                local ____t_52 = __t
-                local ____TS__Number_result_51 = __TS__Number(t)
-                __O[2713] = ____TS__Number_result_51
-                __TS__SparseArrayPush(____array_55, if ____t_52(____TS__Number_result_51) then __O[2713] else 0)
-                local ____t_54 = __t
-                local ____TS__Number_result_53 = __TS__Number(homeX)
-                __O[2714] = ____TS__Number_result_53
-                __TS__SparseArrayPush(____array_55, if ____t_54(____TS__Number_result_53) then __O[2714] else 0)
-                ____overlay_56(__TS__SparseArraySpread(____array_55))
+                local ____overlay_80 = overlay
+                local ____c_79 = c
+                local ____t_result_69
+                local ____t_68 = __t
+                local ____get_result_67 = __get(C2, tema)
+                __O[2742] = ____get_result_67
+                if ____t_68(____get_result_67) then
+                    ____t_result_69 = __O[2742]
+                else
+                    ____t_result_69 = C2.creuza
+                end
+                local ____t_result_72
+                local ____t_71 = __t
+                local ____TS__Number_result_70 = __TS__Number(camera)
+                __O[2743] = ____TS__Number_result_70
+                if ____t_71(____TS__Number_result_70) then
+                    ____t_result_72 = __O[2743]
+                else
+                    ____t_result_72 = 0
+                end
+                local ____t_result_75
+                local ____t_74 = __t
+                local ____TS__Number_result_73 = __TS__Number(t)
+                __O[2744] = ____TS__Number_result_73
+                if ____t_74(____TS__Number_result_73) then
+                    ____t_result_75 = __O[2744]
+                else
+                    ____t_result_75 = 0
+                end
+                local ____t_result_78
+                local ____t_77 = __t
+                local ____TS__Number_result_76 = __TS__Number(homeX)
+                __O[2745] = ____TS__Number_result_76
+                if ____t_77(____TS__Number_result_76) then
+                    ____t_result_78 = __O[2745]
+                else
+                    ____t_result_78 = 0
+                end
+                ____overlay_80(
+                    nil,
+                    ____c_79,
+                    ____t_result_69,
+                    ____t_result_72,
+                    ____t_result_75,
+                    ____t_result_78
+                )
             end)
         end
     end

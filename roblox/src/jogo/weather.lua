@@ -14,9 +14,16 @@ local __O = {};
     local ground, FLOOR, hash, st, prints, bits, rings, lastStepX, prevGround, lastSplash, printScene, P
     function ground(self, c, o, t, cam, k)
         local pl = o.player
+        local ____t_22 = t
+        local ____t_result_21
+        if __t(ground.lt) then
+            ____t_result_21 = ground.lt
+        else
+            ____t_result_21 = t
+        end
         local dt = math.max(
             0,
-            math.min(0.1, t - if __t(ground.lt) then ground.lt else t)
+            math.min(0.1, ____t_22 - ____t_result_21)
         )
         ground.lt = t
         if o.scene ~= printScene then
@@ -73,97 +80,125 @@ local __O = {};
             do
                 local i = 0
                 while i < 40 do
-                    local wx = 160 + i * 240 + hash(nil, i + 170) * 120
-                    local w = (44 + hash(nil, i + 171) * 70) * a
-                    local x = wx - cam
-                    if __t(x < -120 or x > 1080) then
-                        continue
-                    end
-                    c.fillStyle = ("rgba(38,52,80," .. tostring(0.45 * a)) .. ")"
-                    c:fillRect(
-                        math.floor((x - w / 2) / 2 + 0.5) * 2,
-                        FLOOR + 4,
-                        math.floor(w / 2 + 0.5) * 2,
-                        4
-                    )
-                    c:fillRect(
-                        math.floor((x - w / 2 + 6) / 2 + 0.5) * 2,
-                        FLOOR + 2,
-                        math.floor((w - 12) / 2 + 0.5) * 2,
-                        2
-                    )
-                    c:fillRect(
-                        math.floor((x - w / 2 + 6) / 2 + 0.5) * 2,
-                        FLOOR + 8,
-                        math.floor((w - 12) / 2 + 0.5) * 2,
-                        2
-                    )
-                    c.fillStyle = ("rgba(190,210,240," .. tostring(0.35 * a)) .. ")"
-                    c:fillRect(
-                        math.floor((x - w / 3) / 2 + 0.5) * 2,
-                        FLOOR + 4,
-                        math.floor(w / 4 / 2 + 0.5) * 2,
-                        2
-                    )
-                    c:fillRect(
-                        math.floor((x + w / 12) / 2 + 0.5) * 2,
-                        FLOOR + 6,
-                        math.floor(w / 6 / 2 + 0.5) * 2,
-                        2
-                    )
-                    if __t(st.rain > 0.2 and math.random() < 0.25 * st.rain * k) then
-                        __call(
-                            rings,
-                            "push",
-                            {
-                                x = wx + (math.random() - 0.5) * w * 0.8,
-                                t0 = t
-                            }
-                        )
-                    end
-                    local ____t_21 = __t
-                    local ____t_20 = __t
-                    local ____t_18 = __t
-                    local ____t_16 = __t
-                    local ____t_14 = __t
-                    local ____temp_13 = if __t(pl) then pl.ground else pl
-                    __O[51] = ____temp_13
-                    local ____temp_15 = if ____t_14(____temp_13) then math.abs(pl.y - FLOOR) < 3 else __O[51]
-                    __O[52] = ____temp_15
-                    local ____temp_17 = if ____t_16(____temp_15) then math.abs(pl.x - wx) < w / 2 else __O[52]
-                    __O[53] = ____temp_17
-                    local ____temp_19 = if ____t_18(____temp_17) then math.abs(pl.vx) > 40 else __O[53]
-                    __O[54] = ____temp_19
-                    if ____t_21(if ____t_20(____temp_19) then t - lastSplash > 0.18 else __O[54]) then
-                        lastSplash = t
-                        do
-                            local j = 0
-                            while j < 7 do
-                                __call(
-                                    bits,
-                                    "push",
-                                    {
-                                        x = pl.x + (math.random() - 0.5) * 10,
-                                        y = FLOOR + 2,
-                                        vx = (math.random() - 0.5) * 120 + pl.vx * 0.2,
-                                        vy = -60 - math.random() * 110,
-                                        life = 0.45,
-                                        col = "rgba(200,220,255,.9)"
-                                    }
-                                )
-                                j = j + 1
-                            end
+                    do
+                        local wx = 160 + i * 240 + hash(nil, i + 170) * 120
+                        local w = (44 + hash(nil, i + 171) * 70) * a
+                        local x = wx - cam
+                        if __t(x < -120 or x > 1080) then
+                            do i = i + 1 continue end
                         end
-                        do
-                            pcall(function()
-                                local ____opt_24 = window.DarocaAudio
-                                if ____opt_24 ~= nil then
-                                    ____opt_24 = ____opt_24.play
+                        c.fillStyle = ("rgba(38,52,80," .. tostring(0.45 * a)) .. ")"
+                        c:fillRect(
+                            math.floor((x - w / 2) / 2 + 0.5) * 2,
+                            FLOOR + 4,
+                            math.floor(w / 2 + 0.5) * 2,
+                            4
+                        )
+                        c:fillRect(
+                            math.floor((x - w / 2 + 6) / 2 + 0.5) * 2,
+                            FLOOR + 2,
+                            math.floor((w - 12) / 2 + 0.5) * 2,
+                            2
+                        )
+                        c:fillRect(
+                            math.floor((x - w / 2 + 6) / 2 + 0.5) * 2,
+                            FLOOR + 8,
+                            math.floor((w - 12) / 2 + 0.5) * 2,
+                            2
+                        )
+                        c.fillStyle = ("rgba(190,210,240," .. tostring(0.35 * a)) .. ")"
+                        c:fillRect(
+                            math.floor((x - w / 3) / 2 + 0.5) * 2,
+                            FLOOR + 4,
+                            math.floor(w / 4 / 2 + 0.5) * 2,
+                            2
+                        )
+                        c:fillRect(
+                            math.floor((x + w / 12) / 2 + 0.5) * 2,
+                            FLOOR + 6,
+                            math.floor(w / 6 / 2 + 0.5) * 2,
+                            2
+                        )
+                        if __t(st.rain > 0.2 and math.random() < 0.25 * st.rain * k) then
+                            __call(
+                                rings,
+                                "push",
+                                {
+                                    x = wx + (math.random() - 0.5) * w * 0.8,
+                                    t0 = t
+                                }
+                            )
+                        end
+                        local ____t_32 = __t
+                        local ____t_result_31
+                        local ____t_30 = __t
+                        local ____t_result_29
+                        local ____t_28 = __t
+                        local ____t_result_27
+                        local ____t_26 = __t
+                        local ____t_result_25
+                        local ____t_24 = __t
+                        local ____t_result_23
+                        if __t(pl) then
+                            ____t_result_23 = pl.ground
+                        else
+                            ____t_result_23 = pl
+                        end
+                        __O[51] = ____t_result_23
+                        if ____t_24(____t_result_23) then
+                            ____t_result_25 = math.abs(pl.y - FLOOR) < 3
+                        else
+                            ____t_result_25 = __O[51]
+                        end
+                        __O[52] = ____t_result_25
+                        if ____t_26(____t_result_25) then
+                            ____t_result_27 = math.abs(pl.x - wx) < w / 2
+                        else
+                            ____t_result_27 = __O[52]
+                        end
+                        __O[53] = ____t_result_27
+                        if ____t_28(____t_result_27) then
+                            ____t_result_29 = math.abs(pl.vx) > 40
+                        else
+                            ____t_result_29 = __O[53]
+                        end
+                        __O[54] = ____t_result_29
+                        if ____t_30(____t_result_29) then
+                            ____t_result_31 = t - lastSplash > 0.18
+                        else
+                            ____t_result_31 = __O[54]
+                        end
+                        if ____t_32(____t_result_31) then
+                            lastSplash = t
+                            do
+                                local j = 0
+                                while j < 7 do
+                                    __call(
+                                        bits,
+                                        "push",
+                                        {
+                                            x = pl.x + (math.random() - 0.5) * 10,
+                                            y = FLOOR + 2,
+                                            vx = (math.random() - 0.5) * 120 + pl.vx * 0.2,
+                                            vy = -60 - math.random() * 110,
+                                            life = 0.45,
+                                            col = "rgba(200,220,255,.9)"
+                                        }
+                                    )
+                                    j = j + 1
                                 end
-                                if ____opt_24 ~= nil then
-                                    ____opt_24(____opt_24, "agua", {volume = 0.6})
-                                end
-                            end)
+                            end
+                            do
+                                pcall(function()
+                                    local ____opt_35 = window.DarocaAudio
+                                    if ____opt_35 ~= nil then
+                                        ____opt_35 = ____opt_35.play
+                                    end
+                                    if ____opt_35 ~= nil then
+                                        ____opt_35(____opt_35, "agua", {volume = 0.6})
+                                    end
+                                end)
+                            end
                         end
                     end
                     i = i + 1
@@ -199,18 +234,39 @@ local __O = {};
                 2
             )
         end
-        if __t(if __t(pl) then st.cover > 0.15 else pl) then
-            local onFloor = if __t(pl.ground) then math.abs(pl.y - FLOOR) < 3 else pl.ground
+        local ____t_38 = __t
+        local ____t_result_37
+        if __t(pl) then
+            ____t_result_37 = st.cover > 0.15
+        else
+            ____t_result_37 = pl
+        end
+        if ____t_38(____t_result_37) then
+            local ____t_result_39
+            if __t(pl.ground) then
+                ____t_result_39 = math.abs(pl.y - FLOOR) < 3
+            else
+                ____t_result_39 = pl.ground
+            end
+            local onFloor = ____t_result_39
             if __t(onFloor) then
                 if lastStepX == nil then
                     lastStepX = pl.x
                 end
                 if math.abs(pl.x - lastStepX) > 15 then
                     lastStepX = pl.x
-                    __call(prints, "push", {x = pl.x, side = if __t(__mod(
-                        __len(prints),
-                        2
-                    )) then 1 else -1, t0 = t})
+                    __call(
+                        prints,
+                        "push",
+                        {
+                            x = pl.x,
+                            side = __t(__mod(
+                                __len(prints),
+                                2
+                            )) and 1 or -1,
+                            t0 = t
+                        }
+                    )
                     if __len(prints) > 80 then
                         __call(prints, "shift")
                     end
@@ -232,7 +288,14 @@ local __O = {};
             else
                 lastStepX = nil
             end
-            if __t(if __t(onFloor) then not __t(prevGround) else onFloor) then
+            local ____t_41 = __t
+            local ____t_result_40
+            if __t(onFloor) then
+                ____t_result_40 = not __t(prevGround)
+            else
+                ____t_result_40 = onFloor
+            end
+            if ____t_41(____t_result_40) then
                 do
                     local j = 0
                     while j < 12 do
@@ -260,31 +323,33 @@ local __O = {};
                 function(____, f) return t - f.t0 < refill end
             )
             for ____, f in __iterar((prints)) do
-                local x = f.x + f.side * 4 - cam
-                if __t(x < -10 or x > 970) then
-                    continue
+                do
+                    local x = f.x + f.side * 4 - cam
+                    if __t(x < -10 or x > 970) then
+                        continue
+                    end
+                    local a = (1 - (t - f.t0) / refill) * math.min(1, st.cover * 1.5)
+                    c.fillStyle = ("rgba(92,112,155," .. tostring(0.75 * a)) .. ")"
+                    c:fillRect(
+                        math.floor((x - 4) / 2 + 0.5) * 2,
+                        FLOOR - 2,
+                        8,
+                        2
+                    )
+                    c:fillRect(
+                        math.floor((x - 3) / 2 + 0.5) * 2,
+                        FLOOR - 4,
+                        6,
+                        2
+                    )
+                    c.fillStyle = ("rgba(140,160,200," .. tostring(0.5 * a)) .. ")"
+                    c:fillRect(
+                        math.floor((x - 4) / 2 + 0.5) * 2,
+                        FLOOR - 6,
+                        8,
+                        2
+                    )
                 end
-                local a = (1 - (t - f.t0) / refill) * math.min(1, st.cover * 1.5)
-                c.fillStyle = ("rgba(92,112,155," .. tostring(0.75 * a)) .. ")"
-                c:fillRect(
-                    math.floor((x - 4) / 2 + 0.5) * 2,
-                    FLOOR - 2,
-                    8,
-                    2
-                )
-                c:fillRect(
-                    math.floor((x - 3) / 2 + 0.5) * 2,
-                    FLOOR - 4,
-                    6,
-                    2
-                )
-                c.fillStyle = ("rgba(140,160,200," .. tostring(0.5 * a)) .. ")"
-                c:fillRect(
-                    math.floor((x - 4) / 2 + 0.5) * 2,
-                    FLOOR - 6,
-                    8,
-                    2
-                )
             end
         elseif __t(pl) then
             prevGround = pl.ground
@@ -386,11 +451,16 @@ local __O = {};
                 rain = 0,
                 snow = 0,
                 wind = 0.15 + hash(nil, seedAuto + 3) * 0.2,
-                dust = if __t(__get(DUSTY, scene)) then 0.3 else 0
+                dust = __t(__get(DUSTY, scene)) and 0.3 or 0
             }
         end
         if r < 0.72 then
-            return {rain = 0, snow = 0, wind = 0.9, dust = if __t(__get(DUSTY, scene)) then 0.9 else 0.3}
+            return {
+                rain = 0,
+                snow = 0,
+                wind = 0.9,
+                dust = __t(__get(DUSTY, scene)) and 0.9 or 0.3
+            }
         end
         if r < 0.92 then
             return {
@@ -403,7 +473,12 @@ local __O = {};
                 dust = 0
             }
         end
-        return {rain = 0, snow = 0, wind = 0.5, dust = if __t(__get(DUSTY, scene)) then 0.6 else 0.1}
+        return {
+            rain = 0,
+            snow = 0,
+            wind = 0.5,
+            dust = __t(__get(DUSTY, scene)) and 0.6 or 0.1
+        }
     end
     local function update(self, t, scene)
         local dt = math.max(
@@ -420,7 +495,12 @@ local __O = {};
         elseif mode == "neve" then
             target = {rain = 0, snow = 1, wind = 0.25, dust = 0}
         else
-            target = {rain = 0, snow = 0, wind = 1, dust = if __t(__get(DUSTY, scene)) then 1 else 0.4}
+            target = {
+                rain = 0,
+                snow = 0,
+                wind = 1,
+                dust = __t(__get(DUSTY, scene)) and 1 or 0.4
+            }
         end
         for ____, k in __iterar((__arrL({"rain", "snow", "wind", "dust"}, 4))) do
             __set(
@@ -429,14 +509,28 @@ local __O = {};
                 __get(st, k) + (__get(target, k) - __get(st, k)) * math.min(1, dt * 0.35)
             )
         end
+        local ____st_cover_1 = st.cover
+        local ____temp_0
+        if st.snow > 0.5 then
+            ____temp_0 = dt * 0.035
+        else
+            ____temp_0 = -dt * 0.03
+        end
         st.cover = math.max(
             0,
-            math.min(1, st.cover + if st.snow > 0.5 then dt * 0.035 else -dt * 0.03)
+            math.min(1, ____st_cover_1 + ____temp_0)
         )
         st.flash = math.max(0, st.flash - dt * 3)
+        local ____st_wet_3 = st.wet
+        local ____temp_2
+        if st.rain > 0.15 then
+            ____temp_2 = dt * 0.07 * st.rain
+        else
+            ____temp_2 = -dt * 0.012
+        end
         st.wet = math.max(
             0,
-            math.min(1, st.wet + if st.rain > 0.15 then dt * 0.07 * st.rain else -dt * 0.012)
+            math.min(1, ____st_wet_3 + ____temp_2)
         )
         if __t(st.rain > 0.7 and hash(
             nil,
@@ -455,36 +549,60 @@ local __O = {};
         )
     end
     local function draw(self, c, o)
-        local ____t_5 = __t
-        local ____opt_2 = window.Graphics
-        if ____opt_2 ~= nil then
-            ____opt_2 = ____opt_2.profile
-        end
-        local ____opt_result_4
-        if ____opt_2 ~= nil then
-            ____opt_result_4 = ____opt_2(____opt_2)
-        end
-        __O[47] = ____opt_result_4
-        local prof = if ____t_5(____opt_result_4) then __O[47] else {particles = 1, weather = true}
-        local scene = __TS__Number(o.scene)
-        local ____t_7 = __t
-        local ____TS__Number_result_6 = __TS__Number(o.time)
-        __O[48] = ____TS__Number_result_6
-        local t = if ____t_7(____TS__Number_result_6) then __O[48] else 0
-        local ____t_10 = __t
+        local ____t_result_10
         local ____t_9 = __t
-        local ____temp_8 = not __t(prof.weather) or not __t(__call(OUTDOOR, "includes", scene))
-        __O[49] = ____temp_8
-        if ____t_10(if ____t_9(____temp_8) then __O[49] else not __t(o.outdoor)) then
+        local ____opt_6 = window.Graphics
+        if ____opt_6 ~= nil then
+            ____opt_6 = ____opt_6.profile
+        end
+        local ____opt_result_8
+        if ____opt_6 ~= nil then
+            ____opt_result_8 = ____opt_6(____opt_6)
+        end
+        __O[47] = ____opt_result_8
+        if ____t_9(____opt_result_8) then
+            ____t_result_10 = __O[47]
+        else
+            ____t_result_10 = {particles = 1, weather = true}
+        end
+        local prof = ____t_result_10
+        local scene = __TS__Number(o.scene)
+        local ____t_result_13
+        local ____t_12 = __t
+        local ____TS__Number_result_11 = __TS__Number(o.time)
+        __O[48] = ____TS__Number_result_11
+        if ____t_12(____TS__Number_result_11) then
+            ____t_result_13 = __O[48]
+        else
+            ____t_result_13 = 0
+        end
+        local t = ____t_result_13
+        local ____t_17 = __t
+        local ____t_result_16
+        local ____t_15 = __t
+        local ____temp_14 = not __t(prof.weather) or not __t(__call(OUTDOOR, "includes", scene))
+        __O[49] = ____temp_14
+        if ____t_15(____temp_14) then
+            ____t_result_16 = __O[49]
+        else
+            ____t_result_16 = not __t(o.outdoor)
+        end
+        if ____t_17(____t_result_16) then
             lastT = t
             return
         end
         update(nil, t, scene)
         local k = prof.particles
-        local ____t_12 = __t
-        local ____TS__Number_result_11 = __TS__Number(o.camera)
-        __O[50] = ____TS__Number_result_11
-        local cam = if ____t_12(____TS__Number_result_11) then __O[50] else 0
+        local ____t_result_20
+        local ____t_19 = __t
+        local ____TS__Number_result_18 = __TS__Number(o.camera)
+        __O[50] = ____TS__Number_result_18
+        if ____t_19(____TS__Number_result_18) then
+            ____t_result_20 = __O[50]
+        else
+            ____t_result_20 = 0
+        end
+        local cam = ____t_result_20
         local wind = st.wind * (math.sin(t * 0.3) * 0.3 + 0.7)
         local lean = 0.25 + wind * 0.55
         c:save()
@@ -548,7 +666,7 @@ local __O = {};
                         ) + 1000,
                         1000
                     ) - 20
-                    c.fillStyle = if __t(__mod(i, 3)) then "rgba(200,218,245,.6)" else "rgba(235,242,255,.85)"
+                    c.fillStyle = __t(__mod(i, 3)) and "rgba(200,218,245,.6)" or "rgba(235,242,255,.85)"
                     do
                         local s2 = 0
                         while s2 < 6 do
@@ -684,8 +802,8 @@ local __O = {};
                         c,
                         x + 2,
                         y + 2,
-                        if __t(big) then 6 else 4,
-                        if __t(big) then 6 else 4,
+                        __t(big) and 6 or 4,
+                        __t(big) and 6 or 4,
                         "rgba(110,130,170,.35)"
                     )
                     P(
@@ -693,8 +811,8 @@ local __O = {};
                         c,
                         x,
                         y,
-                        if __t(big) then 6 else 4,
-                        if __t(big) then 6 else 4,
+                        __t(big) and 6 or 4,
+                        __t(big) and 6 or 4,
                         "#ffffff"
                     )
                     i = i + 1
@@ -831,21 +949,35 @@ local __O = {};
         return mode
     end
     local function cur()
-        local ____t_27 = __t
-        local ____call_result_26 = __call(
+        local ____t_result_44
+        local ____t_43 = __t
+        local ____call_result_42 = __call(
             MODES,
             "find",
             function(____, m) return m.id == mode end
         )
-        __O[55] = ____call_result_26
-        return if ____t_27(____call_result_26) then __O[55] else __get(MODES, 0)
+        __O[55] = ____call_result_42
+        if ____t_43(____call_result_42) then
+            ____t_result_44 = __O[55]
+        else
+            ____t_result_44 = __get(MODES, 0)
+        end
+        return ____t_result_44
     end
     window.Weather = __ord(
         {
             draw = function(____, c, o)
                 do
                     pcall(function()
-                        draw(nil, c, if __t(o) then o else {})
+                        local ____draw_47 = draw
+                        local ____c_46 = c
+                        local ____t_result_45
+                        if __t(o) then
+                            ____t_result_45 = o
+                        else
+                            ____t_result_45 = {}
+                        end
+                        ____draw_47(nil, ____c_46, ____t_result_45)
                     end)
                 end
             end,

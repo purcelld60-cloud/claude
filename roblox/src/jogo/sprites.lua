@@ -20,14 +20,20 @@ local __O = {};
     local sheets = __TS__New(Map)
     local ready = false
     local function add(self, name, def)
-        local ____t_2 = __t
+        local ____t_3 = __t
+        local ____t_result_2
         local ____t_1 = __t
         local ____temp_0 = not __t(def) or type(def.arquivo) ~= "string"
         __O[272] = ____temp_0
-        if ____t_2(if ____t_1(____temp_0) then __O[272] else __re_test(
-            __re("^[a-z]+:|^\\/|\\.\\.", "i"),
-            def.arquivo
-        )) then
+        if ____t_1(____temp_0) then
+            ____t_result_2 = __O[272]
+        else
+            ____t_result_2 = __re_test(
+                __re("^[a-z]+:|^\\/|\\.\\.", "i"),
+                def.arquivo
+            )
+        end
+        if ____t_3(____t_result_2) then
             return
         end
         local img = __new("Image")
@@ -38,26 +44,40 @@ local __O = {};
         img.src = __add(BASE, def.arquivo)
         __call(sheets, "set", name, entry)
     end
-    local ____self_10 = window:fetch(
+    local ____self_13 = window:fetch(
         __add(BASE, "manifest.json"),
         {cache = "no-cache"}
     )
-    local ____self_9 = ____self_10["then"](
-        ____self_10,
-        function(____, r) return if __t(r.ok) then r:json() else nil end
-    )
-    ____self_9["then"](
-        ____self_9,
-        function(____, data)
-            local ____iter_8 = __iter
-            local ____entries_7 = __entries
-            local ____t_6 = __t
-            local ____opt_result_5
-            if data ~= nil then
-                ____opt_result_5 = data.sprites
+    local ____self_11 = ____self_13["then"](
+        ____self_13,
+        function(____, r)
+            local ____t_result_12
+            if __t(r.ok) then
+                ____t_result_12 = r:json()
+            else
+                ____t_result_12 = nil
             end
-            __O[273] = ____opt_result_5
-            for ____, ____value in __TS__Iterator(____iter_8(____entries_7(if ____t_6(____opt_result_5) then __O[273] else {}))) do
+            return ____t_result_12
+        end
+    )
+    ____self_11["then"](
+        ____self_11,
+        function(____, data)
+            local ____iter_10 = __iter
+            local ____entries_9 = __entries
+            local ____t_result_8
+            local ____t_7 = __t
+            local ____opt_result_6
+            if data ~= nil then
+                ____opt_result_6 = data.sprites
+            end
+            __O[273] = ____opt_result_6
+            if ____t_7(____opt_result_6) then
+                ____t_result_8 = __O[273]
+            else
+                ____t_result_8 = {}
+            end
+            for ____, ____value in __TS__Iterator(____iter_10(____entries_9(____t_result_8))) do
                 local name = ____value[1]
                 local def = ____value[2]
                 add(nil, name, def)
@@ -69,7 +89,20 @@ local __O = {};
     end)
     local function get(____, name)
         local e = __call(sheets, "get", name)
-        return if __t(if __t(e) then e.ok else e) then e else nil
+        local ____t_result_16
+        local ____t_15 = __t
+        local ____t_result_14
+        if __t(e) then
+            ____t_result_14 = e.ok
+        else
+            ____t_result_14 = e
+        end
+        if ____t_15(____t_result_14) then
+            ____t_result_16 = e
+        else
+            ____t_result_16 = nil
+        end
+        return ____t_result_16
     end
     local function draw(self, c, name, x, y, o)
         if o == nil then
@@ -80,63 +113,119 @@ local __O = {};
             return false
         end
         local d = e.def
-        local ____t_12 = __t
-        local ____getq_result_11 = __getq(d.quadro, 0)
-        __O[274] = ____getq_result_11
-        local fw = if ____t_12(____getq_result_11) then __O[274] else e.img.width
-        local ____t_14 = __t
-        local ____getq_result_13 = __getq(d.quadro, 1)
-        __O[275] = ____getq_result_13
-        local fh = if ____t_14(____getq_result_13) then __O[275] else e.img.height
+        local ____t_result_19
+        local ____t_18 = __t
+        local ____getq_result_17 = __getq(d.quadro, 0)
+        __O[274] = ____getq_result_17
+        if ____t_18(____getq_result_17) then
+            ____t_result_19 = __O[274]
+        else
+            ____t_result_19 = e.img.width
+        end
+        local fw = ____t_result_19
+        local ____t_result_22
+        local ____t_21 = __t
+        local ____getq_result_20 = __getq(d.quadro, 1)
+        __O[275] = ____getq_result_20
+        if ____t_21(____getq_result_20) then
+            ____t_result_22 = __O[275]
+        else
+            ____t_result_22 = e.img.height
+        end
+        local fh = ____t_result_22
         local cols = math.max(
             1,
             math.floor(e.img.width / fw)
         )
-        local ____t_20 = __t
-        local ____t_16 = __t
-        local ____getq_result_15 = __getq(d.animacoes, o.anim)
-        __O[276] = ____getq_result_15
-        local ____opt_17 = d.animacoes
-        if ____opt_17 ~= nil then
-            ____opt_17 = ____opt_17.parado
+        local ____t_result_29
+        local ____t_28 = __t
+        local ____t_result_27
+        local ____t_24 = __t
+        local ____getq_result_23 = __getq(d.animacoes, o.anim)
+        __O[276] = ____getq_result_23
+        if ____t_24(____getq_result_23) then
+            ____t_result_27 = __O[276]
+        else
+            local ____opt_25 = d.animacoes
+            if ____opt_25 ~= nil then
+                ____opt_25 = ____opt_25.parado
+            end
+            ____t_result_27 = ____opt_25
         end
-        local ____temp_19 = if ____t_16(____getq_result_15) then __O[276] else ____opt_17
-        __O[277] = ____temp_19
-        local frames = if ____t_20(____temp_19) then __O[277] else __arrL({0}, 1)
-        local fps = if __t(d.fps) then d.fps else 8
-        local ____t_26 = __t
-        local ____get_24 = __get
-        local ____mod_23 = __mod
-        local ____t_22 = __t
-        local ____TS__Number_result_21 = __TS__Number(o.time)
-        __O[278] = ____TS__Number_result_21
-        local ____get_24_result_25 = ____get_24(
+        __O[277] = ____t_result_27
+        if ____t_28(____t_result_27) then
+            ____t_result_29 = __O[277]
+        else
+            ____t_result_29 = __arrL({0}, 1)
+        end
+        local frames = ____t_result_29
+        local ____t_result_30
+        if __t(d.fps) then
+            ____t_result_30 = d.fps
+        else
+            ____t_result_30 = 8
+        end
+        local fps = ____t_result_30
+        local ____t_result_38
+        local ____t_37 = __t
+        local ____get_35 = __get
+        local ____mod_34 = __mod
+        local ____t_result_33
+        local ____t_32 = __t
+        local ____TS__Number_result_31 = __TS__Number(o.time)
+        __O[278] = ____TS__Number_result_31
+        if ____t_32(____TS__Number_result_31) then
+            ____t_result_33 = __O[278]
+        else
+            ____t_result_33 = 0
+        end
+        local ____get_35_result_36 = ____get_35(
             frames,
-            ____mod_23(
-                math.floor(if ____t_22(____TS__Number_result_21) then __O[278] else 0 * fps),
+            ____mod_34(
+                math.floor(____t_result_33 * fps),
                 __len(frames)
             )
         )
-        __O[279] = ____get_24_result_25
-        local idx = if ____t_26(____get_24_result_25) then __O[279] else 0
-        local scale = if __t(d.escala) then d.escala else 2 * if __t(o.scale) then o.scale else 1
-        local ____getq_result_27 = __getq(d.ancora, 0)
-        if ____getq_result_27 == nil then
-            ____getq_result_27 = fw / 2
+        __O[279] = ____get_35_result_36
+        if ____t_37(____get_35_result_36) then
+            ____t_result_38 = __O[279]
+        else
+            ____t_result_38 = 0
         end
-        local ax = ____getq_result_27
-        local ____getq_result_28 = __getq(d.ancora, 1)
-        if ____getq_result_28 == nil then
-            ____getq_result_28 = fh
+        local idx = ____t_result_38
+        local ____t_result_39
+        if __t(d.escala) then
+            ____t_result_39 = d.escala
+        else
+            ____t_result_39 = 2
         end
-        local ay = ____getq_result_28
+        local ____t_result_40
+        if __t(o.scale) then
+            ____t_result_40 = o.scale
+        else
+            ____t_result_40 = 1
+        end
+        local scale = ____t_result_39 * ____t_result_40
+        local ____getq_result_41 = __getq(d.ancora, 0)
+        if ____getq_result_41 == nil then
+            ____getq_result_41 = fw / 2
+        end
+        local ax = ____getq_result_41
+        local ____getq_result_42 = __getq(d.ancora, 1)
+        if ____getq_result_42 == nil then
+            ____getq_result_42 = fh
+        end
+        local ay = ____getq_result_42
         c:save()
         c.imageSmoothingEnabled = false
         c:translate(
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1 * scale, scale)
+        c:scale(
+            (__lt(o.facing, 0) and -1 or 1) * scale,
+            scale
+        )
         c:drawImage(
             e.img,
             __mod(idx, cols) * fw,
@@ -161,7 +250,14 @@ local __O = {};
         "get,draw,has,ready"
     )
     local art = window.Art
-    if __t(if __t(art) then type(art.drawCharacter) == "function" else art) then
+    local ____t_44 = __t
+    local ____t_result_43
+    if __t(art) then
+        ____t_result_43 = type(art.drawCharacter) == "function"
+    else
+        ____t_result_43 = art
+    end
+    if ____t_44(____t_result_43) then
         local original = art.drawCharacter
         art.drawCharacter = function(self, ...)
             local __args = {...}
@@ -170,12 +266,36 @@ local __O = {};
                 o = {}
             end
             local name = __add("personagem-", ____type)
-            if __t(if __t(sheets.size) then get(nil, name) else sheets.size) then
-                local ____t_31 = __t
-                local ____t_30 = __t
-                local ____temp_29 = if __t(o.attack) then o.attack else o.attacking
-                __O[280] = ____temp_29
-                local anim = if __t(o.hit) then "dano" else if ____t_31(if ____t_30(____temp_29) then __O[280] else o.punch) then "ataque" else if o.grounded == false then "pulo" else if __t(o.moving) then "andar" else "parado"
+            local ____t_46 = __t
+            local ____t_result_45
+            if __t(sheets.size) then
+                ____t_result_45 = get(nil, name)
+            else
+                ____t_result_45 = sheets.size
+            end
+            if ____t_46(____t_result_45) then
+                local ____t_result_51
+                if __t(o.hit) then
+                    ____t_result_51 = "dano"
+                else
+                    local ____t_50 = __t
+                    local ____t_result_49
+                    local ____t_48 = __t
+                    local ____t_result_47
+                    if __t(o.attack) then
+                        ____t_result_47 = o.attack
+                    else
+                        ____t_result_47 = o.attacking
+                    end
+                    __O[280] = ____t_result_47
+                    if ____t_48(____t_result_47) then
+                        ____t_result_49 = __O[280]
+                    else
+                        ____t_result_49 = o.punch
+                    end
+                    ____t_result_51 = ____t_50(____t_result_49) and "ataque" or (o.grounded == false and "pulo" or (__t(o.moving) and "andar" or "parado"))
+                end
+                local anim = ____t_result_51
                 if __t(draw(
                     nil,
                     c,

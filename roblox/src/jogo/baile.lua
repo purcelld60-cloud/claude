@@ -8,6 +8,9 @@ local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__Spread = ____lualib.__TS__Spread
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local ____exports = {}
 local __O = {};
 (function()
@@ -45,13 +48,21 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) else c:moveTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) end
+            function(____, p, i)
+                local ____t_result_2
+                if __t(i) then
+                    ____t_result_2 = c:lineTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                else
+                    ____t_result_2 = c:moveTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                end
+                return ____t_result_2
+            end
         )
         c:stroke()
     end
@@ -183,10 +194,34 @@ local __O = {};
             3,
             "#0c101d70"
         )
-        local hop = if move == 2 then b * 6 else b * 2.5
-        local lean = if move == 3 then math.sin(beat * 0.5) * 0.12 else 0
-        local fA = if move == 1 then math.sin(beat) * 9 else sw * 0.4
-        local fB = if move == 1 then -math.sin(beat) * 9 else -sw * 0.4
+        local ____temp_21
+        if move == 2 then
+            ____temp_21 = b * 6
+        else
+            ____temp_21 = b * 2.5
+        end
+        local hop = ____temp_21
+        local ____temp_22
+        if move == 3 then
+            ____temp_22 = math.sin(beat * 0.5) * 0.12
+        else
+            ____temp_22 = 0
+        end
+        local lean = ____temp_22
+        local ____temp_23
+        if move == 1 then
+            ____temp_23 = math.sin(beat) * 9
+        else
+            ____temp_23 = sw * 0.4
+        end
+        local fA = ____temp_23
+        local ____temp_24
+        if move == 1 then
+            ____temp_24 = -math.sin(beat) * 9
+        else
+            ____temp_24 = -sw * 0.4
+        end
+        local fB = ____temp_24
         line(
             nil,
             c,
@@ -231,7 +266,7 @@ local __O = {};
             -4,
             11,
             4,
-            if __t(__mod(seed, 3)) then "#e9ecef" else "#ff5a5a"
+            __t(__mod(seed, 3)) and "#e9ecef" or "#ff5a5a"
         )
         c:translate(sw * 0.2, -hop)
         c:rotate(lean)
@@ -613,7 +648,7 @@ local __O = {};
             -52,
             5,
             2,
-            if b > 0.5 then "#8b3a3a" else "#6a3a32"
+            b > 0.5 and "#8b3a3a" or "#6a3a32"
         )
         c:restore()
     end
@@ -624,15 +659,15 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local ____t_29 = __t
-        local ____opt_26 = window.BailePixel
-        if ____opt_26 ~= nil then
-            ____opt_26 = ____opt_26.ollyan
+        local ____t_36 = __t
+        local ____opt_33 = window.BailePixel
+        if ____opt_33 ~= nil then
+            ____opt_33 = ____opt_33.ollyan
         end
-        local ____opt_result_28
-        if ____opt_26 ~= nil then
-            ____opt_result_28 = ____opt_26(
-                ____opt_26,
+        local ____opt_result_35
+        if ____opt_33 ~= nil then
+            ____opt_result_35 = ____opt_33(
+                ____opt_33,
                 c,
                 x,
                 y,
@@ -640,11 +675,25 @@ local __O = {};
                 o
             )
         end
-        if ____t_29(____opt_result_28) then
+        if ____t_36(____opt_result_35) then
             return
         end
-        if __t(if __t(o.flying) then o.flying else isLite(nil)) then
-            if __t(if __t(o.flying) then not __t(isLite(nil)) else o.flying) then
+        local ____t_38 = __t
+        local ____t_result_37
+        if __t(o.flying) then
+            ____t_result_37 = o.flying
+        else
+            ____t_result_37 = isLite(nil)
+        end
+        if ____t_38(____t_result_37) then
+            local ____t_40 = __t
+            local ____t_result_39
+            if __t(o.flying) then
+                ____t_result_39 = not __t(isLite(nil))
+            else
+                ____t_result_39 = o.flying
+            end
+            if ____t_40(____t_result_39) then
                 c:save()
                 c:translate(
                     math.floor(x + 0.5),
@@ -672,7 +721,7 @@ local __O = {};
             )
         end
         local scale = finite(nil, o.scale, 1)
-        local face = if o.facing == -1 then -1 else 1
+        local face = o.facing == -1 and -1 or 1
         local skin = "#ebc4ab"
         local flush = "#e07a74"
         local ink = "#121722"
@@ -985,7 +1034,7 @@ local __O = {};
             rect(
                 nil,
                 c,
-                if side > 0 then 14 else -20,
+                side > 0 and 14 or -20,
                 -12,
                 6,
                 3,
@@ -1072,14 +1121,14 @@ local __O = {};
             4,
             "#f2a39a"
         )
-        local lid = if math.sin(t * 0.9) > 0.85 then 1 else 0
+        local lid = math.sin(t * 0.9) > 0.85 and 1 or 0
         rect(
             nil,
             c,
             -7,
             -12,
             5,
-            if __t(lid) then 1 else 3,
+            __t(lid) and 1 or 3,
             "#f2e4d7"
         )
         rect(
@@ -1088,7 +1137,7 @@ local __O = {};
             3,
             -12,
             5,
-            if __t(lid) then 1 else 3,
+            __t(lid) and 1 or 3,
             "#f2e4d7"
         )
         if not __t(lid) then
@@ -1233,9 +1282,9 @@ local __O = {};
                                 )) then
                                     inside = not __t(inside)
                                 end
-                                local ____i_36 = i
-                                i = ____i_36 + 1
-                                j = ____i_36
+                                local ____i_47 = i
+                                i = ____i_47 + 1
+                                j = ____i_47
                             end
                         end
                         if __t(inside) then
@@ -1256,8 +1305,14 @@ local __O = {};
             o = {}
         end
         local flying = not not __t(o.flying)
-        local flap = math.floor(math.sin(t * if __t(o.fast) then 15 else 10) * 4 + 0.5)
-        local sway = if __t(flying) then math.sin(t * 2) * 0.018 else math.sin(t * 2.3) * 0.027
+        local flap = math.floor(math.sin(t * (__t(o.fast) and 15 or 10)) * 4 + 0.5)
+        local ____t_result_48
+        if __t(flying) then
+            ____t_result_48 = math.sin(t * 2) * 0.018
+        else
+            ____t_result_48 = math.sin(t * 2.3) * 0.027
+        end
+        local sway = ____t_result_48
         local scale = finite(nil, o.scale, 1)
         local skin = "#e7c2a9"
         local shadow = "#c18e7d"
@@ -1267,7 +1322,15 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if o.facing == -1 then __TS__Number(-scale) else scale, scale)
+        local ____c_50 = c
+        local ____c_scale_51 = c.scale
+        local ____temp_49
+        if o.facing == -1 then
+            ____temp_49 = __TS__Number(-scale)
+        else
+            ____temp_49 = scale
+        end
+        ____c_scale_51(____c_50, ____temp_49, scale)
         c:rotate(finite(nil, o.angle, 0) + sway)
         if __t(o.aura) then
             glow(
@@ -1447,7 +1510,13 @@ local __O = {};
             end
             c:restore()
         end
-        local leg = if __t(flying) then math.floor(math.sin(t * 7) * 2 + 0.5) else math.floor(math.sin(t * 3) * 2 + 0.5)
+        local ____t_result_52
+        if __t(flying) then
+            ____t_result_52 = math.floor(math.sin(t * 7) * 2 + 0.5)
+        else
+            ____t_result_52 = math.floor(math.sin(t * 3) * 2 + 0.5)
+        end
+        local leg = ____t_result_52
         pixelPoly(
             nil,
             c,
@@ -1570,7 +1639,7 @@ local __O = {};
             11,
             "#b7bcc4"
         )
-        local handY = if __t(flying) then -32 else -27
+        local handY = __t(flying) and -32 or -27
         pixelPoly(
             nil,
             c,
@@ -1885,14 +1954,25 @@ local __O = {};
         c:restore()
     end
     function ollyanNoBaile(self, c, camera, t, opts)
-        local ____t_59 = __t
-        local ____t_58 = __t
-        local ____t_56 = __t
-        local ____temp_55 = not __t(opts.hideOllyan) and not __t(opts.defeated)
-        __O[1357] = ____temp_55
-        local ____temp_57 = if ____t_56(____temp_55) then NPC_X - camera > -100 else __O[1357]
-        __O[1358] = ____temp_57
-        if ____t_59(if ____t_58(____temp_57) then NPC_X - camera < W + 100 else __O[1358]) then
+        local ____t_80 = __t
+        local ____t_result_79
+        local ____t_78 = __t
+        local ____t_result_77
+        local ____t_76 = __t
+        local ____temp_75 = not __t(opts.hideOllyan) and not __t(opts.defeated)
+        __O[1376] = ____temp_75
+        if ____t_76(____temp_75) then
+            ____t_result_77 = NPC_X - camera > -100
+        else
+            ____t_result_77 = __O[1376]
+        end
+        __O[1377] = ____t_result_77
+        if ____t_78(____t_result_77) then
+            ____t_result_79 = NPC_X - camera < W + 100
+        else
+            ____t_result_79 = __O[1377]
+        end
+        if ____t_80(____t_result_79) then
             drawOllyan(
                 nil,
                 c,
@@ -1906,7 +1986,7 @@ local __O = {};
                 c,
                 "OLLYAN",
                 NPC_X - camera,
-                FLOOR - if __t(isLite(nil)) then 106 else 158,
+                FLOOR - (__t(isLite(nil)) and 106 or 158),
                 11,
                 "#f4dca7"
             )
@@ -1916,17 +1996,28 @@ local __O = {};
                     c,
                     "Ô, chapéu… qual foi?",
                     NPC_X - camera,
-                    FLOOR - if __t(isLite(nil)) then 124 else 176,
+                    FLOOR - (__t(isLite(nil)) and 124 or 176),
                     10,
                     "#d8c4e6"
                 )
             end
         end
-        local ____t_62 = __t
-        local ____t_61 = __t
-        local ____temp_60 = if __t(opts.defeated) then NPC_X - camera > -100 else opts.defeated
-        __O[1359] = ____temp_60
-        if ____t_62(if ____t_61(____temp_60) then NPC_X - camera < W + 100 else __O[1359]) then
+        local ____t_84 = __t
+        local ____t_result_83
+        local ____t_82 = __t
+        local ____t_result_81
+        if __t(opts.defeated) then
+            ____t_result_81 = NPC_X - camera > -100
+        else
+            ____t_result_81 = opts.defeated
+        end
+        __O[1378] = ____t_result_81
+        if ____t_82(____t_result_81) then
+            ____t_result_83 = NPC_X - camera < W + 100
+        else
+            ____t_result_83 = __O[1378]
+        end
+        if ____t_84(____t_result_83) then
             drawOllyan(
                 nil,
                 c,
@@ -1940,7 +2031,7 @@ local __O = {};
                 c,
                 "OLLYAN · AGORA É SÓ DANÇA",
                 NPC_X - camera,
-                FLOOR - if __t(isLite(nil)) then 108 else 158,
+                FLOOR - (__t(isLite(nil)) and 108 or 158),
                 10,
                 "#bfe5c7"
             )
@@ -1992,27 +2083,27 @@ local __O = {};
             end
         end
         if values.maxHP ~= nil then
-            local ____s_player_80 = s.player
-            local ____clamp_result_79 = clamp(
+            local ____s_player_124 = s.player
+            local ____clamp_result_123 = clamp(
                 nil,
                 finite(nil, values.maxHP, b.maxHP),
                 1,
                 10000
             )
-            b.maxHP = ____clamp_result_79
-            ____s_player_80.maxHP = ____clamp_result_79
+            b.maxHP = ____clamp_result_123
+            ____s_player_124.maxHP = ____clamp_result_123
             s.player.hp = math.min(s.player.hp, s.player.maxHP)
         end
         if values.maxGas ~= nil then
-            local ____s_player_82 = s.player
-            local ____clamp_result_81 = clamp(
+            local ____s_player_126 = s.player
+            local ____clamp_result_125 = clamp(
                 nil,
                 finite(nil, values.maxGas, b.maxGas),
                 10,
                 10000
             )
-            b.maxGas = ____clamp_result_81
-            ____s_player_82.maxGas = ____clamp_result_81
+            b.maxGas = ____clamp_result_125
+            ____s_player_126.maxGas = ____clamp_result_125
             s.player.gas = math.min(s.player.gas, s.player.maxGas)
         end
     end
@@ -2063,7 +2154,7 @@ local __O = {};
         s.transitionFrom = s.phase
         s.transitionTo = next
         s.phase = next
-        s.mode = if next == 2 then "platform" else "car"
+        s.mode = next == 2 and "platform" or "car"
         s.boss.max = __get(s.phaseHPs, next - 1)
         s.boss.hp = s.boss.max
         s.stage = "transition"
@@ -2133,7 +2224,15 @@ local __O = {};
         t = clamp(nil, t, 0, 1)
         return t * t * (3 - 2 * t)
     end
-    finite = function(____, n, f) return if __isFiniteN(__TS__Number(n)) then __TS__Number(n) else f end
+    finite = function(____, n, f)
+        local ____isFiniteN_result_0
+        if __isFiniteN(__TS__Number(n)) then
+            ____isFiniteN_result_0 = __TS__Number(n)
+        else
+            ____isFiniteN_result_0 = f
+        end
+        return ____isFiniteN_result_0
+    end
     palette = __ord({
         ink = "#171d32",
         night = "#111b39",
@@ -2243,13 +2342,21 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) else c:moveTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) end
+            function(____, p, i)
+                local ____t_result_1
+                if __t(i) then
+                    ____t_result_1 = c:lineTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                else
+                    ____t_result_1 = c:moveTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                end
+                return ____t_result_1
+            end
         )
         c:closePath()
         __call(c, "fill")
@@ -2317,15 +2424,15 @@ local __O = {};
         if scale == nil then
             scale = 1
         end
-        local ____t_5 = __t
-        local ____opt_2 = window.BailePixel
-        if ____opt_2 ~= nil then
-            ____opt_2 = ____opt_2.dancer
+        local ____t_8 = __t
+        local ____opt_5 = window.BailePixel
+        if ____opt_5 ~= nil then
+            ____opt_5 = ____opt_5.dancer
         end
-        local ____opt_result_4
-        if ____opt_2 ~= nil then
-            ____opt_result_4 = ____opt_2(
-                ____opt_2,
+        local ____opt_result_7
+        if ____opt_5 ~= nil then
+            ____opt_result_7 = ____opt_5(
+                ____opt_5,
                 c,
                 x,
                 y,
@@ -2334,19 +2441,19 @@ local __O = {};
                 scale
             )
         end
-        if ____t_5(____opt_result_4) then
+        if ____t_8(____opt_result_7) then
             return
         end
-        local ____t_11 = __t
-        local ____opt_8 = window.Graphics
-        if ____opt_8 ~= nil then
-            ____opt_8 = ____opt_8.isLite
+        local ____t_14 = __t
+        local ____opt_11 = window.Graphics
+        if ____opt_11 ~= nil then
+            ____opt_11 = ____opt_11.isLite
         end
-        local ____opt_result_10
-        if ____opt_8 ~= nil then
-            ____opt_result_10 = ____opt_8(____opt_8)
+        local ____opt_result_13
+        if ____opt_11 ~= nil then
+            ____opt_result_13 = ____opt_11(____opt_11)
         end
-        if not ____t_11(____opt_result_10) then
+        if not ____t_14(____opt_result_13) then
             return dancerHD(
                 nil,
                 c,
@@ -2520,7 +2627,7 @@ local __O = {};
             -54,
             16,
             6,
-            if __mod(seed, 4) == 0 then "#54404a" else "#232534"
+            __mod(seed, 4) == 0 and "#54404a" or "#232534"
         )
         if __mod(seed, 3) == 0 then
             rect(
@@ -2592,29 +2699,29 @@ local __O = {};
         c:restore()
     end
     isLite = function()
-        local ____t_17 = __t
-        local ____opt_14 = window.Graphics
-        if ____opt_14 ~= nil then
-            ____opt_14 = ____opt_14.isLite
+        local ____t_20 = __t
+        local ____opt_17 = window.Graphics
+        if ____opt_17 ~= nil then
+            ____opt_17 = ____opt_17.isLite
         end
-        local ____opt_result_16
-        if ____opt_14 ~= nil then
-            ____opt_result_16 = ____opt_14(____opt_14)
+        local ____opt_result_19
+        if ____opt_17 ~= nil then
+            ____opt_result_19 = ____opt_17(____opt_17)
         end
-        return not not ____t_17(____opt_result_16)
+        return not not ____t_20(____opt_result_19)
     end
     BPM = 2.15
     local function showFx(self, c, x, t)
-        local ____t_23 = __t
-        local ____opt_20 = window.BailePixel
-        if ____opt_20 ~= nil then
-            ____opt_20 = ____opt_20.fx
+        local ____t_30 = __t
+        local ____opt_27 = window.BailePixel
+        if ____opt_27 ~= nil then
+            ____opt_27 = ____opt_27.fx
         end
-        local ____opt_result_22
-        if ____opt_20 ~= nil then
-            ____opt_result_22 = ____opt_20(____opt_20, c, x, t)
+        local ____opt_result_29
+        if ____opt_27 ~= nil then
+            ____opt_result_29 = ____opt_27(____opt_27, c, x, t)
         end
-        if ____t_23(____opt_result_22) then
+        if ____t_30(____opt_result_29) then
             return
         end
         local beat = t * BPM
@@ -2678,7 +2785,7 @@ local __O = {};
                             190 - k,
                             8,
                             3,
-                            if k > 24 then "#ff4f6a" else if k > 14 then "#ffe14f" else "#4fd8ff"
+                            k > 24 and "#ff4f6a" or (k > 14 and "#ffe14f" or "#4fd8ff")
                         )
                         k = k + 4
                     end
@@ -2734,7 +2841,7 @@ local __O = {};
             do
                 local i = 0
                 while i < 40 do
-                    local side = if __t(__mod(i, 2)) then 1 else -1
+                    local side = __t(__mod(i, 2)) and 1 or -1
                     local a = -math.pi / 2 + side * (0.2 + __mod(i * 37, 50) / 100)
                     local v = 260 * (1 - k * 0.3)
                     c:save()
@@ -2770,16 +2877,16 @@ local __O = {};
         end
     end
     local function stage(self, c, x, t)
-        local ____t_35 = __t
-        local ____opt_32 = window.BailePixel
-        if ____opt_32 ~= nil then
-            ____opt_32 = ____opt_32.palco
+        local ____t_46 = __t
+        local ____opt_43 = window.BailePixel
+        if ____opt_43 ~= nil then
+            ____opt_43 = ____opt_43.palco
         end
-        local ____opt_result_34
-        if ____opt_32 ~= nil then
-            ____opt_result_34 = ____opt_32(____opt_32, c, x, t)
+        local ____opt_result_45
+        if ____opt_43 ~= nil then
+            ____opt_result_45 = ____opt_43(____opt_43, c, x, t)
         end
-        if ____t_35(____opt_result_34) then
+        if ____t_46(____opt_result_45) then
             return
         end
         c:save()
@@ -3248,22 +3355,22 @@ local __O = {};
         end
         c:save()
         c.imageSmoothingEnabled = false
-        local ____t_42 = __t
-        local ____opt_39 = window.BaileGalpao
-        if ____opt_39 ~= nil then
-            ____opt_39 = ____opt_39.draw
+        local ____t_58 = __t
+        local ____opt_55 = window.BaileGalpao
+        if ____opt_55 ~= nil then
+            ____opt_55 = ____opt_55.draw
         end
-        local ____opt_result_41
-        if ____opt_39 ~= nil then
-            ____opt_result_41 = ____opt_39(
-                ____opt_39,
+        local ____opt_result_57
+        if ____opt_55 ~= nil then
+            ____opt_result_57 = ____opt_55(
+                ____opt_55,
                 c,
                 camera,
                 t,
                 opts
             )
         end
-        if ____t_42(____opt_result_41) then
+        if ____t_58(____opt_result_57) then
             ollyanNoBaile(
                 nil,
                 c,
@@ -3293,8 +3400,8 @@ local __O = {};
                     c,
                     xx,
                     yy,
-                    if __mod(i, 7) == 0 then 2 else 1,
-                    if __mod(i, 7) == 0 then 2 else 1,
+                    __mod(i, 7) == 0 and 2 or 1,
+                    __mod(i, 7) == 0 and 2 or 1,
                     "#cbd0e7"
                 )
                 i = i + 1
@@ -3330,7 +3437,7 @@ local __O = {};
         do
             local layer = 0
             while layer < 2 do
-                local speed = if __t(layer) then 0.21 else 0.11
+                local speed = __t(layer) and 0.21 or 0.11
                 do
                     local i = -2
                     while i < 18 do
@@ -3344,7 +3451,7 @@ local __O = {};
                             yy,
                             127,
                             330 - yy,
-                            if __t(layer) then "#24334b" else "#1c2845"
+                            __t(layer) and "#24334b" or "#1c2845"
                         )
                         rect(
                             nil,
@@ -3353,7 +3460,7 @@ local __O = {};
                             yy - 5,
                             113,
                             7,
-                            if __t(layer) then "#3b4b61" else "#293450"
+                            __t(layer) and "#3b4b61" or "#293450"
                         )
                         do
                             local row = 0
@@ -3369,7 +3476,7 @@ local __O = {};
                                                 yy + 15 + row * 22,
                                                 7,
                                                 9,
-                                                if __t(layer) then "#948576" else "#5a6476"
+                                                __t(layer) and "#948576" or "#5a6476"
                                             )
                                         end
                                         col = col + 1
@@ -3560,12 +3667,12 @@ local __O = {};
         if not __t(isLite(nil)) then
             showFx(nil, c, 2240 - camera, t)
         end
-        local ____opt_45 = window.BailePixel
-        if ____opt_45 ~= nil then
-            ____opt_45 = ____opt_45.cenario
+        local ____opt_61 = window.BailePixel
+        if ____opt_61 ~= nil then
+            ____opt_61 = ____opt_61.cenario
         end
-        if ____opt_45 ~= nil then
-            ____opt_45(____opt_45, c, camera, t)
+        if ____opt_61 ~= nil then
+            ____opt_61(____opt_61, c, camera, t)
         end
         do
             local row = 0
@@ -3573,29 +3680,49 @@ local __O = {};
                 do
                     local i = 0
                     while i < 116 do
-                        local wx = 60 + i * 41 + row * 23
-                        local xx = wx - camera
-                        local ____t_51 = __t
-                        local ____t_48 = __t
-                        local ____temp_47 = xx < -45 or xx > W + 45
-                        __O[1355] = ____temp_47
-                        local ____t_50 = __t
-                        local ____temp_49 = row == 0 and wx > 1900
-                        __O[1354] = ____temp_49
-                        if ____t_51(if ____t_48(____temp_47) then __O[1355] else if ____t_50(____temp_49) then wx < 2560 else __O[1354]) then
-                            continue
+                        do
+                            local wx = 60 + i * 41 + row * 23
+                            local xx = wx - camera
+                            local ____t_69 = __t
+                            local ____t_result_68
+                            local ____t_64 = __t
+                            local ____temp_63 = xx < -45 or xx > W + 45
+                            __O[1374] = ____temp_63
+                            if ____t_64(____temp_63) then
+                                ____t_result_68 = __O[1374]
+                            else
+                                local ____t_result_67
+                                local ____t_66 = __t
+                                local ____temp_65 = row == 0 and wx > 1900
+                                __O[1373] = ____temp_65
+                                if ____t_66(____temp_65) then
+                                    ____t_result_67 = wx < 2560
+                                else
+                                    ____t_result_67 = __O[1373]
+                                end
+                                ____t_result_68 = ____t_result_67
+                            end
+                            if ____t_69(____t_result_68) then
+                                do i = i + 1 continue end
+                            end
+                            local ____temp_70
+                            if row == 0 then
+                                ____temp_70 = 401 + __mod(i, 3) * 5
+                            else
+                                ____temp_70 = 438 + __mod(i, 2) * 3
+                            end
+                            local yy = ____temp_70
+                            local scale = row == 0 and 0.73 or 0.91
+                            dancer(
+                                nil,
+                                c,
+                                xx,
+                                yy,
+                                t + row * 0.33,
+                                i + row * 7,
+                                scale
+                            )
                         end
-                        local yy = if row == 0 then 401 + __mod(i, 3) * 5 else 438 + __mod(i, 2) * 3
-                        local scale = if row == 0 then 0.73 else 0.91
-                        dancer(
-                            nil,
-                            c,
-                            xx,
-                            yy,
-                            t + row * 0.33,
-                            i + row * 7,
-                            scale
-                        )
                         i = i + 1
                     end
                 end
@@ -3606,27 +3733,35 @@ local __O = {};
             do
                 local i = 0
                 while i < 70 do
-                    local wx = 40 + i * 67 + __mod(i * 29, 30)
-                    local xx = wx - camera
-                    local ____t_54 = __t
-                    local ____t_53 = __t
-                    local ____temp_52 = xx < -50 or xx > W + 50
-                    __O[1356] = ____temp_52
-                    if ____t_54(if ____t_53(____temp_52) then __O[1356] else math.abs(wx - 3260) < 90) then
-                        continue
+                    do
+                        local wx = 40 + i * 67 + __mod(i * 29, 30)
+                        local xx = wx - camera
+                        local ____t_74 = __t
+                        local ____t_result_73
+                        local ____t_72 = __t
+                        local ____temp_71 = xx < -50 or xx > W + 50
+                        __O[1375] = ____temp_71
+                        if ____t_72(____temp_71) then
+                            ____t_result_73 = __O[1375]
+                        else
+                            ____t_result_73 = math.abs(wx - 3260) < 90
+                        end
+                        if ____t_74(____t_result_73) then
+                            do i = i + 1 continue end
+                        end
+                        c:save()
+                        c.globalAlpha = 0.92
+                        dancer(
+                            nil,
+                            c,
+                            xx,
+                            486 + __mod(i, 3) * 9,
+                            t + 0.6,
+                            i * 5 + 3,
+                            1.08
+                        )
+                        c:restore()
                     end
-                    c:save()
-                    c.globalAlpha = 0.92
-                    dancer(
-                        nil,
-                        c,
-                        xx,
-                        486 + __mod(i, 3) * 9,
-                        t + 0.6,
-                        i * 5 + 3,
-                        1.08
-                    )
-                    c:restore()
                     i = i + 1
                 end
             end
@@ -3638,46 +3773,48 @@ local __O = {};
             4070,
             4620
         }, 5))) do
-            local xx = wx - camera
-            if __t(xx < -100 or xx > W + 100) then
-                continue
+            do
+                local xx = wx - camera
+                if __t(xx < -100 or xx > W + 100) then
+                    continue
+                end
+                rect(
+                    nil,
+                    c,
+                    xx,
+                    203,
+                    8,
+                    237,
+                    "#293b54"
+                )
+                rect(
+                    nil,
+                    c,
+                    xx - 20,
+                    197,
+                    49,
+                    15,
+                    "#526278"
+                )
+                rect(
+                    nil,
+                    c,
+                    xx - 14,
+                    212,
+                    38,
+                    6,
+                    "#efc994"
+                )
+                glow(
+                    nil,
+                    c,
+                    xx + 5,
+                    236,
+                    76,
+                    "#e3b083",
+                    0.09
+                )
             end
-            rect(
-                nil,
-                c,
-                xx,
-                203,
-                8,
-                237,
-                "#293b54"
-            )
-            rect(
-                nil,
-                c,
-                xx - 20,
-                197,
-                49,
-                15,
-                "#526278"
-            )
-            rect(
-                nil,
-                c,
-                xx - 14,
-                212,
-                38,
-                6,
-                "#efc994"
-            )
-            glow(
-                nil,
-                c,
-                xx + 5,
-                236,
-                76,
-                "#e3b083",
-                0.09
-            )
         end
         do
             local i = 0
@@ -3694,44 +3831,46 @@ local __O = {};
                     yy,
                     2,
                     2,
-                    if __t(__mod(i, 2)) then "#c4b6d7" else "#a7dcd8"
+                    __t(__mod(i, 2)) and "#c4b6d7" or "#a7dcd8"
                 )
                 i = i + 1
             end
         end
         local signs = __arrL({{x = 430, txt = "BAILE FUNK"}, {x = 1350, txt = "PISTA DA RESENHA"}, {x = 2970, txt = "VAI COM CALMA, VÉI"}, {x = 4300, txt = "ITABUNA NO RITMO"}}, 4)
         for ____, s in __iterar((signs)) do
-            local xx = s.x - camera
-            if __t(xx < -220 or xx > W + 220) then
-                continue
+            do
+                local xx = s.x - camera
+                if __t(xx < -220 or xx > W + 220) then
+                    continue
+                end
+                rect(
+                    nil,
+                    c,
+                    xx - 124,
+                    258,
+                    248,
+                    34,
+                    "#25304b"
+                )
+                rect(
+                    nil,
+                    c,
+                    xx - 120,
+                    262,
+                    240,
+                    26,
+                    "#3c3556"
+                )
+                text(
+                    nil,
+                    c,
+                    s.txt,
+                    xx,
+                    276,
+                    12,
+                    "#e9b6d3"
+                )
             end
-            rect(
-                nil,
-                c,
-                xx - 124,
-                258,
-                248,
-                34,
-                "#25304b"
-            )
-            rect(
-                nil,
-                c,
-                xx - 120,
-                262,
-                240,
-                26,
-                "#3c3556"
-            )
-            text(
-                nil,
-                c,
-                s.txt,
-                xx,
-                276,
-                12,
-                "#e9b6d3"
-            )
         end
         ollyanNoBaile(
             nil,
@@ -3747,8 +3886,8 @@ local __O = {};
             phase = 1
         end
         local g = c:createLinearGradient(0, 0, 0, H)
-        g:addColorStop(0, if phase == 3 then "#16162e" else "#111e3c")
-        g:addColorStop(0.53, if phase == 3 then "#5d355c" else "#304d74")
+        g:addColorStop(0, phase == 3 and "#16162e" or "#111e3c")
+        g:addColorStop(0.53, phase == 3 and "#5d355c" or "#304d74")
         g:addColorStop(1, "#ae7890")
         c.fillStyle = g
         c:fillRect(0, 0, W, H)
@@ -3768,8 +3907,8 @@ local __O = {};
                     c,
                     x,
                     y,
-                    if __mod(i, 8) == 0 then 2 else 1,
-                    if __mod(i, 8) == 0 then 2 else 1,
+                    __mod(i, 8) == 0 and 2 or 1,
+                    __mod(i, 8) == 0 and 2 or 1,
                     "#d9d2e6"
                 )
                 i = i + 1
@@ -3781,7 +3920,7 @@ local __O = {};
             791,
             122,
             110,
-            if phase == 3 then "#a3c3e8" else "#c3badb",
+            phase == 3 and "#a3c3e8" or "#c3badb",
             0.14
         )
         oval(
@@ -3828,7 +3967,7 @@ local __O = {};
                     x,
                     y,
                     0.9 + __mod(i, 3) * 0.34,
-                    if __t(__mod(i, 2)) then "#7587a8" else "#a8a8c5",
+                    __t(__mod(i, 2)) and "#7587a8" or "#a8a8c5",
                     0.19
                 )
                 i = i + 1
@@ -3943,12 +4082,12 @@ local __O = {};
                 end
             end
         end
-        local ____t_65 = __t
-        local ____opt_63 = window.Art
-        if ____opt_63 ~= nil then
-            ____opt_63 = ____opt_63.drawVehicle
+        local ____t_87 = __t
+        local ____opt_85 = window.Art
+        if ____opt_85 ~= nil then
+            ____opt_85 = ____opt_85.drawVehicle
         end
-        if ____t_65(____opt_63) then
+        if ____t_87(____opt_85) then
             window.Art:drawVehicle(c, 0, 10, t)
         else
             rect(
@@ -3988,12 +4127,12 @@ local __O = {};
                 "#314039"
             )
         end
-        local ____t_68 = __t
-        local ____opt_66 = window.Art
-        if ____opt_66 ~= nil then
-            ____opt_66 = ____opt_66.drawCharacter
+        local ____t_90 = __t
+        local ____opt_88 = window.Art
+        if ____opt_88 ~= nil then
+            ____opt_88 = ____opt_88.drawCharacter
         end
-        if ____t_68(____opt_66) then
+        if ____t_90(____opt_88) then
             window.Art:drawCharacter(
                 c,
                 "daroca",
@@ -4081,7 +4220,10 @@ local __O = {};
             else
                 value = __add(
                     value,
-                    __add(if __t(value) then " " else "", word)
+                    __add(
+                        __t(value) and " " or "",
+                        word
+                    )
                 )
             end
         end
@@ -4109,27 +4251,72 @@ local __O = {};
         c:save()
         c.imageSmoothingEnabled = false
         local G = window.BaileGalpao
-        local tetoY = if __t(G) then G.TETO else 70
+        local ____t_result_91
+        if __t(G) then
+            ____t_result_91 = G.TETO
+        else
+            ____t_result_91 = 70
+        end
+        local tetoY = ____t_result_91
         if index < 2 then
-            local sobe = if index == 1 then smooth(nil, ____local / 1.5) else 0
-            local fura = if index == 1 then smooth(nil, (____local - 1.3) / 0.45) else 0
-            local saiu = if index == 1 then smooth(nil, (____local - 1.55) / 0.9) else 0
-            local ____t_71 = __t
-            local ____t_70 = __t
-            local ____temp_69 = index == 1 and ____local > 1.25
-            __O[1360] = ____temp_69
-            local tremor = if ____t_71(if ____t_70(____temp_69) then ____local < 1.9 else __O[1360]) then math.sin(t * 90) * 3 else 0
+            local ____temp_92
+            if index == 1 then
+                ____temp_92 = smooth(nil, ____local / 1.5)
+            else
+                ____temp_92 = 0
+            end
+            local sobe = ____temp_92
+            local ____temp_93
+            if index == 1 then
+                ____temp_93 = smooth(nil, (____local - 1.3) / 0.45)
+            else
+                ____temp_93 = 0
+            end
+            local fura = ____temp_93
+            local ____temp_94
+            if index == 1 then
+                ____temp_94 = smooth(nil, (____local - 1.55) / 0.9)
+            else
+                ____temp_94 = 0
+            end
+            local saiu = ____temp_94
+            local ____t_result_99
+            local ____t_98 = __t
+            local ____t_result_97
+            local ____t_96 = __t
+            local ____temp_95 = index == 1 and ____local > 1.25
+            __O[1379] = ____temp_95
+            if ____t_96(____temp_95) then
+                ____t_result_97 = ____local < 1.9
+            else
+                ____t_result_97 = __O[1379]
+            end
+            if ____t_98(____t_result_97) then
+                ____t_result_99 = math.sin(t * 90) * 3
+            else
+                ____t_result_99 = 0
+            end
+            local tremor = ____t_result_99
             c:save()
             c:translate(
                 math.floor(tremor + 0.5),
                 math.floor(tremor * 0.5 + 0.5)
             )
-            world(
+            local ____world_103 = world
+            local ____c_101 = c
+            local ____temp_102 = NPC_X - 535
+            local ____t_result_100
+            if __t(G) then
+                ____t_result_100 = fura
+            else
+                ____t_result_100 = nil
+            end
+            ____world_103(
                 nil,
-                c,
-                NPC_X - 535,
+                ____c_101,
+                ____temp_102,
                 t,
-                {hideOllyan = true, rombo = if __t(G) then fura else nil}
+                {hideOllyan = true, rombo = ____t_result_100}
             )
             rect(
                 nil,
@@ -4140,29 +4327,48 @@ local __O = {};
                 H,
                 "#11152d22"
             )
-            local approach = if index == 0 then 535 - smooth(nil, ____local / 2.65) * 75 else 460 + sobe * 75
-            local oy = if index == 0 then 440 else 440 - sobe * (440 - tetoY - 30) - saiu * 200
-            drawOllyan(
+            local ____temp_104
+            if index == 0 then
+                ____temp_104 = 535 - smooth(nil, ____local / 2.65) * 75
+            else
+                ____temp_104 = 460 + sobe * 75
+            end
+            local approach = ____temp_104
+            local oy = index == 0 and 440 or 440 - sobe * (440 - tetoY - 30) - saiu * 200
+            local ____drawOllyan_112 = drawOllyan
+            local ____c_110 = c
+            local ____temp_111 = approach + math.sin(t * 3) * 6
+            local ____temp_106 = 1 + sobe * 0.08
+            local ____temp_107 = -1
+            local ____temp_108 = index == 1 and ____local > 0.25
+            local ____temp_109 = index == 0
+            local ____temp_105
+            if index == 0 then
+                ____temp_105 = math.sin(t * 3) * 0.08
+            else
+                ____temp_105 = 0
+            end
+            ____drawOllyan_112(
                 nil,
-                c,
-                approach + math.sin(t * 3) * 6,
+                ____c_110,
+                ____temp_111,
                 oy,
                 t,
                 {
-                    scale = 1 + sobe * 0.08,
-                    facing = -1,
-                    flying = index == 1 and ____local > 0.25,
-                    cup = index == 0,
+                    scale = ____temp_106,
+                    facing = ____temp_107,
+                    flying = ____temp_108,
+                    cup = ____temp_109,
                     fast = true,
-                    angle = if index == 0 then math.sin(t * 3) * 0.08 else 0
+                    angle = ____temp_105
                 }
             )
-            local ____t_74 = __t
-            local ____opt_72 = window.Art
-            if ____opt_72 ~= nil then
-                ____opt_72 = ____opt_72.drawCharacter
+            local ____t_115 = __t
+            local ____opt_113 = window.Art
+            if ____opt_113 ~= nil then
+                ____opt_113 = ____opt_113.drawCharacter
             end
-            if ____t_74(____opt_72) then
+            if ____t_115(____opt_113) then
                 window.Art:drawCharacter(
                     c,
                     "daroca",
@@ -4228,7 +4434,7 @@ local __O = {};
                                     yy,
                                     6 + __mod(i, 3) * 3,
                                     3,
-                                    if __t(__mod(i, 2)) then "#4a4e60" else "#6a6e80"
+                                    __t(__mod(i, 2)) and "#4a4e60" or "#6a6e80"
                                 )
                             end
                             i = i + 1
@@ -4244,7 +4450,10 @@ local __O = {};
                 c,
                 NPC_X - 535,
                 t,
-                {hideOllyan = true, rombo = if __t(G) then 1 else nil}
+                {
+                    hideOllyan = true,
+                    rombo = __t(G) and 1 or nil
+                }
             )
             rect(
                 nil,
@@ -4320,7 +4529,7 @@ local __O = {};
         text(
             nil,
             c,
-            if index == 2 then "CARRO A GÁS · PERSEGUIÇÃO NO CÉU" else "BAILE FUNK · O CÉU VIROU PISTA",
+            index == 2 and "CARRO A GÁS · PERSEGUIÇÃO NO CÉU" or "BAILE FUNK · O CÉU VIROU PISTA",
             480,
             13,
             10,
@@ -4344,8 +4553,20 @@ local __O = {};
         if not __t(canvasOrContext) then
             return nil
         end
-        local canvas = if type(canvasOrContext.getContext) == "function" then canvasOrContext else nil
-        local c = if __t(canvas) then canvas:getContext("2d") else canvasOrContext
+        local ____temp_116
+        if type(canvasOrContext.getContext) == "function" then
+            ____temp_116 = canvasOrContext
+        else
+            ____temp_116 = nil
+        end
+        local canvas = ____temp_116
+        local ____t_result_117
+        if __t(canvas) then
+            ____t_result_117 = canvas:getContext("2d")
+        else
+            ____t_result_117 = canvasOrContext
+        end
+        local c = ____t_result_117
         if not __t(c) then
             return nil
         end
@@ -4430,11 +4651,11 @@ local __O = {};
             100,
             100000
         )
-        local ____add_75 = __add
+        local ____add_118 = __add
         serial = serial + 1
         return {
             kind = "ollyan",
-            token = ____add_75("ollyan-flight-", serial),
+            token = ____add_118("ollyan-flight-", serial),
             stage = "intro",
             stageTime = 0,
             time = 0,
@@ -4554,11 +4775,17 @@ local __O = {};
         if values == nil then
             values = {}
         end
-        local ____t_78 = __t
-        local ____t_77 = __t
-        local ____temp_76 = not __t(s)
-        __O[1361] = ____temp_76
-        if ____t_78(if ____t_77(____temp_76) then __O[1361] else s.done) then
+        local ____t_122 = __t
+        local ____t_result_121
+        local ____t_120 = __t
+        local ____temp_119 = not __t(s)
+        __O[1380] = ____temp_119
+        if ____t_120(____temp_119) then
+            ____t_result_121 = __O[1380]
+        else
+            ____t_result_121 = s.done
+        end
+        if ____t_122(____t_result_121) then
             return false
         end
         if __t(values.maxHP ~= nil or values.maxGas ~= nil) then
@@ -4591,11 +4818,17 @@ local __O = {};
         event(nil, s, "intro-end")
     end
     local function damagePlayer(self, s, damage, x)
-        local ____t_85 = __t
-        local ____t_84 = __t
-        local ____temp_83 = s.stage ~= "fight" or __gt(s.player.inv, 0)
-        __O[1362] = ____temp_83
-        if ____t_85(if ____t_84(____temp_83) then __O[1362] else __le(s.player.hp, 0)) then
+        local ____t_130 = __t
+        local ____t_result_129
+        local ____t_128 = __t
+        local ____temp_127 = s.stage ~= "fight" or __gt(s.player.inv, 0)
+        __O[1381] = ____temp_127
+        if ____t_128(____temp_127) then
+            ____t_result_129 = __O[1381]
+        else
+            ____t_result_129 = __le(s.player.hp, 0)
+        end
+        if ____t_130(____t_result_129) then
             return false
         end
         local value = math.max(
@@ -4609,7 +4842,12 @@ local __O = {};
         )
         s.player.hp = math.max(0, s.player.hp - value)
         s.player.inv = 1.05
-        s.player.x = clamp(nil, s.player.x + if __lt(s.player.x, x) then -15 else 15, 65, 895)
+        s.player.x = clamp(
+            nil,
+            s.player.x + (__lt(s.player.x, x) and -15 or 15),
+            65,
+            895
+        )
         s.shake = 5
         burst(
             nil,
@@ -4630,11 +4868,17 @@ local __O = {};
         return true
     end
     local function damageBoss(self, s, damage, x, y)
-        local ____t_88 = __t
-        local ____t_87 = __t
-        local ____temp_86 = s.stage ~= "fight" or __gt(s.boss.inv, 0)
-        __O[1363] = ____temp_86
-        if ____t_88(if ____t_87(____temp_86) then __O[1363] else __le(s.boss.hp, 0)) then
+        local ____t_134 = __t
+        local ____t_result_133
+        local ____t_132 = __t
+        local ____temp_131 = s.stage ~= "fight" or __gt(s.boss.inv, 0)
+        __O[1382] = ____temp_131
+        if ____t_132(____temp_131) then
+            ____t_result_133 = __O[1382]
+        else
+            ____t_result_133 = __le(s.boss.hp, 0)
+        end
+        if ____t_134(____t_result_133) then
             return false
         end
         s.boss.hp = math.max(
@@ -4647,7 +4891,7 @@ local __O = {};
             s,
             x,
             y,
-            if s.phase == 3 then "#e9baee" else "#eddaa3",
+            s.phase == 3 and "#e9baee" or "#eddaa3",
             4,
             35
         )
@@ -4715,27 +4959,42 @@ local __O = {};
         end
         local b = s.boss
         local p = s.player
-        local base = math.atan2(if s.mode == "platform" then p.y - 32 else p.y - b.y, p.x - b.x)
-        local gap = if s.phase == 3 then 2 else 0
+        local ____temp_135
+        if s.mode == "platform" then
+            ____temp_135 = p.y - 32
+        else
+            ____temp_135 = p.y
+        end
+        local base = math.atan(____temp_135 - b.y, p.x - b.x)
+        local gap = s.phase == 3 and 2 or 0
         do
             local i = 0
             while __lt(i, count) do
-                if __t(if __t(gap) then i == math.floor(count / 2) else gap) then
-                    continue
+                do
+                    local ____t_137 = __t
+                    local ____t_result_136
+                    if __t(gap) then
+                        ____t_result_136 = i == math.floor(count / 2)
+                    else
+                        ____t_result_136 = gap
+                    end
+                    if ____t_137(____t_result_136) then
+                        do i = i + 1 continue end
+                    end
+                    local a = base + (i - (count - 1) / 2) * spread
+                    shot(
+                        nil,
+                        s,
+                        b.x - 35,
+                        b.y,
+                        math.cos(a) * speed,
+                        math.sin(a) * speed,
+                        "ear",
+                        s.phase == 3 and 16 or 12,
+                        8,
+                        {spin = __t(__mod(i, 2)) and 1 or -1}
+                    )
                 end
-                local a = base + (i - (count - 1) / 2) * spread
-                shot(
-                    nil,
-                    s,
-                    b.x - 35,
-                    b.y,
-                    math.cos(a) * speed,
-                    math.sin(a) * speed,
-                    "ear",
-                    if s.phase == 3 then 16 else 12,
-                    8,
-                    {spin = if __t(__mod(i, 2)) then 1 else -1}
-                )
                 i = i + 1
             end
         end
@@ -4746,30 +5005,38 @@ local __O = {};
         end
         local b = s.boss
         local p = s.player
-        local aim = math.atan2(if s.mode == "platform" then p.y - 32 else p.y - b.y, p.x - b.x)
+        local ____temp_138
+        if s.mode == "platform" then
+            ____temp_138 = p.y - 32
+        else
+            ____temp_138 = p.y
+        end
+        local aim = math.atan(____temp_138 - b.y, p.x - b.x)
         do
             local i = 0
             while __lt(i, count) do
-                local a = i / count * TAU + rotate
-                local delta = math.atan2(
-                    math.sin(a - aim),
-                    math.cos(a - aim)
-                )
-                if math.abs(delta) < 0.2 then
-                    continue
+                do
+                    local a = i / count * TAU + rotate
+                    local delta = math.atan(
+                        math.sin(a - aim),
+                        math.cos(a - aim)
+                    )
+                    if math.abs(delta) < 0.2 then
+                        do i = i + 1 continue end
+                    end
+                    shot(
+                        nil,
+                        s,
+                        b.x,
+                        b.y,
+                        math.cos(a) * speed,
+                        math.sin(a) * speed,
+                        "pulse",
+                        12,
+                        8,
+                        {spin = __t(__mod(i, 2)) and 1 or -1}
+                    )
                 end
-                shot(
-                    nil,
-                    s,
-                    b.x,
-                    b.y,
-                    math.cos(a) * speed,
-                    math.sin(a) * speed,
-                    "pulse",
-                    12,
-                    8,
-                    {spin = if __t(__mod(i, 2)) then 1 else -1}
-                )
                 i = i + 1
             end
         end
@@ -4787,9 +5054,15 @@ local __O = {};
         b.sequence = b.sequence + 1
         b.attackId = b.attackId + 1
         b.targetX = s.player.x
-        b.targetY = if s.mode == "platform" then s.player.y - 32 else s.player.y
+        local ____temp_139
+        if s.mode == "platform" then
+            ____temp_139 = s.player.y - 32
+        else
+            ____temp_139 = s.player.y
+        end
+        b.targetY = ____temp_139
         b.state = "windup"
-        b.stateTime = (p.windup + if b.attack == "moonBeam" then 0.28 else 0) * clamp(
+        b.stateTime = (p.windup + (b.attack == "moonBeam" and 0.28 or 0)) * clamp(
             nil,
             finite(nil, s.options.windupMultiplier, 1),
             0.4,
@@ -4851,20 +5124,26 @@ local __O = {};
             b.swoopEndY = clamp(nil, b.targetY, 130, 430)
             return
         elseif __t(b.attack == "cloudGate" or b.attack == "crosswind") then
-            local gap = if s.mode == "platform" then __get(
-                __arrL({315, 345, 270}, 3),
-                __mod(b.sequence, 3)
-            ) else clamp(
-                nil,
-                130 + __mod(b.sequence * 97, 285),
-                144,
-                405
-            )
+            local ____temp_140
+            if s.mode == "platform" then
+                ____temp_140 = __get(
+                    __arrL({315, 345, 270}, 3),
+                    __mod(b.sequence, 3)
+                )
+            else
+                ____temp_140 = clamp(
+                    nil,
+                    130 + __mod(b.sequence * 97, 285),
+                    144,
+                    405
+                )
+            end
+            local gap = ____temp_140
             __call(s.hazards, "push", {
                 type = "gate",
                 x = 1035,
                 gapY = gap,
-                gapSize = if s.mode == "platform" then 168 else if b.attack == "crosswind" then 114 else 136,
+                gapSize = s.mode == "platform" and 168 or (b.attack == "crosswind" and 114 or 136),
                 delay = 0.45,
                 life = 7,
                 vx = -(158 + s.phase * 13),
@@ -4891,19 +5170,21 @@ local __O = {};
             do
                 local i = 0
                 while i < 3 do
-                    if i == safe then
-                        continue
+                    do
+                        if i == safe then
+                            do i = i + 1 continue end
+                        end
+                        local platform = __get(s.platforms, i)
+                        __call(s.hazards, "push", {
+                            type = "cloudStorm",
+                            x = platform.x + platform.w / 2,
+                            y = platform.y - 12,
+                            delay = 1.05 + i * 0.18,
+                            life = 0.18,
+                            damage = 16,
+                            done = false
+                        })
                     end
-                    local platform = __get(s.platforms, i)
-                    __call(s.hazards, "push", {
-                        type = "cloudStorm",
-                        x = platform.x + platform.w / 2,
-                        y = platform.y - 12,
-                        delay = 1.05 + i * 0.18,
-                        life = 0.18,
-                        damage = 16,
-                        done = false
-                    })
                     i = i + 1
                 end
             end
@@ -4923,7 +5204,11 @@ local __O = {};
                         "comet",
                         15,
                         10,
-                        {delay = i * 0.1, life = 6, spin = if __t(__mod(i, 2)) then 1 else -1}
+                        {
+                            delay = i * 0.1,
+                            life = 6,
+                            spin = __t(__mod(i, 2)) and 1 or -1
+                        }
                     )
                     i = i + 1
                 end
@@ -4952,7 +5237,7 @@ local __O = {};
         end
         b.state = "firing"
         b.stateTime = 0.38
-        s.shake = math.max(s.shake, if b.attack == "moonBeam" then 5 else 2)
+        s.shake = math.max(s.shake, b.attack == "moonBeam" and 5 or 2)
         burst(
             nil,
             s,
@@ -4968,21 +5253,38 @@ local __O = {};
         if ____type == nil then
             ____type = "paper"
         end
-        local ____t_93 = __t
-        local ____t_92 = __t
-        local ____t_90 = __t
-        local ____temp_89 = not __t(s) or s.stage ~= "fight"
-        __O[1364] = ____temp_89
-        local ____temp_91 = if ____t_90(____temp_89) then __O[1364] else s.done
-        __O[1365] = ____temp_91
-        if ____t_93(if ____t_92(____temp_91) then __O[1365] else __le(s.player.hp, 0)) then
+        local ____t_146 = __t
+        local ____t_result_145
+        local ____t_144 = __t
+        local ____t_result_143
+        local ____t_142 = __t
+        local ____temp_141 = not __t(s) or s.stage ~= "fight"
+        __O[1383] = ____temp_141
+        if ____t_142(____temp_141) then
+            ____t_result_143 = __O[1383]
+        else
+            ____t_result_143 = s.done
+        end
+        __O[1384] = ____t_result_143
+        if ____t_144(____t_result_143) then
+            ____t_result_145 = __O[1384]
+        else
+            ____t_result_145 = __le(s.player.hp, 0)
+        end
+        if ____t_146(____t_result_145) then
             return false
         end
         local p = s.player
         local damage = clamp(nil, s.bonuses.damageMultiplier, 0.1, 100)
         local b = s.boss
         local platform = s.mode == "platform"
-        local py = if __t(platform) then p.y - 35 else p.y - 10
+        local ____t_result_147
+        if __t(platform) then
+            ____t_result_147 = p.y - 35
+        else
+            ____t_result_147 = p.y - 10
+        end
+        local py = ____t_result_147
         if ____type == "dash" then
             if __t(__gt(p.dashCooldown, 0) or __lt(p.gas, 6)) then
                 return false
@@ -4992,16 +5294,31 @@ local __O = {};
             p.inv = math.max(p.inv, 0.28)
             p.dashCooldown = clamp(nil, s.bonuses.dashCooldown, 0.35, 4)
             if __t(platform) then
-                p.dashX = if __t(p.facing) then p.facing else 1
+                local ____t_result_148
+                if __t(p.facing) then
+                    ____t_result_148 = p.facing
+                else
+                    ____t_result_148 = 1
+                end
+                p.dashX = ____t_result_148
                 p.dashY = 0
             elseif __t(not __t(p.dashX) and not __t(p.dashY)) then
                 p.dashX = 1
             end
-            burst(
+            local ____burst_152 = burst
+            local ____s_150 = s
+            local ____temp_151 = p.x - 32
+            local ____t_result_149
+            if __t(platform) then
+                ____t_result_149 = p.y - 20
+            else
+                ____t_result_149 = p.y
+            end
+            ____burst_152(
                 nil,
-                s,
-                p.x - 32,
-                if __t(platform) then p.y - 20 else p.y,
+                ____s_150,
+                ____temp_151,
+                ____t_result_149,
                 "#c1edc7",
                 17,
                 150
@@ -5009,20 +5326,39 @@ local __O = {};
             event(nil, s, "dash")
             return true
         end
-        local facing = if __t(platform) then if __ge(b.x, p.x) then 1 else -1 else 1
+        local ____t_result_153
+        if __t(platform) then
+            ____t_result_153 = __ge(b.x, p.x) and 1 or -1
+        else
+            ____t_result_153 = 1
+        end
+        local facing = ____t_result_153
         if __t(platform) then
             p.facing = facing
         end
-        local origin = p.x + if __t(platform) then 23 * facing else 48
-        local angle = if __t(platform) then math.atan2(b.y - 12 - py, b.x - origin) else clamp(
-            nil,
-            math.atan2(
-                b.y - p.y,
-                math.max(70, b.x - p.x)
-            ),
-            -0.65,
-            0.65
-        )
+        local ____p_x_155 = p.x
+        local ____t_result_154
+        if __t(platform) then
+            ____t_result_154 = 23 * facing
+        else
+            ____t_result_154 = 48
+        end
+        local origin = ____p_x_155 + ____t_result_154
+        local ____t_result_156
+        if __t(platform) then
+            ____t_result_156 = math.atan(b.y - 12 - py, b.x - origin)
+        else
+            ____t_result_156 = clamp(
+                nil,
+                math.atan(
+                    b.y - p.y,
+                    math.max(70, b.x - p.x)
+                ),
+                -0.65,
+                0.65
+            )
+        end
+        local angle = ____t_result_156
         if __t(____type == "fart" or ____type == "gas") then
             if __t(__gt(p.fartCooldown, 0) or __lt(p.gas, 22)) then
                 return false
@@ -5115,13 +5451,20 @@ local __O = {};
         local speed = clamp(nil, s.bonuses.moveSpeed, 140, 700)
         local wasY = p.y
         p.jumpBuffer = math.max(0, p.jumpBuffer - dt)
-        p.coyote = if __t(p.grounded) then 0.11 else math.max(0, p.coyote - dt)
-        if __t(if __t(input.jump) then not __t(p.jumpHeld) else input.jump) then
+        p.coyote = __t(p.grounded) and 0.11 or math.max(0, p.coyote - dt)
+        local ____t_158 = __t
+        local ____t_result_157
+        if __t(input.jump) then
+            ____t_result_157 = not __t(p.jumpHeld)
+        else
+            ____t_result_157 = input.jump
+        end
+        if ____t_158(____t_result_157) then
             p.jumpBuffer = 0.13
         end
         p.jumpHeld = not not __t(input.jump)
         if math.abs(ix) > 0.05 then
-            p.facing = if ix < 0 then -1 else 1
+            p.facing = ix < 0 and -1 or 1
         end
         if __t(__gt(p.jumpBuffer, 0) and __gt(p.coyote, 0)) then
             p.vy = -540
@@ -5139,24 +5482,41 @@ local __O = {};
                 55
             )
         end
-        p.vx = if __gt(p.dash, 0) then p.dashX * 2.55 else ix * speed
+        local ____gt_result_159
+        if __gt(p.dash, 0) then
+            ____gt_result_159 = p.dashX * 2.55
+        else
+            ____gt_result_159 = ix
+        end
+        p.vx = ____gt_result_159 * speed
         p.x = clamp(nil, p.x + p.vx * dt, 28, 932)
         p.vy = math.min(780, p.vy + 1200 * dt)
         p.y = p.y + p.vy * dt
         p.grounded = false
         if __ge(p.vy, 0) then
             for ____, platform in __iterar((s.platforms)) do
-                local ____t_98 = __t
-                local ____t_97 = __t
-                local ____t_95 = __t
-                local ____temp_94 = __gt(p.x, platform.x - 7) and __lt(
+                local ____t_165 = __t
+                local ____t_result_164
+                local ____t_163 = __t
+                local ____t_result_162
+                local ____t_161 = __t
+                local ____temp_160 = __gt(p.x, platform.x - 7) and __lt(
                     p.x,
                     __add(platform.x, platform.w) + 7
                 )
-                __O[1366] = ____temp_94
-                local ____temp_96 = if ____t_95(____temp_94) then __le(wasY, platform.y + 1) else __O[1366]
-                __O[1367] = ____temp_96
-                if ____t_98(if ____t_97(____temp_96) then __ge(p.y, platform.y) else __O[1367]) then
+                __O[1385] = ____temp_160
+                if ____t_161(____temp_160) then
+                    ____t_result_162 = __le(wasY, platform.y + 1)
+                else
+                    ____t_result_162 = __O[1385]
+                end
+                __O[1386] = ____t_result_162
+                if ____t_163(____t_result_162) then
+                    ____t_result_164 = __ge(p.y, platform.y)
+                else
+                    ____t_result_164 = __O[1386]
+                end
+                if ____t_165(____t_result_164) then
                     p.y = platform.y
                     p.vy = 0
                     p.grounded = true
@@ -5199,7 +5559,14 @@ local __O = {};
         p.tilt = 0
     end
     local function playerCenter(self, s)
-        return {x = s.player.x, y = if s.mode == "platform" then s.player.y - 31 else s.player.y}
+        local ____s_player_x_167 = s.player.x
+        local ____temp_166
+        if s.mode == "platform" then
+            ____temp_166 = s.player.y - 31
+        else
+            ____temp_166 = s.player.y
+        end
+        return {x = ____s_player_x_167, y = ____temp_166}
     end
     local function update(self, s, delta, input, bonuses)
         if input == nil then
@@ -5208,11 +5575,17 @@ local __O = {};
         if bonuses == nil then
             bonuses = {}
         end
-        local ____t_101 = __t
-        local ____t_100 = __t
-        local ____temp_99 = not __t(s)
-        __O[1368] = ____temp_99
-        if ____t_101(if ____t_100(____temp_99) then __O[1368] else s.done) then
+        local ____t_171 = __t
+        local ____t_result_170
+        local ____t_169 = __t
+        local ____temp_168 = not __t(s)
+        __O[1387] = ____temp_168
+        if ____t_169(____temp_168) then
+            ____t_result_170 = __O[1387]
+        else
+            ____t_result_170 = s.done
+        end
+        if ____t_171(____t_result_170) then
             return
         end
         setBonuses(nil, s, bonuses)
@@ -5321,9 +5694,21 @@ local __O = {};
                 p.dashX = ix
                 p.dashY = iy
             end
-            local speed = clamp(nil, s.bonuses.moveSpeed, 140, 700) * if __gt(p.dash, 0) then 2.55 else 1
-            p.vx = if __gt(p.dash, 0) then p.dashX else ix * speed
-            p.vy = if __gt(p.dash, 0) then p.dashY else iy * speed
+            local speed = clamp(nil, s.bonuses.moveSpeed, 140, 700) * (__gt(p.dash, 0) and 2.55 or 1)
+            local ____gt_result_172
+            if __gt(p.dash, 0) then
+                ____gt_result_172 = p.dashX
+            else
+                ____gt_result_172 = ix
+            end
+            p.vx = ____gt_result_172 * speed
+            local ____gt_result_173
+            if __gt(p.dash, 0) then
+                ____gt_result_173 = p.dashY
+            else
+                ____gt_result_173 = iy
+            end
+            p.vy = ____gt_result_173 * speed
             p.x = clamp(nil, p.x + p.vx * dt, 65, 895)
             p.y = clamp(nil, p.y + p.vy * dt, 104, 454)
             p.grounded = false
@@ -5338,10 +5723,24 @@ local __O = {};
         if s.stage ~= "fight" then
             return
         end
-        if __t(if __t(input.fire) then input.fire else input.paper) then
+        local ____t_175 = __t
+        local ____t_result_174
+        if __t(input.fire) then
+            ____t_result_174 = input.fire
+        else
+            ____t_result_174 = input.paper
+        end
+        if ____t_175(____t_result_174) then
             attack(nil, s, "paper")
         end
-        if __t(if __t(input.fart) then input.fart else input.gasAttack) then
+        local ____t_177 = __t
+        local ____t_result_176
+        if __t(input.fart) then
+            ____t_result_176 = input.fart
+        else
+            ____t_result_176 = input.gasAttack
+        end
+        if ____t_177(____t_result_176) then
             attack(nil, s, "fart")
         end
         if __t(input.dash) then
@@ -5365,7 +5764,13 @@ local __O = {};
             end
         else
             local targetX = 716 + math.sin(s.time * 0.65) * 28
-            local targetY = if s.mode == "platform" then 205 + math.sin(s.time * 0.93) * 48 else 246 + math.sin(s.time * (0.78 + s.phase * 0.07)) * 94
+            local ____temp_178
+            if s.mode == "platform" then
+                ____temp_178 = 205 + math.sin(s.time * 0.93) * 48
+            else
+                ____temp_178 = 246 + math.sin(s.time * (0.78 + s.phase * 0.07)) * 94
+            end
+            local targetY = ____temp_178
             b.x = b.x + (targetX - b.x) * math.min(1, dt * 2)
             b.y = b.y + (targetY - b.y) * math.min(1, dt * 2)
             if __le(b.stateTime, 0) then
@@ -5385,70 +5790,84 @@ local __O = {};
             end
         end
         local center = playerCenter(nil, s)
-        local ____t_104 = __t
-        local ____t_103 = __t
-        local ____temp_102 = b.state == "swoop"
-        __O[1369] = ____temp_102
-        if ____t_104(if ____t_103(____temp_102) then circleEllipse(
-            nil,
-            center.x,
-            center.y,
-            b.x,
-            b.y,
-            48,
-            62,
-            if s.mode == "platform" then 16 else 22
-        ) else __O[1369]) then
+        local ____t_182 = __t
+        local ____t_result_181
+        local ____t_180 = __t
+        local ____temp_179 = b.state == "swoop"
+        __O[1388] = ____temp_179
+        if ____t_180(____temp_179) then
+            ____t_result_181 = circleEllipse(
+                nil,
+                center.x,
+                center.y,
+                b.x,
+                b.y,
+                48,
+                62,
+                s.mode == "platform" and 16 or 22
+            )
+        else
+            ____t_result_181 = __O[1388]
+        end
+        if ____t_182(____t_result_181) then
             damagePlayer(nil, s, 17, b.x)
         end
         for ____, a in __iterar((s.shots)) do
-            a.age = a.age + dt
-            if __gt(a.delay, 0) then
-                a.delay = a.delay - dt
-                continue
-            end
-            a.life = a.life - dt
-            a.x = a.x + a.vx * dt
-            a.y = a.y + a.vy * dt
-            if a.type == "comet" then
-                a.vx = a.vx - dt * 7
-                a.y = a.y + math.sin(a.age * 4) * dt * 12
-            end
-            if a.owner == "player" then
-                local ____t_107 = __t
-                local ____t_106 = __t
-                local ____circleEllipse_result_105 = circleEllipse(
+            do
+                a.age = a.age + dt
+                if __gt(a.delay, 0) then
+                    a.delay = a.delay - dt
+                    continue
+                end
+                a.life = a.life - dt
+                a.x = a.x + a.vx * dt
+                a.y = a.y + a.vy * dt
+                if a.type == "comet" then
+                    a.vx = a.vx - dt * 7
+                    a.y = a.y + math.sin(a.age * 4) * dt * 12
+                end
+                if a.owner == "player" then
+                    local ____t_186 = __t
+                    local ____t_result_185
+                    local ____t_184 = __t
+                    local ____circleEllipse_result_183 = circleEllipse(
+                        nil,
+                        a.x,
+                        a.y,
+                        b.x,
+                        b.y - 18,
+                        33 + s.phase * 3,
+                        59 + s.phase * 3,
+                        a.r
+                    )
+                    __O[1389] = ____circleEllipse_result_183
+                    if ____t_184(____circleEllipse_result_183) then
+                        ____t_result_185 = damageBoss(
+                            nil,
+                            s,
+                            a.damage,
+                            a.x,
+                            a.y
+                        )
+                    else
+                        ____t_result_185 = __O[1389]
+                    end
+                    if ____t_186(____t_result_185) then
+                        a.life = 0
+                    end
+                elseif __t(circleEllipse(
                     nil,
                     a.x,
                     a.y,
-                    b.x,
-                    b.y - 18,
-                    33 + s.phase * 3,
-                    59 + s.phase * 3,
+                    center.x,
+                    center.y,
+                    s.mode == "platform" and 13 or 29,
+                    s.mode == "platform" and 27 or 15,
                     a.r
-                )
-                __O[1370] = ____circleEllipse_result_105
-                if ____t_107(if ____t_106(____circleEllipse_result_105) then damageBoss(
-                    nil,
-                    s,
-                    a.damage,
-                    a.x,
-                    a.y
-                ) else __O[1370]) then
-                    a.life = 0
-                end
-            elseif __t(circleEllipse(
-                nil,
-                a.x,
-                a.y,
-                center.x,
-                center.y,
-                if s.mode == "platform" then 13 else 29,
-                if s.mode == "platform" then 27 else 15,
-                a.r
-            )) then
-                if __t(damagePlayer(nil, s, a.damage, a.x)) then
-                    a.life = 0
+                )) then
+                    if __t(damagePlayer(nil, s, a.damage, a.x)) then
+                        a.life = 0
+                    end
                 end
             end
         end
@@ -5456,72 +5875,96 @@ local __O = {};
             s.shots,
             "filter",
             function(____, a)
-                local ____t_113 = __t
-                local ____t_111 = __t
-                local ____t_109 = __t
-                local ____temp_108 = __gt(a.life, 0) and __gt(a.x, -100)
-                __O[1371] = ____temp_108
-                local ____temp_110 = if ____t_109(____temp_108) then __lt(a.x, 1110) else __O[1371]
-                __O[1372] = ____temp_110
-                local ____temp_112 = if ____t_111(____temp_110) then __gt(a.y, -180) else __O[1372]
-                __O[1373] = ____temp_112
-                return if ____t_113(____temp_112) then __lt(a.y, 690) else __O[1373]
+                local ____t_result_193
+                local ____t_192 = __t
+                local ____t_result_191
+                local ____t_190 = __t
+                local ____t_result_189
+                local ____t_188 = __t
+                local ____temp_187 = __gt(a.life, 0) and __gt(a.x, -100)
+                __O[1390] = ____temp_187
+                if ____t_188(____temp_187) then
+                    ____t_result_189 = __lt(a.x, 1110)
+                else
+                    ____t_result_189 = __O[1390]
+                end
+                __O[1391] = ____t_result_189
+                if ____t_190(____t_result_189) then
+                    ____t_result_191 = __gt(a.y, -180)
+                else
+                    ____t_result_191 = __O[1391]
+                end
+                __O[1392] = ____t_result_191
+                if ____t_192(____t_result_191) then
+                    ____t_result_193 = __lt(a.y, 690)
+                else
+                    ____t_result_193 = __O[1392]
+                end
+                return ____t_result_193
             end
         )
         for ____, h in __iterar((s.hazards)) do
-            if __gt(h.delay, 0) then
-                h.delay = h.delay - dt
-                continue
-            end
-            h.life = h.life - dt
-            if __t(h.type == "cloudStorm" and not __t(h.done)) then
-                h.done = true
-                shot(
-                    nil,
-                    s,
-                    h.x,
-                    90,
-                    0,
-                    340,
-                    "comet",
-                    h.damage,
-                    11,
-                    {life = 2.1, spin = 1}
-                )
-            elseif __t(h.type == "ringBurst" and not __t(h.done)) then
-                h.done = true
-                ring(
-                    nil,
-                    s,
-                    15,
-                    190,
-                    s.time * 0.3
-                )
-            elseif h.type == "gate" then
-                h.x = h.x + h.vx * dt
-                if __t(math.abs(center.x - h.x) < 38 and math.abs(center.y - h.gapY) > h.gapSize * 0.5 - if s.mode == "platform" then 23 else 11) then
-                    damagePlayer(nil, s, h.damage, h.x)
+            do
+                if __gt(h.delay, 0) then
+                    h.delay = h.delay - dt
+                    continue
                 end
-            elseif __t(h.type == "beam" and not __t(h.done)) then
-                local dx = h.tx - h.x
-                local dy = h.ty - h.y
-                local ____t_115 = __t
-                local ____hypot_result_114 = __hypot(dx, dy)
-                __O[1374] = ____hypot_result_114
-                local L = if ____t_115(____hypot_result_114) then __O[1374] else 1
-                local ex = h.x + dx / L * 1200
-                local ey = h.y + dy / L * 1200
-                if pointSegment(
-                    nil,
-                    center.x,
-                    center.y,
-                    h.x,
-                    h.y,
-                    ex,
-                    ey
-                ) < if s.mode == "platform" then 25 else 30 then
-                    if __t(damagePlayer(nil, s, h.damage, h.x)) then
-                        h.done = true
+                h.life = h.life - dt
+                if __t(h.type == "cloudStorm" and not __t(h.done)) then
+                    h.done = true
+                    shot(
+                        nil,
+                        s,
+                        h.x,
+                        90,
+                        0,
+                        340,
+                        "comet",
+                        h.damage,
+                        11,
+                        {life = 2.1, spin = 1}
+                    )
+                elseif __t(h.type == "ringBurst" and not __t(h.done)) then
+                    h.done = true
+                    ring(
+                        nil,
+                        s,
+                        15,
+                        190,
+                        s.time * 0.3
+                    )
+                elseif h.type == "gate" then
+                    h.x = h.x + h.vx * dt
+                    if __t(math.abs(center.x - h.x) < 38 and math.abs(center.y - h.gapY) > h.gapSize * 0.5 - (s.mode == "platform" and 23 or 11)) then
+                        damagePlayer(nil, s, h.damage, h.x)
+                    end
+                elseif __t(h.type == "beam" and not __t(h.done)) then
+                    local dx = h.tx - h.x
+                    local dy = h.ty - h.y
+                    local ____t_result_196
+                    local ____t_195 = __t
+                    local ____hypot_result_194 = __hypot(dx, dy)
+                    __O[1393] = ____hypot_result_194
+                    if ____t_195(____hypot_result_194) then
+                        ____t_result_196 = __O[1393]
+                    else
+                        ____t_result_196 = 1
+                    end
+                    local L = ____t_result_196
+                    local ex = h.x + dx / L * 1200
+                    local ey = h.y + dy / L * 1200
+                    if pointSegment(
+                        nil,
+                        center.x,
+                        center.y,
+                        h.x,
+                        h.y,
+                        ex,
+                        ey
+                    ) < (s.mode == "platform" and 25 or 30) then
+                        if __t(damagePlayer(nil, s, h.damage, h.x)) then
+                            h.done = true
+                        end
                     end
                 end
             end
@@ -5530,19 +5973,31 @@ local __O = {};
             s.hazards,
             "filter",
             function(____, h)
-                local ____t_117 = __t
-                local ____gt_result_116 = __gt(h.life, 0)
-                __O[1375] = ____gt_result_116
-                return if ____t_117(____gt_result_116) then h.type ~= "gate" or __gt(h.x, -70) else __O[1375]
+                local ____t_result_199
+                local ____t_198 = __t
+                local ____gt_result_197 = __gt(h.life, 0)
+                __O[1394] = ____gt_result_197
+                if ____t_198(____gt_result_197) then
+                    ____t_result_199 = h.type ~= "gate" or __gt(h.x, -70)
+                else
+                    ____t_result_199 = __O[1394]
+                end
+                return ____t_result_199
             end
         )
     end
     local function advance(self, s)
-        local ____t_120 = __t
-        local ____t_119 = __t
-        local ____temp_118 = not __t(s)
-        __O[1376] = ____temp_118
-        if ____t_120(if ____t_119(____temp_118) then __O[1376] else s.done) then
+        local ____t_203 = __t
+        local ____t_result_202
+        local ____t_201 = __t
+        local ____temp_200 = not __t(s)
+        __O[1395] = ____temp_200
+        if ____t_201(____temp_200) then
+            ____t_result_202 = __O[1395]
+        else
+            ____t_result_202 = s.done
+        end
+        if ____t_203(____t_result_202) then
             return false
         end
         if s.stage == "intro" then
@@ -5568,11 +6023,17 @@ local __O = {};
         return false
     end
     local function cancel(self, s)
-        local ____t_123 = __t
-        local ____t_122 = __t
-        local ____temp_121 = not __t(s)
-        __O[1377] = ____temp_121
-        if ____t_123(if ____t_122(____temp_121) then __O[1377] else s.done) then
+        local ____t_207 = __t
+        local ____t_result_206
+        local ____t_205 = __t
+        local ____temp_204 = not __t(s)
+        __O[1396] = ____temp_204
+        if ____t_205(____temp_204) then
+            ____t_result_206 = __O[1396]
+        else
+            ____t_result_206 = s.done
+        end
+        if ____t_207(____t_result_206) then
             return false
         end
         s.done = true
@@ -5595,34 +6056,63 @@ local __O = {};
         if not __t(s) then
             return nil
         end
+        local ____s_boss_hp_209 = s.boss.hp
+        local ____s_boss_max_210 = s.boss.max
+        local ____s_boss_max_211 = s.boss.max
+        local ____s_phase_212 = s.phase
+        local ____s_mode_213 = s.mode
+        local ____call_result_214 = __call(s.phaseHPs, "slice")
+        local ____temp_215 = not not __t(s.player.grounded)
+        local ____s_player_x_216 = s.player.x
+        local ____s_player_y_217 = s.player.y
+        local ____s_player_vy_218 = s.player.vy
+        local ____get_result_name_219 = __get(phases, s.phase - 1).name
+        local ____s_stage_220 = s.stage
+        local ____s_time_221 = s.time
+        local ____s_stageTime_222 = s.stageTime
+        local ____temp_223 = s.stage == "fight" or s.stage == "transition"
+        local ____s_done_224 = s.done
+        local ____s_success_225 = s.success
+        local ____s_player_hp_226 = s.player.hp
+        local ____s_player_maxHP_227 = s.player.maxHP
+        local ____s_player_gas_228 = s.player.gas
+        local ____s_player_maxGas_229 = s.player.maxGas
+        local ____s_player_dashCooldown_230 = s.player.dashCooldown
+        local ____s_player_fartCooldown_231 = s.player.fartCooldown
+        local ____temp_208
+        if s.boss.state == "windup" then
+            ____temp_208 = __get(attackNames, s.boss.attack)
+        else
+            ____temp_208 = ""
+        end
         return {
             type = "ollyan",
             name = "Ollyan · Orelhas ao Vento",
-            hp = s.boss.hp,
-            max = s.boss.max,
-            maxHP = s.boss.max,
-            phase = s.phase,
-            mode = s.mode,
-            phaseHPs = __call(s.phaseHPs, "slice"),
-            playerGrounded = not not __t(s.player.grounded),
-            playerX = s.player.x,
-            playerY = s.player.y,
-            playerVY = s.player.vy,
-            phaseName = __get(phases, s.phase - 1).name,
+            hp = ____s_boss_hp_209,
+            max = ____s_boss_max_210,
+            maxHP = ____s_boss_max_211,
+            phase = ____s_phase_212,
+            mode = ____s_mode_213,
+            phaseHPs = ____call_result_214,
+            playerGrounded = ____temp_215,
+            playerX = ____s_player_x_216,
+            playerY = ____s_player_y_217,
+            playerVY = ____s_player_vy_218,
+            phaseName = ____get_result_name_219,
             phases = 3,
-            stage = s.stage,
-            time = s.time,
-            stageTime = s.stageTime,
-            active = s.stage == "fight" or s.stage == "transition",
-            done = s.done,
-            success = s.success,
-            playerHP = s.player.hp,
-            playerMaxHP = s.player.maxHP,
-            gas = s.player.gas,
-            maxGas = s.player.maxGas,
-            dashCooldown = s.player.dashCooldown,
-            fartCooldown = s.player.fartCooldown,
-            telegraph = if s.boss.state == "windup" then __get(attackNames, s.boss.attack) else "",
+            stage = ____s_stage_220,
+            time = ____s_time_221,
+            stageTime = ____s_stageTime_222,
+            active = ____temp_223,
+            done = ____s_done_224,
+            success = ____s_success_225,
+            playerHP = ____s_player_hp_226,
+            playerMaxHP = ____s_player_maxHP_227,
+            gas = ____s_player_gas_228,
+            maxGas = ____s_player_maxGas_229,
+            dashCooldown = ____s_player_dashCooldown_230,
+            fartCooldown = ____s_player_fartCooldown_231,
+            telegraph = ____temp_208,
             attack = s.boss.attack,
             shotCount = __len(s.shots),
             hazardCount = __len(s.hazards),
@@ -5633,33 +6123,47 @@ local __O = {};
         if not __t(s) then
             return nil
         end
-        return {
-            cutscene = if s.stage == "intro" then "ollyan_flight" else nil,
-            cutsceneElapsed = if s.stage == "intro" then s.stageTime else 0,
-            cutsceneToken = s.token,
-            cutsceneIndex = if s.stage == "intro" then math.min(
+        local ____temp_234 = s.stage == "intro" and "ollyan_flight" or nil
+        local ____temp_232
+        if s.stage == "intro" then
+            ____temp_232 = s.stageTime
+        else
+            ____temp_232 = 0
+        end
+        local ____s_token_235 = s.token
+        local ____temp_233
+        if s.stage == "intro" then
+            ____temp_233 = math.min(
                 2,
                 math.floor(s.stageTime / 3)
-            ) else 0,
+            )
+        else
+            ____temp_233 = 0
+        end
+        return {
+            cutscene = ____temp_234,
+            cutsceneElapsed = ____temp_232,
+            cutsceneToken = ____s_token_235,
+            cutsceneIndex = ____temp_233,
             cutsceneTimed = s.stage == "intro",
-            boss = if __t(__call(
+            boss = __t(__call(
                 __arrL({"fight", "transition"}, 2),
                 "includes",
                 s.stage
-            )) then "ollyan" else nil
+            )) and "ollyan" or nil
         }
     end
     local function drawProjectile(self, c, a, t)
-        local ____t_129 = __t
-        local ____opt_126 = window.BailePixel
-        if ____opt_126 ~= nil then
-            ____opt_126 = ____opt_126.projetil
+        local ____t_241 = __t
+        local ____opt_238 = window.BailePixel
+        if ____opt_238 ~= nil then
+            ____opt_238 = ____opt_238.projetil
         end
-        local ____opt_result_128
-        if ____opt_126 ~= nil then
-            ____opt_result_128 = ____opt_126(____opt_126, c, a, t)
+        local ____opt_result_240
+        if ____opt_238 ~= nil then
+            ____opt_result_240 = ____opt_238(____opt_238, c, a, t)
         end
-        if ____t_129(____opt_result_128) then
+        if ____t_241(____opt_result_240) then
             return
         end
         c:save()
@@ -5842,52 +6346,54 @@ local __O = {};
         c:restore()
     end
     local function hazardDraw(self, c, h, t)
-        local ____t_135 = __t
-        local ____opt_132 = window.BailePixel
-        if ____opt_132 ~= nil then
-            ____opt_132 = ____opt_132.perigo
+        local ____t_247 = __t
+        local ____opt_244 = window.BailePixel
+        if ____opt_244 ~= nil then
+            ____opt_244 = ____opt_244.perigo
         end
-        local ____opt_result_134
-        if ____opt_132 ~= nil then
-            ____opt_result_134 = ____opt_132(____opt_132, c, h, t)
+        local ____opt_result_246
+        if ____opt_244 ~= nil then
+            ____opt_result_246 = ____opt_244(____opt_244, c, h, t)
         end
-        if ____t_135(____opt_result_134) then
+        if ____t_247(____opt_result_246) then
             return
         end
         c:save()
         if h.type == "gate" then
-            local x = if __gt(h.delay, 0) then 930 else h.x
-            local alpha = if __gt(h.delay, 0) then 0.45 else 1
+            local x = __gt(h.delay, 0) and 930 or h.x
+            local alpha = __gt(h.delay, 0) and 0.45 or 1
             c.globalAlpha = c.globalAlpha * alpha
             do
                 local yy = 90
                 while yy < 494 do
-                    if math.abs(yy - h.gapY) < h.gapSize * 0.5 then
-                        continue
+                    do
+                        if math.abs(yy - h.gapY) < h.gapSize * 0.5 then
+                            do yy = yy + 29 continue end
+                        end
+                        cloud(
+                            nil,
+                            c,
+                            x,
+                            yy,
+                            0.55,
+                            "#a7bed8",
+                            0.9
+                        )
+                        line(
+                            nil,
+                            c,
+                            __arrL(
+                                {
+                                    __arrL({x + 13, yy - 2}, 2),
+                                    __arrL({x - 8, yy + 2}, 2),
+                                    __arrL({x - 25, yy - 1}, 2)
+                                },
+                                3
+                            ),
+                            "#e2d7e9",
+                            2
+                        )
                     end
-                    cloud(
-                        nil,
-                        c,
-                        x,
-                        yy,
-                        0.55,
-                        "#a7bed8",
-                        0.9
-                    )
-                    line(
-                        nil,
-                        c,
-                        __arrL(
-                            {
-                                __arrL({x + 13, yy - 2}, 2),
-                                __arrL({x - 8, yy + 2}, 2),
-                                __arrL({x - 25, yy - 1}, 2)
-                            },
-                            3
-                        ),
-                        "#e2d7e9",
-                        2
-                    )
                     yy = yy + 29
                 end
             end
@@ -5918,7 +6424,7 @@ local __O = {};
                 )
             end
         elseif h.type == "cloudStorm" then
-            c.globalAlpha = if __gt(h.delay, 0) then 0.7 else 0.3
+            c.globalAlpha = __gt(h.delay, 0) and 0.7 or 0.3
             line(
                 nil,
                 c,
@@ -5953,10 +6459,16 @@ local __O = {};
         elseif h.type == "beam" then
             local dx = h.tx - h.x
             local dy = h.ty - h.y
-            local ____t_137 = __t
-            local ____hypot_result_136 = __hypot(dx, dy)
-            __O[1378] = ____hypot_result_136
-            local len = if ____t_137(____hypot_result_136) then __O[1378] else 1
+            local ____t_result_250
+            local ____t_249 = __t
+            local ____hypot_result_248 = __hypot(dx, dy)
+            __O[1397] = ____hypot_result_248
+            if ____t_249(____hypot_result_248) then
+                ____t_result_250 = __O[1397]
+            else
+                ____t_result_250 = 1
+            end
+            local len = ____t_result_250
             local ex = h.x + dx / len * 1200
             local ey = h.y + dy / len * 1200
             if __gt(h.delay, 0) then
@@ -6119,12 +6631,12 @@ local __O = {};
         end
         c:save()
         c.globalAlpha = c.globalAlpha * alpha
-        local ____t_140 = __t
-        local ____opt_138 = window.Art
-        if ____opt_138 ~= nil then
-            ____opt_138 = ____opt_138.drawVehicle
+        local ____t_253 = __t
+        local ____opt_251 = window.Art
+        if ____opt_251 ~= nil then
+            ____opt_251 = ____opt_251.drawVehicle
         end
-        if ____t_140(____opt_138) then
+        if ____t_253(____opt_251) then
             window.Art:drawVehicle(c, s.parkedCar.x, s.parkedCar.y, s.time * 0.35)
         else
             rect(
@@ -6187,30 +6699,47 @@ local __O = {};
                 end
             end
         end
-        local ____t_143 = __t
-        local ____opt_141 = window.Art
-        if ____opt_141 ~= nil then
-            ____opt_141 = ____opt_141.drawCharacter
+        local ____t_256 = __t
+        local ____opt_254 = window.Art
+        if ____opt_254 ~= nil then
+            ____opt_254 = ____opt_254.drawCharacter
         end
-        if ____t_143(____opt_141) then
-            window.Art:drawCharacter(
-                c,
-                "daroca",
-                x,
-                y,
-                {
-                    frame = s.time,
-                    facing = p.facing,
-                    muscular = not not __t(s.options.trained),
-                    moving = math.abs(p.vx) > 10,
-                    speed = math.abs(p.vx),
-                    grounded = p.grounded,
-                    vy = p.vy,
-                    attack = __gt(p.attackTime, 0),
-                    attackType = p.lastAttack,
-                    attackProgress = 1 - p.attackTime / 0.3,
-                    animation = if __t(p.grounded) then if math.abs(p.vx) > 10 then "run" else "idle" else if __lt(p.vy, 0) then "jump" else "fall"
-                }
+        if ____t_256(____opt_254) then
+            local ____self_269 = window.Art
+            local ____self_269_drawCharacter_270 = ____self_269.drawCharacter
+            local ____array_268 = __TS__SparseArrayNew(c, "daroca", x, y)
+            local ____s_time_258 = s.time
+            local ____p_facing_259 = p.facing
+            local ____temp_260 = not not __t(s.options.trained)
+            local ____temp_261 = math.abs(p.vx) > 10
+            local ____math_abs_result_262 = math.abs(p.vx)
+            local ____p_grounded_263 = p.grounded
+            local ____p_vy_264 = p.vy
+            local ____gt_result_265 = __gt(p.attackTime, 0)
+            local ____p_lastAttack_266 = p.lastAttack
+            local ____temp_267 = 1 - p.attackTime / 0.3
+            local ____t_result_257
+            if __t(p.grounded) then
+                ____t_result_257 = math.abs(p.vx) > 10 and "run" or "idle"
+            else
+                ____t_result_257 = __lt(p.vy, 0) and "jump" or "fall"
+            end
+            __TS__SparseArrayPush(____array_268, {
+                frame = ____s_time_258,
+                facing = ____p_facing_259,
+                muscular = ____temp_260,
+                moving = ____temp_261,
+                speed = ____math_abs_result_262,
+                grounded = ____p_grounded_263,
+                vy = ____p_vy_264,
+                attack = ____gt_result_265,
+                attackType = ____p_lastAttack_266,
+                attackProgress = ____temp_267,
+                animation = ____t_result_257
+            })
+            ____self_269_drawCharacter_270(
+                ____self_269,
+                __TS__SparseArraySpread(____array_268)
             )
         else
             rect(
@@ -6254,7 +6783,13 @@ local __O = {};
     end
     local function transitionPilot(self, c, s)
         local q = clamp(nil, s.stageTime / 2.05, 0, 1)
-        local from = if __t(s.transitionStart) then s.transitionStart else {x = 196, y = 320, mode = "car"}
+        local ____t_result_271
+        if __t(s.transitionStart) then
+            ____t_result_271 = s.transitionStart
+        else
+            ____t_result_271 = {x = 196, y = 320, mode = "car"}
+        end
+        local from = ____t_result_271
         local park = s.parkedCar
         if s.mode == "platform" then
             skyPlatforms(
@@ -6356,13 +6891,13 @@ local __O = {};
         local b = s.boss
         local p = s.player
         local scale = 1.37 + (s.phase - 1) * 0.09
-        local aura = if s.phase == 3 then "#bda7e2" else if s.phase == 2 then "#9acbdf" else nil
-        local ____opt_146 = window.BailePixel
-        if ____opt_146 ~= nil then
-            ____opt_146 = ____opt_146.antesChefe
+        local aura = s.phase == 3 and "#bda7e2" or (s.phase == 2 and "#9acbdf" or nil)
+        local ____opt_274 = window.BailePixel
+        if ____opt_274 ~= nil then
+            ____opt_274 = ____opt_274.antesChefe
         end
-        if ____opt_146 ~= nil then
-            ____opt_146(____opt_146, c, s)
+        if ____opt_274 ~= nil then
+            ____opt_274(____opt_274, c, s)
         end
         if s.stage == "victory" then
             drawOllyan(
@@ -6398,21 +6933,33 @@ local __O = {};
                 end
             end
         else
-            drawOllyan(
+            local ____drawOllyan_282 = drawOllyan
+            local ____array_281 = __TS__SparseArrayNew(
                 nil,
                 c,
                 b.x,
                 b.y + 63,
-                s.time,
-                {
-                    scale = scale,
-                    flying = true,
-                    fast = b.state == "windup" or s.phase == 3,
-                    hit = __gt(b.hit, 0),
-                    aura = aura,
-                    angle = if b.state == "swoop" then math.sin(s.time * 8) * 0.13 else 0
-                }
+                s.time
             )
+            local ____scale_277 = scale
+            local ____temp_278 = b.state == "windup" or s.phase == 3
+            local ____gt_result_279 = __gt(b.hit, 0)
+            local ____aura_280 = aura
+            local ____temp_276
+            if b.state == "swoop" then
+                ____temp_276 = math.sin(s.time * 8) * 0.13
+            else
+                ____temp_276 = 0
+            end
+            __TS__SparseArrayPush(____array_281, {
+                scale = ____scale_277,
+                flying = true,
+                fast = ____temp_278,
+                hit = ____gt_result_279,
+                aura = ____aura_280,
+                angle = ____temp_276
+            })
+            ____drawOllyan_282(__TS__SparseArraySpread(____array_281))
         end
         for ____, a in __iterar((s.shots)) do
             drawProjectile(nil, c, a, s.time)
@@ -6487,7 +7034,7 @@ local __O = {};
                 37,
                 394 * b.hp / b.max,
                 8,
-                if s.phase == 3 then "#bd91db" else if s.phase == 2 then "#9acdd5" else "#e0bb8e"
+                s.phase == 3 and "#bd91db" or (s.phase == 2 and "#9acdd5" or "#e0bb8e")
             )
             text(
                 nil,
@@ -6548,7 +7095,7 @@ local __O = {};
             text(
                 nil,
                 c,
-                if s.mode == "platform" then "SAIA DO CARRO · ANDE E PULE PELAS NUVENS" else "VOLTE AO CARRO A GÁS · O CÉU É SEU",
+                s.mode == "platform" and "SAIA DO CARRO · ANDE E PULE PELAS NUVENS" or "VOLTE AO CARRO A GÁS · O CÉU É SEU",
                 480,
                 296,
                 10,
@@ -6573,18 +7120,18 @@ local __O = {};
                 480,
                 77,
                 11,
-                if b.attack == "moonBeam" then "#f6cbab" else "#d5e6d5"
+                b.attack == "moonBeam" and "#f6cbab" or "#d5e6d5"
             )
-            local ____t_153 = __t
-            local ____opt_150 = window.BailePixel
-            if ____opt_150 ~= nil then
-                ____opt_150 = ____opt_150.telegrafa
+            local ____t_288 = __t
+            local ____opt_285 = window.BailePixel
+            if ____opt_285 ~= nil then
+                ____opt_285 = ____opt_285.telegrafa
             end
-            local ____opt_result_152
-            if ____opt_150 ~= nil then
-                ____opt_result_152 = ____opt_150(____opt_150, c, s)
+            local ____opt_result_287
+            if ____opt_285 ~= nil then
+                ____opt_result_287 = ____opt_285(____opt_285, c, s)
             end
-            if not ____t_153(____opt_result_152) then
+            if not ____t_288(____opt_result_287) then
                 if b.attack == "swoop" then
                     c:save()
                     c.globalAlpha = 0.35
@@ -6628,10 +7175,16 @@ local __O = {};
                 if b.attack == "moonBeam" then
                     local dx = b.targetX - b.x
                     local dy = b.targetY - b.y
-                    local ____t_155 = __t
-                    local ____hypot_result_154 = __hypot(dx, dy)
-                    __O[1379] = ____hypot_result_154
-                    local len = if ____t_155(____hypot_result_154) then __O[1379] else 1
+                    local ____t_result_291
+                    local ____t_290 = __t
+                    local ____hypot_result_289 = __hypot(dx, dy)
+                    __O[1398] = ____hypot_result_289
+                    if ____t_290(____hypot_result_289) then
+                        ____t_result_291 = __O[1398]
+                    else
+                        ____t_result_291 = 1
+                    end
+                    local len = ____t_result_291
                     c:save()
                     c:setLineDash(__arrL({11, 8}, 2))
                     line(
@@ -6651,15 +7204,21 @@ local __O = {};
                 end
             end
         end
-        local ____t_158 = __t
-        local ____t_157 = __t
-        local ____temp_156 = s.stage == "fight"
-        __O[1380] = ____temp_156
-        if ____t_158(if ____t_157(____temp_156) then __lt(s.time, 15) or s.mode == "platform" else __O[1380]) then
+        local ____t_295 = __t
+        local ____t_result_294
+        local ____t_293 = __t
+        local ____temp_292 = s.stage == "fight"
+        __O[1399] = ____temp_292
+        if ____t_293(____temp_292) then
+            ____t_result_294 = __lt(s.time, 15) or s.mode == "platform"
+        else
+            ____t_result_294 = __O[1399]
+        end
+        if ____t_295(____t_result_294) then
             text(
                 nil,
                 c,
-                if s.mode == "platform" then "A / D OU JOYSTICK: ANDAR · ESPAÇO / PULAR: SALTAR · PAPEL / PEIDO / DASH" else "VOE EM TODAS AS DIREÇÕES · PAPEL / PEIDO / DASH",
+                s.mode == "platform" and "A / D OU JOYSTICK: ANDAR · ESPAÇO / PULAR: SALTAR · PAPEL / PEIDO / DASH" or "VOE EM TODAS AS DIREÇÕES · PAPEL / PEIDO / DASH",
                 480,
                 508,
                 10,
@@ -6751,12 +7310,12 @@ local __O = {};
             getAudioState = getAudioState,
             drainEvents = drainEvents,
             isDone = function(____, s)
-                local ____t_162 = __t
-                local ____opt_result_161
+                local ____t_299 = __t
+                local ____opt_result_298
                 if s ~= nil then
-                    ____opt_result_161 = s.done
+                    ____opt_result_298 = s.done
                 end
-                return not not ____t_162(____opt_result_161)
+                return not not ____t_299(____opt_result_298)
             end,
             previewTimeline = previewTimeline,
             getIntroTimeline = previewTimeline,

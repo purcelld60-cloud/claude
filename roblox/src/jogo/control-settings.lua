@@ -15,8 +15,14 @@ local __O = {};
         if message == nil then
             message = "Alterações salvas neste dispositivo."
         end
-        status.textContent = if __t(persistenceAvailable) then message else "Alterações nesta sessão. Permita o armazenamento do navegador para manter seus controles."
-        modal.dataset.save = if __t(persistenceAvailable) then "saved" else "temporary"
+        local ____t_result_25
+        if __t(persistenceAvailable) then
+            ____t_result_25 = message
+        else
+            ____t_result_25 = "Alterações nesta sessão. Permita o armazenamento do navegador para manter seus controles."
+        end
+        status.textContent = ____t_result_25
+        modal.dataset.save = __t(persistenceAvailable) and "saved" or "temporary"
         resetRequested = false
         resetButton.textContent = "Restaurar padrões"
     end
@@ -47,7 +53,7 @@ local __O = {};
                     ),
                     ". "
                 ),
-                if __t(action == "pause" and slot == 0) then "Escape é uma saída fixa." else "Clique para alterar."
+                __t(action == "pause" and slot == 0) and "Escape é uma saída fixa." or "Clique para alterar."
             )
         )
         local fixed = action == "pause" and slot == 0
@@ -57,9 +63,15 @@ local __O = {};
             not __t(code)
         )
         button.classList:toggle("is-fixed", fixed)
-        button.title = if __t(fixed) then "Escape sempre permite sair ou pausar" else if __t(code) then "Clique para trocar esta tecla" else "Adicionar outro atalho"
+        button.title = __t(fixed) and "Escape sempre permite sair ou pausar" or (__t(code) and "Clique para trocar esta tecla" or "Adicionar outro atalho")
         local kbd = window.document:createElement("kbd")
-        kbd.textContent = if __t(code) then codeLabel(nil, code) else "+"
+        local ____t_result_26
+        if __t(code) then
+            ____t_result_26 = codeLabel(nil, code)
+        else
+            ____t_result_26 = "+"
+        end
+        kbd.textContent = ____t_result_26
         button:append(kbd)
         if not __t(code) then
             local add = window.document:createElement("small")
@@ -76,22 +88,39 @@ local __O = {};
             function() return beginCapture(nil, action, slot) end
         )
         wrap:append(button)
-        local ____t_25 = __t
-        local ____t_20 = __t
-        local ____temp_19 = if __t(code) then not __t(fixed) else code
-        __O[2482] = ____temp_19
-        local ____gt_24 = __gt
-        local ____len_23 = __len
-        local ____t_22 = __t
-        local ____get_result_21 = __get(
-            api:getState().bindings,
-            action
-        )
-        __O[2481] = ____get_result_21
-        if ____t_25(if ____t_20(____temp_19) then ____gt_24(
-            ____len_23(if ____t_22(____get_result_21) then __O[2481] else __arrL({}, 0)),
-            1
-        ) else __O[2482]) then
+        local ____t_35 = __t
+        local ____t_result_34
+        local ____t_28 = __t
+        local ____t_result_27
+        if __t(code) then
+            ____t_result_27 = not __t(fixed)
+        else
+            ____t_result_27 = code
+        end
+        __O[2513] = ____t_result_27
+        if ____t_28(____t_result_27) then
+            local ____gt_33 = __gt
+            local ____len_32 = __len
+            local ____t_result_31
+            local ____t_30 = __t
+            local ____get_result_29 = __get(
+                api:getState().bindings,
+                action
+            )
+            __O[2512] = ____get_result_29
+            if ____t_30(____get_result_29) then
+                ____t_result_31 = __O[2512]
+            else
+                ____t_result_31 = __arrL({}, 0)
+            end
+            ____t_result_34 = ____gt_33(
+                ____len_32(____t_result_31),
+                1
+            )
+        else
+            ____t_result_34 = __O[2513]
+        end
+        if ____t_35(____t_result_34) then
             local clear = window.document:createElement("button")
             clear.type = "button"
             clear.className = "controls-key-clear"
@@ -115,12 +144,19 @@ local __O = {};
                 function()
                     stopCapture(nil)
                     local result = api:clearBinding(action, slot)
-                    local ____opt_result_28
+                    local ____opt_result_38
                     if result ~= nil then
-                        ____opt_result_28 = result.ok
+                        ____opt_result_38 = result.ok
                     end
-                    if ____opt_result_28 == false then
-                        saveMessage(nil, if __t(result.message) then result.message else "Mantenha pelo menos uma tecla para esta ação.")
+                    if ____opt_result_38 == false then
+                        local ____saveMessage_40 = saveMessage
+                        local ____t_result_39
+                        if __t(result.message) then
+                            ____t_result_39 = result.message
+                        else
+                            ____t_result_39 = "Mantenha pelo menos uma tecla para esta ação."
+                        end
+                        ____saveMessage_40(nil, ____t_result_39)
                     else
                         saveMessage(nil)
                     end
@@ -149,10 +185,16 @@ local __O = {};
                 local title = window.document:createElement("b")
                 title.textContent = actionName(nil, action)
                 local note = window.document:createElement("small")
-                local ____t_30 = __t
-                local ____get_result_29 = __get(descriptions, action)
-                __O[2483] = ____get_result_29
-                note.textContent = if ____t_30(____get_result_29) then __O[2483] else ""
+                local ____t_result_43
+                local ____t_42 = __t
+                local ____get_result_41 = __get(descriptions, action)
+                __O[2514] = ____get_result_41
+                if ____t_42(____get_result_41) then
+                    ____t_result_43 = __O[2514]
+                else
+                    ____t_result_43 = ""
+                end
+                note.textContent = ____t_result_43
                 copy:append(title, note)
                 local slots = window.document:createElement("div")
                 slots.className = "controls-key-slots"
@@ -238,11 +280,17 @@ local __O = {};
                         actionKeys(nil, "right")
                     )
                 else
-                    local ____t_33 = __t
-                    local ____t_32 = __t
-                    local ____get_result_31 = __get(barActions, index)
-                    __O[2484] = ____get_result_31
-                    if ____t_33(if ____t_32(____get_result_31) then __get(keys, 0) else __O[2484]) then
+                    local ____t_47 = __t
+                    local ____t_result_46
+                    local ____t_45 = __t
+                    local ____get_result_44 = __get(barActions, index)
+                    __O[2515] = ____get_result_44
+                    if ____t_45(____get_result_44) then
+                        ____t_result_46 = __get(keys, 0)
+                    else
+                        ____t_result_46 = __O[2515]
+                    end
+                    if ____t_47(____t_result_46) then
                         __get(keys, 0).textContent = api:getLabel(__get(barActions, index))
                         hint.title = actionKeys(
                             nil,
@@ -292,21 +340,34 @@ local __O = {};
                         )
                     end
                 else
-                    local ____t_36 = __t
-                    local ____t_35 = __t
-                    local ____get_result_34 = __get(keys, 0)
-                    __O[2485] = ____get_result_34
-                    if ____t_36(if ____t_35(____get_result_34) then __get(helpActions, index) else __O[2485]) then
-                        __get(keys, 0).textContent = if __get(helpActions, index) == "training" then __add(
-                            __add(
-                                api:getLabel("interact"),
-                                " / "
-                            ),
-                            api:getLabel("jump")
-                        ) else actionKeys(
-                            nil,
-                            __get(helpActions, index)
-                        )
+                    local ____t_51 = __t
+                    local ____t_result_50
+                    local ____t_49 = __t
+                    local ____get_result_48 = __get(keys, 0)
+                    __O[2516] = ____get_result_48
+                    if ____t_49(____get_result_48) then
+                        ____t_result_50 = __get(helpActions, index)
+                    else
+                        ____t_result_50 = __O[2516]
+                    end
+                    if ____t_51(____t_result_50) then
+                        local ____get_result_53 = __get(keys, 0)
+                        local ____temp_52
+                        if __get(helpActions, index) == "training" then
+                            ____temp_52 = __add(
+                                __add(
+                                    api:getLabel("interact"),
+                                    " / "
+                                ),
+                                api:getLabel("jump")
+                            )
+                        else
+                            ____temp_52 = actionKeys(
+                                nil,
+                                __get(helpActions, index)
+                            )
+                        end
+                        ____get_result_53.textContent = ____temp_52
                     end
                 end
             end
@@ -332,10 +393,16 @@ local __O = {};
                 )) then
                     return
                 end
-                local ____t_38 = __t
-                local ____get_result_37 = __get(descriptions, action)
-                __O[2486] = ____get_result_37
-                local label = if ____t_38(____get_result_37) then __O[2486] else actionName(nil, action)
+                local ____t_result_56
+                local ____t_55 = __t
+                local ____get_result_54 = __get(descriptions, action)
+                __O[2517] = ____get_result_54
+                if ____t_55(____get_result_54) then
+                    ____t_result_56 = __O[2517]
+                else
+                    ____t_result_56 = actionName(nil, action)
+                end
+                local label = ____t_result_56
                 button:setAttribute(
                     "aria-label",
                     __add(
@@ -396,12 +463,12 @@ local __O = {};
         local intro = window.document:querySelector("#helpModal>p:not(.help-tip)")
         local tip = window.document:querySelector("#helpModal>.help-tip")
         if __t(intro) then
-            local ____intro_dataset_40 = intro.dataset
-            local ____intro_dataset_controlsOriginal_39 = intro.dataset.controlsOriginal
-            if ____intro_dataset_controlsOriginal_39 == nil then
-                ____intro_dataset_controlsOriginal_39 = intro.textContent
+            local ____intro_dataset_58 = intro.dataset
+            local ____intro_dataset_controlsOriginal_57 = intro.dataset.controlsOriginal
+            if ____intro_dataset_controlsOriginal_57 == nil then
+                ____intro_dataset_controlsOriginal_57 = intro.textContent
             end
-            ____intro_dataset_40.controlsOriginal = ____intro_dataset_controlsOriginal_39
+            ____intro_dataset_58.controlsOriginal = ____intro_dataset_controlsOriginal_57
             intro.textContent = __call(
                 intro.dataset.controlsOriginal,
                 "replace",
@@ -416,12 +483,12 @@ local __O = {};
             )
         end
         if __t(tip) then
-            local ____tip_dataset_42 = tip.dataset
-            local ____tip_dataset_controlsOriginal_41 = tip.dataset.controlsOriginal
-            if ____tip_dataset_controlsOriginal_41 == nil then
-                ____tip_dataset_controlsOriginal_41 = tip.textContent
+            local ____tip_dataset_60 = tip.dataset
+            local ____tip_dataset_controlsOriginal_59 = tip.dataset.controlsOriginal
+            if ____tip_dataset_controlsOriginal_59 == nil then
+                ____tip_dataset_controlsOriginal_59 = tip.textContent
             end
-            ____tip_dataset_42.controlsOriginal = ____tip_dataset_controlsOriginal_41
+            ____tip_dataset_60.controlsOriginal = ____tip_dataset_controlsOriginal_59
             tip.textContent = __call(
                 __call(
                     __call(
@@ -463,16 +530,16 @@ local __O = {};
     function beginCapture(self, action, slot)
         stopCapture(nil)
         capturing = {action = action, slot = slot}
-        local ____opt_45 = window.Game
-        if ____opt_45 ~= nil then
-            ____opt_45 = ____opt_45.releaseInputs
+        local ____opt_63 = window.Game
+        if ____opt_63 ~= nil then
+            ____opt_63 = ____opt_63.releaseInputs
         end
-        if ____opt_45 ~= nil then
-            ____opt_45(____opt_45)
+        if ____opt_63 ~= nil then
+            ____opt_63(____opt_63)
         end
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = true}}))
-        local ____callq_49 = __callq
-        local ____opt_47 = modal:querySelector(__add(
+        local ____callq_67 = __callq
+        local ____opt_65 = modal:querySelector(__add(
             __add(
                 __add(
                     __add("[data-binding-action=\"", action),
@@ -482,10 +549,10 @@ local __O = {};
             ),
             "\"]"
         ))
-        if ____opt_47 ~= nil then
-            ____opt_47 = ____opt_47.classList
+        if ____opt_65 ~= nil then
+            ____opt_65 = ____opt_65.classList
         end
-        ____callq_49(____opt_47, "add", "is-listening")
+        ____callq_67(____opt_65, "add", "is-listening")
         captureBox.hidden = false
         captureBox.dataset.state = "listening"
         captureTitle.textContent = __add(
@@ -517,34 +584,46 @@ local __O = {};
             function(____, el) return el.classList:remove("is-listening") end
         )
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-        local ____opt_52 = window.Game
-        if ____opt_52 ~= nil then
-            ____opt_52 = ____opt_52.releaseInputs
+        local ____opt_70 = window.Game
+        if ____opt_70 ~= nil then
+            ____opt_70 = ____opt_70.releaseInputs
         end
-        if ____opt_52 ~= nil then
-            ____opt_52(____opt_52)
+        if ____opt_70 ~= nil then
+            ____opt_70(____opt_70)
         end
     end
     local ____ = "use strict"
     api = window.ControlSettings
     local shell = window.document:getElementById("gameShell")
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(api) or not __t(shell)
-    __O[2475] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2475] else window.ControlSettingsUI) then
+    __O[2506] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[2506]
+    else
+        ____t_result_2 = window.ControlSettingsUI
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     canvas = window.document:getElementById("gameCanvas")
     local icons = __ord({pad = "<path d=\"M5 5h14v2h3v12h-6l-3-3h-2l-3 3H2V7h3z\"/><path class=\"ink-light\" d=\"M6 8h2v3h3v2H8v3H6v-3H3v-2h3zm10 1h3v3h-3zm-3 4h3v3h-3z\"/>", boots = "<path d=\"M3 2h7v11h4v7H2v-5h1zm11 0h7v11h2v7h-7v-5h-2z\"/><path class=\"ink-light\" d=\"M5 5h3v8H5zm11 0h3v8h-3zM4 16h8v2H4zm14 0h3v2h-3z\"/>", paper = "<path d=\"M5 1h11l5 5v16H3V3h2zm10 2v5h4\"/><path class=\"ink-light\" d=\"M6 10h12v2H6zm0 4h12v2H6zm0 4h8v2H6z\"/>", leaf = "<path d=\"M12 1h3v5h5v3h3v4h-4v4h-5v6h-3V13H6V9H2V6h6v3h3z\"/><path class=\"ink-light\" d=\"M15 8h3v3h-3zm-3 3h3v2h-3z\"/>"}, "pad,boots,paper,leaf")
     svg = function(____, name)
-        local ____add_6 = __add
-        local ____add_5 = __add
-        local ____t_4 = __t
-        local ____get_result_3 = __get(icons, name)
-        __O[2476] = ____get_result_3
-        return ____add_6(
-            ____add_5("<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" shape-rendering=\"crispEdges\">", if ____t_4(____get_result_3) then __O[2476] else icons.pad),
+        local ____add_8 = __add
+        local ____add_7 = __add
+        local ____t_result_6
+        local ____t_5 = __t
+        local ____get_result_4 = __get(icons, name)
+        __O[2507] = ____get_result_4
+        if ____t_5(____get_result_4) then
+            ____t_result_6 = __O[2507]
+        else
+            ____t_result_6 = icons.pad
+        end
+        return ____add_8(
+            ____add_7("<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" shape-rendering=\"crispEdges\">", ____t_result_6),
             "</svg>"
         )
     end
@@ -663,43 +742,74 @@ local __O = {};
     sensitivity = modal:querySelector("#controlSensitivity")
     deadzone = modal:querySelector("#controlDeadzone")
     actionName = function(____, id)
-        local ____t_12 = __t
-        local ____t_8 = __t
-        local ____get_result_7 = __get(labels, id)
-        __O[2477] = ____get_result_7
-        local ____opt_9 = __call(
-            api.actions,
-            "find",
-            function(____, a) return a.id == id end
-        )
-        if ____opt_9 ~= nil then
-            ____opt_9 = ____opt_9.label
+        local ____t_result_15
+        local ____t_14 = __t
+        local ____t_result_13
+        local ____t_10 = __t
+        local ____get_result_9 = __get(labels, id)
+        __O[2508] = ____get_result_9
+        if ____t_10(____get_result_9) then
+            ____t_result_13 = __O[2508]
+        else
+            local ____opt_11 = __call(
+                api.actions,
+                "find",
+                function(____, a) return a.id == id end
+            )
+            if ____opt_11 ~= nil then
+                ____opt_11 = ____opt_11.label
+            end
+            ____t_result_13 = ____opt_11
         end
-        local ____temp_11 = if ____t_8(____get_result_7) then __O[2477] else ____opt_9
-        __O[2478] = ____temp_11
-        return if ____t_12(____temp_11) then __O[2478] else id
+        __O[2509] = ____t_result_13
+        if ____t_14(____t_result_13) then
+            ____t_result_15 = __O[2509]
+        else
+            ____t_result_15 = id
+        end
+        return ____t_result_15
     end
-    codeLabel = function(____, code) return if __t(code) then api:labelForCode(code) else "Adicionar" end
+    codeLabel = function(____, code)
+        local ____t_result_16
+        if __t(code) then
+            ____t_result_16 = api:labelForCode(code)
+        else
+            ____t_result_16 = "Adicionar"
+        end
+        return ____t_result_16
+    end
     actionKeys = function(____, id, separator)
         if separator == nil then
             separator = " / "
         end
+        local ____t_result_24
+        local ____t_23 = __t
+        local ____call_21 = __call
+        local ____call_20 = __call
+        local ____t_result_19
         local ____t_18 = __t
-        local ____call_16 = __call
-        local ____call_15 = __call
-        local ____t_14 = __t
-        local ____get_result_13 = __get(
+        local ____get_result_17 = __get(
             api:getState().bindings,
             id
         )
-        __O[2479] = ____get_result_13
-        local ____call_16_result_17 = ____call_16(
-            ____call_15(if ____t_14(____get_result_13) then __O[2479] else __arrL({}, 0), "map", codeLabel),
+        __O[2510] = ____get_result_17
+        if ____t_18(____get_result_17) then
+            ____t_result_19 = __O[2510]
+        else
+            ____t_result_19 = __arrL({}, 0)
+        end
+        local ____call_21_result_22 = ____call_21(
+            ____call_20(____t_result_19, "map", codeLabel),
             "join",
             separator
         )
-        __O[2480] = ____call_16_result_17
-        return if ____t_18(____call_16_result_17) then __O[2480] else "Sem tecla"
+        __O[2511] = ____call_21_result_22
+        if ____t_23(____call_21_result_22) then
+            ____t_result_24 = __O[2511]
+        else
+            ____t_result_24 = "Sem tecla"
+        end
+        return ____t_result_24
     end
     local function selectTab(self, next)
         stopCapture(nil)
@@ -713,7 +823,7 @@ local __O = {};
                     "aria-selected",
                     tostring(on)
                 )
-                button.tabIndex = if __t(on) then 0 else -1
+                button.tabIndex = __t(on) and 0 or -1
             end
         )
         modal:querySelector("#controlKeysPage").hidden = next ~= "keys"
@@ -725,13 +835,13 @@ local __O = {};
         end
         local target = __assign({}, capturing)
         local result = api:setBinding(target.action, code, target.slot)
-        local ____opt_result_56
+        local ____opt_result_74
         if result ~= nil then
-            ____opt_result_56 = result.ok
+            ____opt_result_74 = result.ok
         end
-        if ____opt_result_56 == false then
+        if ____opt_result_74 == false then
             captureBox.dataset.state = "conflict"
-            captureTitle.textContent = if __t(__lenq(result.conflicts)) then "Essa tecla já tem uma tarefa." else "Essa tecla não pode ser usada."
+            captureTitle.textContent = __t(__lenq(result.conflicts)) and "Essa tecla já tem uma tarefa." or "Essa tecla não pode ser usada."
             local other = __getq(result.conflicts, 0)
             local oldCode = __getq(
                 __get(
@@ -741,22 +851,30 @@ local __O = {};
                 target.slot
             )
             if __t(other) then
-                local ____t_58 = __t
-                local ____temp_57 = __len(result.conflicts) == 1 and not not __t(oldCode)
-                __O[2487] = ____temp_57
-                local canSwap = if ____t_58(____temp_57) then not __t(other.action == "pause" and other.slot == 0) else __O[2487]
-                captureCopy.textContent = __add(
+                local ____t_result_77
+                local ____t_76 = __t
+                local ____temp_75 = __len(result.conflicts) == 1 and not not __t(oldCode)
+                __O[2518] = ____temp_75
+                if ____t_76(____temp_75) then
+                    ____t_result_77 = not __t(other.action == "pause" and other.slot == 0)
+                else
+                    ____t_result_77 = __O[2518]
+                end
+                local canSwap = ____t_result_77
+                local ____add_80 = __add
+                local ____add_result_79 = __add(
                     __add(
                         __add(
-                            __add(
-                                codeLabel(nil, code),
-                                " está em "
-                            ),
-                            actionName(nil, other.action)
+                            codeLabel(nil, code),
+                            " está em "
                         ),
-                        ". "
+                        actionName(nil, other.action)
                     ),
-                    if __t(canSwap) then __add(
+                    ". "
+                )
+                local ____t_result_78
+                if __t(canSwap) then
+                    ____t_result_78 = __add(
                         __add(
                             __add(
                                 __add(
@@ -768,8 +886,11 @@ local __O = {};
                             actionName(nil, other.action)
                         ),
                         ", sem deixar ninguém sem atalho."
-                    ) else "Escolha uma tecla livre. Nenhum atalho foi removido."
-                )
+                    )
+                else
+                    ____t_result_78 = "Escolha uma tecla livre. Nenhum atalho foi removido."
+                end
+                captureCopy.textContent = ____add_80(____add_result_79, ____t_result_78)
                 conflict = {target = target, code = code, other = other, oldCode = oldCode}
                 swapButton.hidden = not __t(canSwap)
                 capturing = nil
@@ -779,9 +900,21 @@ local __O = {};
                     function(____, el) return el.classList:remove("is-listening") end
                 )
                 window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-                if __t(canSwap) then swapButton else cancelCapture:focus({preventScroll = true})
+                local ____t_result_81
+                if __t(canSwap) then
+                    ____t_result_81 = swapButton
+                else
+                    ____t_result_81 = cancelCapture
+                end
+                ____t_result_81:focus({preventScroll = true})
             else
-                captureCopy.textContent = if __t(result.message) then result.message else "Escolha outra tecla. Escape continua reservado para sair."
+                local ____t_result_82
+                if __t(result.message) then
+                    ____t_result_82 = result.message
+                else
+                    ____t_result_82 = "Escolha outra tecla. Escape continua reservado para sair."
+                end
+                captureCopy.textContent = ____t_result_82
                 swapButton.hidden = true
             end
             return
@@ -801,7 +934,7 @@ local __O = {};
             )
         )
         refresh(nil)
-        local ____opt_59 = modal:querySelector(__add(
+        local ____opt_83 = modal:querySelector(__add(
             __add(
                 __add(
                     __add("[data-binding-action=\"", target.action),
@@ -811,66 +944,92 @@ local __O = {};
             ),
             "\"]"
         ))
-        if ____opt_59 ~= nil then
-            ____opt_59:focus({preventScroll = true})
+        if ____opt_83 ~= nil then
+            ____opt_83:focus({preventScroll = true})
         end
     end
     local function open(self)
         if __t(modal.open) then
             return
         end
-        local ____opt_61 = window.Game
-        if ____opt_61 ~= nil then
-            ____opt_61 = ____opt_61:getState()
+        local ____opt_85 = window.Game
+        if ____opt_85 ~= nil then
+            ____opt_85 = ____opt_85:getState()
         end
-        local state = ____opt_61
+        local state = ____opt_85
         returnFocus = window.document.activeElement
-        local ____t_75 = __t
-        local ____t_74 = __t
-        local ____t_72 = __t
-        local ____t_70 = __t
-        local ____t_68 = __t
-        local ____t_66 = __t
-        local ____opt_result_65
+        local ____t_100 = __t
+        local ____t_result_99
+        local ____t_98 = __t
+        local ____t_result_97
+        local ____t_96 = __t
+        local ____t_result_95
+        local ____t_94 = __t
+        local ____t_result_93
+        local ____t_92 = __t
+        local ____t_result_91
+        local ____t_90 = __t
+        local ____opt_result_89
         if state ~= nil then
-            ____opt_result_65 = state.started
+            ____opt_result_89 = state.started
         end
-        __O[2488] = ____opt_result_65
-        local ____temp_67 = if ____t_66(____opt_result_65) then not __t(state.paused) else __O[2488]
-        __O[2489] = ____temp_67
-        local ____temp_69 = if ____t_68(____temp_67) then not __t(state.won) else __O[2489]
-        __O[2490] = ____temp_69
-        local ____temp_71 = if ____t_70(____temp_69) then not __t(state.defeated) else __O[2490]
-        __O[2491] = ____temp_71
-        local ____temp_73 = if ____t_72(____temp_71) then not __t(state.chapterEnded) else __O[2491]
-        __O[2492] = ____temp_73
-        resumeAfterClose = not not ____t_75(if ____t_74(____temp_73) then not __t(window.document:querySelector("dialog[open]")) else __O[2492])
-        local ____opt_78 = window.Game
-        if ____opt_78 ~= nil then
-            ____opt_78 = ____opt_78.releaseInputs
+        __O[2519] = ____opt_result_89
+        if ____t_90(____opt_result_89) then
+            ____t_result_91 = not __t(state.paused)
+        else
+            ____t_result_91 = __O[2519]
         end
-        if ____opt_78 ~= nil then
-            ____opt_78(____opt_78)
+        __O[2520] = ____t_result_91
+        if ____t_92(____t_result_91) then
+            ____t_result_93 = not __t(state.won)
+        else
+            ____t_result_93 = __O[2520]
+        end
+        __O[2521] = ____t_result_93
+        if ____t_94(____t_result_93) then
+            ____t_result_95 = not __t(state.defeated)
+        else
+            ____t_result_95 = __O[2521]
+        end
+        __O[2522] = ____t_result_95
+        if ____t_96(____t_result_95) then
+            ____t_result_97 = not __t(state.chapterEnded)
+        else
+            ____t_result_97 = __O[2522]
+        end
+        __O[2523] = ____t_result_97
+        if ____t_98(____t_result_97) then
+            ____t_result_99 = not __t(window.document:querySelector("dialog[open]"))
+        else
+            ____t_result_99 = __O[2523]
+        end
+        resumeAfterClose = not not ____t_100(____t_result_99)
+        local ____opt_103 = window.Game
+        if ____opt_103 ~= nil then
+            ____opt_103 = ____opt_103.releaseInputs
+        end
+        if ____opt_103 ~= nil then
+            ____opt_103(____opt_103)
         end
         if __t(resumeAfterClose) then
-            local ____opt_82 = window.Game
-            if ____opt_82 ~= nil then
-                ____opt_82 = ____opt_82.pause
+            local ____opt_107 = window.Game
+            if ____opt_107 ~= nil then
+                ____opt_107 = ____opt_107.pause
             end
-            if ____opt_82 ~= nil then
-                ____opt_82(____opt_82)
+            if ____opt_107 ~= nil then
+                ____opt_107(____opt_107)
             end
         end
         refresh(nil)
         selectTab(nil, tab)
         saveMessage(nil, "Salvo neste dispositivo · separado do progresso.")
         modal:showModal()
-        local ____opt_84 = modal:querySelector(__add(
+        local ____opt_109 = modal:querySelector(__add(
             __add("[data-control-tab=\"", tab),
             "\"]"
         ))
-        if ____opt_84 ~= nil then
-            ____opt_84:focus({preventScroll = true})
+        if ____opt_109 ~= nil then
+            ____opt_109:focus({preventScroll = true})
         end
     end
     local function close(self)
@@ -884,51 +1043,75 @@ local __O = {};
             stopCapture(nil)
             local shouldResume = resumeAfterClose
             resumeAfterClose = false
-            if __t(if __t(shouldResume) then not __t(window.document:querySelector("dialog[open]")) else shouldResume) then
-                local ____opt_88 = window.Game
-                if ____opt_88 ~= nil then
-                    ____opt_88 = ____opt_88.resume
+            local ____t_112 = __t
+            local ____t_result_111
+            if __t(shouldResume) then
+                ____t_result_111 = not __t(window.document:querySelector("dialog[open]"))
+            else
+                ____t_result_111 = shouldResume
+            end
+            if ____t_112(____t_result_111) then
+                local ____opt_115 = window.Game
+                if ____opt_115 ~= nil then
+                    ____opt_115 = ____opt_115.resume
                 end
-                if ____opt_88 ~= nil then
-                    ____opt_88(____opt_88)
+                if ____opt_115 ~= nil then
+                    ____opt_115(____opt_115)
                 end
             end
-            local ____opt_92 = window.Game
-            if ____opt_92 ~= nil then
-                ____opt_92 = ____opt_92.releaseInputs
+            local ____opt_119 = window.Game
+            if ____opt_119 ~= nil then
+                ____opt_119 = ____opt_119.releaseInputs
             end
-            if ____opt_92 ~= nil then
-                ____opt_92(____opt_92)
+            if ____opt_119 ~= nil then
+                ____opt_119(____opt_119)
             end
             window:requestAnimationFrame(function()
-                local ____opt_94 = window.Game
-                if ____opt_94 ~= nil then
-                    ____opt_94 = ____opt_94:getState()
+                local ____opt_121 = window.Game
+                if ____opt_121 ~= nil then
+                    ____opt_121 = ____opt_121:getState()
                 end
-                local state = ____opt_94
-                local ____t_102 = __t
-                local ____t_101 = __t
-                local ____t_99 = __t
-                local ____opt_result_98
+                local state = ____opt_121
+                local ____t_130 = __t
+                local ____t_result_129
+                local ____t_128 = __t
+                local ____t_result_127
+                local ____t_126 = __t
+                local ____opt_result_125
                 if state ~= nil then
-                    ____opt_result_98 = state.started
+                    ____opt_result_125 = state.started
                 end
-                __O[2493] = ____opt_result_98
-                local ____temp_100 = if ____t_99(____opt_result_98) then not __t(state.paused) else __O[2493]
-                __O[2494] = ____temp_100
-                if ____t_102(if ____t_101(____temp_100) then not __t(window.document:querySelector("dialog[open]")) else __O[2494]) then
+                __O[2524] = ____opt_result_125
+                if ____t_126(____opt_result_125) then
+                    ____t_result_127 = not __t(state.paused)
+                else
+                    ____t_result_127 = __O[2524]
+                end
+                __O[2525] = ____t_result_127
+                if ____t_128(____t_result_127) then
+                    ____t_result_129 = not __t(window.document:querySelector("dialog[open]"))
+                else
+                    ____t_result_129 = __O[2525]
+                end
+                if ____t_130(____t_result_129) then
                     if canvas ~= nil then
                         canvas:focus({preventScroll = true})
                     end
                 else
-                    local ____t_109 = __t
-                    local ____t_108 = __t
-                    local ____opt_result_107
+                    local ____t_138 = __t
+                    local ____t_result_137
+                    local ____t_136 = __t
+                    local ____opt_result_135
                     if returnFocus ~= nil then
-                        ____opt_result_107 = returnFocus.isConnected
+                        ____opt_result_135 = returnFocus.isConnected
                     end
-                    __O[2495] = ____opt_result_107
-                    if ____t_109(if ____t_108(____opt_result_107) then __len(returnFocus:getClientRects()) else __O[2495]) then
+                    __O[2526] = ____opt_result_135
+                    if ____t_136(____opt_result_135) then
+                        ____t_result_137 = __len(returnFocus:getClientRects())
+                    else
+                        ____t_result_137 = __O[2526]
+                    end
+                    if ____t_138(____t_result_137) then
                         returnFocus:focus({preventScroll = true})
                     end
                 end
@@ -953,14 +1136,25 @@ local __O = {};
                 return
             end
             local r = modal:getBoundingClientRect()
-            local ____t_114 = __t
-            local ____t_113 = __t
-            local ____t_111 = __t
-            local ____temp_110 = event.clientX < r.left or event.clientX > r.right
-            __O[2496] = ____temp_110
-            local ____temp_112 = if ____t_111(____temp_110) then __O[2496] else event.clientY < r.top
-            __O[2497] = ____temp_112
-            if ____t_114(if ____t_113(____temp_112) then __O[2497] else event.clientY > r.bottom) then
+            local ____t_144 = __t
+            local ____t_result_143
+            local ____t_142 = __t
+            local ____t_result_141
+            local ____t_140 = __t
+            local ____temp_139 = event.clientX < r.left or event.clientX > r.right
+            __O[2527] = ____temp_139
+            if ____t_140(____temp_139) then
+                ____t_result_141 = __O[2527]
+            else
+                ____t_result_141 = event.clientY < r.top
+            end
+            __O[2528] = ____t_result_141
+            if ____t_142(____t_result_141) then
+                ____t_result_143 = __O[2528]
+            else
+                ____t_result_143 = event.clientY > r.bottom
+            end
+            if ____t_144(____t_result_143) then
                 if __t(capturing) then
                     stopCapture(nil)
                 else
@@ -993,7 +1187,7 @@ local __O = {};
                 return
             end
             event:preventDefault()
-            local next = if event.key == "Home" then "keys" else if event.key == "End" then "feel" else if tab == "keys" then "feel" else "keys"
+            local next = event.key == "Home" and "keys" or (event.key == "End" and "feel" or (tab == "keys" and "feel" or "keys"))
             selectTab(nil, next)
             modal:querySelector(__add(
                 __add("[data-control-tab=\"", next),
@@ -1004,14 +1198,20 @@ local __O = {};
     cancelCapture:addEventListener(
         "click",
         function()
-            local ____opt_result_117
-            if conflict ~= nil then
-                ____opt_result_117 = conflict.target
+            local ____t_result_148
+            if __t(capturing) then
+                ____t_result_148 = capturing
+            else
+                local ____opt_result_147
+                if conflict ~= nil then
+                    ____opt_result_147 = conflict.target
+                end
+                ____t_result_148 = ____opt_result_147
             end
-            local last = if __t(capturing) then capturing else ____opt_result_117
+            local last = ____t_result_148
             stopCapture(nil)
             if __t(last) then
-                local ____opt_118 = modal:querySelector(__add(
+                local ____opt_149 = modal:querySelector(__add(
                     __add(
                         __add(
                             __add("[data-binding-action=\"", last.action),
@@ -1021,8 +1221,8 @@ local __O = {};
                     ),
                     "\"]"
                 ))
-                if ____opt_118 ~= nil then
-                    ____opt_118:focus({preventScroll = true})
+                if ____opt_149 ~= nil then
+                    ____opt_149:focus({preventScroll = true})
                 end
             end
         end
@@ -1033,22 +1233,28 @@ local __O = {};
             if not __t(conflict) then
                 return
             end
-            local ____conflict_120 = conflict
-            local target = ____conflict_120.target
-            local code = ____conflict_120.code
+            local ____conflict_151 = conflict
+            local target = ____conflict_151.target
+            local code = ____conflict_151.code
             local result = api:setBinding(target.action, code, target.slot, {swapConflicts = true})
-            local ____opt_result_123
+            local ____opt_result_154
             if result ~= nil then
-                ____opt_result_123 = result.ok
+                ____opt_result_154 = result.ok
             end
-            if ____opt_result_123 == false then
-                captureCopy.textContent = if __t(result.message) then result.message else "A troca não pôde ser feita. Escolha outra tecla."
+            if ____opt_result_154 == false then
+                local ____t_result_155
+                if __t(result.message) then
+                    ____t_result_155 = result.message
+                else
+                    ____t_result_155 = "A troca não pôde ser feita. Escolha outra tecla."
+                end
+                captureCopy.textContent = ____t_result_155
                 return
             end
             stopCapture(nil)
             saveMessage(nil, "Teclas trocadas e salvas. Nenhuma ação ficou sem atalho.")
             refresh(nil)
-            local ____opt_124 = modal:querySelector(__add(
+            local ____opt_156 = modal:querySelector(__add(
                 __add(
                     __add(
                         __add("[data-binding-action=\"", target.action),
@@ -1058,8 +1264,8 @@ local __O = {};
                 ),
                 "\"]"
             ))
-            if ____opt_124 ~= nil then
-                ____opt_124:focus({preventScroll = true})
+            if ____opt_156 ~= nil then
+                ____opt_156:focus({preventScroll = true})
             end
         end
     )
@@ -1109,7 +1315,7 @@ local __O = {};
                 if event.code == "Escape" then
                     local last = capturing
                     stopCapture(nil)
-                    local ____opt_126 = modal:querySelector(__add(
+                    local ____opt_158 = modal:querySelector(__add(
                         __add(
                             __add(
                                 __add("[data-binding-action=\"", last.action),
@@ -1119,8 +1325,8 @@ local __O = {};
                         ),
                         "\"]"
                     ))
-                    if ____opt_126 ~= nil then
-                        ____opt_126:focus({preventScroll = true})
+                    if ____opt_158 ~= nil then
+                        ____opt_158:focus({preventScroll = true})
                     end
                     return
                 end
@@ -1137,22 +1343,28 @@ local __O = {};
                 end
                 return
             end
-            local ____t_131 = __t
-            local ____t_130 = __t
-            local ____this_129
-            ____this_129 = event.target
-            local ____opt_128 = ____this_129.closest
-            if ____opt_128 ~= nil then
-                ____opt_128 = ____opt_128(____this_129, "[data-control-tab]")
+            local ____t_164 = __t
+            local ____t_result_163
+            local ____t_162 = __t
+            local ____this_161
+            ____this_161 = event.target
+            local ____opt_160 = ____this_161.closest
+            if ____opt_160 ~= nil then
+                ____opt_160 = ____opt_160(____this_161, "[data-control-tab]")
             end
-            __O[2498] = ____opt_128
-            if ____t_131(if ____t_130(____opt_128) then __call(
-                __arrL({"ArrowLeft", "ArrowRight", "Home", "End"}, 4),
-                "includes",
-                event.key
-            ) else __O[2498]) then
+            __O[2529] = ____opt_160
+            if ____t_162(____opt_160) then
+                ____t_result_163 = __call(
+                    __arrL({"ArrowLeft", "ArrowRight", "Home", "End"}, 4),
+                    "includes",
+                    event.key
+                )
+            else
+                ____t_result_163 = __O[2529]
+            end
+            if ____t_164(____t_result_163) then
                 event:preventDefault()
-                local next = if event.key == "Home" then "keys" else if event.key == "End" then "feel" else if tab == "keys" then "feel" else "keys"
+                local next = event.key == "Home" and "keys" or (event.key == "End" and "feel" or (tab == "keys" and "feel" or "keys"))
                 selectTab(nil, next)
                 modal:querySelector(__add(
                     __add("[data-control-tab=\"", next),
@@ -1175,16 +1387,23 @@ local __O = {};
     window:addEventListener(
         "controls-change",
         function(____, event)
-            local ____opt_132 = event.detail
-            if ____opt_132 ~= nil then
-                ____opt_132 = ____opt_132.saved
+            local ____opt_165 = event.detail
+            if ____opt_165 ~= nil then
+                ____opt_165 = ____opt_165.saved
             end
-            if type(____opt_132) == "boolean" then
+            if type(____opt_165) == "boolean" then
                 persistenceAvailable = event.detail.saved
             end
             refreshFeel(nil)
             updateHints(nil)
-            if __t(if __t(modal.open) then not __t(capturing) else modal.open) then
+            local ____t_168 = __t
+            local ____t_result_167
+            if __t(modal.open) then
+                ____t_result_167 = not __t(capturing)
+            else
+                ____t_result_167 = modal.open
+            end
+            if ____t_168(____t_result_167) then
                 renderBindings(nil)
             end
         end
@@ -1213,11 +1432,16 @@ local __O = {};
     local help = window.document:getElementById("helpModal")
     if __t(help) then
         local button = settingsButton(nil, "helpControlsBtn", "controls-configure-link", "CONFIGURAR CONTROLES")
-        local ____t_137 = __t
-        local ____opt_134 = help:querySelector(".help-grid")
-        local ____temp_136 = ____opt_134 and ____opt_134:insertAdjacentElement("beforebegin", button)
-        __O[2499] = ____temp_136
-        local ____ = if ____t_137(____temp_136) then __O[2499] else help:append(button)
+        local ____t_result_173
+        local ____t_172 = __t
+        local ____opt_169 = help:querySelector(".help-grid")
+        local ____temp_171 = ____opt_169 and ____opt_169:insertAdjacentElement("beforebegin", button)
+        __O[2530] = ____temp_171
+        if ____t_172(____temp_171) then
+            ____t_result_173 = __O[2530]
+        else
+            ____t_result_173 = help:append(button)
+        end
     end
     window.ControlSettingsUI = __ord(
         {

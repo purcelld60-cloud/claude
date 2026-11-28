@@ -10,7 +10,13 @@ local __O = {};
 (function()
     local effectiveLook, build, render, drawPreview, open, close, updateInventory, DEFAULT, OPTIONS, look, unlocked, save, jaglionStatus, TRAJES, statusTraje, cobre, isDefault, panel, preview, raf, onClose, t0, ROWS
     function effectiveLook(self)
-        return if __t(look.costume ~= "normal" and statusTraje(nil, look.costume) ~= "ready") then __assign({}, look, {costume = "normal"}) else look
+        local ____t_result_17
+        if __t(look.costume ~= "normal" and statusTraje(nil, look.costume) ~= "ready") then
+            ____t_result_17 = __assign({}, look, {costume = "normal"})
+        else
+            ____t_result_17 = look
+        end
+        return ____t_result_17
     end
     function build(self)
         if __t(panel) then
@@ -23,10 +29,16 @@ local __O = {};
         panel:setAttribute("role", "dialog")
         panel:setAttribute("aria-label", "Espelho da Bigodon")
         panel.innerHTML = "<div class=\"vp-box\"><div class=\"vp-head\"><b>ESPELHO DA BIGODON</b><span class=\"vp-davi\"></span></div><div class=\"vp-body\"><div class=\"vp-mirror\"><canvas width=\"200\" height=\"230\" aria-hidden=\"true\"></canvas><small class=\"vp-note\"></small></div><div class=\"vp-rows\"></div></div><div class=\"vp-actions\"><button type=\"button\" class=\"vp-reset\">PADRÃO</button><button type=\"button\" class=\"vp-done primary-btn\">PRONTO</button></div></div>"
-        local ____t_20 = __t
-        local ____temp_19 = window.document:getElementById("gameShell")
-        __O[136] = ____temp_19
-        if ____t_20(____temp_19) then __O[136] else window.document.body:append(panel)
+        local ____t_result_34
+        local ____t_33 = __t
+        local ____temp_32 = window.document:getElementById("gameShell")
+        __O[136] = ____temp_32
+        if ____t_33(____temp_32) then
+            ____t_result_34 = __O[136]
+        else
+            ____t_result_34 = window.document.body
+        end
+        ____t_result_34:append(panel)
         preview = panel:querySelector("canvas")
         panel:querySelector(".vp-done"):addEventListener("click", close)
         panel:querySelector(".vp-reset"):addEventListener(
@@ -55,96 +67,139 @@ local __O = {};
         local outfit = effectiveLook(nil)
         local status = jaglionStatus(nil)
         local traje = outfit.costume
-        local hint = if status == "reserved" then "Seu Jaglion está pronto. Fale com Davi na Bigodon para recebê-lo." else "Para ganhar o Jaglion, encontre Amanda na entrada da Praça Camacan e aceite o jantar."
+        local hint = status == "reserved" and "Seu Jaglion está pronto. Fale com Davi na Bigodon para recebê-lo." or "Para ganhar o Jaglion, encontre Amanda na entrada da Praça Camacan e aceite o jantar."
         for ____, ____value in __iterar((ROWS)) do
             local key = ____value[1]
             local label = ____value[2]
-            if __t(key == "hatColor" and outfit.hat ~= "bone") then
-                continue
-            end
-            local row = window.document:createElement("div")
-            row.className = __add("vp-row", if __t(cobre(nil, traje, key)) then " is-off" else "")
-            row.innerHTML = __add(
-                __add("<span>", label),
-                "</span>"
-            )
-            local list = window.document:createElement("div")
-            list.className = "vp-opts"
-            for ____, ____value in __iterar((__get(OPTIONS, key))) do
-                local val = ____value[1]
-                local name = ____value[2]
-                local light = ____value[3]
-                local b = window.document:createElement("button")
-                b.type = "button"
-                local color = __call(val, "startsWith", "#")
-                b.className = __add(
-                    __add("vp-opt", if __t(color) then " vp-swatch" else ""),
-                    if __get(outfit, key) == val then " on" else ""
+            do
+                if __t(key == "hatColor" and outfit.hat ~= "bone") then
+                    continue
+                end
+                local row = window.document:createElement("div")
+                row.className = __add(
+                    "vp-row",
+                    __t(cobre(nil, traje, key)) and " is-off" or ""
                 )
-                b:setAttribute("aria-pressed", if __get(outfit, key) == val then "true" else "false")
-                if __t(color) then
-                    b.style:setProperty("--sw", val)
-                    b.title = name
-                    b:setAttribute(
-                        "aria-label",
+                row.innerHTML = __add(
+                    __add("<span>", label),
+                    "</span>"
+                )
+                local list = window.document:createElement("div")
+                list.className = "vp-opts"
+                for ____, ____value in __iterar((__get(OPTIONS, key))) do
+                    local val = ____value[1]
+                    local name = ____value[2]
+                    local light = ____value[3]
+                    local b = window.document:createElement("button")
+                    b.type = "button"
+                    local color = __call(val, "startsWith", "#")
+                    b.className = __add(
                         __add(
-                            __add(
-                                __call(label, "toLowerCase"),
-                                " "
-                            ),
-                            name
-                        )
+                            "vp-opt",
+                            __t(color) and " vp-swatch" or ""
+                        ),
+                        __get(outfit, key) == val and " on" or ""
                     )
-                else
-                    b.textContent = name
+                    b:setAttribute(
+                        "aria-pressed",
+                        __get(outfit, key) == val and "true" or "false"
+                    )
+                    if __t(color) then
+                        b.style:setProperty("--sw", val)
+                        b.title = name
+                        b:setAttribute(
+                            "aria-label",
+                            __add(
+                                __add(
+                                    __call(label, "toLowerCase"),
+                                    " "
+                                ),
+                                name
+                            )
+                        )
+                    else
+                        b.textContent = name
+                    end
+                    if val == "jaglion" then
+                        __call(b.classList, "add", "vp-lion")
+                        if status ~= "ready" then
+                            b.textContent = status == "reserved" and "JAGLION · RESERVADO" or "JAGLION · BLOQUEADO"
+                            b.title = hint
+                        end
+                    elseif __t(key == "costume" and val ~= "normal") then
+                        __call(b.classList, "add", "vp-lion")
+                        if statusTraje(nil, val) ~= "ready" then
+                            b.textContent = __add(name, " · BLOQUEADO")
+                            b.title = __get(TRAJES, val).dica
+                        end
+                    end
+                    local ____t_result_37
+                    local ____t_36 = __t
+                    local ____temp_35 = key == "costume" and statusTraje(nil, val) ~= "ready"
+                    __O[137] = ____temp_35
+                    if ____t_36(____temp_35) then
+                        ____t_result_37 = __O[137]
+                    else
+                        ____t_result_37 = cobre(nil, traje, key)
+                    end
+                    b.disabled = ____t_result_37
+                    b:addEventListener(
+                        "click",
+                        function()
+                            __set(look, key, val)
+                            if key == "shirt" then
+                                local ____look_39 = look
+                                local ____t_result_38
+                                if __t(light) then
+                                    ____t_result_38 = light
+                                else
+                                    ____t_result_38 = look.shirtLight
+                                end
+                                ____look_39.shirtLight = ____t_result_38
+                            end
+                            save(nil)
+                            render(nil)
+                            local ____opt_42 = panel:querySelector(("[data-k=\"" .. tostring(key)) .. "\"] .on")
+                            if ____opt_42 ~= nil then
+                                ____opt_42 = ____opt_42.focus
+                            end
+                            if ____opt_42 ~= nil then
+                                ____opt_42(____opt_42)
+                            end
+                        end
+                    )
+                    list:append(b)
                 end
-                if val == "jaglion" then
-                    __call(b.classList, "add", "vp-lion")
-                    if status ~= "ready" then
-                        b.textContent = if status == "reserved" then "JAGLION · RESERVADO" else "JAGLION · BLOQUEADO"
-                        b.title = hint
-                    end
-                elseif __t(key == "costume" and val ~= "normal") then
-                    __call(b.classList, "add", "vp-lion")
-                    if statusTraje(nil, val) ~= "ready" then
-                        b.textContent = __add(name, " · BLOQUEADO")
-                        b.title = __get(TRAJES, val).dica
-                    end
-                end
-                local ____t_22 = __t
-                local ____temp_21 = key == "costume" and statusTraje(nil, val) ~= "ready"
-                __O[137] = ____temp_21
-                b.disabled = if ____t_22(____temp_21) then __O[137] else cobre(nil, traje, key)
-                b:addEventListener(
-                    "click",
-                    function()
-                        __set(look, key, val)
-                        if key == "shirt" then
-                            look.shirtLight = if __t(light) then light else look.shirtLight
-                        end
-                        save(nil)
-                        render(nil)
-                        local ____opt_25 = panel:querySelector(("[data-k=\"" .. tostring(key)) .. "\"] .on")
-                        if ____opt_25 ~= nil then
-                            ____opt_25 = ____opt_25.focus
-                        end
-                        if ____opt_25 ~= nil then
-                            ____opt_25(____opt_25)
-                        end
-                    end
-                )
-                list:append(b)
+                row.dataset.k = key
+                row:append(list)
+                rows:append(row)
             end
-            row.dataset.k = key
-            row:append(list)
-            rows:append(row)
         end
         local falta = __call(
             __arrL({"dajegue", "caipira", "farda"}, 3),
             "find",
             function(____, k) return statusTraje(nil, k) ~= "ready" end
         )
-        panel:querySelector(".vp-note").textContent = if __t(__get(TRAJES, traje)) then __get(TRAJES, traje).nota else if status ~= "ready" then hint else if __t(falta) then __get(TRAJES, falta).dica else if __t(isDefault(nil, outfit)) then "O Da Roça de sempre." else "Visual novo, mesma resenha."
+        local ____temp_47 = panel:querySelector(".vp-note")
+        local ____t_result_46
+        if __t(__get(TRAJES, traje)) then
+            ____t_result_46 = __get(TRAJES, traje).nota
+        else
+            local ____temp_45
+            if status ~= "ready" then
+                ____temp_45 = hint
+            else
+                local ____t_result_44
+                if __t(falta) then
+                    ____t_result_44 = __get(TRAJES, falta).dica
+                else
+                    ____t_result_44 = __t(isDefault(nil, outfit)) and "O Da Roça de sempre." or "Visual novo, mesma resenha."
+                end
+                ____temp_45 = ____t_result_44
+            end
+            ____t_result_46 = ____temp_45
+        end
+        ____temp_47.textContent = ____t_result_46
     end
     function drawPreview(self, now)
         if __t(panel.hidden) then
@@ -174,18 +229,23 @@ local __O = {};
         c:fillRect(40, 214, 120, 6)
         do
             pcall(function()
-                local ____opt_29 = window.Art
-                if ____opt_29 ~= nil then
-                    ____opt_29 = ____opt_29.drawCharacter
+                local ____opt_50 = window.Art
+                if ____opt_50 ~= nil then
+                    ____opt_50 = ____opt_50.drawCharacter
                 end
-                if ____opt_29 ~= nil then
-                    ____opt_29(
-                        ____opt_29,
+                if ____opt_50 ~= nil then
+                    ____opt_50(
+                        ____opt_50,
                         c,
                         "daroca",
                         100,
                         214,
-                        {facing = if math.sin(t * 0.6) > -0.2 then 1 else -1, frame = t, scale = 2.1, grounded = true}
+                        {
+                            facing = math.sin(t * 0.6) > -0.2 and 1 or -1,
+                            frame = t,
+                            scale = 2.1,
+                            grounded = true
+                        }
                     )
                 end
             end)
@@ -199,10 +259,38 @@ local __O = {};
         build(nil)
         unlocked = true
         save(nil)
-        onClose = if __t(opts.onClose) then opts.onClose else nil
-        panel:querySelector(".vp-davi").textContent = if __t(opts.line) then opts.line else "Davi: E aí, Da Roça, vai querer o quê hoje?"
-        panel:querySelector(".vp-head b").textContent = if __t(opts.title) then opts.title else "ESPELHO DA BIGODON"
-        panel:setAttribute("aria-label", if __t(opts.title) then opts.title else "Espelho da Bigodon")
+        local ____t_result_52
+        if __t(opts.onClose) then
+            ____t_result_52 = opts.onClose
+        else
+            ____t_result_52 = nil
+        end
+        onClose = ____t_result_52
+        local ____temp_54 = panel:querySelector(".vp-davi")
+        local ____t_result_53
+        if __t(opts.line) then
+            ____t_result_53 = opts.line
+        else
+            ____t_result_53 = "Davi: E aí, Da Roça, vai querer o quê hoje?"
+        end
+        ____temp_54.textContent = ____t_result_53
+        local ____temp_56 = panel:querySelector(".vp-head b")
+        local ____t_result_55
+        if __t(opts.title) then
+            ____t_result_55 = opts.title
+        else
+            ____t_result_55 = "ESPELHO DA BIGODON"
+        end
+        ____temp_56.textContent = ____t_result_55
+        local ____panel_58 = panel
+        local ____panel_setAttribute_59 = panel.setAttribute
+        local ____t_result_57
+        if __t(opts.title) then
+            ____t_result_57 = opts.title
+        else
+            ____t_result_57 = "Espelho da Bigodon"
+        end
+        ____panel_setAttribute_59(____panel_58, "aria-label", ____t_result_57)
         render(nil)
         panel.hidden = false
         t0 = window.performance:now()
@@ -211,36 +299,42 @@ local __O = {};
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = true}}))
         window:setTimeout(
             function()
-                local ____opt_33 = panel:querySelector(".vp-opt.on")
-                if ____opt_33 ~= nil then
-                    ____opt_33 = ____opt_33.focus
+                local ____opt_62 = panel:querySelector(".vp-opt.on")
+                if ____opt_62 ~= nil then
+                    ____opt_62 = ____opt_62.focus
                 end
-                local ____opt_result_35
-                if ____opt_33 ~= nil then
-                    ____opt_result_35 = ____opt_33(____opt_33)
+                local ____opt_result_64
+                if ____opt_62 ~= nil then
+                    ____opt_result_64 = ____opt_62(____opt_62)
                 end
-                return ____opt_result_35
+                return ____opt_result_64
             end,
             40
         )
         updateInventory(nil)
     end
     function close(self)
-        local ____t_38 = __t
-        local ____t_37 = __t
-        local ____temp_36 = not __t(panel)
-        __O[138] = ____temp_36
-        if ____t_38(if ____t_37(____temp_36) then __O[138] else panel.hidden) then
+        local ____t_68 = __t
+        local ____t_result_67
+        local ____t_66 = __t
+        local ____temp_65 = not __t(panel)
+        __O[138] = ____temp_65
+        if ____t_66(____temp_65) then
+            ____t_result_67 = __O[138]
+        else
+            ____t_result_67 = panel.hidden
+        end
+        if ____t_68(____t_result_67) then
             return
         end
         panel.hidden = true
         window:cancelAnimationFrame(raf)
         save(nil)
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-        local ____opt_41 = window.document:getElementById("gameCanvas")
-        local ____opt_39 = ____opt_41 and ____opt_41.focus
-        if ____opt_39 ~= nil then
-            ____opt_39(____opt_41)
+        local ____opt_71 = window.document:getElementById("gameCanvas")
+        local ____opt_69 = ____opt_71 and ____opt_71.focus
+        if ____opt_69 ~= nil then
+            ____opt_69(____opt_71)
         end
         local fn = onClose
         onClose = nil
@@ -381,9 +475,23 @@ local __O = {};
     do
         pcall(function()
             local d = window.JSON:parse(window.localStorage:getItem(KEY))
-            if __t(if __t(d) then type(d) == "table" else d) then
+            local ____t_1 = __t
+            local ____t_result_0
+            if __t(d) then
+                ____t_result_0 = type(d) == "table"
+            else
+                ____t_result_0 = d
+            end
+            if ____t_1(____t_result_0) then
                 unlocked = not not __t(d.unlocked)
-                if __t(if __t(d.trajes) then type(d.trajes) == "table" else d.trajes) then
+                local ____t_3 = __t
+                local ____t_result_2
+                if __t(d.trajes) then
+                    ____t_result_2 = type(d.trajes) == "table"
+                else
+                    ____t_result_2 = d.trajes
+                end
+                if ____t_3(____t_result_2) then
                     for ____, k in __iterar((__arrL({"dajegue", "caipira", "farda"}, 3))) do
                         __set(
                             trajes,
@@ -415,17 +523,23 @@ local __O = {};
         end
     end
     jaglionStatus = function()
-        local ____t_5 = __t
-        local ____opt_2 = window.Game
-        if ____opt_2 ~= nil then
-            ____opt_2 = ____opt_2.getJaglionStatus
+        local ____t_result_10
+        local ____t_9 = __t
+        local ____opt_6 = window.Game
+        if ____opt_6 ~= nil then
+            ____opt_6 = ____opt_6.getJaglionStatus
         end
-        local ____opt_result_4
-        if ____opt_2 ~= nil then
-            ____opt_result_4 = ____opt_2(____opt_2)
+        local ____opt_result_8
+        if ____opt_6 ~= nil then
+            ____opt_result_8 = ____opt_6(____opt_6)
         end
-        __O[129] = ____opt_result_4
-        return if ____t_5(____opt_result_4) then __O[129] else "locked"
+        __O[129] = ____opt_result_8
+        if ____t_9(____opt_result_8) then
+            ____t_result_10 = __O[129]
+        else
+            ____t_result_10 = "locked"
+        end
+        return ____t_result_10
     end
     TRAJES = __ord(
         {
@@ -437,37 +551,84 @@ local __O = {};
         "jaglion,dajegue,caipira,farda"
     )
     statusTraje = function(____, id)
-        local ____t_8 = __t
-        local ____t_7 = __t
-        local ____get_result_6 = __get(trajes, id)
-        __O[130] = ____get_result_6
-        return if id == "normal" then "ready" else if id == "jaglion" then jaglionStatus(nil) else if ____t_8(if ____t_7(____get_result_6) then __O[130] else window.DAROCA_DEV) then "ready" else "locked"
+        local ____temp_16
+        if id == "normal" then
+            ____temp_16 = "ready"
+        else
+            local ____temp_15
+            if id == "jaglion" then
+                ____temp_15 = jaglionStatus(nil)
+            else
+                local ____t_14 = __t
+                local ____t_result_13
+                local ____t_12 = __t
+                local ____get_result_11 = __get(trajes, id)
+                __O[130] = ____get_result_11
+                if ____t_12(____get_result_11) then
+                    ____t_result_13 = __O[130]
+                else
+                    ____t_result_13 = window.DAROCA_DEV
+                end
+                ____temp_15 = ____t_14(____t_result_13) and "ready" or "locked"
+            end
+            ____temp_16 = ____temp_15
+        end
+        return ____temp_16
     end
     cobre = function(____, traje, key)
-        local ____t_10 = __t
-        local ____temp_9 = key ~= "costume"
-        __O[135] = ____temp_9
-        local ____t_16 = __t
-        local ____t_12 = __t
-        local ____temp_11 = traje == "jaglion" or traje == "dajegue"
-        __O[132] = ____temp_11
-        local ____t_14 = __t
-        local ____temp_13 = traje == "caipira"
-        __O[131] = ____temp_13
-        local ____temp_15 = if ____t_12(____temp_11) then __O[132] else if ____t_14(____temp_13) then __call(
-            __arrL({"hat", "hatColor", "shirt", "pants"}, 4),
-            "includes",
-            key
-        ) else __O[131]
-        __O[134] = ____temp_15
-        local ____t_18 = __t
-        local ____temp_17 = traje == "farda"
-        __O[133] = ____temp_17
-        return if ____t_10(____temp_9) then if ____t_16(____temp_15) then __O[134] else if ____t_18(____temp_17) then __call(
-            __arrL({"shirt", "pants"}, 2),
-            "includes",
-            key
-        ) else __O[133] else __O[135]
+        local ____t_result_31
+        local ____t_19 = __t
+        local ____temp_18 = key ~= "costume"
+        __O[135] = ____temp_18
+        if ____t_19(____temp_18) then
+            local ____t_result_30
+            local ____t_26 = __t
+            local ____t_result_25
+            local ____t_21 = __t
+            local ____temp_20 = traje == "jaglion" or traje == "dajegue"
+            __O[132] = ____temp_20
+            if ____t_21(____temp_20) then
+                ____t_result_25 = __O[132]
+            else
+                local ____t_result_24
+                local ____t_23 = __t
+                local ____temp_22 = traje == "caipira"
+                __O[131] = ____temp_22
+                if ____t_23(____temp_22) then
+                    ____t_result_24 = __call(
+                        __arrL({"hat", "hatColor", "shirt", "pants"}, 4),
+                        "includes",
+                        key
+                    )
+                else
+                    ____t_result_24 = __O[131]
+                end
+                ____t_result_25 = ____t_result_24
+            end
+            __O[134] = ____t_result_25
+            if ____t_26(____t_result_25) then
+                ____t_result_30 = __O[134]
+            else
+                local ____t_result_29
+                local ____t_28 = __t
+                local ____temp_27 = traje == "farda"
+                __O[133] = ____temp_27
+                if ____t_28(____temp_27) then
+                    ____t_result_29 = __call(
+                        __arrL({"shirt", "pants"}, 2),
+                        "includes",
+                        key
+                    )
+                else
+                    ____t_result_29 = __O[133]
+                end
+                ____t_result_30 = ____t_result_29
+            end
+            ____t_result_31 = ____t_result_30
+        else
+            ____t_result_31 = __O[135]
+        end
+        return ____t_result_31
     end
     isDefault = function(____, outfit) return __call(
         __keys(DEFAULT),
@@ -496,7 +657,13 @@ local __O = {};
         {
             get = function()
                 local outfit = effectiveLook(nil)
-                return if __t(isDefault(nil, outfit)) then nil else outfit
+                local ____t_result_73
+                if __t(isDefault(nil, outfit)) then
+                    ____t_result_73 = nil
+                else
+                    ____t_result_73 = outfit
+                end
+                return ____t_result_73
             end,
             current = function() return __assign(
                 {},
@@ -507,21 +674,33 @@ local __O = {};
             isOpen = function() return not not __t(panel) and not __t(panel.hidden) end,
             unlocked = function() return unlocked end,
             set = function(____, k, v)
-                local ____t_45 = __t
-                local ____t_44 = __t
-                local ____temp_43 = DEFAULT[k] ~= nil and type(v) == "string"
-                __O[139] = ____temp_43
-                if ____t_45(if ____t_44(____temp_43) then not __t(k == "costume" and statusTraje(nil, v) ~= "ready") else __O[139]) then
+                local ____t_77 = __t
+                local ____t_result_76
+                local ____t_75 = __t
+                local ____temp_74 = DEFAULT[k] ~= nil and type(v) == "string"
+                __O[139] = ____temp_74
+                if ____t_75(____temp_74) then
+                    ____t_result_76 = not __t(k == "costume" and statusTraje(nil, v) ~= "ready")
+                else
+                    ____t_result_76 = __O[139]
+                end
+                if ____t_77(____t_result_76) then
                     __set(look, k, v)
                     save(nil)
                 end
             end,
             ganhar = function(____, id)
-                local ____t_48 = __t
-                local ____t_47 = __t
-                local ____temp_46 = not __t(__get(TRAJES, id)) or id == "jaglion"
-                __O[140] = ____temp_46
-                if ____t_48(if ____t_47(____temp_46) then __O[140] else __get(trajes, id)) then
+                local ____t_81 = __t
+                local ____t_result_80
+                local ____t_79 = __t
+                local ____temp_78 = not __t(__get(TRAJES, id)) or id == "jaglion"
+                __O[140] = ____temp_78
+                if ____t_79(____temp_78) then
+                    ____t_result_80 = __O[140]
+                else
+                    ____t_result_80 = __get(trajes, id)
+                end
+                if ____t_81(____t_result_80) then
                     return false
                 end
                 __set(trajes, id, true)

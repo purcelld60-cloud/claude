@@ -59,7 +59,16 @@ local ____exports = {};
     local band = __ord({start = 0.3, ["end"] = 0.7}, "start,end")
     local function invitation(self, q)
         if __t(q.amandaDating) then
-            return __arrL({{name = "Amanda", text = if __t(q.jaglionClaimed) then "Olha o meu par da selva! Ainda cabe um jantar nessa agenda de herói?" else "Deixei um presente com o Davi na Bigodon. E a nossa mesa continua lá, viu?"}, {name = "Amanda", text = "Se quiser repetir a sobremesa, vem comigo.", actionLabel = "Jantar de novo"}}, 2)
+            return __arrL(
+                {
+                    {
+                        name = "Amanda",
+                        text = __t(q.jaglionClaimed) and "Olha o meu par da selva! Ainda cabe um jantar nessa agenda de herói?" or "Deixei um presente com o Davi na Bigodon. E a nossa mesa continua lá, viu?"
+                    },
+                    {name = "Amanda", text = "Se quiser repetir a sobremesa, vem comigo.", actionLabel = "Jantar de novo"}
+                },
+                2
+            )
         end
         if __t(q.amandaInvited) then
             return __arrL({{name = "Amanda", text = "Guardei a mesa da janela. Hoje a gente vai no nosso tempo. Bora?", actionLabel = "Ir ao jantar"}}, 1)
@@ -102,7 +111,14 @@ local ____exports = {};
         end
     end
     local function submit(self, s, value)
-        if __t(if __t(s.done) then s.done else __gt(s.cooldown, 0)) then
+        local ____t_1 = __t
+        local ____t_result_0
+        if __t(s.done) then
+            ____t_result_0 = s.done
+        else
+            ____t_result_0 = __gt(s.cooldown, 0)
+        end
+        if ____t_1(____t_result_0) then
             return false
         end
         if s.phase == "choice" then
@@ -116,7 +132,14 @@ local ____exports = {};
             if not __t(answer) then
                 return false
             end
-            if __t(if __t(s.calm) then __get(answer, 1) else s.calm) then
+            local ____t_3 = __t
+            local ____t_result_2
+            if __t(s.calm) then
+                ____t_result_2 = __get(answer, 1)
+            else
+                ____t_result_2 = s.calm
+            end
+            if ____t_3(____t_result_2) then
                 s.score = s.score + 1
             end
             s.feedback = __get(answer, 2)
@@ -128,15 +151,15 @@ local ____exports = {};
         end
         if s.phase == "breath" then
             s.calm = __ge(s.marker, band.start) and __le(s.marker, band["end"])
-            local ____t_4 = __t
-            local ____temp_3 = not __t(s.calm)
-            if ____temp_3 then
-                local ____s_0, ____misses_1 = s, "misses"
-                local ____s_misses_2 = ____s_0[____misses_1] + 1
-                ____s_0[____misses_1] = ____s_misses_2
-                ____temp_3 = ____s_misses_2 < 2
+            local ____t_8 = __t
+            local ____temp_7 = not __t(s.calm)
+            if ____temp_7 then
+                local ____s_4, ____misses_5 = s, "misses"
+                local ____s_misses_6 = ____s_4[____misses_5] + 1
+                ____s_4[____misses_5] = ____s_misses_6
+                ____temp_7 = ____s_misses_6 < 2
             end
-            if ____t_4(____temp_3) then
+            if ____t_8(____temp_7) then
                 s.feedback = "“Sem pressa, chapéu.” Espere o coração chegar ao bordado claro e respire."
                 s.cooldown = 0.42
                 return true
@@ -178,7 +201,13 @@ local ____exports = {};
             choices = nil
         }
         if s.phase == "breath" then
-            v.text = if __t(s.feedback) then s.feedback else __add(course.thought, " Respire quando o coração entrar na faixa clara.")
+            local ____t_result_9
+            if __t(s.feedback) then
+                ____t_result_9 = s.feedback
+            else
+                ____t_result_9 = __add(course.thought, " Respire quando o coração entrar na faixa clara.")
+            end
+            v.text = ____t_result_9
             v.actionLabel = "Respirar"
         elseif s.phase == "choice" then
             v.speaker = "Amanda"
@@ -195,14 +224,14 @@ local ____exports = {};
         elseif s.phase == "reply" then
             v.speaker = "À mesa"
             v.text = s.feedback
-            v.actionLabel = if s.course == __len(courses) - 1 then "Ouvir Amanda" else "Próximo prato"
+            v.actionLabel = s.course == __len(courses) - 1 and "Ouvir Amanda" or "Próximo prato"
         else
             v.speaker = "Amanda"
             if __t(__ge(s.score, 2) and not __t(s.options.dating)) then
                 v.text = "“Eu queria te ver de novo até nos dias em que ninguém roubar bolo nenhum. Quer namorar comigo?”"
                 v.actionLabel = "Quero namorar!"
             else
-                v.text = if __t(s.options.dating) then "“Gosto de ter uma mesa nossa. Da próxima vez, a sobremesa é por minha conta.”" else "“Hoje a gente se atropelou um pouco, né? Outro dia a gente tenta de novo. Me encontra na praça.”"
+                v.text = __t(s.options.dating) and "“Gosto de ter uma mesa nossa. Da próxima vez, a sobremesa é por minha conta.”" or "“Hoje a gente se atropelou um pouco, né? Outro dia a gente tenta de novo. Me encontra na praça.”"
                 v.actionLabel = "Voltar à praça"
             end
         end
