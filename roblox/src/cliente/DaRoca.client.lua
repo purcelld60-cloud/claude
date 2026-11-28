@@ -71,6 +71,8 @@ if ei then
     if okC then eiPagina = rP; imagemPagina.Parent = palco else imagemPagina:Destroy(); imagemPagina = nil end
   end
 end
+-- interface "de baixo" (embaixo do logo e dos canvas pequenos), criada quando precisar
+local imagemBaixo, eiBaixo
 local function novaImagemCv(w, h)
   local ok, r = pcall(function() return AssetService:CreateEditableImage({ Size = Vector2.new(w, h) }) end)
   if ok then return r end
@@ -286,11 +288,12 @@ local function soltar(code, key) if presas[code] then presas[code] = nil; N.tecl
 -- ===== entrada: mouse e toque (coordenadas da tela do jogo, 960 x 540) =====
 local function posicaoNoJogo(p)
   local inset = GuiService:GetGuiInset()
-  local x = (p.X + 0 - palco.AbsolutePosition.X) / palco.AbsoluteSize.X * W
+  local x = (p.X + inset.X - palco.AbsolutePosition.X) / palco.AbsoluteSize.X * W
   local y = (p.Y + inset.Y - palco.AbsolutePosition.Y) / palco.AbsoluteSize.Y * H
   return x, y
 end
 local toques, proxToque, ignorados = {}, 1, {}
+local tocouControle, ultimoToque, botaoInfo -- definidos com os controles de toque e o painel
 local function idDoToque(input) local id = toques[input]; if not id then id = proxToque; proxToque = proxToque + 1; toques[input] = id end; return id end
 
 local paginaControles -- criada mais abaixo
@@ -311,8 +314,12 @@ UIS.InputBegan:Connect(function(input, processado)
   elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
     local x, y = posicaoNoJogo(input.Position); N.ponteiro("pointerdown", x, y, 1, false)
   elseif input.UserInputType == Enum.UserInputType.Touch then
-    if processado then ignorados[input] = true; return end -- toque num controle do Roblox (direcional, botões)
-    local x, y = posicaoNoJogo(input.Position); N.ponteiro("pointerdown", x, y, idDoToque(input), true)
+    -- toque que começou num controle de toque do Roblox (direcional, botões) não vai para a página do jogo
+    -- (o "processado" do Roblox no celular não é confiável: depende de Active e muda entre PC e celular)
+    if tocouControle and tocouControle(input.Position) then ignorados[input] = true; return end
+    local x, y = posicaoNoJogo(input.Position)
+    ultimoToque = { x = x, y = y, alvo = (N.elementoEm and desenhista and desenhista.chave) and desenhista.chave(N.elementoEm(x, y)) or "?" }
+    N.ponteiro("pointerdown", x, y, idDoToque(input), true)
   end
 end)
 UIS.InputEnded:Connect(function(input)
@@ -503,6 +510,16 @@ botaoToque("FALAR", "KeyE", "e", .68, .70, .15, Color3.fromRGB(60, 96, 140))
 botaoToque("REEIS", "KeyR", "r", .70, .46, .11)
 botaoToque("BIVOLT", "KeyB", "b", .80, .40, .11)
 botaoToque("CARRO", "KeyV", "v", .91, .34, .11)
+tocouControle = function(pos)
+  local inset = GuiService:GetGuiInset()
+  local x, y = pos.X + inset.X, pos.Y + inset.Y
+  local function dentro(o) local a, t = o.AbsolutePosition, o.AbsoluteSize; return x >= a.X and y >= a.Y and x <= a.X + t.X and y <= a.Y + t.Y end
+  if botaoInfo and botaoInfo.Visible and dentro(botaoInfo) then return true end
+  if not controlesToque.Visible then return false end
+  if dentro(zonaDirecional) then return true end
+  for _, bt in ipairs(botoesToque) do if dentro(bt.b) then return true end end
+  return false
+end
 local ESTADOS_JOGO = { jogo = true, dialogo = true, luta = true }
 local function atualizarControlesToque()
   local mostrar = N.toque and desenhista and ESTADOS_JOGO[desenhista.estadoNome] or false
@@ -531,14 +548,17 @@ end
 -- cada canvas da página (jogo, fundo da tela inicial, logo, minigames) vira uma imagem própria, enviada só quando
 -- o canvas muda; a imagem da primeira vez reaproveita a que foi criada no começo (ei)
 local camadasCv, livreEi = {}, ei
-local medidas = { jogo = 0, pagina = 0, envios = 0 }
+local medidas = { jogo = 0, pagina = 0, envios = 0, imagens = 2, falhas = 0 }
+-- Sem memória de imagem para alguma camada (celular com pouca memória para EditableImage): volta a desenhar tudo
+-- numa imagem só, como antes, para nada sumir da tela.
+local voltarParaImagemUnica
 local function camadaDe(el, w, h)
   local c = camadasCv[el]
   if c and (c.w ~= w or c.h ~= h) then if c.ei ~= ei then c.ei:Destroy() end; c.label:Destroy(); camadasCv[el] = nil; c = nil end
   if not c then
     local e
-    if livreEi and w == W and h == H then e = livreEi; livreEi = nil else e = (w > 0 and h > 0 and w <= 1024 and h <= 1024) and novaImagemCv(w, h) or nil end
-    if not e then return nil end
+    if livreEi and w == W and h == H then e = livreEi; livreEi = nil else e = (w > 0 and h > 0 and w <= 1024 and h <= 1024) and novaImagemCv(w, h) or nil; if e then medidas.imagens = medidas.imagens + 1 end end
+    if not e then medidas.falhas = medidas.falhas + 1; if voltarParaImagemUnica then voltarParaImagemUnica("sem memória para a camada " .. w .. "x" .. h) end; return nil end
     local l = (e == ei) and imagem or Instance.new("ImageLabel")
     l.BackgroundTransparency = 1; l.ResampleMode = Enum.ResamplerMode.Pixelated; l.BorderSizePixel = 0; l.ImageTransparency = 0; l.Parent = palco
     if e ~= ei then l.ImageContent = Content.fromObject(e) end
@@ -601,6 +621,16 @@ local function mostrarCanvas()
     end
   end
 end
+voltarParaImagemUnica = function(motivo)
+  if not camadas then return end
+  warn("[Da Roça] tela em uma imagem só: " .. tostring(motivo))
+  camadas = false; window.DAROCA_CAMADAS = false
+  for el, c in pairs(camadasCv) do if c.label ~= imagem then c.label.Visible = false end end
+  if imagemPagina then imagemPagina.Visible = false end
+  if imagemBaixo then imagemBaixo.Visible = false end
+  imagem.ImageContent = Content.fromObject(ei); imagem.Position = UDim2.fromScale(0, 0); imagem.Size = UDim2.fromScale(1, 1)
+  imagem.ImageRectOffset = Vector2.zero; imagem.ImageRectSize = Vector2.zero; imagem.ImageTransparency = 0; imagem.ZIndex = 50; imagem.Visible = true
+end
 local function umQuadro()
   emQuadro = true
   local t0 = os.clock()
@@ -609,8 +639,22 @@ local function umQuadro()
     local t1 = os.clock()
     local tela, mudou = desenhista.desenhar({ camadas = true })
     emQuadro = false
-    if mudou then enviar(eiPagina, tela); medidas.envios = medidas.envios + 1 end
-    mostrarCanvas()
+    if mudou then
+      enviar(eiPagina, tela); medidas.envios = medidas.envios + 1
+      local k = desenhista.indiceBaixo
+      if k then
+        if not eiBaixo then
+          eiBaixo = novaImagemCv(W, H)
+          if eiBaixo then
+            medidas.imagens = medidas.imagens + 1
+            imagemBaixo = Instance.new("ImageLabel"); imagemBaixo.Size = UDim2.fromScale(1, 1); imagemBaixo.BackgroundTransparency = 1
+            imagemBaixo.ResampleMode = Enum.ResamplerMode.Pixelated; imagemBaixo.ImageContent = Content.fromObject(eiBaixo); imagemBaixo.Parent = palco
+          else medidas.falhas = medidas.falhas + 1; voltarParaImagemUnica("sem memória para a interface de baixo") end
+        end
+        if eiBaixo then enviar(eiBaixo, desenhista.telaBaixo); imagemBaixo.ZIndex = 50 + k * 6; imagemBaixo.Visible = true end
+      elseif imagemBaixo then imagemBaixo.Visible = false end
+    end
+    if camadas then mostrarCanvas() end
     medidas.jogo, medidas.pagina = t1 - t0, os.clock() - t1
   else
     local tela = desenhista and desenhista.desenhar() or window.document:getElementById("gameCanvas")
@@ -759,7 +803,14 @@ local painel = Instance.new("TextLabel")
 painel.Visible = false; painel.BackgroundColor3 = Color3.new(0, 0, 0); painel.BackgroundTransparency = .3; painel.BorderSizePixel = 0
 painel.TextColor3 = Color3.fromRGB(255, 233, 168); painel.Font = Enum.Font.Code; painel.TextSize = 14
 painel.TextXAlignment = Enum.TextXAlignment.Left; painel.TextYAlignment = Enum.TextYAlignment.Top
-painel.Size = UDim2.fromOffset(360, 132); painel.Position = UDim2.fromOffset(8, 44); painel.ZIndex = 30; painel.Parent = gui
+painel.Size = UDim2.fromOffset(380, 150); painel.Position = UDim2.fromOffset(8, 44); painel.ZIndex = 30; painel.Parent = gui
+painel.TextWrapped = true
+-- botão "i" (canto de baixo à esquerda, na faixa preta do celular): abre e fecha o painel sem teclado
+botaoInfo = Instance.new("TextButton")
+botaoInfo.AnchorPoint = Vector2.new(0, 1); botaoInfo.Position = UDim2.new(0, 6, 1, -6); botaoInfo.Size = UDim2.fromOffset(26, 26)
+botaoInfo.BackgroundColor3 = Color3.fromRGB(40, 28, 18); botaoInfo.BackgroundTransparency = .35; botaoInfo.TextColor3 = Color3.fromRGB(255, 233, 168)
+botaoInfo.Font = Enum.Font.Code; botaoInfo.TextSize = 16; botaoInfo.Text = "i"; botaoInfo.ZIndex = 31; botaoInfo.Parent = gui
+botaoInfo.Activated:Connect(function() painel.Visible = not painel.Visible end)
 local somaP = { n = 0, jogo = 0, pagina = 0, fundo = 0, total = 0, envios = 0, t = os.clock() }
 local function atualizarPainel(tFundo, tTotal)
   somaP.n = somaP.n + 1; somaP.jogo = somaP.jogo + (medidas.jogo or 0); somaP.pagina = somaP.pagina + (medidas.pagina or 0)
@@ -769,9 +820,11 @@ local function atualizarPainel(tFundo, tTotal)
   if painel.Visible then
     local n = math.max(1, somaP.n)
     local nivel = "?"; pcall(function() nivel = tostring(window.Graphics:level()) end)
-    painel.Text = ("DA ROÇA · %s\n%.0f quadros/s\nlua: %.1f ms (jogo %.1f · tela %.1f · cenário %.1f)\nenvios de imagem: %.0f/s\nqualidade: %s · camadas: %s\ncena: %s · nativo: %s"):format(
+    local ut = ultimoToque and ("%.0f,%.0f → %s"):format(ultimoToque.x, ultimoToque.y, tostring(ultimoToque.alvo)) or "nenhum"
+    painel.Text = ("DA ROÇA · %s\n%.0f quadros/s\nlua: %.1f ms (jogo %.1f · tela %.1f · cenário %.1f)\nenvios de imagem: %.0f/s · imagens %d (falhas %d)\nqualidade: %s · camadas: %s · toque: %s\ncena: %s · tela: %s\nÚltimo toque: %s"):format(
       VERSAO, somaP.n / (agora - somaP.t), somaP.total / n * 1000, somaP.jogo / n * 1000, somaP.pagina / n * 1000, somaP.fundo / n * 1000,
-      medidas.envios / (agora - somaP.t), nivel, window.DAROCA_CAMADAS and "sim" or "não", tostring(window.DAROCA_QUADRO_CAMADAS), RunService:IsStudio() and "Studio" or "não")
+      medidas.envios / (agora - somaP.t), medidas.imagens, medidas.falhas, nivel, (camadas and window.DAROCA_CAMADAS) and "sim" or "não", N.toque and "sim" or "não",
+      tostring(window.DAROCA_QUADRO_CAMADAS), tostring(desenhista and desenhista.estadoNome), ut)
   end
   medidas.envios = 0
   somaP = { n = 0, jogo = 0, pagina = 0, fundo = 0, total = 0, t = agora }

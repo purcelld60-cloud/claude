@@ -6370,6 +6370,16 @@ local __O = {};
     )
     __L1.conteudo = __L1.tela:querySelector(".start-content")
     __L1.placaHtml = __L1.tela:querySelector(".wooden-title")
+    local ____t_174 = __t
+    local ____t_result_173
+    if __t(window.DAROCA_ROBLOX) then
+        ____t_result_173 = __L1.placaHtml
+    else
+        ____t_result_173 = window.DAROCA_ROBLOX
+    end
+    if ____t_174(____t_result_173) then
+        __L1.placaHtml.hidden = true
+    end
     if __t(__L1.conteudo) then
         if __t(__L1.placaHtml) then
             __L1.placaHtml:before(logoCv)
@@ -6379,7 +6389,10 @@ local __O = {};
     end
     __L1.dica = window.document:createElement("div")
     __L1.dica.className = "tr-dica"
-    __L1.dica.innerHTML = "<b>✿</b> <span class=\"longa\">Toque no cenário: plante na horta, assuste as galinhas, troque o dia no sol...</span><span class=\"curta\">Toque no cenário!</span>"
+    __L1.dica.innerHTML = __add(
+        __t(window.DAROCA_ROBLOX) and "" or "<b>✿</b> ",
+        "<span class=\"longa\">Toque no cenário: plante na horta, assuste as galinhas, troque o dia no sol...</span><span class=\"curta\">Toque no cenário!</span>"
+    )
     do
         pcall(function()
             if window.localStorage:getItem("daroca-tela-dica") == "1" then
@@ -6411,22 +6424,22 @@ local __O = {};
         "pointerdown",
         function(____, e)
             local alvo = e.target
-            local ____t_179 = __t
-            local ____t_result_178
-            local ____t_174 = __t
-            local ____temp_173 = alvo ~= __L1.tela and alvo ~= __L1.cvFundo
-            __O[3264] = ____temp_173
-            if ____t_174(____temp_173) then
-                local ____t_177 = __t
-                local ____opt_175 = alvo.classList
-                if ____opt_175 ~= nil then
-                    ____opt_175 = ____opt_175:contains("start-content")
+            local ____t_181 = __t
+            local ____t_result_180
+            local ____t_176 = __t
+            local ____temp_175 = alvo ~= __L1.tela and alvo ~= __L1.cvFundo
+            __O[3264] = ____temp_175
+            if ____t_176(____temp_175) then
+                local ____t_179 = __t
+                local ____opt_177 = alvo.classList
+                if ____opt_177 ~= nil then
+                    ____opt_177 = ____opt_177:contains("start-content")
                 end
-                ____t_result_178 = not ____t_177(____opt_175)
+                ____t_result_180 = not ____t_179(____opt_177)
             else
-                ____t_result_178 = __O[3264]
+                ____t_result_180 = __O[3264]
             end
-            if ____t_179(____t_result_178) then
+            if ____t_181(____t_result_180) then
                 return
             end
             local x, y = table.unpack(
@@ -6434,25 +6447,25 @@ local __O = {};
                 1,
                 2
             )
+            local ____t_187 = __t
+            local ____t_result_186
             local ____t_185 = __t
             local ____t_result_184
             local ____t_183 = __t
-            local ____t_result_182
-            local ____t_181 = __t
-            local ____temp_180 = x < 0 or y < 0
-            __O[3265] = ____temp_180
-            if ____t_181(____temp_180) then
-                ____t_result_182 = __O[3265]
+            local ____temp_182 = x < 0 or y < 0
+            __O[3265] = ____temp_182
+            if ____t_183(____temp_182) then
+                ____t_result_184 = __O[3265]
             else
-                ____t_result_182 = x > __L1.LW
+                ____t_result_184 = x > __L1.LW
             end
-            __O[3266] = ____t_result_182
-            if ____t_183(____t_result_182) then
-                ____t_result_184 = __O[3266]
-            else
-                ____t_result_184 = y > __L1.LH
-            end
+            __O[3266] = ____t_result_184
             if ____t_185(____t_result_184) then
+                ____t_result_186 = __O[3266]
+            else
+                ____t_result_186 = y > __L1.LH
+            end
+            if ____t_187(____t_result_186) then
                 return
             end
             __L1:tocar(x, y)
@@ -6469,17 +6482,17 @@ local __O = {};
     __L1.tela:addEventListener(
         "pointermove",
         function(____, e)
+            local ____t_191 = __t
+            local ____t_result_190
             local ____t_189 = __t
-            local ____t_result_188
-            local ____t_187 = __t
-            local ____temp_186 = e.pointerType ~= "mouse"
-            __O[3267] = ____temp_186
-            if ____t_187(____temp_186) then
-                ____t_result_188 = __O[3267]
+            local ____temp_188 = e.pointerType ~= "mouse"
+            __O[3267] = ____temp_188
+            if ____t_189(____temp_188) then
+                ____t_result_190 = __O[3267]
             else
-                ____t_result_188 = e.target ~= __L1.cvFundo and e.target ~= __L1.tela
+                ____t_result_190 = e.target ~= __L1.cvFundo and e.target ~= __L1.tela
             end
-            if ____t_189(____t_result_188) then
+            if ____t_191(____t_result_190) then
                 return
             end
             if window.performance:now() - __L1.rastro < 45 then

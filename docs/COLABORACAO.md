@@ -559,4 +559,19 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - O direcional/pulo padrão do Roblox foi desligado (`GuiService.TouchControlsEnabled`).
   - **Teste local** (`toque.lua`): tocar JOGAR → NOVA AVENTURA começa o jogo, pular a história, pausar e continuar,
     conversa aparece.
+- **28/11 · Claude:** **Roblox no iPhone, de novo: não dava para jogar e a tela inicial estava estranha.**
+  - **Estado da página** (`desenhista.estadoAtual`): agora cada estado capturado é escolhido pelos elementos que
+    aparecem só nele e estão na tela (somam) ou faltam (descontam); as classes só desempatam.
+    - Antes a pausa às vezes não aparecia, porque as classes do `#gameShell` variam.
+  - **Tela inicial:** o título em texto (`.wooden-title`, escondido por CSS no navegador) aparecia por cima do logo; no
+    Roblox ele fica `hidden`.
+    - O que a página desenha antes de um canvas pequeno (logo) vai para a imagem "de baixo" (`telaBaixo`,
+      `indiceBaixo`), embaixo dele.
+    - A flor "✿" da dica sai no Roblox (não está na fonte).
+  - **Toque:**
+    - o filtro dos controles nativos é geométrico; o "processado" do Roblox não é confiável no celular;
+    - a posição do toque usa o recuo completo (x e y) da `GuiService:GetGuiInset()`.
+  - **Sem memória de imagem:** o cliente volta a uma imagem só (`voltarParaImagemUnica`).
+  - **Diagnóstico:** botão "i" no canto de baixo à esquerda mostra o painel F3, com estado da tela e o alvo do último
+    toque.
 

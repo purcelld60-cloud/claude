@@ -129,52 +129,50 @@ function D.iniciar(op)
     while el and el ~= document and el.nodeType == 1 do if escondido(el) then return false end; el = rawget(el, "_pai") end
     return el ~= nil
   end
-  -- Estados com as mesmas classes (tela inicial e painel JOGAR; jogo, conversa e inventário; pausa e seus painéis)
-  -- se distinguem pelos elementos que aparecem em um e não no outro: vale o estado que mais combina com a página.
-  local discriminantes = {}
-  local function desempatar(md, empatados)
-    local chaveGrupo = md .. ":" .. table.concat(empatados, ",")
-    local lista = discriminantes[chaveGrupo]
-    if not lista then
-      lista = {}
-      for k, r in pairs(I[md]) do
-        if r.vis then
-          -- discrimina se aparece ("1") em algum dos empatados e não aparece ("0" ou "-": nem existia) em outro
-          local um, outro = false, false
-          for _, i in ipairs(empatados) do local c = r.vis:sub(i, i); if c == "1" then um = true else outro = true end end
-          if um and outro then lista[#lista + 1] = { k = k, vis = r.vis } end
+  -- Qual estado capturado combina com a página agora: para cada estado, os elementos que aparecem nele (e não em
+  -- todos os estados) somam se estão na tela e descontam se não estão; as classes do body/#gameShell só desempatam.
+  -- (Só as classes não bastam: tela inicial e painel JOGAR, jogo e conversa, pausa e seus painéis têm as mesmas.)
+  local discrim = {}
+  local function prepararDiscrim(md)
+    local d = discrim[md]; if d then return d end
+    local n = #I.estados[md]
+    d = { chaves = {}, porEstado = {} }
+    for i = 1, n do d.porEstado[i] = {} end
+    for k, r in pairs(I[md]) do
+      if r.vis then
+        local todos = true
+        for i = 1, n do if r.vis:sub(i, i) ~= "1" then todos = false; break end end
+        if not todos then
+          local usa = false
+          for i = 1, n do if r.vis:sub(i, i) == "1" then local t = d.porEstado[i]; t[#t + 1] = k; usa = true end end
+          if usa then d.chaves[#d.chaves + 1] = k end
         end
       end
-      discriminantes[chaveGrupo] = lista
     end
-    local melhor, nota = empatados[1], -1
-    local vistos = {}
-    for _, d in ipairs(lista) do local el = porChave(d.k); vistos[d.k] = el ~= nil and aparece(el) end
-    -- cada elemento esperado ("1") que está na tela soma; esperado mas escondido pesa contra (no Roblox não há CSS:
-    -- o que o navegador esconde por estilo continua "visível" aqui, então só o que falta de verdade conta contra)
-    for _, i in ipairs(empatados) do
-      local n = 0
-      for _, d in ipairs(lista) do if d.vis:sub(i, i) == "1" then if vistos[d.k] then n = n + 1 else n = n - 2 end end end
-      if n > nota then nota = n; melhor = i end
-    end
-    return melhor
+    discrim[md] = d
+    return d
   end
   local function estadoAtual()
-    local lista = I.estados[modo()]
+    local md = modo()
+    local lista = I.estados[md]
     local atual = {}
     for c in pairs(document.body._cls) do atual[c] = true end
     local sh = document:getElementById("gameShell")
     if sh then for c in pairs(sh._cls) do atual["shell." .. c] = true end end
-    local melhor, nota, empatados = 1, -1, {}
+    local d = prepararDiscrim(md)
+    local vis = {}
+    for _, k in ipairs(d.chaves) do local el = porChave(k); vis[k] = el ~= nil and aparece(el) end
+    local melhor, nota = 1, -math.huge
     for i, e in ipairs(lista) do
       local comum, total = 0, 0
       for _, c in ipairs(e.assinatura) do total = total + 1; if atual[c] then comum = comum + 1 end end
       for c in pairs(atual) do local tem = false; for _, x in ipairs(e.assinatura) do if x == c then tem = true; break end end; if not tem then total = total + 1 end end
-      local s = total > 0 and comum / total or 1
-      if s > nota + 1e-9 then nota = s; melhor = i; empatados = { i }
-      elseif math.abs(s - nota) <= 1e-9 then empatados[#empatados + 1] = i end
+      local classes = total > 0 and comum / total or 1
+      local v = 0
+      for _, k in ipairs(d.porEstado[i] or {}) do if vis[k] then v = v + 1 else v = v - 1 end end
+      local s2 = v + classes * .5
+      if s2 > nota then nota = s2; melhor = i end
     end
-    if #empatados > 1 then return desempatar(modo(), empatados) end
     return melhor
   end
 
@@ -473,6 +471,9 @@ function D.iniciar(op)
   end
   local ultimaAssinatura
   D.camadaJogo = nil; D.camadasCanvas = {}
+  -- interface "de baixo": o que a página desenha antes do primeiro canvas pequeno (logo, prévia) fica embaixo dele
+  local telaBaixo = Canvas.novo(960, 540)
+  D.telaBaixo = telaBaixo; D.indiceBaixo = nil
 
   -- op.camadas: a página vira uma camada transparente por cima do canvas do jogo (que o Roblox mostra numa imagem
   -- própria, D.camadaJogo); devolve a tela e se ela mudou desde a última vez.
@@ -506,7 +507,7 @@ function D.iniciar(op)
       if ass == ultimaAssinatura then return tela, false end
       ultimaAssinatura = not vivo and ass or nil
       ctx:clearRect(0, 0, 960, 540)
-      D.camadaJogo = nil; D.camadasCanvas = {}
+      D.camadaJogo = nil; D.camadasCanvas = {}; D.indiceBaixo = nil
     else
       ultimaAssinatura = nil
       ctx.fillStyle = "#000000"; ctx:fillRect(0, 0, 960, 540)
@@ -588,7 +589,11 @@ function D.iniciar(op)
         if camadas then
           -- cada canvas da página é uma imagem própria no Roblox (enviada só quando muda), embaixo da interface;
           -- um canvas opaco da tela toda esconde o que veio antes dele
-          if cheia then D.camadaJogo = el; D.camadasCanvas = {}; ctx:clearRect(0, 0, 960, 540) end
+          if cheia then D.camadaJogo = el; D.camadasCanvas = {}; D.indiceBaixo = nil; ctx:clearRect(0, 0, 960, 540)
+          elseif not D.indiceBaixo then
+            -- o que já foi desenhado fica embaixo deste canvas (e dos próximos); o resto vai por cima
+            Canvas.copiar(telaBaixo, tela); ctx:clearRect(0, 0, 960, 540); D.indiceBaixo = #D.camadasCanvas + 1
+          end
           D.camadasCanvas[#D.camadasCanvas + 1] = { el = el, x = x, y = y, w = w, h = h, op = op }
         elseif not jaDesenhou and cheia and el.width == 960 and el.height == 540 and not el._.fonte then
           Canvas.copiar(tela, el) -- a cena do jogo ocupa a tela toda: cópia direta, sem misturar pixel a pixel

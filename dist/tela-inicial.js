@@ -441,8 +441,10 @@
      MONTAGEM NA TELA
      ================================================================= */
   const conteudo = tela.querySelector('.start-content'), placaHtml = tela.querySelector('.wooden-title');
+  // Roblox: sem CSS, o título em texto (escondido no navegador, só para leitor de tela) apareceria por cima do logo
+  if (window.DAROCA_ROBLOX && placaHtml) placaHtml.hidden = true;
   if (conteudo) { if (placaHtml) placaHtml.before(logoCv); else conteudo.prepend(logoCv); }
-  const dica = document.createElement('div'); dica.className = 'tr-dica'; dica.innerHTML = '<b>✿</b> <span class="longa">Toque no cenário: plante na horta, assuste as galinhas, troque o dia no sol...</span><span class="curta">Toque no cenário!</span>';
+  const dica = document.createElement('div'); dica.className = 'tr-dica'; dica.innerHTML = (window.DAROCA_ROBLOX ? '' : '<b>✿</b> ') + '<span class="longa">Toque no cenário: plante na horta, assuste as galinhas, troque o dia no sol...</span><span class="curta">Toque no cenário!</span>';
   try { if (localStorage.getItem('daroca-tela-dica') === '1') dica.classList.add('some'); } catch (e) {}
   tela.appendChild(dica);
   logoCv.addEventListener('pointerdown', (e) => { e.stopPropagation(); onda = 1; som('logo'); for (let k = 0; k < 10; k++) folhas(rnd(120, 360), rnd(20, 60), 1); });
