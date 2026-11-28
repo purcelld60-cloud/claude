@@ -23,6 +23,8 @@ local jogador = Players.LocalPlayer
 pcall(function() StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, false) end)
 pcall(function() StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true) end)
 GuiService.AutoSelectGuiEnabled = false
+-- sem o direcional e o pulo padrão do Roblox no celular (o jogo tem os próprios controles de toque)
+pcall(function() GuiService.TouchControlsEnabled = false end)
 local camera = workspace.CurrentCamera
 camera.CameraType = Enum.CameraType.Scriptable
 camera.CFrame = CFrame.new(0, 10000, 0)
@@ -288,7 +290,7 @@ local function posicaoNoJogo(p)
   local y = (p.Y + inset.Y - palco.AbsolutePosition.Y) / palco.AbsoluteSize.Y * H
   return x, y
 end
-local toques, proxToque = {}, 1
+local toques, proxToque, ignorados = {}, 1, {}
 local function idDoToque(input) local id = toques[input]; if not id then id = proxToque; proxToque = proxToque + 1; toques[input] = id end; return id end
 
 local paginaControles -- criada mais abaixo
@@ -309,6 +311,7 @@ UIS.InputBegan:Connect(function(input, processado)
   elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
     local x, y = posicaoNoJogo(input.Position); N.ponteiro("pointerdown", x, y, 1, false)
   elseif input.UserInputType == Enum.UserInputType.Touch then
+    if processado then ignorados[input] = true; return end -- toque num controle do Roblox (direcional, botões)
     local x, y = posicaoNoJogo(input.Position); N.ponteiro("pointerdown", x, y, idDoToque(input), true)
   end
 end)
@@ -320,6 +323,7 @@ UIS.InputEnded:Connect(function(input)
   elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
     local x, y = posicaoNoJogo(input.Position); N.ponteiro("pointerup", x, y, 1, false)
   elseif input.UserInputType == Enum.UserInputType.Touch then
+    if ignorados[input] then ignorados[input] = nil; return end
     local x, y = posicaoNoJogo(input.Position); N.ponteiro("pointerup", x, y, idDoToque(input), true); toques[input] = nil
   end
 end)
@@ -327,6 +331,7 @@ UIS.InputChanged:Connect(function(input)
   if input.UserInputType == Enum.UserInputType.MouseMovement then
     local x, y = posicaoNoJogo(input.Position); N.ponteiro("pointermove", x, y, 1, false)
   elseif input.UserInputType == Enum.UserInputType.Touch then
+    if ignorados[input] then return end
     local x, y = posicaoNoJogo(input.Position); N.ponteiro("pointermove", x, y, idDoToque(input), true)
   elseif input.KeyCode == Enum.KeyCode.Thumbstick1 then
     -- alavanca esquerda: anda (A/D) e olha para cima/baixo (W/S)
@@ -428,6 +433,85 @@ UIS.LastInputTypeChanged:Connect(function()
   local a = aparelho()
   if not jaMostrado[a] and a ~= "toque" then jaMostrado[a] = true; task.defer(mostrarGuia, a) end
 end)
+-- ===== controles de toque (celular): direcional e botões do próprio Roblox, por cima do jogo =====
+-- Aparecem só no celular e só com o jogo rolando (jogo, conversa, luta); cada botão vira a tecla do jogo.
+local controlesToque = Instance.new("Frame")
+controlesToque.Name = "ControlesToque"; controlesToque.Size = UDim2.fromScale(1, 1); controlesToque.BackgroundTransparency = 1
+controlesToque.Visible = false; controlesToque.ZIndex = 20; controlesToque.Parent = gui
+local MADEIRA, BORDA, LETRA = Color3.fromRGB(138, 90, 50), Color3.fromRGB(58, 34, 16), Color3.fromRGB(255, 233, 168)
+local function arredondar(o, raio) local c = Instance.new("UICorner"); c.CornerRadius = raio or UDim.new(1, 0); c.Parent = o end
+local function borda(o, cor, esp) local b = Instance.new("UIStroke"); b.Color = cor or BORDA; b.Thickness = esp or 3; b.ApplyStrokeMode = Enum.ApplyStrokeMode.Border; b.Parent = o end
+-- direcional: aparece onde o polegar encosta (lado esquerdo); parado, fica embaixo à esquerda
+local zonaDirecional = Instance.new("TextButton")
+zonaDirecional.Text = ""; zonaDirecional.AutoButtonColor = false; zonaDirecional.BackgroundTransparency = 1
+zonaDirecional.Size = UDim2.fromScale(.42, .62); zonaDirecional.Position = UDim2.fromScale(0, .38); zonaDirecional.ZIndex = 20; zonaDirecional.Parent = controlesToque
+local PADRAO = UDim2.fromScale(.15, .74)
+local baseDir = Instance.new("Frame")
+baseDir.AnchorPoint = Vector2.new(.5, .5); baseDir.Size = UDim2.fromScale(.30, .30); baseDir.SizeConstraint = Enum.SizeConstraint.RelativeYY
+baseDir.Position = PADRAO; baseDir.BackgroundColor3 = BORDA; baseDir.BackgroundTransparency = .5; baseDir.ZIndex = 21; baseDir.Active = false; baseDir.Parent = controlesToque
+arredondar(baseDir); borda(baseDir, MADEIRA, 3)
+local pinoDir = Instance.new("Frame")
+pinoDir.AnchorPoint = Vector2.new(.5, .5); pinoDir.Size = UDim2.fromScale(.42, .42); pinoDir.Position = UDim2.fromScale(.5, .5)
+pinoDir.BackgroundColor3 = MADEIRA; pinoDir.ZIndex = 22; pinoDir.Active = false; pinoDir.Parent = baseDir
+arredondar(pinoDir); borda(pinoDir, BORDA, 3)
+local dedoDir, centroDir
+local function direcao(dx, dy)
+  if dx < -.35 then apertar("KeyA", "a") else soltar("KeyA", "a") end
+  if dx > .35 then apertar("KeyD", "d") else soltar("KeyD", "d") end
+  if dy < -.5 then apertar("KeyW", "w") else soltar("KeyW", "w") end
+  if dy > .5 then apertar("KeyS", "s") else soltar("KeyS", "s") end
+end
+zonaDirecional.InputBegan:Connect(function(input)
+  if input.UserInputType ~= Enum.UserInputType.Touch or dedoDir then return end
+  dedoDir = input; centroDir = Vector2.new(input.Position.X, input.Position.Y)
+  local inset = GuiService:GetGuiInset()
+  baseDir.Position = UDim2.fromOffset(centroDir.X, centroDir.Y + inset.Y); baseDir.BackgroundTransparency = .3
+  pinoDir.Position = UDim2.fromScale(.5, .5)
+end)
+UIS.InputChanged:Connect(function(input)
+  if input ~= dedoDir then return end
+  local raio = math.max(1, baseDir.AbsoluteSize.X / 2)
+  local d = Vector2.new(input.Position.X, input.Position.Y) - centroDir
+  if d.Magnitude > raio then d = d.Unit * raio end
+  pinoDir.Position = UDim2.new(.5, d.X, .5, d.Y)
+  direcao(d.X / raio, d.Y / raio)
+end)
+local function soltarDirecional()
+  dedoDir = nil; direcao(0, 0); pinoDir.Position = UDim2.fromScale(.5, .5); baseDir.Position = PADRAO; baseDir.BackgroundTransparency = .5
+end
+UIS.InputEnded:Connect(function(input) if input == dedoDir then soltarDirecional() end end)
+-- botões de ação (as mesmas teclas do PC)
+local botoesToque = {}
+local function botaoToque(texto, code, key, x, y, tam, cor)
+  local b = Instance.new("TextButton")
+  b.Text = texto; b.FontFace = PIXEL; b.TextScaled = true; b.TextColor3 = LETRA; b.AutoButtonColor = false
+  b.AnchorPoint = Vector2.new(.5, .5); b.Position = UDim2.fromScale(x, y); b.Size = UDim2.fromScale(tam, tam); b.SizeConstraint = Enum.SizeConstraint.RelativeYY
+  b.BackgroundColor3 = cor or MADEIRA; b.BackgroundTransparency = .12; b.ZIndex = 21; b.Parent = controlesToque
+  arredondar(b); borda(b, BORDA, 3)
+  local pad = Instance.new("UIPadding"); pad.PaddingLeft = UDim.new(.14, 0); pad.PaddingRight = UDim.new(.14, 0); pad.PaddingTop = UDim.new(.3, 0); pad.PaddingBottom = UDim.new(.3, 0); pad.Parent = b
+  local dedos = 0
+  b.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.Touch then dedos = dedos + 1; apertar(code, key); b.BackgroundTransparency = 0 end end)
+  b.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.Touch then dedos = math.max(0, dedos - 1); if dedos == 0 then soltar(code, key); b.BackgroundTransparency = .12 end end end)
+  botoesToque[#botoesToque + 1] = { b = b, code = code, key = key }
+  return b
+end
+botaoToque("PULAR", "Space", " ", .90, .80, .22, Color3.fromRGB(86, 140, 58))
+botaoToque("PAPEL", "KeyJ", "j", .77, .86, .17)
+botaoToque("PEIDÃO", "KeyK", "k", .80, .62, .17, Color3.fromRGB(110, 120, 52))
+botaoToque("DASH", "KeyL", "l", .92, .56, .15)
+botaoToque("FALAR", "KeyE", "e", .68, .70, .15, Color3.fromRGB(60, 96, 140))
+botaoToque("REEIS", "KeyR", "r", .70, .46, .11)
+botaoToque("BIVOLT", "KeyB", "b", .80, .40, .11)
+botaoToque("CARRO", "KeyV", "v", .91, .34, .11)
+local ESTADOS_JOGO = { jogo = true, dialogo = true, luta = true }
+local function atualizarControlesToque()
+  local mostrar = N.toque and desenhista and ESTADOS_JOGO[desenhista.estadoNome] or false
+  if controlesToque.Visible ~= mostrar then
+    controlesToque.Visible = mostrar
+    if not mostrar then soltarDirecional(); for _, bt in ipairs(botoesToque) do soltar(bt.code, bt.key); bt.b.BackgroundTransparency = .12 end end
+  end
+end
+
 -- botão "?" para abrir o guia de novo
 local ajuda = Instance.new("TextButton"); ajuda.AnchorPoint = Vector2.new(1, 1); ajuda.Position = UDim2.new(1, -8, 1, -8); ajuda.Size = UDim2.fromOffset(34, 34)
 ajuda.BackgroundColor3 = Color3.fromRGB(138, 90, 50); ajuda.FontFace = PIXEL; ajuda.TextSize = 16; ajuda.TextColor3 = Color3.fromRGB(255, 233, 168); ajuda.Text = "?"; ajuda.ZIndex = 9; ajuda.Parent = fundo
@@ -715,6 +799,7 @@ task.spawn(function()
     local okF, eF = pcall(passoFundo, os.clock() - (ultimoQuadro or os.clock())); ultimoQuadro = os.clock()
     if not okF then warn("[Da Roça] camadas: " .. tostring(eF)) end
     pcall(mostrarFundo)
+    pcall(atualizarControlesToque)
     pcall(atualizarPainel, os.clock() - tF, os.clock() - inicioLaco)
     RunService.RenderStepped:Wait()
   end

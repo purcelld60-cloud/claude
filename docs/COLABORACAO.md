@@ -545,4 +545,18 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     | Roça andando | 28 ms | 22 ms |
     | Luta entrando | 312 ms | 40 ms |
     | Campanha 2 | 86 ms | 15 ms |
+- **28/11 · Claude:** **Roblox no celular (iPhone): nada respondia ao toque.**
+  - **Causa 1 (desenhista):** estados capturados com as mesmas classes (inicio/jogar; jogo/diálogo/inventário;
+    pausa/dados/viagem/opções) empatavam e sempre ganhava o primeiro.
+    - O painel JOGAR (`menu-escolha`) abria no jogo, mas nunca aparecia na tela (no PC também).
+    - Agora o empate é decidido pelos elementos que aparecem num estado e não no outro (`desempatar`/`porChave`).
+  - **Causa 2:** o direcional e os botões de toque do jogo não estão na captura da interface.
+    - O cliente agora tem controles de toque próprios do Roblox, só no celular e só com o jogo rolando (jogo,
+      conversa, luta).
+    - O direcional aparece onde o polegar encosta; os botões são PULAR, PAPEL, PEIDÃO, DASH, FALAR, REEIS, BIVOLT e
+      CARRO, cada um a mesma tecla do PC.
+    - Toques nesses controles não vão para a página.
+    - O direcional/pulo padrão do Roblox foi desligado (`GuiService.TouchControlsEnabled`).
+  - **Teste local** (`toque.lua`): tocar JOGAR → NOVA AVENTURA começa o jogo, pular a história, pausar e continuar,
+    conversa aparece.
 

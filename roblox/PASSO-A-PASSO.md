@@ -141,7 +141,8 @@ do Rojo. Os arquivos entram direto no Studio aberto.
 | Pausa e menu | Esc | Menu | Options |
 | Ver o guia de novo | F1 | View | Share |
 
-No celular, aparecem os botões de toque do próprio jogo.
+No celular, com o jogo rolando, aparecem os controles de toque: o direcional surge onde o polegar encosta (lado
+esquerdo) e os botões PULAR, PAPEL, PEIDÃO, DASH, FALAR, REEIS, BIVOLT e CARRO ficam à direita.
 
 A **qualidade gráfica do Roblox** (menu do Roblox → Configurações → Qualidade gráfica) vira a do jogo:
 

@@ -109,24 +109,76 @@ function D.iniciar(op)
   end
 
   -- estado da tela: o estado capturado mais parecido com as classes atuais do body e do #gameShell
+  -- elemento pela chave estável ("#id" ou "#id>tag:i>tag:i", a mesma do capturar.mjs)
+  local function porChave(k)
+    local id, resto = k:match("^#([^>]+)(.*)$")
+    local el
+    if id then el = document:getElementById(id)
+    elseif k:sub(1, 4) == "body" then el = document.body; resto = k:sub(5)
+    else return nil end
+    for tag, n in (resto or ""):gmatch(">([%w%-]+):(%d+)") do
+      if not el then return nil end
+      local i, achou = 0, nil
+      for _, f in ipairs(el._filhos) do if f.nodeType == 1 and f._tag == tag then if i == tonumber(n) then achou = f; break end; i = i + 1 end end
+      el = achou
+    end
+    return el
+  end
+  local escondido
+  local function aparece(el)
+    while el and el ~= document and el.nodeType == 1 do if escondido(el) then return false end; el = rawget(el, "_pai") end
+    return el ~= nil
+  end
+  -- Estados com as mesmas classes (tela inicial e painel JOGAR; jogo, conversa e inventário; pausa e seus painéis)
+  -- se distinguem pelos elementos que aparecem em um e não no outro: vale o estado que mais combina com a página.
+  local discriminantes = {}
+  local function desempatar(md, empatados)
+    local chaveGrupo = md .. ":" .. table.concat(empatados, ",")
+    local lista = discriminantes[chaveGrupo]
+    if not lista then
+      lista = {}
+      for k, r in pairs(I[md]) do
+        if r.vis then
+          -- discrimina se aparece ("1") em algum dos empatados e não aparece ("0" ou "-": nem existia) em outro
+          local um, outro = false, false
+          for _, i in ipairs(empatados) do local c = r.vis:sub(i, i); if c == "1" then um = true else outro = true end end
+          if um and outro then lista[#lista + 1] = { k = k, vis = r.vis } end
+        end
+      end
+      discriminantes[chaveGrupo] = lista
+    end
+    local melhor, nota = empatados[1], -1
+    local vistos = {}
+    for _, d in ipairs(lista) do local el = porChave(d.k); vistos[d.k] = el ~= nil and aparece(el) end
+    -- cada elemento esperado ("1") que está na tela soma; esperado mas escondido pesa contra (no Roblox não há CSS:
+    -- o que o navegador esconde por estilo continua "visível" aqui, então só o que falta de verdade conta contra)
+    for _, i in ipairs(empatados) do
+      local n = 0
+      for _, d in ipairs(lista) do if d.vis:sub(i, i) == "1" then if vistos[d.k] then n = n + 1 else n = n - 2 end end end
+      if n > nota then nota = n; melhor = i end
+    end
+    return melhor
+  end
   local function estadoAtual()
     local lista = I.estados[modo()]
     local atual = {}
     for c in pairs(document.body._cls) do atual[c] = true end
     local sh = document:getElementById("gameShell")
     if sh then for c in pairs(sh._cls) do atual["shell." .. c] = true end end
-    local melhor, nota = 1, -1
+    local melhor, nota, empatados = 1, -1, {}
     for i, e in ipairs(lista) do
       local comum, total = 0, 0
       for _, c in ipairs(e.assinatura) do total = total + 1; if atual[c] then comum = comum + 1 end end
       for c in pairs(atual) do local tem = false; for _, x in ipairs(e.assinatura) do if x == c then tem = true; break end end; if not tem then total = total + 1 end end
       local s = total > 0 and comum / total or 1
-      if s > nota then nota = s; melhor = i end
+      if s > nota + 1e-9 then nota = s; melhor = i; empatados = { i }
+      elseif math.abs(s - nota) <= 1e-9 then empatados[#empatados + 1] = i end
     end
+    if #empatados > 1 then return desempatar(modo(), empatados) end
     return melhor
   end
 
-  local function escondido(el)
+  escondido = function(el)
     if el._attr.hidden ~= nil then return true end
     if el.style and rawget(el.style, "display") == "none" then return true end
     if el._tag == "dialog" and el._attr.open == nil then return true end
@@ -430,6 +482,7 @@ function D.iniciar(op)
     ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"
     local tab, idx = I[modo()], estadoAtual()
     local nomeEstado = I.estados[modo()][idx] and I.estados[modo()][idx].nome
+    D.estadoNome = nomeEstado -- o cliente mostra os controles de toque só no jogo e nas lutas
     local lista, janelas = {}, {}
     local function andar(el, zPai, opPai)
       if el.nodeType ~= 1 then return end
