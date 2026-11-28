@@ -30,9 +30,9 @@ local __O = {};
                 if ____opt_13 ~= nil then
                     ____opt_result_15 = ____opt_13(____opt_13)
                 end
-                __O[3005] = ____opt_result_15
+                __O[3009] = ____opt_result_15
                 if ____t_16(____opt_result_15) then
-                    ____t_result_17 = __O[3005]
+                    ____t_result_17 = __O[3009]
                 else
                     ____t_result_17 = {}
                 end
@@ -73,9 +73,9 @@ local __O = {};
                 local ____t_result_23
                 local ____t_22 = __t
                 local ____temp_21 = window.localStorage:getItem(SAVE_KEY)
-                __O[3006] = ____temp_21
+                __O[3010] = ____temp_21
                 if ____t_22(____temp_21) then
-                    ____t_result_23 = __O[3006]
+                    ____t_result_23 = __O[3010]
                 else
                     ____t_result_23 = "null"
                 end
@@ -194,23 +194,23 @@ local __O = {};
         else
             ____t_result_117 = state.started
         end
-        __O[3010] = ____t_result_117
+        __O[3014] = ____t_result_117
         if ____t_118(____t_result_117) then
             ____t_result_119 = not __t(state.won)
         else
-            ____t_result_119 = __O[3010]
+            ____t_result_119 = __O[3014]
         end
-        __O[3011] = ____t_result_119
+        __O[3015] = ____t_result_119
         if ____t_120(____t_result_119) then
             ____t_result_121 = not __t(state.defeated)
         else
-            ____t_result_121 = __O[3011]
+            ____t_result_121 = __O[3015]
         end
-        __O[3012] = ____t_result_121
+        __O[3016] = ____t_result_121
         if ____t_122(____t_result_121) then
             ____t_result_123 = not __t(state.chapterEnded)
         else
-            ____t_result_123 = __O[3012]
+            ____t_result_123 = __O[3016]
         end
         resumeAfterSandbox = not not ____t_124(____t_result_123)
         local ____opt_127 = window.Game
@@ -271,9 +271,9 @@ local __O = {};
             if result ~= nil then
                 ____opt_result_142 = result.error
             end
-            __O[3013] = ____opt_result_142
+            __O[3017] = ____opt_result_142
             if ____t_143(____opt_result_142) then
-                ____t_result_144 = __O[3013]
+                ____t_result_144 = __O[3017]
             else
                 ____t_result_144 = "Termine a conversa, cena ou desafio atual antes de começar a revanche."
             end
@@ -294,9 +294,9 @@ local __O = {};
         if ____opt_178 ~= nil then
             ____opt_result_180 = ____opt_178(____opt_178)
         end
-        __O[3017] = ____opt_result_180
+        __O[3021] = ____opt_result_180
         if ____t_181(____opt_result_180) then
-            ____t_result_182 = __O[3017]
+            ____t_result_182 = __O[3021]
         else
             ____t_result_182 = "normal"
         end
@@ -342,9 +342,9 @@ local __O = {};
             if settings ~= nil then
                 ____opt_result_197 = settings.description
             end
-            __O[3018] = ____opt_result_197
+            __O[3022] = ____opt_result_197
             if ____t_198(____opt_result_197) then
-                ____t_result_199 = __O[3018]
+                ____t_result_199 = __O[3022]
             else
                 ____t_result_199 = "A receita original do desafio."
             end
@@ -356,9 +356,9 @@ local __O = {};
         if settings ~= nil then
             ____opt_result_202 = settings.label
         end
-        __O[3019] = ____opt_result_202
+        __O[3023] = ____opt_result_202
         if ____t_203(____opt_result_202) then
-            ____t_result_204 = __O[3019]
+            ____t_result_204 = __O[3023]
         else
             ____t_result_204 = "NORMAL"
         end
@@ -388,9 +388,9 @@ local __O = {};
         if ____opt_211 ~= nil then
             ____opt_211 = ____opt_211.level
         end
-        __O[3020] = ____opt_211
+        __O[3024] = ____opt_211
         if ____t_213(____opt_211) then
-            ____t_result_222 = __O[3020]
+            ____t_result_222 = __O[3024]
         else
             local ____opt_218 = window.Progression
             if ____opt_218 ~= nil then
@@ -406,9 +406,9 @@ local __O = {};
             end
             ____t_result_222 = ____opt_result_221
         end
-        __O[3021] = ____t_result_222
+        __O[3025] = ____t_result_222
         if ____t_223(____t_result_222) then
-            ____t_result_224 = __O[3021]
+            ____t_result_224 = __O[3025]
         else
             ____t_result_224 = 1
         end
@@ -417,9 +417,9 @@ local __O = {};
         local ____t_228 = __t
         local ____opt_225 = window.document:getElementById("stageName")
         local ____temp_227 = ____opt_225 and ____opt_225.textContent
-        __O[3022] = ____temp_227
+        __O[3026] = ____temp_227
         if ____t_228(____temp_227) then
-            ____t_result_229 = __O[3022]
+            ____t_result_229 = __O[3026]
         else
             ____t_result_229 = "A roça"
         end
@@ -488,9 +488,9 @@ local __O = {};
     local ____t_result_4
     local ____t_3 = __t
     local ____temp_2 = not __t(shell) or not __t(screen)
-    __O[3003] = ____temp_2
+    __O[3007] = ____temp_2
     if ____t_3(____temp_2) then
-        ____t_result_4 = __O[3003]
+        ____t_result_4 = __O[3007]
     else
         ____t_result_4 = not __t(modal)
     end
@@ -627,9 +627,9 @@ local __O = {};
         local ____t_result_8
         local ____t_7 = __t
         local ____get_result_6 = __get(icons, name)
-        __O[3004] = ____get_result_6
+        __O[3008] = ____get_result_6
         if ____t_7(____get_result_6) then
-            ____t_result_8 = __O[3004]
+            ____t_result_8 = __O[3008]
         else
             ____t_result_8 = icons.book
         end
@@ -894,9 +894,9 @@ local __O = {};
     if ____opt_51 ~= nil then
         ____opt_result_53 = ____opt_51(____opt_51)
     end
-    __O[3007] = ____opt_result_53
+    __O[3011] = ____opt_result_53
     if ____t_54(____opt_result_53) then
-        ____t_result_55 = __O[3007]
+        ____t_result_55 = __O[3011]
     else
         ____t_result_55 = "MÉDIA"
     end
@@ -911,9 +911,9 @@ local __O = {};
     if ____opt_59 ~= nil then
         ____opt_result_61 = ____opt_59(____opt_59)
     end
-    __O[3008] = ____opt_result_61
+    __O[3012] = ____opt_result_61
     if ____t_62(____opt_result_61) then
-        ____t_result_63 = __O[3008]
+        ____t_result_63 = __O[3012]
     else
         ____t_result_63 = "Cenário vivo, luz e partículas."
     end
@@ -1194,9 +1194,9 @@ local __O = {};
         local ____t_result_105
         local ____t_104 = __t
         local ____temp_103 = window.document:getElementById(id)
-        __O[3009] = ____temp_103
+        __O[3013] = ____temp_103
         if ____t_104(____temp_103) then
-            ____t_result_105 = __O[3009]
+            ____t_result_105 = __O[3013]
         else
             ____t_result_105 = mainActions:querySelector(__add("#", id))
         end
@@ -1332,7 +1332,7 @@ local __O = {};
             if previousFocus ~= nil then
                 ____opt_result_156 = previousFocus.isConnected
             end
-            __O[3014] = ____opt_result_156
+            __O[3018] = ____opt_result_156
             if ____t_157(____opt_result_156) then
                 local ____t_160 = __t
                 local ____this_159
@@ -1343,7 +1343,7 @@ local __O = {};
                 end
                 ____t_result_161 = not ____t_160(____opt_158)
             else
-                ____t_result_161 = __O[3014]
+                ____t_result_161 = __O[3018]
             end
             if ____t_162(____t_result_161) then
                 previousFocus:focus()
@@ -1363,15 +1363,15 @@ local __O = {};
             local ____t_result_165
             local ____t_164 = __t
             local ____temp_163 = event.clientX < r.left or event.clientX > r.right
-            __O[3015] = ____temp_163
+            __O[3019] = ____temp_163
             if ____t_164(____temp_163) then
-                ____t_result_165 = __O[3015]
+                ____t_result_165 = __O[3019]
             else
                 ____t_result_165 = event.clientY < r.top
             end
-            __O[3016] = ____t_result_165
+            __O[3020] = ____t_result_165
             if ____t_166(____t_result_165) then
-                ____t_result_167 = __O[3016]
+                ____t_result_167 = __O[3020]
             else
                 ____t_result_167 = event.clientY > r.bottom
             end

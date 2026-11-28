@@ -82,9 +82,9 @@ local __O = {};
         else
             ____t_result_5 = window.document:getElementById("gameShell")
         end
-        __O[2837] = ____t_result_5
+        __O[2841] = ____t_result_5
         if ____t_6(____t_result_5) then
-            ____t_result_7 = __O[2837]
+            ____t_result_7 = __O[2841]
         else
             ____t_result_7 = window.document.body
         end
@@ -208,9 +208,9 @@ local __O = {};
         local ____t_result_12
         local ____t_11 = __t
         local ____temp_10 = window.localStorage:getItem("daroca-arena-name")
-        __O[2838] = ____temp_10
+        __O[2842] = ____temp_10
         if ____t_11(____temp_10) then
-            ____t_result_12 = __O[2838]
+            ____t_result_12 = __O[2842]
         else
             ____t_result_12 = ""
         end
@@ -255,9 +255,9 @@ local __O = {};
                     if ____opt_15 ~= nil then
                         ____opt_15 = ____opt_15.code
                     end
-                    __O[2839] = ____opt_15
+                    __O[2843] = ____opt_15
                     if ____t_17(____opt_15) then
-                        ____t_result_18 = __O[2839]
+                        ____t_result_18 = __O[2843]
                     else
                         ____t_result_18 = ""
                     end
@@ -276,9 +276,9 @@ local __O = {};
                             if ____opt_21 ~= nil then
                                 ____opt_21 = ____opt_21.code
                             end
-                            __O[2840] = ____opt_21
+                            __O[2844] = ____opt_21
                             if ____t_23(____opt_21) then
-                                ____t_result_24 = __O[2840]
+                                ____t_result_24 = __O[2844]
                             else
                                 ____t_result_24 = ""
                             end
@@ -497,9 +497,9 @@ local __O = {};
         if ____opt_50 ~= nil then
             ____opt_50 = ____opt_50.id
         end
-        __O[2842] = ____opt_50
+        __O[2846] = ____opt_50
         if ____t_52(____opt_50) then
-            ____t_result_53 = __O[2842]
+            ____t_result_53 = __O[2846]
         else
             ____t_result_53 = "daroca"
         end
@@ -661,9 +661,9 @@ local __O = {};
                     if k ~= nil then
                         ____opt_result_69 = k.color
                     end
-                    __O[2843] = ____opt_result_69
+                    __O[2847] = ____opt_result_69
                     if ____t_70(____opt_result_69) then
-                        ____t_result_71 = __O[2843]
+                        ____t_result_71 = __O[2847]
                     else
                         ____t_result_71 = "#d4be89"
                     end
@@ -682,9 +682,9 @@ local __O = {};
                     if k ~= nil then
                         ____opt_result_75 = k.name
                     end
-                    __O[2844] = ____opt_result_75
+                    __O[2848] = ____opt_result_75
                     if ____t_76(____opt_result_75) then
-                        ____t_result_77 = __O[2844]
+                        ____t_result_77 = __O[2848]
                     else
                         ____t_result_77 = p.character
                     end
@@ -784,9 +784,9 @@ local __O = {};
         if ____opt_96 ~= nil then
             ____opt_96 = ____opt_96.character
         end
-        __O[2845] = ____opt_96
+        __O[2849] = ____opt_96
         if ____t_101(____opt_96) then
-            ____t_result_102 = __O[2845]
+            ____t_result_102 = __O[2849]
         else
             ____t_result_102 = __L1.selected
         end
@@ -913,7 +913,7 @@ local __O = {};
             local ____t_result_115
             local ____t_112 = __t
             local ____temp_111 = window.location.protocol == "file:"
-            __O[2846] = ____temp_111
+            __O[2850] = ____temp_111
             if ____t_112(____temp_111) then
                 local ____opt_113 = window.DaRocaNetwork
                 if ____opt_113 ~= nil then
@@ -921,7 +921,7 @@ local __O = {};
                 end
                 ____t_result_115 = ____opt_113
             else
-                ____t_result_115 = __O[2846]
+                ____t_result_115 = __O[2850]
             end
             if ____t_116(____t_result_115) then
                 local ____self_121 = window.DaRocaNetwork
@@ -1036,9 +1036,9 @@ local __O = {};
                 ____opt_result_148 = response.ok
             end
             local ____temp_149 = ____opt_result_148 == false or __ge(status, 400)
-            __O[2847] = ____temp_149
+            __O[2851] = ____temp_149
             if ____t_150(____temp_149) then
-                ____t_result_154 = __O[2847]
+                ____t_result_154 = __O[2851]
             else
                 local ____opt_result_153
                 if data ~= nil then
@@ -1060,9 +1060,9 @@ local __O = {};
                 if ____opt_result_160 ~= nil then
                     ____opt_result_161 = ____opt_result_160.message
                 end
-                __O[2848] = ____opt_result_161
+                __O[2852] = ____opt_result_161
                 if ____t_162(____opt_result_161) then
-                    ____t_result_166 = __O[2848]
+                    ____t_result_166 = __O[2852]
                 else
                     local ____opt_result_165
                     if data ~= nil then
@@ -1070,9 +1070,9 @@ local __O = {};
                     end
                     ____t_result_166 = ____opt_result_165
                 end
-                __O[2849] = ____t_result_166
+                __O[2853] = ____t_result_166
                 if ____t_167(____t_result_166) then
-                    ____t_result_172 = __O[2849]
+                    ____t_result_172 = __O[2853]
                 else
                     local ____temp_171
                     local ____opt_result_170
@@ -1111,9 +1111,9 @@ local __O = {};
                 __L1["$"](__L1, "arenaName").value,
                 20
             )
-            __O[2850] = ____temp_176
+            __O[2854] = ____temp_176
             if ____t_177(____temp_176) then
-                ____t_result_178 = __O[2850]
+                ____t_result_178 = __O[2854]
             else
                 ____t_result_178 = "Da Resenha"
             end
@@ -1284,9 +1284,9 @@ local __O = {};
             if own ~= nil then
                 ____opt_result_203 = own.seq
             end
-            __O[2851] = ____opt_result_203
+            __O[2855] = ____opt_result_203
             if ____t_204(____opt_result_203) then
-                ____t_result_205 = __O[2851]
+                ____t_result_205 = __O[2855]
             else
                 ____t_result_205 = 0
             end
@@ -1332,9 +1332,9 @@ local __O = {};
                     ____opt_result_215 = p.used
                 end
                 local ____getq_216_result_217 = ____getq_216(____opt_result_215, action)
-                __O[2852] = ____getq_216_result_217
+                __O[2856] = ____getq_216_result_217
                 if ____t_218(____getq_216_result_217) then
-                    ____t_result_223 = __O[2852]
+                    ____t_result_223 = __O[2856]
                 else
                     local ____getq_222 = __getq
                     local ____opt_result_221
@@ -1343,9 +1343,9 @@ local __O = {};
                     end
                     ____t_result_223 = ____getq_222(____opt_result_221, action)
                 end
-                __O[2853] = ____t_result_223
+                __O[2857] = ____t_result_223
                 if ____t_224(____t_result_223) then
-                    ____t_result_225 = __O[2853]
+                    ____t_result_225 = __O[2857]
                 else
                     ____t_result_225 = 0
                 end
@@ -1365,13 +1365,13 @@ local __O = {};
         local ____t_result_231
         local ____t_230 = __t
         local ____temp_229 = __L1.room.status == "lobby"
-        __O[2854] = ____temp_229
+        __O[2858] = ____temp_229
         if ____t_230(____temp_229) then
             ____t_result_231 = __L1.world
         else
-            ____t_result_231 = __O[2854]
+            ____t_result_231 = __O[2858]
         end
-        __O[2855] = ____t_result_231
+        __O[2859] = ____t_result_231
         if ____t_232(____t_result_231) then
             local ____opt_233 = data.state
             if ____opt_233 ~= nil then
@@ -1379,9 +1379,9 @@ local __O = {};
             end
             ____t_result_235 = ____opt_233 == __L1.world.matchId
         else
-            ____t_result_235 = __O[2855]
+            ____t_result_235 = __O[2859]
         end
-        __O[2856] = ____t_result_235
+        __O[2860] = ____t_result_235
         if ____t_236(____t_result_235) then
             local ____opt_237 = data.state
             if ____opt_237 ~= nil then
@@ -1389,7 +1389,7 @@ local __O = {};
             end
             ____t_result_239 = ____opt_237 == "finished"
         else
-            ____t_result_239 = __O[2856]
+            ____t_result_239 = __O[2860]
         end
         if ____t_240(____t_result_239) then
             __L1.world = nil
@@ -1529,9 +1529,9 @@ local __O = {};
         else
             ____t_result_259 = not __t(__L1.credentials)
         end
-        __O[2857] = ____t_result_259
+        __O[2861] = ____t_result_259
         if ____t_260(____t_result_259) then
-            ____t_result_261 = __O[2857]
+            ____t_result_261 = __O[2861]
         else
             ____t_result_261 = not __t(window.ArenaNet)
         end
@@ -1587,9 +1587,9 @@ local __O = {};
         local ____t_result_267
         local ____t_266 = __t
         local ____temp_265 = not __t(__L1.credentials)
-        __O[2858] = ____temp_265
+        __O[2862] = ____temp_265
         if ____t_266(____temp_265) then
-            ____t_result_267 = __O[2858]
+            ____t_result_267 = __O[2862]
         else
             ____t_result_267 = __L1.busy
         end
@@ -1638,11 +1638,11 @@ local __O = {};
                 end
                 ____temp_277 = ____opt_275 == "lobby"
             end
-            __O[2859] = ____temp_277
+            __O[2863] = ____temp_277
             if ____t_278(____temp_277) then
                 ____t_result_279 = __L1.lobbyRevision ~= __L1.syncedLobbyRevision
             else
-                ____t_result_279 = __O[2859]
+                ____t_result_279 = __O[2863]
             end
             if ____t_280(____t_result_279) then
                 body.character = __L1.selected
@@ -1652,11 +1652,11 @@ local __O = {};
             local ____t_result_283
             local ____t_282 = __t
             local ____temp_281 = __L1:isHost()
-            __O[2860] = ____temp_281
+            __O[2864] = ____temp_281
             if ____t_282(____temp_281) then
                 ____t_result_283 = __L1.world
             else
-                ____t_result_283 = __O[2860]
+                ____t_result_283 = __O[2864]
             end
             if ____t_284(____t_result_283) then
                 body.state = __L1:snapshot()
@@ -1861,11 +1861,11 @@ local __O = {};
         local ____t_result_314
         local ____t_313 = __t
         local ____temp_312 = not __t(__L1.practice)
-        __O[2861] = ____temp_312
+        __O[2865] = ____temp_312
         if ____t_313(____temp_312) then
             ____t_result_314 = __L1:playing()
         else
-            ____t_result_314 = __O[2861]
+            ____t_result_314 = __O[2865]
         end
         if ____t_315(____t_result_314) then
             if not __t(window:confirm("Sair da partida e da sala online?")) then
@@ -1883,9 +1883,9 @@ local __O = {};
             __L1["$"](__L1, "arenaName").value,
             20
         )
-        __O[2862] = ____temp_316
+        __O[2866] = ____temp_316
         if ____t_317(____temp_316) then
-            ____t_result_318 = __O[2862]
+            ____t_result_318 = __O[2866]
         else
             ____t_result_318 = "Você"
         end
@@ -1945,9 +1945,9 @@ local __O = {};
             __len(__L1.room.players),
             2
         )
-        __O[2863] = ____temp_322
+        __O[2867] = ____temp_322
         if ____t_323(____temp_322) then
-            ____t_result_325 = __O[2863]
+            ____t_result_325 = __O[2867]
         else
             ____t_result_325 = not __t(__call(
                 __L1.room.players,
@@ -2034,9 +2034,9 @@ local __O = {};
         ____this_328 = window.crypto
         local ____opt_327 = ____this_328.randomUUID
         local ____temp_329 = ____opt_327 and ____opt_327(____this_328)
-        __O[2864] = ____temp_329
+        __O[2868] = ____temp_329
         if ____t_330(____temp_329) then
-            ____t_result_331 = __O[2864]
+            ____t_result_331 = __O[2868]
         else
             ____t_result_331 = tostring(window.Date:now())
         end
@@ -2072,9 +2072,9 @@ local __O = {};
                         local ____t_result_335
                         local ____t_334 = __t
                         local ____getq_result_333 = __getq(commands, a)
-                        __O[2865] = ____getq_result_333
+                        __O[2869] = ____getq_result_333
                         if ____t_334(____getq_result_333) then
-                            ____t_result_335 = __O[2865]
+                            ____t_result_335 = __O[2869]
                         else
                             ____t_result_335 = 0
                         end
@@ -2195,7 +2195,7 @@ local __O = {};
         else
             ____t_result_346 = s
         end
-        __O[2866] = ____t_result_346
+        __O[2870] = ____t_result_346
         if ____t_347(____t_result_346) then
             ____t_result_348 = __call(
                 __arrL({"countdown", "playing", "finished"}, 3),
@@ -2203,57 +2203,57 @@ local __O = {};
                 s.phase
             )
         else
-            ____t_result_348 = __O[2866]
+            ____t_result_348 = __O[2870]
         end
-        __O[2867] = ____t_result_348
+        __O[2871] = ____t_result_348
         if ____t_349(____t_result_348) then
             ____t_result_350 = s.phase ~= "countdown" or __isFiniteN(s.startAt)
         else
-            ____t_result_350 = __O[2867]
+            ____t_result_350 = __O[2871]
         end
-        __O[2868] = ____t_result_350
+        __O[2872] = ____t_result_350
         if ____t_351(____t_result_350) then
             ____t_result_352 = type(s.matchId) == "string"
         else
-            ____t_result_352 = __O[2868]
+            ____t_result_352 = __O[2872]
         end
-        __O[2869] = ____t_result_352
+        __O[2873] = ____t_result_352
         if ____t_353(____t_result_352) then
             ____t_result_354 = __isFiniteN(s.time)
         else
-            ____t_result_354 = __O[2869]
+            ____t_result_354 = __O[2873]
         end
-        __O[2870] = ____t_result_354
+        __O[2874] = ____t_result_354
         if ____t_355(____t_result_354) then
             ____t_result_356 = __isFiniteN(s.remaining)
         else
-            ____t_result_356 = __O[2870]
+            ____t_result_356 = __O[2874]
         end
-        __O[2871] = ____t_result_356
+        __O[2875] = ____t_result_356
         if ____t_357(____t_result_356) then
             ____t_result_358 = __isArray(s.players)
         else
-            ____t_result_358 = __O[2871]
+            ____t_result_358 = __O[2875]
         end
-        __O[2872] = ____t_result_358
+        __O[2876] = ____t_result_358
         if ____t_359(____t_result_358) then
             ____t_result_360 = __ge(
                 __len(s.players),
                 2
             )
         else
-            ____t_result_360 = __O[2872]
+            ____t_result_360 = __O[2876]
         end
-        __O[2873] = ____t_result_360
+        __O[2877] = ____t_result_360
         if ____t_361(____t_result_360) then
             ____t_result_362 = __le(
                 __len(s.players),
                 4
             )
         else
-            ____t_result_362 = __O[2873]
+            ____t_result_362 = __O[2877]
         end
-        __O[2881] = ____t_result_362
+        __O[2885] = ____t_result_362
         if ____t_363(____t_result_362) then
             ____t_result_381 = __call(
                 s.players,
@@ -2283,19 +2283,19 @@ local __O = {};
                     else
                         ____t_result_366 = p
                     end
-                    __O[2874] = ____t_result_366
+                    __O[2878] = ____t_result_366
                     if ____t_367(____t_result_366) then
                         ____t_result_368 = type(p.id) == "string"
                     else
-                        ____t_result_368 = __O[2874]
+                        ____t_result_368 = __O[2878]
                     end
-                    __O[2875] = ____t_result_368
+                    __O[2879] = ____t_result_368
                     if ____t_369(____t_result_368) then
                         ____t_result_370 = type(p.name) == "string"
                     else
-                        ____t_result_370 = __O[2875]
+                        ____t_result_370 = __O[2879]
                     end
-                    __O[2876] = ____t_result_370
+                    __O[2880] = ____t_result_370
                     if ____t_371(____t_result_370) then
                         ____t_result_372 = __call(
                             __arrL({
@@ -2316,54 +2316,54 @@ local __O = {};
                             function(____, k) return __isFiniteN(__get(p, k)) end
                         )
                     else
-                        ____t_result_372 = __O[2876]
+                        ____t_result_372 = __O[2880]
                     end
-                    __O[2877] = ____t_result_372
+                    __O[2881] = ____t_result_372
                     if ____t_373(____t_result_372) then
                         ____t_result_374 = math.abs(p.x) < 10000
                     else
-                        ____t_result_374 = __O[2877]
+                        ____t_result_374 = __O[2881]
                     end
-                    __O[2878] = ____t_result_374
+                    __O[2882] = ____t_result_374
                     if ____t_375(____t_result_374) then
                         ____t_result_376 = math.abs(p.y) < 10000
                     else
-                        ____t_result_376 = __O[2878]
+                        ____t_result_376 = __O[2882]
                     end
-                    __O[2879] = ____t_result_376
+                    __O[2883] = ____t_result_376
                     if ____t_377(____t_result_376) then
                         ____t_result_378 = __ge(p.stocks, 0)
                     else
-                        ____t_result_378 = __O[2879]
+                        ____t_result_378 = __O[2883]
                     end
-                    __O[2880] = ____t_result_378
+                    __O[2884] = ____t_result_378
                     if ____t_379(____t_result_378) then
                         ____t_result_380 = __le(p.stocks, 3)
                     else
-                        ____t_result_380 = __O[2880]
+                        ____t_result_380 = __O[2884]
                     end
                     return ____t_result_380
                 end
             )
         else
-            ____t_result_381 = __O[2881]
+            ____t_result_381 = __O[2885]
         end
-        __O[2882] = ____t_result_381
+        __O[2886] = ____t_result_381
         if ____t_382(____t_result_381) then
             ____t_result_383 = __isArray(s.shots)
         else
-            ____t_result_383 = __O[2882]
+            ____t_result_383 = __O[2886]
         end
-        __O[2883] = ____t_result_383
+        __O[2887] = ____t_result_383
         if ____t_384(____t_result_383) then
             ____t_result_385 = __le(
                 __len(s.shots),
                 36
             )
         else
-            ____t_result_385 = __O[2883]
+            ____t_result_385 = __O[2887]
         end
-        __O[2885] = ____t_result_385
+        __O[2889] = ____t_result_385
         if ____t_386(____t_result_385) then
             ____t_result_390 = __call(
                 s.shots,
@@ -2388,47 +2388,47 @@ local __O = {};
                     else
                         ____t_result_387 = p
                     end
-                    __O[2884] = ____t_result_387
+                    __O[2888] = ____t_result_387
                     if ____t_388(____t_result_387) then
                         ____t_result_389 = type(p.type) == "string"
                     else
-                        ____t_result_389 = __O[2884]
+                        ____t_result_389 = __O[2888]
                     end
                     return ____t_result_389
                 end
             )
         else
-            ____t_result_390 = __O[2885]
+            ____t_result_390 = __O[2889]
         end
-        __O[2886] = ____t_result_390
+        __O[2890] = ____t_result_390
         if ____t_391(____t_result_390) then
             ____t_result_392 = __isArray(s.attacks)
         else
-            ____t_result_392 = __O[2886]
+            ____t_result_392 = __O[2890]
         end
-        __O[2887] = ____t_result_392
+        __O[2891] = ____t_result_392
         if ____t_393(____t_result_392) then
             ____t_result_394 = __le(
                 __len(s.attacks),
                 12
             )
         else
-            ____t_result_394 = __O[2887]
+            ____t_result_394 = __O[2891]
         end
-        __O[2888] = ____t_result_394
+        __O[2892] = ____t_result_394
         if ____t_395(____t_result_394) then
             ____t_result_396 = __isArray(s.events)
         else
-            ____t_result_396 = __O[2888]
+            ____t_result_396 = __O[2892]
         end
-        __O[2889] = ____t_result_396
+        __O[2893] = ____t_result_396
         if ____t_397(____t_result_396) then
             ____t_result_398 = __le(
                 __len(s.events),
                 12
             )
         else
-            ____t_result_398 = __O[2889]
+            ____t_result_398 = __O[2893]
         end
         return ____t_result_398
     end
@@ -2436,9 +2436,9 @@ local __O = {};
         local ____t_result_401
         local ____t_400 = __t
         local ____TS__Number_result_399 = __TS__Number(i.aim)
-        __O[2890] = ____TS__Number_result_399
+        __O[2894] = ____TS__Number_result_399
         if ____t_400(____TS__Number_result_399) then
-            ____t_result_401 = __O[2890]
+            ____t_result_401 = __O[2894]
         else
             ____t_result_401 = 0
         end
@@ -2485,7 +2485,7 @@ local __O = {};
             local ____t_result_406
             local ____t_405 = __t
             local ____temp_404 = not __t(__L1:isHost())
-            __O[2891] = ____temp_404
+            __O[2895] = ____temp_404
             if ____t_405(____temp_404) then
                 ____t_result_406 = __call(
                     __arrL({"attack", "special", "ultimate"}, 3),
@@ -2493,7 +2493,7 @@ local __O = {};
                     action
                 )
             else
-                ____t_result_406 = __O[2891]
+                ____t_result_406 = __O[2895]
             end
             if ____t_407(____t_result_406) then
                 local p = __call(
@@ -2567,9 +2567,9 @@ local __O = {};
             ____opt_result_420 = ____opt_418(____opt_418).sensitivity
         end
         local ____TS__Number_result_421 = __TS__Number(____opt_result_420)
-        __O[2892] = ____TS__Number_result_421
+        __O[2896] = ____TS__Number_result_421
         if ____t_422(____TS__Number_result_421) then
-            ____t_result_423 = __O[2892]
+            ____t_result_423 = __O[2896]
         else
             ____t_result_423 = 1
         end
@@ -2618,11 +2618,11 @@ local __O = {};
         local ____t_result_437
         local ____t_436 = __t
         local ____call_result_435 = __call(heldActions, "has", "attack")
-        __O[2893] = ____call_result_435
+        __O[2897] = ____call_result_435
         if ____t_436(____call_result_435) then
             ____t_result_437 = window.performance:now() - __L1.inputAt > 330
         else
-            ____t_result_437 = __O[2893]
+            ____t_result_437 = __O[2897]
         end
         if ____t_438(____t_result_437) then
             __L1:captureAim()
@@ -2637,9 +2637,9 @@ local __O = {};
         local ____t_result_447
         local ____t_442 = __t
         local ____temp_441 = not __t(command) or not __t(__isSafeInteger(command.seq))
-        __O[2894] = ____temp_441
+        __O[2898] = ____temp_441
         if ____t_442(____temp_441) then
-            ____t_result_447 = __O[2894]
+            ____t_result_447 = __O[2898]
         else
             local ____t_446 = __t
             local ____callq_445 = __callq
@@ -2678,14 +2678,14 @@ local __O = {};
                 local ____t_result_453
                 local ____t_452 = __t
                 local ____isSafeInteger_result_451 = __isSafeInteger(__get(command, k))
-                __O[2895] = ____isSafeInteger_result_451
+                __O[2899] = ____isSafeInteger_result_451
                 if ____t_452(____isSafeInteger_result_451) then
                     ____t_result_453 = __ge(
                         __get(command, k),
                         0
                     )
                 else
-                    ____t_result_453 = __O[2895]
+                    ____t_result_453 = __O[2899]
                 end
                 return ____t_result_453
             end
@@ -2724,11 +2724,11 @@ local __O = {};
                 local ____t_result_456
                 local ____t_455 = __t
                 local ____temp_454 = __gt(a.stocks, 0) and __le(a.respawn, 0)
-                __O[2896] = ____temp_454
+                __O[2900] = ____temp_454
                 if ____t_455(____temp_454) then
                     ____t_result_456 = a.id ~= p.id
                 else
-                    ____t_result_456 = __O[2896]
+                    ____t_result_456 = __O[2900]
                 end
                 return ____t_result_456
             end
@@ -2749,9 +2749,9 @@ local __O = {};
             "find",
             function(____, s) return s.main end
         )
-        __O[2897] = ____call_result_457
+        __O[2901] = ____call_result_457
         if ____t_458(____call_result_457) then
-            ____t_result_459 = __O[2897]
+            ____t_result_459 = __O[2901]
         else
             ____t_result_459 = __get(__L1.STAGE, 0)
         end
@@ -2764,7 +2764,7 @@ local __O = {};
         local ____t_result_463
         local ____t_461 = __t
         local ____temp_460 = not __t(p.ground)
-        __O[2898] = ____temp_460
+        __O[2902] = ____temp_460
         if ____t_461(____temp_460) then
             local ____t_result_462
             if __t(offstage) then
@@ -2774,7 +2774,7 @@ local __O = {};
             end
             ____t_result_463 = ____t_result_462
         else
-            ____t_result_463 = __O[2898]
+            ____t_result_463 = __O[2902]
         end
         if ____t_464(____t_result_463) then
             base.x = __TS__MathSign(main.x + main.w / 2 - p.x)
@@ -2782,7 +2782,7 @@ local __O = {};
             local ____t_result_470
             local ____t_466 = __t
             local ____temp_465 = __le(p.stun, 0) and __gt(p.vy, -90)
-            __O[2899] = ____temp_465
+            __O[2903] = ____temp_465
             if ____t_466(____temp_465) then
                 local ____ge_469 = __ge
                 local ____L1_world_time_468 = __L1.world.time
@@ -2794,7 +2794,7 @@ local __O = {};
                 end
                 ____t_result_470 = ____ge_469(____L1_world_time_468, ____t_result_467)
             else
-                ____t_result_470 = __O[2899]
+                ____t_result_470 = __O[2903]
             end
             if ____t_471(____t_result_470) then
                 if __lt(p.jumps, 3) then
@@ -2828,9 +2828,9 @@ local __O = {};
         local ____t_result_475
         local ____t_474 = __t
         local ____temp_473 = want < 0 and __lt(p.x, left + 30)
-        __O[2900] = ____temp_473
+        __O[2904] = ____temp_473
         if ____t_474(____temp_473) then
-            ____t_result_475 = __O[2900]
+            ____t_result_475 = __O[2904]
         else
             ____t_result_475 = want > 0 and __gt(p.x, right - 30)
         end
@@ -2849,9 +2849,9 @@ local __O = {};
         local ____t_result_480
         local ____t_479 = __t
         local ____TS__MathSign_result_478 = __TS__MathSign(dx)
-        __O[2901] = ____TS__MathSign_result_478
+        __O[2905] = ____TS__MathSign_result_478
         if ____t_479(____TS__MathSign_result_478) then
-            ____t_result_480 = __O[2901]
+            ____t_result_480 = __O[2905]
         else
             ____t_result_480 = p.facing
         end
@@ -2865,32 +2865,32 @@ local __O = {};
             local ____t_result_484
             local ____t_483 = __t
             local ____temp_482 = __gt(target.attackAnim, 0) and math.abs(dx) < 110
-            __O[2902] = ____temp_482
+            __O[2906] = ____temp_482
             if ____t_483(____temp_482) then
                 ____t_result_484 = math.abs(dy) < 90
             else
-                ____t_result_484 = __O[2902]
+                ____t_result_484 = __O[2906]
             end
-            __O[2903] = ____t_result_484
+            __O[2907] = ____t_result_484
             if ____t_485(____t_result_484) then
                 ____t_result_486 = __le(p.dashCD, 0)
             else
-                ____t_result_486 = __O[2903]
+                ____t_result_486 = __O[2907]
             end
-            __O[2904] = ____t_result_486
+            __O[2908] = ____t_result_486
             if ____t_487(____t_result_486) then
                 ____t_result_488 = math.random() < 0.3
             else
-                ____t_result_488 = __O[2904]
+                ____t_result_488 = __O[2908]
             end
             if ____t_489(____t_result_488) then
                 base.dash = base.dash + 1
                 local ____t_result_492
                 local ____t_491 = __t
                 local ____temp_490 = -__TS__MathSign(dx)
-                __O[2905] = ____temp_490
+                __O[2909] = ____temp_490
                 if ____t_491(____temp_490) then
-                    ____t_result_492 = __O[2905]
+                    ____t_result_492 = __O[2909]
                 else
                     ____t_result_492 = 1
                 end
@@ -2908,11 +2908,11 @@ local __O = {};
                 local ____t_result_495
                 local ____t_494 = __t
                 local ____temp_493 = __ge(p.comboHits, 3) and math.abs(dx) < 135
-                __O[2906] = ____temp_493
+                __O[2910] = ____temp_493
                 if ____t_494(____temp_493) then
                     ____t_result_495 = math.abs(dy) < 100
                 else
-                    ____t_result_495 = __O[2906]
+                    ____t_result_495 = __O[2910]
                 end
                 if ____t_496(____t_result_495) then
                     base.ultimate = base.ultimate + 1
@@ -3100,9 +3100,9 @@ local __O = {};
                     local ____t_result_514
                     local ____t_513 = __t
                     local ____TS__Number_result_512 = __TS__Number(e.power)
-                    __O[2907] = ____TS__Number_result_512
+                    __O[2911] = ____TS__Number_result_512
                     if ____t_513(____TS__Number_result_512) then
-                        ____t_result_514 = __O[2907]
+                        ____t_result_514 = __O[2911]
                     else
                         ____t_result_514 = 0
                     end
@@ -3173,11 +3173,11 @@ local __O = {};
                         local ____t_result_524
                         local ____t_523 = __t
                         local ____temp_522 = __gt(q.stocks, 0) and __le(q.respawn, 0)
-                        __O[2908] = ____temp_522
+                        __O[2912] = ____temp_522
                         if ____t_523(____temp_522) then
                             ____t_result_524 = q.id ~= p.id
                         else
-                            ____t_result_524 = __O[2908]
+                            ____t_result_524 = __O[2912]
                         end
                         return ____t_result_524
                     end
@@ -3211,9 +3211,9 @@ local __O = {};
                 }
             )
         end
-        __O[2910] = ____opt_result_529
+        __O[2914] = ____opt_result_529
         if ____t_530(____opt_result_529) then
-            ____t_result_546 = __O[2910]
+            ____t_result_546 = __O[2914]
         else
             local ____assign_545 = __assign
             local ____temp_543 = {}
@@ -3257,9 +3257,9 @@ local __O = {};
                 local ____t_result_541
                 local ____t_540 = __t
                 local ____table_shot_539 = __L1:kit(p.character).shot
-                __O[2909] = ____table_shot_539
+                __O[2913] = ____table_shot_539
                 if ____t_540(____table_shot_539) then
-                    ____t_result_541 = __O[2909]
+                    ____t_result_541 = __O[2913]
                 else
                     ____t_result_541 = "paper"
                 end
@@ -3276,9 +3276,9 @@ local __O = {};
         local ____t_result_549
         local ____t_548 = __t
         local ____temp_547 = __gt(p.stun, 0) or __gt(p.respawn, 0)
-        __O[2911] = ____temp_547
+        __O[2915] = ____temp_547
         if ____t_548(____temp_547) then
-            ____t_result_549 = __O[2911]
+            ____t_result_549 = __O[2915]
         else
             ____t_result_549 = __le(p.stocks, 0)
         end
@@ -3289,9 +3289,9 @@ local __O = {};
         local ____t_result_553
         local ____t_552 = __t
         local ____temp_551 = kind == "physical" and __gt(p.cd, 0)
-        __O[2912] = ____temp_551
+        __O[2916] = ____temp_551
         if ____t_552(____temp_551) then
-            ____t_result_553 = __O[2912]
+            ____t_result_553 = __O[2916]
         else
             ____t_result_553 = kind == "ranged" and __gt(p.skillCD, 0)
         end
@@ -3324,23 +3324,23 @@ local __O = {};
         local ____t_result_560
         local ____t_559 = __t
         local ____temp_558 = kind == "physical" and dir == "up"
-        __O[2913] = ____temp_558
+        __O[2917] = ____temp_558
         if ____t_559(____temp_558) then
             ____t_result_560 = not __t(p.ground)
         else
-            ____t_result_560 = __O[2913]
+            ____t_result_560 = __O[2917]
         end
-        __O[2914] = ____t_result_560
+        __O[2918] = ____t_result_560
         if ____t_561(____t_result_560) then
             ____t_result_562 = not __t(p.recoveryUsed)
         else
-            ____t_result_562 = __O[2914]
+            ____t_result_562 = __O[2918]
         end
-        __O[2915] = ____t_result_562
+        __O[2919] = ____t_result_562
         if ____t_563(____t_result_562) then
             ____t_result_564 = __le(p.stun, 0)
         else
-            ____t_result_564 = __O[2915]
+            ____t_result_564 = __O[2919]
         end
         if ____t_565(____t_result_564) then
             p.recoveryUsed = true
@@ -3447,7 +3447,7 @@ local __O = {};
         local ____t_result_586
         local ____t_582 = __t
         local ____temp_581 = kind == "combo"
-        __O[2916] = ____temp_581
+        __O[2920] = ____temp_581
         if ____t_582(____temp_581) then
             local ____lenq_585 = __lenq
             local ____opt_583 = d.finisher
@@ -3456,7 +3456,7 @@ local __O = {};
             end
             ____t_result_586 = ____lenq_585(____opt_583)
         else
-            ____t_result_586 = __O[2916]
+            ____t_result_586 = __O[2920]
         end
         if ____t_587(____t_result_586) then
             ____t_result_601 = d.finisher.hits
@@ -3588,9 +3588,9 @@ local __O = {};
                         if ____opt_615 ~= nil then
                             ____opt_615 = ____opt_615.sound
                         end
-                        __O[2917] = ____opt_615
+                        __O[2921] = ____opt_615
                         if ____t_617(____opt_615) then
-                            ____t_result_618 = __O[2917]
+                            ____t_result_618 = __O[2921]
                         else
                             ____t_result_618 = d.sound
                         end
@@ -3616,9 +3616,9 @@ local __O = {};
                     if ____opt_622 ~= nil then
                         ____opt_622 = ____opt_622.grab
                     end
-                    __O[2918] = ____opt_622
+                    __O[2922] = ____opt_622
                     if ____t_624(____opt_622) then
-                        ____t_result_625 = __O[2918]
+                        ____t_result_625 = __O[2922]
                     else
                         ____t_result_625 = 0
                     end
@@ -3628,9 +3628,9 @@ local __O = {};
                     if ____opt_626 ~= nil then
                         ____opt_626 = ____opt_626.summon
                     end
-                    __O[2919] = ____opt_626
+                    __O[2923] = ____opt_626
                     if ____t_628(____opt_626) then
-                        ____t_result_629 = __O[2919]
+                        ____t_result_629 = __O[2923]
                     else
                         ____t_result_629 = nil
                     end
@@ -3769,9 +3769,9 @@ local __O = {};
         local ____t_result_660
         local ____t_659 = __t
         local ____temp_658 = not __t(p) or __le(p.stocks, 0)
-        __O[2920] = ____temp_658
+        __O[2924] = ____temp_658
         if ____t_659(____temp_658) then
-            ____t_result_660 = __O[2920]
+            ____t_result_660 = __O[2924]
         else
             ____t_result_660 = __gt(p.respawn, 0)
         end
@@ -3872,9 +3872,9 @@ local __O = {};
                     else
                         ____t_result_678 = s.r
                     end
-                    __O[2921] = ____t_result_678
+                    __O[2925] = ____t_result_678
                     if ____t_679(____t_result_678) then
-                        ____t_result_680 = __O[2921]
+                        ____t_result_680 = __O[2925]
                     else
                         ____t_result_680 = 11
                     end
@@ -4031,11 +4031,11 @@ local __O = {};
         local ____t_result_713
         local ____t_712 = __t
         local ____temp_711 = q.warp == "target"
-        __O[2922] = ____temp_711
+        __O[2926] = ____temp_711
         if ____t_712(____temp_711) then
             ____t_result_713 = locked
         else
-            ____t_result_713 = __O[2922]
+            ____t_result_713 = __O[2926]
         end
         if ____t_714(____t_result_713) then
             local target = __call(
@@ -4045,11 +4045,11 @@ local __O = {};
                     local ____t_result_717
                     local ____t_716 = __t
                     local ____temp_715 = t.id == locked and __gt(t.stocks, 0)
-                    __O[2923] = ____temp_715
+                    __O[2927] = ____temp_715
                     if ____t_716(____temp_715) then
                         ____t_result_717 = __le(t.respawn, 0)
                     else
-                        ____t_result_717 = __O[2923]
+                        ____t_result_717 = __O[2927]
                     end
                     return ____t_result_717
                 end
@@ -4153,9 +4153,9 @@ local __O = {};
         local ____t_result_743
         local ____t_742 = __t
         local ____temp_741 = __le(target.stocks, 0) or __gt(target.respawn, 0)
-        __O[2924] = ____temp_741
+        __O[2928] = ____temp_741
         if ____t_742(____temp_741) then
-            ____t_result_743 = __O[2924]
+            ____t_result_743 = __O[2928]
         else
             ____t_result_743 = __gt(target.inv, 0)
         end
@@ -4165,9 +4165,9 @@ local __O = {};
         local ____t_result_747
         local ____t_746 = __t
         local ____TS__Number_result_745 = __TS__Number(hit.damage)
-        __O[2925] = ____TS__Number_result_745
+        __O[2929] = ____TS__Number_result_745
         if ____t_746(____TS__Number_result_745) then
-            ____t_result_747 = __O[2925]
+            ____t_result_747 = __O[2929]
         else
             ____t_result_747 = 7
         end
@@ -4199,9 +4199,9 @@ local __O = {};
         local ____t_result_755
         local ____t_754 = __t
         local ____table_weight_753 = __L1:kit(target.character).weight
-        __O[2926] = ____table_weight_753
+        __O[2930] = ____table_weight_753
         if ____t_754(____table_weight_753) then
-            ____t_result_755 = __O[2926]
+            ____t_result_755 = __O[2930]
         else
             ____t_result_755 = 1
         end
@@ -4228,9 +4228,9 @@ local __O = {};
         else
             ____t_result_758 = hit.dir
         end
-        __O[2927] = ____t_result_758
+        __O[2931] = ____t_result_758
         if ____t_759(____t_result_758) then
-            ____t_result_761 = __O[2927]
+            ____t_result_761 = __O[2931]
         else
             local ____t_result_760
             if __t(source) then
@@ -4245,11 +4245,11 @@ local __O = {};
         local ____t_result_764
         local ____t_763 = __t
         local ____gt_result_762 = __gt(angle, 0.3)
-        __O[2928] = ____gt_result_762
+        __O[2932] = ____gt_result_762
         if ____t_763(____gt_result_762) then
             ____t_result_764 = grounded
         else
-            ____t_result_764 = __O[2928]
+            ____t_result_764 = __O[2932]
         end
         if ____t_765(____t_result_764) then
             angle = -1.25
@@ -4300,11 +4300,11 @@ local __O = {};
                 end
                 ____temp_770 = ____opt_768 == hit.attackId
             end
-            __O[2929] = ____temp_770
+            __O[2933] = ____temp_770
             if ____t_771(____temp_770) then
                 ____t_result_772 = not __t(source.attackState.targetId)
             else
-                ____t_result_772 = __O[2929]
+                ____t_result_772 = __O[2933]
             end
             if ____t_773(____t_result_772) then
                 source.attackState.targetId = target.id
@@ -4330,9 +4330,9 @@ local __O = {};
             if source ~= nil then
                 ____opt_result_776 = source.character
             end
-            __O[2930] = ____opt_result_776
+            __O[2934] = ____opt_result_776
             if ____t_777(____opt_result_776) then
-                ____t_result_778 = __O[2930]
+                ____t_result_778 = __O[2934]
             else
                 ____t_result_778 = target.character
             end
@@ -4455,9 +4455,9 @@ local __O = {};
                     local ____t_result_791
                     local ____t_790 = __t
                     local ____TS__Number_result_789 = __TS__Number(__get(command, action))
-                    __O[2931] = ____TS__Number_result_789
+                    __O[2935] = ____TS__Number_result_789
                     if ____t_790(____TS__Number_result_789) then
-                        ____t_result_791 = __O[2931]
+                        ____t_result_791 = __O[2935]
                     else
                         ____t_result_791 = 0
                     end
@@ -4495,9 +4495,9 @@ local __O = {};
                     local ____t_result_796
                     local ____t_795 = __t
                     local ____get_result_794 = __get(p, key)
-                    __O[2932] = ____get_result_794
+                    __O[2936] = ____get_result_794
                     if ____t_795(____get_result_794) then
-                        ____t_result_796 = __O[2932]
+                        ____t_result_796 = __O[2936]
                     else
                         ____t_result_796 = 0
                     end
@@ -4541,9 +4541,9 @@ local __O = {};
                             local ____t_result_803
                             local ____t_802 = __t
                             local ____get_result_801 = __get(i, a)
-                            __O[2933] = ____get_result_801
+                            __O[2937] = ____get_result_801
                             if ____t_802(____get_result_801) then
-                                ____t_result_803 = __O[2933]
+                                ____t_result_803 = __O[2937]
                             else
                                 ____t_result_803 = __get(p.used, a)
                             end
@@ -4564,15 +4564,15 @@ local __O = {};
                 local ____t_result_808
                 local ____t_807 = __t
                 local ____TS__Number_result_806 = __TS__Number(i.seq)
-                __O[2934] = ____TS__Number_result_806
+                __O[2938] = ____TS__Number_result_806
                 if ____t_807(____TS__Number_result_806) then
-                    ____t_result_808 = __O[2934]
+                    ____t_result_808 = __O[2938]
                 else
                     ____t_result_808 = p.ackInput
                 end
-                __O[2935] = ____t_result_808
+                __O[2939] = ____t_result_808
                 if ____t_809(____t_result_808) then
-                    ____t_result_810 = __O[2935]
+                    ____t_result_810 = __O[2939]
                 else
                     ____t_result_810 = 0
                 end
@@ -4581,9 +4581,9 @@ local __O = {};
                     local ____t_result_813
                     local ____t_812 = __t
                     local ____TS__Number_result_811 = __TS__Number(__get(i, action))
-                    __O[2936] = ____TS__Number_result_811
+                    __O[2940] = ____TS__Number_result_811
                     if ____t_812(____TS__Number_result_811) then
-                        ____t_result_813 = __O[2936]
+                        ____t_result_813 = __O[2940]
                     else
                         ____t_result_813 = 0
                     end
@@ -4615,15 +4615,15 @@ local __O = {};
                 local ____t_result_816
                 local ____t_815 = __t
                 local ____temp_814 = __lt(p.x, __L1.KO.left) or __gt(p.x, __L1.KO.right)
-                __O[2937] = ____temp_814
+                __O[2941] = ____temp_814
                 if ____t_815(____temp_814) then
-                    ____t_result_816 = __O[2937]
+                    ____t_result_816 = __O[2941]
                 else
                     ____t_result_816 = __lt(p.y, __L1.KO.top)
                 end
-                __O[2938] = ____t_result_816
+                __O[2942] = ____t_result_816
                 if ____t_817(____t_result_816) then
-                    ____t_result_818 = __O[2938]
+                    ____t_result_818 = __O[2942]
                 else
                     ____t_result_818 = __gt(p.y, __L1.KO.bottom)
                 end
@@ -4657,9 +4657,9 @@ local __O = {};
                 local ____t_result_822
                 local ____t_821 = __t
                 local ____temp_820 = not __t(owner) or __le(owner.stocks, 0)
-                __O[2939] = ____temp_820
+                __O[2943] = ____temp_820
                 if ____t_821(____temp_820) then
-                    ____t_result_822 = __O[2939]
+                    ____t_result_822 = __O[2943]
                 else
                     ____t_result_822 = __gt(owner.respawn, 0)
                 end
@@ -4680,11 +4680,11 @@ local __O = {};
                             local ____t_result_826
                             local ____t_825 = __t
                             local ____temp_824 = p.id == a.trackTargetId and __gt(p.stocks, 0)
-                            __O[2940] = ____temp_824
+                            __O[2944] = ____temp_824
                             if ____t_825(____temp_824) then
                                 ____t_result_826 = __le(p.respawn, 0)
                             else
-                                ____t_result_826 = __O[2940]
+                                ____t_result_826 = __O[2944]
                             end
                             return ____t_result_826
                         end
@@ -4708,35 +4708,35 @@ local __O = {};
                     local ____t_result_830
                     local ____t_829 = __t
                     local ____temp_828 = p.id ~= a.owner
-                    __O[2941] = ____temp_828
+                    __O[2945] = ____temp_828
                     if ____t_829(____temp_828) then
                         ____t_result_830 = not __t(a.trackTargetId) or p.id == a.trackTargetId
                     else
-                        ____t_result_830 = __O[2941]
+                        ____t_result_830 = __O[2945]
                     end
-                    __O[2942] = ____t_result_830
+                    __O[2946] = ____t_result_830
                     if ____t_831(____t_result_830) then
                         ____t_result_832 = not __t(__call(a.hitIds, "includes", p.id))
                     else
-                        ____t_result_832 = __O[2942]
+                        ____t_result_832 = __O[2946]
                     end
-                    __O[2943] = ____t_result_832
+                    __O[2947] = ____t_result_832
                     if ____t_833(____t_result_832) then
                         ____t_result_834 = __lt(
                             math.abs(p.x - a.x),
                             a.r + 17
                         )
                     else
-                        ____t_result_834 = __O[2943]
+                        ____t_result_834 = __O[2947]
                     end
-                    __O[2944] = ____t_result_834
+                    __O[2948] = ____t_result_834
                     if ____t_835(____t_result_834) then
                         ____t_result_836 = __lt(
                             math.abs(p.y - 34 - a.y),
                             a.r + 31
                         )
                     else
-                        ____t_result_836 = __O[2944]
+                        ____t_result_836 = __O[2948]
                     end
                     if ____t_837(____t_result_836) then
                         if __t(__L1:applyHit(p, a, owner)) then
@@ -4780,9 +4780,9 @@ local __O = {};
                     local ____t_result_842
                     local ____t_841 = __t
                     local ____hypot_result_840 = __hypot(dx, dy)
-                    __O[2945] = ____hypot_result_840
+                    __O[2949] = ____hypot_result_840
                     if ____t_841(____hypot_result_840) then
-                        ____t_result_842 = __O[2945]
+                        ____t_result_842 = __O[2949]
                     else
                         ____t_result_842 = 1
                     end
@@ -4836,15 +4836,15 @@ local __O = {};
                         local ____t_result_850
                         local ____t_849 = __t
                         local ____temp_848 = p.id == s.owner
-                        __O[2946] = ____temp_848
+                        __O[2950] = ____temp_848
                         if ____t_849(____temp_848) then
-                            ____t_result_850 = __O[2946]
+                            ____t_result_850 = __O[2950]
                         else
                             ____t_result_850 = __call(s.hitIds, "includes", p.id)
                         end
-                        __O[2947] = ____t_result_850
+                        __O[2951] = ____t_result_850
                         if ____t_851(____t_result_850) then
-                            ____t_result_852 = __O[2947]
+                            ____t_result_852 = __O[2951]
                         else
                             ____t_result_852 = __le(s.life, 0)
                         end
@@ -4882,17 +4882,17 @@ local __O = {};
                 local ____t_result_856
                 local ____t_855 = __t
                 local ____temp_854 = __gt(s.life, 0) and __gt(s.x, __L1.KO.left - 150)
-                __O[2948] = ____temp_854
+                __O[2952] = ____temp_854
                 if ____t_855(____temp_854) then
                     ____t_result_856 = __lt(s.x, __L1.KO.right + 150)
                 else
-                    ____t_result_856 = __O[2948]
+                    ____t_result_856 = __O[2952]
                 end
-                __O[2949] = ____t_result_856
+                __O[2953] = ____t_result_856
                 if ____t_857(____t_result_856) then
                     ____t_result_858 = __lt(s.y, __L1.KO.bottom + 100)
                 else
-                    ____t_result_858 = __O[2949]
+                    ____t_result_858 = __O[2953]
                 end
                 return ____t_result_858
             end
@@ -4916,15 +4916,15 @@ local __O = {};
                     local ____t_result_861
                     local ____t_860 = __t
                     local ____temp_859 = b.stocks - a.stocks
-                    __O[2950] = ____temp_859
+                    __O[2954] = ____temp_859
                     if ____t_860(____temp_859) then
-                        ____t_result_861 = __O[2950]
+                        ____t_result_861 = __O[2954]
                     else
                         ____t_result_861 = a.damage - b.damage
                     end
-                    __O[2951] = ____t_result_861
+                    __O[2955] = ____t_result_861
                     if ____t_862(____t_result_861) then
-                        ____t_result_863 = __O[2951]
+                        ____t_result_863 = __O[2955]
                     else
                         ____t_result_863 = b.kills - a.kills
                     end
@@ -5094,9 +5094,9 @@ local __O = {};
                 if ____opt_873 ~= nil then
                     ____opt_result_875 = ____opt_873(____opt_873, p.damage)
                 end
-                __O[2952] = ____opt_result_875
+                __O[2956] = ____opt_result_875
                 if ____t_876(____opt_result_875) then
-                    ____t_result_877 = __O[2952]
+                    ____t_result_877 = __O[2956]
                 else
                     ____t_result_877 = "#fffdf0"
                 end
@@ -5140,11 +5140,11 @@ local __O = {};
         local ____t_result_882
         local ____t_881 = __t
         local ____temp_880 = not not __t(____local) and __gt(____local.stocks, 0)
-        __O[2953] = ____temp_880
+        __O[2957] = ____temp_880
         if ____t_881(____temp_880) then
             ____t_result_882 = __ge(____local.comboHits, 3)
         else
-            ____t_result_882 = __O[2953]
+            ____t_result_882 = __O[2957]
         end
         local readyCombo = ____t_result_882
         __L1.screen.classList:toggle(
@@ -5175,9 +5175,9 @@ local __O = {};
         local ____t_result_885
         local ____t_884 = __t
         local ____table_speed_883 = __L1:kit(p.character).speed
-        __O[2954] = ____table_speed_883
+        __O[2958] = ____table_speed_883
         if ____t_884(____table_speed_883) then
-            ____t_result_885 = __O[2954]
+            ____t_result_885 = __O[2958]
         else
             ____t_result_885 = 1
         end
@@ -5191,9 +5191,9 @@ local __O = {};
         if ____opt_888 ~= nil then
             ____opt_result_890 = ____opt_888(____opt_888).sensitivity
         end
-        __O[2955] = ____opt_result_890
+        __O[2959] = ____opt_result_890
         if ____t_891(____opt_result_890) then
-            ____t_result_892 = __O[2955]
+            ____t_result_892 = __O[2959]
         else
             ____t_result_892 = 1
         end
@@ -5237,15 +5237,15 @@ local __O = {};
         local ____t_result_900
         local ____t_899 = __t
         local ____temp_898 = not __t(__L1:playing()) or __le(p.stocks, 0)
-        __O[2956] = ____temp_898
+        __O[2960] = ____temp_898
         if ____t_899(____temp_898) then
-            ____t_result_900 = __O[2956]
+            ____t_result_900 = __O[2960]
         else
             ____t_result_900 = __gt(p.respawn, 0)
         end
-        __O[2957] = ____t_result_900
+        __O[2961] = ____t_result_900
         if ____t_901(____t_result_900) then
-            ____t_result_903 = __O[2957]
+            ____t_result_903 = __O[2961]
         else
             local ____t_result_902
             if __t(old) then
@@ -5264,9 +5264,9 @@ local __O = {};
         local ____t_result_907
         local ____t_906 = __t
         local ____TS__Number_result_905 = __TS__Number(p.ackInput)
-        __O[2958] = ____TS__Number_result_905
+        __O[2962] = ____TS__Number_result_905
         if ____t_906(____TS__Number_result_905) then
-            ____t_result_907 = __O[2958]
+            ____t_result_907 = __O[2962]
         else
             ____t_result_907 = 0
         end
@@ -5293,15 +5293,15 @@ local __O = {};
         local ____t_result_910
         local ____t_909 = __t
         local ____temp_908 = __L1:isHost()
-        __O[2959] = ____temp_908
+        __O[2963] = ____temp_908
         if ____t_909(____temp_908) then
-            ____t_result_910 = __O[2959]
+            ____t_result_910 = __O[2963]
         else
             ____t_result_910 = not __t(__L1:playing())
         end
-        __O[2960] = ____t_result_910
+        __O[2964] = ____t_result_910
         if ____t_911(____t_result_910) then
-            ____t_result_917 = __O[2960]
+            ____t_result_917 = __O[2964]
         else
             local ____opt_914 = __L1.controls
             if ____opt_914 ~= nil then
@@ -5325,9 +5325,9 @@ local __O = {};
         local ____t_result_921
         local ____t_920 = __t
         local ____temp_919 = not __t(p) or __le(p.stocks, 0)
-        __O[2961] = ____temp_919
+        __O[2965] = ____temp_919
         if ____t_920(____temp_919) then
-            ____t_result_921 = __O[2961]
+            ____t_result_921 = __O[2965]
         else
             ____t_result_921 = __gt(p.respawn, 0)
         end
@@ -5393,29 +5393,29 @@ local __O = {};
         local ____t_result_930
         local ____t_929 = __t
         local ____temp_928 = p.id == __L1:localId()
-        __O[2962] = ____temp_928
+        __O[2966] = ____temp_928
         if ____t_929(____temp_928) then
             ____t_result_930 = __L1.prediction
         else
-            ____t_result_930 = __O[2962]
+            ____t_result_930 = __O[2966]
         end
-        __O[2963] = ____t_result_930
+        __O[2967] = ____t_result_930
         if ____t_931(____t_result_930) then
             ____t_result_932 = __gt(p.stocks, 0)
         else
-            ____t_result_932 = __O[2963]
+            ____t_result_932 = __O[2967]
         end
-        __O[2964] = ____t_result_932
+        __O[2968] = ____t_result_932
         if ____t_933(____t_result_932) then
             ____t_result_934 = __le(p.respawn, 0)
         else
-            ____t_result_934 = __O[2964]
+            ____t_result_934 = __O[2968]
         end
-        __O[2965] = ____t_result_934
+        __O[2969] = ____t_result_934
         if ____t_935(____t_result_934) then
             ____t_result_936 = __L1:playing()
         else
-            ____t_result_936 = __O[2965]
+            ____t_result_936 = __O[2969]
         end
         if ____t_937(____t_result_936) then
             local ____error = __hypot(shown.x - __L1.prediction.x, shown.y - __L1.prediction.y)
@@ -5520,29 +5520,29 @@ local __O = {};
         else
             ____t_result_948 = a
         end
-        __O[2966] = ____t_result_948
+        __O[2970] = ____t_result_948
         if ____t_949(____t_result_948) then
             ____t_result_950 = a.stocks == b.stocks
         else
-            ____t_result_950 = __O[2966]
+            ____t_result_950 = __O[2970]
         end
-        __O[2967] = ____t_result_950
+        __O[2971] = ____t_result_950
         if ____t_951(____t_result_950) then
             ____t_result_952 = __le(a.respawn, 0)
         else
-            ____t_result_952 = __O[2967]
+            ____t_result_952 = __O[2971]
         end
-        __O[2968] = ____t_result_952
+        __O[2972] = ____t_result_952
         if ____t_953(____t_result_952) then
             ____t_result_954 = __le(b.respawn, 0)
         else
-            ____t_result_954 = __O[2968]
+            ____t_result_954 = __O[2972]
         end
-        __O[2969] = ____t_result_954
+        __O[2973] = ____t_result_954
         if ____t_955(____t_result_954) then
             ____t_result_956 = __hypot(b.x - a.x, b.y - a.y) < 260
         else
-            ____t_result_956 = __O[2969]
+            ____t_result_956 = __O[2973]
         end
         if ____t_957(____t_result_956) then
             local ____L1_clamp_962 = __L1.clamp
@@ -5550,9 +5550,9 @@ local __O = {};
             local ____t_result_960
             local ____t_959 = __t
             local ____temp_958 = after.at - before.at
-            __O[2970] = ____temp_958
+            __O[2974] = ____temp_958
             if ____t_959(____temp_958) then
-                ____t_result_960 = __O[2970]
+                ____t_result_960 = __O[2974]
             else
                 ____t_result_960 = 1
             end
@@ -5569,11 +5569,11 @@ local __O = {};
             else
                 ____t_result_963 = a
             end
-            __O[2971] = ____t_result_963
+            __O[2975] = ____t_result_963
             if ____t_964(____t_result_963) then
                 ____t_result_965 = __le(a.respawn, 0)
             else
-                ____t_result_965 = __O[2971]
+                ____t_result_965 = __O[2975]
             end
             if ____t_966(____t_result_965) then
                 local age = __L1:clamp((targetAt - before.at) / 1000, 0, 0.15)
@@ -5587,9 +5587,9 @@ local __O = {};
         local ____t_result_969
         local ____t_968 = __t
         local ____TS__Number_result_967 = __TS__Number(p.motionTime)
-        __O[2972] = ____TS__Number_result_967
+        __O[2976] = ____TS__Number_result_967
         if ____t_968(____TS__Number_result_967) then
-            ____t_result_969 = __O[2972]
+            ____t_result_969 = __O[2976]
         else
             ____t_result_969 = 0
         end
@@ -5597,9 +5597,9 @@ local __O = {};
         local ____t_result_973
         local ____t_971 = __t
         local ____temp_970 = shown.motion ~= p.motion or shown.visualStock ~= p.stocks
-        __O[2973] = ____temp_970
+        __O[2977] = ____temp_970
         if ____t_971(____temp_970) then
-            ____t_result_973 = __O[2973]
+            ____t_result_973 = __O[2977]
         else
             local ____t_result_972
             if __t(shown.sourcePoseTime) then
@@ -5674,9 +5674,9 @@ local __O = {};
             local ____t_result_984
             local ____t_983 = __t
             local ____TS__Number_result_982 = __TS__Number(p.attackAnim)
-            __O[2974] = ____TS__Number_result_982
+            __O[2978] = ____TS__Number_result_982
             if ____t_983(____TS__Number_result_982) then
-                ____t_result_984 = __O[2974]
+                ____t_result_984 = __O[2978]
             else
                 ____t_result_984 = 0
             end
@@ -5686,9 +5686,9 @@ local __O = {};
             local ____t_result_988
             local ____t_987 = __t
             local ____TS__Number_result_986 = __TS__Number(p.attackAnim)
-            __O[2975] = ____TS__Number_result_986
+            __O[2979] = ____TS__Number_result_986
             if ____t_987(____TS__Number_result_986) then
-                ____t_result_988 = __O[2975]
+                ____t_result_988 = __O[2979]
             else
                 ____t_result_988 = 0
             end
@@ -5760,9 +5760,9 @@ local __O = {};
                 local ____t_result_1001
                 local ____t_1000 = __t
                 local ____call_result_999 = __call(positions, "get", p.id)
-                __O[2976] = ____call_result_999
+                __O[2980] = ____call_result_999
                 if ____t_1000(____call_result_999) then
-                    ____t_result_1001 = __O[2976]
+                    ____t_result_1001 = __O[2980]
                 else
                     ____t_result_1001 = p
                 end
@@ -5850,9 +5850,9 @@ local __O = {};
                 local ____t_result_1011
                 local ____t_1010 = __t
                 local ____TS__ParseFloat_result_1009 = __TS__ParseFloat(style:getPropertyValue(__add("--arena-safe-", side)))
-                __O[2977] = ____TS__ParseFloat_result_1009
+                __O[2981] = ____TS__ParseFloat_result_1009
                 if ____t_1010(____TS__ParseFloat_result_1009) then
-                    ____t_result_1011 = __O[2977]
+                    ____t_result_1011 = __O[2981]
                 else
                     ____t_result_1011 = 0
                 end
@@ -5879,7 +5879,7 @@ local __O = {};
         local ____t_result_1023
         local ____t_1015 = __t
         local ____temp_1014 = __L1:playing()
-        __O[2978] = ____temp_1014
+        __O[2982] = ____temp_1014
         if ____t_1015(____temp_1014) then
             local ____t_1022 = __t
             local ____t_result_1021
@@ -5898,7 +5898,7 @@ local __O = {};
             end
             ____t_result_1023 = not ____t_1022(____t_result_1021)
         else
-            ____t_result_1023 = __O[2978]
+            ____t_result_1023 = __O[2982]
         end
         if ____t_1024(____t_result_1023) then
             __L1.visualClock = math.max(__L1.world.time, __L1.visualClock + __L1.renderDt)
@@ -6249,13 +6249,13 @@ local __O = {};
         local ____t_result_1068
         local ____t_1067 = __t
         local ____temp_1066 = __L1:isHost()
-        __O[2979] = ____temp_1066
+        __O[2983] = ____temp_1066
         if ____t_1067(____temp_1066) then
             ____t_result_1068 = __L1:inMatch()
         else
-            ____t_result_1068 = __O[2979]
+            ____t_result_1068 = __O[2983]
         end
-        __O[2980] = ____t_result_1068
+        __O[2984] = ____t_result_1068
         if ____t_1069(____t_result_1068) then
             local ____t_1076 = __t
             local ____t_result_1075
@@ -6274,9 +6274,9 @@ local __O = {};
             end
             ____t_result_1077 = not ____t_1076(____t_result_1075)
         else
-            ____t_result_1077 = __O[2980]
+            ____t_result_1077 = __O[2984]
         end
-        __O[2981] = ____t_result_1077
+        __O[2985] = ____t_result_1077
         if ____t_1078(____t_result_1077) then
             local ____t_result_1081
             if __t(__L1.practice) then
@@ -6290,7 +6290,7 @@ local __O = {};
             end
             ____t_result_1082 = ____t_result_1081
         else
-            ____t_result_1082 = __O[2981]
+            ____t_result_1082 = __O[2985]
         end
         if ____t_1083(____t_result_1082) then
             __L1.accumulator = __L1.accumulator + dt
@@ -6312,11 +6312,11 @@ local __O = {};
         else
             ____t_result_1084 = __L1.net
         end
-        __O[2982] = ____t_result_1084
+        __O[2986] = ____t_result_1084
         if ____t_1085(____t_result_1084) then
             ____t_result_1086 = now - __L1.lastNetAt > 50
         else
-            ____t_result_1086 = __O[2982]
+            ____t_result_1086 = __O[2986]
         end
         if ____t_1087(____t_result_1086) then
             __L1.lastNetAt = now
@@ -6324,11 +6324,11 @@ local __O = {};
             local ____t_result_1090
             local ____t_1089 = __t
             local ____temp_1088 = __L1:isHost()
-            __O[2983] = ____temp_1088
+            __O[2987] = ____temp_1088
             if ____t_1089(____temp_1088) then
                 ____t_result_1090 = __L1.world
             else
-                ____t_result_1090 = __O[2983]
+                ____t_result_1090 = __O[2987]
             end
             if ____t_1091(____t_result_1090) then
                 local ____this_1093
@@ -6452,17 +6452,17 @@ local __O = {};
             ____opt_result_1126 = state.started
         end
         local ____temp_1128 = not not ____t_1127(____opt_result_1126) and not __t(state.paused)
-        __O[2984] = ____temp_1128
+        __O[2988] = ____temp_1128
         if ____t_1129(____temp_1128) then
             ____t_result_1130 = not __t(state.won)
         else
-            ____t_result_1130 = __O[2984]
+            ____t_result_1130 = __O[2988]
         end
-        __O[2985] = ____t_result_1130
+        __O[2989] = ____t_result_1130
         if ____t_1131(____t_result_1130) then
             ____t_result_1132 = not __t(state.chapterEnded)
         else
-            ____t_result_1132 = __O[2985]
+            ____t_result_1132 = __O[2989]
         end
         __L1.pausedCampaign = ____t_result_1132
         if __t(__L1.pausedCampaign) then
@@ -6485,11 +6485,11 @@ local __O = {};
         if ____opt_1139 ~= nil then
             ____opt_result_1141 = ____opt_1139(____opt_1139).open
         end
-        __O[2986] = ____opt_result_1141
+        __O[2990] = ____opt_result_1141
         if ____t_1142(____opt_result_1141) then
             ____t_result_1143 = window.CoopArena:close()
         else
-            ____t_result_1143 = __O[2986]
+            ____t_result_1143 = __O[2990]
         end
         __L1.opened = true
         __L1.screen.hidden = false
@@ -6510,9 +6510,9 @@ local __O = {};
                 local ____t_result_1146
                 local ____t_1145 = __t
                 local ____temp_1144 = window.sessionStorage:getItem("daroca-arena-room")
-                __O[2987] = ____temp_1144
+                __O[2991] = ____temp_1144
                 if ____t_1145(____temp_1144) then
-                    ____t_result_1146 = __O[2987]
+                    ____t_result_1146 = __O[2991]
                 else
                     ____t_result_1146 = "null"
                 end
@@ -6526,20 +6526,20 @@ local __O = {};
                 if saved ~= nil then
                     ____opt_result_1151 = saved.token
                 end
-                __O[2988] = ____opt_result_1151
+                __O[2992] = ____opt_result_1151
                 if ____t_1152(____opt_result_1151) then
                     ____t_result_1153 = __re_test(
                         __re("^[A-Z0-9]{6}$", ""),
                         saved.code
                     )
                 else
-                    ____t_result_1153 = __O[2988]
+                    ____t_result_1153 = __O[2992]
                 end
-                __O[2989] = ____t_result_1153
+                __O[2993] = ____t_result_1153
                 if ____t_1154(____t_result_1153) then
                     ____t_result_1155 = saved.playerId
                 else
-                    ____t_result_1155 = __O[2989]
+                    ____t_result_1155 = __O[2993]
                 end
                 if ____t_1156(____t_result_1155) then
                     __L1.credentials = {
@@ -6583,11 +6583,11 @@ local __O = {};
         else
             ____t_result_1161 = __L1.credentials
         end
-        __O[2990] = ____t_result_1161
+        __O[2994] = ____t_result_1161
         if ____t_1162(____t_result_1161) then
             ____t_result_1163 = not __t(window:confirm("Sair da arena e encerrar sua participação na sala?"))
         else
-            ____t_result_1163 = __O[2990]
+            ____t_result_1163 = __O[2994]
         end
         if ____t_1164(____t_result_1163) then
             return
@@ -6681,9 +6681,9 @@ local __O = {};
         if ____opt_1181 ~= nil then
             ____opt_1181 = ____opt_1181.all
         end
-        __O[2834] = ____opt_1181
+        __O[2838] = ____opt_1181
         if ____t_1183(____opt_1181) then
-            ____t_result_1184 = __O[2834]
+            ____t_result_1184 = __O[2838]
         else
             ____t_result_1184 = __arrL({}, 0)
         end
@@ -6693,9 +6693,9 @@ local __O = {};
         local ____t_result_1187
         local ____t_1186 = __t
         local ____callq_result_1185 = __callq(window.ArenaRoster, "get", id)
-        __O[2835] = ____callq_result_1185
+        __O[2839] = ____callq_result_1185
         if ____t_1186(____callq_result_1185) then
-            ____t_result_1187 = __O[2835]
+            ____t_result_1187 = __O[2839]
         else
             ____t_result_1187 = __get(
                 __L1:roster(),
@@ -6799,9 +6799,9 @@ local __O = {};
         if ____opt_1192 ~= nil then
             ____opt_1192 = ____opt_1192.playerId
         end
-        __O[2836] = ____opt_1192
+        __O[2840] = ____opt_1192
         if ____t_1194(____opt_1192) then
-            ____t_result_1195 = __O[2836]
+            ____t_result_1195 = __O[2840]
         else
             ____t_result_1195 = "practice-local"
         end
@@ -6865,9 +6865,9 @@ local __O = {};
         if ____opt_1209 ~= nil then
             ____opt_result_1211 = ____opt_1209(____opt_1209, action)
         end
-        __O[2841] = ____opt_result_1211
+        __O[2845] = ____opt_result_1211
         if ____t_1212(____opt_result_1211) then
-            ____t_result_1213 = __O[2841]
+            ____t_result_1213 = __O[2845]
         else
             ____t_result_1213 = fallback
         end
@@ -6935,9 +6935,9 @@ local __O = {};
             local ____t_result_1216
             local ____t_1215 = __t
             local ____temp_1214 = not __t(__L1.opened)
-            __O[2991] = ____temp_1214
+            __O[2995] = ____temp_1214
             if ____t_1215(____temp_1214) then
-                ____t_result_1216 = __O[2991]
+                ____t_result_1216 = __O[2995]
             else
                 ____t_result_1216 = window.document:querySelector("dialog[open]")
             end
@@ -7056,11 +7056,11 @@ local __O = {};
             else
                 ____t_result_1232 = __L1.opened
             end
-            __O[2992] = ____t_result_1232
+            __O[2996] = ____t_result_1232
             if ____t_1233(____t_result_1232) then
                 ____t_result_1234 = __L1.credentials
             else
-                ____t_result_1234 = __O[2992]
+                ____t_result_1234 = __O[2996]
             end
             if ____t_1235(____t_result_1234) then
                 __L1:notify(__t(__L1:isHost()) and "Mantenha o jogo aberto para a sala continuar em tempo real." or "Você voltou? A arena reconecta automaticamente.")
@@ -7092,9 +7092,9 @@ local __O = {};
                 if ____opt_1242 ~= nil then
                     ____opt_result_1244 = ____opt_1242(____opt_1242)
                 end
-                __O[2993] = ____opt_result_1244
+                __O[2997] = ____opt_result_1244
                 if ____t_1245(____opt_result_1244) then
-                    ____t_result_1246 = __O[2993]
+                    ____t_result_1246 = __O[2997]
                 else
                     ____t_result_1246 = nil
                 end
@@ -7141,9 +7141,9 @@ local __O = {};
                 if ____opt_1255 ~= nil then
                     ____opt_1255 = ____opt_1255.code
                 end
-                __O[2994] = ____opt_1255
+                __O[2998] = ____opt_1255
                 if ____t_1257(____opt_1255) then
-                    ____t_result_1258 = __O[2994]
+                    ____t_result_1258 = __O[2998]
                 else
                     ____t_result_1258 = nil
                 end
@@ -7156,9 +7156,9 @@ local __O = {};
                 if ____opt_1259 ~= nil then
                     ____opt_1259 = ____opt_1259.phase
                 end
-                __O[2995] = ____opt_1259
+                __O[2999] = ____opt_1259
                 if ____t_1261(____opt_1259) then
-                    ____t_result_1264 = __O[2995]
+                    ____t_result_1264 = __O[2999]
                 else
                     local ____opt_1262 = __L1.room
                     if ____opt_1262 ~= nil then
@@ -7166,9 +7166,9 @@ local __O = {};
                     end
                     ____t_result_1264 = ____opt_1262
                 end
-                __O[2996] = ____t_result_1264
+                __O[3000] = ____t_result_1264
                 if ____t_1265(____t_result_1264) then
-                    ____t_result_1266 = __O[2996]
+                    ____t_result_1266 = __O[3000]
                 else
                     ____t_result_1266 = "selection"
                 end
@@ -7178,9 +7178,9 @@ local __O = {};
                 if ____opt_1267 ~= nil then
                     ____opt_1267 = ____opt_1267.matchId
                 end
-                __O[2997] = ____opt_1267
+                __O[3001] = ____opt_1267
                 if ____t_1269(____opt_1267) then
-                    ____t_result_1270 = __O[2997]
+                    ____t_result_1270 = __O[3001]
                 else
                     ____t_result_1270 = nil
                 end
@@ -7260,9 +7260,9 @@ local __O = {};
                         actions = __assign({}, p.used)
                     } end
                 )
-                __O[2998] = ____callq_1277_result_1278
+                __O[3002] = ____callq_1277_result_1278
                 if ____t_1279(____callq_1277_result_1278) then
-                    ____t_result_1282 = __O[2998]
+                    ____t_result_1282 = __O[3002]
                 else
                     local ____opt_1280 = __L1.room
                     if ____opt_1280 ~= nil then
@@ -7270,9 +7270,9 @@ local __O = {};
                     end
                     ____t_result_1282 = ____opt_1280
                 end
-                __O[2999] = ____t_result_1282
+                __O[3003] = ____t_result_1282
                 if ____t_1283(____t_result_1282) then
-                    ____t_result_1284 = __O[2999]
+                    ____t_result_1284 = __O[3003]
                 else
                     ____t_result_1284 = __arrL({}, 0)
                 end
@@ -7284,9 +7284,9 @@ local __O = {};
                     ____opt_1285 = ____opt_1285.shots
                 end
                 local ____lenq_1287_result_1288 = ____lenq_1287(____opt_1285)
-                __O[3000] = ____lenq_1287_result_1288
+                __O[3004] = ____lenq_1287_result_1288
                 if ____t_1289(____lenq_1287_result_1288) then
-                    ____t_result_1290 = __O[3000]
+                    ____t_result_1290 = __O[3004]
                 else
                     ____t_result_1290 = 0
                 end
@@ -7303,9 +7303,9 @@ local __O = {};
                 if ____opt_1291 ~= nil then
                     ____opt_1291 = ____opt_1291.remaining
                 end
-                __O[3001] = ____opt_1291
+                __O[3005] = ____opt_1291
                 if ____t_1293(____opt_1291) then
-                    ____t_result_1294 = __O[3001]
+                    ____t_result_1294 = __O[3005]
                 else
                     ____t_result_1294 = 0
                 end
@@ -7319,9 +7319,9 @@ local __O = {};
                 if ____opt_1297 ~= nil then
                     ____opt_result_1299 = ____opt_1297(____opt_1297)
                 end
-                __O[3002] = ____opt_result_1299
+                __O[3006] = ____opt_result_1299
                 if ____t_1300(____opt_result_1299) then
-                    ____t_result_1301 = __O[3002]
+                    ____t_result_1301 = __O[3006]
                 else
                     ____t_result_1301 = nil
                 end

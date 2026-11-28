@@ -14,9 +14,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawArena)
-    __O[2706] = ____temp_0
+    __O[2710] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[2706]
+        ____t_result_2 = __O[2710]
     else
         ____t_result_2 = window.BossArena
     end
@@ -527,11 +527,11 @@ local __O = {};
         else
             ____t_result_8 = ____type
         end
-        __O[2707] = ____t_result_8
+        __O[2711] = ____t_result_8
         if ____t_9(____t_result_8) then
             ____t_result_10 = ____type.light
         else
-            ____t_result_10 = __O[2707]
+            ____t_result_10 = __O[2711]
         end
         if ____t_11(____t_result_10) then
             ____t_result_12 = ____type
@@ -768,7 +768,7 @@ local __O = {};
         if ____opt_18 ~= nil then
             ____opt_result_20 = ____opt_18(____opt_18, ____type)
         end
-        __O[2708] = ____opt_result_20
+        __O[2712] = ____opt_result_20
         if ____t_21(____opt_result_20) then
             ____t_result_22 = window.HdMaps:drawArena(
                 c,
@@ -778,7 +778,7 @@ local __O = {};
                 homeX
             )
         else
-            ____t_result_22 = __O[2708]
+            ____t_result_22 = __O[2712]
         end
         if ____t_23(____t_result_22) then
             do
@@ -794,27 +794,27 @@ local __O = {};
                     local ____t_result_27
                     local ____t_26 = __t
                     local ____TS__Number_result_25 = __TS__Number(camera)
-                    __O[2709] = ____TS__Number_result_25
+                    __O[2713] = ____TS__Number_result_25
                     if ____t_26(____TS__Number_result_25) then
-                        ____t_result_27 = __O[2709]
+                        ____t_result_27 = __O[2713]
                     else
                         ____t_result_27 = 0
                     end
                     local ____t_result_30
                     local ____t_29 = __t
                     local ____TS__Number_result_28 = __TS__Number(t)
-                    __O[2710] = ____TS__Number_result_28
+                    __O[2714] = ____TS__Number_result_28
                     if ____t_29(____TS__Number_result_28) then
-                        ____t_result_30 = __O[2710]
+                        ____t_result_30 = __O[2714]
                     else
                         ____t_result_30 = 0
                     end
                     local ____t_result_33
                     local ____t_32 = __t
                     local ____TS__Number_result_31 = __TS__Number(homeX)
-                    __O[2711] = ____TS__Number_result_31
+                    __O[2715] = ____TS__Number_result_31
                     if ____t_32(____TS__Number_result_31) then
-                        ____t_result_33 = __O[2711]
+                        ____t_result_33 = __O[2715]
                     else
                         ____t_result_33 = 0
                     end
@@ -850,9 +850,9 @@ local __O = {};
         if ____opt_38 ~= nil then
             ____opt_result_40 = ____opt_38(____opt_38)
         end
-        __O[2712] = ____opt_result_40
+        __O[2716] = ____opt_result_40
         if ____t_41(____opt_result_40) then
-            ____t_result_47 = __O[2712]
+            ____t_result_47 = __O[2716]
         else
             local ____opt_44 = window.HdScene
             if ____opt_44 ~= nil then
@@ -880,27 +880,27 @@ local __O = {};
                 local ____t_result_52
                 local ____t_51 = __t
                 local ____TS__Number_result_50 = __TS__Number(camera)
-                __O[2713] = ____TS__Number_result_50
+                __O[2717] = ____TS__Number_result_50
                 if ____t_51(____TS__Number_result_50) then
-                    ____t_result_52 = __O[2713]
+                    ____t_result_52 = __O[2717]
                 else
                     ____t_result_52 = 0
                 end
                 local ____t_result_55
                 local ____t_54 = __t
                 local ____TS__Number_result_53 = __TS__Number(t)
-                __O[2714] = ____TS__Number_result_53
+                __O[2718] = ____TS__Number_result_53
                 if ____t_54(____TS__Number_result_53) then
-                    ____t_result_55 = __O[2714]
+                    ____t_result_55 = __O[2718]
                 else
                     ____t_result_55 = 0
                 end
                 local ____t_result_58
                 local ____t_57 = __t
                 local ____TS__Number_result_56 = __TS__Number(homeX)
-                __O[2715] = ____TS__Number_result_56
+                __O[2719] = ____TS__Number_result_56
                 if ____t_57(____TS__Number_result_56) then
-                    ____t_result_58 = __O[2715]
+                    ____t_result_58 = __O[2719]
                 else
                     ____t_result_58 = 0
                 end
@@ -994,36 +994,36 @@ local __O = {};
                 local ____t_result_69
                 local ____t_68 = __t
                 local ____get_result_67 = __get(C2, tema)
-                __O[2716] = ____get_result_67
+                __O[2720] = ____get_result_67
                 if ____t_68(____get_result_67) then
-                    ____t_result_69 = __O[2716]
+                    ____t_result_69 = __O[2720]
                 else
                     ____t_result_69 = C2.creuza
                 end
                 local ____t_result_72
                 local ____t_71 = __t
                 local ____TS__Number_result_70 = __TS__Number(camera)
-                __O[2717] = ____TS__Number_result_70
+                __O[2721] = ____TS__Number_result_70
                 if ____t_71(____TS__Number_result_70) then
-                    ____t_result_72 = __O[2717]
+                    ____t_result_72 = __O[2721]
                 else
                     ____t_result_72 = 0
                 end
                 local ____t_result_75
                 local ____t_74 = __t
                 local ____TS__Number_result_73 = __TS__Number(t)
-                __O[2718] = ____TS__Number_result_73
+                __O[2722] = ____TS__Number_result_73
                 if ____t_74(____TS__Number_result_73) then
-                    ____t_result_75 = __O[2718]
+                    ____t_result_75 = __O[2722]
                 else
                     ____t_result_75 = 0
                 end
                 local ____t_result_78
                 local ____t_77 = __t
                 local ____TS__Number_result_76 = __TS__Number(homeX)
-                __O[2719] = ____TS__Number_result_76
+                __O[2723] = ____TS__Number_result_76
                 if ____t_77(____TS__Number_result_76) then
-                    ____t_result_78 = __O[2719]
+                    ____t_result_78 = __O[2723]
                 else
                     ____t_result_78 = 0
                 end

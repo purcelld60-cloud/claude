@@ -290,6 +290,16 @@ function C.contexto(cv)
         local gx, gy = p[3] - p[1], p[4] - p[2]; local Lq = gx * gx + gy * gy
         local t, dt = 0, 0
         if Lq > 0 then t = ((ux - p[1]) * gx + (uy - p[2]) * gy) / Lq; dt = (dux * gx + duy * gy) / Lq end
+        if dt == 0 then -- degradê só na vertical: a cor é a mesma na linha inteira
+          local k = floor(t * 255 + .5); if k < 0 then k = 0 elseif k > 255 then k = 255 end
+          local a, cr2, cg2, cb2 = LA[k] * ga, LR[k], LG[k], LB[k]
+          if a <= 0 then return end
+          local antes, depois = -1, 0
+          for x = x0, x1 do local i = base + x
+            if not cm or cm[i] then local pos = (i - 1) * 4; local v = RD(px, pos); if v ~= antes then antes = v; depois = mx(v, cr2, cg2, cb2, a) end; WR(px, pos, depois) end
+          end
+          return
+        end
         for x = x0, x1 do local i = base + x
           if not cm or cm[i] then
             local k = floor(t * 255 + .5); if k < 0 then k = 0 elseif k > 255 then k = 255 end
@@ -321,21 +331,33 @@ function C.contexto(cv)
       return
     end
     local o = op or "source-over"
+    -- pixel art tem muitas cores repetidas lado a lado: o último fundo misturado e o resultado ficam guardados
+    local antes, depois = -1, 0
     if not op then
       -- source-over translúcido: caminho mais curto quando o fundo já é opaco
       local k = 1 - a; local ra, ga2, ba = r * a, g * a, b * a
       for x = x0, x1 do local i = base + x
         if not cm or cm[i] then
-          local v = RD(px, (i - 1) * 4)
-          if v >= OPACO then
-            WR(px, (i - 1) * 4, floor(ra + (v % 256) * k + .5) + floor(ga2 + (v // 256 % 256) * k + .5) * 256 + floor(ba + (v // 65536 % 256) * k + .5) * 65536 + OPACO)
-          else WR(px, (i - 1) * 4, misturar(o, v, r, g, b, a)) end
+          local pos = (i - 1) * 4
+          local v = RD(px, pos)
+          if v == antes then WR(px, pos, depois)
+          elseif v >= OPACO then
+            depois = floor(ra + (v % 256) * k + .5) + floor(ga2 + (v // 256 % 256) * k + .5) * 256 + floor(ba + (v // 65536 % 256) * k + .5) * 65536 + OPACO
+            antes = v; WR(px, pos, depois)
+          else WR(px, pos, misturar(o, v, r, g, b, a)) end
         end
       end
       return
     end
     local mx = modoDe(op)
-    for x = x0, x1 do local i = base + x; if not cm or cm[i] then WR(px, (i - 1) * 4, mx(RD(px, (i - 1) * 4), r, g, b, a)) end end
+    for x = x0, x1 do local i = base + x
+      if not cm or cm[i] then
+        local pos = (i - 1) * 4
+        local v = RD(px, pos)
+        if v ~= antes then antes = v; depois = mx(v, r, g, b, a) end
+        WR(px, pos, depois)
+      end
+    end
   end
   local function estiloDe(s) if type(s) == "table" and s.__grad then return s end; return cor(s) or { 0, 0, 0, 1 } end
 
@@ -687,6 +709,9 @@ function C.contexto(cv)
   end
   ctx.fillText = function(t, x, y, mw) texto(t, n0(x, 0), n0(y, 0), estiloDe(ctx.fillStyle), mw) end
   ctx.strokeText = function(t, x, y, mw) texto(t, n0(x, 0), n0(y, 0), estiloDe(ctx.strokeStyle), mw) end
+
+  -- cópia da tela inteira de outro canvas do mesmo tamanho (o jogo usa para o fundo guardado das lutas)
+  ctx.copiarTela = function(outro) pausa(); if type(outro) ~= "table" or not outro._ then return false end; return C.copiar(cv, outro) end
 
   -- o jogo chama ctx:metodo(...) (com o próprio ctx na frente)
   for k, f in pairs(ctx) do if type(f) == "function" and k:sub(1, 2) ~= "__" then api[k] = f; ctx[k] = function(_, ...) return f(...) end end end

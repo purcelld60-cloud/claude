@@ -28,9 +28,9 @@ local __O = {};
         if ____opt_277 ~= nil then
             ____opt_277 = ____opt_277(____this_278, q)
         end
-        __O[2305] = ____opt_277
+        __O[2309] = ____opt_277
         if ____t_279(____opt_277) then
-            ____t_result_280 = __O[2305]
+            ____t_result_280 = __O[2309]
         else
             ____t_result_280 = __arrL({}, 0)
         end
@@ -216,23 +216,23 @@ local __O = {};
         if state ~= nil then
             ____opt_result_4 = state.started
         end
-        __O[2255] = ____opt_result_4
+        __O[2259] = ____opt_result_4
         if ____t_5(____opt_result_4) then
             ____t_result_6 = not __t(state.paused)
         else
-            ____t_result_6 = __O[2255]
+            ____t_result_6 = __O[2259]
         end
-        __O[2256] = ____t_result_6
+        __O[2260] = ____t_result_6
         if ____t_7(____t_result_6) then
             ____t_result_8 = not __t(state.won)
         else
-            ____t_result_8 = __O[2256]
+            ____t_result_8 = __O[2260]
         end
-        __O[2257] = ____t_result_8
+        __O[2261] = ____t_result_8
         if ____t_9(____t_result_8) then
             ____t_result_10 = not __t(state.defeated)
         else
-            ____t_result_10 = __O[2257]
+            ____t_result_10 = __O[2261]
         end
         modalWasRunning = not not ____t_11(____t_result_10)
         if __t(modalWasRunning) then
@@ -289,15 +289,15 @@ local __O = {};
                         local ____t_result_14
                         local ____t_13 = __t
                         local ____temp_12 = e.clientX < b.left or e.clientX > b.right
-                        __O[2258] = ____temp_12
+                        __O[2262] = ____temp_12
                         if ____t_13(____temp_12) then
-                            ____t_result_14 = __O[2258]
+                            ____t_result_14 = __O[2262]
                         else
                             ____t_result_14 = e.clientY < b.top
                         end
-                        __O[2259] = ____t_result_14
+                        __O[2263] = ____t_result_14
                         if ____t_15(____t_result_14) then
-                            ____t_result_16 = __O[2259]
+                            ____t_result_16 = __O[2263]
                         else
                             ____t_result_16 = e.clientY > b.bottom
                         end
@@ -452,9 +452,9 @@ local __O = {};
         __re("iPhone|iPad|iPod", ""),
         window.navigator.userAgent
     )
-    __O[2260] = ____re_test_result_33
+    __O[2264] = ____re_test_result_33
     if ____t_34(____re_test_result_33) then
-        ____t_result_35 = __O[2260]
+        ____t_result_35 = __O[2264]
     else
         ____t_result_35 = window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
     end
@@ -467,9 +467,9 @@ local __O = {};
         local ____t_result_38
         local ____t_37 = __t
         local ____temp_36 = window.location.protocol == "file:"
-        __O[2261] = ____temp_36
+        __O[2265] = ____temp_36
         if ____t_37(____temp_36) then
-            ____t_result_38 = __O[2261]
+            ____t_result_38 = __O[2265]
         else
             ____t_result_38 = __call(
                 __new("URLSearchParams", window.location.search),
@@ -477,15 +477,15 @@ local __O = {};
                 "native"
             )
         end
-        __O[2262] = ____t_result_38
+        __O[2266] = ____t_result_38
         if ____t_39(____t_result_38) then
-            ____t_result_40 = __O[2262]
+            ____t_result_40 = __O[2266]
         else
             ____t_result_40 = window:matchMedia("(display-mode: standalone)").matches
         end
-        __O[2263] = ____t_result_40
+        __O[2267] = ____t_result_40
         if ____t_41(____t_result_40) then
-            ____t_result_42 = __O[2263]
+            ____t_result_42 = __O[2267]
         else
             ____t_result_42 = not not __t(window.navigator.standalone)
         end
@@ -514,9 +514,9 @@ local __O = {};
     local ____t_result_45
     local ____t_44 = __t
     local ____temp_43 = not __t(isIOS)
-    __O[2264] = ____temp_43
+    __O[2268] = ____temp_43
     if ____t_44(____temp_43) then
-        ____t_result_45 = __O[2264]
+        ____t_result_45 = __O[2268]
     else
         ____t_result_45 = standalone(nil)
     end
@@ -531,9 +531,9 @@ local __O = {};
         local ____t_result_50
         local ____t_49 = __t
         local ____temp_48 = vv and vv.width
-        __O[2265] = ____temp_48
+        __O[2269] = ____temp_48
         if ____t_49(____temp_48) then
-            ____t_result_50 = __O[2265]
+            ____t_result_50 = __O[2269]
         else
             ____t_result_50 = window.innerWidth
         end
@@ -541,9 +541,9 @@ local __O = {};
         local ____t_result_55
         local ____t_54 = __t
         local ____temp_53 = vv and vv.height
-        __O[2266] = ____temp_53
+        __O[2270] = ____temp_53
         if ____t_54(____temp_53) then
-            ____t_result_55 = __O[2266]
+            ____t_result_55 = __O[2270]
         else
             ____t_result_55 = window.innerHeight
         end
@@ -566,9 +566,9 @@ local __O = {};
             local ____t_result_60
             local ____t_59 = __t
             local ____temp_58 = vv and vv.offsetLeft
-            __O[2267] = ____temp_58
+            __O[2271] = ____temp_58
             if ____t_59(____temp_58) then
-                ____t_result_60 = __O[2267]
+                ____t_result_60 = __O[2271]
             else
                 ____t_result_60 = 0
             end
@@ -589,9 +589,9 @@ local __O = {};
             local ____t_result_69
             local ____t_68 = __t
             local ____temp_67 = vv and vv.offsetTop
-            __O[2268] = ____temp_67
+            __O[2272] = ____temp_67
             if ____t_68(____temp_67) then
-                ____t_result_69 = __O[2268]
+                ____t_result_69 = __O[2272]
             else
                 ____t_result_69 = 0
             end
@@ -607,9 +607,9 @@ local __O = {};
         local ____t_result_76
         local ____t_75 = __t
         local ____temp_74 = not __t(window.document:getElementById("startScreen").hidden)
-        __O[2269] = ____temp_74
+        __O[2273] = ____temp_74
         if ____t_75(____temp_74) then
-            ____t_result_76 = __O[2269]
+            ____t_result_76 = __O[2273]
         else
             ____t_result_76 = __call(
                 __arrL({
@@ -640,20 +640,20 @@ local __O = {};
         else
             ____t_result_77 = wide
         end
-        __O[2270] = ____t_result_77
+        __O[2274] = ____t_result_77
         if ____t_78(____t_result_77) then
             ____t_result_79 = height >= 280
         else
-            ____t_result_79 = __O[2270]
+            ____t_result_79 = __O[2274]
         end
         ____self_80_toggle_81(____self_80, "screen-crop-safe", ____t_result_79)
         local ____t_result_86
         local ____t_85 = __t
         local ____opt_82 = shell:querySelector(".game-topbar")
         local ____temp_84 = ____opt_82 and ____opt_82:getBoundingClientRect().height
-        __O[2271] = ____temp_84
+        __O[2275] = ____temp_84
         if ____t_85(____temp_84) then
-            ____t_result_86 = __O[2271]
+            ____t_result_86 = __O[2275]
         else
             ____t_result_86 = 0
         end
@@ -661,9 +661,9 @@ local __O = {};
         local ____t_90 = __t
         local ____opt_87 = shell:querySelector(".progress-hud")
         local ____temp_89 = ____opt_87 and ____opt_87:getBoundingClientRect().height
-        __O[2272] = ____temp_89
+        __O[2276] = ____temp_89
         if ____t_90(____temp_89) then
-            ____t_result_91 = __O[2272]
+            ____t_result_91 = __O[2276]
         else
             ____t_result_91 = 0
         end
@@ -677,9 +677,9 @@ local __O = {};
             local ____t_result_94
             local ____t_93 = __t
             local ____TS__ParseFloat_result_92 = __TS__ParseFloat(v)
-            __O[2273] = ____TS__ParseFloat_result_92
+            __O[2277] = ____TS__ParseFloat_result_92
             if ____t_93(____TS__ParseFloat_result_92) then
-                ____t_result_94 = __O[2273]
+                ____t_result_94 = __O[2277]
             else
                 ____t_result_94 = 0
             end
@@ -716,15 +716,15 @@ local __O = {};
         local ____t_result_97
         local ____t_96 = __t
         local ____temp_95 = not __t(isIOS)
-        __O[2274] = ____temp_95
+        __O[2278] = ____temp_95
         if ____t_96(____temp_95) then
-            ____t_result_97 = __O[2274]
+            ____t_result_97 = __O[2278]
         else
             ____t_result_97 = standalone(nil)
         end
-        __O[2275] = ____t_result_97
+        __O[2279] = ____t_result_97
         if ____t_98(____t_result_97) then
-            ____t_result_99 = __O[2275]
+            ____t_result_99 = __O[2279]
         else
             ____t_result_99 = isNative(nil)
         end
@@ -737,17 +737,17 @@ local __O = {};
         else
             ____t_result_100 = height <= width
         end
-        __O[2277] = ____t_result_100
+        __O[2281] = ____t_result_100
         if ____t_101(____t_result_100) then
-            ____t_result_106 = __O[2277]
+            ____t_result_106 = __O[2281]
         else
             local ____t_105 = __t
             local ____t_result_104
             local ____t_103 = __t
             local ____table_matches_102 = window:matchMedia("(pointer: coarse)").matches
-            __O[2276] = ____table_matches_102
+            __O[2280] = ____table_matches_102
             if ____t_103(____table_matches_102) then
-                ____t_result_104 = __O[2276]
+                ____t_result_104 = __O[2280]
             else
                 ____t_result_104 = width < 800
             end
@@ -843,11 +843,11 @@ local __O = {};
                     local ____t_result_124
                     local ____t_123 = __t
                     local ____temp_122 = not __t(standalone(nil))
-                    __O[2278] = ____temp_122
+                    __O[2282] = ____temp_122
                     if ____t_123(____temp_122) then
                         ____t_result_124 = shell.requestFullscreen
                     else
-                        ____t_result_124 = __O[2278]
+                        ____t_result_124 = __O[2282]
                     end
                     if ____t_125(____t_result_124) then
                         __TS__Await(shell:requestFullscreen({navigationUI = "hide"}))
@@ -856,11 +856,11 @@ local __O = {};
                         local ____t_result_128
                         local ____t_127 = __t
                         local ____temp_126 = not __t(standalone(nil))
-                        __O[2279] = ____temp_126
+                        __O[2283] = ____temp_126
                         if ____t_127(____temp_126) then
                             ____t_result_128 = shell.webkitRequestFullscreen
                         else
-                            ____t_result_128 = __O[2279]
+                            ____t_result_128 = __O[2283]
                         end
                         if ____t_129(____t_result_128) then
                             __TS__Await(shell:webkitRequestFullscreen())
@@ -1080,29 +1080,29 @@ local __O = {};
             local ____t_result_164
             local ____t_163 = __t
             local ____temp_162 = e.code == "Escape"
-            __O[2280] = ____temp_162
+            __O[2284] = ____temp_162
             if ____t_163(____temp_162) then
                 ____t_result_164 = immersive
             else
-                ____t_result_164 = __O[2280]
+                ____t_result_164 = __O[2284]
             end
-            __O[2281] = ____t_result_164
+            __O[2285] = ____t_result_164
             if ____t_165(____t_result_164) then
                 ____t_result_166 = not __t(baseGameShell(nil))
             else
-                ____t_result_166 = __O[2281]
+                ____t_result_166 = __O[2285]
             end
-            __O[2282] = ____t_result_166
+            __O[2286] = ____t_result_166
             if ____t_167(____t_result_166) then
                 ____t_result_168 = not __t(isNative(nil))
             else
-                ____t_result_168 = __O[2282]
+                ____t_result_168 = __O[2286]
             end
-            __O[2283] = ____t_result_168
+            __O[2287] = ____t_result_168
             if ____t_169(____t_result_168) then
                 ____t_result_170 = not __t(window.document:querySelector("dialog[open]"))
             else
-                ____t_result_170 = __O[2283]
+                ____t_result_170 = __O[2287]
             end
             if ____t_171(____t_result_170) then
                 exitImmersive(nil)
@@ -1137,23 +1137,23 @@ local __O = {};
         else
             ____t_result_178 = immersive
         end
-        __O[2284] = ____t_result_178
+        __O[2288] = ____t_result_178
         if ____t_179(____t_result_178) then
             ____t_result_180 = shell.classList:contains("screen-fill")
         else
-            ____t_result_180 = __O[2284]
+            ____t_result_180 = __O[2288]
         end
-        __O[2285] = ____t_result_180
+        __O[2289] = ____t_result_180
         if ____t_181(____t_result_180) then
             ____t_result_182 = shell.classList:contains("screen-crop-safe")
         else
-            ____t_result_182 = __O[2285]
+            ____t_result_182 = __O[2289]
         end
-        __O[2286] = ____t_result_182
+        __O[2290] = ____t_result_182
         if ____t_183(____t_result_182) then
             ____t_result_184 = not __t(shell.classList:contains("screen-story"))
         else
-            ____t_result_184 = __O[2286]
+            ____t_result_184 = __O[2290]
         end
         if ____t_185(____t_result_184) then
             local viewport = shell:querySelector(".viewport")
@@ -1176,9 +1176,9 @@ local __O = {};
             local ____t_result_194
             local ____t_193 = __t
             local ____TS__ParseFloat_result_192 = __TS__ParseFloat(shell.style:getPropertyValue("--screen-hud-height"))
-            __O[2287] = ____TS__ParseFloat_result_192
+            __O[2291] = ____TS__ParseFloat_result_192
             if ____t_193(____TS__ParseFloat_result_192) then
-                ____t_result_194 = __O[2287]
+                ____t_result_194 = __O[2291]
             else
                 ____t_result_194 = 72
             end
@@ -1186,9 +1186,9 @@ local __O = {};
             local ____t_result_197
             local ____t_196 = __t
             local ____TS__ParseFloat_result_195 = __TS__ParseFloat(window:getComputedStyle(shell).paddingTop)
-            __O[2288] = ____TS__ParseFloat_result_195
+            __O[2292] = ____TS__ParseFloat_result_195
             if ____t_196(____TS__ParseFloat_result_195) then
-                ____t_result_197 = __O[2288]
+                ____t_result_197 = __O[2292]
             else
                 ____t_result_197 = 0
             end
@@ -1246,9 +1246,9 @@ local __O = {};
                 if ____opt_202 ~= nil then
                     ____opt_202 = ____opt_202:canTravel(n, state.q)
                 end
-                __O[2289] = ____opt_202
+                __O[2293] = ____opt_202
                 if ____t_204(____opt_202) then
-                    ____t_result_205 = __O[2289]
+                    ____t_result_205 = __O[2293]
                 else
                     ____t_result_205 = {ok = true, reason = ""}
                 end
@@ -1302,9 +1302,9 @@ local __O = {};
         else
             ____t_result_208 = state.won
         end
-        __O[2290] = ____t_result_208
+        __O[2294] = ____t_result_208
         if ____t_209(____t_result_208) then
-            ____t_result_212 = __O[2290]
+            ____t_result_212 = __O[2294]
         else
             local ____opt_210 = state.training
             if ____opt_210 ~= nil then
@@ -1312,45 +1312,45 @@ local __O = {};
             end
             ____t_result_212 = ____opt_210
         end
-        __O[2291] = ____t_result_212
+        __O[2295] = ____t_result_212
         if ____t_213(____t_result_212) then
-            ____t_result_214 = __O[2291]
+            ____t_result_214 = __O[2295]
         else
             ____t_result_214 = state.activity
         end
-        __O[2292] = ____t_result_214
+        __O[2296] = ____t_result_214
         if ____t_215(____t_result_214) then
-            ____t_result_216 = __O[2292]
+            ____t_result_216 = __O[2296]
         else
             ____t_result_216 = state.dialog
         end
-        __O[2293] = ____t_result_216
+        __O[2297] = ____t_result_216
         if ____t_217(____t_result_216) then
-            ____t_result_218 = __O[2293]
+            ____t_result_218 = __O[2297]
         else
             ____t_result_218 = state.paused
         end
-        __O[2294] = ____t_result_218
+        __O[2298] = ____t_result_218
         if ____t_219(____t_result_218) then
-            ____t_result_220 = __O[2294]
+            ____t_result_220 = __O[2298]
         else
             ____t_result_220 = state.activeBoss
         end
-        __O[2295] = ____t_result_220
+        __O[2299] = ____t_result_220
         if ____t_221(____t_result_220) then
-            ____t_result_222 = __O[2295]
+            ____t_result_222 = __O[2299]
         else
             ____t_result_222 = state.routeTransition
         end
-        __O[2296] = ____t_result_222
+        __O[2300] = ____t_result_222
         if ____t_223(____t_result_222) then
-            ____t_result_224 = __O[2296]
+            ____t_result_224 = __O[2300]
         else
             ____t_result_224 = state.cutscene
         end
-        __O[2297] = ____t_result_224
+        __O[2301] = ____t_result_224
         if ____t_225(____t_result_224) then
-            ____t_result_226 = __O[2297]
+            ____t_result_226 = __O[2301]
         else
             ____t_result_226 = state.room
         end
@@ -1474,15 +1474,15 @@ local __O = {};
             else
                 ____t_result_243 = st.defeated
             end
-            __O[2298] = ____t_result_243
+            __O[2302] = ____t_result_243
             if ____t_244(____t_result_243) then
-                ____t_result_245 = __O[2298]
+                ____t_result_245 = __O[2302]
             else
                 ____t_result_245 = st.dialog
             end
-            __O[2299] = ____t_result_245
+            __O[2303] = ____t_result_245
             if ____t_246(____t_result_245) then
-                ____t_result_249 = __O[2299]
+                ____t_result_249 = __O[2303]
             else
                 local ____opt_247 = st.training
                 if ____opt_247 ~= nil then
@@ -1490,21 +1490,21 @@ local __O = {};
                 end
                 ____t_result_249 = ____opt_247
             end
-            __O[2300] = ____t_result_249
+            __O[2304] = ____t_result_249
             if ____t_250(____t_result_249) then
-                ____t_result_251 = __O[2300]
+                ____t_result_251 = __O[2304]
             else
                 ____t_result_251 = st.activity
             end
-            __O[2301] = ____t_result_251
+            __O[2305] = ____t_result_251
             if ____t_252(____t_result_251) then
-                ____t_result_253 = __O[2301]
+                ____t_result_253 = __O[2305]
             else
                 ____t_result_253 = st.cutscene
             end
-            __O[2302] = ____t_result_253
+            __O[2306] = ____t_result_253
             if ____t_254(____t_result_253) then
-                ____t_result_255 = __O[2302]
+                ____t_result_255 = __O[2306]
             else
                 ____t_result_255 = st.room
             end
@@ -1587,9 +1587,9 @@ local __O = {};
                 __len(e.touches),
                 1
             )
-            __O[2303] = ____gt_result_257
+            __O[2307] = ____gt_result_257
             if ____t_258(____gt_result_257) then
-                ____t_result_261 = __O[2303]
+                ____t_result_261 = __O[2307]
             else
                 local ____this_260
                 ____this_260 = e.target
@@ -1713,9 +1713,9 @@ local __O = {};
                 local ____t_result_275
                 local ____t_274 = __t
                 local ____lt_result_273 = __lt(p.points, 1)
-                __O[2304] = ____lt_result_273
+                __O[2308] = ____lt_result_273
                 if ____t_274(____lt_result_273) then
-                    ____t_result_275 = __O[2304]
+                    ____t_result_275 = __O[2308]
                 else
                     ____t_result_275 = not not __t(p.teto) and __ge(
                         __get(p.stats, b.dataset.spendStat),

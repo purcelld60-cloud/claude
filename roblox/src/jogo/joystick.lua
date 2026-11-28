@@ -91,9 +91,9 @@ local __O = {};
             local ____t_result_10
             local ____t_9 = __t
             local ____temp_8 = pointer ~= nil
-            __O[2248] = ____temp_8
+            __O[2252] = ____temp_8
             if ____t_9(____temp_8) then
-                ____t_result_10 = __O[2248]
+                ____t_result_10 = __O[2252]
             else
                 ____t_result_10 = e.pointerType == "mouse" and e.button ~= 0
             end
@@ -124,21 +124,21 @@ local __O = {};
                 ____opt_result_16 = s.started
             end
             local ____temp_18 = not ____t_17(____opt_result_16)
-            __O[2249] = ____temp_18
+            __O[2253] = ____temp_18
             if ____t_19(____temp_18) then
-                ____t_result_20 = __O[2249]
+                ____t_result_20 = __O[2253]
             else
                 ____t_result_20 = s.paused
             end
-            __O[2250] = ____t_result_20
+            __O[2254] = ____t_result_20
             if ____t_21(____t_result_20) then
-                ____t_result_22 = __O[2250]
+                ____t_result_22 = __O[2254]
             else
                 ____t_result_22 = s.dialog
             end
-            __O[2251] = ____t_result_22
+            __O[2255] = ____t_result_22
             if ____t_23(____t_result_22) then
-                ____t_result_26 = __O[2251]
+                ____t_result_26 = __O[2255]
             else
                 local ____opt_24 = s.training
                 if ____opt_24 ~= nil then
@@ -146,21 +146,21 @@ local __O = {};
                 end
                 ____t_result_26 = ____opt_24
             end
-            __O[2252] = ____t_result_26
+            __O[2256] = ____t_result_26
             if ____t_27(____t_result_26) then
-                ____t_result_28 = __O[2252]
+                ____t_result_28 = __O[2256]
             else
                 ____t_result_28 = s.defeated
             end
-            __O[2253] = ____t_result_28
+            __O[2257] = ____t_result_28
             if ____t_29(____t_result_28) then
-                ____t_result_30 = __O[2253]
+                ____t_result_30 = __O[2257]
             else
                 ____t_result_30 = s.won
             end
-            __O[2254] = ____t_result_30
+            __O[2258] = ____t_result_30
             if ____t_31(____t_result_30) then
-                ____t_result_32 = __O[2254]
+                ____t_result_32 = __O[2258]
             else
                 ____t_result_32 = s.cutscene
             end

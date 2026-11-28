@@ -22,9 +22,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(A)
-    __O[2720] = ____temp_0
+    __O[2724] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[2720]
+        ____t_result_2 = __O[2724]
     else
         ____t_result_2 = window.ArenaFx
     end
@@ -64,9 +64,9 @@ local __O = {};
             ____opt_result_12 = camera.x
         end
         local ____TS__Number_result_13 = __TS__Number(____opt_result_12)
-        __O[2721] = ____TS__Number_result_13
+        __O[2725] = ____TS__Number_result_13
         if ____t_14(____TS__Number_result_13) then
-            ____t_result_15 = __O[2721]
+            ____t_result_15 = __O[2725]
         else
             ____t_result_15 = 640
         end
@@ -292,9 +292,9 @@ local __O = {};
             local ____t_result_19
             local ____t_18 = __t
             local ____TS__Number_result_17 = __TS__Number(p.x)
-            __O[2722] = ____TS__Number_result_17
+            __O[2726] = ____TS__Number_result_17
             if ____t_18(____TS__Number_result_17) then
-                ____t_result_19 = __O[2722]
+                ____t_result_19 = __O[2726]
             else
                 ____t_result_19 = 0
             end
@@ -302,9 +302,9 @@ local __O = {};
             local ____t_result_22
             local ____t_21 = __t
             local ____TS__Number_result_20 = __TS__Number(p.y)
-            __O[2723] = ____TS__Number_result_20
+            __O[2727] = ____TS__Number_result_20
             if ____t_21(____TS__Number_result_20) then
-                ____t_result_22 = __O[2723]
+                ____t_result_22 = __O[2727]
             else
                 ____t_result_22 = 0
             end
@@ -312,9 +312,9 @@ local __O = {};
             local ____t_result_25
             local ____t_24 = __t
             local ____TS__Number_result_23 = __TS__Number(p.w)
-            __O[2724] = ____TS__Number_result_23
+            __O[2728] = ____TS__Number_result_23
             if ____t_24(____TS__Number_result_23) then
-                ____t_result_25 = __O[2724]
+                ____t_result_25 = __O[2728]
             else
                 ____t_result_25 = 100
             end
@@ -358,9 +358,9 @@ local __O = {};
                     local ____t_result_28
                     local ____t_27 = __t
                     local ____temp_26 = math.floor(w / 70) - 1
-                    __O[2725] = ____temp_26
+                    __O[2729] = ____temp_26
                     if ____t_27(____temp_26) then
-                        ____t_result_28 = __O[2725]
+                        ____t_result_28 = __O[2729]
                     else
                         ____t_result_28 = 1
                     end
@@ -556,9 +556,9 @@ local __O = {};
         local ____t_result_36
         local ____t_35 = __t
         local ____TS__Number_result_34 = __TS__Number(p.attackProgress)
-        __O[2726] = ____TS__Number_result_34
+        __O[2730] = ____TS__Number_result_34
         if ____t_35(____TS__Number_result_34) then
-            ____t_result_36 = __O[2726]
+            ____t_result_36 = __O[2730]
         else
             ____t_result_36 = 0
         end
@@ -567,9 +567,9 @@ local __O = {};
         local ____t_result_39
         local ____t_38 = __t
         local ____temp_37 = not __gt(p.attackAnim, 0) or prog < 0.16
-        __O[2727] = ____temp_37
+        __O[2731] = ____temp_37
         if ____t_38(____temp_37) then
-            ____t_result_39 = __O[2727]
+            ____t_result_39 = __O[2731]
         else
             ____t_result_39 = prog > 0.72
         end
@@ -606,11 +606,11 @@ local __O = {};
         local ____t_result_44
         local ____t_43 = __t
         local ____temp_42 = face < 0 and dir ~= "up"
-        __O[2728] = ____temp_42
+        __O[2732] = ____temp_42
         if ____t_43(____temp_42) then
             ____t_result_44 = dir ~= "down"
         else
-            ____t_result_44 = __O[2728]
+            ____t_result_44 = __O[2732]
         end
         if ____t_45(____t_result_44) then
             a0 = math.pi - 1
@@ -645,9 +645,9 @@ local __O = {};
         local ____t_result_48
         local ____t_47 = __t
         local ____temp_46 = not __t(p) or p.stocks == 0
-        __O[2729] = ____temp_46
+        __O[2733] = ____temp_46
         if ____t_47(____temp_46) then
-            ____t_result_48 = __O[2729]
+            ____t_result_48 = __O[2733]
         else
             ____t_result_48 = p.eliminated
         end
@@ -664,9 +664,9 @@ local __O = {};
         local ____t_result_53
         local ____t_52 = __t
         local ____call_result_51 = __call(hist, "get", id)
-        __O[2730] = ____call_result_51
+        __O[2734] = ____call_result_51
         if ____t_52(____call_result_51) then
-            ____t_result_53 = __O[2730]
+            ____t_result_53 = __O[2734]
         else
             ____t_result_53 = {
                 ghosts = __arrL({}, 0),
@@ -685,9 +685,9 @@ local __O = {};
         local ____t_result_56
         local ____t_55 = __t
         local ____TS__Number_result_54 = __TS__Number(p.vx)
-        __O[2731] = ____TS__Number_result_54
+        __O[2735] = ____TS__Number_result_54
         if ____t_55(____TS__Number_result_54) then
-            ____t_result_56 = __O[2731]
+            ____t_result_56 = __O[2735]
         else
             ____t_result_56 = 0
         end
@@ -695,9 +695,9 @@ local __O = {};
         local ____t_result_59
         local ____t_58 = __t
         local ____TS__Number_result_57 = __TS__Number(p.vy)
-        __O[2732] = ____TS__Number_result_57
+        __O[2736] = ____TS__Number_result_57
         if ____t_58(____TS__Number_result_57) then
-            ____t_result_59 = __O[2732]
+            ____t_result_59 = __O[2736]
         else
             ____t_result_59 = 0
         end
@@ -730,11 +730,11 @@ local __O = {};
         else
             ____t_result_65 = air
         end
-        __O[2733] = ____t_result_65
+        __O[2737] = ____t_result_65
         if ____t_66(____t_result_65) then
             ____t_result_67 = speed > 330
         else
-            ____t_result_67 = __O[2733]
+            ____t_result_67 = __O[2737]
         end
         local launched = ____t_result_67
         local ____t_result_68
@@ -747,9 +747,9 @@ local __O = {};
         local ____t_result_71
         local ____t_70 = __t
         local ____TS__Number_result_69 = __TS__Number(p.motionTime)
-        __O[2734] = ____TS__Number_result_69
+        __O[2738] = ____TS__Number_result_69
         if ____t_70(____TS__Number_result_69) then
-            ____t_result_71 = __O[2734]
+            ____t_result_71 = __O[2738]
         else
             ____t_result_71 = 0
         end
@@ -760,9 +760,9 @@ local __O = {};
         if ____opt_72 ~= nil then
             ____opt_72 = ____opt_72.color
         end
-        __O[2735] = ____opt_72
+        __O[2739] = ____opt_72
         if ____t_74(____opt_72) then
-            ____t_result_75 = __O[2735]
+            ____t_result_75 = __O[2739]
         else
             ____t_result_75 = "#ffd27a"
         end
@@ -773,20 +773,20 @@ local __O = {};
         local ____t_result_78
         local ____t_77 = __t
         local ____temp_76 = motion == "dash"
-        __O[2736] = ____temp_76
+        __O[2740] = ____temp_76
         if ____t_77(____temp_76) then
-            ____t_result_78 = __O[2736]
+            ____t_result_78 = __O[2740]
         else
             ____t_result_78 = launched
         end
-        __O[2737] = ____t_result_78
+        __O[2741] = ____t_result_78
         if ____t_79(____t_result_78) then
             ____t_result_80 = not __t(__len(h.ghosts)) or t - __get(
                 h.ghosts,
                 __len(h.ghosts) - 1
             ).t > 0.035
         else
-            ____t_result_80 = __O[2737]
+            ____t_result_80 = __O[2741]
         end
         if ____t_81(____t_result_80) then
             __call(
@@ -906,11 +906,11 @@ local __O = {};
             else
                 ____t_result_84 = air
             end
-            __O[2738] = ____t_result_84
+            __O[2742] = ____t_result_84
             if ____t_85(____t_result_84) then
                 ____t_result_86 = vy < -150
             else
-                ____t_result_86 = __O[2738]
+                ____t_result_86 = __O[2742]
             end
             if ____t_87(____t_result_86) then
                 sy = 1.07
@@ -1003,9 +1003,9 @@ local __O = {};
                                 local ____t_result_97
                                 local ____t_96 = __t
                                 local ____TS__Number_result_95 = __TS__Number(t)
-                                __O[2739] = ____TS__Number_result_95
+                                __O[2743] = ____TS__Number_result_95
                                 if ____t_96(____TS__Number_result_95) then
-                                    ____t_result_97 = __O[2739]
+                                    ____t_result_97 = __O[2743]
                                 else
                                     ____t_result_97 = 0
                                 end
@@ -1032,9 +1032,9 @@ local __O = {};
                                 local ____t_result_103
                                 local ____t_102 = __t
                                 local ____TS__Number_result_101 = __TS__Number(t)
-                                __O[2740] = ____TS__Number_result_101
+                                __O[2744] = ____TS__Number_result_101
                                 if ____t_102(____TS__Number_result_101) then
-                                    ____t_result_103 = __O[2740]
+                                    ____t_result_103 = __O[2744]
                                 else
                                     ____t_result_103 = 0
                                 end
@@ -1058,9 +1058,9 @@ local __O = {};
                             local ____t_result_109
                             local ____t_108 = __t
                             local ____TS__Number_result_107 = __TS__Number(t)
-                            __O[2741] = ____TS__Number_result_107
+                            __O[2745] = ____TS__Number_result_107
                             if ____t_108(____TS__Number_result_107) then
-                                ____t_result_109 = __O[2741]
+                                ____t_result_109 = __O[2745]
                             else
                                 ____t_result_109 = 0
                             end

@@ -523,9 +523,9 @@ local __O = {};
                 local ____t_result_2
                 local ____t_1 = __t
                 local ____call_result_0 = __call(byId, "get", id)
-                __O[2508] = ____call_result_0
+                __O[2512] = ____call_result_0
                 if ____t_1(____call_result_0) then
-                    ____t_result_2 = __O[2508]
+                    ____t_result_2 = __O[2512]
                 else
                     ____t_result_2 = __get(kits, 0)
                 end

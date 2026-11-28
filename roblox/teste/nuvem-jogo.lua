@@ -56,14 +56,18 @@ for _, nome in ipairs({ "fillRect", "fill", "stroke", "drawImage", "fillText", "
   local orig = api[nome]
   if type(orig) == "function" then api[nome] = function(...) local t = os.clock(); local a, b = orig(...); soma[nome] = (soma[nome] or 0) + os.clock() - t; cont[nome] = (cont[nome] or 0) + 1; return a, b end end
 end
+local function medir(etapa, n)
+  soma, cont = {}, {}
+  quadros(n, etapa, true)
+  local partes = {}; local tot = 0
+  for k, v in pairs(soma) do tot = tot + v; partes[#partes + 1] = ("%s %.0f ms (%d)"):format(k, v * 1000 / n, cont[k] / n) end
+  print(("  canvas do jogo: %.0f ms por quadro → %s"):format(tot * 1000 / n, table.concat(partes, " | ")))
+end
 for _, q in ipairs({ "low", "medium" }) do
   pcall(function() N.window.Graphics:set(q) end); quadros(3, "aquece")
-  soma, cont = {}, {}
-  local t = os.clock(); quadros(10, "jogando (" .. q .. ")", true); local total = os.clock() - t
-  local partes = {}; local tot = 0
-  for k, v in pairs(soma) do tot = tot + v; partes[#partes + 1] = ("%s %.0f ms (%d)"):format(k, v * 100, cont[k] / 10) end
-  print(("  canvas do jogo: %.0f ms por quadro → %s"):format(tot * 100, table.concat(partes, " | ")))
+  medir("jogando (" .. q .. ")", 10)
 end
+pcall(function() N.window.Graphics:set("auto-low") end)
 -- anda um pouco para a direita e pula
 N.tecla("keydown", "KeyD", "d"); quadros(8, "andando"); N.tecla("keyup", "KeyD", "d")
 N.tecla("keydown", "Space", " "); quadros(4, "pulo"); N.tecla("keyup", "Space", " ")
@@ -71,8 +75,16 @@ N.tecla("keydown", "Space", " "); quadros(4, "pulo"); N.tecla("keyup", "Space", 
 N.window.localStorage:setItem("daroca-sandbox-v1", "1")
 for _, chefe in ipairs({ "freddy", "igor" }) do
   local okB, r = pcall(G.startSandboxBoss, G, chefe); print("luta " .. chefe .. ": " .. tostring(okB and r or r))
-  for _ = 1, 3 do pcall(G.skipCutscene, G); pcall(G.closeDialogue, G); quadros(2, "abrindo luta") end
-  quadros(10, "luta " .. chefe, true)
+  for _ = 1, 3 do pcall(G.skipCutscene, G); pcall(G.closeDialogue, G); botao("BORA CONTINUAR"); quadros(2, "abrindo luta") end
+  for k = 1, 30 do quadros(1, "luta " .. chefe .. " começando"); if k % 5 == 0 then pcall(G.skipCutscene, G); pcall(G.closeDialogue, G); botao("BORA CONTINUAR") end end -- espera a arena terminar de entrar
+  local st = select(2, pcall(G.getState, G))
+  if type(st) == "table" then print(("  estado: arena=%s chefe=%s diálogo=%s cutscene=%s pausado=%s derrotado=%s cena=%s câmera=%s jogador=%s,%s vida=%s"):format(tostring(st.arenaType), tostring(st.activeBoss), tostring(st.dialog), tostring(st.cutscene), tostring(st.paused), tostring(st.defeated), tostring(st.scene), tostring(st.camera), tostring(st.player and st.player.x), tostring(st.player and st.player.y), tostring(st.player and st.player.hp))) end
+  local A = N.window.Art; local nC, nA = 0, 0
+  local oC, oA = A.drawScene, A.drawArena
+  pcall(function() A.drawScene = function(...) nC = nC + 1; return oC(...) end; A.drawArena = function(...) nA = nA + 1; return oA(...) end end)
+  quadros(3, "conta"); print(("  em 3 quadros: drawScene %d, drawArena %d"):format(nC, nA))
+  pcall(function() A.drawScene = oC; A.drawArena = oA end)
+  medir("luta " .. chefe .. " (baixa)", 10)
   N.tecla("keydown", "KeyJ", "j"); quadros(4, "golpe"); N.tecla("keyup", "KeyJ", "j")
 end
 print(("erros diferentes: %d · tempo total %.0f s"):format(nErros, os.clock() - t0))

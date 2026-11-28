@@ -16,9 +16,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art)
-    __O[2695] = ____temp_0
+    __O[2699] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[2695]
+        ____t_result_2 = __O[2699]
     else
         ____t_result_2 = window.SceneDetails
     end
@@ -39,9 +39,9 @@ local __O = {};
         local ____t_result_8
         local ____t_7 = __t
         local ____TS__Number_result_6 = __TS__Number(n)
-        __O[2696] = ____TS__Number_result_6
+        __O[2700] = ____TS__Number_result_6
         if ____t_7(____TS__Number_result_6) then
-            ____t_result_8 = __O[2696]
+            ____t_result_8 = __O[2700]
         else
             ____t_result_8 = 0
         end
@@ -147,9 +147,9 @@ local __O = {};
             local ____t_result_17
             local ____t_16 = __t
             local ____TS__Number_result_15 = __TS__Number(t)
-            __O[2697] = ____TS__Number_result_15
+            __O[2701] = ____TS__Number_result_15
             if ____t_16(____TS__Number_result_15) then
-                ____t_result_17 = __O[2697]
+                ____t_result_17 = __O[2701]
             else
                 ____t_result_17 = 0
             end
@@ -611,9 +611,9 @@ local __O = {};
         local ____t_result_41
         local ____t_40 = __t
         local ____get_result_39 = __get(palettes, scene)
-        __O[2698] = ____get_result_39
+        __O[2702] = ____get_result_39
         if ____t_40(____get_result_39) then
-            ____t_result_41 = __O[2698]
+            ____t_result_41 = __O[2702]
         else
             ____t_result_41 = __get(palettes, 0)
         end
@@ -807,9 +807,9 @@ local __O = {};
                     ____opt_50 = ____opt_50.gaps
                 end
                 local ____getq_52_result_53 = ____getq_52(____opt_50, scene)
-                __O[2699] = ____getq_52_result_53
+                __O[2703] = ____getq_52_result_53
                 if ____t_54(____getq_52_result_53) then
-                    ____t_result_55 = __O[2699]
+                    ____t_result_55 = __O[2703]
                 else
                     ____t_result_55 = __arrL({}, 0)
                 end
@@ -1587,9 +1587,9 @@ local __O = {};
             ____opt_result_66 = camera.x
         end
         local ____TS__Number_result_67 = __TS__Number(____opt_result_66)
-        __O[2700] = ____TS__Number_result_67
+        __O[2704] = ____TS__Number_result_67
         if ____t_68(____TS__Number_result_67) then
-            ____t_result_69 = __O[2700]
+            ____t_result_69 = __O[2704]
         else
             ____t_result_69 = 640
         end
@@ -1857,9 +1857,9 @@ local __O = {};
                 if camera ~= nil then
                     ____opt_result_72 = camera.x
                 end
-                __O[2701] = ____opt_result_72
+                __O[2705] = ____opt_result_72
                 if ____t_73(____opt_result_72) then
-                    ____t_result_74 = __O[2701]
+                    ____t_result_74 = __O[2705]
                 else
                     ____t_result_74 = 0
                 end
@@ -1921,9 +1921,9 @@ local __O = {};
                 local ____t_result_79
                 local ____t_78 = __t
                 local ____TS__Number_result_77 = __TS__Number(p.x)
-                __O[2702] = ____TS__Number_result_77
+                __O[2706] = ____TS__Number_result_77
                 if ____t_78(____TS__Number_result_77) then
-                    ____t_result_79 = __O[2702]
+                    ____t_result_79 = __O[2706]
                 else
                     ____t_result_79 = 0
                 end
@@ -1931,9 +1931,9 @@ local __O = {};
                 local ____t_result_82
                 local ____t_81 = __t
                 local ____TS__Number_result_80 = __TS__Number(p.y)
-                __O[2703] = ____TS__Number_result_80
+                __O[2707] = ____TS__Number_result_80
                 if ____t_81(____TS__Number_result_80) then
-                    ____t_result_82 = __O[2703]
+                    ____t_result_82 = __O[2707]
                 else
                     ____t_result_82 = 0
                 end
@@ -1941,9 +1941,9 @@ local __O = {};
                 local ____t_result_85
                 local ____t_84 = __t
                 local ____TS__Number_result_83 = __TS__Number(p.w)
-                __O[2704] = ____TS__Number_result_83
+                __O[2708] = ____TS__Number_result_83
                 if ____t_84(____TS__Number_result_83) then
-                    ____t_result_85 = __O[2704]
+                    ____t_result_85 = __O[2708]
                 else
                     ____t_result_85 = 0
                 end
@@ -2082,9 +2082,9 @@ local __O = {};
         local ____t_result_97
         local ____t_96 = __t
         local ____TS__Number_result_95 = __TS__Number(camera)
-        __O[2705] = ____TS__Number_result_95
+        __O[2709] = ____TS__Number_result_95
         if ____t_96(____TS__Number_result_95) then
-            ____t_result_97 = __O[2705]
+            ____t_result_97 = __O[2709]
         else
             ____t_result_97 = 0
         end

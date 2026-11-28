@@ -1028,9 +1028,9 @@ local __O = {};
         if ____opt_16 ~= nil then
             ____opt_result_18 = ____opt_16(____opt_16)
         end
-        __O[2323] = ____opt_result_18
+        __O[2327] = ____opt_result_18
         if ____t_19(____opt_result_18) then
-            ____t_result_20 = __O[2323]
+            ____t_result_20 = __O[2327]
         else
             ____t_result_20 = {}
         end
@@ -1041,9 +1041,9 @@ local __O = {};
             local ____t_result_23
             local ____t_22 = __t
             local ____get_result_21 = __get(map, p.name)
-            __O[2324] = ____get_result_21
+            __O[2328] = ____get_result_21
             if ____t_22(____get_result_21) then
-                ____t_result_23 = __O[2324]
+                ____t_result_23 = __O[2328]
             else
                 ____t_result_23 = nil
             end
@@ -1096,59 +1096,59 @@ local __O = {};
         local ____t_result_37
         local ____t_36 = __t
         local ____temp_35 = not not __t(st)
-        __O[2325] = ____temp_35
+        __O[2329] = ____temp_35
         if ____t_36(____temp_35) then
             ____t_result_37 = st.started
         else
-            ____t_result_37 = __O[2325]
+            ____t_result_37 = __O[2329]
         end
-        __O[2326] = ____t_result_37
+        __O[2330] = ____t_result_37
         if ____t_38(____t_result_37) then
             ____t_result_39 = st.playing ~= false
         else
-            ____t_result_39 = __O[2326]
+            ____t_result_39 = __O[2330]
         end
-        __O[2327] = ____t_result_39
+        __O[2331] = ____t_result_39
         if ____t_40(____t_result_39) then
             ____t_result_41 = not __t(st.paused)
         else
-            ____t_result_41 = __O[2327]
+            ____t_result_41 = __O[2331]
         end
-        __O[2328] = ____t_result_41
+        __O[2332] = ____t_result_41
         if ____t_42(____t_result_41) then
             ____t_result_43 = not __t(st.cutscene)
         else
-            ____t_result_43 = __O[2328]
+            ____t_result_43 = __O[2332]
         end
-        __O[2329] = ____t_result_43
+        __O[2333] = ____t_result_43
         if ____t_44(____t_result_43) then
             ____t_result_45 = not __t(st.room)
         else
-            ____t_result_45 = __O[2329]
+            ____t_result_45 = __O[2333]
         end
-        __O[2330] = ____t_result_45
+        __O[2334] = ____t_result_45
         if ____t_46(____t_result_45) then
             ____t_result_47 = not __t(fl)
         else
-            ____t_result_47 = __O[2330]
+            ____t_result_47 = __O[2334]
         end
-        __O[2331] = ____t_result_47
+        __O[2335] = ____t_result_47
         if ____t_48(____t_result_47) then
             ____t_result_49 = soundOn(nil)
         else
-            ____t_result_49 = __O[2331]
+            ____t_result_49 = __O[2335]
         end
-        __O[2332] = ____t_result_49
+        __O[2336] = ____t_result_49
         if ____t_50(____t_result_49) then
             ____t_result_51 = vol.ambient
         else
-            ____t_result_51 = __O[2332]
+            ____t_result_51 = __O[2336]
         end
-        __O[2333] = ____t_result_51
+        __O[2337] = ____t_result_51
         if ____t_52(____t_result_51) then
             ____t_result_53 = vol.sfx > 0
         else
-            ____t_result_53 = __O[2333]
+            ____t_result_53 = __O[2337]
         end
         local live = ____t_result_53
         local ____t_result_54
@@ -1213,17 +1213,17 @@ local __O = {};
         local ____t_result_65
         local ____t_64 = __t
         local ____temp_63 = not __t(file)
-        __O[2334] = ____temp_63
+        __O[2338] = ____temp_63
         if ____t_64(____temp_63) then
             ____t_result_65 = live
         else
-            ____t_result_65 = __O[2334]
+            ____t_result_65 = __O[2338]
         end
-        __O[2335] = ____t_result_65
+        __O[2339] = ____t_result_65
         if ____t_66(____t_result_65) then
             ____t_result_67 = __get(PROFILES, scene)
         else
-            ____t_result_67 = __O[2335]
+            ____t_result_67 = __O[2339]
         end
         if ____t_68(____t_result_67) then
             ____t_result_69 = __add(scene, "")
@@ -1268,9 +1268,9 @@ local __O = {};
             if ____opt_result_83 ~= nil then
                 ____opt_result_84 = ____opt_result_83.rain
             end
-            __O[2336] = ____opt_result_84
+            __O[2340] = ____opt_result_84
             if ____t_85(____opt_result_84) then
-                ____t_result_86 = __O[2336]
+                ____t_result_86 = __O[2340]
             else
                 ____t_result_86 = 0
             end
@@ -1312,11 +1312,11 @@ local __O = {};
                 local ____t_result_89
                 local ____t_88 = __t
                 local ____lenq_result_87 = __lenq(ev)
-                __O[2337] = ____lenq_result_87
+                __O[2341] = ____lenq_result_87
                 if ____t_88(____lenq_result_87) then
                     ____t_result_89 = math.random() < 0.8
                 else
-                    ____t_result_89 = __O[2337]
+                    ____t_result_89 = __O[2341]
                 end
                 if ____t_90(____t_result_89) then
                     ambEvent(
@@ -1405,9 +1405,9 @@ local __O = {};
                 if ctx ~= nil then
                     ____opt_result_101 = ctx.state
                 end
-                __O[2338] = ____opt_result_101
+                __O[2342] = ____opt_result_101
                 if ____t_102(____opt_result_101) then
-                    ____t_result_103 = __O[2338]
+                    ____t_result_103 = __O[2342]
                 else
                     ____t_result_103 = "sem áudio"
                 end

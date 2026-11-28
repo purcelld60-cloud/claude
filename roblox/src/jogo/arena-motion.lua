@@ -46,9 +46,9 @@ local __O = {};
         if ____opt_1 ~= nil then
             ____opt_1 = ____opt_1.jumpPress
         end
-        __O[2805] = ____opt_1
+        __O[2809] = ____opt_1
         if ____t_3(____opt_1) then
-            ____t_result_4 = __O[2805]
+            ____t_result_4 = __O[2809]
         else
             ____t_result_4 = 0
         end
@@ -58,9 +58,9 @@ local __O = {};
         if ____opt_5 ~= nil then
             ____opt_5 = ____opt_5.dash
         end
-        __O[2806] = ____opt_5
+        __O[2810] = ____opt_5
         if ____t_7(____opt_5) then
-            ____t_result_8 = __O[2806]
+            ____t_result_8 = __O[2810]
         else
             ____t_result_8 = 0
         end
@@ -71,9 +71,9 @@ local __O = {};
             local ____t_result_14
             local ____t_13 = __t
             local ____TS__Number_result_12 = __TS__Number(__get(p, key))
-            __O[2807] = ____TS__Number_result_12
+            __O[2811] = ____TS__Number_result_12
             if ____t_13(____TS__Number_result_12) then
-                ____t_result_14 = __O[2807]
+                ____t_result_14 = __O[2811]
             else
                 ____t_result_14 = 0
             end
@@ -96,9 +96,9 @@ local __O = {};
         local ____t_result_21
         local ____t_20 = __t
         local ____TS__Number_result_19 = __TS__Number(p.wallTouches)
-        __O[2808] = ____TS__Number_result_19
+        __O[2812] = ____TS__Number_result_19
         if ____t_20(____TS__Number_result_19) then
-            ____t_result_21 = __O[2808]
+            ____t_result_21 = __O[2812]
         else
             ____t_result_21 = 0
         end
@@ -115,9 +115,9 @@ local __O = {};
         local ____t_result_27
         local ____t_26 = __t
         local ____TS__Number_result_25 = __TS__Number(p.motionTime)
-        __O[2809] = ____TS__Number_result_25
+        __O[2813] = ____TS__Number_result_25
         if ____t_26(____TS__Number_result_25) then
-            ____t_result_27 = __O[2809]
+            ____t_result_27 = __O[2813]
         else
             ____t_result_27 = 0
         end
@@ -148,9 +148,9 @@ local __O = {};
         local ____t_result_34
         local ____t_33 = __t
         local ____temp_32 = not __t(p) or __le(p.stocks, 0)
-        __O[2810] = ____temp_32
+        __O[2814] = ____temp_32
         if ____t_33(____temp_32) then
-            ____t_result_34 = __O[2810]
+            ____t_result_34 = __O[2814]
         else
             ____t_result_34 = __gt(p.respawn, 0)
         end
@@ -160,9 +160,9 @@ local __O = {};
         local ____t_result_38
         local ____t_37 = __t
         local ____TS__Number_result_36 = __TS__Number(dt)
-        __O[2811] = ____TS__Number_result_36
+        __O[2815] = ____TS__Number_result_36
         if ____t_37(____TS__Number_result_36) then
-            ____t_result_38 = __O[2811]
+            ____t_result_38 = __O[2815]
         else
             ____t_result_38 = 0
         end
@@ -188,9 +188,9 @@ local __O = {};
             local ____t_result_44
             local ____t_43 = __t
             local ____get_result_42 = __get(p, key)
-            __O[2812] = ____get_result_42
+            __O[2816] = ____get_result_42
             if ____t_43(____get_result_42) then
-                ____t_result_44 = __O[2812]
+                ____t_result_44 = __O[2816]
             else
                 ____t_result_44 = 0
             end
@@ -206,9 +206,9 @@ local __O = {};
         local ____t_result_49
         local ____t_48 = __t
         local ____TS__Number_result_47 = __TS__Number(i.x)
-        __O[2813] = ____TS__Number_result_47
+        __O[2817] = ____TS__Number_result_47
         if ____t_48(____TS__Number_result_47) then
-            ____t_result_49 = __O[2813]
+            ____t_result_49 = __O[2817]
         else
             ____t_result_49 = 0
         end
@@ -216,9 +216,9 @@ local __O = {};
         local ____t_result_52
         local ____t_51 = __t
         local ____TS__Number_result_50 = __TS__Number(i.y)
-        __O[2814] = ____TS__Number_result_50
+        __O[2818] = ____TS__Number_result_50
         if ____t_51(____TS__Number_result_50) then
-            ____t_result_52 = __O[2814]
+            ____t_result_52 = __O[2818]
         else
             ____t_result_52 = 0
         end
@@ -248,15 +248,15 @@ local __O = {};
         local ____t_result_59
         local ____t_58 = __t
         local ____TS__Number_result_57 = __TS__Number(i.response)
-        __O[2815] = ____TS__Number_result_57
+        __O[2819] = ____TS__Number_result_57
         if ____t_58(____TS__Number_result_57) then
-            ____t_result_59 = __O[2815]
+            ____t_result_59 = __O[2819]
         else
             ____t_result_59 = options.response
         end
-        __O[2816] = ____t_result_59
+        __O[2820] = ____t_result_59
         if ____t_60(____t_result_59) then
-            ____t_result_61 = __O[2816]
+            ____t_result_61 = __O[2820]
         else
             ____t_result_61 = 1
         end
@@ -278,11 +278,11 @@ local __O = {};
         else
             ____t_result_63 = x
         end
-        __O[2817] = ____t_result_63
+        __O[2821] = ____t_result_63
         if ____t_64(____t_result_63) then
             ____t_result_65 = __le(p.wallKick, 0)
         else
-            ____t_result_65 = __O[2817]
+            ____t_result_65 = __O[2821]
         end
         if ____t_66(____t_result_65) then
             p.facing = __TS__MathSign(x)
@@ -291,11 +291,11 @@ local __O = {};
         local ____t_result_69
         local ____t_68 = __t
         local ____temp_67 = __gt(p.launch, 0) and math.abs(p.vx) < speed * 0.55
-        __O[2818] = ____temp_67
+        __O[2822] = ____temp_67
         if ____t_68(____temp_67) then
             ____t_result_69 = __le(p.stun, 0)
         else
-            ____t_result_69 = __O[2818]
+            ____t_result_69 = __O[2822]
         end
         if ____t_70(____t_result_69) then
             p.launch = 0
@@ -317,9 +317,9 @@ local __O = {};
         local ____t_result_73
         local ____t_72 = __t
         local ____TS__Number_result_71 = __TS__Number(i.jumpPress)
-        __O[2819] = ____TS__Number_result_71
+        __O[2823] = ____TS__Number_result_71
         if ____t_72(____TS__Number_result_71) then
-            ____t_result_73 = __O[2819]
+            ____t_result_73 = __O[2823]
         else
             ____t_result_73 = 0
         end
@@ -341,23 +341,23 @@ local __O = {};
             local ____t_result_78
             local ____t_77 = __t
             local ____le_result_76 = __le(p.stun, 0)
-            __O[2820] = ____le_result_76
+            __O[2824] = ____le_result_76
             if ____t_77(____le_result_76) then
                 ____t_result_78 = p.wallSide
             else
-                ____t_result_78 = __O[2820]
+                ____t_result_78 = __O[2824]
             end
-            __O[2821] = ____t_result_78
+            __O[2825] = ____t_result_78
             if ____t_79(____t_result_78) then
                 ____t_result_80 = __gt(p.wallGrip, 0)
             else
-                ____t_result_80 = __O[2821]
+                ____t_result_80 = __O[2825]
             end
-            __O[2822] = ____t_result_80
+            __O[2826] = ____t_result_80
             if ____t_81(____t_result_80) then
                 ____t_result_82 = __lt(p.wallTouches, 4)
             else
-                ____t_result_82 = __O[2822]
+                ____t_result_82 = __O[2826]
             end
             if ____t_83(____t_result_82) then
                 p.vx = __TS__Number(-p.wallSide) * 360
@@ -382,11 +382,11 @@ local __O = {};
                 local ____t_result_88
                 local ____t_87 = __t
                 local ____temp_86 = y > 0.5
-                __O[2823] = ____temp_86
+                __O[2827] = ____temp_86
                 if ____t_87(____temp_86) then
                     ____t_result_88 = p.ground
                 else
-                    ____t_result_88 = __O[2823]
+                    ____t_result_88 = __O[2827]
                 end
                 if ____t_89(____t_result_88) then
                     p.dropThrough = 0.25
@@ -416,9 +416,9 @@ local __O = {};
         local ____t_result_94
         local ____t_93 = __t
         local ____TS__Number_result_92 = __TS__Number(i.dash)
-        __O[2824] = ____TS__Number_result_92
+        __O[2828] = ____TS__Number_result_92
         if ____t_93(____TS__Number_result_92) then
-            ____t_result_94 = __O[2824]
+            ____t_result_94 = __O[2828]
         else
             ____t_result_94 = 0
         end
@@ -462,17 +462,17 @@ local __O = {};
             local ____t_result_103
             local ____t_102 = __t
             local ____temp_101 = not __t(p.ground) and y > 0.55
-            __O[2825] = ____temp_101
+            __O[2829] = ____temp_101
             if ____t_102(____temp_101) then
                 ____t_result_103 = __gt(p.vy, -40)
             else
-                ____t_result_103 = __O[2825]
+                ____t_result_103 = __O[2829]
             end
-            __O[2826] = ____t_result_103
+            __O[2830] = ____t_result_103
             if ____t_104(____t_result_103) then
                 ____t_result_105 = __le(p.stun, 0)
             else
-                ____t_result_105 = __O[2826]
+                ____t_result_105 = __O[2830]
             end
             local fast = ____t_result_105
             p.vy = math.min(
@@ -498,11 +498,11 @@ local __O = {};
         else
             ____t_result_106 = main
         end
-        __O[2827] = ____t_result_106
+        __O[2831] = ____t_result_106
         if ____t_107(____t_result_106) then
             ____t_result_108 = __lt(p.y - 64, main.y + 170)
         else
-            ____t_result_108 = __O[2827]
+            ____t_result_108 = __O[2831]
         end
         if ____t_109(____t_result_108) then
             local left = main.x
@@ -536,29 +536,29 @@ local __O = {};
         else
             ____t_result_110 = wall
         end
-        __O[2828] = ____t_result_110
+        __O[2832] = ____t_result_110
         if ____t_111(____t_result_110) then
             ____t_result_112 = __le(p.wallKick, 0)
         else
-            ____t_result_112 = __O[2828]
+            ____t_result_112 = __O[2832]
         end
-        __O[2829] = ____t_result_112
+        __O[2833] = ____t_result_112
         if ____t_113(____t_result_112) then
             ____t_result_114 = __gt(p.wallGrip, 0)
         else
-            ____t_result_114 = __O[2829]
+            ____t_result_114 = __O[2833]
         end
-        __O[2830] = ____t_result_114
+        __O[2834] = ____t_result_114
         if ____t_115(____t_result_114) then
             ____t_result_116 = __lt(p.wallTouches, 4)
         else
-            ____t_result_116 = __O[2830]
+            ____t_result_116 = __O[2834]
         end
-        __O[2831] = ____t_result_116
+        __O[2835] = ____t_result_116
         if ____t_117(____t_result_116) then
             ____t_result_118 = __le(p.dashTime, 0)
         else
-            ____t_result_118 = __O[2831]
+            ____t_result_118 = __O[2835]
         end
         if ____t_119(____t_result_118) then
             p.wallSide = wall
@@ -576,20 +576,20 @@ local __O = {};
                 local ____t_result_122
                 local ____t_121 = __t
                 local ____temp_120 = __le(previousY, platform.y + 3) and __ge(p.y, platform.y)
-                __O[2832] = ____temp_120
+                __O[2836] = ____temp_120
                 if ____t_121(____temp_120) then
                     ____t_result_122 = __ge(p.x, platform.x - 10)
                 else
-                    ____t_result_122 = __O[2832]
+                    ____t_result_122 = __O[2836]
                 end
-                __O[2833] = ____t_result_122
+                __O[2837] = ____t_result_122
                 if ____t_123(____t_result_122) then
                     ____t_result_124 = __le(
                         p.x,
                         __add(platform.x, platform.w) + 10
                     )
                 else
-                    ____t_result_124 = __O[2833]
+                    ____t_result_124 = __O[2837]
                 end
                 if ____t_125(____t_result_124) then
                     p.y = platform.y

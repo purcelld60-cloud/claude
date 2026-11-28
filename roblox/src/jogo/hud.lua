@@ -20,15 +20,15 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(shell) or not __t(hud)
-    __O[3063] = ____temp_0
+    __O[3067] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[3063]
+        ____t_result_2 = __O[3067]
     else
         ____t_result_2 = not __t(ending)
     end
-    __O[3064] = ____t_result_2
+    __O[3068] = ____t_result_2
     if ____t_3(____t_result_2) then
-        ____t_result_4 = __O[3064]
+        ____t_result_4 = __O[3068]
     else
         ____t_result_4 = not __t(endCanvas)
     end
@@ -60,9 +60,9 @@ local __O = {};
         local ____t_result_10
         local ____t_9 = __t
         local ____TS__Number_result_8 = __TS__Number(boss.phaseCount)
-        __O[3065] = ____TS__Number_result_8
+        __O[3069] = ____TS__Number_result_8
         if ____t_9(____TS__Number_result_8) then
-            ____t_result_10 = __O[3065]
+            ____t_result_10 = __O[3069]
         else
             ____t_result_10 = 3
         end
@@ -76,9 +76,9 @@ local __O = {};
         local ____t_result_13
         local ____t_12 = __t
         local ____TS__Number_result_11 = __TS__Number(boss.phase)
-        __O[3066] = ____TS__Number_result_11
+        __O[3070] = ____TS__Number_result_11
         if ____t_12(____TS__Number_result_11) then
-            ____t_result_13 = __O[3066]
+            ____t_result_13 = __O[3070]
         else
             ____t_result_13 = 1
         end
@@ -164,9 +164,9 @@ local __O = {};
         local ____t_result_19
         local ____t_18 = __t
         local ____temp_17 = not __t(statsModal)
-        __O[3067] = ____temp_17
+        __O[3071] = ____temp_17
         if ____t_18(____temp_17) then
-            ____t_result_19 = __O[3067]
+            ____t_result_19 = __O[3071]
         else
             ____t_result_19 = statsModal.dataset.ranchReady
         end
@@ -249,9 +249,9 @@ local __O = {};
             local ____t_result_37
             local ____t_36 = __t
             local ____TS__Number_result_35 = __TS__Number(__getq(state.stats, stat))
-            __O[3068] = ____TS__Number_result_35
+            __O[3072] = ____TS__Number_result_35
             if ____t_36(____TS__Number_result_35) then
-                ____t_result_37 = __O[3068]
+                ____t_result_37 = __O[3072]
             else
                 ____t_result_37 = 0
             end
@@ -446,27 +446,27 @@ local __O = {};
             local ____t_result_96
             local ____t_95 = __t
             local ____temp_94 = shell.classList:contains("in-main-menu")
-            __O[3069] = ____temp_94
+            __O[3073] = ____temp_94
             if ____t_95(____temp_94) then
-                ____t_result_96 = __O[3069]
+                ____t_result_96 = __O[3073]
             else
                 ____t_result_96 = shell.classList:contains("is-cutscene")
             end
-            __O[3070] = ____t_result_96
+            __O[3074] = ____t_result_96
             if ____t_97(____t_result_96) then
-                ____t_result_98 = __O[3070]
+                ____t_result_98 = __O[3074]
             else
                 ____t_result_98 = shell.classList:contains("is-dialog")
             end
-            __O[3071] = ____t_result_98
+            __O[3075] = ____t_result_98
             if ____t_99(____t_result_98) then
-                ____t_result_100 = __O[3071]
+                ____t_result_100 = __O[3075]
             else
                 ____t_result_100 = shell.classList:contains("is-paused")
             end
-            __O[3072] = ____t_result_100
+            __O[3076] = ____t_result_100
             if ____t_101(____t_result_100) then
-                ____t_result_102 = __O[3072]
+                ____t_result_102 = __O[3076]
             else
                 ____t_result_102 = shell.classList:contains("is-chapter-ended")
             end
@@ -491,9 +491,9 @@ local __O = {};
                 local ____t_result_111
                 local ____t_110 = __t
                 local ____TS__Number_result_109 = __TS__Number(boss.hp)
-                __O[3073] = ____TS__Number_result_109
+                __O[3077] = ____TS__Number_result_109
                 if ____t_110(____TS__Number_result_109) then
-                    ____t_result_111 = __O[3073]
+                    ____t_result_111 = __O[3077]
                 else
                     ____t_result_111 = 0
                 end
@@ -503,15 +503,15 @@ local __O = {};
                 local ____t_result_114
                 local ____t_113 = __t
                 local ____TS__Number_result_112 = __TS__Number(boss.phaseMaxHp)
-                __O[3074] = ____TS__Number_result_112
+                __O[3078] = ____TS__Number_result_112
                 if ____t_113(____TS__Number_result_112) then
-                    ____t_result_114 = __O[3074]
+                    ____t_result_114 = __O[3078]
                 else
                     ____t_result_114 = __TS__Number(boss.max)
                 end
-                __O[3075] = ____t_result_114
+                __O[3079] = ____t_result_114
                 if ____t_115(____t_result_114) then
-                    ____t_result_116 = __O[3075]
+                    ____t_result_116 = __O[3079]
                 else
                     ____t_result_116 = 1
                 end
@@ -575,9 +575,9 @@ local __O = {};
                     dashing = "INVESTIDA",
                     firing = "DESVIE!"
                 }, boss.state)
-                __O[3076] = ____get_result_119
+                __O[3080] = ____get_result_119
                 if ____t_120(____get_result_119) then
-                    ____t_result_121 = __O[3076]
+                    ____t_result_121 = __O[3080]
                 else
                     ____t_result_121 = "CHEFÃO"
                 end

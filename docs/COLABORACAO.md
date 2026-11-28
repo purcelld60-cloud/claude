@@ -465,3 +465,29 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
       redesenhada no carregamento.
   - **Resultado em Lua 5.3:** a tela-inicial carrega em 0,02 s (antes 0,21 s) e o logo fica pronto em ~20 quadros.
   - O cliente avisa no Output qualquer módulo que leve mais de 0,5 s para carregar.
+- **28/11 · Claude:** **Roblox testado de verdade num servidor do Roblox (Open Cloud) e publicado.**
+  - **Ferramentas:** `roblox/ferramentas/nuvem.py` publica uma versão no lugar e roda um script Luau nela (Luau Execution).
+    A chave da API não fica no repositório. Os testes ficam em `roblox/teste/nuvem-*.lua`:
+    - `nuvem-jogo.lua`: título → JOGAR → história → lutas, com o tempo de cada método do canvas;
+    - `nuvem-cenas.lua`: todos os cenários, minigames da C1, os dois mapas e a campanha 2 (com `MODO = "fliperama"`,
+      os 11 jogos do fliperama).
+  - **Conversão** (`converter.mjs`): o alvo Luau do TSTL tira de dentro dos `if` o que vem antes de um `?.`. Agora sai em
+    Lua 5.3 e passa por um ajuste para Luau:
+    - `goto __continue` vira `continue`, levando o incremento do `for`;
+    - o lualib perde o `_G.pcall` e o `debug.getinfo`, que não existem no Roblox.
+  - **Mapa** (`mapa3d.js`): montar o mapa pixel a pixel passava de 70 s no Roblox e derrubava o script. Com
+    `DAROCA_ROBLOX`, `Mapa3D.abrir` mostra um quadro leve (`abrirSimples`): lista dos lugares, cadeados, motivo e
+    "ir". No navegador nada muda.
+  - **Lutas** (`game.js`, `fundoDaArena`): com a arena aberta, a câmera fica parada. O cenário de trás é desenhado uma
+    vez e depois copiado com `ctx.copiarTela`, que só existe no canvas do Roblox. No servidor, a luta na BAIXA caiu de
+    0,16 s para 0,01 s por quadro.
+  - **Canvas** (`canvas.lua`):
+    - retângulo opaco e `clearRect` usam `buffer.fill`/`buffer.copy`;
+    - a mistura translúcida guarda o último fundo e o resultado (pixel art repete cor), com imagem idêntica;
+    - `copiarTela` copia a tela inteira.
+  - **Página** (`desenhista.lua`): frases viram imagem guardada; a pele é colada por faixas.
+  - **Medido no servidor:**
+    - jogando na BAIXA ≈ 0,09 s por quadro;
+    - MÉDIA ≈ 0,30 s;
+    - o que sobra é a lógica de `art`/`game`/`hd-maps`, grandes demais para o código nativo do Roblox.
+

@@ -25,21 +25,21 @@ local __O = {};
         else
             ____t_result_52 = not __t(offlineAllowed)
         end
-        __O[2460] = ____t_result_52
+        __O[2464] = ____t_result_52
         if ____t_53(____t_result_52) then
-            ____t_result_54 = __O[2460]
+            ____t_result_54 = __O[2464]
         else
             ____t_result_54 = not __t(installed)
         end
-        __O[2461] = ____t_result_54
+        __O[2465] = ____t_result_54
         if ____t_55(____t_result_54) then
-            ____t_result_56 = __O[2461]
+            ____t_result_56 = __O[2465]
         else
             ____t_result_56 = not __t(window.navigator.onLine)
         end
-        __O[2462] = ____t_result_56
+        __O[2466] = ____t_result_56
         if ____t_57(____t_result_56) then
-            ____t_result_58 = __O[2462]
+            ____t_result_58 = __O[2466]
         else
             ____t_result_58 = not __t(window.navigator.serviceWorker)
         end
@@ -59,9 +59,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = window.location.protocol == "file:" or window.location.protocol == "daroca:"
-    __O[2449] = ____temp_0
+    __O[2453] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[2449]
+        ____t_result_2 = __O[2453]
     else
         ____t_result_2 = __call(
             __new("URLSearchParams", window.location.search),
@@ -74,9 +74,9 @@ local __O = {};
         local ____t_result_5
         local ____t_4 = __t
         local ____table_matches_3 = window:matchMedia("(display-mode: standalone)").matches
-        __O[2450] = ____table_matches_3
+        __O[2454] = ____table_matches_3
         if ____t_4(____table_matches_3) then
-            ____t_result_5 = __O[2450]
+            ____t_result_5 = __O[2454]
         else
             ____t_result_5 = not not __t(window.navigator.standalone)
         end
@@ -88,9 +88,9 @@ local __O = {};
         __re("iPhone|iPad|iPod", ""),
         window.navigator.userAgent
     )
-    __O[2451] = ____re_test_result_6
+    __O[2455] = ____re_test_result_6
     if ____t_7(____re_test_result_6) then
-        ____t_result_8 = __O[2451]
+        ____t_result_8 = __O[2455]
     else
         ____t_result_8 = window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
     end
@@ -125,9 +125,9 @@ local __O = {};
             local ____t_result_15
             local ____t_14 = __t
             local ____temp_13 = window.document:getElementById("gameShell")
-            __O[2452] = ____temp_13
+            __O[2456] = ____temp_13
             if ____t_14(____temp_13) then
-                ____t_result_15 = __O[2452]
+                ____t_result_15 = __O[2456]
             else
                 ____t_result_15 = window.document.body
             end
@@ -147,15 +147,15 @@ local __O = {};
                         local ____t_result_18
                         local ____t_17 = __t
                         local ____temp_16 = __lt(e.clientX, b.left) or __gt(e.clientX, b.right)
-                        __O[2453] = ____temp_16
+                        __O[2457] = ____temp_16
                         if ____t_17(____temp_16) then
-                            ____t_result_18 = __O[2453]
+                            ____t_result_18 = __O[2457]
                         else
                             ____t_result_18 = __lt(e.clientY, b.top)
                         end
-                        __O[2454] = ____t_result_18
+                        __O[2458] = ____t_result_18
                         if ____t_19(____t_result_18) then
-                            ____t_result_20 = __O[2454]
+                            ____t_result_20 = __O[2458]
                         else
                             ____t_result_20 = __gt(e.clientY, b.bottom)
                         end
@@ -200,23 +200,23 @@ local __O = {};
         if state ~= nil then
             ____opt_result_30 = state.started
         end
-        __O[2455] = ____opt_result_30
+        __O[2459] = ____opt_result_30
         if ____t_31(____opt_result_30) then
             ____t_result_32 = not __t(state.paused)
         else
-            ____t_result_32 = __O[2455]
+            ____t_result_32 = __O[2459]
         end
-        __O[2456] = ____t_result_32
+        __O[2460] = ____t_result_32
         if ____t_33(____t_result_32) then
             ____t_result_34 = not __t(state.won)
         else
-            ____t_result_34 = __O[2456]
+            ____t_result_34 = __O[2460]
         end
-        __O[2457] = ____t_result_34
+        __O[2461] = ____t_result_34
         if ____t_35(____t_result_34) then
             ____t_result_36 = not __t(state.defeated)
         else
-            ____t_result_36 = __O[2457]
+            ____t_result_36 = __O[2461]
         end
         resumeAfterGuide = not not ____t_37(____t_result_36)
         local ____opt_40 = window.Game
@@ -277,9 +277,9 @@ local __O = {};
     local ____t_result_48
     local ____t_47 = __t
     local ____standalone_result_46 = standalone(nil)
-    __O[2458] = ____standalone_result_46
+    __O[2462] = ____standalone_result_46
     if ____t_47(____standalone_result_46) then
-        ____t_result_48 = __O[2458]
+        ____t_result_48 = __O[2462]
     else
         ____t_result_48 = __call(
             __new("URLSearchParams", window.location.search),
@@ -312,9 +312,9 @@ local __O = {};
         "includes",
         window.location.hostname
     ))
-    __O[2459] = ____temp_49
+    __O[2463] = ____temp_49
     if ____t_50(____temp_49) then
-        ____t_result_51 = __O[2459]
+        ____t_result_51 = __O[2463]
     else
         ____t_result_51 = __call(
             __new("URLSearchParams", window.location.search),
@@ -331,19 +331,19 @@ local __O = {};
     local ____t_result_65
     local ____t_64 = __t
     local ____temp_63 = not __t(nativeApp)
-    __O[2463] = ____temp_63
+    __O[2467] = ____temp_63
     if ____t_64(____temp_63) then
         ____t_result_65 = offlineAllowed
     else
-        ____t_result_65 = __O[2463]
+        ____t_result_65 = __O[2467]
     end
-    __O[2464] = ____t_result_65
+    __O[2468] = ____t_result_65
     if ____t_66(____t_result_65) then
         ____t_result_67 = window.navigator.serviceWorker ~= nil
     else
-        ____t_result_67 = __O[2464]
+        ____t_result_67 = __O[2468]
     end
-    __O[2465] = ____t_result_67
+    __O[2469] = ____t_result_67
     if ____t_68(____t_result_67) then
         ____t_result_69 = __call(
             __arrL({"https:", "http:"}, 2),
@@ -351,7 +351,7 @@ local __O = {};
             window.location.protocol
         )
     else
-        ____t_result_69 = __O[2465]
+        ____t_result_69 = __O[2469]
     end
     if ____t_70(____t_result_69) then
         window.navigator.serviceWorker:addEventListener(
@@ -365,11 +365,11 @@ local __O = {};
                     ____opt_71 = ____opt_71.type
                 end
                 local ____temp_73 = ____opt_71 == "trilhas-offline"
-                __O[2466] = ____temp_73
+                __O[2470] = ____temp_73
                 if ____t_74(____temp_73) then
                     ____t_result_75 = status
                 else
-                    ____t_result_75 = __O[2466]
+                    ____t_result_75 = __O[2470]
                 end
                 if ____t_76(____t_result_75) then
                     status.textContent = __t(e.data.ready) and "Jogo e trilhas originais disponíveis offline." or "O jogo está salvo. Abra conectado para terminar de guardar as trilhas."

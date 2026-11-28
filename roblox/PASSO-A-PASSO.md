@@ -162,6 +162,8 @@ A **qualidade gráfica do Roblox** (menu do Roblox → Configurações → Quali
 | O save não volta no Studio | Ligue **Enable Studio Access to API Services**. No jogo publicado o save funciona sozinho. |
 | "Script timeout: exhausted allowed execution time" | Baixe o `.rbxlx` mais novo (build 4 em diante): o carregamento agora pausa sozinho e o problema foi corrigido. |
 | O carregamento para em "tela-inicial" (82%) e depois aparece "carregar:48: Script timeout" | Baixe o `.rbxlx` da **build 9 em diante**: a tela inicial não é mais compilada em código nativo e monta o logo aos poucos, sem estourar os 10 s do Roblox. |
+| Fica em "ABRINDO A TELA INICIAL" com a tela preta | Use a versão de **28/11 em diante** (já publicada no seu lugar). Ela foi testada direto num servidor do Roblox: tela inicial, história, lutas, todos os cenários, minigames, mapas, campanha 2 e os 11 jogos do fliperama rodaram sem nenhum erro. |
+| O jogo trava ao abrir o mapa (carro a gás ou táxi) | Corrigido em 28/11: no Roblox o mapa virou um quadro leve com a lista de lugares (← → escolhe, ENTER vai, ESC fecha). |
 | Aparece "O ROBLOX NÃO DEIXOU DESENHAR A TELA DO JOGO" | Faça o Passo 3: **Allow Mesh / Image APIs** ligado (publique antes, se o botão estiver cinza) e a conta dona com 13+ e verificação de idade/ID. |
 | Aparece "DEU ERRO AO DESENHAR A TELA" | Tire uma foto dessa tela e da janela **Output** e me mande. |
 | Aparece erro em vermelho na janela **Output** | Copie o texto do Output (Exibir → Output) e me mande; eu corrijo. |
@@ -171,6 +173,8 @@ A **qualidade gráfica do Roblox** (menu do Roblox → Configurações → Quali
 
 - O **modo online** (Arena online) não funciona dentro do Roblox; a campanha é para um jogador.
 - A qualidade **ALTA** usa WebGL no navegador; no Roblox ela fica igual à MÉDIA.
+- **Mapa de viagem:** no navegador é o mapa desenhado de Itabuna e de Conquista; no Roblox é um quadro com a lista
+  dos lugares, os mesmos cadeados e o mesmo "ir" (montar o mapa desenhado levava mais de um minuto lá).
 - **Janelas que não foram fotografadas:** a interface do Roblox é redesenhada a partir de fotos das telas do jogo.
   Se aparecer uma janela que não estava nas fotos, ela vem num painel simples no estilo do jogo, com o mesmo texto e
   os mesmos botões funcionando.
