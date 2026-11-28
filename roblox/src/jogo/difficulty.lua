@@ -5,6 +5,9 @@ local tostring = __JSR.__str
 local __isFiniteN, __ord, __arrL, __iterar, __t, __get, __set, __call, __new, __entries, __assign, __getters = __JSR.__isFiniteN, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__call, __JSR.__new, __JSR.__entries, __JSR.__assign, __JSR.__getters
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local __TS__Number = ____lualib.__TS__Number
 local ____exports = {}
 local __O = {};
@@ -173,8 +176,16 @@ local __O = {};
         local ____type = ____value[1]
         local p = ____value[2]
         if ____type ~= "giant" then
-            p.phaseHP = __call(
-                if ____type == "nikolas" then __arrL({1, 1.2, 1.4, 1.65}, 4) else __arrL({1, 1.25, 1.5}, 3),
+            local ____p_2 = p
+            local ____call_1 = __call
+            local ____temp_0
+            if ____type == "nikolas" then
+                ____temp_0 = __arrL({1, 1.2, 1.4, 1.65}, 4)
+            else
+                ____temp_0 = __arrL({1, 1.25, 1.5}, 3)
+            end
+            ____p_2.phaseHP = ____call_1(
+                ____temp_0,
                 "map",
                 function(____, multiplier) return math.floor(p.hp * multiplier + 0.5) end
             )
@@ -233,32 +244,49 @@ local __O = {};
         for ____, ____value in __iterar((__entries(profiles))) do
             local ____type = ____value[1]
             local profile = ____value[2]
-            __set(
-                __get(scaled, id),
-                ____type,
-                if id == "normal" then profile else __ord(
-                    __assign(
-                        {},
-                        profile,
-                        {hp = math.floor(profile.hp * settings.hp + 0.5)},
-                        if __t(profile.phaseHP) then {phaseHP = __call(
-                            profile.phaseHP,
+            local ____set_10 = __set
+            local ____get_result_8 = __get(scaled, id)
+            local ____type_9 = ____type
+            local ____temp_7
+            if id == "normal" then
+                ____temp_7 = profile
+            else
+                local ____ord_6 = __ord
+                local ____assign_5 = __assign
+                local ____array_4 = __TS__SparseArrayNew(
+                    {},
+                    profile,
+                    {hp = math.floor(profile.hp * settings.hp + 0.5)}
+                )
+                local ____t_result_3
+                if __t(profile.phaseHP) then
+                    ____t_result_3 = {phaseHP = __call(
+                        profile.phaseHP,
+                        "map",
+                        function(____, hp) return math.floor(hp * settings.hp + 0.5) end
+                    )}
+                else
+                    ____t_result_3 = {}
+                end
+                __TS__SparseArrayPush(
+                    ____array_4,
+                    ____t_result_3,
+                    {
+                        windup = profile.windup * settings.windup,
+                        minWindup = profile.minWindup * settings.windup,
+                        recovery = __call(
+                            profile.recovery,
                             "map",
-                            function(____, hp) return math.floor(hp * settings.hp + 0.5) end
-                        )} else {},
-                        {
-                            windup = profile.windup * settings.windup,
-                            minWindup = profile.minWindup * settings.windup,
-                            recovery = __call(
-                                profile.recovery,
-                                "map",
-                                function(____, seconds) return seconds * settings.recovery end
-                            )
-                        }
-                    ),
+                            function(____, seconds) return seconds * settings.recovery end
+                        )
+                    }
+                )
+                ____temp_7 = ____ord_6(
+                    ____assign_5(__TS__SparseArraySpread(____array_4)),
                     "hp,windup,minWindup,recovery"
                 )
-            )
+            end
+            ____set_10(____get_result_8, ____type_9, ____temp_7)
         end
         __get(scaled, id)
     end
@@ -270,26 +298,32 @@ local __O = {};
         if selected == nil then
             selected = mode
         end
-        local ____t_1 = __t
-        local ____get_result_0 = __get(modes, selected)
-        __O[1273] = ____get_result_0
-        return if ____t_1(____get_result_0) then __O[1273] else modes.normal
+        local ____t_result_13
+        local ____t_12 = __t
+        local ____get_result_11 = __get(modes, selected)
+        __O[1278] = ____get_result_11
+        if ____t_12(____get_result_11) then
+            ____t_result_13 = __O[1278]
+        else
+            ____t_result_13 = modes.normal
+        end
+        return ____t_result_13
     end
     local function setMode(self, next)
-        local ____t_8 = __t
-        local ____temp_7 = not __t(__call(modes, "hasOwnProperty", next))
-        if not ____temp_7 then
-            local ____opt_4 = window.CampaignRun
-            if ____opt_4 ~= nil then
-                ____opt_4 = ____opt_4.canSetMode
+        local ____t_20 = __t
+        local ____temp_19 = not __t(__call(modes, "hasOwnProperty", next))
+        if not ____temp_19 then
+            local ____opt_16 = window.CampaignRun
+            if ____opt_16 ~= nil then
+                ____opt_16 = ____opt_16.canSetMode
             end
-            local ____opt_result_6
-            if ____opt_4 ~= nil then
-                ____opt_result_6 = ____opt_4(____opt_4, next)
+            local ____opt_result_18
+            if ____opt_16 ~= nil then
+                ____opt_result_18 = ____opt_16(____opt_16, next)
             end
-            ____temp_7 = ____opt_result_6 == false
+            ____temp_19 = ____opt_result_18 == false
         end
-        if ____t_8(____temp_7) then
+        if ____t_20(____temp_19) then
             return false
         end
         if next == mode then
@@ -321,21 +355,39 @@ local __O = {};
         if selected == nil then
             selected = mode
         end
-        local ____t_13 = __t
-        local ____get_11 = __get
-        local ____t_10 = __t
-        local ____get_result_9 = __get(scaled, selected)
-        __O[1274] = ____get_result_9
-        local ____get_11_result_12 = ____get_11(if ____t_10(____get_result_9) then __O[1274] else scaled.normal, ____type)
-        __O[1275] = ____get_11_result_12
-        return if ____t_13(____get_11_result_12) then __O[1275] else nil
+        local ____t_result_27
+        local ____t_26 = __t
+        local ____get_24 = __get
+        local ____t_result_23
+        local ____t_22 = __t
+        local ____get_result_21 = __get(scaled, selected)
+        __O[1279] = ____get_result_21
+        if ____t_22(____get_result_21) then
+            ____t_result_23 = __O[1279]
+        else
+            ____t_result_23 = scaled.normal
+        end
+        local ____get_24_result_25 = ____get_24(____t_result_23, ____type)
+        __O[1280] = ____get_24_result_25
+        if ____t_26(____get_24_result_25) then
+            ____t_result_27 = __O[1280]
+        else
+            ____t_result_27 = nil
+        end
+        return ____t_result_27
     end
     local function scaleIncomingDamage(self, damage, selected)
         if selected == nil then
             selected = mode
         end
         local value = __TS__Number(damage)
-        return if __isFiniteN(value) then math.max(0, value) * getSettings(nil, selected).incomingDamage else 0
+        local ____isFiniteN_result_28
+        if __isFiniteN(value) then
+            ____isFiniteN_result_28 = math.max(0, value) * getSettings(nil, selected).incomingDamage
+        else
+            ____isFiniteN_result_28 = 0
+        end
+        return ____isFiniteN_result_28
     end
     window.Difficulty = __ord(
         __getters(
@@ -345,16 +397,16 @@ local __O = {};
                 getSettings = getSettings,
                 setMode = setMode,
                 isLocked = function()
-                    local ____t_19 = __t
-                    local ____opt_16 = window.CampaignRun
-                    if ____opt_16 ~= nil then
-                        ____opt_16 = ____opt_16.isEasyLocked
+                    local ____t_34 = __t
+                    local ____opt_31 = window.CampaignRun
+                    if ____opt_31 ~= nil then
+                        ____opt_31 = ____opt_31.isEasyLocked
                     end
-                    local ____opt_result_18
-                    if ____opt_16 ~= nil then
-                        ____opt_result_18 = ____opt_16(____opt_16)
+                    local ____opt_result_33
+                    if ____opt_31 ~= nil then
+                        ____opt_result_33 = ____opt_31(____opt_31)
                     end
-                    return not not ____t_19(____opt_result_18)
+                    return not not ____t_34(____opt_result_33)
                 end,
                 scaleIncomingDamage = scaleIncomingDamage,
                 boss = boss,

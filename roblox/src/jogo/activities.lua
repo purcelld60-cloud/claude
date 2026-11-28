@@ -7,6 +7,9 @@ local __len, __call, __add, __assign, __bor = __JSR.__len, __JSR.__call, __JSR._
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
 local __TS__Iterator = ____lualib.__TS__Iterator
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local ____exports = {}
 local __O = {};
 (function()
@@ -164,7 +167,7 @@ local __O = {};
         s.phaseTime = 0
         s.cooldown = 0.18
         s.aim = __mod(0.17 + s.shots * 0.21, 1)
-        s.aimDirection = if __t(__mod(s.shots, 2)) then -1 else 1
+        s.aimDirection = __t(__mod(s.shots, 2)) and -1 or 1
         s.power = 0.05
         s.powerDirection = 1
         s.lockedAim = nil
@@ -181,11 +184,17 @@ local __O = {};
         if ____opt_result_2 == "dinner" then
             return window.AmandaDinner:update(s, dt)
         end
-        local ____t_5 = __t
+        local ____t_6 = __t
+        local ____t_result_5
         local ____t_4 = __t
         local ____temp_3 = not __t(s)
-        __O[1263] = ____temp_3
-        if ____t_5(if ____t_4(____temp_3) then __O[1263] else s.done) then
+        __O[1268] = ____temp_3
+        if ____t_4(____temp_3) then
+            ____t_result_5 = __O[1268]
+        else
+            ____t_result_5 = s.done
+        end
+        if ____t_6(____t_result_5) then
             return
         end
         s.time = s.time + math.max(0, dt)
@@ -247,7 +256,7 @@ local __O = {};
                         math.min(2, s.goals - 1)
                     )
                 else
-                    s.feedback = if __t(s.shot.blocked) then "Mota: defendi! Espere o goleiro sair do canto." else "Mota: foi parar na roça! Use força dentro da faixa verde."
+                    s.feedback = __t(s.shot.blocked) and "Mota: defendi! Espere o goleiro sair do canto." or "Mota: foi parar na roça! Use força dentro da faixa verde."
                 end
             end
         elseif __t(s.phase == "result" and __ge(s.phaseTime, 1.05)) then
@@ -255,28 +264,39 @@ local __O = {};
                 s.done = true
                 s.success = __ge(s.goals, 3)
                 s.phase = "complete"
-                s.feedback = if __t(s.success) then "Mota: treino completo! Esse dash agora vai voar." else "Mota: quase! Volte e tente de novo. Craque também erra."
+                s.feedback = __t(s.success) and "Mota: treino completo! Esse dash agora vai voar." or "Mota: quase! Volte e tente de novo. Craque também erra."
             else
                 nextShot(nil, s)
             end
         end
     end
     local function submit(self, s, value)
-        local ____opt_result_8
+        local ____opt_result_9
         if s ~= nil then
-            ____opt_result_8 = s.kind
+            ____opt_result_9 = s.kind
         end
-        if ____opt_result_8 == "dinner" then
+        if ____opt_result_9 == "dinner" then
             return window.AmandaDinner:submit(s, value)
         end
+        local ____t_15 = __t
+        local ____t_result_14
         local ____t_13 = __t
-        local ____t_12 = __t
-        local ____t_10 = __t
-        local ____temp_9 = not __t(s)
-        __O[1264] = ____temp_9
-        local ____temp_11 = if ____t_10(____temp_9) then __O[1264] else s.done
-        __O[1265] = ____temp_11
-        if ____t_13(if ____t_12(____temp_11) then __O[1265] else __gt(s.cooldown, 0)) then
+        local ____t_result_12
+        local ____t_11 = __t
+        local ____temp_10 = not __t(s)
+        __O[1269] = ____temp_10
+        if ____t_11(____temp_10) then
+            ____t_result_12 = __O[1269]
+        else
+            ____t_result_12 = s.done
+        end
+        __O[1270] = ____t_result_12
+        if ____t_13(____t_result_12) then
+            ____t_result_14 = __O[1270]
+        else
+            ____t_result_14 = __gt(s.cooldown, 0)
+        end
+        if ____t_15(____t_result_14) then
             return false
         end
         if s.kind == "quiz" then
@@ -291,11 +311,17 @@ local __O = {};
                     __len(QUESTIONS)
                 )
             )
-            local ____t_16 = __t
-            local ____t_15 = __t
-            local ____temp_14 = not __isInteger(answer) or answer < 0
-            __O[1266] = ____temp_14
-            if ____t_16(if ____t_15(____temp_14) then __O[1266] else answer > 2) then
+            local ____t_19 = __t
+            local ____t_result_18
+            local ____t_17 = __t
+            local ____temp_16 = not __isInteger(answer) or answer < 0
+            __O[1271] = ____temp_16
+            if ____t_17(____temp_16) then
+                ____t_result_18 = __O[1271]
+            else
+                ____t_result_18 = answer > 2
+            end
+            if ____t_19(____t_result_18) then
                 return false
             end
             s.attempts = s.attempts + 1
@@ -334,29 +360,50 @@ local __O = {};
             local blocked = math.abs(aim - s.lockedKeeper) < 0.135
             s.target = {x = s.goalArea.x + aim * s.goalArea.w, y = s.goalArea.y + 105 - (s.power - 0.55) * 95}
             if __t(not __t(goodPower) or not __t(inside)) then
-                local ____s_target_17, ____x_18 = s.target, "x"
-                ____s_target_17[____x_18] = ____s_target_17[____x_18] + if __lt(aim, 0.5) then -70 else 70
-                s.target.y = if __gt(s.power, 0.85) then 82 else 345
+                local ____s_target_20, ____x_21 = s.target, "x"
+                ____s_target_20[____x_21] = ____s_target_20[____x_21] + (__lt(aim, 0.5) and -70 or 70)
+                s.target.y = __gt(s.power, 0.85) and 82 or 345
             end
-            local ____s_26 = s
-            local ____s_power_23 = s.power
-            local ____aim_24 = aim
-            local ____t_20 = __t
-            local ____temp_19 = if __t(goodPower) then inside else goodPower
-            __O[1267] = ____temp_19
-            local ____temp_25 = if ____t_20(____temp_19) then not __t(blocked) else __O[1267]
-            local ____t_22 = __t
-            local ____temp_21 = if __t(goodPower) then inside else goodPower
-            __O[1268] = ____temp_21
-            ____s_26.shot = {
+            local ____s_30 = s
+            local ____s_power_28 = s.power
+            local ____aim_29 = aim
+            local ____t_result_24
+            local ____t_23 = __t
+            local ____t_result_22
+            if __t(goodPower) then
+                ____t_result_22 = inside
+            else
+                ____t_result_22 = goodPower
+            end
+            __O[1272] = ____t_result_22
+            if ____t_23(____t_result_22) then
+                ____t_result_24 = not __t(blocked)
+            else
+                ____t_result_24 = __O[1272]
+            end
+            local ____t_result_27
+            local ____t_26 = __t
+            local ____t_result_25
+            if __t(goodPower) then
+                ____t_result_25 = inside
+            else
+                ____t_result_25 = goodPower
+            end
+            __O[1273] = ____t_result_25
+            if ____t_26(____t_result_25) then
+                ____t_result_27 = blocked
+            else
+                ____t_result_27 = __O[1273]
+            end
+            ____s_30.shot = {
                 startX = 236,
                 startY = 319,
                 x = 236,
                 y = 319,
-                power = ____s_power_23,
-                aim = ____aim_24,
-                goal = ____temp_25,
-                blocked = if ____t_22(____temp_21) then blocked else __O[1268],
+                power = ____s_power_28,
+                aim = ____aim_29,
+                goal = ____t_result_24,
+                blocked = ____t_result_27,
                 rotation = 0
             }
             s.phase = "flight"
@@ -368,11 +415,11 @@ local __O = {};
         return false
     end
     local function view(self, s)
-        local ____opt_result_29
+        local ____opt_result_33
         if s ~= nil then
-            ____opt_result_29 = s.kind
+            ____opt_result_33 = s.kind
         end
-        if ____opt_result_29 == "dinner" then
+        if ____opt_result_33 == "dinner" then
             return window.AmandaDinner:view(s)
         end
         if not __t(s) then
@@ -392,9 +439,15 @@ local __O = {};
                     __len(QUESTIONS)
                 )
             )
+            local ____t_result_34
+            if __t(s.feedback) then
+                ____t_result_34 = s.feedback
+            else
+                ____t_result_34 = q.prompt
+            end
             return {
                 title = "ENGLISH DO MIQUEIAS",
-                text = if __t(s.feedback) then s.feedback else q.prompt,
+                text = ____t_result_34,
                 scoreLabel = ((tostring(s.correct) .. " / 3 acertos · ") .. tostring(s.attempts)) .. " respostas",
                 actionLabel = "",
                 choices = __call(
@@ -408,16 +461,22 @@ local __O = {};
             title = "FUTEBOL COM GABRIEL MOTA",
             text = s.feedback,
             scoreLabel = ((((((tostring(s.goals) .. " / 3 gols · ") .. tostring(s.shots)) .. " / ") .. tostring(s.maxShots)) .. " chutes · ") .. tostring(s.score)) .. " pontos",
-            actionLabel = if s.phase == "aim" then "MIRAR" else if s.phase == "power" then "CHUTAR!" else if s.phase == "complete" then "CONCLUÍDO" else "A BOLA ESTÁ NO AR…",
+            actionLabel = s.phase == "aim" and "MIRAR" or (s.phase == "power" and "CHUTAR!" or (s.phase == "complete" and "CONCLUÍDO" or "A BOLA ESTÁ NO AR…")),
             choices = nil
         }
     end
     local function cancel(self, s)
-        local ____t_32 = __t
-        local ____t_31 = __t
-        local ____temp_30 = not __t(s)
-        __O[1269] = ____temp_30
-        if ____t_32(if ____t_31(____temp_30) then __O[1269] else s.done) then
+        local ____t_38 = __t
+        local ____t_result_37
+        local ____t_36 = __t
+        local ____temp_35 = not __t(s)
+        __O[1274] = ____temp_35
+        if ____t_36(____temp_35) then
+            ____t_result_37 = __O[1274]
+        else
+            ____t_result_37 = s.done
+        end
+        if ____t_38(____t_result_37) then
             return
         end
         s.done = true
@@ -465,13 +524,21 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) else c:moveTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) end
+            function(____, p, i)
+                local ____t_result_39
+                if __t(i) then
+                    ____t_result_39 = c:lineTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                else
+                    ____t_result_39 = c:moveTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                end
+                return ____t_result_39
+            end
         )
         c:stroke()
     end
@@ -546,12 +613,12 @@ local __O = {};
         if options == nil then
             options = {}
         end
-        local ____t_35 = __t
-        local ____opt_33 = window.Art
-        if ____opt_33 ~= nil then
-            ____opt_33 = ____opt_33.drawCharacter
+        local ____t_42 = __t
+        local ____opt_40 = window.Art
+        if ____opt_40 ~= nil then
+            ____opt_40 = ____opt_40.drawCharacter
         end
-        if ____t_35(____opt_33) then
+        if ____t_42(____opt_40) then
             window.Art:drawCharacter(
                 c,
                 ____type,
@@ -567,7 +634,7 @@ local __O = {};
                 y - 48,
                 24,
                 48,
-                if ____type == "daroca" then "#e2a04c" else "#83a0ba"
+                ____type == "daroca" and "#e2a04c" or "#83a0ba"
             )
         end
     end
@@ -772,36 +839,49 @@ local __O = {};
                     y,
                     480,
                     7,
-                    if __t(__mod(fila, 2)) then "#5a6470" else "#4a545e"
+                    __t(__mod(fila, 2)) and "#5a6470" or "#4a545e"
                 )
                 do
                     local k = 0
                     while k < 70 do
-                        local x = k * 7 + __mod(fila, 2) * 3 + math.floor(h(nil, k + fila * 70) * 2 + 0.5)
-                        local pula = quadro == 1 and __mod(k + fila, 3) == 0
-                        local braco = __mod(k * 7 + fila, 5) == 0
-                        if __lt(
-                            h(nil, k * 3 + fila),
-                            0.12
-                        ) then
-                            continue
+                        do
+                            local x = k * 7 + __mod(fila, 2) * 3 + math.floor(h(nil, k + fila * 70) * 2 + 0.5)
+                            local pula = quadro == 1 and __mod(k + fila, 3) == 0
+                            local braco = __mod(k * 7 + fila, 5) == 0
+                            if __lt(
+                                h(nil, k * 3 + fila),
+                                0.12
+                            ) then
+                                do k = k + 1 continue end
+                            end
+                            local ____PK_pessoa_45 = PK.pessoa
+                            local ____array_44 = __TS__SparseArrayNew(
+                                c,
+                                x,
+                                y - 1,
+                                __get(
+                                    PELES,
+                                    __mod(k + fila, 5)
+                                ),
+                                __get(
+                                    ROUPAS,
+                                    __mod(k * 3 + fila, 8)
+                                ),
+                                "#1c1410",
+                                pula
+                            )
+                            local ____t_result_43
+                            if __t(braco) then
+                                ____t_result_43 = quadro == 1
+                            else
+                                ____t_result_43 = braco
+                            end
+                            __TS__SparseArrayPush(____array_44, ____t_result_43)
+                            ____PK_pessoa_45(
+                                PK,
+                                __TS__SparseArraySpread(____array_44)
+                            )
                         end
-                        PK:pessoa(
-                            c,
-                            x,
-                            y - 1,
-                            __get(
-                                PELES,
-                                __mod(k + fila, 5)
-                            ),
-                            __get(
-                                ROUPAS,
-                                __mod(k * 3 + fila, 8)
-                            ),
-                            "#1c1410",
-                            pula,
-                            if __t(braco) then quadro == 1 else braco
-                        )
                         k = k + 1
                     end
                 end
@@ -880,7 +960,7 @@ local __O = {};
                     y,
                     480,
                     10,
-                    if __t(__mod(k, 2)) then "#3a8a48" else "#348042"
+                    __t(__mod(k, 2)) and "#3a8a48" or "#348042"
                 )
                 y = y + 10
             end
@@ -897,7 +977,7 @@ local __O = {};
                     y,
                     1,
                     1,
-                    if __t(__mod(i, 3)) then "#2c7038" else "#4a9a54"
+                    __t(__mod(i, 3)) and "#2c7038" or "#4a9a54"
                 )
                 i = i + 1
             end
@@ -1106,7 +1186,7 @@ local __O = {};
                         24 + y,
                         8 + math.floor(math.sin(s.time * 6 + y * 0.6) * 1.5 + 0.5),
                         1,
-                        if y < 3 then "#2c5a9e" else "#f2c94c"
+                        y < 3 and "#2c5a9e" or "#f2c94c"
                     )
                     y = y + 1
                 end
@@ -1117,15 +1197,27 @@ local __O = {};
         local gy = g.y / 2
         local gw = g.w / 2
         local gh = g.h / 2
-        local ____t_40 = __t
-        local ____t_37 = __t
-        local ____temp_36 = s.phase == "result"
-        __O[1270] = ____temp_36
-        local ____opt_38 = s.shot
-        if ____opt_38 ~= nil then
-            ____opt_38 = ____opt_38.goal
+        local ____t_result_52
+        local ____t_51 = __t
+        local ____t_result_50
+        local ____t_47 = __t
+        local ____temp_46 = s.phase == "result"
+        __O[1275] = ____temp_46
+        if ____t_47(____temp_46) then
+            local ____opt_48 = s.shot
+            if ____opt_48 ~= nil then
+                ____opt_48 = ____opt_48.goal
+            end
+            ____t_result_50 = ____opt_48
+        else
+            ____t_result_50 = __O[1275]
         end
-        local tremendo = if ____t_40(if ____t_37(____temp_36) then ____opt_38 else __O[1270]) then math.max(0, 1 - s.phaseTime * 1.6) else 0
+        if ____t_51(____t_result_50) then
+            ____t_result_52 = math.max(0, 1 - s.phaseTime * 1.6)
+        else
+            ____t_result_52 = 0
+        end
+        local tremendo = ____t_result_52
         P(
             nil,
             c,
@@ -1232,11 +1324,23 @@ local __O = {};
             1,
             "rgba(0,0,0,.25)"
         )
-        local ____t_43 = __t
-        local ____t_42 = __t
-        local ____temp_41 = s.lockedKeeper ~= nil
-        __O[1271] = ____temp_41
-        local keeper = if ____t_43(if ____t_42(____temp_41) then s.phase == "flight" or s.phase == "result" else __O[1271]) then s.lockedKeeper else s.keeper
+        local ____t_result_57
+        local ____t_56 = __t
+        local ____t_result_55
+        local ____t_54 = __t
+        local ____temp_53 = s.lockedKeeper ~= nil
+        __O[1276] = ____temp_53
+        if ____t_54(____temp_53) then
+            ____t_result_55 = s.phase == "flight" or s.phase == "result"
+        else
+            ____t_result_55 = __O[1276]
+        end
+        if ____t_56(____t_result_55) then
+            ____t_result_57 = s.lockedKeeper
+        else
+            ____t_result_57 = s.keeper
+        end
+        local keeper = ____t_result_57
         local kx = g.x + keeper * g.w
         rect(
             nil,
@@ -1306,21 +1410,21 @@ local __O = {};
             {
                 frame = s.time,
                 muscular = not not __t(s.options.trained),
-                animation = if s.phase == "flight" then "paper" else "idle",
-                spriteFrame = if s.phase == "flight" then 3 else 0,
+                animation = s.phase == "flight" and "paper" or "idle",
+                spriteFrame = s.phase == "flight" and 3 or 0,
                 attack = s.phase == "flight",
                 attackType = "paper",
                 attackProgress = 0.6
             }
         )
-        local ____s_lockedAim_44 = s.lockedAim
-        if ____s_lockedAim_44 == nil then
-            ____s_lockedAim_44 = s.aim
+        local ____s_lockedAim_58 = s.lockedAim
+        if ____s_lockedAim_58 == nil then
+            ____s_lockedAim_58 = s.aim
         end
-        local aim = ____s_lockedAim_44
+        local aim = ____s_lockedAim_58
         local tx = math.floor((g.x + aim * g.w) / 2 + 0.5)
         local ty = math.floor((g.y + 101) / 2 + 0.5)
-        local cm = if s.phase == "aim" then "#e0ff8a" else "#ffd24a"
+        local cm = s.phase == "aim" and "#e0ff8a" or "#ffd24a"
         P(
             nil,
             c,
@@ -1380,8 +1484,8 @@ local __O = {};
             P(
                 nil,
                 c,
-                tx + dx + if dx < 0 then 0 else 1,
-                ty + dy + if dy < 0 then 0 else 0,
+                tx + dx + (dx < 0 and 0 or 1),
+                ty + dy + (dy < 0 and 0 or 0),
                 1,
                 2,
                 cm
@@ -1494,7 +1598,7 @@ local __O = {};
                     36,
                     3,
                     3,
-                    if __t(feito) then "#f2f2ee" else "#2a2a3a"
+                    __t(feito) and "#f2f2ee" or "#2a2a3a"
                 )
                 k = k + 1
             end
@@ -1564,19 +1668,25 @@ local __O = {};
                 marcador = "#fff7d2"
             }
         )
-        local ____t_47 = __t
-        local ____t_46 = __t
-        local ____temp_45 = s.phase == "result"
-        __O[1272] = ____temp_45
-        if ____t_47(if ____t_46(____temp_45) then s.shot else __O[1272]) then
-            local txt = if __t(s.shot.goal) then "GOLAÇO!" else if __t(s.shot.blocked) then "DEFENDEU!" else "PRA FORA!"
+        local ____t_62 = __t
+        local ____t_result_61
+        local ____t_60 = __t
+        local ____temp_59 = s.phase == "result"
+        __O[1277] = ____temp_59
+        if ____t_60(____temp_59) then
+            ____t_result_61 = s.shot
+        else
+            ____t_result_61 = __O[1277]
+        end
+        if ____t_62(____t_result_61) then
+            local txt = __t(s.shot.goal) and "GOLAÇO!" or (__t(s.shot.blocked) and "DEFENDEU!" or "PRA FORA!")
             PK:contorno(
                 c,
                 txt,
                 480,
                 100,
                 32,
-                if __t(s.shot.goal) then "#fff0a0" else "#f4baa1",
+                __t(s.shot.goal) and "#fff0a0" or "#f4baa1",
                 "#1c1410"
             )
             if __t(s.shot.goal) then
@@ -1673,7 +1783,7 @@ local __O = {};
                     4 + h(nil, i * 1.73) * 151,
                     1,
                     1,
-                    if __t(__mod(i, 3)) then "#304e3e" else "#26402f"
+                    __t(__mod(i, 3)) and "#304e3e" or "#26402f"
                 )
                 i = i + 1
             end
@@ -2122,12 +2232,12 @@ local __O = {};
     end
     local function quiz(self, c, s)
         local PK = window.PixelKit
-        local ____t_50 = __t
-        local ____opt_48 = window.Art
-        if ____opt_48 ~= nil then
-            ____opt_48 = ____opt_48.drawClassroom
+        local ____t_65 = __t
+        local ____opt_63 = window.Art
+        if ____opt_63 ~= nil then
+            ____opt_63 = ____opt_63.drawClassroom
         end
-        if ____t_50(____opt_48) then
+        if ____t_65(____opt_63) then
             window.Art:drawClassroom(c, "miqueias", s.time)
         else
             rect(
@@ -2243,7 +2353,7 @@ local __O = {};
                 local x = 228 + i * 14
                 local y = 166
                 local on = __lt(i, s.correct)
-                local cor = if __t(on) then "#f2e27a" else "rgba(245,248,240,.35)"
+                local cor = __t(on) and "#f2e27a" or "rgba(245,248,240,.35)"
                 P(
                     nil,
                     c,
@@ -2314,11 +2424,20 @@ local __O = {};
             do
                 local k = 0
                 while k < 8 do
+                    local ____c_68 = c
+                    local ____temp_69 = 352 + k
+                    local ____bor_67 = __bor
+                    local ____temp_66
+                    if k < 3 then
+                        ____temp_66 = k
+                    else
+                        ____temp_66 = 3 - (k - 3) * 1.6
+                    end
                     P(
                         nil,
-                        c,
-                        352 + k,
-                        __bor(146 + if k < 3 then k else 3 - (k - 3) * 1.6, 0),
+                        ____c_68,
+                        ____temp_69,
+                        ____bor_67(146 + ____temp_66, 0),
                         2,
                         2,
                         "#9aff9a"
@@ -2336,29 +2455,38 @@ local __O = {};
                 "center",
                 "#1a2e24"
             )
-        elseif __t(if __t(s.feedback) then not __t(s.feedbackGood) else s.feedback) then
-            do
-                local k = 0
-                while k < 12 do
-                    P(
-                        nil,
-                        c,
-                        350 + k,
-                        136 + k,
-                        2,
-                        2,
-                        "#ff9a8a"
-                    )
-                    P(
-                        nil,
-                        c,
-                        361 - k,
-                        136 + k,
-                        2,
-                        2,
-                        "#ff9a8a"
-                    )
-                    k = k + 1
+        else
+            local ____t_71 = __t
+            local ____t_result_70
+            if __t(s.feedback) then
+                ____t_result_70 = not __t(s.feedbackGood)
+            else
+                ____t_result_70 = s.feedback
+            end
+            if ____t_71(____t_result_70) then
+                do
+                    local k = 0
+                    while k < 12 do
+                        P(
+                            nil,
+                            c,
+                            350 + k,
+                            136 + k,
+                            2,
+                            2,
+                            "#ff9a8a"
+                        )
+                        P(
+                            nil,
+                            c,
+                            361 - k,
+                            136 + k,
+                            2,
+                            2,
+                            "#ff9a8a"
+                        )
+                        k = k + 1
+                    end
                 end
             end
         end

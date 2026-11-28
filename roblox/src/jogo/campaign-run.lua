@@ -25,63 +25,114 @@ local __O = {};
             now,
             stamp(nil)
         )
+        local ____t_14 = __t
+        local ____t_result_13
+        local ____t_12 = __t
+        local ____t_result_11
         local ____t_10 = __t
-        local ____t_9 = __t
-        local ____t_7 = __t
-        local ____t_5 = __t
-        local ____t_3 = __t
-        local ____temp_2 = lastAt ~= nil
-        __O[1277] = ____temp_2
-        local ____temp_4 = if ____t_3(____temp_2) then active else __O[1277]
-        __O[1278] = ____temp_4
-        local ____temp_6 = if ____t_5(____temp_4) then not __t(suspended) else __O[1278]
-        __O[1279] = ____temp_6
-        local ____temp_8 = if ____t_7(____temp_6) then run else __O[1279]
-        __O[1280] = ____temp_8
-        if ____t_10(if ____t_9(____temp_8) then not __t(run.finished) else __O[1280]) then
+        local ____t_result_9
+        local ____t_8 = __t
+        local ____t_result_7
+        local ____t_6 = __t
+        local ____temp_5 = lastAt ~= nil
+        __O[1282] = ____temp_5
+        if ____t_6(____temp_5) then
+            ____t_result_7 = active
+        else
+            ____t_result_7 = __O[1282]
+        end
+        __O[1283] = ____t_result_7
+        if ____t_8(____t_result_7) then
+            ____t_result_9 = not __t(suspended)
+        else
+            ____t_result_9 = __O[1283]
+        end
+        __O[1284] = ____t_result_9
+        if ____t_10(____t_result_9) then
+            ____t_result_11 = run
+        else
+            ____t_result_11 = __O[1284]
+        end
+        __O[1285] = ____t_result_11
+        if ____t_12(____t_result_11) then
+            ____t_result_13 = not __t(run.finished)
+        else
+            ____t_result_13 = __O[1285]
+        end
+        if ____t_14(____t_result_13) then
             local delta = math.max(0, now - lastAt)
             run.elapsedMs = run.elapsedMs + delta
-            local ____set_15 = __set
-            local ____run_modeTime_13 = run.modeTime
-            local ____run_mode_14 = run.mode
-            local ____t_12 = __t
-            local ____get_result_11 = __get(run.modeTime, run.mode)
-            __O[1281] = ____get_result_11
-            ____set_15(____run_modeTime_13, ____run_mode_14, if ____t_12(____get_result_11) then __O[1281] else 0 + delta)
+            local ____set_20 = __set
+            local ____run_modeTime_18 = run.modeTime
+            local ____run_mode_19 = run.mode
+            local ____t_result_17
+            local ____t_16 = __t
+            local ____get_result_15 = __get(run.modeTime, run.mode)
+            __O[1286] = ____get_result_15
+            if ____t_16(____get_result_15) then
+                ____t_result_17 = __O[1286]
+            else
+                ____t_result_17 = 0
+            end
+            ____set_20(____run_modeTime_18, ____run_mode_19, ____t_result_17 + delta)
         end
         lastAt = now
-        local ____t_19 = __t
-        local ____t_17 = __t
-        local ____temp_16 = not not __t(nextActive) and not __t(suspended)
-        __O[1282] = ____temp_16
-        local ____temp_18 = if ____t_17(____temp_16) then not not __t(run) else __O[1282]
-        __O[1283] = ____temp_18
-        active = if ____t_19(____temp_18) then not __t(run.finished) else __O[1283]
+        local ____t_result_25
+        local ____t_24 = __t
+        local ____t_result_23
+        local ____t_22 = __t
+        local ____temp_21 = not not __t(nextActive) and not __t(suspended)
+        __O[1287] = ____temp_21
+        if ____t_22(____temp_21) then
+            ____t_result_23 = not not __t(run)
+        else
+            ____t_result_23 = __O[1287]
+        end
+        __O[1288] = ____t_result_23
+        if ____t_24(____t_result_23) then
+            ____t_result_25 = not __t(run.finished)
+        else
+            ____t_result_25 = __O[1288]
+        end
+        active = ____t_result_25
         if now - lastRender > 250 then
             lastRender = now
             render(nil)
         end
-        return if __t(run) then run.elapsedMs else 0
+        local ____t_result_26
+        if __t(run) then
+            ____t_result_26 = run.elapsedMs
+        else
+            ____t_result_26 = 0
+        end
+        return ____t_result_26
     end
     function modeSummary(self)
         if not __t(run) then
             return {mode = "normal", modeLabel = "NORMAL", mixed = false}
         end
         local used = run.modesUsed
-        local mode = if __t(__call(used, "includes", "easy")) then "easy" else if __t(__call(used, "includes", "normal")) then "normal" else "hard"
-        return {
-            mode = mode,
-            modeLabel = if __gt(
-                __len(used),
-                1
-            ) then __add(
+        local mode = __t(__call(used, "includes", "easy")) and "easy" or (__t(__call(used, "includes", "normal")) and "normal" or "hard")
+        local ____mode_93 = mode
+        local ____gt_result_92
+        if __gt(
+            __len(used),
+            1
+        ) then
+            ____gt_result_92 = __add(
                 "MISTO · ",
                 __call(
                     __call(used, "map", label),
                     "join",
                     " / "
                 )
-            ) else label(nil, mode),
+            )
+        else
+            ____gt_result_92 = label(nil, mode)
+        end
+        return {
+            mode = ____mode_93,
+            modeLabel = ____gt_result_92,
             mixed = __gt(
                 __len(used),
                 1
@@ -89,11 +140,17 @@ local __O = {};
         }
     end
     function finish(self)
-        local ____t_67 = __t
-        local ____t_66 = __t
-        local ____temp_65 = not __t(run)
-        __O[1294] = ____temp_65
-        if ____t_67(if ____t_66(____temp_65) then __O[1294] else suspended) then
+        local ____t_97 = __t
+        local ____t_result_96
+        local ____t_95 = __t
+        local ____temp_94 = not __t(run)
+        __O[1299] = ____temp_94
+        if ____t_95(____temp_94) then
+            ____t_result_96 = __O[1299]
+        else
+            ____t_result_96 = suspended
+        end
+        if ____t_97(____t_result_96) then
             return nil
         end
         if __t(run.finished) then
@@ -125,17 +182,29 @@ local __O = {};
     end
     function getState(self)
         local summary = modeSummary(nil)
-        return if __t(run) then __assign(
-            {},
-            copy(nil, run),
-            {
-                suspended = suspended,
-                active = if __t(active) then not __t(suspended) else active,
+        local ____t_result_103
+        if __t(run) then
+            local ____assign_102 = __assign
+            local ____temp_100 = {}
+            local ____copy_result_101 = copy(nil, run)
+            local ____suspended_99 = suspended
+            local ____t_result_98
+            if __t(active) then
+                ____t_result_98 = not __t(suspended)
+            else
+                ____t_result_98 = active
+            end
+            ____t_result_103 = ____assign_102(____temp_100, ____copy_result_101, {
+                suspended = ____suspended_99,
+                active = ____t_result_98,
                 categoryMode = summary.mode,
                 modeLabel = summary.modeLabel,
                 mixed = summary.mixed
-            }
-        ) else nil
+            })
+        else
+            ____t_result_103 = nil
+        end
+        return ____t_result_103
     end
     function format(self, ms)
         local seconds = math.floor(math.max(
@@ -143,18 +212,27 @@ local __O = {};
             finite(nil, ms)
         ) / 1000)
         local hours = math.floor(seconds / 3600)
-        return __add(
-            __add(
-                __add(
-                    if __t(hours) then __add(
-                        __call(
-                            tostring(hours),
-                            "padStart",
-                            2,
-                            "0"
-                        ),
-                        ":"
-                    ) else "",
+        local ____add_110 = __add
+        local ____add_109 = __add
+        local ____add_108 = __add
+        local ____t_result_107
+        if __t(hours) then
+            ____t_result_107 = __add(
+                __call(
+                    tostring(hours),
+                    "padStart",
+                    2,
+                    "0"
+                ),
+                ":"
+            )
+        else
+            ____t_result_107 = ""
+        end
+        return ____add_110(
+            ____add_109(
+                ____add_108(
+                    ____t_result_107,
                     __call(
                         tostring(__mod(
                             math.floor(seconds / 60),
@@ -180,14 +258,32 @@ local __O = {};
             return
         end
         local ____end = window.document:getElementById("chapterEndScreen")
-        local ____t_74 = __t
-        local ____t_72 = __t
-        local ____temp_71 = window.document:querySelector("#pauseScreen .rp-body")
-        __O[1295] = ____temp_71
-        local ____temp_73 = if ____t_72(____temp_71) then __O[1295] else window.document:querySelector("#pauseScreen .ranch-pause-body")
-        __O[1296] = ____temp_73
-        local pause = if ____t_74(____temp_73) then __O[1296] else window.document:querySelector("#pauseScreen .game-modal")
-        if __t(if __t(____end) then not __t(window.document:getElementById("campaignRunResult")) else ____end) then
+        local ____t_result_115
+        local ____t_114 = __t
+        local ____t_result_113
+        local ____t_112 = __t
+        local ____temp_111 = window.document:querySelector("#pauseScreen .rp-body")
+        __O[1300] = ____temp_111
+        if ____t_112(____temp_111) then
+            ____t_result_113 = __O[1300]
+        else
+            ____t_result_113 = window.document:querySelector("#pauseScreen .ranch-pause-body")
+        end
+        __O[1301] = ____t_result_113
+        if ____t_114(____t_result_113) then
+            ____t_result_115 = __O[1301]
+        else
+            ____t_result_115 = window.document:querySelector("#pauseScreen .game-modal")
+        end
+        local pause = ____t_result_115
+        local ____t_117 = __t
+        local ____t_result_116
+        if __t(____end) then
+            ____t_result_116 = not __t(window.document:getElementById("campaignRunResult"))
+        else
+            ____t_result_116 = ____end
+        end
+        if ____t_117(____t_result_116) then
             local card = window.document:createElement("section")
             card.id = "campaignRunResult"
             card.className = "campaign-run-result"
@@ -195,18 +291,25 @@ local __O = {};
             card.innerHTML = "<span>TEMPO DE CAMPANHA</span><strong></strong><b></b><small></small>"
             ____end:append(card)
         end
-        if __t(if __t(pause) then not __t(window.document:getElementById("campaignRunPause")) else pause) then
+        local ____t_119 = __t
+        local ____t_result_118
+        if __t(pause) then
+            ____t_result_118 = not __t(window.document:getElementById("campaignRunPause"))
+        else
+            ____t_result_118 = pause
+        end
+        if ____t_119(____t_result_118) then
             local card = window.document:createElement("div")
             card.id = "campaignRunPause"
             card.className = "campaign-run-pause"
             card.innerHTML = "<span>⏱ TEMPO ATIVO</span><b></b><small></small>"
             pause:append(card)
         end
-        local ____opt_result_77
+        local ____opt_result_122
         if run ~= nil then
-            ____opt_result_77 = run.result
+            ____opt_result_122 = run.result
         end
-        local result = ____opt_result_77
+        local result = ____opt_result_122
         local card = window.document:getElementById("campaignRunResult")
         if __t(card) then
             card.hidden = not __t(result)
@@ -214,17 +317,40 @@ local __O = {};
                 card.dataset.mode = result.mode
                 card:querySelector("strong").textContent = format(nil, result.elapsedMs)
                 card:querySelector("b").textContent = result.modeLabel
-                card:querySelector("small").textContent = if __t(result.partial) then "SAVE ANTERIOR · TEMPO PARCIAL DESDE A ATUALIZAÇÃO" else if result.mode == "easy" then "PRÊMIO: CHUPETA · GUGU DADA" else "ATÉ A DERROTA DE NIKOLAS · PAUSAS DESCONTADAS"
+                card:querySelector("small").textContent = __t(result.partial) and "SAVE ANTERIOR · TEMPO PARCIAL DESDE A ATUALIZAÇÃO" or (result.mode == "easy" and "PRÊMIO: CHUPETA · GUGU DADA" or "ATÉ A DERROTA DE NIKOLAS · PAUSAS DESCONTADAS")
             end
         end
         local timer = window.document:getElementById("campaignRunPause")
         if __t(timer) then
-            local ____t_79 = __t
-            local ____temp_78 = not __t(run)
-            __O[1297] = ____temp_78
-            timer.hidden = if ____t_79(____temp_78) then __O[1297] else suspended
-            timer:querySelector("b").textContent = if __t(run) then format(nil, run.elapsedMs) else ""
-            timer:querySelector("small").textContent = if __t(run) then __add(if __t(run.partial) then "Tempo parcial · save anterior" else if __t(run.finished) then "Campanha concluída" else modeSummary(nil).modeLabel, if __t(run.easyLocked) then " · Fácil travado neste save" else "") else ""
+            local ____t_result_125
+            local ____t_124 = __t
+            local ____temp_123 = not __t(run)
+            __O[1302] = ____temp_123
+            if ____t_124(____temp_123) then
+                ____t_result_125 = __O[1302]
+            else
+                ____t_result_125 = suspended
+            end
+            timer.hidden = ____t_result_125
+            local ____temp_127 = timer:querySelector("b")
+            local ____t_result_126
+            if __t(run) then
+                ____t_result_126 = format(nil, run.elapsedMs)
+            else
+                ____t_result_126 = ""
+            end
+            ____temp_127.textContent = ____t_result_126
+            local ____temp_129 = timer:querySelector("small")
+            local ____t_result_128
+            if __t(run) then
+                ____t_result_128 = __add(
+                    __t(run.partial) and "Tempo parcial · save anterior" or (__t(run.finished) and "Campanha concluída" or modeSummary(nil).modeLabel),
+                    __t(run.easyLocked) and " · Fácil travado neste save" or ""
+                )
+            else
+                ____t_result_128 = ""
+            end
+            ____temp_129.textContent = ____t_result_128
         end
     end
     local ____ = "use strict"
@@ -236,10 +362,16 @@ local __O = {};
         )
     end
     label = function(____, mode)
+        local ____t_result_2
         local ____t_1 = __t
         local ____get_result_0 = __get({easy = "FÁCIL", normal = "NORMAL", hard = "DIFÍCIL"}, mode)
-        __O[1276] = ____get_result_0
-        return if ____t_1(____get_result_0) then __O[1276] else "NORMAL"
+        __O[1281] = ____get_result_0
+        if ____t_1(____get_result_0) then
+            ____t_result_2 = __O[1281]
+        else
+            ____t_result_2 = "NORMAL"
+        end
+        return ____t_result_2
     end
     run = nil
     suspended = false
@@ -252,9 +384,23 @@ local __O = {};
         if fallback == nil then
             fallback = 0
         end
-        return if __isFiniteN(__TS__Number(value)) then __TS__Number(value) else fallback
+        local ____isFiniteN_result_3
+        if __isFiniteN(__TS__Number(value)) then
+            ____isFiniteN_result_3 = __TS__Number(value)
+        else
+            ____isFiniteN_result_3 = fallback
+        end
+        return ____isFiniteN_result_3
     end
-    copy = function(____, value) return if __t(value) then window.JSON:parse(window.JSON:stringify(value)) else nil end
+    copy = function(____, value)
+        local ____t_result_4
+        if __t(value) then
+            ____t_result_4 = window.JSON:parse(window.JSON:stringify(value))
+        else
+            ____t_result_4 = nil
+        end
+        return ____t_result_4
+    end
     emit = function(____, reason)
         do
             pcall(function()
@@ -273,12 +419,12 @@ local __O = {};
         restoring = true
         do
             local ____try, ____error = pcall(function()
-                local ____opt_22 = window.Difficulty
-                if ____opt_22 ~= nil then
-                    ____opt_22 = ____opt_22.setMode
+                local ____opt_29 = window.Difficulty
+                if ____opt_29 ~= nil then
+                    ____opt_29 = ____opt_29.setMode
                 end
-                if ____opt_22 ~= nil then
-                    ____opt_22(____opt_22, mode)
+                if ____opt_29 ~= nil then
+                    ____opt_29(____opt_29, mode)
                 end
             end)
             do
@@ -296,41 +442,89 @@ local __O = {};
         suspended = false
         active = false
         lastAt = stamp(nil)
-        local ____t_27 = __t
-        local ____opt_result_26
+        local ____t_result_36
+        local ____t_34 = __t
+        local ____opt_result_33
         if data ~= nil then
-            ____opt_result_26 = data.mode
+            ____opt_result_33 = data.mode
         end
-        local mode = if ____t_27(valid(nil, ____opt_result_26)) then data.mode else if __t(valid(nil, options.mode)) then options.mode else "normal"
-        local ____opt_result_30
+        if ____t_34(valid(nil, ____opt_result_33)) then
+            ____t_result_36 = data.mode
+        else
+            local ____t_result_35
+            if __t(valid(nil, options.mode)) then
+                ____t_result_35 = options.mode
+            else
+                ____t_result_35 = "normal"
+            end
+            ____t_result_36 = ____t_result_35
+        end
+        local mode = ____t_result_36
+        local ____opt_result_39
         if data ~= nil then
-            ____opt_result_30 = data.schema
+            ____opt_result_39 = data.schema
         end
-        if ____opt_result_30 == 1 then
-            local used = if __isArray(data.modesUsed) then __arr(__TS__Spread(__iter(__TS__New(
-                Set,
-                __call(data.modesUsed, "filter", valid)
-            )))) else __arrL({mode}, 1)
-            local ____math_max_result_43 = math.max(
+        if ____opt_result_39 == 1 then
+            local ____isArray_result_40
+            if __isArray(data.modesUsed) then
+                ____isArray_result_40 = __arr(__TS__Spread(__iter(__TS__New(
+                    Set,
+                    __call(data.modesUsed, "filter", valid)
+                ))))
+            else
+                ____isArray_result_40 = __arrL({mode}, 1)
+            end
+            local used = ____isArray_result_40
+            local ____math_max_result_63 = math.max(
                 0,
                 finite(nil, data.elapsedMs)
             )
-            local ____mode_44 = mode
-            local ____t_32 = __t
-            local ____temp_31 = not not __t(data.easyLocked) or mode == "easy"
-            __O[1284] = ____temp_31
-            local ____temp_45 = if ____t_32(____temp_31) then __O[1284] else __call(used, "includes", "easy")
-            local ____temp_46 = if __t(__len(used)) then used else __arrL({mode}, 1)
-            local ____call_result_47 = __call(
-                __call(
-                    __call(
-                        if __isArray(data.history) then data.history else __arrL({}, 0),
+            local ____mode_64 = mode
+            local ____t_result_43
+            local ____t_42 = __t
+            local ____temp_41 = not not __t(data.easyLocked) or mode == "easy"
+            __O[1289] = ____temp_41
+            if ____t_42(____temp_41) then
+                ____t_result_43 = __O[1289]
+            else
+                ____t_result_43 = __call(used, "includes", "easy")
+            end
+            local ____t_result_44
+            if __t(__len(used)) then
+                ____t_result_44 = used
+            else
+                ____t_result_44 = __arrL({mode}, 1)
+            end
+            local ____call_51 = __call
+            local ____call_50 = __call
+            local ____call_49 = __call
+            local ____isArray_result_45
+            if __isArray(data.history) then
+                ____isArray_result_45 = data.history
+            else
+                ____isArray_result_45 = __arrL({}, 0)
+            end
+            local ____call_51_result_65 = ____call_51(
+                ____call_50(
+                    ____call_49(
+                        ____isArray_result_45,
                         "filter",
                         function(____, e)
-                            local ____t_34 = __t
-                            local ____temp_33 = if __t(e) then valid(nil, e.mode) else e
-                            __O[1285] = ____temp_33
-                            return if ____t_34(____temp_33) then __isFiniteN(e.atMs) else __O[1285]
+                            local ____t_result_48
+                            local ____t_47 = __t
+                            local ____t_result_46
+                            if __t(e) then
+                                ____t_result_46 = valid(nil, e.mode)
+                            else
+                                ____t_result_46 = e
+                            end
+                            __O[1290] = ____t_result_46
+                            if ____t_47(____t_result_46) then
+                                ____t_result_48 = __isFiniteN(e.atMs)
+                            else
+                                ____t_result_48 = __O[1290]
+                            end
+                            return ____t_result_48
                         end
                     ),
                     "slice",
@@ -342,45 +536,62 @@ local __O = {};
                     atMs = math.max(0, e.atMs)
                 } end
             )
-            local ____opt_35 = data.modeTime
-            if ____opt_35 ~= nil then
-                ____opt_35 = ____opt_35.easy
+            local ____opt_52 = data.modeTime
+            if ____opt_52 ~= nil then
+                ____opt_52 = ____opt_52.easy
             end
-            local ____math_max_result_41 = math.max(
+            local ____math_max_result_58 = math.max(
                 0,
-                finite(nil, ____opt_35)
+                finite(nil, ____opt_52)
             )
-            local ____opt_37 = data.modeTime
-            if ____opt_37 ~= nil then
-                ____opt_37 = ____opt_37.normal
+            local ____opt_54 = data.modeTime
+            if ____opt_54 ~= nil then
+                ____opt_54 = ____opt_54.normal
             end
-            local ____math_max_result_42 = math.max(
+            local ____math_max_result_59 = math.max(
                 0,
-                finite(nil, ____opt_37)
+                finite(nil, ____opt_54)
             )
-            local ____opt_39 = data.modeTime
-            if ____opt_39 ~= nil then
-                ____opt_39 = ____opt_39.hard
+            local ____opt_56 = data.modeTime
+            if ____opt_56 ~= nil then
+                ____opt_56 = ____opt_56.hard
+            end
+            local ____temp_66 = {
+                easy = ____math_max_result_58,
+                normal = ____math_max_result_59,
+                hard = math.max(
+                    0,
+                    finite(nil, ____opt_56)
+                )
+            }
+            local ____temp_67 = not not __t(data.partial)
+            local ____temp_68 = not not __t(data.finished)
+            local ____temp_69 = not not __t(data.initialChoicePending)
+            local ____t_result_62
+            local ____t_61 = __t
+            local ____t_result_60
+            if __t(data.result) then
+                ____t_result_60 = type(data.result) == "table"
+            else
+                ____t_result_60 = data.result
+            end
+            if ____t_61(____t_result_60) then
+                ____t_result_62 = copy(nil, data.result)
+            else
+                ____t_result_62 = nil
             end
             run = {
                 schema = 1,
-                elapsedMs = ____math_max_result_43,
-                mode = ____mode_44,
-                easyLocked = ____temp_45,
-                modesUsed = ____temp_46,
-                history = ____call_result_47,
-                modeTime = {
-                    easy = ____math_max_result_41,
-                    normal = ____math_max_result_42,
-                    hard = math.max(
-                        0,
-                        finite(nil, ____opt_39)
-                    )
-                },
-                partial = not not __t(data.partial),
-                finished = not not __t(data.finished),
-                initialChoicePending = not not __t(data.initialChoicePending),
-                result = if __t(if __t(data.result) then type(data.result) == "table" else data.result) then copy(nil, data.result) else nil
+                elapsedMs = ____math_max_result_63,
+                mode = ____mode_64,
+                easyLocked = ____t_result_43,
+                modesUsed = ____t_result_44,
+                history = ____call_51_result_65,
+                modeTime = ____temp_66,
+                partial = ____temp_67,
+                finished = ____temp_68,
+                initialChoicePending = ____temp_69,
+                result = ____t_result_62
             }
             if __t(run.easyLocked) then
                 run.mode = "easy"
@@ -404,7 +615,14 @@ local __O = {};
             }
         end
         assignMode(nil, run.mode)
-        if __t(if __t(options.completed) then not __t(run.finished) else options.completed) then
+        local ____t_71 = __t
+        local ____t_result_70
+        if __t(options.completed) then
+            ____t_result_70 = not __t(run.finished)
+        else
+            ____t_result_70 = options.completed
+        end
+        if ____t_71(____t_result_70) then
             finish(nil)
         end
         render(nil)
@@ -429,35 +647,83 @@ local __O = {};
         end
     end
     local function canSetMode(self, next)
-        local ____t_49 = __t
-        local ____valid_result_48 = valid(nil, next)
-        __O[1290] = ____valid_result_48
-        local ____t_57 = __t
-        local ____t_55 = __t
-        local ____t_53 = __t
-        local ____t_51 = __t
-        local ____temp_50 = not __t(run)
-        __O[1286] = ____temp_50
-        local ____temp_52 = if ____t_51(____temp_50) then __O[1286] else suspended
-        __O[1287] = ____temp_52
-        local ____temp_54 = if ____t_53(____temp_52) then __O[1287] else not __t(run.easyLocked)
-        __O[1288] = ____temp_54
-        local ____temp_56 = if ____t_55(____temp_54) then __O[1288] else next == "easy"
-        __O[1289] = ____temp_56
-        return if ____t_49(____valid_result_48) then if ____t_57(____temp_56) then __O[1289] else restoring else __O[1290]
+        local ____t_result_83
+        local ____t_73 = __t
+        local ____valid_result_72 = valid(nil, next)
+        __O[1295] = ____valid_result_72
+        if ____t_73(____valid_result_72) then
+            local ____t_result_82
+            local ____t_81 = __t
+            local ____t_result_80
+            local ____t_79 = __t
+            local ____t_result_78
+            local ____t_77 = __t
+            local ____t_result_76
+            local ____t_75 = __t
+            local ____temp_74 = not __t(run)
+            __O[1291] = ____temp_74
+            if ____t_75(____temp_74) then
+                ____t_result_76 = __O[1291]
+            else
+                ____t_result_76 = suspended
+            end
+            __O[1292] = ____t_result_76
+            if ____t_77(____t_result_76) then
+                ____t_result_78 = __O[1292]
+            else
+                ____t_result_78 = not __t(run.easyLocked)
+            end
+            __O[1293] = ____t_result_78
+            if ____t_79(____t_result_78) then
+                ____t_result_80 = __O[1293]
+            else
+                ____t_result_80 = next == "easy"
+            end
+            __O[1294] = ____t_result_80
+            if ____t_81(____t_result_80) then
+                ____t_result_82 = __O[1294]
+            else
+                ____t_result_82 = restoring
+            end
+            ____t_result_83 = ____t_result_82
+        else
+            ____t_result_83 = __O[1295]
+        end
+        return ____t_result_83
     end
     local function changeMode(self, next)
-        local ____t_64 = __t
-        local ____t_63 = __t
-        local ____t_61 = __t
-        local ____t_59 = __t
-        local ____temp_58 = if __t(restoring) then restoring else suspended
-        __O[1291] = ____temp_58
-        local ____temp_60 = if ____t_59(____temp_58) then __O[1291] else not __t(run)
-        __O[1292] = ____temp_60
-        local ____temp_62 = if ____t_61(____temp_60) then __O[1292] else not __t(valid(nil, next))
-        __O[1293] = ____temp_62
-        if ____t_64(if ____t_63(____temp_62) then __O[1293] else next == run.mode) then
+        local ____t_91 = __t
+        local ____t_result_90
+        local ____t_89 = __t
+        local ____t_result_88
+        local ____t_87 = __t
+        local ____t_result_86
+        local ____t_85 = __t
+        local ____t_result_84
+        if __t(restoring) then
+            ____t_result_84 = restoring
+        else
+            ____t_result_84 = suspended
+        end
+        __O[1296] = ____t_result_84
+        if ____t_85(____t_result_84) then
+            ____t_result_86 = __O[1296]
+        else
+            ____t_result_86 = not __t(run)
+        end
+        __O[1297] = ____t_result_86
+        if ____t_87(____t_result_86) then
+            ____t_result_88 = __O[1297]
+        else
+            ____t_result_88 = not __t(valid(nil, next))
+        end
+        __O[1298] = ____t_result_88
+        if ____t_89(____t_result_88) then
+            ____t_result_90 = __O[1298]
+        else
+            ____t_result_90 = next == run.mode
+        end
+        if ____t_91(____t_result_90) then
             return
         end
         tick(
@@ -511,21 +777,21 @@ local __O = {};
         return copy(nil, run)
     end
     local function getResult(self)
-        local ____opt_result_70
+        local ____opt_result_106
         if run ~= nil then
-            ____opt_result_70 = run.result
+            ____opt_result_106 = run.result
         end
-        return copy(nil, ____opt_result_70)
+        return copy(nil, ____opt_result_106)
     end
     window:addEventListener(
         "difficulty-change",
         function(____, event)
-            local ____changeMode_82 = changeMode
-            local ____opt_80 = event.detail
-            if ____opt_80 ~= nil then
-                ____opt_80 = ____opt_80.mode
+            local ____changeMode_132 = changeMode
+            local ____opt_130 = event.detail
+            if ____opt_130 ~= nil then
+                ____opt_130 = ____opt_130.mode
             end
-            return ____changeMode_82(nil, ____opt_80)
+            return ____changeMode_132(nil, ____opt_130)
         end
     )
     window:addEventListener("chapter-ended", render)
@@ -553,12 +819,12 @@ local __O = {};
             confirmInitialMode = confirmInitialMode,
             canSetMode = canSetMode,
             isEasyLocked = function()
-                local ____t_86 = __t
-                local ____opt_result_85
+                local ____t_136 = __t
+                local ____opt_result_135
                 if run ~= nil then
-                    ____opt_result_85 = run.easyLocked
+                    ____opt_result_135 = run.easyLocked
                 end
-                return not not ____t_86(____opt_result_85) and not __t(suspended)
+                return not not ____t_136(____opt_result_135) and not __t(suspended)
             end,
             serialize = serialize,
             getState = getState,

@@ -16,6 +16,58 @@ function D.iniciar(op)
   local tela = Canvas.novo(960, 540)
   local ctx = tela:getContext("2d")
   D.tela = tela
+  -- As peles (fotos da interface) não mudam: cada uma é estudada uma vez, linha por linha, em faixas opacas,
+  -- transparentes e semitransparentes. Depois, a cada quadro, as faixas opacas vão com cópia direta de memória,
+  -- as transparentes são puladas e só os pixels semitransparentes são misturados. Antes era pixel a pixel (~0,1 s).
+  local faixasDe = setmetatable({}, { __mode = "k" })
+  local RD, WR, OPACO = Canvas.RD, Canvas.WR, 4278190080
+  local function faixas(img)
+    local f = faixasDe[img]; if f then return f end
+    local S = img._; local w, h, px = S.w, S.h, S.px
+    f = {}
+    for y = 0, h - 1 do
+      local linha, x = {}, 0
+      while x < w do
+        local v = RD(px, (y * w + x) * 4)
+        local tipo = v >= OPACO and 1 or v >= 16777216 and 2 or 0
+        local x0 = x
+        repeat x = x + 1; local v2 = x < w and RD(px, (y * w + x) * 4) or -1; local t2 = v2 >= OPACO and 1 or v2 >= 16777216 and 2 or 0 until x >= w or t2 ~= tipo
+        if tipo ~= 0 then linha[#linha + 1] = { x0, x - 1, tipo } end
+      end
+      f[y] = linha
+    end
+    faixasDe[img] = f
+    return f
+  end
+  local copiarMem = buffer and buffer.copy or (table.move and function(dp, dof, sp, so, n) table.move(sp, so // 4 + 1, so // 4 + n // 4, dof // 4 + 1, dp) end)
+  local function colarPele(img, ox, oy)
+    ox, oy = math.floor(ox + .5), math.floor(oy + .5)
+    local S, P = img._, tela._
+    local sw, W, H, sp, dp = S.w, P.w, P.h, S.px, P.px
+    local f = faixas(img)
+    for y = 0, S.h - 1 do
+      local dy = oy + y
+      if dy >= 0 and dy < H then
+        for _, fx in ipairs(f[y]) do
+          local a, b = fx[1], fx[2]
+          if ox + a < 0 then a = -ox end
+          if ox + b > W - 1 then b = W - 1 - ox end
+          if a <= b then
+            local so, dof = (y * sw + a) * 4, (dy * W + ox + a) * 4
+            if fx[3] == 1 then
+              if copiarMem then copiarMem(dp, dof, sp, so, (b - a + 1) * 4)
+              else for k = 0, b - a do WR(dp, dof + k * 4, RD(sp, so + k * 4)) end end
+            else
+              for k = 0, b - a do
+                local v = RD(sp, so + k * 4)
+                WR(dp, dof + k * 4, Canvas.sobre(RD(dp, dof + k * 4), v % 256, v // 256 % 256, v // 65536 % 256, (v // 16777216) / 255))
+              end
+            end
+          end
+        end
+      end
+    end
+  end
   local modo = function() return N.toque and "toque" or "pc" end
 
   -- chave estável de cada elemento (a mesma do capturar.mjs)
@@ -109,7 +161,40 @@ function D.iniciar(op)
     return w
   end
   -- escreve em qualquer canvas (pixel(x, y, w, h, alfa) pinta um pontinho na cor certa)
+  -- Textos da página: cada frase (fonte, tamanho, cor) vira uma imagem pequena feita uma vez e colada com as faixas
+  -- (antes cada pixel de cada letra era um fillRect com mistura, a cada quadro). O cache esvazia quando passa de 400.
+  local cacheTexto, nTexto = {}, 0
+  local escreverDireto
+  local function escreverGuardado(fam, s, texto, x, y, pixel, esp)
+    local chave = fam .. "|" .. s .. "|" .. texto .. "|" .. pixel.cor .. "|" .. pixel.alfa .. "|" .. (esp or 0)
+    local e = cacheTexto[chave]
+    if not e then
+      local tam, k = tamanhoMaisPerto(fam, s); if not tam then return 0 end
+      local g = F[fam][tam].g
+      local x0, x1, y0, y1, cx = 0, 1, 0, 1, 0
+      for _, ch in ipairs(letras(texto)) do
+        local gl = g[ch] or g["?"]
+        if gl then
+          if gl[4] > 0 then x0 = math.min(x0, cx + gl[2] * k); x1 = math.max(x1, cx + (gl[2] + gl[4]) * k); y0 = math.min(y0, gl[3] * k); y1 = math.max(y1, (gl[3] + gl[5]) * k) end
+          cx = cx + gl[1] * k + (esp or 0)
+        end
+      end
+      local ox, oy = math.ceil(-x0) + 1, math.ceil(-y0) + 1
+      local img = Canvas.novo(math.max(1, math.ceil(x1 - x0) + 3), math.max(1, math.ceil(y1 - y0) + 3))
+      local c2 = img:getContext("2d")
+      local avanco = escreverDireto(fam, s, texto, ox, oy, function(px, py, pw, ph, a) c2.globalAlpha = pixel.alfa * a; c2.fillStyle = pixel.cor; c2:fillRect(px, py, pw, ph) end, esp)
+      e = { img = img, ox = ox, oy = oy, avanco = avanco }
+      if nTexto > 400 then cacheTexto, nTexto = {}, 0 end
+      cacheTexto[chave] = e; nTexto = nTexto + 1
+    end
+    colarPele(e.img, x - e.ox, y - e.oy)
+    return e.avanco
+  end
   function D.escrever(fam, s, texto, x, y, pixel, esp)
+    if type(pixel) == "table" and pixel.cor then return escreverGuardado(fam, s, texto, x, y, pixel, esp) end
+    return escreverDireto(fam, s, texto, x, y, pixel, esp)
+  end
+  escreverDireto = function(fam, s, texto, x, y, pixel, esp)
     local tam, k = tamanhoMaisPerto(fam, s); if not tam then return 0 end
     local tab = F[fam][tam]; local g = tab.g
     local cx = x
@@ -154,12 +239,13 @@ function D.iniciar(op)
     return document.body
   end
 
+  -- cor de texto da página: uma tabela (cor, alfa) que o D.escrever reconhece e guarda como imagem pronta
   local function pixelDe(cor, alfa)
-    return function(px, py, pw, ph, a)
+    return setmetatable({ cor = tostring(cor), alfa = alfa }, { __call = function(_, px, py, pw, ph, a)
       ctx.globalAlpha = alfa * a
       ctx.fillStyle = cor
       ctx:fillRect(px, py, pw, ph)
-    end
+    end })
   end
 
   -- Janelas que a captura não fotografou (avisos e confirmações criados na hora, como o "Tá difícil demais?"):
@@ -391,7 +477,7 @@ function D.iniciar(op)
         if w ~= r.w and r.w > 0 then
           local k = w / r.w
           ctx:drawImage(p, 0, 0, max(1, r.pw * k), r.ph, r.px + dx, r.py + dy, max(1, r.pw * k), r.ph)
-        else ctx:drawImage(p, r.px + dx, r.py + dy) end
+        else colarPele(p, r.px + dx, r.py + dy) end
       end
       if r.canvas and el._ then
         if not jaDesenhou and op >= 1 and x == 0 and y == 0 and w == 960 and h == 540 and el.width == 960 and el.height == 540 then

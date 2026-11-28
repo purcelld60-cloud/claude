@@ -62,14 +62,20 @@ local __O = {};
         if b == nil then
             b = 1
         end
-        local ____a_3 = a
-        local ____b_2 = b
+        local ____a_4 = a
+        local ____b_3 = b
+        local ____t_result_2
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(n)
-        __O[1256] = ____TS__Number_result_0
+        __O[1261] = ____TS__Number_result_0
+        if ____t_1(____TS__Number_result_0) then
+            ____t_result_2 = __O[1261]
+        else
+            ____t_result_2 = 0
+        end
         return math.max(
-            ____a_3,
-            math.min(____b_2, if ____t_1(____TS__Number_result_0) then __O[1256] else 0)
+            ____a_4,
+            math.min(____b_3, ____t_result_2)
         )
     end
     local function ease(____, n)
@@ -80,11 +86,11 @@ local __O = {};
         return a + (b - a) * n
     end
     local function isEasy(____, s)
-        local ____opt_result_6
+        local ____opt_result_7
         if s ~= nil then
-            ____opt_result_6 = s.kind
+            ____opt_result_7 = s.kind
         end
-        return ____opt_result_6 == KIND
+        return ____opt_result_7 == KIND
     end
     local function position(self, s)
         if not __t(s) then
@@ -99,13 +105,19 @@ local __O = {};
             0,
             __len(frames) - 1
         )
-        local ____get_result_start_9 = __get(shots, index).start
-        local ____t_8 = __t
-        local ____TS__Number_result_7 = __TS__Number(s.time)
-        __O[1257] = ____TS__Number_result_7
+        local ____get_result_start_11 = __get(shots, index).start
+        local ____t_result_10
+        local ____t_9 = __t
+        local ____TS__Number_result_8 = __TS__Number(s.time)
+        __O[1262] = ____TS__Number_result_8
+        if ____t_9(____TS__Number_result_8) then
+            ____t_result_10 = __O[1262]
+        else
+            ____t_result_10 = 0
+        end
         return clamp(
             nil,
-            ____get_result_start_9 + math.max(0, if ____t_8(____TS__Number_result_7) then __O[1257] else 0),
+            ____get_result_start_11 + math.max(0, ____t_result_10),
             0,
             total
         )
@@ -114,7 +126,7 @@ local __O = {};
         if options == nil then
             options = {}
         end
-        local ____add_10 = __add
+        local ____add_12 = __add
         serial = serial + 1
         return {
             kind = KIND,
@@ -122,7 +134,7 @@ local __O = {};
             time = 0,
             elapsed = 0,
             done = false,
-            token = ____add_10("easy-finish-", serial),
+            token = ____add_12("easy-finish-", serial),
             sfxPlayed = false,
             options = __assign({}, options)
         }
@@ -154,44 +166,66 @@ local __O = {};
         }
     end
     local function voice(self, s)
-        local ____t_17 = __t
+        local ____t_20 = __t
+        local ____t_result_19
+        local ____t_18 = __t
+        local ____t_result_17
         local ____t_16 = __t
-        local ____t_14 = __t
-        local ____opt_11 = s.options
-        if ____opt_11 ~= nil then
-            ____opt_11 = ____opt_11.preview
+        local ____t_result_15
+        if __t(s.sfxPlayed) then
+            ____t_result_15 = s.sfxPlayed
+        else
+            local ____opt_13 = s.options
+            if ____opt_13 ~= nil then
+                ____opt_13 = ____opt_13.preview
+            end
+            ____t_result_15 = ____opt_13
         end
-        local ____temp_13 = if __t(s.sfxPlayed) then s.sfxPlayed else ____opt_11
-        __O[1258] = ____temp_13
-        local ____temp_15 = if ____t_14(____temp_13) then __O[1258] else s.index ~= 2
-        __O[1259] = ____temp_15
-        if ____t_17(if ____t_16(____temp_15) then __O[1259] else __lt(s.time, 0.08)) then
+        __O[1263] = ____t_result_15
+        if ____t_16(____t_result_15) then
+            ____t_result_17 = __O[1263]
+        else
+            ____t_result_17 = s.index ~= 2
+        end
+        __O[1264] = ____t_result_17
+        if ____t_18(____t_result_17) then
+            ____t_result_19 = __O[1264]
+        else
+            ____t_result_19 = __lt(s.time, 0.08)
+        end
+        if ____t_20(____t_result_19) then
             return
         end
         s.sfxPlayed = true
-        local ____opt_22 = window.ArenaSound
-        if ____opt_22 ~= nil then
-            ____opt_22 = ____opt_22.play
+        local ____opt_25 = window.ArenaSound
+        if ____opt_25 ~= nil then
+            ____opt_25 = ____opt_25.play
         end
-        if ____opt_22 ~= nil then
-            local ____add_20 = __add
-            local ____s_audioToken_19 = s.audioToken
-            if ____s_audioToken_19 == nil then
-                ____s_audioToken_19 = s.token
+        if ____opt_25 ~= nil then
+            local ____add_23 = __add
+            local ____s_audioToken_22 = s.audioToken
+            if ____s_audioToken_22 == nil then
+                ____s_audioToken_22 = s.token
             end
-            ____opt_22(
-                ____opt_22,
+            ____opt_25(
+                ____opt_25,
                 "gugu-dada",
-                {id = ____add_20("easy-babble-", ____s_audioToken_19)}
+                {id = ____add_23("easy-babble-", ____s_audioToken_22)}
             )
         end
     end
     local function update(self, s, dt)
-        local ____t_26 = __t
-        local ____t_25 = __t
-        local ____temp_24 = not __t(s)
-        __O[1260] = ____temp_24
-        if ____t_26(if ____t_25(____temp_24) then __O[1260] else s.done) then
+        local ____t_30 = __t
+        local ____t_result_29
+        local ____t_28 = __t
+        local ____temp_27 = not __t(s)
+        __O[1265] = ____temp_27
+        if ____t_28(____temp_27) then
+            ____t_result_29 = __O[1265]
+        else
+            ____t_result_29 = s.done
+        end
+        if ____t_30(____t_result_29) then
             return
         end
         s.time = s.time + clamp(nil, dt, 0, 0.1)
@@ -214,11 +248,17 @@ local __O = {};
         voice(nil, s)
     end
     local function advance(self, s)
-        local ____t_29 = __t
-        local ____t_28 = __t
-        local ____temp_27 = not __t(s)
-        __O[1261] = ____temp_27
-        if ____t_29(if ____t_28(____temp_27) then __O[1261] else s.done) then
+        local ____t_34 = __t
+        local ____t_result_33
+        local ____t_32 = __t
+        local ____temp_31 = not __t(s)
+        __O[1266] = ____temp_31
+        if ____t_32(____temp_31) then
+            ____t_result_33 = __O[1266]
+        else
+            ____t_result_33 = s.done
+        end
+        if ____t_34(____t_result_33) then
             return false
         end
         if __ge(
@@ -827,55 +867,93 @@ local __O = {};
         c:save()
         c.imageSmoothingEnabled = false
         backdrop(nil, c, s)
-        local ____t_31 = __t
-        local ____TS__Number_result_30 = __TS__Number(s.time)
-        __O[1262] = ____TS__Number_result_30
-        local t = if ____t_31(____TS__Number_result_30) then __O[1262] else 0
+        local ____t_result_37
+        local ____t_36 = __t
+        local ____TS__Number_result_35 = __TS__Number(s.time)
+        __O[1267] = ____TS__Number_result_35
+        if ____t_36(____TS__Number_result_35) then
+            ____t_result_37 = __O[1267]
+        else
+            ____t_result_37 = 0
+        end
+        local t = ____t_result_37
         local i = clamp(nil, s.index, 0, 2)
         local globalTime = position(nil, s)
-        local bouncing = if i == 2 then math.abs(math.sin(t * 5.1)) * 11 else 0
-        local actorX = if i == 0 then 625 else 615
+        local ____temp_38
+        if i == 2 then
+            ____temp_38 = math.abs(math.sin(t * 5.1)) * 11
+        else
+            ____temp_38 = 0
+        end
+        local bouncing = ____temp_38
+        local actorX = i == 0 and 625 or 615
         local actorY = 475 - bouncing
-        local scale = if i == 0 then 3.45 else 3.9
-        local tilt = if i == 2 then math.sin(t * 5.1) * 0.035 else 0
-        local reach = if i == 1 then ease(nil, t / 1.8) else if i == 2 then 1 else 0
+        local scale = i == 0 and 3.45 or 3.9
+        local ____temp_39
+        if i == 2 then
+            ____temp_39 = math.sin(t * 5.1) * 0.035
+        else
+            ____temp_39 = 0
+        end
+        local tilt = ____temp_39
+        local ____temp_40
+        if i == 1 then
+            ____temp_40 = ease(nil, t / 1.8)
+        else
+            ____temp_40 = i == 2 and 1 or 0
+        end
+        local reach = ____temp_40
         c:save()
         c:translate(actorX, actorY)
         c:rotate(tilt)
-        local ____t_34 = __t
-        local ____opt_32 = window.Art
-        if ____opt_32 ~= nil then
-            ____opt_32 = ____opt_32.drawCharacter
+        local ____t_43 = __t
+        local ____opt_41 = window.Art
+        if ____opt_41 ~= nil then
+            ____opt_41 = ____opt_41.drawCharacter
         end
-        if ____t_34(____opt_32) then
-            local ____self_41 = window.Art
-            local ____self_41_drawCharacter_42 = ____self_41.drawCharacter
-            local ____c_40 = c
-            local ____scale_38 = scale
-            local ____temp_39 = if i == 2 then t * 0.8 else 0
-            local ____t_37 = __t
-            local ____opt_35 = s.options
-            if ____opt_35 ~= nil then
-                ____opt_35 = ____opt_35.trained
+        if ____t_43(____opt_41) then
+            local ____self_54 = window.Art
+            local ____self_54_drawCharacter_55 = ____self_54.drawCharacter
+            local ____c_53 = c
+            local ____scale_49 = scale
+            local ____temp_44
+            if i == 2 then
+                ____temp_44 = t * 0.8
+            else
+                ____temp_44 = 0
             end
-            ____self_41_drawCharacter_42(
-                ____self_41,
-                ____c_40,
+            local ____t_47 = __t
+            local ____opt_45 = s.options
+            if ____opt_45 ~= nil then
+                ____opt_45 = ____opt_45.trained
+            end
+            local ____temp_50 = not not ____t_47(____opt_45)
+            local ____temp_51 = i == 1 and t < 1.65
+            local ____temp_52 = i == 1 and "paper" or nil
+            local ____temp_48
+            if i == 1 then
+                ____temp_48 = 0.02 + reach * 0.16
+            else
+                ____temp_48 = 0
+            end
+            ____self_54_drawCharacter_55(
+                ____self_54,
+                ____c_53,
                 "daroca",
                 0,
                 0,
                 {
-                    scale = ____scale_38,
+                    scale = ____scale_49,
                     facing = 1,
-                    frame = ____temp_39,
+                    frame = ____temp_44,
                     moving = false,
                     grounded = true,
-                    muscular = not not ____t_37(____opt_35),
-                    attack = i == 1 and t < 1.65,
-                    attackType = if i == 1 then "paper" else nil,
+                    muscular = ____temp_50,
+                    attack = ____temp_51,
+                    attackType = ____temp_52,
                     animation = "idle",
-                    attackProgress = if i == 1 then 0.02 + reach * 0.16 else 0,
-                    pose = if i == 0 then "offer" else nil
+                    attackProgress = ____temp_48,
+                    pose = i == 0 and "offer" or nil
                 }
             )
         else
@@ -939,9 +1017,15 @@ local __O = {};
             local handX = 13 - 21 * handProgress
             local handY = -24 - 28 * handProgress
             local attach = ease(nil, (reach - 0.74) / 0.26)
-            local localX = if i == 2 then 10 else mix(nil, handX + 4, 10, attach)
-            local localY = if i == 2 then -43.8 else mix(nil, handY - 1, -43.8, attach)
-            local wobble = if i == 2 then math.sin(t * 11) * 1.5 else 0
+            local localX = i == 2 and 10 or mix(nil, handX + 4, 10, attach)
+            local localY = i == 2 and -43.8 or mix(nil, handY - 1, -43.8, attach)
+            local ____temp_56
+            if i == 2 then
+                ____temp_56 = math.sin(t * 11) * 1.5
+            else
+                ____temp_56 = 0
+            end
+            local wobble = ____temp_56
             pacifier(
                 nil,
                 c,
@@ -953,15 +1037,15 @@ local __O = {};
         end
         c:restore()
         if i == 2 then
-            local words = if t < 1.55 then "GUGU…" else "DADA!"
+            local words = t < 1.55 and "GUGU…" or "DADA!"
             text(
                 nil,
                 c,
                 words,
                 239,
                 333 + math.sin(t * 5) * 4,
-                if t < 1.55 then 35 else 44,
-                if t < 1.55 then "#fff2a0" else "#ffda50"
+                t < 1.55 and 35 or 44,
+                t < 1.55 and "#fff2a0" or "#ffda50"
             )
             do
                 local j = 0
@@ -1052,7 +1136,13 @@ local __O = {};
                     if options == nil then
                         options = {}
                     end
-                    return if kind == KIND then create(nil, options) else original:create(kind, options)
+                    local ____temp_57
+                    if kind == KIND then
+                        ____temp_57 = create(nil, options)
+                    else
+                        ____temp_57 = original:create(kind, options)
+                    end
+                    return ____temp_57
                 end,
                 stateAt = function(____, kind, seconds, options)
                     if seconds == nil then
@@ -1061,39 +1151,105 @@ local __O = {};
                     if options == nil then
                         options = {}
                     end
-                    return if kind == KIND then stateAt(nil, seconds, options) else original:stateAt(kind, seconds, options)
+                    local ____temp_58
+                    if kind == KIND then
+                        ____temp_58 = stateAt(nil, seconds, options)
+                    else
+                        ____temp_58 = original:stateAt(kind, seconds, options)
+                    end
+                    return ____temp_58
                 end,
                 timeline = function(____, kind)
                     if kind == nil then
                         kind = "intro"
                     end
-                    return if __t(isEasy(nil, kind)) then position(nil, kind) else if kind == KIND then info else original:timeline(kind)
+                    local ____t_result_60
+                    if __t(isEasy(nil, kind)) then
+                        ____t_result_60 = position(nil, kind)
+                    else
+                        local ____temp_59
+                        if kind == KIND then
+                            ____temp_59 = info
+                        else
+                            ____temp_59 = original:timeline(kind)
+                        end
+                        ____t_result_60 = ____temp_59
+                    end
+                    return ____t_result_60
                 end,
-                timelinePosition = function(____, s) return if __t(isEasy(nil, s)) then position(nil, s) else original:timelinePosition(s) end,
-                update = function(____, s, dt) return if __t(isEasy(nil, s)) then update(nil, s, dt) else original:update(s, dt) end,
-                advance = function(____, s) return if __t(isEasy(nil, s)) then advance(nil, s) else original:advance(s) end,
-                beat = function(____, s) return if __t(isEasy(nil, s)) then __assign(
-                    {},
-                    __get(
-                        frames,
-                        clamp(nil, s.index, 0, 2)
-                    ),
-                    {
-                        index = clamp(nil, s.index, 0, 2),
-                        number = clamp(nil, s.index, 0, 2) + 1,
-                        total = __len(frames)
-                    }
-                ) else original:beat(s) end,
-                draw = function(____, c, s) return if __t(isEasy(nil, s)) then draw(nil, c, s) else original:draw(c, s) end,
-                anchor = function(____, s) return if __t(isEasy(nil, s)) then {
-                    x = 235,
-                    y = 62,
-                    width = 390,
-                    tail = "right",
-                    speakerX = 650,
-                    speakerY = 293,
-                    safeBottom = 224
-                } else original:anchor(s) end,
+                timelinePosition = function(____, s)
+                    local ____t_result_61
+                    if __t(isEasy(nil, s)) then
+                        ____t_result_61 = position(nil, s)
+                    else
+                        ____t_result_61 = original:timelinePosition(s)
+                    end
+                    return ____t_result_61
+                end,
+                update = function(____, s, dt)
+                    local ____t_result_62
+                    if __t(isEasy(nil, s)) then
+                        ____t_result_62 = update(nil, s, dt)
+                    else
+                        ____t_result_62 = original:update(s, dt)
+                    end
+                    return ____t_result_62
+                end,
+                advance = function(____, s)
+                    local ____t_result_63
+                    if __t(isEasy(nil, s)) then
+                        ____t_result_63 = advance(nil, s)
+                    else
+                        ____t_result_63 = original:advance(s)
+                    end
+                    return ____t_result_63
+                end,
+                beat = function(____, s)
+                    local ____t_result_64
+                    if __t(isEasy(nil, s)) then
+                        ____t_result_64 = __assign(
+                            {},
+                            __get(
+                                frames,
+                                clamp(nil, s.index, 0, 2)
+                            ),
+                            {
+                                index = clamp(nil, s.index, 0, 2),
+                                number = clamp(nil, s.index, 0, 2) + 1,
+                                total = __len(frames)
+                            }
+                        )
+                    else
+                        ____t_result_64 = original:beat(s)
+                    end
+                    return ____t_result_64
+                end,
+                draw = function(____, c, s)
+                    local ____t_result_65
+                    if __t(isEasy(nil, s)) then
+                        ____t_result_65 = draw(nil, c, s)
+                    else
+                        ____t_result_65 = original:draw(c, s)
+                    end
+                    return ____t_result_65
+                end,
+                anchor = function(____, s)
+                    local ____t_result_66
+                    if __t(isEasy(nil, s)) then
+                        ____t_result_66 = {
+                            x = 235,
+                            y = 62,
+                            width = 390,
+                            tail = "right",
+                            speakerX = 650,
+                            speakerY = 293,
+                            safeBottom = 224
+                        }
+                    else
+                        ____t_result_66 = original:anchor(s)
+                    end
+                    return ____t_result_66
+                end,
                 metadata = __assign(
                     {},
                     original.metadata,

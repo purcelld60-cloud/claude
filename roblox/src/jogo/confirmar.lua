@@ -2,7 +2,6 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __t = __JSR.__t
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Promise = ____lualib.__TS__Promise
@@ -70,18 +69,30 @@ local __O = {};
                     e:preventDefault()
                     fechar(nil, false)
                 else
-                    local ____t_4 = __t
+                    local ____t_5 = __t
+                    local ____t_result_4
                     local ____t_3 = __t
                     local ____temp_2 = e.key == "Tab" or e.key == "ArrowLeft"
-                    __O[3194] = ____temp_2
-                    if ____t_4(if ____t_3(____temp_2) then __O[3194] else e.key == "ArrowRight") then
+                    __O[3199] = ____temp_2
+                    if ____t_3(____temp_2) then
+                        ____t_result_4 = __O[3199]
+                    else
+                        ____t_result_4 = e.key == "ArrowRight"
+                    end
+                    if ____t_5(____t_result_4) then
                         e:preventDefault()
                         local n, s = table.unpack(
                             el:querySelectorAll("button"),
                             1,
                             2
                         )
-                        __D[1] = if window.document.activeElement == n then s else n:focus()
+                        local ____temp_6
+                        if window.document.activeElement == n then
+                            ____temp_6 = s
+                        else
+                            ____temp_6 = n
+                        end
+                        ____temp_6:focus()
                     end
                 end
             end,
@@ -97,15 +108,48 @@ local __O = {};
         if pendente ~= nil then
             pendente(nil, false)
         end
-        d:querySelector("h2").textContent = if __t(o.titulo) then o.titulo else "Tem certeza?"
-        d:querySelector("p").innerHTML = if __t(o.html) then o.html else ""
+        local ____temp_10 = d:querySelector("h2")
+        local ____t_result_9
+        if __t(o.titulo) then
+            ____t_result_9 = o.titulo
+        else
+            ____t_result_9 = "Tem certeza?"
+        end
+        ____temp_10.textContent = ____t_result_9
+        local ____temp_12 = d:querySelector("p")
+        local ____t_result_11
+        if __t(o.html) then
+            ____t_result_11 = o.html
+        else
+            ____t_result_11 = ""
+        end
+        ____temp_12.innerHTML = ____t_result_11
         if not __t(o.html) then
-            d:querySelector("p").textContent = if __t(o.texto) then o.texto else ""
+            local ____temp_14 = d:querySelector("p")
+            local ____t_result_13
+            if __t(o.texto) then
+                ____t_result_13 = o.texto
+            else
+                ____t_result_13 = ""
+            end
+            ____temp_14.textContent = ____t_result_13
         end
         local sim = d:querySelector(".sim")
         local nao = d:querySelector(".nao")
-        sim.textContent = if __t(o.sim) then o.sim else "SIM"
-        nao.textContent = if __t(o.nao) then o.nao else "CANCELAR"
+        local ____t_result_15
+        if __t(o.sim) then
+            ____t_result_15 = o.sim
+        else
+            ____t_result_15 = "SIM"
+        end
+        sim.textContent = ____t_result_15
+        local ____t_result_16
+        if __t(o.nao) then
+            ____t_result_16 = o.nao
+        else
+            ____t_result_16 = "CANCELAR"
+        end
+        nao.textContent = ____t_result_16
         sim.classList:toggle("perigo", o.perigo ~= false)
         d.hidden = false
         window:setTimeout(
@@ -126,13 +170,26 @@ local __O = {};
                 return true, false
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____self_9 = window.JSON
-                local ____self_9_parse_10 = ____self_9.parse
-                local ____t_8 = __t
-                local ____temp_7 = window.localStorage:getItem(SAVE)
-                __O[3195] = ____temp_7
-                local d = ____self_9_parse_10(____self_9, if ____t_8(____temp_7) then __O[3195] else "null")
-                return true, not not __t(if __t(d) then d.q else d)
+                local ____self_20 = window.JSON
+                local ____self_20_parse_21 = ____self_20.parse
+                local ____t_result_19
+                local ____t_18 = __t
+                local ____temp_17 = window.localStorage:getItem(SAVE)
+                __O[3200] = ____temp_17
+                if ____t_18(____temp_17) then
+                    ____t_result_19 = __O[3200]
+                else
+                    ____t_result_19 = "null"
+                end
+                local d = ____self_20_parse_21(____self_20, ____t_result_19)
+                local ____t_23 = __t
+                local ____t_result_22
+                if __t(d) then
+                    ____t_result_22 = d.q
+                else
+                    ____t_result_22 = d
+                end
+                return true, not not ____t_23(____t_result_22)
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -146,28 +203,39 @@ local __O = {};
     window:addEventListener(
         "click",
         function(____, e)
-            local ____this_12
-            ____this_12 = e.target
-            local ____opt_11 = ____this_12.closest
-            if ____opt_11 ~= nil then
-                ____opt_11 = ____opt_11(____this_12, "#startBtn")
+            local ____this_25
+            ____this_25 = e.target
+            local ____opt_24 = ____this_25.closest
+            if ____opt_24 ~= nil then
+                ____opt_24 = ____opt_24(____this_25, "#startBtn")
             end
-            local b = ____opt_11
-            local ____t_17 = __t
-            local ____t_16 = __t
-            local ____t_14 = __t
-            local ____temp_13 = not __t(b)
-            __O[3196] = ____temp_13
-            local ____temp_15 = if ____t_14(____temp_13) then __O[3196] else liberado
-            __O[3197] = ____temp_15
-            if ____t_17(if ____t_16(____temp_15) then __O[3197] else not __t(temSave(nil))) then
+            local b = ____opt_24
+            local ____t_31 = __t
+            local ____t_result_30
+            local ____t_29 = __t
+            local ____t_result_28
+            local ____t_27 = __t
+            local ____temp_26 = not __t(b)
+            __O[3201] = ____temp_26
+            if ____t_27(____temp_26) then
+                ____t_result_28 = __O[3201]
+            else
+                ____t_result_28 = liberado
+            end
+            __O[3202] = ____t_result_28
+            if ____t_29(____t_result_28) then
+                ____t_result_30 = __O[3202]
+            else
+                ____t_result_30 = not __t(temSave(nil))
+            end
+            if ____t_31(____t_result_30) then
                 return
             end
             e:preventDefault()
             e:stopImmediatePropagation()
-            local ____self_18 = Confirmar(nil, {titulo = "JOGAR DO COMEÇO?", html = "Você já tem uma aventura salva.<br>Começar do zero <b>apaga todo o progresso da campanha principal</b>: história, itens, nível e atributos.<br><br>Tem certeza que quer reiniciar o save?", sim = "APAGAR E COMEÇAR", nao = "CANCELAR"})
-            ____self_18["then"](
-                ____self_18,
+            local ____self_32 = Confirmar(nil, {titulo = "JOGAR DO COMEÇO?", html = "Você já tem uma aventura salva.<br>Começar do zero <b>apaga todo o progresso da campanha principal</b>: história, itens, nível e atributos.<br><br>Tem certeza que quer reiniciar o save?", sim = "APAGAR E COMEÇAR", nao = "CANCELAR"})
+            ____self_32["then"](
+                ____self_32,
                 function(____, ok)
                     if not __t(ok) then
                         return

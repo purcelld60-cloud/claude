@@ -2,7 +2,6 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __lt, __gt, __ge, __getq, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call = __JSR.__lt, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call
 local __add, __iter, __assign = __JSR.__add, __JSR.__iter, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -206,14 +205,21 @@ local __O = {};
         5
     )
     local function barras(self, slug, base)
-        return __call(
-            if slug == "jorge" then __arrL({
+        local ____call_1 = __call
+        local ____temp_0
+        if slug == "jorge" then
+            ____temp_0 = __arrL({
                 0.56,
                 0.68,
                 0.8,
                 0.93,
                 1.03
-            }, 5) else __arrL({1, 1.25, 1.5}, 3),
+            }, 5)
+        else
+            ____temp_0 = __arrL({1, 1.25, 1.5}, 3)
+        end
+        return ____call_1(
+            ____temp_0,
             "map",
             function(____, m) return math.max(
                 1,
@@ -224,15 +230,27 @@ local __O = {};
     local function palco(self, f, p)
         local l = f.l + 36
         local r = f.r - 36
+        local ____t_result_2
+        if __t(p.vx) then
+            ____t_result_2 = p.vx
+        else
+            ____t_result_2 = 0
+        end
         local dianteira = clamp(
             nil,
-            if __t(p.vx) then p.vx else 0 * math.min(0.18, (f.fase - 1) * 0.08) / f.avisoModo,
+            ____t_result_2 * math.min(0.18, (f.fase - 1) * 0.08) / f.avisoModo,
             -64,
             64
         )
         local x = clamp(nil, p.x + dianteira, l, r)
-        local d = if __lt(p.x, f.x) then -1 else 1
-        local edge = if d < 0 then l else r
+        local d = __lt(p.x, f.x) and -1 or 1
+        local ____temp_3
+        if d < 0 then
+            ____temp_3 = l
+        else
+            ____temp_3 = r
+        end
+        local edge = ____temp_3
         local function alvo(____, dx)
             return clamp(nil, x + dx, l, r)
         end
@@ -1339,15 +1357,30 @@ local __O = {};
                     function(____, a) return __call(
                         __arrL({-1, 1}, 2),
                         "map",
-                        function(____, s, i) return a:mov(
-                            "voto",
-                            if s < 0 then a.l else a.r,
-                            37 + i * 66,
-                            a.x,
-                            37 + i * 66,
-                            0.78,
-                            {letra = if __t(i) then "B" else "A", rx = 23, atraso = i * 0.22}
-                        ) end
+                        function(____, s, i)
+                            local ____a_5 = a
+                            local ____a_mov_6 = a.mov
+                            local ____temp_4
+                            if s < 0 then
+                                ____temp_4 = a.l
+                            else
+                                ____temp_4 = a.r
+                            end
+                            return ____a_mov_6(
+                                ____a_5,
+                                "voto",
+                                ____temp_4,
+                                37 + i * 66,
+                                a.x,
+                                37 + i * 66,
+                                0.78,
+                                {
+                                    letra = __t(i) and "B" or "A",
+                                    rx = 23,
+                                    atraso = i * 0.22
+                                }
+                            )
+                        end
                     ) end
                 },
                 2
@@ -1498,15 +1531,26 @@ local __O = {};
                     function(____, a) return __call(
                         __arrL({-1, 1}, 2),
                         "map",
-                        function(____, d, i) return a:mov(
-                            "mascara",
-                            if __t(i) then a.r else a.l,
-                            105 - i * 65,
-                            a:alvo(d * 28),
-                            40 + i * 53,
-                            0.8,
-                            {onda = 20 * d, atraso = 0.28 * i, rx = 18, ry = 20}
-                        ) end
+                        function(____, d, i)
+                            local ____a_8 = a
+                            local ____a_mov_9 = a.mov
+                            local ____t_result_7
+                            if __t(i) then
+                                ____t_result_7 = a.r
+                            else
+                                ____t_result_7 = a.l
+                            end
+                            return ____a_mov_9(
+                                ____a_8,
+                                "mascara",
+                                ____t_result_7,
+                                105 - i * 65,
+                                a:alvo(d * 28),
+                                40 + i * 53,
+                                0.8,
+                                {onda = 20 * d, atraso = 0.28 * i, rx = 18, ry = 20}
+                            )
+                        end
                     ) end
                 },
                 2
@@ -1565,15 +1609,33 @@ local __O = {};
                     function(____, a) return __call(
                         __arrL({0, 1, 2}, 3),
                         "map",
-                        function(____, i) return a:mov(
-                            "invasor",
-                            if __t(__mod(i, 2)) then a.twin else a.b,
-                            32 + i * 36,
-                            if __t(__mod(i, 2)) then a.r else a.l,
-                            32 + i * 36,
-                            0.98,
-                            {onda = 13, atraso = i * 0.26, rx = 18}
-                        ) end
+                        function(____, i)
+                            local ____a_13 = a
+                            local ____a_mov_14 = a.mov
+                            local ____t_result_10
+                            if __t(__mod(i, 2)) then
+                                ____t_result_10 = a.twin
+                            else
+                                ____t_result_10 = a.b
+                            end
+                            local ____temp_12 = 32 + i * 36
+                            local ____t_result_11
+                            if __t(__mod(i, 2)) then
+                                ____t_result_11 = a.r
+                            else
+                                ____t_result_11 = a.l
+                            end
+                            return ____a_mov_14(
+                                ____a_13,
+                                "invasor",
+                                ____t_result_10,
+                                ____temp_12,
+                                ____t_result_11,
+                                32 + i * 36,
+                                0.98,
+                                {onda = 13, atraso = i * 0.26, rx = 18}
+                            )
+                        end
                     ) end
                 },
                 2
@@ -1708,15 +1770,28 @@ local __O = {};
                     function(____, a) return __call(
                         __arrL({-1, 1}, 2),
                         "map",
-                        function(____, d, i) return a:mov(
-                            if __t(i) then "metade2" else "metade1",
-                            a.x,
-                            190,
-                            if __t(i) then a.r else a.l,
-                            23,
-                            0.99,
-                            {arco = 27, rx = 21, ry = 20}
-                        ) end
+                        function(____, d, i)
+                            local ____a_18 = a
+                            local ____a_mov_19 = a.mov
+                            local ____temp_16 = __t(i) and "metade2" or "metade1"
+                            local ____a_x_17 = a.x
+                            local ____t_result_15
+                            if __t(i) then
+                                ____t_result_15 = a.r
+                            else
+                                ____t_result_15 = a.l
+                            end
+                            return ____a_mov_19(
+                                ____a_18,
+                                ____temp_16,
+                                ____a_x_17,
+                                190,
+                                ____t_result_15,
+                                23,
+                                0.99,
+                                {arco = 27, rx = 21, ry = 20}
+                            )
+                        end
                     ) end
                 },
                 2
@@ -1772,15 +1847,15 @@ local __O = {};
                     "Palavras que partem",
                     function(____, a)
                         local falas = __arrL({"O trio já era.", "Nem senti falta.", "Você ficou pra trás.", "Era só por pena."}, 4)
-                        local ____get_4 = __get
-                        local ____mod_3 = __mod
-                        local ____a_f_0, ____farpas_1 = a.f, "farpas"
-                        local ____a_f_farpas_2 = ____a_f_0[____farpas_1]
-                        ____a_f_0[____farpas_1] = ____a_f_farpas_2 + 1
-                        local fala = ____get_4(
+                        local ____get_24 = __get
+                        local ____mod_23 = __mod
+                        local ____a_f_20, ____farpas_21 = a.f, "farpas"
+                        local ____a_f_farpas_22 = ____a_f_20[____farpas_21]
+                        ____a_f_20[____farpas_21] = ____a_f_farpas_22 + 1
+                        local fala = ____get_24(
                             falas,
-                            ____mod_3(
-                                ____a_f_farpas_2,
+                            ____mod_23(
+                                ____a_f_farpas_22,
                                 __len(falas)
                             )
                         )
@@ -1914,28 +1989,49 @@ local __O = {};
         if recuperacao == nil then
             recuperacao = __arrL({1, 0.9, 0.8}, 3)
         end
+        local ____slug_27 = slug
+        local ____x_28 = x
+        local ____piso_29 = piso
+        local ____piso_30 = piso
+        local ____l_31 = l
+        local ____r_32 = r
+        local ____temp_25
+        if slug == "gemeos" then
+            ____temp_25 = l + 43
+        else
+            ____temp_25 = nil
+        end
+        local ____arrL_result_33 = __arrL({}, 0)
+        local ____arrL_result_34 = __arrL({}, 0)
+        local ____x_35 = x
+        local ____t_result_26
+        if __t(modo.windup) then
+            ____t_result_26 = modo.windup
+        else
+            ____t_result_26 = 1
+        end
         local f = {
-            slug = slug,
-            x = x,
-            y = piso,
-            piso = piso,
-            l = l,
-            r = r,
+            slug = ____slug_27,
+            x = ____x_28,
+            y = ____piso_29,
+            piso = ____piso_30,
+            l = ____l_31,
+            r = ____r_32,
             ceu = nil,
             estrada = nil,
             farpas = 0,
-            gemeoX = if slug == "gemeos" then l + 43 else nil,
+            gemeoX = ____temp_25,
             fase = 1,
             indice = 0,
             estado = "idle",
             tempo = 0,
             dur = 0,
             idade = 0,
-            objetos = __arrL({}, 0),
-            marcas = __arrL({}, 0),
+            objetos = ____arrL_result_33,
+            marcas = ____arrL_result_34,
             golpe = "",
-            destino = x,
-            avisoModo = if __t(modo.windup) then modo.windup else 1,
+            destino = ____x_35,
+            avisoModo = ____t_result_26,
             recuperacao = recuperacao,
             jogadorAnteriorX = nil,
             jogadorAnteriorY = nil
@@ -1948,33 +2044,45 @@ local __O = {};
         return f
     end
     local function terreno(self, f)
-        local ____t_8 = __t
-        local ____opt_result_7
+        local ____t_result_45
+        local ____t_39 = __t
+        local ____opt_result_38
         if f ~= nil then
-            ____opt_result_7 = f.estrada
+            ____opt_result_38 = f.estrada
         end
-        local ____t_12 = __t
-        local ____opt_result_11
-        if f ~= nil then
-            ____opt_result_11 = f.ceu
+        if ____t_39(____opt_result_38) then
+            ____t_result_45 = window.PerseguicaoMoto
+        else
+            local ____t_result_44
+            local ____t_43 = __t
+            local ____opt_result_42
+            if f ~= nil then
+                ____opt_result_42 = f.ceu
+            end
+            if ____t_43(____opt_result_42) then
+                ____t_result_44 = window.JorgeDuelo
+            else
+                ____t_result_44 = nil
+            end
+            ____t_result_45 = ____t_result_44
         end
-        return if ____t_8(____opt_result_7) then window.PerseguicaoMoto else if ____t_12(____opt_result_11) then window.JorgeDuelo else nil
+        return ____t_result_45
     end
     local function preparar(self, f, p)
         local lista = __get(
             __get(chefes, f.slug).fases,
             f.fase - 1
         )
-        local ____f_18 = f
-        local ____get_17 = __get
-        local ____mod_16 = __mod
-        local ____f_13, ____indice_14 = f, "indice"
-        local ____f_indice_15 = ____f_13[____indice_14]
-        ____f_13[____indice_14] = ____f_indice_15 + 1
-        ____f_18.golpe = ____get_17(
+        local ____f_51 = f
+        local ____get_50 = __get
+        local ____mod_49 = __mod
+        local ____f_46, ____indice_47 = f, "indice"
+        local ____f_indice_48 = ____f_46[____indice_47]
+        ____f_46[____indice_47] = ____f_indice_48 + 1
+        ____f_51.golpe = ____get_50(
             lista,
-            ____mod_16(
-                ____f_indice_15,
+            ____mod_49(
+                ____f_indice_48,
                 __len(lista)
             )
         )
@@ -1992,8 +2100,8 @@ local __O = {};
         end
         f.estado = "windup"
         f.tempo = 0
-        local aviso = if f.golpe == "ruptura" then 1.24 else if f.golpe == "saltoBarriga" then 0.91 else 0.78 - (f.fase - 1) * 0.04
-        f.dur = math.max(if f.golpe == "ruptura" then 1.1 else 0.52, aviso * f.avisoModo)
+        local aviso = f.golpe == "ruptura" and 1.24 or (f.golpe == "saltoBarriga" and 0.91 or 0.78 - (f.fase - 1) * 0.04)
+        f.dur = math.max(f.golpe == "ruptura" and 1.1 or 0.52, aviso * f.avisoModo)
     end
     local function trocar(self, f, fase, jogador)
         if f.slug == "jorge" then
@@ -2006,20 +2114,41 @@ local __O = {};
         f.indice = 0
         f.estado = "phaseChange"
         f.tempo = 0
-        f.dur = if f.slug == "jorge" then 1.65 else 1.05
+        f.dur = f.slug == "jorge" and 1.65 or 1.05
         f.objetos = __arrL({}, 0)
         f.marcas = __arrL({}, 0)
         f.golpe = ""
-        local ____f_19 = f
+        local ____f_52 = f
         f.jogadorAnteriorY = nil
-        ____f_19.jogadorAnteriorX = nil
+        ____f_52.jogadorAnteriorX = nil
         return f.dur
     end
     local function ponto(self, o, t)
         t = clamp(nil, t, 0, 1)
+        local ____mix_result_58 = mix(nil, o.x0, o.x1, t)
+        local ____mix_result_55 = mix(nil, o.y0, o.y1, t)
+        local ____t_result_53
+        if __t(o.arco) then
+            ____t_result_53 = o.arco
+        else
+            ____t_result_53 = 0
+        end
+        local ____t_result_54
+        if __t(o.quiques) then
+            ____t_result_54 = math.abs(math.sin(t * math.pi * o.quiques))
+        else
+            ____t_result_54 = 4 * t * (1 - t)
+        end
+        local ____temp_57 = ____mix_result_55 - ____t_result_53 * ____t_result_54
+        local ____t_result_56
+        if __t(o.onda) then
+            ____t_result_56 = o.onda
+        else
+            ____t_result_56 = 0
+        end
         return {
-            x = mix(nil, o.x0, o.x1, t),
-            y = mix(nil, o.y0, o.y1, t) - if __t(o.arco) then o.arco else 0 * if __t(o.quiques) then math.abs(math.sin(t * math.pi * o.quiques)) else 4 * t * (1 - t) - if __t(o.onda) then o.onda else 0 * math.sin(t * math.pi * 2)
+            x = ____mix_result_58,
+            y = ____temp_57 - ____t_result_56 * math.sin(t * math.pi * 2)
         }
     end
     local function cruzaCaixa(self, x0, y0, x1, y1, rx, ry)
@@ -2027,16 +2156,22 @@ local __O = {};
         local dy = (y1 - y0) / 2
         local cx = x0 + dx
         local cy = y0 + dy
-        local ____t_21 = __t
-        local ____temp_20 = __lt(
+        local ____t_result_61
+        local ____t_60 = __t
+        local ____temp_59 = __lt(
             math.abs(cx),
             rx + math.abs(dx)
         ) and __lt(
             math.abs(cy),
             ry + math.abs(dy)
         )
-        __O[918] = ____temp_20
-        return if ____t_21(____temp_20) then math.abs(cx * dy - cy * dx) <= rx * math.abs(dy) + ry * math.abs(dx) else __O[918]
+        __O[923] = ____temp_59
+        if ____t_60(____temp_59) then
+            ____t_result_61 = math.abs(cx * dy - cy * dx) <= rx * math.abs(dy) + ry * math.abs(dx)
+        else
+            ____t_result_61 = __O[923]
+        end
+        return ____t_result_61
     end
     local function contatoNoQuadro(self, o, fim, tempo, dt, p, xAntes, yAntes)
         local inicio = math.max(tempo - dt, o.atraso)
@@ -2045,23 +2180,48 @@ local __O = {};
             __add(o.atraso, o.dur)
         )
         local function fracao(____, instante)
-            return if __gt(dt, 0) then clamp(nil, 1 - (tempo - instante) / dt, 0, 1) else 1
+            local ____gt_result_62
+            if __gt(dt, 0) then
+                ____gt_result_62 = clamp(nil, 1 - (tempo - instante) / dt, 0, 1)
+            else
+                ____gt_result_62 = 1
+            end
+            return ____gt_result_62
         end
         local inicioRel = (inicio - o.atraso) / o.dur
         local primeiro = ponto(nil, o, inicioRel)
         local u = fracao(nil, inicio)
         local x0 = primeiro.x - mix(nil, xAntes, p.x, u)
         local y0 = primeiro.y - mix(nil, yAntes, p.y, u) + 26
-        local passos = if __t(if __t(o.arco) then o.arco else o.onda) then math.max(
-            1,
-            math.ceil((termino - inicio) * 60)
-        ) else 1
+        local ____t_result_65
+        local ____t_64 = __t
+        local ____t_result_63
+        if __t(o.arco) then
+            ____t_result_63 = o.arco
+        else
+            ____t_result_63 = o.onda
+        end
+        if ____t_64(____t_result_63) then
+            ____t_result_65 = math.max(
+                1,
+                math.ceil((termino - inicio) * 60)
+            )
+        else
+            ____t_result_65 = 1
+        end
+        local passos = ____t_result_65
         do
             local i = 1
             while i <= passos do
                 local instante = mix(nil, inicio, termino, i / passos)
                 local v = fracao(nil, instante)
-                local pos = if i == passos then fim else ponto(nil, o, (instante - o.atraso) / o.dur)
+                local ____temp_66
+                if i == passos then
+                    ____temp_66 = fim
+                else
+                    ____temp_66 = ponto(nil, o, (instante - o.atraso) / o.dur)
+                end
+                local pos = ____temp_66
                 local x1 = pos.x - mix(nil, xAntes, p.x, v)
                 local y1 = pos.y - mix(nil, yAntes, p.y, v) + 26
                 if __t(cruzaCaixa(
@@ -2092,16 +2252,16 @@ local __O = {};
         __call(f.marcas, "push", {art = o.art, x = pos.x, y = pos.y, idade = 0})
     end
     local function atualizar(self, f, dt, p, ferir, som)
-        local ____f_jogadorAnteriorX_22 = f.jogadorAnteriorX
-        if ____f_jogadorAnteriorX_22 == nil then
-            ____f_jogadorAnteriorX_22 = p.x
+        local ____f_jogadorAnteriorX_67 = f.jogadorAnteriorX
+        if ____f_jogadorAnteriorX_67 == nil then
+            ____f_jogadorAnteriorX_67 = p.x
         end
-        local xAntes = ____f_jogadorAnteriorX_22
-        local ____f_jogadorAnteriorY_23 = f.jogadorAnteriorY
-        if ____f_jogadorAnteriorY_23 == nil then
-            ____f_jogadorAnteriorY_23 = p.y
+        local xAntes = ____f_jogadorAnteriorX_67
+        local ____f_jogadorAnteriorY_68 = f.jogadorAnteriorY
+        if ____f_jogadorAnteriorY_68 == nil then
+            ____f_jogadorAnteriorY_68 = p.y
         end
-        local yAntes = ____f_jogadorAnteriorY_23
+        local yAntes = ____f_jogadorAnteriorY_68
         f.jogadorAnteriorX = p.x
         f.jogadorAnteriorY = p.y
         f.idade = __add(f.idade, dt)
@@ -2112,13 +2272,13 @@ local __O = {};
         do
             local i = __len(f.marcas) - 1
             while i >= 0 do
-                local ____gt_25 = __gt
-                local ____add_result_24 = __add(
+                local ____gt_70 = __gt
+                local ____add_result_69 = __add(
                     __get(f.marcas, i).idade,
                     dt
                 )
-                __get(f.marcas, i).idade = ____add_result_24
-                if ____gt_25(____add_result_24, 0.28) then
+                __get(f.marcas, i).idade = ____add_result_69
+                if ____gt_70(____add_result_69, 0.28) then
                     __call(f.marcas, "splice", i, 1)
                 end
                 i = i - 1
@@ -2157,43 +2317,64 @@ local __O = {};
             end
         end
         for ____, o in __iterar((f.objetos)) do
-            local t = (f.tempo - o.atraso) / o.dur
-            local ____t_30 = __t
-            local ____t_29 = __t
-            local ____temp_28 = t < 0
-            __O[919] = ____temp_28
-            if ____t_30(if ____t_29(____temp_28) then __O[919] else o.fim) then
-                continue
-            end
-            local pos = ponto(nil, o, t)
-            if __t(if __t(o.piloto) then o.piloto else o.corpo) then
-                f.x = pos.x
-            end
-            if __t(o.corpo) then
-                f.y = pos.y + o.corpo
-            end
-            local ____t_33 = __t
-            local ____t_32 = __t
-            local ____temp_31 = not __t(o.acertou)
-            __O[920] = ____temp_31
-            __D[1] = if ____t_33(if ____t_32(____temp_31) then contatoNoQuadro(
-                nil,
-                o,
-                pos,
-                f.tempo,
-                dt,
-                p,
-                xAntes,
-                yAntes
-            ) else __O[920]) then
-                o.acertou = true
-                impacto(nil, f, o, pos)
-                ferir(nil, o.dano, pos.x)
-            end
-            if t >= 1 then
-                o.fim = true
-                if not __t(o.acertou) then
+            do
+                local t = (f.tempo - o.atraso) / o.dur
+                local ____t_76 = __t
+                local ____t_result_75
+                local ____t_74 = __t
+                local ____temp_73 = t < 0
+                __O[924] = ____temp_73
+                if ____t_74(____temp_73) then
+                    ____t_result_75 = __O[924]
+                else
+                    ____t_result_75 = o.fim
+                end
+                if ____t_76(____t_result_75) then
+                    continue
+                end
+                local pos = ponto(nil, o, t)
+                local ____t_78 = __t
+                local ____t_result_77
+                if __t(o.piloto) then
+                    ____t_result_77 = o.piloto
+                else
+                    ____t_result_77 = o.corpo
+                end
+                if ____t_78(____t_result_77) then
+                    f.x = pos.x
+                end
+                if __t(o.corpo) then
+                    f.y = pos.y + o.corpo
+                end
+                local ____t_82 = __t
+                local ____t_result_81
+                local ____t_80 = __t
+                local ____temp_79 = not __t(o.acertou)
+                __O[925] = ____temp_79
+                if ____t_80(____temp_79) then
+                    ____t_result_81 = contatoNoQuadro(
+                        nil,
+                        o,
+                        pos,
+                        f.tempo,
+                        dt,
+                        p,
+                        xAntes,
+                        yAntes
+                    )
+                else
+                    ____t_result_81 = __O[925]
+                end
+                if ____t_82(____t_result_81) then
+                    o.acertou = true
                     impacto(nil, f, o, pos)
+                    ferir(nil, o.dano, pos.x)
+                end
+                if t >= 1 then
+                    o.fim = true
+                    if not __t(o.acertou) then
+                        impacto(nil, f, o, pos)
+                    end
                 end
             end
         end
@@ -2211,20 +2392,32 @@ local __O = {};
             )
         )
         f.dur = math.max(0.3, base * (0.7 - (f.fase - 1) * 0.015))
-        local dir = if __ge(f.x, p.x) then 1 else -1
+        local dir = __ge(f.x, p.x) and 1 or -1
         f.destino = clamp(nil, p.x + dir * 218, f.l + 52, f.r - 52)
     end
     local function capitulo(self, f)
-        return if f.slug == "jorge" then __get(capitulos, f.fase - 1) else nil
+        local ____temp_83
+        if f.slug == "jorge" then
+            ____temp_83 = __get(capitulos, f.fase - 1)
+        else
+            ____temp_83 = nil
+        end
+        return ____temp_83
     end
     local function titulo(self, f)
-        local ____t_35 = __t
-        local ____getq_result_34 = __getq(
+        local ____t_result_86
+        local ____t_85 = __t
+        local ____getq_result_84 = __getq(
             __get(golpes, f.golpe),
             0
         )
-        __O[921] = ____getq_result_34
-        return if ____t_35(____getq_result_34) then __O[921] else ""
+        __O[926] = ____getq_result_84
+        if ____t_85(____getq_result_84) then
+            ____t_result_86 = __O[926]
+        else
+            ____t_result_86 = ""
+        end
+        return ____t_result_86
     end
     window.ConquistaCombate = __ord({
         chefes = chefes,

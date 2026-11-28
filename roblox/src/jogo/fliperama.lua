@@ -2,7 +2,6 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __newExpr, __lt, __le, __gt, __ge, __getq, __callq, __mod, __ord, __arrL, __iterar, __t = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t
 local __get, __set, __inc, __arr, __len, __call, __add, __new, __iter, __keys, __assign, __isArray = __JSR.__get, __JSR.__set, __JSR.__inc, __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__assign, __JSR.__isArray
 local __arrayFrom, __bor, __hypot, __getters, __re, __re_replace = __JSR.__arrayFrom, __JSR.__bor, __JSR.__hypot, __JSR.__getters, __JSR.__re, __JSR.__re_replace
@@ -21,14 +20,25 @@ local __O = {};
 (function()
     local __L1 = {}
     __L1.sfx = function(self, name)
-        local ____t_2 = __t
+        local ____t_3 = __t
+        local ____t_result_2
         local ____t_1 = __t
-        local ____temp_0 = if __t(__L1.net) then __L1.net.role == "host" else __L1.net
-        __O[1081] = ____temp_0
-        __D[1] = if ____t_2(if ____t_1(____temp_0) then __lt(
-            __len(__L1.net.sfx),
-            20
-        ) else __O[1081]) then
+        local ____t_result_0
+        if __t(__L1.net) then
+            ____t_result_0 = __L1.net.role == "host"
+        else
+            ____t_result_0 = __L1.net
+        end
+        __O[1086] = ____t_result_0
+        if ____t_1(____t_result_0) then
+            ____t_result_2 = __lt(
+                __len(__L1.net.sfx),
+                20
+            )
+        else
+            ____t_result_2 = __O[1086]
+        end
+        if ____t_3(____t_result_2) then
             __call(__L1.net.sfx, "push", name)
         end
         if __t(__L1.tv) then
@@ -39,26 +49,39 @@ local __O = {};
         end
         do
             pcall(function()
-                __L1.actx = if __t(__L1.actx) then __L1.actx else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                local ____t_result_6
+                if __t(__L1.actx) then
+                    ____t_result_6 = __L1.actx
+                else
+                    local ____newExpr_5 = __newExpr
+                    local ____t_result_4
+                    if __t(window.AudioContext) then
+                        ____t_result_4 = window.AudioContext
+                    else
+                        ____t_result_4 = window.webkitAudioContext
+                    end
+                    ____t_result_6 = ____newExpr_5(____t_result_4)
+                end
+                __L1.actx = ____t_result_6
                 if __L1.actx.state == "suspended" then
                     __L1.actx:resume()
                 end
                 local now = __L1.actx.currentTime
                 local out = __L1.actx:createGain()
-                local ____out_gain_9 = out.gain
-                local ____opt_5 = window.DarocaAudio
-                if ____opt_5 ~= nil then
-                    ____opt_5 = ____opt_5.sfx
+                local ____out_gain_13 = out.gain
+                local ____opt_9 = window.DarocaAudio
+                if ____opt_9 ~= nil then
+                    ____opt_9 = ____opt_9.sfx
                 end
-                local ____opt_result_7
-                if ____opt_5 ~= nil then
-                    ____opt_result_7 = ____opt_5(____opt_5)
+                local ____opt_result_11
+                if ____opt_9 ~= nil then
+                    ____opt_result_11 = ____opt_9(____opt_9)
                 end
-                local ____opt_result_7_8 = ____opt_result_7
-                if ____opt_result_7_8 == nil then
-                    ____opt_result_7_8 = 1
+                local ____opt_result_11_12 = ____opt_result_11
+                if ____opt_result_11_12 == nil then
+                    ____opt_result_11_12 = 1
                 end
-                ____out_gain_9.value = 0.045 * ____opt_result_7_8
+                ____out_gain_13.value = 0.045 * ____opt_result_11_12
                 out:connect(__L1.actx.destination)
                 local function tone(____, f, f2, d, ____type, at, vol)
                     if ____type == nil then
@@ -119,8 +142,9 @@ local __O = {};
                     g:connect(out)
                     s:start(now + at)
                 end
-                local ____t_11 = __t
-                local ____get_result_10 = __get(
+                local ____t_result_16
+                local ____t_15 = __t
+                local ____get_result_14 = __get(
                     {
                         pick = function()
                             tone(nil, 880, 1320, 0.08)
@@ -247,8 +271,13 @@ local __O = {};
                     },
                     name
                 )
-                __O[1082] = ____get_result_10
-                __D[1] = if ____t_11(____get_result_10) then __O[1082] else function() return tone(nil, 500, 500, 0.05) end(nil)
+                __O[1087] = ____get_result_14
+                if ____t_15(____get_result_14) then
+                    ____t_result_16 = __O[1087]
+                else
+                    ____t_result_16 = function() return tone(nil, 500, 500, 0.05) end
+                end
+                ____t_result_16(nil)
             end)
         end
     end
@@ -256,17 +285,23 @@ local __O = {};
         local out = __arr(nil, nil, nil, nil)
         do
             pcall(function()
-                local ____call_18 = __call
-                local ____arr_17 = __arr
-                local ____iter_16 = __iter
-                local ____t_15 = __t
-                local ____this_13
-                ____this_13 = window.navigator
-                local ____opt_12 = ____this_13.getGamepads
-                local ____temp_14 = ____opt_12 and ____opt_12(____this_13)
-                __O[1084] = ____temp_14
-                local pads = ____call_18(
-                    ____arr_17(__TS__Spread(____iter_16(if ____t_15(____temp_14) then __O[1084] else __arrL({}, 0)))),
+                local ____call_24 = __call
+                local ____arr_23 = __arr
+                local ____iter_22 = __iter
+                local ____t_result_21
+                local ____t_20 = __t
+                local ____this_18
+                ____this_18 = window.navigator
+                local ____opt_17 = ____this_18.getGamepads
+                local ____temp_19 = ____opt_17 and ____opt_17(____this_18)
+                __O[1089] = ____temp_19
+                if ____t_20(____temp_19) then
+                    ____t_result_21 = __O[1089]
+                else
+                    ____t_result_21 = __arrL({}, 0)
+                end
+                local pads = ____call_24(
+                    ____arr_23(__TS__Spread(____iter_22(____t_result_21))),
                     "filter",
                     window.Boolean
                 )
@@ -274,54 +309,106 @@ local __O = {};
                     __call(pads, "slice", 0, 4),
                     "forEach",
                     function(____, g, i)
-                        local ____t_20 = __t
-                        local ____get_result_19 = __get(g.axes, 0)
-                        __O[1085] = ____get_result_19
-                        local ax = if ____t_20(____get_result_19) then __O[1085] else 0
-                        local ____t_22 = __t
-                        local ____get_result_21 = __get(g.axes, 1)
-                        __O[1086] = ____get_result_21
-                        local ay = if ____t_22(____get_result_21) then __O[1086] else 0
-                        local function bt(____, n)
-                            local ____t_25 = __t
-                            local ____opt_23 = __get(g.buttons, n)
-                            if ____opt_23 ~= nil then
-                                ____opt_23 = ____opt_23.pressed
-                            end
-                            return not not ____t_25(____opt_23)
+                        local ____t_result_27
+                        local ____t_26 = __t
+                        local ____get_result_25 = __get(g.axes, 0)
+                        __O[1090] = ____get_result_25
+                        if ____t_26(____get_result_25) then
+                            ____t_result_27 = __O[1090]
+                        else
+                            ____t_result_27 = 0
                         end
-                        local ____set_44 = __set
-                        local ____i_43 = i
-                        local ____t_28 = __t
-                        local ____t_27 = __t
-                        local ____temp_26 = ax < -0.4
-                        __O[1087] = ____temp_26
-                        local ____t_31 = __t
-                        local ____t_30 = __t
-                        local ____temp_29 = ax > 0.4
-                        __O[1088] = ____temp_29
-                        local ____temp_40 = if ____t_28(if ____t_27(____temp_26) then __O[1087] else bt(nil, 14)) then -1 else if ____t_31(if ____t_30(____temp_29) then __O[1088] else bt(nil, 15)) then 1 else 0
-                        local ____t_34 = __t
-                        local ____t_33 = __t
-                        local ____temp_32 = ay < -0.4
-                        __O[1089] = ____temp_32
+                        local ax = ____t_result_27
+                        local ____t_result_30
+                        local ____t_29 = __t
+                        local ____get_result_28 = __get(g.axes, 1)
+                        __O[1091] = ____get_result_28
+                        if ____t_29(____get_result_28) then
+                            ____t_result_30 = __O[1091]
+                        else
+                            ____t_result_30 = 0
+                        end
+                        local ay = ____t_result_30
+                        local function bt(____, n)
+                            local ____t_33 = __t
+                            local ____opt_31 = __get(g.buttons, n)
+                            if ____opt_31 ~= nil then
+                                ____opt_31 = ____opt_31.pressed
+                            end
+                            return not not ____t_33(____opt_31)
+                        end
+                        local ____set_57 = __set
+                        local ____i_56 = i
+                        local ____t_result_42
                         local ____t_37 = __t
-                        local ____t_36 = __t
-                        local ____temp_35 = ay > 0.4
-                        __O[1090] = ____temp_35
-                        local ____temp_41 = if ____t_34(if ____t_33(____temp_32) then __O[1089] else bt(nil, 12)) then -1 else if ____t_37(if ____t_36(____temp_35) then __O[1090] else bt(nil, 13)) then 1 else 0
-                        local ____bt_result_42 = bt(nil, 0)
-                        local ____t_39 = __t
-                        local ____bt_result_38 = bt(nil, 1)
-                        __O[1091] = ____bt_result_38
-                        ____set_44(
+                        local ____t_result_36
+                        local ____t_35 = __t
+                        local ____temp_34 = ax < -0.4
+                        __O[1092] = ____temp_34
+                        if ____t_35(____temp_34) then
+                            ____t_result_36 = __O[1092]
+                        else
+                            ____t_result_36 = bt(nil, 14)
+                        end
+                        if ____t_37(____t_result_36) then
+                            ____t_result_42 = -1
+                        else
+                            local ____t_41 = __t
+                            local ____t_result_40
+                            local ____t_39 = __t
+                            local ____temp_38 = ax > 0.4
+                            __O[1093] = ____temp_38
+                            if ____t_39(____temp_38) then
+                                ____t_result_40 = __O[1093]
+                            else
+                                ____t_result_40 = bt(nil, 15)
+                            end
+                            ____t_result_42 = ____t_41(____t_result_40) and 1 or 0
+                        end
+                        local ____t_result_51
+                        local ____t_46 = __t
+                        local ____t_result_45
+                        local ____t_44 = __t
+                        local ____temp_43 = ay < -0.4
+                        __O[1094] = ____temp_43
+                        if ____t_44(____temp_43) then
+                            ____t_result_45 = __O[1094]
+                        else
+                            ____t_result_45 = bt(nil, 12)
+                        end
+                        if ____t_46(____t_result_45) then
+                            ____t_result_51 = -1
+                        else
+                            local ____t_50 = __t
+                            local ____t_result_49
+                            local ____t_48 = __t
+                            local ____temp_47 = ay > 0.4
+                            __O[1095] = ____temp_47
+                            if ____t_48(____temp_47) then
+                                ____t_result_49 = __O[1095]
+                            else
+                                ____t_result_49 = bt(nil, 13)
+                            end
+                            ____t_result_51 = ____t_50(____t_result_49) and 1 or 0
+                        end
+                        local ____bt_result_55 = bt(nil, 0)
+                        local ____t_result_54
+                        local ____t_53 = __t
+                        local ____bt_result_52 = bt(nil, 1)
+                        __O[1096] = ____bt_result_52
+                        if ____t_53(____bt_result_52) then
+                            ____t_result_54 = __O[1096]
+                        else
+                            ____t_result_54 = bt(nil, 2)
+                        end
+                        ____set_57(
                             out,
-                            ____i_43,
+                            ____i_56,
                             {
-                                x = ____temp_40,
-                                y = ____temp_41,
-                                a = ____bt_result_42,
-                                b = if ____t_39(____bt_result_38) then __O[1091] else bt(nil, 2),
+                                x = ____t_result_42,
+                                y = ____t_result_51,
+                                a = ____bt_result_55,
+                                b = ____t_result_54,
                                 start = bt(nil, 9)
                             }
                         )
@@ -337,14 +424,42 @@ local __O = {};
             local i = 0
             while i < 4 do
                 local p = __get(__L1.P, i)
-                local k = if i == 0 then __L1.K1 else if i == 1 then __L1.K2 else {}
-                local ____t_48 = __t
-                local ____t_46 = __t
-                local ____temp_45 = if __t(__L1.solo) then __L1.solo else not not __t(__L1.net)
-                __O[1092] = ____temp_45
-                local ____temp_47 = if ____t_46(____temp_45) then __O[1092] else not not __t(__L1.tv)
-                __O[1093] = ____temp_47
-                local both = if ____t_48(____temp_47) then i == 0 else __O[1093]
+                local ____temp_59
+                if i == 0 then
+                    ____temp_59 = __L1.K1
+                else
+                    local ____temp_58
+                    if i == 1 then
+                        ____temp_58 = __L1.K2
+                    else
+                        ____temp_58 = {}
+                    end
+                    ____temp_59 = ____temp_58
+                end
+                local k = ____temp_59
+                local ____t_result_64
+                local ____t_63 = __t
+                local ____t_result_62
+                local ____t_61 = __t
+                local ____t_result_60
+                if __t(__L1.solo) then
+                    ____t_result_60 = __L1.solo
+                else
+                    ____t_result_60 = not not __t(__L1.net)
+                end
+                __O[1097] = ____t_result_60
+                if ____t_61(____t_result_60) then
+                    ____t_result_62 = __O[1097]
+                else
+                    ____t_result_62 = not not __t(__L1.tv)
+                end
+                __O[1098] = ____t_result_62
+                if ____t_63(____t_result_62) then
+                    ____t_result_64 = i == 0
+                else
+                    ____t_result_64 = __O[1098]
+                end
+                local both = ____t_result_64
                 if i > 1 then
                     for ____, n in __iterar((__arrL({
                         "up",
@@ -354,90 +469,229 @@ local __O = {};
                         "a",
                         "b"
                     }, 6))) do
-                        local ____set_51 = __set
-                        local ____t_50 = __t
-                        local ____get_result_49 = __get(k, n)
-                        __O[1094] = ____get_result_49
-                        ____set_51(k, n, if ____t_50(____get_result_49) then __O[1094] else __arrL({}, 0))
+                        local ____set_68 = __set
+                        local ____t_result_67
+                        local ____t_66 = __t
+                        local ____get_result_65 = __get(k, n)
+                        __O[1099] = ____get_result_65
+                        if ____t_66(____get_result_65) then
+                            ____t_result_67 = __O[1099]
+                        else
+                            ____t_result_67 = __arrL({}, 0)
+                        end
+                        ____set_68(k, n, ____t_result_67)
                     end
                 end
                 local function kk(____, n)
-                    local ____t_53 = __t
-                    local ____temp_52 = __L1:held(__get(k, n))
-                    __O[1095] = ____temp_52
-                    return if ____t_53(____temp_52) then __O[1095] else if __t(both) then __L1:held(__get(__L1.K2, n)) else both
+                    local ____t_result_72
+                    local ____t_70 = __t
+                    local ____temp_69 = __L1:held(__get(k, n))
+                    __O[1100] = ____temp_69
+                    if ____t_70(____temp_69) then
+                        ____t_result_72 = __O[1100]
+                    else
+                        local ____t_result_71
+                        if __t(both) then
+                            ____t_result_71 = __L1:held(__get(__L1.K2, n))
+                        else
+                            ____t_result_71 = both
+                        end
+                        ____t_result_72 = ____t_result_71
+                    end
+                    return ____t_result_72
                 end
                 local pad = __get(pads, i)
                 local t = __get(__L1.touch, i)
-                local ____t_60 = __t
-                local ____t_55 = __t
-                local ____temp_54 = if __t(kk(nil, "left")) then -1 else 0 + if __t(kk(nil, "right")) then 1 else 0
-                __O[1096] = ____temp_54
-                local ____opt_result_58
-                if pad ~= nil then
-                    ____opt_result_58 = pad.x
+                local ____t_result_80
+                local ____t_79 = __t
+                local ____t_result_78
+                local ____t_74 = __t
+                local ____temp_73 = (__t(kk(nil, "left")) and -1 or 0) + (__t(kk(nil, "right")) and 1 or 0)
+                __O[1101] = ____temp_73
+                if ____t_74(____temp_73) then
+                    ____t_result_78 = __O[1101]
+                else
+                    local ____opt_result_77
+                    if pad ~= nil then
+                        ____opt_result_77 = pad.x
+                    end
+                    ____t_result_78 = ____opt_result_77
                 end
-                local ____temp_59 = if ____t_55(____temp_54) then __O[1096] else ____opt_result_58
-                __O[1097] = ____temp_59
-                local x = if ____t_60(____temp_59) then __O[1097] else t.x
-                local ____t_67 = __t
-                local ____t_62 = __t
-                local ____temp_61 = if __t(kk(nil, "up")) then -1 else 0 + if __t(kk(nil, "down")) then 1 else 0
-                __O[1098] = ____temp_61
-                local ____opt_result_65
-                if pad ~= nil then
-                    ____opt_result_65 = pad.y
+                __O[1102] = ____t_result_78
+                if ____t_79(____t_result_78) then
+                    ____t_result_80 = __O[1102]
+                else
+                    ____t_result_80 = t.x
                 end
-                local ____temp_66 = if ____t_62(____temp_61) then __O[1098] else ____opt_result_65
-                __O[1099] = ____temp_66
-                local y = if ____t_67(____temp_66) then __O[1099] else t.y
-                local ____t_75 = __t
-                local ____t_69 = __t
-                local ____kk_result_68 = kk(nil, "a")
-                __O[1100] = ____kk_result_68
-                local ____t_73 = __t
-                local ____opt_result_72
-                if pad ~= nil then
-                    ____opt_result_72 = pad.a
+                local x = ____t_result_80
+                local ____t_result_88
+                local ____t_87 = __t
+                local ____t_result_86
+                local ____t_82 = __t
+                local ____temp_81 = (__t(kk(nil, "up")) and -1 or 0) + (__t(kk(nil, "down")) and 1 or 0)
+                __O[1103] = ____temp_81
+                if ____t_82(____temp_81) then
+                    ____t_result_86 = __O[1103]
+                else
+                    local ____opt_result_85
+                    if pad ~= nil then
+                        ____opt_result_85 = pad.y
+                    end
+                    ____t_result_86 = ____opt_result_85
                 end
-                local ____temp_74 = if ____t_69(____kk_result_68) then __O[1100] else not not ____t_73(____opt_result_72)
-                __O[1101] = ____temp_74
-                local a = if ____t_75(____temp_74) then __O[1101] else t.a
-                local ____t_83 = __t
-                local ____t_77 = __t
-                local ____kk_result_76 = kk(nil, "b")
-                __O[1102] = ____kk_result_76
-                local ____t_81 = __t
-                local ____opt_result_80
-                if pad ~= nil then
-                    ____opt_result_80 = pad.b
+                __O[1104] = ____t_result_86
+                if ____t_87(____t_result_86) then
+                    ____t_result_88 = __O[1104]
+                else
+                    ____t_result_88 = t.y
                 end
-                local ____temp_82 = if ____t_77(____kk_result_76) then __O[1102] else not not ____t_81(____opt_result_80)
-                __O[1103] = ____temp_82
-                local b = if ____t_83(____temp_82) then __O[1103] else t.b
+                local y = ____t_result_88
+                local ____t_result_97
+                local ____t_96 = __t
+                local ____t_result_95
+                local ____t_90 = __t
+                local ____kk_result_89 = kk(nil, "a")
+                __O[1105] = ____kk_result_89
+                if ____t_90(____kk_result_89) then
+                    ____t_result_95 = __O[1105]
+                else
+                    local ____t_94 = __t
+                    local ____opt_result_93
+                    if pad ~= nil then
+                        ____opt_result_93 = pad.a
+                    end
+                    ____t_result_95 = not not ____t_94(____opt_result_93)
+                end
+                __O[1106] = ____t_result_95
+                if ____t_96(____t_result_95) then
+                    ____t_result_97 = __O[1106]
+                else
+                    ____t_result_97 = t.a
+                end
+                local a = ____t_result_97
+                local ____t_result_106
+                local ____t_105 = __t
+                local ____t_result_104
+                local ____t_99 = __t
+                local ____kk_result_98 = kk(nil, "b")
+                __O[1107] = ____kk_result_98
+                if ____t_99(____kk_result_98) then
+                    ____t_result_104 = __O[1107]
+                else
+                    local ____t_103 = __t
+                    local ____opt_result_102
+                    if pad ~= nil then
+                        ____opt_result_102 = pad.b
+                    end
+                    ____t_result_104 = not not ____t_103(____opt_result_102)
+                end
+                __O[1108] = ____t_result_104
+                if ____t_105(____t_result_104) then
+                    ____t_result_106 = __O[1108]
+                else
+                    ____t_result_106 = t.b
+                end
+                local b = ____t_result_106
                 if __t(__L1.tv) then
                     local r = __L1.tv:take(i)
                     if __t(r) then
-                        x = if __t(r.x) then r.x else x
-                        y = if __t(r.y) then r.y else y
-                        a = if __t(a) then a else r.a
-                        b = if __t(b) then b else r.b
+                        local ____t_result_107
+                        if __t(r.x) then
+                            ____t_result_107 = r.x
+                        else
+                            ____t_result_107 = x
+                        end
+                        x = ____t_result_107
+                        local ____t_result_108
+                        if __t(r.y) then
+                            ____t_result_108 = r.y
+                        else
+                            ____t_result_108 = y
+                        end
+                        y = ____t_result_108
+                        local ____t_result_109
+                        if __t(a) then
+                            ____t_result_109 = a
+                        else
+                            ____t_result_109 = r.a
+                        end
+                        a = ____t_result_109
+                        local ____t_result_110
+                        if __t(b) then
+                            ____t_result_110 = b
+                        else
+                            ____t_result_110 = r.b
+                        end
+                        b = ____t_result_110
                     end
                 end
-                if __t(if __t(__L1.net) then i == 1 else __L1.net) then
-                    local r = if __L1.net.role == "host" then if __t(__len(__L1.net.queue)) then __call(__L1.net.queue, "shift") else __L1.net.remote else {x = 0, y = 0, a = false, b = false}
+                local ____t_112 = __t
+                local ____t_result_111
+                if __t(__L1.net) then
+                    ____t_result_111 = i == 1
+                else
+                    ____t_result_111 = __L1.net
+                end
+                if ____t_112(____t_result_111) then
+                    local ____temp_114
+                    if __L1.net.role == "host" then
+                        local ____t_result_113
+                        if __t(__len(__L1.net.queue)) then
+                            ____t_result_113 = __call(__L1.net.queue, "shift")
+                        else
+                            ____t_result_113 = __L1.net.remote
+                        end
+                        ____temp_114 = ____t_result_113
+                    else
+                        ____temp_114 = {x = 0, y = 0, a = false, b = false}
+                    end
+                    local r = ____temp_114
                     x = r.x
                     y = r.y
                     a = r.a
                     b = r.b
                 end
-                p.ap = if __t(a) then not __t(p.pa) else a
-                p.bp = if __t(b) then not __t(p.pb) else b
-                if __t(if __t(x) then x ~= p.px else x) then
-                    __call(p.dirs, "push", if __lt(x, 0) then "l" else "r")
+                local ____t_result_115
+                if __t(a) then
+                    ____t_result_115 = not __t(p.pa)
+                else
+                    ____t_result_115 = a
                 end
-                if __t(if __t(y) then y ~= p.py else y) then
-                    __call(p.dirs, "push", if __lt(y, 0) then "u" else "d")
+                p.ap = ____t_result_115
+                local ____t_result_116
+                if __t(b) then
+                    ____t_result_116 = not __t(p.pb)
+                else
+                    ____t_result_116 = b
+                end
+                p.bp = ____t_result_116
+                local ____t_118 = __t
+                local ____t_result_117
+                if __t(x) then
+                    ____t_result_117 = x ~= p.px
+                else
+                    ____t_result_117 = x
+                end
+                if ____t_118(____t_result_117) then
+                    __call(
+                        p.dirs,
+                        "push",
+                        __lt(x, 0) and "l" or "r"
+                    )
+                end
+                local ____t_120 = __t
+                local ____t_result_119
+                if __t(y) then
+                    ____t_result_119 = y ~= p.py
+                else
+                    ____t_result_119 = y
+                end
+                if ____t_120(____t_result_119) then
+                    __call(
+                        p.dirs,
+                        "push",
+                        __lt(y, 0) and "u" or "d"
+                    )
                 end
                 if __len(p.dirs) > 3 then
                     __call(
@@ -460,20 +714,20 @@ local __O = {};
         end
         __call(__L1.latch, "clear")
         local pad0 = __get(pads, 0)
-        local ____L1_menuNav_88 = __L1.menuNav
-        local ____t_87 = __t
-        local ____opt_result_86
+        local ____L1_menuNav_125 = __L1.menuNav
+        local ____t_124 = __t
+        local ____opt_result_123
         if pad0 ~= nil then
-            ____opt_result_86 = pad0.start
+            ____opt_result_123 = pad0.start
         end
-        ____L1_menuNav_88.start = not not ____t_87(____opt_result_86) and not __t(__L1.menuNav.pstart)
-        local ____L1_menuNav_93 = __L1.menuNav
-        local ____t_92 = __t
-        local ____opt_result_91
+        ____L1_menuNav_125.start = not not ____t_124(____opt_result_123) and not __t(__L1.menuNav.pstart)
+        local ____L1_menuNav_130 = __L1.menuNav
+        local ____t_129 = __t
+        local ____opt_result_128
         if pad0 ~= nil then
-            ____opt_result_91 = pad0.start
+            ____opt_result_128 = pad0.start
         end
-        ____L1_menuNav_93.pstart = not not ____t_92(____opt_result_91)
+        ____L1_menuNav_130.pstart = not not ____t_129(____opt_result_128)
     end
     __L1.txt = function(self, c, s, x, y, size, col, align, shadow)
         if size == nil then
@@ -563,13 +817,13 @@ local __O = {};
         end
         do
             pcall(function()
-                local ____opt_96 = window.Art
-                if ____opt_96 ~= nil then
-                    ____opt_96 = ____opt_96.drawCharacter
+                local ____opt_133 = window.Art
+                if ____opt_133 ~= nil then
+                    ____opt_133 = ____opt_133.drawCharacter
                 end
-                if ____opt_96 ~= nil then
-                    ____opt_96(
-                        ____opt_96,
+                if ____opt_133 ~= nil then
+                    ____opt_133(
+                        ____opt_133,
                         c,
                         ____type,
                         x,
@@ -586,27 +840,56 @@ local __O = {};
             vals,
             "forEach",
             function(____, v, i)
-                local x = if __le(n, 2) then if __t(i) then __L1.W - 70 else 20 else 20 + i * ((__L1.W - 90) / n)
-                local ____L1_txt_102 = __L1.txt
-                local ____array_101 = __TS__SparseArrayNew(
-                    c,
-                    __add(if __t(label) then label(nil, i) else __add(
+                local ____le_result_136
+                if __le(n, 2) then
+                    local ____t_result_135
+                    if __t(i) then
+                        ____t_result_135 = __L1.W - 70
+                    else
+                        ____t_result_135 = 20
+                    end
+                    ____le_result_136 = ____t_result_135
+                else
+                    ____le_result_136 = 20 + i * ((__L1.W - 90) / n)
+                end
+                local x = ____le_result_136
+                local ____L1_txt_144 = __L1.txt
+                local ____array_143 = __TS__SparseArrayNew(c)
+                local ____add_138 = __add
+                local ____t_result_137
+                if __t(label) then
+                    ____t_result_137 = label(nil, i)
+                else
+                    ____t_result_137 = __add(
                         __get(__L1.PLAYER_NAME, i),
                         " "
-                    ), v),
+                    )
+                end
+                __TS__SparseArrayPush(
+                    ____array_143,
+                    ____add_138(____t_result_137, v),
                     x,
                     18,
-                    if __gt(n, 2) then 11 else 14,
+                    __gt(n, 2) and 11 or 14,
                     __get(__L1.PLAYER_COL, i)
                 )
-                local ____t_100 = __t
-                local ____t_99 = __t
-                local ____le_result_98 = __le(n, 2)
-                __O[1110] = ____le_result_98
-                __TS__SparseArrayPush(____array_101, if ____t_100(if ____t_99(____le_result_98) then i else __O[1110]) then "right" else "left")
-                ____L1_txt_102(
+                local ____t_142 = __t
+                local ____t_result_141
+                local ____t_140 = __t
+                local ____le_result_139 = __le(n, 2)
+                __O[1115] = ____le_result_139
+                if ____t_140(____le_result_139) then
+                    ____t_result_141 = i
+                else
+                    ____t_result_141 = __O[1115]
+                end
+                __TS__SparseArrayPush(
+                    ____array_143,
+                    ____t_142(____t_result_141) and "right" or "left"
+                )
+                ____L1_txt_144(
                     __L1,
-                    __TS__SparseArraySpread(____array_101)
+                    __TS__SparseArraySpread(____array_143)
                 )
             end
         )
@@ -1063,13 +1346,27 @@ local __O = {};
         local perto = __call(
             st.pl,
             "some",
-            function(____, p) return if __t(p.mao) then __gt(p.x, 300) else p.mao end
+            function(____, p)
+                local ____t_result_145
+                if __t(p.mao) then
+                    ____t_result_145 = __gt(p.x, 300)
+                else
+                    ____t_result_145 = p.mao
+                end
+                return ____t_result_145
+            end
         )
         local mastiga = __gt(st.come, 0)
         local bravo = __gt(st.bravo, 0)
-        local abre = if __t(mastiga) then if math.sin(st.t * 30) > 0 then 0.25 else 0.7 else if __t(perto) then 1 else 0.55 + math.sin(st.t * 3) * 0.1
-        local pele = if __t(bravo) then "#e86a5a" else "#e7a079"
-        local sombra = if __t(bravo) then "#b8443a" else "#c07a58"
+        local ____t_result_146
+        if __t(mastiga) then
+            ____t_result_146 = math.sin(st.t * 30) > 0 and 0.25 or 0.7
+        else
+            ____t_result_146 = __t(perto) and 1 or 0.55 + math.sin(st.t * 3) * 0.1
+        end
+        local abre = ____t_result_146
+        local pele = __t(bravo) and "#e86a5a" or "#e7a079"
+        local sombra = __t(bravo) and "#b8443a" or "#c07a58"
         __L1:R(
             g,
             cx - 30,
@@ -1106,13 +1403,24 @@ local __O = {};
                     1,
                     "#3a2418"
                 )
-                __L1:R(
+                local ____L1_R_149 = __L1.R
+                local ____array_148 = __TS__SparseArrayNew(
                     g,
                     cx - w,
                     cy + y,
                     w * 2,
-                    1,
-                    if y > 20 then sombra else pele
+                    1
+                )
+                local ____temp_147
+                if y > 20 then
+                    ____temp_147 = sombra
+                else
+                    ____temp_147 = pele
+                end
+                __TS__SparseArrayPush(____array_148, ____temp_147)
+                ____L1_R_149(
+                    __L1,
+                    __TS__SparseArraySpread(____array_148)
                 )
                 y = y + 1
             end
@@ -1183,7 +1491,7 @@ local __O = {};
                 1,
                 "#3a2418"
             )
-            local ol = if __t(perto) then 2 else 0
+            local ol = __t(perto) and 2 or 0
             __L1:R(
                 g,
                 ex - 3 + ol,
@@ -1200,10 +1508,21 @@ local __O = {};
                 2,
                 "#ffffff"
             )
-            __L1:R(
-                g,
-                ex - 10,
-                cy - 30 - if __t(bravo) then if s > 0 then -3 else 3 else if __t(perto) then 4 else 0,
+            local ____L1_R_154 = __L1.R
+            local ____g_152 = g
+            local ____temp_153 = ex - 10
+            local ____temp_151 = cy - 30
+            local ____t_result_150
+            if __t(bravo) then
+                ____t_result_150 = s > 0 and -3 or 3
+            else
+                ____t_result_150 = __t(perto) and 4 or 0
+            end
+            ____L1_R_154(
+                __L1,
+                ____g_152,
+                ____temp_153,
+                ____temp_151 - ____t_result_150,
                 20,
                 3,
                 "#3a2418"
@@ -1214,7 +1533,7 @@ local __O = {};
                 cy + 8,
                 9,
                 5,
-                if __t(bravo) then "#c83a3a" else "#f08a7a"
+                __t(bravo) and "#c83a3a" or "#f08a7a"
             )
         end
         __L1:R(
@@ -1332,13 +1651,30 @@ local __O = {};
     __L1.startGame = function(self, gm, mode)
         __L1.game = gm
         __L1.solo = mode == "solo"
+        local ____mode_160 = mode
+        local ____temp_159
+        if mode == "duo" then
+            local ____t_result_158
+            if __t(__L1.tv) then
+                local ____L1_clamp_157 = __L1.clamp
+                local ____temp_156 = __L1.tv:count()
+                local ____t_result_155
+                if __t(gm.max) then
+                    ____t_result_155 = gm.max
+                else
+                    ____t_result_155 = 2
+                end
+                ____t_result_158 = ____L1_clamp_157(__L1, ____temp_156, 2, ____t_result_155)
+            else
+                ____t_result_158 = 2
+            end
+            ____temp_159 = ____t_result_158
+        else
+            ____temp_159 = 1
+        end
         __L1.st = {
-            mode = mode,
-            np = if mode == "duo" then if __t(__L1.tv) then __L1:clamp(
-                __L1.tv:count(),
-                2,
-                if __t(gm.max) then gm.max else 2
-            ) else 2 else 1,
+            mode = ____mode_160,
+            np = ____temp_159,
             t = 0,
             score = __arrL({0, 0, 0, 0}, 4),
             pop = __arrL({}, 0),
@@ -1346,7 +1682,15 @@ local __O = {};
             banner = nil,
             ended = nil
         }
-        __assign(__L1.st, if __t(gm.extra) then gm.extra else {})
+        local ____assign_163 = __assign
+        local ____L1_st_162 = __L1.st
+        local ____t_result_161
+        if __t(gm.extra) then
+            ____t_result_161 = gm.extra
+        else
+            ____t_result_161 = {}
+        end
+        ____assign_163(____L1_st_162, ____t_result_161)
         __L1.st["end"] = function(____, r)
             if not __t(__L1.st.ended) then
                 __L1.st.ended = r
@@ -1361,9 +1705,9 @@ local __O = {};
             __L1.P,
             "forEach",
             function(____, p)
-                local ____arrL_result_103 = __arrL({}, 0)
-                p.dirs = ____arrL_result_103
-                return ____arrL_result_103
+                local ____arrL_result_164 = __arrL({}, 0)
+                p.dirs = ____arrL_result_164
+                return ____arrL_result_164
             end
         )
         __L1:sfx("menu")
@@ -1379,7 +1723,13 @@ local __O = {};
         local newMedal = false
         local qualifies = false
         if __t(__L1.st.mode == "solo" or __L1.game.duo == "coop") then
-            local score = math.floor(if __t(res.score) then res.score else 0 + 0.5)
+            local ____t_result_165
+            if __t(res.score) then
+                ____t_result_165 = res.score
+            else
+                ____t_result_165 = 0
+            end
+            local score = math.floor(____t_result_165 + 0.5)
             fichas = 1 + math.floor(score / 150)
             if __L1.st.mode == "solo" then
                 medal = __len(__call(
@@ -1394,19 +1744,25 @@ local __O = {};
                 end
             end
             local list = __get(r, __L1.st.mode)
-            local ____t_105 = __t
-            local ____temp_104 = score > 0
-            __O[1179] = ____temp_104
-            qualifies = if ____t_105(____temp_104) then __lt(
-                __len(list),
-                5
-            ) or __gt(
-                score,
-                __get(
-                    list,
-                    __len(list) - 1
-                ).s
-            ) else __O[1179]
+            local ____t_result_168
+            local ____t_167 = __t
+            local ____temp_166 = score > 0
+            __O[1184] = ____temp_166
+            if ____t_167(____temp_166) then
+                ____t_result_168 = __lt(
+                    __len(list),
+                    5
+                ) or __gt(
+                    score,
+                    __get(
+                        list,
+                        __len(list) - 1
+                    ).s
+                )
+            else
+                ____t_result_168 = __O[1184]
+            end
+            qualifies = ____t_result_168
             res.score = score
         else
             fichas = 2
@@ -1414,40 +1770,67 @@ local __O = {};
                 __inc(r.wins, res.winner, 1, true)
             end
         end
-        local ____L1_data_106, ____fichas_107 = __L1.data, "fichas"
-        ____L1_data_106[____fichas_107] = ____L1_data_106[____fichas_107] + fichas
+        local ____L1_data_169, ____fichas_170 = __L1.data, "fichas"
+        ____L1_data_169[____fichas_170] = ____L1_data_169[____fichas_170] + fichas
         __L1:persist()
         __L1.screen = "over"
         __L1.overSel = 0
-        local ____call_112 = __call
-        local ____call_111 = __call
-        local ____call_110 = __call
-        local ____t_109 = __t
-        local ____temp_108 = window.localStorage:getItem("daroca-fliperama-nome")
-        __O[1180] = ____temp_108
-        __L1.initials = if __t(qualifies) then {
-            s = ____call_112(
-                ____call_111(
-                    ____call_110(if ____t_109(____temp_108) then __O[1180] else "DRC", "slice", 0, 3),
-                    "padEnd",
-                    3,
-                    "A"
+        local ____t_result_177
+        if __t(qualifies) then
+            local ____call_176 = __call
+            local ____call_175 = __call
+            local ____call_174 = __call
+            local ____t_result_173
+            local ____t_172 = __t
+            local ____temp_171 = window.localStorage:getItem("daroca-fliperama-nome")
+            __O[1185] = ____temp_171
+            if ____t_172(____temp_171) then
+                ____t_result_173 = __O[1185]
+            else
+                ____t_result_173 = "DRC"
+            end
+            ____t_result_177 = {
+                s = ____call_176(
+                    ____call_175(
+                        ____call_174(____t_result_173, "slice", 0, 3),
+                        "padEnd",
+                        3,
+                        "A"
+                    ),
+                    "split",
+                    ""
                 ),
-                "split",
-                ""
-            ),
-            i = 0
-        } else nil
+                i = 0
+            }
+        else
+            ____t_result_177 = nil
+        end
+        __L1.initials = ____t_result_177
         __L1.st.summary = {fichas = fichas, medal = medal, newMedal = newMedal}
-        local ____L1_sfx_118 = __L1.sfx
-        local ____t_117 = __t
-        local ____t_114 = __t
-        local ____temp_113 = res.win == false
-        __O[1182] = ____temp_113
-        local ____t_116 = __t
-        local ____temp_115 = __L1.st.mode == "solo" and medal == 0
-        __O[1181] = ____temp_115
-        ____L1_sfx_118(__L1, if ____t_117(if ____t_114(____temp_113) then __O[1182] else if ____t_116(____temp_115) then not __t(res.win) else __O[1181]) then "lose" else "win")
+        local ____L1_sfx_185 = __L1.sfx
+        local ____t_184 = __t
+        local ____t_result_183
+        local ____t_179 = __t
+        local ____temp_178 = res.win == false
+        __O[1187] = ____temp_178
+        if ____t_179(____temp_178) then
+            ____t_result_183 = __O[1187]
+        else
+            local ____t_result_182
+            local ____t_181 = __t
+            local ____temp_180 = __L1.st.mode == "solo" and medal == 0
+            __O[1186] = ____temp_180
+            if ____t_181(____temp_180) then
+                ____t_result_182 = not __t(res.win)
+            else
+                ____t_result_182 = __O[1186]
+            end
+            ____t_result_183 = ____t_result_182
+        end
+        ____L1_sfx_185(
+            __L1,
+            ____t_184(____t_result_183) and "lose" or "win"
+        )
     end
     __L1.saveInitials = function(self)
         local name = __call(__L1.initials.s, "join", "")
@@ -1502,8 +1885,8 @@ local __O = {};
                 __L1:sfx("lose")
                 return
             end
-            local ____L1_data_119, ____fichas_120 = __L1.data, "fichas"
-            ____L1_data_119[____fichas_120] = ____L1_data_119[____fichas_120] - price
+            local ____L1_data_186, ____fichas_187 = __L1.data, "fichas"
+            ____L1_data_186[____fichas_187] = ____L1_data_186[____fichas_187] - price
             __call(__L1.data.unlocked, "push", ____type)
             __L1:persist()
             __L1.shopMsg = {
@@ -1518,7 +1901,11 @@ local __O = {};
         end
         __set(__L1.data.avatar, slot, ____type)
         if __get(__L1.data.avatar, 1 - slot) == ____type then
-            __set(__L1.data.avatar, 1 - slot, if __get(__L1.data.avatar, slot) == "daroca" then "reeis" else "daroca")
+            __set(
+                __L1.data.avatar,
+                1 - slot,
+                __get(__L1.data.avatar, slot) == "daroca" and "reeis" or "daroca"
+            )
         end
         __L1:persist()
         __L1.shopMsg = {
@@ -1537,13 +1924,13 @@ local __O = {};
         __L1.screen = "online"
         __L1.onlineSel = 0
         __L1:sfx("menu")
-        local ____opt_123 = window.DarocaOnline
-        if ____opt_123 ~= nil then
-            ____opt_123 = ____opt_123.ready
+        local ____opt_190 = window.DarocaOnline
+        if ____opt_190 ~= nil then
+            ____opt_190 = ____opt_190.ready
         end
-        if ____opt_123 ~= nil then
-            ____opt_123["then"](
-                ____opt_123,
+        if ____opt_190 ~= nil then
+            ____opt_190["then"](
+                ____opt_190,
                 function()
                 end
             )
@@ -1557,72 +1944,109 @@ local __O = {};
             __L1:leaveNet("")
         end
         __L1.onlineSel = 0
-        local ____self_127 = window.DarocaOnline
-        local ____self_127_connect_128 = ____self_127.connect
-        local ____t_126 = __t
-        local ____temp_125 = window.localStorage:getItem("daroca-fliperama-nome")
-        __O[1185] = ____temp_125
-        local conn = ____self_127_connect_128(
-            ____self_127,
+        local ____self_195 = window.DarocaOnline
+        local ____self_195_connect_196 = ____self_195.connect
+        local ____t_result_194
+        local ____t_193 = __t
+        local ____temp_192 = window.localStorage:getItem("daroca-fliperama-nome")
+        __O[1190] = ____temp_192
+        if ____t_193(____temp_192) then
+            ____t_result_194 = __O[1190]
+        else
+            ____t_result_194 = "DRC"
+        end
+        local conn = ____self_195_connect_196(
+            ____self_195,
             {
-                name = if ____t_126(____temp_125) then __O[1185] else "DRC",
+                name = ____t_result_194,
                 avatar = __get(__L1.data.avatar, 0)
             }
         )
+        local ____conn_198 = conn
+        local ____kind_199 = kind
+        local ____arrL_result_200 = __arrL({}, 0)
+        local ____temp_201 = {x = 0, y = 0, a = false, b = false}
+        local ____arrL_result_202 = __arrL({}, 0)
+        local ____arrL_result_203 = __arrL({}, 0)
+        local ____temp_197
+        if kind == "join" then
+            ____temp_197 = __add(
+                __add("Entrando na sala ", code),
+                "…"
+            )
+        else
+            ____temp_197 = "Conectando ao servidor…"
+        end
         __L1.net = {
-            conn = conn,
-            kind = kind,
+            conn = ____conn_198,
+            kind = ____kind_199,
             code = nil,
             role = nil,
             live = false,
             peerOnline = false,
-            players = __arrL({}, 0),
+            players = ____arrL_result_200,
             av = nil,
-            remote = {x = 0, y = 0, a = false, b = false},
-            queue = __arrL({}, 0),
-            sfx = __arrL({}, 0),
+            remote = ____temp_201,
+            queue = ____arrL_result_202,
+            sfx = ____arrL_result_203,
             seq = 0,
             sent = 0,
             last = "",
             snap = nil,
-            msg = if kind == "join" then __add(
-                __add("Entrando na sala ", code),
-                "…"
-            ) else "Conectando ao servidor…",
+            msg = ____temp_197,
             joined = false,
             gotOver = false
         }
         conn:on(
             "welcome",
             function()
-                local ____t_133 = __t
-                local ____t_132 = __t
-                local ____opt_129 = __L1.net
-                if ____opt_129 ~= nil then
-                    ____opt_129 = ____opt_129.conn
+                local ____t_209 = __t
+                local ____t_result_208
+                local ____t_207 = __t
+                local ____opt_204 = __L1.net
+                if ____opt_204 ~= nil then
+                    ____opt_204 = ____opt_204.conn
                 end
-                local ____temp_131 = ____opt_129 ~= conn
-                __O[1186] = ____temp_131
-                if ____t_133(if ____t_132(____temp_131) then __O[1186] else __L1.net.joined) then
+                local ____temp_206 = ____opt_204 ~= conn
+                __O[1191] = ____temp_206
+                if ____t_207(____temp_206) then
+                    ____t_result_208 = __O[1191]
+                else
+                    ____t_result_208 = __L1.net.joined
+                end
+                if ____t_209(____t_result_208) then
                     return
                 end
                 __L1.net.joined = true
-                conn:send(if kind == "join" then {t = "join", code = code} else if kind == "quick" then {t = "quick", kind = "fliperama"} else {t = "create", kind = "fliperama", cap = 2})
+                local ____conn_send_212 = conn.send
+                local ____temp_211
+                if kind == "join" then
+                    ____temp_211 = {t = "join", code = code}
+                else
+                    local ____temp_210
+                    if kind == "quick" then
+                        ____temp_210 = {t = "quick", kind = "fliperama"}
+                    else
+                        ____temp_210 = {t = "create", kind = "fliperama", cap = 2}
+                    end
+                    ____temp_211 = ____temp_210
+                end
+                ____conn_send_212(conn, ____temp_211)
             end
         )
         conn:on(
             "room",
             function(____, m)
-                local ____opt_134 = __L1.net
-                if ____opt_134 ~= nil then
-                    ____opt_134 = ____opt_134.conn
+                local ____opt_213 = __L1.net
+                if ____opt_213 ~= nil then
+                    ____opt_213 = ____opt_213.conn
                 end
-                if ____opt_134 ~= conn then
+                if ____opt_213 ~= conn then
                     return
                 end
                 __L1.net.code = m.code
                 __L1.net.players = m.players
-                __L1.net.role = if m.hostId == conn.id then "host" else "guest"
+                __L1.net.role = m.hostId == conn.id and "host" or "guest"
                 __L1.net.live = true
                 local bySlot = __call(
                     __arrL({0, 1}, 2),
@@ -1633,50 +2057,84 @@ local __O = {};
                         function(____, p) return p.slot == sl end
                     ) end
                 )
-                local ____L1_net_144 = __L1.net
-                local ____arrL_143 = __arrL
-                local ____t_138 = __t
-                local ____opt_136 = __get(bySlot, 0)
-                if ____opt_136 ~= nil then
-                    ____opt_136 = ____opt_136.avatar
+                local ____L1_net_224 = __L1.net
+                local ____arrL_223 = __arrL
+                local ____t_result_218
+                local ____t_217 = __t
+                local ____opt_215 = __get(bySlot, 0)
+                if ____opt_215 ~= nil then
+                    ____opt_215 = ____opt_215.avatar
                 end
-                __O[1187] = ____opt_136
-                local ____temp_142 = if ____t_138(____opt_136) then __O[1187] else "daroca"
-                local ____t_141 = __t
-                local ____opt_139 = __get(bySlot, 1)
-                if ____opt_139 ~= nil then
-                    ____opt_139 = ____opt_139.avatar
+                __O[1192] = ____opt_215
+                if ____t_217(____opt_215) then
+                    ____t_result_218 = __O[1192]
+                else
+                    ____t_result_218 = "daroca"
                 end
-                __O[1188] = ____opt_139
-                ____L1_net_144.av = ____arrL_143({____temp_142, if ____t_141(____opt_139) then __O[1188] else "reeis"}, 2)
+                local ____t_result_222
+                local ____t_221 = __t
+                local ____opt_219 = __get(bySlot, 1)
+                if ____opt_219 ~= nil then
+                    ____opt_219 = ____opt_219.avatar
+                end
+                __O[1193] = ____opt_219
+                if ____t_221(____opt_219) then
+                    ____t_result_222 = __O[1193]
+                else
+                    ____t_result_222 = "reeis"
+                end
+                ____L1_net_224.av = ____arrL_223({____t_result_218, ____t_result_222}, 2)
                 if __get(__L1.net.av, 0) == __get(__L1.net.av, 1) then
-                    __set(__L1.net.av, 1, if __get(__L1.net.av, 0) == "reeis" then "daroca" else "reeis")
+                    __set(
+                        __L1.net.av,
+                        1,
+                        __get(__L1.net.av, 0) == "reeis" and "daroca" or "reeis"
+                    )
                 end
                 local was = __L1.net.peerOnline
-                local ____L1_net_147 = __L1.net
-                local ____t_146 = __t
-                local ____ge_result_145 = __ge(
+                local ____L1_net_228 = __L1.net
+                local ____t_result_227
+                local ____t_226 = __t
+                local ____ge_result_225 = __ge(
                     __len(m.players),
                     2
                 )
-                __O[1189] = ____ge_result_145
-                ____L1_net_147.peerOnline = if ____t_146(____ge_result_145) then __call(
-                    m.players,
-                    "every",
-                    function(____, p) return p.online end
-                ) else __O[1189]
-                __L1.net.msg = if __t(__L1.net.peerOnline) then if __L1.net.role == "host" then "Amigo conectado! Escolha o jogo." else "Conectado! O anfitrião escolhe o jogo." else if __ge(
-                    __len(m.players),
-                    2
-                ) then "O amigo caiu. Esperando ele voltar…" else __add(
-                    __add("Sala ", m.code),
-                    " aberta. Passe o código para o amigo."
-                )
-                local ____t_150 = __t
-                local ____t_149 = __t
-                local ____temp_148 = not __t(was)
-                __O[1190] = ____temp_148
-                if ____t_150(if ____t_149(____temp_148) then __L1.net.peerOnline else __O[1190]) then
+                __O[1194] = ____ge_result_225
+                if ____t_226(____ge_result_225) then
+                    ____t_result_227 = __call(
+                        m.players,
+                        "every",
+                        function(____, p) return p.online end
+                    )
+                else
+                    ____t_result_227 = __O[1194]
+                end
+                ____L1_net_228.peerOnline = ____t_result_227
+                local ____L1_net_230 = __L1.net
+                local ____t_result_229
+                if __t(__L1.net.peerOnline) then
+                    ____t_result_229 = __L1.net.role == "host" and "Amigo conectado! Escolha o jogo." or "Conectado! O anfitrião escolhe o jogo."
+                else
+                    ____t_result_229 = __ge(
+                        __len(m.players),
+                        2
+                    ) and "O amigo caiu. Esperando ele voltar…" or __add(
+                        __add("Sala ", m.code),
+                        " aberta. Passe o código para o amigo."
+                    )
+                end
+                ____L1_net_230.msg = ____t_result_229
+                local ____t_234 = __t
+                local ____t_result_233
+                local ____t_232 = __t
+                local ____temp_231 = not __t(was)
+                __O[1195] = ____temp_231
+                if ____t_232(____temp_231) then
+                    ____t_result_233 = __L1.net.peerOnline
+                else
+                    ____t_result_233 = __O[1195]
+                end
+                if ____t_234(____t_result_233) then
                     __L1:sfx("win")
                     if __t(__L1.net.role == "host" and __L1.screen == "online") then
                         __L1.screen = "menu"
@@ -1687,11 +2145,11 @@ local __O = {};
         conn:on(
             "input",
             function(____, m)
-                local ____opt_151 = __L1.net
-                if ____opt_151 ~= nil then
-                    ____opt_151 = ____opt_151.conn
+                local ____opt_235 = __L1.net
+                if ____opt_235 ~= nil then
+                    ____opt_235 = ____opt_235.conn
                 end
-                if ____opt_151 ~= conn then
+                if ____opt_235 ~= conn then
                     return
                 end
                 __L1.net.lastIn = window.performance:now()
@@ -1707,12 +2165,12 @@ local __O = {};
         conn:on(
             "state",
             function(____, m)
-                local ____t_155 = __t
-                local ____opt_153 = __L1.net
-                if ____opt_153 ~= nil then
-                    ____opt_153 = ____opt_153.conn
+                local ____t_239 = __t
+                local ____opt_237 = __L1.net
+                if ____opt_237 ~= nil then
+                    ____opt_237 = ____opt_237.conn
                 end
-                if ____t_155(____opt_153 ~= conn or __L1.net.role ~= "guest") then
+                if ____t_239(____opt_237 ~= conn or __L1.net.role ~= "guest") then
                     return
                 end
                 __L1.net.lastIn = window.performance:now()
@@ -1722,15 +2180,22 @@ local __O = {};
         conn:on(
             "error",
             function(____, m)
-                local ____opt_156 = __L1.net
-                if ____opt_156 ~= nil then
-                    ____opt_156 = ____opt_156.conn
+                local ____opt_240 = __L1.net
+                if ____opt_240 ~= nil then
+                    ____opt_240 = ____opt_240.conn
                 end
-                if ____opt_156 ~= conn then
+                if ____opt_240 ~= conn then
                     return
                 end
                 __L1.net.msg = m.m
-                if __t(if __t(m.fatal) then m.fatal else m["end"]) then
+                local ____t_243 = __t
+                local ____t_result_242
+                if __t(m.fatal) then
+                    ____t_result_242 = m.fatal
+                else
+                    ____t_result_242 = m["end"]
+                end
+                if ____t_243(____t_result_242) then
                     local msg = m.m
                     __L1:leaveNet(msg)
                 end
@@ -1739,15 +2204,21 @@ local __O = {};
         conn:on(
             "status",
             function(____, m)
-                local ____t_162 = __t
-                local ____t_161 = __t
-                local ____opt_158 = __L1.net
-                if ____opt_158 ~= nil then
-                    ____opt_158 = ____opt_158.conn
+                local ____t_249 = __t
+                local ____t_result_248
+                local ____t_247 = __t
+                local ____opt_244 = __L1.net
+                if ____opt_244 ~= nil then
+                    ____opt_244 = ____opt_244.conn
                 end
-                local ____temp_160 = ____opt_158 == conn and not __t(m.online)
-                __O[1191] = ____temp_160
-                if ____t_162(if ____t_161(____temp_160) then __L1.net.live else __O[1191]) then
+                local ____temp_246 = ____opt_244 == conn and not __t(m.online)
+                __O[1196] = ____temp_246
+                if ____t_247(____temp_246) then
+                    ____t_result_248 = __L1.net.live
+                else
+                    ____t_result_248 = __O[1196]
+                end
+                if ____t_249(____t_result_248) then
                     __L1.net.msg = "Reconectando…"
                 end
             end
@@ -1830,12 +2301,25 @@ local __O = {};
     __L1.onlineAct = function(self, i)
         __L1:sfx("menu")
         __L1.onlineMsg = ""
-        if __t(if __t(__L1.net) then __L1.net.live else __L1.net) then
-            local ____t_165 = __t
-            local ____t_164 = __t
-            local ____temp_163 = i == 0 and __L1.net.role == "host"
-            __O[1192] = ____temp_163
-            if ____t_165(if ____t_164(____temp_163) then __L1.net.peerOnline else __O[1192]) then
+        local ____t_251 = __t
+        local ____t_result_250
+        if __t(__L1.net) then
+            ____t_result_250 = __L1.net.live
+        else
+            ____t_result_250 = __L1.net
+        end
+        if ____t_251(____t_result_250) then
+            local ____t_255 = __t
+            local ____t_result_254
+            local ____t_253 = __t
+            local ____temp_252 = i == 0 and __L1.net.role == "host"
+            __O[1197] = ____temp_252
+            if ____t_253(____temp_252) then
+                ____t_result_254 = __L1.net.peerOnline
+            else
+                ____t_result_254 = __O[1197]
+            end
+            if ____t_255(____t_result_254) then
                 __L1.screen = "menu"
             else
                 __L1:leaveNet("")
@@ -1849,21 +2333,27 @@ local __O = {};
         elseif i == 2 then
             __L1:startNet("quick")
         elseif i == 3 then
-            local ____t_171 = __t
-            local ____opt_168 = window.DarocaOnline
-            if ____opt_168 ~= nil then
-                ____opt_168 = ____opt_168.configured
+            local ____t_result_262
+            local ____t_261 = __t
+            local ____opt_258 = window.DarocaOnline
+            if ____opt_258 ~= nil then
+                ____opt_258 = ____opt_258.configured
             end
-            local ____opt_result_170
-            if ____opt_168 ~= nil then
-                ____opt_result_170 = ____opt_168(____opt_168)
+            local ____opt_result_260
+            if ____opt_258 ~= nil then
+                ____opt_result_260 = ____opt_258(____opt_258)
             end
-            __O[1193] = ____opt_result_170
-            local cur = if ____t_171(____opt_result_170) then __O[1193] else ""
+            __O[1198] = ____opt_result_260
+            if ____t_261(____opt_result_260) then
+                ____t_result_262 = __O[1198]
+            else
+                ____t_result_262 = ""
+            end
+            local cur = ____t_result_262
             local v = window:prompt("Endereço do servidor online (ex.: https://meu-servidor.fly.dev). Deixe vazio para usar o padrão.", cur)
             if v ~= nil then
                 __callq(window.DarocaOnline, "set", v)
-                __L1.onlineMsg = if __t(v) then "Servidor salvo neste aparelho." else "Usando o servidor padrão."
+                __L1.onlineMsg = __t(v) and "Servidor salvo neste aparelho." or "Usando o servidor padrão."
             end
         else
             if __t(__L1.net) then
@@ -1873,10 +2363,24 @@ local __O = {};
         end
     end
     __L1.updateOnline = function(self, dirs, ap)
-        if __t(if __t(__L1.codeBox) then not __t(__L1.codeBox.hidden) else __L1.codeBox) then
+        local ____t_264 = __t
+        local ____t_result_263
+        if __t(__L1.codeBox) then
+            ____t_result_263 = not __t(__L1.codeBox.hidden)
+        else
+            ____t_result_263 = __L1.codeBox
+        end
+        if ____t_264(____t_result_263) then
             return
         end
-        local n = if __t(if __t(__L1.net) then __L1.net.live else __L1.net) then 2 else __len(__L1.ONLINE_OPTS)
+        local ____t_266 = __t
+        local ____t_result_265
+        if __t(__L1.net) then
+            ____t_result_265 = __L1.net.live
+        else
+            ____t_result_265 = __L1.net
+        end
+        local n = ____t_266(____t_result_265) and 2 or __len(__L1.ONLINE_OPTS)
         for ____, d in __iterar((dirs)) do
             if __t(d == "u" or d == "l") then
                 __L1.onlineSel = __mod(__L1.onlineSel + n - 1, n)
@@ -1948,26 +2452,38 @@ local __O = {};
             "center",
             nil
         )
-        local ____t_177 = __t
-        local ____opt_174 = window.DarocaOnline
-        if ____opt_174 ~= nil then
-            ____opt_174 = ____opt_174.sameOrigin
+        local ____t_result_280
+        local ____t_272 = __t
+        local ____opt_269 = window.DarocaOnline
+        if ____opt_269 ~= nil then
+            ____opt_269 = ____opt_269.sameOrigin
         end
-        local ____opt_result_176
-        if ____opt_174 ~= nil then
-            ____opt_result_176 = ____opt_174(____opt_174)
+        local ____opt_result_271
+        if ____opt_269 ~= nil then
+            ____opt_result_271 = ____opt_269(____opt_269)
         end
-        local ____t_183 = __t
-        local ____opt_180 = window.DarocaOnline
-        if ____opt_180 ~= nil then
-            ____opt_180 = ____opt_180.configured
+        if ____t_272(____opt_result_271) then
+            ____t_result_280 = "este site"
+        else
+            local ____t_result_279
+            local ____t_278 = __t
+            local ____opt_275 = window.DarocaOnline
+            if ____opt_275 ~= nil then
+                ____opt_275 = ____opt_275.configured
+            end
+            local ____opt_result_277
+            if ____opt_275 ~= nil then
+                ____opt_result_277 = ____opt_275(____opt_275)
+            end
+            __O[1199] = ____opt_result_277
+            if ____t_278(____opt_result_277) then
+                ____t_result_279 = __O[1199]
+            else
+                ____t_result_279 = "nenhum"
+            end
+            ____t_result_280 = ____t_result_279
         end
-        local ____opt_result_182
-        if ____opt_180 ~= nil then
-            ____opt_result_182 = ____opt_180(____opt_180)
-        end
-        __O[1194] = ____opt_result_182
-        local srv = if ____t_177(____opt_result_176) then "este site" else if ____t_183(____opt_result_182) then __O[1194] else "nenhum"
+        local srv = ____t_result_280
         __L1:txt(
             c,
             __add(
@@ -1981,11 +2497,18 @@ local __O = {};
             __L1.W / 2,
             102,
             9,
-            if srv == "nenhum" then "#ff9a8a" else "#8ad070",
+            srv == "nenhum" and "#ff9a8a" or "#8ad070",
             "center",
             nil
         )
-        if __t(if __t(__L1.net) then __L1.net.live else __L1.net) then
+        local ____t_282 = __t
+        local ____t_result_281
+        if __t(__L1.net) then
+            ____t_result_281 = __L1.net.live
+        else
+            ____t_result_281 = __L1.net
+        end
+        if ____t_282(____t_result_281) then
             __L1:frame(
                 c,
                 300,
@@ -2004,9 +2527,18 @@ local __O = {};
                 10,
                 "#e8d8b0"
             )
-            __L1:txt(
-                c,
-                if __t(__L1.net.code) then __L1.net.code else "······",
+            local ____L1_txt_285 = __L1.txt
+            local ____c_284 = c
+            local ____t_result_283
+            if __t(__L1.net.code) then
+                ____t_result_283 = __L1.net.code
+            else
+                ____t_result_283 = "······"
+            end
+            ____L1_txt_285(
+                __L1,
+                ____c_284,
+                ____t_result_283,
                 __L1.W / 2,
                 200,
                 40,
@@ -2027,30 +2559,54 @@ local __O = {};
                 ps,
                 "forEach",
                 function(____, pl, i)
-                    local x = if __t(i) then 640 else 320
-                    local ____L1_hero_193 = __L1.hero
-                    local ____c_191 = c
-                    local ____t_185 = __t
-                    local ____getq_result_184 = __getq(__L1.net.av, i)
-                    __O[1195] = ____getq_result_184
-                    local ____temp_192 = if ____t_185(____getq_result_184) then __O[1195] else if __t(i) then "reeis" else "daroca"
-                    local ____L1_t_190 = __L1.t
-                    local ____t_189 = __t
-                    local ____opt_result_188
-                    if pl ~= nil then
-                        ____opt_result_188 = pl.online
+                    local x = __t(i) and 640 or 320
+                    local ____L1_hero_297 = __L1.hero
+                    local ____c_296 = c
+                    local ____t_result_288
+                    local ____t_287 = __t
+                    local ____getq_result_286 = __getq(__L1.net.av, i)
+                    __O[1200] = ____getq_result_286
+                    if ____t_287(____getq_result_286) then
+                        ____t_result_288 = __O[1200]
+                    else
+                        ____t_result_288 = __t(i) and "reeis" or "daroca"
                     end
-                    ____L1_hero_193(
+                    local ____L1_t_294 = __L1.t
+                    local ____t_292 = __t
+                    local ____opt_result_291
+                    if pl ~= nil then
+                        ____opt_result_291 = pl.online
+                    end
+                    local ____temp_295 = ____t_292(____opt_result_291) and "friend" or nil
+                    local ____t_result_293
+                    if __t(pl) then
+                        ____t_result_293 = __t(pl.online) and 1 or 0.4
+                    else
+                        ____t_result_293 = 0.15
+                    end
+                    ____L1_hero_297(
                         __L1,
-                        ____c_191,
-                        ____temp_192,
+                        ____c_296,
+                        ____t_result_288,
                         x,
                         370,
-                        {scale = 1.3, frame = ____L1_t_190, emotion = if ____t_189(____opt_result_188) then "friend" else nil, opacity = if __t(pl) then if __t(pl.online) then 1 else 0.4 else 0.15}
+                        {scale = 1.3, frame = ____L1_t_294, emotion = ____temp_295, opacity = ____t_result_293}
                     )
-                    __L1:txt(
-                        c,
-                        if __t(pl) then __add(if i == 0 then "ANFITRIÃO" else "CONVIDADO", if __t(pl.online) then "" else " (caiu)") else "esperando…",
+                    local ____L1_txt_300 = __L1.txt
+                    local ____c_299 = c
+                    local ____t_result_298
+                    if __t(pl) then
+                        ____t_result_298 = __add(
+                            i == 0 and "ANFITRIÃO" or "CONVIDADO",
+                            __t(pl.online) and "" or " (caiu)"
+                        )
+                    else
+                        ____t_result_298 = "esperando…"
+                    end
+                    ____L1_txt_300(
+                        __L1,
+                        ____c_299,
+                        ____t_result_298,
                         x,
                         392,
                         10,
@@ -2066,16 +2622,22 @@ local __O = {};
                 12,
                 "#fff"
             )
-            local ____L1_button_198 = __L1.button
-            local ____c_197 = c
-            local ____t_196 = __t
-            local ____t_195 = __t
-            local ____temp_194 = __L1.net.role == "host"
-            __O[1196] = ____temp_194
-            ____L1_button_198(
+            local ____L1_button_306 = __L1.button
+            local ____c_305 = c
+            local ____t_304 = __t
+            local ____t_result_303
+            local ____t_302 = __t
+            local ____temp_301 = __L1.net.role == "host"
+            __O[1201] = ____temp_301
+            if ____t_302(____temp_301) then
+                ____t_result_303 = __L1.net.peerOnline
+            else
+                ____t_result_303 = __O[1201]
+            end
+            ____L1_button_306(
                 __L1,
-                ____c_197,
-                if ____t_196(if ____t_195(____temp_194) then __L1.net.peerOnline else __O[1196]) then "ESCOLHER JOGO" else "AGUARDANDO…",
+                ____c_305,
+                ____t_304(____t_result_303) and "ESCOLHER JOGO" or "AGUARDANDO…",
                 300,
                 452,
                 200,
@@ -2111,9 +2673,24 @@ local __O = {};
                     end
                 ) end
             )
-            __L1:txt(
-                c,
-                if __t(__L1.net) then __L1.net.msg else if __t(__L1.onlineMsg) then __L1.onlineMsg else "Crie uma sala e passe o código, ou entre na sala do amigo.",
+            local ____L1_txt_310 = __L1.txt
+            local ____c_309 = c
+            local ____t_result_308
+            if __t(__L1.net) then
+                ____t_result_308 = __L1.net.msg
+            else
+                local ____t_result_307
+                if __t(__L1.onlineMsg) then
+                    ____t_result_307 = __L1.onlineMsg
+                else
+                    ____t_result_307 = "Crie uma sala e passe o código, ou entre na sala do amigo."
+                end
+                ____t_result_308 = ____t_result_307
+            end
+            ____L1_txt_310(
+                __L1,
+                ____c_309,
+                ____t_result_308,
                 __L1.W / 2,
                 466,
                 11,
@@ -2134,24 +2711,46 @@ local __O = {};
         end
     end
     __L1.hostTick = function(self, now)
-        local ____t_201 = __t
-        local ____t_200 = __t
-        local ____temp_199 = not __t(__L1.net) or not __t(__L1.net.live)
-        __O[1197] = ____temp_199
-        if ____t_201(if ____t_200(____temp_199) then __O[1197] else now - __L1.net.sent < 33) then
+        local ____t_314 = __t
+        local ____t_result_313
+        local ____t_312 = __t
+        local ____temp_311 = not __t(__L1.net) or not __t(__L1.net.live)
+        __O[1202] = ____temp_311
+        if ____t_312(____temp_311) then
+            ____t_result_313 = __O[1202]
+        else
+            ____t_result_313 = now - __L1.net.sent < 33
+        end
+        if ____t_314(____t_result_313) then
             return
         end
         __L1.net.sent = now
-        local ____t_207 = __t
-        local ____t_205 = __t
-        local ____t_203 = __t
-        local ____temp_202 = __L1.screen == "play" or __L1.screen == "count"
-        __O[1198] = ____temp_202
-        local ____temp_204 = if ____t_203(____temp_202) then __O[1198] else __L1.screen == "over"
-        __O[1199] = ____temp_204
-        local ____temp_206 = if ____t_205(____temp_204) then __L1.st else __O[1199]
-        __O[1200] = ____temp_206
-        local playing = if ____t_207(____temp_206) then __L1.game else __O[1200]
+        local ____t_result_321
+        local ____t_320 = __t
+        local ____t_result_319
+        local ____t_318 = __t
+        local ____t_result_317
+        local ____t_316 = __t
+        local ____temp_315 = __L1.screen == "play" or __L1.screen == "count"
+        __O[1203] = ____temp_315
+        if ____t_316(____temp_315) then
+            ____t_result_317 = __O[1203]
+        else
+            ____t_result_317 = __L1.screen == "over"
+        end
+        __O[1204] = ____t_result_317
+        if ____t_318(____t_result_317) then
+            ____t_result_319 = __L1.st
+        else
+            ____t_result_319 = __O[1204]
+        end
+        __O[1205] = ____t_result_319
+        if ____t_320(____t_result_319) then
+            ____t_result_321 = __L1.game
+        else
+            ____t_result_321 = __O[1205]
+        end
+        local playing = ____t_result_321
         local d
         if __t(playing) then
             d = {
@@ -2163,48 +2762,74 @@ local __O = {};
                 st = window.JSON:parse(window.JSON:stringify(
                     __L1.st,
                     function(____, k, v)
-                        local ____t_212 = __t
-                        local ____t_209 = __t
-                        local ____temp_208 = type(v) == "function"
-                        __O[1202] = ____temp_208
-                        local ____t_211 = __t
-                        local ____temp_210 = k == "fx" and __isArray(v)
-                        __O[1201] = ____temp_210
-                        return if ____t_212(if ____t_209(____temp_208) then __O[1202] else if ____t_211(____temp_210) then __len(v) > 40 else __O[1201]) then nil else v
+                        local ____t_result_329
+                        local ____t_328 = __t
+                        local ____t_result_327
+                        local ____t_323 = __t
+                        local ____temp_322 = type(v) == "function"
+                        __O[1207] = ____temp_322
+                        if ____t_323(____temp_322) then
+                            ____t_result_327 = __O[1207]
+                        else
+                            local ____t_result_326
+                            local ____t_325 = __t
+                            local ____temp_324 = k == "fx" and __isArray(v)
+                            __O[1206] = ____temp_324
+                            if ____t_325(____temp_324) then
+                                ____t_result_326 = __len(v) > 40
+                            else
+                                ____t_result_326 = __O[1206]
+                            end
+                            ____t_result_327 = ____t_result_326
+                        end
+                        if ____t_328(____t_result_327) then
+                            ____t_result_329 = nil
+                        else
+                            ____t_result_329 = v
+                        end
+                        return ____t_result_329
                     end
                 )),
                 sfx = __call(__L1.net.sfx, "splice", 0),
                 away = not __t(__L1:peerLive())
             }
         else
-            local ____opt_213 = __get(__L1.GAMES, __L1.sel)
-            if ____opt_213 ~= nil then
-                ____opt_213 = ____opt_213.id
+            local ____opt_330 = __get(__L1.GAMES, __L1.sel)
+            if ____opt_330 ~= nil then
+                ____opt_330 = ____opt_330.id
             end
             d = {
                 scr = "wait",
-                g = ____opt_213,
+                g = ____opt_330,
                 what = __L1.screen,
                 av = __L1.net.av,
                 sfx = __call(__L1.net.sfx, "splice", 0)
             }
         end
-        local ____self_218 = __L1.net.conn
-        local ____self_218_send_219 = ____self_218.send
-        local ____L1_net_215, ____seq_216 = __L1.net, "seq"
-        local ____L1_net_seq_217 = ____L1_net_215[____seq_216] + 1
-        ____L1_net_215[____seq_216] = ____L1_net_seq_217
-        ____self_218_send_219(____self_218, {t = "state", s = ____L1_net_seq_217, d = d})
+        local ____self_335 = __L1.net.conn
+        local ____self_335_send_336 = ____self_335.send
+        local ____L1_net_332, ____seq_333 = __L1.net, "seq"
+        local ____L1_net_seq_334 = ____L1_net_332[____seq_333] + 1
+        ____L1_net_332[____seq_333] = ____L1_net_seq_334
+        ____self_335_send_336(____self_335, {t = "state", s = ____L1_net_seq_334, d = d})
     end
     __L1.guestTick = function(self)
-        if __t(window.performance:now() - if __t(__L1.net.lastIn) then __L1.net.lastIn else window.performance:now() > 4000 and not __t(__L1.net.kicked)) then
+        local ____t_339 = __t
+        local ____temp_338 = window.performance:now()
+        local ____t_result_337
+        if __t(__L1.net.lastIn) then
+            ____t_result_337 = __L1.net.lastIn
+        else
+            ____t_result_337 = window.performance:now()
+        end
+        if ____t_339(____temp_338 - ____t_result_337 > 4000 and not __t(__L1.net.kicked)) then
             __L1.net.kicked = true
             __L1.net.stale = true
-            local ____this_221
-            ____this_221 = __L1.net.conn
-            local ____opt_220 = ____this_221.kick
-            if ____opt_220 ~= nil then
-                ____opt_220(____this_221)
+            local ____this_341
+            ____this_341 = __L1.net.conn
+            local ____opt_340 = ____this_341.kick
+            if ____opt_340 ~= nil then
+                ____opt_340(____this_341)
             end
             window:setTimeout(
                 function()
@@ -2222,20 +2847,20 @@ local __O = {};
         if __t(key ~= __L1.net.last or now - __L1.net.sent > 100) then
             __L1.net.last = key
             __L1.net.sent = now
-            local ____self_225 = __L1.net.conn
-            local ____self_225_send_226 = ____self_225.send
-            local ____L1_net_222, ____seq_223 = __L1.net, "seq"
-            local ____L1_net_seq_224 = ____L1_net_222[____seq_223] + 1
-            ____L1_net_222[____seq_223] = ____L1_net_seq_224
-            ____self_225_send_226(____self_225, {t = "input", s = ____L1_net_seq_224, i = i})
+            local ____self_345 = __L1.net.conn
+            local ____self_345_send_346 = ____self_345.send
+            local ____L1_net_342, ____seq_343 = __L1.net, "seq"
+            local ____L1_net_seq_344 = ____L1_net_342[____seq_343] + 1
+            ____L1_net_342[____seq_343] = ____L1_net_seq_344
+            ____self_345_send_346(____self_345, {t = "input", s = ____L1_net_seq_344, i = i})
         end
         __call(
             __L1.P,
             "forEach",
             function(____, q)
-                local ____arrL_result_227 = __arrL({}, 0)
-                q.dirs = ____arrL_result_227
-                return ____arrL_result_227
+                local ____arrL_result_347 = __arrL({}, 0)
+                q.dirs = ____arrL_result_347
+                return ____arrL_result_347
             end
         )
     end
@@ -2247,7 +2872,15 @@ local __O = {};
         if __isArray(d.av) then
             __L1.net.av = d.av
         end
-        for ____, n in __iterar((__call(if __t(d.sfx) then d.sfx else __arrL({}, 0), "slice", 0, 8))) do
+        local ____iter_350 = __iter
+        local ____call_349 = __call
+        local ____t_result_348
+        if __t(d.sfx) then
+            ____t_result_348 = d.sfx
+        else
+            ____t_result_348 = __arrL({}, 0)
+        end
+        for ____, n in __TS__Iterator(____iter_350(____call_349(____t_result_348, "slice", 0, 8))) do
             local keep = __L1.net.role
             __L1.net.role = "x"
             __L1:sfx(tostring(n))
@@ -2260,15 +2893,34 @@ local __O = {};
             if __L1.screen ~= "online" then
                 __L1.screen = "guestwait"
             end
-            __L1.st = if __t(if __t(__L1.st) then __L1.screen == "over" else __L1.st) then __L1.st else __L1.st
-            local ____t_229 = __t
-            local ____call_result_228 = __call(
+            local ____t_result_353
+            local ____t_352 = __t
+            local ____t_result_351
+            if __t(__L1.st) then
+                ____t_result_351 = __L1.screen == "over"
+            else
+                ____t_result_351 = __L1.st
+            end
+            if ____t_352(____t_result_351) then
+                ____t_result_353 = __L1.st
+            else
+                ____t_result_353 = __L1.st
+            end
+            __L1.st = ____t_result_353
+            local ____t_result_356
+            local ____t_355 = __t
+            local ____call_result_354 = __call(
                 __L1.GAMES,
                 "find",
                 function(____, g2) return g2.id == d.g end
             )
-            __O[1203] = ____call_result_228
-            __L1.game = if ____t_229(____call_result_228) then __O[1203] else __L1.game
+            __O[1208] = ____call_result_354
+            if ____t_355(____call_result_354) then
+                ____t_result_356 = __O[1208]
+            else
+                ____t_result_356 = __L1.game
+            end
+            __L1.game = ____t_result_356
             __L1.net.waitWhat = d.what
             __L1.net.gotOver = false
             return
@@ -2285,18 +2937,31 @@ local __O = {};
         __L1.st = d.st
         __L1.st["end"] = function()
         end
-        __L1.st.pop = if __t(__L1.st.pop) then __L1.st.pop else __arrL({}, 0)
-        local ____t_231 = __t
-        local ____TS__Number_result_230 = __TS__Number(d.cd)
-        __O[1204] = ____TS__Number_result_230
-        __L1.cd = if ____t_231(____TS__Number_result_230) then __O[1204] else 0
+        local ____L1_st_358 = __L1.st
+        local ____t_result_357
+        if __t(__L1.st.pop) then
+            ____t_result_357 = __L1.st.pop
+        else
+            ____t_result_357 = __arrL({}, 0)
+        end
+        ____L1_st_358.pop = ____t_result_357
+        local ____t_result_361
+        local ____t_360 = __t
+        local ____TS__Number_result_359 = __TS__Number(d.cd)
+        __O[1209] = ____TS__Number_result_359
+        if ____t_360(____TS__Number_result_359) then
+            ____t_result_361 = __O[1209]
+        else
+            ____t_result_361 = 0
+        end
+        __L1.cd = ____t_result_361
         __L1.screen = d.scr
         __L1.paused = false
         __L1.solo = true
         if __t(d.scr == "over" and not __t(__L1.net.gotOver)) then
             __L1.net.gotOver = true
-            local ____L1_data_232, ____fichas_233 = __L1.data, "fichas"
-            ____L1_data_232[____fichas_233] = ____L1_data_232[____fichas_233] + 2
+            local ____L1_data_362, ____fichas_363 = __L1.data, "fichas"
+            ____L1_data_362[____fichas_363] = ____L1_data_362[____fichas_363] + 2
             __L1:persist()
         end
     end
@@ -2306,39 +2971,89 @@ local __O = {};
         c:save()
         c.fillStyle = "rgba(10,14,24,.75)"
         c:fillRect(__L1.W / 2 - 150, __L1.H - 22, 300, 20)
-        __L1:txt(
-            c,
-            __add(if __t(__L1.net.code) then __add(
+        local ____L1_txt_370 = __L1.txt
+        local ____array_369 = __TS__SparseArrayNew(c)
+        local ____add_367 = __add
+        local ____t_result_364
+        if __t(__L1.net.code) then
+            ____t_result_364 = __add(
                 __add("SALA ", __L1.net.code),
                 " · "
-            ) else "", if __t(on) then if ping ~= nil then __add(
-                __add("PING ", ping),
-                " ms"
-            ) else "ONLINE" else "RECONECTANDO…"),
+            )
+        else
+            ____t_result_364 = ""
+        end
+        local ____t_result_366
+        if __t(on) then
+            local ____temp_365
+            if ping ~= nil then
+                ____temp_365 = __add(
+                    __add("PING ", ping),
+                    " ms"
+                )
+            else
+                ____temp_365 = "ONLINE"
+            end
+            ____t_result_366 = ____temp_365
+        else
+            ____t_result_366 = "RECONECTANDO…"
+        end
+        __TS__SparseArrayPush(
+            ____array_369,
+            ____add_367(____t_result_364, ____t_result_366),
             __L1.W / 2,
             __L1.H - 12,
-            9,
-            if __t(on) then if __gt(ping, 180) then "#ffb347" else "#8ad070" else "#ff9a8a",
-            "center",
-            nil
+            9
         )
-        local ____t_242 = __t
-        local ____t_241 = __t
-        local ____t_239 = __t
-        local ____t_237 = __t
-        local ____t_235 = __t
-        local ____temp_234 = __L1.net.role == "host"
-        __O[1205] = ____temp_234
-        local ____temp_236 = if ____t_235(____temp_234) then __L1.net.live else __O[1205]
-        __O[1206] = ____temp_236
-        local ____temp_238 = if ____t_237(____temp_236) then not __t(__L1:peerLive()) else __O[1206]
-        __O[1207] = ____temp_238
-        local ____temp_240 = if ____t_239(____temp_238) then __ge(
-            __len(__L1.net.players),
-            2
-        ) else __O[1207]
-        __O[1208] = ____temp_240
-        if ____t_242(if ____t_241(____temp_240) then __L1.screen == "play" or __L1.screen == "count" else __O[1208]) then
+        local ____t_result_368
+        if __t(on) then
+            ____t_result_368 = __gt(ping, 180) and "#ffb347" or "#8ad070"
+        else
+            ____t_result_368 = "#ff9a8a"
+        end
+        __TS__SparseArrayPush(____array_369, ____t_result_368, "center", nil)
+        ____L1_txt_370(
+            __L1,
+            __TS__SparseArraySpread(____array_369)
+        )
+        local ____t_380 = __t
+        local ____t_result_379
+        local ____t_378 = __t
+        local ____t_result_377
+        local ____t_376 = __t
+        local ____t_result_375
+        local ____t_374 = __t
+        local ____t_result_373
+        local ____t_372 = __t
+        local ____temp_371 = __L1.net.role == "host"
+        __O[1210] = ____temp_371
+        if ____t_372(____temp_371) then
+            ____t_result_373 = __L1.net.live
+        else
+            ____t_result_373 = __O[1210]
+        end
+        __O[1211] = ____t_result_373
+        if ____t_374(____t_result_373) then
+            ____t_result_375 = not __t(__L1:peerLive())
+        else
+            ____t_result_375 = __O[1211]
+        end
+        __O[1212] = ____t_result_375
+        if ____t_376(____t_result_375) then
+            ____t_result_377 = __ge(
+                __len(__L1.net.players),
+                2
+            )
+        else
+            ____t_result_377 = __O[1212]
+        end
+        __O[1213] = ____t_result_377
+        if ____t_378(____t_result_377) then
+            ____t_result_379 = __L1.screen == "play" or __L1.screen == "count"
+        else
+            ____t_result_379 = __O[1213]
+        end
+        if ____t_380(____t_result_379) then
             c.fillStyle = "rgba(10,8,12,.6)"
             c:fillRect(0, 200, __L1.W, 90)
             __L1:txt(
@@ -2350,20 +3065,45 @@ local __O = {};
                 "#fff3a0"
             )
         end
-        local ____t_250 = __t
-        local ____t_244 = __t
-        local ____temp_243 = __L1.net.role == "guest"
-        __O[1211] = ____temp_243
-        local ____t_247 = __t
-        local ____opt_245 = __L1.net.snap
-        if ____opt_245 ~= nil then
-            ____opt_245 = ____opt_245.away
+        local ____t_393 = __t
+        local ____t_result_392
+        local ____t_382 = __t
+        local ____temp_381 = __L1.net.role == "guest"
+        __O[1216] = ____temp_381
+        if ____t_382(____temp_381) then
+            local ____t_result_391
+            local ____t_385 = __t
+            local ____opt_383 = __L1.net.snap
+            if ____opt_383 ~= nil then
+                ____opt_383 = ____opt_383.away
+            end
+            __O[1215] = ____opt_383
+            if ____t_385(____opt_383) then
+                ____t_result_391 = __O[1215]
+            else
+                local ____t_result_390
+                local ____t_389 = __t
+                local ____temp_387 = window.performance:now()
+                local ____t_result_386
+                if __t(__L1.net.lastIn) then
+                    ____t_result_386 = __L1.net.lastIn
+                else
+                    ____t_result_386 = window.performance:now()
+                end
+                local ____temp_388 = ____temp_387 - ____t_result_386 > 1500
+                __O[1214] = ____temp_388
+                if ____t_389(____temp_388) then
+                    ____t_result_390 = __L1.screen == "play" or __L1.screen == "count"
+                else
+                    ____t_result_390 = __O[1214]
+                end
+                ____t_result_391 = ____t_result_390
+            end
+            ____t_result_392 = ____t_result_391
+        else
+            ____t_result_392 = __O[1216]
         end
-        __O[1210] = ____opt_245
-        local ____t_249 = __t
-        local ____temp_248 = window.performance:now() - if __t(__L1.net.lastIn) then __L1.net.lastIn else window.performance:now() > 1500
-        __O[1209] = ____temp_248
-        if ____t_250(if ____t_244(____temp_243) then if ____t_247(____opt_245) then __O[1210] else if ____t_249(____temp_248) then __L1.screen == "play" or __L1.screen == "count" else __O[1209] else __O[1211]) then
+        if ____t_393(____t_result_392) then
             c.fillStyle = "rgba(10,8,12,.6)"
             c:fillRect(0, 200, __L1.W, 90)
             __L1:txt(
@@ -2379,26 +3119,47 @@ local __O = {};
     end
     __L1.tvTarget = function(self)
         local T = window.DAROCA_TV
-        if __t(if __t(T) then T.port else T) then
-            return {
-                ws = __add(
-                    __add("ws://127.0.0.1:", T.port),
-                    "/ws"
-                ),
-                join = __add(if __t(T.ip) then __add(
+        local ____t_395 = __t
+        local ____t_result_394
+        if __t(T) then
+            ____t_result_394 = T.port
+        else
+            ____t_result_394 = T
+        end
+        if ____t_395(____t_result_394) then
+            local ____add_result_398 = __add(
+                __add("ws://127.0.0.1:", T.port),
+                "/ws"
+            )
+            local ____add_397 = __add
+            local ____t_result_396
+            if __t(T.ip) then
+                ____t_result_396 = __add(
                     __add(
                         __add("http://", T.ip),
                         ":"
                     ),
                     T.port
-                ) else "", "/controle.html")
+                )
+            else
+                ____t_result_396 = ""
+            end
+            return {
+                ws = ____add_result_398,
+                join = ____add_397(____t_result_396, "/controle.html")
             }
         end
         local O = window.DarocaOnline
         if not __t(O) then
             return nil
         end
-        local base = if __t(O:sameOrigin()) then window.location.origin else O:base()
+        local ____t_result_399
+        if __t(O:sameOrigin()) then
+            ____t_result_399 = window.location.origin
+        else
+            ____t_result_399 = O:base()
+        end
+        local base = ____t_result_399
         if not __t(base) then
             return nil
         end
@@ -2423,15 +3184,21 @@ local __O = {};
         if __t(__L1.tv) then
             return
         end
-        local ____t_276 = __t
-        local ____opt_274 = window.DarocaOnline
-        if ____opt_274 ~= nil then
-            ____opt_274 = ____opt_274.ready
+        local ____t_result_433
+        local ____t_432 = __t
+        local ____opt_430 = window.DarocaOnline
+        if ____opt_430 ~= nil then
+            ____opt_430 = ____opt_430.ready
         end
-        __O[1212] = ____opt_274
-        local ____self_273 = if ____t_276(____opt_274) then __O[1212] else __TS__Promise.resolve()
-        ____self_273["then"](
-            ____self_273,
+        __O[1217] = ____opt_430
+        if ____t_432(____opt_430) then
+            ____t_result_433 = __O[1217]
+        else
+            ____t_result_433 = __TS__Promise.resolve()
+        end
+        local ____self_429 = ____t_result_433
+        ____self_429["then"](
+            ____self_429,
             function()
                 local target = __L1:tvTarget()
                 if not __t(target) then
@@ -2485,15 +3252,21 @@ local __O = {};
                 conn:on(
                     "welcome",
                     function()
-                        local ____t_255 = __t
-                        local ____t_254 = __t
-                        local ____opt_251 = __L1.tv
-                        if ____opt_251 ~= nil then
-                            ____opt_251 = ____opt_251.conn
+                        local ____t_405 = __t
+                        local ____t_result_404
+                        local ____t_403 = __t
+                        local ____opt_400 = __L1.tv
+                        if ____opt_400 ~= nil then
+                            ____opt_400 = ____opt_400.conn
                         end
-                        local ____temp_253 = ____opt_251 ~= conn
-                        __O[1213] = ____temp_253
-                        if ____t_255(if ____t_254(____temp_253) then __O[1213] else __L1.tv.sent) then
+                        local ____temp_402 = ____opt_400 ~= conn
+                        __O[1218] = ____temp_402
+                        if ____t_403(____temp_402) then
+                            ____t_result_404 = __O[1218]
+                        else
+                            ____t_result_404 = __L1.tv.sent
+                        end
+                        if ____t_405(____t_result_404) then
                             return
                         end
                         __L1.tv.sent = true
@@ -2503,11 +3276,11 @@ local __O = {};
                 conn:on(
                     "room",
                     function(____, m)
-                        local ____opt_256 = __L1.tv
-                        if ____opt_256 ~= nil then
-                            ____opt_256 = ____opt_256.conn
+                        local ____opt_406 = __L1.tv
+                        if ____opt_406 ~= nil then
+                            ____opt_406 = ____opt_406.conn
                         end
-                        if ____opt_256 ~= conn then
+                        if ____opt_406 ~= conn then
                             return
                         end
                         __L1.tv.code = m.code
@@ -2532,7 +3305,16 @@ local __O = {};
                             function(____, p, i)
                                 p.index = i
                                 if __t(not __t(__get(__L1.tv.av, i)) or not __t(__get(__L1.tv.av, i).fixed)) then
-                                    __set(__L1.tv.av, i, {type = if __t(__get(__L1.AV_NAMES, p.avatar)) then p.avatar else __get(__L1.DEF_AV, i)})
+                                    local ____set_411 = __set
+                                    local ____L1_tv_av_409 = __L1.tv.av
+                                    local ____i_410 = i
+                                    local ____t_result_408
+                                    if __t(__get(__L1.AV_NAMES, p.avatar)) then
+                                        ____t_result_408 = p.avatar
+                                    else
+                                        ____t_result_408 = __get(__L1.DEF_AV, i)
+                                    end
+                                    ____set_411(____L1_tv_av_409, ____i_410, {type = ____t_result_408})
                                 end
                             end
                         )
@@ -2559,15 +3341,26 @@ local __O = {};
                                 avatar = __get(__L1.tv.av, i).type
                             }) end
                         )
-                        __L1.tvMsg = if __t(__len(__L1.tv.phones)) then "Aperte A no celular do P1 (ou OK no controle remoto) para escolher o jogo." else "Aponte a câmera do celular para o QR code."
-                        local ____t_262 = __t
-                        local ____t_261 = __t
-                        local ____t_259 = __t
-                        local ____temp_258 = not __t(__L1.tv.qr)
-                        __O[1214] = ____temp_258
-                        local ____temp_260 = if ____t_259(____temp_258) then window.qrcode else __O[1214]
-                        __O[1215] = ____temp_260
-                        if ____t_262(if ____t_261(____temp_260) then __L1.tv.code else __O[1215]) then
+                        __L1.tvMsg = __t(__len(__L1.tv.phones)) and "Aperte A no celular do P1 (ou OK no controle remoto) para escolher o jogo." or "Aponte a câmera do celular para o QR code."
+                        local ____t_417 = __t
+                        local ____t_result_416
+                        local ____t_415 = __t
+                        local ____t_result_414
+                        local ____t_413 = __t
+                        local ____temp_412 = not __t(__L1.tv.qr)
+                        __O[1219] = ____temp_412
+                        if ____t_413(____temp_412) then
+                            ____t_result_414 = window.qrcode
+                        else
+                            ____t_result_414 = __O[1219]
+                        end
+                        __O[1220] = ____t_result_414
+                        if ____t_415(____t_result_414) then
+                            ____t_result_416 = __L1.tv.code
+                        else
+                            ____t_result_416 = __O[1220]
+                        end
+                        if ____t_417(____t_result_416) then
                             do
                                 pcall(function()
                                     local q = window:qrcode(0, "M")
@@ -2585,11 +3378,11 @@ local __O = {};
                 conn:on(
                     "input",
                     function(____, m)
-                        local ____opt_263 = __L1.tv
-                        if ____opt_263 ~= nil then
-                            ____opt_263 = ____opt_263.conn
+                        local ____opt_418 = __L1.tv
+                        if ____opt_418 ~= nil then
+                            ____opt_418 = ____opt_418.conn
                         end
-                        if ____opt_263 ~= conn then
+                        if ____opt_418 ~= conn then
                             return
                         end
                         local i = __call(
@@ -2612,12 +3405,12 @@ local __O = {};
                 conn:on(
                     "event",
                     function(____, m)
-                        local ____t_267 = __t
-                        local ____opt_265 = __L1.tv
-                        if ____opt_265 ~= nil then
-                            ____opt_265 = ____opt_265.conn
+                        local ____t_422 = __t
+                        local ____opt_420 = __L1.tv
+                        if ____opt_420 ~= nil then
+                            ____opt_420 = ____opt_420.conn
                         end
-                        if ____t_267(____opt_265 ~= conn or not __t(m.e)) then
+                        if ____t_422(____opt_420 ~= conn or not __t(m.e)) then
                             return
                         end
                         local i = __call(
@@ -2625,11 +3418,17 @@ local __O = {};
                             "findIndex",
                             function(____, p) return p.id == m.from end
                         )
-                        local ____t_270 = __t
-                        local ____t_269 = __t
-                        local ____temp_268 = __ge(i, 0) and m.e.kind == "pick"
-                        __O[1216] = ____temp_268
-                        if ____t_270(if ____t_269(____temp_268) then __get(__L1.AV_NAMES, m.e.avatar) else __O[1216]) then
+                        local ____t_426 = __t
+                        local ____t_result_425
+                        local ____t_424 = __t
+                        local ____temp_423 = __ge(i, 0) and m.e.kind == "pick"
+                        __O[1221] = ____temp_423
+                        if ____t_424(____temp_423) then
+                            ____t_result_425 = __get(__L1.AV_NAMES, m.e.avatar)
+                        else
+                            ____t_result_425 = __O[1221]
+                        end
+                        if ____t_426(____t_result_425) then
                             __set(__L1.tv.av, i, {type = m.e.avatar, fixed = true})
                             __L1:sfx("move")
                             __L1.tv:send({
@@ -2645,11 +3444,11 @@ local __O = {};
                 conn:on(
                     "error",
                     function(____, m)
-                        local ____opt_271 = __L1.tv
-                        if ____opt_271 ~= nil then
-                            ____opt_271 = ____opt_271.conn
+                        local ____opt_427 = __L1.tv
+                        if ____opt_427 ~= nil then
+                            ____opt_427 = ____opt_427.conn
                         end
-                        if ____opt_271 == conn then
+                        if ____opt_427 == conn then
                             __L1.tvMsg = m.m
                         end
                     end
@@ -2696,53 +3495,97 @@ local __O = {};
         if not __t(__L1.tv) then
             return
         end
-        local ____add_287 = __add
-        local ____add_282 = __add
-        local ____add_281 = __add
-        local ____add_result_280 = __add(__L1.screen, "|")
-        local ____t_279 = __t
-        local ____opt_277 = __L1.game
-        if ____opt_277 ~= nil then
-            ____opt_277 = ____opt_277.id
+        local ____add_445 = __add
+        local ____add_440 = __add
+        local ____add_439 = __add
+        local ____add_result_438 = __add(__L1.screen, "|")
+        local ____t_result_437
+        local ____t_436 = __t
+        local ____opt_434 = __L1.game
+        if ____opt_434 ~= nil then
+            ____opt_434 = ____opt_434.id
         end
-        __O[1217] = ____opt_277
-        local ____add_282_result_286 = ____add_282(
-            ____add_281(____add_result_280, if ____t_279(____opt_277) then __O[1217] else ""),
+        __O[1222] = ____opt_434
+        if ____t_436(____opt_434) then
+            ____t_result_437 = __O[1222]
+        else
+            ____t_result_437 = ""
+        end
+        local ____add_440_result_444 = ____add_440(
+            ____add_439(____add_result_438, ____t_result_437),
             "|"
         )
-        local ____t_285 = __t
-        local ____opt_283 = __L1.st
-        if ____opt_283 ~= nil then
-            ____opt_283 = ____opt_283.ended
+        local ____t_443 = __t
+        local ____opt_441 = __L1.st
+        if ____opt_441 ~= nil then
+            ____opt_441 = ____opt_441.ended
         end
-        local key = ____add_287(____add_282_result_286, if ____t_285(____opt_283) then 1 else 0)
+        local key = ____add_445(
+            ____add_440_result_444,
+            ____t_443(____opt_441) and 1 or 0
+        )
         if key == __L1.tvLastScreen then
             return
         end
         __L1.tvLastScreen = key
-        local ____add_294 = __add
-        local ____t_293 = __t
-        local ____opt_290 = __L1.st
-        if ____opt_290 ~= nil then
-            ____opt_290 = ____opt_290.ended
+        local ____t_result_456
+        if __t(__L1.screen == "play" or __L1.screen == "count") then
+            ____t_result_456 = __add("Jogando: ", __L1.game.name)
+        else
+            local ____temp_455
+            if __L1.screen == "over" then
+                local ____add_453 = __add
+                local ____t_result_452
+                local ____t_451 = __t
+                local ____opt_448 = __L1.st
+                if ____opt_448 ~= nil then
+                    ____opt_448 = ____opt_448.ended
+                end
+                local ____opt_result_450
+                if ____opt_448 ~= nil then
+                    ____opt_result_450 = ____opt_448.text
+                end
+                __O[1223] = ____opt_result_450
+                if ____t_451(____opt_result_450) then
+                    ____t_result_452 = __O[1223]
+                else
+                    ____t_result_452 = ""
+                end
+                ____temp_455 = ____add_453("Fim de jogo! ", ____t_result_452)
+            else
+                local ____temp_454
+                if __L1.screen == "mode" then
+                    ____temp_454 = __add(
+                        "Escolhendo: ",
+                        __get(__L1.GAMES, __L1.sel).name
+                    )
+                else
+                    ____temp_454 = "Escolhendo o jogo na TV…"
+                end
+                ____temp_455 = ____temp_454
+            end
+            ____t_result_456 = ____temp_455
         end
-        local ____opt_result_292
-        if ____opt_290 ~= nil then
-            ____opt_result_292 = ____opt_290.text
-        end
-        __O[1218] = ____opt_result_292
-        local text = if __t(__L1.screen == "play" or __L1.screen == "count") then __add("Jogando: ", __L1.game.name) else if __L1.screen == "over" then ____add_294("Fim de jogo! ", if ____t_293(____opt_result_292) then __O[1218] else "") else if __L1.screen == "mode" then __add(
-            "Escolhendo: ",
-            __get(__L1.GAMES, __L1.sel).name
-        ) else "Escolhendo o jogo na TV…"
+        local text = ____t_result_456
         __L1.tv:send({kind = "status", text = text, playing = __L1.screen == "play" or __L1.screen == "count"})
     end
     __L1.updateTV = function(self, ap)
-        local ____t_297 = __t
-        local ____t_296 = __t
-        local ____temp_295 = if __t(ap) then __L1.tv else ap
-        __O[1219] = ____temp_295
-        if ____t_297(if ____t_296(____temp_295) then __len(__L1.tv.phones) else __O[1219]) then
+        local ____t_460 = __t
+        local ____t_result_459
+        local ____t_458 = __t
+        local ____t_result_457
+        if __t(ap) then
+            ____t_result_457 = __L1.tv
+        else
+            ____t_result_457 = ap
+        end
+        __O[1224] = ____t_result_457
+        if ____t_458(____t_result_457) then
+            ____t_result_459 = __len(__L1.tv.phones)
+        else
+            ____t_result_459 = __O[1224]
+        end
+        if ____t_460(____t_result_459) then
             __L1.screen = "menu"
             __L1:sfx("menu")
         end
@@ -2805,9 +3648,18 @@ local __O = {};
             nil
         )
         if __t(not __t(__L1.tv) or not __t(__L1.tv.code)) then
-            __L1:txt(
-                c,
-                if __t(__L1.tvMsg) then __L1.tvMsg else "Abrindo a sala…",
+            local ____L1_txt_463 = __L1.txt
+            local ____c_462 = c
+            local ____t_result_461
+            if __t(__L1.tvMsg) then
+                ____t_result_461 = __L1.tvMsg
+            else
+                ____t_result_461 = "Abrindo a sala…"
+            end
+            ____L1_txt_463(
+                __L1,
+                ____c_462,
+                ____t_result_461,
                 __L1.W / 2,
                 260,
                 13,
@@ -2918,53 +3770,80 @@ local __O = {};
                 local x = 380 + i * 140
                 local y = 280
                 local p = __get(__L1.tv.phones, i)
-                __L1:frame(
+                local ____L1_frame_466 = __L1.frame
+                local ____array_465 = __TS__SparseArrayNew(
                     c,
                     x - 60,
                     y,
                     124,
                     150,
-                    if __t(p) then "#1e2a1e" else "#161616",
-                    if __t(p) then __get(__L1.PLAYER_COL, i) else "#444",
-                    "#2a2a2a"
+                    __t(p) and "#1e2a1e" or "#161616"
+                )
+                local ____t_result_464
+                if __t(p) then
+                    ____t_result_464 = __get(__L1.PLAYER_COL, i)
+                else
+                    ____t_result_464 = "#444"
+                end
+                __TS__SparseArrayPush(____array_465, ____t_result_464, "#2a2a2a")
+                ____L1_frame_466(
+                    __L1,
+                    __TS__SparseArraySpread(____array_465)
                 )
                 if __t(p) then
-                    local ____L1_hero_302 = __L1.hero
-                    local ____c_301 = c
-                    local ____t_300 = __t
-                    local ____opt_298 = __get(__L1.tv.av, i)
-                    if ____opt_298 ~= nil then
-                        ____opt_298 = ____opt_298.type
+                    local ____L1_hero_472 = __L1.hero
+                    local ____c_471 = c
+                    local ____t_result_470
+                    local ____t_469 = __t
+                    local ____opt_467 = __get(__L1.tv.av, i)
+                    if ____opt_467 ~= nil then
+                        ____opt_467 = ____opt_467.type
                     end
-                    __O[1220] = ____opt_298
-                    ____L1_hero_302(
+                    __O[1225] = ____opt_467
+                    if ____t_469(____opt_467) then
+                        ____t_result_470 = __O[1225]
+                    else
+                        ____t_result_470 = __get(__L1.DEF_AV, i)
+                    end
+                    ____L1_hero_472(
                         __L1,
-                        ____c_301,
-                        if ____t_300(____opt_298) then __O[1220] else __get(__L1.DEF_AV, i),
+                        ____c_471,
+                        ____t_result_470,
                         x + 2,
                         y + 112,
-                        {scale = 1, frame = __L1.t, emotion = "friend", opacity = if __t(p.online) then 1 else 0.4}
+                        {
+                            scale = 1,
+                            frame = __L1.t,
+                            emotion = "friend",
+                            opacity = __t(p.online) and 1 or 0.4
+                        }
                     )
-                    local ____L1_txt_312 = __L1.txt
-                    local ____c_311 = c
-                    local ____add_310 = __add
-                    local ____add_result_309 = __add(
+                    local ____L1_txt_483 = __L1.txt
+                    local ____c_482 = c
+                    local ____add_481 = __add
+                    local ____add_result_480 = __add(
                         __add("P", i + 1),
                         " · "
                     )
-                    local ____t_308 = __t
-                    local ____get_306 = __get
-                    local ____L1_AV_NAMES_305 = __L1.AV_NAMES
-                    local ____opt_303 = __get(__L1.tv.av, i)
-                    if ____opt_303 ~= nil then
-                        ____opt_303 = ____opt_303.type
+                    local ____t_result_479
+                    local ____t_478 = __t
+                    local ____get_476 = __get
+                    local ____L1_AV_NAMES_475 = __L1.AV_NAMES
+                    local ____opt_473 = __get(__L1.tv.av, i)
+                    if ____opt_473 ~= nil then
+                        ____opt_473 = ____opt_473.type
                     end
-                    local ____get_306_result_307 = ____get_306(____L1_AV_NAMES_305, ____opt_303)
-                    __O[1221] = ____get_306_result_307
-                    ____L1_txt_312(
+                    local ____get_476_result_477 = ____get_476(____L1_AV_NAMES_475, ____opt_473)
+                    __O[1226] = ____get_476_result_477
+                    if ____t_478(____get_476_result_477) then
+                        ____t_result_479 = __O[1226]
+                    else
+                        ____t_result_479 = p.name
+                    end
+                    ____L1_txt_483(
                         __L1,
-                        ____c_311,
-                        ____add_310(____add_result_309, if ____t_308(____get_306_result_307) then __O[1221] else p.name),
+                        ____c_482,
+                        ____add_481(____add_result_480, ____t_result_479),
                         x + 2,
                         y + 132,
                         8,
@@ -2996,7 +3875,7 @@ local __O = {};
         )
         __L1:button(
             c,
-            if __t(__len(__L1.tv.phones)) then "ESCOLHER JOGO" else "ESPERANDO JOGADORES…",
+            __t(__len(__L1.tv.phones)) and "ESCOLHER JOGO" or "ESPERANDO JOGADORES…",
             340,
             474,
             280,
@@ -3024,19 +3903,41 @@ local __O = {};
     end
     __L1.back = function(self)
         __L1:sfx("menu")
-        local ____t_315 = __t
-        local ____t_314 = __t
-        local ____temp_313 = if __t(__L1.net) then __L1.net.live else __L1.net
-        __O[1222] = ____temp_313
-        if ____t_315(if ____t_314(____temp_313) then __L1.screen ~= "menu" or __L1.net.role == "guest" else __O[1222]) then
-            local ____t_320 = __t
-            local ____t_319 = __t
-            local ____t_317 = __t
-            local ____temp_316 = __L1.net.role == "guest" or __L1.screen == "play"
-            __O[1223] = ____temp_316
-            local ____temp_318 = if ____t_317(____temp_316) then __O[1223] else __L1.screen == "count"
-            __O[1224] = ____temp_318
-            if ____t_320(if ____t_319(____temp_318) then __O[1224] else __L1.screen == "over") then
+        local ____t_487 = __t
+        local ____t_result_486
+        local ____t_485 = __t
+        local ____t_result_484
+        if __t(__L1.net) then
+            ____t_result_484 = __L1.net.live
+        else
+            ____t_result_484 = __L1.net
+        end
+        __O[1227] = ____t_result_484
+        if ____t_485(____t_result_484) then
+            ____t_result_486 = __L1.screen ~= "menu" or __L1.net.role == "guest"
+        else
+            ____t_result_486 = __O[1227]
+        end
+        if ____t_487(____t_result_486) then
+            local ____t_493 = __t
+            local ____t_result_492
+            local ____t_491 = __t
+            local ____t_result_490
+            local ____t_489 = __t
+            local ____temp_488 = __L1.net.role == "guest" or __L1.screen == "play"
+            __O[1228] = ____temp_488
+            if ____t_489(____temp_488) then
+                ____t_result_490 = __O[1228]
+            else
+                ____t_result_490 = __L1.screen == "count"
+            end
+            __O[1229] = ____t_result_490
+            if ____t_491(____t_result_490) then
+                ____t_result_492 = __O[1229]
+            else
+                ____t_result_492 = __L1.screen == "over"
+            end
+            if ____t_493(____t_result_492) then
                 __L1:leaveNet("Você saiu da sala online.")
                 return
             end
@@ -3071,10 +3972,21 @@ local __O = {};
     __L1.updateScreens = function(self, dt)
         local p = __get(__L1.P, 0)
         local p2 = __get(__L1.P, 1)
-        local ____t_322 = __t
-        local ____temp_321 = if __t(p.ap) then p.ap else p2.ap
-        __O[1225] = ____temp_321
-        local ap = if ____t_322(____temp_321) then __O[1225] else __L1.menuNav.start
+        local ____t_result_496
+        local ____t_495 = __t
+        local ____t_result_494
+        if __t(p.ap) then
+            ____t_result_494 = p.ap
+        else
+            ____t_result_494 = p2.ap
+        end
+        __O[1230] = ____t_result_494
+        if ____t_495(____t_result_494) then
+            ____t_result_496 = __O[1230]
+        else
+            ____t_result_496 = __L1.menuNav.start
+        end
+        local ap = ____t_result_496
         local function nav(____, v)
             __L1:sfx("move")
             return v
@@ -3136,7 +4048,14 @@ local __O = {};
                 __L1.modeSel = 0
                 __L1:sfx("menu")
             end
-            if __t(if __t(p.bp) then p.bp else p2.bp) then
+            local ____t_498 = __t
+            local ____t_result_497
+            if __t(p.bp) then
+                ____t_result_497 = p.bp
+            else
+                ____t_result_497 = p2.bp
+            end
+            if ____t_498(____t_result_497) then
                 __L1.screen = "loja"
                 __L1.shopSel = 0
                 __L1:sfx("menu")
@@ -3178,23 +4097,48 @@ local __O = {};
             if __t(ap) then
                 __L1:shopAct(0)
             end
-            if __t(if __t(p.bp) then p.bp else p2.bp) then
+            local ____t_500 = __t
+            local ____t_result_499
+            if __t(p.bp) then
+                ____t_result_499 = p.bp
+            else
+                ____t_result_499 = p2.bp
+            end
+            if ____t_500(____t_result_499) then
                 __L1:shopAct(1)
             end
         elseif __L1.screen == "mode" then
             for ____, d in __iterar((dirs)) do
-                local ____t_327 = __t
-                local ____t_326 = __t
-                local ____t_324 = __t
-                local ____temp_323 = d == "l" or d == "r"
-                __O[1226] = ____temp_323
-                local ____temp_325 = if ____t_324(____temp_323) then __O[1226] else d == "u"
-                __O[1227] = ____temp_325
-                if ____t_327(if ____t_326(____temp_325) then __O[1227] else d == "d") then
+                local ____t_506 = __t
+                local ____t_result_505
+                local ____t_504 = __t
+                local ____t_result_503
+                local ____t_502 = __t
+                local ____temp_501 = d == "l" or d == "r"
+                __O[1231] = ____temp_501
+                if ____t_502(____temp_501) then
+                    ____t_result_503 = __O[1231]
+                else
+                    ____t_result_503 = d == "u"
+                end
+                __O[1232] = ____t_result_503
+                if ____t_504(____t_result_503) then
+                    ____t_result_505 = __O[1232]
+                else
+                    ____t_result_505 = d == "d"
+                end
+                if ____t_506(____t_result_505) then
                     __L1.modeSel = nav(nil, 1 - __L1.modeSel)
                 end
             end
-            if __t(if __t(__L1.net) then __L1.net.live else __L1.net) then
+            local ____t_508 = __t
+            local ____t_result_507
+            if __t(__L1.net) then
+                ____t_result_507 = __L1.net.live
+            else
+                ____t_result_507 = __L1.net
+            end
+            if ____t_508(____t_result_507) then
                 if __t(ap) then
                     if __t(__L1.net.peerOnline) then
                         __L1:startGame(
@@ -3205,7 +4149,14 @@ local __O = {};
                         __L1:sfx("fake")
                     end
                 end
-                if __t(if __t(p.bp) then p.bp else p2.bp) then
+                local ____t_510 = __t
+                local ____t_result_509
+                if __t(p.bp) then
+                    ____t_result_509 = p.bp
+                else
+                    ____t_result_509 = p2.bp
+                end
+                if ____t_510(____t_result_509) then
                     __L1.screen = "menu"
                 end
                 return
@@ -3214,13 +4165,20 @@ local __O = {};
                 if __t(ap) then
                     __L1:startGame(
                         __get(__L1.GAMES, __L1.sel),
-                        if __ge(
+                        __ge(
                             __L1.tv:count(),
                             2
-                        ) then "duo" else "solo"
+                        ) and "duo" or "solo"
                     )
                 end
-                if __t(if __t(p.bp) then p.bp else p2.bp) then
+                local ____t_512 = __t
+                local ____t_result_511
+                if __t(p.bp) then
+                    ____t_result_511 = p.bp
+                else
+                    ____t_result_511 = p2.bp
+                end
+                if ____t_512(____t_result_511) then
                     __L1.screen = "menu"
                 end
                 return
@@ -3228,10 +4186,17 @@ local __O = {};
             if __t(ap) then
                 __L1:startGame(
                     __get(__L1.GAMES, __L1.sel),
-                    if __t(__L1.modeSel) then "duo" else "solo"
+                    __t(__L1.modeSel) and "duo" or "solo"
                 )
             end
-            if __t(if __t(p.bp) then p.bp else p2.bp) then
+            local ____t_514 = __t
+            local ____t_result_513
+            if __t(p.bp) then
+                ____t_result_513 = p.bp
+            else
+                ____t_result_513 = p2.bp
+            end
+            if ____t_514(____t_result_513) then
                 __L1.screen = "menu"
                 __L1:sfx("menu")
             end
@@ -3258,8 +4223,8 @@ local __O = {};
                 function(____, q) return __lt(q.t, 0.9) end
             )
             if __t(__L1.st.banner) then
-                local ____L1_st_banner_328, ____t_329 = __L1.st.banner, "t"
-                ____L1_st_banner_328[____t_329] = ____L1_st_banner_328[____t_329] - dt
+                local ____L1_st_banner_515, ____t_516 = __L1.st.banner, "t"
+                ____L1_st_banner_515[____t_516] = ____L1_st_banner_515[____t_516] - dt
                 if __le(__L1.st.banner.t, 0) then
                     __L1.st.banner = nil
                 end
@@ -3327,8 +4292,8 @@ local __O = {};
                 end
                 if __t(ap) then
                     if __lt(__L1.initials.i, 2) then
-                        local ____L1_initials_330, ____i_331 = __L1.initials, "i"
-                        ____L1_initials_330[____i_331] = ____L1_initials_330[____i_331] + 1
+                        local ____L1_initials_517, ____i_518 = __L1.initials, "i"
+                        ____L1_initials_517[____i_518] = ____L1_initials_517[____i_518] + 1
                         __L1:sfx("move")
                     else
                         __L1:saveInitials()
@@ -3337,24 +4302,41 @@ local __O = {};
                 return
             end
             for ____, d in __iterar((dirs)) do
-                local ____t_336 = __t
-                local ____t_335 = __t
-                local ____t_333 = __t
-                local ____temp_332 = d == "l" or d == "r"
-                __O[1228] = ____temp_332
-                local ____temp_334 = if ____t_333(____temp_332) then __O[1228] else d == "u"
-                __O[1229] = ____temp_334
-                if ____t_336(if ____t_335(____temp_334) then __O[1229] else d == "d") then
+                local ____t_524 = __t
+                local ____t_result_523
+                local ____t_522 = __t
+                local ____t_result_521
+                local ____t_520 = __t
+                local ____temp_519 = d == "l" or d == "r"
+                __O[1233] = ____temp_519
+                if ____t_520(____temp_519) then
+                    ____t_result_521 = __O[1233]
+                else
+                    ____t_result_521 = d == "u"
+                end
+                __O[1234] = ____t_result_521
+                if ____t_522(____t_result_521) then
+                    ____t_result_523 = __O[1234]
+                else
+                    ____t_result_523 = d == "d"
+                end
+                if ____t_524(____t_result_523) then
                     __L1.overSel = nav(nil, 1 - __L1.overSel)
                 end
             end
             if __t(ap) then
                 if __L1.overSel == 0 then
-                    local ____t_339 = __t
-                    local ____t_338 = __t
-                    local ____temp_337 = not __t(__L1.net)
-                    __O[1230] = ____temp_337
-                    if ____t_339(if ____t_338(____temp_337) then __O[1230] else __L1.net.peerOnline) then
+                    local ____t_528 = __t
+                    local ____t_result_527
+                    local ____t_526 = __t
+                    local ____temp_525 = not __t(__L1.net)
+                    __O[1235] = ____temp_525
+                    if ____t_526(____temp_525) then
+                        ____t_result_527 = __O[1235]
+                    else
+                        ____t_result_527 = __L1.net.peerOnline
+                    end
+                    if ____t_528(____t_result_527) then
                         __L1:startGame(__L1.game, __L1.st.mode)
                     end
                 else
@@ -3362,7 +4344,14 @@ local __O = {};
                     __L1:sfx("menu")
                 end
             end
-            if __t(if __t(p.bp) then p.bp else p2.bp) then
+            local ____t_530 = __t
+            local ____t_result_529
+            if __t(p.bp) then
+                ____t_result_529 = p.bp
+            else
+                ____t_result_529 = p2.bp
+            end
+            if ____t_530(____t_result_529) then
                 __L1.screen = "menu"
             end
         end
@@ -3937,8 +4926,8 @@ local __O = {};
             y,
             w,
             h,
-            if __t(on) then "#4a7a3a" else "#2a2018",
-            if __t(on) then "#fff3a0" else "#e8c27a"
+            __t(on) and "#4a7a3a" or "#2a2018",
+            __t(on) and "#fff3a0" or "#e8c27a"
         )
         __L1:txt(
             c,
@@ -3946,7 +4935,7 @@ local __O = {};
             x + w / 2,
             y + h / 2 + 1,
             14,
-            if __t(on) then "#fff" else "#e8d8b0"
+            __t(on) and "#fff" or "#e8d8b0"
         )
         __call(__L1.clicks, "push", {
             x = x,
@@ -3985,19 +4974,25 @@ local __O = {};
                 "#7ad1ff",
                 "#2a4a6a"
             )
-            local ____L1_txt_345 = __L1.txt
-            local ____c_344 = c
-            local ____add_343 = __add
-            local ____t_342 = __t
-            local ____opt_340 = __L1.net
-            if ____opt_340 ~= nil then
-                ____opt_340 = ____opt_340.code
+            local ____L1_txt_537 = __L1.txt
+            local ____c_536 = c
+            local ____add_535 = __add
+            local ____t_result_534
+            local ____t_533 = __t
+            local ____opt_531 = __L1.net
+            if ____opt_531 ~= nil then
+                ____opt_531 = ____opt_531.code
             end
-            __O[1231] = ____opt_340
-            ____L1_txt_345(
+            __O[1236] = ____opt_531
+            if ____t_533(____opt_531) then
+                ____t_result_534 = __O[1236]
+            else
+                ____t_result_534 = ""
+            end
+            ____L1_txt_537(
                 __L1,
-                ____c_344,
-                ____add_343("SALA ", if ____t_342(____opt_340) then __O[1231] else ""),
+                ____c_536,
+                ____add_535("SALA ", ____t_result_534),
                 __L1.W / 2,
                 190,
                 16,
@@ -4007,16 +5002,16 @@ local __O = {};
                 __L1.GAMES,
                 "find",
                 function(____, g2)
-                    local ____g2_id_351 = g2.id
-                    local ____opt_348 = __L1.net
-                    if ____opt_348 ~= nil then
-                        ____opt_348 = ____opt_348.snap
+                    local ____g2_id_543 = g2.id
+                    local ____opt_540 = __L1.net
+                    if ____opt_540 ~= nil then
+                        ____opt_540 = ____opt_540.snap
                     end
-                    local ____opt_result_350
-                    if ____opt_348 ~= nil then
-                        ____opt_result_350 = ____opt_348.g
+                    local ____opt_result_542
+                    if ____opt_540 ~= nil then
+                        ____opt_result_542 = ____opt_540.g
                     end
-                    return ____g2_id_351 == ____opt_result_350
+                    return ____g2_id_543 == ____opt_result_542
                 end
             )
             __L1:txt(
@@ -4094,7 +5089,7 @@ local __O = {};
                 __L1.W / 2,
                 46,
                 26,
-                if math.sin(__L1.t * 6) > -0.8 then "#ffd0f0" else "#a06a90",
+                math.sin(__L1.t * 6) > -0.8 and "#ffd0f0" or "#a06a90",
                 "center",
                 "#a02a6a"
             )
@@ -4128,21 +5123,21 @@ local __O = {};
                     local row = math.floor(i / 5)
                     local on = i == __L1.sel
                     local x = 22 + col * 186
-                    local y = 104 + row * 178 + if __t(on) then -4 else 0
+                    local y = 104 + row * 178 + (__t(on) and -4 or 0)
                     local r = __L1:rec(gm.id)
-                    local ____opt_352 = __get(r.solo, 0)
-                    if ____opt_352 ~= nil then
-                        ____opt_352 = ____opt_352.s
+                    local ____opt_544 = __get(r.solo, 0)
+                    if ____opt_544 ~= nil then
+                        ____opt_544 = ____opt_544.s
                     end
-                    local best = ____opt_352
+                    local best = ____opt_544
                     __L1:frame(
                         c,
                         x,
                         y,
                         172,
                         164,
-                        if __t(on) then "#3a2a40" else "#241a20",
-                        if __t(on) then "#fff3a0" else gm.color,
+                        __t(on) and "#3a2a40" or "#241a20",
+                        __t(on) and "#fff3a0" or gm.color,
                         "#3a2a2a"
                     )
                     __L1:R(
@@ -4173,7 +5168,7 @@ local __O = {};
                         x + 86,
                         y + 82,
                         9,
-                        if __t(on) then "#fff" else "#f0e0c0"
+                        __t(on) and "#fff" or "#f0e0c0"
                     )
                     __L1:txt(
                         c,
@@ -4185,14 +5180,22 @@ local __O = {};
                         x + 86,
                         y + 98,
                         9,
-                        if __t(on) then "#fff" else "#f0e0c0"
+                        __t(on) and "#fff" or "#f0e0c0"
                     )
-                    __L1:txt(
-                        c,
-                        __add(
-                            __add(if gm.duo == "coop" then "JUNTOS" else "CONTRA", " · ATÉ "),
-                            if __t(gm.max) then gm.max else 2
-                        ),
+                    local ____L1_txt_550 = __L1.txt
+                    local ____c_549 = c
+                    local ____add_548 = __add
+                    local ____add_result_547 = __add(gm.duo == "coop" and "JUNTOS" or "CONTRA", " · ATÉ ")
+                    local ____t_result_546
+                    if __t(gm.max) then
+                        ____t_result_546 = gm.max
+                    else
+                        ____t_result_546 = 2
+                    end
+                    ____L1_txt_550(
+                        __L1,
+                        ____c_549,
+                        ____add_548(____add_result_547, ____t_result_546),
                         x + 86,
                         y + 120,
                         8,
@@ -4200,9 +5203,18 @@ local __O = {};
                         "center",
                         nil
                     )
-                    __L1:txt(
-                        c,
-                        if __t(best) then __add("RECORDE ", best) else "SEM RECORDE",
+                    local ____L1_txt_553 = __L1.txt
+                    local ____c_552 = c
+                    local ____t_result_551
+                    if __t(best) then
+                        ____t_result_551 = __add("RECORDE ", best)
+                    else
+                        ____t_result_551 = "SEM RECORDE"
+                    end
+                    ____L1_txt_553(
+                        __L1,
+                        ____c_552,
+                        ____t_result_551,
                         x + 86,
                         y + 140,
                         8,
@@ -4386,15 +5398,15 @@ local __O = {};
                     local y = 92 + row * 186
                     local on = i == __L1.shopSel
                     local has = __call(__L1.data.unlocked, "includes", ____type)
-                    local tag = if __get(__L1.data.avatar, 0) == ____type then "P1" else if __get(__L1.data.avatar, 1) == ____type then "P2" else ""
+                    local tag = __get(__L1.data.avatar, 0) == ____type and "P1" or (__get(__L1.data.avatar, 1) == ____type and "P2" or "")
                     __L1:frame(
                         c,
                         x,
                         y,
                         118,
                         174,
-                        if __t(on) then "#3a2a40" else "#241a20",
-                        if __t(on) then "#fff3a0" else if __t(has) then "#8ad070" else "#7a6a5a",
+                        __t(on) and "#3a2a40" or "#241a20",
+                        __t(on) and "#fff3a0" or (__t(has) and "#8ad070" or "#7a6a5a"),
                         "#3a2a2a"
                     )
                     c:save()
@@ -4404,12 +5416,18 @@ local __O = {};
                     if not __t(has) then
                         c.globalAlpha = 0.35
                     end
-                    __L1:hero(
-                        c,
-                        ____type,
-                        x + 59,
-                        y + 118,
-                        {scale = 1, frame = if __t(on) then __L1.t else 0, moving = on}
+                    local ____L1_hero_556 = __L1.hero
+                    local ____array_555 = __TS__SparseArrayNew(c, ____type, x + 59, y + 118)
+                    local ____t_result_554
+                    if __t(on) then
+                        ____t_result_554 = __L1.t
+                    else
+                        ____t_result_554 = 0
+                    end
+                    __TS__SparseArrayPush(____array_555, {scale = 1, frame = ____t_result_554, moving = on})
+                    ____L1_hero_556(
+                        __L1,
+                        __TS__SparseArraySpread(____array_555)
                     )
                     c:restore()
                     __L1:txt(
@@ -4420,15 +5438,37 @@ local __O = {};
                         9,
                         "#fff"
                     )
-                    __L1:txt(
-                        c,
-                        if __t(has) then if __t(tag) then tag else "LIBERADO" else __add("◎ ", price),
+                    local ____L1_txt_561 = __L1.txt
+                    local ____array_560 = __TS__SparseArrayNew(c)
+                    local ____t_result_558
+                    if __t(has) then
+                        local ____t_result_557
+                        if __t(tag) then
+                            ____t_result_557 = tag
+                        else
+                            ____t_result_557 = "LIBERADO"
+                        end
+                        ____t_result_558 = ____t_result_557
+                    else
+                        ____t_result_558 = __add("◎ ", price)
+                    end
+                    __TS__SparseArrayPush(
+                        ____array_560,
+                        ____t_result_558,
                         x + 59,
                         y + 158,
-                        9,
-                        if __t(tag) then __get(__L1.PLAYER_COL, if tag == "P1" then 0 else 1) else if __t(has) then "#8ad070" else "#ffd75a",
-                        "center",
-                        nil
+                        9
+                    )
+                    local ____t_result_559
+                    if __t(tag) then
+                        ____t_result_559 = __get(__L1.PLAYER_COL, tag == "P1" and 0 or 1)
+                    else
+                        ____t_result_559 = __t(has) and "#8ad070" or "#ffd75a"
+                    end
+                    __TS__SparseArrayPush(____array_560, ____t_result_559, "center", nil)
+                    ____L1_txt_561(
+                        __L1,
+                        __TS__SparseArraySpread(____array_560)
                     )
                     __call(
                         __L1.clicks,
@@ -4454,7 +5494,7 @@ local __O = {};
             local has = __call(__L1.data.unlocked, "includes", ____type)
             __L1:button(
                 c,
-                if __t(has) then "P1 (A)" else "COMPRAR (A)",
+                __t(has) and "P1 (A)" or "COMPRAR (A)",
                 300,
                 470,
                 170,
@@ -4486,8 +5526,8 @@ local __O = {};
                 end
             )
             if __t(__L1.shopMsg) then
-                local ____L1_shopMsg_354, ____t_355 = __L1.shopMsg, "t"
-                ____L1_shopMsg_354[____t_355] = ____L1_shopMsg_354[____t_355] - 1 / 60
+                local ____L1_shopMsg_562, ____t_563 = __L1.shopMsg, "t"
+                ____L1_shopMsg_562[____t_563] = ____L1_shopMsg_562[____t_563] - 1 / 60
                 __L1:txt(
                     c,
                     __L1.shopMsg.s,
@@ -4558,8 +5598,15 @@ local __O = {};
                 "#ffd75a",
                 "left"
             )
-            __call(
-                if __t(__L1.modeSel) then gm.rulesDuo else gm.rules,
+            local ____call_565 = __call
+            local ____t_result_564
+            if __t(__L1.modeSel) then
+                ____t_result_564 = gm.rulesDuo
+            else
+                ____t_result_564 = gm.rules
+            end
+            ____call_565(
+                ____t_result_564,
                 "forEach",
                 function(____, l, i) return __L1:txt(
                     c,
@@ -4581,7 +5628,13 @@ local __O = {};
                 "#ffd75a",
                 "left"
             )
-            local ctrl = if __t(__L1.modeSel) then __arrL({"P1: WASD + J (A) / K (B)", "P2: setas + Enter (A) / Shift direito (B)", "Controles e toque também funcionam"}, 3) else __arrL({"Setas ou WASD · A: J, Espaço ou Enter · B: K", "Controle (gamepad) e toque também funcionam"}, 2)
+            local ____t_result_566
+            if __t(__L1.modeSel) then
+                ____t_result_566 = __arrL({"P1: WASD + J (A) / K (B)", "P2: setas + Enter (A) / Shift direito (B)", "Controles e toque também funcionam"}, 3)
+            else
+                ____t_result_566 = __arrL({"Setas ou WASD · A: J, Espaço ou Enter · B: K", "Controle (gamepad) e toque também funcionam"}, 2)
+            end
+            local ctrl = ____t_result_566
             __call(
                 __call(gm.controls, "concat", ctrl),
                 "forEach",
@@ -4606,15 +5659,32 @@ local __O = {};
                 "#a08060",
                 "#3a2a2a"
             )
-            __L1:txt(
-                c,
-                __add("RANKING ", if __t(__L1.modeSel) then if gm.duo == "coop" then "DUPLA" else "VITÓRIAS" else "SOZINHO"),
+            local ____L1_txt_570 = __L1.txt
+            local ____c_569 = c
+            local ____add_568 = __add
+            local ____t_result_567
+            if __t(__L1.modeSel) then
+                ____t_result_567 = gm.duo == "coop" and "DUPLA" or "VITÓRIAS"
+            else
+                ____t_result_567 = "SOZINHO"
+            end
+            ____L1_txt_570(
+                __L1,
+                ____c_569,
+                ____add_568("RANKING ", ____t_result_567),
                 750,
                 166,
                 11,
                 "#ffd75a"
             )
-            if __t(if __t(__L1.modeSel) then gm.duo == "versus" else __L1.modeSel) then
+            local ____t_572 = __t
+            local ____t_result_571
+            if __t(__L1.modeSel) then
+                ____t_result_571 = gm.duo == "versus"
+            else
+                ____t_result_571 = __L1.modeSel
+            end
+            if ____t_572(____t_result_571) then
                 __L1:txt(
                     c,
                     __add(
@@ -4644,7 +5714,10 @@ local __O = {};
                     __get(__L1.PLAYER_COL, 1)
                 )
             else
-                local list = __get(r, if __t(__L1.modeSel) then "duo" else "solo")
+                local list = __get(
+                    r,
+                    __t(__L1.modeSel) and "duo" or "solo"
+                )
                 if not __t(__len(list)) then
                     __L1:txt(
                         c,
@@ -4670,7 +5743,7 @@ local __O = {};
                             640,
                             200 + i * 30,
                             13,
-                            if __t(i) then "#e8d8b0" else "#ffd75a",
+                            __t(i) and "#e8d8b0" or "#ffd75a",
                             "left"
                         )
                         __L1:txt(
@@ -4679,7 +5752,7 @@ local __O = {};
                             870,
                             200 + i * 30,
                             13,
-                            if __t(i) then "#e8d8b0" else "#ffd75a",
+                            __t(i) and "#e8d8b0" or "#ffd75a",
                             "right"
                         )
                     end
@@ -4702,13 +5775,25 @@ local __O = {};
             end
             if __t(__L1.tv) then
                 local n = __L1.tv:count()
-                local k = if __ge(n, 2) then math.min(n, if __t(gm.max) then gm.max else 2) else 1
+                local ____ge_result_574
+                if __ge(n, 2) then
+                    local ____t_result_573
+                    if __t(gm.max) then
+                        ____t_result_573 = gm.max
+                    else
+                        ____t_result_573 = 2
+                    end
+                    ____ge_result_574 = math.min(n, ____t_result_573)
+                else
+                    ____ge_result_574 = 1
+                end
+                local k = ____ge_result_574
                 __L1:button(
                     c,
                     __add(
                         __add(
                             __add("JOGAR NA TV · ", k),
-                            if k > 1 then " JOGADORES" else " JOGADOR"
+                            k > 1 and " JOGADORES" or " JOGADOR"
                         ),
                         " (A)"
                     ),
@@ -4717,7 +5802,10 @@ local __O = {};
                     440,
                     56,
                     true,
-                    function() return __L1:startGame(gm, if __ge(n, 2) then "duo" else "solo") end
+                    function() return __L1:startGame(
+                        gm,
+                        __ge(n, 2) and "duo" or "solo"
+                    ) end
                 )
                 __L1:button(
                     c,
@@ -4731,17 +5819,41 @@ local __O = {};
                         __L1.screen = "menu"
                     end
                 )
-                if __gt(n, if __t(gm.max) then gm.max else 2) then
-                    __L1:txt(
-                        c,
-                        __add(
-                            __add(
-                                __add(
-                                    __add("Este jogo é para até ", if __t(gm.max) then gm.max else 2),
-                                    " jogadores: jogam P1"
-                                ),
-                                if __gt(gm.max, 2) then __add(" a P", gm.max) else " e P2"
-                            ),
+                local ____gt_576 = __gt
+                local ____t_result_575
+                if __t(gm.max) then
+                    ____t_result_575 = gm.max
+                else
+                    ____t_result_575 = 2
+                end
+                if ____gt_576(n, ____t_result_575) then
+                    local ____L1_txt_585 = __L1.txt
+                    local ____c_584 = c
+                    local ____add_583 = __add
+                    local ____add_582 = __add
+                    local ____add_579 = __add
+                    local ____add_578 = __add
+                    local ____t_result_577
+                    if __t(gm.max) then
+                        ____t_result_577 = gm.max
+                    else
+                        ____t_result_577 = 2
+                    end
+                    local ____add_579_result_581 = ____add_579(
+                        ____add_578("Este jogo é para até ", ____t_result_577),
+                        " jogadores: jogam P1"
+                    )
+                    local ____gt_result_580
+                    if __gt(gm.max, 2) then
+                        ____gt_result_580 = __add(" a P", gm.max)
+                    else
+                        ____gt_result_580 = " e P2"
+                    end
+                    ____L1_txt_585(
+                        __L1,
+                        ____c_584,
+                        ____add_583(
+                            ____add_582(____add_579_result_581, ____gt_result_580),
                             "."
                         ),
                         __L1.W / 2,
@@ -4752,81 +5864,90 @@ local __O = {};
                         nil
                     )
                 end
-            elseif __t(if __t(__L1.net) then __L1.net.live else __L1.net) then
-                __L1:button(
-                    c,
-                    if __t(__L1.net.peerOnline) then "JOGAR ONLINE (A)" else "ESPERANDO O AMIGO…",
-                    300,
-                    410,
-                    390,
-                    56,
-                    true,
-                    function()
-                        if __t(__L1.net.peerOnline) then
-                            __L1:startGame(gm, "duo")
-                        end
-                    end
-                )
-                __L1:button(
-                    c,
-                    "VOLTAR",
-                    60,
-                    410,
-                    140,
-                    56,
-                    false,
-                    function()
-                        __L1.screen = "menu"
-                    end
-                )
             else
-                __L1:button(
-                    c,
-                    "SOZINHO",
-                    300,
-                    410,
-                    170,
-                    56,
-                    __L1.modeSel == 0,
-                    function()
-                        if __L1.modeSel == 0 then
-                            __L1:startGame(gm, "solo")
-                        else
-                            __L1.modeSel = 0
-                            __L1:sfx("move")
+                local ____t_587 = __t
+                local ____t_result_586
+                if __t(__L1.net) then
+                    ____t_result_586 = __L1.net.live
+                else
+                    ____t_result_586 = __L1.net
+                end
+                if ____t_587(____t_result_586) then
+                    __L1:button(
+                        c,
+                        __t(__L1.net.peerOnline) and "JOGAR ONLINE (A)" or "ESPERANDO O AMIGO…",
+                        300,
+                        410,
+                        390,
+                        56,
+                        true,
+                        function()
+                            if __t(__L1.net.peerOnline) then
+                                __L1:startGame(gm, "duo")
+                            end
                         end
-                    end
-                )
-                __L1:button(
-                    c,
-                    if gm.duo == "coop" then "DUPLA JUNTOS" else "DUPLA CONTRA",
-                    490,
-                    410,
-                    200,
-                    56,
-                    __L1.modeSel == 1,
-                    function()
-                        if __L1.modeSel == 1 then
-                            __L1:startGame(gm, "duo")
-                        else
-                            __L1.modeSel = 1
-                            __L1:sfx("move")
+                    )
+                    __L1:button(
+                        c,
+                        "VOLTAR",
+                        60,
+                        410,
+                        140,
+                        56,
+                        false,
+                        function()
+                            __L1.screen = "menu"
                         end
-                    end
-                )
-                __L1:button(
-                    c,
-                    "VOLTAR",
-                    60,
-                    410,
-                    140,
-                    56,
-                    false,
-                    function()
-                        __L1.screen = "menu"
-                        __L1:sfx("menu")
-                    end
-                )
+                    )
+                else
+                    __L1:button(
+                        c,
+                        "SOZINHO",
+                        300,
+                        410,
+                        170,
+                        56,
+                        __L1.modeSel == 0,
+                        function()
+                            if __L1.modeSel == 0 then
+                                __L1:startGame(gm, "solo")
+                            else
+                                __L1.modeSel = 0
+                                __L1:sfx("move")
+                            end
+                        end
+                    )
+                    __L1:button(
+                        c,
+                        gm.duo == "coop" and "DUPLA JUNTOS" or "DUPLA CONTRA",
+                        490,
+                        410,
+                        200,
+                        56,
+                        __L1.modeSel == 1,
+                        function()
+                            if __L1.modeSel == 1 then
+                                __L1:startGame(gm, "duo")
+                            else
+                                __L1.modeSel = 1
+                                __L1:sfx("move")
+                            end
+                        end
+                    )
+                    __L1:button(
+                        c,
+                        "VOLTAR",
+                        60,
+                        410,
+                        140,
+                        56,
+                        false,
+                        function()
+                            __L1.screen = "menu"
+                            __L1:sfx("menu")
+                        end
+                    )
+                end
             end
             __L1:txt(
                 c,
@@ -4856,15 +5977,24 @@ local __O = {};
             local versus = __L1.st.mode == "duo" and __L1.game.duo == "versus"
             __L1:txt(
                 c,
-                if __t(versus) then "FIM DE JOGO" else if res.win == false then "NÃO FOI DESSA VEZ" else "FIM DE JOGO",
+                __t(versus) and "FIM DE JOGO" or (res.win == false and "NÃO FOI DESSA VEZ" or "FIM DE JOGO"),
                 __L1.W / 2,
                 84,
                 24,
                 "#fff"
             )
-            __L1:txt(
-                c,
-                if __t(res.text) then res.text else "",
+            local ____L1_txt_590 = __L1.txt
+            local ____c_589 = c
+            local ____t_result_588
+            if __t(res.text) then
+                ____t_result_588 = res.text
+            else
+                ____t_result_588 = ""
+            end
+            ____L1_txt_590(
+                __L1,
+                ____c_589,
+                ____t_result_588,
                 __L1.W / 2,
                 120,
                 11,
@@ -4884,14 +6014,14 @@ local __O = {};
                 end
                 __L1:txt(
                     c,
-                    if __t(res.winner == nil or res.winner == nil) then "EMPATE" else __add(
+                    __t(res.winner == nil or res.winner == nil) and "EMPATE" or __add(
                         __get(__L1.PLAYER_NAME, res.winner),
                         " VENCEU!"
                     ),
                     __L1.W / 2,
                     296,
                     20,
-                    if __t(res.winner == nil or res.winner == nil) then "#fff" else __get(__L1.PLAYER_COL, res.winner)
+                    __t(res.winner == nil or res.winner == nil) and "#fff" or __get(__L1.PLAYER_COL, res.winner)
                 )
             else
                 __L1:txt(
@@ -4927,7 +6057,7 @@ local __O = {};
                                 "MEDALHA DE ",
                                 __get(__L1.MEDALS, sm.medal)
                             ),
-                            if __t(sm.newMedal) then " · NOVA!" else ""
+                            __t(sm.newMedal) and " · NOVA!" or ""
                         ),
                         __L1.W / 2,
                         306,
@@ -4973,8 +6103,8 @@ local __O = {};
                             388,
                             44,
                             54,
-                            if i == __L1.initials.i then "#4a3a20" else "#1e1612",
-                            if i == __L1.initials.i then "#fff3a0" else "#a08060",
+                            i == __L1.initials.i and "#4a3a20" or "#1e1612",
+                            i == __L1.initials.i and "#fff3a0" or "#a08060",
                             "#3a2a2a"
                         )
                         __L1:txt(
@@ -5035,44 +6165,59 @@ local __O = {};
                     "center",
                     nil
                 )
-            elseif __t(if __t(__L1.net) then __L1.net.role == "guest" else __L1.net) then
-                __L1:txt(
-                    c,
-                    "O anfitrião escolhe o próximo jogo…",
-                    __L1.W / 2,
-                    420,
-                    12,
-                    "#e8d8b0"
-                )
             else
-                __L1:button(
-                    c,
-                    "DE NOVO",
-                    300,
-                    400,
-                    170,
-                    56,
-                    __L1.overSel == 0,
-                    function() return __L1:startGame(__L1.game, __L1.st.mode) end
-                )
-                __L1:button(
-                    c,
-                    "MENU",
-                    490,
-                    400,
-                    170,
-                    56,
-                    __L1.overSel == 1,
-                    function()
-                        __L1.screen = "menu"
-                        __L1:sfx("menu")
-                    end
-                )
+                local ____t_592 = __t
+                local ____t_result_591
+                if __t(__L1.net) then
+                    ____t_result_591 = __L1.net.role == "guest"
+                else
+                    ____t_result_591 = __L1.net
+                end
+                if ____t_592(____t_result_591) then
+                    __L1:txt(
+                        c,
+                        "O anfitrião escolhe o próximo jogo…",
+                        __L1.W / 2,
+                        420,
+                        12,
+                        "#e8d8b0"
+                    )
+                else
+                    __L1:button(
+                        c,
+                        "DE NOVO",
+                        300,
+                        400,
+                        170,
+                        56,
+                        __L1.overSel == 0,
+                        function() return __L1:startGame(__L1.game, __L1.st.mode) end
+                    )
+                    __L1:button(
+                        c,
+                        "MENU",
+                        490,
+                        400,
+                        170,
+                        56,
+                        __L1.overSel == 1,
+                        function()
+                            __L1.screen = "menu"
+                            __L1:sfx("menu")
+                        end
+                    )
+                end
             end
         end
     end
     __L1.drawPlay = function(self, c)
-        local sh = if __gt(__L1.st.shake, 0) then math.floor((math.random() - 0.5) * 8 / 2 + 0.5) * 2 else 0
+        local ____gt_result_593
+        if __gt(__L1.st.shake, 0) then
+            ____gt_result_593 = math.floor((math.random() - 0.5) * 8 / 2 + 0.5) * 2
+        else
+            ____gt_result_593 = 0
+        end
+        local sh = ____gt_result_593
         __L1.g:save()
         __L1.g.imageSmoothingEnabled = false
         __L1.g:clearRect(0, 0, __L1.LW, __L1.LH)
@@ -5114,9 +6259,18 @@ local __O = {};
             c.fillStyle = "rgba(10,8,12,.55)"
             c:fillRect(0, 0, __L1.W, __L1.H)
             local n = math.ceil(__L1.cd)
-            __L1:txt(
-                c,
-                if n > 0 then tostring(n) else "VAI!",
+            local ____L1_txt_596 = __L1.txt
+            local ____c_595 = c
+            local ____temp_594
+            if n > 0 then
+                ____temp_594 = tostring(n)
+            else
+                ____temp_594 = "VAI!"
+            end
+            ____L1_txt_596(
+                __L1,
+                ____c_595,
+                ____temp_594,
                 __L1.W / 2,
                 220,
                 64,
@@ -5167,10 +6321,17 @@ local __O = {};
                 )
             end
         end
-        if __t(if __t(__L1.st.ended) then __L1.screen == "play" else __L1.st.ended) then
+        local ____t_598 = __t
+        local ____t_result_597
+        if __t(__L1.st.ended) then
+            ____t_result_597 = __L1.screen == "play"
+        else
+            ____t_result_597 = __L1.st.ended
+        end
+        if ____t_598(____t_result_597) then
             __L1:txt(
                 c,
-                if __t(__L1.st.mode == "duo" and __L1.game.duo == "versus") then "FIM!" else "FIM DE JOGO",
+                __t(__L1.st.mode == "duo" and __L1.game.duo == "versus") and "FIM!" or "FIM DE JOGO",
                 __L1.W / 2,
                 250,
                 40,
@@ -5230,32 +6391,88 @@ local __O = {};
         if not __t(__L1.open) then
             return
         end
-        local ____t_357 = __t
-        local ____temp_356 = (now - __L1.last) / 1000
-        __O[1232] = ____temp_356
-        local dt = math.min(0.05, if ____t_357(____temp_356) then __O[1232] else 0)
+        local ____t_result_601
+        local ____t_600 = __t
+        local ____temp_599 = (now - __L1.last) / 1000
+        __O[1237] = ____temp_599
+        if ____t_600(____temp_599) then
+            ____t_result_601 = __O[1237]
+        else
+            ____t_result_601 = 0
+        end
+        local dt = math.min(0.05, ____t_result_601)
         __L1.last = now
         __L1.t = __L1.t + dt
         __L1:pollInput()
-        local ____t_360 = __t
-        local ____t_359 = __t
-        local ____temp_358 = if __t(__L1.net) then __L1.net.role == "guest" else __L1.net
-        __O[1233] = ____temp_358
-        if ____t_360(if ____t_359(____temp_358) then __L1.net.live else __O[1233]) then
+        local ____t_605 = __t
+        local ____t_result_604
+        local ____t_603 = __t
+        local ____t_result_602
+        if __t(__L1.net) then
+            ____t_result_602 = __L1.net.role == "guest"
+        else
+            ____t_result_602 = __L1.net
+        end
+        __O[1238] = ____t_result_602
+        if ____t_603(____t_result_602) then
+            ____t_result_604 = __L1.net.live
+        else
+            ____t_result_604 = __O[1238]
+        end
+        if ____t_605(____t_result_604) then
             __L1:guestTick()
         else
-            local ____t_366 = __t
-            local ____t_364 = __t
-            local ____t_362 = __t
-            local ____temp_361 = if __t(__L1.net) then __L1.net.role == "host" else __L1.net
-            __O[1234] = ____temp_361
-            local ____temp_363 = if ____t_362(____temp_361) then __L1.net.live else __O[1234]
-            __O[1235] = ____temp_363
-            local ____temp_365 = if ____t_364(____temp_363) then not __t(__L1:peerLive()) else __O[1235]
-            __O[1236] = ____temp_365
-            local away = if ____t_366(____temp_365) then __L1.screen == "play" or __L1.screen == "count" else __O[1236]
-            __L1:updateScreens(if __t(if __t(__L1.paused) then __L1.paused else away) then 0 else dt)
-            if __t(if __t(__L1.net) then __L1.net.role == "host" else __L1.net) then
+            local ____t_result_612
+            local ____t_611 = __t
+            local ____t_result_610
+            local ____t_609 = __t
+            local ____t_result_608
+            local ____t_607 = __t
+            local ____t_result_606
+            if __t(__L1.net) then
+                ____t_result_606 = __L1.net.role == "host"
+            else
+                ____t_result_606 = __L1.net
+            end
+            __O[1239] = ____t_result_606
+            if ____t_607(____t_result_606) then
+                ____t_result_608 = __L1.net.live
+            else
+                ____t_result_608 = __O[1239]
+            end
+            __O[1240] = ____t_result_608
+            if ____t_609(____t_result_608) then
+                ____t_result_610 = not __t(__L1:peerLive())
+            else
+                ____t_result_610 = __O[1240]
+            end
+            __O[1241] = ____t_result_610
+            if ____t_611(____t_result_610) then
+                ____t_result_612 = __L1.screen == "play" or __L1.screen == "count"
+            else
+                ____t_result_612 = __O[1241]
+            end
+            local away = ____t_result_612
+            local ____L1_updateScreens_615 = __L1.updateScreens
+            local ____t_614 = __t
+            local ____t_result_613
+            if __t(__L1.paused) then
+                ____t_result_613 = __L1.paused
+            else
+                ____t_result_613 = away
+            end
+            ____L1_updateScreens_615(
+                __L1,
+                ____t_614(____t_result_613) and 0 or dt
+            )
+            local ____t_617 = __t
+            local ____t_result_616
+            if __t(__L1.net) then
+                ____t_result_616 = __L1.net.role == "host"
+            else
+                ____t_result_616 = __L1.net
+            end
+            if ____t_617(____t_result_616) then
                 __L1:hostTick(now)
             end
         end
@@ -5264,7 +6481,14 @@ local __O = {};
         if __t(__L1.screen == "play" or __L1.screen == "count") then
             __L1:drawPlay(__L1.ctx)
         else
-            if __t(if __t(__L1.st) then __L1.screen == "over" else __L1.st) then
+            local ____t_619 = __t
+            local ____t_result_618
+            if __t(__L1.st) then
+                ____t_result_618 = __L1.screen == "over"
+            else
+                ____t_result_618 = __L1.st
+            end
+            if ____t_619(____t_result_618) then
                 __L1:drawPlay(__L1.ctx)
             end
             __L1:drawScreens(__L1.ctx)
@@ -5274,11 +6498,17 @@ local __O = {};
         end
         if __t(__L1.tv) then
             __L1:tvSync()
-            local ____t_369 = __t
-            local ____t_368 = __t
-            local ____temp_367 = __L1.screen ~= "tv"
-            __O[1237] = ____temp_367
-            if ____t_369(if ____t_368(____temp_367) then __L1.tv.code else __O[1237]) then
+            local ____t_623 = __t
+            local ____t_result_622
+            local ____t_621 = __t
+            local ____temp_620 = __L1.screen ~= "tv"
+            __O[1242] = ____temp_620
+            if ____t_621(____temp_620) then
+                ____t_result_622 = __L1.tv.code
+            else
+                ____t_result_622 = __O[1242]
+            end
+            if ____t_623(____t_result_622) then
                 __L1.ctx:save()
                 __L1.ctx.fillStyle = "rgba(10,14,24,.7)"
                 __L1.ctx:fillRect(__L1.W - 230, __L1.H - 22, 226, 20)
@@ -5295,7 +6525,7 @@ local __O = {};
                             ),
                             " CELULAR"
                         ),
-                        if __len(__L1.tv.phones) == 1 then "" else "ES"
+                        __len(__L1.tv.phones) == 1 and "" or "ES"
                     ),
                     __L1.W - 117,
                     __L1.H - 12,
@@ -5309,12 +6539,37 @@ local __O = {};
         end
         __L1.ctx:restore()
         if __t(__L1.touchUI) then
-            local ____L1_touchUI_dataset_373 = __L1.touchUI.dataset
-            local ____t_372 = __t
-            local ____t_371 = __t
-            local ____temp_370 = __L1.screen == "play" or __L1.screen == "count"
-            __O[1238] = ____temp_370
-            ____L1_touchUI_dataset_373.mode = if __t(__L1.tv) then "menu" else if ____t_372(if ____t_371(____temp_370) then not __t(__L1.paused) else __O[1238]) then if __t(if __t(__L1.solo) then __L1.solo else __L1.net) then "solo" else "duo" else "menu"
+            local ____L1_touchUI_dataset_632 = __L1.touchUI.dataset
+            local ____t_result_631
+            if __t(__L1.tv) then
+                ____t_result_631 = "menu"
+            else
+                local ____t_result_630
+                local ____t_627 = __t
+                local ____t_result_626
+                local ____t_625 = __t
+                local ____temp_624 = __L1.screen == "play" or __L1.screen == "count"
+                __O[1243] = ____temp_624
+                if ____t_625(____temp_624) then
+                    ____t_result_626 = not __t(__L1.paused)
+                else
+                    ____t_result_626 = __O[1243]
+                end
+                if ____t_627(____t_result_626) then
+                    local ____t_629 = __t
+                    local ____t_result_628
+                    if __t(__L1.solo) then
+                        ____t_result_628 = __L1.solo
+                    else
+                        ____t_result_628 = __L1.net
+                    end
+                    ____t_result_630 = ____t_629(____t_result_628) and "solo" or "duo"
+                else
+                    ____t_result_630 = "menu"
+                end
+                ____t_result_631 = ____t_result_630
+            end
+            ____L1_touchUI_dataset_632.mode = ____t_result_631
         end
         __L1.raf = window:requestAnimationFrame(__L1.loop)
     end
@@ -5381,10 +6636,24 @@ local __O = {};
                     b,
                     function(____, on)
                         if __t(x) then
-                            __get(__L1.touch, i).x = if __t(on) then x else if __get(__L1.touch, i).x == x then 0 else __get(__L1.touch, i).x
+                            local ____get_result_634 = __get(__L1.touch, i)
+                            local ____t_result_633
+                            if __t(on) then
+                                ____t_result_633 = x
+                            else
+                                ____t_result_633 = __get(__L1.touch, i).x == x and 0 or __get(__L1.touch, i).x
+                            end
+                            ____get_result_634.x = ____t_result_633
                         end
                         if __t(y) then
-                            __get(__L1.touch, i).y = if __t(on) then y else if __get(__L1.touch, i).y == y then 0 else __get(__L1.touch, i).y
+                            local ____get_result_636 = __get(__L1.touch, i)
+                            local ____t_result_635
+                            if __t(on) then
+                                ____t_result_635 = y
+                            else
+                                ____t_result_635 = __get(__L1.touch, i).y == y and 0 or __get(__L1.touch, i).y
+                            end
+                            ____get_result_636.y = ____t_result_635
                         end
                     end
                 )
@@ -5421,33 +6690,50 @@ local __O = {};
             pad(nil, 1, "right")
         )
         __L1.root:append(__L1.cv, __L1.touchUI, close)
-        local ____t_375 = __t
-        local ____temp_374 = window.document:getElementById("gameShell")
-        __O[1239] = ____temp_374
-        __D[1] = if ____t_375(____temp_374) then __O[1239] else window.document.body:append(__L1.root)
+        local ____t_result_639
+        local ____t_638 = __t
+        local ____temp_637 = window.document:getElementById("gameShell")
+        __O[1244] = ____temp_637
+        if ____t_638(____temp_637) then
+            ____t_result_639 = __O[1244]
+        else
+            ____t_result_639 = window.document.body
+        end
+        ____t_result_639:append(__L1.root)
         __L1.cv:addEventListener(
             "pointerdown",
             function(____, e)
                 local r = __L1.cv:getBoundingClientRect()
                 local x = (e.clientX - r.left) / r.width * __L1.W
                 local y = (e.clientY - r.top) / r.height * __L1.H
-                local ____t_385 = __t
-                local ____t_382 = __t
-                local ____t_377 = __t
-                local ____temp_376 = __L1.screen == "play" and not __t(__L1.paused)
-                __O[1240] = ____temp_376
-                local ____t_380 = __t
-                local ____opt_378 = __L1.st
-                if ____opt_378 ~= nil then
-                    ____opt_378 = ____opt_378.ended
+                local ____t_650 = __t
+                local ____t_result_649
+                local ____t_646 = __t
+                local ____t_result_645
+                local ____t_641 = __t
+                local ____temp_640 = __L1.screen == "play" and not __t(__L1.paused)
+                __O[1245] = ____temp_640
+                if ____t_641(____temp_640) then
+                    local ____t_644 = __t
+                    local ____opt_642 = __L1.st
+                    if ____opt_642 ~= nil then
+                        ____opt_642 = ____opt_642.ended
+                    end
+                    ____t_result_645 = not ____t_644(____opt_642)
+                else
+                    ____t_result_645 = __O[1245]
                 end
-                local ____temp_381 = if ____t_377(____temp_376) then not ____t_380(____opt_378) else __O[1240]
-                __O[1241] = ____temp_381
-                local ____opt_383 = __L1.game
-                if ____opt_383 ~= nil then
-                    ____opt_383 = ____opt_383.tap
+                __O[1246] = ____t_result_645
+                if ____t_646(____t_result_645) then
+                    local ____opt_647 = __L1.game
+                    if ____opt_647 ~= nil then
+                        ____opt_647 = ____opt_647.tap
+                    end
+                    ____t_result_649 = ____opt_647
+                else
+                    ____t_result_649 = __O[1246]
                 end
-                if ____t_385(if ____t_382(____temp_381) then ____opt_383 else __O[1241]) then
+                if ____t_650(____t_result_649) then
                     e:preventDefault()
                     __L1.game:tap(__L1.st, x / 2, y / 2)
                     return
@@ -5456,20 +6742,31 @@ local __O = {};
                     __call(__L1.clicks, "slice"),
                     "reverse"
                 ))) do
-                    local ____t_390 = __t
-                    local ____t_389 = __t
-                    local ____t_387 = __t
-                    local ____temp_386 = __ge(x, k.x) and __le(
+                    local ____t_656 = __t
+                    local ____t_result_655
+                    local ____t_654 = __t
+                    local ____t_result_653
+                    local ____t_652 = __t
+                    local ____temp_651 = __ge(x, k.x) and __le(
                         x,
                         __add(k.x, k.w)
                     )
-                    __O[1242] = ____temp_386
-                    local ____temp_388 = if ____t_387(____temp_386) then __ge(y, k.y) else __O[1242]
-                    __O[1243] = ____temp_388
-                    __D[1] = if ____t_390(if ____t_389(____temp_388) then __le(
-                        y,
-                        __add(k.y, k.h)
-                    ) else __O[1243]) then
+                    __O[1247] = ____temp_651
+                    if ____t_652(____temp_651) then
+                        ____t_result_653 = __ge(y, k.y)
+                    else
+                        ____t_result_653 = __O[1247]
+                    end
+                    __O[1248] = ____t_result_653
+                    if ____t_654(____t_result_653) then
+                        ____t_result_655 = __le(
+                            y,
+                            __add(k.y, k.h)
+                        )
+                    else
+                        ____t_result_655 = __O[1248]
+                    end
+                    if ____t_656(____t_result_655) then
                         e:preventDefault()
                         k:act()
                         return
@@ -5480,24 +6777,30 @@ local __O = {};
         window:addEventListener(
             "keydown",
             function(____, e)
-                local ____t_394 = __t
-                local ____temp_393 = not __t(__L1.open)
-                if not ____temp_393 then
-                    local ____opt_391 = e.target
-                    ____temp_393 = (____opt_391 and ____opt_391.tagName) == "INPUT"
+                local ____t_660 = __t
+                local ____temp_659 = not __t(__L1.open)
+                if not ____temp_659 then
+                    local ____opt_657 = e.target
+                    ____temp_659 = (____opt_657 and ____opt_657.tagName) == "INPUT"
                 end
-                if ____t_394(____temp_393) then
+                if ____t_660(____temp_659) then
                     return
                 end
                 if __t(e.code == "Escape" or e.code == "Backspace") then
                     e:preventDefault()
                     __L1:back()
                 else
-                    local ____t_397 = __t
-                    local ____t_396 = __t
-                    local ____temp_395 = e.code == "KeyP"
-                    __O[1244] = ____temp_395
-                    if ____t_397(if ____t_396(____temp_395) then __L1.screen == "play" or __L1.screen == "count" else __O[1244]) then
+                    local ____t_664 = __t
+                    local ____t_result_663
+                    local ____t_662 = __t
+                    local ____temp_661 = e.code == "KeyP"
+                    __O[1249] = ____temp_661
+                    if ____t_662(____temp_661) then
+                        ____t_result_663 = __L1.screen == "play" or __L1.screen == "count"
+                    else
+                        ____t_result_663 = __O[1249]
+                    end
+                    if ____t_664(____t_result_663) then
                         __L1:back()
                     end
                 end
@@ -5505,37 +6808,75 @@ local __O = {};
                 if not __t(e["repeat"]) then
                     __call(__L1.latch, "add", e.code)
                 end
-                local ____t_404 = __t
-                local ____t_403 = __t
-                local ____t_401 = __t
-                local ____t_399 = __t
-                local ____temp_398 = e.code == "KeyO" and __L1.screen == "menu"
-                __O[1245] = ____temp_398
-                local ____temp_400 = if ____t_399(____temp_398) then not __t(__L1.net) else __O[1245]
-                __O[1246] = ____temp_400
-                local ____temp_402 = if ____t_401(____temp_400) then not __t(__L1.tv) else __O[1246]
-                __O[1247] = ____temp_402
-                if ____t_404(if ____t_403(____temp_402) then not __t(e["repeat"]) else __O[1247]) then
+                local ____t_672 = __t
+                local ____t_result_671
+                local ____t_670 = __t
+                local ____t_result_669
+                local ____t_668 = __t
+                local ____t_result_667
+                local ____t_666 = __t
+                local ____temp_665 = e.code == "KeyO" and __L1.screen == "menu"
+                __O[1250] = ____temp_665
+                if ____t_666(____temp_665) then
+                    ____t_result_667 = not __t(__L1.net)
+                else
+                    ____t_result_667 = __O[1250]
+                end
+                __O[1251] = ____t_result_667
+                if ____t_668(____t_result_667) then
+                    ____t_result_669 = not __t(__L1.tv)
+                else
+                    ____t_result_669 = __O[1251]
+                end
+                __O[1252] = ____t_result_669
+                if ____t_670(____t_result_669) then
+                    ____t_result_671 = not __t(e["repeat"])
+                else
+                    ____t_result_671 = __O[1252]
+                end
+                if ____t_672(____t_result_671) then
                     __L1:openOnline()
                 end
-                local ____t_409 = __t
-                local ____t_408 = __t
-                local ____t_406 = __t
-                local ____temp_405 = e.code == "KeyT" and __L1.screen == "menu"
-                __O[1248] = ____temp_405
-                local ____temp_407 = if ____t_406(____temp_405) then not __t(__L1.net) else __O[1248]
-                __O[1249] = ____temp_407
-                if ____t_409(if ____t_408(____temp_407) then not __t(e["repeat"]) else __O[1249]) then
+                local ____t_678 = __t
+                local ____t_result_677
+                local ____t_676 = __t
+                local ____t_result_675
+                local ____t_674 = __t
+                local ____temp_673 = e.code == "KeyT" and __L1.screen == "menu"
+                __O[1253] = ____temp_673
+                if ____t_674(____temp_673) then
+                    ____t_result_675 = not __t(__L1.net)
+                else
+                    ____t_result_675 = __O[1253]
+                end
+                __O[1254] = ____t_result_675
+                if ____t_676(____t_result_675) then
+                    ____t_result_677 = not __t(e["repeat"])
+                else
+                    ____t_result_677 = __O[1254]
+                end
+                if ____t_678(____t_result_677) then
                     __L1:openTV()
                 end
-                local ____t_414 = __t
-                local ____t_413 = __t
-                local ____t_411 = __t
-                local ____call_result_410 = __call(e.code, "startsWith", "Arrow")
-                __O[1250] = ____call_result_410
-                local ____temp_412 = if ____t_411(____call_result_410) then __O[1250] else e.code == "Space"
-                __O[1251] = ____temp_412
-                if ____t_414(if ____t_413(____temp_412) then __O[1251] else e.code == "Enter") then
+                local ____t_684 = __t
+                local ____t_result_683
+                local ____t_682 = __t
+                local ____t_result_681
+                local ____t_680 = __t
+                local ____call_result_679 = __call(e.code, "startsWith", "Arrow")
+                __O[1255] = ____call_result_679
+                if ____t_680(____call_result_679) then
+                    ____t_result_681 = __O[1255]
+                else
+                    ____t_result_681 = e.code == "Space"
+                end
+                __O[1256] = ____t_result_681
+                if ____t_682(____t_result_681) then
+                    ____t_result_683 = __O[1256]
+                else
+                    ____t_result_683 = e.code == "Enter"
+                end
+                if ____t_684(____t_result_683) then
                     e:preventDefault()
                 end
                 e:stopImmediatePropagation()
@@ -5589,13 +6930,25 @@ local __O = {};
         if __t(__L1.open) then
             return
         end
-        __L1.from = if __t(opts.from) then opts.from else nil
-        local ____t_417 = __t
-        local ____opt_415 = window.Game
-        if ____opt_415 ~= nil then
-            ____opt_415 = ____opt_415.soundOn
+        local ____t_result_685
+        if __t(opts.from) then
+            ____t_result_685 = opts.from
+        else
+            ____t_result_685 = nil
         end
-        __L1.muted = if ____t_417(____opt_415) then not __t(window.Game:soundOn()) and __L1.from ~= "title" else false
+        __L1.from = ____t_result_685
+        local ____t_result_689
+        local ____t_688 = __t
+        local ____opt_686 = window.Game
+        if ____opt_686 ~= nil then
+            ____opt_686 = ____opt_686.soundOn
+        end
+        if ____t_688(____opt_686) then
+            ____t_result_689 = not __t(window.Game:soundOn()) and __L1.from ~= "title"
+        else
+            ____t_result_689 = false
+        end
+        __L1.muted = ____t_result_689
         __L1.open = true
         __L1.root.hidden = false
         __L1.screen = "menu"
@@ -5619,9 +6972,9 @@ local __O = {};
             function(____, x) return __assign(x, {x = 0, y = 0, a = false, b = false}) end
         )
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = true}}))
-        local ____callq_420 = __callq
-        local ____opt_418 = window.document:getElementById("gameShell")
-        ____callq_420(____opt_418 and ____opt_418.classList, "add", "is-fliperama")
+        local ____callq_692 = __callq
+        local ____opt_690 = window.document:getElementById("gameShell")
+        ____callq_692(____opt_690 and ____opt_690.classList, "add", "is-fliperama")
         __L1.last = window.performance:now()
         __L1.raf = window:requestAnimationFrame(__L1.loop)
         window:setTimeout(
@@ -5641,24 +6994,30 @@ local __O = {};
             __set(__L1.keys, k, false)
         end
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-        local ____opt_421 = window.document:getElementById("gameShell")
-        if ____opt_421 ~= nil then
-            ____opt_421.classList:remove("is-fliperama")
+        local ____opt_693 = window.document:getElementById("gameShell")
+        if ____opt_693 ~= nil then
+            ____opt_693.classList:remove("is-fliperama")
         end
         __L1:updateInventory()
-        local ____opt_425 = window.document:getElementById("gameCanvas")
-        local ____opt_423 = ____opt_425 and ____opt_425.focus
-        if ____opt_423 ~= nil then
-            ____opt_423(____opt_425)
+        local ____opt_697 = window.document:getElementById("gameCanvas")
+        local ____opt_695 = ____opt_697 and ____opt_697.focus
+        if ____opt_695 ~= nil then
+            ____opt_695(____opt_697)
         end
     end
     __L1.near = function(self, scene, x)
-        local ____call_429 = __call
-        local ____t_428 = __t
-        local ____get_result_427 = __get(__L1.CABINETS, scene)
-        __O[1252] = ____get_result_427
-        return ____call_429(
-            if ____t_428(____get_result_427) then __O[1252] else __arrL({}, 0),
+        local ____call_702 = __call
+        local ____t_result_701
+        local ____t_700 = __t
+        local ____get_result_699 = __get(__L1.CABINETS, scene)
+        __O[1257] = ____get_result_699
+        if ____t_700(____get_result_699) then
+            ____t_result_701 = __O[1257]
+        else
+            ____t_result_701 = __arrL({}, 0)
+        end
+        return ____call_702(
+            ____t_result_701,
             "some",
             function(____, cx) return math.abs(cx - x) < 46 end
         )
@@ -5711,7 +7070,7 @@ local __O = {};
             -98,
             32,
             8,
-            if math.sin(tm * 5) > -0.6 then "#ff6ab0" else "#a03a70"
+            math.sin(tm * 5) > -0.6 and "#ff6ab0" or "#a03a70"
         )
         c.fillStyle = "#fff"
         c.font = "6px Pixel, monospace"
@@ -5878,8 +7237,14 @@ local __O = {};
             function(____, gm, i)
                 local m = __L1:rec(gm.id).medal
                 local tx = 6 + __mod(i, 5) * 16
-                local ty = if i < 5 then -34 else -6
-                local col = if __t(m) then __get(__L1.MEDAL_COL, m) else "rgba(40,30,20,.45)"
+                local ty = i < 5 and -34 or -6
+                local ____t_result_703
+                if __t(m) then
+                    ____t_result_703 = __get(__L1.MEDAL_COL, m)
+                else
+                    ____t_result_703 = "rgba(40,30,20,.45)"
+                end
+                local col = ____t_result_703
                 P2(
                     nil,
                     tx + 2,
@@ -5918,7 +7283,14 @@ local __O = {};
         )
     end
     __L1.drawWorld = function(self, c, o)
-        if __t(if __t(o.arena) then o.arena else o.room) then
+        local ____t_705 = __t
+        local ____t_result_704
+        if __t(o.arena) then
+            ____t_result_704 = o.arena
+        else
+            ____t_result_704 = o.room
+        end
+        if ____t_705(____t_result_704) then
             return
         end
         local list = __get(__L1.CABINETS, o.scene)
@@ -5926,18 +7298,41 @@ local __O = {};
             return
         end
         for ____, x in __iterar((list)) do
-            if __t(x - o.camera < -60 or x - o.camera > 1020) then
-                continue
-            end
-            __L1:drawCabinet(c, x, 440, if __t(o.time) then o.time else 0)
-            if o.scene == 0 then
-                __L1:drawTrophies(c, x + 60, 440)
+            do
+                if __t(x - o.camera < -60 or x - o.camera > 1020) then
+                    continue
+                end
+                local ____L1_drawCabinet_708 = __L1.drawCabinet
+                local ____c_707 = c
+                local ____t_result_706
+                if __t(o.time) then
+                    ____t_result_706 = o.time
+                else
+                    ____t_result_706 = 0
+                end
+                ____L1_drawCabinet_708(
+                    __L1,
+                    ____c_707,
+                    x,
+                    440,
+                    ____t_result_706
+                )
+                if o.scene == 0 then
+                    __L1:drawTrophies(c, x + 60, 440)
+                end
             end
         end
     end
     __L1.addEntries = function(self)
         local entries = window.document:querySelector("#startScreen .ranch-mode-entries")
-        if __t(if __t(entries) then not __t(entries:querySelector("[data-open-tv]")) else entries) then
+        local ____t_710 = __t
+        local ____t_result_709
+        if __t(entries) then
+            ____t_result_709 = not __t(entries:querySelector("[data-open-tv]"))
+        else
+            ____t_result_709 = entries
+        end
+        if ____t_710(____t_result_709) then
             local b = window.document:createElement("button")
             b.type = "button"
             b.dataset.openTv = "1"
@@ -5954,7 +7349,14 @@ local __O = {};
                 entries:prepend(b)
             end
         end
-        if __t(if __t(entries) then not __t(entries:querySelector("[data-open-fliperama]")) else entries) then
+        local ____t_712 = __t
+        local ____t_result_711
+        if __t(entries) then
+            ____t_result_711 = not __t(entries:querySelector("[data-open-fliperama]"))
+        else
+            ____t_result_711 = entries
+        end
+        if ____t_712(____t_result_711) then
             local b = window.document:createElement("button")
             b.type = "button"
             b.dataset.openFliperama = "1"
@@ -5966,7 +7368,14 @@ local __O = {};
             entries:append(b)
         end
         local modal = window.document:querySelector("#pauseScreen .game-modal")
-        if __t(if __t(modal) then not __t(modal:querySelector("[data-open-fliperama]")) else modal) then
+        local ____t_714 = __t
+        local ____t_result_713
+        if __t(modal) then
+            ____t_result_713 = not __t(modal:querySelector("[data-open-fliperama]"))
+        else
+            ____t_result_713 = modal
+        end
+        if ____t_714(____t_result_713) then
             local b = window.document:createElement("button")
             b.type = "button"
             b.className = "text-button"
@@ -6015,25 +7424,31 @@ local __O = {};
             "filter",
             function(____, m) return m == 3 end
         ))
-        row:querySelector(".hud-fp-count").textContent = __add(
+        local ____temp_718 = row:querySelector(".hud-fp-count")
+        local ____add_717 = __add
+        local ____add_result_716 = __add(
             __add(
                 __add(
                     __add(
-                        __add(
-                            __add(__L1.data.fichas, " fichas · "),
-                            __len(medals)
-                        ),
-                        "/"
+                        __add(__L1.data.fichas, " fichas · "),
+                        __len(medals)
                     ),
-                    __len(__L1.GAMES)
+                    "/"
                 ),
-                " medalhas"
+                __len(__L1.GAMES)
             ),
-            if __t(gold) then __add(
+            " medalhas"
+        )
+        local ____t_result_715
+        if __t(gold) then
+            ____t_result_715 = __add(
                 __add(" (", gold),
                 " ouro)"
-            ) else ""
-        )
+            )
+        else
+            ____t_result_715 = ""
+        end
+        ____temp_718.textContent = ____add_717(____add_result_716, ____t_result_715)
     end
     local ____ = "use strict"
     if __t(window.Fliperama) then
@@ -6068,12 +7483,50 @@ local __O = {};
     do
         pcall(function()
             local d = window.JSON:parse(window.localStorage:getItem(__L1.KEY))
-            if __t(if __t(d) then type(d) == "table" else d) then
-                local ____ord_432 = __ord
-                local ____t_431 = __t
-                local ____TS__Number_result_430 = __TS__Number(d.fichas)
-                __O[1079] = ____TS__Number_result_430
-                __L1.data = ____ord_432({fichas = if ____t_431(____TS__Number_result_430) then __O[1079] else 0, games = if __t(if __t(d.games) then type(d.games) == "table" else d.games) then d.games else {}, unlocked = if __isArray(d.unlocked) then d.unlocked else __arrL({"daroca", "reeis"}, 2), avatar = if __t(__isArray(d.avatar) and __len(d.avatar) == 2) then d.avatar else __arrL({"daroca", "reeis"}, 2)}, "fichas,games,unlocked,avatar")
+            local ____t_720 = __t
+            local ____t_result_719
+            if __t(d) then
+                ____t_result_719 = type(d) == "table"
+            else
+                ____t_result_719 = d
+            end
+            if ____t_720(____t_result_719) then
+                local ____ord_729 = __ord
+                local ____t_result_723
+                local ____t_722 = __t
+                local ____TS__Number_result_721 = __TS__Number(d.fichas)
+                __O[1084] = ____TS__Number_result_721
+                if ____t_722(____TS__Number_result_721) then
+                    ____t_result_723 = __O[1084]
+                else
+                    ____t_result_723 = 0
+                end
+                local ____t_result_726
+                local ____t_725 = __t
+                local ____t_result_724
+                if __t(d.games) then
+                    ____t_result_724 = type(d.games) == "table"
+                else
+                    ____t_result_724 = d.games
+                end
+                if ____t_725(____t_result_724) then
+                    ____t_result_726 = d.games
+                else
+                    ____t_result_726 = {}
+                end
+                local ____isArray_result_727
+                if __isArray(d.unlocked) then
+                    ____isArray_result_727 = d.unlocked
+                else
+                    ____isArray_result_727 = __arrL({"daroca", "reeis"}, 2)
+                end
+                local ____t_result_728
+                if __t(__isArray(d.avatar) and __len(d.avatar) == 2) then
+                    ____t_result_728 = d.avatar
+                else
+                    ____t_result_728 = __arrL({"daroca", "reeis"}, 2)
+                end
+                __L1.data = ____ord_729({fichas = ____t_result_723, games = ____t_result_726, unlocked = ____isArray_result_727, avatar = ____t_result_728}, "fichas,games,unlocked,avatar")
             end
         end)
     end
@@ -6088,19 +7541,25 @@ local __O = {};
         end
     end
     __L1.rec = function(____, id)
-        local ____set_437 = __set
-        local ____L1_data_games_435 = __L1.data.games
-        local ____id_436 = id
-        local ____t_434 = __t
-        local ____get_result_433 = __get(__L1.data.games, id)
-        __O[1080] = ____get_result_433
-        return ____set_437(____L1_data_games_435, ____id_436, if ____t_434(____get_result_433) then __O[1080] else {
-            solo = __arrL({}, 0),
-            duo = __arrL({}, 0),
-            medal = 0,
-            plays = 0,
-            wins = __arrL({0, 0}, 2)
-        })
+        local ____set_735 = __set
+        local ____L1_data_games_733 = __L1.data.games
+        local ____id_734 = id
+        local ____t_result_732
+        local ____t_731 = __t
+        local ____get_result_730 = __get(__L1.data.games, id)
+        __O[1085] = ____get_result_730
+        if ____t_731(____get_result_730) then
+            ____t_result_732 = __O[1085]
+        else
+            ____t_result_732 = {
+                solo = __arrL({}, 0),
+                duo = __arrL({}, 0),
+                medal = 0,
+                plays = 0,
+                wins = __arrL({0, 0}, 2)
+            }
+        end
+        return ____set_735(____L1_data_games_733, ____id_734, ____t_result_732)
     end
     __L1.actx = nil
     __L1.muted = false
@@ -6164,10 +7623,16 @@ local __O = {};
         list,
         "some",
         function(____, k)
-            local ____t_439 = __t
-            local ____get_result_438 = __get(__L1.keys, k)
-            __O[1083] = ____get_result_438
-            return if ____t_439(____get_result_438) then __O[1083] else __call(__L1.latch, "has", k)
+            local ____t_result_738
+            local ____t_737 = __t
+            local ____get_result_736 = __get(__L1.keys, k)
+            __O[1088] = ____get_result_736
+            if ____t_737(____get_result_736) then
+                ____t_result_738 = __O[1088]
+            else
+                ____t_result_738 = __call(__L1.latch, "has", k)
+            end
+            return ____t_result_738
         end
     ) end
     __L1.menuNav = __ord({start = false, pstart = false}, "start,pstart")
@@ -6223,26 +7688,44 @@ local __O = {};
     )
     __L1.DEF_AV = __arrL({"daroca", "reeis", "lucas", "aica"}, 4)
     __L1.avOf = function(____, i)
-        local ____t_445 = __t
-        local ____getq_444 = __getq
-        local ____opt_442 = __L1.tv
-        if ____opt_442 ~= nil then
-            ____opt_442 = ____opt_442.av
+        local ____t_result_752
+        local ____t_744 = __t
+        local ____getq_743 = __getq
+        local ____opt_741 = __L1.tv
+        if ____opt_741 ~= nil then
+            ____opt_741 = ____opt_741.av
         end
-        local ____opt_440 = ____getq_444(____opt_442, i)
-        if ____opt_440 ~= nil then
-            ____opt_440 = ____opt_440.type
+        local ____opt_739 = ____getq_743(____opt_741, i)
+        if ____opt_739 ~= nil then
+            ____opt_739 = ____opt_739.type
         end
-        __O[1105] = ____opt_440
-        local ____t_450 = __t
-        local ____getq_448 = __getq
-        local ____opt_446 = __L1.net
-        if ____opt_446 ~= nil then
-            ____opt_446 = ____opt_446.av
+        __O[1110] = ____opt_739
+        if ____t_744(____opt_739) then
+            ____t_result_752 = __O[1110]
+        else
+            local ____lt_result_751
+            if __lt(i, 2) then
+                local ____t_result_750
+                local ____t_749 = __t
+                local ____getq_747 = __getq
+                local ____opt_745 = __L1.net
+                if ____opt_745 ~= nil then
+                    ____opt_745 = ____opt_745.av
+                end
+                local ____getq_747_result_748 = ____getq_747(____opt_745, i)
+                __O[1109] = ____getq_747_result_748
+                if ____t_749(____getq_747_result_748) then
+                    ____t_result_750 = __O[1109]
+                else
+                    ____t_result_750 = __get(__L1.data.avatar, i)
+                end
+                ____lt_result_751 = ____t_result_750
+            else
+                ____lt_result_751 = __get(__L1.DEF_AV, i)
+            end
+            ____t_result_752 = ____lt_result_751
         end
-        local ____getq_448_result_449 = ____getq_448(____opt_446, i)
-        __O[1104] = ____getq_448_result_449
-        return if ____t_445(____opt_440) then __O[1105] else if __lt(i, 2) then if ____t_450(____getq_448_result_449) then __O[1104] else __get(__L1.data.avatar, i) else __get(__L1.DEF_AV, i)
+        return ____t_result_752
     end
     __L1.PLAYER_TYPES = __getters(
         {},
@@ -6266,45 +7749,77 @@ local __O = {};
         {},
         {
             [0] = function()
-                local ____t_452 = __t
-                local ____get_result_451 = __get(
+                local ____t_result_755
+                local ____t_754 = __t
+                local ____get_result_753 = __get(
                     __L1.AV_NAMES,
                     __get(__L1.PLAYER_TYPES, 0)
                 )
-                __O[1106] = ____get_result_451
-                return if ____t_452(____get_result_451) then __O[1106] else "P1"
+                __O[1111] = ____get_result_753
+                if ____t_754(____get_result_753) then
+                    ____t_result_755 = __O[1111]
+                else
+                    ____t_result_755 = "P1"
+                end
+                return ____t_result_755
             end,
             [1] = function()
-                local ____t_454 = __t
-                local ____get_result_453 = __get(
+                local ____t_result_758
+                local ____t_757 = __t
+                local ____get_result_756 = __get(
                     __L1.AV_NAMES,
                     __get(__L1.PLAYER_TYPES, 1)
                 )
-                __O[1107] = ____get_result_453
-                return if ____t_454(____get_result_453) then __O[1107] else "P2"
+                __O[1112] = ____get_result_756
+                if ____t_757(____get_result_756) then
+                    ____t_result_758 = __O[1112]
+                else
+                    ____t_result_758 = "P2"
+                end
+                return ____t_result_758
             end,
             [2] = function()
-                local ____t_456 = __t
-                local ____get_result_455 = __get(
+                local ____t_result_761
+                local ____t_760 = __t
+                local ____get_result_759 = __get(
                     __L1.AV_NAMES,
                     __get(__L1.PLAYER_TYPES, 2)
                 )
-                __O[1108] = ____get_result_455
-                return if ____t_456(____get_result_455) then __O[1108] else "P3"
+                __O[1113] = ____get_result_759
+                if ____t_760(____get_result_759) then
+                    ____t_result_761 = __O[1113]
+                else
+                    ____t_result_761 = "P3"
+                end
+                return ____t_result_761
             end,
             [3] = function()
-                local ____t_458 = __t
-                local ____get_result_457 = __get(
+                local ____t_result_764
+                local ____t_763 = __t
+                local ____get_result_762 = __get(
                     __L1.AV_NAMES,
                     __get(__L1.PLAYER_TYPES, 3)
                 )
-                __O[1109] = ____get_result_457
-                return if ____t_458(____get_result_457) then __O[1109] else "P4"
+                __O[1114] = ____get_result_762
+                if ____t_763(____get_result_762) then
+                    ____t_result_764 = __O[1114]
+                else
+                    ____t_result_764 = "P4"
+                end
+                return ____t_result_764
             end
         }
     )
-    __L1.NP = function(____, st) return if __t(st.np) then st.np else if st.mode == "duo" then 2 else 1 end
-    __L1.cpuType = function() return if __get(__L1.data.avatar, 0) == "nikolas" then "lucas" else "nikolas" end
+    __L1.NP = function(____, st)
+        local ____t_result_765
+        if __t(st.np) then
+            ____t_result_765 = st.np
+        else
+            ____t_result_765 = st.mode == "duo" and 2 or 1
+        end
+        return ____t_result_765
+    end
+    __L1.cpuType = function() return __get(__L1.data.avatar, 0) == "nikolas" and "lucas" or "nikolas" end
     __L1.cpuName = function() return __get(
         __L1.AV_NAMES,
         __L1:cpuType()
@@ -6383,29 +7898,36 @@ local __O = {};
                         },
                         4
                     )
-                    st.worms = if st.mode == "duo" then __call(
-                        __call(
-                            starts,
-                            "slice",
-                            0,
-                            __L1:NP(st)
-                        ),
-                        "map",
-                        function(____, a) return mk(
-                            nil,
-                            __TS__Spread(__iter(a))
-                        ) end
-                    ) else __arrL(
-                        {mk(
-                            nil,
-                            10,
-                            15,
-                            1,
-                            "#ff8fb0",
-                            "#e8507a"
-                        )},
-                        1
-                    )
+                    local ____st_767 = st
+                    local ____temp_766
+                    if st.mode == "duo" then
+                        ____temp_766 = __call(
+                            __call(
+                                starts,
+                                "slice",
+                                0,
+                                __L1:NP(st)
+                            ),
+                            "map",
+                            function(____, a) return mk(
+                                nil,
+                                __TS__Spread(__iter(a))
+                            ) end
+                        )
+                    else
+                        ____temp_766 = __arrL(
+                            {mk(
+                                nil,
+                                10,
+                                15,
+                                1,
+                                "#ff8fb0",
+                                "#e8507a"
+                            )},
+                            1
+                        )
+                    end
+                    ____st_767.worms = ____temp_766
                     do
                         local i = 0
                         while i < 3 do
@@ -6450,39 +7972,53 @@ local __O = {};
                         function(____, w, i)
                             local p = __get(__L1.P, i)
                             while __t(__len(p.dirs)) do
-                                local d = __call(p.dirs, "shift")
-                                local v = __get(
-                                    {
-                                        u = __arrL({0, -1}, 2),
-                                        d = __arrL({0, 1}, 2),
-                                        l = __arrL({-1, 0}, 2),
-                                        r = __arrL({1, 0}, 2)
-                                    },
-                                    d
-                                )
-                                local last = if __t(__len(w.q)) then __get(
-                                    w.q,
-                                    __len(w.q) - 1
-                                ) else w.dir
-                                local ____t_461 = __t
-                                local ____t_460 = __t
-                                local ____temp_459 = __get(v, 0) == __TS__Number(-last.x) and __get(v, 1) == __TS__Number(-last.y)
-                                __O[1111] = ____temp_459
-                                if ____t_461(if ____t_460(____temp_459) then __O[1111] else __get(v, 0) == last.x and __get(v, 1) == last.y) then
-                                    continue
-                                end
-                                if __lt(
-                                    __len(w.q),
-                                    2
-                                ) then
-                                    __call(
-                                        w.q,
-                                        "push",
+                                do
+                                    local d = __call(p.dirs, "shift")
+                                    local v = __get(
                                         {
-                                            x = __get(v, 0),
-                                            y = __get(v, 1)
-                                        }
+                                            u = __arrL({0, -1}, 2),
+                                            d = __arrL({0, 1}, 2),
+                                            l = __arrL({-1, 0}, 2),
+                                            r = __arrL({1, 0}, 2)
+                                        },
+                                        d
                                     )
+                                    local ____t_result_768
+                                    if __t(__len(w.q)) then
+                                        ____t_result_768 = __get(
+                                            w.q,
+                                            __len(w.q) - 1
+                                        )
+                                    else
+                                        ____t_result_768 = w.dir
+                                    end
+                                    local last = ____t_result_768
+                                    local ____t_772 = __t
+                                    local ____t_result_771
+                                    local ____t_770 = __t
+                                    local ____temp_769 = __get(v, 0) == __TS__Number(-last.x) and __get(v, 1) == __TS__Number(-last.y)
+                                    __O[1116] = ____temp_769
+                                    if ____t_770(____temp_769) then
+                                        ____t_result_771 = __O[1116]
+                                    else
+                                        ____t_result_771 = __get(v, 0) == last.x and __get(v, 1) == last.y
+                                    end
+                                    if ____t_772(____t_result_771) then
+                                        continue
+                                    end
+                                    if __lt(
+                                        __len(w.q),
+                                        2
+                                    ) then
+                                        __call(
+                                            w.q,
+                                            "push",
+                                            {
+                                                x = __get(v, 0),
+                                                y = __get(v, 1)
+                                            }
+                                        )
+                                    end
                                 end
                             end
                         end
@@ -6504,8 +8040,8 @@ local __O = {};
                         st.goldT = 14
                     end
                     if __t(st.gold) then
-                        local ____st_gold_462, ____life_463 = st.gold, "life"
-                        ____st_gold_462[____life_463] = ____st_gold_462[____life_463] - dt
+                        local ____st_gold_773, ____life_774 = st.gold, "life"
+                        ____st_gold_773[____life_774] = ____st_gold_773[____life_774] - dt
                         if __le(st.gold.life, 0) then
                             st.gold = nil
                         end
@@ -6515,7 +8051,7 @@ local __O = {};
                         "map",
                         function(____, w) return __len(w.body) end
                     ))))
-                    local period = if st.mode == "duo" then 0.1 else math.max(0.055, 0.12 - len * 0.0016)
+                    local period = st.mode == "duo" and 0.1 or math.max(0.055, 0.12 - len * 0.0016)
                     st.step = __add(st.step, dt)
                     if __lt(st.step, period) then
                         return
@@ -6551,17 +8087,28 @@ local __O = {};
                             if not __t(h) then
                                 return
                             end
-                            local ____t_467 = __t
-                            local ____t_465 = __t
-                            local ____temp_464 = __lt(h.x, 0) or __lt(h.y, 0)
-                            __O[1112] = ____temp_464
-                            local ____temp_466 = if ____t_465(____temp_464) then __O[1112] else __ge(h.x, st.cols)
-                            __O[1113] = ____temp_466
-                            local dead = if ____t_467(____temp_466) then __O[1113] else __ge(h.y, st.rows)
+                            local ____t_result_779
+                            local ____t_778 = __t
+                            local ____t_result_777
+                            local ____t_776 = __t
+                            local ____temp_775 = __lt(h.x, 0) or __lt(h.y, 0)
+                            __O[1117] = ____temp_775
+                            if ____t_776(____temp_775) then
+                                ____t_result_777 = __O[1117]
+                            else
+                                ____t_result_777 = __ge(h.x, st.cols)
+                            end
+                            __O[1118] = ____t_result_777
+                            if ____t_778(____t_result_777) then
+                                ____t_result_779 = __O[1118]
+                            else
+                                ____t_result_779 = __ge(h.y, st.rows)
+                            end
+                            local dead = ____t_result_779
                             for ____, o in __iterar((st.worms)) do
                                 do
                                     local j = 0
-                                    while j < __len(o.body) - if __t(o == w and not __t(w.eat)) then 1 else 0 do
+                                    while j < __len(o.body) - (__t(o == w and not __t(w.eat)) and 1 or 0) do
                                         if __t(__get(o.body, j).x == h.x and __get(o.body, j).y == h.y) then
                                             dead = true
                                         end
@@ -6573,17 +8120,33 @@ local __O = {};
                                 heads,
                                 "forEach",
                                 function(____, h2, k)
-                                    local ____t_474 = __t
-                                    local ____t_473 = __t
-                                    local ____t_471 = __t
-                                    local ____t_469 = __t
-                                    local ____temp_468 = k ~= i
-                                    __O[1114] = ____temp_468
-                                    local ____temp_470 = if ____t_469(____temp_468) then h2 else __O[1114]
-                                    __O[1115] = ____temp_470
-                                    local ____temp_472 = if ____t_471(____temp_470) then h2.x == h.x else __O[1115]
-                                    __O[1116] = ____temp_472
-                                    if ____t_474(if ____t_473(____temp_472) then h2.y == h.y else __O[1116]) then
+                                    local ____t_787 = __t
+                                    local ____t_result_786
+                                    local ____t_785 = __t
+                                    local ____t_result_784
+                                    local ____t_783 = __t
+                                    local ____t_result_782
+                                    local ____t_781 = __t
+                                    local ____temp_780 = k ~= i
+                                    __O[1119] = ____temp_780
+                                    if ____t_781(____temp_780) then
+                                        ____t_result_782 = h2
+                                    else
+                                        ____t_result_782 = __O[1119]
+                                    end
+                                    __O[1120] = ____t_result_782
+                                    if ____t_783(____t_result_782) then
+                                        ____t_result_784 = h2.x == h.x
+                                    else
+                                        ____t_result_784 = __O[1120]
+                                    end
+                                    __O[1121] = ____t_result_784
+                                    if ____t_785(____t_result_784) then
+                                        ____t_result_786 = h2.y == h.y
+                                    else
+                                        ____t_result_786 = __O[1121]
+                                    end
+                                    if ____t_787(____t_result_786) then
                                         dead = true
                                     end
                                 end
@@ -6625,11 +8188,22 @@ local __O = {};
                                 __L1:sfx("pick")
                                 __call(st.pop, "push", {x = st.ox + h.x * 8 + 4, y = st.oy + h.y * 8, s = "+10", t = 0})
                             end
-                            local ____t_477 = __t
-                            local ____t_476 = __t
-                            local ____temp_475 = if __t(st.gold) then st.gold.x == h.x else st.gold
-                            __O[1117] = ____temp_475
-                            if ____t_477(if ____t_476(____temp_475) then st.gold.y == h.y else __O[1117]) then
+                            local ____t_791 = __t
+                            local ____t_result_790
+                            local ____t_789 = __t
+                            local ____t_result_788
+                            if __t(st.gold) then
+                                ____t_result_788 = st.gold.x == h.x
+                            else
+                                ____t_result_788 = st.gold
+                            end
+                            __O[1122] = ____t_result_788
+                            if ____t_789(____t_result_788) then
+                                ____t_result_790 = st.gold.y == h.y
+                            else
+                                ____t_result_790 = __O[1122]
+                            end
+                            if ____t_791(____t_result_790) then
                                 st.gold = nil
                                 w.eat = w.eat + 4
                                 __set(
@@ -6662,7 +8236,15 @@ local __O = {};
                                 __call(
                                     st.worms,
                                     "map",
-                                    function(____, w, k) return if __t(w.alive) then k else -1 end
+                                    function(____, w, k)
+                                        local ____t_result_792
+                                        if __t(w.alive) then
+                                            ____t_result_792 = k
+                                        else
+                                            ____t_result_792 = -1
+                                        end
+                                        return ____t_result_792
+                                    end
                                 ),
                                 "filter",
                                 function(____, k) return __ge(k, 0) end
@@ -6709,7 +8291,7 @@ local __O = {};
                                         st.oy + y * 8,
                                         8,
                                         8,
-                                        if __t(__mod(x + y, 2)) then "#6e4a2c" else "#684528"
+                                        __t(__mod(x + y, 2)) and "#6e4a2c" or "#684528"
                                     )
                                     if v > 0.93 then
                                         __L1:R(
@@ -6812,13 +8394,19 @@ local __O = {};
                     if __t(st.gold) then
                         local x = st.ox + st.gold.x * 8
                         local y = st.oy + st.gold.y * 8
-                        local ____t_479 = __t
-                        local ____lt_result_478 = __lt(st.gold.life, 2)
-                        __O[1118] = ____lt_result_478
-                        local bl = if ____t_479(____lt_result_478) then __mod(
-                            math.floor(st.t * 8),
-                            2
-                        ) else __O[1118]
+                        local ____t_result_795
+                        local ____t_794 = __t
+                        local ____lt_result_793 = __lt(st.gold.life, 2)
+                        __O[1123] = ____lt_result_793
+                        if ____t_794(____lt_result_793) then
+                            ____t_result_795 = __mod(
+                                math.floor(st.t * 8),
+                                2
+                            )
+                        else
+                            ____t_result_795 = __O[1123]
+                        end
+                        local bl = ____t_result_795
                         if not __t(bl) then
                             __L1:R(
                                 g,
@@ -6864,14 +8452,32 @@ local __O = {};
                                 function(____, b, j)
                                     local x = st.ox + b.x * 8
                                     local y = st.oy + b.y * 8
-                                    local ____t_482 = __t
-                                    local ____t_481 = __t
-                                    local ____temp_480 = not __t(w.alive)
-                                    __O[1119] = ____temp_480
-                                    local col = if ____t_482(if ____t_481(____temp_480) then __mod(
-                                        math.floor(st.t * 10),
-                                        2
-                                    ) else __O[1119]) then "#fff" else if j == 0 then w.head else w.col
+                                    local ____t_result_801
+                                    local ____t_799 = __t
+                                    local ____t_result_798
+                                    local ____t_797 = __t
+                                    local ____temp_796 = not __t(w.alive)
+                                    __O[1124] = ____temp_796
+                                    if ____t_797(____temp_796) then
+                                        ____t_result_798 = __mod(
+                                            math.floor(st.t * 10),
+                                            2
+                                        )
+                                    else
+                                        ____t_result_798 = __O[1124]
+                                    end
+                                    if ____t_799(____t_result_798) then
+                                        ____t_result_801 = "#fff"
+                                    else
+                                        local ____temp_800
+                                        if j == 0 then
+                                            ____temp_800 = w.head
+                                        else
+                                            ____temp_800 = w.col
+                                        end
+                                        ____t_result_801 = ____temp_800
+                                    end
+                                    local col = ____t_result_801
                                     __L1:R(
                                         g,
                                         x + 1,
@@ -6938,7 +8544,15 @@ local __O = {};
                             __call(
                                 st.worms,
                                 "map",
-                                function(____, w, i) return if __t(w.alive) then __get(st.score, i) else "✕" end
+                                function(____, w, i)
+                                    local ____t_result_802
+                                    if __t(w.alive) then
+                                        ____t_result_802 = __get(st.score, i)
+                                    else
+                                        ____t_result_802 = "✕"
+                                    end
+                                    return ____t_result_802
+                                end
                             )
                         )
                     end
@@ -6965,7 +8579,10 @@ local __O = {};
                     st.pads = __arrL({{y = 135, vy = 0}, {y = 135, vy = 0}}, 2)
                     st.pts = __arrL({0, 0}, 2)
                     st.hits = 0
-                    st:serve(st, if math.random() < 0.5 then -1 else 1)
+                    st:serve(
+                        st,
+                        math.random() < 0.5 and -1 or 1
+                    )
                     st.trail = __arrL({}, 0)
                 end,
                 update = function(self, st, dt)
@@ -6977,10 +8594,24 @@ local __O = {};
                         function(____, p, i)
                             local want
                             if __t(i == 1 and st.mode == "solo") then
-                                local ____add_result_483 = __add(if __t(st.cpuLag) then st.cpuLag else 0, dt)
-                                st.cpuLag = ____add_result_483
-                                local lag = ____add_result_483
-                                local target = if __gt(b.vx, 0) then b.y + math.sin(st.t * 1.3) * 10 else 135
+                                local ____st_805 = st
+                                local ____add_804 = __add
+                                local ____t_result_803
+                                if __t(st.cpuLag) then
+                                    ____t_result_803 = st.cpuLag
+                                else
+                                    ____t_result_803 = 0
+                                end
+                                local ____add_804_result_806 = ____add_804(____t_result_803, dt)
+                                ____st_805.cpuLag = ____add_804_result_806
+                                local lag = ____add_804_result_806
+                                local ____gt_result_807
+                                if __gt(b.vx, 0) then
+                                    ____gt_result_807 = b.y + math.sin(st.t * 1.3) * 10
+                                else
+                                    ____gt_result_807 = 135
+                                end
+                                local target = ____gt_result_807
                                 want = __L1:clamp((target - p.y) / 18, -1, 1)
                                 local max = 0.62 + math.min(
                                     0.35,
@@ -7025,29 +8656,41 @@ local __O = {};
                         local i = ____value[1]
                         local px = ____value[2]
                         local p = __get(st.pads, i)
-                        local ____t_486 = __t
-                        local ____t_485 = __t
-                        local ____temp_484 = math.abs(b.x - px) < 5 and math.abs(b.y - p.y) < ph / 2 + 3
-                        __O[1120] = ____temp_484
-                        if ____t_486(if ____t_485(____temp_484) then if i == 0 then __lt(b.vx, 0) else __gt(b.vx, 0) else __O[1120]) then
+                        local ____t_812 = __t
+                        local ____t_result_811
+                        local ____t_809 = __t
+                        local ____temp_808 = math.abs(b.x - px) < 5 and math.abs(b.y - p.y) < ph / 2 + 3
+                        __O[1125] = ____temp_808
+                        if ____t_809(____temp_808) then
+                            local ____temp_810
+                            if i == 0 then
+                                ____temp_810 = __lt(b.vx, 0)
+                            else
+                                ____temp_810 = __gt(b.vx, 0)
+                            end
+                            ____t_result_811 = ____temp_810
+                        else
+                            ____t_result_811 = __O[1125]
+                        end
+                        if ____t_812(____t_result_811) then
                             local off = (b.y - p.y) / (ph / 2)
                             local sp = math.min(
                                 430,
                                 __hypot(b.vx, b.vy) + 14
                             )
-                            b.vx = if i == 0 then 1 else -1 * sp * math.cos(off * 0.8)
+                            b.vx = (i == 0 and 1 or -1) * sp * math.cos(off * 0.8)
                             b.vy = sp * math.sin(off * 0.8)
                             b.spin = p.vy * 0.9
-                            b.x = px + if i == 0 then 5 else -5
+                            b.x = px + (i == 0 and 5 or -5)
                             st.hits = st.hits + 1
                             __L1:sfx("hit")
                             st.shake = 0.12
                         end
                     end
                     if __t(__lt(b.x, -10) or __gt(b.x, __L1.LW + 10)) then
-                        local who = if __lt(b.x, 0) then 1 else 0
+                        local who = __lt(b.x, 0) and 1 or 0
                         __inc(st.pts, who, 1, true)
-                        __L1:sfx(if __t(who == 0 or st.mode == "duo") then "pick" else "lose")
+                        __L1:sfx(__t(who == 0 or st.mode == "duo") and "pick" or "lose")
                         if __ge(
                             __get(st.pts, who),
                             7
@@ -7055,9 +8698,9 @@ local __O = {};
                             if st.mode == "solo" then
                                 local sc = math.max(
                                     0,
-                                    __get(st.pts, 0) * 100 - __get(st.pts, 1) * 30 + if who == 0 then 500 else 0 + st.hits * 5
+                                    __get(st.pts, 0) * 100 - __get(st.pts, 1) * 30 + (who == 0 and 500 or 0) + st.hits * 5
                                 )
-                                st["end"](st, {score = sc, win = who == 0, text = if who == 0 then "Você venceu o Nikolas!" else "Nikolas venceu desta vez."})
+                                st["end"](st, {score = sc, win = who == 0, text = who == 0 and "Você venceu o Nikolas!" or "Nikolas venceu desta vez."})
                             else
                                 st["end"](
                                     st,
@@ -7083,7 +8726,7 @@ local __O = {};
                                 )
                             end
                         else
-                            st:serve(st, if who == 0 then 1 else -1)
+                            st:serve(st, who == 0 and 1 or -1)
                         end
                     end
                 end,
@@ -7151,14 +8794,20 @@ local __O = {};
                         )
                     end
                     local b = st.ball
-                    local ____t_489 = __t
-                    local ____t_488 = __t
-                    local ____gt_result_487 = __gt(b.wait, 0)
-                    __O[1121] = ____gt_result_487
-                    __D[1] = if not ____t_489(if ____t_488(____gt_result_487) then __mod(
-                        math.floor(st.t * 8),
-                        2
-                    ) else __O[1121]) then
+                    local ____t_816 = __t
+                    local ____t_result_815
+                    local ____t_814 = __t
+                    local ____gt_result_813 = __gt(b.wait, 0)
+                    __O[1126] = ____gt_result_813
+                    if ____t_814(____gt_result_813) then
+                        ____t_result_815 = __mod(
+                            math.floor(st.t * 8),
+                            2
+                        )
+                    else
+                        ____t_result_815 = __O[1126]
+                    end
+                    if not ____t_816(____t_result_815) then
                         __L1:R(
                             g,
                             b.x - 2,
@@ -7207,7 +8856,7 @@ local __O = {};
                             x = ____bindingPattern0[1]
                             i = ____bindingPattern0[2]
                             local y = __get(st.pads, i).y
-                            local col = if __t(i) then "#3a9ad0" else "#e8823a"
+                            local col = __t(i) and "#3a9ad0" or "#e8823a"
                             __L1:R(
                                 g,
                                 x - 3,
@@ -7222,7 +8871,7 @@ local __O = {};
                                 y - 16,
                                 4,
                                 32,
-                                if __t(i) then "#7ad1ff" else "#ffb347"
+                                __t(i) and "#7ad1ff" or "#ffb347"
                             )
                             __L1:R(
                                 g,
@@ -7258,7 +8907,7 @@ local __O = {};
                         __L1.W / 2 + 60,
                         22,
                         28,
-                        if st.mode == "solo" then "#c9a8ff" else __get(__L1.PLAYER_COL, 1)
+                        st.mode == "solo" and "#c9a8ff" or __get(__L1.PLAYER_COL, 1)
                     )
                     __L1:txt(
                         c,
@@ -7268,13 +8917,22 @@ local __O = {};
                         12,
                         __get(__L1.PLAYER_COL, 0)
                     )
-                    __L1:txt(
-                        c,
-                        if st.mode == "solo" then __L1:cpuName() else __get(__L1.PLAYER_NAME, 1),
+                    local ____L1_txt_819 = __L1.txt
+                    local ____c_818 = c
+                    local ____temp_817
+                    if st.mode == "solo" then
+                        ____temp_817 = __L1:cpuName()
+                    else
+                        ____temp_817 = __get(__L1.PLAYER_NAME, 1)
+                    end
+                    ____L1_txt_819(
+                        __L1,
+                        ____c_818,
+                        ____temp_817,
                         __L1.W - 120,
                         22,
                         12,
-                        if st.mode == "solo" then "#c9a8ff" else __get(__L1.PLAYER_COL, 1)
+                        st.mode == "solo" and "#c9a8ff" or __get(__L1.PLAYER_COL, 1)
                     )
                 end,
                 extra = {serve = function(self, st, dir)
@@ -7308,11 +8966,16 @@ local __O = {};
                 init = function(self, st)
                     st.lives = 3
                     st.level = 0
-                    st.pads = __call(
-                        __arrL({{x = 240, w = 52, y = 252}}, 1),
-                        "concat",
-                        if st.mode == "duo" then __arrL({{x = 240, w = 40, y = 232}}, 1) else __arrL({}, 0)
-                    )
+                    local ____st_823 = st
+                    local ____call_822 = __call
+                    local ____arrL_result_821 = __arrL({{x = 240, w = 52, y = 252}}, 1)
+                    local ____temp_820
+                    if st.mode == "duo" then
+                        ____temp_820 = __arrL({{x = 240, w = 40, y = 232}}, 1)
+                    else
+                        ____temp_820 = __arrL({}, 0)
+                    end
+                    ____st_823.pads = ____call_822(____arrL_result_821, "concat", ____temp_820)
                     st.drops = __arrL({}, 0)
                     st.fx = __arrL({}, 0)
                     st.wide = 0
@@ -7328,35 +8991,65 @@ local __O = {};
                             do
                                 local c = 0
                                 while c < 12 do
-                                    local ____t_495 = __t
-                                    local ____t_493 = __t
-                                    local ____t_491 = __t
-                                    local ____temp_490 = L == 0
-                                    __O[1122] = ____temp_490
-                                    local ____temp_492 = if ____t_491(____temp_490) then __O[1122] else L == 1 and __mod(r + c, 2) == 0
-                                    __O[1123] = ____temp_492
-                                    local ____temp_494 = if ____t_493(____temp_492) then __O[1123] else L == 2 and math.abs(c - 5.5) < 6 - r
-                                    __O[1125] = ____temp_494
-                                    local ____t_497 = __t
-                                    local ____temp_496 = L == 3
-                                    __O[1124] = ____temp_496
-                                    local on = if ____t_495(____temp_494) then __O[1125] else if ____t_497(____temp_496) then __mod(c, 3) ~= 1 or __mod(r, 2) == 0 else __O[1124]
-                                    if not __t(on) then
-                                        continue
+                                    do
+                                        local ____t_result_833
+                                        local ____t_829 = __t
+                                        local ____t_result_828
+                                        local ____t_827 = __t
+                                        local ____t_result_826
+                                        local ____t_825 = __t
+                                        local ____temp_824 = L == 0
+                                        __O[1127] = ____temp_824
+                                        if ____t_825(____temp_824) then
+                                            ____t_result_826 = __O[1127]
+                                        else
+                                            ____t_result_826 = L == 1 and __mod(r + c, 2) == 0
+                                        end
+                                        __O[1128] = ____t_result_826
+                                        if ____t_827(____t_result_826) then
+                                            ____t_result_828 = __O[1128]
+                                        else
+                                            ____t_result_828 = L == 2 and math.abs(c - 5.5) < 6 - r
+                                        end
+                                        __O[1130] = ____t_result_828
+                                        if ____t_829(____t_result_828) then
+                                            ____t_result_833 = __O[1130]
+                                        else
+                                            local ____t_result_832
+                                            local ____t_831 = __t
+                                            local ____temp_830 = L == 3
+                                            __O[1129] = ____temp_830
+                                            if ____t_831(____temp_830) then
+                                                ____t_result_832 = __mod(c, 3) ~= 1 or __mod(r, 2) == 0
+                                            else
+                                                ____t_result_832 = __O[1129]
+                                            end
+                                            ____t_result_833 = ____t_result_832
+                                        end
+                                        local on = ____t_result_833
+                                        if not __t(on) then
+                                            do c = c + 1 continue end
+                                        end
+                                        local ____t_837 = __t
+                                        local ____t_result_836
+                                        local ____t_835 = __t
+                                        local ____temp_834 = r == 0
+                                        __O[1131] = ____temp_834
+                                        if ____t_835(____temp_834) then
+                                            ____t_result_836 = __O[1131]
+                                        else
+                                            ____t_result_836 = L == 3 and r == 2
+                                        end
+                                        local hp = ____t_837(____t_result_836) and 2 or 1
+                                        __call(st.bricks, "push", {
+                                            x = 24 + c * 36,
+                                            y = 34 + r * 13,
+                                            w = 34,
+                                            h = 11,
+                                            hp = hp,
+                                            row = r
+                                        })
                                     end
-                                    local ____t_500 = __t
-                                    local ____t_499 = __t
-                                    local ____temp_498 = r == 0
-                                    __O[1126] = ____temp_498
-                                    local hp = if ____t_500(if ____t_499(____temp_498) then __O[1126] else L == 3 and r == 2) then 2 else 1
-                                    __call(st.bricks, "push", {
-                                        x = 24 + c * 36,
-                                        y = 34 + r * 13,
-                                        w = 34,
-                                        h = 11,
-                                        hp = hp,
-                                        row = r
-                                    })
                                     c = c + 1
                                 end
                             end
@@ -7379,7 +9072,7 @@ local __O = {};
                         st.pads,
                         "forEach",
                         function(____, p, i)
-                            p.w = if __t(i) then 40 else 52 + if __gt(st.wide, 0) then 26 else 0
+                            p.w = (__t(i) and 40 or 52) + (__gt(st.wide, 0) and 26 or 0)
                             p.x = __L1:clamp(
                                 p.x + __get(__L1.P, i).x * 250 * dt,
                                 p.w / 2 + 6,
@@ -7390,152 +9083,204 @@ local __O = {};
                     st.wide = math.max(0, st.wide - dt)
                     st.glue = math.max(0, st.glue - dt)
                     for ____, b in __iterar((st.balls)) do
-                        local ____t_503 = __t
-                        local ____t_502 = __t
-                        local ____temp_501 = b.stuck ~= false and b.stuck ~= nil
-                        __O[1127] = ____temp_501
-                        if ____t_503(if ____t_502(____temp_501) then b.stuck ~= nil else __O[1127]) then
-                            local p = __get(st.pads, b.stuck)
-                            b.x = __add(p.x, if __t(b.off) then b.off else 0)
-                            b.y = p.y - 5
-                            local ____t_508 = __t
-                            local ____t_505 = __t
-                            local ____get_result_ap_504 = __get(__L1.P, b.stuck).ap
-                            __O[1129] = ____get_result_ap_504
-                            local ____t_507 = __t
-                            local ____temp_506 = st.mode == "solo"
-                            __O[1128] = ____temp_506
-                            if ____t_508(if ____t_505(____get_result_ap_504) then __O[1129] else if ____t_507(____temp_506) then __get(__L1.P, 0).ap else __O[1128]) then
-                                local a = __L1:rnd(-0.5, 0.5)
-                                b.vx = math.sin(a) * b.sp
-                                b.vy = -math.cos(a) * b.sp
-                                b.stuck = nil
-                                __L1:sfx("bounce")
+                        do
+                            local ____t_841 = __t
+                            local ____t_result_840
+                            local ____t_839 = __t
+                            local ____temp_838 = b.stuck ~= false and b.stuck ~= nil
+                            __O[1132] = ____temp_838
+                            if ____t_839(____temp_838) then
+                                ____t_result_840 = b.stuck ~= nil
+                            else
+                                ____t_result_840 = __O[1132]
                             end
-                            continue
-                        end
-                        b.x = b.x + b.vx * dt
-                        b.y = b.y + b.vy * dt
-                        if __lt(b.x, 6) then
-                            b.x = 6
-                            b.vx = math.abs(b.vx)
-                            __L1:sfx("bounce")
-                        end
-                        if __gt(b.x, __L1.LW - 6) then
-                            b.x = __L1.LW - 6
-                            b.vx = -math.abs(b.vx)
-                            __L1:sfx("bounce")
-                        end
-                        if __lt(b.y, 22) then
-                            b.y = 22
-                            b.vy = math.abs(b.vy)
-                            __L1:sfx("bounce")
-                        end
-                        __call(
-                            st.pads,
-                            "forEach",
-                            function(____, p, i)
-                                local ____t_513 = __t
-                                local ____t_512 = __t
-                                local ____t_510 = __t
-                                local ____temp_509 = __gt(b.vy, 0) and __gt(b.y, p.y - 5)
-                                __O[1130] = ____temp_509
-                                local ____temp_511 = if ____t_510(____temp_509) then __lt(b.y, p.y + 2) else __O[1130]
-                                __O[1131] = ____temp_511
-                                if ____t_513(if ____t_512(____temp_511) then math.abs(b.x - p.x) < p.w / 2 + 3 else __O[1131]) then
-                                    local off = (b.x - p.x) / (p.w / 2)
-                                    local sp = __hypot(b.vx, b.vy) * 1.01
-                                    b.vx = math.sin(off * 1.05) * sp
-                                    b.vy = -math.abs(math.cos(off * 1.05) * sp)
-                                    b.y = p.y - 5
-                                    if __gt(st.glue, 0) then
-                                        b.stuck = i
-                                        b.off = b.x - p.x
-                                    end
-                                    __L1:sfx("hit")
+                            if ____t_841(____t_result_840) then
+                                local p = __get(st.pads, b.stuck)
+                                local ____add_844 = __add
+                                local ____p_x_843 = p.x
+                                local ____t_result_842
+                                if __t(b.off) then
+                                    ____t_result_842 = b.off
+                                else
+                                    ____t_result_842 = 0
                                 end
-                            end
-                        )
-                        for ____, k in __iterar((st.bricks)) do
-                            if __le(k.hp, 0) then
+                                b.x = ____add_844(____p_x_843, ____t_result_842)
+                                b.y = p.y - 5
+                                local ____t_851 = __t
+                                local ____t_result_850
+                                local ____t_846 = __t
+                                local ____get_result_ap_845 = __get(__L1.P, b.stuck).ap
+                                __O[1134] = ____get_result_ap_845
+                                if ____t_846(____get_result_ap_845) then
+                                    ____t_result_850 = __O[1134]
+                                else
+                                    local ____t_result_849
+                                    local ____t_848 = __t
+                                    local ____temp_847 = st.mode == "solo"
+                                    __O[1133] = ____temp_847
+                                    if ____t_848(____temp_847) then
+                                        ____t_result_849 = __get(__L1.P, 0).ap
+                                    else
+                                        ____t_result_849 = __O[1133]
+                                    end
+                                    ____t_result_850 = ____t_result_849
+                                end
+                                if ____t_851(____t_result_850) then
+                                    local a = __L1:rnd(-0.5, 0.5)
+                                    b.vx = math.sin(a) * b.sp
+                                    b.vy = -math.cos(a) * b.sp
+                                    b.stuck = nil
+                                    __L1:sfx("bounce")
+                                end
                                 continue
                             end
-                            local ____t_518 = __t
-                            local ____t_517 = __t
-                            local ____t_515 = __t
-                            local ____temp_514 = __gt(b.x, k.x - 2) and __lt(
-                                b.x,
-                                __add(k.x, k.w) + 2
-                            )
-                            __O[1132] = ____temp_514
-                            local ____temp_516 = if ____t_515(____temp_514) then __gt(b.y, k.y - 2) else __O[1132]
-                            __O[1133] = ____temp_516
-                            __D[1] = if ____t_518(if ____t_517(____temp_516) then __lt(
-                                b.y,
-                                __add(k.y, k.h) + 2
-                            ) else __O[1133]) then
-                                local ox = math.min(
-                                    b.x - k.x + 2,
-                                    __add(k.x, k.w) + 2 - b.x
-                                )
-                                local oy = math.min(
-                                    b.y - k.y + 2,
-                                    __add(k.y, k.h) + 2 - b.y
-                                )
-                                if ox < oy then
-                                    b.vx = __TS__Number(-b.vx)
-                                else
-                                    b.vy = __TS__Number(-b.vy)
-                                end
-                                k.hp = k.hp - 1
-                                if __le(k.hp, 0) then
-                                    __set(
-                                        st.score,
-                                        0,
-                                        __get(st.score, 0) + if k.row == 0 then 25 else 10
-                                    )
-                                    __L1:sfx("break")
-                                    do
-                                        local j = 0
-                                        while j < 6 do
-                                            __call(
-                                                st.fx,
-                                                "push",
-                                                {
-                                                    x = __add(
-                                                        k.x,
-                                                        __L1:rnd(0, k.w)
-                                                    ),
-                                                    y = __add(
-                                                        k.y,
-                                                        __L1:rnd(0, k.h)
-                                                    ),
-                                                    vx = __L1:rnd(-60, 60),
-                                                    vy = __L1:rnd(-80, 10),
-                                                    t = 0
-                                                }
-                                            )
-                                            j = j + 1
+                            b.x = b.x + b.vx * dt
+                            b.y = b.y + b.vy * dt
+                            if __lt(b.x, 6) then
+                                b.x = 6
+                                b.vx = math.abs(b.vx)
+                                __L1:sfx("bounce")
+                            end
+                            if __gt(b.x, __L1.LW - 6) then
+                                b.x = __L1.LW - 6
+                                b.vx = -math.abs(b.vx)
+                                __L1:sfx("bounce")
+                            end
+                            if __lt(b.y, 22) then
+                                b.y = 22
+                                b.vy = math.abs(b.vy)
+                                __L1:sfx("bounce")
+                            end
+                            __call(
+                                st.pads,
+                                "forEach",
+                                function(____, p, i)
+                                    local ____t_857 = __t
+                                    local ____t_result_856
+                                    local ____t_855 = __t
+                                    local ____t_result_854
+                                    local ____t_853 = __t
+                                    local ____temp_852 = __gt(b.vy, 0) and __gt(b.y, p.y - 5)
+                                    __O[1135] = ____temp_852
+                                    if ____t_853(____temp_852) then
+                                        ____t_result_854 = __lt(b.y, p.y + 2)
+                                    else
+                                        ____t_result_854 = __O[1135]
+                                    end
+                                    __O[1136] = ____t_result_854
+                                    if ____t_855(____t_result_854) then
+                                        ____t_result_856 = math.abs(b.x - p.x) < p.w / 2 + 3
+                                    else
+                                        ____t_result_856 = __O[1136]
+                                    end
+                                    if ____t_857(____t_result_856) then
+                                        local off = (b.x - p.x) / (p.w / 2)
+                                        local sp = __hypot(b.vx, b.vy) * 1.01
+                                        b.vx = math.sin(off * 1.05) * sp
+                                        b.vy = -math.abs(math.cos(off * 1.05) * sp)
+                                        b.y = p.y - 5
+                                        if __gt(st.glue, 0) then
+                                            b.stuck = i
+                                            b.off = b.x - p.x
                                         end
+                                        __L1:sfx("hit")
                                     end
-                                    if math.random() < 0.14 then
-                                        __call(
-                                            st.drops,
-                                            "push",
-                                            {
-                                                x = k.x + k.w / 2,
-                                                y = k.y,
-                                                kind = __get(
-                                                    __arrL({"lapis", "borracha", "cola", "coracao"}, 4),
-                                                    if math.random() < 0.1 then 3 else __L1:irnd(0, 2)
-                                                )
-                                            }
-                                        )
-                                    end
-                                else
-                                    __L1:sfx("hit")
                                 end
-                                break
+                            )
+                            for ____, k in __iterar((st.bricks)) do
+                                do
+                                    if __le(k.hp, 0) then
+                                        continue
+                                    end
+                                    local ____t_863 = __t
+                                    local ____t_result_862
+                                    local ____t_861 = __t
+                                    local ____t_result_860
+                                    local ____t_859 = __t
+                                    local ____temp_858 = __gt(b.x, k.x - 2) and __lt(
+                                        b.x,
+                                        __add(k.x, k.w) + 2
+                                    )
+                                    __O[1137] = ____temp_858
+                                    if ____t_859(____temp_858) then
+                                        ____t_result_860 = __gt(b.y, k.y - 2)
+                                    else
+                                        ____t_result_860 = __O[1137]
+                                    end
+                                    __O[1138] = ____t_result_860
+                                    if ____t_861(____t_result_860) then
+                                        ____t_result_862 = __lt(
+                                            b.y,
+                                            __add(k.y, k.h) + 2
+                                        )
+                                    else
+                                        ____t_result_862 = __O[1138]
+                                    end
+                                    if ____t_863(____t_result_862) then
+                                        local ox = math.min(
+                                            b.x - k.x + 2,
+                                            __add(k.x, k.w) + 2 - b.x
+                                        )
+                                        local oy = math.min(
+                                            b.y - k.y + 2,
+                                            __add(k.y, k.h) + 2 - b.y
+                                        )
+                                        if ox < oy then
+                                            b.vx = __TS__Number(-b.vx)
+                                        else
+                                            b.vy = __TS__Number(-b.vy)
+                                        end
+                                        k.hp = k.hp - 1
+                                        if __le(k.hp, 0) then
+                                            __set(
+                                                st.score,
+                                                0,
+                                                __get(st.score, 0) + (k.row == 0 and 25 or 10)
+                                            )
+                                            __L1:sfx("break")
+                                            do
+                                                local j = 0
+                                                while j < 6 do
+                                                    __call(
+                                                        st.fx,
+                                                        "push",
+                                                        {
+                                                            x = __add(
+                                                                k.x,
+                                                                __L1:rnd(0, k.w)
+                                                            ),
+                                                            y = __add(
+                                                                k.y,
+                                                                __L1:rnd(0, k.h)
+                                                            ),
+                                                            vx = __L1:rnd(-60, 60),
+                                                            vy = __L1:rnd(-80, 10),
+                                                            t = 0
+                                                        }
+                                                    )
+                                                    j = j + 1
+                                                end
+                                            end
+                                            if math.random() < 0.14 then
+                                                __call(
+                                                    st.drops,
+                                                    "push",
+                                                    {
+                                                        x = k.x + k.w / 2,
+                                                        y = k.y,
+                                                        kind = __get(
+                                                            __arrL({"lapis", "borracha", "cola", "coracao"}, 4),
+                                                            math.random() < 0.1 and 3 or __L1:irnd(0, 2)
+                                                        )
+                                                    }
+                                                )
+                                            end
+                                        else
+                                            __L1:sfx("hit")
+                                        end
+                                        break
+                                    end
+                                end
                             end
                         end
                     end
@@ -7566,11 +9311,17 @@ local __O = {};
                             st.pads,
                             "forEach",
                             function(____, p)
-                                local ____t_521 = __t
-                                local ____t_520 = __t
-                                local ____temp_519 = not __t(d.got) and math.abs(d.y - p.y) < 6
-                                __O[1134] = ____temp_519
-                                if ____t_521(if ____t_520(____temp_519) then math.abs(d.x - p.x) < p.w / 2 + 5 else __O[1134]) then
+                                local ____t_867 = __t
+                                local ____t_result_866
+                                local ____t_865 = __t
+                                local ____temp_864 = not __t(d.got) and math.abs(d.y - p.y) < 6
+                                __O[1139] = ____temp_864
+                                if ____t_865(____temp_864) then
+                                    ____t_result_866 = math.abs(d.x - p.x) < p.w / 2 + 5
+                                else
+                                    ____t_result_866 = __O[1139]
+                                end
+                                if ____t_867(____t_result_866) then
                                     d.got = true
                                     __L1:sfx("power")
                                     if d.kind == "lapis" then
@@ -7580,14 +9331,20 @@ local __O = {};
                                     elseif d.kind == "coracao" then
                                         st.lives = math.min(5, st.lives + 1)
                                     else
-                                        local ____t_523 = __t
-                                        local ____call_result_522 = __call(
+                                        local ____t_result_870
+                                        local ____t_869 = __t
+                                        local ____call_result_868 = __call(
                                             st.balls,
                                             "find",
                                             function(____, b) return b.stuck == nil or b.stuck == nil end
                                         )
-                                        __O[1135] = ____call_result_522
-                                        local src = if ____t_523(____call_result_522) then __O[1135] else __get(st.balls, 0)
+                                        __O[1140] = ____call_result_868
+                                        if ____t_869(____call_result_868) then
+                                            ____t_result_870 = __O[1140]
+                                        else
+                                            ____t_result_870 = __get(st.balls, 0)
+                                        end
+                                        local src = ____t_result_870
                                         if __t(src) then
                                             for ____, a in __iterar((__arrL({-0.5, 0.5}, 2))) do
                                                 __call(
@@ -7684,59 +9441,61 @@ local __O = {};
                         "#9a7ad0"
                     }, 6)
                     for ____, k in __iterar((st.bricks)) do
-                        if __le(k.hp, 0) then
-                            continue
-                        end
-                        __L1:R(
-                            g,
-                            k.x,
-                            k.y,
-                            k.w,
-                            k.h,
-                            "#4a3a2a"
-                        )
-                        __L1:R(
-                            g,
-                            k.x + 1,
-                            k.y + 1,
-                            k.w - 2,
-                            k.h - 2,
-                            if __gt(k.hp, 1) then "#3a3a6a" else __get(pal, k.row)
-                        )
-                        __L1:R(
-                            g,
-                            k.x + 2,
-                            k.y + 2,
-                            k.w - 4,
-                            1,
-                            "rgba(255,255,255,.5)"
-                        )
-                        if __gt(k.hp, 1) then
+                        do
+                            if __le(k.hp, 0) then
+                                continue
+                            end
                             __L1:R(
                                 g,
-                                k.x + 6,
-                                k.y + 4,
-                                5,
-                                3,
-                                "#1a1a3a"
+                                k.x,
+                                k.y,
+                                k.w,
+                                k.h,
+                                "#4a3a2a"
                             )
                             __L1:R(
                                 g,
-                                k.x + 20,
-                                k.y + 3,
-                                4,
-                                4,
-                                "#1a1a3a"
+                                k.x + 1,
+                                k.y + 1,
+                                k.w - 2,
+                                k.h - 2,
+                                __gt(k.hp, 1) and "#3a3a6a" or __get(pal, k.row)
                             )
-                        else
                             __L1:R(
                                 g,
-                                k.x + 4,
-                                k.y + 5,
-                                k.w - 8,
+                                k.x + 2,
+                                k.y + 2,
+                                k.w - 4,
                                 1,
-                                "rgba(0,0,0,.18)"
+                                "rgba(255,255,255,.5)"
                             )
+                            if __gt(k.hp, 1) then
+                                __L1:R(
+                                    g,
+                                    k.x + 6,
+                                    k.y + 4,
+                                    5,
+                                    3,
+                                    "#1a1a3a"
+                                )
+                                __L1:R(
+                                    g,
+                                    k.x + 20,
+                                    k.y + 3,
+                                    4,
+                                    4,
+                                    "#1a1a3a"
+                                )
+                            else
+                                __L1:R(
+                                    g,
+                                    k.x + 4,
+                                    k.y + 5,
+                                    k.w - 8,
+                                    1,
+                                    "rgba(0,0,0,.18)"
+                                )
+                            end
                         end
                     end
                     for ____, d in __iterar((st.drops)) do
@@ -7786,7 +9545,7 @@ local __O = {};
                                 p.y + 1,
                                 p.w - 2,
                                 3,
-                                if __t(i) then "#7ad1ff" else if __gt(st.glue, 0) then "#e0f0e0" else "#e8c070"
+                                __t(i) and "#7ad1ff" or (__gt(st.glue, 0) and "#e0f0e0" or "#e8c070")
                             )
                             do
                                 local x = 4
@@ -7796,7 +9555,7 @@ local __O = {};
                                         p.x - p.w / 2 + x,
                                         p.y + 1,
                                         1,
-                                        if __t(__mod(x, 8)) then 1 else 2,
+                                        __t(__mod(x, 8)) and 1 or 2,
                                         "#6a4a2a"
                                     )
                                     x = x + 4
@@ -7925,40 +9684,58 @@ local __O = {};
                     do
                         local i = 0
                         while i < 2 do
-                            local cpu = i == 1 and st.mode == "solo"
-                            local press = nil
-                            if __t(cpu) then
-                                st.cpuT = st.cpuT - dt
-                                if __le(st.cpuT, 0) then
-                                    press = if __get(st.last, 1) == "a" then "b" else "a"
-                                    st.cpuT = 1 / (5.6 + st.round * 0.9 + math.sin(st.t * 2) * 1.2)
+                            do
+                                local cpu = i == 1 and st.mode == "solo"
+                                local press = nil
+                                if __t(cpu) then
+                                    st.cpuT = st.cpuT - dt
+                                    if __le(st.cpuT, 0) then
+                                        press = __get(st.last, 1) == "a" and "b" or "a"
+                                        st.cpuT = 1 / (5.6 + st.round * 0.9 + math.sin(st.t * 2) * 1.2)
+                                    end
+                                else
+                                    press = __t(__get(__L1.P, i).ap) and "a" or (__t(__get(__L1.P, i).bp) and "b" or nil)
                                 end
-                            else
-                                press = if __t(__get(__L1.P, i).ap) then "a" else if __t(__get(__L1.P, i).bp) then "b" else nil
-                            end
-                            if not __t(press) then
-                                continue
-                            end
-                            local sweet = math.abs(__get(st.pulse, i) - 0.5) < 0.12
-                            if press ~= __get(st.last, i) then
-                                __set(
-                                    force,
-                                    i,
-                                    __get(force, i) + if __t(cpu) then 0.017 else 0.02 * if __t(sweet) then 2 else 1
-                                )
-                                __inc(st.taps, i, 1, true)
-                                if __t(if __t(sweet) then not __t(cpu) else sweet) then
-                                    __call(st.pop, "push", {x = if __t(i) then 360 else 120, y = 70, s = "FORTE!", t = 0})
+                                if not __t(press) then
+                                    do i = i + 1 continue end
                                 end
-                                __L1:sfx("pull")
-                            else
-                                __set(
-                                    force,
-                                    i,
-                                    __get(force, i) + 0.003
-                                )
+                                local sweet = math.abs(__get(st.pulse, i) - 0.5) < 0.12
+                                if press ~= __get(st.last, i) then
+                                    __set(
+                                        force,
+                                        i,
+                                        __get(force, i) + (__t(cpu) and 0.017 or 0.02) * (__t(sweet) and 2 or 1)
+                                    )
+                                    __inc(st.taps, i, 1, true)
+                                    local ____t_872 = __t
+                                    local ____t_result_871
+                                    if __t(sweet) then
+                                        ____t_result_871 = not __t(cpu)
+                                    else
+                                        ____t_result_871 = sweet
+                                    end
+                                    if ____t_872(____t_result_871) then
+                                        __call(
+                                            st.pop,
+                                            "push",
+                                            {
+                                                x = __t(i) and 360 or 120,
+                                                y = 70,
+                                                s = "FORTE!",
+                                                t = 0
+                                            }
+                                        )
+                                    end
+                                    __L1:sfx("pull")
+                                else
+                                    __set(
+                                        force,
+                                        i,
+                                        __get(force, i) + 0.003
+                                    )
+                                end
+                                __set(st.last, i, press)
                             end
-                            __set(st.last, i, press)
                             i = i + 1
                         end
                     end
@@ -7966,9 +9743,9 @@ local __O = {};
                     st.v = st.v * 0.02 ^ dt
                     st.rope = __L1:clamp(st.rope + st.v * dt, -1.05, 1.05)
                     if math.abs(st.rope) >= 1 then
-                        local w = if __lt(st.rope, 0) then 0 else 1
+                        local w = __lt(st.rope, 0) and 0 or 1
                         __inc(st.wins, w, 1, true)
-                        __L1:sfx(if __t(w == 0 or st.mode == "duo") then "win" else "lose")
+                        __L1:sfx(__t(w == 0 or st.mode == "duo") and "win" or "lose")
                         st.shake = 0.4
                         do
                             local j = 0
@@ -7995,17 +9772,26 @@ local __O = {};
                                 st["end"](
                                     st,
                                     {
-                                        score = __get(st.wins, 0) * 300 + if w == 0 then 400 else 0 + __get(st.taps, 0) * 2,
+                                        score = __get(st.wins, 0) * 300 + (w == 0 and 400 or 0) + __get(st.taps, 0) * 2,
                                         win = w == 0,
-                                        text = if w == 0 then "Nikolas caiu na lama!" else "Você foi parar na lama!"
+                                        text = w == 0 and "Nikolas caiu na lama!" or "Você foi parar na lama!"
                                     }
                                 )
                             else
-                                st["end"](
-                                    st,
+                                local ____st_875 = st
+                                local ____st_end_876 = st["end"]
+                                local ____add_874 = __add
+                                local ____t_result_873
+                                if __t(w) then
+                                    ____t_result_873 = __get(__L1.PLAYER_NAME, 1)
+                                else
+                                    ____t_result_873 = __get(__L1.PLAYER_NAME, 0)
+                                end
+                                ____st_end_876(
+                                    ____st_875,
                                     {
                                         winner = w,
-                                        text = __add(if __t(w) then __get(__L1.PLAYER_NAME, 1) else __get(__L1.PLAYER_NAME, 0), " venceu o cabo de guerra!")
+                                        text = ____add_874(____t_result_873, " venceu o cabo de guerra!")
                                     }
                                 )
                             end
@@ -8076,7 +9862,7 @@ local __O = {};
                         while x < __L1.LW do
                             __L1:R(
                                 g,
-                                x + if __t(__mod(x, 60)) then 0 else 8,
+                                x + (__t(__mod(x, 60)) and 0 or 8),
                                 150 + __mod(x, 3) * 6,
                                 20,
                                 2,
@@ -8134,7 +9920,7 @@ local __O = {};
                                 ry + math.floor(math.sin((x + st.t * 40) * 0.05) * (math.abs(st.v) * 2) + 0.5),
                                 4,
                                 3,
-                                if __t(__mod(x, 8)) then "#c8a060" else "#a88040"
+                                __t(__mod(x, 8)) and "#c8a060" or "#a88040"
                             )
                             x = x + 4
                         end
@@ -8184,37 +9970,39 @@ local __O = {};
                     do
                         local i = 0
                         while i < 2 do
-                            local x = if __t(i) then 400 else 80
-                            local y = 60
-                            local p = __get(st.pulse, i)
-                            local r = 6 + math.abs(p - 0.5) * 22
-                            local sweet = math.abs(p - 0.5) < 0.12
-                            if __t(i == 1 and st.mode == "solo") then
-                                continue
-                            end
                             do
-                                local a = 0
-                                while a < 24 do
-                                    local an = a / 24 * math.pi * 2
-                                    __L1:R(
-                                        g,
-                                        x + math.cos(an) * r,
-                                        y + math.sin(an) * r,
-                                        2,
-                                        2,
-                                        if __t(sweet) then "#7af07a" else "#fff3d0"
-                                    )
-                                    a = a + 1
+                                local x = __t(i) and 400 or 80
+                                local y = 60
+                                local p = __get(st.pulse, i)
+                                local r = 6 + math.abs(p - 0.5) * 22
+                                local sweet = math.abs(p - 0.5) < 0.12
+                                if __t(i == 1 and st.mode == "solo") then
+                                    do i = i + 1 continue end
                                 end
+                                do
+                                    local a = 0
+                                    while a < 24 do
+                                        local an = a / 24 * math.pi * 2
+                                        __L1:R(
+                                            g,
+                                            x + math.cos(an) * r,
+                                            y + math.sin(an) * r,
+                                            2,
+                                            2,
+                                            __t(sweet) and "#7af07a" or "#fff3d0"
+                                        )
+                                        a = a + 1
+                                    end
+                                end
+                                __L1:R(
+                                    g,
+                                    x - 1,
+                                    y - 1,
+                                    3,
+                                    3,
+                                    "#7af07a"
+                                )
                             end
-                            __L1:R(
-                                g,
-                                x - 1,
-                                y - 1,
-                                3,
-                                3,
-                                "#7af07a"
-                            )
                             i = i + 1
                         end
                     end
@@ -8232,9 +10020,18 @@ local __O = {};
                         430,
                         {facing = 1, moving = lean > 0.2, frame = st.t * (1 + lean * 3), scale = 1.3}
                     )
-                    __L1:hero(
-                        c,
-                        if st.mode == "solo" then __L1:cpuType() else __get(__L1.PLAYER_TYPES, 1),
+                    local ____L1_hero_879 = __L1.hero
+                    local ____c_878 = c
+                    local ____temp_877
+                    if st.mode == "solo" then
+                        ____temp_877 = __L1:cpuType()
+                    else
+                        ____temp_877 = __get(__L1.PLAYER_TYPES, 1)
+                    end
+                    ____L1_hero_879(
+                        __L1,
+                        ____c_878,
+                        ____temp_877,
                         660 + off + 70,
                         430,
                         {facing = -1, moving = lean > 0.2, frame = st.t * (1 + lean * 3), scale = 1.3}
@@ -8283,7 +10080,7 @@ local __O = {};
                         __L1.W - 70,
                         20,
                         14,
-                        if st.mode == "solo" then "#c9a8ff" else __get(__L1.PLAYER_COL, 1),
+                        st.mode == "solo" and "#c9a8ff" or __get(__L1.PLAYER_COL, 1),
                         "right"
                     )
                     if __t(__gt(st.pause, 0) and __gt(st.t, 0.1)) then
@@ -8317,8 +10114,11 @@ local __O = {};
                 rulesDuo = __arrL({"Os dois correm juntos e somam pontos.", "Cada um tem 3 vidas. Coração revive o parceiro.", "Acaba quando os dois caírem."}, 3),
                 controls = __arrL({"Esquerda e direita: correr", "A: pular"}, 2),
                 init = function(self, st)
-                    st.pl = __call(
-                        if st.mode == "duo" then __get(
+                    local ____st_882 = st
+                    local ____call_881 = __call
+                    local ____temp_880
+                    if st.mode == "duo" then
+                        ____temp_880 = __get(
                             __arrL(
                                 {
                                     __arrL({180, 300}, 2),
@@ -8328,7 +10128,12 @@ local __O = {};
                                 3
                             ),
                             __L1:NP(st) - 2
-                        ) else __arrL({240}, 1),
+                        )
+                    else
+                        ____temp_880 = __arrL({240}, 1)
+                    end
+                    ____st_882.pl = ____call_881(
+                        ____temp_880,
                         "map",
                         function(____, x, i) return {
                             x = x,
@@ -8365,11 +10170,17 @@ local __O = {};
                             if __t(__get(__L1.P, i).x) then
                                 p.face = __get(__L1.P, i).x
                             end
-                            local ____t_526 = __t
-                            local ____t_525 = __t
-                            local ____temp_524 = p.y == 0
-                            __O[1136] = ____temp_524
-                            if ____t_526(if ____t_525(____temp_524) then __get(__L1.P, i).ap else __O[1136]) then
+                            local ____t_886 = __t
+                            local ____t_result_885
+                            local ____t_884 = __t
+                            local ____temp_883 = p.y == 0
+                            __O[1141] = ____temp_883
+                            if ____t_884(____temp_883) then
+                                ____t_result_885 = __get(__L1.P, i).ap
+                            else
+                                ____t_result_885 = __O[1141]
+                            end
+                            if ____t_886(____t_result_885) then
                                 p.vy = 230
                                 __L1:sfx("bounce")
                             end
@@ -8390,7 +10201,7 @@ local __O = {};
                             st.items,
                             "push",
                             {
-                                kind = if r < 0.1 then "acai" else if r < 0.118 then "coracao" else "chinelo",
+                                kind = r < 0.1 and "acai" or (r < 0.118 and "coracao" or "chinelo"),
                                 x = x,
                                 y = -30,
                                 vy = 0,
@@ -8402,105 +10213,133 @@ local __O = {};
                     st.flyT = st.flyT - dt
                     if __le(st.flyT, 0) then
                         st.flyT = __L1:rnd(6, 11) - diff * 3
-                        local dir = if math.random() < 0.5 then 1 else -1
+                        local dir = math.random() < 0.5 and 1 or -1
                         __call(st.items, "push", {
                             kind = "voador",
-                            x = if dir > 0 then -20 else __L1.LW + 20,
+                            x = dir > 0 and -20 or __L1.LW + 20,
                             y = 232,
                             vx = dir * (190 + diff * 90),
                             warn = 0.8
                         })
                     end
                     for ____, it in __iterar((st.items)) do
-                        if __gt(it.warn, 0) then
-                            it.warn = it.warn - dt
-                            continue
-                        end
-                        if it.kind == "voador" then
-                            it.x = it.x + it.vx * dt
-                        else
-                            it.vy = it.vy + 520 * dt
-                            it.y = it.y + it.vy * dt
-                            it.rot = it.rot + dt * 8
-                        end
-                        for ____, p in __iterar((st.pl)) do
-                            local ____t_529 = __t
-                            local ____t_528 = __t
-                            local ____le_result_527 = __le(p.hp, 0)
-                            __O[1137] = ____le_result_527
-                            if ____t_529(if ____t_528(____le_result_527) then __O[1137] else it.done) then
+                        do
+                            if __gt(it.warn, 0) then
+                                it.warn = it.warn - dt
                                 continue
                             end
-                            local py = 248 - p.y
-                            local ____t_531 = __t
-                            local ____temp_530 = math.abs(it.x - p.x) < 12 and __gt(it.y, py - 30)
-                            __O[1138] = ____temp_530
-                            local hit = if it.kind == "voador" then math.abs(it.x - p.x) < 10 and __lt(p.y, 14) else if ____t_531(____temp_530) then __lt(it.y, py) else __O[1138]
-                            if not __t(hit) then
-                                continue
+                            if it.kind == "voador" then
+                                it.x = it.x + it.vx * dt
+                            else
+                                it.vy = it.vy + 520 * dt
+                                it.y = it.y + it.vy * dt
+                                it.rot = it.rot + dt * 8
                             end
-                            if it.kind == "acai" then
-                                it.done = true
-                                st.acai = st.acai + 1
-                                __set(
-                                    st.score,
-                                    0,
-                                    __get(st.score, 0) + 50
-                                )
-                                __L1:sfx("pick")
-                                __call(st.pop, "push", {x = it.x, y = py - 30, s = "+50", t = 0})
-                            elseif it.kind == "coracao" then
-                                it.done = true
-                                local dead = __call(
-                                    st.pl,
-                                    "find",
-                                    function(____, q) return __le(q.hp, 0) end
-                                )
-                                if __t(dead) then
-                                    dead.hp = 1
-                                    dead.inv = 2
-                                else
-                                    p.hp = math.min(3, p.hp + 1)
-                                end
-                                __L1:sfx("power")
-                            elseif __le(p.inv, 0) then
-                                p.hp = p.hp - 1
-                                p.inv = 1.3
-                                it.done = it.kind ~= "voador"
-                                __L1:sfx("hit")
-                                st.shake = 0.25
-                            end
-                        end
-                        if __t(it.kind ~= "voador" and __gt(it.y, 250)) then
-                            it.done = true
-                            if it.kind == "chinelo" then
+                            for ____, p in __iterar((st.pl)) do
                                 do
-                                    local j = 0
-                                    while j < 3 do
-                                        __call(
-                                            st.pop,
-                                            "push",
-                                            {
-                                                x = __add(
-                                                    it.x,
-                                                    __L1:rnd(-6, 6)
-                                                ),
-                                                y = 248,
-                                                s = "·",
-                                                t = 0
-                                            }
+                                    local ____t_890 = __t
+                                    local ____t_result_889
+                                    local ____t_888 = __t
+                                    local ____le_result_887 = __le(p.hp, 0)
+                                    __O[1142] = ____le_result_887
+                                    if ____t_888(____le_result_887) then
+                                        ____t_result_889 = __O[1142]
+                                    else
+                                        ____t_result_889 = it.done
+                                    end
+                                    if ____t_890(____t_result_889) then
+                                        continue
+                                    end
+                                    local py = 248 - p.y
+                                    local ____temp_894
+                                    if it.kind == "voador" then
+                                        ____temp_894 = math.abs(it.x - p.x) < 10 and __lt(p.y, 14)
+                                    else
+                                        local ____t_result_893
+                                        local ____t_892 = __t
+                                        local ____temp_891 = math.abs(it.x - p.x) < 12 and __gt(it.y, py - 30)
+                                        __O[1143] = ____temp_891
+                                        if ____t_892(____temp_891) then
+                                            ____t_result_893 = __lt(it.y, py)
+                                        else
+                                            ____t_result_893 = __O[1143]
+                                        end
+                                        ____temp_894 = ____t_result_893
+                                    end
+                                    local hit = ____temp_894
+                                    if not __t(hit) then
+                                        continue
+                                    end
+                                    if it.kind == "acai" then
+                                        it.done = true
+                                        st.acai = st.acai + 1
+                                        __set(
+                                            st.score,
+                                            0,
+                                            __get(st.score, 0) + 50
                                         )
-                                        j = j + 1
+                                        __L1:sfx("pick")
+                                        __call(st.pop, "push", {x = it.x, y = py - 30, s = "+50", t = 0})
+                                    elseif it.kind == "coracao" then
+                                        it.done = true
+                                        local dead = __call(
+                                            st.pl,
+                                            "find",
+                                            function(____, q) return __le(q.hp, 0) end
+                                        )
+                                        if __t(dead) then
+                                            dead.hp = 1
+                                            dead.inv = 2
+                                        else
+                                            p.hp = math.min(3, p.hp + 1)
+                                        end
+                                        __L1:sfx("power")
+                                    elseif __le(p.inv, 0) then
+                                        p.hp = p.hp - 1
+                                        p.inv = 1.3
+                                        it.done = it.kind ~= "voador"
+                                        __L1:sfx("hit")
+                                        st.shake = 0.25
                                     end
                                 end
                             end
-                        end
-                        local ____t_534 = __t
-                        local ____t_533 = __t
-                        local ____temp_532 = it.kind == "voador"
-                        __O[1139] = ____temp_532
-                        if ____t_534(if ____t_533(____temp_532) then __lt(it.x, -40) or __gt(it.x, __L1.LW + 40) else __O[1139]) then
-                            it.done = true
+                            if __t(it.kind ~= "voador" and __gt(it.y, 250)) then
+                                it.done = true
+                                if it.kind == "chinelo" then
+                                    do
+                                        local j = 0
+                                        while j < 3 do
+                                            __call(
+                                                st.pop,
+                                                "push",
+                                                {
+                                                    x = __add(
+                                                        it.x,
+                                                        __L1:rnd(-6, 6)
+                                                    ),
+                                                    y = 248,
+                                                    s = "·",
+                                                    t = 0
+                                                }
+                                            )
+                                            j = j + 1
+                                        end
+                                    end
+                                end
+                            end
+                            local ____t_898 = __t
+                            local ____t_result_897
+                            local ____t_896 = __t
+                            local ____temp_895 = it.kind == "voador"
+                            __O[1144] = ____temp_895
+                            if ____t_896(____temp_895) then
+                                ____t_result_897 = __lt(it.x, -40) or __gt(it.x, __L1.LW + 40)
+                            else
+                                ____t_result_897 = __O[1144]
+                            end
+                            if ____t_898(____t_result_897) then
+                                it.done = true
+                            end
                         end
                     end
                     st.items = __call(
@@ -8656,188 +10495,190 @@ local __O = {};
                         end
                     end
                     for ____, it in __iterar((st.items)) do
-                        if it.kind == "voador" then
-                            if __gt(it.warn, 0) then
-                                if __t(__mod(
-                                    math.floor(st.t * 10),
-                                    2
-                                )) then
-                                    __L1:txt(
-                                        g,
-                                        "!",
-                                        if __gt(it.vx, 0) then 10 else __L1.LW - 10,
-                                        232,
-                                        10,
-                                        "#e84a3a",
-                                        "center",
-                                        nil
-                                    )
+                        do
+                            if it.kind == "voador" then
+                                if __gt(it.warn, 0) then
+                                    if __t(__mod(
+                                        math.floor(st.t * 10),
+                                        2
+                                    )) then
+                                        __L1:txt(
+                                            g,
+                                            "!",
+                                            __gt(it.vx, 0) and 10 or __L1.LW - 10,
+                                            232,
+                                            10,
+                                            "#e84a3a",
+                                            "center",
+                                            nil
+                                        )
+                                    end
+                                    continue
                                 end
-                                continue
-                            end
-                            __L1:R(
-                                g,
-                                it.x - 10,
-                                it.y - 3,
-                                20,
-                                6,
-                                "#2a5ad0"
-                            )
-                            __L1:R(
-                                g,
-                                it.x - 8,
-                                it.y - 2,
-                                16,
-                                4,
-                                "#4a8af0"
-                            )
-                            __L1:R(
-                                g,
-                                it.x - 2,
-                                it.y - 5,
-                                4,
-                                3,
-                                "#f0f0f0"
-                            )
-                            continue
-                        end
-                        local sw = math.max(
-                            4,
-                            14 - math.max(0, 250 - it.y) / 25
-                        )
-                        __L1:R(
-                            g,
-                            it.x - sw,
-                            249,
-                            sw * 2,
-                            2,
-                            "rgba(20,20,30,.35)"
-                        )
-                        if __gt(it.warn, 0) then
-                            continue
-                        end
-                        if it.kind == "chinelo" then
-                            local v = __mod(
-                                math.floor(it.rot),
-                                2
-                            )
-                            if __t(v) then
                                 __L1:R(
                                     g,
-                                    it.x - 4,
-                                    it.y - 9,
-                                    8,
-                                    18,
-                                    "#2a5ad0"
-                                )
-                                __L1:R(
-                                    g,
-                                    it.x - 3,
-                                    it.y - 8,
+                                    it.x - 10,
+                                    it.y - 3,
+                                    20,
                                     6,
-                                    16,
-                                    "#4a8af0"
-                                )
-                                __L1:R(
-                                    g,
-                                    it.x - 1,
-                                    it.y - 6,
-                                    2,
-                                    5,
-                                    "#f0f0f0"
-                                )
-                            else
-                                __L1:R(
-                                    g,
-                                    it.x - 9,
-                                    it.y - 4,
-                                    18,
-                                    8,
                                     "#2a5ad0"
                                 )
                                 __L1:R(
                                     g,
                                     it.x - 8,
-                                    it.y - 3,
+                                    it.y - 2,
                                     16,
-                                    6,
+                                    4,
                                     "#4a8af0"
                                 )
                                 __L1:R(
                                     g,
-                                    it.x - 4,
-                                    it.y - 1,
-                                    5,
-                                    2,
+                                    it.x - 2,
+                                    it.y - 5,
+                                    4,
+                                    3,
                                     "#f0f0f0"
                                 )
+                                continue
                             end
-                        elseif it.kind == "acai" then
-                            __L1:R(
-                                g,
-                                it.x - 5,
-                                it.y - 8,
-                                10,
-                                10,
-                                "#f0f0f0"
-                            )
-                            __L1:R(
-                                g,
-                                it.x - 4,
-                                it.y - 7,
-                                8,
+                            local sw = math.max(
                                 4,
-                                "#5a1a5a"
+                                14 - math.max(0, 250 - it.y) / 25
                             )
                             __L1:R(
                                 g,
-                                it.x - 3,
-                                it.y - 9,
-                                6,
+                                it.x - sw,
+                                249,
+                                sw * 2,
                                 2,
-                                "#9a3a8a"
+                                "rgba(20,20,30,.35)"
                             )
-                            __L1:R(
-                                g,
-                                it.x + 1,
-                                it.y - 13,
-                                1,
-                                5,
-                                "#e84a3a"
-                            )
-                        else
-                            __L1:R(
-                                g,
-                                it.x - 5,
-                                it.y - 4,
-                                4,
-                                4,
-                                "#e84a5a"
-                            )
-                            __L1:R(
-                                g,
-                                it.x + 1,
-                                it.y - 4,
-                                4,
-                                4,
-                                "#e84a5a"
-                            )
-                            __L1:R(
-                                g,
-                                it.x - 5,
-                                it.y - 1,
-                                10,
-                                3,
-                                "#e84a5a"
-                            )
-                            __L1:R(
-                                g,
-                                it.x - 3,
-                                it.y + 2,
-                                6,
-                                2,
-                                "#e84a5a"
-                            )
+                            if __gt(it.warn, 0) then
+                                continue
+                            end
+                            if it.kind == "chinelo" then
+                                local v = __mod(
+                                    math.floor(it.rot),
+                                    2
+                                )
+                                if __t(v) then
+                                    __L1:R(
+                                        g,
+                                        it.x - 4,
+                                        it.y - 9,
+                                        8,
+                                        18,
+                                        "#2a5ad0"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        it.x - 3,
+                                        it.y - 8,
+                                        6,
+                                        16,
+                                        "#4a8af0"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        it.x - 1,
+                                        it.y - 6,
+                                        2,
+                                        5,
+                                        "#f0f0f0"
+                                    )
+                                else
+                                    __L1:R(
+                                        g,
+                                        it.x - 9,
+                                        it.y - 4,
+                                        18,
+                                        8,
+                                        "#2a5ad0"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        it.x - 8,
+                                        it.y - 3,
+                                        16,
+                                        6,
+                                        "#4a8af0"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        it.x - 4,
+                                        it.y - 1,
+                                        5,
+                                        2,
+                                        "#f0f0f0"
+                                    )
+                                end
+                            elseif it.kind == "acai" then
+                                __L1:R(
+                                    g,
+                                    it.x - 5,
+                                    it.y - 8,
+                                    10,
+                                    10,
+                                    "#f0f0f0"
+                                )
+                                __L1:R(
+                                    g,
+                                    it.x - 4,
+                                    it.y - 7,
+                                    8,
+                                    4,
+                                    "#5a1a5a"
+                                )
+                                __L1:R(
+                                    g,
+                                    it.x - 3,
+                                    it.y - 9,
+                                    6,
+                                    2,
+                                    "#9a3a8a"
+                                )
+                                __L1:R(
+                                    g,
+                                    it.x + 1,
+                                    it.y - 13,
+                                    1,
+                                    5,
+                                    "#e84a3a"
+                                )
+                            else
+                                __L1:R(
+                                    g,
+                                    it.x - 5,
+                                    it.y - 4,
+                                    4,
+                                    4,
+                                    "#e84a5a"
+                                )
+                                __L1:R(
+                                    g,
+                                    it.x + 1,
+                                    it.y - 4,
+                                    4,
+                                    4,
+                                    "#e84a5a"
+                                )
+                                __L1:R(
+                                    g,
+                                    it.x - 5,
+                                    it.y - 1,
+                                    10,
+                                    3,
+                                    "#e84a5a"
+                                )
+                                __L1:R(
+                                    g,
+                                    it.x - 3,
+                                    it.y + 2,
+                                    6,
+                                    2,
+                                    "#e84a5a"
+                                )
+                            end
                         end
                     end
                 end,
@@ -8856,14 +10697,20 @@ local __O = {};
                                 )
                                 return
                             end
-                            local ____t_537 = __t
-                            local ____t_536 = __t
-                            local ____gt_result_535 = __gt(p.inv, 0)
-                            __O[1140] = ____gt_result_535
-                            __D[1] = if ____t_537(if ____t_536(____gt_result_535) then __mod(
-                                math.floor(st.t * 14),
-                                2
-                            ) else __O[1140]) then
+                            local ____t_902 = __t
+                            local ____t_result_901
+                            local ____t_900 = __t
+                            local ____gt_result_899 = __gt(p.inv, 0)
+                            __O[1145] = ____gt_result_899
+                            if ____t_900(____gt_result_899) then
+                                ____t_result_901 = __mod(
+                                    math.floor(st.t * 14),
+                                    2
+                                )
+                            else
+                                ____t_result_901 = __O[1145]
+                            end
+                            if ____t_902(____t_result_901) then
                                 return
                             end
                             __L1:hero(
@@ -8888,10 +10735,10 @@ local __O = {};
                             math.floor(__get(st.score, 0) + 0.5)
                         ),
                         __L1.W / 2,
-                        if __gt(
+                        __gt(
                             __len(st.pl),
                             2
-                        ) then 44 else 16,
+                        ) and 44 or 16,
                         14
                     )
                     if __gt(
@@ -8904,14 +10751,20 @@ local __O = {};
                                 st.pl,
                                 "map",
                                 function(____, p)
-                                    local ____t_539 = __t
-                                    local ____call_result_538 = __call(
+                                    local ____t_result_905
+                                    local ____t_904 = __t
+                                    local ____call_result_903 = __call(
                                         "♥",
                                         "repeat",
                                         math.max(0, p.hp)
                                     )
-                                    __O[1141] = ____call_result_538
-                                    return if ____t_539(____call_result_538) then __O[1141] else "✕"
+                                    __O[1146] = ____call_result_903
+                                    if ____t_904(____call_result_903) then
+                                        ____t_result_905 = __O[1146]
+                                    else
+                                        ____t_result_905 = "✕"
+                                    end
+                                    return ____t_result_905
                                 end
                             )
                         )
@@ -8919,14 +10772,23 @@ local __O = {};
                         __call(
                             st.pl,
                             "forEach",
-                            function(____, p, i) return __L1:txt(
-                                c,
-                                __add(
-                                    __add(
-                                        if st.mode == "duo" then __add(
-                                            __get(__L1.PLAYER_NAME, i),
-                                            " "
-                                        ) else "",
+                            function(____, p, i)
+                                local ____L1_txt_912 = __L1.txt
+                                local ____c_910 = c
+                                local ____add_908 = __add
+                                local ____add_907 = __add
+                                local ____temp_906
+                                if st.mode == "duo" then
+                                    ____temp_906 = __add(
+                                        __get(__L1.PLAYER_NAME, i),
+                                        " "
+                                    )
+                                else
+                                    ____temp_906 = ""
+                                end
+                                local ____add_908_result_911 = ____add_908(
+                                    ____add_907(
+                                        ____temp_906,
                                         __call(
                                             "♥",
                                             "repeat",
@@ -8938,13 +10800,24 @@ local __O = {};
                                         "repeat",
                                         3 - math.max(0, p.hp)
                                     )
-                                ),
-                                if __t(i) then __L1.W - 70 else 20,
-                                16,
-                                14,
-                                __get(__L1.PLAYER_COL, i),
-                                if __t(i) then "right" else "left"
-                            ) end
+                                )
+                                local ____t_result_909
+                                if __t(i) then
+                                    ____t_result_909 = __L1.W - 70
+                                else
+                                    ____t_result_909 = 20
+                                end
+                                return ____L1_txt_912(
+                                    __L1,
+                                    ____c_910,
+                                    ____add_908_result_911,
+                                    ____t_result_909,
+                                    16,
+                                    14,
+                                    __get(__L1.PLAYER_COL, i),
+                                    __t(i) and "right" or "left"
+                                )
+                            end
                         )
                     end
                 end
@@ -8978,13 +10851,16 @@ local __O = {};
                     if r.state == "wait" then
                         r.wait = r.wait - dt
                         if __t(r.fakeAt ~= nil and __le(r.wait, r.fakeAt)) then
-                            r.fake = {s = if math.random() < 0.5 then "COCÓ..." else "QUÉN!", t = 0.8}
+                            r.fake = {
+                                s = math.random() < 0.5 and "COCÓ..." or "QUÉN!",
+                                t = 0.8
+                            }
                             r.fakeAt = nil
                             __L1:sfx("fake")
                         end
                         if __t(r.fake) then
-                            local ____r_fake_540, ____t_541 = r.fake, "t"
-                            ____r_fake_540[____t_541] = ____r_fake_540[____t_541] - dt
+                            local ____r_fake_913, ____t_914 = r.fake, "t"
+                            ____r_fake_913[____t_914] = ____r_fake_913[____t_914] - dt
                             if __le(r.fake.t, 0) then
                                 r.fake = nil
                             end
@@ -8995,11 +10871,17 @@ local __O = {};
                                 i,
                                 __L1:NP(st)
                             ) do
-                                local ____t_544 = __t
-                                local ____t_543 = __t
-                                local ____get_result_ap_542 = __get(__L1.P, i).ap
-                                __O[1142] = ____get_result_ap_542
-                                if ____t_544(if ____t_543(____get_result_ap_542) then r.state == "wait" else __O[1142]) then
+                                local ____t_918 = __t
+                                local ____t_result_917
+                                local ____t_916 = __t
+                                local ____get_result_ap_915 = __get(__L1.P, i).ap
+                                __O[1147] = ____get_result_ap_915
+                                if ____t_916(____get_result_ap_915) then
+                                    ____t_result_917 = r.state == "wait"
+                                else
+                                    ____t_result_917 = __O[1147]
+                                end
+                                if ____t_918(____t_result_917) then
                                     r.state = "early"
                                     r.who = i
                                     r.t = 0
@@ -9038,11 +10920,17 @@ local __O = {};
                                 i,
                                 __L1:NP(st)
                             ) do
-                                local ____t_547 = __t
-                                local ____t_546 = __t
-                                local ____get_result_ap_545 = __get(__L1.P, i).ap
-                                __O[1143] = ____get_result_ap_545
-                                if ____t_547(if ____t_546(____get_result_ap_545) then r.state == "go" else __O[1143]) then
+                                local ____t_922 = __t
+                                local ____t_result_921
+                                local ____t_920 = __t
+                                local ____get_result_ap_919 = __get(__L1.P, i).ap
+                                __O[1148] = ____get_result_ap_919
+                                if ____t_920(____get_result_ap_919) then
+                                    ____t_result_921 = r.state == "go"
+                                else
+                                    ____t_result_921 = __O[1148]
+                                end
+                                if ____t_922(____t_result_921) then
                                     r.state = "hit"
                                     r.who = i
                                     r.ms = math.floor(r.t * 1000 + 0.5)
@@ -9067,17 +10955,43 @@ local __O = {};
                             end
                         end
                     else
-                        r.t2 = __add(if __t(r.t2) then r.t2 else 0, dt)
-                        r.t = __add(if __t(r.t) then r.t else 0, dt)
-                        local ____t_550 = __t
-                        local ____t_549 = __t
-                        local ____temp_548 = __gt(r.t2, 1.6) and r.state == "hit"
-                        __O[1144] = ____temp_548
-                        if ____t_550(if ____t_549(____temp_548) then __O[1144] else r.state == "early" and __gt(r.t, 1.6)) then
-                            local done = if st.mode == "solo" then __ge(
-                                __len(st.times),
-                                5
-                            ) else math.max(__TS__Spread(__iter(st.pts))) >= 3
+                        local ____add_924 = __add
+                        local ____t_result_923
+                        if __t(r.t2) then
+                            ____t_result_923 = r.t2
+                        else
+                            ____t_result_923 = 0
+                        end
+                        r.t2 = ____add_924(____t_result_923, dt)
+                        local ____add_926 = __add
+                        local ____t_result_925
+                        if __t(r.t) then
+                            ____t_result_925 = r.t
+                        else
+                            ____t_result_925 = 0
+                        end
+                        r.t = ____add_926(____t_result_925, dt)
+                        local ____t_930 = __t
+                        local ____t_result_929
+                        local ____t_928 = __t
+                        local ____temp_927 = __gt(r.t2, 1.6) and r.state == "hit"
+                        __O[1149] = ____temp_927
+                        if ____t_928(____temp_927) then
+                            ____t_result_929 = __O[1149]
+                        else
+                            ____t_result_929 = r.state == "early" and __gt(r.t, 1.6)
+                        end
+                        if ____t_930(____t_result_929) then
+                            local ____temp_931
+                            if st.mode == "solo" then
+                                ____temp_931 = __ge(
+                                    __len(st.times),
+                                    5
+                                )
+                            else
+                                ____temp_931 = math.max(__TS__Spread(__iter(st.pts))) >= 3
+                            end
+                            local done = ____temp_931
                             if __t(done) then
                                 if st.mode == "solo" then
                                     local sc = __call(
@@ -9110,18 +11024,30 @@ local __O = {};
                                         __L1:NP(st)
                                     )
                                     local best = math.max(__TS__Spread(__iter(sc)))
-                                    local w = if __gt(
+                                    local ____gt_result_932
+                                    if __gt(
                                         __len(__call(
                                             sc,
                                             "filter",
                                             function(____, v) return v == best end
                                         )),
                                         1
-                                    ) then nil else __call(sc, "indexOf", best)
-                                    st["end"](st, {winner = w, text = if w == nil then "Empate de reflexos!" else __add(
-                                        __get(__L1.PLAYER_NAME, w),
-                                        " tem o reflexo mais rápido da roça!"
-                                    )})
+                                    ) then
+                                        ____gt_result_932 = nil
+                                    else
+                                        ____gt_result_932 = __call(sc, "indexOf", best)
+                                    end
+                                    local w = ____gt_result_932
+                                    st["end"](
+                                        st,
+                                        {
+                                            winner = w,
+                                            text = w == nil and "Empate de reflexos!" or __add(
+                                                __get(__L1.PLAYER_NAME, w),
+                                                " tem o reflexo mais rápido da roça!"
+                                            )
+                                        }
+                                    )
                                 end
                             else
                                 st:next(st)
@@ -9135,13 +11061,17 @@ local __O = {};
                     do
                         local i = 0
                         while i < 12 do
-                            __L1:R(
+                            local ____L1_R_935 = __L1.R
+                            local ____array_934 = __TS__SparseArrayNew(
                                 g,
                                 0,
                                 i * 12,
                                 __L1.LW,
-                                12,
-                                if __t(go) then __get(
+                                12
+                            )
+                            local ____t_result_933
+                            if __t(go) then
+                                ____t_result_933 = __get(
                                     __arrL({
                                         "#f8d890",
                                         "#f8d088",
@@ -9157,7 +11087,9 @@ local __O = {};
                                         "#b88038"
                                     }, 12),
                                     i
-                                ) else __get(
+                                )
+                            else
+                                ____t_result_933 = __get(
                                     __arrL({
                                         "#2a3058",
                                         "#323862",
@@ -9174,6 +11106,11 @@ local __O = {};
                                     }, 12),
                                     i
                                 )
+                            end
+                            __TS__SparseArrayPush(____array_934, ____t_result_933)
+                            ____L1_R_935(
+                                __L1,
+                                __TS__SparseArraySpread(____array_934)
                             )
                             i = i + 1
                         end
@@ -9184,7 +11121,7 @@ local __O = {};
                         150,
                         __L1.LW,
                         120,
-                        if __t(go) then "#6a9a4a" else "#3a5a3a"
+                        __t(go) and "#6a9a4a" or "#3a5a3a"
                     )
                     do
                         local x = 0
@@ -9217,7 +11154,7 @@ local __O = {};
                         "#8a6a4a"
                     )
                     local bx = 240
-                    local by = 168 - if __t(go) then 6 else 0
+                    local by = 168 - (__t(go) and 6 or 0)
                     __L1:R(
                         g,
                         bx - 10,
@@ -9262,7 +11199,7 @@ local __O = {};
                         g,
                         bx + 16,
                         by - 26,
-                        if __t(go) then 6 else 4,
+                        __t(go) and 6 or 4,
                         3,
                         "#e8a83a"
                     )
@@ -9345,13 +11282,22 @@ local __O = {};
                 drawMain = function(self, c, st)
                     local r = st.r
                     if r.state == "wait" then
-                        __L1:txt(
-                            c,
-                            if __t(r.fake) then r.fake.s else "ESPERA...",
+                        local ____L1_txt_938 = __L1.txt
+                        local ____c_937 = c
+                        local ____t_result_936
+                        if __t(r.fake) then
+                            ____t_result_936 = r.fake.s
+                        else
+                            ____t_result_936 = "ESPERA..."
+                        end
+                        ____L1_txt_938(
+                            __L1,
+                            ____c_937,
+                            ____t_result_936,
                             __L1.W / 2,
                             140,
-                            if __t(r.fake) then 26 else 22,
-                            if __t(r.fake) then "#ffd0a0" else "#c8c8e8"
+                            __t(r.fake) and 26 or 22,
+                            __t(r.fake) and "#ffd0a0" or "#c8c8e8"
                         )
                     end
                     if r.state == "go" then
@@ -9367,12 +11313,22 @@ local __O = {};
                         )
                     end
                     if r.state == "early" then
-                        __L1:txt(
-                            c,
-                            __add(if st.mode == "duo" then __add(
+                        local ____L1_txt_942 = __L1.txt
+                        local ____c_941 = c
+                        local ____add_940 = __add
+                        local ____temp_939
+                        if st.mode == "duo" then
+                            ____temp_939 = __add(
                                 __get(__L1.PLAYER_NAME, r.who),
                                 " "
-                            ) else "", "APERTOU ANTES!"),
+                            )
+                        else
+                            ____temp_939 = ""
+                        end
+                        ____L1_txt_942(
+                            __L1,
+                            ____c_941,
+                            ____add_940(____temp_939, "APERTOU ANTES!"),
                             __L1.W / 2,
                             140,
                             26,
@@ -9380,26 +11336,70 @@ local __O = {};
                         )
                     end
                     if r.state == "hit" then
-                        __L1:txt(
-                            c,
-                            if r.who == nil then "NINGUÉM APERTOU!" else __add(
-                                __add(if st.mode == "duo" then __add(
+                        local ____L1_txt_953 = __L1.txt
+                        local ____c_951 = c
+                        local ____temp_946
+                        if r.who == nil then
+                            ____temp_946 = "NINGUÉM APERTOU!"
+                        else
+                            local ____add_945 = __add
+                            local ____add_944 = __add
+                            local ____temp_943
+                            if st.mode == "duo" then
+                                ____temp_943 = __add(
                                     __get(__L1.PLAYER_NAME, r.who),
                                     " · "
-                                ) else "", r.ms),
+                                )
+                            else
+                                ____temp_943 = ""
+                            end
+                            ____temp_946 = ____add_945(
+                                ____add_944(____temp_943, r.ms),
                                 " ms"
-                            ),
-                            __L1.W / 2,
+                            )
+                        end
+                        local ____temp_952 = __L1.W / 2
+                        local ____temp_950
+                        if r.who == nil then
+                            ____temp_950 = "#ff8a7a"
+                        else
+                            local ____get_949 = __get
+                            local ____L1_PLAYER_COL_948 = __L1.PLAYER_COL
+                            local ____t_result_947
+                            if __t(r.who) then
+                                ____t_result_947 = r.who
+                            else
+                                ____t_result_947 = 0
+                            end
+                            ____temp_950 = ____get_949(____L1_PLAYER_COL_948, ____t_result_947)
+                        end
+                        ____L1_txt_953(
+                            __L1,
+                            ____c_951,
+                            ____temp_946,
+                            ____temp_952,
                             140,
                             32,
-                            if r.who == nil then "#ff8a7a" else __get(__L1.PLAYER_COL, if __t(r.who) then r.who else 0)
+                            ____temp_950
                         )
                     end
                     local n = __L1:NP(st)
                     do
                         local i = 0
                         while __lt(i, n) do
-                            local x = if n == 1 then __L1.W / 2 else if n == 2 then if __t(i) then 720 else 240 else 160 + i * (640 / (n - 1))
+                            local ____temp_955
+                            if n == 1 then
+                                ____temp_955 = __L1.W / 2
+                            else
+                                local ____temp_954
+                                if n == 2 then
+                                    ____temp_954 = __t(i) and 720 or 240
+                                else
+                                    ____temp_954 = 160 + i * (640 / (n - 1))
+                                end
+                                ____temp_955 = ____temp_954
+                            end
+                            local x = ____temp_955
                             local react = r.state == "hit" and r.who == i
                             __L1:hero(
                                 c,
@@ -9407,10 +11407,10 @@ local __O = {};
                                 x,
                                 520,
                                 {
-                                    facing = if __t(i) then -1 else 1,
+                                    facing = __t(i) and -1 or 1,
                                     attack = react,
                                     attackProgress = 0.5,
-                                    emotion = if __t(r.state == "early" and r.who == i) then "embarrassed" else nil,
+                                    emotion = __t(r.state == "early" and r.who == i) and "embarrassed" or nil,
                                     frame = st.t,
                                     scale = 1.4
                                 }
@@ -9426,7 +11426,7 @@ local __O = {};
                                     "RODADA ",
                                     math.min(
                                         5,
-                                        __len(st.times) + if __t(r.state == "wait" or r.state == "go") then 1 else 0
+                                        __len(st.times) + (__t(r.state == "wait" or r.state == "go") and 1 or 0)
                                     )
                                 ),
                                 " / 5"
@@ -9445,10 +11445,18 @@ local __O = {};
                 extra = {next = function(self, st)
                     st.round = st.round + 1
                     local wait = __L1:rnd(1.6, 4.4)
-                    st.r = {
+                    local ____st_958 = st
+                    local ____wait_957 = wait
+                    local ____temp_956
+                    if math.random() < 0.55 then
+                        ____temp_956 = __L1:rnd(0.6, wait - 0.5)
+                    else
+                        ____temp_956 = nil
+                    end
+                    ____st_958.r = {
                         state = "wait",
-                        wait = wait,
-                        fakeAt = if math.random() < 0.55 then __L1:rnd(0.6, wait - 0.5) else nil,
+                        wait = ____wait_957,
+                        fakeAt = ____temp_956,
                         fake = nil,
                         t = 0
                     }
@@ -9496,7 +11504,7 @@ local __O = {};
                             local j = __L1:irnd(0, i)
                             do
                                 do
-                                    __O[1145] = __iter(__arrL(
+                                    __O[1150] = __iter(__arrL(
                                         {
                                             __get(deck, j),
                                             __get(deck, i)
@@ -9506,16 +11514,16 @@ local __O = {};
                                     __set(
                                         deck,
                                         i,
-                                        __get(__O[1145], 0)
+                                        __get(__O[1150], 0)
                                     )
                                 end
                                 __set(
                                     deck,
                                     j,
-                                    __get(__O[1145], 1)
+                                    __get(__O[1150], 1)
                                 )
                             end
-                            local ____ = __O[1145]
+                            local ____ = __O[1150]
                             i = i - 1
                         end
                     end
@@ -9538,20 +11546,36 @@ local __O = {};
                 end,
                 flip = function(self, st, i)
                     local c = __get(st.cards, i)
-                    local ____t_557 = __t
-                    local ____t_556 = __t
-                    local ____t_554 = __t
-                    local ____t_552 = __t
-                    local ____gt_result_551 = __gt(st.wait, 0)
-                    __O[1146] = ____gt_result_551
-                    local ____temp_553 = if ____t_552(____gt_result_551) then __O[1146] else c.up
-                    __O[1147] = ____temp_553
-                    local ____temp_555 = if ____t_554(____temp_553) then __O[1147] else c.done
-                    __O[1148] = ____temp_555
-                    __D[1] = if ____t_557(if ____t_556(____temp_555) then __O[1148] else __ge(
-                        __len(st.open),
-                        2
-                    )) then
+                    local ____t_966 = __t
+                    local ____t_result_965
+                    local ____t_964 = __t
+                    local ____t_result_963
+                    local ____t_962 = __t
+                    local ____t_result_961
+                    local ____t_960 = __t
+                    local ____gt_result_959 = __gt(st.wait, 0)
+                    __O[1151] = ____gt_result_959
+                    if ____t_960(____gt_result_959) then
+                        ____t_result_961 = __O[1151]
+                    else
+                        ____t_result_961 = c.up
+                    end
+                    __O[1152] = ____t_result_961
+                    if ____t_962(____t_result_961) then
+                        ____t_result_963 = __O[1152]
+                    else
+                        ____t_result_963 = c.done
+                    end
+                    __O[1153] = ____t_result_963
+                    if ____t_964(____t_result_963) then
+                        ____t_result_965 = __O[1153]
+                    else
+                        ____t_result_965 = __ge(
+                            __len(st.open),
+                            2
+                        )
+                    end
+                    if ____t_966(____t_result_965) then
                         return
                     end
                     c.up = true
@@ -9570,9 +11594,9 @@ local __O = {};
                             2
                         )
                         if a.k == b.k then
-                            local ____a_558 = a
+                            local ____a_967 = a
                             b.done = true
-                            ____a_558.done = true
+                            ____a_967.done = true
                             st.open = __arrL({}, 0)
                             st.combo = st.combo + 1
                             st.best = math.max(st.best, st.combo)
@@ -9584,7 +11608,17 @@ local __O = {};
                             )
                             __L1:sfx("pick")
                             local p = self:pos(__call(st.cards, "indexOf", a))
-                            __call(st.pop, "push", {x = p.x + 26, y = p.y + 10, s = if __gt(st.combo, 1) then __add("SEQUÊNCIA x", st.combo) else "PAR!", t = 0})
+                            local ____call_972 = __call
+                            local ____st_pop_971 = st.pop
+                            local ____temp_969 = p.x + 26
+                            local ____temp_970 = p.y + 10
+                            local ____gt_result_968
+                            if __gt(st.combo, 1) then
+                                ____gt_result_968 = __add("SEQUÊNCIA x", st.combo)
+                            else
+                                ____gt_result_968 = "PAR!"
+                            end
+                            ____call_972(____st_pop_971, "push", {x = ____temp_969, y = ____temp_970, s = ____gt_result_968, t = 0})
                         else
                             st.wait = 0.9
                             st.combo = 0
@@ -9599,14 +11633,25 @@ local __O = {};
                             __len(st.cards)
                         ) do
                             local p = self:pos(i)
-                            local ____t_563 = __t
-                            local ____t_562 = __t
-                            local ____t_560 = __t
-                            local ____temp_559 = __ge(x, p.x) and __lt(x, p.x + 52)
-                            __O[1149] = ____temp_559
-                            local ____temp_561 = if ____t_560(____temp_559) then __ge(y, p.y) else __O[1149]
-                            __O[1150] = ____temp_561
-                            if ____t_563(if ____t_562(____temp_561) then __lt(y, p.y + 50) else __O[1150]) then
+                            local ____t_978 = __t
+                            local ____t_result_977
+                            local ____t_976 = __t
+                            local ____t_result_975
+                            local ____t_974 = __t
+                            local ____temp_973 = __ge(x, p.x) and __lt(x, p.x + 52)
+                            __O[1154] = ____temp_973
+                            if ____t_974(____temp_973) then
+                                ____t_result_975 = __ge(y, p.y)
+                            else
+                                ____t_result_975 = __O[1154]
+                            end
+                            __O[1155] = ____t_result_975
+                            if ____t_976(____t_result_975) then
+                                ____t_result_977 = __lt(y, p.y + 50)
+                            else
+                                ____t_result_977 = __O[1155]
+                            end
+                            if ____t_978(____t_result_977) then
                                 st.cur = i
                                 self:flip(st, i)
                                 return
@@ -9636,7 +11681,15 @@ local __O = {};
                             end
                         end
                     end
-                    local p = __get(__L1.P, if st.mode == "duo" then st.turn else 0)
+                    local ____get_981 = __get
+                    local ____L1_P_980 = __L1.P
+                    local ____temp_979
+                    if st.mode == "duo" then
+                        ____temp_979 = st.turn
+                    else
+                        ____temp_979 = 0
+                    end
+                    local p = ____get_981(____L1_P_980, ____temp_979)
                     while __t(__len(p.dirs)) do
                         local d = __call(p.dirs, "shift")
                         local c = __mod(st.cur, 5)
@@ -9658,9 +11711,9 @@ local __O = {};
                         __L1.P,
                         "forEach",
                         function(____, q)
-                            local ____arrL_result_564 = __arrL({}, 0)
-                            q.dirs = ____arrL_result_564
-                            return ____arrL_result_564
+                            local ____arrL_result_982 = __arrL({}, 0)
+                            q.dirs = ____arrL_result_982
+                            return ____arrL_result_982
                         end
                     )
                     if __t(p.ap) then
@@ -9697,14 +11750,20 @@ local __O = {};
                                 __L1:NP(st)
                             )
                             local best = math.max(__TS__Spread(__iter(sc)))
-                            local w = if __gt(
+                            local ____gt_result_983
+                            if __gt(
                                 __len(__call(
                                     sc,
                                     "filter",
                                     function(____, v) return v == best end
                                 )),
                                 1
-                            ) then nil else __call(sc, "indexOf", best)
+                            ) then
+                                ____gt_result_983 = nil
+                            else
+                                ____gt_result_983 = __call(sc, "indexOf", best)
+                            end
+                            local w = ____gt_result_983
                             st["end"](
                                 st,
                                 {
@@ -9778,19 +11837,36 @@ local __O = {};
                         function(____, c, i)
                             local p = self:pos(i)
                             local on = i == st.cur
-                            local ____t_566 = __t
-                            local ____math_floor_result_565 = math.floor(math.abs(math.cos(c.flip * math.pi / 2)) * 26 + 0.5)
-                            __O[1151] = ____math_floor_result_565
-                            local squash = if ____t_566(____math_floor_result_565) then __O[1151] else 2
+                            local ____t_result_986
+                            local ____t_985 = __t
+                            local ____math_floor_result_984 = math.floor(math.abs(math.cos(c.flip * math.pi / 2)) * 26 + 0.5)
+                            __O[1156] = ____math_floor_result_984
+                            if ____t_985(____math_floor_result_984) then
+                                ____t_result_986 = __O[1156]
+                            else
+                                ____t_result_986 = 2
+                            end
+                            local squash = ____t_result_986
                             local cx = p.x + 26
                             if __t(on) then
-                                __L1:R(
+                                local ____L1_R_989 = __L1.R
+                                local ____array_988 = __TS__SparseArrayNew(
                                     g,
                                     p.x - 3,
                                     p.y - 3,
                                     58,
-                                    56,
-                                    if st.mode == "duo" then __get(__L1.PLAYER_COL, st.turn) else "#fff3a0"
+                                    56
+                                )
+                                local ____temp_987
+                                if st.mode == "duo" then
+                                    ____temp_987 = __get(__L1.PLAYER_COL, st.turn)
+                                else
+                                    ____temp_987 = "#fff3a0"
+                                end
+                                __TS__SparseArrayPush(____array_988, ____temp_987)
+                                ____L1_R_989(
+                                    __L1,
+                                    __TS__SparseArraySpread(____array_988)
                                 )
                             end
                             if __t(c.done) then
@@ -9956,8 +12032,11 @@ local __O = {};
                 controls = __arrL({"Direcional: mover a mira", "A: atirar (ou toque no alvo)"}, 2),
                 init = function(self, st)
                     st.time = 60
-                    st.aim = __call(
-                        if st.mode == "duo" then __get(
+                    local ____st_992 = st
+                    local ____call_991 = __call
+                    local ____temp_990
+                    if st.mode == "duo" then
+                        ____temp_990 = __get(
                             __arrL(
                                 {
                                     __arrL({160, 320}, 2),
@@ -9967,7 +12046,12 @@ local __O = {};
                                 3
                             ),
                             __L1:NP(st) - 2
-                        ) else __arrL({240}, 1),
+                        )
+                    else
+                        ____temp_990 = __arrL({240}, 1)
+                    end
+                    ____st_992.aim = ____call_991(
+                        ____temp_990,
                         "map",
                         function(____, x) return {x = x, y = 130, cd = 0} end
                     )
@@ -9986,20 +12070,35 @@ local __O = {};
                 end,
                 shoot = function(self, st, i, x, y)
                     local a = __get(st.aim, i)
-                    local ____t_569 = __t
-                    local ____t_568 = __t
-                    local ____temp_567 = not __t(a) or __gt(a.cd, 0)
-                    __O[1152] = ____temp_567
-                    if ____t_569(if ____t_568(____temp_567) then __O[1152] else st.ended) then
+                    local ____t_996 = __t
+                    local ____t_result_995
+                    local ____t_994 = __t
+                    local ____temp_993 = not __t(a) or __gt(a.cd, 0)
+                    __O[1157] = ____temp_993
+                    if ____t_994(____temp_993) then
+                        ____t_result_995 = __O[1157]
+                    else
+                        ____t_result_995 = st.ended
+                    end
+                    if ____t_996(____t_result_995) then
                         return
                     end
                     a.cd = 0.28
-                    __call(st.shots, "push", {
-                        i = i,
-                        sx = if __gt(
-                            __len(st.aim),
-                            1
-                        ) then 60 + i * (360 / (__len(st.aim) - 1)) else 240,
+                    local ____call_1000 = __call
+                    local ____st_shots_999 = st.shots
+                    local ____i_998 = i
+                    local ____gt_result_997
+                    if __gt(
+                        __len(st.aim),
+                        1
+                    ) then
+                        ____gt_result_997 = 60 + i * (360 / (__len(st.aim) - 1))
+                    else
+                        ____gt_result_997 = 240
+                    end
+                    ____call_1000(____st_shots_999, "push", {
+                        i = ____i_998,
+                        sx = ____gt_result_997,
                         x = x,
                         y = y,
                         t = 0
@@ -10025,8 +12124,24 @@ local __O = {};
                                 )
                             )
                         )
-                        __call(st.pop, "push", {x = x, y = y, s = if __t(label) then label else if __gt(pts, 0) then __add("+", pts) else tostring(pts), t = 0})
-                        __L1:sfx(if __gt(pts, 0) then "pick" else "lose")
+                        local ____call_1006 = __call
+                        local ____st_pop_1005 = st.pop
+                        local ____x_1003 = x
+                        local ____y_1004 = y
+                        local ____t_result_1002
+                        if __t(label) then
+                            ____t_result_1002 = label
+                        else
+                            local ____gt_result_1001
+                            if __gt(pts, 0) then
+                                ____gt_result_1001 = __add("+", pts)
+                            else
+                                ____gt_result_1001 = tostring(pts)
+                            end
+                            ____t_result_1002 = ____gt_result_1001
+                        end
+                        ____call_1006(____st_pop_1005, "push", {x = ____x_1003, y = ____y_1004, s = ____t_result_1002, t = 0})
+                        __L1:sfx(__gt(pts, 0) and "pick" or "lose")
                         do
                             local k = 0
                             while k < 6 do
@@ -10045,57 +12160,107 @@ local __O = {};
                             end
                         end
                     end
-                    local ____t_572 = __t
-                    local ____t_571 = __t
-                    local ____temp_570 = if __t(st.chick) then math.abs(s.x - st.chick.x) < 10 else st.chick
-                    __O[1153] = ____temp_570
-                    if ____t_572(if ____t_571(____temp_570) then math.abs(s.y - st.chick.y) < 9 else __O[1153]) then
+                    local ____t_1010 = __t
+                    local ____t_result_1009
+                    local ____t_1008 = __t
+                    local ____t_result_1007
+                    if __t(st.chick) then
+                        ____t_result_1007 = math.abs(s.x - st.chick.x) < 10
+                    else
+                        ____t_result_1007 = st.chick
+                    end
+                    __O[1158] = ____t_result_1007
+                    if ____t_1008(____t_result_1007) then
+                        ____t_result_1009 = math.abs(s.y - st.chick.y) < 9
+                    else
+                        ____t_result_1009 = __O[1158]
+                    end
+                    if ____t_1010(____t_result_1009) then
                         add(nil, 50, st.chick.x, st.chick.y)
                         st.chick = nil
                         return
                     end
                     for ____, b in __iterar((st.balloons)) do
-                        local ____t_575 = __t
-                        local ____t_574 = __t
-                        local ____temp_573 = not __t(b.pop) and math.abs(s.x - b.x) < 8
-                        __O[1154] = ____temp_573
-                        if ____t_575(if ____t_574(____temp_573) then math.abs(s.y - b.y) < 10 else __O[1154]) then
+                        local ____t_1014 = __t
+                        local ____t_result_1013
+                        local ____t_1012 = __t
+                        local ____temp_1011 = not __t(b.pop) and math.abs(s.x - b.x) < 8
+                        __O[1159] = ____temp_1011
+                        if ____t_1012(____temp_1011) then
+                            ____t_result_1013 = math.abs(s.y - b.y) < 10
+                        else
+                            ____t_result_1013 = __O[1159]
+                        end
+                        if ____t_1014(____t_result_1013) then
                             b.pop = true
                             add(nil, 15, b.x, b.y)
                             return
                         end
                     end
                     for ____, d in __iterar((st.ducks)) do
-                        local ____t_578 = __t
-                        local ____t_577 = __t
-                        local ____temp_576 = not __t(d.down) and math.abs(s.x - d.x) < 10
-                        __O[1155] = ____temp_576
-                        if ____t_578(if ____t_577(____temp_576) then math.abs(s.y - (d.y - 6)) < 9 else __O[1155]) then
+                        local ____t_1018 = __t
+                        local ____t_result_1017
+                        local ____t_1016 = __t
+                        local ____temp_1015 = not __t(d.down) and math.abs(s.x - d.x) < 10
+                        __O[1160] = ____temp_1015
+                        if ____t_1016(____temp_1015) then
+                            ____t_result_1017 = math.abs(s.y - (d.y - 6)) < 9
+                        else
+                            ____t_result_1017 = __O[1160]
+                        end
+                        if ____t_1018(____t_result_1017) then
                             d.down = true
                             add(nil, 20, d.x, d.y - 8)
                             return
                         end
                     end
                     for ____, c in __iterar((st.cans)) do
-                        local ____t_583 = __t
-                        local ____t_582 = __t
-                        local ____t_580 = __t
-                        local ____temp_579 = if __t(c.up) then math.abs(s.x - c.x) < 6 else c.up
-                        __O[1156] = ____temp_579
-                        local ____temp_581 = if ____t_580(____temp_579) then __gt(s.y, 100) else __O[1156]
-                        __O[1157] = ____temp_581
-                        if ____t_583(if ____t_582(____temp_581) then __lt(s.y, 120) else __O[1157]) then
+                        local ____t_1024 = __t
+                        local ____t_result_1023
+                        local ____t_1022 = __t
+                        local ____t_result_1021
+                        local ____t_1020 = __t
+                        local ____t_result_1019
+                        if __t(c.up) then
+                            ____t_result_1019 = math.abs(s.x - c.x) < 6
+                        else
+                            ____t_result_1019 = c.up
+                        end
+                        __O[1161] = ____t_result_1019
+                        if ____t_1020(____t_result_1019) then
+                            ____t_result_1021 = __gt(s.y, 100)
+                        else
+                            ____t_result_1021 = __O[1161]
+                        end
+                        __O[1162] = ____t_result_1021
+                        if ____t_1022(____t_result_1021) then
+                            ____t_result_1023 = __lt(s.y, 120)
+                        else
+                            ____t_result_1023 = __O[1162]
+                        end
+                        if ____t_1024(____t_result_1023) then
                             c.up = false
                             c.t = 3
                             add(nil, 10, c.x, 104)
                             return
                         end
                     end
-                    local ____t_586 = __t
-                    local ____t_585 = __t
-                    local ____temp_584 = if __t(st.cow) then math.abs(s.x - st.cow.x) < 20 else st.cow
-                    __O[1158] = ____temp_584
-                    if ____t_586(if ____t_585(____temp_584) then math.abs(s.y - 150) < 14 else __O[1158]) then
+                    local ____t_1028 = __t
+                    local ____t_result_1027
+                    local ____t_1026 = __t
+                    local ____t_result_1025
+                    if __t(st.cow) then
+                        ____t_result_1025 = math.abs(s.x - st.cow.x) < 20
+                    else
+                        ____t_result_1025 = st.cow
+                    end
+                    __O[1163] = ____t_result_1025
+                    if ____t_1026(____t_result_1025) then
+                        ____t_result_1027 = math.abs(s.y - 150) < 14
+                    else
+                        ____t_result_1027 = __O[1163]
+                    end
+                    if ____t_1028(____t_result_1027) then
                         add(
                             nil,
                             -30,
@@ -10153,12 +12318,12 @@ local __O = {};
                     st.spawnD = st.spawnD - dt
                     if __le(st.spawnD, 0) then
                         st.spawnD = __L1:rnd(1.2, 2.4)
-                        local dir = if math.random() < 0.5 then 1 else -1
+                        local dir = math.random() < 0.5 and 1 or -1
                         __call(
                             st.ducks,
                             "push",
                             {
-                                x = if dir > 0 then -12 else __L1.LW + 12,
+                                x = dir > 0 and -12 or __L1.LW + 12,
                                 y = 206,
                                 vx = dir * __L1:rnd(40, 80)
                             }
@@ -10182,23 +12347,23 @@ local __O = {};
                         )
                     end
                     if __t(not __t(st.chick) and math.random() < dt * 0.08) then
-                        local dir = if math.random() < 0.5 then 1 else -1
-                        st.chick = {x = if dir > 0 then -10 else __L1.LW + 10, y = 44, vx = dir * 150}
+                        local dir = math.random() < 0.5 and 1 or -1
+                        st.chick = {x = dir > 0 and -10 or __L1.LW + 10, y = 44, vx = dir * 150}
                     end
                     if __t(st.chick) then
-                        local ____st_chick_587, ____x_588 = st.chick, "x"
-                        ____st_chick_587[____x_588] = ____st_chick_587[____x_588] + st.chick.vx * dt
+                        local ____st_chick_1029, ____x_1030 = st.chick, "x"
+                        ____st_chick_1029[____x_1030] = ____st_chick_1029[____x_1030] + st.chick.vx * dt
                         if __t(__lt(st.chick.x, -20) or __gt(st.chick.x, __L1.LW + 20)) then
                             st.chick = nil
                         end
                     end
                     if __t(not __t(st.cow) and math.random() < dt * 0.1) then
-                        local dir = if math.random() < 0.5 then 1 else -1
-                        st.cow = {x = if dir > 0 then -30 else __L1.LW + 30, vx = dir * 30, hit = 0}
+                        local dir = math.random() < 0.5 and 1 or -1
+                        st.cow = {x = dir > 0 and -30 or __L1.LW + 30, vx = dir * 30, hit = 0}
                     end
                     if __t(st.cow) then
-                        local ____st_cow_589, ____x_590 = st.cow, "x"
-                        ____st_cow_589[____x_590] = ____st_cow_589[____x_590] + st.cow.vx * dt
+                        local ____st_cow_1031, ____x_1032 = st.cow, "x"
+                        ____st_cow_1031[____x_1032] = ____st_cow_1031[____x_1032] + st.cow.vx * dt
                         st.cow.hit = math.max(0, st.cow.hit - dt)
                         if __t(__lt(st.cow.x, -40) or __gt(st.cow.x, __L1.LW + 40)) then
                             st.cow = nil
@@ -10215,10 +12380,16 @@ local __O = {};
                         st.ducks,
                         "filter",
                         function(____, d)
-                            local ____t_592 = __t
-                            local ____temp_591 = __gt(d.x, -20) and __lt(d.x, __L1.LW + 20)
-                            __O[1159] = ____temp_591
-                            return if ____t_592(____temp_591) then __lt(d.y, 226) else __O[1159]
+                            local ____t_result_1035
+                            local ____t_1034 = __t
+                            local ____temp_1033 = __gt(d.x, -20) and __lt(d.x, __L1.LW + 20)
+                            __O[1164] = ____temp_1033
+                            if ____t_1034(____temp_1033) then
+                                ____t_result_1035 = __lt(d.y, 226)
+                            else
+                                ____t_result_1035 = __O[1164]
+                            end
+                            return ____t_result_1035
                         end
                     )
                     for ____, b in __iterar((st.balloons)) do
@@ -10259,7 +12430,13 @@ local __O = {};
                                 "filter",
                                 function(____, v) return v == best end
                             ))
-                            local w = if __gt(tops, 1) then nil else __call(sc, "indexOf", best)
+                            local ____gt_result_1036
+                            if __gt(tops, 1) then
+                                ____gt_result_1036 = nil
+                            else
+                                ____gt_result_1036 = __call(sc, "indexOf", best)
+                            end
+                            local w = ____gt_result_1036
                             st["end"](
                                 st,
                                 {
@@ -10376,8 +12553,14 @@ local __O = {};
                     end
                     if __t(st.cow) then
                         local x = st.cow.x
-                        local f = if __gt(st.cow.vx, 0) then 1 else -1
-                        local sh = if __gt(st.cow.hit, 0) then math.floor(math.sin(st.t * 60) + 0.5) else 0
+                        local f = __gt(st.cow.vx, 0) and 1 or -1
+                        local ____gt_result_1037
+                        if __gt(st.cow.hit, 0) then
+                            ____gt_result_1037 = math.floor(math.sin(st.t * 60) + 0.5)
+                        else
+                            ____gt_result_1037 = 0
+                        end
+                        local sh = ____gt_result_1037
                         __L1:R(
                             g,
                             x - 16 + sh,
@@ -10474,14 +12657,14 @@ local __O = {};
                         end
                     end
                     for ____, d in __iterar((st.ducks)) do
-                        local f = if __gt(d.vx, 0) then 1 else -1
+                        local f = __gt(d.vx, 0) and 1 or -1
                         __L1:R(
                             g,
                             d.x - 7,
                             d.y - 6,
                             14,
                             6,
-                            if __t(d.down) then "#8a6a3a" else "#e8c040"
+                            __t(d.down) and "#8a6a3a" or "#e8c040"
                         )
                         __L1:R(
                             g,
@@ -10489,7 +12672,7 @@ local __O = {};
                             d.y - 12,
                             6,
                             6,
-                            if __t(d.down) then "#8a6a3a" else "#e8c040"
+                            __t(d.down) and "#8a6a3a" or "#e8c040"
                         )
                         __L1:R(
                             g,
@@ -10543,7 +12726,7 @@ local __O = {};
                         )
                     end
                     if __t(st.chick) then
-                        local f = if __gt(st.chick.vx, 0) then 1 else -1
+                        local f = __gt(st.chick.vx, 0) and 1 or -1
                         __L1:R(
                             g,
                             st.chick.x - 6,
@@ -10605,7 +12788,13 @@ local __O = {};
                         st.aim,
                         "forEach",
                         function(____, a, i)
-                            local col = if st.mode == "duo" then __get(__L1.PLAYER_COL, i) else "#ff4a3a"
+                            local ____temp_1038
+                            if st.mode == "duo" then
+                                ____temp_1038 = __get(__L1.PLAYER_COL, i)
+                            else
+                                ____temp_1038 = "#ff4a3a"
+                            end
+                            local col = ____temp_1038
                             __L1:R(
                                 g,
                                 a.x - 8,
@@ -10644,7 +12833,7 @@ local __O = {};
                                 a.y - 1,
                                 3,
                                 3,
-                                if __gt(a.cd, 0) then "#8a8a8a" else col
+                                __gt(a.cd, 0) and "#8a8a8a" or col
                             )
                         end
                     )
@@ -10657,12 +12846,12 @@ local __O = {};
                             "s"
                         ),
                         __L1.W / 2,
-                        if __gt(
+                        __gt(
                             __len(st.aim),
                             2
-                        ) then 44 else 18,
+                        ) and 44 or 18,
                         16,
-                        if __lt(st.time, 10) then "#ff8a7a" else "#fff1ca"
+                        __lt(st.time, 10) and "#ff8a7a" or "#fff1ca"
                     )
                     if st.mode == "solo" then
                         __L1:txt(
@@ -10711,17 +12900,25 @@ local __O = {};
                     local duo = st.mode == "duo"
                     local seed = math.random() * 1000
                     st.goal = 2500
-                    st.roads = __call(
-                        if __t(duo) then __arrL(
+                    local ____st_1041 = st
+                    local ____call_1040 = __call
+                    local ____t_result_1039
+                    if __t(duo) then
+                        ____t_result_1039 = __arrL(
                             {
                                 __arrL({16, 216}, 2),
                                 __arrL({248, 216}, 2)
                             },
                             2
-                        ) else __arrL(
+                        )
+                    else
+                        ____t_result_1039 = __arrL(
                             {__arrL({110, 260}, 2)},
                             1
-                        ),
+                        )
+                    end
+                    ____st_1041.roads = ____call_1040(
+                        ____t_result_1039,
                         "map",
                         function(____, ____bindingPattern0, i)
                             local w
@@ -10752,112 +12949,148 @@ local __O = {};
                 end,
                 update = function(self, st, dt)
                     for ____, r in __iterar((st.roads)) do
-                        if __t(r.done) then
-                            continue
-                        end
-                        local p = __get(__L1.P, r.i)
-                        local ____t_594 = __t
-                        local ____temp_593 = if __t(p.a) then __gt(r.gas, 0) else p.a
-                        __O[1160] = ____temp_593
-                        local turbo = if ____t_594(____temp_593) then __le(r.crash, 0) else __O[1160]
-                        local target = if __gt(r.crash, 0) then 40 else if __t(turbo) then 230 else 140 + math.min(40, r.dist / 400)
-                        r.speed = r.speed + (target - r.speed) * math.min(1, dt * 2.5)
-                        r.crash = math.max(0, r.crash - dt)
-                        r.gas = math.max(0, r.gas - dt * if st.mode == "solo" then 2.4 else 1.2 - if __t(turbo) then dt * 14 else 0)
-                        r.car = __L1:clamp(
-                            r.car + p.x * 150 * dt,
-                            r.x0 + 14,
-                            __add(r.x0, r.w) - 14
-                        )
-                        r.dist = r.dist + r.speed * dt
-                        while __lt(r.next, r.dist + 300) do
-                            local k = self:rng(r)
-                            local lane = r.x0 + 18 + self:rng(r) * (r.w - 36)
-                            __call(r.objs, "push", {d = r.next, x = lane, kind = if __lt(k, 0.3) then "buraco" else if __lt(k, 0.52) then "galinha" else if __lt(k, 0.7) then "carroca" else if __lt(k, 0.86) then "cone" else "gas", vx = if __lt(
-                                self:rng(r),
-                                0.5
-                            ) then 40 else -40})
-                            r.next = r.next + (70 + self:rng(r) * 90 - math.min(40, r.dist / 200))
-                        end
-                        for ____, o in __iterar((r.objs)) do
-                            if __t(o.got) then
+                        do
+                            if __t(r.done) then
                                 continue
                             end
-                            if o.kind == "galinha" then
-                                do
-                                    o.x = __L1:clamp(
-                                        o.x + o.vx * dt,
-                                        r.x0 + 8,
-                                        __add(r.x0, r.w) - 8
-                                    )
-                                    local ____t_596 = __t
-                                    local ____temp_595 = __le(o.x, r.x0 + 8) or __ge(
-                                        o.x,
-                                        __add(r.x0, r.w) - 8
-                                    )
-                                    __O[1161] = ____temp_595
-                                    local ____TS__Number_result_597 = __TS__Number(-o.vx)
-                                    o.vx = ____TS__Number_result_597
-                                    local ____ = if ____t_596(____temp_595) then ____TS__Number_result_597 else __O[1161]
-                                end
+                            local p = __get(__L1.P, r.i)
+                            local ____t_result_1044
+                            local ____t_1043 = __t
+                            local ____t_result_1042
+                            if __t(p.a) then
+                                ____t_result_1042 = __gt(r.gas, 0)
+                            else
+                                ____t_result_1042 = p.a
                             end
-                            if o.kind == "carroca" then
-                                o.d = o.d + 45 * dt
+                            __O[1165] = ____t_result_1042
+                            if ____t_1043(____t_result_1042) then
+                                ____t_result_1044 = __le(r.crash, 0)
+                            else
+                                ____t_result_1044 = __O[1165]
                             end
-                            local dy = o.d - r.dist
-                            local hw = if o.kind == "carroca" then 14 else if o.kind == "buraco" then 10 else 8
-                            if __t(math.abs(dy) < 14 and math.abs(o.x - r.car) < hw + 6) then
-                                o.got = true
-                                if o.kind == "gas" then
-                                    r.gas = math.min(100, r.gas + 30)
-                                    __L1:sfx("power")
-                                    __call(st.pop, "push", {x = r.car, y = 200, s = "+GÁS", t = 0})
-                                else
-                                    r.crash = if o.kind == "buraco" then 0.5 else if o.kind == "cone" then 0.4 else 0.9
-                                    __L1:sfx("hit")
-                                    st.shake = 0.2
-                                    __call(st.pop, "push", {x = r.car, y = 200, s = if o.kind == "galinha" then "CÓÓ!" else if o.kind == "buraco" then "TUNC!" else "POW!", t = 0})
-                                end
+                            local turbo = ____t_result_1044
+                            local target = __gt(r.crash, 0) and 40 or (__t(turbo) and 230 or 140 + math.min(40, r.dist / 400))
+                            r.speed = r.speed + (target - r.speed) * math.min(1, dt * 2.5)
+                            r.crash = math.max(0, r.crash - dt)
+                            local ____temp_1046 = r.gas - dt * (st.mode == "solo" and 2.4 or 1.2)
+                            local ____t_result_1045
+                            if __t(turbo) then
+                                ____t_result_1045 = dt * 14
+                            else
+                                ____t_result_1045 = 0
                             end
-                        end
-                        r.objs = __call(
-                            r.objs,
-                            "filter",
-                            function(____, o) return __gt(o.d, r.dist - 40) end
-                        )
-                        if __t(st.mode == "duo" and __ge(r.dist, st.goal)) then
-                            r.done = true
-                            st["end"](
-                                st,
-                                {
-                                    winner = r.i,
-                                    text = __add(
-                                        __get(__L1.PLAYER_NAME, r.i),
-                                        " cruzou a linha de chegada!"
-                                    )
-                                }
+                            r.gas = math.max(0, ____temp_1046 - ____t_result_1045)
+                            r.car = __L1:clamp(
+                                r.car + p.x * 150 * dt,
+                                r.x0 + 14,
+                                __add(r.x0, r.w) - 14
                             )
-                            __L1:sfx("win")
-                        end
-                        if __t(__le(r.gas, 0) and __lt(r.speed, 45)) then
-                            if st.mode == "solo" then
+                            r.dist = r.dist + r.speed * dt
+                            while __lt(r.next, r.dist + 300) do
+                                local k = self:rng(r)
+                                local lane = r.x0 + 18 + self:rng(r) * (r.w - 36)
+                                __call(
+                                    r.objs,
+                                    "push",
+                                    {
+                                        d = r.next,
+                                        x = lane,
+                                        kind = __lt(k, 0.3) and "buraco" or (__lt(k, 0.52) and "galinha" or (__lt(k, 0.7) and "carroca" or (__lt(k, 0.86) and "cone" or "gas"))),
+                                        vx = __lt(
+                                            self:rng(r),
+                                            0.5
+                                        ) and 40 or -40
+                                    }
+                                )
+                                r.next = r.next + (70 + self:rng(r) * 90 - math.min(40, r.dist / 200))
+                            end
+                            for ____, o in __iterar((r.objs)) do
+                                do
+                                    if __t(o.got) then
+                                        continue
+                                    end
+                                    if o.kind == "galinha" then
+                                        do
+                                            o.x = __L1:clamp(
+                                                o.x + o.vx * dt,
+                                                r.x0 + 8,
+                                                __add(r.x0, r.w) - 8
+                                            )
+                                            local ____t_result_1050
+                                            local ____t_1048 = __t
+                                            local ____temp_1047 = __le(o.x, r.x0 + 8) or __ge(
+                                                o.x,
+                                                __add(r.x0, r.w) - 8
+                                            )
+                                            __O[1166] = ____temp_1047
+                                            if ____t_1048(____temp_1047) then
+                                                local ____TS__Number_result_1049 = __TS__Number(-o.vx)
+                                                o.vx = ____TS__Number_result_1049
+                                                ____t_result_1050 = ____TS__Number_result_1049
+                                            else
+                                                ____t_result_1050 = __O[1166]
+                                            end
+                                        end
+                                    end
+                                    if o.kind == "carroca" then
+                                        o.d = o.d + 45 * dt
+                                    end
+                                    local dy = o.d - r.dist
+                                    local hw = o.kind == "carroca" and 14 or (o.kind == "buraco" and 10 or 8)
+                                    if __t(math.abs(dy) < 14 and math.abs(o.x - r.car) < hw + 6) then
+                                        o.got = true
+                                        if o.kind == "gas" then
+                                            r.gas = math.min(100, r.gas + 30)
+                                            __L1:sfx("power")
+                                            __call(st.pop, "push", {x = r.car, y = 200, s = "+GÁS", t = 0})
+                                        else
+                                            r.crash = o.kind == "buraco" and 0.5 or (o.kind == "cone" and 0.4 or 0.9)
+                                            __L1:sfx("hit")
+                                            st.shake = 0.2
+                                            __call(st.pop, "push", {x = r.car, y = 200, s = o.kind == "galinha" and "CÓÓ!" or (o.kind == "buraco" and "TUNC!" or "POW!"), t = 0})
+                                        end
+                                    end
+                                end
+                            end
+                            r.objs = __call(
+                                r.objs,
+                                "filter",
+                                function(____, o) return __gt(o.d, r.dist - 40) end
+                            )
+                            if __t(st.mode == "duo" and __ge(r.dist, st.goal)) then
+                                r.done = true
                                 st["end"](
                                     st,
                                     {
-                                        score = math.floor(r.dist / 10) * 1,
+                                        winner = r.i,
                                         text = __add(
-                                            __add(
-                                                "O gás acabou em ",
-                                                math.floor(r.dist / 10)
-                                            ),
-                                            " m."
+                                            __get(__L1.PLAYER_NAME, r.i),
+                                            " cruzou a linha de chegada!"
                                         )
                                     }
                                 )
-                                __L1:sfx("lose")
-                            else
-                                r.gas = 6
-                                r.crash = 0.8
+                                __L1:sfx("win")
+                            end
+                            if __t(__le(r.gas, 0) and __lt(r.speed, 45)) then
+                                if st.mode == "solo" then
+                                    st["end"](
+                                        st,
+                                        {
+                                            score = math.floor(r.dist / 10) * 1,
+                                            text = __add(
+                                                __add(
+                                                    "O gás acabou em ",
+                                                    math.floor(r.dist / 10)
+                                                ),
+                                                " m."
+                                            )
+                                        }
+                                    )
+                                    __L1:sfx("lose")
+                                else
+                                    r.gas = 6
+                                    r.crash = 0.8
+                                end
                             end
                         end
                     end
@@ -10957,7 +13190,7 @@ local __O = {};
                                             fy,
                                             8,
                                             4,
-                                            if __t(__mod(x / 8, 2)) then "#fff" else "#1a1a1a"
+                                            __t(__mod(x / 8, 2)) and "#fff" or "#1a1a1a"
                                         )
                                         __L1:R(
                                             g,
@@ -10965,7 +13198,7 @@ local __O = {};
                                             fy + 4,
                                             8,
                                             4,
-                                            if __t(__mod(x / 8, 2)) then "#1a1a1a" else "#fff"
+                                            __t(__mod(x / 8, 2)) and "#1a1a1a" or "#fff"
                                         )
                                         x = x + 8
                                     end
@@ -10973,151 +13206,159 @@ local __O = {};
                             end
                         end
                         for ____, o in __iterar((r.objs)) do
-                            if __t(o.got) then
-                                continue
-                            end
-                            local y = 220 - (o.d - r.dist)
-                            if __t(y < -20 or y > __L1.LH + 20) then
-                                continue
-                            end
-                            if o.kind == "buraco" then
-                                __L1:R(
-                                    g,
-                                    o.x - 9,
-                                    y - 5,
-                                    18,
-                                    10,
-                                    "#6a4a2a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x - 7,
-                                    y - 3,
-                                    14,
-                                    6,
-                                    "#4a3020"
-                                )
-                            elseif o.kind == "galinha" then
-                                __L1:R(
-                                    g,
-                                    o.x - 5,
-                                    y - 4,
-                                    10,
-                                    8,
-                                    "#f4f0e0"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x + if __gt(o.vx, 0) then 3 else -6,
-                                    y - 7,
-                                    4,
-                                    4,
-                                    "#f4f0e0"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x + if __gt(o.vx, 0) then 4 else -5,
-                                    y - 9,
-                                    2,
-                                    2,
-                                    "#e83a3a"
-                                )
-                            elseif o.kind == "carroca" then
-                                __L1:R(
-                                    g,
-                                    o.x - 12,
-                                    y - 14,
-                                    24,
-                                    26,
-                                    "#8a5a2a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x - 10,
-                                    y - 12,
-                                    20,
-                                    22,
-                                    "#b07a3a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x - 14,
-                                    y - 10,
-                                    3,
-                                    8,
-                                    "#2a2a2a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x + 11,
-                                    y - 10,
-                                    3,
-                                    8,
-                                    "#2a2a2a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x - 3,
-                                    y - 26,
-                                    6,
-                                    12,
-                                    "#7a5a3a"
-                                )
-                            elseif o.kind == "cone" then
-                                __L1:R(
-                                    g,
-                                    o.x - 4,
-                                    y - 2,
-                                    8,
-                                    6,
-                                    "#e8823a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x - 2,
-                                    y - 8,
-                                    4,
-                                    6,
-                                    "#e8823a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x - 3,
-                                    y - 4,
-                                    6,
-                                    1,
-                                    "#fff"
-                                )
-                            else
-                                __L1:R(
-                                    g,
-                                    o.x - 5,
-                                    y - 7,
-                                    10,
-                                    12,
-                                    "#d03a3a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x - 2,
-                                    y - 9,
-                                    4,
-                                    2,
-                                    "#2a2a2a"
-                                )
-                                __L1:R(
-                                    g,
-                                    o.x - 3,
-                                    y - 3,
-                                    6,
-                                    3,
-                                    "#ffd75a"
-                                )
+                            do
+                                if __t(o.got) then
+                                    continue
+                                end
+                                local y = 220 - (o.d - r.dist)
+                                if __t(y < -20 or y > __L1.LH + 20) then
+                                    continue
+                                end
+                                if o.kind == "buraco" then
+                                    __L1:R(
+                                        g,
+                                        o.x - 9,
+                                        y - 5,
+                                        18,
+                                        10,
+                                        "#6a4a2a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x - 7,
+                                        y - 3,
+                                        14,
+                                        6,
+                                        "#4a3020"
+                                    )
+                                elseif o.kind == "galinha" then
+                                    __L1:R(
+                                        g,
+                                        o.x - 5,
+                                        y - 4,
+                                        10,
+                                        8,
+                                        "#f4f0e0"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x + (__gt(o.vx, 0) and 3 or -6),
+                                        y - 7,
+                                        4,
+                                        4,
+                                        "#f4f0e0"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x + (__gt(o.vx, 0) and 4 or -5),
+                                        y - 9,
+                                        2,
+                                        2,
+                                        "#e83a3a"
+                                    )
+                                elseif o.kind == "carroca" then
+                                    __L1:R(
+                                        g,
+                                        o.x - 12,
+                                        y - 14,
+                                        24,
+                                        26,
+                                        "#8a5a2a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x - 10,
+                                        y - 12,
+                                        20,
+                                        22,
+                                        "#b07a3a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x - 14,
+                                        y - 10,
+                                        3,
+                                        8,
+                                        "#2a2a2a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x + 11,
+                                        y - 10,
+                                        3,
+                                        8,
+                                        "#2a2a2a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x - 3,
+                                        y - 26,
+                                        6,
+                                        12,
+                                        "#7a5a3a"
+                                    )
+                                elseif o.kind == "cone" then
+                                    __L1:R(
+                                        g,
+                                        o.x - 4,
+                                        y - 2,
+                                        8,
+                                        6,
+                                        "#e8823a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x - 2,
+                                        y - 8,
+                                        4,
+                                        6,
+                                        "#e8823a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x - 3,
+                                        y - 4,
+                                        6,
+                                        1,
+                                        "#fff"
+                                    )
+                                else
+                                    __L1:R(
+                                        g,
+                                        o.x - 5,
+                                        y - 7,
+                                        10,
+                                        12,
+                                        "#d03a3a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x - 2,
+                                        y - 9,
+                                        4,
+                                        2,
+                                        "#2a2a2a"
+                                    )
+                                    __L1:R(
+                                        g,
+                                        o.x - 3,
+                                        y - 3,
+                                        6,
+                                        3,
+                                        "#ffd75a"
+                                    )
+                                end
                             end
                         end
                         local cx = r.car
                         local cy = 220
-                        local sh = if __gt(r.crash, 0) then math.floor(math.sin(st.t * 50) * 2 + 0.5) else 0
+                        local ____gt_result_1051
+                        if __gt(r.crash, 0) then
+                            ____gt_result_1051 = math.floor(math.sin(st.t * 50) * 2 + 0.5)
+                        else
+                            ____gt_result_1051 = 0
+                        end
+                        local sh = ____gt_result_1051
                         local col = __get(__L1.PLAYER_COL, r.i)
                         __L1:R(
                             g,
@@ -11183,11 +13424,17 @@ local __O = {};
                             6,
                             "#1a1a1a"
                         )
-                        local ____t_600 = __t
-                        local ____t_599 = __t
-                        local ____get_result_a_598 = __get(__L1.P, r.i).a
-                        __O[1162] = ____get_result_a_598
-                        if ____t_600(if ____t_599(____get_result_a_598) then __gt(r.gas, 0) else __O[1162]) then
+                        local ____t_1055 = __t
+                        local ____t_result_1054
+                        local ____t_1053 = __t
+                        local ____get_result_a_1052 = __get(__L1.P, r.i).a
+                        __O[1167] = ____get_result_a_1052
+                        if ____t_1053(____get_result_a_1052) then
+                            ____t_result_1054 = __gt(r.gas, 0)
+                        else
+                            ____t_result_1054 = __O[1167]
+                        end
+                        if ____t_1055(____t_result_1054) then
                             do
                                 local k = 0
                                 while k < 3 do
@@ -11197,7 +13444,7 @@ local __O = {};
                                         cy + 14 + __mod(st.t * 40 + k * 4, 8),
                                         2,
                                         3,
-                                        if __t(__mod(k, 2)) then "#ffd75a" else "#ff8a3a"
+                                        __t(__mod(k, 2)) and "#ffd75a" or "#ff8a3a"
                                     )
                                     k = k + 1
                                 end
@@ -11212,16 +13459,26 @@ local __O = {};
                         "forEach",
                         function(____, r)
                             local cx = (r.x0 + r.w / 2) * 2
-                            __L1:txt(
-                                c,
-                                __add(
-                                    math.floor(r.dist / 10),
-                                    " m"
-                                ),
+                            local ____L1_txt_1059 = __L1.txt
+                            local ____c_1057 = c
+                            local ____add_result_1058 = __add(
+                                math.floor(r.dist / 10),
+                                " m"
+                            )
+                            local ____temp_1056
+                            if st.mode == "duo" then
+                                ____temp_1056 = __get(__L1.PLAYER_COL, r.i)
+                            else
+                                ____temp_1056 = "#fff1ca"
+                            end
+                            ____L1_txt_1059(
+                                __L1,
+                                ____c_1057,
+                                ____add_result_1058,
                                 cx,
                                 18,
                                 14,
-                                if st.mode == "duo" then __get(__L1.PLAYER_COL, r.i) else "#fff1ca"
+                                ____temp_1056
                             )
                             local gx = r.x0 * 2 + 16
                             local gw = r.w * 2 - 32
@@ -11239,7 +13496,7 @@ local __O = {};
                                 36,
                                 math.max(0, (gw - 4) * r.gas / 100),
                                 6,
-                                if __lt(r.gas, 25) then "#e84a3a" else "#7af07a"
+                                __lt(r.gas, 25) and "#e84a3a" or "#7af07a"
                             )
                             __L1:txt(
                                 c,
@@ -11302,12 +13559,22 @@ local __O = {};
                     st.cam = 0
                     st.mud = 330
                     st.mudV = 6
-                    st.lives = if st.mode == "duo" then 4 else 3
+                    st.lives = st.mode == "duo" and 4 or 3
                     st.best = 0
                     st.papers = 0
-                    st.lives = if st.mode == "duo" then __L1:NP(st) + 2 else 3
-                    st.pl = __call(
-                        if st.mode == "duo" then __get(
+                    local ____st_1061 = st
+                    local ____temp_1060
+                    if st.mode == "duo" then
+                        ____temp_1060 = __L1:NP(st) + 2
+                    else
+                        ____temp_1060 = 3
+                    end
+                    ____st_1061.lives = ____temp_1060
+                    local ____st_1064 = st
+                    local ____call_1063 = __call
+                    local ____temp_1062
+                    if st.mode == "duo" then
+                        ____temp_1062 = __get(
                             __arrL(
                                 {
                                     __arrL({200, 280}, 2),
@@ -11317,7 +13584,12 @@ local __O = {};
                                 3
                             ),
                             __L1:NP(st) - 2
-                        ) else __arrL({240}, 1),
+                        )
+                    else
+                        ____temp_1062 = __arrL({240}, 1)
+                    end
+                    ____st_1064.pl = ____call_1063(
+                        ____temp_1062,
                         "map",
                         function(____, x, i) return {
                             i = i,
@@ -11335,19 +13607,27 @@ local __O = {};
                 addPlat = function(self, st)
                     st.top = st.top - __L1:rnd(34, 50)
                     local w = __L1:rnd(38, 70)
-                    local kind = if math.random() < 0.14 then "varal" else if math.random() < 0.18 then "telha" else "laje"
-                    __call(
-                        st.plats,
-                        "push",
-                        {
-                            x = __L1:rnd(10, __L1.LW - 10 - w),
-                            y = st.top,
-                            w = w,
-                            kind = kind,
-                            vx = if kind == "varal" then if math.random() < 0.5 then 40 else -40 else 0,
-                            crack = 0
-                        }
-                    )
+                    local kind = math.random() < 0.14 and "varal" or (math.random() < 0.18 and "telha" or "laje")
+                    local ____call_1071 = __call
+                    local ____st_plats_1070 = st.plats
+                    local ____temp_1066 = __L1:rnd(10, __L1.LW - 10 - w)
+                    local ____st_top_1067 = st.top
+                    local ____w_1068 = w
+                    local ____kind_1069 = kind
+                    local ____temp_1065
+                    if kind == "varal" then
+                        ____temp_1065 = math.random() < 0.5 and 40 or -40
+                    else
+                        ____temp_1065 = 0
+                    end
+                    ____call_1071(____st_plats_1070, "push", {
+                        x = ____temp_1066,
+                        y = ____st_top_1067,
+                        w = ____w_1068,
+                        kind = ____kind_1069,
+                        vx = ____temp_1065,
+                        crack = 0
+                    })
                     if math.random() < 0.3 then
                         __call(
                             st.items,
@@ -11403,10 +13683,16 @@ local __O = {};
                                                 st.plats,
                                                 "filter",
                                                 function(____, q)
-                                                    local ____t_602 = __t
-                                                    local ____temp_601 = __gt(q.y, st.cam + 20) and __lt(q.y, st.cam + 200)
-                                                    __O[1163] = ____temp_601
-                                                    return if ____t_602(____temp_601) then q.kind ~= "telha" else __O[1163]
+                                                    local ____t_result_1074
+                                                    local ____t_1073 = __t
+                                                    local ____temp_1072 = __gt(q.y, st.cam + 20) and __lt(q.y, st.cam + 200)
+                                                    __O[1168] = ____temp_1072
+                                                    if ____t_1073(____temp_1072) then
+                                                        ____t_result_1074 = q.kind ~= "telha"
+                                                    else
+                                                        ____t_result_1074 = __O[1168]
+                                                    end
+                                                    return ____t_result_1074
                                                 end
                                             ),
                                             "sort",
@@ -11414,8 +13700,34 @@ local __O = {};
                                         ),
                                         0
                                     )
-                                    p.x = if __t(mate) then mate.x else if __t(best) then best.x + best.w / 2 else 240
-                                    p.y = if __t(mate) then mate.y else if __t(best) then best.y else st.cam + 100 - 2
+                                    local ____p_1077 = p
+                                    local ____t_result_1076
+                                    if __t(mate) then
+                                        ____t_result_1076 = mate.x
+                                    else
+                                        local ____t_result_1075
+                                        if __t(best) then
+                                            ____t_result_1075 = best.x + best.w / 2
+                                        else
+                                            ____t_result_1075 = 240
+                                        end
+                                        ____t_result_1076 = ____t_result_1075
+                                    end
+                                    ____p_1077.x = ____t_result_1076
+                                    local ____p_1080 = p
+                                    local ____t_result_1079
+                                    if __t(mate) then
+                                        ____t_result_1079 = mate.y
+                                    else
+                                        local ____t_result_1078
+                                        if __t(best) then
+                                            ____t_result_1078 = best.y
+                                        else
+                                            ____t_result_1078 = st.cam + 100
+                                        end
+                                        ____t_result_1079 = ____t_result_1078
+                                    end
+                                    ____p_1080.y = ____t_result_1079 - 2
                                     p.vy = 0
                                     p.inv = 1.5
                                 end
@@ -11428,7 +13740,14 @@ local __O = {};
                             end
                             p.x = __L1:clamp(p.x + p.vx * dt, 8, __L1.LW - 8)
                             p.inv = math.max(0, p.inv - dt)
-                            if __t(if __t(p.ground) then c.ap else p.ground) then
+                            local ____t_1082 = __t
+                            local ____t_result_1081
+                            if __t(p.ground) then
+                                ____t_result_1081 = c.ap
+                            else
+                                ____t_result_1081 = p.ground
+                            end
+                            if ____t_1082(____t_result_1081) then
                                 p.vy = -285
                                 p.ground = false
                                 __L1:sfx("bounce")
@@ -11439,17 +13758,28 @@ local __O = {};
                             p.ground = false
                             if __ge(p.vy, 0) then
                                 for ____, pl in __iterar((st.plats)) do
-                                    local ____t_607 = __t
-                                    local ____t_606 = __t
-                                    local ____t_604 = __t
-                                    local ____temp_603 = __gt(p.x, pl.x - 4) and __lt(
+                                    local ____t_1088 = __t
+                                    local ____t_result_1087
+                                    local ____t_1086 = __t
+                                    local ____t_result_1085
+                                    local ____t_1084 = __t
+                                    local ____temp_1083 = __gt(p.x, pl.x - 4) and __lt(
                                         p.x,
                                         __add(pl.x, pl.w) + 4
                                     )
-                                    __O[1164] = ____temp_603
-                                    local ____temp_605 = if ____t_604(____temp_603) then __le(oy, pl.y + 2) else __O[1164]
-                                    __O[1165] = ____temp_605
-                                    if ____t_607(if ____t_606(____temp_605) then __ge(p.y, pl.y) else __O[1165]) then
+                                    __O[1169] = ____temp_1083
+                                    if ____t_1084(____temp_1083) then
+                                        ____t_result_1085 = __le(oy, pl.y + 2)
+                                    else
+                                        ____t_result_1085 = __O[1169]
+                                    end
+                                    __O[1170] = ____t_result_1085
+                                    if ____t_1086(____t_result_1085) then
+                                        ____t_result_1087 = __ge(p.y, pl.y)
+                                    else
+                                        ____t_result_1087 = __O[1170]
+                                    end
+                                    if ____t_1088(____t_result_1087) then
                                         p.y = pl.y
                                         p.vy = 0
                                         p.ground = true
@@ -11464,11 +13794,17 @@ local __O = {};
                                 end
                             end
                             for ____, it in __iterar((st.items)) do
-                                local ____t_610 = __t
-                                local ____t_609 = __t
-                                local ____temp_608 = not __t(it.got) and math.abs(it.x - p.x) < 10
-                                __O[1166] = ____temp_608
-                                if ____t_610(if ____t_609(____temp_608) then math.abs(it.y - (p.y - 16)) < 16 else __O[1166]) then
+                                local ____t_1092 = __t
+                                local ____t_result_1091
+                                local ____t_1090 = __t
+                                local ____temp_1089 = not __t(it.got) and math.abs(it.x - p.x) < 10
+                                __O[1171] = ____temp_1089
+                                if ____t_1090(____temp_1089) then
+                                    ____t_result_1091 = math.abs(it.y - (p.y - 16)) < 16
+                                else
+                                    ____t_result_1091 = __O[1171]
+                                end
+                                if ____t_1092(____t_result_1091) then
                                     it.got = true
                                     st.papers = st.papers + 1
                                     __set(
@@ -11500,11 +13836,17 @@ local __O = {};
                         "filter",
                         function(____, p) return __le(p.out, 0) end
                     )
-                    local high = if __t(__len(alive)) then math.min(__TS__Spread(__iter(__call(
-                        alive,
-                        "map",
-                        function(____, p) return p.y end
-                    )))) else nil
+                    local ____t_result_1093
+                    if __t(__len(alive)) then
+                        ____t_result_1093 = math.min(__TS__Spread(__iter(__call(
+                            alive,
+                            "map",
+                            function(____, p) return p.y end
+                        ))))
+                    else
+                        ____t_result_1093 = nil
+                    end
+                    local high = ____t_result_1093
                     if high ~= nil then
                         local want = math.min(st.cam, high - 130)
                         st.cam = st.cam + (want - st.cam) * math.min(1, dt * 3)
@@ -11607,103 +13949,111 @@ local __O = {};
                         -math.floor(st.cam + 0.5)
                     )
                     for ____, pl in __iterar((st.plats)) do
-                        local sh = if __t(pl.crack) then math.floor(math.sin(st.t * 60) + 0.5) else 0
-                        if pl.kind == "chao" then
-                            __L1:R(
-                                g,
-                                0,
-                                pl.y,
-                                __L1.LW,
-                                40,
-                                "#7a5a3a"
-                            )
-                            continue
-                        end
-                        if pl.kind == "laje" then
-                            __L1:R(
-                                g,
-                                pl.x,
-                                pl.y,
-                                pl.w,
-                                6,
-                                "#9a9a8a"
-                            )
-                            __L1:R(
-                                g,
-                                pl.x,
-                                pl.y,
-                                pl.w,
-                                2,
-                                "#c8c8b8"
-                            )
-                            __L1:R(
-                                g,
-                                pl.x + 3,
-                                pl.y + 6,
-                                3,
-                                8,
-                                "#7a7a6a"
-                            )
-                            __L1:R(
-                                g,
-                                __add(pl.x, pl.w) - 6,
-                                pl.y + 6,
-                                3,
-                                8,
-                                "#7a7a6a"
-                            )
-                        elseif pl.kind == "telha" then
-                            do
-                                local x = 0
-                                while __lt(x, pl.w) do
-                                    __L1:R(
-                                        g,
-                                        pl.x + x + sh,
-                                        pl.y + if __t(__mod(x, 12)) then 1 else 0,
-                                        6,
-                                        5,
-                                        "#c8603a"
-                                    )
-                                    x = x + 6
-                                end
-                            end
+                        do
+                            local ____t_result_1094
                             if __t(pl.crack) then
+                                ____t_result_1094 = math.floor(math.sin(st.t * 60) + 0.5)
+                            else
+                                ____t_result_1094 = 0
+                            end
+                            local sh = ____t_result_1094
+                            if pl.kind == "chao" then
                                 __L1:R(
                                     g,
-                                    pl.x + pl.w / 2 + sh,
+                                    0,
                                     pl.y,
-                                    1,
-                                    5,
-                                    "#2a1a10"
+                                    __L1.LW,
+                                    40,
+                                    "#7a5a3a"
                                 )
+                                continue
                             end
-                        else
-                            __L1:R(
-                                g,
-                                pl.x,
-                                pl.y,
-                                pl.w,
-                                2,
-                                "#e8e0d0"
-                            )
-                            do
-                                local x = 4
-                                while x < pl.w - 4 do
+                            if pl.kind == "laje" then
+                                __L1:R(
+                                    g,
+                                    pl.x,
+                                    pl.y,
+                                    pl.w,
+                                    6,
+                                    "#9a9a8a"
+                                )
+                                __L1:R(
+                                    g,
+                                    pl.x,
+                                    pl.y,
+                                    pl.w,
+                                    2,
+                                    "#c8c8b8"
+                                )
+                                __L1:R(
+                                    g,
+                                    pl.x + 3,
+                                    pl.y + 6,
+                                    3,
+                                    8,
+                                    "#7a7a6a"
+                                )
+                                __L1:R(
+                                    g,
+                                    __add(pl.x, pl.w) - 6,
+                                    pl.y + 6,
+                                    3,
+                                    8,
+                                    "#7a7a6a"
+                                )
+                            elseif pl.kind == "telha" then
+                                do
+                                    local x = 0
+                                    while __lt(x, pl.w) do
+                                        __L1:R(
+                                            g,
+                                            pl.x + x + sh,
+                                            pl.y + (__t(__mod(x, 12)) and 1 or 0),
+                                            6,
+                                            5,
+                                            "#c8603a"
+                                        )
+                                        x = x + 6
+                                    end
+                                end
+                                if __t(pl.crack) then
                                     __L1:R(
                                         g,
-                                        pl.x + x,
-                                        pl.y + 2,
-                                        7,
-                                        8,
-                                        __get(
-                                            __arrL({"#e86a8a", "#7ad1ff", "#ffd75a", "#8ad070"}, 4),
-                                            __mod(
-                                                __bor(x / 10, 0),
-                                                4
+                                        pl.x + pl.w / 2 + sh,
+                                        pl.y,
+                                        1,
+                                        5,
+                                        "#2a1a10"
+                                    )
+                                end
+                            else
+                                __L1:R(
+                                    g,
+                                    pl.x,
+                                    pl.y,
+                                    pl.w,
+                                    2,
+                                    "#e8e0d0"
+                                )
+                                do
+                                    local x = 4
+                                    while x < pl.w - 4 do
+                                        __L1:R(
+                                            g,
+                                            pl.x + x,
+                                            pl.y + 2,
+                                            7,
+                                            8,
+                                            __get(
+                                                __arrL({"#e86a8a", "#7ad1ff", "#ffd75a", "#8ad070"}, 4),
+                                                __mod(
+                                                    __bor(x / 10, 0),
+                                                    4
+                                                )
                                             )
                                         )
-                                    )
-                                    x = x + 10
+                                        x = x + 10
+                                    end
                                 end
                             end
                         end
@@ -11758,17 +14108,29 @@ local __O = {};
                         st.pl,
                         "forEach",
                         function(____, p)
-                            local ____t_615 = __t
-                            local ____t_612 = __t
-                            local ____gt_result_611 = __gt(p.out, 0)
-                            __O[1168] = ____gt_result_611
-                            local ____t_614 = __t
-                            local ____gt_result_613 = __gt(p.inv, 0)
-                            __O[1167] = ____gt_result_613
-                            __D[1] = if ____t_615(if ____t_612(____gt_result_611) then __O[1168] else if ____t_614(____gt_result_613) then __mod(
-                                math.floor(st.t * 14),
-                                2
-                            ) else __O[1167]) then
+                            local ____t_1101 = __t
+                            local ____t_result_1100
+                            local ____t_1096 = __t
+                            local ____gt_result_1095 = __gt(p.out, 0)
+                            __O[1173] = ____gt_result_1095
+                            if ____t_1096(____gt_result_1095) then
+                                ____t_result_1100 = __O[1173]
+                            else
+                                local ____t_result_1099
+                                local ____t_1098 = __t
+                                local ____gt_result_1097 = __gt(p.inv, 0)
+                                __O[1172] = ____gt_result_1097
+                                if ____t_1098(____gt_result_1097) then
+                                    ____t_result_1099 = __mod(
+                                        math.floor(st.t * 14),
+                                        2
+                                    )
+                                else
+                                    ____t_result_1099 = __O[1172]
+                                end
+                                ____t_result_1100 = ____t_result_1099
+                            end
+                            if ____t_1101(____t_result_1100) then
                                 return
                             end
                             __L1:hero(
@@ -11857,8 +14219,11 @@ local __O = {};
                 rulesDuo = __arrL({"Todo mundo alimenta o mesmo Igor e soma os pontos.", "Cada um carrega uma comida por vez.", "Combine quem busca em cima e quem busca embaixo!"}, 3),
                 controls = __arrL({"Esquerda e direita: correr", "A: pular", "B: largar o que está na mão"}, 3),
                 init = function(self, st)
-                    st.pl = __call(
-                        if st.mode == "duo" then __get(
+                    local ____st_1104 = st
+                    local ____call_1103 = __call
+                    local ____temp_1102
+                    if st.mode == "duo" then
+                        ____temp_1102 = __get(
                             __arrL(
                                 {
                                     __arrL({120, 200}, 2),
@@ -11868,7 +14233,12 @@ local __O = {};
                                 3
                             ),
                             __L1:NP(st) - 2
-                        ) else __arrL({160}, 1),
+                        )
+                    else
+                        ____temp_1102 = __arrL({160}, 1)
+                    end
+                    ____st_1104.pl = ____call_1103(
+                        ____temp_1102,
                         "map",
                         function(____, x, i) return {
                             x = x,
@@ -11923,19 +14293,25 @@ local __O = {};
                         )
                     )
                     local ruim = math.random() < 0.22
-                    local tipo = if __t(ruim) then __get(
-                        __L1.RUINS,
-                        __L1:irnd(
-                            0,
-                            __len(__L1.RUINS) - 1
+                    local ____t_result_1105
+                    if __t(ruim) then
+                        ____t_result_1105 = __get(
+                            __L1.RUINS,
+                            __L1:irnd(
+                                0,
+                                __len(__L1.RUINS) - 1
+                            )
                         )
-                    ) else __get(
-                        __L1.COMIDAS,
-                        __L1:irnd(
-                            0,
-                            __len(__L1.COMIDAS) - 1
+                    else
+                        ____t_result_1105 = __get(
+                            __L1.COMIDAS,
+                            __L1:irnd(
+                                0,
+                                __len(__L1.COMIDAS) - 1
+                            )
                         )
-                    )
+                    end
+                    local tipo = ____t_result_1105
                     __call(
                         st.itens,
                         "push",
@@ -11952,17 +14328,28 @@ local __O = {};
                 chao = function(self, st, p)
                     local py = 248 - p.y
                     for ____, b in __iterar((st.bancas)) do
-                        local ____t_620 = __t
-                        local ____t_619 = __t
-                        local ____t_617 = __t
-                        local ____temp_616 = __le(p.vy, 0) and __gt(p.x, b.x - 4)
-                        __O[1169] = ____temp_616
-                        local ____temp_618 = if ____t_617(____temp_616) then __lt(
-                            p.x,
-                            __add(b.x, b.w) + 4
-                        ) else __O[1169]
-                        __O[1170] = ____temp_618
-                        if ____t_620(if ____t_619(____temp_618) then math.abs(py - b.y) <= 4 else __O[1170]) then
+                        local ____t_1111 = __t
+                        local ____t_result_1110
+                        local ____t_1109 = __t
+                        local ____t_result_1108
+                        local ____t_1107 = __t
+                        local ____temp_1106 = __le(p.vy, 0) and __gt(p.x, b.x - 4)
+                        __O[1174] = ____temp_1106
+                        if ____t_1107(____temp_1106) then
+                            ____t_result_1108 = __lt(
+                                p.x,
+                                __add(b.x, b.w) + 4
+                            )
+                        else
+                            ____t_result_1108 = __O[1174]
+                        end
+                        __O[1175] = ____t_result_1108
+                        if ____t_1109(____t_result_1108) then
+                            ____t_result_1110 = math.abs(py - b.y) <= 4
+                        else
+                            ____t_result_1110 = __O[1175]
+                        end
+                        if ____t_1111(____t_result_1110) then
                             return 248 - b.y
                         end
                     end
@@ -11992,10 +14379,16 @@ local __O = {};
                         st.itens,
                         "filter",
                         function(____, it)
-                            local ____t_622 = __t
-                            local ____gt_result_621 = __gt(it.vida, 0)
-                            __O[1171] = ____gt_result_621
-                            return if ____t_622(____gt_result_621) then __O[1171] else it.mao
+                            local ____t_result_1114
+                            local ____t_1113 = __t
+                            local ____gt_result_1112 = __gt(it.vida, 0)
+                            __O[1176] = ____gt_result_1112
+                            if ____t_1113(____gt_result_1112) then
+                                ____t_result_1114 = __O[1176]
+                            else
+                                ____t_result_1114 = it.mao
+                            end
+                            return ____t_result_1114
                         end
                     )
                     __call(
@@ -12012,11 +14405,17 @@ local __O = {};
                                 p.face = __get(__L1.P, i).x
                             end
                             local base = self:chao(st, p)
-                            local ____t_625 = __t
-                            local ____t_624 = __t
-                            local ____get_result_ap_623 = __get(__L1.P, i).ap
-                            __O[1172] = ____get_result_ap_623
-                            if ____t_625(if ____t_624(____get_result_ap_623) then p.y == base or p.y == 0 else __O[1172]) then
+                            local ____t_1118 = __t
+                            local ____t_result_1117
+                            local ____t_1116 = __t
+                            local ____get_result_ap_1115 = __get(__L1.P, i).ap
+                            __O[1177] = ____get_result_ap_1115
+                            if ____t_1116(____get_result_ap_1115) then
+                                ____t_result_1117 = p.y == base or p.y == 0
+                            else
+                                ____t_result_1117 = __O[1177]
+                            end
+                            if ____t_1118(____t_result_1117) then
                                 p.vy = 260
                                 __L1:sfx("bounce")
                             end
@@ -12025,20 +14424,36 @@ local __O = {};
                             local pouso = 0
                             for ____, b in __iterar((st.bancas)) do
                                 local top = 248 - b.y
-                                local ____t_632 = __t
-                                local ____t_631 = __t
-                                local ____t_629 = __t
-                                local ____t_627 = __t
-                                local ____temp_626 = __le(p.vy, 0) and __ge(p.y, top)
-                                __O[1173] = ____temp_626
-                                local ____temp_628 = if ____t_627(____temp_626) then __le(ny, top) else __O[1173]
-                                __O[1174] = ____temp_628
-                                local ____temp_630 = if ____t_629(____temp_628) then __gt(p.x, b.x - 4) else __O[1174]
-                                __O[1175] = ____temp_630
-                                __D[1] = if ____t_632(if ____t_631(____temp_630) then __lt(
-                                    p.x,
-                                    __add(b.x, b.w) + 4
-                                ) else __O[1175]) then
+                                local ____t_1126 = __t
+                                local ____t_result_1125
+                                local ____t_1124 = __t
+                                local ____t_result_1123
+                                local ____t_1122 = __t
+                                local ____t_result_1121
+                                local ____t_1120 = __t
+                                local ____temp_1119 = __le(p.vy, 0) and __ge(p.y, top)
+                                __O[1178] = ____temp_1119
+                                if ____t_1120(____temp_1119) then
+                                    ____t_result_1121 = __le(ny, top)
+                                else
+                                    ____t_result_1121 = __O[1178]
+                                end
+                                __O[1179] = ____t_result_1121
+                                if ____t_1122(____t_result_1121) then
+                                    ____t_result_1123 = __gt(p.x, b.x - 4)
+                                else
+                                    ____t_result_1123 = __O[1179]
+                                end
+                                __O[1180] = ____t_result_1123
+                                if ____t_1124(____t_result_1123) then
+                                    ____t_result_1125 = __lt(
+                                        p.x,
+                                        __add(b.x, b.w) + 4
+                                    )
+                                else
+                                    ____t_result_1125 = __O[1180]
+                                end
+                                if ____t_1126(____t_result_1125) then
                                     pouso = math.max(pouso, top)
                                 end
                             end
@@ -12046,11 +14461,17 @@ local __O = {};
                             if p.y == pouso then
                                 p.vy = math.max(0, p.vy)
                             end
-                            local ____t_635 = __t
-                            local ____t_634 = __t
-                            local ____get_result_bp_633 = __get(__L1.P, i).bp
-                            __O[1176] = ____get_result_bp_633
-                            if ____t_635(if ____t_634(____get_result_bp_633) then p.mao else __O[1176]) then
+                            local ____t_1130 = __t
+                            local ____t_result_1129
+                            local ____t_1128 = __t
+                            local ____get_result_bp_1127 = __get(__L1.P, i).bp
+                            __O[1181] = ____get_result_bp_1127
+                            if ____t_1128(____get_result_bp_1127) then
+                                ____t_result_1129 = p.mao
+                            else
+                                ____t_result_1129 = __O[1181]
+                            end
+                            if ____t_1130(____t_result_1129) then
                                 __call(
                                     st.itens,
                                     "push",
@@ -12070,11 +14491,22 @@ local __O = {};
                                     __L1:sfx("pick")
                                 end
                             end
-                            local ____t_638 = __t
-                            local ____t_637 = __t
-                            local ____temp_636 = if __t(p.mao) then __gt(p.x, 352) else p.mao
-                            __O[1177] = ____temp_636
-                            if ____t_638(if ____t_637(____temp_636) then __lt(p.y, 120) else __O[1177]) then
+                            local ____t_1134 = __t
+                            local ____t_result_1133
+                            local ____t_1132 = __t
+                            local ____t_result_1131
+                            if __t(p.mao) then
+                                ____t_result_1131 = __gt(p.x, 352)
+                            else
+                                ____t_result_1131 = p.mao
+                            end
+                            __O[1182] = ____t_result_1131
+                            if ____t_1132(____t_result_1131) then
+                                ____t_result_1133 = __lt(p.y, 120)
+                            else
+                                ____t_result_1133 = __O[1182]
+                            end
+                            if ____t_1134(____t_result_1133) then
                                 local it = p.mao
                                 p.mao = nil
                                 if __t(it.ruim) then
@@ -12109,16 +14541,23 @@ local __O = {};
                                         __get(st.score, 0) + pts
                                     )
                                     __L1:sfx("power")
-                                    __call(
-                                        st.pop,
+                                    local ____call_1139 = __call
+                                    local ____st_pop_1138 = st.pop
+                                    local ____add_1137 = __add
+                                    local ____add_result_1136 = __add("+", pts)
+                                    local ____gt_result_1135
+                                    if __gt(st.combo, 1) then
+                                        ____gt_result_1135 = __add(" x", st.combo)
+                                    else
+                                        ____gt_result_1135 = ""
+                                    end
+                                    ____call_1139(
+                                        ____st_pop_1138,
                                         "push",
                                         {
                                             x = 410,
                                             y = 120,
-                                            s = __add(
-                                                __add("+", pts),
-                                                if __gt(st.combo, 1) then __add(" x", st.combo) else ""
-                                            ),
+                                            s = ____add_1137(____add_result_1136, ____gt_result_1135),
                                             t = 0
                                         }
                                     )
@@ -12156,14 +14595,17 @@ local __O = {};
                         function(____, m) return __lt(m.t, 1) end
                     )
                     if __t(__le(st.tempo, 0) or __le(st.fome, 0)) then
-                        __L1:sfx(if __le(st.fome, 0) then "lose" else "win")
-                        st["end"](
-                            st,
-                            {
-                                score = math.floor(__get(st.score, 0) + 0.5),
-                                text = if __le(st.fome, 0) then ("O Igor ficou com fome e foi embora. Comeu " .. tostring(st.comeu)) .. " vezes." else ("Tempo! O Igor comeu " .. tostring(st.comeu)) .. " vezes e pediu sobremesa."
-                            }
-                        )
+                        __L1:sfx(__le(st.fome, 0) and "lose" or "win")
+                        local ____st_1142 = st
+                        local ____st_end_1143 = st["end"]
+                        local ____math_floor_result_1141 = math.floor(__get(st.score, 0) + 0.5)
+                        local ____le_result_1140
+                        if __le(st.fome, 0) then
+                            ____le_result_1140 = ("O Igor ficou com fome e foi embora. Comeu " .. tostring(st.comeu)) .. " vezes."
+                        else
+                            ____le_result_1140 = ("Tempo! O Igor comeu " .. tostring(st.comeu)) .. " vezes e pediu sobremesa."
+                        end
+                        ____st_end_1143(____st_1142, {score = ____math_floor_result_1141, text = ____le_result_1140})
                     end
                 end,
                 drawLow = function(self, g, st)
@@ -12176,7 +14618,7 @@ local __O = {};
                                 i * 6,
                                 __L1.LW,
                                 6,
-                                if __t(__mod(i, 2)) then "#e8d8b0" else "#c84a3a"
+                                __t(__mod(i, 2)) and "#e8d8b0" or "#c84a3a"
                             )
                             i = i + 1
                         end
@@ -12243,7 +14685,7 @@ local __O = {};
                             __L1:R(
                                 g,
                                 x,
-                                256 + if __t(__mod(x, 28)) then 0 else 4,
+                                256 + (__t(__mod(x, 28)) and 0 or 4),
                                 6,
                                 2,
                                 "#8a6a42"
@@ -12309,62 +14751,70 @@ local __O = {};
                         end
                     end
                     for ____, it in __iterar((st.itens)) do
-                        local ____t_641 = __t
-                        local ____t_640 = __t
-                        local ____lt_result_639 = __lt(it.vida, 2)
-                        __O[1178] = ____lt_result_639
-                        __D[1] = if ____t_641(if ____t_640(____lt_result_639) then __mod(
-                            math.floor(st.t * 10),
-                            2
-                        ) else __O[1178]) then
-                            continue
-                        end
-                        local ____, c1, c2 = table.unpack(it.tipo, 1, 3)
-                        local x = it.x
-                        local y = it.y - 6
-                        __L1:R(
-                            g,
-                            x - 5,
-                            y - 4,
-                            10,
-                            8,
-                            "#2a1a10"
-                        )
-                        __L1:R(
-                            g,
-                            x - 4,
-                            y - 3,
-                            8,
-                            6,
-                            c1
-                        )
-                        __L1:R(
-                            g,
-                            x - 3,
-                            y - 3,
-                            4,
-                            2,
-                            c2
-                        )
-                        if __t(it.ruim) then
+                        do
+                            local ____t_1147 = __t
+                            local ____t_result_1146
+                            local ____t_1145 = __t
+                            local ____lt_result_1144 = __lt(it.vida, 2)
+                            __O[1183] = ____lt_result_1144
+                            if ____t_1145(____lt_result_1144) then
+                                ____t_result_1146 = __mod(
+                                    math.floor(st.t * 10),
+                                    2
+                                )
+                            else
+                                ____t_result_1146 = __O[1183]
+                            end
+                            if ____t_1147(____t_result_1146) then
+                                continue
+                            end
+                            local ____, c1, c2 = table.unpack(it.tipo, 1, 3)
+                            local x = it.x
+                            local y = it.y - 6
                             __L1:R(
                                 g,
-                                x - 1,
-                                y - 9,
-                                2,
-                                3,
-                                "#7ad070"
+                                x - 5,
+                                y - 4,
+                                10,
+                                8,
+                                "#2a1a10"
                             )
                             __L1:R(
                                 g,
-                                x + 3,
-                                y - 11,
-                                2,
-                                3,
-                                "#7ad070"
+                                x - 4,
+                                y - 3,
+                                8,
+                                6,
+                                c1
                             )
-                        else
-                            __L1:c_brilho(g, x, y, st.t)
+                            __L1:R(
+                                g,
+                                x - 3,
+                                y - 3,
+                                4,
+                                2,
+                                c2
+                            )
+                            if __t(it.ruim) then
+                                __L1:R(
+                                    g,
+                                    x - 1,
+                                    y - 9,
+                                    2,
+                                    3,
+                                    "#7ad070"
+                                )
+                                __L1:R(
+                                    g,
+                                    x + 3,
+                                    y - 11,
+                                    2,
+                                    3,
+                                    "#7ad070"
+                                )
+                            else
+                                __L1:c_brilho(g, x, y, st.t)
+                            end
                         end
                     end
                     __L1:igorRosto(g, 424, 150, st)
@@ -12392,7 +14842,7 @@ local __O = {};
                         8,
                         120 * st.fome,
                         6,
-                        if __gt(st.fome, 0.35) then "#7ad070" else "#e84a3a"
+                        __gt(st.fome, 0.35) and "#7ad070" or "#e84a3a"
                     )
                     __L1:R(
                         g,
@@ -12428,7 +14878,7 @@ local __O = {};
                                     p.x * 2,
                                     500 - p.y * 2 - 110,
                                     10,
-                                    if __t(p.mao.ruim) then "#ff8a7a" else "#fff6c8"
+                                    __t(p.mao.ruim) and "#ff8a7a" or "#fff6c8"
                                 )
                             end
                         end
@@ -12463,7 +14913,7 @@ local __O = {};
                         __L1.W - 300,
                         18,
                         14,
-                        if __lt(st.tempo, 10) then "#ff6a5a" else "#fffaf0",
+                        __lt(st.tempo, 10) and "#ff6a5a" or "#fffaf0",
                         "right"
                     )
                     if __gt(st.combo, 1) then
@@ -12511,13 +14961,31 @@ local __O = {};
         "VOLTAR"
     }, 5)
     __L1.peerLive = function()
-        local ____t_645 = __t
-        local ____t_643 = __t
-        local ____temp_642 = not not __t(__L1.net)
-        __O[1183] = ____temp_642
-        local ____temp_644 = if ____t_643(____temp_642) then __L1.net.peerOnline else __O[1183]
-        __O[1184] = ____temp_644
-        return if ____t_645(____temp_644) then window.performance:now() - if __t(__L1.net.lastIn) then __L1.net.lastIn else 0 < 3000 or not __t(__L1.screen == "play" or __L1.screen == "count") else __O[1184]
+        local ____t_result_1154
+        local ____t_1151 = __t
+        local ____t_result_1150
+        local ____t_1149 = __t
+        local ____temp_1148 = not not __t(__L1.net)
+        __O[1188] = ____temp_1148
+        if ____t_1149(____temp_1148) then
+            ____t_result_1150 = __L1.net.peerOnline
+        else
+            ____t_result_1150 = __O[1188]
+        end
+        __O[1189] = ____t_result_1150
+        if ____t_1151(____t_result_1150) then
+            local ____temp_1153 = window.performance:now()
+            local ____t_result_1152
+            if __t(__L1.net.lastIn) then
+                ____t_result_1152 = __L1.net.lastIn
+            else
+                ____t_result_1152 = 0
+            end
+            ____t_result_1154 = ____temp_1153 - ____t_result_1152 < 3000 or not __t(__L1.screen == "play" or __L1.screen == "count")
+        else
+            ____t_result_1154 = __O[1189]
+        end
+        return ____t_result_1154
     end
     __L1.onlineMsg = ""
     __L1.tv = nil
@@ -12541,14 +15009,37 @@ local __O = {};
     window.Fliperama = __ord(
         {
             current = function()
-                local ____t_650 = __t
-                local ____t_647 = __t
-                local ____temp_646 = if __t(__L1.open) then __L1.game else __L1.open
-                __O[1254] = ____temp_646
-                local ____t_649 = __t
-                local ____temp_648 = __L1.screen == "play" or __L1.screen == "count"
-                __O[1253] = ____temp_648
-                return if ____t_650(if ____t_647(____temp_646) then if ____t_649(____temp_648) then __O[1253] else __L1.screen == "over" else __O[1254]) then __L1.game.id else nil
+                local ____t_result_1162
+                local ____t_1161 = __t
+                local ____t_result_1160
+                local ____t_1156 = __t
+                local ____t_result_1155
+                if __t(__L1.open) then
+                    ____t_result_1155 = __L1.game
+                else
+                    ____t_result_1155 = __L1.open
+                end
+                __O[1259] = ____t_result_1155
+                if ____t_1156(____t_result_1155) then
+                    local ____t_result_1159
+                    local ____t_1158 = __t
+                    local ____temp_1157 = __L1.screen == "play" or __L1.screen == "count"
+                    __O[1258] = ____temp_1157
+                    if ____t_1158(____temp_1157) then
+                        ____t_result_1159 = __O[1258]
+                    else
+                        ____t_result_1159 = __L1.screen == "over"
+                    end
+                    ____t_result_1160 = ____t_result_1159
+                else
+                    ____t_result_1160 = __O[1259]
+                end
+                if ____t_1161(____t_result_1160) then
+                    ____t_result_1162 = __L1.game.id
+                else
+                    ____t_result_1162 = nil
+                end
+                return ____t_result_1162
             end,
             open = __L1.openUp,
             openTV = function()
@@ -12566,15 +15057,26 @@ local __O = {};
             ) end,
             stats = function() return window.JSON:parse(window.JSON:stringify(__L1.data)) end,
             register = function(____, gm)
-                local ____t_653 = __t
-                local ____t_652 = __t
-                local ____temp_651 = if __t(gm) then gm.id else gm
-                __O[1255] = ____temp_651
-                __D[1] = if ____t_653(if ____t_652(____temp_651) then not __t(__call(
-                    __L1.GAMES,
-                    "some",
-                    function(____, x) return x.id == gm.id end
-                )) else __O[1255]) then
+                local ____t_1166 = __t
+                local ____t_result_1165
+                local ____t_1164 = __t
+                local ____t_result_1163
+                if __t(gm) then
+                    ____t_result_1163 = gm.id
+                else
+                    ____t_result_1163 = gm
+                end
+                __O[1260] = ____t_result_1163
+                if ____t_1164(____t_result_1163) then
+                    ____t_result_1165 = not __t(__call(
+                        __L1.GAMES,
+                        "some",
+                        function(____, x) return x.id == gm.id end
+                    ))
+                else
+                    ____t_result_1165 = __O[1260]
+                end
+                if ____t_1166(____t_result_1165) then
                     __call(__L1.GAMES, "push", gm)
                 end
             end,

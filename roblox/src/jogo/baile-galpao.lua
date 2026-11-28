@@ -3,7 +3,6 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __lt, __le, __gt, __isFiniteN, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__isFiniteN, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call
 local __add, __entries, __assign = __JSR.__add, __JSR.__entries, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
@@ -60,13 +59,13 @@ local __O = {};
         end
         do
             pcall(function()
-                local ____opt_12 = window.Art
-                if ____opt_12 ~= nil then
-                    ____opt_12 = ____opt_12.drawCharacter
+                local ____opt_14 = window.Art
+                if ____opt_14 ~= nil then
+                    ____opt_14 = ____opt_14.drawCharacter
                 end
-                if ____opt_12 ~= nil then
-                    ____opt_12(
-                        ____opt_12,
+                if ____opt_14 ~= nil then
+                    ____opt_14(
+                        ____opt_14,
                         c,
                         tipo,
                         x,
@@ -217,7 +216,7 @@ local __O = {};
             x0 + 200,
             384,
             t,
-            {facing = if math.sin(t * 0.5) > 0 then 1 else -1}
+            {facing = math.sin(t * 0.5) > 0 and 1 or -1}
         )
         R(
             nil,
@@ -291,52 +290,60 @@ local __O = {};
         do
             local x = __TS__Number(-__mod(cam, tile))
             while x < W do
-                if x < ini - tile then
-                    continue
-                end
-                local wx = x + cam
                 do
-                    local y = FLOOR
-                    while y < H do
-                        local i = math.floor(wx / tile)
-                        local j = (y - FLOOR) / 20
-                        R(
-                            nil,
-                            c,
-                            x,
-                            y,
-                            tile - 1,
-                            19,
-                            if __t(__mod(i + j, 2)) then "#1a1630" else "#16132a"
-                        )
-                        local ____t_19 = __t
-                        local ____t_18 = __t
-                        local ____temp_17 = __gt(wx, 1700) and __lt(wx, 2800)
-                        __O[1393] = ____temp_17
-                        if ____t_19(if ____t_18(____temp_17) then not __t(lite(nil)) else __O[1393]) then
-                            local on = __mod(i + j + beat, 4) == 0 or __mod(i * 3 + j + beat, 7) == 0
-                            if __t(on) then
-                                c:save()
-                                c.globalAlpha = 0.38
-                                R(
-                                    nil,
-                                    c,
-                                    x + 1,
-                                    y + 1,
-                                    tile - 3,
-                                    17,
-                                    __get(
-                                        NEON,
-                                        __mod(
-                                            i + j + beat,
-                                            __len(NEON)
+                    if x < ini - tile then
+                        do x = x + tile continue end
+                    end
+                    local wx = x + cam
+                    do
+                        local y = FLOOR
+                        while y < H do
+                            local i = math.floor(wx / tile)
+                            local j = (y - FLOOR) / 20
+                            R(
+                                nil,
+                                c,
+                                x,
+                                y,
+                                tile - 1,
+                                19,
+                                __t(__mod(i + j, 2)) and "#1a1630" or "#16132a"
+                            )
+                            local ____t_22 = __t
+                            local ____t_result_21
+                            local ____t_20 = __t
+                            local ____temp_19 = __gt(wx, 1700) and __lt(wx, 2800)
+                            __O[1398] = ____temp_19
+                            if ____t_20(____temp_19) then
+                                ____t_result_21 = not __t(lite(nil))
+                            else
+                                ____t_result_21 = __O[1398]
+                            end
+                            if ____t_22(____t_result_21) then
+                                local on = __mod(i + j + beat, 4) == 0 or __mod(i * 3 + j + beat, 7) == 0
+                                if __t(on) then
+                                    c:save()
+                                    c.globalAlpha = 0.38
+                                    R(
+                                        nil,
+                                        c,
+                                        x + 1,
+                                        y + 1,
+                                        tile - 3,
+                                        17,
+                                        __get(
+                                            NEON,
+                                            __mod(
+                                                i + j + beat,
+                                                __len(NEON)
+                                            )
                                         )
                                     )
-                                )
-                                c:restore()
+                                    c:restore()
+                                end
                             end
+                            y = y + 20
                         end
-                        y = y + 20
                     end
                 end
                 x = x + tile
@@ -410,13 +417,21 @@ local __O = {};
         __call(
             pts,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) else c:moveTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) end
+            function(____, p, i)
+                local ____t_result_6
+                if __t(i) then
+                    ____t_result_6 = c:lineTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                else
+                    ____t_result_6 = c:moveTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                end
+                return ____t_result_6
+            end
         )
         c:closePath()
         __call(c, "fill")
@@ -431,13 +446,21 @@ local __O = {};
         __call(
             pts,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) else c:moveTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) end
+            function(____, p, i)
+                local ____t_result_7
+                if __t(i) then
+                    ____t_result_7 = c:lineTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                else
+                    ____t_result_7 = c:moveTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                end
+                return ____t_result_7
+            end
         )
         c:stroke()
     end
@@ -566,12 +589,12 @@ local __O = {};
     )
     local function registrar()
         local CP = window.CampanhaPersonagens
-        local ____t_9 = __t
-        local ____opt_result_8
+        local ____t_11 = __t
+        local ____opt_result_10
         if CP ~= nil then
-            ____opt_result_8 = CP.registrar
+            ____opt_result_10 = CP.registrar
         end
-        if not ____t_9(____opt_result_8) then
+        if not ____t_11(____opt_result_10) then
             return false
         end
         for ____, ____value in __iterar((__entries(GENTE))) do
@@ -588,12 +611,12 @@ local __O = {};
     local ultimoRombo = 0
     local raios = nil
     local function dancarino(self, c, x, y, t, seed, esc)
-        local ____t_16 = __t
-        local ____opt_14 = window.BailePixel
-        if ____opt_14 ~= nil then
-            ____opt_14 = ____opt_14.dancer
+        local ____t_18 = __t
+        local ____opt_16 = window.BailePixel
+        if ____opt_16 ~= nil then
+            ____opt_16 = ____opt_16.dancer
         end
-        if ____t_16(____opt_14) then
+        if ____t_18(____opt_16) then
             window.BailePixel:dancer(
                 c,
                 x,
@@ -624,9 +647,9 @@ local __O = {};
                     c,
                     x,
                     y,
-                    if __mod(i, 9) == 0 then 2 else 1,
-                    if __mod(i, 9) == 0 then 2 else 1,
-                    if __t(__mod(i, 5)) then "#c9cfe8" else "#ffffff"
+                    __mod(i, 9) == 0 and 2 or 1,
+                    __mod(i, 9) == 0 and 2 or 1,
+                    __t(__mod(i, 5)) and "#c9cfe8" or "#ffffff"
                 )
                 i = i + 1
             end
@@ -679,7 +702,7 @@ local __O = {};
         do
             local layer = 0
             while layer < 2 do
-                local v = if __t(layer) then 0.3 else 0.15
+                local v = __t(layer) and 0.3 or 0.15
                 do
                     local i = -1
                     while i < 10 do
@@ -693,7 +716,7 @@ local __O = {};
                             y,
                             138,
                             FLOOR - y,
-                            if __t(layer) then "#1c2440" else "#141a33"
+                            __t(layer) and "#1c2440" or "#141a33"
                         )
                         do
                             local r = 0
@@ -709,7 +732,7 @@ local __O = {};
                                                 y + 12 + r * 20,
                                                 8,
                                                 10,
-                                                if __t(__mod(i + r * k, 5)) then "#2a3456" else "#d8b86a"
+                                                __t(__mod(i + r * k, 5)) and "#2a3456" or "#d8b86a"
                                             )
                                         end
                                         k = k + 1
@@ -964,10 +987,13 @@ local __O = {};
         g:addColorStop(0, "#3a1a4a")
         g:addColorStop(
             1,
-            __get(NEON, if __t(__mod(
-                math.floor(t / BEAT),
-                2
-            )) then 0 else 1)
+            __get(
+                NEON,
+                __t(__mod(
+                    math.floor(t / BEAT),
+                    2
+                )) and 0 or 1
+            )
         )
         c.fillStyle = g
         c:fillRect(dx, dy, dw, FLOOR - dy)
@@ -986,10 +1012,13 @@ local __O = {};
                 },
                 4
             ),
-            __get(NEON, if __t(__mod(
-                math.floor(t / BEAT),
-                2
-            )) then 0 else 1)
+            __get(
+                NEON,
+                __t(__mod(
+                    math.floor(t / BEAT),
+                    2
+                )) and 0 or 1
+            )
         )
         c:restore()
         local nx = x0 - 70
@@ -1005,7 +1034,7 @@ local __O = {};
             "#120e1e"
         )
         c:save()
-        c.strokeStyle = if __t(on) then "#ff4fa8" else "#5a2a44"
+        c.strokeStyle = __t(on) and "#ff4fa8" or "#5a2a44"
         c.lineWidth = 2
         c:strokeRect(nx, ny, 222, 50)
         c:restore()
@@ -1016,7 +1045,7 @@ local __O = {};
             nx + 111,
             ny + 15,
             13,
-            if __t(on) then "#3fe0ff" else "#1a4a5a",
+            __t(on) and "#3fe0ff" or "#1a4a5a",
             "#05030a"
         )
         texto(
@@ -1026,7 +1055,7 @@ local __O = {};
             nx + 111,
             ny + 35,
             20,
-            if __t(on) then "#ff4fa8" else "#5a2a44",
+            __t(on) and "#ff4fa8" or "#5a2a44",
             "#05030a"
         )
         if __t(on) then
@@ -1128,38 +1157,40 @@ local __O = {};
             local s = ____value[2]
             local cor = ____value[3]
             local borda = ____value[4]
-            local x = wx - cam
-            if __t(x < -320 or x > W + 320) then
-                continue
-            end
-            c:save()
-            c:translate(x, 190)
-            c:rotate(-0.04)
-            c.font = "bold 34px monospace"
-            c.textAlign = "center"
-            c.lineWidth = 6
-            c.strokeStyle = borda
-            c:strokeText(s, 0, 0)
-            c.fillStyle = cor
-            c:fillText(s, 0, 0)
-            c.fillStyle = "#ffffff55"
-            c:fillText(s, -2, -2)
             do
-                local k = 0
-                while k < 6 do
-                    R(
-                        nil,
-                        c,
-                        -120 + k * 47 + hsh(nil, wx + k) * 20,
-                        8,
-                        3,
-                        6 + hsh(nil, k + wx) * 18,
-                        cor
-                    )
-                    k = k + 1
+                local x = wx - cam
+                if __t(x < -320 or x > W + 320) then
+                    continue
                 end
+                c:save()
+                c:translate(x, 190)
+                c:rotate(-0.04)
+                c.font = "bold 34px monospace"
+                c.textAlign = "center"
+                c.lineWidth = 6
+                c.strokeStyle = borda
+                c:strokeText(s, 0, 0)
+                c.fillStyle = cor
+                c:fillText(s, 0, 0)
+                c.fillStyle = "#ffffff55"
+                c:fillText(s, -2, -2)
+                do
+                    local k = 0
+                    while k < 6 do
+                        R(
+                            nil,
+                            c,
+                            -120 + k * 47 + hsh(nil, wx + k) * 20,
+                            8,
+                            3,
+                            6 + hsh(nil, k + wx) * 18,
+                            cor
+                        )
+                        k = k + 1
+                    end
+                end
+                c:restore()
             end
-            c:restore()
         end
         do
             local x = ini - __mod(cam, 8)
@@ -1404,96 +1435,121 @@ local __O = {};
         do
             local i = -1
             while i < 14 do
-                local wx = 900 + i * 300
-                local x = wx - cam
-                local ____t_24 = __t
-                local ____t_21 = __t
-                local ____temp_20 = x < -400 or x > W + 400
-                __O[1395] = ____temp_20
-                local ____t_23 = __t
-                local ____lite_result_22 = lite(nil)
-                __O[1394] = ____lite_result_22
-                if ____t_24(if ____t_21(____temp_20) then __O[1395] else if ____t_23(____lite_result_22) then __mod(i, 2) else __O[1394]) then
-                    continue
-                end
-                R(
-                    nil,
-                    c,
-                    x - 7,
-                    TETO + 28,
-                    14,
-                    10,
-                    "#2a2a36"
-                )
-                R(
-                    nil,
-                    c,
-                    x - 4,
-                    TETO + 38,
-                    8,
-                    6,
-                    "#3a3a4a"
-                )
-                local ang = math.sin(t * 0.8 + i * 1.7) * 0.55 + if __t(__mod(i, 2)) then 0.1 else -0.1
-                local cor = __get(
-                    NEON,
-                    __mod(
-                        i + beat,
-                        __len(NEON)
+                do
+                    local wx = 900 + i * 300
+                    local x = wx - cam
+                    local ____t_29 = __t
+                    local ____t_result_28
+                    local ____t_24 = __t
+                    local ____temp_23 = x < -400 or x > W + 400
+                    __O[1400] = ____temp_23
+                    if ____t_24(____temp_23) then
+                        ____t_result_28 = __O[1400]
+                    else
+                        local ____t_result_27
+                        local ____t_26 = __t
+                        local ____lite_result_25 = lite(nil)
+                        __O[1399] = ____lite_result_25
+                        if ____t_26(____lite_result_25) then
+                            ____t_result_27 = __mod(i, 2)
+                        else
+                            ____t_result_27 = __O[1399]
+                        end
+                        ____t_result_28 = ____t_result_27
+                    end
+                    if ____t_29(____t_result_28) then
+                        do i = i + 1 continue end
+                    end
+                    R(
+                        nil,
+                        c,
+                        x - 7,
+                        TETO + 28,
+                        14,
+                        10,
+                        "#2a2a36"
                     )
-                )
-                local len = 380
-                local ex = x + math.sin(ang) * len
-                local ey = TETO + 44 + math.cos(ang) * len
-                local w1 = 4
-                local w2 = 46
-                local nx = math.cos(ang)
-                local ny = -math.sin(ang)
-                c.globalAlpha = 0.1 + if __mod(i, 3) == __mod(beat, 3) then 0.05 else 0
-                poly(
-                    nil,
-                    c,
-                    __arrL(
-                        {
-                            __arrL({x - nx * w1, TETO + 44 - ny * w1}, 2),
-                            __arrL({x + nx * w1, TETO + 44 + ny * w1}, 2),
-                            __arrL({ex + nx * w2, ey + ny * w2}, 2),
-                            __arrL({ex - nx * w2, ey - ny * w2}, 2)
-                        },
-                        4
-                    ),
-                    cor
-                )
-                c.globalAlpha = 0.16
-                poly(
-                    nil,
-                    c,
-                    __arrL(
-                        {
-                            __arrL({x - nx * 1.5, TETO + 44}, 2),
-                            __arrL({x + nx * 1.5, TETO + 44}, 2),
-                            __arrL({ex + nx * 10, ey}, 2),
-                            __arrL({ex - nx * 10, ey}, 2)
-                        },
-                        4
-                    ),
-                    cor
-                )
+                    R(
+                        nil,
+                        c,
+                        x - 4,
+                        TETO + 38,
+                        8,
+                        6,
+                        "#3a3a4a"
+                    )
+                    local ang = math.sin(t * 0.8 + i * 1.7) * 0.55 + (__t(__mod(i, 2)) and 0.1 or -0.1)
+                    local cor = __get(
+                        NEON,
+                        __mod(
+                            i + beat,
+                            __len(NEON)
+                        )
+                    )
+                    local len = 380
+                    local ex = x + math.sin(ang) * len
+                    local ey = TETO + 44 + math.cos(ang) * len
+                    local w1 = 4
+                    local w2 = 46
+                    local nx = math.cos(ang)
+                    local ny = -math.sin(ang)
+                    c.globalAlpha = 0.1 + (__mod(i, 3) == __mod(beat, 3) and 0.05 or 0)
+                    poly(
+                        nil,
+                        c,
+                        __arrL(
+                            {
+                                __arrL({x - nx * w1, TETO + 44 - ny * w1}, 2),
+                                __arrL({x + nx * w1, TETO + 44 + ny * w1}, 2),
+                                __arrL({ex + nx * w2, ey + ny * w2}, 2),
+                                __arrL({ex - nx * w2, ey - ny * w2}, 2)
+                            },
+                            4
+                        ),
+                        cor
+                    )
+                    c.globalAlpha = 0.16
+                    poly(
+                        nil,
+                        c,
+                        __arrL(
+                            {
+                                __arrL({x - nx * 1.5, TETO + 44}, 2),
+                                __arrL({x + nx * 1.5, TETO + 44}, 2),
+                                __arrL({ex + nx * 10, ey}, 2),
+                                __arrL({ex - nx * 10, ey}, 2)
+                            },
+                            4
+                        ),
+                        cor
+                    )
+                end
                 i = i + 1
             end
         end
         local px0 = PALCO - cam
-        local ____t_29 = __t
-        local ____t_28 = __t
-        local ____t_26 = __t
-        local ____temp_25 = not __t(lite(nil)) and px0 > -900
-        __O[1396] = ____temp_25
-        local ____temp_27 = if ____t_26(____temp_25) then px0 < W + 900 else __O[1396]
-        __O[1397] = ____temp_27
-        __D[1] = if ____t_29(if ____t_28(____temp_27) then __mod(
-            math.floor(t / (BEAT * 4)),
-            2
-        ) == 0 else __O[1397]) then
+        local ____t_35 = __t
+        local ____t_result_34
+        local ____t_33 = __t
+        local ____t_result_32
+        local ____t_31 = __t
+        local ____temp_30 = not __t(lite(nil)) and px0 > -900
+        __O[1401] = ____temp_30
+        if ____t_31(____temp_30) then
+            ____t_result_32 = px0 < W + 900
+        else
+            ____t_result_32 = __O[1401]
+        end
+        __O[1402] = ____t_result_32
+        if ____t_33(____t_result_32) then
+            ____t_result_34 = __mod(
+                math.floor(t / (BEAT * 4)),
+                2
+            ) == 0
+        else
+            ____t_result_34 = __O[1402]
+        end
+        if ____t_35(____t_result_34) then
             c.globalAlpha = 0.55
             do
                 local k = 0
@@ -1526,7 +1582,7 @@ local __O = {};
             c.globalAlpha = 0.5
             do
                 local k = 0
-                while k < if __t(lite(nil)) then 10 else 26 do
+                while k < (__t(lite(nil)) and 10 or 26) do
                     local a = k * 2.399 + t * 0.6
                     local rr = 160 + __mod(k * 47, 520)
                     local x = px0 + math.cos(a) * rr
@@ -1566,7 +1622,7 @@ local __O = {};
                 ) - 220
                 local y = 330 + __mod(k, 3) * 30
                 c.globalAlpha = 0.07
-                c.fillStyle = if __t(__mod(k, 2)) then "#b8a8e8" else "#e8b8e0"
+                c.fillStyle = __t(__mod(k, 2)) and "#b8a8e8" or "#e8b8e0"
                 c:beginPath()
                 c:ellipse(
                     x,
@@ -1592,36 +1648,74 @@ local __O = {};
                     do
                         local i = 0
                         while i < 116 do
-                            local wx = 60 + i * 41 + row * 23
-                            local x = wx - cam
-                            local ____t_40 = __t
-                            local ____t_37 = __t
-                            local ____t_33 = __t
-                            local ____t_31 = __t
-                            local ____temp_30 = wx < ini or x < -45
-                            __O[1398] = ____temp_30
-                            local ____temp_32 = if ____t_31(____temp_30) then __O[1398] else x > W + 45
-                            __O[1400] = ____temp_32
-                            local ____t_35 = __t
-                            local ____temp_34 = row == 0 and wx > 1900
-                            __O[1399] = ____temp_34
-                            local ____temp_36 = if ____t_33(____temp_32) then __O[1400] else if ____t_35(____temp_34) then wx < 2560 else __O[1399]
-                            __O[1402] = ____temp_36
-                            local ____t_39 = __t
-                            local ____temp_38 = wx > 1100 and wx < 1530
-                            __O[1401] = ____temp_38
-                            if ____t_40(if ____t_37(____temp_36) then __O[1402] else if ____t_39(____temp_38) then row == 0 else __O[1401]) then
-                                continue
+                            do
+                                local wx = 60 + i * 41 + row * 23
+                                local x = wx - cam
+                                local ____t_49 = __t
+                                local ____t_result_48
+                                local ____t_44 = __t
+                                local ____t_result_43
+                                local ____t_39 = __t
+                                local ____t_result_38
+                                local ____t_37 = __t
+                                local ____temp_36 = wx < ini or x < -45
+                                __O[1403] = ____temp_36
+                                if ____t_37(____temp_36) then
+                                    ____t_result_38 = __O[1403]
+                                else
+                                    ____t_result_38 = x > W + 45
+                                end
+                                __O[1405] = ____t_result_38
+                                if ____t_39(____t_result_38) then
+                                    ____t_result_43 = __O[1405]
+                                else
+                                    local ____t_result_42
+                                    local ____t_41 = __t
+                                    local ____temp_40 = row == 0 and wx > 1900
+                                    __O[1404] = ____temp_40
+                                    if ____t_41(____temp_40) then
+                                        ____t_result_42 = wx < 2560
+                                    else
+                                        ____t_result_42 = __O[1404]
+                                    end
+                                    ____t_result_43 = ____t_result_42
+                                end
+                                __O[1407] = ____t_result_43
+                                if ____t_44(____t_result_43) then
+                                    ____t_result_48 = __O[1407]
+                                else
+                                    local ____t_result_47
+                                    local ____t_46 = __t
+                                    local ____temp_45 = wx > 1100 and wx < 1530
+                                    __O[1406] = ____temp_45
+                                    if ____t_46(____temp_45) then
+                                        ____t_result_47 = row == 0
+                                    else
+                                        ____t_result_47 = __O[1406]
+                                    end
+                                    ____t_result_48 = ____t_result_47
+                                end
+                                if ____t_49(____t_result_48) then
+                                    do i = i + 1 continue end
+                                end
+                                local ____dancarino_52 = dancarino
+                                local ____c_51 = c
+                                local ____temp_50
+                                if row == 0 then
+                                    ____temp_50 = 401 + __mod(i, 3) * 5
+                                else
+                                    ____temp_50 = 438 + __mod(i, 2) * 3
+                                end
+                                ____dancarino_52(
+                                    nil,
+                                    ____c_51,
+                                    x,
+                                    ____temp_50,
+                                    t + row * 0.33,
+                                    i + row * 7,
+                                    row == 0 and 0.73 or 0.91
+                                )
                             end
-                            dancarino(
-                                nil,
-                                c,
-                                x,
-                                if row == 0 then 401 + __mod(i, 3) * 5 else 438 + __mod(i, 2) * 3,
-                                t + row * 0.33,
-                                i + row * 7,
-                                if row == 0 then 0.73 else 0.91
-                            )
                             i = i + 1
                         end
                     end
@@ -1636,30 +1730,48 @@ local __O = {};
         do
             local i = 0
             while i < 70 do
-                local wx = 40 + i * 67 + __mod(i * 29, 30)
-                local x = wx - cam
-                local ____t_47 = __t
-                local ____t_46 = __t
-                local ____t_44 = __t
-                local ____t_42 = __t
-                local ____temp_41 = wx < ini or x < -50
-                __O[1403] = ____temp_41
-                local ____temp_43 = if ____t_42(____temp_41) then __O[1403] else x > W + 50
-                __O[1404] = ____temp_43
-                local ____temp_45 = if ____t_44(____temp_43) then __O[1404] else math.abs(wx - NPC_X) < 90
-                __O[1405] = ____temp_45
-                if ____t_47(if ____t_46(____temp_45) then __O[1405] else math.abs(wx - MC_X) < 70) then
-                    continue
+                do
+                    local wx = 40 + i * 67 + __mod(i * 29, 30)
+                    local x = wx - cam
+                    local ____t_60 = __t
+                    local ____t_result_59
+                    local ____t_58 = __t
+                    local ____t_result_57
+                    local ____t_56 = __t
+                    local ____t_result_55
+                    local ____t_54 = __t
+                    local ____temp_53 = wx < ini or x < -50
+                    __O[1408] = ____temp_53
+                    if ____t_54(____temp_53) then
+                        ____t_result_55 = __O[1408]
+                    else
+                        ____t_result_55 = x > W + 50
+                    end
+                    __O[1409] = ____t_result_55
+                    if ____t_56(____t_result_55) then
+                        ____t_result_57 = __O[1409]
+                    else
+                        ____t_result_57 = math.abs(wx - NPC_X) < 90
+                    end
+                    __O[1410] = ____t_result_57
+                    if ____t_58(____t_result_57) then
+                        ____t_result_59 = __O[1410]
+                    else
+                        ____t_result_59 = math.abs(wx - MC_X) < 70
+                    end
+                    if ____t_60(____t_result_59) then
+                        do i = i + 1 continue end
+                    end
+                    dancarino(
+                        nil,
+                        c,
+                        x,
+                        486 + __mod(i, 3) * 9,
+                        t + 0.6,
+                        i * 5 + 3,
+                        1.08
+                    )
                 end
-                dancarino(
-                    nil,
-                    c,
-                    x,
-                    486 + __mod(i, 3) * 9,
-                    t + 0.6,
-                    i * 5 + 3,
-                    1.08
-                )
                 i = i + 1
             end
         end
@@ -1762,7 +1874,13 @@ local __O = {};
                 __call(
                     pts,
                     "push",
-                    __arrL({x, TETO - 22 - if __t(__mod(i, 2)) then 4 else 0}, 2)
+                    __arrL(
+                        {
+                            x,
+                            TETO - 22 - (__t(__mod(i, 2)) and 4 or 0)
+                        },
+                        2
+                    )
                 )
                 i = i + 1
             end
@@ -1896,7 +2014,7 @@ local __O = {};
         c.globalAlpha = k
         do
             local i = 0
-            while i < if __t(lite(nil)) then 12 else 34 do
+            while i < (__t(lite(nil)) and 12 or 34) do
                 local u = __mod(
                     t * 0.05 + hsh(nil, i),
                     1
@@ -1910,7 +2028,7 @@ local __O = {};
                     yy,
                     1,
                     1,
-                    if __t(__mod(i, 3)) then "#e4f0ff" else "#ffffff"
+                    __t(__mod(i, 3)) and "#e4f0ff" or "#ffffff"
                 )
                 i = i + 1
             end
@@ -1919,24 +2037,30 @@ local __O = {};
     end
     local function luzPixel(self, c, cam, t, k)
         local F = window.FxPixel
-        local ____t_54 = __t
-        local ____opt_result_52
+        local ____t_67 = __t
+        local ____opt_result_65
         if F ~= nil then
-            ____opt_result_52 = F.pronto
+            ____opt_result_65 = F.pronto
         end
-        local ____opt_result_53
-        if ____opt_result_52 ~= nil then
-            ____opt_result_53 = ____opt_result_52(F)
+        local ____opt_result_66
+        if ____opt_result_65 ~= nil then
+            ____opt_result_66 = ____opt_result_65(F)
         end
-        if not ____t_54(____opt_result_53) then
+        if not ____t_67(____opt_result_66) then
             return
         end
         if __gt(k, 0.6) then
-            local ____t_57 = __t
-            local ____t_56 = __t
-            local ____temp_55 = not __t(raios)
-            __O[1406] = ____temp_55
-            if ____t_57(if ____t_56(____temp_55) then __O[1406] else raios.feito) then
+            local ____t_71 = __t
+            local ____t_result_70
+            local ____t_69 = __t
+            local ____temp_68 = not __t(raios)
+            __O[1411] = ____temp_68
+            if ____t_69(____temp_68) then
+                ____t_result_70 = __O[1411]
+            else
+                ____t_result_70 = raios.feito
+            end
+            if ____t_71(____t_result_70) then
                 raios = F:tocar("weather/god-rays", {
                     dono = "baile",
                     x = NPC_X + 40,
@@ -1955,12 +2079,12 @@ local __O = {};
     end
     local function estouro(self, cam)
         local F = window.FxPixel
-        local ____t_61 = __t
-        local ____opt_result_60
+        local ____t_75 = __t
+        local ____opt_result_74
         if F ~= nil then
-            ____opt_result_60 = F.tocar
+            ____opt_result_74 = F.tocar
         end
-        if not ____t_61(____opt_result_60) then
+        if not ____t_75(____opt_result_74) then
             return
         end
         F:tocar(
@@ -1999,20 +2123,44 @@ local __O = {};
         if opts == nil then
             opts = {}
         end
-        local ____t_63 = __t
-        local ____TS__Number_result_62 = __TS__Number(camera)
-        __O[1407] = ____TS__Number_result_62
-        local cam = if ____t_63(____TS__Number_result_62) then __O[1407] else 0
-        local ____t_65 = __t
-        local ____TS__Number_result_64 = __TS__Number(t)
-        __O[1408] = ____TS__Number_result_64
-        t = if ____t_65(____TS__Number_result_64) then __O[1408] else 0
-        local k = if __isFiniteN(opts.rombo) then clamp(nil, opts.rombo, 0, 1) else if __t(telhadoAberto) then 1 else 0
-        local ____t_68 = __t
-        local ____t_67 = __t
-        local ____temp_66 = k > 0 and ultimoRombo <= 0
-        __O[1409] = ____temp_66
-        if ____t_68(if ____t_67(____temp_66) then __isFiniteN(opts.rombo) else __O[1409]) then
+        local ____t_result_78
+        local ____t_77 = __t
+        local ____TS__Number_result_76 = __TS__Number(camera)
+        __O[1412] = ____TS__Number_result_76
+        if ____t_77(____TS__Number_result_76) then
+            ____t_result_78 = __O[1412]
+        else
+            ____t_result_78 = 0
+        end
+        local cam = ____t_result_78
+        local ____t_result_81
+        local ____t_80 = __t
+        local ____TS__Number_result_79 = __TS__Number(t)
+        __O[1413] = ____TS__Number_result_79
+        if ____t_80(____TS__Number_result_79) then
+            ____t_result_81 = __O[1413]
+        else
+            ____t_result_81 = 0
+        end
+        t = ____t_result_81
+        local ____isFiniteN_result_82
+        if __isFiniteN(opts.rombo) then
+            ____isFiniteN_result_82 = clamp(nil, opts.rombo, 0, 1)
+        else
+            ____isFiniteN_result_82 = __t(telhadoAberto) and 1 or 0
+        end
+        local k = ____isFiniteN_result_82
+        local ____t_86 = __t
+        local ____t_result_85
+        local ____t_84 = __t
+        local ____temp_83 = k > 0 and ultimoRombo <= 0
+        __O[1414] = ____temp_83
+        if ____t_84(____temp_83) then
+            ____t_result_85 = __isFiniteN(opts.rombo)
+        else
+            ____t_result_85 = __O[1414]
+        end
+        if ____t_86(____t_result_85) then
             estouro(nil, cam)
         end
         ultimoRombo = k
@@ -2031,21 +2179,21 @@ local __O = {};
             c:clip()
             do
                 pcall(function()
-                    local ____t_71 = __t
-                    local ____opt_69 = window.BailePixel
-                    if ____opt_69 ~= nil then
-                        ____opt_69 = ____opt_69.palco
+                    local ____t_89 = __t
+                    local ____opt_87 = window.BailePixel
+                    if ____opt_87 ~= nil then
+                        ____opt_87 = ____opt_87.palco
                     end
-                    if ____t_71(____opt_69) then
+                    if ____t_89(____opt_87) then
                         window.BailePixel:palco(c, PALCO - cam, t)
                     end
                     if not __t(lite(nil)) then
-                        local ____opt_74 = window.BailePixel
-                        if ____opt_74 ~= nil then
-                            ____opt_74 = ____opt_74.fx
+                        local ____opt_92 = window.BailePixel
+                        if ____opt_92 ~= nil then
+                            ____opt_92 = ____opt_92.fx
                         end
-                        if ____opt_74 ~= nil then
-                            ____opt_74(____opt_74, c, PALCO - cam, t)
+                        if ____opt_92 ~= nil then
+                            ____opt_92(____opt_92, c, PALCO - cam, t)
                         end
                     end
                 end)
@@ -2094,10 +2242,13 @@ local __O = {};
                 TETO,
                 W - ini,
                 H - TETO,
-                __get(NEON, if __t(__mod(
-                    math.floor(t / BEAT),
-                    2
-                )) then 0 else 1)
+                __get(
+                    NEON,
+                    __t(__mod(
+                        math.floor(t / BEAT),
+                        2
+                    )) and 0 or 1
+                )
             )
             c:restore()
         end

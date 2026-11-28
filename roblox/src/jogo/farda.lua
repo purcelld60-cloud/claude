@@ -135,24 +135,36 @@ local __O = {};
     end
     local ALUNOS = __keys(ITENS)
     local function entregues(____, q)
-        local ____Set_9 = Set
-        local ____call_8 = __call
+        local ____Set_10 = Set
+        local ____call_9 = __call
+        local ____isArray_result_8
         local ____isArray_7 = __isArray
         local ____opt_result_6
         if q ~= nil then
             ____opt_result_6 = q.achados
         end
+        if ____isArray_7(____opt_result_6) then
+            ____isArray_result_8 = q.achados
+        else
+            ____isArray_result_8 = __arrL({}, 0)
+        end
         return __TS__New(
-            ____Set_9,
-            ____call_8(
-                if ____isArray_7(____opt_result_6) then q.achados else __arrL({}, 0),
+            ____Set_10,
+            ____call_9(
+                ____isArray_result_8,
                 "filter",
                 function(____, id) return __call(ALUNOS, "includes", id) end
             )
         )
     end
     local function fala(____, name, text, actionLabel)
-        return if __t(actionLabel) then {name = name, text = text, actionLabel = actionLabel} else {name = name, text = text}
+        local ____t_result_11
+        if __t(actionLabel) then
+            ____t_result_11 = {name = name, text = text, actionLabel = actionLabel}
+        else
+            ____t_result_11 = {name = name, text = text}
+        end
+        return ____t_result_11
     end
     local function estado(self, q)
         if __t(not __t(q) or type(q) ~= "table") then
@@ -164,17 +176,23 @@ local __O = {};
         if not __t(q.fardaAceita) then
             return "nova"
         end
-        return if entregues(nil, q).size >= __len(ALUNOS) then "entregar" else "ativa"
+        return entregues(nil, q).size >= __len(ALUNOS) and "entregar" or "ativa"
     end
     local function falar(self, id, q, api)
         local st = estado(nil, q)
-        local ____t_12 = __t
-        local ____opt_10 = __get(NPCS, id)
-        if ____opt_10 ~= nil then
-            ____opt_10 = ____opt_10.name
+        local ____t_result_15
+        local ____t_14 = __t
+        local ____opt_12 = __get(NPCS, id)
+        if ____opt_12 ~= nil then
+            ____opt_12 = ____opt_12.name
         end
-        __O[1317] = ____opt_10
-        local N = if ____t_12(____opt_10) then __O[1317] else id
+        __O[1322] = ____opt_12
+        if ____t_14(____opt_12) then
+            ____t_result_15 = __O[1322]
+        else
+            ____t_result_15 = id
+        end
+        local N = ____t_result_15
         if id == "tia_ana" then
             if st == "nova" then
                 api:say(
@@ -239,12 +257,12 @@ local __O = {};
                     ),
                     function()
                         q.fardaFeita = true
-                        local ____opt_15 = window.DarocaLook
-                        if ____opt_15 ~= nil then
-                            ____opt_15 = ____opt_15.ganhar
+                        local ____opt_18 = window.DarocaLook
+                        if ____opt_18 ~= nil then
+                            ____opt_18 = ____opt_18.ganhar
                         end
-                        if ____opt_15 ~= nil then
-                            ____opt_15(____opt_15, "farda")
+                        if ____opt_18 ~= nil then
+                            ____opt_18(____opt_18, "farda")
                         end
                         api:xp(150, "side-farda")
                         api:toast("FARDA DA ESCOLA no espelho! Abra em INVENTÁRIO › ESPELHO.")
@@ -263,31 +281,37 @@ local __O = {};
         if not __t(I) then
             return
         end
-        local ____t_22 = __t
-        local ____t_18 = __t
-        local ____call_result_17 = __call(
+        local ____t_26 = __t
+        local ____t_result_25
+        local ____t_21 = __t
+        local ____call_result_20 = __call(
             entregues(nil, q),
             "has",
             id
         )
-        __O[1318] = ____call_result_17
-        local ____opt_result_21
-        if q ~= nil then
-            ____opt_result_21 = q.fardaFeita
+        __O[1323] = ____call_result_20
+        if ____t_21(____call_result_20) then
+            ____t_result_25 = __O[1323]
+        else
+            local ____opt_result_24
+            if q ~= nil then
+                ____opt_result_24 = q.fardaFeita
+            end
+            ____t_result_25 = ____opt_result_24
         end
-        if ____t_22(if ____t_18(____call_result_17) then __O[1318] else ____opt_result_21) then
+        if ____t_26(____t_result_25) then
             api:say(__arrL(
                 {fala(nil, N, "Valeu de novo, Da Roça! Agora eu não esqueço mais nada... acho.")},
                 1
             ))
             return
         end
-        local ____t_26 = __t
-        local ____opt_result_25
+        local ____t_30 = __t
+        local ____opt_result_29
         if q ~= nil then
-            ____opt_result_25 = q.fardaAceita
+            ____opt_result_29 = q.fardaAceita
         end
-        if not ____t_26(____opt_result_25) then
+        if not ____t_30(____opt_result_29) then
             api:say(__arrL(
                 {fala(
                     nil,
@@ -325,7 +349,7 @@ local __O = {};
                     30,
                     __add("achado-", id)
                 )
-                api:toast(if e.size >= __len(ALUNOS) then "Achados e perdidos 3/3! Volte à Tia Ana, perto da entrada do pátio." else ((tostring(I.curto) .. " entregue · ") .. tostring(e.size)) .. "/3")
+                api:toast(e.size >= __len(ALUNOS) and "Achados e perdidos 3/3! Volte à Tia Ana, perto da entrada do pátio." or ((tostring(I.curto) .. " entregue · ") .. tostring(e.size)) .. "/3")
                 api:save()
             end
         )
@@ -342,9 +366,21 @@ local __O = {};
                 "find",
                 function(____, a) return not __t(__call(e, "has", a)) end
             )
-            return if __t(prox) then __get(NPCS, prox).x else NPCS.tia_ana.x
+            local ____t_result_31
+            if __t(prox) then
+                ____t_result_31 = __get(NPCS, prox).x
+            else
+                ____t_result_31 = NPCS.tia_ana.x
+            end
+            return ____t_result_31
         end
-        return if st == "entregar" then NPCS.tia_ana.x else nil
+        local ____temp_32
+        if st == "entregar" then
+            ____temp_32 = NPCS.tia_ana.x
+        else
+            ____temp_32 = nil
+        end
+        return ____temp_32
     end
     local function objetivo(self, q, scene)
         if __TS__Number(scene) ~= SCENE then
@@ -380,150 +416,152 @@ local __O = {};
         end
         local e = entregues(nil, q)
         for ____, id in __iterar((ALUNOS)) do
-            if __t(__call(e, "has", id)) then
-                continue
-            end
-            local I = __get(ITENS, id)
-            local x = __get(NPCS, id).x + 18
-            local y = FLOOR - 118 + math.sin(t * 3 + x) * 3
-            R(
-                nil,
-                c,
-                x - 14,
-                y - 12,
-                28,
-                22,
-                "#263b42"
-            )
-            R(
-                nil,
-                c,
-                x - 13,
-                y - 11,
-                26,
-                20,
-                "#f6f4ea"
-            )
-            R(
-                nil,
-                c,
-                x - 6,
-                y + 9,
-                4,
-                4,
-                "#f6f4ea"
-            )
-            R(
-                nil,
-                c,
-                x - 9,
-                y + 13,
-                3,
-                3,
-                "#f6f4ea"
-            )
-            if id == "aluno_caio" then
+            do
+                if __t(__call(e, "has", id)) then
+                    continue
+                end
+                local I = __get(ITENS, id)
+                local x = __get(NPCS, id).x + 18
+                local y = FLOOR - 118 + math.sin(t * 3 + x) * 3
                 R(
                     nil,
                     c,
-                    x - 9,
-                    y - 5,
-                    18,
-                    9,
-                    I.cor
+                    x - 14,
+                    y - 12,
+                    28,
+                    22,
+                    "#263b42"
+                )
+                R(
+                    nil,
+                    c,
+                    x - 13,
+                    y - 11,
+                    26,
+                    20,
+                    "#f6f4ea"
+                )
+                R(
+                    nil,
+                    c,
+                    x - 6,
+                    y + 9,
+                    4,
+                    4,
+                    "#f6f4ea"
                 )
                 R(
                     nil,
                     c,
                     x - 9,
-                    y - 5,
-                    18,
-                    2,
-                    "#6a9af0"
+                    y + 13,
+                    3,
+                    3,
+                    "#f6f4ea"
                 )
-                R(
-                    nil,
-                    c,
-                    x + 2,
-                    y - 3,
-                    4,
-                    5,
-                    "#f2f2ee"
-                )
-                R(
-                    nil,
-                    c,
-                    x + 3,
-                    y - 4,
-                    2,
-                    1,
-                    "#e8433a"
-                )
-            elseif id == "aluna_lara" then
-                R(
-                    nil,
-                    c,
-                    x - 3,
-                    y - 8,
-                    6,
-                    15,
-                    I.cor
-                )
-                R(
-                    nil,
-                    c,
-                    x - 2,
-                    y - 10,
-                    4,
-                    2,
-                    "#f2f2ee"
-                )
-                R(
-                    nil,
-                    c,
-                    x - 1,
-                    y - 4,
-                    2,
-                    4,
-                    "#ffd0f0"
-                )
-            else
-                R(
-                    nil,
-                    c,
-                    x - 9,
-                    y - 6,
-                    18,
-                    13,
-                    I.cor
-                )
-                R(
-                    nil,
-                    c,
-                    x - 12,
-                    y - 6,
-                    4,
-                    10,
-                    I.cor
-                )
-                R(
-                    nil,
-                    c,
-                    x + 8,
-                    y - 6,
-                    4,
-                    10,
-                    I.cor
-                )
-                R(
-                    nil,
-                    c,
-                    x - 1,
-                    y - 6,
-                    2,
-                    13,
-                    "#f2f2ee"
-                )
+                if id == "aluno_caio" then
+                    R(
+                        nil,
+                        c,
+                        x - 9,
+                        y - 5,
+                        18,
+                        9,
+                        I.cor
+                    )
+                    R(
+                        nil,
+                        c,
+                        x - 9,
+                        y - 5,
+                        18,
+                        2,
+                        "#6a9af0"
+                    )
+                    R(
+                        nil,
+                        c,
+                        x + 2,
+                        y - 3,
+                        4,
+                        5,
+                        "#f2f2ee"
+                    )
+                    R(
+                        nil,
+                        c,
+                        x + 3,
+                        y - 4,
+                        2,
+                        1,
+                        "#e8433a"
+                    )
+                elseif id == "aluna_lara" then
+                    R(
+                        nil,
+                        c,
+                        x - 3,
+                        y - 8,
+                        6,
+                        15,
+                        I.cor
+                    )
+                    R(
+                        nil,
+                        c,
+                        x - 2,
+                        y - 10,
+                        4,
+                        2,
+                        "#f2f2ee"
+                    )
+                    R(
+                        nil,
+                        c,
+                        x - 1,
+                        y - 4,
+                        2,
+                        4,
+                        "#ffd0f0"
+                    )
+                else
+                    R(
+                        nil,
+                        c,
+                        x - 9,
+                        y - 6,
+                        18,
+                        13,
+                        I.cor
+                    )
+                    R(
+                        nil,
+                        c,
+                        x - 12,
+                        y - 6,
+                        4,
+                        10,
+                        I.cor
+                    )
+                    R(
+                        nil,
+                        c,
+                        x + 8,
+                        y - 6,
+                        4,
+                        10,
+                        I.cor
+                    )
+                    R(
+                        nil,
+                        c,
+                        x - 1,
+                        y - 6,
+                        2,
+                        13,
+                        "#f2f2ee"
+                    )
+                end
             end
         end
     end

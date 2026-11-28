@@ -19,13 +19,26 @@ local __O = {};
     local L = {}
     do
         pcall(function()
-            local ____self_2 = window.JSON
-            local ____self_2_parse_3 = ____self_2.parse
+            local ____self_3 = window.JSON
+            local ____self_3_parse_4 = ____self_3.parse
+            local ____t_result_2
             local ____t_1 = __t
             local ____temp_0 = window.localStorage:getItem(KEY)
-            __O[883] = ____temp_0
-            local r = ____self_2_parse_3(____self_2, if ____t_1(____temp_0) then __O[883] else "null")
-            if __t(if __t(r) then type(r) == "table" else r) then
+            __O[888] = ____temp_0
+            if ____t_1(____temp_0) then
+                ____t_result_2 = __O[888]
+            else
+                ____t_result_2 = "null"
+            end
+            local r = ____self_3_parse_4(____self_3, ____t_result_2)
+            local ____t_6 = __t
+            local ____t_result_5
+            if __t(r) then
+                ____t_result_5 = type(r) == "table"
+            else
+                ____t_result_5 = r
+            end
+            if ____t_6(____t_result_5) then
                 L = r
             end
         end)
@@ -55,13 +68,19 @@ local __O = {};
         poder2 = "Poder 2"
     }, "joy,jump,paper,fart,dash,interact,poder1,poder2")
     local function alvos(____, tela)
-        local ____t_6 = __t
-        local ____opt_4 = tela:closest(".c2j")
-        if ____opt_4 ~= nil then
-            ____opt_4 = ____opt_4:querySelector(".c2-c1-shell")
+        local ____t_result_10
+        local ____t_9 = __t
+        local ____opt_7 = tela:closest(".c2j")
+        if ____opt_7 ~= nil then
+            ____opt_7 = ____opt_7:querySelector(".c2-c1-shell")
         end
-        __O[884] = ____opt_4
-        local c1 = if ____t_6(____opt_4) then __O[884] else tela:querySelector(".c2-c1-shell")
+        __O[889] = ____opt_7
+        if ____t_9(____opt_7) then
+            ____t_result_10 = __O[889]
+        else
+            ____t_result_10 = tela:querySelector(".c2-c1-shell")
+        end
+        local c1 = ____t_result_10
         if __t(c1) then
             return __call(
                 __arr(
@@ -112,134 +131,209 @@ local __O = {};
             return
         end
         local tem = __len(__keys(L)) > 0
-        local ____opt_7 = tela:querySelector(".c2-treino-ctl")
-        if ____opt_7 ~= nil then
-            ____opt_7.classList:toggle("livre", tem)
+        local ____opt_11 = tela:querySelector(".c2-treino-ctl")
+        if ____opt_11 ~= nil then
+            ____opt_11.classList:toggle("livre", tem)
         end
         for ____, ____value in __iterar((alvos(nil, tela))) do
             local id = ____value[1]
             local el = ____value[2]
-            local v = __get(L, id)
-            local c1 = el:closest(".c2-c1-shell")
-            if __t(if __t(c1) then el.dataset.c1Style == nil else c1) then
-                local ____el_dataset_11 = el.dataset
-                local ____t_10 = __t
-                local ____temp_9 = el:getAttribute("style")
-                __O[885] = ____temp_9
-                ____el_dataset_11.c1Style = if ____t_10(____temp_9) then __O[885] else ""
-            end
-            if __t(not __t(tem) or not __t(v)) then
-                el.classList:remove("c2-livre")
+            do
+                local v = __get(L, id)
+                local c1 = el:closest(".c2-c1-shell")
+                local ____t_14 = __t
+                local ____t_result_13
+                if __t(c1) then
+                    ____t_result_13 = el.dataset.c1Style == nil
+                else
+                    ____t_result_13 = c1
+                end
+                if ____t_14(____t_result_13) then
+                    local ____el_dataset_18 = el.dataset
+                    local ____t_result_17
+                    local ____t_16 = __t
+                    local ____temp_15 = el:getAttribute("style")
+                    __O[890] = ____temp_15
+                    if ____t_16(____temp_15) then
+                        ____t_result_17 = __O[890]
+                    else
+                        ____t_result_17 = ""
+                    end
+                    ____el_dataset_18.c1Style = ____t_result_17
+                end
+                if __t(not __t(tem) or not __t(v)) then
+                    el.classList:remove("c2-livre")
+                    if __t(c1) then
+                        el:setAttribute("style", el.dataset.c1Style)
+                    else
+                        for ____, k in __iterar((__arrL({
+                            "left",
+                            "top",
+                            "right",
+                            "bottom",
+                            "transform",
+                            "margin",
+                            "position"
+                        }, 7))) do
+                            __set(el.style, k, "")
+                        end
+                    end
+                    continue
+                end
                 if __t(c1) then
                     el:setAttribute("style", el.dataset.c1Style)
-                else
-                    for ____, k in __iterar((__arrL({
-                        "left",
-                        "top",
-                        "right",
-                        "bottom",
-                        "transform",
-                        "margin",
-                        "position"
-                    }, 7))) do
-                        __set(el.style, k, "")
+                    local ____t_result_24
+                    local ____t_23 = __t
+                    local ____t_result_21
+                    if __t(el.offsetParent) then
+                        ____t_result_21 = el.offsetParent
+                    else
+                        ____t_result_21 = el:closest(".touch-controls")
                     end
+                    local ____opt_result_22
+                    if ____t_result_21 ~= nil then
+                        ____opt_result_22 = ____t_result_21:getBoundingClientRect()
+                    end
+                    __O[891] = ____opt_result_22
+                    if ____t_23(____opt_result_22) then
+                        ____t_result_24 = __O[891]
+                    else
+                        ____t_result_24 = {left = 0, top = 0}
+                    end
+                    local lay = ____t_result_24
+                    local ____t_result_29
+                    local ____t_28 = __t
+                    local ____t_result_27
+                    local ____t_26 = __t
+                    local ____TS__ParseFloat_result_25 = __TS__ParseFloat(window:getComputedStyle(el):getPropertyValue("--ccl-size"))
+                    __O[892] = ____TS__ParseFloat_result_25
+                    if ____t_26(____TS__ParseFloat_result_25) then
+                        ____t_result_27 = __O[892]
+                    else
+                        ____t_result_27 = el:getBoundingClientRect().width
+                    end
+                    __O[893] = ____t_result_27
+                    if ____t_28(____t_result_27) then
+                        ____t_result_29 = __O[893]
+                    else
+                        ____t_result_29 = 50
+                    end
+                    local base = ____t_result_29
+                    el.style:setProperty(
+                        "--ccl-x",
+                        __add(
+                            __call(v.x / 100 * window.innerWidth - lay.left, "toFixed", 1),
+                            "px"
+                        )
+                    )
+                    el.style:setProperty(
+                        "--ccl-y",
+                        __add(
+                            __call(v.y / 100 * window.innerHeight - lay.top, "toFixed", 1),
+                            "px"
+                        )
+                    )
+                    local ____self_32 = el.style
+                    local ____self_32_setProperty_33 = ____self_32.setProperty
+                    local ____add_31 = __add
+                    local ____t_result_30
+                    if __t(v.s) then
+                        ____t_result_30 = v.s
+                    else
+                        ____t_result_30 = 1
+                    end
+                    ____self_32_setProperty_33(
+                        ____self_32,
+                        "--ccl-size",
+                        ____add_31(
+                            math.floor(base * ____t_result_30 + 0.5),
+                            "px"
+                        )
+                    )
+                    __call(el.classList, "add", "c2-livre")
+                    continue
                 end
-                continue
-            end
-            if __t(c1) then
-                el:setAttribute("style", el.dataset.c1Style)
-                local ____t_14 = __t
-                local ____opt_12 = if __t(el.offsetParent) then el.offsetParent else el:closest(".touch-controls")
-                if ____opt_12 ~= nil then
-                    ____opt_12 = ____opt_12:getBoundingClientRect()
-                end
-                __O[886] = ____opt_12
-                local lay = if ____t_14(____opt_12) then __O[886] else {left = 0, top = 0}
-                local ____t_18 = __t
-                local ____t_16 = __t
-                local ____TS__ParseFloat_result_15 = __TS__ParseFloat(window:getComputedStyle(el):getPropertyValue("--ccl-size"))
-                __O[887] = ____TS__ParseFloat_result_15
-                local ____temp_17 = if ____t_16(____TS__ParseFloat_result_15) then __O[887] else el:getBoundingClientRect().width
-                __O[888] = ____temp_17
-                local base = if ____t_18(____temp_17) then __O[888] else 50
-                el.style:setProperty(
-                    "--ccl-x",
-                    __add(
-                        __call(v.x / 100 * window.innerWidth - lay.left, "toFixed", 1),
-                        "px"
-                    )
-                )
-                el.style:setProperty(
-                    "--ccl-y",
-                    __add(
-                        __call(v.y / 100 * window.innerHeight - lay.top, "toFixed", 1),
-                        "px"
-                    )
-                )
-                el.style:setProperty(
-                    "--ccl-size",
-                    __add(
-                        math.floor(base * if __t(v.s) then v.s else 1 + 0.5),
-                        "px"
-                    )
-                )
                 __call(el.classList, "add", "c2-livre")
-                continue
+                el.style.left = __add(v.x, "%")
+                el.style.top = __add(v.y, "%")
+                el.style.right = "auto"
+                el.style.bottom = "auto"
+                el.style.margin = "0"
+                local ____el_style_35 = el.style
+                local ____t_result_34
+                if __t(v.s) then
+                    ____t_result_34 = v.s
+                else
+                    ____t_result_34 = 1
+                end
+                ____el_style_35.transform = ("translate(-50%,-50%) scale(" .. tostring(____t_result_34)) .. ")"
             end
-            __call(el.classList, "add", "c2-livre")
-            el.style.left = __add(v.x, "%")
-            el.style.top = __add(v.y, "%")
-            el.style.right = "auto"
-            el.style.bottom = "auto"
-            el.style.margin = "0"
-            el.style.transform = ("translate(-50%,-50%) scale(" .. tostring(if __t(v.s) then v.s else 1)) .. ")"
         end
     end
     local function fotografar(self, tela)
-        local ____t_21 = __t
-        local ____opt_19 = tela:closest(".c2j")
-        if ____opt_19 ~= nil then
-            ____opt_19 = ____opt_19:querySelector(".c2-c1-shell")
+        local ____t_result_39
+        local ____t_38 = __t
+        local ____opt_36 = tela:closest(".c2j")
+        if ____opt_36 ~= nil then
+            ____opt_36 = ____opt_36:querySelector(".c2-c1-shell")
         end
-        local r = if ____t_21(____opt_19) then {left = 0, top = 0, width = window.innerWidth, height = window.innerHeight} else tela:getBoundingClientRect()
+        if ____t_38(____opt_36) then
+            ____t_result_39 = {left = 0, top = 0, width = window.innerWidth, height = window.innerHeight}
+        else
+            ____t_result_39 = tela:getBoundingClientRect()
+        end
+        local r = ____t_result_39
         local novo = {}
         for ____, ____value in __iterar((alvos(nil, tela))) do
             local id = ____value[1]
             local el = ____value[2]
-            local b = el:getBoundingClientRect()
-            if not __t(b.width) then
-                continue
+            do
+                local b = el:getBoundingClientRect()
+                if not __t(b.width) then
+                    continue
+                end
+                local ____set_47 = __set
+                local ____id_46 = id
+                local ____TS__Number_result_44 = __TS__Number(__call((b.left + b.width / 2 - r.left) / r.width * 100, "toFixed", 2))
+                local ____TS__Number_result_45 = __TS__Number(__call((b.top + b.height / 2 - r.top) / r.height * 100, "toFixed", 2))
+                local ____t_result_43
+                local ____t_42 = __t
+                local ____opt_40 = __get(L, id)
+                if ____opt_40 ~= nil then
+                    ____opt_40 = ____opt_40.s
+                end
+                __O[894] = ____opt_40
+                if ____t_42(____opt_40) then
+                    ____t_result_43 = __O[894]
+                else
+                    ____t_result_43 = 1
+                end
+                ____set_47(novo, ____id_46, {x = ____TS__Number_result_44, y = ____TS__Number_result_45, s = ____t_result_43})
             end
-            local ____set_28 = __set
-            local ____id_27 = id
-            local ____TS__Number_result_25 = __TS__Number(__call((b.left + b.width / 2 - r.left) / r.width * 100, "toFixed", 2))
-            local ____TS__Number_result_26 = __TS__Number(__call((b.top + b.height / 2 - r.top) / r.height * 100, "toFixed", 2))
-            local ____t_24 = __t
-            local ____opt_22 = __get(L, id)
-            if ____opt_22 ~= nil then
-                ____opt_22 = ____opt_22.s
-            end
-            __O[889] = ____opt_22
-            ____set_28(novo, ____id_27, {x = ____TS__Number_result_25, y = ____TS__Number_result_26, s = if ____t_24(____opt_22) then __O[889] else 1})
         end
         L = novo
         aplicar(nil, tela)
     end
     local function editar(self, tela, aoFechar)
-        local ____t_31 = __t
-        local ____t_30 = __t
-        local ____temp_29 = not __t(tela)
-        __O[890] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then __O[890] else tela:querySelector(".c2-editor")) then
+        local ____t_51 = __t
+        local ____t_result_50
+        local ____t_49 = __t
+        local ____temp_48 = not __t(tela)
+        __O[895] = ____temp_48
+        if ____t_49(____temp_48) then
+            ____t_result_50 = __O[895]
+        else
+            ____t_result_50 = tela:querySelector(".c2-editor")
+        end
+        if ____t_51(____t_result_50) then
             return
         end
         local joy = tela:querySelector(".joy")
-        local ____opt_result_34
+        local ____opt_result_54
         if joy ~= nil then
-            ____opt_result_34 = joy.style.display
+            ____opt_result_54 = joy.style.display
         end
-        local joyDisp = ____opt_result_34
+        local joyDisp = ____opt_result_54
         if __t(joy) then
             joy.style.display = "block"
         end
@@ -261,22 +355,34 @@ local __O = {};
                 local el = ____value[2]
                 el.classList:toggle("c2-sel", id == sel)
             end
-            local ____add_38 = __add
-            local ____call_37 = __call
-            local ____t_36 = __t
-            local ____get_result_35 = __get(NOMES, sel)
-            __O[891] = ____get_result_35
-            nome.textContent = ____add_38(
-                ____call_37(if ____t_36(____get_result_35) then __O[891] else sel, "toUpperCase"),
+            local ____add_59 = __add
+            local ____call_58 = __call
+            local ____t_result_57
+            local ____t_56 = __t
+            local ____get_result_55 = __get(NOMES, sel)
+            __O[896] = ____get_result_55
+            if ____t_56(____get_result_55) then
+                ____t_result_57 = __O[896]
+            else
+                ____t_result_57 = sel
+            end
+            nome.textContent = ____add_59(
+                ____call_58(____t_result_57, "toUpperCase"),
                 ":"
             )
-            local ____t_41 = __t
-            local ____opt_39 = __get(L, sel)
-            if ____opt_39 ~= nil then
-                ____opt_39 = ____opt_39.s
+            local ____t_result_63
+            local ____t_62 = __t
+            local ____opt_60 = __get(L, sel)
+            if ____opt_60 ~= nil then
+                ____opt_60 = ____opt_60.s
             end
-            __O[892] = ____opt_39
-            range.value = math.floor(if ____t_41(____opt_39) then __O[892] else 1 * 100 + 0.5)
+            __O[897] = ____opt_60
+            if ____t_62(____opt_60) then
+                ____t_result_63 = __O[897]
+            else
+                ____t_result_63 = 1
+            end
+            range.value = math.floor(____t_result_63 * 100 + 0.5)
         end
         range:addEventListener(
             "input",
@@ -314,12 +420,18 @@ local __O = {};
                 return
             end
             mexeu = true
-            local ____t_44 = __t
-            local ____opt_42 = tela:closest(".c2j")
-            if ____opt_42 ~= nil then
-                ____opt_42 = ____opt_42:querySelector(".c2-c1-shell")
+            local ____t_result_67
+            local ____t_66 = __t
+            local ____opt_64 = tela:closest(".c2j")
+            if ____opt_64 ~= nil then
+                ____opt_64 = ____opt_64:querySelector(".c2-c1-shell")
             end
-            local r = if ____t_44(____opt_42) then {left = 0, top = 0, width = window.innerWidth, height = window.innerHeight} else tela:getBoundingClientRect()
+            if ____t_66(____opt_64) then
+                ____t_result_67 = {left = 0, top = 0, width = window.innerWidth, height = window.innerHeight}
+            else
+                ____t_result_67 = tela:getBoundingClientRect()
+            end
+            local r = ____t_result_67
             __get(L, sel).x = __TS__Number(__call(
                 clamp(nil, (e.clientX - r.left) / r.width * 100, 4, 96),
                 "toFixed",
@@ -352,10 +464,16 @@ local __O = {};
                 e:stopPropagation()
             end
         end
-        local ____t_46 = __t
-        local ____temp_45 = tela:closest(".c2j")
-        __O[893] = ____temp_45
-        local raiz = if ____t_46(____temp_45) then __O[893] else tela
+        local ____t_result_70
+        local ____t_69 = __t
+        local ____temp_68 = tela:closest(".c2j")
+        __O[898] = ____temp_68
+        if ____t_69(____temp_68) then
+            ____t_result_70 = __O[898]
+        else
+            ____t_result_70 = tela
+        end
+        local raiz = ____t_result_70
         raiz:addEventListener("pointerdown", baixo, true)
         window:addEventListener("pointermove", move)
         window:addEventListener("pointerup", cima, true)
@@ -378,7 +496,14 @@ local __O = {};
                 el.classList:remove("c2-sel")
             end
             if __t(joy) then
-                joy.style.display = if __t(joyDisp) then joyDisp else ""
+                local ____joy_style_72 = joy.style
+                local ____t_result_71
+                if __t(joyDisp) then
+                    ____t_result_71 = joyDisp
+                else
+                    ____t_result_71 = ""
+                end
+                ____joy_style_72.display = ____t_result_71
             end
             if not __t(mexeu) then
                 L = {}
@@ -404,8 +529,8 @@ local __O = {};
         marcar(nil)
         window:setTimeout(
             function()
-                local ____opt_49 = ed:querySelector("[data-a=\"pronto\"]")
-                return ____opt_49 and ____opt_49:focus()
+                local ____opt_75 = ed:querySelector("[data-a=\"pronto\"]")
+                return ____opt_75 and ____opt_75:focus()
             end,
             30
         )

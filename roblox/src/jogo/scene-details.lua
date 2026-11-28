@@ -2,7 +2,7 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __lt, __getq, __mod, __ord, __arrL, __iterar, __t, __get, __call, __add, __assign = __JSR.__lt, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__assign
+local __lt, __getq, __mod, __ord, __arrL, __iterar, __t, __get, __call, __add, __iter, __assign = __JSR.__lt, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
 local Map = ____lualib.Map
 local __TS__New = ____lualib.__TS__New
@@ -12,30 +12,42 @@ local ____exports = {}
 local __O = {};
 (function()
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art)
-    __O[2690] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2690] else window.SceneDetails) then
+    __O[2695] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[2695]
+    else
+        ____t_result_2 = window.SceneDetails
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     local art = window.Art
     local arena = window.ArenaArt
     local cache = __TS__New(Map)
     local CACHE_LIMIT = 28
-    local ____this_4
-    ____this_4 = window
-    local ____opt_3 = ____this_4.matchMedia
-    local reduced = ____opt_3 and ____opt_3(____this_4, "(prefers-reduced-motion: reduce)")
+    local ____this_5
+    ____this_5 = window
+    local ____opt_4 = ____this_5.matchMedia
+    local reduced = ____opt_4 and ____opt_4(____this_5, "(prefers-reduced-motion: reduce)")
     local function clamp(____, n, a, b)
-        local ____a_8 = a
-        local ____b_7 = b
-        local ____t_6 = __t
-        local ____TS__Number_result_5 = __TS__Number(n)
-        __O[2691] = ____TS__Number_result_5
+        local ____a_10 = a
+        local ____b_9 = b
+        local ____t_result_8
+        local ____t_7 = __t
+        local ____TS__Number_result_6 = __TS__Number(n)
+        __O[2696] = ____TS__Number_result_6
+        if ____t_7(____TS__Number_result_6) then
+            ____t_result_8 = __O[2696]
+        else
+            ____t_result_8 = 0
+        end
         return math.max(
-            ____a_8,
-            math.min(____b_7, if ____t_6(____TS__Number_result_5) then __O[2691] else 0)
+            ____a_10,
+            math.min(____b_9, ____t_result_8)
         )
     end
     local function hash(____, n)
@@ -57,13 +69,21 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                math.floor(__get(p, 0) + 0.5),
-                math.floor(__get(p, 1) + 0.5)
-            ) else c:moveTo(
-                math.floor(__get(p, 0) + 0.5),
-                math.floor(__get(p, 1) + 0.5)
-            ) end
+            function(____, p, i)
+                local ____t_result_11
+                if __t(i) then
+                    ____t_result_11 = c:lineTo(
+                        math.floor(__get(p, 0) + 0.5),
+                        math.floor(__get(p, 1) + 0.5)
+                    )
+                else
+                    ____t_result_11 = c:moveTo(
+                        math.floor(__get(p, 0) + 0.5),
+                        math.floor(__get(p, 1) + 0.5)
+                    )
+                end
+                return ____t_result_11
+            end
         )
         c:closePath()
         __call(c, "fill")
@@ -78,13 +98,21 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                math.floor(__get(p, 0) + 0.5),
-                math.floor(__get(p, 1) + 0.5)
-            ) else c:moveTo(
-                math.floor(__get(p, 0) + 0.5),
-                math.floor(__get(p, 1) + 0.5)
-            ) end
+            function(____, p, i)
+                local ____t_result_12
+                if __t(i) then
+                    ____t_result_12 = c:lineTo(
+                        math.floor(__get(p, 0) + 0.5),
+                        math.floor(__get(p, 1) + 0.5)
+                    )
+                else
+                    ____t_result_12 = c:moveTo(
+                        math.floor(__get(p, 0) + 0.5),
+                        math.floor(__get(p, 1) + 0.5)
+                    )
+                end
+                return ____t_result_12
+            end
         )
         c:stroke()
     end
@@ -112,10 +140,22 @@ local __O = {};
         return v
     end
     local function time(self, t)
-        local ____t_12 = __t
-        local ____TS__Number_result_11 = __TS__Number(t)
-        __O[2692] = ____TS__Number_result_11
-        return if __t(reduced and reduced.matches) then 0 else if ____t_12(____TS__Number_result_11) then __O[2692] else 0
+        local ____t_result_18
+        if __t(reduced and reduced.matches) then
+            ____t_result_18 = 0
+        else
+            local ____t_result_17
+            local ____t_16 = __t
+            local ____TS__Number_result_15 = __TS__Number(t)
+            __O[2697] = ____TS__Number_result_15
+            if ____t_16(____TS__Number_result_15) then
+                ____t_result_17 = __O[2697]
+            else
+                ____t_result_17 = 0
+            end
+            ____t_result_18 = ____t_result_17
+        end
+        return ____t_result_18
     end
     local function sceneAllowed(self)
         do
@@ -123,30 +163,30 @@ local __O = {};
                 return true, true
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____opt_15 = window.Game
-                if ____opt_15 ~= nil then
-                    ____opt_15 = ____opt_15.getAudioState
+                local ____opt_21 = window.Game
+                if ____opt_21 ~= nil then
+                    ____opt_21 = ____opt_21.getAudioState
                 end
-                local ____opt_result_17
-                if ____opt_15 ~= nil then
-                    ____opt_result_17 = ____opt_15(____opt_15)
+                local ____opt_result_23
+                if ____opt_21 ~= nil then
+                    ____opt_result_23 = ____opt_21(____opt_21)
                 end
-                local s = ____opt_result_17
-                local ____t_21 = __t
-                local ____opt_result_20
+                local s = ____opt_result_23
+                local ____t_27 = __t
+                local ____opt_result_26
                 if s ~= nil then
-                    ____opt_result_20 = s.cutscene
+                    ____opt_result_26 = s.cutscene
                 end
-                local ____temp_26 = not ____t_21(____opt_result_20)
-                if ____temp_26 then
-                    local ____t_25 = __t
-                    local ____opt_result_24
+                local ____temp_32 = not ____t_27(____opt_result_26)
+                if ____temp_32 then
+                    local ____t_31 = __t
+                    local ____opt_result_30
                     if s ~= nil then
-                        ____opt_result_24 = s.activity
+                        ____opt_result_30 = s.activity
                     end
-                    ____temp_26 = not ____t_25(____opt_result_24)
+                    ____temp_32 = not ____t_31(____opt_result_30)
                 end
-                return true, ____temp_26
+                return true, ____temp_32
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch()
@@ -297,17 +337,17 @@ local __O = {};
             end
             return
         end
-        local ____t_32 = __t
-        local ____opt_29 = window.Graphics
-        if ____opt_29 ~= nil then
-            ____opt_29 = ____opt_29.isLite
+        local ____t_38 = __t
+        local ____opt_35 = window.Graphics
+        if ____opt_35 ~= nil then
+            ____opt_35 = ____opt_35.isLite
         end
-        local ____opt_result_31
-        if ____opt_29 ~= nil then
-            ____opt_result_31 = ____opt_29(____opt_29)
+        local ____opt_result_37
+        if ____opt_35 ~= nil then
+            ____opt_result_37 = ____opt_35(____opt_35)
         end
-        if ____t_32(____opt_result_31) then
-            local h = if scene == 9 then 140 else 180
+        if ____t_38(____opt_result_37) then
+            local h = scene == 9 and 140 or 180
             local bg = cached(
                 nil,
                 __add("sky:", scene),
@@ -315,9 +355,9 @@ local __O = {};
                 h,
                 function(____, g)
                     local grad = g:createLinearGradient(0, 0, 0, h)
-                    grad:addColorStop(0, if scene == 3 then "#3f99d5" else "#3199df")
+                    grad:addColorStop(0, scene == 3 and "#3f99d5" or "#3199df")
                     grad:addColorStop(0.64, "#7fc9ee")
-                    grad:addColorStop(1, if h < 120 then "#74b8e7" else "#96cef0")
+                    grad:addColorStop(1, h < 120 and "#74b8e7" or "#96cef0")
                     g.fillStyle = grad
                     g:fillRect(0, 0, 960, h)
                     do
@@ -343,7 +383,7 @@ local __O = {};
             c:rect(0, 0, 960, h)
             c:clip()
             local sx = 734 - camera * 0.025
-            local sy = if h < 120 then 38 else 80
+            local sy = h < 120 and 38 or 80
             do
                 local i = 3
                 while i > 0 do
@@ -443,58 +483,7 @@ local __O = {};
         end
         if scene == 3 then
             for ____, wx in __iterar((__arrL({85, 2450}, 2))) do
-                local x = wx - camera
-                if __t(x < -30 or x > 990) then
-                    continue
-                end
-                rect(
-                    nil,
-                    c,
-                    x,
-                    122,
-                    8,
-                    58,
-                    "#4b6260"
-                )
-                rect(
-                    nil,
-                    c,
-                    x + 1,
-                    122,
-                    2,
-                    58,
-                    "#9eb9b8"
-                )
-                rect(
-                    nil,
-                    c,
-                    x - 16,
-                    112,
-                    41,
-                    16,
-                    "#3e5354"
-                )
                 do
-                    local k = 0
-                    while k < 3 do
-                        rect(
-                            nil,
-                            c,
-                            x - 11 + k * 11,
-                            115,
-                            8,
-                            9,
-                            "#f9e5ac"
-                        )
-                        k = k + 1
-                    end
-                end
-            end
-        end
-        if scene == 7 then
-            do
-                local wx = 300
-                while __lt(wx, camera + 1000) do
                     local x = wx - camera
                     if __t(x < -30 or x > 990) then
                         continue
@@ -503,42 +492,97 @@ local __O = {};
                         nil,
                         c,
                         x,
-                        100,
-                        7,
-                        80,
-                        "#40687b"
+                        122,
+                        8,
+                        58,
+                        "#4b6260"
                     )
                     rect(
                         nil,
                         c,
                         x + 1,
-                        100,
+                        122,
                         2,
-                        80,
-                        "#9bbecb"
+                        58,
+                        "#9eb9b8"
                     )
                     rect(
                         nil,
                         c,
-                        x - 18,
-                        89,
-                        43,
-                        17,
-                        "#1f425c"
+                        x - 16,
+                        112,
+                        41,
+                        16,
+                        "#3e5354"
                     )
                     do
-                        local j = 0
-                        while j < 3 do
+                        local k = 0
+                        while k < 3 do
                             rect(
                                 nil,
                                 c,
-                                x - 13 + j * 12,
-                                93,
-                                9,
+                                x - 11 + k * 11,
+                                115,
                                 8,
-                                "#fff2b6"
+                                9,
+                                "#f9e5ac"
                             )
-                            j = j + 1
+                            k = k + 1
+                        end
+                    end
+                end
+            end
+        end
+        if scene == 7 then
+            do
+                local wx = 300
+                while __lt(wx, camera + 1000) do
+                    do
+                        local x = wx - camera
+                        if __t(x < -30 or x > 990) then
+                            do wx = wx + 1300 continue end
+                        end
+                        rect(
+                            nil,
+                            c,
+                            x,
+                            100,
+                            7,
+                            80,
+                            "#40687b"
+                        )
+                        rect(
+                            nil,
+                            c,
+                            x + 1,
+                            100,
+                            2,
+                            80,
+                            "#9bbecb"
+                        )
+                        rect(
+                            nil,
+                            c,
+                            x - 18,
+                            89,
+                            43,
+                            17,
+                            "#1f425c"
+                        )
+                        do
+                            local j = 0
+                            while j < 3 do
+                                rect(
+                                    nil,
+                                    c,
+                                    x - 13 + j * 12,
+                                    93,
+                                    9,
+                                    8,
+                                    "#fff2b6"
+                                )
+                                j = j + 1
+                            end
                         end
                     end
                     wx = wx + 1300
@@ -564,10 +608,16 @@ local __O = {};
         12
     )
     local function groundTexture(self, c, scene, camera)
-        local ____t_34 = __t
-        local ____get_result_33 = __get(palettes, scene)
-        __O[2693] = ____get_result_33
-        local pal = if ____t_34(____get_result_33) then __O[2693] else __get(palettes, 0)
+        local ____t_result_41
+        local ____t_40 = __t
+        local ____get_result_39 = __get(palettes, scene)
+        __O[2698] = ____get_result_39
+        if ____t_40(____get_result_39) then
+            ____t_result_41 = __O[2698]
+        else
+            ____t_result_41 = __get(palettes, 0)
+        end
+        local pal = ____t_result_41
         local start = math.floor(camera / 256)
         do
             local chunk = start
@@ -594,14 +644,22 @@ local __O = {};
                                 local x = hash(nil, i + seed * 71) * 250
                                 local y = 8 + hash(nil, i + seed * 13 + 87) * 84
                                 if scene == 0 then
+                                    local ____g_43 = g
+                                    local ____temp_44 = 4 + hash(nil, i + 6) * 9
+                                    local ____t_result_42
+                                    if __t(__mod(i, 3)) then
+                                        ____t_result_42 = __get(pal, 0)
+                                    else
+                                        ____t_result_42 = __get(pal, 1)
+                                    end
                                     rect(
                                         nil,
-                                        g,
+                                        ____g_43,
                                         x,
                                         y,
-                                        4 + hash(nil, i + 6) * 9,
+                                        ____temp_44,
                                         2,
-                                        if __t(__mod(i, 3)) then __get(pal, 0) else __get(pal, 1)
+                                        ____t_result_42
                                     )
                                     if __mod(i, 4) == 0 then
                                         rect(
@@ -624,14 +682,21 @@ local __O = {};
                                         )
                                     end
                                 elseif scene == 7 then
+                                    local ____g_46 = g
+                                    local ____t_result_45
+                                    if __t(__mod(i, 3)) then
+                                        ____t_result_45 = __get(pal, 0)
+                                    else
+                                        ____t_result_45 = __get(pal, 1)
+                                    end
                                     rect(
                                         nil,
-                                        g,
+                                        ____g_46,
                                         x,
                                         y,
                                         2,
                                         3,
-                                        if __t(__mod(i, 3)) then __get(pal, 0) else __get(pal, 1)
+                                        ____t_result_45
                                     )
                                     rect(
                                         nil,
@@ -643,14 +708,22 @@ local __O = {};
                                         __get(pal, 0)
                                     )
                                 else
+                                    local ____g_48 = g
+                                    local ____temp_49 = 11 + hash(nil, i + 4) * 14
+                                    local ____t_result_47
+                                    if __t(__mod(i, 3)) then
+                                        ____t_result_47 = __get(pal, 0)
+                                    else
+                                        ____t_result_47 = __get(pal, 1)
+                                    end
                                     rect(
                                         nil,
-                                        g,
+                                        ____g_48,
                                         x,
                                         y,
-                                        11 + hash(nil, i + 4) * 14,
+                                        ____temp_49,
                                         1,
-                                        if __t(__mod(i, 3)) then __get(pal, 0) else __get(pal, 1)
+                                        ____t_result_47
                                     )
                                     if __mod(i, 5) == 0 then
                                         rect(
@@ -726,28 +799,36 @@ local __O = {};
                     end
                 )
                 local worldX = chunk * 256
-                local ____t_39 = __t
-                local ____getq_37 = __getq
-                local ____opt_35 = window.WorldData
-                if ____opt_35 ~= nil then
-                    ____opt_35 = ____opt_35.gaps
+                local ____t_result_55
+                local ____t_54 = __t
+                local ____getq_52 = __getq
+                local ____opt_50 = window.WorldData
+                if ____opt_50 ~= nil then
+                    ____opt_50 = ____opt_50.gaps
                 end
-                local ____getq_37_result_38 = ____getq_37(____opt_35, scene)
-                __O[2694] = ____getq_37_result_38
-                local gaps = if ____t_39(____getq_37_result_38) then __O[2694] else __arrL({}, 0)
+                local ____getq_52_result_53 = ____getq_52(____opt_50, scene)
+                __O[2699] = ____getq_52_result_53
+                if ____t_54(____getq_52_result_53) then
+                    ____t_result_55 = __O[2699]
+                else
+                    ____t_result_55 = __arrL({}, 0)
+                end
+                local gaps = ____t_result_55
                 c:save()
                 c:beginPath()
                 local cursor = worldX
                 for ____, gap in __iterar((gaps)) do
-                    local a = __TS__Number(__get(gap, 0))
-                    local b = a + __TS__Number(__get(gap, 1))
-                    if __t(b <= worldX or a >= worldX + 256) then
-                        continue
+                    do
+                        local a = __TS__Number(__get(gap, 0))
+                        local b = a + __TS__Number(__get(gap, 1))
+                        if __t(b <= worldX or a >= worldX + 256) then
+                            continue
+                        end
+                        if a > cursor then
+                            c:rect(cursor - camera, 444, a - cursor, 96)
+                        end
+                        cursor = math.max(cursor, b)
                     end
-                    if a > cursor then
-                        c:rect(cursor - camera, 444, a - cursor, 96)
-                    end
-                    cursor = math.max(cursor, b)
                 end
                 if cursor < worldX + 256 then
                     c:rect(cursor - camera, 444, worldX + 256 - cursor, 96)
@@ -783,7 +864,7 @@ local __O = {};
                 local i = start
                 while i <= start + 6 do
                     local x = i * 190 + hash(nil, i + 9) * 74 - camera
-                    local yy = if __t(scene == 0 or scene == 7) then 524 else 530
+                    local yy = __t(scene == 0 or scene == 7) and 524 or 530
                     if __t(scene == 0 or scene == 7) then
                         do
                             local j = 0
@@ -806,7 +887,7 @@ local __O = {};
                                         },
                                         2
                                     ),
-                                    if __t(__mod(j, 2)) then "#7fbb48" else "#3c823e",
+                                    __t(__mod(j, 2)) and "#7fbb48" or "#3c823e",
                                     2
                                 )
                                 line(
@@ -993,86 +1074,88 @@ local __O = {};
         )) then
             return
         end
-        local spacing = if scene == 2 then 280 else if scene == 8 then 438 else 660
+        local spacing = scene == 2 and 280 or (scene == 8 and 438 or 660)
         local start = math.floor(camera / spacing) - 1
         c:save()
         do
             local i = start
             while i < start + 6 do
-                local x = i * spacing - camera + if scene == 2 then 84 else if scene == 8 then 130 else 175
-                if __t(x < -180 or x > 1140) then
-                    continue
-                end
-                poly(
-                    nil,
-                    c,
-                    __arrL(
-                        {
-                            __arrL({x, if scene == 8 then 105 else 155}, 2),
-                            __arrL({x + 35, if scene == 8 then 105 else 155}, 2),
-                            __arrL({x + 137, 432}, 2),
-                            __arrL({x - 83, 432}, 2)
-                        },
-                        4
-                    ),
-                    if scene == 8 then "#ffe3a909" else "#f9f5d20a"
-                )
                 do
-                    local j = 0
-                    while j < 4 do
-                        local dx = x - 20 + j * 32
-                        local yy = 460 + j * 8
+                    local x = i * spacing - camera + (scene == 2 and 84 or (scene == 8 and 130 or 175))
+                    if __t(x < -180 or x > 1140) then
+                        do i = i + 1 continue end
+                    end
+                    poly(
+                        nil,
+                        c,
+                        __arrL(
+                            {
+                                __arrL({x, scene == 8 and 105 or 155}, 2),
+                                __arrL({x + 35, scene == 8 and 105 or 155}, 2),
+                                __arrL({x + 137, 432}, 2),
+                                __arrL({x - 83, 432}, 2)
+                            },
+                            4
+                        ),
+                        scene == 8 and "#ffe3a909" or "#f9f5d20a"
+                    )
+                    do
+                        local j = 0
+                        while j < 4 do
+                            local dx = x - 20 + j * 32
+                            local yy = 460 + j * 8
+                            rect(
+                                nil,
+                                c,
+                                dx,
+                                yy,
+                                86 - j * 10,
+                                2,
+                                scene == 8 and "#ffe3a918" or "#e6efda1a"
+                            )
+                            j = j + 1
+                        end
+                    end
+                    if scene == 8 then
                         rect(
                             nil,
                             c,
-                            dx,
-                            yy,
-                            86 - j * 10,
+                            x - 42,
+                            135,
                             2,
-                            if scene == 8 then "#ffe3a918" else "#e6efda1a"
+                            131,
+                            "#e5f7ef44"
                         )
-                        j = j + 1
+                        rect(
+                            nil,
+                            c,
+                            x - 42,
+                            135,
+                            72,
+                            1,
+                            "#e5f7ef66"
+                        )
                     end
-                end
-                if scene == 8 then
-                    rect(
-                        nil,
-                        c,
-                        x - 42,
-                        135,
-                        2,
-                        131,
-                        "#e5f7ef44"
-                    )
-                    rect(
-                        nil,
-                        c,
-                        x - 42,
-                        135,
-                        72,
-                        1,
-                        "#e5f7ef66"
-                    )
-                end
-                if scene == 2 then
-                    rect(
-                        nil,
-                        c,
-                        x + 8,
-                        307,
-                        2,
-                        52,
-                        "#cee6d633"
-                    )
-                    rect(
-                        nil,
-                        c,
-                        x - 13,
-                        307,
-                        21,
-                        1,
-                        "#cee6d655"
-                    )
+                    if scene == 2 then
+                        rect(
+                            nil,
+                            c,
+                            x + 8,
+                            307,
+                            2,
+                            52,
+                            "#cee6d633"
+                        )
+                        rect(
+                            nil,
+                            c,
+                            x - 13,
+                            307,
+                            21,
+                            1,
+                            "#cee6d655"
+                        )
+                    end
                 end
                 i = i + 1
             end
@@ -1098,7 +1181,7 @@ local __O = {};
     end
     local function roofDetails(self, c, scene, camera, t)
         if __t(scene == 1 or scene == 9) then
-            local y = if scene == 1 then 222 else 212
+            local y = scene == 1 and 222 or 212
             local start = math.floor(camera / 187)
             do
                 local i = start
@@ -1142,7 +1225,7 @@ local __O = {};
                         y,
                         2,
                         2,
-                        if __t(__mod(i, 2)) then "#99d9f2" else "#ffe7ba"
+                        __t(__mod(i, 2)) and "#99d9f2" or "#ffe7ba"
                     )
                     i = i + 1
                 end
@@ -1363,27 +1446,39 @@ local __O = {};
             return
         end
         t = time(nil, t)
-        ____type = if type(____type) == "table" then ____type.type else ____type
-        local ____t_45 = __t
-        local ____opt_42 = window.HdScene
-        if ____opt_42 ~= nil then
-            ____opt_42 = ____opt_42.active
+        local ____temp_56
+        if type(____type) == "table" then
+            ____temp_56 = ____type.type
+        else
+            ____temp_56 = ____type
         end
-        local ____opt_result_44
-        if ____opt_42 ~= nil then
-            ____opt_result_44 = ____opt_42(____opt_42, ____type)
+        ____type = ____temp_56
+        local ____t_62 = __t
+        local ____opt_59 = window.HdScene
+        if ____opt_59 ~= nil then
+            ____opt_59 = ____opt_59.active
         end
-        if ____t_45(____opt_result_44) then
+        local ____opt_result_61
+        if ____opt_59 ~= nil then
+            ____opt_result_61 = ____opt_59(____opt_59, ____type)
+        end
+        if ____t_62(____opt_result_61) then
             return
         end
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_63
+        if __t(homeX) then
+            ____t_result_63 = homeX - camera
+        else
+            ____t_result_63 = 480
+        end
+        local center = ____t_result_63
         c:save()
         local dark = __call(
             __arrL({"marco", "menezes", "giant", "dede"}, 4),
             "includes",
             ____type
         )
-        local color = if __t(dark) then "#d8a9d555" else "#f3dfae66"
+        local color = __t(dark) and "#d8a9d555" or "#f3dfae66"
         do
             local i = 0
             while i < 7 do
@@ -1412,7 +1507,7 @@ local __O = {};
                     453 + __mod(i, 3) * 29,
                     24 + __mod(i, 2) * 13,
                     1,
-                    if __t(dark) then "#b391b133" else "#f2d7b433"
+                    __t(dark) and "#b391b133" or "#f2d7b433"
                 )
                 if __mod(i, 3) == 0 then
                     rect(
@@ -1422,7 +1517,7 @@ local __O = {};
                         455 + __mod(i, 3) * 29,
                         12,
                         1,
-                        if __t(dark) then "#352c4922" else "#5a493622"
+                        __t(dark) and "#352c4922" or "#5a493622"
                     )
                 end
                 i = i + 1
@@ -1485,14 +1580,20 @@ local __O = {};
             45,
             math.min(H * 0.66, H * 0.88 - 100)
         ))
-        local ____t_50 = __t
-        local ____opt_result_48
+        local ____t_result_69
+        local ____t_68 = __t
+        local ____opt_result_66
         if camera ~= nil then
-            ____opt_result_48 = camera.x
+            ____opt_result_66 = camera.x
         end
-        local ____TS__Number_result_49 = __TS__Number(____opt_result_48)
-        __O[2695] = ____TS__Number_result_49
-        local pan = if ____t_50(____TS__Number_result_49) then __O[2695] else 640
+        local ____TS__Number_result_67 = __TS__Number(____opt_result_66)
+        __O[2700] = ____TS__Number_result_67
+        if ____t_68(____TS__Number_result_67) then
+            ____t_result_69 = __O[2700]
+        else
+            ____t_result_69 = 640
+        end
+        local pan = ____t_result_69
         local fade = math.min(
             24,
             math.floor(cap / 4)
@@ -1722,7 +1823,7 @@ local __O = {};
         c:restore()
         local ground = H - 4
         for ____, side in __iterar((__arrL({1, -1}, 2))) do
-            local x = if side > 0 then 8 else W - 8
+            local x = side > 0 and 8 or W - 8
             do
                 local i = 0
                 while i < 4 do
@@ -1739,7 +1840,7 @@ local __O = {};
                             },
                             4
                         ),
-                        if __t(__mod(i, 2)) then "#328f4688" else "#75bb4b88"
+                        __t(__mod(i, 2)) and "#328f4688" or "#75bb4b88"
                     )
                     i = i + 1
                 end
@@ -1748,15 +1849,21 @@ local __O = {};
         do
             local i = 0
             while i < 3 do
-                local ____mod_56 = __mod
-                local ____temp_55 = i * 317 + t * 8
-                local ____t_54 = __t
-                local ____opt_result_53
+                local ____mod_76 = __mod
+                local ____temp_75 = i * 317 + t * 8
+                local ____t_result_74
+                local ____t_73 = __t
+                local ____opt_result_72
                 if camera ~= nil then
-                    ____opt_result_53 = camera.x
+                    ____opt_result_72 = camera.x
                 end
-                __O[2696] = ____opt_result_53
-                local x = ____mod_56(____temp_55 - if ____t_54(____opt_result_53) then __O[2696] else 0 * 0.09 + W + 140, W + 140) - 70
+                __O[2701] = ____opt_result_72
+                if ____t_73(____opt_result_72) then
+                    ____t_result_74 = __O[2701]
+                else
+                    ____t_result_74 = 0
+                end
+                local x = ____mod_76(____temp_75 - ____t_result_74 * 0.09 + W + 140, W + 140) - 70
                 local y = H * 0.2 + i * 19 + math.sin(t * 0.4 + i) * 3
                 local wing = math.floor(math.sin(t * 4 + i) * 2 + 0.5)
                 line(
@@ -1802,101 +1909,134 @@ local __O = {};
         t = time(nil, t)
         c:save()
         c.imageSmoothingEnabled = false
-        for ____, p in __iterar((if __t(platforms) then platforms else __arrL({}, 0))) do
-            local ____t_58 = __t
-            local ____TS__Number_result_57 = __TS__Number(p.x)
-            __O[2697] = ____TS__Number_result_57
-            local x = if ____t_58(____TS__Number_result_57) then __O[2697] else 0
-            local ____t_60 = __t
-            local ____TS__Number_result_59 = __TS__Number(p.y)
-            __O[2698] = ____TS__Number_result_59
-            local y = if ____t_60(____TS__Number_result_59) then __O[2698] else 0
-            local ____t_62 = __t
-            local ____TS__Number_result_61 = __TS__Number(p.w)
-            __O[2699] = ____TS__Number_result_61
-            local w = if ____t_62(____TS__Number_result_61) then __O[2699] else 0
-            if w < 30 then
-                continue
-            end
-            rect(
-                nil,
-                c,
-                x + 8,
-                y + 8,
-                w - 16,
-                2,
-                "#302e2933"
-            )
+        local ____iter_88 = __iter
+        local ____t_result_87
+        if __t(platforms) then
+            ____t_result_87 = platforms
+        else
+            ____t_result_87 = __arrL({}, 0)
+        end
+        for ____, p in __TS__Iterator(____iter_88(____t_result_87)) do
             do
-                local i = 0
-                while i < math.min(
-                    9,
-                    math.floor(w / 35)
-                ) do
-                    local xx = x + 13 + i * (w - 28) / math.max(
-                        1,
-                        math.min(
-                            9,
-                            math.floor(w / 35)
-                        )
-                    )
-                    rect(
-                        nil,
-                        c,
-                        xx,
-                        y + 3,
-                        7,
-                        1,
-                        "#e2f3ac"
-                    )
-                    rect(
-                        nil,
-                        c,
-                        xx + 3,
-                        y + 10,
-                        5,
-                        1,
-                        "#f0cf8b66"
-                    )
-                    i = i + 1
+                local ____t_result_79
+                local ____t_78 = __t
+                local ____TS__Number_result_77 = __TS__Number(p.x)
+                __O[2702] = ____TS__Number_result_77
+                if ____t_78(____TS__Number_result_77) then
+                    ____t_result_79 = __O[2702]
+                else
+                    ____t_result_79 = 0
                 end
-            end
-            if __t(p.main) then
-                for ____, side in __iterar((__arrL({-1, 1}, 2))) do
-                    local xx = if side < 0 then x + 56 else x + w - 57
-                    local sway = math.floor(math.sin(t * 1.4 + xx) * 2 + 0.5)
-                    line(
-                        nil,
-                        c,
-                        __arrL(
-                            {
-                                __arrL({xx, y + 31}, 2),
-                                __arrL({xx + sway, y + 49}, 2),
-                                __arrL({xx - 4 + sway, y + 64}, 2)
-                            },
-                            3
-                        ),
-                        "#2f713e",
-                        2
-                    )
-                    do
-                        local j = 0
-                        while j < 3 do
-                            poly(
-                                nil,
-                                c,
-                                __arrL(
-                                    {
-                                        __arrL({xx + sway, y + 39 + j * 9}, 2),
-                                        __arrL({xx - 6 + sway, y + 36 + j * 9}, 2),
-                                        __arrL({xx - 8 + sway, y + 40 + j * 9}, 2),
-                                        __arrL({xx - 1 + sway, y + 44 + j * 9}, 2)
-                                    },
-                                    4
-                                ),
-                                if __t(__mod(j, 2)) then "#83bc55" else "#5ba149"
+                local x = ____t_result_79
+                local ____t_result_82
+                local ____t_81 = __t
+                local ____TS__Number_result_80 = __TS__Number(p.y)
+                __O[2703] = ____TS__Number_result_80
+                if ____t_81(____TS__Number_result_80) then
+                    ____t_result_82 = __O[2703]
+                else
+                    ____t_result_82 = 0
+                end
+                local y = ____t_result_82
+                local ____t_result_85
+                local ____t_84 = __t
+                local ____TS__Number_result_83 = __TS__Number(p.w)
+                __O[2704] = ____TS__Number_result_83
+                if ____t_84(____TS__Number_result_83) then
+                    ____t_result_85 = __O[2704]
+                else
+                    ____t_result_85 = 0
+                end
+                local w = ____t_result_85
+                if w < 30 then
+                    continue
+                end
+                rect(
+                    nil,
+                    c,
+                    x + 8,
+                    y + 8,
+                    w - 16,
+                    2,
+                    "#302e2933"
+                )
+                do
+                    local i = 0
+                    while i < math.min(
+                        9,
+                        math.floor(w / 35)
+                    ) do
+                        local xx = x + 13 + i * (w - 28) / math.max(
+                            1,
+                            math.min(
+                                9,
+                                math.floor(w / 35)
                             )
-                            j = j + 1
+                        )
+                        rect(
+                            nil,
+                            c,
+                            xx,
+                            y + 3,
+                            7,
+                            1,
+                            "#e2f3ac"
+                        )
+                        rect(
+                            nil,
+                            c,
+                            xx + 3,
+                            y + 10,
+                            5,
+                            1,
+                            "#f0cf8b66"
+                        )
+                        i = i + 1
+                    end
+                end
+                if __t(p.main) then
+                    for ____, side in __iterar((__arrL({-1, 1}, 2))) do
+                        local ____temp_86
+                        if side < 0 then
+                            ____temp_86 = x + 56
+                        else
+                            ____temp_86 = x + w - 57
+                        end
+                        local xx = ____temp_86
+                        local sway = math.floor(math.sin(t * 1.4 + xx) * 2 + 0.5)
+                        line(
+                            nil,
+                            c,
+                            __arrL(
+                                {
+                                    __arrL({xx, y + 31}, 2),
+                                    __arrL({xx + sway, y + 49}, 2),
+                                    __arrL({xx - 4 + sway, y + 64}, 2)
+                                },
+                                3
+                            ),
+                            "#2f713e",
+                            2
+                        )
+                        do
+                            local j = 0
+                            while j < 3 do
+                                poly(
+                                    nil,
+                                    c,
+                                    __arrL(
+                                        {
+                                            __arrL({xx + sway, y + 39 + j * 9}, 2),
+                                            __arrL({xx - 6 + sway, y + 36 + j * 9}, 2),
+                                            __arrL({xx - 8 + sway, y + 40 + j * 9}, 2),
+                                            __arrL({xx - 1 + sway, y + 44 + j * 9}, 2)
+                                        },
+                                        4
+                                    ),
+                                    __t(__mod(j, 2)) and "#83bc55" or "#5ba149"
+                                )
+                                j = j + 1
+                            end
                         end
                     end
                 end
@@ -1921,32 +2061,38 @@ local __O = {};
             camera,
             t
         )
-        local ____t_68 = __t
-        local ____opt_65 = window.HdMaps
-        if ____opt_65 ~= nil then
-            ____opt_65 = ____opt_65.handles
+        local ____t_94 = __t
+        local ____opt_91 = window.HdMaps
+        if ____opt_91 ~= nil then
+            ____opt_91 = ____opt_91.handles
         end
-        local ____opt_result_67
-        if ____opt_65 ~= nil then
-            ____opt_result_67 = ____opt_65(
-                ____opt_65,
+        local ____opt_result_93
+        if ____opt_91 ~= nil then
+            ____opt_result_93 = ____opt_91(
+                ____opt_91,
                 __TS__Number(scene)
             )
         end
-        if ____t_68(____opt_result_67) then
+        if ____t_94(____opt_result_93) then
             return
         end
-        local ____campaign_73 = campaign
-        local ____c_71 = c
-        local ____TS__Number_result_72 = __TS__Number(scene)
-        local ____t_70 = __t
-        local ____TS__Number_result_69 = __TS__Number(camera)
-        __O[2700] = ____TS__Number_result_69
-        ____campaign_73(
+        local ____campaign_100 = campaign
+        local ____c_98 = c
+        local ____TS__Number_result_99 = __TS__Number(scene)
+        local ____t_result_97
+        local ____t_96 = __t
+        local ____TS__Number_result_95 = __TS__Number(camera)
+        __O[2705] = ____TS__Number_result_95
+        if ____t_96(____TS__Number_result_95) then
+            ____t_result_97 = __O[2705]
+        else
+            ____t_result_97 = 0
+        end
+        ____campaign_100(
             nil,
-            ____c_71,
-            ____TS__Number_result_72,
-            if ____t_70(____TS__Number_result_69) then __O[2700] else 0,
+            ____c_98,
+            ____TS__Number_result_99,
+            ____t_result_97,
             t
         )
     end
@@ -1954,16 +2100,16 @@ local __O = {};
         if t == nil then
             t = 0
         end
-        local ____t_79 = __t
-        local ____opt_76 = window.HdMaps
-        if ____opt_76 ~= nil then
-            ____opt_76 = ____opt_76.drawRoom
+        local ____t_106 = __t
+        local ____opt_103 = window.HdMaps
+        if ____opt_103 ~= nil then
+            ____opt_103 = ____opt_103.drawRoom
         end
-        local ____opt_result_78
-        if ____opt_76 ~= nil then
-            ____opt_result_78 = ____opt_76(____opt_76, c, id, t)
+        local ____opt_result_105
+        if ____opt_103 ~= nil then
+            ____opt_result_105 = ____opt_103(____opt_103, c, id, t)
         end
-        if ____t_79(____opt_result_78) then
+        if ____t_106(____opt_result_105) then
             return
         end
         originalRoom(nil, c, id, t)

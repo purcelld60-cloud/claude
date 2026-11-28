@@ -126,7 +126,10 @@ local __O = {};
                                 y,
                                 1,
                                 1,
-                                __get(cores, if __get(l, x) == "#" then 0 else __TS__Number(__get(l, x)))
+                                __get(
+                                    cores,
+                                    __get(l, x) == "#" and 0 or __TS__Number(__get(l, x))
+                                )
                             )
                         end
                         x = x + 1
@@ -184,20 +187,34 @@ local __O = {};
             for ____, dy in __iterar((__arrL({-1, 1}, 2))) do
                 local ex = x + dx * w / 2
                 local ey = y + dy * h / 2
+                local ____c_1 = c
+                local ____temp_0
+                if dx > 0 then
+                    ____temp_0 = ponta
+                else
+                    ____temp_0 = 0
+                end
                 P(
                     nil,
-                    c,
-                    ex - if dx > 0 then ponta else 0,
+                    ____c_1,
+                    ex - ____temp_0,
                     ey,
                     ponta,
                     3,
                     cor
                 )
+                local ____c_3 = c
+                local ____temp_2
+                if dy > 0 then
+                    ____temp_2 = ponta
+                else
+                    ____temp_2 = 0
+                end
                 P(
                     nil,
-                    c,
+                    ____c_3,
                     ex,
-                    ey - if dy > 0 then ponta else 0,
+                    ey - ____temp_2,
                     3,
                     ponta,
                     cor
@@ -218,13 +235,19 @@ local __O = {};
                 local x
                 x = ____bindingPattern0[1]
                 y = ____bindingPattern0[2]
-                return if __t(i) then c:lineTo(
-                    math.floor(x + 0.5),
-                    math.floor(y + 0.5)
-                ) else c:moveTo(
-                    math.floor(x + 0.5),
-                    math.floor(y + 0.5)
-                )
+                local ____t_result_4
+                if __t(i) then
+                    ____t_result_4 = c:lineTo(
+                        math.floor(x + 0.5),
+                        math.floor(y + 0.5)
+                    )
+                else
+                    ____t_result_4 = c:moveTo(
+                        math.floor(x + 0.5),
+                        math.floor(y + 0.5)
+                    )
+                end
+                return ____t_result_4
             end
         )
         c.strokeStyle = cor
@@ -356,13 +379,20 @@ local __O = {};
         c:restore()
     end
     local function movel(self, c, o, p, t, cor)
-        local ____p_0 = p
-        local x = ____p_0.x
-        local y = ____p_0.y
-        local dir = if __ge(o.x1, o.x0) then 1 else -1
+        local ____p_5 = p
+        local x = ____p_5.x
+        local y = ____p_5.y
+        local dir = __ge(o.x1, o.x0) and 1 or -1
         local w = o.rx * 2
         local h = o.ry * 2
-        if __t(if __t(o.corpo) then o.corpo else o.art == "motoTonhao") then
+        local ____t_7 = __t
+        local ____t_result_6
+        if __t(o.corpo) then
+            ____t_result_6 = o.corpo
+        else
+            ____t_result_6 = o.art == "motoTonhao"
+        end
+        if ____t_7(____t_result_6) then
             return
         end
         if o.art == "farpa" then
@@ -419,7 +449,7 @@ local __O = {};
             return
         end
         if __t(o.art == "metade1" or o.art == "metade2") then
-            local lado = if o.art == "metade1" then -1 else 1
+            local lado = o.art == "metade1" and -1 or 1
             retrato(
                 nil,
                 c,
@@ -497,7 +527,7 @@ local __O = {};
                 nil,
                 c,
                 cabo,
-                if __t(__call(o.art, "endsWith", "2")) then "#ee85b9" else "#5fcbd1",
+                __t(__call(o.art, "endsWith", "2")) and "#ee85b9" or "#5fcbd1",
                 2
             )
         end
@@ -552,10 +582,18 @@ local __O = {};
             dir
         )
         if __t(o.art == "tecla" or o.art == "voto") then
-            texto(
+            local ____texto_10 = texto
+            local ____c_9 = c
+            local ____t_result_8
+            if __t(o.letra) then
+                ____t_result_8 = o.letra
+            else
+                ____t_result_8 = "ESC"
+            end
+            ____texto_10(
                 nil,
-                c,
-                if __t(o.letra) then o.letra else "ESC",
+                ____c_9,
+                ____t_result_8,
                 x,
                 y - 1,
                 branco,
@@ -573,7 +611,7 @@ local __O = {};
                         y + 12 - __mod(i, 2) * 4,
                         6,
                         3,
-                        if __t(__mod(i, 2)) then "#efd6a4" else "#8b7974"
+                        __t(__mod(i, 2)) and "#efd6a4" or "#8b7974"
                     )
                     i = i + 1
                 end
@@ -742,7 +780,7 @@ local __O = {};
                             y,
                             w / 7 + 1,
                             7,
-                            if __t(__mod(k, 2)) then "#473940" else "#ffce72"
+                            __t(__mod(k, 2)) and "#473940" or "#ffce72"
                         )
                         k = k + 1
                     end
@@ -781,7 +819,7 @@ local __O = {};
                             bot - 10 - __mod(i, 2) * 4,
                             9,
                             2,
-                            if __t(__mod(i, 2)) then "#a1a9b7" else "#947e9c"
+                            __t(__mod(i, 2)) and "#a1a9b7" or "#947e9c"
                         )
                         local yy = bot - 9 - 4 * salto * (1 - salto) * (h - 11)
                         P(
@@ -834,7 +872,7 @@ local __O = {};
                                 },
                                 4
                             ),
-                            if __t(__mod(i, 2)) then "#ecc998" else "#ffead1",
+                            __t(__mod(i, 2)) and "#ecc998" or "#ffead1",
                             4
                         )
                         i = i + 1
@@ -936,7 +974,7 @@ local __O = {};
                             bot - math.sin(a) * (h - 7) * r,
                             8,
                             7,
-                            if __t(__mod(i, 2)) then "#ffeac4" else "#dbb688"
+                            __t(__mod(i, 2)) and "#ffeac4" or "#dbb688"
                         )
                         i = i + 1
                     end
@@ -1027,7 +1065,7 @@ local __O = {};
                     do
                         local i = 1
                         while i <= 5 do
-                            local s = if __t(__mod(i, 2)) then 1 else -1
+                            local s = __t(__mod(i, 2)) and 1 or -1
                             local yy = bot - i * alto / 6
                             risco(
                                 nil,
@@ -1129,7 +1167,7 @@ local __O = {};
                             top,
                             ww,
                             h - 8 + __mod(i, 2) * 7,
-                            if __t(__mod(i, 2)) then "#b93e54" else "#872c45"
+                            __t(__mod(i, 2)) and "#b93e54" or "#872c45"
                         )
                         P(
                             nil,
@@ -1476,8 +1514,23 @@ local __O = {};
                 i = i + 1
             end
         end
-        if __t(if __t(o.corpo) then o.corpo else o.art == "motoTonhao") then
-            local pe = __add(o.y1, if __t(o.corpo) then o.corpo else 14)
+        local ____t_12 = __t
+        local ____t_result_11
+        if __t(o.corpo) then
+            ____t_result_11 = o.corpo
+        else
+            ____t_result_11 = o.art == "motoTonhao"
+        end
+        if ____t_12(____t_result_11) then
+            local ____add_15 = __add
+            local ____o_y1_14 = o.y1
+            local ____t_result_13
+            if __t(o.corpo) then
+                ____t_result_13 = o.corpo
+            else
+                ____t_result_13 = 14
+            end
+            local pe = ____add_15(____o_y1_14, ____t_result_13)
             for ____, lado in __iterar((__arrL({-1, 1}, 2))) do
                 risco(
                     nil,
@@ -1736,7 +1789,7 @@ local __O = {};
                                 },
                                 2
                             ),
-                            if __t(__mod(i, 2)) then "#ffc77d" else "#775c56",
+                            __t(__mod(i, 2)) and "#ffc77d" or "#775c56",
                             3
                         )
                         i = i + 1
@@ -1757,7 +1810,7 @@ local __O = {};
                             -math.sin(a) * d,
                             4 + __mod(i, 2),
                             3,
-                            if __t(__mod(i, 2)) then "#fbd693" else "#ac784e"
+                            __t(__mod(i, 2)) and "#fbd693" or "#ac784e"
                         )
                         i = i + 1
                     end
@@ -1997,11 +2050,36 @@ local __O = {};
         c:restore()
     end
     local function personagem(self, c, f, tipo, x, y, o)
-        local dir = if __lt(o.facing, 0) then -1 else 1
-        local u = math.min(1, f.tempo / if __t(f.dur) then f.dur else 1)
-        local carga = if f.estado == "windup" then u * u else 0
-        local golpe = if f.estado == "firing" then math.sin(math.min(1, u * 2.1) * math.pi) else 0
-        local repouso = if f.estado == "recover" then math.sin(u * math.pi) * 0.028 else 0
+        local dir = __lt(o.facing, 0) and -1 or 1
+        local ____f_tempo_17 = f.tempo
+        local ____t_result_16
+        if __t(f.dur) then
+            ____t_result_16 = f.dur
+        else
+            ____t_result_16 = 1
+        end
+        local u = math.min(1, ____f_tempo_17 / ____t_result_16)
+        local ____temp_18
+        if f.estado == "windup" then
+            ____temp_18 = u * u
+        else
+            ____temp_18 = 0
+        end
+        local carga = ____temp_18
+        local ____temp_19
+        if f.estado == "firing" then
+            ____temp_19 = math.sin(math.min(1, u * 2.1) * math.pi)
+        else
+            ____temp_19 = 0
+        end
+        local golpe = ____temp_19
+        local ____temp_20
+        if f.estado == "recover" then
+            ____temp_20 = math.sin(u * math.pi) * 0.028
+        else
+            ____temp_20 = 0
+        end
+        local repouso = ____temp_20
         c:save()
         c:translate(
             math.floor(x + 0.5),
@@ -2009,12 +2087,28 @@ local __O = {};
         )
         c:scale(1 + carga * 0.055 - golpe * 0.035, 1 - carga * 0.085 + golpe * 0.052 - repouso)
         c:rotate(dir * (golpe * 0.095 - carga * 0.06))
-        window.Art:drawCharacter(
-            c,
-            tipo,
+        local ____self_29 = window.Art
+        local ____self_29_drawCharacter_30 = ____self_29.drawCharacter
+        local ____c_27 = c
+        local ____tipo_28 = tipo
+        local ____assign_26 = __assign
+        local ____temp_24 = {}
+        local ____o_25 = o
+        local ____f_idade_22 = f.idade
+        local ____temp_23 = carga > 0 or golpe > 0
+        local ____t_result_21
+        if __t(carga) then
+            ____t_result_21 = carga * 0.24
+        else
+            ____t_result_21 = 0.25 + golpe * 0.72
+        end
+        ____self_29_drawCharacter_30(
+            ____self_29,
+            ____c_27,
+            ____tipo_28,
             0,
             0,
-            __assign({}, o, {frame = f.idade, attack = carga > 0 or golpe > 0, attackProgress = if __t(carga) then carga * 0.24 else 0.25 + golpe * 0.72})
+            ____assign_26(____temp_24, ____o_25, {frame = ____f_idade_22, attack = ____temp_23, attackProgress = ____t_result_21})
         )
         c:restore()
     end
@@ -2024,83 +2118,119 @@ local __O = {};
         end
         c:save()
         c.imageSmoothingEnabled = false
-        local ____t_2 = __t
-        local ____getq_result_1 = __getq(
+        local ____t_result_33
+        local ____t_32 = __t
+        local ____getq_result_31 = __getq(
             combate:capitulo(f),
             2
         )
-        __O[922] = ____getq_result_1
-        local cor = if ____t_2(____getq_result_1) then __O[922] else __get(combate.chefes, f.slug).cor
+        __O[927] = ____getq_result_31
+        if ____t_32(____getq_result_31) then
+            ____t_result_33 = __O[927]
+        else
+            ____t_result_33 = __get(combate.chefes, f.slug).cor
+        end
+        local cor = ____t_result_33
         if f.estado == "phaseChange" then
             virada(nil, c, f)
         end
         for ____, o in __iterar((f.objetos)) do
-            local ativa = f.estado == "firing"
-            local rel = if __t(ativa) then f.tempo - o.atraso else f.tempo - f.dur - o.atraso
-            if __t(if __t(o.fim) then o.fim else rel < -math.max(0.76, if f.estado == "windup" then f.dur else 0)) then
-                continue
-            end
-            if __t(not __t(ativa) or rel < 0) then
-                aviso(
-                    nil,
-                    c,
-                    o,
-                    cor,
-                    math.max(
-                        0,
-                        math.min(1, 1 + rel / if __t(ativa) then 0.76 else f.dur)
-                    )
-                )
-                continue
-            end
-            local u = math.min(1, rel / o.dur)
-            if __t(o.area) then
-                zona(
-                    nil,
-                    c,
-                    o,
-                    u,
-                    cor
-                )
-            else
-                local p = combate:ponto(o, u)
-                local ____t_5 = __t
-                local ____t_4 = __t
-                local ____temp_3 = not __t(o.corpo) and o.art ~= "motoTonhao"
-                __O[923] = ____temp_3
-                if ____t_5(if ____t_4(____temp_3) then u > 0.02 else __O[923]) then
-                    local a = combate:ponto(
-                        o,
-                        math.max(0, u - 0.035 / o.dur)
-                    )
-                    local dx = p.x - a.x
-                    local dy = p.y - a.y
-                    local comprimento = __hypot(dx, dy)
-                    if comprimento > 6 then
-                        local s = math.min(17, comprimento) / comprimento
-                        risco(
-                            nil,
-                            c,
-                            __arrL(
-                                {
-                                    __arrL({p.x - dx * s, p.y - dy * s}, 2),
-                                    __arrL({p.x, p.y}, 2)
-                                },
-                                2
-                            ),
-                            cor,
-                            2
-                        )
-                    end
+            do
+                local ativa = f.estado == "firing"
+                local ____t_result_34
+                if __t(ativa) then
+                    ____t_result_34 = f.tempo - o.atraso
+                else
+                    ____t_result_34 = f.tempo - f.dur - o.atraso
                 end
-                movel(
-                    nil,
-                    c,
-                    o,
-                    p,
-                    u,
-                    cor
-                )
+                local rel = ____t_result_34
+                local ____t_37 = __t
+                local ____t_result_36
+                if __t(o.fim) then
+                    ____t_result_36 = o.fim
+                else
+                    local ____temp_35
+                    if f.estado == "windup" then
+                        ____temp_35 = f.dur
+                    else
+                        ____temp_35 = 0
+                    end
+                    ____t_result_36 = rel < -math.max(0.76, ____temp_35)
+                end
+                if ____t_37(____t_result_36) then
+                    continue
+                end
+                if __t(not __t(ativa) or rel < 0) then
+                    aviso(
+                        nil,
+                        c,
+                        o,
+                        cor,
+                        math.max(
+                            0,
+                            math.min(
+                                1,
+                                1 + rel / (__t(ativa) and 0.76 or f.dur)
+                            )
+                        )
+                    )
+                    continue
+                end
+                local u = math.min(1, rel / o.dur)
+                if __t(o.area) then
+                    zona(
+                        nil,
+                        c,
+                        o,
+                        u,
+                        cor
+                    )
+                else
+                    local p = combate:ponto(o, u)
+                    local ____t_41 = __t
+                    local ____t_result_40
+                    local ____t_39 = __t
+                    local ____temp_38 = not __t(o.corpo) and o.art ~= "motoTonhao"
+                    __O[928] = ____temp_38
+                    if ____t_39(____temp_38) then
+                        ____t_result_40 = u > 0.02
+                    else
+                        ____t_result_40 = __O[928]
+                    end
+                    if ____t_41(____t_result_40) then
+                        local a = combate:ponto(
+                            o,
+                            math.max(0, u - 0.035 / o.dur)
+                        )
+                        local dx = p.x - a.x
+                        local dy = p.y - a.y
+                        local comprimento = __hypot(dx, dy)
+                        if comprimento > 6 then
+                            local s = math.min(17, comprimento) / comprimento
+                            risco(
+                                nil,
+                                c,
+                                __arrL(
+                                    {
+                                        __arrL({p.x - dx * s, p.y - dy * s}, 2),
+                                        __arrL({p.x, p.y}, 2)
+                                    },
+                                    2
+                                ),
+                                cor,
+                                2
+                            )
+                        end
+                    end
+                    movel(
+                        nil,
+                        c,
+                        o,
+                        p,
+                        u,
+                        cor
+                    )
+                end
             end
         end
         for ____, m in __iterar((f.marcas)) do

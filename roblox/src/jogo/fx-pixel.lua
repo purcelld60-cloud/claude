@@ -29,7 +29,13 @@ local __O = {};
                 s.src = "vendor/pixelfx.js?v=2"
                 s.async = true
                 s.onload = function()
-                    lib = if __t(window.PixelFXLib) then window.PixelFXLib else nil
+                    local ____t_result_0
+                    if __t(window.PixelFXLib) then
+                        ____t_result_0 = window.PixelFXLib
+                    else
+                        ____t_result_0 = nil
+                    end
+                    lib = ____t_result_0
                     if __t(lib) then
                         frame = lib:createFrame(FW, FH)
                         tela = window.document:createElement("canvas")
@@ -58,7 +64,13 @@ local __O = {};
         if not __t(mod) then
             return nil
         end
-        local dono = if __t(o.dono) then o.dono else "luta"
+        local ____t_result_7
+        if __t(o.dono) then
+            ____t_result_7 = o.dono
+        else
+            ____t_result_7 = "luta"
+        end
+        local dono = ____t_result_7
         local meus = __call(
             ativos,
             "filter",
@@ -73,17 +85,22 @@ local __O = {};
                 1
             )
         end
-        local ____assign_9 = __assign
-        local ____temp_7 = {}
-        local ____temp_8 = if __t(o.opcoes) then o.opcoes else {}
-        local ____o_seed_6 = o.seed
-        if ____o_seed_6 == nil then
-            ____o_seed_6 = __bor(
+        local ____assign_11 = __assign
+        local ____temp_10 = {}
+        local ____t_result_8
+        if __t(o.opcoes) then
+            ____t_result_8 = o.opcoes
+        else
+            ____t_result_8 = {}
+        end
+        local ____o_seed_9 = o.seed
+        if ____o_seed_9 == nil then
+            ____o_seed_9 = __bor(
                 math.random() * 1000000,
                 0
             )
         end
-        local op = ____assign_9(____temp_7, ____temp_8, {seed = ____o_seed_6})
+        local op = ____assign_11(____temp_10, ____t_result_8, {seed = ____o_seed_9})
         if __t(o.palette) then
             op.palette = o.palette
         end
@@ -102,7 +119,17 @@ local __O = {};
                 fx = lib:createFx(mod, op)
                 do
                     local k = 0
-                    while k < if __t(o.avancar) then o.avancar else 0 * 60 do
+                    while true do
+                        local ____k_13 = k
+                        local ____t_result_12
+                        if __t(o.avancar) then
+                            ____t_result_12 = o.avancar
+                        else
+                            ____t_result_12 = 0
+                        end
+                        if not (____k_13 < ____t_result_12 * 60) then
+                            break
+                        end
                         fx:update(1 / 60)
                         k = k + 1
                     end
@@ -115,28 +142,54 @@ local __O = {};
                 return ____returnValue
             end
         end
-        local ____fx_13 = fx
-        local ____dono_14 = dono
-        local ____temp_15 = o.mundo ~= false
-        local ____temp_16 = if __t(o.x) then o.x else 0
-        local ____temp_17 = if __t(o.y) then o.y else 0
-        local ____temp_18 = if __t(o.seguir) then o.seguir else nil
-        local ____temp_19 = if __t(o.atraso) then o.atraso else 0
-        local ____t_12 = __t
-        local ____opt_10 = mod.meta
-        if ____opt_10 ~= nil then
-            ____opt_10 = ____opt_10.loop
+        local ____fx_22 = fx
+        local ____dono_23 = dono
+        local ____temp_24 = o.mundo ~= false
+        local ____t_result_14
+        if __t(o.x) then
+            ____t_result_14 = o.x
+        else
+            ____t_result_14 = 0
+        end
+        local ____t_result_15
+        if __t(o.y) then
+            ____t_result_15 = o.y
+        else
+            ____t_result_15 = 0
+        end
+        local ____t_result_16
+        if __t(o.seguir) then
+            ____t_result_16 = o.seguir
+        else
+            ____t_result_16 = nil
+        end
+        local ____t_result_17
+        if __t(o.atraso) then
+            ____t_result_17 = o.atraso
+        else
+            ____t_result_17 = 0
+        end
+        local ____t_result_21
+        if __t(o.duracao) then
+            ____t_result_21 = o.duracao
+        else
+            local ____t_20 = __t
+            local ____opt_18 = mod.meta
+            if ____opt_18 ~= nil then
+                ____opt_18 = ____opt_18.loop
+            end
+            ____t_result_21 = ____t_20(____opt_18) and 4 or 0
         end
         local a = {
-            fx = ____fx_13,
-            dono = ____dono_14,
-            mundo = ____temp_15,
-            x = ____temp_16,
-            y = ____temp_17,
-            seguir = ____temp_18,
-            atraso = ____temp_19,
+            fx = ____fx_22,
+            dono = ____dono_23,
+            mundo = ____temp_24,
+            x = ____t_result_14,
+            y = ____t_result_15,
+            seguir = ____t_result_16,
+            atraso = ____t_result_17,
             vida = 0,
-            duracao = if __t(o.duracao) then o.duracao else if ____t_12(____opt_10) then 4 else 0
+            duracao = ____t_result_21
         }
         __call(ativos, "push", a)
         return __getters(
@@ -155,7 +208,13 @@ local __O = {};
             return
         end
         local ag = window.performance:now()
-        if ag - if __t(ultimo.__disparo) then ultimo.__disparo else 0 < 180 then
+        local ____t_result_103
+        if __t(ultimo.__disparo) then
+            ____t_result_103 = ultimo.__disparo
+        else
+            ____t_result_103 = 0
+        end
+        if ag - ____t_result_103 < 180 then
             return
         end
         ultimo.__disparo = ag
@@ -277,18 +336,18 @@ local __O = {};
         window:addEventListener("load", agendar, {once = true})
     end
     local function leve()
-        local ____t_5 = __t
-        local ____opt_2 = window.Graphics
-        if ____opt_2 ~= nil then
-            ____opt_2 = ____opt_2.isLite
+        local ____t_6 = __t
+        local ____opt_3 = window.Graphics
+        if ____opt_3 ~= nil then
+            ____opt_3 = ____opt_3.isLite
         end
-        local ____opt_result_4
-        if ____opt_2 ~= nil then
-            ____opt_result_4 = ____opt_2(____opt_2)
+        local ____opt_result_5
+        if ____opt_3 ~= nil then
+            ____opt_result_5 = ____opt_3(____opt_3)
         end
-        return not not ____t_5(____opt_result_4)
+        return not not ____t_6(____opt_result_5)
     end
-    limite = function() return if __t(leve(nil)) then 6 else 22 end
+    limite = function() return __t(leve(nil)) and 6 or 22 end
     local function desenhar(self, ctx, o)
         if o == nil then
             o = {}
@@ -296,12 +355,24 @@ local __O = {};
         if __t(not __t(lib) or not __t(__len(ativos))) then
             return
         end
-        local dono = if __t(o.dono) then o.dono else "luta"
-        local camada = if o.camada == "back" then "back" else "front"
-        local ____t_21 = __t
-        local ____TS__Number_result_20 = __TS__Number(o.camera)
-        __O[1474] = ____TS__Number_result_20
-        local cam = if ____t_21(____TS__Number_result_20) then __O[1474] else 0
+        local ____t_result_25
+        if __t(o.dono) then
+            ____t_result_25 = o.dono
+        else
+            ____t_result_25 = "luta"
+        end
+        local dono = ____t_result_25
+        local camada = o.camada == "back" and "back" or "front"
+        local ____t_result_28
+        local ____t_27 = __t
+        local ____TS__Number_result_26 = __TS__Number(o.camera)
+        __O[1479] = ____TS__Number_result_26
+        if ____t_27(____TS__Number_result_26) then
+            ____t_result_28 = __O[1479]
+        else
+            ____t_result_28 = 0
+        end
+        local cam = ____t_result_28
         local meus = __call(
             ativos,
             "filter",
@@ -310,40 +381,67 @@ local __O = {};
         if not __t(__len(meus)) then
             return
         end
-        local ____t_24 = __t
-        local ____t_23 = __t
-        local ____temp_22 = camada == "back"
-        __O[1475] = ____temp_22
-        if ____t_24(if ____t_23(____temp_22) then __O[1475] else o.atualizar) then
+        local ____t_32 = __t
+        local ____t_result_31
+        local ____t_30 = __t
+        local ____temp_29 = camada == "back"
+        __O[1480] = ____temp_29
+        if ____t_30(____temp_29) then
+            ____t_result_31 = __O[1480]
+        else
+            ____t_result_31 = o.atualizar
+        end
+        if ____t_32(____t_result_31) then
             local t = __TS__Number(o.tempo)
             local dt = 1 / 60
             if __isFiniteN(t) then
                 local u = __get(ultimo, dono)
-                dt = if u == nil then 1 / 60 else math.max(
-                    0,
-                    math.min(0.1, t - u)
-                )
+                local ____temp_33
+                if u == nil then
+                    ____temp_33 = 1 / 60
+                else
+                    ____temp_33 = math.max(
+                        0,
+                        math.min(0.1, t - u)
+                    )
+                end
+                dt = ____temp_33
                 __set(ultimo, dono, t)
             end
             for ____, a in __iterar((meus)) do
-                if __gt(a.atraso, 0) then
-                    a.atraso = a.atraso - dt
-                    continue
-                end
-                a.fx:update(dt)
-                a.vida = a.vida + dt
-                if __t(if __t(a.duracao) then __ge(a.vida, a.duracao) else a.duracao) then
-                    a.fx:stop()
+                do
+                    if __gt(a.atraso, 0) then
+                        a.atraso = a.atraso - dt
+                        continue
+                    end
+                    a.fx:update(dt)
+                    a.vida = a.vida + dt
+                    local ____t_35 = __t
+                    local ____t_result_34
+                    if __t(a.duracao) then
+                        ____t_result_34 = __ge(a.vida, a.duracao)
+                    else
+                        ____t_result_34 = a.duracao
+                    end
+                    if ____t_35(____t_result_34) then
+                        a.fx:stop()
+                    end
                 end
             end
             do
                 local i = __len(ativos) - 1
                 while i >= 0 do
-                    local ____t_27 = __t
-                    local ____t_26 = __t
-                    local ____temp_25 = __get(ativos, i).dono == dono
-                    __O[1476] = ____temp_25
-                    if ____t_27(if ____t_26(____temp_25) then __get(ativos, i).fx:done() else __O[1476]) then
+                    local ____t_39 = __t
+                    local ____t_result_38
+                    local ____t_37 = __t
+                    local ____temp_36 = __get(ativos, i).dono == dono
+                    __O[1481] = ____temp_36
+                    if ____t_37(____temp_36) then
+                        ____t_result_38 = __get(ativos, i).fx:done()
+                    else
+                        ____t_result_38 = __O[1481]
+                    end
+                    if ____t_39(____t_result_38) then
                         __call(ativos, "splice", i, 1)
                     end
                     i = i - 1
@@ -353,29 +451,50 @@ local __O = {};
         lib:clearFrame(frame)
         local algum = false
         for ____, a in __iterar((meus)) do
-            local ____t_30 = __t
-            local ____t_29 = __t
-            local ____gt_result_28 = __gt(a.atraso, 0)
-            __O[1477] = ____gt_result_28
-            if ____t_30(if ____t_29(____gt_result_28) then __O[1477] else a.fx:done()) then
-                continue
-            end
-            local p = if __t(a.seguir) then a:seguir() else a
-            if not __t(p) then
-                continue
-            end
-            a.fx.options.x = math.floor(if __t(a.mundo) then p.x - cam else p.x / ESC + 0.5)
-            a.fx.options.y = math.floor(p.y / ESC + 0.5)
             do
-                local function ____catch(e)
-                    a.fx:stop()
+                local ____t_43 = __t
+                local ____t_result_42
+                local ____t_41 = __t
+                local ____gt_result_40 = __gt(a.atraso, 0)
+                __O[1482] = ____gt_result_40
+                if ____t_41(____gt_result_40) then
+                    ____t_result_42 = __O[1482]
+                else
+                    ____t_result_42 = a.fx:done()
                 end
-                local ____try, ____hasReturned = pcall(function()
-                    a.fx:draw(frame, camada)
-                    algum = true
-                end)
-                if not ____try then
-                    ____catch(____hasReturned)
+                if ____t_43(____t_result_42) then
+                    continue
+                end
+                local ____t_result_44
+                if __t(a.seguir) then
+                    ____t_result_44 = a:seguir()
+                else
+                    ____t_result_44 = a
+                end
+                local p = ____t_result_44
+                if not __t(p) then
+                    continue
+                end
+                local ____a_fx_options_46 = a.fx.options
+                local ____t_result_45
+                if __t(a.mundo) then
+                    ____t_result_45 = p.x - cam
+                else
+                    ____t_result_45 = p.x
+                end
+                ____a_fx_options_46.x = math.floor(____t_result_45 / ESC + 0.5)
+                a.fx.options.y = math.floor(p.y / ESC + 0.5)
+                do
+                    local function ____catch(e)
+                        a.fx:stop()
+                    end
+                    local ____try, ____hasReturned = pcall(function()
+                        a.fx:draw(frame, camada)
+                        algum = true
+                    end)
+                    if not ____try then
+                        ____catch(____hasReturned)
+                    end
                 end
             end
         end
@@ -388,7 +507,7 @@ local __O = {};
         ctx.imageSmoothingEnabled = false
         ctx:drawImage(
             tela,
-            if o.mundo == false then 0 else cam,
+            o.mundo == false and 0 or cam,
             0,
             FW * ESC,
             FH * ESC
@@ -417,18 +536,30 @@ local __O = {};
         if __t(window.Golpes) then
             return
         end
-        local ____t_33 = __t
-        local ____t_32 = __t
-        local ____temp_31 = not __t(d) or not __isFiniteN(d.x)
-        __O[1478] = ____temp_31
-        if ____t_33(if ____t_32(____temp_31) then __O[1478] else not __isFiniteN(d.y)) then
+        local ____t_50 = __t
+        local ____t_result_49
+        local ____t_48 = __t
+        local ____temp_47 = not __t(d) or not __isFiniteN(d.x)
+        __O[1483] = ____temp_47
+        if ____t_48(____temp_47) then
+            ____t_result_49 = __O[1483]
+        else
+            ____t_result_49 = not __isFiniteN(d.y)
+        end
+        if ____t_50(____t_result_49) then
             return
         end
-        local dir = if __lt(d.dir, 0) then -1 else 1
+        local dir = __lt(d.dir, 0) and -1 or 1
         if tipo == "gas" then
+            local ____t_result_51
+            if __t(d.stage) then
+                ____t_result_51 = d.stage
+            else
+                ____t_result_51 = 1
+            end
             local st = math.max(
                 1,
-                math.min(3, if __t(d.stage) then d.stage else 1)
+                math.min(3, ____t_result_51)
             )
             tocar(nil, "spawn/poof", {x = d.x + dir * 18, y = d.y + 22, palette = PAL.peido, flip = dir < 0})
             if st >= 2 then
@@ -441,11 +572,17 @@ local __O = {};
         elseif tipo == "dash" then
             tocar(nil, "spawn/poof", {x = d.x - dir * 14, y = d.y + 4, palette = PAL.poeira, flip = dir < 0})
         else
-            local ____t_36 = __t
-            local ____t_35 = __t
-            local ____temp_34 = tipo == "cast"
-            __O[1479] = ____temp_34
-            if ____t_36(if ____t_35(____temp_34) then d.kind else __O[1479]) then
+            local ____t_55 = __t
+            local ____t_result_54
+            local ____t_53 = __t
+            local ____temp_52 = tipo == "cast"
+            __O[1484] = ____temp_52
+            if ____t_53(____temp_52) then
+                ____t_result_54 = d.kind
+            else
+                ____t_result_54 = __O[1484]
+            end
+            if ____t_55(____t_result_54) then
                 disparo(nil, d)
             elseif __t(tipo == "cast" and not __t(d.kind)) then
                 if d.element == "fire" then
@@ -460,11 +597,17 @@ local __O = {};
     end
     local function ligarCampaignVfx(self)
         local o = window.CampaignVfx
-        local ____t_39 = __t
-        local ____t_38 = __t
-        local ____temp_37 = not __t(o)
-        __O[1480] = ____temp_37
-        if ____t_39(if ____t_38(____temp_37) then __O[1480] else o.__pixel) then
+        local ____t_59 = __t
+        local ____t_result_58
+        local ____t_57 = __t
+        local ____temp_56 = not __t(o)
+        __O[1485] = ____temp_56
+        if ____t_57(____temp_56) then
+            ____t_result_58 = __O[1485]
+        else
+            ____t_result_58 = o.__pixel
+        end
+        if ____t_59(____t_result_58) then
             return false
         end
         window.CampaignVfx = __assign(
@@ -489,31 +632,61 @@ local __O = {};
         window:addEventListener("DOMContentLoaded", ligarCampaignVfx, {once = true})
     end
     local function perigo(self, h, chefe)
-        local ____t_42 = __t
-        local ____t_41 = __t
-        local ____temp_40 = not __t(h)
-        __O[1481] = ____temp_40
-        if ____t_42(if ____t_41(____temp_40) then __O[1481] else window.Golpes) then
+        local ____t_63 = __t
+        local ____t_result_62
+        local ____t_61 = __t
+        local ____temp_60 = not __t(h)
+        __O[1486] = ____temp_60
+        if ____t_61(____temp_60) then
+            ____t_result_62 = __O[1486]
+        else
+            ____t_result_62 = window.Golpes
+        end
+        if ____t_63(____t_result_62) then
             return
         end
         local x = h.x
-        local y = if __t(h.y) then h.y else 0 + 8
-        local ____t_45 = __t
-        local ____t_44 = __t
-        local ____temp_43 = h.type == "astral"
-        __O[1482] = ____temp_43
-        if ____t_45(if ____t_44(____temp_43) then __O[1482] else h.astral) then
+        local ____t_result_64
+        if __t(h.y) then
+            ____t_result_64 = h.y
+        else
+            ____t_result_64 = 0
+        end
+        local y = ____t_result_64 + 8
+        local ____t_68 = __t
+        local ____t_result_67
+        local ____t_66 = __t
+        local ____temp_65 = h.type == "astral"
+        __O[1487] = ____temp_65
+        if ____t_66(____temp_65) then
+            ____t_result_67 = __O[1487]
+        else
+            ____t_result_67 = h.astral
+        end
+        if ____t_68(____t_result_67) then
             tocar(nil, "arcane/star-fall", {x = x, y = y})
         elseif h.type == "slime" then
             tocar(nil, "nature/acid-splash", {x = x, y = y})
         else
-            local ____t_48 = __t
-            local ____t_47 = __t
-            local ____temp_46 = h.type == "smoke"
-            __O[1483] = ____temp_46
-            if ____t_48(if ____t_47(____temp_46) then h.brasa else __O[1483]) then
+            local ____t_72 = __t
+            local ____t_result_71
+            local ____t_70 = __t
+            local ____temp_69 = h.type == "smoke"
+            __O[1488] = ____temp_69
+            if ____t_70(____temp_69) then
+                ____t_result_71 = h.brasa
+            else
+                ____t_result_71 = __O[1488]
+            end
+            if ____t_72(____t_result_71) then
                 local ag = window.performance:now()
-                if ag - if __t(ultimo.__brasa) then ultimo.__brasa else 0 > 280 then
+                local ____t_result_73
+                if __t(ultimo.__brasa) then
+                    ____t_result_73 = ultimo.__brasa
+                else
+                    ____t_result_73 = 0
+                end
+                if ag - ____t_result_73 > 280 then
                     ultimo.__brasa = ag
                     tocar(
                         nil,
@@ -537,31 +710,52 @@ local __O = {};
                     opcoes = {semLata = true}
                 })
             else
-                local ____t_51 = __t
-                local ____t_50 = __t
-                local ____temp_49 = h.type == "ring"
-                __O[1484] = ____temp_49
-                if ____t_51(if ____t_50(____temp_49) then h.smoke else __O[1484]) then
+                local ____t_77 = __t
+                local ____t_result_76
+                local ____t_75 = __t
+                local ____temp_74 = h.type == "ring"
+                __O[1489] = ____temp_74
+                if ____t_75(____temp_74) then
+                    ____t_result_76 = h.smoke
+                else
+                    ____t_result_76 = __O[1489]
+                end
+                if ____t_77(____t_result_76) then
                     tocar(nil, "spawn/poof", {x = x, y = y, palette = PAL.fumaca})
                 else
-                    local ____t_54 = __t
-                    local ____t_53 = __t
-                    local ____temp_52 = h.type == "ring"
-                    __O[1485] = ____temp_52
-                    if ____t_54(if ____t_53(____temp_52) then h.catarro else __O[1485]) then
+                    local ____t_81 = __t
+                    local ____t_result_80
+                    local ____t_79 = __t
+                    local ____temp_78 = h.type == "ring"
+                    __O[1490] = ____temp_78
+                    if ____t_79(____temp_78) then
+                        ____t_result_80 = h.catarro
+                    else
+                        ____t_result_80 = __O[1490]
+                    end
+                    if ____t_81(____t_result_80) then
                         tocar(nil, "water/wave-crash", {x = x - 30, y = y, palette = PAL.catarro, flip = true})
                         tocar(nil, "water/wave-crash", {x = x + 30, y = y, palette = PAL.catarro})
                         tocar(nil, "nature/acid-splash", {x = x, y = y, palette = PAL.catarro, atraso = 0.05})
                     elseif h.type == "slime" then
                         tocar(nil, "nature/acid-splash", {x = x, y = y, palette = PAL.catarro})
-                    elseif __t(if __t(h.ink) then h.ink else h.type == "ink") then
-                        tocar(nil, "shadow/dark-explosion", {x = x, y = y, palette = PAL.tinta})
-                    elseif h.type == "provoke" then
-                        tocar(nil, "arcane/magic-circle-cast", {x = x, y = y, palette = PAL.ouro})
-                    elseif h.type == "ring" then
-                        tocar(nil, "impacts/ground-slam", {x = x, y = y, palette = PAL.choque})
                     else
-                        tocar(nil, "nature/quake", {x = x, y = y})
+                        local ____t_83 = __t
+                        local ____t_result_82
+                        if __t(h.ink) then
+                            ____t_result_82 = h.ink
+                        else
+                            ____t_result_82 = h.type == "ink"
+                        end
+                        if ____t_83(____t_result_82) then
+                            tocar(nil, "shadow/dark-explosion", {x = x, y = y, palette = PAL.tinta})
+                        elseif h.type == "provoke" then
+                            tocar(nil, "arcane/magic-circle-cast", {x = x, y = y, palette = PAL.ouro})
+                        elseif h.type == "ring" then
+                            tocar(nil, "impacts/ground-slam", {x = x, y = y, palette = PAL.choque})
+                        else
+                            tocar(nil, "nature/quake", {x = x, y = y})
+                        end
                     end
                 end
             end
@@ -581,19 +775,25 @@ local __O = {};
         kaique = "eletrico"
     }, "nicolas,reeisBoss,arthur,marco,giant,nikolas,dede,freddy,menezes,igor,kaique")
     local function corDe(____, e)
-        local ____t_61 = __t
-        local ____get_59 = __get
-        local ____get_58 = __get
-        local ____opt_result_57
+        local ____t_result_91
+        local ____t_90 = __t
+        local ____get_88 = __get
+        local ____get_87 = __get
+        local ____opt_result_86
         if e ~= nil then
-            ____opt_result_57 = e.type
+            ____opt_result_86 = e.type
         end
-        local ____get_59_result_60 = ____get_59(
+        local ____get_88_result_89 = ____get_88(
             PAL,
-            ____get_58(COR, ____opt_result_57)
+            ____get_87(COR, ____opt_result_86)
         )
-        __O[1486] = ____get_59_result_60
-        return if ____t_61(____get_59_result_60) then __O[1486] else PAL.ouro
+        __O[1491] = ____get_88_result_89
+        if ____t_90(____get_88_result_89) then
+            ____t_result_91 = __O[1491]
+        else
+            ____t_result_91 = PAL.ouro
+        end
+        return ____t_result_91
     end
     local function fase(self, e)
         if not __t(e) then
@@ -616,15 +816,35 @@ local __O = {};
         elseif __t(t == "marco" or t == "giant") then
             tocar(nil, "shadow/dark-explosion", {x = x, y = y, palette = PAL.tinta})
         else
-            local ____t_66 = __t
-            local ____t_65 = __t
-            local ____t_63 = __t
-            local ____temp_62 = t == "freddy" or t == "menezes"
-            __O[1487] = ____temp_62
-            local ____temp_64 = if ____t_63(____temp_62) then __O[1487] else t == "igor"
-            __O[1488] = ____temp_64
-            if ____t_66(if ____t_65(____temp_64) then __O[1488] else t == "kaique") then
-                tocar(nil, "impacts/ground-slam", {x = x, y = y, palette = if __t(t == "igor" or t == "kaique") then PAL.eletrico else PAL.choque})
+            local ____t_97 = __t
+            local ____t_result_96
+            local ____t_95 = __t
+            local ____t_result_94
+            local ____t_93 = __t
+            local ____temp_92 = t == "freddy" or t == "menezes"
+            __O[1492] = ____temp_92
+            if ____t_93(____temp_92) then
+                ____t_result_94 = __O[1492]
+            else
+                ____t_result_94 = t == "igor"
+            end
+            __O[1493] = ____t_result_94
+            if ____t_95(____t_result_94) then
+                ____t_result_96 = __O[1493]
+            else
+                ____t_result_96 = t == "kaique"
+            end
+            if ____t_97(____t_result_96) then
+                local ____tocar_101 = tocar
+                local ____x_99 = x
+                local ____y_100 = y
+                local ____t_result_98
+                if __t(t == "igor" or t == "kaique") then
+                    ____t_result_98 = PAL.eletrico
+                else
+                    ____t_result_98 = PAL.choque
+                end
+                ____tocar_101(nil, "impacts/ground-slam", {x = ____x_99, y = ____y_100, palette = ____t_result_98})
             elseif t == "dede" then
                 tocar(nil, "explosions/smoke-bomb", {
                     x = x,
@@ -667,13 +887,19 @@ local __O = {};
             return
         end
         local antes = __call(estados, "get", e)
-        local agora = if __t(e.conquista) then e.conquista.estado else e.state
+        local ____t_result_102
+        if __t(e.conquista) then
+            ____t_result_102 = e.conquista.estado
+        else
+            ____t_result_102 = e.state
+        end
+        local agora = ____t_result_102
         if antes == agora then
             return
         end
         __call(estados, "set", e, agora)
         if __t(agora == "dashing" and not __t(window.Golpes)) then
-            local d = if __lt(e.dashDir, 0) then -1 else 1
+            local d = __lt(e.dashDir, 0) and -1 or 1
             tocar(nil, "spawn/poof", {x = e.x - d * 22, y = e.y, palette = PAL.poeira, flip = d < 0})
         elseif __t(agora == "phaseChange" and antes ~= nil) then
             fase(nil, e)

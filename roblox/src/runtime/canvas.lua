@@ -38,6 +38,21 @@ function C.copiar(destino, origem)
   return true
 end
 
+-- linha de uma cor só: escreve o primeiro pixel e vai dobrando com cópia de memória (960 px = ~10 cópias)
+local copiar, encher = buffer and buffer.copy, buffer and buffer.fill
+local function pintarLinha(px, o0, n, col)
+  if n <= 0 then return end
+  if copiar and n > 8 then
+    WR(px, o0, col); local feito = 1
+    while feito < n do local k = n - feito; if k > feito then k = feito end; copiar(px, o0 + feito * 4, px, o0, k * 4); feito = feito + k end
+  else for o = o0, o0 + (n - 1) * 4, 4 do WR(px, o, col) end end
+end
+local function apagarFaixa(px, o0, n)
+  if n <= 0 then return end
+  if encher then encher(px, o0, 0, n * 4) else for o = o0, o0 + (n - 1) * 4, 4 do WR(px, o, 0) end end
+end
+C.pintarLinha = pintarLinha
+
 -- cores: "#rgb", "#rrggbb", "#rrggbbaa", "rgb()", "rgba()", "hsl()", nomes; guardadas em cache como {r, g, b, a(0..1)}
 local NOMES = { white = "#ffffff", black = "#000000", red = "#ff0000", green = "#008000", blue = "#0000ff", yellow = "#ffff00", orange = "#ffa500", purple = "#800080", pink = "#ffc0cb",
   transparent = "#00000000", gray = "#808080", grey = "#808080", silver = "#c0c0c0", gold = "#ffd700", cyan = "#00ffff", magenta = "#ff00ff", lime = "#00ff00", brown = "#a52a2a", navy = "#000080", teal = "#008080", maroon = "#800000", olive = "#808000", crimson = "#dc143c", tomato = "#ff6347", khaki = "#f0e68c", beige = "#f5f5dc", ivory = "#fffff0", wheat = "#f5deb3", tan = "#d2b48c", coral = "#ff7f50", salmon = "#fa8072", violet = "#ee82ee", indigo = "#4b0082", skyblue = "#87ceeb", whitesmoke = "#f5f5f5", lightgray = "#d3d3d3", darkgray = "#a9a9a9", dimgray = "#696969" }
@@ -302,7 +317,7 @@ function C.contexto(cv)
     if not op and a >= 1 then
       local col = r + g * 256 + b * 65536 + OPACO
       if cm then for x = x0, x1 do local i = base + x; if cm[i] then WR(px, (i - 1) * 4, col) end end
-      else for o = (base + x0 - 1) * 4, (base + x1 - 1) * 4, 4 do WR(px, o, col) end end
+      else pintarLinha(px, (base + x0 - 1) * 4, x1 - x0 + 1, col) end
       return
     end
     local o = op or "source-over"
@@ -446,9 +461,11 @@ function C.contexto(cv)
         local W, px, cr, cm = P.w, P.px, clipRect, clipMask
         if cr then ax = max(ax, cr[1]); bx = min(bx, cr[3] - 1); ay = max(ay, cr[2]); by = min(by, cr[4] - 1) end
         ax = max(0, ax); bx = min(W - 1, bx)
-        for yy = max(0, ay), min(P.h - 1, by) do local base = yy * W + 1
+        local y0, y1 = max(0, ay), min(P.h - 1, by)
+        if not cm and ax == 0 and bx == W - 1 and y1 >= y0 then apagarFaixa(px, y0 * W * 4, (y1 - y0 + 1) * W); return end
+        for yy = y0, y1 do local base = yy * W + 1
           if cm then for xx = ax, bx do local i = base + xx; if cm[i] then WR(px, (i - 1) * 4, 0) end end
-          else for o = (base + ax - 1) * 4, (base + bx - 1) * 4, 4 do WR(px, o, 0) end end
+          else apagarFaixa(px, (base + ax - 1) * 4, bx - ax + 1) end
         end
         return
       end
@@ -461,7 +478,32 @@ function C.contexto(cv)
       preencherPoligonos({ p }, estilo, "nonzero")
     end
   end
-  ctx.fillRect = function(x, y, w, h) pausa(); retangulo(tonumber(x) or 0, tonumber(y) or 0, tonumber(w) or 0, tonumber(h) or 0, estiloDe(ctx.fillStyle)) end
+  ctx.fillRect = function(x, y, w, h)
+    pausa()
+    x, y, w, h = tonumber(x) or 0, tonumber(y) or 0, tonumber(w) or 0, tonumber(h) or 0
+    local estilo = estiloDe(ctx.fillStyle)
+    -- caminho direto (o mais comum no pixel art): cor opaca, sem giro, sem máscara, sem modo de mistura
+    if not estilo.__grad and estilo[4] >= 1 and not clipMask and m[2] == 0 and m[3] == 0 and w == w and h == h and x == x and y == y and alfaGlobal() >= 1 and not opAtual() then
+      if w < 0 then x = x + w; w = -w end; if h < 0 then y = y + h; h = -h end
+      local x0, y0 = m[1] * x + m[5], m[4] * y + m[6]; local x1, y1 = m[1] * (x + w) + m[5], m[4] * (y + h) + m[6]
+      if x1 < x0 then x0, x1 = x1, x0 end; if y1 < y0 then y0, y1 = y1, y0 end
+      local ax, bx, ay, by = ceil(x0 - .5), floor(x1 - .5), ceil(y0 - .5), floor(y1 - .5)
+      local W, H = P.w, P.h
+      local cr = clipRect
+      if cr then if ax < cr[1] then ax = cr[1] end; if bx > cr[3] - 1 then bx = cr[3] - 1 end; if ay < cr[2] then ay = cr[2] end; if by > cr[4] - 1 then by = cr[4] - 1 end end
+      if ax < 0 then ax = 0 end; if bx > W - 1 then bx = W - 1 end; if ay < 0 then ay = 0 end; if by > H - 1 then by = H - 1 end
+      if bx < ax or by < ay then return end
+      local col, px, n = estilo[1] + estilo[2] * 256 + estilo[3] * 65536 + OPACO, P.px, bx - ax + 1
+      local o0 = (ay * W + ax) * 4
+      pintarLinha(px, o0, n, col)
+      for yy = ay + 1, by do
+        local o = (yy * W + ax) * 4
+        if copiar then copiar(px, o, px, o0, n * 4) else pintarLinha(px, o, n, col) end
+      end
+      return
+    end
+    retangulo(x, y, w, h, estilo)
+  end
   ctx.clearRect = function(x, y, w, h) retangulo(tonumber(x) or 0, tonumber(y) or 0, tonumber(w) or 0, tonumber(h) or 0, nil, true) end
   ctx.strokeRect = function(x, y, w, h) local c0, s0 = caminho, sub; api.beginPath(); api.rect(x, y, w, h); api.stroke(); caminho = c0; sub = s0 end
 

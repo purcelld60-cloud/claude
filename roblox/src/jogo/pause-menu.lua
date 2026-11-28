@@ -20,17 +20,23 @@ local __O = {};
                 return true, {}
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____t_14 = __t
-                local ____opt_11 = window.Game
-                if ____opt_11 ~= nil then
-                    ____opt_11 = ____opt_11.getState
+                local ____t_result_17
+                local ____t_16 = __t
+                local ____opt_13 = window.Game
+                if ____opt_13 ~= nil then
+                    ____opt_13 = ____opt_13.getState
                 end
-                local ____opt_result_13
-                if ____opt_11 ~= nil then
-                    ____opt_result_13 = ____opt_11(____opt_11)
+                local ____opt_result_15
+                if ____opt_13 ~= nil then
+                    ____opt_result_15 = ____opt_13(____opt_13)
                 end
-                __O[3000] = ____opt_result_13
-                return true, if ____t_14(____opt_result_13) then __O[3000] else {}
+                __O[3005] = ____opt_result_15
+                if ____t_16(____opt_result_15) then
+                    ____t_result_17 = __O[3005]
+                else
+                    ____t_result_17 = {}
+                end
+                return true, ____t_result_17
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch()
@@ -49,12 +55,12 @@ local __O = {};
         return true
     end
     function isSandboxUnlocked(self)
-        local ____t_17 = __t
-        local ____opt_15 = gameState(nil).q
-        if ____opt_15 ~= nil then
-            ____opt_15 = ____opt_15.jorgeSeen
+        local ____t_20 = __t
+        local ____opt_18 = gameState(nil).q
+        if ____opt_18 ~= nil then
+            ____opt_18 = ____opt_18.jorgeSeen
         end
-        if ____t_17(____opt_15) then
+        if ____t_20(____opt_18) then
             return unlock(nil)
         end
         do
@@ -62,22 +68,28 @@ local __O = {};
                 if window.localStorage:getItem(UNLOCK_KEY) == "1" then
                     return true, true
                 end
-                local ____self_20 = window.JSON
-                local ____self_20_parse_21 = ____self_20.parse
-                local ____t_19 = __t
-                local ____temp_18 = window.localStorage:getItem(SAVE_KEY)
-                __O[3001] = ____temp_18
-                local saved = ____self_20_parse_21(____self_20, if ____t_19(____temp_18) then __O[3001] else "null")
-                local ____t_28 = __t
-                local ____opt_result_26
+                local ____self_24 = window.JSON
+                local ____self_24_parse_25 = ____self_24.parse
+                local ____t_result_23
+                local ____t_22 = __t
+                local ____temp_21 = window.localStorage:getItem(SAVE_KEY)
+                __O[3006] = ____temp_21
+                if ____t_22(____temp_21) then
+                    ____t_result_23 = __O[3006]
+                else
+                    ____t_result_23 = "null"
+                end
+                local saved = ____self_24_parse_25(____self_24, ____t_result_23)
+                local ____t_32 = __t
+                local ____opt_result_30
                 if saved ~= nil then
-                    ____opt_result_26 = saved.q
+                    ____opt_result_30 = saved.q
                 end
-                local ____opt_result_27
-                if ____opt_result_26 ~= nil then
-                    ____opt_result_27 = ____opt_result_26.jorgeSeen
+                local ____opt_result_31
+                if ____opt_result_30 ~= nil then
+                    ____opt_result_31 = ____opt_result_30.jorgeSeen
                 end
-                if ____t_28(____opt_result_27) then
+                if ____t_32(____opt_result_31) then
                     return true, unlock(nil)
                 end
             end)
@@ -95,23 +107,35 @@ local __O = {};
         if __t(mover) then
             mover.textContent = "MUDAR BOTÕES DE LUGAR"
         end
-        heading:querySelector("#ranchPauseTitle").textContent = if nome == "opcoes" then "OPÇÕES" else "PAUSA"
+        heading:querySelector("#ranchPauseTitle").textContent = nome == "opcoes" and "OPÇÕES" or "PAUSA"
         modal.scrollTop = 0
         window:requestAnimationFrame(function()
-            local alvo = if nome == "opcoes" then paginaOpcoes:querySelector("button:not([hidden])") else if __t(resume) then resume else optionsButton
-            local ____opt_101 = alvo and alvo.focus
-            if ____opt_101 ~= nil then
-                ____opt_101(alvo, {preventScroll = true})
+            local ____temp_109
+            if nome == "opcoes" then
+                ____temp_109 = paginaOpcoes:querySelector("button:not([hidden])")
+            else
+                local ____t_result_108
+                if __t(resume) then
+                    ____t_result_108 = resume
+                else
+                    ____t_result_108 = optionsButton
+                end
+                ____temp_109 = ____t_result_108
+            end
+            local alvo = ____temp_109
+            local ____opt_110 = alvo and alvo.focus
+            if ____opt_110 ~= nil then
+                ____opt_110(alvo, {preventScroll = true})
             end
         end)
     end
     function drawPortraits(self)
-        local ____t_107 = __t
-        local ____opt_105 = window.Art
-        if ____opt_105 ~= nil then
-            ____opt_105 = ____opt_105.drawCharacter
+        local ____t_116 = __t
+        local ____opt_114 = window.Art
+        if ____opt_114 ~= nil then
+            ____opt_114 = ____opt_114.drawCharacter
         end
-        if not ____t_107(____opt_105) then
+        if not ____t_116(____opt_114) then
             return
         end
         for ____, boss in __iterar((bosses)) do
@@ -122,7 +146,7 @@ local __O = {};
             local ctx = canvas:getContext("2d")
             ctx.imageSmoothingEnabled = false
             ctx:clearRect(0, 0, 128, 112)
-            ctx.fillStyle = if boss.id == "nikolas" then "#5c3854" else if boss.id == "menezes" then "#5b5660" else if boss.id == "marco" then "#564772" else "#425d54"
+            ctx.fillStyle = boss.id == "nikolas" and "#5c3854" or (boss.id == "menezes" and "#5b5660" or (boss.id == "marco" and "#564772" or "#425d54"))
             ctx:fillRect(0, 0, 128, 112)
             ctx.fillStyle = "#f2dba511"
             do
@@ -144,7 +168,7 @@ local __O = {};
                 boss.art,
                 64,
                 106,
-                {facing = 1, frame = 0, scale = if boss.id == "giant" then 0.43 else if boss.id == "reeisBoss" then 0.8 else 0.94}
+                {facing = 1, frame = 0, scale = boss.id == "giant" and 0.43 or (boss.id == "reeisBoss" and 0.8 or 0.94)}
             )
         end
     end
@@ -157,31 +181,52 @@ local __O = {};
         end
         previousFocus = window.document.activeElement
         local state = gameState(nil)
-        local ____t_114 = __t
-        local ____t_113 = __t
-        local ____t_111 = __t
-        local ____t_109 = __t
-        local ____temp_108 = if __t(state.started) then not __t(state.paused) else state.started
-        __O[3005] = ____temp_108
-        local ____temp_110 = if ____t_109(____temp_108) then not __t(state.won) else __O[3005]
-        __O[3006] = ____temp_110
-        local ____temp_112 = if ____t_111(____temp_110) then not __t(state.defeated) else __O[3006]
-        __O[3007] = ____temp_112
-        resumeAfterSandbox = not not ____t_114(if ____t_113(____temp_112) then not __t(state.chapterEnded) else __O[3007])
-        local ____opt_117 = window.Game
-        if ____opt_117 ~= nil then
-            ____opt_117 = ____opt_117.releaseInputs
+        local ____t_124 = __t
+        local ____t_result_123
+        local ____t_122 = __t
+        local ____t_result_121
+        local ____t_120 = __t
+        local ____t_result_119
+        local ____t_118 = __t
+        local ____t_result_117
+        if __t(state.started) then
+            ____t_result_117 = not __t(state.paused)
+        else
+            ____t_result_117 = state.started
         end
-        if ____opt_117 ~= nil then
-            ____opt_117(____opt_117)
+        __O[3010] = ____t_result_117
+        if ____t_118(____t_result_117) then
+            ____t_result_119 = not __t(state.won)
+        else
+            ____t_result_119 = __O[3010]
+        end
+        __O[3011] = ____t_result_119
+        if ____t_120(____t_result_119) then
+            ____t_result_121 = not __t(state.defeated)
+        else
+            ____t_result_121 = __O[3011]
+        end
+        __O[3012] = ____t_result_121
+        if ____t_122(____t_result_121) then
+            ____t_result_123 = not __t(state.chapterEnded)
+        else
+            ____t_result_123 = __O[3012]
+        end
+        resumeAfterSandbox = not not ____t_124(____t_result_123)
+        local ____opt_127 = window.Game
+        if ____opt_127 ~= nil then
+            ____opt_127 = ____opt_127.releaseInputs
+        end
+        if ____opt_127 ~= nil then
+            ____opt_127(____opt_127)
         end
         if __t(resumeAfterSandbox) then
-            local ____opt_121 = window.Game
-            if ____opt_121 ~= nil then
-                ____opt_121 = ____opt_121.pause
+            local ____opt_131 = window.Game
+            if ____opt_131 ~= nil then
+                ____opt_131 = ____opt_131.pause
             end
-            if ____opt_121 ~= nil then
-                ____opt_121(____opt_121)
+            if ____opt_131 ~= nil then
+                ____opt_131(____opt_131)
             end
         end
         sandbox:querySelector("#ranchSandboxFeedback").textContent = ""
@@ -195,11 +240,11 @@ local __O = {};
         if not __t(isSandboxUnlocked(nil)) then
             return
         end
-        local ____opt_123 = window.Game
-        if ____opt_123 ~= nil then
-            ____opt_123 = ____opt_123.startSandboxBoss
+        local ____opt_133 = window.Game
+        if ____opt_133 ~= nil then
+            ____opt_133 = ____opt_133.startSandboxBoss
         end
-        if type(____opt_123) ~= "function" then
+        if type(____opt_133) ~= "function" then
             sandbox:querySelector("#ranchSandboxFeedback").textContent = "A arena ainda está carregando. Tente novamente em um instante."
             return
         end
@@ -207,160 +252,229 @@ local __O = {};
         resumeAfterSandbox = false
         sandbox:close()
         local result = window.Game:startSandboxBoss(____type)
-        local ____t_129 = __t
-        local ____temp_128 = result == false
-        if not ____temp_128 then
-            local ____opt_result_127
+        local ____t_139 = __t
+        local ____temp_138 = result == false
+        if not ____temp_138 then
+            local ____opt_result_137
             if result ~= nil then
-                ____opt_result_127 = result.ok
+                ____opt_result_137 = result.ok
             end
-            ____temp_128 = ____opt_result_127 == false
+            ____temp_138 = ____opt_result_137 == false
         end
-        if ____t_129(____temp_128) then
+        if ____t_139(____temp_138) then
             resumeAfterSandbox = wasResume
             sandbox:showModal()
-            local ____temp_134 = sandbox:querySelector("#ranchSandboxFeedback")
-            local ____t_133 = __t
-            local ____opt_result_132
+            local ____temp_145 = sandbox:querySelector("#ranchSandboxFeedback")
+            local ____t_result_144
+            local ____t_143 = __t
+            local ____opt_result_142
             if result ~= nil then
-                ____opt_result_132 = result.error
+                ____opt_result_142 = result.error
             end
-            __O[3008] = ____opt_result_132
-            ____temp_134.textContent = if ____t_133(____opt_result_132) then __O[3008] else "Termine a conversa, cena ou desafio atual antes de começar a revanche."
+            __O[3013] = ____opt_result_142
+            if ____t_143(____opt_result_142) then
+                ____t_result_144 = __O[3013]
+            else
+                ____t_result_144 = "Termine a conversa, cena ou desafio atual antes de começar a revanche."
+            end
+            ____temp_145.textContent = ____t_result_144
         end
         render(nil)
     end
     function render(self)
         local state = gameState(nil)
         local unlocked = isSandboxUnlocked(nil)
-        local ____t_168 = __t
-        local ____opt_165 = window.Difficulty
-        if ____opt_165 ~= nil then
-            ____opt_165 = ____opt_165.getMode
+        local ____t_result_182
+        local ____t_181 = __t
+        local ____opt_178 = window.Difficulty
+        if ____opt_178 ~= nil then
+            ____opt_178 = ____opt_178.getMode
         end
-        local ____opt_result_167
-        if ____opt_165 ~= nil then
-            ____opt_result_167 = ____opt_165(____opt_165)
+        local ____opt_result_180
+        if ____opt_178 ~= nil then
+            ____opt_result_180 = ____opt_178(____opt_178)
         end
-        __O[3012] = ____opt_result_167
-        local selected = if ____t_168(____opt_result_167) then __O[3012] else "normal"
-        local ____opt_171 = window.Difficulty
-        if ____opt_171 ~= nil then
-            ____opt_171 = ____opt_171.getSettings
+        __O[3017] = ____opt_result_180
+        if ____t_181(____opt_result_180) then
+            ____t_result_182 = __O[3017]
+        else
+            ____t_result_182 = "normal"
         end
-        local ____opt_result_173
-        if ____opt_171 ~= nil then
-            ____opt_result_173 = ____opt_171(____opt_171, selected)
+        local selected = ____t_result_182
+        local ____opt_185 = window.Difficulty
+        if ____opt_185 ~= nil then
+            ____opt_185 = ____opt_185.getSettings
         end
-        local settings = ____opt_result_173
-        local ____t_179 = __t
-        local ____opt_176 = window.Difficulty
-        if ____opt_176 ~= nil then
-            ____opt_176 = ____opt_176.isLocked
+        local ____opt_result_187
+        if ____opt_185 ~= nil then
+            ____opt_result_187 = ____opt_185(____opt_185, selected)
         end
-        local ____opt_result_178
-        if ____opt_176 ~= nil then
-            ____opt_result_178 = ____opt_176(____opt_176)
+        local settings = ____opt_result_187
+        local ____t_193 = __t
+        local ____opt_190 = window.Difficulty
+        if ____opt_190 ~= nil then
+            ____opt_190 = ____opt_190.isLocked
         end
-        local easyLocked = not not ____t_179(____opt_result_178)
+        local ____opt_result_192
+        if ____opt_190 ~= nil then
+            ____opt_result_192 = ____opt_190(____opt_190)
+        end
+        local easyLocked = not not ____t_193(____opt_result_192)
         for ____, button in __iterar((window.document:querySelectorAll("[data-rp-difficulty]"))) do
             button:setAttribute(
                 "aria-pressed",
                 tostring(button.dataset.rpDifficulty == selected)
             )
-            button.disabled = if __t(easyLocked) then button.dataset.rpDifficulty ~= "easy" else easyLocked
-            button.title = if __t(button.disabled) then "Fácil travado neste save. Só uma nova aventura permite trocar." else ""
+            local ____t_result_194
+            if __t(easyLocked) then
+                ____t_result_194 = button.dataset.rpDifficulty ~= "easy"
+            else
+                ____t_result_194 = easyLocked
+            end
+            button.disabled = ____t_result_194
+            button.title = __t(button.disabled) and "Fácil travado neste save. Só uma nova aventura permite trocar." or ""
         end
         local description = window.document:getElementById("ranchDifficultyDescription")
         if __t(description) then
-            local ____t_183 = __t
-            local ____opt_result_182
+            local ____t_result_199
+            local ____t_198 = __t
+            local ____opt_result_197
             if settings ~= nil then
-                ____opt_result_182 = settings.description
+                ____opt_result_197 = settings.description
             end
-            __O[3013] = ____opt_result_182
-            description.textContent = if ____t_183(____opt_result_182) then __O[3013] else "A receita original do desafio."
+            __O[3018] = ____opt_result_197
+            if ____t_198(____opt_result_197) then
+                ____t_result_199 = __O[3018]
+            else
+                ____t_result_199 = "A receita original do desafio."
+            end
+            description.textContent = ____t_result_199
         end
-        local ____t_187 = __t
-        local ____opt_result_186
-        if settings ~= nil then
-            ____opt_result_186 = settings.label
-        end
-        __O[3014] = ____opt_result_186
-        local modeLabel = if ____t_187(____opt_result_186) then __O[3014] else "NORMAL"
-        sandbox:querySelector("#ranchSandboxDifficulty").textContent = __add("DIFICULDADE ", modeLabel)
-        local noteText = if __t(if __t(state.activeBoss) then state.activeBoss else state.ollyan) then "A escolha vale no próximo confronto. A luta atual mantém a dificuldade do início." else "A dificuldade vale nos próximos confrontos. Seus atributos e seu progresso continuam iguais."
-        note.textContent = if __t(easyLocked) then "FÁCIL TRAVADO NESTE SAVE · Para mudar de dificuldade, crie uma nova aventura." else noteText
-        local ____opt_190 = window.CampaignRun
-        if ____opt_190 ~= nil then
-            ____opt_190 = ____opt_190.render
-        end
-        if ____opt_190 ~= nil then
-            ____opt_190(____opt_190)
-        end
-        local ____t_204 = __t
-        local ____t_194 = __t
-        local ____opt_192 = state.progression
-        if ____opt_192 ~= nil then
-            ____opt_192 = ____opt_192.level
-        end
-        __O[3015] = ____opt_192
-        local ____opt_199 = window.Progression
-        if ____opt_199 ~= nil then
-            ____opt_199 = ____opt_199.getState
-        end
-        local ____opt_result_201
-        if ____opt_199 ~= nil then
-            ____opt_result_201 = ____opt_199(____opt_199)
-        end
+        local ____t_result_204
+        local ____t_203 = __t
         local ____opt_result_202
-        if ____opt_result_201 ~= nil then
-            ____opt_result_202 = ____opt_result_201.level
+        if settings ~= nil then
+            ____opt_result_202 = settings.label
         end
-        local ____temp_203 = if ____t_194(____opt_192) then __O[3015] else ____opt_result_202
-        __O[3016] = ____temp_203
-        local level = if ____t_204(____temp_203) then __O[3016] else 1
-        local ____t_208 = __t
-        local ____opt_205 = window.document:getElementById("stageName")
-        local ____temp_207 = ____opt_205 and ____opt_205.textContent
-        __O[3017] = ____temp_207
-        local stage = if ____t_208(____temp_207) then __O[3017] else "A roça"
+        __O[3019] = ____opt_result_202
+        if ____t_203(____opt_result_202) then
+            ____t_result_204 = __O[3019]
+        else
+            ____t_result_204 = "NORMAL"
+        end
+        local modeLabel = ____t_result_204
+        sandbox:querySelector("#ranchSandboxDifficulty").textContent = __add("DIFICULDADE ", modeLabel)
+        local ____t_206 = __t
+        local ____t_result_205
+        if __t(state.activeBoss) then
+            ____t_result_205 = state.activeBoss
+        else
+            ____t_result_205 = state.ollyan
+        end
+        local noteText = ____t_206(____t_result_205) and "A escolha vale no próximo confronto. A luta atual mantém a dificuldade do início." or "A dificuldade vale nos próximos confrontos. Seus atributos e seu progresso continuam iguais."
+        note.textContent = __t(easyLocked) and "FÁCIL TRAVADO NESTE SAVE · Para mudar de dificuldade, crie uma nova aventura." or noteText
+        local ____opt_209 = window.CampaignRun
+        if ____opt_209 ~= nil then
+            ____opt_209 = ____opt_209.render
+        end
+        if ____opt_209 ~= nil then
+            ____opt_209(____opt_209)
+        end
+        local ____t_result_224
+        local ____t_223 = __t
+        local ____t_result_222
+        local ____t_213 = __t
+        local ____opt_211 = state.progression
+        if ____opt_211 ~= nil then
+            ____opt_211 = ____opt_211.level
+        end
+        __O[3020] = ____opt_211
+        if ____t_213(____opt_211) then
+            ____t_result_222 = __O[3020]
+        else
+            local ____opt_218 = window.Progression
+            if ____opt_218 ~= nil then
+                ____opt_218 = ____opt_218.getState
+            end
+            local ____opt_result_220
+            if ____opt_218 ~= nil then
+                ____opt_result_220 = ____opt_218(____opt_218)
+            end
+            local ____opt_result_221
+            if ____opt_result_220 ~= nil then
+                ____opt_result_221 = ____opt_result_220.level
+            end
+            ____t_result_222 = ____opt_result_221
+        end
+        __O[3021] = ____t_result_222
+        if ____t_223(____t_result_222) then
+            ____t_result_224 = __O[3021]
+        else
+            ____t_result_224 = 1
+        end
+        local level = ____t_result_224
+        local ____t_result_229
+        local ____t_228 = __t
+        local ____opt_225 = window.document:getElementById("stageName")
+        local ____temp_227 = ____opt_225 and ____opt_225.textContent
+        __O[3022] = ____temp_227
+        if ____t_228(____temp_227) then
+            ____t_result_229 = __O[3022]
+        else
+            ____t_result_229 = "A roça"
+        end
+        local stage = ____t_result_229
         heading:querySelector("#ranchPauseLocation").textContent = __add(
             __add(
-                __add(if __t(state.sandbox) then "SANDBOX · " else "", stage),
+                __add(
+                    __t(state.sandbox) and "SANDBOX · " or "",
+                    stage
+                ),
                 " · NÍVEL "
             ),
             level
         )
         sandboxButton.disabled = not __t(unlocked)
-        sandboxButton:querySelector("small").textContent = if __t(unlocked) then "Sandbox: escolha uma revanche." else "Libere após concluir a história de Jorge."
-        sandboxButton:setAttribute("aria-label", if __t(unlocked) then "Abrir sandbox e escolher um chefe" else "Sandbox bloqueado: conclua a história de Jorge")
+        sandboxButton:querySelector("small").textContent = __t(unlocked) and "Sandbox: escolha uma revanche." or "Libere após concluir a história de Jorge."
+        sandboxButton:setAttribute(
+            "aria-label",
+            __t(unlocked) and "Abrir sandbox e escolher um chefe" or "Sandbox bloqueado: conclua a história de Jorge"
+        )
         returnButton.hidden = not __t(state.sandbox)
         retryButton.hidden = not __t(state.sandbox)
-        local ____t_211 = __t
-        local ____opt_209 = state.sandbox
-        if ____opt_209 ~= nil then
-            ____opt_209 = ____opt_209.result
+        local ____t_232 = __t
+        local ____opt_230 = state.sandbox
+        if ____opt_230 ~= nil then
+            ____opt_230 = ____opt_230.result
         end
-        resultBanner.hidden = not ____t_211(____opt_209)
-        local ____opt_212 = state.sandbox
-        if ____opt_212 ~= nil then
-            ____opt_212 = ____opt_212.result
+        resultBanner.hidden = not ____t_232(____opt_230)
+        local ____temp_238
+        local ____opt_233 = state.sandbox
+        if ____opt_233 ~= nil then
+            ____opt_233 = ____opt_233.result
         end
-        local ____t_216 = __t
-        local ____opt_214 = state.sandbox
-        if ____opt_214 ~= nil then
-            ____opt_214 = ____opt_214.result
+        if ____opt_233 == "won" then
+            ____temp_238 = "REVANCHE VENCIDA! O bolo tá vingado de novo."
+        else
+            local ____t_237 = __t
+            local ____opt_235 = state.sandbox
+            if ____opt_235 ~= nil then
+                ____opt_235 = ____opt_235.result
+            end
+            ____temp_238 = ____t_237(____opt_235) and "A POEIRA BAIXOU. Ajuste o shape e tente outra vez." or ""
         end
-        resultBanner.textContent = if ____opt_212 == "won" then "REVANCHE VENCIDA! O bolo tá vingado de novo." else if ____t_216(____opt_214) then "A POEIRA BAIXOU. Ajuste o shape e tente outra vez." else ""
+        resultBanner.textContent = ____temp_238
         for ____, button in __iterar((window.document:querySelectorAll("[data-open-sandbox]"))) do
             button.disabled = not __t(unlocked)
-            button:setAttribute("aria-label", if __t(unlocked) then "Sandbox: escolher um chefe" else "Sandbox bloqueado: conclua a história de Jorge")
+            button:setAttribute(
+                "aria-label",
+                __t(unlocked) and "Sandbox: escolher um chefe" or "Sandbox bloqueado: conclua a história de Jorge"
+            )
         end
         endingButton.hidden = not __t(unlocked)
-        local ____opt_217 = window.document:getElementById("soundBtn")
-        local sound = (____opt_217 and ____opt_217:getAttribute("aria-pressed")) == "true"
-        audio:querySelector("b").textContent = if __t(sound) then "SOM LIGADO" else "SOM DESLIGADO"
+        local ____opt_239 = window.document:getElementById("soundBtn")
+        local sound = (____opt_239 and ____opt_239:getAttribute("aria-pressed")) == "true"
+        audio:querySelector("b").textContent = __t(sound) and "SOM LIGADO" or "SOM DESLIGADO"
         audio:setAttribute(
             "aria-pressed",
             tostring(sound)
@@ -370,11 +484,17 @@ local __O = {};
     local shell = window.document:getElementById("gameShell")
     local screen = window.document:getElementById("pauseScreen")
     modal = screen and screen:querySelector(".game-modal")
-    local ____t_4 = __t
+    local ____t_5 = __t
+    local ____t_result_4
     local ____t_3 = __t
     local ____temp_2 = not __t(shell) or not __t(screen)
-    __O[2998] = ____temp_2
-    if ____t_4(if ____t_3(____temp_2) then __O[2998] else not __t(modal)) then
+    __O[3003] = ____temp_2
+    if ____t_3(____temp_2) then
+        ____t_result_4 = __O[3003]
+    else
+        ____t_result_4 = not __t(modal)
+    end
+    if ____t_5(____t_result_4) then
         return
     end
     UNLOCK_KEY = "daroca-sandbox-v1"
@@ -502,13 +622,19 @@ local __O = {};
         story = "<path d=\"M5 4h22v24H5zM5 10h22M10 4v6m12-6v6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"m13 14 8 5-8 5z\" fill=\"currentColor\"/>"
     }, "resume,controls,sandbox,sound,exit,book,story")
     local function icon(self, name)
-        local ____add_8 = __add
-        local ____add_7 = __add
-        local ____t_6 = __t
-        local ____get_result_5 = __get(icons, name)
-        __O[2999] = ____get_result_5
-        return ____add_8(
-            ____add_7("<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\">", if ____t_6(____get_result_5) then __O[2999] else icons.book),
+        local ____add_10 = __add
+        local ____add_9 = __add
+        local ____t_result_8
+        local ____t_7 = __t
+        local ____get_result_6 = __get(icons, name)
+        __O[3004] = ____get_result_6
+        if ____t_7(____get_result_6) then
+            ____t_result_8 = __O[3004]
+        else
+            ____t_result_8 = icons.book
+        end
+        return ____add_10(
+            ____add_9("<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\">", ____t_result_8),
             "</svg>"
         )
     end
@@ -562,7 +688,7 @@ local __O = {};
                     __add(
                         __add(
                             __add(
-                                __add("<span aria-hidden=\"true\">", if mode == "easy" then "♧" else if mode == "hard" then "⚡" else "✦"),
+                                __add("<span aria-hidden=\"true\">", mode == "easy" and "♧" or (mode == "hard" and "⚡" or "✦")),
                                 "</span><b>"
                             ),
                             name
@@ -576,12 +702,12 @@ local __O = {};
             button:addEventListener(
                 "click",
                 function()
-                    local ____opt_31 = window.Difficulty
-                    if ____opt_31 ~= nil then
-                        ____opt_31 = ____opt_31.setMode
+                    local ____opt_35 = window.Difficulty
+                    if ____opt_35 ~= nil then
+                        ____opt_35 = ____opt_35.setMode
                     end
-                    if ____opt_31 ~= nil then
-                        ____opt_31(____opt_31, mode)
+                    if ____opt_35 ~= nil then
+                        ____opt_35(____opt_35, mode)
                     end
                     render(nil)
                 end
@@ -645,28 +771,28 @@ local __O = {};
         "Teclas, resposta e joystick.",
         "controls",
         function()
-            local ____t_35 = __t
-            local ____opt_33 = window.ControlSettingsUI
-            if ____opt_33 ~= nil then
-                ____opt_33 = ____opt_33.open
+            local ____t_39 = __t
+            local ____opt_37 = window.ControlSettingsUI
+            if ____opt_37 ~= nil then
+                ____opt_37 = ____opt_37.open
             end
-            if ____t_35(____opt_33) then
+            if ____t_39(____opt_37) then
                 window.ControlSettingsUI:open()
             else
-                local ____t_38 = __t
-                local ____opt_36 = window.ControlSettingsPanel
-                if ____opt_36 ~= nil then
-                    ____opt_36 = ____opt_36.open
+                local ____t_42 = __t
+                local ____opt_40 = window.ControlSettingsPanel
+                if ____opt_40 ~= nil then
+                    ____opt_40 = ____opt_40.open
                 end
-                if ____t_38(____opt_36) then
+                if ____t_42(____opt_40) then
                     window.ControlSettingsPanel:open()
                 else
-                    local ____opt_41 = window.GameView
-                    if ____opt_41 ~= nil then
-                        ____opt_41 = ____opt_41.openHelp
+                    local ____opt_45 = window.GameView
+                    if ____opt_45 ~= nil then
+                        ____opt_45 = ____opt_45.openHelp
                     end
-                    if ____opt_41 ~= nil then
-                        ____opt_41(____opt_41)
+                    if ____opt_45 ~= nil then
+                        ____opt_45(____opt_45)
                     end
                 end
             end
@@ -680,9 +806,9 @@ local __O = {};
         "Músicas e efeitos do jogo.",
         "sound",
         function()
-            local ____opt_43 = window.document:getElementById("soundBtn")
-            if ____opt_43 ~= nil then
-                ____opt_43:click()
+            local ____opt_47 = window.document:getElementById("soundBtn")
+            if ____opt_47 ~= nil then
+                ____opt_47:click()
             end
             render(nil)
         end
@@ -756,42 +882,54 @@ local __O = {};
         mainActions:append(box)
     end
     local gfx
-    local ____makeButton_63 = makeButton
-    local ____add_51 = __add
-    local ____t_50 = __t
-    local ____opt_47 = window.Graphics
-    if ____opt_47 ~= nil then
-        ____opt_47 = ____opt_47.label
+    local ____makeButton_69 = makeButton
+    local ____add_56 = __add
+    local ____t_result_55
+    local ____t_54 = __t
+    local ____opt_51 = window.Graphics
+    if ____opt_51 ~= nil then
+        ____opt_51 = ____opt_51.label
     end
-    local ____opt_result_49
-    if ____opt_47 ~= nil then
-        ____opt_result_49 = ____opt_47(____opt_47)
+    local ____opt_result_53
+    if ____opt_51 ~= nil then
+        ____opt_result_53 = ____opt_51(____opt_51)
     end
-    __O[3002] = ____opt_result_49
-    local ____add_51_result_62 = ____add_51("QUALIDADE: ", if ____t_50(____opt_result_49) then __O[3002] else "MÉDIA")
-    local ____t_57 = __t
-    local ____opt_54 = window.Graphics
-    if ____opt_54 ~= nil then
-        ____opt_54 = ____opt_54.describe
+    __O[3007] = ____opt_result_53
+    if ____t_54(____opt_result_53) then
+        ____t_result_55 = __O[3007]
+    else
+        ____t_result_55 = "MÉDIA"
     end
-    local ____opt_result_56
-    if ____opt_54 ~= nil then
-        ____opt_result_56 = ____opt_54(____opt_54)
+    local ____add_56_result_68 = ____add_56("QUALIDADE: ", ____t_result_55)
+    local ____t_result_63
+    local ____t_62 = __t
+    local ____opt_59 = window.Graphics
+    if ____opt_59 ~= nil then
+        ____opt_59 = ____opt_59.describe
     end
-    __O[3003] = ____opt_result_56
-    gfx = ____makeButton_63(
+    local ____opt_result_61
+    if ____opt_59 ~= nil then
+        ____opt_result_61 = ____opt_59(____opt_59)
+    end
+    __O[3008] = ____opt_result_61
+    if ____t_62(____opt_result_61) then
+        ____t_result_63 = __O[3008]
+    else
+        ____t_result_63 = "Cenário vivo, luz e partículas."
+    end
+    gfx = ____makeButton_69(
         nil,
         "ranchGraphicsBtn",
-        ____add_51_result_62,
-        if ____t_57(____opt_result_56) then __O[3003] else "Cenário vivo, luz e partículas.",
+        ____add_56_result_68,
+        ____t_result_63,
         "controls",
         function()
-            local ____opt_60 = window.Graphics
-            if ____opt_60 ~= nil then
-                ____opt_60 = ____opt_60.toggle
+            local ____opt_66 = window.Graphics
+            if ____opt_66 ~= nil then
+                ____opt_66 = ____opt_66.toggle
             end
-            if ____opt_60 ~= nil then
-                ____opt_60(____opt_60)
+            if ____opt_66 ~= nil then
+                ____opt_66(____opt_66)
             end
             gfx:querySelector("b").textContent = __add(
                 "QUALIDADE: ",
@@ -801,13 +939,13 @@ local __O = {};
         end
     )
     mainActions:append(gfx)
-    local ____opt_66 = window.Graphics
-    if ____opt_66 ~= nil then
-        ____opt_66 = ____opt_66.onChange
+    local ____opt_72 = window.Graphics
+    if ____opt_72 ~= nil then
+        ____opt_72 = ____opt_72.onChange
     end
-    if ____opt_66 ~= nil then
-        ____opt_66(
-            ____opt_66,
+    if ____opt_72 ~= nil then
+        ____opt_72(
+            ____opt_72,
             function()
                 gfx:querySelector("b").textContent = __add(
                     "QUALIDADE: ",
@@ -878,26 +1016,26 @@ local __O = {};
         "sandbox",
         function()
             local state = gameState(nil)
-            local ____t_70 = __t
-            local ____opt_68 = window.Game
-            if ____opt_68 ~= nil then
-                ____opt_68 = ____opt_68.retrySandboxBoss
+            local ____t_76 = __t
+            local ____opt_74 = window.Game
+            if ____opt_74 ~= nil then
+                ____opt_74 = ____opt_74.retrySandboxBoss
             end
-            if ____t_70(____opt_68) then
+            if ____t_76(____opt_74) then
                 window.Game:retrySandboxBoss()
             else
-                local ____t_73 = __t
-                local ____opt_71 = state.sandbox
-                if ____opt_71 ~= nil then
-                    ____opt_71 = ____opt_71.type
+                local ____t_79 = __t
+                local ____opt_77 = state.sandbox
+                if ____opt_77 ~= nil then
+                    ____opt_77 = ____opt_77.type
                 end
-                if ____t_73(____opt_71) then
-                    local ____opt_76 = window.Game
-                    if ____opt_76 ~= nil then
-                        ____opt_76 = ____opt_76.startSandboxBoss
+                if ____t_79(____opt_77) then
+                    local ____opt_82 = window.Game
+                    if ____opt_82 ~= nil then
+                        ____opt_82 = ____opt_82.startSandboxBoss
                     end
-                    if ____opt_76 ~= nil then
-                        ____opt_76(____opt_76, state.sandbox.type)
+                    if ____opt_82 ~= nil then
+                        ____opt_82(____opt_82, state.sandbox.type)
                     end
                 end
             end
@@ -913,12 +1051,12 @@ local __O = {};
         "Encerre o treino e recupere sua aventura.",
         "exit",
         function()
-            local ____opt_80 = window.Game
-            if ____opt_80 ~= nil then
-                ____opt_80 = ____opt_80.exitSandbox
+            local ____opt_86 = window.Game
+            if ____opt_86 ~= nil then
+                ____opt_86 = ____opt_86.exitSandbox
             end
-            if ____opt_80 ~= nil then
-                ____opt_80(____opt_80)
+            if ____opt_86 ~= nil then
+                ____opt_86(____opt_86)
             end
             render(nil)
         end
@@ -947,15 +1085,15 @@ local __O = {};
             "Missões, personagens e instalação.",
             "book",
             function()
-                local ____opt_84 = window.AdventureMenu
-                if ____opt_84 ~= nil then
-                    ____opt_84 = ____opt_84.openInfo
+                local ____opt_90 = window.AdventureMenu
+                if ____opt_90 ~= nil then
+                    ____opt_90 = ____opt_90.openInfo
                 end
-                local ____opt_result_86
-                if ____opt_84 ~= nil then
-                    ____opt_result_86 = ____opt_84(____opt_84)
+                local ____opt_result_92
+                if ____opt_90 ~= nil then
+                    ____opt_result_92 = ____opt_90(____opt_90)
                 end
-                return ____opt_result_86
+                return ____opt_result_92
             end
         ))
     end
@@ -984,15 +1122,15 @@ local __O = {};
             "Seu progresso continua guardado.",
             "exit",
             function()
-                local ____opt_89 = window.Game
-                if ____opt_89 ~= nil then
-                    ____opt_89 = ____opt_89.returnToMenu
+                local ____opt_95 = window.Game
+                if ____opt_95 ~= nil then
+                    ____opt_95 = ____opt_95.returnToMenu
                 end
-                local ____opt_result_91
-                if ____opt_89 ~= nil then
-                    ____opt_result_91 = ____opt_89(____opt_89)
+                local ____opt_result_97
+                if ____opt_95 ~= nil then
+                    ____opt_result_97 = ____opt_95(____opt_95)
                 end
-                return ____opt_result_91
+                return ____opt_result_97
             end
         ))
     end
@@ -1003,25 +1141,25 @@ local __O = {};
         "Crie uma sala pelo celular.",
         "sandbox",
         function()
-            local ____opt_94 = window.Arena
-            if ____opt_94 ~= nil then
-                ____opt_94 = ____opt_94.open
+            local ____opt_100 = window.Arena
+            if ____opt_100 ~= nil then
+                ____opt_100 = ____opt_100.open
             end
-            local ____opt_result_96
-            if ____opt_94 ~= nil then
-                ____opt_result_96 = ____opt_94(____opt_94)
+            local ____opt_result_102
+            if ____opt_100 ~= nil then
+                ____opt_result_102 = ____opt_100(____opt_100)
             end
-            return ____opt_result_96
+            return ____opt_result_102
         end
     ))
     local function preserveExtra(self, button)
         local isCoop = button.id == "pauseCoopBtn"
-        local title = if __t(isCoop) then "DUPLA LOCAL" else __call(button.textContent, "trim")
+        local title = __t(isCoop) and "DUPLA LOCAL" or __call(button.textContent, "trim")
         utility:append(labelButton(
             nil,
             button,
             title,
-            if __t(isCoop) then "O modo clássico de rede local." else "Mais uma parada da resenha.",
+            __t(isCoop) and "O modo clássico de rede local." or "Mais uma parada da resenha.",
             "controls"
         ))
     end
@@ -1053,10 +1191,16 @@ local __O = {};
         function() return mostrarPagina(nil, "inicio") end
     )
     local function pick(____, id)
-        local ____t_98 = __t
-        local ____temp_97 = window.document:getElementById(id)
-        __O[3004] = ____temp_97
-        return if ____t_98(____temp_97) then __O[3004] else mainActions:querySelector(__add("#", id))
+        local ____t_result_105
+        local ____t_104 = __t
+        local ____temp_103 = window.document:getElementById(id)
+        __O[3009] = ____temp_103
+        if ____t_104(____temp_103) then
+            ____t_result_105 = __O[3009]
+        else
+            ____t_result_105 = mainActions:querySelector(__add("#", id))
+        end
+        return ____t_result_105
     end
     paginaOpcoes:append(__TS__Spread(__iter(__call(
         __call(
@@ -1073,8 +1217,8 @@ local __O = {};
     end
     paginaOpcoes:append(controls, difficulty, note, optionsBack)
     local homeButton = utility:querySelector("#mainMenuBtn,#ranchHomeBtn")
-    local ____paginaInicio_append_100 = paginaInicio.append
-    local ____array_99 = __TS__SparseArrayNew(__TS__Spread(__iter(__call(
+    local ____paginaInicio_append_107 = paginaInicio.append
+    local ____array_106 = __TS__SparseArrayNew(__TS__Spread(__iter(__call(
         __arrL({
             resume,
             optionsButton,
@@ -1085,10 +1229,10 @@ local __O = {};
         "filter",
         window.Boolean
     ))))
-    __TS__SparseArrayPush(____array_99, utility)
-    ____paginaInicio_append_100(
+    __TS__SparseArrayPush(____array_106, utility)
+    ____paginaInicio_append_107(
         paginaInicio,
-        __TS__SparseArraySpread(____array_99)
+        __TS__SparseArraySpread(____array_106)
     )
     local fim = window.document:createElement("div")
     fim.className = "rp-utility"
@@ -1127,7 +1271,10 @@ local __O = {};
         button.className = "rs-boss"
         button.dataset.sandboxBoss = boss.id
         button.innerHTML = __add(
-            __add("<span class=\"rs-portrait\"><canvas width=\"128\" height=\"112\" aria-hidden=\"true\"></canvas><i>", if boss.phases == 1 then "67" else __add(boss.phases, " FASES")),
+            __add(
+                "<span class=\"rs-portrait\"><canvas width=\"128\" height=\"112\" aria-hidden=\"true\"></canvas><i>",
+                boss.phases == 1 and "67" or __add(boss.phases, " FASES")
+            ),
             "</i></span><span class=\"rs-copy\"><small></small><b></b><span></span></span><span class=\"rs-challenge\" aria-hidden=\"true\">DESAFIAR →</span>"
         )
         button:querySelector(".rs-copy small").textContent = boss.stage
@@ -1161,38 +1308,44 @@ local __O = {};
             if __t(sandbox.open) then
                 return
             end
-            local ____opt_137 = window.Game
-            if ____opt_137 ~= nil then
-                ____opt_137 = ____opt_137.releaseInputs
+            local ____opt_148 = window.Game
+            if ____opt_148 ~= nil then
+                ____opt_148 = ____opt_148.releaseInputs
             end
-            if ____opt_137 ~= nil then
-                ____opt_137(____opt_137)
+            if ____opt_148 ~= nil then
+                ____opt_148(____opt_148)
             end
             if __t(resumeAfterSandbox) then
                 resumeAfterSandbox = false
-                local ____opt_141 = window.Game
-                if ____opt_141 ~= nil then
-                    ____opt_141 = ____opt_141.resume
+                local ____opt_152 = window.Game
+                if ____opt_152 ~= nil then
+                    ____opt_152 = ____opt_152.resume
                 end
-                if ____opt_141 ~= nil then
-                    ____opt_141(____opt_141)
+                if ____opt_152 ~= nil then
+                    ____opt_152(____opt_152)
                 end
             end
-            local ____t_150 = __t
-            local ____t_146 = __t
-            local ____opt_result_145
+            local ____t_162 = __t
+            local ____t_result_161
+            local ____t_157 = __t
+            local ____opt_result_156
             if previousFocus ~= nil then
-                ____opt_result_145 = previousFocus.isConnected
+                ____opt_result_156 = previousFocus.isConnected
             end
-            __O[3009] = ____opt_result_145
-            local ____t_149 = __t
-            local ____this_148
-            ____this_148 = previousFocus
-            local ____opt_147 = ____this_148.closest
-            if ____opt_147 ~= nil then
-                ____opt_147 = ____opt_147(____this_148, "[hidden]")
+            __O[3014] = ____opt_result_156
+            if ____t_157(____opt_result_156) then
+                local ____t_160 = __t
+                local ____this_159
+                ____this_159 = previousFocus
+                local ____opt_158 = ____this_159.closest
+                if ____opt_158 ~= nil then
+                    ____opt_158 = ____opt_158(____this_159, "[hidden]")
+                end
+                ____t_result_161 = not ____t_160(____opt_158)
+            else
+                ____t_result_161 = __O[3014]
             end
-            if ____t_150(if ____t_146(____opt_result_145) then not ____t_149(____opt_147) else __O[3009]) then
+            if ____t_162(____t_result_161) then
                 previousFocus:focus()
             end
         end
@@ -1204,14 +1357,25 @@ local __O = {};
                 return
             end
             local r = sandbox:getBoundingClientRect()
-            local ____t_155 = __t
-            local ____t_154 = __t
-            local ____t_152 = __t
-            local ____temp_151 = event.clientX < r.left or event.clientX > r.right
-            __O[3010] = ____temp_151
-            local ____temp_153 = if ____t_152(____temp_151) then __O[3010] else event.clientY < r.top
-            __O[3011] = ____temp_153
-            if ____t_155(if ____t_154(____temp_153) then __O[3011] else event.clientY > r.bottom) then
+            local ____t_168 = __t
+            local ____t_result_167
+            local ____t_166 = __t
+            local ____t_result_165
+            local ____t_164 = __t
+            local ____temp_163 = event.clientX < r.left or event.clientX > r.right
+            __O[3015] = ____temp_163
+            if ____t_164(____temp_163) then
+                ____t_result_165 = __O[3015]
+            else
+                ____t_result_165 = event.clientY < r.top
+            end
+            __O[3016] = ____t_result_165
+            if ____t_166(____t_result_165) then
+                ____t_result_167 = __O[3016]
+            else
+                ____t_result_167 = event.clientY > r.bottom
+            end
+            if ____t_168(____t_result_167) then
                 closeSandbox(nil)
             end
         end
@@ -1227,22 +1391,22 @@ local __O = {};
             "<span>TERREIRO DOS CHEFES</span>"
         )
         titleButton.dataset.openSandbox = ""
-        local ____opt_156 = window.document:querySelector("#startScreen .start-menu")
-        if ____opt_156 ~= nil then
-            ____opt_156:append(titleButton)
+        local ____opt_169 = window.document:querySelector("#startScreen .start-menu")
+        if ____opt_169 ~= nil then
+            ____opt_169:append(titleButton)
         end
     end
     window.document:addEventListener(
         "click",
         function(____, event)
-            local ____t_160 = __t
-            local ____this_159
-            ____this_159 = event.target
-            local ____opt_158 = ____this_159.closest
-            if ____opt_158 ~= nil then
-                ____opt_158 = ____opt_158(____this_159, "[data-open-sandbox]")
+            local ____t_173 = __t
+            local ____this_172
+            ____this_172 = event.target
+            local ____opt_171 = ____this_172.closest
+            if ____opt_171 ~= nil then
+                ____opt_171 = ____opt_171(____this_172, "[data-open-sandbox]")
             end
-            if ____t_160(____opt_158) then
+            if ____t_173(____opt_171) then
                 event:preventDefault()
                 openSandbox(nil)
             end
@@ -1256,27 +1420,27 @@ local __O = {};
         "click",
         function() return openSandbox(nil) end
     )
-    local ____opt_161 = window.document:querySelector("#chapterEndScreen .ending-options")
-    if ____opt_161 ~= nil then
-        ____opt_161:append(endingButton)
+    local ____opt_174 = window.document:querySelector("#chapterEndScreen .ending-options")
+    if ____opt_174 ~= nil then
+        ____opt_174:append(endingButton)
     end
     local function open(self)
-        local ____opt_221 = window.Game
-        if ____opt_221 ~= nil then
-            ____opt_221 = ____opt_221.pause
+        local ____opt_243 = window.Game
+        if ____opt_243 ~= nil then
+            ____opt_243 = ____opt_243.pause
         end
-        if ____opt_221 ~= nil then
-            ____opt_221(____opt_221)
+        if ____opt_243 ~= nil then
+            ____opt_243(____opt_243)
         end
         render(nil)
     end
     local function close(self)
-        local ____opt_225 = window.Game
-        if ____opt_225 ~= nil then
-            ____opt_225 = ____opt_225.resume
+        local ____opt_247 = window.Game
+        if ____opt_247 ~= nil then
+            ____opt_247 = ____opt_247.resume
         end
-        if ____opt_225 ~= nil then
-            ____opt_225(____opt_225)
+        if ____opt_247 ~= nil then
+            ____opt_247(____opt_247)
         end
     end
     __new(
@@ -1322,9 +1486,9 @@ local __O = {};
         end
     )
     window:addEventListener("sandbox-change", render)
-    local ____opt_229 = window.document:getElementById("soundBtn")
-    if ____opt_229 ~= nil then
-        ____opt_229:addEventListener(
+    local ____opt_251 = window.document:getElementById("soundBtn")
+    if ____opt_251 ~= nil then
+        ____opt_251:addEventListener(
             "click",
             function() return window:requestAnimationFrame(render) end
         )

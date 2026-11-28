@@ -7,6 +7,9 @@ local __call, __add, __iter, __assign, __hypot, __re, __re_replace = __JSR.__cal
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__Iterator = ____lualib.__TS__Iterator
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local __TS__Number = ____lualib.__TS__Number
 local ____exports = {}
 local __O = {};
@@ -122,7 +125,15 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(__TS__Spread(__iter(p))) else c:moveTo(__TS__Spread(__iter(p))) end
+            function(____, p, i)
+                local ____t_result_0
+                if __t(i) then
+                    ____t_result_0 = c:lineTo(__TS__Spread(__iter(p)))
+                else
+                    ____t_result_0 = c:moveTo(__TS__Spread(__iter(p)))
+                end
+                return ____t_result_0
+            end
         )
         c:closePath()
         __call(c, "fill")
@@ -135,7 +146,15 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(__TS__Spread(__iter(p))) else c:moveTo(__TS__Spread(__iter(p))) end
+            function(____, p, i)
+                local ____t_result_1
+                if __t(i) then
+                    ____t_result_1 = c:lineTo(__TS__Spread(__iter(p)))
+                else
+                    ____t_result_1 = c:moveTo(__TS__Spread(__iter(p)))
+                end
+                return ____t_result_1
+            end
         )
         c.strokeStyle = color
         c.lineWidth = width
@@ -244,8 +263,8 @@ local __O = {};
                     c,
                     x,
                     y,
-                    if __mod(i, 3) == 0 then 1.4 else 0.7,
-                    if __mod(i, 3) == 0 then 1.4 else 0.7,
+                    __mod(i, 3) == 0 and 1.4 or 0.7,
+                    __mod(i, 3) == 0 and 1.4 or 0.7,
                     "#d5bdff"
                 )
                 c:restore()
@@ -262,7 +281,7 @@ local __O = {};
             while i < 190 do
                 local x = __mod(i * 191 + tick * 7, 960)
                 local y = __mod(i * i * 17 + tick * 31, 540)
-                c.fillStyle = if __t(__mod(i, 2)) then "#d3c2d9" else "#050509"
+                c.fillStyle = __t(__mod(i, 2)) and "#d3c2d9" or "#050509"
                 c:fillRect(
                     x,
                     y,
@@ -383,16 +402,16 @@ local __O = {};
                 math.min(2.9, h * 0.4),
                 "#fff2d9"
             )
-            local ____t_5 = __t
-            local ____opt_2 = window.Graphics
-            if ____opt_2 ~= nil then
-                ____opt_2 = ____opt_2.isLite
+            local ____t_7 = __t
+            local ____opt_4 = window.Graphics
+            if ____opt_4 ~= nil then
+                ____opt_4 = ____opt_4.isLite
             end
-            local ____opt_result_4
-            if ____opt_2 ~= nil then
-                ____opt_result_4 = ____opt_2(____opt_2)
+            local ____opt_result_6
+            if ____opt_4 ~= nil then
+                ____opt_result_6 = ____opt_4(____opt_4)
             end
-            if not ____t_5(____opt_result_4) then
+            if not ____t_7(____opt_result_6) then
                 c:save()
                 c:beginPath()
                 c:ellipse(
@@ -458,16 +477,16 @@ local __O = {};
                 )
             end
         end
-        local ____t_11 = __t
-        local ____opt_8 = window.Graphics
-        if ____opt_8 ~= nil then
-            ____opt_8 = ____opt_8.isLite
+        local ____t_13 = __t
+        local ____opt_10 = window.Graphics
+        if ____opt_10 ~= nil then
+            ____opt_10 = ____opt_10.isLite
         end
-        local ____opt_result_10
-        if ____opt_8 ~= nil then
-            ____opt_result_10 = ____opt_8(____opt_8)
+        local ____opt_result_12
+        if ____opt_10 ~= nil then
+            ____opt_result_12 = ____opt_10(____opt_10)
         end
-        if not ____t_11(____opt_result_10) then
+        if not ____t_13(____opt_result_12) then
             c:save()
             c:beginPath()
             c:moveTo(left + 5, y + 1)
@@ -517,24 +536,32 @@ local __O = {};
         local base = y - 9 - 18
         local outer = base - openness * 10
         local inner = base - openness * 27
-        stroke(
-            nil,
-            c,
-            if __lt(side, 0) then __arrL(
+        local ____stroke_16 = stroke
+        local ____c_15 = c
+        local ____lt_result_14
+        if __lt(side, 0) then
+            ____lt_result_14 = __arrL(
                 {
                     __arrL({left - 2, outer}, 2),
                     __arrL({x - 17, base - 6 - openness * 16}, 2),
                     __arrL({right - 1, inner}, 2)
                 },
                 3
-            ) else __arrL(
+            )
+        else
+            ____lt_result_14 = __arrL(
                 {
                     __arrL({left - 2, inner}, 2),
                     __arrL({x + 13, base - 6 - openness * 16}, 2),
                     __arrL({right - 1, outer}, 2)
                 },
                 3
-            ),
+            )
+        end
+        ____stroke_16(
+            nil,
+            ____c_15,
+            ____lt_result_14,
             "#251c1d",
             8
         )
@@ -756,10 +783,18 @@ local __O = {};
         c:save()
         c:translate(
             x,
-            y + math.sin(t * 1.65) * if __gt(o.fear, 0.5) then 0.5 else 1.5
+            y + math.sin(t * 1.65) * (__gt(o.fear, 0.5) and 0.5 or 1.5)
         )
         c:scale(s, s)
-        c:rotate(if __t(o.tilt) then o.tilt else 0)
+        local ____c_18 = c
+        local ____c_rotate_19 = c.rotate
+        local ____t_result_17
+        if __t(o.tilt) then
+            ____t_result_17 = o.tilt
+        else
+            ____t_result_17 = 0
+        end
+        ____c_rotate_19(____c_18, ____t_result_17)
         poly(
             nil,
             c,
@@ -1124,45 +1159,64 @@ local __O = {};
                 1
             )
         end
-        local blink = if __gt(o.fear, 0.4) then 0 else clamp(
+        local blink = __gt(o.fear, 0.4) and 0 or clamp(
             nil,
             1 - math.abs(t - 3.9) / 0.18
         )
-        local look = if __gt(o.fear, 0.4) then 0 else -2.5
-        eye(
+        local look = __gt(o.fear, 0.4) and 0 or -2.5
+        local ____eye_22 = eye
+        local ____array_21 = __TS__SparseArrayNew(
             nil,
             c,
             -48,
             13,
-            -1,
-            if __t(o.fear) then o.fear else 0,
-            if __gt(o.fear, 0.5) then 0.42 else 0.9,
+            -1
+        )
+        local ____t_result_20
+        if __t(o.fear) then
+            ____t_result_20 = o.fear
+        else
+            ____t_result_20 = 0
+        end
+        __TS__SparseArrayPush(
+            ____array_21,
+            ____t_result_20,
+            __gt(o.fear, 0.5) and 0.42 or 0.9,
             t,
             look,
             blink
         )
-        eye(
+        ____eye_22(__TS__SparseArraySpread(____array_21))
+        local ____eye_25 = eye
+        local ____c_24 = c
+        local ____t_result_23
+        if __t(o.fear) then
+            ____t_result_23 = o.fear
+        else
+            ____t_result_23 = 0
+        end
+        ____eye_25(
             nil,
-            c,
+            ____c_24,
             47,
             10,
             1,
-            if __t(o.fear) then o.fear else 0,
-            if __gt(o.fear, 0.5) then 0.42 else 0.9,
+            ____t_result_23,
+            __gt(o.fear, 0.5) and 0.42 or 0.9,
             t,
             look,
             blink
         )
-        local ____t_17 = __t
-        local ____opt_14 = window.Graphics
-        if ____opt_14 ~= nil then
-            ____opt_14 = ____opt_14.isLite
+        local ____t_31 = __t
+        local ____opt_28 = window.Graphics
+        if ____opt_28 ~= nil then
+            ____opt_28 = ____opt_28.isLite
         end
-        local ____opt_result_16
-        if ____opt_14 ~= nil then
-            ____opt_result_16 = ____opt_14(____opt_14)
+        local ____opt_result_30
+        if ____opt_28 ~= nil then
+            ____opt_result_30 = ____opt_28(____opt_28)
         end
-        if not ____t_17(____opt_result_16) then
+        if not ____t_31(____opt_result_30) then
             c:save()
             c:beginPath()
             __call(
@@ -1182,13 +1236,21 @@ local __O = {};
                     10
                 ),
                 "forEach",
-                function(____, p, i) return if __t(i) then c:lineTo(
-                    __get(p, 0),
-                    __get(p, 1)
-                ) else c:moveTo(
-                    __get(p, 0),
-                    __get(p, 1)
-                ) end
+                function(____, p, i)
+                    local ____t_result_32
+                    if __t(i) then
+                        ____t_result_32 = c:lineTo(
+                            __get(p, 0),
+                            __get(p, 1)
+                        )
+                    else
+                        ____t_result_32 = c:moveTo(
+                            __get(p, 0),
+                            __get(p, 1)
+                        )
+                    end
+                    return ____t_result_32
+                end
             )
             c:closePath()
             c:clip()
@@ -1403,7 +1465,16 @@ local __O = {};
             )
             c:restore()
         end
-        hat(nil, c, t, if __t(o.hatTilt) then o.hatTilt else 0)
+        local ____hat_36 = hat
+        local ____c_34 = c
+        local ____t_35 = t
+        local ____t_result_33
+        if __t(o.hatTilt) then
+            ____t_result_33 = o.hatTilt
+        else
+            ____t_result_33 = 0
+        end
+        ____hat_36(nil, ____c_34, ____t_35, ____t_result_33)
         c:restore()
     end
     local function palm(self, c, x, y, s, rotation)
@@ -1506,12 +1577,35 @@ local __O = {};
         end
         c:save()
         c:translate(x, y)
-        c:rotate(if __t(o.angle) then o.angle else 0)
+        local ____c_38 = c
+        local ____c_rotate_39 = c.rotate
+        local ____t_result_37
+        if __t(o.angle) then
+            ____t_result_37 = o.angle
+        else
+            ____t_result_37 = 0
+        end
+        ____c_rotate_39(____c_38, ____t_result_37)
         c:scale(scale, scale)
-        c:transform(
+        local ____c_42 = c
+        local ____c_transform_43 = c.transform
+        local ____t_result_40
+        if __t(o.skew) then
+            ____t_result_40 = o.skew
+        else
+            ____t_result_40 = 0
+        end
+        local ____t_result_41
+        if __t(o.perspective) then
+            ____t_result_41 = o.perspective
+        else
+            ____t_result_41 = 0
+        end
+        ____c_transform_43(
+            ____c_42,
             1,
-            if __t(o.skew) then o.skew else 0,
-            if __t(o.perspective) then o.perspective else 0,
+            ____t_result_40,
+            ____t_result_41,
             1,
             0,
             0
@@ -1530,7 +1624,7 @@ local __O = {};
         end
         c:save()
         c.shadowColor = "#8163b8"
-        c.shadowBlur = if __t(o.glow) then 28 else 8
+        c.shadowBlur = __t(o.glow) and 28 or 8
         c.fillStyle = "#15141e"
         c:fillRect(-w / 2 - 5, -h / 2 + 8, w + 12, h + 4)
         c:restore()
@@ -1596,7 +1690,7 @@ local __O = {};
         text(
             nil,
             c,
-            if __t(o.concealCaller) then "…" else "JORGE",
+            __t(o.concealCaller) and "…" or "JORGE",
             0,
             -81,
             38,
@@ -1650,11 +1744,19 @@ local __O = {};
                 132,
                 24,
                 24,
-                if side < 0 then "#9f4859" else "#4a8b74"
+                side < 0 and "#9f4859" or "#4a8b74"
             )
             c:save()
             c:translate(xx, 132)
-            c:rotate(if side < 0 then math.pi else 0)
+            local ____c_45 = c
+            local ____c_rotate_46 = c.rotate
+            local ____temp_44
+            if side < 0 then
+                ____temp_44 = math.pi
+            else
+                ____temp_44 = 0
+            end
+            ____c_rotate_46(____c_45, ____temp_44)
             stroke(
                 nil,
                 c,
@@ -1677,7 +1779,7 @@ local __O = {};
             text(
                 nil,
                 c,
-                if side < 0 then "Recusar" else "Atender",
+                side < 0 and "Recusar" or "Atender",
                 xx,
                 168,
                 10,
@@ -2118,10 +2220,16 @@ local __O = {};
         end
         local dx = __get(b, 0) - __get(a, 0)
         local dy = __get(b, 1) - __get(a, 1)
-        local ____t_19 = __t
-        local ____hypot_result_18 = __hypot(dx, dy)
-        __O[700] = ____hypot_result_18
-        local len = if ____t_19(____hypot_result_18) then __O[700] else 1
+        local ____t_result_49
+        local ____t_48 = __t
+        local ____hypot_result_47 = __hypot(dx, dy)
+        __O[705] = ____hypot_result_47
+        if ____t_48(____hypot_result_47) then
+            ____t_result_49 = __O[705]
+        else
+            ____t_result_49 = 1
+        end
+        local len = ____t_result_49
         local nx = -dy / len
         local ny = dx / len
         local function edge(____, p, w, side)
@@ -2159,7 +2267,7 @@ local __O = {};
                 },
                 4
             ),
-            if __t(near) then "#435570" else "#2e3c52"
+            __t(near) and "#435570" or "#2e3c52"
         )
         stroke(
             nil,
@@ -2193,7 +2301,7 @@ local __O = {};
                 },
                 2
             ),
-            if __t(near) then "#718096" else "#4d5b73",
+            __t(near) and "#718096" or "#4d5b73",
             2
         )
     end
@@ -2238,7 +2346,7 @@ local __O = {};
                 },
                 6
             ),
-            if __t(near) then "#a9b8c7" else "#738396"
+            __t(near) and "#a9b8c7" or "#738396"
         )
         stroke(
             nil,
@@ -2250,7 +2358,7 @@ local __O = {};
                 },
                 2
             ),
-            if __t(near) then "#d8d9d8" else "#9cabb9",
+            __t(near) and "#d8d9d8" or "#9cabb9",
             3
         )
         stroke(
@@ -2879,25 +2987,44 @@ local __O = {};
         c.imageSmoothingEnabled = true
         c.fillStyle = "#020207"
         c:fillRect(0, 0, 960, 540)
-        local shot = __get(
+        local ____get_51 = __get
+        local ____t_result_50
+        if __t(s.index) then
+            ____t_result_50 = s.index
+        else
+            ____t_result_50 = 0
+        end
+        local shot = ____get_51(
             SHOTS,
             clamp(
                 nil,
-                math.floor(if __t(s.index) then s.index else 0),
+                math.floor(____t_result_50),
                 0,
                 __len(SHOTS) - 1
             )
         )
-        local ____t_21 = __t
-        local ____TS__Number_result_20 = __TS__Number(s.time)
-        __O[701] = ____TS__Number_result_20
-        local t = math.max(0, if ____t_21(____TS__Number_result_20) then __O[701] else 0)
+        local ____t_result_54
+        local ____t_53 = __t
+        local ____TS__Number_result_52 = __TS__Number(s.time)
+        __O[706] = ____TS__Number_result_52
+        if ____t_53(____TS__Number_result_52) then
+            ____t_result_54 = __O[706]
+        else
+            ____t_result_54 = 0
+        end
+        local t = math.max(0, ____t_result_54)
         local p = clamp(nil, t / shot.duration)
         local u = smooth(nil, p)
-        local ____t_23 = __t
-        local ____TS__Number_result_22 = __TS__Number(s.elapsed)
-        __O[702] = ____TS__Number_result_22
-        local elapsed = if ____t_23(____TS__Number_result_22) then __O[702] else t
+        local ____t_result_57
+        local ____t_56 = __t
+        local ____TS__Number_result_55 = __TS__Number(s.elapsed)
+        __O[707] = ____TS__Number_result_55
+        if ____t_56(____TS__Number_result_55) then
+            ____t_result_57 = __O[707]
+        else
+            ____t_result_57 = t
+        end
+        local elapsed = ____t_result_57
         if shot.id == "eyes" then
             drawEnd(nil, c, t)
             c:restore()
@@ -3119,7 +3246,13 @@ local __O = {};
             c:restore()
             local fall = clamp(nil, t / 1.95)
             local drop = fall * fall
-            local bounce = if t > 1.95 then math.sin(clamp(nil, (t - 1.95) / 0.38) * math.pi) * 8 else 0
+            local ____temp_58
+            if t > 1.95 then
+                ____temp_58 = math.sin(clamp(nil, (t - 1.95) / 0.38) * math.pi) * 8
+            else
+                ____temp_58 = 0
+            end
+            local bounce = ____temp_58
             local y = lerp(nil, 120, 461, drop) - bounce
             local spin = lerp(
                 nil,
@@ -3207,16 +3340,22 @@ local __O = {};
         }
     end
     local function beat(self, s)
-        local ____t_28 = __t
-        local ____opt_result_26
+        local ____t_result_64
+        local ____t_63 = __t
+        local ____opt_result_61
         if s ~= nil then
-            ____opt_result_26 = s.index
+            ____opt_result_61 = s.index
         end
-        local ____TS__Number_result_27 = __TS__Number(____opt_result_26)
-        __O[703] = ____TS__Number_result_27
+        local ____TS__Number_result_62 = __TS__Number(____opt_result_61)
+        __O[708] = ____TS__Number_result_62
+        if ____t_63(____TS__Number_result_62) then
+            ____t_result_64 = __O[708]
+        else
+            ____t_result_64 = 0
+        end
         local index = clamp(
             nil,
-            math.floor(if ____t_28(____TS__Number_result_27) then __O[703] else 0),
+            math.floor(____t_result_64),
             0,
             __len(SHOTS) - 1
         )
@@ -3232,11 +3371,17 @@ local __O = {};
         )
     end
     local function advance(self, s)
-        local ____t_31 = __t
-        local ____t_30 = __t
-        local ____temp_29 = not __t(s)
-        __O[704] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then __O[704] else s.done) then
+        local ____t_68 = __t
+        local ____t_result_67
+        local ____t_66 = __t
+        local ____temp_65 = not __t(s)
+        __O[709] = ____temp_65
+        if ____t_66(____temp_65) then
+            ____t_result_67 = __O[709]
+        else
+            ____t_result_67 = s.done
+        end
+        if ____t_68(____t_result_67) then
             return false
         end
         if __ge(
@@ -3251,19 +3396,39 @@ local __O = {};
         return true
     end
     local function update(self, s, dt)
-        local ____t_34 = __t
-        local ____t_33 = __t
-        local ____temp_32 = not __t(s)
-        __O[705] = ____temp_32
-        if ____t_34(if ____t_33(____temp_32) then __O[705] else s.done) then
+        local ____t_72 = __t
+        local ____t_result_71
+        local ____t_70 = __t
+        local ____temp_69 = not __t(s)
+        __O[710] = ____temp_69
+        if ____t_70(____temp_69) then
+            ____t_result_71 = __O[710]
+        else
+            ____t_result_71 = s.done
+        end
+        if ____t_72(____t_result_71) then
             return
         end
-        local ____t_36 = __t
-        local ____TS__Number_result_35 = __TS__Number(dt)
-        __O[706] = ____TS__Number_result_35
-        dt = clamp(nil, if ____t_36(____TS__Number_result_35) then __O[706] else 0, 0, 0.1)
+        local ____t_result_75
+        local ____t_74 = __t
+        local ____TS__Number_result_73 = __TS__Number(dt)
+        __O[711] = ____TS__Number_result_73
+        if ____t_74(____TS__Number_result_73) then
+            ____t_result_75 = __O[711]
+        else
+            ____t_result_75 = 0
+        end
+        dt = clamp(nil, ____t_result_75, 0, 0.1)
         s.time = __add(s.time, dt)
-        s.elapsed = __add(if __t(s.elapsed) then s.elapsed else 0, dt)
+        local ____s_78 = s
+        local ____add_77 = __add
+        local ____t_result_76
+        if __t(s.elapsed) then
+            ____t_result_76 = s.elapsed
+        else
+            ____t_result_76 = 0
+        end
+        ____s_78.elapsed = ____add_77(____t_result_76, dt)
         while __t(__ge(
             s.time,
             __get(SHOTS, s.index).duration

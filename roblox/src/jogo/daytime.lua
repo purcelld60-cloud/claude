@@ -181,6 +181,7 @@ local __O = {};
     end
     local listeners = __arrL({}, 0)
     local function current()
+        local ____t_result_2
         local ____t_1 = __t
         local ____call_result_0 = __call(
             MODES,
@@ -188,7 +189,12 @@ local __O = {};
             function(____, m) return m.id == mode end
         )
         __O[46] = ____call_result_0
-        return if ____t_1(____call_result_0) then __O[46] else __get(MODES, 0)
+        if ____t_1(____call_result_0) then
+            ____t_result_2 = __O[46]
+        else
+            ____t_result_2 = __get(MODES, 0)
+        end
+        return ____t_result_2
     end
     local function hour(self)
         if forced ~= nil then
@@ -218,9 +224,27 @@ local __O = {};
             0,
             math.min(1, (h - a.h) / (b.h - a.h))
         )
-        local sunT = if __t(__gt(h, 5.8) and __lt(h, 18.7)) then (h - 5.8) / 12.9 else nil
-        local mh = if __lt(h, 12) then h + 24 else h
-        local moonT = if __t(__gt(mh, 18.8) and __lt(mh, 29.6)) then (mh - 18.8) / 10.8 else nil
+        local ____t_result_3
+        if __t(__gt(h, 5.8) and __lt(h, 18.7)) then
+            ____t_result_3 = (h - 5.8) / 12.9
+        else
+            ____t_result_3 = nil
+        end
+        local sunT = ____t_result_3
+        local ____lt_result_4
+        if __lt(h, 12) then
+            ____lt_result_4 = h + 24
+        else
+            ____lt_result_4 = h
+        end
+        local mh = ____lt_result_4
+        local ____t_result_5
+        if __t(__gt(mh, 18.8) and __lt(mh, 29.6)) then
+            ____t_result_5 = (mh - 18.8) / 10.8
+        else
+            ____t_result_5 = nil
+        end
+        local moonT = ____t_result_5
         return {
             h = h,
             top = mix(nil, a.top, b.top, k),
@@ -277,13 +301,19 @@ local __O = {};
                 end
             end,
             force = function(____, h)
-                forced = if __t(h == nil or h == nil) then nil else __mod(
-                    __mod(
-                        __TS__Number(h),
+                local ____t_result_6
+                if __t(h == nil or h == nil) then
+                    ____t_result_6 = nil
+                else
+                    ____t_result_6 = __mod(
+                        __mod(
+                            __TS__Number(h),
+                            24
+                        ) + 24,
                         24
-                    ) + 24,
-                    24
-                )
+                    )
+                end
+                forced = ____t_result_6
             end
         },
         "hour,state,next,mode,label,describe,onChange,force"

@@ -433,35 +433,67 @@ local __O = {};
     local directionAngle = __ord({neutral = -0.12, side = -0.12, up = -math.pi / 2, down = math.pi / 2}, "neutral,side,up,down")
     local dirNames = __ord({neutral = "", side = " · lateral", up = " · alto", down = " · baixo"}, "neutral,side,up,down")
     local function identity(self, id)
+        local ____t_result_2
         local ____t_1 = __t
         local ____callq_result_0 = __callq(window.ArenaRoster, "get", id)
-        __O[2504] = ____callq_result_0
-        return if ____t_1(____callq_result_0) then __O[2504] else {
-            id = "daroca",
-            physical = "Cotovelada do chapéu",
-            ranged = "Papel propulsor",
-            combo = "Trinca do feijão",
-            color = "#e8a35d",
-            quote = "Bora pra resenha!"
-        }
+        __O[2509] = ____callq_result_0
+        if ____t_1(____callq_result_0) then
+            ____t_result_2 = __O[2509]
+        else
+            ____t_result_2 = {
+                id = "daroca",
+                physical = "Cotovelada do chapéu",
+                ranged = "Papel propulsor",
+                combo = "Trinca do feijão",
+                color = "#e8a35d",
+                quote = "Bora pra resenha!"
+            }
+        end
+        return ____t_result_2
     end
     local function base(self, id, kind, direction)
         local k = identity(nil, id)
-        id = if __t(__call(profile, "hasOwnProperty", id)) then id else "daroca"
-        direction = if __t(__call(directions, "includes", direction)) then direction else "neutral"
-        return {
-            id = __add(
+        local ____t_result_3
+        if __t(__call(profile, "hasOwnProperty", id)) then
+            ____t_result_3 = id
+        else
+            ____t_result_3 = "daroca"
+        end
+        id = ____t_result_3
+        local ____t_result_4
+        if __t(__call(directions, "includes", direction)) then
+            ____t_result_4 = direction
+        else
+            ____t_result_4 = "neutral"
+        end
+        direction = ____t_result_4
+        local ____add_result_8 = __add(
+            __add(
                 __add(
-                    __add(
-                        __add(id, "."),
-                        kind
-                    ),
-                    "."
+                    __add(id, "."),
+                    kind
                 ),
-                direction
+                "."
             ),
-            name = __add(
-                if kind == "physical" then k.physical else if kind == "ranged" then k.ranged else k.combo,
+            direction
+        )
+        local ____add_7 = __add
+        local ____temp_6
+        if kind == "physical" then
+            ____temp_6 = k.physical
+        else
+            local ____temp_5
+            if kind == "ranged" then
+                ____temp_5 = k.ranged
+            else
+                ____temp_5 = k.combo
+            end
+            ____temp_6 = ____temp_5
+        end
+        return {
+            id = ____add_result_8,
+            name = ____add_7(
+                ____temp_6,
                 __get(dirNames, direction)
             ),
             character = id,
@@ -484,10 +516,16 @@ local __O = {};
         }
     end
     local function physical(self, id, dir, options)
-        local ____t_3 = __t
-        local ____get_result_2 = __get(profile, id)
-        __O[2505] = ____get_result_2
-        local def = if ____t_3(____get_result_2) then __O[2505] else profile.daroca
+        local ____t_result_11
+        local ____t_10 = __t
+        local ____get_result_9 = __get(profile, id)
+        __O[2510] = ____get_result_9
+        if ____t_10(____get_result_9) then
+            ____t_result_11 = __O[2510]
+        else
+            ____t_result_11 = profile.daroca
+        end
+        local def = ____t_result_11
         local p = def.physical
         local d = base(nil, id, "physical", dir)
         d.damage = __get(p, 0)
@@ -495,10 +533,10 @@ local __O = {};
         d.reach = __get(p, 2)
         d.shape = __get(p, 3)
         d.knockback = 210 + (__get(p, 0) - 9) * 18
-        d.windup = if __ge(
+        d.windup = __ge(
             __get(p, 0),
             12
-        ) then 0.12 else if __get(p, 0) == 11 then 0.1 else 0.075
+        ) and 0.12 or (__get(p, 0) == 11 and 0.1 or 0.075)
         d.recovery = d.cooldown - d.windup - d.duration
         d.effects = __arrL({d.shape}, 1)
         if dir == "side" then
@@ -525,17 +563,17 @@ local __O = {};
             )
         end
         if id == "menezes" then
-            d.effects = __arrL({"claws", if dir == "up" then "scratch-up" else "scratch"}, 2)
+            d.effects = __arrL({"claws", dir == "up" and "scratch-up" or "scratch"}, 2)
             d.radius = 21
         end
         if id == "lucas" then
-            d.angle = if dir == "up" then -1.4 else if dir == "down" then 1.15 else -0.06
+            d.angle = dir == "up" and -1.4 or (dir == "down" and 1.15 or -0.06)
             d.radius = 20
             d.effects = __arrL({"lowblow", "frog-star"}, 2)
         end
         if id == "mota" then
             d.effects = __arrL({"football-touch"}, 1)
-            d.self = {vx = if dir == "side" then 56 else 0}
+            d.self = {vx = dir == "side" and 56 or 0}
         end
         if __t(__call(
             __arrL({
@@ -587,10 +625,16 @@ local __O = {};
         return d
     end
     local function ranged(self, id, dir, options)
-        local ____t_5 = __t
-        local ____get_result_4 = __get(profile, id)
-        __O[2506] = ____get_result_4
-        local def = if ____t_5(____get_result_4) then __O[2506] else profile.daroca
+        local ____t_result_14
+        local ____t_13 = __t
+        local ____get_result_12 = __get(profile, id)
+        __O[2511] = ____get_result_12
+        if ____t_13(____get_result_12) then
+            ____t_result_14 = __O[2511]
+        else
+            ____t_result_14 = profile.daroca
+        end
+        local def = ____t_result_14
         local p = def.ranged
         local d = base(nil, id, "ranged", dir)
         d.damage = __get(p, 0)
@@ -602,13 +646,13 @@ local __O = {};
         d.recovery = math.max(0.15, d.cooldown - 0.29)
         d.knockback = 185
         d.shape = __get(p, 2)
-        d.angle = if dir == "up" then -1.28 else if dir == "down" then 1.16 else 0
+        d.angle = dir == "up" and -1.28 or (dir == "down" and 1.16 or 0)
         d.projectile = {
             type = __get(p, 2),
             motion = __get(p, 4),
             speed = __get(p, 3),
-            gravity = if __get(p, 4) == "arc" then 250 else 0,
-            life = if __get(p, 4) == "tether" then 0.5 else 1.5,
+            gravity = __get(p, 4) == "arc" and 250 or 0,
+            life = __get(p, 4) == "tether" and 0.5 or 1.5,
             count = 1,
             spread = 0,
             radius = d.radius,
@@ -616,11 +660,17 @@ local __O = {};
             boomerang = __get(p, 4) == "return",
             maxHits = 1
         }
-        local ____t_8 = __t
-        local ____t_7 = __t
-        local ____temp_6 = __get(p, 4) == "arc" and dir ~= "up"
-        __O[2507] = ____temp_6
-        if ____t_8(if ____t_7(____temp_6) then dir ~= "down" else __O[2507]) then
+        local ____t_18 = __t
+        local ____t_result_17
+        local ____t_16 = __t
+        local ____temp_15 = __get(p, 4) == "arc" and dir ~= "up"
+        __O[2512] = ____temp_15
+        if ____t_16(____temp_15) then
+            ____t_result_17 = dir ~= "down"
+        else
+            ____t_result_17 = __O[2512]
+        end
+        if ____t_18(____t_result_17) then
             d.angle = -0.22
         end
         if __get(p, 4) == "return" then
@@ -630,34 +680,34 @@ local __O = {};
             d.effects = __arrL({"return-trail"}, 1)
         end
         if id == "lucas" then
-            local ____d_projectile_9 = d.projectile
+            local ____d_projectile_19 = d.projectile
             d.slow = 1.35
-            ____d_projectile_9.slow = 1.35
-            local ____d_projectile_10 = d.projectile
+            ____d_projectile_19.slow = 1.35
+            local ____d_projectile_20 = d.projectile
             d.slowFactor = 0.7
-            ____d_projectile_10.slowFactor = 0.7
+            ____d_projectile_20.slowFactor = 0.7
             d.projectile.life = 0.5
             d.projectile.radius = 11
             d.effects = __arrL({"tongue-tether"}, 1)
             d.knockback = 135
         end
         if id == "nikolas" then
-            local ____d_projectile_11 = d.projectile
+            local ____d_projectile_21 = d.projectile
             d.slow = 0.85
-            ____d_projectile_11.slow = 0.85
-            local ____d_projectile_12 = d.projectile
+            ____d_projectile_21.slow = 0.85
+            local ____d_projectile_22 = d.projectile
             d.slowFactor = 0.78
-            ____d_projectile_12.slowFactor = 0.78
+            ____d_projectile_22.slowFactor = 0.78
             d.projectile.gravity = 200
             d.effects = __arrL({"nose-charge", "slime"}, 2)
         end
         if id == "dede" then
-            local ____d_projectile_13 = d.projectile
+            local ____d_projectile_23 = d.projectile
             d.slow = 0.9
-            ____d_projectile_13.slow = 0.9
-            local ____d_projectile_14 = d.projectile
+            ____d_projectile_23.slow = 0.9
+            local ____d_projectile_24 = d.projectile
             d.slowFactor = 0.76
-            ____d_projectile_14.slowFactor = 0.76
+            ____d_projectile_24.slowFactor = 0.76
             d.effects = __arrL({"smoke-ring"}, 1)
             d.projectile.radius = 13
         end
@@ -671,12 +721,12 @@ local __O = {};
             )
         end
         if id == "mota" then
-            local ____d_projectile_15 = d.projectile
+            local ____d_projectile_25 = d.projectile
             d.returnGain = 8
-            ____d_projectile_15.returnGain = 8
-            d.projectile.returnAfter = if dir == "up" then 0.62 else 0.48
-            d.projectile.gravity = if dir == "up" then 380 else if dir == "down" then 340 else 175
-            d.angle = if dir == "up" then -1.1 else if dir == "down" then 1.16 else if dir == "side" then -0.08 else -0.32
+            ____d_projectile_25.returnGain = 8
+            d.projectile.returnAfter = dir == "up" and 0.62 or 0.48
+            d.projectile.gravity = dir == "up" and 380 or (dir == "down" and 340 or 175)
+            d.angle = dir == "up" and -1.1 or (dir == "down" and 1.16 or (dir == "side" and -0.08 or -0.32))
             d.effects = __arrL({"football-launch", "aura-catch"}, 2)
         end
         if id == "igor" then
@@ -688,7 +738,7 @@ local __O = {};
         if id == "caleb" then
             d.projectile.radius = 12
             d.projectile.gravity = 320
-            d.angle = if dir == "up" then -1.22 else if dir == "down" then 1.18 else -0.28
+            d.angle = dir == "up" and -1.22 or (dir == "down" and 1.18 or -0.28)
             d.effects = __arrL({"weight-spin"}, 1)
             d.knockback = 210
         end
@@ -700,7 +750,7 @@ local __O = {};
         end
         if id == "ravid" then
             d.text = "Ó PRA RAVID FALANDO SOZINHO"
-            d.projectile.text = if dir == "up" then "MAS VEJA BEM" else if dir == "down" then "EU DISSE" else "FALANDO SOZINHO"
+            d.projectile.text = dir == "up" and "MAS VEJA BEM" or (dir == "down" and "EU DISSE" or "FALANDO SOZINHO")
             d.projectile.radius = 12
         end
         if id == "menezes" then
@@ -740,7 +790,7 @@ local __O = {};
         )) then
             d.effects = __arrL({"heel-spin", "deboche"}, 2)
             d.projectile.radius = 11
-            d.projectile.gravity = if dir == "up" then 110 else 0
+            d.projectile.gravity = dir == "up" and 110 or 0
             d.projectile.variant = id
         end
         return d
@@ -761,10 +811,16 @@ local __O = {};
         }, extra)
     end
     local function combo(self, id, dir, options)
-        local ____t_17 = __t
-        local ____get_result_16 = __get(profile, id)
-        __O[2508] = ____get_result_16
-        local def = if ____t_17(____get_result_16) then __O[2508] else profile.daroca
+        local ____t_result_28
+        local ____t_27 = __t
+        local ____get_result_26 = __get(profile, id)
+        __O[2513] = ____get_result_26
+        if ____t_27(____get_result_26) then
+            ____t_result_28 = __O[2513]
+        else
+            ____t_result_28 = profile.daroca
+        end
+        local def = ____t_result_28
         local d = base(nil, id, "combo", dir)
         d.damage = 32
         d.knockback = 745
@@ -1242,15 +1298,27 @@ local __O = {};
         until true
         d.finisher = f
         if __t(dir == "up" or dir == "down") then
-            local vertical = if dir == "up" then -1 else 1
+            local vertical = dir == "up" and -1 or 1
             for ____, h in __iterar((f.hits)) do
-                local ____t_19 = __t
-                local ____math_abs_result_18 = math.abs(h.dx)
-                __O[2509] = ____math_abs_result_18
-                local reach = if ____t_19(____math_abs_result_18) then __O[2509] else 51
+                local ____t_result_31
+                local ____t_30 = __t
+                local ____math_abs_result_29 = math.abs(h.dx)
+                __O[2514] = ____math_abs_result_29
+                if ____t_30(____math_abs_result_29) then
+                    ____t_result_31 = __O[2514]
+                else
+                    ____t_result_31 = 51
+                end
+                local reach = ____t_result_31
                 h.dx = 0
                 h.dy = -35 + vertical * reach
-                h.angle = if dir == "up" then -math.pi / 2 else math.pi / 2
+                local ____temp_32
+                if dir == "up" then
+                    ____temp_32 = -math.pi / 2
+                else
+                    ____temp_32 = math.pi / 2
+                end
+                h.angle = ____temp_32
                 h.radius = math.max(35, h.radius)
             end
             d.angle = __get(directionAngle, dir)
@@ -1267,29 +1335,65 @@ local __O = {};
         if options == nil then
             options = {}
         end
-        local id = if __t(__call(profile, "hasOwnProperty", character)) then character else "daroca"
-        local dir = if __t(__call(directions, "includes", direction)) then direction else "neutral"
-        local result = if kind == "combo" then combo(nil, id, dir, options) else if kind == "ranged" then ranged(nil, id, dir, options) else physical(nil, id, dir, options)
-        result.facing = if __TS__Number(options.facing) < 0 then -1 else 1
+        local ____t_result_33
+        if __t(__call(profile, "hasOwnProperty", character)) then
+            ____t_result_33 = character
+        else
+            ____t_result_33 = "daroca"
+        end
+        local id = ____t_result_33
+        local ____t_result_34
+        if __t(__call(directions, "includes", direction)) then
+            ____t_result_34 = direction
+        else
+            ____t_result_34 = "neutral"
+        end
+        local dir = ____t_result_34
+        local ____temp_36
+        if kind == "combo" then
+            ____temp_36 = combo(nil, id, dir, options)
+        else
+            local ____temp_35
+            if kind == "ranged" then
+                ____temp_35 = ranged(nil, id, dir, options)
+            else
+                ____temp_35 = physical(nil, id, dir, options)
+            end
+            ____temp_36 = ____temp_35
+        end
+        local result = ____temp_36
+        result.facing = __TS__Number(options.facing) < 0 and -1 or 1
         result.airborne = not not __t(options.airborne)
         return result
     end
     local function stats(self, character)
-        local id = if __t(__call(profile, "hasOwnProperty", character)) then character else "daroca"
+        local ____t_result_37
+        if __t(__call(profile, "hasOwnProperty", character)) then
+            ____t_result_37 = character
+        else
+            ____t_result_37 = "daroca"
+        end
+        local id = ____t_result_37
         return {
-            speed = if id == "lucas" then 1.08 else 1,
+            speed = id == "lucas" and 1.08 or 1,
             weight = 1,
-            renderHeight = if id == "lucas" then 60 else 70,
-            hurtbox = {w = 34, h = if id == "lucas" then 60 else 70},
+            renderHeight = id == "lucas" and 60 or 70,
+            hurtbox = {w = 34, h = id == "lucas" and 60 or 70},
             stocks = 3,
             jumps = 2
         }
     end
     local function damageColor(self, damage)
-        local ____t_21 = __t
-        local ____TS__Number_result_20 = __TS__Number(damage)
-        __O[2510] = ____TS__Number_result_20
-        local n = math.max(0, if ____t_21(____TS__Number_result_20) then __O[2510] else 0)
+        local ____t_result_40
+        local ____t_39 = __t
+        local ____TS__Number_result_38 = __TS__Number(damage)
+        __O[2515] = ____TS__Number_result_38
+        if ____t_39(____TS__Number_result_38) then
+            ____t_result_40 = __O[2515]
+        else
+            ____t_result_40 = 0
+        end
+        local n = math.max(0, ____t_result_40)
         local stops = __arrL(
             {
                 __arrL(
@@ -1382,7 +1486,13 @@ local __O = {};
         return __isFiniteN(__TS__Number(hits)) and __TS__Number(hits) >= 3
     end
     local function budget(self, character)
-        local id = if __t(__call(profile, "hasOwnProperty", character)) then character else "daroca"
+        local ____t_result_41
+        if __t(__call(profile, "hasOwnProperty", character)) then
+            ____t_result_41 = character
+        else
+            ____t_result_41 = "daroca"
+        end
+        local id = ____t_result_41
         local p = __get(profile, id)
         local comboAttack = combo(nil, id, "neutral", {})
         return {

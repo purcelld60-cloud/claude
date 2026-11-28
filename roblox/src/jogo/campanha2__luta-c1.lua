@@ -36,75 +36,114 @@ local __O = {};
             o = {}
         end
         local k = __get(KIT, o.slug)
-        local ____t_13 = __t
+        local ____t_14 = __t
+        local ____t_result_13
         local ____t_8 = __t
+        local ____t_result_7
         local ____t_3 = __t
+        local ____t_result_2
         local ____t_1 = __t
         local ____temp_0 = not __t(k)
-        __O[954] = ____temp_0
-        local ____temp_2 = if ____t_1(____temp_0) then __O[954] else skin
-        __O[955] = ____temp_2
-        local ____t_6 = __t
-        local ____opt_4 = window.Game
-        if ____opt_4 ~= nil then
-            ____opt_4 = ____opt_4.startSandboxBoss
+        __O[959] = ____temp_0
+        if ____t_1(____temp_0) then
+            ____t_result_2 = __O[959]
+        else
+            ____t_result_2 = skin
         end
-        local ____temp_7 = if ____t_3(____temp_2) then __O[955] else not ____t_6(____opt_4)
-        __O[956] = ____temp_7
-        local ____t_12 = __t
-        local ____getq_11 = __getq
-        local ____opt_9 = window.ConquistaCombate
-        if ____opt_9 ~= nil then
-            ____opt_9 = ____opt_9.chefes
+        __O[960] = ____t_result_2
+        if ____t_3(____t_result_2) then
+            ____t_result_7 = __O[960]
+        else
+            local ____t_6 = __t
+            local ____opt_4 = window.Game
+            if ____opt_4 ~= nil then
+                ____opt_4 = ____opt_4.startSandboxBoss
+            end
+            ____t_result_7 = not ____t_6(____opt_4)
         end
-        if ____t_13(if ____t_8(____temp_7) then __O[956] else not ____t_12(____getq_11(____opt_9, o.slug))) then
+        __O[961] = ____t_result_7
+        if ____t_8(____t_result_7) then
+            ____t_result_13 = __O[961]
+        else
+            local ____t_12 = __t
+            local ____getq_11 = __getq
+            local ____opt_9 = window.ConquistaCombate
+            if ____opt_9 ~= nil then
+                ____opt_9 = ____opt_9.chefes
+            end
+            ____t_result_13 = not ____t_12(____getq_11(____opt_9, o.slug))
+        end
+        if ____t_14(____t_result_13) then
             return false
         end
         local fase = __get(window.CampanhaFases.FASES, o.slug)
-        local ____callq_18 = __callq
-        local ____opt_16 = window.CampanhaCenarios
-        if ____opt_16 ~= nil then
-            ____opt_16 = ____opt_16.lista
+        local ____callq_19 = __callq
+        local ____opt_17 = window.CampanhaCenarios
+        if ____opt_17 ~= nil then
+            ____opt_17 = ____opt_17.lista
         end
-        local ____opt_14 = ____callq_18(
-            ____opt_16,
+        local ____opt_15 = ____callq_19(
+            ____opt_17,
             "find",
             function(____, d) return d.id == o.cena end
         )
-        if ____opt_14 ~= nil then
-            ____opt_14 = ____opt_14.nome
+        if ____opt_15 ~= nil then
+            ____opt_15 = ____opt_15.nome
         end
-        local lugar = ____opt_14
+        local lugar = ____opt_15
+        local ____lugar_21 = lugar
+        local ____fase_chefe_nivel_22 = fase.chefe.nivel
+        local ____k_kit_23 = k.kit
+        local ____k_vida_24 = k.vida
+        local ____o_tipo_25 = o.tipo
+        local ____t_result_20
+        if __t(o.nome) then
+            ____t_result_20 = o.nome
+        else
+            ____t_result_20 = o.slug
+        end
         skin = {
-            lugar = lugar,
-            nivel = fase.chefe.nivel,
-            kit = k.kit,
-            vida = k.vida,
+            lugar = ____lugar_21,
+            nivel = ____fase_chefe_nivel_22,
+            kit = ____k_kit_23,
+            vida = ____k_vida_24,
             dano = 1.3,
-            tipo = o.tipo,
-            nome = if __t(o.nome) then o.nome else o.slug,
+            tipo = ____o_tipo_25,
+            nome = ____t_result_20,
             tema = o.slug,
             cena = o.cena,
             bossX = o.bossX
         }
-        local ____t_24 = __t
-        local ____opt_21 = window.CampanhaCenarios
-        if ____opt_21 ~= nil then
-            ____opt_21 = ____opt_21.largura
+        local ____t_result_32
+        local ____t_31 = __t
+        local ____opt_28 = window.CampanhaCenarios
+        if ____opt_28 ~= nil then
+            ____opt_28 = ____opt_28.largura
         end
-        local ____opt_result_23
-        if ____opt_21 ~= nil then
-            ____opt_result_23 = ____opt_21(____opt_21, o.cena)
+        local ____opt_result_30
+        if ____opt_28 ~= nil then
+            ____opt_result_30 = ____opt_28(____opt_28, o.cena)
         end
-        __O[957] = ____opt_result_23
-        local larg = if ____t_24(____opt_result_23) then __O[957] else 4000
-        local ____temp_27 = larg - 960
-        local ____t_26 = __t
-        local ____TS__Number_result_25 = __TS__Number(o.bossX)
-        __O[958] = ____TS__Number_result_25
+        __O[962] = ____opt_result_30
+        if ____t_31(____opt_result_30) then
+            ____t_result_32 = __O[962]
+        else
+            ____t_result_32 = 4000
+        end
+        local larg = ____t_result_32
+        local ____temp_36 = larg - 960
+        local ____t_result_35
+        local ____t_34 = __t
+        local ____TS__Number_result_33 = __TS__Number(o.bossX)
+        __O[963] = ____TS__Number_result_33
+        if ____t_34(____TS__Number_result_33) then
+            ____t_result_35 = __O[963]
+        else
+            ____t_result_35 = 480
+        end
         camBase = math.max(
             0,
-            math.min(____temp_27, if ____t_26(____TS__Number_result_25) then __O[958] else 480 - 480)
+            math.min(____temp_36, ____t_result_35 - 480)
         )
         cam0 = nil
         aoFim = fim
@@ -143,16 +182,16 @@ local __O = {};
             end
         end
         if __t(ok) then
-            local ____opt_31 = window.DayTime
-            if ____opt_31 ~= nil then
-                ____opt_31 = ____opt_31.force
+            local ____opt_40 = window.DayTime
+            if ____opt_40 ~= nil then
+                ____opt_40 = ____opt_40.force
             end
-            if ____opt_31 ~= nil then
-                local ____o_hora_29 = o.hora
-                if ____o_hora_29 == nil then
-                    ____o_hora_29 = fase.hora
+            if ____opt_40 ~= nil then
+                local ____o_hora_38 = o.hora
+                if ____o_hora_38 == nil then
+                    ____o_hora_38 = fase.hora
                 end
-                ____opt_31(____opt_31, ____o_hora_29)
+                ____opt_40(____opt_40, ____o_hora_38)
             end
         else
             skin = nil
@@ -165,23 +204,29 @@ local __O = {};
         "sandbox-change",
         function(____, e)
             local d = e.detail
-            local ____t_35 = __t
-            local ____t_34 = __t
-            local ____temp_33 = not __t(skin) or not __t(aoFim)
-            __O[959] = ____temp_33
-            if ____t_35(if ____t_34(____temp_33) then __O[959] else entrando) then
+            local ____t_45 = __t
+            local ____t_result_44
+            local ____t_43 = __t
+            local ____temp_42 = not __t(skin) or not __t(aoFim)
+            __O[964] = ____temp_42
+            if ____t_43(____temp_42) then
+                ____t_result_44 = __O[964]
+            else
+                ____t_result_44 = entrando
+            end
+            if ____t_45(____t_result_44) then
                 return
             end
             if not __t(d) then
                 local cb = aoFim
                 aoFim = nil
                 skin = nil
-                local ____opt_38 = window.DayTime
-                if ____opt_38 ~= nil then
-                    ____opt_38 = ____opt_38.force
+                local ____opt_48 = window.DayTime
+                if ____opt_48 ~= nil then
+                    ____opt_48 = ____opt_48.force
                 end
-                if ____opt_38 ~= nil then
-                    ____opt_38(____opt_38, nil)
+                if ____opt_48 ~= nil then
+                    ____opt_48(____opt_48, nil)
                 end
                 cb(nil, "recuou")
                 return
@@ -195,12 +240,12 @@ local __O = {};
             window:setTimeout(
                 function()
                     skin = nil
-                    local ____opt_42 = window.DayTime
-                    if ____opt_42 ~= nil then
-                        ____opt_42 = ____opt_42.force
+                    local ____opt_52 = window.DayTime
+                    if ____opt_52 ~= nil then
+                        ____opt_52 = ____opt_52.force
                     end
-                    if ____opt_42 ~= nil then
-                        ____opt_42(____opt_42, nil)
+                    if ____opt_52 ~= nil then
+                        ____opt_52(____opt_52, nil)
                     end
                     do
                         pcall(function()
@@ -208,10 +253,10 @@ local __O = {};
                         end)
                     end
                     if cb ~= nil then
-                        cb(nil, if r == "won" then "venceu" else if r == "retreat" then "recuou" else "perdeu")
+                        cb(nil, r == "won" and "venceu" or (r == "retreat" and "recuou" or "perdeu"))
                     end
                 end,
-                if r == "won" then 700 else 500
+                r == "won" and 700 or 500
             )
         end
     )
@@ -222,17 +267,23 @@ local __O = {};
         if cam0 == nil then
             cam0 = camera
         end
-        local ____t_51 = __t
-        local ____opt_48 = window.CampanhaCenarios
-        if ____opt_48 ~= nil then
-            ____opt_48 = ____opt_48.largura
+        local ____t_result_62
+        local ____t_61 = __t
+        local ____opt_58 = window.CampanhaCenarios
+        if ____opt_58 ~= nil then
+            ____opt_58 = ____opt_58.largura
         end
-        local ____opt_result_50
-        if ____opt_48 ~= nil then
-            ____opt_result_50 = ____opt_48(____opt_48, skin.cena)
+        local ____opt_result_60
+        if ____opt_58 ~= nil then
+            ____opt_result_60 = ____opt_58(____opt_58, skin.cena)
         end
-        __O[960] = ____opt_result_50
-        local larg = if ____t_51(____opt_result_50) then __O[960] else 4000
+        __O[965] = ____opt_result_60
+        if ____t_61(____opt_result_60) then
+            ____t_result_62 = __O[965]
+        else
+            ____t_result_62 = 4000
+        end
+        local larg = ____t_result_62
         local cx = math.max(
             0,
             math.min(larg - 960, camBase + (camera - cam0))
@@ -242,13 +293,13 @@ local __O = {};
                 return true, false
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____opt_54 = window.Art
-                if ____opt_54 ~= nil then
-                    ____opt_54 = ____opt_54.drawScene
+                local ____opt_65 = window.Art
+                if ____opt_65 ~= nil then
+                    ____opt_65 = ____opt_65.drawScene
                 end
-                if ____opt_54 ~= nil then
-                    ____opt_54(
-                        ____opt_54,
+                if ____opt_65 ~= nil then
+                    ____opt_65(
+                        ____opt_65,
                         ctx,
                         skin.cena,
                         cx,
@@ -285,9 +336,17 @@ local __O = {};
             1,
             2
         )
-        beep(
+        local ____beep_69 = beep
+        local ____hz_68 = hz
+        local ____temp_67
+        if slug == "jorge" then
+            ____temp_67 = fase * 24
+        else
+            ____temp_67 = 0
+        end
+        ____beep_69(
             nil,
-            hz + if slug == "jorge" then fase * 24 else 0,
+            ____hz_68 + ____temp_67,
             0.11,
             onda,
             0.023

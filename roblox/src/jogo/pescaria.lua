@@ -11,11 +11,17 @@ local __O = {};
 (function()
     local puxar, fundo, desenhar, tecla, fechar, LW, LH, TENTATIVAS, TAU, R, PEIXES, box, ctx, raf, j, aoFim, fundos
     function puxar(self)
-        local ____t_2 = __t
+        local ____t_3 = __t
+        local ____t_result_2
         local ____t_1 = __t
         local ____temp_0 = not __t(j)
-        __O[1346] = ____temp_0
-        if ____t_2(if ____t_1(____temp_0) then __O[1346] else j.fim) then
+        __O[1351] = ____temp_0
+        if ____t_1(____temp_0) then
+            ____t_result_2 = __O[1351]
+        else
+            ____t_result_2 = j.fim
+        end
+        if ____t_3(____t_result_2) then
             return
         end
         if j.fase == "mordeu" then
@@ -24,11 +30,17 @@ local __O = {};
                 PEIXES,
                 math.floor(math.random() * __len(PEIXES))
             )
-            local ____call_4 = __call
-            local ____temp_3 = if __t(j.peixesTipo) then j.peixesTipo else __arrL({}, 0)
-            j.peixesTipo = ____temp_3
-            ____call_4(
-                ____temp_3,
+            local ____call_6 = __call
+            local ____j_5 = j
+            local ____t_result_4
+            if __t(j.peixesTipo) then
+                ____t_result_4 = j.peixesTipo
+            else
+                ____t_result_4 = __arrL({}, 0)
+            end
+            ____j_5.peixesTipo = ____t_result_4
+            ____call_6(
+                ____t_result_4,
                 "push",
                 __get(j.ultimo, 0)
             )
@@ -48,7 +60,7 @@ local __O = {};
         end
     end
     function fundo(self, noite)
-        local k = if __t(noite) then "n" else "d"
+        local k = __t(noite) and "n" or "d"
         if __t(__get(fundos, k)) then
             return __get(fundos, k)
         end
@@ -59,23 +71,28 @@ local __O = {};
         local c = cvf:getContext("2d")
         c.imageSmoothingEnabled = false
         local function T(____, d, n)
-            return if __t(noite) then n else d
+            local ____t_result_19
+            if __t(noite) then
+                ____t_result_19 = n
+            else
+                ____t_result_19 = d
+            end
+            return ____t_result_19
         end
         local h = PK.hash
-        PK:faixas(
-            c,
-            0,
-            0,
-            LW,
-            104,
-            if __t(noite) then __arrL({
+        local ____PK_faixas_21 = PK.faixas
+        local ____t_result_20
+        if __t(noite) then
+            ____t_result_20 = __arrL({
                 "#0a1028",
                 "#0e1634",
                 "#121c3e",
                 "#18244a",
                 "#1e2c54",
                 "#26365e"
-            }, 6) else __arrL({
+            }, 6)
+        else
+            ____t_result_20 = __arrL({
                 "#4a92da",
                 "#5aa0e0",
                 "#6aaee6",
@@ -83,6 +100,15 @@ local __O = {};
                 "#90caf0",
                 "#a8d8f4"
             }, 6)
+        end
+        ____PK_faixas_21(
+            PK,
+            c,
+            0,
+            0,
+            LW,
+            104,
+            ____t_result_20
         )
         if __t(noite) then
             do
@@ -95,7 +121,7 @@ local __O = {};
                         h(nil, i + 9) * 80,
                         1,
                         1,
-                        if __t(__mod(i, 7)) then "#c8d0f0" else "#ffffff"
+                        __t(__mod(i, 7)) and "#c8d0f0" or "#ffffff"
                     )
                     i = i + 1
                 end
@@ -146,7 +172,7 @@ local __O = {};
                         36 + y,
                         w * 2,
                         1,
-                        if y < -3 then "#fffbe0" else "#fff2b0"
+                        y < -3 and "#fffbe0" or "#fff2b0"
                     )
                     y = y + 1
                 end
@@ -229,7 +255,7 @@ local __O = {};
                     y1,
                     1,
                     112 - y1,
-                    T(nil, if sobe < 0 then "#86a4b8" else "#6a8aa4", "#1e2a44")
+                    T(nil, sobe < 0 and "#86a4b8" or "#6a8aa4", "#1e2a44")
                 )
                 R(
                     nil,
@@ -261,10 +287,14 @@ local __O = {};
                     y2,
                     1,
                     112 - y2,
-                    T(nil, if __t(__mod(
-                        math.floor((x + y2) / 14),
-                        2
-                    )) then "#5a9a4e" else "#6aaa58", "#16281e")
+                    T(
+                        nil,
+                        __t(__mod(
+                            math.floor((x + y2) / 14),
+                            2
+                        )) and "#5a9a4e" or "#6aaa58",
+                        "#16281e"
+                    )
                 )
                 if __t(__mod(x, 4) == 0 and y2 + 4 < 108) then
                     R(
@@ -297,7 +327,7 @@ local __O = {};
                             y + yy,
                             w * 2,
                             1,
-                            T(nil, if yy < -r / 2 then "#4a8a40" else "#2f6a34", if yy < -r / 2 then "#1a3226" else "#12241a")
+                            T(nil, yy < -r / 2 and "#4a8a40" or "#2f6a34", yy < -r / 2 and "#1a3226" or "#12241a")
                         )
                         yy = yy + 1
                     end
@@ -384,7 +414,7 @@ local __O = {};
             96,
             6,
             6,
-            if __t(noite) then "#ffd27a" else "#5a7a9a"
+            __t(noite) and "#ffd27a" or "#5a7a9a"
         )
         R(
             nil,
@@ -395,13 +425,10 @@ local __O = {};
             10,
             T(nil, "#7a4a2a", "#1a1418")
         )
-        PK:faixas(
-            c,
-            0,
-            110,
-            LW,
-            160,
-            if __t(noite) then __arrL({
+        local ____PK_faixas_23 = PK.faixas
+        local ____t_result_22
+        if __t(noite) then
+            ____t_result_22 = __arrL({
                 "#1e3058",
                 "#1a2a50",
                 "#162448",
@@ -410,7 +437,9 @@ local __O = {};
                 "#0e1830",
                 "#0c1428",
                 "#0a1222"
-            }, 8) else __arrL({
+            }, 8)
+        else
+            ____t_result_22 = __arrL({
                 "#8ac4e4",
                 "#78b6dc",
                 "#68a8d2",
@@ -420,6 +449,15 @@ local __O = {};
                 "#3670a4",
                 "#2c6298"
             }, 8)
+        end
+        ____PK_faixas_23(
+            PK,
+            c,
+            0,
+            110,
+            LW,
+            160,
+            ____t_result_22
         )
         for ____, ____value in __iterar((__arrL(
             {
@@ -493,7 +531,7 @@ local __O = {};
                         R(
                             nil,
                             c,
-                            x + if y > hh * 0.6 then 1 else 0,
+                            x + (y > hh * 0.6 and 1 or 0),
                             268 - y,
                             1,
                             1,
@@ -773,22 +811,28 @@ local __O = {};
             )
             return
         end
-        local ____gt_22 = __gt
-        local ____t_21 = __t
-        local ____opt_17 = window.DayTime
-        if ____opt_17 ~= nil then
-            ____opt_17 = ____opt_17.state
+        local ____gt_34 = __gt
+        local ____t_result_33
+        local ____t_32 = __t
+        local ____opt_28 = window.DayTime
+        if ____opt_28 ~= nil then
+            ____opt_28 = ____opt_28.state
         end
-        local ____opt_result_19
-        if ____opt_17 ~= nil then
-            ____opt_result_19 = ____opt_17(____opt_17)
+        local ____opt_result_30
+        if ____opt_28 ~= nil then
+            ____opt_result_30 = ____opt_28(____opt_28)
         end
-        local ____opt_result_20
-        if ____opt_result_19 ~= nil then
-            ____opt_result_20 = ____opt_result_19.night
+        local ____opt_result_31
+        if ____opt_result_30 ~= nil then
+            ____opt_result_31 = ____opt_result_30.night
         end
-        __O[1349] = ____opt_result_20
-        local noite = ____gt_22(if ____t_21(____opt_result_20) then __O[1349] else 0, 0.55)
+        __O[1354] = ____opt_result_31
+        if ____t_32(____opt_result_31) then
+            ____t_result_33 = __O[1354]
+        else
+            ____t_result_33 = 0
+        end
+        local noite = ____gt_34(____t_result_33, 0.55)
         c:drawImage(
             fundo(nil, noite),
             0,
@@ -824,6 +868,12 @@ local __O = {};
                 ) - 20
                 local y = 118 + __mod(k * 23, 150)
                 local w = 3 + __mod(k, 4) * 2
+                local ____t_result_35
+                if __t(noite) then
+                    ____t_result_35 = __t(__mod(k, 2)) and "#3a5a8a" or "#2a4a7a"
+                else
+                    ____t_result_35 = __t(__mod(k, 2)) and "#a8d8f0" or "#8ac0e0"
+                end
                 R(
                     nil,
                     c,
@@ -831,7 +881,7 @@ local __O = {};
                     y,
                     w,
                     1,
-                    if __t(noite) then if __t(__mod(k, 2)) then "#3a5a8a" else "#2a4a7a" else if __t(__mod(k, 2)) then "#a8d8f0" else "#8ac0e0"
+                    ____t_result_35
                 )
                 k = k + 1
             end
@@ -845,7 +895,7 @@ local __O = {};
                         math.floor(170 + PK:hash(k) * 300 + 0.5),
                         math.floor(116 + PK:hash(k + 4) * 120 + 0.5),
                         2,
-                        if __t(noite) then "#c8d8ff" else "#ffffff"
+                        __t(noite) and "#c8d8ff" or "#ffffff"
                     )
                 end
                 k = k + 1
@@ -865,7 +915,7 @@ local __O = {};
                         y,
                         w * 2,
                         1,
-                        if __t(noite) then "#e8f0ff" else "#fff6c8"
+                        __t(noite) and "#e8f0ff" or "#fff6c8"
                     )
                     y = y + 2
                 end
@@ -923,7 +973,7 @@ local __O = {};
                 nil,
                 c,
                 x + 1,
-                y - if __t(a) then 2 else 1,
+                y - (__t(a) and 2 or 1),
                 3,
                 1,
                 "rgba(220,240,255,.8)"
@@ -931,13 +981,13 @@ local __O = {};
         end
         do
             pcall(function()
-                local ____opt_25 = window.Art
-                if ____opt_25 ~= nil then
-                    ____opt_25 = ____opt_25.drawCharacter
+                local ____opt_38 = window.Art
+                if ____opt_38 ~= nil then
+                    ____opt_38 = ____opt_38.drawCharacter
                 end
-                if ____opt_25 ~= nil then
-                    ____opt_25(
-                        ____opt_25,
+                if ____opt_38 ~= nil then
+                    ____opt_38(
+                        ____opt_38,
                         c,
                         "vagner",
                         40,
@@ -945,13 +995,13 @@ local __O = {};
                         {frame = t, facing = 1, grounded = true, scale = 0.85}
                     )
                 end
-                local ____opt_29 = window.Art
-                if ____opt_29 ~= nil then
-                    ____opt_29 = ____opt_29.drawCharacter
+                local ____opt_42 = window.Art
+                if ____opt_42 ~= nil then
+                    ____opt_42 = ____opt_42.drawCharacter
                 end
-                if ____opt_29 ~= nil then
-                    ____opt_29(
-                        ____opt_29,
+                if ____opt_42 ~= nil then
+                    ____opt_42(
+                        ____opt_42,
                         c,
                         "daroca",
                         108,
@@ -967,7 +1017,13 @@ local __O = {};
                 end
             end)
         end
-        local puxa = if j.fase == "pegou" then math.max(0, 1 - j.tf * 2) else 0
+        local ____temp_44
+        if j.fase == "pegou" then
+            ____temp_44 = math.max(0, 1 - j.tf * 2)
+        else
+            ____temp_44 = 0
+        end
+        local puxa = ____temp_44
         local tx = 186 - puxa * 14
         local ty = 92 - puxa * 18
         do
@@ -975,15 +1031,15 @@ local __O = {};
             while k <= 22 do
                 local u = k / 22
                 local x = 118 + (tx - 118) * u
-                local y = 142 + (ty - 142) * u - math.sin(u * math.pi) * if j.fase == "mordeu" then 5 else 2
+                local y = 142 + (ty - 142) * u - math.sin(u * math.pi) * (j.fase == "mordeu" and 5 or 2)
                 R(
                     nil,
                     c,
                     x,
                     y,
-                    if k < 6 then 2 else 1,
+                    k < 6 and 2 or 1,
                     2,
-                    if k < 6 then "#3a2414" else "#8a5a2a"
+                    k < 6 and "#3a2414" or "#8a5a2a"
                 )
                 k = k + 1
             end
@@ -1008,7 +1064,19 @@ local __O = {};
         )
         local bx = 300
         local base = 158
-        local afunda = if j.fase == "mordeu" then 5 + math.floor(math.sin(j.tf * 30) * 2 + 0.5) else if j.fase == "espera" then math.floor(math.sin(t * 2) * 1.2 + 0.5) else 0
+        local ____temp_46
+        if j.fase == "mordeu" then
+            ____temp_46 = 5 + math.floor(math.sin(j.tf * 30) * 2 + 0.5)
+        else
+            local ____temp_45
+            if j.fase == "espera" then
+                ____temp_45 = math.floor(math.sin(t * 2) * 1.2 + 0.5)
+            else
+                ____temp_45 = 0
+            end
+            ____temp_46 = ____temp_45
+        end
+        local afunda = ____temp_46
         if j.fase ~= "pegou" then
             do
                 local k = 0
@@ -1023,7 +1091,7 @@ local __O = {};
                         y,
                         1,
                         1,
-                        if __t(noite) then "rgba(200,210,240,.6)" else "rgba(255,255,255,.8)"
+                        __t(noite) and "rgba(200,210,240,.6)" or "rgba(255,255,255,.8)"
                     )
                     k = k + 1
                 end
@@ -1081,7 +1149,7 @@ local __O = {};
                 by + 1,
                 9,
                 1,
-                if __t(noite) then "#4a6a9a" else "#c8e8f8"
+                __t(noite) and "#4a6a9a" or "#c8e8f8"
             )
         end
         if j.fase == "mordeu" then
@@ -1142,11 +1210,17 @@ local __O = {};
                 )
             end
         end
-        local ____t_33 = __t
-        local ____t_32 = __t
-        local ____temp_31 = j.fase == "pegou"
-        __O[1350] = ____temp_31
-        if ____t_33(if ____t_32(____temp_31) then j.ultimo else __O[1350]) then
+        local ____t_50 = __t
+        local ____t_result_49
+        local ____t_48 = __t
+        local ____temp_47 = j.fase == "pegou"
+        __O[1355] = ____temp_47
+        if ____t_48(____temp_47) then
+            ____t_result_49 = j.ultimo
+        else
+            ____t_result_49 = __O[1355]
+        end
+        if ____t_50(____t_result_49) then
             local u = math.min(1, j.tf / 0.6)
             local fx = bx - (bx - 140) * u
             local fy = base - math.sin(u * math.pi) * 70 - u * 20
@@ -1187,7 +1261,7 @@ local __O = {};
                     y,
                     2,
                     3,
-                    if __t(__getq(j.peixesTipo, k)) then "#c8d0d8" else "#a8b8c0"
+                    __t(__getq(j.peixesTipo, k)) and "#c8d0d8" or "#a8b8c0"
                 )
                 R(
                     nil,
@@ -1224,14 +1298,25 @@ local __O = {};
                 local x = 318 + k * 22
                 local y = 21
                 if __lt(k, j.peixes) then
-                    local ____PK_peixe_36 = PK.peixe
-                    local ____t_35 = __t
-                    local ____temp_34 = if __t(j.peixesTipo) then __get(j.peixesTipo, k) else j.peixesTipo
-                    __O[1351] = ____temp_34
-                    ____PK_peixe_36(
+                    local ____PK_peixe_54 = PK.peixe
+                    local ____t_result_53
+                    local ____t_52 = __t
+                    local ____t_result_51
+                    if __t(j.peixesTipo) then
+                        ____t_result_51 = __get(j.peixesTipo, k)
+                    else
+                        ____t_result_51 = j.peixesTipo
+                    end
+                    __O[1356] = ____t_result_51
+                    if ____t_52(____t_result_51) then
+                        ____t_result_53 = __O[1356]
+                    else
+                        ____t_result_53 = "TILÁPIA"
+                    end
+                    ____PK_peixe_54(
                         PK,
                         c,
-                        if ____t_35(____temp_34) then __O[1351] else "TILÁPIA",
+                        ____t_result_53,
                         x,
                         y,
                         1
@@ -1281,10 +1366,10 @@ local __O = {};
                 bx,
                 112,
                 16,
-                if __t(__mod(
+                __t(__mod(
                     math.floor(t * 10),
                     2
-                )) then "#ffd24a" else "#ffffff",
+                )) and "#ffd24a" or "#ffffff",
                 "#3a1a0a"
             )
         end
@@ -1296,7 +1381,10 @@ local __O = {};
                 238,
                 240,
                 24,
-                {fundo = if __t(bom) then "#14301e" else "#3a1414", borda = if __t(bom) then "#7af07a" else "#ff9a7a"}
+                {
+                    fundo = __t(bom) and "#14301e" or "#3a1414",
+                    borda = __t(bom) and "#7af07a" or "#ff9a7a"
+                }
             )
             PK:texto(
                 c,
@@ -1304,7 +1392,7 @@ local __O = {};
                 LW / 2,
                 250,
                 8,
-                if __t(bom) then "#b8ffb8" else "#ffd0c0"
+                __t(bom) and "#b8ffb8" or "#ffd0c0"
             )
         end
         if __t(j.fim) then
@@ -1314,19 +1402,31 @@ local __O = {};
                 96,
                 340,
                 64,
-                {fundo = "#101c2a", borda = if __ge(j.peixes, 3) then "#7af07a" else "#ffd24a", rebite = "#5a8aa8"}
+                {
+                    fundo = "#101c2a",
+                    borda = __ge(j.peixes, 3) and "#7af07a" or "#ffd24a",
+                    rebite = "#5a8aa8"
+                }
             )
-            PK:texto(
+            local ____PK_texto_56 = PK.texto
+            local ____ge_result_55
+            if __ge(j.peixes, 3) then
+                ____ge_result_55 = tostring(j.peixes) .. " PEIXES!"
+            else
+                ____ge_result_55 = tostring(j.peixes) .. " PEIXE(S)"
+            end
+            ____PK_texto_56(
+                PK,
                 c,
-                if __ge(j.peixes, 3) then tostring(j.peixes) .. " PEIXES!" else tostring(j.peixes) .. " PEIXE(S)",
+                ____ge_result_55,
                 LW / 2,
                 116,
                 16,
-                if __ge(j.peixes, 3) then "#b8ffb8" else "#ffe9a8"
+                __ge(j.peixes, 3) and "#b8ffb8" or "#ffe9a8"
             )
             PK:texto(
                 c,
-                if __ge(j.peixes, 3) then "PESCADOR DE VERDADE!" else "O VAGNER RIU DE VOCÊ.",
+                __ge(j.peixes, 3) and "PESCADOR DE VERDADE!" or "O VAGNER RIU DE VOCÊ.",
                 LW / 2,
                 140,
                 8,
@@ -1341,14 +1441,20 @@ local __O = {};
         if e.code == "Escape" then
             e:preventDefault()
             e:stopPropagation()
-            local ____fechar_41 = fechar
-            local ____t_40 = __t
-            local ____opt_result_39
+            local ____fechar_62 = fechar
+            local ____t_result_61
+            local ____t_60 = __t
+            local ____opt_result_59
             if j ~= nil then
-                ____opt_result_39 = j.peixes
+                ____opt_result_59 = j.peixes
             end
-            __O[1352] = ____opt_result_39
-            ____fechar_41(nil, if ____t_40(____opt_result_39) then __O[1352] else 0)
+            __O[1357] = ____opt_result_59
+            if ____t_60(____opt_result_59) then
+                ____t_result_61 = __O[1357]
+            else
+                ____t_result_61 = 0
+            end
+            ____fechar_62(nil, ____t_result_61)
             return
         end
         if __t(__call(
@@ -1373,17 +1479,23 @@ local __O = {};
         box = nil
         j = nil
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-        local ____opt_49 = window.document:getElementById("gameCanvas")
-        local ____opt_47 = ____opt_49 and ____opt_49.focus
-        if ____opt_47 ~= nil then
-            ____opt_47(____opt_49)
+        local ____opt_72 = window.document:getElementById("gameCanvas")
+        local ____opt_70 = ____opt_72 and ____opt_72.focus
+        if ____opt_70 ~= nil then
+            ____opt_70(____opt_72)
         end
         local fn = aoFim
         aoFim = nil
         if __t(fn) then
             do
                 pcall(function()
-                    fn(nil, if __t(peixes) then peixes else 0)
+                    local ____t_result_74
+                    if __t(peixes) then
+                        ____t_result_74 = peixes
+                    else
+                        ____t_result_74 = 0
+                    end
+                    fn(nil, ____t_result_74)
                 end)
             end
         end
@@ -1446,7 +1558,14 @@ local __O = {};
         if not __t(j) then
             return
         end
-        local dt = math.min(0.1, (agora - if __t(j.ultimoT) then j.ultimoT else agora) / 1000)
+        local ____agora_8 = agora
+        local ____t_result_7
+        if __t(j.ultimoT) then
+            ____t_result_7 = j.ultimoT
+        else
+            ____t_result_7 = agora
+        end
+        local dt = math.min(0.1, (____agora_8 - ____t_result_7) / 1000)
         j.ultimoT = agora
         j.t = j.t + dt
         j.tf = j.tf + dt
@@ -1458,28 +1577,40 @@ local __O = {};
             j.tf = 0
             j.msg = "ESCAPOU! PUXE QUANDO A BOIA AFUNDAR"
         else
-            local ____t_7 = __t
-            local ____t_6 = __t
-            local ____call_result_5 = __call(
+            local ____t_12 = __t
+            local ____t_result_11
+            local ____t_10 = __t
+            local ____call_result_9 = __call(
                 __arrL({"pegou", "espantou", "escapou"}, 3),
                 "includes",
                 j.fase
             )
-            __O[1347] = ____call_result_5
-            if ____t_7(if ____t_6(____call_result_5) then __ge(j.tf, 1.3) else __O[1347]) then
+            __O[1352] = ____call_result_9
+            if ____t_10(____call_result_9) then
+                ____t_result_11 = __ge(j.tf, 1.3)
+            else
+                ____t_result_11 = __O[1352]
+            end
+            if ____t_12(____t_result_11) then
                 j.tent = j.tent + 1
                 if __ge(j.tent, TENTATIVAS) then
                     j.fim = true
                     window:setTimeout(
                         function()
-                            local ____fechar_12 = fechar
-                            local ____t_11 = __t
-                            local ____opt_result_10
+                            local ____fechar_18 = fechar
+                            local ____t_result_17
+                            local ____t_16 = __t
+                            local ____opt_result_15
                             if j ~= nil then
-                                ____opt_result_10 = j.peixes
+                                ____opt_result_15 = j.peixes
                             end
-                            __O[1348] = ____opt_result_10
-                            return ____fechar_12(nil, if ____t_11(____opt_result_10) then __O[1348] else 0)
+                            __O[1353] = ____opt_result_15
+                            if ____t_16(____opt_result_15) then
+                                ____t_result_17 = __O[1353]
+                            else
+                                ____t_result_17 = 0
+                            end
+                            return ____fechar_18(nil, ____t_result_17)
                         end,
                         1400
                     )
@@ -1499,7 +1630,13 @@ local __O = {};
         if __t(box) then
             return false
         end
-        aoFim = if __t(o.onFim) then o.onFim else nil
+        local ____t_result_63
+        if __t(o.onFim) then
+            ____t_result_63 = o.onFim
+        else
+            ____t_result_63 = nil
+        end
+        aoFim = ____t_result_63
         if not __t(window.document:getElementById("pbEstilo")) then
             local st = window.document:createElement("style")
             st.id = "pbEstilo"
@@ -1534,14 +1671,20 @@ local __O = {};
         s:addEventListener(
             "click",
             function()
-                local ____fechar_46 = fechar
-                local ____t_45 = __t
-                local ____opt_result_44
+                local ____fechar_69 = fechar
+                local ____t_result_68
+                local ____t_67 = __t
+                local ____opt_result_66
                 if j ~= nil then
-                    ____opt_result_44 = j.peixes
+                    ____opt_result_66 = j.peixes
                 end
-                __O[1353] = ____opt_result_44
-                return ____fechar_46(nil, if ____t_45(____opt_result_44) then __O[1353] else 0)
+                __O[1358] = ____opt_result_66
+                if ____t_67(____opt_result_66) then
+                    ____t_result_68 = __O[1358]
+                else
+                    ____t_result_68 = 0
+                end
+                return ____fechar_69(nil, ____t_result_68)
             end
         )
         box:append(s)
@@ -1568,7 +1711,15 @@ local __O = {};
         {
             abrir = abrir,
             aberto = function() return not not __t(box) end,
-            estado = function() return if __t(j) then {fase = j.fase, peixes = j.peixes, tent = j.tent} else j end
+            estado = function()
+                local ____t_result_75
+                if __t(j) then
+                    ____t_result_75 = {fase = j.fase, peixes = j.peixes, tent = j.tent}
+                else
+                    ____t_result_75 = j
+                end
+                return ____t_result_75
+            end
         },
         "abrir,aberto,estado"
     )

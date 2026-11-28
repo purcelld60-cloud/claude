@@ -7,6 +7,9 @@ local __lt, __gt, __isFiniteN, __mod, __ord, __arrL, __iterar, __t, __get, __set
 local __add, __keys, __assign, __band, __shr, __getters, __re, __re_test, __re_exec = __JSR.__add, __JSR.__keys, __JSR.__assign, __JSR.__band, __JSR.__shr, __JSR.__getters, __JSR.__re, __JSR.__re_test, __JSR.__re_exec
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__ParseInt = ____lualib.__TS__ParseInt
 local ____exports = {}
@@ -19,13 +22,21 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) else c:moveTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) end
+            function(____, p, i)
+                local ____t_result_4
+                if __t(i) then
+                    ____t_result_4 = c:lineTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                else
+                    ____t_result_4 = c:moveTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                end
+                return ____t_result_4
+            end
         )
         c:closePath()
         __call(c, "fill")
@@ -237,16 +248,23 @@ local __O = {};
                 OUT,
                 2
             )
-            oval(
+            local ____oval_7 = oval
+            local ____array_6 = __TS__SparseArrayNew(
                 nil,
                 c,
                 -13,
                 -63,
                 5,
-                5,
-                if __t(H.gray) then H.gray else col,
-                2
+                5
             )
+            local ____t_result_5
+            if __t(H.gray) then
+                ____t_result_5 = H.gray
+            else
+                ____t_result_5 = col
+            end
+            __TS__SparseArrayPush(____array_6, ____t_result_5, 2)
+            ____oval_7(__TS__SparseArraySpread(____array_6))
             r(
                 nil,
                 c,
@@ -279,16 +297,23 @@ local __O = {};
                 local i = 0
                 while i < 7 do
                     local a = -math.pi * 0.95 + i * 0.5
-                    oval(
+                    local ____oval_10 = oval
+                    local ____array_9 = __TS__SparseArrayNew(
                         nil,
                         c,
                         -2 + math.cos(a) * 14,
                         -54 + math.sin(a) * 10,
                         5,
-                        5,
-                        if __t(__mod(i, 2)) then col else "#2e211b",
-                        2
+                        5
                     )
+                    local ____t_result_8
+                    if __t(__mod(i, 2)) then
+                        ____t_result_8 = col
+                    else
+                        ____t_result_8 = "#2e211b"
+                    end
+                    __TS__SparseArrayPush(____array_9, ____t_result_8, 2)
+                    ____oval_10(__TS__SparseArraySpread(____array_9))
                     i = i + 1
                 end
             end
@@ -309,7 +334,13 @@ local __O = {};
             return
         end
         local col = H.color
-        local hi = if __t(H.hi) then H.hi else shadeHex(nil, col, 1.35)
+        local ____t_result_11
+        if __t(H.hi) then
+            ____t_result_11 = H.hi
+        else
+            ____t_result_11 = shadeHex(nil, col, 1.35)
+        end
+        local hi = ____t_result_11
         repeat
             local ____switch28 = H.style
             local ____cond28 = ____switch28 == "bowl"
@@ -322,7 +353,7 @@ local __O = {};
                                 nil,
                                 c,
                                 -12 + i * 3.8,
-                                -64 - if __t(i > 0 and i < 7) then 2 else 0,
+                                -64 - (__t(i > 0 and i < 7) and 2 or 0),
                                 4,
                                 4,
                                 OUT,
@@ -352,16 +383,23 @@ local __O = {};
                     do
                         local i = 0
                         while i < 8 do
-                            oval(
+                            local ____oval_14 = oval
+                            local ____array_13 = __TS__SparseArrayNew(
                                 nil,
                                 c,
                                 -12 + i * 3.8,
-                                -64 - if __t(i > 0 and i < 7) then 2 else 0,
+                                -64 - (__t(i > 0 and i < 7) and 2 or 0),
                                 3,
-                                3,
-                                if __t(__mod(i, 2)) then col else hi,
-                                2
+                                3
                             )
+                            local ____t_result_12
+                            if __t(__mod(i, 2)) then
+                                ____t_result_12 = col
+                            else
+                                ____t_result_12 = hi
+                            end
+                            __TS__SparseArrayPush(____array_13, ____t_result_12, 2)
+                            ____oval_14(__TS__SparseArraySpread(____array_13))
                             i = i + 1
                         end
                     end
@@ -386,16 +424,23 @@ local __O = {};
                     do
                         local i = 0
                         while i < 3 do
-                            oval(
+                            local ____oval_17 = oval
+                            local ____array_16 = __TS__SparseArrayNew(
                                 nil,
                                 c,
                                 -12,
                                 -53 + i * 3,
                                 2,
-                                2,
-                                if __t(__mod(i, 2)) then hi else col,
                                 2
                             )
+                            local ____t_result_15
+                            if __t(__mod(i, 2)) then
+                                ____t_result_15 = hi
+                            else
+                                ____t_result_15 = col
+                            end
+                            __TS__SparseArrayPush(____array_16, ____t_result_15, 2)
+                            ____oval_17(__TS__SparseArraySpread(____array_16))
                             i = i + 1
                         end
                     end
@@ -486,7 +531,13 @@ local __O = {};
                 do
                     local dk = shadeHex(nil, col, 0.35)
                     local hl = shadeHex(nil, col, 2.6)
-                    local fade = if __t(H.fade) then H.fade else col
+                    local ____t_result_18
+                    if __t(H.fade) then
+                        ____t_result_18 = H.fade
+                    else
+                        ____t_result_18 = col
+                    end
+                    local fade = ____t_result_18
                     r(
                         nil,
                         c,
@@ -566,16 +617,23 @@ local __O = {};
                             xx = ____bindingPattern0[1]
                             yy = ____bindingPattern0[2]
                             rr = ____bindingPattern0[3]
-                            oval(
+                            local ____oval_21 = oval
+                            local ____array_20 = __TS__SparseArrayNew(
                                 nil,
                                 c,
                                 xx,
                                 yy,
                                 rr,
-                                rr,
-                                if __mod(i, 3) == 1 then shadeHex(nil, col, 1.25) else col,
-                                1
+                                rr
                             )
+                            local ____temp_19
+                            if __mod(i, 3) == 1 then
+                                ____temp_19 = shadeHex(nil, col, 1.25)
+                            else
+                                ____temp_19 = col
+                            end
+                            __TS__SparseArrayPush(____array_20, ____temp_19, 1)
+                            ____oval_21(__TS__SparseArraySpread(____array_20))
                             r(
                                 nil,
                                 c,
@@ -1169,23 +1227,38 @@ local __O = {};
                     3,
                     col
                 )
-                r(
+                local ____array_23 = __TS__SparseArrayNew(
                     nil,
                     c,
                     -6,
                     -62,
                     10,
-                    1,
-                    if __t(H.gray) then H.gray else hi
+                    1
                 )
+                local ____t_result_22
+                if __t(H.gray) then
+                    ____t_result_22 = H.gray
+                else
+                    ____t_result_22 = hi
+                end
+                __TS__SparseArrayPush(____array_23, ____t_result_22)
+                r(__TS__SparseArraySpread(____array_23))
+                local ____c_25 = c
+                local ____temp_26 = -61
+                local ____t_result_24
+                if __t(H.gray) then
+                    ____t_result_24 = H.gray
+                else
+                    ____t_result_24 = hi
+                end
                 r(
                     nil,
-                    c,
+                    ____c_25,
                     2,
-                    -61,
+                    ____temp_26,
                     8,
                     1,
-                    if __t(H.gray) then H.gray else hi
+                    ____t_result_24
                 )
                 break
             end
@@ -1194,16 +1267,23 @@ local __O = {};
                 do
                     local i = 0
                     while i < 8 do
-                        oval(
+                        local ____oval_29 = oval
+                        local ____array_28 = __TS__SparseArrayNew(
                             nil,
                             c,
                             -11 + i * 3.6,
                             -61 + __mod(i, 2) * 2,
                             3,
-                            3,
-                            if __t(__mod(i, 2)) then col else "#bdb8b0",
-                            2
+                            3
                         )
+                        local ____t_result_27
+                        if __t(__mod(i, 2)) then
+                            ____t_result_27 = col
+                        else
+                            ____t_result_27 = "#bdb8b0"
+                        end
+                        __TS__SparseArrayPush(____array_28, ____t_result_27, 2)
+                        ____oval_29(__TS__SparseArraySpread(____array_28))
                         i = i + 1
                     end
                 end
@@ -1248,16 +1328,23 @@ local __O = {};
                 do
                     local i = 0
                     while i < 6 do
-                        oval(
+                        local ____oval_32 = oval
+                        local ____array_31 = __TS__SparseArrayNew(
                             nil,
                             c,
                             -9 + i * 4.5,
                             -63,
                             3,
-                            3,
-                            if __t(__mod(i, 2)) then col else "#2e211b",
-                            2
+                            3
                         )
+                        local ____t_result_30
+                        if __t(__mod(i, 2)) then
+                            ____t_result_30 = col
+                        else
+                            ____t_result_30 = "#2e211b"
+                        end
+                        __TS__SparseArrayPush(____array_31, ____t_result_30, 2)
+                        ____oval_32(__TS__SparseArraySpread(____array_31))
                         i = i + 1
                     end
                 end
@@ -2003,7 +2090,7 @@ local __O = {};
                     hy - 17,
                     3,
                     3,
-                    if math.sin(t * 6) > 0 then "#ff5a4a" else "#7a2a2a"
+                    math.sin(t * 6) > 0 and "#ff5a4a" or "#7a2a2a"
                 )
                 r(
                     nil,
@@ -2128,7 +2215,7 @@ local __O = {};
                         hy - 22,
                         9,
                         9,
-                        if __t(on) then "#fff6d0" else "#d8d0b0",
+                        __t(on) and "#fff6d0" or "#d8d0b0",
                         2
                     )
                     oval(
@@ -2312,58 +2399,160 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        local sc = if __t(o.scale) then o.scale else 1
-        local hk = if __t(S.h) then S.h else 1
-        c:scale(if __lt(o.facing, 0) then -1 else 1 * sc, sc * hk)
+        local ____t_result_33
+        if __t(o.scale) then
+            ____t_result_33 = o.scale
+        else
+            ____t_result_33 = 1
+        end
+        local sc = ____t_result_33
+        local ____t_result_34
+        if __t(S.h) then
+            ____t_result_34 = S.h
+        else
+            ____t_result_34 = 1
+        end
+        local hk = ____t_result_34
+        c:scale(
+            (__lt(o.facing, 0) and -1 or 1) * sc,
+            sc * hk
+        )
         if __isFiniteN(o.opacity) then
             c.globalAlpha = c.globalAlpha * math.max(
                 0,
                 math.min(1, o.opacity)
             )
         end
-        local ____t_4 = __t
-        local ____TS__Number_result_3 = __TS__Number(o.frame)
-        __O[373] = ____TS__Number_result_3
-        local t = if ____t_4(____TS__Number_result_3) then __O[373] else 0
+        local ____t_result_37
+        local ____t_36 = __t
+        local ____TS__Number_result_35 = __TS__Number(o.frame)
+        __O[373] = ____TS__Number_result_35
+        if ____t_36(____TS__Number_result_35) then
+            ____t_result_37 = __O[373]
+        else
+            ____t_result_37 = 0
+        end
+        local t = ____t_result_37
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
         local air = o.grounded == false
-        local walk = if __t(if __t(moving) then not __t(air) else moving) then math.sin(t * 9) else 0
-        local bob = if __t(if __t(moving) then not __t(air) else moving) then math.floor(math.abs(math.cos(t * 9)) * 2 + 0.5) else math.floor(math.sin(t * 2) * 0.7 + 0.5)
+        local ____t_result_40
+        local ____t_39 = __t
+        local ____t_result_38
+        if __t(moving) then
+            ____t_result_38 = not __t(air)
+        else
+            ____t_result_38 = moving
+        end
+        if ____t_39(____t_result_38) then
+            ____t_result_40 = math.sin(t * 9)
+        else
+            ____t_result_40 = 0
+        end
+        local walk = ____t_result_40
+        local ____t_result_43
+        local ____t_42 = __t
+        local ____t_result_41
+        if __t(moving) then
+            ____t_result_41 = not __t(air)
+        else
+            ____t_result_41 = moving
+        end
+        if ____t_42(____t_result_41) then
+            ____t_result_43 = math.floor(math.abs(math.cos(t * 9)) * 2 + 0.5)
+        else
+            ____t_result_43 = math.floor(math.sin(t * 2) * 0.7 + 0.5)
+        end
+        local bob = ____t_result_43
         local attack = not not __t(o.attack)
-        local strike = if __t(attack) then math.max(
-            0,
-            math.sin(if __isFiniteN(o.attackProgress) then o.attackProgress else 0.5 + math.sin(t * 7) * 0.5 * math.pi)
-        ) else 0
+        local ____t_result_45
+        if __t(attack) then
+            local ____isFiniteN_result_44
+            if __isFiniteN(o.attackProgress) then
+                ____isFiniteN_result_44 = o.attackProgress
+            else
+                ____isFiniteN_result_44 = 0.5 + math.sin(t * 7) * 0.5
+            end
+            ____t_result_45 = math.max(
+                0,
+                math.sin(____isFiniteN_result_44 * math.pi)
+            )
+        else
+            ____t_result_45 = 0
+        end
+        local strike = ____t_result_45
         local belly = S.build == "belly"
         local strong = S.build == "strong"
         local slim = S.build == "slim"
         local chubby = S.build == "chubby"
-        local wide = if __t(belly) then 18 else if __t(strong) then 17 else if __t(slim) then 10 else if __t(chubby) then 14 else 12
+        local wide = __t(belly) and 18 or (__t(strong) and 17 or (__t(slim) and 10 or (__t(chubby) and 14 or 12)))
         local skin = S.skin
         local shade = S.shade
-        local shiver = if __t(if __t(S.shiver) then S.shiver else o.cold) then math.floor(math.sin(t * 40) + 0.5) else 0
-        local twitch = if __t(if __t(S.twitch) then math.sin(t * 13) > 0.85 else S.twitch) then 1 else 0
-        local ____t_6 = __t
-        local ____temp_5 = if __t(o.emotion) then o.emotion else S.mood
-        __O[374] = ____temp_5
-        local mood = if ____t_6(____temp_5) then __O[374] else ""
+        local ____t_result_48
+        local ____t_47 = __t
+        local ____t_result_46
+        if __t(S.shiver) then
+            ____t_result_46 = S.shiver
+        else
+            ____t_result_46 = o.cold
+        end
+        if ____t_47(____t_result_46) then
+            ____t_result_48 = math.floor(math.sin(t * 40) + 0.5)
+        else
+            ____t_result_48 = 0
+        end
+        local shiver = ____t_result_48
+        local ____t_50 = __t
+        local ____t_result_49
+        if __t(S.twitch) then
+            ____t_result_49 = math.sin(t * 13) > 0.85
+        else
+            ____t_result_49 = S.twitch
+        end
+        local twitch = ____t_50(____t_result_49) and 1 or 0
+        local ____t_result_53
+        local ____t_52 = __t
+        local ____t_result_51
+        if __t(o.emotion) then
+            ____t_result_51 = o.emotion
+        else
+            ____t_result_51 = S.mood
+        end
+        __O[374] = ____t_result_51
+        if ____t_52(____t_result_51) then
+            ____t_result_53 = __O[374]
+        else
+            ____t_result_53 = ""
+        end
+        local mood = ____t_result_53
         if __t(not __t(o.duelo) or not __t(air)) then
             oval(
                 nil,
                 c,
                 0,
                 -1,
-                if __t(belly) then 23 else if __t(strong) then 21 else if __t(chubby) then 19 else 17,
+                __t(belly) and 23 or (__t(strong) and 21 or (__t(chubby) and 19 or 17)),
                 3,
                 "#2e433d",
                 2
             )
         end
-        local ____t_9 = __t
-        local ____t_8 = __t
-        local ____temp_7 = ____type == "c2_breno"
-        __O[375] = ____temp_7
-        if ____t_9(if __t(o.rage) then o.rage else if ____t_8(____temp_7) then o.powered else __O[375]) then
+        local ____t_58 = __t
+        local ____t_result_57
+        if __t(o.rage) then
+            ____t_result_57 = o.rage
+        else
+            local ____t_result_56
+            local ____t_55 = __t
+            local ____temp_54 = ____type == "c2_breno"
+            __O[375] = ____temp_54
+            if ____t_55(____temp_54) then
+                ____t_result_56 = o.powered
+            else
+                ____t_result_56 = __O[375]
+            end
+            ____t_result_57 = ____t_result_56
+        end
+        if ____t_58(____t_result_57) then
             c:save()
             c.globalAlpha = c.globalAlpha * 0.3
             oval(
@@ -2380,15 +2569,28 @@ local __O = {};
         end
         for ____, side in __iterar((__arrL({-1, 1}, 2))) do
             local fx = side * 7 + math.floor(walk * 12 * side + 0.5)
-            local fy = if __t(if __t(moving) then not __t(air) else moving) then math.max(
-                0,
-                math.cos(t * 9 + if side > 0 then 0 else math.pi)
-            ) * 6 else 0
-            if __t(air) then
-                fx = if side > 0 then 10 else -12
-                fy = if side > 0 then 3 else 11
+            local ____t_result_61
+            local ____t_60 = __t
+            local ____t_result_59
+            if __t(moving) then
+                ____t_result_59 = not __t(air)
+            else
+                ____t_result_59 = moving
             end
-            local legW = if __t(strong) then 11 else if __t(slim) then 7 else 9
+            if ____t_60(____t_result_59) then
+                ____t_result_61 = math.max(
+                    0,
+                    math.cos(t * 9 + (side > 0 and 0 or math.pi))
+                ) * 6
+            else
+                ____t_result_61 = 0
+            end
+            local fy = ____t_result_61
+            if __t(air) then
+                fx = side > 0 and 10 or -12
+                fy = side > 0 and 3 or 11
+            end
+            local legW = __t(strong) and 11 or (__t(slim) and 7 or 9)
             limb(
                 nil,
                 c,
@@ -2403,7 +2605,8 @@ local __O = {};
                 legW,
                 LEGLINE
             )
-            limb(
+            local ____limb_65 = limb
+            local ____array_64 = __TS__SparseArrayNew(
                 nil,
                 c,
                 __arrL(
@@ -2414,29 +2617,59 @@ local __O = {};
                     },
                     3
                 ),
-                if __t(strong) then 7 else if __t(slim) then 4 else 5,
-                if __t(S.skirt) then skin else if __t(S.pants) then S.pants else "#3d4852"
+                __t(strong) and 7 or (__t(slim) and 4 or 5)
             )
-            r(
+            local ____t_result_63
+            if __t(S.skirt) then
+                ____t_result_63 = skin
+            else
+                local ____t_result_62
+                if __t(S.pants) then
+                    ____t_result_62 = S.pants
+                else
+                    ____t_result_62 = "#3d4852"
+                end
+                ____t_result_63 = ____t_result_62
+            end
+            __TS__SparseArrayPush(____array_64, ____t_result_63)
+            ____limb_65(__TS__SparseArraySpread(____array_64))
+            local ____array_67 = __TS__SparseArrayNew(
                 nil,
                 c,
                 fx - 4,
                 -6 - fy,
                 13,
-                6,
-                if __t(S.shoes) then S.shoes else "#26353a"
+                6
             )
-            r(
+            local ____t_result_66
+            if __t(S.shoes) then
+                ____t_result_66 = S.shoes
+            else
+                ____t_result_66 = "#26353a"
+            end
+            __TS__SparseArrayPush(____array_67, ____t_result_66)
+            r(__TS__SparseArraySpread(____array_67))
+            local ____array_69 = __TS__SparseArrayNew(
                 nil,
                 c,
                 fx - 3,
                 -2 - fy,
                 11,
-                2,
-                if __t(S.sole) then S.sole else "#b6b8a6"
+                2
             )
+            local ____t_result_68
+            if __t(S.sole) then
+                ____t_result_68 = S.sole
+            else
+                ____t_result_68 = "#b6b8a6"
+            end
+            __TS__SparseArrayPush(____array_69, ____t_result_68)
+            r(__TS__SparseArraySpread(____array_69))
         end
-        c:translate(if __t(o.dash) then 5 else math.floor(walk * 1.5 + 0.5) + shiver, -bob + if __t(S.hunch) then 2 else 0)
+        c:translate(
+            (__t(o.dash) and 5 or math.floor(walk * 1.5 + 0.5)) + shiver,
+            -bob + (__t(S.hunch) and 2 or 0)
+        )
         if __t(S.hunch) then
             c:rotate(0.06)
         end
@@ -2561,19 +2794,43 @@ local __O = {};
             )
             L = __arrL({-wide + 1, -34}, 2)
         end
-        local ____t_12 = __t
-        local ____t_11 = __t
-        local ____temp_10 = o.duelo == 2
-        __O[376] = ____temp_10
-        if ____t_12(if ____t_11(____temp_10) then attack else __O[376]) then
-            Rh = if __t(air) then __arrL({wide + 9, -39}, 2) else __arrL({wide - 3, -25}, 2)
-            L = if __t(air) then __arrL({-wide - 9, -38}, 2) else __arrL({-wide + 1, -24}, 2)
+        local ____t_73 = __t
+        local ____t_result_72
+        local ____t_71 = __t
+        local ____temp_70 = o.duelo == 2
+        __O[376] = ____temp_70
+        if ____t_71(____temp_70) then
+            ____t_result_72 = attack
         else
-            local ____t_15 = __t
-            local ____t_14 = __t
-            local ____temp_13 = o.duelo == 3
-            __O[377] = ____temp_13
-            if ____t_15(if ____t_14(____temp_13) then attack else __O[377]) then
+            ____t_result_72 = __O[376]
+        end
+        if ____t_73(____t_result_72) then
+            local ____t_result_74
+            if __t(air) then
+                ____t_result_74 = __arrL({wide + 9, -39}, 2)
+            else
+                ____t_result_74 = __arrL({wide - 3, -25}, 2)
+            end
+            Rh = ____t_result_74
+            local ____t_result_75
+            if __t(air) then
+                ____t_result_75 = __arrL({-wide - 9, -38}, 2)
+            else
+                ____t_result_75 = __arrL({-wide + 1, -24}, 2)
+            end
+            L = ____t_result_75
+        else
+            local ____t_79 = __t
+            local ____t_result_78
+            local ____t_77 = __t
+            local ____temp_76 = o.duelo == 3
+            __O[377] = ____temp_76
+            if ____t_77(____temp_76) then
+                ____t_result_78 = attack
+            else
+                ____t_result_78 = __O[377]
+            end
+            if ____t_79(____t_result_78) then
                 Rh = __arrL(
                     {
                         wide + 8 + math.floor(7 * strike + 0.5),
@@ -2583,11 +2840,29 @@ local __O = {};
                 )
                 L = __arrL({0, -43}, 2)
             elseif o.duelo == 4 then
-                Rh = __arrL({wide + 6 + if __t(attack) then 8 else 0, if __t(attack) then -40 else -23}, 2)
-                L = __arrL({-wide - 7, if __t(attack) then -36 else -26}, 2)
+                Rh = __arrL(
+                    {
+                        wide + 6 + (__t(attack) and 8 or 0),
+                        __t(attack) and -40 or -23
+                    },
+                    2
+                )
+                L = __arrL(
+                    {
+                        -wide - 7,
+                        __t(attack) and -36 or -26
+                    },
+                    2
+                )
             elseif o.duelo == 5 then
                 Rh = __arrL({wide + 2, -47}, 2)
-                L = if __t(attack) then __arrL({wide + 4, -32}, 2) else __arrL({-wide - 3, -22}, 2)
+                local ____t_result_80
+                if __t(attack) then
+                    ____t_result_80 = __arrL({wide + 4, -32}, 2)
+                else
+                    ____t_result_80 = __arrL({-wide - 3, -22}, 2)
+                end
+                L = ____t_result_80
             end
         end
         if __t(o.charging) then
@@ -2598,10 +2873,16 @@ local __O = {};
             Rh = __arrL({wide + 22, -32}, 2)
         end
         local sleeveSkin = S.sleeve == "short" or S.topKind == "tank"
-        local armW = if __t(strong) then 11 else if __t(slim) then 6 else 8
-        local armIn = if __t(strong) then 7 else if __t(slim) then 4 else 5
+        local armW = __t(strong) and 11 or (__t(slim) and 6 or 8)
+        local armIn = __t(strong) and 7 or (__t(slim) and 4 or 5)
         local function hand(self, side)
-            local ____end = if __gt(side, 0) then Rh else L
+            local ____gt_result_81
+            if __gt(side, 0) then
+                ____gt_result_81 = Rh
+            else
+                ____gt_result_81 = L
+            end
+            local ____end = ____gt_result_81
             local shoulder = __arrL({side * wide, -36}, 2)
             local elbow = __arrL(
                 {
@@ -2617,21 +2898,71 @@ local __O = {};
                 armW,
                 LINE
             )
-            limb(
+            local ____limb_87 = limb
+            local ____c_85 = c
+            local ____arrL_result_86 = __arrL({shoulder, elbow}, 2)
+            local ____temp_84
+            if S.topKind == "tank" then
+                ____temp_84 = skin
+            else
+                local ____t_result_83
+                if __t(S.topKind == "apron" or S.topKind == "overall") then
+                    local ____t_result_82
+                    if __t(S.inner) then
+                        ____t_result_82 = S.inner
+                    else
+                        ____t_result_82 = S.top
+                    end
+                    ____t_result_83 = ____t_result_82
+                else
+                    ____t_result_83 = S.top
+                end
+                ____temp_84 = ____t_result_83
+            end
+            ____limb_87(
                 nil,
-                c,
-                __arrL({shoulder, elbow}, 2),
+                ____c_85,
+                ____arrL_result_86,
                 armIn,
-                if S.topKind == "tank" then skin else if __t(S.topKind == "apron" or S.topKind == "overall") then if __t(S.inner) then S.inner else S.top else S.top
+                ____temp_84
             )
-            limb(
+            local ____limb_94 = limb
+            local ____c_92 = c
+            local ____arrL_result_93 = __arrL({elbow, ____end}, 2)
+            local ____t_result_91
+            local ____t_89 = __t
+            local ____t_result_88
+            if __t(sleeveSkin) then
+                ____t_result_88 = sleeveSkin
+            else
+                ____t_result_88 = S.topKind == "apron" and not __t(S.inner)
+            end
+            if ____t_89(____t_result_88) then
+                ____t_result_91 = skin
+            else
+                local ____temp_90
+                if S.topKind == "overall" then
+                    ____temp_90 = S.inner
+                else
+                    ____temp_90 = S.top
+                end
+                ____t_result_91 = ____temp_90
+            end
+            ____limb_94(
                 nil,
-                c,
-                __arrL({elbow, ____end}, 2),
+                ____c_92,
+                ____arrL_result_93,
                 armIn,
-                if __t(if __t(sleeveSkin) then sleeveSkin else S.topKind == "apron" and not __t(S.inner)) then skin else if S.topKind == "overall" then S.inner else S.top
+                ____t_result_91
             )
-            if __t(if __t(S.tattoo) then __gt(side, 0) else S.tattoo) then
+            local ____t_96 = __t
+            local ____t_result_95
+            if __t(S.tattoo) then
+                ____t_result_95 = __gt(side, 0)
+            else
+                ____t_result_95 = S.tattoo
+            end
+            if ____t_96(____t_result_95) then
                 r(
                     nil,
                     c,
@@ -2642,15 +2973,22 @@ local __O = {};
                     S.tattoo
                 )
             end
-            r(
+            local ____array_98 = __TS__SparseArrayNew(
                 nil,
                 c,
                 __get(____end, 0) - 3,
                 __get(____end, 1) - 3,
-                if __t(strong) then 8 else 6,
-                if __t(strong) then 7 else 6,
-                if __t(S.gloves) then S.gloves else skin
+                __t(strong) and 8 or 6,
+                __t(strong) and 7 or 6
             )
+            local ____t_result_97
+            if __t(S.gloves) then
+                ____t_result_97 = S.gloves
+            else
+                ____t_result_97 = skin
+            end
+            __TS__SparseArrayPush(____array_98, ____t_result_97)
+            r(__TS__SparseArraySpread(____array_98))
         end
         hand(nil, -1)
         hairBack(nil, c, S)
@@ -2776,7 +3114,7 @@ local __O = {};
                 edge
             )
         end
-        local bx = if __t(belly) then 16 else wide - 1
+        local bx = __t(belly) and 16 or wide - 1
         repeat
             local ____switch117 = S.topKind
             local ____cond117 = ____switch117 == "jacket" or ____switch117 == "hoodie" or ____switch117 == "puffer" or ____switch117 == "cardigan" or ____switch117 == "coat"
@@ -2788,7 +3126,7 @@ local __O = {};
                         -3,
                         -40,
                         7,
-                        if __t(belly) then 22 else 19,
+                        __t(belly) and 22 or 19,
                         S.inner
                     )
                 end
@@ -2798,7 +3136,7 @@ local __O = {};
                     -4,
                     -40,
                     1,
-                    if __t(belly) then 22 else 19,
+                    __t(belly) and 22 or 19,
                     edge
                 )
                 r(
@@ -2807,7 +3145,7 @@ local __O = {};
                     4,
                     -40,
                     1,
-                    if __t(belly) then 22 else 19,
+                    __t(belly) and 22 or 19,
                     edge
                 )
                 if S.topKind == "hoodie" then
@@ -3078,7 +3416,7 @@ local __O = {};
                     -bx + 4,
                     -38,
                     bx * 2 - 8,
-                    if __t(belly) then 20 else 19,
+                    __t(belly) and 20 or 19,
                     S.apron
                 )
                 r(
@@ -3330,7 +3668,14 @@ local __O = {};
                 end
             end
         until true
-        if __t(if __t(S.uniform) then S.uniform else o.uniform) then
+        local ____t_100 = __t
+        local ____t_result_99
+        if __t(S.uniform) then
+            ____t_result_99 = S.uniform
+        else
+            ____t_result_99 = o.uniform
+        end
+        if ____t_100(____t_result_99) then
             r(
                 nil,
                 c,
@@ -3668,23 +4013,29 @@ local __O = {};
                 3,
                 "#2d3031"
             )
-            local ____c_20 = c
-            local ____temp_21 = ey - 3
-            local ____shadeHex_19 = shadeHex
-            local ____t_18 = __t
-            local ____opt_16 = S.hair
-            if ____opt_16 ~= nil then
-                ____opt_16 = ____opt_16.color
+            local ____c_106 = c
+            local ____temp_107 = ey - 3
+            local ____shadeHex_105 = shadeHex
+            local ____t_result_104
+            local ____t_103 = __t
+            local ____opt_101 = S.hair
+            if ____opt_101 ~= nil then
+                ____opt_101 = ____opt_101.color
             end
-            __O[378] = ____opt_16
+            __O[378] = ____opt_101
+            if ____t_103(____opt_101) then
+                ____t_result_104 = __O[378]
+            else
+                ____t_result_104 = "#3a2a20"
+            end
             r(
                 nil,
-                ____c_20,
+                ____c_106,
                 1,
-                ____temp_21,
+                ____temp_107,
                 6,
                 1,
-                ____shadeHex_19(nil, if ____t_18(____opt_16) then __O[378] else "#3a2a20", 1)
+                ____shadeHex_105(nil, ____t_result_104, 1)
             )
         else
             r(
@@ -3842,15 +4193,32 @@ local __O = {};
                 S.goggles
             )
         end
-        local mouthC = if __t(S.lipstick) then S.lipstick else "#855e43"
-        local ____t_26 = __t
-        local ____t_25 = __t
-        local ____t_23 = __t
-        local ____temp_22 = mood == "happy" or mood == "smug"
-        __O[379] = ____temp_22
-        local ____temp_24 = if ____t_23(____temp_22) then __O[379] else S.pose == "cocky"
-        __O[380] = ____temp_24
-        if ____t_26(if ____t_25(____temp_24) then __O[380] else S.pose == "sing") then
+        local ____t_result_108
+        if __t(S.lipstick) then
+            ____t_result_108 = S.lipstick
+        else
+            ____t_result_108 = "#855e43"
+        end
+        local mouthC = ____t_result_108
+        local ____t_114 = __t
+        local ____t_result_113
+        local ____t_112 = __t
+        local ____t_result_111
+        local ____t_110 = __t
+        local ____temp_109 = mood == "happy" or mood == "smug"
+        __O[379] = ____temp_109
+        if ____t_110(____temp_109) then
+            ____t_result_111 = __O[379]
+        else
+            ____t_result_111 = S.pose == "cocky"
+        end
+        __O[380] = ____t_result_111
+        if ____t_112(____t_result_111) then
+            ____t_result_113 = __O[380]
+        else
+            ____t_result_113 = S.pose == "sing"
+        end
+        if ____t_114(____t_result_113) then
             r(
                 nil,
                 c,
@@ -4149,14 +4517,30 @@ local __O = {};
             )
         end
         hand(nil, 1)
-        local ____t_31 = __t
-        local ____t_30 = __t
-        local ____t_28 = __t
-        local ____temp_27 = if __t(S.item) then not __t(attack) else S.item
-        __O[381] = ____temp_27
-        local ____temp_29 = if ____t_28(____temp_27) then not __t(o.reach) else __O[381]
-        __O[382] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then o.item ~= false else __O[382]) then
+        local ____t_120 = __t
+        local ____t_result_119
+        local ____t_118 = __t
+        local ____t_result_117
+        local ____t_116 = __t
+        local ____t_result_115
+        if __t(S.item) then
+            ____t_result_115 = not __t(attack)
+        else
+            ____t_result_115 = S.item
+        end
+        __O[381] = ____t_result_115
+        if ____t_116(____t_result_115) then
+            ____t_result_117 = not __t(o.reach)
+        else
+            ____t_result_117 = __O[381]
+        end
+        __O[382] = ____t_result_117
+        if ____t_118(____t_result_117) then
+            ____t_result_119 = o.item ~= false
+        else
+            ____t_result_119 = __O[382]
+        end
+        if ____t_120(____t_result_119) then
             item(
                 nil,
                 c,
@@ -4210,14 +4594,42 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1 * if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
-        local ____t_33 = __t
-        local ____TS__Number_result_32 = __TS__Number(o.frame)
-        __O[383] = ____TS__Number_result_32
-        local t = if ____t_33(____TS__Number_result_32) then __O[383] else 0
+        local ____c_125 = c
+        local ____c_scale_126 = c.scale
+        local ____temp_122 = __lt(o.facing, 0) and -1 or 1
+        local ____t_result_121
+        if __t(o.scale) then
+            ____t_result_121 = o.scale
+        else
+            ____t_result_121 = 1
+        end
+        local ____temp_124 = ____temp_122 * ____t_result_121
+        local ____t_result_123
+        if __t(o.scale) then
+            ____t_result_123 = o.scale
+        else
+            ____t_result_123 = 1
+        end
+        ____c_scale_126(____c_125, ____temp_124, ____t_result_123)
+        local ____t_result_129
+        local ____t_128 = __t
+        local ____TS__Number_result_127 = __TS__Number(o.frame)
+        __O[383] = ____TS__Number_result_127
+        if ____t_128(____TS__Number_result_127) then
+            ____t_result_129 = __O[383]
+        else
+            ____t_result_129 = 0
+        end
+        local t = ____t_result_129
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
-        local run = if __t(moving) then math.sin(t * 12) else 0
-        local wag = math.sin(t * if __t(moving) then 14 else 9) * 4
+        local ____t_result_130
+        if __t(moving) then
+            ____t_result_130 = math.sin(t * 12)
+        else
+            ____t_result_130 = 0
+        end
+        local run = ____t_result_130
+        local wag = math.sin(t * (__t(moving) and 14 or 9)) * 4
         local fur = "#c98a43"
         local dark = "#9a6330"
         local light = "#efc58c"
@@ -4247,7 +4659,7 @@ local __O = {};
                 local lx
                 lx = ____bindingPattern0[1]
                 ph = ____bindingPattern0[2]
-                local s = math.floor(run * 4 * if __t(__mod(i, 2)) then -1 else 1 + 0.5)
+                local s = math.floor(run * 4 * (__t(__mod(i, 2)) and -1 or 1) + 0.5)
                 r(
                     nil,
                     c,
@@ -4264,7 +4676,7 @@ local __O = {};
                     -12,
                     4,
                     10,
-                    if i < 2 then dark else fur
+                    i < 2 and dark or fur
                 )
                 r(
                     nil,
@@ -4441,11 +4853,17 @@ local __O = {};
             8,
             dark
         )
-        local ____t_36 = __t
-        local ____t_35 = __t
-        local ____temp_34 = o.emotion == "happy"
-        __O[384] = ____temp_34
-        if ____t_36(if ____t_35(____temp_34) then __O[384] else moving) then
+        local ____t_134 = __t
+        local ____t_result_133
+        local ____t_132 = __t
+        local ____temp_131 = o.emotion == "happy"
+        __O[384] = ____temp_131
+        if ____t_132(____temp_131) then
+            ____t_result_133 = __O[384]
+        else
+            ____t_result_133 = moving
+        end
+        if ____t_134(____t_result_133) then
             r(
                 nil,
                 c,
@@ -4498,13 +4916,24 @@ local __O = {};
             math.floor(y + 0.5)
         )
         c:scale(A.sx, A.sy)
-        draw(
+        local ____draw_140 = draw
+        local ____c_139 = c
+        local ____assign_138 = __assign
+        local ____temp_136 = {}
+        local ____o_137 = o
+        local ____temp_135
+        if who == "daroca" then
+            ____temp_135 = false
+        else
+            ____temp_135 = o.look
+        end
+        ____draw_140(
             nil,
-            c,
+            ____c_139,
             t,
             0,
             0,
-            __assign({}, o, {look = if who == "daroca" then false else o.look})
+            ____assign_138(____temp_136, ____o_137, {look = ____temp_135})
         )
         c:restore()
     end
@@ -4532,10 +4961,15 @@ local __O = {};
                 o
             )
         end
-        local m = __re_exec(
-            __re("^(crianca|pre)_(daroca|reeis|jorge)$", ""),
-            if __t(____type) then ____type else ""
-        )
+        local ____re_exec_143 = __re_exec
+        local ____re_result_142 = __re("^(crianca|pre)_(daroca|reeis|jorge)$", "")
+        local ____t_result_141
+        if __t(____type) then
+            ____t_result_141 = ____type
+        else
+            ____t_result_141 = ""
+        end
+        local m = ____re_exec_143(____re_result_142, ____t_result_141)
         if __t(m) then
             return aged(
                 nil,
@@ -4557,11 +4991,17 @@ local __O = {};
         )
     end
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawCharacter)
     __O[372] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[372] else window.CampanhaPersonagens) then
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[372]
+    else
+        ____t_result_2 = window.CampanhaPersonagens
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     base = window.Art.drawCharacter
@@ -5127,12 +5567,18 @@ local __O = {};
         __keys(SPEC),
         "map",
         function(____, id)
-            local ____id_39 = id
-            local ____get_result_name_40 = __get(SPEC, id).name
-            local ____t_38 = __t
-            local ____get_result_37 = __get(ROLE, id)
-            __O[385] = ____get_result_37
-            return {id = ____id_39, nome = ____get_result_name_40, papel = if ____t_38(____get_result_37) then __O[385] else ""}
+            local ____id_147 = id
+            local ____get_result_name_148 = __get(SPEC, id).name
+            local ____t_result_146
+            local ____t_145 = __t
+            local ____get_result_144 = __get(ROLE, id)
+            __O[385] = ____get_result_144
+            if ____t_145(____get_result_144) then
+                ____t_result_146 = __O[385]
+            else
+                ____t_result_146 = ""
+            end
+            return {id = ____id_147, nome = ____get_result_name_148, papel = ____t_result_146}
         end
     )
     __call(
@@ -5150,11 +5596,17 @@ local __O = {};
         if papel == nil then
             papel = ""
         end
-        local ____t_43 = __t
-        local ____t_42 = __t
-        local ____temp_41 = not __t(id) or not __t(spec)
-        __O[386] = ____temp_41
-        if ____t_43(if ____t_42(____temp_41) then __O[386] else __get(SPEC, id)) then
+        local ____t_152 = __t
+        local ____t_result_151
+        local ____t_150 = __t
+        local ____temp_149 = not __t(id) or not __t(spec)
+        __O[386] = ____temp_149
+        if ____t_150(____temp_149) then
+            ____t_result_151 = __O[386]
+        else
+            ____t_result_151 = __get(SPEC, id)
+        end
+        if ____t_152(____t_result_151) then
             return false
         end
         __set(SPEC, id, spec)
@@ -5175,13 +5627,24 @@ local __O = {};
                     "pre_jorge"
                 }, 6),
                 has = function(____, ____type)
-                    local ____t_45 = __t
-                    local ____temp_44 = not not __t(__get(SPEC, ____type)) or ____type == "c2_biscoito"
-                    __O[387] = ____temp_44
-                    return if ____t_45(____temp_44) then __O[387] else __re_test(
-                        __re("^(crianca|pre)_(daroca|reeis|jorge)$", ""),
-                        if __t(____type) then ____type else ""
-                    )
+                    local ____t_result_158
+                    local ____t_154 = __t
+                    local ____temp_153 = not not __t(__get(SPEC, ____type)) or ____type == "c2_biscoito"
+                    __O[387] = ____temp_153
+                    if ____t_154(____temp_153) then
+                        ____t_result_158 = __O[387]
+                    else
+                        local ____re_test_157 = __re_test
+                        local ____re_result_156 = __re("^(crianca|pre)_(daroca|reeis|jorge)$", "")
+                        local ____t_result_155
+                        if __t(____type) then
+                            ____t_result_155 = ____type
+                        else
+                            ____t_result_155 = ""
+                        end
+                        ____t_result_158 = ____re_test_157(____re_result_156, ____t_result_155)
+                    end
+                    return ____t_result_158
                 end
             },
             {lista = function()

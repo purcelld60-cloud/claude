@@ -9,6 +9,9 @@ local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__Number = ____lualib.__TS__Number
 local __TS__MathSign = ____lualib.__TS__MathSign
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local ____exports = {}
 local __O = {};
 (function()
@@ -185,15 +188,21 @@ local __O = {};
     local said = 0
     local function build(self, scene)
         local out = __arrL({}, 0)
-        local ____iter_2 = __iter
-        local ____t_1 = __t
-        local ____get_result_0 = __get(PATCHES, scene)
-        __O[413] = ____get_result_0
-        for ____, ____value in __TS__Iterator(____iter_2(if ____t_1(____get_result_0) then __O[413] else __arrL({}, 0))) do
+        local ____iter_7 = __iter
+        local ____t_result_6
+        local ____t_5 = __t
+        local ____get_result_4 = __get(PATCHES, scene)
+        __O[413] = ____get_result_4
+        if ____t_5(____get_result_4) then
+            ____t_result_6 = __O[413]
+        else
+            ____t_result_6 = __arrL({}, 0)
+        end
+        for ____, ____value in __TS__Iterator(____iter_7(____t_result_6)) do
             local ____type = ____value[1]
             local x0 = ____value[2]
             local w = ____value[3]
-            local step = if ____type == "cacto" then 18 else if ____type == "cafe" then 16 else if ____type == "floreira" then 7 else if ____type == "samambaia" then 12 else if ____type == "mato" then 6 else 5
+            local step = ____type == "cacto" and 18 or (____type == "cafe" and 16 or (____type == "floreira" and 7 or (____type == "samambaia" and 12 or (____type == "mato" and 6 or 5))))
             do
                 local x = x0
                 while __lt(
@@ -220,13 +229,22 @@ local __O = {};
                         cacto = 10 + r * 4,
                         floreira = 10 + r * 10
                     }, ____type) * edge
-                    __call(
+                    local ____call_3 = __call
+                    local ____type_1 = ____type
+                    local ____temp_2 = x + (r2 - 0.5) * step * 0.7
+                    local ____temp_0
+                    if ____type == "floreira" then
+                        ____temp_0 = FLOOR - 2 + (r2 > 0.5 and 4 or 0)
+                    else
+                        ____temp_0 = base
+                    end
+                    ____call_3(
                         out,
                         "push",
                         {
-                            type = ____type,
-                            x = x + (r2 - 0.5) * step * 0.7,
-                            base = if ____type == "floreira" then FLOOR - 2 + if r2 > 0.5 then 4 else 0 else base,
+                            type = ____type_1,
+                            x = ____temp_2,
+                            base = ____temp_0,
                             h = h,
                             hh = h,
                             ph = r * 6.28,
@@ -250,14 +268,20 @@ local __O = {};
             "sort",
             function(____, a, b) return a.base - b.base end
         )
-        local ____call_5 = __call
-        local ____t_4 = __t
-        local ____get_result_3 = __get(PATCHES, scene)
-        __O[414] = ____get_result_3
+        local ____call_11 = __call
+        local ____t_result_10
+        local ____t_9 = __t
+        local ____get_result_8 = __get(PATCHES, scene)
+        __O[414] = ____get_result_8
+        if ____t_9(____get_result_8) then
+            ____t_result_10 = __O[414]
+        else
+            ____t_result_10 = __arrL({}, 0)
+        end
         return {
             stems = out,
-            pots = ____call_5(
-                if ____t_4(____get_result_3) then __O[414] else __arrL({}, 0),
+            pots = ____call_11(
+                ____t_result_10,
                 "filter",
                 function(____, p) return __get(p, 0) == "floreira" end
             )
@@ -277,16 +301,16 @@ local __O = {};
         return __get(sets, scene)
     end
     local function burst(self, s, n, kind)
-        local ____t_11 = __t
-        local ____opt_8 = window.Graphics
-        if ____opt_8 ~= nil then
-            ____opt_8 = ____opt_8.isLite
+        local ____t_17 = __t
+        local ____opt_14 = window.Graphics
+        if ____opt_14 ~= nil then
+            ____opt_14 = ____opt_14.isLite
         end
-        local ____opt_result_10
-        if ____opt_8 ~= nil then
-            ____opt_result_10 = ____opt_8(____opt_8)
+        local ____opt_result_16
+        if ____opt_14 ~= nil then
+            ____opt_result_16 = ____opt_14(____opt_14)
         end
-        local lite = not not ____t_11(____opt_result_10)
+        local lite = not not ____t_17(____opt_result_16)
         if __t(lite) then
             n = math.ceil(n / 3)
         end
@@ -303,19 +327,38 @@ local __O = {};
         do
             local k = 0
             while __lt(k, n) do
-                __call(
-                    parts,
-                    "push",
-                    {
-                        x = tx + (math.random() - 0.5) * 6,
-                        y = ty,
-                        vx = (math.random() - 0.5) * 70,
-                        vy = if kind == "semente" then -30 - math.random() * 30 else -60 - math.random() * 60,
-                        life = if kind == "semente" then 2.5 + math.random() * 2 else 1 + math.random() * 0.8,
-                        kind = kind,
-                        col = if kind == "petala" then s.col else if kind == "grao" then "#d8343a" else if kind == "semente" then "#f4f2ea" else if __gt(s.tone, 0.5) then "#5f9a46" else "#7ab04a"
-                    }
-                )
+                local ____call_25 = __call
+                local ____parts_24 = parts
+                local ____temp_21 = tx + (math.random() - 0.5) * 6
+                local ____temp_22 = (math.random() - 0.5) * 70
+                local ____temp_18
+                if kind == "semente" then
+                    ____temp_18 = -30 - math.random() * 30
+                else
+                    ____temp_18 = -60 - math.random() * 60
+                end
+                local ____temp_19
+                if kind == "semente" then
+                    ____temp_19 = 2.5 + math.random() * 2
+                else
+                    ____temp_19 = 1 + math.random() * 0.8
+                end
+                local ____kind_23 = kind
+                local ____temp_20
+                if kind == "petala" then
+                    ____temp_20 = s.col
+                else
+                    ____temp_20 = kind == "grao" and "#d8343a" or (kind == "semente" and "#f4f2ea" or (__gt(s.tone, 0.5) and "#5f9a46" or "#7ab04a"))
+                end
+                ____call_25(____parts_24, "push", {
+                    x = ____temp_21,
+                    y = ty,
+                    vx = ____temp_22,
+                    vy = ____temp_18,
+                    life = ____temp_19,
+                    kind = ____kind_23,
+                    col = ____temp_20
+                })
                 k = k + 1
             end
         end
@@ -340,109 +383,194 @@ local __O = {};
         if not __t(S) then
             return
         end
-        local p = if __t(o.player) then o.player else {}
-        local ____t_13 = __t
-        local ____TS__Number_result_12 = __TS__Number(p.x)
-        __O[415] = ____TS__Number_result_12
-        local px = if ____t_13(____TS__Number_result_12) then __O[415] else 0
-        local ____t_15 = __t
-        local ____TS__Number_result_14 = __TS__Number(p.y)
-        __O[416] = ____TS__Number_result_14
-        local py = if ____t_15(____TS__Number_result_14) then __O[416] else FLOOR
-        local ____t_17 = __t
-        local ____TS__Number_result_16 = __TS__Number(p.vx)
-        __O[417] = ____TS__Number_result_16
-        local vx = if ____t_17(____TS__Number_result_16) then __O[417] else 0
-        local ____t_19 = __t
-        local ____TS__Number_result_18 = __TS__Number(o.time)
-        __O[418] = ____TS__Number_result_18
-        local t = if ____t_19(____TS__Number_result_18) then __O[418] else 0
+        local ____t_result_26
+        if __t(o.player) then
+            ____t_result_26 = o.player
+        else
+            ____t_result_26 = {}
+        end
+        local p = ____t_result_26
+        local ____t_result_29
+        local ____t_28 = __t
+        local ____TS__Number_result_27 = __TS__Number(p.x)
+        __O[415] = ____TS__Number_result_27
+        if ____t_28(____TS__Number_result_27) then
+            ____t_result_29 = __O[415]
+        else
+            ____t_result_29 = 0
+        end
+        local px = ____t_result_29
+        local ____t_result_32
+        local ____t_31 = __t
+        local ____TS__Number_result_30 = __TS__Number(p.y)
+        __O[416] = ____TS__Number_result_30
+        if ____t_31(____TS__Number_result_30) then
+            ____t_result_32 = __O[416]
+        else
+            ____t_result_32 = FLOOR
+        end
+        local py = ____t_result_32
+        local ____t_result_35
+        local ____t_34 = __t
+        local ____TS__Number_result_33 = __TS__Number(p.vx)
+        __O[417] = ____TS__Number_result_33
+        if ____t_34(____TS__Number_result_33) then
+            ____t_result_35 = __O[417]
+        else
+            ____t_result_35 = 0
+        end
+        local vx = ____t_result_35
+        local ____t_result_38
+        local ____t_37 = __t
+        local ____TS__Number_result_36 = __TS__Number(o.time)
+        __O[418] = ____TS__Number_result_36
+        if ____t_37(____TS__Number_result_36) then
+            ____t_result_38 = __O[418]
+        else
+            ____t_result_38 = 0
+        end
+        local t = ____t_result_38
         local atk = __TS__Number(p.attack) > 0
-        local face = if __lt(p.facing, 0) then -1 else 1
-        local ____t_29 = __t
-        local ____opt_24 = window.Weather
-        if ____opt_24 ~= nil then
-            ____opt_24 = ____opt_24.state
+        local face = __lt(p.facing, 0) and -1 or 1
+        local ____t_result_49
+        local ____t_48 = __t
+        local ____opt_43 = window.Weather
+        if ____opt_43 ~= nil then
+            ____opt_43 = ____opt_43.state
         end
-        local ____opt_result_26
-        if ____opt_24 ~= nil then
-            ____opt_result_26 = ____opt_24(____opt_24)
+        local ____opt_result_45
+        if ____opt_43 ~= nil then
+            ____opt_result_45 = ____opt_43(____opt_43)
         end
-        local ____opt_result_27
-        if ____opt_result_26 ~= nil then
-            ____opt_result_27 = ____opt_result_26.wind
+        local ____opt_result_46
+        if ____opt_result_45 ~= nil then
+            ____opt_result_46 = ____opt_result_45.wind
         end
-        local ____TS__Number_result_28 = __TS__Number(____opt_result_27)
-        __O[419] = ____TS__Number_result_28
-        local wind = if ____t_29(____TS__Number_result_28) then __O[419] else 0.25 * 0.6 + 0.15
+        local ____TS__Number_result_47 = __TS__Number(____opt_result_46)
+        __O[419] = ____TS__Number_result_47
+        if ____t_48(____TS__Number_result_47) then
+            ____t_result_49 = __O[419]
+        else
+            ____t_result_49 = 0.25
+        end
+        local wind = ____t_result_49 * 0.6 + 0.15
         local touched = false
         for ____, s in __iterar((S.stems)) do
-            if math.abs(s.x - (o.camera + 480)) > 620 then
-                continue
-            end
-            local gust = math.sin(t * 1.4 - s.x * 0.05 + s.ph * 0.3) * 0.5 + 0.5
-            local target = if s.type == "cacto" then 0 else wind * (0.15 + gust * 0.35) * if s.type == "floreira" then 0.3 else 1 + math.sin(t * 2.2 + s.ph) * 0.04
-            local d = s.x - px
-            local R0 = if s.type == "cacto" then 12 else 16
-            if __t(math.abs(d) < R0 + 6 and py > s.base - s.h * 1.2) then
-                local f = cl(
-                    nil,
-                    1 - math.abs(d) / R0
-                )
-                local side = if d > 1 then 1 else if d < -1 then -1 else if vx >= 0 then 1 else -1
-                if f > 0 then
-                    touched = true
-                    if s.type == "cacto" then
-                        s.w = s.w + side * dt * 20 * f
-                        if math.abs(vx) > 40 then
-                            say(nil, "AI!", s.x, s.base - 30)
-                        end
-                    else
-                        target = side * (0.6 + 0.7 * math.sqrt(f)) + vx * 0.001 * f
-                        if __t(math.abs(vx) > 90 and math.random() < dt * 6 * f) then
-                            burst(nil, s, 1, if __t(s.type == "flores" or s.type == "floreira") then "petala" else if __t(s.seeds) then "semente" else if s.type == "cafe" then "grao" else "folha")
+            do
+                if math.abs(s.x - (o.camera + 480)) > 620 then
+                    continue
+                end
+                local gust = math.sin(t * 1.4 - s.x * 0.05 + s.ph * 0.3) * 0.5 + 0.5
+                local target = s.type == "cacto" and 0 or wind * (0.15 + gust * 0.35) * (s.type == "floreira" and 0.3 or 1) + math.sin(t * 2.2 + s.ph) * 0.04
+                local d = s.x - px
+                local R0 = s.type == "cacto" and 12 or 16
+                if __t(math.abs(d) < R0 + 6 and py > s.base - s.h * 1.2) then
+                    local f = cl(
+                        nil,
+                        1 - math.abs(d) / R0
+                    )
+                    local side = d > 1 and 1 or (d < -1 and -1 or (vx >= 0 and 1 or -1))
+                    if f > 0 then
+                        touched = true
+                        if s.type == "cacto" then
+                            s.w = s.w + side * dt * 20 * f
+                            if math.abs(vx) > 40 then
+                                say(nil, "AI!", s.x, s.base - 30)
+                            end
+                        else
+                            target = side * (0.6 + 0.7 * math.sqrt(f)) + vx * 0.001 * f
+                            if __t(math.abs(vx) > 90 and math.random() < dt * 6 * f) then
+                                burst(
+                                    nil,
+                                    s,
+                                    1,
+                                    __t(s.type == "flores" or s.type == "floreira") and "petala" or (__t(s.seeds) and "semente" or (s.type == "cafe" and "grao" or "folha"))
+                                )
+                            end
                         end
                     end
                 end
+                local ____t_59 = __t
+                local ____t_result_58
+                local ____t_57 = __t
+                local ____t_result_56
+                local ____t_55 = __t
+                local ____t_result_54
+                local ____t_53 = __t
+                local ____t_result_52
+                local ____t_51 = __t
+                local ____t_result_50
+                if __t(atk) then
+                    ____t_result_50 = __lt(s.cut, 0.5)
+                else
+                    ____t_result_50 = atk
+                end
+                __O[420] = ____t_result_50
+                if ____t_51(____t_result_50) then
+                    ____t_result_52 = __TS__MathSign(d) == face
+                else
+                    ____t_result_52 = __O[420]
+                end
+                __O[421] = ____t_result_52
+                if ____t_53(____t_result_52) then
+                    ____t_result_54 = math.abs(d) < 90
+                else
+                    ____t_result_54 = __O[421]
+                end
+                __O[422] = ____t_result_54
+                if ____t_55(____t_result_54) then
+                    ____t_result_56 = py > s.base - 60
+                else
+                    ____t_result_56 = __O[422]
+                end
+                __O[423] = ____t_result_56
+                if ____t_57(____t_result_56) then
+                    ____t_result_58 = s.type ~= "cacto"
+                else
+                    ____t_result_58 = __O[423]
+                end
+                if ____t_59(____t_result_58) then
+                    s.cut = 1
+                    s.w = s.w + face * 8
+                    burst(
+                        nil,
+                        s,
+                        4,
+                        __t(s.type == "flores" or s.type == "floreira") and "petala" or (__t(s.seeds) and "semente" or (s.type == "cafe" and "grao" or "folha"))
+                    )
+                end
+                s.cut = math.max(0, s.cut - dt * 0.18)
+                s.hh = s.h * (1 - s.cut * 0.65)
+                local acc = (target - s.a) * (s.type == "cacto" and 40 or 70) - s.w * 7
+                s.w = s.w + acc * dt
+                s.a = cl(nil, s.a + s.w * dt, -1.3, 1.3)
             end
-            local ____t_38 = __t
-            local ____t_37 = __t
-            local ____t_35 = __t
-            local ____t_33 = __t
-            local ____t_31 = __t
-            local ____temp_30 = if __t(atk) then __lt(s.cut, 0.5) else atk
-            __O[420] = ____temp_30
-            local ____temp_32 = if ____t_31(____temp_30) then __TS__MathSign(d) == face else __O[420]
-            __O[421] = ____temp_32
-            local ____temp_34 = if ____t_33(____temp_32) then math.abs(d) < 90 else __O[421]
-            __O[422] = ____temp_34
-            local ____temp_36 = if ____t_35(____temp_34) then py > s.base - 60 else __O[422]
-            __O[423] = ____temp_36
-            if ____t_38(if ____t_37(____temp_36) then s.type ~= "cacto" else __O[423]) then
-                s.cut = 1
-                s.w = s.w + face * 8
-                burst(nil, s, 4, if __t(s.type == "flores" or s.type == "floreira") then "petala" else if __t(s.seeds) then "semente" else if s.type == "cafe" then "grao" else "folha")
-            end
-            s.cut = math.max(0, s.cut - dt * 0.18)
-            s.hh = s.h * (1 - s.cut * 0.65)
-            local acc = (target - s.a) * if s.type == "cacto" then 40 else 70 - s.w * 7
-            s.w = s.w + acc * dt
-            s.a = cl(nil, s.a + s.w * dt, -1.3, 1.3)
         end
-        local ____t_41 = __t
-        local ____t_40 = __t
-        local ____temp_39 = if __t(touched) then math.abs(vx) > 60 else touched
-        __O[424] = ____temp_39
-        if ____t_41(if ____t_40(____temp_39) then t - lastSound > 0.22 else __O[424]) then
+        local ____t_63 = __t
+        local ____t_result_62
+        local ____t_61 = __t
+        local ____t_result_60
+        if __t(touched) then
+            ____t_result_60 = math.abs(vx) > 60
+        else
+            ____t_result_60 = touched
+        end
+        __O[424] = ____t_result_60
+        if ____t_61(____t_result_60) then
+            ____t_result_62 = t - lastSound > 0.22
+        else
+            ____t_result_62 = __O[424]
+        end
+        if ____t_63(____t_result_62) then
             lastSound = t
             do
                 pcall(function()
-                    local ____opt_44 = window.DarocaAudio
-                    if ____opt_44 ~= nil then
-                        ____opt_44 = ____opt_44.play
+                    local ____opt_66 = window.DarocaAudio
+                    if ____opt_66 ~= nil then
+                        ____opt_66 = ____opt_66.play
                     end
-                    if ____opt_44 ~= nil then
-                        ____opt_44(____opt_44, "mato", {volume = 0.35})
+                    if ____opt_66 ~= nil then
+                        ____opt_66(____opt_66, "mato", {volume = 0.35})
                     end
                 end)
             end
@@ -462,7 +590,15 @@ local __O = {};
                 else
                     q.vy = q.vy + 160 * dt
                     q.vx = q.vx * (1 - dt * 1.5)
-                    q.x = q.x + (q.vx * dt + if q.kind == "petala" then math.sin(t * 5 + i) * 14 * dt else 0)
+                    local ____q_70, ____x_71 = q, "x"
+                    local ____temp_69 = q.vx * dt
+                    local ____temp_68
+                    if q.kind == "petala" then
+                        ____temp_68 = math.sin(t * 5 + i) * 14 * dt
+                    else
+                        ____temp_68 = 0
+                    end
+                    ____q_70[____x_71] = ____q_70[____x_71] + (____temp_69 + ____temp_68)
                     q.y = q.y + q.vy * dt
                     if __gt(q.y, FLOOR + 6) then
                         q.y = FLOOR + 6
@@ -492,7 +628,19 @@ local __O = {};
             local ____cond48 = ____switch48 == "capim"
             if ____cond48 then
                 do
-                    local cols = if __gt(s.tone, 0.6) then __arrL({"#6f9a3a", "#9cc45a"}, 2) else if __gt(s.tone, 0.25) then __arrL({"#4f8a3a", "#79b04a"}, 2) else __arrL({"#a8a04a", "#d0c06a"}, 2)
+                    local ____gt_result_73
+                    if __gt(s.tone, 0.6) then
+                        ____gt_result_73 = __arrL({"#6f9a3a", "#9cc45a"}, 2)
+                    else
+                        local ____gt_result_72
+                        if __gt(s.tone, 0.25) then
+                            ____gt_result_72 = __arrL({"#4f8a3a", "#79b04a"}, 2)
+                        else
+                            ____gt_result_72 = __arrL({"#a8a04a", "#d0c06a"}, 2)
+                        end
+                        ____gt_result_73 = ____gt_result_72
+                    end
+                    local cols = ____gt_result_73
                     for ____, off in __iterar((__arrL({-2, 0, 2}, 3))) do
                         do
                             local k = 0
@@ -502,15 +650,22 @@ local __O = {};
                                     1,
                                     2
                                 )
-                                R(
+                                local ____array_75 = __TS__SparseArrayNew(
                                     nil,
                                     c,
                                     x + off * (1 - k / n) * 1.5,
                                     y,
                                     2,
-                                    2,
-                                    if k > n * 0.6 then __get(cols, 1) else __get(cols, 0)
+                                    2
                                 )
+                                local ____temp_74
+                                if k > n * 0.6 then
+                                    ____temp_74 = __get(cols, 1)
+                                else
+                                    ____temp_74 = __get(cols, 0)
+                                end
+                                __TS__SparseArrayPush(____array_75, ____temp_74)
+                                R(__TS__SparseArraySpread(____array_75))
                                 k = k + 1
                             end
                         end
@@ -566,7 +721,14 @@ local __O = {};
                         1,
                         2
                     )
-                    if __t(if __t(s.seeds) then __lt(s.cut, 0.3) else s.seeds) then
+                    local ____t_77 = __t
+                    local ____t_result_76
+                    if __t(s.seeds) then
+                        ____t_result_76 = __lt(s.cut, 0.3)
+                    else
+                        ____t_result_76 = s.seeds
+                    end
+                    if ____t_77(____t_result_76) then
                         R(
                             nil,
                             c,
@@ -673,7 +835,7 @@ local __O = {};
                             y - 2,
                             2,
                             2,
-                            if s.col == "#f2c94c" then "#c47a35" else "#f2e06a"
+                            s.col == "#f2c94c" and "#c47a35" or "#f2e06a"
                         )
                     end
                     break
@@ -900,10 +1062,16 @@ local __O = {};
         )
     end
     local function visible(____, o)
-        local ____t_47 = __t
-        local ____temp_46 = __ge(o.scene, 12) and not __t(o.arena)
-        __O[425] = ____temp_46
-        return if ____t_47(____temp_46) then not __t(o.room) else __O[425]
+        local ____t_result_80
+        local ____t_79 = __t
+        local ____temp_78 = __ge(o.scene, 12) and not __t(o.arena)
+        __O[425] = ____temp_78
+        if ____t_79(____temp_78) then
+            ____t_result_80 = not __t(o.room)
+        else
+            ____t_result_80 = __O[425]
+        end
+        return ____t_result_80
     end
     local function drawBack(self, ctx, o)
         if not __t(visible(nil, o)) then
@@ -913,10 +1081,16 @@ local __O = {};
         if not __t(S) then
             return
         end
-        local ____t_49 = __t
-        local ____TS__Number_result_48 = __TS__Number(o.time)
-        __O[426] = ____TS__Number_result_48
-        local t = if ____t_49(____TS__Number_result_48) then __O[426] else 0
+        local ____t_result_83
+        local ____t_82 = __t
+        local ____TS__Number_result_81 = __TS__Number(o.time)
+        __O[426] = ____TS__Number_result_81
+        if ____t_82(____TS__Number_result_81) then
+            ____t_result_83 = __O[426]
+        else
+            ____t_result_83 = 0
+        end
+        local t = ____t_result_83
         local dt = math.max(
             0,
             math.min(0.05, t - lastT)
@@ -936,11 +1110,17 @@ local __O = {};
             end
         end
         for ____, s in __iterar((S.stems)) do
-            local ____t_52 = __t
-            local ____t_51 = __t
-            local ____temp_50 = __lt(s.base, FLOOR) and __gt(s.x, o.camera - 40)
-            __O[427] = ____temp_50
-            if ____t_52(if ____t_51(____temp_50) then __lt(s.x, o.camera + 1000) else __O[427]) then
+            local ____t_87 = __t
+            local ____t_result_86
+            local ____t_85 = __t
+            local ____temp_84 = __lt(s.base, FLOOR) and __gt(s.x, o.camera - 40)
+            __O[427] = ____temp_84
+            if ____t_85(____temp_84) then
+                ____t_result_86 = __lt(s.x, o.camera + 1000)
+            else
+                ____t_result_86 = __O[427]
+            end
+            if ____t_87(____t_result_86) then
                 stem(nil, ctx, s, t)
             end
         end
@@ -954,52 +1134,66 @@ local __O = {};
         if not __t(S) then
             return
         end
-        local ____t_54 = __t
-        local ____TS__Number_result_53 = __TS__Number(o.time)
-        __O[428] = ____TS__Number_result_53
-        local t = if ____t_54(____TS__Number_result_53) then __O[428] else 0
+        local ____t_result_90
+        local ____t_89 = __t
+        local ____TS__Number_result_88 = __TS__Number(o.time)
+        __O[428] = ____TS__Number_result_88
+        if ____t_89(____TS__Number_result_88) then
+            ____t_result_90 = __O[428]
+        else
+            ____t_result_90 = 0
+        end
+        local t = ____t_result_90
         ctx:save()
         ctx.imageSmoothingEnabled = false
         for ____, s in __iterar((S.stems)) do
-            local ____t_57 = __t
-            local ____t_56 = __t
-            local ____temp_55 = __ge(s.base, FLOOR) and __gt(s.x, o.camera - 40)
-            __O[429] = ____temp_55
-            if ____t_57(if ____t_56(____temp_55) then __lt(s.x, o.camera + 1000) else __O[429]) then
+            local ____t_94 = __t
+            local ____t_result_93
+            local ____t_92 = __t
+            local ____temp_91 = __ge(s.base, FLOOR) and __gt(s.x, o.camera - 40)
+            __O[429] = ____temp_91
+            if ____t_92(____temp_91) then
+                ____t_result_93 = __lt(s.x, o.camera + 1000)
+            else
+                ____t_result_93 = __O[429]
+            end
+            if ____t_94(____t_result_93) then
                 stem(nil, ctx, s, t)
             end
         end
         for ____, q in __iterar((parts)) do
-            if q.kind == "texto" then
-                ctx.globalAlpha = cl(nil, q.life * 2)
-                ctx.font = "12px Pixel, monospace"
-                ctx.textAlign = "center"
-                ctx.fillStyle = "#2a1a14"
-                ctx:fillText(q.text, q.x + 2, q.y + 2)
-                ctx.fillStyle = "#ffe2a0"
-                ctx:fillText(q.text, q.x, q.y)
-                continue
-            end
-            ctx.globalAlpha = cl(nil, q.life * 1.5)
-            R(
-                nil,
-                ctx,
-                q.x,
-                q.y,
-                if q.kind == "semente" then 2 else 4,
-                2,
-                q.col
-            )
-            if q.kind == "semente" then
+            do
+                if q.kind == "texto" then
+                    ctx.globalAlpha = cl(nil, q.life * 2)
+                    ctx.font = "12px Pixel, monospace"
+                    ctx.textAlign = "center"
+                    ctx.fillStyle = "#2a1a14"
+                    ctx:fillText(q.text, q.x + 2, q.y + 2)
+                    ctx.fillStyle = "#ffe2a0"
+                    ctx:fillText(q.text, q.x, q.y)
+                    continue
+                end
+                ctx.globalAlpha = cl(nil, q.life * 1.5)
                 R(
                     nil,
                     ctx,
-                    q.x - 2,
-                    q.y - 2,
-                    6,
+                    q.x,
+                    q.y,
+                    q.kind == "semente" and 2 or 4,
                     2,
-                    "rgba(244,242,234,.6)"
+                    q.col
                 )
+                if q.kind == "semente" then
+                    R(
+                        nil,
+                        ctx,
+                        q.x - 2,
+                        q.y - 2,
+                        6,
+                        2,
+                        "rgba(244,242,234,.6)"
+                    )
+                end
             end
         end
         ctx:restore()
@@ -1021,12 +1215,18 @@ local __O = {};
                 __del(sets, scene)
             end,
             canteiros = function(____, scene)
-                local ____call_60 = __call
-                local ____t_59 = __t
-                local ____get_result_58 = __get(PATCHES, scene)
-                __O[430] = ____get_result_58
-                return ____call_60(
-                    if ____t_59(____get_result_58) then __O[430] else __arrL({}, 0),
+                local ____call_98 = __call
+                local ____t_result_97
+                local ____t_96 = __t
+                local ____get_result_95 = __get(PATCHES, scene)
+                __O[430] = ____get_result_95
+                if ____t_96(____get_result_95) then
+                    ____t_result_97 = __O[430]
+                else
+                    ____t_result_97 = __arrL({}, 0)
+                end
+                return ____call_98(
+                    ____t_result_97,
                     "map",
                     function(____, p) return __call(p, "slice") end
                 )

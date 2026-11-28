@@ -150,11 +150,23 @@ local __O = {};
             ilhas,
             "reduce",
             function(____, melhor, i)
-                local ____t_2 = __t
+                local ____t_result_4
+                local ____t_3 = __t
+                local ____t_result_2
                 local ____t_1 = __t
                 local ____temp_0 = i.estado ~= "ausente"
-                __O[908] = ____temp_0
-                return if ____t_2(if ____t_1(____temp_0) then not __t(melhor) or math.abs(meio(nil, i) - x) < math.abs(meio(nil, melhor) - x) else __O[908]) then i else melhor
+                __O[913] = ____temp_0
+                if ____t_1(____temp_0) then
+                    ____t_result_2 = not __t(melhor) or math.abs(meio(nil, i) - x) < math.abs(meio(nil, melhor) - x)
+                else
+                    ____t_result_2 = __O[913]
+                end
+                if ____t_3(____t_result_2) then
+                    ____t_result_4 = i
+                else
+                    ____t_result_4 = melhor
+                end
+                return ____t_result_4
             end,
             nil
         )
@@ -164,7 +176,14 @@ local __O = {};
         f.ceu = nil
         f.y = f.piso
         if fase ~= 4 then
-            if __t(if __t(desceu) then p else desceu) then
+            local ____t_6 = __t
+            local ____t_result_5
+            if __t(desceu) then
+                ____t_result_5 = p
+            else
+                ____t_result_5 = desceu
+            end
+            if ____t_6(____t_result_5) then
                 p.y = f.piso
                 p.vy = 0
                 p.ground = true
@@ -204,16 +223,37 @@ local __O = {};
         local v = clamp(nil, ceu.tempo / 1.25, 0, 1)
         local subida = v * v * (3 - 2 * v)
         for ____, i in __iterar((ceu.ilhas)) do
+            local ____t_result_13
+            local ____t_12 = __t
+            local ____t_result_11
+            local ____t_10 = __t
+            local ____t_result_9
             local ____t_8 = __t
-            local ____t_6 = __t
-            local ____t_4 = __t
-            local ____temp_3 = if __t(p.ground) then __ge(p.vy, 0) else p.ground
-            __O[909] = ____temp_3
-            local ____temp_5 = if ____t_4(____temp_3) then i.estado ~= "ausente" else __O[909]
-            __O[910] = ____temp_5
-            local ____temp_7 = if ____t_6(____temp_5) then sob(nil, i, p.x) else __O[910]
-            __O[911] = ____temp_7
-            local levando = if ____t_8(____temp_7) then math.abs(p.y - i.y) < 2 else __O[911]
+            local ____t_result_7
+            if __t(p.ground) then
+                ____t_result_7 = __ge(p.vy, 0)
+            else
+                ____t_result_7 = p.ground
+            end
+            __O[914] = ____t_result_7
+            if ____t_8(____t_result_7) then
+                ____t_result_9 = i.estado ~= "ausente"
+            else
+                ____t_result_9 = __O[914]
+            end
+            __O[915] = ____t_result_9
+            if ____t_10(____t_result_9) then
+                ____t_result_11 = sob(nil, i, p.x)
+            else
+                ____t_result_11 = __O[915]
+            end
+            __O[916] = ____t_result_11
+            if ____t_12(____t_result_11) then
+                ____t_result_13 = math.abs(p.y - i.y) < 2
+            else
+                ____t_result_13 = __O[916]
+            end
+            local levando = ____t_result_13
             i.anterior = i.y
             i.y = f.piso - subida * (74 + 25 * math.sin(ceu.tempo * 1.12 + i.id * 0.94))
             if __t(levando) then
@@ -228,32 +268,45 @@ local __O = {};
         end
         for ____, o in __iterar((f.objetos)) do
             if o.ilha ~= nil then
-                local ____temp_9 = __get(ceu.ilhas, o.ilha).y - 5
-                o.y1 = ____temp_9
-                o.y0 = ____temp_9
+                local ____temp_14 = __get(ceu.ilhas, o.ilha).y - 5
+                o.y1 = ____temp_14
+                o.y0 = ____temp_14
             end
         end
     end
     local function pousar(self, f, p, antes, ferir)
         if __ge(p.vy, 0) then
             for ____, i in __iterar((f.ceu.ilhas)) do
-                local ____t_14 = __t
-                local ____t_13 = __t
-                local ____t_11 = __t
-                local ____temp_10 = i.estado == "ausente" or not __t(sob(nil, i, p.x))
-                __O[912] = ____temp_10
-                local ____temp_12 = if ____t_11(____temp_10) then __O[912] else __gt(
-                    antes,
-                    math.max(i.y, i.anterior) + 2
-                )
-                __O[913] = ____temp_12
-                if ____t_14(if ____t_13(____temp_12) then __O[913] else __lt(p.y, i.y)) then
-                    continue
+                do
+                    local ____t_20 = __t
+                    local ____t_result_19
+                    local ____t_18 = __t
+                    local ____t_result_17
+                    local ____t_16 = __t
+                    local ____temp_15 = i.estado == "ausente" or not __t(sob(nil, i, p.x))
+                    __O[917] = ____temp_15
+                    if ____t_16(____temp_15) then
+                        ____t_result_17 = __O[917]
+                    else
+                        ____t_result_17 = __gt(
+                            antes,
+                            math.max(i.y, i.anterior) + 2
+                        )
+                    end
+                    __O[918] = ____t_result_17
+                    if ____t_18(____t_result_17) then
+                        ____t_result_19 = __O[918]
+                    else
+                        ____t_result_19 = __lt(p.y, i.y)
+                    end
+                    if ____t_20(____t_result_19) then
+                        continue
+                    end
+                    p.y = i.y
+                    p.vy = 0
+                    p.ground = true
+                    return
                 end
-                p.y = i.y
-                p.vy = 0
-                p.ground = true
-                return
             end
         end
         if __le(p.y, f.piso + 40) then
@@ -266,19 +319,26 @@ local __O = {};
         p.vy = 0
         p.vx = 0
         p.ground = true
-        p.inv = math.max(if __t(p.inv) then p.inv else 0, 0.95)
+        local ____p_22 = p
+        local ____t_result_21
+        if __t(p.inv) then
+            ____t_result_21 = p.inv
+        else
+            ____t_result_21 = 0
+        end
+        ____p_22.inv = math.max(____t_result_21, 0.95)
     end
     local function marcar(self, f)
         local ceu = f.ceu
-        local ____get_19 = __get
-        local ____mod_18 = __mod
-        local ____ceu_15, ____rodada_16 = ceu, "rodada"
-        local ____ceu_rodada_17 = ____ceu_15[____rodada_16]
-        ____ceu_15[____rodada_16] = ____ceu_rodada_17 + 1
-        local ids = ____get_19(
+        local ____get_27 = __get
+        local ____mod_26 = __mod
+        local ____ceu_23, ____rodada_24 = ceu, "rodada"
+        local ____ceu_rodada_25 = ____ceu_23[____rodada_24]
+        ____ceu_23[____rodada_24] = ____ceu_rodada_25 + 1
+        local ids = ____get_27(
             escolhas,
-            ____mod_18(
-                ____ceu_rodada_17,
+            ____mod_26(
+                ____ceu_rodada_25,
                 __len(escolhas)
             )
         )
@@ -295,17 +355,28 @@ local __O = {};
     local function romper(self, f, p)
         for ____, i in __iterar((f.ceu.ilhas)) do
             if i.estado == "aviso" then
-                local ____t_26 = __t
-                local ____t_25 = __t
-                local ____t_23 = __t
-                local ____opt_result_22
+                local ____t_35 = __t
+                local ____t_result_34
+                local ____t_33 = __t
+                local ____t_result_32
+                local ____t_31 = __t
+                local ____opt_result_30
                 if p ~= nil then
-                    ____opt_result_22 = p.ground
+                    ____opt_result_30 = p.ground
                 end
-                __O[914] = ____opt_result_22
-                local ____temp_24 = if ____t_23(____opt_result_22) then sob(nil, i, p.x) else __O[914]
-                __O[915] = ____temp_24
-                if ____t_26(if ____t_25(____temp_24) then math.abs(i.y - p.y) < 3 else __O[915]) then
+                __O[919] = ____opt_result_30
+                if ____t_31(____opt_result_30) then
+                    ____t_result_32 = sob(nil, i, p.x)
+                else
+                    ____t_result_32 = __O[919]
+                end
+                __O[920] = ____t_result_32
+                if ____t_33(____t_result_32) then
+                    ____t_result_34 = math.abs(i.y - p.y) < 3
+                else
+                    ____t_result_34 = __O[920]
+                end
+                if ____t_35(____t_result_34) then
                     p.ground = false
                 end
                 i.estado = "ausente"
@@ -314,11 +385,17 @@ local __O = {};
         end
     end
     local function flutuar(self, f, dt)
-        local ____t_29 = __t
-        local ____t_28 = __t
-        local ____temp_27 = f.golpe == "rasante"
-        __O[916] = ____temp_27
-        if ____t_29(if ____t_28(____temp_27) then f.estado == "firing" or f.estado == "windup" else __O[916]) then
+        local ____t_39 = __t
+        local ____t_result_38
+        local ____t_37 = __t
+        local ____temp_36 = f.golpe == "rasante"
+        __O[921] = ____temp_36
+        if ____t_37(____temp_36) then
+            ____t_result_38 = f.estado == "firing" or f.estado == "windup"
+        else
+            ____t_result_38 = __O[921]
+        end
+        if ____t_39(____t_result_38) then
             return
         end
         local subida = clamp(nil, f.ceu.tempo / 1.18, 0, 1)
@@ -326,20 +403,32 @@ local __O = {};
         f.y = f.y + (f.piso - subida * altura - f.y) * math.min(1, dt * 5.2)
     end
     local function corpo(self, f)
-        return if f.fase == 2 then {rx = 36, altura = 103} else {rx = 22, altura = if f.fase == 4 then 76 else 71}
+        local ____temp_40
+        if f.fase == 2 then
+            ____temp_40 = {rx = 36, altura = 103}
+        else
+            ____temp_40 = {rx = 22, altura = f.fase == 4 and 76 or 71}
+        end
+        return ____temp_40
     end
     local function toca(self, f, x, y, rx, ry)
         local c = corpo(nil, f)
-        local ____t_31 = __t
-        local ____temp_30 = __lt(
+        local ____t_result_43
+        local ____t_42 = __t
+        local ____temp_41 = __lt(
             math.abs(x - f.x),
             c.rx + rx
         ) and __gt(
             __add(y, ry),
             f.y - c.altura
         )
-        __O[917] = ____temp_30
-        return if ____t_31(____temp_30) then __lt(y - ry, f.y) else __O[917]
+        __O[922] = ____temp_41
+        if ____t_42(____temp_41) then
+            ____t_result_43 = __lt(y - ry, f.y)
+        else
+            ____t_result_43 = __O[922]
+        end
+        return ____t_result_43
     end
     rect = function(____, c, x, y, w, h, cor)
         c.fillStyle = cor
@@ -426,9 +515,9 @@ local __O = {};
                     c,
                     x,
                     y,
-                    if __t(__mod(k, 7)) then 1 else 2,
+                    __t(__mod(k, 7)) and 1 or 2,
                     1,
-                    if __t(__mod(k, 4)) then "#aca3bf" else "#fce4c7"
+                    __t(__mod(k, 4)) and "#aca3bf" or "#fce4c7"
                 )
                 k = k + 1
             end
@@ -497,11 +586,11 @@ local __O = {};
                         x = x + 8
                     end
                 end
-                local ____pol_34 = pol
-                local ____arr_33 = __arr
-                local ____array_32 = __TS__SparseArrayNew(__TS__Spread(__iter(pontos)))
+                local ____pol_46 = pol
+                local ____arr_45 = __arr
+                local ____array_44 = __TS__SparseArrayNew(__TS__Spread(__iter(pontos)))
                 __TS__SparseArrayPush(
-                    ____array_32,
+                    ____array_44,
                     __TS__Spread(__iter(__call(
                         __call(
                             __call(pontos, "slice"),
@@ -517,10 +606,10 @@ local __O = {};
                         end
                     )))
                 )
-                ____pol_34(
+                ____pol_46(
                     nil,
                     c,
-                    ____arr_33(__TS__SparseArraySpread(____array_32)),
+                    ____arr_45(__TS__SparseArraySpread(____array_44)),
                     __get(
                         __arrL({"#414b80", "#505888", "#635c8b"}, 3),
                         k
@@ -554,18 +643,18 @@ local __O = {};
                         x = x + 6
                     end
                 end
-                local ____pol_37 = pol
-                local ____arr_36 = __arr
-                local ____array_35 = __TS__SparseArrayNew(__TS__Spread(__iter(pts)))
+                local ____pol_49 = pol
+                local ____arr_48 = __arr
+                local ____array_47 = __TS__SparseArrayNew(__TS__Spread(__iter(pts)))
                 __TS__SparseArrayPush(
-                    ____array_35,
+                    ____array_47,
                     __arrL({486, 270}, 2)
                 )
-                ____pol_37(
+                ____pol_49(
                     nil,
                     c,
-                    ____arr_36(__TS__SparseArraySpread(____array_35)),
-                    if __t(layer) then "#91829a" else "#aa8c9e"
+                    ____arr_48(__TS__SparseArraySpread(____array_47)),
+                    __t(layer) and "#91829a" or "#aa8c9e"
                 )
                 layer = layer + 1
             end
@@ -743,7 +832,7 @@ local __O = {};
                     y,
                     2,
                     1,
-                    if __t(__mod(k, 3)) then "#b4a1a3" else "#efd39e"
+                    __t(__mod(k, 3)) and "#b4a1a3" or "#efd39e"
                 )
                 k = k + 1
             end
@@ -800,7 +889,7 @@ local __O = {};
                     x,
                     y,
                     1.2,
-                    if __t(__mod(k, 3)) then "#aba1b4" else "#a59aae",
+                    __t(__mod(k, 3)) and "#aba1b4" or "#a59aae",
                     "#c7b6bf"
                 )
                 k = k + 1
@@ -872,230 +961,232 @@ local __O = {};
     local function plataformas(self, c, f)
         local t = f.ceu.tempo
         for ____, i in __iterar((f.ceu.ilhas)) do
-            local x = math.floor(i.x + 0.5)
-            local w = math.floor(i.w + 0.5)
-            local y = math.floor(i.y + 0.5)
-            local m = x + w / 2
-            if i.estado == "ausente" then
-                local queda = volta - i.resto
-                if queda < 0.48 then
-                    do
-                        local n = 0
-                        while n < 5 do
-                            local dx = (n - 2) * w / 5
-                            local dy = queda * queda * 390
-                            pol(
-                                nil,
-                                c,
-                                __arrL(
-                                    {
-                                        __arrL({m + dx - 7, y + dy + 3}, 2),
-                                        __arrL({m + dx + 8, y + dy + 6}, 2),
-                                        __arrL({m + dx + 1, y + dy + 18 + n}, 2)
-                                    },
-                                    3
-                                ),
-                                if __t(__mod(n, 2)) then "#a786b4" else "#dcaf97"
-                            )
-                            n = n + 1
+            do
+                local x = math.floor(i.x + 0.5)
+                local w = math.floor(i.w + 0.5)
+                local y = math.floor(i.y + 0.5)
+                local m = x + w / 2
+                if i.estado == "ausente" then
+                    local queda = volta - i.resto
+                    if queda < 0.48 then
+                        do
+                            local n = 0
+                            while n < 5 do
+                                local dx = (n - 2) * w / 5
+                                local dy = queda * queda * 390
+                                pol(
+                                    nil,
+                                    c,
+                                    __arrL(
+                                        {
+                                            __arrL({m + dx - 7, y + dy + 3}, 2),
+                                            __arrL({m + dx + 8, y + dy + 6}, 2),
+                                            __arrL({m + dx + 1, y + dy + 18 + n}, 2)
+                                        },
+                                        3
+                                    ),
+                                    __t(__mod(n, 2)) and "#a786b4" or "#dcaf97"
+                                )
+                                n = n + 1
+                            end
                         end
                     end
-                end
-                if __lt(i.resto, 0.64) then
-                    c:save()
-                    c.globalAlpha = 0.26 + (1 - i.resto / 0.64) * 0.46
-                    do
-                        local n = 0
-                        while n < w do
-                            rect(
-                                nil,
-                                c,
-                                x + n,
-                                y,
-                                math.min(7, w - n),
-                                3,
-                                "#bff9ff"
-                            )
-                            n = n + 12
+                    if __lt(i.resto, 0.64) then
+                        c:save()
+                        c.globalAlpha = 0.26 + (1 - i.resto / 0.64) * 0.46
+                        do
+                            local n = 0
+                            while n < w do
+                                rect(
+                                    nil,
+                                    c,
+                                    x + n,
+                                    y,
+                                    math.min(7, w - n),
+                                    3,
+                                    "#bff9ff"
+                                )
+                                n = n + 12
+                            end
                         end
+                        c:restore()
                     end
-                    c:restore()
+                    continue
                 end
-                continue
-            end
-            local alerta = i.estado == "aviso"
-            pol(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({x, y + 4}, 2),
-                        __arrL({x + w, y + 4}, 2),
-                        __arrL({x + w - 9, y + 16}, 2),
-                        __arrL({m + 15, y + 24}, 2),
-                        __arrL({m + 7, y + 33}, 2),
-                        __arrL({m - 10, y + 33}, 2),
-                        __arrL({m - 17, y + 23}, 2),
-                        __arrL({x + 10, y + 17}, 2)
-                    },
-                    8
-                ),
-                "#323453"
-            )
-            pol(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({x + 8, y + 8}, 2),
-                        __arrL({x + w - 9, y + 8}, 2),
-                        __arrL({x + w - 19, y + 15}, 2),
-                        __arrL({m, y + 28}, 2),
-                        __arrL({x + 17, y + 15}, 2)
-                    },
-                    5
-                ),
-                "#65557e"
-            )
-            pol(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({m - 14, y + 13}, 2),
-                        __arrL({m, y + 9}, 2),
-                        __arrL({m + 14, y + 13}, 2),
-                        __arrL({m, y + 29}, 2)
-                    },
-                    4
-                ),
-                if __t(alerta) then "#ec7975" else "#75cacd"
-            )
-            pol(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({m - 9, y + 14}, 2),
-                        __arrL({m, y + 12}, 2),
-                        __arrL({m, y + 24}, 2)
-                    },
-                    3
-                ),
-                if __t(alerta) then "#ffc79b" else "#baf9ed"
-            )
-            for ____, side in __iterar((__arrL({-1, 1}, 2))) do
-                local g = m + side * w * 0.3
+                local alerta = i.estado == "aviso"
                 pol(
                     nil,
                     c,
                     __arrL(
                         {
-                            __arrL({g - 7, y + 12}, 2),
-                            __arrL({g, y + 10}, 2),
-                            __arrL({g + 7, y + 12}, 2),
-                            __arrL({g, y + 18}, 2)
+                            __arrL({x, y + 4}, 2),
+                            __arrL({x + w, y + 4}, 2),
+                            __arrL({x + w - 9, y + 16}, 2),
+                            __arrL({m + 15, y + 24}, 2),
+                            __arrL({m + 7, y + 33}, 2),
+                            __arrL({m - 10, y + 33}, 2),
+                            __arrL({m - 17, y + 23}, 2),
+                            __arrL({x + 10, y + 17}, 2)
                         },
-                        4
+                        8
                     ),
-                    "#b28eaf"
+                    "#323453"
                 )
-                rect(
-                    nil,
-                    c,
-                    g - 1,
-                    y + 18,
-                    3,
-                    7,
-                    "#9e815d"
-                )
-                rect(
-                    nil,
-                    c,
-                    g - 2,
-                    y + 25,
-                    5,
-                    3,
-                    "#ebbd78"
-                )
-            end
-            rect(
-                nil,
-                c,
-                x,
-                y,
-                w,
-                7,
-                "#4c435c"
-            )
-            rect(
-                nil,
-                c,
-                x,
-                y,
-                w,
-                3,
-                if __t(alerta) then "#ffc783" else "#ffdfae"
-            )
-            rect(
-                nil,
-                c,
-                x + 4,
-                y + 3,
-                w - 8,
-                2,
-                if __t(alerta) then "#d06c65" else "#b699aa"
-            )
-            do
-                local n = 1
-                while n < 4 do
-                    rect(
-                        nil,
-                        c,
-                        x + n * w / 4,
-                        y + 3,
-                        2,
-                        4,
-                        "#6b596e"
-                    )
-                    n = n + 1
-                end
-            end
-            if __t(alerta) then
-                risco(
+                pol(
                     nil,
                     c,
                     __arrL(
                         {
-                            __arrL({m - 13, y + 1}, 2),
-                            __arrL({m - 6, y + 6}, 2),
-                            __arrL({m - 10, y + 10}, 2),
-                            __arrL({m + 1, y + 16}, 2),
-                            __arrL({m - 1, y + 21}, 2),
-                            __arrL({m + 7, y + 26}, 2)
+                            __arrL({x + 8, y + 8}, 2),
+                            __arrL({x + w - 9, y + 8}, 2),
+                            __arrL({x + w - 19, y + 15}, 2),
+                            __arrL({m, y + 28}, 2),
+                            __arrL({x + 17, y + 15}, 2)
                         },
-                        6
+                        5
                     ),
-                    "#ffe8ae",
-                    3
+                    "#65557e"
+                )
+                pol(
+                    nil,
+                    c,
+                    __arrL(
+                        {
+                            __arrL({m - 14, y + 13}, 2),
+                            __arrL({m, y + 9}, 2),
+                            __arrL({m + 14, y + 13}, 2),
+                            __arrL({m, y + 29}, 2)
+                        },
+                        4
+                    ),
+                    __t(alerta) and "#ec7975" or "#75cacd"
+                )
+                pol(
+                    nil,
+                    c,
+                    __arrL(
+                        {
+                            __arrL({m - 9, y + 14}, 2),
+                            __arrL({m, y + 12}, 2),
+                            __arrL({m, y + 24}, 2)
+                        },
+                        3
+                    ),
+                    __t(alerta) and "#ffc79b" or "#baf9ed"
                 )
                 for ____, side in __iterar((__arrL({-1, 1}, 2))) do
-                    local bx = m + side * w * 0.33
-                    local by = y - 14 + math.sin(t * 9) * 2
+                    local g = m + side * w * 0.3
+                    pol(
+                        nil,
+                        c,
+                        __arrL(
+                            {
+                                __arrL({g - 7, y + 12}, 2),
+                                __arrL({g, y + 10}, 2),
+                                __arrL({g + 7, y + 12}, 2),
+                                __arrL({g, y + 18}, 2)
+                            },
+                            4
+                        ),
+                        "#b28eaf"
+                    )
+                    rect(
+                        nil,
+                        c,
+                        g - 1,
+                        y + 18,
+                        3,
+                        7,
+                        "#9e815d"
+                    )
+                    rect(
+                        nil,
+                        c,
+                        g - 2,
+                        y + 25,
+                        5,
+                        3,
+                        "#ebbd78"
+                    )
+                end
+                rect(
+                    nil,
+                    c,
+                    x,
+                    y,
+                    w,
+                    7,
+                    "#4c435c"
+                )
+                rect(
+                    nil,
+                    c,
+                    x,
+                    y,
+                    w,
+                    3,
+                    __t(alerta) and "#ffc783" or "#ffdfae"
+                )
+                rect(
+                    nil,
+                    c,
+                    x + 4,
+                    y + 3,
+                    w - 8,
+                    2,
+                    __t(alerta) and "#d06c65" or "#b699aa"
+                )
+                do
+                    local n = 1
+                    while n < 4 do
+                        rect(
+                            nil,
+                            c,
+                            x + n * w / 4,
+                            y + 3,
+                            2,
+                            4,
+                            "#6b596e"
+                        )
+                        n = n + 1
+                    end
+                end
+                if __t(alerta) then
                     risco(
                         nil,
                         c,
                         __arrL(
                             {
-                                __arrL({bx - 6, by - 4}, 2),
-                                __arrL({bx, by + 1}, 2),
-                                __arrL({bx + 6, by - 4}, 2)
+                                __arrL({m - 13, y + 1}, 2),
+                                __arrL({m - 6, y + 6}, 2),
+                                __arrL({m - 10, y + 10}, 2),
+                                __arrL({m + 1, y + 16}, 2),
+                                __arrL({m - 1, y + 21}, 2),
+                                __arrL({m + 7, y + 26}, 2)
                             },
-                            3
+                            6
                         ),
-                        "#ffb68e",
+                        "#ffe8ae",
                         3
                     )
+                    for ____, side in __iterar((__arrL({-1, 1}, 2))) do
+                        local bx = m + side * w * 0.33
+                        local by = y - 14 + math.sin(t * 9) * 2
+                        risco(
+                            nil,
+                            c,
+                            __arrL(
+                                {
+                                    __arrL({bx - 6, by - 4}, 2),
+                                    __arrL({bx, by + 1}, 2),
+                                    __arrL({bx + 6, by - 4}, 2)
+                                },
+                                3
+                            ),
+                            "#ffb68e",
+                            3
+                        )
+                    end
                 end
             end
         end
@@ -1126,7 +1217,7 @@ local __O = {};
                         },
                         10
                     ),
-                    if __t(__mod(i, 2)) then "#5178bd" else "#5a62ae"
+                    __t(__mod(i, 2)) and "#5178bd" or "#5a62ae"
                 )
                 pol(
                     nil,
@@ -1143,7 +1234,7 @@ local __O = {};
                         },
                         7
                     ),
-                    if __t(__mod(i, 2)) then "#9ce7e9" else "#acbcff"
+                    __t(__mod(i, 2)) and "#9ce7e9" or "#acbcff"
                 )
                 i = i + 1
             end
@@ -1152,7 +1243,7 @@ local __O = {};
             local i = 0
             while i < 6 do
                 local q = __mod(t * 0.75 + i / 6, 1)
-                local lado = if __t(__mod(i, 2)) then 1 else -1
+                local lado = __t(__mod(i, 2)) and 1 or -1
                 rect(
                     nil,
                     c,
@@ -1168,7 +1259,13 @@ local __O = {};
     end
     local function personagem(self, c, f, o)
         local tipo = __get(formas, f.fase - 1)
-        local dir = if __t(o.facing) then o.facing else 1
+        local ____t_result_50
+        if __t(o.facing) then
+            ____t_result_50 = o.facing
+        else
+            ____t_result_50 = 1
+        end
+        local dir = ____t_result_50
         c:save()
         c:translate(
             math.floor(f.x + 0.5),
@@ -1178,9 +1275,21 @@ local __O = {};
             aura(nil, c, f)
         end
         if f.fase == 2 then
-            local preparo = if __t(f.estado == "windup" and f.golpe == "saltoBarriga") then clamp(nil, f.tempo / f.dur, 0, 1) else 0
+            local ____t_result_51
+            if __t(f.estado == "windup" and f.golpe == "saltoBarriga") then
+                ____t_result_51 = clamp(nil, f.tempo / f.dur, 0, 1)
+            else
+                ____t_result_51 = 0
+            end
+            local preparo = ____t_result_51
             local voo = clamp(nil, (f.piso - f.y) / 130, 0, 1)
-            local pouso = if __t(f.golpe == "saltoBarriga" and f.estado == "firing") then math.max(0, 1 - (f.piso - f.y) / 18) * 0.07 else 0
+            local ____t_result_52
+            if __t(f.golpe == "saltoBarriga" and f.estado == "firing") then
+                ____t_result_52 = math.max(0, 1 - (f.piso - f.y) / 18) * 0.07
+            else
+                ____t_result_52 = 0
+            end
+            local pouso = ____t_result_52
             c:scale(1.56 + preparo * 0.13 + pouso - voo * 0.09, 1.48 - preparo * 0.2 - pouso + voo * 0.08)
         end
         if f.fase == 5 then
@@ -1203,7 +1312,7 @@ local __O = {};
                         },
                         3
                     ),
-                    if lado < 0 then "#bce1e3" else "#ffd690",
+                    lado < 0 and "#bce1e3" or "#ffd690",
                     3
                 )
             end
@@ -1217,7 +1326,7 @@ local __O = {};
                 {},
                 o,
                 {
-                    scale = if f.fase == 2 then 1 else 1.08,
+                    scale = f.fase == 2 and 1 or 1.08,
                     duelo = f.fase,
                     grounded = not __t(f.ceu) and __ge(f.y, f.piso - 2),
                     frame = f.idade

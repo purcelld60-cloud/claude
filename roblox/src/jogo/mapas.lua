@@ -2,28 +2,36 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __arr, __len = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__arr, __JSR.__len
 local __call, __add, __iter, __keys, __assign, __isArray, __hypot = __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__keys, __JSR.__assign, __JSR.__isArray, __JSR.__hypot
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__Number = ____lualib.__TS__Number
 local ____exports = {}
 local __O = {};
 (function()
     local ____ = "use strict"
-    local ____t_3 = __t
-    local ____t_2 = __t
-    local ____opt_0 = window.Mapa3D
-    if ____opt_0 ~= nil then
-        ____opt_0 = ____opt_0.arte
+    local ____t_4 = __t
+    local ____t_result_3
+    if __t(window.MapasJogo) then
+        ____t_result_3 = window.MapasJogo
+    else
+        local ____t_2 = __t
+        local ____opt_0 = window.Mapa3D
+        if ____opt_0 ~= nil then
+            ____opt_0 = ____opt_0.arte
+        end
+        ____t_result_3 = not ____t_2(____opt_0)
     end
-    if ____t_3(if __t(window.MapasJogo) then window.MapasJogo else not ____t_2(____opt_0)) then
+    if ____t_4(____t_result_3) then
         return
     end
-    local ____window_Mapa3D_arte_4 = window.Mapa3D.arte
-    local hash = ____window_Mapa3D_arte_4.hash
+    local ____window_Mapa3D_arte_5 = window.Mapa3D.arte
+    local hash = ____window_Mapa3D_arte_5.hash
     local TS = 16
     local function L16(____, n)
         return n * TS
@@ -38,13 +46,13 @@ local __O = {};
             end
             local o = off:getContext("2d")
             o.imageSmoothingEnabled = false
-            local ____opt_7 = window.Art
-            if ____opt_7 ~= nil then
-                ____opt_7 = ____opt_7.drawScene
+            local ____opt_8 = window.Art
+            if ____opt_8 ~= nil then
+                ____opt_8 = ____opt_8.drawScene
             end
-            if ____opt_7 ~= nil then
-                ____opt_7(
-                    ____opt_7,
+            if ____opt_8 ~= nil then
+                ____opt_8(
+                    ____opt_8,
                     o,
                     scene,
                     camera + math.sin(t * 0.3) * 40,
@@ -77,19 +85,30 @@ local __O = {};
                 by = ____bindingPattern0[2]
                 bw = ____bindingPattern0[3]
                 bh = ____bindingPattern0[4]
-                local ____t_12 = __t
-                local ____t_10 = __t
-                local ____temp_9 = __gt(x, bx - m) and __lt(
+                local ____t_result_14
+                local ____t_13 = __t
+                local ____t_result_12
+                local ____t_11 = __t
+                local ____temp_10 = __gt(x, bx - m) and __lt(
                     x,
                     __add(bx, bw) + m
                 )
-                __O[617] = ____temp_9
-                local ____temp_11 = if ____t_10(____temp_9) then __gt(y, by - m) else __O[617]
-                __O[618] = ____temp_11
-                return if ____t_12(____temp_11) then __lt(
-                    y,
-                    __add(by, bh) + m
-                ) else __O[618]
+                __O[622] = ____temp_10
+                if ____t_11(____temp_10) then
+                    ____t_result_12 = __gt(y, by - m)
+                else
+                    ____t_result_12 = __O[622]
+                end
+                __O[623] = ____t_result_12
+                if ____t_13(____t_result_12) then
+                    ____t_result_14 = __lt(
+                        y,
+                        __add(by, bh) + m
+                    )
+                else
+                    ____t_result_14 = __O[623]
+                end
+                return ____t_result_14
             end
         ))
     end
@@ -194,7 +213,7 @@ local __O = {};
                     y + k * 4,
                     larg,
                     4,
-                    if __t(__mod(k, 2)) then "#a8aeb4" else "#bcc0c4"
+                    __t(__mod(k, 2)) and "#a8aeb4" or "#bcc0c4"
                 )
                 P:R(
                     x,
@@ -228,10 +247,16 @@ local __O = {};
         if anda == nil then
             anda = true
         end
-        local f = if __t(anda) then __mod(
-            math.floor(t * 6),
-            2
-        ) else 0
+        local ____t_result_15
+        if __t(anda) then
+            ____t_result_15 = __mod(
+                math.floor(t * 6),
+                2
+            )
+        else
+            ____t_result_15 = 0
+        end
+        local f = ____t_result_15
         P:R(
             x - 1,
             y - 2,
@@ -339,9 +364,15 @@ local __O = {};
             2,
             "#1c1c1c"
         )
+        local ____temp_16
+        if dir > 0 then
+            ____temp_16 = x + 8
+        else
+            ____temp_16 = x - 9
+        end
         R(
             nil,
-            if dir > 0 then x + 8 else x - 9,
+            ____temp_16,
             y - 4,
             1,
             2,
@@ -365,7 +396,7 @@ local __O = {};
                         y - 3,
                         1,
                         1,
-                        if __t(__mod(k, 2)) then "#1c1c1c" else "#f6f6f0"
+                        __t(__mod(k, 2)) and "#1c1c1c" or "#f6f6f0"
                     )
                     k = k + 1
                 end
@@ -383,11 +414,36 @@ local __O = {};
         local K = "#14201f"
         local taxi = tipo == "taxi"
         local c = P.c
-        local cor = if __t(taxi) then __arrL({"#f2c94c", "#ffe48a", "#b8901c"}, 3) else __arrL({"#3c8a8a", "#7ac8c8", "#265e5e"}, 3)
+        local ____t_result_17
+        if __t(taxi) then
+            ____t_result_17 = __arrL({"#f2c94c", "#ffe48a", "#b8901c"}, 3)
+        else
+            ____t_result_17 = __arrL({"#3c8a8a", "#7ac8c8", "#265e5e"}, 3)
+        end
+        local cor = ____t_result_17
         local voa = not not __t(o.voando)
-        local imp = if __t(o.impulso) then o.impulso else 0
-        local carga = if __t(o.carregando) then o.carregando else 0
-        if __t(if __t(voa) then voa else __gt(carga, 0.2)) then
+        local ____t_result_18
+        if __t(o.impulso) then
+            ____t_result_18 = o.impulso
+        else
+            ____t_result_18 = 0
+        end
+        local imp = ____t_result_18
+        local ____t_result_19
+        if __t(o.carregando) then
+            ____t_result_19 = o.carregando
+        else
+            ____t_result_19 = 0
+        end
+        local carga = ____t_result_19
+        local ____t_21 = __t
+        local ____t_result_20
+        if __t(voa) then
+            ____t_result_20 = voa
+        else
+            ____t_result_20 = __gt(carga, 0.2)
+        end
+        if ____t_21(____t_result_20) then
             for ____, ____value in __iterar((__arrL(
                 {
                     __arrL({-9, 0}, 2),
@@ -398,9 +454,16 @@ local __O = {};
                 local fx = ____value[1]
                 local ff = ____value[2]
                 local pisca = math.sin(t * 42 + ff) * 1.4 + math.sin(t * 23 + ff * 2) * 0.8
+                local ____temp_23 = (__t(voa) and 7 or 3 * carga) + imp * 9
+                local ____t_result_22
+                if __t(o.vel) then
+                    ____t_result_22 = o.vel
+                else
+                    ____t_result_22 = 0
+                end
                 local L = math.max(
                     2,
-                    if __t(voa) then 7 else 3 * carga + imp * 9 + math.min(3, if __t(o.vel) then o.vel else 0 / 90) + pisca
+                    ____temp_23 + math.min(3, ____t_result_22 / 90) + pisca
                 )
                 c.globalAlpha = 0.35
                 do
@@ -429,7 +492,7 @@ local __O = {};
                             4 + y,
                             w,
                             1,
-                            if y < L * 0.4 then "#f4fff0" else "#9ef0c8"
+                            y < L * 0.4 and "#f4fff0" or "#9ef0c8"
                         )
                         y = y + 1
                     end
@@ -494,7 +557,14 @@ local __O = {};
                 2,
                 K
             )
-            if __t(if __t(voa) then voa else __gt(carga, 0.2)) then
+            local ____t_25 = __t
+            local ____t_result_24
+            if __t(voa) then
+                ____t_result_24 = voa
+            else
+                ____t_result_24 = __gt(carga, 0.2)
+            end
+            if ____t_25(____t_result_24) then
                 c.globalAlpha = 0.5 + 0.3 * math.sin(t * 20)
                 R(
                     nil,
@@ -611,7 +681,14 @@ local __O = {};
             7,
             __get(cor, 2)
         )
-        local balanca = if __t(if __t(voa) then math.sin(t * 6) > 0.5 else voa) then -1 else 0
+        local ____t_27 = __t
+        local ____t_result_26
+        if __t(voa) then
+            ____t_result_26 = math.sin(t * 6) > 0.5
+        else
+            ____t_result_26 = voa
+        end
+        local balanca = ____t_27(____t_result_26) and -1 or 0
         R(
             nil,
             2,
@@ -678,7 +755,7 @@ local __O = {};
                         -5,
                         2,
                         1,
-                        if __t(__mod(k, 2)) then "#1c1c1c" else "#f6f6f0"
+                        __t(__mod(k, 2)) and "#1c1c1c" or "#f6f6f0"
                     )
                     k = k + 1
                 end
@@ -756,14 +833,20 @@ local __O = {};
             2,
             "#ff9a3a"
         )
-        local ____t_15 = __t
-        local ____t_14 = __t
-        local ____temp_13 = not __t(o.parado) and __mod(
+        local ____t_31 = __t
+        local ____t_result_30
+        local ____t_29 = __t
+        local ____temp_28 = not __t(o.parado) and __mod(
             math.floor(t * 4),
             2
         ) == 0
-        __O[619] = ____temp_13
-        if ____t_15(if ____t_14(____temp_13) then not __t(voa) else __O[619]) then
+        __O[624] = ____temp_28
+        if ____t_29(____temp_28) then
+            ____t_result_30 = not __t(voa)
+        else
+            ____t_result_30 = __O[624]
+        end
+        if ____t_31(____t_result_30) then
             R(
                 nil,
                 15,
@@ -773,8 +856,20 @@ local __O = {};
                 "#ffd36b"
             )
         end
-        local desce = if __t(voa) then 1 else 0
-        local a = if __t(voa) then 0.6 else if __t(o.roda) then o.roda else 0
+        local desce = __t(voa) and 1 or 0
+        local ____t_result_33
+        if __t(voa) then
+            ____t_result_33 = 0.6
+        else
+            local ____t_result_32
+            if __t(o.roda) then
+                ____t_result_32 = o.roda
+            else
+                ____t_result_32 = 0
+            end
+            ____t_result_33 = ____t_result_32
+        end
+        local a = ____t_result_33
         for ____, wx in __iterar((__arrL({-9, 9}, 2))) do
             R(
                 nil,
@@ -856,15 +951,15 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local ____opt_18 = window.CampanhaCamadas
-        if ____opt_18 ~= nil then
-            ____opt_18 = ____opt_18.kit
+        local ____opt_36 = window.CampanhaCamadas
+        if ____opt_36 ~= nil then
+            ____opt_36 = ____opt_36.kit
         end
-        local ____opt_result_20
-        if ____opt_18 ~= nil then
-            ____opt_result_20 = ____opt_18.pxText
+        local ____opt_result_38
+        if ____opt_36 ~= nil then
+            ____opt_result_38 = ____opt_36.pxText
         end
-        local f = ____opt_result_20
+        local f = ____opt_result_38
         if __t(f) then
             return f(
                 nil,
@@ -889,7 +984,13 @@ local __O = {};
             "map",
             function(____, L)
                 local x, y, w, h = table.unpack(L.caixa, 1, 4)
-                local dx, dy = table.unpack(if __t(L.desloc) then L.desloc else __arrL({0, 0}, 2), 1, 2)
+                local ____t_result_39
+                if __t(L.desloc) then
+                    ____t_result_39 = L.desloc
+                else
+                    ____t_result_39 = __arrL({0, 0}, 2)
+                end
+                local dx, dy = table.unpack(____t_result_39, 1, 2)
                 return __arrL(
                     {
                         __add(x, dx),
@@ -920,10 +1021,16 @@ local __O = {};
                 )
                 local dx = __get(b, 0) - __get(a, 0)
                 local dy = __get(b, 1) - __get(a, 1)
-                local ____t_22 = __t
-                local ____hypot_result_21 = __hypot(dx, dy)
-                __O[620] = ____hypot_result_21
-                local l = if ____t_22(____hypot_result_21) then __O[620] else 1
+                local ____t_result_42
+                local ____t_41 = __t
+                local ____hypot_result_40 = __hypot(dx, dy)
+                __O[625] = ____hypot_result_40
+                if ____t_41(____hypot_result_40) then
+                    ____t_result_42 = __O[625]
+                else
+                    ____t_result_42 = 1
+                end
+                local l = ____t_result_42
                 return __arrL(
                     {
                         __get(p, 0) - dy / l * off,
@@ -933,7 +1040,13 @@ local __O = {};
                 )
             end
         )
-        return if __t(rev) then __call(o, "reverse") else o
+        local ____t_result_43
+        if __t(rev) then
+            ____t_result_43 = __call(o, "reverse")
+        else
+            ____t_result_43 = o
+        end
+        return ____t_result_43
     end
     local function cruza(____, pl, y)
         local best = __get(pl, 0)
@@ -1030,10 +1143,17 @@ local __O = {};
                     20,
                     cor
                 )
+                local ____temp_45 = x - 6
+                local ____temp_44
+                if vy > 0 then
+                    ____temp_44 = y - 6
+                else
+                    ____temp_44 = y - 19
+                end
                 R(
                     nil,
-                    x - 6,
-                    if vy > 0 then y - 6 else y - 19,
+                    ____temp_45,
+                    ____temp_44,
                     12,
                     5,
                     "#9fc4d0"
@@ -1048,7 +1168,7 @@ local __O = {};
                 )
                 return
             end
-            local d = if vx >= 0 then 1 else -1
+            local d = vx >= 0 and 1 or -1
             R(
                 nil,
                 x - 15,
@@ -1095,9 +1215,15 @@ local __O = {};
                 1,
                 "#f2f2ee"
             )
+            local ____temp_46
+            if d > 0 then
+                ____temp_46 = x + 12
+            else
+                ____temp_46 = x - 15
+            end
             R(
                 nil,
-                if d > 0 then x + 12 else x - 15,
+                ____temp_46,
                 y - 10,
                 3,
                 6,
@@ -1146,10 +1272,17 @@ local __O = {};
                 1,
                 "#ffffff66"
             )
+            local ____temp_48 = x - 4
+            local ____temp_47
+            if vy > 0 then
+                ____temp_47 = y - 4
+            else
+                ____temp_47 = y - 12
+            end
             R(
                 nil,
-                x - 4,
-                if vy > 0 then y - 4 else y - 12,
+                ____temp_48,
+                ____temp_47,
                 8,
                 3,
                 "#9fc4d0"
@@ -1235,7 +1368,7 @@ local __O = {};
             x,
             y,
             cor,
-            if vx >= 0 then 1 else -1,
+            vx >= 0 and 1 or -1,
             tipo == "taxi"
         )
     end
@@ -1251,7 +1384,8 @@ local __O = {};
             local j = 0
             while __lt(j, n) do
                 local p = tr:em(t * vel / tr.total + j / n + fase)
-                veiculo(
+                local ____veiculo_51 = veiculo
+                local ____array_50 = __TS__SparseArrayNew(
                     nil,
                     P,
                     p.x,
@@ -1263,9 +1397,16 @@ local __O = {};
                             __len(cores)
                         )
                     ),
-                    p.ang,
-                    if type(tipo) == "function" then tipo(nil, j) else tipo
+                    p.ang
                 )
+                local ____temp_49
+                if type(tipo) == "function" then
+                    ____temp_49 = tipo(nil, j)
+                else
+                    ____temp_49 = tipo
+                end
+                __TS__SparseArrayPush(____array_50, ____temp_49)
+                ____veiculo_51(__TS__SparseArraySpread(____array_50))
                 j = j + 1
             end
         end
@@ -1299,25 +1440,36 @@ local __O = {};
                     b = ____bindingPattern0[2]
                     c = ____bindingPattern0[3]
                     d = ____bindingPattern0[4]
-                    local ____t_26 = __t
-                    local ____t_24 = __t
-                    local ____temp_23 = __lt(
+                    local ____t_result_56
+                    local ____t_55 = __t
+                    local ____t_result_54
+                    local ____t_53 = __t
+                    local ____temp_52 = __lt(
                         x,
                         __add(a, c)
                     ) and __gt(
                         __add(x, w),
                         a
                     )
-                    __O[621] = ____temp_23
-                    local ____temp_25 = if ____t_24(____temp_23) then __lt(
-                        y,
-                        __add(b, d)
-                    ) else __O[621]
-                    __O[622] = ____temp_25
-                    return if ____t_26(____temp_25) then __gt(
-                        __add(y, h),
-                        b
-                    ) else __O[622]
+                    __O[626] = ____temp_52
+                    if ____t_53(____temp_52) then
+                        ____t_result_54 = __lt(
+                            y,
+                            __add(b, d)
+                        )
+                    else
+                        ____t_result_54 = __O[626]
+                    end
+                    __O[627] = ____t_result_54
+                    if ____t_55(____t_result_54) then
+                        ____t_result_56 = __gt(
+                            __add(y, h),
+                            b
+                        )
+                    else
+                        ____t_result_56 = __O[627]
+                    end
+                    return ____t_result_56
                 end
             )
         end
@@ -1335,17 +1487,23 @@ local __O = {};
                 if aceita == nil then
                     aceita = Tr.livre
                 end
-                local ____t_29 = __t
-                local ____t_28 = __t
-                local ____temp_27 = not __t(aceita(nil, x, y))
-                __O[623] = ____temp_27
-                __D[1] = if ____t_29(if ____t_28(____temp_27) then __O[623] else bate(
-                    nil,
-                    x - r,
-                    y - r * 0.6,
-                    r * 2,
-                    r * 1.2
-                )) then
+                local ____t_60 = __t
+                local ____t_result_59
+                local ____t_58 = __t
+                local ____temp_57 = not __t(aceita(nil, x, y))
+                __O[628] = ____temp_57
+                if ____t_58(____temp_57) then
+                    ____t_result_59 = __O[628]
+                else
+                    ____t_result_59 = bate(
+                        nil,
+                        x - r,
+                        y - r * 0.6,
+                        r * 2,
+                        r * 1.2
+                    )
+                end
+                if ____t_60(____t_result_59) then
                     return false
                 end
                 __call(
@@ -1401,26 +1559,37 @@ local __O = {};
     local function tipoEh(____, Tr, ...)
         local tipos = {...}
         return function(____, x, y)
-            local ____t_33 = __t
-            local ____t_31 = __t
-            local ____gt_result_30 = __gt(
+            local ____t_result_65
+            local ____t_64 = __t
+            local ____t_result_63
+            local ____t_62 = __t
+            local ____gt_result_61 = __gt(
                 Tr:nivelEm(x, y),
                 0
             )
-            __O[624] = ____gt_result_30
-            local ____temp_32 = if ____t_31(____gt_result_30) then __call(
-                tipos,
-                "includes",
-                Tr:tipoEm(x, y)
-            ) else __O[624]
-            __O[625] = ____temp_32
-            return if ____t_33(____temp_32) then __lt(
-                __get(
-                    Tr.px.wd,
-                    math.floor(y + 0.5) * Tr.px.W + math.floor(x + 0.5)
-                ),
-                0
-            ) else __O[625]
+            __O[629] = ____gt_result_61
+            if ____t_62(____gt_result_61) then
+                ____t_result_63 = __call(
+                    tipos,
+                    "includes",
+                    Tr:tipoEm(x, y)
+                )
+            else
+                ____t_result_63 = __O[629]
+            end
+            __O[630] = ____t_result_63
+            if ____t_64(____t_result_63) then
+                ____t_result_65 = __lt(
+                    __get(
+                        Tr.px.wd,
+                        math.floor(y + 0.5) * Tr.px.W + math.floor(x + 0.5)
+                    ),
+                    0
+                )
+            else
+                ____t_result_65 = __O[630]
+            end
+            return ____t_result_65
         end
     end
     local pecas = __ord(
@@ -1833,13 +2002,13 @@ local __O = {};
                                 nil,
                                 gx,
                                 106,
-                                10 * if gx < 100 then 1 else -1 + 0,
+                                10 * (gx < 100 and 1 or -1) + 0,
                                 3,
                                 "#f6f6f0"
                             )
                             R(
                                 nil,
-                                gx + if gx < 100 then 6 else -9,
+                                gx + (gx < 100 and 6 or -9),
                                 108,
                                 3,
                                 36,
@@ -2810,7 +2979,7 @@ local __O = {};
                                     512,
                                     3,
                                     8,
-                                    if __t(__mod(k, 12)) then "#3c8ab0" else "#f6f6f0"
+                                    __t(__mod(k, 12)) and "#3c8ab0" or "#f6f6f0"
                                 )
                                 k = k + 6
                             end
@@ -3141,7 +3310,7 @@ local __O = {};
                                     412,
                                     6,
                                     6,
-                                    if __t(__mod(k, 12)) then "#f2f2ee" else "#c43c3a"
+                                    __t(__mod(k, 12)) and "#f2f2ee" or "#c43c3a"
                                 )
                                 k = k + 6
                             end
@@ -3211,7 +3380,7 @@ local __O = {};
                                     404 + k * 3,
                                     6,
                                     2,
-                                    if __mod(k, 3) == 0 then "#c43c3a" else if __mod(k, 3) == 1 then "#2c5a9e" else "#f2f2ee"
+                                    __mod(k, 3) == 0 and "#c43c3a" or (__mod(k, 3) == 1 and "#2c5a9e" or "#f2f2ee")
                                 )
                                 k = k + 1
                             end
@@ -3280,7 +3449,14 @@ local __O = {};
                                     while k < 30 do
                                         local t = k / 29
                                         local x = cx + lado * (2 + t * 42)
-                                        local y = cy - math.sin(t * math.pi) * 6 + t * t * 5 - if t > 0.82 then (t - 0.82) * 50 else 0
+                                        local ____temp_67 = cy - math.sin(t * math.pi) * 6 + t * t * 5
+                                        local ____temp_66
+                                        if t > 0.82 then
+                                            ____temp_66 = (t - 0.82) * 50
+                                        else
+                                            ____temp_66 = 0
+                                        end
+                                        local y = ____temp_67 - ____temp_66
                                         local esp = math.floor(13 * (1 - t * 0.75) + 0.5)
                                         R(
                                             nil,
@@ -3298,7 +3474,14 @@ local __O = {};
                                     while k < 30 do
                                         local t = k / 29
                                         local x = cx + lado * (2 + t * 42)
-                                        local y = cy - math.sin(t * math.pi) * 6 + t * t * 5 - if t > 0.82 then (t - 0.82) * 50 else 0
+                                        local ____temp_69 = cy - math.sin(t * math.pi) * 6 + t * t * 5
+                                        local ____temp_68
+                                        if t > 0.82 then
+                                            ____temp_68 = (t - 0.82) * 50
+                                        else
+                                            ____temp_68 = 0
+                                        end
+                                        local y = ____temp_69 - ____temp_68
                                         local esp = math.floor(13 * (1 - t * 0.75) + 0.5)
                                         R(
                                             nil,
@@ -3706,15 +3889,15 @@ local __O = {};
                             do
                                 local x = x0
                                 while x < x1 - 30 do
-                                    local ____get_36 = __get
-                                    local ____mod_35 = __mod
-                                    local ____i_34 = i
-                                    i = ____i_34 + 1
+                                    local ____get_72 = __get
+                                    local ____mod_71 = __mod
+                                    local ____i_70 = i
+                                    i = ____i_70 + 1
                                     local par, tel = table.unpack(
-                                        ____get_36(
+                                        ____get_72(
                                             cores,
-                                            ____mod_35(
-                                                ____i_34,
+                                            ____mod_71(
+                                                ____i_70,
                                                 __len(cores)
                                             )
                                         ),
@@ -4819,10 +5002,10 @@ local __O = {};
                                     y + 2 + h(nil, k, 2) * 20,
                                     2,
                                     1,
-                                    if __gt(
+                                    __gt(
                                         h(nil, k, 3),
                                         0.5
-                                    ) then "#5a3420" else "#7a4a2a"
+                                    ) and "#5a3420" or "#7a4a2a"
                                 )
                                 k = k + 1
                             end
@@ -5025,7 +5208,7 @@ local __O = {};
                                     440 + k * 4,
                                     96 - k * 6,
                                     4,
-                                    if __t(__mod(k, 2)) then "#8a9096" else "#a8aeb4"
+                                    __t(__mod(k, 2)) and "#8a9096" or "#a8aeb4"
                                 )
                                 R(
                                     nil,
@@ -5426,7 +5609,7 @@ local __O = {};
                                     y - 30,
                                     8,
                                     6,
-                                    if __t(__mod(k, 16)) then "#f2f2ee" else "#3c8a5a"
+                                    __t(__mod(k, 16)) and "#f2f2ee" or "#3c8a5a"
                                 )
                                 k = k + 8
                             end
@@ -5491,48 +5674,64 @@ local __O = {};
                 do
                     local i = 0
                     while i < 3000 do
-                        local w = 26 + math.floor(h(nil, i, 41) * 3) * 6
-                        local hh = 30 + math.floor(h(nil, i, 42) * 2) * 6
-                        local x = 430 + h(nil, i, 43) * 560
-                        local y = 6 + h(nil, i, 44) * 660
-                        if __gt(
-                            Tr:nivelEm(x, y + hh),
-                            1
-                        ) then
-                            continue
+                        do
+                            local w = 26 + math.floor(h(nil, i, 41) * 3) * 6
+                            local hh = 30 + math.floor(h(nil, i, 42) * 2) * 6
+                            local x = 430 + h(nil, i, 43) * 560
+                            local y = 6 + h(nil, i, 44) * 660
+                            if __gt(
+                                Tr:nivelEm(x, y + hh),
+                                1
+                            ) then
+                                do i = i + 1 continue end
+                            end
+                            if not __t(lote:area(x - 4, y - 4, w + 10, hh + 10)) then
+                                do i = i + 1 continue end
+                            end
+                            local par, tel = table.unpack(
+                                __get(
+                                    cores,
+                                    __mod(
+                                        i,
+                                        __len(cores)
+                                    )
+                                ),
+                                1,
+                                2
+                            )
+                            add(
+                                nil,
+                                y + hh,
+                                function(____, P)
+                                    local ____P_77 = P
+                                    local ____P_casa_78 = P.casa
+                                    local ____tel_74 = tel
+                                    local ____par_75 = par
+                                    local ____temp_76 = __mod(i, 3) == 0
+                                    local ____temp_73
+                                    if w > 34 then
+                                        ____temp_73 = __arrL({4, w - 10}, 2)
+                                    else
+                                        ____temp_73 = __arrL({4}, 1)
+                                    end
+                                    return ____P_casa_78(
+                                        ____P_77,
+                                        x,
+                                        y,
+                                        w,
+                                        hh,
+                                        {
+                                            telhado = ____tel_74,
+                                            parede = ____par_75,
+                                            madeira = ____temp_76,
+                                            janelas = ____temp_73,
+                                            porta = math.floor(w / 2 + 0.5) - 4,
+                                            chamine = __mod(i, 5) == 0
+                                        }
+                                    )
+                                end
+                            )
                         end
-                        if not __t(lote:area(x - 4, y - 4, w + 10, hh + 10)) then
-                            continue
-                        end
-                        local par, tel = table.unpack(
-                            __get(
-                                cores,
-                                __mod(
-                                    i,
-                                    __len(cores)
-                                )
-                            ),
-                            1,
-                            2
-                        )
-                        add(
-                            nil,
-                            y + hh,
-                            function(____, P) return P:casa(
-                                x,
-                                y,
-                                w,
-                                hh,
-                                {
-                                    telhado = tel,
-                                    parede = par,
-                                    madeira = __mod(i, 3) == 0,
-                                    janelas = if w > 34 then __arrL({4, w - 10}, 2) else __arrL({4}, 1),
-                                    porta = math.floor(w / 2 + 0.5) - 4,
-                                    chamine = __mod(i, 5) == 0
-                                }
-                            ) end
-                        )
                         i = i + 1
                     end
                 end
@@ -5540,127 +5739,177 @@ local __O = {};
                 do
                     local i = 0
                     while i < 70 do
-                        local x = 280 + h(nil, i, 51) * 180
-                        local y = 20 + h(nil, i, 52) * 680
-                        if not __t(lote:ponto(x, y, 8, areia)) then
-                            continue
-                        end
-                        local k = h(nil, i, 53)
-                        add(
-                            nil,
-                            y,
-                            function(____, P)
-                                do
-                                    do
-                                        do
-                                            P:sombra(x + 1, y, 6, 2)
-                                            P:R(
-                                                x - 5,
-                                                y - 5,
-                                                10,
-                                                5,
-                                                "#8a5a3a"
-                                            )
-                                        end
-                                        P:R(
-                                            x + 4,
-                                            y - 7,
-                                            4,
-                                            4,
-                                            "#7a4a2a"
-                                        )
-                                    end
-                                    P:R(
-                                        x - 4,
-                                        y - 5,
-                                        8,
-                                        1,
-                                        "#a87a4a"
-                                    )
-                                end
-                                return if __gt(k, 0.6) then P:coqueiro(x, y) else if __gt(k, 0.45) then P:R(
-                                    x + 6,
-                                    y - 6,
-                                    1,
-                                    1,
-                                    "#1c1c1c"
-                                ) else P:pedra(x, y)
+                        do
+                            local x = 280 + h(nil, i, 51) * 180
+                            local y = 20 + h(nil, i, 52) * 680
+                            if not __t(lote:ponto(x, y, 8, areia)) then
+                                do i = i + 1 continue end
                             end
-                        )
+                            local k = h(nil, i, 53)
+                            add(
+                                nil,
+                                y,
+                                function(____, P)
+                                    local ____gt_result_80
+                                    if __gt(k, 0.6) then
+                                        ____gt_result_80 = P:coqueiro(x, y)
+                                    else
+                                        local ____gt_result_79
+                                        if __gt(k, 0.45) then
+                                            do
+                                                do
+                                                    do
+                                                        P:sombra(x + 1, y, 6, 2)
+                                                        P:R(
+                                                            x - 5,
+                                                            y - 5,
+                                                            10,
+                                                            5,
+                                                            "#8a5a3a"
+                                                        )
+                                                    end
+                                                    P:R(
+                                                        x + 4,
+                                                        y - 7,
+                                                        4,
+                                                        4,
+                                                        "#7a4a2a"
+                                                    )
+                                                end
+                                                P:R(
+                                                    x - 4,
+                                                    y - 5,
+                                                    8,
+                                                    1,
+                                                    "#a87a4a"
+                                                )
+                                            end
+                                            ____gt_result_79 = P:R(
+                                                x + 6,
+                                                y - 6,
+                                                1,
+                                                1,
+                                                "#1c1c1c"
+                                            )
+                                        else
+                                            ____gt_result_79 = P:pedra(x, y)
+                                        end
+                                        ____gt_result_80 = ____gt_result_79
+                                    end
+                                    return ____gt_result_80
+                                end
+                            )
+                        end
                         i = i + 1
                     end
                 end
                 do
                     local i = 0
                     while i < 900 do
-                        local x = 4 + h(nil, i, 61) * 1016
-                        local y = 8 + h(nil, i, 62) * 694
-                        if not __t(lote:ponto(x, y, 8)) then
-                            continue
-                        end
-                        local tp = Tr:tipoEm(x, y)
-                        local lvl = Tr:nivelEm(x, y)
-                        local k = h(nil, i, 63)
-                        if __t(__ge(lvl, 2) and x < 320) then
-                            add(
-                                nil,
-                                y,
-                                function(____, P) return P:cacaueiro(x, y, 1, i) end
-                            )
-                        elseif tp == "mata" then
-                            add(
-                                nil,
-                                y,
-                                function(____, P) return P:arvore(
-                                    x,
-                                    y,
-                                    0.9 + k * 0.5,
-                                    if __gt(k, 0.5) then "escura" else "verde",
-                                    i
-                                ) end
-                            )
-                        elseif x > 420 then
-                            if __gt(k, 0.55) then
-                                continue
+                        do
+                            local x = 4 + h(nil, i, 61) * 1016
+                            local y = 8 + h(nil, i, 62) * 694
+                            if not __t(lote:ponto(x, y, 8)) then
+                                do i = i + 1 continue end
                             end
-                            add(
-                                nil,
-                                y,
-                                function(____, P) return if __gt(k, 0.47) then P:arvore(
-                                    x,
+                            local tp = Tr:tipoEm(x, y)
+                            local lvl = Tr:nivelEm(x, y)
+                            local k = h(nil, i, 63)
+                            if __t(__ge(lvl, 2) and x < 320) then
+                                add(
+                                    nil,
                                     y,
-                                    0.9,
-                                    "amarela",
-                                    i
-                                ) else if __gt(k, 0.4) then P:arvore(
-                                    x,
+                                    function(____, P) return P:cacaueiro(x, y, 1, i) end
+                                )
+                            elseif tp == "mata" then
+                                add(
+                                    nil,
                                     y,
-                                    0.9,
-                                    "rosa",
-                                    i
-                                ) else if __gt(k, 0.3) then P:arbusto(x, y, i, "#f2c94c") else P:arvore(
-                                    x,
+                                    function(____, P) return P:arvore(
+                                        x,
+                                        y,
+                                        0.9 + k * 0.5,
+                                        __gt(k, 0.5) and "escura" or "verde",
+                                        i
+                                    ) end
+                                )
+                            elseif x > 420 then
+                                if __gt(k, 0.55) then
+                                    do i = i + 1 continue end
+                                end
+                                add(
+                                    nil,
                                     y,
-                                    0.8 + k * 0.6,
-                                    "verde",
-                                    i
-                                ) end
-                            )
-                        else
-                            if __gt(k, 0.7) then
-                                continue
+                                    function(____, P)
+                                        local ____gt_result_83
+                                        if __gt(k, 0.47) then
+                                            ____gt_result_83 = P:arvore(
+                                                x,
+                                                y,
+                                                0.9,
+                                                "amarela",
+                                                i
+                                            )
+                                        else
+                                            local ____gt_result_82
+                                            if __gt(k, 0.4) then
+                                                ____gt_result_82 = P:arvore(
+                                                    x,
+                                                    y,
+                                                    0.9,
+                                                    "rosa",
+                                                    i
+                                                )
+                                            else
+                                                local ____gt_result_81
+                                                if __gt(k, 0.3) then
+                                                    ____gt_result_81 = P:arbusto(x, y, i, "#f2c94c")
+                                                else
+                                                    ____gt_result_81 = P:arvore(
+                                                        x,
+                                                        y,
+                                                        0.8 + k * 0.6,
+                                                        "verde",
+                                                        i
+                                                    )
+                                                end
+                                                ____gt_result_82 = ____gt_result_81
+                                            end
+                                            ____gt_result_83 = ____gt_result_82
+                                        end
+                                        return ____gt_result_83
+                                    end
+                                )
+                            else
+                                if __gt(k, 0.7) then
+                                    do i = i + 1 continue end
+                                end
+                                add(
+                                    nil,
+                                    y,
+                                    function(____, P)
+                                        local ____gt_result_85
+                                        if __gt(k, 0.6) then
+                                            ____gt_result_85 = P:arbusto(x, y, i, "#e86a8a")
+                                        else
+                                            local ____gt_result_84
+                                            if __gt(k, 0.55) then
+                                                ____gt_result_84 = P:pedra(x, y)
+                                            else
+                                                ____gt_result_84 = P:arvore(
+                                                    x,
+                                                    y,
+                                                    0.85 + k * 0.5,
+                                                    __gt(k, 0.3) and "escura" or "verde",
+                                                    i
+                                                )
+                                            end
+                                            ____gt_result_85 = ____gt_result_84
+                                        end
+                                        return ____gt_result_85
+                                    end
+                                )
                             end
-                            add(
-                                nil,
-                                y,
-                                function(____, P) return if __gt(k, 0.6) then P:arbusto(x, y, i, "#e86a8a") else if __gt(k, 0.55) then P:pedra(x, y) else P:arvore(
-                                    x,
-                                    y,
-                                    0.85 + k * 0.5,
-                                    if __gt(k, 0.3) then "escura" else "verde",
-                                    i
-                                ) end
-                            )
                         end
                         i = i + 1
                     end
@@ -5704,30 +5953,32 @@ local __O = {};
                 do
                     local k = 0
                     while k < 14 do
-                        local u = __mod(t * 0.18 + k / 14, 1)
-                        local x = 4 + u * 100
-                        local y = 244 + __mod(k * 37, 150)
-                        if Tr:tipoEm(x, y) ~= "trigo" then
-                            continue
+                        do
+                            local u = __mod(t * 0.18 + k / 14, 1)
+                            local x = 4 + u * 100
+                            local y = 244 + __mod(k * 37, 150)
+                            if Tr:tipoEm(x, y) ~= "trigo" then
+                                do k = k + 1 continue end
+                            end
+                            P.c.globalAlpha = 0.45 * math.sin(u * math.pi)
+                            R(
+                                nil,
+                                x,
+                                y,
+                                10,
+                                1,
+                                "#fff4b0"
+                            )
+                            R(
+                                nil,
+                                x + 3,
+                                y + 1,
+                                6,
+                                1,
+                                "#fff4b0"
+                            )
+                            P.c.globalAlpha = 1
                         end
-                        P.c.globalAlpha = 0.45 * math.sin(u * math.pi)
-                        R(
-                            nil,
-                            x,
-                            y,
-                            10,
-                            1,
-                            "#fff4b0"
-                        )
-                        R(
-                            nil,
-                            x + 3,
-                            y + 1,
-                            6,
-                            1,
-                            "#fff4b0"
-                        )
-                        P.c.globalAlpha = 1
                         k = k + 1
                     end
                 end
@@ -5755,7 +6006,7 @@ local __O = {};
                         )
                         R(
                             nil,
-                            x + if math.cos(a + 1.6) > 0 then 2 else -3,
+                            x + (math.cos(a + 1.6) > 0 and 2 or -3),
                             y - 5,
                             2,
                             2,
@@ -5763,7 +6014,7 @@ local __O = {};
                         )
                         R(
                             nil,
-                            x + if math.cos(a + 1.6) > 0 then 4 else -4,
+                            x + (math.cos(a + 1.6) > 0 and 4 or -4),
                             y - 4,
                             1,
                             1,
@@ -5865,7 +6116,7 @@ local __O = {};
                                         cy + math.sin(a) * j,
                                         2,
                                         2,
-                                        if __t(__mod(j, 4)) then "#e8e2d0" else "#c8b48a"
+                                        __t(__mod(j, 4)) and "#e8e2d0" or "#c8b48a"
                                     )
                                     j = j + 1
                                 end
@@ -5972,7 +6223,7 @@ local __O = {};
                     __arrL({"#c43c3a", "#2a2a2a"}, 2),
                     18,
                     0.7,
-                    function(____, j) return if __t(j) then "moto" else nil end
+                    function(____, j) return __t(j) and "moto" or nil end
                 )
                 do
                     local k = 0
@@ -6004,15 +6255,15 @@ local __O = {};
                         R(
                             nil,
                             x,
-                            y - 3 + if __t(b) then 1 else 0,
+                            y - 3 + (__t(b) and 1 or 0),
                             4,
                             3,
                             "#8a9096"
                         )
                         R(
                             nil,
-                            x + if __t(b) then 3 else 3,
-                            y - 4 + if __t(b) then 2 else 0,
+                            x + (__t(b) and 3 or 3),
+                            y - 4 + (__t(b) and 2 or 0),
                             2,
                             2,
                             "#6a7076"
@@ -6099,7 +6350,7 @@ local __O = {};
                         R(
                             nil,
                             x,
-                            y - 5 + if __t(b) then 2 else 0,
+                            y - 5 + (__t(b) and 2 or 0),
                             5,
                             4,
                             "#f6f6f0"
@@ -6107,7 +6358,7 @@ local __O = {};
                         R(
                             nil,
                             x + 4,
-                            y - 7 + if __t(b) then 3 else 0,
+                            y - 7 + (__t(b) and 3 or 0),
                             2,
                             2,
                             "#c43c3a"
@@ -6191,7 +6442,7 @@ local __O = {};
                     R(
                         nil,
                         681,
-                        182 - if __t(pisca) then 0 else 1,
+                        182 - (__t(pisca) and 0 or 1),
                         3,
                         2,
                         "#8a9096"
@@ -6245,15 +6496,15 @@ local __O = {};
                             nil,
                             x,
                             y,
-                            if __t(f) then 5 else 3,
-                            if __t(f) then 3 else 4,
+                            __t(f) and 5 or 3,
+                            __t(f) and 3 or 4,
                             "#f6f4ee"
                         )
                         R(
                             nil,
                             x + 1,
                             y + 1,
-                            if __t(f) then 3 else 1,
+                            __t(f) and 3 or 1,
                             1,
                             "#8ab8e8"
                         )
@@ -6330,7 +6581,7 @@ local __O = {};
                         230,
                         8,
                         3,
-                        if __t(on) then "#3ce06a" else "#1c3a24"
+                        __t(on) and "#3ce06a" or "#1c3a24"
                     )
                     R(
                         nil,
@@ -6338,7 +6589,7 @@ local __O = {};
                         234,
                         8,
                         3,
-                        if __t(on) then "#3a1414" else "#e8433a"
+                        __t(on) and "#3a1414" or "#e8433a"
                     )
                     local d = math.abs(math.sin(t * 3)) * 2
                     R(
@@ -6372,7 +6623,7 @@ local __O = {};
                                 412 + j * 3,
                                 4,
                                 3,
-                                if __mod(j + k, 3) == 0 then "#e8433a" else if __mod(j + k, 3) == 1 then "#f2f2ee" else "#3c6aa8"
+                                __mod(j + k, 3) == 0 and "#e8433a" or (__mod(j + k, 3) == 1 and "#f2f2ee" or "#3c6aa8")
                             )
                             j = j + 1
                         end
@@ -6493,16 +6744,23 @@ local __O = {};
                             math.floor(t * 4 + k),
                             2
                         )
+                        local ____temp_87 = 906 + k * 14
+                        local ____t_result_86
+                        if __t(on) then
+                            ____t_result_86 = __get(
+                                __arrL({"#ff3a8a", "#3ae0ff", "#ffe23a", "#8a3aff"}, 4),
+                                k
+                            )
+                        else
+                            ____t_result_86 = "#3a2a4a"
+                        end
                         R(
                             nil,
-                            906 + k * 14,
+                            ____temp_87,
                             624,
                             10,
                             10,
-                            if __t(on) then __get(
-                                __arrL({"#ff3a8a", "#3ae0ff", "#ffe23a", "#8a3aff"}, 4),
-                                k
-                            ) else "#3a2a4a"
+                            ____t_result_86
                         )
                         k = k + 1
                     end
@@ -6534,7 +6792,7 @@ local __O = {};
                     local a = t * 0.9
                     local x = 932 + math.cos(a) * 70
                     local y = 510 + math.sin(a * 2) * 16
-                    local d = if -math.sin(a) >= 0 then 1 else -1
+                    local d = -math.sin(a) >= 0 and 1 or -1
                     do
                         local k = 1
                         while k < 6 do
@@ -6695,7 +6953,7 @@ local __O = {};
                         R(
                             nil,
                             x - 2,
-                            y - if __t(f) then 2 else 0,
+                            y - (__t(f) and 2 or 0),
                             2,
                             1,
                             "#2a2a2a"
@@ -6703,7 +6961,7 @@ local __O = {};
                         R(
                             nil,
                             x + 3,
-                            y - if __t(f) then 2 else 0,
+                            y - (__t(f) and 2 or 0),
                             2,
                             1,
                             "#2a2a2a"
@@ -6722,7 +6980,7 @@ local __O = {};
                         606,
                         8,
                         6,
-                        if __t(on) then "#3ae0ff" else "#ff3a8a"
+                        __t(on) and "#3ae0ff" or "#ff3a8a"
                     )
                     R(
                         nil,
@@ -6753,23 +7011,30 @@ local __O = {};
             }
         end
         if id == 5 then
-            local ____call_46 = __call
-            local ____arrL_45 = __arrL
-            local ____t_38 = __t
-            local ____temp_37 = not __t(q.mota)
-            __O[626] = ____temp_37
-            local ____temp_43 = if ____t_38(____temp_37) then "O DESAFIO DO MOTA" else __O[626]
-            local ____t_40 = __t
-            local ____temp_39 = not __t(q.almiro)
-            __O[627] = ____temp_39
-            local ____temp_44 = if ____t_40(____temp_39) then "A MISSÃO DO ALMIRO" else __O[627]
-            local ____t_42 = __t
-            local ____temp_41 = not __t(q.miqueias)
-            __O[628] = ____temp_41
+            local ____call_97 = __call
+            local ____arrL_96 = __arrL
+            local ____t_89 = __t
+            local ____temp_88 = not __t(q.mota)
+            __O[631] = ____temp_88
+            local ____temp_94 = ____t_89(____temp_88) and "O DESAFIO DO MOTA" or __O[631]
+            local ____t_91 = __t
+            local ____temp_90 = not __t(q.almiro)
+            __O[632] = ____temp_90
+            local ____temp_95 = ____t_91(____temp_90) and "A MISSÃO DO ALMIRO" or __O[632]
+            local ____t_93 = __t
+            local ____temp_92 = not __t(q.miqueias)
+            __O[633] = ____temp_92
             return {
                 titulo = "PRECISA VENCER",
-                nomes = ____call_46(
-                    ____arrL_45({____temp_43, ____temp_44, if ____t_42(____temp_41) then "O ENGLISH DO MIQUEIAS" else __O[628]}, 3),
+                nomes = ____call_97(
+                    ____arrL_96(
+                        {
+                            ____temp_94,
+                            ____temp_95,
+                            ____t_93(____temp_92) and "O ENGLISH DO MIQUEIAS" or __O[633]
+                        },
+                        3
+                    ),
                     "filter",
                     window.Boolean
                 )
@@ -6788,26 +7053,43 @@ local __O = {};
             }
         end
         if id == 3 then
-            local ____call_53 = __call
-            local ____arrL_52 = __arrL
-            local ____t_48 = __t
-            local ____temp_47 = not __t(q.giant)
-            __O[629] = ____temp_47
-            local ____temp_51 = if ____t_48(____temp_47) then "O MONSTRO DO CADERNO DO CAOS" else __O[629]
-            local ____t_50 = __t
-            local ____temp_49 = not __t(q.menezes)
-            __O[630] = ____temp_49
-            local d = ____call_53(
-                ____arrL_52({____temp_51, if ____t_50(____temp_49) then "MENEZES" else __O[630]}, 2),
+            local ____call_104 = __call
+            local ____arrL_103 = __arrL
+            local ____t_99 = __t
+            local ____temp_98 = not __t(q.giant)
+            __O[634] = ____temp_98
+            local ____temp_102 = ____t_99(____temp_98) and "O MONSTRO DO CADERNO DO CAOS" or __O[634]
+            local ____t_101 = __t
+            local ____temp_100 = not __t(q.menezes)
+            __O[635] = ____temp_100
+            local d = ____call_104(
+                ____arrL_103(
+                    {
+                        ____temp_102,
+                        ____t_101(____temp_100) and "MENEZES" or __O[635]
+                    },
+                    2
+                ),
                 "filter",
                 window.Boolean
             )
-            return {
-                titulo = if __t(__len(d)) then "PRECISA DERROTAR" else "PRECISA",
-                nomes = __call(d, "concat", if __t(q.trained) then __arrL({}, 0) else __arrL(
-                    {__add(if __t(__len(d)) then "+ " else "", "O TREINO DO CALEB")},
+            local ____temp_107 = __t(__len(d)) and "PRECISA DERROTAR" or "PRECISA"
+            local ____call_106 = __call
+            local ____t_result_105
+            if __t(q.trained) then
+                ____t_result_105 = __arrL({}, 0)
+            else
+                ____t_result_105 = __arrL(
+                    {__add(
+                        __t(__len(d)) and "+ " or "",
+                        "O TREINO DO CALEB"
+                    )},
                     1
-                ))
+                )
+            end
+            return {
+                titulo = ____temp_107,
+                nomes = ____call_106(d, "concat", ____t_result_105)
             }
         end
         return {
@@ -6817,37 +7099,49 @@ local __O = {};
     end
     local function abrirMapa1(self, preferido)
         local G = window.Game
-        local ____t_58 = __t
-        local ____t_57 = __t
-        local ____opt_result_56
+        local ____t_112 = __t
+        local ____t_111 = __t
+        local ____opt_result_110
         if G ~= nil then
-            ____opt_result_56 = G.getState
+            ____opt_result_110 = G.getState
         end
-        if ____t_58(not ____t_57(____opt_result_56) or not __t(window.Mapa3D)) then
+        if ____t_112(not ____t_111(____opt_result_110) or not __t(window.Mapa3D)) then
             return false
         end
         local st = G:getState()
-        local q = if __t(st.q) then st.q else {}
-        local ____preferido_59 = preferido
-        if ____preferido_59 == nil then
-            ____preferido_59 = st.scene
+        local ____t_result_113
+        if __t(st.q) then
+            ____t_result_113 = st.q
+        else
+            ____t_result_113 = {}
         end
-        local atual = __TS__Number(____preferido_59)
+        local q = ____t_result_113
+        local ____preferido_114 = preferido
+        if ____preferido_114 == nil then
+            ____preferido_114 = st.scene
+        end
+        local atual = __TS__Number(____preferido_114)
         local function estado(____, id)
             if id == atual then
                 return {ok = true}
             end
-            local ____t_65 = __t
-            local ____opt_62 = window.Campaign
-            if ____opt_62 ~= nil then
-                ____opt_62 = ____opt_62.canTravel
+            local ____t_result_121
+            local ____t_120 = __t
+            local ____opt_117 = window.Campaign
+            if ____opt_117 ~= nil then
+                ____opt_117 = ____opt_117.canTravel
             end
-            local ____opt_result_64
-            if ____opt_62 ~= nil then
-                ____opt_result_64 = ____opt_62(____opt_62, id, q)
+            local ____opt_result_119
+            if ____opt_117 ~= nil then
+                ____opt_result_119 = ____opt_117(____opt_117, id, q)
             end
-            __O[631] = ____opt_result_64
-            local r = if ____t_65(____opt_result_64) then __O[631] else {ok = true}
+            __O[636] = ____opt_result_119
+            if ____t_120(____opt_result_119) then
+                ____t_result_121 = __O[636]
+            else
+                ____t_result_121 = {ok = true}
+            end
+            local r = ____t_result_121
             if r.ok == false then
                 return {
                     ok = false,
@@ -6859,7 +7153,13 @@ local __O = {};
                     )
                 }
             end
-            return if __t(st.vehicle) then {ok = true} else {ok = false, motivo = "Entre no carro a gás (tecla V ou botão CARRO) para viajar."}
+            local ____t_result_122
+            if __t(st.vehicle) then
+                ____t_result_122 = {ok = true}
+            else
+                ____t_result_122 = {ok = false, motivo = "Entre no carro a gás (tecla V ou botão CARRO) para viajar."}
+            end
+            return ____t_result_122
         end
         local d = __assign(
             {},
@@ -6869,33 +7169,33 @@ local __O = {};
                     C1,
                     "map",
                     function(____, L)
-                        local ____assign_72 = __assign
-                        local ____temp_70 = {}
-                        local ____L_71 = L
-                        local ____temp_68 = L.id == atual
-                        local ____estado_result_69 = estado(nil, L.id)
-                        local ____L_id_67 = L.id
-                        local ____L_cam_66 = L.cam
-                        if ____L_cam_66 == nil then
-                            ____L_cam_66 = 700
+                        local ____assign_129 = __assign
+                        local ____temp_127 = {}
+                        local ____L_128 = L
+                        local ____temp_125 = L.id == atual
+                        local ____estado_result_126 = estado(nil, L.id)
+                        local ____L_id_124 = L.id
+                        local ____L_cam_123 = L.cam
+                        if ____L_cam_123 == nil then
+                            ____L_cam_123 = 700
                         end
-                        return ____assign_72(
-                            ____temp_70,
-                            ____L_71,
+                        return ____assign_129(
+                            ____temp_127,
+                            ____L_128,
                             {
-                                atual = ____temp_68,
-                                estado = ____estado_result_69,
-                                previa = previaCena(nil, ____L_id_67, ____L_cam_66)
+                                atual = ____temp_125,
+                                estado = ____estado_result_126,
+                                previa = previaCena(nil, ____L_id_124, ____L_cam_123)
                             }
                         )
                     end
                 ),
                 aoIr = function(____, id)
-                    local ____opt_73 = G.travel
-                    if ____opt_73 ~= nil then
-                        ____opt_73 = ____opt_73(G, id)
+                    local ____opt_130 = G.travel
+                    if ____opt_130 ~= nil then
+                        ____opt_130 = ____opt_130(G, id)
                     end
-                    return ____opt_73
+                    return ____opt_130
                 end,
                 aoFechar = function()
                 end
@@ -6944,12 +7244,18 @@ local __O = {};
     local vencidos = __arrL({}, 0)
     do
         pcall(function()
-            local ____self_77 = window.JSON
-            local ____self_77_parse_78 = ____self_77.parse
-            local ____t_76 = __t
-            local ____temp_75 = window.localStorage:getItem(KEY_V)
-            __O[632] = ____temp_75
-            local v = ____self_77_parse_78(____self_77, if ____t_76(____temp_75) then __O[632] else "[]")
+            local ____self_135 = window.JSON
+            local ____self_135_parse_136 = ____self_135.parse
+            local ____t_result_134
+            local ____t_133 = __t
+            local ____temp_132 = window.localStorage:getItem(KEY_V)
+            __O[637] = ____temp_132
+            if ____t_133(____temp_132) then
+                ____t_result_134 = __O[637]
+            else
+                ____t_result_134 = "[]"
+            end
+            local v = ____self_135_parse_136(____self_135, ____t_result_134)
             if __isArray(v) then
                 vencidos = __call(
                     v,
@@ -6971,15 +7277,21 @@ local __O = {};
     end
     local function travaC2(____, L)
         local r = __get(REQUER, L.id)
-        local ____t_81 = __t
-        local ____t_80 = __t
-        local ____temp_79 = not __t(r)
-        __O[633] = ____temp_79
-        if ____t_81(if ____t_80(____temp_79) then __O[633] else __call(vencidos, "includes", r)) then
+        local ____t_140 = __t
+        local ____t_result_139
+        local ____t_138 = __t
+        local ____temp_137 = not __t(r)
+        __O[638] = ____temp_137
+        if ____t_138(____temp_137) then
+            ____t_result_139 = __O[638]
+        else
+            ____t_result_139 = __call(vencidos, "includes", r)
+        end
+        if ____t_140(____t_result_139) then
             return {ok = true}
         end
         local nome = __get(VILOES, r)
-        local txt = ((("O Seu Zé não leva ninguém pra lá enquanto " .. tostring(__get(VNOME, r))) .. " ") .. if r == "gemeos" then "estiverem" else "estiver") .. " no caminho."
+        local txt = ((("O Seu Zé não leva ninguém pra lá enquanto " .. tostring(__get(VNOME, r))) .. " ") .. (r == "gemeos" and "estiverem" or "estiver")) .. " no caminho."
         return {
             ok = false,
             motivo = ("Derrote " .. tostring(nome)) .. " para liberar.",
@@ -7238,7 +7550,7 @@ local __O = {};
                                     120 - k * 2.6,
                                     (14 - k) * 2.2,
                                     3,
-                                    if __t(__mod(k, 3)) then "#eedfb6" else "#f8f3e4"
+                                    __t(__mod(k, 3)) and "#eedfb6" or "#f8f3e4"
                                 )
                                 k = k + 1
                             end
@@ -7598,7 +7910,7 @@ local __O = {};
                                     268 + math.abs(k - 2),
                                     2,
                                     8,
-                                    if __t(__mod(k, 2)) then "#e8c24c" else "#c43c3a"
+                                    __t(__mod(k, 2)) and "#e8c24c" or "#c43c3a"
                                 )
                                 k = k + 1
                             end
@@ -7847,7 +8159,7 @@ local __O = {};
                                     610,
                                     2,
                                     26,
-                                    if __mod(k, 6) < 3 then "#7a4a2a" else "#5a3420"
+                                    __mod(k, 6) < 3 and "#7a4a2a" or "#5a3420"
                                 )
                                 k = k + 3
                             end
@@ -8251,26 +8563,28 @@ local __O = {};
                         do
                             local k = 0
                             while k < 6 do
-                                if k == 3 then
-                                    continue
-                                end
-                                carrinho(
-                                    nil,
-                                    P,
-                                    914 + k * 28,
-                                    262,
-                                    __get(
-                                        __arrL({
-                                            "#c43c3a",
-                                            "#f2f2ee",
-                                            "#3c6aa8",
-                                            "#e8c24c",
-                                            "#2a2a2a",
-                                            "#3c8a5a"
-                                        }, 6),
-                                        k
+                                do
+                                    if k == 3 then
+                                        do k = k + 1 continue end
+                                    end
+                                    carrinho(
+                                        nil,
+                                        P,
+                                        914 + k * 28,
+                                        262,
+                                        __get(
+                                            __arrL({
+                                                "#c43c3a",
+                                                "#f2f2ee",
+                                                "#3c6aa8",
+                                                "#e8c24c",
+                                                "#2a2a2a",
+                                                "#3c8a5a"
+                                            }, 6),
+                                            k
+                                        )
                                     )
-                                )
+                                end
                                 k = k + 1
                             end
                         end
@@ -8513,22 +8827,30 @@ local __O = {};
                         do
                             local i = 0
                             while i < 16 do
-                                local x = 30 + hash(nil, i, 1) * 170
-                                local y = 420 + hash(nil, i, 2) * 150
-                                local ____t_84 = __t
-                                local ____t_83 = __t
-                                local ____temp_82 = math.abs(x - 100) < 20 and y > 480
-                                __O[634] = ____temp_82
-                                if ____t_84(if ____t_83(____temp_82) then y < 540 else __O[634]) then
-                                    continue
+                                do
+                                    local x = 30 + hash(nil, i, 1) * 170
+                                    local y = 420 + hash(nil, i, 2) * 150
+                                    local ____t_144 = __t
+                                    local ____t_result_143
+                                    local ____t_142 = __t
+                                    local ____temp_141 = math.abs(x - 100) < 20 and y > 480
+                                    __O[639] = ____temp_141
+                                    if ____t_142(____temp_141) then
+                                        ____t_result_143 = y < 540
+                                    else
+                                        ____t_result_143 = __O[639]
+                                    end
+                                    if ____t_144(____t_result_143) then
+                                        do i = i + 1 continue end
+                                    end
+                                    P:arvore(
+                                        x,
+                                        y,
+                                        1 + hash(nil, i, 3) * 0.4,
+                                        __t(__mod(i, 3)) and "escura" or "verde",
+                                        i
+                                    )
                                 end
-                                P:arvore(
-                                    x,
-                                    y,
-                                    1 + hash(nil, i, 3) * 0.4,
-                                    if __t(__mod(i, 3)) then "escura" else "verde",
-                                    i
-                                )
                                 i = i + 1
                             end
                         end
@@ -10202,10 +10524,10 @@ local __O = {};
                             682 + h(nil, k, 72) * 42,
                             2,
                             1,
-                            if __gt(
+                            __gt(
                                 h(nil, k, 73),
                                 0.5
-                            ) then "#5a3420" else "#7a4a2a"
+                            ) and "#5a3420" or "#7a4a2a"
                         )
                         k = k + 1
                     end
@@ -11105,58 +11427,80 @@ local __O = {};
                 do
                     local i = 0
                     while i < 4000 do
-                        local alto = __gt(
-                            h(nil, i, 81),
-                            0.35
-                        )
-                        local w = if __t(alto) then 30 + math.floor(h(nil, i, 82) * 3) * 6 else 30
-                        local hh = if __t(alto) then 40 + math.floor(h(nil, i, 83) * 4) * 6 else 32
-                        local x = 210 + h(nil, i, 84) * 930
-                        local y = 96 + h(nil, i, 85) * 470
-                        if Tr:nivelEm(x, y + hh) ~= 1 then
-                            continue
-                        end
-                        if not __t(lote:area(x - 3, y - 2, w + 8, hh + 8)) then
-                            continue
-                        end
-                        local cor = __get(
-                            paredes,
-                            __mod(
-                                i,
-                                __len(paredes)
+                        do
+                            local alto = __gt(
+                                h(nil, i, 81),
+                                0.35
                             )
-                        )
-                        add(
-                            nil,
-                            y + hh,
-                            function(____, P) return if __t(alto) then P:predio(
-                                x,
-                                y,
-                                w,
-                                hh,
-                                {
-                                    parede = cor,
-                                    fachada = 18 + __mod(i, 3) * 6,
-                                    porta = __mod(i, 2) == 0,
-                                    faixa = if __mod(i, 4) == 0 then "#c8a46a" else nil
-                                }
-                            ) else P:casa(
-                                x,
-                                y,
-                                w,
-                                hh,
-                                {
-                                    telhado = __get(
-                                        __arrL({"#b8644a", "#9a4a34", "#c8544a"}, 3),
-                                        __mod(i, 3)
-                                    ),
-                                    parede = cor,
-                                    madeira = false,
-                                    janelas = __arrL({4, 22}, 2),
-                                    porta = 13
-                                }
-                            ) end
-                        )
+                            local ____t_result_145
+                            if __t(alto) then
+                                ____t_result_145 = 30 + math.floor(h(nil, i, 82) * 3) * 6
+                            else
+                                ____t_result_145 = 30
+                            end
+                            local w = ____t_result_145
+                            local ____t_result_146
+                            if __t(alto) then
+                                ____t_result_146 = 40 + math.floor(h(nil, i, 83) * 4) * 6
+                            else
+                                ____t_result_146 = 32
+                            end
+                            local hh = ____t_result_146
+                            local x = 210 + h(nil, i, 84) * 930
+                            local y = 96 + h(nil, i, 85) * 470
+                            if Tr:nivelEm(x, y + hh) ~= 1 then
+                                do i = i + 1 continue end
+                            end
+                            if not __t(lote:area(x - 3, y - 2, w + 8, hh + 8)) then
+                                do i = i + 1 continue end
+                            end
+                            local cor = __get(
+                                paredes,
+                                __mod(
+                                    i,
+                                    __len(paredes)
+                                )
+                            )
+                            add(
+                                nil,
+                                y + hh,
+                                function(____, P)
+                                    local ____t_result_147
+                                    if __t(alto) then
+                                        ____t_result_147 = P:predio(
+                                            x,
+                                            y,
+                                            w,
+                                            hh,
+                                            {
+                                                parede = cor,
+                                                fachada = 18 + __mod(i, 3) * 6,
+                                                porta = __mod(i, 2) == 0,
+                                                faixa = __mod(i, 4) == 0 and "#c8a46a" or nil
+                                            }
+                                        )
+                                    else
+                                        ____t_result_147 = P:casa(
+                                            x,
+                                            y,
+                                            w,
+                                            hh,
+                                            {
+                                                telhado = __get(
+                                                    __arrL({"#b8644a", "#9a4a34", "#c8544a"}, 3),
+                                                    __mod(i, 3)
+                                                ),
+                                                parede = cor,
+                                                madeira = false,
+                                                janelas = __arrL({4, 22}, 2),
+                                                porta = 13
+                                            }
+                                        )
+                                    end
+                                    return ____t_result_147
+                                end
+                            )
+                        end
                         i = i + 1
                     end
                 end
@@ -11164,95 +11508,154 @@ local __O = {};
                 do
                     local i = 0
                     while i < 260 do
-                        local x = h(nil, i, 91) * 1150
-                        local y = h(nil, i, 92) * 768
-                        if not __t(lote:ponto(x, y, 6, cerrado)) then
-                            continue
+                        do
+                            local x = h(nil, i, 91) * 1150
+                            local y = h(nil, i, 92) * 768
+                            if not __t(lote:ponto(x, y, 6, cerrado)) then
+                                do i = i + 1 continue end
+                            end
+                            local k = h(nil, i, 93)
+                            add(
+                                nil,
+                                y,
+                                function(____, P)
+                                    local ____gt_result_149
+                                    if __gt(k, 0.6) then
+                                        ____gt_result_149 = pecas:cacto(P, x, y)
+                                    else
+                                        local ____gt_result_148
+                                        if __gt(k, 0.35) then
+                                            ____gt_result_148 = P:pedra(x, y)
+                                        else
+                                            ____gt_result_148 = P:arbusto(
+                                                x,
+                                                y,
+                                                i,
+                                                __gt(k, 0.2) and "#f2c94c" or nil
+                                            )
+                                        end
+                                        ____gt_result_149 = ____gt_result_148
+                                    end
+                                    return ____gt_result_149
+                                end
+                            )
                         end
-                        local k = h(nil, i, 93)
-                        add(
-                            nil,
-                            y,
-                            function(____, P) return if __gt(k, 0.6) then pecas:cacto(P, x, y) else if __gt(k, 0.35) then P:pedra(x, y) else P:arbusto(x, y, i, if __gt(k, 0.2) then "#f2c94c" else nil) end
-                        )
                         i = i + 1
                     end
                 end
                 do
                     local i = 0
                     while i < 900 do
-                        local x = 4 + h(nil, i, 101) * 1144
-                        local y = 8 + h(nil, i, 102) * 756
-                        if not __t(lote:ponto(x, y, 8)) then
-                            continue
-                        end
-                        local tp = Tr:tipoEm(x, y)
-                        local k = h(nil, i, 103)
-                        if tp == "mata" then
-                            add(
-                                nil,
-                                y,
-                                function(____, P) return if __gt(k, 0.75) then P:eucalipto(x, y, 1, i) else P:arvore(
-                                    x,
-                                    y,
-                                    0.9 + k * 0.5,
-                                    if __gt(k, 0.4) then "escura" else "verde",
-                                    i
-                                ) end
-                            )
-                        else
-                            local ____t_87 = __t
-                            local ____t_86 = __t
-                            local ____temp_85 = y > 660 and x > 700
-                            __O[635] = ____temp_85
-                            if ____t_87(if ____t_86(____temp_85) then x < 940 else __O[635]) then
+                        do
+                            local x = 4 + h(nil, i, 101) * 1144
+                            local y = 8 + h(nil, i, 102) * 756
+                            if not __t(lote:ponto(x, y, 8)) then
+                                do i = i + 1 continue end
+                            end
+                            local tp = Tr:tipoEm(x, y)
+                            local k = h(nil, i, 103)
+                            if tp == "mata" then
                                 add(
                                     nil,
                                     y,
-                                    function(____, P) return if __gt(k, 0.5) then P:pinheiro(x, y, 1, i) else P:arvore(
-                                        x,
-                                        y,
-                                        0.9,
-                                        "verde",
-                                        i
-                                    ) end
-                                )
-                            elseif __t(x > 900 and y > 540) then
-                                if __gt(k, 0.5) then
-                                    continue
-                                end
-                                add(
-                                    nil,
-                                    y,
-                                    function(____, P) return P:eucalipto(x, y, 0.9 + k * 0.3, i) end
+                                    function(____, P)
+                                        local ____gt_result_150
+                                        if __gt(k, 0.75) then
+                                            ____gt_result_150 = P:eucalipto(x, y, 1, i)
+                                        else
+                                            ____gt_result_150 = P:arvore(
+                                                x,
+                                                y,
+                                                0.9 + k * 0.5,
+                                                __gt(k, 0.4) and "escura" or "verde",
+                                                i
+                                            )
+                                        end
+                                        return ____gt_result_150
+                                    end
                                 )
                             else
-                                if __gt(k, 0.5) then
-                                    continue
+                                local ____t_154 = __t
+                                local ____t_result_153
+                                local ____t_152 = __t
+                                local ____temp_151 = y > 660 and x > 700
+                                __O[640] = ____temp_151
+                                if ____t_152(____temp_151) then
+                                    ____t_result_153 = x < 940
+                                else
+                                    ____t_result_153 = __O[640]
                                 end
-                                add(
-                                    nil,
-                                    y,
-                                    function(____, P) return if __gt(k, 0.38) then P:arvore(
-                                        x,
+                                if ____t_154(____t_result_153) then
+                                    add(
+                                        nil,
                                         y,
-                                        0.9,
-                                        "roxa",
-                                        i
-                                    ) else if __gt(k, 0.3) then P:arvore(
-                                        x,
+                                        function(____, P)
+                                            local ____gt_result_155
+                                            if __gt(k, 0.5) then
+                                                ____gt_result_155 = P:pinheiro(x, y, 1, i)
+                                            else
+                                                ____gt_result_155 = P:arvore(
+                                                    x,
+                                                    y,
+                                                    0.9,
+                                                    "verde",
+                                                    i
+                                                )
+                                            end
+                                            return ____gt_result_155
+                                        end
+                                    )
+                                elseif __t(x > 900 and y > 540) then
+                                    if __gt(k, 0.5) then
+                                        do i = i + 1 continue end
+                                    end
+                                    add(
+                                        nil,
                                         y,
-                                        0.9,
-                                        "amarela",
-                                        i
-                                    ) else P:arvore(
-                                        x,
+                                        function(____, P) return P:eucalipto(x, y, 0.9 + k * 0.3, i) end
+                                    )
+                                else
+                                    if __gt(k, 0.5) then
+                                        do i = i + 1 continue end
+                                    end
+                                    add(
+                                        nil,
                                         y,
-                                        0.8 + k * 0.6,
-                                        "verde",
-                                        i
-                                    ) end
-                                )
+                                        function(____, P)
+                                            local ____gt_result_157
+                                            if __gt(k, 0.38) then
+                                                ____gt_result_157 = P:arvore(
+                                                    x,
+                                                    y,
+                                                    0.9,
+                                                    "roxa",
+                                                    i
+                                                )
+                                            else
+                                                local ____gt_result_156
+                                                if __gt(k, 0.3) then
+                                                    ____gt_result_156 = P:arvore(
+                                                        x,
+                                                        y,
+                                                        0.9,
+                                                        "amarela",
+                                                        i
+                                                    )
+                                                else
+                                                    ____gt_result_156 = P:arvore(
+                                                        x,
+                                                        y,
+                                                        0.8 + k * 0.6,
+                                                        "verde",
+                                                        i
+                                                    )
+                                                end
+                                                ____gt_result_157 = ____gt_result_156
+                                            end
+                                            return ____gt_result_157
+                                        end
+                                    )
+                                end
                             end
                         end
                         i = i + 1
@@ -11297,7 +11700,7 @@ local __O = {};
                             y,
                             2,
                             5,
-                            if __t(__mod(k, 3)) then "#e2f4ff" else "#9fd0f0"
+                            __t(__mod(k, 3)) and "#e2f4ff" or "#9fd0f0"
                         )
                         k = k + 1
                     end
@@ -11369,7 +11772,7 @@ local __O = {};
                     __arrL({"#e8c24c", "#2a2a2a"}, 2),
                     24,
                     0.4,
-                    function(____, j) return if j == 0 then "taxi" else nil end
+                    function(____, j) return j == 0 and "taxi" or nil end
                 )
                 naRua(
                     nil,
@@ -11414,7 +11817,7 @@ local __O = {};
                     __arrL({"#e8c24c", "#3c6aa8"}, 2),
                     20,
                     0.5,
-                    function(____, j) return if j == 0 then "taxi" else nil end
+                    function(____, j) return j == 0 and "taxi" or nil end
                 )
                 naRua(
                     nil,
@@ -11541,7 +11944,7 @@ local __O = {};
                         txt(
                             nil,
                             P,
-                            if __t(__mod(q, 2)) then "BIII!" else "FOOM!",
+                            __t(__mod(q, 2)) and "BIII!" or "FOOM!",
                             p.x + 1,
                             p.y - 24,
                             "#c43c3a"
@@ -11764,7 +12167,7 @@ local __O = {};
                                 y - 10 - math.floor(math.sqrt(1 - (k / 6) ^ 2) * 3 + 0.5),
                                 2,
                                 2,
-                                if __t(__mod(k, 2)) then "#3c8ad8" else "#f2c94c"
+                                __t(__mod(k, 2)) and "#3c8ad8" or "#f2c94c"
                             )
                             k = k + 1
                         end
@@ -12194,7 +12597,7 @@ local __O = {};
                         "LAN",
                         1103,
                         386,
-                        if __t(on) then "#3ae0ff" else "#1c4a5a",
+                        __t(on) and "#3ae0ff" or "#1c4a5a",
                         {s = 2}
                     )
                     do
@@ -12206,10 +12609,10 @@ local __O = {};
                                 400,
                                 10,
                                 6,
-                                if __t(__mod(
+                                __t(__mod(
                                     math.floor(t * 5 + k),
                                     3
-                                )) then "#2a6ae8" else "#5ae0ff"
+                                )) and "#2a6ae8" or "#5ae0ff"
                             )
                             k = k + 1
                         end
@@ -12312,10 +12715,10 @@ local __O = {};
                     txt(
                         nil,
                         P,
-                        if __t(mostra) then "12C" else "0740",
+                        __t(mostra) and "12C" or "0740",
                         659,
                         200,
-                        if __t(mostra) then "#5ae0ff" else "#ff9a3a"
+                        __t(mostra) and "#5ae0ff" or "#ff9a3a"
                     )
                 end
                 do
@@ -12479,7 +12882,13 @@ local __O = {};
         if not __t(window.Mapa3D) then
             return false
         end
-        local visto = if __t(opts.liberado) then opts.liberado else travaC2
+        local ____t_result_158
+        if __t(opts.liberado) then
+            ____t_result_158 = opts.liberado
+        else
+            ____t_result_158 = travaC2
+        end
+        local visto = ____t_result_158
         local d = __assign(
             {},
             MAPA2,
@@ -12487,19 +12896,31 @@ local __O = {};
                 locais = __call(
                     PONTOS,
                     "map",
-                    function(____, L) return __assign(
-                        {},
-                        L,
-                        {
-                            atual = L.cena == cenaAtual,
-                            estado = if L.cena == cenaAtual then {ok = true} else visto(nil, L),
-                            previa = previaCena(
-                                nil,
-                                L.cena,
-                                math.max(0, L.x - 360)
-                            )
-                        }
-                    ) end
+                    function(____, L)
+                        local ____assign_163 = __assign
+                        local ____temp_161 = {}
+                        local ____L_162 = L
+                        local ____temp_160 = L.cena == cenaAtual
+                        local ____temp_159
+                        if L.cena == cenaAtual then
+                            ____temp_159 = {ok = true}
+                        else
+                            ____temp_159 = visto(nil, L)
+                        end
+                        return ____assign_163(
+                            ____temp_161,
+                            ____L_162,
+                            {
+                                atual = ____temp_160,
+                                estado = ____temp_159,
+                                previa = previaCena(
+                                    nil,
+                                    L.cena,
+                                    math.max(0, L.x - 360)
+                                )
+                            }
+                        )
+                    end
                 ),
                 aoIr = function(____, id)
                     local L = __call(
@@ -12521,32 +12942,38 @@ local __O = {};
                 "find",
                 function(____, v) return not __t(__call(vencidos, "includes", v)) end
             )
-            d.teste = if __t(prox) then {
-                rotulo = __add(
-                    "TESTE: VENCER ",
-                    __get(VILOES, prox)
-                ),
-                acao = function()
-                    __call(vencidos, "push", prox)
-                    salvarV(nil)
-                    window.Mapa3D:fechar()
-                    window:setTimeout(
-                        function() return abrirMapa2(nil, cenaAtual, aoIr, opts) end,
-                        380
-                    )
-                end
-            } else {
-                rotulo = "TESTE: ZERAR VILÕES",
-                acao = function()
-                    vencidos = __arrL({}, 0)
-                    salvarV(nil)
-                    window.Mapa3D:fechar()
-                    window:setTimeout(
-                        function() return abrirMapa2(nil, cenaAtual, aoIr, opts) end,
-                        380
-                    )
-                end
-            }
+            local ____t_result_166
+            if __t(prox) then
+                ____t_result_166 = {
+                    rotulo = __add(
+                        "TESTE: VENCER ",
+                        __get(VILOES, prox)
+                    ),
+                    acao = function()
+                        __call(vencidos, "push", prox)
+                        salvarV(nil)
+                        window.Mapa3D:fechar()
+                        window:setTimeout(
+                            function() return abrirMapa2(nil, cenaAtual, aoIr, opts) end,
+                            380
+                        )
+                    end
+                }
+            else
+                ____t_result_166 = {
+                    rotulo = "TESTE: ZERAR VILÕES",
+                    acao = function()
+                        vencidos = __arrL({}, 0)
+                        salvarV(nil)
+                        window.Mapa3D:fechar()
+                        window:setTimeout(
+                            function() return abrirMapa2(nil, cenaAtual, aoIr, opts) end,
+                            380
+                        )
+                    end
+                }
+            end
+            d.teste = ____t_result_166
         end
         return window.Mapa3D:abrir(d)
     end
@@ -12674,7 +13101,7 @@ local __O = {};
                     y - 32,
                     4,
                     4,
-                    if __t(__mod(k, 2)) then "#1c1c1c" else "#f6f6f0"
+                    __t(__mod(k, 2)) and "#1c1c1c" or "#f6f6f0"
                 )
                 k = k + 1
             end
@@ -12688,7 +13115,7 @@ local __O = {};
                     y - 28,
                     4,
                     4,
-                    if __t(__mod(k, 2)) then "#f6f6f0" else "#1c1c1c"
+                    __t(__mod(k, 2)) and "#f6f6f0" or "#1c1c1c"
                 )
                 k = k + 1
             end
@@ -12711,7 +13138,7 @@ local __O = {};
             y - 80,
             36,
             8,
-            if __t(pisca) then "#fff2a0" else "#e8d070"
+            __t(pisca) and "#fff2a0" or "#e8d070"
         )
         c.font = "9px Pixel, monospace"
         c.textAlign = "center"
@@ -12806,32 +13233,56 @@ local __O = {};
                     "find",
                     function(____, q) return q.cena == cena and math.abs(q.x - x) < 90 end
                 )
-                return if __t(p) then {id = p.id, x = p.x, rotulo = "CHAMAR O TÁXI DO SEU ZÉ", botao = "TÁXI"} else nil
+                local ____t_result_167
+                if __t(p) then
+                    ____t_result_167 = {id = p.id, x = p.x, rotulo = "CHAMAR O TÁXI DO SEU ZÉ", botao = "TÁXI"}
+                else
+                    ____t_result_167 = nil
+                end
+                return ____t_result_167
             end,
             desenhar = function(____, c, o)
-                local ____t_93 = __t
-                local ____opt_90 = o.player
-                if ____opt_90 ~= nil then
-                    ____opt_90 = ____opt_90.x
+                local ____t_result_172
+                local ____t_171 = __t
+                local ____opt_168 = o.player
+                if ____opt_168 ~= nil then
+                    ____opt_168 = ____opt_168.x
                 end
-                local ____TS__Number_result_92 = __TS__Number(____opt_90)
-                __O[636] = ____TS__Number_result_92
-                local hx = if ____t_93(____TS__Number_result_92) then __O[636] else -9999
-                local ____t_95 = __t
-                local ____TS__Number_result_94 = __TS__Number(o.time)
-                __O[637] = ____TS__Number_result_94
-                local t = if ____t_95(____TS__Number_result_94) then __O[637] else 0
+                local ____TS__Number_result_170 = __TS__Number(____opt_168)
+                __O[641] = ____TS__Number_result_170
+                if ____t_171(____TS__Number_result_170) then
+                    ____t_result_172 = __O[641]
+                else
+                    ____t_result_172 = -9999
+                end
+                local hx = ____t_result_172
+                local ____t_result_175
+                local ____t_174 = __t
+                local ____TS__Number_result_173 = __TS__Number(o.time)
+                __O[642] = ____TS__Number_result_173
+                if ____t_174(____TS__Number_result_173) then
+                    ____t_result_175 = __O[642]
+                else
+                    ____t_result_175 = 0
+                end
+                local t = ____t_result_175
                 for ____, p in __iterar((PONTOS)) do
-                    local ____t_100 = __t
-                    local ____temp_99 = p.cena == __TS__Number(o.scene)
-                    if ____temp_99 then
-                        local ____p_x_98 = p.x
-                        local ____t_97 = __t
-                        local ____TS__Number_result_96 = __TS__Number(o.camera)
-                        __O[638] = ____TS__Number_result_96
-                        ____temp_99 = math.abs(____p_x_98 - if ____t_97(____TS__Number_result_96) then __O[638] else 0 - 480) < 640
+                    local ____t_181 = __t
+                    local ____temp_180 = p.cena == __TS__Number(o.scene)
+                    if ____temp_180 then
+                        local ____p_x_179 = p.x
+                        local ____t_result_178
+                        local ____t_177 = __t
+                        local ____TS__Number_result_176 = __TS__Number(o.camera)
+                        __O[643] = ____TS__Number_result_176
+                        if ____t_177(____TS__Number_result_176) then
+                            ____t_result_178 = __O[643]
+                        else
+                            ____t_result_178 = 0
+                        end
+                        ____temp_180 = math.abs(____p_x_179 - ____t_result_178 - 480) < 640
                     end
-                    if ____t_100(____temp_99) then
+                    if ____t_181(____temp_180) then
                         desenharTaxi(
                             nil,
                             c,
@@ -12845,11 +13296,17 @@ local __O = {};
             abrir = abrirMapa2,
             vencidos = function() return __call(vencidos, "slice") end,
             vencer = function(____, v)
-                local ____t_103 = __t
-                local ____t_102 = __t
-                local ____call_result_101 = __call(ORDEM, "includes", v)
-                __O[639] = ____call_result_101
-                if ____t_103(if ____t_102(____call_result_101) then not __t(__call(vencidos, "includes", v)) else __O[639]) then
+                local ____t_185 = __t
+                local ____t_result_184
+                local ____t_183 = __t
+                local ____call_result_182 = __call(ORDEM, "includes", v)
+                __O[644] = ____call_result_182
+                if ____t_183(____call_result_182) then
+                    ____t_result_184 = not __t(__call(vencidos, "includes", v))
+                else
+                    ____t_result_184 = __O[644]
+                end
+                if ____t_185(____t_result_184) then
                     __call(vencidos, "push", v)
                     salvarV(nil)
                 end

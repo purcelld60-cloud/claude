@@ -86,20 +86,43 @@ local __O = {};
         local e = f.estrada
         e.fase = fase
         for ____, m in __iterar((e.motos)) do
-            local ____t_8 = __t
-            local ____t_5 = __t
+            local ____t_11 = __t
+            local ____t_result_10
+            local ____t_6 = __t
+            local ____t_result_5
             local ____t_1 = __t
             local ____temp_0 = fase == 1 and m.id == 1
-            __O[895] = ____temp_0
-            local ____t_3 = __t
-            local ____temp_2 = fase == 2
-            __O[894] = ____temp_2
-            local ____temp_4 = if ____t_1(____temp_0) then __O[895] else if ____t_3(____temp_2) then m.id == 1 or m.id == 3 else __O[894]
-            __O[897] = ____temp_4
-            local ____t_7 = __t
-            local ____temp_6 = fase == 3
-            __O[896] = ____temp_6
-            if ____t_8(if ____t_5(____temp_4) then __O[897] else if ____t_7(____temp_6) then m.id == 1 or m.id == 2 else __O[896]) then
+            __O[900] = ____temp_0
+            if ____t_1(____temp_0) then
+                ____t_result_5 = __O[900]
+            else
+                local ____t_result_4
+                local ____t_3 = __t
+                local ____temp_2 = fase == 2
+                __O[899] = ____temp_2
+                if ____t_3(____temp_2) then
+                    ____t_result_4 = m.id == 1 or m.id == 3
+                else
+                    ____t_result_4 = __O[899]
+                end
+                ____t_result_5 = ____t_result_4
+            end
+            __O[902] = ____t_result_5
+            if ____t_6(____t_result_5) then
+                ____t_result_10 = __O[902]
+            else
+                local ____t_result_9
+                local ____t_8 = __t
+                local ____temp_7 = fase == 3
+                __O[901] = ____temp_7
+                if ____t_8(____temp_7) then
+                    ____t_result_9 = m.id == 1 or m.id == 2
+                else
+                    ____t_result_9 = __O[901]
+                end
+                ____t_result_10 = ____t_result_9
+            end
+            if ____t_11(____t_result_10) then
                 m.rival.max = 42 + fase * 10
                 m.rival.hp = m.rival.max
                 m.rival.ejetado = 0
@@ -112,7 +135,15 @@ local __O = {};
         return __call(
             e.motos,
             "reduce",
-            function(____, a, b) return if math.abs(b.x - x) < math.abs(a.x - x) then b else a end
+            function(____, a, b)
+                local ____temp_12
+                if math.abs(b.x - x) < math.abs(a.x - x) then
+                    ____temp_12 = b
+                else
+                    ____temp_12 = a
+                end
+                return ____temp_12
+            end
         )
     end
     local function avancar(self, f, dt, p)
@@ -121,9 +152,9 @@ local __O = {};
             local m = __get(e.motos, 0)
             p.x = m.x - 10
             p.y = m.y
-            local ____p_9 = p
+            local ____p_13 = p
             p.vy = 0
-            ____p_9.vx = 0
+            ____p_13.vx = 0
             p.ground = true
             p.facing = 1
             e.montou = true
@@ -138,14 +169,25 @@ local __O = {};
             m.anteriorY = m.y
             m.x = m.base + 22 * math.sin(t * 0.91 + fase) + 6 * math.sin(t * 2.15 + fase)
             m.y = f.piso - 60 - 15 * __mod(m.id, 2) + 7 * math.sin(t * 1.6 + fase) + 2 * math.sin(t * 7 + fase)
-            local ____t_14 = __t
-            local ____t_13 = __t
-            local ____t_11 = __t
-            local ____temp_10 = e.apoio == m.id
-            __O[898] = ____temp_10
-            local ____temp_12 = if ____t_11(____temp_10) then p.ground else __O[898]
-            __O[899] = ____temp_12
-            if ____t_14(if ____t_13(____temp_12) then __ge(p.vy, 0) else __O[899]) then
+            local ____t_19 = __t
+            local ____t_result_18
+            local ____t_17 = __t
+            local ____t_result_16
+            local ____t_15 = __t
+            local ____temp_14 = e.apoio == m.id
+            __O[903] = ____temp_14
+            if ____t_15(____temp_14) then
+                ____t_result_16 = p.ground
+            else
+                ____t_result_16 = __O[903]
+            end
+            __O[904] = ____t_result_16
+            if ____t_17(____t_result_16) then
+                ____t_result_18 = __ge(p.vy, 0)
+            else
+                ____t_result_18 = __O[904]
+            end
+            if ____t_19(____t_result_18) then
                 p.x = p.x + (m.x - m.anteriorX)
                 p.y = p.y + (m.y - m.anteriorY)
             end
@@ -159,23 +201,35 @@ local __O = {};
         for ____, o in __iterar((f.objetos)) do
             if o.moto ~= nil then
                 local m = __get(e.motos, o.moto)
-                local ____m_x_15 = m.x
-                o.x1 = ____m_x_15
-                o.x0 = ____m_x_15
-                local ____temp_16 = m.y - o.ry
-                o.y1 = ____temp_16
-                o.y0 = ____temp_16
+                local ____m_x_20 = m.x
+                o.x1 = ____m_x_20
+                o.x0 = ____m_x_20
+                local ____temp_21 = m.y - o.ry
+                o.y1 = ____temp_21
+                o.y0 = ____temp_21
             end
         end
         for ____, o in __iterar((f.objetos)) do
-            local ____t_21 = __t
-            local ____t_18 = __t
-            local ____temp_17 = o.cobrador ~= nil and not __t(__get(e.motos, o.cobrador).rival.hp)
-            __O[901] = ____temp_17
-            local ____t_20 = __t
-            local ____temp_19 = f.estado == "windup"
-            __O[900] = ____temp_19
-            if ____t_21(if ____t_18(____temp_17) then if ____t_20(____temp_19) then __O[900] else f.estado == "firing" and __lt(f.tempo, o.atraso) else __O[901]) then
+            local ____t_28 = __t
+            local ____t_result_27
+            local ____t_23 = __t
+            local ____temp_22 = o.cobrador ~= nil and not __t(__get(e.motos, o.cobrador).rival.hp)
+            __O[906] = ____temp_22
+            if ____t_23(____temp_22) then
+                local ____t_result_26
+                local ____t_25 = __t
+                local ____temp_24 = f.estado == "windup"
+                __O[905] = ____temp_24
+                if ____t_25(____temp_24) then
+                    ____t_result_26 = __O[905]
+                else
+                    ____t_result_26 = f.estado == "firing" and __lt(f.tempo, o.atraso)
+                end
+                ____t_result_27 = ____t_result_26
+            else
+                ____t_result_27 = __O[906]
+            end
+            if ____t_28(____t_result_27) then
                 o.fim = true
             end
         end
@@ -186,24 +240,32 @@ local __O = {};
         e.apoio = nil
         if __ge(p.vy, 0) then
             for ____, m in __iterar((e.motos)) do
-                local ____t_24 = __t
-                local ____t_23 = __t
-                local ____temp_22 = not __t(sob(nil, m, p.x)) or __gt(
-                    antes,
-                    math.max(m.y, m.anteriorY) + 3
-                )
-                __O[902] = ____temp_22
-                if ____t_24(if ____t_23(____temp_22) then __O[902] else __lt(p.y, m.y)) then
-                    continue
+                do
+                    local ____t_32 = __t
+                    local ____t_result_31
+                    local ____t_30 = __t
+                    local ____temp_29 = not __t(sob(nil, m, p.x)) or __gt(
+                        antes,
+                        math.max(m.y, m.anteriorY) + 3
+                    )
+                    __O[907] = ____temp_29
+                    if ____t_30(____temp_29) then
+                        ____t_result_31 = __O[907]
+                    else
+                        ____t_result_31 = __lt(p.y, m.y)
+                    end
+                    if ____t_32(____t_result_31) then
+                        continue
+                    end
+                    if ultimo ~= m.id then
+                        m.pulo = 0.2
+                    end
+                    p.y = m.y
+                    p.vy = 0
+                    p.ground = true
+                    e.apoio = m.id
+                    return
                 end
-                if ultimo ~= m.id then
-                    m.pulo = 0.2
-                end
-                p.y = m.y
-                p.vy = 0
-                p.ground = true
-                e.apoio = m.id
-                return
             end
         end
         if __lt(p.y, f.piso + 1) then
@@ -213,20 +275,27 @@ local __O = {};
         ferir(nil, 10, p.x)
         p.x = m.x - 12
         p.y = m.y
-        local ____p_25 = p
+        local ____p_33 = p
         p.vy = 0
-        ____p_25.vx = 0
+        ____p_33.vx = 0
         p.ground = true
         e.apoio = m.id
         m.pulo = 0.2
-        p.inv = math.max(if __t(p.inv) then p.inv else 0, 0.95)
+        local ____p_35 = p
+        local ____t_result_34
+        if __t(p.inv) then
+            ____t_result_34 = p.inv
+        else
+            ____t_result_34 = 0
+        end
+        ____p_35.inv = math.max(____t_result_34, 0.95)
     end
     local function setores(self, a, art, altura, dois)
         local e = a.f.estrada
         local m = perto(nil, e, a.x)
         local indices = __arrL({m.id}, 1)
         if __t(dois) then
-            __call(indices, "push", if m.id == 3 then 2 else m.id + 1)
+            __call(indices, "push", m.id == 3 and 2 or m.id + 1)
         end
         return __call(
             indices,
@@ -242,9 +311,9 @@ local __O = {};
                     0.76
                 )
                 o.moto = id
-                local ____temp_26 = apoio.y - o.ry
-                o.y1 = ____temp_26
-                o.y0 = ____temp_26
+                local ____temp_36 = apoio.y - o.ry
+                o.y1 = ____temp_36
+                o.y0 = ____temp_36
                 return o
             end
         )
@@ -291,15 +360,27 @@ local __O = {};
     end
     local function alvo(self, f, p, chefe)
         local escolhido = chefe
-        local dist = if __TS__MathSign(chefe.x - p.x) == p.facing then math.abs(chefe.x - p.x) else math.huge
+        local ____temp_37
+        if __TS__MathSign(chefe.x - p.x) == p.facing then
+            ____temp_37 = math.abs(chefe.x - p.x)
+        else
+            ____temp_37 = math.huge
+        end
+        local dist = ____temp_37
         for ____, m in __iterar((f.estrada.motos)) do
             local r = m.rival
             local d = (r.x - p.x) * p.facing
-            local ____t_29 = __t
-            local ____t_28 = __t
-            local ____temp_27 = __gt(r.hp, 0) and d > 0
-            __O[903] = ____temp_27
-            if ____t_29(if ____t_28(____temp_27) then d < dist else __O[903]) then
+            local ____t_41 = __t
+            local ____t_result_40
+            local ____t_39 = __t
+            local ____temp_38 = __gt(r.hp, 0) and d > 0
+            __O[908] = ____temp_38
+            if ____t_39(____temp_38) then
+                ____t_result_40 = d < dist
+            else
+                ____t_result_40 = __O[908]
+            end
+            if ____t_41(____t_result_40) then
                 dist = d
                 escolhido = r
             end
@@ -309,17 +390,28 @@ local __O = {};
     local function acertar(self, f, s)
         for ____, m in __iterar((f.estrada.motos)) do
             local r = m.rival
-            local ____t_34 = __t
-            local ____t_33 = __t
-            local ____t_31 = __t
-            local ____temp_30 = __gt(r.hp, 0) and __lt(
+            local ____t_47 = __t
+            local ____t_result_46
+            local ____t_45 = __t
+            local ____t_result_44
+            local ____t_43 = __t
+            local ____temp_42 = __gt(r.hp, 0) and __lt(
                 math.abs(s.x - r.x),
                 r.largura + 7
             )
-            __O[904] = ____temp_30
-            local ____temp_32 = if ____t_31(____temp_30) then __gt(s.y, r.y - r.alto - 6) else __O[904]
-            __O[905] = ____temp_32
-            if ____t_34(if ____t_33(____temp_32) then __lt(s.y, r.y + 5) else __O[905]) then
+            __O[909] = ____temp_42
+            if ____t_43(____temp_42) then
+                ____t_result_44 = __gt(s.y, r.y - r.alto - 6)
+            else
+                ____t_result_44 = __O[909]
+            end
+            __O[910] = ____t_result_44
+            if ____t_45(____t_result_44) then
+                ____t_result_46 = __lt(s.y, r.y + 5)
+            else
+                ____t_result_46 = __O[910]
+            end
+            if ____t_47(____t_result_46) then
                 r:onDano(s.damage)
                 return true
             end
@@ -503,17 +595,17 @@ local __O = {};
                         x = x + 4
                     end
                 end
-                local ____pol_37 = pol
-                local ____arr_36 = __arr
-                local ____array_35 = __TS__SparseArrayNew(__TS__Spread(__iter(pts)))
+                local ____pol_50 = pol
+                local ____arr_49 = __arr
+                local ____array_48 = __TS__SparseArrayNew(__TS__Spread(__iter(pts)))
                 __TS__SparseArrayPush(
-                    ____array_35,
+                    ____array_48,
                     __arrL({480, 215}, 2)
                 )
-                ____pol_37(
+                ____pol_50(
                     nil,
                     c,
-                    ____arr_36(__TS__SparseArraySpread(____array_35)),
+                    ____arr_49(__TS__SparseArraySpread(____array_48)),
                     __get(
                         __arrL({"#96b9bb", "#779e9a", "#5c8980"}, 3),
                         k
@@ -844,8 +936,14 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        local pele = if __t(hit) then "#fff2cc" else if __t(chefe) then "#a96f48" else "#ad7c59"
-        local bal = if __t(acao) then math.floor(3 * math.sin(t * 8) + 0.5) else 0
+        local pele = __t(hit) and "#fff2cc" or (__t(chefe) and "#a96f48" or "#ad7c59")
+        local ____t_result_51
+        if __t(acao) then
+            ____t_result_51 = math.floor(3 * math.sin(t * 8) + 0.5)
+        else
+            ____t_result_51 = 0
+        end
+        local bal = ____t_result_51
         traco(
             nil,
             c,
@@ -909,7 +1007,7 @@ local __O = {};
             -24,
             17,
             3,
-            if __t(chefe) then "#f3e873" else "#d6dab9"
+            __t(chefe) and "#f3e873" or "#d6dab9"
         )
         traco(
             nil,
@@ -1031,7 +1129,14 @@ local __O = {};
                 "#e6da71"
             )
         end
-        if __t(if __t(acao) then not __t(chefe) else acao) then
+        local ____t_53 = __t
+        local ____t_result_52
+        if __t(acao) then
+            ____t_result_52 = not __t(chefe)
+        else
+            ____t_result_52 = acao
+        end
+        if ____t_53(____t_result_52) then
             traco(
                 nil,
                 c,
@@ -1073,7 +1178,14 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        local treme = math.floor(bal * 3 + if __t(chefe) then math.sin(t * 8) * 1.5 else 0 + 0.5)
+        local ____temp_55 = bal * 3
+        local ____t_result_54
+        if __t(chefe) then
+            ____t_result_54 = math.sin(t * 8) * 1.5
+        else
+            ____t_result_54 = 0
+        end
+        local treme = math.floor(____temp_55 + ____t_result_54 + 0.5)
         px(
             nil,
             c,
@@ -1103,7 +1215,7 @@ local __O = {};
                     22 + i * 4 - u * 5,
                     4 + u * 8,
                     2,
-                    if __t(__mod(i, 2)) then "#a2a8a2" else "#8e9a98"
+                    __t(__mod(i, 2)) and "#a2a8a2" or "#8e9a98"
                 )
                 i = i + 1
             end
@@ -1293,8 +1405,8 @@ local __O = {};
                 false
             )
         elseif __gt(rival.hp, 0) then
-            local ____piloto_41 = piloto
-            local ____array_40 = __TS__SparseArrayNew(
+            local ____piloto_60 = piloto
+            local ____array_59 = __TS__SparseArrayNew(
                 nil,
                 c,
                 17,
@@ -1303,16 +1415,22 @@ local __O = {};
                 "#414e60",
                 false
             )
-            local ____t_39 = __t
-            local ____temp_38 = f.golpe == "recibo"
-            __O[906] = ____temp_38
+            local ____t_result_58
+            local ____t_57 = __t
+            local ____temp_56 = f.golpe == "recibo"
+            __O[911] = ____temp_56
+            if ____t_57(____temp_56) then
+                ____t_result_58 = f.estado == "windup" or f.estado == "firing"
+            else
+                ____t_result_58 = __O[911]
+            end
             __TS__SparseArrayPush(
-                ____array_40,
-                if ____t_39(____temp_38) then f.estado == "windup" or f.estado == "firing" else __O[906],
+                ____array_59,
+                ____t_result_58,
                 t,
                 __gt(rival.hit, 0)
             )
-            ____piloto_41(__TS__SparseArraySpread(____array_40))
+            ____piloto_60(__TS__SparseArraySpread(____array_59))
         elseif __gt(rival.ejetado, 0) then
             local u = 1 - rival.ejetado / 0.52
             c:save()
@@ -1355,11 +1473,17 @@ local __O = {};
                 "#c2a578"
             )
         end
-        local ____t_44 = __t
-        local ____t_43 = __t
-        local ____temp_42 = not __t(chefe) and __gt(rival.hp, 0)
-        __O[907] = ____temp_42
-        if ____t_44(if ____t_43(____temp_42) then __lt(rival.hp, rival.max) else __O[907]) then
+        local ____t_64 = __t
+        local ____t_result_63
+        local ____t_62 = __t
+        local ____temp_61 = not __t(chefe) and __gt(rival.hp, 0)
+        __O[912] = ____temp_61
+        if ____t_62(____temp_61) then
+            ____t_result_63 = __lt(rival.hp, rival.max)
+        else
+            ____t_result_63 = __O[912]
+        end
+        if ____t_64(____t_result_63) then
             px(
                 nil,
                 c,
@@ -1379,7 +1503,14 @@ local __O = {};
                 "#eeb57c"
             )
         end
-        if __t(if __t(chefe) then f.estado == "windup" else chefe) then
+        local ____t_66 = __t
+        local ____t_result_65
+        if __t(chefe) then
+            ____t_result_65 = f.estado == "windup"
+        else
+            ____t_result_65 = chefe
+        end
+        if ____t_66(____t_result_65) then
             px(
                 nil,
                 c,
@@ -1387,7 +1518,7 @@ local __O = {};
                 -9,
                 8,
                 3,
-                if math.sin(t * 15) > 0.1 then "#fff8db" else "#d79746"
+                math.sin(t * 15) > 0.1 and "#fff8db" or "#d79746"
             )
         end
         c:restore()

@@ -3,16 +3,15 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __set, __len = __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len
 local __call, __add, __iter, __assign, __band, __shr, __hypot, __getters, __re, __re_test = __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__assign, __JSR.__band, __JSR.__shr, __JSR.__hypot, __JSR.__getters, __JSR.__re, __JSR.__re_test
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__ParseInt = ____lualib.__TS__ParseInt
-local __TS__Iterator = ____lualib.__TS__Iterator
-local __TS__Number = ____lualib.__TS__Number
 local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
 local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
 local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
+local __TS__Iterator = ____lualib.__TS__Iterator
+local __TS__Number = ____lualib.__TS__Number
 local ____exports = {}
 local __O = {};
 (function()
@@ -118,15 +117,23 @@ local __O = {};
         do
             local i = 0
             while i < w * h / 16 do
-                R(
+                local ____R_6 = R
+                local ____array_5 = __TS__SparseArrayNew(
                     nil,
                     c,
                     x + hash(nil, i * 3.1 + seed) * w,
                     y + hash(nil, i * 7.7 + seed + 1) * h,
                     1,
-                    1,
-                    if __t(__mod(i, 2)) then lt else dk
+                    1
                 )
+                local ____t_result_4
+                if __t(__mod(i, 2)) then
+                    ____t_result_4 = lt
+                else
+                    ____t_result_4 = dk
+                end
+                __TS__SparseArrayPush(____array_5, ____t_result_4)
+                ____R_6(__TS__SparseArraySpread(____array_5))
                 i = i + 1
             end
         end
@@ -170,7 +177,7 @@ local __O = {};
         do
             local yy = 0
             while __lt(yy, h) do
-                local off = if __t(__mod(yy / 4, 2)) then 0 else 4
+                local off = __t(__mod(yy / 4, 2)) and 0 or 4
                 do
                     local xx = -off
                     while __lt(xx, w) do
@@ -180,18 +187,26 @@ local __O = {};
                             __add(x, w)
                         ) - bx
                         if bw > 0 then
-                            R(
+                            local ____R_9 = R
+                            local ____array_8 = __TS__SparseArrayNew(
                                 nil,
                                 c,
                                 bx,
                                 y + yy,
                                 bw,
-                                math.min(3, h - yy),
-                                if __gt(
-                                    hash(nil, xx * 1.3 + yy * 7 + seed),
-                                    0.5
-                                ) then col else __L1:shadeHex(col, 0.9)
+                                math.min(3, h - yy)
                             )
+                            local ____gt_result_7
+                            if __gt(
+                                hash(nil, xx * 1.3 + yy * 7 + seed),
+                                0.5
+                            ) then
+                                ____gt_result_7 = col
+                            else
+                                ____gt_result_7 = __L1:shadeHex(col, 0.9)
+                            end
+                            __TS__SparseArrayPush(____array_8, ____gt_result_7)
+                            ____R_9(__TS__SparseArraySpread(____array_8))
                         end
                         xx = xx + 8
                     end
@@ -448,10 +463,10 @@ local __O = {};
                         __add(y, h) - 6 - math.floor(hash(nil, k + seed) * 3 + 0.5),
                         2,
                         4,
-                        if __gt(
+                        __gt(
                             hash(nil, k + seed + 9),
                             0.5
-                        ) then "#4f8a3a" else "#e86a7a"
+                        ) and "#4f8a3a" or "#e86a7a"
                     )
                     k = k + 3
                 end
@@ -937,7 +952,7 @@ local __O = {};
                     y - 10 - __mod(k, 2) * 3,
                     3,
                     3,
-                    if __t(__mod(k, 2)) then "#4f8a3a" else "#5f9a46"
+                    __t(__mod(k, 2)) and "#4f8a3a" or "#5f9a46"
                 )
                 k = k + 1
             end
@@ -1099,15 +1114,16 @@ local __O = {};
                 do
                     local k = 0
                     while k < 5 do
-                        R(
-                            nil,
-                            c,
-                            x + k,
-                            yy + k,
-                            if 6 - k * 2 > 0 then 6 - k * 2 else 1,
-                            1,
-                            col
-                        )
+                        local ____R_12 = R
+                        local ____array_11 = __TS__SparseArrayNew(nil, c, x + k, yy + k)
+                        local ____temp_10
+                        if 6 - k * 2 > 0 then
+                            ____temp_10 = 6 - k * 2
+                        else
+                            ____temp_10 = 1
+                        end
+                        __TS__SparseArrayPush(____array_11, ____temp_10, 1, col)
+                        ____R_12(__TS__SparseArraySpread(____array_11))
                         k = k + 1
                     end
                 end
@@ -1132,7 +1148,7 @@ local __O = {};
             o = {}
         end
         local fh = 26
-        local top = __L1.GY - floors * fh - if __t(o.loja) then 4 else 0
+        local top = __L1.GY - floors * fh - (__t(o.loja) and 4 or 0)
         __L1:plaster(
             c,
             x,
@@ -1161,7 +1177,7 @@ local __O = {};
             __L1:shadeHex(col, 0.85)
         )
         do
-            local f = if __t(o.loja) then 1 else 0
+            local f = __t(o.loja) and 1 or 0
             while __lt(f, floors) do
                 local yy = __L1.GY - (f + 1) * fh + 5
                 R(
@@ -1287,10 +1303,10 @@ local __O = {};
                     c,
                     x + 4 + math.floor(hash(nil, seed + 32) * (w - 20) + 0.5),
                     top - 17,
-                    if __gt(
+                    __gt(
                         hash(nil, seed + 33),
                         0.5
-                    ) then 1 else 0
+                    ) and 1 or 0
                 )
             end
             if __gt(
@@ -1313,16 +1329,22 @@ local __O = {};
         return top
     end
     __L1.loja = function(self, c, x, w, signCol, a, b, seed)
-        local ____call_6 = __call
-        local ____t_5 = __t
-        local ____get_result_4 = __get(__L1.LOJAS, __L1.CUR)
-        __O[389] = ____get_result_4
-        ____call_6(
-            if ____t_5(____get_result_4) then __O[389] else __set(
+        local ____call_16 = __call
+        local ____t_result_15
+        local ____t_14 = __t
+        local ____get_result_13 = __get(__L1.LOJAS, __L1.CUR)
+        __O[389] = ____get_result_13
+        if ____t_14(____get_result_13) then
+            ____t_result_15 = __O[389]
+        else
+            ____t_result_15 = __set(
                 __L1.LOJAS,
                 __L1.CUR,
                 __arrL({}, 0)
-            ),
+            )
+        end
+        ____call_16(
+            ____t_result_15,
             "push",
             __arrL({x, w, signCol}, 3)
         )
@@ -1365,15 +1387,23 @@ local __O = {};
         do
             local k = 0
             while __lt(k, w) do
-                R(
+                local ____R_19 = R
+                local ____array_18 = __TS__SparseArrayNew(
                     nil,
                     c,
                     x + k,
                     __L1.GY - 21,
                     6,
-                    5,
-                    if __t(__mod(k / 6, 2)) then a else b
+                    5
                 )
+                local ____t_result_17
+                if __t(__mod(k / 6, 2)) then
+                    ____t_result_17 = a
+                else
+                    ____t_result_17 = b
+                end
+                __TS__SparseArrayPush(____array_18, ____t_result_17)
+                ____R_19(__TS__SparseArraySpread(____array_18))
                 R(
                     nil,
                     c,
@@ -1467,7 +1497,13 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local h = if __t(o.h) then o.h else 34
+        local ____t_result_20
+        if __t(o.h) then
+            ____t_result_20 = o.h
+        else
+            ____t_result_20 = 34
+        end
+        local h = ____t_result_20
         local top = __L1.GY - h
         if __gt(
             hash(nil, seed + 7),
@@ -1493,16 +1529,27 @@ local __O = {};
                 seed
             )
         end
-        __L1:roofTiles(
+        local ____L1_roofTiles_23 = __L1.roofTiles
+        local ____array_22 = __TS__SparseArrayNew(
             c,
             x - 4,
             top - 8,
             w + 8,
-            8,
-            if __t(o.telhado) then o.telhado else __L1:pick(
+            8
+        )
+        local ____t_result_21
+        if __t(o.telhado) then
+            ____t_result_21 = o.telhado
+        else
+            ____t_result_21 = __L1:pick(
                 __arrL({"#a8543c", "#9a4a34", "#b8644a"}, 3),
                 seed
             )
+        end
+        __TS__SparseArrayPush(____array_22, ____t_result_21)
+        ____L1_roofTiles_23(
+            __L1,
+            __TS__SparseArraySpread(____array_22)
         )
         __L1:janela(
             c,
@@ -1510,10 +1557,10 @@ local __O = {};
             top + 8,
             14,
             13,
-            if __gt(
+            __gt(
                 hash(nil, seed),
                 0.4
-            ) then "grade" else "veneziana",
+            ) and "grade" or "veneziana",
             seed
         )
         if __gt(w, 60) then
@@ -1562,10 +1609,10 @@ local __O = {};
                 c,
                 __add(x, w) - 20,
                 top - 22,
-                if __gt(
+                __gt(
                     hash(nil, seed + 22),
                     0.5
-                ) then 1 else 0
+                ) and 1 or 0
             )
         end
         if __gt(
@@ -2171,7 +2218,7 @@ local __O = {};
         R(
             nil,
             c,
-            x + if dir > 0 then 7 else 4,
+            x + (dir > 0 and 7 or 4),
             y - 13,
             18,
             6,
@@ -2180,7 +2227,7 @@ local __O = {};
         R(
             nil,
             c,
-            x + if dir > 0 then 9 else 6,
+            x + (dir > 0 and 9 or 6),
             y - 12,
             14,
             4,
@@ -2189,7 +2236,7 @@ local __O = {};
         R(
             nil,
             c,
-            x + if dir > 0 then 16 else 13,
+            x + (dir > 0 and 16 or 13),
             y - 12,
             1,
             4,
@@ -2213,19 +2260,35 @@ local __O = {};
             3,
             "#1c1c1c"
         )
-        R(
+        local ____R_26 = R
+        local ____c_25 = c
+        local ____temp_24
+        if dir > 0 then
+            ____temp_24 = x + w - 2
+        else
+            ____temp_24 = x
+        end
+        ____R_26(
             nil,
-            c,
-            if dir > 0 then x + w - 2 else x,
+            ____c_25,
+            ____temp_24,
             y - 7,
             2,
             2,
             "#fff2b0"
         )
-        R(
+        local ____R_29 = R
+        local ____c_28 = c
+        local ____temp_27
+        if dir > 0 then
+            ____temp_27 = x
+        else
+            ____temp_27 = x + w - 2
+        end
+        ____R_29(
             nil,
-            c,
-            if dir > 0 then x else x + w - 2,
+            ____c_28,
+            ____temp_27,
             y - 7,
             2,
             2,
@@ -2439,15 +2502,23 @@ local __O = {};
             while i < 26 do
                 local a = hash(nil, i + seed) * 6.28
                 local r = hash(nil, i * 3 + seed) * 16 * s
-                ell(
+                local ____ell_32 = ell
+                local ____array_31 = __TS__SparseArrayNew(
                     nil,
                     c,
                     x + math.cos(a) * r * 1.2,
                     base - 40 * s + math.sin(a) * r * 0.7,
                     4 * s,
-                    3.5 * s,
-                    if __t(__mod(i, 3)) then col else __L1:shadeHex(col, 0.8)
+                    3.5 * s
                 )
+                local ____t_result_30
+                if __t(__mod(i, 3)) then
+                    ____t_result_30 = col
+                else
+                    ____t_result_30 = __L1:shadeHex(col, 0.8)
+                end
+                __TS__SparseArrayPush(____array_31, ____t_result_30)
+                ____ell_32(__TS__SparseArraySpread(____array_31))
                 i = i + 1
             end
         end
@@ -2598,7 +2669,7 @@ local __O = {};
                     218,
                     12,
                     2,
-                    if __t(__mod(x / 24, 2)) then "#e8c24c" else "#2a2a2a"
+                    __t(__mod(x / 24, 2)) and "#e8c24c" or "#2a2a2a"
                 )
                 x = x + 24
             end
@@ -2636,7 +2707,7 @@ local __O = {};
                     222 + hash(nil, i * 2.7) * 48,
                     1,
                     1,
-                    if __t(__mod(i, 2)) then "#6c7073" else "#4c5053"
+                    __t(__mod(i, 2)) and "#6c7073" or "#4c5053"
                 )
                 i = i + 1
             end
@@ -2730,7 +2801,7 @@ local __O = {};
                     y + hash(nil, i * 3.3) * (LH - y),
                     1,
                     1,
-                    if __t(__mod(i, 2)) then "#d2cdc0" else "#ece8de"
+                    __t(__mod(i, 2)) and "#d2cdc0" or "#ece8de"
                 )
                 i = i + 1
             end
@@ -2898,15 +2969,23 @@ local __O = {};
         do
             local x = 0
             while __lt(x, W) do
-                R(
+                local ____R_35 = R
+                local ____array_34 = __TS__SparseArrayNew(
                     nil,
                     c,
                     x,
                     217 - math.floor(hash(nil, x) * 4 + 0.5),
                     1,
-                    4,
-                    if __t(__mod(x, 2)) then a else "#8ab05a"
+                    4
                 )
+                local ____t_result_33
+                if __t(__mod(x, 2)) then
+                    ____t_result_33 = a
+                else
+                    ____t_result_33 = "#8ab05a"
+                end
+                __TS__SparseArrayPush(____array_34, ____t_result_33)
+                ____R_35(__TS__SparseArraySpread(____array_34))
                 x = x + 3
             end
         end
@@ -2993,7 +3072,14 @@ local __O = {};
         do
             local x = 0
             while x < T do
-                local h = 10 + math.sin(x * 0.009) * 5 + math.sin(x * 0.031) * 3 + if __t(x > 520 and x < 900) then math.sin((x - 520) / 380 * math.pi) * 22 else 0
+                local ____temp_37 = 10 + math.sin(x * 0.009) * 5 + math.sin(x * 0.031) * 3
+                local ____t_result_36
+                if __t(x > 520 and x < 900) then
+                    ____t_result_36 = math.sin((x - 520) / 380 * math.pi) * 22
+                else
+                    ____t_result_36 = 0
+                end
+                local h = ____temp_37 + ____t_result_36
                 do
                     local y = 0
                     while y < h do
@@ -3004,7 +3090,7 @@ local __O = {};
                             150 - h + y,
                             1,
                             1,
-                            if y < 2 then "#c4d0d4" else __call(
+                            y < 2 and "#c4d0d4" or __call(
                                 __call(
                                     mix(
                                         nil,
@@ -3464,10 +3550,15 @@ local __O = {};
                     hash(nil, i + 1203),
                     0.3
                 ) then
-                    __L1:caixaDagua(cn, x + 3, y - 14, if __gt(
-                        hash(nil, i + 1204),
-                        0.5
-                    ) then 1 else 0)
+                    __L1:caixaDagua(
+                        cn,
+                        x + 3,
+                        y - 14,
+                        __gt(
+                            hash(nil, i + 1204),
+                            0.5
+                        ) and 1 or 0
+                    )
                 end
                 if __gt(
                     hash(nil, i + 1205),
@@ -3545,7 +3636,7 @@ local __O = {};
                     y,
                     8 + hash(nil, i) * 6,
                     6,
-                    if __gt(kind, 0.82) then "#b86ac8" else if __gt(kind, 0.7) then "#e8c84a" else if __t(__mod(i, 2)) then "#4f7a46" else "#5f8a52"
+                    __gt(kind, 0.82) and "#b86ac8" or (__gt(kind, 0.7) and "#e8c84a" or (__t(__mod(i, 2)) and "#4f7a46" or "#5f8a52"))
                 )
                 ell(
                     nil,
@@ -3554,7 +3645,7 @@ local __O = {};
                     y - 2,
                     5,
                     3,
-                    if __gt(kind, 0.82) then "#d48ae0" else if __gt(kind, 0.7) then "#f6dc6a" else "#6f9a5c"
+                    __gt(kind, 0.82) and "#d48ae0" or (__gt(kind, 0.7) and "#f6dc6a" or "#6f9a5c")
                 )
                 i = i + 1
             end
@@ -3618,7 +3709,13 @@ local __O = {};
         if not __t(__L1.FOG) then
             __L1.FOG = __L1:buildFog()
         end
-        local morning = if __t(__ge(s.h, 4.5) and __lt(s.h, 9.5)) then 1 - math.abs(s.h - 7) / 2.5 else 0
+        local ____t_result_38
+        if __t(__ge(s.h, 4.5) and __lt(s.h, 9.5)) then
+            ____t_result_38 = 1 - math.abs(s.h - 7) / 2.5
+        else
+            ____t_result_38 = 0
+        end
+        local morning = ____t_result_38
         local k = cl(nil, amount * (0.55 + morning * 0.8 + s.night * 0.25))
         c.globalAlpha = k * 0.85
         tile(nil, c, __L1.FOG, camL * 0.5 - t * 4)
@@ -3672,7 +3769,7 @@ local __O = {};
                             nil,
                             c,
                             x - 2,
-                            y - if __t(f) then 1 else 0,
+                            y - (__t(f) and 1 or 0),
                             2,
                             1,
                             "#3a3a40"
@@ -3681,7 +3778,7 @@ local __O = {};
                             nil,
                             c,
                             x + 1,
-                            y - if __t(f) then 1 else 0,
+                            y - (__t(f) and 1 or 0),
                             2,
                             1,
                             "#3a3a40"
@@ -3854,7 +3951,7 @@ local __O = {};
         do
             local i = 0
             while i < 14 do
-                local dir = if __t(__mod(i, 2)) then 1 else -1
+                local dir = __t(__mod(i, 2)) and 1 or -1
                 local x = __L1:wrap(
                     i * 73 + dir * t * (6 + __mod(i, 4) * 2) - off,
                     560
@@ -3882,19 +3979,35 @@ local __O = {};
                     c:save()
                     c.globalCompositeOperation = "lighter"
                     c.globalAlpha = nt
-                    R(
+                    local ____R_41 = R
+                    local ____c_40 = c
+                    local ____temp_39
+                    if dir > 0 then
+                        ____temp_39 = x + 4
+                    else
+                        ____temp_39 = x - 3
+                    end
+                    ____R_41(
                         nil,
-                        c,
-                        if dir > 0 then x + 4 else x - 3,
+                        ____c_40,
+                        ____temp_39,
                         y,
                         3,
                         1,
                         "#fff2b0"
                     )
-                    R(
+                    local ____R_44 = R
+                    local ____c_43 = c
+                    local ____temp_42
+                    if dir > 0 then
+                        ____temp_42 = x - 1
+                    else
+                        ____temp_42 = x + 4
+                    end
+                    ____R_44(
                         nil,
-                        c,
-                        if dir > 0 then x - 1 else x + 4,
+                        ____c_43,
+                        ____temp_42,
                         y,
                         1,
                         1,
@@ -3917,60 +4030,62 @@ local __O = {};
             local gx0 = ____value[1]
             local h = ____value[2]
             local sd = ____value[3]
-            local x = __L1:wrap(gx0 - camL * 0.05) - 0
-            local top = 160 - h
-            local a = math.sin(t * 0.12 + sd * 2) * 0.9
-            local len = 26
-            if __t(x < -40 or __gt(x, LW + 40)) then
-                continue
+            do
+                local x = __L1:wrap(gx0 - camL * 0.05) - 0
+                local top = 160 - h
+                local a = math.sin(t * 0.12 + sd * 2) * 0.9
+                local len = 26
+                if __t(x < -40 or __gt(x, LW + 40)) then
+                    continue
+                end
+                local ex = x + math.cos(a) * len
+                local back = x - math.cos(a) * 10
+                limb(
+                    nil,
+                    c,
+                    __arrL(
+                        {
+                            __arrL({back, top}, 2),
+                            __arrL({ex, top}, 2)
+                        },
+                        2
+                    ),
+                    1,
+                    "#e8a83a"
+                )
+                R(
+                    nil,
+                    c,
+                    back - 2,
+                    top,
+                    4,
+                    3,
+                    "#8a8a86"
+                )
+                local hk = ex - math.sin(t * 0.9 + sd) * 2
+                limb(
+                    nil,
+                    c,
+                    __arrL(
+                        {
+                            __arrL({ex - 2, top + 1}, 2),
+                            __arrL({hk, top + 14}, 2)
+                        },
+                        2
+                    ),
+                    1,
+                    "#5a5a56"
+                )
+                R(
+                    nil,
+                    c,
+                    hk - 1,
+                    top + 14,
+                    3,
+                    2,
+                    "#5a5a56"
+                )
             end
-            local ex = x + math.cos(a) * len
-            local back = x - math.cos(a) * 10
-            limb(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({back, top}, 2),
-                        __arrL({ex, top}, 2)
-                    },
-                    2
-                ),
-                1,
-                "#e8a83a"
-            )
-            R(
-                nil,
-                c,
-                back - 2,
-                top,
-                4,
-                3,
-                "#8a8a86"
-            )
-            local hk = ex - math.sin(t * 0.9 + sd) * 2
-            limb(
-                nil,
-                c,
-                __arrL(
-                    {
-                        __arrL({ex - 2, top + 1}, 2),
-                        __arrL({hk, top + 14}, 2)
-                    },
-                    2
-                ),
-                1,
-                "#5a5a56"
-            )
-            R(
-                nil,
-                c,
-                hk - 1,
-                top + 14,
-                3,
-                2,
-                "#5a5a56"
-            )
         end
     end
     __L1.fumacas = function(self, c, s, t, camL)
@@ -3984,24 +4099,26 @@ local __O = {};
         ))) do
             local x0 = ____value[1]
             local y0 = ____value[2]
-            local x = __L1:wrap(x0 - camL * 0.05) - 0
-            if __t(x < -20 or __gt(x, LW + 20)) then
-                continue
-            end
             do
-                local i = 0
-                while i < 6 do
-                    local k = __mod(t * 0.12 + i / 6, 1)
-                    R(
-                        nil,
-                        c,
-                        x + math.sin(t * 0.5 + i) * 3 + k * 10,
-                        y0 - k * 30,
-                        2 + k * 5,
-                        2 + k * 2,
-                        ("rgba(225,228,230," .. tostring((1 - k) * 0.45)) .. ")"
-                    )
-                    i = i + 1
+                local x = __L1:wrap(x0 - camL * 0.05) - 0
+                if __t(x < -20 or __gt(x, LW + 20)) then
+                    continue
+                end
+                do
+                    local i = 0
+                    while i < 6 do
+                        local k = __mod(t * 0.12 + i / 6, 1)
+                        R(
+                            nil,
+                            c,
+                            x + math.sin(t * 0.5 + i) * 3 + k * 10,
+                            y0 - k * 30,
+                            2 + k * 5,
+                            2 + k * 2,
+                            ("rgba(225,228,230," .. tostring((1 - k) * 0.45)) .. ")"
+                        )
+                        i = i + 1
+                    end
                 end
             end
         end
@@ -4010,33 +4127,43 @@ local __O = {};
         do
             local i = 0
             while i < 6 do
-                local x = __L1:wrap(i * 161 + 40 - camL * 0.12)
-                local y = 96 + __mod(i, 3) * 14
-                if __gt(x, LW + 10) then
-                    continue
-                end
-                R(
-                    nil,
-                    c,
-                    x,
-                    y,
-                    1,
-                    10,
-                    "#6a6a66"
-                )
                 do
-                    local k = 0
-                    while k < 6 do
-                        R(
-                            nil,
-                            c,
-                            x + 1 + k,
-                            y + math.floor(math.sin(t * 5 + k * 0.8 + i) * 1 + 0.5),
-                            1,
-                            4,
-                            if __t(__mod(i, 2)) then if k < 3 then "#2c8a3a" else "#e8c24c" else if k < 2 then "#f2f2ee" else if k < 4 then "#c43c3a" else "#3c6aa8"
-                        )
-                        k = k + 1
+                    local x = __L1:wrap(i * 161 + 40 - camL * 0.12)
+                    local y = 96 + __mod(i, 3) * 14
+                    if __gt(x, LW + 10) then
+                        do i = i + 1 continue end
+                    end
+                    R(
+                        nil,
+                        c,
+                        x,
+                        y,
+                        1,
+                        10,
+                        "#6a6a66"
+                    )
+                    do
+                        local k = 0
+                        while k < 6 do
+                            local ____R_47 = R
+                            local ____array_46 = __TS__SparseArrayNew(
+                                nil,
+                                c,
+                                x + 1 + k,
+                                y + math.floor(math.sin(t * 5 + k * 0.8 + i) * 1 + 0.5),
+                                1,
+                                4
+                            )
+                            local ____t_result_45
+                            if __t(__mod(i, 2)) then
+                                ____t_result_45 = k < 3 and "#2c8a3a" or "#e8c24c"
+                            else
+                                ____t_result_45 = k < 2 and "#f2f2ee" or (k < 4 and "#c43c3a" or "#3c6aa8")
+                            end
+                            __TS__SparseArrayPush(____array_46, ____t_result_45)
+                            ____R_47(__TS__SparseArraySpread(____array_46))
+                            k = k + 1
+                        end
                     end
                 end
                 i = i + 1
@@ -4053,27 +4180,29 @@ local __O = {};
         do
             local i = 0
             while i < 40 do
-                local slot = math.floor(t / 3 + hash(nil, i) * 10)
-                if __gt(
-                    hash(nil, slot * 7 + i),
-                    0.5
-                ) then
-                    continue
+                do
+                    local slot = math.floor(t / 3 + hash(nil, i) * 10)
+                    if __gt(
+                        hash(nil, slot * 7 + i),
+                        0.5
+                    ) then
+                        do i = i + 1 continue end
+                    end
+                    local x = __L1:wrap(hash(nil, i + 70) * 964 - camL * 0.12)
+                    local y = 110 + hash(nil, i + 71) * 58
+                    if __gt(x, LW) then
+                        do i = i + 1 continue end
+                    end
+                    R(
+                        nil,
+                        c,
+                        x,
+                        y,
+                        2,
+                        3,
+                        ("rgba(255,214,140," .. tostring(0.8 * a)) .. ")"
+                    )
                 end
-                local x = __L1:wrap(hash(nil, i + 70) * 964 - camL * 0.12)
-                local y = 110 + hash(nil, i + 71) * 58
-                if __gt(x, LW) then
-                    continue
-                end
-                R(
-                    nil,
-                    c,
-                    x,
-                    y,
-                    2,
-                    3,
-                    ("rgba(255,214,140," .. tostring(0.8 * a)) .. ")"
-                )
                 i = i + 1
             end
         end
@@ -4084,19 +4213,21 @@ local __O = {};
             return
         end
         for ____, ax in __iterar((__arrL({590, 640, 820}, 3))) do
-            local x = __L1:wrap(ax - camL * 0.02)
-            if __gt(x, LW) then
-                continue
+            do
+                local x = __L1:wrap(ax - camL * 0.02)
+                if __gt(x, LW) then
+                    continue
+                end
+                R(
+                    nil,
+                    c,
+                    x - 1,
+                    108,
+                    3,
+                    3,
+                    ("rgba(255,70,60," .. tostring(0.5 + __L1:night(s) * 0.5)) .. ")"
+                )
             end
-            R(
-                nil,
-                c,
-                x - 1,
-                108,
-                3,
-                3,
-                ("rgba(255,70,60," .. tostring(0.5 + __L1:night(s) * 0.5)) .. ")"
-            )
         end
     end
     __L1.conquistaBack = function(self, c, s, t, camL, o)
@@ -4155,24 +4286,42 @@ local __O = {};
             )
         end
         if o.birds ~= false then
-            __L1:passaros(
-                c,
-                t,
-                camL,
-                7,
-                if __t(o.seed) then o.seed else 0
+            local ____L1_passaros_50 = __L1.passaros
+            local ____array_49 = __TS__SparseArrayNew(c, t, camL, 7)
+            local ____t_result_48
+            if __t(o.seed) then
+                ____t_result_48 = o.seed
+            else
+                ____t_result_48 = 0
+            end
+            __TS__SparseArrayPush(____array_49, ____t_result_48)
+            ____L1_passaros_50(
+                __L1,
+                __TS__SparseArraySpread(____array_49)
             )
         end
         if __t(o.kites) then
-            __L1:pipas(c, t, camL, if __t(o.seed) then o.seed else 0)
+            local ____L1_pipas_53 = __L1.pipas
+            local ____array_52 = __TS__SparseArrayNew(c, t, camL)
+            local ____t_result_51
+            if __t(o.seed) then
+                ____t_result_51 = o.seed
+            else
+                ____t_result_51 = 0
+            end
+            __TS__SparseArrayPush(____array_52, ____t_result_51)
+            ____L1_pipas_53(
+                __L1,
+                __TS__SparseArraySpread(____array_52)
+            )
         end
-        local ____opt_9 = __L1:CAM()
-        if ____opt_9 ~= nil then
-            ____opt_9 = ____opt_9.meio
+        local ____opt_56 = __L1:CAM()
+        if ____opt_56 ~= nil then
+            ____opt_56 = ____opt_56.meio
         end
-        if ____opt_9 ~= nil then
-            ____opt_9(
-                ____opt_9,
+        if ____opt_56 ~= nil then
+            ____opt_56(
+                ____opt_56,
                 __L1.CUR,
                 c,
                 s,
@@ -4196,33 +4345,35 @@ local __O = {};
                 do
                     local j = 0
                     while j < 3 do
-                        if __lt(
-                            hash(nil, i * 9 + j + id),
-                            0.35
-                        ) then
-                            continue
+                        do
+                            if __lt(
+                                hash(nil, i * 9 + j + id),
+                                0.35
+                            ) then
+                                do j = j + 1 continue end
+                            end
+                            local u = 0.2 + hash(nil, i * 3 + j * 7 + id) * 0.6
+                            local px = F.x0 + i * F.step + u * F.step
+                            local py = F.y0 + math.floor(math.sin(u * math.pi) * 9 + 0.5) - 1
+                            __call(
+                                out,
+                                "push",
+                                {
+                                    px = px,
+                                    py = py,
+                                    x = px,
+                                    y = py,
+                                    vx = 0,
+                                    vy = 0,
+                                    st = 0,
+                                    tm = 0,
+                                    col = __L1:pick(
+                                        __arrL({"#3a3a40", "#5a4a3a", "#6a6f78"}, 3),
+                                        i + j
+                                    )
+                                }
+                            )
                         end
-                        local u = 0.2 + hash(nil, i * 3 + j * 7 + id) * 0.6
-                        local px = F.x0 + i * F.step + u * F.step
-                        local py = F.y0 + math.floor(math.sin(u * math.pi) * 9 + 0.5) - 1
-                        __call(
-                            out,
-                            "push",
-                            {
-                                px = px,
-                                py = py,
-                                x = px,
-                                y = py,
-                                vx = 0,
-                                vy = 0,
-                                st = 0,
-                                tm = 0,
-                                col = __L1:pick(
-                                    __arrL({"#3a3a40", "#5a4a3a", "#6a6f78"}, 3),
-                                    i + j
-                                )
-                            }
-                        )
                         j = j + 1
                     end
                 end
@@ -4244,125 +4395,161 @@ local __O = {};
         local hx = __L1.HERO.x / 2
         local jumping = __L1.HERO.vy < -250
         for ____, b in __iterar((L)) do
-            local d = math.abs(b.px - hx)
-            local ____t_15 = __t
-            local ____t_12 = __t
-            local ____temp_11 = b.st == 0
-            __O[391] = ____temp_11
-            local ____t_14 = __t
-            local ____temp_13 = d < 70
-            __O[390] = ____temp_13
-            if ____t_15(if ____t_12(____temp_11) then if ____t_14(____temp_13) then __O[390] else if __t(jumping) then d < 140 else jumping else __O[391]) then
-                b.st = 1
-                b.vx = if __ge(b.px, hx) then 1 else -1 * (40 + math.random() * 40)
-                b.vy = -40 - math.random() * 20
-                b.tm = 7 + math.random() * 6
-            end
-            if b.st == 1 then
-                b.x = b.x + b.vx * dt
-                b.y = b.y + b.vy * dt
-                b.vy = b.vy - 4 * dt
-                b.tm = b.tm - dt
-                if __t(__le(b.tm, 0) and d > 160) then
-                    b.st = 2
+            do
+                local d = math.abs(b.px - hx)
+                local ____t_65 = __t
+                local ____t_result_64
+                local ____t_59 = __t
+                local ____temp_58 = b.st == 0
+                __O[391] = ____temp_58
+                if ____t_59(____temp_58) then
+                    local ____t_result_63
+                    local ____t_61 = __t
+                    local ____temp_60 = d < 70
+                    __O[390] = ____temp_60
+                    if ____t_61(____temp_60) then
+                        ____t_result_63 = __O[390]
+                    else
+                        local ____t_result_62
+                        if __t(jumping) then
+                            ____t_result_62 = d < 140
+                        else
+                            ____t_result_62 = jumping
+                        end
+                        ____t_result_63 = ____t_result_62
+                    end
+                    ____t_result_64 = ____t_result_63
+                else
+                    ____t_result_64 = __O[391]
                 end
-            end
-            if b.st == 2 then
-                b.x = b.x + (b.px - b.x) * math.min(1, dt * 1.5)
-                b.y = b.y + (b.py - b.y) * math.min(1, dt * 1.5)
-                if __t(math.abs(b.x - b.px) < 1 and math.abs(b.y - b.py) < 1) then
-                    b.st = 0
-                    b.x = b.px
-                    b.y = b.py
+                if ____t_65(____t_result_64) then
+                    b.st = 1
+                    b.vx = (__ge(b.px, hx) and 1 or -1) * (40 + math.random() * 40)
+                    b.vy = -40 - math.random() * 20
+                    b.tm = 7 + math.random() * 6
                 end
-            end
-            local x = b.x - camL
-            if __t(x < -10 or __gt(x, LW + 10)) then
-                continue
-            end
-            if b.st == 0 then
-                local bob = if math.sin(t * 2 + b.px) > 0.9 then 1 else 0
-                R(
-                    nil,
-                    c,
-                    x,
-                    b.y - 3 + bob,
-                    3,
-                    3,
-                    b.col
-                )
-                R(
-                    nil,
-                    c,
-                    x + 2,
-                    b.y - 4 + bob,
-                    2,
-                    2,
-                    b.col
-                )
-                R(
-                    nil,
-                    c,
-                    x + 3,
-                    b.y - 3 + bob,
-                    1,
-                    1,
-                    "#e8a83a"
-                )
-                R(
-                    nil,
-                    c,
-                    x - 1,
-                    b.y - 2,
-                    1,
-                    1,
-                    b.col
-                )
-            else
-                local f = math.sin(t * 18 + b.px) > 0
-                R(
-                    nil,
-                    c,
-                    x,
-                    b.y,
-                    3,
-                    2,
-                    b.col
-                )
-                R(
-                    nil,
-                    c,
-                    x - 2,
-                    b.y - if __t(f) then 2 else 0,
-                    2,
-                    1,
-                    b.col
-                )
-                R(
-                    nil,
-                    c,
-                    x + 3,
-                    b.y - if __t(f) then 2 else 0,
-                    2,
-                    1,
-                    b.col
-                )
+                if b.st == 1 then
+                    b.x = b.x + b.vx * dt
+                    b.y = b.y + b.vy * dt
+                    b.vy = b.vy - 4 * dt
+                    b.tm = b.tm - dt
+                    if __t(__le(b.tm, 0) and d > 160) then
+                        b.st = 2
+                    end
+                end
+                if b.st == 2 then
+                    b.x = b.x + (b.px - b.x) * math.min(1, dt * 1.5)
+                    b.y = b.y + (b.py - b.y) * math.min(1, dt * 1.5)
+                    if __t(math.abs(b.x - b.px) < 1 and math.abs(b.y - b.py) < 1) then
+                        b.st = 0
+                        b.x = b.px
+                        b.y = b.py
+                    end
+                end
+                local x = b.x - camL
+                if __t(x < -10 or __gt(x, LW + 10)) then
+                    continue
+                end
+                if b.st == 0 then
+                    local bob = math.sin(t * 2 + b.px) > 0.9 and 1 or 0
+                    R(
+                        nil,
+                        c,
+                        x,
+                        b.y - 3 + bob,
+                        3,
+                        3,
+                        b.col
+                    )
+                    R(
+                        nil,
+                        c,
+                        x + 2,
+                        b.y - 4 + bob,
+                        2,
+                        2,
+                        b.col
+                    )
+                    R(
+                        nil,
+                        c,
+                        x + 3,
+                        b.y - 3 + bob,
+                        1,
+                        1,
+                        "#e8a83a"
+                    )
+                    R(
+                        nil,
+                        c,
+                        x - 1,
+                        b.y - 2,
+                        1,
+                        1,
+                        b.col
+                    )
+                else
+                    local f = math.sin(t * 18 + b.px) > 0
+                    R(
+                        nil,
+                        c,
+                        x,
+                        b.y,
+                        3,
+                        2,
+                        b.col
+                    )
+                    R(
+                        nil,
+                        c,
+                        x - 2,
+                        b.y - (__t(f) and 2 or 0),
+                        2,
+                        1,
+                        b.col
+                    )
+                    R(
+                        nil,
+                        c,
+                        x + 3,
+                        b.y - (__t(f) and 2 or 0),
+                        2,
+                        1,
+                        b.col
+                    )
+                end
             end
         end
     end
     __L1.heroi = function(self, x, y, vy)
-        local ____t_17 = __t
-        local ____TS__Number_result_16 = __TS__Number(x)
-        __O[392] = ____TS__Number_result_16
-        local ____temp_22 = if ____t_17(____TS__Number_result_16) then __O[392] else -9999
-        local ____t_19 = __t
-        local ____TS__Number_result_18 = __TS__Number(y)
-        __O[393] = ____TS__Number_result_18
-        local ____temp_23 = if ____t_19(____TS__Number_result_18) then __O[393] else 440
-        local ____t_21 = __t
-        local ____TS__Number_result_20 = __TS__Number(vy)
-        __O[394] = ____TS__Number_result_20
-        __L1.HERO = {x = ____temp_22, y = ____temp_23, vy = if ____t_21(____TS__Number_result_20) then __O[394] else 0}
+        local ____t_result_68
+        local ____t_67 = __t
+        local ____TS__Number_result_66 = __TS__Number(x)
+        __O[392] = ____TS__Number_result_66
+        if ____t_67(____TS__Number_result_66) then
+            ____t_result_68 = __O[392]
+        else
+            ____t_result_68 = -9999
+        end
+        local ____t_result_71
+        local ____t_70 = __t
+        local ____TS__Number_result_69 = __TS__Number(y)
+        __O[393] = ____TS__Number_result_69
+        if ____t_70(____TS__Number_result_69) then
+            ____t_result_71 = __O[393]
+        else
+            ____t_result_71 = 440
+        end
+        local ____t_result_74
+        local ____t_73 = __t
+        local ____TS__Number_result_72 = __TS__Number(vy)
+        __O[394] = ____TS__Number_result_72
+        if ____t_73(____TS__Number_result_72) then
+            ____t_result_74 = __O[394]
+        else
+            ____t_result_74 = 0
+        end
+        __L1.HERO = {x = ____t_result_68, y = ____t_result_71, vy = ____t_result_74}
     end
     __L1.buildAir = function(self)
         local cv, c = table.unpack(
@@ -4664,10 +4851,10 @@ local __O = {};
                     nil,
                     c,
                     x,
-                    191 + if __t(__mod(
+                    191 + (__t(__mod(
                         math.floor(x / 38),
                         2
-                    )) then 0 else 0,
+                    )) and 0 or 0),
                     2,
                     2,
                     "#c43c3a"
@@ -5461,7 +5648,7 @@ local __O = {};
                         186 - __mod(k, 2) * 6,
                         3,
                         5,
-                        if __t(__mod(k, 2)) then "#4f8a3a" else "#5f9a46"
+                        __t(__mod(k, 2)) and "#4f8a3a" or "#5f9a46"
                     )
                     k = k + 1
                 end
@@ -5899,7 +6086,7 @@ local __O = {};
                             62 + k * 8,
                             22,
                             4,
-                            if __t(math.sin(t * 3 + k) > 0 or k > 1) then "#5ae070" else "#14202a"
+                            __t(math.sin(t * 3 + k) > 0 or k > 1) and "#5ae070" or "#14202a"
                         )
                         k = k + 1
                     end
@@ -5979,7 +6166,7 @@ local __O = {};
                             120 + k * 0.8 + sw * k * 0.3,
                             4,
                             5 - k * 0.6,
-                            if __t(__mod(k, 2)) then "#f2f2ee" else "#f08a24"
+                            __t(__mod(k, 2)) and "#f2f2ee" or "#f08a24"
                         )
                         k = k + 1
                     end
@@ -5991,11 +6178,17 @@ local __O = {};
             while i < 12 do
                 local wx = 120 + i * 175 + math.sin(t * 0.3 + i) * 30
                 local x = wx - camL
-                local ____t_26 = __t
-                local ____t_25 = __t
-                local ____temp_24 = __L1:vis(x, 20)
-                __O[395] = ____temp_24
-                if ____t_26(if ____t_25(____temp_24) then wx < __L1.AIR.TAR or wx > __L1.AIR.GR else __O[395]) then
+                local ____t_78 = __t
+                local ____t_result_77
+                local ____t_76 = __t
+                local ____temp_75 = __L1:vis(x, 20)
+                __O[395] = ____temp_75
+                if ____t_76(____temp_75) then
+                    ____t_result_77 = wx < __L1.AIR.TAR or wx > __L1.AIR.GR
+                else
+                    ____t_result_77 = __O[395]
+                end
+                if ____t_78(____t_result_77) then
                     __L1:gente(c, x, __L1.GY, i)
                     R(
                         nil,
@@ -6073,11 +6266,17 @@ local __O = {};
             local x = __L1.AIR.GR + 20
             while x < __L1.AIR.W do
                 local sx = x - camL
-                local ____t_29 = __t
-                local ____t_28 = __t
-                local ____temp_27 = __L1:vis(sx)
-                __O[396] = ____temp_27
-                if ____t_29(if ____t_28(____temp_27) then __gt(a, 0.05) else __O[396]) then
+                local ____t_82 = __t
+                local ____t_result_81
+                local ____t_80 = __t
+                local ____temp_79 = __L1:vis(sx)
+                __O[396] = ____temp_79
+                if ____t_80(____temp_79) then
+                    ____t_result_81 = __gt(a, 0.05)
+                else
+                    ____t_result_81 = __O[396]
+                end
+                if ____t_82(____t_result_81) then
                     g.fillStyle = ("rgba(255,246,216," .. tostring(0.25 * a)) .. ")"
                     g:fillRect(sx - 20, 66, 40, 144)
                     lightAdd(
@@ -6102,54 +6301,56 @@ local __O = {};
             local i = 0
             local x = 6
             while x < __L1.BAIRRO.W - 60 do
-                if __t(x > __L1.BAIRRO.PEN - 70 and x < __L1.BAIRRO.PEN + 240) then
-                    x = __L1.BAIRRO.PEN + 240
-                    continue
+                do
+                    if __t(x > __L1.BAIRRO.PEN - 70 and x < __L1.BAIRRO.PEN + 240) then
+                        x = __L1.BAIRRO.PEN + 240
+                        do i = i + 1 continue end
+                    end
+                    if __t(x > 1110 and x < 1360) then
+                        x = 1360
+                        do i = i + 1 continue end
+                    end
+                    local w = 62 + math.floor(hash(nil, i + 40) * 40 + 0.5)
+                    if __mod(i, 5) == 3 then
+                        __L1:predio(
+                            c,
+                            x,
+                            w,
+                            2,
+                            __L1:pick(
+                                __arrL({
+                                    "#e9d8b4",
+                                    "#c9dcc8",
+                                    "#e8c4b4",
+                                    "#d4d8e8",
+                                    "#f0e2a8"
+                                }, 5),
+                                i
+                            ),
+                            i + 60,
+                            {telhado = "#a8543c"}
+                        )
+                    else
+                        __L1:casa(
+                            c,
+                            x,
+                            w,
+                            __L1:pick(
+                                __arrL({
+                                    "#e9d8b4",
+                                    "#c9dcc8",
+                                    "#e8c4b4",
+                                    "#d4d8e8",
+                                    "#f0e2a8",
+                                    "#d8c8e0"
+                                }, 6),
+                                i
+                            ),
+                            i + 40
+                        )
+                    end
+                    x = x + (w + 16)
                 end
-                if __t(x > 1110 and x < 1360) then
-                    x = 1360
-                    continue
-                end
-                local w = 62 + math.floor(hash(nil, i + 40) * 40 + 0.5)
-                if __mod(i, 5) == 3 then
-                    __L1:predio(
-                        c,
-                        x,
-                        w,
-                        2,
-                        __L1:pick(
-                            __arrL({
-                                "#e9d8b4",
-                                "#c9dcc8",
-                                "#e8c4b4",
-                                "#d4d8e8",
-                                "#f0e2a8"
-                            }, 5),
-                            i
-                        ),
-                        i + 60,
-                        {telhado = "#a8543c"}
-                    )
-                else
-                    __L1:casa(
-                        c,
-                        x,
-                        w,
-                        __L1:pick(
-                            __arrL({
-                                "#e9d8b4",
-                                "#c9dcc8",
-                                "#e8c4b4",
-                                "#d4d8e8",
-                                "#f0e2a8",
-                                "#d8c8e0"
-                            }, 6),
-                            i
-                        ),
-                        i + 40
-                    )
-                end
-                x = x + (w + 16)
                 i = i + 1
             end
         end
@@ -6512,7 +6713,7 @@ local __O = {};
                         c,
                         sx,
                         214,
-                        if x == 560 then "#b86ac8" else "#e8c84a",
+                        x == 560 and "#b86ac8" or "#e8c84a",
                         x
                     )
                 else
@@ -6627,14 +6828,20 @@ local __O = {};
             local k = 0
             while k < 6 do
                 local sx = __L1.BAIRRO.PEN + 20 + k * 35 - camL
-                local ____t_32 = __t
-                local ____t_31 = __t
-                local ____temp_30 = __L1:vis(sx)
-                __O[397] = ____temp_30
-                __D[1] = if ____t_32(if ____t_31(____temp_30) then __gt(
-                    hash(nil, k + 9),
-                    0.3
-                ) else __O[397]) then
+                local ____t_86 = __t
+                local ____t_result_85
+                local ____t_84 = __t
+                local ____temp_83 = __L1:vis(sx)
+                __O[397] = ____temp_83
+                if ____t_84(____temp_83) then
+                    ____t_result_85 = __gt(
+                        hash(nil, k + 9),
+                        0.3
+                    )
+                else
+                    ____t_result_85 = __O[397]
+                end
+                if ____t_86(____t_result_85) then
                     g.fillStyle = ("rgba(255,214,140," .. tostring(0.55 * a)) .. ")"
                     g:fillRect(sx - 6, 110, 12, 14)
                 end
@@ -6821,7 +7028,7 @@ local __O = {};
                         108 - k,
                         w,
                         1,
-                        if __t(__mod(k, 3)) then wall else white
+                        __t(__mod(k, 3)) and wall or white
                     )
                 end
                 k = k + 1
@@ -7041,7 +7248,7 @@ local __O = {};
                     36 - k * 2.2,
                     w,
                     2.3,
-                    if __mod(k, 4) == 0 then white else wall
+                    __mod(k, 4) == 0 and white or wall
                 )
                 k = k + 1
             end
@@ -7212,43 +7419,45 @@ local __O = {};
             local i = 0
             local sx = 1700
             while sx < __L1.CENTRO.W - 60 do
-                local w = 92 + math.floor(hash(nil, i + 500) * 30 + 0.5)
-                if i == 0 then
-                    sx = sx + 180
-                    continue
+                do
+                    local w = 92 + math.floor(hash(nil, i + 500) * 30 + 0.5)
+                    if i == 0 then
+                        sx = sx + 180
+                        do i = i + 1 continue end
+                    end
+                    __L1:predio(
+                        c,
+                        sx,
+                        w,
+                        3 + math.floor(hash(nil, i + 501) * 2 + 0.5),
+                        __L1:pick(
+                            __arrL({"#ddd3bf", "#e9e6dc", "#cfc6b2", "#f0e6cc"}, 4),
+                            i
+                        ),
+                        500 + i,
+                        {loja = true}
+                    )
+                    local tt = __get(
+                        toldo,
+                        __mod(i + 2, 5)
+                    )
+                    __L1:loja(
+                        c,
+                        sx,
+                        w,
+                        __get(
+                            sinal,
+                            __mod(
+                                i + 3,
+                                __len(sinal)
+                            )
+                        ),
+                        __get(tt, 0),
+                        __get(tt, 1),
+                        510 + i
+                    )
+                    sx = sx + (w + 4)
                 end
-                __L1:predio(
-                    c,
-                    sx,
-                    w,
-                    3 + math.floor(hash(nil, i + 501) * 2 + 0.5),
-                    __L1:pick(
-                        __arrL({"#ddd3bf", "#e9e6dc", "#cfc6b2", "#f0e6cc"}, 4),
-                        i
-                    ),
-                    500 + i,
-                    {loja = true}
-                )
-                local tt = __get(
-                    toldo,
-                    __mod(i + 2, 5)
-                )
-                __L1:loja(
-                    c,
-                    sx,
-                    w,
-                    __get(
-                        sinal,
-                        __mod(
-                            i + 3,
-                            __len(sinal)
-                        )
-                    ),
-                    __get(tt, 0),
-                    __get(tt, 1),
-                    510 + i
-                )
-                sx = sx + (w + 4)
                 i = i + 1
             end
         end
@@ -7584,7 +7793,7 @@ local __O = {};
                     c,
                     sx,
                     212,
-                    if x == 1120 then "#b86ac8" else "#e8c84a",
+                    x == 1120 and "#b86ac8" or "#e8c84a",
                     x,
                     0.9
                 )
@@ -7940,7 +8149,7 @@ local __O = {};
                     y,
                     2,
                     1,
-                    if __t(__mod(i, 3)) then "#7a7a56" else "#95956c"
+                    __t(__mod(i, 3)) and "#7a7a56" or "#95956c"
                 )
                 i = i + 1
             end
@@ -7971,7 +8180,7 @@ local __O = {};
                     y,
                     3 + hash(nil, i) * 5,
                     3,
-                    if __t(__mod(i, 2)) then "#5a7a3c" else "#6a8a44"
+                    __t(__mod(i, 2)) and "#5a7a3c" or "#6a8a44"
                 )
                 if __gt(
                     hash(nil, i + 702),
@@ -8471,13 +8680,13 @@ local __O = {};
             camL
         )
         tile(nil, c, __L1.FAR.ridge, camL * 0.02)
-        local ____opt_35 = __L1:CAM()
-        if ____opt_35 ~= nil then
-            ____opt_35 = ____opt_35.meio
+        local ____opt_89 = __L1:CAM()
+        if ____opt_89 ~= nil then
+            ____opt_89 = ____opt_89.meio
         end
-        if ____opt_35 ~= nil then
-            ____opt_35(
-                ____opt_35,
+        if ____opt_89 ~= nil then
+            ____opt_89(
+                ____opt_89,
                 __L1.CUR,
                 c,
                 s,
@@ -8612,11 +8821,17 @@ local __O = {};
         end
         for ____, x in __iterar((__arrL({520, 1340}, 2))) do
             local sx = x - camL
-            local ____t_39 = __t
-            local ____t_38 = __t
-            local ____temp_37 = __L1:vis(sx)
-            __O[398] = ____temp_37
-            if ____t_39(if ____t_38(____temp_37) then math.sin(t * 3) > 0 else __O[398]) then
+            local ____t_94 = __t
+            local ____t_result_93
+            local ____t_92 = __t
+            local ____temp_91 = __L1:vis(sx)
+            __O[398] = ____temp_91
+            if ____t_92(____temp_91) then
+                ____t_result_93 = math.sin(t * 3) > 0
+            else
+                ____t_result_93 = __O[398]
+            end
+            if ____t_94(____t_result_93) then
                 g.fillStyle = ("rgba(255,80,60," .. tostring(a)) .. ")"
                 g:fillRect(sx - 1, 32, 5, 5)
             end
@@ -8657,57 +8872,65 @@ local __O = {};
             local i = 0
             local x = 10
             while x < __L1.AVENIDA.W do
-                local w = 70 + math.floor(hash(nil, i + 70) * 50 + 0.5)
-                local ____t_42 = __t
-                local ____t_41 = __t
-                local ____temp_40 = math.abs(x + w / 2 - __L1.AVENIDA.INDIO) < 280
-                __O[399] = ____temp_40
-                if ____t_42(if ____t_41(____temp_40) then __O[399] else x > 280 and x < 480) then
-                    x = x + (w + 30)
-                    continue
-                end
-                __L1:predio(
-                    c,
-                    x,
-                    w,
-                    2 + math.floor(hash(nil, i + 71) * 4 + 0.5),
-                    __L1:pick(
-                        __arrL({
-                            "#e9e6dc",
-                            "#ddd3bf",
-                            "#f2efe6",
-                            "#cfd6dc",
-                            "#e8dcc8"
-                        }, 5),
-                        i
-                    ),
-                    700 + i,
-                    {loja = __gt(
-                        hash(nil, i + 72),
-                        0.4
-                    )}
-                )
-                if __gt(
-                    hash(nil, i + 72),
-                    0.4
-                ) then
-                    __L1:loja(
+                do
+                    local w = 70 + math.floor(hash(nil, i + 70) * 50 + 0.5)
+                    local ____t_98 = __t
+                    local ____t_result_97
+                    local ____t_96 = __t
+                    local ____temp_95 = math.abs(x + w / 2 - __L1.AVENIDA.INDIO) < 280
+                    __O[399] = ____temp_95
+                    if ____t_96(____temp_95) then
+                        ____t_result_97 = __O[399]
+                    else
+                        ____t_result_97 = x > 280 and x < 480
+                    end
+                    if ____t_98(____t_result_97) then
+                        x = x + (w + 30)
+                        do i = i + 1 continue end
+                    end
+                    __L1:predio(
                         c,
                         x,
                         w,
+                        2 + math.floor(hash(nil, i + 71) * 4 + 0.5),
                         __L1:pick(
-                            __arrL({"#c43c3a", "#2c5a8a", "#3c7a4a", "#c47a35"}, 4),
+                            __arrL({
+                                "#e9e6dc",
+                                "#ddd3bf",
+                                "#f2efe6",
+                                "#cfd6dc",
+                                "#e8dcc8"
+                            }, 5),
                             i
                         ),
-                        __L1:pick(
-                            __arrL({"#c43c3a", "#2c5a8a", "#e8c24c"}, 3),
-                            i + 1
-                        ),
-                        "#f2efe6",
-                        710 + i
+                        700 + i,
+                        {loja = __gt(
+                            hash(nil, i + 72),
+                            0.4
+                        )}
                     )
+                    if __gt(
+                        hash(nil, i + 72),
+                        0.4
+                    ) then
+                        __L1:loja(
+                            c,
+                            x,
+                            w,
+                            __L1:pick(
+                                __arrL({"#c43c3a", "#2c5a8a", "#3c7a4a", "#c47a35"}, 4),
+                                i
+                            ),
+                            __L1:pick(
+                                __arrL({"#c43c3a", "#2c5a8a", "#e8c24c"}, 3),
+                                i + 1
+                            ),
+                            "#f2efe6",
+                            710 + i
+                        )
+                    end
+                    x = x + (w + 20)
                 end
-                x = x + (w + 20)
                 i = i + 1
             end
         end
@@ -8883,7 +9106,7 @@ local __O = {};
                 59,
                 114,
                 48,
-                if bx == 620 then "#e8c24c" else "#5f9fd0"
+                bx == 620 and "#e8c24c" or "#5f9fd0"
             )
             R(
                 nil,
@@ -9422,132 +9645,134 @@ local __O = {};
         do
             local i = 0
             while i < 11 do
-                local dir = if __t(__mod(i, 2)) then 1 else -1
-                local sp = 40 + __mod(i, 3) * 18
-                local wx = __mod(
-                    __mod(i * 337 + t * sp * dir, 3300) + 3300,
-                    3300
-                ) - 150
-                local sx = wx - camL * 0.9
-                if not __t(__L1:vis(sx, 60)) then
-                    continue
-                end
-                if __mod(i, 4) == 3 then
-                    R(
-                        nil,
-                        c,
-                        sx,
-                        172,
-                        56,
-                        18,
-                        "#3c7aa8"
-                    )
-                    R(
-                        nil,
-                        c,
-                        sx + 2,
-                        174,
-                        52,
-                        6,
-                        "#a9ccd8"
-                    )
-                    R(
-                        nil,
-                        c,
-                        sx,
-                        184,
-                        56,
-                        2,
-                        "#f2efe6"
-                    )
-                    ell(
-                        nil,
-                        c,
-                        sx + 8,
-                        192,
-                        3,
-                        3,
-                        "#1c1c1c"
-                    )
-                    ell(
-                        nil,
-                        c,
-                        sx + 46,
-                        192,
-                        3,
-                        3,
-                        "#1c1c1c"
-                    )
-                elseif __mod(i, 3) == 2 then
-                    ell(
-                        nil,
-                        c,
-                        sx + 2,
-                        191,
-                        3,
-                        3,
-                        "#1c1c1c"
-                    )
-                    ell(
-                        nil,
-                        c,
-                        sx + 12,
-                        191,
-                        3,
-                        3,
-                        "#1c1c1c"
-                    )
-                    R(
-                        nil,
-                        c,
-                        sx + 2,
-                        185,
-                        11,
-                        4,
-                        __L1:pick(
-                            __arrL({"#c43c3a", "#f08a24"}, 2),
-                            i
+                do
+                    local dir = __t(__mod(i, 2)) and 1 or -1
+                    local sp = 40 + __mod(i, 3) * 18
+                    local wx = __mod(
+                        __mod(i * 337 + t * sp * dir, 3300) + 3300,
+                        3300
+                    ) - 150
+                    local sx = wx - camL * 0.9
+                    if not __t(__L1:vis(sx, 60)) then
+                        do i = i + 1 continue end
+                    end
+                    if __mod(i, 4) == 3 then
+                        R(
+                            nil,
+                            c,
+                            sx,
+                            172,
+                            56,
+                            18,
+                            "#3c7aa8"
                         )
-                    )
-                    R(
-                        nil,
-                        c,
-                        sx + 5,
-                        178,
-                        5,
-                        7,
-                        __L1:pick(
-                            __arrL({"#c43c3a", "#f08a24"}, 2),
-                            i
+                        R(
+                            nil,
+                            c,
+                            sx + 2,
+                            174,
+                            52,
+                            6,
+                            "#a9ccd8"
                         )
-                    )
-                    R(
-                        nil,
-                        c,
-                        sx + 5,
-                        175,
-                        5,
-                        3,
-                        "#c43c3a"
-                    )
-                else
-                    __L1:carro(
-                        c,
-                        sx,
-                        if dir > 0 then 192 else 200,
-                        __L1:pick(
-                            __arrL({
-                                "#c43c3a",
-                                "#f2f2ee",
-                                "#3c6aa8",
-                                "#2a2a2a",
-                                "#9aa0a6",
-                                "#e8c24c"
-                            }, 6),
-                            i
-                        ),
-                        dir
-                    )
+                        R(
+                            nil,
+                            c,
+                            sx,
+                            184,
+                            56,
+                            2,
+                            "#f2efe6"
+                        )
+                        ell(
+                            nil,
+                            c,
+                            sx + 8,
+                            192,
+                            3,
+                            3,
+                            "#1c1c1c"
+                        )
+                        ell(
+                            nil,
+                            c,
+                            sx + 46,
+                            192,
+                            3,
+                            3,
+                            "#1c1c1c"
+                        )
+                    elseif __mod(i, 3) == 2 then
+                        ell(
+                            nil,
+                            c,
+                            sx + 2,
+                            191,
+                            3,
+                            3,
+                            "#1c1c1c"
+                        )
+                        ell(
+                            nil,
+                            c,
+                            sx + 12,
+                            191,
+                            3,
+                            3,
+                            "#1c1c1c"
+                        )
+                        R(
+                            nil,
+                            c,
+                            sx + 2,
+                            185,
+                            11,
+                            4,
+                            __L1:pick(
+                                __arrL({"#c43c3a", "#f08a24"}, 2),
+                                i
+                            )
+                        )
+                        R(
+                            nil,
+                            c,
+                            sx + 5,
+                            178,
+                            5,
+                            7,
+                            __L1:pick(
+                                __arrL({"#c43c3a", "#f08a24"}, 2),
+                                i
+                            )
+                        )
+                        R(
+                            nil,
+                            c,
+                            sx + 5,
+                            175,
+                            5,
+                            3,
+                            "#c43c3a"
+                        )
+                    else
+                        __L1:carro(
+                            c,
+                            sx,
+                            dir > 0 and 192 or 200,
+                            __L1:pick(
+                                __arrL({
+                                    "#c43c3a",
+                                    "#f2f2ee",
+                                    "#3c6aa8",
+                                    "#2a2a2a",
+                                    "#9aa0a6",
+                                    "#e8c24c"
+                                }, 6),
+                                i
+                            ),
+                            dir
+                        )
+                    end
                 end
                 i = i + 1
             end
@@ -9587,15 +9812,25 @@ local __O = {};
                 __call(
                     __arrL({"#d8443a", "#e8c24c", "#4ac07a"}, 3),
                     "forEach",
-                    function(____, col, k) return R(
-                        nil,
-                        c,
-                        sx - 1,
-                        112 + k * 6,
-                        5,
-                        4,
-                        if ph == k then col else "#3a3a3a"
-                    ) end
+                    function(____, col, k)
+                        local ____R_101 = R
+                        local ____array_100 = __TS__SparseArrayNew(
+                            nil,
+                            c,
+                            sx - 1,
+                            112 + k * 6,
+                            5,
+                            4
+                        )
+                        local ____temp_99
+                        if ph == k then
+                            ____temp_99 = col
+                        else
+                            ____temp_99 = "#3a3a3a"
+                        end
+                        __TS__SparseArrayPush(____array_100, ____temp_99)
+                        return ____R_101(__TS__SparseArraySpread(____array_100))
+                    end
                 )
             end
         end
@@ -9621,7 +9856,7 @@ local __O = {};
                     c,
                     sx,
                     210,
-                    if x == 700 then "#e8c84a" else "#b86ac8",
+                    x == 700 and "#e8c84a" or "#b86ac8",
                     x,
                     0.85
                 )
@@ -9640,8 +9875,8 @@ local __O = {};
         end
         do
             local i = 0
-            while i < if __t(__L1:parado()) then 0 else 4 do
-                local dir = if __t(__mod(i, 2)) then 1 else -1
+            while i < (__t(__L1:parado()) and 0 or 4) do
+                local dir = __t(__mod(i, 2)) and 1 or -1
                 local wx = __mod(
                     __mod(i * 777 + t * (70 + i * 10) * dir, 3400) + 3400,
                     3400
@@ -9651,7 +9886,7 @@ local __O = {};
                     __L1:carro(
                         c,
                         sx,
-                        if dir > 0 then 240 else 258,
+                        dir > 0 and 240 or 258,
                         __L1:pick(
                             __arrL({"#f2f2ee", "#2a2a2a", "#c43c3a", "#3c8a5a"}, 4),
                             i + 2
@@ -10117,33 +10352,35 @@ local __O = {};
             local i = 0
             local x = 16
             while x < __L1.FEIRA.W - 60 do
-                if __t(__call(
-                    __L1.FEIRA.BISC,
-                    "some",
-                    function(____, b) return x > b - 74 and x < b + 124 end
-                )) then
-                    continue
+                do
+                    if __t(__call(
+                        __L1.FEIRA.BISC,
+                        "some",
+                        function(____, b) return x > b - 74 and x < b + 124 end
+                    )) then
+                        do do i = i + 1 x = x + 92 end continue end
+                    end
+                    __L1:barraca(
+                        c,
+                        x,
+                        82,
+                        __get(
+                            tarps,
+                            __mod(
+                                i,
+                                __len(tarps)
+                            )
+                        ),
+                        __get(
+                            goods,
+                            __mod(
+                                i,
+                                __len(goods)
+                            )
+                        ),
+                        i
+                    )
                 end
-                __L1:barraca(
-                    c,
-                    x,
-                    82,
-                    __get(
-                        tarps,
-                        __mod(
-                            i,
-                            __len(tarps)
-                        )
-                    ),
-                    __get(
-                        goods,
-                        __mod(
-                            i,
-                            __len(goods)
-                        )
-                    ),
-                    i
-                )
                 do
                     i = i + 1
                     x = x + 92
@@ -10349,24 +10586,26 @@ local __O = {};
             end
         end
         for ____, bx in __iterar((__L1.FEIRA.BISC)) do
-            local x = bx + 108 - camL
-            if not __t(__L1:vis(x, 80)) then
-                continue
-            end
             do
-                local i = 0
-                while i < 6 do
-                    local k = __mod(t * 0.25 + i / 6, 1)
-                    R(
-                        nil,
-                        c,
-                        x - 6 + math.sin(t + i) * 3,
-                        150 - k * 30,
-                        3 + k * 3,
-                        2,
-                        ("rgba(255,248,232," .. tostring((1 - k) * 0.5)) .. ")"
-                    )
-                    i = i + 1
+                local x = bx + 108 - camL
+                if not __t(__L1:vis(x, 80)) then
+                    continue
+                end
+                do
+                    local i = 0
+                    while i < 6 do
+                        local k = __mod(t * 0.25 + i / 6, 1)
+                        R(
+                            nil,
+                            c,
+                            x - 6 + math.sin(t + i) * 3,
+                            150 - k * 30,
+                            3 + k * 3,
+                            2,
+                            ("rgba(255,248,232," .. tostring((1 - k) * 0.5)) .. ")"
+                        )
+                        i = i + 1
+                    end
                 end
             end
         end
@@ -10380,7 +10619,7 @@ local __O = {};
                             nil,
                             c,
                             sx + 6 + k * 8,
-                            __L1.GY - 12 - if math.sin(t * 6 + k) > 0.7 then 1 else 0,
+                            __L1.GY - 12 - (math.sin(t * 6 + k) > 0.7 and 1 or 0),
                             2,
                             2,
                             "#c43c3a"
@@ -10456,7 +10695,7 @@ local __O = {};
                             yy,
                             5,
                             5,
-                            if __t(__mod(row, 2)) then "#2f5a34" else "#3a6a3c"
+                            __t(__mod(row, 2)) and "#2f5a34" or "#3a6a3c"
                         )
                         ell(
                             nil,
@@ -10535,7 +10774,7 @@ local __O = {};
                             top + 4 + k * 5,
                             4 + hash(nil, i * 3 + k) * 4,
                             4 + hash(nil, i + k) * 3,
-                            if __t(__mod(k, 2)) then "#5a7a5a" else "#6f8f6a"
+                            __t(__mod(k, 2)) and "#5a7a5a" or "#6f8f6a"
                         )
                         k = k + 1
                     end
@@ -10649,7 +10888,7 @@ local __O = {};
                     yy,
                     2,
                     6,
-                    if __mod(k, 8) < 4 then "#7a4a2a" else "#5a3420"
+                    __mod(k, 8) < 4 and "#7a4a2a" or "#5a3420"
                 )
                 k = k + 2
             end
@@ -11086,13 +11325,13 @@ local __O = {};
             160
         )
         tile(nil, c, __L1.FAR.trees, camL * 0.08)
-        local ____opt_45 = __L1:CAM()
-        if ____opt_45 ~= nil then
-            ____opt_45 = ____opt_45.meio
+        local ____opt_104 = __L1:CAM()
+        if ____opt_104 ~= nil then
+            ____opt_104 = ____opt_104.meio
         end
-        if ____opt_45 ~= nil then
-            ____opt_45(
-                ____opt_45,
+        if ____opt_104 ~= nil then
+            ____opt_104(
+                ____opt_104,
                 __L1.CUR,
                 c,
                 s,
@@ -11590,7 +11829,7 @@ local __O = {};
                     150 - k,
                     w * 2,
                     1,
-                    if __t(__mod(k, 6)) then "#eef0f2" else "#d8dce0"
+                    __t(__mod(k, 6)) and "#eef0f2" or "#d8dce0"
                 )
                 k = k + 1
             end
@@ -11767,10 +12006,10 @@ local __O = {};
                             142,
                             3,
                             3,
-                            if __t(__mod(
+                            __t(__mod(
                                 math.floor(t * 6) + k / 8,
                                 3
-                            )) then "#ffe39a" else "#8a6a3a"
+                            )) and "#ffe39a" or "#8a6a3a"
                         )
                         k = k + 8
                     end
@@ -11778,24 +12017,26 @@ local __O = {};
             end
         end
         for ____, x in __iterar((__arrL({640, 860}, 2))) do
-            local sx = x - camL
-            if __t(not __t(__L1:vis(sx, 120)) or __lt(a, 0.05)) then
-                continue
+            do
+                local sx = x - camL
+                if __t(not __t(__L1:vis(sx, 120)) or __lt(a, 0.05)) then
+                    continue
+                end
+                local ang = math.sin(t * 0.6 + x) * 0.5
+                c.fillStyle = ("rgba(255,250,220," .. tostring(0.08 * a)) .. ")"
+                c:beginPath()
+                c:moveTo(sx, 140)
+                c:lineTo(
+                    sx + math.sin(ang) * 260 - 20,
+                    -10
+                )
+                c:lineTo(
+                    sx + math.sin(ang) * 260 + 20,
+                    -10
+                )
+                c:closePath()
+                __call(c, "fill")
             end
-            local ang = math.sin(t * 0.6 + x) * 0.5
-            c.fillStyle = ("rgba(255,250,220," .. tostring(0.08 * a)) .. ")"
-            c:beginPath()
-            c:moveTo(sx, 140)
-            c:lineTo(
-                sx + math.sin(ang) * 260 - 20,
-                -10
-            )
-            c:lineTo(
-                sx + math.sin(ang) * 260 + 20,
-                -10
-            )
-            c:closePath()
-            __call(c, "fill")
         end
         for ____, x in __iterar((__arrL({420, 1180, 1800}, 3))) do
             local sx = x - camL
@@ -12379,15 +12620,23 @@ local __O = {};
                             do
                                 local k = 0
                                 while k < w - 4 do
-                                    R(
+                                    local ____R_108 = R
+                                    local ____array_107 = __TS__SparseArrayNew(
                                         nil,
                                         c,
                                         x + 2 + k,
                                         L.y + 5,
                                         4,
-                                        3,
-                                        if __t(__mod(k / 4, 2)) then sig else "#f2efe6"
+                                        3
                                     )
+                                    local ____t_result_106
+                                    if __t(__mod(k / 4, 2)) then
+                                        ____t_result_106 = sig
+                                    else
+                                        ____t_result_106 = "#f2efe6"
+                                    end
+                                    __TS__SparseArrayPush(____array_107, ____t_result_106)
+                                    ____R_108(__TS__SparseArraySpread(____array_107))
                                     k = k + 4
                                 end
                             end
@@ -13589,7 +13838,7 @@ local __O = {};
                     top + hash(nil, k * 3 + i) * (bot - top),
                     1,
                     1,
-                    if __t(__mod(k, 3)) then "#52565e" else "#3a3e46"
+                    __t(__mod(k, 3)) and "#52565e" or "#3a3e46"
                 )
                 k = k + 1
             end
@@ -15597,146 +15846,150 @@ local __O = {};
         do
             local x = 60
             while x < __L1.SHOP.W do
-                local sx = x - camL
-                local sw = math.floor(math.sin(t * 1.1 + x) * 1 + 0.5)
-                if not __t(__L1:vis(sx, 40)) then
-                    continue
-                end
-                R(
-                    nil,
-                    c,
-                    sx + 8,
-                    11,
-                    1,
-                    6,
-                    "#5a6066"
-                )
-                R(
-                    nil,
-                    c,
-                    sx + 26,
-                    11,
-                    1,
-                    6,
-                    "#5a6066"
-                )
-                __L1:vgrad(
-                    c,
-                    sx + 4 + sw,
-                    17,
-                    28,
-                    44,
-                    "#3c6ab0",
-                    "#1d3a70"
-                )
-                R(
-                    nil,
-                    c,
-                    sx + 4 + sw,
-                    17,
-                    28,
-                    2,
-                    "#7aa0d8"
-                )
                 do
-                    local k = 0
-                    while k < 4 do
-                        R(
-                            nil,
-                            c,
-                            sx + 5 + k * 7 + sw,
-                            61,
-                            5,
-                            3 + __mod(k, 2) * 2,
-                            "#1d3a70"
-                        )
-                        k = k + 1
+                    local sx = x - camL
+                    local sw = math.floor(math.sin(t * 1.1 + x) * 1 + 0.5)
+                    if not __t(__L1:vis(sx, 40)) then
+                        do x = x + 300 continue end
                     end
-                end
-                do
-                    local k = 0
-                    while k < 3 do
-                        local fy = 26 + k * 9
-                        R(
-                            nil,
-                            c,
-                            sx + 17 + sw,
-                            fy,
-                            2,
-                            6,
-                            "#f2f6fa"
-                        )
-                        R(
-                            nil,
-                            c,
-                            sx + 15 + sw,
-                            fy + 2,
-                            6,
-                            2,
-                            "#f2f6fa"
-                        )
-                        k = k + 1
+                    R(
+                        nil,
+                        c,
+                        sx + 8,
+                        11,
+                        1,
+                        6,
+                        "#5a6066"
+                    )
+                    R(
+                        nil,
+                        c,
+                        sx + 26,
+                        11,
+                        1,
+                        6,
+                        "#5a6066"
+                    )
+                    __L1:vgrad(
+                        c,
+                        sx + 4 + sw,
+                        17,
+                        28,
+                        44,
+                        "#3c6ab0",
+                        "#1d3a70"
+                    )
+                    R(
+                        nil,
+                        c,
+                        sx + 4 + sw,
+                        17,
+                        28,
+                        2,
+                        "#7aa0d8"
+                    )
+                    do
+                        local k = 0
+                        while k < 4 do
+                            R(
+                                nil,
+                                c,
+                                sx + 5 + k * 7 + sw,
+                                61,
+                                5,
+                                3 + __mod(k, 2) * 2,
+                                "#1d3a70"
+                            )
+                            k = k + 1
+                        end
                     end
+                    do
+                        local k = 0
+                        while k < 3 do
+                            local fy = 26 + k * 9
+                            R(
+                                nil,
+                                c,
+                                sx + 17 + sw,
+                                fy,
+                                2,
+                                6,
+                                "#f2f6fa"
+                            )
+                            R(
+                                nil,
+                                c,
+                                sx + 15 + sw,
+                                fy + 2,
+                                6,
+                                2,
+                                "#f2f6fa"
+                            )
+                            k = k + 1
+                        end
+                    end
+                    R(
+                        nil,
+                        c,
+                        sx + 8 + sw,
+                        55,
+                        20,
+                        2,
+                        "#f2c94c"
+                    )
                 end
-                R(
-                    nil,
-                    c,
-                    sx + 8 + sw,
-                    55,
-                    20,
-                    2,
-                    "#f2c94c"
-                )
                 x = x + 300
             end
         end
         do
             local x = 210
             while x < __L1.SHOP.W do
-                local sx = x - camL + math.sin(t * 0.9 + x) * 1.5
-                if not __t(__L1:vis(sx, 20)) then
-                    continue
-                end
-                R(
-                    nil,
-                    c,
-                    sx,
-                    11,
-                    1,
-                    22,
-                    "#5a6066"
-                )
-                R(
-                    nil,
-                    c,
-                    sx - 6,
-                    33,
-                    13,
-                    7,
-                    "#b86a3a"
-                )
-                R(
-                    nil,
-                    c,
-                    sx - 6,
-                    33,
-                    13,
-                    2,
-                    "#d88a4a"
-                )
                 do
-                    local k = 0
-                    while k < 7 do
-                        R(
-                            nil,
-                            c,
-                            sx - 7 + k * 2,
-                            40 + __mod(k, 3) * 2,
-                            2,
-                            5 + __mod(k, 2) * 6,
-                            if __t(__mod(k, 2)) then "#3f7a3c" else "#5f9a46"
-                        )
-                        k = k + 1
+                    local sx = x - camL + math.sin(t * 0.9 + x) * 1.5
+                    if not __t(__L1:vis(sx, 20)) then
+                        do x = x + 300 continue end
+                    end
+                    R(
+                        nil,
+                        c,
+                        sx,
+                        11,
+                        1,
+                        22,
+                        "#5a6066"
+                    )
+                    R(
+                        nil,
+                        c,
+                        sx - 6,
+                        33,
+                        13,
+                        7,
+                        "#b86a3a"
+                    )
+                    R(
+                        nil,
+                        c,
+                        sx - 6,
+                        33,
+                        13,
+                        2,
+                        "#d88a4a"
+                    )
+                    do
+                        local k = 0
+                        while k < 7 do
+                            R(
+                                nil,
+                                c,
+                                sx - 7 + k * 2,
+                                40 + __mod(k, 3) * 2,
+                                2,
+                                5 + __mod(k, 2) * 6,
+                                __t(__mod(k, 2)) and "#3f7a3c" or "#5f9a46"
+                            )
+                            k = k + 1
+                        end
                     end
                 end
                 x = x + 300
@@ -15874,10 +16127,10 @@ local __O = {};
                                     py,
                                     1,
                                     2,
-                                    if __t(__mod(
+                                    __t(__mod(
                                         k + math.floor(t * 8),
                                         3
-                                    )) then "#bfe8f0" else "#ffffff"
+                                    )) and "#bfe8f0" or "#ffffff"
                                 )
                                 k = k + 1
                             end
@@ -15905,7 +16158,7 @@ local __O = {};
                             y,
                             2,
                             2,
-                            if __t(on) then "#fff2b0" else "#7a5a2a"
+                            __t(on) and "#fff2b0" or "#7a5a2a"
                         )
                         R(
                             nil,
@@ -15914,7 +16167,7 @@ local __O = {};
                             y + 22,
                             2,
                             2,
-                            if __t(on) then "#fff2b0" else "#7a5a2a"
+                            __t(on) and "#fff2b0" or "#7a5a2a"
                         )
                         k = k + 6
                     end
@@ -16041,7 +16294,7 @@ local __O = {};
                     150,
                     28,
                     2,
-                    if math.sin(t * 6) > 0 then "#f2c94c" else "#ffffff"
+                    math.sin(t * 6) > 0 and "#f2c94c" or "#ffffff"
                 )
                 local gx = x + 10 + math.sin(t * 0.8) * 8
                 R(
@@ -16076,7 +16329,7 @@ local __O = {};
                     194,
                     26,
                     2,
-                    if math.sin(t * 5) > 0 then "#f2c94c" else "#e05a8a"
+                    math.sin(t * 5) > 0 and "#f2c94c" or "#e05a8a"
                 )
             end
         end
@@ -16425,7 +16678,7 @@ local __O = {};
                     62,
                     14,
                     9,
-                    if __t(k) then "#2c8a3a" else "#2c8a3a"
+                    __t(k) and "#2c8a3a" or "#2c8a3a"
                 )
                 R(
                     nil,
@@ -16434,7 +16687,7 @@ local __O = {};
                     64,
                     6,
                     5,
-                    if __t(k) then "#c43c3a" else "#e8c24c"
+                    __t(k) and "#c43c3a" or "#e8c24c"
                 )
                 k = k + 1
             end
@@ -16844,21 +17097,27 @@ local __O = {};
         do
             local i = 0
             while i < 6 do
-                local dir = if __t(__mod(i, 2)) then 1 else -1
+                local dir = __t(__mod(i, 2)) and 1 or -1
                 local wx = __mod(
                     __mod(i * 431 + t * (50 + i * 6) * dir, 2900) + 2900,
                     2900
                 ) - 200
                 local sx = wx - camL
-                local ____t_49 = __t
-                local ____t_48 = __t
-                local ____temp_47 = __L1:vis(sx, 40)
-                __O[400] = ____temp_47
-                if ____t_49(if ____t_48(____temp_47) then wx < __L1.OLIVIA.SESI else __O[400]) then
+                local ____t_112 = __t
+                local ____t_result_111
+                local ____t_110 = __t
+                local ____temp_109 = __L1:vis(sx, 40)
+                __O[400] = ____temp_109
+                if ____t_110(____temp_109) then
+                    ____t_result_111 = wx < __L1.OLIVIA.SESI
+                else
+                    ____t_result_111 = __O[400]
+                end
+                if ____t_112(____t_result_111) then
                     __L1:carro(
                         c,
                         sx,
-                        if dir > 0 then 172 else 196,
+                        dir > 0 and 172 or 196,
                         __L1:pick(
                             __arrL({"#f2f2ee", "#3c6aa8", "#c43c3a", "#2a2a2a"}, 4),
                             i
@@ -16874,11 +17133,17 @@ local __O = {};
             while i < 3 do
                 local wx = __mod(i * 500 + t * 22, 1300)
                 local sx = wx - camL
-                local ____t_52 = __t
-                local ____t_51 = __t
-                local ____temp_50 = __L1:vis(sx, 20)
-                __O[401] = ____temp_50
-                if ____t_52(if ____t_51(____temp_50) then wx < __L1.OLIVIA.SESI else __O[401]) then
+                local ____t_116 = __t
+                local ____t_result_115
+                local ____t_114 = __t
+                local ____temp_113 = __L1:vis(sx, 20)
+                __O[401] = ____temp_113
+                if ____t_114(____temp_113) then
+                    ____t_result_115 = wx < __L1.OLIVIA.SESI
+                else
+                    ____t_result_115 = __O[401]
+                end
+                if ____t_116(____t_result_115) then
                     ell(
                         nil,
                         c,
@@ -16957,7 +17222,7 @@ local __O = {};
                     c,
                     sx,
                     210,
-                    if x == 560 then "#e8c84a" else "#b86ac8",
+                    x == 560 and "#e8c84a" or "#b86ac8",
                     x,
                     0.8
                 )
@@ -17222,87 +17487,89 @@ local __O = {};
         do
             local i = 0
             while i < n do
-                local x = hash(nil, i * 1.37 + W) * W
-                local y = 224 + hash(nil, i * 2.71 + W) * 42
-                local r = hash(nil, i * 3.3)
-                if kind == "interno" then
-                    if __gt(r, 0.85) then
+                do
+                    local x = hash(nil, i * 1.37 + W) * W
+                    local y = 224 + hash(nil, i * 2.71 + W) * 42
+                    local r = hash(nil, i * 3.3)
+                    if kind == "interno" then
+                        if __gt(r, 0.85) then
+                            R(
+                                nil,
+                                c,
+                                x,
+                                y,
+                                6,
+                                1,
+                                "rgba(255,255,255,.35)"
+                            )
+                        end
+                        do i = i + 1 continue end
+                    end
+                    if __lt(r, 0.35) then
                         R(
                             nil,
                             c,
                             x,
                             y,
-                            6,
+                            3,
+                            2,
+                            __L1:pick(
+                                __arrL({"#c47a35", "#a85a2a", "#d8a24a", "#8a6a3a"}, 4),
+                                i
+                            )
+                        )
+                        R(
+                            nil,
+                            c,
+                            x + 1,
+                            y - 1,
                             1,
-                            "rgba(255,255,255,.35)"
+                            1,
+                            "#6a4a2a"
+                        )
+                    elseif __t(__lt(r, 0.5) and kind == "cidade") then
+                        R(
+                            nil,
+                            c,
+                            x,
+                            y,
+                            4,
+                            3,
+                            "#f2efe6"
+                        )
+                        R(
+                            nil,
+                            c,
+                            x + 1,
+                            y + 1,
+                            2,
+                            1,
+                            "#9aa0a6"
+                        )
+                    elseif __lt(r, 0.75) then
+                        R(
+                            nil,
+                            c,
+                            x,
+                            y,
+                            2,
+                            1,
+                            kind == "natureza" and "#9a8a6a" or "#8a867c"
+                        )
+                    elseif kind == "natureza" then
+                        R(
+                            nil,
+                            c,
+                            x,
+                            y,
+                            2,
+                            2,
+                            __L1:pick(
+                                __arrL({"#e8c24c", "#f2efe6", "#c86ab8"}, 3),
+                                i
+                            )
                         )
                     end
-                    continue
-                end
-                if __lt(r, 0.35) then
-                    R(
-                        nil,
-                        c,
-                        x,
-                        y,
-                        3,
-                        2,
-                        __L1:pick(
-                            __arrL({"#c47a35", "#a85a2a", "#d8a24a", "#8a6a3a"}, 4),
-                            i
-                        )
-                    )
-                    R(
-                        nil,
-                        c,
-                        x + 1,
-                        y - 1,
-                        1,
-                        1,
-                        "#6a4a2a"
-                    )
-                elseif __t(__lt(r, 0.5) and kind == "cidade") then
-                    R(
-                        nil,
-                        c,
-                        x,
-                        y,
-                        4,
-                        3,
-                        "#f2efe6"
-                    )
-                    R(
-                        nil,
-                        c,
-                        x + 1,
-                        y + 1,
-                        2,
-                        1,
-                        "#9aa0a6"
-                    )
-                elseif __lt(r, 0.75) then
-                    R(
-                        nil,
-                        c,
-                        x,
-                        y,
-                        2,
-                        1,
-                        if kind == "natureza" then "#9a8a6a" else "#8a867c"
-                    )
-                elseif kind == "natureza" then
-                    R(
-                        nil,
-                        c,
-                        x,
-                        y,
-                        2,
-                        2,
-                        __L1:pick(
-                            __arrL({"#e8c24c", "#f2efe6", "#c86ab8"}, 3),
-                            i
-                        )
-                    )
                 end
                 i = i + 1
             end
@@ -17353,13 +17620,24 @@ local __O = {};
         do
             local i = 0
             while i < w * h / 26 do
-                __L1:Q(
+                local ____L1_Q_119 = __L1.Q
+                local ____array_118 = __TS__SparseArrayNew(
                     c,
                     x + hash(nil, i + seed) * w,
                     y + 6 + hash(nil, i * 3 + seed) * (h - 8),
                     2,
-                    2,
-                    if __t(__mod(i, 2)) then __L1:shadeHex(face, 0.9) else __L1:shadeHex(face, 1.06)
+                    2
+                )
+                local ____t_result_117
+                if __t(__mod(i, 2)) then
+                    ____t_result_117 = __L1:shadeHex(face, 0.9)
+                else
+                    ____t_result_117 = __L1:shadeHex(face, 1.06)
+                end
+                __TS__SparseArrayPush(____array_118, ____t_result_117)
+                ____L1_Q_119(
+                    __L1,
+                    __TS__SparseArraySpread(____array_118)
                 )
                 i = i + 1
             end
@@ -17377,13 +17655,20 @@ local __O = {};
         __L1:sombra(c, x, y, w)
         local function depthAt(____, k)
             local u = k / w
-            return 14 + math.sin(u * math.pi) * 16 + math.sin(u * 7 + sd) * 3 + if __gt(
+            local ____temp_121 = 14 + math.sin(u * math.pi) * 16 + math.sin(u * 7 + sd) * 3
+            local ____gt_result_120
+            if __gt(
                 hash(
                     nil,
                     math.floor(k / 14) + sd
                 ),
                 0.6
-            ) then 5 * math.sin(__mod(k, 14) / 14 * math.pi) else 0
+            ) then
+                ____gt_result_120 = 5 * math.sin(__mod(k, 14) / 14 * math.pi)
+            else
+                ____gt_result_120 = 0
+            end
+            return ____temp_121 + ____gt_result_120
         end
         local light = __L1:shadeHex(o.soil, 1.18)
         local strata = __L1:shadeHex(o.soil, 0.82)
@@ -17461,16 +17746,25 @@ local __O = {};
             while i < w / 9 do
                 local sx = x + 4 + hash(nil, i * 1.7 + sd) * (w - 8)
                 local sy = y + 10 + hash(nil, i * 2.3 + sd) * (depthAt(nil, sx - x) - 12)
-                __L1:Q(
-                    c,
+                local ____L1_Q_124 = __L1.Q
+                local ____c_123 = c
+                local ____gt_result_122
+                if __gt(
+                    hash(nil, i + sd),
+                    0.5
+                ) then
+                    ____gt_result_122 = o.dark
+                else
+                    ____gt_result_122 = light
+                end
+                ____L1_Q_124(
+                    __L1,
+                    ____c_123,
                     sx,
                     sy,
                     2,
                     2,
-                    if __gt(
-                        hash(nil, i + sd),
-                        0.5
-                    ) then o.dark else light
+                    ____gt_result_122
                 )
                 i = i + 1
             end
@@ -17522,7 +17816,7 @@ local __O = {};
                             base + k - 2,
                             2,
                             2,
-                            if k > len - 4 then "#8a6a3a" else "#5a3a20"
+                            k > len - 4 and "#8a6a3a" or "#5a3a20"
                         )
                         k = k + 2
                     end
@@ -17540,13 +17834,24 @@ local __O = {};
             do
                 local k = 0
                 while k < 10 do
-                    __L1:Q(
+                    local ____L1_Q_127 = __L1.Q
+                    local ____array_126 = __TS__SparseArrayNew(
                         c,
                         ex + math.sin(k + t) * 1,
                         y + 4 + k,
                         4,
-                        2,
-                        if k < 6 then o.top else __L1:shadeHex(o.top, 0.8)
+                        2
+                    )
+                    local ____temp_125
+                    if k < 6 then
+                        ____temp_125 = o.top
+                    else
+                        ____temp_125 = __L1:shadeHex(o.top, 0.8)
+                    end
+                    __TS__SparseArrayPush(____array_126, ____temp_125)
+                    ____L1_Q_127(
+                        __L1,
+                        __TS__SparseArraySpread(____array_126)
                     )
                     k = k + 2
                 end
@@ -17580,13 +17885,24 @@ local __O = {};
             local k = 0
             while __lt(k, w) do
                 local sw = math.floor(math.sin(t * 2.4 + k * 0.2 + sd) * 1 + 0.5)
-                __L1:Q(
+                local ____L1_Q_130 = __L1.Q
+                local ____array_129 = __TS__SparseArrayNew(
                     c,
                     x + k + sw,
                     y - 2 - math.floor(hash(nil, k + sd) * 5 + 0.5),
                     2,
-                    4,
-                    if __t(__mod(k, 2)) then o.top else o.top2
+                    4
+                )
+                local ____t_result_128
+                if __t(__mod(k, 2)) then
+                    ____t_result_128 = o.top
+                else
+                    ____t_result_128 = o.top2
+                end
+                __TS__SparseArrayPush(____array_129, ____t_result_128)
+                ____L1_Q_130(
+                    __L1,
+                    __TS__SparseArraySpread(____array_129)
                 )
                 k = k + 3
             end
@@ -17625,10 +17941,17 @@ local __O = {};
                 i = i + 1
             end
         end
-        __D[1] = if __t(if __t(o.cacto) then __gt(
-            hash(nil, sd),
-            0.4
-        ) else o.cacto) then
+        local ____t_132 = __t
+        local ____t_result_131
+        if __t(o.cacto) then
+            ____t_result_131 = __gt(
+                hash(nil, sd),
+                0.4
+            )
+        else
+            ____t_result_131 = o.cacto
+        end
+        if ____t_132(____t_result_131) then
             local cx = x + 12 + math.floor(hash(nil, sd + 3) * (w - 30) + 0.5)
             __L1:Q(
                 c,
@@ -17718,22 +18041,28 @@ local __O = {};
         local x, y, w = table.unpack(p, 1, 3)
         c:save()
         c.imageSmoothingEnabled = false
-        local ____array_55 = __TS__SparseArrayNew(
+        local ____array_136 = __TS__SparseArrayNew(
             nil,
             c,
             x,
             y,
             w
         )
-        local ____t_54 = __t
-        local ____TS__Number_result_53 = __TS__Number(t)
-        __O[402] = ____TS__Number_result_53
+        local ____t_result_135
+        local ____t_134 = __t
+        local ____TS__Number_result_133 = __TS__Number(t)
+        __O[402] = ____TS__Number_result_133
+        if ____t_134(____TS__Number_result_133) then
+            ____t_result_135 = __O[402]
+        else
+            ____t_result_135 = 0
+        end
         __TS__SparseArrayPush(
-            ____array_55,
-            if ____t_54(____TS__Number_result_53) then __O[402] else 0,
+            ____array_136,
+            ____t_result_135,
             math.floor(x * 7 + y * 3 + 0.5)
         )
-        f(__TS__SparseArraySpread(____array_55))
+        f(__TS__SparseArraySpread(____array_136))
         c:restore()
         return true
     end
@@ -17743,382 +18072,402 @@ local __O = {};
             return
         end
         local t = window.performance:now() / 1000
-        local ____opt_56 = __call(
+        local ____opt_137 = __call(
             __L1.LIST,
             "find",
             function(____, d) return d.id == id end
         )
-        if ____opt_56 ~= nil then
-            ____opt_56 = ____opt_56.vao
+        if ____opt_137 ~= nil then
+            ____opt_137 = ____opt_137.vao
         end
-        local V = ____opt_56
+        local V = ____opt_137
         local H = LH - FLOOR
-        local ____t_61 = __t
-        local ____opt_result_60
+        local ____t_result_147
+        local ____t_142 = __t
+        local ____opt_result_141
         if V ~= nil then
-            ____opt_result_60 = V.tipo
+            ____opt_result_141 = V.tipo
         end
-        __O[403] = ____opt_result_60
-        local ____t_65 = __t
-        local ____opt_result_64
+        __O[403] = ____opt_result_141
+        if ____t_142(____opt_result_141) then
+            ____t_result_147 = __O[403]
+        else
+            local ____t_146 = __t
+            local ____opt_result_145
+            if V ~= nil then
+                ____opt_result_145 = V.borda
+            end
+            ____t_result_147 = ____t_146(____opt_result_145 == "#7ac0b8" or id == 18) and "agua" or (id == 16 and "obra" or "terra")
+        end
+        local tipo = ____t_result_147
+        local ____t_result_152
+        local ____t_151 = __t
+        local ____opt_result_150
         if V ~= nil then
-            ____opt_result_64 = V.borda
+            ____opt_result_150 = V.fundo
         end
-        local tipo = if ____t_61(____opt_result_60) then __O[403] else if ____t_65(____opt_result_64 == "#7ac0b8" or id == 18) then "agua" else if id == 16 then "obra" else "terra"
-        local ____t_69 = __t
-        local ____opt_result_68
-        if V ~= nil then
-            ____opt_result_68 = V.fundo
+        __O[404] = ____opt_result_150
+        if ____t_151(____opt_result_150) then
+            ____t_result_152 = __O[404]
+        else
+            ____t_result_152 = tipo == "terra" and "#3a3024" or (tipo == "agua" and "#2c5a78" or "#2a2a2c")
         end
-        __O[404] = ____opt_result_68
-        local fundo = if ____t_69(____opt_result_68) then __O[404] else if tipo == "terra" then "#3a3024" else if tipo == "agua" then "#2c5a78" else "#2a2a2c"
+        local fundo = ____t_result_152
         for ____, ____value in __iterar((L.gaps)) do
             local gx = ____value[1]
             local gw = ____value[2]
-            local x = math.floor(gx / 2 - camL + 0.5)
-            local w = math.floor(gw / 2 + 0.5)
-            if not __t(__L1:vis(x, w + 20)) then
-                continue
-            end
-            local parede = if tipo == "obra" then "#6a6a66" else if tipo == "agua" then "#5a5a52" else "#5a4430"
-            local pw = math.max(
-                4,
-                math.floor(w * 0.09 + 0.5)
-            )
-            local seed = gx
             do
-                local y = 0
-                while y < H do
+                local x = math.floor(gx / 2 - camL + 0.5)
+                local w = math.floor(gw / 2 + 0.5)
+                if not __t(__L1:vis(x, w + 20)) then
+                    continue
+                end
+                local parede = tipo == "obra" and "#6a6a66" or (tipo == "agua" and "#5a5a52" or "#5a4430")
+                local pw = math.max(
+                    4,
+                    math.floor(w * 0.09 + 0.5)
+                )
+                local seed = gx
+                do
+                    local y = 0
+                    while y < H do
+                        R(
+                            nil,
+                            c,
+                            x,
+                            FLOOR + y,
+                            w,
+                            2,
+                            __L1:mixH(
+                                fundo,
+                                "#060606",
+                                math.min(1, y / (H * 0.8))
+                            )
+                        )
+                        y = y + 2
+                    end
+                end
+                do
+                    local y = 0
+                    while y < H do
+                        local k = math.min(1, y / (H * 0.9))
+                        local inc = math.floor(y * 0.18 + 0.5)
+                        R(
+                            nil,
+                            c,
+                            x,
+                            FLOOR + y,
+                            pw + inc,
+                            2,
+                            __L1:mixH(parede, "#0c0a08", k * 0.9)
+                        )
+                        R(
+                            nil,
+                            c,
+                            x + w - pw - inc,
+                            FLOOR + y,
+                            pw + inc,
+                            2,
+                            __L1:mixH(
+                                parede,
+                                "#0c0a08",
+                                math.min(1, k * 0.9 + 0.15)
+                            )
+                        )
+                        y = y + 2
+                    end
+                end
+                if tipo == "terra" then
+                    do
+                        local k = 0
+                        while k < w * H / 40 do
+                            local px = x + hash(nil, seed + k * 3.3) * w
+                            local py = FLOOR + hash(nil, seed + k * 7.1) * H * 0.7
+                            R(
+                                nil,
+                                c,
+                                px,
+                                py,
+                                1 + __mod(k, 2),
+                                1,
+                                __t(__mod(k, 3)) and "rgba(20,14,8,.35)" or "rgba(150,120,80,.25)"
+                            )
+                            k = k + 1
+                        end
+                    end
+                end
+                if tipo == "terra" then
+                    do
+                        local k = 0
+                        while k < 5 do
+                            local rx = x + 3 + hash(nil, seed + k) * (w - 6)
+                            local ry = FLOOR + 2
+                            do
+                                local j = 0
+                                while j < 6 + __mod(k, 4) do
+                                    R(
+                                        nil,
+                                        c,
+                                        rx + math.floor(math.sin(j + k) * 1.5 + 0.5),
+                                        ry,
+                                        1,
+                                        2,
+                                        "#3a2a18"
+                                    )
+                                    ry = ry + 2
+                                    j = j + 1
+                                end
+                            end
+                            k = k + 1
+                        end
+                    end
+                end
+                if tipo == "obra" then
+                    do
+                        local y = FLOOR + 6
+                        while __lt(y, LH) do
+                            do
+                                local xx = x + pw
+                                while xx < x + w - pw do
+                                    R(
+                                        nil,
+                                        c,
+                                        xx + (__t(__mod(y / 7, 2)) and 6 or 0),
+                                        y,
+                                        10,
+                                        1,
+                                        "rgba(0,0,0,.25)"
+                                    )
+                                    xx = xx + 12
+                                end
+                            end
+                            y = y + 7
+                        end
+                    end
+                    do
+                        local k = 0
+                        while k < 4 do
+                            local vx = x + 6 + k * (w - 12) / 3
+                            R(
+                                nil,
+                                c,
+                                vx,
+                                FLOOR + 6,
+                                1,
+                                H * 0.5,
+                                "#7a4a2a"
+                            )
+                            R(
+                                nil,
+                                c,
+                                vx,
+                                FLOOR + 6,
+                                1,
+                                2,
+                                "#c8803a"
+                            )
+                            k = k + 1
+                        end
+                    end
+                    do
+                        local xx = 0
+                        while xx < w do
+                            R(
+                                nil,
+                                c,
+                                x + xx,
+                                FLOOR - 10,
+                                math.min(3, w - xx),
+                                2,
+                                __t(__mod(xx / 6, 2)) and "#1c1c1c" or "#f2c018"
+                            )
+                            xx = xx + 6
+                        end
+                    end
+                    R(
+                        nil,
+                        c,
+                        x - 2,
+                        FLOOR - 12,
+                        1,
+                        12,
+                        "#8a8a88"
+                    )
+                    R(
+                        nil,
+                        c,
+                        x + w + 1,
+                        FLOOR - 12,
+                        1,
+                        12,
+                        "#8a8a88"
+                    )
+                end
+                if tipo == "agua" then
+                    local ny = FLOOR + 7
+                    R(
+                        nil,
+                        c,
+                        x + 1,
+                        ny,
+                        w - 2,
+                        LH - ny,
+                        __L1:mixH(fundo, "#0a1a24", 0.25)
+                    )
+                    do
+                        local y = ny + 2
+                        while __lt(y, LH) do
+                            R(
+                                nil,
+                                c,
+                                x + 1,
+                                y,
+                                w - 2,
+                                1,
+                                ("rgba(0,0,0," .. tostring(math.min(0.5, (y - ny) / H * 0.6))) .. ")"
+                            )
+                            y = y + 3
+                        end
+                    end
+                    R(
+                        nil,
+                        c,
+                        x + 1,
+                        ny,
+                        w - 2,
+                        1,
+                        "rgba(200,240,255,.45)"
+                    )
+                    do
+                        local k = 0
+                        while k < w / 9 do
+                            local ox = __mod(
+                                k * 9 + t * 8 + hash(nil, seed + k) * 9,
+                                w - 8
+                            )
+                            R(
+                                nil,
+                                c,
+                                x + 3 + ox,
+                                ny + 3 + __mod(k, 3) * 4,
+                                4 + __mod(k, 2) * 2,
+                                1,
+                                "rgba(220,250,255,.35)"
+                            )
+                            k = k + 1
+                        end
+                    end
                     R(
                         nil,
                         c,
                         x,
-                        FLOOR + y,
-                        w,
+                        FLOOR,
                         2,
-                        __L1:mixH(
-                            fundo,
-                            "#060606",
-                            math.min(1, y / (H * 0.8))
-                        )
-                    )
-                    y = y + 2
-                end
-            end
-            do
-                local y = 0
-                while y < H do
-                    local k = math.min(1, y / (H * 0.9))
-                    local inc = math.floor(y * 0.18 + 0.5)
-                    R(
-                        nil,
-                        c,
-                        x,
-                        FLOOR + y,
-                        pw + inc,
-                        2,
-                        __L1:mixH(parede, "#0c0a08", k * 0.9)
+                        ny - FLOOR,
+                        "#4a4a44"
                     )
                     R(
                         nil,
                         c,
-                        x + w - pw - inc,
-                        FLOOR + y,
-                        pw + inc,
+                        x + w - 2,
+                        FLOOR,
                         2,
-                        __L1:mixH(
-                            parede,
-                            "#0c0a08",
-                            math.min(1, k * 0.9 + 0.15)
-                        )
+                        ny - FLOOR,
+                        "#4a4a44"
                     )
-                    y = y + 2
                 end
-            end
-            if tipo == "terra" then
-                do
-                    local k = 0
-                    while k < w * H / 40 do
-                        local px = x + hash(nil, seed + k * 3.3) * w
-                        local py = FLOOR + hash(nil, seed + k * 7.1) * H * 0.7
-                        R(
-                            nil,
-                            c,
-                            px,
-                            py,
-                            1 + __mod(k, 2),
-                            1,
-                            if __t(__mod(k, 3)) then "rgba(20,14,8,.35)" else "rgba(150,120,80,.25)"
-                        )
-                        k = k + 1
-                    end
+                local ____t_result_157
+                local ____t_156 = __t
+                local ____opt_result_155
+                if V ~= nil then
+                    ____opt_result_155 = V.borda
                 end
-            end
-            if tipo == "terra" then
-                do
-                    local k = 0
-                    while k < 5 do
-                        local rx = x + 3 + hash(nil, seed + k) * (w - 6)
-                        local ry = FLOOR + 2
-                        do
-                            local j = 0
-                            while j < 6 + __mod(k, 4) do
+                __O[405] = ____opt_result_155
+                if ____t_156(____opt_result_155) then
+                    ____t_result_157 = __O[405]
+                else
+                    ____t_result_157 = tipo == "obra" and "#9a9a94" or (tipo == "agua" and "#7ac0b8" or "#5a7a3a")
+                end
+                local borda = ____t_result_157
+                R(
+                    nil,
+                    c,
+                    x - 3,
+                    FLOOR,
+                    w + 6,
+                    2,
+                    borda
+                )
+                R(
+                    nil,
+                    c,
+                    x - 3,
+                    FLOOR + 2,
+                    w + 6,
+                    1,
+                    "rgba(0,0,0,.45)"
+                )
+                if tipo == "terra" then
+                    do
+                        local k = 0
+                        while k < w do
+                            if __gt(
+                                hash(nil, seed + k * 1.9),
+                                0.55
+                            ) then
                                 R(
                                     nil,
                                     c,
-                                    rx + math.floor(math.sin(j + k) * 1.5 + 0.5),
-                                    ry,
+                                    x + k,
+                                    FLOOR + 2,
                                     1,
-                                    2,
-                                    "#3a2a18"
+                                    1 + math.floor(hash(nil, seed + k) * 4 + 0.5),
+                                    "#4a6a30"
                                 )
-                                ry = ry + 2
-                                j = j + 1
                             end
+                            k = k + 2
                         end
-                        k = k + 1
-                    end
-                end
-            end
-            if tipo == "obra" then
-                do
-                    local y = FLOOR + 6
-                    while __lt(y, LH) do
-                        do
-                            local xx = x + pw
-                            while xx < x + w - pw do
-                                R(
-                                    nil,
-                                    c,
-                                    xx + if __t(__mod(y / 7, 2)) then 6 else 0,
-                                    y,
-                                    10,
-                                    1,
-                                    "rgba(0,0,0,.25)"
-                                )
-                                xx = xx + 12
-                            end
-                        end
-                        y = y + 7
-                    end
-                end
-                do
-                    local k = 0
-                    while k < 4 do
-                        local vx = x + 6 + k * (w - 12) / 3
-                        R(
-                            nil,
-                            c,
-                            vx,
-                            FLOOR + 6,
-                            1,
-                            H * 0.5,
-                            "#7a4a2a"
-                        )
-                        R(
-                            nil,
-                            c,
-                            vx,
-                            FLOOR + 6,
-                            1,
-                            2,
-                            "#c8803a"
-                        )
-                        k = k + 1
-                    end
-                end
-                do
-                    local xx = 0
-                    while xx < w do
-                        R(
-                            nil,
-                            c,
-                            x + xx,
-                            FLOOR - 10,
-                            math.min(3, w - xx),
-                            2,
-                            if __t(__mod(xx / 6, 2)) then "#1c1c1c" else "#f2c018"
-                        )
-                        xx = xx + 6
                     end
                 end
                 R(
                     nil,
                     c,
                     x - 2,
-                    FLOOR - 12,
-                    1,
-                    12,
-                    "#8a8a88"
+                    FLOOR,
+                    2,
+                    H,
+                    "rgba(0,0,0,.35)"
                 )
                 R(
                     nil,
                     c,
-                    x + w + 1,
-                    FLOOR - 12,
-                    1,
-                    12,
-                    "#8a8a88"
+                    x + w,
+                    FLOOR,
+                    2,
+                    H,
+                    "rgba(0,0,0,.35)"
                 )
-            end
-            if tipo == "agua" then
-                local ny = FLOOR + 7
-                R(
-                    nil,
-                    c,
-                    x + 1,
-                    ny,
-                    w - 2,
-                    LH - ny,
-                    __L1:mixH(fundo, "#0a1a24", 0.25)
-                )
-                do
-                    local y = ny + 2
-                    while __lt(y, LH) do
+                if id == 16 then
+                    for ____, cx in __iterar((__arrL({x - 8, x + w + 2}, 2))) do
                         R(
                             nil,
                             c,
-                            x + 1,
-                            y,
-                            w - 2,
-                            1,
-                            ("rgba(0,0,0," .. tostring(math.min(0.5, (y - ny) / H * 0.6))) .. ")"
-                        )
-                        y = y + 3
-                    end
-                end
-                R(
-                    nil,
-                    c,
-                    x + 1,
-                    ny,
-                    w - 2,
-                    1,
-                    "rgba(200,240,255,.45)"
-                )
-                do
-                    local k = 0
-                    while k < w / 9 do
-                        local ox = __mod(
-                            k * 9 + t * 8 + hash(nil, seed + k) * 9,
-                            w - 8
+                            cx,
+                            FLOOR - 9,
+                            6,
+                            9,
+                            "#f08a24"
                         )
                         R(
                             nil,
                             c,
-                            x + 3 + ox,
-                            ny + 3 + __mod(k, 3) * 4,
-                            4 + __mod(k, 2) * 2,
-                            1,
-                            "rgba(220,250,255,.35)"
+                            cx + 1,
+                            FLOOR - 6,
+                            4,
+                            2,
+                            "#f2f2ee"
                         )
-                        k = k + 1
                     end
-                end
-                R(
-                    nil,
-                    c,
-                    x,
-                    FLOOR,
-                    2,
-                    ny - FLOOR,
-                    "#4a4a44"
-                )
-                R(
-                    nil,
-                    c,
-                    x + w - 2,
-                    FLOOR,
-                    2,
-                    ny - FLOOR,
-                    "#4a4a44"
-                )
-            end
-            local ____t_73 = __t
-            local ____opt_result_72
-            if V ~= nil then
-                ____opt_result_72 = V.borda
-            end
-            __O[405] = ____opt_result_72
-            local borda = if ____t_73(____opt_result_72) then __O[405] else if tipo == "obra" then "#9a9a94" else if tipo == "agua" then "#7ac0b8" else "#5a7a3a"
-            R(
-                nil,
-                c,
-                x - 3,
-                FLOOR,
-                w + 6,
-                2,
-                borda
-            )
-            R(
-                nil,
-                c,
-                x - 3,
-                FLOOR + 2,
-                w + 6,
-                1,
-                "rgba(0,0,0,.45)"
-            )
-            if tipo == "terra" then
-                do
-                    local k = 0
-                    while k < w do
-                        if __gt(
-                            hash(nil, seed + k * 1.9),
-                            0.55
-                        ) then
-                            R(
-                                nil,
-                                c,
-                                x + k,
-                                FLOOR + 2,
-                                1,
-                                1 + math.floor(hash(nil, seed + k) * 4 + 0.5),
-                                "#4a6a30"
-                            )
-                        end
-                        k = k + 2
-                    end
-                end
-            end
-            R(
-                nil,
-                c,
-                x - 2,
-                FLOOR,
-                2,
-                H,
-                "rgba(0,0,0,.35)"
-            )
-            R(
-                nil,
-                c,
-                x + w,
-                FLOOR,
-                2,
-                H,
-                "rgba(0,0,0,.35)"
-            )
-            if id == 16 then
-                for ____, cx in __iterar((__arrL({x - 8, x + w + 2}, 2))) do
-                    R(
-                        nil,
-                        c,
-                        cx,
-                        FLOOR - 9,
-                        6,
-                        9,
-                        "#f08a24"
-                    )
-                    R(
-                        nil,
-                        c,
-                        cx + 1,
-                        FLOOR - 6,
-                        4,
-                        2,
-                        "#f2f2ee"
-                    )
                 end
             end
         end
@@ -18148,12 +18497,12 @@ local __O = {};
                     text = __L1:textOf(d),
                     draw = function(____, c, s, t, camL)
                         __L1.CUR = d.id
-                        local ____opt_76 = __L1:CAM()
-                        if ____opt_76 ~= nil then
-                            ____opt_76 = ____opt_76.entrar
+                        local ____opt_160 = __L1:CAM()
+                        if ____opt_160 ~= nil then
+                            ____opt_160 = ____opt_160.entrar
                         end
-                        if ____opt_76 ~= nil then
-                            ____opt_76(____opt_76, d.id)
+                        if ____opt_160 ~= nil then
+                            ____opt_160(____opt_160, d.id)
                         end
                         draw(
                             nil,
@@ -18162,13 +18511,13 @@ local __O = {};
                             t,
                             camL
                         )
-                        local ____opt_80 = __L1:CAM()
-                        if ____opt_80 ~= nil then
-                            ____opt_80 = ____opt_80.frente
+                        local ____opt_164 = __L1:CAM()
+                        if ____opt_164 ~= nil then
+                            ____opt_164 = ____opt_164.frente
                         end
-                        if ____opt_80 ~= nil then
-                            ____opt_80(
-                                ____opt_80,
+                        if ____opt_164 ~= nil then
+                            ____opt_164(
+                                ____opt_164,
                                 d.id,
                                 c,
                                 s,
@@ -18179,25 +18528,25 @@ local __O = {};
                         __L1:holes(c, d.id, camL)
                     end,
                     lights = function(____, g, s, t, camL)
-                        local ____this_83
-                        ____this_83 = d
-                        local ____opt_82 = ____this_83.lights
-                        if ____opt_82 ~= nil then
-                            ____opt_82(
-                                ____this_83,
+                        local ____this_167
+                        ____this_167 = d
+                        local ____opt_166 = ____this_167.lights
+                        if ____opt_166 ~= nil then
+                            ____opt_166(
+                                ____this_167,
                                 g,
                                 s,
                                 t,
                                 camL
                             )
                         end
-                        local ____opt_86 = __L1:CAM()
-                        if ____opt_86 ~= nil then
-                            ____opt_86 = ____opt_86.luzes
+                        local ____opt_170 = __L1:CAM()
+                        if ____opt_170 ~= nil then
+                            ____opt_170 = ____opt_170.luzes
                         end
-                        if ____opt_86 ~= nil then
-                            ____opt_86(
-                                ____opt_86,
+                        if ____opt_170 ~= nil then
+                            ____opt_170(
+                                ____opt_170,
                                 d.id,
                                 g,
                                 s,
@@ -18209,12 +18558,19 @@ local __O = {};
                 }
             )
         )
-        local ____opt_90 = window.Interact
-        if ____opt_90 ~= nil then
-            ____opt_90 = ____opt_90.addScene
+        local ____opt_176 = window.Interact
+        if ____opt_176 ~= nil then
+            ____opt_176 = ____opt_176.addScene
         end
-        if ____opt_90 ~= nil then
-            ____opt_90(____opt_90, d.id, if __t(d.interact) then d.interact else __arrL({}, 0))
+        if ____opt_176 ~= nil then
+            local ____d_id_174 = d.id
+            local ____t_result_173
+            if __t(d.interact) then
+                ____t_result_173 = d.interact
+            else
+                ____t_result_173 = __arrL({}, 0)
+            end
+            ____opt_176(____opt_176, ____d_id_174, ____t_result_173)
         end
         local i = __call(
             __L1.LIST,
@@ -18226,19 +18582,48 @@ local __O = {};
         else
             __call(__L1.LIST, "push", d)
         end
+        local ____d_id_182 = d.id
+        local ____d_key_183 = d.key
+        local ____d_nome_184 = d.nome
+        local ____d_lugar_185 = d.lugar
+        local ____d_width_186 = d.width
+        local ____temp_187 = not not __t(d.noite)
+        local ____temp_188 = not not __t(d.amb)
+        local ____get_result_platforms_189 = __get(__L1.LAYOUT, d.id).platforms
+        local ____get_result_gaps_190 = __get(__L1.LAYOUT, d.id).gaps
+        local ____len_179 = __len
+        local ____t_result_178
+        if __t(d.interact) then
+            ____t_result_178 = d.interact
+        else
+            ____t_result_178 = __arrL({}, 0)
+        end
+        local ____len_179_result_191 = ____len_179(____t_result_178)
+        local ____t_result_180
+        if __t(d.grupo) then
+            ____t_result_180 = d.grupo
+        else
+            ____t_result_180 = "cenario"
+        end
+        local ____t_result_181
+        if __t(d.limites) then
+            ____t_result_181 = d.limites
+        else
+            ____t_result_181 = nil
+        end
         local pub = {
-            id = d.id,
-            key = d.key,
-            nome = d.nome,
-            lugar = d.lugar,
-            largura = d.width,
-            noite = not not __t(d.noite),
-            interno = not not __t(d.amb),
-            plataformas = __get(__L1.LAYOUT, d.id).platforms,
-            vaos = __get(__L1.LAYOUT, d.id).gaps,
-            interativos = __len(if __t(d.interact) then d.interact else __arrL({}, 0)),
-            grupo = if __t(d.grupo) then d.grupo else "cenario",
-            limites = if __t(d.limites) then d.limites else nil
+            id = ____d_id_182,
+            key = ____d_key_183,
+            nome = ____d_nome_184,
+            lugar = ____d_lugar_185,
+            largura = ____d_width_186,
+            noite = ____temp_187,
+            interno = ____temp_188,
+            plataformas = ____get_result_platforms_189,
+            vaos = ____get_result_gaps_190,
+            interativos = ____len_179_result_191,
+            grupo = ____t_result_180,
+            limites = ____t_result_181
         }
         local j = __call(
             __L1.PUBLIC,
@@ -18255,44 +18640,55 @@ local __O = {};
         end
     end
     local ____ = "use strict"
-    local ____t_97 = __t
-    local ____t_96 = __t
-    local ____t_94 = __t
-    local ____opt_92 = window.HdMaps
-    if ____opt_92 ~= nil then
-        ____opt_92 = ____opt_92.register
+    local ____t_198 = __t
+    local ____t_result_197
+    local ____t_196 = __t
+    local ____t_result_195
+    if __t(window.CampanhaCenarios) then
+        ____t_result_195 = window.CampanhaCenarios
+    else
+        local ____t_194 = __t
+        local ____opt_192 = window.HdMaps
+        if ____opt_192 ~= nil then
+            ____opt_192 = ____opt_192.register
+        end
+        ____t_result_195 = not ____t_194(____opt_192)
     end
-    local ____temp_95 = if __t(window.CampanhaCenarios) then window.CampanhaCenarios else not ____t_94(____opt_92)
-    __O[388] = ____temp_95
-    if ____t_97(if ____t_96(____temp_95) then __O[388] else not __t(window.HdMaps.kit)) then
+    __O[388] = ____t_result_195
+    if ____t_196(____t_result_195) then
+        ____t_result_197 = __O[388]
+    else
+        ____t_result_197 = not __t(window.HdMaps.kit)
+    end
+    if ____t_198(____t_result_197) then
         return
     end
     __L1.K = window.HdMaps.kit
-    local ____L1_K_98 = __L1.K
-    LW = ____L1_K_98.LW
-    LH = ____L1_K_98.LH
-    FLOOR = ____L1_K_98.FLOOR
-    R = ____L1_K_98.R
-    ell = ____L1_K_98.ell
-    mk = ____L1_K_98.mk
-    hash = ____L1_K_98.hash
-    cl = ____L1_K_98.cl
-    mix = ____L1_K_98.mix
-    dither = ____L1_K_98.dither
-    limb = ____L1_K_98.limb
-    sky = ____L1_K_98.sky
-    haze = ____L1_K_98.haze
-    tile = ____L1_K_98.tile
-    tree = ____L1_K_98.tree
-    slant = ____L1_K_98.slant
-    sunInfo = ____L1_K_98.sunInfo
-    sunWall = ____L1_K_98.sunWall
-    board = ____L1_K_98.board
-    bench = ____L1_K_98.bench
-    lampPost = ____L1_K_98.lampPost
-    lampGlow = ____L1_K_98.lampGlow
-    shadeAdd = ____L1_K_98.shadeAdd
-    lightAdd = ____L1_K_98.lightAdd
+    local ____L1_K_199 = __L1.K
+    LW = ____L1_K_199.LW
+    LH = ____L1_K_199.LH
+    FLOOR = ____L1_K_199.FLOOR
+    R = ____L1_K_199.R
+    ell = ____L1_K_199.ell
+    mk = ____L1_K_199.mk
+    hash = ____L1_K_199.hash
+    cl = ____L1_K_199.cl
+    mix = ____L1_K_199.mix
+    dither = ____L1_K_199.dither
+    limb = ____L1_K_199.limb
+    sky = ____L1_K_199.sky
+    haze = ____L1_K_199.haze
+    tile = ____L1_K_199.tile
+    tree = ____L1_K_199.tree
+    slant = ____L1_K_199.slant
+    sunInfo = ____L1_K_199.sunInfo
+    sunWall = ____L1_K_199.sunWall
+    board = ____L1_K_199.board
+    bench = ____L1_K_199.bench
+    lampPost = ____L1_K_199.lampPost
+    lampGlow = ____L1_K_199.lampGlow
+    shadeAdd = ____L1_K_199.shadeAdd
+    lightAdd = ____L1_K_199.lightAdd
     __L1.GY = 210
     __L1.vis = function(____, x, m)
         if m == nil then
@@ -18322,16 +18718,16 @@ local __O = {};
     __L1.LOJAS = {}
     __L1.CAM = function() return window.CampanhaCamadas end
     __L1.parado = function()
-        local ____t_104 = __t
-        local ____opt_101 = __L1:CAM()
-        if ____opt_101 ~= nil then
-            ____opt_101 = ____opt_101.engarrafado
+        local ____t_205 = __t
+        local ____opt_202 = __L1:CAM()
+        if ____opt_202 ~= nil then
+            ____opt_202 = ____opt_202.engarrafado
         end
-        local ____opt_result_103
-        if ____opt_101 ~= nil then
-            ____opt_result_103 = ____opt_101(____opt_101, __L1.CUR)
+        local ____opt_result_204
+        if ____opt_202 ~= nil then
+            ____opt_result_204 = ____opt_202(____opt_202, __L1.CUR)
         end
-        return not not ____t_104(____opt_result_103)
+        return not not ____t_205(____opt_result_204)
     end
     __L1.CURT = __arrL({
         "#e8d8a8",
@@ -19590,7 +19986,7 @@ local __O = {};
                             __L1.GY - 18 - __mod(k, 3) * 4,
                             3,
                             4,
-                            if __t(__mod(k, 2)) then "#4f8a3a" else "#5f9a46"
+                            __t(__mod(k, 2)) and "#4f8a3a" or "#5f9a46"
                         )
                         k = k + 1
                     end
@@ -20120,7 +20516,7 @@ local __O = {};
                             __L1.GY - k * 2.2,
                             (10 - k) * 1.4 + 2,
                             3,
-                            if __t(__mod(k, 2)) then "#b07a4a" else "#a06a3e"
+                            __t(__mod(k, 2)) and "#b07a4a" or "#a06a3e"
                         )
                         k = k + 1
                     end
@@ -20732,7 +21128,7 @@ local __O = {};
                         y - 16 - __mod(k, 2) * 4,
                         4,
                         6,
-                        if __t(__mod(k, 2)) then "#4f8a3a" else "#5f9a46"
+                        __t(__mod(k, 2)) and "#4f8a3a" or "#5f9a46"
                     )
                     k = k + 1
                 end
@@ -21190,16 +21586,27 @@ local __O = {};
                         math.floor(t * 4) + k / 16,
                         3
                     ) ~= 0
-                    __L1:Q(
+                    local ____L1_Q_208 = __L1.Q
+                    local ____array_207 = __TS__SparseArrayNew(
                         c,
                         x + k,
                         y + 22,
                         4,
-                        4,
-                        if __t(on) then __L1:pick(
+                        4
+                    )
+                    local ____t_result_206
+                    if __t(on) then
+                        ____t_result_206 = __L1:pick(
                             __arrL({"#ffe39a", "#ff6a8a", "#6ac8ff"}, 3),
                             k + sd
-                        ) else "#5a5040"
+                        )
+                    else
+                        ____t_result_206 = "#5a5040"
+                    end
+                    __TS__SparseArrayPush(____array_207, ____t_result_206)
+                    ____L1_Q_208(
+                        __L1,
+                        __TS__SparseArraySpread(____array_207)
                     )
                     k = k + 16
                 end
@@ -21280,7 +21687,7 @@ local __O = {};
                             y - 14 - __mod(k, 2) * 4,
                             4,
                             6,
-                            if __t(__mod(k, 2)) then "#4f8a3a" else "#5f9a46"
+                            __t(__mod(k, 2)) and "#4f8a3a" or "#5f9a46"
                         )
                         k = k + 1
                     end
@@ -21324,7 +21731,7 @@ local __O = {};
                         y - 2 - math.floor(hash(nil, k + sd) * 4 + 0.5),
                         2,
                         4,
-                        if __t(__mod(k, 2)) then "#5f9a46" else "#79b04a"
+                        __t(__mod(k, 2)) and "#5f9a46" or "#79b04a"
                     )
                     k = k + 3
                 end
@@ -21382,34 +21789,53 @@ local __O = {};
             -math.floor(camera + 0.5),
             0
         )
-        local ____iter_113 = __iter
-        local ____call_112 = __call
-        local ____temp_111 = if __t(d.labels) then d.labels else __arrL({}, 0)
-        local ____t_110 = __t
-        local ____opt_107 = __L1:CAM()
-        if ____opt_107 ~= nil then
-            ____opt_107 = ____opt_107.falas
+        local ____iter_219 = __iter
+        local ____call_218 = __call
+        local ____t_result_210
+        if __t(d.labels) then
+            ____t_result_210 = d.labels
+        else
+            ____t_result_210 = __arrL({}, 0)
         end
-        local ____opt_result_109
-        if ____opt_107 ~= nil then
-            ____opt_result_109 = ____opt_107(____opt_107, d.id, camera)
+        local ____t_result_217
+        local ____t_216 = __t
+        local ____opt_213 = __L1:CAM()
+        if ____opt_213 ~= nil then
+            ____opt_213 = ____opt_213.falas
         end
-        __O[406] = ____opt_result_109
-        for ____, lb in __TS__Iterator(____iter_113(____call_112(____temp_111, "concat", if ____t_110(____opt_result_109) then __O[406] else __arrL({}, 0)))) do
-            local x, y, str, size, col = table.unpack(lb, 1, 5)
-            local a = if __t(d.labelAlpha) then d:labelAlpha(lb) else 1
-            if __le(a, 0.01) then
-                continue
+        local ____opt_result_215
+        if ____opt_213 ~= nil then
+            ____opt_result_215 = ____opt_213(____opt_213, d.id, camera)
+        end
+        __O[406] = ____opt_result_215
+        if ____t_216(____opt_result_215) then
+            ____t_result_217 = __O[406]
+        else
+            ____t_result_217 = __arrL({}, 0)
+        end
+        for ____, lb in __TS__Iterator(____iter_219(____call_218(____t_result_210, "concat", ____t_result_217))) do
+            do
+                local x, y, str, size, col = table.unpack(lb, 1, 5)
+                local ____t_result_209
+                if __t(d.labelAlpha) then
+                    ____t_result_209 = d:labelAlpha(lb)
+                else
+                    ____t_result_209 = 1
+                end
+                local a = ____t_result_209
+                if __le(a, 0.01) then
+                    continue
+                end
+                c.globalAlpha = a
+                __L1:text(
+                    c,
+                    str,
+                    x * 2,
+                    y * 2,
+                    size,
+                    col
+                )
             end
-            c.globalAlpha = a
-            __L1:text(
-                c,
-                str,
-                x * 2,
-                y * 2,
-                size,
-                col
-            )
         end
         c:restore()
     end end
@@ -21417,11 +21843,11 @@ local __O = {};
     for ____, d in __iterar((__call(__L1.LIST, "slice"))) do
         __L1:registrar(d)
     end
-    local ____opt_114 = window.Art
-    if ____opt_114 ~= nil then
-        ____opt_114 = ____opt_114.drawScene
+    local ____opt_220 = window.Art
+    if ____opt_220 ~= nil then
+        ____opt_220 = ____opt_220.drawScene
     end
-    __L1.baseScene = ____opt_114
+    __L1.baseScene = ____opt_220
     if __t(__L1.baseScene) then
         window.Art.drawScene = function(self, c, scene, camera, t)
             if camera == nil then
@@ -21430,15 +21856,21 @@ local __O = {};
             if t == nil then
                 t = 0
             end
-            local ____t_118 = __t
-            local ____t_117 = __t
-            local ____ge_result_116 = __ge(scene, 12)
-            __O[407] = ____ge_result_116
-            __D[1] = if not ____t_118(if ____t_117(____ge_result_116) then __call(
-                __L1.LIST,
-                "some",
-                function(____, d) return d.id == scene end
-            ) else __O[407]) then
+            local ____t_225 = __t
+            local ____t_result_224
+            local ____t_223 = __t
+            local ____ge_result_222 = __ge(scene, 12)
+            __O[407] = ____ge_result_222
+            if ____t_223(____ge_result_222) then
+                ____t_result_224 = __call(
+                    __L1.LIST,
+                    "some",
+                    function(____, d) return d.id == scene end
+                )
+            else
+                ____t_result_224 = __O[407]
+            end
+            if not ____t_225(____t_result_224) then
                 return __L1:baseScene(c, scene, camera, t)
             end
             c:save()
@@ -21446,21 +21878,35 @@ local __O = {};
             c:beginPath()
             c:rect(0, 0, 960, 540)
             c:clip()
-            local ____t_126 = __t
-            local ____self_124 = window.HdMaps
-            local ____self_124_draw_125 = ____self_124.draw
-            local ____array_123 = __TS__SparseArrayNew(c, scene)
-            local ____t_120 = __t
-            local ____TS__Number_result_119 = __TS__Number(camera)
-            __O[408] = ____TS__Number_result_119
-            __TS__SparseArrayPush(____array_123, if ____t_120(____TS__Number_result_119) then __O[408] else 0)
-            local ____t_122 = __t
-            local ____TS__Number_result_121 = __TS__Number(t)
-            __O[409] = ____TS__Number_result_121
-            __TS__SparseArrayPush(____array_123, if ____t_122(____TS__Number_result_121) then __O[409] else 0)
-            if ____t_126(____self_124_draw_125(
-                ____self_124,
-                __TS__SparseArraySpread(____array_123)
+            local ____t_236 = __t
+            local ____self_234 = window.HdMaps
+            local ____self_234_draw_235 = ____self_234.draw
+            local ____c_232 = c
+            local ____scene_233 = scene
+            local ____t_result_228
+            local ____t_227 = __t
+            local ____TS__Number_result_226 = __TS__Number(camera)
+            __O[408] = ____TS__Number_result_226
+            if ____t_227(____TS__Number_result_226) then
+                ____t_result_228 = __O[408]
+            else
+                ____t_result_228 = 0
+            end
+            local ____t_result_231
+            local ____t_230 = __t
+            local ____TS__Number_result_229 = __TS__Number(t)
+            __O[409] = ____TS__Number_result_229
+            if ____t_230(____TS__Number_result_229) then
+                ____t_result_231 = __O[409]
+            else
+                ____t_result_231 = 0
+            end
+            if ____t_236(____self_234_draw_235(
+                ____self_234,
+                ____c_232,
+                ____scene_233,
+                ____t_result_228,
+                ____t_result_231
             )) then
                 window.HdMaps:finish(c, scene)
             end
@@ -21557,23 +22003,41 @@ local __O = {};
             QL = __L1.QL,
             concretoBase = __L1.concretoBase,
             shopFar = function()
-                local ____temp_127 = __L1:buildShopFar()
-                __L1.SHOPFAR = ____temp_127
-                return if __t(__L1.SHOPFAR) then __L1.SHOPFAR else ____temp_127
+                local ____t_result_238
+                if __t(__L1.SHOPFAR) then
+                    ____t_result_238 = __L1.SHOPFAR
+                else
+                    local ____temp_237 = __L1:buildShopFar()
+                    __L1.SHOPFAR = ____temp_237
+                    ____t_result_238 = ____temp_237
+                end
+                return ____t_result_238
             end,
             SHOP = __L1.SHOP,
             heroiPos = function() return __L1.HERO end,
             lojas = function(____, id)
-                local ____call_130 = __call
-                local ____t_129 = __t
-                local ____get_result_128 = __get(__L1.LOJAS, id)
-                __O[410] = ____get_result_128
-                return ____call_130(if ____t_129(____get_result_128) then __O[410] else __arrL({}, 0), "slice")
+                local ____call_242 = __call
+                local ____t_result_241
+                local ____t_240 = __t
+                local ____get_result_239 = __get(__L1.LOJAS, id)
+                __O[410] = ____get_result_239
+                if ____t_240(____get_result_239) then
+                    ____t_result_241 = __O[410]
+                else
+                    ____t_result_241 = __arrL({}, 0)
+                end
+                return ____call_242(____t_result_241, "slice")
             end,
             FAR = function()
-                local ____temp_131 = __L1:buildFar()
-                __L1.FAR = ____temp_131
-                return if __t(__L1.FAR) then __L1.FAR else ____temp_131
+                local ____t_result_244
+                if __t(__L1.FAR) then
+                    ____t_result_244 = __L1.FAR
+                else
+                    local ____temp_243 = __L1:buildFar()
+                    __L1.FAR = ____temp_243
+                    ____t_result_244 = ____temp_243
+                end
+                return ____t_result_244
             end,
             cenaAtual = function() return __L1.CUR end,
             BAIRRO = __L1.BAIRRO,
@@ -21597,23 +22061,35 @@ local __O = {};
         __getters(
             {
                 largura = function(____, id)
-                    local ____t_134 = __t
-                    local ____opt_132 = __call(
+                    local ____t_result_248
+                    local ____t_247 = __t
+                    local ____opt_245 = __call(
                         __L1.LIST,
                         "find",
                         function(____, d) return d.id == id end
                     )
-                    if ____opt_132 ~= nil then
-                        ____opt_132 = ____opt_132.width
+                    if ____opt_245 ~= nil then
+                        ____opt_245 = ____opt_245.width
                     end
-                    __O[411] = ____opt_132
-                    return if ____t_134(____opt_132) then __O[411] else 0
+                    __O[411] = ____opt_245
+                    if ____t_247(____opt_245) then
+                        ____t_result_248 = __O[411]
+                    else
+                        ____t_result_248 = 0
+                    end
+                    return ____t_result_248
                 end,
                 layout = function(____, id)
-                    local ____t_136 = __t
-                    local ____get_result_135 = __get(__L1.LAYOUT, id)
-                    __O[412] = ____get_result_135
-                    return if ____t_136(____get_result_135) then __O[412] else nil
+                    local ____t_result_251
+                    local ____t_250 = __t
+                    local ____get_result_249 = __get(__L1.LAYOUT, id)
+                    __O[412] = ____get_result_249
+                    if ____t_250(____get_result_249) then
+                        ____t_result_251 = __O[412]
+                    else
+                        ____t_result_251 = nil
+                    end
+                    return ____t_result_251
                 end,
                 plataforma = __L1.plataforma,
                 heroi = __L1.heroi,

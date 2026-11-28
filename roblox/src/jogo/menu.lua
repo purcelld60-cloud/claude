@@ -48,8 +48,11 @@ local __O = {};
             "aria-pressed",
             tostring(active)
         )
-        fullscreenButton:setAttribute("aria-label", if __t(active) then "Sair da tela cheia" else "Jogar em tela cheia")
-        fullscreenButton.title = if __t(active) then "Sair da tela cheia" else "Tela cheia"
+        fullscreenButton:setAttribute(
+            "aria-label",
+            __t(active) and "Sair da tela cheia" or "Jogar em tela cheia"
+        )
+        fullscreenButton.title = __t(active) and "Sair da tela cheia" or "Tela cheia"
     end
     fullscreenButton:addEventListener(
         "click",
@@ -76,47 +79,80 @@ local __O = {};
                         ____opt_result_16 = ____opt_14(____opt_14)
                     end
                     __TS__Await(____opt_result_16)
+                    local ____t_result_19
                     local ____t_18 = __t
                     local ____re_test_result_17 = __re_test(
                         __re("iPhone|iPad|iPod", ""),
                         window.navigator.userAgent
                     )
-                    __O[2462] = ____re_test_result_17
-                    local ios = if ____t_18(____re_test_result_17) then __O[2462] else window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
-                    local ____t_24 = __t
-                    local ____t_22 = __t
-                    local ____t_20 = __t
-                    local ____temp_19 = not not __t(window.navigator.standalone)
-                    __O[2463] = ____temp_19
-                    local ____temp_21 = if ____t_20(____temp_19) then __O[2463] else window:matchMedia("(display-mode: standalone)").matches
-                    __O[2464] = ____temp_21
-                    local ____temp_23 = if ____t_22(____temp_21) then __O[2464] else window.location.protocol == "file:"
-                    __O[2465] = ____temp_23
-                    local installed = if ____t_24(____temp_23) then __O[2465] else __call(
-                        __new("URLSearchParams", window.location.search),
-                        "has",
-                        "native"
-                    )
-                    local ____t_33 = __t
-                    local ____t_26 = __t
-                    local ____temp_25 = if __t(ios) then not __t(installed) else ios
-                    __O[2466] = ____temp_25
-                    local ____t_32 = __t
-                    local ____opt_29 = window.GameView
-                    if ____opt_29 ~= nil then
-                        ____opt_29 = ____opt_29.isNativeFullscreen
+                    __O[2467] = ____re_test_result_17
+                    if ____t_18(____re_test_result_17) then
+                        ____t_result_19 = __O[2467]
+                    else
+                        ____t_result_19 = window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
                     end
-                    local ____opt_result_31
-                    if ____opt_29 ~= nil then
-                        ____opt_result_31 = ____opt_29(____opt_29)
+                    local ios = ____t_result_19
+                    local ____t_result_26
+                    local ____t_25 = __t
+                    local ____t_result_24
+                    local ____t_23 = __t
+                    local ____t_result_22
+                    local ____t_21 = __t
+                    local ____temp_20 = not not __t(window.navigator.standalone)
+                    __O[2468] = ____temp_20
+                    if ____t_21(____temp_20) then
+                        ____t_result_22 = __O[2468]
+                    else
+                        ____t_result_22 = window:matchMedia("(display-mode: standalone)").matches
                     end
-                    if ____t_33(if ____t_26(____temp_25) then not ____t_32(____opt_result_31) else __O[2466]) then
-                        local ____opt_36 = window.GameInstall
-                        if ____opt_36 ~= nil then
-                            ____opt_36 = ____opt_36.showGuide
+                    __O[2469] = ____t_result_22
+                    if ____t_23(____t_result_22) then
+                        ____t_result_24 = __O[2469]
+                    else
+                        ____t_result_24 = window.location.protocol == "file:"
+                    end
+                    __O[2470] = ____t_result_24
+                    if ____t_25(____t_result_24) then
+                        ____t_result_26 = __O[2470]
+                    else
+                        ____t_result_26 = __call(
+                            __new("URLSearchParams", window.location.search),
+                            "has",
+                            "native"
+                        )
+                    end
+                    local installed = ____t_result_26
+                    local ____t_36 = __t
+                    local ____t_result_35
+                    local ____t_28 = __t
+                    local ____t_result_27
+                    if __t(ios) then
+                        ____t_result_27 = not __t(installed)
+                    else
+                        ____t_result_27 = ios
+                    end
+                    __O[2471] = ____t_result_27
+                    if ____t_28(____t_result_27) then
+                        local ____t_34 = __t
+                        local ____opt_31 = window.GameView
+                        if ____opt_31 ~= nil then
+                            ____opt_31 = ____opt_31.isNativeFullscreen
                         end
-                        if ____opt_36 ~= nil then
-                            ____opt_36(____opt_36)
+                        local ____opt_result_33
+                        if ____opt_31 ~= nil then
+                            ____opt_result_33 = ____opt_31(____opt_31)
+                        end
+                        ____t_result_35 = not ____t_34(____opt_result_33)
+                    else
+                        ____t_result_35 = __O[2471]
+                    end
+                    if ____t_36(____t_result_35) then
+                        local ____opt_39 = window.GameInstall
+                        if ____opt_39 ~= nil then
+                            ____opt_39 = ____opt_39.showGuide
+                        end
+                        if ____opt_39 ~= nil then
+                            ____opt_39(____opt_39)
                         end
                     end
                 end
@@ -159,7 +195,7 @@ local __O = {};
                     "aria-selected",
                     tostring(on)
                 )
-                button.tabIndex = if __t(on) then 0 else -1
+                button.tabIndex = __t(on) and 0 or -1
             end
         )
         for ____, id in __iterar((__arrL({"journal", "cast", "install"}, 3))) do
@@ -175,46 +211,62 @@ local __O = {};
             selectTab(nil, tab)
             return
         end
-        local ____opt_38 = window.Game
-        if ____opt_38 ~= nil then
-            ____opt_38 = ____opt_38:getState()
+        local ____opt_41 = window.Game
+        if ____opt_41 ~= nil then
+            ____opt_41 = ____opt_41:getState()
         end
-        local state = ____opt_38
+        local state = ____opt_41
+        local ____t_52 = __t
+        local ____t_result_51
+        local ____t_50 = __t
+        local ____t_result_49
         local ____t_48 = __t
-        local ____t_47 = __t
-        local ____t_45 = __t
-        local ____t_43 = __t
-        local ____opt_result_42
+        local ____t_result_47
+        local ____t_46 = __t
+        local ____opt_result_45
         if state ~= nil then
-            ____opt_result_42 = state.started
+            ____opt_result_45 = state.started
         end
-        __O[2467] = ____opt_result_42
-        local ____temp_44 = if ____t_43(____opt_result_42) then not __t(state.paused) else __O[2467]
-        __O[2468] = ____temp_44
-        local ____temp_46 = if ____t_45(____temp_44) then not __t(state.won) else __O[2468]
-        __O[2469] = ____temp_46
-        resumeAfterInfo = not not ____t_48(if ____t_47(____temp_46) then not __t(state.defeated) else __O[2469])
-        local ____opt_51 = window.Game
-        if ____opt_51 ~= nil then
-            ____opt_51 = ____opt_51.releaseInputs
+        __O[2472] = ____opt_result_45
+        if ____t_46(____opt_result_45) then
+            ____t_result_47 = not __t(state.paused)
+        else
+            ____t_result_47 = __O[2472]
         end
-        if ____opt_51 ~= nil then
-            ____opt_51(____opt_51)
+        __O[2473] = ____t_result_47
+        if ____t_48(____t_result_47) then
+            ____t_result_49 = not __t(state.won)
+        else
+            ____t_result_49 = __O[2473]
+        end
+        __O[2474] = ____t_result_49
+        if ____t_50(____t_result_49) then
+            ____t_result_51 = not __t(state.defeated)
+        else
+            ____t_result_51 = __O[2474]
+        end
+        resumeAfterInfo = not not ____t_52(____t_result_51)
+        local ____opt_55 = window.Game
+        if ____opt_55 ~= nil then
+            ____opt_55 = ____opt_55.releaseInputs
+        end
+        if ____opt_55 ~= nil then
+            ____opt_55(____opt_55)
         end
         if __t(resumeAfterInfo) then
             window.Game:pause()
         end
-        local ____temp_60 = window.document:getElementById("acaiPrize")
-        local ____t_59 = __t
-        local ____opt_result_57
+        local ____temp_64 = window.document:getElementById("acaiPrize")
+        local ____t_63 = __t
+        local ____opt_result_61
         if state ~= nil then
-            ____opt_result_57 = state.q
+            ____opt_result_61 = state.q
         end
-        local ____opt_result_58
-        if ____opt_result_57 ~= nil then
-            ____opt_result_58 = ____opt_result_57.acai
+        local ____opt_result_62
+        if ____opt_result_61 ~= nil then
+            ____opt_result_62 = ____opt_result_61.acai
         end
-        ____temp_60.hidden = not ____t_59(____opt_result_58)
+        ____temp_64.hidden = not ____t_63(____opt_result_62)
         selectTab(nil, tab)
         info:showModal()
     end
@@ -228,12 +280,12 @@ local __O = {};
         function()
             if __t(resumeAfterInfo) then
                 resumeAfterInfo = false
-                local ____opt_63 = window.Game
-                if ____opt_63 ~= nil then
-                    ____opt_63 = ____opt_63.resume
+                local ____opt_67 = window.Game
+                if ____opt_67 ~= nil then
+                    ____opt_67 = ____opt_67.resume
                 end
-                if ____opt_63 ~= nil then
-                    ____opt_63(____opt_63)
+                if ____opt_67 ~= nil then
+                    ____opt_67(____opt_67)
                 end
             end
         end
@@ -243,14 +295,25 @@ local __O = {};
         function(____, event)
             if event.target == info then
                 local r = info:getBoundingClientRect()
-                local ____t_69 = __t
-                local ____t_68 = __t
-                local ____t_66 = __t
-                local ____temp_65 = event.clientX < r.left or event.clientX > r.right
-                __O[2470] = ____temp_65
-                local ____temp_67 = if ____t_66(____temp_65) then __O[2470] else event.clientY < r.top
-                __O[2471] = ____temp_67
-                if ____t_69(if ____t_68(____temp_67) then __O[2471] else event.clientY > r.bottom) then
+                local ____t_74 = __t
+                local ____t_result_73
+                local ____t_72 = __t
+                local ____t_result_71
+                local ____t_70 = __t
+                local ____temp_69 = event.clientX < r.left or event.clientX > r.right
+                __O[2475] = ____temp_69
+                if ____t_70(____temp_69) then
+                    ____t_result_71 = __O[2475]
+                else
+                    ____t_result_71 = event.clientY < r.top
+                end
+                __O[2476] = ____t_result_71
+                if ____t_72(____t_result_71) then
+                    ____t_result_73 = __O[2476]
+                else
+                    ____t_result_73 = event.clientY > r.bottom
+                end
+                if ____t_74(____t_result_73) then
                     closeInfo(nil)
                 end
             end
@@ -280,7 +343,7 @@ local __O = {};
             local i = __call(tabs, "indexOf", activeTab)
             local next = __get(
                 tabs,
-                __mod(i + if event.key == "ArrowRight" then 1 else 2, 3)
+                __mod(i + (event.key == "ArrowRight" and 1 or 2), 3)
             )
             selectTab(nil, next)
             info:querySelector(__add(
@@ -296,80 +359,101 @@ local __O = {};
     window.document:getElementById("bookHelpBtn"):addEventListener(
         "click",
         function()
-            local ____opt_72 = window.GameView
-            if ____opt_72 ~= nil then
-                ____opt_72 = ____opt_72.openHelp
+            local ____opt_77 = window.GameView
+            if ____opt_77 ~= nil then
+                ____opt_77 = ____opt_77.openHelp
             end
-            local ____opt_result_74
-            if ____opt_72 ~= nil then
-                ____opt_result_74 = ____opt_72(____opt_72)
+            local ____opt_result_79
+            if ____opt_77 ~= nil then
+                ____opt_result_79 = ____opt_77(____opt_77)
             end
-            return ____opt_result_74
+            return ____opt_result_79
         end
     )
     info:addEventListener(
         "click",
         function(____, event)
-            local ____this_76
-            ____this_76 = event.target
-            local ____opt_75 = ____this_76.closest
-            if ____opt_75 ~= nil then
-                ____opt_75 = ____opt_75(____this_76, "[data-scene]")
+            local ____this_81
+            ____this_81 = event.target
+            local ____opt_80 = ____this_81.closest
+            if ____opt_80 ~= nil then
+                ____opt_80 = ____opt_80(____this_81, "[data-scene]")
             end
-            local stop = ____opt_75
+            local stop = ____opt_80
             if not __t(stop) then
                 return
             end
             event:preventDefault()
             event:stopImmediatePropagation()
-            local ____opt_77 = window.Game
-            if ____opt_77 ~= nil then
-                ____opt_77 = ____opt_77:getState()
+            local ____opt_82 = window.Game
+            if ____opt_82 ~= nil then
+                ____opt_82 = ____opt_82:getState()
             end
-            local state = ____opt_77
-            local ____t_82 = __t
-            local ____opt_result_81
+            local state = ____opt_82
+            local ____t_87 = __t
+            local ____opt_result_86
             if state ~= nil then
-                ____opt_result_81 = state.started
+                ____opt_result_86 = state.started
             end
-            if not ____t_82(____opt_result_81) then
+            if not ____t_87(____opt_result_86) then
                 window.document:getElementById("infoNotice").textContent = "Escolha a dificuldade no pause. Cada nível dá 2 pontos para investir em ATRIBUTOS. Comece ou continue a aventura e prepare seu shape antes dos chefes."
                 return
             end
+            local ____t_97 = __t
+            local ____t_result_96
+            local ____t_93 = __t
+            local ____t_result_92
             local ____t_91 = __t
-            local ____t_88 = __t
-            local ____t_86 = __t
-            local ____t_84 = __t
-            local ____temp_83 = if __t(state.activeBoss) then state.activeBoss else state.room
-            __O[2472] = ____temp_83
-            local ____temp_85 = if ____t_84(____temp_83) then __O[2472] else state.cutscene
-            __O[2473] = ____temp_85
-            local ____temp_87 = if ____t_86(____temp_85) then __O[2473] else state.activity
-            __O[2474] = ____temp_87
-            local ____opt_89 = state.training
-            if ____opt_89 ~= nil then
-                ____opt_89 = ____opt_89.active
+            local ____t_result_90
+            local ____t_89 = __t
+            local ____t_result_88
+            if __t(state.activeBoss) then
+                ____t_result_88 = state.activeBoss
+            else
+                ____t_result_88 = state.room
             end
-            if ____t_91(if ____t_88(____temp_87) then __O[2474] else ____opt_89) then
+            __O[2477] = ____t_result_88
+            if ____t_89(____t_result_88) then
+                ____t_result_90 = __O[2477]
+            else
+                ____t_result_90 = state.cutscene
+            end
+            __O[2478] = ____t_result_90
+            if ____t_91(____t_result_90) then
+                ____t_result_92 = __O[2478]
+            else
+                ____t_result_92 = state.activity
+            end
+            __O[2479] = ____t_result_92
+            if ____t_93(____t_result_92) then
+                ____t_result_96 = __O[2479]
+            else
+                local ____opt_94 = state.training
+                if ____opt_94 ~= nil then
+                    ____opt_94 = ____opt_94.active
+                end
+                ____t_result_96 = ____opt_94
+            end
+            if ____t_97(____t_result_96) then
                 window.document:getElementById("infoNotice").textContent = "Retome a exploração fora da luta, sala ou desafio para escolher uma viagem."
                 return
             end
             resumeAfterInfo = false
             closeInfo(nil)
-            local ____opt_94 = window.Game
-            if ____opt_94 ~= nil then
-                ____opt_94 = ____opt_94.resume
+            local ____opt_100 = window.Game
+            if ____opt_100 ~= nil then
+                ____opt_100 = ____opt_100.resume
             end
-            if ____opt_94 ~= nil then
-                ____opt_94(____opt_94)
+            if ____opt_100 ~= nil then
+                ____opt_100(____opt_100)
             end
-            local ____opt_98 = window.GameView
-            if ____opt_98 ~= nil then
-                ____opt_98 = ____opt_98.openRoutes
+            local ____opt_104 = window.GameView
+            if ____opt_104 ~= nil then
+                ____opt_104 = ____opt_104.openRoutes
             end
-            if ____opt_98 ~= nil then
-                ____opt_98(
-                    ____opt_98,
+            if ____opt_104 ~= nil then
+                ____opt_104(
+                    ____opt_104,
                     __TS__Number(stop.dataset.scene)
                 )
             end
@@ -395,12 +479,12 @@ local __O = {};
         home:addEventListener(
             "click",
             function()
-                local ____opt_102 = window.Game
-                if ____opt_102 ~= nil then
-                    ____opt_102 = ____opt_102.returnToMenu
+                local ____opt_108 = window.Game
+                if ____opt_108 ~= nil then
+                    ____opt_108 = ____opt_108.returnToMenu
                 end
-                if ____opt_102 ~= nil then
-                    ____opt_102(____opt_102)
+                if ____opt_108 ~= nil then
+                    ____opt_108(____opt_108)
                 end
             end
         )
@@ -410,27 +494,27 @@ local __O = {};
         local on = not __t(start.hidden)
         shell.classList:toggle("in-main-menu", on)
         if __t(on) then
-            local ____opt_106 = window.Game
-            if ____opt_106 ~= nil then
-                ____opt_106 = ____opt_106.releaseInputs
+            local ____opt_112 = window.Game
+            if ____opt_112 ~= nil then
+                ____opt_112 = ____opt_112.releaseInputs
             end
-            if ____opt_106 ~= nil then
-                ____opt_106(____opt_106)
+            if ____opt_112 ~= nil then
+                ____opt_112(____opt_112)
             end
-            local ____opt_110 = window.GameView
-            if ____opt_110 ~= nil then
-                ____opt_110 = ____opt_110.closeRoutes
+            local ____opt_116 = window.GameView
+            if ____opt_116 ~= nil then
+                ____opt_116 = ____opt_116.closeRoutes
             end
-            if ____opt_110 ~= nil then
-                ____opt_110(____opt_110)
+            if ____opt_116 ~= nil then
+                ____opt_116(____opt_116)
             end
         end
-        local ____opt_114 = window.GameView
-        if ____opt_114 ~= nil then
-            ____opt_114 = ____opt_114.fit
+        local ____opt_120 = window.GameView
+        if ____opt_120 ~= nil then
+            ____opt_120 = ____opt_120.fit
         end
-        if ____opt_114 ~= nil then
-            ____opt_114(____opt_114)
+        if ____opt_120 ~= nil then
+            ____opt_120(____opt_120)
         end
     end
     __new("MutationObserver", syncTitle):observe(
@@ -444,12 +528,12 @@ local __O = {};
         )
     )
     syncTitle(nil)
-    local ____opt_118 = window.GameView
-    if ____opt_118 ~= nil then
-        ____opt_118 = ____opt_118.enterFullscreen
+    local ____opt_124 = window.GameView
+    if ____opt_124 ~= nil then
+        ____opt_124 = ____opt_124.enterFullscreen
     end
-    if ____opt_118 ~= nil then
-        ____opt_118(____opt_118, {pageOnly = true})
+    if ____opt_124 ~= nil then
+        ____opt_124(____opt_124, {pageOnly = true})
     end
     syncTitle(nil)
     window.AdventureMenu = __ord({openInfo = openInfo, closeInfo = closeInfo, showTab = selectTab}, "openInfo,closeInfo,showTab")

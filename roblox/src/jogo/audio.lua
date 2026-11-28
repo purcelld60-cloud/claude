@@ -14,10 +14,16 @@ local __O = {};
 (function()
     local clamp
     function clamp(self, v, a, b, def)
-        return if __isFiniteN(v) then math.max(
-            a,
-            math.min(b, v)
-        ) else def
+        local ____isFiniteN_result_0
+        if __isFiniteN(v) then
+            ____isFiniteN_result_0 = math.max(
+                a,
+                math.min(b, v)
+            )
+        else
+            ____isFiniteN_result_0 = def
+        end
+        return ____isFiniteN_result_0
     end
     local ____ = "use strict"
     if __t(window.DarocaAudio) then
@@ -78,12 +84,18 @@ local __O = {};
         )
     end
     local function soundOn()
-        local ____t_2 = __t
-        local ____opt_0 = window.Game
-        if ____opt_0 ~= nil then
-            ____opt_0 = ____opt_0.soundOn
+        local ____t_result_4
+        local ____t_3 = __t
+        local ____opt_1 = window.Game
+        if ____opt_1 ~= nil then
+            ____opt_1 = ____opt_1.soundOn
         end
-        return if ____t_2(____opt_0) then window.Game:soundOn() else true
+        if ____t_3(____opt_1) then
+            ____t_result_4 = window.Game:soundOn()
+        else
+            ____t_result_4 = true
+        end
+        return ____t_result_4
     end
     local ctx = nil
     local master = nil
@@ -94,7 +106,14 @@ local __O = {};
                     return true, nil
                 end
                 local ____try, ____hasReturned, ____returnValue = pcall(function()
-                    ctx = __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                    local ____newExpr_6 = __newExpr
+                    local ____t_result_5
+                    if __t(window.AudioContext) then
+                        ____t_result_5 = window.AudioContext
+                    else
+                        ____t_result_5 = window.webkitAudioContext
+                    end
+                    ctx = ____newExpr_6(____t_result_5)
                     master = ctx:createGain()
                     master:connect(ctx.destination)
                 end)
@@ -125,7 +144,15 @@ local __O = {};
         end
         local now = a.currentTime
         local out = a:createGain()
-        out.gain.value = 0.05 * vol.sfx * if __t(opts.volume) then opts.volume else 1
+        local ____out_gain_9 = out.gain
+        local ____temp_8 = 0.05 * vol.sfx
+        local ____t_result_7
+        if __t(opts.volume) then
+            ____t_result_7 = opts.volume
+        else
+            ____t_result_7 = 1
+        end
+        ____out_gain_9.value = ____temp_8 * ____t_result_7
         out:connect(master)
         local function tone(____, f, f2, d, ____type, at, v)
             if ____type == nil then
@@ -625,11 +652,11 @@ local __O = {};
                         function(____, n)
                             do
                                 pcall(function()
-                                    local ____this_4
-                                    ____this_4 = n
-                                    local ____opt_3 = ____this_4.stop
-                                    if ____opt_3 ~= nil then
-                                        ____opt_3(____this_4)
+                                    local ____this_11
+                                    ____this_11 = n
+                                    local ____opt_10 = ____this_11.stop
+                                    if ____opt_10 ~= nil then
+                                        ____opt_10(____this_11)
                                     end
                                     n:disconnect()
                                 end)
@@ -662,7 +689,7 @@ local __O = {};
             local fl = a:createBiquadFilter()
             fl.type = ____type
             fl.frequency.value = f
-            fl.Q.value = if ____type == "bandpass" then 0.7 else 0.5
+            fl.Q.value = ____type == "bandpass" and 0.7 or 0.5
             local g = a:createGain()
             g.gain.value = v
             if __t(mod) then
@@ -765,7 +792,14 @@ local __O = {};
                 d
             ) + 0.05)
         end
-        if __t(if __t(night) then kind == "passaro" or kind == "galinha" else night) then
+        local ____t_13 = __t
+        local ____t_result_12
+        if __t(night) then
+            ____t_result_12 = kind == "passaro" or kind == "galinha"
+        else
+            ____t_result_12 = night
+        end
+        if ____t_13(____t_result_12) then
             kind = "grilo"
         end
         repeat
@@ -984,87 +1018,163 @@ local __O = {};
         until true
     end
     local function fileAmbient(self, scene)
-        local ____t_10 = __t
-        local ____opt_7 = window.DarocaMusicas
-        if ____opt_7 ~= nil then
-            ____opt_7 = ____opt_7.ambient
+        local ____t_result_20
+        local ____t_19 = __t
+        local ____opt_16 = window.DarocaMusicas
+        if ____opt_16 ~= nil then
+            ____opt_16 = ____opt_16.ambient
         end
-        local ____opt_result_9
-        if ____opt_7 ~= nil then
-            ____opt_result_9 = ____opt_7(____opt_7)
+        local ____opt_result_18
+        if ____opt_16 ~= nil then
+            ____opt_result_18 = ____opt_16(____opt_16)
         end
-        __O[2318] = ____opt_result_9
-        local map = if ____t_10(____opt_result_9) then __O[2318] else {}
+        __O[2323] = ____opt_result_18
+        if ____t_19(____opt_result_18) then
+            ____t_result_20 = __O[2323]
+        else
+            ____t_result_20 = {}
+        end
+        local map = ____t_result_20
         local p = __get(PROFILES, scene)
-        local ____t_12 = __t
-        local ____get_result_11 = __get(map, p.name)
-        __O[2319] = ____get_result_11
-        return if __t(p) then if ____t_12(____get_result_11) then __O[2319] else nil else nil
+        local ____t_result_24
+        if __t(p) then
+            local ____t_result_23
+            local ____t_22 = __t
+            local ____get_result_21 = __get(map, p.name)
+            __O[2324] = ____get_result_21
+            if ____t_22(____get_result_21) then
+                ____t_result_23 = __O[2324]
+            else
+                ____t_result_23 = nil
+            end
+            ____t_result_24 = ____t_result_23
+        else
+            ____t_result_24 = nil
+        end
+        return ____t_result_24
     end
     local function tick(self)
         local st = nil
         do
             pcall(function()
-                local ____opt_15 = window.Game
-                if ____opt_15 ~= nil then
-                    ____opt_15 = ____opt_15.getAudioState
+                local ____opt_27 = window.Game
+                if ____opt_27 ~= nil then
+                    ____opt_27 = ____opt_27.getAudioState
                 end
-                local ____opt_result_17
-                if ____opt_15 ~= nil then
-                    ____opt_result_17 = ____opt_15(____opt_15)
+                local ____opt_result_29
+                if ____opt_27 ~= nil then
+                    ____opt_result_29 = ____opt_27(____opt_27)
                 end
-                st = ____opt_result_17
+                st = ____opt_result_29
             end)
         end
-        local ____opt_20 = window.Fliperama
-        if ____opt_20 ~= nil then
-            ____opt_20 = ____opt_20.isOpen
+        local ____opt_32 = window.Fliperama
+        if ____opt_32 ~= nil then
+            ____opt_32 = ____opt_32.isOpen
         end
-        local ____opt_result_22
-        if ____opt_20 ~= nil then
-            ____opt_result_22 = ____opt_20(____opt_20)
+        local ____opt_result_34
+        if ____opt_32 ~= nil then
+            ____opt_result_34 = ____opt_32(____opt_32)
         end
-        local fl = ____opt_result_22
+        local fl = ____opt_result_34
+        local ____t_result_53
+        local ____t_52 = __t
+        local ____t_result_51
+        local ____t_50 = __t
+        local ____t_result_49
+        local ____t_48 = __t
+        local ____t_result_47
+        local ____t_46 = __t
+        local ____t_result_45
+        local ____t_44 = __t
+        local ____t_result_43
+        local ____t_42 = __t
+        local ____t_result_41
         local ____t_40 = __t
+        local ____t_result_39
         local ____t_38 = __t
+        local ____t_result_37
         local ____t_36 = __t
-        local ____t_34 = __t
-        local ____t_32 = __t
-        local ____t_30 = __t
-        local ____t_28 = __t
-        local ____t_26 = __t
-        local ____t_24 = __t
-        local ____temp_23 = not not __t(st)
-        __O[2320] = ____temp_23
-        local ____temp_25 = if ____t_24(____temp_23) then st.started else __O[2320]
-        __O[2321] = ____temp_25
-        local ____temp_27 = if ____t_26(____temp_25) then st.playing ~= false else __O[2321]
-        __O[2322] = ____temp_27
-        local ____temp_29 = if ____t_28(____temp_27) then not __t(st.paused) else __O[2322]
-        __O[2323] = ____temp_29
-        local ____temp_31 = if ____t_30(____temp_29) then not __t(st.cutscene) else __O[2323]
-        __O[2324] = ____temp_31
-        local ____temp_33 = if ____t_32(____temp_31) then not __t(st.room) else __O[2324]
-        __O[2325] = ____temp_33
-        local ____temp_35 = if ____t_34(____temp_33) then not __t(fl) else __O[2325]
-        __O[2326] = ____temp_35
-        local ____temp_37 = if ____t_36(____temp_35) then soundOn(nil) else __O[2326]
-        __O[2327] = ____temp_37
-        local ____temp_39 = if ____t_38(____temp_37) then vol.ambient else __O[2327]
-        __O[2328] = ____temp_39
-        local live = if ____t_40(____temp_39) then vol.sfx > 0 else __O[2328]
-        local scene = if __t(live) then __TS__Number(st.scene) else -1
-        local ____opt_43 = window.DayTime
-        if ____opt_43 ~= nil then
-            ____opt_43 = ____opt_43.state
+        local ____temp_35 = not not __t(st)
+        __O[2325] = ____temp_35
+        if ____t_36(____temp_35) then
+            ____t_result_37 = st.started
+        else
+            ____t_result_37 = __O[2325]
         end
-        local ____opt_result_45
-        if ____opt_43 ~= nil then
-            ____opt_result_45 = ____opt_43(____opt_43)
+        __O[2326] = ____t_result_37
+        if ____t_38(____t_result_37) then
+            ____t_result_39 = st.playing ~= false
+        else
+            ____t_result_39 = __O[2326]
         end
-        local s = ____opt_result_45
+        __O[2327] = ____t_result_39
+        if ____t_40(____t_result_39) then
+            ____t_result_41 = not __t(st.paused)
+        else
+            ____t_result_41 = __O[2327]
+        end
+        __O[2328] = ____t_result_41
+        if ____t_42(____t_result_41) then
+            ____t_result_43 = not __t(st.cutscene)
+        else
+            ____t_result_43 = __O[2328]
+        end
+        __O[2329] = ____t_result_43
+        if ____t_44(____t_result_43) then
+            ____t_result_45 = not __t(st.room)
+        else
+            ____t_result_45 = __O[2329]
+        end
+        __O[2330] = ____t_result_45
+        if ____t_46(____t_result_45) then
+            ____t_result_47 = not __t(fl)
+        else
+            ____t_result_47 = __O[2330]
+        end
+        __O[2331] = ____t_result_47
+        if ____t_48(____t_result_47) then
+            ____t_result_49 = soundOn(nil)
+        else
+            ____t_result_49 = __O[2331]
+        end
+        __O[2332] = ____t_result_49
+        if ____t_50(____t_result_49) then
+            ____t_result_51 = vol.ambient
+        else
+            ____t_result_51 = __O[2332]
+        end
+        __O[2333] = ____t_result_51
+        if ____t_52(____t_result_51) then
+            ____t_result_53 = vol.sfx > 0
+        else
+            ____t_result_53 = __O[2333]
+        end
+        local live = ____t_result_53
+        local ____t_result_54
+        if __t(live) then
+            ____t_result_54 = __TS__Number(st.scene)
+        else
+            ____t_result_54 = -1
+        end
+        local scene = ____t_result_54
+        local ____opt_57 = window.DayTime
+        if ____opt_57 ~= nil then
+            ____opt_57 = ____opt_57.state
+        end
+        local ____opt_result_59
+        if ____opt_57 ~= nil then
+            ____opt_result_59 = ____opt_57(____opt_57)
+        end
+        local s = ____opt_result_59
         local night = not not __t(s) and __gt(s.night, 0.55)
-        local file = if __t(live) then fileAmbient(nil, scene) else nil
+        local ____t_result_60
+        if __t(live) then
+            ____t_result_60 = fileAmbient(nil, scene)
+        else
+            ____t_result_60 = nil
+        end
+        local file = ____t_result_60
         if __t(file) then
             if fileAmbKey ~= file then
                 do
@@ -1080,7 +1190,10 @@ local __O = {};
                 fileAmb:play():catch(function()
                 end)
             end
-            fileAmb.volume = math.min(1, 0.5 * vol.sfx * if __t(st.boss) then 0.4 else 1)
+            fileAmb.volume = math.min(
+                1,
+                0.5 * vol.sfx * (__t(st.boss) and 0.4 or 1)
+            )
             if __t(amb) then
                 stopAmb(nil)
             end
@@ -1093,14 +1206,31 @@ local __O = {};
             fileAmb = nil
             fileAmbKey = ""
         end
-        local ____t_52 = __t
-        local ____t_51 = __t
-        local ____t_49 = __t
-        local ____temp_48 = not __t(file)
-        __O[2329] = ____temp_48
-        local ____temp_50 = if ____t_49(____temp_48) then live else __O[2329]
-        __O[2330] = ____temp_50
-        local key = if ____t_52(if ____t_51(____temp_50) then __get(PROFILES, scene) else __O[2330]) then __add(scene, "") else ""
+        local ____t_result_69
+        local ____t_68 = __t
+        local ____t_result_67
+        local ____t_66 = __t
+        local ____t_result_65
+        local ____t_64 = __t
+        local ____temp_63 = not __t(file)
+        __O[2334] = ____temp_63
+        if ____t_64(____temp_63) then
+            ____t_result_65 = live
+        else
+            ____t_result_65 = __O[2334]
+        end
+        __O[2335] = ____t_result_65
+        if ____t_66(____t_result_65) then
+            ____t_result_67 = __get(PROFILES, scene)
+        else
+            ____t_result_67 = __O[2335]
+        end
+        if ____t_68(____t_result_67) then
+            ____t_result_69 = __add(scene, "")
+        else
+            ____t_result_69 = ""
+        end
+        local key = ____t_result_69
         if key ~= lastKey then
             lastKey = key
             stopAmb(nil)
@@ -1108,30 +1238,43 @@ local __O = {};
                 startAmb(nil, scene, night)
             end
         end
-        if __t(if __t(amb) then ctx else amb) then
-            local ____temp_57 = 0.07 * vol.sfx
-            local ____t_56 = __t
-            local ____opt_result_55
+        local ____t_71 = __t
+        local ____t_result_70
+        if __t(amb) then
+            ____t_result_70 = ctx
+        else
+            ____t_result_70 = amb
+        end
+        if ____t_71(____t_result_70) then
+            local ____temp_76 = 0.07 * vol.sfx
+            local ____t_75 = __t
+            local ____opt_result_74
             if st ~= nil then
-                ____opt_result_55 = st.boss
+                ____opt_result_74 = st.boss
             end
-            local level = ____temp_57 * if ____t_56(____opt_result_55) then 0.35 else 1
+            local level = ____temp_76 * (____t_75(____opt_result_74) and 0.35 or 1)
             amb.gain.gain:setTargetAtTime(level, ctx.currentTime, 0.6)
-            local ____t_66 = __t
-            local ____opt_62 = window.Weather
-            if ____opt_62 ~= nil then
-                ____opt_62 = ____opt_62.state
+            local ____t_result_86
+            local ____t_85 = __t
+            local ____opt_81 = window.Weather
+            if ____opt_81 ~= nil then
+                ____opt_81 = ____opt_81.state
             end
-            local ____opt_result_64
-            if ____opt_62 ~= nil then
-                ____opt_result_64 = ____opt_62(____opt_62)
+            local ____opt_result_83
+            if ____opt_81 ~= nil then
+                ____opt_result_83 = ____opt_81(____opt_81)
             end
-            local ____opt_result_65
-            if ____opt_result_64 ~= nil then
-                ____opt_result_65 = ____opt_result_64.rain
+            local ____opt_result_84
+            if ____opt_result_83 ~= nil then
+                ____opt_result_84 = ____opt_result_83.rain
             end
-            __O[2331] = ____opt_result_65
-            local rain = if ____t_66(____opt_result_65) then __O[2331] else 0
+            __O[2336] = ____opt_result_84
+            if ____t_85(____opt_result_84) then
+                ____t_result_86 = __O[2336]
+            else
+                ____t_result_86 = 0
+            end
+            local rain = ____t_result_86
             if __t(__gt(rain, 0.15) and not __t(amb.rain)) then
                 local s2 = ctx:createBufferSource()
                 s2.buffer = noiseBuffer(nil, ctx)
@@ -1165,11 +1308,17 @@ local __O = {};
             if t > nextEvent then
                 nextEvent = t + 1500 + math.random() * 4500
                 local ev = __get(PROFILES, amb.scene).events
-                local ____t_69 = __t
-                local ____t_68 = __t
-                local ____lenq_result_67 = __lenq(ev)
-                __O[2332] = ____lenq_result_67
-                if ____t_69(if ____t_68(____lenq_result_67) then math.random() < 0.8 else __O[2332]) then
+                local ____t_90 = __t
+                local ____t_result_89
+                local ____t_88 = __t
+                local ____lenq_result_87 = __lenq(ev)
+                __O[2337] = ____lenq_result_87
+                if ____t_88(____lenq_result_87) then
+                    ____t_result_89 = math.random() < 0.8
+                else
+                    ____t_result_89 = __O[2337]
+                end
+                if ____t_90(____t_result_89) then
                     ambEvent(
                         nil,
                         __get(
@@ -1228,24 +1377,41 @@ local __O = {};
             end,
             play = play,
             status = function()
-                local ____opt_70 = __get(PROFILES, amb.scene)
-                if ____opt_70 ~= nil then
-                    ____opt_70 = ____opt_70.name
+                local ____t_result_94
+                if __t(amb) then
+                    local ____opt_91 = __get(PROFILES, amb.scene)
+                    if ____opt_91 ~= nil then
+                        ____opt_91 = ____opt_91.name
+                    end
+                    ____t_result_94 = ____opt_91
+                else
+                    local ____t_result_93
+                    if __t(fileAmbKey) then
+                        ____t_result_93 = fileAmbKey
+                    else
+                        ____t_result_93 = nil
+                    end
+                    ____t_result_94 = ____t_result_93
                 end
-                local ____temp_80 = if __t(amb) then ____opt_70 else if __t(fileAmbKey) then fileAmbKey else nil
-                local ____t_75 = __t
-                local ____opt_result_74
+                local ____t_98 = __t
+                local ____opt_result_97
                 if amb ~= nil then
-                    ____opt_result_74 = amb.rain
+                    ____opt_result_97 = amb.rain
                 end
-                local ____temp_81 = not not ____t_75(____opt_result_74)
-                local ____t_79 = __t
-                local ____opt_result_78
+                local ____temp_104 = not not ____t_98(____opt_result_97)
+                local ____t_result_103
+                local ____t_102 = __t
+                local ____opt_result_101
                 if ctx ~= nil then
-                    ____opt_result_78 = ctx.state
+                    ____opt_result_101 = ctx.state
                 end
-                __O[2333] = ____opt_result_78
-                return {ambiente = ____temp_80, chuva = ____temp_81, contexto = if ____t_79(____opt_result_78) then __O[2333] else "sem áudio"}
+                __O[2338] = ____opt_result_101
+                if ____t_102(____opt_result_101) then
+                    ____t_result_103 = __O[2338]
+                else
+                    ____t_result_103 = "sem áudio"
+                end
+                return {ambiente = ____t_result_94, chuva = ____temp_104, contexto = ____t_result_103}
             end
         },
         "music,sfx,ambientOn,setMusic,setSfx,setAmbient,onChange,play,status"

@@ -3,7 +3,6 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __fcall, __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__fcall, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
 local __arr, __len, __call, __add, __new, __iter, __keys, __bor, __band, __shl, __shr, __re = __JSR.__arr, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__iter, __JSR.__keys, __JSR.__bor, __JSR.__band, __JSR.__shl, __JSR.__shr, __JSR.__re
 local __re_test = __JSR.__re_test
@@ -22,11 +21,17 @@ local ____exports = {}
 local __O = {};
 (function()
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art)
-    __O[679] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[679] else window.Art.__brainrots) then
+    __O[684] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[684]
+    else
+        ____t_result_2 = window.Art.__brainrots
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     local original = window.Art.drawMinion
@@ -123,11 +128,17 @@ local __O = {};
                             1,
                             2
                         )
+                        local ____t_7 = __t
+                        local ____t_result_6
                         local ____t_5 = __t
-                        local ____t_4 = __t
-                        local ____temp_3 = __le(ay, yc) and __gt(by, yc)
-                        __O[680] = ____temp_3
-                        if ____t_5(if ____t_4(____temp_3) then __O[680] else __le(by, yc) and __gt(ay, yc)) then
+                        local ____temp_4 = __le(ay, yc) and __gt(by, yc)
+                        __O[685] = ____temp_4
+                        if ____t_5(____temp_4) then
+                            ____t_result_6 = __O[685]
+                        else
+                            ____t_result_6 = __le(by, yc) and __gt(ay, yc)
+                        end
+                        if ____t_7(____t_result_6) then
                             __call(xs, "push", ax + (yc - ay) / (by - ay) * (bx - ax))
                         end
                         i = i + 1
@@ -192,10 +203,10 @@ local __O = {};
             h,
             plana(nil, BRANCO)
         )
-        local pw = if w >= 4 then 2 else 1
+        local pw = w >= 4 and 2 or 1
         r(
             nil,
-            x + w - pw - if w >= 4 then 1 else 0,
+            x + w - pw - (w >= 4 and 1 or 0),
             y + h - 2,
             pw,
             2,
@@ -266,7 +277,13 @@ local __O = {};
             math.sin(x * 12.9898 + y * 78.233) * 43758.5453,
             1
         )
-        local k = if h < 0 then h + 1 else h
+        local ____temp_8
+        if h < 0 then
+            ____temp_8 = h + 1
+        else
+            ____temp_8 = h
+        end
+        local k = ____temp_8
         if k > 0.9 then
             c = mistura(
                 nil,
@@ -322,14 +339,25 @@ local __O = {};
             end
         end
         local function em(____, x, y)
+            local ____t_14 = __t
+            local ____t_result_13
+            local ____t_12 = __t
+            local ____t_result_11
             local ____t_10 = __t
-            local ____t_9 = __t
-            local ____t_7 = __t
-            local ____temp_6 = __lt(x, 0) or __lt(y, 0)
-            __O[681] = ____temp_6
-            local ____temp_8 = if ____t_7(____temp_6) then __O[681] else __ge(x, W)
-            __O[682] = ____temp_8
-            return if ____t_10(if ____t_9(____temp_8) then __O[682] else __ge(y, H)) then -1 else __get(cor, y * W + x)
+            local ____temp_9 = __lt(x, 0) or __lt(y, 0)
+            __O[686] = ____temp_9
+            if ____t_10(____temp_9) then
+                ____t_result_11 = __O[686]
+            else
+                ____t_result_11 = __ge(x, W)
+            end
+            __O[687] = ____t_result_11
+            if ____t_12(____t_result_11) then
+                ____t_result_13 = __O[687]
+            else
+                ____t_result_13 = __ge(y, H)
+            end
+            return ____t_14(____t_result_13) and -1 or __get(cor, y * W + x)
         end
         local plano = __TS__New(
             Set,
@@ -352,78 +380,131 @@ local __O = {};
                 do
                     local x = 0
                     while x < W do
-                        local i = y * W + x
-                        local c = __get(cor, i)
-                        if c < 0 then
-                            local ____t_15 = __t
-                            local ____t_14 = __t
-                            local ____t_12 = __t
-                            local ____temp_11 = em(nil, x - 1, y) >= 0 or em(nil, x + 1, y) >= 0
-                            __O[683] = ____temp_11
-                            local ____temp_13 = if ____t_12(____temp_11) then __O[683] else em(nil, x, y - 1) >= 0
-                            __O[684] = ____temp_13
-                            if ____t_15(if ____t_14(____temp_13) then __O[684] else em(nil, x, y + 1) >= 0) then
-                                local ____call_18 = __call
-                                local ____arr_17 = __arr
-                                local ____array_16 = __TS__SparseArrayNew(__TS__Spread(__iter(BORDA)))
-                                __TS__SparseArrayPush(____array_16, 255)
-                                ____call_18(
-                                    out,
-                                    "set",
-                                    ____arr_17(__TS__SparseArraySpread(____array_16)),
-                                    i * 4
-                                )
-                            end
-                            continue
-                        end
-                        local rgb = __arrL(
-                            {
-                                __band(
-                                    __shr(c, 16),
-                                    255
-                                ),
-                                __band(
-                                    __shr(c, 8),
-                                    255
-                                ),
-                                __band(c, 255)
-                            },
-                            3
-                        )
-                        if not __t(__call(plano, "has", c)) then
-                            local cima = em(nil, x, y - 1) ~= c
-                            local baixo = em(nil, x, y + 1) ~= c
-                            local dir = em(nil, x + 1, y) ~= c
-                            local esq = em(nil, x - 1, y) ~= c
-                            if __t(if __t(cima) then not __t(baixo) else cima) then
-                                rgb = mistura(nil, rgb, LUZ, 0.34)
-                            elseif __t(if __t(baixo) then baixo else dir) then
-                                rgb = mistura(nil, rgb, SOMBRA, if __t(if __t(baixo) then dir else baixo) then 0.44 else 0.3)
-                            elseif em(nil, x, y + 2) ~= c then
-                                rgb = mistura(nil, rgb, SOMBRA, 0.14)
-                            else
-                                local ____t_21 = __t
+                        do
+                            local i = y * W + x
+                            local c = __get(cor, i)
+                            if c < 0 then
                                 local ____t_20 = __t
-                                local ____temp_19 = if __t(esq) then esq else em(nil, x - 1, y - 1) ~= c
-                                __O[685] = ____temp_19
-                                if ____t_21(if ____t_20(____temp_19) then __O[685] else em(nil, x, y - 2) ~= c) then
-                                    rgb = mistura(nil, rgb, LUZ, 0.14)
+                                local ____t_result_19
+                                local ____t_18 = __t
+                                local ____t_result_17
+                                local ____t_16 = __t
+                                local ____temp_15 = em(nil, x - 1, y) >= 0 or em(nil, x + 1, y) >= 0
+                                __O[688] = ____temp_15
+                                if ____t_16(____temp_15) then
+                                    ____t_result_17 = __O[688]
+                                else
+                                    ____t_result_17 = em(nil, x, y - 1) >= 0
+                                end
+                                __O[689] = ____t_result_17
+                                if ____t_18(____t_result_17) then
+                                    ____t_result_19 = __O[689]
+                                else
+                                    ____t_result_19 = em(nil, x, y + 1) >= 0
+                                end
+                                if ____t_20(____t_result_19) then
+                                    local ____call_23 = __call
+                                    local ____arr_22 = __arr
+                                    local ____array_21 = __TS__SparseArrayNew(__TS__Spread(__iter(BORDA)))
+                                    __TS__SparseArrayPush(____array_21, 255)
+                                    ____call_23(
+                                        out,
+                                        "set",
+                                        ____arr_22(__TS__SparseArraySpread(____array_21)),
+                                        i * 4
+                                    )
+                                end
+                                do x = x + 1 continue end
+                            end
+                            local rgb = __arrL(
+                                {
+                                    __band(
+                                        __shr(c, 16),
+                                        255
+                                    ),
+                                    __band(
+                                        __shr(c, 8),
+                                        255
+                                    ),
+                                    __band(c, 255)
+                                },
+                                3
+                            )
+                            if not __t(__call(plano, "has", c)) then
+                                local cima = em(nil, x, y - 1) ~= c
+                                local baixo = em(nil, x, y + 1) ~= c
+                                local dir = em(nil, x + 1, y) ~= c
+                                local esq = em(nil, x - 1, y) ~= c
+                                local ____t_25 = __t
+                                local ____t_result_24
+                                if __t(cima) then
+                                    ____t_result_24 = not __t(baixo)
+                                else
+                                    ____t_result_24 = cima
+                                end
+                                if ____t_25(____t_result_24) then
+                                    rgb = mistura(nil, rgb, LUZ, 0.34)
+                                else
+                                    local ____t_27 = __t
+                                    local ____t_result_26
+                                    if __t(baixo) then
+                                        ____t_result_26 = baixo
+                                    else
+                                        ____t_result_26 = dir
+                                    end
+                                    if ____t_27(____t_result_26) then
+                                        local ____rgb_30 = rgb
+                                        local ____t_29 = __t
+                                        local ____t_result_28
+                                        if __t(baixo) then
+                                            ____t_result_28 = dir
+                                        else
+                                            ____t_result_28 = baixo
+                                        end
+                                        rgb = mistura(
+                                            nil,
+                                            ____rgb_30,
+                                            SOMBRA,
+                                            ____t_29(____t_result_28) and 0.44 or 0.3
+                                        )
+                                    elseif em(nil, x, y + 2) ~= c then
+                                        rgb = mistura(nil, rgb, SOMBRA, 0.14)
+                                    else
+                                        local ____t_34 = __t
+                                        local ____t_result_33
+                                        local ____t_32 = __t
+                                        local ____t_result_31
+                                        if __t(esq) then
+                                            ____t_result_31 = esq
+                                        else
+                                            ____t_result_31 = em(nil, x - 1, y - 1) ~= c
+                                        end
+                                        __O[690] = ____t_result_31
+                                        if ____t_32(____t_result_31) then
+                                            ____t_result_33 = __O[690]
+                                        else
+                                            ____t_result_33 = em(nil, x, y - 2) ~= c
+                                        end
+                                        if ____t_34(____t_result_33) then
+                                            rgb = mistura(nil, rgb, LUZ, 0.14)
+                                        end
+                                    end
                                 end
                             end
+                            if not __t(__call(plano, "has", c)) then
+                                rgb = roxo(nil, rgb, x, y)
+                            end
+                            local ____call_37 = __call
+                            local ____arr_36 = __arr
+                            local ____array_35 = __TS__SparseArrayNew(__TS__Spread(__iter(rgb)))
+                            __TS__SparseArrayPush(____array_35, 255)
+                            ____call_37(
+                                out,
+                                "set",
+                                ____arr_36(__TS__SparseArraySpread(____array_35)),
+                                i * 4
+                            )
                         end
-                        if not __t(__call(plano, "has", c)) then
-                            rgb = roxo(nil, rgb, x, y)
-                        end
-                        local ____call_24 = __call
-                        local ____arr_23 = __arr
-                        local ____array_22 = __TS__SparseArrayNew(__TS__Spread(__iter(rgb)))
-                        __TS__SparseArrayPush(____array_22, 255)
-                        ____call_24(
-                            out,
-                            "set",
-                            ____arr_23(__TS__SparseArraySpread(____array_22)),
-                            i * 4
-                        )
                         x = x + 1
                     end
                 end
@@ -437,7 +518,7 @@ local __O = {};
         {
             tralalero = function(self, f, bravo)
                 local a = f / N * TAU
-                local y0 = -19 + if __mod(f, 4) < 2 then 0 else -1
+                local y0 = -19 + (__mod(f, 4) < 2 and 0 or -1)
                 __call(
                     __arrL({-9, -1, 7}, 3),
                     "forEach",
@@ -1122,7 +1203,7 @@ local __O = {};
                         p(
                             nil,
                             11 + k * 2,
-                            y0 + if __t(__band(k, 1)) then 0 else 2,
+                            y0 + (__t(__band(k, 1)) and 0 or 2),
                             plana(nil, "#f6f6e8")
                         )
                         k = k + 1
@@ -1417,7 +1498,7 @@ local __O = {};
                         0,
                         math.floor(fase * 3 + 0.5)
                     )
-                    local px = if lado < 0 then -12 else 2
+                    local px = lado < 0 and -12 or 2
                     r(
                         nil,
                         lado * 5 - 2,
@@ -1442,7 +1523,7 @@ local __O = {};
                         1,
                         "#b8805a"
                     )
-                    p(nil, px + if lado < 0 then 0 else 9, -5 - lev, "#e0a878")
+                    p(nil, px + (lado < 0 and 0 or 9), -5 - lev, "#e0a878")
                 end
                 r(
                     nil,
@@ -1849,7 +1930,7 @@ local __O = {};
                             y0 + y,
                             rx,
                             ry,
-                            if __t(__mod(k, 2)) then "#f08a50" else "#f8a06a"
+                            __t(__mod(k, 2)) and "#f08a50" or "#f8a06a"
                         )
                     end
                 )
@@ -1976,7 +2057,7 @@ local __O = {};
     local function quadro(self, nome, f, bravo)
         local chave = __add(
             __add(nome, f),
-            if __t(bravo) then "b" else ""
+            __t(bravo) and "b" or ""
         )
         local q = __call(cache, "get", chave)
         if __t(q) then
@@ -2024,9 +2105,17 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local f = __mod(
-            __mod(
-                math.floor(if __t(t) then t else 0 * 9),
+        local ____mod_40 = __mod
+        local ____mod_39 = __mod
+        local ____t_result_38
+        if __t(t) then
+            ____t_result_38 = t
+        else
+            ____t_result_38 = 0
+        end
+        local f = ____mod_40(
+            ____mod_39(
+                math.floor(____t_result_38 * 9),
                 N
             ) + N,
             N
@@ -2043,8 +2132,8 @@ local __O = {};
             math.floor(y + 0.5)
         )
         local a0 = ctx.globalAlpha
-        local sw = if __t(__get(VOA, nome)) then 12 else 16
-        ctx.globalAlpha = a0 * if __t(__get(VOA, nome)) then 0.18 else 0.28
+        local sw = __t(__get(VOA, nome)) and 12 or 16
+        ctx.globalAlpha = a0 * (__t(__get(VOA, nome)) and 0.18 or 0.28)
         ctx.fillStyle = "#2a0f3a"
         ctx:fillRect(-sw, -2, sw * 2, 4)
         ctx:fillRect(-sw + 4, -4, sw * 2 - 8, 2)
@@ -2061,10 +2150,24 @@ local __O = {};
             W * S,
             H * S
         )
-        __D[1] = if __t(if __t(o.hit) then __mod(
-            math.floor(if __t(t) then t else 0 * 18),
-            2
-        ) == 0 else o.hit) then
+        local ____t_44 = __t
+        local ____t_result_43
+        if __t(o.hit) then
+            local ____mod_42 = __mod
+            local ____t_result_41
+            if __t(t) then
+                ____t_result_41 = t
+            else
+                ____t_result_41 = 0
+            end
+            ____t_result_43 = ____mod_42(
+                math.floor(____t_result_41 * 18),
+                2
+            ) == 0
+        else
+            ____t_result_43 = o.hit
+        end
+        if ____t_44(____t_result_43) then
             ctx.globalAlpha = a0 * 0.85
             ctx:drawImage(
                 q.branco,
@@ -2095,36 +2198,88 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local ____t_28 = __t
-        local ____t_26 = __t
-        local ____temp_25 = if __t(o.design) then o.design else o.variant
-        __O[686] = ____temp_25
-        local ____temp_27 = if ____t_26(____temp_25) then __O[686] else if __t(if __t(o.type) then o.type ~= "doodle" else o.type) then o.type else ""
-        __O[687] = ____temp_27
-        local design = tostring(if ____t_28(____temp_27) then __O[687] else "")
+        local ____t_result_52
+        local ____t_51 = __t
+        local ____t_result_50
+        local ____t_46 = __t
+        local ____t_result_45
+        if __t(o.design) then
+            ____t_result_45 = o.design
+        else
+            ____t_result_45 = o.variant
+        end
+        __O[691] = ____t_result_45
+        if ____t_46(____t_result_45) then
+            ____t_result_50 = __O[691]
+        else
+            local ____t_result_49
+            local ____t_48 = __t
+            local ____t_result_47
+            if __t(o.type) then
+                ____t_result_47 = o.type ~= "doodle"
+            else
+                ____t_result_47 = o.type
+            end
+            if ____t_48(____t_result_47) then
+                ____t_result_49 = o.type
+            else
+                ____t_result_49 = ""
+            end
+            ____t_result_50 = ____t_result_49
+        end
+        __O[692] = ____t_result_50
+        if ____t_51(____t_result_50) then
+            ____t_result_52 = __O[692]
+        else
+            ____t_result_52 = ""
+        end
+        local design = tostring(____t_result_52)
         local nome = __get(DESENHOS, design)
-        local ____t_35 = __t
-        local ____t_30 = __t
-        local ____temp_29 = not __t(nome)
-        __O[690] = ____temp_29
-        local ____t_34 = __t
-        local ____t_32 = __t
-        local ____temp_31 = design == "" or design == "ink"
-        __O[688] = ____temp_31
-        local ____temp_33 = if ____t_32(____temp_31) then __O[688] else design == "doodle"
-        __O[689] = ____temp_33
-        __D[1] = if ____t_35(if ____t_30(____temp_29) then if ____t_34(____temp_33) then __O[689] else __re_test(
-            __re("^\\d$", ""),
-            design
-        ) else __O[690]) then
-            local ____get_39 = __get
-            local ____mod_38 = __mod
-            local ____t_37 = __t
-            local ____TS__Number_result_36 = __TS__Number(kind)
-            __O[691] = ____TS__Number_result_36
-            nome = ____get_39(
+        local ____t_61 = __t
+        local ____t_result_60
+        local ____t_54 = __t
+        local ____temp_53 = not __t(nome)
+        __O[695] = ____temp_53
+        if ____t_54(____temp_53) then
+            local ____t_result_59
+            local ____t_58 = __t
+            local ____t_result_57
+            local ____t_56 = __t
+            local ____temp_55 = design == "" or design == "ink"
+            __O[693] = ____temp_55
+            if ____t_56(____temp_55) then
+                ____t_result_57 = __O[693]
+            else
+                ____t_result_57 = design == "doodle"
+            end
+            __O[694] = ____t_result_57
+            if ____t_58(____t_result_57) then
+                ____t_result_59 = __O[694]
+            else
+                ____t_result_59 = __re_test(
+                    __re("^\\d$", ""),
+                    design
+                )
+            end
+            ____t_result_60 = ____t_result_59
+        else
+            ____t_result_60 = __O[695]
+        end
+        if ____t_61(____t_result_60) then
+            local ____get_66 = __get
+            local ____mod_65 = __mod
+            local ____t_result_64
+            local ____t_63 = __t
+            local ____TS__Number_result_62 = __TS__Number(kind)
+            __O[696] = ____TS__Number_result_62
+            if ____t_63(____TS__Number_result_62) then
+                ____t_result_64 = __O[696]
+            else
+                ____t_result_64 = 0
+            end
+            nome = ____get_66(
                 RABISCOS,
-                ____mod_38(if ____t_37(____TS__Number_result_36) then __O[691] else 0, 3)
+                ____mod_65(____t_result_64, 3)
             )
         end
         if not __t(nome) then
@@ -2139,20 +2294,31 @@ local __O = {};
                 o
             )
         end
-        local ____pintar_44 = pintar
-        local ____array_43 = __TS__SparseArrayNew(
+        local ____pintar_72 = pintar
+        local ____array_71 = __TS__SparseArrayNew(
             nil,
             ctx,
             nome,
             x,
             y
         )
-        local ____temp_42 = if __t(t) then t else 0
-        local ____t_41 = __t
-        local ____TS__Number_result_40 = __TS__Number(kind)
-        __O[692] = ____TS__Number_result_40
-        __TS__SparseArrayPush(____array_43, ____temp_42 + if ____t_41(____TS__Number_result_40) then __O[692] else 0 * 0.37, o)
-        ____pintar_44(__TS__SparseArraySpread(____array_43))
+        local ____t_result_67
+        if __t(t) then
+            ____t_result_67 = t
+        else
+            ____t_result_67 = 0
+        end
+        local ____t_result_70
+        local ____t_69 = __t
+        local ____TS__Number_result_68 = __TS__Number(kind)
+        __O[697] = ____TS__Number_result_68
+        if ____t_69(____TS__Number_result_68) then
+            ____t_result_70 = __O[697]
+        else
+            ____t_result_70 = 0
+        end
+        __TS__SparseArrayPush(____array_71, ____t_result_67 + ____t_result_70 * 0.37, o)
+        ____pintar_72(__TS__SparseArraySpread(____array_71))
     end
     window.Art.drawMinion = desenhar
     window.Art.drawBrainrot = function(____, ctx, nome, x, y, t, o)

@@ -3,11 +3,13 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __lt, __gt, __ge, __objCreate, __isFiniteN, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__lt, __JSR.__gt, __JSR.__ge, __JSR.__objCreate, __JSR.__isFiniteN, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
 local __del, __len, __call, __add, __keys, __assign = __JSR.__del, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__keys, __JSR.__assign
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local __TS__Iterator = ____lualib.__TS__Iterator
 local ____exports = {}
 local __O = {};
@@ -20,14 +22,20 @@ local __O = {};
     local events = __arrL({}, 0)
     local serial = 0
     local function clamp(____, v, a, b)
-        local ____a_3 = a
-        local ____b_2 = b
+        local ____a_4 = a
+        local ____b_3 = b
+        local ____t_result_2
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(v)
-        __O[1467] = ____TS__Number_result_0
+        __O[1472] = ____TS__Number_result_0
+        if ____t_1(____TS__Number_result_0) then
+            ____t_result_2 = __O[1472]
+        else
+            ____t_result_2 = 0
+        end
         return math.max(
-            ____a_3,
-            math.min(____b_2, if ____t_1(____TS__Number_result_0) then __O[1467] else 0)
+            ____a_4,
+            math.min(____b_3, ____t_result_2)
         )
     end
     local function rect(self, c, x, y, w, h, color)
@@ -45,13 +53,21 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                math.floor(__get(p, 0) + 0.5),
-                math.floor(__get(p, 1) + 0.5)
-            ) else c:moveTo(
-                math.floor(__get(p, 0) + 0.5),
-                math.floor(__get(p, 1) + 0.5)
-            ) end
+            function(____, p, i)
+                local ____t_result_5
+                if __t(i) then
+                    ____t_result_5 = c:lineTo(
+                        math.floor(__get(p, 0) + 0.5),
+                        math.floor(__get(p, 1) + 0.5)
+                    )
+                else
+                    ____t_result_5 = c:moveTo(
+                        math.floor(__get(p, 0) + 0.5),
+                        math.floor(__get(p, 1) + 0.5)
+                    )
+                end
+                return ____t_result_5
+            end
         )
         c:closePath()
         __call(c, "fill")
@@ -133,15 +149,23 @@ local __O = {};
             k * 5 - 4,
             color
         )
-        rect(
+        local ____rect_8 = rect
+        local ____array_7 = __TS__SparseArrayNew(
             nil,
             c,
             x - k,
             y - k * 2 + 3,
             k * 2,
-            k,
-            if __t(light) then light else CREAM
+            k
         )
+        local ____t_result_6
+        if __t(light) then
+            ____t_result_6 = light
+        else
+            ____t_result_6 = CREAM
+        end
+        __TS__SparseArrayPush(____array_7, ____t_result_6)
+        ____rect_8(__TS__SparseArraySpread(____array_7))
     end
     local function emit(self, ____type, data)
         if data == nil then
@@ -150,27 +174,43 @@ local __O = {};
         if __t(not __isFiniteN(data.x) or not __isFiniteN(data.y)) then
             return
         end
-        local duration = if ____type == "surge" then 0.62 else if ____type == "gas" then 0.42 else if ____type == "dash" then 0.28 else if ____type == "cast" then 0.18 else 0.24
-        local ____set_7 = __set
-        local ____type_6 = ____type
-        local ____t_5 = __t
-        local ____get_result_4 = __get(history, ____type)
-        __O[1468] = ____get_result_4
-        ____set_7(history, ____type_6, if ____t_5(____get_result_4) then __O[1468] else 0 + 1)
-        local ____assign_10 = __assign
-        local ____temp_8 = {}
-        local ____data_9 = data
+        local duration = ____type == "surge" and 0.62 or (____type == "gas" and 0.42 or (____type == "dash" and 0.28 or (____type == "cast" and 0.18 or 0.24)))
+        local ____set_13 = __set
+        local ____type_12 = ____type
+        local ____t_result_11
+        local ____t_10 = __t
+        local ____get_result_9 = __get(history, ____type)
+        __O[1473] = ____get_result_9
+        if ____t_10(____get_result_9) then
+            ____t_result_11 = __O[1473]
+        else
+            ____t_result_11 = 0
+        end
+        ____set_13(history, ____type_12, ____t_result_11 + 1)
+        local ____assign_21 = __assign
+        local ____temp_19 = {}
+        local ____data_20 = data
         serial = serial + 1
-        local event = ____assign_10(
-            ____temp_8,
-            ____data_9,
+        local ____serial_15 = serial
+        local ____type_16 = ____type
+        local ____duration_17 = duration
+        local ____temp_18 = __lt(data.dir, 0) and -1 or 1
+        local ____t_result_14
+        if __t(data.stage) then
+            ____t_result_14 = data.stage
+        else
+            ____t_result_14 = 1
+        end
+        local event = ____assign_21(
+            ____temp_19,
+            ____data_20,
             {
-                id = serial,
-                type = ____type,
+                id = ____serial_15,
+                type = ____type_16,
                 age = 0,
-                duration = duration,
-                dir = if __lt(data.dir, 0) then -1 else 1,
-                stage = clamp(nil, if __t(data.stage) then data.stage else 1, 1, 3)
+                duration = ____duration_17,
+                dir = ____temp_18,
+                stage = clamp(nil, ____t_result_14, 1, 3)
             }
         )
         if __len(events) >= LIMIT then
@@ -199,9 +239,15 @@ local __O = {};
     local function impact(self, c, e, p)
         local electric = e.element == "electric"
         local fire = e.element == "fire"
-        local color = if e.type == "enemyHit" then "#e79c79" else if __t(electric) then "#85e3f3" else if __t(fire) then "#f9b457" else if e.kind == "nikolas" then "#b7dc6b" else "#ffd376"
-        local n = if __ge(e.damage, 40) then 18 else 13 * (1 - p * 0.35)
-        local angle = if __t(e.dir) then e.dir else 1 * 0.13
+        local color = e.type == "enemyHit" and "#e79c79" or (__t(electric) and "#85e3f3" or (__t(fire) and "#f9b457" or (e.kind == "nikolas" and "#b7dc6b" or "#ffd376")))
+        local n = (__ge(e.damage, 40) and 18 or 13) * (1 - p * 0.35)
+        local ____t_result_22
+        if __t(e.dir) then
+            ____t_result_22 = e.dir
+        else
+            ____t_result_22 = 1
+        end
+        local angle = ____t_result_22 * 0.13
         c:rotate(angle)
         if __lt(p, 0.7) then
             poly(
@@ -264,22 +310,38 @@ local __O = {};
         do
             local i = 0
             while i < 5 do
-                local side = if __t(__mod(i, 2)) then -1 else 1
+                local side = __t(__mod(i, 2)) and -1 or 1
                 local x = side * (9 + p * (18 + i * 2))
                 local y = (i - 2) * (3 + p * 3) - p * 8
-                rect(
+                local ____rect_26 = rect
+                local ____c_24 = c
+                local ____temp_25 = __t(__mod(i, 2)) and 3 or 5
+                local ____t_result_23
+                if __t(__mod(i, 2)) then
+                    ____t_result_23 = color
+                else
+                    ____t_result_23 = CREAM
+                end
+                ____rect_26(
                     nil,
-                    c,
+                    ____c_24,
                     x,
                     y,
-                    if __t(__mod(i, 2)) then 3 else 5,
+                    ____temp_25,
                     2,
-                    if __t(__mod(i, 2)) then color else CREAM
+                    ____t_result_23
                 )
                 i = i + 1
             end
         end
-        if __t(if __t(electric) then __lt(p, 0.68) else electric) then
+        local ____t_28 = __t
+        local ____t_result_27
+        if __t(electric) then
+            ____t_result_27 = __lt(p, 0.68)
+        else
+            ____t_result_27 = electric
+        end
+        if ____t_28(____t_result_27) then
             pixelLine(
                 nil,
                 c,
@@ -299,7 +361,14 @@ local __O = {};
                 2
             )
         end
-        if __t(if __t(fire) then __lt(p, 0.7) else fire) then
+        local ____t_30 = __t
+        local ____t_result_29
+        if __t(fire) then
+            ____t_result_29 = __lt(p, 0.7)
+        else
+            ____t_result_29 = fire
+        end
+        if ____t_30(____t_result_29) then
             do
                 local i = 0
                 while i < 3 do
@@ -325,185 +394,218 @@ local __O = {};
             layer = "front"
         end
         for ____, e in __iterar((events)) do
-            local ____t_13 = __t
-            local ____t_12 = __t
-            local ____temp_11 = e.type == "gas"
-            __O[1469] = ____temp_11
-            if ____t_13(if ____t_12(____temp_11) then window.Golpes else __O[1469]) then
-                continue
-            end
-            local ____t_15 = __t
-            local ____temp_14 = e.type == "gas" or e.type == "surge"
-            __O[1470] = ____temp_14
-            local back = if ____t_15(____temp_14) then __O[1470] else e.type == "dash"
-            if layer == "back" ~= back then
-                continue
-            end
-            local p = clamp(nil, e.age / e.duration, 0, 1)
-            c:save()
-            c:translate(
-                math.floor(e.x + 0.5),
-                math.floor(e.y + 0.5)
-            )
-            c.globalAlpha = c.globalAlpha * if p > 0.7 then (1 - p) / 0.3 else 1
-            if e.type == "gas" then
-                c:scale(e.dir, 1)
-                local reach = math.min(
-                    185,
-                    math.max(80, if __t(e.radius) then e.radius else 120)
+            do
+                local ____t_34 = __t
+                local ____t_result_33
+                local ____t_32 = __t
+                local ____temp_31 = e.type == "gas"
+                __O[1474] = ____temp_31
+                if ____t_32(____temp_31) then
+                    ____t_result_33 = window.Golpes
+                else
+                    ____t_result_33 = __O[1474]
+                end
+                if ____t_34(____t_result_33) then
+                    continue
+                end
+                local ____t_result_37
+                local ____t_36 = __t
+                local ____temp_35 = e.type == "gas" or e.type == "surge"
+                __O[1475] = ____temp_35
+                if ____t_36(____temp_35) then
+                    ____t_result_37 = __O[1475]
+                else
+                    ____t_result_37 = e.type == "dash"
+                end
+                local back = ____t_result_37
+                if layer == "back" ~= back then
+                    continue
+                end
+                local p = clamp(nil, e.age / e.duration, 0, 1)
+                c:save()
+                c:translate(
+                    math.floor(e.x + 0.5),
+                    math.floor(e.y + 0.5)
                 )
-                do
-                    local i = 0
-                    while i < 4 do
-                        local q = i / 3
-                        local travel = 10 + p * reach * (0.35 + q * 0.65)
-                        local yy = math.sin(i * 2.4) * 11 + p * if __t(__mod(i, 2)) then -9 else 5
-                        local size = (10 + e.stage * 2 + q * 7) * (1 - p * 0.3)
-                        cloud(
-                            nil,
-                            c,
-                            travel,
-                            yy,
-                            size,
-                            if __t(__mod(i, 2)) then "#9ecb4b" else "#bedc69",
-                            "#e6ef9c"
-                        )
-                        i = i + 1
-                    end
+                local ____c_39, ____globalAlpha_40 = c, "globalAlpha"
+                local ____temp_38
+                if p > 0.7 then
+                    ____temp_38 = (1 - p) / 0.3
+                else
+                    ____temp_38 = 1
                 end
-                do
-                    local i = 0
-                    while i < 3 do
-                        rect(
-                            nil,
-                            c,
-                            8 + p * (38 + i * 14),
-                            -12 + i * 10,
-                            6,
-                            2,
-                            "#e3ef9a"
-                        )
-                        i = i + 1
+                ____c_39[____globalAlpha_40] = ____c_39[____globalAlpha_40] * ____temp_38
+                if e.type == "gas" then
+                    c:scale(e.dir, 1)
+                    local ____t_result_41
+                    if __t(e.radius) then
+                        ____t_result_41 = e.radius
+                    else
+                        ____t_result_41 = 120
                     end
-                end
-            elseif e.type == "surge" then
-                do
-                    local i = 0
-                    while i < 5 do
-                        local xx = (i - 2) * 14
-                        local lift = math.sin(p * math.pi) * (30 + __mod(i, 2) * 16)
-                        poly(
-                            nil,
-                            c,
-                            __arrL(
-                                {
-                                    __arrL({xx - 6, 22}, 2),
-                                    __arrL({xx - 5, -lift}, 2),
-                                    __arrL({xx + 1, -lift - 13}, 2),
-                                    __arrL({xx + 6, -lift + 3}, 2),
-                                    __arrL({xx + 4, 22}, 2)
-                                },
-                                5
-                            ),
-                            if __t(__mod(i, 2)) then "#e8b83c" else "#fff0a0"
-                        )
-                        i = i + 1
+                    local reach = math.min(
+                        185,
+                        math.max(80, ____t_result_41)
+                    )
+                    do
+                        local i = 0
+                        while i < 4 do
+                            local q = i / 3
+                            local travel = 10 + p * reach * (0.35 + q * 0.65)
+                            local yy = math.sin(i * 2.4) * 11 + p * (__t(__mod(i, 2)) and -9 or 5)
+                            local size = (10 + e.stage * 2 + q * 7) * (1 - p * 0.3)
+                            cloud(
+                                nil,
+                                c,
+                                travel,
+                                yy,
+                                size,
+                                __t(__mod(i, 2)) and "#9ecb4b" or "#bedc69",
+                                "#e6ef9c"
+                            )
+                            i = i + 1
+                        end
                     end
-                end
-                do
-                    local i = 0
-                    while i < 4 do
-                        rect(
-                            nil,
-                            c,
-                            (i - 1.5) * 21,
-                            -15 - p * (45 + __mod(i, 2) * 20),
-                            3,
-                            5,
-                            CREAM
-                        )
-                        i = i + 1
+                    do
+                        local i = 0
+                        while i < 3 do
+                            rect(
+                                nil,
+                                c,
+                                8 + p * (38 + i * 14),
+                                -12 + i * 10,
+                                6,
+                                2,
+                                "#e3ef9a"
+                            )
+                            i = i + 1
+                        end
                     end
-                end
-            elseif e.type == "dash" then
-                c:scale(e.dir, 1)
-                do
-                    local i = 0
-                    while i < 3 do
-                        local xx = -i * 13 - p * (16 + i * 7)
-                        rect(
-                            nil,
-                            c,
-                            xx,
-                            -2 - __mod(i, 2) * 4,
-                            9 - i * 2,
-                            3,
-                            "#d8cc9b"
-                        )
-                        rect(
-                            nil,
-                            c,
-                            xx + 2,
-                            -5 - __mod(i, 2) * 4,
-                            4,
-                            2,
-                            CREAM
-                        )
-                        i = i + 1
+                elseif e.type == "surge" then
+                    do
+                        local i = 0
+                        while i < 5 do
+                            local xx = (i - 2) * 14
+                            local lift = math.sin(p * math.pi) * (30 + __mod(i, 2) * 16)
+                            poly(
+                                nil,
+                                c,
+                                __arrL(
+                                    {
+                                        __arrL({xx - 6, 22}, 2),
+                                        __arrL({xx - 5, -lift}, 2),
+                                        __arrL({xx + 1, -lift - 13}, 2),
+                                        __arrL({xx + 6, -lift + 3}, 2),
+                                        __arrL({xx + 4, 22}, 2)
+                                    },
+                                    5
+                                ),
+                                __t(__mod(i, 2)) and "#e8b83c" or "#fff0a0"
+                            )
+                            i = i + 1
+                        end
                     end
+                    do
+                        local i = 0
+                        while i < 4 do
+                            rect(
+                                nil,
+                                c,
+                                (i - 1.5) * 21,
+                                -15 - p * (45 + __mod(i, 2) * 20),
+                                3,
+                                5,
+                                CREAM
+                            )
+                            i = i + 1
+                        end
+                    end
+                elseif e.type == "dash" then
+                    c:scale(e.dir, 1)
+                    do
+                        local i = 0
+                        while i < 3 do
+                            local xx = -i * 13 - p * (16 + i * 7)
+                            rect(
+                                nil,
+                                c,
+                                xx,
+                                -2 - __mod(i, 2) * 4,
+                                9 - i * 2,
+                                3,
+                                "#d8cc9b"
+                            )
+                            rect(
+                                nil,
+                                c,
+                                xx + 2,
+                                -5 - __mod(i, 2) * 4,
+                                4,
+                                2,
+                                CREAM
+                            )
+                            i = i + 1
+                        end
+                    end
+                elseif e.type == "cast" then
+                    c:scale(e.dir, 1)
+                    poly(
+                        nil,
+                        c,
+                        __arrL(
+                            {
+                                __arrL({0, -2}, 2),
+                                __arrL({12, -6}, 2),
+                                __arrL({8, -2}, 2),
+                                __arrL({19, 0}, 2),
+                                __arrL({8, 3}, 2),
+                                __arrL({11, 7}, 2),
+                                __arrL({0, 2}, 2)
+                            },
+                            7
+                        ),
+                        e.element == "electric" and "#b5f4fb" or (e.element == "fire" and "#ffc66d" or (e.kind == "slime" and "#d0e78f" or (e.kind == "word" and "#e9bfd5" or (e.kind == "doodle" and "#dab6ef" or (e.kind == "smoke" and "#c3d0cc" or CREAM)))))
+                    )
+                else
+                    impact(nil, c, e, p)
                 end
-            elseif e.type == "cast" then
-                c:scale(e.dir, 1)
-                poly(
-                    nil,
-                    c,
-                    __arrL(
-                        {
-                            __arrL({0, -2}, 2),
-                            __arrL({12, -6}, 2),
-                            __arrL({8, -2}, 2),
-                            __arrL({19, 0}, 2),
-                            __arrL({8, 3}, 2),
-                            __arrL({11, 7}, 2),
-                            __arrL({0, 2}, 2)
-                        },
-                        7
-                    ),
-                    if e.element == "electric" then "#b5f4fb" else if e.element == "fire" then "#ffc66d" else if e.kind == "slime" then "#d0e78f" else if e.kind == "word" then "#e9bfd5" else if e.kind == "doodle" then "#dab6ef" else if e.kind == "smoke" then "#c3d0cc" else CREAM
-                )
-            else
-                impact(nil, c, e, p)
+                c:restore()
             end
-            c:restore()
         end
     end
     local function drawProjectile(self, c, s, t)
         if t == nil then
             t = 0
         end
-        local ____t_18 = __t
-        local ____t_17 = __t
-        local ____temp_16 = not __t(s) or __gt(s.delay, 0)
-        __O[1471] = ____temp_16
-        __D[1] = if ____t_18(if ____t_17(____temp_16) then __O[1471] else not __t(__call(
-            __arrL({
-                "paper",
-                "ruler",
-                "case",
-                "reeis",
-                "papaia",
-                "enemyBullet",
-                "slime",
-                "inkBlade",
-                "smoke",
-                "bituca",
-                "astral",
-                "confetti",
-                "word"
-            }, 13),
-            "includes",
-            s.type
-        ))) then
+        local ____t_45 = __t
+        local ____t_result_44
+        local ____t_43 = __t
+        local ____temp_42 = not __t(s) or __gt(s.delay, 0)
+        __O[1476] = ____temp_42
+        if ____t_43(____temp_42) then
+            ____t_result_44 = __O[1476]
+        else
+            ____t_result_44 = not __t(__call(
+                __arrL({
+                    "paper",
+                    "ruler",
+                    "case",
+                    "reeis",
+                    "papaia",
+                    "enemyBullet",
+                    "slime",
+                    "inkBlade",
+                    "smoke",
+                    "bituca",
+                    "astral",
+                    "confetti",
+                    "word"
+                }, 13),
+                "includes",
+                s.type
+            ))
+        end
+        if ____t_45(____t_result_44) then
             return false
         end
         c:save()
@@ -512,15 +614,26 @@ local __O = {};
             math.floor(s.x + 0.5),
             math.floor(s.y + 0.5)
         )
-        local ____t_20 = __t
-        local ____TS__Number_result_19 = __TS__Number(s.vy)
-        __O[1472] = ____TS__Number_result_19
-        local ____temp_23 = if ____t_20(____TS__Number_result_19) then __O[1472] else 0
-        local ____t_22 = __t
-        local ____TS__Number_result_21 = __TS__Number(s.vx)
-        __O[1473] = ____TS__Number_result_21
-        local angle = math.atan2(____temp_23, if ____t_22(____TS__Number_result_21) then __O[1473] else 1)
-        local color = if s.element == "electric" then "#a0ebf4" else if s.element == "fire" then "#f6b152" else "#f5e2b2"
+        local ____t_result_48
+        local ____t_47 = __t
+        local ____TS__Number_result_46 = __TS__Number(s.vy)
+        __O[1477] = ____TS__Number_result_46
+        if ____t_47(____TS__Number_result_46) then
+            ____t_result_48 = __O[1477]
+        else
+            ____t_result_48 = 0
+        end
+        local ____t_result_51
+        local ____t_50 = __t
+        local ____TS__Number_result_49 = __TS__Number(s.vx)
+        __O[1478] = ____TS__Number_result_49
+        if ____t_50(____TS__Number_result_49) then
+            ____t_result_51 = __O[1478]
+        else
+            ____t_result_51 = 1
+        end
+        local angle = math.atan(____t_result_48, ____t_result_51)
+        local color = s.element == "electric" and "#a0ebf4" or (s.element == "fire" and "#f6b152" or "#f5e2b2")
         if __t(__call(
             __arrL({
                 "paper",
@@ -542,7 +655,7 @@ local __O = {};
                     -1,
                     8,
                     2,
-                    if __t(s.type == "enemyBullet" or s.type == "reeis") then "#dcb56c" else color
+                    __t(s.type == "enemyBullet" or s.type == "reeis") and "#dcb56c" or color
                 )
                 rect(
                     nil,
@@ -551,7 +664,7 @@ local __O = {};
                     3,
                     5,
                     1,
-                    if s.type == "papaia" then "#f8d878" else "#e3dcc1"
+                    s.type == "papaia" and "#f8d878" or "#e3dcc1"
                 )
             end
             if s.type == "paper" then
@@ -651,7 +764,7 @@ local __O = {};
                             -11 + i * 4,
                             0,
                             1,
-                            if __t(__mod(i, 2)) then 2 else 3,
+                            __t(__mod(i, 2)) and 2 or 3,
                             "#86683c"
                         )
                         i = i + 1
@@ -840,7 +953,7 @@ local __O = {};
                     -2,
                     14,
                     4,
-                    if __t(gun) then "#ffe191" else "#e9bd62"
+                    __t(gun) and "#ffe191" or "#e9bd62"
                 )
                 rect(
                     nil,
@@ -858,7 +971,7 @@ local __O = {};
                     -1,
                     7,
                     2,
-                    if __t(gun) then "#f9dc7e" else "#edbb63"
+                    __t(gun) and "#f9dc7e" or "#edbb63"
                 )
             end
         elseif s.type == "slime" then
@@ -991,7 +1104,14 @@ local __O = {};
             )
         elseif s.type == "smoke" then
             local base = c.globalAlpha
-            local w = math.sin(t * 7 + if __t(s.variant) then s.variant else 0) * 1.5
+            local ____temp_53 = t * 7
+            local ____t_result_52
+            if __t(s.variant) then
+                ____t_result_52 = s.variant
+            else
+                ____t_result_52 = 0
+            end
+            local w = math.sin(____temp_53 + ____t_result_52) * 1.5
             c:rotate(angle)
             do
                 local i = 1
@@ -1041,7 +1161,7 @@ local __O = {};
                         y - 1,
                         3,
                         3,
-                        if __t(a > math.pi * 0.9 and a < math.pi * 1.8) then "#eef3ec" else "#c3cfcb"
+                        __t(a > math.pi * 0.9 and a < math.pi * 1.8) and "#eef3ec" or "#c3cfcb"
                     )
                     k = k + 1
                 end
@@ -1054,11 +1174,26 @@ local __O = {};
                 local i = 1
                 while i <= 4 do
                     c.globalAlpha = base * (0.36 - i * 0.07)
-                    rect(
+                    local ____rect_58 = rect
+                    local ____c_56 = c
+                    local ____t_result_54
+                    if __t(s.vx) then
+                        ____t_result_54 = s.vx
+                    else
+                        ____t_result_54 = 0
+                    end
+                    local ____temp_57 = __TS__Number(-____t_result_54) * 0.018 * i - 2
+                    local ____t_result_55
+                    if __t(s.vy) then
+                        ____t_result_55 = s.vy
+                    else
+                        ____t_result_55 = 0
+                    end
+                    ____rect_58(
                         nil,
-                        c,
-                        __TS__Number(-if __t(s.vx) then s.vx else 0) * 0.018 * i - 2,
-                        __TS__Number(-if __t(s.vy) then s.vy else 0) * 0.018 * i - 2 - i * 2,
+                        ____c_56,
+                        ____temp_57,
+                        __TS__Number(-____t_result_55) * 0.018 * i - 2 - i * 2,
                         5 - i * 0.6,
                         5 - i * 0.6,
                         "#b9c3c0"
@@ -1068,7 +1203,15 @@ local __O = {};
             end
             c:restore()
             c.globalAlpha = base
-            c:rotate(if __t(s.spin) then s.spin else 0 + t * 13)
+            local ____c_60 = c
+            local ____c_rotate_61 = c.rotate
+            local ____t_result_59
+            if __t(s.spin) then
+                ____t_result_59 = s.spin
+            else
+                ____t_result_59 = 0
+            end
+            ____c_rotate_61(____c_60, ____t_result_59 + t * 13)
             c.globalAlpha = base * (0.25 + 0.15 * math.sin(t * 30))
             rect(
                 nil,
@@ -1229,7 +1372,13 @@ local __O = {};
                 "#c17cba"
             )
         elseif s.type == "word" then
-            local value = tostring(if __t(s.text) then s.text else "POUDI")
+            local ____t_result_62
+            if __t(s.text) then
+                ____t_result_62 = s.text
+            else
+                ____t_result_62 = "POUDI"
+            end
+            local value = tostring(____t_result_62)
             local w = math.min(
                 220,
                 __len(value) * 7 + 18
@@ -1271,7 +1420,7 @@ local __O = {};
             c.font = "bold 12px monospace"
             c.textAlign = "center"
             c.textBaseline = "middle"
-            c.fillStyle = if __t(s.echo) then "#315d79" else "#623950"
+            c.fillStyle = __t(s.echo) and "#315d79" or "#623950"
             c:fillText(value, 0, 1)
         end
         c:restore()

@@ -11,11 +11,17 @@ local __O = {};
     local canvas = window.document:getElementById("gameCanvas")
     local normal = window.document:getElementById("dialogBox")
     local film = window.document:querySelector(".cinematic-caption")
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(viewport) or not __t(canvas)
-    __O[2429] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[2429] else not __t(normal)) then
+    __O[2434] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[2434]
+    else
+        ____t_result_2 = not __t(normal)
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     local controls = window.document:getElementById("dialogControls")
@@ -56,14 +62,25 @@ local __O = {};
                 end
                 event:preventDefault()
                 local touch = __get(event.changedTouches, 0)
+                local ____t_9 = __t
+                local ____t_result_8
                 local ____t_7 = __t
-                local ____t_6 = __t
-                local ____t_4 = __t
-                local ____temp_3 = not __t(__len(event.touches))
-                __O[2430] = ____temp_3
-                local ____temp_5 = if ____t_4(____temp_3) then touch else __O[2430]
-                __O[2431] = ____temp_5
-                if ____t_7(if ____t_6(____temp_5) then button:contains(window.document:elementFromPoint(touch.clientX, touch.clientY)) else __O[2431]) then
+                local ____t_result_6
+                local ____t_5 = __t
+                local ____temp_4 = not __t(__len(event.touches))
+                __O[2435] = ____temp_4
+                if ____t_5(____temp_4) then
+                    ____t_result_6 = touch
+                else
+                    ____t_result_6 = __O[2435]
+                end
+                __O[2436] = ____t_result_6
+                if ____t_7(____t_result_6) then
+                    ____t_result_8 = button:contains(window.document:elementFromPoint(touch.clientX, touch.clientY))
+                else
+                    ____t_result_8 = __O[2436]
+                end
+                if ____t_9(____t_result_8) then
                     activate(nil)
                 end
             end,
@@ -85,30 +102,30 @@ local __O = {};
         nil,
         next,
         function()
-            local ____opt_10 = window.Game
-            if ____opt_10 ~= nil then
-                ____opt_10 = ____opt_10.advanceDialogue
+            local ____opt_12 = window.Game
+            if ____opt_12 ~= nil then
+                ____opt_12 = ____opt_12.advanceDialogue
             end
-            local ____opt_result_12
-            if ____opt_10 ~= nil then
-                ____opt_result_12 = ____opt_10(____opt_10)
+            local ____opt_result_14
+            if ____opt_12 ~= nil then
+                ____opt_result_14 = ____opt_12(____opt_12)
             end
-            return ____opt_result_12
+            return ____opt_result_14
         end
     )
     bindControl(
         nil,
         close,
         function()
-            local ____opt_15 = window.Game
-            if ____opt_15 ~= nil then
-                ____opt_15 = ____opt_15.closeDialogue
+            local ____opt_17 = window.Game
+            if ____opt_17 ~= nil then
+                ____opt_17 = ____opt_17.closeDialogue
             end
-            local ____opt_result_17
-            if ____opt_15 ~= nil then
-                ____opt_result_17 = ____opt_15(____opt_15, false)
+            local ____opt_result_19
+            if ____opt_17 ~= nil then
+                ____opt_result_19 = ____opt_17(____opt_17, false)
             end
-            return ____opt_result_17
+            return ____opt_result_19
         end
     )
     local prior = ""
@@ -122,7 +139,13 @@ local __O = {};
         local v = viewport:getBoundingClientRect()
         local r = canvas:getBoundingClientRect()
         local contain = window:getComputedStyle(canvas).objectFit == "contain"
-        local scale = if __t(contain) then math.min(r.width / 960, r.height / 540) else r.width / 960
+        local ____t_result_20
+        if __t(contain) then
+            ____t_result_20 = math.min(r.width / 960, r.height / 540)
+        else
+            ____t_result_20 = r.width / 960
+        end
+        local scale = ____t_result_20
         local w = 960 * scale
         local h = 540 * scale
         return {v = v, scale = scale, ox = r.left - v.left + (r.width - w) / 2, oy = r.top - v.top + (r.height - h) / 2}
@@ -133,25 +156,61 @@ local __O = {};
         local vh = b.v.height
         local leftGutter = math.max(0, b.ox)
         local rightGutter = math.max(0, vw - b.ox - 960 * b.scale)
-        local ____lt_19 = __lt
-        local ____anchor_x_18 = anchor.x
-        if ____anchor_x_18 == nil then
-            ____anchor_x_18 = 480
+        local ____lt_22 = __lt
+        local ____anchor_x_21 = anchor.x
+        if ____anchor_x_21 == nil then
+            ____anchor_x_21 = 480
         end
-        local onLeft = ____lt_19(____anchor_x_18, 480)
-        local gutter = if __t(onLeft) then leftGutter else rightGutter
-        local ____t_21 = __t
-        local ____temp_20 = if __t(cinematic) then vh < 280 else cinematic
-        __O[2432] = ____temp_20
-        local sideBalloon = if ____t_21(____temp_20) then gutter >= 200 else __O[2432]
-        local wanted = if __t(anchor.width) then anchor.width else 380 * b.scale
-        local width = if __t(sideBalloon) then math.min(230, gutter - 18) else clamp(
-            nil,
-            wanted,
-            math.min(210, vw - 24),
-            math.min(370, vw * 0.67)
-        )
-        el.dataset.placement = if __t(sideBalloon) then if __t(onLeft) then "gutter-left" else "gutter-right" else "sky"
+        local onLeft = ____lt_22(____anchor_x_21, 480)
+        local ____t_result_23
+        if __t(onLeft) then
+            ____t_result_23 = leftGutter
+        else
+            ____t_result_23 = rightGutter
+        end
+        local gutter = ____t_result_23
+        local ____t_result_26
+        local ____t_25 = __t
+        local ____t_result_24
+        if __t(cinematic) then
+            ____t_result_24 = vh < 280
+        else
+            ____t_result_24 = cinematic
+        end
+        __O[2437] = ____t_result_24
+        if ____t_25(____t_result_24) then
+            ____t_result_26 = gutter >= 200
+        else
+            ____t_result_26 = __O[2437]
+        end
+        local sideBalloon = ____t_result_26
+        local ____t_result_27
+        if __t(anchor.width) then
+            ____t_result_27 = anchor.width
+        else
+            ____t_result_27 = 380
+        end
+        local wanted = ____t_result_27 * b.scale
+        local ____t_result_28
+        if __t(sideBalloon) then
+            ____t_result_28 = math.min(230, gutter - 18)
+        else
+            ____t_result_28 = clamp(
+                nil,
+                wanted,
+                math.min(210, vw - 24),
+                math.min(370, vw * 0.67)
+            )
+        end
+        local width = ____t_result_28
+        local ____el_dataset_30 = el.dataset
+        local ____t_result_29
+        if __t(sideBalloon) then
+            ____t_result_29 = __t(onLeft) and "gutter-left" or "gutter-right"
+        else
+            ____t_result_29 = "sky"
+        end
+        ____el_dataset_30.placement = ____t_result_29
         el.style.width = __add(
             math.floor(width + 0.5),
             "px"
@@ -162,39 +221,83 @@ local __O = {};
         el.style.bottom = "auto"
         el.style.right = "auto"
         local h = el:getBoundingClientRect().height
-        local ____b_ox_23 = b.ox
-        local ____anchor_x_22 = anchor.x
-        if ____anchor_x_22 == nil then
-            ____anchor_x_22 = 480
+        local ____t_result_34
+        if __t(sideBalloon) then
+            local ____t_result_31
+            if __t(onLeft) then
+                ____t_result_31 = leftGutter / 2
+            else
+                ____t_result_31 = vw - rightGutter / 2
+            end
+            ____t_result_34 = ____t_result_31
+        else
+            local ____b_ox_33 = b.ox
+            local ____anchor_x_32 = anchor.x
+            if ____anchor_x_32 == nil then
+                ____anchor_x_32 = 480
+            end
+            ____t_result_34 = ____b_ox_33 + ____anchor_x_32 * b.scale
         end
-        local x = if __t(sideBalloon) then if __t(onLeft) then leftGutter / 2 else vw - rightGutter / 2 else ____b_ox_23 + ____anchor_x_22 * b.scale
-        local ____b_oy_25 = b.oy
-        local ____anchor_y_24 = anchor.y
-        if ____anchor_y_24 == nil then
-            ____anchor_y_24 = 65
+        local x = ____t_result_34
+        local ____t_result_39
+        if __t(cinematic) then
+            local ____b_oy_36 = b.oy
+            local ____anchor_y_35 = anchor.y
+            if ____anchor_y_35 == nil then
+                ____anchor_y_35 = 65
+            end
+            ____t_result_39 = ____b_oy_36 + ____anchor_y_35 * b.scale
+        else
+            local ____b_oy_38 = b.oy
+            local ____anchor_y_37 = anchor.y
+            if ____anchor_y_37 == nil then
+                ____anchor_y_37 = 330
+            end
+            ____t_result_39 = ____b_oy_38 + ____anchor_y_37 * b.scale - h - 18
         end
-        local ____b_oy_27 = b.oy
-        local ____anchor_y_26 = anchor.y
-        if ____anchor_y_26 == nil then
-            ____anchor_y_26 = 330
+        local y = ____t_result_39
+        local ____t_result_45
+        if __t(cinematic) then
+            local ____t_result_44
+            local ____t_43 = __t
+            local ____opt_40 = window.document:querySelector(".cinematic-heading")
+            local ____temp_42 = ____opt_40 and ____opt_40:getBoundingClientRect().height
+            __O[2438] = ____temp_42
+            if ____t_43(____temp_42) then
+                ____t_result_44 = __O[2438]
+            else
+                ____t_result_44 = 20
+            end
+            ____t_result_45 = ____t_result_44
+        else
+            ____t_result_45 = 0
         end
-        local y = if __t(cinematic) then ____b_oy_25 + ____anchor_y_24 * b.scale else ____b_oy_27 + ____anchor_y_26 * b.scale - h - 18
-        local ____t_31 = __t
-        local ____opt_28 = window.document:querySelector(".cinematic-heading")
-        local ____temp_30 = ____opt_28 and ____opt_28:getBoundingClientRect().height
-        __O[2433] = ____temp_30
-        local header = if __t(cinematic) then if ____t_31(____temp_30) then __O[2433] else 20 else 0
-        local controlsSpace = if __t(cinematic) then 47 else math.max(
+        local header = ____t_result_45
+        local controlsSpace = __t(cinematic) and 47 or math.max(
             47,
             controls:getBoundingClientRect().height + 22
         )
-        if __t(if __t(cinematic) then b.oy > 30 else cinematic) then
+        local ____t_47 = __t
+        local ____t_result_46
+        if __t(cinematic) then
+            ____t_result_46 = b.oy > 30
+        else
+            ____t_result_46 = cinematic
+        end
+        if ____t_47(____t_result_46) then
             y = math.max(header + 22, b.oy - h - 12)
+        end
+        local ____y_49 = y
+        local ____t_result_48
+        if __t(cinematic) then
+            ____t_result_48 = header + 18
+        else
+            ____t_result_48 = 10
         end
         y = clamp(
             nil,
-            y,
-            if __t(cinematic) then header + 18 else 10,
+            ____y_49,
+            ____t_result_48,
             math.max(12, vh - h - controlsSpace)
         )
         x = clamp(nil, x, 8 + width / 2, vw - 8 - width / 2)
@@ -206,22 +309,22 @@ local __O = {};
             math.floor(y + 0.5),
             "px"
         )
-        local ____b_ox_34 = b.ox
-        local ____anchor_speakerX_32 = anchor.speakerX
-        if ____anchor_speakerX_32 == nil then
-            ____anchor_speakerX_32 = anchor.x
+        local ____b_ox_52 = b.ox
+        local ____anchor_speakerX_50 = anchor.speakerX
+        if ____anchor_speakerX_50 == nil then
+            ____anchor_speakerX_50 = anchor.x
         end
-        local ____anchor_speakerX_32_33 = ____anchor_speakerX_32
-        if ____anchor_speakerX_32_33 == nil then
-            ____anchor_speakerX_32_33 = 480
+        local ____anchor_speakerX_50_51 = ____anchor_speakerX_50
+        if ____anchor_speakerX_50_51 == nil then
+            ____anchor_speakerX_50_51 = 480
         end
-        local speakerX = ____b_ox_34 + ____anchor_speakerX_32_33 * b.scale
-        local ____b_oy_36 = b.oy
-        local ____anchor_speakerY_35 = anchor.speakerY
-        if ____anchor_speakerY_35 == nil then
-            ____anchor_speakerY_35 = 300
+        local speakerX = ____b_ox_52 + ____anchor_speakerX_50_51 * b.scale
+        local ____b_oy_54 = b.oy
+        local ____anchor_speakerY_53 = anchor.speakerY
+        if ____anchor_speakerY_53 == nil then
+            ____anchor_speakerY_53 = 300
         end
-        local speakerY = ____b_oy_36 + ____anchor_speakerY_35 * b.scale
+        local speakerY = ____b_oy_54 + ____anchor_speakerY_53 * b.scale
         el.style:setProperty(
             "--tail-left",
             __add(
@@ -236,94 +339,165 @@ local __O = {};
                 "px"
             )
         )
-        el.dataset.tail = if __t(anchor.tail) then anchor.tail else if speakerX < x then "left" else "right"
-        local ____el_dataset_39 = el.dataset
-        local ____t_38 = __t
-        local ____temp_37 = if __t(anchor.type) then anchor.type else anchor.speaker
-        __O[2434] = ____temp_37
-        ____el_dataset_39.speaker = if ____t_38(____temp_37) then __O[2434] else ""
+        local ____el_dataset_56 = el.dataset
+        local ____t_result_55
+        if __t(anchor.tail) then
+            ____t_result_55 = anchor.tail
+        else
+            ____t_result_55 = speakerX < x and "left" or "right"
+        end
+        ____el_dataset_56.tail = ____t_result_55
+        local ____el_dataset_60 = el.dataset
+        local ____t_result_59
+        local ____t_58 = __t
+        local ____t_result_57
+        if __t(anchor.type) then
+            ____t_result_57 = anchor.type
+        else
+            ____t_result_57 = anchor.speaker
+        end
+        __O[2439] = ____t_result_57
+        if ____t_58(____t_result_57) then
+            ____t_result_59 = __O[2439]
+        else
+            ____t_result_59 = ""
+        end
+        ____el_dataset_60.speaker = ____t_result_59
     end
     local function tick(self)
-        local ____t_51 = __t
-        local ____t_45 = __t
-        local ____opt_42 = window.Campanha2
-        if ____opt_42 ~= nil then
-            ____opt_42 = ____opt_42.aberto
+        local ____t_73 = __t
+        local ____t_result_72
+        local ____t_66 = __t
+        local ____opt_63 = window.Campanha2
+        if ____opt_63 ~= nil then
+            ____opt_63 = ____opt_63.aberto
         end
-        local ____opt_result_44
-        if ____opt_42 ~= nil then
-            ____opt_result_44 = ____opt_42(____opt_42)
+        local ____opt_result_65
+        if ____opt_63 ~= nil then
+            ____opt_result_65 = ____opt_63(____opt_63)
         end
-        __O[2435] = ____opt_result_44
-        local ____opt_48 = window.Fliperama
-        if ____opt_48 ~= nil then
-            ____opt_48 = ____opt_48.isOpen
+        __O[2440] = ____opt_result_65
+        if ____t_66(____opt_result_65) then
+            ____t_result_72 = __O[2440]
+        else
+            local ____opt_69 = window.Fliperama
+            if ____opt_69 ~= nil then
+                ____opt_69 = ____opt_69.isOpen
+            end
+            local ____opt_result_71
+            if ____opt_69 ~= nil then
+                ____opt_result_71 = ____opt_69(____opt_69)
+            end
+            ____t_result_72 = ____opt_result_71
         end
-        local ____opt_result_50
-        if ____opt_48 ~= nil then
-            ____opt_result_50 = ____opt_48(____opt_48)
-        end
-        if ____t_51(if ____t_45(____opt_result_44) then __O[2435] else ____opt_result_50) then
+        if ____t_73(____t_result_72) then
             window:requestAnimationFrame(tick)
             return
         end
-        local ____t_57 = __t
-        local ____opt_54 = window.Game
-        if ____opt_54 ~= nil then
-            ____opt_54 = ____opt_54.getDialogueView
+        local ____t_result_85
+        local ____t_79 = __t
+        local ____opt_76 = window.Game
+        if ____opt_76 ~= nil then
+            ____opt_76 = ____opt_76.getDialogueView
         end
-        local ____opt_result_56
-        if ____opt_54 ~= nil then
-            ____opt_result_56 = ____opt_54(____opt_54)
+        local ____opt_result_78
+        if ____opt_76 ~= nil then
+            ____opt_result_78 = ____opt_76(____opt_76)
         end
-        __O[2436] = ____opt_result_56
-        local ____opt_60 = window.Game
-        if ____opt_60 ~= nil then
-            ____opt_60 = ____opt_60.getState
+        __O[2441] = ____opt_result_78
+        if ____t_79(____opt_result_78) then
+            ____t_result_85 = __O[2441]
+        else
+            local ____opt_82 = window.Game
+            if ____opt_82 ~= nil then
+                ____opt_82 = ____opt_82.getState
+            end
+            local ____opt_result_84
+            if ____opt_82 ~= nil then
+                ____opt_result_84 = ____opt_82(____opt_82)
+            end
+            ____t_result_85 = ____opt_result_84
         end
-        local ____opt_result_62
-        if ____opt_60 ~= nil then
-            ____opt_result_62 = ____opt_60(____opt_60)
-        end
-        local state = if ____t_57(____opt_result_56) then __O[2436] else ____opt_result_62
+        local state = ____t_result_85
         if __t(state) then
-            local ____t_64 = __t
-            local ____temp_63 = not not __t(state.dialog) and not __t(state.paused)
-            __O[2437] = ____temp_63
-            local active = if ____t_64(____temp_63) then not __t(state.cutscene) else __O[2437]
+            local ____t_result_88
+            local ____t_87 = __t
+            local ____temp_86 = not not __t(state.dialog) and not __t(state.paused)
+            __O[2442] = ____temp_86
+            if ____t_87(____temp_86) then
+                ____t_result_88 = not __t(state.cutscene)
+            else
+                ____t_result_88 = __O[2442]
+            end
+            local active = ____t_result_88
             normal.hidden = not __t(active)
             controls.hidden = not __t(active)
             if __t(active) then
-                local ____t_67 = __t
-                local ____this_66
-                ____this_66 = window.Game
-                local ____opt_65 = ____this_66.getDialogueAnchor
-                if ____opt_65 ~= nil then
-                    ____opt_65 = ____opt_65(____this_66)
+                local ____t_result_92
+                local ____t_91 = __t
+                local ____this_90
+                ____this_90 = window.Game
+                local ____opt_89 = ____this_90.getDialogueAnchor
+                if ____opt_89 ~= nil then
+                    ____opt_89 = ____opt_89(____this_90)
                 end
-                __O[2438] = ____opt_65
-                local a = if ____t_67(____opt_65) then __O[2438] else {x = 480, y = 300, speakerX = 480}
+                __O[2443] = ____opt_89
+                if ____t_91(____opt_89) then
+                    ____t_result_92 = __O[2443]
+                else
+                    ____t_result_92 = {x = 480, y = 300, speakerX = 480}
+                end
+                local a = ____t_result_92
                 position(nil, normal, a, false)
             end
-            local ____t_70 = __t
-            local ____t_69 = __t
-            local ____temp_68 = if __t(film) then state.cutscene else film
-            __O[2439] = ____temp_68
-            if ____t_70(if ____t_69(____temp_68) then not __t(state.paused) else __O[2439]) then
-                local ____t_76 = __t
-                local ____opt_73 = window.Cinematics
-                if ____opt_73 ~= nil then
-                    ____opt_73 = ____opt_73.anchor
+            local ____t_96 = __t
+            local ____t_result_95
+            local ____t_94 = __t
+            local ____t_result_93
+            if __t(film) then
+                ____t_result_93 = state.cutscene
+            else
+                ____t_result_93 = film
+            end
+            __O[2444] = ____t_result_93
+            if ____t_94(____t_result_93) then
+                ____t_result_95 = not __t(state.paused)
+            else
+                ____t_result_95 = __O[2444]
+            end
+            if ____t_96(____t_result_95) then
+                local ____t_result_103
+                local ____t_102 = __t
+                local ____opt_99 = window.Cinematics
+                if ____opt_99 ~= nil then
+                    ____opt_99 = ____opt_99.anchor
                 end
-                local ____opt_result_75
-                if ____opt_73 ~= nil then
-                    ____opt_result_75 = ____opt_73(____opt_73, state.cutscene)
+                local ____opt_result_101
+                if ____opt_99 ~= nil then
+                    ____opt_result_101 = ____opt_99(____opt_99, state.cutscene)
                 end
-                __O[2440] = ____opt_result_75
-                local a = if ____t_76(____opt_result_75) then __O[2440] else {x = 300, y = 65, width = 400, speakerX = 300}
+                __O[2445] = ____opt_result_101
+                if ____t_102(____opt_result_101) then
+                    ____t_result_103 = __O[2445]
+                else
+                    ____t_result_103 = {x = 300, y = 65, width = 400, speakerX = 300}
+                end
+                local a = ____t_result_103
                 position(nil, film, a, true)
             end
-            local key = __add(if __t(active) then "d" else "", if __t(if __t(state.cutscene) then not __t(state.paused) else state.cutscene) then "c" else "")
+            local ____add_107 = __add
+            local ____temp_106 = __t(active) and "d" or ""
+            local ____t_105 = __t
+            local ____t_result_104
+            if __t(state.cutscene) then
+                ____t_result_104 = not __t(state.paused)
+            else
+                ____t_result_104 = state.cutscene
+            end
+            local key = ____add_107(
+                ____temp_106,
+                ____t_105(____t_result_104) and "c" or ""
+            )
             if key ~= prior then
                 prior = key
                 viewport.classList:toggle(

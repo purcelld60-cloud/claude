@@ -1115,7 +1115,7 @@ end
 local Error, RangeError, ReferenceError, SyntaxError, TypeError, URIError
 do
     local function getErrorStack(self, constructor)
-        if debug == nil then
+        if debug == nil or debug.getinfo == nil then
             return nil
         end
         local level = 1
@@ -1143,7 +1143,7 @@ do
     local function wrapErrorToString(self, getDescription)
         return function(self)
             local description = getDescription(self)
-            local caller = debug.getinfo(3, "f")
+            local caller = debug.getinfo and debug.getinfo(3, "f")
             local isClassicLua = __TS__StringIncludes(_VERSION, "Lua 5.0")
             if isClassicLua or caller and caller.func ~= error then
                 return description

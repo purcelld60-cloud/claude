@@ -13,11 +13,17 @@ local ____exports = {}
 local __O = {};
 (function()
     local ____ = "use strict"
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawCharacter)
-    __O[668] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[668] else window.CharDetail) then
+    __O[673] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[673]
+    else
+        ____t_result_2 = window.CharDetail
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     local original = window.Art.drawCharacter
@@ -68,31 +74,63 @@ local __O = {};
         if o == nil then
             o = {}
         end
+        local ____t_21 = __t
+        local ____t_result_20
         local ____t_18 = __t
-        local ____t_17 = __t
-        local ____t_15 = __t
-        local ____t_13 = __t
-        local ____t_11 = __t
-        local ____t_4 = __t
-        local ____temp_3 = not __t(enabled)
-        __O[669] = ____temp_3
-        local ____opt_7 = window.Graphics
-        if ____opt_7 ~= nil then
-            ____opt_7 = ____opt_7.isLite
+        local ____t_result_17
+        local ____t_16 = __t
+        local ____t_result_15
+        local ____t_14 = __t
+        local ____t_result_13
+        local ____t_12 = __t
+        local ____t_result_11
+        local ____t_5 = __t
+        local ____temp_4 = not __t(enabled)
+        __O[674] = ____temp_4
+        if ____t_5(____temp_4) then
+            ____t_result_11 = __O[674]
+        else
+            local ____opt_8 = window.Graphics
+            if ____opt_8 ~= nil then
+                ____opt_8 = ____opt_8.isLite
+            end
+            local ____opt_result_10
+            if ____opt_8 ~= nil then
+                ____opt_result_10 = ____opt_8(____opt_8)
+            end
+            ____t_result_11 = ____opt_result_10
         end
-        local ____opt_result_9
-        if ____opt_7 ~= nil then
-            ____opt_result_9 = ____opt_7(____opt_7)
+        __O[675] = ____t_result_11
+        if ____t_12(____t_result_11) then
+            ____t_result_13 = __O[675]
+        else
+            ____t_result_13 = __call(SKIP, "has", ____type)
         end
-        local ____temp_10 = if ____t_4(____temp_3) then __O[669] else ____opt_result_9
-        __O[670] = ____temp_10
-        local ____temp_12 = if ____t_11(____temp_10) then __O[670] else __call(SKIP, "has", ____type)
-        __O[671] = ____temp_12
-        local ____temp_14 = if ____t_13(____temp_12) then __O[671] else ____type == "nikolas" and __TS__Number(o.bossPhase) >= 2
-        __O[672] = ____temp_14
-        local ____temp_16 = if ____t_15(____temp_14) then __O[672] else ____type == "reeisBoss"
-        __O[673] = ____temp_16
-        if ____t_18(if ____t_17(____temp_16) then __O[673] else if __t(o.transformed) then ____type == "reeis" else o.transformed) then
+        __O[676] = ____t_result_13
+        if ____t_14(____t_result_13) then
+            ____t_result_15 = __O[676]
+        else
+            ____t_result_15 = ____type == "nikolas" and __TS__Number(o.bossPhase) >= 2
+        end
+        __O[677] = ____t_result_15
+        if ____t_16(____t_result_15) then
+            ____t_result_17 = __O[677]
+        else
+            ____t_result_17 = ____type == "reeisBoss"
+        end
+        __O[678] = ____t_result_17
+        if ____t_18(____t_result_17) then
+            ____t_result_20 = __O[678]
+        else
+            local ____t_result_19
+            if __t(o.transformed) then
+                ____t_result_19 = ____type == "reeis"
+            else
+                ____t_result_19 = o.transformed
+            end
+            ____t_result_20 = ____t_result_19
+        end
+        if ____t_21(____t_result_20) then
             return original(
                 nil,
                 c,
@@ -124,7 +162,14 @@ local __O = {};
                 return ____returnValue
             end
         end
-        local scale = __hypot(m.a, m.b) * if __t(o.scale) then o.scale else 1
+        local ____hypot_result_23 = __hypot(m.a, m.b)
+        local ____t_result_22
+        if __t(o.scale) then
+            ____t_result_22 = o.scale
+        else
+            ____t_result_22 = 1
+        end
+        local scale = ____hypot_result_23 * ____t_result_22
         if scale < 0.55 then
             return original(
                 nil,
@@ -136,17 +181,30 @@ local __O = {};
             )
         end
         local sx = m.a * x + m.c * y + m.e
-        local ____t_21 = __t
-        local ____opt_19 = c.canvas
-        if ____opt_19 ~= nil then
-            ____opt_19 = ____opt_19.width
+        local ____t_result_27
+        local ____t_26 = __t
+        local ____opt_24 = c.canvas
+        if ____opt_24 ~= nil then
+            ____opt_24 = ____opt_24.width
         end
-        __O[674] = ____opt_19
-        local cw = if ____t_21(____opt_19) then __O[674] else 960
+        __O[679] = ____opt_24
+        if ____t_26(____opt_24) then
+            ____t_result_27 = __O[679]
+        else
+            ____t_result_27 = 960
+        end
+        local cw = ____t_result_27
         if __t(__lt(sx, -260) or __gt(sx, cw + 260)) then
             return
         end
-        if __gt(if __t(o.scale) then o.scale else 1, 1.25) then
+        local ____gt_29 = __gt
+        local ____t_result_28
+        if __t(o.scale) then
+            ____t_result_28 = o.scale
+        else
+            ____t_result_28 = 1
+        end
+        if ____gt_29(____t_result_28, 1.25) then
             return original(
                 nil,
                 c,
@@ -156,41 +214,99 @@ local __O = {};
                 o
             )
         end
-        local ____t_30 = __t
-        local ____t_29 = __t
-        local ____t_27 = __t
-        local ____t_25 = __t
-        local ____t_23 = __t
-        local ____temp_22 = if __t(o.cache) then math.abs(m.a - 1) < 0.01 else o.cache
-        __O[675] = ____temp_22
-        local ____temp_24 = if ____t_23(____temp_22) then math.abs(m.d - 1) < 0.01 else __O[675]
-        __O[676] = ____temp_24
-        local ____temp_26 = if ____t_25(____temp_24) then not __t(m.b) else __O[676]
-        __O[677] = ____temp_26
-        local ____temp_28 = if ____t_27(____temp_26) then not __t(m.c) else __O[677]
-        __O[678] = ____temp_28
-        local ck = if ____t_30(if ____t_29(____temp_28) then not __t(o.hit) else __O[678]) then __add(
-            __add(
-                __add(
-                    __add(
-                        __add(
-                            __add(____type, "|"),
-                            if __lt(if __t(o.facing) then o.facing else 1, 0) then -1 else 1
-                        ),
-                        "|"
-                    ),
-                    __mod(
-                        __mod(
-                            math.floor(if __t(o.frame) then o.frame else 0 * 3),
+        local ____t_result_54
+        local ____t_39 = __t
+        local ____t_result_38
+        local ____t_37 = __t
+        local ____t_result_36
+        local ____t_35 = __t
+        local ____t_result_34
+        local ____t_33 = __t
+        local ____t_result_32
+        local ____t_31 = __t
+        local ____t_result_30
+        if __t(o.cache) then
+            ____t_result_30 = math.abs(m.a - 1) < 0.01
+        else
+            ____t_result_30 = o.cache
+        end
+        __O[680] = ____t_result_30
+        if ____t_31(____t_result_30) then
+            ____t_result_32 = math.abs(m.d - 1) < 0.01
+        else
+            ____t_result_32 = __O[680]
+        end
+        __O[681] = ____t_result_32
+        if ____t_33(____t_result_32) then
+            ____t_result_34 = not __t(m.b)
+        else
+            ____t_result_34 = __O[681]
+        end
+        __O[682] = ____t_result_34
+        if ____t_35(____t_result_34) then
+            ____t_result_36 = not __t(m.c)
+        else
+            ____t_result_36 = __O[682]
+        end
+        __O[683] = ____t_result_36
+        if ____t_37(____t_result_36) then
+            ____t_result_38 = not __t(o.hit)
+        else
+            ____t_result_38 = __O[683]
+        end
+        if ____t_39(____t_result_38) then
+            local ____add_53 = __add
+            local ____add_50 = __add
+            local ____add_49 = __add
+            local ____add_44 = __add
+            local ____add_43 = __add
+            local ____add_result_42 = __add(____type, "|")
+            local ____lt_41 = __lt
+            local ____t_result_40
+            if __t(o.facing) then
+                ____t_result_40 = o.facing
+            else
+                ____t_result_40 = 1
+            end
+            local ____add_44_result_48 = ____add_44(
+                ____add_43(
+                    ____add_result_42,
+                    ____lt_41(____t_result_40, 0) and -1 or 1
+                ),
+                "|"
+            )
+            local ____mod_47 = __mod
+            local ____mod_46 = __mod
+            local ____t_result_45
+            if __t(o.frame) then
+                ____t_result_45 = o.frame
+            else
+                ____t_result_45 = 0
+            end
+            local ____add_50_result_52 = ____add_50(
+                ____add_49(
+                    ____add_44_result_48,
+                    ____mod_47(
+                        ____mod_46(
+                            math.floor(____t_result_45 * 3),
                             6
                         ) + 6,
                         6
                     )
                 ),
                 "|"
-            ),
-            if __t(o.scale) then o.scale else 1
-        ) else nil
+            )
+            local ____t_result_51
+            if __t(o.scale) then
+                ____t_result_51 = o.scale
+            else
+                ____t_result_51 = 1
+            end
+            ____t_result_54 = ____add_53(____add_50_result_52, ____t_result_51)
+        else
+            ____t_result_54 = nil
+        end
+        local ck = ____t_result_54
         if __t(ck) then
             local hit = __call(CACHE, "get", ck)
             if __t(hit) then
@@ -204,10 +320,19 @@ local __O = {};
                 c:restore()
                 return
             end
-            o = __assign(
-                {},
-                o,
-                {frame = math.floor(if __t(o.frame) then o.frame else 0 * 3) / 3}
+            local ____assign_58 = __assign
+            local ____temp_56 = {}
+            local ____o_57 = o
+            local ____t_result_55
+            if __t(o.frame) then
+                ____t_result_55 = o.frame
+            else
+                ____t_result_55 = 0
+            end
+            o = ____assign_58(
+                ____temp_56,
+                ____o_57,
+                {frame = math.floor(____t_result_55 * 3) / 3}
             )
         end
         sprite:setTransform(
@@ -236,7 +361,14 @@ local __O = {};
         g:addColorStop(1, "rgba(24,18,28,.20)")
         sprite.fillStyle = g
         sprite:fillRect(0, 0, W, H)
-        local face = if __lt(if __t(o.facing) then o.facing else 1, 0) then -1 else 1
+        local ____lt_60 = __lt
+        local ____t_result_59
+        if __t(o.facing) then
+            ____t_result_59 = o.facing
+        else
+            ____t_result_59 = 1
+        end
+        local face = ____lt_60(____t_result_59, 0) and -1 or 1
         local key = sprite:createRadialGradient(
             OX + face * 16,
             OY - 96,

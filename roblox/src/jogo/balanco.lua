@@ -3,7 +3,6 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __callq, __mod, __ord, __arrL, __t, __get, __call, __add, __new, __hypot = __JSR.__callq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__t, __JSR.__get, __JSR.__call, __JSR.__add, __JSR.__new, __JSR.__hypot
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Number = ____lualib.__TS__Number
@@ -17,28 +16,33 @@ local __O = {};
             return
         end
         active = false
-        ui.hidden = true
-        local ____ = if __t(ui) then true else ui
+        local ____t_result_18
+        if __t(ui) then
+            ui.hidden = true
+            ____t_result_18 = true
+        else
+            ____t_result_18 = ui
+        end
         do
             pcall(function()
-                local ____opt_19 = window.DayTime
-                if ____opt_19 ~= nil then
-                    ____opt_19 = ____opt_19.force
+                local ____opt_21 = window.DayTime
+                if ____opt_21 ~= nil then
+                    ____opt_21 = ____opt_21.force
                 end
-                if ____opt_19 ~= nil then
-                    ____opt_19(____opt_19, nil)
+                if ____opt_21 ~= nil then
+                    ____opt_21(____opt_21, nil)
                 end
             end)
         end
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-        local ____opt_21 = window.document:getElementById("gameShell")
-        if ____opt_21 ~= nil then
-            ____opt_21.classList:remove("is-balanco")
-        end
-        local ____opt_25 = window.document:getElementById("gameCanvas")
-        local ____opt_23 = ____opt_25 and ____opt_25.focus
+        local ____opt_23 = window.document:getElementById("gameShell")
         if ____opt_23 ~= nil then
-            ____opt_23(____opt_25)
+            ____opt_23.classList:remove("is-balanco")
+        end
+        local ____opt_27 = window.document:getElementById("gameCanvas")
+        local ____opt_25 = ____opt_27 and ____opt_27.focus
+        if ____opt_25 ~= nil then
+            ____opt_25(____opt_27)
         end
     end
     local ____ = "use strict"
@@ -90,23 +94,34 @@ local __O = {};
             ui.className = "balanco-ui"
             ui.innerHTML = "<span class=\"bl-hora\"></span><button type=\"button\" class=\"bl-sair\">LEVANTAR</button>"
             ui:querySelector(".bl-sair"):addEventListener("click", leave)
+            local ____t_result_13
             local ____t_12 = __t
+            local ____t_result_11
             local ____t_10 = __t
             local ____temp_9 = window.document:getElementById("gameViewport")
             __O[350] = ____temp_9
-            local ____temp_11 = if ____t_10(____temp_9) then __O[350] else window.document:getElementById("gameShell")
-            __O[351] = ____temp_11
-            __D[1] = if ____t_12(____temp_11) then __O[351] else window.document.body:append(ui)
+            if ____t_10(____temp_9) then
+                ____t_result_11 = __O[350]
+            else
+                ____t_result_11 = window.document:getElementById("gameShell")
+            end
+            __O[351] = ____t_result_11
+            if ____t_12(____t_result_11) then
+                ____t_result_13 = __O[351]
+            else
+                ____t_result_13 = window.document.body
+            end
+            ____t_result_13:append(ui)
         end
         ui.hidden = false
         do
             pcall(function()
-                local ____opt_15 = window.DarocaAudio
-                if ____opt_15 ~= nil then
-                    ____opt_15 = ____opt_15.play
+                local ____opt_16 = window.DarocaAudio
+                if ____opt_16 ~= nil then
+                    ____opt_16 = ____opt_16.play
                 end
-                if ____opt_15 ~= nil then
-                    ____opt_15(____opt_15, "porta", {volume = 0.4})
+                if ____opt_16 ~= nil then
+                    ____opt_16(____opt_16, "porta", {volume = 0.4})
                 end
             end)
         end
@@ -146,38 +161,67 @@ local __O = {};
         return a + (b - a) * k
     end
     local function draw(self, ctx, o)
-        local ____t_31 = __t
+        local ____t_34 = __t
+        local ____t_result_33
+        local ____t_32 = __t
+        local ____t_result_31
         local ____t_30 = __t
-        local ____t_28 = __t
-        local ____temp_27 = o.scene ~= SCENE
-        __O[352] = ____temp_27
-        local ____temp_29 = if ____t_28(____temp_27) then __O[352] else o.arena
-        __O[353] = ____temp_29
-        if ____t_31(if ____t_30(____temp_29) then __O[353] else o.room) then
+        local ____temp_29 = o.scene ~= SCENE
+        __O[352] = ____temp_29
+        if ____t_30(____temp_29) then
+            ____t_result_31 = __O[352]
+        else
+            ____t_result_31 = o.arena
+        end
+        __O[353] = ____t_result_31
+        if ____t_32(____t_result_31) then
+            ____t_result_33 = __O[353]
+        else
+            ____t_result_33 = o.room
+        end
+        if ____t_34(____t_result_33) then
             if __t(active) then
                 leave(nil)
             end
             return
         end
-        local ____t_33 = __t
-        local ____TS__Number_result_32 = __TS__Number(o.time)
-        __O[354] = ____TS__Number_result_32
-        local t = if ____t_33(____TS__Number_result_32) then __O[354] else 0
+        local ____t_result_37
+        local ____t_36 = __t
+        local ____TS__Number_result_35 = __TS__Number(o.time)
+        __O[354] = ____TS__Number_result_35
+        if ____t_36(____TS__Number_result_35) then
+            ____t_result_37 = __O[354]
+        else
+            ____t_result_37 = 0
+        end
+        local t = ____t_result_37
         local dt = math.max(
             0,
             math.min(0.05, t - lastT)
         )
         lastT = t
-        local target = if __t(active) then 0.42 else 0.04 + math.sin(t * 0.4) * 0.02
+        local target = __t(active) and 0.42 or 0.04 + math.sin(t * 0.4) * 0.02
         local amp = math.abs(theta) + math.abs(omega) / 3.9
         omega = omega + -(9.8 / (ROPE / 40)) * math.sin(theta) * dt
-        omega = omega * if __t(active) then 1 else 0.995
-        local ____t_36 = __t
-        local ____t_35 = __t
-        local ____temp_34 = amp < target and __TS__MathSign(omega) == __TS__MathSign(theta)
-        __O[355] = ____temp_34
-        if ____t_36(if ____t_35(____temp_34) then __O[355] else amp < 0.02) then
-            omega = omega + __TS__MathSign(if __t(omega) then omega else 1) * 0.5 * dt
+        omega = omega * (__t(active) and 1 or 0.995)
+        local ____t_41 = __t
+        local ____t_result_40
+        local ____t_39 = __t
+        local ____temp_38 = amp < target and __TS__MathSign(omega) == __TS__MathSign(theta)
+        __O[355] = ____temp_38
+        if ____t_39(____temp_38) then
+            ____t_result_40 = __O[355]
+        else
+            ____t_result_40 = amp < 0.02
+        end
+        if ____t_41(____t_result_40) then
+            local ____t_result_42
+            if __t(omega) then
+                ____t_result_42 = omega
+            else
+                ____t_result_42 = 1
+            end
+            omega = omega + __TS__MathSign(____t_result_42) * 0.5 * dt
         end
         if amp > target + 0.05 then
             omega = omega * 0.99
@@ -200,7 +244,7 @@ local __O = {};
                 local i = 0
                 while i <= n do
                     local k = i / n
-                    ctx.fillStyle = if __t(__mod(i, 3)) then "#e2cc96" else "#a8885a"
+                    ctx.fillStyle = __t(__mod(i, 3)) and "#e2cc96" or "#a8885a"
                     ctx:fillRect(
                         math.floor(lerp(nil, x0, x1, k) / 2 + 0.5) * 2,
                         math.floor(lerp(nil, y0, y1, k) / 2 + 0.5) * 2,
@@ -241,13 +285,13 @@ local __O = {};
             local function heroi(____, x, y)
                 do
                     pcall(function()
-                        local ____opt_39 = window.Art
-                        if ____opt_39 ~= nil then
-                            ____opt_39 = ____opt_39.drawCharacter
+                        local ____opt_45 = window.Art
+                        if ____opt_45 ~= nil then
+                            ____opt_45 = ____opt_45.drawCharacter
                         end
-                        if ____opt_39 ~= nil then
-                            ____opt_39(
-                                ____opt_39,
+                        if ____opt_45 ~= nil then
+                            ____opt_45(
+                                ____opt_45,
                                 ctx,
                                 "daroca",
                                 x,
@@ -288,7 +332,7 @@ local __O = {};
                     local k2 = 0
                     while k2 <= 6 do
                         local q = k2 / 6
-                        ctx.fillStyle = if k2 < 3 then "#d9873a" else "#c98a5a"
+                        ctx.fillStyle = k2 < 3 and "#d9873a" or "#c98a5a"
                         ctx:fillRect(
                             math.floor(lerp(nil, ox, mx, q) + 0.5) - 1,
                             math.floor(lerp(nil, oy, my, q) + 0.5) - 1,
@@ -309,12 +353,12 @@ local __O = {};
             hour = __mod(hour + dt * 0.25, 24)
             do
                 pcall(function()
-                    local ____opt_43 = window.DayTime
-                    if ____opt_43 ~= nil then
-                        ____opt_43 = ____opt_43.force
+                    local ____opt_49 = window.DayTime
+                    if ____opt_49 ~= nil then
+                        ____opt_49 = ____opt_49.force
                     end
-                    if ____opt_43 ~= nil then
-                        ____opt_43(____opt_43, hour)
+                    if ____opt_49 ~= nil then
+                        ____opt_49(____opt_49, hour)
                     end
                 end)
             end

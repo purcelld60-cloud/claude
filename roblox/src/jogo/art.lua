@@ -26,13 +26,21 @@ local __O = {};
         __call(
             points,
             "forEach",
-            function(____, p, i) return if __t(i) then c:lineTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) else c:moveTo(
-                __get(p, 0),
-                __get(p, 1)
-            ) end
+            function(____, p, i)
+                local ____t_result_0
+                if __t(i) then
+                    ____t_result_0 = c:lineTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                else
+                    ____t_result_0 = c:moveTo(
+                        __get(p, 0),
+                        __get(p, 1)
+                    )
+                end
+                return ____t_result_0
+            end
         )
         c:closePath()
         __call(c, "fill")
@@ -228,10 +236,16 @@ local __O = {};
                         do
                             local xx = 0
                             while xx < lw do
-                                local pick = if frac * 16 > __get(
+                                local ____temp_1
+                                if frac * 16 > __get(
                                     __L1.BAYER,
                                     __band(yy, 3) * 4 + __band(xx, 3)
-                                ) + 0.5 then __get(cols, i + 1) else __get(cols, i)
+                                ) + 0.5 then
+                                    ____temp_1 = __get(cols, i + 1)
+                                else
+                                    ____temp_1 = __get(cols, i)
+                                end
+                                local pick = ____temp_1
                                 local o = (yy * lw + xx) * 4
                                 __set(
                                     img.data,
@@ -298,10 +312,16 @@ local __O = {};
                                 )
                                 local steps = a * 4
                                 local base = math.floor(steps)
-                                local on = if (steps - base) * 16 > __get(
+                                local ____temp_2
+                                if (steps - base) * 16 > __get(
                                     __L1.BAYER,
                                     __band(yy, 3) * 4 + __band(xx, 3)
-                                ) + 0.5 then base + 1 else base
+                                ) + 0.5 then
+                                    ____temp_2 = base + 1
+                                else
+                                    ____temp_2 = base
+                                end
+                                local on = ____temp_2
                                 local o = (yy * lw + xx) * 4
                                 __set(
                                     img.data,
@@ -342,9 +362,9 @@ local __O = {};
     end
     __L1.farRange = function(self, scene)
         local mood = __L1:skyFor(scene)
-        local far = if mood == "golden" then "#8a84a8" else if mood == "afternoon" then "#7d98bb" else "#78a3c6"
-        local near = if mood == "golden" then "#6f6b92" else if mood == "afternoon" then "#64819f" else "#5f8fb3"
-        local snow = if mood == "golden" then "#f0c9b0" else "#e6f0f4"
+        local far = mood == "golden" and "#8a84a8" or (mood == "afternoon" and "#7d98bb" or "#78a3c6")
+        local near = mood == "golden" and "#6f6b92" or (mood == "afternoon" and "#64819f" or "#5f8fb3")
+        local snow = mood == "golden" and "#f0c9b0" or "#e6f0f4"
         return __L1:cachedLayer(
             __add("range-", mood),
             1920,
@@ -383,8 +403,8 @@ local __O = {};
                         __add("haze-", mood),
                         1920,
                         190,
-                        if mood == "golden" then "#f2d3a8" else "#e4eef0",
-                        function(____, u, v) return if __lt(v, 0.35) then 0 else ((v - 0.35) / 0.65) ^ 1.4 * 0.7 end,
+                        mood == "golden" and "#f2d3a8" or "#e4eef0",
+                        function(____, u, v) return __lt(v, 0.35) and 0 or ((v - 0.35) / 0.65) ^ 1.4 * 0.7 end,
                         2
                     ),
                     0,
@@ -395,7 +415,10 @@ local __O = {};
     end
     __L1.sunGlow = function(self, c, x, y, warm)
         local glow = __L1:cachedLayer(
-            __add("sun-", if __t(warm) then "w" else "d"),
+            __add(
+                "sun-",
+                __t(warm) and "w" or "d"
+            ),
             340,
             340,
             function(____, g)
@@ -407,8 +430,14 @@ local __O = {};
                     170,
                     170
                 )
-                gr:addColorStop(0, if __t(warm) then "rgba(255,214,150,.55)" else "rgba(255,248,214,.5)")
-                gr:addColorStop(0.35, if __t(warm) then "rgba(255,200,140,.18)" else "rgba(255,250,224,.16)")
+                gr:addColorStop(
+                    0,
+                    __t(warm) and "rgba(255,214,150,.55)" or "rgba(255,248,214,.5)"
+                )
+                gr:addColorStop(
+                    0.35,
+                    __t(warm) and "rgba(255,200,140,.18)" or "rgba(255,250,224,.16)"
+                )
                 gr:addColorStop(1, "rgba(255,250,224,0)")
                 g.fillStyle = gr
                 g:fillRect(0, 0, 340, 340)
@@ -422,7 +451,7 @@ local __O = {};
                             170,
                             46 + i * 12,
                             46 + i * 12,
-                            if __t(warm) then "#ffe0b0" else "#fff7da",
+                            __t(warm) and "#ffe0b0" or "#fff7da",
                             3
                         )
                         i = i + 1
@@ -445,7 +474,10 @@ local __O = {};
         end
         c:drawImage(
             __L1:cachedLayer(
-                __add("overlay-", if __t(ink) then "ink" else if __t(outdoor) then "out" else "in"),
+                __add(
+                    "overlay-",
+                    __t(ink) and "ink" or (__t(outdoor) and "out" or "in")
+                ),
                 960,
                 540,
                 function(____, x)
@@ -456,11 +488,14 @@ local __O = {};
                     x:fillRect(0, 412, 960, 30)
                     local d = x:createLinearGradient(0, 452, 0, 540)
                     d:addColorStop(0, "rgba(20,14,10,0)")
-                    d:addColorStop(1, if __t(ink) then "rgba(20,10,40,.45)" else "rgba(20,14,10,.42)")
+                    d:addColorStop(
+                        1,
+                        __t(ink) and "rgba(20,10,40,.45)" or "rgba(20,14,10,.42)"
+                    )
                     x.fillStyle = d
                     x:fillRect(0, 452, 960, 88)
                     if not __t(outdoor) then
-                        x.fillStyle = if __t(ink) then "rgba(40,20,70,.12)" else "rgba(40,34,28,.1)"
+                        x.fillStyle = __t(ink) and "rgba(40,20,70,.12)" or "rgba(40,34,28,.1)"
                         x:fillRect(0, 0, 960, 540)
                     end
                     local v = x:createRadialGradient(
@@ -472,7 +507,10 @@ local __O = {};
                         620
                     )
                     v:addColorStop(0, "rgba(12,16,14,0)")
-                    v:addColorStop(1, if __t(ink) then "rgba(20,10,38,.5)" else if __t(outdoor) then "rgba(12,16,14,.32)" else "rgba(12,16,14,.42)")
+                    v:addColorStop(
+                        1,
+                        __t(ink) and "rgba(20,10,38,.5)" or (__t(outdoor) and "rgba(12,16,14,.32)" or "rgba(12,16,14,.42)")
+                    )
                     x.fillStyle = v
                     x:fillRect(0, 0, 960, 540)
                 end
@@ -491,8 +529,15 @@ local __O = {};
                 while i < 4 do
                     local sway = math.sin(t * 0.25 + i * 1.7) * 18
                     local x0 = 620 + i * 70 + sway - __mod(camera * 0.02, 60)
-                    local a = if __t(warm) then 0.07 else 0.055
-                    c.fillStyle = if __t(warm) then ("rgba(255,206,140," .. tostring(a)) .. ")" else ("rgba(255,250,215," .. tostring(a)) .. ")"
+                    local a = __t(warm) and 0.07 or 0.055
+                    local ____c_4 = c
+                    local ____t_result_3
+                    if __t(warm) then
+                        ____t_result_3 = ("rgba(255,206,140," .. tostring(a)) .. ")"
+                    else
+                        ____t_result_3 = ("rgba(255,250,215," .. tostring(a)) .. ")"
+                    end
+                    ____c_4.fillStyle = ____t_result_3
                     c:beginPath()
                     c:moveTo(x0, 0)
                     c:lineTo(x0 + 60 + i * 10, 0)
@@ -518,11 +563,11 @@ local __O = {};
                     c.globalAlpha = tw * (1 - math.abs(life - 0.5) * 2)
                     __L1:r(
                         c,
-                        bx - if bx > 740 then 0 else 0,
+                        bx - (bx > 740 and 0 or 0),
                         by,
                         2,
                         2,
-                        if __t(warm) then "#ffe2b0" else "#fffbe2"
+                        __t(warm) and "#ffe2b0" or "#fffbe2"
                     )
                     i = i + 1
                 end
@@ -570,7 +615,7 @@ local __O = {};
             if __t(warm) then
                 c:save()
                 c.globalCompositeOperation = "soft-light"
-                c.fillStyle = if mood == "golden" then "rgba(255,170,90,.32)" else "rgba(255,200,130,.22)"
+                c.fillStyle = mood == "golden" and "rgba(255,170,90,.32)" or "rgba(255,200,130,.22)"
                 c:fillRect(0, 0, 960, 440)
                 c:restore()
             end
@@ -590,7 +635,13 @@ local __O = {};
             },
             8
         )
-        local tree = if __t(near) then __arrL({"#2f6b3a", "#3f8240", "#5c9c48"}, 3) else __arrL({"#5f9a7c", "#6ea888", "#7fb595"}, 3)
+        local ____t_result_5
+        if __t(near) then
+            ____t_result_5 = __arrL({"#2f6b3a", "#3f8240", "#5c9c48"}, 3)
+        else
+            ____t_result_5 = __arrL({"#5f9a7c", "#6ea888", "#7fb595"}, 3)
+        end
+        local tree = ____t_result_5
         do
             local k = 0
             while k < __len(steps) do
@@ -608,7 +659,7 @@ local __O = {};
                     sy,
                     sw,
                     2,
-                    if __t(near) then "#86bd62" else "#a9cbb5"
+                    __t(near) and "#86bd62" or "#a9cbb5"
                 )
                 __L1:r(
                     c,
@@ -616,179 +667,219 @@ local __O = {};
                     sy + 5,
                     sw,
                     3,
-                    if __t(near) then "#4f8f50" else "#7aa891"
+                    __t(near) and "#4f8f50" or "#7aa891"
                 )
                 local n = math.max(
                     1,
-                    math.floor(sw / if __t(near) then 11 else 8)
+                    math.floor(sw / (__t(near) and 11 or 8))
                 )
                 do
                     local i = 0
                     while i < n do
-                        local h = __L1:hash(seed * 31 + k * 7 + i)
-                        if h < 0.35 then
-                            continue
-                        end
-                        local tx = sx + 3 + i * (sw - 6) / n
-                        if __t(if __t(near) then h > 0.93 else near) then
-                            __L1:r(
-                                c,
-                                tx - 5,
-                                sy - 7,
-                                11,
-                                7,
-                                "#efe2c4"
-                            )
-                            __L1:r(
-                                c,
-                                tx - 6,
-                                sy - 10,
-                                13,
-                                3,
-                                "#c2573e"
-                            )
-                            __L1:r(
-                                c,
-                                tx - 1,
-                                sy - 4,
-                                3,
-                                4,
-                                "#6b4a33"
-                            )
-                            __L1:r(
-                                c,
-                                tx + 2,
-                                sy - 13,
-                                2,
-                                3,
-                                "#8a5a40"
-                            )
-                            do
-                                local q = 0
-                                while q < 4 do
-                                    local k = __mod(__L1.animT * 0.35 + q / 4 + h, 1)
-                                    c.globalAlpha = (1 - k) * 0.55
-                                    __L1:r(
-                                        c,
-                                        tx + 2 + math.floor(__L1:windAt(0) * 4 * k + k * 5 + 0.5),
-                                        sy - 15 - k * 22,
-                                        2 + math.floor(k * 3 + 0.5),
-                                        2 + math.floor(k * 2 + 0.5),
-                                        "#eef2f3"
-                                    )
-                                    q = q + 1
-                                end
+                        do
+                            local h = __L1:hash(seed * 31 + k * 7 + i)
+                            if h < 0.35 then
+                                do i = i + 1 continue end
                             end
-                            c.globalAlpha = 1
-                        elseif __t(if __t(near) then h > 0.86 else near) then
-                            __L1:r(
-                                c,
-                                tx - 4,
-                                sy - 5,
-                                8,
-                                4,
-                                if h > 0.9 then "#f2efe6" else "#8a5a3a"
-                            )
-                            __L1:r(
-                                c,
-                                tx + 3,
-                                sy - 6,
-                                3,
-                                3,
-                                if h > 0.9 then "#f2efe6" else "#8a5a3a"
-                            )
-                            __L1:r(
-                                c,
-                                tx - 3,
-                                sy - 1,
-                                1,
-                                2,
-                                "#3a3028"
-                            )
-                            __L1:r(
-                                c,
-                                tx + 2,
-                                sy - 1,
-                                1,
-                                2,
-                                "#3a3028"
-                            )
-                            __L1:r(
-                                c,
-                                tx - 2,
-                                sy - 4,
-                                2,
-                                2,
-                                "#2c2a28"
-                            )
-                        elseif __t(if __t(near) then h > 0.8 else near) then
-                            __L1:r(
-                                c,
-                                tx,
-                                sy - 16,
-                                2,
-                                16,
-                                "#8a6a45"
-                            )
-                            __L1:r(
-                                c,
-                                tx - 5,
-                                sy - 18,
-                                12,
-                                2,
-                                "#3f8240"
-                            )
-                            __L1:r(
-                                c,
-                                tx - 3,
-                                sy - 20,
-                                8,
-                                2,
-                                "#5c9c48"
-                            )
-                            __L1:r(
-                                c,
-                                tx + 1,
-                                sy - 16,
-                                2,
-                                2,
-                                "#7a5a2a"
-                            )
-                        else
-                            local z = if __t(near) then 4 + math.floor(h * 4) else 2 + math.floor(h * 2)
-                            __L1:r(
-                                c,
-                                tx - z,
-                                sy - z * 1.6,
-                                z * 2,
-                                z * 1.6,
-                                __get(tree, 0)
-                            )
-                            __L1:r(
-                                c,
-                                tx - z + 1,
-                                sy - z * 1.6,
-                                z * 2 - 2,
-                                z * 0.8,
-                                __get(tree, 2)
-                            )
-                            __L1:r(
-                                c,
-                                tx - 1,
-                                sy - z * 0.6 + 1,
-                                1,
-                                z * 0.6,
-                                if __t(near) then "#5a4030" else "#6f8f80"
-                            )
-                            if __t(if __t(near) then h > 0.6 else near) then
+                            local tx = sx + 3 + i * (sw - 6) / n
+                            local ____t_7 = __t
+                            local ____t_result_6
+                            if __t(near) then
+                                ____t_result_6 = h > 0.93
+                            else
+                                ____t_result_6 = near
+                            end
+                            if ____t_7(____t_result_6) then
                                 __L1:r(
                                     c,
-                                    tx + z - 2,
-                                    sy - z,
-                                    2,
-                                    2,
-                                    "#d79a3a"
+                                    tx - 5,
+                                    sy - 7,
+                                    11,
+                                    7,
+                                    "#efe2c4"
                                 )
+                                __L1:r(
+                                    c,
+                                    tx - 6,
+                                    sy - 10,
+                                    13,
+                                    3,
+                                    "#c2573e"
+                                )
+                                __L1:r(
+                                    c,
+                                    tx - 1,
+                                    sy - 4,
+                                    3,
+                                    4,
+                                    "#6b4a33"
+                                )
+                                __L1:r(
+                                    c,
+                                    tx + 2,
+                                    sy - 13,
+                                    2,
+                                    3,
+                                    "#8a5a40"
+                                )
+                                do
+                                    local q = 0
+                                    while q < 4 do
+                                        local k = __mod(__L1.animT * 0.35 + q / 4 + h, 1)
+                                        c.globalAlpha = (1 - k) * 0.55
+                                        __L1:r(
+                                            c,
+                                            tx + 2 + math.floor(__L1:windAt(0) * 4 * k + k * 5 + 0.5),
+                                            sy - 15 - k * 22,
+                                            2 + math.floor(k * 3 + 0.5),
+                                            2 + math.floor(k * 2 + 0.5),
+                                            "#eef2f3"
+                                        )
+                                        q = q + 1
+                                    end
+                                end
+                                c.globalAlpha = 1
+                            else
+                                local ____t_9 = __t
+                                local ____t_result_8
+                                if __t(near) then
+                                    ____t_result_8 = h > 0.86
+                                else
+                                    ____t_result_8 = near
+                                end
+                                if ____t_9(____t_result_8) then
+                                    __L1:r(
+                                        c,
+                                        tx - 4,
+                                        sy - 5,
+                                        8,
+                                        4,
+                                        h > 0.9 and "#f2efe6" or "#8a5a3a"
+                                    )
+                                    __L1:r(
+                                        c,
+                                        tx + 3,
+                                        sy - 6,
+                                        3,
+                                        3,
+                                        h > 0.9 and "#f2efe6" or "#8a5a3a"
+                                    )
+                                    __L1:r(
+                                        c,
+                                        tx - 3,
+                                        sy - 1,
+                                        1,
+                                        2,
+                                        "#3a3028"
+                                    )
+                                    __L1:r(
+                                        c,
+                                        tx + 2,
+                                        sy - 1,
+                                        1,
+                                        2,
+                                        "#3a3028"
+                                    )
+                                    __L1:r(
+                                        c,
+                                        tx - 2,
+                                        sy - 4,
+                                        2,
+                                        2,
+                                        "#2c2a28"
+                                    )
+                                else
+                                    local ____t_11 = __t
+                                    local ____t_result_10
+                                    if __t(near) then
+                                        ____t_result_10 = h > 0.8
+                                    else
+                                        ____t_result_10 = near
+                                    end
+                                    if ____t_11(____t_result_10) then
+                                        __L1:r(
+                                            c,
+                                            tx,
+                                            sy - 16,
+                                            2,
+                                            16,
+                                            "#8a6a45"
+                                        )
+                                        __L1:r(
+                                            c,
+                                            tx - 5,
+                                            sy - 18,
+                                            12,
+                                            2,
+                                            "#3f8240"
+                                        )
+                                        __L1:r(
+                                            c,
+                                            tx - 3,
+                                            sy - 20,
+                                            8,
+                                            2,
+                                            "#5c9c48"
+                                        )
+                                        __L1:r(
+                                            c,
+                                            tx + 1,
+                                            sy - 16,
+                                            2,
+                                            2,
+                                            "#7a5a2a"
+                                        )
+                                    else
+                                        local ____t_result_12
+                                        if __t(near) then
+                                            ____t_result_12 = 4 + math.floor(h * 4)
+                                        else
+                                            ____t_result_12 = 2 + math.floor(h * 2)
+                                        end
+                                        local z = ____t_result_12
+                                        __L1:r(
+                                            c,
+                                            tx - z,
+                                            sy - z * 1.6,
+                                            z * 2,
+                                            z * 1.6,
+                                            __get(tree, 0)
+                                        )
+                                        __L1:r(
+                                            c,
+                                            tx - z + 1,
+                                            sy - z * 1.6,
+                                            z * 2 - 2,
+                                            z * 0.8,
+                                            __get(tree, 2)
+                                        )
+                                        __L1:r(
+                                            c,
+                                            tx - 1,
+                                            sy - z * 0.6 + 1,
+                                            1,
+                                            z * 0.6,
+                                            __t(near) and "#5a4030" or "#6f8f80"
+                                        )
+                                        local ____t_14 = __t
+                                        local ____t_result_13
+                                        if __t(near) then
+                                            ____t_result_13 = h > 0.6
+                                        else
+                                            ____t_result_13 = near
+                                        end
+                                        if ____t_14(____t_result_13) then
+                                            __L1:r(
+                                                c,
+                                                tx + z - 2,
+                                                sy - z,
+                                                2,
+                                                2,
+                                                "#d79a3a"
+                                            )
+                                        end
+                                    end
+                                end
                             end
                         end
                         i = i + 1
@@ -797,7 +888,14 @@ local __O = {};
                 k = k + 1
             end
         end
-        if __t(if __t(near) then __L1:hash(seed + 5) > 0.5 else near) then
+        local ____t_16 = __t
+        local ____t_result_15
+        if __t(near) then
+            ____t_result_15 = __L1:hash(seed + 5) > 0.5
+        else
+            ____t_result_15 = near
+        end
+        if ____t_16(____t_result_15) then
             __L1:r(
                 c,
                 x + w * 0.2,
@@ -862,7 +960,7 @@ local __O = {};
                 while xx < 1920 do
                     local h = 40 + math.floor(__L1:hash(i + 700) * 95)
                     local w = 26 + math.floor(__L1:hash(i + 701) * 46)
-                    local col = if __L1:hash(i + 702) > 0.5 then far else mid
+                    local col = __L1:hash(i + 702) > 0.5 and far or mid
                     local y = 170 - h
                     x.fillStyle = col
                     x:fillRect(xx, y, w, h)
@@ -874,7 +972,7 @@ local __O = {};
                             do
                                 local wx = xx + 3
                                 while wx < xx + w - 3 do
-                                    x.fillStyle = if __L1:hash(i * 13 + wx + wy) > 0.86 then lit else win
+                                    x.fillStyle = __L1:hash(i * 13 + wx + wy) > 0.86 and lit or win
                                     x.globalAlpha = 0.55
                                     x:fillRect(wx, wy, 3, 3)
                                     x.globalAlpha = 1
@@ -1028,7 +1126,7 @@ local __O = {};
             512,
             440,
             function(____, x)
-                local dark = if kind == "ink" then "rgba(40,20,60," else "rgba(30,24,18,"
+                local dark = kind == "ink" and "rgba(40,20,60," or "rgba(30,24,18,"
                 local light = "rgba(255,252,240,"
                 do
                     local i = 0
@@ -1036,11 +1134,25 @@ local __O = {};
                         local px = math.floor(__L1:hash(i + 5000) * 512)
                         local py = math.floor(__L1:hash(i + 5100) * 440)
                         local a = 0.04 + __L1:hash(i + 5200) * 0.07
-                        x.fillStyle = __add(
-                            __add(if __t(__mod(i, 3)) then dark else light, a),
+                        local ____x_20 = x
+                        local ____add_19 = __add
+                        local ____add_18 = __add
+                        local ____t_result_17
+                        if __t(__mod(i, 3)) then
+                            ____t_result_17 = dark
+                        else
+                            ____t_result_17 = light
+                        end
+                        ____x_20.fillStyle = ____add_19(
+                            ____add_18(____t_result_17, a),
                             ")"
                         )
-                        x:fillRect(px, py, if __L1:hash(i + 5300) > 0.8 then 2 else 1, 1)
+                        x:fillRect(
+                            px,
+                            py,
+                            __L1:hash(i + 5300) > 0.8 and 2 or 1,
+                            1
+                        )
                         i = i + 1
                     end
                 end
@@ -1060,7 +1172,12 @@ local __O = {};
                             __add(dark, "0)")
                         )
                         x.fillStyle = g
-                        x:fillRect(px, py, 1 + if __mod(i, 3) == 0 then 1 else 0, len)
+                        x:fillRect(
+                            px,
+                            py,
+                            1 + (__mod(i, 3) == 0 and 1 or 0),
+                            len
+                        )
                         i = i + 1
                     end
                 end
@@ -1079,7 +1196,7 @@ local __O = {};
                                     1,
                                     2
                                 )
-                                cx = cx + if __L1:hash(i * 9 + k) > 0.5 then 1 else -1
+                                cx = cx + (__L1:hash(i * 9 + k) > 0.5 and 1 or -1)
                                 cy = cy + 2
                                 k = k + 1
                             end
@@ -1106,7 +1223,7 @@ local __O = {};
         if not __t(band) then
             return
         end
-        local tile = __L1:materialTile(if scene == 6 then "ink" else "std")
+        local tile = __L1:materialTile(scene == 6 and "ink" or "std")
         local off = __mod(
             __mod(camera, 512) + 512,
             512
@@ -1483,7 +1600,7 @@ local __O = {};
                     y - 6 - __mod(i, 2) * 4,
                     3,
                     6 + __mod(i, 2) * 4,
-                    if __t(__mod(i, 2)) then "#4f9a40" else "#6fbf55"
+                    __t(__mod(i, 2)) and "#4f9a40" or "#6fbf55"
                 )
                 if i == 2 then
                     __L1:r(
@@ -1571,58 +1688,66 @@ local __O = {};
             do
                 local i = 0
                 while i < 12 do
-                    local wx = 140 + i * 137
-                    local gap = wx + 83
-                    if wx >= 1750 then
-                        break
-                    end
-                    local seed = i * 7 + 3
-                    local ____t_2 = __t
-                    local ____t_1 = __t
-                    local ____temp_0 = gap > 300 and gap < 500
-                    __O[153] = ____temp_0
-                    if ____t_2(if ____t_1(____temp_0) then __O[153] else gap > 960 and gap < 1130) then
-                        continue
-                    end
-                    if not __t(vis(nil, gap)) then
-                        continue
-                    end
-                    if __mod(i, 3) == 0 then
-                        __L1:ac(c, gap + 14, 252)
-                    elseif __mod(i, 3) == 1 then
-                        __L1:poster(c, gap + 17, 292, seed)
-                        if __t(__mod(i, 2)) then
-                            __L1:poster(c, gap + 19, 262, seed + 1)
-                        end
-                    else
-                        __L1:pipe(c, gap + 40, 237, 368)
-                        if i == 5 then
-                            __L1:wallClock(c, gap + 22, 262, t)
-                        end
-                    end
-                    if __mod(i, 2) == 0 then
-                        __L1:tag(c, gap + 6, 388, seed)
-                    end
-                    __L1:r(
-                        c,
-                        wx + 4,
-                        346,
-                        75,
-                        1,
-                        "#00000014"
-                    )
                     do
-                        local k = 0
-                        while k < 4 do
-                            __L1:r(
-                                c,
-                                wx + 12 + k * 19,
-                                346,
-                                1,
-                                10 + __mod(i + k, 3) * 6,
-                                "#20304018"
-                            )
-                            k = k + 1
+                        local wx = 140 + i * 137
+                        local gap = wx + 83
+                        if wx >= 1750 then
+                            break
+                        end
+                        local seed = i * 7 + 3
+                        local ____t_24 = __t
+                        local ____t_result_23
+                        local ____t_22 = __t
+                        local ____temp_21 = gap > 300 and gap < 500
+                        __O[153] = ____temp_21
+                        if ____t_22(____temp_21) then
+                            ____t_result_23 = __O[153]
+                        else
+                            ____t_result_23 = gap > 960 and gap < 1130
+                        end
+                        if ____t_24(____t_result_23) then
+                            do i = i + 1 continue end
+                        end
+                        if not __t(vis(nil, gap)) then
+                            do i = i + 1 continue end
+                        end
+                        if __mod(i, 3) == 0 then
+                            __L1:ac(c, gap + 14, 252)
+                        elseif __mod(i, 3) == 1 then
+                            __L1:poster(c, gap + 17, 292, seed)
+                            if __t(__mod(i, 2)) then
+                                __L1:poster(c, gap + 19, 262, seed + 1)
+                            end
+                        else
+                            __L1:pipe(c, gap + 40, 237, 368)
+                            if i == 5 then
+                                __L1:wallClock(c, gap + 22, 262, t)
+                            end
+                        end
+                        if __mod(i, 2) == 0 then
+                            __L1:tag(c, gap + 6, 388, seed)
+                        end
+                        __L1:r(
+                            c,
+                            wx + 4,
+                            346,
+                            75,
+                            1,
+                            "#00000014"
+                        )
+                        do
+                            local k = 0
+                            while k < 4 do
+                                __L1:r(
+                                    c,
+                                    wx + 12 + k * 19,
+                                    346,
+                                    1,
+                                    10 + __mod(i + k, 3) * 6,
+                                    "#20304018"
+                                )
+                                k = k + 1
+                            end
                         end
                     end
                     i = i + 1
@@ -1693,19 +1818,21 @@ local __O = {};
                 local x = 55
                 local i = 0
                 while x < width do
-                    local gap = x + 101 + 18
-                    if not __t(vis(nil, gap)) then
-                        continue
-                    end
-                    if __mod(i, 3) == 0 then
-                        __L1:ac(c, gap + 10, 232)
-                    elseif __mod(i, 3) == 1 then
-                        __L1:poster(c, gap + 14, 262, i + 2)
-                    else
-                        __L1:pipe(c, gap + 30, 221, 322)
-                    end
-                    if __t(__mod(i, 2)) then
-                        __L1:tag(c, gap, 332, i)
+                    do
+                        local gap = x + 101 + 18
+                        if not __t(vis(nil, gap)) then
+                            do do x = x + 187 i = i + 1 end continue end
+                        end
+                        if __mod(i, 3) == 0 then
+                            __L1:ac(c, gap + 10, 232)
+                        elseif __mod(i, 3) == 1 then
+                            __L1:poster(c, gap + 14, 262, i + 2)
+                        else
+                            __L1:pipe(c, gap + 30, 221, 322)
+                        end
+                        if __t(__mod(i, 2)) then
+                            __L1:tag(c, gap, 332, i)
+                        end
                     end
                     do
                         x = x + 187
@@ -1751,7 +1878,7 @@ local __O = {};
                                             yy + 86 + j * 6,
                                             8,
                                             5,
-                                            if __t(__mod(j, 2)) then "#9c4f36" else "#b5603f"
+                                            __t(__mod(j, 2)) and "#9c4f36" or "#b5603f"
                                         )
                                         j = j + 1
                                     end
@@ -1772,7 +1899,7 @@ local __O = {};
                         __L1:gasCan(
                             c,
                             x + 170,
-                            yy + 148 - __mod(i, 2) * 29 + if __t(__mod(i, 2)) then 29 else 0 - 16
+                            yy + 148 - __mod(i, 2) * 29 + (__t(__mod(i, 2)) and 29 or 0) - 16
                         )
                     end
                     __L1:r(
@@ -1799,55 +1926,57 @@ local __O = {};
             do
                 local x = 60
                 while x < __L1:worldWidth(7) do
-                    if not __t(vis(nil, x, 120)) then
-                        continue
-                    end
-                    local cols = __get(
-                        __arrL(
-                            {
-                                __arrL({"#21496c", "#f2c14e"}, 2),
-                                __arrL({"#c0392b", "#ffffff"}, 2),
-                                __arrL({"#2e7d32", "#fff3c4"}, 2)
-                            },
-                            3
-                        ),
-                        __mod(
-                            __bor(x / 520, 0),
-                            3
+                    do
+                        if not __t(vis(nil, x, 120)) then
+                            do x = x + 520 continue end
+                        end
+                        local cols = __get(
+                            __arrL(
+                                {
+                                    __arrL({"#21496c", "#f2c14e"}, 2),
+                                    __arrL({"#c0392b", "#ffffff"}, 2),
+                                    __arrL({"#2e7d32", "#fff3c4"}, 2)
+                                },
+                                3
+                            ),
+                            __mod(
+                                __bor(x / 520, 0),
+                                3
+                            )
                         )
-                    )
-                    __L1:r(
-                        c,
-                        x,
-                        300,
-                        110,
-                        22,
-                        __get(cols, 0)
-                    )
-                    __L1:r(
-                        c,
-                        x + 4,
-                        304,
-                        102,
-                        14,
-                        __get(cols, 1)
-                    )
-                    __L1:r(
-                        c,
-                        x + 10,
-                        308,
-                        40,
-                        6,
-                        __get(cols, 0)
-                    )
-                    __L1:r(
-                        c,
-                        x + 56,
-                        308,
-                        44,
-                        6,
-                        __get(cols, 0)
-                    )
+                        __L1:r(
+                            c,
+                            x,
+                            300,
+                            110,
+                            22,
+                            __get(cols, 0)
+                        )
+                        __L1:r(
+                            c,
+                            x + 4,
+                            304,
+                            102,
+                            14,
+                            __get(cols, 1)
+                        )
+                        __L1:r(
+                            c,
+                            x + 10,
+                            308,
+                            40,
+                            6,
+                            __get(cols, 0)
+                        )
+                        __L1:r(
+                            c,
+                            x + 56,
+                            308,
+                            44,
+                            6,
+                            __get(cols, 0)
+                        )
+                    end
                     x = x + 520
                 end
             end
@@ -1857,7 +1986,7 @@ local __O = {};
     __L1.windowPerson = function(self, c, x, y, w, h, seed, t, hx, lean)
         local cx = x + w / 2
         local near = hx ~= nil and math.abs(hx - cx) < 140
-        local dir = if hx == nil then 0 else __TS__MathSign(hx - cx)
+        local dir = hx == nil and 0 or __TS__MathSign(hx - cx)
         local skin = __get(
             __L1.SKIN,
             __mod(
@@ -1887,7 +2016,7 @@ local __O = {};
         )
         local bob = math.floor(math.sin(t * 1.7 + seed) * 1 + 0.5)
         local by = __add(y, h) - 2
-        local head = by - 22 + bob - if __t(lean) then 4 else 0
+        local head = by - 22 + bob - (__t(lean) and 4 or 0)
         __L1:r(
             c,
             cx - 9,
@@ -1930,7 +2059,13 @@ local __O = {};
                 hair
             )
         end
-        local look = if __t(near) then dir * 2 else math.floor(math.sin(t * 0.5 + seed) * 1.4 + 0.5)
+        local ____t_result_25
+        if __t(near) then
+            ____t_result_25 = dir * 2
+        else
+            ____t_result_25 = math.floor(math.sin(t * 0.5 + seed) * 1.4 + 0.5)
+        end
+        local look = ____t_result_25
         __L1:r(
             c,
             cx - 3 + look,
@@ -1957,7 +2092,7 @@ local __O = {};
                 "#8a3a2a"
             )
             local wave = math.floor(math.sin(t * 12 + seed) * 3 + 0.5)
-            local ax = cx + if dir >= 0 then 9 else -12
+            local ax = cx + (dir >= 0 and 9 or -12)
             __L1:r(
                 c,
                 ax,
@@ -1996,16 +2131,29 @@ local __O = {};
                 end
             end
         end
-        local ____opt_5 = window.SceneLife
-        if ____opt_5 ~= nil then
-            ____opt_5 = ____opt_5.hero
+        local ____opt_28 = window.SceneLife
+        if ____opt_28 ~= nil then
+            ____opt_28 = ____opt_28.hero
         end
-        local ____opt_result_7
-        if ____opt_5 ~= nil then
-            ____opt_result_7 = ____opt_5(____opt_5)
+        local ____opt_result_30
+        if ____opt_28 ~= nil then
+            ____opt_result_30 = ____opt_28(____opt_28)
         end
-        local hero = ____opt_result_7
-        local hx = if __t(if __t(hero) then __isFiniteN(hero.x) else hero) then hero.x else nil
+        local hero = ____opt_result_30
+        local ____t_result_33
+        local ____t_32 = __t
+        local ____t_result_31
+        if __t(hero) then
+            ____t_result_31 = __isFiniteN(hero.x)
+        else
+            ____t_result_31 = hero
+        end
+        if ____t_32(____t_result_31) then
+            ____t_result_33 = hero.x
+        else
+            ____t_result_33 = nil
+        end
+        local hx = ____t_result_33
         c:save()
         c:translate(
             -math.floor(camera + 0.5),
@@ -2021,29 +2169,31 @@ local __O = {};
             do
                 local i = 0
                 while i < 12 do
-                    local x = 140 + i * 137
-                    if __t(x >= 1750 or not __t(vis(nil, x))) then
-                        continue
+                    do
+                        local x = 140 + i * 137
+                        if __t(x >= 1750 or not __t(vis(nil, x))) then
+                            do i = i + 1 continue end
+                        end
+                        local seed = i * 13 + 7
+                        if __L1:hash(seed) < 0.5 then
+                            do i = i + 1 continue end
+                        end
+                        c:save()
+                        c:beginPath()
+                        c:rect(x + 5, 272, 73, 68)
+                        c:clip()
+                        __L1:windowPerson(
+                            c,
+                            x + 5,
+                            272,
+                            34,
+                            68,
+                            seed,
+                            t,
+                            hx
+                        )
+                        c:restore()
                     end
-                    local seed = i * 13 + 7
-                    if __L1:hash(seed) < 0.5 then
-                        continue
-                    end
-                    c:save()
-                    c:beginPath()
-                    c:rect(x + 5, 272, 73, 68)
-                    c:clip()
-                    __L1:windowPerson(
-                        c,
-                        x + 5,
-                        272,
-                        34,
-                        68,
-                        seed,
-                        t,
-                        hx
-                    )
-                    c:restore()
                     i = i + 1
                 end
             end
@@ -2054,28 +2204,30 @@ local __O = {};
                 local x = 55
                 local i = 0
                 while x < width do
-                    if not __t(vis(nil, x)) then
-                        continue
+                    do
+                        if not __t(vis(nil, x)) then
+                            do do x = x + 187 i = i + 1 end continue end
+                        end
+                        local seed = i * 17 + 3
+                        if __L1:hash(seed) < 0.45 then
+                            do do x = x + 187 i = i + 1 end continue end
+                        end
+                        c:save()
+                        c:beginPath()
+                        c:rect(x + 5, 249, 91, 54)
+                        c:clip()
+                        __L1:windowPerson(
+                            c,
+                            x + 51,
+                            249,
+                            40,
+                            54,
+                            seed,
+                            t,
+                            hx
+                        )
+                        c:restore()
                     end
-                    local seed = i * 17 + 3
-                    if __L1:hash(seed) < 0.45 then
-                        continue
-                    end
-                    c:save()
-                    c:beginPath()
-                    c:rect(x + 5, 249, 91, 54)
-                    c:clip()
-                    __L1:windowPerson(
-                        c,
-                        x + 51,
-                        249,
-                        40,
-                        54,
-                        seed,
-                        t,
-                        hx
-                    )
-                    c:restore()
                     do
                         x = x + 187
                         i = i + 1
@@ -2089,41 +2241,43 @@ local __O = {};
             do
                 local i = lo
                 while i < hi do
-                    local x = i * 210
-                    local yy = 272 + __mod(i, 2) * 29
-                    local seed = math.abs(i * 7 + 31)
-                    if __L1:hash(seed) < 0.45 then
-                        continue
+                    do
+                        local x = i * 210
+                        local yy = 272 + __mod(i, 2) * 29
+                        local seed = math.abs(i * 7 + 31)
+                        if __L1:hash(seed) < 0.45 then
+                            do i = i + 1 continue end
+                        end
+                        local wx = x + 13 + __mod(seed, 2) * (188 * 0.48)
+                        local ww = math.min(30, 188 * 0.3)
+                        local wh = math.min(
+                            42,
+                            163 - __mod(i, 2) * 29 - 27
+                        )
+                        if __t(__call(
+                            signs5,
+                            "some",
+                            function(____, sx) return wx + ww > sx - 4 and wx < sx + 132 end
+                        )) then
+                            do i = i + 1 continue end
+                        end
+                        c:save()
+                        c:beginPath()
+                        c:rect(wx + 3, yy + 18 + 3, ww - 6, wh - 7)
+                        c:clip()
+                        __L1:windowPerson(
+                            c,
+                            wx + 3,
+                            yy + 21,
+                            ww - 6,
+                            wh - 7,
+                            seed,
+                            t,
+                            hx,
+                            true
+                        )
+                        c:restore()
                     end
-                    local wx = x + 13 + __mod(seed, 2) * (188 * 0.48)
-                    local ww = math.min(30, 188 * 0.3)
-                    local wh = math.min(
-                        42,
-                        163 - __mod(i, 2) * 29 - 27
-                    )
-                    if __t(__call(
-                        signs5,
-                        "some",
-                        function(____, sx) return wx + ww > sx - 4 and wx < sx + 132 end
-                    )) then
-                        continue
-                    end
-                    c:save()
-                    c:beginPath()
-                    c:rect(wx + 3, yy + 18 + 3, ww - 6, wh - 7)
-                    c:clip()
-                    __L1:windowPerson(
-                        c,
-                        wx + 3,
-                        yy + 21,
-                        ww - 6,
-                        wh - 7,
-                        seed,
-                        t,
-                        hx,
-                        true
-                    )
-                    c:restore()
                     i = i + 1
                 end
             end
@@ -2219,9 +2373,15 @@ local __O = {};
                     local i = 0
                     while i < 7 do
                         local row = math.ceil(i / 2)
-                        local side = if __t(__mod(i, 2)) then 1 else -1
+                        local side = __t(__mod(i, 2)) and 1 or -1
                         local x = bx + row * 11
-                        local y = by + if __t(i) then side * row * 6 else 0
+                        local ____t_result_34
+                        if __t(i) then
+                            ____t_result_34 = side * row * 6
+                        else
+                            ____t_result_34 = 0
+                        end
+                        local y = by + ____t_result_34
                         local f = math.floor(math.sin(t * 10 + i) * 2 + 0.5)
                         __L1:r(
                             c,
@@ -2254,14 +2414,25 @@ local __O = {};
         end
     end
     __L1.sky = function(self, c, scene, camera, t)
-        local ____t_12 = __t
-        local ____t_11 = __t
-        local ____t_9 = __t
-        local ____temp_8 = scene == 2 or scene == 6
-        __O[154] = ____temp_8
-        local ____temp_10 = if ____t_9(____temp_8) then __O[154] else scene == 8
-        __O[155] = ____temp_10
-        if ____t_12(if ____t_11(____temp_10) then __O[155] else scene == 10) then
+        local ____t_40 = __t
+        local ____t_result_39
+        local ____t_38 = __t
+        local ____t_result_37
+        local ____t_36 = __t
+        local ____temp_35 = scene == 2 or scene == 6
+        __O[154] = ____temp_35
+        if ____t_36(____temp_35) then
+            ____t_result_37 = __O[154]
+        else
+            ____t_result_37 = scene == 8
+        end
+        __O[155] = ____t_result_37
+        if ____t_38(____t_result_37) then
+            ____t_result_39 = __O[155]
+        else
+            ____t_result_39 = scene == 10
+        end
+        if ____t_40(____t_result_39) then
             __L1:r(
                 c,
                 0,
@@ -2273,7 +2444,13 @@ local __O = {};
             return
         end
         if __t(__L1.liteNow) then
-            local colors = if scene == 3 then __arrL({"#78a9d7", "#a7cbe4", "#d6e3dc"}, 3) else __arrL({"#74b8e7", "#96cef0", "#c9e7ec"}, 3)
+            local ____temp_41
+            if scene == 3 then
+                ____temp_41 = __arrL({"#78a9d7", "#a7cbe4", "#d6e3dc"}, 3)
+            else
+                ____temp_41 = __arrL({"#74b8e7", "#96cef0", "#c9e7ec"}, 3)
+            end
+            local colors = ____temp_41
             __L1:r(
                 c,
                 0,
@@ -2298,14 +2475,14 @@ local __O = {};
                 200,
                 __get(colors, 2)
             )
-            local lx = if scene == 3 then 762 else 734
+            local lx = scene == 3 and 762 or 734
             __L1:oval(
                 c,
                 lx - camera * 0.025,
                 99,
                 35,
                 35,
-                if scene == 3 then "#fff0c4" else "#fff6cc",
+                scene == 3 and "#fff0c4" or "#fff6cc",
                 4
             )
             do
@@ -2331,7 +2508,7 @@ local __O = {};
                         197 + __L1:hash(i + 5) * 34,
                         422,
                         250,
-                        if scene == 3 then "#7eada0" else "#89b7a0"
+                        scene == 3 and "#7eada0" or "#89b7a0"
                     )
                     i = i + 1
                 end
@@ -2345,7 +2522,7 @@ local __O = {};
                         271 + __L1:hash(i + 21) * 25,
                         400,
                         190,
-                        if scene == 3 then "#5b937b" else "#64a068"
+                        scene == 3 and "#5b937b" or "#64a068"
                     )
                     i = i + 1
                 end
@@ -2364,17 +2541,17 @@ local __O = {};
             0,
             0
         )
-        local sx = if scene == 3 then 762 else 734
-        local ____t_18 = __t
-        local ____opt_15 = window.HdScene
-        if ____opt_15 ~= nil then
-            ____opt_15 = ____opt_15.sky
+        local sx = scene == 3 and 762 or 734
+        local ____t_47 = __t
+        local ____opt_44 = window.HdScene
+        if ____opt_44 ~= nil then
+            ____opt_44 = ____opt_44.sky
         end
-        local ____opt_result_17
-        if ____opt_15 ~= nil then
-            ____opt_result_17 = ____opt_15(____opt_15, c, t, camera)
+        local ____opt_result_46
+        if ____opt_44 ~= nil then
+            ____opt_result_46 = ____opt_44(____opt_44, c, t, camera)
         end
-        local hdSky = not not ____t_18(____opt_result_17)
+        local hdSky = not not ____t_47(____opt_result_46)
         if not __t(hdSky) then
             __L1:sunGlow(c, sx - camera * 0.025, 99, mood == "golden" or mood == "afternoon")
         end
@@ -2398,24 +2575,35 @@ local __O = {};
                 99,
                 35,
                 35,
-                if scene == 3 then "#fff0c4" else "#fff6cc",
+                scene == 3 and "#fff0c4" or "#fff6cc",
                 4
             )
         end
-        local ____t_23 = __t
-        local ____t_22 = __t
-        local ____t_20 = __t
-        local ____temp_19 = scene == 1 or scene == 4
-        __O[156] = ____temp_19
-        local ____temp_21 = if ____t_20(____temp_19) then __O[156] else scene == 7
-        __O[157] = ____temp_21
-        if ____t_23(if ____t_22(____temp_21) then __O[157] else scene == 9) then
+        local ____t_53 = __t
+        local ____t_result_52
+        local ____t_51 = __t
+        local ____t_result_50
+        local ____t_49 = __t
+        local ____temp_48 = scene == 1 or scene == 4
+        __O[156] = ____temp_48
+        if ____t_49(____temp_48) then
+            ____t_result_50 = __O[156]
+        else
+            ____t_result_50 = scene == 7
+        end
+        __O[157] = ____t_result_50
+        if ____t_51(____t_result_50) then
+            ____t_result_52 = __O[157]
+        else
+            ____t_result_52 = scene == 9
+        end
+        if ____t_53(____t_result_52) then
             local sk = __L1:skyline(scene)
             local o = __mod(
                 __mod(camera * 0.1, 1920) + 1920,
                 1920
             )
-            local sy = if scene == 4 then 118 else if scene == 7 then 10 else if scene == 9 then 17 else 46
+            local sy = scene == 4 and 118 or (scene == 7 and 10 or (scene == 9 and 17 or 46))
             c:drawImage(
                 sk,
                 __TS__Number(-o),
@@ -2461,7 +2649,7 @@ local __O = {};
                     hy,
                     422,
                     250,
-                    if scene == 3 then "#7eada0" else "#89b7a0"
+                    scene == 3 and "#7eada0" or "#89b7a0"
                 )
                 if __t(hx > -430 and hx < 960) then
                     __L1:hillDetail(
@@ -2487,7 +2675,7 @@ local __O = {};
                     hy,
                     400,
                     190,
-                    if scene == 3 then "#5b937b" else "#64a068"
+                    scene == 3 and "#5b937b" or "#64a068"
                 )
                 if __t(hx > -410 and hx < 960) then
                     __L1:hillDetail(
@@ -2576,7 +2764,10 @@ local __O = {};
             )
             do
                 local sw = math.floor(__L1:windAt(__L1:screenX(c, 0)) * 2.2 + 0.5)
-                c:translate(sw, if math.abs(sw) > 1 then 1 else 0)
+                c:translate(
+                    sw,
+                    math.abs(sw) > 1 and 1 or 0
+                )
             end
             do
                 local i = 0
@@ -2595,7 +2786,7 @@ local __O = {};
                             },
                             4
                         ),
-                        if __t(__mod(i, 2)) then "#367c42" else "#64a147"
+                        __t(__mod(i, 2)) and "#367c42" or "#64a147"
                     )
                     i = i + 1
                 end
@@ -2725,7 +2916,7 @@ local __O = {};
                         yy,
                         6 + __L1:hash(i) * 8,
                         3,
-                        if __t(__mod(i, 3)) then "#7fac42" else "#2c633b"
+                        __t(__mod(i, 3)) and "#7fac42" or "#2c633b"
                     )
                     i = i + 1
                 end
@@ -2856,7 +3047,7 @@ local __O = {};
             while i < 5 do
                 local xx = x + i * 4
                 local h = 5 + __L1:hash(i + seed) * 8
-                local col = if __t(__mod(i, 2)) then "#7dad42" else "#3e863d"
+                local col = __t(__mod(i, 2)) and "#7dad42" or "#3e863d"
                 local lean = math.floor(w * (1.4 + h * 0.18) + math.sin(__L1.animT * 3.1 + i + seed) * 0.4 + 0.5)
                 __L1:r(
                     c,
@@ -2880,7 +3071,7 @@ local __O = {};
                     y - h - __L1:hash(i + seed) * 1 + 1,
                     2,
                     h * 0.3,
-                    if __t(__mod(i, 2)) then "#a6c95a" else "#58a046"
+                    __t(__mod(i, 2)) and "#a6c95a" or "#58a046"
                 )
                 i = i + 1
             end
@@ -2990,7 +3181,7 @@ local __O = {};
                     yy,
                     ____end - start,
                     9,
-                    if __t(__mod(row, 2)) then "#c96545" else "#d9774d"
+                    __t(__mod(row, 2)) and "#c96545" or "#d9774d"
                 )
                 do
                     local xx = start
@@ -3198,10 +3389,16 @@ local __O = {};
                 ["9"] = __arrL({"#c3ccca", "#f2f3df", "#9aaeb0"}, 3),
                 ["10"] = __arrL({"#ab805b", "#f0d9b0", "#856747"}, 3)
             }
-            local ____t_25 = __t
-            local ____get_result_24 = __get(palettes, scene)
-            __O[158] = ____get_result_24
-            local p = if ____t_25(____get_result_24) then __O[158] else __get(palettes, 4)
+            local ____t_result_56
+            local ____t_55 = __t
+            local ____get_result_54 = __get(palettes, scene)
+            __O[158] = ____get_result_54
+            if ____t_55(____get_result_54) then
+                ____t_result_56 = __O[158]
+            else
+                ____t_result_56 = __get(palettes, 4)
+            end
+            local p = ____t_result_56
             __L1:r(
                 c,
                 0,
@@ -3260,7 +3457,7 @@ local __O = {};
             440,
             960,
             100,
-            if __t(farm) then "#a17349" else if __t(gym) then "#554b48" else "#97856e"
+            __t(farm) and "#a17349" or (__t(gym) and "#554b48" or "#97856e")
         )
         if __t(farm) then
             __L1:r(
@@ -3309,7 +3506,7 @@ local __O = {};
                 440,
                 960,
                 7,
-                if __t(gym) then "#8f8170" else "#c4b08a"
+                __t(gym) and "#8f8170" or "#c4b08a"
             )
             __L1:r(
                 c,
@@ -3331,7 +3528,7 @@ local __O = {};
                     y,
                     3 + __L1:hash(i + 5) * 10,
                     3,
-                    if scene == 2 then "#655956" else if __t(farm) then "#bb8c56" else "#a8977b"
+                    scene == 2 and "#655956" or (__t(farm) and "#bb8c56" or "#a8977b")
                 )
                 if __mod(i, 3) == 0 then
                     __L1:r(
@@ -3359,7 +3556,7 @@ local __O = {};
                         452,
                         1,
                         88,
-                        if scene == 2 then "#4c4240" else "#817460"
+                        scene == 2 and "#4c4240" or "#817460"
                     )
                     x = x + 96
                 end
@@ -3370,7 +3567,7 @@ local __O = {};
                 498,
                 960,
                 1,
-                if scene == 2 then "#4c4240" else "#817460"
+                scene == 2 and "#4c4240" or "#817460"
             )
         end
     end
@@ -3611,22 +3808,24 @@ local __O = {};
         do
             local i = 0
             while i < 75 do
-                local x = __L1:hash(i + 67) * 2600
-                local y = 426 + __L1:hash(i + 44) * 12
-                if __t(x > 115 and x < 330) then
-                    continue
-                end
-                __L1:grass(c, x, y, i)
-                if __mod(i, 5) == 0 then
-                    __L1:flower(
-                        c,
-                        x + 5,
-                        y,
-                        __get(
-                            __arrL({"#efcf71", "#e3a67d", "#f4df9a"}, 3),
-                            __mod(i, 3)
+                do
+                    local x = __L1:hash(i + 67) * 2600
+                    local y = 426 + __L1:hash(i + 44) * 12
+                    if __t(x > 115 and x < 330) then
+                        do i = i + 1 continue end
+                    end
+                    __L1:grass(c, x, y, i)
+                    if __mod(i, 5) == 0 then
+                        __L1:flower(
+                            c,
+                            x + 5,
+                            y,
+                            __get(
+                                __arrL({"#efcf71", "#e3a67d", "#f4df9a"}, 3),
+                                __mod(i, 3)
+                            )
                         )
-                    )
+                    end
                 end
                 i = i + 1
             end
@@ -3643,7 +3842,7 @@ local __O = {};
                     y - 2,
                     w,
                     4,
-                    if __t(__mod(i, 2)) then "#f0ce60" else "#e9a66d"
+                    __t(__mod(i, 2)) and "#f0ce60" or "#e9a66d"
                 )
                 __L1:r(
                     c,
@@ -3651,7 +3850,7 @@ local __O = {};
                     y - 2,
                     w,
                     4,
-                    if __t(__mod(i, 2)) then "#ffe5a1" else "#f5bf8c"
+                    __t(__mod(i, 2)) and "#ffe5a1" or "#f5bf8c"
                 )
                 __L1:r(
                     c,
@@ -4896,7 +5095,7 @@ local __O = {};
                         },
                         3
                     ),
-                    if __t(__mod(i, 2)) then "#b87d59" else "#879c81"
+                    __t(__mod(i, 2)) and "#b87d59" or "#879c81"
                 )
                 i = i + 1
             end
@@ -5060,14 +5259,14 @@ local __O = {};
             y - 30,
             9,
             4,
-            if __t(__mod(seed, 3)) then "#373c36" else "#835d37"
+            __t(__mod(seed, 3)) and "#373c36" or "#835d37"
         )
         __L1:r(
             c,
             x - 4,
             y - 5,
             3,
-            if __t(seat) then 5 else 8,
+            __t(seat) and 5 or 8,
             "#344e5c"
         )
         __L1:r(
@@ -5075,7 +5274,7 @@ local __O = {};
             x + 2,
             y - 5,
             3,
-            if __t(seat) then 5 else 8,
+            __t(seat) and 5 or 8,
             "#344e5c"
         )
         __L1:r(
@@ -5196,7 +5395,7 @@ local __O = {};
                     yy,
                     19 + __L1:hash(i + 4) * 30,
                     2,
-                    if __t(__mod(i, 2)) then "#96d4dd" else "#83c0d1"
+                    __t(__mod(i, 2)) and "#96d4dd" or "#83c0d1"
                 )
                 i = i + 1
             end
@@ -5266,288 +5465,294 @@ local __O = {};
         do
             local x = 160
             while x < __L1:worldWidth(4) do
-                if __t(x < camera - 260 or __gt(x, camera + 1160)) then
-                    continue
+                do
+                    if __t(x < camera - 260 or __gt(x, camera + 1160)) then
+                        do x = x + 570 continue end
+                    end
+                    __L1:tree(
+                        c,
+                        x,
+                        430,
+                        0.72,
+                        1
+                    )
+                    __L1:bush(
+                        c,
+                        x + 75,
+                        433,
+                        75,
+                        "#578b45"
+                    )
+                    __L1:r(
+                        c,
+                        x + 137,
+                        401,
+                        112,
+                        8,
+                        "#986c44"
+                    )
+                    __L1:r(
+                        c,
+                        x + 142,
+                        409,
+                        7,
+                        30,
+                        "#4c6d57"
+                    )
+                    __L1:r(
+                        c,
+                        x + 234,
+                        409,
+                        7,
+                        30,
+                        "#4c6d57"
+                    )
+                    __L1:r(
+                        c,
+                        x + 137,
+                        378,
+                        112,
+                        7,
+                        "#c39b65"
+                    )
+                    __L1:r(
+                        c,
+                        x + 137,
+                        391,
+                        112,
+                        6,
+                        "#b28856"
+                    )
+                    __L1:backgroundCitizen(
+                        c,
+                        x + 180,
+                        404,
+                        t,
+                        math.floor(x / 570),
+                        true
+                    )
                 end
-                __L1:tree(
-                    c,
-                    x,
-                    430,
-                    0.72,
-                    1
-                )
-                __L1:bush(
-                    c,
-                    x + 75,
-                    433,
-                    75,
-                    "#578b45"
-                )
-                __L1:r(
-                    c,
-                    x + 137,
-                    401,
-                    112,
-                    8,
-                    "#986c44"
-                )
-                __L1:r(
-                    c,
-                    x + 142,
-                    409,
-                    7,
-                    30,
-                    "#4c6d57"
-                )
-                __L1:r(
-                    c,
-                    x + 234,
-                    409,
-                    7,
-                    30,
-                    "#4c6d57"
-                )
-                __L1:r(
-                    c,
-                    x + 137,
-                    378,
-                    112,
-                    7,
-                    "#c39b65"
-                )
-                __L1:r(
-                    c,
-                    x + 137,
-                    391,
-                    112,
-                    6,
-                    "#b28856"
-                )
-                __L1:backgroundCitizen(
-                    c,
-                    x + 180,
-                    404,
-                    t,
-                    math.floor(x / 570),
-                    true
-                )
                 x = x + 570
             end
         end
         for ____, x in __iterar((__arrL({1050, 4230}, 2))) do
-            if __t(x < camera - 280 or __gt(x, camera + 1240)) then
-                continue
-            end
-            __L1:oval(
-                c,
-                x,
-                425,
-                111,
-                18,
-                "#698d89",
-                3
-            )
-            __L1:oval(
-                c,
-                x,
-                416,
-                103,
-                20,
-                "#d7d4b8",
-                3
-            )
-            __L1:oval(
-                c,
-                x,
-                409,
-                91,
-                15,
-                "#77bbca",
-                3
-            )
-            __L1:oval(
-                c,
-                x,
-                409,
-                74,
-                9,
-                "#a5dce2",
-                3
-            )
-            __L1:r(
-                c,
-                x - 8,
-                342,
-                17,
-                65,
-                "#d9d9bd"
-            )
-            __L1:oval(
-                c,
-                x,
-                341,
-                58,
-                9,
-                "#d9d9bd",
-                3
-            )
-            __L1:oval(
-                c,
-                x,
-                335,
-                50,
-                8,
-                "#82c6cf",
-                3
-            )
-            __L1:r(
-                c,
-                x - 4,
-                294,
-                8,
-                40,
-                "#ecedcf"
-            )
-            __L1:oval(
-                c,
-                x,
-                293,
-                21,
-                7,
-                "#e5e7cd",
-                2
-            )
             do
-                local j = 0
-                while j < 5 do
-                    local a = j * math.pi / 4 + math.pi * 0.1
-                    local ex = math.cos(a) * 44
-                    local ey = math.sin(a) * 24
-                    __L1:limb(
-                        c,
-                        __arrL(
-                            {
-                                __arrL({x, 291}, 2),
-                                __arrL({x + ex * 0.5, 259 - ey}, 2),
-                                __arrL({x + ex, 312}, 2)
-                            },
-                            3
-                        ),
-                        3,
-                        "#b7eced"
-                    )
-                    __L1:r(
-                        c,
-                        x + ex,
-                        306 + __mod(t * 55 + j * 11, 19),
-                        3,
-                        5,
-                        "#edf8ee"
-                    )
-                    j = j + 1
+                if __t(x < camera - 280 or __gt(x, camera + 1240)) then
+                    continue
                 end
-            end
-            do
-                local j = 0
-                while j < 12 do
-                    local xx = x - 74 + j * 14
-                    local yy = 409 - math.abs(math.sin(t * 3 + j)) * 7
-                    __L1:r(
-                        c,
-                        xx,
-                        yy,
-                        4,
-                        2,
-                        "#d6f2e8"
-                    )
-                    j = j + 1
+                __L1:oval(
+                    c,
+                    x,
+                    425,
+                    111,
+                    18,
+                    "#698d89",
+                    3
+                )
+                __L1:oval(
+                    c,
+                    x,
+                    416,
+                    103,
+                    20,
+                    "#d7d4b8",
+                    3
+                )
+                __L1:oval(
+                    c,
+                    x,
+                    409,
+                    91,
+                    15,
+                    "#77bbca",
+                    3
+                )
+                __L1:oval(
+                    c,
+                    x,
+                    409,
+                    74,
+                    9,
+                    "#a5dce2",
+                    3
+                )
+                __L1:r(
+                    c,
+                    x - 8,
+                    342,
+                    17,
+                    65,
+                    "#d9d9bd"
+                )
+                __L1:oval(
+                    c,
+                    x,
+                    341,
+                    58,
+                    9,
+                    "#d9d9bd",
+                    3
+                )
+                __L1:oval(
+                    c,
+                    x,
+                    335,
+                    50,
+                    8,
+                    "#82c6cf",
+                    3
+                )
+                __L1:r(
+                    c,
+                    x - 4,
+                    294,
+                    8,
+                    40,
+                    "#ecedcf"
+                )
+                __L1:oval(
+                    c,
+                    x,
+                    293,
+                    21,
+                    7,
+                    "#e5e7cd",
+                    2
+                )
+                do
+                    local j = 0
+                    while j < 5 do
+                        local a = j * math.pi / 4 + math.pi * 0.1
+                        local ex = math.cos(a) * 44
+                        local ey = math.sin(a) * 24
+                        __L1:limb(
+                            c,
+                            __arrL(
+                                {
+                                    __arrL({x, 291}, 2),
+                                    __arrL({x + ex * 0.5, 259 - ey}, 2),
+                                    __arrL({x + ex, 312}, 2)
+                                },
+                                3
+                            ),
+                            3,
+                            "#b7eced"
+                        )
+                        __L1:r(
+                            c,
+                            x + ex,
+                            306 + __mod(t * 55 + j * 11, 19),
+                            3,
+                            5,
+                            "#edf8ee"
+                        )
+                        j = j + 1
+                    end
+                end
+                do
+                    local j = 0
+                    while j < 12 do
+                        local xx = x - 74 + j * 14
+                        local yy = 409 - math.abs(math.sin(t * 3 + j)) * 7
+                        __L1:r(
+                            c,
+                            xx,
+                            yy,
+                            4,
+                            2,
+                            "#d6f2e8"
+                        )
+                        j = j + 1
+                    end
                 end
             end
         end
         for ____, x in __iterar((__arrL({1970, 5030}, 2))) do
-            if __t(x < camera - 300 or __gt(x, camera + 1100)) then
-                continue
-            end
-            __L1:r(
-                c,
-                x,
-                314,
-                170,
-                124,
-                "#efdfb5"
-            )
-            __L1:r(
-                c,
-                x - 12,
-                306,
-                194,
-                16,
-                "#274d61"
-            )
-            __L1:r(
-                c,
-                x + 9,
-                326,
-                152,
-                14,
-                "#305a6c"
-            )
-            __L1:r(
-                c,
-                x + 15,
-                350,
-                139,
-                61,
-                "#4c898c"
-            )
-            __L1:r(
-                c,
-                x + 19,
-                354,
-                131,
-                52,
-                "#89b9b6"
-            )
-            __L1:r(
-                c,
-                x + 13,
-                412,
-                142,
-                9,
-                "#c79860"
-            )
-            c.fillStyle = "#f8ebc7"
-            c.font = "bold 10px monospace"
-            c:fillText("CACAU & RESENHA", x + 21, 337)
             do
-                local i = 0
-                while i < 3 do
-                    __L1:r(
-                        c,
-                        x + 28 + i * 44,
-                        374,
-                        22,
-                        31,
-                        "#9b694b"
-                    )
-                    __L1:r(
-                        c,
-                        x + 31 + i * 44,
-                        372,
-                        15,
-                        4,
-                        "#d9ac69"
-                    )
-                    i = i + 1
+                if __t(x < camera - 300 or __gt(x, camera + 1100)) then
+                    continue
                 end
+                __L1:r(
+                    c,
+                    x,
+                    314,
+                    170,
+                    124,
+                    "#efdfb5"
+                )
+                __L1:r(
+                    c,
+                    x - 12,
+                    306,
+                    194,
+                    16,
+                    "#274d61"
+                )
+                __L1:r(
+                    c,
+                    x + 9,
+                    326,
+                    152,
+                    14,
+                    "#305a6c"
+                )
+                __L1:r(
+                    c,
+                    x + 15,
+                    350,
+                    139,
+                    61,
+                    "#4c898c"
+                )
+                __L1:r(
+                    c,
+                    x + 19,
+                    354,
+                    131,
+                    52,
+                    "#89b9b6"
+                )
+                __L1:r(
+                    c,
+                    x + 13,
+                    412,
+                    142,
+                    9,
+                    "#c79860"
+                )
+                c.fillStyle = "#f8ebc7"
+                c.font = "bold 10px monospace"
+                c:fillText("CACAU & RESENHA", x + 21, 337)
+                do
+                    local i = 0
+                    while i < 3 do
+                        __L1:r(
+                            c,
+                            x + 28 + i * 44,
+                            374,
+                            22,
+                            31,
+                            "#9b694b"
+                        )
+                        __L1:r(
+                            c,
+                            x + 31 + i * 44,
+                            372,
+                            15,
+                            4,
+                            "#d9ac69"
+                        )
+                        i = i + 1
+                    end
+                end
+                __L1:backgroundCitizen(
+                    c,
+                    x + 82,
+                    412,
+                    t,
+                    3
+                )
             end
-            __L1:backgroundCitizen(
-                c,
-                x + 82,
-                412,
-                t,
-                3
-            )
         end
         __L1:r(
             c,
@@ -5581,34 +5786,36 @@ local __O = {};
         do
             local i = 0
             while i < 9 do
-                local x = 700 + i * 650
-                if __t(x < camera - 70 or __gt(x, camera + 1040)) then
-                    continue
+                do
+                    local x = 700 + i * 650
+                    if __t(x < camera - 70 or __gt(x, camera + 1040)) then
+                        do i = i + 1 continue end
+                    end
+                    __L1:r(
+                        c,
+                        x,
+                        261,
+                        5,
+                        176,
+                        "#476967"
+                    )
+                    __L1:r(
+                        c,
+                        x - 13,
+                        251,
+                        32,
+                        13,
+                        "#294e5a"
+                    )
+                    __L1:r(
+                        c,
+                        x - 8,
+                        254,
+                        22,
+                        7,
+                        "#fff0b4"
+                    )
                 end
-                __L1:r(
-                    c,
-                    x,
-                    261,
-                    5,
-                    176,
-                    "#476967"
-                )
-                __L1:r(
-                    c,
-                    x - 13,
-                    251,
-                    32,
-                    13,
-                    "#294e5a"
-                )
-                __L1:r(
-                    c,
-                    x - 8,
-                    254,
-                    22,
-                    7,
-                    "#fff0b4"
-                )
                 i = i + 1
             end
         end
@@ -5639,7 +5846,7 @@ local __O = {};
             y,
             w,
             h,
-            if __t(back) then "#82949a" else "#513e38"
+            __t(back) and "#82949a" or "#513e38"
         )
         __L1:r(
             c,
@@ -5655,7 +5862,7 @@ local __O = {};
             y - 7,
             w + 10,
             10,
-            if __t(back) then "#5b747b" else "#71645a"
+            __t(back) and "#5b747b" or "#71645a"
         )
         __L1:r(
             c,
@@ -5671,17 +5878,19 @@ local __O = {};
                 do
                     local col = 0
                     while col < math.floor(w / 24) do
-                        if __t(back) then
-                            continue
+                        do
+                            if __t(back) then
+                                do col = col + 1 continue end
+                            end
+                            __L1:r(
+                                c,
+                                x + 4 + col * 24 + (__t(__mod(row, 2)) and 9 or 0),
+                                y + 13 + row * 18,
+                                17,
+                                1,
+                                "#a9654b"
+                            )
                         end
-                        __L1:r(
-                            c,
-                            x + 4 + col * 24 + if __t(__mod(row, 2)) then 9 else 0,
-                            y + 13 + row * 18,
-                            17,
-                            1,
-                            "#a9654b"
-                        )
                         col = col + 1
                     end
                 end
@@ -5708,7 +5917,7 @@ local __O = {};
                     wy + 3,
                     math.min(24, w * 0.3 - 6),
                     wh - 7,
-                    if __t(__mod(seed, 3)) then "#84b6c0" else "#e1c892"
+                    __t(__mod(seed, 3)) and "#84b6c0" or "#e1c892"
                 )
                 __L1:r(
                     c,
@@ -5945,46 +6154,48 @@ local __O = {};
             local x = 870
             local i = 0
             while x < __L1:worldWidth(5) do
-                if __t(x < camera - 260 or __gt(x, camera + 1100)) then
-                    continue
+                do
+                    if __t(x < camera - 260 or __gt(x, camera + 1100)) then
+                        do do x = x + 900 i = i + 1 end continue end
+                    end
+                    __L1:r(
+                        c,
+                        x,
+                        294,
+                        128,
+                        75,
+                        "#3c5358"
+                    )
+                    __L1:r(
+                        c,
+                        x + 5,
+                        299,
+                        118,
+                        65,
+                        "#2a5b65"
+                    )
+                    c.fillStyle = "#b0dfc5"
+                    c.font = "bold 12px monospace"
+                    c:fillText(i > 4 and "ALTO DO MORRO" or "RESPEITA A RESENHA", x + 7, 322)
+                    c.font = "bold 9px monospace"
+                    c:fillText("GABRIEL REEIS", x + 12, 344)
+                    __L1:r(
+                        c,
+                        x + 142,
+                        393,
+                        28,
+                        45,
+                        "#395f59"
+                    )
+                    __L1:r(
+                        c,
+                        x + 140,
+                        387,
+                        32,
+                        7,
+                        "#82a087"
+                    )
                 end
-                __L1:r(
-                    c,
-                    x,
-                    294,
-                    128,
-                    75,
-                    "#3c5358"
-                )
-                __L1:r(
-                    c,
-                    x + 5,
-                    299,
-                    118,
-                    65,
-                    "#2a5b65"
-                )
-                c.fillStyle = "#b0dfc5"
-                c.font = "bold 12px monospace"
-                c:fillText(if i > 4 then "ALTO DO MORRO" else "RESPEITA A RESENHA", x + 7, 322)
-                c.font = "bold 9px monospace"
-                c:fillText("GABRIEL REEIS", x + 12, 344)
-                __L1:r(
-                    c,
-                    x + 142,
-                    393,
-                    28,
-                    45,
-                    "#395f59"
-                )
-                __L1:r(
-                    c,
-                    x + 140,
-                    387,
-                    32,
-                    7,
-                    "#82a087"
-                )
                 do
                     x = x + 900
                     i = i + 1
@@ -6040,7 +6251,7 @@ local __O = {};
                     y,
                     3,
                     3,
-                    if __t(__mod(i, 3)) then "#b5a2cf" else "#e3c7ed"
+                    __t(__mod(i, 3)) and "#b5a2cf" or "#e3c7ed"
                 )
                 i = i + 1
             end
@@ -6195,28 +6406,30 @@ local __O = {};
             local x = 680
             local i = 0
             while x < __L1:worldWidth(6) do
-                if __t(x < camera - 190 or __gt(x, camera + 1140)) then
-                    continue
+                do
+                    if __t(x < camera - 190 or __gt(x, camera + 1140)) then
+                        do do x = x + 990 i = i + 1 end continue end
+                    end
+                    __L1:r(
+                        c,
+                        x,
+                        109,
+                        143,
+                        39,
+                        "#3c324f"
+                    )
+                    __L1:r(
+                        c,
+                        x + 4,
+                        113,
+                        135,
+                        31,
+                        "#876591"
+                    )
+                    c.fillStyle = "#f1d3e1"
+                    c.font = "bold 11px monospace"
+                    c:fillText(i > 3 and "O RABISCO GIGANTE" or "O CADERNO TEM FOME", x + 9, 132)
                 end
-                __L1:r(
-                    c,
-                    x,
-                    109,
-                    143,
-                    39,
-                    "#3c324f"
-                )
-                __L1:r(
-                    c,
-                    x + 4,
-                    113,
-                    135,
-                    31,
-                    "#876591"
-                )
-                c.fillStyle = "#f1d3e1"
-                c.font = "bold 11px monospace"
-                c:fillText(if i > 3 then "O RABISCO GIGANTE" else "O CADERNO TEM FOME", x + 9, 132)
                 do
                     x = x + 990
                     i = i + 1
@@ -6234,7 +6447,7 @@ local __O = {};
                     yy,
                     6,
                     3,
-                    if __t(__mod(i, 2)) then "#ddb8d0" else "#a5ca9c"
+                    __t(__mod(i, 2)) and "#ddb8d0" or "#a5ca9c"
                 )
                 i = i + 1
             end
@@ -6340,112 +6553,116 @@ local __O = {};
         do
             local x = 190
             while x < __L1:worldWidth(7) do
-                if __t(x < camera - 400 or __gt(x, camera + 1220)) then
-                    continue
-                end
                 do
-                    local row = 0
-                    while row < 3 do
-                        __L1:r(
-                            c,
-                            x - row * 16,
-                            264 + row * 20,
-                            320 + row * 32,
-                            7,
-                            "#6b90a4"
-                        )
-                        do
-                            local j = 0
-                            while j < 15 do
-                                __L1:backgroundCitizen(
-                                    c,
-                                    x + 10 + j * 20,
-                                    268 + row * 20,
-                                    t,
-                                    j + row * 5,
-                                    true
-                                )
-                                j = j + 1
-                            end
-                        end
-                        row = row + 1
+                    if __t(x < camera - 400 or __gt(x, camera + 1220)) then
+                        do x = x + 960 continue end
                     end
+                    do
+                        local row = 0
+                        while row < 3 do
+                            __L1:r(
+                                c,
+                                x - row * 16,
+                                264 + row * 20,
+                                320 + row * 32,
+                                7,
+                                "#6b90a4"
+                            )
+                            do
+                                local j = 0
+                                while j < 15 do
+                                    __L1:backgroundCitizen(
+                                        c,
+                                        x + 10 + j * 20,
+                                        268 + row * 20,
+                                        t,
+                                        j + row * 5,
+                                        true
+                                    )
+                                    j = j + 1
+                                end
+                            end
+                            row = row + 1
+                        end
+                    end
+                    __L1:r(
+                        c,
+                        x + 125,
+                        258,
+                        84,
+                        4,
+                        "#183e60"
+                    )
                 end
-                __L1:r(
-                    c,
-                    x + 125,
-                    258,
-                    84,
-                    4,
-                    "#183e60"
-                )
                 x = x + 960
             end
         end
         for ____, x in __iterar((__arrL({740, 4410}, 2))) do
-            if __t(x < camera - 200 or __gt(x, camera + 1120)) then
-                continue
-            end
-            __L1:r(
-                c,
-                x,
-                283,
-                7,
-                154,
-                "#e9f2de"
-            )
-            __L1:r(
-                c,
-                x + 173,
-                283,
-                7,
-                154,
-                "#e9f2de"
-            )
-            __L1:r(
-                c,
-                x,
-                282,
-                180,
-                7,
-                "#faffeb"
-            )
             do
-                local j = 0
-                while j < 10 do
-                    __L1:r(
-                        c,
-                        x + 5 + j * 18,
-                        290,
-                        1,
-                        145,
-                        "#b1ceaf"
-                    )
-                    j = j + 1
+                if __t(x < camera - 200 or __gt(x, camera + 1120)) then
+                    continue
                 end
-            end
-            do
-                local j = 0
-                while j < 8 do
-                    __L1:r(
-                        c,
-                        x + 7,
-                        291 + j * 18,
-                        166,
-                        1,
-                        "#b1ceaf"
-                    )
-                    j = j + 1
+                __L1:r(
+                    c,
+                    x,
+                    283,
+                    7,
+                    154,
+                    "#e9f2de"
+                )
+                __L1:r(
+                    c,
+                    x + 173,
+                    283,
+                    7,
+                    154,
+                    "#e9f2de"
+                )
+                __L1:r(
+                    c,
+                    x,
+                    282,
+                    180,
+                    7,
+                    "#faffeb"
+                )
+                do
+                    local j = 0
+                    while j < 10 do
+                        __L1:r(
+                            c,
+                            x + 5 + j * 18,
+                            290,
+                            1,
+                            145,
+                            "#b1ceaf"
+                        )
+                        j = j + 1
+                    end
                 end
+                do
+                    local j = 0
+                    while j < 8 do
+                        __L1:r(
+                            c,
+                            x + 7,
+                            291 + j * 18,
+                            166,
+                            1,
+                            "#b1ceaf"
+                        )
+                        j = j + 1
+                    end
+                end
+                __L1:r(
+                    c,
+                    x - 17,
+                    434,
+                    216,
+                    3,
+                    "#e6efcf"
+                )
             end
-            __L1:r(
-                c,
-                x - 17,
-                434,
-                216,
-                3,
-                "#e6efcf"
-            )
         end
         do
             local x = 1250
@@ -6590,7 +6807,7 @@ local __O = {};
                         },
                         4
                     ),
-                    if __t(__mod(i, 2)) then "#bf5e51" else "#476e99"
+                    __t(__mod(i, 2)) and "#bf5e51" or "#476e99"
                 )
                 i = i + 1
             end
@@ -6945,271 +7162,273 @@ local __O = {};
             local xx = 65
             local i = 0
             while xx < width do
-                if __t(xx < camera - 420 or __gt(xx, camera + 1040)) then
-                    continue
-                end
-                __L1:r(
-                    c,
-                    xx,
-                    123,
-                    213,
-                    186,
-                    "#303b3f"
-                )
-                __L1:r(
-                    c,
-                    xx + 5,
-                    128,
-                    203,
-                    176,
-                    "#b98b52"
-                )
-                __L1:r(
-                    c,
-                    xx + 11,
-                    134,
-                    191,
-                    163,
-                    "#576f75"
-                )
-                __L1:r(
-                    c,
-                    xx + 15,
-                    138,
-                    183,
-                    153,
-                    "#8dafb0"
-                )
-                __L1:poly(
-                    c,
-                    __arrL(
-                        {
-                            __arrL({xx + 22, 280}, 2),
-                            __arrL({xx + 123, 140}, 2),
-                            __arrL({xx + 149, 140}, 2),
-                            __arrL({xx + 48, 280}, 2)
-                        },
-                        4
-                    ),
-                    "#a7cbcb"
-                )
-                __L1:poly(
-                    c,
-                    __arrL(
-                        {
-                            __arrL({xx + 124, 278}, 2),
-                            __arrL({xx + 184, 194}, 2),
-                            __arrL({xx + 197, 194}, 2),
-                            __arrL({xx + 137, 278}, 2)
-                        },
-                        4
-                    ),
-                    "#9abfbd"
-                )
-                __L1:r(
-                    c,
-                    xx + 25,
-                    143,
-                    77,
-                    2,
-                    "#d2e1cc"
-                )
-                __L1:r(
-                    c,
-                    xx - 12,
-                    309,
-                    240,
-                    14,
-                    "#333f40"
-                )
-                __L1:r(
-                    c,
-                    xx - 9,
-                    309,
-                    234,
-                    4,
-                    "#b98a55"
-                )
-                __L1:r(
-                    c,
-                    xx - 6,
-                    323,
-                    226,
-                    47,
-                    "#a27a50"
-                )
-                __L1:r(
-                    c,
-                    xx - 6,
-                    323,
-                    226,
-                    5,
-                    "#76563c"
-                )
                 do
-                    local d = 0
-                    while d < 3 do
-                        __L1:r(
-                            c,
-                            xx + 2 + d * 72,
-                            332,
-                            63,
-                            27,
-                            "#805a3f"
-                        )
-                        __L1:r(
-                            c,
-                            xx + 7 + d * 72,
-                            335,
-                            53,
-                            2,
-                            "#bd9561"
-                        )
-                        __L1:r(
-                            c,
-                            xx + 26 + d * 72,
-                            342,
-                            15,
-                            3,
-                            "#d3be86"
-                        )
-                        d = d + 1
+                    if __t(xx < camera - 420 or __gt(xx, camera + 1040)) then
+                        do do xx = xx + 438 i = i + 1 end continue end
                     end
-                end
-                local colors = __arrL({"#67888c", "#b96851", "#d5b677"}, 3)
-                do
-                    local j = 0
-                    while j < 5 do
-                        local bx = xx + 4 + j * 27
-                        __L1:r(
-                            c,
-                            bx,
-                            286 - __mod(j, 2) * 7,
-                            10,
-                            23 + __mod(j, 2) * 7,
-                            __get(
-                                colors,
-                                __mod(j, 3)
+                    __L1:r(
+                        c,
+                        xx,
+                        123,
+                        213,
+                        186,
+                        "#303b3f"
+                    )
+                    __L1:r(
+                        c,
+                        xx + 5,
+                        128,
+                        203,
+                        176,
+                        "#b98b52"
+                    )
+                    __L1:r(
+                        c,
+                        xx + 11,
+                        134,
+                        191,
+                        163,
+                        "#576f75"
+                    )
+                    __L1:r(
+                        c,
+                        xx + 15,
+                        138,
+                        183,
+                        153,
+                        "#8dafb0"
+                    )
+                    __L1:poly(
+                        c,
+                        __arrL(
+                            {
+                                __arrL({xx + 22, 280}, 2),
+                                __arrL({xx + 123, 140}, 2),
+                                __arrL({xx + 149, 140}, 2),
+                                __arrL({xx + 48, 280}, 2)
+                            },
+                            4
+                        ),
+                        "#a7cbcb"
+                    )
+                    __L1:poly(
+                        c,
+                        __arrL(
+                            {
+                                __arrL({xx + 124, 278}, 2),
+                                __arrL({xx + 184, 194}, 2),
+                                __arrL({xx + 197, 194}, 2),
+                                __arrL({xx + 137, 278}, 2)
+                            },
+                            4
+                        ),
+                        "#9abfbd"
+                    )
+                    __L1:r(
+                        c,
+                        xx + 25,
+                        143,
+                        77,
+                        2,
+                        "#d2e1cc"
+                    )
+                    __L1:r(
+                        c,
+                        xx - 12,
+                        309,
+                        240,
+                        14,
+                        "#333f40"
+                    )
+                    __L1:r(
+                        c,
+                        xx - 9,
+                        309,
+                        234,
+                        4,
+                        "#b98a55"
+                    )
+                    __L1:r(
+                        c,
+                        xx - 6,
+                        323,
+                        226,
+                        47,
+                        "#a27a50"
+                    )
+                    __L1:r(
+                        c,
+                        xx - 6,
+                        323,
+                        226,
+                        5,
+                        "#76563c"
+                    )
+                    do
+                        local d = 0
+                        while d < 3 do
+                            __L1:r(
+                                c,
+                                xx + 2 + d * 72,
+                                332,
+                                63,
+                                27,
+                                "#805a3f"
                             )
-                        )
-                        __L1:r(
-                            c,
-                            bx + 2,
-                            281 - __mod(j, 2) * 7,
-                            6,
-                            6,
-                            "#28393e"
-                        )
-                        __L1:r(
-                            c,
-                            bx + 3,
-                            290 - __mod(j, 2) * 7,
-                            4,
-                            4,
-                            "#f0e4bb"
-                        )
-                        j = j + 1
+                            __L1:r(
+                                c,
+                                xx + 7 + d * 72,
+                                335,
+                                53,
+                                2,
+                                "#bd9561"
+                            )
+                            __L1:r(
+                                c,
+                                xx + 26 + d * 72,
+                                342,
+                                15,
+                                3,
+                                "#d3be86"
+                            )
+                            d = d + 1
+                        end
                     end
-                end
-                __L1:r(
-                    c,
-                    xx + 153,
-                    297,
-                    31,
-                    11,
-                    "#d4dbcd"
-                )
-                do
-                    local j = 0
-                    while j < 6 do
-                        __L1:r(
-                            c,
-                            xx + 155 + j * 4,
-                            294,
-                            2,
-                            11,
-                            "#28383d"
-                        )
-                        j = j + 1
+                    local colors = __arrL({"#67888c", "#b96851", "#d5b677"}, 3)
+                    do
+                        local j = 0
+                        while j < 5 do
+                            local bx = xx + 4 + j * 27
+                            __L1:r(
+                                c,
+                                bx,
+                                286 - __mod(j, 2) * 7,
+                                10,
+                                23 + __mod(j, 2) * 7,
+                                __get(
+                                    colors,
+                                    __mod(j, 3)
+                                )
+                            )
+                            __L1:r(
+                                c,
+                                bx + 2,
+                                281 - __mod(j, 2) * 7,
+                                6,
+                                6,
+                                "#28393e"
+                            )
+                            __L1:r(
+                                c,
+                                bx + 3,
+                                290 - __mod(j, 2) * 7,
+                                4,
+                                4,
+                                "#f0e4bb"
+                            )
+                            j = j + 1
+                        end
                     end
-                end
-                __L1:r(
-                    c,
-                    xx + 192,
-                    290,
-                    7,
-                    18,
-                    "#46616b"
-                )
-                __L1:r(
-                    c,
-                    xx + 190,
-                    286,
-                    11,
-                    6,
-                    "#bcc6b7"
-                )
-                __L1:r(
-                    c,
-                    xx + 93,
-                    40,
-                    3,
-                    47,
-                    "#3f4140"
-                )
-                __L1:r(
-                    c,
-                    xx + 64,
-                    86,
-                    63,
-                    8,
-                    "#3b3c36"
-                )
-                __L1:poly(
-                    c,
-                    __arrL(
-                        {
-                            __arrL({xx + 68, 92}, 2),
-                            __arrL({xx + 123, 92}, 2),
-                            __arrL({xx + 114, 105}, 2),
-                            __arrL({xx + 77, 105}, 2)
-                        },
-                        4
-                    ),
-                    "#b68a53"
-                )
-                __L1:r(
-                    c,
-                    xx + 83,
-                    102,
-                    27,
-                    5,
-                    "#ffe8a4"
-                )
-                __L1:barberChair(
-                    c,
-                    xx + 102,
-                    435,
-                    t + i,
-                    i == 3 or i == 5
-                )
-                do
-                    local k = 0
-                    while k < 7 do
-                        local hx = xx + 70 + k * 11
-                        __L1:poly(
-                            c,
-                            __arrL(
-                                {
-                                    __arrL({hx, 434}, 2),
-                                    __arrL({hx + 4, 432}, 2),
-                                    __arrL({hx + 7, 435}, 2)
-                                },
-                                3
-                            ),
-                            if __t(__mod(k, 2)) then "#53493e" else "#403b34"
-                        )
-                        k = k + 1
+                    __L1:r(
+                        c,
+                        xx + 153,
+                        297,
+                        31,
+                        11,
+                        "#d4dbcd"
+                    )
+                    do
+                        local j = 0
+                        while j < 6 do
+                            __L1:r(
+                                c,
+                                xx + 155 + j * 4,
+                                294,
+                                2,
+                                11,
+                                "#28383d"
+                            )
+                            j = j + 1
+                        end
+                    end
+                    __L1:r(
+                        c,
+                        xx + 192,
+                        290,
+                        7,
+                        18,
+                        "#46616b"
+                    )
+                    __L1:r(
+                        c,
+                        xx + 190,
+                        286,
+                        11,
+                        6,
+                        "#bcc6b7"
+                    )
+                    __L1:r(
+                        c,
+                        xx + 93,
+                        40,
+                        3,
+                        47,
+                        "#3f4140"
+                    )
+                    __L1:r(
+                        c,
+                        xx + 64,
+                        86,
+                        63,
+                        8,
+                        "#3b3c36"
+                    )
+                    __L1:poly(
+                        c,
+                        __arrL(
+                            {
+                                __arrL({xx + 68, 92}, 2),
+                                __arrL({xx + 123, 92}, 2),
+                                __arrL({xx + 114, 105}, 2),
+                                __arrL({xx + 77, 105}, 2)
+                            },
+                            4
+                        ),
+                        "#b68a53"
+                    )
+                    __L1:r(
+                        c,
+                        xx + 83,
+                        102,
+                        27,
+                        5,
+                        "#ffe8a4"
+                    )
+                    __L1:barberChair(
+                        c,
+                        xx + 102,
+                        435,
+                        t + i,
+                        i == 3 or i == 5
+                    )
+                    do
+                        local k = 0
+                        while k < 7 do
+                            local hx = xx + 70 + k * 11
+                            __L1:poly(
+                                c,
+                                __arrL(
+                                    {
+                                        __arrL({hx, 434}, 2),
+                                        __arrL({hx + 4, 432}, 2),
+                                        __arrL({hx + 7, 435}, 2)
+                                    },
+                                    3
+                                ),
+                                __t(__mod(k, 2)) and "#53493e" or "#403b34"
+                            )
+                            k = k + 1
+                        end
                     end
                 end
                 do
@@ -7611,7 +7830,7 @@ local __O = {};
                     dy,
                     2,
                     2,
-                    if __t(__mod(i, 2)) then "#f4d79b88" else "#f5e9be66"
+                    __t(__mod(i, 2)) and "#f4d79b88" or "#f5e9be66"
                 )
                 i = i + 1
             end
@@ -7629,33 +7848,45 @@ local __O = {};
         c:beginPath()
         c:rect(0, 0, 960, 540)
         c:clip()
-        local ____t_27 = __t
-        local ____TS__Number_result_26 = __TS__Number(camera)
-        __O[159] = ____TS__Number_result_26
-        camera = if ____t_27(____TS__Number_result_26) then __O[159] else 0
-        local ____t_29 = __t
-        local ____TS__Number_result_28 = __TS__Number(t)
-        __O[160] = ____TS__Number_result_28
-        t = if ____t_29(____TS__Number_result_28) then __O[160] else 0
+        local ____t_result_59
+        local ____t_58 = __t
+        local ____TS__Number_result_57 = __TS__Number(camera)
+        __O[159] = ____TS__Number_result_57
+        if ____t_58(____TS__Number_result_57) then
+            ____t_result_59 = __O[159]
+        else
+            ____t_result_59 = 0
+        end
+        camera = ____t_result_59
+        local ____t_result_62
+        local ____t_61 = __t
+        local ____TS__Number_result_60 = __TS__Number(t)
+        __O[160] = ____TS__Number_result_60
+        if ____t_61(____TS__Number_result_60) then
+            ____t_result_62 = __O[160]
+        else
+            ____t_result_62 = 0
+        end
+        t = ____t_result_62
         __L1.animT = t
         __L1.animCam = 0
-        local ____t_35 = __t
-        local ____opt_32 = window.Graphics
-        if ____opt_32 ~= nil then
-            ____opt_32 = ____opt_32.isLite
+        local ____t_68 = __t
+        local ____opt_65 = window.Graphics
+        if ____opt_65 ~= nil then
+            ____opt_65 = ____opt_65.isLite
         end
-        local ____opt_result_34
-        if ____opt_32 ~= nil then
-            ____opt_result_34 = ____opt_32(____opt_32)
+        local ____opt_result_67
+        if ____opt_65 ~= nil then
+            ____opt_result_67 = ____opt_65(____opt_65)
         end
-        __L1.liteNow = not not ____t_35(____opt_result_34)
+        __L1.liteNow = not not ____t_68(____opt_result_67)
         if scene == 11 then
-            local ____t_38 = __t
-            local ____opt_36 = window.BaileWorld
-            if ____opt_36 ~= nil then
-                ____opt_36 = ____opt_36.draw
+            local ____t_71 = __t
+            local ____opt_69 = window.BaileWorld
+            if ____opt_69 ~= nil then
+                ____opt_69 = ____opt_69.draw
             end
-            if ____t_38(____opt_36) then
+            if ____t_71(____opt_69) then
                 window.BaileWorld:draw(c, camera, t, {hideOllyan = true})
             else
                 __L1:r(
@@ -7686,25 +7917,31 @@ local __O = {};
             c:restore()
             return
         end
-        local ____t_46 = __t
-        local ____t_40 = __t
-        local ____temp_39 = not __t(__L1.liteNow) or __ge(scene, 40)
-        __O[161] = ____temp_39
-        local ____opt_43 = window.HdMaps
-        if ____opt_43 ~= nil then
-            ____opt_43 = ____opt_43.draw
+        local ____t_80 = __t
+        local ____t_result_79
+        local ____t_73 = __t
+        local ____temp_72 = not __t(__L1.liteNow) or __ge(scene, 40)
+        __O[161] = ____temp_72
+        if ____t_73(____temp_72) then
+            local ____opt_76 = window.HdMaps
+            if ____opt_76 ~= nil then
+                ____opt_76 = ____opt_76.draw
+            end
+            local ____opt_result_78
+            if ____opt_76 ~= nil then
+                ____opt_result_78 = ____opt_76(
+                    ____opt_76,
+                    c,
+                    scene,
+                    camera,
+                    t
+                )
+            end
+            ____t_result_79 = ____opt_result_78
+        else
+            ____t_result_79 = __O[161]
         end
-        local ____opt_result_45
-        if ____opt_43 ~= nil then
-            ____opt_result_45 = ____opt_43(
-                ____opt_43,
-                c,
-                scene,
-                camera,
-                t
-            )
-        end
-        if ____t_46(if ____t_40(____temp_39) then ____opt_result_45 else __O[161]) then
+        if ____t_80(____t_result_79) then
             __L1:groundBridges(c, scene, camera, t)
             window.HdMaps:finish(c, scene)
             c:restore()
@@ -7734,11 +7971,17 @@ local __O = {};
         else
             __L1:farm(c, camera, t)
         end
-        local ____t_49 = __t
-        local ____t_48 = __t
-        local ____temp_47 = scene ~= 2 and scene ~= 8
-        __O[162] = ____temp_47
-        if ____t_49(if ____t_48(____temp_47) then scene ~= 10 else __O[162]) then
+        local ____t_84 = __t
+        local ____t_result_83
+        local ____t_82 = __t
+        local ____temp_81 = scene ~= 2 and scene ~= 8
+        __O[162] = ____temp_81
+        if ____t_82(____temp_81) then
+            ____t_result_83 = scene ~= 10
+        else
+            ____t_result_83 = __O[162]
+        end
+        if ____t_84(____t_result_83) then
             do
                 local i = 0
                 while i < 13 do
@@ -7753,7 +7996,7 @@ local __O = {};
                         ly,
                         5,
                         2,
-                        if __t(__mod(i, 2)) then "#8bb65a" else "#b2c56c"
+                        __t(__mod(i, 2)) and "#8bb65a" or "#b2c56c"
                     )
                     __L1:r(
                         c,
@@ -7791,9 +8034,9 @@ local __O = {};
         if depth == nil then
             depth = 100
         end
-        local ink = if scene == 6 then "#4b3559" else "#57422f"
-        local wood = if scene == 6 then "#95749f" else "#a87947"
-        local lit = if scene == 6 then "#d8b7c4" else "#e0b66f"
+        local ink = scene == 6 and "#4b3559" or "#57422f"
+        local wood = scene == 6 and "#95749f" or "#a87947"
+        local lit = scene == 6 and "#d8b7c4" or "#e0b66f"
         local bottom = math.min(540, feet + depth)
         __L1:r(
             c,
@@ -7801,7 +8044,7 @@ local __O = {};
             feet + 13,
             width,
             bottom - feet - 13,
-            if scene == 6 then "#4e416c" else "#3a7581"
+            scene == 6 and "#4e416c" or "#3a7581"
         )
         do
             local i = 0
@@ -7819,7 +8062,7 @@ local __O = {};
                         __add(x, width) - xx
                     ),
                     2,
-                    if scene == 6 then "#a8a1c6" else "#8bc8cd"
+                    scene == 6 and "#a8a1c6" or "#8bc8cd"
                 )
                 i = i + 1
             end
@@ -8013,15 +8256,21 @@ local __O = {};
         )
     end
     __L1.groundBridges = function(self, c, scene, camera, t)
-        local ____t_54 = __t
-        local ____getq_52 = __getq
-        local ____opt_50 = window.WorldData
-        if ____opt_50 ~= nil then
-            ____opt_50 = ____opt_50.gaps
+        local ____t_result_90
+        local ____t_89 = __t
+        local ____getq_87 = __getq
+        local ____opt_85 = window.WorldData
+        if ____opt_85 ~= nil then
+            ____opt_85 = ____opt_85.gaps
         end
-        local ____getq_52_result_53 = ____getq_52(____opt_50, scene)
-        __O[163] = ____getq_52_result_53
-        local gaps = if ____t_54(____getq_52_result_53) then __O[163] else __arrL({}, 0)
+        local ____getq_87_result_88 = ____getq_87(____opt_85, scene)
+        __O[163] = ____getq_87_result_88
+        if ____t_89(____getq_87_result_88) then
+            ____t_result_90 = __O[163]
+        else
+            ____t_result_90 = __arrL({}, 0)
+        end
+        local gaps = ____t_result_90
         if not __t(__len(gaps)) then
             return
         end
@@ -8031,28 +8280,46 @@ local __O = {};
             0
         )
         for ____, g in __iterar((gaps)) do
-            local x = __TS__Number(__get(g, 0))
-            local w = __TS__Number(__get(g, 1))
-            local ____t_61 = __t
-            local ____t_60 = __t
-            local ____t_58 = __t
-            local ____t_56 = __t
-            local ____temp_55 = not __isFiniteN(x) or not __isFiniteN(w)
-            __O[164] = ____temp_55
-            local ____temp_57 = if ____t_56(____temp_55) then __O[164] else w <= 0
-            __O[165] = ____temp_57
-            local ____temp_59 = if ____t_58(____temp_57) then __O[165] else x + w < camera - 25
-            __O[166] = ____temp_59
-            if ____t_61(if ____t_60(____temp_59) then __O[166] else __gt(x, camera + 985)) then
-                continue
+            do
+                local x = __TS__Number(__get(g, 0))
+                local w = __TS__Number(__get(g, 1))
+                local ____t_98 = __t
+                local ____t_result_97
+                local ____t_96 = __t
+                local ____t_result_95
+                local ____t_94 = __t
+                local ____t_result_93
+                local ____t_92 = __t
+                local ____temp_91 = not __isFiniteN(x) or not __isFiniteN(w)
+                __O[164] = ____temp_91
+                if ____t_92(____temp_91) then
+                    ____t_result_93 = __O[164]
+                else
+                    ____t_result_93 = w <= 0
+                end
+                __O[165] = ____t_result_93
+                if ____t_94(____t_result_93) then
+                    ____t_result_95 = __O[165]
+                else
+                    ____t_result_95 = x + w < camera - 25
+                end
+                __O[166] = ____t_result_95
+                if ____t_96(____t_result_95) then
+                    ____t_result_97 = __O[166]
+                else
+                    ____t_result_97 = __gt(x, camera + 985)
+                end
+                if ____t_98(____t_result_97) then
+                    continue
+                end
+                __L1:woodenBridge(
+                    c,
+                    x,
+                    w,
+                    t,
+                    scene
+                )
             end
-            __L1:woodenBridge(
-                c,
-                x,
-                w,
-                t,
-                scene
-            )
         end
         c:restore()
     end
@@ -8107,7 +8374,7 @@ local __O = {};
             -7,
             12,
             9,
-            if __t(rooster) then "#b27b4b" else "#fcf2d9",
+            __t(rooster) and "#b27b4b" or "#fcf2d9",
             2
         )
         __L1:r(
@@ -8116,7 +8383,7 @@ local __O = {};
             -12,
             6,
             7,
-            if __t(rooster) then "#315e49" else "#d8d5bd"
+            __t(rooster) and "#315e49" or "#d8d5bd"
         )
         __L1:r(
             c,
@@ -8124,7 +8391,7 @@ local __O = {};
             -15,
             5,
             5,
-            if __t(rooster) then "#28533d" else "#e8dfc2"
+            __t(rooster) and "#28533d" or "#e8dfc2"
         )
         __L1:r(
             c,
@@ -8132,7 +8399,7 @@ local __O = {};
             -20,
             9,
             14,
-            if __t(rooster) then "#d9aa64" else "#fff9e4"
+            __t(rooster) and "#d9aa64" or "#fff9e4"
         )
         __L1:r(
             c,
@@ -8172,7 +8439,7 @@ local __O = {};
             -11 + math.floor(math.sin(t * 3) + 0.5),
             9,
             6,
-            if __t(rooster) then "#8e603e" else "#e2ddc6"
+            __t(rooster) and "#8e603e" or "#e2ddc6"
         )
         __L1:r(
             c,
@@ -8180,7 +8447,7 @@ local __O = {};
             -10,
             7,
             2,
-            if __t(rooster) then "#c58b52" else "#fff8df"
+            __t(rooster) and "#c58b52" or "#fff8df"
         )
         c:restore()
     end
@@ -8359,20 +8626,38 @@ local __O = {};
         end
         c:save()
         c.imageSmoothingEnabled = false
-        local ____t_63 = __t
-        local ____TS__Number_result_62 = __TS__Number(time)
-        __O[167] = ____TS__Number_result_62
-        local t = if ____t_63(____TS__Number_result_62) then __O[167] else 0
-        local ____c_69 = c
-        local ____c_scale_70 = c.scale
-        local ____t_65 = __t
-        local ____TS__Number_result_64 = __TS__Number(width)
-        __O[168] = ____TS__Number_result_64
-        local ____temp_68 = if ____t_65(____TS__Number_result_64) then __O[168] else 960 / 960
-        local ____t_67 = __t
-        local ____TS__Number_result_66 = __TS__Number(height)
-        __O[169] = ____TS__Number_result_66
-        ____c_scale_70(____c_69, ____temp_68, if ____t_67(____TS__Number_result_66) then __O[169] else 540 / 540)
+        local ____t_result_101
+        local ____t_100 = __t
+        local ____TS__Number_result_99 = __TS__Number(time)
+        __O[167] = ____TS__Number_result_99
+        if ____t_100(____TS__Number_result_99) then
+            ____t_result_101 = __O[167]
+        else
+            ____t_result_101 = 0
+        end
+        local t = ____t_result_101
+        local ____c_109 = c
+        local ____c_scale_110 = c.scale
+        local ____t_result_104
+        local ____t_103 = __t
+        local ____TS__Number_result_102 = __TS__Number(width)
+        __O[168] = ____TS__Number_result_102
+        if ____t_103(____TS__Number_result_102) then
+            ____t_result_104 = __O[168]
+        else
+            ____t_result_104 = 960
+        end
+        local ____temp_108 = ____t_result_104 / 960
+        local ____t_result_107
+        local ____t_106 = __t
+        local ____TS__Number_result_105 = __TS__Number(height)
+        __O[169] = ____TS__Number_result_105
+        if ____t_106(____TS__Number_result_105) then
+            ____t_result_107 = __O[169]
+        else
+            ____t_result_107 = 540
+        end
+        ____c_scale_110(____c_109, ____temp_108, ____t_result_107 / 540)
         __L1:r(
             c,
             0,
@@ -8601,7 +8886,7 @@ local __O = {};
                     306 + row * 10,
                     ww,
                     8,
-                    if __t(__mod(row, 2)) then "#bd6547" else "#d47b4c"
+                    __t(__mod(row, 2)) and "#bd6547" or "#d47b4c"
                 )
                 do
                     local k = 0
@@ -8792,19 +9077,21 @@ local __O = {};
         do
             local i = 0
             while i < 30 do
-                local xx = 780 + __L1:hash(i + 80) * 173
-                local yy = 383 + __L1:hash(i + 90) * 151 + math.sin(t * 1.2 + i) * 2
-                if __t(xx < 800 and yy < 471) then
-                    continue
+                do
+                    local xx = 780 + __L1:hash(i + 80) * 173
+                    local yy = 383 + __L1:hash(i + 90) * 151 + math.sin(t * 1.2 + i) * 2
+                    if __t(xx < 800 and yy < 471) then
+                        do i = i + 1 continue end
+                    end
+                    __L1:r(
+                        c,
+                        xx,
+                        yy,
+                        10 + __L1:hash(i) * 17,
+                        2,
+                        __t(__mod(i, 3)) and "#b4e6df" or "#e8f7e5"
+                    )
                 end
-                __L1:r(
-                    c,
-                    xx,
-                    yy,
-                    10 + __L1:hash(i) * 17,
-                    2,
-                    if __t(__mod(i, 3)) then "#b4e6df" else "#e8f7e5"
-                )
                 i = i + 1
             end
         end
@@ -8863,7 +9150,7 @@ local __O = {};
                     yy,
                     4 + __L1:hash(i) * 4,
                     2,
-                    if __t(__mod(i, 2)) then "#bca174" else "#ebd3a0"
+                    __t(__mod(i, 2)) and "#bca174" or "#ebd3a0"
                 )
                 i = i + 1
             end
@@ -8954,26 +9241,34 @@ local __O = {};
         do
             local i = 0
             while i < 48 do
-                local xx = 14 + __L1:hash(i + 37) * 930
-                local yy = 443 + __L1:hash(i + 61) * 93
-                local ____t_73 = __t
-                local ____t_72 = __t
-                local ____temp_71 = xx > 342 and xx < 581
-                __O[170] = ____temp_71
-                if ____t_73(if ____t_72(____temp_71) then __O[170] else xx > 760 and xx < 955) then
-                    continue
-                end
-                __L1:grass(c, xx, yy, i)
-                if __mod(i, 3) == 0 then
-                    __L1:flower(
-                        c,
-                        xx + 6 + math.sin(t * 1.1 + i) * 1.6,
-                        yy - 1,
-                        __get(
-                            __arrL({"#f2ce5b", "#f2e9b5", "#d88e89", "#b7b9de"}, 4),
-                            __mod(i, 4)
+                do
+                    local xx = 14 + __L1:hash(i + 37) * 930
+                    local yy = 443 + __L1:hash(i + 61) * 93
+                    local ____t_114 = __t
+                    local ____t_result_113
+                    local ____t_112 = __t
+                    local ____temp_111 = xx > 342 and xx < 581
+                    __O[170] = ____temp_111
+                    if ____t_112(____temp_111) then
+                        ____t_result_113 = __O[170]
+                    else
+                        ____t_result_113 = xx > 760 and xx < 955
+                    end
+                    if ____t_114(____t_result_113) then
+                        do i = i + 1 continue end
+                    end
+                    __L1:grass(c, xx, yy, i)
+                    if __mod(i, 3) == 0 then
+                        __L1:flower(
+                            c,
+                            xx + 6 + math.sin(t * 1.1 + i) * 1.6,
+                            yy - 1,
+                            __get(
+                                __arrL({"#f2ce5b", "#f2e9b5", "#d88e89", "#b7b9de"}, 4),
+                                __mod(i, 4)
+                            )
                         )
-                    )
+                    end
                 end
                 i = i + 1
             end
@@ -9011,7 +9306,7 @@ local __O = {};
                     yy - 2,
                     wing,
                     4,
-                    if __t(__mod(i, 2)) then "#e8b15e" else "#e7a7aa"
+                    __t(__mod(i, 2)) and "#e8b15e" or "#e7a7aa"
                 )
                 __L1:r(
                     c,
@@ -9079,7 +9374,7 @@ local __O = {};
                     yy,
                     2,
                     2,
-                    if __t(__mod(i, 2)) then "#f7e7a5" else "#b8d879"
+                    __t(__mod(i, 2)) and "#f7e7a5" or "#b8d879"
                 )
                 i = i + 1
             end
@@ -9149,34 +9444,52 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        local ____t_75 = __t
-        local ____TS__Number_result_74 = __TS__Number(o.scale)
-        __O[171] = ____TS__Number_result_74
-        local s = if ____t_75(____TS__Number_result_74) then __O[171] else 1
-        local ____t_77 = __t
-        local ____TS__Number_result_76 = __TS__Number(o.intensity)
-        __O[172] = ____TS__Number_result_76
+        local ____t_result_117
+        local ____t_116 = __t
+        local ____TS__Number_result_115 = __TS__Number(o.scale)
+        __O[171] = ____TS__Number_result_115
+        if ____t_116(____TS__Number_result_115) then
+            ____t_result_117 = __O[171]
+        else
+            ____t_result_117 = 1
+        end
+        local s = ____t_result_117
+        local ____t_result_120
+        local ____t_119 = __t
+        local ____TS__Number_result_118 = __TS__Number(o.intensity)
+        __O[172] = ____TS__Number_result_118
+        if ____t_119(____TS__Number_result_118) then
+            ____t_result_120 = __O[172]
+        else
+            ____t_result_120 = 0.7
+        end
         local intensity = math.max(
             0.15,
-            math.min(1, if ____t_77(____TS__Number_result_76) then __O[172] else 0.7)
+            math.min(1, ____t_result_120)
         )
         c:scale(s, s)
         local red = not not __t(o.red) or type(o.color) == "string"
-        local glow = if __t(red) then __arrL({
-            "#f33b35",
-            "#ff7162",
-            "#ffd8b8",
-            "#ff4a48",
-            "#ff9b7c",
-            "#fff1df"
-        }, 6) else __arrL({
-            "#f39425",
-            "#ffdd41",
-            "#fff6ba",
-            "#ffc435",
-            "#ffce42",
-            "#fff9dc"
-        }, 6)
+        local ____t_result_121
+        if __t(red) then
+            ____t_result_121 = __arrL({
+                "#f33b35",
+                "#ff7162",
+                "#ffd8b8",
+                "#ff4a48",
+                "#ff9b7c",
+                "#fff1df"
+            }, 6)
+        else
+            ____t_result_121 = __arrL({
+                "#f39425",
+                "#ffdd41",
+                "#fff6ba",
+                "#ffc435",
+                "#ffce42",
+                "#fff9dc"
+            }, 6)
+        end
+        local glow = ____t_result_121
         local pulse = math.sin(t * 13) * 2
         local tip = -96 - pulse
         local alpha = c.globalAlpha
@@ -9266,21 +9579,31 @@ local __O = {};
         do
             local i = 0
             while i < 9 do
-                local side = if __t(__mod(i, 2)) then 1 else -1
+                local side = __t(__mod(i, 2)) and 1 or -1
                 local yy = -8 - i * 10
                 local xx = side * (21 + math.sin(t * 10 + i) * 5)
-                __L1:limb(
-                    c,
-                    __arrL(
-                        {
-                            __arrL({xx + side * 3, yy + 5}, 2),
-                            __arrL({xx - side * 3, yy - 3}, 2),
-                            __arrL({xx + side * 2, yy - 10}, 2)
-                        },
-                        3
-                    ),
+                local ____L1_limb_125 = __L1.limb
+                local ____c_123 = c
+                local ____arrL_result_124 = __arrL(
+                    {
+                        __arrL({xx + side * 3, yy + 5}, 2),
+                        __arrL({xx - side * 3, yy - 3}, 2),
+                        __arrL({xx + side * 2, yy - 10}, 2)
+                    },
+                    3
+                )
+                local ____t_result_122
+                if __t(__mod(i, 3)) then
+                    ____t_result_122 = __get(glow, 4)
+                else
+                    ____t_result_122 = __get(glow, 5)
+                end
+                ____L1_limb_125(
+                    __L1,
+                    ____c_123,
+                    ____arrL_result_124,
                     2,
-                    if __t(__mod(i, 3)) then __get(glow, 4) else __get(glow, 5)
+                    ____t_result_122
                 )
                 i = i + 1
             end
@@ -9330,7 +9653,7 @@ local __O = {};
                         xx,
                         yy,
                         2,
-                        if __t(__mod(i, 3)) then 6 else 9,
+                        __t(__mod(i, 3)) and 6 or 9,
                         __get(glow, 2)
                     )
                     i = i + 1
@@ -9354,21 +9677,21 @@ local __O = {};
                 end
             end
         end
-        local ____t_83 = __t
-        local ____opt_80 = window.Graphics
-        if ____opt_80 ~= nil then
-            ____opt_80 = ____opt_80.isLite
+        local ____t_131 = __t
+        local ____opt_128 = window.Graphics
+        if ____opt_128 ~= nil then
+            ____opt_128 = ____opt_128.isLite
         end
-        local ____opt_result_82
-        if ____opt_80 ~= nil then
-            ____opt_result_82 = ____opt_80(____opt_80)
+        local ____opt_result_130
+        if ____opt_128 ~= nil then
+            ____opt_result_130 = ____opt_128(____opt_128)
         end
-        if not ____t_83(____opt_result_82) then
+        if not ____t_131(____opt_result_130) then
             local a0 = c.globalAlpha
             do
                 local i = 0
                 while i < 12 do
-                    local side = if __t(__mod(i, 2)) then 1 else -1
+                    local side = __t(__mod(i, 2)) and 1 or -1
                     local bx = side * (8 + __mod(i * 7, 26))
                     local life = __mod(
                         t * 1.6 + __L1:hash(i + 300),
@@ -9381,13 +9704,24 @@ local __O = {};
                         math.floor((1 - life) * 8 + 0.5)
                     )
                     c.globalAlpha = a0 * (1 - life) * 0.85
-                    __L1:r(
+                    local ____L1_r_134 = __L1.r
+                    local ____array_133 = __TS__SparseArrayNew(
                         c,
                         bx - w / 2 + math.sin(t * 9 + i) * 3,
                         yy - h * (1 - life) * 0.3,
                         w,
-                        math.max(4, h * (1 - life) * 0.6),
-                        if __t(__mod(i, 3)) then __get(glow, 1) else __get(glow, 2)
+                        math.max(4, h * (1 - life) * 0.6)
+                    )
+                    local ____t_result_132
+                    if __t(__mod(i, 3)) then
+                        ____t_result_132 = __get(glow, 1)
+                    else
+                        ____t_result_132 = __get(glow, 2)
+                    end
+                    __TS__SparseArrayPush(____array_133, ____t_result_132)
+                    ____L1_r_134(
+                        __L1,
+                        __TS__SparseArraySpread(____array_133)
                     )
                     __L1:r(
                         c,
@@ -9491,7 +9825,7 @@ local __O = {};
                     yy,
                     3,
                     3,
-                    if __t(__mod(i, 2)) then "#d3fbef" else "#f8d784"
+                    __t(__mod(i, 2)) and "#d3fbef" or "#f8d784"
                 )
                 __L1:r(
                     c,
@@ -9534,7 +9868,7 @@ local __O = {};
                         yy,
                         2,
                         6,
-                        if __t(__mod(i, 2)) then "#ffe8a1" else "#98ebe7"
+                        __t(__mod(i, 2)) and "#ffe8a1" or "#98ebe7"
                     )
                     i = i + 1
                 end
@@ -9552,45 +9886,107 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1 * if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
+        local ____c_139 = c
+        local ____c_scale_140 = c.scale
+        local ____temp_136 = __lt(o.facing, 0) and -1 or 1
+        local ____t_result_135
+        if __t(o.scale) then
+            ____t_result_135 = o.scale
+        else
+            ____t_result_135 = 1
+        end
+        local ____temp_138 = ____temp_136 * ____t_result_135
+        local ____t_result_137
+        if __t(o.scale) then
+            ____t_result_137 = o.scale
+        else
+            ____t_result_137 = 1
+        end
+        ____c_scale_140(____c_139, ____temp_138, ____t_result_137)
         if __isFiniteN(o.opacity) then
             c.globalAlpha = c.globalAlpha * math.max(
                 0,
                 math.min(1, o.opacity)
             )
         end
-        local ____t_85 = __t
-        local ____TS__Number_result_84 = __TS__Number(o.frame)
-        __O[173] = ____TS__Number_result_84
-        local t = if ____t_85(____TS__Number_result_84) then __O[173] else 0
-        local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
-        local walk = if __t(moving) then math.sin(t * 9) else 0
-        local bob = if __t(moving) then math.floor(math.abs(math.cos(t * 9)) * 2 + 0.5) else math.floor(math.sin(t * 2) * 0.7 + 0.5)
-        local ____temp_89 = ____type == "nicolas"
-        if ____temp_89 then
-            local ____t_88 = __t
-            local ____t_87 = __t
-            local ____temp_86 = if __t(o.supreme) then o.supreme else o.powered
-            __O[174] = ____temp_86
-            ____temp_89 = not not ____t_88(if ____t_87(____temp_86) then __O[174] else o.transformed)
+        local ____t_result_143
+        local ____t_142 = __t
+        local ____TS__Number_result_141 = __TS__Number(o.frame)
+        __O[173] = ____TS__Number_result_141
+        if ____t_142(____TS__Number_result_141) then
+            ____t_result_143 = __O[173]
+        else
+            ____t_result_143 = 0
         end
-        local supreme = ____temp_89
+        local t = ____t_result_143
+        local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
+        local ____t_result_144
+        if __t(moving) then
+            ____t_result_144 = math.sin(t * 9)
+        else
+            ____t_result_144 = 0
+        end
+        local walk = ____t_result_144
+        local ____t_result_145
+        if __t(moving) then
+            ____t_result_145 = math.floor(math.abs(math.cos(t * 9)) * 2 + 0.5)
+        else
+            ____t_result_145 = math.floor(math.sin(t * 2) * 0.7 + 0.5)
+        end
+        local bob = ____t_result_145
+        local ____temp_150 = ____type == "nicolas"
+        if ____temp_150 then
+            local ____t_149 = __t
+            local ____t_result_148
+            local ____t_147 = __t
+            local ____t_result_146
+            if __t(o.supreme) then
+                ____t_result_146 = o.supreme
+            else
+                ____t_result_146 = o.powered
+            end
+            __O[174] = ____t_result_146
+            if ____t_147(____t_result_146) then
+                ____t_result_148 = __O[174]
+            else
+                ____t_result_148 = o.transformed
+            end
+            ____temp_150 = not not ____t_149(____t_result_148)
+        end
+        local supreme = ____temp_150
         local attack = not not __t(o.attack)
-        local strike = if __t(attack) then math.max(
-            0,
-            math.sin(if __isFiniteN(o.attackProgress) then o.attackProgress else 0.5 + math.sin(t * 7) * 0.5 * math.pi)
-        ) else 0
+        local ____t_result_152
+        if __t(attack) then
+            local ____isFiniteN_result_151
+            if __isFiniteN(o.attackProgress) then
+                ____isFiniteN_result_151 = o.attackProgress
+            else
+                ____isFiniteN_result_151 = 0.5 + math.sin(t * 7) * 0.5
+            end
+            ____t_result_152 = math.max(
+                0,
+                math.sin(____isFiniteN_result_151 * math.pi)
+            )
+        else
+            ____t_result_152 = 0
+        end
+        local strike = ____t_result_152
         local skins = {davi = "#ecc5ab", vitor = "#f1cfb8", freddy = "#815133", nicolas = "#f1cdb5"}
         local skin = __get(skins, ____type)
-        local shade = if ____type == "freddy" then "#52372a" else "#bd947b"
-        local coats = {davi = "#252c31", vitor = "#a9afb1", freddy = "#34424a", nicolas = if __t(supreme) then "#e0bc69" else "#e7e1c9"}
+        local shade = ____type == "freddy" and "#52372a" or "#bd947b"
+        local coats = {
+            davi = "#252c31",
+            vitor = "#a9afb1",
+            freddy = "#34424a",
+            nicolas = __t(supreme) and "#e0bc69" or "#e7e1c9"
+        }
         local coat = __get(coats, ____type)
-        local edge = if ____type == "vitor" then "#737f85" else if ____type == "nicolas" then "#8f6746" else "#18272e"
+        local edge = ____type == "vitor" and "#737f85" or (____type == "nicolas" and "#8f6746" or "#18272e")
         local belly = ____type == "davi"
         local strong = false
         local slim = ____type == "freddy"
-        local wide = if __t(belly) then 18 else if __t(slim) then 9 else 12
-        local legCol = if ____type == "davi" then "#3d4852" else if ____type == "vitor" then "#384d61" else if ____type == "freddy" then "#493d42" else "#3d5268"
+        local wide = __t(belly) and 18 or (__t(slim) and 9 or 12)
+        local legCol = ____type == "davi" and "#3d4852" or (____type == "vitor" and "#384d61" or (____type == "freddy" and "#493d42" or "#3d5268"))
         if __t(supreme) then
             __L1:supremeAura(c, t, o)
             __L1:poly(
@@ -9648,20 +10044,26 @@ local __O = {};
             c,
             0,
             -1,
-            if __t(belly) then 23 else if __t(strong) then 21 else 17,
+            __t(belly) and 23 or (__t(strong) and 21 or 17),
             3,
             "#2e433d",
             2
         )
         for ____, side in __iterar((__arrL({-1, 1}, 2))) do
             local fx = side * 7 + math.floor(walk * 12 * side + 0.5)
-            local fy = if __t(moving) then math.max(
-                0,
-                math.cos(t * 9 + if side > 0 then 0 else math.pi)
-            ) * 6 else 0
+            local ____t_result_153
+            if __t(moving) then
+                ____t_result_153 = math.max(
+                    0,
+                    math.cos(t * 9 + (side > 0 and 0 or math.pi))
+                ) * 6
+            else
+                ____t_result_153 = 0
+            end
+            local fy = ____t_result_153
             if o.grounded == false then
-                fx = if side > 0 then 10 else -12
-                fy = if side > 0 then 3 else 11
+                fx = side > 0 and 10 or -12
+                fy = side > 0 and 3 or 11
             end
             __L1:limb(
                 c,
@@ -9673,7 +10075,7 @@ local __O = {};
                     },
                     3
                 ),
-                if __t(strong) then 11 else if __t(slim) then 7 else 9,
+                __t(strong) and 11 or (__t(slim) and 7 or 9),
                 "#27333a"
             )
             __L1:limb(
@@ -9686,7 +10088,7 @@ local __O = {};
                     },
                     3
                 ),
-                if __t(strong) then 7 else if __t(slim) then 4 else 5,
+                __t(strong) and 7 or (__t(slim) and 4 or 5),
                 legCol
             )
             __L1:r(
@@ -9703,7 +10105,7 @@ local __O = {};
                 -2 - fy,
                 11,
                 2,
-                if ____type == "nicolas" then "#ede8d7" else "#b6b8a6"
+                ____type == "nicolas" and "#ede8d7" or "#b6b8a6"
             )
             if __t(supreme) then
                 __L1:r(
@@ -9716,7 +10118,10 @@ local __O = {};
                 )
             end
         end
-        c:translate(if __t(o.dash) then 5 else math.floor(walk * 1.5 + 0.5), -bob)
+        c:translate(
+            __t(o.dash) and 5 or math.floor(walk * 1.5 + 0.5),
+            -bob
+        )
         local leftHand = __arrL(
             {
                 -wide - 5 + math.floor(walk * 7 + 0.5),
@@ -9777,7 +10182,13 @@ local __O = {};
             rightHand = __arrL({38, -35}, 2)
         end
         local function hand(self, side, front)
-            local ____end = if __gt(side, 0) then rightHand else leftHand
+            local ____gt_result_154
+            if __gt(side, 0) then
+                ____gt_result_154 = rightHand
+            else
+                ____gt_result_154 = leftHand
+            end
+            local ____end = ____gt_result_154
             local shoulder = __arrL({side * wide, -36}, 2)
             local elbow = __arrL(
                 {
@@ -9789,27 +10200,38 @@ local __O = {};
             __L1:limb(
                 c,
                 __arrL({shoulder, elbow, ____end}, 3),
-                if __t(strong) then 11 else if __t(slim) then 6 else 8,
+                __t(strong) and 11 or (__t(slim) and 6 or 8),
                 "#243137"
             )
             __L1:limb(
                 c,
                 __arrL({shoulder, elbow}, 2),
-                if __t(strong) then 7 else if __t(slim) then 4 else 5,
+                __t(strong) and 7 or (__t(slim) and 4 or 5),
                 coat
             )
-            __L1:limb(
+            local ____L1_limb_157 = __L1.limb
+            local ____array_156 = __TS__SparseArrayNew(
                 c,
                 __arrL({elbow, ____end}, 2),
-                if __t(strong) then 7 else if __t(slim) then 4 else 5,
-                if ____type == "freddy" then skin else coat
+                __t(strong) and 7 or (__t(slim) and 4 or 5)
+            )
+            local ____temp_155
+            if ____type == "freddy" then
+                ____temp_155 = skin
+            else
+                ____temp_155 = coat
+            end
+            __TS__SparseArrayPush(____array_156, ____temp_155)
+            ____L1_limb_157(
+                __L1,
+                __TS__SparseArraySpread(____array_156)
             )
             __L1:r(
                 c,
                 __get(____end, 0) - 3,
                 __get(____end, 1) - 3,
-                if __t(strong) then 8 else 6,
-                if __t(strong) then 7 else 6,
+                __t(strong) and 8 or 6,
+                __t(strong) and 7 or 6,
                 skin
             )
             if ____type == "freddy" then
@@ -9900,7 +10322,7 @@ local __O = {};
                 -38,
                 3,
                 17,
-                if ____type == "vitor" then "#cdd0c9" else if ____type == "freddy" then "#657273" else if __t(supreme) then "#ffe6a4" else "#f8f0d9"
+                ____type == "vitor" and "#cdd0c9" or (____type == "freddy" and "#657273" or (__t(supreme) and "#ffe6a4" or "#f8f0d9"))
             )
             __L1:r(
                 c,
@@ -9930,7 +10352,7 @@ local __O = {};
                 -40,
                 12,
                 5,
-                if ____type == "vitor" then "#c5c8c2" else "#3a4244"
+                ____type == "vitor" and "#c5c8c2" or "#3a4244"
             )
             __L1:r(
                 c,
@@ -10188,7 +10610,7 @@ local __O = {};
                         yy,
                         3,
                         4,
-                        if __t(__mod(i, 2)) then "#28322e" else "#1b2427",
+                        __t(__mod(i, 2)) and "#28322e" or "#1b2427",
                         2
                     )
                     __L1:r(
@@ -10243,13 +10665,13 @@ local __O = {};
                 "#e2c6a5"
             )
         else
-            local hair = if ____type == "vitor" then "#20292e" else if ____type == "davi" then "#634a37" else "#72533c"
+            local hair = ____type == "vitor" and "#20292e" or (____type == "davi" and "#634a37" or "#72533c")
             __L1:r(
                 c,
                 -12,
                 -63,
                 26,
-                if ____type == "vitor" then 7 else 10,
+                ____type == "vitor" and 7 or 10,
                 hair
             )
             __L1:r(
@@ -10257,7 +10679,7 @@ local __O = {};
                 -9,
                 -65,
                 20,
-                if ____type == "vitor" then 3 else 5,
+                ____type == "vitor" and 3 or 5,
                 hair
             )
             __L1:r(
@@ -10282,7 +10704,7 @@ local __O = {};
                 -62,
                 14,
                 2,
-                if ____type == "vitor" then "#3c4446" else if ____type == "davi" then "#866548" else "#9a7650"
+                ____type == "vitor" and "#3c4446" or (____type == "davi" and "#866548" or "#9a7650")
             )
             if ____type == "davi" then
                 __L1:r(
@@ -10563,7 +10985,14 @@ local __O = {};
                     "#f9e7c9"
                 )
             end
-            if __t(if __t(attack) then supreme else attack) then
+            local ____t_159 = __t
+            local ____t_result_158
+            if __t(attack) then
+                ____t_result_158 = supreme
+            else
+                ____t_result_158 = attack
+            end
+            if ____t_159(____t_result_158) then
                 local hx = __get(rightHand, 0)
                 local hy = __get(rightHand, 1)
                 __L1:oval(
@@ -10600,7 +11029,14 @@ local __O = {};
                 end
             end
         end
-        if __t(if __t(attack) then ____type == "freddy" else attack) then
+        local ____t_161 = __t
+        local ____t_result_160
+        if __t(attack) then
+            ____t_result_160 = ____type == "freddy"
+        else
+            ____t_result_160 = attack
+        end
+        if ____t_161(____t_result_160) then
             __L1:limb(
                 c,
                 __arrL(
@@ -10630,7 +11066,7 @@ local __O = {};
                 -45,
                 16,
                 2,
-                if __t(supreme) then "#a1eeeb" else "#d7b184"
+                __t(supreme) and "#a1eeeb" or "#d7b184"
             )
             __L1:r(
                 c,
@@ -10638,7 +11074,7 @@ local __O = {};
                 -31,
                 21,
                 2,
-                if __t(supreme) then "#f9dfa0" else "#aa8a78"
+                __t(supreme) and "#f9dfa0" or "#aa8a78"
             )
         end
         if __t(o.hit) then
@@ -10706,20 +11142,54 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1 * if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
+        local ____c_166 = c
+        local ____c_scale_167 = c.scale
+        local ____temp_163 = __lt(o.facing, 0) and -1 or 1
+        local ____t_result_162
+        if __t(o.scale) then
+            ____t_result_162 = o.scale
+        else
+            ____t_result_162 = 1
+        end
+        local ____temp_165 = ____temp_163 * ____t_result_162
+        local ____t_result_164
+        if __t(o.scale) then
+            ____t_result_164 = o.scale
+        else
+            ____t_result_164 = 1
+        end
+        ____c_scale_167(____c_166, ____temp_165, ____t_result_164)
         if __isFiniteN(o.opacity) then
             c.globalAlpha = c.globalAlpha * math.max(
                 0,
                 math.min(1, o.opacity)
             )
         end
-        local ____t_91 = __t
-        local ____TS__Number_result_90 = __TS__Number(o.frame)
-        __O[175] = ____TS__Number_result_90
-        local t = if ____t_91(____TS__Number_result_90) then __O[175] else 0
+        local ____t_result_170
+        local ____t_169 = __t
+        local ____TS__Number_result_168 = __TS__Number(o.frame)
+        __O[175] = ____TS__Number_result_168
+        if ____t_169(____TS__Number_result_168) then
+            ____t_result_170 = __O[175]
+        else
+            ____t_result_170 = 0
+        end
+        local t = ____t_result_170
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
-        local walk = if __t(moving) then math.sin(t * 8) else 0
-        local bob = if __t(moving) then math.floor(math.abs(math.cos(t * 8)) * 2 + 0.5) else math.floor(math.sin(t * 2) * 0.7 + 0.5)
+        local ____t_result_171
+        if __t(moving) then
+            ____t_result_171 = math.sin(t * 8)
+        else
+            ____t_result_171 = 0
+        end
+        local walk = ____t_result_171
+        local ____t_result_172
+        if __t(moving) then
+            ____t_result_172 = math.floor(math.abs(math.cos(t * 8)) * 2 + 0.5)
+        else
+            ____t_result_172 = math.floor(math.sin(t * 2) * 0.7 + 0.5)
+        end
+        local bob = ____t_result_172
         local receptionist = ____type == "allef"
         local skin = __get({
             allef = "#805136",
@@ -10728,15 +11198,15 @@ local __O = {};
             rayssa = "#815338",
             analaura = "#f2ccb2"
         }, ____type)
-        local shade = if __t(receptionist) then "#4e352a" else if ____type == "eloisa" then "#b47e61" else if ____type == "analaura" then "#be947b" else "#4c352c"
-        local hair = if ____type == "eloisa" then "#4d372c" else if ____type == "analaura" then "#51362d" else "#232d2b"
+        local shade = __t(receptionist) and "#4e352a" or (____type == "eloisa" and "#b47e61" or (____type == "analaura" and "#be947b" or "#4c352c"))
+        local hair = ____type == "eloisa" and "#4d372c" or (____type == "analaura" and "#51362d" or "#232d2b")
         local pants = "#203b60"
-        local half = if __t(receptionist) then 18 else 10
+        local half = __t(receptionist) and 18 or 10
         __L1:oval(
             c,
             0,
             -1,
-            if __t(receptionist) then 23 else 17,
+            __t(receptionist) and 23 or 17,
             3,
             "#39483e",
             2
@@ -10807,7 +11277,7 @@ local __O = {};
                                     yy,
                                     4,
                                     4,
-                                    if __t(__mod(j, 3)) then "#25302e" else "#3a4238"
+                                    __t(__mod(j, 3)) and "#25302e" or "#3a4238"
                                 )
                                 __L1:r(
                                     c,
@@ -10838,23 +11308,32 @@ local __O = {};
                     0,
                     -57,
                     19,
-                    if __t(long) then 22 else 19,
+                    __t(long) and 22 or 19,
                     hair,
                     2
                 )
                 for ____, side in __iterar((__arrL({-1, 1}, 2))) do
                     do
                         local i = 0
-                        while i < if __t(long) then 10 else 6 do
+                        while i < (__t(long) and 10 or 6) do
                             local yy = -61 + i * 4
                             local xx = side * (14 + math.sin(i * 1.5 + t * 0.4) * 2)
-                            __L1:oval(
-                                c,
+                            local ____L1_oval_175 = __L1.oval
+                            local ____c_174 = c
+                            local ____temp_173
+                            if __mod(i, 3) == 0 then
+                                ____temp_173 = __t(long) and "#6a4734" or "#303b32"
+                            else
+                                ____temp_173 = hair
+                            end
+                            ____L1_oval_175(
+                                __L1,
+                                ____c_174,
                                 xx,
                                 yy,
                                 5,
                                 5,
-                                if __mod(i, 3) == 0 then if __t(long) then "#6a4734" else "#303b32" else hair,
+                                ____temp_173,
                                 2
                             )
                             if __mod(i, 2) == 0 then
@@ -10864,7 +11343,7 @@ local __O = {};
                                     yy - 2,
                                     2,
                                     2,
-                                    if __t(long) then "#7a543c" else "#455044"
+                                    __t(long) and "#7a543c" or "#455044"
                                 )
                             end
                             i = i + 1
@@ -10894,35 +11373,53 @@ local __O = {};
             end
         end
         for ____, side in __iterar((__arrL({-1, 1}, 2))) do
-            local fx = side * if __t(receptionist) then 7 else 5 + math.floor(walk * 11 * side + 0.5)
-            local fy = if __t(moving) then math.max(
-                0,
-                math.cos(t * 8 + if side > 0 then 0 else math.pi)
-            ) * 5 else 0
+            local fx = side * (__t(receptionist) and 7 or 5) + math.floor(walk * 11 * side + 0.5)
+            local ____t_result_176
+            if __t(moving) then
+                ____t_result_176 = math.max(
+                    0,
+                    math.cos(t * 8 + (side > 0 and 0 or math.pi))
+                ) * 5
+            else
+                ____t_result_176 = 0
+            end
+            local fy = ____t_result_176
             __L1:limb(
                 c,
                 __arrL(
                     {
-                        __arrL({side * if __t(receptionist) then 7 else 4, -23}, 2),
+                        __arrL(
+                            {
+                                side * (__t(receptionist) and 7 or 4),
+                                -23
+                            },
+                            2
+                        ),
                         __arrL({side * 5, -13}, 2),
                         __arrL({fx, -4 - fy}, 2)
                     },
                     3
                 ),
-                if __t(receptionist) then 10 else 8,
+                __t(receptionist) and 10 or 8,
                 "#263640"
             )
             __L1:limb(
                 c,
                 __arrL(
                     {
-                        __arrL({side * if __t(receptionist) then 7 else 4, -23}, 2),
+                        __arrL(
+                            {
+                                side * (__t(receptionist) and 7 or 4),
+                                -23
+                            },
+                            2
+                        ),
                         __arrL({side * 5, -13}, 2),
                         __arrL({fx, -4 - fy}, 2)
                     },
                     3
                 ),
-                if __t(receptionist) then 6 else 4,
+                __t(receptionist) and 6 or 4,
                 pants
             )
             __L1:r(
@@ -10961,25 +11458,37 @@ local __O = {};
             2
         )
         if not __t(moving) then
-            leftHand = if __t(receptionist) then __arrL({-22, -25}, 2) else __arrL({-13, -22}, 2)
-            rightHand = if __t(receptionist) then __arrL(
-                {
-                    31,
-                    -33 + math.sin(t * 3) * 3
-                },
-                2
-            ) else __arrL(
-                {
-                    23,
-                    -29 + math.sin(t * 2.5) * 3
-                },
-                2
-            )
+            local ____t_result_177
+            if __t(receptionist) then
+                ____t_result_177 = __arrL({-22, -25}, 2)
+            else
+                ____t_result_177 = __arrL({-13, -22}, 2)
+            end
+            leftHand = ____t_result_177
+            local ____t_result_178
+            if __t(receptionist) then
+                ____t_result_178 = __arrL(
+                    {
+                        31,
+                        -33 + math.sin(t * 3) * 3
+                    },
+                    2
+                )
+            else
+                ____t_result_178 = __arrL(
+                    {
+                        23,
+                        -29 + math.sin(t * 2.5) * 3
+                    },
+                    2
+                )
+            end
+            rightHand = ____t_result_178
         end
         if __t(o.talking) then
             rightHand = __arrL(
                 {
-                    if __t(receptionist) then 34 else 29,
+                    __t(receptionist) and 34 or 29,
                     -31 + math.sin(t * 6) * 5
                 },
                 2
@@ -10999,32 +11508,38 @@ local __O = {};
             rightHand = __arrL({37, -35}, 2)
         end
         local function socialArm(self, side)
-            local ____end = if __gt(side, 0) then rightHand else leftHand
+            local ____gt_result_179
+            if __gt(side, 0) then
+                ____gt_result_179 = rightHand
+            else
+                ____gt_result_179 = leftHand
+            end
+            local ____end = ____gt_result_179
             local elbow = __arrL({side * (half + 5), -29 + walk * side * 3}, 2)
             local shoulder = __arrL({side * half, -36}, 2)
             __L1:limb(
                 c,
                 __arrL({shoulder, elbow, ____end}, 3),
-                if __t(receptionist) then 10 else 7,
+                __t(receptionist) and 10 or 7,
                 "#28383d"
             )
             __L1:limb(
                 c,
                 __arrL({shoulder, elbow}, 2),
-                if __t(receptionist) then 6 else 4,
-                if __t(receptionist) then "#3b5260" else "#eeeedd"
+                __t(receptionist) and 6 or 4,
+                __t(receptionist) and "#3b5260" or "#eeeedd"
             )
             __L1:limb(
                 c,
                 __arrL({elbow, ____end}, 2),
-                if __t(receptionist) then 6 else 4,
+                __t(receptionist) and 6 or 4,
                 skin
             )
             __L1:r(
                 c,
                 __get(____end, 0) - 3,
                 __get(____end, 1) - 3,
-                if __t(receptionist) then 7 else 6,
+                __t(receptionist) and 7 or 6,
                 6,
                 skin
             )
@@ -11108,7 +11623,7 @@ local __O = {};
                 "#6b8690"
             )
         else
-            local extra = if ____type == "analaura" then 1 else 0
+            local extra = ____type == "analaura" and 1 or 0
             __L1:r(
                 c,
                 -12 - extra,
@@ -11277,14 +11792,14 @@ local __O = {};
                 local i = 0
                 while i < 8 do
                     local hx = -11 + i * 3.5
-                    local hy = -66 - if __mod(i, 3) == 1 then 7 else if __mod(i, 3) == 2 then 4 else 1
+                    local hy = -66 - (__mod(i, 3) == 1 and 7 or (__mod(i, 3) == 2 and 4 or 1))
                     __L1:oval(
                         c,
                         hx,
                         hy,
                         4,
                         5,
-                        if __mod(i, 3) == 0 then "#303b31" else hair,
+                        __mod(i, 3) == 0 and "#303b31" or hair,
                         2
                     )
                     __L1:r(
@@ -11319,7 +11834,7 @@ local __O = {};
                 0,
                 -45,
                 12,
-                if __t(o.talking) then 5 else 3,
+                __t(o.talking) and 5 or 3,
                 "#47352d"
             )
             __L1:r(
@@ -11451,7 +11966,7 @@ local __O = {};
                     local i = 0
                     while i < 8 do
                         local hx = -12 + i * 3.5
-                        local hy = -65 - if __mod(i, 3) == 1 then 3 else 0
+                        local hy = -65 - (__mod(i, 3) == 1 and 3 or 0)
                         __L1:oval(
                             c,
                             hx,
@@ -11468,14 +11983,14 @@ local __O = {};
                     local i = 0
                     while i < 7 do
                         local hx = -11 + i * 4
-                        local hy = -66 - if __mod(i, 3) == 1 then 3 else 0
+                        local hy = -66 - (__mod(i, 3) == 1 and 3 or 0)
                         __L1:r(
                             c,
                             hx - 1,
                             hy - 1,
                             2,
                             2,
-                            if ____type == "analaura" then "#7d573e" else "#455044"
+                            ____type == "analaura" and "#7d573e" or "#455044"
                         )
                         i = i + 1
                     end
@@ -11505,13 +12020,13 @@ local __O = {};
                 1,
                 "#5c4033"
             )
-            local lip = if ____type == "eloisa" then "#d35e8c" else if ____type == "analaura" then "#a96964" else "#a06655"
+            local lip = ____type == "eloisa" and "#d35e8c" or (____type == "analaura" and "#a96964" or "#a06655")
             __L1:r(
                 c,
                 1,
                 -45,
                 10,
-                if __t(o.talking) then 4 else 2,
+                __t(o.talking) and 4 or 2,
                 lip
             )
             __L1:r(
@@ -11520,7 +12035,7 @@ local __O = {};
                 -45,
                 6,
                 1,
-                if ____type == "eloisa" then "#f4a1c0" else "#e1bba2"
+                ____type == "eloisa" and "#f4a1c0" or "#e1bba2"
             )
             if __t(o.talking) then
                 __L1:r(
@@ -11645,117 +12160,125 @@ local __O = {};
             local x = 125
             local i = 0
             while x < width do
-                if __t(x < camera - 300 or __gt(x, camera + 1120)) then
-                    continue
-                end
-                __L1:r(
-                    c,
-                    x,
-                    130,
-                    206,
-                    152,
-                    "#80684d"
-                )
-                __L1:r(
-                    c,
-                    x + 6,
-                    136,
-                    194,
-                    140,
-                    "#d7e5cf"
-                )
-                __L1:r(
-                    c,
-                    x + 12,
-                    142,
-                    182,
-                    128,
-                    "#8fc7d4"
-                )
-                __L1:cloud(
-                    c,
-                    x + 27,
-                    174,
-                    0.8,
-                    "#f9f2d6"
-                )
-                __L1:poly(
-                    c,
-                    __arrL(
-                        {
-                            __arrL({x + 14, 267}, 2),
-                            __arrL({x + 46, 223}, 2),
-                            __arrL({x + 90, 254}, 2),
-                            __arrL({x + 137, 213}, 2),
-                            __arrL({x + 193, 260}, 2),
-                            __arrL({x + 193, 270}, 2),
-                            __arrL({x + 14, 270}, 2)
-                        },
-                        7
-                    ),
-                    "#74a68b"
-                )
-                __L1:r(
-                    c,
-                    x + 98,
-                    137,
-                    6,
-                    139,
-                    "#f1e4c4"
-                )
-                __L1:r(
-                    c,
-                    x + 7,
-                    208,
-                    194,
-                    5,
-                    "#f1e4c4"
-                )
-                __L1:r(
-                    c,
-                    x - 5,
-                    282,
-                    216,
-                    7,
-                    "#b18b5d"
-                )
-                __L1:r(
-                    c,
-                    x - 13,
-                    116,
-                    233,
-                    7,
-                    "#705d48"
-                )
-                local flutter = math.floor(math.sin(t * 1.6 + i) * 3 + 0.5)
-                for ____, side in __iterar((__arrL({-1, 1}, 2))) do
-                    local cx = if side < 0 then x - 3 else x + 179
+                do
+                    if __t(x < camera - 300 or __gt(x, camera + 1120)) then
+                        do do x = x + 660 i = i + 1 end continue end
+                    end
+                    __L1:r(
+                        c,
+                        x,
+                        130,
+                        206,
+                        152,
+                        "#80684d"
+                    )
+                    __L1:r(
+                        c,
+                        x + 6,
+                        136,
+                        194,
+                        140,
+                        "#d7e5cf"
+                    )
+                    __L1:r(
+                        c,
+                        x + 12,
+                        142,
+                        182,
+                        128,
+                        "#8fc7d4"
+                    )
+                    __L1:cloud(
+                        c,
+                        x + 27,
+                        174,
+                        0.8,
+                        "#f9f2d6"
+                    )
                     __L1:poly(
                         c,
                         __arrL(
                             {
-                                __arrL({cx, 123}, 2),
-                                __arrL({cx + 30, 123}, 2),
-                                __arrL({cx + 27 + flutter, 253}, 2),
-                                __arrL({cx + 7 + flutter, 262}, 2),
-                                __arrL({cx - 3, 244}, 2)
+                                __arrL({x + 14, 267}, 2),
+                                __arrL({x + 46, 223}, 2),
+                                __arrL({x + 90, 254}, 2),
+                                __arrL({x + 137, 213}, 2),
+                                __arrL({x + 193, 260}, 2),
+                                __arrL({x + 193, 270}, 2),
+                                __arrL({x + 14, 270}, 2)
                             },
-                            5
+                            7
                         ),
-                        if __t(__mod(i, 2)) then "#d6a5a0" else "#b9b9cf"
+                        "#74a68b"
                     )
-                    do
-                        local j = 0
-                        while j < 3 do
-                            __L1:r(
-                                c,
-                                cx + 4 + j * 8,
-                                127,
-                                2,
-                                116,
-                                "#f1d5bc"
-                            )
-                            j = j + 1
+                    __L1:r(
+                        c,
+                        x + 98,
+                        137,
+                        6,
+                        139,
+                        "#f1e4c4"
+                    )
+                    __L1:r(
+                        c,
+                        x + 7,
+                        208,
+                        194,
+                        5,
+                        "#f1e4c4"
+                    )
+                    __L1:r(
+                        c,
+                        x - 5,
+                        282,
+                        216,
+                        7,
+                        "#b18b5d"
+                    )
+                    __L1:r(
+                        c,
+                        x - 13,
+                        116,
+                        233,
+                        7,
+                        "#705d48"
+                    )
+                    local flutter = math.floor(math.sin(t * 1.6 + i) * 3 + 0.5)
+                    for ____, side in __iterar((__arrL({-1, 1}, 2))) do
+                        local ____temp_180
+                        if side < 0 then
+                            ____temp_180 = x - 3
+                        else
+                            ____temp_180 = x + 179
+                        end
+                        local cx = ____temp_180
+                        __L1:poly(
+                            c,
+                            __arrL(
+                                {
+                                    __arrL({cx, 123}, 2),
+                                    __arrL({cx + 30, 123}, 2),
+                                    __arrL({cx + 27 + flutter, 253}, 2),
+                                    __arrL({cx + 7 + flutter, 262}, 2),
+                                    __arrL({cx - 3, 244}, 2)
+                                },
+                                5
+                            ),
+                            __t(__mod(i, 2)) and "#d6a5a0" or "#b9b9cf"
+                        )
+                        do
+                            local j = 0
+                            while j < 3 do
+                                __L1:r(
+                                    c,
+                                    cx + 4 + j * 8,
+                                    127,
+                                    2,
+                                    116,
+                                    "#f1d5bc"
+                                )
+                                j = j + 1
+                            end
                         end
                     end
                 end
@@ -11799,111 +12322,113 @@ local __O = {};
             local x = 350
             local i = 0
             while x < 2050 do
-                if __t(x < camera - 300 or __gt(x, camera + 1060)) then
-                    continue
-                end
-                __L1:r(
-                    c,
-                    x - 18,
-                    386,
-                    258,
-                    43,
-                    "#5a5e50"
-                )
-                __L1:r(
-                    c,
-                    x - 13,
-                    342,
-                    248,
-                    72,
-                    if __t(__mod(i, 2)) then "#b56e68" else "#bb8b5b"
-                )
-                __L1:r(
-                    c,
-                    x - 11,
-                    340,
-                    244,
-                    8,
-                    if __t(__mod(i, 2)) then "#d99987" else "#e4b47a"
-                )
-                __L1:r(
-                    c,
-                    x - 27,
-                    367,
-                    21,
-                    49,
-                    if __t(__mod(i, 2)) then "#a65e5c" else "#a7774d"
-                )
-                __L1:r(
-                    c,
-                    x + 229,
-                    367,
-                    21,
-                    49,
-                    if __t(__mod(i, 2)) then "#a65e5c" else "#a7774d"
-                )
                 do
-                    local j = 0
-                    while j < 3 do
-                        __L1:r(
-                            c,
-                            x + 3 + j * 73,
-                            355,
-                            66,
-                            48,
-                            if __t(__mod(i, 2)) then "#c07b70" else "#d09e68"
-                        )
-                        __L1:r(
-                            c,
-                            x + 6 + j * 73,
-                            357,
-                            60,
-                            4,
-                            if __t(__mod(i, 2)) then "#dda18d" else "#edc18a"
-                        )
-                        j = j + 1
+                    if __t(x < camera - 300 or __gt(x, camera + 1060)) then
+                        do do x = x + 470 i = i + 1 end continue end
                     end
+                    __L1:r(
+                        c,
+                        x - 18,
+                        386,
+                        258,
+                        43,
+                        "#5a5e50"
+                    )
+                    __L1:r(
+                        c,
+                        x - 13,
+                        342,
+                        248,
+                        72,
+                        __t(__mod(i, 2)) and "#b56e68" or "#bb8b5b"
+                    )
+                    __L1:r(
+                        c,
+                        x - 11,
+                        340,
+                        244,
+                        8,
+                        __t(__mod(i, 2)) and "#d99987" or "#e4b47a"
+                    )
+                    __L1:r(
+                        c,
+                        x - 27,
+                        367,
+                        21,
+                        49,
+                        __t(__mod(i, 2)) and "#a65e5c" or "#a7774d"
+                    )
+                    __L1:r(
+                        c,
+                        x + 229,
+                        367,
+                        21,
+                        49,
+                        __t(__mod(i, 2)) and "#a65e5c" or "#a7774d"
+                    )
+                    do
+                        local j = 0
+                        while j < 3 do
+                            __L1:r(
+                                c,
+                                x + 3 + j * 73,
+                                355,
+                                66,
+                                48,
+                                __t(__mod(i, 2)) and "#c07b70" or "#d09e68"
+                            )
+                            __L1:r(
+                                c,
+                                x + 6 + j * 73,
+                                357,
+                                60,
+                                4,
+                                __t(__mod(i, 2)) and "#dda18d" or "#edc18a"
+                            )
+                            j = j + 1
+                        end
+                    end
+                    __L1:r(
+                        c,
+                        x + 13,
+                        415,
+                        9,
+                        25,
+                        "#625844"
+                    )
+                    __L1:r(
+                        c,
+                        x + 210,
+                        415,
+                        9,
+                        25,
+                        "#625844"
+                    )
+                    __L1:r(
+                        c,
+                        x + 24,
+                        352,
+                        32,
+                        31,
+                        __t(__mod(i, 2)) and "#e4d59d" or "#8eafa3"
+                    )
+                    __L1:r(
+                        c,
+                        x + 28,
+                        356,
+                        24,
+                        23,
+                        __t(__mod(i, 2)) and "#f2e3af" or "#b7cfb4"
+                    )
+                    __L1:r(
+                        c,
+                        x + 186,
+                        354,
+                        30,
+                        28,
+                        "#d9b0b5"
+                    )
                 end
-                __L1:r(
-                    c,
-                    x + 13,
-                    415,
-                    9,
-                    25,
-                    "#625844"
-                )
-                __L1:r(
-                    c,
-                    x + 210,
-                    415,
-                    9,
-                    25,
-                    "#625844"
-                )
-                __L1:r(
-                    c,
-                    x + 24,
-                    352,
-                    32,
-                    31,
-                    if __t(__mod(i, 2)) then "#e4d59d" else "#8eafa3"
-                )
-                __L1:r(
-                    c,
-                    x + 28,
-                    356,
-                    24,
-                    23,
-                    if __t(__mod(i, 2)) then "#f2e3af" else "#b7cfb4"
-                )
-                __L1:r(
-                    c,
-                    x + 186,
-                    354,
-                    30,
-                    28,
-                    "#d9b0b5"
-                )
                 do
                     x = x + 470
                     i = i + 1
@@ -11918,76 +12443,78 @@ local __O = {};
             2470,
             3200
         }, 6))) do
-            if __t(x < camera - 100 or __gt(x, camera + 1070)) then
-                continue
-            end
-            __L1:r(
-                c,
-                x,
-                395,
-                44,
-                45,
-                "#94704e"
-            )
-            __L1:r(
-                c,
-                x - 5,
-                389,
-                54,
-                9,
-                "#c29961"
-            )
-            __L1:r(
-                c,
-                x + 6,
-                404,
-                32,
-                2,
-                "#d8b47a"
-            )
-            __L1:r(
-                c,
-                x + 13,
-                372,
-                21,
-                17,
-                "#bf755a"
-            )
-            __L1:r(
-                c,
-                x + 10,
-                369,
-                27,
-                5,
-                "#d99572"
-            )
             do
-                local j = 0
-                while j < 5 do
-                    local xx = x + 22 + (j - 2) * 5
-                    local yy = 354 - math.sin(t + j) * 2
-                    __L1:limb(
-                        c,
-                        __arrL(
-                            {
-                                __arrL({x + 23, 371}, 2),
-                                __arrL({xx, yy}, 2)
-                            },
+                if __t(x < camera - 100 or __gt(x, camera + 1070)) then
+                    continue
+                end
+                __L1:r(
+                    c,
+                    x,
+                    395,
+                    44,
+                    45,
+                    "#94704e"
+                )
+                __L1:r(
+                    c,
+                    x - 5,
+                    389,
+                    54,
+                    9,
+                    "#c29961"
+                )
+                __L1:r(
+                    c,
+                    x + 6,
+                    404,
+                    32,
+                    2,
+                    "#d8b47a"
+                )
+                __L1:r(
+                    c,
+                    x + 13,
+                    372,
+                    21,
+                    17,
+                    "#bf755a"
+                )
+                __L1:r(
+                    c,
+                    x + 10,
+                    369,
+                    27,
+                    5,
+                    "#d99572"
+                )
+                do
+                    local j = 0
+                    while j < 5 do
+                        local xx = x + 22 + (j - 2) * 5
+                        local yy = 354 - math.sin(t + j) * 2
+                        __L1:limb(
+                            c,
+                            __arrL(
+                                {
+                                    __arrL({x + 23, 371}, 2),
+                                    __arrL({xx, yy}, 2)
+                                },
+                                2
+                            ),
+                            2,
+                            "#466e4a"
+                        )
+                        __L1:oval(
+                            c,
+                            xx + (__t(__mod(j, 2)) and 5 or -5),
+                            yy - 2,
+                            8,
+                            4,
+                            __t(__mod(j, 2)) and "#6f9c60" or "#91b374",
                             2
-                        ),
-                        2,
-                        "#466e4a"
-                    )
-                    __L1:oval(
-                        c,
-                        xx + if __t(__mod(j, 2)) then 5 else -5,
-                        yy - 2,
-                        8,
-                        4,
-                        if __t(__mod(j, 2)) then "#6f9c60" else "#91b374",
-                        2
-                    )
-                    j = j + 1
+                        )
+                        j = j + 1
+                    end
                 end
             end
         end
@@ -12393,44 +12920,114 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1 * if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
+        local ____c_185 = c
+        local ____c_scale_186 = c.scale
+        local ____temp_182 = __lt(o.facing, 0) and -1 or 1
+        local ____t_result_181
+        if __t(o.scale) then
+            ____t_result_181 = o.scale
+        else
+            ____t_result_181 = 1
+        end
+        local ____temp_184 = ____temp_182 * ____t_result_181
+        local ____t_result_183
+        if __t(o.scale) then
+            ____t_result_183 = o.scale
+        else
+            ____t_result_183 = 1
+        end
+        ____c_scale_186(____c_185, ____temp_184, ____t_result_183)
         if __isFiniteN(o.opacity) then
             c.globalAlpha = c.globalAlpha * math.max(
                 0,
                 math.min(1, o.opacity)
             )
         end
-        local ____t_93 = __t
-        local ____TS__Number_result_92 = __TS__Number(o.frame)
-        __O[176] = ____TS__Number_result_92
-        local t = if ____t_93(____TS__Number_result_92) then __O[176] else 0
+        local ____t_result_189
+        local ____t_188 = __t
+        local ____TS__Number_result_187 = __TS__Number(o.frame)
+        __O[176] = ____TS__Number_result_187
+        if ____t_188(____TS__Number_result_187) then
+            ____t_result_189 = __O[176]
+        else
+            ____t_result_189 = 0
+        end
+        local t = ____t_result_189
         local moving = not not __t(o.moving) or __TS__Number(o.speed) > 8
-        local walk = if __t(moving) then math.sin(t * 8) else 0
-        local bob = if __t(moving) then math.floor(math.abs(math.sin(t * 8)) * 2 + 0.5) else math.floor(math.sin(t * 2) * 0.7 + 0.5)
+        local ____t_result_190
+        if __t(moving) then
+            ____t_result_190 = math.sin(t * 8)
+        else
+            ____t_result_190 = 0
+        end
+        local walk = ____t_result_190
+        local ____t_result_191
+        if __t(moving) then
+            ____t_result_191 = math.floor(math.abs(math.sin(t * 8)) * 2 + 0.5)
+        else
+            ____t_result_191 = math.floor(math.sin(t * 2) * 0.7 + 0.5)
+        end
+        local bob = ____t_result_191
         local skin = __get({dede = "#b98b6c", aica = "#d8ad89", ravile = "#b17d57", arthur = "#f0cdb6"}, ____type)
-        local shadow = if ____type == "arthur" then "#c0947d" else if ____type == "aica" then "#af805f" else "#815a42"
+        local shadow = ____type == "arthur" and "#c0947d" or (____type == "aica" and "#af805f" or "#815a42")
         local slim = ____type == "dede" or ____type == "ravile"
-        local bodyHalf = if __t(slim) then 8 else 11
-        local coat = if ____type == "dede" then "#516563" else if ____type == "aica" then "#e5e7d6" else if ____type == "ravile" then "#8fafbf" else "#6d99a0"
-        local pants = if ____type == "dede" then "#3a434d" else "#2c435c"
-        local ____t_95 = __t
-        local ____temp_94 = ____type == "aica"
-        __O[177] = ____temp_94
-        local helping = if ____t_95(____temp_94) then if __t(o.helping) then o.helping else o.pose == "helping" else __O[177]
-        local ____t_97 = __t
-        local ____temp_96 = ____type == "ravile"
-        __O[178] = ____temp_96
-        local earPull = if ____t_97(____temp_96) then o.pose == "earpull" or o.gesture == "earpull" else __O[178]
-        local ____t_99 = __t
-        local ____temp_98 = ____type == "arthur"
-        __O[179] = ____temp_98
-        local earPulled = if ____t_99(____temp_98) then o.pose == "earpulled" or o.gesture == "earpulled" else __O[179]
+        local bodyHalf = __t(slim) and 8 or 11
+        local coat = ____type == "dede" and "#516563" or (____type == "aica" and "#e5e7d6" or (____type == "ravile" and "#8fafbf" or "#6d99a0"))
+        local pants = ____type == "dede" and "#3a434d" or "#2c435c"
+        local ____t_result_195
+        local ____t_193 = __t
+        local ____temp_192 = ____type == "aica"
+        __O[177] = ____temp_192
+        if ____t_193(____temp_192) then
+            local ____t_result_194
+            if __t(o.helping) then
+                ____t_result_194 = o.helping
+            else
+                ____t_result_194 = o.pose == "helping"
+            end
+            ____t_result_195 = ____t_result_194
+        else
+            ____t_result_195 = __O[177]
+        end
+        local helping = ____t_result_195
+        local ____t_result_198
+        local ____t_197 = __t
+        local ____temp_196 = ____type == "ravile"
+        __O[178] = ____temp_196
+        if ____t_197(____temp_196) then
+            ____t_result_198 = o.pose == "earpull" or o.gesture == "earpull"
+        else
+            ____t_result_198 = __O[178]
+        end
+        local earPull = ____t_result_198
+        local ____t_result_201
+        local ____t_200 = __t
+        local ____temp_199 = ____type == "arthur"
+        __O[179] = ____temp_199
+        if ____t_200(____temp_199) then
+            ____t_result_201 = o.pose == "earpulled" or o.gesture == "earpulled"
+        else
+            ____t_result_201 = __O[179]
+        end
+        local earPulled = ____t_result_201
         local attack = not not __t(o.attack)
-        local progress = if __isFiniteN(o.attackProgress) then math.max(
-            0,
-            math.min(1, o.attackProgress)
-        ) else 0.5 + 0.5 * math.sin(t * 6)
-        local strike = if __t(attack) then math.sin(progress * math.pi) else 0
+        local ____isFiniteN_result_202
+        if __isFiniteN(o.attackProgress) then
+            ____isFiniteN_result_202 = math.max(
+                0,
+                math.min(1, o.attackProgress)
+            )
+        else
+            ____isFiniteN_result_202 = 0.5 + 0.5 * math.sin(t * 6)
+        end
+        local progress = ____isFiniteN_result_202
+        local ____t_result_203
+        if __t(attack) then
+            ____t_result_203 = math.sin(progress * math.pi)
+        else
+            ____t_result_203 = 0
+        end
+        local strike = ____t_result_203
         if __t(____type == "dede" and o.smoke ~= false) then
             __L1:smokePuffs(
                 c,
@@ -12439,20 +13036,36 @@ local __O = {};
                 t,
                 0.8
             )
-            local ____t_104 = __t
-            local ____t_103 = __t
-            local ____t_101 = __t
-            local ____temp_100 = if __t(o.smoking) then o.smoking else o.smoke
-            __O[180] = ____temp_100
-            local ____temp_102 = if ____t_101(____temp_100) then __O[180] else o.charging
-            __O[181] = ____temp_102
-            if ____t_104(if ____t_103(____temp_102) then __O[181] else o.hiddenInSmoke) then
+            local ____t_209 = __t
+            local ____t_result_208
+            local ____t_207 = __t
+            local ____t_result_206
+            local ____t_205 = __t
+            local ____t_result_204
+            if __t(o.smoking) then
+                ____t_result_204 = o.smoking
+            else
+                ____t_result_204 = o.smoke
+            end
+            __O[180] = ____t_result_204
+            if ____t_205(____t_result_204) then
+                ____t_result_206 = __O[180]
+            else
+                ____t_result_206 = o.charging
+            end
+            __O[181] = ____t_result_206
+            if ____t_207(____t_result_206) then
+                ____t_result_208 = __O[181]
+            else
+                ____t_result_208 = o.hiddenInSmoke
+            end
+            if ____t_209(____t_result_208) then
                 __L1:smokePuffs(
                     c,
                     24,
                     -33,
                     t + 2,
-                    if __t(o.charging) then 1.3 else 0.8
+                    __t(o.charging) and 1.3 or 0.8
                 )
             end
         end
@@ -12460,16 +13073,28 @@ local __O = {};
             c,
             0,
             -1,
-            if __t(slim) then 14 else 17,
+            __t(slim) and 14 or 17,
             3,
             "#35453d",
             2
         )
-        local ____t_107 = __t
-        local ____t_106 = __t
-        local ____temp_105 = ____type == "ravile"
-        __O[182] = ____temp_105
-        if ____t_107(if ____t_106(____temp_105) then if __t(o.injured) then o.injured else o.fallen else __O[182]) then
+        local ____t_214 = __t
+        local ____t_result_213
+        local ____t_211 = __t
+        local ____temp_210 = ____type == "ravile"
+        __O[182] = ____temp_210
+        if ____t_211(____temp_210) then
+            local ____t_result_212
+            if __t(o.injured) then
+                ____t_result_212 = o.injured
+            else
+                ____t_result_212 = o.fallen
+            end
+            ____t_result_213 = ____t_result_212
+        else
+            ____t_result_213 = __O[182]
+        end
+        if ____t_214(____t_result_213) then
             __L1:r(
                 c,
                 -41,
@@ -12681,16 +13306,28 @@ local __O = {};
             c:restore()
             return
         end
-        local ____t_110 = __t
-        local ____t_109 = __t
-        local ____temp_108 = ____type == "dede"
-        __O[183] = ____temp_108
-        if ____t_110(if ____t_109(____temp_108) then o.hiddenInSmoke else __O[183]) then
+        local ____t_218 = __t
+        local ____t_result_217
+        local ____t_216 = __t
+        local ____temp_215 = ____type == "dede"
+        __O[183] = ____temp_215
+        if ____t_216(____temp_215) then
+            ____t_result_217 = o.hiddenInSmoke
+        else
+            ____t_result_217 = __O[183]
+        end
+        if ____t_218(____t_result_217) then
             c.globalAlpha = c.globalAlpha * 0.66
         end
-        local hip = if ____type == "arthur" then math.sin(t * if __t(moving) then 4 else 2) * 2.3 else 0
+        local ____temp_219
+        if ____type == "arthur" then
+            ____temp_219 = math.sin(t * (__t(moving) and 4 or 2)) * 2.3
+        else
+            ____temp_219 = 0
+        end
+        local hip = ____temp_219
         if __t(____type == "aica" or ____type == "ravile") then
-            local hair = if ____type == "aica" then "#4d392f" else "#362f2b"
+            local hair = ____type == "aica" and "#4d392f" or "#362f2b"
             __L1:r(
                 c,
                 -15,
@@ -12733,24 +13370,30 @@ local __O = {};
             )
         end
         for ____, side in __iterar((__arrL({-1, 1}, 2))) do
-            local footX = side * if __t(slim) then 5 else 6 + math.floor(walk * 11 * side + 0.5)
-            local footY = if __t(moving) then math.max(
-                0,
-                math.cos(t * 8 + if side > 0 then 0 else math.pi)
-            ) * 5 else 0
+            local footX = side * (__t(slim) and 5 or 6) + math.floor(walk * 11 * side + 0.5)
+            local ____t_result_220
+            if __t(moving) then
+                ____t_result_220 = math.max(
+                    0,
+                    math.cos(t * 8 + (side > 0 and 0 or math.pi))
+                ) * 5
+            else
+                ____t_result_220 = 0
+            end
+            local footY = ____t_result_220
             if o.grounded == false then
-                footX = if side > 0 then 11 else -9
-                footY = if side > 0 then 3 else 10
+                footX = side > 0 and 11 or -9
+                footY = side > 0 and 3 or 10
             end
             if __t(helping) then
-                footX = if side > 0 then 18 else -9
+                footX = side > 0 and 18 or -9
                 footY = 0
                 __L1:limb(
                     c,
                     __arrL(
                         {
                             __arrL({side * 5, -17}, 2),
-                            __arrL({if side > 0 then 11 else -15, -6}, 2),
+                            __arrL({side > 0 and 11 or -15, -6}, 2),
                             __arrL({footX, -3}, 2)
                         },
                         3
@@ -12763,7 +13406,7 @@ local __O = {};
                     __arrL(
                         {
                             __arrL({side * 5, -17}, 2),
-                            __arrL({if side > 0 then 11 else -15, -6}, 2),
+                            __arrL({side > 0 and 11 or -15, -6}, 2),
                             __arrL({footX, -3}, 2)
                         },
                         3
@@ -12776,26 +13419,50 @@ local __O = {};
                     c,
                     __arrL(
                         {
-                            __arrL({side * if __t(slim) then 4 else 5 + hip, -24}, 2),
-                            __arrL({side * if __t(slim) then 4 else 5 + hip * 0.5, -13}, 2),
+                            __arrL(
+                                {
+                                    side * (__t(slim) and 4 or 5) + hip,
+                                    -24
+                                },
+                                2
+                            ),
+                            __arrL(
+                                {
+                                    side * (__t(slim) and 4 or 5) + hip * 0.5,
+                                    -13
+                                },
+                                2
+                            ),
                             __arrL({footX, -4 - footY}, 2)
                         },
                         3
                     ),
-                    if __t(slim) then 6 else 9,
+                    __t(slim) and 6 or 9,
                     "#263a47"
                 )
                 __L1:limb(
                     c,
                     __arrL(
                         {
-                            __arrL({side * if __t(slim) then 4 else 5 + hip, -24}, 2),
-                            __arrL({side * if __t(slim) then 4 else 5 + hip * 0.5, -13}, 2),
+                            __arrL(
+                                {
+                                    side * (__t(slim) and 4 or 5) + hip,
+                                    -24
+                                },
+                                2
+                            ),
+                            __arrL(
+                                {
+                                    side * (__t(slim) and 4 or 5) + hip * 0.5,
+                                    -13
+                                },
+                                2
+                            ),
                             __arrL({footX, -4 - footY}, 2)
                         },
                         3
                     ),
-                    if __t(slim) then 3 else 5,
+                    __t(slim) and 3 or 5,
                     pants
                 )
             end
@@ -12805,7 +13472,7 @@ local __O = {};
                 -5 - footY,
                 12,
                 5,
-                if ____type == "dede" then "#26363b" else "#e8e4d5"
+                ____type == "dede" and "#26363b" or "#e8e4d5"
             )
             __L1:r(
                 c,
@@ -12813,21 +13480,48 @@ local __O = {};
                 -2 - footY,
                 11,
                 2,
-                if ____type == "dede" then "#aab5a4" else "#98afb0"
+                ____type == "dede" and "#aab5a4" or "#98afb0"
             )
         end
-        c:translate(if __t(o.dash) then 5 else walk + hip, -bob + if __t(helping) then 16 else 0)
+        c:translate(
+            (__t(o.dash) and 5 or walk) + hip,
+            -bob + (__t(helping) and 16 or 0)
+        )
         local dedeCiclo = __mod(t * 0.3, 1)
-        local ____t_113 = __t
-        local ____t_112 = __t
-        local ____temp_111 = ____type == "dede" and not __t(moving)
-        __O[184] = ____temp_111
-        local dedeTrago = if ____t_113(if ____t_112(____temp_111) then not __t(attack) else __O[184]) then if dedeCiclo < 0.2 then math.sin(dedeCiclo / 0.2 * math.pi) else 0 else 0
-        local ____t_116 = __t
-        local ____t_115 = __t
-        local ____temp_114 = ____type == "dede" and not __t(moving)
-        __O[185] = ____temp_114
-        if ____t_116(if ____t_115(____temp_114) then not __t(o.dash) else __O[185]) then
+        local ____t_result_226
+        local ____t_224 = __t
+        local ____t_result_223
+        local ____t_222 = __t
+        local ____temp_221 = ____type == "dede" and not __t(moving)
+        __O[184] = ____temp_221
+        if ____t_222(____temp_221) then
+            ____t_result_223 = not __t(attack)
+        else
+            ____t_result_223 = __O[184]
+        end
+        if ____t_224(____t_result_223) then
+            local ____temp_225
+            if dedeCiclo < 0.2 then
+                ____temp_225 = math.sin(dedeCiclo / 0.2 * math.pi)
+            else
+                ____temp_225 = 0
+            end
+            ____t_result_226 = ____temp_225
+        else
+            ____t_result_226 = 0
+        end
+        local dedeTrago = ____t_result_226
+        local ____t_230 = __t
+        local ____t_result_229
+        local ____t_228 = __t
+        local ____temp_227 = ____type == "dede" and not __t(moving)
+        __O[185] = ____temp_227
+        if ____t_228(____temp_227) then
+            ____t_result_229 = not __t(o.dash)
+        else
+            ____t_result_229 = __O[185]
+        end
+        if ____t_230(____t_result_229) then
             c:translate(
                 math.floor(math.sin(t * 1.1) * 1.6 + 0.5),
                 math.floor(math.max(
@@ -12882,11 +13576,17 @@ local __O = {};
                 2
             )
         end
-        local ____t_119 = __t
-        local ____t_118 = __t
-        local ____temp_117 = ____type == "arthur"
-        __O[186] = ____temp_117
-        if ____t_119(if ____t_118(____temp_117) then moving else __O[186]) then
+        local ____t_234 = __t
+        local ____t_result_233
+        local ____t_232 = __t
+        local ____temp_231 = ____type == "arthur"
+        __O[186] = ____temp_231
+        if ____t_232(____temp_231) then
+            ____t_result_233 = moving
+        else
+            ____t_result_233 = __O[186]
+        end
+        if ____t_234(____t_result_233) then
             leftHand = __arrL(
                 {
                     -13 + walk * 10,
@@ -12903,14 +13603,34 @@ local __O = {};
             )
         end
         if __t(attack) then
-            rightHand = if ____type == "arthur" then __arrL({27 + strike * 20, -37 - strike * 5}, 2) else __arrL({27 + strike * 12, -35 - strike * 11}, 2)
+            local ____temp_235
+            if ____type == "arthur" then
+                ____temp_235 = __arrL({27 + strike * 20, -37 - strike * 5}, 2)
+            else
+                ____temp_235 = __arrL({27 + strike * 12, -35 - strike * 11}, 2)
+            end
+            rightHand = ____temp_235
             leftHand = __arrL({-13, -34}, 2)
         end
-        if __t(if __t(o.charging) then ____type == "dede" else o.charging) then
+        local ____t_237 = __t
+        local ____t_result_236
+        if __t(o.charging) then
+            ____t_result_236 = ____type == "dede"
+        else
+            ____t_result_236 = o.charging
+        end
+        if ____t_237(____t_result_236) then
             leftHand = __arrL({-28, -30}, 2)
             rightHand = __arrL({29, -35}, 2)
         end
-        if __t(if __t(o.inhale) then ____type == "dede" else o.inhale) then
+        local ____t_239 = __t
+        local ____t_result_238
+        if __t(o.inhale) then
+            ____t_result_238 = ____type == "dede"
+        else
+            ____t_result_238 = o.inhale
+        end
+        if ____t_239(____t_result_238) then
             leftHand = __arrL({-17, -26}, 2)
             rightHand = __arrL({12, -43}, 2)
         end
@@ -12923,8 +13643,21 @@ local __O = {};
             rightHand = __arrL({-6, -42}, 2)
         end
         local function arm(self, side)
-            local ____end = if __gt(side, 0) then rightHand else leftHand
-            local elbow = __arrL({if __gt(side, 0) then if __t(slim) then 15 else 18 else -if __t(slim) then 14 else 17, -29 + walk * side * 3}, 2)
+            local ____gt_result_240
+            if __gt(side, 0) then
+                ____gt_result_240 = rightHand
+            else
+                ____gt_result_240 = leftHand
+            end
+            local ____end = ____gt_result_240
+            local ____arrL_242 = __arrL
+            local ____gt_result_241
+            if __gt(side, 0) then
+                ____gt_result_241 = __t(slim) and 15 or 18
+            else
+                ____gt_result_241 = -(__t(slim) and 14 or 17)
+            end
+            local elbow = ____arrL_242({____gt_result_241, -29 + walk * side * 3}, 2)
             __L1:limb(
                 c,
                 __arrL(
@@ -12935,7 +13668,7 @@ local __O = {};
                     },
                     3
                 ),
-                if __t(slim) then 6 else 8,
+                __t(slim) and 6 or 8,
                 "#293a40"
             )
             __L1:limb(
@@ -12947,14 +13680,25 @@ local __O = {};
                     },
                     2
                 ),
-                if __t(slim) then 3 else 5,
+                __t(slim) and 3 or 5,
                 coat
             )
-            __L1:limb(
+            local ____L1_limb_245 = __L1.limb
+            local ____array_244 = __TS__SparseArrayNew(
                 c,
                 __arrL({elbow, ____end}, 2),
-                if __t(slim) then 3 else 5,
-                if ____type == "dede" then coat else skin
+                __t(slim) and 3 or 5
+            )
+            local ____temp_243
+            if ____type == "dede" then
+                ____temp_243 = coat
+            else
+                ____temp_243 = skin
+            end
+            __TS__SparseArrayPush(____array_244, ____temp_243)
+            ____L1_limb_245(
+                __L1,
+                __TS__SparseArraySpread(____array_244)
             )
             __L1:r(
                 c,
@@ -12988,7 +13732,7 @@ local __O = {};
             -36,
             2,
             13,
-            if ____type == "dede" then "#788b80" else "#d7e3dc"
+            ____type == "dede" and "#788b80" or "#d7e3dc"
         )
         __L1:r(
             c,
@@ -12996,7 +13740,7 @@ local __O = {};
             -21,
             bodyHalf * 2 + 1,
             3,
-            if ____type == "dede" then "#334748" else "#325577"
+            ____type == "dede" and "#334748" or "#325577"
         )
         if ____type == "dede" then
             __L1:poly(
@@ -13530,13 +14274,13 @@ local __O = {};
                 1,
                 -56,
                 8,
-                if __t(pisca) then 5 else 3,
+                __t(pisca) and 5 or 3,
                 "#8d5c46"
             )
             __L1:r(
                 c,
                 1,
-                if __t(pisca) then -52 else -54,
+                __t(pisca) and -52 or -54,
                 8,
                 1,
                 "#3e2a24"
@@ -13567,12 +14311,18 @@ local __O = {};
             )
             local hx = __get(rightHand, 0)
             local hy = __get(rightHand, 1)
-            local brilho = if __t(o.inhale) then 1 else dedeTrago
-            local ____t_122 = __t
-            local ____t_121 = __t
-            local ____temp_120 = not __t(attack) or progress < 0.32
-            __O[187] = ____temp_120
-            if ____t_122(if ____t_121(____temp_120) then __O[187] else progress > 0.85) then
+            local brilho = __t(o.inhale) and 1 or dedeTrago
+            local ____t_249 = __t
+            local ____t_result_248
+            local ____t_247 = __t
+            local ____temp_246 = not __t(attack) or progress < 0.32
+            __O[187] = ____temp_246
+            if ____t_247(____temp_246) then
+                ____t_result_248 = __O[187]
+            else
+                ____t_result_248 = progress > 0.85
+            end
+            if ____t_249(____t_result_248) then
                 __L1:r(
                     c,
                     hx + 1,
@@ -13611,7 +14361,7 @@ local __O = {};
                     hy - 3,
                     2,
                     2,
-                    if brilho > 0.3 then "#ff7a2a" else "#c8401f"
+                    brilho > 0.3 and "#ff7a2a" or "#c8401f"
                 )
                 if __t(brilho > 0.3 or math.sin(t * 5) > 0.6) then
                     __L1:r(
@@ -13648,9 +14398,9 @@ local __O = {};
                                 c,
                                 hx + 12 + math.sin(t * 2.2 + k * 7) * k * 5,
                                 hy - 5 - k * 34,
-                                if k > 0.5 then 2 else 1,
+                                k > 0.5 and 2 or 1,
                                 2,
-                                if k > 0.4 then "#c9d3cf" else "#e6ece6"
+                                k > 0.4 and "#c9d3cf" or "#e6ece6"
                             )
                             i = i + 1
                         end
@@ -13658,34 +14408,47 @@ local __O = {};
                     c:restore()
                 end
             end
-            local ____t_127 = __t
-            local ____t_126 = __t
-            local ____t_124 = __t
-            local ____temp_123 = o.smoke ~= false and not __t(moving)
-            __O[188] = ____temp_123
-            local ____temp_125 = if ____t_124(____temp_123) then dedeCiclo > 0.21 else __O[188]
-            __O[189] = ____temp_125
-            if ____t_127(if ____t_126(____temp_125) then dedeCiclo < 0.46 else __O[189]) then
+            local ____t_255 = __t
+            local ____t_result_254
+            local ____t_253 = __t
+            local ____t_result_252
+            local ____t_251 = __t
+            local ____temp_250 = o.smoke ~= false and not __t(moving)
+            __O[188] = ____temp_250
+            if ____t_251(____temp_250) then
+                ____t_result_252 = dedeCiclo > 0.21
+            else
+                ____t_result_252 = __O[188]
+            end
+            __O[189] = ____t_result_252
+            if ____t_253(____t_result_252) then
+                ____t_result_254 = dedeCiclo < 0.46
+            else
+                ____t_result_254 = __O[189]
+            end
+            if ____t_255(____t_result_254) then
                 local k = (dedeCiclo - 0.21) / 0.25
                 c:save()
                 local base = c.globalAlpha
                 do
                     local i = 0
                     while i < 5 do
-                        local kk = math.min(1, k * 1.3 - i * 0.08)
-                        if kk <= 0 then
-                            continue
+                        do
+                            local kk = math.min(1, k * 1.3 - i * 0.08)
+                            if kk <= 0 then
+                                do i = i + 1 continue end
+                            end
+                            c.globalAlpha = base * (1 - kk) * 0.8
+                            __L1:oval(
+                                c,
+                                14 + kk * 24 + i * 3,
+                                -44 - kk * 14 - i * 2,
+                                3 + kk * 6,
+                                2 + kk * 4,
+                                __t(__mod(i, 2)) and "#c6d1cd" or "#e4ebe4",
+                                2
+                            )
                         end
-                        c.globalAlpha = base * (1 - kk) * 0.8
-                        __L1:oval(
-                            c,
-                            14 + kk * 24 + i * 3,
-                            -44 - kk * 14 - i * 2,
-                            3 + kk * 6,
-                            2 + kk * 4,
-                            if __t(__mod(i, 2)) then "#c6d1cd" else "#e4ebe4",
-                            2
-                        )
                         i = i + 1
                     end
                 end
@@ -13713,7 +14476,7 @@ local __O = {};
                 c:restore()
             end
         else
-            local hair = if ____type == "aica" then "#4d392f" else "#362f2b"
+            local hair = ____type == "aica" and "#4d392f" or "#362f2b"
             __L1:r(
                 c,
                 -13,
@@ -13752,7 +14515,7 @@ local __O = {};
                 -63,
                 7,
                 2,
-                if ____type == "aica" then "#77573d" else "#65503a"
+                ____type == "aica" and "#77573d" or "#65503a"
             )
             __L1:r(
                 c,
@@ -13760,7 +14523,7 @@ local __O = {};
                 -63,
                 7,
                 2,
-                if ____type == "aica" then "#77573d" else "#65503a"
+                ____type == "aica" and "#77573d" or "#65503a"
             )
             __L1:r(
                 c,
@@ -13786,11 +14549,17 @@ local __O = {};
                 1,
                 "#ebc7a7"
             )
-            local ____t_130 = __t
-            local ____t_129 = __t
-            local ____temp_128 = ____type == "aica"
-            __O[190] = ____temp_128
-            if ____t_130(if ____t_129(____temp_128) then o.shouting else __O[190]) then
+            local ____t_259 = __t
+            local ____t_result_258
+            local ____t_257 = __t
+            local ____temp_256 = ____type == "aica"
+            __O[190] = ____temp_256
+            if ____t_257(____temp_256) then
+                ____t_result_258 = o.shouting
+            else
+                ____t_result_258 = __O[190]
+            end
+            if ____t_259(____t_result_258) then
                 __L1:r(
                     c,
                     0,
@@ -13942,65 +14711,67 @@ local __O = {};
         do
             local x = 55
             while x < width do
-                if __t(x < camera - 180 or __gt(x, camera + 1150)) then
-                    continue
+                do
+                    if __t(x < camera - 180 or __gt(x, camera + 1150)) then
+                        do x = x + 187 continue end
+                    end
+                    __L1:r(
+                        c,
+                        x,
+                        244,
+                        101,
+                        64,
+                        "#294e68"
+                    )
+                    __L1:r(
+                        c,
+                        x + 5,
+                        249,
+                        91,
+                        54,
+                        "#7bafb7"
+                    )
+                    __L1:r(
+                        c,
+                        x + 9,
+                        253,
+                        36,
+                        20,
+                        "#c2dfe0"
+                    )
+                    __L1:r(
+                        c,
+                        x + 51,
+                        278,
+                        40,
+                        20,
+                        "#9fc8c9"
+                    )
+                    __L1:r(
+                        c,
+                        x + 47,
+                        249,
+                        4,
+                        54,
+                        "#e6eee1"
+                    )
+                    __L1:r(
+                        c,
+                        x + 5,
+                        275,
+                        91,
+                        4,
+                        "#e6eee1"
+                    )
+                    __L1:r(
+                        c,
+                        x - 4,
+                        308,
+                        109,
+                        5,
+                        "#acbcb7"
+                    )
                 end
-                __L1:r(
-                    c,
-                    x,
-                    244,
-                    101,
-                    64,
-                    "#294e68"
-                )
-                __L1:r(
-                    c,
-                    x + 5,
-                    249,
-                    91,
-                    54,
-                    "#7bafb7"
-                )
-                __L1:r(
-                    c,
-                    x + 9,
-                    253,
-                    36,
-                    20,
-                    "#c2dfe0"
-                )
-                __L1:r(
-                    c,
-                    x + 51,
-                    278,
-                    40,
-                    20,
-                    "#9fc8c9"
-                )
-                __L1:r(
-                    c,
-                    x + 47,
-                    249,
-                    4,
-                    54,
-                    "#e6eee1"
-                )
-                __L1:r(
-                    c,
-                    x + 5,
-                    275,
-                    91,
-                    4,
-                    "#e6eee1"
-                )
-                __L1:r(
-                    c,
-                    x - 4,
-                    308,
-                    109,
-                    5,
-                    "#acbcb7"
-                )
                 x = x + 187
             end
         end
@@ -14065,106 +14836,110 @@ local __O = {};
         c.fillStyle = "#a9d5da"
         c:fillText("PÁTIO · UM RECREIO DE MUITAS HISTÓRIAS", 356, 267)
         for ____, x in __iterar((__arrL({70, 1220, 2170, 3490}, 4))) do
-            if __t(x < camera - 150 or __gt(x, camera + 1120)) then
-                continue
+            do
+                if __t(x < camera - 150 or __gt(x, camera + 1120)) then
+                    continue
+                end
+                __L1:tree(
+                    c,
+                    x,
+                    428,
+                    0.72,
+                    1
+                )
+                __L1:oval(
+                    c,
+                    x,
+                    432,
+                    55,
+                    8,
+                    "#6e9b8b",
+                    3
+                )
+                __L1:r(
+                    c,
+                    x - 49,
+                    426,
+                    97,
+                    10,
+                    "#436d72"
+                )
+                __L1:r(
+                    c,
+                    x - 46,
+                    426,
+                    91,
+                    3,
+                    "#b2d1bd"
+                )
             end
-            __L1:tree(
-                c,
-                x,
-                428,
-                0.72,
-                1
-            )
-            __L1:oval(
-                c,
-                x,
-                432,
-                55,
-                8,
-                "#6e9b8b",
-                3
-            )
-            __L1:r(
-                c,
-                x - 49,
-                426,
-                97,
-                10,
-                "#436d72"
-            )
-            __L1:r(
-                c,
-                x - 46,
-                426,
-                91,
-                3,
-                "#b2d1bd"
-            )
         end
         for ____, x in __iterar((__arrL({90, 1460, 1980, 3370}, 4))) do
-            if __t(x < camera - 200 or __gt(x, camera + 1120)) then
-                continue
-            end
-            __L1:r(
-                c,
-                x,
-                396,
-                130,
-                10,
-                "#2c5e8e"
-            )
-            __L1:r(
-                c,
-                x + 4,
-                399,
-                122,
-                3,
-                "#6296b7"
-            )
-            __L1:r(
-                c,
-                x + 9,
-                406,
-                7,
-                33,
-                "#587e8d"
-            )
-            __L1:r(
-                c,
-                x + 113,
-                406,
-                7,
-                33,
-                "#587e8d"
-            )
-            __L1:r(
-                c,
-                x,
-                372,
-                130,
-                7,
-                "#386e9d"
-            )
-            __L1:r(
-                c,
-                x,
-                385,
-                130,
-                6,
-                "#386e9d"
-            )
             do
-                local j = 0
-                while j < 2 do
-                    __L1:backgroundCitizen(
-                        c,
-                        x + 40 + j * 43,
-                        400,
-                        t,
-                        math.floor(x / 90) + j,
-                        true
-                    )
-                    j = j + 1
+                if __t(x < camera - 200 or __gt(x, camera + 1120)) then
+                    continue
+                end
+                __L1:r(
+                    c,
+                    x,
+                    396,
+                    130,
+                    10,
+                    "#2c5e8e"
+                )
+                __L1:r(
+                    c,
+                    x + 4,
+                    399,
+                    122,
+                    3,
+                    "#6296b7"
+                )
+                __L1:r(
+                    c,
+                    x + 9,
+                    406,
+                    7,
+                    33,
+                    "#587e8d"
+                )
+                __L1:r(
+                    c,
+                    x + 113,
+                    406,
+                    7,
+                    33,
+                    "#587e8d"
+                )
+                __L1:r(
+                    c,
+                    x,
+                    372,
+                    130,
+                    7,
+                    "#386e9d"
+                )
+                __L1:r(
+                    c,
+                    x,
+                    385,
+                    130,
+                    6,
+                    "#386e9d"
+                )
+                do
+                    local j = 0
+                    while j < 2 do
+                        __L1:backgroundCitizen(
+                            c,
+                            x + 40 + j * 43,
+                            400,
+                            t,
+                            math.floor(x / 90) + j,
+                            true
+                        )
+                        j = j + 1
+                    end
                 end
             end
         end
@@ -14226,7 +15001,7 @@ local __O = {};
                         },
                         3
                     ),
-                    if __mod(i, 3) == 0 then "#659fbe" else if __mod(i, 3) == 1 then "#f1e4ba" else "#94bc9b"
+                    __mod(i, 3) == 0 and "#659fbe" or (__mod(i, 3) == 1 and "#f1e4ba" or "#94bc9b")
                 )
                 i = i + 1
             end
@@ -14297,7 +15072,13 @@ local __O = {};
     end
     __L1.questArena = function(self, c, ____type, camera, t, homeX)
         c:save()
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_260
+        if __t(homeX) then
+            ____t_result_260 = homeX - camera
+        else
+            ____t_result_260 = 480
+        end
+        local center = ____t_result_260
         if ____type == "arthur" then
             __L1:sky(c, 9, 0, t)
             __L1:courtyard(
@@ -14679,7 +15460,23 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1 * if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
+        local ____c_265 = c
+        local ____c_scale_266 = c.scale
+        local ____temp_262 = __lt(o.facing, 0) and -1 or 1
+        local ____t_result_261
+        if __t(o.scale) then
+            ____t_result_261 = o.scale
+        else
+            ____t_result_261 = 1
+        end
+        local ____temp_264 = ____temp_262 * ____t_result_261
+        local ____t_result_263
+        if __t(o.scale) then
+            ____t_result_263 = o.scale
+        else
+            ____t_result_263 = 1
+        end
+        ____c_scale_266(____c_265, ____temp_264, ____t_result_263)
         local step = math.sin(t * 18) * 3
         __L1:limb(
             c,
@@ -14851,7 +15648,10 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1, 1)
+        c:scale(
+            __lt(o.facing, 0) and -1 or 1,
+            1
+        )
         local bob = math.floor(math.sin(t * 6) * 3 + 0.5)
         __L1:oval(
             c,
@@ -15090,7 +15890,7 @@ local __O = {};
                 )
                 __L1:r(
                     c,
-                    if side > 0 then 8 else -18,
+                    side > 0 and 8 or -18,
                     -8,
                     13,
                     9,
@@ -15098,7 +15898,7 @@ local __O = {};
                 )
                 __L1:r(
                     c,
-                    if side > 0 then 11 else -17,
+                    side > 0 and 11 or -17,
                     -2,
                     13,
                     4,
@@ -15168,7 +15968,7 @@ local __O = {};
                             4
                         ),
                         3,
-                        if __t(__mod(i, 2)) then "#e3c780" else "#f4dfa1"
+                        __t(__mod(i, 2)) and "#e3c780" or "#f4dfa1"
                     )
                     i = i + 1
                 end
@@ -15297,7 +16097,21 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
+        local ____c_269 = c
+        local ____c_scale_270 = c.scale
+        local ____t_result_267
+        if __t(o.scale) then
+            ____t_result_267 = o.scale
+        else
+            ____t_result_267 = 1
+        end
+        local ____t_result_268
+        if __t(o.scale) then
+            ____t_result_268 = o.scale
+        else
+            ____t_result_268 = 1
+        end
+        ____c_scale_270(____c_269, ____t_result_267, ____t_result_268)
         __L1:oval(
             c,
             0,
@@ -15416,7 +16230,7 @@ local __O = {};
                     yy,
                     2,
                     2,
-                    if __t(__mod(i, 2)) then "#c99653" else "#efd09a"
+                    __t(__mod(i, 2)) and "#c99653" or "#efd09a"
                 )
                 i = i + 1
             end
@@ -15461,31 +16275,73 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1 * if __t(o.scale) then o.scale else 1, if __t(o.scale) then o.scale else 1)
-        local ____t_132 = __t
-        local ____TS__Number_result_131 = __TS__Number(o.frame)
-        __O[191] = ____TS__Number_result_131
-        local t = if ____t_132(____TS__Number_result_131) then __O[191] else 0
+        local ____c_275 = c
+        local ____c_scale_276 = c.scale
+        local ____temp_272 = __lt(o.facing, 0) and -1 or 1
+        local ____t_result_271
+        if __t(o.scale) then
+            ____t_result_271 = o.scale
+        else
+            ____t_result_271 = 1
+        end
+        local ____temp_274 = ____temp_272 * ____t_result_271
+        local ____t_result_273
+        if __t(o.scale) then
+            ____t_result_273 = o.scale
+        else
+            ____t_result_273 = 1
+        end
+        ____c_scale_276(____c_275, ____temp_274, ____t_result_273)
+        local ____t_result_279
+        local ____t_278 = __t
+        local ____TS__Number_result_277 = __TS__Number(o.frame)
+        __O[191] = ____TS__Number_result_277
+        if ____t_278(____TS__Number_result_277) then
+            ____t_result_279 = __O[191]
+        else
+            ____t_result_279 = 0
+        end
+        local t = ____t_result_279
         local moving = not not __t(o.moving)
-        local walk = if __t(moving) then math.sin(t * 7) * 4 else 0
-        local skin = if ____type == "igor" then "#e7a079" else "#f0cbb4"
+        local ____t_result_280
+        if __t(moving) then
+            ____t_result_280 = math.sin(t * 7) * 4
+        else
+            ____t_result_280 = 0
+        end
+        local walk = ____t_result_280
+        local skin = ____type == "igor" and "#e7a079" or "#f0cbb4"
         local ink = "#34404b"
         __L1:oval(
             c,
             0,
             1,
-            if ____type == "igor" then 27 else 19,
+            ____type == "igor" and 27 or 19,
             4,
             "#243b3c55",
             3
         )
-        local ____t_135 = __t
-        local ____t_134 = __t
-        local ____temp_133 = ____type == "igor"
-        __O[192] = ____temp_133
-        if ____t_135(if ____t_134(____temp_133) then o.bellyRolling else __O[192]) then
+        local ____t_284 = __t
+        local ____t_result_283
+        local ____t_282 = __t
+        local ____temp_281 = ____type == "igor"
+        __O[192] = ____temp_281
+        if ____t_282(____temp_281) then
+            ____t_result_283 = o.bellyRolling
+        else
+            ____t_result_283 = __O[192]
+        end
+        if ____t_284(____t_result_283) then
             c:translate(0, -36)
-            c:rotate(if __t(o.rollAngle) then o.rollAngle else 0)
+            local ____c_286 = c
+            local ____c_rotate_287 = c.rotate
+            local ____t_result_285
+            if __t(o.rollAngle) then
+                ____t_result_285 = o.rollAngle
+            else
+                ____t_result_285 = 0
+            end
+            ____c_rotate_287(____c_286, ____t_result_285)
             __L1:oval(
                 c,
                 0,
@@ -15501,7 +16357,7 @@ local __O = {};
                 1,
                 32,
                 33,
-                if __t(o.monitorBattle) then "#277ab8" else "#e3a47b",
+                __t(o.monitorBattle) and "#277ab8" or "#e3a47b",
                 3
             )
             __L1:oval(
@@ -15510,7 +16366,7 @@ local __O = {};
                 4,
                 24,
                 24,
-                if __t(o.monitorBattle) then "#3a96ce" else "#efb38c",
+                __t(o.monitorBattle) and "#3a96ce" or "#efb38c",
                 3
             )
             __L1:r(
@@ -15519,7 +16375,7 @@ local __O = {};
                 -3,
                 6,
                 5,
-                if __t(o.monitorBattle) then "#1c5a91" else "#bb785b"
+                __t(o.monitorBattle) and "#1c5a91" or "#bb785b"
             )
             __L1:r(
                 c,
@@ -15590,15 +16446,15 @@ local __O = {};
         end
         if ____type == "igor" then
             local IP = o.igorPose
-            local ____o_igorPoseK_136 = o.igorPoseK
-            if ____o_igorPoseK_136 == nil then
-                ____o_igorPoseK_136 = 1
+            local ____o_igorPoseK_288 = o.igorPoseK
+            if ____o_igorPoseK_288 == nil then
+                ____o_igorPoseK_288 = 1
             end
             local ik = math.max(
                 0,
                 math.min(
                     1,
-                    __TS__Number(____o_igorPoseK_136)
+                    __TS__Number(____o_igorPoseK_288)
                 )
             )
             if IP == "rise" then
@@ -15717,7 +16573,7 @@ local __O = {};
                 -41,
                 28,
                 29,
-                if __t(o.monitorBattle) then "#226ca8" else "#7c8075",
+                __t(o.monitorBattle) and "#226ca8" or "#7c8075",
                 3
             )
             __L1:oval(
@@ -15726,7 +16582,7 @@ local __O = {};
                 -38,
                 25,
                 23,
-                if __t(o.monitorBattle) then "#318ac3" else skin,
+                __t(o.monitorBattle) and "#318ac3" or skin,
                 3
             )
             __L1:oval(
@@ -15735,7 +16591,7 @@ local __O = {};
                 -39,
                 19,
                 18,
-                if __t(o.monitorBattle) then "#45a0d2" else "#efb28b",
+                __t(o.monitorBattle) and "#45a0d2" or "#efb28b",
                 3
             )
             __L1:r(
@@ -15744,7 +16600,7 @@ local __O = {};
                 -39,
                 5,
                 4,
-                if __t(o.monitorBattle) then "#246caa" else "#bc7b5d"
+                __t(o.monitorBattle) and "#246caa" or "#bc7b5d"
             )
             if __t(o.monitorBattle) then
                 __L1:r(
@@ -16214,7 +17070,7 @@ local __O = {};
                 -92,
                 3,
                 3,
-                if __t(o.rage) then "#ec6668" else "#25313b"
+                __t(o.rage) and "#ec6668" or "#25313b"
             )
             __L1:r(
                 c,
@@ -16222,7 +17078,7 @@ local __O = {};
                 -92,
                 3,
                 3,
-                if __t(o.rage) then "#ec6668" else "#25313b"
+                __t(o.rage) and "#ec6668" or "#25313b"
             )
             __L1:r(
                 c,
@@ -16247,7 +17103,13 @@ local __O = {};
                     {
                         __arrL({-12, -72}, 2),
                         __arrL({-17, -57}, 2),
-                        __arrL({if __t(aiming) then 18 else -13, -50}, 2)
+                        __arrL(
+                            {
+                                __t(aiming) and 18 or -13,
+                                -50
+                            },
+                            2
+                        )
                     },
                     3
                 ),
@@ -16260,7 +17122,13 @@ local __O = {};
                     {
                         __arrL({-12, -72}, 2),
                         __arrL({-17, -57}, 2),
-                        __arrL({if __t(aiming) then 18 else -13, -50}, 2)
+                        __arrL(
+                            {
+                                __t(aiming) and 18 or -13,
+                                -50
+                            },
+                            2
+                        )
                     },
                     3
                 ),
@@ -16273,7 +17141,13 @@ local __O = {};
                     {
                         __arrL({12, -72}, 2),
                         __arrL({19, -57}, 2),
-                        __arrL({if __t(aiming) then 33 else 19, -50}, 2)
+                        __arrL(
+                            {
+                                __t(aiming) and 33 or 19,
+                                -50
+                            },
+                            2
+                        )
                     },
                     3
                 ),
@@ -16286,7 +17160,13 @@ local __O = {};
                     {
                         __arrL({12, -72}, 2),
                         __arrL({19, -57}, 2),
-                        __arrL({if __t(aiming) then 33 else 19, -50}, 2)
+                        __arrL(
+                            {
+                                __t(aiming) and 33 or 19,
+                                -50
+                            },
+                            2
+                        )
                     },
                     3
                 ),
@@ -16342,7 +17222,14 @@ local __O = {};
                     5,
                     "#a58c66"
                 )
-                if __t(if __t(o.firing) then math.sin(t * 35) > 0.1 else o.firing) then
+                local ____t_290 = __t
+                local ____t_result_289
+                if __t(o.firing) then
+                    ____t_result_289 = math.sin(t * 35) > 0.1
+                else
+                    ____t_result_289 = o.firing
+                end
+                if ____t_290(____t_result_289) then
                     __L1:poly(
                         c,
                         __arrL(
@@ -16364,7 +17251,7 @@ local __O = {};
             __L1:r(
                 c,
                 -10,
-                if ____type == "igor" then -74 else -93,
+                ____type == "igor" and -74 or -93,
                 4,
                 3,
                 "#f45c68"
@@ -16372,7 +17259,7 @@ local __O = {};
             __L1:r(
                 c,
                 5,
-                if ____type == "igor" then -74 else -93,
+                ____type == "igor" and -74 or -93,
                 4,
                 3,
                 "#f45c68"
@@ -16383,9 +17270,9 @@ local __O = {};
             __L1:r(
                 c,
                 -32,
-                if ____type == "igor" then -90 else -112,
+                ____type == "igor" and -90 or -112,
                 66,
-                if ____type == "igor" then 90 else 112,
+                ____type == "igor" and 90 or 112,
                 "#fff3d5"
             )
         end
@@ -16523,7 +17410,7 @@ local __O = {};
                         yy,
                         3,
                         7,
-                        if __t(__mod(i, 3)) then "#d5b8ff" else "#fff1b7"
+                        __t(__mod(i, 3)) and "#d5b8ff" or "#fff1b7"
                     )
                     i = i + 1
                 end
@@ -16551,7 +17438,7 @@ local __O = {};
                         yy,
                         4,
                         12,
-                        if __t(__mod(i, 2)) then "#dc9fb8" else "#d7b8ef"
+                        __t(__mod(i, 2)) and "#dc9fb8" or "#d7b8ef"
                     )
                     i = i + 1
                 end
@@ -16582,32 +17469,56 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local ____t_138 = __t
-        local ____TS__Number_result_137 = __TS__Number(o.bossPhase)
-        __O[194] = ____TS__Number_result_137
+        local ____t_result_293
+        local ____t_292 = __t
+        local ____TS__Number_result_291 = __TS__Number(o.bossPhase)
+        __O[194] = ____TS__Number_result_291
+        if ____t_292(____TS__Number_result_291) then
+            ____t_result_293 = __O[194]
+        else
+            ____t_result_293 = 2
+        end
         local phase = math.max(
             2,
             math.min(
                 4,
-                math.floor(if ____t_138(____TS__Number_result_137) then __O[194] else 2)
+                math.floor(____t_result_293)
             )
         )
-        local ____t_140 = __t
-        local ____TS__Number_result_139 = __TS__Number(o.frame)
-        __O[195] = ____TS__Number_result_139
-        local t = if ____t_140(____TS__Number_result_139) then __O[195] else 0
+        local ____t_result_296
+        local ____t_295 = __t
+        local ____TS__Number_result_294 = __TS__Number(o.frame)
+        __O[195] = ____TS__Number_result_294
+        if ____t_295(____TS__Number_result_294) then
+            ____t_result_296 = __O[195]
+        else
+            ____t_result_296 = 0
+        end
+        local t = ____t_result_296
         local changing = not not __t(o.phaseChanging) or o.state == "phaseChange"
-        local ____t_142 = __t
-        local ____TS__Number_result_141 = __TS__Number(o.transformProgress)
-        __O[196] = ____TS__Number_result_141
-        local p = if __t(changing) then math.max(
-            0,
-            math.min(1, if ____t_142(____TS__Number_result_141) then __O[196] else 0)
-        ) else 1
+        local ____t_result_300
+        if __t(changing) then
+            local ____t_result_299
+            local ____t_298 = __t
+            local ____TS__Number_result_297 = __TS__Number(o.transformProgress)
+            __O[196] = ____TS__Number_result_297
+            if ____t_298(____TS__Number_result_297) then
+                ____t_result_299 = __O[196]
+            else
+                ____t_result_299 = 0
+            end
+            ____t_result_300 = math.max(
+                0,
+                math.min(1, ____t_result_299)
+            )
+        else
+            ____t_result_300 = 1
+        end
+        local p = ____t_result_300
         local function ease(____, v)
             return v * v * (3 - 2 * v)
         end
-        local face = if __lt(o.facing, 0) then -1 else 1
+        local face = __lt(o.facing, 0) and -1 or 1
         c:save()
         c.imageSmoothingEnabled = false
         c:translate(
@@ -16620,15 +17531,40 @@ local __O = {};
                 math.min(1, o.opacity)
             )
         end
-        __L1:nikolasPowerAura(c, t, phase, if phase == 3 then math.max(0.1, p) else p)
-        local ____t_147 = __t
-        local ____t_146 = __t
-        local ____t_144 = __t
-        local ____temp_143 = phase == 2
-        __O[197] = ____temp_143
-        local ____temp_145 = if ____t_144(____temp_143) then changing else __O[197]
-        __O[198] = ____temp_145
-        if ____t_147(if ____t_146(____temp_145) then p < 0.34 else __O[198]) then
+        local ____L1_nikolasPowerAura_303 = __L1.nikolasPowerAura
+        local ____c_302 = c
+        local ____temp_301
+        if phase == 3 then
+            ____temp_301 = math.max(0.1, p)
+        else
+            ____temp_301 = p
+        end
+        ____L1_nikolasPowerAura_303(
+            __L1,
+            ____c_302,
+            t,
+            phase,
+            ____temp_301
+        )
+        local ____t_309 = __t
+        local ____t_result_308
+        local ____t_307 = __t
+        local ____t_result_306
+        local ____t_305 = __t
+        local ____temp_304 = phase == 2
+        __O[197] = ____temp_304
+        if ____t_305(____temp_304) then
+            ____t_result_306 = changing
+        else
+            ____t_result_306 = __O[197]
+        end
+        __O[198] = ____t_result_306
+        if ____t_307(____t_result_306) then
+            ____t_result_308 = p < 0.34
+        else
+            ____t_result_308 = __O[198]
+        end
+        if ____t_309(____t_result_308) then
             __L1:character(
                 c,
                 "nikolas",
@@ -16649,12 +17585,30 @@ local __O = {};
             c:restore()
             return
         end
-        local scale = if phase == 4 then if __t(changing) then 1.36 + (3.3 - 1.36) * ease(nil, p) else 3.3 else 1.36
-        local ____t_150 = __t
-        local ____t_149 = __t
-        local ____temp_148 = phase == 2
-        __O[199] = ____temp_148
-        if ____t_150(if ____t_149(____temp_148) then changing else __O[199]) then
+        local ____temp_311
+        if phase == 4 then
+            local ____t_result_310
+            if __t(changing) then
+                ____t_result_310 = 1.36 + (3.3 - 1.36) * ease(nil, p)
+            else
+                ____t_result_310 = 3.3
+            end
+            ____temp_311 = ____t_result_310
+        else
+            ____temp_311 = 1.36
+        end
+        local scale = ____temp_311
+        local ____t_315 = __t
+        local ____t_result_314
+        local ____t_313 = __t
+        local ____temp_312 = phase == 2
+        __O[199] = ____temp_312
+        if ____t_313(____temp_312) then
+            ____t_result_314 = changing
+        else
+            ____t_result_314 = __O[199]
+        end
+        if ____t_315(____t_result_314) then
             scale = scale * (0.78 + 0.22 * ease(
                 nil,
                 math.max(0, (p - 0.34) / 0.66)
@@ -16665,15 +17619,27 @@ local __O = {};
         local light = "#f6d1a3"
         local shade = "#a86c4e"
         local ink = "#352e34"
-        local purple = if phase == 4 then "#805579" else "#8c6594"
+        local purple = phase == 4 and "#805579" or "#8c6594"
         local clothLight = "#b38bb7"
         local pants = "#423e59"
         local breath = math.floor(math.sin(t * 2.5) * 0.7 + 0.5)
-        local ____t_152 = __t
-        local ____temp_151 = not not __t(o.attack) or o.state == "windup"
-        __O[200] = ____temp_151
-        local attack = if ____t_152(____temp_151) then __O[200] else o.state == "firing"
-        local charge = if __t(changing) then changing else o.charging
+        local ____t_result_318
+        local ____t_317 = __t
+        local ____temp_316 = not not __t(o.attack) or o.state == "windup"
+        __O[200] = ____temp_316
+        if ____t_317(____temp_316) then
+            ____t_result_318 = __O[200]
+        else
+            ____t_result_318 = o.state == "firing"
+        end
+        local attack = ____t_result_318
+        local ____t_result_319
+        if __t(changing) then
+            ____t_result_319 = changing
+        else
+            ____t_result_319 = o.charging
+        end
+        local charge = ____t_result_319
         c:translate(0, breath)
         __L1:r(
             c,
@@ -16775,11 +17741,17 @@ local __O = {};
         local backHand = __arrL({-47, -29}, 2)
         local frontElbow = __arrL({49, -49}, 2)
         local frontHand = __arrL({45, -28}, 2)
-        local noseX = if o.view == "front" then 5 else 23
-        local ____t_154 = __t
-        local ____temp_153 = o.noseRub ~= false and not __t(attack)
-        __O[201] = ____temp_153
-        local rubbing = if ____t_154(____temp_153) then not __t(charge) else __O[201]
+        local noseX = o.view == "front" and 5 or 23
+        local ____t_result_322
+        local ____t_321 = __t
+        local ____temp_320 = o.noseRub ~= false and not __t(attack)
+        __O[201] = ____temp_320
+        if ____t_321(____temp_320) then
+            ____t_result_322 = not __t(charge)
+        else
+            ____t_result_322 = __O[201]
+        end
+        local rubbing = ____t_result_322
         if __t(charge) then
             backElbow = __arrL({-48, -59}, 2)
             backHand = __arrL({-38, -38}, 2)
@@ -16805,9 +17777,27 @@ local __O = {};
             backHand = __arrL({-54, -36}, 2)
         end
         local function powerArm(self, front)
-            local elbow = if __t(front) then frontElbow else backElbow
-            local hand = if __t(front) then frontHand else backHand
-            local shoulder = __arrL({if __t(front) then 31 else -31, -67}, 2)
+            local ____t_result_323
+            if __t(front) then
+                ____t_result_323 = frontElbow
+            else
+                ____t_result_323 = backElbow
+            end
+            local elbow = ____t_result_323
+            local ____t_result_324
+            if __t(front) then
+                ____t_result_324 = frontHand
+            else
+                ____t_result_324 = backHand
+            end
+            local hand = ____t_result_324
+            local shoulder = __arrL(
+                {
+                    __t(front) and 31 or -31,
+                    -67
+                },
+                2
+            )
             __L1:limb(
                 c,
                 __arrL({shoulder, elbow, hand}, 3),
@@ -16905,7 +17895,7 @@ local __O = {};
                         3
                     ),
                     1,
-                    if phase == 4 then "#db939c" else "#c2e7cf"
+                    phase == 4 and "#db939c" or "#c2e7cf"
                 )
             end
         end
@@ -17263,7 +18253,7 @@ local __O = {};
                 -88,
                 2,
                 4,
-                if phase == 4 then "#f6a395" else "#f5d986"
+                phase == 4 and "#f6a395" or "#f5d986"
             )
             __L1:r(
                 c,
@@ -17271,7 +18261,7 @@ local __O = {};
                 -89,
                 2,
                 4,
-                if phase == 4 then "#f6a395" else "#f5d986"
+                phase == 4 and "#f6a395" or "#f5d986"
             )
         end
         __L1:oval(
@@ -17364,24 +18354,35 @@ local __O = {};
                 local i = 0
                 while i < 4 do
                     local yy = 4 + i * 9 + math.floor(math.sin(t * 8 + i) * 2 + 0.5)
-                    local xx = if __t(__mod(i, 2)) then 1 else -1 * (13 + i * 3)
+                    local xx = (__t(__mod(i, 2)) and 1 or -1) * (13 + i * 3)
                     __L1:r(
                         c,
                         xx,
                         yy,
                         4,
                         6,
-                        if __t(__mod(i, 2)) then "#f7df88" else "#c7afea"
+                        __t(__mod(i, 2)) and "#f7df88" or "#c7afea"
                     )
                     i = i + 1
                 end
             end
         end
-        local ____t_157 = __t
-        local ____t_156 = __t
-        local ____temp_155 = if __t(changing) then p > 0.31 else changing
-        __O[202] = ____temp_155
-        if ____t_157(if ____t_156(____temp_155) then p < 0.44 else __O[202]) then
+        local ____t_328 = __t
+        local ____t_result_327
+        local ____t_326 = __t
+        local ____t_result_325
+        if __t(changing) then
+            ____t_result_325 = p > 0.31
+        else
+            ____t_result_325 = changing
+        end
+        __O[202] = ____t_result_325
+        if ____t_326(____t_result_325) then
+            ____t_result_327 = p < 0.44
+        else
+            ____t_result_327 = __O[202]
+        end
+        if ____t_328(____t_result_327) then
             c:save()
             c.globalAlpha = c.globalAlpha * (math.sin((p - 0.31) / 0.13 * math.pi) * 0.78)
             __L1:oval(
@@ -17423,25 +18424,37 @@ local __O = {};
             window.AmandaArt:drawCharacter(c, x, y, o)
             return
         end
-        local ____t_162 = __t
-        local ____t_159 = __t
-        local ____temp_158 = ____type == "ollyan"
-        __O[203] = ____temp_158
-        local ____opt_160 = window.BaileWorld
-        if ____opt_160 ~= nil then
-            ____opt_160 = ____opt_160.drawOllyan
+        local ____t_334 = __t
+        local ____t_result_333
+        local ____t_330 = __t
+        local ____temp_329 = ____type == "ollyan"
+        __O[203] = ____temp_329
+        if ____t_330(____temp_329) then
+            local ____opt_331 = window.BaileWorld
+            if ____opt_331 ~= nil then
+                ____opt_331 = ____opt_331.drawOllyan
+            end
+            ____t_result_333 = ____opt_331
+        else
+            ____t_result_333 = __O[203]
         end
-        if ____t_162(if ____t_159(____temp_158) then ____opt_160 else __O[203]) then
-            local ____self_166 = window.BaileWorld
-            local ____self_166_drawOllyan_167 = ____self_166.drawOllyan
-            local ____array_165 = __TS__SparseArrayNew(c, x, y)
-            local ____t_164 = __t
-            local ____TS__Number_result_163 = __TS__Number(o.frame)
-            __O[204] = ____TS__Number_result_163
-            __TS__SparseArrayPush(____array_165, if ____t_164(____TS__Number_result_163) then __O[204] else 0, o)
-            ____self_166_drawOllyan_167(
-                ____self_166,
-                __TS__SparseArraySpread(____array_165)
+        if ____t_334(____t_result_333) then
+            local ____self_339 = window.BaileWorld
+            local ____self_339_drawOllyan_340 = ____self_339.drawOllyan
+            local ____array_338 = __TS__SparseArrayNew(c, x, y)
+            local ____t_result_337
+            local ____t_336 = __t
+            local ____TS__Number_result_335 = __TS__Number(o.frame)
+            __O[204] = ____TS__Number_result_335
+            if ____t_336(____TS__Number_result_335) then
+                ____t_result_337 = __O[204]
+            else
+                ____t_result_337 = 0
+            end
+            __TS__SparseArrayPush(____array_338, ____t_result_337, o)
+            ____self_339_drawOllyan_340(
+                ____self_339,
+                __TS__SparseArraySpread(____array_338)
             )
             return
         end
@@ -17504,28 +18517,40 @@ local __O = {};
             return
         end
         if ____type == "giant" then
-            local ____L1_giant_171 = __L1.giant
-            local ____array_170 = __TS__SparseArrayNew(c, x, y)
-            local ____t_169 = __t
-            local ____TS__Number_result_168 = __TS__Number(o.frame)
-            __O[205] = ____TS__Number_result_168
-            __TS__SparseArrayPush(____array_170, if ____t_169(____TS__Number_result_168) then __O[205] else 0, o)
-            ____L1_giant_171(
+            local ____L1_giant_345 = __L1.giant
+            local ____array_344 = __TS__SparseArrayNew(c, x, y)
+            local ____t_result_343
+            local ____t_342 = __t
+            local ____TS__Number_result_341 = __TS__Number(o.frame)
+            __O[205] = ____TS__Number_result_341
+            if ____t_342(____TS__Number_result_341) then
+                ____t_result_343 = __O[205]
+            else
+                ____t_result_343 = 0
+            end
+            __TS__SparseArrayPush(____array_344, ____t_result_343, o)
+            ____L1_giant_345(
                 __L1,
-                __TS__SparseArraySpread(____array_170)
+                __TS__SparseArraySpread(____array_344)
             )
             return
         end
         if ____type == "thug" then
-            local ____L1_thug_175 = __L1.thug
-            local ____array_174 = __TS__SparseArrayNew(c, x, y)
-            local ____t_173 = __t
-            local ____TS__Number_result_172 = __TS__Number(o.frame)
-            __O[206] = ____TS__Number_result_172
-            __TS__SparseArrayPush(____array_174, if ____t_173(____TS__Number_result_172) then __O[206] else 0, o)
-            ____L1_thug_175(
+            local ____L1_thug_350 = __L1.thug
+            local ____array_349 = __TS__SparseArrayNew(c, x, y)
+            local ____t_result_348
+            local ____t_347 = __t
+            local ____TS__Number_result_346 = __TS__Number(o.frame)
+            __O[206] = ____TS__Number_result_346
+            if ____t_347(____TS__Number_result_346) then
+                ____t_result_348 = __O[206]
+            else
+                ____t_result_348 = 0
+            end
+            __TS__SparseArrayPush(____array_349, ____t_result_348, o)
+            ____L1_thug_350(
                 __L1,
-                __TS__SparseArraySpread(____array_174)
+                __TS__SparseArraySpread(____array_349)
             )
             return
         end
@@ -17539,8 +18564,14 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        local face = if __lt(o.facing, 0) then -1 else 1
-        local scl = if __t(o.scale) then o.scale else 1
+        local face = __lt(o.facing, 0) and -1 or 1
+        local ____t_result_351
+        if __t(o.scale) then
+            ____t_result_351 = o.scale
+        else
+            ____t_result_351 = 1
+        end
+        local scl = ____t_result_351
         c:scale(face * scl, scl)
         if __isFiniteN(o.opacity) then
             c.globalAlpha = c.globalAlpha * math.max(
@@ -17548,126 +18579,497 @@ local __O = {};
                 math.min(1, o.opacity)
             )
         end
-        local ____t_177 = __t
-        local ____TS__Number_result_176 = __TS__Number(o.frame)
-        __O[207] = ____TS__Number_result_176
-        local frame = if ____t_177(____TS__Number_result_176) then __O[207] else 0
+        local ____t_result_354
+        local ____t_353 = __t
+        local ____TS__Number_result_352 = __TS__Number(o.frame)
+        __O[207] = ____TS__Number_result_352
+        if ____t_353(____TS__Number_result_352) then
+            ____t_result_354 = __O[207]
+        else
+            ____t_result_354 = 0
+        end
+        local frame = ____t_result_354
         local rawPhase = frame * 9
-        local inferred = if __t(if __t(o.attack) then o.attackType == "fart" else o.attack) then "fart" else if __t(if __t(o.attack) then not __t(o.attackType) or o.attackType == "paper" else o.attack) then "paper" else if __TS__Number(o.land) > 0 then "land" else if __t(o.dash) then "dash" else if __t(o.flight) then "flight" else if o.grounded == false then if __TS__Number(o.vy) < 0 then "jump" else "fall" else if __t(if __t(o.moving) then o.moving else __TS__Number(o.speed) > 8) then "walk" else "idle"
-        local ____t_180 = __t
-        local ____t_179 = __t
-        local ____temp_178 = ____type == "daroca"
-        __O[208] = ____temp_178
-        local heroAnim = if ____t_180(if ____t_179(____temp_178) then __get(__L1.heroFrameCatalog, if __t(o.animation) then o.animation else inferred) else __O[208]) then if __t(o.animation) then o.animation else inferred else ""
-        local ____t_182 = __t
-        local ____get_result_181 = __get(__L1.heroFrameCatalog, heroAnim)
-        __O[209] = ____get_result_181
-        local count = if ____t_182(____get_result_181) then __O[209] else 1
-        local ____t_184 = __t
-        local ____TS__Number_result_183 = __TS__Number(o.attackProgress)
-        __O[210] = ____TS__Number_result_183
-        local ____t_186 = __t
-        local ____TS__Number_result_185 = __TS__Number(o.vy)
-        __O[211] = ____TS__Number_result_185
-        local naturalIndex = if __t(heroAnim == "walk" or heroAnim == "dash") then math.floor(rawPhase / (math.pi * 2) * count) else if __t(heroAnim == "paper" or heroAnim == "fart") then math.floor(if ____t_184(____TS__Number_result_183) then __O[210] else 0 * (count - 1) + 0.5) else if __t(heroAnim == "jump" or heroAnim == "fall") then math.min(
-            2,
-            math.floor(math.abs(if ____t_186(____TS__Number_result_185) then __O[211] else 0) / 150)
-        ) else math.floor(frame * 4)
-        local poseIndex = if __isFiniteN(o.spriteFrame) then __mod(
-            __mod(
-                math.floor(o.spriteFrame),
+        local ____t_result_366
+        local ____t_356 = __t
+        local ____t_result_355
+        if __t(o.attack) then
+            ____t_result_355 = o.attackType == "fart"
+        else
+            ____t_result_355 = o.attack
+        end
+        if ____t_356(____t_result_355) then
+            ____t_result_366 = "fart"
+        else
+            local ____t_result_365
+            local ____t_358 = __t
+            local ____t_result_357
+            if __t(o.attack) then
+                ____t_result_357 = not __t(o.attackType) or o.attackType == "paper"
+            else
+                ____t_result_357 = o.attack
+            end
+            if ____t_358(____t_result_357) then
+                ____t_result_365 = "paper"
+            else
+                local ____temp_364
+                if __TS__Number(o.land) > 0 then
+                    ____temp_364 = "land"
+                else
+                    local ____t_result_363
+                    if __t(o.dash) then
+                        ____t_result_363 = "dash"
+                    else
+                        local ____t_result_362
+                        if __t(o.flight) then
+                            ____t_result_362 = "flight"
+                        else
+                            local ____temp_361
+                            if o.grounded == false then
+                                ____temp_361 = __TS__Number(o.vy) < 0 and "jump" or "fall"
+                            else
+                                local ____t_360 = __t
+                                local ____t_result_359
+                                if __t(o.moving) then
+                                    ____t_result_359 = o.moving
+                                else
+                                    ____t_result_359 = __TS__Number(o.speed) > 8
+                                end
+                                ____temp_361 = ____t_360(____t_result_359) and "walk" or "idle"
+                            end
+                            ____t_result_362 = ____temp_361
+                        end
+                        ____t_result_363 = ____t_result_362
+                    end
+                    ____temp_364 = ____t_result_363
+                end
+                ____t_result_365 = ____temp_364
+            end
+            ____t_result_366 = ____t_result_365
+        end
+        local inferred = ____t_result_366
+        local ____t_result_375
+        local ____t_373 = __t
+        local ____t_result_372
+        local ____t_368 = __t
+        local ____temp_367 = ____type == "daroca"
+        __O[208] = ____temp_367
+        if ____t_368(____temp_367) then
+            local ____get_371 = __get
+            local ____L1_heroFrameCatalog_370 = __L1.heroFrameCatalog
+            local ____t_result_369
+            if __t(o.animation) then
+                ____t_result_369 = o.animation
+            else
+                ____t_result_369 = inferred
+            end
+            ____t_result_372 = ____get_371(____L1_heroFrameCatalog_370, ____t_result_369)
+        else
+            ____t_result_372 = __O[208]
+        end
+        if ____t_373(____t_result_372) then
+            local ____t_result_374
+            if __t(o.animation) then
+                ____t_result_374 = o.animation
+            else
+                ____t_result_374 = inferred
+            end
+            ____t_result_375 = ____t_result_374
+        else
+            ____t_result_375 = ""
+        end
+        local heroAnim = ____t_result_375
+        local ____t_result_378
+        local ____t_377 = __t
+        local ____get_result_376 = __get(__L1.heroFrameCatalog, heroAnim)
+        __O[209] = ____get_result_376
+        if ____t_377(____get_result_376) then
+            ____t_result_378 = __O[209]
+        else
+            ____t_result_378 = 1
+        end
+        local count = ____t_result_378
+        local ____t_result_387
+        if __t(heroAnim == "walk" or heroAnim == "dash") then
+            ____t_result_387 = math.floor(rawPhase / (math.pi * 2) * count)
+        else
+            local ____t_result_386
+            if __t(heroAnim == "paper" or heroAnim == "fart") then
+                local ____t_result_381
+                local ____t_380 = __t
+                local ____TS__Number_result_379 = __TS__Number(o.attackProgress)
+                __O[210] = ____TS__Number_result_379
+                if ____t_380(____TS__Number_result_379) then
+                    ____t_result_381 = __O[210]
+                else
+                    ____t_result_381 = 0
+                end
+                ____t_result_386 = math.floor(____t_result_381 * (count - 1) + 0.5)
+            else
+                local ____t_result_385
+                if __t(heroAnim == "jump" or heroAnim == "fall") then
+                    local ____t_result_384
+                    local ____t_383 = __t
+                    local ____TS__Number_result_382 = __TS__Number(o.vy)
+                    __O[211] = ____TS__Number_result_382
+                    if ____t_383(____TS__Number_result_382) then
+                        ____t_result_384 = __O[211]
+                    else
+                        ____t_result_384 = 0
+                    end
+                    ____t_result_385 = math.min(
+                        2,
+                        math.floor(math.abs(____t_result_384) / 150)
+                    )
+                else
+                    ____t_result_385 = math.floor(frame * 4)
+                end
+                ____t_result_386 = ____t_result_385
+            end
+            ____t_result_387 = ____t_result_386
+        end
+        local naturalIndex = ____t_result_387
+        local ____isFiniteN_result_388
+        if __isFiniteN(o.spriteFrame) then
+            ____isFiniteN_result_388 = __mod(
+                __mod(
+                    math.floor(o.spriteFrame),
+                    count
+                ) + count,
                 count
-            ) + count,
-            count
-        ) else __mod(
-            __mod(naturalIndex, count) + count,
-            count
-        )
-        local phase = if __t(heroAnim == "walk" or heroAnim == "dash") then poseIndex / count * math.pi * 2 else rawPhase
-        local ____t_190 = __t
-        local ____t_188 = __t
-        local ____temp_187 = o.moving == true or __TS__Number(o.speed) > 8
-        __O[212] = ____temp_187
-        local ____temp_189 = if ____t_188(____temp_187) then __O[212] else heroAnim == "walk"
-        __O[213] = ____temp_189
-        local moving = if ____t_190(____temp_189) then __O[213] else heroAnim == "dash"
-        local grounded = if __t(__call(
+            )
+        else
+            ____isFiniteN_result_388 = __mod(
+                __mod(naturalIndex, count) + count,
+                count
+            )
+        end
+        local poseIndex = ____isFiniteN_result_388
+        local ____t_result_389
+        if __t(heroAnim == "walk" or heroAnim == "dash") then
+            ____t_result_389 = poseIndex / count * math.pi * 2
+        else
+            ____t_result_389 = rawPhase
+        end
+        local phase = ____t_result_389
+        local ____t_result_394
+        local ____t_393 = __t
+        local ____t_result_392
+        local ____t_391 = __t
+        local ____temp_390 = o.moving == true or __TS__Number(o.speed) > 8
+        __O[212] = ____temp_390
+        if ____t_391(____temp_390) then
+            ____t_result_392 = __O[212]
+        else
+            ____t_result_392 = heroAnim == "walk"
+        end
+        __O[213] = ____t_result_392
+        if ____t_393(____t_result_392) then
+            ____t_result_394 = __O[213]
+        else
+            ____t_result_394 = heroAnim == "dash"
+        end
+        local moving = ____t_result_394
+        local ____t_result_395
+        if __t(__call(
             __arrL({"jump", "fall", "flight"}, 3),
             "includes",
             heroAnim
-        )) then false else o.grounded ~= false
+        )) then
+            ____t_result_395 = false
+        else
+            ____t_result_395 = o.grounded ~= false
+        end
+        local grounded = ____t_result_395
         local flight = not not __t(o.flight) or heroAnim == "flight"
         local air = not __t(grounded)
         local rising = heroAnim == "jump" or __TS__Number(o.vy) < -20
-        local walk = if __t(if __t(moving) then grounded else moving) then math.sin(phase) else 0
+        local ____t_result_398
+        local ____t_397 = __t
+        local ____t_result_396
+        if __t(moving) then
+            ____t_result_396 = grounded
+        else
+            ____t_result_396 = moving
+        end
+        if ____t_397(____t_result_396) then
+            ____t_result_398 = math.sin(phase)
+        else
+            ____t_result_398 = 0
+        end
+        local walk = ____t_result_398
         local hit = o.hit
-        local ____t_192 = __t
-        local ____TS__Number_result_191 = __TS__Number(o.recoil)
-        __O[214] = ____TS__Number_result_191
+        local ____t_result_401
+        local ____t_400 = __t
+        local ____TS__Number_result_399 = __TS__Number(o.recoil)
+        __O[214] = ____TS__Number_result_399
+        if ____t_400(____TS__Number_result_399) then
+            ____t_result_401 = __O[214]
+        else
+            ____t_result_401 = __t(hit) and 0.6 or 0
+        end
         local recoil = math.max(
             0,
-            math.min(1, if ____t_192(____TS__Number_result_191) then __O[214] else if __t(hit) then 0.6 else 0)
+            math.min(1, ____t_result_401)
         )
-        local ____t_196 = __t
-        local ____t_194 = __t
-        local ____temp_193 = not not __t(o.attack) or heroAnim == "paper"
-        __O[215] = ____temp_193
-        local ____temp_195 = if ____t_194(____temp_193) then __O[215] else heroAnim == "fart"
-        __O[217] = ____temp_195
-        local ____t_198 = __t
-        local ____temp_197 = if __t(o.attackType) then __TS__Number(o.attackProgress) > 0 else o.attackType
-        __O[216] = ____temp_197
-        local attackOn = if ____t_196(____temp_195) then __O[217] else if ____t_198(____temp_197) then __TS__Number(o.attackProgress) < 1 else __O[216]
-        local progress = if __t(__isFiniteN(o.attackProgress) and not __isFiniteN(o.spriteFrame)) then math.max(
-            0,
-            math.min(1, o.attackProgress)
-        ) else if __t(if __t(heroAnim) then heroAnim == "paper" or heroAnim == "fart" else heroAnim) then poseIndex / (count - 1) else 0.5 + math.sin(frame * 7) * 0.5
-        local attackType = if __t(heroAnim == "paper" or heroAnim == "fart") then heroAnim else if __t(o.attackType) then o.attackType else if ____type == "reeis" then "gun" else if ____type == "daroca" then "paper" else "cast"
-        local strike = if __t(attackOn) then math.max(
-            0,
-            1 - math.abs(progress - 0.48) / 0.26
-        ) else 0
-        local fart = if __t(attackOn) then attackType == "fart" else attackOn
-        local ____t_200 = __t
-        local ____TS__Number_result_199 = __TS__Number(o.land)
-        __O[218] = ____TS__Number_result_199
-        local landAmount = if __t(heroAnim == "land" and __isFiniteN(o.spriteFrame)) then 1 - poseIndex / 2 else math.max(
-            0,
-            math.min(1, if ____t_200(____TS__Number_result_199) then __O[218] else 0)
-        )
-        local squat = if __t(fart) then math.floor(if progress < 0.28 then math.sin(progress / 0.28 * math.pi * 0.5) * 5 else if progress < 0.5 then 5 * (1 - (progress - 0.28) / 0.22) - 3 * math.sin((progress - 0.28) / 0.22 * math.pi) else -2 * (1 - (progress - 0.5) / 0.5) + 0.5) else if __t(landAmount) then math.floor(landAmount * 6 + 0.5) else if __t(o.charging) then 4 + math.floor(math.sin(frame * 16) + 0.5) else if __t(if __t(o.dash) then o.dash else heroAnim == "dash") then 3 else 0
-        local bob = if heroAnim == "idle" then __get(
-            __arrL({0, -1, -2, -1}, 4),
-            poseIndex
-        ) else if __t(if __t(moving) then grounded else moving) then math.floor((1 - math.cos(phase * 2)) * 1.2 + 0.5) else math.floor(math.sin(frame * 2.5) * 0.7 + 0.5)
-        local lean = math.floor(if __t(if __t(o.dash) then o.dash else heroAnim == "dash") then 8 else if __t(moving) then 2 else 0 + if __t(flight) then 4 else 0 - recoil * 6 + if __t(if __t(attackOn) then attackType == "paper" else attackOn) then if progress < 0.32 then -3 else 4 * strike else 0 + 0.5)
-        local ____t_209 = __t
-        local ____t_202 = __t
-        local ____temp_201 = ____type == "reeis"
-        __O[222] = ____temp_201
-        local ____t_208 = __t
-        local ____t_206 = __t
-        local ____t_204 = __t
-        local ____temp_203 = if __t(o.transformed) then o.transformed else o.charging
-        __O[219] = ____temp_203
-        local ____temp_205 = if ____t_204(____temp_203) then __O[219] else o.powered
-        __O[220] = ____temp_205
-        local ____temp_207 = if ____t_206(____temp_205) then __O[220] else o.aura
-        __O[221] = ____temp_207
-        if ____t_209(if ____t_202(____temp_201) then if ____t_208(____temp_207) then __O[221] else o.energy else __O[222]) then
+        local ____t_result_409
+        local ____t_405 = __t
+        local ____t_result_404
+        local ____t_403 = __t
+        local ____temp_402 = not not __t(o.attack) or heroAnim == "paper"
+        __O[215] = ____temp_402
+        if ____t_403(____temp_402) then
+            ____t_result_404 = __O[215]
+        else
+            ____t_result_404 = heroAnim == "fart"
+        end
+        __O[217] = ____t_result_404
+        if ____t_405(____t_result_404) then
+            ____t_result_409 = __O[217]
+        else
+            local ____t_result_408
+            local ____t_407 = __t
+            local ____t_result_406
+            if __t(o.attackType) then
+                ____t_result_406 = __TS__Number(o.attackProgress) > 0
+            else
+                ____t_result_406 = o.attackType
+            end
+            __O[216] = ____t_result_406
+            if ____t_407(____t_result_406) then
+                ____t_result_408 = __TS__Number(o.attackProgress) < 1
+            else
+                ____t_result_408 = __O[216]
+            end
+            ____t_result_409 = ____t_result_408
+        end
+        local attackOn = ____t_result_409
+        local ____t_result_413
+        if __t(__isFiniteN(o.attackProgress) and not __isFiniteN(o.spriteFrame)) then
+            ____t_result_413 = math.max(
+                0,
+                math.min(1, o.attackProgress)
+            )
+        else
+            local ____t_result_412
+            local ____t_411 = __t
+            local ____t_result_410
+            if __t(heroAnim) then
+                ____t_result_410 = heroAnim == "paper" or heroAnim == "fart"
+            else
+                ____t_result_410 = heroAnim
+            end
+            if ____t_411(____t_result_410) then
+                ____t_result_412 = poseIndex / (count - 1)
+            else
+                ____t_result_412 = 0.5 + math.sin(frame * 7) * 0.5
+            end
+            ____t_result_413 = ____t_result_412
+        end
+        local progress = ____t_result_413
+        local ____t_result_415
+        if __t(heroAnim == "paper" or heroAnim == "fart") then
+            ____t_result_415 = heroAnim
+        else
+            local ____t_result_414
+            if __t(o.attackType) then
+                ____t_result_414 = o.attackType
+            else
+                ____t_result_414 = ____type == "reeis" and "gun" or (____type == "daroca" and "paper" or "cast")
+            end
+            ____t_result_415 = ____t_result_414
+        end
+        local attackType = ____t_result_415
+        local ____t_result_416
+        if __t(attackOn) then
+            ____t_result_416 = math.max(
+                0,
+                1 - math.abs(progress - 0.48) / 0.26
+            )
+        else
+            ____t_result_416 = 0
+        end
+        local strike = ____t_result_416
+        local ____t_result_417
+        if __t(attackOn) then
+            ____t_result_417 = attackType == "fart"
+        else
+            ____t_result_417 = attackOn
+        end
+        local fart = ____t_result_417
+        local ____t_result_421
+        if __t(heroAnim == "land" and __isFiniteN(o.spriteFrame)) then
+            ____t_result_421 = 1 - poseIndex / 2
+        else
+            local ____t_result_420
+            local ____t_419 = __t
+            local ____TS__Number_result_418 = __TS__Number(o.land)
+            __O[218] = ____TS__Number_result_418
+            if ____t_419(____TS__Number_result_418) then
+                ____t_result_420 = __O[218]
+            else
+                ____t_result_420 = 0
+            end
+            ____t_result_421 = math.max(
+                0,
+                math.min(1, ____t_result_420)
+            )
+        end
+        local landAmount = ____t_result_421
+        local ____t_result_428
+        if __t(fart) then
+            local ____temp_423
+            if progress < 0.28 then
+                ____temp_423 = math.sin(progress / 0.28 * math.pi * 0.5) * 5
+            else
+                local ____temp_422
+                if progress < 0.5 then
+                    ____temp_422 = 5 * (1 - (progress - 0.28) / 0.22) - 3 * math.sin((progress - 0.28) / 0.22 * math.pi)
+                else
+                    ____temp_422 = -2 * (1 - (progress - 0.5) / 0.5)
+                end
+                ____temp_423 = ____temp_422
+            end
+            ____t_result_428 = math.floor(____temp_423 + 0.5)
+        else
+            local ____t_result_427
+            if __t(landAmount) then
+                ____t_result_427 = math.floor(landAmount * 6 + 0.5)
+            else
+                local ____t_result_426
+                if __t(o.charging) then
+                    ____t_result_426 = 4 + math.floor(math.sin(frame * 16) + 0.5)
+                else
+                    local ____t_425 = __t
+                    local ____t_result_424
+                    if __t(o.dash) then
+                        ____t_result_424 = o.dash
+                    else
+                        ____t_result_424 = heroAnim == "dash"
+                    end
+                    ____t_result_426 = ____t_425(____t_result_424) and 3 or 0
+                end
+                ____t_result_427 = ____t_result_426
+            end
+            ____t_result_428 = ____t_result_427
+        end
+        local squat = ____t_result_428
+        local ____temp_432
+        if heroAnim == "idle" then
+            ____temp_432 = __get(
+                __arrL({0, -1, -2, -1}, 4),
+                poseIndex
+            )
+        else
+            local ____t_result_431
+            local ____t_430 = __t
+            local ____t_result_429
+            if __t(moving) then
+                ____t_result_429 = grounded
+            else
+                ____t_result_429 = moving
+            end
+            if ____t_430(____t_result_429) then
+                ____t_result_431 = math.floor((1 - math.cos(phase * 2)) * 1.2 + 0.5)
+            else
+                ____t_result_431 = math.floor(math.sin(frame * 2.5) * 0.7 + 0.5)
+            end
+            ____temp_432 = ____t_result_431
+        end
+        local bob = ____temp_432
+        local ____t_434 = __t
+        local ____t_result_433
+        if __t(o.dash) then
+            ____t_result_433 = o.dash
+        else
+            ____t_result_433 = heroAnim == "dash"
+        end
+        local ____temp_438 = (____t_434(____t_result_433) and 8 or (__t(moving) and 2 or 0)) + (__t(flight) and 4 or 0) - recoil * 6
+        local ____t_result_437
+        local ____t_436 = __t
+        local ____t_result_435
+        if __t(attackOn) then
+            ____t_result_435 = attackType == "paper"
+        else
+            ____t_result_435 = attackOn
+        end
+        if ____t_436(____t_result_435) then
+            ____t_result_437 = progress < 0.32 and -3 or 4 * strike
+        else
+            ____t_result_437 = 0
+        end
+        local lean = math.floor(____temp_438 + ____t_result_437 + 0.5)
+        local ____t_449 = __t
+        local ____t_result_448
+        local ____t_440 = __t
+        local ____temp_439 = ____type == "reeis"
+        __O[222] = ____temp_439
+        if ____t_440(____temp_439) then
+            local ____t_result_447
+            local ____t_446 = __t
+            local ____t_result_445
+            local ____t_444 = __t
+            local ____t_result_443
+            local ____t_442 = __t
+            local ____t_result_441
+            if __t(o.transformed) then
+                ____t_result_441 = o.transformed
+            else
+                ____t_result_441 = o.charging
+            end
+            __O[219] = ____t_result_441
+            if ____t_442(____t_result_441) then
+                ____t_result_443 = __O[219]
+            else
+                ____t_result_443 = o.powered
+            end
+            __O[220] = ____t_result_443
+            if ____t_444(____t_result_443) then
+                ____t_result_445 = __O[220]
+            else
+                ____t_result_445 = o.aura
+            end
+            __O[221] = ____t_result_445
+            if ____t_446(____t_result_445) then
+                ____t_result_447 = __O[221]
+            else
+                ____t_result_447 = o.energy
+            end
+            ____t_result_448 = ____t_result_447
+        else
+            ____t_result_448 = __O[222]
+        end
+        if ____t_449(____t_result_448) then
             __L1:energyAura(
                 c,
                 0,
                 0,
                 frame,
-                {scale = if __t(o.transformed) then 1.75 else 1, intensity = if __t(o.charging) then 0.92 else 0.98, charging = o.charging, powered = o.powered}
+                {
+                    scale = __t(o.transformed) and 1.75 or 1,
+                    intensity = __t(o.charging) and 0.92 or 0.98,
+                    charging = o.charging,
+                    powered = o.powered
+                }
             )
         end
-        local ____t_212 = __t
-        local ____t_211 = __t
-        local ____temp_210 = ____type == "marco"
-        __O[223] = ____temp_210
-        if ____t_212(if ____t_211(____temp_210) then if __t(o.angry) then o.angry else o.rage else __O[223]) then
+        local ____t_454 = __t
+        local ____t_result_453
+        local ____t_451 = __t
+        local ____temp_450 = ____type == "marco"
+        __O[223] = ____temp_450
+        if ____t_451(____temp_450) then
+            local ____t_result_452
+            if __t(o.angry) then
+                ____t_result_452 = o.angry
+            else
+                ____t_result_452 = o.rage
+            end
+            ____t_result_453 = ____t_result_452
+        else
+            ____t_result_453 = __O[223]
+        end
+        if ____t_454(____t_result_453) then
             __L1:energyAura(
                 c,
                 0,
@@ -17698,7 +19100,7 @@ local __O = {};
                         ay,
                         5,
                         3,
-                        if __t(__mod(i, 2)) then "#ec715f" else "#a94249"
+                        __t(__mod(i, 2)) and "#ec715f" or "#a94249"
                     )
                     __L1:r(
                         c,
@@ -17716,7 +19118,7 @@ local __O = {};
             c,
             0,
             -1,
-            if __t(air) then 11 else if ____type == "mota" then 14 else 17,
+            __t(air) and 11 or (____type == "mota" and 14 or 17),
             3,
             "#304333",
             2
@@ -17724,130 +19126,337 @@ local __O = {};
         if ____type == "lucas" then
             c:scale(0.84, 0.78)
         end
-        local ____t_215 = __t
-        local ____t_214 = __t
-        local ____temp_213 = ____type == "reeis"
-        __O[224] = ____temp_213
-        if ____t_215(if ____t_214(____temp_213) then o.transformed else __O[224]) then
+        local ____t_458 = __t
+        local ____t_result_457
+        local ____t_456 = __t
+        local ____temp_455 = ____type == "reeis"
+        __O[224] = ____temp_455
+        if ____t_456(____temp_455) then
+            ____t_result_457 = o.transformed
+        else
+            ____t_result_457 = __O[224]
+        end
+        if ____t_458(____t_result_457) then
             c:scale(1.9, 1.75)
         end
-        local skin = if ____type == "reeis" then "#825033" else if ____type == "caleb" then "#f0c9af" else if ____type == "lucas" then "#efc9b0" else if ____type == "menezes" then "#b47d54" else if ____type == "marco" then "#f0cdb8" else if ____type == "mota" then "#f1ccb4" else if ____type == "nikolas" then "#e1b28a" else if ____type == "miqueias" then "#f0cbb5" else if ____type == "almiro" then "#b47b53" else "#d6a071"
-        local ____t_220 = __t
-        local ____t_219 = __t
-        local ____t_217 = __t
-        local ____temp_216 = ____type == "caleb" or ____type == "miqueias"
-        __O[225] = ____temp_216
-        local ____temp_218 = if ____t_217(____temp_216) then __O[225] else ____type == "mota"
-        __O[226] = ____temp_218
-        local shadow = if ____type == "reeis" then "#51382c" else if ____type == "almiro" then "#8a573d" else if ____t_220(if ____t_219(____temp_218) then __O[226] else ____type == "marco") then "#c3977f" else "#a86c4e"
-        local ____t_222 = __t
-        local ____temp_221 = if __t(o.look) then o.look else __callq(window.DarocaLook, "get")
-        __O[227] = ____temp_221
-        local LK = if __t(____type == "daroca" and o.look ~= false) then if ____t_222(____temp_221) then __O[227] else nil else nil
-        local ____opt_result_225
-        if LK ~= nil then
-            ____opt_result_225 = LK.costume
+        local skin = ____type == "reeis" and "#825033" or (____type == "caleb" and "#f0c9af" or (____type == "lucas" and "#efc9b0" or (____type == "menezes" and "#b47d54" or (____type == "marco" and "#f0cdb8" or (____type == "mota" and "#f1ccb4" or (____type == "nikolas" and "#e1b28a" or (____type == "miqueias" and "#f0cbb5" or (____type == "almiro" and "#b47b53" or "#d6a071"))))))))
+        local ____temp_466
+        if ____type == "reeis" then
+            ____temp_466 = "#51382c"
+        else
+            local ____temp_465
+            if ____type == "almiro" then
+                ____temp_465 = "#8a573d"
+            else
+                local ____t_464 = __t
+                local ____t_result_463
+                local ____t_462 = __t
+                local ____t_result_461
+                local ____t_460 = __t
+                local ____temp_459 = ____type == "caleb" or ____type == "miqueias"
+                __O[225] = ____temp_459
+                if ____t_460(____temp_459) then
+                    ____t_result_461 = __O[225]
+                else
+                    ____t_result_461 = ____type == "mota"
+                end
+                __O[226] = ____t_result_461
+                if ____t_462(____t_result_461) then
+                    ____t_result_463 = __O[226]
+                else
+                    ____t_result_463 = ____type == "marco"
+                end
+                ____temp_465 = ____t_464(____t_result_463) and "#c3977f" or "#a86c4e"
+            end
+            ____temp_466 = ____temp_465
         end
-        local lion = ____opt_result_225 == "jaglion"
-        local ____opt_result_228
-        if LK ~= nil then
-            ____opt_result_228 = LK.costume
+        local shadow = ____temp_466
+        local ____t_result_470
+        if __t(____type == "daroca" and o.look ~= false) then
+            local ____t_result_469
+            local ____t_468 = __t
+            local ____t_result_467
+            if __t(o.look) then
+                ____t_result_467 = o.look
+            else
+                ____t_result_467 = __callq(window.DarocaLook, "get")
+            end
+            __O[227] = ____t_result_467
+            if ____t_468(____t_result_467) then
+                ____t_result_469 = __O[227]
+            else
+                ____t_result_469 = nil
+            end
+            ____t_result_470 = ____t_result_469
+        else
+            ____t_result_470 = nil
         end
-        local jeg = ____opt_result_228 == "dajegue"
-        local ____opt_result_231
+        local LK = ____t_result_470
+        local ____opt_result_473
         if LK ~= nil then
-            ____opt_result_231 = LK.costume
+            ____opt_result_473 = LK.costume
         end
-        local cai = ____opt_result_231 == "caipira"
-        local ____opt_result_234
+        local lion = ____opt_result_473 == "jaglion"
+        local ____opt_result_476
         if LK ~= nil then
-            ____opt_result_234 = LK.costume
+            ____opt_result_476 = LK.costume
         end
-        local far = ____opt_result_234 == "farda"
-        local kig = if __t(lion) then lion else jeg
-        local trajeLuz = if __t(lion) then "#f3c766" else if __t(jeg) then "#aaa397" else if __t(far) then "#ffffff" else if __t(cai) then "#e2685a" else nil
-        local ____t_240 = __t
-        local ____t_238 = __t
-        local ____opt_result_237
+        local jeg = ____opt_result_476 == "dajegue"
+        local ____opt_result_479
         if LK ~= nil then
-            ____opt_result_237 = LK.shirt
+            ____opt_result_479 = LK.costume
         end
-        __O[228] = ____opt_result_237
-        local ____temp_239 = if ____t_238(____opt_result_237) then __O[228] else __get({
-            daroca = "#dc8c47",
-            lucas = "#9a9e9e",
-            reeis = "#4d7374",
-            nikolas = "#8c6594",
-            menezes = "#647c84",
-            caleb = "#e1b563",
-            ravid = "#7c93a1",
-            marco = "#222b30",
-            kaua = "#66888a",
-            almiro = "#367cba",
-            miqueias = "#617b70",
-            mota = "#1b4677"
-        }, ____type)
-        __O[229] = ____temp_239
-        local shirt = if __t(lion) then "#e3a83f" else if __t(jeg) then "#8f887d" else if __t(far) then "#f1f1ea" else if __t(cai) then "#c2392d" else if ____t_240(____temp_239) then __O[229] else "#dc8c47"
-        local ____t_244 = __t
-        local ____opt_result_243
+        local cai = ____opt_result_479 == "caipira"
+        local ____opt_result_482
         if LK ~= nil then
-            ____opt_result_243 = LK.pants
+            ____opt_result_482 = LK.costume
         end
-        __O[230] = ____opt_result_243
-        local pants = if __t(lion) then "#d39a36" else if __t(jeg) then "#7b746a" else if __t(far) then "#1d2d58" else if __t(cai) then "#7a5636" else if ____t_244(____opt_result_243) then __O[230] else if ____type == "marco" then "#2b353e" else if ____type == "nikolas" then "#423e59" else if ____type == "caleb" then "#564d3e" else if __t(____type == "almiro" or ____type == "lucas") then "#1e3355" else if ____type == "miqueias" then "#354c53" else if ____type == "mota" then "#1c3558" else "#455b62"
+        local far = ____opt_result_482 == "farda"
+        local ____t_result_483
+        if __t(lion) then
+            ____t_result_483 = lion
+        else
+            ____t_result_483 = jeg
+        end
+        local kig = ____t_result_483
+        local trajeLuz = __t(lion) and "#f3c766" or (__t(jeg) and "#aaa397" or (__t(far) and "#ffffff" or (__t(cai) and "#e2685a" or nil)))
+        local ____t_result_494
+        if __t(lion) then
+            ____t_result_494 = "#e3a83f"
+        else
+            local ____t_result_493
+            if __t(jeg) then
+                ____t_result_493 = "#8f887d"
+            else
+                local ____t_result_492
+                if __t(far) then
+                    ____t_result_492 = "#f1f1ea"
+                else
+                    local ____t_result_491
+                    if __t(cai) then
+                        ____t_result_491 = "#c2392d"
+                    else
+                        local ____t_result_490
+                        local ____t_489 = __t
+                        local ____t_result_488
+                        local ____t_487 = __t
+                        local ____opt_result_486
+                        if LK ~= nil then
+                            ____opt_result_486 = LK.shirt
+                        end
+                        __O[228] = ____opt_result_486
+                        if ____t_487(____opt_result_486) then
+                            ____t_result_488 = __O[228]
+                        else
+                            ____t_result_488 = __get({
+                                daroca = "#dc8c47",
+                                lucas = "#9a9e9e",
+                                reeis = "#4d7374",
+                                nikolas = "#8c6594",
+                                menezes = "#647c84",
+                                caleb = "#e1b563",
+                                ravid = "#7c93a1",
+                                marco = "#222b30",
+                                kaua = "#66888a",
+                                almiro = "#367cba",
+                                miqueias = "#617b70",
+                                mota = "#1b4677"
+                            }, ____type)
+                        end
+                        __O[229] = ____t_result_488
+                        if ____t_489(____t_result_488) then
+                            ____t_result_490 = __O[229]
+                        else
+                            ____t_result_490 = "#dc8c47"
+                        end
+                        ____t_result_491 = ____t_result_490
+                    end
+                    ____t_result_492 = ____t_result_491
+                end
+                ____t_result_493 = ____t_result_492
+            end
+            ____t_result_494 = ____t_result_493
+        end
+        local shirt = ____t_result_494
+        local ____t_result_503
+        if __t(lion) then
+            ____t_result_503 = "#d39a36"
+        else
+            local ____t_result_502
+            if __t(jeg) then
+                ____t_result_502 = "#7b746a"
+            else
+                local ____t_result_501
+                if __t(far) then
+                    ____t_result_501 = "#1d2d58"
+                else
+                    local ____t_result_500
+                    if __t(cai) then
+                        ____t_result_500 = "#7a5636"
+                    else
+                        local ____t_result_499
+                        local ____t_498 = __t
+                        local ____opt_result_497
+                        if LK ~= nil then
+                            ____opt_result_497 = LK.pants
+                        end
+                        __O[230] = ____opt_result_497
+                        if ____t_498(____opt_result_497) then
+                            ____t_result_499 = __O[230]
+                        else
+                            ____t_result_499 = ____type == "marco" and "#2b353e" or (____type == "nikolas" and "#423e59" or (____type == "caleb" and "#564d3e" or (__t(____type == "almiro" or ____type == "lucas") and "#1e3355" or (____type == "miqueias" and "#354c53" or (____type == "mota" and "#1c3558" or "#455b62")))))
+                        end
+                        ____t_result_500 = ____t_result_499
+                    end
+                    ____t_result_501 = ____t_result_500
+                end
+                ____t_result_502 = ____t_result_501
+            end
+            ____t_result_503 = ____t_result_502
+        end
+        local pants = ____t_result_503
         local function leg(self, front)
-            local sign = if __t(front) then 1 else -1
-            local swing = if __t(front) then walk else -walk
-            local footX = if __t(moving) then math.floor(swing * 13 + 0.5) else sign * 6
-            local lift = if __t(if __t(moving) then grounded else moving) then math.floor(math.max(
-                0,
-                math.cos(phase + if __t(front) then 0 else math.pi)
-            ) * 7 + 0.5) else 0
+            local sign = __t(front) and 1 or -1
+            local ____t_result_504
+            if __t(front) then
+                ____t_result_504 = walk
+            else
+                ____t_result_504 = -walk
+            end
+            local swing = ____t_result_504
+            local ____t_result_505
+            if __t(moving) then
+                ____t_result_505 = math.floor(swing * 13 + 0.5)
+            else
+                ____t_result_505 = sign * 6
+            end
+            local footX = ____t_result_505
+            local ____t_result_508
+            local ____t_507 = __t
+            local ____t_result_506
+            if __t(moving) then
+                ____t_result_506 = grounded
+            else
+                ____t_result_506 = moving
+            end
+            if ____t_507(____t_result_506) then
+                ____t_result_508 = math.floor(math.max(
+                    0,
+                    math.cos(phase + (__t(front) and 0 or math.pi))
+                ) * 7 + 0.5)
+            else
+                ____t_result_508 = 0
+            end
+            local lift = ____t_result_508
             local footY = -lift
             local hipX = sign * 4 + math.floor(lean * 0.25 + 0.5)
             local hipY = -23 - bob + squat
             if __t(air) then
-                footX = if __t(front) then if __t(flight) then -5 else if __t(rising) then 8 else 11 else if __t(flight) then -18 else if __t(rising) then -8 else -5
-                footY = if __t(front) then if __t(flight) then -3 else if __t(rising) then -7 else -1 else if __t(flight) then -12 else if __t(rising) then -13 else -6
+                local ____t_result_509
+                if __t(front) then
+                    ____t_result_509 = __t(flight) and -5 or (__t(rising) and 8 or 11)
+                else
+                    ____t_result_509 = __t(flight) and -18 or (__t(rising) and -8 or -5)
+                end
+                footX = ____t_result_509
+                local ____t_result_510
+                if __t(front) then
+                    ____t_result_510 = __t(flight) and -3 or (__t(rising) and -7 or -1)
+                else
+                    ____t_result_510 = __t(flight) and -12 or (__t(rising) and -13 or -6)
+                end
+                footY = ____t_result_510
             end
             if heroAnim == "jump" then
-                footX = footX + if __t(front) then poseIndex * 2 else __TS__Number(-poseIndex) * 2
-                footY = footY - if __t(front) then __get(
-                    __arrL({0, 3, 5}, 3),
-                    poseIndex
-                ) else __get(
-                    __arrL({0, 2, 0}, 3),
-                    poseIndex
-                )
+                local ____t_result_511
+                if __t(front) then
+                    ____t_result_511 = poseIndex * 2
+                else
+                    ____t_result_511 = __TS__Number(-poseIndex) * 2
+                end
+                footX = footX + ____t_result_511
+                local ____t_result_512
+                if __t(front) then
+                    ____t_result_512 = __get(
+                        __arrL({0, 3, 5}, 3),
+                        poseIndex
+                    )
+                else
+                    ____t_result_512 = __get(
+                        __arrL({0, 2, 0}, 3),
+                        poseIndex
+                    )
+                end
+                footY = footY - ____t_result_512
             end
             if heroAnim == "fall" then
-                footX = footX + if __t(front) then poseIndex * 2 else __TS__Number(-poseIndex)
-                footY = footY + if __t(front) then __get(
-                    __arrL({0, 1, 3}, 3),
-                    poseIndex
-                ) else __get(
-                    __arrL({0, 2, 4}, 3),
-                    poseIndex
-                )
+                local ____t_result_513
+                if __t(front) then
+                    ____t_result_513 = poseIndex * 2
+                else
+                    ____t_result_513 = __TS__Number(-poseIndex)
+                end
+                footX = footX + ____t_result_513
+                local ____t_result_514
+                if __t(front) then
+                    ____t_result_514 = __get(
+                        __arrL({0, 1, 3}, 3),
+                        poseIndex
+                    )
+                else
+                    ____t_result_514 = __get(
+                        __arrL({0, 2, 4}, 3),
+                        poseIndex
+                    )
+                end
+                footY = footY + ____t_result_514
             end
             if heroAnim == "flight" then
-                footY = footY + math.floor(math.sin(poseIndex * math.pi * 0.5 + if __t(front) then 0 else 1) * 3 + 0.5)
+                footY = footY + math.floor(math.sin(poseIndex * math.pi * 0.5 + (__t(front) and 0 or 1)) * 3 + 0.5)
             end
             if __t(landAmount) then
-                footX = footX + if __t(front) then math.floor(landAmount * 4 + 0.5) else -math.floor(landAmount * 4 + 0.5)
+                local ____t_result_515
+                if __t(front) then
+                    ____t_result_515 = math.floor(landAmount * 4 + 0.5)
+                else
+                    ____t_result_515 = -math.floor(landAmount * 4 + 0.5)
+                end
+                footX = footX + ____t_result_515
             end
-            local ____t_249 = __t
-            local ____t_248 = __t
-            local ____t_246 = __t
-            local ____temp_245 = ____type == "daroca"
-            __O[231] = ____temp_245
-            local ____temp_247 = if ____t_246(____temp_245) then attackOn else __O[231]
-            __O[232] = ____temp_247
-            if ____t_249(if ____t_248(____temp_247) then attackType == "paper" else __O[232]) then
-                footX = footX + if __t(front) then math.floor(strike * 3 + 0.5) else -math.floor(strike * 2 + 0.5)
+            local ____t_521 = __t
+            local ____t_result_520
+            local ____t_519 = __t
+            local ____t_result_518
+            local ____t_517 = __t
+            local ____temp_516 = ____type == "daroca"
+            __O[231] = ____temp_516
+            if ____t_517(____temp_516) then
+                ____t_result_518 = attackOn
+            else
+                ____t_result_518 = __O[231]
             end
-            local kneeX = if __t(air) then footX - 5 else math.floor((footX + hipX) / 2 + 0.5) + if __t(front) then 2 else -2 - math.floor(squat * 0.7 + 0.5)
+            __O[232] = ____t_result_518
+            if ____t_519(____t_result_518) then
+                ____t_result_520 = attackType == "paper"
+            else
+                ____t_result_520 = __O[232]
+            end
+            if ____t_521(____t_result_520) then
+                local ____t_result_522
+                if __t(front) then
+                    ____t_result_522 = math.floor(strike * 3 + 0.5)
+                else
+                    ____t_result_522 = -math.floor(strike * 2 + 0.5)
+                end
+                footX = footX + ____t_result_522
+            end
+            local ____t_result_523
+            if __t(air) then
+                ____t_result_523 = footX - 5
+            else
+                ____t_result_523 = math.floor((footX + hipX) / 2 + 0.5) + (__t(front) and 2 or -2) - math.floor(squat * 0.7 + 0.5)
+            end
+            local kneeX = ____t_result_523
             local kneeY = -12 - bob + math.floor(squat * 0.7 + 0.5) - lift * 0.45
             local pts = __arrL(
                 {
@@ -17857,22 +19466,70 @@ local __O = {};
                 },
                 3
             )
-            __L1:limb(c, pts, if __t(____type == "mota" or ____type == "marco") then 7 else 9, __L1.P.ink)
-            local ____L1_limb_255 = __L1.limb
-            local ____c_253 = c
-            local ____temp_254 = if __t(____type == "mota" or ____type == "marco") then 4 else 5
-            local ____t_252 = __t
-            local ____t_251 = __t
-            local ____temp_250 = ____type == "lucas" or ____type == "almiro"
-            __O[233] = ____temp_250
-            ____L1_limb_255(
-                __L1,
-                ____c_253,
+            __L1:limb(
+                c,
                 pts,
-                ____temp_254,
-                if __t(front) then pants else if __t(lion) then "#b8862e" else if __t(jeg) then "#665f56" else if __t(far) then "#16234a" else if __t(cai) then "#62452b" else if ____t_252(if ____t_251(____temp_250) then __O[233] else ____type == "mota") then "#17283e" else "#374a50"
+                __t(____type == "mota" or ____type == "marco") and 7 or 9,
+                __L1.P.ink
             )
-            if __t(if __t(far) then front else far) then
+            local ____L1_limb_535 = __L1.limb
+            local ____c_533 = c
+            local ____temp_534 = __t(____type == "mota" or ____type == "marco") and 4 or 5
+            local ____t_result_532
+            if __t(front) then
+                ____t_result_532 = pants
+            else
+                local ____t_result_531
+                if __t(lion) then
+                    ____t_result_531 = "#b8862e"
+                else
+                    local ____t_result_530
+                    if __t(jeg) then
+                        ____t_result_530 = "#665f56"
+                    else
+                        local ____t_result_529
+                        if __t(far) then
+                            ____t_result_529 = "#16234a"
+                        else
+                            local ____t_result_528
+                            if __t(cai) then
+                                ____t_result_528 = "#62452b"
+                            else
+                                local ____t_527 = __t
+                                local ____t_result_526
+                                local ____t_525 = __t
+                                local ____temp_524 = ____type == "lucas" or ____type == "almiro"
+                                __O[233] = ____temp_524
+                                if ____t_525(____temp_524) then
+                                    ____t_result_526 = __O[233]
+                                else
+                                    ____t_result_526 = ____type == "mota"
+                                end
+                                ____t_result_528 = ____t_527(____t_result_526) and "#17283e" or "#374a50"
+                            end
+                            ____t_result_529 = ____t_result_528
+                        end
+                        ____t_result_530 = ____t_result_529
+                    end
+                    ____t_result_531 = ____t_result_530
+                end
+                ____t_result_532 = ____t_result_531
+            end
+            ____L1_limb_535(
+                __L1,
+                ____c_533,
+                pts,
+                ____temp_534,
+                ____t_result_532
+            )
+            local ____t_537 = __t
+            local ____t_result_536
+            if __t(far) then
+                ____t_result_536 = front
+            else
+                ____t_result_536 = far
+            end
+            if ____t_537(____t_result_536) then
                 __L1:limb(
                     c,
                     __call(
@@ -17923,10 +19580,10 @@ local __O = {};
                     footY - 8,
                     11,
                     3,
-                    if __t(front) then "#9a7448" else "#7d5c38"
+                    __t(front) and "#9a7448" or "#7d5c38"
                 )
             end
-            local shoe = if __t(lion) then "#e3a83f" else if __t(jeg) then "#3b332c" else if __t(cai) then "#5a3a22" else if __t(far) then "#1a1a1e" else if ____type == "lucas" then "#f4f7f3" else if ____type == "almiro" then "#9ef13d" else if ____type == "mota" then "#18394d" else "#343b35"
+            local shoe = __t(lion) and "#e3a83f" or (__t(jeg) and "#3b332c" or (__t(cai) and "#5a3a22" or (__t(far) and "#1a1a1e" or (____type == "lucas" and "#f4f7f3" or (____type == "almiro" and "#9ef13d" or (____type == "mota" and "#18394d" or "#343b35"))))))
             __L1:r(
                 c,
                 footX - 4,
@@ -17941,7 +19598,7 @@ local __O = {};
                 footY - 2,
                 11,
                 2,
-                if ____type == "lucas" then "#bac6cd" else if ____type == "almiro" then "#d1ff77" else if ____type == "mota" then "#f1ede3" else if __t(front) then "#bba784" else "#8e8c70"
+                ____type == "lucas" and "#bac6cd" or (____type == "almiro" and "#d1ff77" or (____type == "mota" and "#f1ede3" or (__t(front) and "#bba784" or "#8e8c70")))
             )
             if __t(lion) then
                 __L1:r(
@@ -18000,75 +19657,147 @@ local __O = {};
             lean,
             __TS__Number(-bob) + squat + math.floor(recoil * 2 + 0.5)
         )
-        local ____t_260 = __t
-        local ____t_259 = __t
-        local ____t_257 = __t
-        local ____temp_256 = ____type == "daroca"
-        __O[234] = ____temp_256
-        local ____temp_258 = if ____t_257(____temp_256) then attackOn else __O[234]
-        __O[235] = ____temp_258
-        if ____t_260(if ____t_259(____temp_258) then attackType == "paper" else __O[235]) then
-            c:rotate(if progress < 0.3 then -0.035 * math.sin(progress / 0.3 * math.pi * 0.5) else math.sin((progress - 0.3) / 0.7 * math.pi) * 0.045)
+        local ____t_543 = __t
+        local ____t_result_542
+        local ____t_541 = __t
+        local ____t_result_540
+        local ____t_539 = __t
+        local ____temp_538 = ____type == "daroca"
+        __O[234] = ____temp_538
+        if ____t_539(____temp_538) then
+            ____t_result_540 = attackOn
+        else
+            ____t_result_540 = __O[234]
         end
-        local ____t_266 = __t
-        local ____t_262 = __t
-        local ____temp_261 = ____type == "caleb"
-        __O[237] = ____temp_261
-        local ____t_264 = __t
-        local ____temp_263 = ____type == "reeis"
-        __O[236] = ____temp_263
-        local ____temp_265 = if ____t_262(____temp_261) then __O[237] else if ____t_264(____temp_263) then o.transformed else __O[236]
-        __O[239] = ____temp_265
-        local ____t_268 = __t
-        local ____temp_267 = ____type == "daroca"
-        __O[238] = ____temp_267
-        local muscular = if ____t_266(____temp_265) then __O[239] else if ____t_268(____temp_267) then o.muscular else __O[238]
-        local ____t_270 = __t
-        local ____temp_269 = ____type == "daroca"
-        __O[240] = ____temp_269
-        local heroStrong = if ____t_270(____temp_269) then o.muscular else __O[240]
+        __O[235] = ____t_result_540
+        if ____t_541(____t_result_540) then
+            ____t_result_542 = attackType == "paper"
+        else
+            ____t_result_542 = __O[235]
+        end
+        if ____t_543(____t_result_542) then
+            local ____c_545 = c
+            local ____c_rotate_546 = c.rotate
+            local ____temp_544
+            if progress < 0.3 then
+                ____temp_544 = -0.035 * math.sin(progress / 0.3 * math.pi * 0.5)
+            else
+                ____temp_544 = math.sin((progress - 0.3) / 0.7 * math.pi) * 0.045
+            end
+            ____c_rotate_546(____c_545, ____temp_544)
+        end
+        local ____t_result_557
+        local ____t_553 = __t
+        local ____t_result_552
+        local ____t_548 = __t
+        local ____temp_547 = ____type == "caleb"
+        __O[237] = ____temp_547
+        if ____t_548(____temp_547) then
+            ____t_result_552 = __O[237]
+        else
+            local ____t_result_551
+            local ____t_550 = __t
+            local ____temp_549 = ____type == "reeis"
+            __O[236] = ____temp_549
+            if ____t_550(____temp_549) then
+                ____t_result_551 = o.transformed
+            else
+                ____t_result_551 = __O[236]
+            end
+            ____t_result_552 = ____t_result_551
+        end
+        __O[239] = ____t_result_552
+        if ____t_553(____t_result_552) then
+            ____t_result_557 = __O[239]
+        else
+            local ____t_result_556
+            local ____t_555 = __t
+            local ____temp_554 = ____type == "daroca"
+            __O[238] = ____temp_554
+            if ____t_555(____temp_554) then
+                ____t_result_556 = o.muscular
+            else
+                ____t_result_556 = __O[238]
+            end
+            ____t_result_557 = ____t_result_556
+        end
+        local muscular = ____t_result_557
+        local ____t_result_560
+        local ____t_559 = __t
+        local ____temp_558 = ____type == "daroca"
+        __O[240] = ____temp_558
+        if ____t_559(____temp_558) then
+            ____t_result_560 = o.muscular
+        else
+            ____t_result_560 = __O[240]
+        end
+        local heroStrong = ____t_result_560
         local slim = ____type == "mota" or ____type == "marco"
-        local shoulder = if __t(muscular) then 20 else if __t(slim) then 9 else 12
-        local gesture = if __t(moving) then 0 else if heroAnim == "idle" then __get(
-            __arrL({0, 1, 2, 0}, 4),
-            poseIndex
-        ) else math.floor(math.sin(frame * 2.4 + 1) * 2 + 0.5)
+        local shoulder = __t(muscular) and 20 or (__t(slim) and 9 or 12)
+        local ____t_result_562
+        if __t(moving) then
+            ____t_result_562 = 0
+        else
+            local ____temp_561
+            if heroAnim == "idle" then
+                ____temp_561 = __get(
+                    __arrL({0, 1, 2, 0}, 4),
+                    poseIndex
+                )
+            else
+                ____temp_561 = math.floor(math.sin(frame * 2.4 + 1) * 2 + 0.5)
+            end
+            ____t_result_562 = ____temp_561
+        end
+        local gesture = ____t_result_562
         local backElbow = __arrL(
             {
-                -if __t(muscular) then 23 else if __t(slim) then 12 else 15 + math.floor(walk * 5 + 0.5),
+                -(__t(muscular) and 23 or (__t(slim) and 12 or 15)) + math.floor(walk * 5 + 0.5),
                 -27
             },
             2
         )
         local backHand = __arrL(
             {
-                -if __t(muscular) then 23 else if __t(slim) then 12 else 14 + math.floor(walk * 9 + 0.5),
+                -(__t(muscular) and 23 or (__t(slim) and 12 or 14)) + math.floor(walk * 9 + 0.5),
                 -18 - gesture
             },
             2
         )
         local frontElbow = __arrL(
             {
-                if __t(muscular) then 23 else if __t(slim) then 12 else 15 - math.floor(walk * 5 + 0.5),
+                (__t(muscular) and 23 or (__t(slim) and 12 or 15)) - math.floor(walk * 5 + 0.5),
                 -27
             },
             2
         )
         local frontHand = __arrL(
             {
-                if __t(muscular) then 23 else if __t(slim) then 12 else 15 - math.floor(walk * 10 + 0.5),
+                (__t(muscular) and 23 or (__t(slim) and 12 or 15)) - math.floor(walk * 10 + 0.5),
                 -18 + gesture
             },
             2
         )
-        local ____t_275 = __t
-        local ____t_272 = __t
-        local ____temp_271 = ____type == "ravid"
-        __O[242] = ____temp_271
-        local ____t_274 = __t
-        local ____temp_273 = not __t(moving)
-        __O[241] = ____temp_273
-        if ____t_275(if ____t_272(____temp_271) then if ____t_274(____temp_273) then __O[241] else o.talking else __O[242]) then
+        local ____t_569 = __t
+        local ____t_result_568
+        local ____t_564 = __t
+        local ____temp_563 = ____type == "ravid"
+        __O[242] = ____temp_563
+        if ____t_564(____temp_563) then
+            local ____t_result_567
+            local ____t_566 = __t
+            local ____temp_565 = not __t(moving)
+            __O[241] = ____temp_565
+            if ____t_566(____temp_565) then
+                ____t_result_567 = __O[241]
+            else
+                ____t_result_567 = o.talking
+            end
+            ____t_result_568 = ____t_result_567
+        else
+            ____t_result_568 = __O[242]
+        end
+        if ____t_569(____t_result_568) then
             frontElbow = __arrL({22, -33}, 2)
             frontHand = __arrL(
                 {
@@ -18079,11 +19808,17 @@ local __O = {};
             )
             backHand = __arrL({-17, -26 + gesture}, 2)
         end
-        local ____t_278 = __t
-        local ____t_277 = __t
-        local ____temp_276 = ____type == "almiro" or ____type == "miqueias"
-        __O[243] = ____temp_276
-        if ____t_278(if ____t_277(____temp_276) then not __t(moving) else __O[243]) then
+        local ____t_573 = __t
+        local ____t_result_572
+        local ____t_571 = __t
+        local ____temp_570 = ____type == "almiro" or ____type == "miqueias"
+        __O[243] = ____temp_570
+        if ____t_571(____temp_570) then
+            ____t_result_572 = not __t(moving)
+        else
+            ____t_result_572 = __O[243]
+        end
+        if ____t_573(____t_result_572) then
             frontElbow = __arrL({18, -28}, 2)
             frontHand = __arrL(
                 {
@@ -18095,9 +19830,21 @@ local __O = {};
         end
         if __t(air) then
             backElbow = __arrL({-18, -33}, 2)
-            backHand = __arrL({if __t(flight) then -26 else -20, if __t(flight) then -26 else if __t(rising) then -40 else -31}, 2)
+            backHand = __arrL(
+                {
+                    __t(flight) and -26 or -20,
+                    __t(flight) and -26 or (__t(rising) and -40 or -31)
+                },
+                2
+            )
             frontElbow = __arrL({18, -34}, 2)
-            frontHand = __arrL({if __t(flight) then 25 else 20, if __t(flight) then -40 else if __t(rising) then -46 else -36}, 2)
+            frontHand = __arrL(
+                {
+                    __t(flight) and 25 or 20,
+                    __t(flight) and -40 or (__t(rising) and -46 or -36)
+                },
+                2
+            )
         end
         if heroAnim == "flight" then
             __set(
@@ -18129,7 +19876,14 @@ local __O = {};
             frontElbow = __arrL({27, -29}, 2)
             frontHand = __arrL({19, -24}, 2)
         end
-        if __t(if __t(o.dash) then o.dash else heroAnim == "dash") then
+        local ____t_575 = __t
+        local ____t_result_574
+        if __t(o.dash) then
+            ____t_result_574 = o.dash
+        else
+            ____t_result_574 = heroAnim == "dash"
+        end
+        if ____t_575(____t_result_574) then
             backElbow = __arrL({-24, -30}, 2)
             backHand = __arrL({-32, -32}, 2)
             frontElbow = __arrL({12, -41}, 2)
@@ -18175,11 +19929,17 @@ local __O = {};
                 frontElbow = __arrL({19, -29}, 2)
                 frontHand = __arrL({25, -34}, 2)
             else
-                local ____t_281 = __t
-                local ____t_280 = __t
-                local ____temp_279 = ____type == "reeis" or ____type == "caleb"
-                __O[244] = ____temp_279
-                if ____t_281(if ____t_280(____temp_279) then __O[244] else attackType == "punch") then
+                local ____t_579 = __t
+                local ____t_result_578
+                local ____t_577 = __t
+                local ____temp_576 = ____type == "reeis" or ____type == "caleb"
+                __O[244] = ____temp_576
+                if ____t_577(____temp_576) then
+                    ____t_result_578 = __O[244]
+                else
+                    ____t_result_578 = attackType == "punch"
+                end
+                if ____t_579(____t_result_578) then
                     frontElbow = __arrL({16 + strike * 9, -31 - strike * 3}, 2)
                     frontHand = __arrL({20 + strike * 20, -27 - strike * 9}, 2)
                     backElbow = __arrL({-16, -37}, 2)
@@ -18203,41 +19963,94 @@ local __O = {};
                 end
             end
         end
-        local ____t_287 = __t
-        local ____t_283 = __t
-        local ____temp_282 = ____type == "nikolas"
-        __O[246] = ____temp_282
-        local ____t_285 = __t
-        local ____temp_284 = o.noseRub ~= false
-        __O[245] = ____temp_284
-        local ____temp_286 = if ____t_283(____temp_282) then if ____t_285(____temp_284) then __O[245] else attackOn else __O[246]
-        __O[247] = ____temp_286
-        local noseRubbing = if ____t_287(____temp_286) then not __t(__call(
-            __arrL({"fistbump", "offer", "steal"}, 3),
-            "includes",
-            if __t(o.pose) then o.pose else o.gesture
-        )) else __O[247]
+        local ____t_result_591
+        local ____t_586 = __t
+        local ____t_result_585
+        local ____t_581 = __t
+        local ____temp_580 = ____type == "nikolas"
+        __O[246] = ____temp_580
+        if ____t_581(____temp_580) then
+            local ____t_result_584
+            local ____t_583 = __t
+            local ____temp_582 = o.noseRub ~= false
+            __O[245] = ____temp_582
+            if ____t_583(____temp_582) then
+                ____t_result_584 = __O[245]
+            else
+                ____t_result_584 = attackOn
+            end
+            ____t_result_585 = ____t_result_584
+        else
+            ____t_result_585 = __O[246]
+        end
+        __O[247] = ____t_result_585
+        if ____t_586(____t_result_585) then
+            local ____t_590 = __t
+            local ____call_589 = __call
+            local ____arrL_result_588 = __arrL({"fistbump", "offer", "steal"}, 3)
+            local ____t_result_587
+            if __t(o.pose) then
+                ____t_result_587 = o.pose
+            else
+                ____t_result_587 = o.gesture
+            end
+            ____t_result_591 = not ____t_590(____call_589(____arrL_result_588, "includes", ____t_result_587))
+        else
+            ____t_result_591 = __O[247]
+        end
+        local noseRubbing = ____t_result_591
         if __t(noseRubbing) then
             frontElbow = __arrL({22, -37}, 2)
             frontHand = __arrL(
                 {
-                    if o.view == "front" then 4 else 18 + 2,
+                    (o.view == "front" and 4 or 18) + 2,
                     -49 + math.floor(math.sin(frame * 13) * 3 + 0.5)
                 },
                 2
             )
         end
         local function arm(self, front)
-            local elbow = if __t(front) then frontElbow else backElbow
-            local hand = if __t(front) then frontHand else backHand
-            local should = __arrL({if __t(front) then shoulder else -shoulder, if __t(muscular) then -38 else -34}, 2)
-            local ____t_290 = __t
-            local ____t_289 = __t
-            local ____temp_288 = ____type == "daroca"
-            __O[248] = ____temp_288
-            if ____t_290(if ____t_289(____temp_288) then attackOn else __O[248]) then
-                local upper = if __t(muscular) then 14 else 11
-                local lower = if __t(muscular) then 15 else 12
+            local ____t_result_592
+            if __t(front) then
+                ____t_result_592 = frontElbow
+            else
+                ____t_result_592 = backElbow
+            end
+            local elbow = ____t_result_592
+            local ____t_result_593
+            if __t(front) then
+                ____t_result_593 = frontHand
+            else
+                ____t_result_593 = backHand
+            end
+            local hand = ____t_result_593
+            local ____arrL_595 = __arrL
+            local ____t_result_594
+            if __t(front) then
+                ____t_result_594 = shoulder
+            else
+                ____t_result_594 = -shoulder
+            end
+            local should = ____arrL_595(
+                {
+                    ____t_result_594,
+                    __t(muscular) and -38 or -34
+                },
+                2
+            )
+            local ____t_599 = __t
+            local ____t_result_598
+            local ____t_597 = __t
+            local ____temp_596 = ____type == "daroca"
+            __O[248] = ____temp_596
+            if ____t_597(____temp_596) then
+                ____t_result_598 = attackOn
+            else
+                ____t_result_598 = __O[248]
+            end
+            if ____t_599(____t_result_598) then
+                local upper = __t(muscular) and 14 or 11
+                local lower = __t(muscular) and 15 or 12
                 local dx = __get(hand, 0) - __get(should, 0)
                 local dy = __get(hand, 1) - __get(should, 1)
                 local distance = math.min(
@@ -18247,8 +20060,8 @@ local __O = {};
                         __hypot(dx, dy)
                     )
                 )
-                local angle = math.atan2(dy, dx)
-                local bend = if __t(front) then -1 else 1 * math.acos(math.max(
+                local angle = math.atan(dy, dx)
+                local bend = (__t(front) and -1 or 1) * math.acos(math.max(
                     -1,
                     math.min(1, (upper * upper + distance * distance - lower * lower) / (2 * upper * distance))
                 ))
@@ -18277,14 +20090,32 @@ local __O = {};
             __L1:limb(
                 c,
                 __arrL({should, elbow, hand}, 3),
-                if __t(muscular) then 13 else if __t(slim) then 6 else 8,
+                __t(muscular) and 13 or (__t(slim) and 6 or 8),
                 __L1.P.ink
             )
-            __L1:limb(
+            local ____L1_limb_604 = __L1.limb
+            local ____array_603 = __TS__SparseArrayNew(
                 c,
                 __arrL({should, elbow}, 2),
-                if __t(muscular) then 9 else if __t(slim) then 4 else 5,
-                if __t(if __t(muscular) then not __t(lion) else muscular) then skin else shirt
+                __t(muscular) and 9 or (__t(slim) and 4 or 5)
+            )
+            local ____t_result_602
+            local ____t_601 = __t
+            local ____t_result_600
+            if __t(muscular) then
+                ____t_result_600 = not __t(lion)
+            else
+                ____t_result_600 = muscular
+            end
+            if ____t_601(____t_result_600) then
+                ____t_result_602 = skin
+            else
+                ____t_result_602 = shirt
+            end
+            __TS__SparseArrayPush(____array_603, ____t_result_602)
+            ____L1_limb_604(
+                __L1,
+                __TS__SparseArraySpread(____array_603)
             )
             if __t(heroStrong) then
                 __L1:limb(
@@ -18306,41 +20137,63 @@ local __O = {};
                     shirt
                 )
             end
-            local ____L1_limb_299 = __L1.limb
-            local ____array_298 = __TS__SparseArrayNew(
+            local ____L1_limb_615 = __L1.limb
+            local ____array_614 = __TS__SparseArrayNew(
                 c,
                 __arrL({elbow, hand}, 2),
-                if __t(muscular) then 8 else if __t(slim) then 4 else 5
+                __t(muscular) and 8 or (__t(slim) and 4 or 5)
             )
-            local ____t_297 = __t
-            local ____t_296 = __t
-            local ____t_294 = __t
-            local ____t_292 = __t
-            local ____temp_291 = ____type == "marco"
-            __O[249] = ____temp_291
-            local ____temp_293 = if ____t_292(____temp_291) then __O[249] else lion
-            __O[250] = ____temp_293
-            local ____temp_295 = if ____t_294(____temp_293) then __O[250] else jeg
-            __O[251] = ____temp_295
-            __TS__SparseArrayPush(____array_298, if ____t_297(if ____t_296(____temp_295) then __O[251] else cai) then shirt else skin)
-            ____L1_limb_299(
+            local ____t_result_613
+            local ____t_612 = __t
+            local ____t_result_611
+            local ____t_610 = __t
+            local ____t_result_609
+            local ____t_608 = __t
+            local ____t_result_607
+            local ____t_606 = __t
+            local ____temp_605 = ____type == "marco"
+            __O[249] = ____temp_605
+            if ____t_606(____temp_605) then
+                ____t_result_607 = __O[249]
+            else
+                ____t_result_607 = lion
+            end
+            __O[250] = ____t_result_607
+            if ____t_608(____t_result_607) then
+                ____t_result_609 = __O[250]
+            else
+                ____t_result_609 = jeg
+            end
+            __O[251] = ____t_result_609
+            if ____t_610(____t_result_609) then
+                ____t_result_611 = __O[251]
+            else
+                ____t_result_611 = cai
+            end
+            if ____t_612(____t_result_611) then
+                ____t_result_613 = shirt
+            else
+                ____t_result_613 = skin
+            end
+            __TS__SparseArrayPush(____array_614, ____t_result_613)
+            ____L1_limb_615(
                 __L1,
-                __TS__SparseArraySpread(____array_298)
+                __TS__SparseArraySpread(____array_614)
             )
             __L1:r(
                 c,
                 __get(hand, 0) - 3,
                 __get(hand, 1) - 3,
-                if __t(muscular) then 9 else if __t(slim) then 5 else 6,
-                if __t(muscular) then 8 else if __t(slim) then 5 else 6,
-                if __t(lion) then "#f0c25a" else if __t(jeg) then "#4a4139" else skin
+                __t(muscular) and 9 or (__t(slim) and 5 or 6),
+                __t(muscular) and 8 or (__t(slim) and 5 or 6),
+                __t(lion) and "#f0c25a" or (__t(jeg) and "#4a4139" or skin)
             )
             if __t(lion) then
                 __L1:r(
                     c,
                     __get(hand, 0) - 4,
                     __get(hand, 1) - 4,
-                    if __t(muscular) then 11 else 8,
+                    __t(muscular) and 11 or 8,
                     2,
                     __L1.P.ink
                 )
@@ -18376,7 +20229,7 @@ local __O = {};
                     __get(elbow, 1) - 4,
                     4,
                     2,
-                    if ____type == "reeis" then "#a26c45" else "#f5d8bb"
+                    ____type == "reeis" and "#a26c45" or "#f5d8bb"
                 )
                 __L1:r(
                     c,
@@ -18484,7 +20337,7 @@ local __O = {};
                     -27,
                     15,
                     3,
-                    if ____type == "reeis" then "#3b5b5b" else "#b18b51"
+                    ____type == "reeis" and "#3b5b5b" or "#b18b51"
                 )
             end
         elseif __t(slim) then
@@ -18519,7 +20372,19 @@ local __O = {};
                 shirt
             )
         else
-            local broad = if __t(fart) then if progress < 0.32 then math.floor(math.sin(progress / 0.32 * math.pi * 0.5) * 2 + 0.5) else if progress < 0.65 then -1 else 0 else 0
+            local ____t_result_617
+            if __t(fart) then
+                local ____temp_616
+                if progress < 0.32 then
+                    ____temp_616 = math.floor(math.sin(progress / 0.32 * math.pi * 0.5) * 2 + 0.5)
+                else
+                    ____temp_616 = progress < 0.65 and -1 or 0
+                end
+                ____t_result_617 = ____temp_616
+            else
+                ____t_result_617 = 0
+            end
+            local broad = ____t_result_617
             __L1:r(
                 c,
                 -13 - broad,
@@ -18536,25 +20401,48 @@ local __O = {};
                 19,
                 shirt
             )
-            local ____L1_r_306 = __L1.r
-            local ____array_305 = __TS__SparseArrayNew(
+            local ____L1_r_627 = __L1.r
+            local ____array_626 = __TS__SparseArrayNew(
                 c,
                 -10,
                 -35,
                 3,
                 12
             )
-            local ____t_304 = __t
-            local ____opt_result_302
-            if LK ~= nil then
-                ____opt_result_302 = LK.shirtLight
+            local ____temp_625
+            if ____type == "lucas" then
+                ____temp_625 = "#c3c9c7"
+            else
+                local ____temp_624
+                if ____type == "almiro" then
+                    ____temp_624 = "#80b2dc"
+                else
+                    local ____t_result_623
+                    local ____t_622 = __t
+                    local ____t_result_621
+                    if __t(trajeLuz) then
+                        ____t_result_621 = trajeLuz
+                    else
+                        local ____opt_result_620
+                        if LK ~= nil then
+                            ____opt_result_620 = LK.shirtLight
+                        end
+                        ____t_result_621 = ____opt_result_620
+                    end
+                    __O[252] = ____t_result_621
+                    if ____t_622(____t_result_621) then
+                        ____t_result_623 = __O[252]
+                    else
+                        ____t_result_623 = "#e7ac65"
+                    end
+                    ____temp_624 = ____t_result_623
+                end
+                ____temp_625 = ____temp_624
             end
-            local ____temp_303 = if __t(trajeLuz) then trajeLuz else ____opt_result_302
-            __O[252] = ____temp_303
-            __TS__SparseArrayPush(____array_305, if ____type == "lucas" then "#c3c9c7" else if ____type == "almiro" then "#80b2dc" else if ____t_304(____temp_303) then __O[252] else "#e7ac65")
-            ____L1_r_306(
+            __TS__SparseArrayPush(____array_626, ____temp_625)
+            ____L1_r_627(
                 __L1,
-                __TS__SparseArraySpread(____array_305)
+                __TS__SparseArraySpread(____array_626)
             )
             if __t(lion) then
                 __L1:r(
@@ -18709,27 +20597,63 @@ local __O = {};
             shadow
         )
         if ____type == "daroca" then
-            local ____t_310 = __t
-            local ____opt_result_309
+            local ____t_result_632
+            local ____t_631 = __t
+            local ____opt_result_630
             if LK ~= nil then
-                ____opt_result_309 = LK.hairColor
+                ____opt_result_630 = LK.hairColor
             end
-            __O[253] = ____opt_result_309
-            local hairC = if ____t_310(____opt_result_309) then __O[253] else "#5f4934"
-            local ____t_314 = __t
-            local ____opt_result_313
+            __O[253] = ____opt_result_630
+            if ____t_631(____opt_result_630) then
+                ____t_result_632 = __O[253]
+            else
+                ____t_result_632 = "#5f4934"
+            end
+            local hairC = ____t_result_632
+            local ____t_result_637
+            local ____t_636 = __t
+            local ____opt_result_635
             if LK ~= nil then
-                ____opt_result_313 = LK.hairStyle
+                ____opt_result_635 = LK.hairStyle
             end
-            __O[254] = ____opt_result_313
-            local hs = if ____t_314(____opt_result_313) then __O[254] else "curto"
-            local ____t_318 = __t
-            local ____opt_result_317
-            if LK ~= nil then
-                ____opt_result_317 = LK.hat
+            __O[254] = ____opt_result_635
+            if ____t_636(____opt_result_635) then
+                ____t_result_637 = __O[254]
+            else
+                ____t_result_637 = "curto"
             end
-            __O[255] = ____opt_result_317
-            local hat = if __t(lion) then "jaglion" else if __t(jeg) then "dajegue" else if __t(cai) then "caipira" else if ____t_318(____opt_result_317) then __O[255] else "palha"
+            local hs = ____t_result_637
+            local ____t_result_645
+            if __t(lion) then
+                ____t_result_645 = "jaglion"
+            else
+                local ____t_result_644
+                if __t(jeg) then
+                    ____t_result_644 = "dajegue"
+                else
+                    local ____t_result_643
+                    if __t(cai) then
+                        ____t_result_643 = "caipira"
+                    else
+                        local ____t_result_642
+                        local ____t_641 = __t
+                        local ____opt_result_640
+                        if LK ~= nil then
+                            ____opt_result_640 = LK.hat
+                        end
+                        __O[255] = ____opt_result_640
+                        if ____t_641(____opt_result_640) then
+                            ____t_result_642 = __O[255]
+                        else
+                            ____t_result_642 = "palha"
+                        end
+                        ____t_result_643 = ____t_result_642
+                    end
+                    ____t_result_644 = ____t_result_643
+                end
+                ____t_result_645 = ____t_result_644
+            end
+            local hat = ____t_result_645
             if not __t(kig) then
                 __L1:r(
                     c,
@@ -18985,7 +20909,10 @@ local __O = {};
                 )
             end
             c:save()
-            c:translate(if __t(flight) then -2 else math.floor(-walk + 0.5), if __t(flight) then -3 else math.floor(-math.abs(walk) + 0.5))
+            c:translate(
+                __t(flight) and -2 or math.floor(-walk + 0.5),
+                __t(flight) and -3 or math.floor(-math.abs(walk) + 0.5)
+            )
             if hat == "palha" then
                 __L1:r(
                     c,
@@ -19052,13 +20979,19 @@ local __O = {};
                     "#f5d68b"
                 )
             elseif hat == "bone" then
-                local ____t_322 = __t
-                local ____opt_result_321
+                local ____t_result_650
+                local ____t_649 = __t
+                local ____opt_result_648
                 if LK ~= nil then
-                    ____opt_result_321 = LK.hatColor
+                    ____opt_result_648 = LK.hatColor
                 end
-                __O[256] = ____opt_result_321
-                local bc = if ____t_322(____opt_result_321) then __O[256] else "#c0392b"
+                __O[256] = ____opt_result_648
+                if ____t_649(____opt_result_648) then
+                    ____t_result_650 = __O[256]
+                else
+                    ____t_result_650 = "#c0392b"
+                end
+                local bc = ____t_result_650
                 __L1:r(
                     c,
                     -13,
@@ -20079,7 +22012,21 @@ local __O = {};
                 )
             end
             c:save()
-            c:translate(if __t(moving) then math.floor(-walk * 2 + 0.5) else 0, if __t(moving) then math.floor(math.abs(walk) * 2 + 0.5) else if __t(flight) then -2 else 0)
+            local ____c_653 = c
+            local ____c_translate_654 = c.translate
+            local ____t_result_651
+            if __t(moving) then
+                ____t_result_651 = math.floor(-walk * 2 + 0.5)
+            else
+                ____t_result_651 = 0
+            end
+            local ____t_result_652
+            if __t(moving) then
+                ____t_result_652 = math.floor(math.abs(walk) * 2 + 0.5)
+            else
+                ____t_result_652 = __t(flight) and -2 or 0
+            end
+            ____c_translate_654(____c_653, ____t_result_651, ____t_result_652)
             __L1:r(
                 c,
                 -17,
@@ -20121,42 +22068,65 @@ local __O = {};
                 3,
                 "#b5814a"
             )
-            local ____L1_r_328 = __L1.r
-            local ____array_327 = __TS__SparseArrayNew(
+            local ____L1_r_661 = __L1.r
+            local ____array_660 = __TS__SparseArrayNew(
                 c,
                 -9,
                 -28,
                 7,
                 2
             )
-            local ____t_326 = __t
-            local ____opt_result_325
-            if LK ~= nil then
-                ____opt_result_325 = LK.shirt
+            local ____t_result_659
+            if __t(lion) then
+                ____t_result_659 = "#b8802a"
+            else
+                local ____t_658 = __t
+                local ____opt_result_657
+                if LK ~= nil then
+                    ____opt_result_657 = LK.shirt
+                end
+                ____t_result_659 = ____t_658(____opt_result_657) and "rgba(0,0,0,.22)" or "#bd7135"
             end
-            __TS__SparseArrayPush(____array_327, if __t(lion) then "#b8802a" else if ____t_326(____opt_result_325) then "rgba(0,0,0,.22)" else "#bd7135")
-            ____L1_r_328(
+            __TS__SparseArrayPush(____array_660, ____t_result_659)
+            ____L1_r_661(
                 __L1,
-                __TS__SparseArraySpread(____array_327)
+                __TS__SparseArraySpread(____array_660)
             )
-            local ____L1_r_336 = __L1.r
-            local ____c_334 = c
-            local ____temp_335 = -30
-            local ____t_333 = __t
-            local ____opt_result_331
-            if LK ~= nil then
-                ____opt_result_331 = LK.shirtLight
+            local ____L1_r_671 = __L1.r
+            local ____c_669 = c
+            local ____temp_670 = -30
+            local ____t_result_668
+            if __t(lion) then
+                ____t_result_668 = "#f6d68b"
+            else
+                local ____t_result_667
+                local ____t_666 = __t
+                local ____t_result_665
+                if __t(trajeLuz) then
+                    ____t_result_665 = trajeLuz
+                else
+                    local ____opt_result_664
+                    if LK ~= nil then
+                        ____opt_result_664 = LK.shirtLight
+                    end
+                    ____t_result_665 = ____opt_result_664
+                end
+                __O[257] = ____t_result_665
+                if ____t_666(____t_result_665) then
+                    ____t_result_667 = __O[257]
+                else
+                    ____t_result_667 = "#f0ab59"
+                end
+                ____t_result_668 = ____t_result_667
             end
-            local ____temp_332 = if __t(trajeLuz) then trajeLuz else ____opt_result_331
-            __O[257] = ____temp_332
-            ____L1_r_336(
+            ____L1_r_671(
                 __L1,
-                ____c_334,
+                ____c_669,
                 4,
-                ____temp_335,
+                ____temp_670,
                 6,
                 2,
-                if __t(lion) then "#f6d68b" else if ____t_333(____temp_332) then __O[257] else "#f0ab59"
+                ____t_result_668
             )
             __L1:r(
                 c,
@@ -20321,11 +22291,22 @@ local __O = {};
                 )
             end
         elseif ____type == "reeis" then
-            local ____t_339 = __t
-            local ____t_338 = __t
-            local ____temp_337 = if __t(o.transformed) then o.transformed else o.powered
-            __O[258] = ____temp_337
-            if ____t_339(if ____t_338(____temp_337) then __O[258] else o.charging) then
+            local ____t_675 = __t
+            local ____t_result_674
+            local ____t_673 = __t
+            local ____t_result_672
+            if __t(o.transformed) then
+                ____t_result_672 = o.transformed
+            else
+                ____t_result_672 = o.powered
+            end
+            __O[258] = ____t_result_672
+            if ____t_673(____t_result_672) then
+                ____t_result_674 = __O[258]
+            else
+                ____t_result_674 = o.charging
+            end
+            if ____t_675(____t_result_674) then
                 c:save()
                 if __t(o.charging) then
                     c.globalAlpha = c.globalAlpha * (0.7 + math.sin(frame * 18) * 0.15)
@@ -20446,7 +22427,21 @@ local __O = {};
             )
             if __t(o.transformed) then
                 c:save()
-                c:translate(if __t(attackOn) then -math.floor(strike * 4 + 0.5) else 0, if __t(attackOn) then -math.floor(strike * 2 + 0.5) else 0)
+                local ____c_678 = c
+                local ____c_translate_679 = c.translate
+                local ____t_result_676
+                if __t(attackOn) then
+                    ____t_result_676 = -math.floor(strike * 4 + 0.5)
+                else
+                    ____t_result_676 = 0
+                end
+                local ____t_result_677
+                if __t(attackOn) then
+                    ____t_result_677 = -math.floor(strike * 2 + 0.5)
+                else
+                    ____t_result_677 = 0
+                end
+                ____c_translate_679(____c_678, ____t_result_676, ____t_result_677)
                 __L1:r(
                     c,
                     19,
@@ -20487,11 +22482,22 @@ local __O = {};
                     5,
                     skin
                 )
-                local ____t_342 = __t
-                local ____t_341 = __t
-                local ____temp_340 = if __t(attackOn) then progress > 0.34 else attackOn
-                __O[259] = ____temp_340
-                if ____t_342(if ____t_341(____temp_340) then progress < 0.56 else __O[259]) then
+                local ____t_683 = __t
+                local ____t_result_682
+                local ____t_681 = __t
+                local ____t_result_680
+                if __t(attackOn) then
+                    ____t_result_680 = progress > 0.34
+                else
+                    ____t_result_680 = attackOn
+                end
+                __O[259] = ____t_result_680
+                if ____t_681(____t_result_680) then
+                    ____t_result_682 = progress < 0.56
+                else
+                    ____t_result_682 = __O[259]
+                end
+                if ____t_683(____t_result_682) then
                     __L1:poly(
                         c,
                         __arrL(
@@ -20519,7 +22525,14 @@ local __O = {};
                 end
                 c:restore()
             end
-            if __t(if __t(o.powered) then o.powered else o.charging) then
+            local ____t_685 = __t
+            local ____t_result_684
+            if __t(o.powered) then
+                ____t_result_684 = o.powered
+            else
+                ____t_result_684 = o.charging
+            end
+            if ____t_685(____t_result_684) then
                 __L1:r(
                     c,
                     -9,
@@ -20586,7 +22599,7 @@ local __O = {};
                 2,
                 "#463835"
             )
-            local noseX = if o.view == "front" then 4 else 18
+            local noseX = o.view == "front" and 4 or 18
             __L1:oval(
                 c,
                 noseX,
@@ -20809,7 +22822,7 @@ local __O = {};
                         -64 - __mod(i, 2) * 2,
                         4,
                         4,
-                        if __t(__mod(i, 2)) then "#242a2b" else "#333b38",
+                        __t(__mod(i, 2)) and "#242a2b" or "#333b38",
                         2
                     )
                     i = i + 1
@@ -21370,13 +23383,20 @@ local __O = {};
                 1,
                 "#353c38"
             )
-            if __t(if __t(o.talking) then o.talking else math.sin(frame * 5) > 0) then
+            local ____t_687 = __t
+            local ____t_result_686
+            if __t(o.talking) then
+                ____t_result_686 = o.talking
+            else
+                ____t_result_686 = math.sin(frame * 5) > 0
+            end
+            if ____t_687(____t_result_686) then
                 __L1:r(
                     c,
                     5,
                     -44,
                     7,
-                    if math.sin(frame * 11) > 0 then 4 else 2,
+                    math.sin(frame * 11) > 0 and 4 or 2,
                     "#4e3c32"
                 )
                 __L1:r(
@@ -21388,7 +23408,14 @@ local __O = {};
                     "#e4c7a0"
                 )
             end
-            if __t(if __t(o.talking) then o.talking else not __t(moving)) then
+            local ____t_689 = __t
+            local ____t_result_688
+            if __t(o.talking) then
+                ____t_result_688 = o.talking
+            else
+                ____t_result_688 = not __t(moving)
+            end
+            if ____t_689(____t_result_688) then
                 __L1:r(
                     c,
                     __get(frontHand, 0) + 2,
@@ -21453,17 +23480,35 @@ local __O = {};
                 -53,
                 8,
                 2,
-                if __t(o.angry) then "#9c3f45" else "#473a36"
+                __t(o.angry) and "#9c3f45" or "#473a36"
             )
-            __L1:r(
-                c,
+            local ____L1_r_694 = __L1.r
+            local ____c_692 = c
+            local ____temp_693 = -50
+            local ____t_691 = __t
+            local ____t_result_690
+            if __t(o.angry) then
+                ____t_result_690 = o.angry
+            else
+                ____t_result_690 = o.rage
+            end
+            ____L1_r_694(
+                __L1,
+                ____c_692,
                 5,
-                -50,
+                ____temp_693,
                 3,
                 2,
-                if __t(if __t(o.angry) then o.angry else o.rage) then "#ff302f" else "#3a3039"
+                ____t_691(____t_result_690) and "#ff302f" or "#3a3039"
             )
-            if __t(if __t(o.angry) then o.angry else o.rage) then
+            local ____t_696 = __t
+            local ____t_result_695
+            if __t(o.angry) then
+                ____t_result_695 = o.angry
+            else
+                ____t_result_695 = o.rage
+            end
+            if ____t_696(____t_result_695) then
                 __L1:r(
                     c,
                     3,
@@ -21672,7 +23717,7 @@ local __O = {};
                     2,
                     "#302c35"
                 )
-                local ink = if __t(o.angry) then "#e67c68" else "#b59ac6"
+                local ink = __t(o.angry) and "#e67c68" or "#b59ac6"
                 do
                     local i = 0
                     while i < 5 do
@@ -21883,7 +23928,21 @@ local __O = {};
                 "#674f3a"
             )
             c:save()
-            c:translate(if __t(attackOn) then -math.floor(strike * 5 + 0.5) else 0, if __t(attackOn) then -math.floor(strike * 2 + 0.5) else 0)
+            local ____c_699 = c
+            local ____c_translate_700 = c.translate
+            local ____t_result_697
+            if __t(attackOn) then
+                ____t_result_697 = -math.floor(strike * 5 + 0.5)
+            else
+                ____t_result_697 = 0
+            end
+            local ____t_result_698
+            if __t(attackOn) then
+                ____t_result_698 = -math.floor(strike * 2 + 0.5)
+            else
+                ____t_result_698 = 0
+            end
+            ____c_translate_700(____c_699, ____t_result_697, ____t_result_698)
             __L1:r(
                 c,
                 15,
@@ -21908,7 +23967,7 @@ local __O = {};
                         20 + i * 5,
                         -31,
                         1,
-                        if __t(__mod(i, 2)) then 3 else 5,
+                        __t(__mod(i, 2)) and 3 or 5,
                         "#705a3b"
                     )
                     i = i + 1
@@ -22522,11 +24581,22 @@ local __O = {};
             )
             c:restore()
         end
-        local ____t_345 = __t
-        local ____t_344 = __t
-        local ____temp_343 = if __t(attackOn) then ____type == "daroca" else attackOn
-        __O[260] = ____temp_343
-        if ____t_345(if ____t_344(____temp_343) then attackType == "paper" else __O[260]) then
+        local ____t_704 = __t
+        local ____t_result_703
+        local ____t_702 = __t
+        local ____t_result_701
+        if __t(attackOn) then
+            ____t_result_701 = ____type == "daroca"
+        else
+            ____t_result_701 = attackOn
+        end
+        __O[260] = ____t_result_701
+        if ____t_702(____t_result_701) then
+            ____t_result_703 = attackType == "paper"
+        else
+            ____t_result_703 = __O[260]
+        end
+        if ____t_704(____t_result_703) then
             if progress < 0.5 then
                 local hx = __get(frontHand, 0)
                 local hy = __get(frontHand, 1)
@@ -22613,7 +24683,7 @@ local __O = {};
                             },
                             5
                         ),
-                        if o.attackElement == "electric" then "#b1e5e7" else "#f2b260"
+                        o.attackElement == "electric" and "#b1e5e7" or "#f2b260"
                     )
                     __L1:r(
                         c,
@@ -22669,7 +24739,14 @@ local __O = {};
                 )
             end
         end
-        if __t(if __t(flight) then ____type == "daroca" else flight) then
+        local ____t_706 = __t
+        local ____t_result_705
+        if __t(flight) then
+            ____t_result_705 = ____type == "daroca"
+        else
+            ____t_result_705 = flight
+        end
+        if ____t_706(____t_result_705) then
             __L1:r(
                 c,
                 -22,
@@ -22687,17 +24764,39 @@ local __O = {};
                 "#d1bd87"
             )
         end
-        local ____t_352 = __t
-        local ____t_347 = __t
-        local ____temp_346 = if __t(attackOn) then strike > 0.5 else attackOn
-        __O[263] = ____temp_346
-        local ____t_351 = __t
-        local ____t_349 = __t
-        local ____temp_348 = attackType == "punch"
-        __O[261] = ____temp_348
-        local ____temp_350 = if ____t_349(____temp_348) then __O[261] else ____type == "reeis" and not __t(o.transformed)
-        __O[262] = ____temp_350
-        if ____t_352(if ____t_347(____temp_346) then if ____t_351(____temp_350) then __O[262] else ____type == "caleb" else __O[263]) then
+        local ____t_715 = __t
+        local ____t_result_714
+        local ____t_708 = __t
+        local ____t_result_707
+        if __t(attackOn) then
+            ____t_result_707 = strike > 0.5
+        else
+            ____t_result_707 = attackOn
+        end
+        __O[263] = ____t_result_707
+        if ____t_708(____t_result_707) then
+            local ____t_result_713
+            local ____t_712 = __t
+            local ____t_result_711
+            local ____t_710 = __t
+            local ____temp_709 = attackType == "punch"
+            __O[261] = ____temp_709
+            if ____t_710(____temp_709) then
+                ____t_result_711 = __O[261]
+            else
+                ____t_result_711 = ____type == "reeis" and not __t(o.transformed)
+            end
+            __O[262] = ____t_result_711
+            if ____t_712(____t_result_711) then
+                ____t_result_713 = __O[262]
+            else
+                ____t_result_713 = ____type == "caleb"
+            end
+            ____t_result_714 = ____t_result_713
+        else
+            ____t_result_714 = __O[263]
+        end
+        if ____t_715(____t_result_714) then
             __L1:limb(
                 c,
                 __arrL(
@@ -22726,7 +24825,14 @@ local __O = {};
                 "#fff0b7"
             )
         end
-        if __t(if __t(o.dash) then o.dash else heroAnim == "dash") then
+        local ____t_717 = __t
+        local ____t_result_716
+        if __t(o.dash) then
+            ____t_result_716 = o.dash
+        else
+            ____t_result_716 = heroAnim == "dash"
+        end
+        if ____t_717(____t_result_716) then
             __L1:r(
                 c,
                 -31,
@@ -23218,22 +25324,34 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        local ____mod_356 = __mod
-        local ____mod_355 = __mod
-        local ____t_354 = __t
-        local ____TS__Number_result_353 = __TS__Number(variant)
-        __O[264] = ____TS__Number_result_353
-        local v = ____mod_356(
-            ____mod_355(if ____t_354(____TS__Number_result_353) then __O[264] else 0, 3) + 3,
+        local ____mod_722 = __mod
+        local ____mod_721 = __mod
+        local ____t_result_720
+        local ____t_719 = __t
+        local ____TS__Number_result_718 = __TS__Number(variant)
+        __O[264] = ____TS__Number_result_718
+        if ____t_719(____TS__Number_result_718) then
+            ____t_result_720 = __O[264]
+        else
+            ____t_result_720 = 0
+        end
+        local v = ____mod_722(
+            ____mod_721(____t_result_720, 3) + 3,
             3
         )
-        local ____t_358 = __t
-        local ____TS__Number_result_357 = __TS__Number(time)
-        __O[265] = ____TS__Number_result_357
-        local t = if ____t_358(____TS__Number_result_357) then __O[265] else 0
+        local ____t_result_725
+        local ____t_724 = __t
+        local ____TS__Number_result_723 = __TS__Number(time)
+        __O[265] = ____TS__Number_result_723
+        if ____t_724(____TS__Number_result_723) then
+            ____t_result_725 = __O[265]
+        else
+            ____t_result_725 = 0
+        end
+        local t = ____t_result_725
         local wiggle = math.floor(math.sin(t * 13 + v) * 2 + 0.5)
-        local ink = if __t(enraged) then "#692f42" else "#3d354c"
-        local edge = if __t(enraged) then "#db7467" else "#9e84ac"
+        local ink = __t(enraged) and "#692f42" or "#3d354c"
+        local edge = __t(enraged) and "#db7467" or "#9e84ac"
         local paper = "#f1dbad"
         if __t(enraged) then
             c:save()
@@ -23321,7 +25439,7 @@ local __O = {};
                 -7,
                 2,
                 4,
-                if __t(enraged) then "#c5484b" else "#61456f"
+                __t(enraged) and "#c5484b" or "#61456f"
             )
             __L1:r(
                 c,
@@ -23329,7 +25447,7 @@ local __O = {};
                 -7,
                 2,
                 4,
-                if __t(enraged) then "#c5484b" else "#61456f"
+                __t(enraged) and "#c5484b" or "#61456f"
             )
             __L1:r(
                 c,
@@ -23418,7 +25536,7 @@ local __O = {};
                 -7,
                 6,
                 10,
-                if __t(enraged) then "#b64b56" else "#705280"
+                __t(enraged) and "#b64b56" or "#705280"
             )
             __L1:r(
                 c,
@@ -23621,17 +25739,23 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        local kind = if type(____type) == "number" then __get(
-            __arrL({"pencil", "eraser", "clip"}, 3),
-            __mod(____type, 3)
-        ) else __re_replace(
-            __call(
-                tostring(____type),
-                "toLowerCase"
-            ),
-            __re("s$", ""),
-            ""
-        )
+        local ____temp_726
+        if type(____type) == "number" then
+            ____temp_726 = __get(
+                __arrL({"pencil", "eraser", "clip"}, 3),
+                __mod(____type, 3)
+            )
+        else
+            ____temp_726 = __re_replace(
+                __call(
+                    tostring(____type),
+                    "toLowerCase"
+                ),
+                __re("s$", ""),
+                ""
+            )
+        end
+        local kind = ____temp_726
         if kind == "eraser" then
             __L1:poly(
                 c,
@@ -23791,7 +25915,7 @@ local __O = {};
             t = 0
         end
         local english = id == "miqueias"
-        local accent = if __t(english) then "#796080" else "#527f93"
+        local accent = __t(english) and "#796080" or "#527f93"
         __L1:r(
             c,
             x - 53,
@@ -23822,7 +25946,7 @@ local __O = {};
             285,
             78,
             144,
-            if __t(english) then "#93868d" else "#7f9ba1"
+            __t(english) and "#93868d" or "#7f9ba1"
         )
         __L1:r(
             c,
@@ -23886,14 +26010,22 @@ local __O = {};
             244,
             146,
             19,
-            if __t(english) then "#a38ba8" else "#7fa0af"
+            __t(english) and "#a38ba8" or "#7fa0af"
         )
         c.fillStyle = "#fff1cb"
         c.font = "bold 11px monospace"
-        c:fillText(if __t(english) then "SALA · MIQUEIAS" else "SALA · ALMIRO", x - 66, 258)
+        c:fillText(
+            __t(english) and "SALA · MIQUEIAS" or "SALA · ALMIRO",
+            x - 66,
+            258
+        )
         c.fillStyle = "#c9ddbc"
         c.font = "bold 8px monospace"
-        c:fillText(if __t(english) then "ENGLISH IS VERY BOM" else "CIÊNCIAS DA ROÇA", x - 53, 311)
+        c:fillText(
+            __t(english) and "ENGLISH IS VERY BOM" or "CIÊNCIAS DA ROÇA",
+            x - 53,
+            311
+        )
         do
             local i = 0
             while i < 2 do
@@ -24219,7 +26351,7 @@ local __O = {};
                     )
                     c.fillStyle = "#204f57"
                     c.font = __add(
-                        __add("bold ", if i == 4 then 9 else 11),
+                        __add("bold ", i == 4 and 9 or 11),
                         "px monospace"
                     )
                     local words = __call(
@@ -24230,7 +26362,7 @@ local __O = {};
                     local line = ""
                     local yy = 304
                     for ____, word in __iterar((words)) do
-                        if __len(__add(line, word)) > if i == 4 then 21 else 18 then
+                        if __len(__add(line, word)) > (i == 4 and 21 or 18) then
                             c:fillText(
                                 __call(line, "trim"),
                                 x + 13,
@@ -24499,7 +26631,19 @@ local __O = {};
         if theme == nil then
             theme = "wood"
         end
-        local kind = if type(theme) == "table" then if __t(theme.theme) then theme.theme else "wood" else theme
+        local ____temp_728
+        if type(theme) == "table" then
+            local ____t_result_727
+            if __t(theme.theme) then
+                ____t_result_727 = theme.theme
+            else
+                ____t_result_727 = "wood"
+            end
+            ____temp_728 = ____t_result_727
+        else
+            ____temp_728 = theme
+        end
+        local kind = ____temp_728
         local colors = {
             house = __arrL({"#80634d", "#f0dbb4"}, 2),
             rayssa = __arrL({"#80634d", "#f0dbb4"}, 2),
@@ -24517,10 +26661,16 @@ local __O = {};
             gym = __arrL({"#3e514c", "#a4b39c"}, 2),
             court = __arrL({"#6f7968", "#d7c39b"}, 2)
         }
-        local ____t_360 = __t
-        local ____get_result_359 = __get(colors, kind)
-        __O[266] = ____get_result_359
-        local pal = if ____t_360(____get_result_359) then __O[266] else colors.wood
+        local ____t_result_731
+        local ____t_730 = __t
+        local ____get_result_729 = __get(colors, kind)
+        __O[266] = ____get_result_729
+        if ____t_730(____get_result_729) then
+            ____t_result_731 = __O[266]
+        else
+            ____t_result_731 = colors.wood
+        end
+        local pal = ____t_result_731
         c:save()
         __L1:r(
             c,
@@ -24591,7 +26741,7 @@ local __O = {};
             0,
             960,
             540,
-            if __t(en) then "#e3eef0" else "#e9f2f3"
+            __t(en) and "#e3eef0" or "#e9f2f3"
         )
         __L1:r(
             c,
@@ -24622,7 +26772,7 @@ local __O = {};
                             45 + row * 47,
                             54,
                             1,
-                            if __t(en) then "#c3b4a5" else "#9ab8c1"
+                            __t(en) and "#c3b4a5" or "#9ab8c1"
                         )
                         __L1:r(
                             c,
@@ -24630,7 +26780,7 @@ local __O = {};
                             45 + row * 47,
                             1,
                             41,
-                            if __t(en) then "#c3b4a5" else "#9ab8c1"
+                            __t(en) and "#c3b4a5" or "#9ab8c1"
                         )
                         col = col + 1
                     end
@@ -24717,7 +26867,7 @@ local __O = {};
             247,
             82,
             193,
-            if __t(en) then "#7b7a83" else "#6d8c97"
+            __t(en) and "#7b7a83" or "#6d8c97"
         )
         __L1:r(
             c,
@@ -24822,15 +26972,34 @@ local __O = {};
         )
         c.fillStyle = "#1d5155"
         c.font = __add(
-            __add("bold ", if __t(en) then 18 else 23),
+            __add(
+                "bold ",
+                __t(en) and 18 or 23
+            ),
             "px monospace"
         )
-        c:fillText(if __t(en) then "MY ENGLISH IS VERY BOM TODAY!" else "CIÊNCIAS DA ROÇA", if __t(en) then 315 else 331, 107)
+        c:fillText(
+            __t(en) and "MY ENGLISH IS VERY BOM TODAY!" or "CIÊNCIAS DA ROÇA",
+            __t(en) and 315 or 331,
+            107
+        )
         c.font = "bold 14px monospace"
-        c:fillText(if __t(en) then "The bolo are disappear." else "Bolo + sapo = aventura", 325, 140)
-        c:fillText(if __t(en) then "You is ready? ALLRIGHT!" else "Hipótese: o bolo foi roubado.", 325, 163)
+        c:fillText(
+            __t(en) and "The bolo are disappear." or "Bolo + sapo = aventura",
+            325,
+            140
+        )
+        c:fillText(
+            __t(en) and "You is ready? ALLRIGHT!" or "Hipótese: o bolo foi roubado.",
+            325,
+            163
+        )
         c.font = "bold 12px monospace"
-        c:fillText(if __t(en) then "BELEZA CREUZA!  CONCORDA OU SEM CORDA?" else "Observação + amizade + muita coragem", 325, 192)
+        c:fillText(
+            __t(en) and "BELEZA CREUZA!  CONCORDA OU SEM CORDA?" or "Observação + amizade + muita coragem",
+            325,
+            192
+        )
         __L1:r(
             c,
             311,
@@ -24875,10 +27044,26 @@ local __O = {};
                     55,
                     "#f0dfb0"
                 )
-                c.fillStyle = if __t(en) then "#74627f" else "#597687"
+                c.fillStyle = __t(en) and "#74627f" or "#597687"
                 c.font = "bold 9px monospace"
-                c:fillText(if __t(en) then if __t(i) then "HELLO, TURMA!" else "BOOK = LIVRO" else if __t(i) then "AULA COM HUMOR" else "PENSE. OBSERVE.", x + 8, 249)
-                c:fillText(if __t(en) then if __t(i) then "GOOD LANCHE!" else "CAKE = BOLO" else if __t(i) then "E CURIOSIDADE!" else "FAÇA PERGUNTAS.", x + 8, 267)
+                local ____c_733 = c
+                local ____c_fillText_734 = c.fillText
+                local ____t_result_732
+                if __t(en) then
+                    ____t_result_732 = __t(i) and "HELLO, TURMA!" or "BOOK = LIVRO"
+                else
+                    ____t_result_732 = __t(i) and "AULA COM HUMOR" or "PENSE. OBSERVE."
+                end
+                ____c_fillText_734(____c_733, ____t_result_732, x + 8, 249)
+                local ____c_736 = c
+                local ____c_fillText_737 = c.fillText
+                local ____t_result_735
+                if __t(en) then
+                    ____t_result_735 = __t(i) and "GOOD LANCHE!" or "CAKE = BOLO"
+                else
+                    ____t_result_735 = __t(i) and "E CURIOSIDADE!" or "FAÇA PERGUNTAS."
+                end
+                ____c_fillText_737(____c_736, ____t_result_735, x + 8, 267)
                 i = i + 1
             end
         end
@@ -24928,7 +27113,7 @@ local __O = {};
                             yy - 2 + bob,
                             29,
                             25,
-                            if __mod(i, 3) == 0 then "#e3ebed" else "#244e7b"
+                            __mod(i, 3) == 0 and "#e3ebed" or "#244e7b"
                         )
                         __L1:r(
                             c,
@@ -25118,7 +27303,7 @@ local __O = {};
             367,
             34,
             9,
-            if __t(en) then "#678b6f" else "#7b96a6"
+            __t(en) and "#678b6f" or "#7b96a6"
         )
         __L1:r(
             c,
@@ -25158,7 +27343,7 @@ local __O = {};
             440,
             960,
             100,
-            if __t(en) then "#a58d70" else "#8e9384"
+            __t(en) and "#a58d70" or "#8e9384"
         )
         __L1:r(
             c,
@@ -25194,7 +27379,13 @@ local __O = {};
     end
     __L1.newArena = function(self, c, ____type, camera, t, homeX)
         c:save()
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_738
+        if __t(homeX) then
+            ____t_result_738 = homeX - camera
+        else
+            ____t_result_738 = 480
+        end
+        local center = ____t_result_738
         c:translate(
             math.floor(center - 480 + 0.5),
             0
@@ -25430,7 +27621,7 @@ local __O = {};
                         yy,
                         2,
                         2,
-                        if __t(__mod(i, 2)) then "#e0f8d9" else "#f7e6aa"
+                        __t(__mod(i, 2)) and "#e0f8d9" or "#f7e6aa"
                     )
                     if __mod(i, 4) == 0 then
                         __L1:r(
@@ -25771,7 +27962,7 @@ local __O = {};
                         },
                         3
                     ),
-                    if __mod(i, 3) == 0 then "#e3b887" else if __mod(i, 3) == 1 then "#8dc4bf" else "#cb8e9f"
+                    __mod(i, 3) == 0 and "#e3b887" or (__mod(i, 3) == 1 and "#8dc4bf" or "#cb8e9f")
                 )
                 i = i + 1
             end
@@ -25836,7 +28027,13 @@ local __O = {};
         )
     end
     __L1.monitorArena = function(self, c, ____type, camera, t, homeX)
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_739
+        if __t(homeX) then
+            ____t_result_739 = homeX - camera
+        else
+            ____t_result_739 = 480
+        end
+        local center = ____t_result_739
         __L1:r(
             c,
             0,
@@ -25932,7 +28129,7 @@ local __O = {};
         c.fillStyle = "#fff0c4"
         c.font = "bold 21px monospace"
         c.textAlign = "center"
-        c:fillText(if ____type == "igor" then "CANTINA · FISCALIZAÇÃO DO LANCHE" else "CORREDOR · FISCALIZAÇÃO MÁXIMA", 480, 75)
+        c:fillText(____type == "igor" and "CANTINA · FISCALIZAÇÃO DO LANCHE" or "CORREDOR · FISCALIZAÇÃO MÁXIMA", 480, 75)
         if ____type == "igor" then
             __L1:r(
                 c,
@@ -26117,7 +28314,13 @@ local __O = {};
         end
         c:save()
         c.imageSmoothingEnabled = false
-        local ____type = if type(bossType) == "table" then bossType.type else bossType
+        local ____temp_740
+        if type(bossType) == "table" then
+            ____temp_740 = bossType.type
+        else
+            ____temp_740 = bossType
+        end
+        local ____type = ____temp_740
         if __t(____type == "dede" or ____type == "arthur") then
             __L1:questArena(
                 c,
@@ -26151,7 +28354,13 @@ local __O = {};
             c:restore()
             return
         end
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_741
+        if __t(homeX) then
+            ____t_result_741 = homeX - camera
+        else
+            ____t_result_741 = 480
+        end
+        local center = ____t_result_741
         if __t(____type == "igor" or ____type == "kaique") then
             __L1:monitorArena(
                 c,
@@ -26171,7 +28380,7 @@ local __O = {};
             0,
             960,
             540,
-            if __t(marco) then "#27233d" else if __t(menezes) then "#382b35" else "#8bb7d3"
+            __t(marco) and "#27233d" or (__t(menezes) and "#382b35" or "#8bb7d3")
         )
         c:save()
         c:translate(
@@ -26197,7 +28406,7 @@ local __O = {};
                             },
                             7
                         ),
-                        if __t(__mod(i, 2)) then "#69617d" else "#5a546e"
+                        __t(__mod(i, 2)) and "#69617d" or "#5a546e"
                     )
                     __L1:r(
                         c,
@@ -26379,7 +28588,7 @@ local __O = {};
             do
                 local side = 0
                 while side < 2 do
-                    local x = if __t(side) then 817 else -200
+                    local x = __t(side) and 817 or -200
                     __L1:r(
                         c,
                         x,
@@ -26802,7 +29011,7 @@ local __O = {};
             440,
             960,
             100,
-            if __t(marco) then "#4c3a5e" else if __t(menezes) then "#755d47" else "#865c40"
+            __t(marco) and "#4c3a5e" or (__t(menezes) and "#755d47" or "#865c40")
         )
         __L1:r(
             c,
@@ -26810,7 +29019,7 @@ local __O = {};
             440,
             960,
             6,
-            if __t(marco) then "#c19bc6" else if __t(menezes) then "#dbbd86" else "#d8ba7b"
+            __t(marco) and "#c19bc6" or (__t(menezes) and "#dbbd86" or "#d8ba7b")
         )
         do
             local i = 0
@@ -26821,7 +29030,7 @@ local __O = {};
                     451,
                     1,
                     89,
-                    if __t(marco) then "#735780" else if __t(menezes) then "#a18461" else "#a98256"
+                    __t(marco) and "#735780" or (__t(menezes) and "#a18461" or "#a98256")
                 )
                 __L1:r(
                     c,
@@ -26829,7 +29038,7 @@ local __O = {};
                     473,
                     26,
                     2,
-                    if __t(marco) then "#8b6594" else if __t(menezes) then "#8f7255" else "#b2925c"
+                    __t(marco) and "#8b6594" or (__t(menezes) and "#8f7255" or "#b2925c")
                 )
                 i = i + 1
             end
@@ -26849,22 +29058,49 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1, 1)
-        local ____t_362 = __t
-        local ____TS__Number_result_361 = __TS__Number(o.scale)
-        __O[267] = ____TS__Number_result_361
-        local scale = if ____t_362(____TS__Number_result_361) then __O[267] else 1
+        c:scale(
+            __lt(o.facing, 0) and -1 or 1,
+            1
+        )
+        local ____t_result_744
+        local ____t_743 = __t
+        local ____TS__Number_result_742 = __TS__Number(o.scale)
+        __O[267] = ____TS__Number_result_742
+        if ____t_743(____TS__Number_result_742) then
+            ____t_result_744 = __O[267]
+        else
+            ____t_result_744 = 1
+        end
+        local scale = ____t_result_744
         c:scale(scale, scale)
-        local ____t_364 = __t
-        local ____TS__Number_result_363 = __TS__Number(o.tier)
-        __O[268] = ____TS__Number_result_363
+        local ____t_result_747
+        local ____t_746 = __t
+        local ____TS__Number_result_745 = __TS__Number(o.tier)
+        __O[268] = ____TS__Number_result_745
+        if ____t_746(____TS__Number_result_745) then
+            ____t_result_747 = __O[268]
+        else
+            ____t_result_747 = 1
+        end
         local tier = math.max(
             1,
-            math.min(4, if ____t_364(____TS__Number_result_363) then __O[268] else 1)
+            math.min(4, ____t_result_747)
         )
         local walking = o.moving ~= false
-        local step = if __t(walking) then math.sin(t * 9) * 7 else 0
-        local bob = if __t(walking) then math.floor(math.abs(math.sin(t * 9)) * 2 + 0.5) else math.floor(math.sin(t * 2) + 0.5)
+        local ____t_result_748
+        if __t(walking) then
+            ____t_result_748 = math.sin(t * 9) * 7
+        else
+            ____t_result_748 = 0
+        end
+        local step = ____t_result_748
+        local ____t_result_749
+        if __t(walking) then
+            ____t_result_749 = math.floor(math.abs(math.sin(t * 9)) * 2 + 0.5)
+        else
+            ____t_result_749 = math.floor(math.sin(t * 2) + 0.5)
+        end
+        local bob = ____t_result_749
         __L1:oval(
             c,
             0,
@@ -26900,7 +29136,7 @@ local __O = {};
                     3
                 ),
                 5,
-                if __t(__mod(tier, 2)) then "#3e5267" else "#4f4b59"
+                __t(__mod(tier, 2)) and "#3e5267" or "#4f4b59"
             )
             __L1:r(
                 c,
@@ -27032,8 +29268,14 @@ local __O = {};
             1,
             "#657a79"
         )
-        local recoil = if __t(o.attack) then math.floor((0.5 + 0.5 * math.sin(t * 25)) * 4 + 0.5) else 0
-        local barrel = if o.weapon == "carbine" then 37 else if o.weapon == "scatter" then 31 else 20
+        local ____t_result_750
+        if __t(o.attack) then
+            ____t_result_750 = math.floor((0.5 + 0.5 * math.sin(t * 25)) * 4 + 0.5)
+        else
+            ____t_result_750 = 0
+        end
+        local recoil = ____t_result_750
+        local barrel = o.weapon == "carbine" and 37 or (o.weapon == "scatter" and 31 or 20)
         c:save()
         c:translate(-recoil, 0)
         __L1:limb(
@@ -27163,7 +29405,14 @@ local __O = {};
                 "#354d56"
             )
         end
-        if __t(if __t(o.attack) then math.sin(t * 29) > 0.7 else o.attack) then
+        local ____t_752 = __t
+        local ____t_result_751
+        if __t(o.attack) then
+            ____t_result_751 = math.sin(t * 29) > 0.7
+        else
+            ____t_result_751 = o.attack
+        end
+        if ____t_752(____t_result_751) then
             __L1:poly(
                 c,
                 __arrL(
@@ -27240,15 +29489,30 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1, 1)
-        local ____t_366 = __t
-        local ____TS__Number_result_365 = __TS__Number(o.scale)
-        __O[269] = ____TS__Number_result_365
-        local size = if ____t_366(____TS__Number_result_365) then __O[269] else 1
+        c:scale(
+            __lt(o.facing, 0) and -1 or 1,
+            1
+        )
+        local ____t_result_755
+        local ____t_754 = __t
+        local ____TS__Number_result_753 = __TS__Number(o.scale)
+        __O[269] = ____TS__Number_result_753
+        if ____t_754(____TS__Number_result_753) then
+            ____t_result_755 = __O[269]
+        else
+            ____t_result_755 = 1
+        end
+        local size = ____t_result_755
         c:scale(size, size)
         local pulse = math.floor(math.sin(t * 3) * 3 + 0.5)
         local attack = not not __t(o.attack)
-        local raise = if __t(attack) then math.floor((0.5 + 0.5 * math.sin(t * 5)) * 30 + 0.5) else 0
+        local ____t_result_756
+        if __t(attack) then
+            ____t_result_756 = math.floor((0.5 + 0.5 * math.sin(t * 5)) * 30 + 0.5)
+        else
+            ____t_result_756 = 0
+        end
+        local raise = ____t_result_756
         __L1:oval(
             c,
             0,
@@ -27259,10 +29523,16 @@ local __O = {};
             4
         )
         for ____, side in __iterar((__arrL({-1, 1}, 2))) do
-            local lift = if __t(o.moving) then math.max(
-                0,
-                math.sin(t * 5 + side)
-            ) * 8 else 0
+            local ____t_result_757
+            if __t(o.moving) then
+                ____t_result_757 = math.max(
+                    0,
+                    math.sin(t * 5 + side)
+                ) * 8
+            else
+                ____t_result_757 = 0
+            end
+            local lift = ____t_result_757
             __L1:poly(
                 c,
                 __arrL(
@@ -27278,7 +29548,7 @@ local __O = {};
             )
             __L1:r(
                 c,
-                if side > 0 then 23 else -62,
+                side > 0 and 23 or -62,
                 -13 - lift,
                 40,
                 12,
@@ -27286,7 +29556,7 @@ local __O = {};
             )
             __L1:r(
                 c,
-                if side > 0 then 27 else -57,
+                side > 0 and 27 or -57,
                 -10 - lift,
                 31,
                 4,
@@ -27356,7 +29626,14 @@ local __O = {};
             "#6d527f"
         )
         for ____, side in __iterar((__arrL({-1, 1}, 2))) do
-            local yy = -106 - raise + if side > 0 then pulse else -pulse
+            local ____temp_759 = -106 - raise
+            local ____temp_758
+            if side > 0 then
+                ____temp_758 = pulse
+            else
+                ____temp_758 = -pulse
+            end
+            local yy = ____temp_759 + ____temp_758
             __L1:limb(
                 c,
                 __arrL(
@@ -27400,9 +29677,18 @@ local __O = {};
             do
                 local j = 0
                 while j < 3 do
-                    __L1:r(
-                        c,
-                        if side > 0 then 91 + j * 7 else -112 + j * 7,
+                    local ____L1_r_762 = __L1.r
+                    local ____c_761 = c
+                    local ____temp_760
+                    if side > 0 then
+                        ____temp_760 = 91 + j * 7
+                    else
+                        ____temp_760 = -112 + j * 7
+                    end
+                    ____L1_r_762(
+                        __L1,
+                        ____c_761,
+                        ____temp_760,
                         yy + 46,
                         5,
                         15,
@@ -27506,7 +29792,7 @@ local __O = {};
             4,
             "#f6e3ed"
         )
-        local maw = if __t(attack) then 23 else 15 + math.floor(math.sin(t * 2) * 2 + 0.5)
+        local maw = __t(attack) and 23 or 15 + math.floor(math.sin(t * 2) * 2 + 0.5)
         __L1:r(
             c,
             -35,
@@ -27572,7 +29858,7 @@ local __O = {};
                     yy,
                     3,
                     6,
-                    if __t(__mod(i, 2)) then "#c6a1cb" else "#98ba8a"
+                    __t(__mod(i, 2)) and "#c6a1cb" or "#98ba8a"
                 )
                 i = i + 1
             end
@@ -27604,14 +29890,14 @@ local __O = {};
             math.floor(y + 0.5)
         )
         local alpha = c.globalAlpha
-        c.globalAlpha = c.globalAlpha * if __t(active) then 0.9 else 0.65
+        c.globalAlpha = c.globalAlpha * (__t(active) and 0.9 or 0.65)
         __L1:oval(
             c,
             0,
             -2,
             36,
             7,
-            if __t(active) then "#a13c45" else "#5d416b",
+            __t(active) and "#a13c45" or "#5d416b",
             2
         )
         __L1:r(
@@ -27620,7 +29906,7 @@ local __O = {};
             -7,
             65,
             10,
-            if __t(active) then "#e14b4b" else "#9e78a7"
+            __t(active) and "#e14b4b" or "#9e78a7"
         )
         __L1:r(
             c,
@@ -27628,9 +29914,9 @@ local __O = {};
             -6,
             59,
             6,
-            if __t(active) then "#582b40" else "#3a344f"
+            __t(active) and "#582b40" or "#3a344f"
         )
-        c.fillStyle = if __t(active) then "#ffe1ca" else "#d9b9d8"
+        c.fillStyle = __t(active) and "#ffe1ca" or "#d9b9d8"
         c.font = "bold 9px monospace"
         c.textAlign = "center"
         c:fillText("SARUÊ!", 0, 1)
@@ -27674,7 +29960,13 @@ local __O = {};
     end
     __L1.specialArena = function(self, c, ____type, camera, t, homeX)
         c:save()
-        local center = if __t(homeX) then homeX - camera else 480
+        local ____t_result_763
+        if __t(homeX) then
+            ____t_result_763 = homeX - camera
+        else
+            ____t_result_763 = 480
+        end
+        local center = ____t_result_763
         if ____type == "reeisBoss" then
             __L1:sky(c, 5, camera * 0.1, t)
             __L1:favela(c, camera * 0.24, t)
@@ -27910,7 +30202,7 @@ local __O = {};
                             },
                             3
                         ),
-                        if __t(__mod(i, 2)) then "#7fc6c6" else "#d8bd78"
+                        __t(__mod(i, 2)) and "#7fc6c6" or "#d8bd78"
                     )
                     i = i + 1
                 end
@@ -28145,7 +30437,10 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1, 1)
+        c:scale(
+            __lt(o.facing, 0) and -1 or 1,
+            1
+        )
         local bob = math.floor(math.sin(t * 7) * 3 + 0.5)
         __L1:oval(
             c,
@@ -28590,10 +30885,34 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local ____t_368 = __t
-        local ____temp_367 = if __t(o.design) then o.design else o.variant
-        __O[270] = ____temp_367
-        local design = tostring(if ____t_368(____temp_367) then __O[270] else if __t(if __t(o.type) then o.type ~= "doodle" else o.type) then o.type else kind)
+        local ____t_result_769
+        local ____t_765 = __t
+        local ____t_result_764
+        if __t(o.design) then
+            ____t_result_764 = o.design
+        else
+            ____t_result_764 = o.variant
+        end
+        __O[270] = ____t_result_764
+        if ____t_765(____t_result_764) then
+            ____t_result_769 = __O[270]
+        else
+            local ____t_result_768
+            local ____t_767 = __t
+            local ____t_result_766
+            if __t(o.type) then
+                ____t_result_766 = o.type ~= "doodle"
+            else
+                ____t_result_766 = o.type
+            end
+            if ____t_767(____t_result_766) then
+                ____t_result_768 = o.type
+            else
+                ____t_result_768 = kind
+            end
+            ____t_result_769 = ____t_result_768
+        end
+        local design = tostring(____t_result_769)
         if __t(__call(
             __arrL({"spindle", "wobbler", "pasta"}, 3),
             "includes",
@@ -28635,12 +30954,21 @@ local __O = {};
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -1 else 1, 1)
-        local ____t_370 = __t
-        local ____TS__Number_result_369 = __TS__Number(kind)
-        __O[271] = ____TS__Number_result_369
-        local k = if ____t_370(____TS__Number_result_369) then __O[271] else 0
-        local bob = if o.moving == false then 0 else math.floor(math.sin(t * 9 + k) * 2 + 0.5)
+        c:scale(
+            __lt(o.facing, 0) and -1 or 1,
+            1
+        )
+        local ____t_result_772
+        local ____t_771 = __t
+        local ____TS__Number_result_770 = __TS__Number(kind)
+        __O[271] = ____TS__Number_result_770
+        if ____t_771(____TS__Number_result_770) then
+            ____t_result_772 = __O[271]
+        else
+            ____t_result_772 = 0
+        end
+        local k = ____t_result_772
+        local bob = o.moving == false and 0 or math.floor(math.sin(t * 9 + k) * 2 + 0.5)
         __L1:oval(
             c,
             0,
@@ -28788,34 +31116,45 @@ local __O = {};
         flight = 4
     }, "idle,walk,jump,fall,land,dash,paper,fart,flight")
     __L1.worldWidth = function(____, scene)
-        local ____t_377 = __t
-        local ____t_375 = __t
-        local ____getq_373 = __getq
-        local ____opt_371 = window.WorldData
-        if ____opt_371 ~= nil then
-            ____opt_371 = ____opt_371.widths
+        local ____t_result_780
+        local ____t_779 = __t
+        local ____t_result_778
+        local ____t_777 = __t
+        local ____getq_775 = __getq
+        local ____opt_773 = window.WorldData
+        if ____opt_773 ~= nil then
+            ____opt_773 = ____opt_773.widths
         end
-        local ____TS__Number_result_374 = __TS__Number(____getq_373(____opt_371, scene))
-        __O[151] = ____TS__Number_result_374
-        local ____temp_376 = if ____t_375(____TS__Number_result_374) then __O[151] else __get(
-            __arrL({
-                4800,
-                6200,
-                5000,
-                5200,
-                6000,
-                7200,
-                6600,
-                4800,
-                3600,
-                4200,
-                3600,
-                4800
-            }, 12),
-            scene
-        )
-        __O[152] = ____temp_376
-        return if ____t_377(____temp_376) then __O[152] else 4800
+        local ____TS__Number_result_776 = __TS__Number(____getq_775(____opt_773, scene))
+        __O[151] = ____TS__Number_result_776
+        if ____t_777(____TS__Number_result_776) then
+            ____t_result_778 = __O[151]
+        else
+            ____t_result_778 = __get(
+                __arrL({
+                    4800,
+                    6200,
+                    5000,
+                    5200,
+                    6000,
+                    7200,
+                    6600,
+                    4800,
+                    3600,
+                    4200,
+                    3600,
+                    4800
+                }, 12),
+                scene
+            )
+        end
+        __O[152] = ____t_result_778
+        if ____t_779(____t_result_778) then
+            ____t_result_780 = __O[152]
+        else
+            ____t_result_780 = 4800
+        end
+        return ____t_result_780
     end
     __L1.r = function(____, c, x, y, w, h, color)
         c.fillStyle = color
@@ -28847,7 +31186,14 @@ local __O = {};
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
                 local m = c:getTransform()
-                return true, m.e / if __t(m.a) then m.a else 1 + x
+                local ____m_e_782 = m.e
+                local ____t_result_781
+                if __t(m.a) then
+                    ____t_result_781 = m.a
+                else
+                    ____t_result_781 = 1
+                end
+                return true, ____m_e_782 / ____t_result_781 + x
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -28934,7 +31280,7 @@ local __O = {};
         },
         "day,afternoon,golden,plaza"
     )
-    __L1.skyFor = function(____, scene) return if scene == 3 then "afternoon" else if scene == 5 then "golden" else if scene == 4 then "plaza" else "day" end
+    __L1.skyFor = function(____, scene) return scene == 3 and "afternoon" or (scene == 5 and "golden" or (scene == 4 and "plaza" or "day")) end
     __L1.OUTDOOR = __TS__New(
         Set,
         __arrL({
@@ -28982,18 +31328,24 @@ local __O = {};
         ["4"] = __ord({halfWidth = 185, height = 340, centerY = 170, visualHalfWidth = 210}, "halfWidth,height,centerY,visualHalfWidth")
     }
     __L1.nikolasBounds = function(____, phase)
-        local ____get_381 = __get
-        local ____L1_nikolasFormGeometry_380 = __L1.nikolasFormGeometry
-        local ____t_379 = __t
-        local ____TS__Number_result_378 = __TS__Number(phase)
-        __O[193] = ____TS__Number_result_378
-        return ____get_381(
-            ____L1_nikolasFormGeometry_380,
+        local ____get_787 = __get
+        local ____L1_nikolasFormGeometry_786 = __L1.nikolasFormGeometry
+        local ____t_result_785
+        local ____t_784 = __t
+        local ____TS__Number_result_783 = __TS__Number(phase)
+        __O[193] = ____TS__Number_result_783
+        if ____t_784(____TS__Number_result_783) then
+            ____t_result_785 = __O[193]
+        else
+            ____t_result_785 = 1
+        end
+        return ____get_787(
+            ____L1_nikolasFormGeometry_786,
             math.max(
                 1,
                 math.min(
                     4,
-                    math.floor(if ____t_379(____TS__Number_result_378) then __O[193] else 1)
+                    math.floor(____t_result_785)
                 )
             )
         )

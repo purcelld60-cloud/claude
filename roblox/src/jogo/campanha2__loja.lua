@@ -32,11 +32,17 @@ local __O = {};
             local i = 0
             while i < 8 do
                 local p = pos(nil, i)
-                local ____t_14 = __t
-                local ____t_13 = __t
-                local ____temp_12 = math.abs(x - p.x) < 15 and __gt(y, p.y - 50)
-                __O[509] = ____temp_12
-                if ____t_14(if ____t_13(____temp_12) then __lt(y, p.y + 22) else __O[509]) then
+                local ____t_20 = __t
+                local ____t_result_19
+                local ____t_18 = __t
+                local ____temp_17 = math.abs(x - p.x) < 15 and __gt(y, p.y - 50)
+                __O[509] = ____temp_17
+                if ____t_18(____temp_17) then
+                    ____t_result_19 = __lt(y, p.y + 22)
+                else
+                    ____t_result_19 = __O[509]
+                end
+                if ____t_20(____t_result_19) then
                     return i
                 end
                 i = i + 1
@@ -68,7 +74,7 @@ local __O = {};
         else
             falar(
                 nil,
-                (((("Essa aí? Só depois que alguém der um jeito n" .. if __call(
+                (((("Essa aí? Só depois que alguém der um jeito n" .. (__call(
                     __get(
                         __get(DONO, p.id),
                         1
@@ -76,28 +82,28 @@ local __O = {};
                     "slice",
                     0,
                     1
-                ) == "a" then "a" else "o") .. tostring(__call(
+                ) == "a" and "a" or "o")) .. tostring(__call(
                     __get(
                         __get(DONO, p.id),
                         1
                     ),
                     "slice",
                     1
-                ))) .. ". O ingrediente tá com ") .. if __t(__call(
+                ))) .. ". O ingrediente tá com ") .. (__t(__call(
                     __get(
                         __get(DONO, p.id),
                         1
                     ),
                     "startsWith",
                     "os"
-                )) then "eles" else if __t(__call(
+                )) and "eles" or (__t(__call(
                     __get(
                         __get(DONO, p.id),
                         1
                     ),
                     "startsWith",
                     "a"
-                )) then "ela" else "ele") .. "!",
+                )) and "ela" or "ele"))) .. "!",
                 "nega"
             )
         end
@@ -115,21 +121,54 @@ local __O = {};
         )
         local preco = __get(PRECO, p.id)
         local livre = liberada(nil, p.id)
-        local ____t_16 = __t
-        local ____temp_15 = __ge(st.moedas, preco) and not __t(tem)
-        __O[510] = ____temp_15
-        local pode = if ____t_16(____temp_15) then livre else __O[510]
-        box:querySelector(".perg").innerHTML = ((((((((("<b>GARRAFADA DE " .. tostring(p.nome)) .. "</b>") .. tostring(if __t(if __t(livre) then livre else tem) then p.desc else ("<span class=\"tranca\">🔒 Ainda não chegou na banca. Derrote " .. tostring(__call(
-            __re_replace(
-                __get(
-                    __get(DONO, p.id),
-                    1
+        local ____t_result_23
+        local ____t_22 = __t
+        local ____temp_21 = __ge(st.moedas, preco) and not __t(tem)
+        __O[510] = ____temp_21
+        if ____t_22(____temp_21) then
+            ____t_result_23 = livre
+        else
+            ____t_result_23 = __O[510]
+        end
+        local pode = ____t_result_23
+        local ____temp_30 = box:querySelector(".perg")
+        local ____p_nome_29 = p.nome
+        local ____t_result_26
+        local ____t_25 = __t
+        local ____t_result_24
+        if __t(livre) then
+            ____t_result_24 = livre
+        else
+            ____t_result_24 = tem
+        end
+        if ____t_25(____t_result_24) then
+            ____t_result_26 = p.desc
+        else
+            ____t_result_26 = ("<span class=\"tranca\">🔒 Ainda não chegou na banca. Derrote " .. tostring(__call(
+                __re_replace(
+                    __get(
+                        __get(DONO, p.id),
+                        1
+                    ),
+                    __re("^(a|o|os) ", ""),
+                    ""
                 ),
-                __re("^(a|o|os) ", ""),
-                ""
-            ),
-            "toUpperCase"
-        ))) .. " para o Seu Lindomar conseguir o ingrediente.</span>")) .. "<div class=\"p\">") .. if __t(tem) then "✔ VOCÊ JÁ TEM" else if __t(livre) then ("PREÇO: ● " .. tostring(preco)) .. " moedas" else "PREÇO: ● ???") .. "</div><div class=\"bts\"><button type=\"button\" class=\"comprar\" ") .. if __t(pode) then "" else "disabled") .. ">") .. if __t(tem) then "JÁ É SUA" else if __t(livre) then "COMPRAR" else "🔒 TRANCADA") .. "</button><button type=\"button\" class=\"mural\">MONTAR BUILD</button></div>"
+                "toUpperCase"
+            ))) .. " para o Seu Lindomar conseguir o ingrediente.</span>"
+        end
+        local ____t_result_28
+        if __t(tem) then
+            ____t_result_28 = "✔ VOCÊ JÁ TEM"
+        else
+            local ____t_result_27
+            if __t(livre) then
+                ____t_result_27 = ("PREÇO: ● " .. tostring(preco)) .. " moedas"
+            else
+                ____t_result_27 = "PREÇO: ● ???"
+            end
+            ____t_result_28 = ____t_result_27
+        end
+        ____temp_30.innerHTML = ((((((((("<b>GARRAFADA DE " .. tostring(____p_nome_29)) .. "</b>") .. tostring(____t_result_26)) .. "<div class=\"p\">") .. ____t_result_28) .. "</div><div class=\"bts\"><button type=\"button\" class=\"comprar\" ") .. (__t(pode) and "" or "disabled")) .. ">") .. (__t(tem) and "JÁ É SUA" or (__t(livre) and "COMPRAR" or "🔒 TRANCADA"))) .. "</button><button type=\"button\" class=\"mural\">MONTAR BUILD</button></div>"
         box:querySelector(".comprar"):addEventListener("click", comprar)
         box:querySelector(".mural"):addEventListener(
             "click",
@@ -224,7 +263,7 @@ local __O = {};
                     0,
                     16,
                     190,
-                    if __t(__mod(x, 32)) then "#6a4428" else "#5e3c24"
+                    __t(__mod(x, 32)) and "#6a4428" or "#5e3c24"
                 )
                 R(
                     nil,
@@ -377,7 +416,7 @@ local __O = {};
         do
             local k = 0
             while k < 9 do
-                local hx = 20 + k * 52 + if k > 1 then 70 else 0
+                local hx = 20 + k * 52 + (k > 1 and 70 or 0)
                 local sw = math.sin(t * 1.3 + k) * 1.5
                 if hx > LW then
                     break
@@ -480,10 +519,22 @@ local __O = {};
         local resp = math.floor(math.sin(t * 2) * 1.2 + 0.5)
         local pisca = __mod(t, 3.4) < 0.12
         local h = humor
-        local lean = if h == "aponta" then math.min(1, humorT * 4) * 6 else 0
+        local ____temp_34
+        if h == "aponta" then
+            ____temp_34 = math.min(1, humorT * 4) * 6
+        else
+            ____temp_34 = 0
+        end
+        local lean = ____temp_34
         local ri = h == "ri" and humorT < 1.6
         local nega = h == "nega" and humorT < 1.2
-        local shake = if __t(nega) then math.floor(math.sin(humorT * 30) * 3 + 0.5) else 0
+        local ____t_result_35
+        if __t(nega) then
+            ____t_result_35 = math.floor(math.sin(humorT * 30) * 3 + 0.5)
+        else
+            ____t_result_35 = 0
+        end
+        local shake = ____t_result_35
         local y0 = by - 120 + resp
         R(
             nil,
@@ -525,7 +576,19 @@ local __O = {};
             10,
             "#c43c3a"
         )
-        local braco = if h == "aponta" then -18 - lean else if __t(ri) then -10 + math.sin(humorT * 12) * 4 else 0
+        local ____temp_37
+        if h == "aponta" then
+            ____temp_37 = -18 - lean
+        else
+            local ____t_result_36
+            if __t(ri) then
+                ____t_result_36 = -10 + math.sin(humorT * 12) * 4
+            else
+                ____t_result_36 = 0
+            end
+            ____temp_37 = ____t_result_36
+        end
+        local braco = ____temp_37
         R(
             nil,
             bx + 80,
@@ -693,7 +756,7 @@ local __O = {};
             8,
             "#c48a64"
         )
-        local bg = math.floor(math.sin(t * 5) * if __t(ri) then 2 else 0.6 + 0.5)
+        local bg = math.floor(math.sin(t * 5) * (__t(ri) and 2 or 0.6) + 0.5)
         R(
             nil,
             hx + 6,
@@ -877,14 +940,32 @@ local __O = {};
             p.id
         )
         local on = i == sel
-        local sobe = if __t(on) then 10 + math.sin(t * 3) * 2 else math.sin(t * 2 + i) * 0.6
+        local ____t_result_38
+        if __t(on) then
+            ____t_result_38 = 10 + math.sin(t * 3) * 2
+        else
+            ____t_result_38 = math.sin(t * 2 + i) * 0.6
+        end
+        local sobe = ____t_result_38
         local x = q.x
         local y = q.y - sobe
-        local ____t_20 = __t
-        local ____liberada_result_19 = liberada(nil, p.id)
-        __O[511] = ____liberada_result_19
-        local livre = if ____t_20(____liberada_result_19) then __O[511] else tem
-        local cor = if __t(livre) then p.cor else "#2a1e16"
+        local ____t_result_41
+        local ____t_40 = __t
+        local ____liberada_result_39 = liberada(nil, p.id)
+        __O[511] = ____liberada_result_39
+        if ____t_40(____liberada_result_39) then
+            ____t_result_41 = __O[511]
+        else
+            ____t_result_41 = tem
+        end
+        local livre = ____t_result_41
+        local ____t_result_42
+        if __t(livre) then
+            ____t_result_42 = p.cor
+        else
+            ____t_result_42 = "#2a1e16"
+        end
+        local cor = ____t_result_42
         local forma = __get(GARRAFA, p.id)
         if __t(on) then
             local g = c:createRadialGradient(
@@ -914,7 +995,7 @@ local __O = {};
             3,
             "rgba(0,0,0,.35)"
         )
-        local vid = if __t(livre) then "#dceef2" else "#3a2e24"
+        local vid = __t(livre) and "#dceef2" or "#3a2e24"
         local function liq(____, yy, h, w)
             R(
                 nil,
@@ -1067,7 +1148,7 @@ local __O = {};
                 y - 18,
                 20,
                 18,
-                if __t(livre) then "#f6f2ea" else vid
+                __t(livre) and "#f6f2ea" or vid
             )
             R(
                 nil,
@@ -1083,7 +1164,7 @@ local __O = {};
                 y - 14,
                 6,
                 3,
-                if __t(livre) then "#f6f2ea" else vid
+                __t(livre) and "#f6f2ea" or vid
             )
             R(
                 nil,
@@ -1091,7 +1172,7 @@ local __O = {};
                 y - 22,
                 8,
                 4,
-                if __t(livre) then "#f6f2ea" else vid
+                __t(livre) and "#f6f2ea" or vid
             )
             do
                 local k = 0
@@ -1140,7 +1221,7 @@ local __O = {};
                 y - 16,
                 12,
                 8,
-                if __t(livre) then "#f2e8c8" else "#4a3a2e"
+                __t(livre) and "#f2e8c8" or "#4a3a2e"
             )
             R(
                 nil,
@@ -1148,7 +1229,7 @@ local __O = {};
                 y - 14,
                 6,
                 4,
-                if __t(livre) then "#c43c3a" else "#3a2a20"
+                __t(livre) and "#c43c3a" or "#3a2a20"
             )
         end
         if forma == "tubo" then
@@ -1359,10 +1440,10 @@ local __O = {};
                 1,
                 "#ffffff"
             )
-            c.fillStyle = if __ge(
+            c.fillStyle = __ge(
                 st.moedas,
                 __get(PRECO, p.id)
-            ) then "#3a2414" else "#a83a2a"
+            ) and "#3a2414" or "#a83a2a"
             c:fillText(
                 __add(
                     "●",
@@ -1488,22 +1569,24 @@ local __O = {};
             )
         end
         for ____, m in __iterar((moedaFx)) do
-            if __lt(m.t, 0) then
-                continue
+            do
+                if __lt(m.t, 0) then
+                    continue
+                end
+                local u = math.min(1, m.t / 0.5)
+                local x = m.x + (m.tx - m.x) * u
+                local y = m.y + (m.ty - m.y) * u - math.sin(u * math.pi) * 30
+                c.fillStyle = "#ffd24a"
+                c:beginPath()
+                c:arc(
+                    x,
+                    y,
+                    3,
+                    0,
+                    math.pi * 2
+                )
+                __call(c, "fill")
             end
-            local u = math.min(1, m.t / 0.5)
-            local x = m.x + (m.tx - m.x) * u
-            local y = m.y + (m.ty - m.y) * u - math.sin(u * math.pi) * 30
-            c.fillStyle = "#ffd24a"
-            c:beginPath()
-            c:arc(
-                x,
-                y,
-                3,
-                0,
-                math.pi * 2
-            )
-            __call(c, "fill")
         end
     end
     function loop(self, now)
@@ -1547,7 +1630,14 @@ local __O = {};
         c:restore()
     end
     local ____ = "use strict"
-    if __t(if __t(window.CampanhaLoja) then window.CampanhaLoja else not __t(window.CampanhaPoderes)) then
+    local ____t_1 = __t
+    local ____t_result_0
+    if __t(window.CampanhaLoja) then
+        ____t_result_0 = window.CampanhaLoja
+    else
+        ____t_result_0 = not __t(window.CampanhaPoderes)
+    end
+    if ____t_1(____t_result_0) then
         return
     end
     PW = window.CampanhaPoderes
@@ -1596,13 +1686,26 @@ local __O = {};
     st = {moedas = 0}
     do
         pcall(function()
-            local ____self_2 = window.JSON
-            local ____self_2_parse_3 = ____self_2.parse
-            local ____t_1 = __t
-            local ____temp_0 = window.localStorage:getItem(KEY)
-            __O[508] = ____temp_0
-            local s = ____self_2_parse_3(____self_2, if ____t_1(____temp_0) then __O[508] else "null")
-            if __t(if __t(s) then __isFiniteN(s.moedas) else s) then
+            local ____self_5 = window.JSON
+            local ____self_5_parse_6 = ____self_5.parse
+            local ____t_result_4
+            local ____t_3 = __t
+            local ____temp_2 = window.localStorage:getItem(KEY)
+            __O[508] = ____temp_2
+            if ____t_3(____temp_2) then
+                ____t_result_4 = __O[508]
+            else
+                ____t_result_4 = "null"
+            end
+            local s = ____self_5_parse_6(____self_5, ____t_result_4)
+            local ____t_8 = __t
+            local ____t_result_7
+            if __t(s) then
+                ____t_result_7 = __isFiniteN(s.moedas)
+            else
+                ____t_result_7 = s
+            end
+            if ____t_8(____t_result_7) then
                 st = s
             end
         end)
@@ -1717,20 +1820,20 @@ local __O = {};
         "fofoca,buzina,biscoito,flash,cafezao,supersoco,clone,aura"
     )
     liberada = function(____, id)
-        local ____temp_11 = not __t(__get(DONO, id))
-        if not ____temp_11 then
-            local ____t_10 = __t
-            local ____callq_9 = __callq
-            local ____opt_6 = window.CampanhaTaxi
-            if ____opt_6 ~= nil then
-                ____opt_6 = ____opt_6.vencidos
+        local ____temp_16 = not __t(__get(DONO, id))
+        if not ____temp_16 then
+            local ____t_15 = __t
+            local ____callq_14 = __callq
+            local ____opt_11 = window.CampanhaTaxi
+            if ____opt_11 ~= nil then
+                ____opt_11 = ____opt_11.vencidos
             end
-            local ____opt_result_8
-            if ____opt_6 ~= nil then
-                ____opt_result_8 = ____opt_6(____opt_6)
+            local ____opt_result_13
+            if ____opt_11 ~= nil then
+                ____opt_result_13 = ____opt_11(____opt_11)
             end
-            ____temp_11 = not not ____t_10(____callq_9(
-                ____opt_result_8,
+            ____temp_16 = not not ____t_15(____callq_14(
+                ____opt_result_13,
                 "includes",
                 __get(
                     __get(DONO, id),
@@ -1738,7 +1841,7 @@ local __O = {};
                 )
             ))
         end
-        return ____temp_11
+        return ____temp_16
     end
     sorte = function(____, a) return __get(
         a,
@@ -1752,7 +1855,13 @@ local __O = {};
             montar(nil)
         end
         aberto = {teste = not not __t(o.teste)}
-        aoFechar = if __t(o.onClose) then o.onClose else nil
+        local ____t_result_31
+        if __t(o.onClose) then
+            ____t_result_31 = o.onClose
+        else
+            ____t_result_31 = nil
+        end
+        aoFechar = ____t_result_31
         box.hidden = false
         window:requestAnimationFrame(function() return __call(box.classList, "add", "on") end)
         sel = 0
@@ -1782,13 +1891,13 @@ local __O = {};
         local x = math.sin(n * 127.1 + 311.7) * 43758.5453
         return x - math.floor(x)
     end
-    local ____opt_23 = window.CampanhaPersonagens
-    if ____opt_23 ~= nil then
-        ____opt_23 = ____opt_23.registrar
+    local ____opt_45 = window.CampanhaPersonagens
+    if ____opt_45 ~= nil then
+        ____opt_45 = ____opt_45.registrar
     end
-    if ____opt_23 ~= nil then
-        ____opt_23(
-            ____opt_23,
+    if ____opt_45 ~= nil then
+        ____opt_45(
+            ____opt_45,
             "c2_lindomar",
             __ord(
                 {
@@ -1819,10 +1928,16 @@ local __O = {};
         end
         local x = BANCA.x
         local y = 440
-        local ____t_26 = __t
-        local ____TS__Number_result_25 = __TS__Number(o.time)
-        __O[512] = ____TS__Number_result_25
-        local t2 = if ____t_26(____TS__Number_result_25) then __O[512] else 0
+        local ____t_result_49
+        local ____t_48 = __t
+        local ____TS__Number_result_47 = __TS__Number(o.time)
+        __O[512] = ____TS__Number_result_47
+        if ____t_48(____TS__Number_result_47) then
+            ____t_result_49 = __O[512]
+        else
+            ____t_result_49 = 0
+        end
+        local t2 = ____t_result_49
         local function R2(____, a, b, w, h, col)
             c2.fillStyle = col
             c2:fillRect(
@@ -1832,10 +1947,16 @@ local __O = {};
                 h
             )
         end
-        local ____t_28 = __t
-        local ____TS__Number_result_27 = __TS__Number(o.camera)
-        __O[513] = ____TS__Number_result_27
-        if math.abs(x - if ____t_28(____TS__Number_result_27) then __O[513] else 0 - 480) > 640 then
+        local ____t_result_52
+        local ____t_51 = __t
+        local ____TS__Number_result_50 = __TS__Number(o.camera)
+        __O[513] = ____TS__Number_result_50
+        if ____t_51(____TS__Number_result_50) then
+            ____t_result_52 = __O[513]
+        else
+            ____t_result_52 = 0
+        end
+        if math.abs(x - ____t_result_52 - 480) > 640 then
             return
         end
         R2(
@@ -1981,13 +2102,13 @@ local __O = {};
         c2.fillStyle = "#7a2a1a"
         c2:fillText("GARRAFADAS", x - 12, y - 134)
         c2.textAlign = "left"
-        local ____opt_31 = window.Art
-        if ____opt_31 ~= nil then
-            ____opt_31 = ____opt_31.drawCharacter
+        local ____opt_55 = window.Art
+        if ____opt_55 ~= nil then
+            ____opt_55 = ____opt_55.drawCharacter
         end
-        if ____opt_31 ~= nil then
-            ____opt_31(
-                ____opt_31,
+        if ____opt_55 ~= nil then
+            ____opt_55(
+                ____opt_55,
                 c2,
                 "c2_lindomar",
                 x + 74,
@@ -1995,14 +2116,20 @@ local __O = {};
                 {frame = t2, facing = -1, moving = false, grounded = true}
             )
         end
-        local ____t_36 = __t
-        local ____opt_33 = o.player
-        if ____opt_33 ~= nil then
-            ____opt_33 = ____opt_33.x
+        local ____t_result_61
+        local ____t_60 = __t
+        local ____opt_57 = o.player
+        if ____opt_57 ~= nil then
+            ____opt_57 = ____opt_57.x
         end
-        local ____TS__Number_result_35 = __TS__Number(____opt_33)
-        __O[514] = ____TS__Number_result_35
-        local hx = if ____t_36(____TS__Number_result_35) then __O[514] else -9999
+        local ____TS__Number_result_59 = __TS__Number(____opt_57)
+        __O[514] = ____TS__Number_result_59
+        if ____t_60(____TS__Number_result_59) then
+            ____t_result_61 = __O[514]
+        else
+            ____t_result_61 = -9999
+        end
+        local hx = ____t_result_61
         if math.abs(hx - x) < 110 then
             local dy = math.floor(math.sin(t2 * 5) * 3 + 0.5)
             R2(
@@ -2040,7 +2167,15 @@ local __O = {};
                 return function() return __call(ouvintes, "delete", f) end
             end,
             precos = function() return __assign({}, PRECO) end,
-            perto = function(____, cena, x) return if __t(cena == BANCA.cena and math.abs(x - BANCA.x) < 110) then {id = "loja", x = BANCA.x + 20, rotulo = "COMPRAR GARRAFADAS DO SEU LINDOMAR", botao = "LOJA"} else nil end,
+            perto = function(____, cena, x)
+                local ____t_result_62
+                if __t(cena == BANCA.cena and math.abs(x - BANCA.x) < 110) then
+                    ____t_result_62 = {id = "loja", x = BANCA.x + 20, rotulo = "COMPRAR GARRAFADAS DO SEU LINDOMAR", botao = "LOJA"}
+                else
+                    ____t_result_62 = nil
+                end
+                return ____t_result_62
+            end,
             desenhar = desenharBanca,
             banca = function() return __assign({}, BANCA) end
         },

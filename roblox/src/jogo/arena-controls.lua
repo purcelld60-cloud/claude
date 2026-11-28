@@ -73,18 +73,29 @@ local __O = {};
         do
             local ____try, ____hasReturned, ____returnValue = pcall(function()
                 local data = window.JSON:parse(window.localStorage:getItem(KEY))
-                local ____t_7 = __t
+                local ____t_8 = __t
+                local ____t_result_7
                 local ____t_6 = __t
+                local ____t_result_5
                 local ____t_4 = __t
                 local ____opt_result_2
                 if data ~= nil then
                     ____opt_result_2 = data.schema
                 end
                 local ____temp_3 = ____opt_result_2 == 1
-                __O[2793] = ____temp_3
-                local ____temp_5 = if ____t_4(____temp_3) then data.layouts else __O[2793]
-                __O[2794] = ____temp_5
-                if ____t_7(if ____t_6(____temp_5) then type(data.layouts) == "table" else __O[2794]) then
+                __O[2798] = ____temp_3
+                if ____t_4(____temp_3) then
+                    ____t_result_5 = data.layouts
+                else
+                    ____t_result_5 = __O[2798]
+                end
+                __O[2799] = ____t_result_5
+                if ____t_6(____t_result_5) then
+                    ____t_result_7 = type(data.layouts) == "table"
+                else
+                    ____t_result_7 = __O[2799]
+                end
+                if ____t_8(____t_result_7) then
                     return true, data.layouts
                 end
             end)
@@ -147,24 +158,40 @@ local __O = {};
                 __get(layouts, orientation),
                 id
             )
-            local ____isFiniteN_15 = __isFiniteN
-            local ____opt_result_14
+            local ____isFiniteN_result_17
+            local ____isFiniteN_16 = __isFiniteN
+            local ____opt_result_15
             if record ~= nil then
-                ____opt_result_14 = record.x
+                ____opt_result_15 = record.x
             end
-            local ____temp_24 = if ____isFiniteN_15(____opt_result_14) then clamp(nil, record.x, 0, 1) else __get(base, 0)
-            local ____isFiniteN_19 = __isFiniteN
-            local ____opt_result_18
+            if ____isFiniteN_16(____opt_result_15) then
+                ____isFiniteN_result_17 = clamp(nil, record.x, 0, 1)
+            else
+                ____isFiniteN_result_17 = __get(base, 0)
+            end
+            local ____isFiniteN_result_22
+            local ____isFiniteN_21 = __isFiniteN
+            local ____opt_result_20
             if record ~= nil then
-                ____opt_result_18 = record.y
+                ____opt_result_20 = record.y
             end
-            local ____temp_25 = if ____isFiniteN_19(____opt_result_18) then clamp(nil, record.y, 0, 1) else __get(base, 1)
-            local ____isFiniteN_23 = __isFiniteN
-            local ____opt_result_22
+            if ____isFiniteN_21(____opt_result_20) then
+                ____isFiniteN_result_22 = clamp(nil, record.y, 0, 1)
+            else
+                ____isFiniteN_result_22 = __get(base, 1)
+            end
+            local ____isFiniteN_result_27
+            local ____isFiniteN_26 = __isFiniteN
+            local ____opt_result_25
             if record ~= nil then
-                ____opt_result_22 = record.size
+                ____opt_result_25 = record.size
             end
-            return {x = ____temp_24, y = ____temp_25, size = if ____isFiniteN_23(____opt_result_22) then clamp(nil, record.size, if id == "joystick" then 80 else 40, if id == "joystick" then 180 else 110) else __get(base, 2)}
+            if ____isFiniteN_26(____opt_result_25) then
+                ____isFiniteN_result_27 = clamp(nil, record.size, id == "joystick" and 80 or 40, id == "joystick" and 180 or 110)
+            else
+                ____isFiniteN_result_27 = __get(base, 2)
+            end
+            return {x = ____isFiniteN_result_17, y = ____isFiniteN_result_22, size = ____isFiniteN_result_27}
         end
         function persist(self)
             do
@@ -182,14 +209,21 @@ local __O = {};
                     ____catch()
                 end
             end
-            query(nil, "#arenaLayoutSaved").textContent = if __t(saved) then __add("SALVO NESTE APARELHO · ", if orientation == "landscape" then "TELA DEITADA" else "TELA EM PÉ") else "Armazenamento indisponível: vale até fechar o jogo."
+            local ____query_result_29 = query(nil, "#arenaLayoutSaved")
+            local ____t_result_28
+            if __t(saved) then
+                ____t_result_28 = __add("SALVO NESTE APARELHO · ", orientation == "landscape" and "TELA DEITADA" or "TELA EM PÉ")
+            else
+                ____t_result_28 = "Armazenamento indisponível: vale até fechar o jogo."
+            end
+            ____query_result_29.textContent = ____t_result_28
         end
         function selectedUI(self)
             local s = setting(nil, selected)
             query(nil, "#arenaLayoutSelection").textContent = __get(NAMES, selected)
             local range = query(nil, "#arenaLayoutScale")
-            range.min = if selected == "joystick" then "80" else "40"
-            range.max = if selected == "joystick" then "180" else "110"
+            range.min = selected == "joystick" and "80" or "40"
+            range.max = selected == "joystick" and "180" or "110"
             range.value = s.size
             query(nil, "#arenaLayoutSize").textContent = __add(
                 math.floor(s.size + 0.5),
@@ -198,7 +232,15 @@ local __O = {};
             for ____, ____value in __iterar((targets)) do
                 local id = ____value[1]
                 local target = ____value[2]
-                target.classList:toggle("layout-selected", if __t(editing) then id == selected else editing)
+                local ____self_31 = target.classList
+                local ____self_31_toggle_32 = ____self_31.toggle
+                local ____t_result_30
+                if __t(editing) then
+                    ____t_result_30 = id == selected
+                else
+                    ____t_result_30 = editing
+                end
+                ____self_31_toggle_32(____self_31, "layout-selected", ____t_result_30)
             end
         end
         function apply(self)
@@ -206,18 +248,24 @@ local __O = {};
             if __t(r.w < 20 or r.h < 20) then
                 return
             end
-            orientation = if r.w >= r.h then "landscape" else "portrait"
+            orientation = r.w >= r.h and "landscape" or "portrait"
             local style = window:getComputedStyle(screen)
             local safe = {}
             for ____, side in __iterar((__arrL({"top", "right", "bottom", "left"}, 4))) do
-                local ____set_28 = __set
-                local ____t_27 = __t
-                local ____TS__ParseFloat_result_26 = __TS__ParseFloat(style:getPropertyValue(__add("--arena-safe-", side)))
-                __O[2795] = ____TS__ParseFloat_result_26
-                ____set_28(
+                local ____set_36 = __set
+                local ____t_result_35
+                local ____t_34 = __t
+                local ____TS__ParseFloat_result_33 = __TS__ParseFloat(style:getPropertyValue(__add("--arena-safe-", side)))
+                __O[2800] = ____TS__ParseFloat_result_33
+                if ____t_34(____TS__ParseFloat_result_33) then
+                    ____t_result_35 = __O[2800]
+                else
+                    ____t_result_35 = 0
+                end
+                ____set_36(
                     safe,
                     side,
-                    math.max(8, if ____t_27(____TS__ParseFloat_result_26) then __O[2795] else 0 + 8)
+                    math.max(8, ____t_result_35 + 8)
                 )
             end
             for ____, ____value in __iterar((targets)) do
@@ -245,12 +293,12 @@ local __O = {};
             end
         end
         function setJoy(self, x, y)
-            local ____t_31 = __t
-            local ____opt_29 = window.ControlSettings
-            if ____opt_29 ~= nil then
-                ____opt_29 = ____opt_29.transformJoystick
+            local ____t_40 = __t
+            local ____opt_38 = window.ControlSettings
+            if ____opt_38 ~= nil then
+                ____opt_38 = ____opt_38.transformJoystick
             end
-            if ____t_31(____opt_29) then
+            if ____t_40(____opt_38) then
                 local result = window.ControlSettings:transformJoystick(x, y)
                 x = result.x
                 y = result.y
@@ -323,13 +371,13 @@ local __O = {};
             canvas.height = math.floor(r.height + 0.5)
             local c = canvas:getContext("2d")
             c.imageSmoothingEnabled = false
-            local ____opt_46 = window.ArenaArt
-            if ____opt_46 ~= nil then
-                ____opt_46 = ____opt_46.drawBackground
+            local ____opt_57 = window.ArenaArt
+            if ____opt_57 ~= nil then
+                ____opt_57 = ____opt_57.drawBackground
             end
-            if ____opt_46 ~= nil then
-                ____opt_46(
-                    ____opt_46,
+            if ____opt_57 ~= nil then
+                ____opt_57(
+                    ____opt_57,
                     c,
                     {x = 640, y = 320, zoom = 0.6},
                     0,
@@ -361,7 +409,7 @@ local __O = {};
                 __call(screen.classList, "add", "in-battle", "arena-layout-preview")
             end
             panel.hidden = false
-            query(nil, ".alc-note").textContent = if __t(state.practice) then "O treino está pausado. Arraste e redimensione os controles." else if __t(state.playing) then "A partida online continua. Seus comandos ficam parados enquanto você ajusta." else "Arraste os controles para testar a posição. O ajuste fica salvo para esta orientação."
+            query(nil, ".alc-note").textContent = __t(state.practice) and "O treino está pausado. Arraste e redimensione os controles." or (__t(state.playing) and "A partida online continua. Seus comandos ficam parados enquanto você ajusta." or "Arraste os controles para testar a posição. O ajuste fica salvo para esta orientação.")
             onEditing(nil, true)
             apply(nil)
             persist(nil)
@@ -436,9 +484,9 @@ local __O = {};
             "click",
             function() return openEditor(nil) end
         )
-        local ____opt_8 = screen:querySelector(".arena-header-actions")
-        if ____opt_8 ~= nil then
-            ____opt_8:prepend(entry)
+        local ____opt_9 = screen:querySelector(".arena-header-actions")
+        if ____opt_9 ~= nil then
+            ____opt_9:prepend(entry)
         end
         local battleEntry = entry:cloneNode(true)
         battleEntry.id = "arenaBattleControlsBtn"
@@ -448,9 +496,9 @@ local __O = {};
             "click",
             function() return openEditor(nil) end
         )
-        local ____opt_10 = screen:querySelector(".arena-match-top")
-        if ____opt_10 ~= nil then
-            ____opt_10:insertBefore(
+        local ____opt_11 = screen:querySelector(".arena-match-top")
+        if ____opt_11 ~= nil then
+            ____opt_11:insertBefore(
                 battleEntry,
                 screen:querySelector("#arenaBattleLeave")
             )
@@ -458,10 +506,15 @@ local __O = {};
         query = function(____, s) return panel:querySelector(s) end
         local function put(self, id, values)
             do
-                __O[2796] = layouts
-                __O[2797] = orientation
+                __O[2801] = layouts
+                __O[2802] = orientation
             end
-            local ____ = if __t(__get(__O[2796], __O[2797])) then __get(__O[2796], __O[2797]) else __set(__O[2796], __O[2797], {})
+            local ____t_result_37
+            if __t(__get(__O[2801], __O[2802])) then
+                ____t_result_37 = __get(__O[2801], __O[2802])
+            else
+                ____t_result_37 = __set(__O[2801], __O[2802], {})
+            end
             __set(
                 __get(layouts, orientation),
                 id,
@@ -506,14 +559,25 @@ local __O = {};
                         beginDrag(nil, event, id, target)
                         return
                     end
-                    local ____t_36 = __t
-                    local ____t_35 = __t
-                    local ____t_33 = __t
-                    local ____temp_32 = not __t(getState(nil).playing)
-                    __O[2798] = ____temp_32
-                    local ____temp_34 = if ____t_33(____temp_32) then __O[2798] else getState(nil).eliminated
-                    __O[2799] = ____temp_34
-                    if ____t_36(if ____t_35(____temp_34) then __O[2799] else target.disabled) then
+                    local ____t_46 = __t
+                    local ____t_result_45
+                    local ____t_44 = __t
+                    local ____t_result_43
+                    local ____t_42 = __t
+                    local ____temp_41 = not __t(getState(nil).playing)
+                    __O[2803] = ____temp_41
+                    if ____t_42(____temp_41) then
+                        ____t_result_43 = __O[2803]
+                    else
+                        ____t_result_43 = getState(nil).eliminated
+                    end
+                    __O[2804] = ____t_result_43
+                    if ____t_44(____t_result_43) then
+                        ____t_result_45 = __O[2804]
+                    else
+                        ____t_result_45 = target.disabled
+                    end
+                    if ____t_46(____t_result_45) then
                         return
                     end
                     event:preventDefault()
@@ -539,12 +603,18 @@ local __O = {};
             target:addEventListener(
                 "pointermove",
                 function(____, event)
-                    local ____t_40 = __t
-                    local ____opt_result_39
-                    if pointer ~= nil then
-                        ____opt_result_39 = pointer.id
+                    local ____t_51 = __t
+                    local ____t_result_50
+                    if __t(editing) then
+                        local ____opt_result_49
+                        if pointer ~= nil then
+                            ____opt_result_49 = pointer.id
+                        end
+                        ____t_result_50 = ____opt_result_49 == event.pointerId
+                    else
+                        ____t_result_50 = editing
                     end
-                    if ____t_40(if __t(editing) then ____opt_result_39 == event.pointerId else editing) then
+                    if ____t_51(____t_result_50) then
                         event:preventDefault()
                         local r = bounds(nil)
                         local size = target:getBoundingClientRect().width
@@ -560,11 +630,11 @@ local __O = {};
                 end
             )
             local function release(____, event)
-                local ____opt_result_43
+                local ____opt_result_54
                 if pointer ~= nil then
-                    ____opt_result_43 = pointer.id
+                    ____opt_result_54 = pointer.id
                 end
-                if ____opt_result_43 == event.pointerId then
+                if ____opt_result_54 == event.pointerId then
                     pointer = nil
                     persist(nil)
                 end
@@ -603,7 +673,14 @@ local __O = {};
             pointer = nil
             panel.hidden = true
             screen.classList:remove("arena-layout-editing", "arena-layout-preview")
-            if __t(if __t(preview) then not __t(getState(nil).hasWorld) else preview) then
+            local ____t_60 = __t
+            local ____t_result_59
+            if __t(preview) then
+                ____t_result_59 = not __t(getState(nil).hasWorld)
+            else
+                ____t_result_59 = preview
+            end
+            if ____t_60(____t_result_59) then
                 screen:querySelector("#arenaLobby").hidden = preview.lobbyHidden
                 screen:querySelector("#arenaBattle").hidden = preview.battleHidden
                 screen.classList:toggle("in-battle", preview.inBattle)
@@ -613,9 +690,9 @@ local __O = {};
                 target.classList:remove("layout-selected")
             end
             onEditing(nil, false)
-            local ____opt_48 = screen:querySelector("#arenaCanvas")
-            if ____opt_48 ~= nil then
-                ____opt_48:focus({preventScroll = true})
+            local ____opt_61 = screen:querySelector("#arenaCanvas")
+            if ____opt_61 ~= nil then
+                ____opt_61:focus({preventScroll = true})
             end
         end
         query(nil, "#arenaLayoutScale"):addEventListener(
@@ -641,12 +718,12 @@ local __O = {};
             "click",
             function()
                 clear(nil)
-                local ____opt_52 = window.ControlSettingsUI
-                if ____opt_52 ~= nil then
-                    ____opt_52 = ____opt_52.open
+                local ____opt_65 = window.ControlSettingsUI
+                if ____opt_65 ~= nil then
+                    ____opt_65 = ____opt_65.open
                 end
-                if ____opt_52 ~= nil then
-                    ____opt_52(____opt_52)
+                if ____opt_65 ~= nil then
+                    ____opt_65(____opt_65)
                 end
             end
         )

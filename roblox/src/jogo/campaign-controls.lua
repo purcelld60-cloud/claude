@@ -20,14 +20,25 @@ local __O = {};
     local shell = window.document:getElementById("gameShell")
     local layer = shell and shell:querySelector(".touch-controls")
     local joystick = window.document:getElementById("moveJoystick")
-    local ____t_6 = __t
+    local ____t_7 = __t
+    local ____t_result_6
     local ____t_5 = __t
+    local ____t_result_4
     local ____t_3 = __t
     local ____temp_2 = not __t(shell) or not __t(layer)
-    __O[3018] = ____temp_2
-    local ____temp_4 = if ____t_3(____temp_2) then __O[3018] else not __t(joystick)
-    __O[3019] = ____temp_4
-    if ____t_6(if ____t_5(____temp_4) then __O[3019] else window.CampaignControls) then
+    __O[3023] = ____temp_2
+    if ____t_3(____temp_2) then
+        ____t_result_4 = __O[3023]
+    else
+        ____t_result_4 = not __t(joystick)
+    end
+    __O[3024] = ____t_result_4
+    if ____t_5(____t_result_4) then
+        ____t_result_6 = __O[3024]
+    else
+        ____t_result_6 = window.CampaignControls
+    end
+    if ____t_7(____t_result_6) then
         return
     end
     local KEY = "daroca-campaign-layout-v1"
@@ -85,50 +96,67 @@ local __O = {};
         )
     end
     local function state()
-        local ____t_12 = __t
-        local ____opt_9 = window.Game
-        if ____opt_9 ~= nil then
-            ____opt_9 = ____opt_9.getState
+        local ____t_result_14
+        local ____t_13 = __t
+        local ____opt_10 = window.Game
+        if ____opt_10 ~= nil then
+            ____opt_10 = ____opt_10.getState
         end
-        local ____opt_result_11
-        if ____opt_9 ~= nil then
-            ____opt_result_11 = ____opt_9(____opt_9)
+        local ____opt_result_12
+        if ____opt_10 ~= nil then
+            ____opt_result_12 = ____opt_10(____opt_10)
         end
-        __O[3020] = ____opt_result_11
-        return if ____t_12(____opt_result_11) then __O[3020] else {}
+        __O[3025] = ____opt_result_12
+        if ____t_13(____opt_result_12) then
+            ____t_result_14 = __O[3025]
+        else
+            ____t_result_14 = {}
+        end
+        return ____t_result_14
     end
     local function otherMode()
-        local ____t_31 = __t
-        local ____t_25 = __t
-        local ____t_18 = __t
-        local ____opt_15 = window.Arena
-        if ____opt_15 ~= nil then
-            ____opt_15 = ____opt_15.isOpen
+        local ____t_34 = __t
+        local ____t_result_33
+        local ____t_27 = __t
+        local ____t_result_26
+        local ____t_20 = __t
+        local ____opt_17 = window.Arena
+        if ____opt_17 ~= nil then
+            ____opt_17 = ____opt_17.isOpen
         end
-        local ____opt_result_17
-        if ____opt_15 ~= nil then
-            ____opt_result_17 = ____opt_15(____opt_15)
+        local ____opt_result_19
+        if ____opt_17 ~= nil then
+            ____opt_result_19 = ____opt_17(____opt_17)
         end
-        __O[3021] = ____opt_result_17
-        local ____opt_21 = window.CoopArena
-        if ____opt_21 ~= nil then
-            ____opt_21 = ____opt_21.getStatus
+        __O[3026] = ____opt_result_19
+        if ____t_20(____opt_result_19) then
+            ____t_result_26 = __O[3026]
+        else
+            local ____opt_23 = window.CoopArena
+            if ____opt_23 ~= nil then
+                ____opt_23 = ____opt_23.getStatus
+            end
+            local ____opt_result_25
+            if ____opt_23 ~= nil then
+                ____opt_result_25 = ____opt_23(____opt_23).open
+            end
+            ____t_result_26 = ____opt_result_25
         end
-        local ____opt_result_23
-        if ____opt_21 ~= nil then
-            ____opt_result_23 = ____opt_21(____opt_21).open
+        __O[3027] = ____t_result_26
+        if ____t_27(____t_result_26) then
+            ____t_result_33 = __O[3027]
+        else
+            local ____opt_30 = window.PartyGame
+            if ____opt_30 ~= nil then
+                ____opt_30 = ____opt_30.getStatus
+            end
+            local ____opt_result_32
+            if ____opt_30 ~= nil then
+                ____opt_result_32 = ____opt_30(____opt_30).open
+            end
+            ____t_result_33 = ____opt_result_32
         end
-        local ____temp_24 = if ____t_18(____opt_result_17) then __O[3021] else ____opt_result_23
-        __O[3022] = ____temp_24
-        local ____opt_28 = window.PartyGame
-        if ____opt_28 ~= nil then
-            ____opt_28 = ____opt_28.getStatus
-        end
-        local ____opt_result_30
-        if ____opt_28 ~= nil then
-            ____opt_result_30 = ____opt_28(____opt_28).open
-        end
-        return not not ____t_31(if ____t_25(____temp_24) then __O[3022] else ____opt_result_30)
+        return not not ____t_34(____t_result_33)
     end
     local layouts = {}
     local editing = false
@@ -143,27 +171,49 @@ local __O = {};
     local previousInert = false
     do
         pcall(function()
-            local ____self_34 = window.JSON
-            local ____self_34_parse_35 = ____self_34.parse
-            local ____t_33 = __t
-            local ____temp_32 = window.localStorage:getItem(KEY)
-            __O[3023] = ____temp_32
-            local record = ____self_34_parse_35(____self_34, if ____t_33(____temp_32) then __O[3023] else "null")
-            local ____t_45 = __t
-            local ____t_44 = __t
-            local ____t_42 = __t
-            local ____t_40 = __t
-            local ____opt_result_38
-            if record ~= nil then
-                ____opt_result_38 = record.schema
+            local ____self_38 = window.JSON
+            local ____self_38_parse_39 = ____self_38.parse
+            local ____t_result_37
+            local ____t_36 = __t
+            local ____temp_35 = window.localStorage:getItem(KEY)
+            __O[3028] = ____temp_35
+            if ____t_36(____temp_35) then
+                ____t_result_37 = __O[3028]
+            else
+                ____t_result_37 = "null"
             end
-            local ____temp_39 = ____opt_result_38 == 1
-            __O[3024] = ____temp_39
-            local ____temp_41 = if ____t_40(____temp_39) then record.layouts else __O[3024]
-            __O[3025] = ____temp_41
-            local ____temp_43 = if ____t_42(____temp_41) then type(record.layouts) == "table" else __O[3025]
-            __O[3026] = ____temp_43
-            if ____t_45(if ____t_44(____temp_43) then not __isArray(record.layouts) else __O[3026]) then
+            local record = ____self_38_parse_39(____self_38, ____t_result_37)
+            local ____t_50 = __t
+            local ____t_result_49
+            local ____t_48 = __t
+            local ____t_result_47
+            local ____t_46 = __t
+            local ____t_result_45
+            local ____t_44 = __t
+            local ____opt_result_42
+            if record ~= nil then
+                ____opt_result_42 = record.schema
+            end
+            local ____temp_43 = ____opt_result_42 == 1
+            __O[3029] = ____temp_43
+            if ____t_44(____temp_43) then
+                ____t_result_45 = record.layouts
+            else
+                ____t_result_45 = __O[3029]
+            end
+            __O[3030] = ____t_result_45
+            if ____t_46(____t_result_45) then
+                ____t_result_47 = type(record.layouts) == "table"
+            else
+                ____t_result_47 = __O[3030]
+            end
+            __O[3031] = ____t_result_47
+            if ____t_48(____t_result_47) then
+                ____t_result_49 = not __isArray(record.layouts)
+            else
+                ____t_result_49 = __O[3031]
+            end
+            if ____t_50(____t_result_49) then
                 layouts = record.layouts
             end
         end)
@@ -183,35 +233,57 @@ local __O = {};
     local sizeLabel = panel:querySelector("#campaignControlSize")
     local saveLabel = panel:querySelector("#campaignControlSaved")
     local function setting(self, id)
-        local ____t_47 = __t
-        local ____get_result_46 = __get(
+        local ____t_result_53
+        local ____t_52 = __t
+        local ____get_result_51 = __get(
             __get(defaults, orientation),
             id
         )
-        __O[3027] = ____get_result_46
-        local base = if ____t_47(____get_result_46) then __O[3027] else __get(defaults, orientation).paper
+        __O[3032] = ____get_result_51
+        if ____t_52(____get_result_51) then
+            ____t_result_53 = __O[3032]
+        else
+            ____t_result_53 = __get(defaults, orientation).paper
+        end
+        local base = ____t_result_53
         local record = __getq(
             __get(layouts, orientation),
             id
         )
-        local ____isFiniteN_51 = __isFiniteN
-        local ____opt_result_50
+        local ____isFiniteN_result_58
+        local ____isFiniteN_57 = __isFiniteN
+        local ____opt_result_56
         if record ~= nil then
-            ____opt_result_50 = record.x
+            ____opt_result_56 = record.x
         end
-        local ____temp_60 = if ____isFiniteN_51(____opt_result_50) then clamp(nil, record.x, 0, 1) else __get(base, 0)
-        local ____isFiniteN_55 = __isFiniteN
-        local ____opt_result_54
+        if ____isFiniteN_57(____opt_result_56) then
+            ____isFiniteN_result_58 = clamp(nil, record.x, 0, 1)
+        else
+            ____isFiniteN_result_58 = __get(base, 0)
+        end
+        local ____isFiniteN_result_63
+        local ____isFiniteN_62 = __isFiniteN
+        local ____opt_result_61
         if record ~= nil then
-            ____opt_result_54 = record.y
+            ____opt_result_61 = record.y
         end
-        local ____temp_61 = if ____isFiniteN_55(____opt_result_54) then clamp(nil, record.y, 0, 1) else __get(base, 1)
-        local ____isFiniteN_59 = __isFiniteN
-        local ____opt_result_58
+        if ____isFiniteN_62(____opt_result_61) then
+            ____isFiniteN_result_63 = clamp(nil, record.y, 0, 1)
+        else
+            ____isFiniteN_result_63 = __get(base, 1)
+        end
+        local ____isFiniteN_result_68
+        local ____isFiniteN_67 = __isFiniteN
+        local ____opt_result_66
         if record ~= nil then
-            ____opt_result_58 = record.size
+            ____opt_result_66 = record.size
         end
-        return {x = ____temp_60, y = ____temp_61, size = if ____isFiniteN_59(____opt_result_58) then clamp(nil, record.size, if id == "joystick" then 80 else 40, if id == "joystick" then 180 else 110) else __get(base, 2)}
+        if ____isFiniteN_67(____opt_result_66) then
+            ____isFiniteN_result_68 = clamp(nil, record.size, id == "joystick" and 80 or 40, id == "joystick" and 180 or 110)
+        else
+            ____isFiniteN_result_68 = __get(base, 2)
+        end
+        return {x = ____isFiniteN_result_58, y = ____isFiniteN_result_63, size = ____isFiniteN_result_68}
     end
     local function persist(self)
         do
@@ -231,8 +303,11 @@ local __O = {};
         end
         saveLabel.textContent = __add(
             __add(
-                __add(if __t(saved) then "SALVO NESTE APARELHO" else "VALE ATÉ FECHAR O JOGO", " · "),
-                if orientation == "landscape" then "TELA DEITADA" else "TELA EM PÉ"
+                __add(
+                    __t(saved) and "SALVO NESTE APARELHO" or "VALE ATÉ FECHAR O JOGO",
+                    " · "
+                ),
+                orientation == "landscape" and "TELA DEITADA" or "TELA EM PÉ"
             ),
             " · CAMPANHA PAUSADA"
         )
@@ -240,8 +315,8 @@ local __O = {};
     local function selectedUI(self)
         local value = setting(nil, selected)
         choose.value = selected
-        range.min = if selected == "joystick" then "80" else "40"
-        range.max = if selected == "joystick" then "180" else "110"
+        range.min = selected == "joystick" and "80" or "40"
+        range.max = selected == "joystick" and "180" or "110"
         range.value = value.size
         sizeLabel.textContent = __add(
             math.floor(value.size + 0.5),
@@ -250,35 +325,86 @@ local __O = {};
         for ____, ____value in __iterar((targets)) do
             local id = ____value[1]
             local target = ____value[2]
-            target.classList:toggle("campaign-layout-selected", if __t(editing) then id == selected else editing)
+            local ____self_70 = target.classList
+            local ____self_70_toggle_71 = ____self_70.toggle
+            local ____t_result_69
+            if __t(editing) then
+                ____t_result_69 = id == selected
+            else
+                ____t_result_69 = editing
+            end
+            ____self_70_toggle_71(____self_70, "campaign-layout-selected", ____t_result_69)
         end
     end
     local function readPlane(self)
         local rect = shell:getBoundingClientRect()
-        local ____opt_62 = window.document:getElementById("gameCanvas")
-        local canvas = ____opt_62 and ____opt_62:getBoundingClientRect()
-        local ____opt_64 = shell:querySelector(".game-topbar")
-        local hud = ____opt_64 and ____opt_64:getBoundingClientRect()
-        local ____opt_66 = shell:querySelector(".progress-hud")
-        local progress = ____opt_66 and ____opt_66:getBoundingClientRect()
-        local ____t_69 = __t
-        local ____temp_68 = shell.classList:contains("immersive")
-        __O[3028] = ____temp_68
-        local immersive = if ____t_69(____temp_68) then __O[3028] else window.document.body.classList:contains("shell-experience")
-        local ____t_77 = __t
-        local ____temp_76 = canvas and canvas.top
-        __O[3029] = ____temp_76
-        local top = if __t(immersive) then math.max(0, if __t(hud and hud.height) then hud.bottom else rect.top - rect.top, if __t(progress and progress.height) then progress.bottom else rect.top - rect.top) else math.max(0, if ____t_77(____temp_76) then __O[3029] else rect.top - rect.top)
-        local ____top_82 = top
-        local ____math_max_result_83 = math.max(1, rect.width)
-        local ____t_81 = __t
-        local ____temp_80 = canvas and canvas.height
-        __O[3030] = ____temp_80
+        local ____opt_72 = window.document:getElementById("gameCanvas")
+        local canvas = ____opt_72 and ____opt_72:getBoundingClientRect()
+        local ____opt_74 = shell:querySelector(".game-topbar")
+        local hud = ____opt_74 and ____opt_74:getBoundingClientRect()
+        local ____opt_76 = shell:querySelector(".progress-hud")
+        local progress = ____opt_76 and ____opt_76:getBoundingClientRect()
+        local ____t_result_80
+        local ____t_79 = __t
+        local ____temp_78 = shell.classList:contains("immersive")
+        __O[3033] = ____temp_78
+        if ____t_79(____temp_78) then
+            ____t_result_80 = __O[3033]
+        else
+            ____t_result_80 = window.document.body.classList:contains("shell-experience")
+        end
+        local immersive = ____t_result_80
+        local ____t_result_93
+        if __t(immersive) then
+            local ____t_result_83
+            if __t(hud and hud.height) then
+                ____t_result_83 = hud.bottom
+            else
+                ____t_result_83 = rect.top
+            end
+            local ____temp_87 = ____t_result_83 - rect.top
+            local ____t_result_86
+            if __t(progress and progress.height) then
+                ____t_result_86 = progress.bottom
+            else
+                ____t_result_86 = rect.top
+            end
+            ____t_result_93 = math.max(0, ____temp_87, ____t_result_86 - rect.top)
+        else
+            local ____t_result_92
+            local ____t_91 = __t
+            local ____temp_90 = canvas and canvas.top
+            __O[3034] = ____temp_90
+            if ____t_91(____temp_90) then
+                ____t_result_92 = __O[3034]
+            else
+                ____t_result_92 = rect.top
+            end
+            ____t_result_93 = math.max(0, ____t_result_92 - rect.top)
+        end
+        local top = ____t_result_93
+        local ____top_100 = top
+        local ____math_max_result_101 = math.max(1, rect.width)
+        local ____t_result_99
+        if __t(immersive) then
+            ____t_result_99 = rect.height - top
+        else
+            local ____t_result_98
+            local ____t_97 = __t
+            local ____temp_96 = canvas and canvas.height
+            __O[3035] = ____temp_96
+            if ____t_97(____temp_96) then
+                ____t_result_98 = __O[3035]
+            else
+                ____t_result_98 = rect.height - top
+            end
+            ____t_result_99 = ____t_result_98
+        end
         plane = {
             left = 0,
-            top = ____top_82,
-            width = ____math_max_result_83,
-            height = math.max(120, if __t(immersive) then rect.height - top else if ____t_81(____temp_80) then __O[3030] else rect.height - top)
+            top = ____top_100,
+            width = ____math_max_result_101,
+            height = math.max(120, ____t_result_99)
         }
         layer.style:setProperty(
             "--ccl-left",
@@ -296,7 +422,7 @@ local __O = {};
             "--ccl-height",
             __add(plane.height, "px")
         )
-        orientation = if plane.width >= plane.height then "landscape" else "portrait"
+        orientation = plane.width >= plane.height and "landscape" or "portrait"
         return rect
     end
     local function apply(self)
@@ -307,14 +433,20 @@ local __O = {};
         local style = window:getComputedStyle(shell)
         local safe = {}
         for ____, side in __iterar((__arrL({"left", "right", "bottom"}, 3))) do
-            local ____set_86 = __set
-            local ____t_85 = __t
-            local ____TS__ParseFloat_result_84 = __TS__ParseFloat(style:getPropertyValue(__add("--ccl-safe-", side)))
-            __O[3031] = ____TS__ParseFloat_result_84
-            ____set_86(
+            local ____set_105 = __set
+            local ____t_result_104
+            local ____t_103 = __t
+            local ____TS__ParseFloat_result_102 = __TS__ParseFloat(style:getPropertyValue(__add("--ccl-safe-", side)))
+            __O[3036] = ____TS__ParseFloat_result_102
+            if ____t_103(____TS__ParseFloat_result_102) then
+                ____t_result_104 = __O[3036]
+            else
+                ____t_result_104 = 0
+            end
+            ____set_105(
                 safe,
                 side,
-                math.max(7, if ____t_85(____TS__ParseFloat_result_84) then __O[3031] else 0 + 7)
+                math.max(7, ____t_result_104 + 7)
             )
         end
         for ____, ____value in __iterar((targets)) do
@@ -343,11 +475,17 @@ local __O = {};
         selectedUI(nil)
     end
     local function put(self, id, value)
-        local ____t_89 = __t
-        local ____t_88 = __t
-        local ____temp_87 = not __t(__get(layouts, orientation)) or type(__get(layouts, orientation)) ~= "table"
-        __O[3032] = ____temp_87
-        if ____t_89(if ____t_88(____temp_87) then __O[3032] else __isArray(__get(layouts, orientation))) then
+        local ____t_109 = __t
+        local ____t_result_108
+        local ____t_107 = __t
+        local ____temp_106 = not __t(__get(layouts, orientation)) or type(__get(layouts, orientation)) ~= "table"
+        __O[3037] = ____temp_106
+        if ____t_107(____temp_106) then
+            ____t_result_108 = __O[3037]
+        else
+            ____t_result_108 = __isArray(__get(layouts, orientation))
+        end
+        if ____t_109(____t_result_108) then
             __set(layouts, orientation, {})
         end
         __set(
@@ -396,48 +534,107 @@ local __O = {};
         scheduled = false
         discover(nil)
         local s = state(nil)
-        local ____t_95 = __t
-        local ____opt_92 = window.Campanha2
-        if ____opt_92 ~= nil then
-            ____opt_92 = ____opt_92.aberto
+        local ____t_115 = __t
+        local ____opt_112 = window.Campanha2
+        if ____opt_112 ~= nil then
+            ____opt_112 = ____opt_112.aberto
         end
-        local ____opt_result_94
-        if ____opt_92 ~= nil then
-            ____opt_result_94 = ____opt_92(____opt_92)
+        local ____opt_result_114
+        if ____opt_112 ~= nil then
+            ____opt_result_114 = ____opt_112(____opt_112)
         end
-        local c2 = not not ____t_95(____opt_result_94)
-        local ____t_101 = __t
-        local ____t_99 = __t
-        local ____t_97 = __t
-        local ____temp_96 = not not __t(s.started) and not __t(s.won)
-        __O[3033] = ____temp_96
-        local ____temp_98 = if ____t_97(____temp_96) then not __t(s.defeated) else __O[3033]
-        __O[3034] = ____temp_98
-        local ____temp_100 = if ____t_99(____temp_98) then not __t(s.chapterEnded) else __O[3034]
-        __O[3035] = ____temp_100
-        local active = if __t(c2) then c2 else if ____t_101(____temp_100) then not __t(otherMode(nil)) else __O[3035]
-        local ready = if __t(active) then active else editing
-        local ____t_114 = __t
-        local ____t_109 = __t
-        local ____t_107 = __t
-        local ____t_105 = __t
-        local ____t_103 = __t
-        local ____temp_102 = if __t(active) then not __t(s.paused) else active
-        __O[3036] = ____temp_102
-        local ____temp_104 = if ____t_103(____temp_102) then not __t(s.dialog) else __O[3036]
-        __O[3037] = ____temp_104
-        local ____temp_106 = if ____t_105(____temp_104) then not __t(s.cutscene) else __O[3037]
-        __O[3038] = ____temp_106
-        local ____temp_108 = if ____t_107(____temp_106) then not __t(s.activity) else __O[3038]
-        __O[3039] = ____temp_108
-        local ____t_112 = __t
-        local ____opt_110 = s.training
-        if ____opt_110 ~= nil then
-            ____opt_110 = ____opt_110.active
+        local c2 = not not ____t_115(____opt_result_114)
+        local ____t_result_123
+        if __t(c2) then
+            ____t_result_123 = c2
+        else
+            local ____t_result_122
+            local ____t_121 = __t
+            local ____t_result_120
+            local ____t_119 = __t
+            local ____t_result_118
+            local ____t_117 = __t
+            local ____temp_116 = not not __t(s.started) and not __t(s.won)
+            __O[3038] = ____temp_116
+            if ____t_117(____temp_116) then
+                ____t_result_118 = not __t(s.defeated)
+            else
+                ____t_result_118 = __O[3038]
+            end
+            __O[3039] = ____t_result_118
+            if ____t_119(____t_result_118) then
+                ____t_result_120 = not __t(s.chapterEnded)
+            else
+                ____t_result_120 = __O[3039]
+            end
+            __O[3040] = ____t_result_120
+            if ____t_121(____t_result_120) then
+                ____t_result_122 = not __t(otherMode(nil))
+            else
+                ____t_result_122 = __O[3040]
+            end
+            ____t_result_123 = ____t_result_122
         end
-        local ____temp_113 = if ____t_109(____temp_108) then not ____t_112(____opt_110) else __O[3039]
-        __O[3040] = ____temp_113
-        local playable = if ____t_114(____temp_113) then not __t(s.routeTransition) else __O[3040]
+        local active = ____t_result_123
+        local ____t_result_124
+        if __t(active) then
+            ____t_result_124 = active
+        else
+            ____t_result_124 = editing
+        end
+        local ready = ____t_result_124
+        local ____t_result_138
+        local ____t_137 = __t
+        local ____t_result_136
+        local ____t_132 = __t
+        local ____t_result_131
+        local ____t_130 = __t
+        local ____t_result_129
+        local ____t_128 = __t
+        local ____t_result_127
+        local ____t_126 = __t
+        local ____t_result_125
+        if __t(active) then
+            ____t_result_125 = not __t(s.paused)
+        else
+            ____t_result_125 = active
+        end
+        __O[3041] = ____t_result_125
+        if ____t_126(____t_result_125) then
+            ____t_result_127 = not __t(s.dialog)
+        else
+            ____t_result_127 = __O[3041]
+        end
+        __O[3042] = ____t_result_127
+        if ____t_128(____t_result_127) then
+            ____t_result_129 = not __t(s.cutscene)
+        else
+            ____t_result_129 = __O[3042]
+        end
+        __O[3043] = ____t_result_129
+        if ____t_130(____t_result_129) then
+            ____t_result_131 = not __t(s.activity)
+        else
+            ____t_result_131 = __O[3043]
+        end
+        __O[3044] = ____t_result_131
+        if ____t_132(____t_result_131) then
+            local ____t_135 = __t
+            local ____opt_133 = s.training
+            if ____opt_133 ~= nil then
+                ____opt_133 = ____opt_133.active
+            end
+            ____t_result_136 = not ____t_135(____opt_133)
+        else
+            ____t_result_136 = __O[3044]
+        end
+        __O[3045] = ____t_result_136
+        if ____t_137(____t_result_136) then
+            ____t_result_138 = not __t(s.routeTransition)
+        else
+            ____t_result_138 = __O[3045]
+        end
+        local playable = ____t_result_138
         for ____, ____value in __iterar((__arrL(
             {
                 __arrL({"campaign-layout-ready", ready}, 2),
@@ -456,24 +653,50 @@ local __O = {};
             apply(nil)
         end
         if not __t(editing) then
-            local ____t_125 = __t
-            local ____t_124 = __t
-            local ____t_122 = __t
-            local ____t_118 = __t
-            local ____t_116 = __t
-            local ____temp_115 = if __t(s.dialog) then s.dialog else s.cutscene
-            __O[3041] = ____temp_115
-            local ____temp_117 = if ____t_116(____temp_115) then __O[3041] else s.activity
-            __O[3042] = ____temp_117
-            local ____opt_119 = s.training
-            if ____opt_119 ~= nil then
-                ____opt_119 = ____opt_119.active
+            local ____t_150 = __t
+            local ____t_result_149
+            local ____t_148 = __t
+            local ____t_result_147
+            local ____t_146 = __t
+            local ____t_result_145
+            local ____t_142 = __t
+            local ____t_result_141
+            local ____t_140 = __t
+            local ____t_result_139
+            if __t(s.dialog) then
+                ____t_result_139 = s.dialog
+            else
+                ____t_result_139 = s.cutscene
             end
-            local ____temp_121 = if ____t_118(____temp_117) then __O[3042] else ____opt_119
-            __O[3043] = ____temp_121
-            local ____temp_123 = if ____t_122(____temp_121) then __O[3043] else s.routeTransition
-            __O[3044] = ____temp_123
-            entry.disabled = not not ____t_125(if ____t_124(____temp_123) then __O[3044] else otherMode(nil))
+            __O[3046] = ____t_result_139
+            if ____t_140(____t_result_139) then
+                ____t_result_141 = __O[3046]
+            else
+                ____t_result_141 = s.activity
+            end
+            __O[3047] = ____t_result_141
+            if ____t_142(____t_result_141) then
+                ____t_result_145 = __O[3047]
+            else
+                local ____opt_143 = s.training
+                if ____opt_143 ~= nil then
+                    ____opt_143 = ____opt_143.active
+                end
+                ____t_result_145 = ____opt_143
+            end
+            __O[3048] = ____t_result_145
+            if ____t_146(____t_result_145) then
+                ____t_result_147 = __O[3048]
+            else
+                ____t_result_147 = s.routeTransition
+            end
+            __O[3049] = ____t_result_147
+            if ____t_148(____t_result_147) then
+                ____t_result_149 = __O[3049]
+            else
+                ____t_result_149 = otherMode(nil)
+            end
+            entry.disabled = not not ____t_150(____t_result_149)
             settingsEntry.disabled = entry.disabled
         end
     end
@@ -485,19 +708,19 @@ local __O = {};
         window:requestAnimationFrame(sync)
     end
     local function release(self)
-        local ____opt_128 = window.Game
-        if ____opt_128 ~= nil then
-            ____opt_128 = ____opt_128.releaseInputs
+        local ____opt_153 = window.Game
+        if ____opt_153 ~= nil then
+            ____opt_153 = ____opt_153.releaseInputs
         end
-        if ____opt_128 ~= nil then
-            ____opt_128(____opt_128)
+        if ____opt_153 ~= nil then
+            ____opt_153(____opt_153)
         end
-        local ____opt_132 = window.Joystick
-        if ____opt_132 ~= nil then
-            ____opt_132 = ____opt_132.reset
+        local ____opt_157 = window.Joystick
+        if ____opt_157 ~= nil then
+            ____opt_157 = ____opt_157.reset
         end
-        if ____opt_132 ~= nil then
-            ____opt_132(____opt_132)
+        if ____opt_157 ~= nil then
+            ____opt_157(____opt_157)
         end
     end
     local function capture(self, active)
@@ -509,50 +732,98 @@ local __O = {};
             return true
         end
         local s = state(nil)
-        local ____t_152 = __t
-        local ____t_151 = __t
-        local ____t_149 = __t
-        local ____t_147 = __t
-        local ____t_145 = __t
-        local ____t_141 = __t
-        local ____t_139 = __t
-        local ____t_137 = __t
-        local ____t_135 = __t
-        local ____otherMode_result_134 = otherMode(nil)
-        __O[3045] = ____otherMode_result_134
-        local ____temp_136 = if ____t_135(____otherMode_result_134) then __O[3045] else s.dialog
-        __O[3046] = ____temp_136
-        local ____temp_138 = if ____t_137(____temp_136) then __O[3046] else s.cutscene
-        __O[3047] = ____temp_138
-        local ____temp_140 = if ____t_139(____temp_138) then __O[3047] else s.activity
-        __O[3048] = ____temp_140
-        local ____opt_142 = s.training
-        if ____opt_142 ~= nil then
-            ____opt_142 = ____opt_142.active
+        local ____t_178 = __t
+        local ____t_result_177
+        local ____t_176 = __t
+        local ____t_result_175
+        local ____t_174 = __t
+        local ____t_result_173
+        local ____t_172 = __t
+        local ____t_result_171
+        local ____t_170 = __t
+        local ____t_result_169
+        local ____t_166 = __t
+        local ____t_result_165
+        local ____t_164 = __t
+        local ____t_result_163
+        local ____t_162 = __t
+        local ____t_result_161
+        local ____t_160 = __t
+        local ____otherMode_result_159 = otherMode(nil)
+        __O[3050] = ____otherMode_result_159
+        if ____t_160(____otherMode_result_159) then
+            ____t_result_161 = __O[3050]
+        else
+            ____t_result_161 = s.dialog
         end
-        local ____temp_144 = if ____t_141(____temp_140) then __O[3048] else ____opt_142
-        __O[3049] = ____temp_144
-        local ____temp_146 = if ____t_145(____temp_144) then __O[3049] else s.routeTransition
-        __O[3050] = ____temp_146
-        local ____temp_148 = if ____t_147(____temp_146) then __O[3050] else s.defeated
-        __O[3051] = ____temp_148
-        local ____temp_150 = if ____t_149(____temp_148) then __O[3051] else s.won
-        __O[3052] = ____temp_150
-        if ____t_152(if ____t_151(____temp_150) then __O[3052] else s.chapterEnded) then
+        __O[3051] = ____t_result_161
+        if ____t_162(____t_result_161) then
+            ____t_result_163 = __O[3051]
+        else
+            ____t_result_163 = s.cutscene
+        end
+        __O[3052] = ____t_result_163
+        if ____t_164(____t_result_163) then
+            ____t_result_165 = __O[3052]
+        else
+            ____t_result_165 = s.activity
+        end
+        __O[3053] = ____t_result_165
+        if ____t_166(____t_result_165) then
+            ____t_result_169 = __O[3053]
+        else
+            local ____opt_167 = s.training
+            if ____opt_167 ~= nil then
+                ____opt_167 = ____opt_167.active
+            end
+            ____t_result_169 = ____opt_167
+        end
+        __O[3054] = ____t_result_169
+        if ____t_170(____t_result_169) then
+            ____t_result_171 = __O[3054]
+        else
+            ____t_result_171 = s.routeTransition
+        end
+        __O[3055] = ____t_result_171
+        if ____t_172(____t_result_171) then
+            ____t_result_173 = __O[3055]
+        else
+            ____t_result_173 = s.defeated
+        end
+        __O[3056] = ____t_result_173
+        if ____t_174(____t_result_173) then
+            ____t_result_175 = __O[3056]
+        else
+            ____t_result_175 = s.won
+        end
+        __O[3057] = ____t_result_175
+        if ____t_176(____t_result_175) then
+            ____t_result_177 = __O[3057]
+        else
+            ____t_result_177 = s.chapterEnded
+        end
+        if ____t_178(____t_result_177) then
             return false
         end
         if __t(window.document:querySelector("dialog[open]")) then
             return false
         end
         returnFocus = window.document.activeElement
-        resumeAfter = not not __t(if __t(s.started) then not __t(s.paused) else s.started)
+        local ____t_180 = __t
+        local ____t_result_179
+        if __t(s.started) then
+            ____t_result_179 = not __t(s.paused)
+        else
+            ____t_result_179 = s.started
+        end
+        resumeAfter = not not ____t_180(____t_result_179)
         if __t(resumeAfter) then
-            local ____opt_155 = window.Game
-            if ____opt_155 ~= nil then
-                ____opt_155 = ____opt_155.pause
+            local ____opt_183 = window.Game
+            if ____opt_183 ~= nil then
+                ____opt_183 = ____opt_183.pause
             end
-            if ____opt_155 ~= nil then
-                ____opt_155(____opt_155)
+            if ____opt_183 ~= nil then
+                ____opt_183(____opt_183)
             end
         end
         editing = true
@@ -586,37 +857,54 @@ local __O = {};
         local resume = resumeAfter
         resumeAfter = false
         sync(nil)
-        local ____t_161 = __t
-        local ____t_160 = __t
-        local ____temp_159 = if __t(resume) then state(nil).started else resume
-        __O[3053] = ____temp_159
-        if ____t_161(if ____t_160(____temp_159) then not __t(window.document:querySelector("dialog[open]")) else __O[3053]) then
-            local ____opt_164 = window.Game
-            if ____opt_164 ~= nil then
-                ____opt_164 = ____opt_164.resume
+        local ____t_190 = __t
+        local ____t_result_189
+        local ____t_188 = __t
+        local ____t_result_187
+        if __t(resume) then
+            ____t_result_187 = state(nil).started
+        else
+            ____t_result_187 = resume
+        end
+        __O[3058] = ____t_result_187
+        if ____t_188(____t_result_187) then
+            ____t_result_189 = not __t(window.document:querySelector("dialog[open]"))
+        else
+            ____t_result_189 = __O[3058]
+        end
+        if ____t_190(____t_result_189) then
+            local ____opt_193 = window.Game
+            if ____opt_193 ~= nil then
+                ____opt_193 = ____opt_193.resume
             end
-            if ____opt_164 ~= nil then
-                ____opt_164(____opt_164)
+            if ____opt_193 ~= nil then
+                ____opt_193(____opt_193)
             end
         end
         release(nil)
         window:requestAnimationFrame(function()
-            local ____t_168 = __t
-            local ____t_167 = __t
-            local ____state_result_started_166 = state(nil).started
-            __O[3054] = ____state_result_started_166
-            if ____t_168(if ____t_167(____state_result_started_166) then not __t(state(nil).paused) else __O[3054]) then
-                local ____opt_169 = window.document:getElementById("gameCanvas")
-                if ____opt_169 ~= nil then
-                    ____opt_169:focus({preventScroll = true})
+            local ____t_198 = __t
+            local ____t_result_197
+            local ____t_196 = __t
+            local ____state_result_started_195 = state(nil).started
+            __O[3059] = ____state_result_started_195
+            if ____t_196(____state_result_started_195) then
+                ____t_result_197 = not __t(state(nil).paused)
+            else
+                ____t_result_197 = __O[3059]
+            end
+            if ____t_198(____t_result_197) then
+                local ____opt_199 = window.document:getElementById("gameCanvas")
+                if ____opt_199 ~= nil then
+                    ____opt_199:focus({preventScroll = true})
                 end
             else
-                local ____t_174 = __t
-                local ____opt_result_173
+                local ____t_204 = __t
+                local ____opt_result_203
                 if returnFocus ~= nil then
-                    ____opt_result_173 = returnFocus.isConnected
+                    ____opt_result_203 = returnFocus.isConnected
                 end
-                if ____t_174(____opt_result_173) then
+                if ____t_204(____opt_result_203) then
                     returnFocus:focus({preventScroll = true})
                 end
             end
@@ -633,12 +921,12 @@ local __O = {};
                 function() return open(nil) end,
                 {once = true}
             )
-            local ____opt_179 = window.ControlSettingsUI
-            if ____opt_179 ~= nil then
-                ____opt_179 = ____opt_179.close
+            local ____opt_209 = window.ControlSettingsUI
+            if ____opt_209 ~= nil then
+                ____opt_209 = ____opt_209.close
             end
-            if ____opt_179 ~= nil then
-                ____opt_179(____opt_179)
+            if ____opt_209 ~= nil then
+                ____opt_209(____opt_209)
             end
         else
             open(nil)
@@ -650,32 +938,40 @@ local __O = {};
     entry.className = "rp-action"
     entry.innerHTML = "<svg viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path d=\"M4 4h9v9H4zm15 0h9v9h-9zM4 19h9v9H4zm15 0h9v9h-9z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"m13 10 6 6-6 6m-3-9 6 6 6-6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg><span><b>BOTÕES DA CAMPANHA</b><small>Arraste, aumente e deixe do seu jeito.</small></span><i aria-hidden=\"true\">›</i>"
     entry:addEventListener("click", open)
-    local ____t_184 = __t
-    local ____opt_181 = window.document:getElementById("ranchControlsBtn")
-    local ____temp_183 = ____opt_181 and ____opt_181:insertAdjacentElement("afterend", entry)
-    __O[3055] = ____temp_183
-    local ____opt_185 = window.document:querySelector("#pauseScreen .game-modal")
-    local ____ = if ____t_184(____temp_183) then __O[3055] else ____opt_185 and ____opt_185:append(entry)
+    local ____t_result_217
+    local ____t_214 = __t
+    local ____opt_211 = window.document:getElementById("ranchControlsBtn")
+    local ____temp_213 = ____opt_211 and ____opt_211:insertAdjacentElement("afterend", entry)
+    __O[3060] = ____temp_213
+    if ____t_214(____temp_213) then
+        ____t_result_217 = __O[3060]
+    else
+        local ____opt_215 = window.document:querySelector("#pauseScreen .game-modal")
+        ____t_result_217 = ____opt_215 and ____opt_215:append(entry)
+    end
     settingsEntry = window.document:createElement("button")
     settingsEntry.id = "campaignLayoutSettingsBtn"
     settingsEntry.type = "button"
     settingsEntry.className = "controls-configure-link campaign-layout-settings-link"
     settingsEntry.innerHTML = "POSIÇÃO E TAMANHO DOS BOTÕES <span>↗</span>"
     settingsEntry:addEventListener("click", fromSettings)
-    local ____opt_187 = window.document:querySelector("#controlSettingsModal .controls-tabs")
-    if ____opt_187 ~= nil then
-        ____opt_187:insertAdjacentElement("beforebegin", settingsEntry)
+    local ____opt_218 = window.document:querySelector("#controlSettingsModal .controls-tabs")
+    if ____opt_218 ~= nil then
+        ____opt_218:insertAdjacentElement("beforebegin", settingsEntry)
     end
     panel:querySelector("[data-ccl-collapse]"):addEventListener(
         "click",
         function(____, event)
             local collapsed = panel.classList:toggle("is-collapsed")
-            event.currentTarget.textContent = if __t(collapsed) then "+" else "−"
+            event.currentTarget.textContent = __t(collapsed) and "+" or "−"
             event.currentTarget:setAttribute(
                 "aria-expanded",
                 tostring(not __t(collapsed))
             )
-            event.currentTarget:setAttribute("aria-label", if __t(collapsed) then "Expandir painel de tamanho dos botões" else "Recolher painel para liberar os botões")
+            event.currentTarget:setAttribute(
+                "aria-label",
+                __t(collapsed) and "Expandir painel de tamanho dos botões" or "Recolher painel para liberar os botões"
+            )
         end
     )
     choose:addEventListener(
@@ -710,29 +1006,29 @@ local __O = {};
         "click",
         function()
             close(nil)
-            local ____opt_191 = window.ControlSettingsUI
-            if ____opt_191 ~= nil then
-                ____opt_191 = ____opt_191.open
+            local ____opt_222 = window.ControlSettingsUI
+            if ____opt_222 ~= nil then
+                ____opt_222 = ____opt_222.open
             end
-            if ____opt_191 ~= nil then
-                ____opt_191(____opt_191)
+            if ____opt_222 ~= nil then
+                ____opt_222(____opt_222)
             end
         end
     )
     local function intercept(self, event)
-        local ____t_197 = __t
-        local ____temp_196 = not __t(editing)
-        if not ____temp_196 then
-            local ____t_195 = __t
-            local ____this_194
-            ____this_194 = event.target
-            local ____opt_193 = ____this_194.closest
-            if ____opt_193 ~= nil then
-                ____opt_193 = ____opt_193(____this_194, ".touch-controls")
+        local ____t_228 = __t
+        local ____temp_227 = not __t(editing)
+        if not ____temp_227 then
+            local ____t_226 = __t
+            local ____this_225
+            ____this_225 = event.target
+            local ____opt_224 = ____this_225.closest
+            if ____opt_224 ~= nil then
+                ____opt_224 = ____opt_224(____this_225, ".touch-controls")
             end
-            ____temp_196 = not ____t_195(____opt_193)
+            ____temp_227 = not ____t_226(____opt_224)
         end
-        if ____t_197(____temp_196) then
+        if ____t_228(____temp_227) then
             return
         end
         local target = event.target:closest(".campaign-layout-target")
@@ -755,16 +1051,16 @@ local __O = {};
                 end)
             end
         else
-            local ____t_202 = __t
-            local ____temp_201 = event.type == "pointermove"
-            if ____temp_201 then
-                local ____opt_result_200
+            local ____t_233 = __t
+            local ____temp_232 = event.type == "pointermove"
+            if ____temp_232 then
+                local ____opt_result_231
                 if pointer ~= nil then
-                    ____opt_result_200 = pointer.id
+                    ____opt_result_231 = pointer.id
                 end
-                ____temp_201 = ____opt_result_200 == event.pointerId
+                ____temp_232 = ____opt_result_231 == event.pointerId
             end
-            if ____t_202(____temp_201) then
+            if ____t_233(____temp_232) then
                 local bounds = layer:getBoundingClientRect()
                 put(
                     nil,
@@ -775,19 +1071,25 @@ local __O = {};
                     }
                 )
             else
-                local ____t_208 = __t
-                local ____t_204 = __t
-                local ____call_result_203 = __call(
+                local ____t_240 = __t
+                local ____t_result_239
+                local ____t_235 = __t
+                local ____call_result_234 = __call(
                     __arrL({"pointerup", "pointercancel", "lostpointercapture"}, 3),
                     "includes",
                     event.type
                 )
-                __O[3056] = ____call_result_203
-                local ____opt_result_207
-                if pointer ~= nil then
-                    ____opt_result_207 = pointer.id
+                __O[3061] = ____call_result_234
+                if ____t_235(____call_result_234) then
+                    local ____opt_result_238
+                    if pointer ~= nil then
+                        ____opt_result_238 = pointer.id
+                    end
+                    ____t_result_239 = ____opt_result_238 == event.pointerId
+                else
+                    ____t_result_239 = __O[3061]
                 end
-                if ____t_208(if ____t_204(____call_result_203) then ____opt_result_207 == event.pointerId else __O[3056]) then
+                if ____t_240(____t_result_239) then
                     pointer = nil
                     persist(nil)
                 end
@@ -829,10 +1131,16 @@ local __O = {};
                     __arr(__TS__Spread(__iter(panel:querySelectorAll("button,input,select")))),
                     "filter",
                     function(____, e)
-                        local ____t_210 = __t
-                        local ____temp_209 = not __t(e.hidden) and not __t(e.disabled)
-                        __O[3057] = ____temp_209
-                        return if ____t_210(____temp_209) then __len(e:getClientRects()) else __O[3057]
+                        local ____t_result_243
+                        local ____t_242 = __t
+                        local ____temp_241 = not __t(e.hidden) and not __t(e.disabled)
+                        __O[3062] = ____temp_241
+                        if ____t_242(____temp_241) then
+                            ____t_result_243 = __len(e:getClientRects())
+                        else
+                            ____t_result_243 = __O[3062]
+                        end
+                        return ____t_result_243
                     end
                 )
                 local first = __get(list, 0)
@@ -840,7 +1148,14 @@ local __O = {};
                     list,
                     __len(list) - 1
                 )
-                if __t(if __t(event.shiftKey) then window.document.activeElement == first else event.shiftKey) then
+                local ____t_245 = __t
+                local ____t_result_244
+                if __t(event.shiftKey) then
+                    ____t_result_244 = window.document.activeElement == first
+                else
+                    ____t_result_244 = event.shiftKey
+                end
+                if ____t_245(____t_result_244) then
                     event:preventDefault()
                     last:focus()
                 elseif __t(not __t(event.shiftKey) and window.document.activeElement == last) then
@@ -923,9 +1238,9 @@ local __O = {};
     )
     window:addEventListener("resize", schedule)
     window:addEventListener("c2-controles", schedule)
-    local ____opt_211 = window.visualViewport
-    if ____opt_211 ~= nil then
-        ____opt_211:addEventListener("resize", schedule)
+    local ____opt_246 = window.visualViewport
+    if ____opt_246 ~= nil then
+        ____opt_246:addEventListener("resize", schedule)
     end
     window.CampaignControls = __ord(
         {

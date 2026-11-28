@@ -124,15 +124,35 @@ local ____exports = {};
         if o == nil then
             o = {}
         end
-        local t = if __t(o.frame) then o.frame else 0
-        local sc = 2 * if __t(o.scale) then o.scale else 1
+        local ____t_result_0
+        if __t(o.frame) then
+            ____t_result_0 = o.frame
+        else
+            ____t_result_0 = 0
+        end
+        local t = ____t_result_0
+        local ____t_result_1
+        if __t(o.scale) then
+            ____t_result_1 = o.scale
+        else
+            ____t_result_1 = 1
+        end
+        local sc = 2 * ____t_result_1
         local blink = __mod(t + 0.5, 3.7) < 0.14
         c:save()
         c:translate(
             math.floor(x + 0.5),
             math.floor(y + 0.5)
         )
-        c:scale(if __lt(o.facing, 0) then -sc else sc, sc)
+        local ____c_3 = c
+        local ____c_scale_4 = c.scale
+        local ____lt_result_2
+        if __lt(o.facing, 0) then
+            ____lt_result_2 = -sc
+        else
+            ____lt_result_2 = sc
+        end
+        ____c_scale_4(____c_3, ____lt_result_2, sc)
         if __isFiniteN(o.opacity) then
             c.globalAlpha = c.globalAlpha * o.opacity
         end
@@ -226,7 +246,10 @@ local ____exports = {};
             1,
             "#d78b83"
         )
-        c:translate(0, if math.sin(t * 2.2) > 0.66 then -1 else 0)
+        c:translate(
+            0,
+            math.sin(t * 2.2) > 0.66 and -1 or 0
+        )
         shape(
             nil,
             c,
@@ -438,30 +461,50 @@ local ____exports = {};
                 "#8e543e"
             )
         end
-        local gesture = if __t(o.talking) then o.talking else if __t(o.seated) then math.sin(t * 1.7) > 0.45 else o.seated
-        shape(nil, c, if __t(gesture) then __arrL(
-            {
-                __arrL({7, -24}, 2),
-                __arrL({10, -23}, 2),
-                __arrL({11, -19}, 2),
-                __arrL({14, -21}, 2),
-                __arrL({15, -19}, 2),
-                __arrL({12, -15}, 2),
-                __arrL({8, -16}, 2),
-                __arrL({6, -20}, 2)
-            },
-            8
-        ) else __arrL(
-            {
-                __arrL({7, -24}, 2),
-                __arrL({10, -23}, 2),
-                __arrL({11, -18}, 2),
-                __arrL({10, -14}, 2),
-                __arrL({7, -15}, 2),
-                __arrL({7, -19}, 2)
-            },
-            6
-        ), "#c18a50")
+        local ____t_result_6
+        if __t(o.talking) then
+            ____t_result_6 = o.talking
+        else
+            local ____t_result_5
+            if __t(o.seated) then
+                ____t_result_5 = math.sin(t * 1.7) > 0.45
+            else
+                ____t_result_5 = o.seated
+            end
+            ____t_result_6 = ____t_result_5
+        end
+        local gesture = ____t_result_6
+        local ____shape_9 = shape
+        local ____c_8 = c
+        local ____t_result_7
+        if __t(gesture) then
+            ____t_result_7 = __arrL(
+                {
+                    __arrL({7, -24}, 2),
+                    __arrL({10, -23}, 2),
+                    __arrL({11, -19}, 2),
+                    __arrL({14, -21}, 2),
+                    __arrL({15, -19}, 2),
+                    __arrL({12, -15}, 2),
+                    __arrL({8, -16}, 2),
+                    __arrL({6, -20}, 2)
+                },
+                8
+            )
+        else
+            ____t_result_7 = __arrL(
+                {
+                    __arrL({7, -24}, 2),
+                    __arrL({10, -23}, 2),
+                    __arrL({11, -18}, 2),
+                    __arrL({10, -14}, 2),
+                    __arrL({7, -15}, 2),
+                    __arrL({7, -19}, 2)
+                },
+                6
+            )
+        end
+        ____shape_9(nil, ____c_8, ____t_result_7, "#c18a50")
         rect(
             nil,
             c,
@@ -907,9 +950,9 @@ local ____exports = {};
                     c,
                     53 + __mod(i * 167, 365),
                     9 + __mod(i * 37, 84),
-                    if __t(__mod(i, 8)) then 1 else 2,
+                    __t(__mod(i, 8)) and 1 or 2,
                     1,
-                    if __t(__mod(i, 3)) then "#ae9db7" else "#eee1c5"
+                    __t(__mod(i, 3)) and "#ae9db7" or "#eee1c5"
                 )
                 i = i + 1
             end
@@ -1018,7 +1061,7 @@ local ____exports = {};
                             y + 4,
                             2,
                             3,
-                            if __t(__mod(i + k, 3)) then "#efb079" else "#49445a"
+                            __t(__mod(i + k, 3)) and "#efb079" or "#49445a"
                         )
                         k = k + 1
                     end
@@ -1094,7 +1137,7 @@ local ____exports = {};
                     140 - __mod(i * 3, 7),
                     15,
                     9,
-                    if __t(__mod(i, 3)) then "#324849" else "#3d5150"
+                    __t(__mod(i, 3)) and "#324849" or "#3d5150"
                 )
                 i = i + 1
             end
@@ -1234,7 +1277,7 @@ local ____exports = {};
                     i * 7,
                     480,
                     1,
-                    if __t(__mod(i, 2)) then "#975f55" else "#a56a59"
+                    __t(__mod(i, 2)) and "#975f55" or "#a56a59"
                 )
                 i = i + 1
             end
@@ -1540,7 +1583,7 @@ local ____exports = {};
                                 },
                                 4
                             ),
-                            if __t(__mod(row + col, 2)) then "#81565a" else "#966366"
+                            __t(__mod(row + col, 2)) and "#81565a" or "#966366"
                         )
                         col = col + 1
                     end
@@ -2017,7 +2060,7 @@ local ____exports = {};
             12,
             "#d7a875"
         )
-        local flicker = if math.sin(t * 4.5) > 0.25 then 1 else 0
+        local flicker = math.sin(t * 4.5) > 0.25 and 1 or 0
         light(
             nil,
             c,
@@ -2110,7 +2153,13 @@ local ____exports = {};
         local t = s.time
         local nervous = s.phase == "breath"
         local speak = s.phase == "choice" or s.phase == "outcome"
-        local lift = if __t(nervous) then math.floor(math.sin(t * 4) + 0.5) else 0
+        local ____t_result_10
+        if __t(nervous) then
+            ____t_result_10 = math.floor(math.sin(t * 4) + 0.5)
+        else
+            ____t_result_10 = 0
+        end
+        local lift = ____t_result_10
         window.Art:drawCharacter(
             c,
             "daroca",

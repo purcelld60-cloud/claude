@@ -5,6 +5,9 @@ local window = __JSR.window
 local tostring = __JSR.__str
 local __lt, __gt, __mod, __ord, __arrL, __iterar, __t, __get, __len, __call, __add, __shr = __JSR.__lt, __JSR.__gt, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__shr
 local ____lualib = require(script.Parent.lualib_bundle)
+local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
+local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
+local __TS__SparseArraySpread = ____lualib.__TS__SparseArraySpread
 local __TS__Iterator = ____lualib.__TS__Iterator
 local ____exports = {}
 local __O = {};
@@ -93,7 +96,7 @@ local __O = {};
             R(
                 nil,
                 c,
-                x + if __t(__mod(s, 2)) then 2 else 5,
+                x + (__t(__mod(s, 2)) and 2 or 5),
                 y,
                 1,
                 3,
@@ -102,7 +105,7 @@ local __O = {};
             R(
                 nil,
                 c,
-                x + if __t(__mod(s, 2)) then 5 else 2,
+                x + (__t(__mod(s, 2)) and 5 or 2),
                 y + 4,
                 1,
                 4,
@@ -276,13 +279,19 @@ local __O = {};
         return 482
     end
     local ____ = "use strict"
-    local ____t_3 = __t
-    local ____t_2 = __t
-    local ____opt_0 = window.CampanhaCenarios
-    if ____opt_0 ~= nil then
-        ____opt_0 = ____opt_0.arte
+    local ____t_4 = __t
+    local ____t_result_3
+    if __t(window.CampanhaAmbientes) then
+        ____t_result_3 = window.CampanhaAmbientes
+    else
+        local ____t_2 = __t
+        local ____opt_0 = window.CampanhaCenarios
+        if ____opt_0 ~= nil then
+            ____opt_0 = ____opt_0.arte
+        end
+        ____t_result_3 = not ____t_2(____opt_0)
     end
-    if ____t_3(if __t(window.CampanhaAmbientes) then window.CampanhaAmbientes else not ____t_2(____opt_0)) then
+    if ____t_4(____t_result_3) then
         return
     end
     local A = window.CampanhaCenarios.arte
@@ -533,10 +542,10 @@ local __O = {};
                                 yy + 2 + math.floor(hash(nil, x + r) * 3 + 0.5),
                                 2,
                                 1,
-                                if __gt(
+                                __gt(
                                     hash(nil, x + r),
                                     0.5
-                                ) then "#9a6a42" else "#7a4c2c"
+                                ) and "#9a6a42" or "#7a4c2c"
                             )
                         end
                         x = x + 3
@@ -577,15 +586,23 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        R(
+        local ____R_7 = R
+        local ____array_6 = __TS__SparseArrayNew(
             nil,
             c,
             x - 3,
             y - 3,
             w + 6,
-            h + 3,
-            if __t(o.batente) then o.batente else "#efe6d4"
+            h + 3
         )
+        local ____t_result_5
+        if __t(o.batente) then
+            ____t_result_5 = o.batente
+        else
+            ____t_result_5 = "#efe6d4"
+        end
+        __TS__SparseArrayPush(____array_6, ____t_result_5)
+        ____R_7(__TS__SparseArraySpread(____array_6))
         R(
             nil,
             c,
@@ -973,7 +990,7 @@ local __O = {};
                     top,
                     20,
                     GY - top,
-                    if __t(__mod(x / 20, 2)) then "#e6e2d8" else "#dcd7cb"
+                    __t(__mod(x / 20, 2)) and "#e6e2d8" or "#dcd7cb"
                 )
                 R(
                     nil,
@@ -1488,7 +1505,7 @@ local __O = {};
                         }, 5),
                         k
                     ),
-                    if __t(__mod(k, 2)) then 1 else -1
+                    __t(__mod(k, 2)) and 1 or -1
                 )
                 k = k + 1
             end
@@ -1763,7 +1780,7 @@ local __O = {};
                     c,
                     sx,
                     206,
-                    if x < FR.ENT then "#b86ac8" else "#e8c84a",
+                    x < FR.ENT and "#b86ac8" or "#e8c84a",
                     x,
                     0.8
                 )
@@ -2230,48 +2247,50 @@ local __O = {};
         do
             local x = 120
             while x < P2.W do
-                local sx = x - camL
-                local sw = math.floor(math.sin(t * 1.1 + x) + 0.5)
-                if not __t(vis(nil, sx, 40)) then
-                    continue
+                do
+                    local sx = x - camL
+                    local sw = math.floor(math.sin(t * 1.1 + x) + 0.5)
+                    if not __t(vis(nil, sx, 40)) then
+                        do x = x + 260 continue end
+                    end
+                    R(
+                        nil,
+                        c,
+                        sx + 8,
+                        44,
+                        1,
+                        6,
+                        "#5a6066"
+                    )
+                    vgrad(
+                        nil,
+                        c,
+                        sx + 4 + sw,
+                        50,
+                        26,
+                        30,
+                        "#c43c3a",
+                        "#7a1e1e"
+                    )
+                    R(
+                        nil,
+                        c,
+                        sx + 4 + sw,
+                        50,
+                        26,
+                        2,
+                        "#e86a6a"
+                    )
+                    R(
+                        nil,
+                        c,
+                        sx + 8 + sw,
+                        72,
+                        18,
+                        2,
+                        "#f2c94c"
+                    )
                 end
-                R(
-                    nil,
-                    c,
-                    sx + 8,
-                    44,
-                    1,
-                    6,
-                    "#5a6066"
-                )
-                vgrad(
-                    nil,
-                    c,
-                    sx + 4 + sw,
-                    50,
-                    26,
-                    30,
-                    "#c43c3a",
-                    "#7a1e1e"
-                )
-                R(
-                    nil,
-                    c,
-                    sx + 4 + sw,
-                    50,
-                    26,
-                    2,
-                    "#e86a6a"
-                )
-                R(
-                    nil,
-                    c,
-                    sx + 8 + sw,
-                    72,
-                    18,
-                    2,
-                    "#f2c94c"
-                )
                 x = x + 260
             end
         end
@@ -2457,19 +2476,34 @@ local __O = {};
                 do
                     local x = x0
                     while __lt(x, x1) do
-                        R(
+                        local ____R_10 = R
+                        local ____array_9 = __TS__SparseArrayNew(
                             nil,
                             c,
                             x,
                             y,
                             BL,
-                            BL,
-                            if __t(__mod(
-                                __add(x, y) / BL,
-                                2
-                            )) then a else b2
+                            BL
                         )
-                        if __t(if __t(flor) then __mod(x / BL + y / BL, 3) == 0 else flor) then
+                        local ____t_result_8
+                        if __t(__mod(
+                            __add(x, y) / BL,
+                            2
+                        )) then
+                            ____t_result_8 = a
+                        else
+                            ____t_result_8 = b2
+                        end
+                        __TS__SparseArrayPush(____array_9, ____t_result_8)
+                        ____R_10(__TS__SparseArraySpread(____array_9))
+                        local ____t_12 = __t
+                        local ____t_result_11
+                        if __t(flor) then
+                            ____t_result_11 = __mod(x / BL + y / BL, 3) == 0
+                        else
+                            ____t_result_11 = flor
+                        end
+                        if ____t_12(____t_result_11) then
                             R(
                                 nil,
                                 c,
@@ -2509,15 +2543,23 @@ local __O = {};
         do
             local y = y0
             while __lt(y, y1) do
-                R(
+                local ____R_15 = R
+                local ____array_14 = __TS__SparseArrayNew(
                     nil,
                     c,
                     x0,
                     y,
                     x1 - x0,
-                    4,
-                    if __t(__mod(y / 4, 2)) then base else shadeHex(nil, base, 0.92)
+                    4
                 )
+                local ____t_result_13
+                if __t(__mod(y / 4, 2)) then
+                    ____t_result_13 = base
+                else
+                    ____t_result_13 = shadeHex(nil, base, 0.92)
+                end
+                __TS__SparseArrayPush(____array_14, ____t_result_13)
+                ____R_15(__TS__SparseArraySpread(____array_14))
                 R(
                     nil,
                     c,
@@ -2871,7 +2913,7 @@ local __O = {};
                 c,
                 x,
                 b.floor,
-                if n == "4" then "#8a4a2a" else "#7a5232",
+                n == "4" and "#8a4a2a" or "#7a5232",
                 {num = true}
             )
             R(
@@ -2881,7 +2923,7 @@ local __O = {};
                 b.floor - 2,
                 20,
                 2,
-                if n == "4" then "#b83a3a" else "#5a6a3a"
+                n == "4" and "#b83a3a" or "#5a6a3a"
             )
         end
         for ____, x in __iterar((__arrL({
@@ -3240,7 +3282,7 @@ local __O = {};
                     199 - __mod(k, 3) * 4,
                     3,
                     4,
-                    if __t(__mod(k, 2)) then "#3f7a3c" else "#5f9a46"
+                    __t(__mod(k, 2)) and "#3f7a3c" or "#5f9a46"
                 )
                 k = k + 1
             end
@@ -3292,10 +3334,10 @@ local __O = {};
                     b.floor + 1,
                     2,
                     3,
-                    if __gt(
+                    __gt(
                         hash(nil, x),
                         0.5
-                    ) then "#9a2a2a" else "#8a2424"
+                    ) and "#9a2a2a" or "#8a2424"
                 )
                 x = x + 2
             end
@@ -3336,10 +3378,10 @@ local __O = {};
                 nil,
                 c,
                 x - 1,
-                147 - if f == 1 then 1 else 0,
+                147 - (f == 1 and 1 or 0),
                 4,
                 3,
-                if f == 2 then "#ffb04a" else "#f2a83a"
+                f == 2 and "#ffb04a" or "#f2a83a"
             )
             R(
                 nil,
@@ -4066,10 +4108,10 @@ local __O = {};
                             f - 12 + y,
                             1,
                             1,
-                            if __t(__mod(
+                            __t(__mod(
                                 __shr(x, 1) + __shr(y, 1),
                                 2
-                            )) then "#b83a3a" else "#8a2424"
+                            )) and "#b83a3a" or "#8a2424"
                         )
                         y = y + 1
                     end
@@ -4319,7 +4361,7 @@ local __O = {};
                 b.floor - 31,
                 3,
                 1,
-                if math.sin(t * 3) > 0 then "#e05a8a" else "#5ae0d0"
+                math.sin(t * 3) > 0 and "#e05a8a" or "#5ae0d0"
             )
         end
         do
@@ -4331,13 +4373,13 @@ local __O = {};
                 b.floor - 17,
                 4,
                 6,
-                if f > 0.85 then "#ffe39a" else "#f6c86a"
+                f > 0.85 and "#ffe39a" or "#f6c86a"
             )
             R(
                 nil,
                 c,
                 288,
-                b.floor - 16 - if f > 0.9 then 1 else 0,
+                b.floor - 16 - (f > 0.9 and 1 or 0),
                 2,
                 3,
                 "#fff6d0"
@@ -4368,7 +4410,7 @@ local __O = {};
                             149 + hash(nil, k * 5.3) * 10,
                             1,
                             1,
-                            if math.sin(t * 2 + k) > -0.3 then "#f6f2ea" else "#8a90a8"
+                            math.sin(t * 2 + k) > -0.3 and "#f6f2ea" or "#8a90a8"
                         )
                         k = k + 1
                     end
@@ -5967,17 +6009,31 @@ local __O = {};
             math.min(0.05, t - revT)
         )
         revT = t
-        revela = cl(nil, revela + if __t(dentro) then dt * 3.5 else -dt * 3)
+        local ____cl_18 = cl
+        local ____revela_17 = revela
+        local ____t_result_16
+        if __t(dentro) then
+            ____t_result_16 = dt * 3.5
+        else
+            ____t_result_16 = -dt * 3
+        end
+        revela = ____cl_18(nil, ____revela_17 + ____t_result_16)
         do
             local i = 0
             while i < 10 do
                 local wx = 40 + i * 100 + math.sin(t * 0.4 + i) * 30
                 local sx = wx - camL
-                local ____t_6 = __t
-                local ____t_5 = __t
-                local ____vis_result_4 = vis(nil, sx, 20)
-                __O[431] = ____vis_result_4
-                if ____t_6(if ____t_5(____vis_result_4) then wx < ESC.Z0 - 10 or wx > ESC.Z1 + 10 else __O[431]) then
+                local ____t_22 = __t
+                local ____t_result_21
+                local ____t_20 = __t
+                local ____vis_result_19 = vis(nil, sx, 20)
+                __O[431] = ____vis_result_19
+                if ____t_20(____vis_result_19) then
+                    ____t_result_21 = wx < ESC.Z0 - 10 or wx > ESC.Z1 + 10
+                else
+                    ____t_result_21 = __O[431]
+                end
+                if ____t_22(____t_result_21) then
                     pessoa(
                         nil,
                         c,
@@ -6403,7 +6459,7 @@ local __O = {};
                             "#f08a24",
                             "#2c5a9e"
                         }, 7),
-                        math.floor(hash(nil, i) * 7) + if __mod(i, 7) == 0 then 1 else 0
+                        math.floor(hash(nil, i) * 7) + (__mod(i, 7) == 0 and 1 or 0)
                     )
                 )
                 i = i + 1
@@ -6485,7 +6541,7 @@ local __O = {};
                     nil,
                     c,
                     x,
-                    177 + if __t(__mod(x, 4)) then 0 else 1,
+                    177 + (__t(__mod(x, 4)) and 0 or 1),
                     1,
                     5,
                     "#e8eaec"
@@ -6543,7 +6599,7 @@ local __O = {};
                         182 - __mod(k, 3) * 5,
                         4,
                         5,
-                        if __t(__mod(k, 2)) then "#4f8a3a" else "#5f9a46"
+                        __t(__mod(k, 2)) and "#4f8a3a" or "#5f9a46"
                     )
                     k = k + 1
                 end
@@ -6694,21 +6750,21 @@ local __O = {};
         do
             local i = 0
             while i < 12 do
-                local wx = 220 + __mod(i, 6) * 60 + math.sin(t * 0.5 + i) * if i > 5 then 50 else 2
+                local wx = 220 + __mod(i, 6) * 60 + math.sin(t * 0.5 + i) * (i > 5 and 50 or 2)
                 local sx = wx - camL
                 if __t(vis(nil, sx, 20)) then
                     pessoa(
                         nil,
                         c,
                         sx,
-                        if i > 5 then 216 else 202,
+                        i > 5 and 216 or 202,
                         i
                     )
                     R(
                         nil,
                         c,
                         sx - 1,
-                        if i > 5 then 216 else 202 - 14,
+                        (i > 5 and 216 or 202) - 14,
                         7,
                         2,
                         "#2c5a9e"
@@ -6894,13 +6950,16 @@ local __O = {};
                         function(____, ____bindingPattern0, i)
                             local n
                             n = ____bindingPattern0[1]
-                            return __arrL({
-                                200 + i * 150 + 77,
-                                SHOP.TOP + 10,
-                                n,
-                                if __len(n) > 12 then 5 else 7,
-                                "#f6f2ea"
-                            }, 5)
+                            return __arrL(
+                                {
+                                    200 + i * 150 + 77,
+                                    SHOP.TOP + 10,
+                                    n,
+                                    __len(n) > 12 and 5 or 7,
+                                    "#f6f2ea"
+                                },
+                                5
+                            )
                         end
                     ),
                     "concat",

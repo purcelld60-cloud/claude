@@ -87,47 +87,84 @@ local __O = {};
     pad:addEventListener(
         "pointerdown",
         function(____, e)
-            local ____t_10 = __t
+            local ____t_11 = __t
+            local ____t_result_10
             local ____t_9 = __t
             local ____temp_8 = pointer ~= nil
-            __O[2243] = ____temp_8
-            if ____t_10(if ____t_9(____temp_8) then __O[2243] else e.pointerType == "mouse" and e.button ~= 0) then
+            __O[2248] = ____temp_8
+            if ____t_9(____temp_8) then
+                ____t_result_10 = __O[2248]
+            else
+                ____t_result_10 = e.pointerType == "mouse" and e.button ~= 0
+            end
+            if ____t_11(____t_result_10) then
                 return
             end
-            local ____opt_11 = window.Game
-            if ____opt_11 ~= nil then
-                ____opt_11 = ____opt_11:getState()
+            local ____opt_12 = window.Game
+            if ____opt_12 ~= nil then
+                ____opt_12 = ____opt_12:getState()
             end
-            local s = ____opt_11
+            local s = ____opt_12
+            local ____t_33 = __t
+            local ____t_result_32
             local ____t_31 = __t
-            local ____t_30 = __t
-            local ____t_28 = __t
-            local ____t_26 = __t
-            local ____t_22 = __t
-            local ____t_20 = __t
-            local ____t_18 = __t
-            local ____t_16 = __t
-            local ____opt_result_15
+            local ____t_result_30
+            local ____t_29 = __t
+            local ____t_result_28
+            local ____t_27 = __t
+            local ____t_result_26
+            local ____t_23 = __t
+            local ____t_result_22
+            local ____t_21 = __t
+            local ____t_result_20
+            local ____t_19 = __t
+            local ____t_17 = __t
+            local ____opt_result_16
             if s ~= nil then
-                ____opt_result_15 = s.started
+                ____opt_result_16 = s.started
             end
-            local ____temp_17 = not ____t_16(____opt_result_15)
-            __O[2244] = ____temp_17
-            local ____temp_19 = if ____t_18(____temp_17) then __O[2244] else s.paused
-            __O[2245] = ____temp_19
-            local ____temp_21 = if ____t_20(____temp_19) then __O[2245] else s.dialog
-            __O[2246] = ____temp_21
-            local ____opt_23 = s.training
-            if ____opt_23 ~= nil then
-                ____opt_23 = ____opt_23.active
+            local ____temp_18 = not ____t_17(____opt_result_16)
+            __O[2249] = ____temp_18
+            if ____t_19(____temp_18) then
+                ____t_result_20 = __O[2249]
+            else
+                ____t_result_20 = s.paused
             end
-            local ____temp_25 = if ____t_22(____temp_21) then __O[2246] else ____opt_23
-            __O[2247] = ____temp_25
-            local ____temp_27 = if ____t_26(____temp_25) then __O[2247] else s.defeated
-            __O[2248] = ____temp_27
-            local ____temp_29 = if ____t_28(____temp_27) then __O[2248] else s.won
-            __O[2249] = ____temp_29
-            if ____t_31(if ____t_30(____temp_29) then __O[2249] else s.cutscene) then
+            __O[2250] = ____t_result_20
+            if ____t_21(____t_result_20) then
+                ____t_result_22 = __O[2250]
+            else
+                ____t_result_22 = s.dialog
+            end
+            __O[2251] = ____t_result_22
+            if ____t_23(____t_result_22) then
+                ____t_result_26 = __O[2251]
+            else
+                local ____opt_24 = s.training
+                if ____opt_24 ~= nil then
+                    ____opt_24 = ____opt_24.active
+                end
+                ____t_result_26 = ____opt_24
+            end
+            __O[2252] = ____t_result_26
+            if ____t_27(____t_result_26) then
+                ____t_result_28 = __O[2252]
+            else
+                ____t_result_28 = s.defeated
+            end
+            __O[2253] = ____t_result_28
+            if ____t_29(____t_result_28) then
+                ____t_result_30 = __O[2253]
+            else
+                ____t_result_30 = s.won
+            end
+            __O[2254] = ____t_result_30
+            if ____t_31(____t_result_30) then
+                ____t_result_32 = __O[2254]
+            else
+                ____t_result_32 = s.cutscene
+            end
+            if ____t_33(____t_result_32) then
                 return
             end
             if __t(e.cancelable) then

@@ -22,19 +22,32 @@ local __O = {};
         end
         do
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____t_8 = __t
-                local ____opt_5 = window.Game
-                if ____opt_5 ~= nil then
-                    ____opt_5 = ____opt_5.soundOn
+                local ____t_9 = __t
+                local ____opt_6 = window.Game
+                if ____opt_6 ~= nil then
+                    ____opt_6 = ____opt_6.soundOn
                 end
-                local ____opt_result_7
-                if ____opt_5 ~= nil then
-                    ____opt_result_7 = ____opt_5(____opt_5)
+                local ____opt_result_8
+                if ____opt_6 ~= nil then
+                    ____opt_result_8 = ____opt_6(____opt_6)
                 end
-                if not ____t_8(____opt_result_7) then
+                if not ____t_9(____opt_result_8) then
                     return true
                 end
-                audio = if __t(audio) then audio else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                local ____t_result_12
+                if __t(audio) then
+                    ____t_result_12 = audio
+                else
+                    local ____newExpr_11 = __newExpr
+                    local ____t_result_10
+                    if __t(window.AudioContext) then
+                        ____t_result_10 = window.AudioContext
+                    else
+                        ____t_result_10 = window.webkitAudioContext
+                    end
+                    ____t_result_12 = ____newExpr_11(____t_result_10)
+                end
+                audio = ____t_result_12
                 local o = audio:createOscillator()
                 local g = audio:createGain()
                 o.type = tipo
@@ -52,38 +65,59 @@ local __O = {};
         end
     end
     function apertar(self, lane)
-        local ____t_11 = __t
-        local ____t_10 = __t
-        local ____temp_9 = not __t(jogo)
-        __O[1411] = ____temp_9
-        if ____t_11(if ____t_10(____temp_9) then __O[1411] else jogo.fim) then
+        local ____t_16 = __t
+        local ____t_result_15
+        local ____t_14 = __t
+        local ____temp_13 = not __t(jogo)
+        __O[1416] = ____temp_13
+        if ____t_14(____temp_13) then
+            ____t_result_15 = __O[1416]
+        else
+            ____t_result_15 = jogo.fim
+        end
+        if ____t_16(____t_result_15) then
             return
         end
         __set(jogo.trilha, lane, 0.18)
         local melhor = nil
         local dist = 1
         for ____, n in __iterar((jogo.notas)) do
-            if __t(n.ok ~= nil or n.lane ~= lane) then
-                continue
-            end
-            local d = math.abs(n.t - jogo.t)
-            if d < dist then
-                dist = d
-                melhor = n
+            do
+                if __t(n.ok ~= nil or n.lane ~= lane) then
+                    continue
+                end
+                local d = math.abs(n.t - jogo.t)
+                if d < dist then
+                    dist = d
+                    melhor = n
+                end
             end
         end
-        if __t(if __t(melhor) then dist <= 0.16 else melhor) then
-            local ____set_13 = __set
-            local ____temp_12 = if __t(jogo.acerto) then jogo.acerto else __arrL({0, 0, 0, 0}, 4)
-            jogo.acerto = ____temp_12
-            ____set_13(____temp_12, lane, 0.3)
-            melhor.ok = if dist <= 0.06 then 1 else 0.7
+        local ____t_18 = __t
+        local ____t_result_17
+        if __t(melhor) then
+            ____t_result_17 = dist <= 0.16
+        else
+            ____t_result_17 = melhor
+        end
+        if ____t_18(____t_result_17) then
+            local ____set_21 = __set
+            local ____jogo_20 = jogo
+            local ____t_result_19
+            if __t(jogo.acerto) then
+                ____t_result_19 = jogo.acerto
+            else
+                ____t_result_19 = __arrL({0, 0, 0, 0}, 4)
+            end
+            ____jogo_20.acerto = ____t_result_19
+            ____set_21(____t_result_19, lane, 0.3)
+            melhor.ok = dist <= 0.06 and 1 or 0.7
             jogo.combo = jogo.combo + 1
             jogo.melhorCombo = math.max(jogo.melhorCombo, jogo.combo)
-            jogo.msg = if dist <= 0.06 then "PERFEITO!" else "BOM!"
+            jogo.msg = dist <= 0.06 and "PERFEITO!" or "BOM!"
             jogo.msgT = 0.45
             jogo.pulo = 0.25
-            som(nil, if dist <= 0.06 then 880 else 660)
+            som(nil, dist <= 0.06 and 880 or 660)
         else
             jogo.combo = 0
             jogo.msg = "FORA DO RITMO"
@@ -102,7 +136,17 @@ local __O = {};
         return math.floor(__call(
             n,
             "reduce",
-            function(____, s, x) return __add(s, if __t(x.ok) then x.ok else 0) end,
+            function(____, s, x)
+                local ____add_24 = __add
+                local ____s_23 = s
+                local ____t_result_22
+                if __t(x.ok) then
+                    ____t_result_22 = x.ok
+                else
+                    ____t_result_22 = 0
+                end
+                return ____add_24(____s_23, ____t_result_22)
+            end,
             0
         ) / __len(n) * 100 + 0.5)
     end
@@ -112,12 +156,18 @@ local __O = {};
             "filter",
             function(____, x) return x.ok ~= nil end
         )
-        return if __t(__len(n)) then math.floor(__call(
-            n,
-            "reduce",
-            function(____, s, x) return __add(s, x.ok) end,
-            0
-        ) / __len(n) * 100 + 0.5) else 100
+        local ____t_result_25
+        if __t(__len(n)) then
+            ____t_result_25 = math.floor(__call(
+                n,
+                "reduce",
+                function(____, s, x) return __add(s, x.ok) end,
+                0
+            ) / __len(n) * 100 + 0.5)
+        else
+            ____t_result_25 = 100
+        end
+        return ____t_result_25
     end
     function fundo(self)
         if __t(fundoCv) then
@@ -481,10 +531,10 @@ local __O = {};
                             146 - y,
                             6,
                             2,
-                            if y > 50 then "#ff4fa8" else if y > 30 then "#ffd24a" else __get(
+                            y > 50 and "#ff4fa8" or (y > 30 and "#ffd24a" or __get(
                                 CORES,
                                 __mod(k + beat, 4)
-                            )
+                            ))
                         )
                         y = y + 3
                     end
@@ -496,7 +546,7 @@ local __O = {};
             c,
             cfg.titulo,
             140,
-            if __t(cfg.versos) then 60 else 64,
+            __t(cfg.versos) and 60 or 64,
             8,
             "#ffffff",
             "#3a1a4a"
@@ -587,45 +637,53 @@ local __O = {};
         end
         do
             pcall(function()
-                local ____opt_16 = window.Art
-                if ____opt_16 ~= nil then
-                    ____opt_16 = ____opt_16.drawCharacter
+                local ____opt_33 = window.Art
+                if ____opt_33 ~= nil then
+                    ____opt_33 = ____opt_33.drawCharacter
                 end
-                if ____opt_16 ~= nil then
-                    ____opt_16(
-                        ____opt_16,
+                if ____opt_33 ~= nil then
+                    local ____cfg_rival_31 = cfg.rival
+                    local ____temp_30 = t * 2
+                    local ____t_result_29
+                    if __t(cfg.versos) then
+                        ____t_result_29 = __mod(
+                            math.floor(t / (BEAT * 8)),
+                            2
+                        ) == 0
+                    else
+                        ____t_result_29 = cfg.versos
+                    end
+                    ____opt_33(
+                        ____opt_33,
                         c,
-                        cfg.rival,
+                        ____cfg_rival_31,
                         52,
                         230,
                         {
-                            frame = t * 2,
+                            frame = ____temp_30,
                             facing = 1,
                             grounded = true,
                             scale = 0.9,
-                            attack = if __t(cfg.versos) then __mod(
-                                math.floor(t / (BEAT * 8)),
-                                2
-                            ) == 0 else cfg.versos,
+                            attack = ____t_result_29,
                             attackProgress = __mod(t, BEAT) / BEAT
                         }
                     )
                 end
                 local pula = math.abs(math.sin(t * math.pi / BEAT)) * 6 + jogo.pulo * 14
-                local ____opt_20 = window.Art
-                if ____opt_20 ~= nil then
-                    ____opt_20 = ____opt_20.drawCharacter
+                local ____opt_37 = window.Art
+                if ____opt_37 ~= nil then
+                    ____opt_37 = ____opt_37.drawCharacter
                 end
-                if ____opt_20 ~= nil then
-                    ____opt_20(
-                        ____opt_20,
+                if ____opt_37 ~= nil then
+                    ____opt_37(
+                        ____opt_37,
                         c,
                         "daroca",
                         138,
                         230 - pula,
                         {
                             frame = t * 2.2,
-                            facing = if __t(__mod(beat, 2)) then 1 else -1,
+                            facing = __t(__mod(beat, 2)) and 1 or -1,
                             moving = true,
                             grounded = pula < 2,
                             scale = 1
@@ -651,13 +709,13 @@ local __O = {};
                         4,
                         "#6a5a3a"
                     )
-                    local ____opt_24 = window.Art
-                    if ____opt_24 ~= nil then
-                        ____opt_24 = ____opt_24.drawCharacter
+                    local ____opt_41 = window.Art
+                    if ____opt_41 ~= nil then
+                        ____opt_41 = ____opt_41.drawCharacter
                     end
-                    if ____opt_24 ~= nil then
-                        ____opt_24(
-                            ____opt_24,
+                    if ____opt_41 ~= nil then
+                        ____opt_41(
+                            ____opt_41,
                             c,
                             "daroca",
                             214,
@@ -717,18 +775,22 @@ local __O = {};
                 74,
                 248,
                 32,
-                {fundo = "#0e0818", borda = if __t(seu) then "#3fe0ff" else "#ff4fa8", sombra = false}
+                {
+                    fundo = "#0e0818",
+                    borda = __t(seu) and "#3fe0ff" or "#ff4fa8",
+                    sombra = false
+                }
             )
             PK:texto(
                 c,
                 __add(
-                    if __t(seu) then "DA ROÇA: " else "FREDDY: ",
+                    __t(seu) and "DA ROÇA: " or "FREDDY: ",
                     __get(v, 0)
                 ),
                 22,
                 83,
                 8,
-                if __t(seu) then "#9af4ff" else "#ffb0d8",
+                __t(seu) and "#9af4ff" or "#ffb0d8",
                 "left"
             )
             PK:texto(
@@ -740,14 +802,14 @@ local __O = {};
                 "#f2f2ea",
                 "left"
             )
-            local px = if __t(seu) then 138 else 52
+            local px = __t(seu) and 138 or 52
             do
                 local k = 0
                 while k < 2 do
                     local u = __mod(t * 0.8 + k / 2, 1)
                     local nx = math.floor(px + 12 + k * 6 + math.sin(t * 3 + k) * 2 + 0.5)
                     local ny = math.floor(168 - u * 30 + 0.5)
-                    local cor = if __t(seu) then "#3fe0ff" else "#ff4fa8"
+                    local cor = __t(seu) and "#3fe0ff" or "#ff4fa8"
                     c.globalAlpha = 1 - u
                     R(
                         nil,
@@ -797,28 +859,40 @@ local __O = {};
                 local grupo = __mod(k + beat, 3)
                 local pula = grupo == 0 and fase < 0.5
                 local y = 250 + __mod(k, 2) * 4
-                local ____PK_pessoa_30 = PK.pessoa
-                local ____get_result_28 = __get(
+                local ____PK_pessoa_49 = PK.pessoa
+                local ____get_result_47 = __get(
                     PELES,
                     __mod(k, 5)
                 )
-                local ____get_result_29 = __get(
+                local ____get_result_48 = __get(
                     ROUPAS,
                     __mod(k, 8)
                 )
-                local ____t_27 = __t
-                local ____temp_26 = __mod(k, 4) == 1
-                __O[1412] = ____temp_26
-                ____PK_pessoa_30(
+                local ____t_result_46
+                local ____t_44 = __t
+                local ____temp_43 = __mod(k, 4) == 1
+                __O[1417] = ____temp_43
+                if ____t_44(____temp_43) then
+                    ____t_result_46 = __O[1417]
+                else
+                    local ____t_result_45
+                    if __t(pula) then
+                        ____t_result_45 = __mod(k, 2) == 0
+                    else
+                        ____t_result_45 = pula
+                    end
+                    ____t_result_46 = ____t_result_45
+                end
+                ____PK_pessoa_49(
                     PK,
                     c,
                     x,
                     y,
-                    ____get_result_28,
-                    ____get_result_29,
+                    ____get_result_47,
+                    ____get_result_48,
                     "#1c1410",
                     pula,
-                    if ____t_27(____temp_26) then __O[1412] else if __t(pula) then __mod(k, 2) == 0 else pula
+                    ____t_result_46
                 )
                 if __mod(k, 6) == 2 then
                     R(
@@ -865,14 +939,22 @@ local __O = {};
                     )
                     c.globalAlpha = 1
                 end
+                local ____temp_51 = lx(nil, i) - 16
+                local ____temp_52 = LINHA - 1
+                local ____t_result_50
+                if __t(on) then
+                    ____t_result_50 = __get(CORES, i)
+                else
+                    ____t_result_50 = "#3a2a4a"
+                end
                 R(
                     nil,
                     c,
-                    lx(nil, i) - 16,
-                    LINHA - 1,
+                    ____temp_51,
+                    ____temp_52,
                     32,
                     2,
-                    if __t(on) then __get(CORES, i) else "#3a2a4a"
+                    ____t_result_50
                 )
                 if __t(on) then
                     PK:seta(
@@ -894,7 +976,13 @@ local __O = {};
                         2
                     )
                 end
-                local ac = if __t(jogo.acerto) then __get(jogo.acerto, i) else 0
+                local ____t_result_53
+                if __t(jogo.acerto) then
+                    ____t_result_53 = __get(jogo.acerto, i)
+                else
+                    ____t_result_53 = 0
+                end
+                local ac = ____t_result_53
                 if __gt(ac, 0) then
                     local r = math.floor(6 + (1 - ac / 0.3) * 14 + 0.5)
                     do
@@ -924,30 +1012,38 @@ local __O = {};
             end
         end
         for ____, n in __iterar((jogo.notas)) do
-            if __t(n.ok) then
-                continue
+            do
+                if __t(n.ok) then
+                    continue
+                end
+                local y = LINHA - (n.t - t) * VEL
+                if __t(y < -14 or y > LH + 14) then
+                    continue
+                end
+                PK:seta(
+                    c,
+                    lx(nil, n.lane),
+                    y,
+                    n.lane,
+                    n.ok == 0 and "#5a3a3a" or __get(CORES, n.lane),
+                    2
+                )
             end
-            local y = LINHA - (n.t - t) * VEL
-            if __t(y < -14 or y > LH + 14) then
-                continue
-            end
-            PK:seta(
-                c,
-                lx(nil, n.lane),
-                y,
-                n.lane,
-                if n.ok == 0 then "#5a3a3a" else __get(CORES, n.lane),
-                2
-            )
         end
-        local pct = if __t(jogo.fim) then nota(nil) else parcial(nil)
+        local ____t_result_54
+        if __t(jogo.fim) then
+            ____t_result_54 = nota(nil)
+        else
+            ____t_result_54 = parcial(nil)
+        end
+        local pct = ____t_result_54
         PK:painel(
             c,
             290,
             4,
             180,
             16,
-            {fundo = "#120a1e", borda = if pct >= META then "#7af07a" else "#ff9a7a", sombra = false}
+            {fundo = "#120a1e", borda = pct >= META and "#7af07a" or "#ff9a7a", sombra = false}
         )
         PK:texto(
             c,
@@ -955,7 +1051,7 @@ local __O = {};
             380,
             12,
             8,
-            if pct >= META then "#c8ffc8" else "#ffd0c0"
+            pct >= META and "#c8ffc8" or "#ffd0c0"
         )
         if __gt(jogo.combo, 2) then
             PK:contorno(
@@ -963,7 +1059,7 @@ local __O = {};
                 __add("COMBO ", jogo.combo),
                 360,
                 240,
-                if __gt(jogo.pulo, 0.15) then 16 else 8,
+                __gt(jogo.pulo, 0.15) and 16 or 8,
                 "#ffd24a",
                 "#3a1a0a"
             )
@@ -975,7 +1071,7 @@ local __O = {};
                 360,
                 130,
                 8,
-                if jogo.msg == "FORA DO RITMO" then "#ff7a6a" else "#9aff9a",
+                jogo.msg == "FORA DO RITMO" and "#ff7a6a" or "#9aff9a",
                 "#0a0614"
             )
         end
@@ -991,7 +1087,7 @@ local __O = {};
         if __lt(jogo.t, 2) then
             PK:contorno(
                 c,
-                if __lt(jogo.t, 1) then "PREPARA..." else "VAI!",
+                __lt(jogo.t, 1) and "PREPARA..." or "VAI!",
                 360,
                 100,
                 16,
@@ -1006,7 +1102,7 @@ local __O = {};
                 100,
                 400,
                 64,
-                {fundo = "#0e0818", borda = if pct >= META then "#7af07a" else "#ffd24a", rebite = "#ff4fa8"}
+                {fundo = "#0e0818", borda = pct >= META and "#7af07a" or "#ffd24a", rebite = "#ff4fa8"}
             )
             PK:texto(
                 c,
@@ -1014,11 +1110,19 @@ local __O = {};
                 LW / 2,
                 120,
                 16,
-                if pct >= META then "#b8ffb8" else "#ffe9a8"
+                pct >= META and "#b8ffb8" or "#ffe9a8"
             )
-            PK:texto(
+            local ____PK_texto_56 = PK.texto
+            local ____temp_55
+            if pct >= META then
+                ____temp_55 = cfg.ganhou
+            else
+                ____temp_55 = "FALTOU POUCO!"
+            end
+            ____PK_texto_56(
+                PK,
                 c,
-                if pct >= META then cfg.ganhou else "FALTOU POUCO!",
+                ____temp_55,
                 LW / 2,
                 144,
                 8,
@@ -1033,7 +1137,14 @@ local __O = {};
         if e.code == "Escape" then
             e:preventDefault()
             e:stopPropagation()
-            fechar(nil, false, if __t(jogo) then nota(nil) else 0, true)
+            local ____fechar_58 = fechar
+            local ____t_result_57
+            if __t(jogo) then
+                ____t_result_57 = nota(nil)
+            else
+                ____t_result_57 = 0
+            end
+            ____fechar_58(nil, false, ____t_result_57, true)
             return
         end
         local lane = __get(TECLAS, e.code)
@@ -1059,22 +1170,24 @@ local __O = {};
         box = nil
         jogo = nil
         window:dispatchEvent(__new("CustomEvent", "controls-capture", {detail = {active = false}}))
-        local ____opt_33 = window.document:getElementById("gameCanvas")
-        local ____opt_31 = ____opt_33 and ____opt_33.focus
-        if ____opt_31 ~= nil then
-            ____opt_31(____opt_33)
+        local ____opt_67 = window.document:getElementById("gameCanvas")
+        local ____opt_65 = ____opt_67 and ____opt_67.focus
+        if ____opt_65 ~= nil then
+            ____opt_65(____opt_67)
         end
         local fn = aoFim
         aoFim = nil
         if __t(fn) then
             do
                 pcall(function()
-                    fn(
-                        nil,
-                        not not __t(ok),
-                        if __t(pct) then pct else 0,
-                        desistiu
-                    )
+                    local ____temp_70 = not not __t(ok)
+                    local ____t_result_69
+                    if __t(pct) then
+                        ____t_result_69 = pct
+                    else
+                        ____t_result_69 = 0
+                    end
+                    fn(nil, ____temp_70, ____t_result_69, desistiu)
                 end)
             end
         end
@@ -1143,12 +1256,25 @@ local __O = {};
             while b < DURACAO / BEAT - 2 do
                 local t = b * BEAT
                 local compasso = math.floor(b / 8)
-                __call(notas, "push", {t = t, lane = if __mod(b + compasso, 4) == 0 then 0 else math.floor(rnd(nil) * 4)})
-                local ____t_2 = __t
+                __call(
+                    notas,
+                    "push",
+                    {
+                        t = t,
+                        lane = __mod(b + compasso, 4) == 0 and 0 or math.floor(rnd(nil) * 4)
+                    }
+                )
+                local ____t_3 = __t
+                local ____t_result_2
                 local ____t_1 = __t
                 local ____temp_0 = __mod(compasso, 2) == 1 and __mod(b, 2) == 1
-                __O[1410] = ____temp_0
-                if ____t_2(if ____t_1(____temp_0) then rnd(nil) < 0.55 else __O[1410]) then
+                __O[1415] = ____temp_0
+                if ____t_1(____temp_0) then
+                    ____t_result_2 = rnd(nil) < 0.55
+                else
+                    ____t_result_2 = __O[1415]
+                end
+                if ____t_3(____t_result_2) then
                     __call(
                         notas,
                         "push",
@@ -1191,7 +1317,14 @@ local __O = {};
         if not __t(jogo) then
             return
         end
-        local dt = math.min(0.1, (agora - if __t(jogo.ultimo) then jogo.ultimo else agora) / 1000)
+        local ____agora_27 = agora
+        local ____t_result_26
+        if __t(jogo.ultimo) then
+            ____t_result_26 = jogo.ultimo
+        else
+            ____t_result_26 = agora
+        end
+        local dt = math.min(0.1, (____agora_27 - ____t_result_26) / 1000)
         jogo.ultimo = agora
         jogo.t = jogo.t + dt
         jogo.msgT = jogo.msgT - dt
@@ -1311,7 +1444,16 @@ local __O = {};
         sair.textContent = "DESISTIR (Esc)"
         sair:addEventListener(
             "click",
-            function() return fechar(nil, false, if __t(jogo) then nota(nil) else 0, true) end
+            function()
+                local ____fechar_60 = fechar
+                local ____t_result_59
+                if __t(jogo) then
+                    ____t_result_59 = nota(nil)
+                else
+                    ____t_result_59 = 0
+                end
+                return ____fechar_60(nil, false, ____t_result_59, true)
+            end
         )
         box:append(sair)
         window.document.body:append(box)
@@ -1324,8 +1466,22 @@ local __O = {};
         if __t(box) then
             return false
         end
-        aoFim = if __t(o.onFim) then o.onFim else nil
-        cfg = __assign({}, PADRAO, if __t(o.config) then o.config else {})
+        local ____t_result_61
+        if __t(o.onFim) then
+            ____t_result_61 = o.onFim
+        else
+            ____t_result_61 = nil
+        end
+        aoFim = ____t_result_61
+        local ____assign_64 = __assign
+        local ____temp_63 = {}
+        local ____t_result_62
+        if __t(o.config) then
+            ____t_result_62 = o.config
+        else
+            ____t_result_62 = {}
+        end
+        cfg = ____assign_64(____temp_63, PADRAO, ____t_result_62)
         montar(nil)
         jogo = {
             t = -1,
@@ -1350,15 +1506,23 @@ local __O = {};
             fechar = function() return fechar(nil, false, 0, true) end,
             aberto = function() return not not __t(box) end,
             META = META,
-            estado = function() return if __t(jogo) then {
-                t = jogo.t,
-                nota = nota(nil),
-                notas = __call(
-                    jogo.notas,
-                    "map",
-                    function(____, n) return {t = n.t, lane = n.lane, ok = n.ok} end
-                )
-            } else jogo end
+            estado = function()
+                local ____t_result_71
+                if __t(jogo) then
+                    ____t_result_71 = {
+                        t = jogo.t,
+                        nota = nota(nil),
+                        notas = __call(
+                            jogo.notas,
+                            "map",
+                            function(____, n) return {t = n.t, lane = n.lane, ok = n.ok} end
+                        )
+                    }
+                else
+                    ____t_result_71 = jogo
+                end
+                return ____t_result_71
+            end
         },
         "abrir,fechar,aberto,META,estado"
     )

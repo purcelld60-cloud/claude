@@ -14,19 +14,31 @@ local __O = {};
     end
     local bar = window.document:querySelector(".game-topbar")
     local progress = window.document:querySelector(".progress-hud")
-    local ____t_2 = __t
+    local ____t_3 = __t
+    local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(bar)
-    __O[3184] = ____temp_0
-    if ____t_2(if ____t_1(____temp_0) then __O[3184] else bar.dataset.minimal) then
+    __O[3189] = ____temp_0
+    if ____t_1(____temp_0) then
+        ____t_result_2 = __O[3189]
+    else
+        ____t_result_2 = bar.dataset.minimal
+    end
+    if ____t_3(____t_result_2) then
         return
     end
     bar.dataset.minimal = "1"
     local function _____24(____, s)
-        local ____t_4 = __t
-        local ____temp_3 = bar:querySelector(s)
-        __O[3185] = ____temp_3
-        return if ____t_4(____temp_3) then __O[3185] else window.document:querySelector(s)
+        local ____t_result_6
+        local ____t_5 = __t
+        local ____temp_4 = bar:querySelector(s)
+        __O[3190] = ____temp_4
+        if ____t_5(____temp_4) then
+            ____t_result_6 = __O[3190]
+        else
+            ____t_result_6 = window.document:querySelector(s)
+        end
+        return ____t_result_6
     end
     local function el(____, tag, cls, html)
         local e = window.document:createElement(tag)
@@ -48,11 +60,17 @@ local __O = {};
     local statsBtn = progress and progress:querySelector("#statsBtn")
     local xp = progress and progress:querySelector(".xp-block")
     local chapter = progress and progress:querySelector("#campaignChapter")
-    local ____t_13 = __t
-    local ____t_12 = __t
-    local ____temp_11 = not __t(hearts) or not __t(ammo)
-    __O[3186] = ____temp_11
-    if ____t_13(if ____t_12(____temp_11) then __O[3186] else not __t(actions)) then
+    local ____t_16 = __t
+    local ____t_result_15
+    local ____t_14 = __t
+    local ____temp_13 = not __t(hearts) or not __t(ammo)
+    __O[3191] = ____temp_13
+    if ____t_14(____temp_13) then
+        ____t_result_15 = __O[3191]
+    else
+        ____t_result_15 = not __t(actions)
+    end
+    if ____t_16(____t_result_15) then
         return
     end
     local left = el(nil, "div", "hud-min-left")
@@ -134,7 +152,14 @@ local __O = {};
     window.document:addEventListener(
         "pointerdown",
         function(____, e)
-            if __t(if __t(dataPanel.hidden) then invPanel.hidden else dataPanel.hidden) then
+            local ____t_18 = __t
+            local ____t_result_17
+            if __t(dataPanel.hidden) then
+                ____t_result_17 = invPanel.hidden
+            else
+                ____t_result_17 = dataPanel.hidden
+            end
+            if ____t_18(____t_result_17) then
                 return
             end
             if __t(e.target:closest(".hud-panel,.hud-btn,dialog")) then
@@ -147,7 +172,19 @@ local __O = {};
     window.document:addEventListener(
         "keydown",
         function(____, e)
-            if __t(e.key == "Escape" and not __t(if __t(dataPanel.hidden) then invPanel.hidden else dataPanel.hidden)) then
+            local ____t_22 = __t
+            local ____temp_21 = e.key == "Escape"
+            if ____temp_21 then
+                local ____t_20 = __t
+                local ____t_result_19
+                if __t(dataPanel.hidden) then
+                    ____t_result_19 = invPanel.hidden
+                else
+                    ____t_result_19 = dataPanel.hidden
+                end
+                ____temp_21 = not ____t_20(____t_result_19)
+            end
+            if ____t_22(____temp_21) then
                 close(nil)
             end
         end
@@ -157,7 +194,14 @@ local __O = {};
     end
     local paper = ammo:querySelector("#paperValue")
     local mirror = invPanel:querySelector("#hudPaperMirror")
-    if __t(if __t(paper) then mirror else paper) then
+    local ____t_26 = __t
+    local ____t_result_25
+    if __t(paper) then
+        ____t_result_25 = mirror
+    else
+        ____t_result_25 = paper
+    end
+    if ____t_26(____t_result_25) then
         local function sync()
             mirror.textContent = paper.textContent
         end
@@ -167,23 +211,36 @@ local __O = {};
             __ord({childList = true, characterData = true, subtree = true}, "childList,characterData,subtree")
         )
     end
-    local ____opt_result_18
+    local ____opt_result_29
     if gas ~= nil then
-        ____opt_result_18 = gas:querySelector("#gasPercent")
+        ____opt_result_29 = gas:querySelector("#gasPercent")
     end
-    local gasPct = ____opt_result_18
-    local ____opt_result_21
+    local gasPct = ____opt_result_29
+    local ____opt_result_32
     if gas ~= nil then
-        ____opt_result_21 = gas:querySelector("#gasFill")
+        ____opt_result_32 = gas:querySelector("#gasFill")
     end
-    local gasFill = ____opt_result_21
+    local gasFill = ____opt_result_32
     local mini = gasMini:querySelector("b")
-    if __t(if __t(gasPct) then gasFill else gasPct) then
+    local ____t_34 = __t
+    local ____t_result_33
+    if __t(gasPct) then
+        ____t_result_33 = gasFill
+    else
+        ____t_result_33 = gasPct
+    end
+    if ____t_34(____t_result_33) then
         local function sync()
-            local ____t_23 = __t
-            local ____TS__ParseFloat_result_22 = __TS__ParseFloat(gasPct.textContent)
-            __O[3187] = ____TS__ParseFloat_result_22
-            local v = if ____t_23(____TS__ParseFloat_result_22) then __O[3187] else 0
+            local ____t_result_37
+            local ____t_36 = __t
+            local ____TS__ParseFloat_result_35 = __TS__ParseFloat(gasPct.textContent)
+            __O[3192] = ____TS__ParseFloat_result_35
+            if ____t_36(____TS__ParseFloat_result_35) then
+                ____t_result_37 = __O[3192]
+            else
+                ____t_result_37 = 0
+            end
+            local v = ____t_result_37
             mini.style.width = __add(
                 math.max(
                     0,

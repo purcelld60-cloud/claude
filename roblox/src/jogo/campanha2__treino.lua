@@ -2,9 +2,8 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __newExpr, __lt, __le, __gt, __ge, __mod, __ord, __arrL, __iterar, __t, __get, __set = __JSR.__newExpr, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t, __JSR.__get, __JSR.__set
-local __len, __call, __add, __assign, __isArray, __re, __re_test, __re_replace = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__assign, __JSR.__isArray, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
+local __len, __call, __add, __iter, __assign, __isArray, __re, __re_test, __re_replace = __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__assign, __JSR.__isArray, __JSR.__re, __JSR.__re_test, __JSR.__re_replace
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__Iterator = ____lualib.__TS__Iterator
 local __TS__MathSign = ____lualib.__TS__MathSign
@@ -38,12 +37,32 @@ local __O = {};
                     "vazio",
                     not __t(p)
                 )
-                b.innerHTML = ((((("<kbd>" .. if __t(i) then "I" else "U") .. "</kbd>") .. tostring(if __t(p) then PW:iconeSVG(id) else "<svg class=\"control-icon\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill=\"currentColor\" d=\"M4 4h16v2H4zM4 18h16v2H4zM4 6h2v12H4zM18 6h2v12h-2z\"/></svg>")) .. "<small>") .. tostring(if __t(p) then p.curto else "VAZIO")) .. "</small><span class=\"c2-cd\"></span>"
+                local ____temp_19 = __t(i) and "I" or "U"
+                local ____t_result_17
+                if __t(p) then
+                    ____t_result_17 = PW:iconeSVG(id)
+                else
+                    ____t_result_17 = "<svg class=\"control-icon\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill=\"currentColor\" d=\"M4 4h16v2H4zM4 18h16v2H4zM4 6h2v12H4zM18 6h2v12h-2z\"/></svg>"
+                end
+                local ____t_result_18
+                if __t(p) then
+                    ____t_result_18 = p.curto
+                else
+                    ____t_result_18 = "VAZIO"
+                end
+                b.innerHTML = ((((("<kbd>" .. ____temp_19) .. "</kbd>") .. tostring(____t_result_17)) .. "<small>") .. tostring(____t_result_18)) .. "</small><span class=\"c2-cd\"></span>"
             end
         )
     end
     local ____ = "use strict"
-    if __t(if __t(window.CampanhaTreino) then window.CampanhaTreino else not __t(window.CampanhaPoderes)) then
+    local ____t_1 = __t
+    local ____t_result_0
+    if __t(window.CampanhaTreino) then
+        ____t_result_0 = window.CampanhaTreino
+    else
+        ____t_result_0 = not __t(window.CampanhaPoderes)
+    end
+    if ____t_1(____t_result_0) then
         return
     end
     PW = window.CampanhaPoderes
@@ -69,50 +88,70 @@ local __O = {};
         st.id = "c2TreinoCss"
         local txt = ""
         for ____, sh in __iterar((window.document.styleSheets)) do
-            local rules
             do
-                local ____hasContinued
-                local function ____catch(e)
-                    ____hasContinued = true
-                    return
+                local rules
+                do
+                    local ____hasContinued
+                    local function ____catch(e)
+                        ____hasContinued = true
+                        return
+                    end
+                    local ____try, ____hasReturned = pcall(function()
+                        rules = sh.cssRules
+                    end)
+                    if not ____try then
+                        ____catch(____hasReturned)
+                    end
+                    if ____hasContinued then
+                        continue
+                    end
                 end
-                local ____try, ____hasReturned = pcall(function()
-                    rules = sh.cssRules
-                end)
-                if not ____try then
-                    ____catch(____hasReturned)
+                local ____iter_7 = __iter
+                local ____t_result_6
+                if __t(rules) then
+                    ____t_result_6 = rules
+                else
+                    ____t_result_6 = __arrL({}, 0)
                 end
-                if ____hasContinued then
-                    continue
-                end
-            end
-            for ____, r in __iterar((if __t(rules) then rules else __arrL({}, 0))) do
-                local ____t_2 = __t
-                local ____t_1 = __t
-                local ____temp_0 = if __t(r.selectorText) then __re_test(
-                    __re("crafted-controls", ""),
-                    r.selectorText
-                ) else r.selectorText
-                __O[490] = ____temp_0
-                __D[1] = if ____t_2(if ____t_1(____temp_0) then __re_test(
-                    __re("touch-btn|control-icon|kbd|-btn\\b", ""),
-                    r.selectorText
-                ) else __O[490]) then
-                    txt = __add(
-                        txt,
-                        __add(
-                            __re_replace(
-                                __re_replace(
-                                    r.cssText,
-                                    __re("#gameShell\\s*", "g"),
-                                    ""
-                                ),
-                                __re("\\.crafted-controls", "g"),
-                                ".c2-treino-ctl"
-                            ),
-                            "\n"
+                for ____, r in __TS__Iterator(____iter_7(____t_result_6)) do
+                    local ____t_5 = __t
+                    local ____t_result_4
+                    local ____t_3 = __t
+                    local ____t_result_2
+                    if __t(r.selectorText) then
+                        ____t_result_2 = __re_test(
+                            __re("crafted-controls", ""),
+                            r.selectorText
                         )
-                    )
+                    else
+                        ____t_result_2 = r.selectorText
+                    end
+                    __O[490] = ____t_result_2
+                    if ____t_3(____t_result_2) then
+                        ____t_result_4 = __re_test(
+                            __re("touch-btn|control-icon|kbd|-btn\\b", ""),
+                            r.selectorText
+                        )
+                    else
+                        ____t_result_4 = __O[490]
+                    end
+                    if ____t_5(____t_result_4) then
+                        txt = __add(
+                            txt,
+                            __add(
+                                __re_replace(
+                                    __re_replace(
+                                        r.cssText,
+                                        __re("#gameShell\\s*", "g"),
+                                        ""
+                                    ),
+                                    __re("\\.crafted-controls", "g"),
+                                    ".c2-treino-ctl"
+                                ),
+                                "\n"
+                            )
+                        )
+                    end
                 end
             end
         end
@@ -150,18 +189,30 @@ local __O = {};
                 b.className = "touch-btn c2-poder-btn"
             else
                 local orig = window.document:querySelector(("#gameShell .touch-controls [data-action=\"" .. tostring(id)) .. "\"]")
-                b.className = if __t(orig) then __re_replace(
-                    orig.className,
-                    __re("\\b(pressed|campaign-layout-target)\\b", "g"),
-                    ""
-                ) else "touch-btn"
-                local ____add_9 = __add
-                local ____t_8 = __t
-                local ____opt_3 = orig and orig:querySelector("svg")
-                local ____temp_7 = ____opt_3 and ____opt_3.outerHTML
-                __O[491] = ____temp_7
-                b.innerHTML = ____add_9(
-                    if ____t_8(____temp_7) then __O[491] else "",
+                local ____t_result_8
+                if __t(orig) then
+                    ____t_result_8 = __re_replace(
+                        orig.className,
+                        __re("\\b(pressed|campaign-layout-target)\\b", "g"),
+                        ""
+                    )
+                else
+                    ____t_result_8 = "touch-btn"
+                end
+                b.className = ____t_result_8
+                local ____add_16 = __add
+                local ____t_result_15
+                local ____t_14 = __t
+                local ____opt_9 = orig and orig:querySelector("svg")
+                local ____temp_13 = ____opt_9 and ____opt_9.outerHTML
+                __O[491] = ____temp_13
+                if ____t_14(____temp_13) then
+                    ____t_result_15 = __O[491]
+                else
+                    ____t_result_15 = ""
+                end
+                b.innerHTML = ____add_16(
+                    ____t_result_15,
                     ("<small>" .. tostring(nome)) .. "</small>"
                 )
             end
@@ -211,11 +262,11 @@ local __O = {};
         if o == nil then
             o = {}
         end
-        local ____v_10 = v
-        if ____v_10 == nil then
-            ____v_10 = not __t(on)
+        local ____v_20 = v
+        if ____v_20 == nil then
+            ____v_20 = not __t(on)
         end
-        on = ____v_10
+        on = ____v_20
         modoJogo = not not __t(o.jogo)
         if __t(barra) then
             barra.hidden = not __t(on)
@@ -229,14 +280,20 @@ local __O = {};
             end
         end
         if __t(on) then
-            bonecos = if __t(modoJogo) then __arrL({}, 0) else __arrL(
-                {
-                    novoBoneco(nil, P.x + 170),
-                    novoBoneco(nil, P.x + 250),
-                    novoBoneco(nil, P.x + 330)
-                },
-                3
-            )
+            local ____t_result_21
+            if __t(modoJogo) then
+                ____t_result_21 = __arrL({}, 0)
+            else
+                ____t_result_21 = __arrL(
+                    {
+                        novoBoneco(nil, P.x + 170),
+                        novoBoneco(nil, P.x + 250),
+                        novoBoneco(nil, P.x + 330)
+                    },
+                    3
+                )
+            end
+            bonecos = ____t_result_21
             heroRef = P
         else
             bonecos = __arrL({}, 0)
@@ -254,28 +311,52 @@ local __O = {};
                 if __le(e.hp, 0) then
                     return
                 end
-                local ____t_13 = __t
-                local ____t_12 = __t
-                local ____temp_11 = if __t(modoJogo) then tipo ~= "papel" else modoJogo
-                __O[492] = ____temp_11
-                if ____t_13(if ____t_12(____temp_11) then tipo ~= "peido" else __O[492]) then
+                local ____t_25 = __t
+                local ____t_result_24
+                local ____t_23 = __t
+                local ____t_result_22
+                if __t(modoJogo) then
+                    ____t_result_22 = tipo ~= "papel"
+                else
+                    ____t_result_22 = modoJogo
+                end
+                __O[492] = ____t_result_22
+                if ____t_23(____t_result_22) then
+                    ____t_result_24 = tipo ~= "peido"
+                else
+                    ____t_result_24 = __O[492]
+                end
+                if ____t_25(____t_result_24) then
                     n = math.floor(n * 5 + 0.5)
                 end
                 e.piscaAte = window.performance:now() + 400
                 if __t(e.onDano) then
                     local r = e:onDano(n, tipo, dir)
                     if r ~= false then
-                        __call(
-                            textos,
-                            "push",
-                            {
-                                x = e.x + (math.random() - 0.5) * 20,
-                                y = e.y - if __t(e.alto) then e.alto else 90,
-                                n = if __t(r) then r else n,
-                                t = 0,
-                                cor = if tipo == "soco" then "#ffd24a" else if tipo == "confuso" then "#e48fb0" else "#fff6dc"
-                            }
-                        )
+                        local ____call_32 = __call
+                        local ____textos_31 = textos
+                        local ____temp_29 = e.x + (math.random() - 0.5) * 20
+                        local ____e_y_27 = e.y
+                        local ____t_result_26
+                        if __t(e.alto) then
+                            ____t_result_26 = e.alto
+                        else
+                            ____t_result_26 = 90
+                        end
+                        local ____temp_30 = ____e_y_27 - ____t_result_26
+                        local ____t_result_28
+                        if __t(r) then
+                            ____t_result_28 = r
+                        else
+                            ____t_result_28 = n
+                        end
+                        ____call_32(____textos_31, "push", {
+                            x = ____temp_29,
+                            y = ____temp_30,
+                            n = ____t_result_28,
+                            t = 0,
+                            cor = tipo == "soco" and "#ffd24a" or (tipo == "confuso" and "#e48fb0" or "#fff6dc")
+                        })
                     end
                     return
                 end
@@ -289,17 +370,17 @@ local __O = {};
                         y = e.y - 90,
                         n = n,
                         t = 0,
-                        cor = if tipo == "soco" then "#ffd24a" else if tipo == "confuso" then "#e48fb0" else "#fff6dc"
+                        cor = tipo == "soco" and "#ffd24a" or (tipo == "confuso" and "#e48fb0" or "#fff6dc")
                     }
                 )
                 if __le(e.hp, 0) then
                     e.morto = 2.2
-                    local ____opt_16 = window.CampanhaLoja
-                    if ____opt_16 ~= nil then
-                        ____opt_16 = ____opt_16.ganhar
+                    local ____opt_35 = window.CampanhaLoja
+                    if ____opt_35 ~= nil then
+                        ____opt_35 = ____opt_35.ganhar
                     end
-                    if ____opt_16 ~= nil then
-                        ____opt_16(____opt_16, 8)
+                    if ____opt_35 ~= nil then
+                        ____opt_35(____opt_35, 8)
                     end
                     __call(textos, "push", {
                         x = e.x,
@@ -326,26 +407,39 @@ local __O = {};
         }
     end
     local function bater(self, e, n, tipo, dir)
-        local ____self_26 = mundo(nil)
-        local ____self_26_dano_27 = ____self_26.dano
-        local ____e_25 = e
-        local ____temp_24 = n * if __t(bn.damageMultiplier) then bn.damageMultiplier else 1 * PW:multiplicadores().forca
-        local ____t_23 = __t
-        local ____opt_20 = window.CampanhaAliados
-        if ____opt_20 ~= nil then
-            ____opt_20 = ____opt_20.forca
+        local ____self_48 = mundo(nil)
+        local ____self_48_dano_49 = ____self_48.dano
+        local ____e_47 = e
+        local ____n_38 = n
+        local ____t_result_37
+        if __t(bn.damageMultiplier) then
+            ____t_result_37 = bn.damageMultiplier
+        else
+            ____t_result_37 = 1
         end
-        local ____opt_result_22
-        if ____opt_20 ~= nil then
-            ____opt_result_22 = ____opt_20(____opt_20)
+        local ____temp_46 = ____n_38 * ____t_result_37 * PW:multiplicadores().forca
+        local ____t_result_45
+        local ____t_44 = __t
+        local ____opt_41 = window.CampanhaAliados
+        if ____opt_41 ~= nil then
+            ____opt_41 = ____opt_41.forca
         end
-        __O[493] = ____opt_result_22
-        ____self_26_dano_27(
-            ____self_26,
-            ____e_25,
+        local ____opt_result_43
+        if ____opt_41 ~= nil then
+            ____opt_result_43 = ____opt_41(____opt_41)
+        end
+        __O[493] = ____opt_result_43
+        if ____t_44(____opt_result_43) then
+            ____t_result_45 = __O[493]
+        else
+            ____t_result_45 = 1
+        end
+        ____self_48_dano_49(
+            ____self_48,
+            ____e_47,
             math.max(
                 1,
-                math.floor(____temp_24 * if ____t_23(____opt_result_22) then __O[493] else 1 + 0.5)
+                math.floor(____temp_46 * ____t_result_45 + 0.5)
             ),
             tipo,
             dir
@@ -369,19 +463,25 @@ local __O = {};
                 bn = __assign({}, BONUS0)
             end
             local ____try, ____hasReturned = pcall(function()
-                local ____assign_35 = __assign
-                local ____temp_34 = {}
-                local ____t_33 = __t
-                local ____opt_30 = window.Progression
-                if ____opt_30 ~= nil then
-                    ____opt_30 = ____opt_30.bonuses
+                local ____assign_58 = __assign
+                local ____temp_57 = {}
+                local ____t_result_56
+                local ____t_55 = __t
+                local ____opt_52 = window.Progression
+                if ____opt_52 ~= nil then
+                    ____opt_52 = ____opt_52.bonuses
                 end
-                local ____opt_result_32
-                if ____opt_30 ~= nil then
-                    ____opt_result_32 = ____opt_30(____opt_30)
+                local ____opt_result_54
+                if ____opt_52 ~= nil then
+                    ____opt_result_54 = ____opt_52(____opt_52)
                 end
-                __O[494] = ____opt_result_32
-                bn = ____assign_35(____temp_34, BONUS0, if ____t_33(____opt_result_32) then __O[494] else {})
+                __O[494] = ____opt_result_54
+                if ____t_55(____opt_result_54) then
+                    ____t_result_56 = __O[494]
+                else
+                    ____t_result_56 = {}
+                end
+                bn = ____assign_58(____temp_57, BONUS0, ____t_result_56)
             end)
             if not ____try then
                 ____catch(____hasReturned)
@@ -432,33 +532,52 @@ local __O = {};
         end
         do
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____t_39 = __t
-                local ____t_38 = __t
-                local ____opt_36 = window.Game
-                if ____opt_36 ~= nil then
-                    ____opt_36 = ____opt_36.soundOn
+                local ____t_63 = __t
+                local ____t_result_62
+                local ____t_61 = __t
+                local ____opt_59 = window.Game
+                if ____opt_59 ~= nil then
+                    ____opt_59 = ____opt_59.soundOn
                 end
-                __O[495] = ____opt_36
-                if ____t_39(if ____t_38(____opt_36) then not __t(window.Game:soundOn()) else __O[495]) then
+                __O[495] = ____opt_59
+                if ____t_61(____opt_59) then
+                    ____t_result_62 = not __t(window.Game:soundOn())
+                else
+                    ____t_result_62 = __O[495]
+                end
+                if ____t_63(____t_result_62) then
                     return true
                 end
-                local ____opt_42 = window.DarocaAudio
-                if ____opt_42 ~= nil then
-                    ____opt_42 = ____opt_42.sfx
+                local ____opt_66 = window.DarocaAudio
+                if ____opt_66 ~= nil then
+                    ____opt_66 = ____opt_66.sfx
                 end
-                local ____opt_result_44
-                if ____opt_42 ~= nil then
-                    ____opt_result_44 = ____opt_42(____opt_42)
+                local ____opt_result_68
+                if ____opt_66 ~= nil then
+                    ____opt_result_68 = ____opt_66(____opt_66)
                 end
-                local ____opt_result_44_45 = ____opt_result_44
-                if ____opt_result_44_45 == nil then
-                    ____opt_result_44_45 = 1
+                local ____opt_result_68_69 = ____opt_result_68
+                if ____opt_result_68_69 == nil then
+                    ____opt_result_68_69 = 1
                 end
-                vol = vol * ____opt_result_44_45
+                vol = vol * ____opt_result_68_69
                 if vol <= 0.0005 then
                     return true
                 end
-                ctxSom = if __t(ctxSom) then ctxSom else __newExpr(if __t(window.AudioContext) then window.AudioContext else window.webkitAudioContext)
+                local ____t_result_72
+                if __t(ctxSom) then
+                    ____t_result_72 = ctxSom
+                else
+                    local ____newExpr_71 = __newExpr
+                    local ____t_result_70
+                    if __t(window.AudioContext) then
+                        ____t_result_70 = window.AudioContext
+                    else
+                        ____t_result_70 = window.webkitAudioContext
+                    end
+                    ____t_result_72 = ____newExpr_71(____t_result_70)
+                end
+                ctxSom = ____t_result_72
                 ctxSom:resume()
                 local o = ctxSom:createOscillator()
                 local g = ctxSom:createGain()
@@ -528,32 +647,55 @@ local __O = {};
             cdPapel = 0.4
             return
         end
-        local w = if __t(C1.weapon) then C1.weapon else 0
-        local tier = if __t(C1.miqueias) then bn.projectileTier else 0
-        local elemento = if tier >= 2 then "electric" else if tier == 1 then "fire" else nil
-        local tipo = if __t(elemento) then "papaia" else if w == 2 then "case" else if w == 1 then "ruler" else "paper"
-        local vel = if __t(w) then 680 else CFG.papel
-        local dano = if __t(C1.trained) then 28 else 18 + if w == 1 then 14 else if w == 2 then 22 else 0
-        cdPapel = if w == 2 then 0.31 else CFG.papelCd
+        local ____t_result_73
+        if __t(C1.weapon) then
+            ____t_result_73 = C1.weapon
+        else
+            ____t_result_73 = 0
+        end
+        local w = ____t_result_73
+        local ____t_result_74
+        if __t(C1.miqueias) then
+            ____t_result_74 = bn.projectileTier
+        else
+            ____t_result_74 = 0
+        end
+        local tier = ____t_result_74
+        local elemento = tier >= 2 and "electric" or (tier == 1 and "fire" or nil)
+        local tipo = __t(elemento) and "papaia" or (w == 2 and "case" or (w == 1 and "ruler" or "paper"))
+        local vel = __t(w) and 680 or CFG.papel
+        local dano = (__t(C1.trained) and 28 or 18) + (w == 1 and 14 or (w == 2 and 22 or 0))
+        cdPapel = w == 2 and 0.31 or CFG.papelCd
         papeis = papeis - 1
         shake = math.max(shake, 1.2)
         P.attack = 0.24
         P.attackType = "paper"
         P.attackDuration = 0.24
-        local dir = if __lt(P.facing, 0) then -1 else 1
+        local dir = __lt(P.facing, 0) and -1 or 1
         local alvo = __get(
             __call(
                 __call(
                     bonecos,
                     "filter",
                     function(____, b)
-                        local ____t_49 = __t
-                        local ____t_47 = __t
-                        local ____temp_46 = __gt(b.hp, 0) and not __t(b.intocavel)
-                        __O[496] = ____temp_46
-                        local ____temp_48 = if ____t_47(____temp_46) then __TS__MathSign(b.x - P.x) == dir else __O[496]
-                        __O[497] = ____temp_48
-                        return if ____t_49(____temp_48) then math.abs(b.x - P.x) < 650 else __O[497]
+                        local ____t_result_79
+                        local ____t_78 = __t
+                        local ____t_result_77
+                        local ____t_76 = __t
+                        local ____temp_75 = __gt(b.hp, 0) and not __t(b.intocavel)
+                        __O[496] = ____temp_75
+                        if ____t_76(____temp_75) then
+                            ____t_result_77 = __TS__MathSign(b.x - P.x) == dir
+                        else
+                            ____t_result_77 = __O[496]
+                        end
+                        __O[497] = ____t_result_77
+                        if ____t_78(____t_result_77) then
+                            ____t_result_79 = math.abs(b.x - P.x) < 650
+                        else
+                            ____t_result_79 = __O[497]
+                        end
+                        return ____t_result_79
                     end
                 ),
                 "sort",
@@ -561,17 +703,38 @@ local __O = {};
             ),
             0
         )
-        local mira = if __t(alvo) then math.max(
-            -0.85,
-            math.min(
-                0.85,
-                math.atan2(
-                    alvo.y - if __t(alvo.alto) then alvo.alto else 80 / 2 - (P.y - 32),
-                    math.abs(alvo.x - P.x)
+        local ____t_result_83
+        if __t(alvo) then
+            local ____temp_82 = -0.85
+            local ____alvo_y_81 = alvo.y
+            local ____t_result_80
+            if __t(alvo.alto) then
+                ____t_result_80 = alvo.alto
+            else
+                ____t_result_80 = 80
+            end
+            ____t_result_83 = math.max(
+                ____temp_82,
+                math.min(
+                    0.85,
+                    math.atan(
+                        ____alvo_y_81 - ____t_result_80 / 2 - (P.y - 32),
+                        math.abs(alvo.x - P.x)
+                    )
                 )
             )
-        ) else 0
-        for ____, ab in __iterar((if w == 2 then __arrL({-0.11, 0, 0.11}, 3) else __arrL({0}, 1))) do
+        else
+            ____t_result_83 = 0
+        end
+        local mira = ____t_result_83
+        local ____iter_85 = __iter
+        local ____temp_84
+        if w == 2 then
+            ____temp_84 = __arrL({-0.11, 0, 0.11}, 3)
+        else
+            ____temp_84 = __arrL({0}, 1)
+        end
+        for ____, ab in __TS__Iterator(____iter_85(____temp_84)) do
             __call(
                 tiros,
                 "push",
@@ -587,30 +750,40 @@ local __O = {};
                 }
             )
         end
-        local ____opt_52 = VFX(nil)
-        if ____opt_52 ~= nil then
-            ____opt_52 = ____opt_52.emit
+        local ____opt_88 = VFX(nil)
+        if ____opt_88 ~= nil then
+            ____opt_88 = ____opt_88.emit
         end
-        if ____opt_52 ~= nil then
-            ____opt_52(____opt_52, "cast", {x = P.x + dir * 26, y = P.y - 32, dir = dir, element = elemento})
+        if ____opt_88 ~= nil then
+            ____opt_88(____opt_88, "cast", {x = P.x + dir * 26, y = P.y - 32, dir = dir, element = elemento})
         end
         fx(
             nil,
             P.x + dir * 30,
             P.y - 32,
-            if elemento == "electric" then "#a7e6f1" else if __t(elemento) then "#f7b76c" else "#f8f3da",
+            elemento == "electric" and "#a7e6f1" or (__t(elemento) and "#f7b76c" or "#f8f3da"),
             4,
             35
         )
-        beep(nil, if __t(elemento) then 570 else 760, 0.045)
+        beep(
+            nil,
+            __t(elemento) and 570 or 760,
+            0.045
+        )
     end
     local function peido(self, P)
         if cdPeido > 0 then
             return
         end
         local corrente = janela > 0
-        combo = if __t(corrente) then math.min(3, combo + 1) else 1
-        local custo = if combo == 3 then 20 else if combo == 2 then 17 else 20
+        local ____t_result_90
+        if __t(corrente) then
+            ____t_result_90 = math.min(3, combo + 1)
+        else
+            ____t_result_90 = 1
+        end
+        combo = ____t_result_90
+        local custo = combo == 3 and 20 or (combo == 2 and 17 or 20)
         if gas < custo then
             aviso(nil, "Seu gás precisa recarregar. Espere no chão!")
             combo = 0
@@ -618,12 +791,12 @@ local __O = {};
             return
         end
         gas = gas - custo
-        cdPeido = if combo == 3 then 1.5 else 0.24
-        janela = if combo < 3 then 0.85 else 0
+        cdPeido = combo == 3 and 1.5 or 0.24
+        janela = combo < 3 and 0.85 or 0
         P.attack = 0.36
         P.attackType = "fart"
         P.attackDuration = 0.36
-        shake = math.max(shake, if combo == 3 then 9 else 4)
+        shake = math.max(shake, combo == 3 and 9 or 4)
         beep(
             nil,
             80 - combo * 8,
@@ -631,15 +804,15 @@ local __O = {};
             "sawtooth",
             0.045
         )
-        local dir = if __lt(P.facing, 0) then -1 else 1
-        local raio = if combo == 3 then 260 else if combo == 2 then 205 else 155
-        local mult = if combo == 3 then 1.8 else if combo == 2 then 1.25 else 1
-        local ____opt_56 = VFX(nil)
-        if ____opt_56 ~= nil then
-            ____opt_56 = ____opt_56.emit
+        local dir = __lt(P.facing, 0) and -1 or 1
+        local raio = combo == 3 and 260 or (combo == 2 and 205 or 155)
+        local mult = combo == 3 and 1.8 or (combo == 2 and 1.25 or 1)
+        local ____opt_93 = VFX(nil)
+        if ____opt_93 ~= nil then
+            ____opt_93 = ____opt_93.emit
         end
-        if ____opt_56 ~= nil then
-            ____opt_56(____opt_56, "gas", {
+        if ____opt_93 ~= nil then
+            ____opt_93(____opt_93, "gas", {
                 x = P.x + dir * 9,
                 y = P.y - 23,
                 dir = dir,
@@ -651,23 +824,47 @@ local __O = {};
             nil,
             P.x + dir * 38,
             P.y - 22,
-            if combo == 3 then "#e0ef82" else "#b9df55",
-            if combo == 3 then 52 else 25,
+            combo == 3 and "#e0ef82" or "#b9df55",
+            combo == 3 and 52 or 25,
             raio * 0.75
         )
         for ____, b in __iterar((bonecos)) do
-            local ____t_62 = __t
-            local ____t_61 = __t
-            local ____t_59 = __t
-            local ____temp_58 = __gt(b.hp, 0) and not __t(b.intocavel)
-            __O[498] = ____temp_58
-            local ____temp_60 = if ____t_59(____temp_58) then math.abs(b.x - P.x) < raio + (if __t(b.largura) then b.largura else 22 - 22) else __O[498]
-            __O[499] = ____temp_60
-            if ____t_62(if ____t_61(____temp_60) then math.abs(if __t(b.y) then b.y else FLOOR - P.y) < 180 else __O[499]) then
+            local ____t_103 = __t
+            local ____t_result_102
+            local ____t_100 = __t
+            local ____t_result_99
+            local ____t_96 = __t
+            local ____temp_95 = __gt(b.hp, 0) and not __t(b.intocavel)
+            __O[498] = ____temp_95
+            if ____t_96(____temp_95) then
+                local ____math_abs_result_98 = math.abs(b.x - P.x)
+                local ____t_result_97
+                if __t(b.largura) then
+                    ____t_result_97 = b.largura
+                else
+                    ____t_result_97 = 22
+                end
+                ____t_result_99 = ____math_abs_result_98 < raio + (____t_result_97 - 22)
+            else
+                ____t_result_99 = __O[498]
+            end
+            __O[499] = ____t_result_99
+            if ____t_100(____t_result_99) then
+                local ____t_result_101
+                if __t(b.y) then
+                    ____t_result_101 = b.y
+                else
+                    ____t_result_101 = FLOOR
+                end
+                ____t_result_102 = math.abs(____t_result_101 - P.y) < 180
+            else
+                ____t_result_102 = __O[499]
+            end
+            if ____t_103(____t_result_102) then
                 bater(
                     nil,
                     b,
-                    if __t(C1.trained) then 55 else 34 * mult,
+                    (__t(C1.trained) and 55 or 34) * mult,
                     "peido",
                     0
                 )
@@ -676,25 +873,47 @@ local __O = {};
     end
     local function acao(self, id, down, P)
         heroRef = P
-        local dir = if __lt(P.facing, 0) then -1 else 1
+        local dir = __lt(P.facing, 0) and -1 or 1
         if __t(id == "poder1" or id == "poder2") then
             local r = PW:usar(
-                if id == "poder1" then 0 else 1,
+                id == "poder1" and 0 or 1,
                 mundo(nil),
-                if __t(down) then "down" else "up"
+                __t(down) and "down" or "up"
             )
-            local ____t_65 = __t
-            local ____t_64 = __t
-            local ____temp_63 = if __t(down) then not __t(r.ok) else down
-            __O[500] = ____temp_63
-            if ____t_65(if ____t_64(____temp_63) then r.motivo == "vazio" else __O[500]) then
+            local ____t_107 = __t
+            local ____t_result_106
+            local ____t_105 = __t
+            local ____t_result_104
+            if __t(down) then
+                ____t_result_104 = not __t(r.ok)
+            else
+                ____t_result_104 = down
+            end
+            __O[500] = ____t_result_104
+            if ____t_105(____t_result_104) then
+                ____t_result_106 = r.motivo == "vazio"
+            else
+                ____t_result_106 = __O[500]
+            end
+            if ____t_107(____t_result_106) then
                 aviso(nil, "Equipe um poder no Mural dos Poderes (quarto da pensão).")
             end
-            local ____t_68 = __t
-            local ____t_67 = __t
-            local ____temp_66 = if __t(down) then not __t(r.ok) else down
-            __O[501] = ____temp_66
-            if ____t_68(if ____t_67(____temp_66) then r.motivo == "recarga" else __O[501]) then
+            local ____t_111 = __t
+            local ____t_result_110
+            local ____t_109 = __t
+            local ____t_result_108
+            if __t(down) then
+                ____t_result_108 = not __t(r.ok)
+            else
+                ____t_result_108 = down
+            end
+            __O[501] = ____t_result_108
+            if ____t_109(____t_result_108) then
+                ____t_result_110 = r.motivo == "recarga"
+            else
+                ____t_result_110 = __O[501]
+            end
+            if ____t_111(____t_result_110) then
                 aviso(
                     nil,
                     ("Recarregando: " .. tostring(__call(
@@ -714,7 +933,13 @@ local __O = {};
                 not not __t(down)
             )
             if __t(down) then
-                __D[1] = if id == "paper" then papel else peido(nil, P)
+                local ____temp_112
+                if id == "paper" then
+                    ____temp_112 = papel
+                else
+                    ____temp_112 = peido
+                end
+                ____temp_112(nil, P)
             end
             return true
         end
@@ -723,17 +948,24 @@ local __O = {};
         end
         if id == "dash" then
             if dashCd <= 0 then
-                dashDir = if __lt(P.facing, 0) then -1 else 1
+                dashDir = __lt(P.facing, 0) and -1 or 1
                 dashT = CFG.dashT
                 dashCd = bn.dashCooldown
                 P.vx = dashDir * CFG.dash
-                P.inv = math.max(if __t(P.inv) then P.inv else 0, 0.18)
-                local ____opt_71 = VFX(nil)
-                if ____opt_71 ~= nil then
-                    ____opt_71 = ____opt_71.emit
+                local ____P_114 = P
+                local ____t_result_113
+                if __t(P.inv) then
+                    ____t_result_113 = P.inv
+                else
+                    ____t_result_113 = 0
                 end
-                if ____opt_71 ~= nil then
-                    ____opt_71(____opt_71, "dash", {x = P.x, y = P.y - 3, dir = dashDir})
+                ____P_114.inv = math.max(____t_result_113, 0.18)
+                local ____opt_117 = VFX(nil)
+                if ____opt_117 ~= nil then
+                    ____opt_117 = ____opt_117.emit
+                end
+                if ____opt_117 ~= nil then
+                    ____opt_117(____opt_117, "dash", {x = P.x, y = P.y - 3, dir = dashDir})
                 end
                 fx(
                     nil,
@@ -759,24 +991,24 @@ local __O = {};
                 return true, false
             end
             local ____try, ____hasReturned, ____returnValue = pcall(function()
-                local ____t_84 = __t
-                local ____opt_79 = window.Game
-                if ____opt_79 ~= nil then
-                    ____opt_79 = ____opt_79.getState
+                local ____t_130 = __t
+                local ____opt_125 = window.Game
+                if ____opt_125 ~= nil then
+                    ____opt_125 = ____opt_125.getState
                 end
-                local ____opt_result_81
-                if ____opt_79 ~= nil then
-                    ____opt_result_81 = ____opt_79(____opt_79)
+                local ____opt_result_127
+                if ____opt_125 ~= nil then
+                    ____opt_result_127 = ____opt_125(____opt_125)
                 end
-                local ____opt_result_82
-                if ____opt_result_81 ~= nil then
-                    ____opt_result_82 = ____opt_result_81.q
+                local ____opt_result_128
+                if ____opt_result_127 ~= nil then
+                    ____opt_result_128 = ____opt_result_127.q
                 end
-                local ____opt_result_83
-                if ____opt_result_82 ~= nil then
-                    ____opt_result_83 = ____opt_result_82.trained
+                local ____opt_result_129
+                if ____opt_result_128 ~= nil then
+                    ____opt_result_129 = ____opt_result_128.trained
                 end
-                return true, not not ____t_84(____opt_result_83)
+                return true, not not ____t_130(____opt_result_129)
             end)
             if not ____try then
                 ____hasReturned, ____returnValue = ____catch(____hasReturned)
@@ -798,12 +1030,18 @@ local __O = {};
         end
         avisoUlt = s
         avisoQuando = agora
-        local ____t_87 = __t
-        local ____opt_85 = window.Campanha2
-        if ____opt_85 ~= nil then
-            ____opt_85 = ____opt_85.aviso
+        local ____t_134 = __t
+        local ____t_result_133
+        if __t(modoJogo) then
+            local ____opt_131 = window.Campanha2
+            if ____opt_131 ~= nil then
+                ____opt_131 = ____opt_131.aviso
+            end
+            ____t_result_133 = ____opt_131
+        else
+            ____t_result_133 = modoJogo
         end
-        if ____t_87(if __t(modoJogo) then ____opt_85 else modoJogo) then
+        if ____t_134(____t_result_133) then
             do
                 local ____try, ____hasReturned, ____returnValue = pcall(function()
                     window.Campanha2:aviso(s)
@@ -853,10 +1091,16 @@ local __O = {};
             P.vx = dashDir * CFG.dash
             __call(rastro, "push", {x = P.x, y = P.y, facing = P.facing, life = 0.2})
         end
-        local ____t_89 = __t
-        local ____temp_88 = not __t(P.ground) and gas > 0
-        __O[502] = ____temp_88
-        voandoAgora = if ____t_89(____temp_88) then not not __t(o.segurandoPulo) else __O[502]
+        local ____t_result_137
+        local ____t_136 = __t
+        local ____temp_135 = not __t(P.ground) and gas > 0
+        __O[502] = ____temp_135
+        if ____t_136(____temp_135) then
+            ____t_result_137 = not not __t(o.segurandoPulo)
+        else
+            ____t_result_137 = __O[502]
+        end
+        voandoAgora = ____t_result_137
         if __t(voandoAgora) then
             if __gt(
                 P.vy,
@@ -879,14 +1123,23 @@ local __O = {};
                 )
             end
         elseif not __t(o.segurandoPulo) then
-            gas = math.min(bn.maxGas, gas + dt * if __t(P.ground) then bn.gasRegen else bn.airGasRegen)
+            local ____bn_maxGas_141 = bn.maxGas
+            local ____gas_140 = gas
+            local ____dt_139 = dt
+            local ____t_result_138
+            if __t(P.ground) then
+                ____t_result_138 = bn.gasRegen
+            else
+                ____t_result_138 = bn.airGasRegen
+            end
+            gas = math.min(____bn_maxGas_141, ____gas_140 + ____dt_139 * ____t_result_138)
         end
-        local ____opt_92 = VFX(nil)
-        if ____opt_92 ~= nil then
-            ____opt_92 = ____opt_92.update
+        local ____opt_144 = VFX(nil)
+        if ____opt_144 ~= nil then
+            ____opt_144 = ____opt_144.update
         end
-        if ____opt_92 ~= nil then
-            ____opt_92(____opt_92, dt)
+        if ____opt_144 ~= nil then
+            ____opt_144(____opt_144, dt)
         end
         for ____, a in __iterar((rastro)) do
             a.life = a.life - dt
@@ -909,64 +1162,66 @@ local __O = {};
         )
         if not __t(modoJogo) then
             for ____, b in __iterar((bonecos)) do
-                if __gt(b.morto, 0) then
-                    b.morto = b.morto - dt
-                    if __le(b.morto, 0) then
-                        __assign(
-                            b,
-                            novoBoneco(nil, b.base)
-                        )
-                    end
-                    continue
-                end
-                b.hit = math.max(0, b.hit - dt)
-                b.stun = math.max(0, b.stun - dt)
-                b.conf = math.max(0, b.conf - dt)
-                b.golpe = math.max(0, b.golpe - dt)
-                b.x = b.x + b.vx * dt
-                b.vx = b.vx * 0.02 ^ dt
-                b.vy = b.vy + 1400 * dt
-                b.y = math.min(FLOOR, b.y + b.vy * dt)
-                if __ge(b.y, FLOOR) then
-                    b.vy = 0
-                end
-                if __t(__gt(b.conf, 0) and __le(b.stun, 0)) then
-                    local alvo = __get(
-                        __call(
-                            __call(
-                                bonecos,
-                                "filter",
-                                function(____, q) return q ~= b and __gt(q.hp, 0) end
-                            ),
-                            "sort",
-                            function(____, p, q) return math.abs(p.x - b.x) - math.abs(q.x - b.x) end
-                        ),
-                        0
-                    )
-                    if __t(alvo) then
-                        local d = alvo.x - b.x
-                        if math.abs(d) > 40 then
-                            b.x = b.x + __TS__MathSign(d) * 120 * dt
-                        elseif __le(b.golpe, 0) then
-                            b.golpe = 0.7
-                            mundo(nil):dano(
-                                alvo,
-                                4,
-                                "confuso",
-                                __TS__MathSign(d)
+                do
+                    if __gt(b.morto, 0) then
+                        b.morto = b.morto - dt
+                        if __le(b.morto, 0) then
+                            __assign(
+                                b,
+                                novoBoneco(nil, b.base)
                             )
-                            alvo.vx = __TS__MathSign(d) * 160
-                            __call(textos, "push", {
-                                x = b.x,
-                                y = b.y - 110,
-                                n = "TOMA!",
-                                t = 0,
-                                cor = "#e48fb0"
-                            })
                         end
+                        continue
                     end
-                elseif __le(b.stun, 0) then
-                    b.x = b.x + (b.base - b.x) * math.min(1, dt * 0.8)
+                    b.hit = math.max(0, b.hit - dt)
+                    b.stun = math.max(0, b.stun - dt)
+                    b.conf = math.max(0, b.conf - dt)
+                    b.golpe = math.max(0, b.golpe - dt)
+                    b.x = b.x + b.vx * dt
+                    b.vx = b.vx * 0.02 ^ dt
+                    b.vy = b.vy + 1400 * dt
+                    b.y = math.min(FLOOR, b.y + b.vy * dt)
+                    if __ge(b.y, FLOOR) then
+                        b.vy = 0
+                    end
+                    if __t(__gt(b.conf, 0) and __le(b.stun, 0)) then
+                        local alvo = __get(
+                            __call(
+                                __call(
+                                    bonecos,
+                                    "filter",
+                                    function(____, q) return q ~= b and __gt(q.hp, 0) end
+                                ),
+                                "sort",
+                                function(____, p, q) return math.abs(p.x - b.x) - math.abs(q.x - b.x) end
+                            ),
+                            0
+                        )
+                        if __t(alvo) then
+                            local d = alvo.x - b.x
+                            if math.abs(d) > 40 then
+                                b.x = b.x + __TS__MathSign(d) * 120 * dt
+                            elseif __le(b.golpe, 0) then
+                                b.golpe = 0.7
+                                mundo(nil):dano(
+                                    alvo,
+                                    4,
+                                    "confuso",
+                                    __TS__MathSign(d)
+                                )
+                                alvo.vx = __TS__MathSign(d) * 160
+                                __call(textos, "push", {
+                                    x = b.x,
+                                    y = b.y - 110,
+                                    n = "TOMA!",
+                                    t = 0,
+                                    cor = "#e48fb0"
+                                })
+                            end
+                        end
+                    elseif __le(b.stun, 0) then
+                        b.x = b.x + (b.base - b.x) * math.min(1, dt * 0.8)
+                    end
                 end
             end
         end
@@ -978,24 +1233,61 @@ local __O = {};
                 q.x = q.x + q.vx * dt
                 q.y = q.y + q.vy * dt
                 for ____, b in __iterar((bonecos)) do
-                    local ____t_100 = __t
-                    local ____t_99 = __t
-                    local ____t_97 = __t
-                    local ____t_95 = __t
-                    local ____temp_94 = __gt(b.hp, 0) and not __t(b.intocavel)
-                    __O[503] = ____temp_94
-                    local ____temp_96 = if ____t_95(____temp_94) then __lt(
-                        math.abs(b.x - q.x),
-                        if __t(b.largura) then b.largura else 22
-                    ) else __O[503]
-                    __O[504] = ____temp_96
-                    local ____temp_98 = if ____t_97(____temp_96) then __gt(q.y, b.y - if __t(b.alto) then b.alto else 80) else __O[504]
-                    __O[505] = ____temp_98
-                    if ____t_100(if ____t_99(____temp_98) then __lt(q.y, b.y + 4) else __O[505]) then
-                        bater(
+                    local ____t_160 = __t
+                    local ____t_result_159
+                    local ____t_158 = __t
+                    local ____t_result_157
+                    local ____t_152 = __t
+                    local ____t_result_151
+                    local ____t_147 = __t
+                    local ____temp_146 = __gt(b.hp, 0) and not __t(b.intocavel)
+                    __O[503] = ____temp_146
+                    if ____t_147(____temp_146) then
+                        local ____lt_150 = __lt
+                        local ____math_abs_result_149 = math.abs(b.x - q.x)
+                        local ____t_result_148
+                        if __t(b.largura) then
+                            ____t_result_148 = b.largura
+                        else
+                            ____t_result_148 = 22
+                        end
+                        ____t_result_151 = ____lt_150(____math_abs_result_149, ____t_result_148)
+                    else
+                        ____t_result_151 = __O[503]
+                    end
+                    __O[504] = ____t_result_151
+                    if ____t_152(____t_result_151) then
+                        local ____gt_156 = __gt
+                        local ____q_y_155 = q.y
+                        local ____b_y_154 = b.y
+                        local ____t_result_153
+                        if __t(b.alto) then
+                            ____t_result_153 = b.alto
+                        else
+                            ____t_result_153 = 80
+                        end
+                        ____t_result_157 = ____gt_156(____q_y_155, ____b_y_154 - ____t_result_153)
+                    else
+                        ____t_result_157 = __O[504]
+                    end
+                    __O[505] = ____t_result_157
+                    if ____t_158(____t_result_157) then
+                        ____t_result_159 = __lt(q.y, b.y + 4)
+                    else
+                        ____t_result_159 = __O[505]
+                    end
+                    if ____t_160(____t_result_159) then
+                        local ____bater_162 = bater
+                        local ____t_result_161
+                        if __t(q.dano) then
+                            ____t_result_161 = q.dano
+                        else
+                            ____t_result_161 = 6
+                        end
+                        ____bater_162(
                             nil,
                             b,
-                            if __t(q.dano) then q.dano else 6,
+                            ____t_result_161,
                             "papel",
                             __TS__MathSign(q.vx)
                         )
@@ -1017,8 +1309,15 @@ local __O = {};
         )
     end
     local function piscando(____, e)
-        return __gt(
-            if __t(e.piscaAte) then e.piscaAte else 0,
+        local ____gt_164 = __gt
+        local ____t_result_163
+        if __t(e.piscaAte) then
+            ____t_result_163 = e.piscaAte
+        else
+            ____t_result_163 = 0
+        end
+        return ____gt_164(
+            ____t_result_163,
             window.performance:now()
         ) and __mod(
             math.floor(window.performance:now() / 55),
@@ -1036,15 +1335,27 @@ local __O = {};
             )
         end
         local caido = __le(b.hp, 0)
-        local sh = if __gt(b.hit, 0) then math.floor(math.sin(t * 60) * 2 + 0.5) else 0
+        local ____gt_result_165
+        if __gt(b.hit, 0) then
+            ____gt_result_165 = math.floor(math.sin(t * 60) * 2 + 0.5)
+        else
+            ____gt_result_165 = 0
+        end
+        local sh = ____gt_result_165
         local x = b.x + sh
         local y = b.y
         c:save()
-        local ____t_103 = __t
-        local ____t_102 = __t
-        local ____temp_101 = not __t(caido)
-        __O[506] = ____temp_101
-        if ____t_103(if ____t_102(____temp_101) then piscando(nil, b) else __O[506]) then
+        local ____t_169 = __t
+        local ____t_result_168
+        local ____t_167 = __t
+        local ____temp_166 = not __t(caido)
+        __O[506] = ____temp_166
+        if ____t_167(____temp_166) then
+            ____t_result_168 = piscando(nil, b)
+        else
+            ____t_result_168 = __O[506]
+        end
+        if ____t_169(____t_result_168) then
             c.globalAlpha = 0.25
         end
         if __t(caido) then
@@ -1077,7 +1388,7 @@ local __O = {};
             y - 64,
             28,
             30,
-            if __gt(b.hit, 0) then "#ffffff" else "#c43c3a"
+            __gt(b.hit, 0) and "#ffffff" or "#c43c3a"
         )
         R(
             nil,
@@ -1207,7 +1518,7 @@ local __O = {};
                 y - 105,
                 38 * b.hp / b.max,
                 3,
-                if b.hp / b.max > 0.4 then "#7ac85a" else "#e8433a"
+                b.hp / b.max > 0.4 and "#7ac85a" or "#e8433a"
             )
         end
     end
@@ -1236,40 +1547,55 @@ local __O = {};
         end
         c.globalAlpha = 1
         for ____, q in __iterar((tiros)) do
-            local ____t_109 = __t
-            local ____opt_106 = VFX(nil)
-            if ____opt_106 ~= nil then
-                ____opt_106 = ____opt_106.drawProjectile
+            do
+                local ____t_178 = __t
+                local ____opt_175 = VFX(nil)
+                if ____opt_175 ~= nil then
+                    ____opt_175 = ____opt_175.drawProjectile
+                end
+                local ____opt_result_177
+                if ____opt_175 ~= nil then
+                    local ____c_173 = c
+                    local ____t_result_171
+                    if __t(q.tipo) then
+                        ____t_result_171 = q.tipo
+                    else
+                        ____t_result_171 = "paper"
+                    end
+                    local ____t_result_172
+                    if __t(q.elemento) then
+                        ____t_result_172 = q.elemento
+                    else
+                        ____t_result_172 = nil
+                    end
+                    ____opt_result_177 = ____opt_175(____opt_175, ____c_173, {
+                        type = ____t_result_171,
+                        element = ____t_result_172,
+                        x = q.x,
+                        y = q.y,
+                        vx = q.vx,
+                        vy = q.vy,
+                        owner = "player"
+                    }, t)
+                end
+                if ____t_178(____opt_result_177) then
+                    continue
+                end
+                c.fillStyle = "#f6f4ee"
+                c:fillRect(
+                    math.floor(q.x - 5 + 0.5),
+                    math.floor(q.y - 5 + 0.5),
+                    10,
+                    10
+                )
             end
-            local ____opt_result_108
-            if ____opt_106 ~= nil then
-                ____opt_result_108 = ____opt_106(____opt_106, c, {
-                    type = if __t(q.tipo) then q.tipo else "paper",
-                    element = if __t(q.elemento) then q.elemento else nil,
-                    x = q.x,
-                    y = q.y,
-                    vx = q.vx,
-                    vy = q.vy,
-                    owner = "player"
-                }, t)
-            end
-            if ____t_109(____opt_result_108) then
-                continue
-            end
-            c.fillStyle = "#f6f4ee"
-            c:fillRect(
-                math.floor(q.x - 5 + 0.5),
-                math.floor(q.y - 5 + 0.5),
-                10,
-                10
-            )
         end
-        local ____opt_112 = VFX(nil)
-        if ____opt_112 ~= nil then
-            ____opt_112 = ____opt_112.draw
+        local ____opt_181 = VFX(nil)
+        if ____opt_181 ~= nil then
+            ____opt_181 = ____opt_181.draw
         end
-        if ____opt_112 ~= nil then
-            ____opt_112(____opt_112, c, t, "front")
+        if ____opt_181 ~= nil then
+            ____opt_181(____opt_181, c, t, "front")
         end
         PW:desenhar(
             c,
@@ -1305,43 +1631,55 @@ local __O = {};
             barra:querySelector(".c2-treino-gas i").style.width = tostring(gas) .. "%"
             local m = PW:multiplicadores()
             local eq = PW:estado().equipados
-            local ____temp_123 = barra:querySelector(".c2-treino-info")
-            local ____opt_116 = window.CampanhaLoja
-            if ____opt_116 ~= nil then
-                ____opt_116 = ____opt_116.moedas
+            local ____temp_194 = barra:querySelector(".c2-treino-info")
+            local ____opt_185 = window.CampanhaLoja
+            if ____opt_185 ~= nil then
+                ____opt_185 = ____opt_185.moedas
             end
-            local ____opt_result_118
-            if ____opt_116 ~= nil then
-                ____opt_result_118 = ____opt_116(____opt_116)
+            local ____opt_result_187
+            if ____opt_185 ~= nil then
+                ____opt_result_187 = ____opt_185(____opt_185)
             end
-            local ____opt_result_118_119 = ____opt_result_118
-            if ____opt_result_118_119 == nil then
-                ____opt_result_118_119 = 0
+            local ____opt_result_187_188 = ____opt_result_187
+            if ____opt_result_187_188 == nil then
+                ____opt_result_187_188 = 0
             end
-            ____temp_123.innerHTML = (((("TREINO DE PODERES · ● " .. tostring(____opt_result_118_119)) .. " MOEDAS<br>J PAPEL · K PEIDO · L DASH · ␣ VOAR · U/I PODERES<br>") .. tostring(if __t(__len(__call(eq, "filter", window.Boolean))) then __add(
-                "Equipados: ",
-                __call(
+            local ____t_result_193
+            if __t(__len(__call(eq, "filter", window.Boolean))) then
+                ____t_result_193 = __add(
+                    "Equipados: ",
                     __call(
-                        eq,
-                        "map",
-                        function(____, id)
-                            local ____t_122 = __t
-                            local ____opt_120 = __call(
-                                PW:lista(),
-                                "find",
-                                function(____, p) return p.id == id end
-                            )
-                            if ____opt_120 ~= nil then
-                                ____opt_120 = ____opt_120.curto
+                        __call(
+                            eq,
+                            "map",
+                            function(____, id)
+                                local ____t_result_192
+                                local ____t_191 = __t
+                                local ____opt_189 = __call(
+                                    PW:lista(),
+                                    "find",
+                                    function(____, p) return p.id == id end
+                                )
+                                if ____opt_189 ~= nil then
+                                    ____opt_189 = ____opt_189.curto
+                                end
+                                __O[507] = ____opt_189
+                                if ____t_191(____opt_189) then
+                                    ____t_result_192 = __O[507]
+                                else
+                                    ____t_result_192 = "—"
+                                end
+                                return ____t_result_192
                             end
-                            __O[507] = ____opt_120
-                            return if ____t_122(____opt_120) then __O[507] else "—"
-                        end
-                    ),
-                    "join",
-                    " + "
+                        ),
+                        "join",
+                        " + "
+                    )
                 )
-            ) else "Sem poder equipado: abra o MURAL")) .. if __gt(m.vel, 1) then "<br>☕ CAFEZÃO ATIVO" else "") .. if __t(PW:escudo()) then "<br>♥ AURA ATIVA" else ""
+            else
+                ____t_result_193 = "Sem poder equipado: abra o MURAL"
+            end
+            ____temp_194.innerHTML = (((("TREINO DE PODERES · ● " .. tostring(____opt_result_187_188)) .. " MOEDAS<br>J PAPEL · K PEIDO · L DASH · ␣ VOAR · U/I PODERES<br>") .. tostring(____t_result_193)) .. (__gt(m.vel, 1) and "<br>☕ CAFEZÃO ATIVO" or "")) .. (__t(PW:escudo()) and "<br>♥ AURA ATIVA" or "")
             __call(
                 __arrL({0, 1}, 2),
                 "forEach",
@@ -1391,25 +1729,25 @@ local __O = {};
                 if not __t(on) then
                     return
                 end
-                local ____opt_126 = VFX(nil)
-                if ____opt_126 ~= nil then
-                    ____opt_126 = ____opt_126.draw
+                local ____opt_197 = VFX(nil)
+                if ____opt_197 ~= nil then
+                    ____opt_197 = ____opt_197.draw
                 end
-                if ____opt_126 ~= nil then
-                    ____opt_126(____opt_126, c, t, "back")
+                if ____opt_197 ~= nil then
+                    ____opt_197(____opt_197, c, t, "back")
                 end
                 for ____, a in __iterar((rastro)) do
                     c:save()
                     c.globalAlpha = math.min(1, a.life * 2)
                     do
                         pcall(function()
-                            local ____opt_130 = window.Art
-                            if ____opt_130 ~= nil then
-                                ____opt_130 = ____opt_130.drawCharacter
+                            local ____opt_201 = window.Art
+                            if ____opt_201 ~= nil then
+                                ____opt_201 = ____opt_201.drawCharacter
                             end
-                            if ____opt_130 ~= nil then
-                                ____opt_130(
-                                    ____opt_130,
+                            if ____opt_201 ~= nil then
+                                ____opt_201(
+                                    ____opt_201,
                                     c,
                                     "daroca",
                                     a.x,
@@ -1441,13 +1779,29 @@ local __O = {};
                 end
                 return bonecos
             end,
-            dashing = function() return if __t(on) then dashT > 0 else on end,
+            dashing = function()
+                local ____t_result_203
+                if __t(on) then
+                    ____t_result_203 = dashT > 0
+                else
+                    ____t_result_203 = on
+                end
+                return ____t_result_203
+            end,
             acao = acao,
             passo = passo,
             desenhar = desenhar,
             montarBarra = montarBarra,
             tremor = function() return shake end,
-            velocidade = function() return if __t(on) then PW:multiplicadores().vel else 1 end
+            velocidade = function()
+                local ____t_result_204
+                if __t(on) then
+                    ____t_result_204 = PW:multiplicadores().vel
+                else
+                    ____t_result_204 = 1
+                end
+                return ____t_result_204
+            end
         },
         "dashFalta,voandoAgora,som,bonus,gasMax,encher,dadosC1,desenharAtras,papeis,musculoso,piscando,ligar,ligado,gas,inimigos,dashing,acao,passo,desenhar,montarBarra,tremor,velocidade"
     )

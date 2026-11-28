@@ -2,7 +2,6 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __D = {}
 local __mod, __arrL, __t, __get, __len, __call, __new, __re, __re_test = __JSR.__mod, __JSR.__arrL, __JSR.__t, __JSR.__get, __JSR.__len, __JSR.__call, __JSR.__new, __JSR.__re, __JSR.__re_test
 local ____exports = {}
 local __O = {};
@@ -12,10 +11,17 @@ local __O = {};
     if not __t(el) then
         return
     end
-    __D[1] = if __t(if __t(window.navigator.webdriver) then not __re_test(
-        __re("[?&]abertura\\b", ""),
-        window.location.search
-    ) else window.navigator.webdriver) then
+    local ____t_1 = __t
+    local ____t_result_0
+    if __t(window.navigator.webdriver) then
+        ____t_result_0 = not __re_test(
+            __re("[?&]abertura\\b", ""),
+            window.location.search
+        )
+    else
+        ____t_result_0 = window.navigator.webdriver
+    end
+    if ____t_1(____t_result_0) then
         el:remove()
         return
     end
@@ -37,7 +43,14 @@ local __O = {};
                 n + 1,
                 __len(DICAS)
             )
-            if __t(if __t(dica) then not __t(el.classList:contains("ab-pronto")) else dica) then
+            local ____t_3 = __t
+            local ____t_result_2
+            if __t(dica) then
+                ____t_result_2 = not __t(el.classList:contains("ab-pronto"))
+            else
+                ____t_result_2 = dica
+            end
+            if ____t_3(____t_result_2) then
                 dica.textContent = __get(DICAS, n)
             end
         end,
@@ -68,7 +81,10 @@ local __O = {};
         if __t(dica) then
             dica.textContent = "PRONTO!"
         end
-        window:setTimeout(sair, if __t(pularPedido) then 150 else 900)
+        window:setTimeout(
+            sair,
+            __t(pularPedido) and 150 or 900
+        )
     end
     local function quandoCarregar(self)
         local falta = math.max(
@@ -83,17 +99,17 @@ local __O = {};
         window:addEventListener("load", quandoCarregar, {once = true})
     end
     local function pular(____, e)
-        local ____this_1
-        ____this_1 = e
-        local ____opt_0 = ____this_1.preventDefault
-        if ____opt_0 ~= nil then
-            ____opt_0(____this_1)
+        local ____this_5
+        ____this_5 = e
+        local ____opt_4 = ____this_5.preventDefault
+        if ____opt_4 ~= nil then
+            ____opt_4(____this_5)
         end
-        local ____this_3
-        ____this_3 = e
-        local ____opt_2 = ____this_3.stopPropagation
-        if ____opt_2 ~= nil then
-            ____opt_2(____this_3)
+        local ____this_7
+        ____this_7 = e
+        local ____opt_6 = ____this_7.stopPropagation
+        if ____opt_6 ~= nil then
+            ____opt_6(____this_7)
         end
         if __t(carregado) then
             sair(nil)
@@ -105,11 +121,17 @@ local __O = {};
     window:addEventListener(
         "keydown",
         function(____, e)
-            local ____t_6 = __t
-            local ____t_5 = __t
-            local ____temp_4 = window.document:getElementById("abertura")
-            __O[1] = ____temp_4
-            if ____t_6(if ____t_5(____temp_4) then not __t(saindo) else __O[1]) then
+            local ____t_11 = __t
+            local ____t_result_10
+            local ____t_9 = __t
+            local ____temp_8 = window.document:getElementById("abertura")
+            __O[1] = ____temp_8
+            if ____t_9(____temp_8) then
+                ____t_result_10 = not __t(saindo)
+            else
+                ____t_result_10 = __O[1]
+            end
+            if ____t_11(____t_result_10) then
                 pular(nil, e)
             end
         end,
