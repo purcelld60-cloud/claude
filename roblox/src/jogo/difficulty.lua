@@ -301,9 +301,9 @@ local __O = {};
         local ____t_result_13
         local ____t_12 = __t
         local ____get_result_11 = __get(modes, selected)
-        __O[1291] = ____get_result_11
+        __O[1292] = ____get_result_11
         if ____t_12(____get_result_11) then
-            ____t_result_13 = __O[1291]
+            ____t_result_13 = __O[1292]
         else
             ____t_result_13 = modes.normal
         end
@@ -361,16 +361,16 @@ local __O = {};
         local ____t_result_23
         local ____t_22 = __t
         local ____get_result_21 = __get(scaled, selected)
-        __O[1292] = ____get_result_21
+        __O[1293] = ____get_result_21
         if ____t_22(____get_result_21) then
-            ____t_result_23 = __O[1292]
+            ____t_result_23 = __O[1293]
         else
             ____t_result_23 = scaled.normal
         end
         local ____get_24_result_25 = ____get_24(____t_result_23, ____type)
-        __O[1293] = ____get_24_result_25
+        __O[1294] = ____get_24_result_25
         if ____t_26(____get_24_result_25) then
-            ____t_result_27 = __O[1293]
+            ____t_result_27 = __O[1294]
         else
             ____t_result_27 = nil
         end

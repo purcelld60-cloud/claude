@@ -186,9 +186,9 @@ local __O = {};
         if ____opt_12 ~= nil then
             ____opt_12 = ____opt_12.name
         end
-        __O[1335] = ____opt_12
+        __O[1336] = ____opt_12
         if ____t_14(____opt_12) then
-            ____t_result_15 = __O[1335]
+            ____t_result_15 = __O[1336]
         else
             ____t_result_15 = id
         end
@@ -289,9 +289,9 @@ local __O = {};
             "has",
             id
         )
-        __O[1336] = ____call_result_20
+        __O[1337] = ____call_result_20
         if ____t_21(____call_result_20) then
-            ____t_result_25 = __O[1336]
+            ____t_result_25 = __O[1337]
         else
             local ____opt_result_24
             if q ~= nil then

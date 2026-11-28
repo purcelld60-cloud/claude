@@ -1262,9 +1262,14 @@
   // placa de vídeo desliza as camadas a cada quadro com a câmera. Só os cenários deste arquivo (campanha 1).
   const CAMS = { M: 96, cv: null, g: null, luz: null, lg: null, ceu: null, ceuG: null, nevoas: [] };
   const podeCamadas = (scene) => !!MAPS[scene] && !MAPS[scene].always && !!window.DayTime;
-  function desenharCamadas(scene, camera, t) {
+  function desenharCamadas(scene, camera, t, hora) {
     scene = Number(scene); camera = Number(camera) || 0; t = Number(t) || 0;
     if (!podeCamadas(scene)) return null;
+    // cenas de história travam uma hora do dia só enquanto desenham: o cenário delas usa a mesma hora
+    const forcar = typeof hora === 'number' && Number.isFinite(hora); if (forcar) window.DayTime.force(hora);
+    try { return desenharCamadasAgora(scene, camera, t); } finally { if (forcar) window.DayTime.force(null); }
+  }
+  function desenharCamadasAgora(scene, camera, t) {
     const M = CAMS.M, VW = 482 + 2 * M;
     if (!CAMS.cv) { [CAMS.cv, CAMS.g] = mk(VW, LH); [CAMS.luz, CAMS.lg] = mk(VW, LH); [CAMS.ceu, CAMS.ceuG] = mk(482, LH); }
     const s = window.DayTime.state(), camL = Math.floor(camera / 2), camW = camL - M, g = CAMS.g;

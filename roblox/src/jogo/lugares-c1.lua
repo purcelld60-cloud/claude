@@ -277,9 +277,9 @@ local __O = {};
             ____opt_result_8 = s.night
         end
         local ____TS__Number_result_9 = __TS__Number(____opt_result_8)
-        __O[1342] = ____TS__Number_result_9
+        __O[1343] = ____TS__Number_result_9
         if ____t_10(____TS__Number_result_9) then
-            ____t_result_11 = __O[1342]
+            ____t_result_11 = __O[1343]
         else
             ____t_result_11 = 0
         end
@@ -5299,9 +5299,9 @@ local __O = {};
         if ____opt_100 ~= nil then
             ____opt_100 = ____opt_100.name
         end
-        __O[1343] = ____opt_100
+        __O[1344] = ____opt_100
         if ____t_102(____opt_100) then
-            ____t_result_103 = __O[1343]
+            ____t_result_103 = __O[1344]
         else
             ____t_result_103 = id
         end
@@ -5447,15 +5447,15 @@ local __O = {};
             end
             ____temp_112 = not ____t_111(____opt_result_110)
         end
-        __O[1344] = ____temp_112
+        __O[1345] = ____temp_112
         if ____t_113(____temp_112) then
-            ____t_result_114 = __O[1344]
+            ____t_result_114 = __O[1345]
         else
             ____t_result_114 = q.ferramentasFeita
         end
-        __O[1345] = ____t_result_114
+        __O[1346] = ____t_result_114
         if ____t_115(____t_result_114) then
-            ____t_result_116 = __O[1345]
+            ____t_result_116 = __O[1346]
         else
             ____t_result_116 = not __t(player)
         end
@@ -5470,11 +5470,11 @@ local __O = {};
                 local ____t_result_120
                 local ____t_119 = __t
                 local ____temp_118 = not __t(__call(a, "has", p.id)) and math.abs(player.x - p.x) <= 34
-                __O[1346] = ____temp_118
+                __O[1347] = ____temp_118
                 if ____t_119(____temp_118) then
                     ____t_result_120 = math.abs(player.y - 30 - p.y) <= 44
                 else
-                    ____t_result_120 = __O[1346]
+                    ____t_result_120 = __O[1347]
                 end
                 return ____t_result_120
             end
@@ -5502,9 +5502,9 @@ local __O = {};
             end
             ____temp_125 = not ____t_124(____opt_result_123)
         end
-        __O[1347] = ____temp_125
+        __O[1348] = ____temp_125
         if ____t_126(____temp_125) then
-            ____t_result_127 = __O[1347]
+            ____t_result_127 = __O[1348]
         else
             ____t_result_127 = q.ferramentasFeita
         end
@@ -5628,7 +5628,7 @@ local __O = {};
         local ____t_result_134
         local ____t_130 = __t
         local ____temp_129 = __TS__Number(scene) == 40
-        __O[1348] = ____temp_129
+        __O[1349] = ____temp_129
         if ____t_130(____temp_129) then
             local ____opt_result_133
             if q ~= nil then
@@ -5636,13 +5636,13 @@ local __O = {};
             end
             ____t_result_134 = ____opt_result_133
         else
-            ____t_result_134 = __O[1348]
+            ____t_result_134 = __O[1349]
         end
-        __O[1349] = ____t_result_134
+        __O[1350] = ____t_result_134
         if ____t_135(____t_result_134) then
             ____t_result_136 = not __t(q.ferramentasFeita)
         else
-            ____t_result_136 = __O[1349]
+            ____t_result_136 = __O[1350]
         end
         if ____t_137(____t_result_136) then
             local n = achadas(nil, q).size
@@ -5681,9 +5681,9 @@ local __O = {};
             end
             ____temp_142 = not ____t_141(____opt_result_140)
         end
-        __O[1350] = ____temp_142
+        __O[1351] = ____temp_142
         if ____t_143(____temp_142) then
-            ____t_result_144 = __O[1350]
+            ____t_result_144 = __O[1351]
         else
             ____t_result_144 = q.ferramentasFeita
         end
@@ -5726,9 +5726,9 @@ local __O = {};
                 if ____opt_149 ~= nil then
                     ____opt_149 = ____opt_149.nome
                 end
-                __O[1351] = ____opt_149
+                __O[1352] = ____opt_149
                 if ____t_151(____opt_149) then
-                    ____t_result_152 = __O[1351]
+                    ____t_result_152 = __O[1352]
                 else
                     ____t_result_152 = ""
                 end
@@ -5744,9 +5744,9 @@ local __O = {};
                 if ____opt_153 ~= nil then
                     ____opt_153 = ____opt_153.sub
                 end
-                __O[1352] = ____opt_153
+                __O[1353] = ____opt_153
                 if ____t_155(____opt_153) then
-                    ____t_result_156 = __O[1352]
+                    ____t_result_156 = __O[1353]
                 else
                     ____t_result_156 = ""
                 end
@@ -5762,9 +5762,9 @@ local __O = {};
                 if ____opt_157 ~= nil then
                     ____opt_157 = ____opt_157.largura
                 end
-                __O[1353] = ____opt_157
+                __O[1354] = ____opt_157
                 if ____t_159(____opt_157) then
-                    ____t_result_160 = __O[1353]
+                    ____t_result_160 = __O[1354]
                 else
                     ____t_result_160 = 0
                 end
@@ -5781,9 +5781,9 @@ local __O = {};
                 if ____opt_161 ~= nil then
                     ____opt_161 = ____opt_161.plataformas
                 end
-                __O[1354] = ____opt_161
+                __O[1355] = ____opt_161
                 if ____t_163(____opt_161) then
-                    ____t_result_164 = __O[1354]
+                    ____t_result_164 = __O[1355]
                 else
                     ____t_result_164 = __arrL({}, 0)
                 end

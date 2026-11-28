@@ -254,9 +254,9 @@ local __O = {};
             if ____opt_27 ~= nil then
                 ____opt_27 = ____opt_27.lista
             end
-            __O[809] = ____opt_27
+            __O[810] = ____opt_27
             if ____t_29(____opt_27) then
-                ____t_result_30 = __O[809]
+                ____t_result_30 = __O[810]
             else
                 ____t_result_30 = __arrL({}, 0)
             end
@@ -307,9 +307,9 @@ local __O = {};
             if ____opt_36 ~= nil then
                 ____opt_36 = ____opt_36.lista
             end
-            __O[810] = ____opt_36
+            __O[811] = ____opt_36
             if ____t_38(____opt_36) then
-                ____t_result_39 = __O[810]
+                ____t_result_39 = __O[811]
             else
                 ____t_result_39 = __arrL({}, 0)
             end
@@ -323,7 +323,7 @@ local __O = {};
                 else
                     ____t_result_32 = d.key
                 end
-                __O[811] = ____t_result_32
+                __O[812] = ____t_result_32
                 if ____t_33(____t_result_32) then
                     ____t_result_34 = not __t(__call(
                         __arrL({"patio"}, 1),
@@ -331,7 +331,7 @@ local __O = {};
                         d.key
                     ))
                 else
-                    ____t_result_34 = __O[811]
+                    ____t_result_34 = __O[812]
                 end
                 if ____t_35(____t_result_34) then
                     __set(cenarios, d.key, d.id)
@@ -1254,11 +1254,11 @@ local __O = {};
                             local ____t_result_62
                             local ____t_61 = __t
                             local ____temp_60 = k < 3
-                            __O[812] = ____temp_60
+                            __O[813] = ____temp_60
                             if ____t_61(____temp_60) then
                                 ____t_result_62 = estado == "chamando" or estado == "ligando"
                             else
-                                ____t_result_62 = __O[812]
+                                ____t_result_62 = __O[813]
                             end
                             if not ____t_63(____t_result_62) then
                                 break
@@ -1359,9 +1359,9 @@ local __O = {};
                         },
                         estado
                     )
-                    __O[813] = ____get_result_69
+                    __O[814] = ____get_result_69
                     if ____t_70(____get_result_69) then
-                        ____t_result_71 = __O[813]
+                        ____t_result_71 = __O[814]
                     else
                         ____t_result_71 = ""
                     end
@@ -1379,11 +1379,11 @@ local __O = {};
                     local ____t_result_74
                     local ____t_73 = __t
                     local ____temp_72 = estado == "recusada" and aperta ~= nil
-                    __O[814] = ____temp_72
+                    __O[815] = ____temp_72
                     if ____t_73(____temp_72) then
                         ____t_result_74 = t - aperta < 0.4
                     else
-                        ____t_result_74 = __O[814]
+                        ____t_result_74 = __O[815]
                     end
                     if ____t_75(____t_result_74) then
                         c.fillStyle = ("rgba(255,60,40," .. tostring(0.5 - (t - aperta))) .. ")"
@@ -3367,15 +3367,15 @@ local __O = {};
                                 local ____t_result_97
                                 local ____t_96 = __t
                                 local ____temp_95 = j == 1
-                                __O[815] = ____temp_95
+                                __O[816] = ____temp_95
                                 if ____t_96(____temp_95) then
                                     ____t_result_97 = i == 1 or i == 2
                                 else
-                                    ____t_result_97 = __O[815]
+                                    ____t_result_97 = __O[816]
                                 end
-                                __O[816] = ____t_result_97
+                                __O[817] = ____t_result_97
                                 if ____t_98(____t_result_97) then
-                                    ____t_result_99 = __O[816]
+                                    ____t_result_99 = __O[817]
                                 else
                                     ____t_result_99 = j == 2 and i == 1
                                 end
@@ -3418,9 +3418,9 @@ local __O = {};
                 if ____opt_102 ~= nil then
                     ____opt_result_104 = ____opt_102(____opt_102, id, 96)
                 end
-                __O[817] = ____opt_result_104
+                __O[818] = ____opt_result_104
                 if ____t_105(____opt_result_104) then
-                    ____t_result_106 = __O[817]
+                    ____t_result_106 = __O[818]
                 else
                     ____t_result_106 = ""
                 end
@@ -3572,9 +3572,9 @@ local __O = {};
                 local ____t_result_117
                 local ____t_116 = __t
                 local ____TS__Number_result_115 = __TS__Number(e.dur)
-                __O[818] = ____TS__Number_result_115
+                __O[819] = ____TS__Number_result_115
                 if ____t_116(____TS__Number_result_115) then
-                    ____t_result_117 = __O[818]
+                    ____t_result_117 = __O[819]
                 else
                     ____t_result_117 = 6
                 end
@@ -3759,9 +3759,9 @@ local __O = {};
                 local ____t_result_121
                 local ____t_120 = __t
                 local ____TS__Number_result_119 = __TS__Number(e.dur)
-                __O[819] = ____TS__Number_result_119
+                __O[820] = ____TS__Number_result_119
                 if ____t_120(____TS__Number_result_119) then
-                    ____t_result_121 = __O[819]
+                    ____t_result_121 = __O[820]
                 else
                     ____t_result_121 = 3.4
                 end
@@ -3773,9 +3773,9 @@ local __O = {};
                 local ____t_result_125
                 local ____t_124 = __t
                 local ____TS__Number_result_123 = __TS__Number(e.x)
-                __O[820] = ____TS__Number_result_123
+                __O[821] = ____TS__Number_result_123
                 if ____t_124(____TS__Number_result_123) then
-                    ____t_result_125 = __O[820]
+                    ____t_result_125 = __O[821]
                 else
                     ____t_result_125 = 480
                 end
@@ -3783,9 +3783,9 @@ local __O = {};
                 local ____t_result_128
                 local ____t_127 = __t
                 local ____TS__Number_result_126 = __TS__Number(e.y)
-                __O[821] = ____TS__Number_result_126
+                __O[822] = ____TS__Number_result_126
                 if ____t_127(____TS__Number_result_126) then
-                    ____t_result_128 = __O[821]
+                    ____t_result_128 = __O[822]
                 else
                     ____t_result_128 = 250
                 end
@@ -3793,9 +3793,9 @@ local __O = {};
                 local ____t_result_131
                 local ____t_130 = __t
                 local ____TS__Number_result_129 = __TS__Number(e.escala)
-                __O[822] = ____TS__Number_result_129
+                __O[823] = ____TS__Number_result_129
                 if ____t_130(____TS__Number_result_129) then
-                    ____t_result_131 = __O[822]
+                    ____t_result_131 = __O[823]
                 else
                     ____t_result_131 = 1
                 end
@@ -3938,9 +3938,9 @@ local __O = {};
                 local ____t_result_141
                 local ____t_140 = __t
                 local ____TS__Number_result_139 = __TS__Number(e.forca)
-                __O[823] = ____TS__Number_result_139
+                __O[824] = ____TS__Number_result_139
                 if ____t_140(____TS__Number_result_139) then
-                    ____t_result_141 = __O[823]
+                    ____t_result_141 = __O[824]
                 else
                     ____t_result_141 = 0.5
                 end
@@ -3972,9 +3972,9 @@ local __O = {};
                 local ____t_result_145
                 local ____t_144 = __t
                 local ____TS__Number_result_143 = __TS__Number(e.t)
-                __O[824] = ____TS__Number_result_143
+                __O[825] = ____TS__Number_result_143
                 if ____t_144(____TS__Number_result_143) then
-                    ____t_result_145 = __O[824]
+                    ____t_result_145 = __O[825]
                 else
                     ____t_result_145 = 0
                 end
@@ -3982,9 +3982,9 @@ local __O = {};
                 local ____t_result_148
                 local ____t_147 = __t
                 local ____TS__Number_result_146 = __TS__Number(e.intervalo)
-                __O[825] = ____TS__Number_result_146
+                __O[826] = ____TS__Number_result_146
                 if ____t_147(____TS__Number_result_146) then
-                    ____t_result_148 = __O[825]
+                    ____t_result_148 = __O[826]
                 else
                     ____t_result_148 = 1.3
                 end
@@ -4061,9 +4061,9 @@ local __O = {};
                 local ____t_result_157
                 local ____t_156 = __t
                 local ____TS__Number_result_155 = __TS__Number(e.dur)
-                __O[826] = ____TS__Number_result_155
+                __O[827] = ____TS__Number_result_155
                 if ____t_156(____TS__Number_result_155) then
-                    ____t_result_157 = __O[826]
+                    ____t_result_157 = __O[827]
                 else
                     ____t_result_157 = 5
                 end
@@ -4106,9 +4106,9 @@ local __O = {};
                 local ____t_result_164
                 local ____t_163 = __t
                 local ____TS__Number_result_162 = __TS__Number(e.x)
-                __O[827] = ____TS__Number_result_162
+                __O[828] = ____TS__Number_result_162
                 if ____t_163(____TS__Number_result_162) then
-                    ____t_result_164 = __O[827]
+                    ____t_result_164 = __O[828]
                 else
                     ____t_result_164 = 480
                 end
@@ -4122,9 +4122,9 @@ local __O = {};
                 local ____t_result_167
                 local ____t_166 = __t
                 local ____TS__Number_result_165 = __TS__Number(e.giro)
-                __O[828] = ____TS__Number_result_165
+                __O[829] = ____TS__Number_result_165
                 if ____t_166(____TS__Number_result_165) then
-                    ____t_result_167 = __O[828]
+                    ____t_result_167 = __O[829]
                 else
                     ____t_result_167 = -0.05
                 end
@@ -4209,9 +4209,9 @@ local __O = {};
                 local ____t_result_176
                 local ____t_175 = __t
                 local ____TS__Number_result_174 = __TS__Number(e.t)
-                __O[829] = ____TS__Number_result_174
+                __O[830] = ____TS__Number_result_174
                 if ____t_175(____TS__Number_result_174) then
-                    ____t_result_176 = __O[829]
+                    ____t_result_176 = __O[830]
                 else
                     ____t_result_176 = 0
                 end
@@ -4224,9 +4224,9 @@ local __O = {};
                     local ____t_result_179
                     local ____t_178 = __t
                     local ____TS__Number_result_177 = __TS__Number(e.dur)
-                    __O[830] = ____TS__Number_result_177
+                    __O[831] = ____TS__Number_result_177
                     if ____t_178(____TS__Number_result_177) then
-                        ____t_result_179 = __O[830]
+                        ____t_result_179 = __O[831]
                     else
                         ____t_result_179 = 99
                     end
@@ -4239,9 +4239,9 @@ local __O = {};
                 local ____t_result_186
                 local ____t_185 = __t
                 local ____TS__Number_result_184 = __TS__Number(e.x)
-                __O[831] = ____TS__Number_result_184
+                __O[832] = ____TS__Number_result_184
                 if ____t_185(____TS__Number_result_184) then
-                    ____t_result_186 = __O[831]
+                    ____t_result_186 = __O[832]
                 else
                     ____t_result_186 = 520
                 end
@@ -4249,9 +4249,9 @@ local __O = {};
                 local ____t_result_189
                 local ____t_188 = __t
                 local ____TS__Number_result_187 = __TS__Number(e.y)
-                __O[832] = ____TS__Number_result_187
+                __O[833] = ____TS__Number_result_187
                 if ____t_188(____TS__Number_result_187) then
-                    ____t_result_189 = __O[832]
+                    ____t_result_189 = __O[833]
                 else
                     ____t_result_189 = 300
                 end
@@ -4356,9 +4356,9 @@ local __O = {};
                 local ____t_result_193
                 local ____t_192 = __t
                 local ____TS__Number_result_191 = __TS__Number(e.forca)
-                __O[833] = ____TS__Number_result_191
+                __O[834] = ____TS__Number_result_191
                 if ____t_192(____TS__Number_result_191) then
-                    ____t_result_193 = __O[833]
+                    ____t_result_193 = __O[834]
                 else
                     ____t_result_193 = 0.5
                 end
@@ -4441,9 +4441,9 @@ local __O = {};
                 local ____t_result_196
                 local ____t_195 = __t
                 local ____TS__Number_result_194 = __TS__Number(e.t)
-                __O[834] = ____TS__Number_result_194
+                __O[835] = ____TS__Number_result_194
                 if ____t_195(____TS__Number_result_194) then
-                    ____t_result_196 = __O[834]
+                    ____t_result_196 = __O[835]
                 else
                     ____t_result_196 = 0
                 end
@@ -4451,9 +4451,9 @@ local __O = {};
                 local ____t_result_199
                 local ____t_198 = __t
                 local ____TS__Number_result_197 = __TS__Number(e.dur)
-                __O[835] = ____TS__Number_result_197
+                __O[836] = ____TS__Number_result_197
                 if ____t_198(____TS__Number_result_197) then
-                    ____t_result_199 = __O[835]
+                    ____t_result_199 = __O[836]
                 else
                     ____t_result_199 = 1.5
                 end
@@ -4466,9 +4466,9 @@ local __O = {};
                 local ____t_result_202
                 local ____t_201 = __t
                 local ____TS__Number_result_200 = __TS__Number(e.forca)
-                __O[836] = ____TS__Number_result_200
+                __O[837] = ____TS__Number_result_200
                 if ____t_201(____TS__Number_result_200) then
-                    ____t_result_202 = __O[836]
+                    ____t_result_202 = __O[837]
                 else
                     ____t_result_202 = 1
                 end
@@ -4554,9 +4554,9 @@ local __O = {};
                 local ____t_result_207
                 local ____t_206 = __t
                 local ____TS__Number_result_205 = __TS__Number(e.dur)
-                __O[837] = ____TS__Number_result_205
+                __O[838] = ____TS__Number_result_205
                 if ____t_206(____TS__Number_result_205) then
-                    ____t_result_207 = __O[837]
+                    ____t_result_207 = __O[838]
                 else
                     ____t_result_207 = 3.4
                 end
@@ -4776,9 +4776,9 @@ local __O = {};
                 local ____t_result_215
                 local ____t_214 = __t
                 local ____TS__Number_result_213 = __TS__Number(e.dur)
-                __O[838] = ____TS__Number_result_213
+                __O[839] = ____TS__Number_result_213
                 if ____t_214(____TS__Number_result_213) then
-                    ____t_result_215 = __O[838]
+                    ____t_result_215 = __O[839]
                 else
                     ____t_result_215 = 4.2
                 end
@@ -4812,9 +4812,9 @@ local __O = {};
                 if ____opt_220 ~= nil then
                     ____opt_result_222 = ____opt_220(____opt_220)
                 end
-                __O[839] = ____opt_result_222
+                __O[840] = ____opt_result_222
                 if ____t_223(____opt_result_222) then
-                    ____t_result_224 = __O[839]
+                    ____t_result_224 = __O[840]
                 else
                     ____t_result_224 = __arrL({}, 0)
                 end
@@ -4823,9 +4823,9 @@ local __O = {};
                     "find",
                     function(____, p) return p.id == id end
                 )
-                __O[840] = ____call_225_result_226
+                __O[841] = ____call_225_result_226
                 if ____t_227(____call_225_result_226) then
-                    ____t_result_228 = __O[840]
+                    ____t_result_228 = __O[841]
                 else
                     ____t_result_228 = {
                         nome = __call(id, "toUpperCase"),
@@ -4964,9 +4964,9 @@ local __O = {};
                 local ____t_result_235
                 local ____t_234 = __t
                 local ____TS__Number_result_233 = __TS__Number(e.t)
-                __O[841] = ____TS__Number_result_233
+                __O[842] = ____TS__Number_result_233
                 if ____t_234(____TS__Number_result_233) then
-                    ____t_result_235 = __O[841]
+                    ____t_result_235 = __O[842]
                 else
                     ____t_result_235 = 0
                 end
@@ -5097,9 +5097,9 @@ local __O = {};
                 local ____t_result_240
                 local ____t_239 = __t
                 local ____TS__Number_result_238 = __TS__Number(e.t)
-                __O[842] = ____TS__Number_result_238
+                __O[843] = ____TS__Number_result_238
                 if ____t_239(____TS__Number_result_238) then
-                    ____t_result_240 = __O[842]
+                    ____t_result_240 = __O[843]
                 else
                     ____t_result_240 = 0
                 end
@@ -5108,9 +5108,9 @@ local __O = {};
                 local ____t_result_243
                 local ____t_242 = __t
                 local ____TS__Number_result_241 = __TS__Number(e.dur)
-                __O[843] = ____TS__Number_result_241
+                __O[844] = ____TS__Number_result_241
                 if ____t_242(____TS__Number_result_241) then
-                    ____t_result_243 = __O[843]
+                    ____t_result_243 = __O[844]
                 else
                     ____t_result_243 = 1
                 end
@@ -5118,9 +5118,9 @@ local __O = {};
                 local ____t_result_247
                 local ____t_246 = __t
                 local ____TS__Number_result_245 = __TS__Number(e.altura)
-                __O[844] = ____TS__Number_result_245
+                __O[845] = ____TS__Number_result_245
                 if ____t_246(____TS__Number_result_245) then
-                    ____t_result_247 = __O[844]
+                    ____t_result_247 = __O[845]
                 else
                     ____t_result_247 = 60
                 end
@@ -5136,9 +5136,9 @@ local __O = {};
                 local ____t_result_250
                 local ____t_249 = __t
                 local ____TS__Number_result_248 = __TS__Number(e.dur)
-                __O[845] = ____TS__Number_result_248
+                __O[846] = ____TS__Number_result_248
                 if ____t_249(____TS__Number_result_248) then
-                    ____t_result_250 = __O[845]
+                    ____t_result_250 = __O[846]
                 else
                     ____t_result_250 = 0.9
                 end
@@ -5156,27 +5156,27 @@ local __O = {};
                 local ____t_result_254
                 local ____t_253 = __t
                 local ____TS__Number_result_252 = __TS__Number(e.x)
-                __O[846] = ____TS__Number_result_252
+                __O[847] = ____TS__Number_result_252
                 if ____t_253(____TS__Number_result_252) then
-                    ____t_result_254 = __O[846]
+                    ____t_result_254 = __O[847]
                 else
                     ____t_result_254 = 480
                 end
                 local ____t_result_257
                 local ____t_256 = __t
                 local ____TS__Number_result_255 = __TS__Number(e.y)
-                __O[847] = ____TS__Number_result_255
+                __O[848] = ____TS__Number_result_255
                 if ____t_256(____TS__Number_result_255) then
-                    ____t_result_257 = __O[847]
+                    ____t_result_257 = __O[848]
                 else
                     ____t_result_257 = 250
                 end
                 local ____t_result_260
                 local ____t_259 = __t
                 local ____TS__Number_result_258 = __TS__Number(e.giro)
-                __O[848] = ____TS__Number_result_258
+                __O[849] = ____TS__Number_result_258
                 if ____t_259(____TS__Number_result_258) then
-                    ____t_result_260 = __O[848]
+                    ____t_result_260 = __O[849]
                 else
                     ____t_result_260 = 0.06
                 end
@@ -5221,9 +5221,9 @@ local __O = {};
                 local ____t_result_270
                 local ____t_269 = __t
                 local ____TS__Number_result_268 = __TS__Number(e.t)
-                __O[849] = ____TS__Number_result_268
+                __O[850] = ____TS__Number_result_268
                 if ____t_269(____TS__Number_result_268) then
-                    ____t_result_270 = __O[849]
+                    ____t_result_270 = __O[850]
                 else
                     ____t_result_270 = 0
                 end
@@ -5236,9 +5236,9 @@ local __O = {};
                     local ____t_result_273
                     local ____t_272 = __t
                     local ____TS__Number_result_271 = __TS__Number(e.dur)
-                    __O[850] = ____TS__Number_result_271
+                    __O[851] = ____TS__Number_result_271
                     if ____t_272(____TS__Number_result_271) then
-                        ____t_result_273 = __O[850]
+                        ____t_result_273 = __O[851]
                     else
                         ____t_result_273 = 99
                     end
@@ -5257,9 +5257,9 @@ local __O = {};
                 local ____t_result_281
                 local ____t_280 = __t
                 local ____TS__Number_result_279 = __TS__Number(e.x)
-                __O[851] = ____TS__Number_result_279
+                __O[852] = ____TS__Number_result_279
                 if ____t_280(____TS__Number_result_279) then
-                    ____t_result_281 = __O[851]
+                    ____t_result_281 = __O[852]
                 else
                     ____t_result_281 = 760
                 end
@@ -5316,9 +5316,9 @@ local __O = {};
                         local ____t_result_286
                         local ____t_285 = __t
                         local ____TS__Number_result_284 = __TS__Number(m.t)
-                        __O[852] = ____TS__Number_result_284
+                        __O[853] = ____TS__Number_result_284
                         if ____t_285(____TS__Number_result_284) then
-                            ____t_result_286 = __O[852]
+                            ____t_result_286 = __O[853]
                         else
                             ____t_result_286 = 0
                         end
@@ -6686,9 +6686,9 @@ local __O = {};
                 if ____opt_316 ~= nil then
                     ____opt_316 = ____opt_316.pele
                 end
-                __O[853] = ____opt_316
+                __O[854] = ____opt_316
                 if ____t_318(____opt_316) then
-                    ____t_result_319 = __O[853]
+                    ____t_result_319 = __O[854]
                 else
                     ____t_result_319 = "#c68a5e"
                 end
@@ -6707,9 +6707,9 @@ local __O = {};
                 if ____opt_320 ~= nil then
                     ____opt_320 = ____opt_320.manga
                 end
-                __O[854] = ____opt_320
+                __O[855] = ____opt_320
                 if ____t_322(____opt_320) then
-                    ____t_result_323 = __O[854]
+                    ____t_result_323 = __O[855]
                 else
                     ____t_result_323 = "#a8704a"
                 end
@@ -7760,17 +7760,17 @@ local __O = {};
             if ____opt_327 ~= nil then
                 ____opt_327 = ____opt_327.soundOn
             end
-            __O[855] = ____opt_327
+            __O[856] = ____opt_327
             if ____t_329(____opt_327) then
                 ____t_result_330 = not __t(window.Game:soundOn())
             else
-                ____t_result_330 = __O[855]
+                ____t_result_330 = __O[856]
             end
-            __O[856] = ____t_result_330
+            __O[857] = ____t_result_330
             if ____t_331(____t_result_330) then
                 ____t_result_332 = not __t(window.__somCutscene)
             else
-                ____t_result_332 = __O[856]
+                ____t_result_332 = __O[857]
             end
             return not ____t_333(____t_result_332)
         end
@@ -8045,9 +8045,9 @@ local __O = {};
             local ____t_result_352
             local ____t_351 = __t
             local ____temp_350 = not __t(id) or not __t(__get(TRILHAS, id))
-            __O[857] = ____temp_350
+            __O[858] = ____temp_350
             if ____t_351(____temp_350) then
-                ____t_result_352 = __O[857]
+                ____t_result_352 = __O[858]
             else
                 ____t_result_352 = not __t(ligado(nil))
             end
@@ -8088,9 +8088,9 @@ local __O = {};
             local ____t_result_359
             local ____t_358 = __t
             local ____get_result_vol_357 = __get(TRILHAS, id).vol
-            __O[858] = ____get_result_vol_357
+            __O[859] = ____get_result_vol_357
             if ____t_358(____get_result_vol_357) then
-                ____t_result_359 = __O[858]
+                ____t_result_359 = __O[859]
             else
                 ____t_result_359 = 1
             end
@@ -8255,9 +8255,9 @@ local __O = {};
                     if ____opt_397 ~= nil then
                         ____opt_result_399 = ____opt_397(____opt_397)
                     end
-                    __O[859] = ____opt_result_399
+                    __O[860] = ____opt_result_399
                     if ____t_400(____opt_result_399) then
-                        ____t_result_401 = __O[859]
+                        ____t_result_401 = __O[860]
                     else
                         ____t_result_401 = __arrL({}, 0)
                     end
@@ -8357,9 +8357,9 @@ local __O = {};
             if sc ~= nil then
                 ____opt_result_410 = sc.title
             end
-            __O[860] = ____opt_result_410
+            __O[861] = ____opt_result_410
             if ____t_411(____opt_result_410) then
-                ____t_result_412 = __O[860]
+                ____t_result_412 = __O[861]
             else
                 ____t_result_412 = id
             end

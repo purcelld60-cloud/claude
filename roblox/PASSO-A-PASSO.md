@@ -154,6 +154,9 @@ Roblox desliza a cada quadro, sem esperar o Lua. O jogo continua desenhando o ce
 hora do dia, luzes), só que aos poucos, numa rotina à parte. Por isso andar fica liso, e as animações do fundo
 (árvores, bichos, luzes) andam um pouco mais devagar que o resto. **F2** liga e desliga, para comparar.
 
+**F3** mostra um painel com os quadros por segundo e quanto cada parte gasta. Se o jogo travar, tire uma foto com esse
+painel aberto e mande: ela diz exatamente onde está o peso no seu aparelho.
+
 ---
 
 ## Problemas comuns

@@ -17,9 +17,9 @@ local __O = {};
         local ____t_result_10
         local ____t_9 = __t
         local ____TS__Number_result_8 = __TS__Number(value)
-        __O[1449] = ____TS__Number_result_8
+        __O[1450] = ____TS__Number_result_8
         if ____t_9(____TS__Number_result_8) then
-            ____t_result_10 = __O[1449]
+            ____t_result_10 = __O[1450]
         else
             ____t_result_10 = 0
         end
@@ -124,9 +124,9 @@ local __O = {};
         local ____t_result_86
         local ____t_85 = __t
         local ____get_result_84 = __get(s.progress.quests, p.id)
-        __O[1454] = ____get_result_84
+        __O[1455] = ____get_result_84
         if ____t_85(____get_result_84) then
-            ____t_result_86 = __O[1454]
+            ____t_result_86 = __O[1455]
         else
             ____t_result_86 = {}
         end
@@ -173,9 +173,9 @@ local __O = {};
                     local ____t_result_89
                     local ____t_88 = __t
                     local ____get_result_87 = __get(s.progress.completed, id)
-                    __O[1455] = ____get_result_87
+                    __O[1456] = ____get_result_87
                     if ____t_88(____get_result_87) then
-                        ____t_result_89 = __O[1455]
+                        ____t_result_89 = __O[1456]
                     else
                         ____t_result_89 = __get(s.progress.inspected, id)
                     end
@@ -271,9 +271,9 @@ local __O = {};
             local ____t_result_98
             local ____t_97 = __t
             local ____get_result_96 = __get(s.progress.quests, p.id)
-            __O[1456] = ____get_result_96
+            __O[1457] = ____get_result_96
             if ____t_97(____get_result_96) then
-                ____t_result_98 = __O[1456]
+                ____t_result_98 = __O[1457]
             else
                 ____t_result_98 = {}
             end
@@ -288,7 +288,7 @@ local __O = {};
                 local ____t_result_104
                 local ____t_100 = __t
                 local ____temp_99 = not __t(quest.done)
-                __O[1458] = ____temp_99
+                __O[1459] = ____temp_99
                 if ____t_100(____temp_99) then
                     ____t_result_104 = __call(
                         p.requirements,
@@ -297,9 +297,9 @@ local __O = {};
                             local ____t_result_103
                             local ____t_102 = __t
                             local ____get_result_101 = __get(s.progress.completed, id)
-                            __O[1457] = ____get_result_101
+                            __O[1458] = ____get_result_101
                             if ____t_102(____get_result_101) then
-                                ____t_result_103 = __O[1457]
+                                ____t_result_103 = __O[1458]
                             else
                                 ____t_result_103 = __get(s.progress.inspected, id)
                             end
@@ -307,7 +307,7 @@ local __O = {};
                         end
                     )
                 else
-                    ____t_result_104 = __O[1458]
+                    ____t_result_104 = __O[1459]
                 end
                 if ____t_105(____t_result_104) then
                     quest.done = true
@@ -509,9 +509,9 @@ local __O = {};
         local ____t_result_115
         local ____t_114 = __t
         local ____temp_113 = not __t(s) or s.stage ~= "live"
-        __O[1459] = ____temp_113
+        __O[1460] = ____temp_113
         if ____t_114(____temp_113) then
-            ____t_result_115 = __O[1459]
+            ____t_result_115 = __O[1460]
         else
             ____t_result_115 = s.kind ~= "pump"
         end
@@ -1024,9 +1024,9 @@ local __O = {};
             if ____opt_126 ~= nil then
                 ____opt_126 = ____opt_126.name
             end
-            __O[1460] = ____opt_126
+            __O[1461] = ____opt_126
             if ____t_128(____opt_126) then
-                ____t_result_129 = __O[1460]
+                ____t_result_129 = __O[1461]
             else
                 ____t_result_129 = "UM PÁTIO SEM BAGUNÇA"
             end
@@ -1139,9 +1139,9 @@ local __O = {};
             ____opt_result_139 = ____opt_result_138.completed
         end
         local ____getq_140_result_141 = ____getq_140(____opt_result_139, p.id)
-        __O[1461] = ____getq_140_result_141
+        __O[1462] = ____getq_140_result_141
         if ____t_142(____getq_140_result_141) then
-            ____t_result_150 = __O[1461]
+            ____t_result_150 = __O[1462]
         else
             local ____getq_149 = __getq
             local ____opt_result_147
@@ -2235,9 +2235,9 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____temp_0 = not __t(q.worldLife) or type(q.worldLife) ~= "table"
-        __O[1447] = ____temp_0
+        __O[1448] = ____temp_0
         if ____t_1(____temp_0) then
-            ____t_result_2 = __O[1447]
+            ____t_result_2 = __O[1448]
         else
             ____t_result_2 = __isArray(q.worldLife)
         end
@@ -2256,9 +2256,9 @@ local __O = {};
             local ____t_result_6
             local ____t_5 = __t
             local ____temp_4 = not __t(__get(value, key)) or type(__get(value, key)) ~= "table"
-            __O[1448] = ____temp_4
+            __O[1449] = ____temp_4
             if ____t_5(____temp_4) then
-                ____t_result_6 = __O[1448]
+                ____t_result_6 = __O[1449]
             else
                 ____t_result_6 = __isArray(__get(value, key))
             end
@@ -2329,7 +2329,7 @@ local __O = {};
                     ____opt_result_17 = session.stage
                 end
                 local ____temp_18 = ____opt_result_17 == "live" and session.kind == "pump"
-                __O[1451] = ____temp_18
+                __O[1452] = ____temp_18
                 if ____t_19(____temp_18) then
                     local ____t_result_27
                     local ____t_21 = __t
@@ -2338,9 +2338,9 @@ local __O = {};
                         "includes",
                         e.code
                     )
-                    __O[1450] = ____call_result_20
+                    __O[1451] = ____call_result_20
                     if ____t_21(____call_result_20) then
-                        ____t_result_27 = __O[1450]
+                        ____t_result_27 = __O[1451]
                     else
                         local ____opt_24 = window.ControlSettings
                         if ____opt_24 ~= nil then
@@ -2354,7 +2354,7 @@ local __O = {};
                     end
                     ____t_result_28 = ____t_result_27
                 else
-                    ____t_result_28 = __O[1451]
+                    ____t_result_28 = __O[1452]
                 end
                 if ____t_29(____t_result_28) then
                     e:preventDefault()
@@ -2369,7 +2369,7 @@ local __O = {};
                         ____opt_result_32 = session.stage
                     end
                     local ____temp_33 = ____opt_result_32 == "live"
-                    __O[1452] = ____temp_33
+                    __O[1453] = ____temp_33
                     if ____t_34(____temp_33) then
                         ____t_result_35 = __call(
                             __arrL({
@@ -2386,7 +2386,7 @@ local __O = {};
                             e.code
                         )
                     else
-                        ____t_result_35 = __O[1452]
+                        ____t_result_35 = __O[1453]
                     end
                     if ____t_36(____t_result_35) then
                         e:preventDefault()
@@ -2423,9 +2423,9 @@ local __O = {};
         if ____opt_47 ~= nil then
             ____opt_result_49 = ____opt_47(____opt_47)
         end
-        __O[1453] = ____opt_result_49
+        __O[1454] = ____opt_result_49
         if ____t_50(____opt_result_49) then
-            ____t_result_51 = __O[1453]
+            ____t_result_51 = __O[1454]
         else
             ____t_result_51 = {}
         end
@@ -2536,9 +2536,9 @@ local __O = {};
         if ____opt_152 ~= nil then
             ____opt_152 = ____opt_152.width
         end
-        __O[1462] = ____opt_152
+        __O[1463] = ____opt_152
         if ____t_154(____opt_152) then
-            ____t_result_155 = __O[1462]
+            ____t_result_155 = __O[1463]
         else
             ____t_result_155 = 960
         end
@@ -2549,9 +2549,9 @@ local __O = {};
                 local ____t_result_158
                 local ____t_157 = __t
                 local ____temp_156 = p.scene ~= __TS__Number(scene) or p.x < camera - 90
-                __O[1463] = ____temp_156
+                __O[1464] = ____temp_156
                 if ____t_157(____temp_156) then
-                    ____t_result_158 = __O[1463]
+                    ____t_result_158 = __O[1464]
                 else
                     ____t_result_158 = __gt(
                         p.x,
@@ -2566,18 +2566,18 @@ local __O = {};
                 local ____t_result_162
                 local ____t_161 = __t
                 local ____TS__Number_result_160 = __TS__Number(t)
-                __O[1464] = ____TS__Number_result_160
+                __O[1465] = ____TS__Number_result_160
                 if ____t_161(____TS__Number_result_160) then
-                    ____t_result_162 = __O[1464]
+                    ____t_result_162 = __O[1465]
                 else
                     ____t_result_162 = 0
                 end
                 local ____t_result_165
                 local ____t_164 = __t
                 local ____TS__Number_result_163 = __TS__Number(camera)
-                __O[1465] = ____TS__Number_result_163
+                __O[1466] = ____TS__Number_result_163
                 if ____t_164(____TS__Number_result_163) then
-                    ____t_result_165 = __O[1465]
+                    ____t_result_165 = __O[1466]
                 else
                     ____t_result_165 = 0
                 end
@@ -2598,11 +2598,11 @@ local __O = {};
                 else
                     ____t_result_168 = player
                 end
-                __O[1466] = ____t_result_168
+                __O[1467] = ____t_result_168
                 if ____t_169(____t_result_168) then
                     ____t_result_170 = math.abs(player.y - FLOOR) < 85
                 else
-                    ____t_result_170 = __O[1466]
+                    ____t_result_170 = __O[1467]
                 end
                 if ____t_171(____t_result_170) then
                     local x = p.x - camera
@@ -2620,9 +2620,9 @@ local __O = {};
                         ____opt_result_177 = ____opt_result_176.completed
                     end
                     local ____getq_178_result_179 = ____getq_178(____opt_result_177, p.id)
-                    __O[1467] = ____getq_178_result_179
+                    __O[1468] = ____getq_178_result_179
                     if ____t_180(____getq_178_result_179) then
-                        ____t_result_188 = __O[1467]
+                        ____t_result_188 = __O[1468]
                     else
                         local ____getq_187 = __getq
                         local ____opt_result_185
@@ -2685,9 +2685,9 @@ local __O = {};
         local ____t_result_191
         local ____t_190 = __t
         local ____temp_189 = not __t(player) or not __t(q)
-        __O[1468] = ____temp_189
+        __O[1469] = ____temp_189
         if ____t_190(____temp_189) then
-            ____t_result_191 = __O[1468]
+            ____t_result_191 = __O[1469]
         else
             ____t_result_191 = math.abs(player.y - FLOOR) > 85
         end
@@ -2741,9 +2741,9 @@ local __O = {};
             if ____opt_194 ~= nil then
                 ____opt_194 = ____opt_194.name
             end
-            __O[1469] = ____opt_194
+            __O[1470] = ____opt_194
             if ____t_196(____opt_194) then
-                ____t_result_197 = __O[1469]
+                ____t_result_197 = __O[1470]
             else
                 ____t_result_197 = nil
             end

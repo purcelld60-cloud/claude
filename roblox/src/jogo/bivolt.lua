@@ -162,9 +162,9 @@ local __O = {};
         local ____t_result_23
         local ____t_22 = __t
         local ____temp_21 = not __t(name) or not __t(q)
-        __O[1316] = ____temp_21
+        __O[1317] = ____temp_21
         if ____t_22(____temp_21) then
-            ____t_result_23 = __O[1316]
+            ____t_result_23 = __O[1317]
         else
             ____t_result_23 = type(q) ~= "table"
         end
@@ -279,27 +279,27 @@ local __O = {};
         local ____t_result_29
         local ____t_28 = __t
         local ____temp_27 = not __t(q) or type(q) ~= "table"
-        __O[1317] = ____temp_27
+        __O[1318] = ____temp_27
         if ____t_28(____temp_27) then
-            ____t_result_29 = __O[1317]
+            ____t_result_29 = __O[1318]
         else
             ____t_result_29 = not __t(plan)
         end
-        __O[1318] = ____t_result_29
+        __O[1319] = ____t_result_29
         if ____t_30(____t_result_29) then
-            ____t_result_31 = __O[1318]
+            ____t_result_31 = __O[1319]
         else
             ____t_result_31 = type(plan) ~= "table"
         end
-        __O[1319] = ____t_result_31
+        __O[1320] = ____t_result_31
         if ____t_32(____t_result_31) then
-            ____t_result_33 = __O[1319]
+            ____t_result_33 = __O[1320]
         else
             ____t_result_33 = not __t(__call(issued, "has", plan))
         end
-        __O[1320] = ____t_result_33
+        __O[1321] = ____t_result_33
         if ____t_34(____t_result_33) then
-            ____t_result_35 = __O[1320]
+            ____t_result_35 = __O[1321]
         else
             ____t_result_35 = __call(completed, "has", plan)
         end
@@ -330,15 +330,15 @@ local __O = {};
             local ____t_result_41
             local ____t_40 = __t
             local ____temp_39 = not __t(s.accepted)
-            __O[1321] = ____temp_39
+            __O[1322] = ____temp_39
             if ____t_40(____temp_39) then
-                ____t_result_41 = __O[1321]
+                ____t_result_41 = __O[1322]
             else
                 ____t_result_41 = s.unlocked
             end
-            __O[1322] = ____t_result_41
+            __O[1323] = ____t_result_41
             if ____t_42(____t_result_41) then
-                ____t_result_43 = __O[1322]
+                ____t_result_43 = __O[1323]
             else
                 ____t_result_43 = s.needed ~= 0
             end
@@ -363,15 +363,15 @@ local __O = {};
             local ____t_result_47
             local ____t_46 = __t
             local ____temp_45 = not __t(s.unlocked) or s.charges >= MAX_CHARGES
-            __O[1323] = ____temp_45
+            __O[1324] = ____temp_45
             if ____t_46(____temp_45) then
-                ____t_result_47 = __O[1323]
+                ____t_result_47 = __O[1324]
             else
                 ____t_result_47 = not __t(bag)
             end
-            __O[1324] = ____t_result_47
+            __O[1325] = ____t_result_47
             if ____t_48(____t_result_47) then
-                ____t_result_49 = __O[1324]
+                ____t_result_49 = __O[1325]
             else
                 ____t_result_49 = materials(nil, bag) < 3
             end
@@ -432,27 +432,27 @@ local __O = {};
             end
             ____temp_55 = not ____t_54(____opt_result_53)
         end
-        __O[1325] = ____temp_55
+        __O[1326] = ____temp_55
         if ____t_56(____temp_55) then
-            ____t_result_57 = __O[1325]
+            ____t_result_57 = __O[1326]
         else
             ____t_result_57 = q.bivoltUnlocked
         end
-        __O[1326] = ____t_result_57
+        __O[1327] = ____t_result_57
         if ____t_58(____t_result_57) then
-            ____t_result_59 = __O[1326]
+            ____t_result_59 = __O[1327]
         else
             ____t_result_59 = not __t(player)
         end
-        __O[1327] = ____t_result_59
+        __O[1328] = ____t_result_59
         if ____t_60(____t_result_59) then
-            ____t_result_61 = __O[1327]
+            ____t_result_61 = __O[1328]
         else
             ____t_result_61 = not __isFiniteN(player.x)
         end
-        __O[1328] = ____t_result_61
+        __O[1329] = ____t_result_61
         if ____t_62(____t_result_61) then
-            ____t_result_63 = __O[1328]
+            ____t_result_63 = __O[1329]
         else
             ____t_result_63 = not __isFiniteN(player.y)
         end
@@ -467,11 +467,11 @@ local __O = {};
                 local ____t_result_67
                 local ____t_66 = __t
                 local ____temp_65 = not __t(__call(collected, "has", p.id)) and math.abs(player.x - p.x) <= 29
-                __O[1329] = ____temp_65
+                __O[1330] = ____temp_65
                 if ____t_66(____temp_65) then
                     ____t_result_67 = math.abs(player.y - 30 - p.y) <= 35
                 else
-                    ____t_result_67 = __O[1329]
+                    ____t_result_67 = __O[1330]
                 end
                 return ____t_result_67
             end
@@ -532,9 +532,9 @@ local __O = {};
         local ____t_result_74
         local ____t_69 = __t
         local ____temp_68 = not __t(c) or __TS__Number(scene) ~= SCENE
-        __O[1330] = ____temp_68
+        __O[1331] = ____temp_68
         if ____t_69(____temp_68) then
-            ____t_result_74 = __O[1330]
+            ____t_result_74 = __O[1331]
         else
             local ____t_73 = __t
             local ____opt_result_72
@@ -543,9 +543,9 @@ local __O = {};
             end
             ____t_result_74 = not ____t_73(____opt_result_72)
         end
-        __O[1331] = ____t_result_74
+        __O[1332] = ____t_result_74
         if ____t_75(____t_result_74) then
-            ____t_result_76 = __O[1331]
+            ____t_result_76 = __O[1332]
         else
             ____t_result_76 = q.bivoltUnlocked
         end
@@ -559,9 +559,9 @@ local __O = {};
         local ____t_result_80
         local ____t_79 = __t
         local ____TS__Number_result_78 = __TS__Number(camera)
-        __O[1332] = ____TS__Number_result_78
+        __O[1333] = ____TS__Number_result_78
         if ____t_79(____TS__Number_result_78) then
-            ____t_result_80 = __O[1332]
+            ____t_result_80 = __O[1333]
         else
             ____t_result_80 = 0
         end
@@ -716,17 +716,17 @@ local __O = {};
         else
             ____t_result_87 = s.unlocked
         end
-        __O[1333] = ____t_result_87
+        __O[1334] = ____t_result_87
         if ____t_88(____t_result_87) then
             ____t_result_89 = not __t(active)
         else
-            ____t_result_89 = __O[1333]
+            ____t_result_89 = __O[1334]
         end
-        __O[1334] = ____t_result_89
+        __O[1335] = ____t_result_89
         if ____t_90(____t_result_89) then
             ____t_result_91 = cooldown == 0
         else
-            ____t_result_91 = __O[1334]
+            ____t_result_91 = __O[1335]
         end
         local ____temp_97 = remaining / DURATION
         local ____temp_98 = cooldown / COOLDOWN

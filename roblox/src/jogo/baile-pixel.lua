@@ -122,9 +122,9 @@ local __O = {};
                         local ____t_result_2
                         local ____t_1 = __t
                         local ____temp_0 = __le(ay, yc) and __gt(by, yc)
-                        __O[1399] = ____temp_0
+                        __O[1400] = ____temp_0
                         if ____t_1(____temp_0) then
-                            ____t_result_2 = __O[1399]
+                            ____t_result_2 = __O[1400]
                         else
                             ____t_result_2 = __le(by, yc) and __gt(ay, yc)
                         end
@@ -165,9 +165,9 @@ local __O = {};
         local ____t_result_6
         local ____t_5 = __t
         local ____hypot_result_4 = __hypot(dx, dy)
-        __O[1400] = ____hypot_result_4
+        __O[1401] = ____hypot_result_4
         if ____t_5(____hypot_result_4) then
-            ____t_result_6 = __O[1400]
+            ____t_result_6 = __O[1401]
         else
             ____t_result_6 = 1
         end
@@ -243,15 +243,15 @@ local __O = {};
             local ____t_result_9
             local ____t_8 = __t
             local ____temp_7 = __lt(x, 0) or __lt(y, 0)
-            __O[1401] = ____temp_7
+            __O[1402] = ____temp_7
             if ____t_8(____temp_7) then
-                ____t_result_9 = __O[1401]
+                ____t_result_9 = __O[1402]
             else
                 ____t_result_9 = __ge(x, W)
             end
-            __O[1402] = ____t_result_9
+            __O[1403] = ____t_result_9
             if ____t_10(____t_result_9) then
-                ____t_result_11 = __O[1402]
+                ____t_result_11 = __O[1403]
             else
                 ____t_result_11 = __ge(y, H)
             end
@@ -288,15 +288,15 @@ local __O = {};
                                 local ____t_result_15
                                 local ____t_14 = __t
                                 local ____temp_13 = em(nil, x - 1, y) >= 0 or em(nil, x + 1, y) >= 0
-                                __O[1403] = ____temp_13
+                                __O[1404] = ____temp_13
                                 if ____t_14(____temp_13) then
-                                    ____t_result_15 = __O[1403]
+                                    ____t_result_15 = __O[1404]
                                 else
                                     ____t_result_15 = em(nil, x, y - 1) >= 0
                                 end
-                                __O[1404] = ____t_result_15
+                                __O[1405] = ____t_result_15
                                 if ____t_16(____t_result_15) then
-                                    ____t_result_17 = __O[1404]
+                                    ____t_result_17 = __O[1405]
                                 else
                                     ____t_result_17 = em(nil, x, y + 1) >= 0
                                 end
@@ -915,9 +915,9 @@ local __O = {};
         local ____t_result_40
         local ____t_39 = __t
         local ____temp_38 = T.topo == 1 or T.topo == 2
-        __O[1405] = ____temp_38
+        __O[1406] = ____temp_38
         if ____t_39(____temp_38) then
-            ____t_result_40 = __O[1405]
+            ____t_result_40 = __O[1406]
         else
             ____t_result_40 = T.topo == 4
         end
@@ -2279,9 +2279,9 @@ local __O = {};
             local ____t_result_47
             local ____t_46 = __t
             local ____TS__Number_result_45 = __TS__Number(o.angle)
-            __O[1406] = ____TS__Number_result_45
+            __O[1407] = ____TS__Number_result_45
             if ____t_46(____TS__Number_result_45) then
-                ____t_result_47 = __O[1406]
+                ____t_result_47 = __O[1407]
             else
                 ____t_result_47 = 0
             end
@@ -2929,9 +2929,9 @@ local __O = {};
                             local ____t_result_57
                             local ____t_56 = __t
                             local ____temp_55 = k > -1 and k < 1.5
-                            __O[1407] = ____temp_55
+                            __O[1408] = ____temp_55
                             if ____t_56(____temp_55) then
-                                ____t_result_57 = __O[1407]
+                                ____t_result_57 = __O[1408]
                             else
                                 ____t_result_57 = k > 7
                             end
@@ -4112,9 +4112,9 @@ local __O = {};
         local ____t_result_65
         local ____t_64 = __t
         local ____hypot_result_63 = __hypot(a.vx, a.vy)
-        __O[1408] = ____hypot_result_63
+        __O[1409] = ____hypot_result_63
         if ____t_64(____hypot_result_63) then
-            ____t_result_65 = __O[1408]
+            ____t_result_65 = __O[1409]
         else
             ____t_result_65 = 1
         end
@@ -4712,9 +4712,9 @@ local __O = {};
             local ____t_result_83
             local ____t_82 = __t
             local ____hypot_result_81 = __hypot(dx, dy)
-            __O[1409] = ____hypot_result_81
+            __O[1410] = ____hypot_result_81
             if ____t_82(____hypot_result_81) then
-                ____t_result_83 = __O[1409]
+                ____t_result_83 = __O[1410]
             else
                 ____t_result_83 = 1
             end
@@ -4973,9 +4973,9 @@ local __O = {};
             local ____t_result_86
             local ____t_85 = __t
             local ____hypot_result_84 = __hypot(dx, dy)
-            __O[1410] = ____hypot_result_84
+            __O[1411] = ____hypot_result_84
             if ____t_85(____hypot_result_84) then
-                ____t_result_86 = __O[1410]
+                ____t_result_86 = __O[1411]
             else
                 ____t_result_86 = 1
             end

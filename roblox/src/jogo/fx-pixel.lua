@@ -366,9 +366,9 @@ local __O = {};
         local ____t_result_28
         local ____t_27 = __t
         local ____TS__Number_result_26 = __TS__Number(o.camera)
-        __O[1492] = ____TS__Number_result_26
+        __O[1493] = ____TS__Number_result_26
         if ____t_27(____TS__Number_result_26) then
-            ____t_result_28 = __O[1492]
+            ____t_result_28 = __O[1493]
         else
             ____t_result_28 = 0
         end
@@ -385,9 +385,9 @@ local __O = {};
         local ____t_result_31
         local ____t_30 = __t
         local ____temp_29 = camada == "back"
-        __O[1493] = ____temp_29
+        __O[1494] = ____temp_29
         if ____t_30(____temp_29) then
-            ____t_result_31 = __O[1493]
+            ____t_result_31 = __O[1494]
         else
             ____t_result_31 = o.atualizar
         end
@@ -435,11 +435,11 @@ local __O = {};
                     local ____t_result_38
                     local ____t_37 = __t
                     local ____temp_36 = __get(ativos, i).dono == dono
-                    __O[1494] = ____temp_36
+                    __O[1495] = ____temp_36
                     if ____t_37(____temp_36) then
                         ____t_result_38 = __get(ativos, i).fx:done()
                     else
-                        ____t_result_38 = __O[1494]
+                        ____t_result_38 = __O[1495]
                     end
                     if ____t_39(____t_result_38) then
                         __call(ativos, "splice", i, 1)
@@ -456,9 +456,9 @@ local __O = {};
                 local ____t_result_42
                 local ____t_41 = __t
                 local ____gt_result_40 = __gt(a.atraso, 0)
-                __O[1495] = ____gt_result_40
+                __O[1496] = ____gt_result_40
                 if ____t_41(____gt_result_40) then
-                    ____t_result_42 = __O[1495]
+                    ____t_result_42 = __O[1496]
                 else
                     ____t_result_42 = a.fx:done()
                 end
@@ -540,9 +540,9 @@ local __O = {};
         local ____t_result_49
         local ____t_48 = __t
         local ____temp_47 = not __t(d) or not __isFiniteN(d.x)
-        __O[1496] = ____temp_47
+        __O[1497] = ____temp_47
         if ____t_48(____temp_47) then
-            ____t_result_49 = __O[1496]
+            ____t_result_49 = __O[1497]
         else
             ____t_result_49 = not __isFiniteN(d.y)
         end
@@ -576,11 +576,11 @@ local __O = {};
             local ____t_result_54
             local ____t_53 = __t
             local ____temp_52 = tipo == "cast"
-            __O[1497] = ____temp_52
+            __O[1498] = ____temp_52
             if ____t_53(____temp_52) then
                 ____t_result_54 = d.kind
             else
-                ____t_result_54 = __O[1497]
+                ____t_result_54 = __O[1498]
             end
             if ____t_55(____t_result_54) then
                 disparo(nil, d)
@@ -601,9 +601,9 @@ local __O = {};
         local ____t_result_58
         local ____t_57 = __t
         local ____temp_56 = not __t(o)
-        __O[1498] = ____temp_56
+        __O[1499] = ____temp_56
         if ____t_57(____temp_56) then
-            ____t_result_58 = __O[1498]
+            ____t_result_58 = __O[1499]
         else
             ____t_result_58 = o.__pixel
         end
@@ -636,9 +636,9 @@ local __O = {};
         local ____t_result_62
         local ____t_61 = __t
         local ____temp_60 = not __t(h)
-        __O[1499] = ____temp_60
+        __O[1500] = ____temp_60
         if ____t_61(____temp_60) then
-            ____t_result_62 = __O[1499]
+            ____t_result_62 = __O[1500]
         else
             ____t_result_62 = window.Golpes
         end
@@ -657,9 +657,9 @@ local __O = {};
         local ____t_result_67
         local ____t_66 = __t
         local ____temp_65 = h.type == "astral"
-        __O[1500] = ____temp_65
+        __O[1501] = ____temp_65
         if ____t_66(____temp_65) then
-            ____t_result_67 = __O[1500]
+            ____t_result_67 = __O[1501]
         else
             ____t_result_67 = h.astral
         end
@@ -672,11 +672,11 @@ local __O = {};
             local ____t_result_71
             local ____t_70 = __t
             local ____temp_69 = h.type == "smoke"
-            __O[1501] = ____temp_69
+            __O[1502] = ____temp_69
             if ____t_70(____temp_69) then
                 ____t_result_71 = h.brasa
             else
-                ____t_result_71 = __O[1501]
+                ____t_result_71 = __O[1502]
             end
             if ____t_72(____t_result_71) then
                 local ag = window.performance:now()
@@ -714,11 +714,11 @@ local __O = {};
                 local ____t_result_76
                 local ____t_75 = __t
                 local ____temp_74 = h.type == "ring"
-                __O[1502] = ____temp_74
+                __O[1503] = ____temp_74
                 if ____t_75(____temp_74) then
                     ____t_result_76 = h.smoke
                 else
-                    ____t_result_76 = __O[1502]
+                    ____t_result_76 = __O[1503]
                 end
                 if ____t_77(____t_result_76) then
                     tocar(nil, "spawn/poof", {x = x, y = y, palette = PAL.fumaca})
@@ -727,11 +727,11 @@ local __O = {};
                     local ____t_result_80
                     local ____t_79 = __t
                     local ____temp_78 = h.type == "ring"
-                    __O[1503] = ____temp_78
+                    __O[1504] = ____temp_78
                     if ____t_79(____temp_78) then
                         ____t_result_80 = h.catarro
                     else
-                        ____t_result_80 = __O[1503]
+                        ____t_result_80 = __O[1504]
                     end
                     if ____t_81(____t_result_80) then
                         tocar(nil, "water/wave-crash", {x = x - 30, y = y, palette = PAL.catarro, flip = true})
@@ -787,9 +787,9 @@ local __O = {};
             PAL,
             ____get_87(COR, ____opt_result_86)
         )
-        __O[1504] = ____get_88_result_89
+        __O[1505] = ____get_88_result_89
         if ____t_90(____get_88_result_89) then
-            ____t_result_91 = __O[1504]
+            ____t_result_91 = __O[1505]
         else
             ____t_result_91 = PAL.ouro
         end
@@ -822,15 +822,15 @@ local __O = {};
             local ____t_result_94
             local ____t_93 = __t
             local ____temp_92 = t == "freddy" or t == "menezes"
-            __O[1505] = ____temp_92
+            __O[1506] = ____temp_92
             if ____t_93(____temp_92) then
-                ____t_result_94 = __O[1505]
+                ____t_result_94 = __O[1506]
             else
                 ____t_result_94 = t == "igor"
             end
-            __O[1506] = ____t_result_94
+            __O[1507] = ____t_result_94
             if ____t_95(____t_result_94) then
-                ____t_result_96 = __O[1506]
+                ____t_result_96 = __O[1507]
             else
                 ____t_result_96 = t == "kaique"
             end

@@ -3,8 +3,8 @@
 local __JSR = require(script.Parent.Parent.runtime.js)
 local window = __JSR.window
 local tostring = __JSR.__str
-local __NumberV, __fapply, __lt, __le, __gt, __ge, __getq, __mod, __ord, __arrL, __iterar, __t = __JSR.__NumberV, __JSR.__fapply, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar, __JSR.__t
-local __get, __set, __len, __call, __add, __iter, __keys, __bor, __band, __shr, __hypot = __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__keys, __JSR.__bor, __JSR.__band, __JSR.__shr, __JSR.__hypot
+local __NumberV, __fapply, __lt, __le, __gt, __ge, __isFiniteN, __getq, __mod, __ord, __arrL, __iterar = __JSR.__NumberV, __JSR.__fapply, __JSR.__lt, __JSR.__le, __JSR.__gt, __JSR.__ge, __JSR.__isFiniteN, __JSR.__getq, __JSR.__mod, __JSR.__ord, __JSR.__arrL, __JSR.__iterar
+local __t, __get, __set, __len, __call, __add, __iter, __keys, __bor, __band, __shr, __hypot = __JSR.__t, __JSR.__get, __JSR.__set, __JSR.__len, __JSR.__call, __JSR.__add, __JSR.__iter, __JSR.__keys, __JSR.__bor, __JSR.__band, __JSR.__shr, __JSR.__hypot
 local ____lualib = require(script.Parent.lualib_bundle)
 local __TS__SparseArrayNew = ____lualib.__TS__SparseArrayNew
 local __TS__SparseArrayPush = ____lualib.__TS__SparseArrayPush
@@ -22055,7 +22055,7 @@ local __O = {};
         end
         c:restore()
     end
-    __L1.desenharCamadas = function(self, scene, camera, t)
+    __L1.desenharCamadas = function(self, scene, camera, t, hora)
         scene = __TS__Number(scene)
         local ____t_result_267
         local ____t_266 = __t
@@ -22080,6 +22080,28 @@ local __O = {};
         if not __t(__L1:podeCamadas(scene)) then
             return nil
         end
+        local forcar = type(hora) == "number" and __isFiniteN(hora)
+        if __t(forcar) then
+            window.DayTime:force(hora)
+        end
+        do
+            local ____try, ____hasReturned, ____returnValue = pcall(function()
+                return true, __L1:desenharCamadasAgora(scene, camera, t)
+            end)
+            do
+                if __t(forcar) then
+                    window.DayTime:force(nil)
+                end
+            end
+            if not ____try then
+                error(____hasReturned, 0)
+            end
+            if ____try and ____hasReturned then
+                return ____returnValue
+            end
+        end
+    end
+    __L1.desenharCamadasAgora = function(self, scene, camera, t)
         local M = __L1.CAMS.M
         local VW = 482 + 2 * M
         if not __t(__L1.CAMS.cv) then

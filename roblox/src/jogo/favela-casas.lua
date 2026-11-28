@@ -276,9 +276,9 @@ local __O = {};
         local ____t_result_23
         local ____t_22 = __t
         local ____TS__Number_result_21 = __TS__Number(__get(q.lendasReeis, id))
-        __O[1355] = ____TS__Number_result_21
+        __O[1356] = ____TS__Number_result_21
         if ____t_22(____TS__Number_result_21) then
-            ____t_result_23 = __O[1355]
+            ____t_result_23 = __O[1356]
         else
             ____t_result_23 = 0
         end
@@ -393,9 +393,9 @@ local __O = {};
                     ____opt_result_42 = ____opt_result_41.night
                 end
                 local ____TS__Number_result_43 = __TS__Number(____opt_result_42)
-                __O[1356] = ____TS__Number_result_43
+                __O[1357] = ____TS__Number_result_43
                 if ____t_44(____TS__Number_result_43) then
-                    ____t_result_45 = __O[1356]
+                    ____t_result_45 = __O[1357]
                 else
                     ____t_result_45 = 0
                 end
@@ -2903,12 +2903,12 @@ local __O = {};
         if not __t(tela) then
             do
                 do
-                    __O[1357] = __iter(mk(nil, LW, LH))
-                    tela = __get(__O[1357], 0)
+                    __O[1358] = __iter(mk(nil, LW, LH))
+                    tela = __get(__O[1358], 0)
                 end
-                tctx = __get(__O[1357], 1)
+                tctx = __get(__O[1358], 1)
             end
-            local ____ = __O[1357]
+            local ____ = __O[1358]
         end
         local n = noite(nil)
         tctx.globalAlpha = 1
@@ -2924,9 +2924,9 @@ local __O = {};
         local ____t_result_51
         local ____t_50 = __t
         local ____TS__Number_result_49 = __TS__Number(t)
-        __O[1358] = ____TS__Number_result_49
+        __O[1359] = ____TS__Number_result_49
         if ____t_50(____TS__Number_result_49) then
-            ____t_result_51 = __O[1358]
+            ____t_result_51 = __O[1359]
         else
             ____t_result_51 = 0
         end
@@ -2969,9 +2969,9 @@ local __O = {};
             local ____t_result_56
             local ____t_55 = __t
             local ____TS__Number_result_54 = __TS__Number(t)
-            __O[1359] = ____TS__Number_result_54
+            __O[1360] = ____TS__Number_result_54
             if ____t_55(____TS__Number_result_54) then
-                ____t_result_56 = __O[1359]
+                ____t_result_56 = __O[1360]
             else
                 ____t_result_56 = 0
             end
@@ -2996,9 +2996,9 @@ local __O = {};
         if ____opt_58 ~= nil then
             ____opt_58 = ____opt_58.nome
         end
-        __O[1360] = ____opt_58
+        __O[1361] = ____opt_58
         if ____t_60(____opt_58) then
-            ____t_result_61 = __O[1360]
+            ____t_result_61 = __O[1361]
         else
             ____t_result_61 = ""
         end
@@ -3011,9 +3011,9 @@ local __O = {};
         if ____opt_62 ~= nil then
             ____opt_62 = ____opt_62.npc
         end
-        __O[1361] = ____opt_62
+        __O[1362] = ____opt_62
         if ____t_64(____opt_62) then
-            ____t_result_65 = __O[1361]
+            ____t_result_65 = __O[1362]
         else
             ____t_result_65 = ""
         end
@@ -3035,7 +3035,7 @@ local __O = {};
         local ____t_result_68
         local ____t_67 = __t
         local ____temp_66 = not not __t(n)
-        __O[1362] = ____temp_66
+        __O[1363] = ____temp_66
         if ____t_67(____temp_66) then
             ____t_result_68 = __call(
                 norm,
@@ -3047,7 +3047,7 @@ local __O = {};
                 )
             )
         else
-            ____t_result_68 = __O[1362]
+            ____t_result_68 = __O[1363]
         end
         return ____t_result_68
     end
@@ -3067,9 +3067,9 @@ local __O = {};
                 if ____opt_69 ~= nil then
                     ____opt_69 = ____opt_69.morador
                 end
-                __O[1363] = ____opt_69
+                __O[1364] = ____opt_69
                 if ____t_71(____opt_69) then
-                    ____t_result_72 = __O[1363]
+                    ____t_result_72 = __O[1364]
                 else
                     ____t_result_72 = nil
                 end

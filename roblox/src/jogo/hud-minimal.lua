@@ -18,9 +18,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(bar)
-    __O[3210] = ____temp_0
+    __O[3215] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[3210]
+        ____t_result_2 = __O[3215]
     else
         ____t_result_2 = bar.dataset.minimal
     end
@@ -32,9 +32,9 @@ local __O = {};
         local ____t_result_6
         local ____t_5 = __t
         local ____temp_4 = bar:querySelector(s)
-        __O[3211] = ____temp_4
+        __O[3216] = ____temp_4
         if ____t_5(____temp_4) then
-            ____t_result_6 = __O[3211]
+            ____t_result_6 = __O[3216]
         else
             ____t_result_6 = window.document:querySelector(s)
         end
@@ -64,9 +64,9 @@ local __O = {};
     local ____t_result_15
     local ____t_14 = __t
     local ____temp_13 = not __t(hearts) or not __t(ammo)
-    __O[3212] = ____temp_13
+    __O[3217] = ____temp_13
     if ____t_14(____temp_13) then
-        ____t_result_15 = __O[3212]
+        ____t_result_15 = __O[3217]
     else
         ____t_result_15 = not __t(actions)
     end
@@ -234,9 +234,9 @@ local __O = {};
             local ____t_result_37
             local ____t_36 = __t
             local ____TS__ParseFloat_result_35 = __TS__ParseFloat(gasPct.textContent)
-            __O[3213] = ____TS__ParseFloat_result_35
+            __O[3218] = ____TS__ParseFloat_result_35
             if ____t_36(____TS__ParseFloat_result_35) then
-                ____t_result_37 = __O[3213]
+                ____t_result_37 = __O[3218]
             else
                 ____t_result_37 = 0
             end

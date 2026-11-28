@@ -313,11 +313,11 @@ local __O = {};
                             local ____t_result_21
                             local ____t_20 = __t
                             local ____temp_19 = __gt(wx, 1700) and __lt(wx, 2800)
-                            __O[1411] = ____temp_19
+                            __O[1412] = ____temp_19
                             if ____t_20(____temp_19) then
                                 ____t_result_21 = not __t(lite(nil))
                             else
-                                ____t_result_21 = __O[1411]
+                                ____t_result_21 = __O[1412]
                             end
                             if ____t_22(____t_result_21) then
                                 local on = __mod(i + j + beat, 4) == 0 or __mod(i * 3 + j + beat, 7) == 0
@@ -1442,18 +1442,18 @@ local __O = {};
                     local ____t_result_28
                     local ____t_24 = __t
                     local ____temp_23 = x < -400 or x > W + 400
-                    __O[1413] = ____temp_23
+                    __O[1414] = ____temp_23
                     if ____t_24(____temp_23) then
-                        ____t_result_28 = __O[1413]
+                        ____t_result_28 = __O[1414]
                     else
                         local ____t_result_27
                         local ____t_26 = __t
                         local ____lite_result_25 = lite(nil)
-                        __O[1412] = ____lite_result_25
+                        __O[1413] = ____lite_result_25
                         if ____t_26(____lite_result_25) then
                             ____t_result_27 = __mod(i, 2)
                         else
-                            ____t_result_27 = __O[1412]
+                            ____t_result_27 = __O[1413]
                         end
                         ____t_result_28 = ____t_result_27
                     end
@@ -1534,20 +1534,20 @@ local __O = {};
         local ____t_result_32
         local ____t_31 = __t
         local ____temp_30 = not __t(lite(nil)) and px0 > -900
-        __O[1414] = ____temp_30
+        __O[1415] = ____temp_30
         if ____t_31(____temp_30) then
             ____t_result_32 = px0 < W + 900
         else
-            ____t_result_32 = __O[1414]
+            ____t_result_32 = __O[1415]
         end
-        __O[1415] = ____t_result_32
+        __O[1416] = ____t_result_32
         if ____t_33(____t_result_32) then
             ____t_result_34 = __mod(
                 math.floor(t / (BEAT * 4)),
                 2
             ) == 0
         else
-            ____t_result_34 = __O[1415]
+            ____t_result_34 = __O[1416]
         end
         if ____t_35(____t_result_34) then
             c.globalAlpha = 0.55
@@ -1659,39 +1659,39 @@ local __O = {};
                                 local ____t_result_38
                                 local ____t_37 = __t
                                 local ____temp_36 = wx < ini or x < -45
-                                __O[1416] = ____temp_36
+                                __O[1417] = ____temp_36
                                 if ____t_37(____temp_36) then
-                                    ____t_result_38 = __O[1416]
+                                    ____t_result_38 = __O[1417]
                                 else
                                     ____t_result_38 = x > W + 45
                                 end
-                                __O[1418] = ____t_result_38
+                                __O[1419] = ____t_result_38
                                 if ____t_39(____t_result_38) then
-                                    ____t_result_43 = __O[1418]
+                                    ____t_result_43 = __O[1419]
                                 else
                                     local ____t_result_42
                                     local ____t_41 = __t
                                     local ____temp_40 = row == 0 and wx > 1900
-                                    __O[1417] = ____temp_40
+                                    __O[1418] = ____temp_40
                                     if ____t_41(____temp_40) then
                                         ____t_result_42 = wx < 2560
                                     else
-                                        ____t_result_42 = __O[1417]
+                                        ____t_result_42 = __O[1418]
                                     end
                                     ____t_result_43 = ____t_result_42
                                 end
-                                __O[1420] = ____t_result_43
+                                __O[1421] = ____t_result_43
                                 if ____t_44(____t_result_43) then
-                                    ____t_result_48 = __O[1420]
+                                    ____t_result_48 = __O[1421]
                                 else
                                     local ____t_result_47
                                     local ____t_46 = __t
                                     local ____temp_45 = wx > 1100 and wx < 1530
-                                    __O[1419] = ____temp_45
+                                    __O[1420] = ____temp_45
                                     if ____t_46(____temp_45) then
                                         ____t_result_47 = row == 0
                                     else
-                                        ____t_result_47 = __O[1419]
+                                        ____t_result_47 = __O[1420]
                                     end
                                     ____t_result_48 = ____t_result_47
                                 end
@@ -1741,21 +1741,21 @@ local __O = {};
                     local ____t_result_55
                     local ____t_54 = __t
                     local ____temp_53 = wx < ini or x < -50
-                    __O[1421] = ____temp_53
+                    __O[1422] = ____temp_53
                     if ____t_54(____temp_53) then
-                        ____t_result_55 = __O[1421]
+                        ____t_result_55 = __O[1422]
                     else
                         ____t_result_55 = x > W + 50
                     end
-                    __O[1422] = ____t_result_55
+                    __O[1423] = ____t_result_55
                     if ____t_56(____t_result_55) then
-                        ____t_result_57 = __O[1422]
+                        ____t_result_57 = __O[1423]
                     else
                         ____t_result_57 = math.abs(wx - NPC_X) < 90
                     end
-                    __O[1423] = ____t_result_57
+                    __O[1424] = ____t_result_57
                     if ____t_58(____t_result_57) then
-                        ____t_result_59 = __O[1423]
+                        ____t_result_59 = __O[1424]
                     else
                         ____t_result_59 = math.abs(wx - MC_X) < 70
                     end
@@ -2054,9 +2054,9 @@ local __O = {};
             local ____t_result_70
             local ____t_69 = __t
             local ____temp_68 = not __t(raios)
-            __O[1424] = ____temp_68
+            __O[1425] = ____temp_68
             if ____t_69(____temp_68) then
-                ____t_result_70 = __O[1424]
+                ____t_result_70 = __O[1425]
             else
                 ____t_result_70 = raios.feito
             end
@@ -2126,9 +2126,9 @@ local __O = {};
         local ____t_result_78
         local ____t_77 = __t
         local ____TS__Number_result_76 = __TS__Number(camera)
-        __O[1425] = ____TS__Number_result_76
+        __O[1426] = ____TS__Number_result_76
         if ____t_77(____TS__Number_result_76) then
-            ____t_result_78 = __O[1425]
+            ____t_result_78 = __O[1426]
         else
             ____t_result_78 = 0
         end
@@ -2136,9 +2136,9 @@ local __O = {};
         local ____t_result_81
         local ____t_80 = __t
         local ____TS__Number_result_79 = __TS__Number(t)
-        __O[1426] = ____TS__Number_result_79
+        __O[1427] = ____TS__Number_result_79
         if ____t_80(____TS__Number_result_79) then
-            ____t_result_81 = __O[1426]
+            ____t_result_81 = __O[1427]
         else
             ____t_result_81 = 0
         end
@@ -2154,11 +2154,11 @@ local __O = {};
         local ____t_result_85
         local ____t_84 = __t
         local ____temp_83 = k > 0 and ultimoRombo <= 0
-        __O[1427] = ____temp_83
+        __O[1428] = ____temp_83
         if ____t_84(____temp_83) then
             ____t_result_85 = __isFiniteN(opts.rombo)
         else
-            ____t_result_85 = __O[1427]
+            ____t_result_85 = __O[1428]
         end
         if ____t_86(____t_result_85) then
             estouro(nil, cam)

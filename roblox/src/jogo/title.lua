@@ -24,13 +24,13 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____temp_0 = not __t(panel.hidden) and panel.style.display ~= "none"
-        __O[2467] = ____temp_0
+        __O[2472] = ____temp_0
         if ____t_1(____temp_0) then
             ____t_result_2 = not __t(window.document.hidden)
         else
-            ____t_result_2 = __O[2467]
+            ____t_result_2 = __O[2472]
         end
-        __O[2468] = ____t_result_2
+        __O[2473] = ____t_result_2
         if ____t_3(____t_result_2) then
             local ____t_9 = __t
             local ____opt_6 = window.Campanha2
@@ -43,13 +43,13 @@ local __O = {};
             end
             ____t_result_10 = not ____t_9(____opt_result_8)
         else
-            ____t_result_10 = __O[2468]
+            ____t_result_10 = __O[2473]
         end
-        __O[2469] = ____t_result_10
+        __O[2474] = ____t_result_10
         if ____t_11(____t_result_10) then
             ____t_result_12 = now - last > 31
         else
-            ____t_result_12 = __O[2469]
+            ____t_result_12 = __O[2474]
         end
         if ____t_13(____t_result_12) then
             last = now

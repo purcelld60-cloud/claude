@@ -57,9 +57,9 @@ local __O = {};
         if ____opt_4 ~= nil then
             ____opt_4 = ____opt_4.request
         end
-        __O[2526] = ____opt_4
+        __O[2531] = ____opt_4
         if ____t_6(____opt_4) then
-            ____t_result_12 = __O[2526]
+            ____t_result_12 = __O[2531]
         else
             local ____opt_9 = window.webkit
             if ____opt_9 ~= nil then
@@ -120,9 +120,9 @@ local __O = {};
                     "get",
                     "Authorization"
                 )
-                __O[2527] = ____call_18_result_19
+                __O[2532] = ____call_18_result_19
                 if ____t_20(____call_18_result_19) then
-                    ____t_result_21 = __O[2527]
+                    ____t_result_21 = __O[2532]
                 else
                     ____t_result_21 = ""
                 end
@@ -203,9 +203,9 @@ local __O = {};
             local ____t_result_29
             local ____t_28 = __t
             local ____TS__Number_result_27 = __TS__Number(detail.status)
-            __O[2528] = ____TS__Number_result_27
+            __O[2533] = ____TS__Number_result_27
             if ____t_28(____TS__Number_result_27) then
-                ____t_result_29 = __O[2528]
+                ____t_result_29 = __O[2533]
             else
                 ____t_result_29 = 503
             end

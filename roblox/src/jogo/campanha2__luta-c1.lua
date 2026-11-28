@@ -44,15 +44,15 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____temp_0 = not __t(k)
-        __O[972] = ____temp_0
+        __O[973] = ____temp_0
         if ____t_1(____temp_0) then
-            ____t_result_2 = __O[972]
+            ____t_result_2 = __O[973]
         else
             ____t_result_2 = skin
         end
-        __O[973] = ____t_result_2
+        __O[974] = ____t_result_2
         if ____t_3(____t_result_2) then
-            ____t_result_7 = __O[973]
+            ____t_result_7 = __O[974]
         else
             local ____t_6 = __t
             local ____opt_4 = window.Game
@@ -61,9 +61,9 @@ local __O = {};
             end
             ____t_result_7 = not ____t_6(____opt_4)
         end
-        __O[974] = ____t_result_7
+        __O[975] = ____t_result_7
         if ____t_8(____t_result_7) then
-            ____t_result_13 = __O[974]
+            ____t_result_13 = __O[975]
         else
             local ____t_12 = __t
             local ____getq_11 = __getq
@@ -124,9 +124,9 @@ local __O = {};
         if ____opt_28 ~= nil then
             ____opt_result_30 = ____opt_28(____opt_28, o.cena)
         end
-        __O[975] = ____opt_result_30
+        __O[976] = ____opt_result_30
         if ____t_31(____opt_result_30) then
-            ____t_result_32 = __O[975]
+            ____t_result_32 = __O[976]
         else
             ____t_result_32 = 4000
         end
@@ -135,9 +135,9 @@ local __O = {};
         local ____t_result_35
         local ____t_34 = __t
         local ____TS__Number_result_33 = __TS__Number(o.bossX)
-        __O[976] = ____TS__Number_result_33
+        __O[977] = ____TS__Number_result_33
         if ____t_34(____TS__Number_result_33) then
-            ____t_result_35 = __O[976]
+            ____t_result_35 = __O[977]
         else
             ____t_result_35 = 480
         end
@@ -208,9 +208,9 @@ local __O = {};
             local ____t_result_44
             local ____t_43 = __t
             local ____temp_42 = not __t(skin) or not __t(aoFim)
-            __O[977] = ____temp_42
+            __O[978] = ____temp_42
             if ____t_43(____temp_42) then
-                ____t_result_44 = __O[977]
+                ____t_result_44 = __O[978]
             else
                 ____t_result_44 = entrando
             end
@@ -277,9 +277,9 @@ local __O = {};
         if ____opt_58 ~= nil then
             ____opt_result_60 = ____opt_58(____opt_58, skin.cena)
         end
-        __O[978] = ____opt_result_60
+        __O[979] = ____opt_result_60
         if ____t_61(____opt_result_60) then
-            ____t_result_62 = __O[978]
+            ____t_result_62 = __O[979]
         else
             ____t_result_62 = 4000
         end

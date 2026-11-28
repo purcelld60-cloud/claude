@@ -271,17 +271,17 @@ local __O = {};
                             local ____t_result_5
                             local ____t_4 = __t
                             local ____validCode_result_3 = validCode(nil, code)
-                            __O[1431] = ____validCode_result_3
+                            __O[1432] = ____validCode_result_3
                             if ____t_4(____validCode_result_3) then
                                 ____t_result_5 = code ~= "Escape"
                             else
-                                ____t_result_5 = __O[1431]
+                                ____t_result_5 = __O[1432]
                             end
-                            __O[1432] = ____t_result_5
+                            __O[1433] = ____t_result_5
                             if ____t_6(____t_result_5) then
                                 ____t_result_7 = not __t(__call(used, "has", code))
                             else
-                                ____t_result_7 = __O[1432]
+                                ____t_result_7 = __O[1433]
                             end
                             if ____t_8(____t_result_7) then
                                 __call(codes, "push", code)
@@ -305,11 +305,11 @@ local __O = {};
                 local ____t_result_14
                 local ____t_13 = __t
                 local ____validCode_result_12 = validCode(nil, pauseExtra)
-                __O[1433] = ____validCode_result_12
+                __O[1434] = ____validCode_result_12
                 if ____t_13(____validCode_result_12) then
                     ____t_result_14 = not __t(__call(used, "has", pauseExtra))
                 else
-                    ____t_result_14 = __O[1433]
+                    ____t_result_14 = __O[1434]
                 end
                 if ____t_15(____t_result_14) then
                     __call(fallback.bindings.pause, "push", pauseExtra)
@@ -415,9 +415,9 @@ local __O = {};
         local ____t_result_22
         local ____t_17 = __t
         local ____get_result_16 = __get(labels, code)
-        __O[1434] = ____get_result_16
+        __O[1435] = ____get_result_16
         if ____t_17(____get_result_16) then
-            ____t_result_22 = __O[1434]
+            ____t_result_22 = __O[1435]
         else
             local ____re_test_result_21
             if __re_test(
@@ -506,15 +506,15 @@ local __O = {};
         local ____t_result_25
         local ____t_24 = __t
         local ____temp_23 = not __t(__get(state.bindings, action)) or not __isInteger(slot)
-        __O[1435] = ____temp_23
+        __O[1436] = ____temp_23
         if ____t_24(____temp_23) then
-            ____t_result_25 = __O[1435]
+            ____t_result_25 = __O[1436]
         else
             ____t_result_25 = slot < 0
         end
-        __O[1436] = ____t_result_25
+        __O[1437] = ____t_result_25
         if ____t_26(____t_result_25) then
-            ____t_result_27 = __O[1436]
+            ____t_result_27 = __O[1437]
         else
             ____t_result_27 = slot > 1
         end
@@ -529,18 +529,18 @@ local __O = {};
         local ____t_result_34
         local ____t_30 = __t
         local ____temp_29 = code == "Escape" and action ~= "pause"
-        __O[1438] = ____temp_29
+        __O[1439] = ____temp_29
         if ____t_30(____temp_29) then
-            ____t_result_34 = __O[1438]
+            ____t_result_34 = __O[1439]
         else
             local ____t_result_33
             local ____t_32 = __t
             local ____temp_31 = action == "pause" and slot == 0
-            __O[1437] = ____temp_31
+            __O[1438] = ____temp_31
             if ____t_32(____temp_31) then
                 ____t_result_33 = code ~= "Escape"
             else
-                ____t_result_33 = __O[1437]
+                ____t_result_33 = __O[1438]
             end
             ____t_result_34 = ____t_result_33
         end
@@ -591,11 +591,11 @@ local __O = {};
         else
             ____t_result_36 = __len(conflicts)
         end
-        __O[1439] = ____t_result_36
+        __O[1440] = ____t_result_36
         if ____t_37(____t_result_36) then
             ____t_result_38 = not __t(options.swapConflicts)
         else
-            ____t_result_38 = __O[1439]
+            ____t_result_38 = __O[1440]
         end
         if ____t_39(____t_result_38) then
             return {ok = false, conflicts = conflicts, message = "Essa tecla já está em uso. Confirme a troca ou escolha outra."}
@@ -673,15 +673,15 @@ local __O = {};
         local ____t_result_44
         local ____t_43 = __t
         local ____temp_42 = not __t(__get(state.bindings, action)) or not __isInteger(slot)
-        __O[1440] = ____temp_42
+        __O[1441] = ____temp_42
         if ____t_43(____temp_42) then
-            ____t_result_44 = __O[1440]
+            ____t_result_44 = __O[1441]
         else
             ____t_result_44 = slot < 0
         end
-        __O[1441] = ____t_result_44
+        __O[1442] = ____t_result_44
         if ____t_45(____t_result_44) then
-            ____t_result_46 = __O[1441]
+            ____t_result_46 = __O[1442]
         else
             ____t_result_46 = slot > 1
         end
@@ -735,18 +735,18 @@ local __O = {};
                 local ____t_result_53
                 local ____t_49 = __t
                 local ____get_result_48 = __get(keys, code)
-                __O[1443] = ____get_result_48
+                __O[1444] = ____get_result_48
                 if ____t_49(____get_result_48) then
-                    ____t_result_53 = __O[1443]
+                    ____t_result_53 = __O[1444]
                 else
                     local ____t_result_52
                     local ____t_51 = __t
                     local ____temp_50 = code == "ShiftLeft"
-                    __O[1442] = ____temp_50
+                    __O[1443] = ____temp_50
                     if ____t_51(____temp_50) then
                         ____t_result_52 = keys.ShiftRight
                     else
-                        ____t_result_52 = __O[1442]
+                        ____t_result_52 = __O[1443]
                     end
                     ____t_result_53 = ____t_result_52
                 end
@@ -758,9 +758,9 @@ local __O = {};
         local ____t_result_56
         local ____t_55 = __t
         local ____TS__Number_result_54 = __TS__Number(x)
-        __O[1444] = ____TS__Number_result_54
+        __O[1445] = ____TS__Number_result_54
         if ____t_55(____TS__Number_result_54) then
-            ____t_result_56 = __O[1444]
+            ____t_result_56 = __O[1445]
         else
             ____t_result_56 = 0
         end
@@ -768,9 +768,9 @@ local __O = {};
         local ____t_result_59
         local ____t_58 = __t
         local ____TS__Number_result_57 = __TS__Number(y)
-        __O[1445] = ____TS__Number_result_57
+        __O[1446] = ____TS__Number_result_57
         if ____t_58(____TS__Number_result_57) then
-            ____t_result_59 = __O[1445]
+            ____t_result_59 = __O[1446]
         else
             ____t_result_59 = 0
         end
@@ -797,9 +797,9 @@ local __O = {};
                     local ____t_result_62
                     local ____t_61 = __t
                     local ____get_result_60 = __get(state.bindings, action)
-                    __O[1446] = ____get_result_60
+                    __O[1447] = ____get_result_60
                     if ____t_61(____get_result_60) then
-                        ____t_result_62 = __O[1446]
+                        ____t_result_62 = __O[1447]
                     else
                         ____t_result_62 = __arrL({}, 0)
                     end

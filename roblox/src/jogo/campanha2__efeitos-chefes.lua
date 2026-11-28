@@ -2124,9 +2124,9 @@ local __O = {};
             combate:capitulo(f),
             2
         )
-        __O[940] = ____getq_result_31
+        __O[941] = ____getq_result_31
         if ____t_32(____getq_result_31) then
-            ____t_result_33 = __O[940]
+            ____t_result_33 = __O[941]
         else
             ____t_result_33 = __get(combate.chefes, f.slug).cor
         end
@@ -2191,11 +2191,11 @@ local __O = {};
                     local ____t_result_40
                     local ____t_39 = __t
                     local ____temp_38 = not __t(o.corpo) and o.art ~= "motoTonhao"
-                    __O[941] = ____temp_38
+                    __O[942] = ____temp_38
                     if ____t_39(____temp_38) then
                         ____t_result_40 = u > 0.02
                     else
-                        ____t_result_40 = __O[941]
+                        ____t_result_40 = __O[942]
                     end
                     if ____t_41(____t_result_40) then
                         local a = combate:ponto(

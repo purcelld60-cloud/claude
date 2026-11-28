@@ -250,6 +250,7 @@
     const pintor = EXT.fundos[bgName(shot.bg)];
     if (pintor) { w.save(); w.translate(-camX, 0); try { pintor(w, { t, tt: s.elapsed, shot, s, p: typeof shot.bg === 'object' ? shot.bg : {}, cam, W, H, ajuda }); } catch (e) { w.fillStyle = '#0b0d10'; w.fillRect(camX, 0, W, H); } w.restore(); }
     else if (shot.bg === 'preto') { w.fillStyle = '#0b0d10'; w.fillRect(0, 0, W, H); }
+    else if (window.DAROCA_FUNDO_MUNDO?.(w, shot.scene, camX, s.elapsed)) { /* Roblox: o cenário vem das camadas, embaixo */ }
     else if (window.Art?.drawScene) window.Art.drawScene(w, shot.scene, camX, s.elapsed);
     else { w.fillStyle = '#8ec7e1'; w.fillRect(0, 0, W, H); }
     const list = shot.actors.map((a, i) => ({ a, i, p: actorAt(a, t, b.who === a.type) })).filter((r) => r.p.visible).sort((p, q) => p.a.z - q.a.z || p.p.y - q.p.y || p.i - q.i);
@@ -280,6 +281,8 @@
     let sx = (W - sw) / 2, sy = fy - fy / zoom;
     sx = clamp(sx, Math.min(0, W - sw), Math.max(0, W - sw)); sy = clamp(sy, Math.min(0, H - sh), Math.max(0, H - sh));
     const dx = shake ? Math.round((hash(t * 60) - .5) * shake * 2 / 2) * 2 : 0, dy = shake ? Math.round((hash(t * 60 + 9) - .5) * shake * 2 / 2) * 2 : 0;
+    // Roblox em camadas: o recorte com zoom do mundo (personagens) e do cenário é feito pela placa de vídeo
+    if (window.DAROCA_QUADRO_CAMADAS >= 0 && c.camadaAbaixo) { c.clearRect(0, 0, W, H); c.camadaAbaixo(world, sx, sy, sw, sh, dx, dy); window.DAROCA_QUADRO_ZOOM = { sx, sy, sw, sh, dx, dy }; return; }
     c.save(); c.imageSmoothingEnabled = false; c.fillStyle = '#0b0d10'; c.fillRect(0, 0, W, H);
     c.drawImage(world, sx, sy, sw, sh, dx, dy, W, H); c.restore();
   }
@@ -291,13 +294,22 @@
     if (sub) { c.font = '13px Pixel, monospace'; c.fillStyle = '#d7e7a0'; c.fillText(sub, W / 2, y + 36); }
     c.restore();
   }
+  // Roblox em camadas: efeito parado da tela toda (vinheta, noite, memória) é desenhado uma vez numa imagem guardada e
+  // fica embaixo do canvas da cena (a placa de vídeo junta), em vez de misturar os 518 mil pixels a cada quadro
+  const FIXAS = new Map();
+  function fixa(c, chave, desenho) {
+    if (!(window.DAROCA_QUADRO_CAMADAS >= 0) || !c.camadaAbaixo) return false;
+    let cv = FIXAS.get(chave);
+    if (!cv) { cv = document.createElement('canvas'); cv.width = W; cv.height = H; const g = cv.getContext('2d'); desenho(g); FIXAS.set(chave, cv); }
+    c.camadaAbaixo(cv, 0, 0, W, H, 0, 0, true); return true;
+  }
   function drawFx(c, shot, t, s) {
     const tt = s.elapsed;
     for (const e of shot.fx) {
       const tipo = e.tipo;
-      if (tipo === 'vinheta') { const g = c.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 620); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(8,6,4,${num(e.forca, .6)})`); c.fillStyle = g; c.fillRect(0, 0, W, H); }
-      else if (tipo === 'memoria') { c.fillStyle = 'rgba(150,110,60,.32)'; c.fillRect(0, 0, W, H); c.fillStyle = 'rgba(255,240,200,.08)'; for (let y = 0; y < H; y += 4) c.fillRect(0, y, W, 2); for (let i = 0; i < 26; i++) P(c, hash(i + Math.floor(tt * 12)) * W, hash(i * 3 + Math.floor(tt * 12)) * H, 2, 2, 'rgba(255,240,210,.35)'); }
-      else if (tipo === 'noite') { c.fillStyle = 'rgba(20,30,70,.38)'; c.fillRect(0, 0, W, H); }
+      if (tipo === 'vinheta') { if (!fixa(c, 'v' + num(e.forca, .6), (g) => { const gr = g.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 620); gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, `rgba(8,6,4,${num(e.forca, .6)})`); g.fillStyle = gr; g.fillRect(0, 0, W, H); })) { const g = c.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 620); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(8,6,4,${num(e.forca, .6)})`); c.fillStyle = g; c.fillRect(0, 0, W, H); } }
+      else if (tipo === 'memoria') { if (!fixa(c, 'm', (g) => { g.fillStyle = 'rgba(150,110,60,.32)'; g.fillRect(0, 0, W, H); g.fillStyle = 'rgba(255,240,200,.08)'; for (let y = 0; y < H; y += 4) g.fillRect(0, y, W, 2); })) { c.fillStyle = 'rgba(150,110,60,.32)'; c.fillRect(0, 0, W, H); c.fillStyle = 'rgba(255,240,200,.08)'; for (let y = 0; y < H; y += 4) c.fillRect(0, y, W, 2); } for (let i = 0; i < 26; i++) P(c, hash(i + Math.floor(tt * 12)) * W, hash(i * 3 + Math.floor(tt * 12)) * H, 2, 2, 'rgba(255,240,210,.35)'); }
+      else if (tipo === 'noite') { if (!fixa(c, 'n', (g) => { g.fillStyle = 'rgba(20,30,70,.38)'; g.fillRect(0, 0, W, H); })) { c.fillStyle = 'rgba(20,30,70,.38)'; c.fillRect(0, 0, W, H); } }
       else if (tipo === 'confete') { for (let i = 0; i < 70; i++) { const x = (hash(i) * W + Math.sin(tt * 2 + i) * 20 + W) % W, y = (hash(i + 5) * H + tt * (60 + hash(i + 2) * 70)) % H; P(c, x, y, 4, 4, ['#f2c14e', '#e85d75', '#5bc0eb', '#9bc53d', '#fff'][i % 5]); } }
       else if (tipo === 'coracoes') { for (let i = 0; i < 9; i++) { const x = 160 + hash(i) * 640, y = H - ((tt * 40 + hash(i + 1) * H) % H); const col = '#e85d75'; P(c, x, y, 4, 4, col); P(c, x + 6, y, 4, 4, col); P(c, x - 2, y + 4, 14, 4, col); P(c, x, y + 8, 10, 2, col); P(c, x + 2, y + 10, 6, 2, col); } }
       else if (tipo === 'brilhos') { for (let i = 0; i < 18; i++) { const on = Math.sin(tt * 4 + i * 1.7) > .3; if (!on) continue; const x = hash(i + 30) * W, y = 60 + hash(i + 31) * 340; P(c, x, y - 4, 2, 10, '#fff3a8'); P(c, x - 4, y, 10, 2, '#fff3a8'); } }

@@ -64,11 +64,17 @@ if ei then
   local okP, rP = pcall(function() return AssetService:CreateEditableImage({ Size = Vector2.new(W, H) }) end)
   if okP and rP then
     imagemPagina = Instance.new("ImageLabel")
-    imagemPagina.Size = UDim2.fromScale(1, 1); imagemPagina.BackgroundTransparency = 1; imagemPagina.ResampleMode = Enum.ResamplerMode.Pixelated; imagemPagina.ZIndex = 3
+    imagemPagina.Size = UDim2.fromScale(1, 1); imagemPagina.BackgroundTransparency = 1; imagemPagina.ResampleMode = Enum.ResamplerMode.Pixelated; imagemPagina.ZIndex = 100
     local okC = pcall(function() imagemPagina.ImageContent = Content.fromObject(rP) end)
-    if okC then eiPagina = rP; imagemPagina.Parent = imagem else imagemPagina:Destroy(); imagemPagina = nil end
+    if okC then eiPagina = rP; imagemPagina.Parent = palco else imagemPagina:Destroy(); imagemPagina = nil end
   end
 end
+local function novaImagemCv(w, h)
+  local ok, r = pcall(function() return AssetService:CreateEditableImage({ Size = Vector2.new(w, h) }) end)
+  if ok then return r end
+  return nil
+end
+imagem.Visible = true
 if not ei then
   aviso.TextSize = 14
   aviso.Text = "O ROBLOX NÃO DEIXOU DESENHAR A TELA DO JOGO.\n\n"
@@ -278,8 +284,8 @@ local function soltar(code, key) if presas[code] then presas[code] = nil; N.tecl
 -- ===== entrada: mouse e toque (coordenadas da tela do jogo, 960 x 540) =====
 local function posicaoNoJogo(p)
   local inset = GuiService:GetGuiInset()
-  local x = (p.X + 0 - imagem.AbsolutePosition.X) / imagem.AbsoluteSize.X * W
-  local y = (p.Y + inset.Y - imagem.AbsolutePosition.Y) / imagem.AbsoluteSize.Y * H
+  local x = (p.X + 0 - palco.AbsolutePosition.X) / palco.AbsoluteSize.X * W
+  local y = (p.Y + inset.Y - palco.AbsolutePosition.Y) / palco.AbsoluteSize.Y * H
   return x, y
 end
 local toques, proxToque = {}, 1
@@ -438,19 +444,90 @@ local function enviar(alvo, tela)
   if tela.width == W and tela.height == H then alvo:WritePixelsBuffer(Vector2.zero, tamanho, px)
   else local RD = Canvas.RD; for i = 0, W * H - 1 do writeu32(quadro, i * 4, RD(px, i * 4)) end; alvo:WritePixelsBuffer(Vector2.zero, tamanho, quadro) end
 end
-local jogoVisivel = true
+-- cada canvas da página (jogo, fundo da tela inicial, logo, minigames) vira uma imagem própria, enviada só quando
+-- o canvas muda; a imagem da primeira vez reaproveita a que foi criada no começo (ei)
+local camadasCv, livreEi = {}, ei
+local medidas = { jogo = 0, pagina = 0, envios = 0 }
+local function camadaDe(el, w, h)
+  local c = camadasCv[el]
+  if c and (c.w ~= w or c.h ~= h) then if c.ei ~= ei then c.ei:Destroy() end; c.label:Destroy(); camadasCv[el] = nil; c = nil end
+  if not c then
+    local e
+    if livreEi and w == W and h == H then e = livreEi; livreEi = nil else e = (w > 0 and h > 0 and w <= 1024 and h <= 1024) and novaImagemCv(w, h) or nil end
+    if not e then return nil end
+    local l = (e == ei) and imagem or Instance.new("ImageLabel")
+    l.BackgroundTransparency = 1; l.ResampleMode = Enum.ResamplerMode.Pixelated; l.BorderSizePixel = 0; l.ImageTransparency = 0; l.Parent = palco
+    if e ~= ei then l.ImageContent = Content.fromObject(e) end
+    c = { ei = e, label = l, w = w, h = h, ver = -1, e = {} }
+    camadasCv[el] = c
+  end
+  return c
+end
+local function mostrarCanvas()
+  local usados = {}
+  for i, cam in ipairs(desenhista.camadasCanvas or {}) do
+    local el = cam.el
+    local fonte = el._ and el._.fonte or el
+    local P = fonte._
+    -- canvas embaixo deste (o mundo das cenas do roteiro e os efeitos parados), recortados e ampliados pela placa de vídeo
+    local base = (cam.acima and 110 or 50) + i * 6
+    for j, ab in ipairs((el._ and el._.abaixos) or {}) do
+      if j <= 4 and ab.fonte._ and ab.fonte._.w > 0 and ab.sw > 0 and ab.sh > 0 then
+        local PA = ab.fonte._
+        local c = camadaDe(ab.fonte, PA.w, PA.h)
+        if c then
+          usados[ab.fonte] = true
+          local ver = tostring(PA.versao)
+          if c.ver ~= ver then c.ver = ver; c.ei:WritePixelsBuffer(Vector2.zero, Vector2.new(PA.w, PA.h), PA.px); medidas.envios = medidas.envios + 1 end
+          local e, l = c.e, c.label
+          local kx, ky = cam.w / math.max(1, el.width), cam.h / math.max(1, el.height)
+          local x, y = cam.x + ab.dx * kx, cam.y + ab.dy * ky
+          if e.x ~= x or e.y ~= y or e.w ~= cam.w or e.h ~= cam.h then e.x, e.y, e.w, e.h = x, y, cam.w, cam.h; l.Position = UDim2.fromScale(x / W, y / H); l.Size = UDim2.fromScale(cam.w / W, cam.h / H) end
+          if e.rx ~= ab.sx or e.ry ~= ab.sy or e.rw ~= ab.sw or e.rh ~= ab.sh then e.rx, e.ry, e.rw, e.rh = ab.sx, ab.sy, ab.sw, ab.sh; l.ImageRectOffset = Vector2.new(ab.sx, ab.sy); l.ImageRectSize = Vector2.new(ab.sw, ab.sh) end
+          local z = base + j
+          if e.z ~= z then e.z = z; l.ZIndex = z end
+          if e.tr ~= 0 then e.tr = 0; l.ImageTransparency = 0 end
+          if not e.vis then e.vis = true; l.Visible = true end
+          c.usado = os.clock()
+        end
+      end
+    end
+    if P and P.w > 0 and P.h > 0 then
+      local c = camadaDe(el, P.w, P.h)
+      if c then
+        usados[el] = true
+        local ver = tostring(el._.versao) .. ":" .. tostring(P.versao)
+        if c.ver ~= ver then c.ver = ver; c.ei:WritePixelsBuffer(Vector2.zero, Vector2.new(P.w, P.h), P.px); medidas.envios = medidas.envios + 1 end
+        local e, l = c.e, c.label
+        if e.x ~= cam.x or e.y ~= cam.y or e.w ~= cam.w or e.h ~= cam.h then e.x, e.y, e.w, e.h = cam.x, cam.y, cam.w, cam.h; l.Position = UDim2.fromScale(cam.x / W, cam.y / H); l.Size = UDim2.fromScale(cam.w / W, cam.h / H) end
+        local z = base + 5
+        if e.z ~= z then e.z = z; l.ZIndex = z end
+        local tr = 1 - (tonumber(cam.op) or 1)
+        if e.tr ~= tr then e.tr = tr; l.ImageTransparency = tr end
+        if not e.vis then e.vis = true; l.Visible = true end
+        c.usado = os.clock()
+      end
+    end
+  end
+  for el, c in pairs(camadasCv) do
+    if not usados[el] then
+      if c.e.vis then c.e.vis = false; c.label.Visible = false end
+      -- canvas sumido faz tempo: libera a memória de imagem
+      if c.ei ~= ei and os.clock() - (c.usado or 0) > 5 then c.ei:Destroy(); c.label:Destroy(); camadasCv[el] = nil end
+    end
+  end
+end
 local function umQuadro()
   emQuadro = true
+  local t0 = os.clock()
   N.passo(os.clock() * 1000)
   if camadas then
+    local t1 = os.clock()
     local tela, mudou = desenhista.desenhar({ camadas = true })
     emQuadro = false
-    local jogo = desenhista.camadaJogo
-    if jogo and jogo._ and jogo.width == W and jogo.height == H then
-      ei:WritePixelsBuffer(Vector2.zero, tamanho, jogo._.px)
-      if not jogoVisivel then jogoVisivel = true; imagem.ImageTransparency = 0 end
-    elseif jogoVisivel then jogoVisivel = false; imagem.ImageTransparency = 1 end
-    if mudou then enviar(eiPagina, tela) end
+    if mudou then enviar(eiPagina, tela); medidas.envios = medidas.envios + 1 end
+    mostrarCanvas()
+    medidas.jogo, medidas.pagina = t1 - t0, os.clock() - t1
   else
     local tela = desenhista and desenhista.desenhar() or window.document:getElementById("gameCanvas")
     emQuadro = false
@@ -466,7 +543,7 @@ end
 -- desliza liso, e as animações dele (árvores, bichos, luzes) andam no ritmo dos desenhos prontos.
 local Camadas = require(runtime.camadas)
 local HdCam = window.DAROCA_CAMADAS and window.HdMaps and window.HdMaps.camadas or nil
-local FATIA, MAXW = 0.005, 1024
+local FATIA, MAXW = 0.003, 1024
 local imagensDe = setmetatable({}, { __mode = "k" }) -- canvas → pedaços de EditableImage (até 1024 de largura cada)
 local rotulos, estadoRotulo = {}, {}
 local frente, pronto, desenhando, falhasFundo = nil, nil, false, 0
@@ -523,6 +600,12 @@ local function mostrarFundo()
   local n = 0
   if frente and cena ~= nil and cena >= 0 and frente.cena == cena then
     local itens = Camadas.montar(frente, window.DAROCA_QUADRO_CAMERA, window.DAROCA_QUADRO_TREMOR_X, window.DAROCA_QUADRO_TREMOR_Y)
+    -- cenas do roteiro: o cenário passa pelo mesmo recorte com zoom do mundo (feito pela placa de vídeo)
+    local Z = window.DAROCA_QUADRO_ZOOM
+    if Z and (tonumber(Z.sw) or 0) > 0 and (tonumber(Z.sh) or 0) > 0 then
+      local kx, ky = W / Z.sw, H / Z.sh
+      for _, it in ipairs(itens) do it.x = (it.x - Z.sx) * kx + Z.dx; it.y = (it.y - Z.sy) * ky + Z.dy; it.w = it.w * kx; it.h = it.h * ky end
+    end
     for z, it in ipairs(itens) do
       local reg = imagensDe[it.fonte]
       if reg then
@@ -557,7 +640,7 @@ local function trabalhoFundo()
       -- desenha um pouco à frente, para o lado em que a câmera está indo
       local cam = (window.DAROCA_QUADRO_CAMERA or 0) + math.clamp(velCam * .25, -140, 140)
       desenhando = true
-      local ok, info = pcall(function() return HdCam:desenhar(cena, cam, window.DAROCA_QUADRO_TEMPO or 0) end)
+      local ok, info = pcall(function() return HdCam:desenhar(cena, cam, window.DAROCA_QUADRO_TEMPO or 0, window.DAROCA_QUADRO_HORA) end)
       desenhando = false
       if ok and info then pronto = info; falhasFundo = 0
       elseif not ok then
@@ -577,7 +660,7 @@ local function passoFundo(dt)
   local ativo = cena ~= nil and cena >= 0
   if ativo or desenhando then
     -- urgente: cenário novo ou câmera fora do quadro pronto (o desenho termina neste quadro mesmo)
-    local urgente = desenhando and not ativo or (ativo and (not frente or frente.cena ~= cena or not Camadas.cabe(frente, cam)))
+    local urgente = desenhando and not ativo or (ativo and (not frente or frente.cena ~= cena or not Camadas.cabe(frente, cam, window.DAROCA_QUADRO_ZOOM)))
     fatiaAte = os.clock() + (urgente and 1.5 or FATIA)
     if coroutine.status(fundoCo) == "suspended" then
       local ok, e = coroutine.resume(fundoCo)
@@ -587,12 +670,38 @@ local function passoFundo(dt)
   if pronto then local info = pronto; pronto = nil; consumir(info) end
 end
 
+-- ===== painel de desempenho (F3): quadros por segundo e quanto cada parte gasta, para foto/diagnóstico =====
+local painel = Instance.new("TextLabel")
+painel.Visible = false; painel.BackgroundColor3 = Color3.new(0, 0, 0); painel.BackgroundTransparency = .3; painel.BorderSizePixel = 0
+painel.TextColor3 = Color3.fromRGB(255, 233, 168); painel.Font = Enum.Font.Code; painel.TextSize = 14
+painel.TextXAlignment = Enum.TextXAlignment.Left; painel.TextYAlignment = Enum.TextYAlignment.Top
+painel.Size = UDim2.fromOffset(360, 132); painel.Position = UDim2.fromOffset(8, 44); painel.ZIndex = 30; painel.Parent = gui
+local somaP = { n = 0, jogo = 0, pagina = 0, fundo = 0, total = 0, envios = 0, t = os.clock() }
+local function atualizarPainel(tFundo, tTotal)
+  somaP.n = somaP.n + 1; somaP.jogo = somaP.jogo + (medidas.jogo or 0); somaP.pagina = somaP.pagina + (medidas.pagina or 0)
+  somaP.fundo = somaP.fundo + tFundo; somaP.total = somaP.total + tTotal
+  local agora = os.clock()
+  if agora - somaP.t < .5 then return end
+  if painel.Visible then
+    local n = math.max(1, somaP.n)
+    local nivel = "?"; pcall(function() nivel = tostring(window.Graphics:level()) end)
+    painel.Text = ("DA ROÇA · %s\n%.0f quadros/s\nlua: %.1f ms (jogo %.1f · tela %.1f · cenário %.1f)\nenvios de imagem: %.0f/s\nqualidade: %s · camadas: %s\ncena: %s · nativo: %s"):format(
+      VERSAO, somaP.n / (agora - somaP.t), somaP.total / n * 1000, somaP.jogo / n * 1000, somaP.pagina / n * 1000, somaP.fundo / n * 1000,
+      medidas.envios / (agora - somaP.t), nivel, window.DAROCA_CAMADAS and "sim" or "não", tostring(window.DAROCA_QUADRO_CAMADAS), RunService:IsStudio() and "Studio" or "não")
+  end
+  medidas.envios = 0
+  somaP = { n = 0, jogo = 0, pagina = 0, fundo = 0, total = 0, t = agora }
+end
+UIS.InputBegan:Connect(function(input)
+  if input.KeyCode == Enum.KeyCode.F3 then painel.Visible = not painel.Visible end
+end)
+
 -- um quadro de cada vez, num laço próprio (pode pausar no meio de um quadro pesado sem o Roblox derrubar o script)
 local primeiro, errosSeguidos, inicioQuadros = true, 0, os.clock()
-local ultimoQuadro
+local ultimoQuadro, inicioLaco = nil, os.clock()
 task.spawn(function()
   while true do
-    ultimaPausa = os.clock()
+    ultimaPausa = os.clock(); inicioLaco = os.clock()
     local ok, e = pcall(umQuadro)
     if not ok then
       emQuadro = false; errosSeguidos = errosSeguidos + 1; warn("[Da Roça] quadro: " .. tostring(e))
@@ -602,9 +711,11 @@ task.spawn(function()
       errosSeguidos = 0
       if primeiro then primeiro = false; aviso.Visible = false; print(("[Da Roça] primeiro quadro em %.1f s"):format(os.clock() - inicioQuadros)) end
     end
+    local tF = os.clock()
     local okF, eF = pcall(passoFundo, os.clock() - (ultimoQuadro or os.clock())); ultimoQuadro = os.clock()
     if not okF then warn("[Da Roça] camadas: " .. tostring(eF)) end
     pcall(mostrarFundo)
+    pcall(atualizarPainel, os.clock() - tF, os.clock() - inicioLaco)
     RunService.RenderStepped:Wait()
   end
 end)

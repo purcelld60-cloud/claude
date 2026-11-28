@@ -97,7 +97,7 @@ local __O = {};
         else
             ____t_result_27 = code
         end
-        __O[2508] = ____t_result_27
+        __O[2513] = ____t_result_27
         if ____t_28(____t_result_27) then
             local ____gt_33 = __gt
             local ____len_32 = __len
@@ -107,9 +107,9 @@ local __O = {};
                 api:getState().bindings,
                 action
             )
-            __O[2507] = ____get_result_29
+            __O[2512] = ____get_result_29
             if ____t_30(____get_result_29) then
-                ____t_result_31 = __O[2507]
+                ____t_result_31 = __O[2512]
             else
                 ____t_result_31 = __arrL({}, 0)
             end
@@ -118,7 +118,7 @@ local __O = {};
                 1
             )
         else
-            ____t_result_34 = __O[2508]
+            ____t_result_34 = __O[2513]
         end
         if ____t_35(____t_result_34) then
             local clear = window.document:createElement("button")
@@ -188,9 +188,9 @@ local __O = {};
                 local ____t_result_43
                 local ____t_42 = __t
                 local ____get_result_41 = __get(descriptions, action)
-                __O[2509] = ____get_result_41
+                __O[2514] = ____get_result_41
                 if ____t_42(____get_result_41) then
-                    ____t_result_43 = __O[2509]
+                    ____t_result_43 = __O[2514]
                 else
                     ____t_result_43 = ""
                 end
@@ -284,11 +284,11 @@ local __O = {};
                     local ____t_result_46
                     local ____t_45 = __t
                     local ____get_result_44 = __get(barActions, index)
-                    __O[2510] = ____get_result_44
+                    __O[2515] = ____get_result_44
                     if ____t_45(____get_result_44) then
                         ____t_result_46 = __get(keys, 0)
                     else
-                        ____t_result_46 = __O[2510]
+                        ____t_result_46 = __O[2515]
                     end
                     if ____t_47(____t_result_46) then
                         __get(keys, 0).textContent = api:getLabel(__get(barActions, index))
@@ -344,11 +344,11 @@ local __O = {};
                     local ____t_result_50
                     local ____t_49 = __t
                     local ____get_result_48 = __get(keys, 0)
-                    __O[2511] = ____get_result_48
+                    __O[2516] = ____get_result_48
                     if ____t_49(____get_result_48) then
                         ____t_result_50 = __get(helpActions, index)
                     else
-                        ____t_result_50 = __O[2511]
+                        ____t_result_50 = __O[2516]
                     end
                     if ____t_51(____t_result_50) then
                         local ____get_result_53 = __get(keys, 0)
@@ -396,9 +396,9 @@ local __O = {};
                 local ____t_result_56
                 local ____t_55 = __t
                 local ____get_result_54 = __get(descriptions, action)
-                __O[2512] = ____get_result_54
+                __O[2517] = ____get_result_54
                 if ____t_55(____get_result_54) then
-                    ____t_result_56 = __O[2512]
+                    ____t_result_56 = __O[2517]
                 else
                     ____t_result_56 = actionName(nil, action)
                 end
@@ -599,9 +599,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(api) or not __t(shell)
-    __O[2501] = ____temp_0
+    __O[2506] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[2501]
+        ____t_result_2 = __O[2506]
     else
         ____t_result_2 = window.ControlSettingsUI
     end
@@ -616,9 +616,9 @@ local __O = {};
         local ____t_result_6
         local ____t_5 = __t
         local ____get_result_4 = __get(icons, name)
-        __O[2502] = ____get_result_4
+        __O[2507] = ____get_result_4
         if ____t_5(____get_result_4) then
-            ____t_result_6 = __O[2502]
+            ____t_result_6 = __O[2507]
         else
             ____t_result_6 = icons.pad
         end
@@ -747,9 +747,9 @@ local __O = {};
         local ____t_result_13
         local ____t_10 = __t
         local ____get_result_9 = __get(labels, id)
-        __O[2503] = ____get_result_9
+        __O[2508] = ____get_result_9
         if ____t_10(____get_result_9) then
-            ____t_result_13 = __O[2503]
+            ____t_result_13 = __O[2508]
         else
             local ____opt_11 = __call(
                 api.actions,
@@ -761,9 +761,9 @@ local __O = {};
             end
             ____t_result_13 = ____opt_11
         end
-        __O[2504] = ____t_result_13
+        __O[2509] = ____t_result_13
         if ____t_14(____t_result_13) then
-            ____t_result_15 = __O[2504]
+            ____t_result_15 = __O[2509]
         else
             ____t_result_15 = id
         end
@@ -792,9 +792,9 @@ local __O = {};
             api:getState().bindings,
             id
         )
-        __O[2505] = ____get_result_17
+        __O[2510] = ____get_result_17
         if ____t_18(____get_result_17) then
-            ____t_result_19 = __O[2505]
+            ____t_result_19 = __O[2510]
         else
             ____t_result_19 = __arrL({}, 0)
         end
@@ -803,9 +803,9 @@ local __O = {};
             "join",
             separator
         )
-        __O[2506] = ____call_21_result_22
+        __O[2511] = ____call_21_result_22
         if ____t_23(____call_21_result_22) then
-            ____t_result_24 = __O[2506]
+            ____t_result_24 = __O[2511]
         else
             ____t_result_24 = "Sem tecla"
         end
@@ -854,11 +854,11 @@ local __O = {};
                 local ____t_result_77
                 local ____t_76 = __t
                 local ____temp_75 = __len(result.conflicts) == 1 and not not __t(oldCode)
-                __O[2513] = ____temp_75
+                __O[2518] = ____temp_75
                 if ____t_76(____temp_75) then
                     ____t_result_77 = not __t(other.action == "pause" and other.slot == 0)
                 else
-                    ____t_result_77 = __O[2513]
+                    ____t_result_77 = __O[2518]
                 end
                 local canSwap = ____t_result_77
                 local ____add_80 = __add
@@ -973,35 +973,35 @@ local __O = {};
         if state ~= nil then
             ____opt_result_89 = state.started
         end
-        __O[2514] = ____opt_result_89
+        __O[2519] = ____opt_result_89
         if ____t_90(____opt_result_89) then
             ____t_result_91 = not __t(state.paused)
         else
-            ____t_result_91 = __O[2514]
+            ____t_result_91 = __O[2519]
         end
-        __O[2515] = ____t_result_91
+        __O[2520] = ____t_result_91
         if ____t_92(____t_result_91) then
             ____t_result_93 = not __t(state.won)
         else
-            ____t_result_93 = __O[2515]
+            ____t_result_93 = __O[2520]
         end
-        __O[2516] = ____t_result_93
+        __O[2521] = ____t_result_93
         if ____t_94(____t_result_93) then
             ____t_result_95 = not __t(state.defeated)
         else
-            ____t_result_95 = __O[2516]
+            ____t_result_95 = __O[2521]
         end
-        __O[2517] = ____t_result_95
+        __O[2522] = ____t_result_95
         if ____t_96(____t_result_95) then
             ____t_result_97 = not __t(state.chapterEnded)
         else
-            ____t_result_97 = __O[2517]
+            ____t_result_97 = __O[2522]
         end
-        __O[2518] = ____t_result_97
+        __O[2523] = ____t_result_97
         if ____t_98(____t_result_97) then
             ____t_result_99 = not __t(window.document:querySelector("dialog[open]"))
         else
-            ____t_result_99 = __O[2518]
+            ____t_result_99 = __O[2523]
         end
         resumeAfterClose = not not ____t_100(____t_result_99)
         local ____opt_103 = window.Game
@@ -1081,17 +1081,17 @@ local __O = {};
                 if state ~= nil then
                     ____opt_result_125 = state.started
                 end
-                __O[2519] = ____opt_result_125
+                __O[2524] = ____opt_result_125
                 if ____t_126(____opt_result_125) then
                     ____t_result_127 = not __t(state.paused)
                 else
-                    ____t_result_127 = __O[2519]
+                    ____t_result_127 = __O[2524]
                 end
-                __O[2520] = ____t_result_127
+                __O[2525] = ____t_result_127
                 if ____t_128(____t_result_127) then
                     ____t_result_129 = not __t(window.document:querySelector("dialog[open]"))
                 else
-                    ____t_result_129 = __O[2520]
+                    ____t_result_129 = __O[2525]
                 end
                 if ____t_130(____t_result_129) then
                     if canvas ~= nil then
@@ -1105,11 +1105,11 @@ local __O = {};
                     if returnFocus ~= nil then
                         ____opt_result_135 = returnFocus.isConnected
                     end
-                    __O[2521] = ____opt_result_135
+                    __O[2526] = ____opt_result_135
                     if ____t_136(____opt_result_135) then
                         ____t_result_137 = __len(returnFocus:getClientRects())
                     else
-                        ____t_result_137 = __O[2521]
+                        ____t_result_137 = __O[2526]
                     end
                     if ____t_138(____t_result_137) then
                         returnFocus:focus({preventScroll = true})
@@ -1142,15 +1142,15 @@ local __O = {};
             local ____t_result_141
             local ____t_140 = __t
             local ____temp_139 = event.clientX < r.left or event.clientX > r.right
-            __O[2522] = ____temp_139
+            __O[2527] = ____temp_139
             if ____t_140(____temp_139) then
-                ____t_result_141 = __O[2522]
+                ____t_result_141 = __O[2527]
             else
                 ____t_result_141 = event.clientY < r.top
             end
-            __O[2523] = ____t_result_141
+            __O[2528] = ____t_result_141
             if ____t_142(____t_result_141) then
-                ____t_result_143 = __O[2523]
+                ____t_result_143 = __O[2528]
             else
                 ____t_result_143 = event.clientY > r.bottom
             end
@@ -1352,7 +1352,7 @@ local __O = {};
             if ____opt_160 ~= nil then
                 ____opt_160 = ____opt_160(____this_161, "[data-control-tab]")
             end
-            __O[2524] = ____opt_160
+            __O[2529] = ____opt_160
             if ____t_162(____opt_160) then
                 ____t_result_163 = __call(
                     __arrL({"ArrowLeft", "ArrowRight", "Home", "End"}, 4),
@@ -1360,7 +1360,7 @@ local __O = {};
                     event.key
                 )
             else
-                ____t_result_163 = __O[2524]
+                ____t_result_163 = __O[2529]
             end
             if ____t_164(____t_result_163) then
                 event:preventDefault()
@@ -1436,9 +1436,9 @@ local __O = {};
         local ____t_172 = __t
         local ____opt_169 = help:querySelector(".help-grid")
         local ____temp_171 = ____opt_169 and ____opt_169:insertAdjacentElement("beforebegin", button)
-        __O[2525] = ____temp_171
+        __O[2530] = ____temp_171
         if ____t_172(____temp_171) then
-            ____t_result_173 = __O[2525]
+            ____t_result_173 = __O[2530]
         else
             ____t_result_173 = help:append(button)
         end

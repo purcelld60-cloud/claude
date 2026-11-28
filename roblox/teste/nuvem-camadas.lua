@@ -36,7 +36,7 @@ fundoCo = coroutine.create(function()
     local cena = W.DAROCA_QUADRO_CAMADAS
     if cena and cena >= 0 and not pronto then
       desenhando = true
-      local okD, info = pcall(function() return HdCam:desenhar(cena, W.DAROCA_QUADRO_CAMERA or 0, W.DAROCA_QUADRO_TEMPO or 0) end)
+      local okD, info = pcall(function() return HdCam:desenhar(cena, W.DAROCA_QUADRO_CAMERA or 0, W.DAROCA_QUADRO_TEMPO or 0, W.DAROCA_QUADRO_HORA) end)
       desenhando = false
       if okD then pronto = info; renders = renders + 1 else nErros = nErros + 1; print("ERRO fundo: " .. tostring(info)) end
     end
@@ -53,8 +53,8 @@ local function quadros(n, etapa)
     local cena = W.DAROCA_QUADRO_CAMADAS
     local tf = 0
     if (cena and cena >= 0) or desenhando then
-      local urg = (desenhando and not (cena and cena >= 0)) or (cena and cena >= 0 and (not frente or frente.cena ~= cena or not Camadas.cabe(frente, W.DAROCA_QUADRO_CAMERA)))
-      fatiaAte = os.clock() + (urg and 1.5 or .005)
+      local urg = (desenhando and not (cena and cena >= 0)) or (cena and cena >= 0 and (not frente or frente.cena ~= cena or not Camadas.cabe(frente, W.DAROCA_QUADRO_CAMERA, W.DAROCA_QUADRO_ZOOM)))
+      fatiaAte = os.clock() + (urg and 1.5 or .003)
       local c = os.clock(); local okR, e = coroutine.resume(fundoCo); tf = os.clock() - c
       if not okR then nErros = nErros + 1; print("ERRO rotina: " .. tostring(e)) end
     end
@@ -77,7 +77,7 @@ local function medir(nome)
 end
 local function clicar(sel) local el = N.document:querySelector(sel); if el then pcall(el.click, el) end end
 local function botao(texto) local achou; N.percorrer(N.document.body, function(e) if not achou and e._tag == "button" and N.textoDe(e):upper():find(texto:upper(), 1, true) then achou = e; return true end end); if achou then pcall(achou.click, achou) end end
-quadros(3, "título"); clicar("#menuJogarBtn"); quadros(3, "menu"); clicar("#startBtn"); quadros(3, "começar")
+quadros(25, "título"); medir("tela inicial"); clicar("#menuJogarBtn"); quadros(3, "menu"); clicar("#startBtn"); quadros(3, "começar")
 local G = W.Game
 for _ = 1, 8 do pcall(G.skipCutscene, G); pcall(G.closeDialogue, G); botao("BORA CONTINUAR"); quadros(2, "história") end
 for _, q in ipairs({ "auto-low", "medium" }) do

@@ -222,6 +222,7 @@ function D.iniciar(op)
   end
 
   local ehJanela, desenharJanela
+  local modoCamadas = false
   -- o que foi desenhado no último quadro (para o toque achar o elemento)
   local desenhados = {}
   local caixas = setmetatable({}, { __mode = "k" })
@@ -295,7 +296,8 @@ function D.iniciar(op)
     local x0, y0 = math.floor((960 - w) / 2), math.floor((540 - altB - h) / 2)
     ctx.globalAlpha = .92; ctx.fillStyle = "#07060c"; ctx:fillRect(0, 0, 960, 540); ctx.globalAlpha = 1
     ctx.fillStyle = "#e8c24a"; ctx:fillRect(x0 - 3, y0 - 3, w + 6, h + 6); ctx.fillStyle = "#2a1a0e"; ctx:fillRect(x0 - 1, y0 - 1, w + 2, h + 2)
-    ctx:drawImage(cvs.el, x0, y0, w, h)
+    if modoCamadas then D.camadasCanvas[#D.camadasCanvas + 1] = { el = cvs.el, x = x0, y = y0, w = w, h = h, op = 1, acima = true }
+    else ctx:drawImage(cvs.el._.fonte or cvs.el, x0, y0, w, h) end
     caixas[el] = { x = 0, y = 0, width = 960, height = 540 }
     desenhados[#desenhados + 1] = { el = el, x = 0, y = 0, w = 960, h = 540 }
     if #botoes == 0 then return end
@@ -377,7 +379,7 @@ function D.iniciar(op)
         desenhados[#desenhados + 1] = { el = it.el, x = bx, y = by, w = bw, h = bh }
       else
         local w, h = math.floor(it.el.width * it.k), math.floor(it.el.height * it.k)
-        ctx:drawImage(it.el, x0 + pad, y + 4, w, h)
+        ctx:drawImage(it.el._.fonte or it.el, x0 + pad, y + 4, w, h)
       end
       ctx.globalAlpha = 1
       y = y + it.h
@@ -393,7 +395,10 @@ function D.iniciar(op)
     for _, f in ipairs(el._filhos) do
       if f.nodeType == 3 then partes[#partes + 1] = f._texto
       elseif f.nodeType == 1 and not escondido(f) then
-        if f._tag == "canvas" and f._ then return true end
+        if f._tag == "canvas" and f._ then
+          if f.width >= 200 then partes[#partes + 1] = "T" .. f.width .. "x" .. f.height -- telão: camada própria
+          else partes[#partes + 1] = "c" .. tostring(f._.versao) .. tostring(f._.fonte and f._.fonte._.versao) end
+        end
         partes[#partes + 1] = "<" .. f._tag .. (f._attr.disabled and "d" or "") .. tostring(rawget(f, "_valor") or "")
         if resumoJanela(f, partes) then return true end
       end
@@ -409,19 +414,19 @@ function D.iniciar(op)
       if st then for _, k in ipairs(ESTILOS) do local v = rawget(st, k); if v ~= nil then partes[#partes + 1] = k .. "=" .. tostring(v) end end end
       for _, f in ipairs(el._filhos) do if f.nodeType == 3 then partes[#partes + 1] = f._texto end end
       if r.campo then partes[#partes + 1] = tostring(el.value) end
-      -- canvas que não ocupa a tela toda (minigame, prévia, logo): muda sozinho, a interface é redesenhada sempre
-      if r.canvas and el._ and not (r.x == 0 and r.y == 0 and r.w == 960 and r.h == 540) then vivo = true end
+      -- os canvas da página são camadas próprias no Roblox: não forçam a interface a ser redesenhada
     end
     for _, el in ipairs(janelas) do partes[#partes + 1] = "\1J"; if resumoJanela(el, partes) then vivo = true end end
     return table.concat(partes, "\2"), vivo
   end
   local ultimaAssinatura
-  D.camadaJogo = nil
+  D.camadaJogo = nil; D.camadasCanvas = {}
 
   -- op.camadas: a página vira uma camada transparente por cima do canvas do jogo (que o Roblox mostra numa imagem
   -- própria, D.camadaJogo); devolve a tela e se ela mudou desde a última vez.
   function D.desenhar(op)
     local camadas = op and op.camadas
+    modoCamadas = camadas
     ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"
     local tab, idx = I[modo()], estadoAtual()
     local nomeEstado = I.estados[modo()][idx] and I.estados[modo()][idx].nome
@@ -444,10 +449,11 @@ function D.iniciar(op)
     table.sort(lista, function(a, b) if a.z ~= b.z then return a.z < b.z end; return a.n < b.n end)
     if camadas then
       local ass, vivo = assinar(lista, janelas, idx)
+      D.assinatura = ass
       if ass == ultimaAssinatura then return tela, false end
       ultimaAssinatura = not vivo and ass or nil
       ctx:clearRect(0, 0, 960, 540)
-      D.camadaJogo = nil
+      D.camadaJogo = nil; D.camadasCanvas = {}
     else
       ultimaAssinatura = nil
       ctx.fillStyle = "#000000"; ctx:fillRect(0, 0, 960, 540)
@@ -525,14 +531,17 @@ function D.iniciar(op)
         else colarPele(p, r.px + dx, r.py + dy) end
       end
       if r.canvas and el._ then
-        if camadas and not D.camadaJogo and op >= 1 and x == 0 and y == 0 and w == 960 and h == 540 and el.width == 960 and el.height == 540 then
-          -- camada do jogo: o Roblox mostra este canvas numa imagem própria, embaixo da página; o que veio antes fica por baixo dele
-          D.camadaJogo = el; ctx:clearRect(0, 0, 960, 540)
-        elseif not jaDesenhou and op >= 1 and x == 0 and y == 0 and w == 960 and h == 540 and el.width == 960 and el.height == 540 then
+        local cheia = op >= 1 and x == 0 and y == 0 and w == 960 and h == 540
+        if camadas then
+          -- cada canvas da página é uma imagem própria no Roblox (enviada só quando muda), embaixo da interface;
+          -- um canvas opaco da tela toda esconde o que veio antes dele
+          if cheia then D.camadaJogo = el; D.camadasCanvas = {}; ctx:clearRect(0, 0, 960, 540) end
+          D.camadasCanvas[#D.camadasCanvas + 1] = { el = el, x = x, y = y, w = w, h = h, op = op }
+        elseif not jaDesenhou and cheia and el.width == 960 and el.height == 540 and not el._.fonte then
           Canvas.copiar(tela, el) -- a cena do jogo ocupa a tela toda: cópia direta, sem misturar pixel a pixel
         else
           ctx.globalAlpha = op
-          ctx:drawImage(el, x, y, w, h)
+          ctx:drawImage(el._.fonte or el, x, y, w, h)
           ctx.globalAlpha = 1
         end
       end

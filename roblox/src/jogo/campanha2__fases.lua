@@ -384,9 +384,9 @@ local __O = {};
         local ____t_result_15
         local ____t_14 = __t
         local ____get_result_13 = __get(AVES, tipo)
-        __O[942] = ____get_result_13
+        __O[943] = ____get_result_13
         if ____t_14(____get_result_13) then
-            ____t_result_15 = __O[942]
+            ____t_result_15 = __O[943]
         else
             ____t_result_15 = AVES.pombo
         end
@@ -1088,9 +1088,9 @@ local __O = {};
         if ____opt_20 ~= nil then
             ____opt_result_22 = ____opt_20(____opt_20)
         end
-        __O[943] = ____opt_result_22
+        __O[944] = ____opt_result_22
         if ____t_23(____opt_result_22) then
-            ____t_result_24 = __O[943]
+            ____t_result_24 = __O[944]
         else
             ____t_result_24 = {hp = 1, windup = 1, recovery = 1, incomingDamage = 1}
         end
@@ -1200,15 +1200,15 @@ local __O = {};
             local ____t_result_50
             local ____t_49 = __t
             local ____temp_48 = B.st == "espera" or B.st == "troca"
-            __O[945] = ____temp_48
+            __O[946] = ____temp_48
             if ____t_49(____temp_48) then
-                ____t_result_50 = __O[945]
+                ____t_result_50 = __O[946]
             else
                 ____t_result_50 = B.st == "derrotado"
             end
-            __O[946] = ____t_result_50
+            __O[947] = ____t_result_50
             if ____t_51(____t_result_50) then
-                ____t_result_52 = __O[946]
+                ____t_result_52 = __O[947]
             else
                 ____t_result_52 = B.st == "entrada"
             end
@@ -1282,9 +1282,9 @@ local __O = {};
                 __getq(K.falasFase, f - 1),
                 0
             )
-            __O[947] = ____getq_result_57
+            __O[948] = ____getq_result_57
             if ____t_58(____getq_result_57) then
-                ____t_result_59 = __O[947]
+                ____t_result_59 = __O[948]
             else
                 ____t_result_59 = __get(K.falas, 0)
             end
@@ -1381,11 +1381,11 @@ local __O = {};
             else
                 ____t_result_98 = arena.ativa
             end
-            __O[953] = ____t_result_98
+            __O[954] = ____t_result_98
             if ____t_99(____t_result_98) then
                 ____t_result_100 = __gt(e.x, arena.l - 40) and __lt(e.x, arena.r + 40)
             else
-                ____t_result_100 = __O[953]
+                ____t_result_100 = __O[954]
             end
             if ____t_101(____t_result_100) then
                 local ____e_103 = e
@@ -1420,9 +1420,9 @@ local __O = {};
                     ),
                     0
                 )
-                __O[954] = ____get_result_104
+                __O[955] = ____get_result_104
                 if ____t_105(____get_result_104) then
-                    ____t_result_107 = __O[954]
+                    ____t_result_107 = __O[955]
                 else
                     local ____t_result_106
                     if __t(B.st ~= "espera" and __gt(B.hp, 0)) then
@@ -1439,9 +1439,9 @@ local __O = {};
                     local ____t_result_110
                     local ____t_109 = __t
                     local ____TS__MathSign_result_108 = __TS__MathSign(d)
-                    __O[955] = ____TS__MathSign_result_108
+                    __O[956] = ____TS__MathSign_result_108
                     if ____t_109(____TS__MathSign_result_108) then
-                        ____t_result_110 = __O[955]
+                        ____t_result_110 = __O[956]
                     else
                         ____t_result_110 = 1
                     end
@@ -1516,9 +1516,9 @@ local __O = {};
                     local ____t_result_122
                     local ____t_121 = __t
                     local ____hypot_result_120 = __hypot(ax, ay)
-                    __O[956] = ____hypot_result_120
+                    __O[957] = ____hypot_result_120
                     if ____t_121(____hypot_result_120) then
-                        ____t_result_122 = __O[956]
+                        ____t_result_122 = __O[957]
                     else
                         ____t_result_122 = 1
                     end
@@ -1554,11 +1554,11 @@ local __O = {};
                     else
                         ____t_result_123 = perto
                     end
-                    __O[957] = ____t_result_123
+                    __O[958] = ____t_result_123
                     if ____t_124(____t_result_123) then
                         ____t_result_125 = __le(e.tt, 0)
                     else
-                        ____t_result_125 = __O[957]
+                        ____t_result_125 = __O[958]
                     end
                     if ____t_126(____t_result_125) then
                         e.st = "mira"
@@ -1608,11 +1608,11 @@ local __O = {};
                     local ____t_result_129
                     local ____t_128 = __t
                     local ____temp_127 = not __t(e.acertou) and math.abs(P.x - e.x) < 46
-                    __O[958] = ____temp_127
+                    __O[959] = ____temp_127
                     if ____t_128(____temp_127) then
                         ____t_result_129 = math.abs(P.y - e.y) < 50
                     else
-                        ____t_result_129 = __O[958]
+                        ____t_result_129 = __O[959]
                     end
                     if ____t_130(____t_result_129) then
                         e.acertou = true
@@ -1741,9 +1741,9 @@ local __O = {};
                 local ____t_result_137
                 local ____t_136 = __t
                 local ____getq_result_135 = __getq(K.falasFase, B.fase - 1)
-                __O[959] = ____getq_result_135
+                __O[960] = ____getq_result_135
                 if ____t_136(____getq_result_135) then
-                    ____t_result_137 = __O[959]
+                    ____t_result_137 = __O[960]
                 else
                     ____t_result_137 = K.falas
                 end
@@ -1828,9 +1828,9 @@ local __O = {};
         local ____t_result_27
         local ____t_26 = __t
         local ____DIF_result_hp_25 = DIF(nil).hp
-        __O[944] = ____DIF_result_hp_25
+        __O[945] = ____DIF_result_hp_25
         if ____t_26(____DIF_result_hp_25) then
-            ____t_result_27 = __O[944]
+            ____t_result_27 = __O[945]
         else
             ____t_result_27 = 1
         end
@@ -1953,11 +1953,11 @@ local __O = {};
                 local ____t_result_67
                 local ____t_66 = __t
                 local ____temp_65 = not __t(q.pego) and math.abs(P.x - q.x) < 22
-                __O[948] = ____temp_65
+                __O[949] = ____temp_65
                 if ____t_66(____temp_65) then
                     ____t_result_67 = __gt(P.y, FLOOR - 60)
                 else
-                    ____t_result_67 = __O[948]
+                    ____t_result_67 = __O[949]
                 end
                 if ____t_68(____t_result_67) then
                     q.pego = true
@@ -2047,14 +2047,14 @@ local __O = {};
                     local ____t_result_82
                     local ____t_81 = __t
                     local ____temp_80 = math.abs(P.x - q.x) < (__t(q.chao) and 16 or 18) and __lt(P.y - 60, q.y + 6)
-                    __O[949] = ____temp_80
+                    __O[950] = ____temp_80
                     if ____t_81(____temp_80) then
                         ____t_result_82 = __gt(
                             P.y,
                             q.y - alto + (__t(q.chao) and 0 or -6)
                         )
                     else
-                        ____t_result_82 = __O[949]
+                        ____t_result_82 = __O[950]
                     end
                     if ____t_83(____t_result_82) then
                         local ____t_85 = __t
@@ -2084,9 +2084,9 @@ local __O = {};
                         __get(projs, i).x,
                         arena.l - 900
                     )
-                    __O[950] = ____temp_86
+                    __O[951] = ____temp_86
                     if ____t_87(____temp_86) then
-                        ____t_result_88 = __O[950]
+                        ____t_result_88 = __O[951]
                     else
                         ____t_result_88 = __gt(
                             __get(projs, i).x,
@@ -2105,11 +2105,11 @@ local __O = {};
                 local ____t_result_92
                 local ____t_91 = __t
                 local ____temp_90 = f.k == "raio" and not __t(f.feito)
-                __O[951] = ____temp_90
+                __O[952] = ____temp_90
                 if ____t_91(____temp_90) then
                     ____t_result_92 = __gt(f.t, 0.05)
                 else
-                    ____t_result_92 = __O[951]
+                    ____t_result_92 = __O[952]
                 end
                 if ____t_93(____t_result_92) then
                     f.feito = true
@@ -2164,11 +2164,11 @@ local __O = {};
             local ____t_result_96
             local ____t_95 = __t
             local ____temp_94 = B.st == "espera" and __gt(P.x, arena.l + 60)
-            __O[952] = ____temp_94
+            __O[953] = ____temp_94
             if ____t_95(____temp_94) then
                 ____t_result_96 = not __t(vencido)
             else
-                ____t_result_96 = __O[952]
+                ____t_result_96 = __O[953]
             end
             if ____t_97(____t_result_96) then
                 arena.ativa = true
@@ -3284,9 +3284,9 @@ local __O = {};
                             local ____t_result_165
                             local ____t_164 = __t
                             local ____temp_163 = math.abs(e.vx) > 5
-                            __O[960] = ____temp_163
+                            __O[961] = ____temp_163
                             if ____t_164(____temp_163) then
-                                ____t_result_165 = __O[960]
+                                ____t_result_165 = __O[961]
                             else
                                 ____t_result_165 = e.st == "patrulha" and math.abs(P.x - e.x) < 430
                             end
@@ -3383,11 +3383,11 @@ local __O = {};
                 local ____t_result_172
                 local ____t_171 = __t
                 local ____temp_170 = B.fase >= 2 and not __t(caido)
-                __O[961] = ____temp_170
+                __O[962] = ____temp_170
                 if ____t_171(____temp_170) then
                     ____t_result_172 = slug ~= "jorge"
                 else
-                    ____t_result_172 = __O[961]
+                    ____t_result_172 = __O[962]
                 end
                 local aura = ____t_result_172
                 if __t(aura) then
@@ -3422,11 +3422,11 @@ local __O = {};
                 local ____t_result_177
                 local ____t_176 = __t
                 local ____temp_175 = not __t(caido)
-                __O[962] = ____temp_175
+                __O[963] = ____temp_175
                 if ____t_176(____temp_175) then
                     ____t_result_177 = pisca(nil, B)
                 else
-                    ____t_result_177 = __O[962]
+                    ____t_result_177 = __O[963]
                 end
                 if ____t_178(____t_result_177) then
                     c.globalAlpha = 0.25
@@ -3459,11 +3459,11 @@ local __O = {};
                     local ____t_result_185
                     local ____t_184 = __t
                     local ____temp_183 = slug == "jorge"
-                    __O[963] = ____temp_183
+                    __O[964] = ____temp_183
                     if ____t_184(____temp_183) then
                         ____t_result_185 = luta
                     else
-                        ____t_result_185 = __O[963]
+                        ____t_result_185 = __O[964]
                     end
                     if ____t_186(____t_result_185) then
                         window.JorgeDuelo:personagem(c, luta, pose)
@@ -3483,11 +3483,11 @@ local __O = {};
                         local ____t_result_189
                         local ____t_188 = __t
                         local ____temp_187 = slug == "jorge"
-                        __O[964] = ____temp_187
+                        __O[965] = ____temp_187
                         if ____t_188(____temp_187) then
                             ____t_result_189 = caido
                         else
-                            ____t_result_189 = __O[964]
+                            ____t_result_189 = __O[965]
                         end
                         ____personagem_192(
                             nil,
@@ -3504,11 +3504,11 @@ local __O = {};
                 local ____t_result_195
                 local ____t_194 = __t
                 local ____temp_193 = B.st == "carga"
-                __O[965] = ____temp_193
+                __O[966] = ____temp_193
                 if ____t_194(____temp_193) then
                     ____t_result_195 = luta
                 else
-                    ____t_result_195 = __O[965]
+                    ____t_result_195 = __O[966]
                 end
                 if ____t_196(____t_result_195) then
                     txt(
@@ -3556,11 +3556,11 @@ local __O = {};
                 else
                     ____t_result_197 = B2
                 end
-                __O[966] = ____t_result_197
+                __O[967] = ____t_result_197
                 if ____t_198(____t_result_197) then
                     ____t_result_199 = B.st ~= "entrada"
                 else
-                    ____t_result_199 = __O[966]
+                    ____t_result_199 = __O[967]
                 end
                 if ____t_200(____t_result_199) then
                     c:save()
@@ -3576,11 +3576,11 @@ local __O = {};
                     local ____t_result_203
                     local ____t_202 = __t
                     local ____temp_201 = not __t(caido)
-                    __O[967] = ____temp_201
+                    __O[968] = ____temp_201
                     if ____t_202(____temp_201) then
                         ____t_result_203 = pisca(nil, B2)
                     else
-                        ____t_result_203 = __O[967]
+                        ____t_result_203 = __O[968]
                     end
                     if ____t_204(____t_result_203) then
                         c.globalAlpha = 0.25
@@ -3667,11 +3667,11 @@ local __O = {};
                 local ____t_result_207
                 local ____t_206 = __t
                 local ____temp_205 = falaVida > 0 and not __t(caido)
-                __O[968] = ____temp_205
+                __O[969] = ____temp_205
                 if ____t_206(____temp_205) then
                     ____t_result_207 = B.st ~= "espera"
                 else
-                    ____t_result_207 = __O[968]
+                    ____t_result_207 = __O[969]
                 end
                 if ____t_208(____t_result_207) then
                     c.font = "bold 13px Space, Arial, sans-serif"
@@ -3797,11 +3797,11 @@ local __O = {};
             else
                 ____t_result_209 = arena.ativa
             end
-            __O[969] = ____t_result_209
+            __O[970] = ____t_result_209
             if ____t_210(____t_result_209) then
                 ____t_result_211 = B.st ~= "entrada"
             else
-                ____t_result_211 = __O[969]
+                ____t_result_211 = __O[970]
             end
             if ____t_212(____t_result_211) then
                 local w = 420
@@ -3854,9 +3854,9 @@ local __O = {};
                     }, 5),
                     B.fase - 1
                 )
-                __O[970] = ____get_result_213
+                __O[971] = ____get_result_213
                 if ____t_214(____get_result_213) then
-                    ____t_result_215 = __O[970]
+                    ____t_result_215 = __O[971]
                 else
                     ____t_result_215 = "#e8433a"
                 end
@@ -4040,11 +4040,11 @@ local __O = {};
                     local ____t_result_226
                     local ____t_225 = __t
                     local ____temp_224 = B.st ~= "espera" and B.st ~= "derrotado"
-                    __O[971] = ____temp_224
+                    __O[972] = ____temp_224
                     if ____t_225(____temp_224) then
                         ____t_result_226 = B.st ~= "entrada"
                     else
-                        ____t_result_226 = __O[971]
+                        ____t_result_226 = __O[972]
                     end
                     if ____t_227(____t_result_226) then
                         local ____t_result_228

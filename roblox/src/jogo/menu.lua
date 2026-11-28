@@ -85,9 +85,9 @@ local __O = {};
                         __re("iPhone|iPad|iPod", ""),
                         window.navigator.userAgent
                     )
-                    __O[2488] = ____re_test_result_17
+                    __O[2493] = ____re_test_result_17
                     if ____t_18(____re_test_result_17) then
-                        ____t_result_19 = __O[2488]
+                        ____t_result_19 = __O[2493]
                     else
                         ____t_result_19 = window.navigator.platform == "MacIntel" and window.navigator.maxTouchPoints > 1
                     end
@@ -99,21 +99,21 @@ local __O = {};
                     local ____t_result_22
                     local ____t_21 = __t
                     local ____temp_20 = not not __t(window.navigator.standalone)
-                    __O[2489] = ____temp_20
+                    __O[2494] = ____temp_20
                     if ____t_21(____temp_20) then
-                        ____t_result_22 = __O[2489]
+                        ____t_result_22 = __O[2494]
                     else
                         ____t_result_22 = window:matchMedia("(display-mode: standalone)").matches
                     end
-                    __O[2490] = ____t_result_22
+                    __O[2495] = ____t_result_22
                     if ____t_23(____t_result_22) then
-                        ____t_result_24 = __O[2490]
+                        ____t_result_24 = __O[2495]
                     else
                         ____t_result_24 = window.location.protocol == "file:"
                     end
-                    __O[2491] = ____t_result_24
+                    __O[2496] = ____t_result_24
                     if ____t_25(____t_result_24) then
-                        ____t_result_26 = __O[2491]
+                        ____t_result_26 = __O[2496]
                     else
                         ____t_result_26 = __call(
                             __new("URLSearchParams", window.location.search),
@@ -131,7 +131,7 @@ local __O = {};
                     else
                         ____t_result_27 = ios
                     end
-                    __O[2492] = ____t_result_27
+                    __O[2497] = ____t_result_27
                     if ____t_28(____t_result_27) then
                         local ____t_34 = __t
                         local ____opt_31 = window.GameView
@@ -144,7 +144,7 @@ local __O = {};
                         end
                         ____t_result_35 = not ____t_34(____opt_result_33)
                     else
-                        ____t_result_35 = __O[2492]
+                        ____t_result_35 = __O[2497]
                     end
                     if ____t_36(____t_result_35) then
                         local ____opt_39 = window.GameInstall
@@ -227,23 +227,23 @@ local __O = {};
         if state ~= nil then
             ____opt_result_45 = state.started
         end
-        __O[2493] = ____opt_result_45
+        __O[2498] = ____opt_result_45
         if ____t_46(____opt_result_45) then
             ____t_result_47 = not __t(state.paused)
         else
-            ____t_result_47 = __O[2493]
+            ____t_result_47 = __O[2498]
         end
-        __O[2494] = ____t_result_47
+        __O[2499] = ____t_result_47
         if ____t_48(____t_result_47) then
             ____t_result_49 = not __t(state.won)
         else
-            ____t_result_49 = __O[2494]
+            ____t_result_49 = __O[2499]
         end
-        __O[2495] = ____t_result_49
+        __O[2500] = ____t_result_49
         if ____t_50(____t_result_49) then
             ____t_result_51 = not __t(state.defeated)
         else
-            ____t_result_51 = __O[2495]
+            ____t_result_51 = __O[2500]
         end
         resumeAfterInfo = not not ____t_52(____t_result_51)
         local ____opt_55 = window.Game
@@ -301,15 +301,15 @@ local __O = {};
                 local ____t_result_71
                 local ____t_70 = __t
                 local ____temp_69 = event.clientX < r.left or event.clientX > r.right
-                __O[2496] = ____temp_69
+                __O[2501] = ____temp_69
                 if ____t_70(____temp_69) then
-                    ____t_result_71 = __O[2496]
+                    ____t_result_71 = __O[2501]
                 else
                     ____t_result_71 = event.clientY < r.top
                 end
-                __O[2497] = ____t_result_71
+                __O[2502] = ____t_result_71
                 if ____t_72(____t_result_71) then
-                    ____t_result_73 = __O[2497]
+                    ____t_result_73 = __O[2502]
                 else
                     ____t_result_73 = event.clientY > r.bottom
                 end
@@ -412,21 +412,21 @@ local __O = {};
             else
                 ____t_result_88 = state.room
             end
-            __O[2498] = ____t_result_88
+            __O[2503] = ____t_result_88
             if ____t_89(____t_result_88) then
-                ____t_result_90 = __O[2498]
+                ____t_result_90 = __O[2503]
             else
                 ____t_result_90 = state.cutscene
             end
-            __O[2499] = ____t_result_90
+            __O[2504] = ____t_result_90
             if ____t_91(____t_result_90) then
-                ____t_result_92 = __O[2499]
+                ____t_result_92 = __O[2504]
             else
                 ____t_result_92 = state.activity
             end
-            __O[2500] = ____t_result_92
+            __O[2505] = ____t_result_92
             if ____t_93(____t_result_92) then
-                ____t_result_96 = __O[2500]
+                ____t_result_96 = __O[2505]
             else
                 local ____opt_94 = state.training
                 if ____opt_94 ~= nil then

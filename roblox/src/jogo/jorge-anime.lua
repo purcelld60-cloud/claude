@@ -212,9 +212,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.JorgeEpilogue)
-    __O[1563] = ____temp_0
+    __O[1564] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[1563]
+        ____t_result_2 = __O[1564]
     else
         ____t_result_2 = window.JorgeAnime
     end
@@ -3292,9 +3292,9 @@ local __O = {};
         local ____t_result_35
         local ____t_34 = __t
         local ____temp_33 = flashT < 0.08
-        __O[1564] = ____temp_33
+        __O[1565] = ____temp_33
         if ____t_34(____temp_33) then
-            ____t_result_35 = __O[1564]
+            ____t_result_35 = __O[1565]
         else
             ____t_result_35 = flashT > 0.16 and flashT < 0.22
         end
@@ -3610,9 +3610,9 @@ local __O = {};
         local ____t_result_38
         local ____t_37 = __t
         local ____TS__Number_result_36 = __TS__Number(s.index)
-        __O[1565] = ____TS__Number_result_36
+        __O[1566] = ____TS__Number_result_36
         if ____t_37(____TS__Number_result_36) then
-            ____t_result_38 = __O[1565]
+            ____t_result_38 = __O[1566]
         else
             ____t_result_38 = 0
         end
@@ -3626,9 +3626,9 @@ local __O = {};
         local ____t_result_41
         local ____t_40 = __t
         local ____TS__Number_result_39 = __TS__Number(s.time)
-        __O[1566] = ____TS__Number_result_39
+        __O[1567] = ____TS__Number_result_39
         if ____t_40(____TS__Number_result_39) then
-            ____t_result_41 = __O[1566]
+            ____t_result_41 = __O[1567]
         else
             ____t_result_41 = 0
         end
@@ -3641,9 +3641,9 @@ local __O = {};
         local ____t_result_44
         local ____t_43 = __t
         local ____get_result_42 = __get(RENDER, shot.id)
-        __O[1567] = ____get_result_42
+        __O[1568] = ____get_result_42
         if ____t_43(____get_result_42) then
-            ____t_result_44 = __O[1567]
+            ____t_result_44 = __O[1568]
         else
             ____t_result_44 = eyes
         end

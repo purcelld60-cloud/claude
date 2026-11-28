@@ -35,6 +35,7 @@ function C.copiar(destino, origem)
   local D, O = destino._, origem._
   if D.w ~= O.w or D.h ~= O.h then return false end
   if buffer then buffer.copy(D.px, 0, O.px, 0, D.w * D.h * 4) else local a, b = D.px, O.px; for i = 1, D.w * D.h do a[i] = b[i] end end
+  D.versao = (D.versao or 0) + 1; D.fonte = nil; D.uniforme = nil
   return true
 end
 
@@ -152,7 +153,7 @@ local function misturar(op, v, r, g, b, a)
       local A = da / 255
       sr = sr * A + r * (1 - A); sg = sg * A + g * (1 - A); sb = sb * A + b * (1 - A)
     end
-    if da == 0 then nr, ng, nb, na = sr, sg, sb, a
+    if da == 0 then nr, ng, nb, na = r, g, b, a -- sem cor embaixo, fica a cor do desenho (como no navegador)
     elseif da == 255 then local k = 1 - a; nr = sr * a + dr * k; ng = sg * a + dg * k; nb = sb * a + db * k; na = 1
     else local A = da / 255; local oa = a + A * (1 - a); if oa <= 0 then return v end; local k = A * (1 - a)
       nr = (sr * a + dr * k) / oa; ng = (sg * a + dg * k) / oa; nb = (sb * a + db * k) / oa; na = oa end
@@ -180,6 +181,7 @@ local function modoSeparavel(nome, f)
       local k = 1 - a
       return floor(T[floor(r + .5) * 256 + dr] * a + dr * k + .5) + floor(T[floor(g + .5) * 256 + dg] * a + dg * k + .5) * 256 + floor(T[floor(b + .5) * 256 + db] * a + db * k + .5) * 65536 + OPACO
     end
+    if v < 16777216 then return floor(r + .5) + floor(g + .5) * 256 + floor(b + .5) * 65536 + floor(a * 255 + .5) * 16777216 end -- fundo transparente
     return misturar(nome, v, r, g, b, a)
   end
 end
@@ -196,6 +198,7 @@ local MODOS = {
   ["lighter"] = function(v, r, g, b, a)
     if v >= OPACO then local x, y, z = (v % 256) + r * a, (v // 256 % 256) + g * a, (v // 65536 % 256) + b * a
       return floor((x > 255 and 255 or x) + .5) + floor((y > 255 and 255 or y) + .5) * 256 + floor((z > 255 and 255 or z) + .5) * 65536 + OPACO end
+    if v < 16777216 then return floor(r + .5) + floor(g + .5) * 256 + floor(b + .5) * 65536 + floor(a * 255 + .5) * 16777216 end -- fundo transparente
     return misturar("lighter", v, r, g, b, a)
   end,
   ["multiply"] = modoSeparavel("multiply", function(d, s) return d * s / 255 end),
@@ -244,7 +247,7 @@ end
 -- cria um canvas (largura/altura mudam pelo próprio objeto, como no navegador)
 function C.novo(w, h)
   local cv, priv = {}, { w = max(0, floor(tonumber(w) or 300)), h = max(0, floor(tonumber(h) or 150)) }
-  local function limpar() priv.px = novosPixels(priv.w * priv.h) end
+  local function limpar() priv.px = novosPixels(priv.w * priv.h); priv.versao = (priv.versao or 0) + 1; priv.fonte = nil; priv.uniforme = 0 end
   limpar(); priv.limpar = limpar
   priv.versao = 0
   setmetatable(cv, {
@@ -341,10 +344,12 @@ function C.contexto(cv)
           local pos = (i - 1) * 4
           local v = RD(px, pos)
           if v == antes then WR(px, pos, depois)
-          elseif v >= OPACO then
-            depois = floor(ra + (v % 256) * k + .5) + floor(ga2 + (v // 256 % 256) * k + .5) * 256 + floor(ba + (v // 65536 % 256) * k + .5) * 65536 + OPACO
+          else
+            if v >= OPACO then depois = floor(ra + (v % 256) * k + .5) + floor(ga2 + (v // 256 % 256) * k + .5) * 256 + floor(ba + (v // 65536 % 256) * k + .5) * 65536 + OPACO
+            elseif v < 16777216 then depois = floor(r + .5) + floor(g + .5) * 256 + floor(b + .5) * 65536 + floor(a * 255 + .5) * 16777216 -- fundo transparente
+            else depois = misturar(o, v, r, g, b, a) end
             antes = v; WR(px, pos, depois)
-          else WR(px, pos, misturar(o, v, r, g, b, a)) end
+          end
         end
       end
       return
@@ -729,8 +734,54 @@ function C.contexto(cv)
   -- cópia da tela inteira de outro canvas do mesmo tamanho (o jogo usa para o fundo guardado das lutas)
   ctx.copiarTela = function(outro) pausa(); if type(outro) ~= "table" or not outro._ then return false end; return C.copiar(cv, outro) end
 
-  -- o jogo chama ctx:metodo(...) (com o próprio ctx na frente)
-  for k, f in pairs(ctx) do if type(f) == "function" and k:sub(1, 2) ~= "__" then api[k] = f; ctx[k] = function(_, ...) return f(...) end end end
+  -- Roblox em camadas: este canvas aparece na tela mostrando outro canvas (menor), ampliado pela placa de vídeo
+  -- (a tela inicial desenha a roça em 480x270 e não precisa ampliar pixel a pixel)
+  ctx.usarFonte = function(fonte) P.fonte = (type(fonte) == "table" and fonte._) and fonte or nil; P.versao = P.versao + 1 end
+  -- outro canvas mostrado embaixo deste, recortado (sx, sy, sw, sh) e ampliado para o tamanho deste, deslocado (dx, dy):
+  -- as cenas do roteiro desenham o mundo à parte e o zoom fica com a placa de vídeo
+  -- (somar: empilha mais uma, por cima das que já estão; senão substitui)
+  ctx.camadaAbaixo = function(fonte, sx, sy, sw, sh, dx, dy, somar)
+    if type(fonte) ~= "table" or not fonte._ then if not somar then P.abaixos = nil end; return end
+    local item = { fonte = fonte, sx = tonumber(sx) or 0, sy = tonumber(sy) or 0, sw = tonumber(sw) or fonte.width, sh = tonumber(sh) or fonte.height, dx = tonumber(dx) or 0, dy = tonumber(dy) or 0 }
+    if somar and P.abaixos then P.abaixos[#P.abaixos + 1] = item else P.abaixos = { item } end
+    P.versao = P.versao + 1
+  end
+
+  -- canvas inteiro de uma cor só (acabou de ser limpo ou pintado por inteiro): uma camada de cor por cima da tela toda
+  -- (escurecer, clarear, fade) vira uma cor nova pintada de uma vez, sem misturar pixel por pixel
+  local function tentarUniforme(x, y, w, h)
+    if clipMask or clipRect or opAtual() or m[2] ~= 0 or m[3] ~= 0 or m[1] ~= 1 or m[4] ~= 1 then return false end
+    x, y, w, h = tonumber(x) or 0, tonumber(y) or 0, tonumber(w) or 0, tonumber(h) or 0
+    local x0, y0 = x + m[5], y + m[6]
+    if x0 > 0 or y0 > 0 or x0 + w < P.w or y0 + h < P.h then return false end
+    local estilo = estiloDe(ctx.fillStyle); if estilo.__grad then return false end
+    local a = estilo[4] * alfaGlobal(); if a <= 0 then return true end
+    local v = sobre(P.uniforme, estilo[1], estilo[2], estilo[3], a)
+    P.uniforme = v
+    pintarLinha(P.px, 0, P.w * P.h, v)
+    return true
+  end
+
+  -- o jogo chama ctx:metodo(...) (com o próprio ctx na frente); quem desenha conta uma versão nova do canvas
+  -- (o Roblox só envia de novo para a placa de vídeo o canvas que mudou)
+  local ESCREVE = { fillRect = true, clearRect = true, strokeRect = true, fill = true, stroke = true, drawImage = true, putImageData = true, fillText = true, strokeText = true, copiarTela = true, multiplicarCor = true }
+  for k, f in pairs(ctx) do if type(f) == "function" and k:sub(1, 2) ~= "__" then
+    api[k] = f
+    if k == "clearRect" then ctx[k] = function(_, x, y, w, h)
+      P.versao = P.versao + 1; P.fonte = nil
+      local tudo = (tonumber(x) or 0) <= 0 and (tonumber(y) or 0) <= 0 and (tonumber(w) or 0) >= P.w and (tonumber(h) or 0) >= P.h and m[1] == 1 and m[4] == 1 and m[2] == 0 and m[3] == 0 and m[5] == 0 and m[6] == 0 and not clipMask and not clipRect
+      if tudo then P.abaixos = nil end
+      local r = f(x, y, w, h)
+      P.uniforme = tudo and 0 or nil
+      return r end
+    elseif k == "fillRect" then ctx[k] = function(_, x, y, w, h)
+      P.versao = P.versao + 1; P.fonte = nil
+      if P.uniforme and tentarUniforme(x, y, w, h) then return end
+      P.uniforme = nil
+      return f(x, y, w, h) end
+    elseif ESCREVE[k] then ctx[k] = function(_, ...) P.versao = P.versao + 1; P.fonte = nil; P.uniforme = nil; return f(...) end
+    else ctx[k] = function(_, ...) return f(...) end end
+  end end
   return ctx
 end
 

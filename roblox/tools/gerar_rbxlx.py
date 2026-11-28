@@ -60,6 +60,10 @@ def script(caminho: Path):
     else:
         classe, nome = "ModuleScript", nome[: -len(".lua")]
     fonte = caminho.read_text(encoding="utf-8")
+    if SEM_NATIVO and fonte.startswith("--!native"):
+        # versão de teste: no servidor, roda sem código nativo, como no aparelho do jogador (o Roblox só compila
+        # código nativo no servidor e no Studio)
+        fonte = "--" + fonte[len("--!native"):]
     return item(classe, nome, f'<ProtectedString name="Source">{cdata(fonte)}</ProtectedString>')
 
 
@@ -74,6 +78,7 @@ def pasta(caminho: Path, nome: str):
 
 
 VERSAO = os.environ.get("DAROCA_VERSAO", "local")
+SEM_NATIVO = os.environ.get("DAROCA_SEM_NATIVO") == "1"
 
 
 def no(nome, d):

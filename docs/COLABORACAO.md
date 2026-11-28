@@ -516,4 +516,33 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - a MÉDIA ainda pesa (acabamento dos personagens, ~130 ms por quadro), por isso as qualidades 1 a 7 do Roblox
       usam a BAIXA;
     - a luz direcional do sol (`dirLight`) não entra nas camadas.
+- **28/11 · Claude:** **Roblox: o aparelho do jogador não tem código nativo, então medi sem ele e cortei o que pesava.**
+  - **Medir como no aparelho:** o Roblox só compila `--!native` no servidor e no Studio
+    ([docs](https://create.roblox.com/docs/luau/native-code-gen)). `DAROCA_SEM_NATIVO=1` no `gerar_rbxlx.py` gera
+    uma versão de teste sem nativo, para medir no servidor como roda no aparelho.
+  - **Canvas da página viram camadas:**
+    - todo canvas visível da página (jogo, fundo da tela inicial, logo, telão dos minigames) vira uma imagem
+      própria no Roblox, enviada só quando o canvas muda (`P.versao`);
+    - `ctx.usarFonte(cv)`: a tela inicial mostra a roça 480×270 ampliada pela placa de vídeo;
+    - `ctx.camadaAbaixo(cv, sx, sy, sw, sh, dx, dy, somar)`: as cenas do roteiro passam o mundo (personagens) e os
+      efeitos parados (vinheta, noite, memória) como imagens embaixo do canvas, com o zoom feito pela placa de
+      vídeo (`DAROCA_QUADRO_ZOOM`).
+  - **Cenas de história:**
+    - `Cinematics` (`DAROCA_FUNDO_CAMADAS`) e `roteiro.js` (`DAROCA_FUNDO_MUNDO`) usam o cenário em camadas;
+    - a hora travada da cena vai junto (`DAROCA_QUADRO_HORA`).
+  - **Canvas mais rápido:**
+    - canvas de uma cor só pinta uma camada de cor inteira de uma vez (`P.uniforme`);
+    - mistura sobre pixel transparente vai direto (antes caía na `misturar` genérica, pixel a pixel);
+    - correção: modo de mistura sobre fundo transparente dá a cor do desenho, como no navegador.
+  - **Arena:** no Roblox entra em 0,08 s (`ARENA_FADE`), sem a mistura de 0,6 s.
+  - **Painel F3 no cliente:** quadros por segundo e milissegundos de cada parte.
+  - **Medido sem nativo, na BAIXA:**
+
+    | Parte | Antes | Agora |
+    | --- | --- | --- |
+    | Tela inicial | 85 ms | 25 ms |
+    | Abertura | 180 ms | 49 ms + cenário |
+    | Roça andando | 28 ms | 22 ms |
+    | Luta entrando | 312 ms | 40 ms |
+    | Campanha 2 | 86 ms | 15 ms |
 

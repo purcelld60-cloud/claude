@@ -17,9 +17,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.DAROCA_DEV)
-    __O[1088] = ____temp_0
+    __O[1089] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[1088]
+        ____t_result_2 = __O[1089]
     else
         ____t_result_2 = window.DarocaDev
     end
@@ -340,9 +340,9 @@ local __O = {};
         if ____opt_41 ~= nil then
             ____opt_result_43 = ____opt_41(____opt_41)
         end
-        __O[1089] = ____opt_result_43
+        __O[1090] = ____opt_result_43
         if ____t_44(____opt_result_43) then
-            ____t_result_45 = __O[1089]
+            ____t_result_45 = __O[1090]
         else
             ____t_result_45 = __arrL({}, 0)
         end
@@ -374,9 +374,9 @@ local __O = {};
                 local ____t_result_57
                 local ____t_56 = __t
                 local ____temp_55 = window.localStorage:getItem("daroca-c2-save")
-                __O[1090] = ____temp_55
+                __O[1091] = ____temp_55
                 if ____t_56(____temp_55) then
-                    ____t_result_57 = __O[1090]
+                    ____t_result_57 = __O[1091]
                 else
                     ____t_result_57 = "null"
                 end
@@ -521,9 +521,9 @@ local __O = {};
             local ____t_result_71
             local ____t_70 = __t
             local ____temp_69 = not __t(C:advance(s))
-            __O[1091] = ____temp_69
+            __O[1092] = ____temp_69
             if ____t_70(____temp_69) then
-                ____t_result_71 = __O[1091]
+                ____t_result_71 = __O[1092]
             else
                 ____t_result_71 = s.done
             end
@@ -649,9 +649,9 @@ local __O = {};
         if ____opt_79 ~= nil then
             ____opt_79 = ____opt_79.metadata
         end
-        __O[1092] = ____opt_79
+        __O[1093] = ____opt_79
         if ____t_81(____opt_79) then
-            ____t_result_82 = __O[1092]
+            ____t_result_82 = __O[1093]
         else
             ____t_result_82 = {}
         end
@@ -674,9 +674,9 @@ local __O = {};
         if ____opt_result_89 ~= nil then
             ____opt_result_90 = ____opt_result_89(R)
         end
-        __O[1093] = ____opt_result_90
+        __O[1094] = ____opt_result_90
         if ____t_91(____opt_result_90) then
-            ____t_result_92 = __O[1093]
+            ____t_result_92 = __O[1094]
         else
             ____t_result_92 = __arrL({}, 0)
         end
@@ -699,9 +699,9 @@ local __O = {};
         if ____opt_96 ~= nil then
             ____opt_result_98 = ____opt_96(____opt_96)
         end
-        __O[1094] = ____opt_result_98
+        __O[1095] = ____opt_result_98
         if ____t_99(____opt_result_98) then
-            ____t_result_100 = __O[1094]
+            ____t_result_100 = __O[1095]
         else
             ____t_result_100 = __arrL({}, 0)
         end
@@ -725,9 +725,9 @@ local __O = {};
                         if ____opt_102 ~= nil then
                             ____opt_102 = ____opt_102.title
                         end
-                        __O[1095] = ____opt_102
+                        __O[1096] = ____opt_102
                         if ____t_104(____opt_102) then
-                            ____t_result_105 = __O[1095]
+                            ____t_result_105 = __O[1096]
                         else
                             ____t_result_105 = id
                         end
@@ -797,9 +797,9 @@ local __O = {};
         local ____t_result_115
         local ____t_114 = __t
         local ____temp_113 = not __t(lista)
-        __O[1096] = ____temp_113
+        __O[1097] = ____temp_113
         if ____t_114(____temp_113) then
-            ____t_result_115 = __O[1096]
+            ____t_result_115 = __O[1097]
         else
             ____t_result_115 = lista:querySelector("[data-dev-cut]")
         end

@@ -15,9 +15,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Cinematics)
-    __O[1568] = ____temp_0
+    __O[1569] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[1568]
+        ____t_result_2 = __O[1569]
     else
         ____t_result_2 = window.CinemaFx
     end
@@ -377,9 +377,9 @@ local __O = {};
                     local ____t_result_16
                     local ____t_15 = __t
                     local ____temp_14 = __mod(st, 3.3) < 0.09
-                    __O[1569] = ____temp_14
+                    __O[1570] = ____temp_14
                     if ____t_15(____temp_14) then
-                        ____t_result_16 = __O[1569]
+                        ____t_result_16 = __O[1570]
                     else
                         ____t_result_16 = __mod(st, 3.3) > 0.18 and __mod(st, 3.3) < 0.24
                     end
@@ -436,9 +436,9 @@ local __O = {};
         local ____t_result_21
         local ____t_20 = __t
         local ____temp_19 = not __t(c) or not __t(s)
-        __O[1570] = ____temp_19
+        __O[1571] = ____temp_19
         if ____t_20(____temp_19) then
-            ____t_result_21 = __O[1570]
+            ____t_result_21 = __O[1571]
         else
             ____t_result_21 = lite(nil)
         end
@@ -463,9 +463,9 @@ local __O = {};
             local ____t_result_27
             local ____t_26 = __t
             local ____TS__Number_result_25 = __TS__Number(s.elapsed)
-            __O[1571] = ____TS__Number_result_25
+            __O[1572] = ____TS__Number_result_25
             if ____t_26(____TS__Number_result_25) then
-                ____t_result_27 = __O[1571]
+                ____t_result_27 = __O[1572]
             else
                 ____t_result_27 = 0
             end
@@ -495,9 +495,9 @@ local __O = {};
         local ____t_result_41
         local ____t_40 = __t
         local ____TS__Number_result_39 = __TS__Number(s.time)
-        __O[1572] = ____TS__Number_result_39
+        __O[1573] = ____TS__Number_result_39
         if ____t_40(____TS__Number_result_39) then
-            ____t_result_41 = __O[1572]
+            ____t_result_41 = __O[1573]
         else
             ____t_result_41 = 0
         end
@@ -508,9 +508,9 @@ local __O = {};
         if b ~= nil then
             ____opt_result_44 = b.duration
         end
-        __O[1573] = ____opt_result_44
+        __O[1574] = ____opt_result_44
         if ____t_45(____opt_result_44) then
-            ____t_result_46 = __O[1573]
+            ____t_result_46 = __O[1574]
         else
             ____t_result_46 = 8
         end
@@ -518,9 +518,9 @@ local __O = {};
         local ____t_result_49
         local ____t_48 = __t
         local ____TS__Number_result_47 = __TS__Number(s.elapsed)
-        __O[1574] = ____TS__Number_result_47
+        __O[1575] = ____TS__Number_result_47
         if ____t_48(____TS__Number_result_47) then
-            ____t_result_49 = __O[1574]
+            ____t_result_49 = __O[1575]
         else
             ____t_result_49 = st
         end

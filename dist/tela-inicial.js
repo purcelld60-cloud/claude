@@ -463,7 +463,7 @@
   function desenhar(ctx, segundos, w = 960, h = 540) {
     const dt = ultimo ? clamp(segundos - ultimo, 0, .1) : 1 / 30; ultimo = segundos;
     if (!reduzido) atualizar(dt); else tempo += dt;
-    desenharCena(); ctx.imageSmoothingEnabled = false; ctx.drawImage(cena, 0, 0, w, h);
+    desenharCena(); ctx.imageSmoothingEnabled = false; if (ctx.usarFonte) ctx.usarFonte(cena); else ctx.drawImage(cena, 0, 0, w, h); // Roblox: a placa de vídeo amplia a roça
     desenharLogo(segundos);
   }
   if (window.Art) window.Art.drawTitleScene = desenhar;

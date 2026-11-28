@@ -590,11 +590,11 @@ local __O = {};
                         local ____t_result_5
                         local ____t_4 = __t
                         local ____temp_3 = incl < -1.2 and prof > 0.3
-                        __O[1337] = ____temp_3
+                        __O[1338] = ____temp_3
                         if ____t_4(____temp_3) then
                             ____t_result_5 = __mod(x + y, 2) == 0
                         else
-                            ____t_result_5 = __O[1337]
+                            ____t_result_5 = __O[1338]
                         end
                         if ____t_6(____t_result_5) then
                             cor = medio
@@ -603,11 +603,11 @@ local __O = {};
                         local ____t_result_9
                         local ____t_8 = __t
                         local ____temp_7 = incl > 1.2 and prof > 0.45
-                        __O[1338] = ____temp_7
+                        __O[1339] = ____temp_7
                         if ____t_8(____temp_7) then
                             ____t_result_9 = __mod(x + y, 2) == 0
                         else
-                            ____t_result_9 = __O[1338]
+                            ____t_result_9 = __O[1339]
                         end
                         if ____t_10(____t_result_9) then
                             cor = medio
@@ -621,17 +621,17 @@ local __O = {};
                             math.floor(y + math.sin(x * 0.05) * 3 + 0.5),
                             9
                         ) == 0 and prof > 0.12
-                        __O[1339] = ____temp_11
+                        __O[1340] = ____temp_11
                         if ____t_12(____temp_11) then
                             ____t_result_13 = prof < 0.7
                         else
-                            ____t_result_13 = __O[1339]
+                            ____t_result_13 = __O[1340]
                         end
-                        __O[1340] = ____t_result_13
+                        __O[1341] = ____t_result_13
                         if ____t_14(____t_result_13) then
                             ____t_result_15 = __mod(x + y, 3) ~= 0
                         else
-                            ____t_result_15 = __O[1340]
+                            ____t_result_15 = __O[1341]
                         end
                         if ____t_16(____t_result_15) then
                             cor = escuro
@@ -718,11 +718,11 @@ local __O = {};
                         local ____t_result_19
                         local ____t_18 = __t
                         local ____temp_17 = faixa == 0 and __mod(x, 4) == 0
-                        __O[1341] = ____temp_17
+                        __O[1342] = ____temp_17
                         if ____t_18(____temp_17) then
                             ____t_result_19 = __mod(y, 4) == 0
                         else
-                            ____t_result_19 = __O[1341]
+                            ____t_result_19 = __O[1342]
                         end
                         if ____t_20(____t_result_19) then
                             cor = tom(nil, "#2f6a34", noite)

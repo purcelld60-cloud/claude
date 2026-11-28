@@ -18,6 +18,7 @@ local __TS__New = ____lualib.__TS__New
 local __TS__AsyncAwaiter = ____lualib.__TS__AsyncAwaiter
 local __TS__Await = ____lualib.__TS__Await
 local __TS__PromiseAll = ____lualib.__TS__PromiseAll
+local Map = ____lualib.Map
 local __TS__Spread = ____lualib.__TS__Spread
 local ____exports = {}
 local __O = {};
@@ -370,28 +371,28 @@ local __O = {};
             jorge = __arrL({"jorge", "jorge_celular", "jorge_gordo"}, 3),
             daroca = __arrL({"daroca", "carro"}, 2)
         }
-        local ____t_result_334
-        local ____t_333 = __t
-        local ____get_result_332 = __get(alias, b.who)
-        __O[790] = ____get_result_332
-        if ____t_333(____get_result_332) then
-            ____t_result_334 = __O[790]
+        local ____t_result_341
+        local ____t_340 = __t
+        local ____get_result_339 = __get(alias, b.who)
+        __O[791] = ____get_result_339
+        if ____t_340(____get_result_339) then
+            ____t_result_341 = __O[791]
         else
-            ____t_result_334 = __arrL({b.who}, 1)
+            ____t_result_341 = __arrL({b.who}, 1)
         end
-        local nomes = ____t_result_334
-        local ____t_result_337
-        local ____t_336 = __t
-        local ____call_result_335 = __call(
+        local nomes = ____t_result_341
+        local ____t_result_344
+        local ____t_343 = __t
+        local ____call_result_342 = __call(
             shot.actors,
             "find",
             function(____, x) return __call(nomes, "includes", x.type) end
         )
-        __O[791] = ____call_result_335
-        if ____t_336(____call_result_335) then
-            ____t_result_337 = __O[791]
+        __O[792] = ____call_result_342
+        if ____t_343(____call_result_342) then
+            ____t_result_344 = __O[792]
         else
-            ____t_result_337 = __call(
+            ____t_result_344 = __call(
                 shot.actors,
                 "find",
                 function(____, x) return __re_replace(
@@ -405,7 +406,7 @@ local __O = {};
                 ) end
             )
         end
-        local a = ____t_result_337
+        local a = ____t_result_344
         if not __t(a) then
             return nil
         end
@@ -432,35 +433,35 @@ local __O = {};
             math.max(0, H - H / z)
         )
         local hb = headBox(nil, a.type)
-        local ____temp_339 = 220 - hb.top
-        local ____t_result_338
+        local ____temp_346 = 220 - hb.top
+        local ____t_result_345
         if __t(a.scale) then
-            ____t_result_338 = a.scale
+            ____t_result_345 = a.scale
         else
-            ____t_result_338 = 1
+            ____t_result_345 = 1
         end
-        local alto = ____temp_339 * ____t_result_338
+        local alto = ____temp_346 * ____t_result_345
         local hx = p.x
         local hy = p.y - alto
         local by = p.y - alto * 0.72
-        local ____iter_344 = __iter
-        local ____call_343 = __call
-        local ____t_result_342
+        local ____iter_351 = __iter
+        local ____call_350 = __call
+        local ____t_result_349
         if __t(a.anim) then
-            ____t_result_342 = a.anim
+            ____t_result_349 = a.anim
         else
-            ____t_result_342 = ""
+            ____t_result_349 = ""
         end
-        for ____, nome in __TS__Iterator(____iter_344(____call_343(
-            tostring(____t_result_342),
+        for ____, nome in __TS__Iterator(____iter_351(____call_350(
+            tostring(____t_result_349),
             "split",
             "+"
         ))) do
-            local ____opt_340 = __get(EXT.anims, nome)
-            if ____opt_340 ~= nil then
-                ____opt_340 = ____opt_340.cabeca
+            local ____opt_347 = __get(EXT.anims, nome)
+            if ____opt_347 ~= nil then
+                ____opt_347 = ____opt_347.cabeca
             end
-            local f = ____opt_340
+            local f = ____opt_347
             if __t(f) then
                 local r = f(nil, {x = p.x, y = p.y, alto = alto, facing = p.o.facing})
                 hx = r.x
@@ -471,48 +472,48 @@ local __O = {};
         local x = (hx - camX - sx) * z
         local cabeca = (hy - sy) * z
         local boca = (by - sy) * z
-        local ____x_348 = x
-        local ____cabeca_349 = cabeca
-        local ____boca_350 = boca
-        local ____t_result_347
-        local ____t_346 = __t
-        local ____temp_345 = x < -20 or x > W + 20
-        __O[792] = ____temp_345
-        if ____t_346(____temp_345) then
-            ____t_result_347 = __O[792]
+        local ____x_355 = x
+        local ____cabeca_356 = cabeca
+        local ____boca_357 = boca
+        local ____t_result_354
+        local ____t_353 = __t
+        local ____temp_352 = x < -20 or x > W + 20
+        __O[793] = ____temp_352
+        if ____t_353(____temp_352) then
+            ____t_result_354 = __O[793]
         else
-            ____t_result_347 = cabeca > H
+            ____t_result_354 = cabeca > H
         end
-        return {x = ____x_348, cabeca = ____cabeca_349, boca = ____boca_350, fora = ____t_result_347}
+        return {x = ____x_355, cabeca = ____cabeca_356, boca = ____boca_357, fora = ____t_result_354}
     end
     function linhas(self, c, txt, max)
         local out = __arrL({}, 0)
         local l = ""
         for ____, w2 in __iterar((__call(txt, "split", " "))) do
-            local ____t_result_351
+            local ____t_result_358
             if __t(l) then
-                ____t_result_351 = __add(
+                ____t_result_358 = __add(
                     __add(l, " "),
                     w2
                 )
             else
-                ____t_result_351 = w2
+                ____t_result_358 = w2
             end
-            local tst = ____t_result_351
-            local ____t_355 = __t
-            local ____t_result_354
-            local ____t_353 = __t
-            local ____gt_result_352 = __gt(
+            local tst = ____t_result_358
+            local ____t_362 = __t
+            local ____t_result_361
+            local ____t_360 = __t
+            local ____gt_result_359 = __gt(
                 c:measureText(tst).width,
                 max
             )
-            __O[793] = ____gt_result_352
-            if ____t_353(____gt_result_352) then
-                ____t_result_354 = l
+            __O[794] = ____gt_result_359
+            if ____t_360(____gt_result_359) then
+                ____t_result_361 = l
             else
-                ____t_result_354 = __O[793]
+                ____t_result_361 = __O[794]
             end
-            if ____t_355(____t_result_354) then
+            if ____t_362(____t_result_361) then
                 __call(out, "push", l)
                 l = w2
             else
@@ -536,22 +537,22 @@ local __O = {};
             __re("[^A-Za-zÀ-ú]", "g"),
             ""
         )
-        local ____t_result_358
-        local ____t_357 = __t
-        local ____temp_356 = __gt(
+        local ____t_result_365
+        local ____t_364 = __t
+        local ____temp_363 = __gt(
             __len(letras),
             3
         ) and letras == __call(letras, "toUpperCase")
-        __O[794] = ____temp_356
-        if ____t_357(____temp_356) then
-            ____t_result_358 = __O[794]
+        __O[795] = ____temp_363
+        if ____t_364(____temp_363) then
+            ____t_result_365 = __O[795]
         else
-            ____t_result_358 = __re_test(
+            ____t_result_365 = __re_test(
                 __re("!!|\\?!|!\\?", ""),
                 cheio
             )
         end
-        local grito = ____t_result_358
+        local grito = ____t_result_365
         local pensa = __re_test(
             __re("^\\(.*\\)$", ""),
             __call(cheio, "trim")
@@ -587,14 +588,14 @@ local __O = {};
             c:fillRect(bx, by, bw, bh)
             c.fillStyle = "#e2c47a"
             c:fillRect(bx, by + bh - 4, bw, 4)
-            local ____t_360 = __t
-            local ____t_result_359
+            local ____t_367 = __t
+            local ____t_result_366
             if __t(b.speaker) then
-                ____t_result_359 = b.speaker ~= "Narrador"
+                ____t_result_366 = b.speaker ~= "Narrador"
             else
-                ____t_result_359 = b.speaker
+                ____t_result_366 = b.speaker
             end
-            if ____t_360(____t_result_359) then
+            if ____t_367(____t_result_366) then
                 c.font = "10px Pixel, monospace"
                 c.fillStyle = "#7a4a2a"
                 c:fillText(
@@ -610,23 +611,23 @@ local __O = {};
                 linhas(nil, c, texto, 560),
                 "forEach",
                 function(____, l, i)
-                    local ____c_366 = c
-                    local ____c_fillText_367 = c.fillText
-                    local ____l_364 = l
-                    local ____temp_365 = bx + 18
-                    local ____temp_363 = by + 13
-                    local ____t_362 = __t
-                    local ____t_result_361
+                    local ____c_373 = c
+                    local ____c_fillText_374 = c.fillText
+                    local ____l_371 = l
+                    local ____temp_372 = bx + 18
+                    local ____temp_370 = by + 13
+                    local ____t_369 = __t
+                    local ____t_result_368
                     if __t(b.speaker) then
-                        ____t_result_361 = b.speaker ~= "Narrador"
+                        ____t_result_368 = b.speaker ~= "Narrador"
                     else
-                        ____t_result_361 = b.speaker
+                        ____t_result_368 = b.speaker
                     end
-                    return ____c_fillText_367(
-                        ____c_366,
-                        ____l_364,
-                        ____temp_365,
-                        ____temp_363 + (____t_362(____t_result_361) and 8 or 0) + i * 22
+                    return ____c_fillText_374(
+                        ____c_373,
+                        ____l_371,
+                        ____temp_372,
+                        ____temp_370 + (____t_369(____t_result_368) and 8 or 0) + i * 22
                     )
                 end
             )
@@ -657,14 +658,14 @@ local __O = {};
         local tx
         local ty
         local lado = "baixo"
-        local ____t_369 = __t
-        local ____t_result_368
+        local ____t_376 = __t
+        local ____t_result_375
         if __t(pos) then
-            ____t_result_368 = not __t(pos.fora)
+            ____t_result_375 = not __t(pos.fora)
         else
-            ____t_result_368 = pos
+            ____t_result_375 = pos
         end
-        if ____t_369(____t_result_368) then
+        if ____t_376(____t_result_375) then
             tx = clamp(nil, pos.x, 10, W - 10)
             ty = clamp(nil, pos.boca, 40, H - 30)
             bx = clamp(nil, pos.x - bw / 2 + (pos.x < W / 2 and 40 or -40), 14, W - bw - 14)
@@ -677,32 +678,32 @@ local __O = {};
                     H - 26 - bh
                 )
                 lado = pos.x < W / 2 and "esq" or "dir"
-                local ____temp_370
+                local ____temp_377
                 if lado == "esq" then
-                    ____temp_370 = math.min(
+                    ____temp_377 = math.min(
                         W - bw - 14,
                         math.floor(pos.x + 46 + 0.5)
                     )
                 else
-                    ____temp_370 = math.max(
+                    ____temp_377 = math.max(
                         14,
                         math.floor(pos.x - 46 - bw + 0.5)
                     )
                 end
-                bx = ____temp_370
+                bx = ____temp_377
             end
         else
             bx = math.floor(W / 2 - bw / 2 + 30 + 0.5)
             by = H - 40 - bh
             lado = "nenhum"
         end
-        local ____t_result_371
+        local ____t_result_378
         if __t(grito) then
-            ____t_result_371 = math.floor(math.sin(t * 50) * 1.5 + 0.5)
+            ____t_result_378 = math.floor(math.sin(t * 50) * 1.5 + 0.5)
         else
-            ____t_result_371 = 0
+            ____t_result_378 = 0
         end
-        local tre = ____t_result_371
+        local tre = ____t_result_378
         bx = bx + tre
         local borda = __t(grito) and "#8a1a1a" or "#2a1a10"
         local fundo = __t(pensa) and "#f6f6fa" or "#fff6dc"
@@ -741,9 +742,9 @@ local __O = {};
                     end
                 end
             else
-                local ____temp_373
+                local ____temp_380
                 if lado == "baixo" then
-                    ____temp_373 = __arrL(
+                    ____temp_380 = __arrL(
                         {
                             __arrL({ax - 12, by + bh - 2}, 2),
                             __arrL({ax + 12, by + bh - 2}, 2)
@@ -751,9 +752,9 @@ local __O = {};
                         2
                     )
                 else
-                    local ____temp_372
+                    local ____temp_379
                     if lado == "esq" then
-                        ____temp_372 = __arrL(
+                        ____temp_379 = __arrL(
                             {
                                 __arrL({bx + 2, by + bh / 2 - 12}, 2),
                                 __arrL({bx + 2, by + bh / 2 + 12}, 2)
@@ -761,7 +762,7 @@ local __O = {};
                             2
                         )
                     else
-                        ____temp_372 = __arrL(
+                        ____temp_379 = __arrL(
                             {
                                 __arrL({bx + bw - 2, by + bh / 2 - 12}, 2),
                                 __arrL({bx + bw - 2, by + bh / 2 + 12}, 2)
@@ -769,9 +770,9 @@ local __O = {};
                             2
                         )
                     end
-                    ____temp_373 = ____temp_372
+                    ____temp_380 = ____temp_379
                 end
-                local base = ____temp_373
+                local base = ____temp_380
                 local pt = __arrL({tx + (lado == "esq" and 10 or (lado == "dir" and -10 or 0)), ty - (lado == "baixo" and 14 or 0)}, 2)
                 c:beginPath()
                 c:moveTo(
@@ -888,15 +889,15 @@ local __O = {};
         c.fillStyle = "rgba(255,255,255,.55)"
         c:fillRect(bx + 8, by + 3, bw - 16, 2)
         c.font = "10px Pixel, monospace"
-        local ____call_375 = __call
-        local ____t_result_374
+        local ____call_382 = __call
+        local ____t_result_381
         if __t(b.speaker) then
-            ____t_result_374 = b.speaker
+            ____t_result_381 = b.speaker
         else
-            ____t_result_374 = ""
+            ____t_result_381 = ""
         end
-        local nome = ____call_375(
-            tostring(____t_result_374),
+        local nome = ____call_382(
+            tostring(____t_result_381),
             "toUpperCase"
         )
         local nw = math.ceil(c:measureText(nome).width) + 14
@@ -910,17 +911,17 @@ local __O = {};
         c.fillStyle = "#ffffff"
         c.textBaseline = "middle"
         c:fillText(nome, bx + 19, by - 2)
-        local ____t_379 = __t
-        local ____t_result_378
-        local ____t_377 = __t
-        local ____temp_376 = lado == "nenhum"
-        __O[795] = ____temp_376
-        if ____t_377(____temp_376) then
-            ____t_result_378 = b.portrait
+        local ____t_386 = __t
+        local ____t_result_385
+        local ____t_384 = __t
+        local ____temp_383 = lado == "nenhum"
+        __O[796] = ____temp_383
+        if ____t_384(____temp_383) then
+            ____t_result_385 = b.portrait
         else
-            ____t_result_378 = __O[795]
+            ____t_result_385 = __O[796]
         end
-        if ____t_379(____t_result_378) then
+        if ____t_386(____t_result_385) then
             local pc = retratoCache(nil, b.who, b.emotion, t)
             c.fillStyle = "#2a1a10"
             c:fillRect(bx - 66, by + bh / 2 - 30, 60, 60)
@@ -940,23 +941,23 @@ local __O = {};
             "forEach",
             function(____, l, i) return c:fillText(l, bx + 16, by + 14 + i * (tam + 6)) end
         )
-        local ____t_383 = __t
-        local ____t_result_382
-        local ____t_381 = __t
-        local ____ge_result_380 = __ge(
+        local ____t_390 = __t
+        local ____t_result_389
+        local ____t_388 = __t
+        local ____ge_result_387 = __ge(
             n,
             __len(cheio)
         )
-        __O[796] = ____ge_result_380
-        if ____t_381(____ge_result_380) then
-            ____t_result_382 = __mod(
+        __O[797] = ____ge_result_387
+        if ____t_388(____ge_result_387) then
+            ____t_result_389 = __mod(
                 math.floor(t * 2.5),
                 2
             )
         else
-            ____t_result_382 = __O[796]
+            ____t_result_389 = __O[797]
         end
-        if ____t_383(____t_result_382) then
+        if ____t_390(____t_result_389) then
             c.fillStyle = borda
             c:beginPath()
             c:moveTo(bx + bw - 22, by + bh - 14)
@@ -969,9 +970,9 @@ local __O = {};
     function retratoCache(self, who, emo, t)
         if not __t(rcCanvas) then
             rcCanvas = window.document:createElement("canvas")
-            local ____rcCanvas_384 = rcCanvas
+            local ____rcCanvas_391 = rcCanvas
             rcCanvas.height = 64
-            ____rcCanvas_384.width = 64
+            ____rcCanvas_391.width = 64
         end
         local k = __add(who, emo)
         if k ~= rcKey then
@@ -997,40 +998,40 @@ local __O = {};
             "roteiro-sem-fala",
             not __t(b.text)
         )
-        local ____self_388 = overlay.classList
-        local ____self_388_toggle_389 = ____self_388.toggle
-        local ____t_387 = __t
-        local ____opt_385 = __get(scripts, s.kind)
-        if ____opt_385 ~= nil then
-            ____opt_385 = ____opt_385.balao
+        local ____self_395 = overlay.classList
+        local ____self_395_toggle_396 = ____self_395.toggle
+        local ____t_394 = __t
+        local ____opt_392 = __get(scripts, s.kind)
+        if ____opt_392 ~= nil then
+            ____opt_392 = ____opt_392.balao
         end
-        ____self_388_toggle_389(
-            ____self_388,
+        ____self_395_toggle_396(
+            ____self_395,
             "roteiro-balao",
-            not not ____t_387(____opt_385)
+            not not ____t_394(____opt_392)
         )
-        local ____self_392 = overlay.classList
-        local ____self_392_toggle_393 = ____self_392.toggle
-        local ____t_391 = __t
-        local ____t_result_390
+        local ____self_399 = overlay.classList
+        local ____self_399_toggle_400 = ____self_399.toggle
+        local ____t_398 = __t
+        local ____t_result_397
         if __t(b.text) then
-            ____t_result_390 = b.portrait
+            ____t_result_397 = b.portrait
         else
-            ____t_result_390 = b.text
+            ____t_result_397 = b.text
         end
-        ____self_392_toggle_393(
-            ____self_392,
+        ____self_399_toggle_400(
+            ____self_399,
             "roteiro-com-retrato",
-            not not ____t_391(____t_result_390)
+            not not ____t_398(____t_result_397)
         )
-        local ____t_395 = __t
-        local ____t_result_394
+        local ____t_402 = __t
+        local ____t_result_401
         if __t(b.text) then
-            ____t_result_394 = b.portrait
+            ____t_result_401 = b.portrait
         else
-            ____t_result_394 = b.text
+            ____t_result_401 = b.text
         end
-        if ____t_395(____t_result_394) then
+        if ____t_402(____t_result_401) then
             if not __t(portraitCv) then
                 portraitCv = window.document:createElement("canvas")
                 portraitCv.width = 64
@@ -1039,14 +1040,14 @@ local __O = {};
                 portraitCv:setAttribute("aria-hidden", "true")
             end
             local cap = overlay:querySelector(".cinematic-caption")
-            local ____t_397 = __t
-            local ____t_result_396
+            local ____t_404 = __t
+            local ____t_result_403
             if __t(cap) then
-                ____t_result_396 = portraitCv.parentNode ~= cap
+                ____t_result_403 = portraitCv.parentNode ~= cap
             else
-                ____t_result_396 = cap
+                ____t_result_403 = cap
             end
-            if ____t_397(____t_result_396) then
+            if ____t_404(____t_result_403) then
                 cap:insertBefore(portraitCv, cap.firstChild)
             end
             drawPortrait(
@@ -1059,14 +1060,14 @@ local __O = {};
             )
         end
         local p = window.document:getElementById("cinematicText")
-        local ____t_399 = __t
-        local ____t_result_398
+        local ____t_406 = __t
+        local ____t_result_405
         if __t(p) then
-            ____t_result_398 = b.text
+            ____t_result_405 = b.text
         else
-            ____t_result_398 = p
+            ____t_result_405 = p
         end
-        if ____t_399(____t_result_398) then
+        if ____t_406(____t_result_405) then
             local n = math.min(
                 __len(b.text),
                 math.floor(s.typed)
@@ -2933,15 +2934,31 @@ local __O = {};
             w:fillRect(0, 0, W, H)
         else
             local ____t_260 = __t
-            local ____opt_258 = window.Art
+            local ____this_259
+            ____this_259 = window
+            local ____opt_258 = ____this_259.DAROCA_FUNDO_MUNDO
             if ____opt_258 ~= nil then
-                ____opt_258 = ____opt_258.drawScene
+                ____opt_258 = ____opt_258(
+                    ____this_259,
+                    w,
+                    shot.scene,
+                    camX,
+                    s.elapsed
+                )
             end
             if ____t_260(____opt_258) then
-                window.Art:drawScene(w, shot.scene, camX, s.elapsed)
             else
-                w.fillStyle = "#8ec7e1"
-                w:fillRect(0, 0, W, H)
+                local ____t_263 = __t
+                local ____opt_261 = window.Art
+                if ____opt_261 ~= nil then
+                    ____opt_261 = ____opt_261.drawScene
+                end
+                if ____t_263(____opt_261) then
+                    window.Art:drawScene(w, shot.scene, camX, s.elapsed)
+                else
+                    w.fillStyle = "#8ec7e1"
+                    w:fillRect(0, 0, W, H)
+                end
             end
         end
         local list = __call(
@@ -2960,24 +2977,24 @@ local __O = {};
             ),
             "sort",
             function(____, p, q)
-                local ____t_result_265
-                local ____t_264 = __t
-                local ____t_result_263
-                local ____t_262 = __t
-                local ____temp_261 = p.a.z - q.a.z
-                __O[781] = ____temp_261
-                if ____t_262(____temp_261) then
-                    ____t_result_263 = __O[781]
+                local ____t_result_268
+                local ____t_267 = __t
+                local ____t_result_266
+                local ____t_265 = __t
+                local ____temp_264 = p.a.z - q.a.z
+                __O[781] = ____temp_264
+                if ____t_265(____temp_264) then
+                    ____t_result_266 = __O[781]
                 else
-                    ____t_result_263 = p.p.y - q.p.y
+                    ____t_result_266 = p.p.y - q.p.y
                 end
-                __O[782] = ____t_result_263
-                if ____t_264(____t_result_263) then
-                    ____t_result_265 = __O[782]
+                __O[782] = ____t_result_266
+                if ____t_267(____t_result_266) then
+                    ____t_result_268 = __O[782]
                 else
-                    ____t_result_265 = p.i - q.i
+                    ____t_result_268 = p.i - q.i
                 end
-                return ____t_result_265
+                return ____t_result_268
             end
         )
         for ____, r in __iterar((list)) do
@@ -2995,29 +3012,29 @@ local __O = {};
                 )
                 do
                     pcall(function()
-                        local ____t_271 = __t
-                        local ____t_result_270
-                        local ____t_267 = __t
-                        local ____temp_266 = r.a.type == "carro"
-                        __O[783] = ____temp_266
-                        if ____t_267(____temp_266) then
-                            local ____opt_268 = window.Art
-                            if ____opt_268 ~= nil then
-                                ____opt_268 = ____opt_268.drawVehicle
+                        local ____t_274 = __t
+                        local ____t_result_273
+                        local ____t_270 = __t
+                        local ____temp_269 = r.a.type == "carro"
+                        __O[783] = ____temp_269
+                        if ____t_270(____temp_269) then
+                            local ____opt_271 = window.Art
+                            if ____opt_271 ~= nil then
+                                ____opt_271 = ____opt_271.drawVehicle
                             end
-                            ____t_result_270 = ____opt_268
+                            ____t_result_273 = ____opt_271
                         else
-                            ____t_result_270 = __O[783]
+                            ____t_result_273 = __O[783]
                         end
-                        if ____t_271(____t_result_270) then
+                        if ____t_274(____t_result_273) then
                             local vf = __lt(r.p.o.facing, 0) and -1 or 1
-                            local ____t_result_272
+                            local ____t_result_275
                             if __t(r.p.o.moving) then
-                                ____t_result_272 = math.floor(math.sin(t * 18) + 0.5)
+                                ____t_result_275 = math.floor(math.sin(t * 18) + 0.5)
                             else
-                                ____t_result_272 = 0
+                                ____t_result_275 = 0
                             end
-                            local bob = ____t_result_272
+                            local bob = ____t_result_275
                             w:save()
                             w:translate(
                                 math.floor(sx + 0.5),
@@ -3045,20 +3062,20 @@ local __O = {};
                                 ajuda = ajuda
                             }
                             for ____, n in __iterar((r.p.extras)) do
-                                local ____this_274
-                                ____this_274 = __get(EXT.anims, n)
-                                local ____opt_273 = ____this_274.antes
-                                if ____opt_273 ~= nil then
-                                    ____opt_273(____this_274, w, ctx)
+                                local ____this_277
+                                ____this_277 = __get(EXT.anims, n)
+                                local ____opt_276 = ____this_277.antes
+                                if ____opt_276 ~= nil then
+                                    ____opt_276(____this_277, w, ctx)
                                 end
                             end
-                            local ____opt_277 = window.Art
-                            if ____opt_277 ~= nil then
-                                ____opt_277 = ____opt_277.drawCharacter
+                            local ____opt_280 = window.Art
+                            if ____opt_280 ~= nil then
+                                ____opt_280 = ____opt_280.drawCharacter
                             end
-                            if ____opt_277 ~= nil then
-                                ____opt_277(
-                                    ____opt_277,
+                            if ____opt_280 ~= nil then
+                                ____opt_280(
+                                    ____opt_280,
                                     w,
                                     r.a.type,
                                     sx,
@@ -3070,11 +3087,11 @@ local __O = {};
                                 __call(r.p.extras, "slice"),
                                 "reverse"
                             ))) do
-                                local ____this_280
-                                ____this_280 = __get(EXT.anims, n)
-                                local ____opt_279 = ____this_280.depois
-                                if ____opt_279 ~= nil then
-                                    ____opt_279(____this_280, w, ctx)
+                                local ____this_283
+                                ____this_283 = __get(EXT.anims, n)
+                                local ____opt_282 = ____this_283.depois
+                                if ____opt_282 ~= nil then
+                                    ____opt_282(____this_283, w, ctx)
                                 end
                             end
                         end
@@ -3082,29 +3099,29 @@ local __O = {};
                 end
             end
         end
-        local ____t_288 = __t
-        local ____t_result_287
-        local ____t_286 = __t
-        local ____t_result_285
-        local ____t_282 = __t
-        local ____temp_281 = not __t(pintor) and shot.bg ~= "preto"
-        __O[784] = ____temp_281
-        if ____t_282(____temp_281) then
-            local ____opt_283 = window.HdScene
-            if ____opt_283 ~= nil then
-                ____opt_283 = ____opt_283.drawAmbient
+        local ____t_291 = __t
+        local ____t_result_290
+        local ____t_289 = __t
+        local ____t_result_288
+        local ____t_285 = __t
+        local ____temp_284 = not __t(pintor) and shot.bg ~= "preto"
+        __O[784] = ____temp_284
+        if ____t_285(____temp_284) then
+            local ____opt_286 = window.HdScene
+            if ____opt_286 ~= nil then
+                ____opt_286 = ____opt_286.drawAmbient
             end
-            ____t_result_285 = ____opt_283
+            ____t_result_288 = ____opt_286
         else
-            ____t_result_285 = __O[784]
+            ____t_result_288 = __O[784]
         end
-        __O[785] = ____t_result_285
-        if ____t_286(____t_result_285) then
-            ____t_result_287 = __call(OUTDOOR, "includes", shot.scene)
+        __O[785] = ____t_result_288
+        if ____t_289(____t_result_288) then
+            ____t_result_290 = __call(OUTDOOR, "includes", shot.scene)
         else
-            ____t_result_287 = __O[785]
+            ____t_result_290 = __O[785]
         end
-        if ____t_288(____t_result_287) then
+        if ____t_291(____t_result_290) then
             do
                 pcall(function()
                     window.HdScene:drawAmbient(
@@ -3147,20 +3164,51 @@ local __O = {};
             math.min(0, H - sh),
             math.max(0, H - sh)
         )
-        local ____t_result_289
+        local ____t_result_292
         if __t(shake) then
-            ____t_result_289 = math.floor((hash(nil, t * 60) - 0.5) * shake * 2 / 2 + 0.5) * 2
+            ____t_result_292 = math.floor((hash(nil, t * 60) - 0.5) * shake * 2 / 2 + 0.5) * 2
         else
-            ____t_result_289 = 0
+            ____t_result_292 = 0
         end
-        local dx = ____t_result_289
-        local ____t_result_290
+        local dx = ____t_result_292
+        local ____t_result_293
         if __t(shake) then
-            ____t_result_290 = math.floor((hash(nil, t * 60 + 9) - 0.5) * shake * 2 / 2 + 0.5) * 2
+            ____t_result_293 = math.floor((hash(nil, t * 60 + 9) - 0.5) * shake * 2 / 2 + 0.5) * 2
         else
-            ____t_result_290 = 0
+            ____t_result_293 = 0
         end
-        local dy = ____t_result_290
+        local dy = ____t_result_293
+        local ____t_297 = __t
+        local ____t_result_296
+        local ____t_295 = __t
+        local ____ge_result_294 = __ge(window.DAROCA_QUADRO_CAMADAS, 0)
+        __O[786] = ____ge_result_294
+        if ____t_295(____ge_result_294) then
+            ____t_result_296 = c.camadaAbaixo
+        else
+            ____t_result_296 = __O[786]
+        end
+        if ____t_297(____t_result_296) then
+            c:clearRect(0, 0, W, H)
+            c:camadaAbaixo(
+                world,
+                sx,
+                sy,
+                sw,
+                sh,
+                dx,
+                dy
+            )
+            window.DAROCA_QUADRO_ZOOM = {
+                sx = sx,
+                sy = sy,
+                sw = sw,
+                sh = sh,
+                dx = dx,
+                dy = dy
+            }
+            return
+        end
         c:save()
         c.imageSmoothingEnabled = false
         c.fillStyle = "#0b0d10"
@@ -3213,35 +3261,105 @@ local __O = {};
         end
         c:restore()
     end
+    local FIXAS = __TS__New(Map)
+    local function fixa(self, c, chave, desenho)
+        if __t(not __ge(window.DAROCA_QUADRO_CAMADAS, 0) or not __t(c.camadaAbaixo)) then
+            return false
+        end
+        local cv = __call(FIXAS, "get", chave)
+        if not __t(cv) then
+            cv = window.document:createElement("canvas")
+            cv.width = W
+            cv.height = H
+            local g = cv:getContext("2d")
+            desenho(nil, g)
+            __call(FIXAS, "set", chave, cv)
+        end
+        c:camadaAbaixo(
+            cv,
+            0,
+            0,
+            W,
+            H,
+            0,
+            0,
+            true
+        )
+        return true
+    end
     local function drawFx(self, c, shot, t, s)
         local tt = s.elapsed
         for ____, e in __iterar((shot.fx)) do
             local tipo = e.tipo
             if tipo == "vinheta" then
-                local g = c:createRadialGradient(
-                    W / 2,
-                    H / 2,
-                    200,
-                    W / 2,
-                    H / 2,
-                    620
-                )
-                g:addColorStop(0, "rgba(0,0,0,0)")
-                g:addColorStop(
-                    1,
-                    ("rgba(8,6,4," .. tostring(num(nil, e.forca, 0.6))) .. ")"
-                )
-                c.fillStyle = g
-                c:fillRect(0, 0, W, H)
+                if not __t(fixa(
+                    nil,
+                    c,
+                    __add(
+                        "v",
+                        num(nil, e.forca, 0.6)
+                    ),
+                    function(____, g)
+                        local gr = g:createRadialGradient(
+                            W / 2,
+                            H / 2,
+                            200,
+                            W / 2,
+                            H / 2,
+                            620
+                        )
+                        gr:addColorStop(0, "rgba(0,0,0,0)")
+                        gr:addColorStop(
+                            1,
+                            ("rgba(8,6,4," .. tostring(num(nil, e.forca, 0.6))) .. ")"
+                        )
+                        g.fillStyle = gr
+                        g:fillRect(0, 0, W, H)
+                    end
+                )) then
+                    local g = c:createRadialGradient(
+                        W / 2,
+                        H / 2,
+                        200,
+                        W / 2,
+                        H / 2,
+                        620
+                    )
+                    g:addColorStop(0, "rgba(0,0,0,0)")
+                    g:addColorStop(
+                        1,
+                        ("rgba(8,6,4," .. tostring(num(nil, e.forca, 0.6))) .. ")"
+                    )
+                    c.fillStyle = g
+                    c:fillRect(0, 0, W, H)
+                end
             elseif tipo == "memoria" then
-                c.fillStyle = "rgba(150,110,60,.32)"
-                c:fillRect(0, 0, W, H)
-                c.fillStyle = "rgba(255,240,200,.08)"
-                do
-                    local y = 0
-                    while y < H do
-                        c:fillRect(0, y, W, 2)
-                        y = y + 4
+                if not __t(fixa(
+                    nil,
+                    c,
+                    "m",
+                    function(____, g)
+                        g.fillStyle = "rgba(150,110,60,.32)"
+                        g:fillRect(0, 0, W, H)
+                        g.fillStyle = "rgba(255,240,200,.08)"
+                        do
+                            local y = 0
+                            while y < H do
+                                g:fillRect(0, y, W, 2)
+                                y = y + 4
+                            end
+                        end
+                    end
+                )) then
+                    c.fillStyle = "rgba(150,110,60,.32)"
+                    c:fillRect(0, 0, W, H)
+                    c.fillStyle = "rgba(255,240,200,.08)"
+                    do
+                        local y = 0
+                        while y < H do
+                            c:fillRect(0, y, W, 2)
+                            y = y + 4
+                        end
                     end
                 end
                 do
@@ -3266,8 +3384,18 @@ local __O = {};
                     end
                 end
             elseif tipo == "noite" then
-                c.fillStyle = "rgba(20,30,70,.38)"
-                c:fillRect(0, 0, W, H)
+                if not __t(fixa(
+                    nil,
+                    c,
+                    "n",
+                    function(____, g)
+                        g.fillStyle = "rgba(20,30,70,.38)"
+                        g:fillRect(0, 0, W, H)
+                    end
+                )) then
+                    c.fillStyle = "rgba(20,30,70,.38)"
+                    c:fillRect(0, 0, W, H)
+                end
             elseif tipo == "confete" then
                 do
                     local i = 0
@@ -3477,26 +3605,26 @@ local __O = {};
             if tipo == "cartao" then
                 local f = fxWindow(nil, e, t, 3)
                 if __t(f.on) then
-                    local ____card_295 = card
-                    local ____c_293 = c
-                    local ____t_result_291
+                    local ____card_302 = card
+                    local ____c_300 = c
+                    local ____t_result_298
                     if __t(e.texto) then
-                        ____t_result_291 = e.texto
+                        ____t_result_298 = e.texto
                     else
-                        ____t_result_291 = ""
+                        ____t_result_298 = ""
                     end
-                    local ____tostring_result_294 = tostring(____t_result_291)
-                    local ____t_result_292
+                    local ____tostring_result_301 = tostring(____t_result_298)
+                    local ____t_result_299
                     if __t(e.sub) then
-                        ____t_result_292 = tostring(e.sub)
+                        ____t_result_299 = tostring(e.sub)
                     else
-                        ____t_result_292 = ""
+                        ____t_result_299 = ""
                     end
-                    ____card_295(
+                    ____card_302(
                         nil,
-                        ____c_293,
-                        ____tostring_result_294,
-                        ____t_result_292,
+                        ____c_300,
+                        ____tostring_result_301,
+                        ____t_result_299,
                         math.min(
                             1,
                             (t - f.t0) / 0.3,
@@ -3524,33 +3652,33 @@ local __O = {};
                     c.textAlign = "left"
                     c.font = "11px Pixel, monospace"
                     c.fillStyle = "#d7e7a0"
-                    local ____c_297 = c
-                    local ____c_fillText_298 = c.fillText
-                    local ____t_result_296
+                    local ____c_304 = c
+                    local ____c_fillText_305 = c.fillText
+                    local ____t_result_303
                     if __t(e.sub) then
-                        ____t_result_296 = e.sub
+                        ____t_result_303 = e.sub
                     else
-                        ____t_result_296 = "VOCÊ CHEGOU"
+                        ____t_result_303 = "VOCÊ CHEGOU"
                     end
-                    ____c_fillText_298(
-                        ____c_297,
-                        tostring(____t_result_296),
+                    ____c_fillText_305(
+                        ____c_304,
+                        tostring(____t_result_303),
                         slide + 22,
                         76
                     )
                     c.font = "bold 19px Pixel, monospace"
                     c.fillStyle = "#fff1ca"
-                    local ____c_300 = c
-                    local ____c_fillText_301 = c.fillText
-                    local ____t_result_299
+                    local ____c_307 = c
+                    local ____c_fillText_308 = c.fillText
+                    local ____t_result_306
                     if __t(e.texto) then
-                        ____t_result_299 = e.texto
+                        ____t_result_306 = e.texto
                     else
-                        ____t_result_299 = ""
+                        ____t_result_306 = ""
                     end
-                    ____c_fillText_301(
-                        ____c_300,
-                        tostring(____t_result_299),
+                    ____c_fillText_308(
+                        ____c_307,
+                        tostring(____t_result_306),
                         slide + 22,
                         102
                     )
@@ -3575,39 +3703,39 @@ local __O = {};
                         (__add(f.t0, f.d) - t) / 0.25
                     )
                     c.fillStyle = "#1b130c"
-                    local ____c_303 = c
-                    local ____c_fillText_304 = c.fillText
-                    local ____t_result_302
+                    local ____c_310 = c
+                    local ____c_fillText_311 = c.fillText
+                    local ____t_result_309
                     if __t(e.texto) then
-                        ____t_result_302 = e.texto
+                        ____t_result_309 = e.texto
                     else
-                        ____t_result_302 = ""
+                        ____t_result_309 = ""
                     end
-                    ____c_fillText_304(
-                        ____c_303,
-                        tostring(____t_result_302),
+                    ____c_fillText_311(
+                        ____c_310,
+                        tostring(____t_result_309),
                         4,
                         4
                     )
-                    local ____c_306 = c
-                    local ____t_result_305
+                    local ____c_313 = c
+                    local ____t_result_312
                     if __t(e.cor) then
-                        ____t_result_305 = e.cor
+                        ____t_result_312 = e.cor
                     else
-                        ____t_result_305 = "#ffd166"
+                        ____t_result_312 = "#ffd166"
                     end
-                    ____c_306.fillStyle = ____t_result_305
-                    local ____c_308 = c
-                    local ____c_fillText_309 = c.fillText
-                    local ____t_result_307
+                    ____c_313.fillStyle = ____t_result_312
+                    local ____c_315 = c
+                    local ____c_fillText_316 = c.fillText
+                    local ____t_result_314
                     if __t(e.texto) then
-                        ____t_result_307 = e.texto
+                        ____t_result_314 = e.texto
                     else
-                        ____t_result_307 = ""
+                        ____t_result_314 = ""
                     end
-                    ____c_fillText_309(
-                        ____c_308,
-                        tostring(____t_result_307),
+                    ____c_fillText_316(
+                        ____c_315,
+                        tostring(____t_result_314),
                         0,
                         0
                     )
@@ -3684,23 +3812,23 @@ local __O = {};
         if shot.hour ~= nil then
             do
                 pcall(function()
-                    local ____opt_313 = window.DayTime
-                    if ____opt_313 ~= nil then
-                        ____opt_313 = ____opt_313.force
+                    local ____opt_320 = window.DayTime
+                    if ____opt_320 ~= nil then
+                        ____opt_320 = ____opt_320.force
                     end
-                    if ____opt_313 ~= nil then
-                        local ____temp_311
+                    if ____opt_320 ~= nil then
+                        local ____temp_318
                         if shot.hourTo == nil then
-                            ____temp_311 = shot.hour
+                            ____temp_318 = shot.hour
                         else
-                            ____temp_311 = lerp(
+                            ____temp_318 = lerp(
                                 nil,
                                 shot.hour,
                                 shot.hourTo,
                                 ease(nil, t / shot.camTime)
                             )
                         end
-                        ____opt_313(____opt_313, ____temp_311)
+                        ____opt_320(____opt_320, ____temp_318)
                     end
                     forced = true
                 end)
@@ -3729,9 +3857,9 @@ local __O = {};
         for ____, g in __iterar((EXT.ganchos)) do
             do
                 pcall(function()
-                    local ____opt_315 = g.quadro
-                    if ____opt_315 ~= nil then
-                        ____opt_315(
+                    local ____opt_322 = g.quadro
+                    if ____opt_322 ~= nil then
+                        ____opt_322(
                             g,
                             s,
                             sc,
@@ -3746,37 +3874,37 @@ local __O = {};
         c:fillRect(0, 0, W, 24)
         c.fillStyle = "#10241fe0"
         c:fillRect(0, H - 20, W, 20)
-        local ____t_320 = __t
-        local ____t_result_319
-        local ____t_318 = __t
-        local ____t_result_317
+        local ____t_327 = __t
+        local ____t_result_326
+        local ____t_325 = __t
+        local ____t_result_324
         if __t(b.first) then
-            ____t_result_317 = __lt(s.time, 0.25)
+            ____t_result_324 = __lt(s.time, 0.25)
         else
-            ____t_result_317 = b.first
+            ____t_result_324 = b.first
         end
-        __O[786] = ____t_result_317
-        if ____t_318(____t_result_317) then
-            ____t_result_319 = not __t(__call(
+        __O[787] = ____t_result_324
+        if ____t_325(____t_result_324) then
+            ____t_result_326 = not __t(__call(
                 shot.fx,
                 "some",
                 function(____, e) return e.tipo == "entrada" end
             ))
         else
-            ____t_result_319 = __O[786]
+            ____t_result_326 = __O[787]
         end
-        if ____t_320(____t_result_319) then
+        if ____t_327(____t_result_326) then
             c.fillStyle = ("rgba(13,29,24," .. tostring((1 - s.time / 0.25) * 0.6)) .. ")"
             c:fillRect(0, 24, W, H - 44)
         end
-        local ____t_322 = __t
-        local ____t_result_321
+        local ____t_329 = __t
+        local ____t_result_328
         if __t(sc.balao) then
-            ____t_result_321 = b.text
+            ____t_result_328 = b.text
         else
-            ____t_result_321 = sc.balao
+            ____t_result_328 = sc.balao
         end
-        if ____t_322(____t_result_321) then
+        if ____t_329(____t_result_328) then
             do
                 pcall(function()
                     balao(
@@ -3806,16 +3934,16 @@ local __O = {};
             shot.actors,
             "find",
             function(____, x)
-                local ____t_result_325
-                local ____t_324 = __t
-                local ____temp_323 = x.type == b.who
-                __O[787] = ____temp_323
-                if ____t_324(____temp_323) then
-                    ____t_result_325 = __O[787]
+                local ____t_result_332
+                local ____t_331 = __t
+                local ____temp_330 = x.type == b.who
+                __O[788] = ____temp_330
+                if ____t_331(____temp_330) then
+                    ____t_result_332 = __O[788]
                 else
-                    ____t_result_325 = x.type == "carro" and b.who == "daroca"
+                    ____t_result_332 = x.type == "carro" and b.who == "daroca"
                 end
-                return ____t_result_325
+                return ____t_result_332
             end
         )
         if not __t(a) then
@@ -3850,14 +3978,14 @@ local __O = {};
         local x = clamp(nil, (p.x - camX - sx) * z, 60, W - 60)
         local y = clamp(nil, (headY - sy) * z, 120, 470)
         local left = x < W / 2
-        local ____t_result_326
+        local ____t_result_333
         if __t(left) then
-            ____t_result_326 = clamp(nil, x + 150, 290, 600)
+            ____t_result_333 = clamp(nil, x + 150, 290, 600)
         else
-            ____t_result_326 = clamp(nil, x - 150, 360, 670)
+            ____t_result_333 = clamp(nil, x - 150, 360, 670)
         end
         return {
-            x = ____t_result_326,
+            x = ____t_result_333,
             y = 52,
             width = 500,
             speakerX = x,
@@ -3876,16 +4004,16 @@ local __O = {};
         narrador = "#5a4a3a"
     }, "daroca,reeis,jorge,jorge_gordo,jorge_celular,miguel,fred_conquista,narrador")
     corNome = function(____, who)
-        local ____t_result_331
-        local ____t_330 = __t
-        local ____t_result_329
-        local ____t_328 = __t
-        local ____get_result_327 = __get(CORES_NOME, who)
-        __O[788] = ____get_result_327
-        if ____t_328(____get_result_327) then
-            ____t_result_329 = __O[788]
+        local ____t_result_338
+        local ____t_337 = __t
+        local ____t_result_336
+        local ____t_335 = __t
+        local ____get_result_334 = __get(CORES_NOME, who)
+        __O[789] = ____get_result_334
+        if ____t_335(____get_result_334) then
+            ____t_result_336 = __O[789]
         else
-            ____t_result_329 = __get(
+            ____t_result_336 = __get(
                 CORES_NOME,
                 __re_replace(
                     tostring(who),
@@ -3894,11 +4022,11 @@ local __O = {};
                 )
             )
         end
-        __O[789] = ____t_result_329
-        if ____t_330(____t_result_329) then
-            ____t_result_331 = __O[789]
+        __O[790] = ____t_result_336
+        if ____t_337(____t_result_336) then
+            ____t_result_338 = __O[790]
         else
-            ____t_result_331 = __get(
+            ____t_result_338 = __get(
                 __arrL({
                     "#a8443a",
                     "#3c6a8a",
@@ -3917,7 +4045,7 @@ local __O = {};
                 ) * 6)
             )
         end
-        return ____t_result_331
+        return ____t_result_338
     end
     rcCanvas = nil
     rcKey = ""
@@ -3925,71 +4053,71 @@ local __O = {};
     lastSync = ""
     clearer = nil
     local function seen(____, q)
-        local ____t_result_404
-        local ____t_403 = __t
-        local ____t_result_402
-        local ____t_401 = __t
-        local ____t_result_400
+        local ____t_result_411
+        local ____t_410 = __t
+        local ____t_result_409
+        local ____t_408 = __t
+        local ____t_result_407
         if __t(q) then
-            ____t_result_400 = type(q.roteiros) == "table"
+            ____t_result_407 = type(q.roteiros) == "table"
         else
-            ____t_result_400 = q
+            ____t_result_407 = q
         end
-        __O[797] = ____t_result_400
-        if ____t_401(____t_result_400) then
-            ____t_result_402 = q.roteiros
+        __O[798] = ____t_result_407
+        if ____t_408(____t_result_407) then
+            ____t_result_409 = q.roteiros
         else
-            ____t_result_402 = __O[797]
+            ____t_result_409 = __O[798]
         end
-        __O[798] = ____t_result_402
-        if ____t_403(____t_result_402) then
-            ____t_result_404 = __O[798]
+        __O[799] = ____t_result_409
+        if ____t_410(____t_result_409) then
+            ____t_result_411 = __O[799]
         else
-            ____t_result_404 = {}
+            ____t_result_411 = {}
         end
-        return ____t_result_404
+        return ____t_result_411
     end
     local function allowed(____, s, q)
-        local ____t_result_405
+        local ____t_result_412
         if __t(s) then
-            ____t_result_405 = not __t(s.once) or not __t(__get(
+            ____t_result_412 = not __t(s.once) or not __t(__get(
                 seen(nil, q),
                 s.id
             ))
         else
-            ____t_result_405 = s
+            ____t_result_412 = s
         end
-        return ____t_result_405
+        return ____t_result_412
     end
     local function find(____, fn, q)
-        local ____t_result_412
-        local ____t_411 = __t
-        local ____opt_406 = __call(
+        local ____t_result_419
+        local ____t_418 = __t
+        local ____opt_413 = __call(
             __values(scripts),
             "find",
             function(____, s)
-                local ____t_result_410
-                local ____t_409 = __t
-                local ____fn_result_408 = fn(nil, s)
-                __O[799] = ____fn_result_408
-                if ____t_409(____fn_result_408) then
-                    ____t_result_410 = allowed(nil, s, q)
+                local ____t_result_417
+                local ____t_416 = __t
+                local ____fn_result_415 = fn(nil, s)
+                __O[800] = ____fn_result_415
+                if ____t_416(____fn_result_415) then
+                    ____t_result_417 = allowed(nil, s, q)
                 else
-                    ____t_result_410 = __O[799]
+                    ____t_result_417 = __O[800]
                 end
-                return ____t_result_410
+                return ____t_result_417
             end
         )
-        if ____opt_406 ~= nil then
-            ____opt_406 = ____opt_406.id
+        if ____opt_413 ~= nil then
+            ____opt_413 = ____opt_413.id
         end
-        __O[800] = ____opt_406
-        if ____t_411(____opt_406) then
-            ____t_result_412 = __O[800]
+        __O[801] = ____opt_413
+        if ____t_418(____opt_413) then
+            ____t_result_419 = __O[801]
         else
-            ____t_result_412 = nil
+            ____t_result_419 = nil
         end
-        return ____t_result_412
+        return ____t_result_419
     end
     local api = __ord(
         {
@@ -3997,16 +4125,16 @@ local __O = {};
             list = function() return __keys(scripts) end,
             has = has,
             get = function(____, id)
-                local ____t_result_415
-                local ____t_414 = __t
-                local ____get_result_413 = __get(scripts, id)
-                __O[801] = ____get_result_413
-                if ____t_414(____get_result_413) then
-                    ____t_result_415 = __O[801]
+                local ____t_result_422
+                local ____t_421 = __t
+                local ____get_result_420 = __get(scripts, id)
+                __O[802] = ____get_result_420
+                if ____t_421(____get_result_420) then
+                    ____t_result_422 = __O[802]
                 else
-                    ____t_result_415 = nil
+                    ____t_result_422 = nil
                 end
-                return ____t_result_415
+                return ____t_result_422
             end,
             errors = function() return __call(errors, "slice") end,
             antes = function(____, kind, q) return find(
@@ -4034,19 +4162,19 @@ local __O = {};
                 __set(q.roteiros, id, 1)
             end,
             musicFor = function(____, id)
-                local ____t_result_419
-                local ____t_418 = __t
-                local ____opt_416 = __get(scripts, id)
-                if ____opt_416 ~= nil then
-                    ____opt_416 = ____opt_416.music
+                local ____t_result_426
+                local ____t_425 = __t
+                local ____opt_423 = __get(scripts, id)
+                if ____opt_423 ~= nil then
+                    ____opt_423 = ____opt_423.music
                 end
-                __O[802] = ____opt_416
-                if ____t_418(____opt_416) then
-                    ____t_result_419 = __O[802]
+                __O[803] = ____opt_423
+                if ____t_425(____opt_423) then
+                    ____t_result_426 = __O[803]
                 else
-                    ____t_result_419 = __arrL({}, 0)
+                    ____t_result_426 = __arrL({}, 0)
                 end
-                return ____t_result_419
+                return ____t_result_426
             end,
             create = create,
             update = update,
@@ -4056,31 +4184,31 @@ local __O = {};
             timeline = timeline,
             stateAt = stateAt,
             timelinePosition = function(____, s)
-                local ____t_result_425
+                local ____t_result_432
                 if __t(s) then
-                    local ____t_result_424
+                    local ____t_result_431
                     if __t(s.done) then
-                        local ____t_result_423
-                        local ____t_422 = __t
-                        local ____opt_420 = __get(scripts, s.kind)
-                        if ____opt_420 ~= nil then
-                            ____opt_420 = ____opt_420.duration
+                        local ____t_result_430
+                        local ____t_429 = __t
+                        local ____opt_427 = __get(scripts, s.kind)
+                        if ____opt_427 ~= nil then
+                            ____opt_427 = ____opt_427.duration
                         end
-                        __O[803] = ____opt_420
-                        if ____t_422(____opt_420) then
-                            ____t_result_423 = __O[803]
+                        __O[804] = ____opt_427
+                        if ____t_429(____opt_427) then
+                            ____t_result_430 = __O[804]
                         else
-                            ____t_result_423 = 0
+                            ____t_result_430 = 0
                         end
-                        ____t_result_424 = ____t_result_423
+                        ____t_result_431 = ____t_result_430
                     else
-                        ____t_result_424 = s.elapsed
+                        ____t_result_431 = s.elapsed
                     end
-                    ____t_result_425 = ____t_result_424
+                    ____t_result_432 = ____t_result_431
                 else
-                    ____t_result_425 = 0
+                    ____t_result_432 = 0
                 end
-                return ____t_result_425
+                return ____t_result_432
             end,
             sfx = sfx,
             load = load,
@@ -4102,148 +4230,148 @@ local __O = {};
     }, "portrait,head,sfx,hash,ease,clamp,lerp")
     local function wrap(self)
         local C = window.Cinematics
-        local ____t_429 = __t
-        local ____t_result_428
-        local ____t_427 = __t
-        local ____temp_426 = not __t(C)
-        __O[804] = ____temp_426
-        if ____t_427(____temp_426) then
-            ____t_result_428 = __O[804]
+        local ____t_436 = __t
+        local ____t_result_435
+        local ____t_434 = __t
+        local ____temp_433 = not __t(C)
+        __O[805] = ____temp_433
+        if ____t_434(____temp_433) then
+            ____t_result_435 = __O[805]
         else
-            ____t_result_428 = C.__roteiro
+            ____t_result_435 = C.__roteiro
         end
-        if ____t_429(____t_result_428) then
+        if ____t_436(____t_result_435) then
             return
         end
         local o = __assign({}, C)
         local function mine(____, s)
-            local ____t_result_432
-            local ____t_431 = __t
-            local ____t_result_430
+            local ____t_result_439
+            local ____t_438 = __t
+            local ____t_result_437
             if __t(s) then
-                ____t_result_430 = s.roteiro
+                ____t_result_437 = s.roteiro
             else
-                ____t_result_430 = s
+                ____t_result_437 = s
             end
-            __O[805] = ____t_result_430
-            if ____t_431(____t_result_430) then
-                ____t_result_432 = __get(scripts, s.kind)
+            __O[806] = ____t_result_437
+            if ____t_438(____t_result_437) then
+                ____t_result_439 = __get(scripts, s.kind)
             else
-                ____t_result_432 = __O[805]
+                ____t_result_439 = __O[806]
             end
-            return ____t_result_432
+            return ____t_result_439
         end
         C.create = function(____, kind, opt)
-            local ____t_result_433
+            local ____t_result_440
             if __t(has(nil, kind)) then
-                ____t_result_433 = create(nil, kind, opt)
+                ____t_result_440 = create(nil, kind, opt)
             else
-                ____t_result_433 = o:create(kind, opt)
+                ____t_result_440 = o:create(kind, opt)
             end
-            return ____t_result_433
+            return ____t_result_440
         end
         C.update = function(____, s, dt)
-            local ____t_result_434
+            local ____t_result_441
             if __t(mine(nil, s)) then
-                ____t_result_434 = update(nil, s, dt)
+                ____t_result_441 = update(nil, s, dt)
             else
-                ____t_result_434 = o:update(s, dt)
+                ____t_result_441 = o:update(s, dt)
             end
-            return ____t_result_434
+            return ____t_result_441
         end
         C.advance = function(____, s)
-            local ____t_result_435
+            local ____t_result_442
             if __t(mine(nil, s)) then
-                ____t_result_435 = advance(nil, s)
+                ____t_result_442 = advance(nil, s)
             else
-                ____t_result_435 = o:advance(s)
+                ____t_result_442 = o:advance(s)
             end
-            return ____t_result_435
+            return ____t_result_442
         end
         C.beat = function(____, s)
-            local ____t_result_436
+            local ____t_result_443
             if __t(mine(nil, s)) then
-                ____t_result_436 = beat(nil, s)
+                ____t_result_443 = beat(nil, s)
             else
-                ____t_result_436 = o:beat(s)
+                ____t_result_443 = o:beat(s)
             end
-            return ____t_result_436
+            return ____t_result_443
         end
         C.draw = function(____, c, s)
-            local ____t_result_437
+            local ____t_result_444
             if __t(mine(nil, s)) then
-                ____t_result_437 = draw(nil, c, s)
+                ____t_result_444 = draw(nil, c, s)
             else
-                ____t_result_437 = o:draw(c, s)
+                ____t_result_444 = o:draw(c, s)
             end
-            return ____t_result_437
+            return ____t_result_444
         end
         C.anchor = function(____, s)
-            local ____t_result_438
+            local ____t_result_445
             if __t(mine(nil, s)) then
-                ____t_result_438 = anchor(nil, s)
+                ____t_result_445 = anchor(nil, s)
             else
-                ____t_result_438 = o:anchor(s)
+                ____t_result_445 = o:anchor(s)
             end
-            return ____t_result_438
+            return ____t_result_445
         end
         C.timeline = function(____, k)
+            local ____t_result_455
+            local ____t_449 = __t
             local ____t_result_448
-            local ____t_442 = __t
-            local ____t_result_441
-            local ____t_440 = __t
-            local ____temp_439 = type(k) == "string"
-            __O[806] = ____temp_439
-            if ____t_440(____temp_439) then
-                ____t_result_441 = has(nil, k)
+            local ____t_447 = __t
+            local ____temp_446 = type(k) == "string"
+            __O[807] = ____temp_446
+            if ____t_447(____temp_446) then
+                ____t_result_448 = has(nil, k)
             else
-                ____t_result_441 = __O[806]
+                ____t_result_448 = __O[807]
             end
-            if ____t_442(____t_result_441) then
-                ____t_result_448 = timeline(nil, k)
+            if ____t_449(____t_result_448) then
+                ____t_result_455 = timeline(nil, k)
             else
-                local ____t_result_447
-                local ____t_446 = __t
-                local ____t_result_445
-                local ____t_444 = __t
-                local ____t_result_443
+                local ____t_result_454
+                local ____t_453 = __t
+                local ____t_result_452
+                local ____t_451 = __t
+                local ____t_result_450
                 if __t(k) then
-                    ____t_result_443 = type(k) == "table"
+                    ____t_result_450 = type(k) == "table"
                 else
-                    ____t_result_443 = k
+                    ____t_result_450 = k
                 end
-                __O[807] = ____t_result_443
-                if ____t_444(____t_result_443) then
-                    ____t_result_445 = mine(nil, k)
+                __O[808] = ____t_result_450
+                if ____t_451(____t_result_450) then
+                    ____t_result_452 = mine(nil, k)
                 else
-                    ____t_result_445 = __O[807]
+                    ____t_result_452 = __O[808]
                 end
-                if ____t_446(____t_result_445) then
-                    ____t_result_447 = api:timelinePosition(k)
+                if ____t_453(____t_result_452) then
+                    ____t_result_454 = api:timelinePosition(k)
                 else
-                    ____t_result_447 = o:timeline(k)
+                    ____t_result_454 = o:timeline(k)
                 end
-                ____t_result_448 = ____t_result_447
+                ____t_result_455 = ____t_result_454
             end
-            return ____t_result_448
+            return ____t_result_455
         end
         C.timelinePosition = function(____, s)
-            local ____t_result_449
+            local ____t_result_456
             if __t(mine(nil, s)) then
-                ____t_result_449 = api:timelinePosition(s)
+                ____t_result_456 = api:timelinePosition(s)
             else
-                ____t_result_449 = o:timelinePosition(s)
+                ____t_result_456 = o:timelinePosition(s)
             end
-            return ____t_result_449
+            return ____t_result_456
         end
         C.stateAt = function(____, k, sec, opt)
-            local ____t_result_450
+            local ____t_result_457
             if __t(has(nil, k)) then
-                ____t_result_450 = stateAt(nil, k, sec, opt)
+                ____t_result_457 = stateAt(nil, k, sec, opt)
             else
-                ____t_result_450 = o:stateAt(k, sec, opt)
+                ____t_result_457 = o:stateAt(k, sec, opt)
             end
-            return ____t_result_450
+            return ____t_result_457
         end
         C.__roteiro = true
     end
@@ -4252,25 +4380,25 @@ local __O = {};
         local key
         local sc = __get(scripts, id)
         if not __t(sc) then
-            local ____window_456 = window
-            local ____window_alert_457 = window.alert
-            local ____add_455 = __add
-            local ____add_result_454 = __add(
+            local ____window_463 = window
+            local ____window_alert_464 = window.alert
+            local ____add_462 = __add
+            local ____add_result_461 = __add(
                 __add("Roteiro \"", id),
                 "\" não encontrado.\n"
             )
-            local ____t_result_453
-            local ____t_452 = __t
-            local ____call_result_451 = __call(errors, "join", "\n")
-            __O[808] = ____call_result_451
-            if ____t_452(____call_result_451) then
-                ____t_result_453 = __O[808]
+            local ____t_result_460
+            local ____t_459 = __t
+            local ____call_result_458 = __call(errors, "join", "\n")
+            __O[809] = ____call_result_458
+            if ____t_459(____call_result_458) then
+                ____t_result_460 = __O[809]
             else
-                ____t_result_453 = "Confira o id e a lista.json."
+                ____t_result_460 = "Confira o id e a lista.json."
             end
-            ____window_alert_457(
-                ____window_456,
-                ____add_455(____add_result_454, ____t_result_453)
+            ____window_alert_464(
+                ____window_463,
+                ____add_462(____add_result_461, ____t_result_460)
             )
             return
         end
@@ -4334,14 +4462,14 @@ local __O = {};
             if not __t(s.done) then
                 draw(nil, c, s)
                 local b = beatOf(nil, s)
-                local ____t_459 = __t
-                local ____t_result_458
+                local ____t_466 = __t
+                local ____t_result_465
                 if __t(b.text) then
-                    ____t_result_458 = not __t(sc.balao)
+                    ____t_result_465 = not __t(sc.balao)
                 else
-                    ____t_result_458 = b.text
+                    ____t_result_465 = b.text
                 end
-                if ____t_459(____t_result_458) then
+                if ____t_466(____t_result_465) then
                     local x0 = __t(b.portrait) and 120 or 40
                     c.fillStyle = "rgba(16,30,24,.92)"
                     c:fillRect(30, 388, 900, 120)
@@ -4418,9 +4546,9 @@ local __O = {};
         window:requestAnimationFrame(loop)
     end
     window.Roteiro = __assign({}, api, {preview = preview})
-    local ____self_460 = load(nil)
-    ____self_460["then"](
-        ____self_460,
+    local ____self_467 = load(nil)
+    ____self_467["then"](
+        ____self_467,
         function()
             do
                 pcall(function()

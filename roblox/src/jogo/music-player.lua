@@ -187,23 +187,23 @@ local __O = {};
                         if desired ~= nil then
                             ____opt_result_129 = desired.arenaShuffle
                         end
-                        __O[2382] = ____opt_result_129
+                        __O[2387] = ____opt_result_129
                         if ____t_130(____opt_result_129) then
                             ____t_result_131 = arenaPlaylist.open
                         else
-                            ____t_result_131 = __O[2382]
+                            ____t_result_131 = __O[2387]
                         end
-                        __O[2383] = ____t_result_131
+                        __O[2388] = ____t_result_131
                         if ____t_132(____t_result_131) then
                             ____t_result_133 = active == v.index
                         else
-                            ____t_result_133 = __O[2383]
+                            ____t_result_133 = __O[2388]
                         end
-                        __O[2384] = ____t_result_133
+                        __O[2389] = ____t_result_133
                         if ____t_134(____t_result_133) then
                             ____t_result_135 = v.cueKey == desired.cueKey
                         else
-                            ____t_result_135 = __O[2384]
+                            ____t_result_135 = __O[2389]
                         end
                         if ____t_136(____t_result_135) then
                             nextArenaTrack(nil)
@@ -223,23 +223,23 @@ local __O = {};
                             else
                                 ____t_result_137 = v.loop
                             end
-                            __O[2385] = ____t_result_137
+                            __O[2390] = ____t_result_137
                             if ____t_138(____t_result_137) then
                                 ____t_result_139 = unlocked
                             else
-                                ____t_result_139 = __O[2385]
+                                ____t_result_139 = __O[2390]
                             end
-                            __O[2386] = ____t_result_139
+                            __O[2391] = ____t_result_139
                             if ____t_140(____t_result_139) then
                                 ____t_result_141 = not __t(suspended(nil))
                             else
-                                ____t_result_141 = __O[2386]
+                                ____t_result_141 = __O[2391]
                             end
-                            __O[2387] = ____t_result_141
+                            __O[2392] = ____t_result_141
                             if ____t_142(____t_result_141) then
                                 ____t_result_143 = active == v.index
                             else
-                                ____t_result_143 = __O[2387]
+                                ____t_result_143 = __O[2392]
                             end
                             if ____t_144(____t_result_143) then
                                 lastAttempt = ""
@@ -277,9 +277,9 @@ local __O = {};
                             if ____opt_147 ~= nil then
                                 ____opt_147 = ____opt_147.title
                             end
-                            __O[2388] = ____opt_147
+                            __O[2393] = ____opt_147
                             if ____t_149(____opt_147) then
-                                ____t_result_150 = __O[2388]
+                                ____t_result_150 = __O[2393]
                             else
                                 ____t_result_150 = "esta trilha"
                             end
@@ -299,17 +299,17 @@ local __O = {};
                             if desired ~= nil then
                                 ____opt_result_155 = desired.arenaShuffle
                             end
-                            __O[2389] = ____opt_result_155
+                            __O[2394] = ____opt_result_155
                             if ____t_156(____opt_result_155) then
                                 ____t_result_157 = arenaPlaylist.open
                             else
-                                ____t_result_157 = __O[2389]
+                                ____t_result_157 = __O[2394]
                             end
-                            __O[2390] = ____t_result_157
+                            __O[2395] = ____t_result_157
                             if ____t_158(____t_result_157) then
                                 ____t_result_159 = arenaPlaylist.currentId == v.id
                             else
-                                ____t_result_159 = __O[2390]
+                                ____t_result_159 = __O[2395]
                             end
                             if ____t_160(____t_result_159) then
                                 __call(arenaPlaylist.failed, "add", v.id)
@@ -334,9 +334,9 @@ local __O = {};
         else
             ____t_result_161 = gamePaused
         end
-        __O[2391] = ____t_result_161
+        __O[2396] = ____t_result_161
         if ____t_162(____t_result_161) then
-            ____t_result_163 = __O[2391]
+            ____t_result_163 = __O[2396]
         else
             ____t_result_163 = not not __t(window.document.hidden)
         end
@@ -382,7 +382,7 @@ local __O = {};
                 local j = math.floor(math.random() * (i + 1))
                 do
                     do
-                        __O[2393] = __iter(__arrL(
+                        __O[2398] = __iter(__arrL(
                             {
                                 __get(bag, j),
                                 __get(bag, i)
@@ -392,16 +392,16 @@ local __O = {};
                         __set(
                             bag,
                             i,
-                            __get(__O[2393], 0)
+                            __get(__O[2398], 0)
                         )
                     end
                     __set(
                         bag,
                         j,
-                        __get(__O[2393], 1)
+                        __get(__O[2398], 1)
                     )
                 end
-                local ____ = __O[2393]
+                local ____ = __O[2398]
                 i = i - 1
             end
         end
@@ -488,7 +488,7 @@ local __O = {};
             if alternative >= 0 then
                 do
                     do
-                        __O[2394] = __iter(__arrL(
+                        __O[2399] = __iter(__arrL(
                             {
                                 __get(arenaPlaylist.bag, alternative),
                                 __get(arenaPlaylist.bag, 0)
@@ -498,16 +498,16 @@ local __O = {};
                         __set(
                             arenaPlaylist.bag,
                             0,
-                            __get(__O[2394], 0)
+                            __get(__O[2399], 0)
                         )
                     end
                     __set(
                         arenaPlaylist.bag,
                         alternative,
-                        __get(__O[2394], 1)
+                        __get(__O[2399], 1)
                     )
                 end
-                local ____ = __O[2394]
+                local ____ = __O[2399]
             else
                 arenaPlaylist.bag = __arrL({}, 0)
                 return nextArenaTrack(nil)
@@ -534,9 +534,9 @@ local __O = {};
                 if ____opt_190 ~= nil then
                     ____opt_result_192 = ____opt_190(____opt_190)
                 end
-                __O[2395] = ____opt_result_192
+                __O[2400] = ____opt_result_192
                 if ____t_193(____opt_result_192) then
-                    ____t_result_194 = __O[2395]
+                    ____t_result_194 = __O[2400]
                 else
                     ____t_result_194 = nil
                 end
@@ -568,11 +568,11 @@ local __O = {};
         local ____t_result_201
         local ____t_200 = __t
         local ____temp_199 = type(arena.matchId) == "string"
-        __O[2396] = ____temp_199
+        __O[2401] = ____temp_199
         if ____t_200(____temp_199) then
             ____t_result_201 = arena.matchId
         else
-            ____t_result_201 = __O[2396]
+            ____t_result_201 = __O[2401]
         end
         if ____t_202(____t_result_201) then
             ____t_result_203 = arena.matchId
@@ -688,9 +688,9 @@ local __O = {};
                     if ____opt_218 ~= nil then
                         ____opt_result_220 = ____opt_218(____opt_218)
                     end
-                    __O[2397] = ____opt_result_220
+                    __O[2402] = ____opt_result_220
                     if ____t_221(____opt_result_220) then
-                        ____t_result_222 = __O[2397]
+                        ____t_result_222 = __O[2402]
                     else
                         ____t_result_222 = nil
                     end
@@ -739,7 +739,7 @@ local __O = {};
                 if challenge ~= nil then
                     ____opt_result_235 = challenge.open
                 end
-                __O[2398] = ____opt_result_235
+                __O[2403] = ____opt_result_235
                 if ____t_236(____opt_result_235) then
                     ____t_result_237 = __call(
                         __arrL({"pump", "memory", "sort"}, 3),
@@ -747,7 +747,7 @@ local __O = {};
                         challenge.kind
                     )
                 else
-                    ____t_result_237 = __O[2398]
+                    ____t_result_237 = __O[2403]
                 end
                 if ____t_238(____t_result_237) then
                     local ____opt_241 = window.Game
@@ -777,9 +777,9 @@ local __O = {};
                         ____opt_result_247 = game.scene
                     end
                     local ____get_248_result_249 = ____get_248(SCENES, ____opt_result_247)
-                    __O[2399] = ____get_248_result_249
+                    __O[2404] = ____get_248_result_249
                     if ____t_250(____get_248_result_249) then
-                        ____t_result_251 = __O[2399]
+                        ____t_result_251 = __O[2404]
                     else
                         ____t_result_251 = "roca"
                     end
@@ -930,9 +930,9 @@ local __O = {};
                 if ____opt_297 ~= nil then
                     ____opt_result_299 = ____opt_297(____opt_297, id)
                 end
-                __O[2400] = ____opt_result_299
+                __O[2405] = ____opt_result_299
                 if ____t_300(____opt_result_299) then
-                    ____t_result_301 = __O[2400]
+                    ____t_result_301 = __O[2405]
                 else
                     ____t_result_301 = __arrL({}, 0)
                 end
@@ -1024,9 +1024,9 @@ local __O = {};
         local ____t_result_332
         local ____t_331 = __t
         local ____temp_330 = not __t(state) or not __t(state.started)
-        __O[2401] = ____temp_330
+        __O[2406] = ____temp_330
         if ____t_331(____temp_330) then
-            ____t_result_332 = __O[2401]
+            ____t_result_332 = __O[2406]
         else
             ____t_result_332 = state.playing == false
         end
@@ -1046,9 +1046,9 @@ local __O = {};
             SCENES,
             __TS__Number(state.scene)
         )
-        __O[2402] = ____get_result_335
+        __O[2407] = ____get_result_335
         if ____t_336(____get_result_335) then
-            ____t_result_337 = __O[2402]
+            ____t_result_337 = __O[2407]
         else
             ____t_result_337 = __get(SCENES, 0)
         end
@@ -1070,9 +1070,9 @@ local __O = {};
             if ____opt_341 ~= nil then
                 ____opt_result_343 = ____opt_341(____opt_341, state.cutscene)
             end
-            __O[2403] = ____opt_result_343
+            __O[2408] = ____opt_result_343
             if ____t_344(____opt_result_343) then
-                ____t_result_345 = __O[2403]
+                ____t_result_345 = __O[2408]
             else
                 ____t_result_345 = __arrL({}, 0)
             end
@@ -1183,9 +1183,9 @@ local __O = {};
                     local ____t_result_358
                     local ____t_357 = __t
                     local ____temp_356 = name == alias
-                    __O[2404] = ____temp_356
+                    __O[2409] = ____temp_356
                     if ____t_357(____temp_356) then
-                        ____t_result_358 = __O[2404]
+                        ____t_result_358 = __O[2409]
                     else
                         ____t_result_358 = __call(
                             name,
@@ -1193,9 +1193,9 @@ local __O = {};
                             __add(alias, " ")
                         )
                     end
-                    __O[2405] = ____t_result_358
+                    __O[2410] = ____t_result_358
                     if ____t_359(____t_result_358) then
-                        ____t_result_360 = __O[2405]
+                        ____t_result_360 = __O[2410]
                     else
                         ____t_result_360 = __call(
                             name,
@@ -1244,9 +1244,9 @@ local __O = {};
         local ____t_result_375
         local ____t_374 = __t
         local ____get_result_373 = __get(list, 0)
-        __O[2407] = ____get_result_373
+        __O[2412] = ____get_result_373
         if ____t_374(____get_result_373) then
-            ____t_result_375 = __O[2407]
+            ____t_result_375 = __O[2412]
         else
             ____t_result_375 = "menu.title"
         end
@@ -1276,11 +1276,11 @@ local __O = {};
                 local ____t_result_381
                 local ____t_380 = __t
                 local ____temp_379 = key == __add("events.", cutsceneKind)
-                __O[2408] = ____temp_379
+                __O[2413] = ____temp_379
                 if ____t_380(____temp_379) then
                     ____t_result_381 = binding.startSeconds ~= nil or binding.delaySeconds ~= nil
                 else
-                    ____t_result_381 = __O[2408]
+                    ____t_result_381 = __O[2413]
                 end
                 local legacyCue = ____t_result_381
                 local ____t_386 = __t
@@ -1289,9 +1289,9 @@ local __O = {};
                     local ____t_result_384
                     local ____t_383 = __t
                     local ____temp_382 = key == __add("cutscenes.", cutsceneKind)
-                    __O[2409] = ____temp_382
+                    __O[2414] = ____temp_382
                     if ____t_383(____temp_382) then
-                        ____t_result_384 = __O[2409]
+                        ____t_result_384 = __O[2414]
                     else
                         ____t_result_384 = legacyCue
                     end
@@ -1494,7 +1494,7 @@ local __O = {};
         local ____t_result_438
         local ____t_433 = __t
         local ____temp_432 = not __t(nativePaused) and not __t(window.document.hidden)
-        __O[2410] = ____temp_432
+        __O[2415] = ____temp_432
         if ____t_433(____temp_432) then
             local ____t_437 = __t
             local ____opt_result_436
@@ -1503,7 +1503,7 @@ local __O = {};
             end
             ____t_result_438 = not ____t_437(____opt_result_436)
         else
-            ____t_result_438 = __O[2410]
+            ____t_result_438 = __O[2415]
         end
         local running = ____t_result_438
         if __t(not __t(filmClock) or filmClock.key ~= selection.cueKey) then
@@ -1617,23 +1617,23 @@ local __O = {};
                     else
                         ____t_result_452 = ok
                     end
-                    __O[2411] = ____t_result_452
+                    __O[2416] = ____t_result_452
                     if ____t_453(____t_result_452) then
                         ____t_result_454 = v.pending == generation
                     else
-                        ____t_result_454 = __O[2411]
+                        ____t_result_454 = __O[2416]
                     end
-                    __O[2412] = ____t_result_454
+                    __O[2417] = ____t_result_454
                     if ____t_455(____t_result_454) then
                         ____t_result_456 = not __t(suspended(nil))
                     else
-                        ____t_result_456 = __O[2412]
+                        ____t_result_456 = __O[2417]
                     end
-                    __O[2413] = ____t_result_456
+                    __O[2418] = ____t_result_456
                     if ____t_457(____t_result_456) then
                         ____t_result_458 = enabled
                     else
-                        ____t_result_458 = __O[2413]
+                        ____t_result_458 = __O[2418]
                     end
                     ____resolve_459(nil, ____t_result_458)
                 end
@@ -1693,21 +1693,21 @@ local __O = {};
             local ____t_result_468
             local ____t_467 = __t
             local ____temp_466 = not __t(same)
-            __O[2414] = ____temp_466
+            __O[2419] = ____temp_466
             if ____t_467(____temp_466) then
-                ____t_result_468 = __O[2414]
+                ____t_result_468 = __O[2419]
             else
                 ____t_result_468 = seek
             end
-            __O[2415] = ____t_result_468
+            __O[2420] = ____t_result_468
             if ____t_469(____t_result_468) then
-                ____t_result_470 = __O[2415]
+                ____t_result_470 = __O[2420]
             else
                 ____t_result_470 = v.cueKey ~= selection.cueKey
             end
-            __O[2416] = ____t_result_470
+            __O[2421] = ____t_result_470
             if ____t_471(____t_result_470) then
-                ____t_result_473 = __O[2416]
+                ____t_result_473 = __O[2421]
             else
                 local ____t_result_472
                 if __t(v.ended) then
@@ -1731,15 +1731,15 @@ local __O = {};
                 else
                     ____t_result_474 = selection.arenaShuffle
                 end
-                __O[2417] = ____t_result_474
+                __O[2422] = ____t_result_474
                 if ____t_475(____t_result_474) then
-                    ____t_result_476 = __O[2417]
+                    ____t_result_476 = __O[2422]
                 else
                     ____t_result_476 = __gt(selection.startSeconds, 0)
                 end
-                __O[2418] = ____t_result_476
+                __O[2423] = ____t_result_476
                 if ____t_477(____t_result_476) then
-                    ____t_result_478 = __O[2418]
+                    ____t_result_478 = __O[2423]
                 else
                     ____t_result_478 = __callq(v.cueKey, "startsWith", "offset|")
                 end
@@ -1753,11 +1753,11 @@ local __O = {};
                     local ____t_result_483
                     local ____t_482 = __t
                     local ____temp_481 = generation == requestGeneration and not __t(suspended(nil))
-                    __O[2419] = ____temp_481
+                    __O[2424] = ____temp_481
                     if ____t_482(____temp_481) then
                         ____t_result_483 = enabled
                     else
-                        ____t_result_483 = __O[2419]
+                        ____t_result_483 = __O[2424]
                     end
                     if ____t_484(____t_result_483) then
                         lastError = "Não foi possível carregar o trecho da música. Toque no som para tentar novamente."
@@ -1770,15 +1770,15 @@ local __O = {};
                 local ____t_result_487
                 local ____t_486 = __t
                 local ____temp_485 = generation ~= requestGeneration or v.pending ~= generation
-                __O[2420] = ____temp_485
+                __O[2425] = ____temp_485
                 if ____t_486(____temp_485) then
-                    ____t_result_487 = __O[2420]
+                    ____t_result_487 = __O[2425]
                 else
                     ____t_result_487 = not __t(enabled)
                 end
-                __O[2421] = ____t_result_487
+                __O[2426] = ____t_result_487
                 if ____t_488(____t_result_487) then
-                    ____t_result_489 = __O[2421]
+                    ____t_result_489 = __O[2426]
                 else
                     ____t_result_489 = suspended(nil)
                 end
@@ -1804,9 +1804,9 @@ local __O = {};
                     else
                         ____t_result_493 = selection.track.duration
                     end
-                    __O[2422] = ____t_result_493
+                    __O[2427] = ____t_result_493
                     if ____t_494(____t_result_493) then
-                        ____t_result_495 = __O[2422]
+                        ____t_result_495 = __O[2427]
                     else
                         ____t_result_495 = math.huge
                     end
@@ -1902,15 +1902,15 @@ local __O = {};
                 local ____t_result_506
                 local ____t_505 = __t
                 local ____temp_504 = generation ~= requestGeneration or v.pending ~= generation
-                __O[2423] = ____temp_504
+                __O[2428] = ____temp_504
                 if ____t_505(____temp_504) then
-                    ____t_result_506 = __O[2423]
+                    ____t_result_506 = __O[2428]
                 else
                     ____t_result_506 = not __t(enabled)
                 end
-                __O[2424] = ____t_result_506
+                __O[2429] = ____t_result_506
                 if ____t_507(____t_result_506) then
-                    ____t_result_508 = __O[2424]
+                    ____t_result_508 = __O[2429]
                 else
                     ____t_result_508 = suspended(nil)
                 end
@@ -1926,9 +1926,9 @@ local __O = {};
                 local ____t_result_512
                 local ____t_511 = __t
                 local ____temp_510 = generation ~= requestGeneration or not __t(enabled)
-                __O[2425] = ____temp_510
+                __O[2430] = ____temp_510
                 if ____t_511(____temp_510) then
-                    ____t_result_512 = __O[2425]
+                    ____t_result_512 = __O[2430]
                 else
                     ____t_result_512 = suspended(nil)
                 end
@@ -2012,11 +2012,11 @@ local __O = {};
         if lastAudioState ~= nil then
             ____opt_result_521 = lastAudioState.cutscene
         end
-        __O[2426] = ____opt_result_521
+        __O[2431] = ____opt_result_521
         if ____t_522(____opt_result_521) then
             ____t_result_523 = lastAudioState.paused
         else
-            ____t_result_523 = __O[2426]
+            ____t_result_523 = __O[2431]
         end
         local nextPaused = not not ____t_524(____t_result_523)
         if nextPaused ~= gamePaused then
@@ -2045,15 +2045,15 @@ local __O = {};
         local ____t_result_532
         local ____t_531 = __t
         local ____temp_530 = not __t(ready) or not __t(enabled)
-        __O[2427] = ____temp_530
+        __O[2432] = ____temp_530
         if ____t_531(____temp_530) then
-            ____t_result_532 = __O[2427]
+            ____t_result_532 = __O[2432]
         else
             ____t_result_532 = not __t(unlocked)
         end
-        __O[2428] = ____t_result_532
+        __O[2433] = ____t_result_532
         if ____t_533(____t_result_532) then
-            ____t_result_534 = __O[2428]
+            ____t_result_534 = __O[2433]
         else
             ____t_result_534 = suspended(nil)
         end
@@ -2106,18 +2106,18 @@ local __O = {};
             local ____t_result_543
             local ____t_539 = __t
             local ____temp_538 = selection.cueKey ~= nil and same.cueKey ~= selection.cueKey
-            __O[2430] = ____temp_538
+            __O[2435] = ____temp_538
             if ____t_539(____temp_538) then
-                ____t_result_543 = __O[2430]
+                ____t_result_543 = __O[2435]
             else
                 local ____t_result_542
                 local ____t_541 = __t
                 local ____temp_540 = selection.cueKey == nil
-                __O[2429] = ____temp_540
+                __O[2434] = ____temp_540
                 if ____t_541(____temp_540) then
                     ____t_result_542 = __callq(same.cueKey, "startsWith", "offset|")
                 else
-                    ____t_result_542 = __O[2429]
+                    ____t_result_542 = __O[2434]
                 end
                 ____t_result_543 = ____t_result_542
             end
@@ -2135,11 +2135,11 @@ local __O = {};
         else
             ____t_result_545 = selection.cutscene
         end
-        __O[2431] = ____t_result_545
+        __O[2436] = ____t_result_545
         if ____t_546(____t_result_545) then
             ____t_result_547 = targetPosition(nil, selection, {duration = selection.track.duration}).ended
         else
-            ____t_result_547 = __O[2431]
+            ____t_result_547 = __O[2436]
         end
         if ____t_548(____t_result_547) then
             silenceSelection(
@@ -2160,17 +2160,17 @@ local __O = {};
         else
             ____t_result_549 = same
         end
-        __O[2432] = ____t_result_549
+        __O[2437] = ____t_result_549
         if ____t_550(____t_result_549) then
             ____t_result_551 = not __t(same.audio.paused)
         else
-            ____t_result_551 = __O[2432]
+            ____t_result_551 = __O[2437]
         end
-        __O[2433] = ____t_result_551
+        __O[2438] = ____t_result_551
         if ____t_552(____t_result_551) then
             ____t_result_553 = not __t(cueChanged)
         else
-            ____t_result_553 = __O[2433]
+            ____t_result_553 = __O[2438]
         end
         if ____t_554(____t_result_553) then
             same.cueKey = selection.cueKey
@@ -2246,23 +2246,23 @@ local __O = {};
         if same ~= nil then
             ____opt_result_562 = same.ended
         end
-        __O[2434] = ____opt_result_562
+        __O[2439] = ____opt_result_562
         if ____t_563(____opt_result_562) then
             ____t_result_564 = not __t(selection.loop)
         else
-            ____t_result_564 = __O[2434]
+            ____t_result_564 = __O[2439]
         end
-        __O[2435] = ____t_result_564
+        __O[2440] = ____t_result_564
         if ____t_565(____t_result_564) then
             ____t_result_566 = same.cueKey == selection.cueKey
         else
-            ____t_result_566 = __O[2435]
+            ____t_result_566 = __O[2440]
         end
-        __O[2436] = ____t_result_566
+        __O[2441] = ____t_result_566
         if ____t_567(____t_result_566) then
             ____t_result_568 = not __t(cueChanged)
         else
-            ____t_result_568 = __O[2436]
+            ____t_result_568 = __O[2441]
         end
         if ____t_569(____t_result_568) then
             lastAttempt = attempt
@@ -2367,19 +2367,19 @@ local __O = {};
         else
             ____t_result_610 = enabled
         end
-        __O[2441] = ____t_result_610
+        __O[2446] = ____t_result_610
         if ____t_611(____t_result_610) then
             ____t_result_612 = not __t(suspended(nil))
         else
-            ____t_result_612 = __O[2441]
+            ____t_result_612 = __O[2446]
         end
-        __O[2442] = ____t_result_612
+        __O[2447] = ____t_result_612
         if ____t_613(____t_result_612) then
             ____t_result_614 = not __t(audioContext) or audioContext.state == "running"
         else
-            ____t_result_614 = __O[2442]
+            ____t_result_614 = __O[2447]
         end
-        __O[2444] = ____t_result_614
+        __O[2449] = ____t_result_614
         if ____t_615(____t_result_614) then
             ____t_result_619 = __call(
                 voices,
@@ -2388,20 +2388,20 @@ local __O = {};
                     local ____t_result_618
                     local ____t_617 = __t
                     local ____temp_616 = not __t(v.audio.paused) and not __t(v.audio.ended)
-                    __O[2443] = ____temp_616
+                    __O[2448] = ____temp_616
                     if ____t_617(____temp_616) then
                         ____t_result_618 = __gt(
                             currentVolume(nil, v),
                             0.0001
                         )
                     else
-                        ____t_result_618 = __O[2443]
+                        ____t_result_618 = __O[2448]
                     end
                     return ____t_result_618
                 end
             )
         else
-            ____t_result_619 = __O[2444]
+            ____t_result_619 = __O[2449]
         end
         return ____t_result_619
     end
@@ -2419,9 +2419,9 @@ local __O = {};
         if desired ~= nil then
             ____opt_result_622 = desired.track.id
         end
-        __O[2445] = ____opt_result_622
+        __O[2450] = ____opt_result_622
         if ____t_623(____opt_result_622) then
-            ____t_result_624 = __O[2445]
+            ____t_result_624 = __O[2450]
         else
             ____t_result_624 = nil
         end
@@ -2431,9 +2431,9 @@ local __O = {};
         if desired ~= nil then
             ____opt_result_627 = desired.track.title
         end
-        __O[2446] = ____opt_result_627
+        __O[2451] = ____opt_result_627
         if ____t_628(____opt_result_627) then
-            ____t_result_629 = __O[2446]
+            ____t_result_629 = __O[2451]
         else
             ____t_result_629 = nil
         end
@@ -2443,9 +2443,9 @@ local __O = {};
         if desired ~= nil then
             ____opt_result_632 = desired.startSeconds
         end
-        __O[2447] = ____opt_result_632
+        __O[2452] = ____opt_result_632
         if ____t_633(____opt_result_632) then
-            ____t_result_634 = __O[2447]
+            ____t_result_634 = __O[2452]
         else
             ____t_result_634 = 0
         end
@@ -2455,9 +2455,9 @@ local __O = {};
         if desired ~= nil then
             ____opt_result_637 = desired.delaySeconds
         end
-        __O[2448] = ____opt_result_637
+        __O[2453] = ____opt_result_637
         if ____t_638(____opt_result_637) then
-            ____t_result_639 = __O[2448]
+            ____t_result_639 = __O[2453]
         else
             ____t_result_639 = 0
         end
@@ -2484,11 +2484,11 @@ local __O = {};
         if desired ~= nil then
             ____opt_result_650 = desired.cutscene
         end
-        __O[2449] = ____opt_result_650
+        __O[2454] = ____opt_result_650
         if ____t_651(____opt_result_650) then
             ____t_result_652 = __lt(desired.elapsed, desired.delaySeconds)
         else
-            ____t_result_652 = __O[2449]
+            ____t_result_652 = __O[2454]
         end
         local ____temp_671 = not not ____t_653(____t_result_652)
         local ____isPlaying_result_672 = isPlaying(nil)
@@ -2553,9 +2553,9 @@ local __O = {};
                     local ____t_result_659
                     local ____t_658 = __t
                     local ____TS__Number_result_657 = __TS__Number(v.audio.currentTime)
-                    __O[2450] = ____TS__Number_result_657
+                    __O[2455] = ____TS__Number_result_657
                     if ____t_658(____TS__Number_result_657) then
-                        ____t_result_659 = __O[2450]
+                        ____t_result_659 = __O[2455]
                     else
                         ____t_result_659 = 0
                     end
@@ -2605,11 +2605,11 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = window.location.hostname == "127.0.0.1" and __call(launch, "get", "native") == "1"
-    __O[2361] = ____temp_0
+    __O[2366] = ____temp_0
     if ____t_1(____temp_0) then
         ____t_result_2 = __call(launch, "get", "pc") == "1"
     else
-        ____t_result_2 = __O[2361]
+        ____t_result_2 = __O[2366]
     end
     local nativePC = ____t_result_2
     local ____t_result_9
@@ -2619,21 +2619,21 @@ local __O = {};
     local ____t_result_5
     local ____t_4 = __t
     local ____temp_3 = window.location.hostname == "appassets.androidplatform.net"
-    __O[2362] = ____temp_3
+    __O[2367] = ____temp_3
     if ____t_4(____temp_3) then
-        ____t_result_5 = __O[2362]
+        ____t_result_5 = __O[2367]
     else
         ____t_result_5 = nativePC
     end
-    __O[2363] = ____t_result_5
+    __O[2368] = ____t_result_5
     if ____t_6(____t_result_5) then
-        ____t_result_7 = __O[2363]
+        ____t_result_7 = __O[2368]
     else
         ____t_result_7 = window.location.protocol == "file:"
     end
-    __O[2364] = ____t_result_7
+    __O[2369] = ____t_result_7
     if ____t_8(____t_result_7) then
-        ____t_result_9 = __O[2364]
+        ____t_result_9 = __O[2369]
     else
         ____t_result_9 = window.location.protocol == "daroca:"
     end
@@ -2651,9 +2651,9 @@ local __O = {};
     if ____opt_10 ~= nil then
         ____opt_10 = ____opt_10.tracks
     end
-    __O[2365] = ____opt_10
+    __O[2370] = ____opt_10
     if ____t_12(____opt_10) then
-        ____t_result_13 = __O[2365]
+        ____t_result_13 = __O[2370]
     else
         ____t_result_13 = __arrL({}, 0)
     end
@@ -2754,21 +2754,21 @@ local __O = {};
         local ____t_result_19
         local ____t_18 = __t
         local ____temp_17 = not __t(raw) or raw.schema ~= VERSION
-        __O[2366] = ____temp_17
+        __O[2371] = ____temp_17
         if ____t_18(____temp_17) then
-            ____t_result_19 = __O[2366]
+            ____t_result_19 = __O[2371]
         else
             ____t_result_19 = not __isArray(raw.tracks)
         end
-        __O[2367] = ____t_result_19
+        __O[2372] = ____t_result_19
         if ____t_20(____t_result_19) then
-            ____t_result_21 = __O[2367]
+            ____t_result_21 = __O[2372]
         else
             ____t_result_21 = not __t(raw.bindings)
         end
-        __O[2368] = ____t_result_21
+        __O[2373] = ____t_result_21
         if ____t_22(____t_result_21) then
-            ____t_result_23 = __O[2368]
+            ____t_result_23 = __O[2373]
         else
             ____t_result_23 = type(raw.bindings) ~= "table"
         end
@@ -2818,11 +2818,11 @@ local __O = {};
                         else
                             ____t_result_26 = x
                         end
-                        __O[2369] = ____t_result_26
+                        __O[2374] = ____t_result_26
                         if ____t_27(____t_result_26) then
                             ____t_result_28 = type(x.name) == "string"
                         else
-                            ____t_result_28 = __O[2369]
+                            ____t_result_28 = __O[2374]
                         end
                         return ____t_result_28
                     end
@@ -2846,18 +2846,18 @@ local __O = {};
                 local ____t_result_34
                 local ____t_33 = __t
                 local ____temp_32 = not __t(t) or type(t.id) ~= "string"
-                __O[2370] = ____temp_32
+                __O[2375] = ____temp_32
                 if ____t_33(____temp_32) then
-                    ____t_result_34 = __O[2370]
+                    ____t_result_34 = __O[2375]
                 else
                     ____t_result_34 = not __re_test(
                         __re("^[a-f0-9]{64}$", "i"),
                         t.id
                     )
                 end
-                __O[2371] = ____t_result_34
+                __O[2376] = ____t_result_34
                 if ____t_35(____t_result_34) then
-                    ____t_result_36 = __O[2371]
+                    ____t_result_36 = __O[2376]
                 else
                     ____t_result_36 = __call(seen, "has", t.id)
                 end
@@ -2936,14 +2936,14 @@ local __O = {};
                 local ____t_result_46
                 local ____t_45 = __t
                 local ____temp_44 = not __t(isNative) and not __t(__call(packagedIds, "has", id))
-                __O[2372] = ____temp_44
+                __O[2377] = ____temp_44
                 if ____t_45(____temp_44) then
                     ____t_result_46 = t.url == __add(
                         __add("/music/", id),
                         ".mp3"
                     )
                 else
-                    ____t_result_46 = __O[2372]
+                    ____t_result_46 = __O[2377]
                 end
                 if ____t_47(____t_result_46) then
                     ____t_result_48 = t.url
@@ -2978,15 +2978,15 @@ local __O = {};
                     __re("^[a-zA-Z0-9_.-]{1,90}$", ""),
                     id
                 ) or not __t(b)
-                __O[2373] = ____temp_60
+                __O[2378] = ____temp_60
                 if ____t_61(____temp_60) then
-                    ____t_result_62 = __O[2373]
+                    ____t_result_62 = __O[2378]
                 else
                     ____t_result_62 = type(b) ~= "table"
                 end
-                __O[2374] = ____t_result_62
+                __O[2379] = ____t_result_62
                 if ____t_63(____t_result_62) then
-                    ____t_result_64 = __O[2374]
+                    ____t_result_64 = __O[2379]
                 else
                     ____t_result_64 = not __t(__call(
                         c.tracks,
@@ -3042,9 +3042,9 @@ local __O = {};
         local ____t_result_68
         local ____t_67 = __t
         local ____temp_66 = not __t(____local) or not __t(c)
-        __O[2375] = ____temp_66
+        __O[2380] = ____temp_66
         if ____t_67(____temp_66) then
-            ____t_result_68 = __O[2375]
+            ____t_result_68 = __O[2380]
         else
             ____t_result_68 = not __t(__len(____local.tracks)) and not __t(__len(__keys(____local.bindings)))
         end
@@ -3091,9 +3091,9 @@ local __O = {};
                 local ____t_result_72
                 local ____t_71 = __t
                 local ____temp_70 = window.localStorage:getItem(CONFIG_CACHE)
-                __O[2376] = ____temp_70
+                __O[2381] = ____temp_70
                 if ____t_71(____temp_70) then
-                    ____t_result_72 = __O[2376]
+                    ____t_result_72 = __O[2381]
                 else
                     ____t_result_72 = "null"
                 end
@@ -3262,11 +3262,11 @@ local __O = {};
                     local ____t_result_92
                     local ____t_91 = __t
                     local ____temp_90 = not __t(ready)
-                    __O[2377] = ____temp_90
+                    __O[2382] = ____temp_90
                     if ____t_91(____temp_90) then
                         ____t_result_92 = base
                     else
-                        ____t_result_92 = __O[2377]
+                        ____t_result_92 = __O[2382]
                     end
                     if ____t_93(____t_result_92) then
                         applyConfig(nil, base, baseSource)
@@ -3306,7 +3306,7 @@ local __O = {};
                     else
                         ____t_result_99 = ____local
                     end
-                    __O[2379] = ____t_result_99
+                    __O[2384] = ____t_result_99
                     if ____t_100(____t_result_99) then
                         local ____temp_106 = not __t(ready)
                         if not ____temp_106 then
@@ -3316,9 +3316,9 @@ local __O = {};
                             if base ~= nil then
                                 ____opt_result_103 = base.revision
                             end
-                            __O[2378] = ____opt_result_103
+                            __O[2383] = ____opt_result_103
                             if ____t_104(____opt_result_103) then
-                                ____t_result_105 = __O[2378]
+                                ____t_result_105 = __O[2383]
                             else
                                 ____t_result_105 = 0
                             end
@@ -3326,7 +3326,7 @@ local __O = {};
                         end
                         ____t_result_107 = ____temp_106
                     else
-                        ____t_result_107 = __O[2379]
+                        ____t_result_107 = __O[2384]
                     end
                     if ____t_108(____t_result_107) then
                         local ____mergeLocal_110 = mergeLocal
@@ -3347,17 +3347,17 @@ local __O = {};
                     local ____t_result_113
                     local ____t_112 = __t
                     local ____temp_111 = not __t(isNative)
-                    __O[2380] = ____temp_111
+                    __O[2385] = ____temp_111
                     if ____t_112(____temp_111) then
                         ____t_result_113 = isWeb
                     else
-                        ____t_result_113 = __O[2380]
+                        ____t_result_113 = __O[2385]
                     end
-                    __O[2381] = ____t_result_113
+                    __O[2386] = ____t_result_113
                     if ____t_114(____t_result_113) then
                         ____t_result_115 = not __t(window.DAROCA_LAN)
                     else
-                        ____t_result_115 = __O[2381]
+                        ____t_result_115 = __O[2386]
                     end
                     if ____t_116(____t_result_115) then
                         local ____try = __TS__AsyncAwaiter(function()
@@ -3442,11 +3442,11 @@ local __O = {};
                                 else
                                     ____t_result_169 = v.warming
                                 end
-                                __O[2392] = ____t_result_169
+                                __O[2397] = ____t_result_169
                                 if ____t_170(____t_result_169) then
                                     ____t_result_171 = generation == requestGeneration
                                 else
-                                    ____t_result_171 = __O[2392]
+                                    ____t_result_171 = __O[2397]
                                 end
                                 if ____t_172(____t_result_171) then
                                     v.audio:pause()
@@ -3558,7 +3558,7 @@ local __O = {};
         else
             ____t_result_369 = b
         end
-        __O[2406] = ____t_result_369
+        __O[2411] = ____t_result_369
         if ____t_370(____t_result_369) then
             ____t_result_371 = __call(
                 config.tracks,
@@ -3566,7 +3566,7 @@ local __O = {};
                 function(____, t) return t.id == b.trackId end
             )
         else
-            ____t_result_371 = __O[2406]
+            ____t_result_371 = __O[2411]
         end
         return not not ____t_372(____t_result_371)
     end
@@ -3629,17 +3629,17 @@ local __O = {};
                 local ____t_result_583
                 local ____t_582 = __t
                 local ____temp_581 = v.volume == 0 and active ~= v.index
-                __O[2437] = ____temp_581
+                __O[2442] = ____temp_581
                 if ____t_582(____temp_581) then
                     ____t_result_583 = not __t(v.pending)
                 else
-                    ____t_result_583 = __O[2437]
+                    ____t_result_583 = __O[2442]
                 end
-                __O[2438] = ____t_result_583
+                __O[2443] = ____t_result_583
                 if ____t_584(____t_result_583) then
                     ____t_result_585 = not __t(v.audio.paused)
                 else
-                    ____t_result_585 = __O[2438]
+                    ____t_result_585 = __O[2443]
                 end
                 if ____t_586(____t_result_585) then
                     v.audio:pause()
@@ -3673,15 +3673,15 @@ local __O = {};
         local ____t_result_601
         local ____t_600 = __t
         local ____suspended_result_599 = suspended(nil)
-        __O[2439] = ____suspended_result_599
+        __O[2444] = ____suspended_result_599
         if ____t_600(____suspended_result_599) then
-            ____t_result_601 = __O[2439]
+            ____t_result_601 = __O[2444]
         else
             ____t_result_601 = not __t(enabled)
         end
-        __O[2440] = ____t_result_601
+        __O[2445] = ____t_result_601
         if ____t_602(____t_result_601) then
-            ____t_result_603 = __O[2440]
+            ____t_result_603 = __O[2445]
         else
             ____t_result_603 = not __t(unlocked)
         end
@@ -3715,11 +3715,11 @@ local __O = {};
         local ____t_result_676
         local ____t_675 = __t
         local ____temp_674 = type(id) == "string"
-        __O[2451] = ____temp_674
+        __O[2456] = ____temp_674
         if ____t_675(____temp_674) then
             ____t_result_676 = id
         else
-            ____t_result_676 = __O[2451]
+            ____t_result_676 = __O[2456]
         end
         if ____t_677(____t_result_676) then
             ____t_result_678 = id
@@ -3834,17 +3834,17 @@ local __O = {};
     else
         ____t_result_685 = title
     end
-    __O[2452] = ____t_result_685
+    __O[2457] = ____t_result_685
     if ____t_686(____t_result_685) then
         ____t_result_687 = type(title.append) == "function"
     else
-        ____t_result_687 = __O[2452]
+        ____t_result_687 = __O[2457]
     end
-    __O[2453] = ____t_result_687
+    __O[2458] = ____t_result_687
     if ____t_688(____t_result_687) then
         ____t_result_689 = not __t(window.document:getElementById("menuMusicBtn"))
     else
-        ____t_result_689 = __O[2453]
+        ____t_result_689 = __O[2458]
     end
     if ____t_690(____t_result_689) then
         local button = window.document:createElement("button")
@@ -3931,11 +3931,11 @@ local __O = {};
         else
             ____t_result_696 = event.isTrusted
         end
-        __O[2454] = ____t_result_696
+        __O[2459] = ____t_result_696
         if ____t_697(____t_result_696) then
             ____t_result_698 = not __t(unlocked) or not __t(isPlaying(nil))
         else
-            ____t_result_698 = __O[2454]
+            ____t_result_698 = __O[2459]
         end
         if ____t_699(____t_result_698) then
             unlock(nil)

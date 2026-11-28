@@ -17,39 +17,39 @@ local __O = {};
         if kind == nil then
             kind = "intro"
         end
-        local ____t_85 = __t
-        local ____t_result_84
+        local ____t_88 = __t
+        local ____t_result_87
         if __t(kind) then
-            ____t_result_84 = type(kind) == "table"
+            ____t_result_87 = type(kind) == "table"
         else
-            ____t_result_84 = kind
+            ____t_result_87 = kind
         end
-        if ____t_85(____t_result_84) then
+        if ____t_88(____t_result_87) then
             return timelinePosition(nil, kind)
         end
-        local ____temp_90
+        local ____temp_93
         if kind == "jorge_epilogue" then
-            local ____opt_86 = window.JorgeEpilogue
-            if ____opt_86 ~= nil then
-                ____opt_86 = ____opt_86.shots
+            local ____opt_89 = window.JorgeEpilogue
+            if ____opt_89 ~= nil then
+                ____opt_89 = ____opt_89.shots
             end
-            ____temp_90 = ____opt_86
+            ____temp_93 = ____opt_89
         else
-            local ____temp_89
+            local ____temp_92
             if kind == "intro" then
-                ____temp_89 = INTRO
+                ____temp_92 = INTRO
             else
-                local ____temp_88
+                local ____temp_91
                 if kind == "outro" then
-                    ____temp_88 = OUTRO
+                    ____temp_91 = OUTRO
                 else
-                    ____temp_88 = __get(EXTRA, kind)
+                    ____temp_91 = __get(EXTRA, kind)
                 end
-                ____temp_89 = ____temp_88
+                ____temp_92 = ____temp_91
             end
-            ____temp_90 = ____temp_89
+            ____temp_93 = ____temp_92
         end
-        local frames = ____temp_90
+        local frames = ____temp_93
         if not __t(frames) then
             return nil
         end
@@ -59,41 +59,41 @@ local __O = {};
             "map",
             function(____, frame, index)
                 local duration = frameDuration(nil, frame)
-                local ____t_result_91
-                if __t(frame.id) then
-                    ____t_result_91 = frame.id
-                else
-                    ____t_result_91 = tostring(index)
-                end
-                local ____index_95 = index
-                local ____start_96 = start
-                local ____duration_97 = duration
-                local ____t_result_92
-                if __t(frame.title) then
-                    ____t_result_92 = frame.title
-                else
-                    ____t_result_92 = __add("Quadro ", index + 1)
-                end
-                local ____t_result_93
-                if __t(frame.speaker) then
-                    ____t_result_93 = frame.speaker
-                else
-                    ____t_result_93 = ""
-                end
                 local ____t_result_94
-                if __t(frame.text) then
-                    ____t_result_94 = frame.text
+                if __t(frame.id) then
+                    ____t_result_94 = frame.id
                 else
-                    ____t_result_94 = ""
+                    ____t_result_94 = tostring(index)
+                end
+                local ____index_98 = index
+                local ____start_99 = start
+                local ____duration_100 = duration
+                local ____t_result_95
+                if __t(frame.title) then
+                    ____t_result_95 = frame.title
+                else
+                    ____t_result_95 = __add("Quadro ", index + 1)
+                end
+                local ____t_result_96
+                if __t(frame.speaker) then
+                    ____t_result_96 = frame.speaker
+                else
+                    ____t_result_96 = ""
+                end
+                local ____t_result_97
+                if __t(frame.text) then
+                    ____t_result_97 = frame.text
+                else
+                    ____t_result_97 = ""
                 end
                 local shot = {
-                    id = ____t_result_91,
-                    index = ____index_95,
-                    start = ____start_96,
-                    duration = ____duration_97,
-                    label = ____t_result_92,
-                    speaker = ____t_result_93,
-                    text = ____t_result_94
+                    id = ____t_result_94,
+                    index = ____index_98,
+                    start = ____start_99,
+                    duration = ____duration_100,
+                    label = ____t_result_95,
+                    speaker = ____t_result_96,
+                    text = ____t_result_97
                 }
                 start = start + duration
                 return shot
@@ -117,35 +117,35 @@ local __O = {};
         if __t(s.done) then
             return timing.duration
         end
-        local ____t_result_100
-        local ____t_99 = __t
-        local ____TS__Number_result_98 = __TS__Number(s.index)
-        __O[729] = ____TS__Number_result_98
-        if ____t_99(____TS__Number_result_98) then
-            ____t_result_100 = __O[729]
+        local ____t_result_103
+        local ____t_102 = __t
+        local ____TS__Number_result_101 = __TS__Number(s.index)
+        __O[729] = ____TS__Number_result_101
+        if ____t_102(____TS__Number_result_101) then
+            ____t_result_103 = __O[729]
         else
-            ____t_result_100 = 0
+            ____t_result_103 = 0
         end
         local index = clamp(
             nil,
-            math.floor(____t_result_100),
+            math.floor(____t_result_103),
             0,
             __len(timing.shots) - 1
         )
         local shot = __get(timing.shots, index)
-        local ____shot_start_104 = shot.start
-        local ____t_result_103
-        local ____t_102 = __t
-        local ____TS__Number_result_101 = __TS__Number(s.time)
-        __O[730] = ____TS__Number_result_101
-        if ____t_102(____TS__Number_result_101) then
-            ____t_result_103 = __O[730]
+        local ____shot_start_107 = shot.start
+        local ____t_result_106
+        local ____t_105 = __t
+        local ____TS__Number_result_104 = __TS__Number(s.time)
+        __O[730] = ____TS__Number_result_104
+        if ____t_105(____TS__Number_result_104) then
+            ____t_result_106 = __O[730]
         else
-            ____t_result_103 = 0
+            ____t_result_106 = 0
         end
         return clamp(
             nil,
-            ____shot_start_104 + math.max(0, ____t_result_103),
+            ____shot_start_107 + math.max(0, ____t_result_106),
             0,
             timing.duration
         )
@@ -750,28 +750,41 @@ local __O = {};
             c:translate(0, -PISO_CINE)
             pisoAplicado = false
         end
+        local cam = camera + math.floor(math.sin(state.time * 0.35) * 8 + 0.5)
+        local tc = state.time * 0.7 + state.index * 2
         local ____t_10 = __t
-        local ____opt_8 = window.Art
+        local ____this_9
+        ____this_9 = window
+        local ____opt_8 = ____this_9.DAROCA_FUNDO_CAMADAS
         if ____opt_8 ~= nil then
-            ____opt_8 = ____opt_8.drawScene
-        end
-        if ____t_10(____opt_8) then
-            window.Art:drawScene(
+            ____opt_8 = ____opt_8(
+                ____this_9,
                 c,
                 scene,
-                camera + math.floor(math.sin(state.time * 0.35) * 8 + 0.5),
-                state.time * 0.7 + state.index * 2
+                cam,
+                tc
             )
+        end
+        if ____t_10(____opt_8) then
         else
-            rect(
-                nil,
-                c,
-                0,
-                0,
-                960,
-                540,
-                "#8bc4e4"
-            )
+            local ____t_13 = __t
+            local ____opt_11 = window.Art
+            if ____opt_11 ~= nil then
+                ____opt_11 = ____opt_11.drawScene
+            end
+            if ____t_13(____opt_11) then
+                window.Art:drawScene(c, scene, cam, tc)
+            else
+                rect(
+                    nil,
+                    c,
+                    0,
+                    0,
+                    960,
+                    540,
+                    "#8bc4e4"
+                )
+            end
         end
         rect(
             nil,
@@ -1202,12 +1215,12 @@ local __O = {};
                 t,
                 {facing = -1, scale = 1.55}
             )
-            local ____t_13 = __t
-            local ____opt_11 = window.Art
-            if ____opt_11 ~= nil then
-                ____opt_11 = ____opt_11.drawVehicle
+            local ____t_16 = __t
+            local ____opt_14 = window.Art
+            if ____opt_14 ~= nil then
+                ____opt_14 = ____opt_14.drawVehicle
             end
-            if ____t_13(____opt_11) then
+            if ____t_16(____opt_14) then
                 window.Art:drawVehicle(c, 810, 389, t)
             end
             do
@@ -1561,12 +1574,12 @@ local __O = {};
         if scene == nil then
             scene = 1
         end
-        local ____t_16 = __t
-        local ____opt_14 = window.Art
-        if ____opt_14 ~= nil then
-            ____opt_14 = ____opt_14.drawArena
+        local ____t_19 = __t
+        local ____opt_17 = window.Art
+        if ____opt_17 ~= nil then
+            ____opt_17 = ____opt_17.drawArena
         end
-        if ____t_16(____opt_14) then
+        if ____t_19(____opt_17) then
             window.Art:drawArena(
                 c,
                 ____type,
@@ -1601,25 +1614,25 @@ local __O = {};
             freddy = "#5d4c4b",
             nicolas = "#b4af90"
         }
-        local ____rect_21 = rect
-        local ____c_20 = c
-        local ____t_result_19
-        local ____t_18 = __t
-        local ____get_result_17 = __get(floorColors, ____type)
-        __O[725] = ____get_result_17
-        if ____t_18(____get_result_17) then
-            ____t_result_19 = __O[725]
+        local ____rect_24 = rect
+        local ____c_23 = c
+        local ____t_result_22
+        local ____t_21 = __t
+        local ____get_result_20 = __get(floorColors, ____type)
+        __O[725] = ____get_result_20
+        if ____t_21(____get_result_20) then
+            ____t_result_22 = __O[725]
         else
-            ____t_result_19 = "#4d6250"
+            ____t_result_22 = "#4d6250"
         end
-        ____rect_21(
+        ____rect_24(
             nil,
-            ____c_20,
+            ____c_23,
             0,
             378,
             960,
             35,
-            ____t_result_19
+            ____t_result_22
         )
         rect(
             nil,
@@ -1884,12 +1897,12 @@ local __O = {};
         c:save()
         c:translate(x, y)
         c:scale(scale, scale)
-        local ____t_24 = __t
-        local ____opt_22 = window.Art
-        if ____opt_22 ~= nil then
-            ____opt_22 = ____opt_22.drawMinion
+        local ____t_27 = __t
+        local ____opt_25 = window.Art
+        if ____opt_25 ~= nil then
+            ____opt_25 = ____opt_25.drawMinion
         end
-        if ____t_24(____opt_22) then
+        if ____t_27(____opt_25) then
             window.Art:drawMinion(
                 c,
                 0,
@@ -1899,12 +1912,12 @@ local __O = {};
                 {type = kind, moving = true, range = 20}
             )
         else
-            local ____t_27 = __t
-            local ____opt_25 = window.Art
-            if ____opt_25 ~= nil then
-                ____opt_25 = ____opt_25.drawDoodle
+            local ____t_30 = __t
+            local ____opt_28 = window.Art
+            if ____opt_28 ~= nil then
+                ____opt_28 = ____opt_28.drawDoodle
             end
-            if ____t_27(____opt_25) then
+            if ____t_30(____opt_28) then
                 window.Art:drawDoodle(
                     c,
                     0,
@@ -2242,19 +2255,19 @@ local __O = {};
             "freddy",
             5
         )
-        local ____actor_30 = actor
-        local ____c_29 = c
-        local ____t_result_28
+        local ____actor_33 = actor
+        local ____c_32 = c
+        local ____t_result_31
         if __t(defeat) then
-            ____t_result_28 = ease(nil, t) * 35
+            ____t_result_31 = ease(nil, t) * 35
         else
-            ____t_result_28 = 0
+            ____t_result_31 = 0
         end
-        ____actor_30(
+        ____actor_33(
             nil,
-            ____c_29,
+            ____c_32,
             "daroca",
-            230 + ____t_result_28,
+            230 + ____t_result_31,
             378,
             t,
             {
@@ -2266,95 +2279,95 @@ local __O = {};
                 attackProgress = 0.48
             }
         )
-        local ____t_result_31
+        local ____t_result_34
         if __t(not __t(defeat) and i == 0) then
-            ____t_result_31 = ease(nil, t / 1.1)
+            ____t_result_34 = ease(nil, t / 1.1)
         else
-            ____t_result_31 = 1
+            ____t_result_34 = 1
         end
-        local enter = ____t_result_31
+        local enter = ____t_result_34
         local fx = __t(defeat) and 665 or 810 - enter * 140
-        local ____actor_47 = actor
-        local ____c_46 = c
-        local ____t_33 = __t
-        local ____t_result_32
+        local ____actor_50 = actor
+        local ____c_49 = c
+        local ____t_36 = __t
+        local ____t_result_35
         if __t(defeat) then
-            ____t_result_32 = i == 2
+            ____t_result_35 = i == 2
         else
-            ____t_result_32 = defeat
+            ____t_result_35 = defeat
         end
-        local ____temp_41 = ____t_33(____t_result_32) and 1 or -1
-        local ____temp_42 = __t(defeat) and 2 or 2.12
-        local ____t_result_36
-        local ____t_35 = __t
-        local ____temp_34 = not __t(defeat) and i == 0
-        __O[726] = ____temp_34
-        if ____t_35(____temp_34) then
-            ____t_result_36 = __lt(t, 1.1)
-        else
-            ____t_result_36 = __O[726]
-        end
-        local ____t_38 = __t
-        local ____t_result_37
-        if __t(defeat) then
-            ____t_result_37 = i == 0
-        else
-            ____t_result_37 = defeat
-        end
-        local ____temp_43 = ____t_38(____t_result_37) and 0.6 or 0
-        local ____temp_44 = not __t(defeat) and i == 2
-        local ____mod_result_45 = __mod(t * 0.6, 1)
-        local ____t_40 = __t
+        local ____temp_44 = ____t_36(____t_result_35) and 1 or -1
+        local ____temp_45 = __t(defeat) and 2 or 2.12
         local ____t_result_39
-        if __t(defeat) then
-            ____t_result_39 = i == 1
+        local ____t_38 = __t
+        local ____temp_37 = not __t(defeat) and i == 0
+        __O[726] = ____temp_37
+        if ____t_38(____temp_37) then
+            ____t_result_39 = __lt(t, 1.1)
         else
-            ____t_result_39 = defeat
+            ____t_result_39 = __O[726]
         end
-        ____actor_47(
+        local ____t_41 = __t
+        local ____t_result_40
+        if __t(defeat) then
+            ____t_result_40 = i == 0
+        else
+            ____t_result_40 = defeat
+        end
+        local ____temp_46 = ____t_41(____t_result_40) and 0.6 or 0
+        local ____temp_47 = not __t(defeat) and i == 2
+        local ____mod_result_48 = __mod(t * 0.6, 1)
+        local ____t_43 = __t
+        local ____t_result_42
+        if __t(defeat) then
+            ____t_result_42 = i == 1
+        else
+            ____t_result_42 = defeat
+        end
+        ____actor_50(
             nil,
-            ____c_46,
+            ____c_49,
             "freddy",
             fx,
             378,
             t,
             {
-                facing = ____temp_41,
-                scale = ____temp_42,
-                moving = ____t_result_36,
+                facing = ____temp_44,
+                scale = ____temp_45,
+                moving = ____t_result_39,
                 speed = 180,
-                recoil = ____temp_43,
-                attack = ____temp_44,
+                recoil = ____temp_46,
+                attack = ____temp_47,
                 attackType = "punch",
-                attackProgress = ____mod_result_45,
-                pose = ____t_40(____t_result_39) and "fistbump" or nil
+                attackProgress = ____mod_result_48,
+                pose = ____t_43(____t_result_42) and "fistbump" or nil
             }
         )
+        local ____t_57 = __t
+        local ____t_result_56
         local ____t_54 = __t
         local ____t_result_53
-        local ____t_51 = __t
-        local ____t_result_50
-        local ____t_49 = __t
-        local ____temp_48 = not __t(defeat) and i == 0
-        __O[727] = ____temp_48
-        if ____t_49(____temp_48) then
-            ____t_result_50 = __O[727]
+        local ____t_52 = __t
+        local ____temp_51 = not __t(defeat) and i == 0
+        __O[727] = ____temp_51
+        if ____t_52(____temp_51) then
+            ____t_result_53 = __O[727]
         else
-            ____t_result_50 = not __t(defeat) and i == 3
+            ____t_result_53 = not __t(defeat) and i == 3
         end
-        __O[728] = ____t_result_50
-        if ____t_51(____t_result_50) then
-            ____t_result_53 = __O[728]
-        else
-            local ____t_result_52
-            if __t(defeat) then
-                ____t_result_52 = i == 2
-            else
-                ____t_result_52 = defeat
-            end
-            ____t_result_53 = ____t_result_52
-        end
+        __O[728] = ____t_result_53
         if ____t_54(____t_result_53) then
+            ____t_result_56 = __O[728]
+        else
+            local ____t_result_55
+            if __t(defeat) then
+                ____t_result_55 = i == 2
+            else
+                ____t_result_55 = defeat
+            end
+            ____t_result_56 = ____t_result_55
+        end
+        if ____t_57(____t_result_56) then
             word(
                 nil,
                 c,
@@ -2423,14 +2436,14 @@ local __O = {};
                 110
             )
         end
-        local ____t_56 = __t
-        local ____t_result_55
+        local ____t_59 = __t
+        local ____t_result_58
         if __t(defeat) then
-            ____t_result_55 = i == 0
+            ____t_result_58 = i == 0
         else
-            ____t_result_55 = defeat
+            ____t_result_58 = defeat
         end
-        if ____t_56(____t_result_55) then
+        if ____t_59(____t_result_58) then
             rect(
                 nil,
                 c,
@@ -2450,14 +2463,14 @@ local __O = {};
                 "#d1d9c9"
             )
         end
-        local ____t_58 = __t
-        local ____t_result_57
+        local ____t_61 = __t
+        local ____t_result_60
         if __t(defeat) then
-            ____t_result_57 = i == 1
+            ____t_result_60 = i == 1
         else
-            ____t_result_57 = defeat
+            ____t_result_60 = defeat
         end
-        if ____t_58(____t_result_57) then
+        if ____t_61(____t_result_60) then
             heart(
                 nil,
                 c,
@@ -2492,14 +2505,14 @@ local __O = {};
                     4700
                 )
                 c:save()
-                local ____c_60 = c
-                local ____temp_59
+                local ____c_63 = c
+                local ____temp_62
                 if i == 2 then
-                    ____temp_59 = ease(nil, t / 1.15)
+                    ____temp_62 = ease(nil, t / 1.15)
                 else
-                    ____temp_59 = 1
+                    ____temp_62 = 1
                 end
-                ____c_60.globalAlpha = ____temp_59
+                ____c_63.globalAlpha = ____temp_62
                 battleBackdrop(
                     nil,
                     c,
@@ -2512,13 +2525,13 @@ local __O = {};
             end
             local awakened = __ge(i, 2)
             local charge = i == 2 and __lt(t, 1.15)
-            local ____t_result_61
+            local ____t_result_64
             if __t(awakened) then
-                ____t_result_61 = math.sin(t * 2) * 3
+                ____t_result_64 = math.sin(t * 2) * 3
             else
-                ____t_result_61 = 0
+                ____t_result_64 = 0
             end
-            local hover = ____t_result_61
+            local hover = ____t_result_64
             if __t(awakened) then
                 celestialSeal(
                     nil,
@@ -2660,13 +2673,13 @@ local __O = {};
                 end
             end
         else
-            local ____temp_62
+            local ____temp_65
             if i == 1 then
-                ____temp_62 = ease(nil, t / 1.2)
+                ____temp_65 = ease(nil, t / 1.2)
             else
-                ____temp_62 = __gt(i, 1) and 1 or 0
+                ____temp_65 = __gt(i, 1) and 1 or 0
             end
-            local dissolve = ____temp_62
+            local dissolve = ____temp_65
             backdrop(
                 nil,
                 c,
@@ -2898,27 +2911,27 @@ local __O = {};
                 attackProgress = __mod(t * 0.6, 1)
             }
         )
-        local ____actor_67 = actor
-        local ____c_66 = c
-        local ____temp_65 = -1
-        local ____t_64 = __t
-        local ____t_result_63
+        local ____actor_70 = actor
+        local ____c_69 = c
+        local ____temp_68 = -1
+        local ____t_67 = __t
+        local ____t_result_66
         if __t(defeat) then
-            ____t_result_63 = i == 0
+            ____t_result_66 = i == 0
         else
-            ____t_result_63 = defeat
+            ____t_result_66 = defeat
         end
-        ____actor_67(
+        ____actor_70(
             nil,
-            ____c_66,
+            ____c_69,
             "dede",
             665,
             378,
             t,
             {
-                facing = ____temp_65,
+                facing = ____temp_68,
                 scale = 2,
-                recoil = ____t_64(____t_result_63) and 0.5 or 0,
+                recoil = ____t_67(____t_result_66) and 0.5 or 0,
                 attack = not __t(defeat) and i == 2,
                 attackType = "cast",
                 attackProgress = __mod(t * 0.6, 1),
@@ -3292,12 +3305,12 @@ local __O = {};
         if scale == nil then
             scale = 1
         end
-        local ____t_70 = __t
-        local ____opt_68 = window.Art
-        if ____opt_68 ~= nil then
-            ____opt_68 = ____opt_68.drawAcai
+        local ____t_73 = __t
+        local ____opt_71 = window.Art
+        if ____opt_71 ~= nil then
+            ____opt_71 = ____opt_71.drawAcai
         end
-        if ____t_70(____opt_68) then
+        if ____t_73(____opt_71) then
             window.Art:drawAcai(
                 c,
                 x,
@@ -4859,13 +4872,13 @@ local __O = {};
                 local run = __lt(t, 0.9)
                 local charge = __ge(t, 0.9) and __lt(t, 1.8)
                 local powered = __ge(t, 1.8)
-                local ____t_result_71
+                local ____t_result_74
                 if __t(run) then
-                    ____t_result_71 = -90 + ease(nil, t / 0.9) * 605
+                    ____t_result_74 = -90 + ease(nil, t / 0.9) * 605
                 else
-                    ____t_result_71 = 515
+                    ____t_result_74 = 515
                 end
-                local x = ____t_result_71
+                local x = ____t_result_74
                 actor(
                     nil,
                     c,
@@ -4875,33 +4888,33 @@ local __O = {};
                     t,
                     {facing = 1, scale = 1.7, muscular = strong}
                 )
-                local ____actor_77 = actor
-                local ____c_76 = c
-                local ____temp_73 = __t(powered) and 1.15 or 1.75
-                local ____temp_74 = __t(run) and 400 or 0
-                local ____powered_75 = powered
-                local ____t_result_72
+                local ____actor_80 = actor
+                local ____c_79 = c
+                local ____temp_76 = __t(powered) and 1.15 or 1.75
+                local ____temp_77 = __t(run) and 400 or 0
+                local ____powered_78 = powered
+                local ____t_result_75
                 if __t(charge) then
-                    ____t_result_72 = charge
+                    ____t_result_75 = charge
                 else
-                    ____t_result_72 = powered
+                    ____t_result_75 = powered
                 end
-                ____actor_77(
+                ____actor_80(
                     nil,
-                    ____c_76,
+                    ____c_79,
                     "reeis",
                     x,
                     378,
                     t,
                     {
                         facing = 1,
-                        scale = ____temp_73,
+                        scale = ____temp_76,
                         moving = run,
-                        speed = ____temp_74,
+                        speed = ____temp_77,
                         charging = charge,
                         transformed = powered,
-                        powered = ____powered_75,
-                        aura = ____t_result_72
+                        powered = ____powered_78,
+                        aura = ____t_result_75
                     }
                 )
                 if __t(powered) then
@@ -4972,32 +4985,32 @@ local __O = {};
         end
     end
     local function isEpilogue(self, s)
-        local ____opt_result_80
+        local ____opt_result_83
         if s ~= nil then
-            ____opt_result_80 = s.kind
+            ____opt_result_83 = s.kind
         end
-        return ____opt_result_80 == "jorge_epilogue"
+        return ____opt_result_83 == "jorge_epilogue"
     end
     frameDuration = function(____, frame)
-        local ____isFiniteN_result_83
+        local ____isFiniteN_result_86
         if __isFiniteN(frame.duration) then
-            ____isFiniteN_result_83 = frame.duration
+            ____isFiniteN_result_86 = frame.duration
         else
-            local ____len_82 = __len
-            local ____t_result_81
+            local ____len_85 = __len
+            local ____t_result_84
             if __t(frame.text) then
-                ____t_result_81 = frame.text
+                ____t_result_84 = frame.text
             else
-                ____t_result_81 = ""
+                ____t_result_84 = ""
             end
-            ____isFiniteN_result_83 = math.floor(clamp(
+            ____isFiniteN_result_86 = math.floor(clamp(
                 nil,
-                ____len_82(____t_result_81) / 19 + 1.35,
+                ____len_85(____t_result_84) / 19 + 1.35,
                 4.5,
                 9
             ) * 100 + 0.5) / 100
         end
-        return ____isFiniteN_result_83
+        return ____isFiniteN_result_86
     end
     local function stateAt(self, kind, seconds, options)
         if seconds == nil then
@@ -5010,16 +5023,16 @@ local __O = {};
         if not __t(timing) then
             return nil
         end
-        local ____t_result_107
-        local ____t_106 = __t
-        local ____TS__Number_result_105 = __TS__Number(seconds)
-        __O[731] = ____TS__Number_result_105
-        if ____t_106(____TS__Number_result_105) then
-            ____t_result_107 = __O[731]
+        local ____t_result_110
+        local ____t_109 = __t
+        local ____TS__Number_result_108 = __TS__Number(seconds)
+        __O[731] = ____TS__Number_result_108
+        if ____t_109(____TS__Number_result_108) then
+            ____t_result_110 = __O[731]
         else
-            ____t_result_107 = 0
+            ____t_result_110 = 0
         end
-        local elapsed = clamp(nil, ____t_result_107, 0, timing.duration)
+        local elapsed = clamp(nil, ____t_result_110, 0, timing.duration)
         local last = __len(timing.shots) - 1
         local index = __call(
             timing.shots,
@@ -5049,17 +5062,17 @@ local __O = {};
             options = {}
         end
         if kind == "jorge_epilogue" then
-            local ____t_result_111
-            local ____t_110 = __t
-            local ____opt_108 = window.JorgeEpilogue
-            if ____opt_108 ~= nil then
-                ____opt_108 = ____opt_108:create(options)
+            local ____t_result_114
+            local ____t_113 = __t
+            local ____opt_111 = window.JorgeEpilogue
+            if ____opt_111 ~= nil then
+                ____opt_111 = ____opt_111:create(options)
             end
-            __O[732] = ____opt_108
-            if ____t_110(____opt_108) then
-                ____t_result_111 = __O[732]
+            __O[732] = ____opt_111
+            if ____t_113(____opt_111) then
+                ____t_result_114 = __O[732]
             else
-                ____t_result_111 = {
+                ____t_result_114 = {
                     kind = kind,
                     index = 0,
                     time = 0,
@@ -5068,26 +5081,26 @@ local __O = {};
                     options = __assign({}, options)
                 }
             end
-            return ____t_result_111
+            return ____t_result_114
         end
-        local ____t_result_116
-        local ____t_115 = __t
-        local ____t_result_114
-        local ____t_113 = __t
-        local ____temp_112 = kind == "outro"
-        __O[733] = ____temp_112
-        if ____t_113(____temp_112) then
-            ____t_result_114 = __O[733]
+        local ____t_result_119
+        local ____t_118 = __t
+        local ____t_result_117
+        local ____t_116 = __t
+        local ____temp_115 = kind == "outro"
+        __O[733] = ____temp_115
+        if ____t_116(____temp_115) then
+            ____t_result_117 = __O[733]
         else
-            ____t_result_114 = __fcall(__hasOwnV, EXTRA, kind)
+            ____t_result_117 = __fcall(__hasOwnV, EXTRA, kind)
         end
-        if ____t_115(____t_result_114) then
-            ____t_result_116 = kind
+        if ____t_118(____t_result_117) then
+            ____t_result_119 = kind
         else
-            ____t_result_116 = "intro"
+            ____t_result_119 = "intro"
         end
         return {
-            kind = ____t_result_116,
+            kind = ____t_result_119,
             index = 0,
             time = 0,
             elapsed = 0,
@@ -5096,57 +5109,57 @@ local __O = {};
         }
     end
     local function list(self, s)
-        local ____t_result_125
+        local ____t_result_128
         if __t(isEpilogue(nil, s)) then
-            local ____t_result_120
-            local ____t_119 = __t
-            local ____opt_117 = window.JorgeEpilogue
-            if ____opt_117 ~= nil then
-                ____opt_117 = ____opt_117.shots
-            end
-            __O[734] = ____opt_117
-            if ____t_119(____opt_117) then
-                ____t_result_120 = __O[734]
-            else
-                ____t_result_120 = __arrL({}, 0)
-            end
-            ____t_result_125 = ____t_result_120
-        else
-            local ____t_result_124
+            local ____t_result_123
             local ____t_122 = __t
-            local ____get_result_121 = __get(EXTRA, s.kind)
-            __O[735] = ____get_result_121
-            if ____t_122(____get_result_121) then
-                ____t_result_124 = __O[735]
-            else
-                local ____temp_123
-                if s.kind == "outro" then
-                    ____temp_123 = OUTRO
-                else
-                    ____temp_123 = INTRO
-                end
-                ____t_result_124 = ____temp_123
+            local ____opt_120 = window.JorgeEpilogue
+            if ____opt_120 ~= nil then
+                ____opt_120 = ____opt_120.shots
             end
-            ____t_result_125 = ____t_result_124
+            __O[734] = ____opt_120
+            if ____t_122(____opt_120) then
+                ____t_result_123 = __O[734]
+            else
+                ____t_result_123 = __arrL({}, 0)
+            end
+            ____t_result_128 = ____t_result_123
+        else
+            local ____t_result_127
+            local ____t_125 = __t
+            local ____get_result_124 = __get(EXTRA, s.kind)
+            __O[735] = ____get_result_124
+            if ____t_125(____get_result_124) then
+                ____t_result_127 = __O[735]
+            else
+                local ____temp_126
+                if s.kind == "outro" then
+                    ____temp_126 = OUTRO
+                else
+                    ____temp_126 = INTRO
+                end
+                ____t_result_127 = ____temp_126
+            end
+            ____t_result_128 = ____t_result_127
         end
-        return ____t_result_125
+        return ____t_result_128
     end
     local function beat(self, s)
         if not __t(s) then
             return nil
         end
         if __t(isEpilogue(nil, s)) then
-            local ____t_result_129
-            local ____t_128 = __t
-            local ____opt_126 = window.JorgeEpilogue
-            if ____opt_126 ~= nil then
-                ____opt_126 = ____opt_126:beat(s)
+            local ____t_result_132
+            local ____t_131 = __t
+            local ____opt_129 = window.JorgeEpilogue
+            if ____opt_129 ~= nil then
+                ____opt_129 = ____opt_129:beat(s)
             end
-            __O[736] = ____opt_126
-            if ____t_128(____opt_126) then
-                ____t_result_129 = __O[736]
+            __O[736] = ____opt_129
+            if ____t_131(____opt_129) then
+                ____t_result_132 = __O[736]
             else
-                ____t_result_129 = {
+                ____t_result_132 = {
                     index = 0,
                     number = 1,
                     total = 1,
@@ -5155,21 +5168,21 @@ local __O = {};
                     cinematic = true
                 }
             end
-            return ____t_result_129
+            return ____t_result_132
         end
         local beats = list(nil, s)
-        local ____t_result_132
-        local ____t_131 = __t
-        local ____TS__Number_result_130 = __TS__Number(s.index)
-        __O[737] = ____TS__Number_result_130
-        if ____t_131(____TS__Number_result_130) then
-            ____t_result_132 = __O[737]
+        local ____t_result_135
+        local ____t_134 = __t
+        local ____TS__Number_result_133 = __TS__Number(s.index)
+        __O[737] = ____TS__Number_result_133
+        if ____t_134(____TS__Number_result_133) then
+            ____t_result_135 = __O[737]
         else
-            ____t_result_132 = 0
+            ____t_result_135 = 0
         end
         local index = clamp(
             nil,
-            math.floor(____t_result_132),
+            math.floor(____t_result_135),
             0,
             __len(beats) - 1
         )
@@ -5184,17 +5197,17 @@ local __O = {};
         )
     end
     local function update(self, s, dt)
-        local ____t_136 = __t
-        local ____t_result_135
-        local ____t_134 = __t
-        local ____temp_133 = not __t(s)
-        __O[738] = ____temp_133
-        if ____t_134(____temp_133) then
-            ____t_result_135 = __O[738]
+        local ____t_139 = __t
+        local ____t_result_138
+        local ____t_137 = __t
+        local ____temp_136 = not __t(s)
+        __O[738] = ____temp_136
+        if ____t_137(____temp_136) then
+            ____t_result_138 = __O[738]
         else
-            ____t_result_135 = s.done
+            ____t_result_138 = s.done
         end
-        if ____t_136(____t_result_135) then
+        if ____t_139(____t_result_138) then
             return
         end
         if __t(isEpilogue(nil, s)) then
@@ -5205,32 +5218,32 @@ local __O = {};
             end
             return
         end
-        local ____t_result_139
-        local ____t_138 = __t
-        local ____TS__Number_result_137 = __TS__Number(dt)
-        __O[739] = ____TS__Number_result_137
-        if ____t_138(____TS__Number_result_137) then
-            ____t_result_139 = __O[739]
+        local ____t_result_142
+        local ____t_141 = __t
+        local ____TS__Number_result_140 = __TS__Number(dt)
+        __O[739] = ____TS__Number_result_140
+        if ____t_141(____TS__Number_result_140) then
+            ____t_result_142 = __O[739]
         else
-            ____t_result_139 = 0
+            ____t_result_142 = 0
         end
-        dt = clamp(nil, ____t_result_139, 0, 0.1)
+        dt = clamp(nil, ____t_result_142, 0, 0.1)
         s.time = __add(s.time, dt)
-        local ____s_142 = s
-        local ____add_141 = __add
-        local ____t_result_140
+        local ____s_145 = s
+        local ____add_144 = __add
+        local ____t_result_143
         if __t(s.elapsed) then
-            ____t_result_140 = s.elapsed
+            ____t_result_143 = s.elapsed
         else
-            ____t_result_140 = 0
+            ____t_result_143 = 0
         end
-        ____s_142.elapsed = ____add_141(____t_result_140, dt)
-        local ____t_145 = __t
-        local ____opt_143 = s.options
-        if ____opt_143 ~= nil then
-            ____opt_143 = ____opt_143.musicTimed
+        ____s_145.elapsed = ____add_144(____t_result_143, dt)
+        local ____t_148 = __t
+        local ____opt_146 = s.options
+        if ____opt_146 ~= nil then
+            ____opt_146 = ____opt_146.musicTimed
         end
-        if ____t_145(____opt_143) then
+        if ____t_148(____opt_146) then
             local timing = timeline(nil, s.kind)
             while __t(not __t(s.done) and __ge(
                 s.time,
@@ -5255,17 +5268,17 @@ local __O = {};
         end
     end
     local function advance(self, s)
-        local ____t_149 = __t
-        local ____t_result_148
-        local ____t_147 = __t
-        local ____temp_146 = not __t(s)
-        __O[740] = ____temp_146
-        if ____t_147(____temp_146) then
-            ____t_result_148 = __O[740]
+        local ____t_152 = __t
+        local ____t_result_151
+        local ____t_150 = __t
+        local ____temp_149 = not __t(s)
+        __O[740] = ____temp_149
+        if ____t_150(____temp_149) then
+            ____t_result_151 = __O[740]
         else
-            ____t_result_148 = s.done
+            ____t_result_151 = s.done
         end
-        if ____t_149(____t_result_148) then
+        if ____t_152(____t_result_151) then
             return false
         end
         if __t(isEpilogue(nil, s)) then
@@ -5284,12 +5297,12 @@ local __O = {};
         end
         s.index = s.index + 1
         s.time = 0
-        local ____t_152 = __t
-        local ____opt_150 = s.options
-        if ____opt_150 ~= nil then
-            ____opt_150 = ____opt_150.musicTimed
+        local ____t_155 = __t
+        local ____opt_153 = s.options
+        if ____opt_153 ~= nil then
+            ____opt_153 = ____opt_153.musicTimed
         end
-        if ____t_152(____opt_150) then
+        if ____t_155(____opt_153) then
             s.elapsed = timelinePosition(nil, s)
         end
         return true
@@ -5320,29 +5333,29 @@ local __O = {};
         end
         local b = beat(nil, s)
         local i = s.index
-        local ____t_result_155
-        local ____t_154 = __t
-        local ____TS__Number_result_153 = __TS__Number(s.time)
-        __O[741] = ____TS__Number_result_153
-        if ____t_154(____TS__Number_result_153) then
-            ____t_result_155 = __O[741]
+        local ____t_result_158
+        local ____t_157 = __t
+        local ____TS__Number_result_156 = __TS__Number(s.time)
+        __O[741] = ____TS__Number_result_156
+        if ____t_157(____TS__Number_result_156) then
+            ____t_result_158 = __O[741]
         else
-            ____t_result_155 = 0
+            ____t_result_158 = 0
         end
-        local t = ____t_result_155
-        local ____t_result_160
-        local ____t_159 = __t
-        local ____opt_result_158
+        local t = ____t_result_158
+        local ____t_result_163
+        local ____t_162 = __t
+        local ____opt_result_161
         if b ~= nil then
-            ____opt_result_158 = b.speaker
+            ____opt_result_161 = b.speaker
         end
-        __O[742] = ____opt_result_158
-        if ____t_159(____opt_result_158) then
-            ____t_result_160 = __O[742]
+        __O[742] = ____opt_result_161
+        if ____t_162(____opt_result_161) then
+            ____t_result_163 = __O[742]
         else
-            ____t_result_160 = ""
+            ____t_result_163 = ""
         end
-        local who = ____t_result_160
+        local who = ____t_result_163
         local actorX = __t(__call(who, "includes", "Da Roça")) and 265 or (__t(__call(who, "includes", "Nikolas")) and 645 or (__t(__call(who, "includes", "Lucas")) and 190 or (__t(__call(who, "includes", "Reeis")) and 650 or (__t(__call(who, "includes", "Menezes")) and 690 or (__t(__call(who, "includes", "Marco")) and 635 or 452)))))
         local actorY = __t(__call(who, "includes", "Lucas")) and 322 or (__t(__call(who, "includes", "Monstro")) and 165 or (__t(__call(who, "includes", "Armadilha")) and 380 or 278))
         if __t(__call(who, "includes", "Freddy")) then
@@ -5378,149 +5391,149 @@ local __O = {};
                 315,
                 730
             }, 7)
-            local ____t_result_163
-            local ____t_162 = __t
-            local ____get_result_161 = __get(partySpeakers, i)
-            __O[743] = ____get_result_161
-            if ____t_162(____get_result_161) then
-                ____t_result_163 = __O[743]
+            local ____t_result_166
+            local ____t_165 = __t
+            local ____get_result_164 = __get(partySpeakers, i)
+            __O[743] = ____get_result_164
+            if ____t_165(____get_result_164) then
+                ____t_result_166 = __O[743]
             else
-                ____t_result_163 = 315
+                ____t_result_166 = 315
             end
-            actorX = ____t_result_163
+            actorX = ____t_result_166
             actorY = 290
         end
         if s.kind == "intro" then
-            local ____t_167 = __t
-            local ____t_result_166
-            local ____t_165 = __t
-            local ____temp_164 = i == 0
-            __O[744] = ____temp_164
-            if ____t_165(____temp_164) then
-                ____t_result_166 = __call(who, "includes", "Da Roça")
+            local ____t_170 = __t
+            local ____t_result_169
+            local ____t_168 = __t
+            local ____temp_167 = i == 0
+            __O[744] = ____temp_167
+            if ____t_168(____temp_167) then
+                ____t_result_169 = __call(who, "includes", "Da Roça")
             else
-                ____t_result_166 = __O[744]
+                ____t_result_169 = __O[744]
             end
-            if ____t_167(____t_result_166) then
+            if ____t_170(____t_result_169) then
                 actorX = 330 + ease(nil, t / 1.1) * 60
             end
-            local ____t_171 = __t
-            local ____t_result_170
-            local ____t_169 = __t
-            local ____temp_168 = i == 1
-            __O[745] = ____temp_168
-            if ____t_169(____temp_168) then
-                ____t_result_170 = __call(who, "includes", "Nikolas")
+            local ____t_174 = __t
+            local ____t_result_173
+            local ____t_172 = __t
+            local ____temp_171 = i == 1
+            __O[745] = ____temp_171
+            if ____t_172(____temp_171) then
+                ____t_result_173 = __call(who, "includes", "Nikolas")
             else
-                ____t_result_170 = __O[745]
+                ____t_result_173 = __O[745]
             end
-            if ____t_171(____t_result_170) then
+            if ____t_174(____t_result_173) then
                 actorX = 610 + math.sin(t * 2) * 5
             end
-            local ____t_175 = __t
-            local ____t_result_174
-            local ____t_173 = __t
-            local ____temp_172 = i == 2
-            __O[746] = ____temp_172
-            if ____t_173(____temp_172) then
-                ____t_result_174 = __call(who, "includes", "Lucas")
+            local ____t_178 = __t
+            local ____t_result_177
+            local ____t_176 = __t
+            local ____temp_175 = i == 2
+            __O[746] = ____temp_175
+            if ____t_176(____temp_175) then
+                ____t_result_177 = __call(who, "includes", "Lucas")
             else
-                ____t_result_174 = __O[746]
+                ____t_result_177 = __O[746]
             end
-            if ____t_175(____t_result_174) then
+            if ____t_178(____t_result_177) then
                 actorX = 160
             end
-            local ____t_179 = __t
-            local ____t_result_178
-            local ____t_177 = __t
-            local ____temp_176 = i == 3
-            __O[747] = ____temp_176
-            if ____t_177(____temp_176) then
-                ____t_result_178 = __call(who, "includes", "Nikolas")
+            local ____t_182 = __t
+            local ____t_result_181
+            local ____t_180 = __t
+            local ____temp_179 = i == 3
+            __O[747] = ____temp_179
+            if ____t_180(____temp_179) then
+                ____t_result_181 = __call(who, "includes", "Nikolas")
             else
-                ____t_result_178 = __O[747]
+                ____t_result_181 = __O[747]
             end
-            if ____t_179(____t_result_178) then
+            if ____t_182(____t_result_181) then
                 actorX = 647 - ease(nil, t / 3) * 35
                 actorY = 268
             end
-            local ____t_183 = __t
-            local ____t_result_182
-            local ____t_181 = __t
-            local ____temp_180 = i == 5
-            __O[748] = ____temp_180
-            if ____t_181(____temp_180) then
-                ____t_result_182 = __call(who, "includes", "Nikolas")
+            local ____t_186 = __t
+            local ____t_result_185
+            local ____t_184 = __t
+            local ____temp_183 = i == 5
+            __O[748] = ____temp_183
+            if ____t_184(____temp_183) then
+                ____t_result_185 = __call(who, "includes", "Nikolas")
             else
-                ____t_result_182 = __O[748]
+                ____t_result_185 = __O[748]
             end
-            if ____t_183(____t_result_182) then
+            if ____t_186(____t_result_185) then
                 actorX = 575 + ease(nil, t / 2.4) * 240
             end
-            local ____t_187 = __t
-            local ____t_result_186
-            local ____t_185 = __t
-            local ____temp_184 = i == 6
-            __O[749] = ____temp_184
-            if ____t_185(____temp_184) then
-                ____t_result_186 = __call(who, "includes", "Da Roça")
+            local ____t_190 = __t
+            local ____t_result_189
+            local ____t_188 = __t
+            local ____temp_187 = i == 6
+            __O[749] = ____temp_187
+            if ____t_188(____temp_187) then
+                ____t_result_189 = __call(who, "includes", "Da Roça")
             else
-                ____t_result_186 = __O[749]
+                ____t_result_189 = __O[749]
             end
-            if ____t_187(____t_result_186) then
+            if ____t_190(____t_result_189) then
                 actorX = 360
             end
         elseif s.kind == "outro" then
-            local ____t_191 = __t
-            local ____t_result_190
-            local ____t_189 = __t
-            local ____temp_188 = i == 5
-            __O[750] = ____temp_188
-            if ____t_189(____temp_188) then
-                ____t_result_190 = __call(who, "includes", "Reeis")
+            local ____t_194 = __t
+            local ____t_result_193
+            local ____t_192 = __t
+            local ____temp_191 = i == 5
+            __O[750] = ____temp_191
+            if ____t_192(____temp_191) then
+                ____t_result_193 = __call(who, "includes", "Reeis")
             else
-                ____t_result_190 = __O[750]
+                ____t_result_193 = __O[750]
             end
-            if ____t_191(____t_result_190) then
+            if ____t_194(____t_result_193) then
                 actorX = 805
             end
-            local ____t_195 = __t
-            local ____t_result_194
-            local ____t_193 = __t
-            local ____temp_192 = i == 3
-            __O[751] = ____temp_192
-            if ____t_193(____temp_192) then
-                ____t_result_194 = __call(who, "includes", "Lucas")
+            local ____t_198 = __t
+            local ____t_result_197
+            local ____t_196 = __t
+            local ____temp_195 = i == 3
+            __O[751] = ____temp_195
+            if ____t_196(____temp_195) then
+                ____t_result_197 = __call(who, "includes", "Lucas")
             else
-                ____t_result_194 = __O[751]
+                ____t_result_197 = __O[751]
             end
-            if ____t_195(____t_result_194) then
+            if ____t_198(____t_result_197) then
                 actorX = 220
             end
         end
         local large = s.kind == "boss_giant"
-        local ____t_result_196
+        local ____t_result_199
         if __t(large) then
-            ____t_result_196 = large
+            ____t_result_199 = large
         else
-            ____t_result_196 = actorX < 480
+            ____t_result_199 = actorX < 480
         end
-        local left = ____t_result_196
-        local ____temp_199 = __t(large) and 245 or (__t(left) and 285 or 680)
-        local ____temp_200 = __t(large) and 61 or 65
-        local ____temp_201 = __t(large) and 390 or 410
-        local ____t_198 = __t
-        local ____t_result_197
+        local left = ____t_result_199
+        local ____temp_202 = __t(large) and 245 or (__t(left) and 285 or 680)
+        local ____temp_203 = __t(large) and 61 or 65
+        local ____temp_204 = __t(large) and 390 or 410
+        local ____t_201 = __t
+        local ____t_result_200
         if __t(left) then
-            ____t_result_197 = not __t(large)
+            ____t_result_200 = not __t(large)
         else
-            ____t_result_197 = left
+            ____t_result_200 = left
         end
         return {
-            x = ____temp_199,
-            y = ____temp_200,
-            width = ____temp_201,
-            tail = ____t_198(____t_result_197) and "left" or "right",
+            x = ____temp_202,
+            y = ____temp_203,
+            width = ____temp_204,
+            tail = ____t_201(____t_result_200) and "left" or "right",
             speakerX = clamp(
                 nil,
                 actorX + math.floor(math.sin(t * 0.4) * 4 + 0.5),
@@ -5595,64 +5608,64 @@ local __O = {};
         end
         c:restore()
     end
-    local ____window_223 = window
-    local ____ord_222 = __ord
-    local ____create_212 = create
-    local ____update_213 = update
-    local ____advance_214 = advance
-    local ____beat_215 = beat
-    local ____draw_216 = draw
-    local ____anchor_217 = anchor
-    local ____timeline_218 = timeline
-    local ____timelinePosition_219 = timelinePosition
-    local ____stateAt_220 = stateAt
-    local ____arr_result_221 = __arr(__TS__Spread(__iter(PARTY_CAST)))
-    local ____ord_211 = __ord
-    local ____assign_210 = __assign
-    local ____temp_209 = {}
-    local ____call_result_207 = __call(
+    local ____window_226 = window
+    local ____ord_225 = __ord
+    local ____create_215 = create
+    local ____update_216 = update
+    local ____advance_217 = advance
+    local ____beat_218 = beat
+    local ____draw_219 = draw
+    local ____anchor_220 = anchor
+    local ____timeline_221 = timeline
+    local ____timelinePosition_222 = timelinePosition
+    local ____stateAt_223 = stateAt
+    local ____arr_result_224 = __arr(__TS__Spread(__iter(PARTY_CAST)))
+    local ____ord_214 = __ord
+    local ____assign_213 = __assign
+    local ____temp_212 = {}
+    local ____call_result_210 = __call(
         INTRO,
         "map",
         function(____, x) return __assign({}, x) end
     )
-    local ____call_result_208 = __call(
+    local ____call_result_211 = __call(
         OUTRO,
         "map",
         function(____, x) return __assign({}, x) end
     )
-    local ____call_206 = __call
-    local ____t_result_205
-    local ____t_204 = __t
-    local ____opt_202 = window.JorgeEpilogue
-    if ____opt_202 ~= nil then
-        ____opt_202 = ____opt_202.shots
+    local ____call_209 = __call
+    local ____t_result_208
+    local ____t_207 = __t
+    local ____opt_205 = window.JorgeEpilogue
+    if ____opt_205 ~= nil then
+        ____opt_205 = ____opt_205.shots
     end
-    __O[752] = ____opt_202
-    if ____t_204(____opt_202) then
-        ____t_result_205 = __O[752]
+    __O[752] = ____opt_205
+    if ____t_207(____opt_205) then
+        ____t_result_208 = __O[752]
     else
-        ____t_result_205 = __arrL({}, 0)
+        ____t_result_208 = __arrL({}, 0)
     end
-    ____window_223.Cinematics = ____ord_222(
+    ____window_226.Cinematics = ____ord_225(
         {
-            create = ____create_212,
-            update = ____update_213,
-            advance = ____advance_214,
-            beat = ____beat_215,
-            draw = ____draw_216,
-            anchor = ____anchor_217,
-            timeline = ____timeline_218,
-            timelinePosition = ____timelinePosition_219,
-            stateAt = ____stateAt_220,
-            celebrationCast = ____arr_result_221,
-            metadata = ____ord_211(
-                ____assign_210(
-                    ____temp_209,
+            create = ____create_215,
+            update = ____update_216,
+            advance = ____advance_217,
+            beat = ____beat_218,
+            draw = ____draw_219,
+            anchor = ____anchor_220,
+            timeline = ____timeline_221,
+            timelinePosition = ____timelinePosition_222,
+            stateAt = ____stateAt_223,
+            celebrationCast = ____arr_result_224,
+            metadata = ____ord_214(
+                ____assign_213(
+                    ____temp_212,
                     {
-                        intro = ____call_result_207,
-                        outro = ____call_result_208,
-                        jorge_epilogue = ____call_206(
-                            ____t_result_205,
+                        intro = ____call_result_210,
+                        outro = ____call_result_211,
+                        jorge_epilogue = ____call_209(
+                            ____t_result_208,
                             "map",
                             function(____, x) return __assign({}, x) end
                         )

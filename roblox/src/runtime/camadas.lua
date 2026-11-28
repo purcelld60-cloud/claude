@@ -38,11 +38,15 @@ function K.montar(info, camera, tx, ty)
   return out
 end
 
--- a câmera ainda cabe no quadro do meio que está pronto? (senão o próximo desenho é urgente)
-function K.cabe(info, camera)
+-- o que aparece na tela ainda cabe no quadro do meio que está pronto? (senão o próximo desenho é urgente)
+-- Z: recorte com zoom das cenas do roteiro (com zoom aparece só uma parte do cenário)
+function K.cabe(info, camera, Z)
   if not info then return false end
-  local camL = floor((tonumber(camera) or 0) / 2)
-  return math.abs(camL - (info.camW + info.M)) <= info.M - 6
+  camera = tonumber(camera) or 0
+  local sx, sw = 0, 960
+  if type(Z) == "table" and (tonumber(Z.sw) or 0) > 0 then sx, sw = tonumber(Z.sx) or 0, tonumber(Z.sw) end
+  local a, b = (camera + sx) / 2, (camera + sx + sw) / 2
+  return a >= info.camW + 4 and b <= info.camW + info.VW - 4
 end
 
 return K

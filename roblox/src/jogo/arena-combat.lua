@@ -436,9 +436,9 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____callq_result_0 = __callq(window.ArenaRoster, "get", id)
-        __O[2530] = ____callq_result_0
+        __O[2535] = ____callq_result_0
         if ____t_1(____callq_result_0) then
-            ____t_result_2 = __O[2530]
+            ____t_result_2 = __O[2535]
         else
             ____t_result_2 = {
                 id = "daroca",
@@ -519,9 +519,9 @@ local __O = {};
         local ____t_result_11
         local ____t_10 = __t
         local ____get_result_9 = __get(profile, id)
-        __O[2531] = ____get_result_9
+        __O[2536] = ____get_result_9
         if ____t_10(____get_result_9) then
-            ____t_result_11 = __O[2531]
+            ____t_result_11 = __O[2536]
         else
             ____t_result_11 = profile.daroca
         end
@@ -628,9 +628,9 @@ local __O = {};
         local ____t_result_14
         local ____t_13 = __t
         local ____get_result_12 = __get(profile, id)
-        __O[2532] = ____get_result_12
+        __O[2537] = ____get_result_12
         if ____t_13(____get_result_12) then
-            ____t_result_14 = __O[2532]
+            ____t_result_14 = __O[2537]
         else
             ____t_result_14 = profile.daroca
         end
@@ -664,11 +664,11 @@ local __O = {};
         local ____t_result_17
         local ____t_16 = __t
         local ____temp_15 = __get(p, 4) == "arc" and dir ~= "up"
-        __O[2533] = ____temp_15
+        __O[2538] = ____temp_15
         if ____t_16(____temp_15) then
             ____t_result_17 = dir ~= "down"
         else
-            ____t_result_17 = __O[2533]
+            ____t_result_17 = __O[2538]
         end
         if ____t_18(____t_result_17) then
             d.angle = -0.22
@@ -814,9 +814,9 @@ local __O = {};
         local ____t_result_28
         local ____t_27 = __t
         local ____get_result_26 = __get(profile, id)
-        __O[2534] = ____get_result_26
+        __O[2539] = ____get_result_26
         if ____t_27(____get_result_26) then
-            ____t_result_28 = __O[2534]
+            ____t_result_28 = __O[2539]
         else
             ____t_result_28 = profile.daroca
         end
@@ -1303,9 +1303,9 @@ local __O = {};
                 local ____t_result_31
                 local ____t_30 = __t
                 local ____math_abs_result_29 = math.abs(h.dx)
-                __O[2535] = ____math_abs_result_29
+                __O[2540] = ____math_abs_result_29
                 if ____t_30(____math_abs_result_29) then
-                    ____t_result_31 = __O[2535]
+                    ____t_result_31 = __O[2540]
                 else
                     ____t_result_31 = 51
                 end
@@ -1387,9 +1387,9 @@ local __O = {};
         local ____t_result_40
         local ____t_39 = __t
         local ____TS__Number_result_38 = __TS__Number(damage)
-        __O[2536] = ____TS__Number_result_38
+        __O[2541] = ____TS__Number_result_38
         if ____t_39(____TS__Number_result_38) then
-            ____t_result_40 = __O[2536]
+            ____t_result_40 = __O[2541]
         else
             ____t_result_40 = 0
         end

@@ -35,29 +35,29 @@ local __O = {};
         local ____t_result_7
         local ____t_6 = __t
         local ____temp_5 = lastAt ~= nil
-        __O[1295] = ____temp_5
+        __O[1296] = ____temp_5
         if ____t_6(____temp_5) then
             ____t_result_7 = active
         else
-            ____t_result_7 = __O[1295]
+            ____t_result_7 = __O[1296]
         end
-        __O[1296] = ____t_result_7
+        __O[1297] = ____t_result_7
         if ____t_8(____t_result_7) then
             ____t_result_9 = not __t(suspended)
         else
-            ____t_result_9 = __O[1296]
+            ____t_result_9 = __O[1297]
         end
-        __O[1297] = ____t_result_9
+        __O[1298] = ____t_result_9
         if ____t_10(____t_result_9) then
             ____t_result_11 = run
         else
-            ____t_result_11 = __O[1297]
+            ____t_result_11 = __O[1298]
         end
-        __O[1298] = ____t_result_11
+        __O[1299] = ____t_result_11
         if ____t_12(____t_result_11) then
             ____t_result_13 = not __t(run.finished)
         else
-            ____t_result_13 = __O[1298]
+            ____t_result_13 = __O[1299]
         end
         if ____t_14(____t_result_13) then
             local delta = math.max(0, now - lastAt)
@@ -68,9 +68,9 @@ local __O = {};
             local ____t_result_17
             local ____t_16 = __t
             local ____get_result_15 = __get(run.modeTime, run.mode)
-            __O[1299] = ____get_result_15
+            __O[1300] = ____get_result_15
             if ____t_16(____get_result_15) then
-                ____t_result_17 = __O[1299]
+                ____t_result_17 = __O[1300]
             else
                 ____t_result_17 = 0
             end
@@ -82,17 +82,17 @@ local __O = {};
         local ____t_result_23
         local ____t_22 = __t
         local ____temp_21 = not not __t(nextActive) and not __t(suspended)
-        __O[1300] = ____temp_21
+        __O[1301] = ____temp_21
         if ____t_22(____temp_21) then
             ____t_result_23 = not not __t(run)
         else
-            ____t_result_23 = __O[1300]
+            ____t_result_23 = __O[1301]
         end
-        __O[1301] = ____t_result_23
+        __O[1302] = ____t_result_23
         if ____t_24(____t_result_23) then
             ____t_result_25 = not __t(run.finished)
         else
-            ____t_result_25 = __O[1301]
+            ____t_result_25 = __O[1302]
         end
         active = ____t_result_25
         if now - lastRender > 250 then
@@ -144,9 +144,9 @@ local __O = {};
         local ____t_result_96
         local ____t_95 = __t
         local ____temp_94 = not __t(run)
-        __O[1312] = ____temp_94
+        __O[1313] = ____temp_94
         if ____t_95(____temp_94) then
-            ____t_result_96 = __O[1312]
+            ____t_result_96 = __O[1313]
         else
             ____t_result_96 = suspended
         end
@@ -263,15 +263,15 @@ local __O = {};
         local ____t_result_113
         local ____t_112 = __t
         local ____temp_111 = window.document:querySelector("#pauseScreen .rp-body")
-        __O[1313] = ____temp_111
+        __O[1314] = ____temp_111
         if ____t_112(____temp_111) then
-            ____t_result_113 = __O[1313]
+            ____t_result_113 = __O[1314]
         else
             ____t_result_113 = window.document:querySelector("#pauseScreen .ranch-pause-body")
         end
-        __O[1314] = ____t_result_113
+        __O[1315] = ____t_result_113
         if ____t_114(____t_result_113) then
-            ____t_result_115 = __O[1314]
+            ____t_result_115 = __O[1315]
         else
             ____t_result_115 = window.document:querySelector("#pauseScreen .game-modal")
         end
@@ -325,9 +325,9 @@ local __O = {};
             local ____t_result_125
             local ____t_124 = __t
             local ____temp_123 = not __t(run)
-            __O[1315] = ____temp_123
+            __O[1316] = ____temp_123
             if ____t_124(____temp_123) then
-                ____t_result_125 = __O[1315]
+                ____t_result_125 = __O[1316]
             else
                 ____t_result_125 = suspended
             end
@@ -365,9 +365,9 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____get_result_0 = __get({easy = "FÁCIL", normal = "NORMAL", hard = "DIFÍCIL"}, mode)
-        __O[1294] = ____get_result_0
+        __O[1295] = ____get_result_0
         if ____t_1(____get_result_0) then
-            ____t_result_2 = __O[1294]
+            ____t_result_2 = __O[1295]
         else
             ____t_result_2 = "NORMAL"
         end
@@ -483,9 +483,9 @@ local __O = {};
             local ____t_result_43
             local ____t_42 = __t
             local ____temp_41 = not not __t(data.easyLocked) or mode == "easy"
-            __O[1302] = ____temp_41
+            __O[1303] = ____temp_41
             if ____t_42(____temp_41) then
-                ____t_result_43 = __O[1302]
+                ____t_result_43 = __O[1303]
             else
                 ____t_result_43 = __call(used, "includes", "easy")
             end
@@ -518,11 +518,11 @@ local __O = {};
                             else
                                 ____t_result_46 = e
                             end
-                            __O[1303] = ____t_result_46
+                            __O[1304] = ____t_result_46
                             if ____t_47(____t_result_46) then
                                 ____t_result_48 = __isFiniteN(e.atMs)
                             else
-                                ____t_result_48 = __O[1303]
+                                ____t_result_48 = __O[1304]
                             end
                             return ____t_result_48
                         end
@@ -650,7 +650,7 @@ local __O = {};
         local ____t_result_83
         local ____t_73 = __t
         local ____valid_result_72 = valid(nil, next)
-        __O[1308] = ____valid_result_72
+        __O[1309] = ____valid_result_72
         if ____t_73(____valid_result_72) then
             local ____t_result_82
             local ____t_81 = __t
@@ -661,33 +661,33 @@ local __O = {};
             local ____t_result_76
             local ____t_75 = __t
             local ____temp_74 = not __t(run)
-            __O[1304] = ____temp_74
+            __O[1305] = ____temp_74
             if ____t_75(____temp_74) then
-                ____t_result_76 = __O[1304]
+                ____t_result_76 = __O[1305]
             else
                 ____t_result_76 = suspended
             end
-            __O[1305] = ____t_result_76
+            __O[1306] = ____t_result_76
             if ____t_77(____t_result_76) then
-                ____t_result_78 = __O[1305]
+                ____t_result_78 = __O[1306]
             else
                 ____t_result_78 = not __t(run.easyLocked)
             end
-            __O[1306] = ____t_result_78
+            __O[1307] = ____t_result_78
             if ____t_79(____t_result_78) then
-                ____t_result_80 = __O[1306]
+                ____t_result_80 = __O[1307]
             else
                 ____t_result_80 = next == "easy"
             end
-            __O[1307] = ____t_result_80
+            __O[1308] = ____t_result_80
             if ____t_81(____t_result_80) then
-                ____t_result_82 = __O[1307]
+                ____t_result_82 = __O[1308]
             else
                 ____t_result_82 = restoring
             end
             ____t_result_83 = ____t_result_82
         else
-            ____t_result_83 = __O[1308]
+            ____t_result_83 = __O[1309]
         end
         return ____t_result_83
     end
@@ -705,21 +705,21 @@ local __O = {};
         else
             ____t_result_84 = suspended
         end
-        __O[1309] = ____t_result_84
+        __O[1310] = ____t_result_84
         if ____t_85(____t_result_84) then
-            ____t_result_86 = __O[1309]
+            ____t_result_86 = __O[1310]
         else
             ____t_result_86 = not __t(run)
         end
-        __O[1310] = ____t_result_86
+        __O[1311] = ____t_result_86
         if ____t_87(____t_result_86) then
-            ____t_result_88 = __O[1310]
+            ____t_result_88 = __O[1311]
         else
             ____t_result_88 = not __t(valid(nil, next))
         end
-        __O[1311] = ____t_result_88
+        __O[1312] = ____t_result_88
         if ____t_89(____t_result_88) then
-            ____t_result_90 = __O[1311]
+            ____t_result_90 = __O[1312]
         else
             ____t_result_90 = next == run.mode
         end
