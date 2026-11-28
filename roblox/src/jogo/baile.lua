@@ -1960,17 +1960,17 @@ local __O = {};
         local ____t_result_77
         local ____t_76 = __t
         local ____temp_75 = not __t(opts.hideOllyan) and not __t(opts.defeated)
-        __O[1362] = ____temp_75
+        __O[1375] = ____temp_75
         if ____t_76(____temp_75) then
             ____t_result_77 = NPC_X - camera > -100
         else
-            ____t_result_77 = __O[1362]
+            ____t_result_77 = __O[1375]
         end
-        __O[1363] = ____t_result_77
+        __O[1376] = ____t_result_77
         if ____t_78(____t_result_77) then
             ____t_result_79 = NPC_X - camera < W + 100
         else
-            ____t_result_79 = __O[1363]
+            ____t_result_79 = __O[1376]
         end
         if ____t_80(____t_result_79) then
             drawOllyan(
@@ -2011,11 +2011,11 @@ local __O = {};
         else
             ____t_result_81 = opts.defeated
         end
-        __O[1364] = ____t_result_81
+        __O[1377] = ____t_result_81
         if ____t_82(____t_result_81) then
             ____t_result_83 = NPC_X - camera < W + 100
         else
-            ____t_result_83 = __O[1364]
+            ____t_result_83 = __O[1377]
         end
         if ____t_84(____t_result_83) then
             drawOllyan(
@@ -3687,18 +3687,18 @@ local __O = {};
                             local ____t_result_68
                             local ____t_64 = __t
                             local ____temp_63 = xx < -45 or xx > W + 45
-                            __O[1360] = ____temp_63
+                            __O[1373] = ____temp_63
                             if ____t_64(____temp_63) then
-                                ____t_result_68 = __O[1360]
+                                ____t_result_68 = __O[1373]
                             else
                                 local ____t_result_67
                                 local ____t_66 = __t
                                 local ____temp_65 = row == 0 and wx > 1900
-                                __O[1359] = ____temp_65
+                                __O[1372] = ____temp_65
                                 if ____t_66(____temp_65) then
                                     ____t_result_67 = wx < 2560
                                 else
-                                    ____t_result_67 = __O[1359]
+                                    ____t_result_67 = __O[1372]
                                 end
                                 ____t_result_68 = ____t_result_67
                             end
@@ -3740,9 +3740,9 @@ local __O = {};
                         local ____t_result_73
                         local ____t_72 = __t
                         local ____temp_71 = xx < -50 or xx > W + 50
-                        __O[1361] = ____temp_71
+                        __O[1374] = ____temp_71
                         if ____t_72(____temp_71) then
-                            ____t_result_73 = __O[1361]
+                            ____t_result_73 = __O[1374]
                         else
                             ____t_result_73 = math.abs(wx - 3260) < 90
                         end
@@ -4285,11 +4285,11 @@ local __O = {};
             local ____t_result_97
             local ____t_96 = __t
             local ____temp_95 = index == 1 and ____local > 1.25
-            __O[1365] = ____temp_95
+            __O[1378] = ____temp_95
             if ____t_96(____temp_95) then
                 ____t_result_97 = ____local < 1.9
             else
-                ____t_result_97 = __O[1365]
+                ____t_result_97 = __O[1378]
             end
             if ____t_98(____t_result_97) then
                 ____t_result_99 = math.sin(t * 90) * 3
@@ -4779,9 +4779,9 @@ local __O = {};
         local ____t_result_121
         local ____t_120 = __t
         local ____temp_119 = not __t(s)
-        __O[1366] = ____temp_119
+        __O[1379] = ____temp_119
         if ____t_120(____temp_119) then
-            ____t_result_121 = __O[1366]
+            ____t_result_121 = __O[1379]
         else
             ____t_result_121 = s.done
         end
@@ -4822,9 +4822,9 @@ local __O = {};
         local ____t_result_129
         local ____t_128 = __t
         local ____temp_127 = s.stage ~= "fight" or __gt(s.player.inv, 0)
-        __O[1367] = ____temp_127
+        __O[1380] = ____temp_127
         if ____t_128(____temp_127) then
-            ____t_result_129 = __O[1367]
+            ____t_result_129 = __O[1380]
         else
             ____t_result_129 = __le(s.player.hp, 0)
         end
@@ -4872,9 +4872,9 @@ local __O = {};
         local ____t_result_133
         local ____t_132 = __t
         local ____temp_131 = s.stage ~= "fight" or __gt(s.boss.inv, 0)
-        __O[1368] = ____temp_131
+        __O[1381] = ____temp_131
         if ____t_132(____temp_131) then
-            ____t_result_133 = __O[1368]
+            ____t_result_133 = __O[1381]
         else
             ____t_result_133 = __le(s.boss.hp, 0)
         end
@@ -5259,15 +5259,15 @@ local __O = {};
         local ____t_result_143
         local ____t_142 = __t
         local ____temp_141 = not __t(s) or s.stage ~= "fight"
-        __O[1369] = ____temp_141
+        __O[1382] = ____temp_141
         if ____t_142(____temp_141) then
-            ____t_result_143 = __O[1369]
+            ____t_result_143 = __O[1382]
         else
             ____t_result_143 = s.done
         end
-        __O[1370] = ____t_result_143
+        __O[1383] = ____t_result_143
         if ____t_144(____t_result_143) then
-            ____t_result_145 = __O[1370]
+            ____t_result_145 = __O[1383]
         else
             ____t_result_145 = __le(s.player.hp, 0)
         end
@@ -5504,17 +5504,17 @@ local __O = {};
                     p.x,
                     __add(platform.x, platform.w) + 7
                 )
-                __O[1371] = ____temp_160
+                __O[1384] = ____temp_160
                 if ____t_161(____temp_160) then
                     ____t_result_162 = __le(wasY, platform.y + 1)
                 else
-                    ____t_result_162 = __O[1371]
+                    ____t_result_162 = __O[1384]
                 end
-                __O[1372] = ____t_result_162
+                __O[1385] = ____t_result_162
                 if ____t_163(____t_result_162) then
                     ____t_result_164 = __ge(p.y, platform.y)
                 else
-                    ____t_result_164 = __O[1372]
+                    ____t_result_164 = __O[1385]
                 end
                 if ____t_165(____t_result_164) then
                     p.y = platform.y
@@ -5579,9 +5579,9 @@ local __O = {};
         local ____t_result_170
         local ____t_169 = __t
         local ____temp_168 = not __t(s)
-        __O[1373] = ____temp_168
+        __O[1386] = ____temp_168
         if ____t_169(____temp_168) then
-            ____t_result_170 = __O[1373]
+            ____t_result_170 = __O[1386]
         else
             ____t_result_170 = s.done
         end
@@ -5794,7 +5794,7 @@ local __O = {};
         local ____t_result_181
         local ____t_180 = __t
         local ____temp_179 = b.state == "swoop"
-        __O[1374] = ____temp_179
+        __O[1387] = ____temp_179
         if ____t_180(____temp_179) then
             ____t_result_181 = circleEllipse(
                 nil,
@@ -5807,7 +5807,7 @@ local __O = {};
                 s.mode == "platform" and 16 or 22
             )
         else
-            ____t_result_181 = __O[1374]
+            ____t_result_181 = __O[1387]
         end
         if ____t_182(____t_result_181) then
             damagePlayer(nil, s, 17, b.x)
@@ -5840,7 +5840,7 @@ local __O = {};
                         59 + s.phase * 3,
                         a.r
                     )
-                    __O[1375] = ____circleEllipse_result_183
+                    __O[1388] = ____circleEllipse_result_183
                     if ____t_184(____circleEllipse_result_183) then
                         ____t_result_185 = damageBoss(
                             nil,
@@ -5850,7 +5850,7 @@ local __O = {};
                             a.y
                         )
                     else
-                        ____t_result_185 = __O[1375]
+                        ____t_result_185 = __O[1388]
                     end
                     if ____t_186(____t_result_185) then
                         a.life = 0
@@ -5882,23 +5882,23 @@ local __O = {};
                 local ____t_result_189
                 local ____t_188 = __t
                 local ____temp_187 = __gt(a.life, 0) and __gt(a.x, -100)
-                __O[1376] = ____temp_187
+                __O[1389] = ____temp_187
                 if ____t_188(____temp_187) then
                     ____t_result_189 = __lt(a.x, 1110)
                 else
-                    ____t_result_189 = __O[1376]
+                    ____t_result_189 = __O[1389]
                 end
-                __O[1377] = ____t_result_189
+                __O[1390] = ____t_result_189
                 if ____t_190(____t_result_189) then
                     ____t_result_191 = __gt(a.y, -180)
                 else
-                    ____t_result_191 = __O[1377]
+                    ____t_result_191 = __O[1390]
                 end
-                __O[1378] = ____t_result_191
+                __O[1391] = ____t_result_191
                 if ____t_192(____t_result_191) then
                     ____t_result_193 = __lt(a.y, 690)
                 else
-                    ____t_result_193 = __O[1378]
+                    ____t_result_193 = __O[1391]
                 end
                 return ____t_result_193
             end
@@ -5944,9 +5944,9 @@ local __O = {};
                     local ____t_result_196
                     local ____t_195 = __t
                     local ____hypot_result_194 = __hypot(dx, dy)
-                    __O[1379] = ____hypot_result_194
+                    __O[1392] = ____hypot_result_194
                     if ____t_195(____hypot_result_194) then
-                        ____t_result_196 = __O[1379]
+                        ____t_result_196 = __O[1392]
                     else
                         ____t_result_196 = 1
                     end
@@ -5976,11 +5976,11 @@ local __O = {};
                 local ____t_result_199
                 local ____t_198 = __t
                 local ____gt_result_197 = __gt(h.life, 0)
-                __O[1380] = ____gt_result_197
+                __O[1393] = ____gt_result_197
                 if ____t_198(____gt_result_197) then
                     ____t_result_199 = h.type ~= "gate" or __gt(h.x, -70)
                 else
-                    ____t_result_199 = __O[1380]
+                    ____t_result_199 = __O[1393]
                 end
                 return ____t_result_199
             end
@@ -5991,9 +5991,9 @@ local __O = {};
         local ____t_result_202
         local ____t_201 = __t
         local ____temp_200 = not __t(s)
-        __O[1381] = ____temp_200
+        __O[1394] = ____temp_200
         if ____t_201(____temp_200) then
-            ____t_result_202 = __O[1381]
+            ____t_result_202 = __O[1394]
         else
             ____t_result_202 = s.done
         end
@@ -6027,9 +6027,9 @@ local __O = {};
         local ____t_result_206
         local ____t_205 = __t
         local ____temp_204 = not __t(s)
-        __O[1382] = ____temp_204
+        __O[1395] = ____temp_204
         if ____t_205(____temp_204) then
-            ____t_result_206 = __O[1382]
+            ____t_result_206 = __O[1395]
         else
             ____t_result_206 = s.done
         end
@@ -6462,9 +6462,9 @@ local __O = {};
             local ____t_result_250
             local ____t_249 = __t
             local ____hypot_result_248 = __hypot(dx, dy)
-            __O[1383] = ____hypot_result_248
+            __O[1396] = ____hypot_result_248
             if ____t_249(____hypot_result_248) then
-                ____t_result_250 = __O[1383]
+                ____t_result_250 = __O[1396]
             else
                 ____t_result_250 = 1
             end
@@ -7178,9 +7178,9 @@ local __O = {};
                     local ____t_result_291
                     local ____t_290 = __t
                     local ____hypot_result_289 = __hypot(dx, dy)
-                    __O[1384] = ____hypot_result_289
+                    __O[1397] = ____hypot_result_289
                     if ____t_290(____hypot_result_289) then
-                        ____t_result_291 = __O[1384]
+                        ____t_result_291 = __O[1397]
                     else
                         ____t_result_291 = 1
                     end
@@ -7208,11 +7208,11 @@ local __O = {};
         local ____t_result_294
         local ____t_293 = __t
         local ____temp_292 = s.stage == "fight"
-        __O[1385] = ____temp_292
+        __O[1398] = ____temp_292
         if ____t_293(____temp_292) then
             ____t_result_294 = __lt(s.time, 15) or s.mode == "platform"
         else
-            ____t_result_294 = __O[1385]
+            ____t_result_294 = __O[1398]
         end
         if ____t_295(____t_result_294) then
             text(

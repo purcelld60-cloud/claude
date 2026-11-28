@@ -115,9 +115,9 @@ local __O = {};
         local ____t_result_35
         local ____t_34 = __t
         local ____temp_33 = not __t(box)
-        __O[461] = ____temp_33
+        __O[474] = ____temp_33
         if ____t_34(____temp_33) then
-            ____t_result_35 = __O[461]
+            ____t_result_35 = __O[474]
         else
             ____t_result_35 = box.hidden
         end
@@ -150,9 +150,9 @@ local __O = {};
         end
         ____t_result_3 = not ____t_2(____opt_0)
     end
-    __O[456] = ____t_result_3
+    __O[469] = ____t_result_3
     if ____t_4(____t_result_3) then
-        ____t_result_8 = __O[456]
+        ____t_result_8 = __O[469]
     else
         local ____t_7 = __t
         local ____opt_5 = window.Art
@@ -1427,9 +1427,9 @@ local __O = {};
             local ____t_result_12
             local ____t_11 = __t
             local ____temp_10 = window.localStorage:getItem(KEY)
-            __O[457] = ____temp_10
+            __O[470] = ____temp_10
             if ____t_11(____temp_10) then
-                ____t_result_12 = __O[457]
+                ____t_result_12 = __O[470]
             else
                 ____t_result_12 = "[]"
             end
@@ -1470,9 +1470,9 @@ local __O = {};
         local ____t_result_18
         local ____t_17 = __t
         local ____TS__Number_result_16 = __TS__Number(o.time)
-        __O[458] = ____TS__Number_result_16
+        __O[471] = ____TS__Number_result_16
         if ____t_17(____TS__Number_result_16) then
-            ____t_result_18 = __O[458]
+            ____t_result_18 = __O[471]
         else
             ____t_result_18 = 0
         end
@@ -1484,9 +1484,9 @@ local __O = {};
             ____opt_19 = ____opt_19.x
         end
         local ____TS__Number_result_21 = __TS__Number(____opt_19)
-        __O[459] = ____TS__Number_result_21
+        __O[472] = ____TS__Number_result_21
         if ____t_22(____TS__Number_result_21) then
-            ____t_result_23 = __O[459]
+            ____t_result_23 = __O[472]
         else
             ____t_result_23 = -9999
         end
@@ -1494,9 +1494,9 @@ local __O = {};
         local ____t_result_26
         local ____t_25 = __t
         local ____TS__Number_result_24 = __TS__Number(o.camera)
-        __O[460] = ____TS__Number_result_24
+        __O[473] = ____TS__Number_result_24
         if ____t_25(____TS__Number_result_24) then
-            ____t_result_26 = __O[460]
+            ____t_result_26 = __O[473]
         else
             ____t_result_26 = 0
         end
@@ -1694,9 +1694,9 @@ local __O = {};
             local ____t_result_41
             local ____t_40 = __t
             local ____temp_39 = not __t(box)
-            __O[462] = ____temp_39
+            __O[475] = ____temp_39
             if ____t_40(____temp_39) then
-                ____t_result_41 = __O[462]
+                ____t_result_41 = __O[475]
             else
                 ____t_result_41 = box.hidden
             end
@@ -1724,9 +1724,9 @@ local __O = {};
                 local ____t_result_45
                 local ____t_44 = __t
                 local ____temp_43 = k == "Enter" or k == " "
-                __O[463] = ____temp_43
+                __O[476] = ____temp_43
                 if ____t_44(____temp_43) then
-                    ____t_result_45 = __O[463]
+                    ____t_result_45 = __O[476]
                 else
                     ____t_result_45 = __call(k, "toLowerCase") == "e"
                 end

@@ -15,9 +15,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.CampanhaNovos)
-    __O[454] = ____temp_0
+    __O[467] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[454]
+        ____t_result_2 = __O[467]
     else
         ____t_result_2 = window.CampanhaNovos.b
     end
@@ -3976,11 +3976,11 @@ local __O = {};
         local ____t_result_14
         local ____t_13 = __t
         local ____vis_result_12 = vis(nil, tw, 100)
-        __O[455] = ____vis_result_12
+        __O[468] = ____vis_result_12
         if ____t_13(____vis_result_12) then
             ____t_result_14 = math.sin(t * 3) > 0
         else
-            ____t_result_14 = __O[455]
+            ____t_result_14 = __O[468]
         end
         if ____t_15(____t_result_14) then
             lightAdd(

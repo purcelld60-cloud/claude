@@ -126,14 +126,14 @@ local __O = {};
                     else
                         ____t_result_2 = r.selectorText
                     end
-                    __O[490] = ____t_result_2
+                    __O[503] = ____t_result_2
                     if ____t_3(____t_result_2) then
                         ____t_result_4 = __re_test(
                             __re("touch-btn|control-icon|kbd|-btn\\b", ""),
                             r.selectorText
                         )
                     else
-                        ____t_result_4 = __O[490]
+                        ____t_result_4 = __O[503]
                     end
                     if ____t_5(____t_result_4) then
                         txt = __add(
@@ -205,9 +205,9 @@ local __O = {};
                 local ____t_14 = __t
                 local ____opt_9 = orig and orig:querySelector("svg")
                 local ____temp_13 = ____opt_9 and ____opt_9.outerHTML
-                __O[491] = ____temp_13
+                __O[504] = ____temp_13
                 if ____t_14(____temp_13) then
-                    ____t_result_15 = __O[491]
+                    ____t_result_15 = __O[504]
                 else
                     ____t_result_15 = ""
                 end
@@ -320,11 +320,11 @@ local __O = {};
                 else
                     ____t_result_22 = modoJogo
                 end
-                __O[492] = ____t_result_22
+                __O[505] = ____t_result_22
                 if ____t_23(____t_result_22) then
                     ____t_result_24 = tipo ~= "peido"
                 else
-                    ____t_result_24 = __O[492]
+                    ____t_result_24 = __O[505]
                 end
                 if ____t_25(____t_result_24) then
                     n = math.floor(n * 5 + 0.5)
@@ -428,9 +428,9 @@ local __O = {};
         if ____opt_41 ~= nil then
             ____opt_result_43 = ____opt_41(____opt_41)
         end
-        __O[493] = ____opt_result_43
+        __O[506] = ____opt_result_43
         if ____t_44(____opt_result_43) then
-            ____t_result_45 = __O[493]
+            ____t_result_45 = __O[506]
         else
             ____t_result_45 = 1
         end
@@ -475,9 +475,9 @@ local __O = {};
                 if ____opt_52 ~= nil then
                     ____opt_result_54 = ____opt_52(____opt_52)
                 end
-                __O[494] = ____opt_result_54
+                __O[507] = ____opt_result_54
                 if ____t_55(____opt_result_54) then
-                    ____t_result_56 = __O[494]
+                    ____t_result_56 = __O[507]
                 else
                     ____t_result_56 = {}
                 end
@@ -539,11 +539,11 @@ local __O = {};
                 if ____opt_59 ~= nil then
                     ____opt_59 = ____opt_59.soundOn
                 end
-                __O[495] = ____opt_59
+                __O[508] = ____opt_59
                 if ____t_61(____opt_59) then
                     ____t_result_62 = not __t(window.Game:soundOn())
                 else
-                    ____t_result_62 = __O[495]
+                    ____t_result_62 = __O[508]
                 end
                 if ____t_63(____t_result_62) then
                     return true
@@ -683,17 +683,17 @@ local __O = {};
                         local ____t_result_77
                         local ____t_76 = __t
                         local ____temp_75 = __gt(b.hp, 0) and not __t(b.intocavel)
-                        __O[496] = ____temp_75
+                        __O[509] = ____temp_75
                         if ____t_76(____temp_75) then
                             ____t_result_77 = __TS__MathSign(b.x - P.x) == dir
                         else
-                            ____t_result_77 = __O[496]
+                            ____t_result_77 = __O[509]
                         end
-                        __O[497] = ____t_result_77
+                        __O[510] = ____t_result_77
                         if ____t_78(____t_result_77) then
                             ____t_result_79 = math.abs(b.x - P.x) < 650
                         else
-                            ____t_result_79 = __O[497]
+                            ____t_result_79 = __O[510]
                         end
                         return ____t_result_79
                     end
@@ -835,7 +835,7 @@ local __O = {};
             local ____t_result_99
             local ____t_96 = __t
             local ____temp_95 = __gt(b.hp, 0) and not __t(b.intocavel)
-            __O[498] = ____temp_95
+            __O[511] = ____temp_95
             if ____t_96(____temp_95) then
                 local ____math_abs_result_98 = math.abs(b.x - P.x)
                 local ____t_result_97
@@ -846,9 +846,9 @@ local __O = {};
                 end
                 ____t_result_99 = ____math_abs_result_98 < raio + (____t_result_97 - 22)
             else
-                ____t_result_99 = __O[498]
+                ____t_result_99 = __O[511]
             end
-            __O[499] = ____t_result_99
+            __O[512] = ____t_result_99
             if ____t_100(____t_result_99) then
                 local ____t_result_101
                 if __t(b.y) then
@@ -858,7 +858,7 @@ local __O = {};
                 end
                 ____t_result_102 = math.abs(____t_result_101 - P.y) < 180
             else
-                ____t_result_102 = __O[499]
+                ____t_result_102 = __O[512]
             end
             if ____t_103(____t_result_102) then
                 bater(
@@ -889,11 +889,11 @@ local __O = {};
             else
                 ____t_result_104 = down
             end
-            __O[500] = ____t_result_104
+            __O[513] = ____t_result_104
             if ____t_105(____t_result_104) then
                 ____t_result_106 = r.motivo == "vazio"
             else
-                ____t_result_106 = __O[500]
+                ____t_result_106 = __O[513]
             end
             if ____t_107(____t_result_106) then
                 aviso(nil, "Equipe um poder no Mural dos Poderes (quarto da pensão).")
@@ -907,11 +907,11 @@ local __O = {};
             else
                 ____t_result_108 = down
             end
-            __O[501] = ____t_result_108
+            __O[514] = ____t_result_108
             if ____t_109(____t_result_108) then
                 ____t_result_110 = r.motivo == "recarga"
             else
-                ____t_result_110 = __O[501]
+                ____t_result_110 = __O[514]
             end
             if ____t_111(____t_result_110) then
                 aviso(
@@ -1094,11 +1094,11 @@ local __O = {};
         local ____t_result_137
         local ____t_136 = __t
         local ____temp_135 = not __t(P.ground) and gas > 0
-        __O[502] = ____temp_135
+        __O[515] = ____temp_135
         if ____t_136(____temp_135) then
             ____t_result_137 = not not __t(o.segurandoPulo)
         else
-            ____t_result_137 = __O[502]
+            ____t_result_137 = __O[515]
         end
         voandoAgora = ____t_result_137
         if __t(voandoAgora) then
@@ -1241,7 +1241,7 @@ local __O = {};
                     local ____t_result_151
                     local ____t_147 = __t
                     local ____temp_146 = __gt(b.hp, 0) and not __t(b.intocavel)
-                    __O[503] = ____temp_146
+                    __O[516] = ____temp_146
                     if ____t_147(____temp_146) then
                         local ____lt_150 = __lt
                         local ____math_abs_result_149 = math.abs(b.x - q.x)
@@ -1253,9 +1253,9 @@ local __O = {};
                         end
                         ____t_result_151 = ____lt_150(____math_abs_result_149, ____t_result_148)
                     else
-                        ____t_result_151 = __O[503]
+                        ____t_result_151 = __O[516]
                     end
-                    __O[504] = ____t_result_151
+                    __O[517] = ____t_result_151
                     if ____t_152(____t_result_151) then
                         local ____gt_156 = __gt
                         local ____q_y_155 = q.y
@@ -1268,13 +1268,13 @@ local __O = {};
                         end
                         ____t_result_157 = ____gt_156(____q_y_155, ____b_y_154 - ____t_result_153)
                     else
-                        ____t_result_157 = __O[504]
+                        ____t_result_157 = __O[517]
                     end
-                    __O[505] = ____t_result_157
+                    __O[518] = ____t_result_157
                     if ____t_158(____t_result_157) then
                         ____t_result_159 = __lt(q.y, b.y + 4)
                     else
-                        ____t_result_159 = __O[505]
+                        ____t_result_159 = __O[518]
                     end
                     if ____t_160(____t_result_159) then
                         local ____bater_162 = bater
@@ -1349,11 +1349,11 @@ local __O = {};
         local ____t_result_168
         local ____t_167 = __t
         local ____temp_166 = not __t(caido)
-        __O[506] = ____temp_166
+        __O[519] = ____temp_166
         if ____t_167(____temp_166) then
             ____t_result_168 = piscando(nil, b)
         else
-            ____t_result_168 = __O[506]
+            ____t_result_168 = __O[519]
         end
         if ____t_169(____t_result_168) then
             c.globalAlpha = 0.25
@@ -1663,9 +1663,9 @@ local __O = {};
                                 if ____opt_189 ~= nil then
                                     ____opt_189 = ____opt_189.curto
                                 end
-                                __O[507] = ____opt_189
+                                __O[520] = ____opt_189
                                 if ____t_191(____opt_189) then
-                                    ____t_result_192 = __O[507]
+                                    ____t_result_192 = __O[520]
                                 else
                                     ____t_result_192 = "—"
                                 end

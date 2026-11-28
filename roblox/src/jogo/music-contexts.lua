@@ -443,14 +443,14 @@ local __O = {};
             local ____t_result_13
             local ____t_12 = __t
             local ____call_result_11 = __call(kinds, "has", kind)
-            __O[2343] = ____call_result_11
+            __O[2360] = ____call_result_11
             if ____t_12(____call_result_11) then
                 ____t_result_13 = __re_test(
                     __re("^(?:cutscenes|events)\\.", ""),
                     context.id
                 )
             else
-                ____t_result_13 = __O[2343]
+                ____t_result_13 = __O[2360]
             end
             if ____t_14(____t_result_13) then
                 ____t_result_15 = __assign({}, context, {previewKind = kind})

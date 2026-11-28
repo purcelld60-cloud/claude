@@ -79,9 +79,9 @@ local __O = {};
         if ____opt_2 ~= nil then
             ____opt_result_4 = ____opt_2(____opt_2)
         end
-        __O[341] = ____opt_result_4
+        __O[354] = ____opt_result_4
         if ____t_5(____opt_result_4) then
-            ____t_result_6 = __O[341]
+            ____t_result_6 = __O[354]
         else
             ____t_result_6 = {lean = 0.3, str = 0.8}
         end
@@ -100,9 +100,9 @@ local __O = {};
         if ____opt_result_13 ~= nil then
             ____opt_result_14 = ____opt_result_13.rain
         end
-        __O[342] = ____opt_result_14
+        __O[355] = ____opt_result_14
         if ____t_15(____opt_result_14) then
-            ____t_result_16 = __O[342]
+            ____t_result_16 = __O[355]
         else
             ____t_result_16 = 0
         end
@@ -121,9 +121,9 @@ local __O = {};
         if ____opt_result_23 ~= nil then
             ____opt_result_24 = ____opt_result_23.snow
         end
-        __O[343] = ____opt_result_24
+        __O[356] = ____opt_result_24
         if ____t_25(____opt_result_24) then
-            ____t_result_26 = __O[343]
+            ____t_result_26 = __O[356]
         else
             ____t_result_26 = 0
         end
@@ -250,9 +250,9 @@ local __O = {};
             else
                 ____t_result_30 = L.indoor
             end
-            __O[344] = ____t_result_30
+            __O[357] = ____t_result_30
             if ____t_31(____t_result_30) then
-                ____t_result_32 = __O[344]
+                ____t_result_32 = __O[357]
             else
                 ____t_result_32 = not __t(L.indoor)
             end
@@ -267,9 +267,9 @@ local __O = {};
                 if ____opt_36 ~= nil then
                     ____opt_result_38 = ____opt_36(____opt_36, o.scene, o.x)
                 end
-                __O[345] = ____opt_result_38
+                __O[358] = ____opt_result_38
                 if ____t_39(____opt_result_38) then
-                    ____t_result_40 = __O[345]
+                    ____t_result_40 = __O[358]
                 else
                     ____t_result_40 = __arrL({}, 0)
                 end
@@ -419,9 +419,9 @@ local __O = {};
             if ____opt_51 ~= nil then
                 ____opt_result_53 = ____opt_51(____opt_51, o.scene, o.x)
             end
-            __O[346] = ____opt_result_53
+            __O[359] = ____opt_result_53
             if ____t_54(____opt_result_53) then
-                ____t_result_55 = __O[346]
+                ____t_result_55 = __O[359]
             else
                 ____t_result_55 = {k = 0}
             end
@@ -605,11 +605,11 @@ local __O = {};
         local ____t_result_68
         local ____t_67 = __t
         local ____temp_66 = not __t(L.indoor) and not __t(o.room)
-        __O[347] = ____temp_66
+        __O[360] = ____temp_66
         if ____t_67(____temp_66) then
             ____t_result_68 = not __t(o.arena)
         else
-            ____t_result_68 = __O[347]
+            ____t_result_68 = __O[360]
         end
         if ____t_69(____t_result_68) then
             local ____t_result_76
@@ -622,9 +622,9 @@ local __O = {};
             if ____opt_72 ~= nil then
                 ____opt_result_74 = ____opt_72(____opt_72)
             end
-            __O[348] = ____opt_result_74
+            __O[361] = ____opt_result_74
             if ____t_75(____opt_result_74) then
-                ____t_result_76 = __O[348]
+                ____t_result_76 = __O[361]
             else
                 ____t_result_76 = {}
             end
@@ -783,9 +783,9 @@ local __O = {};
         local ____t_result_102
         local ____t_96 = __t
         local ____temp_95 = not __t(o) or type(o.draw) ~= "function"
-        __O[349] = ____temp_95
+        __O[362] = ____temp_95
         if ____t_96(____temp_95) then
-            ____t_result_102 = __O[349]
+            ____t_result_102 = __O[362]
         else
             local ____opt_99 = window.Graphics
             if ____opt_99 ~= nil then

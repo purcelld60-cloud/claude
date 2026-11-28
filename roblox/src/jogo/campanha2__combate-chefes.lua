@@ -2165,11 +2165,11 @@ local __O = {};
             math.abs(cy),
             ry + math.abs(dy)
         )
-        __O[923] = ____temp_59
+        __O[936] = ____temp_59
         if ____t_60(____temp_59) then
             ____t_result_61 = math.abs(cx * dy - cy * dx) <= rx * math.abs(dy) + ry * math.abs(dx)
         else
-            ____t_result_61 = __O[923]
+            ____t_result_61 = __O[936]
         end
         return ____t_result_61
     end
@@ -2323,9 +2323,9 @@ local __O = {};
                 local ____t_result_75
                 local ____t_74 = __t
                 local ____temp_73 = t < 0
-                __O[924] = ____temp_73
+                __O[937] = ____temp_73
                 if ____t_74(____temp_73) then
-                    ____t_result_75 = __O[924]
+                    ____t_result_75 = __O[937]
                 else
                     ____t_result_75 = o.fim
                 end
@@ -2350,7 +2350,7 @@ local __O = {};
                 local ____t_result_81
                 local ____t_80 = __t
                 local ____temp_79 = not __t(o.acertou)
-                __O[925] = ____temp_79
+                __O[938] = ____temp_79
                 if ____t_80(____temp_79) then
                     ____t_result_81 = contatoNoQuadro(
                         nil,
@@ -2363,7 +2363,7 @@ local __O = {};
                         yAntes
                     )
                 else
-                    ____t_result_81 = __O[925]
+                    ____t_result_81 = __O[938]
                 end
                 if ____t_82(____t_result_81) then
                     o.acertou = true
@@ -2411,9 +2411,9 @@ local __O = {};
             __get(golpes, f.golpe),
             0
         )
-        __O[926] = ____getq_result_84
+        __O[939] = ____getq_result_84
         if ____t_85(____getq_result_84) then
-            ____t_result_86 = __O[926]
+            ____t_result_86 = __O[939]
         else
             ____t_result_86 = ""
         end

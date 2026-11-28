@@ -69,9 +69,9 @@ local __O = {};
         local ____t_result_15
         local ____t_14 = __t
         local ____temp_13 = not __t(jogo)
-        __O[1416] = ____temp_13
+        __O[1429] = ____temp_13
         if ____t_14(____temp_13) then
-            ____t_result_15 = __O[1416]
+            ____t_result_15 = __O[1429]
         else
             ____t_result_15 = jogo.fim
         end
@@ -871,9 +871,9 @@ local __O = {};
                 local ____t_result_46
                 local ____t_44 = __t
                 local ____temp_43 = __mod(k, 4) == 1
-                __O[1417] = ____temp_43
+                __O[1430] = ____temp_43
                 if ____t_44(____temp_43) then
-                    ____t_result_46 = __O[1417]
+                    ____t_result_46 = __O[1430]
                 else
                     local ____t_result_45
                     if __t(pula) then
@@ -1268,11 +1268,11 @@ local __O = {};
                 local ____t_result_2
                 local ____t_1 = __t
                 local ____temp_0 = __mod(compasso, 2) == 1 and __mod(b, 2) == 1
-                __O[1415] = ____temp_0
+                __O[1428] = ____temp_0
                 if ____t_1(____temp_0) then
                     ____t_result_2 = rnd(nil) < 0.55
                 else
-                    ____t_result_2 = __O[1415]
+                    ____t_result_2 = __O[1428]
                 end
                 if ____t_3(____t_result_2) then
                     __call(

@@ -15,9 +15,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(viewport) or not __t(canvas)
-    __O[2438] = ____temp_0
+    __O[2455] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[2438]
+        ____t_result_2 = __O[2455]
     else
         ____t_result_2 = not __t(normal)
     end
@@ -68,17 +68,17 @@ local __O = {};
                 local ____t_result_6
                 local ____t_5 = __t
                 local ____temp_4 = not __t(__len(event.touches))
-                __O[2439] = ____temp_4
+                __O[2456] = ____temp_4
                 if ____t_5(____temp_4) then
                     ____t_result_6 = touch
                 else
-                    ____t_result_6 = __O[2439]
+                    ____t_result_6 = __O[2456]
                 end
-                __O[2440] = ____t_result_6
+                __O[2457] = ____t_result_6
                 if ____t_7(____t_result_6) then
                     ____t_result_8 = button:contains(window.document:elementFromPoint(touch.clientX, touch.clientY))
                 else
-                    ____t_result_8 = __O[2440]
+                    ____t_result_8 = __O[2457]
                 end
                 if ____t_9(____t_result_8) then
                     activate(nil)
@@ -177,11 +177,11 @@ local __O = {};
         else
             ____t_result_24 = cinematic
         end
-        __O[2441] = ____t_result_24
+        __O[2458] = ____t_result_24
         if ____t_25(____t_result_24) then
             ____t_result_26 = gutter >= 200
         else
-            ____t_result_26 = __O[2441]
+            ____t_result_26 = __O[2458]
         end
         local sideBalloon = ____t_result_26
         local ____t_result_27
@@ -262,9 +262,9 @@ local __O = {};
             local ____t_43 = __t
             local ____opt_40 = window.document:querySelector(".cinematic-heading")
             local ____temp_42 = ____opt_40 and ____opt_40:getBoundingClientRect().height
-            __O[2442] = ____temp_42
+            __O[2459] = ____temp_42
             if ____t_43(____temp_42) then
-                ____t_result_44 = __O[2442]
+                ____t_result_44 = __O[2459]
             else
                 ____t_result_44 = 20
             end
@@ -356,9 +356,9 @@ local __O = {};
         else
             ____t_result_57 = anchor.speaker
         end
-        __O[2443] = ____t_result_57
+        __O[2460] = ____t_result_57
         if ____t_58(____t_result_57) then
-            ____t_result_59 = __O[2443]
+            ____t_result_59 = __O[2460]
         else
             ____t_result_59 = ""
         end
@@ -376,9 +376,9 @@ local __O = {};
         if ____opt_63 ~= nil then
             ____opt_result_65 = ____opt_63(____opt_63)
         end
-        __O[2444] = ____opt_result_65
+        __O[2461] = ____opt_result_65
         if ____t_66(____opt_result_65) then
-            ____t_result_72 = __O[2444]
+            ____t_result_72 = __O[2461]
         else
             local ____opt_69 = window.Fliperama
             if ____opt_69 ~= nil then
@@ -404,9 +404,9 @@ local __O = {};
         if ____opt_76 ~= nil then
             ____opt_result_78 = ____opt_76(____opt_76)
         end
-        __O[2445] = ____opt_result_78
+        __O[2462] = ____opt_result_78
         if ____t_79(____opt_result_78) then
-            ____t_result_85 = __O[2445]
+            ____t_result_85 = __O[2462]
         else
             local ____opt_82 = window.Game
             if ____opt_82 ~= nil then
@@ -423,11 +423,11 @@ local __O = {};
             local ____t_result_88
             local ____t_87 = __t
             local ____temp_86 = not not __t(state.dialog) and not __t(state.paused)
-            __O[2446] = ____temp_86
+            __O[2463] = ____temp_86
             if ____t_87(____temp_86) then
                 ____t_result_88 = not __t(state.cutscene)
             else
-                ____t_result_88 = __O[2446]
+                ____t_result_88 = __O[2463]
             end
             local active = ____t_result_88
             normal.hidden = not __t(active)
@@ -441,9 +441,9 @@ local __O = {};
                 if ____opt_89 ~= nil then
                     ____opt_89 = ____opt_89(____this_90)
                 end
-                __O[2447] = ____opt_89
+                __O[2464] = ____opt_89
                 if ____t_91(____opt_89) then
-                    ____t_result_92 = __O[2447]
+                    ____t_result_92 = __O[2464]
                 else
                     ____t_result_92 = {x = 480, y = 300, speakerX = 480}
                 end
@@ -459,11 +459,11 @@ local __O = {};
             else
                 ____t_result_93 = film
             end
-            __O[2448] = ____t_result_93
+            __O[2465] = ____t_result_93
             if ____t_94(____t_result_93) then
                 ____t_result_95 = not __t(state.paused)
             else
-                ____t_result_95 = __O[2448]
+                ____t_result_95 = __O[2465]
             end
             if ____t_96(____t_result_95) then
                 local ____t_result_103
@@ -476,9 +476,9 @@ local __O = {};
                 if ____opt_99 ~= nil then
                     ____opt_result_101 = ____opt_99(____opt_99, state.cutscene)
                 end
-                __O[2449] = ____opt_result_101
+                __O[2466] = ____opt_result_101
                 if ____t_102(____opt_result_101) then
-                    ____t_result_103 = __O[2449]
+                    ____t_result_103 = __O[2466]
                 else
                     ____t_result_103 = {x = 300, y = 65, width = 400, speakerX = 300}
                 end

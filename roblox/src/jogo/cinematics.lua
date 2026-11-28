@@ -120,9 +120,9 @@ local __O = {};
         local ____t_result_100
         local ____t_99 = __t
         local ____TS__Number_result_98 = __TS__Number(s.index)
-        __O[716] = ____TS__Number_result_98
+        __O[729] = ____TS__Number_result_98
         if ____t_99(____TS__Number_result_98) then
-            ____t_result_100 = __O[716]
+            ____t_result_100 = __O[729]
         else
             ____t_result_100 = 0
         end
@@ -137,9 +137,9 @@ local __O = {};
         local ____t_result_103
         local ____t_102 = __t
         local ____TS__Number_result_101 = __TS__Number(s.time)
-        __O[717] = ____TS__Number_result_101
+        __O[730] = ____TS__Number_result_101
         if ____t_102(____TS__Number_result_101) then
-            ____t_result_103 = __O[717]
+            ____t_result_103 = __O[730]
         else
             ____t_result_103 = 0
         end
@@ -1606,9 +1606,9 @@ local __O = {};
         local ____t_result_19
         local ____t_18 = __t
         local ____get_result_17 = __get(floorColors, ____type)
-        __O[712] = ____get_result_17
+        __O[725] = ____get_result_17
         if ____t_18(____get_result_17) then
-            ____t_result_19 = __O[712]
+            ____t_result_19 = __O[725]
         else
             ____t_result_19 = "#4d6250"
         end
@@ -2288,11 +2288,11 @@ local __O = {};
         local ____t_result_36
         local ____t_35 = __t
         local ____temp_34 = not __t(defeat) and i == 0
-        __O[713] = ____temp_34
+        __O[726] = ____temp_34
         if ____t_35(____temp_34) then
             ____t_result_36 = __lt(t, 1.1)
         else
-            ____t_result_36 = __O[713]
+            ____t_result_36 = __O[726]
         end
         local ____t_38 = __t
         local ____t_result_37
@@ -2336,15 +2336,15 @@ local __O = {};
         local ____t_result_50
         local ____t_49 = __t
         local ____temp_48 = not __t(defeat) and i == 0
-        __O[714] = ____temp_48
+        __O[727] = ____temp_48
         if ____t_49(____temp_48) then
-            ____t_result_50 = __O[714]
+            ____t_result_50 = __O[727]
         else
             ____t_result_50 = not __t(defeat) and i == 3
         end
-        __O[715] = ____t_result_50
+        __O[728] = ____t_result_50
         if ____t_51(____t_result_50) then
-            ____t_result_53 = __O[715]
+            ____t_result_53 = __O[728]
         else
             local ____t_result_52
             if __t(defeat) then
@@ -5013,9 +5013,9 @@ local __O = {};
         local ____t_result_107
         local ____t_106 = __t
         local ____TS__Number_result_105 = __TS__Number(seconds)
-        __O[718] = ____TS__Number_result_105
+        __O[731] = ____TS__Number_result_105
         if ____t_106(____TS__Number_result_105) then
-            ____t_result_107 = __O[718]
+            ____t_result_107 = __O[731]
         else
             ____t_result_107 = 0
         end
@@ -5055,9 +5055,9 @@ local __O = {};
             if ____opt_108 ~= nil then
                 ____opt_108 = ____opt_108:create(options)
             end
-            __O[719] = ____opt_108
+            __O[732] = ____opt_108
             if ____t_110(____opt_108) then
-                ____t_result_111 = __O[719]
+                ____t_result_111 = __O[732]
             else
                 ____t_result_111 = {
                     kind = kind,
@@ -5075,9 +5075,9 @@ local __O = {};
         local ____t_result_114
         local ____t_113 = __t
         local ____temp_112 = kind == "outro"
-        __O[720] = ____temp_112
+        __O[733] = ____temp_112
         if ____t_113(____temp_112) then
-            ____t_result_114 = __O[720]
+            ____t_result_114 = __O[733]
         else
             ____t_result_114 = __fcall(__hasOwnV, EXTRA, kind)
         end
@@ -5104,9 +5104,9 @@ local __O = {};
             if ____opt_117 ~= nil then
                 ____opt_117 = ____opt_117.shots
             end
-            __O[721] = ____opt_117
+            __O[734] = ____opt_117
             if ____t_119(____opt_117) then
-                ____t_result_120 = __O[721]
+                ____t_result_120 = __O[734]
             else
                 ____t_result_120 = __arrL({}, 0)
             end
@@ -5115,9 +5115,9 @@ local __O = {};
             local ____t_result_124
             local ____t_122 = __t
             local ____get_result_121 = __get(EXTRA, s.kind)
-            __O[722] = ____get_result_121
+            __O[735] = ____get_result_121
             if ____t_122(____get_result_121) then
-                ____t_result_124 = __O[722]
+                ____t_result_124 = __O[735]
             else
                 local ____temp_123
                 if s.kind == "outro" then
@@ -5142,9 +5142,9 @@ local __O = {};
             if ____opt_126 ~= nil then
                 ____opt_126 = ____opt_126:beat(s)
             end
-            __O[723] = ____opt_126
+            __O[736] = ____opt_126
             if ____t_128(____opt_126) then
-                ____t_result_129 = __O[723]
+                ____t_result_129 = __O[736]
             else
                 ____t_result_129 = {
                     index = 0,
@@ -5161,9 +5161,9 @@ local __O = {};
         local ____t_result_132
         local ____t_131 = __t
         local ____TS__Number_result_130 = __TS__Number(s.index)
-        __O[724] = ____TS__Number_result_130
+        __O[737] = ____TS__Number_result_130
         if ____t_131(____TS__Number_result_130) then
-            ____t_result_132 = __O[724]
+            ____t_result_132 = __O[737]
         else
             ____t_result_132 = 0
         end
@@ -5188,9 +5188,9 @@ local __O = {};
         local ____t_result_135
         local ____t_134 = __t
         local ____temp_133 = not __t(s)
-        __O[725] = ____temp_133
+        __O[738] = ____temp_133
         if ____t_134(____temp_133) then
-            ____t_result_135 = __O[725]
+            ____t_result_135 = __O[738]
         else
             ____t_result_135 = s.done
         end
@@ -5208,9 +5208,9 @@ local __O = {};
         local ____t_result_139
         local ____t_138 = __t
         local ____TS__Number_result_137 = __TS__Number(dt)
-        __O[726] = ____TS__Number_result_137
+        __O[739] = ____TS__Number_result_137
         if ____t_138(____TS__Number_result_137) then
-            ____t_result_139 = __O[726]
+            ____t_result_139 = __O[739]
         else
             ____t_result_139 = 0
         end
@@ -5259,9 +5259,9 @@ local __O = {};
         local ____t_result_148
         local ____t_147 = __t
         local ____temp_146 = not __t(s)
-        __O[727] = ____temp_146
+        __O[740] = ____temp_146
         if ____t_147(____temp_146) then
-            ____t_result_148 = __O[727]
+            ____t_result_148 = __O[740]
         else
             ____t_result_148 = s.done
         end
@@ -5323,9 +5323,9 @@ local __O = {};
         local ____t_result_155
         local ____t_154 = __t
         local ____TS__Number_result_153 = __TS__Number(s.time)
-        __O[728] = ____TS__Number_result_153
+        __O[741] = ____TS__Number_result_153
         if ____t_154(____TS__Number_result_153) then
-            ____t_result_155 = __O[728]
+            ____t_result_155 = __O[741]
         else
             ____t_result_155 = 0
         end
@@ -5336,9 +5336,9 @@ local __O = {};
         if b ~= nil then
             ____opt_result_158 = b.speaker
         end
-        __O[729] = ____opt_result_158
+        __O[742] = ____opt_result_158
         if ____t_159(____opt_result_158) then
-            ____t_result_160 = __O[729]
+            ____t_result_160 = __O[742]
         else
             ____t_result_160 = ""
         end
@@ -5381,9 +5381,9 @@ local __O = {};
             local ____t_result_163
             local ____t_162 = __t
             local ____get_result_161 = __get(partySpeakers, i)
-            __O[730] = ____get_result_161
+            __O[743] = ____get_result_161
             if ____t_162(____get_result_161) then
-                ____t_result_163 = __O[730]
+                ____t_result_163 = __O[743]
             else
                 ____t_result_163 = 315
             end
@@ -5395,11 +5395,11 @@ local __O = {};
             local ____t_result_166
             local ____t_165 = __t
             local ____temp_164 = i == 0
-            __O[731] = ____temp_164
+            __O[744] = ____temp_164
             if ____t_165(____temp_164) then
                 ____t_result_166 = __call(who, "includes", "Da Roça")
             else
-                ____t_result_166 = __O[731]
+                ____t_result_166 = __O[744]
             end
             if ____t_167(____t_result_166) then
                 actorX = 330 + ease(nil, t / 1.1) * 60
@@ -5408,11 +5408,11 @@ local __O = {};
             local ____t_result_170
             local ____t_169 = __t
             local ____temp_168 = i == 1
-            __O[732] = ____temp_168
+            __O[745] = ____temp_168
             if ____t_169(____temp_168) then
                 ____t_result_170 = __call(who, "includes", "Nikolas")
             else
-                ____t_result_170 = __O[732]
+                ____t_result_170 = __O[745]
             end
             if ____t_171(____t_result_170) then
                 actorX = 610 + math.sin(t * 2) * 5
@@ -5421,11 +5421,11 @@ local __O = {};
             local ____t_result_174
             local ____t_173 = __t
             local ____temp_172 = i == 2
-            __O[733] = ____temp_172
+            __O[746] = ____temp_172
             if ____t_173(____temp_172) then
                 ____t_result_174 = __call(who, "includes", "Lucas")
             else
-                ____t_result_174 = __O[733]
+                ____t_result_174 = __O[746]
             end
             if ____t_175(____t_result_174) then
                 actorX = 160
@@ -5434,11 +5434,11 @@ local __O = {};
             local ____t_result_178
             local ____t_177 = __t
             local ____temp_176 = i == 3
-            __O[734] = ____temp_176
+            __O[747] = ____temp_176
             if ____t_177(____temp_176) then
                 ____t_result_178 = __call(who, "includes", "Nikolas")
             else
-                ____t_result_178 = __O[734]
+                ____t_result_178 = __O[747]
             end
             if ____t_179(____t_result_178) then
                 actorX = 647 - ease(nil, t / 3) * 35
@@ -5448,11 +5448,11 @@ local __O = {};
             local ____t_result_182
             local ____t_181 = __t
             local ____temp_180 = i == 5
-            __O[735] = ____temp_180
+            __O[748] = ____temp_180
             if ____t_181(____temp_180) then
                 ____t_result_182 = __call(who, "includes", "Nikolas")
             else
-                ____t_result_182 = __O[735]
+                ____t_result_182 = __O[748]
             end
             if ____t_183(____t_result_182) then
                 actorX = 575 + ease(nil, t / 2.4) * 240
@@ -5461,11 +5461,11 @@ local __O = {};
             local ____t_result_186
             local ____t_185 = __t
             local ____temp_184 = i == 6
-            __O[736] = ____temp_184
+            __O[749] = ____temp_184
             if ____t_185(____temp_184) then
                 ____t_result_186 = __call(who, "includes", "Da Roça")
             else
-                ____t_result_186 = __O[736]
+                ____t_result_186 = __O[749]
             end
             if ____t_187(____t_result_186) then
                 actorX = 360
@@ -5475,11 +5475,11 @@ local __O = {};
             local ____t_result_190
             local ____t_189 = __t
             local ____temp_188 = i == 5
-            __O[737] = ____temp_188
+            __O[750] = ____temp_188
             if ____t_189(____temp_188) then
                 ____t_result_190 = __call(who, "includes", "Reeis")
             else
-                ____t_result_190 = __O[737]
+                ____t_result_190 = __O[750]
             end
             if ____t_191(____t_result_190) then
                 actorX = 805
@@ -5488,11 +5488,11 @@ local __O = {};
             local ____t_result_194
             local ____t_193 = __t
             local ____temp_192 = i == 3
-            __O[738] = ____temp_192
+            __O[751] = ____temp_192
             if ____t_193(____temp_192) then
                 ____t_result_194 = __call(who, "includes", "Lucas")
             else
-                ____t_result_194 = __O[738]
+                ____t_result_194 = __O[751]
             end
             if ____t_195(____t_result_194) then
                 actorX = 220
@@ -5627,9 +5627,9 @@ local __O = {};
     if ____opt_202 ~= nil then
         ____opt_202 = ____opt_202.shots
     end
-    __O[739] = ____opt_202
+    __O[752] = ____opt_202
     if ____t_204(____opt_202) then
-        ____t_result_205 = __O[739]
+        ____t_result_205 = __O[752]
     else
         ____t_result_205 = __arrL({}, 0)
     end

@@ -6,7 +6,9 @@
   - celular: toque nos mesmos botões do jogo (o jogo desenha os botões de toque dele);
   - Xbox e PlayStation: controle mapeado para as teclas do jogo (página "Como jogar" explica cada botão);
   - a qualidade gráfica do Roblox (Configurações > Qualidade gráfica) escolhe a qualidade do jogo:
-    1 a 3 = BAIXA, 4 a 7 = MÉDIA, 8 a 10 = ALTA, Automático = AUTOMÁTICA do jogo;
+    1 a 7 = BAIXA, 8 a 10 = MÉDIA, Automático = AUTOMÁTICA do jogo começando na BAIXA;
+  - os cenários HD da campanha 1 ficam em camadas na placa de vídeo (céu, fundos, meio), deslizando a cada quadro;
+    F2 liga e desliga isso para comparar;
   - o save (localStorage do jogo) fica no DataStore do jogador (script do servidor). ]]
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -29,10 +31,14 @@ local gui = Instance.new("ScreenGui")
 gui.Name = "DaRoca"; gui.ResetOnSpawn = false; gui.IgnoreGuiInset = true; gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 gui.Parent = jogador:WaitForChild("PlayerGui")
 local fundo = Instance.new("Frame"); fundo.Size = UDim2.fromScale(1, 1); fundo.BackgroundColor3 = Color3.new(0, 0, 0); fundo.BorderSizePixel = 0; fundo.Parent = gui
+-- palco 16:9 com as camadas: cenário (imagens próprias, embaixo), canvas do jogo e a interface por cima
+local palco = Instance.new("Frame")
+palco.AnchorPoint = Vector2.new(.5, .5); palco.Position = UDim2.fromScale(.5, .5); palco.Size = UDim2.fromScale(1, 1)
+palco.BackgroundTransparency = 1; palco.ClipsDescendants = true; palco.Parent = fundo
+local proporcao = Instance.new("UIAspectRatioConstraint"); proporcao.AspectRatio = 16 / 9; proporcao.Parent = palco
 local imagem = Instance.new("ImageLabel")
-imagem.AnchorPoint = Vector2.new(.5, .5); imagem.Position = UDim2.fromScale(.5, .5); imagem.Size = UDim2.fromScale(1, 1)
-imagem.BackgroundTransparency = 1; imagem.ResampleMode = Enum.ResamplerMode.Pixelated; imagem.Parent = fundo
-local proporcao = Instance.new("UIAspectRatioConstraint"); proporcao.AspectRatio = 16 / 9; proporcao.Parent = imagem
+imagem.Size = UDim2.fromScale(1, 1); imagem.ZIndex = 50
+imagem.BackgroundTransparency = 1; imagem.ResampleMode = Enum.ResamplerMode.Pixelated; imagem.Parent = palco
 
 local PIXEL = Font.new("rbxasset://fonts/families/PressStart2P.json")
 local aviso = Instance.new("TextLabel")
@@ -51,6 +57,17 @@ do
     local okC, eC = pcall(function() imagem.ImageContent = Content.fromObject(r) end)
     if okC then ei = r else erroImagem = eC end
   else erroImagem = okE and "o Roblox devolveu nil (memória de imagem cheia)" or r end
+end
+-- camada da interface (página) por cima da imagem do jogo: só é enviada de novo quando muda
+local imagemPagina, eiPagina
+if ei then
+  local okP, rP = pcall(function() return AssetService:CreateEditableImage({ Size = Vector2.new(W, H) }) end)
+  if okP and rP then
+    imagemPagina = Instance.new("ImageLabel")
+    imagemPagina.Size = UDim2.fromScale(1, 1); imagemPagina.BackgroundTransparency = 1; imagemPagina.ResampleMode = Enum.ResamplerMode.Pixelated; imagemPagina.ZIndex = 3
+    local okC = pcall(function() imagemPagina.ImageContent = Content.fromObject(rP) end)
+    if okC then eiPagina = rP; imagemPagina.Parent = imagem else imagemPagina:Destroy(); imagemPagina = nil end
+  end
 end
 if not ei then
   aviso.TextSize = 14
@@ -81,6 +98,7 @@ local Audio = require(runtime.audio)
 local LL = require(jogoPasta.lualib_bundle)
 local window = N.window
 window.DAROCA_ROBLOX = true
+window.DAROCA_CAMADAS = eiPagina ~= nil -- cenário HD em camadas na placa de vídeo (precisa das imagens extras)
 N.toque = UIS.TouchEnabled and not UIS.KeyboardEnabled
 window.navigator.maxTouchPoints = N.toque and 5 or 0
 window.localStorage._carregar(salvosIniciais)
@@ -91,9 +109,11 @@ local function nivelDoRoblox()
   local q = configuracoes.SavedQualityLevel
   -- Automático começa na BAIXA (o jogo desenha tudo no processador); o automático do jogo continua valendo dali
   if q == Enum.SavedQualitySetting.Automatic then return "auto-low" end
+  -- com o cenário em camadas a BAIXA já mostra o cenário completo; a MÉDIA acrescenta o acabamento dos personagens,
+  -- que ainda pesa no processador (fica para as qualidades 8 a 10)
   local n = tonumber(tostring(q):match("(%d+)$")) or 5
-  if n <= 3 then return "low" elseif n <= 7 then return "medium" end
-  return "high"
+  if n <= 7 then return "low" end
+  return "medium"
 end
 window.localStorage:setItem("daroca-graphics-v1", nivelDoRoblox())
 
@@ -151,7 +171,13 @@ local VERSAO = versaoValor and versaoValor.Value or "local"
 print("[Da Roça] versão " .. VERSAO)
 -- pausa um quadro quando já faz um tempo sem pausar: o Roblox derruba scripts que ficam ~10 s sem pausar
 local ultimaPausa = os.clock()
+-- o cenário em camadas é desenhado numa rotina à parte, em fatias curtas a cada quadro (fundoCo/fatiaAte, mais abaixo)
+local fundoCo, fatiaAte = nil, 0
 local function ceder()
+  if fundoCo and coroutine.running() == fundoCo then
+    if os.clock() > fatiaAte and coroutine.isyieldable() then coroutine.yield() end
+    return
+  end
   if os.clock() - ultimaPausa > .25 and coroutine.isyieldable() then task.wait(); ultimaPausa = os.clock() end
 end
 Canvas.ceder = ceder
@@ -266,6 +292,10 @@ UIS.InputBegan:Connect(function(input, processado)
   end
   if input.UserInputType == Enum.UserInputType.Keyboard then
     if input.KeyCode == Enum.KeyCode.F1 then paginaControles.Visible = true; return end
+    if input.KeyCode == Enum.KeyCode.F2 and eiPagina then -- liga/desliga o cenário em camadas (para comparar)
+      window.DAROCA_CAMADAS = not window.DAROCA_CAMADAS
+      print("[Da Roça] cenário em camadas: " .. (window.DAROCA_CAMADAS and "ligado" or "desligado")); return
+    end
     local code, key = codigoDe(input.KeyCode); if code then apertar(code, key) end
   elseif input.UserInputType.Name:match("^Gamepad") then
     if input.KeyCode == Enum.KeyCode.ButtonSelect then if paginaControles then paginaControles.Visible = true end; return end
@@ -400,22 +430,166 @@ ajuda.Activated:Connect(function() mostrarGuia() end)
 
 -- ===== laço principal: avança o jogo, desenha a página e copia para a imagem =====
 local writeu32 = buffer.writeu32
+-- tela em camadas: a imagem do jogo (canvas do jogo, todo quadro) e a da interface por cima (só quando muda).
+-- Sem a segunda imagem (memória de imagem cheia), volta ao jeito antigo: tudo numa imagem só.
+local camadas = eiPagina ~= nil and desenhista ~= nil
+local function enviar(alvo, tela)
+  local px = tela._.px
+  if tela.width == W and tela.height == H then alvo:WritePixelsBuffer(Vector2.zero, tamanho, px)
+  else local RD = Canvas.RD; for i = 0, W * H - 1 do writeu32(quadro, i * 4, RD(px, i * 4)) end; alvo:WritePixelsBuffer(Vector2.zero, tamanho, quadro) end
+end
+local jogoVisivel = true
 local function umQuadro()
   emQuadro = true
   N.passo(os.clock() * 1000)
-  local tela = desenhista and desenhista.desenhar() or window.document:getElementById("gameCanvas")
-  emQuadro = false
-  if tela then
-    -- os pixels da tela já são um buffer RGBA do tamanho certo: vão direto para a imagem
-    local px = tela._.px
-    if tela.width == W and tela.height == H then ei:WritePixelsBuffer(Vector2.zero, tamanho, px)
-    else local RD = Canvas.RD; for i = 0, W * H - 1 do writeu32(quadro, i * 4, RD(px, i * 4)) end; ei:WritePixelsBuffer(Vector2.zero, tamanho, quadro) end
+  if camadas then
+    local tela, mudou = desenhista.desenhar({ camadas = true })
+    emQuadro = false
+    local jogo = desenhista.camadaJogo
+    if jogo and jogo._ and jogo.width == W and jogo.height == H then
+      ei:WritePixelsBuffer(Vector2.zero, tamanho, jogo._.px)
+      if not jogoVisivel then jogoVisivel = true; imagem.ImageTransparency = 0 end
+    elseif jogoVisivel then jogoVisivel = false; imagem.ImageTransparency = 1 end
+    if mudou then enviar(eiPagina, tela) end
+  else
+    local tela = desenhista and desenhista.desenhar() or window.document:getElementById("gameCanvas")
+    emQuadro = false
+    if tela then enviar(ei, tela) end
   end
   local fila = filaEntradas; filaEntradas = {}
   for _, f in ipairs(fila) do pcall(f) end
 end
+-- ===== cenário em camadas (cenários HD da campanha 1) =====
+-- O jogo desenha o cenário num quadro mais largo que a tela, sem o céu e os fundos que se repetem (que viram imagens
+-- próprias). Esse desenho é feito aos poucos, em fatias de FATIA segundos por quadro, numa rotina à parte; quando fica
+-- pronto, vai para as imagens. A cada quadro a placa de vídeo só reposiciona as camadas com a câmera: o cenário
+-- desliza liso, e as animações dele (árvores, bichos, luzes) andam no ritmo dos desenhos prontos.
+local Camadas = require(runtime.camadas)
+local HdCam = window.DAROCA_CAMADAS and window.HdMaps and window.HdMaps.camadas or nil
+local FATIA, MAXW = 0.005, 1024
+local imagensDe = setmetatable({}, { __mode = "k" }) -- canvas → pedaços de EditableImage (até 1024 de largura cada)
+local rotulos, estadoRotulo = {}, {}
+local frente, pronto, desenhando, falhasFundo = nil, nil, false, 0
+local velCam, camAnterior = 0, nil
+local function novaImagem(w, h)
+  local ok, r = pcall(function() return AssetService:CreateEditableImage({ Size = Vector2.new(w, h) }) end)
+  if ok then return r end
+  return nil
+end
+local function imagemDe(cv, reenviar)
+  local reg = imagensDe[cv]
+  local w, h = cv.width, cv.height
+  if reg and (reg.w ~= w or reg.h ~= h) then for _, p in ipairs(reg.pedacos) do p.ei:Destroy() end; reg = nil end
+  if not reg then
+    reg = { w = w, h = h, pedacos = {} }
+    local x0 = 0
+    while x0 < w do
+      local pw = math.min(MAXW, w - x0)
+      local e = novaImagem(pw, h); if not e then return nil end
+      reg.pedacos[#reg.pedacos + 1] = { ei = e, x0 = x0, w = pw, conteudo = Content.fromObject(e) }
+      x0 = x0 + pw
+    end
+    imagensDe[cv] = reg; reenviar = true
+  end
+  if reenviar then
+    local px = cv._.px
+    if #reg.pedacos == 1 then reg.pedacos[1].ei:WritePixelsBuffer(Vector2.zero, Vector2.new(w, h), px)
+    else
+      for _, p in ipairs(reg.pedacos) do
+        local b = buffer.create(p.w * h * 4)
+        for y = 0, h - 1 do buffer.copy(b, y * p.w * 4, px, (y * w + p.x0) * 4, p.w * 4) end
+        p.ei:WritePixelsBuffer(Vector2.zero, Vector2.new(p.w, h), b)
+      end
+    end
+  end
+  return reg
+end
+-- céu e névoa mudam devagar: vão para a imagem no máximo duas vezes por segundo
+local envioLento = setmetatable({}, { __mode = "k" })
+local function lento(cv) local t = os.clock(); local u = envioLento[cv]; if u and t - u < .5 and imagensDe[cv] then return false end; envioLento[cv] = t; return true end
+local function consumir(info)
+  local ok = imagemDe(info.meio, true) ~= nil
+  for _, f in ipairs(info.fundo) do
+    if f.tipo == "ceu" then ok = imagemDe(info.ceu, lento(info.ceu)) ~= nil and ok
+    elseif f.tipo == "nevoa" then ok = imagemDe(f.cv, lento(f.cv)) ~= nil and ok
+    elseif f.tipo == "tile" then ok = imagemDe(f.img, false) ~= nil and ok end
+  end
+  if not ok then warn("[Da Roça] sem memória de imagem para as camadas do cenário; voltando ao desenho direto"); window.DAROCA_CAMADAS = false; HdCam = nil; frente = nil; return end
+  frente = info
+end
+local BRANCO = Color3.new(1, 1, 1)
+local function mostrarFundo()
+  local cena = window.DAROCA_QUADRO_CAMADAS
+  local n = 0
+  if frente and cena ~= nil and cena >= 0 and frente.cena == cena then
+    local itens = Camadas.montar(frente, window.DAROCA_QUADRO_CAMERA, window.DAROCA_QUADRO_TREMOR_X, window.DAROCA_QUADRO_TREMOR_Y)
+    for z, it in ipairs(itens) do
+      local reg = imagensDe[it.fonte]
+      if reg then
+        local k = it.w / reg.w
+        for _, p in ipairs(reg.pedacos) do
+          n = n + 1
+          local l, e = rotulos[n], estadoRotulo[n]
+          if not l then
+            l = Instance.new("ImageLabel"); l.BackgroundTransparency = 1; l.ResampleMode = Enum.ResamplerMode.Pixelated; l.BorderSizePixel = 0; l.Parent = palco
+            rotulos[n] = l; e = {}; estadoRotulo[n] = e
+          end
+          if e.conteudo ~= p.conteudo then e.conteudo = p.conteudo; l.ImageContent = p.conteudo end
+          local x, w2, h2 = it.x + p.x0 * k, p.w * k, it.h
+          if e.x ~= x or e.y ~= it.y or e.w ~= w2 or e.h ~= h2 then e.x, e.y, e.w, e.h = x, it.y, w2, h2; l.Position = UDim2.fromScale(x / W, it.y / H); l.Size = UDim2.fromScale(w2 / W, h2 / H) end
+          local tr = 1 - it.alfa
+          if e.tr ~= tr then e.tr = tr; l.ImageTransparency = tr end
+          local t = it.tinta
+          local cor = t and Color3.new(t[1], t[2], t[3]) or BRANCO
+          if e.cor ~= cor then e.cor = cor; l.ImageColor3 = cor end
+          if e.z ~= z then e.z = z; l.ZIndex = z end
+          if not e.vis then e.vis = true; l.Visible = true end
+        end
+      end
+    end
+  end
+  for i = n + 1, #rotulos do local e = estadoRotulo[i]; if e.vis then e.vis = false; rotulos[i].Visible = false end end
+end
+local function trabalhoFundo()
+  while true do
+    local cena = window.DAROCA_QUADRO_CAMADAS
+    if HdCam and cena and cena >= 0 and not pronto then
+      -- desenha um pouco à frente, para o lado em que a câmera está indo
+      local cam = (window.DAROCA_QUADRO_CAMERA or 0) + math.clamp(velCam * .25, -140, 140)
+      desenhando = true
+      local ok, info = pcall(function() return HdCam:desenhar(cena, cam, window.DAROCA_QUADRO_TEMPO or 0) end)
+      desenhando = false
+      if ok and info then pronto = info; falhasFundo = 0
+      elseif not ok then
+        falhasFundo = falhasFundo + 1; warn("[Da Roça] cenário em camadas: " .. tostring(info))
+        if falhasFundo >= 3 then window.DAROCA_CAMADAS = false; HdCam = nil end
+      end
+    end
+    coroutine.yield()
+  end
+end
+if HdCam then fundoCo = coroutine.create(trabalhoFundo) end
+local function passoFundo(dt)
+  if not fundoCo then return end
+  local cena, cam = window.DAROCA_QUADRO_CAMADAS, window.DAROCA_QUADRO_CAMERA or 0
+  if camAnterior and dt > 0 then velCam = velCam * .7 + ((cam - camAnterior) / dt) * .3 end
+  camAnterior = cam
+  local ativo = cena ~= nil and cena >= 0
+  if ativo or desenhando then
+    -- urgente: cenário novo ou câmera fora do quadro pronto (o desenho termina neste quadro mesmo)
+    local urgente = desenhando and not ativo or (ativo and (not frente or frente.cena ~= cena or not Camadas.cabe(frente, cam)))
+    fatiaAte = os.clock() + (urgente and 1.5 or FATIA)
+    if coroutine.status(fundoCo) == "suspended" then
+      local ok, e = coroutine.resume(fundoCo)
+      if not ok then warn("[Da Roça] rotina do cenário: " .. tostring(e)); desenhando = false; fundoCo = HdCam and coroutine.create(trabalhoFundo) or nil end
+    end
+  end
+  if pronto then local info = pronto; pronto = nil; consumir(info) end
+end
+
 -- um quadro de cada vez, num laço próprio (pode pausar no meio de um quadro pesado sem o Roblox derrubar o script)
 local primeiro, errosSeguidos, inicioQuadros = true, 0, os.clock()
+local ultimoQuadro
 task.spawn(function()
   while true do
     ultimaPausa = os.clock()
@@ -428,6 +602,9 @@ task.spawn(function()
       errosSeguidos = 0
       if primeiro then primeiro = false; aviso.Visible = false; print(("[Da Roça] primeiro quadro em %.1f s"):format(os.clock() - inicioQuadros)) end
     end
+    local okF, eF = pcall(passoFundo, os.clock() - (ultimoQuadro or os.clock())); ultimoQuadro = os.clock()
+    if not okF then warn("[Da Roça] camadas: " .. tostring(eF)) end
+    pcall(mostrarFundo)
     RunService.RenderStepped:Wait()
   end
 end)

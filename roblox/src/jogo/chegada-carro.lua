@@ -41,9 +41,9 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(cena)
-        __O[698] = ____TS__Number_result_0
+        __O[711] = ____TS__Number_result_0
         if ____t_1(____TS__Number_result_0) then
-            ____t_result_2 = __O[698]
+            ____t_result_2 = __O[711]
         else
             ____t_result_2 = 0
         end
@@ -242,11 +242,11 @@ local __O = {};
                 local ____t_result_12
                 local ____t_11 = __t
                 local ____temp_10 = f > 0.45 and f < 0.5
-                __O[699] = ____temp_10
+                __O[712] = ____temp_10
                 if ____t_11(____temp_10) then
                     ____t_result_12 = math.random() < 0.8
                 else
-                    ____t_result_12 = __O[699]
+                    ____t_result_12 = __O[712]
                 end
                 if ____t_13(____t_result_12) then
                     do
@@ -745,9 +745,9 @@ local __O = {};
         local ____t_result_28
         local ____t_27 = __t
         local ____get_result_26 = __get(ANIM, ch.cena)
-        __O[700] = ____get_result_26
+        __O[713] = ____get_result_26
         if ____t_27(____get_result_26) then
-            ____t_result_28 = __O[700]
+            ____t_result_28 = __O[713]
         else
             ____t_result_28 = __get(ANIM, 0)
         end
@@ -767,9 +767,9 @@ local __O = {};
             y1,
             ____t_result_29
         )
-        __O[701] = ____fn_result_30
+        __O[714] = ____fn_result_30
         if ____t_31(____fn_result_30) then
-            ____t_result_32 = __O[701]
+            ____t_result_32 = __O[714]
         else
             ____t_result_32 = {}
         end
@@ -904,9 +904,9 @@ local __O = {};
                     local ____t_result_49
                     local ____t_48 = __t
                     local ____temp_47 = p.cor == "#e8dcc0" or p.cor == "#d8c098"
-                    __O[702] = ____temp_47
+                    __O[715] = ____temp_47
                     if ____t_48(____temp_47) then
-                        ____t_result_49 = __O[702]
+                        ____t_result_49 = __O[715]
                     else
                         ____t_result_49 = p.cor == "#e8e8e8"
                     end

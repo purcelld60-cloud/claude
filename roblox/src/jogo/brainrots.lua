@@ -25,9 +25,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art)
-    __O[684] = ____temp_0
+    __O[697] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[684]
+        ____t_result_2 = __O[697]
     else
         ____t_result_2 = window.Art.__brainrots
     end
@@ -132,9 +132,9 @@ local __O = {};
                         local ____t_result_6
                         local ____t_5 = __t
                         local ____temp_4 = __le(ay, yc) and __gt(by, yc)
-                        __O[685] = ____temp_4
+                        __O[698] = ____temp_4
                         if ____t_5(____temp_4) then
-                            ____t_result_6 = __O[685]
+                            ____t_result_6 = __O[698]
                         else
                             ____t_result_6 = __le(by, yc) and __gt(ay, yc)
                         end
@@ -345,15 +345,15 @@ local __O = {};
             local ____t_result_11
             local ____t_10 = __t
             local ____temp_9 = __lt(x, 0) or __lt(y, 0)
-            __O[686] = ____temp_9
+            __O[699] = ____temp_9
             if ____t_10(____temp_9) then
-                ____t_result_11 = __O[686]
+                ____t_result_11 = __O[699]
             else
                 ____t_result_11 = __ge(x, W)
             end
-            __O[687] = ____t_result_11
+            __O[700] = ____t_result_11
             if ____t_12(____t_result_11) then
-                ____t_result_13 = __O[687]
+                ____t_result_13 = __O[700]
             else
                 ____t_result_13 = __ge(y, H)
             end
@@ -390,15 +390,15 @@ local __O = {};
                                 local ____t_result_17
                                 local ____t_16 = __t
                                 local ____temp_15 = em(nil, x - 1, y) >= 0 or em(nil, x + 1, y) >= 0
-                                __O[688] = ____temp_15
+                                __O[701] = ____temp_15
                                 if ____t_16(____temp_15) then
-                                    ____t_result_17 = __O[688]
+                                    ____t_result_17 = __O[701]
                                 else
                                     ____t_result_17 = em(nil, x, y - 1) >= 0
                                 end
-                                __O[689] = ____t_result_17
+                                __O[702] = ____t_result_17
                                 if ____t_18(____t_result_17) then
-                                    ____t_result_19 = __O[689]
+                                    ____t_result_19 = __O[702]
                                 else
                                     ____t_result_19 = em(nil, x, y + 1) >= 0
                                 end
@@ -479,9 +479,9 @@ local __O = {};
                                         else
                                             ____t_result_31 = em(nil, x - 1, y - 1) ~= c
                                         end
-                                        __O[690] = ____t_result_31
+                                        __O[703] = ____t_result_31
                                         if ____t_32(____t_result_31) then
-                                            ____t_result_33 = __O[690]
+                                            ____t_result_33 = __O[703]
                                         else
                                             ____t_result_33 = em(nil, x, y - 2) ~= c
                                         end
@@ -2208,9 +2208,9 @@ local __O = {};
         else
             ____t_result_45 = o.variant
         end
-        __O[691] = ____t_result_45
+        __O[704] = ____t_result_45
         if ____t_46(____t_result_45) then
-            ____t_result_50 = __O[691]
+            ____t_result_50 = __O[704]
         else
             local ____t_result_49
             local ____t_48 = __t
@@ -2227,9 +2227,9 @@ local __O = {};
             end
             ____t_result_50 = ____t_result_49
         end
-        __O[692] = ____t_result_50
+        __O[705] = ____t_result_50
         if ____t_51(____t_result_50) then
-            ____t_result_52 = __O[692]
+            ____t_result_52 = __O[705]
         else
             ____t_result_52 = ""
         end
@@ -2239,22 +2239,22 @@ local __O = {};
         local ____t_result_60
         local ____t_54 = __t
         local ____temp_53 = not __t(nome)
-        __O[695] = ____temp_53
+        __O[708] = ____temp_53
         if ____t_54(____temp_53) then
             local ____t_result_59
             local ____t_58 = __t
             local ____t_result_57
             local ____t_56 = __t
             local ____temp_55 = design == "" or design == "ink"
-            __O[693] = ____temp_55
+            __O[706] = ____temp_55
             if ____t_56(____temp_55) then
-                ____t_result_57 = __O[693]
+                ____t_result_57 = __O[706]
             else
                 ____t_result_57 = design == "doodle"
             end
-            __O[694] = ____t_result_57
+            __O[707] = ____t_result_57
             if ____t_58(____t_result_57) then
-                ____t_result_59 = __O[694]
+                ____t_result_59 = __O[707]
             else
                 ____t_result_59 = __re_test(
                     __re("^\\d$", ""),
@@ -2263,7 +2263,7 @@ local __O = {};
             end
             ____t_result_60 = ____t_result_59
         else
-            ____t_result_60 = __O[695]
+            ____t_result_60 = __O[708]
         end
         if ____t_61(____t_result_60) then
             local ____get_66 = __get
@@ -2271,9 +2271,9 @@ local __O = {};
             local ____t_result_64
             local ____t_63 = __t
             local ____TS__Number_result_62 = __TS__Number(kind)
-            __O[696] = ____TS__Number_result_62
+            __O[709] = ____TS__Number_result_62
             if ____t_63(____TS__Number_result_62) then
-                ____t_result_64 = __O[696]
+                ____t_result_64 = __O[709]
             else
                 ____t_result_64 = 0
             end
@@ -2311,9 +2311,9 @@ local __O = {};
         local ____t_result_70
         local ____t_69 = __t
         local ____TS__Number_result_68 = __TS__Number(kind)
-        __O[697] = ____TS__Number_result_68
+        __O[710] = ____TS__Number_result_68
         if ____t_69(____TS__Number_result_68) then
-            ____t_result_70 = __O[697]
+            ____t_result_70 = __O[710]
         else
             ____t_result_70 = 0
         end

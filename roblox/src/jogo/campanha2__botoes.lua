@@ -24,9 +24,9 @@ local __O = {};
             local ____t_result_2
             local ____t_1 = __t
             local ____temp_0 = window.localStorage:getItem(KEY)
-            __O[888] = ____temp_0
+            __O[901] = ____temp_0
             if ____t_1(____temp_0) then
-                ____t_result_2 = __O[888]
+                ____t_result_2 = __O[901]
             else
                 ____t_result_2 = "null"
             end
@@ -74,9 +74,9 @@ local __O = {};
         if ____opt_7 ~= nil then
             ____opt_7 = ____opt_7:querySelector(".c2-c1-shell")
         end
-        __O[889] = ____opt_7
+        __O[902] = ____opt_7
         if ____t_9(____opt_7) then
-            ____t_result_10 = __O[889]
+            ____t_result_10 = __O[902]
         else
             ____t_result_10 = tela:querySelector(".c2-c1-shell")
         end
@@ -153,9 +153,9 @@ local __O = {};
                     local ____t_result_17
                     local ____t_16 = __t
                     local ____temp_15 = el:getAttribute("style")
-                    __O[890] = ____temp_15
+                    __O[903] = ____temp_15
                     if ____t_16(____temp_15) then
-                        ____t_result_17 = __O[890]
+                        ____t_result_17 = __O[903]
                     else
                         ____t_result_17 = ""
                     end
@@ -194,9 +194,9 @@ local __O = {};
                     if ____t_result_21 ~= nil then
                         ____opt_result_22 = ____t_result_21:getBoundingClientRect()
                     end
-                    __O[891] = ____opt_result_22
+                    __O[904] = ____opt_result_22
                     if ____t_23(____opt_result_22) then
-                        ____t_result_24 = __O[891]
+                        ____t_result_24 = __O[904]
                     else
                         ____t_result_24 = {left = 0, top = 0}
                     end
@@ -206,15 +206,15 @@ local __O = {};
                     local ____t_result_27
                     local ____t_26 = __t
                     local ____TS__ParseFloat_result_25 = __TS__ParseFloat(window:getComputedStyle(el):getPropertyValue("--ccl-size"))
-                    __O[892] = ____TS__ParseFloat_result_25
+                    __O[905] = ____TS__ParseFloat_result_25
                     if ____t_26(____TS__ParseFloat_result_25) then
-                        ____t_result_27 = __O[892]
+                        ____t_result_27 = __O[905]
                     else
                         ____t_result_27 = el:getBoundingClientRect().width
                     end
-                    __O[893] = ____t_result_27
+                    __O[906] = ____t_result_27
                     if ____t_28(____t_result_27) then
-                        ____t_result_29 = __O[893]
+                        ____t_result_29 = __O[906]
                     else
                         ____t_result_29 = 50
                     end
@@ -302,9 +302,9 @@ local __O = {};
                 if ____opt_40 ~= nil then
                     ____opt_40 = ____opt_40.s
                 end
-                __O[894] = ____opt_40
+                __O[907] = ____opt_40
                 if ____t_42(____opt_40) then
-                    ____t_result_43 = __O[894]
+                    ____t_result_43 = __O[907]
                 else
                     ____t_result_43 = 1
                 end
@@ -319,9 +319,9 @@ local __O = {};
         local ____t_result_50
         local ____t_49 = __t
         local ____temp_48 = not __t(tela)
-        __O[895] = ____temp_48
+        __O[908] = ____temp_48
         if ____t_49(____temp_48) then
-            ____t_result_50 = __O[895]
+            ____t_result_50 = __O[908]
         else
             ____t_result_50 = tela:querySelector(".c2-editor")
         end
@@ -360,9 +360,9 @@ local __O = {};
             local ____t_result_57
             local ____t_56 = __t
             local ____get_result_55 = __get(NOMES, sel)
-            __O[896] = ____get_result_55
+            __O[909] = ____get_result_55
             if ____t_56(____get_result_55) then
-                ____t_result_57 = __O[896]
+                ____t_result_57 = __O[909]
             else
                 ____t_result_57 = sel
             end
@@ -376,9 +376,9 @@ local __O = {};
             if ____opt_60 ~= nil then
                 ____opt_60 = ____opt_60.s
             end
-            __O[897] = ____opt_60
+            __O[910] = ____opt_60
             if ____t_62(____opt_60) then
-                ____t_result_63 = __O[897]
+                ____t_result_63 = __O[910]
             else
                 ____t_result_63 = 1
             end
@@ -467,9 +467,9 @@ local __O = {};
         local ____t_result_70
         local ____t_69 = __t
         local ____temp_68 = tela:closest(".c2j")
-        __O[898] = ____temp_68
+        __O[911] = ____temp_68
         if ____t_69(____temp_68) then
-            ____t_result_70 = __O[898]
+            ____t_result_70 = __O[911]
         else
             ____t_result_70 = tela
         end

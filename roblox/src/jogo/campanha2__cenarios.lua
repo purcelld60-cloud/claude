@@ -1333,9 +1333,9 @@ local __O = {};
         local ____t_result_15
         local ____t_14 = __t
         local ____get_result_13 = __get(__L1.LOJAS, __L1.CUR)
-        __O[389] = ____get_result_13
+        __O[402] = ____get_result_13
         if ____t_14(____get_result_13) then
-            ____t_result_15 = __O[389]
+            ____t_result_15 = __O[402]
         else
             ____t_result_15 = __set(
                 __L1.LOJAS,
@@ -4401,14 +4401,14 @@ local __O = {};
                 local ____t_result_64
                 local ____t_59 = __t
                 local ____temp_58 = b.st == 0
-                __O[391] = ____temp_58
+                __O[404] = ____temp_58
                 if ____t_59(____temp_58) then
                     local ____t_result_63
                     local ____t_61 = __t
                     local ____temp_60 = d < 70
-                    __O[390] = ____temp_60
+                    __O[403] = ____temp_60
                     if ____t_61(____temp_60) then
-                        ____t_result_63 = __O[390]
+                        ____t_result_63 = __O[403]
                     else
                         local ____t_result_62
                         if __t(jumping) then
@@ -4420,7 +4420,7 @@ local __O = {};
                     end
                     ____t_result_64 = ____t_result_63
                 else
-                    ____t_result_64 = __O[391]
+                    ____t_result_64 = __O[404]
                 end
                 if ____t_65(____t_result_64) then
                     b.st = 1
@@ -4525,27 +4525,27 @@ local __O = {};
         local ____t_result_68
         local ____t_67 = __t
         local ____TS__Number_result_66 = __TS__Number(x)
-        __O[392] = ____TS__Number_result_66
+        __O[405] = ____TS__Number_result_66
         if ____t_67(____TS__Number_result_66) then
-            ____t_result_68 = __O[392]
+            ____t_result_68 = __O[405]
         else
             ____t_result_68 = -9999
         end
         local ____t_result_71
         local ____t_70 = __t
         local ____TS__Number_result_69 = __TS__Number(y)
-        __O[393] = ____TS__Number_result_69
+        __O[406] = ____TS__Number_result_69
         if ____t_70(____TS__Number_result_69) then
-            ____t_result_71 = __O[393]
+            ____t_result_71 = __O[406]
         else
             ____t_result_71 = 440
         end
         local ____t_result_74
         local ____t_73 = __t
         local ____TS__Number_result_72 = __TS__Number(vy)
-        __O[394] = ____TS__Number_result_72
+        __O[407] = ____TS__Number_result_72
         if ____t_73(____TS__Number_result_72) then
-            ____t_result_74 = __O[394]
+            ____t_result_74 = __O[407]
         else
             ____t_result_74 = 0
         end
@@ -6182,11 +6182,11 @@ local __O = {};
                 local ____t_result_77
                 local ____t_76 = __t
                 local ____temp_75 = __L1:vis(x, 20)
-                __O[395] = ____temp_75
+                __O[408] = ____temp_75
                 if ____t_76(____temp_75) then
                     ____t_result_77 = wx < __L1.AIR.TAR or wx > __L1.AIR.GR
                 else
-                    ____t_result_77 = __O[395]
+                    ____t_result_77 = __O[408]
                 end
                 if ____t_78(____t_result_77) then
                     __L1:gente(c, x, __L1.GY, i)
@@ -6270,11 +6270,11 @@ local __O = {};
                 local ____t_result_81
                 local ____t_80 = __t
                 local ____temp_79 = __L1:vis(sx)
-                __O[396] = ____temp_79
+                __O[409] = ____temp_79
                 if ____t_80(____temp_79) then
                     ____t_result_81 = __gt(a, 0.05)
                 else
-                    ____t_result_81 = __O[396]
+                    ____t_result_81 = __O[409]
                 end
                 if ____t_82(____t_result_81) then
                     g.fillStyle = ("rgba(255,246,216," .. tostring(0.25 * a)) .. ")"
@@ -6832,14 +6832,14 @@ local __O = {};
                 local ____t_result_85
                 local ____t_84 = __t
                 local ____temp_83 = __L1:vis(sx)
-                __O[397] = ____temp_83
+                __O[410] = ____temp_83
                 if ____t_84(____temp_83) then
                     ____t_result_85 = __gt(
                         hash(nil, k + 9),
                         0.3
                     )
                 else
-                    ____t_result_85 = __O[397]
+                    ____t_result_85 = __O[410]
                 end
                 if ____t_86(____t_result_85) then
                     g.fillStyle = ("rgba(255,214,140," .. tostring(0.55 * a)) .. ")"
@@ -8825,11 +8825,11 @@ local __O = {};
             local ____t_result_93
             local ____t_92 = __t
             local ____temp_91 = __L1:vis(sx)
-            __O[398] = ____temp_91
+            __O[411] = ____temp_91
             if ____t_92(____temp_91) then
                 ____t_result_93 = math.sin(t * 3) > 0
             else
-                ____t_result_93 = __O[398]
+                ____t_result_93 = __O[411]
             end
             if ____t_94(____t_result_93) then
                 g.fillStyle = ("rgba(255,80,60," .. tostring(a)) .. ")"
@@ -8878,9 +8878,9 @@ local __O = {};
                     local ____t_result_97
                     local ____t_96 = __t
                     local ____temp_95 = math.abs(x + w / 2 - __L1.AVENIDA.INDIO) < 280
-                    __O[399] = ____temp_95
+                    __O[412] = ____temp_95
                     if ____t_96(____temp_95) then
-                        ____t_result_97 = __O[399]
+                        ____t_result_97 = __O[412]
                     else
                         ____t_result_97 = x > 280 and x < 480
                     end
@@ -17107,11 +17107,11 @@ local __O = {};
                 local ____t_result_111
                 local ____t_110 = __t
                 local ____temp_109 = __L1:vis(sx, 40)
-                __O[400] = ____temp_109
+                __O[413] = ____temp_109
                 if ____t_110(____temp_109) then
                     ____t_result_111 = wx < __L1.OLIVIA.SESI
                 else
-                    ____t_result_111 = __O[400]
+                    ____t_result_111 = __O[413]
                 end
                 if ____t_112(____t_result_111) then
                     __L1:carro(
@@ -17137,11 +17137,11 @@ local __O = {};
                 local ____t_result_115
                 local ____t_114 = __t
                 local ____temp_113 = __L1:vis(sx, 20)
-                __O[401] = ____temp_113
+                __O[414] = ____temp_113
                 if ____t_114(____temp_113) then
                     ____t_result_115 = wx < __L1.OLIVIA.SESI
                 else
-                    ____t_result_115 = __O[401]
+                    ____t_result_115 = __O[414]
                 end
                 if ____t_116(____t_result_115) then
                     ell(
@@ -18051,9 +18051,9 @@ local __O = {};
         local ____t_result_135
         local ____t_134 = __t
         local ____TS__Number_result_133 = __TS__Number(t)
-        __O[402] = ____TS__Number_result_133
+        __O[415] = ____TS__Number_result_133
         if ____t_134(____TS__Number_result_133) then
-            ____t_result_135 = __O[402]
+            ____t_result_135 = __O[415]
         else
             ____t_result_135 = 0
         end
@@ -18088,9 +18088,9 @@ local __O = {};
         if V ~= nil then
             ____opt_result_141 = V.tipo
         end
-        __O[403] = ____opt_result_141
+        __O[416] = ____opt_result_141
         if ____t_142(____opt_result_141) then
-            ____t_result_147 = __O[403]
+            ____t_result_147 = __O[416]
         else
             local ____t_146 = __t
             local ____opt_result_145
@@ -18106,9 +18106,9 @@ local __O = {};
         if V ~= nil then
             ____opt_result_150 = V.fundo
         end
-        __O[404] = ____opt_result_150
+        __O[417] = ____opt_result_150
         if ____t_151(____opt_result_150) then
-            ____t_result_152 = __O[404]
+            ____t_result_152 = __O[417]
         else
             ____t_result_152 = tipo == "terra" and "#3a3024" or (tipo == "agua" and "#2c5a78" or "#2a2a2c")
         end
@@ -18382,9 +18382,9 @@ local __O = {};
                 if V ~= nil then
                     ____opt_result_155 = V.borda
                 end
-                __O[405] = ____opt_result_155
+                __O[418] = ____opt_result_155
                 if ____t_156(____opt_result_155) then
-                    ____t_result_157 = __O[405]
+                    ____t_result_157 = __O[418]
                 else
                     ____t_result_157 = tipo == "obra" and "#9a9a94" or (tipo == "agua" and "#7ac0b8" or "#5a7a3a")
                 end
@@ -18654,9 +18654,9 @@ local __O = {};
         end
         ____t_result_195 = not ____t_194(____opt_192)
     end
-    __O[388] = ____t_result_195
+    __O[401] = ____t_result_195
     if ____t_196(____t_result_195) then
-        ____t_result_197 = __O[388]
+        ____t_result_197 = __O[401]
     else
         ____t_result_197 = not __t(window.HdMaps.kit)
     end
@@ -21807,9 +21807,9 @@ local __O = {};
         if ____opt_213 ~= nil then
             ____opt_result_215 = ____opt_213(____opt_213, d.id, camera)
         end
-        __O[406] = ____opt_result_215
+        __O[419] = ____opt_result_215
         if ____t_216(____opt_result_215) then
-            ____t_result_217 = __O[406]
+            ____t_result_217 = __O[419]
         else
             ____t_result_217 = __arrL({}, 0)
         end
@@ -21860,7 +21860,7 @@ local __O = {};
             local ____t_result_224
             local ____t_223 = __t
             local ____ge_result_222 = __ge(scene, 12)
-            __O[407] = ____ge_result_222
+            __O[420] = ____ge_result_222
             if ____t_223(____ge_result_222) then
                 ____t_result_224 = __call(
                     __L1.LIST,
@@ -21868,7 +21868,7 @@ local __O = {};
                     function(____, d) return d.id == scene end
                 )
             else
-                ____t_result_224 = __O[407]
+                ____t_result_224 = __O[420]
             end
             if not ____t_225(____t_result_224) then
                 return __L1:baseScene(c, scene, camera, t)
@@ -21886,18 +21886,18 @@ local __O = {};
             local ____t_result_228
             local ____t_227 = __t
             local ____TS__Number_result_226 = __TS__Number(camera)
-            __O[408] = ____TS__Number_result_226
+            __O[421] = ____TS__Number_result_226
             if ____t_227(____TS__Number_result_226) then
-                ____t_result_228 = __O[408]
+                ____t_result_228 = __O[421]
             else
                 ____t_result_228 = 0
             end
             local ____t_result_231
             local ____t_230 = __t
             local ____TS__Number_result_229 = __TS__Number(t)
-            __O[409] = ____TS__Number_result_229
+            __O[422] = ____TS__Number_result_229
             if ____t_230(____TS__Number_result_229) then
-                ____t_result_231 = __O[409]
+                ____t_result_231 = __O[422]
             else
                 ____t_result_231 = 0
             end
@@ -22020,9 +22020,9 @@ local __O = {};
                 local ____t_result_241
                 local ____t_240 = __t
                 local ____get_result_239 = __get(__L1.LOJAS, id)
-                __O[410] = ____get_result_239
+                __O[423] = ____get_result_239
                 if ____t_240(____get_result_239) then
-                    ____t_result_241 = __O[410]
+                    ____t_result_241 = __O[423]
                 else
                     ____t_result_241 = __arrL({}, 0)
                 end
@@ -22071,9 +22071,9 @@ local __O = {};
                     if ____opt_245 ~= nil then
                         ____opt_245 = ____opt_245.width
                     end
-                    __O[411] = ____opt_245
+                    __O[424] = ____opt_245
                     if ____t_247(____opt_245) then
-                        ____t_result_248 = __O[411]
+                        ____t_result_248 = __O[424]
                     else
                         ____t_result_248 = 0
                     end
@@ -22083,9 +22083,9 @@ local __O = {};
                     local ____t_result_251
                     local ____t_250 = __t
                     local ____get_result_249 = __get(__L1.LAYOUT, id)
-                    __O[412] = ____get_result_249
+                    __O[425] = ____get_result_249
                     if ____t_250(____get_result_249) then
-                        ____t_result_251 = __O[412]
+                        ____t_result_251 = __O[425]
                     else
                         ____t_result_251 = nil
                     end

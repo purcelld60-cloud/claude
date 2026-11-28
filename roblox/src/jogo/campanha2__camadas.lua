@@ -1297,11 +1297,11 @@ local __O = {};
             else
                 ____t_result_38 = cfg.outdoors
             end
-            __O[432] = ____t_result_38
+            __O[445] = ____t_result_38
             if ____t_39(____t_result_38) then
                 ____t_result_40 = w > 30
             else
-                ____t_result_40 = __O[432]
+                ____t_result_40 = __O[445]
             end
             if ____t_41(____t_result_40) then
                 local ____outdoorM_46 = outdoorM
@@ -1586,9 +1586,9 @@ local __O = {};
         local ____t_result_64
         local ____t_63 = __t
         local ____get_result_62 = __get(MEIO, id)
-        __O[433] = ____get_result_62
+        __O[446] = ____get_result_62
         if ____t_63(____get_result_62) then
-            ____t_result_64 = __O[433]
+            ____t_result_64 = __O[446]
         else
             ____t_result_64 = __set(
                 MEIO,
@@ -4548,14 +4548,14 @@ local __O = {};
                 local ____t_result_74
                 local ____t_73 = __t
                 local ____temp_72 = __mod(i, 3) == 1
-                __O[434] = ____temp_72
+                __O[447] = ____temp_72
                 if ____t_73(____temp_72) then
                     ____t_result_74 = __mod(
                         math.floor(t * 1.5 + i),
                         4
                     )
                 else
-                    ____t_result_74 = __O[434]
+                    ____t_result_74 = __O[447]
                 end
                 if ____t_75(____t_result_74) then
                     local nx = sx + w - 26
@@ -5107,14 +5107,14 @@ local __O = {};
                                     local ____t_result_78
                                     local ____t_77 = __t
                                     local ____gt_result_76 = __gt(nt, 0.2)
-                                    __O[435] = ____gt_result_76
+                                    __O[448] = ____gt_result_76
                                     if ____t_77(____gt_result_76) then
                                         ____t_result_78 = __mod(
                                             math.floor(t * 2) + math.floor(x - x0 + 0.5) / 12,
                                             3
                                         )
                                     else
-                                        ____t_result_78 = __O[435]
+                                        ____t_result_78 = __O[448]
                                     end
                                     if ____t_79(____t_result_78) then
                                         ____t_result_80 = pick(
@@ -5174,18 +5174,18 @@ local __O = {};
                     local ____t_result_88
                     local ____t_84 = __t
                     local ____temp_83 = not __t(vis(nil, sx, 20))
-                    __O[437] = ____temp_83
+                    __O[450] = ____temp_83
                     if ____t_84(____temp_83) then
-                        ____t_result_88 = __O[437]
+                        ____t_result_88 = __O[450]
                     else
                         local ____t_result_87
                         local ____t_86 = __t
                         local ____temp_85 = id == 12 and wx > AIR.TAR - 10
-                        __O[436] = ____temp_85
+                        __O[449] = ____temp_85
                         if ____t_86(____temp_85) then
                             ____t_result_87 = __lt(wx, AIR.GR + 10)
                         else
-                            ____t_result_87 = __O[436]
+                            ____t_result_87 = __O[449]
                         end
                         ____t_result_88 = ____t_result_87
                     end
@@ -5382,11 +5382,11 @@ local __O = {};
             local ____t_result_96
             local ____t_95 = __t
             local ____get_result_94 = __get(JAM, id)
-            __O[438] = ____get_result_94
+            __O[451] = ____get_result_94
             if ____t_95(____get_result_94) then
                 ____t_result_96 = not __t(__get(forcado, id))
             else
-                ____t_result_96 = __O[438]
+                ____t_result_96 = __O[451]
             end
             if ____t_97(____t_result_96) then
                 __set(
@@ -5404,11 +5404,11 @@ local __O = {};
         local ____t_result_100
         local ____t_99 = __t
         local ____get_result_98 = __get(JAM, id)
-        __O[439] = ____get_result_98
+        __O[452] = ____get_result_98
         if ____t_99(____get_result_98) then
             ____t_result_100 = __get(jamOn, id)
         else
-            ____t_result_100 = __O[439]
+            ____t_result_100 = __O[452]
         end
         return not not ____t_101(____t_result_100)
     end
@@ -5977,11 +5977,11 @@ local __O = {};
                 ),
                 "trim"
             )) > 17
-            __O[440] = ____temp_102
+            __O[453] = ____temp_102
             if ____t_103(____temp_102) then
                 ____t_result_104 = cur
             else
-                ____t_result_104 = __O[440]
+                ____t_result_104 = __O[453]
             end
             if ____t_105(____t_result_104) then
                 __call(lines, "push", cur)
@@ -6172,9 +6172,9 @@ local __O = {};
         if ____opt_106 ~= nil then
             ____opt_106 = ____opt_106.gaps
         end
-        __O[441] = ____opt_106
+        __O[454] = ____opt_106
         if ____t_108(____opt_106) then
-            ____t_result_109 = __O[441]
+            ____t_result_109 = __O[454]
         else
             ____t_result_109 = __arrL({}, 0)
         end
@@ -6205,9 +6205,9 @@ local __O = {};
                     local ____t_result_113
                     local ____t_112 = __t
                     local ____temp_111 = not __t(vis(nil, sx, 70))
-                    __O[442] = ____temp_111
+                    __O[455] = ____temp_111
                     if ____t_112(____temp_111) then
-                        ____t_result_113 = __O[442]
+                        ____t_result_113 = __O[455]
                     else
                         ____t_result_113 = __call(
                             vaos,
@@ -6505,14 +6505,14 @@ local __O = {};
             local ____t_result_122
             local ____t_121 = __t
             local ____temp_120 = quem == "c"
-            __O[443] = ____temp_120
+            __O[456] = ____temp_120
             if ____t_121(____temp_120) then
                 ____t_result_122 = __mod(
                     math.floor(t * 5),
                     2
                 )
             else
-                ____t_result_122 = __O[443]
+                ____t_result_122 = __O[456]
             end
             if ____t_123(____t_result_122) then
                 do
@@ -7174,9 +7174,9 @@ local __O = {};
             FG,
             __get(FGSET, id)
         )
-        __O[444] = ____get_result_124
+        __O[457] = ____get_result_124
         if ____t_125(____get_result_124) then
-            ____t_result_127 = __O[444]
+            ____t_result_127 = __O[457]
         else
             local ____t_result_126
             if __t(__get(FGDRAW, id)) then
@@ -7193,15 +7193,15 @@ local __O = {};
         local ____t_result_130
         local ____t_129 = __t
         local ____temp_128 = not __t(set)
-        __O[445] = ____temp_128
+        __O[458] = ____temp_128
         if ____t_129(____temp_128) then
-            ____t_result_130 = __O[445]
+            ____t_result_130 = __O[458]
         else
             ____t_result_130 = o.arena
         end
-        __O[446] = ____t_result_130
+        __O[459] = ____t_result_130
         if ____t_131(____t_result_130) then
-            ____t_result_132 = __O[446]
+            ____t_result_132 = __O[459]
         else
             ____t_result_132 = o.room
         end
@@ -7211,20 +7211,20 @@ local __O = {};
         if not __t(fgCv) then
             do
                 do
-                    __O[447] = __iter(mk(nil, LW, LH))
-                    fgCv = __get(__O[447], 0)
+                    __O[460] = __iter(mk(nil, LW, LH))
+                    fgCv = __get(__O[460], 0)
                 end
-                fgC = __get(__O[447], 1)
+                fgC = __get(__O[460], 1)
             end
-            local ____ = __O[447]
+            local ____ = __O[460]
         end
         local c = fgC
         local ____t_result_136
         local ____t_135 = __t
         local ____TS__Number_result_134 = __TS__Number(o.camera)
-        __O[448] = ____TS__Number_result_134
+        __O[461] = ____TS__Number_result_134
         if ____t_135(____TS__Number_result_134) then
-            ____t_result_136 = __O[448]
+            ____t_result_136 = __O[461]
         else
             ____t_result_136 = 0
         end
@@ -7233,9 +7233,9 @@ local __O = {};
         local ____t_result_139
         local ____t_138 = __t
         local ____TS__Number_result_137 = __TS__Number(o.time)
-        __O[449] = ____TS__Number_result_137
+        __O[462] = ____TS__Number_result_137
         if ____t_138(____TS__Number_result_137) then
-            ____t_result_139 = __O[449]
+            ____t_result_139 = __O[462]
         else
             ____t_result_139 = 0
         end
@@ -7244,9 +7244,9 @@ local __O = {};
         local ____t_result_142
         local ____t_141 = __t
         local ____temp_140 = window.CampanhaCenarios:largura(id)
-        __O[450] = ____temp_140
+        __O[463] = ____temp_140
         if ____t_141(____temp_140) then
-            ____t_result_142 = __O[450]
+            ____t_result_142 = __O[463]
         else
             ____t_result_142 = 4000
         end
@@ -7290,9 +7290,9 @@ local __O = {};
         if ____opt_147 ~= nil then
             ____opt_result_149 = ____opt_147(____opt_147)
         end
-        __O[451] = ____opt_result_149
+        __O[464] = ____opt_result_149
         if ____t_150(____opt_result_149) then
-            ____t_result_151 = __O[451]
+            ____t_result_151 = __O[464]
         else
             ____t_result_151 = {night = 0}
         end

@@ -214,17 +214,17 @@ local __O = {};
                             local ____t_result_45
                             local ____t_44 = __t
                             local ____temp_43 = __gt(mordidas, 0) and cx == W - 1 - comido
-                            __O[1496] = ____temp_43
+                            __O[1509] = ____temp_43
                             if ____t_44(____temp_43) then
                                 ____t_result_45 = cy > curva
                             else
-                                ____t_result_45 = __O[1496]
+                                ____t_result_45 = __O[1509]
                             end
-                            __O[1497] = ____t_result_45
+                            __O[1510] = ____t_result_45
                             if ____t_46(____t_result_45) then
                                 ____t_result_47 = cy < H - 1
                             else
-                                ____t_result_47 = __O[1497]
+                                ____t_result_47 = __O[1510]
                             end
                             if ____t_48(____t_result_47) then
                                 c = C.miolo
@@ -252,11 +252,11 @@ local __O = {};
                             local ____t_result_53
                             local ____t_52 = __t
                             local ____temp_51 = m > 0.76 and m <= 0.82
-                            __O[1498] = ____temp_51
+                            __O[1511] = ____temp_51
                             if ____t_52(____temp_51) then
                                 ____t_result_53 = cy < 5
                             else
-                                ____t_result_53 = __O[1498]
+                                ____t_result_53 = __O[1511]
                             end
                             if ____t_54(____t_result_53) then
                                 c = C.mofo3
@@ -849,15 +849,15 @@ local __O = {};
         if ____opt_13 ~= nil then
             ____opt_result_15 = ____opt_13(____opt_13, f)
         end
-        __O[1494] = ____opt_result_15
+        __O[1507] = ____opt_result_15
         if ____t_16(____opt_result_15) then
-            ____t_result_17 = __O[1494]
+            ____t_result_17 = __O[1507]
         else
             ____t_result_17 = __get(BOUNDS, f)
         end
-        __O[1495] = ____t_result_17
+        __O[1508] = ____t_result_17
         if ____t_18(____t_result_17) then
-            ____t_result_19 = __O[1495]
+            ____t_result_19 = __O[1508]
         else
             ____t_result_19 = __get(BOUNDS, 1)
         end
@@ -1333,9 +1333,9 @@ local __O = {};
         local ____t_result_100
         local ____t_99 = __t
         local ____TS__Number_result_98 = __TS__Number(s.vx)
-        __O[1499] = ____TS__Number_result_98
+        __O[1512] = ____TS__Number_result_98
         if ____t_99(____TS__Number_result_98) then
-            ____t_result_100 = __O[1499]
+            ____t_result_100 = __O[1512]
         else
             ____t_result_100 = -1
         end
@@ -1343,9 +1343,9 @@ local __O = {};
         local ____t_result_103
         local ____t_102 = __t
         local ____TS__Number_result_101 = __TS__Number(s.vy)
-        __O[1500] = ____TS__Number_result_101
+        __O[1513] = ____TS__Number_result_101
         if ____t_102(____TS__Number_result_101) then
-            ____t_result_103 = __O[1500]
+            ____t_result_103 = __O[1513]
         else
             ____t_result_103 = 0
         end
@@ -1353,9 +1353,9 @@ local __O = {};
         local ____t_result_106
         local ____t_105 = __t
         local ____hypot_result_104 = __hypot(vx, vy)
-        __O[1501] = ____hypot_result_104
+        __O[1514] = ____hypot_result_104
         if ____t_105(____hypot_result_104) then
-            ____t_result_106 = __O[1501]
+            ____t_result_106 = __O[1514]
         else
             ____t_result_106 = 1
         end
@@ -1497,9 +1497,9 @@ local __O = {};
         local ____t_result_118
         local ____t_117 = __t
         local ____TS__Number_result_116 = __TS__Number(h.y)
-        __O[1502] = ____TS__Number_result_116
+        __O[1515] = ____TS__Number_result_116
         if ____t_117(____TS__Number_result_116) then
-            ____t_result_118 = __O[1502]
+            ____t_result_118 = __O[1515]
         else
             ____t_result_118 = 0
         end

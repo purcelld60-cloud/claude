@@ -192,9 +192,9 @@ local __O = {};
         local ____t_result_6
         local ____t_5 = __t
         local ____get_result_4 = __get(PATCHES, scene)
-        __O[413] = ____get_result_4
+        __O[426] = ____get_result_4
         if ____t_5(____get_result_4) then
-            ____t_result_6 = __O[413]
+            ____t_result_6 = __O[426]
         else
             ____t_result_6 = __arrL({}, 0)
         end
@@ -272,9 +272,9 @@ local __O = {};
         local ____t_result_10
         local ____t_9 = __t
         local ____get_result_8 = __get(PATCHES, scene)
-        __O[414] = ____get_result_8
+        __O[427] = ____get_result_8
         if ____t_9(____get_result_8) then
-            ____t_result_10 = __O[414]
+            ____t_result_10 = __O[427]
         else
             ____t_result_10 = __arrL({}, 0)
         end
@@ -393,9 +393,9 @@ local __O = {};
         local ____t_result_29
         local ____t_28 = __t
         local ____TS__Number_result_27 = __TS__Number(p.x)
-        __O[415] = ____TS__Number_result_27
+        __O[428] = ____TS__Number_result_27
         if ____t_28(____TS__Number_result_27) then
-            ____t_result_29 = __O[415]
+            ____t_result_29 = __O[428]
         else
             ____t_result_29 = 0
         end
@@ -403,9 +403,9 @@ local __O = {};
         local ____t_result_32
         local ____t_31 = __t
         local ____TS__Number_result_30 = __TS__Number(p.y)
-        __O[416] = ____TS__Number_result_30
+        __O[429] = ____TS__Number_result_30
         if ____t_31(____TS__Number_result_30) then
-            ____t_result_32 = __O[416]
+            ____t_result_32 = __O[429]
         else
             ____t_result_32 = FLOOR
         end
@@ -413,9 +413,9 @@ local __O = {};
         local ____t_result_35
         local ____t_34 = __t
         local ____TS__Number_result_33 = __TS__Number(p.vx)
-        __O[417] = ____TS__Number_result_33
+        __O[430] = ____TS__Number_result_33
         if ____t_34(____TS__Number_result_33) then
-            ____t_result_35 = __O[417]
+            ____t_result_35 = __O[430]
         else
             ____t_result_35 = 0
         end
@@ -423,9 +423,9 @@ local __O = {};
         local ____t_result_38
         local ____t_37 = __t
         local ____TS__Number_result_36 = __TS__Number(o.time)
-        __O[418] = ____TS__Number_result_36
+        __O[431] = ____TS__Number_result_36
         if ____t_37(____TS__Number_result_36) then
-            ____t_result_38 = __O[418]
+            ____t_result_38 = __O[431]
         else
             ____t_result_38 = 0
         end
@@ -447,9 +447,9 @@ local __O = {};
             ____opt_result_46 = ____opt_result_45.wind
         end
         local ____TS__Number_result_47 = __TS__Number(____opt_result_46)
-        __O[419] = ____TS__Number_result_47
+        __O[432] = ____TS__Number_result_47
         if ____t_48(____TS__Number_result_47) then
-            ____t_result_49 = __O[419]
+            ____t_result_49 = __O[432]
         else
             ____t_result_49 = 0.25
         end
@@ -505,29 +505,29 @@ local __O = {};
                 else
                     ____t_result_50 = atk
                 end
-                __O[420] = ____t_result_50
+                __O[433] = ____t_result_50
                 if ____t_51(____t_result_50) then
                     ____t_result_52 = __TS__MathSign(d) == face
                 else
-                    ____t_result_52 = __O[420]
+                    ____t_result_52 = __O[433]
                 end
-                __O[421] = ____t_result_52
+                __O[434] = ____t_result_52
                 if ____t_53(____t_result_52) then
                     ____t_result_54 = math.abs(d) < 90
                 else
-                    ____t_result_54 = __O[421]
+                    ____t_result_54 = __O[434]
                 end
-                __O[422] = ____t_result_54
+                __O[435] = ____t_result_54
                 if ____t_55(____t_result_54) then
                     ____t_result_56 = py > s.base - 60
                 else
-                    ____t_result_56 = __O[422]
+                    ____t_result_56 = __O[435]
                 end
-                __O[423] = ____t_result_56
+                __O[436] = ____t_result_56
                 if ____t_57(____t_result_56) then
                     ____t_result_58 = s.type ~= "cacto"
                 else
-                    ____t_result_58 = __O[423]
+                    ____t_result_58 = __O[436]
                 end
                 if ____t_59(____t_result_58) then
                     s.cut = 1
@@ -555,11 +555,11 @@ local __O = {};
         else
             ____t_result_60 = touched
         end
-        __O[424] = ____t_result_60
+        __O[437] = ____t_result_60
         if ____t_61(____t_result_60) then
             ____t_result_62 = t - lastSound > 0.22
         else
-            ____t_result_62 = __O[424]
+            ____t_result_62 = __O[437]
         end
         if ____t_63(____t_result_62) then
             lastSound = t
@@ -1065,11 +1065,11 @@ local __O = {};
         local ____t_result_80
         local ____t_79 = __t
         local ____temp_78 = __ge(o.scene, 12) and not __t(o.arena)
-        __O[425] = ____temp_78
+        __O[438] = ____temp_78
         if ____t_79(____temp_78) then
             ____t_result_80 = not __t(o.room)
         else
-            ____t_result_80 = __O[425]
+            ____t_result_80 = __O[438]
         end
         return ____t_result_80
     end
@@ -1084,9 +1084,9 @@ local __O = {};
         local ____t_result_83
         local ____t_82 = __t
         local ____TS__Number_result_81 = __TS__Number(o.time)
-        __O[426] = ____TS__Number_result_81
+        __O[439] = ____TS__Number_result_81
         if ____t_82(____TS__Number_result_81) then
-            ____t_result_83 = __O[426]
+            ____t_result_83 = __O[439]
         else
             ____t_result_83 = 0
         end
@@ -1114,11 +1114,11 @@ local __O = {};
             local ____t_result_86
             local ____t_85 = __t
             local ____temp_84 = __lt(s.base, FLOOR) and __gt(s.x, o.camera - 40)
-            __O[427] = ____temp_84
+            __O[440] = ____temp_84
             if ____t_85(____temp_84) then
                 ____t_result_86 = __lt(s.x, o.camera + 1000)
             else
-                ____t_result_86 = __O[427]
+                ____t_result_86 = __O[440]
             end
             if ____t_87(____t_result_86) then
                 stem(nil, ctx, s, t)
@@ -1137,9 +1137,9 @@ local __O = {};
         local ____t_result_90
         local ____t_89 = __t
         local ____TS__Number_result_88 = __TS__Number(o.time)
-        __O[428] = ____TS__Number_result_88
+        __O[441] = ____TS__Number_result_88
         if ____t_89(____TS__Number_result_88) then
-            ____t_result_90 = __O[428]
+            ____t_result_90 = __O[441]
         else
             ____t_result_90 = 0
         end
@@ -1151,11 +1151,11 @@ local __O = {};
             local ____t_result_93
             local ____t_92 = __t
             local ____temp_91 = __ge(s.base, FLOOR) and __gt(s.x, o.camera - 40)
-            __O[429] = ____temp_91
+            __O[442] = ____temp_91
             if ____t_92(____temp_91) then
                 ____t_result_93 = __lt(s.x, o.camera + 1000)
             else
-                ____t_result_93 = __O[429]
+                ____t_result_93 = __O[442]
             end
             if ____t_94(____t_result_93) then
                 stem(nil, ctx, s, t)
@@ -1219,9 +1219,9 @@ local __O = {};
                 local ____t_result_97
                 local ____t_96 = __t
                 local ____get_result_95 = __get(PATCHES, scene)
-                __O[430] = ____get_result_95
+                __O[443] = ____get_result_95
                 if ____t_96(____get_result_95) then
-                    ____t_result_97 = __O[430]
+                    ____t_result_97 = __O[443]
                 else
                     ____t_result_97 = __arrL({}, 0)
                 end

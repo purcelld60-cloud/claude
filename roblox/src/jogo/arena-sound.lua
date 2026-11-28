@@ -98,9 +98,9 @@ local __O = {};
         local ____t_result_17
         local ____t_16 = __t
         local ____temp_15 = not __t(enabled(nil))
-        __O[2746] = ____temp_15
+        __O[2763] = ____temp_15
         if ____t_16(____temp_15) then
-            ____t_result_17 = __O[2746]
+            ____t_result_17 = __O[2763]
         else
             ____t_result_17 = window.document.hidden
         end
@@ -151,9 +151,9 @@ local __O = {};
             local ____t_result_24
             local ____t_23 = __t
             local ____TS__Number_result_22 = __TS__Number(options.volume)
-            __O[2747] = ____TS__Number_result_22
+            __O[2764] = ____TS__Number_result_22
             if ____t_23(____TS__Number_result_22) then
-                ____t_result_24 = __O[2747]
+                ____t_result_24 = __O[2764]
             else
                 ____t_result_24 = 0.72
             end
@@ -176,9 +176,9 @@ local __O = {};
             local ____t_result_33
             local ____t_32 = __t
             local ____TS__Number_result_31 = __TS__Number(options.pitch)
-            __O[2748] = ____TS__Number_result_31
+            __O[2765] = ____TS__Number_result_31
             if ____t_32(____TS__Number_result_31) then
-                ____t_result_33 = __O[2748]
+                ____t_result_33 = __O[2765]
             else
                 ____t_result_33 = 1
             end
@@ -204,9 +204,9 @@ local __O = {};
         local ____t_result_36
         local ____t_35 = __t
         local ____get_result_34 = __get(frequencies, name)
-        __O[2749] = ____get_result_34
+        __O[2766] = ____get_result_34
         if ____t_35(____get_result_34) then
-            ____t_result_36 = __O[2749]
+            ____t_result_36 = __O[2766]
         else
             ____t_result_36 = frequencies.hit
         end
@@ -248,9 +248,9 @@ local __O = {};
                 local ____t_result_45
                 local ____t_44 = __t
                 local ____TS__Number_result_43 = __TS__Number(options.volume)
-                __O[2750] = ____TS__Number_result_43
+                __O[2767] = ____TS__Number_result_43
                 if ____t_44(____TS__Number_result_43) then
-                    ____t_result_45 = __O[2750]
+                    ____t_result_45 = __O[2767]
                 else
                     ____t_result_45 = 0.055
                 end
@@ -318,9 +318,9 @@ local __O = {};
             if ____opt_48 ~= nil then
                 ____opt_48 = ____opt_48.name
             end
-            __O[2751] = ____opt_48
+            __O[2768] = ____opt_48
             if ____t_50(____opt_48) then
-                ____t_result_51 = __O[2751]
+                ____t_result_51 = __O[2768]
             else
                 ____t_result_51 = "hit"
             end

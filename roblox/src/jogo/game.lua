@@ -34,9 +34,9 @@ local __O = {};
         if ____opt_2 ~= nil then
             ____opt_result_4 = ____opt_2(____opt_2, __L1.q)
         end
-        __O[1602] = ____opt_result_4
+        __O[1615] = ____opt_result_4
         if ____t_5(____opt_result_4) then
-            ____t_result_6 = __O[1602]
+            ____t_result_6 = __O[1615]
         else
             ____t_result_6 = {
                 unlocked = false,
@@ -57,15 +57,15 @@ local __O = {};
         local ____t_result_9
         local ____t_8 = __t
         local ____temp_7 = not __t(container)
-        __O[1603] = ____temp_7
+        __O[1616] = ____temp_7
         if ____t_8(____temp_7) then
-            ____t_result_9 = __O[1603]
+            ____t_result_9 = __O[1616]
         else
             ____t_result_9 = __L1["$"](__L1, "bivoltBtn")
         end
-        __O[1604] = ____t_result_9
+        __O[1617] = ____t_result_9
         if ____t_10(____t_result_9) then
-            ____t_result_11 = __O[1604]
+            ____t_result_11 = __O[1617]
         else
             ____t_result_11 = not __t(window.BivoltSkill)
         end
@@ -180,21 +180,21 @@ local __O = {};
             local ____t_result_26
             local ____t_25 = __t
             local ____temp_24 = not __t(state.ready)
-            __O[1605] = ____temp_24
+            __O[1618] = ____temp_24
             if ____t_25(____temp_24) then
-                ____t_result_26 = __O[1605]
+                ____t_result_26 = __O[1618]
             else
                 ____t_result_26 = __L1.paused
             end
-            __O[1606] = ____t_result_26
+            __O[1619] = ____t_result_26
             if ____t_27(____t_result_26) then
-                ____t_result_28 = __O[1606]
+                ____t_result_28 = __O[1619]
             else
                 ____t_result_28 = not not __t(__L1.dialog)
             end
-            __O[1607] = ____t_result_28
+            __O[1620] = ____t_result_28
             if ____t_29(____t_result_28) then
-                ____t_result_30 = __O[1607]
+                ____t_result_30 = __O[1620]
             else
                 ____t_result_30 = not not __t(__L1.cutscene)
             end
@@ -241,33 +241,33 @@ local __O = {};
         local ____t_result_36
         local ____t_35 = __t
         local ____temp_34 = not __t(__L1.started)
-        __O[1608] = ____temp_34
+        __O[1621] = ____temp_34
         if ____t_35(____temp_34) then
-            ____t_result_36 = __O[1608]
+            ____t_result_36 = __O[1621]
         else
             ____t_result_36 = __L1.paused
         end
-        __O[1609] = ____t_result_36
+        __O[1622] = ____t_result_36
         if ____t_37(____t_result_36) then
-            ____t_result_38 = __O[1609]
+            ____t_result_38 = __O[1622]
         else
             ____t_result_38 = __L1.dialog
         end
-        __O[1610] = ____t_result_38
+        __O[1623] = ____t_result_38
         if ____t_39(____t_result_38) then
-            ____t_result_40 = __O[1610]
+            ____t_result_40 = __O[1623]
         else
             ____t_result_40 = __L1.cutscene
         end
-        __O[1611] = ____t_result_40
+        __O[1624] = ____t_result_40
         if ____t_41(____t_result_40) then
-            ____t_result_42 = __O[1611]
+            ____t_result_42 = __O[1624]
         else
             ____t_result_42 = __L1.routeTransition
         end
-        __O[1612] = ____t_result_42
+        __O[1625] = ____t_result_42
         if ____t_43(____t_result_42) then
-            ____t_result_46 = __O[1612]
+            ____t_result_46 = __O[1625]
         else
             local ____opt_44 = __L1.training
             if ____opt_44 ~= nil then
@@ -275,27 +275,27 @@ local __O = {};
             end
             ____t_result_46 = ____opt_44
         end
-        __O[1613] = ____t_result_46
+        __O[1626] = ____t_result_46
         if ____t_47(____t_result_46) then
-            ____t_result_48 = __O[1613]
+            ____t_result_48 = __O[1626]
         else
             ____t_result_48 = __L1.activity
         end
-        __O[1614] = ____t_result_48
+        __O[1627] = ____t_result_48
         if ____t_49(____t_result_48) then
-            ____t_result_50 = __O[1614]
+            ____t_result_50 = __O[1627]
         else
             ____t_result_50 = __L1.won
         end
-        __O[1615] = ____t_result_50
+        __O[1628] = ____t_result_50
         if ____t_51(____t_result_50) then
-            ____t_result_52 = __O[1615]
+            ____t_result_52 = __O[1628]
         else
             ____t_result_52 = __L1.defeated
         end
-        __O[1616] = ____t_result_52
+        __O[1629] = ____t_result_52
         if ____t_53(____t_result_52) then
-            ____t_result_55 = __O[1616]
+            ____t_result_55 = __O[1629]
         else
             local ____t_result_54
             if __t(__L1.ollyanEncounter) then
@@ -331,9 +331,9 @@ local __O = {};
             if result ~= nil then
                 ____opt_result_68 = result.message
             end
-            __O[1617] = ____opt_result_68
+            __O[1630] = ____opt_result_68
             if ____t_69(____opt_result_68) then
-                ____t_result_70 = __O[1617]
+                ____t_result_70 = __O[1630]
             else
                 ____t_result_70 = "Converse com as garotas na Casa de Rayssa para encontrar o Bivolt."
             end
@@ -485,33 +485,33 @@ local __O = {};
         local ____t_result_89
         local ____t_88 = __t
         local ____temp_87 = not __t(__L1.started)
-        __O[1618] = ____temp_87
+        __O[1631] = ____temp_87
         if ____t_88(____temp_87) then
-            ____t_result_89 = __O[1618]
+            ____t_result_89 = __O[1631]
         else
             ____t_result_89 = __L1.paused
         end
-        __O[1619] = ____t_result_89
+        __O[1632] = ____t_result_89
         if ____t_90(____t_result_89) then
-            ____t_result_91 = __O[1619]
+            ____t_result_91 = __O[1632]
         else
             ____t_result_91 = __L1.dialog
         end
-        __O[1620] = ____t_result_91
+        __O[1633] = ____t_result_91
         if ____t_92(____t_result_91) then
-            ____t_result_93 = __O[1620]
+            ____t_result_93 = __O[1633]
         else
             ____t_result_93 = __L1.cutscene
         end
-        __O[1621] = ____t_result_93
+        __O[1634] = ____t_result_93
         if ____t_94(____t_result_93) then
-            ____t_result_95 = __O[1621]
+            ____t_result_95 = __O[1634]
         else
             ____t_result_95 = __L1.activity
         end
-        __O[1622] = ____t_result_95
+        __O[1635] = ____t_result_95
         if ____t_96(____t_result_95) then
-            ____t_result_99 = __O[1622]
+            ____t_result_99 = __O[1635]
         else
             local ____opt_97 = __L1.training
             if ____opt_97 ~= nil then
@@ -519,51 +519,51 @@ local __O = {};
             end
             ____t_result_99 = ____opt_97
         end
-        __O[1623] = ____t_result_99
+        __O[1636] = ____t_result_99
         if ____t_100(____t_result_99) then
-            ____t_result_101 = __O[1623]
+            ____t_result_101 = __O[1636]
         else
             ____t_result_101 = __L1.arena
         end
-        __O[1624] = ____t_result_101
+        __O[1637] = ____t_result_101
         if ____t_102(____t_result_101) then
-            ____t_result_103 = __O[1624]
+            ____t_result_103 = __O[1637]
         else
             ____t_result_103 = __L1.room
         end
-        __O[1625] = ____t_result_103
+        __O[1638] = ____t_result_103
         if ____t_104(____t_result_103) then
-            ____t_result_105 = __O[1625]
+            ____t_result_105 = __O[1638]
         else
             ____t_result_105 = __L1.routeTransition
         end
-        __O[1626] = ____t_result_105
+        __O[1639] = ____t_result_105
         if ____t_106(____t_result_105) then
-            ____t_result_107 = __O[1626]
+            ____t_result_107 = __O[1639]
         else
             ____t_result_107 = __L1.ollyanEncounter
         end
-        __O[1627] = ____t_result_107
+        __O[1640] = ____t_result_107
         if ____t_108(____t_result_107) then
-            ____t_result_109 = __O[1627]
+            ____t_result_109 = __O[1640]
         else
             ____t_result_109 = __L1.defeated
         end
-        __O[1628] = ____t_result_109
+        __O[1641] = ____t_result_109
         if ____t_110(____t_result_109) then
-            ____t_result_111 = __O[1628]
+            ____t_result_111 = __O[1641]
         else
             ____t_result_111 = __L1.won
         end
-        __O[1629] = ____t_result_111
+        __O[1642] = ____t_result_111
         if ____t_112(____t_result_111) then
-            ____t_result_113 = __O[1629]
+            ____t_result_113 = __O[1642]
         else
             ____t_result_113 = __L1.scene ~= 11
         end
-        __O[1630] = ____t_result_113
+        __O[1643] = ____t_result_113
         if ____t_114(____t_result_113) then
-            ____t_result_115 = __O[1630]
+            ____t_result_115 = __O[1643]
         else
             ____t_result_115 = __L1.q.ollyan
         end
@@ -580,9 +580,9 @@ local __O = {};
         if ____opt_119 ~= nil then
             ____opt_result_121 = ____opt_119(____opt_119)
         end
-        __O[1631] = ____opt_result_121
+        __O[1644] = ____opt_result_121
         if ____t_122(____opt_result_121) then
-            ____t_result_123 = __O[1631]
+            ____t_result_123 = __O[1644]
         else
             ____t_result_123 = __L1.npcInfo.ollyan
         end
@@ -620,9 +620,9 @@ local __O = {};
         if ____opt_126 ~= nil then
             ____opt_result_128 = ____opt_126(____opt_126)
         end
-        __O[1632] = ____opt_result_128
+        __O[1645] = ____opt_result_128
         if ____t_129(____opt_result_128) then
-            ____t_result_130 = __O[1632]
+            ____t_result_130 = __O[1645]
         else
             ____t_result_130 = "normal"
         end
@@ -637,9 +637,9 @@ local __O = {};
         if ____opt_133 ~= nil then
             ____opt_result_135 = ____opt_133(____opt_133, mode)
         end
-        __O[1633] = ____opt_result_135
+        __O[1646] = ____opt_result_135
         if ____t_136(____opt_result_135) then
-            ____t_result_137 = __O[1633]
+            ____t_result_137 = __O[1646]
         else
             ____t_result_137 = {hp = 1, incomingDamage = 1, windup = 1, recovery = 1}
         end
@@ -762,9 +762,9 @@ local __O = {};
                 local ____t_result_150
                 local ____t_149 = __t
                 local ____temp_148 = event.type == "won" or event.type == "defeated"
-                __O[1634] = ____temp_148
+                __O[1647] = ____temp_148
                 if ____t_149(____temp_148) then
-                    ____t_result_150 = __O[1634]
+                    ____t_result_150 = __O[1647]
                 else
                     ____t_result_150 = event.type == "retreat"
                 end
@@ -787,9 +787,9 @@ local __O = {};
             ____opt_result_154 = F.tocar
         end
         local ____temp_156 = not ____t_155(____opt_result_154) or not __t(E)
-        __O[1635] = ____temp_156
+        __O[1648] = ____temp_156
         if ____t_157(____temp_156) then
-            ____t_result_158 = __O[1635]
+            ____t_result_158 = __O[1648]
         else
             ____t_result_158 = not __t(ev)
         end
@@ -880,9 +880,9 @@ local __O = {};
         local ____t_result_164
         local ____t_163 = __t
         local ____temp_162 = __L1:keyHeld("right")
-        __O[1636] = ____temp_162
+        __O[1649] = ____temp_162
         if ____t_163(____temp_162) then
-            ____t_result_164 = __O[1636]
+            ____t_result_164 = __O[1649]
         else
             ____t_result_164 = __L1.touch.right
         end
@@ -891,9 +891,9 @@ local __O = {};
         local ____t_result_169
         local ____t_168 = __t
         local ____temp_167 = __L1:keyHeld("left")
-        __O[1637] = ____temp_167
+        __O[1650] = ____temp_167
         if ____t_168(____temp_167) then
-            ____t_result_169 = __O[1637]
+            ____t_result_169 = __O[1650]
         else
             ____t_result_169 = __L1.touch.left
         end
@@ -909,9 +909,9 @@ local __O = {};
         local ____t_result_175
         local ____t_174 = __t
         local ____temp_173 = __L1:keyHeld("down")
-        __O[1638] = ____temp_173
+        __O[1651] = ____temp_173
         if ____t_174(____temp_173) then
-            ____t_result_175 = __O[1638]
+            ____t_result_175 = __O[1651]
         else
             ____t_result_175 = __L1.touch.down
         end
@@ -922,15 +922,15 @@ local __O = {};
         local ____t_result_180
         local ____t_179 = __t
         local ____temp_178 = __L1:keyHeld("up")
-        __O[1639] = ____temp_178
+        __O[1652] = ____temp_178
         if ____t_179(____temp_178) then
-            ____t_result_180 = __O[1639]
+            ____t_result_180 = __O[1652]
         else
             ____t_result_180 = __L1:keyHeld("jump")
         end
-        __O[1640] = ____t_result_180
+        __O[1653] = ____t_result_180
         if ____t_181(____t_result_180) then
-            ____t_result_182 = __O[1640]
+            ____t_result_182 = __O[1653]
         else
             ____t_result_182 = __L1.touch.jump
         end
@@ -952,27 +952,27 @@ local __O = {};
         local ____t_result_188
         local ____t_187 = __t
         local ____temp_186 = __L1:keyHeld("jump")
-        __O[1641] = ____temp_186
+        __O[1654] = ____temp_186
         if ____t_187(____temp_186) then
-            ____t_result_188 = __O[1641]
+            ____t_result_188 = __O[1654]
         else
             ____t_result_188 = __L1:keyHeld("up")
         end
-        __O[1642] = ____t_result_188
+        __O[1655] = ____t_result_188
         if ____t_189(____t_result_188) then
-            ____t_result_190 = __O[1642]
+            ____t_result_190 = __O[1655]
         else
             ____t_result_190 = __L1.touch.jump
         end
-        __O[1643] = ____t_result_190
+        __O[1656] = ____t_result_190
         if ____t_191(____t_result_190) then
-            ____t_result_192 = __O[1643]
+            ____t_result_192 = __O[1656]
         else
             ____t_result_192 = __L1.touch.up
         end
-        __O[1644] = ____t_result_192
+        __O[1657] = ____t_result_192
         if ____t_193(____t_result_192) then
-            ____t_result_194 = __O[1644]
+            ____t_result_194 = __O[1657]
         else
             ____t_result_194 = __L1.joystick.y < -0.55
         end
@@ -1007,15 +1007,15 @@ local __O = {};
         local ____t_result_202
         local ____t_201 = __t
         local ____temp_200 = not __t(__L1.ollyanEncounter)
-        __O[1645] = ____temp_200
+        __O[1658] = ____temp_200
         if ____t_201(____temp_200) then
-            ____t_result_202 = __O[1645]
+            ____t_result_202 = __O[1658]
         else
             ____t_result_202 = __L1.paused
         end
-        __O[1646] = ____t_result_202
+        __O[1659] = ____t_result_202
         if ____t_203(____t_result_202) then
-            ____t_result_204 = __O[1646]
+            ____t_result_204 = __O[1659]
         else
             ____t_result_204 = __L1.dialog
         end
@@ -1108,9 +1108,9 @@ local __O = {};
             if ____opt_221 ~= nil then
                 ____opt_result_223 = ____opt_221(____opt_221, stat, qtd)
             end
-            __O[1650] = ____opt_result_223
+            __O[1663] = ____opt_result_223
             if ____t_224(____opt_result_223) then
-                ____t_result_225 = __O[1650]
+                ____t_result_225 = __O[1663]
             else
                 ____t_result_225 = false
             end
@@ -1131,9 +1131,9 @@ local __O = {};
         if ____opt_228 ~= nil then
             ____opt_result_230 = ____opt_228(____opt_228, stat, qtd)
         end
-        __O[1651] = ____opt_result_230
+        __O[1664] = ____opt_result_230
         if ____t_231(____opt_result_230) then
-            ____t_result_232 = __O[1651]
+            ____t_result_232 = __O[1664]
         else
             ____t_result_232 = false
         end
@@ -1202,23 +1202,23 @@ local __O = {};
                         local ____t_result_247
                         local ____t_246 = __t
                         local ____temp_245 = __L1:npcAvailable(id)
-                        __O[1652] = ____temp_245
+                        __O[1665] = ____temp_245
                         if ____t_246(____temp_245) then
                             ____t_result_247 = n.scene == __L1.scene
                         else
-                            ____t_result_247 = __O[1652]
+                            ____t_result_247 = __O[1665]
                         end
-                        __O[1653] = ____t_result_247
+                        __O[1666] = ____t_result_247
                         if ____t_248(____t_result_247) then
                             ____t_result_249 = math.abs(__L1.player.x - n.x) < 105
                         else
-                            ____t_result_249 = __O[1653]
+                            ____t_result_249 = __O[1666]
                         end
-                        __O[1654] = ____t_result_249
+                        __O[1667] = ____t_result_249
                         if ____t_250(____t_result_249) then
                             ____t_result_251 = math.abs(__L1.player.y - __L1.FLOOR) < 100
                         else
-                            ____t_result_251 = __O[1654]
+                            ____t_result_251 = __O[1667]
                         end
                         return ____t_result_251
                     end
@@ -1272,9 +1272,9 @@ local __O = {};
         local ____t_result_259
         local ____t_258 = __t
         local ____get_result_257 = __get(requirements, e.type)
-        __O[1656] = ____get_result_257
+        __O[1669] = ____get_result_257
         if ____t_258(____get_result_257) then
-            ____t_result_259 = __O[1656]
+            ____t_result_259 = __O[1669]
         else
             ____t_result_259 = __arrL({}, 0)
         end
@@ -1319,9 +1319,9 @@ local __O = {};
             if campaign ~= nil then
                 ____opt_result_272 = campaign.reason
             end
-            __O[1657] = ____opt_result_272
+            __O[1670] = ____opt_result_272
             if ____t_273(____opt_result_272) then
-                ____t_result_274 = __O[1657]
+                ____t_result_274 = __O[1670]
             else
                 ____t_result_274 = ""
             end
@@ -1343,11 +1343,11 @@ local __O = {};
                             local ____t_result_280
                             local ____t_279 = __t
                             local ____temp_278 = __gt(e.hp, 0) and math.abs(e.x - __L1.player.x) <= 390
-                            __O[1658] = ____temp_278
+                            __O[1671] = ____temp_278
                             if ____t_279(____temp_278) then
                                 ____t_result_280 = math.abs(e.y - __L1.player.y) < 180
                             else
-                                ____t_result_280 = __O[1658]
+                                ____t_result_280 = __O[1671]
                             end
                             return ____t_result_280
                         end
@@ -1357,9 +1357,9 @@ local __O = {};
                 ),
                 0
             )
-            __O[1659] = ____get_result_281
+            __O[1672] = ____get_result_281
             if ____t_282(____get_result_281) then
-                ____t_result_283 = __O[1659]
+                ____t_result_283 = __O[1672]
             else
                 ____t_result_283 = nil
             end
@@ -1434,9 +1434,9 @@ local __O = {};
             local ____t_result_295
             local ____t_289 = __t
             local ____call_result_288 = __call(norm, "includes", __L1.room.id)
-            __O[1660] = ____call_result_288
+            __O[1673] = ____call_result_288
             if ____t_289(____call_result_288) then
-                ____t_result_295 = __O[1660]
+                ____t_result_295 = __O[1673]
             else
                 local ____opt_292 = window.FavelaCasas
                 if ____opt_292 ~= nil then
@@ -1465,9 +1465,9 @@ local __O = {};
             if ____opt_300 ~= nil then
                 ____opt_result_302 = ____opt_300(____opt_300, __L1.room.id)
             end
-            __O[1661] = ____opt_result_302
+            __O[1674] = ____opt_result_302
             if ____t_303(____opt_result_302) then
-                ____t_result_304 = __O[1661]
+                ____t_result_304 = __O[1674]
             else
                 ____t_result_304 = __L1.room.id
             end
@@ -1484,14 +1484,14 @@ local __O = {};
                     local ____t_result_310
                     local ____t_306 = __t
                     local ____temp_305 = n.scene == __L1.scene
-                    __O[1663] = ____temp_305
+                    __O[1676] = ____temp_305
                     if ____t_306(____temp_305) then
                         local ____t_result_309
                         local ____t_308 = __t
                         local ____call_result_307 = __call(norm, "includes", id)
-                        __O[1662] = ____call_result_307
+                        __O[1675] = ____call_result_307
                         if ____t_308(____call_result_307) then
-                            ____t_result_309 = __O[1662]
+                            ____t_result_309 = __O[1675]
                         else
                             ____t_result_309 = __call(
                                 norm,
@@ -1508,7 +1508,7 @@ local __O = {};
                         end
                         ____t_result_310 = ____t_result_309
                     else
-                        ____t_result_310 = __O[1663]
+                        ____t_result_310 = __O[1676]
                     end
                     return ____t_result_310
                 end
@@ -1593,26 +1593,26 @@ local __O = {};
                 ____opt_result_318 = ____opt_316.estrada
             end
             local ____temp_320 = not ____t_319(____opt_result_318) and not __t(__L1.player.ground)
-            __O[1665] = ____temp_320
+            __O[1678] = ____temp_320
             if ____t_321(____temp_320) then
                 local ____t_result_324
                 local ____t_323 = __t
                 local ____temp_322 = __L1:keyHeld("jump")
-                __O[1664] = ____temp_322
+                __O[1677] = ____temp_322
                 if ____t_323(____temp_322) then
-                    ____t_result_324 = __O[1664]
+                    ____t_result_324 = __O[1677]
                 else
                     ____t_result_324 = __L1.touch.jump
                 end
                 ____t_result_325 = ____t_result_324
             else
-                ____t_result_325 = __O[1665]
+                ____t_result_325 = __O[1678]
             end
-            __O[1666] = ____t_result_325
+            __O[1679] = ____t_result_325
             if ____t_326(____t_result_325) then
                 ____t_result_327 = __gt(__L1.player.gas, 0)
             else
-                ____t_result_327 = __O[1666]
+                ____t_result_327 = __O[1679]
             end
             ____t_result_328 = ____t_result_327
         end
@@ -1715,9 +1715,9 @@ local __O = {};
                     ____opt_354 = ____opt_354.arenaPlatforms
                 end
                 local ____getq_356_result_357 = ____getq_356(____opt_354, __L1.arena.type)
-                __O[1670] = ____getq_356_result_357
+                __O[1683] = ____getq_356_result_357
                 if ____t_358(____getq_356_result_357) then
-                    ____t_result_359 = __O[1670]
+                    ____t_result_359 = __O[1683]
                 else
                     ____t_result_359 = __arrL({}, 0)
                 end
@@ -1743,9 +1743,9 @@ local __O = {};
                 local ____t_result_368
                 local ____t_362 = __t
                 local ____get_result_361 = __get(__L1.platforms, __L1.scene)
-                __O[1671] = ____get_result_361
+                __O[1684] = ____get_result_361
                 if ____t_362(____get_result_361) then
-                    ____t_result_368 = __O[1671]
+                    ____t_result_368 = __O[1684]
                 else
                     local ____opt_365 = window.LugaresC1
                     if ____opt_365 ~= nil then
@@ -1757,9 +1757,9 @@ local __O = {};
                     end
                     ____t_result_368 = ____opt_result_367
                 end
-                __O[1672] = ____t_result_368
+                __O[1685] = ____t_result_368
                 if ____t_369(____t_result_368) then
-                    ____t_result_370 = __O[1672]
+                    ____t_result_370 = __O[1685]
                 else
                     ____t_result_370 = __arrL({}, 0)
                 end
@@ -1773,9 +1773,9 @@ local __O = {};
                 if ____opt_373 ~= nil then
                     ____opt_result_375 = ____opt_373(____opt_373, {scene = __L1.scene})
                 end
-                __O[1673] = ____opt_result_375
+                __O[1686] = ____opt_result_375
                 if ____t_376(____opt_result_375) then
-                    ____t_result_377 = __O[1673]
+                    ____t_result_377 = __O[1686]
                 else
                     ____t_result_377 = __arrL({}, 0)
                 end
@@ -1806,23 +1806,23 @@ local __O = {};
                     __get(p, 2)
                 ) + 4
             )
-            __O[1674] = ____temp_381
+            __O[1687] = ____temp_381
             if ____t_382(____temp_381) then
                 ____t_result_383 = __ge(
                     __get(p, 1),
                     __L1.player.y - 2
                 )
             else
-                ____t_result_383 = __O[1674]
+                ____t_result_383 = __O[1687]
             end
-            __O[1675] = ____t_result_383
+            __O[1688] = ____t_result_383
             if ____t_384(____t_result_383) then
                 ____t_result_385 = best == nil or __lt(
                     __get(p, 1),
                     best
                 )
             else
-                ____t_result_385 = __O[1675]
+                ____t_result_385 = __O[1688]
             end
             if ____t_386(____t_result_385) then
                 best = __get(p, 1)
@@ -1977,9 +1977,9 @@ local __O = {};
             if ____opt_429 ~= nil then
                 ____opt_result_431 = ____opt_429(____opt_429, __L1.ollyanEncounter)
             end
-            __O[1676] = ____opt_result_431
+            __O[1689] = ____opt_result_431
             if ____t_432(____opt_result_431) then
-                ____t_result_433 = __O[1676]
+                ____t_result_433 = __O[1689]
             else
                 ____t_result_433 = false
             end
@@ -1992,9 +1992,9 @@ local __O = {};
         local ____t_result_436
         local ____t_435 = __t
         local ____temp_434 = not __t(__L1.cutscene)
-        __O[1677] = ____temp_434
+        __O[1690] = ____temp_434
         if ____t_435(____temp_434) then
-            ____t_result_436 = __O[1677]
+            ____t_result_436 = __O[1690]
         else
             ____t_result_436 = __L1.paused
         end
@@ -2044,9 +2044,9 @@ local __O = {};
         local ____t_result_447
         local ____t_446 = __t
         local ____temp_445 = not __t(__L1.cutscene)
-        __O[1678] = ____temp_445
+        __O[1691] = ____temp_445
         if ____t_446(____temp_445) then
-            ____t_result_447 = __O[1678]
+            ____t_result_447 = __O[1691]
         else
             ____t_result_447 = __L1.paused
         end
@@ -2078,45 +2078,45 @@ local __O = {};
         local ____t_result_451
         local ____t_450 = __t
         local ____temp_449 = not __t(__L1.started)
-        __O[1679] = ____temp_449
+        __O[1692] = ____temp_449
         if ____t_450(____temp_449) then
-            ____t_result_451 = __O[1679]
+            ____t_result_451 = __O[1692]
         else
             ____t_result_451 = __L1.defeated
         end
-        __O[1680] = ____t_result_451
+        __O[1693] = ____t_result_451
         if ____t_452(____t_result_451) then
-            ____t_result_453 = __O[1680]
+            ____t_result_453 = __O[1693]
         else
             ____t_result_453 = __L1.activeBoss
         end
-        __O[1681] = ____t_result_453
+        __O[1694] = ____t_result_453
         if ____t_454(____t_result_453) then
-            ____t_result_455 = __O[1681]
+            ____t_result_455 = __O[1694]
         else
             ____t_result_455 = __L1.arena
         end
-        __O[1682] = ____t_result_455
+        __O[1695] = ____t_result_455
         if ____t_456(____t_result_455) then
-            ____t_result_457 = __O[1682]
+            ____t_result_457 = __O[1695]
         else
             ____t_result_457 = __L1.room
         end
-        __O[1683] = ____t_result_457
+        __O[1696] = ____t_result_457
         if ____t_458(____t_result_457) then
-            ____t_result_459 = __O[1683]
+            ____t_result_459 = __O[1696]
         else
             ____t_result_459 = __L1.routeTransition
         end
-        __O[1684] = ____t_result_459
+        __O[1697] = ____t_result_459
         if ____t_460(____t_result_459) then
-            ____t_result_461 = __O[1684]
+            ____t_result_461 = __O[1697]
         else
             ____t_result_461 = __L1.dialog
         end
-        __O[1685] = ____t_result_461
+        __O[1698] = ____t_result_461
         if ____t_462(____t_result_461) then
-            ____t_result_465 = __O[1685]
+            ____t_result_465 = __O[1698]
         else
             local ____opt_463 = __L1.training
             if ____opt_463 ~= nil then
@@ -2124,15 +2124,15 @@ local __O = {};
             end
             ____t_result_465 = ____opt_463
         end
-        __O[1686] = ____t_result_465
+        __O[1699] = ____t_result_465
         if ____t_466(____t_result_465) then
-            ____t_result_467 = __O[1686]
+            ____t_result_467 = __O[1699]
         else
             ____t_result_467 = __L1.cutscene
         end
-        __O[1687] = ____t_result_467
+        __O[1700] = ____t_result_467
         if ____t_468(____t_result_467) then
-            ____t_result_469 = __O[1687]
+            ____t_result_469 = __O[1700]
         else
             ____t_result_469 = __L1.ollyanEncounter
         end
@@ -2166,51 +2166,51 @@ local __O = {};
         local ____t_result_473
         local ____t_472 = __t
         local ____temp_471 = not __t(__L1.started)
-        __O[1688] = ____temp_471
+        __O[1701] = ____temp_471
         if ____t_472(____temp_471) then
-            ____t_result_473 = __O[1688]
+            ____t_result_473 = __O[1701]
         else
             ____t_result_473 = __L1.paused
         end
-        __O[1689] = ____t_result_473
+        __O[1702] = ____t_result_473
         if ____t_474(____t_result_473) then
-            ____t_result_475 = __O[1689]
+            ____t_result_475 = __O[1702]
         else
             ____t_result_475 = __L1.cutscene
         end
-        __O[1690] = ____t_result_475
+        __O[1703] = ____t_result_475
         if ____t_476(____t_result_475) then
-            ____t_result_477 = __O[1690]
+            ____t_result_477 = __O[1703]
         else
             ____t_result_477 = __L1.room
         end
-        __O[1691] = ____t_result_477
+        __O[1704] = ____t_result_477
         if ____t_478(____t_result_477) then
-            ____t_result_479 = __O[1691]
+            ____t_result_479 = __O[1704]
         else
             ____t_result_479 = __L1.arena
         end
-        __O[1692] = ____t_result_479
+        __O[1705] = ____t_result_479
         if ____t_480(____t_result_479) then
-            ____t_result_481 = __O[1692]
+            ____t_result_481 = __O[1705]
         else
             ____t_result_481 = __L1.activeBoss
         end
-        __O[1693] = ____t_result_481
+        __O[1706] = ____t_result_481
         if ____t_482(____t_result_481) then
-            ____t_result_483 = __O[1693]
+            ____t_result_483 = __O[1706]
         else
             ____t_result_483 = __L1.routeTransition
         end
-        __O[1694] = ____t_result_483
+        __O[1707] = ____t_result_483
         if ____t_484(____t_result_483) then
-            ____t_result_485 = __O[1694]
+            ____t_result_485 = __O[1707]
         else
             ____t_result_485 = __L1.dialog
         end
-        __O[1695] = ____t_result_485
+        __O[1708] = ____t_result_485
         if ____t_486(____t_result_485) then
-            ____t_result_487 = __O[1695]
+            ____t_result_487 = __O[1708]
         else
             ____t_result_487 = __L1.defeated
         end
@@ -2224,9 +2224,9 @@ local __O = {};
         if ____opt_489 ~= nil then
             ____opt_489 = ____opt_489.doors
         end
-        __O[1696] = ____opt_489
+        __O[1709] = ____opt_489
         if ____t_491(____opt_489) then
-            ____t_result_492 = __O[1696]
+            ____t_result_492 = __O[1709]
         else
             ____t_result_492 = __arrL({}, 0)
         end
@@ -2239,9 +2239,9 @@ local __O = {};
         local ____t_result_496
         local ____t_495 = __t
         local ____temp_494 = not __t(door) or math.abs(__L1.player.x - door.x) > 110
-        __O[1697] = ____temp_494
+        __O[1710] = ____temp_494
         if ____t_495(____temp_494) then
-            ____t_result_496 = __O[1697]
+            ____t_result_496 = __O[1710]
         else
             ____t_result_496 = math.abs(__L1.player.y - __L1.FLOOR) > 50
         end
@@ -2296,21 +2296,21 @@ local __O = {};
         local ____t_result_506
         local ____t_505 = __t
         local ____temp_504 = not __t(__L1.room) or __L1.room.phase ~= "inside"
-        __O[1698] = ____temp_504
+        __O[1711] = ____temp_504
         if ____t_505(____temp_504) then
-            ____t_result_506 = __O[1698]
+            ____t_result_506 = __O[1711]
         else
             ____t_result_506 = __L1.dialog
         end
-        __O[1699] = ____t_result_506
+        __O[1712] = ____t_result_506
         if ____t_507(____t_result_506) then
-            ____t_result_508 = __O[1699]
+            ____t_result_508 = __O[1712]
         else
             ____t_result_508 = __L1.paused
         end
-        __O[1700] = ____t_result_508
+        __O[1713] = ____t_result_508
         if ____t_509(____t_result_508) then
-            ____t_result_510 = __O[1700]
+            ____t_result_510 = __O[1713]
         else
             ____t_result_510 = __L1.cutscene
         end
@@ -2381,9 +2381,9 @@ local __O = {};
         local ____t_result_517
         local ____t_516 = __t
         local ____TS__Number_result_515 = __TS__Number(__L1.player.inv)
-        __O[1701] = ____TS__Number_result_515
+        __O[1714] = ____TS__Number_result_515
         if ____t_516(____TS__Number_result_515) then
-            ____t_result_517 = __O[1701]
+            ____t_result_517 = __O[1714]
         else
             ____t_result_517 = 0
         end
@@ -2420,9 +2420,9 @@ local __O = {};
             ____opt_525 = ____opt_525.arenaBounds
         end
         local ____getq_527_result_528 = ____getq_527(____opt_525, e.type)
-        __O[1702] = ____getq_527_result_528
+        __O[1715] = ____getq_527_result_528
         if ____t_529(____getq_527_result_528) then
-            ____t_result_530 = __O[1702]
+            ____t_result_530 = __O[1715]
         else
             ____t_result_530 = __arrL({-430, 430}, 2)
         end
@@ -2538,15 +2538,15 @@ local __O = {};
         local ____t_result_541
         local ____t_540 = __t
         local ____temp_539 = not __t(__L1.arena) or __L1.arena.phase ~= "active"
-        __O[1703] = ____temp_539
+        __O[1716] = ____temp_539
         if ____t_540(____temp_539) then
-            ____t_result_541 = __O[1703]
+            ____t_result_541 = __O[1716]
         else
             ____t_result_541 = __L1.dialog
         end
-        __O[1704] = ____t_result_541
+        __O[1717] = ____t_result_541
         if ____t_542(____t_result_541) then
-            ____t_result_543 = __O[1704]
+            ____t_result_543 = __O[1717]
         else
             ____t_result_543 = __L1.paused
         end
@@ -2693,11 +2693,11 @@ local __O = {};
                     local ____t_result_559
                     local ____t_558 = __t
                     local ____temp_557 = not __t(a.dead) and a ~= m
-                    __O[1705] = ____temp_557
+                    __O[1718] = ____temp_557
                     if ____t_558(____temp_557) then
                         ____t_result_559 = math.abs(a.x - m.x) < 150
                     else
-                        ____t_result_559 = __O[1705]
+                        ____t_result_559 = __O[1718]
                     end
                     return ____t_result_559
                 end
@@ -2858,9 +2858,9 @@ local __O = {};
                     local ____t_result_582
                     local ____t_581 = __t
                     local ____TS__MathSign_result_580 = __TS__MathSign(__L1.player.x - m.x)
-                    __O[1706] = ____TS__MathSign_result_580
+                    __O[1719] = ____TS__MathSign_result_580
                     if ____t_581(____TS__MathSign_result_580) then
-                        ____t_result_582 = __O[1706]
+                        ____t_result_582 = __O[1719]
                     else
                         ____t_result_582 = m.dir
                     end
@@ -2871,9 +2871,9 @@ local __O = {};
                     if ____opt_583 ~= nil then
                         ____opt_583 = ____opt_583.bounds
                     end
-                    __O[1707] = ____opt_583
+                    __O[1720] = ____opt_583
                     if ____t_585(____opt_583) then
-                        ____t_result_586 = __O[1707]
+                        ____t_result_586 = __O[1720]
                     else
                         ____t_result_586 = __arrL({25, __L1.WORLD - 25}, 2)
                     end
@@ -2997,11 +2997,11 @@ local __O = {};
                         local ____t_result_614
                         local ____t_613 = __t
                         local ____temp_612 = m.kind == 1 and __le(m.t, 0)
-                        __O[1708] = ____temp_612
+                        __O[1721] = ____temp_612
                         if ____t_613(____temp_612) then
                             ____t_result_614 = __ge(m.y, __L1.FLOOR)
                         else
-                            ____t_result_614 = __O[1708]
+                            ____t_result_614 = __O[1721]
                         end
                         if ____t_615(____t_result_614) then
                             m.vy = -240
@@ -3050,9 +3050,9 @@ local __O = {};
                 local ____t_result_622
                 local ____t_621 = __t
                 local ____temp_620 = not __t(m.temporary)
-                __O[1709] = ____temp_620
+                __O[1722] = ____temp_620
                 if ____t_621(____temp_620) then
-                    ____t_result_622 = __O[1709]
+                    ____t_result_622 = __O[1722]
                 else
                     ____t_result_622 = not __t(m.dead) and __gt(m.life, 0)
                 end
@@ -3081,9 +3081,9 @@ local __O = {};
         local ____t_result_627
         local ____t_626 = __t
         local ____temp_625 = __L1:keyHeld("left")
-        __O[1710] = ____temp_625
+        __O[1723] = ____temp_625
         if ____t_626(____temp_625) then
-            ____t_result_627 = __O[1710]
+            ____t_result_627 = __O[1723]
         else
             ____t_result_627 = __L1.touch.left
         end
@@ -3091,9 +3091,9 @@ local __O = {};
         local ____t_result_630
         local ____t_629 = __t
         local ____temp_628 = __L1:keyHeld("right")
-        __O[1711] = ____temp_628
+        __O[1724] = ____temp_628
         if ____t_629(____temp_628) then
-            ____t_result_630 = __O[1711]
+            ____t_result_630 = __O[1724]
         else
             ____t_result_630 = __L1.touch.right
         end
@@ -3101,9 +3101,9 @@ local __O = {};
         local ____t_result_633
         local ____t_632 = __t
         local ____temp_631 = __L1:keyHeld("up")
-        __O[1712] = ____temp_631
+        __O[1725] = ____temp_631
         if ____t_632(____temp_631) then
-            ____t_result_633 = __O[1712]
+            ____t_result_633 = __O[1725]
         else
             ____t_result_633 = __L1.touch.up
         end
@@ -3111,9 +3111,9 @@ local __O = {};
         local ____t_result_636
         local ____t_635 = __t
         local ____temp_634 = __L1:keyHeld("down")
-        __O[1713] = ____temp_634
+        __O[1726] = ____temp_634
         if ____t_635(____temp_634) then
-            ____t_result_636 = __O[1713]
+            ____t_result_636 = __O[1726]
         else
             ____t_result_636 = __L1.touch.down
         end
@@ -3121,9 +3121,9 @@ local __O = {};
         local ____t_result_639
         local ____t_638 = __t
         local ____temp_637 = __L1:keyHeld("jump")
-        __O[1714] = ____temp_637
+        __O[1727] = ____temp_637
         if ____t_638(____temp_637) then
-            ____t_result_639 = __O[1714]
+            ____t_result_639 = __O[1727]
         else
             ____t_result_639 = __L1.touch.jump
         end
@@ -3138,9 +3138,9 @@ local __O = {};
         if ____opt_642 ~= nil then
             ____opt_result_644 = ____opt_642(____opt_642)
         end
-        __O[1715] = ____opt_result_644
+        __O[1728] = ____opt_result_644
         if ____t_645(____opt_result_644) then
-            ____t_result_646 = __O[1715]
+            ____t_result_646 = __O[1728]
         else
             ____t_result_646 = 1
         end
@@ -3148,9 +3148,9 @@ local __O = {};
         local ____t_result_649
         local ____t_648 = __t
         local ____temp_647 = (__t(right) and 1 or 0) - (__t(left) and 1 or 0)
-        __O[1716] = ____temp_647
+        __O[1729] = ____temp_647
         if ____t_648(____temp_647) then
-            ____t_result_649 = __O[1716]
+            ____t_result_649 = __O[1729]
         else
             ____t_result_649 = __L1.joystick.x
         end
@@ -3232,9 +3232,9 @@ local __O = {};
             else
                 ____t_result_665 = jump
             end
-            __O[1717] = ____t_result_665
+            __O[1730] = ____t_result_665
             if ____t_666(____t_result_665) then
-                ____t_result_667 = __O[1717]
+                ____t_result_667 = __O[1730]
             else
                 ____t_result_667 = up
             end
@@ -3265,11 +3265,11 @@ local __O = {};
             else
                 ____t_result_672 = jump
             end
-            __O[1718] = ____t_result_672
+            __O[1731] = ____t_result_672
             if ____t_673(____t_result_672) then
                 ____t_result_674 = __L1.player.ground
             else
-                ____t_result_674 = __O[1718]
+                ____t_result_674 = __O[1731]
             end
             if ____t_675(____t_result_674) then
                 local ____L1_player_680 = __L1.player
@@ -3298,17 +3298,17 @@ local __O = {};
             else
                 ____t_result_685 = jump
             end
-            __O[1719] = ____t_result_685
+            __O[1732] = ____t_result_685
             if ____t_686(____t_result_685) then
                 ____t_result_687 = not __t(__L1.player.ground)
             else
-                ____t_result_687 = __O[1719]
+                ____t_result_687 = __O[1732]
             end
-            __O[1720] = ____t_result_687
+            __O[1733] = ____t_result_687
             if ____t_688(____t_result_687) then
                 ____t_result_689 = __gt(__L1.player.gas, 0)
             else
-                ____t_result_689 = __O[1720]
+                ____t_result_689 = __O[1733]
             end
             if ____t_690(____t_result_689) then
                 if __gt(__L1.player.vy, -235) then
@@ -3337,9 +3337,9 @@ local __O = {};
         if ____opt_693 ~= nil then
             ____opt_693 = ____opt_693.bounds
         end
-        __O[1721] = ____opt_693
+        __O[1734] = ____opt_693
         if ____t_695(____opt_693) then
-            ____t_result_696 = __O[1721]
+            ____t_result_696 = __O[1734]
         else
             ____t_result_696 = __arrL({25, __L1.WORLD - 25}, 2)
         end
@@ -3367,11 +3367,11 @@ local __O = {};
         local ____t_result_701
         local ____t_700 = __t
         local ____temp_699 = not __t(terreno) and not __t(__L1.vehicle)
-        __O[1722] = ____temp_699
+        __O[1735] = ____temp_699
         if ____t_700(____temp_699) then
             ____t_result_701 = __ge(__L1.player.vy, 0)
         else
-            ____t_result_701 = __O[1722]
+            ____t_result_701 = __O[1735]
         end
         if ____t_702(____t_result_701) then
             for ____, p in __iterar((__L1:scenePlatforms())) do
@@ -3390,23 +3390,23 @@ local __O = {};
                         __get(p, 2)
                     ) + 8
                 )
-                __O[1723] = ____temp_703
+                __O[1736] = ____temp_703
                 if ____t_704(____temp_703) then
                     ____t_result_705 = __le(
                         oldY,
                         __get(p, 1) + 3
                     )
                 else
-                    ____t_result_705 = __O[1723]
+                    ____t_result_705 = __O[1736]
                 end
-                __O[1724] = ____t_result_705
+                __O[1737] = ____t_result_705
                 if ____t_706(____t_result_705) then
                     ____t_result_707 = __ge(
                         __L1.player.y,
                         __get(p, 1)
                     )
                 else
-                    ____t_result_707 = __O[1724]
+                    ____t_result_707 = __O[1737]
                 end
                 if ____t_708(____t_result_707) then
                     __L1.player.y = __get(p, 1)
@@ -3425,11 +3425,11 @@ local __O = {};
         local ____t_result_711
         local ____t_710 = __t
         local ____temp_709 = not __t(wasGrounded)
-        __O[1725] = ____temp_709
+        __O[1738] = ____temp_709
         if ____t_710(____temp_709) then
             ____t_result_711 = __L1.player.ground
         else
-            ____t_result_711 = __O[1725]
+            ____t_result_711 = __O[1738]
         end
         if ____t_712(____t_result_711) then
             __L1.player.landTimer = 0.15
@@ -3444,9 +3444,9 @@ local __O = {};
                 local ____t_result_715
                 local ____t_714 = __t
                 local ____table_gasRegen_713 = __L1:bonus().gasRegen
-                __O[1726] = ____table_gasRegen_713
+                __O[1739] = ____table_gasRegen_713
                 if ____t_714(____table_gasRegen_713) then
-                    ____t_result_715 = __O[1726]
+                    ____t_result_715 = __O[1739]
                 else
                     ____t_result_715 = 16
                 end
@@ -3455,9 +3455,9 @@ local __O = {};
                 local ____t_result_718
                 local ____t_717 = __t
                 local ____table_airGasRegen_716 = __L1:bonus().airGasRegen
-                __O[1727] = ____table_airGasRegen_716
+                __O[1740] = ____table_airGasRegen_716
                 if ____t_717(____table_airGasRegen_716) then
-                    ____t_result_718 = __O[1727]
+                    ____t_result_718 = __O[1740]
                 else
                     ____t_result_718 = 6
                 end
@@ -3473,23 +3473,23 @@ local __O = {};
         local ____t_result_726
         local ____t_725 = __t
         local ____temp_724 = not __t(__L1.room) and not __t(__L1.arena)
-        __O[1728] = ____temp_724
+        __O[1741] = ____temp_724
         if ____t_725(____temp_724) then
             ____t_result_726 = __L1.player.ground
         else
-            ____t_result_726 = __O[1728]
+            ____t_result_726 = __O[1741]
         end
-        __O[1729] = ____t_result_726
+        __O[1742] = ____t_result_726
         if ____t_727(____t_result_726) then
             ____t_result_728 = __L1.player.y == __L1.FLOOR
         else
-            ____t_result_728 = __O[1729]
+            ____t_result_728 = __O[1742]
         end
-        __O[1730] = ____t_result_728
+        __O[1743] = ____t_result_728
         if ____t_729(____t_result_728) then
             ____t_result_730 = not __t(__L1:gapAt(__L1.player.x))
         else
-            ____t_result_730 = __O[1730]
+            ____t_result_730 = __O[1743]
         end
         if ____t_731(____t_result_730) then
             __L1.lastSafeX = __L1.player.x
@@ -3704,9 +3704,9 @@ local __O = {};
         local ____t_result_748
         local ____t_747 = __t
         local ____temp_746 = not __t(__L1.started)
-        __O[1731] = ____temp_746
+        __O[1744] = ____temp_746
         if ____t_747(____temp_746) then
-            ____t_result_748 = __O[1731]
+            ____t_result_748 = __O[1744]
         else
             ____t_result_748 = __L1.sandbox
         end
@@ -3787,11 +3787,11 @@ local __O = {};
             else
                 ____t_result_776 = a
             end
-            __O[1732] = ____t_result_776
+            __O[1745] = ____t_result_776
             if ____t_777(____t_result_776) then
                 ____t_result_778 = a.q
             else
-                ____t_result_778 = __O[1732]
+                ____t_result_778 = __O[1745]
             end
             if ____t_779(____t_result_778) then
                 ____t_result_780 = a
@@ -3852,9 +3852,9 @@ local __O = {};
                     ____opt_result_793 = s.collected
                 end
                 local ____lenq_794_result_795 = ____lenq_794(____opt_result_793)
-                __O[1733] = ____lenq_794_result_795
+                __O[1746] = ____lenq_794_result_795
                 if ____t_796(____lenq_794_result_795) then
-                    ____t_result_797 = __O[1733]
+                    ____t_result_797 = __O[1746]
                 else
                     ____t_result_797 = 0
                 end
@@ -3998,9 +3998,9 @@ local __O = {};
         local ____t_result_829
         local ____t_823 = __t
         local ____get_result_822 = __get(__L1.scenes, __L1.scene)
-        __O[1734] = ____get_result_822
+        __O[1747] = ____get_result_822
         if ____t_823(____get_result_822) then
-            ____t_result_829 = __O[1734]
+            ____t_result_829 = __O[1747]
         else
             local ____opt_826 = window.LugaresC1
             if ____opt_826 ~= nil then
@@ -4012,9 +4012,9 @@ local __O = {};
             end
             ____t_result_829 = ____opt_result_828
         end
-        __O[1735] = ____t_result_829
+        __O[1748] = ____t_result_829
         if ____t_830(____t_result_829) then
-            ____t_result_831 = __O[1735]
+            ____t_result_831 = __O[1748]
         else
             ____t_result_831 = ""
         end
@@ -4081,9 +4081,9 @@ local __O = {};
         local ____t_result_846
         local ____t_845 = __t
         local ____L1__24_result_844 = __L1["$"](__L1, "gasPercent")
-        __O[1736] = ____L1__24_result_844
+        __O[1749] = ____L1__24_result_844
         if ____t_845(____L1__24_result_844) then
-            ____t_result_846 = __O[1736]
+            ____t_result_846 = __O[1749]
         else
             ____t_result_846 = __L1["$"](__L1, "gasValue")
         end
@@ -4112,11 +4112,11 @@ local __O = {};
         else
             ____t_result_847 = __L1.q.kaua
         end
-        __O[1737] = ____t_result_847
+        __O[1750] = ____t_result_847
         if ____t_848(____t_result_847) then
             ____t_result_849 = __L1:materialCount() >= (__L1.weapon == 0 and 3 or 5)
         else
-            ____t_result_849 = __O[1737]
+            ____t_result_849 = __O[1750]
         end
         ____L1_setText_853(
             __L1,
@@ -4150,11 +4150,11 @@ local __O = {};
             ____opt_856 = ____opt_856.active
         end
         local ____temp_859 = not not ____t_858(____opt_856) and not __t(__L1.paused)
-        __O[1738] = ____temp_859
+        __O[1751] = ____temp_859
         if ____t_860(____temp_859) then
             ____t_result_861 = not __t(__L1.dialog)
         else
-            ____t_result_861 = __O[1738]
+            ____t_result_861 = __O[1751]
         end
         ____L1_show_862(__L1, "trainingAction", ____t_result_861)
         local shell = __L1["$"](__L1, "gameShell")
@@ -4266,15 +4266,15 @@ local __O = {};
                 local ____t_result_881
                 local ____t_880 = __t
                 local ____temp_879 = __L1.dashCooldown > 0
-                __O[1739] = ____temp_879
+                __O[1752] = ____temp_879
                 if ____t_880(____temp_879) then
-                    ____t_result_881 = __O[1739]
+                    ____t_result_881 = __O[1752]
                 else
                     ____t_result_881 = __L1.vehicle
                 end
-                __O[1740] = ____t_result_881
+                __O[1753] = ____t_result_881
                 if ____t_882(____t_result_881) then
-                    ____t_result_883 = __O[1740]
+                    ____t_result_883 = __O[1753]
                 else
                     ____t_result_883 = not __t(__L1.q.mota) and not __t(__L1.q.trained)
                 end
@@ -4330,22 +4330,22 @@ local __O = {};
             end
             ____temp_897 = ____opt_895 == "intro"
         end
-        __O[1741] = ____temp_897
+        __O[1754] = ____temp_897
         if ____t_898(____temp_897) then
             ____t_result_899 = not __t(__L1.paused)
         else
-            ____t_result_899 = __O[1741]
+            ____t_result_899 = __O[1754]
         end
         ____L1_show_900(__L1, "cinematicOverlay", ____t_result_899)
         local ____L1_show_904 = __L1.show
         local ____t_result_903
         local ____t_902 = __t
         local ____temp_901 = not not __t(__L1.room) and not __t(__L1.cutscene)
-        __O[1742] = ____temp_901
+        __O[1755] = ____temp_901
         if ____t_902(____temp_901) then
             ____t_result_903 = not __t(__L1.activity)
         else
-            ____t_result_903 = __O[1742]
+            ____t_result_903 = __O[1755]
         end
         ____L1_show_904(__L1, "roomOverlay", ____t_result_903)
         local ____L1_setText_913 = __L1.setText
@@ -4400,17 +4400,17 @@ local __O = {};
         local ____t_result_920
         local ____t_919 = __t
         local ____temp_918 = not not __t(__L1.activity) and not __t(__L1.paused)
-        __O[1743] = ____temp_918
+        __O[1756] = ____temp_918
         if ____t_919(____temp_918) then
             ____t_result_920 = not __t(__L1.dialog)
         else
-            ____t_result_920 = __O[1743]
+            ____t_result_920 = __O[1756]
         end
-        __O[1744] = ____t_result_920
+        __O[1757] = ____t_result_920
         if ____t_921(____t_result_920) then
             ____t_result_922 = not __t(__L1.cutscene)
         else
-            ____t_result_922 = __O[1744]
+            ____t_result_922 = __O[1757]
         end
         ____L1_show_923(__L1, "activityOverlay", ____t_result_922)
         if shell ~= nil then
@@ -4471,20 +4471,20 @@ local __O = {};
             else
                 ____t_result_934 = dinner
             end
-            __O[1746] = ____t_result_934
+            __O[1759] = ____t_result_934
             if ____t_935(____t_result_934) then
                 local ____t_result_938
                 local ____t_937 = __t
                 local ____lt_result_936 = __lt(__L1.activity.score, 2)
-                __O[1745] = ____lt_result_936
+                __O[1758] = ____lt_result_936
                 if ____t_937(____lt_result_936) then
-                    ____t_result_938 = __O[1745]
+                    ____t_result_938 = __O[1758]
                 else
                     ____t_result_938 = __L1.activity.options.dating
                 end
                 ____t_result_939 = ____t_result_938
             else
-                ____t_result_939 = __O[1746]
+                ____t_result_939 = __O[1759]
             end
             ____L1_show_941(
                 __L1,
@@ -4611,9 +4611,9 @@ local __O = {};
         local ____t_result_956
         local ____t_955 = __t
         local ____temp_954 = __L1.scene == 0 or __L1.scene == 1
-        __O[1747] = ____temp_954
+        __O[1760] = ____temp_954
         if ____t_955(____temp_954) then
-            ____t_result_956 = __O[1747]
+            ____t_result_956 = __O[1760]
         else
             ____t_result_956 = __L1.scene == 4
         end
@@ -4714,9 +4714,9 @@ local __O = {};
                 if ____opt_962 ~= nil then
                     ____opt_result_964 = ____opt_962.hp
                 end
-                __O[1748] = ____opt_result_964
+                __O[1761] = ____opt_result_964
                 if ____t_965(____opt_result_964) then
-                    ____t_result_966 = __O[1748]
+                    ____t_result_966 = __O[1761]
                 else
                     ____t_result_966 = hp
                 end
@@ -4748,9 +4748,9 @@ local __O = {};
         if ____opt_967 ~= nil then
             ____opt_967 = ____opt_967.minions
         end
-        __O[1749] = ____opt_967
+        __O[1762] = ____opt_967
         if ____t_969(____opt_967) then
-            ____t_result_970 = __O[1749]
+            ____t_result_970 = __O[1762]
         else
             ____t_result_970 = __arrL({}, 0)
         end
@@ -4828,9 +4828,9 @@ local __O = {};
         if ____opt_980 ~= nil then
             ____opt_980 = ____opt_980.collectibles
         end
-        __O[1750] = ____opt_980
+        __O[1763] = ____opt_980
         if ____t_982(____opt_980) then
-            ____t_result_983 = __O[1750]
+            ____t_result_983 = __O[1763]
         else
             ____t_result_983 = __arrL({}, 0)
         end
@@ -4861,9 +4861,9 @@ local __O = {};
             "filter",
             function(____, p) return p.type == "carPart" end
         )
-        __O[1751] = ____callq_987_result_988
+        __O[1764] = ____callq_987_result_988
         if ____t_989(____callq_987_result_988) then
-            ____t_result_992 = __O[1751]
+            ____t_result_992 = __O[1764]
         else
             local ____opt_990 = window.WorldData
             if ____opt_990 ~= nil then
@@ -4871,9 +4871,9 @@ local __O = {};
             end
             ____t_result_992 = ____opt_990
         end
-        __O[1752] = ____t_result_992
+        __O[1765] = ____t_result_992
         if ____t_993(____t_result_992) then
-            ____t_result_994 = __O[1752]
+            ____t_result_994 = __O[1765]
         else
             ____t_result_994 = __arrL({{id = "motor", scene = 0, x = 1300, y = 300}, {id = "ventoinha", scene = 0, x = 2500, y = 280}, {id = "cilindro", scene = 0, x = 4200, y = 285}}, 3)
         end
@@ -4915,9 +4915,9 @@ local __O = {};
             "filter",
             function(____, p) return p.type == "notebook" end
         )
-        __O[1753] = ____callq_1003_result_1004
+        __O[1766] = ____callq_1003_result_1004
         if ____t_1005(____callq_1003_result_1004) then
-            ____t_result_1008 = __O[1753]
+            ____t_result_1008 = __O[1766]
         else
             local ____opt_1006 = window.WorldData
             if ____opt_1006 ~= nil then
@@ -4925,9 +4925,9 @@ local __O = {};
             end
             ____t_result_1008 = ____opt_1006
         end
-        __O[1754] = ____t_result_1008
+        __O[1767] = ____t_result_1008
         if ____t_1009(____t_result_1008) then
-            ____t_result_1010 = __O[1754]
+            ____t_result_1010 = __O[1767]
         else
             ____t_result_1010 = __arrL({{id = "caderno-1", scene = 1, x = 1600, y = 355}, {id = "caderno-2", scene = 1, x = 2100, y = 350}, {id = "caderno-3", scene = 1, x = 2900, y = 235}}, 3)
         end
@@ -4980,45 +4980,45 @@ local __O = {};
         local ____t_result_1019
         local ____t_1018 = __t
         local ____temp_1017 = not __t(__L1.vehicle)
-        __O[1755] = ____temp_1017
+        __O[1768] = ____temp_1017
         if ____t_1018(____temp_1017) then
-            ____t_result_1019 = __O[1755]
+            ____t_result_1019 = __O[1768]
         else
             ____t_result_1019 = __L1.activeBoss
         end
-        __O[1756] = ____t_result_1019
+        __O[1769] = ____t_result_1019
         if ____t_1020(____t_result_1019) then
-            ____t_result_1021 = __O[1756]
+            ____t_result_1021 = __O[1769]
         else
             ____t_result_1021 = __L1.arena
         end
-        __O[1757] = ____t_result_1021
+        __O[1770] = ____t_result_1021
         if ____t_1022(____t_result_1021) then
-            ____t_result_1023 = __O[1757]
+            ____t_result_1023 = __O[1770]
         else
             ____t_result_1023 = __L1.room
         end
-        __O[1758] = ____t_result_1023
+        __O[1771] = ____t_result_1023
         if ____t_1024(____t_result_1023) then
-            ____t_result_1025 = __O[1758]
+            ____t_result_1025 = __O[1771]
         else
             ____t_result_1025 = __L1.cutscene
         end
-        __O[1759] = ____t_result_1025
+        __O[1772] = ____t_result_1025
         if ____t_1026(____t_result_1025) then
-            ____t_result_1027 = __O[1759]
+            ____t_result_1027 = __O[1772]
         else
             ____t_result_1027 = __L1.routeTransition
         end
-        __O[1760] = ____t_result_1027
+        __O[1773] = ____t_result_1027
         if ____t_1028(____t_result_1027) then
-            ____t_result_1029 = __O[1760]
+            ____t_result_1029 = __O[1773]
         else
             ____t_result_1029 = __L1.defeated
         end
-        __O[1761] = ____t_result_1029
+        __O[1774] = ____t_result_1029
         if ____t_1030(____t_result_1029) then
-            ____t_result_1031 = __O[1761]
+            ____t_result_1031 = __O[1774]
         else
             ____t_result_1031 = __L1.ollyanEncounter
         end
@@ -5035,9 +5035,9 @@ local __O = {};
         local ____t_result_1042
         local ____t_1034 = __t
         local ____temp_1033 = not __isInteger(n) or __lt(n, 0)
-        __O[1762] = ____temp_1033
+        __O[1775] = ____temp_1033
         if ____t_1034(____temp_1033) then
-            ____t_result_1042 = __O[1762]
+            ____t_result_1042 = __O[1775]
         else
             local ____ge_result_1041 = __ge(
                 n,
@@ -5088,51 +5088,51 @@ local __O = {};
         else
             ____t_result_1044 = __L1.won
         end
-        __O[1763] = ____t_result_1044
+        __O[1776] = ____t_result_1044
         if ____t_1045(____t_result_1044) then
-            ____t_result_1046 = __O[1763]
+            ____t_result_1046 = __O[1776]
         else
             ____t_result_1046 = __L1.chapterEnded
         end
-        __O[1764] = ____t_result_1046
+        __O[1777] = ____t_result_1046
         if ____t_1047(____t_result_1046) then
-            ____t_result_1048 = __O[1764]
+            ____t_result_1048 = __O[1777]
         else
             ____t_result_1048 = __L1.defeated
         end
-        __O[1765] = ____t_result_1048
+        __O[1778] = ____t_result_1048
         if ____t_1049(____t_result_1048) then
-            ____t_result_1050 = __O[1765]
+            ____t_result_1050 = __O[1778]
         else
             ____t_result_1050 = __L1.room
         end
-        __O[1766] = ____t_result_1050
+        __O[1779] = ____t_result_1050
         if ____t_1051(____t_result_1050) then
-            ____t_result_1052 = __O[1766]
+            ____t_result_1052 = __O[1779]
         else
             ____t_result_1052 = __L1.arena
         end
-        __O[1767] = ____t_result_1052
+        __O[1780] = ____t_result_1052
         if ____t_1053(____t_result_1052) then
-            ____t_result_1054 = __O[1767]
+            ____t_result_1054 = __O[1780]
         else
             ____t_result_1054 = __L1.cutscene
         end
-        __O[1768] = ____t_result_1054
+        __O[1781] = ____t_result_1054
         if ____t_1055(____t_result_1054) then
-            ____t_result_1056 = __O[1768]
+            ____t_result_1056 = __O[1781]
         else
             ____t_result_1056 = __L1.activity
         end
-        __O[1769] = ____t_result_1056
+        __O[1782] = ____t_result_1056
         if ____t_1057(____t_result_1056) then
-            ____t_result_1058 = __O[1769]
+            ____t_result_1058 = __O[1782]
         else
             ____t_result_1058 = __L1.routeTransition
         end
-        __O[1770] = ____t_result_1058
+        __O[1783] = ____t_result_1058
         if ____t_1059(____t_result_1058) then
-            ____t_result_1060 = __O[1770]
+            ____t_result_1060 = __O[1783]
         else
             ____t_result_1060 = __L1.ollyanEncounter
         end
@@ -5193,9 +5193,9 @@ local __O = {};
             if ____opt_1065 ~= nil then
                 ____opt_1065 = ____opt_1065.duracao
             end
-            __O[1771] = ____opt_1065
+            __O[1784] = ____opt_1065
             if ____t_1067(____opt_1065) then
-                ____t_result_1068 = __O[1771]
+                ____t_result_1068 = __O[1784]
             else
                 ____t_result_1068 = 0.01
             end
@@ -5247,11 +5247,11 @@ local __O = {};
             else
                 ____t_result_1076 = __L1.q.mota
             end
-            __O[1772] = ____t_result_1076
+            __O[1785] = ____t_result_1076
             if ____t_1077(____t_result_1076) then
                 ____t_result_1078 = __L1.q.miqueias
             else
-                ____t_result_1078 = __O[1772]
+                ____t_result_1078 = __O[1785]
             end
             ____temp_1080 = not ____t_1079(____t_result_1078)
         end
@@ -5276,11 +5276,11 @@ local __O = {};
             else
                 ____t_result_1082 = __L1.q.trained
             end
-            __O[1773] = ____t_result_1082
+            __O[1786] = ____t_result_1082
             if ____t_1083(____t_result_1082) then
                 ____t_result_1084 = __L1.q.menezes
             else
-                ____t_result_1084 = __O[1773]
+                ____t_result_1084 = __O[1786]
             end
             ____temp_1086 = not ____t_1085(____t_result_1084)
         end
@@ -5328,9 +5328,9 @@ local __O = {};
         local ____t_result_1099
         local ____t_1093 = __t
         local ____get_result_1092 = __get(__L1.scenes, n)
-        __O[1774] = ____get_result_1092
+        __O[1787] = ____get_result_1092
         if ____t_1093(____get_result_1092) then
-            ____t_result_1099 = __O[1774]
+            ____t_result_1099 = __O[1787]
         else
             local ____opt_1096 = window.LugaresC1
             if ____opt_1096 ~= nil then
@@ -5342,9 +5342,9 @@ local __O = {};
             end
             ____t_result_1099 = ____opt_result_1098
         end
-        __O[1775] = ____t_result_1099
+        __O[1788] = ____t_result_1099
         if ____t_1100(____t_result_1099) then
-            ____t_result_1101 = __O[1775]
+            ____t_result_1101 = __O[1788]
         else
             ____t_result_1101 = "Itabuna"
         end
@@ -5613,9 +5613,9 @@ local __O = {};
         local ____t_result_1138
         local ____t_1137 = __t
         local ____temp_1136 = not __t(__L1.q.npcVisits) or type(__L1.q.npcVisits) ~= "table"
-        __O[1776] = ____temp_1136
+        __O[1789] = ____temp_1136
         if ____t_1137(____temp_1136) then
-            ____t_result_1138 = __O[1776]
+            ____t_result_1138 = __O[1789]
         else
             ____t_result_1138 = __isArray(__L1.q.npcVisits)
         end
@@ -5625,9 +5625,9 @@ local __O = {};
         local ____t_result_1142
         local ____t_1141 = __t
         local ____TS__Number_result_1140 = __TS__Number(__get(__L1.q.npcVisits, id))
-        __O[1777] = ____TS__Number_result_1140
+        __O[1790] = ____TS__Number_result_1140
         if ____t_1141(____TS__Number_result_1140) then
-            ____t_result_1142 = __O[1777]
+            ____t_result_1142 = __O[1790]
         else
             ____t_result_1142 = 0
         end
@@ -5650,11 +5650,11 @@ local __O = {};
         local ____t_result_1150
         local ____t_1149 = __t
         local ____isArray_result_1148 = __isArray(lines)
-        __O[1778] = ____isArray_result_1148
+        __O[1791] = ____isArray_result_1148
         if ____t_1149(____isArray_result_1148) then
             ____t_result_1150 = __len(lines)
         else
-            ____t_result_1150 = __O[1778]
+            ____t_result_1150 = __O[1791]
         end
         if ____t_1151(____t_result_1150) then
             return lines
@@ -5671,9 +5671,9 @@ local __O = {};
             ____callq_1154(____opt_1152, "split", " ·"),
             0
         )
-        __O[1779] = ____getq_1155_result_1156
+        __O[1792] = ____getq_1155_result_1156
         if ____t_1157(____getq_1155_result_1156) then
-            ____t_result_1158 = __O[1779]
+            ____t_result_1158 = __O[1792]
         else
             ____t_result_1158 = id
         end
@@ -5692,9 +5692,9 @@ local __O = {};
         local ____t_result_1161
         local ____t_1160 = __t
         local ____get_result_1159 = __get(fallback, id)
-        __O[1780] = ____get_result_1159
+        __O[1793] = ____get_result_1159
         if ____t_1160(____get_result_1159) then
-            ____t_result_1161 = __O[1780]
+            ____t_result_1161 = __O[1793]
         else
             ____t_result_1161 = __arrL({"A resenha muda, mas o bolo continua no assunto."}, 1)
         end
@@ -5724,9 +5724,9 @@ local __O = {};
         if ____opt_1164 ~= nil then
             ____opt_result_1166 = ____opt_1164(____opt_1164, {say = __L1.say, toast = __L1.toast})
         end
-        __O[1781] = ____opt_result_1166
+        __O[1794] = ____opt_result_1166
         if ____t_1167(____opt_result_1166) then
-            ____t_result_1168 = __O[1781]
+            ____t_result_1168 = __O[1794]
         else
             ____t_result_1168 = false
         end
@@ -5749,9 +5749,9 @@ local __O = {};
             local ____t_result_1173
             local ____t_1172 = __t
             local ____temp_1171 = __L1.ollyanEncounter.stage == "intro"
-            __O[1782] = ____temp_1171
+            __O[1795] = ____temp_1171
             if ____t_1172(____temp_1171) then
-                ____t_result_1173 = __O[1782]
+                ____t_result_1173 = __O[1795]
             else
                 ____t_result_1173 = __call(
                     __arrL({"victory", "defeat"}, 2),
@@ -5780,39 +5780,39 @@ local __O = {};
         local ____t_result_1177
         local ____t_1176 = __t
         local ____temp_1175 = not __t(__L1.started)
-        __O[1783] = ____temp_1175
+        __O[1796] = ____temp_1175
         if ____t_1176(____temp_1175) then
-            ____t_result_1177 = __O[1783]
+            ____t_result_1177 = __O[1796]
         else
             ____t_result_1177 = __L1.paused
         end
-        __O[1784] = ____t_result_1177
+        __O[1797] = ____t_result_1177
         if ____t_1178(____t_result_1177) then
-            ____t_result_1179 = __O[1784]
+            ____t_result_1179 = __O[1797]
         else
             ____t_result_1179 = __L1.chapterEnded
         end
-        __O[1785] = ____t_result_1179
+        __O[1798] = ____t_result_1179
         if ____t_1180(____t_result_1179) then
-            ____t_result_1181 = __O[1785]
+            ____t_result_1181 = __O[1798]
         else
             ____t_result_1181 = __L1.defeated
         end
-        __O[1786] = ____t_result_1181
+        __O[1799] = ____t_result_1181
         if ____t_1182(____t_result_1181) then
-            ____t_result_1183 = __O[1786]
+            ____t_result_1183 = __O[1799]
         else
             ____t_result_1183 = __L1.cutscene
         end
-        __O[1787] = ____t_result_1183
+        __O[1800] = ____t_result_1183
         if ____t_1184(____t_result_1183) then
-            ____t_result_1185 = __O[1787]
+            ____t_result_1185 = __O[1800]
         else
             ____t_result_1185 = __L1.routeTransition
         end
-        __O[1788] = ____t_result_1185
+        __O[1801] = ____t_result_1185
         if ____t_1186(____t_result_1185) then
-            ____t_result_1187 = __O[1788]
+            ____t_result_1187 = __O[1801]
         else
             ____t_result_1187 = window.performance:now() < __L1.dialogueReopenUntil
         end
@@ -5842,31 +5842,31 @@ local __O = {};
             end
             ____temp_1192 = not ____t_1191(____opt_1189)
         end
-        __O[1789] = ____temp_1192
+        __O[1802] = ____temp_1192
         if ____t_1193(____temp_1192) then
             ____t_result_1194 = not __t(__L1.arena)
         else
-            ____t_result_1194 = __O[1789]
+            ____t_result_1194 = __O[1802]
         end
-        __O[1790] = ____t_result_1194
+        __O[1803] = ____t_result_1194
         if ____t_1195(____t_result_1194) then
             ____t_result_1196 = not __t(__L1.room)
         else
-            ____t_result_1196 = __O[1790]
+            ____t_result_1196 = __O[1803]
         end
-        __O[1791] = ____t_result_1196
+        __O[1804] = ____t_result_1196
         if ____t_1197(____t_result_1196) then
             ____t_result_1198 = not __t(__L1.activeBoss)
         else
-            ____t_result_1198 = __O[1791]
+            ____t_result_1198 = __O[1804]
         end
-        __O[1792] = ____t_result_1198
+        __O[1805] = ____t_result_1198
         if ____t_1199(____t_result_1198) then
             ____t_result_1200 = not __t(__L1.vehicle)
         else
-            ____t_result_1200 = __O[1792]
+            ____t_result_1200 = __O[1805]
         end
-        __O[1793] = ____t_result_1200
+        __O[1806] = ____t_result_1200
         if ____t_1201(____t_result_1200) then
             local ____opt_1204 = window.Balanco
             if ____opt_1204 ~= nil then
@@ -5878,7 +5878,7 @@ local __O = {};
             end
             ____t_result_1207 = ____opt_result_1206
         else
-            ____t_result_1207 = __O[1793]
+            ____t_result_1207 = __O[1806]
         end
         if ____t_1208(____t_result_1207) then
             __L1:releaseInputs()
@@ -5905,31 +5905,31 @@ local __O = {};
             end
             ____temp_1212 = not ____t_1211(____opt_1209)
         end
-        __O[1794] = ____temp_1212
+        __O[1807] = ____temp_1212
         if ____t_1213(____temp_1212) then
             ____t_result_1214 = not __t(__L1.arena)
         else
-            ____t_result_1214 = __O[1794]
+            ____t_result_1214 = __O[1807]
         end
-        __O[1795] = ____t_result_1214
+        __O[1808] = ____t_result_1214
         if ____t_1215(____t_result_1214) then
             ____t_result_1216 = not __t(__L1.room)
         else
-            ____t_result_1216 = __O[1795]
+            ____t_result_1216 = __O[1808]
         end
-        __O[1796] = ____t_result_1216
+        __O[1809] = ____t_result_1216
         if ____t_1217(____t_result_1216) then
             ____t_result_1218 = not __t(__L1.activeBoss)
         else
-            ____t_result_1218 = __O[1796]
+            ____t_result_1218 = __O[1809]
         end
-        __O[1797] = ____t_result_1218
+        __O[1810] = ____t_result_1218
         if ____t_1219(____t_result_1218) then
             ____t_result_1220 = not __t(__L1.vehicle)
         else
-            ____t_result_1220 = __O[1797]
+            ____t_result_1220 = __O[1810]
         end
-        __O[1798] = ____t_result_1220
+        __O[1811] = ____t_result_1220
         if ____t_1221(____t_result_1220) then
             local ____opt_1224 = window.Fliperama
             if ____opt_1224 ~= nil then
@@ -5941,7 +5941,7 @@ local __O = {};
             end
             ____t_result_1227 = ____opt_result_1226
         else
-            ____t_result_1227 = __O[1798]
+            ____t_result_1227 = __O[1811]
         end
         if ____t_1228(____t_result_1227) then
             __L1:releaseInputs()
@@ -6002,9 +6002,9 @@ local __O = {};
                     __get(pertinho, 0)
                 )
             end
-            __O[1799] = ____opt_result_1242
+            __O[1812] = ____opt_result_1242
             if ____t_1243(____opt_result_1242) then
-                ____t_result_1249 = __O[1799]
+                ____t_result_1249 = __O[1812]
             else
                 local ____opt_1246 = window.LugaresC1
                 if ____opt_1246 ~= nil then
@@ -6019,9 +6019,9 @@ local __O = {};
                 end
                 ____t_result_1249 = ____opt_result_1248
             end
-            __O[1800] = ____t_result_1249
+            __O[1813] = ____t_result_1249
             if ____t_1250(____t_result_1249) then
-                ____t_result_1251 = __O[1800]
+                ____t_result_1251 = __O[1813]
             else
                 ____t_result_1251 = __get(pertinho, 0) == "mc_batidao"
             end
@@ -6029,11 +6029,11 @@ local __O = {};
         else
             ____t_result_1252 = pertinho
         end
-        __O[1801] = ____t_result_1252
+        __O[1814] = ____t_result_1252
         if ____t_1253(____t_result_1252) then
             ____t_result_1254 = math.abs(__get(pertinho, 1).x - __L1.player.x) < 75
         else
-            ____t_result_1254 = __O[1801]
+            ____t_result_1254 = __O[1814]
         end
         local missao = ____t_result_1254
         local ____t_result_1255
@@ -6051,11 +6051,11 @@ local __O = {};
         local ____t_result_1258
         local ____t_1257 = __t
         local ____temp_1256 = not __t(missao) and not __t(__L1.room)
-        __O[1802] = ____temp_1256
+        __O[1815] = ____temp_1256
         if ____t_1257(____temp_1256) then
             ____t_result_1258 = not __t(__L1.arena)
         else
-            ____t_result_1258 = __O[1802]
+            ____t_result_1258 = __O[1815]
         end
         if ____t_1259(____t_result_1258) then
             local ____get_1269 = __get
@@ -6067,9 +6067,9 @@ local __O = {};
             if ____opt_1260 ~= nil then
                 ____opt_1260 = ____opt_1260.doors
             end
-            __O[1803] = ____opt_1260
+            __O[1816] = ____opt_1260
             if ____t_1262(____opt_1260) then
-                ____t_result_1263 = __O[1803]
+                ____t_result_1263 = __O[1816]
             else
                 ____t_result_1263 = __arrL({}, 0)
             end
@@ -6082,11 +6082,11 @@ local __O = {};
                             local ____t_result_1266
                             local ____t_1265 = __t
                             local ____temp_1264 = d.scene == __L1.scene and math.abs(__L1.player.x - d.x) < 105
-                            __O[1804] = ____temp_1264
+                            __O[1817] = ____temp_1264
                             if ____t_1265(____temp_1264) then
                                 ____t_result_1266 = math.abs(__L1.player.y - __L1.FLOOR) < 65
                             else
-                                ____t_result_1266 = __O[1804]
+                                ____t_result_1266 = __O[1817]
                             end
                             return ____t_result_1266
                         end
@@ -6109,19 +6109,19 @@ local __O = {};
         local ____t_result_1272
         local ____t_1271 = __t
         local ____temp_1270 = not __t(missao) and not __t(__L1.room)
-        __O[1805] = ____temp_1270
+        __O[1818] = ____temp_1270
         if ____t_1271(____temp_1270) then
             ____t_result_1272 = not __t(__L1.arena)
         else
-            ____t_result_1272 = __O[1805]
+            ____t_result_1272 = __O[1818]
         end
-        __O[1806] = ____t_result_1272
+        __O[1819] = ____t_result_1272
         if ____t_1273(____t_result_1272) then
             ____t_result_1274 = not __t(__L1.vehicle)
         else
-            ____t_result_1274 = __O[1806]
+            ____t_result_1274 = __O[1819]
         end
-        __O[1808] = ____t_result_1274
+        __O[1821] = ____t_result_1274
         if ____t_1275(____t_result_1274) then
             local ____opt_1285 = window.WorldLife
             if ____opt_1285 ~= nil then
@@ -6146,9 +6146,9 @@ local __O = {};
                                 local ____t_result_1279
                                 local ____t_1278 = __t
                                 local ____math_floor_result_1277 = math.floor(count)
-                                __O[1807] = ____math_floor_result_1277
+                                __O[1820] = ____math_floor_result_1277
                                 if ____t_1278(____math_floor_result_1277) then
-                                    ____t_result_1279 = __O[1807]
+                                    ____t_result_1279 = __O[1820]
                                 else
                                     ____t_result_1279 = 0
                                 end
@@ -6167,7 +6167,7 @@ local __O = {};
             end
             ____t_result_1288 = ____opt_result_1287
         else
-            ____t_result_1288 = __O[1808]
+            ____t_result_1288 = __O[1821]
         end
         if ____t_1289(____t_result_1288) then
             return
@@ -6279,9 +6279,9 @@ local __O = {};
             if quest ~= nil then
                 ____opt_result_1297 = quest.lines
             end
-            __O[1809] = ____opt_result_1297
+            __O[1822] = ____opt_result_1297
             if ____t_1298(____opt_result_1297) then
-                ____t_result_1299 = __O[1809]
+                ____t_result_1299 = __O[1822]
             else
                 ____t_result_1299 = __L1:visitTalk(id)
             end
@@ -6404,9 +6404,9 @@ local __O = {};
                                 local ____t_result_1332
                                 local ____t_1331 = __t
                                 local ____get_result_1330 = __get(__L1.items, key)
-                                __O[1810] = ____get_result_1330
+                                __O[1823] = ____get_result_1330
                                 if ____t_1331(____get_result_1330) then
-                                    ____t_result_1332 = __O[1810]
+                                    ____t_result_1332 = __O[1823]
                                 else
                                     ____t_result_1332 = 0
                                 end
@@ -6845,9 +6845,9 @@ local __O = {};
                 if ____opt_1369 ~= nil then
                     ____opt_result_1371 = ____opt_1369(____opt_1369)
                 end
-                __O[1811] = ____opt_result_1371
+                __O[1824] = ____opt_result_1371
                 if ____t_1372(____opt_result_1371) then
-                    ____t_result_1373 = __O[1811]
+                    ____t_result_1373 = __O[1824]
                 else
                     ____t_result_1373 = "normal"
                 end
@@ -6916,9 +6916,9 @@ local __O = {};
         local ____t_result_1395
         local ____t_1394 = __t
         local ____TS__Number_result_1393 = __TS__Number(__L1.q.bivoltCharges)
-        __O[1812] = ____TS__Number_result_1393
+        __O[1825] = ____TS__Number_result_1393
         if ____t_1394(____TS__Number_result_1393) then
-            ____t_result_1395 = __O[1812]
+            ____t_result_1395 = __O[1825]
         else
             ____t_result_1395 = 0
         end
@@ -6939,11 +6939,11 @@ local __O = {};
         else
             ____t_result_1398 = __L1.q.npcVisits
         end
-        __O[1813] = ____t_result_1398
+        __O[1826] = ____t_result_1398
         if ____t_1399(____t_result_1398) then
             ____t_result_1400 = not __isArray(__L1.q.npcVisits)
         else
-            ____t_result_1400 = __O[1813]
+            ____t_result_1400 = __O[1826]
         end
         if ____t_1401(____t_result_1400) then
             ____t_result_1402 = __assign({}, __L1.q.npcVisits)
@@ -7004,9 +7004,9 @@ local __O = {};
                 local ____t_result_1425
                 local ____t_1424 = __t
                 local ____TS__Number_result_1423 = __TS__Number(__get(data.items, k))
-                __O[1814] = ____TS__Number_result_1423
+                __O[1827] = ____TS__Number_result_1423
                 if ____t_1424(____TS__Number_result_1423) then
-                    ____t_result_1425 = __O[1814]
+                    ____t_result_1425 = __O[1827]
                 else
                     ____t_result_1425 = 0
                 end
@@ -7062,9 +7062,9 @@ local __O = {};
             ____opt_result_1441 = data.weapon
         end
         local ____TS__Number_result_1442 = __TS__Number(____opt_result_1441)
-        __O[1815] = ____TS__Number_result_1442
+        __O[1828] = ____TS__Number_result_1442
         if ____t_1443(____TS__Number_result_1442) then
-            ____t_result_1444 = __O[1815]
+            ____t_result_1444 = __O[1828]
         else
             ____t_result_1444 = 0
         end
@@ -7199,9 +7199,9 @@ local __O = {};
                     local ____t_result_1473
                     local ____t_1472 = __t
                     local ____temp_1471 = not __t(__L1.q.jorgeSeen)
-                    __O[1816] = ____temp_1471
+                    __O[1829] = ____temp_1471
                     if ____t_1472(____temp_1471) then
-                        ____t_result_1473 = __O[1816]
+                        ____t_result_1473 = __O[1829]
                     else
                         ____t_result_1473 = __L1.q.jorgeStarted
                     end
@@ -7323,21 +7323,21 @@ local __O = {};
         local ____t_result_1490
         local ____t_1489 = __t
         local ____temp_1488 = not __t(__L1.started)
-        __O[1817] = ____temp_1488
+        __O[1830] = ____temp_1488
         if ____t_1489(____temp_1488) then
-            ____t_result_1490 = __O[1817]
+            ____t_result_1490 = __O[1830]
         else
             ____t_result_1490 = __L1.won
         end
-        __O[1818] = ____t_result_1490
+        __O[1831] = ____t_result_1490
         if ____t_1491(____t_result_1490) then
-            ____t_result_1492 = __O[1818]
+            ____t_result_1492 = __O[1831]
         else
             ____t_result_1492 = __L1.defeated
         end
-        __O[1819] = ____t_result_1492
+        __O[1832] = ____t_result_1492
         if ____t_1493(____t_result_1492) then
-            ____t_result_1494 = __O[1819]
+            ____t_result_1494 = __O[1832]
         else
             ____t_result_1494 = __L1.chapterEnded
         end
@@ -7399,9 +7399,9 @@ local __O = {};
         local ____t_result_1510
         local ____t_1507 = __t
         local ____temp_1506 = __L1.scene >= 12
-        __O[1820] = ____temp_1506
+        __O[1833] = ____temp_1506
         if ____t_1507(____temp_1506) then
-            ____t_result_1510 = __O[1820]
+            ____t_result_1510 = __O[1833]
         else
             local ____opt_1508 = window.C2Luta
             if ____opt_1508 ~= nil then
@@ -7409,11 +7409,11 @@ local __O = {};
             end
             ____t_result_1510 = ____opt_1508
         end
-        __O[1821] = ____t_result_1510
+        __O[1834] = ____t_result_1510
         if ____t_1511(____t_result_1510) then
             ____t_result_1512 = window.CampanhaPoderes
         else
-            ____t_result_1512 = __O[1821]
+            ____t_result_1512 = __O[1834]
         end
         if ____t_1513(____t_result_1512) then
             if __t(__call(
@@ -7455,45 +7455,45 @@ local __O = {};
         local ____t_result_1518
         local ____t_1517 = __t
         local ____temp_1516 = not __t(__L1.started)
-        __O[1822] = ____temp_1516
+        __O[1835] = ____temp_1516
         if ____t_1517(____temp_1516) then
-            ____t_result_1518 = __O[1822]
+            ____t_result_1518 = __O[1835]
         else
             ____t_result_1518 = __L1.paused
         end
-        __O[1823] = ____t_result_1518
+        __O[1836] = ____t_result_1518
         if ____t_1519(____t_result_1518) then
-            ____t_result_1520 = __O[1823]
+            ____t_result_1520 = __O[1836]
         else
             ____t_result_1520 = __L1.dialog
         end
-        __O[1824] = ____t_result_1520
+        __O[1837] = ____t_result_1520
         if ____t_1521(____t_result_1520) then
-            ____t_result_1522 = __O[1824]
+            ____t_result_1522 = __O[1837]
         else
             ____t_result_1522 = __L1.won
         end
-        __O[1825] = ____t_result_1522
+        __O[1838] = ____t_result_1522
         if ____t_1523(____t_result_1522) then
-            ____t_result_1524 = __O[1825]
+            ____t_result_1524 = __O[1838]
         else
             ____t_result_1524 = __L1.defeated
         end
-        __O[1826] = ____t_result_1524
+        __O[1839] = ____t_result_1524
         if ____t_1525(____t_result_1524) then
-            ____t_result_1526 = __O[1826]
+            ____t_result_1526 = __O[1839]
         else
             ____t_result_1526 = __L1.room
         end
-        __O[1827] = ____t_result_1526
+        __O[1840] = ____t_result_1526
         if ____t_1527(____t_result_1526) then
-            ____t_result_1528 = __O[1827]
+            ____t_result_1528 = __O[1840]
         else
             ____t_result_1528 = __L1.cutscene
         end
-        __O[1828] = ____t_result_1528
+        __O[1841] = ____t_result_1528
         if ____t_1529(____t_result_1528) then
-            ____t_result_1530 = __O[1828]
+            ____t_result_1530 = __O[1841]
         else
             ____t_result_1530 = __L1.routeTransition
         end
@@ -7578,21 +7578,21 @@ local __O = {};
         local ____t_result_1537
         local ____t_1536 = __t
         local ____temp_1535 = not __t(__L1.started)
-        __O[1829] = ____temp_1535
+        __O[1842] = ____temp_1535
         if ____t_1536(____temp_1535) then
-            ____t_result_1537 = __O[1829]
+            ____t_result_1537 = __O[1842]
         else
             ____t_result_1537 = __L1.paused
         end
-        __O[1830] = ____t_result_1537
+        __O[1843] = ____t_result_1537
         if ____t_1538(____t_result_1537) then
-            ____t_result_1539 = __O[1830]
+            ____t_result_1539 = __O[1843]
         else
             ____t_result_1539 = __L1.dialog
         end
-        __O[1831] = ____t_result_1539
+        __O[1844] = ____t_result_1539
         if ____t_1540(____t_result_1539) then
-            ____t_result_1543 = __O[1831]
+            ____t_result_1543 = __O[1844]
         else
             local ____opt_1541 = __L1.training
             if ____opt_1541 ~= nil then
@@ -7600,39 +7600,39 @@ local __O = {};
             end
             ____t_result_1543 = ____opt_1541
         end
-        __O[1832] = ____t_result_1543
+        __O[1845] = ____t_result_1543
         if ____t_1544(____t_result_1543) then
-            ____t_result_1545 = __O[1832]
+            ____t_result_1545 = __O[1845]
         else
             ____t_result_1545 = __L1.activity
         end
-        __O[1833] = ____t_result_1545
+        __O[1846] = ____t_result_1545
         if ____t_1546(____t_result_1545) then
-            ____t_result_1547 = __O[1833]
+            ____t_result_1547 = __O[1846]
         else
             ____t_result_1547 = __L1.won
         end
-        __O[1834] = ____t_result_1547
+        __O[1847] = ____t_result_1547
         if ____t_1548(____t_result_1547) then
-            ____t_result_1549 = __O[1834]
+            ____t_result_1549 = __O[1847]
         else
             ____t_result_1549 = __L1.defeated
         end
-        __O[1835] = ____t_result_1549
+        __O[1848] = ____t_result_1549
         if ____t_1550(____t_result_1549) then
-            ____t_result_1551 = __O[1835]
+            ____t_result_1551 = __O[1848]
         else
             ____t_result_1551 = __L1.room
         end
-        __O[1836] = ____t_result_1551
+        __O[1849] = ____t_result_1551
         if ____t_1552(____t_result_1551) then
-            ____t_result_1553 = __O[1836]
+            ____t_result_1553 = __O[1849]
         else
             ____t_result_1553 = __L1.cutscene
         end
-        __O[1837] = ____t_result_1553
+        __O[1850] = ____t_result_1553
         if ____t_1554(____t_result_1553) then
-            ____t_result_1555 = __O[1837]
+            ____t_result_1555 = __O[1850]
         else
             ____t_result_1555 = __L1.routeTransition
         end
@@ -7737,21 +7737,21 @@ local __O = {};
         local ____t_result_1559
         local ____t_1558 = __t
         local ____temp_1557 = not __t(__L1.started)
-        __O[1838] = ____temp_1557
+        __O[1851] = ____temp_1557
         if ____t_1558(____temp_1557) then
-            ____t_result_1559 = __O[1838]
+            ____t_result_1559 = __O[1851]
         else
             ____t_result_1559 = __L1.paused
         end
-        __O[1839] = ____t_result_1559
+        __O[1852] = ____t_result_1559
         if ____t_1560(____t_result_1559) then
-            ____t_result_1561 = __O[1839]
+            ____t_result_1561 = __O[1852]
         else
             ____t_result_1561 = __L1.dialog
         end
-        __O[1840] = ____t_result_1561
+        __O[1853] = ____t_result_1561
         if ____t_1562(____t_result_1561) then
-            ____t_result_1565 = __O[1840]
+            ____t_result_1565 = __O[1853]
         else
             local ____opt_1563 = __L1.training
             if ____opt_1563 ~= nil then
@@ -7759,39 +7759,39 @@ local __O = {};
             end
             ____t_result_1565 = ____opt_1563
         end
-        __O[1841] = ____t_result_1565
+        __O[1854] = ____t_result_1565
         if ____t_1566(____t_result_1565) then
-            ____t_result_1567 = __O[1841]
+            ____t_result_1567 = __O[1854]
         else
             ____t_result_1567 = __L1.activity
         end
-        __O[1842] = ____t_result_1567
+        __O[1855] = ____t_result_1567
         if ____t_1568(____t_result_1567) then
-            ____t_result_1569 = __O[1842]
+            ____t_result_1569 = __O[1855]
         else
             ____t_result_1569 = __L1.won
         end
-        __O[1843] = ____t_result_1569
+        __O[1856] = ____t_result_1569
         if ____t_1570(____t_result_1569) then
-            ____t_result_1571 = __O[1843]
+            ____t_result_1571 = __O[1856]
         else
             ____t_result_1571 = __L1.defeated
         end
-        __O[1844] = ____t_result_1571
+        __O[1857] = ____t_result_1571
         if ____t_1572(____t_result_1571) then
-            ____t_result_1573 = __O[1844]
+            ____t_result_1573 = __O[1857]
         else
             ____t_result_1573 = __L1.room
         end
-        __O[1845] = ____t_result_1573
+        __O[1858] = ____t_result_1573
         if ____t_1574(____t_result_1573) then
-            ____t_result_1575 = __O[1845]
+            ____t_result_1575 = __O[1858]
         else
             ____t_result_1575 = __L1.cutscene
         end
-        __O[1846] = ____t_result_1575
+        __O[1859] = ____t_result_1575
         if ____t_1576(____t_result_1575) then
-            ____t_result_1577 = __O[1846]
+            ____t_result_1577 = __O[1859]
         else
             ____t_result_1577 = __L1.routeTransition
         end
@@ -7809,11 +7809,11 @@ local __O = {};
                 local ____t_result_1581
                 local ____t_1580 = __t
                 local ____temp_1579 = e.type == "nikolas" and __gt(e.hp, 0)
-                __O[1847] = ____temp_1579
+                __O[1860] = ____temp_1579
                 if ____t_1580(____temp_1579) then
                     ____t_result_1581 = math.abs(e.x - __L1.player.x) < 560
                 else
-                    ____t_result_1581 = __O[1847]
+                    ____t_result_1581 = __O[1860]
                 end
                 return ____t_result_1581
             end
@@ -7860,14 +7860,14 @@ local __O = {};
         local ____t_result_1591
         local ____t_1590 = __t
         local ____temp_1589 = kind == "dinner"
-        __O[1848] = ____temp_1589
+        __O[1861] = ____temp_1589
         if ____t_1590(____temp_1589) then
             ____t_result_1591 = __L1.scene ~= __L1.npcInfo.amanda.scene or __getq(
                 __L1:closestNPC(),
                 0
             ) ~= "amanda"
         else
-            ____t_result_1591 = __O[1848]
+            ____t_result_1591 = __O[1861]
         end
         if ____t_1592(____t_result_1591) then
             return false
@@ -7895,21 +7895,21 @@ local __O = {};
         local ____t_result_1595
         local ____t_1594 = __t
         local ____temp_1593 = not __t(__L1.activity)
-        __O[1849] = ____temp_1593
+        __O[1862] = ____temp_1593
         if ____t_1594(____temp_1593) then
-            ____t_result_1595 = __O[1849]
+            ____t_result_1595 = __O[1862]
         else
             ____t_result_1595 = __L1.paused
         end
-        __O[1850] = ____t_result_1595
+        __O[1863] = ____t_result_1595
         if ____t_1596(____t_result_1595) then
-            ____t_result_1597 = __O[1850]
+            ____t_result_1597 = __O[1863]
         else
             ____t_result_1597 = __L1.dialog
         end
-        __O[1851] = ____t_result_1597
+        __O[1864] = ____t_result_1597
         if ____t_1598(____t_result_1597) then
-            ____t_result_1599 = __O[1851]
+            ____t_result_1599 = __O[1864]
         else
             ____t_result_1599 = __L1.cutscene
         end
@@ -8093,21 +8093,21 @@ local __O = {};
             ____opt_1615 = ____opt_1615.active
         end
         local ____temp_1618 = not ____t_1617(____opt_1615)
-        __O[1852] = ____temp_1618
+        __O[1865] = ____temp_1618
         if ____t_1619(____temp_1618) then
-            ____t_result_1620 = __O[1852]
+            ____t_result_1620 = __O[1865]
         else
             ____t_result_1620 = __L1.paused
         end
-        __O[1853] = ____t_result_1620
+        __O[1866] = ____t_result_1620
         if ____t_1621(____t_result_1620) then
-            ____t_result_1622 = __O[1853]
+            ____t_result_1622 = __O[1866]
         else
             ____t_result_1622 = __L1.dialog
         end
-        __O[1854] = ____t_result_1622
+        __O[1867] = ____t_result_1622
         if ____t_1623(____t_result_1622) then
-            ____t_result_1624 = __O[1854]
+            ____t_result_1624 = __O[1867]
         else
             ____t_result_1624 = __gt(__L1.training.cooldown, 0)
         end
@@ -8726,11 +8726,11 @@ local __O = {};
                                     local ____t_result_1641
                                     local ____t_1640 = __t
                                     local ____temp_1639 = not __t(m.dead) and __TS__MathSign(m.x - __L1.player.x) == __L1.player.facing
-                                    __O[1855] = ____temp_1639
+                                    __O[1868] = ____temp_1639
                                     if ____t_1640(____temp_1639) then
                                         ____t_result_1641 = math.abs(m.x - __L1.player.x) < 650
                                     else
-                                        ____t_result_1641 = __O[1855]
+                                        ____t_result_1641 = __O[1868]
                                     end
                                     return ____t_result_1641
                                 end
@@ -8971,11 +8971,11 @@ local __O = {};
                 local ____t_result_1695
                 local ____t_1694 = __t
                 local ____temp_1693 = __gt(r.hp, 0) and math.abs(r.x - __L1.player.x) < radius
-                __O[1856] = ____temp_1693
+                __O[1869] = ____temp_1693
                 if ____t_1694(____temp_1693) then
                     ____t_result_1695 = math.abs(r.y - __L1.player.y) < 90
                 else
-                    ____t_result_1695 = __O[1856]
+                    ____t_result_1695 = __O[1869]
                 end
                 if ____t_1696(____t_result_1695) then
                     r:onDano(damage)
@@ -8994,11 +8994,11 @@ local __O = {};
             else
                 ____t_result_1697 = areaG
             end
-            __O[1857] = ____t_result_1697
+            __O[1870] = ____t_result_1697
             if ____t_1698(____t_result_1697) then
                 ____t_result_1699 = e.type ~= "igor"
             else
-                ____t_result_1699 = __O[1857]
+                ____t_result_1699 = __O[1870]
             end
             if ____t_1700(____t_result_1699) then
                 ____t_result_1713 = window.Golpes:gasAcerta(
@@ -9045,9 +9045,9 @@ local __O = {};
                             local ____t_result_1707
                             local ____t_1704 = __t
                             local ____temp_1703 = math.abs(e.x - __L1.player.x) < radius
-                            __O[1858] = ____temp_1703
+                            __O[1871] = ____temp_1703
                             if ____t_1704(____temp_1703) then
-                                ____t_result_1707 = __O[1858]
+                                ____t_result_1707 = __O[1871]
                             else
                                 local ____opt_1705 = e.conquista
                                 if ____opt_1705 ~= nil then
@@ -9055,11 +9055,11 @@ local __O = {};
                                 end
                                 ____t_result_1707 = ____opt_1705 ~= nil and math.abs(e.conquista.gemeoX - __L1.player.x) < radius
                             end
-                            __O[1859] = ____t_result_1707
+                            __O[1872] = ____t_result_1707
                             if ____t_1708(____t_result_1707) then
                                 ____t_result_1709 = math.abs(e.y - __L1.player.y) < 180
                             else
-                                ____t_result_1709 = __O[1859]
+                                ____t_result_1709 = __O[1872]
                             end
                             ____t_result_1710 = ____t_result_1709
                         end
@@ -9078,7 +9078,7 @@ local __O = {};
             local ____t_result_1718
             local ____t_1716 = __t
             local ____temp_1715 = not __t(m.dead)
-            __O[1860] = ____temp_1715
+            __O[1873] = ____temp_1715
             if ____t_1716(____temp_1715) then
                 local ____t_result_1717
                 if __t(areaG) then
@@ -9091,7 +9091,7 @@ local __O = {};
                 end
                 ____t_result_1718 = ____t_result_1717
             else
-                ____t_result_1718 = __O[1860]
+                ____t_result_1718 = __O[1873]
             end
             if ____t_1719(____t_result_1718) then
                 __L1:damageMinion(m, damage)
@@ -9105,7 +9105,7 @@ local __O = {};
                 local ____t_result_1730
                 local ____t_1721 = __t
                 local ____temp_1720 = a.owner == "enemy"
-                __O[1862] = ____temp_1720
+                __O[1875] = ____temp_1720
                 if ____t_1721(____temp_1720) then
                     local ____t_result_1729
                     if __t(areaG) then
@@ -9116,9 +9116,9 @@ local __O = {};
                         local ____t_result_1724
                         local ____t_1723 = __t
                         local ____table_r_1722 = window.Golpes:formaTiro(a).r
-                        __O[1861] = ____table_r_1722
+                        __O[1874] = ____table_r_1722
                         if ____t_1723(____table_r_1722) then
-                            ____t_result_1724 = __O[1861]
+                            ____t_result_1724 = __O[1874]
                         else
                             ____t_result_1724 = 10
                         end
@@ -9134,7 +9134,7 @@ local __O = {};
                     end
                     ____t_result_1730 = ____t_result_1729
                 else
-                    ____t_result_1730 = __O[1862]
+                    ____t_result_1730 = __O[1875]
                 end
                 return not ____t_1731(____t_result_1730)
             end
@@ -9333,51 +9333,51 @@ local __O = {};
         local ____t_result_1746
         local ____t_1745 = __t
         local ____temp_1744 = not __t(__L1.started)
-        __O[1863] = ____temp_1744
+        __O[1876] = ____temp_1744
         if ____t_1745(____temp_1744) then
-            ____t_result_1746 = __O[1863]
+            ____t_result_1746 = __O[1876]
         else
             ____t_result_1746 = __L1.paused
         end
-        __O[1864] = ____t_result_1746
+        __O[1877] = ____t_result_1746
         if ____t_1747(____t_result_1746) then
-            ____t_result_1748 = __O[1864]
+            ____t_result_1748 = __O[1877]
         else
             ____t_result_1748 = __L1.dialog
         end
-        __O[1865] = ____t_result_1748
+        __O[1878] = ____t_result_1748
         if ____t_1749(____t_result_1748) then
-            ____t_result_1750 = __O[1865]
+            ____t_result_1750 = __O[1878]
         else
             ____t_result_1750 = __L1.won
         end
-        __O[1866] = ____t_result_1750
+        __O[1879] = ____t_result_1750
         if ____t_1751(____t_result_1750) then
-            ____t_result_1752 = __O[1866]
+            ____t_result_1752 = __O[1879]
         else
             ____t_result_1752 = __L1.defeated
         end
-        __O[1867] = ____t_result_1752
+        __O[1880] = ____t_result_1752
         if ____t_1753(____t_result_1752) then
-            ____t_result_1754 = __O[1867]
+            ____t_result_1754 = __O[1880]
         else
             ____t_result_1754 = __L1.room
         end
-        __O[1868] = ____t_result_1754
+        __O[1881] = ____t_result_1754
         if ____t_1755(____t_result_1754) then
-            ____t_result_1756 = __O[1868]
+            ____t_result_1756 = __O[1881]
         else
             ____t_result_1756 = __L1.cutscene
         end
-        __O[1869] = ____t_result_1756
+        __O[1882] = ____t_result_1756
         if ____t_1757(____t_result_1756) then
-            ____t_result_1758 = __O[1869]
+            ____t_result_1758 = __O[1882]
         else
             ____t_result_1758 = __L1.activity
         end
-        __O[1870] = ____t_result_1758
+        __O[1883] = ____t_result_1758
         if ____t_1759(____t_result_1758) then
-            ____t_result_1762 = __O[1870]
+            ____t_result_1762 = __O[1883]
         else
             local ____opt_1760 = __L1.training
             if ____opt_1760 ~= nil then
@@ -9385,9 +9385,9 @@ local __O = {};
             end
             ____t_result_1762 = ____opt_1760
         end
-        __O[1871] = ____t_result_1762
+        __O[1884] = ____t_result_1762
         if ____t_1763(____t_result_1762) then
-            ____t_result_1764 = __O[1871]
+            ____t_result_1764 = __O[1884]
         else
             ____t_result_1764 = __L1.routeTransition
         end
@@ -9412,15 +9412,15 @@ local __O = {};
         local ____t_result_1768
         local ____t_1767 = __t
         local ____temp_1766 = __L1:keyHeld("left")
-        __O[1872] = ____temp_1766
+        __O[1885] = ____temp_1766
         if ____t_1767(____temp_1766) then
-            ____t_result_1768 = __O[1872]
+            ____t_result_1768 = __O[1885]
         else
             ____t_result_1768 = __L1.touch.left
         end
-        __O[1873] = ____t_result_1768
+        __O[1886] = ____t_result_1768
         if ____t_1769(____t_result_1768) then
-            ____t_result_1770 = __O[1873]
+            ____t_result_1770 = __O[1886]
         else
             ____t_result_1770 = __L1.joystick.x < -0.15
         end
@@ -9433,15 +9433,15 @@ local __O = {};
             local ____t_result_1774
             local ____t_1773 = __t
             local ____temp_1772 = __L1:keyHeld("right")
-            __O[1874] = ____temp_1772
+            __O[1887] = ____temp_1772
             if ____t_1773(____temp_1772) then
-                ____t_result_1774 = __O[1874]
+                ____t_result_1774 = __O[1887]
             else
                 ____t_result_1774 = __L1.touch.right
             end
-            __O[1875] = ____t_result_1774
+            __O[1888] = ____t_result_1774
             if ____t_1775(____t_result_1774) then
-                ____t_result_1776 = __O[1875]
+                ____t_result_1776 = __O[1888]
             else
                 ____t_result_1776 = __L1.joystick.x > 0.15
             end
@@ -9506,45 +9506,45 @@ local __O = {};
             end
             ____t_result_1788 = ____opt_result_1787
         end
-        __O[1876] = ____t_result_1788
+        __O[1889] = ____t_result_1788
         if ____t_1789(____t_result_1788) then
-            ____t_result_1790 = __O[1876]
+            ____t_result_1790 = __O[1889]
         else
             ____t_result_1790 = not __t(__L1.started)
         end
-        __O[1877] = ____t_result_1790
+        __O[1890] = ____t_result_1790
         if ____t_1791(____t_result_1790) then
-            ____t_result_1792 = __O[1877]
+            ____t_result_1792 = __O[1890]
         else
             ____t_result_1792 = __L1.paused
         end
-        __O[1878] = ____t_result_1792
+        __O[1891] = ____t_result_1792
         if ____t_1793(____t_result_1792) then
-            ____t_result_1794 = __O[1878]
+            ____t_result_1794 = __O[1891]
         else
             ____t_result_1794 = __L1.dialog
         end
-        __O[1879] = ____t_result_1794
+        __O[1892] = ____t_result_1794
         if ____t_1795(____t_result_1794) then
-            ____t_result_1796 = __O[1879]
+            ____t_result_1796 = __O[1892]
         else
             ____t_result_1796 = __L1.defeated
         end
-        __O[1880] = ____t_result_1796
+        __O[1893] = ____t_result_1796
         if ____t_1797(____t_result_1796) then
-            ____t_result_1798 = __O[1880]
+            ____t_result_1798 = __O[1893]
         else
             ____t_result_1798 = __L1.cutscene
         end
-        __O[1881] = ____t_result_1798
+        __O[1894] = ____t_result_1798
         if ____t_1799(____t_result_1798) then
-            ____t_result_1800 = __O[1881]
+            ____t_result_1800 = __O[1894]
         else
             ____t_result_1800 = __L1.activity
         end
-        __O[1882] = ____t_result_1800
+        __O[1895] = ____t_result_1800
         if ____t_1801(____t_result_1800) then
-            ____t_result_1803 = __O[1882]
+            ____t_result_1803 = __O[1895]
         else
             local ____t_result_1802
             if __t(__L1.room) then
@@ -9554,9 +9554,9 @@ local __O = {};
             end
             ____t_result_1803 = ____t_result_1802
         end
-        __O[1883] = ____t_result_1803
+        __O[1896] = ____t_result_1803
         if ____t_1804(____t_result_1803) then
-            ____t_result_1806 = __O[1883]
+            ____t_result_1806 = __O[1896]
         else
             local ____t_result_1805
             if __t(__L1.arena) then
@@ -9566,9 +9566,9 @@ local __O = {};
             end
             ____t_result_1806 = ____t_result_1805
         end
-        __O[1884] = ____t_result_1806
+        __O[1897] = ____t_result_1806
         if ____t_1807(____t_result_1806) then
-            ____t_result_1810 = __O[1884]
+            ____t_result_1810 = __O[1897]
         else
             local ____opt_1808 = __L1.training
             if ____opt_1808 ~= nil then
@@ -9576,9 +9576,9 @@ local __O = {};
             end
             ____t_result_1810 = ____opt_1808
         end
-        __O[1885] = ____t_result_1810
+        __O[1898] = ____t_result_1810
         if ____t_1811(____t_result_1810) then
-            ____t_result_1812 = __O[1885]
+            ____t_result_1812 = __O[1898]
         else
             ____t_result_1812 = __L1.routeTransition
         end
@@ -9592,17 +9592,17 @@ local __O = {};
         if ____opt_1814 ~= nil then
             ____opt_1814 = ____opt_1814:transformJoystick(x, y)
         end
-        __O[1888] = ____opt_1814
+        __O[1901] = ____opt_1814
         if ____t_1816(____opt_1814) then
-            ____t_result_1826 = __O[1888]
+            ____t_result_1826 = __O[1901]
         else
             local ____L1_clamp_1820 = __L1.clamp
             local ____t_result_1819
             local ____t_1818 = __t
             local ____TS__Number_result_1817 = __TS__Number(x)
-            __O[1886] = ____TS__Number_result_1817
+            __O[1899] = ____TS__Number_result_1817
             if ____t_1818(____TS__Number_result_1817) then
-                ____t_result_1819 = __O[1886]
+                ____t_result_1819 = __O[1899]
             else
                 ____t_result_1819 = 0
             end
@@ -9611,9 +9611,9 @@ local __O = {};
             local ____t_result_1823
             local ____t_1822 = __t
             local ____TS__Number_result_1821 = __TS__Number(y)
-            __O[1887] = ____TS__Number_result_1821
+            __O[1900] = ____TS__Number_result_1821
             if ____t_1822(____TS__Number_result_1821) then
-                ____t_result_1823 = __O[1887]
+                ____t_result_1823 = __O[1900]
             else
                 ____t_result_1823 = 0
             end
@@ -9632,7 +9632,7 @@ local __O = {};
         local ____t_result_1834
         local ____t_1828 = __t
         local ____temp_1827 = __L1.scene == 11 and not __t(__L1.vehicle)
-        __O[1889] = ____temp_1827
+        __O[1902] = ____temp_1827
         if ____t_1828(____temp_1827) then
             local ____gt_1833 = __gt
             local ____L1_player_x_1832 = __L1.player.x
@@ -9646,7 +9646,7 @@ local __O = {};
             end
             ____t_result_1834 = ____gt_1833(____L1_player_x_1832, ____opt_1829_1831 - 70)
         else
-            ____t_result_1834 = __O[1889]
+            ____t_result_1834 = __O[1902]
         end
         if ____t_1835(____t_result_1834) then
             __L1:toast("Dentro do galpão não dá pra ligar o carro. Volte até a porta.")
@@ -9661,9 +9661,9 @@ local __O = {};
         else
             ____t_result_1836 = __L1.cutscene
         end
-        __O[1890] = ____t_result_1836
+        __O[1903] = ____t_result_1836
         if ____t_1837(____t_result_1836) then
-            ____t_result_1838 = __O[1890]
+            ____t_result_1838 = __O[1903]
         else
             ____t_result_1838 = __L1.arena
         end
@@ -9711,9 +9711,9 @@ local __O = {};
         local ____t_result_1844
         local ____t_1841 = __t
         local ____temp_1840 = __le(e.hp, 0) or e.state == "underground"
-        __O[1891] = ____temp_1840
+        __O[1904] = ____temp_1840
         if ____t_1841(____temp_1840) then
-            ____t_result_1844 = __O[1891]
+            ____t_result_1844 = __O[1904]
         else
             local ____opt_1842 = e.conquista
             if ____opt_1842 ~= nil then
@@ -9721,45 +9721,45 @@ local __O = {};
             end
             ____t_result_1844 = ____opt_1842 == "phaseChange"
         end
-        __O[1892] = ____t_result_1844
+        __O[1905] = ____t_result_1844
         if ____t_1845(____t_result_1844) then
-            ____t_result_1846 = __O[1892]
+            ____t_result_1846 = __O[1905]
         else
             ____t_result_1846 = __gt(e.damageLock, 0)
         end
-        __O[1893] = ____t_result_1846
+        __O[1906] = ____t_result_1846
         if ____t_1847(____t_result_1846) then
-            ____t_result_1848 = __O[1893]
+            ____t_result_1848 = __O[1906]
         else
             ____t_result_1848 = __L1.dialog
         end
-        __O[1894] = ____t_result_1848
+        __O[1907] = ____t_result_1848
         if ____t_1849(____t_result_1848) then
-            ____t_result_1850 = __O[1894]
+            ____t_result_1850 = __O[1907]
         else
             ____t_result_1850 = __L1.won
         end
-        __O[1895] = ____t_result_1850
+        __O[1908] = ____t_result_1850
         if ____t_1851(____t_result_1850) then
-            ____t_result_1852 = __O[1895]
+            ____t_result_1852 = __O[1908]
         else
             ____t_result_1852 = __L1.defeated
         end
-        __O[1896] = ____t_result_1852
+        __O[1909] = ____t_result_1852
         if ____t_1853(____t_result_1852) then
-            ____t_result_1854 = __O[1896]
+            ____t_result_1854 = __O[1909]
         else
             ____t_result_1854 = __L1.room
         end
-        __O[1897] = ____t_result_1854
+        __O[1910] = ____t_result_1854
         if ____t_1855(____t_result_1854) then
-            ____t_result_1856 = __O[1897]
+            ____t_result_1856 = __O[1910]
         else
             ____t_result_1856 = __L1.cutscene
         end
-        __O[1898] = ____t_result_1856
+        __O[1911] = ____t_result_1856
         if ____t_1857(____t_result_1856) then
-            ____t_result_1859 = __O[1898]
+            ____t_result_1859 = __O[1911]
         else
             local ____t_result_1858
             if __t(__L1.arena) then
@@ -9890,7 +9890,7 @@ local __O = {};
         local ____t_result_1885
         local ____t_1881 = __t
         local ____temp_1880 = __le(e.hp, 0) and e.type ~= "giant"
-        __O[1899] = ____temp_1880
+        __O[1912] = ____temp_1880
         if ____t_1881(____temp_1880) then
             local ____lt_1884 = __lt
             local ____t_result_1882
@@ -9907,7 +9907,7 @@ local __O = {};
             end
             ____t_result_1885 = ____lt_1884(____t_result_1882, ____t_result_1883)
         else
-            ____t_result_1885 = __O[1899]
+            ____t_result_1885 = __O[1912]
         end
         if ____t_1886(____t_result_1885) then
             e.hp = 0
@@ -9927,11 +9927,11 @@ local __O = {};
         local ____t_result_1892
         local ____t_1891 = __t
         local ____le_result_1890 = __le(e.hp, 0)
-        __O[1900] = ____le_result_1890
+        __O[1913] = ____le_result_1890
         if ____t_1891(____le_result_1890) then
             ____t_result_1892 = __L1.sandbox
         else
-            ____t_result_1892 = __O[1900]
+            ____t_result_1892 = __O[1913]
         end
         if ____t_1893(____t_result_1892) then
             e.hp = 0
@@ -9966,9 +9966,9 @@ local __O = {};
             local ____t_result_1900
             local ____t_1899 = __t
             local ____temp_1898 = __L1:nomeBoss(e.type)
-            __O[1901] = ____temp_1898
+            __O[1914] = ____temp_1898
             if ____t_1899(____temp_1898) then
-                ____t_result_1900 = __O[1901]
+                ____t_result_1900 = __O[1914]
             else
                 ____t_result_1900 = ""
             end
@@ -10092,33 +10092,33 @@ local __O = {};
         local ____t_result_1909
         local ____t_1908 = __t
         local ____gt_result_1907 = __gt(__L1.player.inv, 0)
-        __O[1902] = ____gt_result_1907
+        __O[1915] = ____gt_result_1907
         if ____t_1908(____gt_result_1907) then
-            ____t_result_1909 = __O[1902]
+            ____t_result_1909 = __O[1915]
         else
             ____t_result_1909 = __L1.won
         end
-        __O[1903] = ____t_result_1909
+        __O[1916] = ____t_result_1909
         if ____t_1910(____t_result_1909) then
-            ____t_result_1911 = __O[1903]
+            ____t_result_1911 = __O[1916]
         else
             ____t_result_1911 = __L1.defeated
         end
-        __O[1904] = ____t_result_1911
+        __O[1917] = ____t_result_1911
         if ____t_1912(____t_result_1911) then
-            ____t_result_1913 = __O[1904]
+            ____t_result_1913 = __O[1917]
         else
             ____t_result_1913 = __L1.dialog
         end
-        __O[1905] = ____t_result_1913
+        __O[1918] = ____t_result_1913
         if ____t_1914(____t_result_1913) then
-            ____t_result_1915 = __O[1905]
+            ____t_result_1915 = __O[1918]
         else
             ____t_result_1915 = __L1.paused
         end
-        __O[1906] = ____t_result_1915
+        __O[1919] = ____t_result_1915
         if ____t_1916(____t_result_1915) then
-            ____t_result_1917 = __O[1906]
+            ____t_result_1917 = __O[1919]
         else
             ____t_result_1917 = __L1.routeTransition
         end
@@ -10154,9 +10154,9 @@ local __O = {};
             end
             ____opt_result_1930 = ____opt_1928(____opt_1928, ____n_1926, ____opt_1924)
         end
-        __O[1907] = ____opt_result_1930
+        __O[1920] = ____opt_result_1930
         if ____t_1931(____opt_result_1930) then
-            ____t_result_1932 = __O[1907]
+            ____t_result_1932 = __O[1920]
         else
             ____t_result_1932 = n
         end
@@ -10291,45 +10291,45 @@ local __O = {};
         local ____t_result_1939
         local ____t_1938 = __t
         local ____temp_1937 = not __t(__L1.started) or not __t(__L1.q.nikolas)
-        __O[1908] = ____temp_1937
+        __O[1921] = ____temp_1937
         if ____t_1938(____temp_1937) then
-            ____t_result_1939 = __O[1908]
+            ____t_result_1939 = __O[1921]
         else
             ____t_result_1939 = __L1.defeated
         end
-        __O[1909] = ____t_result_1939
+        __O[1922] = ____t_result_1939
         if ____t_1940(____t_result_1939) then
-            ____t_result_1941 = __O[1909]
+            ____t_result_1941 = __O[1922]
         else
             ____t_result_1941 = __L1.activeBoss
         end
-        __O[1910] = ____t_result_1941
+        __O[1923] = ____t_result_1941
         if ____t_1942(____t_result_1941) then
-            ____t_result_1943 = __O[1910]
+            ____t_result_1943 = __O[1923]
         else
             ____t_result_1943 = __L1.arena
         end
-        __O[1911] = ____t_result_1943
+        __O[1924] = ____t_result_1943
         if ____t_1944(____t_result_1943) then
-            ____t_result_1945 = __O[1911]
+            ____t_result_1945 = __O[1924]
         else
             ____t_result_1945 = __L1.room
         end
-        __O[1912] = ____t_result_1945
+        __O[1925] = ____t_result_1945
         if ____t_1946(____t_result_1945) then
-            ____t_result_1947 = __O[1912]
+            ____t_result_1947 = __O[1925]
         else
             ____t_result_1947 = __L1.routeTransition
         end
-        __O[1913] = ____t_result_1947
+        __O[1926] = ____t_result_1947
         if ____t_1948(____t_result_1947) then
-            ____t_result_1949 = __O[1913]
+            ____t_result_1949 = __O[1926]
         else
             ____t_result_1949 = __L1.dialog
         end
-        __O[1914] = ____t_result_1949
+        __O[1927] = ____t_result_1949
         if ____t_1950(____t_result_1949) then
-            ____t_result_1953 = __O[1914]
+            ____t_result_1953 = __O[1927]
         else
             local ____opt_1951 = __L1.training
             if ____opt_1951 ~= nil then
@@ -10337,21 +10337,21 @@ local __O = {};
             end
             ____t_result_1953 = ____opt_1951
         end
-        __O[1915] = ____t_result_1953
+        __O[1928] = ____t_result_1953
         if ____t_1954(____t_result_1953) then
-            ____t_result_1955 = __O[1915]
+            ____t_result_1955 = __O[1928]
         else
             ____t_result_1955 = __L1.activity
         end
-        __O[1916] = ____t_result_1955
+        __O[1929] = ____t_result_1955
         if ____t_1956(____t_result_1955) then
-            ____t_result_1957 = __O[1916]
+            ____t_result_1957 = __O[1929]
         else
             ____t_result_1957 = __L1.cutscene
         end
-        __O[1917] = ____t_result_1957
+        __O[1930] = ____t_result_1957
         if ____t_1958(____t_result_1957) then
-            ____t_result_1959 = __O[1917]
+            ____t_result_1959 = __O[1930]
         else
             ____t_result_1959 = __L1.ollyanEncounter
         end
@@ -10513,13 +10513,13 @@ local __O = {};
         else
             ____t_result_1974 = b
         end
-        __O[1918] = ____t_result_1974
+        __O[1931] = ____t_result_1974
         if ____t_1975(____t_result_1974) then
             ____t_result_1976 = __gt(b.hp, 0)
         else
-            ____t_result_1976 = __O[1918]
+            ____t_result_1976 = __O[1931]
         end
-        __O[1919] = ____t_result_1976
+        __O[1932] = ____t_result_1976
         if ____t_1977(____t_result_1976) then
             local ____ge_1980 = __ge
             local ____t_result_1978
@@ -10536,19 +10536,19 @@ local __O = {};
             end
             ____t_result_1981 = ____ge_1980(____t_result_1978, ____t_result_1979)
         else
-            ____t_result_1981 = __O[1919]
+            ____t_result_1981 = __O[1932]
         end
-        __O[1920] = ____t_result_1981
+        __O[1933] = ____t_result_1981
         if ____t_1982(____t_result_1981) then
             ____t_result_1983 = b.max
         else
-            ____t_result_1983 = __O[1920]
+            ____t_result_1983 = __O[1933]
         end
-        __O[1921] = ____t_result_1983
+        __O[1934] = ____t_result_1983
         if ____t_1984(____t_result_1983) then
             ____t_result_1985 = b.hp / b.max < 0.35
         else
-            ____t_result_1985 = __O[1921]
+            ____t_result_1985 = __O[1934]
         end
         if ____t_1986(____t_result_1985) then
             local pulse = 0.5 + 0.5 * math.sin(__L1.time * 9)
@@ -10781,7 +10781,7 @@ local __O = {};
         local ____t_result_1999
         local ____t_1993 = __t
         local ____temp_1992 = __L1.scene >= 12
-        __O[1922] = ____temp_1992
+        __O[1935] = ____temp_1992
         if ____t_1993(____temp_1992) then
             local ____opt_1996 = window.CampanhaCenarios
             if ____opt_1996 ~= nil then
@@ -10799,7 +10799,7 @@ local __O = {};
             end
             ____t_result_1999 = ____opt_result_1998
         else
-            ____t_result_1999 = __O[1922]
+            ____t_result_1999 = __O[1935]
         end
         if ____t_2000(____t_result_1999) then
             return
@@ -10812,9 +10812,9 @@ local __O = {};
         local ____t_result_2003
         local ____t_2002 = __t
         local ____temp_2001 = __L1.scene == 0 or __L1.scene == 7
-        __O[1923] = ____temp_2001
+        __O[1936] = ____temp_2001
         if ____t_2002(____temp_2001) then
-            ____t_result_2003 = __O[1923]
+            ____t_result_2003 = __O[1936]
         else
             ____t_result_2003 = __L1.scene == 3
         end
@@ -10915,9 +10915,9 @@ local __O = {};
                     local ____t_result_2008
                     local ____t_2007 = __t
                     local ____temp_2006 = h.type == "smoke"
-                    __O[1924] = ____temp_2006
+                    __O[1937] = ____temp_2006
                     if ____t_2007(____temp_2006) then
-                        ____t_result_2008 = __O[1924]
+                        ____t_result_2008 = __O[1937]
                     else
                         ____t_result_2008 = h.smoke
                     end
@@ -10929,9 +10929,9 @@ local __O = {};
                         local ____t_result_2012
                         local ____t_2011 = __t
                         local ____temp_2010 = h.type == "astral"
-                        __O[1925] = ____temp_2010
+                        __O[1938] = ____temp_2010
                         if ____t_2011(____temp_2010) then
-                            ____t_result_2012 = __O[1925]
+                            ____t_result_2012 = __O[1938]
                         else
                             ____t_result_2012 = h.astral
                         end
@@ -11209,13 +11209,13 @@ local __O = {};
         local ____t_result_2050
         local ____t_2049 = __t
         local ____temp_2048 = h.type == "ring"
-        __O[1926] = ____temp_2048
+        __O[1939] = ____temp_2048
         if ____t_2049(____temp_2048) then
             ____t_result_2050 = h.catarro
         else
-            ____t_result_2050 = __O[1926]
+            ____t_result_2050 = __O[1939]
         end
-        __O[1927] = ____t_result_2050
+        __O[1940] = ____t_result_2050
         if ____t_2051(____t_result_2050) then
             local ____opt_2052 = window.NikolasFx
             if ____opt_2052 ~= nil then
@@ -11223,7 +11223,7 @@ local __O = {};
             end
             ____t_result_2054 = ____opt_2052
         else
-            ____t_result_2054 = __O[1927]
+            ____t_result_2054 = __O[1940]
         end
         if ____t_2055(____t_result_2054) then
             window.NikolasFx:onda(__L1.ctx, h, __L1.time, lite)
@@ -11721,21 +11721,21 @@ local __O = {};
         local ____t_result_2091
         local ____t_2090 = __t
         local ____temp_2089 = not __t(__L1.started)
-        __O[1928] = ____temp_2089
+        __O[1941] = ____temp_2089
         if ____t_2090(____temp_2089) then
-            ____t_result_2091 = __O[1928]
+            ____t_result_2091 = __O[1941]
         else
             ____t_result_2091 = __L1.paused
         end
-        __O[1929] = ____t_result_2091
+        __O[1942] = ____t_result_2091
         if ____t_2092(____t_result_2091) then
-            ____t_result_2093 = __O[1929]
+            ____t_result_2093 = __O[1942]
         else
             ____t_result_2093 = __L1.dialog
         end
-        __O[1930] = ____t_result_2093
+        __O[1943] = ____t_result_2093
         if ____t_2094(____t_result_2093) then
-            ____t_result_2095 = __O[1930]
+            ____t_result_2095 = __O[1943]
         else
             ____t_result_2095 = __L1.defeated
         end
@@ -11940,9 +11940,9 @@ local __O = {};
                 __L1:closestNPC(),
                 0
             )
-            __O[1931] = ____getq_result_2122
+            __O[1944] = ____getq_result_2122
             if ____t_2123(____getq_result_2122) then
-                ____t_result_2124 = __O[1931]
+                ____t_result_2124 = __O[1944]
             else
                 ____t_result_2124 = nil
             end
@@ -11974,17 +11974,17 @@ local __O = {};
         else
             ____t_result_2125 = __L1.player.ground
         end
-        __O[1932] = ____t_result_2125
+        __O[1945] = ____t_result_2125
         if ____t_2126(____t_result_2125) then
             ____t_result_2127 = not __t(__L1.activeBoss)
         else
-            ____t_result_2127 = __O[1932]
+            ____t_result_2127 = __O[1945]
         end
-        __O[1933] = ____t_result_2127
+        __O[1946] = ____t_result_2127
         if ____t_2128(____t_result_2127) then
             ____t_result_2129 = not __t(__L1.arena)
         else
-            ____t_result_2129 = __O[1933]
+            ____t_result_2129 = __O[1946]
         end
         if ____t_2130(____t_result_2129) then
             __L1.player.hp = math.min(
@@ -12001,9 +12001,9 @@ local __O = {};
             __L1:closestNPC(),
             0
         )
-        __O[1934] = ____getq_result_2131
+        __O[1947] = ____getq_result_2131
         if ____t_2132(____getq_result_2131) then
-            ____t_result_2133 = __O[1934]
+            ____t_result_2133 = __O[1947]
         else
             ____t_result_2133 = nil
         end
@@ -12209,11 +12209,11 @@ local __O = {};
             else
                 ____t_result_2162 = __L1.vehicle
             end
-            __O[1935] = ____t_result_2162
+            __O[1948] = ____t_result_2162
             if ____t_2163(____t_result_2162) then
                 ____t_result_2164 = __gt(__L1.player.x, porta)
             else
-                ____t_result_2164 = __O[1935]
+                ____t_result_2164 = __O[1948]
             end
             if ____t_2165(____t_result_2164) then
                 __L1.player.x = porta
@@ -12238,17 +12238,17 @@ local __O = {};
             local ____t_result_2173
             local ____t_2172 = __t
             local ____temp_2171 = pl ~= nil
-            __O[1936] = ____temp_2171
+            __O[1949] = ____temp_2171
             if ____t_2172(____temp_2171) then
                 ____t_result_2173 = __L1.vehicle
             else
-                ____t_result_2173 = __O[1936]
+                ____t_result_2173 = __O[1949]
             end
-            __O[1937] = ____t_result_2173
+            __O[1950] = ____t_result_2173
             if ____t_2174(____t_result_2173) then
                 ____t_result_2175 = __gt(__L1.player.x, pl)
             else
-                ____t_result_2175 = __O[1937]
+                ____t_result_2175 = __O[1950]
             end
             if ____t_2176(____t_result_2175) then
                 __L1.player.x = pl
@@ -12265,13 +12265,13 @@ local __O = {};
         local ____t_result_2179
         local ____t_2178 = __t
         local ____temp_2177 = __L1.scene == 11 and not __t(__L1.q.ollyan)
-        __O[1938] = ____temp_2177
+        __O[1951] = ____temp_2177
         if ____t_2178(____temp_2177) then
             ____t_result_2179 = __L1.ollyanRetryGrace <= 0
         else
-            ____t_result_2179 = __O[1938]
+            ____t_result_2179 = __O[1951]
         end
-        __O[1940] = ____t_result_2179
+        __O[1953] = ____t_result_2179
         if ____t_2180(____t_result_2179) then
             local ____L1_player_x_2188 = __L1.player.x
             local ____t_result_2187
@@ -12284,21 +12284,21 @@ local __O = {};
             if ____opt_2183 ~= nil then
                 ____opt_result_2185 = ____opt_2183(____opt_2183).x
             end
-            __O[1939] = ____opt_result_2185
+            __O[1952] = ____opt_result_2185
             if ____t_2186(____opt_result_2185) then
-                ____t_result_2187 = __O[1939]
+                ____t_result_2187 = __O[1952]
             else
                 ____t_result_2187 = 3260
             end
             ____t_result_2189 = math.abs(____L1_player_x_2188 - ____t_result_2187) < 145
         else
-            ____t_result_2189 = __O[1940]
+            ____t_result_2189 = __O[1953]
         end
-        __O[1941] = ____t_result_2189
+        __O[1954] = ____t_result_2189
         if ____t_2190(____t_result_2189) then
             ____t_result_2191 = __L1.q.lucas
         else
-            ____t_result_2191 = __O[1941]
+            ____t_result_2191 = __O[1954]
         end
         if ____t_2192(____t_result_2191) then
             __L1:beginOllyanEncounter()
@@ -12320,11 +12320,11 @@ local __O = {};
         else
             ____t_result_2193 = __L1.vehicle
         end
-        __O[1942] = ____t_result_2193
+        __O[1955] = ____t_result_2193
         if ____t_2194(____t_result_2193) then
             ____t_result_2195 = __lt(__L1.player.x, 38) or __gt(__L1.player.x, __L1.WORLD - 38)
         else
-            ____t_result_2195 = __O[1942]
+            ____t_result_2195 = __O[1955]
         end
         if ____t_2196(____t_result_2195) then
             __L1.routeEdgeCooldown = 2
@@ -12352,27 +12352,27 @@ local __O = {};
         local ____t_result_2199
         local ____t_2198 = __t
         local ____temp_2197 = __L1.scene ~= 1
-        __O[1943] = ____temp_2197
+        __O[1956] = ____temp_2197
         if ____t_2198(____temp_2197) then
-            ____t_result_2199 = __O[1943]
+            ____t_result_2199 = __O[1956]
         else
             ____t_result_2199 = __L1.marcoTrapTriggered
         end
-        __O[1944] = ____t_result_2199
+        __O[1957] = ____t_result_2199
         if ____t_2200(____t_result_2199) then
-            ____t_result_2201 = __O[1944]
+            ____t_result_2201 = __O[1957]
         else
             ____t_result_2201 = not __t(__L1.activeBoss)
         end
-        __O[1945] = ____t_result_2201
+        __O[1958] = ____t_result_2201
         if ____t_2202(____t_result_2201) then
-            ____t_result_2203 = __O[1945]
+            ____t_result_2203 = __O[1958]
         else
             ____t_result_2203 = __L1.activeBoss.type ~= "marco"
         end
-        __O[1946] = ____t_result_2203
+        __O[1959] = ____t_result_2203
         if ____t_2204(____t_result_2203) then
-            ____t_result_2207 = __O[1946]
+            ____t_result_2207 = __O[1959]
         else
             local ____opt_2205 = __L1.arena
             if ____opt_2205 ~= nil then
@@ -12389,9 +12389,9 @@ local __O = {};
         if ____opt_2209 ~= nil then
             ____opt_2209 = ____opt_2209.sarueTraps
         end
-        __O[1947] = ____opt_2209
+        __O[1960] = ____opt_2209
         if ____t_2211(____opt_2209) then
-            ____t_result_2212 = __O[1947]
+            ____t_result_2212 = __O[1960]
         else
             ____t_result_2212 = __arrL({{scene = 1, x = 3420, width = 70}}, 1)
         end
@@ -12413,11 +12413,11 @@ local __O = {};
                     end
                     ____temp_2215 = ____math_abs_result_2214 < ____t_result_2213 / 2
                 end
-                __O[1948] = ____temp_2215
+                __O[1961] = ____temp_2215
                 if ____t_2216(____temp_2215) then
                     ____t_result_2217 = __gt(__L1.player.y, __L1.FLOOR - 18)
                 else
-                    ____t_result_2217 = __O[1948]
+                    ____t_result_2217 = __O[1961]
                 end
                 return ____t_result_2217
             end
@@ -12466,9 +12466,9 @@ local __O = {};
             end
             ____temp_2220 = ____opt_2218 ~= "igor"
         end
-        __O[1949] = ____temp_2220
+        __O[1962] = ____temp_2220
         if ____t_2221(____temp_2220) then
-            ____t_result_2222 = __O[1949]
+            ____t_result_2222 = __O[1962]
         else
             ____t_result_2222 = __L1.activeBoss ~= e and __L1.arena.phase ~= "exiting"
         end
@@ -12534,9 +12534,9 @@ local __O = {};
             end
             ____opt_result_2234 = ____opt_2232(____opt_2232, ____t_result_2230)
         end
-        __O[1950] = ____opt_result_2234
+        __O[1963] = ____opt_result_2234
         if ____t_2235(____opt_result_2234) then
-            ____t_result_2238 = __O[1950]
+            ____t_result_2238 = __O[1963]
         else
             local ____temp_2237
             if e.phase == 4 then
@@ -12612,9 +12612,9 @@ local __O = {};
         local ____t_result_2250
         local ____t_2249 = __t
         local ____temp_2248 = distance < -15 or distance > 300
-        __O[1951] = ____temp_2248
+        __O[1964] = ____temp_2248
         if ____t_2249(____temp_2248) then
-            ____t_result_2250 = __O[1951]
+            ____t_result_2250 = __O[1964]
         else
             ____t_result_2250 = __lt(__L1.player.y, __L1.FLOOR - 92)
         end
@@ -12637,9 +12637,9 @@ local __O = {};
         if ____opt_2252 ~= nil then
             ____opt_2252 = ____opt_2252.schoolCovers
         end
-        __O[1952] = ____opt_2252
+        __O[1965] = ____opt_2252
         if ____t_2254(____opt_2252) then
-            ____t_result_2255 = __O[1952]
+            ____t_result_2255 = __O[1965]
         else
             ____t_result_2255 = __arrL({}, 0)
         end
@@ -12669,45 +12669,45 @@ local __O = {};
         local ____t_result_2260
         local ____t_2259 = __t
         local ____temp_2258 = not __t(e) or __le(e.hp, 0)
-        __O[1953] = ____temp_2258
+        __O[1966] = ____temp_2258
         if ____t_2259(____temp_2258) then
-            ____t_result_2260 = __O[1953]
+            ____t_result_2260 = __O[1966]
         else
             ____t_result_2260 = __L1.dialog
         end
-        __O[1954] = ____t_result_2260
+        __O[1967] = ____t_result_2260
         if ____t_2261(____t_result_2260) then
-            ____t_result_2262 = __O[1954]
+            ____t_result_2262 = __O[1967]
         else
             ____t_result_2262 = __L1.activeBoss
         end
-        __O[1955] = ____t_result_2262
+        __O[1968] = ____t_result_2262
         if ____t_2263(____t_result_2262) then
-            ____t_result_2264 = __O[1955]
+            ____t_result_2264 = __O[1968]
         else
             ____t_result_2264 = __L1.arena
         end
-        __O[1956] = ____t_result_2264
+        __O[1969] = ____t_result_2264
         if ____t_2265(____t_result_2264) then
-            ____t_result_2266 = __O[1956]
+            ____t_result_2266 = __O[1969]
         else
             ____t_result_2266 = __L1.room
         end
-        __O[1957] = ____t_result_2266
+        __O[1970] = ____t_result_2266
         if ____t_2267(____t_result_2266) then
-            ____t_result_2268 = __O[1957]
+            ____t_result_2268 = __O[1970]
         else
             ____t_result_2268 = __L1.cutscene
         end
-        __O[1958] = ____t_result_2268
+        __O[1971] = ____t_result_2268
         if ____t_2269(____t_result_2268) then
-            ____t_result_2270 = __O[1958]
+            ____t_result_2270 = __O[1971]
         else
             ____t_result_2270 = __L1.paused
         end
-        __O[1959] = ____t_result_2270
+        __O[1972] = ____t_result_2270
         if ____t_2271(____t_result_2270) then
-            ____t_result_2272 = __O[1959]
+            ____t_result_2272 = __O[1972]
         else
             ____t_result_2272 = __L1.defeated
         end
@@ -12756,7 +12756,7 @@ local __O = {};
             end
             ____temp_2279 = ____opt_2277 == "kaique"
         end
-        __O[1960] = ____temp_2279
+        __O[1973] = ____temp_2279
         if ____t_2280(____temp_2279) then
             local ____opt_2281 = __L1.arena
             if ____opt_2281 ~= nil then
@@ -12764,21 +12764,21 @@ local __O = {};
             end
             ____t_result_2283 = ____opt_2281 == "active"
         else
-            ____t_result_2283 = __O[1960]
+            ____t_result_2283 = __O[1973]
         end
-        __O[1961] = ____t_result_2283
+        __O[1974] = ____t_result_2283
         if ____t_2284(____t_result_2283) then
             ____t_result_2285 = not __t(__L1.activeBoss.iraciTriggered)
         else
-            ____t_result_2285 = __O[1961]
+            ____t_result_2285 = __O[1974]
         end
-        __O[1962] = ____t_result_2285
+        __O[1975] = ____t_result_2285
         if ____t_2286(____t_result_2285) then
             ____t_result_2287 = __gt(__L1.player.y, __L1.FLOOR - 18)
         else
-            ____t_result_2287 = __O[1962]
+            ____t_result_2287 = __O[1975]
         end
-        __O[1964] = ____t_result_2287
+        __O[1977] = ____t_result_2287
         if ____t_2288(____t_result_2287) then
             local ____call_2293 = __call
             local ____t_result_2292
@@ -12787,9 +12787,9 @@ local __O = {};
             if ____opt_2289 ~= nil then
                 ____opt_2289 = ____opt_2289.iraciTraps
             end
-            __O[1963] = ____opt_2289
+            __O[1976] = ____opt_2289
             if ____t_2291(____opt_2289) then
-                ____t_result_2292 = __O[1963]
+                ____t_result_2292 = __O[1976]
             else
                 ____t_result_2292 = __arrL({}, 0)
             end
@@ -12799,7 +12799,7 @@ local __O = {};
                 function(____, t) return math.abs(__L1.player.x - t.x) < t.width / 2 end
             )
         else
-            ____t_result_2294 = __O[1964]
+            ____t_result_2294 = __O[1977]
         end
         if ____t_2295(____t_result_2294) then
             local e = __L1.activeBoss
@@ -12844,51 +12844,51 @@ local __O = {};
         local ____t_result_2298
         local ____t_2297 = __t
         local ____temp_2296 = __L1.scene ~= 1
-        __O[1965] = ____temp_2296
+        __O[1978] = ____temp_2296
         if ____t_2297(____temp_2296) then
-            ____t_result_2298 = __O[1965]
+            ____t_result_2298 = __O[1978]
         else
             ____t_result_2298 = __L1.room
         end
-        __O[1966] = ____t_result_2298
+        __O[1979] = ____t_result_2298
         if ____t_2299(____t_result_2298) then
-            ____t_result_2300 = __O[1966]
+            ____t_result_2300 = __O[1979]
         else
             ____t_result_2300 = __L1.arena
         end
-        __O[1967] = ____t_result_2300
+        __O[1980] = ____t_result_2300
         if ____t_2301(____t_result_2300) then
-            ____t_result_2302 = __O[1967]
+            ____t_result_2302 = __O[1980]
         else
             ____t_result_2302 = __L1.activeBoss
         end
-        __O[1968] = ____t_result_2302
+        __O[1981] = ____t_result_2302
         if ____t_2303(____t_result_2302) then
-            ____t_result_2304 = __O[1968]
+            ____t_result_2304 = __O[1981]
         else
             ____t_result_2304 = __L1.dialog
         end
-        __O[1969] = ____t_result_2304
+        __O[1982] = ____t_result_2304
         if ____t_2305(____t_result_2304) then
-            ____t_result_2306 = __O[1969]
+            ____t_result_2306 = __O[1982]
         else
             ____t_result_2306 = __L1.cutscene
         end
-        __O[1970] = ____t_result_2306
+        __O[1983] = ____t_result_2306
         if ____t_2307(____t_result_2306) then
-            ____t_result_2308 = __O[1970]
+            ____t_result_2308 = __O[1983]
         else
             ____t_result_2308 = __L1.vehicle
         end
-        __O[1971] = ____t_result_2308
+        __O[1984] = ____t_result_2308
         if ____t_2309(____t_result_2308) then
-            ____t_result_2310 = __O[1971]
+            ____t_result_2310 = __O[1984]
         else
             ____t_result_2310 = __L1.paused
         end
-        __O[1972] = ____t_result_2310
+        __O[1985] = ____t_result_2310
         if ____t_2311(____t_result_2310) then
-            ____t_result_2312 = __O[1972]
+            ____t_result_2312 = __O[1985]
         else
             ____t_result_2312 = __L1.defeated
         end
@@ -12924,11 +12924,11 @@ local __O = {};
                     __L1.q,
                     __add(e.type, "Sneak")
                 )) and not __t(__get(__L1.q, e.type))
-                __O[1973] = ____temp_2316
+                __O[1986] = ____temp_2316
                 if ____t_2317(____temp_2316) then
                     ____t_result_2318 = __gt(__L1.player.x, e.homeX + 390)
                 else
-                    ____t_result_2318 = __O[1973]
+                    ____t_result_2318 = __O[1986]
                 end
                 if ____t_2319(____t_result_2318) then
                     __set(
@@ -12949,11 +12949,11 @@ local __O = {};
                 local ____t_result_2322
                 local ____t_2321 = __t
                 local ____le_result_2320 = __le(e.monitorCooldown, 0)
-                __O[1974] = ____le_result_2320
+                __O[1987] = ____le_result_2320
                 if ____t_2321(____le_result_2320) then
                     ____t_result_2322 = __L1:monitorSees(e)
                 else
-                    ____t_result_2322 = __O[1974]
+                    ____t_result_2322 = __O[1987]
                 end
                 local seen = ____t_result_2322
                 local ____L1_clamp_2326 = __L1.clamp
@@ -12985,11 +12985,11 @@ local __O = {};
                 else
                     ____t_result_2327 = seen
                 end
-                __O[1975] = ____t_result_2327
+                __O[1988] = ____t_result_2327
                 if ____t_2328(____t_result_2327) then
                     ____t_result_2329 = not __t(e.monitorHint)
                 else
-                    ____t_result_2329 = __O[1975]
+                    ____t_result_2329 = __O[1988]
                 end
                 if ____t_2330(____t_result_2329) then
                     e.monitorHint = true
@@ -13011,11 +13011,11 @@ local __O = {};
                 local ____t_result_2333
                 local ____t_2332 = __t
                 local ____temp_2331 = e.type == "kaique" and __gt(e.hp, 0)
-                __O[1976] = ____temp_2331
+                __O[1989] = ____temp_2331
                 if ____t_2332(____temp_2331) then
                     ____t_result_2333 = not __t(e.iraciTriggered)
                 else
-                    ____t_result_2333 = __O[1976]
+                    ____t_result_2333 = __O[1989]
                 end
                 return ____t_result_2333
             end
@@ -13030,9 +13030,9 @@ local __O = {};
             if ____opt_2334 ~= nil then
                 ____opt_2334 = ____opt_2334.iraciTraps
             end
-            __O[1977] = ____opt_2334
+            __O[1990] = ____opt_2334
             if ____t_2336(____opt_2334) then
-                ____t_result_2337 = __O[1977]
+                ____t_result_2337 = __O[1990]
             else
                 ____t_result_2337 = __arrL({}, 0)
             end
@@ -13075,9 +13075,9 @@ local __O = {};
                 local ____t_result_2343
                 local ____t_2342 = __t
                 local ____TS__MathSign_result_2341 = __TS__MathSign(e.targetX - e.x)
-                __O[1978] = ____TS__MathSign_result_2341
+                __O[1991] = ____TS__MathSign_result_2341
                 if ____t_2342(____TS__MathSign_result_2341) then
-                    ____t_result_2343 = __O[1978]
+                    ____t_result_2343 = __O[1991]
                 else
                     ____t_result_2343 = -1
                 end
@@ -13114,9 +13114,9 @@ local __O = {};
             local ____t_result_2347
             local ____t_2346 = __t
             local ____TS__MathSign_result_2345 = __TS__MathSign(e.targetX - e.x)
-            __O[1979] = ____TS__MathSign_result_2345
+            __O[1992] = ____TS__MathSign_result_2345
             if ____t_2346(____TS__MathSign_result_2345) then
-                ____t_result_2347 = __O[1979]
+                ____t_result_2347 = __O[1992]
             else
                 ____t_result_2347 = -1
             end
@@ -13140,9 +13140,9 @@ local __O = {};
         local ____t_result_2352
         local ____t_2351 = __t
         local ____TS__MathSign_result_2350 = __TS__MathSign(e.targetX - e.x)
-        __O[1980] = ____TS__MathSign_result_2350
+        __O[1993] = ____TS__MathSign_result_2350
         if ____t_2351(____TS__MathSign_result_2350) then
-            ____t_result_2352 = __O[1980]
+            ____t_result_2352 = __O[1993]
         else
             ____t_result_2352 = -1
         end
@@ -13208,21 +13208,21 @@ local __O = {};
         local ____t_result_2360
         local ____t_2359 = __t
         local ____TS__Number_result_2358 = __TS__Number(e.baseMax)
-        __O[1981] = ____TS__Number_result_2358
+        __O[1994] = ____TS__Number_result_2358
         if ____t_2359(____TS__Number_result_2358) then
-            ____t_result_2360 = __O[1981]
+            ____t_result_2360 = __O[1994]
         else
             ____t_result_2360 = __TS__Number(profile.hp)
         end
-        __O[1982] = ____t_result_2360
+        __O[1995] = ____t_result_2360
         if ____t_2361(____t_result_2360) then
-            ____t_result_2362 = __O[1982]
+            ____t_result_2362 = __O[1995]
         else
             ____t_result_2362 = __TS__Number(e.max)
         end
-        __O[1983] = ____t_result_2362
+        __O[1996] = ____t_result_2362
         if ____t_2363(____t_result_2362) then
-            ____t_result_2364 = __O[1983]
+            ____t_result_2364 = __O[1996]
         else
             ____t_result_2364 = 100
         end
@@ -13339,9 +13339,9 @@ local __O = {};
             local ____t_result_2378
             local ____t_2377 = __t
             local ____getq_result_2376 = __getq(kit, e.phase - 2)
-            __O[1984] = ____getq_result_2376
+            __O[1997] = ____getq_result_2376
             if ____t_2377(____getq_result_2376) then
-                ____t_result_2378 = __O[1984]
+                ____t_result_2378 = __O[1997]
             else
                 ____t_result_2378 = "fan"
             end
@@ -13473,9 +13473,9 @@ local __O = {};
         local ____t_result_2387
         local ____t_2386 = __t
         local ____TS__MathSign_result_2385 = __TS__MathSign(e.targetX - e.x)
-        __O[1985] = ____TS__MathSign_result_2385
+        __O[1998] = ____TS__MathSign_result_2385
         if ____t_2386(____TS__MathSign_result_2385) then
-            ____t_result_2387 = __O[1985]
+            ____t_result_2387 = __O[1998]
         else
             ____t_result_2387 = -1
         end
@@ -13979,9 +13979,9 @@ local __O = {};
         local ____t_result_2398
         local ____t_2397 = __t
         local ____temp_2396 = e.type ~= "nikolas" or __lt(e.phase, 2)
-        __O[1986] = ____temp_2396
+        __O[1999] = ____temp_2396
         if ____t_2397(____temp_2396) then
-            ____t_result_2398 = __O[1986]
+            ____t_result_2398 = __O[1999]
         else
             ____t_result_2398 = not __t(__get(__L1.nikolasPhaseWarnings, e.kind))
         end
@@ -13995,9 +13995,9 @@ local __O = {};
             local ____t_result_2402
             local ____t_2401 = __t
             local ____TS__MathSign_result_2400 = __TS__MathSign(e.targetX - e.x)
-            __O[1987] = ____TS__MathSign_result_2400
+            __O[2000] = ____TS__MathSign_result_2400
             if ____t_2401(____TS__MathSign_result_2400) then
-                ____t_result_2402 = __O[1987]
+                ____t_result_2402 = __O[2000]
             else
                 ____t_result_2402 = -1
             end
@@ -14236,11 +14236,11 @@ local __O = {};
         local ____t_result_2409
         local ____t_2408 = __t
         local ____temp_2407 = e.type ~= "giant"
-        __O[1988] = ____temp_2407
+        __O[2001] = ____temp_2407
         if ____t_2408(____temp_2407) then
             ____t_result_2409 = __get(__L1.bossPhaseSkills, e.type)
         else
-            ____t_result_2409 = __O[1988]
+            ____t_result_2409 = __O[2001]
         end
         if ____t_2410(____t_result_2409) then
             e.phaseHP = __L1:bossPhaseHP(e)
@@ -14466,9 +14466,9 @@ local __O = {};
             local ____t_result_2440
             local ____t_2439 = __t
             local ____get_result_2438 = __get(__L1.nikolasPhasePatterns, e.phase)
-            __O[1989] = ____get_result_2438
+            __O[2002] = ____get_result_2438
             if ____t_2439(____get_result_2438) then
-                ____t_result_2440 = __O[1989]
+                ____t_result_2440 = __O[2002]
             else
                 ____t_result_2440 = __get(__L1.nikolasPhasePatterns, 4)
             end
@@ -14478,11 +14478,11 @@ local __O = {};
         local ____t_result_2443
         local ____t_2442 = __t
         local ____temp_2441 = e.type ~= "giant" and e.type ~= "nikolas"
-        __O[1990] = ____temp_2441
+        __O[2003] = ____temp_2441
         if ____t_2442(____temp_2441) then
             ____t_result_2443 = __ge(e.phase, 2)
         else
-            ____t_result_2443 = __O[1990]
+            ____t_result_2443 = __O[2003]
         end
         if ____t_2444(____t_result_2443) then
             local kit = __get(__L1.bossPhaseSkills, e.type)
@@ -14569,9 +14569,9 @@ local __O = {};
                     }
                 )
             end
-            __O[1991] = ____opt_result_2464
+            __O[2004] = ____opt_result_2464
             if ____t_2465(____opt_result_2464) then
-                ____t_result_2466 = __O[1991]
+                ____t_result_2466 = __O[2004]
             else
                 ____t_result_2466 = nil
             end
@@ -14663,45 +14663,45 @@ local __O = {};
         else
             ____t_result_2476 = __le(e.hp, 0)
         end
-        __O[1992] = ____t_result_2476
+        __O[2005] = ____t_result_2476
         if ____t_2477(____t_result_2476) then
-            ____t_result_2478 = __O[1992]
+            ____t_result_2478 = __O[2005]
         else
             ____t_result_2478 = __L1.defeated
         end
-        __O[1993] = ____t_result_2478
+        __O[2006] = ____t_result_2478
         if ____t_2479(____t_result_2478) then
-            ____t_result_2480 = __O[1993]
+            ____t_result_2480 = __O[2006]
         else
             ____t_result_2480 = __L1.won
         end
-        __O[1994] = ____t_result_2480
+        __O[2007] = ____t_result_2480
         if ____t_2481(____t_result_2480) then
-            ____t_result_2482 = __O[1994]
+            ____t_result_2482 = __O[2007]
         else
             ____t_result_2482 = __L1.room
         end
-        __O[1995] = ____t_result_2482
+        __O[2008] = ____t_result_2482
         if ____t_2483(____t_result_2482) then
-            ____t_result_2484 = __O[1995]
+            ____t_result_2484 = __O[2008]
         else
             ____t_result_2484 = __L1.cutscene
         end
-        __O[1996] = ____t_result_2484
+        __O[2009] = ____t_result_2484
         if ____t_2485(____t_result_2484) then
-            ____t_result_2486 = __O[1996]
+            ____t_result_2486 = __O[2009]
         else
             ____t_result_2486 = __L1.activity
         end
-        __O[1997] = ____t_result_2486
+        __O[2010] = ____t_result_2486
         if ____t_2487(____t_result_2486) then
-            ____t_result_2488 = __O[1997]
+            ____t_result_2488 = __O[2010]
         else
             ____t_result_2488 = __L1.dialog
         end
-        __O[1998] = ____t_result_2488
+        __O[2011] = ____t_result_2488
         if ____t_2489(____t_result_2488) then
-            ____t_result_2490 = __O[1998]
+            ____t_result_2490 = __O[2011]
         else
             ____t_result_2490 = __L1.paused
         end
@@ -14727,9 +14727,9 @@ local __O = {};
         if ____opt_2494 ~= nil then
             ____opt_result_2496 = ____opt_2494(____opt_2494)
         end
-        __O[1999] = ____opt_result_2496
+        __O[2012] = ____opt_result_2496
         if ____t_2497(____opt_result_2496) then
-            ____t_result_2498 = __O[1999]
+            ____t_result_2498 = __O[2012]
         else
             ____t_result_2498 = "normal"
         end
@@ -14745,9 +14745,9 @@ local __O = {};
         if ____opt_2502 ~= nil then
             ____opt_result_2504 = ____opt_2502(____opt_2502, e.type, e.difficultyMode)
         end
-        __O[2000] = ____opt_result_2504
+        __O[2013] = ____opt_result_2504
         if ____t_2505(____opt_result_2504) then
-            ____t_result_2506 = __O[2000]
+            ____t_result_2506 = __O[2013]
         else
             ____t_result_2506 = nil
         end
@@ -14802,18 +14802,18 @@ local __O = {};
         local ____t_result_2523
         local ____t_2522 = __t
         local ____temp_2521 = __L1:nomeBoss(e.type)
-        __O[2001] = ____temp_2521
+        __O[2014] = ____temp_2521
         if ____t_2522(____temp_2521) then
-            ____t_result_2523 = __O[2001]
+            ____t_result_2523 = __O[2014]
         else
             ____t_result_2523 = "Chefe"
         end
         local ____t_result_2526
         local ____t_2525 = __t
         local ____table_level_2524 = __L1:bossProfile(e).level
-        __O[2002] = ____table_level_2524
+        __O[2015] = ____table_level_2524
         if ____t_2525(____table_level_2524) then
-            ____t_result_2526 = __O[2002]
+            ____t_result_2526 = __O[2015]
         else
             ____t_result_2526 = 1
         end
@@ -14887,9 +14887,9 @@ local __O = {};
         if ____opt_result_2545 ~= nil then
             ____opt_result_2546 = ____opt_result_2545.label
         end
-        __O[2003] = ____opt_result_2546
+        __O[2016] = ____opt_result_2546
         if ____t_2547(____opt_result_2546) then
-            ____t_result_2548 = __O[2003]
+            ____t_result_2548 = __O[2016]
         else
             ____t_result_2548 = "NORMAL"
         end
@@ -15091,11 +15091,11 @@ local __O = {};
         local ____t_result_2572
         local ____t_2571 = __t
         local ____temp_2570 = e.type == "nikolas" and e.kind == "slimeFan"
-        __O[2004] = ____temp_2570
+        __O[2017] = ____temp_2570
         if ____t_2571(____temp_2570) then
             ____t_result_2572 = e.phase == 3
         else
-            ____t_result_2572 = __O[2004]
+            ____t_result_2572 = __O[2017]
         end
         if ____t_2573(____t_result_2572) then
             __L1:bossFan(
@@ -15109,9 +15109,9 @@ local __O = {};
             local ____t_result_2576
             local ____t_2575 = __t
             local ____TS__MathSign_result_2574 = __TS__MathSign(e.targetX - e.x)
-            __O[2005] = ____TS__MathSign_result_2574
+            __O[2018] = ____TS__MathSign_result_2574
             if ____t_2575(____TS__MathSign_result_2574) then
-                ____t_result_2576 = __O[2005]
+                ____t_result_2576 = __O[2018]
             else
                 ____t_result_2576 = -1
             end
@@ -15176,9 +15176,9 @@ local __O = {};
             local ____t_result_2579
             local ____t_2578 = __t
             local ____TS__MathSign_result_2577 = __TS__MathSign(e.targetX - e.x)
-            __O[2006] = ____TS__MathSign_result_2577
+            __O[2019] = ____TS__MathSign_result_2577
             if ____t_2578(____TS__MathSign_result_2577) then
-                ____t_result_2579 = __O[2006]
+                ____t_result_2579 = __O[2019]
             else
                 ____t_result_2579 = -1
             end
@@ -15277,9 +15277,9 @@ local __O = {};
             local ____t_result_2582
             local ____t_2581 = __t
             local ____TS__MathSign_result_2580 = __TS__MathSign(e.targetX - e.x)
-            __O[2007] = ____TS__MathSign_result_2580
+            __O[2020] = ____TS__MathSign_result_2580
             if ____t_2581(____TS__MathSign_result_2580) then
-                ____t_result_2582 = __O[2007]
+                ____t_result_2582 = __O[2020]
             else
                 ____t_result_2582 = -1
             end
@@ -15397,15 +15397,15 @@ local __O = {};
         local ____t_result_2588
         local ____t_2587 = __t
         local ____temp_2586 = f.estado == "phaseChange"
-        __O[2008] = ____temp_2586
+        __O[2021] = ____temp_2586
         if ____t_2587(____temp_2586) then
-            ____t_result_2588 = __O[2008]
+            ____t_result_2588 = __O[2021]
         else
             ____t_result_2588 = __L1.defeated
         end
-        __O[2009] = ____t_result_2588
+        __O[2022] = ____t_result_2588
         if ____t_2589(____t_result_2588) then
-            ____t_result_2592 = __O[2009]
+            ____t_result_2592 = __O[2022]
         else
             local ____opt_2590 = __L1.sandbox
             if ____opt_2590 ~= nil then
@@ -15478,17 +15478,17 @@ local __O = {};
             local ____t_result_2601
             local ____t_2600 = __t
             local ____temp_2599 = not __t(e.conquista) and __gt(e.hp, 0)
-            __O[2010] = ____temp_2599
+            __O[2023] = ____temp_2599
             if ____t_2600(____temp_2599) then
                 ____t_result_2601 = e.type == "dede"
             else
-                ____t_result_2601 = __O[2010]
+                ____t_result_2601 = __O[2023]
             end
-            __O[2011] = ____t_result_2601
+            __O[2024] = ____t_result_2601
             if ____t_2602(____t_result_2601) then
                 ____t_result_2603 = math.abs(e.x - __L1.player.x) < 650
             else
-                ____t_result_2603 = __O[2011]
+                ____t_result_2603 = __O[2024]
             end
             if ____t_2604(____t_result_2603) then
                 e.tauntTimer = e.tauntTimer - dt
@@ -15505,17 +15505,17 @@ local __O = {};
             local ____t_result_2607
             local ____t_2606 = __t
             local ____temp_2605 = not __t(e.conquista) and __gt(e.hp, 0)
-            __O[2012] = ____temp_2605
+            __O[2025] = ____temp_2605
             if ____t_2606(____temp_2605) then
                 ____t_result_2607 = e.type == "freddy"
             else
-                ____t_result_2607 = __O[2012]
+                ____t_result_2607 = __O[2025]
             end
-            __O[2013] = ____t_result_2607
+            __O[2026] = ____t_result_2607
             if ____t_2608(____t_result_2607) then
                 ____t_result_2609 = math.abs(e.x - __L1.player.x) < 650
             else
-                ____t_result_2609 = __O[2013]
+                ____t_result_2609 = __O[2026]
             end
             if ____t_2610(____t_result_2609) then
                 e.tauntTimer = e.tauntTimer - dt
@@ -15536,9 +15536,9 @@ local __O = {};
         local ____t_result_2614
         local ____t_2612 = __t
         local ____temp_2611 = not __t(e) or __le(e.hp, 0)
-        __O[2014] = ____temp_2611
+        __O[2027] = ____temp_2611
         if ____t_2612(____temp_2611) then
-            ____t_result_2614 = __O[2014]
+            ____t_result_2614 = __O[2027]
         else
             local ____t_result_2613
             if __t(__L1.arena) then
@@ -15566,11 +15566,11 @@ local __O = {};
         local ____t_result_2618
         local ____t_2617 = __t
         local ____temp_2616 = e.type == "nikolas" and e.phase == 3
-        __O[2015] = ____temp_2616
+        __O[2028] = ____temp_2616
         if ____t_2617(____temp_2616) then
             ____t_result_2618 = e.state ~= "phaseChange"
         else
-            ____t_result_2618 = __O[2015]
+            ____t_result_2618 = __O[2028]
         end
         if ____t_2619(____t_result_2618) then
             local ____add_2621 = __add
@@ -15797,7 +15797,7 @@ local __O = {};
             "includes",
             e.state
         ))
-        __O[2016] = ____temp_2645
+        __O[2029] = ____temp_2645
         if ____t_2646(____temp_2645) then
             local ____temp_2649
             if e.type == "igor" then
@@ -15834,7 +15834,7 @@ local __O = {};
             end
             ____t_result_2650 = ____temp_2649
         else
-            ____t_result_2650 = __O[2016]
+            ____t_result_2650 = __O[2029]
         end
         if ____t_2651(____t_result_2650) then
             __L1:hurt(
@@ -15863,9 +15863,9 @@ local __O = {};
         if ____opt_2653 ~= nil then
             ____opt_2653 = ____opt_2653.rageMinions
         end
-        __O[2017] = ____opt_2653
+        __O[2030] = ____opt_2653
         if ____t_2655(____opt_2653) then
-            ____t_result_2656 = __O[2017]
+            ____t_result_2656 = __O[2030]
         else
             ____t_result_2656 = __arrL({{design = "spindle"}, {design = "wobbler"}, {design = "pasta"}, {design = "brainrot"}}, 4)
         end
@@ -15891,9 +15891,9 @@ local __O = {};
                             __len(templates)
                         )
                     ).design
-                    __O[2018] = ____get_result_design_2657
+                    __O[2031] = ____get_result_design_2657
                     if ____t_2658(____get_result_design_2657) then
-                        ____t_result_2659 = __O[2018]
+                        ____t_result_2659 = __O[2031]
                     else
                         ____t_result_2659 = "brainrot"
                     end
@@ -15946,9 +15946,9 @@ local __O = {};
         local ____t_result_2663
         local ____t_2662 = __t
         local ____TS__MathSign_result_2661 = __TS__MathSign(e.targetX - e.x)
-        __O[2019] = ____TS__MathSign_result_2661
+        __O[2032] = ____TS__MathSign_result_2661
         if ____t_2662(____TS__MathSign_result_2661) then
-            ____t_result_2663 = __O[2019]
+            ____t_result_2663 = __O[2032]
         else
             ____t_result_2663 = -1
         end
@@ -16380,9 +16380,9 @@ local __O = {};
             local ____t_result_2678
             local ____t_2677 = __t
             local ____TS__MathSign_result_2676 = __TS__MathSign(e.targetX - e.x)
-            __O[2020] = ____TS__MathSign_result_2676
+            __O[2033] = ____TS__MathSign_result_2676
             if ____t_2677(____TS__MathSign_result_2676) then
-                ____t_result_2678 = __O[2020]
+                ____t_result_2678 = __O[2033]
             else
                 ____t_result_2678 = -1
             end
@@ -16460,9 +16460,9 @@ local __O = {};
                 ____opt_2679 = ____opt_2679.bounds
             end
             local ____temp_2682 = ____getq_2681(____opt_2679, 0) + 100
-            __O[2021] = ____temp_2682
+            __O[2034] = ____temp_2682
             if ____t_2683(____temp_2682) then
-                ____t_result_2684 = __O[2021]
+                ____t_result_2684 = __O[2034]
             else
                 ____t_result_2684 = 55
             end
@@ -16474,9 +16474,9 @@ local __O = {};
                 ____opt_2685 = ____opt_2685.bounds
             end
             local ____temp_2688 = ____getq_2687(____opt_2685, 1) - 100
-            __O[2022] = ____temp_2688
+            __O[2035] = ____temp_2688
             if ____t_2689(____temp_2688) then
-                ____t_result_2690 = __O[2022]
+                ____t_result_2690 = __O[2035]
             else
                 ____t_result_2690 = __L1.WORLD - 55
             end
@@ -16531,9 +16531,9 @@ local __O = {};
                         local ____t_result_2701
                         local ____t_2700 = __t
                         local ____temp_2699 = h.type == "astral"
-                        __O[2023] = ____temp_2699
+                        __O[2036] = ____temp_2699
                         if ____t_2700(____temp_2699) then
-                            ____t_result_2701 = __O[2023]
+                            ____t_result_2701 = __O[2036]
                         else
                             ____t_result_2701 = h.astral
                         end
@@ -16582,14 +16582,14 @@ local __O = {};
                             math.abs(__L1.player.x - h.x),
                             h.r
                         )
-                        __O[2025] = ____lt_result_2708
+                        __O[2038] = ____lt_result_2708
                         if ____t_2709(____lt_result_2708) then
                             local ____t_result_2713
                             local ____t_2711 = __t
                             local ____temp_2710 = h.type == "astral"
-                            __O[2024] = ____temp_2710
+                            __O[2037] = ____temp_2710
                             if ____t_2711(____temp_2710) then
-                                ____t_result_2713 = __O[2024]
+                                ____t_result_2713 = __O[2037]
                             else
                                 local ____t_result_2712
                                 if __t(h.height) then
@@ -16601,7 +16601,7 @@ local __O = {};
                             end
                             ____t_result_2714 = ____t_result_2713
                         else
-                            ____t_result_2714 = __O[2025]
+                            ____t_result_2714 = __O[2038]
                         end
                         ____t_result_2715 = ____t_result_2714
                     end
@@ -16610,11 +16610,11 @@ local __O = {};
                         local ____t_result_2719
                         local ____t_2718 = __t
                         local ____temp_2717 = h.type == "provoke" and not __t(h.didLaunch)
-                        __O[2026] = ____temp_2717
+                        __O[2039] = ____temp_2717
                         if ____t_2718(____temp_2717) then
                             ____t_result_2719 = __le(__L1.player.inv, 0)
                         else
-                            ____t_result_2719 = __O[2026]
+                            ____t_result_2719 = __O[2039]
                         end
                         if ____t_2720(____t_result_2719) then
                             __L1:hurt(h.damage, h.x)
@@ -16734,17 +16734,17 @@ local __O = {};
                 local ____t_result_2731
                 local ____t_2730 = __t
                 local ____temp_2729 = s.owner == "enemy" and s.returnAt ~= nil
-                __O[2027] = ____temp_2729
+                __O[2040] = ____temp_2729
                 if ____t_2730(____temp_2729) then
                     ____t_result_2731 = not __t(s.returned)
                 else
-                    ____t_result_2731 = __O[2027]
+                    ____t_result_2731 = __O[2040]
                 end
-                __O[2028] = ____t_result_2731
+                __O[2041] = ____t_result_2731
                 if ____t_2732(____t_result_2731) then
                     ____t_result_2733 = __le(s.life, s.returnAt)
                 else
-                    ____t_result_2733 = __O[2028]
+                    ____t_result_2733 = __O[2041]
                 end
                 if ____t_2734(____t_result_2733) then
                     s.vx = __TS__Number(-s.vx)
@@ -16766,11 +16766,11 @@ local __O = {};
                 else
                     ____t_result_2735 = s.brasa
                 end
-                __O[2029] = ____t_result_2735
+                __O[2042] = ____t_result_2735
                 if ____t_2736(____t_result_2735) then
                     ____t_result_2737 = __ge(s.y, __L1.FLOOR - 8)
                 else
-                    ____t_result_2737 = __O[2029]
+                    ____t_result_2737 = __O[2042]
                 end
                 if ____t_2738(____t_result_2737) then
                     __call(
@@ -16829,11 +16829,11 @@ local __O = {};
                     if ____opt_2743 ~= nil then
                         ____opt_result_2745 = ____opt_2743.estrada
                     end
-                    __O[2030] = ____opt_result_2745
+                    __O[2043] = ____opt_result_2745
                     if ____t_2746(____opt_result_2745) then
                         ____t_result_2747 = window.PerseguicaoMoto:acertar(__L1.activeBoss.conquista, s)
                     else
-                        ____t_result_2747 = __O[2030]
+                        ____t_result_2747 = __O[2043]
                     end
                     if ____t_2748(____t_result_2747) then
                         s.life = 0
@@ -16844,7 +16844,7 @@ local __O = {};
                         local ____t_result_2766
                         local ____t_2750 = __t
                         local ____temp_2749 = __gt(e.hp, 0) and e.state ~= "underground"
-                        __O[2033] = ____temp_2749
+                        __O[2046] = ____temp_2749
                         if ____t_2750(____temp_2749) then
                             local ____temp_2765
                             local ____opt_2751 = e.conquista
@@ -16899,9 +16899,9 @@ local __O = {};
                                             local ____t_result_2759
                                             local ____t_2756 = __t
                                             local ____temp_2755 = math.abs(s.x - e.x) < (e.type == "giant" and 95 or (e.type == "reeisBoss" and 45 or 35))
-                                            __O[2031] = ____temp_2755
+                                            __O[2044] = ____temp_2755
                                             if ____t_2756(____temp_2755) then
-                                                ____t_result_2759 = __O[2031]
+                                                ____t_result_2759 = __O[2044]
                                             else
                                                 local ____opt_2757 = e.conquista
                                                 if ____opt_2757 ~= nil then
@@ -16909,11 +16909,11 @@ local __O = {};
                                                 end
                                                 ____t_result_2759 = ____opt_2757 ~= nil and math.abs(s.x - e.conquista.gemeoX) < 35
                                             end
-                                            __O[2032] = ____t_result_2759
+                                            __O[2045] = ____t_result_2759
                                             if ____t_2760(____t_result_2759) then
                                                 ____t_result_2761 = math.abs(s.y - (e.y - (e.type == "giant" and 80 or 30))) < (e.type == "giant" and 100 or 55)
                                             else
-                                                ____t_result_2761 = __O[2032]
+                                                ____t_result_2761 = __O[2045]
                                             end
                                             ____t_result_2762 = ____t_result_2761
                                         end
@@ -16925,7 +16925,7 @@ local __O = {};
                             end
                             ____t_result_2766 = ____temp_2765
                         else
-                            ____t_result_2766 = __O[2033]
+                            ____t_result_2766 = __O[2046]
                         end
                         if ____t_2767(____t_result_2766) then
                             __L1:damageEnemy(e, s.damage, s.element)
@@ -16939,7 +16939,7 @@ local __O = {};
                             local ____t_result_2771
                             local ____t_2769 = __t
                             local ____temp_2768 = not __t(m.dead)
-                            __O[2034] = ____temp_2768
+                            __O[2047] = ____temp_2768
                             if ____t_2769(____temp_2768) then
                                 local ____t_result_2770
                                 if __t(window.Golpes) then
@@ -16952,7 +16952,7 @@ local __O = {};
                                 end
                                 ____t_result_2771 = ____t_result_2770
                             else
-                                ____t_result_2771 = __O[2034]
+                                ____t_result_2771 = __O[2047]
                             end
                             if ____t_2772(____t_result_2771) then
                                 __L1:damageMinion(m, s.damage, s.element)
@@ -16967,11 +16967,11 @@ local __O = {};
                             local ____t_result_2775
                             local ____t_2774 = __t
                             local ____temp_2773 = d.type == "doodle" and __gt(d.life, 0)
-                            __O[2035] = ____temp_2773
+                            __O[2048] = ____temp_2773
                             if ____t_2774(____temp_2773) then
                                 ____t_result_2775 = __hypot(s.x - d.x, s.y - d.y) < 27
                             else
-                                ____t_result_2775 = __O[2035]
+                                ____t_result_2775 = __O[2048]
                             end
                             if ____t_2776(____t_result_2775) then
                                 d.life = 0
@@ -17016,23 +17016,23 @@ local __O = {};
                 local ____t_result_2781
                 local ____t_2780 = __t
                 local ____temp_2779 = __gt(s.life, 0) and __gt(s.x, -100)
-                __O[2036] = ____temp_2779
+                __O[2049] = ____temp_2779
                 if ____t_2780(____temp_2779) then
                     ____t_result_2781 = __lt(s.x, __L1.WORLD + 100)
                 else
-                    ____t_result_2781 = __O[2036]
+                    ____t_result_2781 = __O[2049]
                 end
-                __O[2037] = ____t_result_2781
+                __O[2050] = ____t_result_2781
                 if ____t_2782(____t_result_2781) then
                     ____t_result_2783 = __lt(s.y, 520)
                 else
-                    ____t_result_2783 = __O[2037]
+                    ____t_result_2783 = __O[2050]
                 end
-                __O[2038] = ____t_result_2783
+                __O[2051] = ____t_result_2783
                 if ____t_2784(____t_result_2783) then
                     ____t_result_2785 = __gt(s.y, 0)
                 else
-                    ____t_result_2785 = __O[2038]
+                    ____t_result_2785 = __O[2051]
                 end
                 return ____t_result_2785
             end
@@ -17127,7 +17127,7 @@ local __O = {};
         local ____t_result_2798
         local ____t_2795 = __t
         local ____temp_2794 = ____type == "swift"
-        __O[2039] = ____temp_2794
+        __O[2052] = ____temp_2794
         if ____t_2795(____temp_2794) then
             local ____opt_2796 = window.SwiftGuide
             if ____opt_2796 ~= nil then
@@ -17135,7 +17135,7 @@ local __O = {};
             end
             ____t_result_2798 = ____opt_2796
         else
-            ____t_result_2798 = __O[2039]
+            ____t_result_2798 = __O[2052]
         end
         if ____t_2799(____t_result_2798) then
             window.SwiftGuide:draw(__L1.ctx, x, y, opt)
@@ -17196,15 +17196,15 @@ local __O = {};
         local ____t_result_2805
         local ____t_2804 = __t
         local ____temp_2803 = __L1.scene ~= 1
-        __O[2040] = ____temp_2803
+        __O[2053] = ____temp_2803
         if ____t_2804(____temp_2803) then
-            ____t_result_2805 = __O[2040]
+            ____t_result_2805 = __O[2053]
         else
             ____t_result_2805 = __L1.q.kaique
         end
-        __O[2041] = ____t_result_2805
+        __O[2054] = ____t_result_2805
         if ____t_2806(____t_result_2805) then
-            ____t_result_2808 = __O[2041]
+            ____t_result_2808 = __O[2054]
         else
             local ____t_result_2807
             if __t(__L1.arena) then
@@ -17224,9 +17224,9 @@ local __O = {};
         if ____opt_2815 ~= nil then
             ____opt_2815 = ____opt_2815.iraciTraps
         end
-        __O[2042] = ____opt_2815
+        __O[2055] = ____opt_2815
         if ____t_2817(____opt_2815) then
-            ____t_result_2818 = __O[2042]
+            ____t_result_2818 = __O[2055]
         else
             ____t_result_2818 = __arrL({}, 0)
         end
@@ -17239,11 +17239,11 @@ local __O = {};
                 ____opt_2810 = ____opt_2810.type
             end
             local ____temp_2812 = ____opt_2810 == "kaique"
-            __O[2043] = ____temp_2812
+            __O[2056] = ____temp_2812
             if ____t_2813(____temp_2812) then
                 ____t_result_2814 = __L1.activeBoss.iraciTriggered
             else
-                ____t_result_2814 = __O[2043]
+                ____t_result_2814 = __O[2056]
             end
             local angry = ____t_result_2814
             __L1.ctx.fillStyle = __t(angry) and "#af5e62" or "#927596"
@@ -17283,9 +17283,9 @@ local __O = {};
                 if ____opt_2821 ~= nil then
                     ____opt_2821 = ____opt_2821.schoolCovers
                 end
-                __O[2044] = ____opt_2821
+                __O[2057] = ____opt_2821
                 if ____t_2823(____opt_2821) then
-                    ____t_result_2824 = __O[2044]
+                    ____t_result_2824 = __O[2057]
                 else
                     ____t_result_2824 = __arrL({}, 0)
                 end
@@ -17335,9 +17335,9 @@ local __O = {};
         local ____t_result_2828
         local ____t_2827 = __t
         local ____temp_2826 = __L1.scene ~= 1
-        __O[2045] = ____temp_2826
+        __O[2058] = ____temp_2826
         if ____t_2827(____temp_2826) then
-            ____t_result_2828 = __O[2045]
+            ____t_result_2828 = __O[2058]
         else
             ____t_result_2828 = __L1.arena
         end
@@ -17351,9 +17351,9 @@ local __O = {};
         if ____opt_2830 ~= nil then
             ____opt_2830 = ____opt_2830.schoolCovers
         end
-        __O[2046] = ____opt_2830
+        __O[2059] = ____opt_2830
         if ____t_2832(____opt_2830) then
-            ____t_result_2833 = __O[2046]
+            ____t_result_2833 = __O[2059]
         else
             ____t_result_2833 = __arrL({}, 0)
         end
@@ -17417,9 +17417,9 @@ local __O = {};
                     window.ConquistaCombate:capitulo(f),
                     2
                 )
-                __O[2047] = ____getq_result_2838
+                __O[2060] = ____getq_result_2838
                 if ____t_2839(____getq_result_2838) then
-                    ____t_result_2840 = __O[2047]
+                    ____t_result_2840 = __O[2060]
                 else
                     ____t_result_2840 = __get(window.ConquistaCombate.chefes, f.slug).cor
                 end
@@ -17469,15 +17469,15 @@ local __O = {};
             local ____t_result_2847
             local ____t_2846 = __t
             local ____get_result_2845 = __get(__L1.nikolasPhaseWarnings, e.kind)
-            __O[2048] = ____get_result_2845
+            __O[2061] = ____get_result_2845
             if ____t_2846(____get_result_2845) then
-                ____t_result_2847 = __O[2048]
+                ____t_result_2847 = __O[2061]
             else
                 ____t_result_2847 = __get(__L1.bossPhaseSkillNames, e.kind)
             end
-            __O[2049] = ____t_result_2847
+            __O[2062] = ____t_result_2847
             if ____t_2848(____t_result_2847) then
-                ____t_result_2849 = __O[2049]
+                ____t_result_2849 = __O[2062]
             else
                 ____t_result_2849 = "NOVA HABILIDADE"
             end
@@ -17494,11 +17494,11 @@ local __O = {};
         local ____t_result_2855
         local ____t_2854 = __t
         local ____temp_2853 = e.kind == "sewerDive"
-        __O[2050] = ____temp_2853
+        __O[2063] = ____temp_2853
         if ____t_2854(____temp_2853) then
             ____t_result_2855 = e.state == "windup" or e.state == "underground"
         else
-            ____t_result_2855 = __O[2050]
+            ____t_result_2855 = __O[2063]
         end
         if ____t_2856(____t_result_2855) then
             __L1:drawSewerMarker(e.emergeX, true)
@@ -17548,15 +17548,15 @@ local __O = {};
             local ____t_result_2861
             local ____t_2860 = __t
             local ____get_result_2859 = __get(__L1.nikolasPhaseWarnings, e.kind)
-            __O[2051] = ____get_result_2859
+            __O[2064] = ____get_result_2859
             if ____t_2860(____get_result_2859) then
-                ____t_result_2861 = __O[2051]
+                ____t_result_2861 = __O[2064]
             else
                 ____t_result_2861 = __get(__L1.bossPhaseSkillNames, e.kind)
             end
-            __O[2053] = ____t_result_2861
+            __O[2066] = ____t_result_2861
             if ____t_2862(____t_result_2861) then
-                ____t_result_2890 = __O[2053]
+                ____t_result_2890 = __O[2066]
             else
                 local ____temp_2889
                 if e.kind == "bellyBounce" then
@@ -17654,11 +17654,11 @@ local __O = {};
                                                                                                             local ____t_result_2865
                                                                                                             local ____t_2864 = __t
                                                                                                             local ____temp_2863 = e.type == "nikolas" and e.kind == "slimeFan"
-                                                                                                            __O[2052] = ____temp_2863
+                                                                                                            __O[2065] = ____temp_2863
                                                                                                             if ____t_2864(____temp_2863) then
                                                                                                                 ____t_result_2865 = e.phase == 3
                                                                                                             else
-                                                                                                                ____t_result_2865 = __O[2052]
+                                                                                                                ____t_result_2865 = __O[2065]
                                                                                                             end
                                                                                                             ____temp_2867 = ____t_2866(____t_result_2865) and "DUAS RAJADAS! DESVIE DUAS VEZES" or "ATAQUE CARREGANDO!"
                                                                                                         end
@@ -17722,17 +17722,17 @@ local __O = {};
         local ____t_result_2894
         local ____t_2893 = __t
         local ____temp_2892 = e.type == "nikolas" and e.phase == 4
-        __O[2054] = ____temp_2892
+        __O[2067] = ____temp_2892
         if ____t_2893(____temp_2892) then
             ____t_result_2894 = __gt(e.safeLaneTime, 0)
         else
-            ____t_result_2894 = __O[2054]
+            ____t_result_2894 = __O[2067]
         end
-        __O[2055] = ____t_result_2894
+        __O[2068] = ____t_result_2894
         if ____t_2895(____t_result_2894) then
             ____t_result_2896 = __isFiniteN(e.safeLaneX)
         else
-            ____t_result_2896 = __O[2055]
+            ____t_result_2896 = __O[2068]
         end
         if ____t_2897(____t_result_2896) then
             __L1.ctx:save()
@@ -17813,9 +17813,9 @@ local __O = {};
         local ____t_result_2903
         local ____t_2902 = __t
         local ____temp_2901 = __L1.reeisPhase == "running"
-        __O[2056] = ____temp_2901
+        __O[2069] = ____temp_2901
         if ____t_2902(____temp_2901) then
-            ____t_result_2903 = __O[2056]
+            ____t_result_2903 = __O[2069]
         else
             ____t_result_2903 = __L1.reeisPhase == "active" and math.abs(__L1.player.vx) > 8
         end
@@ -17991,9 +17991,9 @@ local __O = {};
         local ____t_result_2935
         local ____t_2929 = __t
         local ____get_result_2928 = __get(__L1.scenes, r.to)
-        __O[2057] = ____get_result_2928
+        __O[2070] = ____get_result_2928
         if ____t_2929(____get_result_2928) then
-            ____t_result_2935 = __O[2057]
+            ____t_result_2935 = __O[2070]
         else
             local ____opt_2932 = window.LugaresC1
             if ____opt_2932 ~= nil then
@@ -18005,9 +18005,9 @@ local __O = {};
             end
             ____t_result_2935 = ____opt_result_2934
         end
-        __O[2058] = ____t_result_2935
+        __O[2071] = ____t_result_2935
         if ____t_2936(____t_result_2935) then
-            ____t_result_2937 = __O[2058]
+            ____t_result_2937 = __O[2071]
         else
             ____t_result_2937 = ""
         end
@@ -18186,7 +18186,7 @@ local __O = {};
                 local ____t_result_2970
                 local ____t_2967 = __t
                 local ____temp_2966 = m.type == "rat"
-                __O[2059] = ____temp_2966
+                __O[2072] = ____temp_2966
                 if ____t_2967(____temp_2966) then
                     local ____opt_2968 = window.Art
                     if ____opt_2968 ~= nil then
@@ -18194,7 +18194,7 @@ local __O = {};
                     end
                     ____t_result_2970 = ____opt_2968
                 else
-                    ____t_result_2970 = __O[2059]
+                    ____t_result_2970 = __O[2072]
                 end
                 if ____t_2971(____t_result_2970) then
                     window.Art:drawRat(
@@ -18212,7 +18212,7 @@ local __O = {};
                     local ____t_result_2976
                     local ____t_2973 = __t
                     local ____temp_2972 = m.type == "thug" or m.kind == "thug"
-                    __O[2060] = ____temp_2972
+                    __O[2073] = ____temp_2972
                     if ____t_2973(____temp_2972) then
                         local ____opt_2974 = window.Art
                         if ____opt_2974 ~= nil then
@@ -18220,7 +18220,7 @@ local __O = {};
                         end
                         ____t_result_2976 = ____opt_2974
                     else
-                        ____t_result_2976 = __O[2060]
+                        ____t_result_2976 = __O[2073]
                     end
                     if ____t_2977(____t_result_2976) then
                         window.Art:drawThug(
@@ -18265,9 +18265,9 @@ local __O = {};
                             else
                                 ____t_result_2981 = m.variant
                             end
-                            __O[2061] = ____t_result_2981
+                            __O[2074] = ____t_result_2981
                             if ____t_2982(____t_result_2981) then
-                                ____t_result_2983 = __O[2061]
+                                ____t_result_2983 = __O[2074]
                             else
                                 ____t_result_2983 = m.type
                             end
@@ -18402,9 +18402,9 @@ local __O = {};
             if ____opt_3000 ~= nil then
                 ____opt_3000 = ____opt_3000.cv
             end
-            __O[2062] = ____opt_3000
+            __O[2075] = ____opt_3000
             if ____t_3002(____opt_3000) then
-                ____t_result_3003 = __O[2062]
+                ____t_result_3003 = __O[2075]
             else
                 ____t_result_3003 = window.document:createElement("canvas")
             end
@@ -18418,30 +18418,137 @@ local __O = {};
         end
         return __L1.ctx:copiarTela(__L1.arenaFundo.cv) ~= false
     end
-    __L1.draw = function(self)
-        local ____t_3007 = __t
+    __L1.frenteCamadas = function(self)
+        local Hc = window.HdMaps.camadas
+        local amb = Hc:ambiente(__L1.scene)
         local ____t_result_3006
         local ____t_3005 = __t
-        local ____temp_3004 = not __t(__L1.arena)
-        __O[2063] = ____temp_3004
+        local ____temp_3004 = __lt(
+            __get(amb, 0),
+            0.97
+        ) or __lt(
+            __get(amb, 1),
+            0.97
+        )
+        __O[2076] = ____temp_3004
         if ____t_3005(____temp_3004) then
-            ____t_result_3006 = __L1.arenaFundo
+            ____t_result_3006 = __O[2076]
         else
-            ____t_result_3006 = __O[2063]
+            ____t_result_3006 = __lt(
+                __get(amb, 2),
+                0.97
+            )
         end
-        if ____t_3007(____t_result_3006) then
+        local escuro = ____t_result_3006
+        local ____t_result_3012
+        local ____t_3011 = __t
+        local ____getq_3009 = __getq
+        local ____opt_3007 = window.WorldData
+        if ____opt_3007 ~= nil then
+            ____opt_3007 = ____opt_3007.gaps
+        end
+        local ____getq_3009_result_3010 = ____getq_3009(____opt_3007, __L1.scene)
+        __O[2077] = ____getq_3009_result_3010
+        if ____t_3011(____getq_3009_result_3010) then
+            ____t_result_3012 = __O[2077]
+        else
+            ____t_result_3012 = __arrL({}, 0)
+        end
+        local gaps = ____t_result_3012
+        local ponte = __call(
+            gaps,
+            "some",
+            function(____, g) return __TS__Number(__get(g, 0)) + __TS__Number(__get(g, 1)) >= __L1.camera - 25 and __TS__Number(__get(g, 0)) <= __L1.camera + 985 end
+        )
+        Hc:texto(__L1.ctx, __L1.scene, __L1.camera)
+        if not __t(ponte) then
+            return
+        end
+        if not __t(escuro) then
+            local ____opt_3015 = window.Art
+            if ____opt_3015 ~= nil then
+                ____opt_3015 = ____opt_3015.drawGroundBridges
+            end
+            if ____opt_3015 ~= nil then
+                ____opt_3015(
+                    ____opt_3015,
+                    __L1.ctx,
+                    __L1.scene,
+                    __L1.camera,
+                    __L1.time
+                )
+            end
+            return
+        end
+        if not __t(__L1.pontesCv) then
+            __L1.pontesCv = window.document:createElement("canvas")
+            __L1.pontesCv.width = __L1.W
+            __L1.pontesCv.height = 160
+        end
+        local g = __L1.pontesCv:getContext("2d")
+        g:setTransform(
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+        )
+        g:clearRect(0, 0, __L1.W, 160)
+        g:translate(0, -380)
+        local ____opt_3019 = window.Art
+        if ____opt_3019 ~= nil then
+            ____opt_3019 = ____opt_3019.drawGroundBridges
+        end
+        if ____opt_3019 ~= nil then
+            ____opt_3019(
+                ____opt_3019,
+                g,
+                __L1.scene,
+                __L1.camera,
+                __L1.time
+            )
+        end
+        g:setTransform(
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+        )
+        Hc:multiplicar(g, __L1.W, 160, amb)
+        __L1.ctx:drawImage(__L1.pontesCv, 0, 380)
+    end
+    __L1.draw = function(self)
+        local ____t_3024 = __t
+        local ____t_result_3023
+        local ____t_3022 = __t
+        local ____temp_3021 = not __t(__L1.arena)
+        __O[2078] = ____temp_3021
+        if ____t_3022(____temp_3021) then
+            ____t_result_3023 = __L1.arenaFundo
+        else
+            ____t_result_3023 = __O[2078]
+        end
+        if ____t_3024(____t_result_3023) then
             __L1.arenaFundo = nil
         end
+        window.DAROCA_QUADRO_CAMADAS = -1
+        window.DAROCA_QUADRO_CAMERA = __L1.camera
+        window.DAROCA_QUADRO_TEMPO = __L1.time
+        window.DAROCA_QUADRO_TREMOR_X = 0
+        window.DAROCA_QUADRO_TREMOR_Y = 0
         __L1.ctx:save()
         __L1.ctx:clearRect(0, 0, __L1.W, __L1.H)
         if __t(__L1.ollyanEncounter) then
             window.OllyanEncounter:draw(__L1.ctx, __L1.ollyanEncounter, {hud = false})
-            local ____opt_3010 = window.FxPixel
-            if ____opt_3010 ~= nil then
-                ____opt_3010 = ____opt_3010.desenhar
+            local ____opt_3027 = window.FxPixel
+            if ____opt_3027 ~= nil then
+                ____opt_3027 = ____opt_3027.desenhar
             end
-            if ____opt_3010 ~= nil then
-                ____opt_3010(____opt_3010, __L1.ctx, {
+            if ____opt_3027 ~= nil then
+                ____opt_3027(____opt_3027, __L1.ctx, {
                     dono = "ollyan",
                     camada = "front",
                     mundo = false,
@@ -18472,115 +18579,147 @@ local __O = {};
             return
         end
         if __L1.shake > 0 then
-            __L1.ctx:translate(
-                math.floor(__L1:rand(
-                    __TS__Number(-__L1.shake),
-                    __L1.shake
-                ) + 0.5),
-                math.floor(__L1:rand(
-                    __TS__Number(-__L1.shake) * 0.4,
-                    __L1.shake * 0.4
-                ) + 0.5)
-            )
+            local tx = math.floor(__L1:rand(
+                __TS__Number(-__L1.shake),
+                __L1.shake
+            ) + 0.5)
+            local ty = math.floor(__L1:rand(
+                __TS__Number(-__L1.shake) * 0.4,
+                __L1.shake * 0.4
+            ) + 0.5)
+            __L1.ctx:translate(tx, ty)
+            window.DAROCA_QUADRO_TREMOR_X = tx
+            window.DAROCA_QUADRO_TREMOR_Y = ty
         end
-        local ____opt_3012 = __L1.activeBoss
-        if ____opt_3012 ~= nil then
-            ____opt_3012 = ____opt_3012.conquista
+        local ____opt_3029 = __L1.activeBoss
+        if ____opt_3029 ~= nil then
+            ____opt_3029 = ____opt_3029.conquista
         end
-        local duelo = ____opt_3012
+        local duelo = ____opt_3029
         local percurso = __L1:terrenoConquista(duelo)
-        local ____t_3018 = __t
-        local ____t_result_3017
-        local ____t_3015 = __t
-        local ____temp_3014 = not __t(percurso)
-        __O[2064] = ____temp_3014
-        if ____t_3015(____temp_3014) then
-            ____t_result_3017 = __O[2064]
+        local ____t_3035 = __t
+        local ____t_result_3034
+        local ____t_3032 = __t
+        local ____temp_3031 = not __t(percurso)
+        __O[2079] = ____temp_3031
+        if ____t_3032(____temp_3031) then
+            ____t_result_3034 = __O[2079]
         else
-            local ____t_result_3016
+            local ____t_result_3033
             if __t(duelo.ceu) then
-                ____t_result_3016 = __lt(duelo.ceu.tempo, 0.85)
+                ____t_result_3033 = __lt(duelo.ceu.tempo, 0.85)
             else
-                ____t_result_3016 = duelo.ceu
+                ____t_result_3033 = duelo.ceu
             end
-            ____t_result_3017 = ____t_result_3016
+            ____t_result_3034 = ____t_result_3033
         end
-        if ____t_3018(____t_result_3017) then
-            local ____t_3025 = __t
-            local ____t_result_3024
-            local ____t_3021 = __t
-            local ____opt_3019 = window.C2Luta
-            if ____opt_3019 ~= nil then
-                ____opt_3019 = ____opt_3019.skin
+        if ____t_3035(____t_result_3034) then
+            local ____t_3042 = __t
+            local ____t_result_3041
+            local ____t_3038 = __t
+            local ____opt_3036 = window.C2Luta
+            if ____opt_3036 ~= nil then
+                ____opt_3036 = ____opt_3036.skin
             end
-            __O[2065] = ____opt_3019
-            if ____t_3021(____opt_3019) then
-                local ____this_3023
-                ____this_3023 = window.C2Luta
-                local ____opt_3022 = ____this_3023.desenharFundo
-                if ____opt_3022 ~= nil then
-                    ____opt_3022 = ____opt_3022(
-                        ____this_3023,
+            __O[2080] = ____opt_3036
+            if ____t_3038(____opt_3036) then
+                local ____this_3040
+                ____this_3040 = window.C2Luta
+                local ____opt_3039 = ____this_3040.desenharFundo
+                if ____opt_3039 ~= nil then
+                    ____opt_3039 = ____opt_3039(
+                        ____this_3040,
                         __L1.ctx,
                         __L1.camera,
                         __L1.time,
                         __L1.arena
                     )
                 end
-                ____t_result_3024 = ____opt_3022
+                ____t_result_3041 = ____opt_3039
             else
-                ____t_result_3024 = __O[2065]
+                ____t_result_3041 = __O[2080]
             end
-            if ____t_3025(____t_result_3024) then
+            if ____t_3042(____t_result_3041) then
             else
-                local ____t_3031 = __t
-                local ____t_result_3030
-                local ____t_3029 = __t
-                local ____t_result_3028
-                local ____t_3027 = __t
-                local ____t_result_3026
+                local ____t_3048 = __t
+                local ____t_result_3047
+                local ____t_3046 = __t
+                local ____t_result_3045
+                local ____t_3044 = __t
+                local ____t_result_3043
                 if __t(__L1.arena) then
-                    ____t_result_3026 = __ge(__L1.arena.blend, 1)
+                    ____t_result_3043 = __ge(__L1.arena.blend, 1)
                 else
-                    ____t_result_3026 = __L1.arena
+                    ____t_result_3043 = __L1.arena
                 end
-                __O[2066] = ____t_result_3026
-                if ____t_3027(____t_result_3026) then
-                    ____t_result_3028 = __L1.ctx.copiarTela
+                __O[2081] = ____t_result_3043
+                if ____t_3044(____t_result_3043) then
+                    ____t_result_3045 = __L1.ctx.copiarTela
                 else
-                    ____t_result_3028 = __O[2066]
+                    ____t_result_3045 = __O[2081]
                 end
-                __O[2067] = ____t_result_3028
-                if ____t_3029(____t_result_3028) then
-                    ____t_result_3030 = __L1:fundoDaArena()
+                __O[2082] = ____t_result_3045
+                if ____t_3046(____t_result_3045) then
+                    ____t_result_3047 = __L1:fundoDaArena()
                 else
-                    ____t_result_3030 = __O[2067]
+                    ____t_result_3047 = __O[2082]
                 end
-                if ____t_3031(____t_result_3030) then
+                if ____t_3048(____t_result_3047) then
                 else
-                    local ____t_3034 = __t
-                    local ____opt_3032 = window.Art
-                    if ____opt_3032 ~= nil then
-                        ____opt_3032 = ____opt_3032.drawScene
-                    end
-                    if ____t_3034(____opt_3032) then
-                        window.Art:drawScene(__L1.ctx, __L1.scene, __L1.camera, __L1.time)
+                    local ____t_3059 = __t
+                    local ____t_result_3058
+                    local ____t_3052 = __t
+                    local ____t_result_3051
+                    local ____t_3050 = __t
+                    local ____temp_3049 = not __t(__L1.arena)
+                    __O[2083] = ____temp_3049
+                    if ____t_3050(____temp_3049) then
+                        ____t_result_3051 = window.DAROCA_CAMADAS
                     else
-                        __L1.ctx.fillStyle = "#819379"
-                        __L1.ctx:fillRect(0, 0, __L1.W, __L1.H)
-                        __L1.ctx.fillStyle = "#617448"
-                        __L1.ctx:fillRect(0, __L1.FLOOR, __L1.W, __L1.H - __L1.FLOOR)
+                        ____t_result_3051 = __O[2083]
+                    end
+                    __O[2084] = ____t_result_3051
+                    if ____t_3052(____t_result_3051) then
+                        local ____opt_3055 = window.HdMaps
+                        if ____opt_3055 ~= nil then
+                            ____opt_3055 = ____opt_3055.camadas
+                        end
+                        local ____opt_result_3057
+                        if ____opt_3055 ~= nil then
+                            ____opt_result_3057 = ____opt_3055:pode(__L1.scene)
+                        end
+                        ____t_result_3058 = ____opt_result_3057
+                    else
+                        ____t_result_3058 = __O[2084]
+                    end
+                    if ____t_3059(____t_result_3058) then
+                        window.DAROCA_QUADRO_CAMADAS = __L1.scene
+                        __L1:frenteCamadas()
+                    else
+                        local ____t_3062 = __t
+                        local ____opt_3060 = window.Art
+                        if ____opt_3060 ~= nil then
+                            ____opt_3060 = ____opt_3060.drawScene
+                        end
+                        if ____t_3062(____opt_3060) then
+                            window.Art:drawScene(__L1.ctx, __L1.scene, __L1.camera, __L1.time)
+                        else
+                            __L1.ctx.fillStyle = "#819379"
+                            __L1.ctx:fillRect(0, 0, __L1.W, __L1.H)
+                            __L1.ctx.fillStyle = "#617448"
+                            __L1.ctx:fillRect(0, __L1.FLOOR, __L1.W, __L1.H - __L1.FLOOR)
+                        end
                     end
                 end
             end
             if not __t(__L1.arena) then
-                local ____opt_3037 = window.WorldLife
-                if ____opt_3037 ~= nil then
-                    ____opt_3037 = ____opt_3037.draw
+                local ____opt_3065 = window.WorldLife
+                if ____opt_3065 ~= nil then
+                    ____opt_3065 = ____opt_3065.draw
                 end
-                if ____opt_3037 ~= nil then
-                    ____opt_3037(
-                        ____opt_3037,
+                if ____opt_3065 ~= nil then
+                    ____opt_3065(
+                        ____opt_3065,
                         __L1.ctx,
                         __L1.scene,
                         __L1.camera,
@@ -18590,27 +18729,27 @@ local __O = {};
                     )
                 end
             end
-            local ____t_3042 = __t
-            local ____t_result_3041
+            local ____t_3070 = __t
+            local ____t_result_3069
             if __t(__L1.arena) then
-                local ____opt_3039 = window.C2Luta
-                if ____opt_3039 ~= nil then
-                    ____opt_3039 = ____opt_3039.skin
+                local ____opt_3067 = window.C2Luta
+                if ____opt_3067 ~= nil then
+                    ____opt_3067 = ____opt_3067.skin
                 end
-                ____t_result_3041 = ____opt_3039
+                ____t_result_3069 = ____opt_3067
             else
-                ____t_result_3041 = __L1.arena
+                ____t_result_3069 = __L1.arena
             end
-            if ____t_3042(____t_result_3041) then
+            if ____t_3070(____t_result_3069) then
                 __L1.ctx:save()
                 __L1.ctx.globalAlpha = __L1.arena.blend
-                local ____opt_3045 = window.BossArena
-                if ____opt_3045 ~= nil then
-                    ____opt_3045 = ____opt_3045.palco
+                local ____opt_3073 = window.BossArena
+                if ____opt_3073 ~= nil then
+                    ____opt_3073 = ____opt_3073.palco
                 end
-                if ____opt_3045 ~= nil then
-                    ____opt_3045(
-                        ____opt_3045,
+                if ____opt_3073 ~= nil then
+                    ____opt_3073(
+                        ____opt_3073,
                         __L1.ctx,
                         window.C2Luta.skin.tema,
                         __L1.camera,
@@ -18620,18 +18759,18 @@ local __O = {};
                 end
                 __L1.ctx:restore()
             else
-                local ____t_3050 = __t
-                local ____t_result_3049
+                local ____t_3078 = __t
+                local ____t_result_3077
                 if __t(__L1.arena) then
-                    local ____opt_3047 = window.Art
-                    if ____opt_3047 ~= nil then
-                        ____opt_3047 = ____opt_3047.drawArena
+                    local ____opt_3075 = window.Art
+                    if ____opt_3075 ~= nil then
+                        ____opt_3075 = ____opt_3075.drawArena
                     end
-                    ____t_result_3049 = ____opt_3047
+                    ____t_result_3077 = ____opt_3075
                 else
-                    ____t_result_3049 = __L1.arena
+                    ____t_result_3077 = __L1.arena
                 end
-                if ____t_3050(____t_result_3049) then
+                if ____t_3078(____t_result_3077) then
                     __L1.ctx:save()
                     __L1.ctx.globalAlpha = __L1.arena.blend
                     window.Art:drawArena(
@@ -18653,33 +18792,33 @@ local __O = {};
             -math.floor(__L1.camera + 0.5),
             0
         )
-        local ____opt_3053 = window.CampaignVfx
-        if ____opt_3053 ~= nil then
-            ____opt_3053 = ____opt_3053.draw
+        local ____opt_3081 = window.CampaignVfx
+        if ____opt_3081 ~= nil then
+            ____opt_3081 = ____opt_3081.draw
         end
-        if ____opt_3053 ~= nil then
-            ____opt_3053(____opt_3053, __L1.ctx, __L1.time, "back")
+        if ____opt_3081 ~= nil then
+            ____opt_3081(____opt_3081, __L1.ctx, __L1.time, "back")
         end
-        local ____opt_3057 = window.Golpes
-        if ____opt_3057 ~= nil then
-            ____opt_3057 = ____opt_3057.desenharGas
+        local ____opt_3085 = window.Golpes
+        if ____opt_3085 ~= nil then
+            ____opt_3085 = ____opt_3085.desenharGas
         end
-        if ____opt_3057 ~= nil then
-            ____opt_3057(____opt_3057, __L1.ctx, __L1.time)
+        if ____opt_3085 ~= nil then
+            ____opt_3085(____opt_3085, __L1.ctx, __L1.time)
         end
-        local ____opt_3061 = window.FxPixel
-        if ____opt_3061 ~= nil then
-            ____opt_3061 = ____opt_3061.desenhar
+        local ____opt_3089 = window.FxPixel
+        if ____opt_3089 ~= nil then
+            ____opt_3089 = ____opt_3089.desenhar
         end
-        if ____opt_3061 ~= nil then
-            ____opt_3061(____opt_3061, __L1.ctx, {dono = "luta", camada = "back", camera = __L1.camera, tempo = __L1.time})
+        if ____opt_3089 ~= nil then
+            ____opt_3089(____opt_3089, __L1.ctx, {dono = "luta", camada = "back", camera = __L1.camera, tempo = __L1.time})
         end
-        local ____t_3065 = __t
-        local ____opt_3063 = __L1.activeBoss
-        if ____opt_3063 ~= nil then
-            ____opt_3063 = ____opt_3063.conquista
+        local ____t_3093 = __t
+        local ____opt_3091 = __L1.activeBoss
+        if ____opt_3091 ~= nil then
+            ____opt_3091 = ____opt_3091.conquista
         end
-        if ____t_3065(____opt_3063) then
+        if ____t_3093(____opt_3091) then
             window.ConquistaEfeitos:fundo(__L1.ctx, __L1.activeBoss.conquista)
         end
         if __t(percurso) then
@@ -18699,16 +18838,16 @@ local __O = {};
                     )) then
                         continue
                     end
-                    local ____t_3071 = __t
-                    local ____opt_3068 = window.Graphics
-                    if ____opt_3068 ~= nil then
-                        ____opt_3068 = ____opt_3068.isLite
+                    local ____t_3099 = __t
+                    local ____opt_3096 = window.Graphics
+                    if ____opt_3096 ~= nil then
+                        ____opt_3096 = ____opt_3096.isLite
                     end
-                    local ____opt_result_3070
-                    if ____opt_3068 ~= nil then
-                        ____opt_result_3070 = ____opt_3068(____opt_3068)
+                    local ____opt_result_3098
+                    if ____opt_3096 ~= nil then
+                        ____opt_result_3098 = ____opt_3096(____opt_3096)
                     end
-                    if ____t_3071(____opt_result_3070) then
+                    if ____t_3099(____opt_result_3098) then
                         __L1.ctx.fillStyle = __L1.scene == 2 and "#63736a" or "#8d724f"
                         __L1.ctx:fillRect(
                             __get(p, 0),
@@ -18731,55 +18870,55 @@ local __O = {};
                             4
                         )
                     else
-                        local ____t_3082 = __t
-                        local ____t_result_3081
-                        local ____t_3077 = __t
-                        local ____t_result_3076
-                        local ____t_3073 = __t
-                        local ____temp_3072 = __L1.scene == 11
-                        __O[2068] = ____temp_3072
-                        if ____t_3073(____temp_3072) then
-                            local ____opt_3074 = window.BaileGalpao
-                            if ____opt_3074 ~= nil then
-                                ____opt_3074 = ____opt_3074.camarote
+                        local ____t_3110 = __t
+                        local ____t_result_3109
+                        local ____t_3105 = __t
+                        local ____t_result_3104
+                        local ____t_3101 = __t
+                        local ____temp_3100 = __L1.scene == 11
+                        __O[2085] = ____temp_3100
+                        if ____t_3101(____temp_3100) then
+                            local ____opt_3102 = window.BaileGalpao
+                            if ____opt_3102 ~= nil then
+                                ____opt_3102 = ____opt_3102.camarote
                             end
-                            ____t_result_3076 = ____opt_3074
+                            ____t_result_3104 = ____opt_3102
                         else
-                            ____t_result_3076 = __O[2068]
+                            ____t_result_3104 = __O[2085]
                         end
-                        __O[2069] = ____t_result_3076
-                        if ____t_3077(____t_result_3076) then
-                            local ____gt_3080 = __gt
-                            local ____get_result_3079 = __get(p, 0)
-                            local ____t_result_3078
+                        __O[2086] = ____t_result_3104
+                        if ____t_3105(____t_result_3104) then
+                            local ____gt_3108 = __gt
+                            local ____get_result_3107 = __get(p, 0)
+                            local ____t_result_3106
                             if __t(window.BaileGalpao.PORTA) then
-                                ____t_result_3078 = window.BaileGalpao.PORTA
+                                ____t_result_3106 = window.BaileGalpao.PORTA
                             else
-                                ____t_result_3078 = 760
+                                ____t_result_3106 = 760
                             end
-                            ____t_result_3081 = ____gt_3080(____get_result_3079, ____t_result_3078)
+                            ____t_result_3109 = ____gt_3108(____get_result_3107, ____t_result_3106)
                         else
-                            ____t_result_3081 = __O[2069]
+                            ____t_result_3109 = __O[2086]
                         end
-                        if ____t_3082(____t_result_3081) then
+                        if ____t_3110(____t_result_3109) then
                             window.BaileGalpao:camarote(__L1.ctx, p, __L1.time)
                         else
-                            local ____t_3088 = __t
-                            local ____opt_3085 = window.LugaresC1
-                            if ____opt_3085 ~= nil then
-                                ____opt_3085 = ____opt_3085.plataforma
+                            local ____t_3116 = __t
+                            local ____opt_3113 = window.LugaresC1
+                            if ____opt_3113 ~= nil then
+                                ____opt_3113 = ____opt_3113.plataforma
                             end
-                            local ____opt_result_3087
-                            if ____opt_3085 ~= nil then
-                                ____opt_result_3087 = ____opt_3085(
-                                    ____opt_3085,
+                            local ____opt_result_3115
+                            if ____opt_3113 ~= nil then
+                                ____opt_result_3115 = ____opt_3113(
+                                    ____opt_3113,
                                     __L1.ctx,
                                     p,
                                     __L1.scene,
                                     __L1.time
                                 )
                             end
-                            if ____t_3088(____opt_result_3087) then
+                            if ____t_3116(____opt_result_3115) then
                             else
                                 __L1:drawPlank(p)
                             end
@@ -18789,45 +18928,45 @@ local __O = {};
             end
         end
         if not __t(percurso) then
-            local ____opt_3100 = window.Interact
-            if ____opt_3100 ~= nil then
-                ____opt_3100 = ____opt_3100.drawBack
+            local ____opt_3128 = window.Interact
+            if ____opt_3128 ~= nil then
+                ____opt_3128 = ____opt_3128.drawBack
             end
-            if ____opt_3100 ~= nil then
-                local ____L1_ctx_3098 = __L1.ctx
-                local ____L1_scene_3094 = __L1.scene
-                local ____L1_camera_3095 = __L1.camera
-                local ____L1_time_3096 = __L1.time
-                local ____temp_3097 = not not __t(__L1.arena)
-                local ____opt_3090 = __L1.arena
-                if ____opt_3090 ~= nil then
-                    ____opt_3090 = ____opt_3090.type
+            if ____opt_3128 ~= nil then
+                local ____L1_ctx_3126 = __L1.ctx
+                local ____L1_scene_3122 = __L1.scene
+                local ____L1_camera_3123 = __L1.camera
+                local ____L1_time_3124 = __L1.time
+                local ____temp_3125 = not not __t(__L1.arena)
+                local ____opt_3118 = __L1.arena
+                if ____opt_3118 ~= nil then
+                    ____opt_3118 = ____opt_3118.type
                 end
-                local ____opt_3092 = __L1.arena
-                if ____opt_3092 ~= nil then
-                    ____opt_3092 = ____opt_3092.homeX
+                local ____opt_3120 = __L1.arena
+                if ____opt_3120 ~= nil then
+                    ____opt_3120 = ____opt_3120.homeX
                 end
-                ____opt_3100(
-                    ____opt_3100,
-                    ____L1_ctx_3098,
+                ____opt_3128(
+                    ____opt_3128,
+                    ____L1_ctx_3126,
                     {
-                        scene = ____L1_scene_3094,
-                        camera = ____L1_camera_3095,
-                        time = ____L1_time_3096,
-                        arena = ____temp_3097,
-                        arenaType = ____opt_3090,
-                        homeX = ____opt_3092,
+                        scene = ____L1_scene_3122,
+                        camera = ____L1_camera_3123,
+                        time = ____L1_time_3124,
+                        arena = ____temp_3125,
+                        arenaType = ____opt_3118,
+                        homeX = ____opt_3120,
                         room = not not __t(__L1.room)
                     }
                 )
             end
-            local ____opt_3104 = window.Fliperama
-            if ____opt_3104 ~= nil then
-                ____opt_3104 = ____opt_3104.drawWorld
+            local ____opt_3132 = window.Fliperama
+            if ____opt_3132 ~= nil then
+                ____opt_3132 = ____opt_3132.drawWorld
             end
-            if ____opt_3104 ~= nil then
-                ____opt_3104(
-                    ____opt_3104,
+            if ____opt_3132 ~= nil then
+                ____opt_3132(
+                    ____opt_3132,
                     __L1.ctx,
                     {
                         scene = __L1.scene,
@@ -18838,13 +18977,13 @@ local __O = {};
                     }
                 )
             end
-            local ____opt_3108 = window.Trigal
-            if ____opt_3108 ~= nil then
-                ____opt_3108 = ____opt_3108.drawBack
+            local ____opt_3136 = window.Trigal
+            if ____opt_3136 ~= nil then
+                ____opt_3136 = ____opt_3136.drawBack
             end
-            if ____opt_3108 ~= nil then
-                ____opt_3108(
-                    ____opt_3108,
+            if ____opt_3136 ~= nil then
+                ____opt_3136(
+                    ____opt_3136,
                     __L1.ctx,
                     {
                         scene = __L1.scene,
@@ -18856,13 +18995,13 @@ local __O = {};
                     }
                 )
             end
-            local ____opt_3112 = window.CampanhaPlantas
-            if ____opt_3112 ~= nil then
-                ____opt_3112 = ____opt_3112.drawBack
+            local ____opt_3140 = window.CampanhaPlantas
+            if ____opt_3140 ~= nil then
+                ____opt_3140 = ____opt_3140.drawBack
             end
-            if ____opt_3112 ~= nil then
-                ____opt_3112(
-                    ____opt_3112,
+            if ____opt_3140 ~= nil then
+                ____opt_3140(
+                    ____opt_3140,
                     __L1.ctx,
                     {
                         scene = __L1.scene,
@@ -18875,23 +19014,23 @@ local __O = {};
                 )
             end
             if __L1.scene >= 12 then
-                local ____opt_3116 = window.CampanhaCenarios
-                if ____opt_3116 ~= nil then
-                    ____opt_3116 = ____opt_3116.heroi
+                local ____opt_3144 = window.CampanhaCenarios
+                if ____opt_3144 ~= nil then
+                    ____opt_3144 = ____opt_3144.heroi
                 end
-                if ____opt_3116 ~= nil then
-                    ____opt_3116(____opt_3116, __L1.player.x, __L1.player.y, __L1.player.vy)
+                if ____opt_3144 ~= nil then
+                    ____opt_3144(____opt_3144, __L1.player.x, __L1.player.y, __L1.player.vy)
                 end
             end
         end
         if not __t(__L1.arena) then
-            local ____opt_3120 = window.BivoltQuest
-            if ____opt_3120 ~= nil then
-                ____opt_3120 = ____opt_3120.draw
+            local ____opt_3148 = window.BivoltQuest
+            if ____opt_3148 ~= nil then
+                ____opt_3148 = ____opt_3148.draw
             end
-            if ____opt_3120 ~= nil then
-                ____opt_3120(
-                    ____opt_3120,
+            if ____opt_3148 ~= nil then
+                ____opt_3148(
+                    ____opt_3148,
                     __L1.ctx,
                     0,
                     __L1.time,
@@ -18899,26 +19038,26 @@ local __O = {};
                     __L1.scene
                 )
             end
-            local ____opt_3124 = window.MissaoFarda
-            if ____opt_3124 ~= nil then
-                ____opt_3124 = ____opt_3124.desenhar
+            local ____opt_3152 = window.MissaoFarda
+            if ____opt_3152 ~= nil then
+                ____opt_3152 = ____opt_3152.desenhar
             end
-            if ____opt_3124 ~= nil then
-                ____opt_3124(
-                    ____opt_3124,
+            if ____opt_3152 ~= nil then
+                ____opt_3152(
+                    ____opt_3152,
                     __L1.ctx,
                     __L1.time,
                     __L1.q,
                     __L1.scene
                 )
             end
-            local ____opt_3128 = window.LugaresC1
-            if ____opt_3128 ~= nil then
-                ____opt_3128 = ____opt_3128.desenhar
+            local ____opt_3156 = window.LugaresC1
+            if ____opt_3156 ~= nil then
+                ____opt_3156 = ____opt_3156.desenhar
             end
-            if ____opt_3128 ~= nil then
-                ____opt_3128(
-                    ____opt_3128,
+            if ____opt_3156 ~= nil then
+                ____opt_3156(
+                    ____opt_3156,
                     __L1.ctx,
                     __L1.time,
                     __L1.q,
@@ -18928,16 +19067,16 @@ local __O = {};
             if __L1.scene == 1 then
                 __L1:drawSchoolWatch()
             end
-            local ____t_3135 = __t
-            local ____opt_3132 = window.Graphics
-            if ____opt_3132 ~= nil then
-                ____opt_3132 = ____opt_3132.isShader
+            local ____t_3163 = __t
+            local ____opt_3160 = window.Graphics
+            if ____opt_3160 ~= nil then
+                ____opt_3160 = ____opt_3160.isShader
             end
-            local ____opt_result_3134
-            if ____opt_3132 ~= nil then
-                ____opt_result_3134 = ____opt_3132(____opt_3132)
+            local ____opt_result_3162
+            if ____opt_3160 ~= nil then
+                ____opt_result_3162 = ____opt_3160(____opt_3160)
             end
-            if ____t_3135(____opt_result_3134) then
+            if ____t_3163(____opt_result_3162) then
                 __L1.pickupsLater = true
             else
                 __L1:drawPickupsNow(__L1.ctx)
@@ -18945,35 +19084,35 @@ local __O = {};
             for ____, ____value in __iterar((__entries(__L1.npcInfo))) do
                 local id = ____value[1]
                 local n = ____value[2]
-                local ____t_3139 = __t
-                local ____t_result_3138
-                local ____t_3137 = __t
-                local ____temp_3136 = n.scene == __L1.scene and math.abs(n.x - __L1.camera - __L1.W / 2) < __L1.W / 2 + 180
-                __O[2070] = ____temp_3136
-                if ____t_3137(____temp_3136) then
-                    ____t_result_3138 = __L1:npcAvailable(id)
+                local ____t_3167 = __t
+                local ____t_result_3166
+                local ____t_3165 = __t
+                local ____temp_3164 = n.scene == __L1.scene and math.abs(n.x - __L1.camera - __L1.W / 2) < __L1.W / 2 + 180
+                __O[2087] = ____temp_3164
+                if ____t_3165(____temp_3164) then
+                    ____t_result_3166 = __L1:npcAvailable(id)
                 else
-                    ____t_result_3138 = __O[2070]
+                    ____t_result_3166 = __O[2087]
                 end
-                if ____t_3139(____t_result_3138) then
-                    local ____L1_sprite_3153 = __L1.sprite
-                    local ____array_3152 = __TS__SparseArrayNew(id, n.x, __L1.FLOOR)
-                    local ____temp_3150 = id == "ravid" and 1 or -1
-                    local ____L1_time_3151 = __L1.time
-                    local ____t_result_3149
-                    local ____t_3141 = __t
-                    local ____temp_3140 = id == "ravid"
-                    __O[2072] = ____temp_3140
-                    if ____t_3141(____temp_3140) then
-                        ____t_result_3149 = __O[2072]
+                if ____t_3167(____t_result_3166) then
+                    local ____L1_sprite_3181 = __L1.sprite
+                    local ____array_3180 = __TS__SparseArrayNew(id, n.x, __L1.FLOOR)
+                    local ____temp_3178 = id == "ravid" and 1 or -1
+                    local ____L1_time_3179 = __L1.time
+                    local ____t_result_3177
+                    local ____t_3169 = __t
+                    local ____temp_3168 = id == "ravid"
+                    __O[2089] = ____temp_3168
+                    if ____t_3169(____temp_3168) then
+                        ____t_result_3177 = __O[2089]
                     else
-                        local ____t_result_3148
-                        local ____t_3143 = __t
-                        local ____temp_3142 = not not __t(__L1.dialog)
-                        __O[2071] = ____temp_3142
-                        if ____t_3143(____temp_3142) then
-                            local ____call_3147 = __call
-                            local ____arrL_result_3146 = __arrL(
+                        local ____t_result_3176
+                        local ____t_3171 = __t
+                        local ____temp_3170 = not not __t(__L1.dialog)
+                        __O[2088] = ____temp_3170
+                        if ____t_3171(____temp_3170) then
+                            local ____call_3175 = __call
+                            local ____arrL_result_3174 = __arrL(
                                 {
                                     n.name,
                                     __get(
@@ -18983,24 +19122,24 @@ local __O = {};
                                 },
                                 2
                             )
-                            local ____opt_3144 = __get(__L1.dialog.lines, __L1.dialog.index)
-                            if ____opt_3144 ~= nil then
-                                ____opt_3144 = ____opt_3144.name
+                            local ____opt_3172 = __get(__L1.dialog.lines, __L1.dialog.index)
+                            if ____opt_3172 ~= nil then
+                                ____opt_3172 = ____opt_3172.name
                             end
-                            ____t_result_3148 = ____call_3147(____arrL_result_3146, "includes", ____opt_3144)
+                            ____t_result_3176 = ____call_3175(____arrL_result_3174, "includes", ____opt_3172)
                         else
-                            ____t_result_3148 = __O[2071]
+                            ____t_result_3176 = __O[2088]
                         end
-                        ____t_result_3149 = ____t_result_3148
+                        ____t_result_3177 = ____t_result_3176
                     end
                     __TS__SparseArrayPush(
-                        ____array_3152,
+                        ____array_3180,
                         {
-                            facing = ____temp_3150,
-                            frame = ____L1_time_3151,
+                            facing = ____temp_3178,
+                            frame = ____L1_time_3179,
                             moving = false,
                             grounded = true,
-                            talking = ____t_result_3149,
+                            talking = ____t_result_3177,
                             injured = id == "ravile" and not __t(__L1.q.arthur),
                             helping = id == "aica" and not __t(__L1.q.arthur),
                             expressive = id == "arthur",
@@ -19008,9 +19147,9 @@ local __O = {};
                             smoke = id == "dede"
                         }
                     )
-                    ____L1_sprite_3153(
+                    ____L1_sprite_3181(
                         __L1,
-                        __TS__SparseArraySpread(____array_3152)
+                        __TS__SparseArraySpread(____array_3180)
                     )
                     if id == "swift" then
                         __L1:pill("Irmão de Clara", n.x, __L1.FLOOR - 112, __L1.nearNPC == id and "#ffe19b" or "#e0d7ba")
@@ -19018,79 +19157,79 @@ local __O = {};
                     else
                         __L1:pill(n.name, n.x, __L1.FLOOR - 100, __L1.nearNPC == id and "#ffe19b" or "#e0d7ba")
                     end
-                    local ____t_3159 = __t
-                    local ____t_result_3158
-                    local ____t_3157 = __t
-                    local ____t_result_3156
-                    local ____t_3155 = __t
-                    local ____temp_3154 = __L1.nearNPC == id
-                    __O[2073] = ____temp_3154
-                    if ____t_3155(____temp_3154) then
-                        ____t_result_3156 = __L1.started
+                    local ____t_3187 = __t
+                    local ____t_result_3186
+                    local ____t_3185 = __t
+                    local ____t_result_3184
+                    local ____t_3183 = __t
+                    local ____temp_3182 = __L1.nearNPC == id
+                    __O[2090] = ____temp_3182
+                    if ____t_3183(____temp_3182) then
+                        ____t_result_3184 = __L1.started
                     else
-                        ____t_result_3156 = __O[2073]
+                        ____t_result_3184 = __O[2090]
                     end
-                    __O[2074] = ____t_result_3156
-                    if ____t_3157(____t_result_3156) then
-                        ____t_result_3158 = not __t(__L1.dialog)
+                    __O[2091] = ____t_result_3184
+                    if ____t_3185(____t_result_3184) then
+                        ____t_result_3186 = not __t(__L1.dialog)
                     else
-                        ____t_result_3158 = __O[2074]
+                        ____t_result_3186 = __O[2091]
                     end
-                    if ____t_3159(____t_result_3158) then
+                    if ____t_3187(____t_result_3186) then
                         __L1:pill("[E] conversar", n.x, __L1.FLOOR - 134, "#b8e5a4")
                     end
                 end
             end
-            local ____t_3165 = __t
-            local ____t_result_3164
-            local ____t_3161 = __t
-            local ____temp_3160 = __L1.scene == 0
-            __O[2075] = ____temp_3160
-            if ____t_3161(____temp_3160) then
-                local ____opt_3162 = window.Art
-                if ____opt_3162 ~= nil then
-                    ____opt_3162 = ____opt_3162.drawVehicle
+            local ____t_3193 = __t
+            local ____t_result_3192
+            local ____t_3189 = __t
+            local ____temp_3188 = __L1.scene == 0
+            __O[2092] = ____temp_3188
+            if ____t_3189(____temp_3188) then
+                local ____opt_3190 = window.Art
+                if ____opt_3190 ~= nil then
+                    ____opt_3190 = ____opt_3190.drawVehicle
                 end
-                ____t_result_3164 = ____opt_3162
+                ____t_result_3192 = ____opt_3190
             else
-                ____t_result_3164 = __O[2075]
+                ____t_result_3192 = __O[2092]
             end
-            if ____t_3165(____t_result_3164) then
+            if ____t_3193(____t_result_3192) then
                 window.Art:drawVehicle(__L1.ctx, 1040, __L1.FLOOR - 5, __L1.time)
             end
             __L1:drawMinions()
-            local ____opt_3168 = window.FavelaCasas
-            if ____opt_3168 ~= nil then
-                ____opt_3168 = ____opt_3168.portas
+            local ____opt_3196 = window.FavelaCasas
+            if ____opt_3196 ~= nil then
+                ____opt_3196 = ____opt_3196.portas
             end
-            if ____opt_3168 ~= nil then
-                ____opt_3168(____opt_3168, __L1.ctx, __L1.scene, __L1.time)
+            if ____opt_3196 ~= nil then
+                ____opt_3196(____opt_3196, __L1.ctx, __L1.scene, __L1.time)
             end
-            local ____iter_3178 = __iter
-            local ____t_result_3177
-            local ____t_3176 = __t
-            local ____opt_3174 = window.WorldData
-            if ____opt_3174 ~= nil then
-                ____opt_3174 = ____opt_3174.doors
+            local ____iter_3206 = __iter
+            local ____t_result_3205
+            local ____t_3204 = __t
+            local ____opt_3202 = window.WorldData
+            if ____opt_3202 ~= nil then
+                ____opt_3202 = ____opt_3202.doors
             end
-            __O[2076] = ____opt_3174
-            if ____t_3176(____opt_3174) then
-                ____t_result_3177 = __O[2076]
+            __O[2093] = ____opt_3202
+            if ____t_3204(____opt_3202) then
+                ____t_result_3205 = __O[2093]
             else
-                ____t_result_3177 = __arrL({}, 0)
+                ____t_result_3205 = __arrL({}, 0)
             end
-            for ____, d in __TS__Iterator(____iter_3178(____t_result_3177)) do
-                local ____t_3173 = __t
-                local ____t_result_3172
-                local ____t_3171 = __t
-                local ____temp_3170 = d.scene == __L1.scene and math.abs(__L1.player.x - d.x) < 110
-                __O[2077] = ____temp_3170
-                if ____t_3171(____temp_3170) then
-                    ____t_result_3172 = math.abs(__L1.player.y - __L1.FLOOR) < 80
+            for ____, d in __TS__Iterator(____iter_3206(____t_result_3205)) do
+                local ____t_3201 = __t
+                local ____t_result_3200
+                local ____t_3199 = __t
+                local ____temp_3198 = d.scene == __L1.scene and math.abs(__L1.player.x - d.x) < 110
+                __O[2094] = ____temp_3198
+                if ____t_3199(____temp_3198) then
+                    ____t_result_3200 = math.abs(__L1.player.y - __L1.FLOOR) < 80
                 else
-                    ____t_result_3172 = __O[2077]
+                    ____t_result_3200 = __O[2094]
                 end
-                if ____t_3173(____t_result_3172) then
+                if ____t_3201(____t_result_3200) then
                     __L1:pill(
                         __t(__L1.vehicle) and "[V] estacionar para entrar" or __add("[E] ", d.label),
                         d.x,
@@ -19100,43 +19239,43 @@ local __O = {};
                 end
             end
         end
-        local ____iter_3191 = __iter
-        local ____t_result_3190
-        local ____t_3189 = __t
-        local ____opt_3187 = window.WorldData
-        if ____opt_3187 ~= nil then
-            ____opt_3187 = ____opt_3187.sarueTraps
+        local ____iter_3219 = __iter
+        local ____t_result_3218
+        local ____t_3217 = __t
+        local ____opt_3215 = window.WorldData
+        if ____opt_3215 ~= nil then
+            ____opt_3215 = ____opt_3215.sarueTraps
         end
-        __O[2078] = ____opt_3187
-        if ____t_3189(____opt_3187) then
-            ____t_result_3190 = __O[2078]
+        __O[2095] = ____opt_3215
+        if ____t_3217(____opt_3215) then
+            ____t_result_3218 = __O[2095]
         else
-            ____t_result_3190 = __arrL({}, 0)
+            ____t_result_3218 = __arrL({}, 0)
         end
-        for ____, trap in __TS__Iterator(____iter_3191(____t_result_3190)) do
-            local ____t_3186 = __t
-            local ____t_result_3185
-            local ____t_3182 = __t
-            local ____t_result_3181
-            local ____t_3180 = __t
-            local ____temp_3179 = trap.scene == __L1.scene
-            __O[2079] = ____temp_3179
-            if ____t_3180(____temp_3179) then
-                ____t_result_3181 = not __t(__L1.arena) or __L1.arena.type == "marco"
+        for ____, trap in __TS__Iterator(____iter_3219(____t_result_3218)) do
+            local ____t_3214 = __t
+            local ____t_result_3213
+            local ____t_3210 = __t
+            local ____t_result_3209
+            local ____t_3208 = __t
+            local ____temp_3207 = trap.scene == __L1.scene
+            __O[2096] = ____temp_3207
+            if ____t_3208(____temp_3207) then
+                ____t_result_3209 = not __t(__L1.arena) or __L1.arena.type == "marco"
             else
-                ____t_result_3181 = __O[2079]
+                ____t_result_3209 = __O[2096]
             end
-            __O[2080] = ____t_result_3181
-            if ____t_3182(____t_result_3181) then
-                local ____opt_3183 = window.Art
-                if ____opt_3183 ~= nil then
-                    ____opt_3183 = ____opt_3183.drawSarueTrap
+            __O[2097] = ____t_result_3209
+            if ____t_3210(____t_result_3209) then
+                local ____opt_3211 = window.Art
+                if ____opt_3211 ~= nil then
+                    ____opt_3211 = ____opt_3211.drawSarueTrap
                 end
-                ____t_result_3185 = ____opt_3183
+                ____t_result_3213 = ____opt_3211
             else
-                ____t_result_3185 = __O[2080]
+                ____t_result_3213 = __O[2097]
             end
-            if ____t_3186(____t_result_3185) then
+            if ____t_3214(____t_result_3213) then
                 window.Art:drawSarueTrap(
                     __L1.ctx,
                     trap.x,
@@ -19148,66 +19287,66 @@ local __O = {};
         end
         for ____, e in __iterar((__L1.enemies)) do
             do
-                local ____t_3196 = __t
-                local ____t_result_3195
-                local ____t_3193 = __t
-                local ____le_result_3192 = __le(e.hp, 0)
-                __O[2081] = ____le_result_3192
-                if ____t_3193(____le_result_3192) then
-                    ____t_result_3195 = __O[2081]
+                local ____t_3224 = __t
+                local ____t_result_3223
+                local ____t_3221 = __t
+                local ____le_result_3220 = __le(e.hp, 0)
+                __O[2098] = ____le_result_3220
+                if ____t_3221(____le_result_3220) then
+                    ____t_result_3223 = __O[2098]
                 else
-                    local ____t_result_3194
+                    local ____t_result_3222
                     if __t(__L1.arena) then
-                        ____t_result_3194 = e.type ~= __L1.arena.type
+                        ____t_result_3222 = e.type ~= __L1.arena.type
                     else
-                        ____t_result_3194 = __L1.arena
+                        ____t_result_3222 = __L1.arena
                     end
-                    ____t_result_3195 = ____t_result_3194
+                    ____t_result_3223 = ____t_result_3222
                 end
-                if ____t_3196(____t_result_3195) then
+                if ____t_3224(____t_result_3223) then
                     continue
                 end
                 if e == __L1.activeBoss then
-                    local ____opt_3199 = window.FxPixel
-                    if ____opt_3199 ~= nil then
-                        ____opt_3199 = ____opt_3199.chefe
+                    local ____opt_3227 = window.FxPixel
+                    if ____opt_3227 ~= nil then
+                        ____opt_3227 = ____opt_3227.chefe
                     end
-                    if ____opt_3199 ~= nil then
-                        ____opt_3199(____opt_3199, e)
+                    if ____opt_3227 ~= nil then
+                        ____opt_3227(____opt_3227, e)
                     end
                 end
                 if __t(e.conquista) then
                     local f = e.conquista
                     local ataca = f.estado == "firing"
                     local prepara = f.estado == "windup"
-                    local ____L1_time_3204 = __L1.time
-                    local ____temp_3205 = __lt(__L1.player.x, e.x) and -1 or 1
-                    local ____gt_result_3206 = __gt(e.hit, 0)
-                    local ____t_result_3201
+                    local ____L1_time_3232 = __L1.time
+                    local ____temp_3233 = __lt(__L1.player.x, e.x) and -1 or 1
+                    local ____gt_result_3234 = __gt(e.hit, 0)
+                    local ____t_result_3229
                     if __t(ataca) then
-                        ____t_result_3201 = ataca
+                        ____t_result_3229 = ataca
                     else
-                        ____t_result_3201 = prepara
+                        ____t_result_3229 = prepara
                     end
-                    local ____t_result_3203
+                    local ____t_result_3231
                     if __t(prepara) then
-                        ____t_result_3203 = 0.25 * __L1:clamp(f.tempo / f.dur, 0, 1)
+                        ____t_result_3231 = 0.25 * __L1:clamp(f.tempo / f.dur, 0, 1)
                     else
-                        local ____t_result_3202
+                        local ____t_result_3230
                         if __t(ataca) then
-                            ____t_result_3202 = 0.3 + 0.7 * __L1:clamp(f.tempo / f.dur, 0, 1)
+                            ____t_result_3230 = 0.3 + 0.7 * __L1:clamp(f.tempo / f.dur, 0, 1)
                         else
-                            ____t_result_3202 = 0
+                            ____t_result_3230 = 0
                         end
-                        ____t_result_3203 = ____t_result_3202
+                        ____t_result_3231 = ____t_result_3230
                     end
                     local opt = {
-                        frame = ____L1_time_3204,
+                        frame = ____L1_time_3232,
                         grounded = true,
-                        facing = ____temp_3205,
-                        hit = ____gt_result_3206,
-                        attack = ____t_result_3201,
-                        attackProgress = ____t_result_3203,
+                        facing = ____temp_3233,
+                        hit = ____gt_result_3234,
+                        attack = ____t_result_3229,
+                        attackProgress = ____t_result_3231,
                         moving = f.estado == "recover" and math.abs(f.destino - f.x) > 4
                     }
                     if __t(f.estrada) then
@@ -19244,32 +19383,32 @@ local __O = {};
                     continue
                 end
                 if e.state == "underground" then
-                    local ____L1_drawSewerMarker_3208 = __L1.drawSewerMarker
-                    local ____e_diveFromX_3207 = e.diveFromX
-                    if ____e_diveFromX_3207 == nil then
-                        ____e_diveFromX_3207 = e.x
+                    local ____L1_drawSewerMarker_3236 = __L1.drawSewerMarker
+                    local ____e_diveFromX_3235 = e.diveFromX
+                    if ____e_diveFromX_3235 == nil then
+                        ____e_diveFromX_3235 = e.x
                     end
-                    ____L1_drawSewerMarker_3208(__L1, ____e_diveFromX_3207, false)
+                    ____L1_drawSewerMarker_3236(__L1, ____e_diveFromX_3235, false)
                     continue
                 end
                 local fxOn = e == __L1.activeBoss
                 if __t(fxOn) then
-                    local ____opt_3211 = window.BossFx
-                    if ____opt_3211 ~= nil then
-                        ____opt_3211 = ____opt_3211.drawBack
+                    local ____opt_3239 = window.BossFx
+                    if ____opt_3239 ~= nil then
+                        ____opt_3239 = ____opt_3239.drawBack
                     end
-                    if ____opt_3211 ~= nil then
-                        ____opt_3211(____opt_3211, __L1.ctx, e, __L1.time)
+                    if ____opt_3239 ~= nil then
+                        ____opt_3239(____opt_3239, __L1.ctx, e, __L1.time)
                     end
                 end
                 if e.type == "nikolas" then
-                    local ____opt_3215 = window.NikolasFx
-                    if ____opt_3215 ~= nil then
-                        ____opt_3215 = ____opt_3215.aura
+                    local ____opt_3243 = window.NikolasFx
+                    if ____opt_3243 ~= nil then
+                        ____opt_3243 = ____opt_3243.aura
                     end
-                    if ____opt_3215 ~= nil then
-                        ____opt_3215(
-                            ____opt_3215,
+                    if ____opt_3243 ~= nil then
+                        ____opt_3243(
+                            ____opt_3243,
                             __L1.ctx,
                             e,
                             __L1.time,
@@ -19280,21 +19419,21 @@ local __O = {};
                 if e.type == "igor" then
                     e.igorScale = __L1:igorScale(e)
                 end
-                local ____t_result_3222
+                local ____t_result_3250
                 if __t(fxOn) then
-                    local ____opt_3219 = window.BossFx
-                    if ____opt_3219 ~= nil then
-                        ____opt_3219 = ____opt_3219.transform
+                    local ____opt_3247 = window.BossFx
+                    if ____opt_3247 ~= nil then
+                        ____opt_3247 = ____opt_3247.transform
                     end
-                    local ____opt_result_3221
-                    if ____opt_3219 ~= nil then
-                        ____opt_result_3221 = ____opt_3219(____opt_3219, e, __L1.player)
+                    local ____opt_result_3249
+                    if ____opt_3247 ~= nil then
+                        ____opt_result_3249 = ____opt_3247(____opt_3247, e, __L1.player)
                     end
-                    ____t_result_3222 = ____opt_result_3221
+                    ____t_result_3250 = ____opt_result_3249
                 else
-                    ____t_result_3222 = nil
+                    ____t_result_3250 = nil
                 end
-                local bt = ____t_result_3222
+                local bt = ____t_result_3250
                 if __t(bt) then
                     __L1.ctx:save()
                     __L1.ctx:translate(
@@ -19315,285 +19454,285 @@ local __O = {};
                         __TS__Number(-e.y)
                     )
                 end
-                local ____L1_sprite_3312 = __L1.sprite
-                local ____array_3311 = __TS__SparseArrayNew(e.type, e.x, e.y)
-                local ____t_result_3227
-                local ____t_3226 = __t
-                local ____t_result_3225
-                local ____t_3224 = __t
-                local ____temp_3223 = __L1:isSchoolMonitor(e)
-                __O[2082] = ____temp_3223
-                if ____t_3224(____temp_3223) then
-                    ____t_result_3225 = not __t(__L1.arena)
+                local ____L1_sprite_3340 = __L1.sprite
+                local ____array_3339 = __TS__SparseArrayNew(e.type, e.x, e.y)
+                local ____t_result_3255
+                local ____t_3254 = __t
+                local ____t_result_3253
+                local ____t_3252 = __t
+                local ____temp_3251 = __L1:isSchoolMonitor(e)
+                __O[2099] = ____temp_3251
+                if ____t_3252(____temp_3251) then
+                    ____t_result_3253 = not __t(__L1.arena)
                 else
-                    ____t_result_3225 = __O[2082]
+                    ____t_result_3253 = __O[2099]
                 end
-                if ____t_3226(____t_result_3225) then
-                    ____t_result_3227 = e.monitorDir
+                if ____t_3254(____t_result_3253) then
+                    ____t_result_3255 = e.monitorDir
                 else
-                    ____t_result_3227 = __lt(__L1.player.x, e.x) and -1 or 1
+                    ____t_result_3255 = __lt(__L1.player.x, e.x) and -1 or 1
                 end
-                local ____L1_time_3291 = __L1.time
-                local ____temp_3229
+                local ____L1_time_3319 = __L1.time
+                local ____temp_3257
                 if e.type == "nikolas" then
-                    local ____t_result_3228
+                    local ____t_result_3256
                     if __t(e.phase) then
-                        ____t_result_3228 = e.phase
+                        ____t_result_3256 = e.phase
                     else
-                        ____t_result_3228 = 1
+                        ____t_result_3256 = 1
                     end
-                    ____temp_3229 = ____t_result_3228
+                    ____temp_3257 = ____t_result_3256
                 else
-                    ____temp_3229 = nil
+                    ____temp_3257 = nil
                 end
-                local ____temp_3292 = e.type == "nikolas" and e.state == "phaseChange"
-                local ____temp_3230
+                local ____temp_3320 = e.type == "nikolas" and e.state == "phaseChange"
+                local ____temp_3258
                 if e.type == "nikolas" then
-                    ____temp_3230 = __L1:nikolasTransformProgress(e)
+                    ____temp_3258 = __L1:nikolasTransformProgress(e)
                 else
-                    ____temp_3230 = 1
+                    ____temp_3258 = 1
                 end
-                local ____e_state_3293 = e.state
-                local ____e_kind_3294 = e.kind
-                local ____e_targetX_3295 = e.targetX
-                local ____gt_result_3296 = __gt(e.hit, 0)
-                local ____temp_3297 = e.state == "windup" or e.state == "firing"
-                local ____temp_3238
+                local ____e_state_3321 = e.state
+                local ____e_kind_3322 = e.kind
+                local ____e_targetX_3323 = e.targetX
+                local ____gt_result_3324 = __gt(e.hit, 0)
+                local ____temp_3325 = e.state == "windup" or e.state == "firing"
+                local ____temp_3266
                 if e.state == "windup" then
-                    local ____L1_clamp_3233 = __L1.clamp
-                    local ____e_stateTimer_3232 = e.stateTimer
-                    local ____t_result_3231
+                    local ____L1_clamp_3261 = __L1.clamp
+                    local ____e_stateTimer_3260 = e.stateTimer
+                    local ____t_result_3259
                     if __t(e.windupDuration) then
-                        ____t_result_3231 = e.windupDuration
+                        ____t_result_3259 = e.windupDuration
                     else
-                        ____t_result_3231 = 1
+                        ____t_result_3259 = 1
                     end
-                    ____temp_3238 = 0.28 * ____L1_clamp_3233(__L1, 1 - ____e_stateTimer_3232 / ____t_result_3231, 0, 1)
+                    ____temp_3266 = 0.28 * ____L1_clamp_3261(__L1, 1 - ____e_stateTimer_3260 / ____t_result_3259, 0, 1)
                 else
-                    local ____temp_3237
+                    local ____temp_3265
                     if e.state == "firing" then
-                        local ____L1_clamp_3236 = __L1.clamp
-                        local ____L1_time_3235 = __L1.time
-                        local ____e_visualAttackAt_3234 = e.visualAttackAt
-                        if ____e_visualAttackAt_3234 == nil then
-                            ____e_visualAttackAt_3234 = __L1.time
+                        local ____L1_clamp_3264 = __L1.clamp
+                        local ____L1_time_3263 = __L1.time
+                        local ____e_visualAttackAt_3262 = e.visualAttackAt
+                        if ____e_visualAttackAt_3262 == nil then
+                            ____e_visualAttackAt_3262 = __L1.time
                         end
-                        ____temp_3237 = 0.3 + 0.7 * ____L1_clamp_3236(__L1, (____L1_time_3235 - ____e_visualAttackAt_3234) / 0.45, 0, 1)
+                        ____temp_3265 = 0.3 + 0.7 * ____L1_clamp_3264(__L1, (____L1_time_3263 - ____e_visualAttackAt_3262) / 0.45, 0, 1)
                     else
-                        ____temp_3237 = 0
+                        ____temp_3265 = 0
                     end
-                    ____temp_3238 = ____temp_3237
+                    ____temp_3266 = ____temp_3265
                 end
-                local ____gt_result_3298 = __gt(e.angry, 0)
-                local ____e_rage_3299 = e.rage
-                local ____temp_3243
+                local ____gt_result_3326 = __gt(e.angry, 0)
+                local ____e_rage_3327 = e.rage
+                local ____temp_3271
                 if e.type == "igor" then
-                    ____temp_3243 = __L1:igorScale(e)
+                    ____temp_3271 = __L1:igorScale(e)
                 else
-                    local ____t_3242 = __t
-                    local ____t_result_3241
-                    local ____t_3240 = __t
-                    local ____temp_3239 = e.type == "marco"
-                    __O[2083] = ____temp_3239
-                    if ____t_3240(____temp_3239) then
-                        ____t_result_3241 = e.rage
+                    local ____t_3270 = __t
+                    local ____t_result_3269
+                    local ____t_3268 = __t
+                    local ____temp_3267 = e.type == "marco"
+                    __O[2100] = ____temp_3267
+                    if ____t_3268(____temp_3267) then
+                        ____t_result_3269 = e.rage
                     else
-                        ____t_result_3241 = __O[2083]
+                        ____t_result_3269 = __O[2100]
                     end
-                    ____temp_3243 = ____t_3242(____t_result_3241) and 1.4 or 1
+                    ____temp_3271 = ____t_3270(____t_result_3269) and 1.4 or 1
                 end
-                local ____temp_3300 = not not __t(__L1.arena)
-                local ____temp_3301 = e.state == "bellyRolling"
-                local ____t_result_3244
+                local ____temp_3328 = not not __t(__L1.arena)
+                local ____temp_3329 = e.state == "bellyRolling"
+                local ____t_result_3272
                 if __t(e.rollAngle) then
-                    ____t_result_3244 = e.rollAngle
+                    ____t_result_3272 = e.rollAngle
                 else
-                    ____t_result_3244 = 0
+                    ____t_result_3272 = 0
                 end
-                local ____t_result_3257
-                local ____t_3248 = __t
-                local ____t_result_3247
-                local ____t_3246 = __t
-                local ____temp_3245 = e.type == "igor"
-                __O[2084] = ____temp_3245
-                if ____t_3246(____temp_3245) then
-                    ____t_result_3247 = fxOn
+                local ____t_result_3285
+                local ____t_3276 = __t
+                local ____t_result_3275
+                local ____t_3274 = __t
+                local ____temp_3273 = e.type == "igor"
+                __O[2101] = ____temp_3273
+                if ____t_3274(____temp_3273) then
+                    ____t_result_3275 = fxOn
                 else
-                    ____t_result_3247 = __O[2084]
+                    ____t_result_3275 = __O[2101]
                 end
-                if ____t_3248(____t_result_3247) then
-                    local ____opt_3253 = window.BossFx
-                    if ____opt_3253 ~= nil then
-                        ____opt_3253 = ____opt_3253.igorPose
+                if ____t_3276(____t_result_3275) then
+                    local ____opt_3281 = window.BossFx
+                    if ____opt_3281 ~= nil then
+                        ____opt_3281 = ____opt_3281.igorPose
                     end
-                    local ____opt_result_3255
-                    if ____opt_3253 ~= nil then
-                        ____opt_result_3255 = ____opt_3253(____opt_3253, e)
+                    local ____opt_result_3283
+                    if ____opt_3281 ~= nil then
+                        ____opt_result_3283 = ____opt_3281(____opt_3281, e)
                     end
-                    local ____opt_result_3256
-                    if ____opt_result_3255 ~= nil then
-                        ____opt_result_3256 = ____opt_result_3255.pose
+                    local ____opt_result_3284
+                    if ____opt_result_3283 ~= nil then
+                        ____opt_result_3284 = ____opt_result_3283.pose
                     end
-                    ____t_result_3257 = ____opt_result_3256
+                    ____t_result_3285 = ____opt_result_3284
                 else
-                    ____t_result_3257 = nil
+                    ____t_result_3285 = nil
                 end
-                local ____t_result_3270
-                local ____t_3261 = __t
-                local ____t_result_3260
-                local ____t_3259 = __t
-                local ____temp_3258 = e.type == "igor"
-                __O[2085] = ____temp_3258
-                if ____t_3259(____temp_3258) then
-                    ____t_result_3260 = fxOn
+                local ____t_result_3298
+                local ____t_3289 = __t
+                local ____t_result_3288
+                local ____t_3287 = __t
+                local ____temp_3286 = e.type == "igor"
+                __O[2102] = ____temp_3286
+                if ____t_3287(____temp_3286) then
+                    ____t_result_3288 = fxOn
                 else
-                    ____t_result_3260 = __O[2085]
+                    ____t_result_3288 = __O[2102]
                 end
-                if ____t_3261(____t_result_3260) then
-                    local ____opt_3266 = window.BossFx
-                    if ____opt_3266 ~= nil then
-                        ____opt_3266 = ____opt_3266.igorPose
+                if ____t_3289(____t_result_3288) then
+                    local ____opt_3294 = window.BossFx
+                    if ____opt_3294 ~= nil then
+                        ____opt_3294 = ____opt_3294.igorPose
                     end
-                    local ____opt_result_3268
-                    if ____opt_3266 ~= nil then
-                        ____opt_result_3268 = ____opt_3266(____opt_3266, e)
+                    local ____opt_result_3296
+                    if ____opt_3294 ~= nil then
+                        ____opt_result_3296 = ____opt_3294(____opt_3294, e)
                     end
-                    local ____opt_result_3269
-                    if ____opt_result_3268 ~= nil then
-                        ____opt_result_3269 = ____opt_result_3268.k
+                    local ____opt_result_3297
+                    if ____opt_result_3296 ~= nil then
+                        ____opt_result_3297 = ____opt_result_3296.k
                     end
-                    ____t_result_3270 = ____opt_result_3269
+                    ____t_result_3298 = ____opt_result_3297
                 else
-                    ____t_result_3270 = nil
+                    ____t_result_3298 = nil
                 end
-                local ____temp_3302 = e.state == "firing"
-                local ____t_result_3276
-                local ____t_3272 = __t
-                local ____temp_3271 = e.state == "dashing"
-                __O[2087] = ____temp_3271
-                if ____t_3272(____temp_3271) then
-                    ____t_result_3276 = __O[2087]
+                local ____temp_3330 = e.state == "firing"
+                local ____t_result_3304
+                local ____t_3300 = __t
+                local ____temp_3299 = e.state == "dashing"
+                __O[2104] = ____temp_3299
+                if ____t_3300(____temp_3299) then
+                    ____t_result_3304 = __O[2104]
                 else
-                    local ____t_result_3275
-                    local ____t_3274 = __t
-                    local ____temp_3273 = __L1:isSchoolMonitor(e)
-                    __O[2086] = ____temp_3273
-                    if ____t_3274(____temp_3273) then
-                        ____t_result_3275 = not __t(__L1.arena)
+                    local ____t_result_3303
+                    local ____t_3302 = __t
+                    local ____temp_3301 = __L1:isSchoolMonitor(e)
+                    __O[2103] = ____temp_3301
+                    if ____t_3302(____temp_3301) then
+                        ____t_result_3303 = not __t(__L1.arena)
                     else
-                        ____t_result_3275 = __O[2086]
+                        ____t_result_3303 = __O[2103]
                     end
-                    ____t_result_3276 = ____t_result_3275
+                    ____t_result_3304 = ____t_result_3303
                 end
-                local ____temp_3303 = e.state == "dashing"
-                local ____temp_3281
+                local ____temp_3331 = e.state == "dashing"
+                local ____temp_3309
                 if e.state == "dashing" then
-                    ____temp_3281 = 600
+                    ____temp_3309 = 600
                 else
-                    local ____t_3280 = __t
-                    local ____t_result_3279
-                    local ____t_3278 = __t
-                    local ____temp_3277 = __L1:isSchoolMonitor(e)
-                    __O[2088] = ____temp_3277
-                    if ____t_3278(____temp_3277) then
-                        ____t_result_3279 = not __t(__L1.arena)
+                    local ____t_3308 = __t
+                    local ____t_result_3307
+                    local ____t_3306 = __t
+                    local ____temp_3305 = __L1:isSchoolMonitor(e)
+                    __O[2105] = ____temp_3305
+                    if ____t_3306(____temp_3305) then
+                        ____t_result_3307 = not __t(__L1.arena)
                     else
-                        ____t_result_3279 = __O[2088]
+                        ____t_result_3307 = __O[2105]
                     end
-                    ____temp_3281 = ____t_3280(____t_result_3279) and 33 or 0
+                    ____temp_3309 = ____t_3308(____t_result_3307) and 33 or 0
                 end
-                local ____ge_result_3304 = __ge(e.y, __L1.FLOOR)
-                local ____temp_3305 = e.type == "arthur"
-                local ____temp_3306 = e.type == "dede"
-                local ____temp_3307 = e.type == "dede"
-                local ____t_result_3284
-                local ____t_3283 = __t
-                local ____temp_3282 = e.type == "dede" and e.state == "windup"
-                __O[2089] = ____temp_3282
-                if ____t_3283(____temp_3282) then
-                    ____t_result_3284 = e.kind == "tragada"
+                local ____ge_result_3332 = __ge(e.y, __L1.FLOOR)
+                local ____temp_3333 = e.type == "arthur"
+                local ____temp_3334 = e.type == "dede"
+                local ____temp_3335 = e.type == "dede"
+                local ____t_result_3312
+                local ____t_3311 = __t
+                local ____temp_3310 = e.type == "dede" and e.state == "windup"
+                __O[2106] = ____temp_3310
+                if ____t_3311(____temp_3310) then
+                    ____t_result_3312 = e.kind == "tragada"
                 else
-                    ____t_result_3284 = __O[2089]
+                    ____t_result_3312 = __O[2106]
                 end
-                local ____temp_3308 = e.state == "concealed"
-                local ____temp_3309 = e.type == "marco" and "doodle" or (e.type == "nikolas" and "slime" or (e.type == "freddy" and "punch" or (e.type == "nicolas" and "cast" or "word")))
-                local ____temp_3287 = e.type == "nicolas"
-                if ____temp_3287 then
-                    local ____opt_3285 = __L1.arena
-                    if ____opt_3285 ~= nil then
-                        ____opt_3285 = ____opt_3285.type
+                local ____temp_3336 = e.state == "concealed"
+                local ____temp_3337 = e.type == "marco" and "doodle" or (e.type == "nikolas" and "slime" or (e.type == "freddy" and "punch" or (e.type == "nicolas" and "cast" or "word")))
+                local ____temp_3315 = e.type == "nicolas"
+                if ____temp_3315 then
+                    local ____opt_3313 = __L1.arena
+                    if ____opt_3313 ~= nil then
+                        ____opt_3313 = ____opt_3313.type
                     end
-                    ____temp_3287 = ____opt_3285 == "nicolas"
+                    ____temp_3315 = ____opt_3313 == "nicolas"
                 end
-                local ____temp_3310 = e.type == "nicolas" and e.state == "windup"
-                local ____temp_3290 = e.type == "nicolas"
-                if ____temp_3290 then
-                    local ____opt_3288 = __L1.arena
-                    if ____opt_3288 ~= nil then
-                        ____opt_3288 = ____opt_3288.type
+                local ____temp_3338 = e.type == "nicolas" and e.state == "windup"
+                local ____temp_3318 = e.type == "nicolas"
+                if ____temp_3318 then
+                    local ____opt_3316 = __L1.arena
+                    if ____opt_3316 ~= nil then
+                        ____opt_3316 = ____opt_3316.type
                     end
-                    ____temp_3290 = ____opt_3288 == "nicolas"
+                    ____temp_3318 = ____opt_3316 == "nicolas"
                 end
-                __TS__SparseArrayPush(____array_3311, {
-                    facing = ____t_result_3227,
-                    frame = ____L1_time_3291,
-                    bossPhase = ____temp_3229,
-                    phaseChanging = ____temp_3292,
-                    transformProgress = ____temp_3230,
-                    phaseState = ____e_state_3293,
-                    giantAttack = ____e_kind_3294,
-                    attackTargetX = ____e_targetX_3295,
-                    hit = ____gt_result_3296,
-                    attack = ____temp_3297,
-                    attackProgress = ____temp_3238,
-                    angry = ____gt_result_3298,
-                    rage = ____e_rage_3299,
-                    scale = ____temp_3243,
-                    monitorBattle = ____temp_3300,
-                    bellyRolling = ____temp_3301,
-                    rollAngle = ____t_result_3244,
-                    igorPose = ____t_result_3257,
-                    igorPoseK = ____t_result_3270,
-                    firing = ____temp_3302,
-                    moving = ____t_result_3276,
-                    dash = ____temp_3303,
-                    speed = ____temp_3281,
-                    grounded = ____ge_result_3304,
-                    expressive = ____temp_3305,
-                    smoking = ____temp_3306,
-                    smoke = ____temp_3307,
-                    inhale = ____t_result_3284,
-                    hiddenInSmoke = ____temp_3308,
-                    attackType = ____temp_3309,
-                    supreme = ____temp_3287,
-                    charging = ____temp_3310,
-                    powered = ____temp_3290,
+                __TS__SparseArrayPush(____array_3339, {
+                    facing = ____t_result_3255,
+                    frame = ____L1_time_3319,
+                    bossPhase = ____temp_3257,
+                    phaseChanging = ____temp_3320,
+                    transformProgress = ____temp_3258,
+                    phaseState = ____e_state_3321,
+                    giantAttack = ____e_kind_3322,
+                    attackTargetX = ____e_targetX_3323,
+                    hit = ____gt_result_3324,
+                    attack = ____temp_3325,
+                    attackProgress = ____temp_3266,
+                    angry = ____gt_result_3326,
+                    rage = ____e_rage_3327,
+                    scale = ____temp_3271,
+                    monitorBattle = ____temp_3328,
+                    bellyRolling = ____temp_3329,
+                    rollAngle = ____t_result_3272,
+                    igorPose = ____t_result_3285,
+                    igorPoseK = ____t_result_3298,
+                    firing = ____temp_3330,
+                    moving = ____t_result_3304,
+                    dash = ____temp_3331,
+                    speed = ____temp_3309,
+                    grounded = ____ge_result_3332,
+                    expressive = ____temp_3333,
+                    smoking = ____temp_3334,
+                    smoke = ____temp_3335,
+                    inhale = ____t_result_3312,
+                    hiddenInSmoke = ____temp_3336,
+                    attackType = ____temp_3337,
+                    supreme = ____temp_3315,
+                    charging = ____temp_3338,
+                    powered = ____temp_3318,
                     noseRub = e.type == "nikolas"
                 })
-                ____L1_sprite_3312(
+                ____L1_sprite_3340(
                     __L1,
-                    __TS__SparseArraySpread(____array_3311)
+                    __TS__SparseArraySpread(____array_3339)
                 )
                 if __t(bt) then
                     __L1.ctx:restore()
                 end
                 if __t(fxOn) then
-                    local ____opt_3315 = window.BossFx
-                    if ____opt_3315 ~= nil then
-                        ____opt_3315 = ____opt_3315.drawFront
+                    local ____opt_3343 = window.BossFx
+                    if ____opt_3343 ~= nil then
+                        ____opt_3343 = ____opt_3343.drawFront
                     end
-                    if ____opt_3315 ~= nil then
-                        ____opt_3315(____opt_3315, __L1.ctx, e, __L1.time)
+                    if ____opt_3343 ~= nil then
+                        ____opt_3343(____opt_3343, __L1.ctx, e, __L1.time)
                     end
                 end
                 if e.type == "nikolas" then
-                    local ____opt_3319 = window.NikolasFx
-                    if ____opt_3319 ~= nil then
-                        ____opt_3319 = ____opt_3319.frente
+                    local ____opt_3347 = window.NikolasFx
+                    if ____opt_3347 ~= nil then
+                        ____opt_3347 = ____opt_3347.frente
                     end
-                    if ____opt_3319 ~= nil then
-                        ____opt_3319(
-                            ____opt_3319,
+                    if ____opt_3347 ~= nil then
+                        ____opt_3347(
+                            ____opt_3347,
                             __L1.ctx,
                             e,
                             __L1.time,
@@ -19601,69 +19740,69 @@ local __O = {};
                         )
                     end
                 end
-                local ____e_y_3327 = e.y
-                local ____temp_3326
+                local ____e_y_3355 = e.y
+                local ____temp_3354
                 if e.type == "giant" then
-                    ____temp_3326 = 205
+                    ____temp_3354 = 205
                 else
-                    local ____t_result_3325
-                    local ____t_3324 = __t
-                    local ____t_result_3323
-                    local ____t_3322 = __t
-                    local ____temp_3321 = e.type == "igor"
-                    __O[2090] = ____temp_3321
-                    if ____t_3322(____temp_3321) then
-                        ____t_result_3323 = __L1.arena
+                    local ____t_result_3353
+                    local ____t_3352 = __t
+                    local ____t_result_3351
+                    local ____t_3350 = __t
+                    local ____temp_3349 = e.type == "igor"
+                    __O[2107] = ____temp_3349
+                    if ____t_3350(____temp_3349) then
+                        ____t_result_3351 = __L1.arena
                     else
-                        ____t_result_3323 = __O[2090]
+                        ____t_result_3351 = __O[2107]
                     end
-                    if ____t_3324(____t_result_3323) then
-                        ____t_result_3325 = 90 * __L1:igorScale(e) + 28
+                    if ____t_3352(____t_result_3351) then
+                        ____t_result_3353 = 90 * __L1:igorScale(e) + 28
                     else
-                        ____t_result_3325 = e.type == "kaique" and 115 or (e.type == "reeisBoss" and 145 or (__t(e.rage) and 140 or 96))
+                        ____t_result_3353 = e.type == "kaique" and 115 or (e.type == "reeisBoss" and 145 or (__t(e.rage) and 140 or 96))
                     end
-                    ____temp_3326 = ____t_result_3325
+                    ____temp_3354 = ____t_result_3353
                 end
-                local nameY = ____e_y_3327 - ____temp_3326
-                local ____t_3337 = __t
-                local ____t_3331 = __t
-                local ____temp_3330 = e.type == "igor"
-                if ____temp_3330 then
-                    local ____opt_3328 = __L1.arena
-                    if ____opt_3328 ~= nil then
-                        ____opt_3328 = ____opt_3328.type
+                local nameY = ____e_y_3355 - ____temp_3354
+                local ____t_3365 = __t
+                local ____t_3359 = __t
+                local ____temp_3358 = e.type == "igor"
+                if ____temp_3358 then
+                    local ____opt_3356 = __L1.arena
+                    if ____opt_3356 ~= nil then
+                        ____opt_3356 = ____opt_3356.type
                     end
-                    ____temp_3330 = ____opt_3328 == "igor"
+                    ____temp_3358 = ____opt_3356 == "igor"
                 end
-                local ____temp_3336 = not ____t_3331(____temp_3330)
-                if ____temp_3336 then
-                    local ____t_3335 = __t
-                    local ____t_result_3334
-                    local ____t_3333 = __t
-                    local ____temp_3332 = e.type == "nikolas" and __ge(e.phase, 2)
-                    __O[2091] = ____temp_3332
-                    if ____t_3333(____temp_3332) then
-                        ____t_result_3334 = __L1.arena
+                local ____temp_3364 = not ____t_3359(____temp_3358)
+                if ____temp_3364 then
+                    local ____t_3363 = __t
+                    local ____t_result_3362
+                    local ____t_3361 = __t
+                    local ____temp_3360 = e.type == "nikolas" and __ge(e.phase, 2)
+                    __O[2108] = ____temp_3360
+                    if ____t_3361(____temp_3360) then
+                        ____t_result_3362 = __L1.arena
                     else
-                        ____t_result_3334 = __O[2091]
+                        ____t_result_3362 = __O[2108]
                     end
-                    ____temp_3336 = not ____t_3335(____t_result_3334)
+                    ____temp_3364 = not ____t_3363(____t_result_3362)
                 end
-                if ____t_3337(____temp_3336) then
-                    local ____L1_pill_3342 = __L1.pill
-                    local ____call_3341 = __call
-                    local ____t_result_3340
-                    local ____t_3339 = __t
-                    local ____temp_3338 = __L1:nomeBoss(e.type)
-                    __O[2092] = ____temp_3338
-                    if ____t_3339(____temp_3338) then
-                        ____t_result_3340 = __O[2092]
+                if ____t_3365(____temp_3364) then
+                    local ____L1_pill_3370 = __L1.pill
+                    local ____call_3369 = __call
+                    local ____t_result_3368
+                    local ____t_3367 = __t
+                    local ____temp_3366 = __L1:nomeBoss(e.type)
+                    __O[2109] = ____temp_3366
+                    if ____t_3367(____temp_3366) then
+                        ____t_result_3368 = __O[2109]
                     else
-                        ____t_result_3340 = e.type
+                        ____t_result_3368 = e.type
                     end
-                    ____L1_pill_3342(
+                    ____L1_pill_3370(
                         __L1,
-                        ____call_3341(____t_result_3340, "toUpperCase"),
+                        ____call_3369(____t_result_3368, "toUpperCase"),
                         e.x,
                         nameY,
                         e.type == "nicolas" and "#fff0aa" or (e.type == "nikolas" and "#f5b38c" or "#eacb98")
@@ -19700,131 +19839,131 @@ local __O = {};
         end
         __L1:drawBossTelegraphs()
         __L1:drawReeis()
-        local ____t_3357 = __t
-        local ____t_result_3356
-        local ____t_3350 = __t
-        local ____t_result_3349
-        local ____t_3348 = __t
-        local ____t_result_3347
-        local ____t_3346 = __t
-        local ____t_result_3345
-        local ____t_3344 = __t
-        local ____temp_3343 = not __t(__L1.arena) and not __t(__L1.room)
-        __O[2093] = ____temp_3343
-        if ____t_3344(____temp_3343) then
-            ____t_result_3345 = not __t(__L1.dialog)
+        local ____t_3385 = __t
+        local ____t_result_3384
+        local ____t_3378 = __t
+        local ____t_result_3377
+        local ____t_3376 = __t
+        local ____t_result_3375
+        local ____t_3374 = __t
+        local ____t_result_3373
+        local ____t_3372 = __t
+        local ____temp_3371 = not __t(__L1.arena) and not __t(__L1.room)
+        __O[2110] = ____temp_3371
+        if ____t_3372(____temp_3371) then
+            ____t_result_3373 = not __t(__L1.dialog)
         else
-            ____t_result_3345 = __O[2093]
+            ____t_result_3373 = __O[2110]
         end
-        __O[2094] = ____t_result_3345
-        if ____t_3346(____t_result_3345) then
-            ____t_result_3347 = __L1.started
+        __O[2111] = ____t_result_3373
+        if ____t_3374(____t_result_3373) then
+            ____t_result_3375 = __L1.started
         else
-            ____t_result_3347 = __O[2094]
+            ____t_result_3375 = __O[2111]
         end
-        __O[2095] = ____t_result_3347
-        if ____t_3348(____t_result_3347) then
-            ____t_result_3349 = not __t(__L1.vehicle)
+        __O[2112] = ____t_result_3375
+        if ____t_3376(____t_result_3375) then
+            ____t_result_3377 = not __t(__L1.vehicle)
         else
-            ____t_result_3349 = __O[2095]
+            ____t_result_3377 = __O[2112]
         end
-        __O[2096] = ____t_result_3349
-        if ____t_3350(____t_result_3349) then
-            local ____opt_3353 = window.Fliperama
-            if ____opt_3353 ~= nil then
-                ____opt_3353 = ____opt_3353.near
+        __O[2113] = ____t_result_3377
+        if ____t_3378(____t_result_3377) then
+            local ____opt_3381 = window.Fliperama
+            if ____opt_3381 ~= nil then
+                ____opt_3381 = ____opt_3381.near
             end
-            local ____opt_result_3355
-            if ____opt_3353 ~= nil then
-                ____opt_result_3355 = ____opt_3353(____opt_3353, __L1.scene, __L1.player.x)
+            local ____opt_result_3383
+            if ____opt_3381 ~= nil then
+                ____opt_result_3383 = ____opt_3381(____opt_3381, __L1.scene, __L1.player.x)
             end
-            ____t_result_3356 = ____opt_result_3355
+            ____t_result_3384 = ____opt_result_3383
         else
-            ____t_result_3356 = __O[2096]
+            ____t_result_3384 = __O[2113]
         end
-        if ____t_3357(____t_result_3356) then
+        if ____t_3385(____t_result_3384) then
             __L1:pill("[E] JOGAR FLIPERAMA", __L1.player.x, __L1.FLOOR - 140, "#ffd0f0")
         end
-        local ____t_3380 = __t
-        local ____t_result_3379
-        local ____t_3373 = __t
-        local ____t_result_3372
-        local ____t_3365 = __t
-        local ____t_result_3364
-        local ____t_3363 = __t
-        local ____t_result_3362
-        local ____t_3361 = __t
-        local ____t_result_3360
-        local ____t_3359 = __t
-        local ____temp_3358 = not __t(__L1.arena) and not __t(__L1.room)
-        __O[2097] = ____temp_3358
-        if ____t_3359(____temp_3358) then
-            ____t_result_3360 = not __t(__L1.dialog)
+        local ____t_3408 = __t
+        local ____t_result_3407
+        local ____t_3401 = __t
+        local ____t_result_3400
+        local ____t_3393 = __t
+        local ____t_result_3392
+        local ____t_3391 = __t
+        local ____t_result_3390
+        local ____t_3389 = __t
+        local ____t_result_3388
+        local ____t_3387 = __t
+        local ____temp_3386 = not __t(__L1.arena) and not __t(__L1.room)
+        __O[2114] = ____temp_3386
+        if ____t_3387(____temp_3386) then
+            ____t_result_3388 = not __t(__L1.dialog)
         else
-            ____t_result_3360 = __O[2097]
+            ____t_result_3388 = __O[2114]
         end
-        __O[2098] = ____t_result_3360
-        if ____t_3361(____t_result_3360) then
-            ____t_result_3362 = __L1.started
+        __O[2115] = ____t_result_3388
+        if ____t_3389(____t_result_3388) then
+            ____t_result_3390 = __L1.started
         else
-            ____t_result_3362 = __O[2098]
+            ____t_result_3390 = __O[2115]
         end
-        __O[2099] = ____t_result_3362
-        if ____t_3363(____t_result_3362) then
-            ____t_result_3364 = not __t(__L1.vehicle)
+        __O[2116] = ____t_result_3390
+        if ____t_3391(____t_result_3390) then
+            ____t_result_3392 = not __t(__L1.vehicle)
         else
-            ____t_result_3364 = __O[2099]
+            ____t_result_3392 = __O[2116]
         end
-        __O[2100] = ____t_result_3364
-        if ____t_3365(____t_result_3364) then
-            local ____t_3371 = __t
-            local ____opt_3368 = window.Balanco
-            if ____opt_3368 ~= nil then
-                ____opt_3368 = ____opt_3368.active
+        __O[2117] = ____t_result_3392
+        if ____t_3393(____t_result_3392) then
+            local ____t_3399 = __t
+            local ____opt_3396 = window.Balanco
+            if ____opt_3396 ~= nil then
+                ____opt_3396 = ____opt_3396.active
             end
-            local ____opt_result_3370
-            if ____opt_3368 ~= nil then
-                ____opt_result_3370 = ____opt_3368(____opt_3368)
+            local ____opt_result_3398
+            if ____opt_3396 ~= nil then
+                ____opt_result_3398 = ____opt_3396(____opt_3396)
             end
-            ____t_result_3372 = not ____t_3371(____opt_result_3370)
+            ____t_result_3400 = not ____t_3399(____opt_result_3398)
         else
-            ____t_result_3372 = __O[2100]
+            ____t_result_3400 = __O[2117]
         end
-        __O[2101] = ____t_result_3372
-        if ____t_3373(____t_result_3372) then
-            local ____opt_3376 = window.Balanco
-            if ____opt_3376 ~= nil then
-                ____opt_3376 = ____opt_3376.near
+        __O[2118] = ____t_result_3400
+        if ____t_3401(____t_result_3400) then
+            local ____opt_3404 = window.Balanco
+            if ____opt_3404 ~= nil then
+                ____opt_3404 = ____opt_3404.near
             end
-            local ____opt_result_3378
-            if ____opt_3376 ~= nil then
-                ____opt_result_3378 = ____opt_3376(____opt_3376, __L1.scene, __L1.player.x)
+            local ____opt_result_3406
+            if ____opt_3404 ~= nil then
+                ____opt_result_3406 = ____opt_3404(____opt_3404, __L1.scene, __L1.player.x)
             end
-            ____t_result_3379 = ____opt_result_3378
+            ____t_result_3407 = ____opt_result_3406
         else
-            ____t_result_3379 = __O[2101]
+            ____t_result_3407 = __O[2118]
         end
-        if ____t_3380(____t_result_3379) then
+        if ____t_3408(____t_result_3407) then
             __L1:pill("[E] SENTAR NO BALANÇO", __L1.player.x, __L1.FLOOR - 140, "#ffe2a8")
         end
-        local ____t_3384 = __t
-        local ____t_result_3383
-        local ____t_3382 = __t
-        local ____temp_3381 = not __t(__L1.arena) and not __t(__L1.dialog)
-        __O[2102] = ____temp_3381
-        if ____t_3382(____temp_3381) then
-            ____t_result_3383 = __L1.started
+        local ____t_3412 = __t
+        local ____t_result_3411
+        local ____t_3410 = __t
+        local ____temp_3409 = not __t(__L1.arena) and not __t(__L1.dialog)
+        __O[2119] = ____temp_3409
+        if ____t_3410(____temp_3409) then
+            ____t_result_3411 = __L1.started
         else
-            ____t_result_3383 = __O[2102]
+            ____t_result_3411 = __O[2119]
         end
-        if ____t_3384(____t_result_3383) then
+        if ____t_3412(____t_result_3411) then
             local nearby = __L1:closestBoss()
             if __t(nearby) then
                 local access = __L1:bossAccess(nearby)
-                local ____L1_pill_3386 = __L1.pill
-                local ____t_result_3385
+                local ____L1_pill_3414 = __L1.pill
+                local ____t_result_3413
                 if __t(access.ok) then
-                    ____t_result_3385 = __add(
+                    ____t_result_3413 = __add(
                         "[E] DESAFIAR ",
                         __call(
                             __L1:nomeBoss(nearby.type),
@@ -19832,71 +19971,71 @@ local __O = {};
                         )
                     )
                 else
-                    ____t_result_3385 = "[E] VER MISSÕES PARA O CHEFE"
+                    ____t_result_3413 = "[E] VER MISSÕES PARA O CHEFE"
                 end
-                ____L1_pill_3386(
+                ____L1_pill_3414(
                     __L1,
-                    ____t_result_3385,
+                    ____t_result_3413,
                     nearby.x,
                     nearby.y - (nearby.type == "giant" and 242 or 172),
                     __t(access.ok) and "#daeda3" or "#f3d298"
                 )
             end
         end
-        local ____t_3392 = __t
-        local ____t_result_3391
-        local ____t_3390 = __t
-        local ____opt_3387 = __L1.arena
-        if ____opt_3387 ~= nil then
-            ____opt_3387 = ____opt_3387.phase
+        local ____t_3420 = __t
+        local ____t_result_3419
+        local ____t_3418 = __t
+        local ____opt_3415 = __L1.arena
+        if ____opt_3415 ~= nil then
+            ____opt_3415 = ____opt_3415.phase
         end
-        local ____temp_3389 = ____opt_3387 == "active" and not __t(__L1.dialog)
-        __O[2103] = ____temp_3389
-        if ____t_3390(____temp_3389) then
-            ____t_result_3391 = not __t(percurso) or __le(
+        local ____temp_3417 = ____opt_3415 == "active" and not __t(__L1.dialog)
+        __O[2120] = ____temp_3417
+        if ____t_3418(____temp_3417) then
+            ____t_result_3419 = not __t(percurso) or __le(
                 __L1.player.x,
                 __get(__L1.arena.bounds, 0) + 78
             )
         else
-            ____t_result_3391 = __O[2103]
+            ____t_result_3419 = __O[2120]
         end
-        if ____t_3392(____t_result_3391) then
-            local ____L1_pill_3399 = __L1.pill
-            local ____temp_3398 = __get(__L1.arena.bounds, 0) + 87
-            local ____t_result_3397
-            local ____t_3396 = __t
-            local ____opt_result_3395
+        if ____t_3420(____t_result_3419) then
+            local ____L1_pill_3427 = __L1.pill
+            local ____temp_3426 = __get(__L1.arena.bounds, 0) + 87
+            local ____t_result_3425
+            local ____t_3424 = __t
+            local ____opt_result_3423
             if duelo ~= nil then
-                ____opt_result_3395 = duelo.ceu
+                ____opt_result_3423 = duelo.ceu
             end
-            if ____t_3396(____opt_result_3395) then
-                ____t_result_3397 = __get(duelo.ceu.ilhas, 0).y + 50
+            if ____t_3424(____opt_result_3423) then
+                ____t_result_3425 = __get(duelo.ceu.ilhas, 0).y + 50
             else
-                ____t_result_3397 = __L1.FLOOR - 65
+                ____t_result_3425 = __L1.FLOOR - 65
             end
-            ____L1_pill_3399(
+            ____L1_pill_3427(
                 __L1,
                 "[E] SAIR DA ARENA",
-                ____temp_3398,
-                ____t_result_3397,
+                ____temp_3426,
+                ____t_result_3425,
                 "#e4ce9b"
             )
         end
-        local ____t_3401 = __t
-        local ____t_result_3400
+        local ____t_3429 = __t
+        local ____t_result_3428
         if __t(__L1.started) then
-            ____t_result_3400 = not __t(percurso)
+            ____t_result_3428 = not __t(percurso)
         else
-            ____t_result_3400 = __L1.started
+            ____t_result_3428 = __L1.started
         end
-        if ____t_3401(____t_result_3400) then
-            local ____opt_3404 = window.SceneLife
-            if ____opt_3404 ~= nil then
-                ____opt_3404 = ____opt_3404.drawBack
+        if ____t_3429(____t_result_3428) then
+            local ____opt_3432 = window.SceneLife
+            if ____opt_3432 ~= nil then
+                ____opt_3432 = ____opt_3432.drawBack
             end
-            if ____opt_3404 ~= nil then
-                ____opt_3404(
-                    ____opt_3404,
+            if ____opt_3432 ~= nil then
+                ____opt_3432(
+                    ____opt_3432,
                     __L1.ctx,
                     {
                         scene = __L1.scene,
@@ -19925,25 +20064,25 @@ local __O = {};
         if __t(__L1.started) then
             __L1:drawBivoltAura(__L1.ctx, __L1.player.x, __L1.player.y - 40)
         end
-        local ____t_3407 = __t
-        local ____t_result_3406
+        local ____t_3435 = __t
+        local ____t_result_3434
         if __t(__L1.started) then
-            ____t_result_3406 = __le(__L1.player.inv, 0) or __mod(
+            ____t_result_3434 = __le(__L1.player.inv, 0) or __mod(
                 math.floor(__L1.time * 15),
                 2
             ) == 0
         else
-            ____t_result_3406 = __L1.started
+            ____t_result_3434 = __L1.started
         end
-        if ____t_3407(____t_result_3406) then
+        if ____t_3435(____t_result_3434) then
             local function drawHero(____, c, ox, oy)
                 local function paint(____, ____type, x, y, opt)
-                    local ____t_3410 = __t
-                    local ____opt_3408 = window.Art
-                    if ____opt_3408 ~= nil then
-                        ____opt_3408 = ____opt_3408.drawCharacter
+                    local ____t_3438 = __t
+                    local ____opt_3436 = window.Art
+                    if ____opt_3436 ~= nil then
+                        ____opt_3436 = ____opt_3436.drawCharacter
                     end
-                    if ____t_3410(____opt_3408) then
+                    if ____t_3438(____opt_3436) then
                         window.Art:drawCharacter(
                             c,
                             ____type,
@@ -19956,18 +20095,18 @@ local __O = {};
                         c:fillRect(x - 13, y - 39, 26, 39)
                     end
                 end
-                local ____t_3414 = __t
-                local ____t_result_3413
+                local ____t_3442 = __t
+                local ____t_result_3441
                 if __t(__L1.vehicle) then
-                    local ____opt_3411 = window.Art
-                    if ____opt_3411 ~= nil then
-                        ____opt_3411 = ____opt_3411.drawVehicle
+                    local ____opt_3439 = window.Art
+                    if ____opt_3439 ~= nil then
+                        ____opt_3439 = ____opt_3439.drawVehicle
                     end
-                    ____t_result_3413 = ____opt_3411
+                    ____t_result_3441 = ____opt_3439
                 else
-                    ____t_result_3413 = __L1.vehicle
+                    ____t_result_3441 = __L1.vehicle
                 end
-                if ____t_3414(____t_result_3413) then
+                if ____t_3442(____t_result_3441) then
                     local vf = __lt(__L1.player.facing, 0) and -1 or 1
                     c:save()
                     c:translate(
@@ -19985,23 +20124,23 @@ local __O = {};
                         __L1:playerSpriteOptions(0.8)
                     )
                 else
-                    local ____t_result_3421
-                    local ____t_3420 = __t
-                    local ____opt_3417 = window.SceneLife
-                    if ____opt_3417 ~= nil then
-                        ____opt_3417 = ____opt_3417.heroScale
+                    local ____t_result_3449
+                    local ____t_3448 = __t
+                    local ____opt_3445 = window.SceneLife
+                    if ____opt_3445 ~= nil then
+                        ____opt_3445 = ____opt_3445.heroScale
                     end
-                    local ____opt_result_3419
-                    if ____opt_3417 ~= nil then
-                        ____opt_result_3419 = ____opt_3417(____opt_3417, __L1.player, __L1.vehicle)
+                    local ____opt_result_3447
+                    if ____opt_3445 ~= nil then
+                        ____opt_result_3447 = ____opt_3445(____opt_3445, __L1.player, __L1.vehicle)
                     end
-                    __O[2104] = ____opt_result_3419
-                    if ____t_3420(____opt_result_3419) then
-                        ____t_result_3421 = __O[2104]
+                    __O[2121] = ____opt_result_3447
+                    if ____t_3448(____opt_result_3447) then
+                        ____t_result_3449 = __O[2121]
                     else
-                        ____t_result_3421 = {sx = 1, sy = 1}
+                        ____t_result_3449 = {sx = 1, sy = 1}
                     end
-                    local k = ____t_result_3421
+                    local k = ____t_result_3449
                     c:save()
                     c:translate(
                         math.floor(ox + 0.5),
@@ -20018,34 +20157,34 @@ local __O = {};
                     c:restore()
                 end
             end
-            local ____t_3427 = __t
-            local ____opt_3424 = window.Balanco
-            if ____opt_3424 ~= nil then
-                ____opt_3424 = ____opt_3424.active
+            local ____t_3455 = __t
+            local ____opt_3452 = window.Balanco
+            if ____opt_3452 ~= nil then
+                ____opt_3452 = ____opt_3452.active
             end
-            local ____opt_result_3426
-            if ____opt_3424 ~= nil then
-                ____opt_result_3426 = ____opt_3424(____opt_3424)
+            local ____opt_result_3454
+            if ____opt_3452 ~= nil then
+                ____opt_result_3454 = ____opt_3452(____opt_3452)
             end
-            if ____t_3427(____opt_result_3426) then
+            if ____t_3455(____opt_result_3454) then
             else
-                local ____t_3437 = __t
-                local ____t_result_3436
-                local ____t_3430 = __t
-                local ____opt_3428 = __L1.routeTransition
-                if ____opt_3428 ~= nil then
-                    ____opt_3428 = ____opt_3428.chegada
+                local ____t_3465 = __t
+                local ____t_result_3464
+                local ____t_3458 = __t
+                local ____opt_3456 = __L1.routeTransition
+                if ____opt_3456 ~= nil then
+                    ____opt_3456 = ____opt_3456.chegada
                 end
-                __O[2105] = ____opt_3428
-                if ____t_3430(____opt_3428) then
-                    local ____opt_3433 = window.ChegadaCarro
-                    if ____opt_3433 ~= nil then
-                        ____opt_3433 = ____opt_3433.desenhar
+                __O[2122] = ____opt_3456
+                if ____t_3458(____opt_3456) then
+                    local ____opt_3461 = window.ChegadaCarro
+                    if ____opt_3461 ~= nil then
+                        ____opt_3461 = ____opt_3461.desenhar
                     end
-                    local ____opt_result_3435
-                    if ____opt_3433 ~= nil then
-                        ____opt_result_3435 = ____opt_3433(
-                            ____opt_3433,
+                    local ____opt_result_3463
+                    if ____opt_3461 ~= nil then
+                        ____opt_result_3463 = ____opt_3461(
+                            ____opt_3461,
                             __L1.ctx,
                             {
                                 x = __L1.player.x,
@@ -20055,26 +20194,26 @@ local __O = {};
                             }
                         )
                     end
-                    ____t_result_3436 = ____opt_result_3435
+                    ____t_result_3464 = ____opt_result_3463
                 else
-                    ____t_result_3436 = __O[2105]
+                    ____t_result_3464 = __O[2122]
                 end
-                if ____t_3437(____t_result_3436) then
+                if ____t_3465(____t_result_3464) then
                 else
-                    local ____t_3445 = __t
-                    local ____t_result_3444
+                    local ____t_3473 = __t
+                    local ____t_result_3472
                     if __t(percurso) then
-                        ____t_result_3444 = percurso
+                        ____t_result_3472 = percurso
                     else
-                        local ____t_3443 = __t
-                        local ____opt_3440 = window.HeroShadow
-                        if ____opt_3440 ~= nil then
-                            ____opt_3440 = ____opt_3440.draw
+                        local ____t_3471 = __t
+                        local ____opt_3468 = window.HeroShadow
+                        if ____opt_3468 ~= nil then
+                            ____opt_3468 = ____opt_3468.draw
                         end
-                        local ____opt_result_3442
-                        if ____opt_3440 ~= nil then
-                            ____opt_result_3442 = ____opt_3440(
-                                ____opt_3440,
+                        local ____opt_result_3470
+                        if ____opt_3468 ~= nil then
+                            ____opt_result_3470 = ____opt_3468(
+                                ____opt_3468,
                                 __L1.ctx,
                                 {
                                     draw = drawHero,
@@ -20090,9 +20229,9 @@ local __O = {};
                                 }
                             )
                         end
-                        ____t_result_3444 = not ____t_3443(____opt_result_3442)
+                        ____t_result_3472 = not ____t_3471(____opt_result_3470)
                     end
-                    if ____t_3445(____t_result_3444) then
+                    if ____t_3473(____t_result_3472) then
                         drawHero(nil, __L1.ctx, __L1.player.x, __L1.player.y)
                     end
                 end
@@ -20100,13 +20239,13 @@ local __O = {};
         end
         if not __t(percurso) then
             if __t(__L1.started) then
-                local ____opt_3448 = window.SceneLife
-                if ____opt_3448 ~= nil then
-                    ____opt_3448 = ____opt_3448.drawFront
+                local ____opt_3476 = window.SceneLife
+                if ____opt_3476 ~= nil then
+                    ____opt_3476 = ____opt_3476.drawFront
                 end
-                if ____opt_3448 ~= nil then
-                    ____opt_3448(
-                        ____opt_3448,
+                if ____opt_3476 ~= nil then
+                    ____opt_3476(
+                        ____opt_3476,
                         __L1.ctx,
                         {
                             scene = __L1.scene,
@@ -20119,45 +20258,45 @@ local __O = {};
                     )
                 end
             end
-            local ____opt_3461 = window.Interact
-            if ____opt_3461 ~= nil then
-                ____opt_3461 = ____opt_3461.drawFront
+            local ____opt_3489 = window.Interact
+            if ____opt_3489 ~= nil then
+                ____opt_3489 = ____opt_3489.drawFront
             end
-            if ____opt_3461 ~= nil then
-                local ____L1_ctx_3459 = __L1.ctx
-                local ____L1_scene_3455 = __L1.scene
-                local ____L1_camera_3456 = __L1.camera
-                local ____L1_time_3457 = __L1.time
-                local ____temp_3458 = not not __t(__L1.arena)
-                local ____opt_3451 = __L1.arena
-                if ____opt_3451 ~= nil then
-                    ____opt_3451 = ____opt_3451.type
+            if ____opt_3489 ~= nil then
+                local ____L1_ctx_3487 = __L1.ctx
+                local ____L1_scene_3483 = __L1.scene
+                local ____L1_camera_3484 = __L1.camera
+                local ____L1_time_3485 = __L1.time
+                local ____temp_3486 = not not __t(__L1.arena)
+                local ____opt_3479 = __L1.arena
+                if ____opt_3479 ~= nil then
+                    ____opt_3479 = ____opt_3479.type
                 end
-                local ____opt_3453 = __L1.arena
-                if ____opt_3453 ~= nil then
-                    ____opt_3453 = ____opt_3453.homeX
+                local ____opt_3481 = __L1.arena
+                if ____opt_3481 ~= nil then
+                    ____opt_3481 = ____opt_3481.homeX
                 end
-                ____opt_3461(
-                    ____opt_3461,
-                    ____L1_ctx_3459,
+                ____opt_3489(
+                    ____opt_3489,
+                    ____L1_ctx_3487,
                     {
-                        scene = ____L1_scene_3455,
-                        camera = ____L1_camera_3456,
-                        time = ____L1_time_3457,
-                        arena = ____temp_3458,
-                        arenaType = ____opt_3451,
-                        homeX = ____opt_3453,
+                        scene = ____L1_scene_3483,
+                        camera = ____L1_camera_3484,
+                        time = ____L1_time_3485,
+                        arena = ____temp_3486,
+                        arenaType = ____opt_3479,
+                        homeX = ____opt_3481,
                         room = not not __t(__L1.room)
                     }
                 )
             end
-            local ____opt_3465 = window.Balanco
-            if ____opt_3465 ~= nil then
-                ____opt_3465 = ____opt_3465.draw
+            local ____opt_3493 = window.Balanco
+            if ____opt_3493 ~= nil then
+                ____opt_3493 = ____opt_3493.draw
             end
-            if ____opt_3465 ~= nil then
-                ____opt_3465(
-                    ____opt_3465,
+            if ____opt_3493 ~= nil then
+                ____opt_3493(
+                    ____opt_3493,
                     __L1.ctx,
                     {
                         scene = __L1.scene,
@@ -20168,13 +20307,13 @@ local __O = {};
                     }
                 )
             end
-            local ____opt_3469 = window.Trigal
-            if ____opt_3469 ~= nil then
-                ____opt_3469 = ____opt_3469.drawFront
+            local ____opt_3497 = window.Trigal
+            if ____opt_3497 ~= nil then
+                ____opt_3497 = ____opt_3497.drawFront
             end
-            if ____opt_3469 ~= nil then
-                ____opt_3469(
-                    ____opt_3469,
+            if ____opt_3497 ~= nil then
+                ____opt_3497(
+                    ____opt_3497,
                     __L1.ctx,
                     {
                         scene = __L1.scene,
@@ -20186,13 +20325,13 @@ local __O = {};
                     }
                 )
             end
-            local ____opt_3473 = window.CampanhaPlantas
-            if ____opt_3473 ~= nil then
-                ____opt_3473 = ____opt_3473.drawFront
+            local ____opt_3501 = window.CampanhaPlantas
+            if ____opt_3501 ~= nil then
+                ____opt_3501 = ____opt_3501.drawFront
             end
-            if ____opt_3473 ~= nil then
-                ____opt_3473(
-                    ____opt_3473,
+            if ____opt_3501 ~= nil then
+                ____opt_3501(
+                    ____opt_3501,
                     __L1.ctx,
                     {
                         scene = __L1.scene,
@@ -20204,13 +20343,13 @@ local __O = {};
                     }
                 )
             end
-            local ____opt_3477 = window.CampanhaCamadas
-            if ____opt_3477 ~= nil then
-                ____opt_3477 = ____opt_3477.primeiroPlano
+            local ____opt_3505 = window.CampanhaCamadas
+            if ____opt_3505 ~= nil then
+                ____opt_3505 = ____opt_3505.primeiroPlano
             end
-            if ____opt_3477 ~= nil then
-                ____opt_3477(
-                    ____opt_3477,
+            if ____opt_3505 ~= nil then
+                ____opt_3505(
+                    ____opt_3505,
                     __L1.ctx,
                     {
                         scene = __L1.scene,
@@ -20223,33 +20362,33 @@ local __O = {};
                 )
             end
         end
-        local ____t_3481 = __t
-        local ____opt_3479 = __L1.activeBoss
-        if ____opt_3479 ~= nil then
-            ____opt_3479 = ____opt_3479.conquista
+        local ____t_3509 = __t
+        local ____opt_3507 = __L1.activeBoss
+        if ____opt_3507 ~= nil then
+            ____opt_3507 = ____opt_3507.conquista
         end
-        if ____t_3481(____opt_3479) then
+        if ____t_3509(____opt_3507) then
             window.ConquistaEfeitos:desenhar(__L1.ctx, __L1.activeBoss.conquista)
         end
-        local ____opt_3484 = window.BossFx
-        if ____opt_3484 ~= nil then
-            ____opt_3484 = ____opt_3484.drawShotTrails
+        local ____opt_3512 = window.BossFx
+        if ____opt_3512 ~= nil then
+            ____opt_3512 = ____opt_3512.drawShotTrails
         end
-        if ____opt_3484 ~= nil then
-            ____opt_3484(____opt_3484, __L1.ctx, __L1.shots)
+        if ____opt_3512 ~= nil then
+            ____opt_3512(____opt_3512, __L1.ctx, __L1.shots)
         end
         for ____, s in __iterar((__L1.shots)) do
             do
-                local ____t_3491 = __t
-                local ____opt_3488 = window.CampaignVfx
-                if ____opt_3488 ~= nil then
-                    ____opt_3488 = ____opt_3488.drawProjectile
+                local ____t_3519 = __t
+                local ____opt_3516 = window.CampaignVfx
+                if ____opt_3516 ~= nil then
+                    ____opt_3516 = ____opt_3516.drawProjectile
                 end
-                local ____opt_result_3490
-                if ____opt_3488 ~= nil then
-                    ____opt_result_3490 = ____opt_3488(____opt_3488, __L1.ctx, s, __L1.time)
+                local ____opt_result_3518
+                if ____opt_3516 ~= nil then
+                    ____opt_result_3518 = ____opt_3516(____opt_3516, __L1.ctx, s, __L1.time)
                 end
-                if ____t_3491(____opt_result_3490) then
+                if ____t_3519(____opt_result_3518) then
                     continue
                 end
                 if s.type == "inkBlade" then
@@ -20363,12 +20502,12 @@ local __O = {};
                     __L1.ctx:strokeRect(s.x - 27, s.gapY - s.gapHeight / 2, 54, s.gapHeight)
                     __L1.ctx:restore()
                 elseif s.type == "doodle" then
-                    local ____t_3494 = __t
-                    local ____opt_3492 = window.Art
-                    if ____opt_3492 ~= nil then
-                        ____opt_3492 = ____opt_3492.drawDoodle
+                    local ____t_3522 = __t
+                    local ____opt_3520 = window.Art
+                    if ____opt_3520 ~= nil then
+                        ____opt_3520 = ____opt_3520.drawDoodle
                     end
-                    if ____t_3494(____opt_3492) then
+                    if ____t_3522(____opt_3520) then
                         window.Art:drawDoodle(
                             __L1.ctx,
                             s.x,
@@ -20388,11 +20527,11 @@ local __O = {};
                                 local r = __t(__mod(i, 2)) and 12 or 21
                                 local x = s.x + math.cos(a + __L1.time * 3) * r
                                 local y = s.y + math.sin(a + __L1.time * 3) * r
-                                local ____t_result_3495
+                                local ____t_result_3523
                                 if __t(i) then
-                                    ____t_result_3495 = __L1.ctx:lineTo(x, y)
+                                    ____t_result_3523 = __L1.ctx:lineTo(x, y)
                                 else
-                                    ____t_result_3495 = __L1.ctx:moveTo(x, y)
+                                    ____t_result_3523 = __L1.ctx:moveTo(x, y)
                                 end
                                 i = i + 1
                             end
@@ -20424,25 +20563,25 @@ local __O = {};
                     )
                     __L1.ctx:restore()
                 else
-                    local ____t_3504 = __t
-                    local ____t_result_3503
-                    local ____t_3497 = __t
-                    local ____temp_3496 = s.type == "slime"
-                    __O[2106] = ____temp_3496
-                    if ____t_3497(____temp_3496) then
-                        local ____opt_3500 = window.NikolasFx
-                        if ____opt_3500 ~= nil then
-                            ____opt_3500 = ____opt_3500.catarro
+                    local ____t_3532 = __t
+                    local ____t_result_3531
+                    local ____t_3525 = __t
+                    local ____temp_3524 = s.type == "slime"
+                    __O[2123] = ____temp_3524
+                    if ____t_3525(____temp_3524) then
+                        local ____opt_3528 = window.NikolasFx
+                        if ____opt_3528 ~= nil then
+                            ____opt_3528 = ____opt_3528.catarro
                         end
-                        local ____opt_result_3502
-                        if ____opt_3500 ~= nil then
-                            ____opt_result_3502 = ____opt_3500(____opt_3500, __L1.ctx, s, __L1.time)
+                        local ____opt_result_3530
+                        if ____opt_3528 ~= nil then
+                            ____opt_result_3530 = ____opt_3528(____opt_3528, __L1.ctx, s, __L1.time)
                         end
-                        ____t_result_3503 = ____opt_result_3502
+                        ____t_result_3531 = ____opt_result_3530
                     else
-                        ____t_result_3503 = __O[2106]
+                        ____t_result_3531 = __O[2123]
                     end
-                    if ____t_3504(____t_result_3503) then
+                    if ____t_3532(____t_result_3531) then
                     elseif s.type == "slime" then
                         __L1.ctx.fillStyle = "#688a3a"
                         __L1.ctx:fillRect(s.x - 12, s.y - 8, 24, 16)
@@ -20453,15 +20592,15 @@ local __O = {};
                     else
                         __L1.ctx:save()
                         __L1.ctx:translate(s.x, s.y)
-                        local ____self_3506 = __L1.ctx
-                        local ____self_3506_rotate_3507 = ____self_3506.rotate
-                        local ____temp_3505
+                        local ____self_3534 = __L1.ctx
+                        local ____self_3534_rotate_3535 = ____self_3534.rotate
+                        local ____temp_3533
                         if s.type == "paper" then
-                            ____temp_3505 = __L1.time * 9
+                            ____temp_3533 = __L1.time * 9
                         else
-                            ____temp_3505 = 0
+                            ____temp_3533 = 0
                         end
-                        ____self_3506_rotate_3507(____self_3506, ____temp_3505)
+                        ____self_3534_rotate_3535(____self_3534, ____temp_3533)
                         __L1.ctx.fillStyle = s.type == "paper" and "#fff3d6" or (s.type == "ruler" and "#e0b061" or (s.type == "case" and "#9dd3c3" or "#ffe096"))
                         __L1.ctx:fillRect(-6, -5, s.type == "paper" and 12 or (s.type == "ruler" and 28 or 18), 10)
                         __L1.ctx.fillStyle = "#d5c9ad"
@@ -20471,19 +20610,19 @@ local __O = {};
                 end
             end
         end
-        local ____opt_3510 = window.CampaignVfx
-        if ____opt_3510 ~= nil then
-            ____opt_3510 = ____opt_3510.draw
+        local ____opt_3538 = window.CampaignVfx
+        if ____opt_3538 ~= nil then
+            ____opt_3538 = ____opt_3538.draw
         end
-        if ____opt_3510 ~= nil then
-            ____opt_3510(____opt_3510, __L1.ctx, __L1.time, "front")
+        if ____opt_3538 ~= nil then
+            ____opt_3538(____opt_3538, __L1.ctx, __L1.time, "front")
         end
-        local ____opt_3514 = window.FxPixel
-        if ____opt_3514 ~= nil then
-            ____opt_3514 = ____opt_3514.desenhar
+        local ____opt_3542 = window.FxPixel
+        if ____opt_3542 ~= nil then
+            ____opt_3542 = ____opt_3542.desenhar
         end
-        if ____opt_3514 ~= nil then
-            ____opt_3514(____opt_3514, __L1.ctx, {dono = "luta", camada = "front", camera = __L1.camera, tempo = __L1.time})
+        if ____opt_3542 ~= nil then
+            ____opt_3542(____opt_3542, __L1.ctx, {dono = "luta", camada = "front", camera = __L1.camera, tempo = __L1.time})
         end
         for ____, p in __iterar((__L1.particles)) do
             __L1.ctx.globalAlpha = __L1:clamp(p.life * 2, 0, 1)
@@ -20496,12 +20635,12 @@ local __O = {};
             )
         end
         __L1.ctx.globalAlpha = 1
-        local ____opt_3518 = window.Golpes
-        if ____opt_3518 ~= nil then
-            ____opt_3518 = ____opt_3518.desenharCaixas
+        local ____opt_3546 = window.Golpes
+        if ____opt_3546 ~= nil then
+            ____opt_3546 = ____opt_3546.desenharCaixas
         end
-        if ____opt_3518 ~= nil then
-            ____opt_3518(____opt_3518, __L1.ctx, {
+        if ____opt_3546 ~= nil then
+            ____opt_3546(____opt_3546, __L1.ctx, {
                 player = __L1.player,
                 enemies = __L1.enemies,
                 minions = __L1.minions,
@@ -20509,27 +20648,27 @@ local __O = {};
                 hazards = __L1.hazards
             })
         end
-        local ____t_3526 = __t
-        local ____t_result_3525
-        local ____t_3524 = __t
-        local ____t_result_3523
+        local ____t_3554 = __t
+        local ____t_result_3553
+        local ____t_3552 = __t
+        local ____t_result_3551
         if __t(__L1.arena) then
-            local ____t_3522 = __t
-            local ____opt_3520 = __L1.activeBoss
-            if ____opt_3520 ~= nil then
-                ____opt_3520 = ____opt_3520.conquista
+            local ____t_3550 = __t
+            local ____opt_3548 = __L1.activeBoss
+            if ____opt_3548 ~= nil then
+                ____opt_3548 = ____opt_3548.conquista
             end
-            ____t_result_3523 = not ____t_3522(____opt_3520)
+            ____t_result_3551 = not ____t_3550(____opt_3548)
         else
-            ____t_result_3523 = __L1.arena
+            ____t_result_3551 = __L1.arena
         end
-        __O[2107] = ____t_result_3523
-        if ____t_3524(____t_result_3523) then
-            ____t_result_3525 = window.HdScene
+        __O[2124] = ____t_result_3551
+        if ____t_3552(____t_result_3551) then
+            ____t_result_3553 = window.HdScene
         else
-            ____t_result_3525 = __O[2107]
+            ____t_result_3553 = __O[2124]
         end
-        if ____t_3526(____t_result_3525) then
+        if ____t_3554(____t_result_3553) then
             __L1.ctx:save()
             __L1.ctx:translate(
                 math.floor(__L1.camera + 0.5),
@@ -20543,13 +20682,13 @@ local __O = {};
                 __L1.arena.homeX,
                 __L1.arena.blend
             )
-            local ____opt_3529 = window.HdMaps
-            if ____opt_3529 ~= nil then
-                ____opt_3529 = ____opt_3529.arenaFront
+            local ____opt_3557 = window.HdMaps
+            if ____opt_3557 ~= nil then
+                ____opt_3557 = ____opt_3557.arenaFront
             end
-            if ____opt_3529 ~= nil then
-                ____opt_3529(
-                    ____opt_3529,
+            if ____opt_3557 ~= nil then
+                ____opt_3557(
+                    ____opt_3557,
                     __L1.ctx,
                     __L1.arena.type,
                     __L1.camera,
@@ -20560,29 +20699,29 @@ local __O = {};
             end
             __L1.ctx:restore()
         else
-            local ____t_3538 = __t
-            local ____t_result_3537
-            local ____t_3536 = __t
-            local ____t_result_3535
-            local ____t_3534 = __t
-            local ____t_result_3533
-            local ____t_3532 = __t
-            local ____temp_3531 = not __t(__L1.arena)
-            __O[2108] = ____temp_3531
-            if ____t_3532(____temp_3531) then
-                ____t_result_3533 = __L1.started
+            local ____t_3566 = __t
+            local ____t_result_3565
+            local ____t_3564 = __t
+            local ____t_result_3563
+            local ____t_3562 = __t
+            local ____t_result_3561
+            local ____t_3560 = __t
+            local ____temp_3559 = not __t(__L1.arena)
+            __O[2125] = ____temp_3559
+            if ____t_3560(____temp_3559) then
+                ____t_result_3561 = __L1.started
             else
-                ____t_result_3533 = __O[2108]
+                ____t_result_3561 = __O[2125]
             end
-            __O[2109] = ____t_result_3533
-            if ____t_3534(____t_result_3533) then
-                ____t_result_3535 = window.HdScene
+            __O[2126] = ____t_result_3561
+            if ____t_3562(____t_result_3561) then
+                ____t_result_3563 = window.HdScene
             else
-                ____t_result_3535 = __O[2109]
+                ____t_result_3563 = __O[2126]
             end
-            __O[2110] = ____t_result_3535
-            if ____t_3536(____t_result_3535) then
-                ____t_result_3537 = __call(
+            __O[2127] = ____t_result_3563
+            if ____t_3564(____t_result_3563) then
+                ____t_result_3565 = __call(
                     __arrL({
                         0,
                         1,
@@ -20596,9 +20735,9 @@ local __O = {};
                     __L1.scene
                 )
             else
-                ____t_result_3537 = __O[2110]
+                ____t_result_3565 = __O[2127]
             end
-            if ____t_3538(____t_result_3537) then
+            if ____t_3566(____t_result_3565) then
                 __L1.ctx:save()
                 __L1.ctx:translate(
                     math.floor(__L1.camera + 0.5),
@@ -20614,58 +20753,58 @@ local __O = {};
                 __L1.ctx:restore()
             end
         end
-        local ____t_3544 = __t
-        local ____t_result_3543
-        local ____t_3542 = __t
-        local ____t_result_3541
-        local ____t_3540 = __t
-        local ____temp_3539 = not __t(__L1.arena)
-        __O[2111] = ____temp_3539
-        if ____t_3540(____temp_3539) then
-            ____t_result_3541 = __L1.started
+        local ____t_3572 = __t
+        local ____t_result_3571
+        local ____t_3570 = __t
+        local ____t_result_3569
+        local ____t_3568 = __t
+        local ____temp_3567 = not __t(__L1.arena)
+        __O[2128] = ____temp_3567
+        if ____t_3568(____temp_3567) then
+            ____t_result_3569 = __L1.started
         else
-            ____t_result_3541 = __O[2111]
+            ____t_result_3569 = __O[2128]
         end
-        __O[2112] = ____t_result_3541
-        if ____t_3542(____t_result_3541) then
-            ____t_result_3543 = window.Weather
+        __O[2129] = ____t_result_3569
+        if ____t_3570(____t_result_3569) then
+            ____t_result_3571 = window.Weather
         else
-            ____t_result_3543 = __O[2112]
+            ____t_result_3571 = __O[2129]
         end
-        if ____t_3544(____t_result_3543) then
+        if ____t_3572(____t_result_3571) then
             __L1.ctx:save()
             __L1.ctx:translate(
                 math.floor(__L1.camera + 0.5),
                 0
             )
-            local ____self_3554 = window.Weather
-            local ____self_3554_draw_3555 = ____self_3554.draw
-            local ____L1_ctx_3553 = __L1.ctx
-            local ____L1_scene_3550 = __L1.scene
-            local ____L1_camera_3551 = __L1.camera
-            local ____L1_time_3552 = __L1.time
-            local ____t_result_3549
-            local ____t_3548 = __t
-            local ____t_result_3547
-            local ____t_3546 = __t
-            local ____temp_3545 = not __t(__L1.cutscene) and not __t(__L1.room)
-            __O[2113] = ____temp_3545
-            if ____t_3546(____temp_3545) then
-                ____t_result_3547 = not __t(__L1.activity)
+            local ____self_3582 = window.Weather
+            local ____self_3582_draw_3583 = ____self_3582.draw
+            local ____L1_ctx_3581 = __L1.ctx
+            local ____L1_scene_3578 = __L1.scene
+            local ____L1_camera_3579 = __L1.camera
+            local ____L1_time_3580 = __L1.time
+            local ____t_result_3577
+            local ____t_3576 = __t
+            local ____t_result_3575
+            local ____t_3574 = __t
+            local ____temp_3573 = not __t(__L1.cutscene) and not __t(__L1.room)
+            __O[2130] = ____temp_3573
+            if ____t_3574(____temp_3573) then
+                ____t_result_3575 = not __t(__L1.activity)
             else
-                ____t_result_3547 = __O[2113]
+                ____t_result_3575 = __O[2130]
             end
-            __O[2114] = ____t_result_3547
-            if ____t_3548(____t_result_3547) then
-                ____t_result_3549 = not __t(__L1.ollyanEncounter)
+            __O[2131] = ____t_result_3575
+            if ____t_3576(____t_result_3575) then
+                ____t_result_3577 = not __t(__L1.ollyanEncounter)
             else
-                ____t_result_3549 = __O[2114]
+                ____t_result_3577 = __O[2131]
             end
-            ____self_3554_draw_3555(____self_3554, ____L1_ctx_3553, {
-                scene = ____L1_scene_3550,
-                camera = ____L1_camera_3551,
-                time = ____L1_time_3552,
-                outdoor = ____t_result_3549,
+            ____self_3582_draw_3583(____self_3582, ____L1_ctx_3581, {
+                scene = ____L1_scene_3578,
+                camera = ____L1_camera_3579,
+                time = ____L1_time_3580,
+                outdoor = ____t_result_3577,
                 player = {
                     x = __L1.player.x,
                     y = __L1.player.y,
@@ -20676,37 +20815,37 @@ local __O = {};
             })
             __L1.ctx:restore()
         end
-        local ____t_3565 = __t
-        local ____t_result_3564
-        local ____t_3561 = __t
-        local ____t_result_3560
-        local ____t_3559 = __t
-        local ____t_result_3558
-        local ____t_3557 = __t
-        local ____temp_3556 = not __t(__L1.arena)
-        __O[2115] = ____temp_3556
-        if ____t_3557(____temp_3556) then
-            ____t_result_3558 = __L1.started
+        local ____t_3593 = __t
+        local ____t_result_3592
+        local ____t_3589 = __t
+        local ____t_result_3588
+        local ____t_3587 = __t
+        local ____t_result_3586
+        local ____t_3585 = __t
+        local ____temp_3584 = not __t(__L1.arena)
+        __O[2132] = ____temp_3584
+        if ____t_3585(____temp_3584) then
+            ____t_result_3586 = __L1.started
         else
-            ____t_result_3558 = __O[2115]
+            ____t_result_3586 = __O[2132]
         end
-        __O[2116] = ____t_result_3558
-        if ____t_3559(____t_result_3558) then
-            ____t_result_3560 = __L1.scene == 6
+        __O[2133] = ____t_result_3586
+        if ____t_3587(____t_result_3586) then
+            ____t_result_3588 = __L1.scene == 6
         else
-            ____t_result_3560 = __O[2116]
+            ____t_result_3588 = __O[2133]
         end
-        __O[2117] = ____t_result_3560
-        if ____t_3561(____t_result_3560) then
-            local ____opt_3562 = window.HdMaps
-            if ____opt_3562 ~= nil then
-                ____opt_3562 = ____opt_3562.darkness
+        __O[2134] = ____t_result_3588
+        if ____t_3589(____t_result_3588) then
+            local ____opt_3590 = window.HdMaps
+            if ____opt_3590 ~= nil then
+                ____opt_3590 = ____opt_3590.darkness
             end
-            ____t_result_3564 = ____opt_3562
+            ____t_result_3592 = ____opt_3590
         else
-            ____t_result_3564 = __O[2117]
+            ____t_result_3592 = __O[2134]
         end
-        if ____t_3565(____t_result_3564) then
+        if ____t_3593(____t_result_3592) then
             __L1.ctx:save()
             __L1.ctx:translate(
                 math.floor(__L1.camera + 0.5),
@@ -20734,26 +20873,26 @@ local __O = {};
             )
         end
         __L1.ctx.globalAlpha = 1
-        local ____t_3571 = __t
-        local ____t_result_3570
-        local ____t_3567 = __t
-        local ____t_result_3566
+        local ____t_3599 = __t
+        local ____t_result_3598
+        local ____t_3595 = __t
+        local ____t_result_3594
         if __t(__L1.q.nikolas) then
-            ____t_result_3566 = __L1.scene == 3
+            ____t_result_3594 = __L1.scene == 3
         else
-            ____t_result_3566 = __L1.q.nikolas
+            ____t_result_3594 = __L1.q.nikolas
         end
-        __O[2118] = ____t_result_3566
-        if ____t_3567(____t_result_3566) then
-            local ____opt_3568 = window.Art
-            if ____opt_3568 ~= nil then
-                ____opt_3568 = ____opt_3568.drawCake
+        __O[2135] = ____t_result_3594
+        if ____t_3595(____t_result_3594) then
+            local ____opt_3596 = window.Art
+            if ____opt_3596 ~= nil then
+                ____opt_3596 = ____opt_3596.drawCake
             end
-            ____t_result_3570 = ____opt_3568
+            ____t_result_3598 = ____opt_3596
         else
-            ____t_result_3570 = __O[2118]
+            ____t_result_3598 = __O[2135]
         end
-        if ____t_3571(____t_result_3570) then
+        if ____t_3599(____t_result_3598) then
             window.Art:drawCake(__L1.ctx, 1970, __L1.FLOOR - 5)
         end
         __L1:drawEpicWorld()
@@ -20761,85 +20900,85 @@ local __O = {};
         if not __t(__L1.started) then
             __L1.ctx.fillStyle = "#192e301c"
             __L1.ctx:fillRect(0, 0, __L1.W, __L1.H)
-            local ____t_3574 = __t
-            local ____opt_3572 = window.Art
-            if ____opt_3572 ~= nil then
-                ____opt_3572 = ____opt_3572.drawVehicle
+            local ____t_3602 = __t
+            local ____opt_3600 = window.Art
+            if ____opt_3600 ~= nil then
+                ____opt_3600 = ____opt_3600.drawVehicle
             end
-            if ____t_3574(____opt_3572) then
+            if ____t_3602(____opt_3600) then
                 window.Art:drawVehicle(__L1.ctx, 760, __L1.FLOOR, __L1.time)
             end
             __L1:sprite("daroca", 760, __L1.FLOOR - 20, {facing = 1, frame = __L1.time, scale = 0.8})
         end
-        local ____t_3593 = __t
-        local ____t_result_3592
-        local ____t_3591 = __t
-        local ____t_result_3590
-        local ____t_3586 = __t
-        local ____t_result_3585
-        local ____t_3584 = __t
-        local ____t_result_3583
-        local ____t_3582 = __t
-        local ____t_result_3581
-        local ____t_3580 = __t
-        local ____t_result_3579
-        local ____t_3578 = __t
-        local ____t_result_3577
-        local ____t_3576 = __t
-        local ____t_result_3575
+        local ____t_3621 = __t
+        local ____t_result_3620
+        local ____t_3619 = __t
+        local ____t_result_3618
+        local ____t_3614 = __t
+        local ____t_result_3613
+        local ____t_3612 = __t
+        local ____t_result_3611
+        local ____t_3610 = __t
+        local ____t_result_3609
+        local ____t_3608 = __t
+        local ____t_result_3607
+        local ____t_3606 = __t
+        local ____t_result_3605
+        local ____t_3604 = __t
+        local ____t_result_3603
         if __t(__L1.started) then
-            ____t_result_3575 = not __t(__L1.dialog)
+            ____t_result_3603 = not __t(__L1.dialog)
         else
-            ____t_result_3575 = __L1.started
+            ____t_result_3603 = __L1.started
         end
-        __O[2119] = ____t_result_3575
-        if ____t_3576(____t_result_3575) then
-            ____t_result_3577 = not __t(__L1.paused)
+        __O[2136] = ____t_result_3603
+        if ____t_3604(____t_result_3603) then
+            ____t_result_3605 = not __t(__L1.paused)
         else
-            ____t_result_3577 = __O[2119]
+            ____t_result_3605 = __O[2136]
         end
-        __O[2120] = ____t_result_3577
-        if ____t_3578(____t_result_3577) then
-            ____t_result_3579 = not __t(__L1.won)
+        __O[2137] = ____t_result_3605
+        if ____t_3606(____t_result_3605) then
+            ____t_result_3607 = not __t(__L1.won)
         else
-            ____t_result_3579 = __O[2120]
+            ____t_result_3607 = __O[2137]
         end
-        __O[2121] = ____t_result_3579
-        if ____t_3580(____t_result_3579) then
-            ____t_result_3581 = not __t(__L1.defeated)
+        __O[2138] = ____t_result_3607
+        if ____t_3608(____t_result_3607) then
+            ____t_result_3609 = not __t(__L1.defeated)
         else
-            ____t_result_3581 = __O[2121]
+            ____t_result_3609 = __O[2138]
         end
-        __O[2122] = ____t_result_3581
-        if ____t_3582(____t_result_3581) then
-            ____t_result_3583 = not __t(__L1.arena)
+        __O[2139] = ____t_result_3609
+        if ____t_3610(____t_result_3609) then
+            ____t_result_3611 = not __t(__L1.arena)
         else
-            ____t_result_3583 = __O[2122]
+            ____t_result_3611 = __O[2139]
         end
-        __O[2123] = ____t_result_3583
-        if ____t_3584(____t_result_3583) then
-            ____t_result_3585 = not __t(__L1.routeTransition)
+        __O[2140] = ____t_result_3611
+        if ____t_3612(____t_result_3611) then
+            ____t_result_3613 = not __t(__L1.routeTransition)
         else
-            ____t_result_3585 = __O[2123]
+            ____t_result_3613 = __O[2140]
         end
-        __O[2124] = ____t_result_3585
-        if ____t_3586(____t_result_3585) then
-            local ____t_3589 = __t
-            local ____opt_3587 = __L1.training
-            if ____opt_3587 ~= nil then
-                ____opt_3587 = ____opt_3587.active
+        __O[2141] = ____t_result_3613
+        if ____t_3614(____t_result_3613) then
+            local ____t_3617 = __t
+            local ____opt_3615 = __L1.training
+            if ____opt_3615 ~= nil then
+                ____opt_3615 = ____opt_3615.active
             end
-            ____t_result_3590 = not ____t_3589(____opt_3587)
+            ____t_result_3618 = not ____t_3617(____opt_3615)
         else
-            ____t_result_3590 = __O[2124]
+            ____t_result_3618 = __O[2141]
         end
-        __O[2125] = ____t_result_3590
-        if ____t_3591(____t_result_3590) then
-            ____t_result_3592 = not __t(__L1.activity)
+        __O[2142] = ____t_result_3618
+        if ____t_3619(____t_result_3618) then
+            ____t_result_3620 = not __t(__L1.activity)
         else
-            ____t_result_3592 = __O[2125]
+            ____t_result_3620 = __O[2142]
         end
-        if ____t_3593(____t_result_3592) then
+        if ____t_3621(____t_result_3620) then
             local needPart = __call(
                 __L1.pickups,
                 "find",
@@ -20850,262 +20989,262 @@ local __O = {};
                 "find",
                 function(____, p) return p.type == "notebook" and not __t(p.taken) end
             )
-            local ____callq_3598 = __callq
-            local ____opt_3596 = window.BivoltQuest
-            if ____opt_3596 ~= nil then
-                ____opt_3596 = ____opt_3596.parts
+            local ____callq_3626 = __callq
+            local ____opt_3624 = window.BivoltQuest
+            if ____opt_3624 ~= nil then
+                ____opt_3624 = ____opt_3624.parts
             end
-            local ____opt_3594 = ____callq_3598(
-                ____opt_3596,
+            local ____opt_3622 = ____callq_3626(
+                ____opt_3624,
                 "find",
                 function(____, p) return not __t(__call(__L1.q.bivoltParts, "includes", p.id)) end
             )
-            if ____opt_3594 ~= nil then
-                ____opt_3594 = ____opt_3594.x
+            if ____opt_3622 ~= nil then
+                ____opt_3622 = ____opt_3622.x
             end
-            local bivoltTarget = ____opt_3594
-            local ____opt_3601 = window.MissaoFarda
-            if ____opt_3601 ~= nil then
-                ____opt_3601 = ____opt_3601.alvo
+            local bivoltTarget = ____opt_3622
+            local ____opt_3629 = window.MissaoFarda
+            if ____opt_3629 ~= nil then
+                ____opt_3629 = ____opt_3629.alvo
             end
-            local ____opt_result_3603
-            if ____opt_3601 ~= nil then
-                ____opt_result_3603 = ____opt_3601(____opt_3601, __L1.q, __L1.scene)
+            local ____opt_result_3631
+            if ____opt_3629 ~= nil then
+                ____opt_result_3631 = ____opt_3629(____opt_3629, __L1.q, __L1.scene)
             end
-            local ____opt_result_3603_3609 = ____opt_result_3603
-            if ____opt_result_3603_3609 == nil then
-                local ____opt_3606 = window.LugaresC1
-                if ____opt_3606 ~= nil then
-                    ____opt_3606 = ____opt_3606.alvo
+            local ____opt_result_3631_3637 = ____opt_result_3631
+            if ____opt_result_3631_3637 == nil then
+                local ____opt_3634 = window.LugaresC1
+                if ____opt_3634 ~= nil then
+                    ____opt_3634 = ____opt_3634.alvo
                 end
-                local ____opt_result_3608
-                if ____opt_3606 ~= nil then
-                    ____opt_result_3608 = ____opt_3606(____opt_3606, __L1.q, __L1.scene)
+                local ____opt_result_3636
+                if ____opt_3634 ~= nil then
+                    ____opt_result_3636 = ____opt_3634(____opt_3634, __L1.q, __L1.scene)
                 end
-                ____opt_result_3603_3609 = ____opt_result_3608
+                ____opt_result_3631_3637 = ____opt_result_3636
             end
-            local fardaAlvo = ____opt_result_3603_3609
-            local ____temp_3651
+            local fardaAlvo = ____opt_result_3631_3637
+            local ____temp_3679
             if fardaAlvo ~= nil then
-                ____temp_3651 = fardaAlvo
+                ____temp_3679 = fardaAlvo
             else
-                local ____t_result_3650
+                local ____t_result_3678
                 if __t(__L1.scene == 11 and not __t(__L1.q.ollyan)) then
-                    ____t_result_3650 = 3260
+                    ____t_result_3678 = 3260
                 else
-                    local ____t_result_3649
+                    local ____t_result_3677
                     if __t(__L1.scene == 10 and not __t(__L1.q.bivoltUnlocked)) then
-                        local ____t_result_3611
+                        local ____t_result_3639
                         if __t(__L1.q.bivoltAccepted) then
-                            local ____bivoltTarget_3610 = bivoltTarget
-                            if ____bivoltTarget_3610 == nil then
-                                ____bivoltTarget_3610 = 1220
+                            local ____bivoltTarget_3638 = bivoltTarget
+                            if ____bivoltTarget_3638 == nil then
+                                ____bivoltTarget_3638 = 1220
                             end
-                            ____t_result_3611 = ____bivoltTarget_3610
+                            ____t_result_3639 = ____bivoltTarget_3638
                         else
-                            ____t_result_3611 = 1220
+                            ____t_result_3639 = 1220
                         end
-                        ____t_result_3649 = ____t_result_3611
+                        ____t_result_3677 = ____t_result_3639
                     else
-                        local ____t_result_3648
+                        local ____t_result_3676
                         if __t(__L1.scene == 10 and not __t(__L1.q.rayssaVisit)) then
-                            ____t_result_3648 = 450
+                            ____t_result_3676 = 450
                         else
-                            local ____t_result_3647
+                            local ____t_result_3675
                             if __t(__L1.scene == 0 and not __t(__L1.q.lucas)) then
-                                local ____t_result_3617
-                                local ____t_3613 = __t
-                                local ____t_result_3612
+                                local ____t_result_3645
+                                local ____t_3641 = __t
+                                local ____t_result_3640
                                 if __t(__L1.q.carMissionAccepted) then
-                                    ____t_result_3612 = __len(__L1.q.carParts) < 3
+                                    ____t_result_3640 = __len(__L1.q.carParts) < 3
                                 else
-                                    ____t_result_3612 = __L1.q.carMissionAccepted
+                                    ____t_result_3640 = __L1.q.carMissionAccepted
                                 end
-                                if ____t_3613(____t_result_3612) then
-                                    local ____opt_result_3616
+                                if ____t_3641(____t_result_3640) then
+                                    local ____opt_result_3644
                                     if needPart ~= nil then
-                                        ____opt_result_3616 = needPart.x
+                                        ____opt_result_3644 = needPart.x
                                     end
-                                    ____t_result_3617 = ____opt_result_3616
+                                    ____t_result_3645 = ____opt_result_3644
                                 else
-                                    ____t_result_3617 = 480
+                                    ____t_result_3645 = 480
                                 end
-                                ____t_result_3647 = ____t_result_3617
+                                ____t_result_3675 = ____t_result_3645
                             else
-                                local ____t_result_3646
+                                local ____t_result_3674
                                 if __t(__L1.scene == 7 and not __t(__L1.q.mota)) then
-                                    ____t_result_3646 = 500
+                                    ____t_result_3674 = 500
                                 else
-                                    local ____t_result_3645
-                                    local ____t_3621 = __t
-                                    local ____t_result_3620
-                                    local ____t_3619 = __t
-                                    local ____temp_3618 = __L1.scene == 8
-                                    __O[2126] = ____temp_3618
-                                    if ____t_3619(____temp_3618) then
-                                        ____t_result_3620 = not __t(__L1.q.bigodon) or __L1:getJaglionStatus() == "reserved"
+                                    local ____t_result_3673
+                                    local ____t_3649 = __t
+                                    local ____t_result_3648
+                                    local ____t_3647 = __t
+                                    local ____temp_3646 = __L1.scene == 8
+                                    __O[2143] = ____temp_3646
+                                    if ____t_3647(____temp_3646) then
+                                        ____t_result_3648 = not __t(__L1.q.bigodon) or __L1:getJaglionStatus() == "reserved"
                                     else
-                                        ____t_result_3620 = __O[2126]
+                                        ____t_result_3648 = __O[2143]
                                     end
-                                    if ____t_3621(____t_result_3620) then
-                                        ____t_result_3645 = __L1.npcInfo.davi.x
+                                    if ____t_3649(____t_result_3648) then
+                                        ____t_result_3673 = __L1.npcInfo.davi.x
                                     else
-                                        local ____t_result_3644
+                                        local ____t_result_3672
                                         if __t(__L1.scene == 9 and not __t(__L1.q.arthur)) then
-                                            local ____t_result_3622
+                                            local ____t_result_3650
                                             if __t(__L1.q.patioAccepted) then
-                                                ____t_result_3622 = __L1:bossHome("arthur", 2850)
+                                                ____t_result_3650 = __L1:bossHome("arthur", 2850)
                                             else
-                                                ____t_result_3622 = 500
+                                                ____t_result_3650 = 500
                                             end
-                                            ____t_result_3644 = ____t_result_3622
+                                            ____t_result_3672 = ____t_result_3650
                                         else
-                                            local ____t_result_3643
+                                            local ____t_result_3671
                                             if __t(__L1.scene == __L1.npcInfo.amanda.scene and not __t(__L1.q.amandaDating)) then
-                                                ____t_result_3643 = __L1.npcInfo.amanda.x
+                                                ____t_result_3671 = __L1.npcInfo.amanda.x
                                             else
-                                                local ____t_result_3642
+                                                local ____t_result_3670
                                                 if __t(__L1.scene == 4 and not __t(__L1.q.nicolas)) then
-                                                    ____t_result_3642 = __L1:bossHome("nicolas", 5350)
+                                                    ____t_result_3670 = __L1:bossHome("nicolas", 5350)
                                                 else
-                                                    local ____t_result_3641
+                                                    local ____t_result_3669
                                                     if __t(__L1.scene == 1 and not __t(__L1.q.almiro)) then
-                                                        local ____t_result_3628
-                                                        local ____t_3624 = __t
-                                                        local ____t_result_3623
+                                                        local ____t_result_3656
+                                                        local ____t_3652 = __t
+                                                        local ____t_result_3651
                                                         if __t(__L1.q.almiroAccepted) then
-                                                            ____t_result_3623 = __len(__L1.q.notebooks) < 3
+                                                            ____t_result_3651 = __len(__L1.q.notebooks) < 3
                                                         else
-                                                            ____t_result_3623 = __L1.q.almiroAccepted
+                                                            ____t_result_3651 = __L1.q.almiroAccepted
                                                         end
-                                                        if ____t_3624(____t_result_3623) then
-                                                            local ____opt_result_3627
+                                                        if ____t_3652(____t_result_3651) then
+                                                            local ____opt_result_3655
                                                             if needBook ~= nil then
-                                                                ____opt_result_3627 = needBook.x
+                                                                ____opt_result_3655 = needBook.x
                                                             end
-                                                            ____t_result_3628 = ____opt_result_3627
+                                                            ____t_result_3656 = ____opt_result_3655
                                                         else
-                                                            ____t_result_3628 = 1350
+                                                            ____t_result_3656 = 1350
                                                         end
-                                                        ____t_result_3641 = ____t_result_3628
+                                                        ____t_result_3669 = ____t_result_3656
                                                     else
-                                                        local ____t_result_3640
+                                                        local ____t_result_3668
                                                         if __t(__L1.scene == 1 and not __t(__L1.q.miqueias)) then
-                                                            ____t_result_3640 = 2350
+                                                            ____t_result_3668 = 2350
                                                         else
-                                                            local ____t_result_3639
-                                                            local ____t_3632 = __t
-                                                            local ____t_result_3631
-                                                            local ____t_3630 = __t
-                                                            local ____temp_3629 = __L1.scene == 5 and not __t(__L1.q.freddy)
-                                                            __O[2127] = ____temp_3629
-                                                            if ____t_3630(____temp_3629) then
-                                                                ____t_result_3631 = not __t(__L1.q.reeis)
+                                                            local ____t_result_3667
+                                                            local ____t_3660 = __t
+                                                            local ____t_result_3659
+                                                            local ____t_3658 = __t
+                                                            local ____temp_3657 = __L1.scene == 5 and not __t(__L1.q.freddy)
+                                                            __O[2144] = ____temp_3657
+                                                            if ____t_3658(____temp_3657) then
+                                                                ____t_result_3659 = not __t(__L1.q.reeis)
                                                             else
-                                                                ____t_result_3631 = __O[2127]
+                                                                ____t_result_3659 = __O[2144]
                                                             end
-                                                            if ____t_3632(____t_result_3631) then
-                                                                ____t_result_3639 = __L1:bossHome("freddy", 5680)
+                                                            if ____t_3660(____t_result_3659) then
+                                                                ____t_result_3667 = __L1:bossHome("freddy", 5680)
                                                             else
-                                                                local ____t_result_3638
+                                                                local ____t_result_3666
                                                                 if __t(__L1.scene == 5 and not __t(__L1.q.reeis)) then
-                                                                    ____t_result_3638 = __L1:bossHome("reeisBoss", 6400)
+                                                                    ____t_result_3666 = __L1:bossHome("reeisBoss", 6400)
                                                                 else
-                                                                    local ____t_result_3637
+                                                                    local ____t_result_3665
                                                                     if __t(__L1.scene == 1 and not __t(__L1.q.marco)) then
-                                                                        ____t_result_3637 = __L1:bossHome("marco", 3700)
+                                                                        ____t_result_3665 = __L1:bossHome("marco", 3700)
                                                                     else
-                                                                        local ____t_result_3636
+                                                                        local ____t_result_3664
                                                                         if __t(__L1.scene == 6 and not __t(__L1.q.giant)) then
-                                                                            ____t_result_3636 = __L1:bossHome("giant", 5650)
+                                                                            ____t_result_3664 = __L1:bossHome("giant", 5650)
                                                                         else
-                                                                            local ____t_result_3635
+                                                                            local ____t_result_3663
                                                                             if __t(__L1.scene == 1 and not __t(__L1.q.menezes)) then
-                                                                                ____t_result_3635 = __L1:bossHome("menezes", 5200)
+                                                                                ____t_result_3663 = __L1:bossHome("menezes", 5200)
                                                                             else
-                                                                                local ____t_result_3634
+                                                                                local ____t_result_3662
                                                                                 if __t(__L1.scene == 2 and not __t(__L1.q.trained)) then
-                                                                                    ____t_result_3634 = 400
+                                                                                    ____t_result_3662 = 400
                                                                                 else
-                                                                                    local ____t_result_3633
+                                                                                    local ____t_result_3661
                                                                                     if __t(__L1.scene == 3 and not __t(__L1.q.nikolas)) then
-                                                                                        ____t_result_3633 = __L1:bossHome("nikolas", 4300)
+                                                                                        ____t_result_3661 = __L1:bossHome("nikolas", 4300)
                                                                                     else
-                                                                                        ____t_result_3633 = nil
+                                                                                        ____t_result_3661 = nil
                                                                                     end
-                                                                                    ____t_result_3634 = ____t_result_3633
+                                                                                    ____t_result_3662 = ____t_result_3661
                                                                                 end
-                                                                                ____t_result_3635 = ____t_result_3634
+                                                                                ____t_result_3663 = ____t_result_3662
                                                                             end
-                                                                            ____t_result_3636 = ____t_result_3635
+                                                                            ____t_result_3664 = ____t_result_3663
                                                                         end
-                                                                        ____t_result_3637 = ____t_result_3636
+                                                                        ____t_result_3665 = ____t_result_3664
                                                                     end
-                                                                    ____t_result_3638 = ____t_result_3637
+                                                                    ____t_result_3666 = ____t_result_3665
                                                                 end
-                                                                ____t_result_3639 = ____t_result_3638
+                                                                ____t_result_3667 = ____t_result_3666
                                                             end
-                                                            ____t_result_3640 = ____t_result_3639
+                                                            ____t_result_3668 = ____t_result_3667
                                                         end
-                                                        ____t_result_3641 = ____t_result_3640
+                                                        ____t_result_3669 = ____t_result_3668
                                                     end
-                                                    ____t_result_3642 = ____t_result_3641
+                                                    ____t_result_3670 = ____t_result_3669
                                                 end
-                                                ____t_result_3643 = ____t_result_3642
+                                                ____t_result_3671 = ____t_result_3670
                                             end
-                                            ____t_result_3644 = ____t_result_3643
+                                            ____t_result_3672 = ____t_result_3671
                                         end
-                                        ____t_result_3645 = ____t_result_3644
+                                        ____t_result_3673 = ____t_result_3672
                                     end
-                                    ____t_result_3646 = ____t_result_3645
+                                    ____t_result_3674 = ____t_result_3673
                                 end
-                                ____t_result_3647 = ____t_result_3646
+                                ____t_result_3675 = ____t_result_3674
                             end
-                            ____t_result_3648 = ____t_result_3647
+                            ____t_result_3676 = ____t_result_3675
                         end
-                        ____t_result_3649 = ____t_result_3648
+                        ____t_result_3677 = ____t_result_3676
                     end
-                    ____t_result_3650 = ____t_result_3649
+                    ____t_result_3678 = ____t_result_3677
                 end
-                ____temp_3651 = ____t_result_3650
+                ____temp_3679 = ____t_result_3678
             end
-            local objective = ____temp_3651
-            local ____t_3661 = __t
-            local ____t_result_3660
-            local ____t_3659 = __t
-            local ____temp_3658 = objective ~= nil
-            if ____temp_3658 then
-                local ____t_3657 = __t
-                local ____opt_3654 = window.Balanco
-                if ____opt_3654 ~= nil then
-                    ____opt_3654 = ____opt_3654.active
+            local objective = ____temp_3679
+            local ____t_3689 = __t
+            local ____t_result_3688
+            local ____t_3687 = __t
+            local ____temp_3686 = objective ~= nil
+            if ____temp_3686 then
+                local ____t_3685 = __t
+                local ____opt_3682 = window.Balanco
+                if ____opt_3682 ~= nil then
+                    ____opt_3682 = ____opt_3682.active
                 end
-                local ____opt_result_3656
-                if ____opt_3654 ~= nil then
-                    ____opt_result_3656 = ____opt_3654(____opt_3654)
+                local ____opt_result_3684
+                if ____opt_3682 ~= nil then
+                    ____opt_result_3684 = ____opt_3682(____opt_3682)
                 end
-                ____temp_3658 = not ____t_3657(____opt_result_3656)
+                ____temp_3686 = not ____t_3685(____opt_result_3684)
             end
-            __O[2128] = ____temp_3658
-            if ____t_3659(____temp_3658) then
-                ____t_result_3660 = __lt(objective, __L1.camera + 45) or __gt(objective, __L1.camera + __L1.W - 45)
+            __O[2145] = ____temp_3686
+            if ____t_3687(____temp_3686) then
+                ____t_result_3688 = __lt(objective, __L1.camera + 45) or __gt(objective, __L1.camera + __L1.W - 45)
             else
-                ____t_result_3660 = __O[2128]
+                ____t_result_3688 = __O[2145]
             end
-            if ____t_3661(____t_result_3660) then
+            if ____t_3689(____t_result_3688) then
                 local right = __gt(objective, __L1.camera + __L1.W - 45)
-                local ____L1_pill_3664 = __L1.pill
-                local ____temp_3663 = __t(right) and "OBJETIVO →" or "← OBJETIVO"
-                local ____t_result_3662
+                local ____L1_pill_3692 = __L1.pill
+                local ____temp_3691 = __t(right) and "OBJETIVO →" or "← OBJETIVO"
+                local ____t_result_3690
                 if __t(right) then
-                    ____t_result_3662 = __L1.W - 83
+                    ____t_result_3690 = __L1.W - 83
                 else
-                    ____t_result_3662 = 83
+                    ____t_result_3690 = 83
                 end
-                ____L1_pill_3664(
+                ____L1_pill_3692(
                     __L1,
-                    ____temp_3663,
-                    ____t_result_3662,
+                    ____temp_3691,
+                    ____t_result_3690,
                     62,
                     "#ffe09b"
                 )
@@ -21113,17 +21252,17 @@ local __O = {};
             if __t(__L1.vehicle) then
                 __L1:pill("CARRO A GÁS", __L1.W / 2, 30, "#cfe5a7")
             end
-            local ____t_3668 = __t
-            local ____t_result_3667
-            local ____t_3666 = __t
-            local ____temp_3665 = __L1.reeisCooldown > 0
-            __O[2129] = ____temp_3665
-            if ____t_3666(____temp_3665) then
-                ____t_result_3667 = __L1.q.reeis
+            local ____t_3696 = __t
+            local ____t_result_3695
+            local ____t_3694 = __t
+            local ____temp_3693 = __L1.reeisCooldown > 0
+            __O[2146] = ____temp_3693
+            if ____t_3694(____temp_3693) then
+                ____t_result_3695 = __L1.q.reeis
             else
-                ____t_result_3667 = __O[2129]
+                ____t_result_3695 = __O[2146]
             end
-            if ____t_3668(____t_result_3667) then
+            if ____t_3696(____t_result_3695) then
                 __L1:pill(
                     __add(
                         __add(
@@ -21164,22 +21303,22 @@ local __O = {};
             end
             __L1.ctx:restore()
         end
-        local ____t_3671 = __t
-        local ____opt_3669 = __L1.training
-        if ____opt_3669 ~= nil then
-            ____opt_3669 = ____opt_3669.active
+        local ____t_3699 = __t
+        local ____opt_3697 = __L1.training
+        if ____opt_3697 ~= nil then
+            ____opt_3697 = ____opt_3697.active
         end
-        if ____t_3671(____opt_3669) then
+        if ____t_3699(____opt_3697) then
             __L1:drawTraining()
         end
-        local ____t_3673 = __t
-        local ____t_result_3672
+        local ____t_3701 = __t
+        local ____t_result_3700
         if __t(__L1.routeTransition) then
-            ____t_result_3672 = not __t(__L1.routeTransition.chegada)
+            ____t_result_3700 = not __t(__L1.routeTransition.chegada)
         else
-            ____t_result_3672 = __L1.routeTransition
+            ____t_result_3700 = __L1.routeTransition
         end
-        if ____t_3673(____t_result_3672) then
+        if ____t_3701(____t_result_3700) then
             __L1:drawRouteTransition()
         end
         if __L1.hitFlash > 0 then
@@ -21194,301 +21333,302 @@ local __O = {};
         __L1.ctx:restore()
     end
     __L1.frame = function(self, now)
-        local ____opt_3680 = window.CampanhaPoderes
-        if ____opt_3680 ~= nil then
-            ____opt_3680 = ____opt_3680.controles
+        local ____opt_3708 = window.CampanhaPoderes
+        if ____opt_3708 ~= nil then
+            ____opt_3708 = ____opt_3708.controles
         end
-        if ____opt_3680 ~= nil then
-            local ____temp_3678 = __L1.scene >= 12
-            if not ____temp_3678 then
-                local ____t_3677 = __t
-                local ____opt_3675 = window.C2Luta
-                if ____opt_3675 ~= nil then
-                    ____opt_3675 = ____opt_3675.skin
+        if ____opt_3708 ~= nil then
+            local ____temp_3706 = __L1.scene >= 12
+            if not ____temp_3706 then
+                local ____t_3705 = __t
+                local ____opt_3703 = window.C2Luta
+                if ____opt_3703 ~= nil then
+                    ____opt_3703 = ____opt_3703.skin
                 end
-                ____temp_3678 = not not ____t_3677(____opt_3675)
+                ____temp_3706 = not not ____t_3705(____opt_3703)
             end
-            ____opt_3680(____opt_3680, ____temp_3678)
+            ____opt_3708(____opt_3708, ____temp_3706)
         end
-        local ____t_3694 = __t
-        local ____t_result_3693
-        local ____t_3687 = __t
-        local ____opt_3684 = window.Fliperama
-        if ____opt_3684 ~= nil then
-            ____opt_3684 = ____opt_3684.isOpen
-        end
-        local ____opt_result_3686
-        if ____opt_3684 ~= nil then
-            ____opt_result_3686 = ____opt_3684(____opt_3684)
-        end
-        __O[2130] = ____opt_result_3686
-        if ____t_3687(____opt_result_3686) then
-            ____t_result_3693 = __O[2130]
-        else
-            local ____opt_3690 = window.Campanha2
-            if ____opt_3690 ~= nil then
-                ____opt_3690 = ____opt_3690.aberto
-            end
-            local ____opt_result_3692
-            if ____opt_3690 ~= nil then
-                ____opt_result_3692 = ____opt_3690(____opt_3690)
-            end
-            ____t_result_3693 = ____opt_result_3692
-        end
-        if ____t_3694(____t_result_3693) then
-            __L1.last = now
-            local ____opt_3697 = window.CampaignRun
-            if ____opt_3697 ~= nil then
-                ____opt_3697 = ____opt_3697.tick
-            end
-            if ____opt_3697 ~= nil then
-                ____opt_3697(____opt_3697, now, false)
-            end
-            window:requestAnimationFrame(__L1.frame)
-            return
-        end
-        local ____t_3704 = __t
-        local ____t_result_3703
-        local ____t_3702 = __t
-        local ____t_result_3701
-        local ____t_3700 = __t
-        local ____t_result_3699
-        if __t(window.DAROCA_ROBLOX) then
-            ____t_result_3699 = not __t(__L1.started)
-        else
-            ____t_result_3699 = window.DAROCA_ROBLOX
-        end
-        __O[2131] = ____t_result_3699
-        if ____t_3700(____t_result_3699) then
-            ____t_result_3701 = __L1["$"](__L1, "startScreen")
-        else
-            ____t_result_3701 = __O[2131]
-        end
-        __O[2132] = ____t_result_3701
-        if ____t_3702(____t_result_3701) then
-            ____t_result_3703 = not __t(__L1["$"](__L1, "startScreen").hidden)
-        else
-            ____t_result_3703 = __O[2132]
-        end
-        if ____t_3704(____t_result_3703) then
-            __L1.last = now
-            window:requestAnimationFrame(__L1.frame)
-            return
-        end
-        local ____opt_3707 = window.WorldLife
-        if ____opt_3707 ~= nil then
-            ____opt_3707 = ____opt_3707.getStatus
-        end
-        local ____opt_result_3709
-        if ____opt_3707 ~= nil then
-            ____opt_result_3709 = ____opt_3707(____opt_3707)
-        end
-        local challenge = ____opt_result_3709
-        local ____t_result_3736
-        local ____t_3727 = __t
-        local ____t_result_3726
-        local ____t_3719 = __t
-        local ____t_result_3718
-        local ____t_3717 = __t
-        local ____t_result_3716
+        local ____t_3722 = __t
+        local ____t_result_3721
         local ____t_3715 = __t
-        local ____t_result_3714
-        local ____t_3713 = __t
-        local ____t_result_3712
-        local ____t_3711 = __t
-        local ____t_result_3710
+        local ____opt_3712 = window.Fliperama
+        if ____opt_3712 ~= nil then
+            ____opt_3712 = ____opt_3712.isOpen
+        end
+        local ____opt_result_3714
+        if ____opt_3712 ~= nil then
+            ____opt_result_3714 = ____opt_3712(____opt_3712)
+        end
+        __O[2147] = ____opt_result_3714
+        if ____t_3715(____opt_result_3714) then
+            ____t_result_3721 = __O[2147]
+        else
+            local ____opt_3718 = window.Campanha2
+            if ____opt_3718 ~= nil then
+                ____opt_3718 = ____opt_3718.aberto
+            end
+            local ____opt_result_3720
+            if ____opt_3718 ~= nil then
+                ____opt_result_3720 = ____opt_3718(____opt_3718)
+            end
+            ____t_result_3721 = ____opt_result_3720
+        end
+        if ____t_3722(____t_result_3721) then
+            __L1.last = now
+            local ____opt_3725 = window.CampaignRun
+            if ____opt_3725 ~= nil then
+                ____opt_3725 = ____opt_3725.tick
+            end
+            if ____opt_3725 ~= nil then
+                ____opt_3725(____opt_3725, now, false)
+            end
+            window:requestAnimationFrame(__L1.frame)
+            return
+        end
+        local ____t_3732 = __t
+        local ____t_result_3731
+        local ____t_3730 = __t
+        local ____t_result_3729
+        local ____t_3728 = __t
+        local ____t_result_3727
+        if __t(window.DAROCA_ROBLOX) then
+            ____t_result_3727 = not __t(__L1.started)
+        else
+            ____t_result_3727 = window.DAROCA_ROBLOX
+        end
+        __O[2148] = ____t_result_3727
+        if ____t_3728(____t_result_3727) then
+            ____t_result_3729 = __L1["$"](__L1, "startScreen")
+        else
+            ____t_result_3729 = __O[2148]
+        end
+        __O[2149] = ____t_result_3729
+        if ____t_3730(____t_result_3729) then
+            ____t_result_3731 = not __t(__L1["$"](__L1, "startScreen").hidden)
+        else
+            ____t_result_3731 = __O[2149]
+        end
+        if ____t_3732(____t_result_3731) then
+            window.DAROCA_QUADRO_CAMADAS = -1
+            __L1.last = now
+            window:requestAnimationFrame(__L1.frame)
+            return
+        end
+        local ____opt_3735 = window.WorldLife
+        if ____opt_3735 ~= nil then
+            ____opt_3735 = ____opt_3735.getStatus
+        end
+        local ____opt_result_3737
+        if ____opt_3735 ~= nil then
+            ____opt_result_3737 = ____opt_3735(____opt_3735)
+        end
+        local challenge = ____opt_result_3737
+        local ____t_result_3764
+        local ____t_3755 = __t
+        local ____t_result_3754
+        local ____t_3747 = __t
+        local ____t_result_3746
+        local ____t_3745 = __t
+        local ____t_result_3744
+        local ____t_3743 = __t
+        local ____t_result_3742
+        local ____t_3741 = __t
+        local ____t_result_3740
+        local ____t_3739 = __t
+        local ____t_result_3738
         if __t(__L1.started) then
-            ____t_result_3710 = not __t(__L1.sandbox)
+            ____t_result_3738 = not __t(__L1.sandbox)
         else
-            ____t_result_3710 = __L1.started
+            ____t_result_3738 = __L1.started
         end
-        __O[2133] = ____t_result_3710
-        if ____t_3711(____t_result_3710) then
-            ____t_result_3712 = not __t(__L1.won)
+        __O[2150] = ____t_result_3738
+        if ____t_3739(____t_result_3738) then
+            ____t_result_3740 = not __t(__L1.won)
         else
-            ____t_result_3712 = __O[2133]
+            ____t_result_3740 = __O[2150]
         end
-        __O[2134] = ____t_result_3712
-        if ____t_3713(____t_result_3712) then
-            ____t_result_3714 = not __t(__L1.chapterEnded)
+        __O[2151] = ____t_result_3740
+        if ____t_3741(____t_result_3740) then
+            ____t_result_3742 = not __t(__L1.chapterEnded)
         else
-            ____t_result_3714 = __O[2134]
+            ____t_result_3742 = __O[2151]
         end
-        __O[2135] = ____t_result_3714
-        if ____t_3715(____t_result_3714) then
-            ____t_result_3716 = not __t(__L1.defeated)
+        __O[2152] = ____t_result_3742
+        if ____t_3743(____t_result_3742) then
+            ____t_result_3744 = not __t(__L1.defeated)
         else
-            ____t_result_3716 = __O[2135]
+            ____t_result_3744 = __O[2152]
         end
-        __O[2136] = ____t_result_3716
-        if ____t_3717(____t_result_3716) then
-            ____t_result_3718 = not __t(window.document.hidden)
+        __O[2153] = ____t_result_3744
+        if ____t_3745(____t_result_3744) then
+            ____t_result_3746 = not __t(window.document.hidden)
         else
-            ____t_result_3718 = __O[2136]
+            ____t_result_3746 = __O[2153]
         end
-        __O[2137] = ____t_result_3718
-        if ____t_3719(____t_result_3718) then
-            local ____t_3725 = __t
-            local ____opt_3722 = window.Arena
-            if ____opt_3722 ~= nil then
-                ____opt_3722 = ____opt_3722.isOpen
+        __O[2154] = ____t_result_3746
+        if ____t_3747(____t_result_3746) then
+            local ____t_3753 = __t
+            local ____opt_3750 = window.Arena
+            if ____opt_3750 ~= nil then
+                ____opt_3750 = ____opt_3750.isOpen
             end
-            local ____opt_result_3724
-            if ____opt_3722 ~= nil then
-                ____opt_result_3724 = ____opt_3722(____opt_3722)
+            local ____opt_result_3752
+            if ____opt_3750 ~= nil then
+                ____opt_result_3752 = ____opt_3750(____opt_3750)
             end
-            ____t_result_3726 = not ____t_3725(____opt_result_3724)
+            ____t_result_3754 = not ____t_3753(____opt_result_3752)
         else
-            ____t_result_3726 = __O[2137]
+            ____t_result_3754 = __O[2154]
         end
-        __O[2140] = ____t_result_3726
-        if ____t_3727(____t_result_3726) then
-            local ____t_result_3735
-            local ____t_3729 = __t
-            local ____temp_3728 = not __t(__L1.paused)
-            __O[2139] = ____temp_3728
-            if ____t_3729(____temp_3728) then
-                ____t_result_3735 = __O[2139]
+        __O[2157] = ____t_result_3754
+        if ____t_3755(____t_result_3754) then
+            local ____t_result_3763
+            local ____t_3757 = __t
+            local ____temp_3756 = not __t(__L1.paused)
+            __O[2156] = ____temp_3756
+            if ____t_3757(____temp_3756) then
+                ____t_result_3763 = __O[2156]
             else
-                local ____t_result_3734
-                local ____t_3733 = __t
-                local ____opt_result_3732
+                local ____t_result_3762
+                local ____t_3761 = __t
+                local ____opt_result_3760
                 if challenge ~= nil then
-                    ____opt_result_3732 = challenge.open
+                    ____opt_result_3760 = challenge.open
                 end
-                __O[2138] = ____opt_result_3732
-                if ____t_3733(____opt_result_3732) then
-                    ____t_result_3734 = challenge.stage == "live"
+                __O[2155] = ____opt_result_3760
+                if ____t_3761(____opt_result_3760) then
+                    ____t_result_3762 = challenge.stage == "live"
                 else
-                    ____t_result_3734 = __O[2138]
+                    ____t_result_3762 = __O[2155]
                 end
-                ____t_result_3735 = ____t_result_3734
+                ____t_result_3763 = ____t_result_3762
             end
-            ____t_result_3736 = ____t_result_3735
+            ____t_result_3764 = ____t_result_3763
         else
-            ____t_result_3736 = __O[2140]
+            ____t_result_3764 = __O[2157]
         end
-        local counting = ____t_result_3736
-        local ____opt_3739 = window.CampaignRun
-        if ____opt_3739 ~= nil then
-            ____opt_3739 = ____opt_3739.tick
+        local counting = ____t_result_3764
+        local ____opt_3767 = window.CampaignRun
+        if ____opt_3767 ~= nil then
+            ____opt_3767 = ____opt_3767.tick
         end
-        if ____opt_3739 ~= nil then
-            ____opt_3739(____opt_3739, now, counting)
+        if ____opt_3767 ~= nil then
+            ____opt_3767(____opt_3767, now, counting)
         end
-        local ____t_3750 = __t
-        local ____t_result_3749
-        local ____t_3742 = __t
-        local ____t_result_3741
+        local ____t_3778 = __t
+        local ____t_result_3777
+        local ____t_3770 = __t
+        local ____t_result_3769
         if __t(counting) then
-            ____t_result_3741 = not __t(__L1.cutscene)
+            ____t_result_3769 = not __t(__L1.cutscene)
         else
-            ____t_result_3741 = counting
+            ____t_result_3769 = counting
         end
-        __O[2141] = ____t_result_3741
-        if ____t_3742(____t_result_3741) then
-            local ____t_3748 = __t
-            local ____opt_3745 = window.SwiftGuide
-            if ____opt_3745 ~= nil then
-                ____opt_3745 = ____opt_3745.isOpen
+        __O[2158] = ____t_result_3769
+        if ____t_3770(____t_result_3769) then
+            local ____t_3776 = __t
+            local ____opt_3773 = window.SwiftGuide
+            if ____opt_3773 ~= nil then
+                ____opt_3773 = ____opt_3773.isOpen
             end
-            local ____opt_result_3747
-            if ____opt_3745 ~= nil then
-                ____opt_result_3747 = ____opt_3745(____opt_3745)
+            local ____opt_result_3775
+            if ____opt_3773 ~= nil then
+                ____opt_result_3775 = ____opt_3773(____opt_3773)
             end
-            ____t_result_3749 = not ____t_3748(____opt_result_3747)
+            ____t_result_3777 = not ____t_3776(____opt_result_3775)
         else
-            ____t_result_3749 = __O[2141]
+            ____t_result_3777 = __O[2158]
         end
-        if ____t_3750(____t_result_3749) then
-            local ____opt_3753 = window.CampaignRun
-            if ____opt_3753 ~= nil then
-                ____opt_3753 = ____opt_3753.confirmInitialMode
+        if ____t_3778(____t_result_3777) then
+            local ____opt_3781 = window.CampaignRun
+            if ____opt_3781 ~= nil then
+                ____opt_3781 = ____opt_3781.confirmInitialMode
             end
-            if ____opt_3753 ~= nil then
-                ____opt_3753(____opt_3753)
+            if ____opt_3781 ~= nil then
+                ____opt_3781(____opt_3781)
             end
         end
         local dt = math.min(0.035, (now - __L1.last) / 1000)
         __L1.last = now
-        local ____t_3764 = __t
-        local ____t_result_3763
-        local ____t_3762 = __t
-        local ____t_result_3761
-        local ____t_3760 = __t
-        local ____t_result_3759
-        local ____t_3758 = __t
-        local ____t_result_3757
-        local ____t_3756 = __t
-        local ____temp_3755 = __L1.hitStop > 0
-        __O[2142] = ____temp_3755
-        if ____t_3756(____temp_3755) then
-            ____t_result_3757 = __L1.started
+        local ____t_3792 = __t
+        local ____t_result_3791
+        local ____t_3790 = __t
+        local ____t_result_3789
+        local ____t_3788 = __t
+        local ____t_result_3787
+        local ____t_3786 = __t
+        local ____t_result_3785
+        local ____t_3784 = __t
+        local ____temp_3783 = __L1.hitStop > 0
+        __O[2159] = ____temp_3783
+        if ____t_3784(____temp_3783) then
+            ____t_result_3785 = __L1.started
         else
-            ____t_result_3757 = __O[2142]
+            ____t_result_3785 = __O[2159]
         end
-        __O[2143] = ____t_result_3757
-        if ____t_3758(____t_result_3757) then
-            ____t_result_3759 = not __t(__L1.cutscene)
+        __O[2160] = ____t_result_3785
+        if ____t_3786(____t_result_3785) then
+            ____t_result_3787 = not __t(__L1.cutscene)
         else
-            ____t_result_3759 = __O[2143]
+            ____t_result_3787 = __O[2160]
         end
-        __O[2144] = ____t_result_3759
-        if ____t_3760(____t_result_3759) then
-            ____t_result_3761 = not __t(__L1.paused)
+        __O[2161] = ____t_result_3787
+        if ____t_3788(____t_result_3787) then
+            ____t_result_3789 = not __t(__L1.paused)
         else
-            ____t_result_3761 = __O[2144]
+            ____t_result_3789 = __O[2161]
         end
-        __O[2145] = ____t_result_3761
-        if ____t_3762(____t_result_3761) then
-            ____t_result_3763 = not __t(__L1.dialog)
+        __O[2162] = ____t_result_3789
+        if ____t_3790(____t_result_3789) then
+            ____t_result_3791 = not __t(__L1.dialog)
         else
-            ____t_result_3763 = __O[2145]
+            ____t_result_3791 = __O[2162]
         end
-        if ____t_3764(____t_result_3763) then
+        if ____t_3792(____t_result_3791) then
             __L1.hitStop = math.max(0, __L1.hitStop - dt)
         else
             __L1.hitStop = 0
             __L1:update(dt)
-            local ____t_3772 = __t
-            local ____t_result_3771
-            local ____t_3770 = __t
-            local ____t_result_3769
-            local ____t_3768 = __t
-            local ____t_result_3767
-            local ____t_3766 = __t
-            local ____t_result_3765
+            local ____t_3800 = __t
+            local ____t_result_3799
+            local ____t_3798 = __t
+            local ____t_result_3797
+            local ____t_3796 = __t
+            local ____t_result_3795
+            local ____t_3794 = __t
+            local ____t_result_3793
             if __t(__L1.started) then
-                ____t_result_3765 = not __t(__L1.cutscene)
+                ____t_result_3793 = not __t(__L1.cutscene)
             else
-                ____t_result_3765 = __L1.started
+                ____t_result_3793 = __L1.started
             end
-            __O[2146] = ____t_result_3765
-            if ____t_3766(____t_result_3765) then
-                ____t_result_3767 = not __t(__L1.room)
+            __O[2163] = ____t_result_3793
+            if ____t_3794(____t_result_3793) then
+                ____t_result_3795 = not __t(__L1.room)
             else
-                ____t_result_3767 = __O[2146]
+                ____t_result_3795 = __O[2163]
             end
-            __O[2147] = ____t_result_3767
-            if ____t_3768(____t_result_3767) then
-                ____t_result_3769 = not __t(__L1.activity)
+            __O[2164] = ____t_result_3795
+            if ____t_3796(____t_result_3795) then
+                ____t_result_3797 = not __t(__L1.activity)
             else
-                ____t_result_3769 = __O[2147]
+                ____t_result_3797 = __O[2164]
             end
-            __O[2148] = ____t_result_3769
-            if ____t_3770(____t_result_3769) then
-                ____t_result_3771 = not __t(__L1.ollyanEncounter)
+            __O[2165] = ____t_result_3797
+            if ____t_3798(____t_result_3797) then
+                ____t_result_3799 = not __t(__L1.ollyanEncounter)
             else
-                ____t_result_3771 = __O[2148]
+                ____t_result_3799 = __O[2165]
             end
-            if ____t_3772(____t_result_3771) then
-                local ____opt_3775 = window.SceneLife
-                if ____opt_3775 ~= nil then
-                    ____opt_3775 = ____opt_3775.update
+            if ____t_3800(____t_result_3799) then
+                local ____opt_3803 = window.SceneLife
+                if ____opt_3803 ~= nil then
+                    ____opt_3803 = ____opt_3803.update
                 end
-                if ____opt_3775 ~= nil then
-                    ____opt_3775(
-                        ____opt_3775,
+                if ____opt_3803 ~= nil then
+                    ____opt_3803(
+                        ____opt_3803,
                         dt,
                         {
                             scene = __L1.scene,
@@ -21502,53 +21642,53 @@ local __O = {};
                     )
                 end
             end
-            local ____t_3786 = __t
-            local ____t_result_3785
-            local ____t_3784 = __t
-            local ____t_result_3783
-            local ____t_3782 = __t
-            local ____t_result_3781
-            local ____t_3780 = __t
-            local ____t_result_3779
-            local ____t_3778 = __t
-            local ____t_result_3777
+            local ____t_3814 = __t
+            local ____t_result_3813
+            local ____t_3812 = __t
+            local ____t_result_3811
+            local ____t_3810 = __t
+            local ____t_result_3809
+            local ____t_3808 = __t
+            local ____t_result_3807
+            local ____t_3806 = __t
+            local ____t_result_3805
             if __t(__L1.started) then
-                ____t_result_3777 = not __t(__L1.cutscene)
+                ____t_result_3805 = not __t(__L1.cutscene)
             else
-                ____t_result_3777 = __L1.started
+                ____t_result_3805 = __L1.started
             end
-            __O[2149] = ____t_result_3777
-            if ____t_3778(____t_result_3777) then
-                ____t_result_3779 = not __t(__L1.room)
+            __O[2166] = ____t_result_3805
+            if ____t_3806(____t_result_3805) then
+                ____t_result_3807 = not __t(__L1.room)
             else
-                ____t_result_3779 = __O[2149]
+                ____t_result_3807 = __O[2166]
             end
-            __O[2150] = ____t_result_3779
-            if ____t_3780(____t_result_3779) then
-                ____t_result_3781 = not __t(__L1.activity)
+            __O[2167] = ____t_result_3807
+            if ____t_3808(____t_result_3807) then
+                ____t_result_3809 = not __t(__L1.activity)
             else
-                ____t_result_3781 = __O[2150]
+                ____t_result_3809 = __O[2167]
             end
-            __O[2151] = ____t_result_3781
-            if ____t_3782(____t_result_3781) then
-                ____t_result_3783 = not __t(__L1.ollyanEncounter)
+            __O[2168] = ____t_result_3809
+            if ____t_3810(____t_result_3809) then
+                ____t_result_3811 = not __t(__L1.ollyanEncounter)
             else
-                ____t_result_3783 = __O[2151]
+                ____t_result_3811 = __O[2168]
             end
-            __O[2152] = ____t_result_3783
-            if ____t_3784(____t_result_3783) then
-                ____t_result_3785 = not __t(__L1.arena)
+            __O[2169] = ____t_result_3811
+            if ____t_3812(____t_result_3811) then
+                ____t_result_3813 = not __t(__L1.arena)
             else
-                ____t_result_3785 = __O[2152]
+                ____t_result_3813 = __O[2169]
             end
-            if ____t_3786(____t_result_3785) then
-                local ____opt_3789 = window.HdMaps
-                if ____opt_3789 ~= nil then
-                    ____opt_3789 = ____opt_3789.touch
+            if ____t_3814(____t_result_3813) then
+                local ____opt_3817 = window.HdMaps
+                if ____opt_3817 ~= nil then
+                    ____opt_3817 = ____opt_3817.touch
                 end
-                if ____opt_3789 ~= nil then
-                    ____opt_3789(
-                        ____opt_3789,
+                if ____opt_3817 ~= nil then
+                    ____opt_3817(
+                        ____opt_3817,
                         __L1.scene,
                         __L1.player.x,
                         __L1.player.y,
@@ -21558,35 +21698,35 @@ local __O = {};
                 end
             end
             if not __t(__L1:terrenoConquista()) then
-                local ____opt_3802 = window.Interact
-                if ____opt_3802 ~= nil then
-                    ____opt_3802 = ____opt_3802.update
+                local ____opt_3830 = window.Interact
+                if ____opt_3830 ~= nil then
+                    ____opt_3830 = ____opt_3830.update
                 end
-                if ____opt_3802 ~= nil then
-                    local ____L1_scene_3796 = __L1.scene
-                    local ____L1_player_3797 = __L1.player
-                    local ____L1_camera_3798 = __L1.camera
-                    local ____L1_time_3799 = __L1.time
-                    local ____temp_3800 = not not __t(__L1.arena)
-                    local ____opt_3792 = __L1.arena
-                    if ____opt_3792 ~= nil then
-                        ____opt_3792 = ____opt_3792.type
+                if ____opt_3830 ~= nil then
+                    local ____L1_scene_3824 = __L1.scene
+                    local ____L1_player_3825 = __L1.player
+                    local ____L1_camera_3826 = __L1.camera
+                    local ____L1_time_3827 = __L1.time
+                    local ____temp_3828 = not not __t(__L1.arena)
+                    local ____opt_3820 = __L1.arena
+                    if ____opt_3820 ~= nil then
+                        ____opt_3820 = ____opt_3820.type
                     end
-                    local ____opt_3794 = __L1.arena
-                    if ____opt_3794 ~= nil then
-                        ____opt_3794 = ____opt_3794.homeX
+                    local ____opt_3822 = __L1.arena
+                    if ____opt_3822 ~= nil then
+                        ____opt_3822 = ____opt_3822.homeX
                     end
-                    ____opt_3802(
-                        ____opt_3802,
+                    ____opt_3830(
+                        ____opt_3830,
                         dt,
                         {
-                            scene = ____L1_scene_3796,
-                            player = ____L1_player_3797,
-                            camera = ____L1_camera_3798,
-                            time = ____L1_time_3799,
-                            arena = ____temp_3800,
-                            arenaType = ____opt_3792,
-                            homeX = ____opt_3794,
+                            scene = ____L1_scene_3824,
+                            player = ____L1_player_3825,
+                            camera = ____L1_camera_3826,
+                            time = ____L1_time_3827,
+                            arena = ____temp_3828,
+                            arenaType = ____opt_3820,
+                            homeX = ____opt_3822,
                             room = not not __t(__L1.room),
                             shots = __L1.shots,
                             enemies = __L1.enemies,
@@ -21596,91 +21736,91 @@ local __O = {};
                     )
                 end
             end
-            local ____t_3805 = __t
-            local ____t_result_3804
+            local ____t_3833 = __t
+            local ____t_result_3832
             if __t(__L1.activeBoss) then
-                ____t_result_3804 = not __t(__L1.activeBoss.conquista)
+                ____t_result_3832 = not __t(__L1.activeBoss.conquista)
             else
-                ____t_result_3804 = __L1.activeBoss
+                ____t_result_3832 = __L1.activeBoss
             end
-            if ____t_3805(____t_result_3804) then
-                local ____opt_3808 = window.BossFx
-                if ____opt_3808 ~= nil then
-                    ____opt_3808 = ____opt_3808.update
+            if ____t_3833(____t_result_3832) then
+                local ____opt_3836 = window.BossFx
+                if ____opt_3836 ~= nil then
+                    ____opt_3836 = ____opt_3836.update
                 end
-                if ____opt_3808 ~= nil then
-                    ____opt_3808(____opt_3808, dt, {boss = __L1.activeBoss, player = __L1.player})
+                if ____opt_3836 ~= nil then
+                    ____opt_3836(____opt_3836, dt, {boss = __L1.activeBoss, player = __L1.player})
                 end
             end
         end
         __L1:updateEpic(dt)
         __L1.pickupsLater = false
         __L1:draw()
-        local ____t_result_3836
-        local ____t_3815 = __t
-        local ____opt_3812 = window.Graphics
-        if ____opt_3812 ~= nil then
-            ____opt_3812 = ____opt_3812.isShader
+        local ____t_result_3864
+        local ____t_3843 = __t
+        local ____opt_3840 = window.Graphics
+        if ____opt_3840 ~= nil then
+            ____opt_3840 = ____opt_3840.isShader
         end
-        local ____opt_result_3814
-        if ____opt_3812 ~= nil then
-            ____opt_result_3814 = ____opt_3812(____opt_3812)
+        local ____opt_result_3842
+        if ____opt_3840 ~= nil then
+            ____opt_result_3842 = ____opt_3840(____opt_3840)
         end
-        __O[2158] = ____opt_result_3814
-        if ____t_3815(____opt_result_3814) then
-            local ____opt_3833 = window.Shader
-            if ____opt_3833 ~= nil then
-                ____opt_3833 = ____opt_3833.apply
+        __O[2175] = ____opt_result_3842
+        if ____t_3843(____opt_result_3842) then
+            local ____opt_3861 = window.Shader
+            if ____opt_3861 ~= nil then
+                ____opt_3861 = ____opt_3861.apply
             end
-            local ____opt_result_3835
-            if ____opt_3833 ~= nil then
-                local ____L1_ctx_canvas_3831 = __L1.ctx.canvas
-                local ____L1_scene_3828 = __L1.scene
-                local ____L1_camera_3829 = __L1.camera
-                local ____L1_time_3830 = __L1.time
-                local ____t_result_3827
-                local ____t_3826 = __t
-                local ____t_result_3825
-                local ____t_3824 = __t
-                local ____t_result_3823
-                local ____t_3822 = __t
-                local ____t_result_3821
-                local ____t_3820 = __t
-                local ____t_result_3819
-                local ____t_3818 = __t
-                local ____t_result_3817
+            local ____opt_result_3863
+            if ____opt_3861 ~= nil then
+                local ____L1_ctx_canvas_3859 = __L1.ctx.canvas
+                local ____L1_scene_3856 = __L1.scene
+                local ____L1_camera_3857 = __L1.camera
+                local ____L1_time_3858 = __L1.time
+                local ____t_result_3855
+                local ____t_3854 = __t
+                local ____t_result_3853
+                local ____t_3852 = __t
+                local ____t_result_3851
+                local ____t_3850 = __t
+                local ____t_result_3849
+                local ____t_3848 = __t
+                local ____t_result_3847
+                local ____t_3846 = __t
+                local ____t_result_3845
                 if __t(__L1.started) then
-                    ____t_result_3817 = not __t(__L1.cutscene)
+                    ____t_result_3845 = not __t(__L1.cutscene)
                 else
-                    ____t_result_3817 = __L1.started
+                    ____t_result_3845 = __L1.started
                 end
-                __O[2153] = ____t_result_3817
-                if ____t_3818(____t_result_3817) then
-                    ____t_result_3819 = not __t(__L1.room)
+                __O[2170] = ____t_result_3845
+                if ____t_3846(____t_result_3845) then
+                    ____t_result_3847 = not __t(__L1.room)
                 else
-                    ____t_result_3819 = __O[2153]
+                    ____t_result_3847 = __O[2170]
                 end
-                __O[2154] = ____t_result_3819
-                if ____t_3820(____t_result_3819) then
-                    ____t_result_3821 = not __t(__L1.activity)
+                __O[2171] = ____t_result_3847
+                if ____t_3848(____t_result_3847) then
+                    ____t_result_3849 = not __t(__L1.activity)
                 else
-                    ____t_result_3821 = __O[2154]
+                    ____t_result_3849 = __O[2171]
                 end
-                __O[2155] = ____t_result_3821
-                if ____t_3822(____t_result_3821) then
-                    ____t_result_3823 = not __t(__L1.ollyanEncounter)
+                __O[2172] = ____t_result_3849
+                if ____t_3850(____t_result_3849) then
+                    ____t_result_3851 = not __t(__L1.ollyanEncounter)
                 else
-                    ____t_result_3823 = __O[2155]
+                    ____t_result_3851 = __O[2172]
                 end
-                __O[2156] = ____t_result_3823
-                if ____t_3824(____t_result_3823) then
-                    ____t_result_3825 = not __t(__L1.arena)
+                __O[2173] = ____t_result_3851
+                if ____t_3852(____t_result_3851) then
+                    ____t_result_3853 = not __t(__L1.arena)
                 else
-                    ____t_result_3825 = __O[2156]
+                    ____t_result_3853 = __O[2173]
                 end
-                __O[2157] = ____t_result_3825
-                if ____t_3826(____t_result_3825) then
-                    ____t_result_3827 = __call(
+                __O[2174] = ____t_result_3853
+                if ____t_3854(____t_result_3853) then
+                    ____t_result_3855 = __call(
                         __arrL({
                             0,
                             1,
@@ -21694,53 +21834,53 @@ local __O = {};
                         __L1.scene
                     )
                 else
-                    ____t_result_3827 = __O[2157]
+                    ____t_result_3855 = __O[2174]
                 end
-                ____opt_result_3835 = ____opt_3833(____opt_3833, ____L1_ctx_canvas_3831, {scene = ____L1_scene_3828, camera = ____L1_camera_3829, time = ____L1_time_3830, outdoor = ____t_result_3827})
+                ____opt_result_3863 = ____opt_3861(____opt_3861, ____L1_ctx_canvas_3859, {scene = ____L1_scene_3856, camera = ____L1_camera_3857, time = ____L1_time_3858, outdoor = ____t_result_3855})
             end
-            ____t_result_3836 = ____opt_result_3835
+            ____t_result_3864 = ____opt_result_3863
         else
-            ____t_result_3836 = __O[2158]
+            ____t_result_3864 = __O[2175]
         end
-        local shaded = ____t_result_3836
-        local ____t_3840 = __t
-        local ____t_result_3839
+        local shaded = ____t_result_3864
+        local ____t_3868 = __t
+        local ____t_result_3867
         if __t(__L1.pickupsLater) then
-            local ____t_3838 = __t
-            local ____t_result_3837
+            local ____t_3866 = __t
+            local ____t_result_3865
             if __t(__L1.routeTransition) then
-                ____t_result_3837 = not __t(__L1.routeTransition.chegada)
+                ____t_result_3865 = not __t(__L1.routeTransition.chegada)
             else
-                ____t_result_3837 = __L1.routeTransition
+                ____t_result_3865 = __L1.routeTransition
             end
-            ____t_result_3839 = not ____t_3838(____t_result_3837)
+            ____t_result_3867 = not ____t_3866(____t_result_3865)
         else
-            ____t_result_3839 = __L1.pickupsLater
+            ____t_result_3867 = __L1.pickupsLater
         end
-        if ____t_3840(____t_result_3839) then
-            local ____t_result_3848
-            local ____t_3847 = __t
-            local ____t_result_3846
+        if ____t_3868(____t_result_3867) then
+            local ____t_result_3876
+            local ____t_3875 = __t
+            local ____t_result_3874
             if __t(shaded) then
-                local ____opt_3843 = window.Shader
-                if ____opt_3843 ~= nil then
-                    ____opt_3843 = ____opt_3843.items
+                local ____opt_3871 = window.Shader
+                if ____opt_3871 ~= nil then
+                    ____opt_3871 = ____opt_3871.items
                 end
-                local ____opt_result_3845
-                if ____opt_3843 ~= nil then
-                    ____opt_result_3845 = ____opt_3843(____opt_3843)
+                local ____opt_result_3873
+                if ____opt_3871 ~= nil then
+                    ____opt_result_3873 = ____opt_3871(____opt_3871)
                 end
-                ____t_result_3846 = ____opt_result_3845
+                ____t_result_3874 = ____opt_result_3873
             else
-                ____t_result_3846 = shaded
+                ____t_result_3874 = shaded
             end
-            __O[2159] = ____t_result_3846
-            if ____t_3847(____t_result_3846) then
-                ____t_result_3848 = __O[2159]
+            __O[2176] = ____t_result_3874
+            if ____t_3875(____t_result_3874) then
+                ____t_result_3876 = __O[2176]
             else
-                ____t_result_3848 = __L1.ctx
+                ____t_result_3876 = __L1.ctx
             end
-            local g = ____t_result_3848
+            local g = ____t_result_3876
             g:save()
             g:setTransform(
                 1,
@@ -21796,14 +21936,14 @@ local __O = {};
         end
         __call(__L1.activePointers, "delete", id)
         __L1:safe(function()
-            local ____t_3851 = __t
-            local ____this_3850
-            ____this_3850 = p.element
-            local ____opt_3849 = ____this_3850.hasPointerCapture
-            if ____opt_3849 ~= nil then
-                ____opt_3849 = ____opt_3849(____this_3850, id)
+            local ____t_3879 = __t
+            local ____this_3878
+            ____this_3878 = p.element
+            local ____opt_3877 = ____this_3878.hasPointerCapture
+            if ____opt_3877 ~= nil then
+                ____opt_3877 = ____opt_3877(____this_3878, id)
             end
-            if ____t_3851(____opt_3849) then
+            if ____t_3879(____opt_3877) then
                 p.element:releasePointerCapture(id)
             end
         end)
@@ -21827,14 +21967,14 @@ local __O = {};
             local id = ____value[1]
             local p = ____value[2]
             __L1:safe(function()
-                local ____t_3854 = __t
-                local ____this_3853
-                ____this_3853 = p.element
-                local ____opt_3852 = ____this_3853.hasPointerCapture
-                if ____opt_3852 ~= nil then
-                    ____opt_3852 = ____opt_3852(____this_3853, id)
+                local ____t_3882 = __t
+                local ____this_3881
+                ____this_3881 = p.element
+                local ____opt_3880 = ____this_3881.hasPointerCapture
+                if ____opt_3880 ~= nil then
+                    ____opt_3880 = ____opt_3880(____this_3881, id)
                 end
-                if ____t_3854(____opt_3852) then
+                if ____t_3882(____opt_3880) then
                     p.element:releasePointerCapture(id)
                 end
             end)
@@ -21872,49 +22012,49 @@ local __O = {};
                     if __t(__call(matched, "has", id)) then
                         continue
                     end
-                    local ____t_result_3859
-                    local ____t_3856 = __t
-                    local ____temp_3855 = t.target == p.element
-                    __O[2190] = ____temp_3855
-                    if ____t_3856(____temp_3855) then
-                        ____t_result_3859 = __O[2190]
+                    local ____t_result_3887
+                    local ____t_3884 = __t
+                    local ____temp_3883 = t.target == p.element
+                    __O[2207] = ____temp_3883
+                    if ____t_3884(____temp_3883) then
+                        ____t_result_3887 = __O[2207]
                     else
-                        local ____this_3858
-                        ____this_3858 = p.element
-                        local ____opt_3857 = ____this_3858.contains
-                        if ____opt_3857 ~= nil then
-                            ____opt_3857 = ____opt_3857(____this_3858, t.target)
+                        local ____this_3886
+                        ____this_3886 = p.element
+                        local ____opt_3885 = ____this_3886.contains
+                        if ____opt_3885 ~= nil then
+                            ____opt_3885 = ____opt_3885(____this_3886, t.target)
                         end
-                        ____t_result_3859 = ____opt_3857
+                        ____t_result_3887 = ____opt_3885
                     end
-                    local sameTarget = ____t_result_3859
-                    local ____hypot_3863 = __hypot
-                    local ____t_clientX_3860 = t.clientX
-                    if ____t_clientX_3860 == nil then
-                        ____t_clientX_3860 = p.x
+                    local sameTarget = ____t_result_3887
+                    local ____hypot_3891 = __hypot
+                    local ____t_clientX_3888 = t.clientX
+                    if ____t_clientX_3888 == nil then
+                        ____t_clientX_3888 = p.x
                     end
-                    local ____temp_3862 = ____t_clientX_3860 - p.x
-                    local ____t_clientY_3861 = t.clientY
-                    if ____t_clientY_3861 == nil then
-                        ____t_clientY_3861 = p.y
+                    local ____temp_3890 = ____t_clientX_3888 - p.x
+                    local ____t_clientY_3889 = t.clientY
+                    if ____t_clientY_3889 == nil then
+                        ____t_clientY_3889 = p.y
                     end
-                    local dist = ____hypot_3863(____temp_3862, ____t_clientY_3861 - p.y)
-                    local ____t_3867 = __t
-                    local ____t_result_3866
-                    local ____t_3865 = __t
-                    local ____t_result_3864
+                    local dist = ____hypot_3891(____temp_3890, ____t_clientY_3889 - p.y)
+                    local ____t_3895 = __t
+                    local ____t_result_3894
+                    local ____t_3893 = __t
+                    local ____t_result_3892
                     if __t(sameTarget) then
-                        ____t_result_3864 = sameTarget
+                        ____t_result_3892 = sameTarget
                     else
-                        ____t_result_3864 = not __t(t.target) and dist < 60
+                        ____t_result_3892 = not __t(t.target) and dist < 60
                     end
-                    __O[2191] = ____t_result_3864
-                    if ____t_3865(____t_result_3864) then
-                        ____t_result_3866 = dist < distance
+                    __O[2208] = ____t_result_3892
+                    if ____t_3893(____t_result_3892) then
+                        ____t_result_3894 = dist < distance
                     else
-                        ____t_result_3866 = __O[2191]
+                        ____t_result_3894 = __O[2208]
                     end
-                    if ____t_3867(____t_result_3866) then
+                    if ____t_3895(____t_result_3894) then
                         best = id
                         distance = dist
                     end
@@ -21953,509 +22093,509 @@ local __O = {};
         )
     end
     __L1.getAudioState = function(self)
-        local ____t_result_3873
+        local ____t_result_3901
         if __t(__L1.ollyanEncounter) then
-            local ____opt_3870 = window.OllyanEncounter
-            if ____opt_3870 ~= nil then
-                ____opt_3870 = ____opt_3870.getAudioState
+            local ____opt_3898 = window.OllyanEncounter
+            if ____opt_3898 ~= nil then
+                ____opt_3898 = ____opt_3898.getAudioState
             end
-            local ____opt_result_3872
-            if ____opt_3870 ~= nil then
-                ____opt_result_3872 = ____opt_3870(____opt_3870, __L1.ollyanEncounter)
+            local ____opt_result_3900
+            if ____opt_3898 ~= nil then
+                ____opt_result_3900 = ____opt_3898(____opt_3898, __L1.ollyanEncounter)
             end
-            ____t_result_3873 = ____opt_result_3872
+            ____t_result_3901 = ____opt_result_3900
         else
-            ____t_result_3873 = nil
+            ____t_result_3901 = nil
         end
-        local flight = ____t_result_3873
-        local ____L1_started_3971 = __L1.started
-        local ____L1_playing_3972 = __L1.playing
-        local ____L1_paused_3973 = __L1.paused
-        local ____L1_scene_3974 = __L1.scene
-        local ____t_result_3877
-        local ____t_3876 = __t
-        local ____opt_3874 = __L1.room
-        if ____opt_3874 ~= nil then
-            ____opt_3874 = ____opt_3874.id
-        end
-        __O[2213] = ____opt_3874
-        if ____t_3876(____opt_3874) then
-            ____t_result_3877 = __O[2213]
-        else
-            ____t_result_3877 = nil
-        end
-        local ____t_result_3886
-        local ____t_3885 = __t
-        local ____t_result_3884
-        local ____t_3881 = __t
-        local ____opt_result_3880
-        if flight ~= nil then
-            ____opt_result_3880 = flight.boss
-        end
-        __O[2214] = ____opt_result_3880
-        if ____t_3881(____opt_result_3880) then
-            ____t_result_3884 = __O[2214]
-        else
-            local ____opt_3882 = __L1.activeBoss
-            if ____opt_3882 ~= nil then
-                ____opt_3882 = ____opt_3882.type
-            end
-            ____t_result_3884 = ____opt_3882
-        end
-        __O[2215] = ____t_result_3884
-        if ____t_3885(____t_result_3884) then
-            ____t_result_3886 = __O[2215]
-        else
-            ____t_result_3886 = nil
-        end
-        local ____t_result_3891
-        if __t(__L1.ollyanEncounter) then
-            ____t_result_3891 = window.OllyanEncounter:getStatus(__L1.ollyanEncounter).phase
-        else
-            local ____t_result_3890
-            local ____t_3889 = __t
-            local ____opt_3887 = __L1.activeBoss
-            if ____opt_3887 ~= nil then
-                ____opt_3887 = ____opt_3887.phase
-            end
-            __O[2216] = ____opt_3887
-            if ____t_3889(____opt_3887) then
-                ____t_result_3890 = __O[2216]
-            else
-                ____t_result_3890 = nil
-            end
-            ____t_result_3891 = ____t_result_3890
-        end
-        local ____t_result_3900
-        local ____t_3899 = __t
-        local ____t_result_3898
-        local ____t_3895 = __t
-        local ____opt_result_3894
-        if flight ~= nil then
-            ____opt_result_3894 = flight.cutscene
-        end
-        __O[2217] = ____opt_result_3894
-        if ____t_3895(____opt_result_3894) then
-            ____t_result_3898 = __O[2217]
-        else
-            local ____opt_3896 = __L1.cutscene
-            if ____opt_3896 ~= nil then
-                ____opt_3896 = ____opt_3896.kind
-            end
-            ____t_result_3898 = ____opt_3896
-        end
-        __O[2218] = ____t_result_3898
-        if ____t_3899(____t_result_3898) then
-            ____t_result_3900 = __O[2218]
-        else
-            ____t_result_3900 = nil
-        end
-        local ____t_result_3909
-        local ____t_3908 = __t
-        local ____t_result_3907
+        local flight = ____t_result_3901
+        local ____L1_started_3999 = __L1.started
+        local ____L1_playing_4000 = __L1.playing
+        local ____L1_paused_4001 = __L1.paused
+        local ____L1_scene_4002 = __L1.scene
+        local ____t_result_3905
         local ____t_3904 = __t
-        local ____opt_result_3903
-        if flight ~= nil then
-            ____opt_result_3903 = flight.cutsceneToken
+        local ____opt_3902 = __L1.room
+        if ____opt_3902 ~= nil then
+            ____opt_3902 = ____opt_3902.id
         end
-        __O[2219] = ____opt_result_3903
-        if ____t_3904(____opt_result_3903) then
-            ____t_result_3907 = __O[2219]
+        __O[2230] = ____opt_3902
+        if ____t_3904(____opt_3902) then
+            ____t_result_3905 = __O[2230]
         else
-            local ____opt_3905 = __L1.cutscene
-            if ____opt_3905 ~= nil then
-                ____opt_3905 = ____opt_3905.audioToken
-            end
-            ____t_result_3907 = ____opt_3905
+            ____t_result_3905 = nil
         end
-        __O[2220] = ____t_result_3907
-        if ____t_3908(____t_result_3907) then
-            ____t_result_3909 = __O[2220]
-        else
-            ____t_result_3909 = nil
-        end
-        local ____t_result_3925
+        local ____t_result_3914
         local ____t_3913 = __t
-        local ____opt_result_3912
+        local ____t_result_3912
+        local ____t_3909 = __t
+        local ____opt_result_3908
         if flight ~= nil then
-            ____opt_result_3912 = flight.cutscene
+            ____opt_result_3908 = flight.boss
         end
-        if ____t_3913(____opt_result_3912) then
-            ____t_result_3925 = flight.cutsceneElapsed
+        __O[2231] = ____opt_result_3908
+        if ____t_3909(____opt_result_3908) then
+            ____t_result_3912 = __O[2231]
         else
-            local ____t_result_3924
-            if __t(__L1.cutscene) then
-                local ____t_result_3923
-                local ____t_3922 = __t
-                local ____opt_3916 = window.Cinematics
-                if ____opt_3916 ~= nil then
-                    ____opt_3916 = ____opt_3916.timelinePosition
-                end
-                local ____opt_result_3918
-                if ____opt_3916 ~= nil then
-                    ____opt_result_3918 = ____opt_3916(____opt_3916, __L1.cutscene)
-                end
-                local ____opt_result_3918_3919 = ____opt_result_3918
-                if ____opt_result_3918_3919 == nil then
-                    ____opt_result_3918_3919 = __L1.cutscene.elapsed
-                end
-                local ____opt_result_3918_3919_3920 = ____opt_result_3918_3919
-                if ____opt_result_3918_3919_3920 == nil then
-                    ____opt_result_3918_3919_3920 = __L1.cutscene.audioElapsed
-                end
-                local ____TS__Number_result_3921 = __TS__Number(____opt_result_3918_3919_3920)
-                __O[2221] = ____TS__Number_result_3921
-                if ____t_3922(____TS__Number_result_3921) then
-                    ____t_result_3923 = __O[2221]
-                else
-                    ____t_result_3923 = 0
-                end
-                ____t_result_3924 = math.max(0, ____t_result_3923)
+            local ____opt_3910 = __L1.activeBoss
+            if ____opt_3910 ~= nil then
+                ____opt_3910 = ____opt_3910.type
+            end
+            ____t_result_3912 = ____opt_3910
+        end
+        __O[2232] = ____t_result_3912
+        if ____t_3913(____t_result_3912) then
+            ____t_result_3914 = __O[2232]
+        else
+            ____t_result_3914 = nil
+        end
+        local ____t_result_3919
+        if __t(__L1.ollyanEncounter) then
+            ____t_result_3919 = window.OllyanEncounter:getStatus(__L1.ollyanEncounter).phase
+        else
+            local ____t_result_3918
+            local ____t_3917 = __t
+            local ____opt_3915 = __L1.activeBoss
+            if ____opt_3915 ~= nil then
+                ____opt_3915 = ____opt_3915.phase
+            end
+            __O[2233] = ____opt_3915
+            if ____t_3917(____opt_3915) then
+                ____t_result_3918 = __O[2233]
             else
-                ____t_result_3924 = 0
+                ____t_result_3918 = nil
             end
-            ____t_result_3925 = ____t_result_3924
+            ____t_result_3919 = ____t_result_3918
         end
-        local ____t_result_3933
-        local ____t_3929 = __t
-        local ____opt_result_3928
+        local ____t_result_3928
+        local ____t_3927 = __t
+        local ____t_result_3926
+        local ____t_3923 = __t
+        local ____opt_result_3922
         if flight ~= nil then
-            ____opt_result_3928 = flight.cutscene
+            ____opt_result_3922 = flight.cutscene
         end
-        if ____t_3929(____opt_result_3928) then
-            ____t_result_3933 = flight.cutsceneIndex
+        __O[2234] = ____opt_result_3922
+        if ____t_3923(____opt_result_3922) then
+            ____t_result_3926 = __O[2234]
         else
-            local ____opt_3930 = __L1.cutscene
-            if ____opt_3930 ~= nil then
-                ____opt_3930 = ____opt_3930.index
+            local ____opt_3924 = __L1.cutscene
+            if ____opt_3924 ~= nil then
+                ____opt_3924 = ____opt_3924.kind
             end
-            local ____opt_3930_3932 = ____opt_3930
-            if ____opt_3930_3932 == nil then
-                ____opt_3930_3932 = nil
-            end
-            ____t_result_3933 = ____opt_3930_3932
+            ____t_result_3926 = ____opt_3924
         end
-        local ____t_3937 = __t
-        local ____opt_result_3936
+        __O[2235] = ____t_result_3926
+        if ____t_3927(____t_result_3926) then
+            ____t_result_3928 = __O[2235]
+        else
+            ____t_result_3928 = nil
+        end
+        local ____t_result_3937
+        local ____t_3936 = __t
+        local ____t_result_3935
+        local ____t_3932 = __t
+        local ____opt_result_3931
         if flight ~= nil then
-            ____opt_result_3936 = flight.cutsceneTimed
+            ____opt_result_3931 = flight.cutsceneToken
         end
-        local ____temp_3944 = not not ____t_3937(____opt_result_3936)
-        if not ____temp_3944 then
-            local ____t_3943 = __t
-            local ____opt_3940 = __L1.cutscene
-            if ____opt_3940 ~= nil then
-                ____opt_3940 = ____opt_3940.options
+        __O[2236] = ____opt_result_3931
+        if ____t_3932(____opt_result_3931) then
+            ____t_result_3935 = __O[2236]
+        else
+            local ____opt_3933 = __L1.cutscene
+            if ____opt_3933 ~= nil then
+                ____opt_3933 = ____opt_3933.audioToken
             end
-            local ____opt_result_3942
-            if ____opt_3940 ~= nil then
-                ____opt_result_3942 = ____opt_3940.musicTimed
-            end
-            ____temp_3944 = not not ____t_3943(____opt_result_3942)
+            ____t_result_3935 = ____opt_3933
         end
-        local ____t_3947 = __t
-        local ____opt_3945 = __L1.training
-        if ____opt_3945 ~= nil then
-            ____opt_3945 = ____opt_3945.active
+        __O[2237] = ____t_result_3935
+        if ____t_3936(____t_result_3935) then
+            ____t_result_3937 = __O[2237]
+        else
+            ____t_result_3937 = nil
         end
-        local ____temp_3975 = not not ____t_3947(____opt_3945)
         local ____t_result_3953
-        local ____t_3952 = __t
-        local ____t_result_3951
-        local ____t_3950 = __t
-        local ____opt_3948 = __L1.activity
-        if ____opt_3948 ~= nil then
-            ____opt_3948 = ____opt_3948.kind
+        local ____t_3941 = __t
+        local ____opt_result_3940
+        if flight ~= nil then
+            ____opt_result_3940 = flight.cutscene
         end
-        __O[2222] = ____opt_3948
-        if ____t_3950(____opt_3948) then
-            ____t_result_3951 = __O[2222]
+        if ____t_3941(____opt_result_3940) then
+            ____t_result_3953 = flight.cutsceneElapsed
         else
-            ____t_result_3951 = __L1.activityCallback
-        end
-        __O[2223] = ____t_result_3951
-        if ____t_3952(____t_result_3951) then
-            ____t_result_3953 = __O[2223]
-        else
-            ____t_result_3953 = nil
-        end
-        local ____t_result_3967
-        local ____t_3959 = __t
-        local ____opt_3956 = window.SwiftGuide
-        if ____opt_3956 ~= nil then
-            ____opt_3956 = ____opt_3956.isOpen
-        end
-        local ____opt_result_3958
-        if ____opt_3956 ~= nil then
-            ____opt_result_3958 = ____opt_3956(____opt_3956)
-        end
-        if ____t_3959(____opt_result_3958) then
-            ____t_result_3967 = "Irmão de Clara Swift"
-        else
-            local ____t_result_3966
-            local ____t_3965 = __t
-            local ____getq_3964 = __getq
-            local ____opt_3962 = __L1.dialog
-            if ____opt_3962 ~= nil then
-                ____opt_3962 = ____opt_3962.lines
-            end
-            local ____opt_3960 = ____getq_3964(____opt_3962, __L1.dialog.index)
-            if ____opt_3960 ~= nil then
-                ____opt_3960 = ____opt_3960.name
-            end
-            __O[2224] = ____opt_3960
-            if ____t_3965(____opt_3960) then
-                ____t_result_3966 = __O[2224]
+            local ____t_result_3952
+            if __t(__L1.cutscene) then
+                local ____t_result_3951
+                local ____t_3950 = __t
+                local ____opt_3944 = window.Cinematics
+                if ____opt_3944 ~= nil then
+                    ____opt_3944 = ____opt_3944.timelinePosition
+                end
+                local ____opt_result_3946
+                if ____opt_3944 ~= nil then
+                    ____opt_result_3946 = ____opt_3944(____opt_3944, __L1.cutscene)
+                end
+                local ____opt_result_3946_3947 = ____opt_result_3946
+                if ____opt_result_3946_3947 == nil then
+                    ____opt_result_3946_3947 = __L1.cutscene.elapsed
+                end
+                local ____opt_result_3946_3947_3948 = ____opt_result_3946_3947
+                if ____opt_result_3946_3947_3948 == nil then
+                    ____opt_result_3946_3947_3948 = __L1.cutscene.audioElapsed
+                end
+                local ____TS__Number_result_3949 = __TS__Number(____opt_result_3946_3947_3948)
+                __O[2238] = ____TS__Number_result_3949
+                if ____t_3950(____TS__Number_result_3949) then
+                    ____t_result_3951 = __O[2238]
+                else
+                    ____t_result_3951 = 0
+                end
+                ____t_result_3952 = math.max(0, ____t_result_3951)
             else
-                ____t_result_3966 = nil
+                ____t_result_3952 = 0
             end
-            ____t_result_3967 = ____t_result_3966
+            ____t_result_3953 = ____t_result_3952
         end
-        local ____L1_reeisPhase_3976 = __L1.reeisPhase
-        local ____L1_sound_3977 = __L1.sound
-        local ____t_result_3970
-        if __t(__L1.defeated) then
-            ____t_result_3970 = __L1.defeated
+        local ____t_result_3961
+        local ____t_3957 = __t
+        local ____opt_result_3956
+        if flight ~= nil then
+            ____opt_result_3956 = flight.cutscene
+        end
+        if ____t_3957(____opt_result_3956) then
+            ____t_result_3961 = flight.cutsceneIndex
         else
-            local ____opt_3968 = __L1.ollyanEncounter
-            if ____opt_3968 ~= nil then
-                ____opt_3968 = ____opt_3968.stage
+            local ____opt_3958 = __L1.cutscene
+            if ____opt_3958 ~= nil then
+                ____opt_3958 = ____opt_3958.index
             end
-            ____t_result_3970 = ____opt_3968 == "defeat"
+            local ____opt_3958_3960 = ____opt_3958
+            if ____opt_3958_3960 == nil then
+                ____opt_3958_3960 = nil
+            end
+            ____t_result_3961 = ____opt_3958_3960
+        end
+        local ____t_3965 = __t
+        local ____opt_result_3964
+        if flight ~= nil then
+            ____opt_result_3964 = flight.cutsceneTimed
+        end
+        local ____temp_3972 = not not ____t_3965(____opt_result_3964)
+        if not ____temp_3972 then
+            local ____t_3971 = __t
+            local ____opt_3968 = __L1.cutscene
+            if ____opt_3968 ~= nil then
+                ____opt_3968 = ____opt_3968.options
+            end
+            local ____opt_result_3970
+            if ____opt_3968 ~= nil then
+                ____opt_result_3970 = ____opt_3968.musicTimed
+            end
+            ____temp_3972 = not not ____t_3971(____opt_result_3970)
+        end
+        local ____t_3975 = __t
+        local ____opt_3973 = __L1.training
+        if ____opt_3973 ~= nil then
+            ____opt_3973 = ____opt_3973.active
+        end
+        local ____temp_4003 = not not ____t_3975(____opt_3973)
+        local ____t_result_3981
+        local ____t_3980 = __t
+        local ____t_result_3979
+        local ____t_3978 = __t
+        local ____opt_3976 = __L1.activity
+        if ____opt_3976 ~= nil then
+            ____opt_3976 = ____opt_3976.kind
+        end
+        __O[2239] = ____opt_3976
+        if ____t_3978(____opt_3976) then
+            ____t_result_3979 = __O[2239]
+        else
+            ____t_result_3979 = __L1.activityCallback
+        end
+        __O[2240] = ____t_result_3979
+        if ____t_3980(____t_result_3979) then
+            ____t_result_3981 = __O[2240]
+        else
+            ____t_result_3981 = nil
+        end
+        local ____t_result_3995
+        local ____t_3987 = __t
+        local ____opt_3984 = window.SwiftGuide
+        if ____opt_3984 ~= nil then
+            ____opt_3984 = ____opt_3984.isOpen
+        end
+        local ____opt_result_3986
+        if ____opt_3984 ~= nil then
+            ____opt_result_3986 = ____opt_3984(____opt_3984)
+        end
+        if ____t_3987(____opt_result_3986) then
+            ____t_result_3995 = "Irmão de Clara Swift"
+        else
+            local ____t_result_3994
+            local ____t_3993 = __t
+            local ____getq_3992 = __getq
+            local ____opt_3990 = __L1.dialog
+            if ____opt_3990 ~= nil then
+                ____opt_3990 = ____opt_3990.lines
+            end
+            local ____opt_3988 = ____getq_3992(____opt_3990, __L1.dialog.index)
+            if ____opt_3988 ~= nil then
+                ____opt_3988 = ____opt_3988.name
+            end
+            __O[2241] = ____opt_3988
+            if ____t_3993(____opt_3988) then
+                ____t_result_3994 = __O[2241]
+            else
+                ____t_result_3994 = nil
+            end
+            ____t_result_3995 = ____t_result_3994
+        end
+        local ____L1_reeisPhase_4004 = __L1.reeisPhase
+        local ____L1_sound_4005 = __L1.sound
+        local ____t_result_3998
+        if __t(__L1.defeated) then
+            ____t_result_3998 = __L1.defeated
+        else
+            local ____opt_3996 = __L1.ollyanEncounter
+            if ____opt_3996 ~= nil then
+                ____opt_3996 = ____opt_3996.stage
+            end
+            ____t_result_3998 = ____opt_3996 == "defeat"
         end
         return {
-            started = ____L1_started_3971,
-            playing = ____L1_playing_3972,
-            paused = ____L1_paused_3973,
-            scene = ____L1_scene_3974,
-            room = ____t_result_3877,
-            boss = ____t_result_3886,
-            bossPhase = ____t_result_3891,
-            cutscene = ____t_result_3900,
-            cutsceneToken = ____t_result_3909,
-            cutsceneElapsed = ____t_result_3925,
-            cutsceneIndex = ____t_result_3933,
-            cutsceneTimed = ____temp_3944,
-            training = ____temp_3975,
-            activity = ____t_result_3953,
-            dialogue = ____t_result_3967,
-            reeis = ____L1_reeisPhase_3976,
-            sound = ____L1_sound_3977,
-            defeated = ____t_result_3970,
+            started = ____L1_started_3999,
+            playing = ____L1_playing_4000,
+            paused = ____L1_paused_4001,
+            scene = ____L1_scene_4002,
+            room = ____t_result_3905,
+            boss = ____t_result_3914,
+            bossPhase = ____t_result_3919,
+            cutscene = ____t_result_3928,
+            cutsceneToken = ____t_result_3937,
+            cutsceneElapsed = ____t_result_3953,
+            cutsceneIndex = ____t_result_3961,
+            cutsceneTimed = ____temp_3972,
+            training = ____temp_4003,
+            activity = ____t_result_3981,
+            dialogue = ____t_result_3995,
+            reeis = ____L1_reeisPhase_4004,
+            sound = ____L1_sound_4005,
+            defeated = ____t_result_3998,
             chapterEnded = __L1.chapterEnded
         }
     end
     __L1.getBossStatus = function(self)
         if __t(__L1.ollyanEncounter) then
             local status = window.OllyanEncounter:getStatus(__L1.ollyanEncounter)
-            local ____t_result_3993
+            local ____t_result_4021
             if __t(status.active) then
-                local ____assign_3992 = __assign
-                local ____temp_3991 = {}
-                local ____t_result_3978
+                local ____assign_4020 = __assign
+                local ____temp_4019 = {}
+                local ____t_result_4006
                 if __t(status.phases) then
-                    ____t_result_3978 = status.phases
+                    ____t_result_4006 = status.phases
                 else
-                    ____t_result_3978 = 3
+                    ____t_result_4006 = 3
                 end
-                local ____status_max_3989 = status.max
-                local ____status_stage_3990 = status.stage
-                local ____t_result_3988
-                local ____t_3987 = __t
-                local ____opt_3983 = window.Difficulty
-                if ____opt_3983 ~= nil then
-                    ____opt_3983 = ____opt_3983.getSettings
+                local ____status_max_4017 = status.max
+                local ____status_stage_4018 = status.stage
+                local ____t_result_4016
+                local ____t_4015 = __t
+                local ____opt_4011 = window.Difficulty
+                if ____opt_4011 ~= nil then
+                    ____opt_4011 = ____opt_4011.getSettings
                 end
-                local ____opt_result_3985
-                if ____opt_3983 ~= nil then
-                    ____opt_result_3985 = ____opt_3983(____opt_3983, __L1.ollyanEncounter.options.difficultyMode)
+                local ____opt_result_4013
+                if ____opt_4011 ~= nil then
+                    ____opt_result_4013 = ____opt_4011(____opt_4011, __L1.ollyanEncounter.options.difficultyMode)
                 end
-                local ____opt_result_3986
-                if ____opt_result_3985 ~= nil then
-                    ____opt_result_3986 = ____opt_result_3985.label
+                local ____opt_result_4014
+                if ____opt_result_4013 ~= nil then
+                    ____opt_result_4014 = ____opt_result_4013.label
                 end
-                __O[2225] = ____opt_result_3986
-                if ____t_3987(____opt_result_3986) then
-                    ____t_result_3988 = __O[2225]
+                __O[2242] = ____opt_result_4014
+                if ____t_4015(____opt_result_4014) then
+                    ____t_result_4016 = __O[2242]
                 else
-                    ____t_result_3988 = "NORMAL"
+                    ____t_result_4016 = "NORMAL"
                 end
-                ____t_result_3993 = ____assign_3992(____temp_3991, status, {
-                    phaseCount = ____t_result_3978,
+                ____t_result_4021 = ____assign_4020(____temp_4019, status, {
+                    phaseCount = ____t_result_4006,
                     phaseBars = 3,
-                    phaseMaxHp = ____status_max_3989,
-                    state = ____status_stage_3990,
-                    difficulty = ____t_result_3988
+                    phaseMaxHp = ____status_max_4017,
+                    state = ____status_stage_4018,
+                    difficulty = ____t_result_4016
                 })
             else
-                ____t_result_3993 = nil
+                ____t_result_4021 = nil
             end
-            return ____t_result_3993
+            return ____t_result_4021
         end
         local e = __L1.activeBoss
         if __t(not __t(e) or __le(e.hp, 0)) then
             return nil
         end
-        local ____t_result_3996
-        local ____t_3995 = __t
-        local ____temp_3994 = __L1:nomeBoss(e.type)
-        __O[2226] = ____temp_3994
-        if ____t_3995(____temp_3994) then
-            ____t_result_3996 = __O[2226]
+        local ____t_result_4024
+        local ____t_4023 = __t
+        local ____temp_4022 = __L1:nomeBoss(e.type)
+        __O[2243] = ____temp_4022
+        if ____t_4023(____temp_4022) then
+            ____t_result_4024 = __O[2243]
         else
-            ____t_result_3996 = e.type
+            ____t_result_4024 = e.type
         end
-        local ____t_result_4000
-        local ____t_3999 = __t
-        local ____opt_3997 = e.conquista
-        if ____opt_3997 ~= nil then
-            ____opt_3997 = ____opt_3997.slug
+        local ____t_result_4028
+        local ____t_4027 = __t
+        local ____opt_4025 = e.conquista
+        if ____opt_4025 ~= nil then
+            ____opt_4025 = ____opt_4025.slug
         end
-        __O[2227] = ____opt_3997
-        if ____t_3999(____opt_3997) then
-            ____t_result_4000 = __O[2227]
+        __O[2244] = ____opt_4025
+        if ____t_4027(____opt_4025) then
+            ____t_result_4028 = __O[2244]
         else
-            ____t_result_4000 = e.type
+            ____t_result_4028 = e.type
         end
-        local ____t_result_4001
+        local ____t_result_4029
         if __t(e.conquista) then
-            ____t_result_4001 = __getq(
+            ____t_result_4029 = __getq(
                 window.ConquistaCombate:capitulo(e.conquista),
                 0
             )
         else
-            ____t_result_4001 = nil
+            ____t_result_4029 = nil
         end
-        local ____math_max_result_4027 = math.max(0, e.hp)
-        local ____e_max_4028 = e.max
-        local ____t_result_4002
+        local ____math_max_result_4055 = math.max(0, e.hp)
+        local ____e_max_4056 = e.max
+        local ____t_result_4030
         if __t(e.phase) then
-            ____t_result_4002 = e.phase
+            ____t_result_4030 = e.phase
         else
-            ____t_result_4002 = 1
+            ____t_result_4030 = 1
         end
-        local ____temp_4004
+        local ____temp_4032
         if e.type == "giant" then
-            ____temp_4004 = 3
+            ____temp_4032 = 3
         else
-            local ____t_result_4003
+            local ____t_result_4031
             if __t(e.phaseCount) then
-                ____t_result_4003 = e.phaseCount
+                ____t_result_4031 = e.phaseCount
             else
-                ____t_result_4003 = 3
+                ____t_result_4031 = 3
             end
-            ____temp_4004 = ____t_result_4003
+            ____temp_4032 = ____t_result_4031
         end
-        local ____temp_4006
+        local ____temp_4034
         if e.type == "giant" then
-            ____temp_4006 = 1
+            ____temp_4034 = 1
         else
-            local ____t_result_4005
+            local ____t_result_4033
             if __t(e.phaseCount) then
-                ____t_result_4005 = e.phaseCount
+                ____t_result_4033 = e.phaseCount
             else
-                ____t_result_4005 = 3
+                ____t_result_4033 = 3
             end
-            ____temp_4006 = ____t_result_4005
+            ____temp_4034 = ____t_result_4033
         end
-        local ____e_max_4029 = e.max
-        local ____temp_4008
+        local ____e_max_4057 = e.max
+        local ____temp_4036
         if e.type == "nikolas" then
-            local ____t_result_4007
+            local ____t_result_4035
             if __t(e.form) then
-                ____t_result_4007 = e.form
+                ____t_result_4035 = e.form
             else
-                ____t_result_4007 = "normal"
+                ____t_result_4035 = "normal"
             end
-            ____temp_4008 = ____t_result_4007
+            ____temp_4036 = ____t_result_4035
         else
-            ____temp_4008 = nil
+            ____temp_4036 = nil
         end
-        local ____e_state_4030 = e.state
-        local ____t_result_4009
+        local ____e_state_4058 = e.state
+        local ____t_result_4037
         if __t(e.charge) then
-            ____t_result_4009 = e.charge
+            ____t_result_4037 = e.charge
         else
-            ____t_result_4009 = 0
+            ____t_result_4037 = 0
         end
-        local ____t_result_4016
-        local ____t_4015 = __t
-        local ____opt_4012 = window.C2Luta
-        if ____opt_4012 ~= nil then
-            ____opt_4012 = ____opt_4012.skin
+        local ____t_result_4044
+        local ____t_4043 = __t
+        local ____opt_4040 = window.C2Luta
+        if ____opt_4040 ~= nil then
+            ____opt_4040 = ____opt_4040.skin
         end
-        local ____opt_result_4014
-        if ____opt_4012 ~= nil then
-            ____opt_result_4014 = ____opt_4012.nivel
+        local ____opt_result_4042
+        if ____opt_4040 ~= nil then
+            ____opt_result_4042 = ____opt_4040.nivel
         end
-        __O[2228] = ____opt_result_4014
-        if ____t_4015(____opt_result_4014) then
-            ____t_result_4016 = __O[2228]
+        __O[2245] = ____opt_result_4042
+        if ____t_4043(____opt_result_4042) then
+            ____t_result_4044 = __O[2245]
         else
-            ____t_result_4016 = __L1:bossProfile(e).level
+            ____t_result_4044 = __L1:bossProfile(e).level
         end
-        local ____t_result_4026
-        local ____t_4025 = __t
-        local ____opt_4021 = window.Difficulty
-        if ____opt_4021 ~= nil then
-            ____opt_4021 = ____opt_4021.getSettings
+        local ____t_result_4054
+        local ____t_4053 = __t
+        local ____opt_4049 = window.Difficulty
+        if ____opt_4049 ~= nil then
+            ____opt_4049 = ____opt_4049.getSettings
         end
-        local ____opt_result_4023
-        if ____opt_4021 ~= nil then
-            ____opt_result_4023 = ____opt_4021(____opt_4021, e.difficultyMode)
+        local ____opt_result_4051
+        if ____opt_4049 ~= nil then
+            ____opt_result_4051 = ____opt_4049(____opt_4049, e.difficultyMode)
         end
-        local ____opt_result_4024
-        if ____opt_result_4023 ~= nil then
-            ____opt_result_4024 = ____opt_result_4023.label
+        local ____opt_result_4052
+        if ____opt_result_4051 ~= nil then
+            ____opt_result_4052 = ____opt_result_4051.label
         end
-        __O[2229] = ____opt_result_4024
-        if ____t_4025(____opt_result_4024) then
-            ____t_result_4026 = __O[2229]
+        __O[2246] = ____opt_result_4052
+        if ____t_4053(____opt_result_4052) then
+            ____t_result_4054 = __O[2246]
         else
-            ____t_result_4026 = "NORMAL"
+            ____t_result_4054 = "NORMAL"
         end
         return {
-            name = ____t_result_3996,
-            type = ____t_result_4000,
-            phaseName = ____t_result_4001,
-            hp = ____math_max_result_4027,
-            max = ____e_max_4028,
-            phase = ____t_result_4002,
-            phaseCount = ____temp_4004,
-            phaseBars = ____temp_4006,
-            phaseMaxHp = ____e_max_4029,
-            form = ____temp_4008,
-            state = ____e_state_4030,
-            charge = ____t_result_4009,
-            recommendedLevel = ____t_result_4016,
-            difficulty = ____t_result_4026
+            name = ____t_result_4024,
+            type = ____t_result_4028,
+            phaseName = ____t_result_4029,
+            hp = ____math_max_result_4055,
+            max = ____e_max_4056,
+            phase = ____t_result_4030,
+            phaseCount = ____temp_4032,
+            phaseBars = ____temp_4034,
+            phaseMaxHp = ____e_max_4057,
+            form = ____temp_4036,
+            state = ____e_state_4058,
+            charge = ____t_result_4037,
+            recommendedLevel = ____t_result_4044,
+            difficulty = ____t_result_4054
         }
     end
     __L1.sandboxUnlocked = function(self)
-        local ____t_4039 = __t
-        local ____t_result_4038
-        local ____t_4037 = __t
-        local ____t_result_4036
+        local ____t_4067 = __t
+        local ____t_result_4066
+        local ____t_4065 = __t
+        local ____t_result_4064
         if __t(__L1.q.jorgeSeen) then
-            ____t_result_4036 = __L1.q.jorgeSeen
+            ____t_result_4064 = __L1.q.jorgeSeen
         else
-            local ____opt_4033 = __L1:load()
-            if ____opt_4033 ~= nil then
-                ____opt_4033 = ____opt_4033.q
+            local ____opt_4061 = __L1:load()
+            if ____opt_4061 ~= nil then
+                ____opt_4061 = ____opt_4061.q
             end
-            local ____opt_result_4035
-            if ____opt_4033 ~= nil then
-                ____opt_result_4035 = ____opt_4033.jorgeSeen
+            local ____opt_result_4063
+            if ____opt_4061 ~= nil then
+                ____opt_result_4063 = ____opt_4061.jorgeSeen
             end
-            ____t_result_4036 = ____opt_result_4035
+            ____t_result_4064 = ____opt_result_4063
         end
-        __O[2230] = ____t_result_4036
-        if ____t_4037(____t_result_4036) then
-            ____t_result_4038 = __O[2230]
+        __O[2247] = ____t_result_4064
+        if ____t_4065(____t_result_4064) then
+            ____t_result_4066 = __O[2247]
         else
-            ____t_result_4038 = __L1:safe(function() return window.localStorage:getItem("daroca-sandbox-v1") == "1" end)
+            ____t_result_4066 = __L1:safe(function() return window.localStorage:getItem("daroca-sandbox-v1") == "1" end)
         end
-        return not not ____t_4039(____t_result_4038)
+        return not not ____t_4067(____t_result_4066)
     end
     __L1.finishSandbox = function(self, result)
         if not __t(__L1.sandbox) then
@@ -22473,16 +22613,16 @@ local __O = {};
         __L1.paused = true
         __L1.defeated = false
         __L1:show("defeatScreen", false)
-        local ____L1_show_4043 = __L1.show
-        local ____t_4042 = __t
-        local ____opt_4040 = window.C2Luta
-        if ____opt_4040 ~= nil then
-            ____opt_4040 = ____opt_4040.skin
+        local ____L1_show_4071 = __L1.show
+        local ____t_4070 = __t
+        local ____opt_4068 = window.C2Luta
+        if ____opt_4068 ~= nil then
+            ____opt_4068 = ____opt_4068.skin
         end
-        ____L1_show_4043(
+        ____L1_show_4071(
             __L1,
             "pauseScreen",
-            not ____t_4042(____opt_4040)
+            not ____t_4070(____opt_4068)
         )
         __L1:updateUI()
         __L1:emitGameEvent("sandbox-change", {type = __L1.sandbox.type, result = result})
@@ -22491,180 +22631,180 @@ local __O = {};
         if __t(not __t(__call(__L1.sandboxScenes, "hasOwnProperty", ____type)) or not __t(__L1:sandboxUnlocked())) then
             return false
         end
-        local ____t_4066 = __t
-        local ____t_result_4065
-        local ____t_4045 = __t
-        local ____temp_4044 = not __t(__L1.sandbox)
-        __O[2239] = ____temp_4044
-        if ____t_4045(____temp_4044) then
-            local ____t_result_4064
-            local ____t_4063 = __t
-            local ____t_result_4062
-            local ____t_4061 = __t
-            local ____t_result_4060
-            local ____t_4057 = __t
-            local ____t_result_4056
-            local ____t_4055 = __t
-            local ____t_result_4054
-            local ____t_4053 = __t
-            local ____t_result_4052
-            local ____t_4051 = __t
-            local ____t_result_4050
-            local ____t_4049 = __t
-            local ____t_result_4048
-            local ____t_4047 = __t
-            local ____t_result_4046
+        local ____t_4094 = __t
+        local ____t_result_4093
+        local ____t_4073 = __t
+        local ____temp_4072 = not __t(__L1.sandbox)
+        __O[2256] = ____temp_4072
+        if ____t_4073(____temp_4072) then
+            local ____t_result_4092
+            local ____t_4091 = __t
+            local ____t_result_4090
+            local ____t_4089 = __t
+            local ____t_result_4088
+            local ____t_4085 = __t
+            local ____t_result_4084
+            local ____t_4083 = __t
+            local ____t_result_4082
+            local ____t_4081 = __t
+            local ____t_result_4080
+            local ____t_4079 = __t
+            local ____t_result_4078
+            local ____t_4077 = __t
+            local ____t_result_4076
+            local ____t_4075 = __t
+            local ____t_result_4074
             if __t(__L1.dialog) then
-                ____t_result_4046 = __L1.dialog
+                ____t_result_4074 = __L1.dialog
             else
-                ____t_result_4046 = __L1.cutscene
+                ____t_result_4074 = __L1.cutscene
             end
-            __O[2231] = ____t_result_4046
-            if ____t_4047(____t_result_4046) then
-                ____t_result_4048 = __O[2231]
+            __O[2248] = ____t_result_4074
+            if ____t_4075(____t_result_4074) then
+                ____t_result_4076 = __O[2248]
             else
-                ____t_result_4048 = __L1.activeBoss
+                ____t_result_4076 = __L1.activeBoss
             end
-            __O[2232] = ____t_result_4048
-            if ____t_4049(____t_result_4048) then
-                ____t_result_4050 = __O[2232]
+            __O[2249] = ____t_result_4076
+            if ____t_4077(____t_result_4076) then
+                ____t_result_4078 = __O[2249]
             else
-                ____t_result_4050 = __L1.arena
+                ____t_result_4078 = __L1.arena
             end
-            __O[2233] = ____t_result_4050
-            if ____t_4051(____t_result_4050) then
-                ____t_result_4052 = __O[2233]
+            __O[2250] = ____t_result_4078
+            if ____t_4079(____t_result_4078) then
+                ____t_result_4080 = __O[2250]
             else
-                ____t_result_4052 = __L1.room
+                ____t_result_4080 = __L1.room
             end
-            __O[2234] = ____t_result_4052
-            if ____t_4053(____t_result_4052) then
-                ____t_result_4054 = __O[2234]
+            __O[2251] = ____t_result_4080
+            if ____t_4081(____t_result_4080) then
+                ____t_result_4082 = __O[2251]
             else
-                ____t_result_4054 = __L1.routeTransition
+                ____t_result_4082 = __L1.routeTransition
             end
-            __O[2235] = ____t_result_4054
-            if ____t_4055(____t_result_4054) then
-                ____t_result_4056 = __O[2235]
+            __O[2252] = ____t_result_4082
+            if ____t_4083(____t_result_4082) then
+                ____t_result_4084 = __O[2252]
             else
-                ____t_result_4056 = __L1.activity
+                ____t_result_4084 = __L1.activity
             end
-            __O[2236] = ____t_result_4056
-            if ____t_4057(____t_result_4056) then
-                ____t_result_4060 = __O[2236]
+            __O[2253] = ____t_result_4084
+            if ____t_4085(____t_result_4084) then
+                ____t_result_4088 = __O[2253]
             else
-                local ____opt_4058 = __L1.training
-                if ____opt_4058 ~= nil then
-                    ____opt_4058 = ____opt_4058.active
+                local ____opt_4086 = __L1.training
+                if ____opt_4086 ~= nil then
+                    ____opt_4086 = ____opt_4086.active
                 end
-                ____t_result_4060 = ____opt_4058
+                ____t_result_4088 = ____opt_4086
             end
-            __O[2237] = ____t_result_4060
-            if ____t_4061(____t_result_4060) then
-                ____t_result_4062 = __O[2237]
+            __O[2254] = ____t_result_4088
+            if ____t_4089(____t_result_4088) then
+                ____t_result_4090 = __O[2254]
             else
-                ____t_result_4062 = __L1.ollyanEncounter
+                ____t_result_4090 = __L1.ollyanEncounter
             end
-            __O[2238] = ____t_result_4062
-            if ____t_4063(____t_result_4062) then
-                ____t_result_4064 = __O[2238]
+            __O[2255] = ____t_result_4090
+            if ____t_4091(____t_result_4090) then
+                ____t_result_4092 = __O[2255]
             else
-                ____t_result_4064 = __L1:bivoltStatus().active
+                ____t_result_4092 = __L1:bivoltStatus().active
             end
-            ____t_result_4065 = ____t_result_4064
+            ____t_result_4093 = ____t_result_4092
         else
-            ____t_result_4065 = __O[2239]
+            ____t_result_4093 = __O[2256]
         end
-        if ____t_4066(____t_result_4065) then
+        if ____t_4094(____t_result_4093) then
             __L1:toast("Termine a cena, conversa ou confronto antes de abrir a revanche.")
             return false
         end
         if not __t(__L1.sandbox) then
-            local ____opt_4069 = window.CampaignRun
-            if ____opt_4069 ~= nil then
-                ____opt_4069 = ____opt_4069.setSuspended
+            local ____opt_4097 = window.CampaignRun
+            if ____opt_4097 ~= nil then
+                ____opt_4097 = ____opt_4097.setSuspended
             end
-            if ____opt_4069 ~= nil then
-                ____opt_4069(____opt_4069, true)
+            if ____opt_4097 ~= nil then
+                ____opt_4097(____opt_4097, true)
             end
-            local ____type_4107 = ____type
-            local ____L1_copyState_4106 = __L1.copyState
-            local ____t_result_4077
-            local ____t_4076 = __t
-            local ____opt_4073 = window.Difficulty
-            if ____opt_4073 ~= nil then
-                ____opt_4073 = ____opt_4073.getMode
+            local ____type_4135 = ____type
+            local ____L1_copyState_4134 = __L1.copyState
+            local ____t_result_4105
+            local ____t_4104 = __t
+            local ____opt_4101 = window.Difficulty
+            if ____opt_4101 ~= nil then
+                ____opt_4101 = ____opt_4101.getMode
             end
-            local ____opt_result_4075
-            if ____opt_4073 ~= nil then
-                ____opt_result_4075 = ____opt_4073(____opt_4073)
+            local ____opt_result_4103
+            if ____opt_4101 ~= nil then
+                ____opt_result_4103 = ____opt_4101(____opt_4101)
             end
-            __O[2240] = ____opt_result_4075
-            if ____t_4076(____opt_result_4075) then
-                ____t_result_4077 = __O[2240]
+            __O[2257] = ____opt_result_4103
+            if ____t_4104(____opt_result_4103) then
+                ____t_result_4105 = __O[2257]
             else
-                ____t_result_4077 = "normal"
+                ____t_result_4105 = "normal"
             end
-            local ____L1_started_4083 = __L1.started
-            local ____L1_playing_4084 = __L1.playing
-            local ____L1_paused_4085 = __L1.paused
-            local ____L1_won_4086 = __L1.won
-            local ____L1_defeated_4087 = __L1.defeated
-            local ____L1_chapterEnded_4088 = __L1.chapterEnded
-            local ____L1_scene_4089 = __L1.scene
-            local ____L1_camera_4090 = __L1.camera
-            local ____L1_player_4091 = __L1.player
-            local ____L1_q_4092 = __L1.q
-            local ____L1_items_4093 = __L1.items
-            local ____L1_collected_4094 = __L1.collected
-            local ____L1_weapon_4095 = __L1.weapon
-            local ____L1_minionKills_4096 = __L1.minionKills
-            local ____L1_seenBossIntros_4097 = __L1.seenBossIntros
-            local ____L1_killCount_4098 = __L1.killCount
-            local ____L1_lastSafeX_4099 = __L1.lastSafeX
-            local ____L1_respawnCheckpoint_4100 = __L1.respawnCheckpoint
-            local ____L1_vehicle_4101 = __L1.vehicle
-            local ____L1_enemies_4102 = __L1.enemies
-            local ____L1_minions_4103 = __L1.minions
-            local ____L1_pickups_4104 = __L1.pickups
-            local ____L1_targets_4105 = __L1.targets
-            local ____opt_4080 = window.Progression
-            if ____opt_4080 ~= nil then
-                ____opt_4080 = ____opt_4080.serialize
+            local ____L1_started_4111 = __L1.started
+            local ____L1_playing_4112 = __L1.playing
+            local ____L1_paused_4113 = __L1.paused
+            local ____L1_won_4114 = __L1.won
+            local ____L1_defeated_4115 = __L1.defeated
+            local ____L1_chapterEnded_4116 = __L1.chapterEnded
+            local ____L1_scene_4117 = __L1.scene
+            local ____L1_camera_4118 = __L1.camera
+            local ____L1_player_4119 = __L1.player
+            local ____L1_q_4120 = __L1.q
+            local ____L1_items_4121 = __L1.items
+            local ____L1_collected_4122 = __L1.collected
+            local ____L1_weapon_4123 = __L1.weapon
+            local ____L1_minionKills_4124 = __L1.minionKills
+            local ____L1_seenBossIntros_4125 = __L1.seenBossIntros
+            local ____L1_killCount_4126 = __L1.killCount
+            local ____L1_lastSafeX_4127 = __L1.lastSafeX
+            local ____L1_respawnCheckpoint_4128 = __L1.respawnCheckpoint
+            local ____L1_vehicle_4129 = __L1.vehicle
+            local ____L1_enemies_4130 = __L1.enemies
+            local ____L1_minions_4131 = __L1.minions
+            local ____L1_pickups_4132 = __L1.pickups
+            local ____L1_targets_4133 = __L1.targets
+            local ____opt_4108 = window.Progression
+            if ____opt_4108 ~= nil then
+                ____opt_4108 = ____opt_4108.serialize
             end
-            local ____opt_result_4082
-            if ____opt_4080 ~= nil then
-                ____opt_result_4082 = ____opt_4080(____opt_4080)
+            local ____opt_result_4110
+            if ____opt_4108 ~= nil then
+                ____opt_result_4110 = ____opt_4108(____opt_4108)
             end
             __L1.sandbox = {
-                type = ____type_4107,
+                type = ____type_4135,
                 result = nil,
-                snapshot = ____L1_copyState_4106(__L1, {
-                    difficultyMode = ____t_result_4077,
-                    started = ____L1_started_4083,
-                    playing = ____L1_playing_4084,
-                    paused = ____L1_paused_4085,
-                    won = ____L1_won_4086,
-                    defeated = ____L1_defeated_4087,
-                    chapterEnded = ____L1_chapterEnded_4088,
-                    scene = ____L1_scene_4089,
-                    camera = ____L1_camera_4090,
-                    player = ____L1_player_4091,
-                    q = ____L1_q_4092,
-                    items = ____L1_items_4093,
-                    collected = ____L1_collected_4094,
-                    weapon = ____L1_weapon_4095,
-                    minionKills = ____L1_minionKills_4096,
-                    seenBossIntros = ____L1_seenBossIntros_4097,
-                    killCount = ____L1_killCount_4098,
-                    lastSafeX = ____L1_lastSafeX_4099,
-                    respawnCheckpoint = ____L1_respawnCheckpoint_4100,
-                    vehicle = ____L1_vehicle_4101,
-                    enemies = ____L1_enemies_4102,
-                    minions = ____L1_minions_4103,
-                    pickups = ____L1_pickups_4104,
-                    targets = ____L1_targets_4105,
-                    progression = ____opt_result_4082,
+                snapshot = ____L1_copyState_4134(__L1, {
+                    difficultyMode = ____t_result_4105,
+                    started = ____L1_started_4111,
+                    playing = ____L1_playing_4112,
+                    paused = ____L1_paused_4113,
+                    won = ____L1_won_4114,
+                    defeated = ____L1_defeated_4115,
+                    chapterEnded = ____L1_chapterEnded_4116,
+                    scene = ____L1_scene_4117,
+                    camera = ____L1_camera_4118,
+                    player = ____L1_player_4119,
+                    q = ____L1_q_4120,
+                    items = ____L1_items_4121,
+                    collected = ____L1_collected_4122,
+                    weapon = ____L1_weapon_4123,
+                    minionKills = ____L1_minionKills_4124,
+                    seenBossIntros = ____L1_seenBossIntros_4125,
+                    killCount = ____L1_killCount_4126,
+                    lastSafeX = ____L1_lastSafeX_4127,
+                    respawnCheckpoint = ____L1_respawnCheckpoint_4128,
+                    vehicle = ____L1_vehicle_4129,
+                    enemies = ____L1_enemies_4130,
+                    minions = ____L1_minions_4131,
+                    pickups = ____L1_pickups_4132,
+                    targets = ____L1_targets_4133,
+                    progression = ____opt_result_4110,
                     reeisCooldown = __L1.reeisCooldown,
                     dashCooldown = __L1.dashCooldown,
                     attackCooldown = __L1.attackCooldown,
@@ -22675,107 +22815,107 @@ local __O = {};
         local snapshot = __L1.sandbox.snapshot
         __L1.sandbox.type = ____type
         __L1.sandbox.result = nil
-        local ____L1_sandbox_4115 = __L1.sandbox
-        local ____t_result_4114
-        local ____t_4113 = __t
-        local ____opt_4110 = window.Difficulty
-        if ____opt_4110 ~= nil then
-            ____opt_4110 = ____opt_4110.getMode
+        local ____L1_sandbox_4143 = __L1.sandbox
+        local ____t_result_4142
+        local ____t_4141 = __t
+        local ____opt_4138 = window.Difficulty
+        if ____opt_4138 ~= nil then
+            ____opt_4138 = ____opt_4138.getMode
         end
-        local ____opt_result_4112
-        if ____opt_4110 ~= nil then
-            ____opt_result_4112 = ____opt_4110(____opt_4110)
+        local ____opt_result_4140
+        if ____opt_4138 ~= nil then
+            ____opt_result_4140 = ____opt_4138(____opt_4138)
         end
-        __O[2241] = ____opt_result_4112
-        if ____t_4113(____opt_result_4112) then
-            ____t_result_4114 = __O[2241]
+        __O[2258] = ____opt_result_4140
+        if ____t_4141(____opt_result_4140) then
+            ____t_result_4142 = __O[2258]
         else
-            ____t_result_4114 = "normal"
+            ____t_result_4142 = "normal"
         end
-        ____L1_sandbox_4115.difficultyMode = ____t_result_4114
-        local ____temp_4116
+        ____L1_sandbox_4143.difficultyMode = ____t_result_4142
+        local ____temp_4144
         if not __t(snapshot.started) then
-            ____temp_4116 = __L1:load()
+            ____temp_4144 = __L1:load()
         else
-            ____temp_4116 = nil
+            ____temp_4144 = nil
         end
-        local saved = ____temp_4116
-        local ____L1_copyState_4125 = __L1.copyState
-        local ____assign_4124 = __assign
-        local ____temp_4122 = {}
-        local ____temp_4123 = __L1:emptyQuest()
-        local ____t_result_4121
-        local ____t_4120 = __t
-        local ____opt_result_4119
-        if saved ~= nil then
-            ____opt_result_4119 = saved.q
-        end
-        __O[2242] = ____opt_result_4119
-        if ____t_4120(____opt_result_4119) then
-            ____t_result_4121 = __O[2242]
-        else
-            ____t_result_4121 = snapshot.q
-        end
-        __L1.q = ____L1_copyState_4125(
-            __L1,
-            ____assign_4124(____temp_4122, ____temp_4123, ____t_result_4121)
-        )
-        local ____opt_4133 = window.Progression
-        if ____opt_4133 ~= nil then
-            ____opt_4133 = ____opt_4133.restore
-        end
-        if ____opt_4133 ~= nil then
-            local ____t_result_4131
-            local ____t_4130 = __t
-            local ____opt_result_4129
-            if saved ~= nil then
-                ____opt_result_4129 = saved.progression
-            end
-            __O[2243] = ____opt_result_4129
-            if ____t_4130(____opt_result_4129) then
-                ____t_result_4131 = __O[2243]
-            else
-                ____t_result_4131 = snapshot.progression
-            end
-            ____opt_4133(____opt_4133, ____t_result_4131)
-        end
-        local ____opt_result_4137
-        if saved ~= nil then
-            ____opt_result_4137 = saved.weapon
-        end
-        local ____opt_result_4137_4138 = ____opt_result_4137
-        if ____opt_result_4137_4138 == nil then
-            ____opt_result_4137_4138 = snapshot.weapon
-        end
-        __L1.weapon = ____opt_result_4137_4138
-        local ____L1_copyState_4144 = __L1.copyState
-        local ____t_result_4143
-        local ____t_4142 = __t
-        local ____opt_result_4141
-        if saved ~= nil then
-            ____opt_result_4141 = saved.items
-        end
-        __O[2244] = ____opt_result_4141
-        if ____t_4142(____opt_result_4141) then
-            ____t_result_4143 = __O[2244]
-        else
-            ____t_result_4143 = snapshot.items
-        end
-        __L1.items = ____L1_copyState_4144(__L1, ____t_result_4143)
-        local ____L1_copyState_4150 = __L1.copyState
+        local saved = ____temp_4144
+        local ____L1_copyState_4153 = __L1.copyState
+        local ____assign_4152 = __assign
+        local ____temp_4150 = {}
+        local ____temp_4151 = __L1:emptyQuest()
         local ____t_result_4149
         local ____t_4148 = __t
         local ____opt_result_4147
         if saved ~= nil then
-            ____opt_result_4147 = saved.collected
+            ____opt_result_4147 = saved.q
         end
-        __O[2245] = ____opt_result_4147
+        __O[2259] = ____opt_result_4147
         if ____t_4148(____opt_result_4147) then
-            ____t_result_4149 = __O[2245]
+            ____t_result_4149 = __O[2259]
         else
-            ____t_result_4149 = snapshot.collected
+            ____t_result_4149 = snapshot.q
         end
-        __L1.collected = ____L1_copyState_4150(__L1, ____t_result_4149)
+        __L1.q = ____L1_copyState_4153(
+            __L1,
+            ____assign_4152(____temp_4150, ____temp_4151, ____t_result_4149)
+        )
+        local ____opt_4161 = window.Progression
+        if ____opt_4161 ~= nil then
+            ____opt_4161 = ____opt_4161.restore
+        end
+        if ____opt_4161 ~= nil then
+            local ____t_result_4159
+            local ____t_4158 = __t
+            local ____opt_result_4157
+            if saved ~= nil then
+                ____opt_result_4157 = saved.progression
+            end
+            __O[2260] = ____opt_result_4157
+            if ____t_4158(____opt_result_4157) then
+                ____t_result_4159 = __O[2260]
+            else
+                ____t_result_4159 = snapshot.progression
+            end
+            ____opt_4161(____opt_4161, ____t_result_4159)
+        end
+        local ____opt_result_4165
+        if saved ~= nil then
+            ____opt_result_4165 = saved.weapon
+        end
+        local ____opt_result_4165_4166 = ____opt_result_4165
+        if ____opt_result_4165_4166 == nil then
+            ____opt_result_4165_4166 = snapshot.weapon
+        end
+        __L1.weapon = ____opt_result_4165_4166
+        local ____L1_copyState_4172 = __L1.copyState
+        local ____t_result_4171
+        local ____t_4170 = __t
+        local ____opt_result_4169
+        if saved ~= nil then
+            ____opt_result_4169 = saved.items
+        end
+        __O[2261] = ____opt_result_4169
+        if ____t_4170(____opt_result_4169) then
+            ____t_result_4171 = __O[2261]
+        else
+            ____t_result_4171 = snapshot.items
+        end
+        __L1.items = ____L1_copyState_4172(__L1, ____t_result_4171)
+        local ____L1_copyState_4178 = __L1.copyState
+        local ____t_result_4177
+        local ____t_4176 = __t
+        local ____opt_result_4175
+        if saved ~= nil then
+            ____opt_result_4175 = saved.collected
+        end
+        __O[2262] = ____opt_result_4175
+        if ____t_4176(____opt_result_4175) then
+            ____t_result_4177 = __O[2262]
+        else
+            ____t_result_4177 = snapshot.collected
+        end
+        __L1.collected = ____L1_copyState_4178(__L1, ____t_result_4177)
         for ____, flag in __iterar((__arrL({
             "lucas",
             "mota",
@@ -22875,13 +23015,13 @@ local __O = {};
         return true
     end
     __L1.retrySandboxBoss = function(self)
-        local ____t_result_4151
+        local ____t_result_4179
         if __t(__L1.sandbox) then
-            ____t_result_4151 = __L1:startSandboxBoss(__L1.sandbox.type)
+            ____t_result_4179 = __L1:startSandboxBoss(__L1.sandbox.type)
         else
-            ____t_result_4151 = false
+            ____t_result_4179 = false
         end
-        return ____t_result_4151
+        return ____t_result_4179
     end
     __L1.exitSandbox = function(self)
         if not __t(__L1.sandbox) then
@@ -22902,25 +23042,25 @@ local __O = {};
         __L1.training = nil
         __L1.routeTransition = nil
         __L1:resetBivolt()
-        local ____opt_4154 = window.CampaignRun
-        if ____opt_4154 ~= nil then
-            ____opt_4154 = ____opt_4154.setSuspended
+        local ____opt_4182 = window.CampaignRun
+        if ____opt_4182 ~= nil then
+            ____opt_4182 = ____opt_4182.setSuspended
         end
-        if ____opt_4154 ~= nil then
-            ____opt_4154(____opt_4154, false)
+        if ____opt_4182 ~= nil then
+            ____opt_4182(____opt_4182, false)
         end
-        local ____opt_4159 = window.Difficulty
-        if ____opt_4159 ~= nil then
-            ____opt_4159 = ____opt_4159.setMode
+        local ____opt_4187 = window.Difficulty
+        if ____opt_4187 ~= nil then
+            ____opt_4187 = ____opt_4187.setMode
         end
-        if ____opt_4159 ~= nil then
-            local ____t_result_4157
+        if ____opt_4187 ~= nil then
+            local ____t_result_4185
             if __t(prior.difficultyMode) then
-                ____t_result_4157 = prior.difficultyMode
+                ____t_result_4185 = prior.difficultyMode
             else
-                ____t_result_4157 = "normal"
+                ____t_result_4185 = "normal"
             end
-            ____opt_4159(____opt_4159, ____t_result_4157)
+            ____opt_4187(____opt_4187, ____t_result_4185)
         end
         __L1.started = prior.started
         __L1.playing = prior.playing
@@ -22950,12 +23090,12 @@ local __O = {};
         __L1.attackCooldown = prior.attackCooldown
         __L1.fartCooldown = prior.fartCooldown
         local ____ = prior
-        local ____opt_4163 = window.Progression
-        if ____opt_4163 ~= nil then
-            ____opt_4163 = ____opt_4163.restore
+        local ____opt_4191 = window.Progression
+        if ____opt_4191 ~= nil then
+            ____opt_4191 = ____opt_4191.restore
         end
-        if ____opt_4163 ~= nil then
-            ____opt_4163(____opt_4163, prior.progression)
+        if ____opt_4191 ~= nil then
+            ____opt_4191(____opt_4191, prior.progression)
         end
         __L1:resetWorldSize()
         __L1.shots = __arrL({}, 0)
@@ -22980,41 +23120,41 @@ local __O = {};
             "startScreen",
             not __t(__L1.started)
         )
-        local ____L1_show_4168 = __L1.show
-        local ____t_result_4167
-        local ____t_4166 = __t
-        local ____t_result_4165
+        local ____L1_show_4196 = __L1.show
+        local ____t_result_4195
+        local ____t_4194 = __t
+        local ____t_result_4193
         if __t(__L1.started) then
-            ____t_result_4165 = __L1.paused
+            ____t_result_4193 = __L1.paused
         else
-            ____t_result_4165 = __L1.started
+            ____t_result_4193 = __L1.started
         end
-        __O[2246] = ____t_result_4165
-        if ____t_4166(____t_result_4165) then
-            ____t_result_4167 = not __t(__L1.chapterEnded)
+        __O[2263] = ____t_result_4193
+        if ____t_4194(____t_result_4193) then
+            ____t_result_4195 = not __t(__L1.chapterEnded)
         else
-            ____t_result_4167 = __O[2246]
+            ____t_result_4195 = __O[2263]
         end
-        ____L1_show_4168(__L1, "pauseScreen", ____t_result_4167)
+        ____L1_show_4196(__L1, "pauseScreen", ____t_result_4195)
         __L1:updateUI()
         __L1:updateContinue()
         __L1:emitGameEvent("sandbox-change", nil)
-        local ____t_4172 = __t
-        local ____t_result_4171
-        local ____t_4170 = __t
-        local ____t_result_4169
+        local ____t_4200 = __t
+        local ____t_result_4199
+        local ____t_4198 = __t
+        local ____t_result_4197
         if __t(__L1.started) then
-            ____t_result_4169 = not __t(__L1.paused)
+            ____t_result_4197 = not __t(__L1.paused)
         else
-            ____t_result_4169 = __L1.started
+            ____t_result_4197 = __L1.started
         end
-        __O[2247] = ____t_result_4169
-        if ____t_4170(____t_result_4169) then
-            ____t_result_4171 = not __t(__L1.chapterEnded)
+        __O[2264] = ____t_result_4197
+        if ____t_4198(____t_result_4197) then
+            ____t_result_4199 = not __t(__L1.chapterEnded)
         else
-            ____t_result_4171 = __O[2247]
+            ____t_result_4199 = __O[2264]
         end
-        if ____t_4172(____t_result_4171) then
+        if ____t_4200(____t_result_4199) then
             __L1.canvas:focus()
         end
         return true
@@ -23033,39 +23173,39 @@ local __O = {};
     __L1.H = 540
     __L1.FLOOR = 440
     __L1.SAVE = "da-roca-adventure-v1"
-    local ____opt_4175 = window.Golpes
-    if ____opt_4175 ~= nil then
-        ____opt_4175 = ____opt_4175.chao
+    local ____opt_4203 = window.Golpes
+    if ____opt_4203 ~= nil then
+        ____opt_4203 = ____opt_4203.chao
     end
-    if ____opt_4175 ~= nil then
-        ____opt_4175(____opt_4175, __L1.FLOOR)
+    if ____opt_4203 ~= nil then
+        ____opt_4203(____opt_4203, __L1.FLOOR)
     end
-    local ____t_result_4182
-    local ____t_4181 = __t
-    local ____getq_4179 = __getq
-    local ____opt_4177 = window.WorldData
-    if ____opt_4177 ~= nil then
-        ____opt_4177 = ____opt_4177.widths
+    local ____t_result_4210
+    local ____t_4209 = __t
+    local ____getq_4207 = __getq
+    local ____opt_4205 = window.WorldData
+    if ____opt_4205 ~= nil then
+        ____opt_4205 = ____opt_4205.widths
     end
-    local ____TS__Number_result_4180 = __TS__Number(____getq_4179(____opt_4177, 0))
-    __O[1597] = ____TS__Number_result_4180
-    if ____t_4181(____TS__Number_result_4180) then
-        ____t_result_4182 = __O[1597]
+    local ____TS__Number_result_4208 = __TS__Number(____getq_4207(____opt_4205, 0))
+    __O[1610] = ____TS__Number_result_4208
+    if ____t_4209(____TS__Number_result_4208) then
+        ____t_result_4210 = __O[1610]
     else
-        ____t_result_4182 = 2600
+        ____t_result_4210 = 2600
     end
-    __L1.WORLD = ____t_result_4182
-    local ____t_result_4186
-    local ____t_4185 = __t
-    local ____opt_4183 = window.Campaign
-    if ____opt_4183 ~= nil then
-        ____opt_4183 = ____opt_4183.sceneNames
+    __L1.WORLD = ____t_result_4210
+    local ____t_result_4214
+    local ____t_4213 = __t
+    local ____opt_4211 = window.Campaign
+    if ____opt_4211 ~= nil then
+        ____opt_4211 = ____opt_4211.sceneNames
     end
-    __O[1598] = ____opt_4183
-    if ____t_4185(____opt_4183) then
-        ____t_result_4186 = __O[1598]
+    __O[1611] = ____opt_4211
+    if ____t_4213(____opt_4211) then
+        ____t_result_4214 = __O[1611]
     else
-        ____t_result_4186 = __arrL({
+        ____t_result_4214 = __arrL({
             "A roça",
             "Colégio Adventista",
             "Academia do Caleb",
@@ -23080,7 +23220,7 @@ local __O = {};
             "Baile funk"
         }, 12)
     end
-    __L1.scenes = ____t_result_4186
+    __L1.scenes = ____t_result_4214
     __L1.phrases = __arrL({
         "da roça poudiaaam",
         "reeeis pouddiaaam",
@@ -23088,27 +23228,27 @@ local __O = {};
         "teketeketeketeke",
         "ó pra Ravid falando sozinho"
     }, 5)
-    local ____ord_4195 = __ord
-    local ____assign_4194 = __assign
-    local ____temp_4193 = {}
-    local ____opt_4187 = window.LugaresC1
-    if ____opt_4187 ~= nil then
-        ____opt_4187 = ____opt_4187.npcs
+    local ____ord_4223 = __ord
+    local ____assign_4222 = __assign
+    local ____temp_4221 = {}
+    local ____opt_4215 = window.LugaresC1
+    if ____opt_4215 ~= nil then
+        ____opt_4215 = ____opt_4215.npcs
     end
-    local ____opt_4189 = window.MissaoFarda
-    if ____opt_4189 ~= nil then
-        ____opt_4189 = ____opt_4189.npcs
+    local ____opt_4217 = window.MissaoFarda
+    if ____opt_4217 ~= nil then
+        ____opt_4217 = ____opt_4217.npcs
     end
-    local ____opt_4191 = window.Campaign
-    if ____opt_4191 ~= nil then
-        ____opt_4191 = ____opt_4191.npcEntries
+    local ____opt_4219 = window.Campaign
+    if ____opt_4219 ~= nil then
+        ____opt_4219 = ____opt_4219.npcEntries
     end
-    __L1.npcInfo = ____ord_4195(
-        ____assign_4194(
-            ____temp_4193,
-            ____opt_4187,
-            ____opt_4189,
-            ____opt_4191,
+    __L1.npcInfo = ____ord_4223(
+        ____assign_4222(
+            ____temp_4221,
+            ____opt_4215,
+            ____opt_4217,
+            ____opt_4219,
             {
                 swift = __ord({name = "Irmão de Clara Swift", scene = 0, x = 340}, "name,scene,x"),
                 ollyan = __ord({name = "Ollyan · Orelhas ao Vento", scene = 11, x = 3260}, "name,scene,x"),
@@ -23136,17 +23276,17 @@ local __O = {};
         ),
         "swift,ollyan,mc_batidao,lucas,kaua,reeis,ravid,caleb,mota,davi,vitor,freddy,nicolas,dede,aica,ravile,arthur,allef,eloisa,giselle,rayssa,analaura"
     )
-    local ____t_result_4199
-    local ____t_4198 = __t
-    local ____opt_4196 = window.WorldData
-    if ____opt_4196 ~= nil then
-        ____opt_4196 = ____opt_4196.platforms
+    local ____t_result_4227
+    local ____t_4226 = __t
+    local ____opt_4224 = window.WorldData
+    if ____opt_4224 ~= nil then
+        ____opt_4224 = ____opt_4224.platforms
     end
-    __O[1599] = ____opt_4196
-    if ____t_4198(____opt_4196) then
-        ____t_result_4199 = __O[1599]
+    __O[1612] = ____opt_4224
+    if ____t_4226(____opt_4224) then
+        ____t_result_4227 = __O[1612]
     else
-        ____t_result_4199 = __arrL(
+        ____t_result_4227 = __arrL(
             {
                 __arrL(
                     {
@@ -23184,7 +23324,7 @@ local __O = {};
             4
         )
     end
-    __L1.platforms = ____t_result_4199
+    __L1.platforms = ____t_result_4227
     __L1.emptyQuest = function() return {
         carMissionAccepted = false,
         carParts = __arrL({}, 0),
@@ -23304,9 +23444,9 @@ local __O = {};
     __L1.bossHintCooldown = 0
     __L1.marcoTrapTriggered = false
     __L1.baseBonus = function()
-        local ____assign_4209 = __assign
-        local ____temp_4207 = {}
-        local ____temp_4208 = {
+        local ____assign_4237 = __assign
+        local ____temp_4235 = {}
+        local ____temp_4236 = {
             maxHP = 100,
             maxGas = 100,
             damageMultiplier = 1,
@@ -23314,64 +23454,64 @@ local __O = {};
             dashCooldown = 1.1,
             projectileTier = 0
         }
-        local ____t_result_4206
-        local ____t_4205 = __t
-        local ____opt_4202 = window.Progression
-        if ____opt_4202 ~= nil then
-            ____opt_4202 = ____opt_4202.bonuses
+        local ____t_result_4234
+        local ____t_4233 = __t
+        local ____opt_4230 = window.Progression
+        if ____opt_4230 ~= nil then
+            ____opt_4230 = ____opt_4230.bonuses
         end
-        local ____opt_result_4204
-        if ____opt_4202 ~= nil then
-            ____opt_result_4204 = ____opt_4202(____opt_4202)
+        local ____opt_result_4232
+        if ____opt_4230 ~= nil then
+            ____opt_result_4232 = ____opt_4230(____opt_4230)
         end
-        __O[1600] = ____opt_result_4204
-        if ____t_4205(____opt_result_4204) then
-            ____t_result_4206 = __O[1600]
+        __O[1613] = ____opt_result_4232
+        if ____t_4233(____opt_result_4232) then
+            ____t_result_4234 = __O[1613]
         else
-            ____t_result_4206 = {}
+            ____t_result_4234 = {}
         end
-        return ____assign_4209(____temp_4207, ____temp_4208, ____t_result_4206)
+        return ____assign_4237(____temp_4235, ____temp_4236, ____t_result_4234)
     end
     __L1.bonus = function()
-        local ____t_result_4216
-        local ____t_4215 = __t
-        local ____opt_4212 = window.BivoltSkill
-        if ____opt_4212 ~= nil then
-            ____opt_4212 = ____opt_4212.bonuses
+        local ____t_result_4244
+        local ____t_4243 = __t
+        local ____opt_4240 = window.BivoltSkill
+        if ____opt_4240 ~= nil then
+            ____opt_4240 = ____opt_4240.bonuses
         end
-        local ____opt_result_4214
-        if ____opt_4212 ~= nil then
-            ____opt_result_4214 = ____opt_4212(
-                ____opt_4212,
+        local ____opt_result_4242
+        if ____opt_4240 ~= nil then
+            ____opt_result_4242 = ____opt_4240(
+                ____opt_4240,
                 __L1:baseBonus()
             )
         end
-        __O[1601] = ____opt_result_4214
-        if ____t_4215(____opt_result_4214) then
-            ____t_result_4216 = __O[1601]
+        __O[1614] = ____opt_result_4242
+        if ____t_4243(____opt_result_4242) then
+            ____t_result_4244 = __O[1614]
         else
-            ____t_result_4216 = __L1:baseBonus()
+            ____t_result_4244 = __L1:baseBonus()
         end
-        return ____t_result_4216
+        return ____t_result_4244
     end
     __L1.bossProfile = function(____, e)
-        local ____t_result_4221
-        local ____t_4220 = __t
-        local ____t_result_4219
+        local ____t_result_4249
+        local ____t_4248 = __t
+        local ____t_result_4247
         if __t(e.difficultyProfile) then
-            ____t_result_4219 = e.difficultyProfile
+            ____t_result_4247 = e.difficultyProfile
         else
-            local ____opt_4217 = window.Difficulty
-            if ____opt_4217 ~= nil then
-                ____opt_4217 = ____opt_4217:boss(e.type)
+            local ____opt_4245 = window.Difficulty
+            if ____opt_4245 ~= nil then
+                ____opt_4245 = ____opt_4245:boss(e.type)
             end
-            ____t_result_4219 = ____opt_4217
+            ____t_result_4247 = ____opt_4245
         end
-        __O[1647] = ____t_result_4219
-        if ____t_4220(____t_result_4219) then
-            ____t_result_4221 = __O[1647]
+        __O[1660] = ____t_result_4247
+        if ____t_4248(____t_result_4247) then
+            ____t_result_4249 = __O[1660]
         else
-            ____t_result_4221 = {
+            ____t_result_4249 = {
                 hp = e.max,
                 level = 1,
                 damage = 1,
@@ -23383,52 +23523,52 @@ local __O = {};
                 armor = 0.32
             }
         end
-        return ____t_result_4221
+        return ____t_result_4249
     end
     __L1.bossRecovery = function(____, e)
-        local ____get_4224 = __get
-        local ____table_recovery_4223 = __L1:bossProfile(e).recovery
-        local ____t_result_4222
+        local ____get_4252 = __get
+        local ____table_recovery_4251 = __L1:bossProfile(e).recovery
+        local ____t_result_4250
         if __t(e.phase) then
-            ____t_result_4222 = e.phase
+            ____t_result_4250 = e.phase
         else
-            ____t_result_4222 = 1
+            ____t_result_4250 = 1
         end
-        local ____get_4224_result_4229 = ____get_4224(
-            ____table_recovery_4223,
+        local ____get_4252_result_4257 = ____get_4252(
+            ____table_recovery_4251,
             math.max(
                 0,
-                math.min(2, ____t_result_4222 - 1)
+                math.min(2, ____t_result_4250 - 1)
             )
         )
-        local ____t_4228 = __t
-        local ____t_result_4227
-        local ____t_4226 = __t
-        local ____temp_4225 = e.type == "kaique"
-        __O[1648] = ____temp_4225
-        if ____t_4226(____temp_4225) then
-            ____t_result_4227 = e.rage
+        local ____t_4256 = __t
+        local ____t_result_4255
+        local ____t_4254 = __t
+        local ____temp_4253 = e.type == "kaique"
+        __O[1661] = ____temp_4253
+        if ____t_4254(____temp_4253) then
+            ____t_result_4255 = e.rage
         else
-            ____t_result_4227 = __O[1648]
+            ____t_result_4255 = __O[1661]
         end
-        return ____get_4224_result_4229 * (____t_4228(____t_result_4227) and 0.88 or 1)
+        return ____get_4252_result_4257 * (____t_4256(____t_result_4255) and 0.88 or 1)
     end
     __L1.levelState = function()
-        local ____t_result_4236
-        local ____t_4235 = __t
-        local ____opt_4232 = window.Progression
-        if ____opt_4232 ~= nil then
-            ____opt_4232 = ____opt_4232.getState
+        local ____t_result_4264
+        local ____t_4263 = __t
+        local ____opt_4260 = window.Progression
+        if ____opt_4260 ~= nil then
+            ____opt_4260 = ____opt_4260.getState
         end
-        local ____opt_result_4234
-        if ____opt_4232 ~= nil then
-            ____opt_result_4234 = ____opt_4232(____opt_4232)
+        local ____opt_result_4262
+        if ____opt_4260 ~= nil then
+            ____opt_result_4262 = ____opt_4260(____opt_4260)
         end
-        __O[1649] = ____opt_result_4234
-        if ____t_4235(____opt_result_4234) then
-            ____t_result_4236 = __O[1649]
+        __O[1662] = ____opt_result_4262
+        if ____t_4263(____opt_result_4262) then
+            ____t_result_4264 = __O[1662]
         else
-            ____t_result_4236 = {
+            ____t_result_4264 = {
                 level = 1,
                 xp = 0,
                 nextXP = 100,
@@ -23436,7 +23576,7 @@ local __O = {};
                 stats = {vigor = 0, forca = 0, gas = 0, agilidade = 0}
             }
         end
-        return ____t_result_4236
+        return ____t_result_4264
     end
     __L1.weaponNames = __arrL({"Bolinhas de papel", "Lançador de régua", "Canhão de estojo"}, 3)
     __L1.itemNames = __ord({pencil = "lápis", eraser = "borracha", clip = "clipe"}, "pencil,eraser,clip")
@@ -23479,30 +23619,30 @@ local __O = {};
     )
     __L1.inputCaptured = false
     __L1.keyHeld = function(____, action)
-        local ____t_result_4237
+        local ____t_result_4265
         if __t(window.ControlSettings) then
-            ____t_result_4237 = window.ControlSettings:pressed(action, __L1.keys)
+            ____t_result_4265 = window.ControlSettings:pressed(action, __L1.keys)
         else
-            ____t_result_4237 = not not __t(__callq(
+            ____t_result_4265 = not not __t(__callq(
                 __get(__L1.defaultKeys, action),
                 "some",
                 function(____, code) return __get(__L1.keys, code) end
             ))
         end
-        return ____t_result_4237
+        return ____t_result_4265
     end
     __L1.keyMatches = function(____, action, code)
-        local ____t_result_4238
+        local ____t_result_4266
         if __t(window.ControlSettings) then
-            ____t_result_4238 = window.ControlSettings:matches(action, code)
+            ____t_result_4266 = window.ControlSettings:matches(action, code)
         else
-            ____t_result_4238 = not not __t(__callq(
+            ____t_result_4266 = not not __t(__callq(
                 __get(__L1.defaultKeys, action),
                 "includes",
                 code
             ))
         end
-        return ____t_result_4238
+        return ____t_result_4266
     end
     __L1.rand = function(____, a, b) return a + math.random() * (b - a) end
     __L1.clamp = function(____, x, a, b) return math.max(
@@ -23523,37 +23663,37 @@ local __O = {};
     __L1.pointerTimes = __TS__New(WeakMap)
     __L1.keyboardClicks = __TS__New(WeakMap)
     __L1.npcAvailable = function(____, id)
-        local ____temp_4243
+        local ____temp_4271
         if id == "reeis" then
-            ____temp_4243 = __L1.q.reeis
+            ____temp_4271 = __L1.q.reeis
         else
-            local ____temp_4242
+            local ____temp_4270
             if id == "freddy" then
-                ____temp_4242 = __L1.q.freddy
+                ____temp_4270 = __L1.q.freddy
             else
-                local ____temp_4241
+                local ____temp_4269
                 if id == "nicolas" then
-                    ____temp_4241 = __L1.q.nicolas
+                    ____temp_4269 = __L1.q.nicolas
                 else
-                    local ____temp_4240
+                    local ____temp_4268
                     if id == "dede" then
-                        ____temp_4240 = __L1.q.dede
+                        ____temp_4268 = __L1.q.dede
                     else
-                        local ____temp_4239
+                        local ____temp_4267
                         if id == "arthur" then
-                            ____temp_4239 = __L1.q.arthur
+                            ____temp_4267 = __L1.q.arthur
                         else
-                            ____temp_4239 = true
+                            ____temp_4267 = true
                         end
-                        ____temp_4240 = ____temp_4239
+                        ____temp_4268 = ____temp_4267
                     end
-                    ____temp_4241 = ____temp_4240
+                    ____temp_4269 = ____temp_4268
                 end
-                ____temp_4242 = ____temp_4241
+                ____temp_4270 = ____temp_4269
             end
-            ____temp_4243 = ____temp_4242
+            ____temp_4271 = ____temp_4270
         end
-        return ____temp_4243
+        return ____temp_4271
     end
     __L1.bossNames = __ord({
         igor = "Igor · Fiscal do Lanche",
@@ -23569,87 +23709,87 @@ local __O = {};
         arthur = "Arthur · Duelo do pátio"
     }, "igor,kaique,marco,menezes,nikolas,reeisBoss,giant,freddy,nicolas,dede,arthur")
     __L1.nomeBoss = function(____, t)
-        local ____t_result_4249
-        local ____t_4248 = __t
-        local ____t_result_4247
-        local ____t_4246 = __t
-        local ____opt_4244 = window.C2Luta
-        if ____opt_4244 ~= nil then
-            ____opt_4244 = ____opt_4244.skin
+        local ____t_result_4277
+        local ____t_4276 = __t
+        local ____t_result_4275
+        local ____t_4274 = __t
+        local ____opt_4272 = window.C2Luta
+        if ____opt_4272 ~= nil then
+            ____opt_4272 = ____opt_4272.skin
         end
-        __O[1655] = ____opt_4244
-        if ____t_4246(____opt_4244) then
-            ____t_result_4247 = t == window.C2Luta.skin.kit
+        __O[1668] = ____opt_4272
+        if ____t_4274(____opt_4272) then
+            ____t_result_4275 = t == window.C2Luta.skin.kit
         else
-            ____t_result_4247 = __O[1655]
+            ____t_result_4275 = __O[1668]
         end
-        if ____t_4248(____t_result_4247) then
-            ____t_result_4249 = window.C2Luta.skin.nome
+        if ____t_4276(____t_result_4275) then
+            ____t_result_4277 = window.C2Luta.skin.nome
         else
-            ____t_result_4249 = __get(__L1.bossNames, t)
+            ____t_result_4277 = __get(__L1.bossNames, t)
         end
-        return ____t_result_4249
+        return ____t_result_4277
     end
     __L1.worldWidthFor = function(____, n)
-        local ____t_result_4262
-        local ____t_4261 = __t
-        local ____t_result_4260
-        local ____t_4254 = __t
-        local ____getq_4252 = __getq
-        local ____opt_4250 = window.WorldData
-        if ____opt_4250 ~= nil then
-            ____opt_4250 = ____opt_4250.widths
+        local ____t_result_4290
+        local ____t_4289 = __t
+        local ____t_result_4288
+        local ____t_4282 = __t
+        local ____getq_4280 = __getq
+        local ____opt_4278 = window.WorldData
+        if ____opt_4278 ~= nil then
+            ____opt_4278 = ____opt_4278.widths
         end
-        local ____TS__Number_result_4253 = __TS__Number(____getq_4252(____opt_4250, n))
-        __O[1667] = ____TS__Number_result_4253
-        if ____t_4254(____TS__Number_result_4253) then
-            ____t_result_4260 = __O[1667]
+        local ____TS__Number_result_4281 = __TS__Number(____getq_4280(____opt_4278, n))
+        __O[1680] = ____TS__Number_result_4281
+        if ____t_4282(____TS__Number_result_4281) then
+            ____t_result_4288 = __O[1680]
         else
-            local ____opt_4257 = window.LugaresC1
-            if ____opt_4257 ~= nil then
-                ____opt_4257 = ____opt_4257.largura
+            local ____opt_4285 = window.LugaresC1
+            if ____opt_4285 ~= nil then
+                ____opt_4285 = ____opt_4285.largura
             end
-            local ____opt_result_4259
-            if ____opt_4257 ~= nil then
-                ____opt_result_4259 = ____opt_4257(____opt_4257, n)
+            local ____opt_result_4287
+            if ____opt_4285 ~= nil then
+                ____opt_result_4287 = ____opt_4285(____opt_4285, n)
             end
-            ____t_result_4260 = ____opt_result_4259
+            ____t_result_4288 = ____opt_result_4287
         end
-        __O[1668] = ____t_result_4260
-        if ____t_4261(____t_result_4260) then
-            ____t_result_4262 = __O[1668]
+        __O[1681] = ____t_result_4288
+        if ____t_4289(____t_result_4288) then
+            ____t_result_4290 = __O[1681]
         else
-            ____t_result_4262 = 2600
+            ____t_result_4290 = 2600
         end
-        return ____t_result_4262
+        return ____t_result_4290
     end
     __L1.bossHome = function(____, ____type, fallback)
-        local ____t_result_4270
-        local ____t_4269 = __t
-        local ____getq_4267 = __getq
-        local ____opt_4265 = window.WorldData
-        if ____opt_4265 ~= nil then
-            ____opt_4265 = ____opt_4265.bosses
+        local ____t_result_4298
+        local ____t_4297 = __t
+        local ____getq_4295 = __getq
+        local ____opt_4293 = window.WorldData
+        if ____opt_4293 ~= nil then
+            ____opt_4293 = ____opt_4293.bosses
         end
-        local ____opt_4263 = ____getq_4267(____opt_4265, ____type)
-        if ____opt_4263 ~= nil then
-            ____opt_4263 = ____opt_4263.x
+        local ____opt_4291 = ____getq_4295(____opt_4293, ____type)
+        if ____opt_4291 ~= nil then
+            ____opt_4291 = ____opt_4291.x
         end
-        local ____TS__Number_result_4268 = __TS__Number(____opt_4263)
-        __O[1669] = ____TS__Number_result_4268
-        if ____t_4269(____TS__Number_result_4268) then
-            ____t_result_4270 = __O[1669]
+        local ____TS__Number_result_4296 = __TS__Number(____opt_4291)
+        __O[1682] = ____TS__Number_result_4296
+        if ____t_4297(____TS__Number_result_4296) then
+            ____t_result_4298 = __O[1682]
         else
-            ____t_result_4270 = fallback
+            ____t_result_4298 = fallback
         end
-        return ____t_result_4270
+        return ____t_result_4298
     end
     __L1.player = __L1:basePlayer()
-    local ____opt_4271 = __L1:load()
-    if ____opt_4271 ~= nil then
-        ____opt_4271 = ____opt_4271.q
+    local ____opt_4299 = __L1:load()
+    if ____opt_4299 ~= nil then
+        ____opt_4299 = ____opt_4299.q
     end
-    __L1.menuLookQuest = ____opt_4271
+    __L1.menuLookQuest = ____opt_4299
     __L1.dialogueReopenUntil = 0
     __L1.dinnerMeter = __L1["$"](__L1, "dinnerBreath")
     __L1.dinnerMeter.style:setProperty(
@@ -23749,205 +23889,206 @@ local __O = {};
     }, "muscleClap,goldenRush,potatoUppercut,auraComets,skySlimeLances,auraSweep,giantPalm,giantStomp,giantSlam,giantBreath")
     __L1.pickupsLater = false
     __L1.arenaFundo = nil
+    __L1.pontesCv = nil
     __L1:createBivoltControl()
     __L1.editableTarget = function(____, target)
-        local ____t_4284 = __t
-        local ____t_result_4283
-        local ____t_4276 = __t
-        local ____opt_result_4275
+        local ____t_4312 = __t
+        local ____t_result_4311
+        local ____t_4304 = __t
+        local ____opt_result_4303
         if target ~= nil then
-            ____opt_result_4275 = target.isContentEditable
+            ____opt_result_4303 = target.isContentEditable
         end
-        __O[2160] = ____opt_result_4275
-        if ____t_4276(____opt_result_4275) then
-            ____t_result_4283 = __O[2160]
+        __O[2177] = ____opt_result_4303
+        if ____t_4304(____opt_result_4303) then
+            ____t_result_4311 = __O[2177]
         else
-            local ____opt_result_4281
+            local ____opt_result_4309
             if target ~= nil then
-                ____opt_result_4281 = target.closest
+                ____opt_result_4309 = target.closest
             end
-            local ____opt_result_4282
-            if ____opt_result_4281 ~= nil then
-                ____opt_result_4282 = ____opt_result_4281(target, "input,textarea,select,[contenteditable=\"\"],[contenteditable=\"true\"],[role=\"textbox\"]")
+            local ____opt_result_4310
+            if ____opt_result_4309 ~= nil then
+                ____opt_result_4310 = ____opt_result_4309(target, "input,textarea,select,[contenteditable=\"\"],[contenteditable=\"true\"],[role=\"textbox\"]")
             end
-            ____t_result_4283 = ____opt_result_4282
+            ____t_result_4311 = ____opt_result_4310
         end
-        return not not ____t_4284(____t_result_4283)
+        return not not ____t_4312(____t_result_4311)
     end
     __L1.visibleKeyboardButton = function(____, target)
-        local ____opt_result_4289
+        local ____opt_result_4317
         if target ~= nil then
-            ____opt_result_4289 = target.closest
+            ____opt_result_4317 = target.closest
         end
-        local ____opt_result_4290
-        if ____opt_result_4289 ~= nil then
-            ____opt_result_4290 = ____opt_result_4289(target, "button,a")
+        local ____opt_result_4318
+        if ____opt_result_4317 ~= nil then
+            ____opt_result_4318 = ____opt_result_4317(target, "button,a")
         end
-        local button = ____opt_result_4290
-        local ____t_result_4297
-        local ____t_4296 = __t
-        local ____t_result_4295
-        local ____t_4294 = __t
-        local ____t_result_4293
-        local ____t_4292 = __t
-        local ____t_result_4291
+        local button = ____opt_result_4318
+        local ____t_result_4325
+        local ____t_4324 = __t
+        local ____t_result_4323
+        local ____t_4322 = __t
+        local ____t_result_4321
+        local ____t_4320 = __t
+        local ____t_result_4319
         if __t(button) then
-            ____t_result_4291 = not __t(button:closest("[hidden],[inert]"))
+            ____t_result_4319 = not __t(button:closest("[hidden],[inert]"))
         else
-            ____t_result_4291 = button
+            ____t_result_4319 = button
         end
-        __O[2161] = ____t_result_4291
-        if ____t_4292(____t_result_4291) then
-            ____t_result_4293 = __len(button:getClientRects())
+        __O[2178] = ____t_result_4319
+        if ____t_4320(____t_result_4319) then
+            ____t_result_4321 = __len(button:getClientRects())
         else
-            ____t_result_4293 = __O[2161]
+            ____t_result_4321 = __O[2178]
         end
-        __O[2162] = ____t_result_4293
-        if ____t_4294(____t_result_4293) then
-            ____t_result_4295 = window:getComputedStyle(button).visibility ~= "hidden"
+        __O[2179] = ____t_result_4321
+        if ____t_4322(____t_result_4321) then
+            ____t_result_4323 = window:getComputedStyle(button).visibility ~= "hidden"
         else
-            ____t_result_4295 = __O[2162]
+            ____t_result_4323 = __O[2179]
         end
-        if ____t_4296(____t_result_4295) then
-            ____t_result_4297 = button
+        if ____t_4324(____t_result_4323) then
+            ____t_result_4325 = button
         else
-            ____t_result_4297 = nil
+            ____t_result_4325 = nil
         end
-        return ____t_result_4297
+        return ____t_result_4325
     end
     window:addEventListener(
         "keydown",
         function(____, e)
-            local ____t_4312 = __t
-            local ____t_result_4311
-            local ____t_4310 = __t
-            local ____t_result_4309
-            local ____t_4306 = __t
-            local ____t_result_4305
-            local ____t_4299 = __t
-            local ____t_result_4298
+            local ____t_4340 = __t
+            local ____t_result_4339
+            local ____t_4338 = __t
+            local ____t_result_4337
+            local ____t_4334 = __t
+            local ____t_result_4333
+            local ____t_4327 = __t
+            local ____t_result_4326
             if __t(e.defaultPrevented) then
-                ____t_result_4298 = e.defaultPrevented
+                ____t_result_4326 = e.defaultPrevented
             else
-                ____t_result_4298 = __L1.inputCaptured
+                ____t_result_4326 = __L1.inputCaptured
             end
-            __O[2163] = ____t_result_4298
-            if ____t_4299(____t_result_4298) then
-                ____t_result_4305 = __O[2163]
+            __O[2180] = ____t_result_4326
+            if ____t_4327(____t_result_4326) then
+                ____t_result_4333 = __O[2180]
             else
-                local ____opt_4302 = window.Arena
-                if ____opt_4302 ~= nil then
-                    ____opt_4302 = ____opt_4302.isOpen
+                local ____opt_4330 = window.Arena
+                if ____opt_4330 ~= nil then
+                    ____opt_4330 = ____opt_4330.isOpen
                 end
-                local ____opt_result_4304
-                if ____opt_4302 ~= nil then
-                    ____opt_result_4304 = ____opt_4302(____opt_4302)
+                local ____opt_result_4332
+                if ____opt_4330 ~= nil then
+                    ____opt_result_4332 = ____opt_4330(____opt_4330)
                 end
-                ____t_result_4305 = ____opt_result_4304
+                ____t_result_4333 = ____opt_result_4332
             end
-            __O[2164] = ____t_result_4305
-            if ____t_4306(____t_result_4305) then
-                ____t_result_4309 = __O[2164]
+            __O[2181] = ____t_result_4333
+            if ____t_4334(____t_result_4333) then
+                ____t_result_4337 = __O[2181]
             else
-                local ____this_4308
-                ____this_4308 = window.document
-                local ____opt_4307 = ____this_4308.querySelector
-                ____t_result_4309 = ____opt_4307 and ____opt_4307(____this_4308, "dialog[open]")
+                local ____this_4336
+                ____this_4336 = window.document
+                local ____opt_4335 = ____this_4336.querySelector
+                ____t_result_4337 = ____opt_4335 and ____opt_4335(____this_4336, "dialog[open]")
             end
-            __O[2165] = ____t_result_4309
-            if ____t_4310(____t_result_4309) then
-                ____t_result_4311 = __O[2165]
+            __O[2182] = ____t_result_4337
+            if ____t_4338(____t_result_4337) then
+                ____t_result_4339 = __O[2182]
             else
-                ____t_result_4311 = __L1:editableTarget(e.target)
+                ____t_result_4339 = __L1:editableTarget(e.target)
             end
-            if ____t_4312(____t_result_4311) then
+            if ____t_4340(____t_result_4339) then
                 return
             end
-            local ____t_4316 = __t
-            local ____t_result_4315
-            local ____t_4314 = __t
-            local ____t_result_4313
+            local ____t_4344 = __t
+            local ____t_result_4343
+            local ____t_4342 = __t
+            local ____t_result_4341
             if __t(e.ctrlKey) then
-                ____t_result_4313 = e.ctrlKey
+                ____t_result_4341 = e.ctrlKey
             else
-                ____t_result_4313 = e.metaKey
+                ____t_result_4341 = e.metaKey
             end
-            __O[2166] = ____t_result_4313
-            if ____t_4314(____t_result_4313) then
-                ____t_result_4315 = __O[2166]
+            __O[2183] = ____t_result_4341
+            if ____t_4342(____t_result_4341) then
+                ____t_result_4343 = __O[2183]
             else
-                ____t_result_4315 = e.altKey
+                ____t_result_4343 = e.altKey
             end
-            if ____t_4316(____t_result_4315) then
+            if ____t_4344(____t_result_4343) then
                 __L1.keys = {}
                 return
             end
             local code = e.code
-            local ____t_result_4323
-            local ____t_4322 = __t
-            local ____t_result_4321
-            local ____t_4320 = __t
-            local ____t_result_4319
-            local ____t_4318 = __t
-            local ____temp_4317 = __L1:keyMatches("interact", code)
-            __O[2167] = ____temp_4317
-            if ____t_4318(____temp_4317) then
-                ____t_result_4319 = __O[2167]
+            local ____t_result_4351
+            local ____t_4350 = __t
+            local ____t_result_4349
+            local ____t_4348 = __t
+            local ____t_result_4347
+            local ____t_4346 = __t
+            local ____temp_4345 = __L1:keyMatches("interact", code)
+            __O[2184] = ____temp_4345
+            if ____t_4346(____temp_4345) then
+                ____t_result_4347 = __O[2184]
             else
-                ____t_result_4319 = __L1:keyMatches("jump", code)
+                ____t_result_4347 = __L1:keyMatches("jump", code)
             end
-            __O[2168] = ____t_result_4319
-            if ____t_4320(____t_result_4319) then
-                ____t_result_4321 = __O[2168]
+            __O[2185] = ____t_result_4347
+            if ____t_4348(____t_result_4347) then
+                ____t_result_4349 = __O[2185]
             else
-                ____t_result_4321 = code == "Space"
+                ____t_result_4349 = code == "Space"
             end
-            __O[2169] = ____t_result_4321
-            if ____t_4322(____t_result_4321) then
-                ____t_result_4323 = __O[2169]
+            __O[2186] = ____t_result_4349
+            if ____t_4350(____t_result_4349) then
+                ____t_result_4351 = __O[2186]
             else
-                ____t_result_4323 = code == "Enter"
+                ____t_result_4351 = code == "Enter"
             end
-            local confirm = ____t_result_4323
-            local ____t_result_4326
-            local ____t_4325 = __t
-            local ____temp_4324 = code == "Escape"
-            __O[2170] = ____temp_4324
-            if ____t_4325(____temp_4324) then
-                ____t_result_4326 = __O[2170]
+            local confirm = ____t_result_4351
+            local ____t_result_4354
+            local ____t_4353 = __t
+            local ____temp_4352 = code == "Escape"
+            __O[2187] = ____temp_4352
+            if ____t_4353(____temp_4352) then
+                ____t_result_4354 = __O[2187]
             else
-                ____t_result_4326 = __L1:keyMatches("pause", code)
+                ____t_result_4354 = __L1:keyMatches("pause", code)
             end
-            local pauseKey = ____t_result_4326
-            local ____t_4329 = __t
-            local ____t_result_4328
+            local pauseKey = ____t_result_4354
+            local ____t_4357 = __t
+            local ____t_result_4356
             if __t(__L1.dialog) then
-                local ____t_result_4327
+                local ____t_result_4355
                 if __t(confirm) then
-                    ____t_result_4327 = confirm
+                    ____t_result_4355 = confirm
                 else
-                    ____t_result_4327 = pauseKey
+                    ____t_result_4355 = pauseKey
                 end
-                ____t_result_4328 = ____t_result_4327
+                ____t_result_4356 = ____t_result_4355
             else
-                ____t_result_4328 = __L1.dialog
+                ____t_result_4356 = __L1.dialog
             end
-            if ____t_4329(____t_result_4328) then
+            if ____t_4357(____t_result_4356) then
                 e:preventDefault()
                 if not __t(e["repeat"]) then
-                    local ____t_4335 = __t
-                    local ____t_result_4334
+                    local ____t_4363 = __t
+                    local ____t_result_4362
                     if __t(pauseKey) then
-                        ____t_result_4334 = pauseKey
+                        ____t_result_4362 = pauseKey
                     else
-                        local ____opt_4332 = e.target
-                        local ____opt_4330 = ____opt_4332 and ____opt_4332.closest
-                        if ____opt_4330 ~= nil then
-                            ____opt_4330 = ____opt_4330(____opt_4332, "#dialogClose")
+                        local ____opt_4360 = e.target
+                        local ____opt_4358 = ____opt_4360 and ____opt_4360.closest
+                        if ____opt_4358 ~= nil then
+                            ____opt_4358 = ____opt_4358(____opt_4360, "#dialogClose")
                         end
-                        ____t_result_4334 = ____opt_4330
+                        ____t_result_4362 = ____opt_4358
                     end
-                    if ____t_4335(____t_result_4334) then
+                    if ____t_4363(____t_result_4362) then
                         __L1:closeDialogue(false)
                     else
                         __L1:nextDialog()
@@ -23955,72 +24096,72 @@ local __O = {};
                 end
                 return
             end
-            local ____t_4343 = __t
-            local ____t_result_4342
-            local ____t_4341 = __t
-            local ____t_result_4340
-            local ____t_4339 = __t
-            local ____t_result_4338
+            local ____t_4371 = __t
+            local ____t_result_4370
+            local ____t_4369 = __t
+            local ____t_result_4368
+            local ____t_4367 = __t
+            local ____t_result_4366
             if __t(__L1.cutscene) then
-                ____t_result_4338 = __L1.cutscene
+                ____t_result_4366 = __L1.cutscene
             else
-                local ____opt_4336 = __L1.ollyanEncounter
-                if ____opt_4336 ~= nil then
-                    ____opt_4336 = ____opt_4336.stage
+                local ____opt_4364 = __L1.ollyanEncounter
+                if ____opt_4364 ~= nil then
+                    ____opt_4364 = ____opt_4364.stage
                 end
-                ____t_result_4338 = ____opt_4336 == "intro"
+                ____t_result_4366 = ____opt_4364 == "intro"
             end
-            __O[2171] = ____t_result_4338
-            if ____t_4339(____t_result_4338) then
-                ____t_result_4340 = not __t(__L1.paused)
+            __O[2188] = ____t_result_4366
+            if ____t_4367(____t_result_4366) then
+                ____t_result_4368 = not __t(__L1.paused)
             else
-                ____t_result_4340 = __O[2171]
+                ____t_result_4368 = __O[2188]
             end
-            __O[2172] = ____t_result_4340
-            if ____t_4341(____t_result_4340) then
-                ____t_result_4342 = confirm
+            __O[2189] = ____t_result_4368
+            if ____t_4369(____t_result_4368) then
+                ____t_result_4370 = confirm
             else
-                ____t_result_4342 = __O[2172]
+                ____t_result_4370 = __O[2189]
             end
-            if ____t_4343(____t_result_4342) then
+            if ____t_4371(____t_result_4370) then
                 e:preventDefault()
                 if not __t(e["repeat"]) then
                     __L1:advanceCutscene()
                 end
                 return
             end
-            local ____t_4351 = __t
-            local ____t_result_4350
-            local ____t_4349 = __t
-            local ____t_result_4348
-            local ____t_4347 = __t
-            local ____t_result_4346
-            local ____t_4345 = __t
-            local ____t_result_4344
+            local ____t_4379 = __t
+            local ____t_result_4378
+            local ____t_4377 = __t
+            local ____t_result_4376
+            local ____t_4375 = __t
+            local ____t_result_4374
+            local ____t_4373 = __t
+            local ____t_result_4372
             if __t(pauseKey) then
-                ____t_result_4344 = __L1.started
+                ____t_result_4372 = __L1.started
             else
-                ____t_result_4344 = pauseKey
+                ____t_result_4372 = pauseKey
             end
-            __O[2173] = ____t_result_4344
-            if ____t_4345(____t_result_4344) then
-                ____t_result_4346 = not __t(__L1.won)
+            __O[2190] = ____t_result_4372
+            if ____t_4373(____t_result_4372) then
+                ____t_result_4374 = not __t(__L1.won)
             else
-                ____t_result_4346 = __O[2173]
+                ____t_result_4374 = __O[2190]
             end
-            __O[2174] = ____t_result_4346
-            if ____t_4347(____t_result_4346) then
-                ____t_result_4348 = not __t(__L1.defeated)
+            __O[2191] = ____t_result_4374
+            if ____t_4375(____t_result_4374) then
+                ____t_result_4376 = not __t(__L1.defeated)
             else
-                ____t_result_4348 = __O[2174]
+                ____t_result_4376 = __O[2191]
             end
-            __O[2175] = ____t_result_4348
-            if ____t_4349(____t_result_4348) then
-                ____t_result_4350 = not __t(__L1.chapterEnded)
+            __O[2192] = ____t_result_4376
+            if ____t_4377(____t_result_4376) then
+                ____t_result_4378 = not __t(__L1.chapterEnded)
             else
-                ____t_result_4350 = __O[2175]
+                ____t_result_4378 = __O[2192]
             end
-            if ____t_4351(____t_result_4350) then
+            if ____t_4379(____t_result_4378) then
                 e:preventDefault()
                 if not __t(e["repeat"]) then
                     if __t(__L1.paused) then
@@ -24031,54 +24172,54 @@ local __O = {};
                 end
                 return
             end
-            local ____t_4361 = __t
-            local ____t_result_4360
-            local ____t_4359 = __t
-            local ____t_result_4358
-            local ____t_4357 = __t
-            local ____t_result_4356
-            local ____t_4355 = __t
-            local ____t_result_4354
-            local ____t_4353 = __t
-            local ____temp_4352 = not __t(__L1.started)
-            __O[2176] = ____temp_4352
-            if ____t_4353(____temp_4352) then
-                ____t_result_4354 = __O[2176]
+            local ____t_4389 = __t
+            local ____t_result_4388
+            local ____t_4387 = __t
+            local ____t_result_4386
+            local ____t_4385 = __t
+            local ____t_result_4384
+            local ____t_4383 = __t
+            local ____t_result_4382
+            local ____t_4381 = __t
+            local ____temp_4380 = not __t(__L1.started)
+            __O[2193] = ____temp_4380
+            if ____t_4381(____temp_4380) then
+                ____t_result_4382 = __O[2193]
             else
-                ____t_result_4354 = __L1.paused
+                ____t_result_4382 = __L1.paused
             end
-            __O[2177] = ____t_result_4354
-            if ____t_4355(____t_result_4354) then
-                ____t_result_4356 = __O[2177]
+            __O[2194] = ____t_result_4382
+            if ____t_4383(____t_result_4382) then
+                ____t_result_4384 = __O[2194]
             else
-                ____t_result_4356 = __L1.won
+                ____t_result_4384 = __L1.won
             end
-            __O[2178] = ____t_result_4356
-            if ____t_4357(____t_result_4356) then
-                ____t_result_4358 = __O[2178]
+            __O[2195] = ____t_result_4384
+            if ____t_4385(____t_result_4384) then
+                ____t_result_4386 = __O[2195]
             else
-                ____t_result_4358 = __L1.defeated
+                ____t_result_4386 = __L1.defeated
             end
-            __O[2179] = ____t_result_4358
-            if ____t_4359(____t_result_4358) then
-                ____t_result_4360 = __O[2179]
+            __O[2196] = ____t_result_4386
+            if ____t_4387(____t_result_4386) then
+                ____t_result_4388 = __O[2196]
             else
-                ____t_result_4360 = __L1.chapterEnded
+                ____t_result_4388 = __L1.chapterEnded
             end
-            if ____t_4361(____t_result_4360) then
+            if ____t_4389(____t_result_4388) then
                 local button = __L1:visibleKeyboardButton(e.target)
-                local ____t_4363 = __t
-                local ____t_result_4362
+                local ____t_4391 = __t
+                local ____t_result_4390
                 if __t(button) then
-                    ____t_result_4362 = __call(
+                    ____t_result_4390 = __call(
                         __arrL({"Enter", "Space"}, 2),
                         "includes",
                         code
                     )
                 else
-                    ____t_result_4362 = button
+                    ____t_result_4390 = button
                 end
-                if ____t_4363(____t_result_4362) then
+                if ____t_4391(____t_result_4390) then
                     __call(
                         __L1.keyboardClicks,
                         "set",
@@ -24088,62 +24229,62 @@ local __O = {};
                 end
                 return
             end
-            local ____t_4369 = __t
-            local ____t_result_4368
-            local ____t_4367 = __t
-            local ____opt_4364 = __L1.activity
-            if ____opt_4364 ~= nil then
-                ____opt_4364 = ____opt_4364.kind
+            local ____t_4397 = __t
+            local ____t_result_4396
+            local ____t_4395 = __t
+            local ____opt_4392 = __L1.activity
+            if ____opt_4392 ~= nil then
+                ____opt_4392 = ____opt_4392.kind
             end
-            local ____temp_4366 = ____opt_4364 == "dinner" and __L1.activity.phase == "choice"
-            __O[2180] = ____temp_4366
-            if ____t_4367(____temp_4366) then
-                ____t_result_4368 = __call(
+            local ____temp_4394 = ____opt_4392 == "dinner" and __L1.activity.phase == "choice"
+            __O[2197] = ____temp_4394
+            if ____t_4395(____temp_4394) then
+                ____t_result_4396 = __call(
                     __arrL({"Digit1", "Digit2", "Numpad1", "Numpad2"}, 4),
                     "includes",
                     code
                 )
             else
-                ____t_result_4368 = __O[2180]
+                ____t_result_4396 = __O[2197]
             end
-            if ____t_4369(____t_result_4368) then
+            if ____t_4397(____t_result_4396) then
                 e:preventDefault()
                 if not __t(e["repeat"]) then
                     __L1:submitActivity(__TS__Number(__call(code, "slice", -1)) - 1)
                 end
                 return
             end
-            local ____t_4371 = __t
-            local ____t_result_4370
+            local ____t_4399 = __t
+            local ____t_result_4398
             if __t(__L1.activity) then
-                ____t_result_4370 = confirm
+                ____t_result_4398 = confirm
             else
-                ____t_result_4370 = __L1.activity
+                ____t_result_4398 = __L1.activity
             end
-            if ____t_4371(____t_result_4370) then
-                local ____t_4377 = __t
-                local ____t_result_4376
-                local ____t_4375 = __t
-                local ____t_result_4374
-                local ____t_4373 = __t
-                local ____temp_4372 = __L1.activity.kind == "quiz" or __L1.activity.kind == "dinner"
-                __O[2181] = ____temp_4372
-                if ____t_4373(____temp_4372) then
-                    ____t_result_4374 = __L1:visibleKeyboardButton(e.target)
+            if ____t_4399(____t_result_4398) then
+                local ____t_4405 = __t
+                local ____t_result_4404
+                local ____t_4403 = __t
+                local ____t_result_4402
+                local ____t_4401 = __t
+                local ____temp_4400 = __L1.activity.kind == "quiz" or __L1.activity.kind == "dinner"
+                __O[2198] = ____temp_4400
+                if ____t_4401(____temp_4400) then
+                    ____t_result_4402 = __L1:visibleKeyboardButton(e.target)
                 else
-                    ____t_result_4374 = __O[2181]
+                    ____t_result_4402 = __O[2198]
                 end
-                __O[2182] = ____t_result_4374
-                if ____t_4375(____t_result_4374) then
-                    ____t_result_4376 = __call(
+                __O[2199] = ____t_result_4402
+                if ____t_4403(____t_result_4402) then
+                    ____t_result_4404 = __call(
                         __arrL({"Enter", "Space"}, 2),
                         "includes",
                         code
                     )
                 else
-                    ____t_result_4376 = __O[2182]
+                    ____t_result_4404 = __O[2199]
                 end
-                if ____t_4377(____t_result_4376) then
+                if ____t_4405(____t_result_4404) then
                     __call(
                         __L1.keyboardClicks,
                         "set",
@@ -24158,95 +24299,95 @@ local __O = {};
                 end
                 return
             end
-            local ____t_4382 = __t
-            local ____t_result_4381
-            local ____t_4380 = __t
-            local ____opt_4378 = __L1.training
-            if ____opt_4378 ~= nil then
-                ____opt_4378 = ____opt_4378.active
+            local ____t_4410 = __t
+            local ____t_result_4409
+            local ____t_4408 = __t
+            local ____opt_4406 = __L1.training
+            if ____opt_4406 ~= nil then
+                ____opt_4406 = ____opt_4406.active
             end
-            __O[2183] = ____opt_4378
-            if ____t_4380(____opt_4378) then
-                ____t_result_4381 = confirm
+            __O[2200] = ____opt_4406
+            if ____t_4408(____opt_4406) then
+                ____t_result_4409 = confirm
             else
-                ____t_result_4381 = __O[2183]
+                ____t_result_4409 = __O[2200]
             end
-            if ____t_4382(____t_result_4381) then
+            if ____t_4410(____t_result_4409) then
                 e:preventDefault()
                 if not __t(e["repeat"]) then
                     __L1:submitTraining()
                 end
                 return
             end
-            local ____t_4396 = __t
-            local ____t_result_4395
-            local ____t_4393 = __t
-            local ____t_result_4392
-            local ____t_4390 = __t
-            local ____t_result_4389
-            local ____t_4388 = __t
-            local ____t_result_4387
-            local ____t_4386 = __t
-            local ____t_result_4385
+            local ____t_4424 = __t
+            local ____t_result_4423
+            local ____t_4421 = __t
+            local ____t_result_4420
+            local ____t_4418 = __t
+            local ____t_result_4417
+            local ____t_4416 = __t
+            local ____t_result_4415
+            local ____t_4414 = __t
+            local ____t_result_4413
             if __t(__L1.activity) then
-                ____t_result_4385 = __L1.activity
+                ____t_result_4413 = __L1.activity
             else
-                local ____opt_4383 = __L1.training
-                if ____opt_4383 ~= nil then
-                    ____opt_4383 = ____opt_4383.active
+                local ____opt_4411 = __L1.training
+                if ____opt_4411 ~= nil then
+                    ____opt_4411 = ____opt_4411.active
                 end
-                ____t_result_4385 = ____opt_4383
+                ____t_result_4413 = ____opt_4411
             end
-            __O[2184] = ____t_result_4385
-            if ____t_4386(____t_result_4385) then
-                ____t_result_4387 = __O[2184]
+            __O[2201] = ____t_result_4413
+            if ____t_4414(____t_result_4413) then
+                ____t_result_4415 = __O[2201]
             else
-                ____t_result_4387 = __L1.cutscene
+                ____t_result_4415 = __L1.cutscene
             end
-            __O[2185] = ____t_result_4387
-            if ____t_4388(____t_result_4387) then
-                ____t_result_4389 = __O[2185]
+            __O[2202] = ____t_result_4415
+            if ____t_4416(____t_result_4415) then
+                ____t_result_4417 = __O[2202]
             else
-                ____t_result_4389 = __L1.routeTransition
+                ____t_result_4417 = __L1.routeTransition
             end
-            __O[2186] = ____t_result_4389
-            if ____t_4390(____t_result_4389) then
-                ____t_result_4392 = __O[2186]
+            __O[2203] = ____t_result_4417
+            if ____t_4418(____t_result_4417) then
+                ____t_result_4420 = __O[2203]
             else
-                local ____t_result_4391
+                local ____t_result_4419
                 if __t(__L1.room) then
-                    ____t_result_4391 = __L1.room.phase ~= "inside"
+                    ____t_result_4419 = __L1.room.phase ~= "inside"
                 else
-                    ____t_result_4391 = __L1.room
+                    ____t_result_4419 = __L1.room
                 end
-                ____t_result_4392 = ____t_result_4391
+                ____t_result_4420 = ____t_result_4419
             end
-            __O[2187] = ____t_result_4392
-            if ____t_4393(____t_result_4392) then
-                ____t_result_4395 = __O[2187]
+            __O[2204] = ____t_result_4420
+            if ____t_4421(____t_result_4420) then
+                ____t_result_4423 = __O[2204]
             else
-                local ____t_result_4394
+                local ____t_result_4422
                 if __t(__L1.arena) then
-                    ____t_result_4394 = __L1.arena.phase ~= "active"
+                    ____t_result_4422 = __L1.arena.phase ~= "active"
                 else
-                    ____t_result_4394 = __L1.arena
+                    ____t_result_4422 = __L1.arena
                 end
-                ____t_result_4395 = ____t_result_4394
+                ____t_result_4423 = ____t_result_4422
             end
-            if ____t_4396(____t_result_4395) then
+            if ____t_4424(____t_result_4423) then
                 return
             end
-            local ____t_4400 = __t
-            local ____t_result_4399
-            local ____t_4398 = __t
-            local ____temp_4397 = code == "Enter"
-            __O[2188] = ____temp_4397
-            if ____t_4398(____temp_4397) then
-                ____t_result_4399 = __L1:keyMatches("interact", code)
+            local ____t_4428 = __t
+            local ____t_result_4427
+            local ____t_4426 = __t
+            local ____temp_4425 = code == "Enter"
+            __O[2205] = ____temp_4425
+            if ____t_4426(____temp_4425) then
+                ____t_result_4427 = __L1:keyMatches("interact", code)
             else
-                ____t_result_4399 = __O[2188]
+                ____t_result_4427 = __O[2205]
             end
-            if ____t_4400(____t_result_4399) then
+            if ____t_4428(____t_result_4427) then
                 local button = __L1:visibleKeyboardButton(e.target)
                 if __t(button) then
                     __call(
@@ -24258,36 +24399,36 @@ local __O = {};
                     return
                 end
             end
-            local ____t_result_4404
-            local ____t_4403 = __t
-            local ____opt_4401 = window.ControlSettings
-            if ____opt_4401 ~= nil then
-                ____opt_4401 = ____opt_4401:getActionsForCode(code)
+            local ____t_result_4432
+            local ____t_4431 = __t
+            local ____opt_4429 = window.ControlSettings
+            if ____opt_4429 ~= nil then
+                ____opt_4429 = ____opt_4429:getActionsForCode(code)
             end
-            __O[2189] = ____opt_4401
-            if ____t_4403(____opt_4401) then
-                ____t_result_4404 = __O[2189]
+            __O[2206] = ____opt_4429
+            if ____t_4431(____opt_4429) then
+                ____t_result_4432 = __O[2206]
             else
-                ____t_result_4404 = __call(
+                ____t_result_4432 = __call(
                     __keys(__L1.defaultKeys),
                     "filter",
                     function(____, a) return __L1:keyMatches(a, code) end
                 )
             end
-            local mapped = ____t_result_4404
+            local mapped = ____t_result_4432
             if not __t(__len(mapped)) then
                 return
             end
             e:preventDefault()
             local held = not not __t(__get(__L1.keys, code))
-            local ____t_4406 = __t
-            local ____t_result_4405
+            local ____t_4434 = __t
+            local ____t_result_4433
             if __t(e["repeat"]) then
-                ____t_result_4405 = not __t(held)
+                ____t_result_4433 = not __t(held)
             else
-                ____t_result_4405 = e["repeat"]
+                ____t_result_4433 = e["repeat"]
             end
-            if ____t_4406(____t_result_4405) then
+            if ____t_4434(____t_result_4433) then
                 return
             end
             __set(__L1.keys, code, true)
@@ -24310,34 +24451,34 @@ local __O = {};
     window:addEventListener(
         "controls-capture",
         function(____, e)
-            local ____t_4409 = __t
-            local ____opt_4407 = e.detail
-            if ____opt_4407 ~= nil then
-                ____opt_4407 = ____opt_4407.active
+            local ____t_4437 = __t
+            local ____opt_4435 = e.detail
+            if ____opt_4435 ~= nil then
+                ____opt_4435 = ____opt_4435.active
             end
-            __L1.inputCaptured = not not ____t_4409(____opt_4407)
+            __L1.inputCaptured = not not ____t_4437(____opt_4435)
             __L1:releaseInputs()
         end
     )
     window.document:addEventListener(
         "focusin",
         function(____, e)
-            local ____t_4417 = __t
-            local ____t_result_4416
-            local ____t_4411 = __t
-            local ____temp_4410 = __L1:editableTarget(e.target)
-            __O[2192] = ____temp_4410
-            if ____t_4411(____temp_4410) then
-                ____t_result_4416 = __O[2192]
+            local ____t_4445 = __t
+            local ____t_result_4444
+            local ____t_4439 = __t
+            local ____temp_4438 = __L1:editableTarget(e.target)
+            __O[2209] = ____temp_4438
+            if ____t_4439(____temp_4438) then
+                ____t_result_4444 = __O[2209]
             else
-                local ____opt_4414 = e.target
-                local ____opt_4412 = ____opt_4414 and ____opt_4414.closest
-                if ____opt_4412 ~= nil then
-                    ____opt_4412 = ____opt_4412(____opt_4414, "dialog[open]")
+                local ____opt_4442 = e.target
+                local ____opt_4440 = ____opt_4442 and ____opt_4442.closest
+                if ____opt_4440 ~= nil then
+                    ____opt_4440 = ____opt_4440(____opt_4442, "dialog[open]")
                 end
-                ____t_result_4416 = ____opt_4412
+                ____t_result_4444 = ____opt_4440
             end
-            if ____t_4417(____t_result_4416) then
+            if ____t_4445(____t_result_4444) then
                 __L1:releaseInputs()
             end
         end
@@ -24346,77 +24487,77 @@ local __O = {};
         "blur",
         function()
             __L1:releaseInputs()
-            local ____t_4421 = __t
-            local ____t_result_4420
-            local ____t_4419 = __t
-            local ____t_result_4418
+            local ____t_4449 = __t
+            local ____t_result_4448
+            local ____t_4447 = __t
+            local ____t_result_4446
             if __t(__L1.started) then
-                ____t_result_4418 = not __t(__L1.dialog)
+                ____t_result_4446 = not __t(__L1.dialog)
             else
-                ____t_result_4418 = __L1.started
+                ____t_result_4446 = __L1.started
             end
-            __O[2193] = ____t_result_4418
-            if ____t_4419(____t_result_4418) then
-                ____t_result_4420 = not __t(__L1.won)
+            __O[2210] = ____t_result_4446
+            if ____t_4447(____t_result_4446) then
+                ____t_result_4448 = not __t(__L1.won)
             else
-                ____t_result_4420 = __O[2193]
+                ____t_result_4448 = __O[2210]
             end
-            if ____t_4421(____t_result_4420) then
+            if ____t_4449(____t_result_4448) then
                 __L1:pause()
             end
         end
     )
     window:addEventListener("pagehide", __L1.releaseInputs)
     window:addEventListener("orientationchange", __L1.releaseInputs)
-    local ____this_4429
-    ____this_4429 = window.document
-    local ____opt_4422 = ____this_4429.addEventListener
-    if ____opt_4422 ~= nil then
-        ____opt_4422(
-            ____this_4429,
+    local ____this_4457
+    ____this_4457 = window.document
+    local ____opt_4450 = ____this_4457.addEventListener
+    if ____opt_4450 ~= nil then
+        ____opt_4450(
+            ____this_4457,
             "visibilitychange",
             function()
                 __L1:releaseInputs()
-                local ____t_4428 = __t
-                local ____t_result_4427
-                local ____t_4426 = __t
-                local ____t_result_4425
-                local ____t_4424 = __t
-                local ____t_result_4423
+                local ____t_4456 = __t
+                local ____t_result_4455
+                local ____t_4454 = __t
+                local ____t_result_4453
+                local ____t_4452 = __t
+                local ____t_result_4451
                 if __t(window.document.hidden) then
-                    ____t_result_4423 = __L1.started
+                    ____t_result_4451 = __L1.started
                 else
-                    ____t_result_4423 = window.document.hidden
+                    ____t_result_4451 = window.document.hidden
                 end
-                __O[2194] = ____t_result_4423
-                if ____t_4424(____t_result_4423) then
-                    ____t_result_4425 = not __t(__L1.won)
+                __O[2211] = ____t_result_4451
+                if ____t_4452(____t_result_4451) then
+                    ____t_result_4453 = not __t(__L1.won)
                 else
-                    ____t_result_4425 = __O[2194]
+                    ____t_result_4453 = __O[2211]
                 end
-                __O[2195] = ____t_result_4425
-                if ____t_4426(____t_result_4425) then
-                    ____t_result_4427 = not __t(__L1.dialog)
+                __O[2212] = ____t_result_4453
+                if ____t_4454(____t_result_4453) then
+                    ____t_result_4455 = not __t(__L1.dialog)
                 else
-                    ____t_result_4427 = __O[2195]
+                    ____t_result_4455 = __O[2212]
                 end
-                if ____t_4428(____t_result_4427) then
+                if ____t_4456(____t_result_4455) then
                     __L1:pause()
                 end
             end
         )
     end
-    local ____this_4431
-    ____this_4431 = window.document
-    local ____opt_4430 = ____this_4431.addEventListener
-    if ____opt_4430 ~= nil then
-        ____opt_4430(____this_4431, "fullscreenchange", __L1.releaseInputs)
+    local ____this_4459
+    ____this_4459 = window.document
+    local ____opt_4458 = ____this_4459.addEventListener
+    if ____opt_4458 ~= nil then
+        ____opt_4458(____this_4459, "fullscreenchange", __L1.releaseInputs)
     end
     for ____, target in __iterar((__arrL({window.document, window}, 2))) do
         for ____, eventName in __iterar((__arrL({"pointerup", "pointercancel", "lostpointercapture"}, 3))) do
-            local ____opt_4432 = target.addEventListener
-            if ____opt_4432 ~= nil then
-                ____opt_4432(
+            local ____opt_4460 = target.addEventListener
+            if ____opt_4460 ~= nil then
+                ____opt_4460(
                     target,
                     eventName,
                     function(____, e) return __L1:releasePointer(e.pointerId) end,
@@ -24424,41 +24565,41 @@ local __O = {};
                 )
             end
         end
-        local ____opt_4434 = target.addEventListener
-        if ____opt_4434 ~= nil then
-            ____opt_4434(
+        local ____opt_4462 = target.addEventListener
+        if ____opt_4462 ~= nil then
+            ____opt_4462(
                 target,
                 "pointermove",
                 function(____, e)
                     local p = __call(__L1.activePointers, "get", e.pointerId)
                     if __t(p) then
-                        local ____e_clientX_4435 = e.clientX
-                        if ____e_clientX_4435 == nil then
-                            ____e_clientX_4435 = p.x
+                        local ____e_clientX_4463 = e.clientX
+                        if ____e_clientX_4463 == nil then
+                            ____e_clientX_4463 = p.x
                         end
-                        p.x = ____e_clientX_4435
-                        local ____e_clientY_4436 = e.clientY
-                        if ____e_clientY_4436 == nil then
-                            ____e_clientY_4436 = p.y
+                        p.x = ____e_clientX_4463
+                        local ____e_clientY_4464 = e.clientY
+                        if ____e_clientY_4464 == nil then
+                            ____e_clientY_4464 = p.y
                         end
-                        p.y = ____e_clientY_4436
+                        p.y = ____e_clientY_4464
                     end
                 end,
                 true
             )
         end
-        local ____opt_4438 = target.addEventListener
-        if ____opt_4438 ~= nil then
-            ____opt_4438(
+        local ____opt_4466 = target.addEventListener
+        if ____opt_4466 ~= nil then
+            ____opt_4466(
                 target,
                 "touchend",
                 __L1.reconcileTouches,
                 __ord({capture = true, passive = true}, "capture,passive")
             )
         end
-        local ____opt_4440 = target.addEventListener
-        if ____opt_4440 ~= nil then
-            ____opt_4440(
+        local ____opt_4468 = target.addEventListener
+        if ____opt_4468 ~= nil then
+            ____opt_4468(
                 target,
                 "touchcancel",
                 __L1.reconcileTouches,
@@ -24474,150 +24615,150 @@ local __O = {};
             el:addEventListener(
                 "pointerdown",
                 function(____, e)
-                    local ____t_4445 = __t
-                    local ____t_result_4444
-                    local ____t_4443 = __t
-                    local ____temp_4442 = e.pointerType == "mouse" and e.button ~= 0
-                    __O[2196] = ____temp_4442
-                    if ____t_4443(____temp_4442) then
-                        ____t_result_4444 = __O[2196]
+                    local ____t_4473 = __t
+                    local ____t_result_4472
+                    local ____t_4471 = __t
+                    local ____temp_4470 = e.pointerType == "mouse" and e.button ~= 0
+                    __O[2213] = ____temp_4470
+                    if ____t_4471(____temp_4470) then
+                        ____t_result_4472 = __O[2213]
                     else
-                        ____t_result_4444 = __call(__L1.activePointers, "has", e.pointerId)
+                        ____t_result_4472 = __call(__L1.activePointers, "has", e.pointerId)
                     end
-                    if ____t_4445(____t_result_4444) then
+                    if ____t_4473(____t_result_4472) then
                         return
                     end
                     e:preventDefault()
-                    local ____t_4482 = __t
-                    local ____t_result_4481
-                    local ____t_4452 = __t
-                    local ____t_result_4451
+                    local ____t_4510 = __t
+                    local ____t_result_4509
+                    local ____t_4480 = __t
+                    local ____t_result_4479
                     if __t(__L1.inputCaptured) then
-                        ____t_result_4451 = __L1.inputCaptured
+                        ____t_result_4479 = __L1.inputCaptured
                     else
-                        local ____opt_4448 = window.Arena
-                        if ____opt_4448 ~= nil then
-                            ____opt_4448 = ____opt_4448.isOpen
+                        local ____opt_4476 = window.Arena
+                        if ____opt_4476 ~= nil then
+                            ____opt_4476 = ____opt_4476.isOpen
                         end
-                        local ____opt_result_4450
-                        if ____opt_4448 ~= nil then
-                            ____opt_result_4450 = ____opt_4448(____opt_4448)
+                        local ____opt_result_4478
+                        if ____opt_4476 ~= nil then
+                            ____opt_result_4478 = ____opt_4476(____opt_4476)
                         end
-                        ____t_result_4451 = ____opt_result_4450
+                        ____t_result_4479 = ____opt_result_4478
                     end
-                    __O[2208] = ____t_result_4451
-                    if ____t_4452(____t_result_4451) then
-                        ____t_result_4481 = __O[2208]
+                    __O[2225] = ____t_result_4479
+                    if ____t_4480(____t_result_4479) then
+                        ____t_result_4509 = __O[2225]
                     else
-                        local ____t_result_4480
-                        local ____t_4454 = __t
-                        local ____call_result_4453 = __call(__L1.heldActions, "has", a)
-                        __O[2207] = ____call_result_4453
-                        if ____t_4454(____call_result_4453) then
-                            local ____t_result_4479
-                            local ____t_4476 = __t
-                            local ____t_result_4475
-                            local ____t_4474 = __t
-                            local ____t_result_4473
-                            local ____t_4472 = __t
-                            local ____t_result_4471
-                            local ____t_4469 = __t
-                            local ____t_result_4468
-                            local ____t_4466 = __t
-                            local ____t_result_4465
-                            local ____t_4464 = __t
-                            local ____t_result_4463
-                            local ____t_4462 = __t
-                            local ____t_result_4461
-                            local ____t_4460 = __t
-                            local ____t_result_4459
-                            local ____t_4458 = __t
-                            local ____t_result_4457
-                            local ____t_4456 = __t
-                            local ____temp_4455 = not __t(__L1.started)
-                            __O[2197] = ____temp_4455
-                            if ____t_4456(____temp_4455) then
-                                ____t_result_4457 = __O[2197]
+                        local ____t_result_4508
+                        local ____t_4482 = __t
+                        local ____call_result_4481 = __call(__L1.heldActions, "has", a)
+                        __O[2224] = ____call_result_4481
+                        if ____t_4482(____call_result_4481) then
+                            local ____t_result_4507
+                            local ____t_4504 = __t
+                            local ____t_result_4503
+                            local ____t_4502 = __t
+                            local ____t_result_4501
+                            local ____t_4500 = __t
+                            local ____t_result_4499
+                            local ____t_4497 = __t
+                            local ____t_result_4496
+                            local ____t_4494 = __t
+                            local ____t_result_4493
+                            local ____t_4492 = __t
+                            local ____t_result_4491
+                            local ____t_4490 = __t
+                            local ____t_result_4489
+                            local ____t_4488 = __t
+                            local ____t_result_4487
+                            local ____t_4486 = __t
+                            local ____t_result_4485
+                            local ____t_4484 = __t
+                            local ____temp_4483 = not __t(__L1.started)
+                            __O[2214] = ____temp_4483
+                            if ____t_4484(____temp_4483) then
+                                ____t_result_4485 = __O[2214]
                             else
-                                ____t_result_4457 = __L1.paused
+                                ____t_result_4485 = __L1.paused
                             end
-                            __O[2198] = ____t_result_4457
-                            if ____t_4458(____t_result_4457) then
-                                ____t_result_4459 = __O[2198]
+                            __O[2215] = ____t_result_4485
+                            if ____t_4486(____t_result_4485) then
+                                ____t_result_4487 = __O[2215]
                             else
-                                ____t_result_4459 = __L1.dialog
+                                ____t_result_4487 = __L1.dialog
                             end
-                            __O[2199] = ____t_result_4459
-                            if ____t_4460(____t_result_4459) then
-                                ____t_result_4461 = __O[2199]
+                            __O[2216] = ____t_result_4487
+                            if ____t_4488(____t_result_4487) then
+                                ____t_result_4489 = __O[2216]
                             else
-                                ____t_result_4461 = __L1.won
+                                ____t_result_4489 = __L1.won
                             end
-                            __O[2200] = ____t_result_4461
-                            if ____t_4462(____t_result_4461) then
-                                ____t_result_4463 = __O[2200]
+                            __O[2217] = ____t_result_4489
+                            if ____t_4490(____t_result_4489) then
+                                ____t_result_4491 = __O[2217]
                             else
-                                ____t_result_4463 = __L1.defeated
+                                ____t_result_4491 = __L1.defeated
                             end
-                            __O[2201] = ____t_result_4463
-                            if ____t_4464(____t_result_4463) then
-                                ____t_result_4465 = __O[2201]
+                            __O[2218] = ____t_result_4491
+                            if ____t_4492(____t_result_4491) then
+                                ____t_result_4493 = __O[2218]
                             else
-                                ____t_result_4465 = __L1.cutscene
+                                ____t_result_4493 = __L1.cutscene
                             end
-                            __O[2202] = ____t_result_4465
-                            if ____t_4466(____t_result_4465) then
-                                ____t_result_4468 = __O[2202]
+                            __O[2219] = ____t_result_4493
+                            if ____t_4494(____t_result_4493) then
+                                ____t_result_4496 = __O[2219]
                             else
-                                local ____t_result_4467
+                                local ____t_result_4495
                                 if __t(__L1.room) then
-                                    ____t_result_4467 = __L1.room.phase ~= "inside"
+                                    ____t_result_4495 = __L1.room.phase ~= "inside"
                                 else
-                                    ____t_result_4467 = __L1.room
+                                    ____t_result_4495 = __L1.room
                                 end
-                                ____t_result_4468 = ____t_result_4467
+                                ____t_result_4496 = ____t_result_4495
                             end
-                            __O[2203] = ____t_result_4468
-                            if ____t_4469(____t_result_4468) then
-                                ____t_result_4471 = __O[2203]
+                            __O[2220] = ____t_result_4496
+                            if ____t_4497(____t_result_4496) then
+                                ____t_result_4499 = __O[2220]
                             else
-                                local ____t_result_4470
+                                local ____t_result_4498
                                 if __t(__L1.arena) then
-                                    ____t_result_4470 = __L1.arena.phase ~= "active"
+                                    ____t_result_4498 = __L1.arena.phase ~= "active"
                                 else
-                                    ____t_result_4470 = __L1.arena
+                                    ____t_result_4498 = __L1.arena
                                 end
-                                ____t_result_4471 = ____t_result_4470
+                                ____t_result_4499 = ____t_result_4498
                             end
-                            __O[2204] = ____t_result_4471
-                            if ____t_4472(____t_result_4471) then
-                                ____t_result_4473 = __O[2204]
+                            __O[2221] = ____t_result_4499
+                            if ____t_4500(____t_result_4499) then
+                                ____t_result_4501 = __O[2221]
                             else
-                                ____t_result_4473 = __L1.routeTransition
+                                ____t_result_4501 = __L1.routeTransition
                             end
-                            __O[2205] = ____t_result_4473
-                            if ____t_4474(____t_result_4473) then
-                                ____t_result_4475 = __O[2205]
+                            __O[2222] = ____t_result_4501
+                            if ____t_4502(____t_result_4501) then
+                                ____t_result_4503 = __O[2222]
                             else
-                                ____t_result_4475 = __L1.activity
+                                ____t_result_4503 = __L1.activity
                             end
-                            __O[2206] = ____t_result_4475
-                            if ____t_4476(____t_result_4475) then
-                                ____t_result_4479 = __O[2206]
+                            __O[2223] = ____t_result_4503
+                            if ____t_4504(____t_result_4503) then
+                                ____t_result_4507 = __O[2223]
                             else
-                                local ____opt_4477 = __L1.training
-                                if ____opt_4477 ~= nil then
-                                    ____opt_4477 = ____opt_4477.active
+                                local ____opt_4505 = __L1.training
+                                if ____opt_4505 ~= nil then
+                                    ____opt_4505 = ____opt_4505.active
                                 end
-                                ____t_result_4479 = ____opt_4477
+                                ____t_result_4507 = ____opt_4505
                             end
-                            ____t_result_4480 = ____t_result_4479
+                            ____t_result_4508 = ____t_result_4507
                         else
-                            ____t_result_4480 = __O[2207]
+                            ____t_result_4508 = __O[2224]
                         end
-                        ____t_result_4481 = ____t_result_4480
+                        ____t_result_4509 = ____t_result_4508
                     end
-                    if ____t_4482(____t_result_4481) then
+                    if ____t_4510(____t_result_4509) then
                         return
                     end
                     __call(
@@ -24626,30 +24767,30 @@ local __O = {};
                         el,
                         window.performance:now()
                     )
-                    local ____call_4489 = __call
-                    local ____L1_activePointers_4487 = __L1.activePointers
-                    local ____e_pointerId_4488 = e.pointerId
-                    local ____el_4486 = el
-                    local ____t_result_4483
+                    local ____call_4517 = __call
+                    local ____L1_activePointers_4515 = __L1.activePointers
+                    local ____e_pointerId_4516 = e.pointerId
+                    local ____el_4514 = el
+                    local ____t_result_4511
                     if __t(e.pointerType) then
-                        ____t_result_4483 = e.pointerType
+                        ____t_result_4511 = e.pointerType
                     else
-                        ____t_result_4483 = "touch"
+                        ____t_result_4511 = "touch"
                     end
-                    local ____e_clientX_4484 = e.clientX
-                    if ____e_clientX_4484 == nil then
-                        ____e_clientX_4484 = 0
+                    local ____e_clientX_4512 = e.clientX
+                    if ____e_clientX_4512 == nil then
+                        ____e_clientX_4512 = 0
                     end
-                    local ____e_clientY_4485 = e.clientY
-                    if ____e_clientY_4485 == nil then
-                        ____e_clientY_4485 = 0
+                    local ____e_clientY_4513 = e.clientY
+                    if ____e_clientY_4513 == nil then
+                        ____e_clientY_4513 = 0
                     end
-                    ____call_4489(____L1_activePointers_4487, "set", ____e_pointerId_4488, {
+                    ____call_4517(____L1_activePointers_4515, "set", ____e_pointerId_4516, {
                         action = a,
-                        element = ____el_4486,
-                        pointerType = ____t_result_4483,
-                        x = ____e_clientX_4484,
-                        y = ____e_clientY_4485
+                        element = ____el_4514,
+                        pointerType = ____t_result_4511,
+                        x = ____e_clientX_4512,
+                        y = ____e_clientY_4513
                     })
                     __L1:safe(function() return el:setPointerCapture(e.pointerId) end)
                     __L1:refreshTouchState()
@@ -24667,52 +24808,52 @@ local __O = {};
             el:addEventListener(
                 "click",
                 function(____, e)
-                    local ____t_4499 = __t
-                    local ____t_result_4498
-                    local ____t_4497 = __t
-                    local ____t_result_4496
-                    local ____t_4493 = __t
-                    local ____t_result_4492
-                    local ____t_4491 = __t
-                    local ____temp_4490 = e.detail ~= 0
-                    __O[2209] = ____temp_4490
-                    if ____t_4491(____temp_4490) then
-                        ____t_result_4492 = __O[2209]
+                    local ____t_4527 = __t
+                    local ____t_result_4526
+                    local ____t_4525 = __t
+                    local ____t_result_4524
+                    local ____t_4521 = __t
+                    local ____t_result_4520
+                    local ____t_4519 = __t
+                    local ____temp_4518 = e.detail ~= 0
+                    __O[2226] = ____temp_4518
+                    if ____t_4519(____temp_4518) then
+                        ____t_result_4520 = __O[2226]
                     else
-                        ____t_result_4492 = __call(__L1.heldActions, "has", a)
+                        ____t_result_4520 = __call(__L1.heldActions, "has", a)
                     end
-                    __O[2210] = ____t_result_4492
-                    if ____t_4493(____t_result_4492) then
-                        ____t_result_4496 = __O[2210]
+                    __O[2227] = ____t_result_4520
+                    if ____t_4521(____t_result_4520) then
+                        ____t_result_4524 = __O[2227]
                     else
-                        local ____opt_4494 = e.sourceCapabilities
-                        if ____opt_4494 ~= nil then
-                            ____opt_4494 = ____opt_4494.firesTouchEvents
+                        local ____opt_4522 = e.sourceCapabilities
+                        if ____opt_4522 ~= nil then
+                            ____opt_4522 = ____opt_4522.firesTouchEvents
                         end
-                        ____t_result_4496 = ____opt_4494
+                        ____t_result_4524 = ____opt_4522
                     end
-                    __O[2211] = ____t_result_4496
-                    if ____t_4497(____t_result_4496) then
-                        ____t_result_4498 = __O[2211]
+                    __O[2228] = ____t_result_4524
+                    if ____t_4525(____t_result_4524) then
+                        ____t_result_4526 = __O[2228]
                     else
-                        ____t_result_4498 = e.pointerType == "touch"
+                        ____t_result_4526 = e.pointerType == "touch"
                     end
-                    if ____t_4499(____t_result_4498) then
+                    if ____t_4527(____t_result_4526) then
                         return
                     end
                     local pointerAt = __call(__L1.pointerTimes, "get", el)
                     local keyboardAt = __call(__L1.keyboardClicks, "get", el)
-                    local ____t_4503 = __t
-                    local ____t_result_4502
-                    local ____t_4501 = __t
-                    local ____temp_4500 = pointerAt ~= nil and window.performance:now() - pointerAt < 750
-                    __O[2212] = ____temp_4500
-                    if ____t_4501(____temp_4500) then
-                        ____t_result_4502 = not __t(keyboardAt ~= nil and __ge(keyboardAt, pointerAt))
+                    local ____t_4531 = __t
+                    local ____t_result_4530
+                    local ____t_4529 = __t
+                    local ____temp_4528 = pointerAt ~= nil and window.performance:now() - pointerAt < 750
+                    __O[2229] = ____temp_4528
+                    if ____t_4529(____temp_4528) then
+                        ____t_result_4530 = not __t(keyboardAt ~= nil and __ge(keyboardAt, pointerAt))
                     else
-                        ____t_result_4502 = __O[2212]
+                        ____t_result_4530 = __O[2229]
                     end
-                    if ____t_4503(____t_result_4502) then
+                    if ____t_4531(____t_result_4530) then
                         return
                     end
                     __L1:action(a)
@@ -24728,46 +24869,46 @@ local __O = {};
             function() return __L1:travel(__TS__Number(el.dataset.scene)) end
         ) end
     )
-    local ____opt_4504 = __L1["$"](__L1, "startBtn")
-    if ____opt_4504 ~= nil then
-        ____opt_4504:addEventListener(
+    local ____opt_4532 = __L1["$"](__L1, "startBtn")
+    if ____opt_4532 ~= nil then
+        ____opt_4532:addEventListener(
             "click",
             function() return __L1:start(false) end
         )
     end
-    local ____opt_4506 = __L1["$"](__L1, "continueBtn")
-    if ____opt_4506 ~= nil then
-        ____opt_4506:addEventListener(
+    local ____opt_4534 = __L1["$"](__L1, "continueBtn")
+    if ____opt_4534 ~= nil then
+        ____opt_4534:addEventListener(
             "click",
             function() return __L1:start(true) end
         )
     end
-    local ____opt_4508 = __L1["$"](__L1, "pauseBtn")
-    if ____opt_4508 ~= nil then
-        ____opt_4508:addEventListener(
+    local ____opt_4536 = __L1["$"](__L1, "pauseBtn")
+    if ____opt_4536 ~= nil then
+        ____opt_4536:addEventListener(
             "click",
             function()
-                local ____t_result_4509
+                local ____t_result_4537
                 if __t(__L1.paused) then
-                    ____t_result_4509 = __L1:resume()
+                    ____t_result_4537 = __L1:resume()
                 else
-                    ____t_result_4509 = __L1:pause()
+                    ____t_result_4537 = __L1:pause()
                 end
-                return ____t_result_4509
+                return ____t_result_4537
             end
         )
     end
-    local ____opt_4511 = __L1["$"](__L1, "resumeBtn")
-    if ____opt_4511 ~= nil then
-        ____opt_4511:addEventListener("click", __L1.resume)
+    local ____opt_4539 = __L1["$"](__L1, "resumeBtn")
+    if ____opt_4539 ~= nil then
+        ____opt_4539:addEventListener("click", __L1.resume)
     end
-    local ____opt_4513 = __L1["$"](__L1, "restartBtn")
-    if ____opt_4513 ~= nil then
-        ____opt_4513:addEventListener("click", __L1.reset)
+    local ____opt_4541 = __L1["$"](__L1, "restartBtn")
+    if ____opt_4541 ~= nil then
+        ____opt_4541:addEventListener("click", __L1.reset)
     end
-    local ____opt_4515 = __L1["$"](__L1, "soundBtn")
-    if ____opt_4515 ~= nil then
-        ____opt_4515:addEventListener(
+    local ____opt_4543 = __L1["$"](__L1, "soundBtn")
+    if ____opt_4543 ~= nil then
+        ____opt_4543:addEventListener(
             "click",
             function()
                 __L1:setSoundEnabled(not __t(__L1.sound))
@@ -24778,29 +24919,29 @@ local __O = {};
     do
         local i = 0
         while i < 3 do
-            local ____opt_4517 = __L1["$"](
+            local ____opt_4545 = __L1["$"](
                 __L1,
                 __add("activityChoice", i)
             )
-            if ____opt_4517 ~= nil then
-                ____opt_4517:addEventListener(
+            if ____opt_4545 ~= nil then
+                ____opt_4545:addEventListener(
                     "click",
                     function()
-                        local ____L1_submitActivity_4521 = __L1.submitActivity
-                        local ____opt_4518 = __L1["$"](
+                        local ____L1_submitActivity_4549 = __L1.submitActivity
+                        local ____opt_4546 = __L1["$"](
                             __L1,
                             __add("activityChoice", i)
                         )
-                        if ____opt_4518 ~= nil then
-                            ____opt_4518 = ____opt_4518.dataset.value
+                        if ____opt_4546 ~= nil then
+                            ____opt_4546 = ____opt_4546.dataset.value
                         end
-                        local ____opt_4518_4520 = ____opt_4518
-                        if ____opt_4518_4520 == nil then
-                            ____opt_4518_4520 = i
+                        local ____opt_4546_4548 = ____opt_4546
+                        if ____opt_4546_4548 == nil then
+                            ____opt_4546_4548 = i
                         end
-                        return ____L1_submitActivity_4521(
+                        return ____L1_submitActivity_4549(
                             __L1,
-                            __TS__Number(____opt_4518_4520)
+                            __TS__Number(____opt_4546_4548)
                         )
                     end
                 )
@@ -24808,33 +24949,33 @@ local __O = {};
             i = i + 1
         end
     end
-    local ____opt_4523 = __L1["$"](__L1, "activityExitBtn")
-    if ____opt_4523 ~= nil then
-        ____opt_4523:addEventListener("click", __L1.cancelActivity)
+    local ____opt_4551 = __L1["$"](__L1, "activityExitBtn")
+    if ____opt_4551 ~= nil then
+        ____opt_4551:addEventListener("click", __L1.cancelActivity)
     end
-    local ____opt_4525 = __L1["$"](__L1, "cutsceneNextBtn")
-    if ____opt_4525 ~= nil then
-        ____opt_4525:addEventListener("click", __L1.advanceCutscene)
+    local ____opt_4553 = __L1["$"](__L1, "cutsceneNextBtn")
+    if ____opt_4553 ~= nil then
+        ____opt_4553:addEventListener("click", __L1.advanceCutscene)
     end
-    local ____opt_4527 = __L1["$"](__L1, "cutsceneSkipBtn")
-    if ____opt_4527 ~= nil then
-        ____opt_4527:addEventListener("click", __L1.skipCutscene)
+    local ____opt_4555 = __L1["$"](__L1, "cutsceneSkipBtn")
+    if ____opt_4555 ~= nil then
+        ____opt_4555:addEventListener("click", __L1.skipCutscene)
     end
-    local ____opt_4529 = __L1["$"](__L1, "replayIntroBtn")
-    if ____opt_4529 ~= nil then
-        ____opt_4529:addEventListener("click", __L1.replayIntro)
+    local ____opt_4557 = __L1["$"](__L1, "replayIntroBtn")
+    if ____opt_4557 ~= nil then
+        ____opt_4557:addEventListener("click", __L1.replayIntro)
     end
-    local ____opt_4531 = __L1["$"](__L1, "roomExitBtn")
-    if ____opt_4531 ~= nil then
-        ____opt_4531:addEventListener("click", __L1.exitRoom)
+    local ____opt_4559 = __L1["$"](__L1, "roomExitBtn")
+    if ____opt_4559 ~= nil then
+        ____opt_4559:addEventListener("click", __L1.exitRoom)
     end
-    local ____opt_4533 = __L1["$"](__L1, "trainingExitBtn")
-    if ____opt_4533 ~= nil then
-        ____opt_4533:addEventListener("click", __L1.cancelTraining)
+    local ____opt_4561 = __L1["$"](__L1, "trainingExitBtn")
+    if ____opt_4561 ~= nil then
+        ____opt_4561:addEventListener("click", __L1.cancelTraining)
     end
-    local ____opt_4535 = __L1["$"](__L1, "respawnBtn")
-    if ____opt_4535 ~= nil then
-        ____opt_4535:addEventListener("click", __L1.respawn)
+    local ____opt_4563 = __L1["$"](__L1, "respawnBtn")
+    if ____opt_4563 ~= nil then
+        ____opt_4563:addEventListener("click", __L1.respawn)
     end
     __L1.sandboxScenes = __ord({
         igor = 1,
@@ -24872,25 +25013,25 @@ local __O = {};
             replayEpilogue = __L1.replayEpilogue,
             returnToMenu = __L1.returnToMenu,
             getViewTarget = function()
-                local ____opt_4539 = __L1.ollyanEncounter
-                if ____opt_4539 ~= nil then
-                    ____opt_4539 = ____opt_4539.player
+                local ____opt_4567 = __L1.ollyanEncounter
+                if ____opt_4567 ~= nil then
+                    ____opt_4567 = ____opt_4567.player
                 end
-                local ____opt_result_4541
-                if ____opt_4539 ~= nil then
-                    ____opt_result_4541 = ____opt_4539.y
+                local ____opt_result_4569
+                if ____opt_4567 ~= nil then
+                    ____opt_result_4569 = ____opt_4567.y
                 end
-                local ____opt_result_4541_4542 = ____opt_result_4541
-                if ____opt_result_4541_4542 == nil then
-                    ____opt_result_4541_4542 = __L1.player.y
+                local ____opt_result_4569_4570 = ____opt_result_4569
+                if ____opt_result_4569_4570 == nil then
+                    ____opt_result_4569_4570 = __L1.player.y
                 end
-                local ____t_result_4543
+                local ____t_result_4571
                 if __t(__L1.vehicle) then
-                    ____t_result_4543 = __L1.vehicle
+                    ____t_result_4571 = __L1.vehicle
                 else
-                    ____t_result_4543 = not not __t(__L1.ollyanEncounter)
+                    ____t_result_4571 = not not __t(__L1.ollyanEncounter)
                 end
-                return {y = ____opt_result_4541_4542, vehicle = ____t_result_4543}
+                return {y = ____opt_result_4569_4570, vehicle = ____t_result_4571}
             end,
             getDialogueAnchor = __L1.getDialogueAnchor,
             submitActivity = __L1.submitActivity,
@@ -24917,52 +25058,52 @@ local __O = {};
             taunt = __L1.taunt,
             craft = __L1.craft,
             getState = function()
-                local ____t_result_4550
-                local ____t_4549 = __t
-                local ____opt_4546 = window.CampaignRun
-                if ____opt_4546 ~= nil then
-                    ____opt_4546 = ____opt_4546.getState
+                local ____t_result_4578
+                local ____t_4577 = __t
+                local ____opt_4574 = window.CampaignRun
+                if ____opt_4574 ~= nil then
+                    ____opt_4574 = ____opt_4574.getState
                 end
-                local ____opt_result_4548
-                if ____opt_4546 ~= nil then
-                    ____opt_result_4548 = ____opt_4546(____opt_4546)
+                local ____opt_result_4576
+                if ____opt_4574 ~= nil then
+                    ____opt_result_4576 = ____opt_4574(____opt_4574)
                 end
-                __O[2248] = ____opt_result_4548
-                if ____t_4549(____opt_result_4548) then
-                    ____t_result_4550 = __O[2248]
+                __O[2265] = ____opt_result_4576
+                if ____t_4577(____opt_result_4576) then
+                    ____t_result_4578 = __O[2265]
                 else
-                    ____t_result_4550 = nil
+                    ____t_result_4578 = nil
                 end
-                local ____t_result_4551
+                local ____t_result_4579
                 if __t(__L1.sandbox) then
-                    ____t_result_4551 = {type = __L1.sandbox.type, result = __L1.sandbox.result, difficultyMode = __L1.sandbox.difficultyMode}
+                    ____t_result_4579 = {type = __L1.sandbox.type, result = __L1.sandbox.result, difficultyMode = __L1.sandbox.difficultyMode}
                 else
-                    ____t_result_4551 = nil
+                    ____t_result_4579 = nil
                 end
-                local ____assign_result_4565 = __assign(
+                local ____assign_result_4593 = __assign(
                     {},
                     __L1:bivoltStatus()
                 )
-                local ____t_result_4552
+                local ____t_result_4580
                 if __t(__L1.ollyanEncounter) then
-                    ____t_result_4552 = __assign(
+                    ____t_result_4580 = __assign(
                         {},
                         window.OllyanEncounter:getStatus(__L1.ollyanEncounter),
                         {player = __assign({}, __L1.ollyanEncounter.player)}
                     )
                 else
-                    ____t_result_4552 = nil
+                    ____t_result_4580 = nil
                 end
-                local ____L1_started_4566 = __L1.started
-                local ____L1_playing_4567 = __L1.playing
-                local ____L1_paused_4568 = __L1.paused
-                local ____L1_won_4569 = __L1.won
-                local ____L1_chapterEnded_4570 = __L1.chapterEnded
-                local ____L1_scene_4571 = __L1.scene
-                local ____L1_camera_4572 = __L1.camera
-                local ____t_result_4553
+                local ____L1_started_4594 = __L1.started
+                local ____L1_playing_4595 = __L1.playing
+                local ____L1_paused_4596 = __L1.paused
+                local ____L1_won_4597 = __L1.won
+                local ____L1_chapterEnded_4598 = __L1.chapterEnded
+                local ____L1_scene_4599 = __L1.scene
+                local ____L1_camera_4600 = __L1.camera
+                local ____t_result_4581
                 if __t(__L1:closestBoss()) then
-                    ____t_result_4553 = __assign(
+                    ____t_result_4581 = __assign(
                         {},
                         {
                             type = __L1:closestBoss().type,
@@ -24971,149 +25112,149 @@ local __O = {};
                         __L1:bossAccess(__L1:closestBoss())
                     )
                 else
-                    ____t_result_4553 = nil
+                    ____t_result_4581 = nil
                 end
-                local ____assign_result_4573 = __assign({}, __L1.q)
-                local ____assign_result_4574 = __assign({}, __L1.player)
-                local ____call_result_4575 = __call(
+                local ____assign_result_4601 = __assign({}, __L1.q)
+                local ____assign_result_4602 = __assign({}, __L1.player)
+                local ____call_result_4603 = __call(
                     __L1.enemies,
                     "map",
                     function(____, e) return __assign({}, e) end
                 )
-                local ____call_result_4576 = __call(
+                local ____call_result_4604 = __call(
                     __L1.targets,
                     "map",
                     function(____, t) return __assign({}, t) end
                 )
-                local ____t_result_4554
+                local ____t_result_4582
                 if __t(__L1.dialog) then
-                    ____t_result_4554 = __assign({}, __L1.dialog)
+                    ____t_result_4582 = __assign({}, __L1.dialog)
                 else
-                    ____t_result_4554 = nil
+                    ____t_result_4582 = nil
                 end
-                local ____assign_result_4577 = __assign({}, __L1.items)
-                local ____temp_4578 = __L1:materialCount()
-                local ____arr_result_4579 = __arr(__TS__Spread(__iter(__L1.collected)))
-                local ____L1_weapon_4580 = __L1.weapon
-                local ____get_result_4581 = __get(__L1.weaponNames, __L1.weapon)
-                local ____temp_4582 = __L1:levelState()
-                local ____L1_comboStep_4583 = __L1.comboStep
-                local ____arr_result_4584 = __arr(__TS__Spread(__iter(__L1.seenBossIntros)))
-                local ____t_result_4555
+                local ____assign_result_4605 = __assign({}, __L1.items)
+                local ____temp_4606 = __L1:materialCount()
+                local ____arr_result_4607 = __arr(__TS__Spread(__iter(__L1.collected)))
+                local ____L1_weapon_4608 = __L1.weapon
+                local ____get_result_4609 = __get(__L1.weaponNames, __L1.weapon)
+                local ____temp_4610 = __L1:levelState()
+                local ____L1_comboStep_4611 = __L1.comboStep
+                local ____arr_result_4612 = __arr(__TS__Spread(__iter(__L1.seenBossIntros)))
+                local ____t_result_4583
                 if __t(__L1.activity) then
-                    ____t_result_4555 = __assign({}, __L1.activity)
+                    ____t_result_4583 = __assign({}, __L1.activity)
                 else
-                    ____t_result_4555 = nil
+                    ____t_result_4583 = nil
                 end
-                local ____t_result_4556
+                local ____t_result_4584
                 if __t(__L1.training) then
-                    ____t_result_4556 = __assign({}, __L1.training)
+                    ____t_result_4584 = __assign({}, __L1.training)
                 else
-                    ____t_result_4556 = nil
+                    ____t_result_4584 = nil
                 end
-                local ____call_result_4585 = __call(
+                local ____call_result_4613 = __call(
                     __L1.shots,
                     "map",
                     function(____, s) return __assign({}, s) end
                 )
-                local ____L1_vehicle_4586 = __L1.vehicle
-                local ____L1_reeisTimer_4587 = __L1.reeisTimer
-                local ____L1_reeisCooldown_4588 = __L1.reeisCooldown
-                local ____L1_reeisPhase_4589 = __L1.reeisPhase
-                local ____L1_reeisX_4590 = __L1.reeisX
-                local ____L1_reeisPhaseTimer_4591 = __L1.reeisPhaseTimer
-                local ____assign_result_4592 = __assign({}, __L1.joystick)
-                local ____L1_dashTimer_4593 = __L1.dashTimer
-                local ____L1_dashCooldown_4594 = __L1.dashCooldown
-                local ____t_result_4560
-                local ____t_4559 = __t
-                local ____opt_4557 = __L1.activeBoss
-                if ____opt_4557 ~= nil then
-                    ____opt_4557 = ____opt_4557.type
+                local ____L1_vehicle_4614 = __L1.vehicle
+                local ____L1_reeisTimer_4615 = __L1.reeisTimer
+                local ____L1_reeisCooldown_4616 = __L1.reeisCooldown
+                local ____L1_reeisPhase_4617 = __L1.reeisPhase
+                local ____L1_reeisX_4618 = __L1.reeisX
+                local ____L1_reeisPhaseTimer_4619 = __L1.reeisPhaseTimer
+                local ____assign_result_4620 = __assign({}, __L1.joystick)
+                local ____L1_dashTimer_4621 = __L1.dashTimer
+                local ____L1_dashCooldown_4622 = __L1.dashCooldown
+                local ____t_result_4588
+                local ____t_4587 = __t
+                local ____opt_4585 = __L1.activeBoss
+                if ____opt_4585 ~= nil then
+                    ____opt_4585 = ____opt_4585.type
                 end
-                __O[2249] = ____opt_4557
-                if ____t_4559(____opt_4557) then
-                    ____t_result_4560 = __O[2249]
+                __O[2266] = ____opt_4585
+                if ____t_4587(____opt_4585) then
+                    ____t_result_4588 = __O[2266]
                 else
-                    ____t_result_4560 = nil
+                    ____t_result_4588 = nil
                 end
-                local ____L1_defeated_4595 = __L1.defeated
-                local ____t_result_4561
+                local ____L1_defeated_4623 = __L1.defeated
+                local ____t_result_4589
                 if __t(__L1.routeTransition) then
-                    ____t_result_4561 = __assign({}, __L1.routeTransition)
+                    ____t_result_4589 = __assign({}, __L1.routeTransition)
                 else
-                    ____t_result_4561 = nil
+                    ____t_result_4589 = nil
                 end
-                local ____call_result_4596 = __call(
+                local ____call_result_4624 = __call(
                     __L1.hazards,
                     "map",
                     function(____, h) return __assign({}, h) end
                 )
-                local ____L1_WORLD_4597 = __L1.WORLD
-                local ____t_result_4562
+                local ____L1_WORLD_4625 = __L1.WORLD
+                local ____t_result_4590
                 if __t(__L1.room) then
-                    ____t_result_4562 = __assign({}, __L1.room)
+                    ____t_result_4590 = __assign({}, __L1.room)
                 else
-                    ____t_result_4562 = nil
+                    ____t_result_4590 = nil
                 end
-                local ____t_result_4563
+                local ____t_result_4591
                 if __t(__L1.arena) then
-                    ____t_result_4563 = __assign({}, __L1.arena)
+                    ____t_result_4591 = __assign({}, __L1.arena)
                 else
-                    ____t_result_4563 = nil
+                    ____t_result_4591 = nil
                 end
-                local ____t_result_4564
+                local ____t_result_4592
                 if __t(__L1.cutscene) then
-                    ____t_result_4564 = __assign({}, __L1.cutscene)
+                    ____t_result_4592 = __assign({}, __L1.cutscene)
                 else
-                    ____t_result_4564 = nil
+                    ____t_result_4592 = nil
                 end
                 return {
-                    run = ____t_result_4550,
-                    sandbox = ____t_result_4551,
-                    bivolt = ____assign_result_4565,
-                    ollyan = ____t_result_4552,
-                    started = ____L1_started_4566,
-                    playing = ____L1_playing_4567,
-                    paused = ____L1_paused_4568,
-                    won = ____L1_won_4569,
-                    chapterEnded = ____L1_chapterEnded_4570,
-                    scene = ____L1_scene_4571,
-                    camera = ____L1_camera_4572,
-                    nearBoss = ____t_result_4553,
-                    q = ____assign_result_4573,
-                    player = ____assign_result_4574,
-                    enemies = ____call_result_4575,
-                    targets = ____call_result_4576,
-                    dialog = ____t_result_4554,
-                    items = ____assign_result_4577,
-                    materialCount = ____temp_4578,
-                    collected = ____arr_result_4579,
-                    weapon = ____L1_weapon_4580,
-                    weaponName = ____get_result_4581,
-                    progression = ____temp_4582,
-                    comboStep = ____L1_comboStep_4583,
-                    seenBossIntros = ____arr_result_4584,
-                    activity = ____t_result_4555,
-                    training = ____t_result_4556,
-                    shots = ____call_result_4585,
-                    vehicle = ____L1_vehicle_4586,
-                    reeisTimer = ____L1_reeisTimer_4587,
-                    reeisCooldown = ____L1_reeisCooldown_4588,
-                    reeisPhase = ____L1_reeisPhase_4589,
-                    reeisX = ____L1_reeisX_4590,
-                    reeisPhaseTimer = ____L1_reeisPhaseTimer_4591,
-                    joystick = ____assign_result_4592,
-                    dashTimer = ____L1_dashTimer_4593,
-                    dashCooldown = ____L1_dashCooldown_4594,
-                    activeBoss = ____t_result_4560,
-                    defeated = ____L1_defeated_4595,
-                    routeTransition = ____t_result_4561,
-                    hazards = ____call_result_4596,
-                    worldWidth = ____L1_WORLD_4597,
-                    room = ____t_result_4562,
-                    arena = ____t_result_4563,
-                    cutscene = ____t_result_4564,
+                    run = ____t_result_4578,
+                    sandbox = ____t_result_4579,
+                    bivolt = ____assign_result_4593,
+                    ollyan = ____t_result_4580,
+                    started = ____L1_started_4594,
+                    playing = ____L1_playing_4595,
+                    paused = ____L1_paused_4596,
+                    won = ____L1_won_4597,
+                    chapterEnded = ____L1_chapterEnded_4598,
+                    scene = ____L1_scene_4599,
+                    camera = ____L1_camera_4600,
+                    nearBoss = ____t_result_4581,
+                    q = ____assign_result_4601,
+                    player = ____assign_result_4602,
+                    enemies = ____call_result_4603,
+                    targets = ____call_result_4604,
+                    dialog = ____t_result_4582,
+                    items = ____assign_result_4605,
+                    materialCount = ____temp_4606,
+                    collected = ____arr_result_4607,
+                    weapon = ____L1_weapon_4608,
+                    weaponName = ____get_result_4609,
+                    progression = ____temp_4610,
+                    comboStep = ____L1_comboStep_4611,
+                    seenBossIntros = ____arr_result_4612,
+                    activity = ____t_result_4583,
+                    training = ____t_result_4584,
+                    shots = ____call_result_4613,
+                    vehicle = ____L1_vehicle_4614,
+                    reeisTimer = ____L1_reeisTimer_4615,
+                    reeisCooldown = ____L1_reeisCooldown_4616,
+                    reeisPhase = ____L1_reeisPhase_4617,
+                    reeisX = ____L1_reeisX_4618,
+                    reeisPhaseTimer = ____L1_reeisPhaseTimer_4619,
+                    joystick = ____assign_result_4620,
+                    dashTimer = ____L1_dashTimer_4621,
+                    dashCooldown = ____L1_dashCooldown_4622,
+                    activeBoss = ____t_result_4588,
+                    defeated = ____L1_defeated_4623,
+                    routeTransition = ____t_result_4589,
+                    hazards = ____call_result_4624,
+                    worldWidth = ____L1_WORLD_4625,
+                    room = ____t_result_4590,
+                    arena = ____t_result_4591,
+                    cutscene = ____t_result_4592,
                     minions = __call(
                         __L1.minions,
                         "map",
@@ -25144,29 +25285,29 @@ local __O = {};
     window:addEventListener(
         "campaign-run-change",
         function(____, event)
-            local ____t_4605 = __t
-            local ____t_result_4604
-            local ____t_4603 = __t
-            local ____t_result_4602
-            local ____t_4601 = __t
-            local ____opt_4598 = event.detail
-            if ____opt_4598 ~= nil then
-                ____opt_4598 = ____opt_4598.reason
+            local ____t_4633 = __t
+            local ____t_result_4632
+            local ____t_4631 = __t
+            local ____t_result_4630
+            local ____t_4629 = __t
+            local ____opt_4626 = event.detail
+            if ____opt_4626 ~= nil then
+                ____opt_4626 = ____opt_4626.reason
             end
-            local ____temp_4600 = ____opt_4598 == "difficulty"
-            __O[2250] = ____temp_4600
-            if ____t_4601(____temp_4600) then
-                ____t_result_4602 = __L1.started
+            local ____temp_4628 = ____opt_4626 == "difficulty"
+            __O[2267] = ____temp_4628
+            if ____t_4629(____temp_4628) then
+                ____t_result_4630 = __L1.started
             else
-                ____t_result_4602 = __O[2250]
+                ____t_result_4630 = __O[2267]
             end
-            __O[2251] = ____t_result_4602
-            if ____t_4603(____t_result_4602) then
-                ____t_result_4604 = not __t(__L1.sandbox)
+            __O[2268] = ____t_result_4630
+            if ____t_4631(____t_result_4630) then
+                ____t_result_4632 = not __t(__L1.sandbox)
             else
-                ____t_result_4604 = __O[2251]
+                ____t_result_4632 = __O[2268]
             end
-            if ____t_4605(____t_result_4604) then
+            if ____t_4633(____t_result_4632) then
                 __L1:save()
                 __L1:updateUI()
             end

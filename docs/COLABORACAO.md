@@ -490,4 +490,30 @@ Escreva sempre no fim, com data, quem é e o que fez ou vai fazer.
     - jogando na BAIXA ≈ 0,09 s por quadro;
     - MÉDIA ≈ 0,30 s;
     - o que sobra é a lógica de `art`/`game`/`hd-maps`, grandes demais para o código nativo do Roblox.
+- **28/11 · Claude:** **Roblox liso: a tela virou camadas na placa de vídeo.**
+  - **Por que travava:** no servidor do Roblox, o cenário levava 92 dos 108 ms de cada quadro (tudo desenhado pixel a
+    pixel em Luau).
+  - **`hd-maps.js` (`HdMaps.camadas`):**
+    - desenha o cenário HD num quadro 2×96 px mais largo que a tela (`LW` virou `let` durante esse desenho);
+    - céu (`sky`) e névoa (`haze`) vão para imagens próprias;
+    - os fundos que se repetem (`tile`, agora com o fator de parallax como 4º argumento) ficam só anotados;
+    - a luz da hora é aplicada no quadro do meio: multiplica pela cor ambiente e soma as luzes;
+    - se algo já foi desenhado no meio antes de um céu/névoa/tile (cenário com céu próprio), eles seguem no meio.
+  - **`game.js`:** com `DAROCA_CAMADAS` e um cenário que `HdMaps.camadas.pode(cena)`, o canvas do jogo não desenha o
+    cenário.
+    - Fica só o que se mexe, mais as placas e as pontes; à noite as pontes recebem a mesma luz (`frenteCamadas`).
+    - Publica `DAROCA_QUADRO_CAMADAS/CAMERA/TEMPO/TREMOR_X/Y` para o Roblox.
+  - **Roblox:**
+    - `runtime/camadas.lua` diz onde cada camada fica para a câmera atual;
+    - o cliente desenha o cenário numa rotina à parte, em fatias de 5 ms por quadro, e só troca as imagens quando o
+      desenho termina;
+    - a placa de vídeo desliza as camadas a cada quadro;
+    - a interface vira outra imagem, enviada só quando o que aparece muda (`desenhista` compara um resumo da página);
+    - F2 liga e desliga o modo em camadas.
+  - **Medido no servidor:** andando na BAIXA, 19 ms por quadro (antes 108 ms).
+  - **Ainda falta:**
+    - cenários da campanha 2, oficina/lanchonete/açude e baile continuam no desenho direto;
+    - a MÉDIA ainda pesa (acabamento dos personagens, ~130 ms por quadro), por isso as qualidades 1 a 7 do Roblox
+      usam a BAIXA;
+    - a luz direcional do sol (`dirLight`) não entra nas camadas.
 

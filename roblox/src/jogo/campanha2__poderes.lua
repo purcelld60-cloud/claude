@@ -46,9 +46,9 @@ local __O = {};
             local ____t_result_65
             local ____t_64 = __t
             local ____temp_63 = not __t(pronto(nil, "supersoco"))
-            __O[473] = ____temp_63
+            __O[486] = ____temp_63
             if ____t_64(____temp_63) then
-                ____t_result_65 = __O[473]
+                ____t_result_65 = __O[486]
             else
                 ____t_result_65 = carga
             end
@@ -93,9 +93,9 @@ local __O = {};
         if ____opt_80 ~= nil then
             ____opt_80 = ____opt_80(____this_81)
         end
-        __O[474] = ____opt_80
+        __O[487] = ____opt_80
         if ____t_82(____opt_80) then
-            ____t_result_83 = __O[474]
+            ____t_result_83 = __O[487]
         else
             ____t_result_83 = __arrL({}, 0)
         end
@@ -109,7 +109,7 @@ local __O = {};
                 local ____t_result_72
                 local ____t_70 = __t
                 local ____temp_69 = dx > -10 and dx < 120
-                __O[475] = ____temp_69
+                __O[488] = ____temp_69
                 if ____t_70(____temp_69) then
                     local ____e_y_71 = e.y
                     if ____e_y_71 == nil then
@@ -117,7 +117,7 @@ local __O = {};
                     end
                     ____t_result_72 = math.abs(____e_y_71 - h.y) < 70
                 else
-                    ____t_result_72 = __O[475]
+                    ____t_result_72 = __O[488]
                 end
                 if ____t_73(____t_result_72) then
                     local ____this_77
@@ -208,9 +208,9 @@ local __O = {};
                     local ____t_result_140
                     local ____t_139 = __t
                     local ____get_result_138 = __get(s.niveis, id)
-                    __O[481] = ____get_result_138
+                    __O[494] = ____get_result_138
                     if ____t_139(____get_result_138) then
-                        ____t_result_140 = __O[481]
+                        ____t_result_140 = __O[494]
                     else
                         ____t_result_140 = 1
                     end
@@ -295,9 +295,9 @@ local __O = {};
                     local ____t_result_152
                     local ____t_151 = __t
                     local ____get_result_150 = __get(s.niveis, p.id)
-                    __O[482] = ____get_result_150
+                    __O[495] = ____get_result_150
                     if ____t_151(____get_result_150) then
-                        ____t_result_152 = __O[482]
+                        ____t_result_152 = __O[495]
                     else
                         ____t_result_152 = 1
                     end
@@ -306,9 +306,9 @@ local __O = {};
                     local ____t_result_156
                     local ____t_155 = __t
                     local ____get_result_154 = __get(s.niveis, p.id)
-                    __O[483] = ____get_result_154
+                    __O[496] = ____get_result_154
                     if ____t_155(____get_result_154) then
-                        ____t_result_156 = __O[483]
+                        ____t_result_156 = __O[496]
                     else
                         ____t_result_156 = 1
                     end
@@ -331,9 +331,9 @@ local __O = {};
         local ____t_result_162
         local ____t_161 = __t
         local ____get_result_160 = __get(s.niveis, p.id)
-        __O[484] = ____get_result_160
+        __O[497] = ____get_result_160
         if ____t_161(____get_result_160) then
-            ____t_result_162 = __O[484]
+            ____t_result_162 = __O[497]
         else
             ____t_result_162 = 1
         end
@@ -397,9 +397,9 @@ local __O = {};
         local ____t_result_175
         local ____t_174 = __t
         local ____temp_173 = not __t(painel)
-        __O[485] = ____temp_173
+        __O[498] = ____temp_173
         if ____t_174(____temp_173) then
-            ____t_result_175 = __O[485]
+            ____t_result_175 = __O[498]
         else
             ____t_result_175 = painel.hidden
         end
@@ -729,9 +729,9 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____get_result_0 = __get(estado.niveis, p.id)
-        __O[464] = ____get_result_0
+        __O[477] = ____get_result_0
         if ____t_1(____get_result_0) then
-            ____t_result_2 = __O[464]
+            ____t_result_2 = __O[477]
         else
             ____t_result_2 = 1
         end
@@ -758,9 +758,9 @@ local __O = {};
             local ____t_result_7
             local ____t_6 = __t
             local ____temp_5 = window.localStorage:getItem(KEY)
-            __O[465] = ____temp_5
+            __O[478] = ____temp_5
             if ____t_6(____temp_5) then
-                ____t_result_7 = __O[465]
+                ____t_result_7 = __O[478]
             else
                 ____t_result_7 = "null"
             end
@@ -837,9 +837,9 @@ local __O = {};
         local ____t_result_22
         local ____t_21 = __t
         local ____temp_20 = not __t(byId(nil, id))
-        __O[466] = ____temp_20
+        __O[479] = ____temp_20
         if ____t_21(____temp_20) then
-            ____t_result_22 = __O[466]
+            ____t_result_22 = __O[479]
         else
             ____t_result_22 = tem(nil, id)
         end
@@ -853,9 +853,9 @@ local __O = {};
         local ____t_result_26
         local ____t_25 = __t
         local ____get_result_24 = __get(estado.niveis, id)
-        __O[467] = ____get_result_24
+        __O[480] = ____get_result_24
         if ____t_25(____get_result_24) then
-            ____t_result_26 = __O[467]
+            ____t_result_26 = __O[480]
         else
             ____t_result_26 = 1
         end
@@ -884,11 +884,11 @@ local __O = {};
         else
             ____t_result_30 = id
         end
-        __O[468] = ____t_result_30
+        __O[481] = ____t_result_30
         if ____t_31(____t_result_30) then
             ____t_result_32 = outro ~= slot
         else
-            ____t_result_32 = __O[468]
+            ____t_result_32 = __O[481]
         end
         if ____t_33(____t_result_32) then
             __set(
@@ -908,9 +908,9 @@ local __O = {};
         local ____t_result_36
         local ____t_35 = __t
         local ____get_result_34 = __get(estado.niveis, id)
-        __O[469] = ____get_result_34
+        __O[482] = ____get_result_34
         if ____t_35(____get_result_34) then
-            ____t_result_36 = __O[469]
+            ____t_result_36 = __O[482]
         else
             ____t_result_36 = 1
         end
@@ -932,9 +932,9 @@ local __O = {};
         local ____t_40 = __t
         local ____opt_37 = window.document:querySelector((".touch-controls [data-action=\"" .. tostring(id)) .. "\"] svg")
         local ____temp_39 = ____opt_37 and ____opt_37.outerHTML
-        __O[470] = ____temp_39
+        __O[483] = ____temp_39
         if ____t_40(____temp_39) then
-            ____t_result_41 = __O[470]
+            ____t_result_41 = __O[483]
         else
             ____t_result_41 = ""
         end
@@ -996,9 +996,9 @@ local __O = {};
         if ____opt_43 ~= nil then
             ____opt_43 = ____opt_43(____this_44)
         end
-        __O[471] = ____opt_43
+        __O[484] = ____opt_43
         if ____t_45(____opt_43) then
-            ____t_result_46 = __O[471]
+            ____t_result_46 = __O[484]
         else
             ____t_result_46 = __arrL({}, 0)
         end
@@ -1059,7 +1059,7 @@ local __O = {};
                 local ____t_result_55
                 local ____t_53 = __t
                 local ____temp_52 = dx > -20 and __lt(dx, al)
-                __O[472] = ____temp_52
+                __O[485] = ____temp_52
                 if ____t_53(____temp_52) then
                     local ____e_y_54 = e.y
                     if ____e_y_54 == nil then
@@ -1067,7 +1067,7 @@ local __O = {};
                     end
                     ____t_result_55 = math.abs(____e_y_54 - h.y) < 90
                 else
-                    ____t_result_55 = __O[472]
+                    ____t_result_55 = __O[485]
                 end
                 if ____t_56(____t_result_55) then
                     local ____this_58
@@ -1226,9 +1226,9 @@ local __O = {};
         if ____opt_result_92 ~= nil then
             ____opt_result_93 = ____opt_result_92(mundo)
         end
-        __O[476] = ____opt_result_93
+        __O[489] = ____opt_result_93
         if ____t_94(____opt_result_93) then
-            ____t_result_95 = __O[476]
+            ____t_result_95 = __O[489]
         else
             ____t_result_95 = __arrL({}, 0)
         end
@@ -1259,7 +1259,7 @@ local __O = {};
                         end
                         ____temp_100 = ____gt_99(____q_y_98, ____e_y_97 - 76)
                     end
-                    __O[477] = ____temp_100
+                    __O[490] = ____temp_100
                     if ____t_101(____temp_100) then
                         local ____lt_104 = __lt
                         local ____q_y_103 = q.y
@@ -1269,7 +1269,7 @@ local __O = {};
                         end
                         ____t_result_105 = ____lt_104(____q_y_103, ____e_y_102)
                     else
-                        ____t_result_105 = __O[477]
+                        ____t_result_105 = __O[490]
                     end
                     if ____t_106(____t_result_105) then
                         local ____this_114
@@ -1282,11 +1282,11 @@ local __O = {};
                             local ____t_result_110
                             local ____t_109 = __t
                             local ____temp_108 = q.k == "biscoito"
-                            __O[478] = ____temp_108
+                            __O[491] = ____temp_108
                             if ____t_109(____temp_108) then
                                 ____t_result_110 = buff
                             else
-                                ____t_result_110 = __O[478]
+                                ____t_result_110 = __O[491]
                             end
                             if ____t_111(____t_result_110) then
                                 ____t_result_112 = buff.forca
@@ -1326,11 +1326,11 @@ local __O = {};
             local ____t_result_117
             local ____t_116 = __t
             local ____le_result_115 = __le(clone.tiro, 0)
-            __O[479] = ____le_result_115
+            __O[492] = ____le_result_115
             if ____t_116(____le_result_115) then
                 ____t_result_117 = __len(inim)
             else
-                ____t_result_117 = __O[479]
+                ____t_result_117 = __O[492]
             end
             if ____t_118(____t_result_117) then
                 local alvo = __call(
@@ -1941,9 +1941,9 @@ local __O = {};
             local ____t_result_132
             local ____t_131 = __t
             local ____TS__Number_result_130 = __TS__Number(mundo.camera)
-            __O[480] = ____TS__Number_result_130
+            __O[493] = ____TS__Number_result_130
             if ____t_131(____TS__Number_result_130) then
-                ____t_result_132 = __O[480]
+                ____t_result_132 = __O[493]
             else
                 ____t_result_132 = 0
             end
@@ -2055,9 +2055,9 @@ local __O = {};
             local ____t_result_181
             local ____t_180 = __t
             local ____temp_179 = not __t(painel)
-            __O[486] = ____temp_179
+            __O[499] = ____temp_179
             if ____t_180(____temp_179) then
-                ____t_result_181 = __O[486]
+                ____t_result_181 = __O[499]
             else
                 ____t_result_181 = painel.hidden
             end
@@ -2110,9 +2110,9 @@ local __O = {};
         local ____t_result_189
         local ____t_188 = __t
         local ____temp_187 = not __t(box)
-        __O[487] = ____temp_187
+        __O[500] = ____temp_187
         if ____t_188(____temp_187) then
-            ____t_result_189 = __O[487]
+            ____t_result_189 = __O[500]
         else
             ____t_result_189 = window.document:getElementById("c2Poder1")
         end
@@ -2154,9 +2154,9 @@ local __O = {};
                 local ____t_result_195
                 local ____t_194 = __t
                 local ____get_result_193 = __get(cd, p.id)
-                __O[488] = ____get_result_193
+                __O[501] = ____get_result_193
                 if ____t_194(____get_result_193) then
-                    ____t_result_195 = __O[488]
+                    ____t_result_195 = __O[501]
                 else
                     ____t_result_195 = 0
                 end
@@ -2280,9 +2280,9 @@ local __O = {};
                 local ____t_result_214
                 local ____t_213 = __t
                 local ____get_result_212 = __get(cd, id)
-                __O[489] = ____get_result_212
+                __O[502] = ____get_result_212
                 if ____t_213(____get_result_212) then
-                    ____t_result_214 = __O[489]
+                    ____t_result_214 = __O[502]
                 else
                     ____t_result_214 = 0
                 end

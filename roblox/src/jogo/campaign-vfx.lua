@@ -27,9 +27,9 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(v)
-        __O[1472] = ____TS__Number_result_0
+        __O[1485] = ____TS__Number_result_0
         if ____t_1(____TS__Number_result_0) then
-            ____t_result_2 = __O[1472]
+            ____t_result_2 = __O[1485]
         else
             ____t_result_2 = 0
         end
@@ -180,9 +180,9 @@ local __O = {};
         local ____t_result_11
         local ____t_10 = __t
         local ____get_result_9 = __get(history, ____type)
-        __O[1473] = ____get_result_9
+        __O[1486] = ____get_result_9
         if ____t_10(____get_result_9) then
-            ____t_result_11 = __O[1473]
+            ____t_result_11 = __O[1486]
         else
             ____t_result_11 = 0
         end
@@ -399,11 +399,11 @@ local __O = {};
                 local ____t_result_33
                 local ____t_32 = __t
                 local ____temp_31 = e.type == "gas"
-                __O[1474] = ____temp_31
+                __O[1487] = ____temp_31
                 if ____t_32(____temp_31) then
                     ____t_result_33 = window.Golpes
                 else
-                    ____t_result_33 = __O[1474]
+                    ____t_result_33 = __O[1487]
                 end
                 if ____t_34(____t_result_33) then
                     continue
@@ -411,9 +411,9 @@ local __O = {};
                 local ____t_result_37
                 local ____t_36 = __t
                 local ____temp_35 = e.type == "gas" or e.type == "surge"
-                __O[1475] = ____temp_35
+                __O[1488] = ____temp_35
                 if ____t_36(____temp_35) then
-                    ____t_result_37 = __O[1475]
+                    ____t_result_37 = __O[1488]
                 else
                     ____t_result_37 = e.type == "dash"
                 end
@@ -581,9 +581,9 @@ local __O = {};
         local ____t_result_44
         local ____t_43 = __t
         local ____temp_42 = not __t(s) or __gt(s.delay, 0)
-        __O[1476] = ____temp_42
+        __O[1489] = ____temp_42
         if ____t_43(____temp_42) then
-            ____t_result_44 = __O[1476]
+            ____t_result_44 = __O[1489]
         else
             ____t_result_44 = not __t(__call(
                 __arrL({
@@ -617,18 +617,18 @@ local __O = {};
         local ____t_result_48
         local ____t_47 = __t
         local ____TS__Number_result_46 = __TS__Number(s.vy)
-        __O[1477] = ____TS__Number_result_46
+        __O[1490] = ____TS__Number_result_46
         if ____t_47(____TS__Number_result_46) then
-            ____t_result_48 = __O[1477]
+            ____t_result_48 = __O[1490]
         else
             ____t_result_48 = 0
         end
         local ____t_result_51
         local ____t_50 = __t
         local ____TS__Number_result_49 = __TS__Number(s.vx)
-        __O[1478] = ____TS__Number_result_49
+        __O[1491] = ____TS__Number_result_49
         if ____t_50(____TS__Number_result_49) then
-            ____t_result_51 = __O[1478]
+            ____t_result_51 = __O[1491]
         else
             ____t_result_51 = 1
         end

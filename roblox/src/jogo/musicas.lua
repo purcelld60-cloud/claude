@@ -150,14 +150,14 @@ local __O = {};
             __re("^chefe-([a-z]+)(?:-fase-?(\\d))?$", "")
         )
         local ____m_8 = m
-        __O[2310] = ____m_8
+        __O[2327] = ____m_8
         if ____t_9(____m_8) then
             ____t_result_10 = __get(
                 BOSS,
                 __get(m, 1)
             )
         else
-            ____t_result_10 = __O[2310]
+            ____t_result_10 = __O[2327]
         end
         if ____t_11(____t_result_10) then
             local ____add_14 = __add
@@ -187,14 +187,14 @@ local __O = {};
             __re("^apresentacao-([a-z]+)$", "")
         )
         local ____m_15 = m
-        __O[2311] = ____m_15
+        __O[2328] = ____m_15
         if ____t_16(____m_15) then
             ____t_result_17 = __get(
                 BOSS,
                 __get(m, 1)
             )
         else
-            ____t_result_17 = __O[2311]
+            ____t_result_17 = __O[2328]
         end
         if ____t_18(____t_result_17) then
             return __add(
@@ -276,14 +276,14 @@ local __O = {};
             __re("^dupla-([a-z]+)$", "")
         )
         local ____m_24 = m
-        __O[2312] = ____m_24
+        __O[2329] = ____m_24
         if ____t_25(____m_24) then
             ____t_result_26 = __get(
                 BOSS,
                 __get(m, 1)
             )
         else
-            ____t_result_26 = __O[2312]
+            ____t_result_26 = __O[2329]
         end
         if ____t_27(____t_result_26) then
             return __add(
@@ -376,9 +376,9 @@ local __O = {};
                 local ____t_result_32
                 local ____t_31 = __t
                 local ____get_result_30 = __get(fm, 2)
-                __O[2313] = ____get_result_30
+                __O[2330] = ____get_result_30
                 if ____t_31(____get_result_30) then
-                    ____t_result_32 = __O[2313]
+                    ____t_result_32 = __O[2330]
                 else
                     ____t_result_32 = ""
                 end
@@ -549,11 +549,11 @@ local __O = {};
                 local ____t_result_41
                 local ____t_40 = __t
                 local ____temp_39 = not __t(list)
-                __O[2314] = ____temp_39
+                __O[2331] = ____temp_39
                 if ____t_40(____temp_39) then
                     ____t_result_41 = pre
                 else
-                    ____t_result_41 = __O[2314]
+                    ____t_result_41 = __O[2331]
                 end
                 if ____t_42(____t_result_41) then
                     list = pre
@@ -562,11 +562,11 @@ local __O = {};
                 local ____t_result_45
                 local ____t_44 = __t
                 local ____temp_43 = txt == nil
-                __O[2315] = ____temp_43
+                __O[2332] = ____temp_43
                 if ____t_44(____temp_43) then
                     ____t_result_45 = pre
                 else
-                    ____t_result_45 = __O[2315]
+                    ____t_result_45 = __O[2332]
                 end
                 if ____t_46(____t_result_45) then
                     local ____t_result_47
@@ -584,9 +584,9 @@ local __O = {};
                 if list ~= nil then
                     ____opt_result_50 = list.arquivos
                 end
-                __O[2316] = ____opt_result_50
+                __O[2333] = ____opt_result_50
                 if ____t_51(____opt_result_50) then
-                    ____t_result_52 = __O[2316]
+                    ____t_result_52 = __O[2333]
                 else
                     ____t_result_52 = __arrL({}, 0)
                 end
@@ -606,29 +606,29 @@ local __O = {};
                         else
                             ____t_result_53 = f
                         end
-                        __O[2317] = ____t_result_53
+                        __O[2334] = ____t_result_53
                         if ____t_54(____t_result_53) then
                             ____t_result_55 = EXT:test(f.nome)
                         else
-                            ____t_result_55 = __O[2317]
+                            ____t_result_55 = __O[2334]
                         end
-                        __O[2318] = ____t_result_55
+                        __O[2335] = ____t_result_55
                         if ____t_56(____t_result_55) then
                             ____t_result_57 = not __re_test(
                                 __re("\\\\|\\.\\.", ""),
                                 f.nome
                             )
                         else
-                            ____t_result_57 = __O[2318]
+                            ____t_result_57 = __O[2335]
                         end
-                        __O[2319] = ____t_result_57
+                        __O[2336] = ____t_result_57
                         if ____t_58(____t_result_57) then
                             ____t_result_59 = __re_test(
                                 __re("^[^/]+(\\/[^/]+)?$", ""),
                                 f.nome
                             )
                         else
-                            ____t_result_59 = __O[2319]
+                            ____t_result_59 = __O[2336]
                         end
                         return ____t_result_59
                     end
@@ -650,9 +650,9 @@ local __O = {};
                 if list ~= nil then
                     ____opt_result_65 = list.avisos
                 end
-                __O[2320] = ____opt_result_65
+                __O[2337] = ____opt_result_65
                 if ____t_66(____opt_result_65) then
-                    ____t_result_67 = __O[2320]
+                    ____t_result_67 = __O[2337]
                 else
                     ____t_result_67 = __arrL({}, 0)
                 end
@@ -696,18 +696,18 @@ local __O = {};
                     local ____t_result_72
                     local ____t_71 = __t
                     local ____TS__Number_result_70 = __TS__Number(meta.bytes)
-                    __O[2321] = ____TS__Number_result_70
+                    __O[2338] = ____TS__Number_result_70
                     if ____t_71(____TS__Number_result_70) then
-                        ____t_result_72 = __O[2321]
+                        ____t_result_72 = __O[2338]
                     else
                         ____t_result_72 = 0
                     end
                     local ____t_result_75
                     local ____t_74 = __t
                     local ____TS__Number_result_73 = __TS__Number(meta.duracao)
-                    __O[2322] = ____TS__Number_result_73
+                    __O[2339] = ____TS__Number_result_73
                     if ____t_74(____TS__Number_result_73) then
-                        ____t_result_75 = __O[2322]
+                        ____t_result_75 = __O[2339]
                     else
                         ____t_result_75 = 0
                     end
@@ -760,9 +760,9 @@ local __O = {};
                         local ____t_result_83
                         local ____t_82 = __t
                         local ____temp_81 = not __t(__call(f.nome, "includes", "/")) or type(f.lugar) ~= "string"
-                        __O[2323] = ____temp_81
+                        __O[2340] = ____temp_81
                         if ____t_82(____temp_81) then
-                            ____t_result_83 = __O[2323]
+                            ____t_result_83 = __O[2340]
                         else
                             ____t_result_83 = not __re_test(
                                 __re("^[a-zA-Z0-9_.-]{1,90}$", ""),
@@ -774,16 +774,16 @@ local __O = {};
                         end
                         local ____call_86 = __call
                         do
-                            __O[2324] = porLugar
-                            __O[2325] = f.lugar
+                            __O[2341] = porLugar
+                            __O[2342] = f.lugar
                         end
                         local ____t_result_85
-                        if __t(__get(__O[2324], __O[2325])) then
-                            ____t_result_85 = __get(__O[2324], __O[2325])
+                        if __t(__get(__O[2341], __O[2342])) then
+                            ____t_result_85 = __get(__O[2341], __O[2342])
                         else
                             ____t_result_85 = __set(
-                                __O[2324],
-                                __O[2325],
+                                __O[2341],
+                                __O[2342],
                                 __arrL({}, 0)
                             )
                         end
@@ -817,11 +817,11 @@ local __O = {};
                     local ____t_result_92
                     local ____t_91 = __t
                     local ____temp_90 = not __t(meta)
-                    __O[2326] = ____temp_90
+                    __O[2343] = ____temp_90
                     if ____t_91(____temp_90) then
                         ____t_result_92 = __len(files)
                     else
-                        ____t_result_92 = __O[2326]
+                        ____t_result_92 = __O[2343]
                     end
                     if ____t_93(____t_result_92) then
                         __call(

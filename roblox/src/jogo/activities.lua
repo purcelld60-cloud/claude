@@ -188,9 +188,9 @@ local __O = {};
         local ____t_result_5
         local ____t_4 = __t
         local ____temp_3 = not __t(s)
-        __O[1268] = ____temp_3
+        __O[1281] = ____temp_3
         if ____t_4(____temp_3) then
-            ____t_result_5 = __O[1268]
+            ____t_result_5 = __O[1281]
         else
             ____t_result_5 = s.done
         end
@@ -284,15 +284,15 @@ local __O = {};
         local ____t_result_12
         local ____t_11 = __t
         local ____temp_10 = not __t(s)
-        __O[1269] = ____temp_10
+        __O[1282] = ____temp_10
         if ____t_11(____temp_10) then
-            ____t_result_12 = __O[1269]
+            ____t_result_12 = __O[1282]
         else
             ____t_result_12 = s.done
         end
-        __O[1270] = ____t_result_12
+        __O[1283] = ____t_result_12
         if ____t_13(____t_result_12) then
-            ____t_result_14 = __O[1270]
+            ____t_result_14 = __O[1283]
         else
             ____t_result_14 = __gt(s.cooldown, 0)
         end
@@ -315,9 +315,9 @@ local __O = {};
             local ____t_result_18
             local ____t_17 = __t
             local ____temp_16 = not __isInteger(answer) or answer < 0
-            __O[1271] = ____temp_16
+            __O[1284] = ____temp_16
             if ____t_17(____temp_16) then
-                ____t_result_18 = __O[1271]
+                ____t_result_18 = __O[1284]
             else
                 ____t_result_18 = answer > 2
             end
@@ -375,11 +375,11 @@ local __O = {};
             else
                 ____t_result_22 = goodPower
             end
-            __O[1272] = ____t_result_22
+            __O[1285] = ____t_result_22
             if ____t_23(____t_result_22) then
                 ____t_result_24 = not __t(blocked)
             else
-                ____t_result_24 = __O[1272]
+                ____t_result_24 = __O[1285]
             end
             local ____t_result_27
             local ____t_26 = __t
@@ -389,11 +389,11 @@ local __O = {};
             else
                 ____t_result_25 = goodPower
             end
-            __O[1273] = ____t_result_25
+            __O[1286] = ____t_result_25
             if ____t_26(____t_result_25) then
                 ____t_result_27 = blocked
             else
-                ____t_result_27 = __O[1273]
+                ____t_result_27 = __O[1286]
             end
             ____s_30.shot = {
                 startX = 236,
@@ -470,9 +470,9 @@ local __O = {};
         local ____t_result_37
         local ____t_36 = __t
         local ____temp_35 = not __t(s)
-        __O[1274] = ____temp_35
+        __O[1287] = ____temp_35
         if ____t_36(____temp_35) then
-            ____t_result_37 = __O[1274]
+            ____t_result_37 = __O[1287]
         else
             ____t_result_37 = s.done
         end
@@ -1202,7 +1202,7 @@ local __O = {};
         local ____t_result_50
         local ____t_47 = __t
         local ____temp_46 = s.phase == "result"
-        __O[1275] = ____temp_46
+        __O[1288] = ____temp_46
         if ____t_47(____temp_46) then
             local ____opt_48 = s.shot
             if ____opt_48 ~= nil then
@@ -1210,7 +1210,7 @@ local __O = {};
             end
             ____t_result_50 = ____opt_48
         else
-            ____t_result_50 = __O[1275]
+            ____t_result_50 = __O[1288]
         end
         if ____t_51(____t_result_50) then
             ____t_result_52 = math.max(0, 1 - s.phaseTime * 1.6)
@@ -1329,11 +1329,11 @@ local __O = {};
         local ____t_result_55
         local ____t_54 = __t
         local ____temp_53 = s.lockedKeeper ~= nil
-        __O[1276] = ____temp_53
+        __O[1289] = ____temp_53
         if ____t_54(____temp_53) then
             ____t_result_55 = s.phase == "flight" or s.phase == "result"
         else
-            ____t_result_55 = __O[1276]
+            ____t_result_55 = __O[1289]
         end
         if ____t_56(____t_result_55) then
             ____t_result_57 = s.lockedKeeper
@@ -1672,11 +1672,11 @@ local __O = {};
         local ____t_result_61
         local ____t_60 = __t
         local ____temp_59 = s.phase == "result"
-        __O[1277] = ____temp_59
+        __O[1290] = ____temp_59
         if ____t_60(____temp_59) then
             ____t_result_61 = s.shot
         else
-            ____t_result_61 = __O[1277]
+            ____t_result_61 = __O[1290]
         end
         if ____t_62(____t_result_61) then
             local txt = __t(s.shot.goal) and "GOLAÇO!" or (__t(s.shot.blocked) and "DEFENDEU!" or "PRA FORA!")

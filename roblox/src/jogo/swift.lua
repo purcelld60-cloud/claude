@@ -158,9 +158,9 @@ local __O = {};
         if modal ~= nil then
             ____opt_result_42 = modal.open
         end
-        __O[1460] = ____opt_result_42
+        __O[1473] = ____opt_result_42
         if ____t_43(____opt_result_42) then
-            ____t_result_44 = __O[1460]
+            ____t_result_44 = __O[1473]
         else
             ____t_result_44 = not __t(session)
         end
@@ -232,9 +232,9 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____TS__Number_result_0 = __TS__Number(options.frame)
-        __O[1457] = ____TS__Number_result_0
+        __O[1470] = ____TS__Number_result_0
         if ____t_1(____TS__Number_result_0) then
-            ____t_result_2 = __O[1457]
+            ____t_result_2 = __O[1470]
         else
             ____t_result_2 = 0
         end
@@ -520,9 +520,9 @@ local __O = {};
         local ____t_result_10
         local ____t_9 = __t
         local ____temp_8 = window.document:getElementById("gameShell")
-        __O[1458] = ____temp_8
+        __O[1471] = ____temp_8
         if ____t_9(____temp_8) then
-            ____t_result_10 = __O[1458]
+            ____t_result_10 = __O[1471]
         else
             ____t_result_10 = window.document.body
         end
@@ -565,9 +565,9 @@ local __O = {};
         if ____opt_13 ~= nil then
             ____opt_result_15 = ____opt_13(____opt_13)
         end
-        __O[1459] = ____opt_result_15
+        __O[1472] = ____opt_result_15
         if ____t_16(____opt_result_15) then
-            ____t_result_17 = __O[1459]
+            ____t_result_17 = __O[1472]
         else
             ____t_result_17 = {id = "normal", label = "NORMAL"}
         end
@@ -620,45 +620,45 @@ local __O = {};
             end
             ____t_result_75 = not ____t_74(____opt_result_73)
         end
-        __O[1461] = ____t_result_75
+        __O[1474] = ____t_result_75
         if ____t_76(____t_result_75) then
-            ____t_result_77 = __O[1461]
+            ____t_result_77 = __O[1474]
         else
             ____t_result_77 = state.sandbox
         end
-        __O[1462] = ____t_result_77
+        __O[1475] = ____t_result_77
         if ____t_78(____t_result_77) then
-            ____t_result_79 = __O[1462]
+            ____t_result_79 = __O[1475]
         else
             ____t_result_79 = state.cutscene
         end
-        __O[1463] = ____t_result_79
+        __O[1476] = ____t_result_79
         if ____t_80(____t_result_79) then
-            ____t_result_81 = __O[1463]
+            ____t_result_81 = __O[1476]
         else
             ____t_result_81 = state.dialog
         end
-        __O[1464] = ____t_result_81
+        __O[1477] = ____t_result_81
         if ____t_82(____t_result_81) then
-            ____t_result_83 = __O[1464]
+            ____t_result_83 = __O[1477]
         else
             ____t_result_83 = state.activeBoss
         end
-        __O[1465] = ____t_result_83
+        __O[1478] = ____t_result_83
         if ____t_84(____t_result_83) then
-            ____t_result_85 = __O[1465]
+            ____t_result_85 = __O[1478]
         else
             ____t_result_85 = state.room
         end
-        __O[1466] = ____t_result_85
+        __O[1479] = ____t_result_85
         if ____t_86(____t_result_85) then
-            ____t_result_87 = __O[1466]
+            ____t_result_87 = __O[1479]
         else
             ____t_result_87 = state.activity
         end
-        __O[1467] = ____t_result_87
+        __O[1480] = ____t_result_87
         if ____t_88(____t_result_87) then
-            ____t_result_91 = __O[1467]
+            ____t_result_91 = __O[1480]
         else
             local ____opt_89 = state.training
             if ____opt_89 ~= nil then
@@ -666,27 +666,27 @@ local __O = {};
             end
             ____t_result_91 = ____opt_89
         end
-        __O[1468] = ____t_result_91
+        __O[1481] = ____t_result_91
         if ____t_92(____t_result_91) then
-            ____t_result_93 = __O[1468]
+            ____t_result_93 = __O[1481]
         else
             ____t_result_93 = state.defeated
         end
-        __O[1469] = ____t_result_93
+        __O[1482] = ____t_result_93
         if ____t_94(____t_result_93) then
-            ____t_result_95 = __O[1469]
+            ____t_result_95 = __O[1482]
         else
             ____t_result_95 = state.won
         end
-        __O[1470] = ____t_result_95
+        __O[1483] = ____t_result_95
         if ____t_96(____t_result_95) then
-            ____t_result_97 = __O[1470]
+            ____t_result_97 = __O[1483]
         else
             ____t_result_97 = state.chapterEnded
         end
-        __O[1471] = ____t_result_97
+        __O[1484] = ____t_result_97
         if ____t_98(____t_result_97) then
-            ____t_result_99 = __O[1471]
+            ____t_result_99 = __O[1484]
         else
             ____t_result_99 = window.document:querySelector("dialog[open]")
         end

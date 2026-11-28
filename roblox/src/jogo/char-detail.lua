@@ -17,9 +17,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawCharacter)
-    __O[673] = ____temp_0
+    __O[686] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[673]
+        ____t_result_2 = __O[686]
     else
         ____t_result_2 = window.CharDetail
     end
@@ -86,9 +86,9 @@ local __O = {};
         local ____t_result_11
         local ____t_5 = __t
         local ____temp_4 = not __t(enabled)
-        __O[674] = ____temp_4
+        __O[687] = ____temp_4
         if ____t_5(____temp_4) then
-            ____t_result_11 = __O[674]
+            ____t_result_11 = __O[687]
         else
             local ____opt_8 = window.Graphics
             if ____opt_8 ~= nil then
@@ -100,27 +100,27 @@ local __O = {};
             end
             ____t_result_11 = ____opt_result_10
         end
-        __O[675] = ____t_result_11
+        __O[688] = ____t_result_11
         if ____t_12(____t_result_11) then
-            ____t_result_13 = __O[675]
+            ____t_result_13 = __O[688]
         else
             ____t_result_13 = __call(SKIP, "has", ____type)
         end
-        __O[676] = ____t_result_13
+        __O[689] = ____t_result_13
         if ____t_14(____t_result_13) then
-            ____t_result_15 = __O[676]
+            ____t_result_15 = __O[689]
         else
             ____t_result_15 = ____type == "nikolas" and __TS__Number(o.bossPhase) >= 2
         end
-        __O[677] = ____t_result_15
+        __O[690] = ____t_result_15
         if ____t_16(____t_result_15) then
-            ____t_result_17 = __O[677]
+            ____t_result_17 = __O[690]
         else
             ____t_result_17 = ____type == "reeisBoss"
         end
-        __O[678] = ____t_result_17
+        __O[691] = ____t_result_17
         if ____t_18(____t_result_17) then
-            ____t_result_20 = __O[678]
+            ____t_result_20 = __O[691]
         else
             local ____t_result_19
             if __t(o.transformed) then
@@ -187,9 +187,9 @@ local __O = {};
         if ____opt_24 ~= nil then
             ____opt_24 = ____opt_24.width
         end
-        __O[679] = ____opt_24
+        __O[692] = ____opt_24
         if ____t_26(____opt_24) then
-            ____t_result_27 = __O[679]
+            ____t_result_27 = __O[692]
         else
             ____t_result_27 = 960
         end
@@ -230,29 +230,29 @@ local __O = {};
         else
             ____t_result_30 = o.cache
         end
-        __O[680] = ____t_result_30
+        __O[693] = ____t_result_30
         if ____t_31(____t_result_30) then
             ____t_result_32 = math.abs(m.d - 1) < 0.01
         else
-            ____t_result_32 = __O[680]
+            ____t_result_32 = __O[693]
         end
-        __O[681] = ____t_result_32
+        __O[694] = ____t_result_32
         if ____t_33(____t_result_32) then
             ____t_result_34 = not __t(m.b)
         else
-            ____t_result_34 = __O[681]
+            ____t_result_34 = __O[694]
         end
-        __O[682] = ____t_result_34
+        __O[695] = ____t_result_34
         if ____t_35(____t_result_34) then
             ____t_result_36 = not __t(m.c)
         else
-            ____t_result_36 = __O[682]
+            ____t_result_36 = __O[695]
         end
-        __O[683] = ____t_result_36
+        __O[696] = ____t_result_36
         if ____t_37(____t_result_36) then
             ____t_result_38 = not __t(o.hit)
         else
-            ____t_result_38 = __O[683]
+            ____t_result_38 = __O[696]
         end
         if ____t_39(____t_result_38) then
             local ____add_53 = __add

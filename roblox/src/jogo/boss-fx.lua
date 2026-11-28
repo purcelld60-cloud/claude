@@ -65,9 +65,9 @@ local __O = {};
         local ____t_result_8
         local ____t_7 = __t
         local ____get_result_6 = __get(COLORS, e.type)
-        __O[1562] = ____get_result_6
+        __O[1575] = ____get_result_6
         if ____t_7(____get_result_6) then
-            ____t_result_8 = __O[1562]
+            ____t_result_8 = __O[1575]
         else
             ____t_result_8 = "#ffe08b"
         end
@@ -116,9 +116,9 @@ local __O = {};
         local ____t_result_15
         local ____t_14 = __t
         local ____TS__Number_result_13 = __TS__Number(dt)
-        __O[1563] = ____TS__Number_result_13
+        __O[1576] = ____TS__Number_result_13
         if ____t_14(____TS__Number_result_13) then
-            ____t_result_15 = __O[1563]
+            ____t_result_15 = __O[1576]
         else
             ____t_result_15 = 0
         end
@@ -238,17 +238,17 @@ local __O = {};
             local ____t_result_34
             local ____t_33 = __t
             local ____temp_32 = e.state == "bellyRolling"
-            __O[1564] = ____temp_32
+            __O[1577] = ____temp_32
             if ____t_33(____temp_32) then
                 ____t_result_34 = full
             else
-                ____t_result_34 = __O[1564]
+                ____t_result_34 = __O[1577]
             end
-            __O[1565] = ____t_result_34
+            __O[1578] = ____t_result_34
             if ____t_35(____t_result_34) then
                 ____t_result_36 = math.random() < 0.6
             else
-                ____t_result_36 = __O[1565]
+                ____t_result_36 = __O[1578]
             end
             if ____t_37(____t_result_36) then
                 local ____opt_42 = window.SceneLife
@@ -280,11 +280,11 @@ local __O = {};
             local ____t_result_46
             local ____t_45 = __t
             local ____temp_44 = e.state == "firing"
-            __O[1566] = ____temp_44
+            __O[1579] = ____temp_44
             if ____t_45(____temp_44) then
                 ____t_result_46 = full
             else
-                ____t_result_46 = __O[1566]
+                ____t_result_46 = __O[1579]
             end
             if ____t_47(____t_result_46) then
                 local ____call_52 = __call
@@ -319,20 +319,20 @@ local __O = {};
         local ____t_result_55
         local ____t_54 = __t
         local ____temp_53 = e.state == "windup"
-        __O[1567] = ____temp_53
+        __O[1580] = ____temp_53
         if ____t_54(____temp_53) then
             ____t_result_55 = full
         else
-            ____t_result_55 = __O[1567]
+            ____t_result_55 = __O[1580]
         end
-        __O[1568] = ____t_result_55
+        __O[1581] = ____t_result_55
         if ____t_56(____t_result_55) then
             ____t_result_57 = __lt(
                 __len(m.motes),
                 26
             )
         else
-            ____t_result_57 = __O[1568]
+            ____t_result_57 = __O[1581]
         end
         if ____t_58(____t_result_57) then
             local a = math.random() * math.pi * 2
@@ -364,17 +364,17 @@ local __O = {};
         local ____t_result_61
         local ____t_60 = __t
         local ____temp_59 = e.state == "dashing" or e.state == "bellyRolling"
-        __O[1569] = ____temp_59
+        __O[1582] = ____temp_59
         if ____t_60(____temp_59) then
             ____t_result_61 = __le(m.ghostT, 0)
         else
-            ____t_result_61 = __O[1569]
+            ____t_result_61 = __O[1582]
         end
-        __O[1570] = ____t_result_61
+        __O[1583] = ____t_result_61
         if ____t_62(____t_result_61) then
             ____t_result_63 = full
         else
-            ____t_result_63 = __O[1570]
+            ____t_result_63 = __O[1583]
         end
         if ____t_64(____t_result_63) then
             local ____call_70 = __call
@@ -453,9 +453,9 @@ local __O = {};
         local ____t_result_77
         local ____t_76 = __t
         local ____temp_75 = not __t(e) or __le(e.hp, 0)
-        __O[1571] = ____temp_75
+        __O[1584] = ____temp_75
         if ____t_76(____temp_75) then
-            ____t_result_77 = __O[1571]
+            ____t_result_77 = __O[1584]
         else
             ____t_result_77 = e.state == "underground"
         end
@@ -542,9 +542,9 @@ local __O = {};
                     ____t_result_87 = e.x
                 end
                 local ____TS__MathSign_result_88 = __TS__MathSign(____t_result_86 - ____t_result_87)
-                __O[1572] = ____TS__MathSign_result_88
+                __O[1585] = ____TS__MathSign_result_88
                 if ____t_89(____TS__MathSign_result_88) then
-                    ____t_result_90 = __O[1572]
+                    ____t_result_90 = __O[1585]
                 else
                     ____t_result_90 = 1
                 end
@@ -585,11 +585,11 @@ local __O = {};
                 local ____t_result_93
                 local ____t_92 = __t
                 local ____temp_91 = e.state == "firing" and m.clap ~= nil
-                __O[1573] = ____temp_91
+                __O[1586] = ____temp_91
                 if ____t_92(____temp_91) then
                     ____t_result_93 = __lt(m.clap, 0.5)
                 else
-                    ____t_result_93 = __O[1573]
+                    ____t_result_93 = __O[1586]
                 end
                 if ____t_94(____t_result_93) then
                     local k = m.clap
@@ -643,17 +643,17 @@ local __O = {};
         local ____t_result_99
         local ____t_98 = __t
         local ____temp_97 = sx == 1 and sy == 1
-        __O[1574] = ____temp_97
+        __O[1587] = ____temp_97
         if ____t_98(____temp_97) then
             ____t_result_99 = dx == 0
         else
-            ____t_result_99 = __O[1574]
+            ____t_result_99 = __O[1587]
         end
-        __O[1575] = ____t_result_99
+        __O[1588] = ____t_result_99
         if ____t_100(____t_result_99) then
             ____t_result_101 = not __t(rot)
         else
-            ____t_result_101 = __O[1575]
+            ____t_result_101 = __O[1588]
         end
         if ____t_102(____t_result_101) then
             return nil
@@ -764,17 +764,17 @@ local __O = {};
         local ____t_result_120
         local ____t_119 = __t
         local ____temp_118 = e.type == "igor" and m.landed ~= nil
-        __O[1576] = ____temp_118
+        __O[1589] = ____temp_118
         if ____t_119(____temp_118) then
             ____t_result_120 = __lt(m.landed, 1.1)
         else
-            ____t_result_120 = __O[1576]
+            ____t_result_120 = __O[1589]
         end
-        __O[1577] = ____t_result_120
+        __O[1590] = ____t_result_120
         if ____t_121(____t_result_120) then
             ____t_result_122 = m.crackX ~= nil
         else
-            ____t_result_122 = __O[1577]
+            ____t_result_122 = __O[1590]
         end
         if ____t_123(____t_result_122) then
             local a = 1 - m.landed / 1.1
@@ -811,11 +811,11 @@ local __O = {};
         local ____t_result_126
         local ____t_125 = __t
         local ____temp_124 = e.type == "igor" and e.state == "bellyRolling"
-        __O[1578] = ____temp_124
+        __O[1591] = ____temp_124
         if ____t_125(____temp_124) then
             ____t_result_126 = full
         else
-            ____t_result_126 = __O[1578]
+            ____t_result_126 = __O[1591]
         end
         if ____t_127(____t_result_126) then
             c:save()
@@ -1032,9 +1032,9 @@ local __O = {};
         local ____t_result_138
         local ____t_137 = __t
         local ____temp_136 = not __t(e) or e.type ~= "igor"
-        __O[1579] = ____temp_136
+        __O[1592] = ____temp_136
         if ____t_137(____temp_136) then
-            ____t_result_138 = __O[1579]
+            ____t_result_138 = __O[1592]
         else
             ____t_result_138 = lite(nil)
         end

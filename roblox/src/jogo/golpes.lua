@@ -90,29 +90,29 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____temp_0 = not not __t(a) and not not __t(b)
-        __O[1580] = ____temp_0
+        __O[1593] = ____temp_0
         if ____t_1(____temp_0) then
             ____t_result_2 = __lt(a.x0, b.x1)
         else
-            ____t_result_2 = __O[1580]
+            ____t_result_2 = __O[1593]
         end
-        __O[1581] = ____t_result_2
+        __O[1594] = ____t_result_2
         if ____t_3(____t_result_2) then
             ____t_result_4 = __gt(a.x1, b.x0)
         else
-            ____t_result_4 = __O[1581]
+            ____t_result_4 = __O[1594]
         end
-        __O[1582] = ____t_result_4
+        __O[1595] = ____t_result_4
         if ____t_5(____t_result_4) then
             ____t_result_6 = __lt(a.y0, b.y1)
         else
-            ____t_result_6 = __O[1582]
+            ____t_result_6 = __O[1595]
         end
-        __O[1583] = ____t_result_6
+        __O[1596] = ____t_result_6
         if ____t_7(____t_result_6) then
             ____t_result_8 = __gt(a.y1, b.y0)
         else
-            ____t_result_8 = __O[1583]
+            ____t_result_8 = __O[1596]
         end
         return ____t_result_8
     end
@@ -162,11 +162,11 @@ local __O = {};
             local ____t_result_13
             local ____t_12 = __t
             local ____temp_11 = e.type == "marco"
-            __O[1584] = ____temp_11
+            __O[1597] = ____temp_11
             if ____t_12(____temp_11) then
                 ____t_result_13 = e.rage
             else
-                ____t_result_13 = __O[1584]
+                ____t_result_13 = __O[1597]
             end
             ____temp_15 = ____t_14(____t_result_13) and "marcoRage" or e.type
         end
@@ -179,9 +179,9 @@ local __O = {};
             CORPO,
             chaveChefe(nil, e)
         )
-        __O[1585] = ____get_result_16
+        __O[1598] = ____get_result_16
         if ____t_17(____get_result_16) then
-            ____t_result_18 = __O[1585]
+            ____t_result_18 = __O[1598]
         else
             ____t_result_18 = __arrL({20, 70}, 2)
         end
@@ -189,9 +189,9 @@ local __O = {};
         local ____t_result_21
         local ____t_20 = __t
         local ____TS__Number_result_19 = __TS__Number(e.escalaCorpo)
-        __O[1586] = ____TS__Number_result_19
+        __O[1599] = ____TS__Number_result_19
         if ____t_20(____TS__Number_result_19) then
-            ____t_result_21 = __O[1586]
+            ____t_result_21 = __O[1599]
         else
             ____t_result_21 = 1
         end
@@ -234,9 +234,9 @@ local __O = {};
         local ____t_result_29
         local ____t_28 = __t
         local ____get_result_27 = __get(CAPANGA, k)
-        __O[1587] = ____get_result_27
+        __O[1600] = ____get_result_27
         if ____t_28(____get_result_27) then
-            ____t_result_29 = __O[1587]
+            ____t_result_29 = __O[1600]
         else
             ____t_result_29 = __arrL({20, 60}, 2)
         end
@@ -276,9 +276,9 @@ local __O = {};
         local ____t_result_34
         local ____t_33 = __t
         local ____get_result_32 = __get(TIRO, s.type)
-        __O[1588] = ____get_result_32
+        __O[1601] = ____get_result_32
         if ____t_33(____get_result_32) then
-            ____t_result_34 = __O[1588]
+            ____t_result_34 = __O[1601]
         else
             ____t_result_34 = 10
         end
@@ -362,9 +362,9 @@ local __O = {};
             local ____t_result_41
             local ____t_40 = __t
             local ____TS__Number_result_39 = __TS__Number(h.y)
-            __O[1589] = ____TS__Number_result_39
+            __O[1602] = ____TS__Number_result_39
             if ____t_40(____TS__Number_result_39) then
-                ____t_result_41 = __O[1589]
+                ____t_result_41 = __O[1602]
             else
                 ____t_result_41 = 0
             end
@@ -537,9 +537,9 @@ local __O = {};
                     local ____t_result_55
                     local ____t_54 = __t
                     local ____temp_53 = h.type == "smoke"
-                    __O[1590] = ____temp_53
+                    __O[1603] = ____temp_53
                     if ____t_54(____temp_53) then
-                        ____t_result_55 = __O[1590]
+                        ____t_result_55 = __O[1603]
                     else
                         ____t_result_55 = h.smoke
                     end
@@ -551,9 +551,9 @@ local __O = {};
                         local ____t_result_59
                         local ____t_58 = __t
                         local ____temp_57 = h.type == "astral"
-                        __O[1591] = ____temp_57
+                        __O[1604] = ____temp_57
                         if ____t_58(____temp_57) then
-                            ____t_result_59 = __O[1591]
+                            ____t_result_59 = __O[1604]
                         else
                             ____t_result_59 = h.astral
                         end
@@ -1127,9 +1127,9 @@ local __O = {};
                             local ____t_result_99
                             local ____t_98 = __t
                             local ____temp_97 = y - r < chao - alt or x - r < h.x - h.r - 1
-                            __O[1592] = ____temp_97
+                            __O[1605] = ____temp_97
                             if ____t_98(____temp_97) then
-                                ____t_result_99 = __O[1592]
+                                ____t_result_99 = __O[1605]
                             else
                                 ____t_result_99 = __gt(
                                     x + r,
@@ -1453,9 +1453,9 @@ local __O = {};
             ____t_result_128 = dono
         end
         local ____get_129_result_130 = ____get_129(DONO, ____t_result_128)
-        __O[1593] = ____get_129_result_130
+        __O[1606] = ____get_129_result_130
         if ____t_131(____get_129_result_130) then
-            ____t_result_132 = __O[1593]
+            ____t_result_132 = __O[1606]
         else
             ____t_result_132 = "pedra"
         end
@@ -2800,11 +2800,11 @@ local __O = {};
         else
             ____t_result_193 = h.height
         end
-        __O[1594] = ____t_result_193
+        __O[1607] = ____t_result_193
         if ____t_194(____t_result_193) then
             ____t_result_195 = __le(h.delay, 0)
         else
-            ____t_result_195 = __O[1594]
+            ____t_result_195 = __O[1607]
         end
         if ____t_196(____t_result_195) then
             return false
@@ -3133,9 +3133,9 @@ local __O = {};
         local ____t_result_215
         local ____t_214 = __t
         local ____temp_213 = not __t(mostrar) or not __t(c)
-        __O[1595] = ____temp_213
+        __O[1608] = ____temp_213
         if ____t_214(____temp_213) then
-            ____t_result_215 = __O[1595]
+            ____t_result_215 = __O[1608]
         else
             ____t_result_215 = not __t(s)
         end
@@ -3163,11 +3163,11 @@ local __O = {};
             local ____t_result_219
             local ____t_218 = __t
             local ____temp_217 = __gt(e.hp, 0) and not __t(e.conquista)
-            __O[1596] = ____temp_217
+            __O[1609] = ____temp_217
             if ____t_218(____temp_217) then
                 ____t_result_219 = e.type ~= "igor"
             else
-                ____t_result_219 = __O[1596]
+                ____t_result_219 = __O[1609]
             end
             if ____t_220(____t_result_219) then
                 contorno(

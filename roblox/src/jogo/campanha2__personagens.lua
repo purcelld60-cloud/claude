@@ -2426,9 +2426,9 @@ local __O = {};
         local ____t_result_37
         local ____t_36 = __t
         local ____TS__Number_result_35 = __TS__Number(o.frame)
-        __O[373] = ____TS__Number_result_35
+        __O[386] = ____TS__Number_result_35
         if ____t_36(____TS__Number_result_35) then
-            ____t_result_37 = __O[373]
+            ____t_result_37 = __O[386]
         else
             ____t_result_37 = 0
         end
@@ -2517,9 +2517,9 @@ local __O = {};
         else
             ____t_result_51 = S.mood
         end
-        __O[374] = ____t_result_51
+        __O[387] = ____t_result_51
         if ____t_52(____t_result_51) then
-            ____t_result_53 = __O[374]
+            ____t_result_53 = __O[387]
         else
             ____t_result_53 = ""
         end
@@ -2544,11 +2544,11 @@ local __O = {};
             local ____t_result_56
             local ____t_55 = __t
             local ____temp_54 = ____type == "c2_breno"
-            __O[375] = ____temp_54
+            __O[388] = ____temp_54
             if ____t_55(____temp_54) then
                 ____t_result_56 = o.powered
             else
-                ____t_result_56 = __O[375]
+                ____t_result_56 = __O[388]
             end
             ____t_result_57 = ____t_result_56
         end
@@ -2798,11 +2798,11 @@ local __O = {};
         local ____t_result_72
         local ____t_71 = __t
         local ____temp_70 = o.duelo == 2
-        __O[376] = ____temp_70
+        __O[389] = ____temp_70
         if ____t_71(____temp_70) then
             ____t_result_72 = attack
         else
-            ____t_result_72 = __O[376]
+            ____t_result_72 = __O[389]
         end
         if ____t_73(____t_result_72) then
             local ____t_result_74
@@ -2824,11 +2824,11 @@ local __O = {};
             local ____t_result_78
             local ____t_77 = __t
             local ____temp_76 = o.duelo == 3
-            __O[377] = ____temp_76
+            __O[390] = ____temp_76
             if ____t_77(____temp_76) then
                 ____t_result_78 = attack
             else
-                ____t_result_78 = __O[377]
+                ____t_result_78 = __O[390]
             end
             if ____t_79(____t_result_78) then
                 Rh = __arrL(
@@ -4022,9 +4022,9 @@ local __O = {};
             if ____opt_101 ~= nil then
                 ____opt_101 = ____opt_101.color
             end
-            __O[378] = ____opt_101
+            __O[391] = ____opt_101
             if ____t_103(____opt_101) then
-                ____t_result_104 = __O[378]
+                ____t_result_104 = __O[391]
             else
                 ____t_result_104 = "#3a2a20"
             end
@@ -4206,15 +4206,15 @@ local __O = {};
         local ____t_result_111
         local ____t_110 = __t
         local ____temp_109 = mood == "happy" or mood == "smug"
-        __O[379] = ____temp_109
+        __O[392] = ____temp_109
         if ____t_110(____temp_109) then
-            ____t_result_111 = __O[379]
+            ____t_result_111 = __O[392]
         else
             ____t_result_111 = S.pose == "cocky"
         end
-        __O[380] = ____t_result_111
+        __O[393] = ____t_result_111
         if ____t_112(____t_result_111) then
-            ____t_result_113 = __O[380]
+            ____t_result_113 = __O[393]
         else
             ____t_result_113 = S.pose == "sing"
         end
@@ -4528,17 +4528,17 @@ local __O = {};
         else
             ____t_result_115 = S.item
         end
-        __O[381] = ____t_result_115
+        __O[394] = ____t_result_115
         if ____t_116(____t_result_115) then
             ____t_result_117 = not __t(o.reach)
         else
-            ____t_result_117 = __O[381]
+            ____t_result_117 = __O[394]
         end
-        __O[382] = ____t_result_117
+        __O[395] = ____t_result_117
         if ____t_118(____t_result_117) then
             ____t_result_119 = o.item ~= false
         else
-            ____t_result_119 = __O[382]
+            ____t_result_119 = __O[395]
         end
         if ____t_120(____t_result_119) then
             item(
@@ -4614,9 +4614,9 @@ local __O = {};
         local ____t_result_129
         local ____t_128 = __t
         local ____TS__Number_result_127 = __TS__Number(o.frame)
-        __O[383] = ____TS__Number_result_127
+        __O[396] = ____TS__Number_result_127
         if ____t_128(____TS__Number_result_127) then
-            ____t_result_129 = __O[383]
+            ____t_result_129 = __O[396]
         else
             ____t_result_129 = 0
         end
@@ -4857,9 +4857,9 @@ local __O = {};
         local ____t_result_133
         local ____t_132 = __t
         local ____temp_131 = o.emotion == "happy"
-        __O[384] = ____temp_131
+        __O[397] = ____temp_131
         if ____t_132(____temp_131) then
-            ____t_result_133 = __O[384]
+            ____t_result_133 = __O[397]
         else
             ____t_result_133 = moving
         end
@@ -4995,9 +4995,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(window.Art) or not __t(window.Art.drawCharacter)
-    __O[372] = ____temp_0
+    __O[385] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[372]
+        ____t_result_2 = __O[385]
     else
         ____t_result_2 = window.CampanhaPersonagens
     end
@@ -5572,9 +5572,9 @@ local __O = {};
             local ____t_result_146
             local ____t_145 = __t
             local ____get_result_144 = __get(ROLE, id)
-            __O[385] = ____get_result_144
+            __O[398] = ____get_result_144
             if ____t_145(____get_result_144) then
-                ____t_result_146 = __O[385]
+                ____t_result_146 = __O[398]
             else
                 ____t_result_146 = ""
             end
@@ -5600,9 +5600,9 @@ local __O = {};
         local ____t_result_151
         local ____t_150 = __t
         local ____temp_149 = not __t(id) or not __t(spec)
-        __O[386] = ____temp_149
+        __O[399] = ____temp_149
         if ____t_150(____temp_149) then
-            ____t_result_151 = __O[386]
+            ____t_result_151 = __O[399]
         else
             ____t_result_151 = __get(SPEC, id)
         end
@@ -5630,9 +5630,9 @@ local __O = {};
                     local ____t_result_158
                     local ____t_154 = __t
                     local ____temp_153 = not not __t(__get(SPEC, ____type)) or ____type == "c2_biscoito"
-                    __O[387] = ____temp_153
+                    __O[400] = ____temp_153
                     if ____t_154(____temp_153) then
-                        ____t_result_158 = __O[387]
+                        ____t_result_158 = __O[400]
                     else
                         local ____re_test_157 = __re_test
                         local ____re_result_156 = __re("^(crianca|pre)_(daroca|reeis|jorge)$", "")

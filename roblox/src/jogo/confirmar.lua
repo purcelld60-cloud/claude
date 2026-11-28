@@ -73,9 +73,9 @@ local __O = {};
                     local ____t_result_4
                     local ____t_3 = __t
                     local ____temp_2 = e.key == "Tab" or e.key == "ArrowLeft"
-                    __O[3203] = ____temp_2
+                    __O[3220] = ____temp_2
                     if ____t_3(____temp_2) then
-                        ____t_result_4 = __O[3203]
+                        ____t_result_4 = __O[3220]
                     else
                         ____t_result_4 = e.key == "ArrowRight"
                     end
@@ -175,9 +175,9 @@ local __O = {};
                 local ____t_result_19
                 local ____t_18 = __t
                 local ____temp_17 = window.localStorage:getItem(SAVE)
-                __O[3204] = ____temp_17
+                __O[3221] = ____temp_17
                 if ____t_18(____temp_17) then
-                    ____t_result_19 = __O[3204]
+                    ____t_result_19 = __O[3221]
                 else
                     ____t_result_19 = "null"
                 end
@@ -216,15 +216,15 @@ local __O = {};
             local ____t_result_28
             local ____t_27 = __t
             local ____temp_26 = not __t(b)
-            __O[3205] = ____temp_26
+            __O[3222] = ____temp_26
             if ____t_27(____temp_26) then
-                ____t_result_28 = __O[3205]
+                ____t_result_28 = __O[3222]
             else
                 ____t_result_28 = liberado
             end
-            __O[3206] = ____t_result_28
+            __O[3223] = ____t_result_28
             if ____t_29(____t_result_28) then
-                ____t_result_30 = __O[3206]
+                ____t_result_30 = __O[3223]
             else
                 ____t_result_30 = not __t(temSave(nil))
             end

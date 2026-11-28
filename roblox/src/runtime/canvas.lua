@@ -710,6 +710,22 @@ function C.contexto(cv)
   ctx.fillText = function(t, x, y, mw) texto(t, n0(x, 0), n0(y, 0), estiloDe(ctx.fillStyle), mw) end
   ctx.strokeText = function(t, x, y, mw) texto(t, n0(x, 0), n0(y, 0), estiloDe(ctx.strokeStyle), mw) end
 
+  -- multiplica o RGB de todos os pixels mantendo a transparência (luz da hora nas camadas do Roblox)
+  ctx.multiplicarCor = function(r, g, b)
+    pausa()
+    r, g, b = tonumber(r) or 1, tonumber(g) or 1, tonumber(b) or 1
+    local TR, TG, TB = {}, {}, {}
+    for i = 0, 255 do TR[i] = floor(i * r + .5); TG[i] = floor(i * g + .5) * 256; TB[i] = floor(i * b + .5) * 65536 end
+    local px = P.px; local antes, depois = -1, 0
+    for o = 0, (P.w * P.h - 1) * 4, 4 do
+      local v = RD(px, o)
+      if v >= 16777216 then
+        if v ~= antes then antes = v; depois = TR[v % 256] + TG[v // 256 % 256] + TB[v // 65536 % 256] + (v // 16777216) * 16777216 end
+        WR(px, o, depois)
+      end
+    end
+  end
+
   -- cópia da tela inteira de outro canvas do mesmo tamanho (o jogo usa para o fundo guardado das lutas)
   ctx.copiarTela = function(outro) pausa(); if type(outro) ~= "table" or not outro._ then return false end; return C.copiar(cv, outro) end
 

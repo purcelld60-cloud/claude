@@ -155,11 +155,11 @@ local __O = {};
                 local ____t_result_2
                 local ____t_1 = __t
                 local ____temp_0 = i.estado ~= "ausente"
-                __O[913] = ____temp_0
+                __O[926] = ____temp_0
                 if ____t_1(____temp_0) then
                     ____t_result_2 = not __t(melhor) or math.abs(meio(nil, i) - x) < math.abs(meio(nil, melhor) - x)
                 else
-                    ____t_result_2 = __O[913]
+                    ____t_result_2 = __O[926]
                 end
                 if ____t_3(____t_result_2) then
                     ____t_result_4 = i
@@ -235,23 +235,23 @@ local __O = {};
             else
                 ____t_result_7 = p.ground
             end
-            __O[914] = ____t_result_7
+            __O[927] = ____t_result_7
             if ____t_8(____t_result_7) then
                 ____t_result_9 = i.estado ~= "ausente"
             else
-                ____t_result_9 = __O[914]
+                ____t_result_9 = __O[927]
             end
-            __O[915] = ____t_result_9
+            __O[928] = ____t_result_9
             if ____t_10(____t_result_9) then
                 ____t_result_11 = sob(nil, i, p.x)
             else
-                ____t_result_11 = __O[915]
+                ____t_result_11 = __O[928]
             end
-            __O[916] = ____t_result_11
+            __O[929] = ____t_result_11
             if ____t_12(____t_result_11) then
                 ____t_result_13 = math.abs(p.y - i.y) < 2
             else
-                ____t_result_13 = __O[916]
+                ____t_result_13 = __O[929]
             end
             local levando = ____t_result_13
             i.anterior = i.y
@@ -284,18 +284,18 @@ local __O = {};
                     local ____t_result_17
                     local ____t_16 = __t
                     local ____temp_15 = i.estado == "ausente" or not __t(sob(nil, i, p.x))
-                    __O[917] = ____temp_15
+                    __O[930] = ____temp_15
                     if ____t_16(____temp_15) then
-                        ____t_result_17 = __O[917]
+                        ____t_result_17 = __O[930]
                     else
                         ____t_result_17 = __gt(
                             antes,
                             math.max(i.y, i.anterior) + 2
                         )
                     end
-                    __O[918] = ____t_result_17
+                    __O[931] = ____t_result_17
                     if ____t_18(____t_result_17) then
-                        ____t_result_19 = __O[918]
+                        ____t_result_19 = __O[931]
                     else
                         ____t_result_19 = __lt(p.y, i.y)
                     end
@@ -364,17 +364,17 @@ local __O = {};
                 if p ~= nil then
                     ____opt_result_30 = p.ground
                 end
-                __O[919] = ____opt_result_30
+                __O[932] = ____opt_result_30
                 if ____t_31(____opt_result_30) then
                     ____t_result_32 = sob(nil, i, p.x)
                 else
-                    ____t_result_32 = __O[919]
+                    ____t_result_32 = __O[932]
                 end
-                __O[920] = ____t_result_32
+                __O[933] = ____t_result_32
                 if ____t_33(____t_result_32) then
                     ____t_result_34 = math.abs(i.y - p.y) < 3
                 else
-                    ____t_result_34 = __O[920]
+                    ____t_result_34 = __O[933]
                 end
                 if ____t_35(____t_result_34) then
                     p.ground = false
@@ -389,11 +389,11 @@ local __O = {};
         local ____t_result_38
         local ____t_37 = __t
         local ____temp_36 = f.golpe == "rasante"
-        __O[921] = ____temp_36
+        __O[934] = ____temp_36
         if ____t_37(____temp_36) then
             ____t_result_38 = f.estado == "firing" or f.estado == "windup"
         else
-            ____t_result_38 = __O[921]
+            ____t_result_38 = __O[934]
         end
         if ____t_39(____t_result_38) then
             return
@@ -422,11 +422,11 @@ local __O = {};
             __add(y, ry),
             f.y - c.altura
         )
-        __O[922] = ____temp_41
+        __O[935] = ____temp_41
         if ____t_42(____temp_41) then
             ____t_result_43 = __lt(y - ry, f.y)
         else
-            ____t_result_43 = __O[922]
+            ____t_result_43 = __O[935]
         end
         return ____t_result_43
     end

@@ -6027,11 +6027,11 @@ local __O = {};
                 local ____t_result_21
                 local ____t_20 = __t
                 local ____vis_result_19 = vis(nil, sx, 20)
-                __O[431] = ____vis_result_19
+                __O[444] = ____vis_result_19
                 if ____t_20(____vis_result_19) then
                     ____t_result_21 = wx < ESC.Z0 - 10 or wx > ESC.Z1 + 10
                 else
-                    ____t_result_21 = __O[431]
+                    ____t_result_21 = __O[444]
                 end
                 if ____t_22(____t_result_21) then
                     pessoa(

@@ -55,9 +55,9 @@ local __O = {};
         local ____t_result_56
         local ____t_55 = __t
         local ____tem_result_54 = tem(nil, "biscoito_cao")
-        __O[866] = ____tem_result_54
+        __O[879] = ____tem_result_54
         if ____t_55(____tem_result_54) then
-            ____t_result_56 = __O[866]
+            ____t_result_56 = __O[879]
         else
             ____t_result_56 = tem(nil, "cao")
         end
@@ -69,9 +69,9 @@ local __O = {};
         local ____t_result_60
         local ____t_59 = __t
         local ____tem_result_58 = tem(nil, "biscoito_cao")
-        __O[867] = ____tem_result_58
+        __O[880] = ____tem_result_58
         if ____t_59(____tem_result_58) then
-            ____t_result_60 = __O[867]
+            ____t_result_60 = __O[880]
         else
             ____t_result_60 = tem(nil, "cao")
         end
@@ -96,15 +96,15 @@ local __O = {};
                 local ____t_result_71
                 local ____t_70 = __t
                 local ____temp_69 = not __t(p)
-                __O[868] = ____temp_69
+                __O[881] = ____temp_69
                 if ____t_70(____temp_69) then
-                    ____t_result_71 = __O[868]
+                    ____t_result_71 = __O[881]
                 else
                     ____t_result_71 = p.sair
                 end
-                __O[869] = ____t_result_71
+                __O[882] = ____t_result_71
                 if ____t_72(____t_result_71) then
-                    ____t_result_73 = __O[869]
+                    ____t_result_73 = __O[882]
                 else
                     ____t_result_73 = p.usado
                 end
@@ -256,11 +256,11 @@ local __O = {};
             local ____t_result_84
             local ____t_83 = __t
             local ____temp_82 = n.ok == nil and n.lane == i
-            __O[871] = ____temp_82
+            __O[884] = ____temp_82
             if ____t_83(____temp_82) then
                 ____t_result_84 = math.abs(n.t - r.t) < d
             else
-                ____t_result_84 = __O[871]
+                ____t_result_84 = __O[884]
             end
             if ____t_85(____t_result_84) then
                 d = math.abs(n.t - r.t)
@@ -948,11 +948,11 @@ local __O = {};
                                 local ____t_result_29
                                 local ____t_28 = __t
                                 local ____pegou_result_27 = pegou(nil, "pneu")
-                                __O[865] = ____pegou_result_27
+                                __O[878] = ____pegou_result_27
                                 if ____t_28(____pegou_result_27) then
                                     ____t_result_29 = tem(nil, "corrente")
                                 else
-                                    ____t_result_29 = __O[865]
+                                    ____t_result_29 = __O[878]
                                 end
                                 ____temp_31 = ____t_30(____t_result_29) and "entregar" or "andando"
                             else
@@ -1365,9 +1365,9 @@ local __O = {};
         else
             ____t_result_77 = c0.nIda
         end
-        __O[870] = ____t_result_77
+        __O[883] = ____t_result_77
         if ____t_78(____t_result_77) then
-            ____t_result_79 = __O[870]
+            ____t_result_79 = __O[883]
         else
             ____t_result_79 = __gt(c0.t, c0.lim)
         end
@@ -1716,19 +1716,19 @@ local __O = {};
                 local ____t_result_106
                 local ____t_105 = __t
                 local ____gt_result_104 = __gt(e.hp, 0)
-                __O[872] = ____gt_result_104
+                __O[885] = ____gt_result_104
                 if ____t_105(____gt_result_104) then
                     ____t_result_106 = e.onDano
                 else
-                    ____t_result_106 = __O[872]
+                    ____t_result_106 = __O[885]
                 end
-                __O[873] = ____t_result_106
+                __O[886] = ____t_result_106
                 if ____t_107(____t_result_106) then
                     ____t_result_108 = math.abs(e.x - P.x) < 340
                 else
-                    ____t_result_108 = __O[873]
+                    ____t_result_108 = __O[886]
                 end
-                __O[874] = ____t_result_108
+                __O[887] = ____t_result_108
                 if ____t_109(____t_result_108) then
                     local ____gt_111 = __gt
                     local ____e_y_110 = e.y
@@ -1737,7 +1737,7 @@ local __O = {};
                     end
                     ____t_result_112 = ____gt_111(____e_y_110, FLOOR - 40)
                 else
-                    ____t_result_112 = __O[874]
+                    ____t_result_112 = __O[887]
                 end
                 return ____t_result_112
             end
@@ -1746,9 +1746,9 @@ local __O = {};
         local ____t_result_116
         local ____t_115 = __t
         local ____temp_114 = not __t(cao.alvo) or __le(cao.alvo.hp, 0)
-        __O[875] = ____temp_114
+        __O[888] = ____temp_114
         if ____t_115(____temp_114) then
-            ____t_result_116 = __O[875]
+            ____t_result_116 = __O[888]
         else
             ____t_result_116 = not __t(__call(vivos, "includes", cao.alvo))
         end
@@ -1764,9 +1764,9 @@ local __O = {};
                 ),
                 0
             )
-            __O[876] = ____get_result_118
+            __O[889] = ____get_result_118
             if ____t_119(____get_result_118) then
-                ____t_result_120 = __O[876]
+                ____t_result_120 = __O[889]
             else
                 ____t_result_120 = nil
             end
@@ -1796,11 +1796,11 @@ local __O = {};
         else
             ____t_result_123 = cao.alvo
         end
-        __O[877] = ____t_result_123
+        __O[890] = ____t_result_123
         if ____t_124(____t_result_123) then
             ____t_result_125 = __le(cao.cd, 0)
         else
-            ____t_result_125 = __O[877]
+            ____t_result_125 = __O[890]
         end
         if ____t_126(____t_result_125) then
             cao.cd = 2.4
@@ -1830,9 +1830,9 @@ local __O = {};
                 local ____t_result_134
                 local ____t_132 = __t
                 local ____temp_131 = a.cena ~= cena
-                __O[878] = ____temp_131
+                __O[891] = ____temp_131
                 if ____t_132(____temp_131) then
-                    ____t_result_134 = __O[878]
+                    ____t_result_134 = __O[891]
                 else
                     local ____t_result_133
                     if __t(a.cao) then
@@ -1912,17 +1912,17 @@ local __O = {};
             local ____t_result_148
             local ____t_147 = __t
             local ____temp_146 = it.cena == cena
-            __O[879] = ____temp_146
+            __O[892] = ____temp_146
             if ____t_147(____temp_146) then
                 ____t_result_148 = it:quando()
             else
-                ____t_result_148 = __O[879]
+                ____t_result_148 = __O[892]
             end
-            __O[880] = ____t_result_148
+            __O[893] = ____t_result_148
             if ____t_149(____t_result_148) then
                 ____t_result_150 = not __t(pegou(nil, it.id))
             else
-                ____t_result_150 = __O[880]
+                ____t_result_150 = __O[893]
             end
             if ____t_151(____t_result_150) then
                 __call(
@@ -1967,11 +1967,11 @@ local __O = {};
         local ____t_result_158
         local ____t_157 = __t
         local ____temp_156 = cena == 14
-        __O[881] = ____temp_156
+        __O[894] = ____temp_156
         if ____t_157(____temp_156) then
             ____t_result_158 = corrida
         else
-            ____t_result_158 = __O[881]
+            ____t_result_158 = __O[894]
         end
         if ____t_159(____t_result_158) then
             return __call(
@@ -2018,9 +2018,9 @@ local __O = {};
                 local ____t_result_163
                 local ____t_161 = __t
                 local ____temp_160 = a.cena ~= cena
-                __O[882] = ____temp_160
+                __O[895] = ____temp_160
                 if ____t_161(____temp_160) then
-                    ____t_result_163 = __O[882]
+                    ____t_result_163 = __O[895]
                 else
                     local ____t_result_162
                     if __t(a.cao) then
@@ -2131,17 +2131,17 @@ local __O = {};
             local ____t_result_185
             local ____t_184 = __t
             local ____temp_183 = it.cena == cena
-            __O[883] = ____temp_183
+            __O[896] = ____temp_183
             if ____t_184(____temp_183) then
                 ____t_result_185 = it:quando()
             else
-                ____t_result_185 = __O[883]
+                ____t_result_185 = __O[896]
             end
-            __O[884] = ____t_result_185
+            __O[897] = ____t_result_185
             if ____t_186(____t_result_185) then
                 ____t_result_187 = not __t(pegou(nil, it.id))
             else
-                ____t_result_187 = __O[884]
+                ____t_result_187 = __O[897]
             end
             if ____t_188(____t_result_187) then
                 local y = FLOOR - 20 + math.sin(t * 3 + it.x) * 4
@@ -2645,7 +2645,7 @@ local __O = {};
                         local ____t_result_209
                         local ____t_208 = __t
                         local ____temp_207 = a.cena == cena
-                        __O[885] = ____temp_207
+                        __O[898] = ____temp_207
                         if ____t_208(____temp_207) then
                             ____t_result_209 = __call(
                                 __arrL({"nova", "entregar"}, 2),
@@ -2653,7 +2653,7 @@ local __O = {};
                                 a:estado()
                             )
                         else
-                            ____t_result_209 = __O[885]
+                            ____t_result_209 = __O[898]
                         end
                         return ____t_result_209
                     end
@@ -2672,17 +2672,17 @@ local __O = {};
                         local ____t_result_212
                         local ____t_211 = __t
                         local ____temp_210 = i.cena == cena
-                        __O[886] = ____temp_210
+                        __O[899] = ____temp_210
                         if ____t_211(____temp_210) then
                             ____t_result_212 = i:quando()
                         else
-                            ____t_result_212 = __O[886]
+                            ____t_result_212 = __O[899]
                         end
-                        __O[887] = ____t_result_212
+                        __O[900] = ____t_result_212
                         if ____t_213(____t_result_212) then
                             ____t_result_214 = not __t(pegou(nil, i.id))
                         else
-                            ____t_result_214 = __O[887]
+                            ____t_result_214 = __O[900]
                         end
                         return ____t_result_214
                     end

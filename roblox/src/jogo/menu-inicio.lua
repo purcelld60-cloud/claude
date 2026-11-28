@@ -28,9 +28,9 @@ local __O = {};
     local ____t_result_2
     local ____t_1 = __t
     local ____temp_0 = not __t(tela)
-    __O[3197] = ____temp_0
+    __O[3214] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[3197]
+        ____t_result_2 = __O[3214]
     else
         ____t_result_2 = window.MenuInicio
     end
@@ -68,9 +68,9 @@ local __O = {};
         local ____t_result_6
         local ____t_5 = __t
         local ____temp_4 = b == jogar or b == multi
-        __O[3198] = ____temp_4
+        __O[3215] = ____temp_4
         if ____t_5(____temp_4) then
-            ____t_result_6 = __O[3198]
+            ____t_result_6 = __O[3215]
         else
             ____t_result_6 = b.id == "adventureInfoBtn"
         end
@@ -87,9 +87,9 @@ local __O = {};
         local ____t_result_10
         local ____t_9 = __t
         local ____temp_8 = b:hasAttribute("data-open-arena")
-        __O[3199] = ____temp_8
+        __O[3216] = ____temp_8
         if ____t_9(____temp_8) then
-            ____t_result_10 = __O[3199]
+            ____t_result_10 = __O[3216]
         else
             ____t_result_10 = b:hasAttribute("data-open-tv")
         end
@@ -150,11 +150,11 @@ local __O = {};
                         else
                             ____t_result_16 = chave
                         end
-                        __O[3200] = ____t_result_16
+                        __O[3217] = ____t_result_16
                         if ____t_17(____t_result_16) then
                             ____t_result_18 = painel:querySelector(("[" .. tostring(chave)) .. "]")
                         else
-                            ____t_result_18 = __O[3200]
+                            ____t_result_18 = __O[3217]
                         end
                         if ____t_19(____t_result_18) then
                             b:remove()
@@ -195,17 +195,17 @@ local __O = {};
                 else
                     ____t_result_27 = cont
                 end
-                __O[3201] = ____t_result_27
+                __O[3218] = ____t_result_27
                 if ____t_28(____t_result_27) then
                     ____t_result_29 = cont.parentElement == c1
                 else
-                    ____t_result_29 = __O[3201]
+                    ____t_result_29 = __O[3218]
                 end
-                __O[3202] = ____t_result_29
+                __O[3219] = ____t_result_29
                 if ____t_30(____t_result_29) then
                     ____t_result_31 = cont.nextElementSibling ~= ini
                 else
-                    ____t_result_31 = __O[3202]
+                    ____t_result_31 = __O[3219]
                 end
                 if ____t_32(____t_result_31) then
                     c1:insertBefore(cont, ini)

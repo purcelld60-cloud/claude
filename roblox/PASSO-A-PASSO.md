@@ -145,10 +145,14 @@ No celular, aparecem os botões de toque do próprio jogo.
 
 A **qualidade gráfica do Roblox** (menu do Roblox → Configurações → Qualidade gráfica) vira a do jogo:
 
-- 1 a 3 → **BAIXA**;
-- 4 a 7 → **MÉDIA**;
-- 8 a 10 → **ALTA**;
-- Automático → **AUTOMÁTICA**, começando na **BAIXA** (o jogo desenha tudo no processador do aparelho).
+- 1 a 7 → **BAIXA**;
+- 8 a 10 → **MÉDIA** (acrescenta o acabamento dos personagens, que ainda pesa no processador);
+- Automático → **AUTOMÁTICA**, começando na **BAIXA**.
+
+**Cenário em camadas (campanha 1):** o céu, os fundos e o meio do cenário viram imagens que a placa de vídeo do
+Roblox desliza a cada quadro, sem esperar o Lua. O jogo continua desenhando o cenário do mesmo jeito (mesma arte,
+hora do dia, luzes), só que aos poucos, numa rotina à parte. Por isso andar fica liso, e as animações do fundo
+(árvores, bichos, luzes) andam um pouco mais devagar que o resto. **F2** liga e desliga, para comparar.
 
 ---
 

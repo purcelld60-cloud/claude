@@ -99,15 +99,15 @@ local __O = {};
             local ____t_result_11
             local ____t_10 = __t
             local ____temp_9 = window.document:getElementById("gameViewport")
-            __O[350] = ____temp_9
+            __O[363] = ____temp_9
             if ____t_10(____temp_9) then
-                ____t_result_11 = __O[350]
+                ____t_result_11 = __O[363]
             else
                 ____t_result_11 = window.document:getElementById("gameShell")
             end
-            __O[351] = ____t_result_11
+            __O[364] = ____t_result_11
             if ____t_12(____t_result_11) then
-                ____t_result_13 = __O[351]
+                ____t_result_13 = __O[364]
             else
                 ____t_result_13 = window.document.body
             end
@@ -167,15 +167,15 @@ local __O = {};
         local ____t_result_31
         local ____t_30 = __t
         local ____temp_29 = o.scene ~= SCENE
-        __O[352] = ____temp_29
+        __O[365] = ____temp_29
         if ____t_30(____temp_29) then
-            ____t_result_31 = __O[352]
+            ____t_result_31 = __O[365]
         else
             ____t_result_31 = o.arena
         end
-        __O[353] = ____t_result_31
+        __O[366] = ____t_result_31
         if ____t_32(____t_result_31) then
-            ____t_result_33 = __O[353]
+            ____t_result_33 = __O[366]
         else
             ____t_result_33 = o.room
         end
@@ -188,9 +188,9 @@ local __O = {};
         local ____t_result_37
         local ____t_36 = __t
         local ____TS__Number_result_35 = __TS__Number(o.time)
-        __O[354] = ____TS__Number_result_35
+        __O[367] = ____TS__Number_result_35
         if ____t_36(____TS__Number_result_35) then
-            ____t_result_37 = __O[354]
+            ____t_result_37 = __O[367]
         else
             ____t_result_37 = 0
         end
@@ -208,9 +208,9 @@ local __O = {};
         local ____t_result_40
         local ____t_39 = __t
         local ____temp_38 = amp < target and __TS__MathSign(omega) == __TS__MathSign(theta)
-        __O[355] = ____temp_38
+        __O[368] = ____temp_38
         if ____t_39(____temp_38) then
-            ____t_result_40 = __O[355]
+            ____t_result_40 = __O[368]
         else
             ____t_result_40 = amp < 0.02
         end

@@ -25,9 +25,9 @@ local __O = {};
         end
         ____t_result_3 = not ____t_2(____opt_0)
     end
-    __O[452] = ____t_result_3
+    __O[465] = ____t_result_3
     if ____t_4(____t_result_3) then
-        ____t_result_8 = __O[452]
+        ____t_result_8 = __O[465]
     else
         local ____t_7 = __t
         local ____opt_5 = window.CampanhaCamadas
@@ -1761,14 +1761,14 @@ local __O = {};
                 local ____t_result_16
                 local ____t_15 = __t
                 local ____vis_result_14 = vis(nil, x, 10)
-                __O[453] = ____vis_result_14
+                __O[466] = ____vis_result_14
                 if ____t_15(____vis_result_14) then
                     ____t_result_16 = __mod(
                         math.floor(t * 0.7 + ax),
                         5
                     )
                 else
-                    ____t_result_16 = __O[453]
+                    ____t_result_16 = __O[466]
                 end
                 if ____t_17(____t_result_16) then
                     R(

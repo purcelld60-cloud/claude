@@ -36,11 +36,11 @@ local __O = {};
                 local ____t_result_19
                 local ____t_18 = __t
                 local ____temp_17 = math.abs(x - p.x) < 15 and __gt(y, p.y - 50)
-                __O[509] = ____temp_17
+                __O[522] = ____temp_17
                 if ____t_18(____temp_17) then
                     ____t_result_19 = __lt(y, p.y + 22)
                 else
-                    ____t_result_19 = __O[509]
+                    ____t_result_19 = __O[522]
                 end
                 if ____t_20(____t_result_19) then
                     return i
@@ -124,11 +124,11 @@ local __O = {};
         local ____t_result_23
         local ____t_22 = __t
         local ____temp_21 = __ge(st.moedas, preco) and not __t(tem)
-        __O[510] = ____temp_21
+        __O[523] = ____temp_21
         if ____t_22(____temp_21) then
             ____t_result_23 = livre
         else
-            ____t_result_23 = __O[510]
+            ____t_result_23 = __O[523]
         end
         local pode = ____t_result_23
         local ____temp_30 = box:querySelector(".perg")
@@ -952,9 +952,9 @@ local __O = {};
         local ____t_result_41
         local ____t_40 = __t
         local ____liberada_result_39 = liberada(nil, p.id)
-        __O[511] = ____liberada_result_39
+        __O[524] = ____liberada_result_39
         if ____t_40(____liberada_result_39) then
-            ____t_result_41 = __O[511]
+            ____t_result_41 = __O[524]
         else
             ____t_result_41 = tem
         end
@@ -1691,9 +1691,9 @@ local __O = {};
             local ____t_result_4
             local ____t_3 = __t
             local ____temp_2 = window.localStorage:getItem(KEY)
-            __O[508] = ____temp_2
+            __O[521] = ____temp_2
             if ____t_3(____temp_2) then
-                ____t_result_4 = __O[508]
+                ____t_result_4 = __O[521]
             else
                 ____t_result_4 = "null"
             end
@@ -1931,9 +1931,9 @@ local __O = {};
         local ____t_result_49
         local ____t_48 = __t
         local ____TS__Number_result_47 = __TS__Number(o.time)
-        __O[512] = ____TS__Number_result_47
+        __O[525] = ____TS__Number_result_47
         if ____t_48(____TS__Number_result_47) then
-            ____t_result_49 = __O[512]
+            ____t_result_49 = __O[525]
         else
             ____t_result_49 = 0
         end
@@ -1950,9 +1950,9 @@ local __O = {};
         local ____t_result_52
         local ____t_51 = __t
         local ____TS__Number_result_50 = __TS__Number(o.camera)
-        __O[513] = ____TS__Number_result_50
+        __O[526] = ____TS__Number_result_50
         if ____t_51(____TS__Number_result_50) then
-            ____t_result_52 = __O[513]
+            ____t_result_52 = __O[526]
         else
             ____t_result_52 = 0
         end
@@ -2123,9 +2123,9 @@ local __O = {};
             ____opt_57 = ____opt_57.x
         end
         local ____TS__Number_result_59 = __TS__Number(____opt_57)
-        __O[514] = ____TS__Number_result_59
+        __O[527] = ____TS__Number_result_59
         if ____t_60(____TS__Number_result_59) then
-            ____t_result_61 = __O[514]
+            ____t_result_61 = __O[527]
         else
             ____t_result_61 = -9999
         end

@@ -385,9 +385,44 @@ function D.iniciar(op)
   end
 
   -- desenha a página inteira no canvas da tela
-  function D.desenhar()
+  -- Resumo do que a página mostra (elementos visíveis, textos, larguras, cores, janelas): se não mudou desde o último
+  -- quadro, a interface não precisa ser desenhada de novo (no modo em camadas ela é uma imagem separada).
+  -- O jogo mexe na página todo quadro (de 4 a 90 vezes), quase sempre gravando o mesmo valor.
+  local ESTILOS = { "width", "height", "color", "opacity", "transform", "left", "top", "background", "backgroundColor" }
+  local function resumoJanela(el, partes)
+    for _, f in ipairs(el._filhos) do
+      if f.nodeType == 3 then partes[#partes + 1] = f._texto
+      elseif f.nodeType == 1 and not escondido(f) then
+        if f._tag == "canvas" and f._ then return true end
+        partes[#partes + 1] = "<" .. f._tag .. (f._attr.disabled and "d" or "") .. tostring(rawget(f, "_valor") or "")
+        if resumoJanela(f, partes) then return true end
+      end
+    end
+    return false
+  end
+  local function assinar(lista, janelas, idx)
+    local partes, vivo = { modo(), idx }, false
+    for _, item in ipairs(lista) do
+      local el, r = item.el, item.r
+      partes[#partes + 1] = "\0" .. chave(el)
+      local st = el.style
+      if st then for _, k in ipairs(ESTILOS) do local v = rawget(st, k); if v ~= nil then partes[#partes + 1] = k .. "=" .. tostring(v) end end end
+      for _, f in ipairs(el._filhos) do if f.nodeType == 3 then partes[#partes + 1] = f._texto end end
+      if r.campo then partes[#partes + 1] = tostring(el.value) end
+      -- canvas que não ocupa a tela toda (minigame, prévia, logo): muda sozinho, a interface é redesenhada sempre
+      if r.canvas and el._ and not (r.x == 0 and r.y == 0 and r.w == 960 and r.h == 540) then vivo = true end
+    end
+    for _, el in ipairs(janelas) do partes[#partes + 1] = "\1J"; if resumoJanela(el, partes) then vivo = true end end
+    return table.concat(partes, "\2"), vivo
+  end
+  local ultimaAssinatura
+  D.camadaJogo = nil
+
+  -- op.camadas: a página vira uma camada transparente por cima do canvas do jogo (que o Roblox mostra numa imagem
+  -- própria, D.camadaJogo); devolve a tela e se ela mudou desde a última vez.
+  function D.desenhar(op)
+    local camadas = op and op.camadas
     ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"
-    ctx.fillStyle = "#000000"; ctx:fillRect(0, 0, 960, 540)
     local tab, idx = I[modo()], estadoAtual()
     local nomeEstado = I.estados[modo()][idx] and I.estados[modo()][idx].nome
     local lista, janelas = {}, {}
@@ -407,6 +442,16 @@ function D.iniciar(op)
     end
     andar(document.documentElement, 0, 1)
     table.sort(lista, function(a, b) if a.z ~= b.z then return a.z < b.z end; return a.n < b.n end)
+    if camadas then
+      local ass, vivo = assinar(lista, janelas, idx)
+      if ass == ultimaAssinatura then return tela, false end
+      ultimaAssinatura = not vivo and ass or nil
+      ctx:clearRect(0, 0, 960, 540)
+      D.camadaJogo = nil
+    else
+      ultimaAssinatura = nil
+      ctx.fillStyle = "#000000"; ctx:fillRect(0, 0, 960, 540)
+    end
     desenhados = {}
     local jaDesenhou = false
     for _, item in ipairs(lista) do
@@ -480,7 +525,10 @@ function D.iniciar(op)
         else colarPele(p, r.px + dx, r.py + dy) end
       end
       if r.canvas and el._ then
-        if not jaDesenhou and op >= 1 and x == 0 and y == 0 and w == 960 and h == 540 and el.width == 960 and el.height == 540 then
+        if camadas and not D.camadaJogo and op >= 1 and x == 0 and y == 0 and w == 960 and h == 540 and el.width == 960 and el.height == 540 then
+          -- camada do jogo: o Roblox mostra este canvas numa imagem própria, embaixo da página; o que veio antes fica por baixo dele
+          D.camadaJogo = el; ctx:clearRect(0, 0, 960, 540)
+        elseif not jaDesenhou and op >= 1 and x == 0 and y == 0 and w == 960 and h == 540 and el.width == 960 and el.height == 540 then
           Canvas.copiar(tela, el) -- a cena do jogo ocupa a tela toda: cópia direta, sem misturar pixel a pixel
         else
           ctx.globalAlpha = op
@@ -531,7 +579,7 @@ function D.iniciar(op)
     end
     for _, el in ipairs(janelas) do desenharJanela(el) end
     ctx.globalAlpha = 1
-    return tela
+    return tela, true
   end
 
   -- texto do canvas do jogo com as letras reais (ctx.font = "bold 12px monospace" etc.)

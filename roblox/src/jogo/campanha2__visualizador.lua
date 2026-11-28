@@ -37,11 +37,11 @@ local __O = {};
                     local ____t_result_23
                     local ____t_22 = __t
                     local ____temp_21 = id == "interact"
-                    __O[647] = ____temp_21
+                    __O[660] = ____temp_21
                     if ____t_22(____temp_21) then
                         ____t_result_23 = down
                     else
-                        ____t_result_23 = __O[647]
+                        ____t_result_23 = __O[660]
                     end
                     if ____t_24(____t_result_23) then
                         usar(nil)
@@ -230,9 +230,9 @@ local __O = {};
         __re("[?&]cenarios2\\b", ""),
         window.location.search
     ) or not __t(window.CampanhaCenarios)
-    __O[645] = ____temp_0
+    __O[658] = ____temp_0
     if ____t_1(____temp_0) then
-        ____t_result_2 = __O[645]
+        ____t_result_2 = __O[658]
     else
         ____t_result_2 = not __t(window.Art)
     end
@@ -281,9 +281,9 @@ local __O = {};
         if ____opt_6 ~= nil then
             ____opt_result_8 = ____opt_6(____opt_6, id)
         end
-        __O[646] = ____opt_result_8
+        __O[659] = ____opt_result_8
         if ____t_9(____opt_result_8) then
-            ____t_result_10 = __O[646]
+            ____t_result_10 = __O[659]
         else
             ____t_result_10 = __arrL({}, 0)
         end
@@ -432,9 +432,9 @@ local __O = {};
         if ____opt_33 ~= nil then
             ____opt_result_35 = ____opt_33(____opt_33)
         end
-        __O[648] = ____opt_result_35
+        __O[661] = ____opt_result_35
         if ____t_36(____opt_result_35) then
-            ____t_result_42 = __O[648]
+            ____t_result_42 = __O[661]
         else
             local ____opt_39 = window.DarocaLook
             if ____opt_39 ~= nil then
@@ -446,9 +446,9 @@ local __O = {};
             end
             ____t_result_42 = ____opt_result_41
         end
-        __O[649] = ____t_result_42
+        __O[662] = ____t_result_42
         if ____t_43(____t_result_42) then
-            ____t_result_49 = __O[649]
+            ____t_result_49 = __O[662]
         else
             local ____opt_46 = window.CampanhaPoderes
             if ____opt_46 ~= nil then
@@ -460,9 +460,9 @@ local __O = {};
             end
             ____t_result_49 = ____opt_result_48
         end
-        __O[650] = ____t_result_49
+        __O[663] = ____t_result_49
         if ____t_50(____t_result_49) then
-            ____t_result_56 = __O[650]
+            ____t_result_56 = __O[663]
         else
             local ____opt_53 = window.Mapa3D
             if ____opt_53 ~= nil then
@@ -474,9 +474,9 @@ local __O = {};
             end
             ____t_result_56 = ____opt_result_55
         end
-        __O[651] = ____t_result_56
+        __O[664] = ____t_result_56
         if ____t_57(____t_result_56) then
-            ____t_result_63 = __O[651]
+            ____t_result_63 = __O[664]
         else
             local ____opt_60 = window.CampanhaLoja
             if ____opt_60 ~= nil then
@@ -488,9 +488,9 @@ local __O = {};
             end
             ____t_result_63 = ____opt_result_62
         end
-        __O[652] = ____t_result_63
+        __O[665] = ____t_result_63
         if ____t_64(____t_result_63) then
-            ____t_result_70 = __O[652]
+            ____t_result_70 = __O[665]
         else
             local ____opt_67 = window.CampanhaCutscenes
             if ____opt_67 ~= nil then
@@ -508,9 +508,9 @@ local __O = {};
         local ____t_result_80
         local ____t_73 = __t
         local ____cobre_result_72 = cobre(nil)
-        __O[653] = ____cobre_result_72
+        __O[666] = ____cobre_result_72
         if ____t_73(____cobre_result_72) then
-            ____t_result_80 = __O[653]
+            ____t_result_80 = __O[666]
         else
             local ____t_79 = __t
             local ____opt_76 = window.CampanhaMoradores
@@ -532,9 +532,9 @@ local __O = {};
             local ____t_result_107
             local ____t_106 = __t
             local ____temp_105 = not __t(open)
-            __O[654] = ____temp_105
+            __O[667] = ____temp_105
             if ____t_106(____temp_105) then
-                ____t_result_107 = __O[654]
+                ____t_result_107 = __O[667]
             else
                 ____t_result_107 = ocupado(nil)
             end
@@ -577,11 +577,11 @@ local __O = {};
             else
                 ____t_result_115 = treino
             end
-            __O[655] = ____t_result_115
+            __O[668] = ____t_result_115
             if ____t_116(____t_result_115) then
                 ____t_result_117 = not __t(e["repeat"])
             else
-                ____t_result_117 = __O[655]
+                ____t_result_117 = __O[668]
             end
             if ____t_118(____t_result_117) then
                 TR:acao(
@@ -594,9 +594,9 @@ local __O = {};
             local ____t_result_121
             local ____t_120 = __t
             local ____temp_119 = k == "Space" or k == "KeyW"
-            __O[656] = ____temp_119
+            __O[669] = ____temp_119
             if ____t_120(____temp_119) then
-                ____t_result_121 = __O[656]
+                ____t_result_121 = __O[669]
             else
                 ____t_result_121 = k == "ArrowUp"
             end
@@ -657,9 +657,9 @@ local __O = {};
                 local ____t_result_132
                 local ____t_131 = __t
                 local ____temp_130 = e.code == "Space" or e.code == "KeyW"
-                __O[657] = ____temp_130
+                __O[670] = ____temp_130
                 if ____t_131(____temp_130) then
-                    ____t_result_132 = __O[657]
+                    ____t_result_132 = __O[670]
                 else
                     ____t_result_132 = e.code == "ArrowUp"
                 end
@@ -671,9 +671,9 @@ local __O = {};
             local ____t_result_136
             local ____t_135 = __t
             local ____temp_134 = e.code == "Space" or e.code == "KeyW"
-            __O[658] = ____temp_134
+            __O[671] = ____temp_134
             if ____t_135(____temp_134) then
-                ____t_result_136 = __O[658]
+                ____t_result_136 = __O[671]
             else
                 ____t_result_136 = e.code == "ArrowUp"
             end
@@ -719,9 +719,9 @@ local __O = {};
             if ____opt_result_149 ~= nil then
                 ____opt_result_150 = ____opt_result_149(TR)
             end
-            __O[659] = ____opt_result_150
+            __O[672] = ____opt_result_150
             if ____t_151(____opt_result_150) then
-                ____t_result_152 = __O[659]
+                ____t_result_152 = __O[672]
             else
                 ____t_result_152 = 1
             end
@@ -762,11 +762,11 @@ local __O = {};
             local ____t_result_158
             local ____t_157 = __t
             local ____temp_156 = r.tipo == "rampa" and __ge(P.x, r.x0)
-            __O[660] = ____temp_156
+            __O[673] = ____temp_156
             if ____t_157(____temp_156) then
                 ____t_result_158 = __le(P.x, r.x1)
             else
-                ____t_result_158 = __O[660]
+                ____t_result_158 = __O[673]
             end
             if ____t_159(____t_result_158) then
                 local ry = r.y0 + (r.y1 - r.y0) * (P.x - r.x0) / (r.x1 - r.x0)
@@ -774,11 +774,11 @@ local __O = {};
                 local ____t_result_162
                 local ____t_161 = __t
                 local ____temp_160 = P.vy >= 0 and P.y >= ry - 14
-                __O[661] = ____temp_160
+                __O[674] = ____temp_160
                 if ____t_161(____temp_160) then
                     ____t_result_162 = __le(prevY, ry + 40)
                 else
-                    ____t_result_162 = __O[661]
+                    ____t_result_162 = __O[674]
                 end
                 if ____t_163(____t_result_162) then
                     P.y = ry
@@ -791,17 +791,17 @@ local __O = {};
                 local ____t_result_166
                 local ____t_165 = __t
                 local ____temp_164 = P.x >= r.x1 - 4
-                __O[662] = ____temp_164
+                __O[675] = ____temp_164
                 if ____t_165(____temp_164) then
                     ____t_result_166 = P.ground
                 else
-                    ____t_result_166 = __O[662]
+                    ____t_result_166 = __O[675]
                 end
-                __O[663] = ____t_result_166
+                __O[676] = ____t_result_166
                 if ____t_167(____t_result_166) then
                     ____t_result_168 = dir > 0
                 else
-                    ____t_result_168 = __O[663]
+                    ____t_result_168 = __O[676]
                 end
                 if ____t_169(____t_result_168) then
                     viagem = {tipo = "porta", t = 0, para = r.para}
@@ -822,17 +822,17 @@ local __O = {};
                     P.x,
                     __add(px, pw) + 6
                 )
-                __O[664] = ____temp_170
+                __O[677] = ____temp_170
                 if ____t_171(____temp_170) then
                     ____t_result_172 = __le(prevY, py + 2)
                 else
-                    ____t_result_172 = __O[664]
+                    ____t_result_172 = __O[677]
                 end
-                __O[665] = ____t_result_172
+                __O[678] = ____t_result_172
                 if ____t_173(____t_result_172) then
                     ____t_result_174 = __ge(P.y, py)
                 else
-                    ____t_result_174 = __O[665]
+                    ____t_result_174 = __O[678]
                 end
                 if ____t_175(____t_result_174) then
                     P.y = py
@@ -844,11 +844,11 @@ local __O = {};
             local ____t_result_178
             local ____t_177 = __t
             local ____temp_176 = not __t(P.ground) and not __t(overGap)
-            __O[666] = ____temp_176
+            __O[679] = ____temp_176
             if ____t_177(____temp_176) then
                 ____t_result_178 = P.y >= FLOOR
             else
-                ____t_result_178 = __O[666]
+                ____t_result_178 = __O[679]
             end
             if ____t_179(____t_result_178) then
                 P.y = FLOOR
@@ -1016,9 +1016,9 @@ local __O = {};
             if ____opt_203 ~= nil then
                 ____opt_result_205 = ____opt_203(____opt_203)
             end
-            __O[667] = ____opt_result_205
+            __O[680] = ____opt_result_205
             if ____t_206(____opt_result_205) then
-                ____t_result_207 = __O[667]
+                ____t_result_207 = __O[680]
             else
                 ____t_result_207 = 0
             end
@@ -1088,15 +1088,15 @@ local __O = {};
         local ____t_result_230
         local ____t_229 = __t
         local ____temp_228 = not not __t(P.vx)
-        __O[668] = ____temp_228
+        __O[681] = ____temp_228
         if ____t_229(____temp_228) then
             ____t_result_230 = P.ground
         else
-            ____t_result_230 = __O[668]
+            ____t_result_230 = __O[681]
         end
-        __O[669] = ____t_result_230
+        __O[682] = ____t_result_230
         if ____t_231(____t_result_230) then
-            ____t_result_235 = __O[669]
+            ____t_result_235 = __O[682]
         else
             local ____opt_result_234
             if viagem ~= nil then
@@ -1154,11 +1154,11 @@ local __O = {};
         local ____t_result_260
         local ____t_259 = __t
         local ____temp_258 = not __t(viagem)
-        __O[670] = ____temp_258
+        __O[683] = ____temp_258
         if ____t_259(____temp_258) then
             ____t_result_260 = P.ground
         else
-            ____t_result_260 = __O[670]
+            ____t_result_260 = __O[683]
         end
         if ____t_261(____t_result_260) then
             local best = 1000000000
@@ -1380,9 +1380,9 @@ local __O = {};
                 if viagem ~= nil then
                     ____opt_result_299 = viagem.tipo
                 end
-                __O[671] = ____opt_result_299
+                __O[684] = ____opt_result_299
                 if ____t_300(____opt_result_299) then
-                    ____t_result_301 = __O[671]
+                    ____t_result_301 = __O[684]
                 else
                     ____t_result_301 = nil
                 end
@@ -1392,9 +1392,9 @@ local __O = {};
                 if perto ~= nil then
                     ____opt_result_304 = perto.rotulo
                 end
-                __O[672] = ____opt_result_304
+                __O[685] = ____opt_result_304
                 if ____t_305(____opt_result_304) then
-                    ____t_result_306 = __O[672]
+                    ____t_result_306 = __O[685]
                 else
                     ____t_result_306 = nil
                 end

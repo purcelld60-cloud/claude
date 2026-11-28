@@ -2223,9 +2223,9 @@ local __O = {};
         local ____t_result_49
         local ____t_48 = __t
         local ____hypot_result_47 = __hypot(dx, dy)
-        __O[705] = ____hypot_result_47
+        __O[718] = ____hypot_result_47
         if ____t_48(____hypot_result_47) then
-            ____t_result_49 = __O[705]
+            ____t_result_49 = __O[718]
         else
             ____t_result_49 = 1
         end
@@ -3006,9 +3006,9 @@ local __O = {};
         local ____t_result_54
         local ____t_53 = __t
         local ____TS__Number_result_52 = __TS__Number(s.time)
-        __O[706] = ____TS__Number_result_52
+        __O[719] = ____TS__Number_result_52
         if ____t_53(____TS__Number_result_52) then
-            ____t_result_54 = __O[706]
+            ____t_result_54 = __O[719]
         else
             ____t_result_54 = 0
         end
@@ -3018,9 +3018,9 @@ local __O = {};
         local ____t_result_57
         local ____t_56 = __t
         local ____TS__Number_result_55 = __TS__Number(s.elapsed)
-        __O[707] = ____TS__Number_result_55
+        __O[720] = ____TS__Number_result_55
         if ____t_56(____TS__Number_result_55) then
-            ____t_result_57 = __O[707]
+            ____t_result_57 = __O[720]
         else
             ____t_result_57 = t
         end
@@ -3347,9 +3347,9 @@ local __O = {};
             ____opt_result_61 = s.index
         end
         local ____TS__Number_result_62 = __TS__Number(____opt_result_61)
-        __O[708] = ____TS__Number_result_62
+        __O[721] = ____TS__Number_result_62
         if ____t_63(____TS__Number_result_62) then
-            ____t_result_64 = __O[708]
+            ____t_result_64 = __O[721]
         else
             ____t_result_64 = 0
         end
@@ -3375,9 +3375,9 @@ local __O = {};
         local ____t_result_67
         local ____t_66 = __t
         local ____temp_65 = not __t(s)
-        __O[709] = ____temp_65
+        __O[722] = ____temp_65
         if ____t_66(____temp_65) then
-            ____t_result_67 = __O[709]
+            ____t_result_67 = __O[722]
         else
             ____t_result_67 = s.done
         end
@@ -3400,9 +3400,9 @@ local __O = {};
         local ____t_result_71
         local ____t_70 = __t
         local ____temp_69 = not __t(s)
-        __O[710] = ____temp_69
+        __O[723] = ____temp_69
         if ____t_70(____temp_69) then
-            ____t_result_71 = __O[710]
+            ____t_result_71 = __O[723]
         else
             ____t_result_71 = s.done
         end
@@ -3412,9 +3412,9 @@ local __O = {};
         local ____t_result_75
         local ____t_74 = __t
         local ____TS__Number_result_73 = __TS__Number(dt)
-        __O[711] = ____TS__Number_result_73
+        __O[724] = ____TS__Number_result_73
         if ____t_74(____TS__Number_result_73) then
-            ____t_result_75 = __O[711]
+            ____t_result_75 = __O[724]
         else
             ____t_result_75 = 0
         end

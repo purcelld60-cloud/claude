@@ -127,9 +127,9 @@ local __O = {};
                     },
                     tipo
                 )
-                __O[515] = ____get_result_1
+                __O[528] = ____get_result_1
                 if ____t_2(____get_result_1) then
-                    ____t_result_3 = __O[515]
+                    ____t_result_3 = __O[528]
                 else
                     ____t_result_3 = __arrL({
                         "#24501f",
@@ -1871,9 +1871,9 @@ local __O = {};
         local ____t_result_369
         local ____t_368 = __t
         local ____get_result_367 = __get(def.locais, LS.sel)
-        __O[602] = ____get_result_367
+        __O[615] = ____get_result_367
         if ____t_368(____get_result_367) then
-            ____t_result_369 = __O[602]
+            ____t_result_369 = __O[615]
         else
             ____t_result_369 = {}
         end
@@ -1964,9 +1964,9 @@ local __O = {};
                 if ____opt_378 ~= nil then
                     ____opt_378 = ____opt_378.motivo
                 end
-                __O[603] = ____opt_378
+                __O[616] = ____opt_378
                 if ____t_380(____opt_378) then
-                    ____t_result_383 = __O[603]
+                    ____t_result_383 = __O[616]
                 else
                     local ____opt_381 = L.estado
                     if ____opt_381 ~= nil then
@@ -1974,9 +1974,9 @@ local __O = {};
                     end
                     ____t_result_383 = ____opt_381
                 end
-                __O[604] = ____t_result_383
+                __O[617] = ____t_result_383
                 if ____t_384(____t_result_383) then
-                    ____t_result_385 = __O[604]
+                    ____t_result_385 = __O[617]
                 else
                     ____t_result_385 = "Ainda não dá para ir."
                 end
@@ -1988,7 +1988,7 @@ local __O = {};
         local ____t_result_392
         local ____t_389 = __t
         local ____temp_388 = not __t(ok)
-        __O[605] = ____temp_388
+        __O[618] = ____temp_388
         if ____t_389(____temp_388) then
             local ____opt_390 = L.estado
             if ____opt_390 ~= nil then
@@ -1996,7 +1996,7 @@ local __O = {};
             end
             ____t_result_392 = ____opt_390
         else
-            ____t_result_392 = __O[605]
+            ____t_result_392 = __O[618]
         end
         local T = ____t_result_392
         local ____t_394 = __t
@@ -2180,7 +2180,7 @@ local __O = {};
         local ____t_result_438
         local ____t_435 = __t
         local ____ge_result_434 = __ge(i, 0)
-        __O[608] = ____ge_result_434
+        __O[621] = ____ge_result_434
         if ____t_435(____ge_result_434) then
             local ____opt_436 = __get(def.locais, i).estado
             if ____opt_436 ~= nil then
@@ -2188,7 +2188,7 @@ local __O = {};
             end
             ____t_result_438 = ____opt_436
         else
-            ____t_result_438 = __O[608]
+            ____t_result_438 = __O[621]
         end
         if ____t_439(____t_result_438) then
             ____t_result_440 = i
@@ -2349,9 +2349,9 @@ local __O = {};
             if ____opt_461 ~= nil then
                 ____opt_461 = ____opt_461.motivo
             end
-            __O[609] = ____opt_461
+            __O[622] = ____opt_461
             if ____t_463(____opt_461) then
-                ____t_result_466 = __O[609]
+                ____t_result_466 = __O[622]
             else
                 local ____opt_464 = L.estado
                 if ____opt_464 ~= nil then
@@ -2359,9 +2359,9 @@ local __O = {};
                 end
                 ____t_result_466 = ____opt_464
             end
-            __O[610] = ____t_result_466
+            __O[623] = ____t_result_466
             if ____t_467(____t_result_466) then
-                ____t_result_468 = __O[610]
+                ____t_result_468 = __O[623]
             else
                 ____t_result_468 = "Ainda não dá para ir."
             end
@@ -2539,9 +2539,9 @@ local __O = {};
         local ____t_result_503
         local ____t_502 = __t
         local ____temp_501 = sel < 0
-        __O[611] = ____temp_501
+        __O[624] = ____temp_501
         if ____t_502(____temp_501) then
-            ____t_result_503 = __O[611]
+            ____t_result_503 = __O[624]
         else
             ____t_result_503 = viagem
         end
@@ -2557,9 +2557,9 @@ local __O = {};
             ____opt_505 = ____opt_505.ok
         end
         local ____temp_507 = ____opt_505 == false
-        __O[612] = ____temp_507
+        __O[625] = ____temp_507
         if ____t_508(____temp_507) then
-            ____t_result_509 = __O[612]
+            ____t_result_509 = __O[625]
         else
             ____t_result_509 = L.atual
         end
@@ -2698,9 +2698,9 @@ local __O = {};
             acc,
             __len(acc) - 1
         )
-        __O[613] = ____get_result_512
+        __O[626] = ____get_result_512
         if ____t_513(____get_result_512) then
-            ____t_result_514 = __O[613]
+            ____t_result_514 = __O[626]
         else
             ____t_result_514 = 1
         end
@@ -2723,9 +2723,9 @@ local __O = {};
         local ____t_result_519
         local ____t_518 = __t
         local ____get_result_517 = __get(R.pts, i)
-        __O[614] = ____get_result_517
+        __O[627] = ____get_result_517
         if ____t_518(____get_result_517) then
-            ____t_result_519 = __O[614]
+            ____t_result_519 = __O[627]
         else
             ____t_result_519 = a
         end
@@ -2801,20 +2801,20 @@ local __O = {};
                     p.x,
                     __add(L.bx, L.bw) + 6
                 )
-                __O[615] = ____temp_524
+                __O[628] = ____temp_524
                 if ____t_525(____temp_524) then
                     ____t_result_526 = p.y > L.by - 30
                 else
-                    ____t_result_526 = __O[615]
+                    ____t_result_526 = __O[628]
                 end
-                __O[616] = ____t_result_526
+                __O[629] = ____t_result_526
                 if ____t_527(____t_result_526) then
                     ____t_result_528 = __lt(
                         p.y,
                         __add(L.by, L.bh) + 6
                     )
                 else
-                    ____t_result_528 = __O[616]
+                    ____t_result_528 = __O[629]
                 end
                 if ____t_529(____t_result_528) then
                     local f = centro(nil, i)
@@ -3140,11 +3140,11 @@ local __O = {};
             else
                 ____t_result_535 = def.voa
             end
-            __O[617] = ____t_result_535
+            __O[630] = ____t_result_535
             if ____t_536(____t_result_535) then
                 ____t_result_537 = k < 1
             else
-                ____t_result_537 = __O[617]
+                ____t_result_537 = __O[630]
             end
             if ____t_538(____t_result_537) then
                 ____t_result_539 = math.max(
@@ -4459,15 +4459,15 @@ local __O = {};
                 local ____t_result_594
                 local ____t_593 = __t
                 local ____temp_592 = sx < -100 or __gt(sx, W + 100)
-                __O[618] = ____temp_592
+                __O[631] = ____temp_592
                 if ____t_593(____temp_592) then
-                    ____t_result_594 = __O[618]
+                    ____t_result_594 = __O[631]
                 else
                     ____t_result_594 = sy < -60
                 end
-                __O[619] = ____t_result_594
+                __O[632] = ____t_result_594
                 if ____t_595(____t_result_594) then
-                    ____t_result_596 = __O[619]
+                    ____t_result_596 = __O[632]
                 else
                     ____t_result_596 = __gt(sy, H + 80)
                 end
@@ -4533,15 +4533,15 @@ local __O = {};
                 local ____t_result_608
                 local ____t_607 = __t
                 local ____temp_606 = x < -60 or __gt(x, W + 60)
-                __O[620] = ____temp_606
+                __O[633] = ____temp_606
                 if ____t_607(____temp_606) then
-                    ____t_result_608 = __O[620]
+                    ____t_result_608 = __O[633]
                 else
                     ____t_result_608 = y < -60
                 end
-                __O[621] = ____t_result_608
+                __O[634] = ____t_result_608
                 if ____t_609(____t_result_608) then
-                    ____t_result_610 = __O[621]
+                    ____t_result_610 = __O[634]
                 else
                     ____t_result_610 = __gt(y, H + 80)
                 end
@@ -4913,9 +4913,9 @@ local __O = {};
             ac,
             __len(ac) - 1
         )
-        __O[516] = ____get_result_13
+        __O[529] = ____get_result_13
         if ____t_14(____get_result_13) then
-            ____t_result_15 = __O[516]
+            ____t_result_15 = __O[529]
         else
             ____t_result_15 = 1
         end
@@ -4943,9 +4943,9 @@ local __O = {};
                 local ____t_result_18
                 local ____t_17 = __t
                 local ____temp_16 = __get(ac, hi) - __get(ac, lo)
-                __O[517] = ____temp_16
+                __O[530] = ____temp_16
                 if ____t_17(____temp_16) then
-                    ____t_result_18 = __O[517]
+                    ____t_result_18 = __O[530]
                 else
                     ____t_result_18 = 1
                 end
@@ -4977,17 +4977,17 @@ local __O = {};
             local ____t_result_22
             local ____t_21 = __t
             local ____temp_20 = __ge(x, 0) and __ge(y, 0)
-            __O[518] = ____temp_20
+            __O[531] = ____temp_20
             if ____t_21(____temp_20) then
                 ____t_result_22 = __lt(x, FW)
             else
-                ____t_result_22 = __O[518]
+                ____t_result_22 = __O[531]
             end
-            __O[519] = ____t_result_22
+            __O[532] = ____t_result_22
             if ____t_23(____t_result_22) then
                 ____t_result_24 = __lt(y, FH)
             else
-                ____t_result_24 = __O[519]
+                ____t_result_24 = __O[532]
             end
             return ____t_result_24
         end
@@ -5308,11 +5308,11 @@ local __O = {};
                                             else
                                                 ____t_result_32 = e
                                             end
-                                            __O[520] = ____t_result_32
+                                            __O[533] = ____t_result_32
                                             if ____t_33(____t_result_32) then
                                                 ____t_result_34 = e.tipo == o.tipo
                                             else
-                                                ____t_result_34 = __O[520]
+                                                ____t_result_34 = __O[533]
                                             end
                                             if ____t_35(____t_result_34) then
                                                 achou = true
@@ -5414,9 +5414,9 @@ local __O = {};
         local ____t_result_40
         local ____t_39 = __t
         local ____get_result_38 = __get(PAL, hex)
-        __O[521] = ____get_result_38
+        __O[534] = ____get_result_38
         if ____t_39(____get_result_38) then
-            ____t_result_40 = __O[521]
+            ____t_result_40 = __O[534]
         else
             ____t_result_40 = __set(
                 PAL,
@@ -5689,20 +5689,20 @@ local __O = {};
                                 local ____t_result_50
                                 local ____t_46 = __t
                                 local ____temp_45 = d < lip
-                                __O[523] = ____temp_45
+                                __O[536] = ____temp_45
                                 if ____t_46(____temp_45) then
                                     local ____t_result_49
                                     local ____t_48 = __t
                                     local ____call_result_47 = __call(VERDE, "has", top)
-                                    __O[522] = ____call_result_47
+                                    __O[535] = ____call_result_47
                                     if ____t_48(____call_result_47) then
-                                        ____t_result_49 = __O[522]
+                                        ____t_result_49 = __O[535]
                                     else
                                         ____t_result_49 = top == TI.campo
                                     end
                                     ____t_result_50 = ____t_result_49
                                 else
-                                    ____t_result_50 = __O[523]
+                                    ____t_result_50 = __O[536]
                                 end
                                 if ____t_51(____t_result_50) then
                                     local ____temp_53
@@ -5724,11 +5724,11 @@ local __O = {};
                                 local ____t_result_56
                                 local ____t_55 = __t
                                 local ____temp_54 = d < 2
-                                __O[524] = ____temp_54
+                                __O[537] = ____temp_54
                                 if ____t_55(____temp_54) then
                                     ____t_result_56 = __call(CAMINHO, "has", top)
                                 else
-                                    ____t_result_56 = __O[524]
+                                    ____t_result_56 = __O[537]
                                 end
                                 if ____t_57(____t_result_56) then
                                     put(
@@ -5764,11 +5764,11 @@ local __O = {};
                                 local ____t_result_60
                                 local ____t_59 = __t
                                 local ____temp_58 = h2(nil, x, 99) < 0.035 and d > 4
-                                __O[525] = ____temp_58
+                                __O[538] = ____temp_58
                                 if ____t_59(____temp_58) then
                                     ____t_result_60 = d < h - 4
                                 else
-                                    ____t_result_60 = __O[525]
+                                    ____t_result_60 = __O[538]
                                 end
                                 if ____t_61(____t_result_60) then
                                     col = terraB
@@ -6103,17 +6103,17 @@ local __O = {};
                                 local ____t_result_75
                                 local ____t_74 = __t
                                 local ____temp_73 = y > 0
-                                __O[526] = ____temp_73
+                                __O[539] = ____temp_73
                                 if ____t_74(____temp_73) then
                                     ____t_result_75 = __call(VERDE, "has", tu)
                                 else
-                                    ____t_result_75 = __O[526]
+                                    ____t_result_75 = __O[539]
                                 end
-                                __O[527] = ____t_result_75
+                                __O[540] = ____t_result_75
                                 if ____t_76(____t_result_75) then
                                     ____t_result_77 = __get(lv, i - W) == L
                                 else
-                                    ____t_result_77 = __O[527]
+                                    ____t_result_77 = __O[540]
                                 end
                                 if ____t_78(____t_result_77) then
                                     f = f * 0.74
@@ -6124,7 +6124,7 @@ local __O = {};
                                     local ____t_result_81
                                     local ____t_80 = __t
                                     local ____temp_79 = y > 1
-                                    __O[528] = ____temp_79
+                                    __O[541] = ____temp_79
                                     if ____t_80(____temp_79) then
                                         ____t_result_81 = __call(
                                             VERDE,
@@ -6132,13 +6132,13 @@ local __O = {};
                                             __get(ty, i - 2 * W)
                                         )
                                     else
-                                        ____t_result_81 = __O[528]
+                                        ____t_result_81 = __O[541]
                                     end
-                                    __O[529] = ____t_result_81
+                                    __O[542] = ____t_result_81
                                     if ____t_82(____t_result_81) then
                                         ____t_result_83 = __get(lv, i - 2 * W) == L
                                     else
-                                        ____t_result_83 = __O[529]
+                                        ____t_result_83 = __O[542]
                                     end
                                     if ____t_84(____t_result_83) then
                                         f = f * 0.88
@@ -6149,15 +6149,15 @@ local __O = {};
                                         local ____t_result_87
                                         local ____t_86 = __t
                                         local ____call_result_85 = __call(VERDE, "has", tl)
-                                        __O[530] = ____call_result_85
+                                        __O[543] = ____call_result_85
                                         if ____t_86(____call_result_85) then
-                                            ____t_result_87 = __O[530]
+                                            ____t_result_87 = __O[543]
                                         else
                                             ____t_result_87 = __call(VERDE, "has", tr)
                                         end
-                                        __O[531] = ____t_result_87
+                                        __O[544] = ____t_result_87
                                         if ____t_88(____t_result_87) then
-                                            ____t_result_89 = __O[531]
+                                            ____t_result_89 = __O[544]
                                         else
                                             ____t_result_89 = __call(VERDE, "has", tb)
                                         end
@@ -6170,7 +6170,7 @@ local __O = {};
                                 local ____t_result_102
                                 local ____t_92 = __t
                                 local ____temp_91 = t == TI.asfalto
-                                __O[536] = ____temp_91
+                                __O[549] = ____temp_91
                                 if ____t_92(____temp_91) then
                                     local ____t_result_101
                                     local ____t_100 = __t
@@ -6181,33 +6181,33 @@ local __O = {};
                                     local ____t_result_95
                                     local ____t_94 = __t
                                     local ____temp_93 = tu == TI.pedra or tu == TI.calcada
-                                    __O[532] = ____temp_93
+                                    __O[545] = ____temp_93
                                     if ____t_94(____temp_93) then
-                                        ____t_result_95 = __O[532]
+                                        ____t_result_95 = __O[545]
                                     else
                                         ____t_result_95 = tb == TI.pedra
                                     end
-                                    __O[533] = ____t_result_95
+                                    __O[546] = ____t_result_95
                                     if ____t_96(____t_result_95) then
-                                        ____t_result_97 = __O[533]
+                                        ____t_result_97 = __O[546]
                                     else
                                         ____t_result_97 = tb == TI.calcada
                                     end
-                                    __O[534] = ____t_result_97
+                                    __O[547] = ____t_result_97
                                     if ____t_98(____t_result_97) then
-                                        ____t_result_99 = __O[534]
+                                        ____t_result_99 = __O[547]
                                     else
                                         ____t_result_99 = tl == TI.pedra
                                     end
-                                    __O[535] = ____t_result_99
+                                    __O[548] = ____t_result_99
                                     if ____t_100(____t_result_99) then
-                                        ____t_result_101 = __O[535]
+                                        ____t_result_101 = __O[548]
                                     else
                                         ____t_result_101 = tr == TI.pedra
                                     end
                                     ____t_result_102 = ____t_result_101
                                 else
-                                    ____t_result_102 = __O[536]
+                                    ____t_result_102 = __O[549]
                                 end
                                 if ____t_103(____t_result_102) then
                                     col = pal(nil, "#d8dcdf")
@@ -6219,17 +6219,17 @@ local __O = {};
                                 local ____t_result_106
                                 local ____t_105 = __t
                                 local ____call_result_104 = __call(VERDE, "has", t)
-                                __O[537] = ____call_result_104
+                                __O[550] = ____call_result_104
                                 if ____t_105(____call_result_104) then
                                     ____t_result_106 = __call(CAMINHO, "has", tb)
                                 else
-                                    ____t_result_106 = __O[537]
+                                    ____t_result_106 = __O[550]
                                 end
-                                __O[538] = ____t_result_106
+                                __O[551] = ____t_result_106
                                 if ____t_107(____t_result_106) then
                                     ____t_result_108 = __get(lv, i + W) == L
                                 else
-                                    ____t_result_108 = __O[538]
+                                    ____t_result_108 = __O[551]
                                 end
                                 if ____t_109(____t_result_108) then
                                     col = pal(nil, "#6aa232")
@@ -6239,11 +6239,11 @@ local __O = {};
                             local ____t_result_112
                             local ____t_111 = __t
                             local ____temp_110 = x > 0 and __get(lv, i - 1) < L
-                            __O[539] = ____temp_110
+                            __O[552] = ____temp_110
                             if ____t_111(____temp_110) then
                                 ____t_result_112 = __get(wd, i - 1) < 0
                             else
-                                ____t_result_112 = __O[539]
+                                ____t_result_112 = __O[552]
                             end
                             if ____t_113(____t_result_112) then
                                 col = pal(nil, "#4f8a28")
@@ -6253,11 +6253,11 @@ local __O = {};
                                 local ____t_result_116
                                 local ____t_115 = __t
                                 local ____temp_114 = x < W - 1 and __get(lv, i + 1) < L
-                                __O[540] = ____temp_114
+                                __O[553] = ____temp_114
                                 if ____t_115(____temp_114) then
                                     ____t_result_116 = __get(wd, i + 1) < 0
                                 else
-                                    ____t_result_116 = __O[540]
+                                    ____t_result_116 = __O[553]
                                 end
                                 if ____t_117(____t_result_116) then
                                     col = pal(nil, "#4f8a28")
@@ -6267,11 +6267,11 @@ local __O = {};
                                     local ____t_result_120
                                     local ____t_119 = __t
                                     local ____temp_118 = y > 0 and __get(lv, i - W) < L
-                                    __O[541] = ____temp_118
+                                    __O[554] = ____temp_118
                                     if ____t_119(____temp_118) then
                                         ____t_result_120 = __get(wd, i - W) < 0
                                     else
-                                        ____t_result_120 = __O[541]
+                                        ____t_result_120 = __O[554]
                                     end
                                     if ____t_121(____t_result_120) then
                                         col = pal(nil, "#d2f48a")
@@ -6298,15 +6298,15 @@ local __O = {};
             local ____t_result_124
             local ____t_123 = __t
             local ____temp_122 = __lt(x, 2) or __lt(y, 30)
-            __O[542] = ____temp_122
+            __O[555] = ____temp_122
             if ____t_123(____temp_122) then
-                ____t_result_124 = __O[542]
+                ____t_result_124 = __O[555]
             else
                 ____t_result_124 = __ge(x, W - 2)
             end
-            __O[543] = ____t_result_124
+            __O[556] = ____t_result_124
             if ____t_125(____t_result_124) then
-                ____t_result_126 = __O[543]
+                ____t_result_126 = __O[556]
             else
                 ____t_result_126 = __ge(y, H - 2)
             end
@@ -6335,53 +6335,53 @@ local __O = {};
                 "has",
                 __get(ty, i)
             )
-            __O[544] = ____call_result_128
+            __O[557] = ____call_result_128
             if ____t_129(____call_result_128) then
                 ____t_result_130 = __get(wd, i) < 0
             else
-                ____t_result_130 = __O[544]
+                ____t_result_130 = __O[557]
             end
-            __O[545] = ____t_result_130
+            __O[558] = ____t_result_130
             if ____t_131(____t_result_130) then
                 ____t_result_132 = not __t(__get(sh, i))
             else
-                ____t_result_132 = __O[545]
+                ____t_result_132 = __O[558]
             end
-            __O[546] = ____t_result_132
+            __O[559] = ____t_result_132
             if ____t_133(____t_result_132) then
                 ____t_result_134 = __get(lv, i) > 0
             else
-                ____t_result_134 = __O[546]
+                ____t_result_134 = __O[559]
             end
-            __O[547] = ____t_result_134
+            __O[560] = ____t_result_134
             if ____t_135(____t_result_134) then
                 ____t_result_136 = __get(lv, i - 26 * W) == __get(lv, i)
             else
-                ____t_result_136 = __O[547]
+                ____t_result_136 = __O[560]
             end
-            __O[548] = ____t_result_136
+            __O[561] = ____t_result_136
             if ____t_137(____t_result_136) then
                 ____t_result_138 = __get(wd, i - 26 * W) < 0
             else
-                ____t_result_138 = __O[548]
+                ____t_result_138 = __O[561]
             end
-            __O[549] = ____t_result_138
+            __O[562] = ____t_result_138
             if ____t_139(____t_result_138) then
                 ____t_result_140 = __get(lv, i + 3 * W) == __get(lv, i)
             else
-                ____t_result_140 = __O[549]
+                ____t_result_140 = __O[562]
             end
-            __O[550] = ____t_result_140
+            __O[563] = ____t_result_140
             if ____t_141(____t_result_140) then
                 ____t_result_142 = __get(ty, i - 1) == __get(ty, i)
             else
-                ____t_result_142 = __O[550]
+                ____t_result_142 = __O[563]
             end
-            __O[551] = ____t_result_142
+            __O[564] = ____t_result_142
             if ____t_143(____t_result_142) then
                 ____t_result_144 = __get(ty, i + 1) == __get(ty, i)
             else
-                ____t_result_144 = __O[551]
+                ____t_result_144 = __O[564]
             end
             return ____t_result_144
         end
@@ -6400,9 +6400,9 @@ local __O = {};
                     local ____t_result_147
                     local ____t_146 = __t
                     local ____temp_145 = y < 4 or y > H - 2
-                    __O[552] = ____temp_145
+                    __O[565] = ____temp_145
                     if ____t_146(____temp_145) then
-                        ____t_result_147 = __O[552]
+                        ____t_result_147 = __O[565]
                     else
                         ____t_result_147 = not __t(__call(
                             VERDE,
@@ -6410,15 +6410,15 @@ local __O = {};
                             __get(ty, i)
                         ))
                     end
-                    __O[553] = ____t_result_147
+                    __O[566] = ____t_result_147
                     if ____t_148(____t_result_147) then
-                        ____t_result_149 = __O[553]
+                        ____t_result_149 = __O[566]
                     else
                         ____t_result_149 = __get(wd, i) >= 0
                     end
-                    __O[554] = ____t_result_149
+                    __O[567] = ____t_result_149
                     if ____t_150(____t_result_149) then
-                        ____t_result_151 = __O[554]
+                        ____t_result_151 = __O[567]
                     else
                         ____t_result_151 = __get(lv, i) == 0
                     end
@@ -6562,9 +6562,9 @@ local __O = {};
                     local ____t_result_155
                     local ____t_154 = __t
                     local ____temp_153 = y < 8 or __get(lv, i) ~= 0
-                    __O[555] = ____temp_153
+                    __O[568] = ____temp_153
                     if ____t_154(____temp_153) then
-                        ____t_result_155 = __O[555]
+                        ____t_result_155 = __O[568]
                     else
                         ____t_result_155 = __get(wd, i) >= 0
                     end
@@ -6576,15 +6576,15 @@ local __O = {};
                     local ____t_result_159
                     local ____t_158 = __t
                     local ____temp_157 = not __t(agua(nil, x - 3, y)) or not __t(agua(nil, x + 3, y))
-                    __O[556] = ____temp_157
+                    __O[569] = ____temp_157
                     if ____t_158(____temp_157) then
-                        ____t_result_159 = __O[556]
+                        ____t_result_159 = __O[569]
                     else
                         ____t_result_159 = not __t(agua(nil, x, y + 3))
                     end
-                    __O[557] = ____t_result_159
+                    __O[570] = ____t_result_159
                     if ____t_160(____t_result_159) then
-                        ____t_result_161 = __O[557]
+                        ____t_result_161 = __O[570]
                     else
                         ____t_result_161 = not __t(agua(nil, x, y - 3))
                     end
@@ -6596,23 +6596,23 @@ local __O = {};
                     local ____t_result_164
                     local ____t_163 = __t
                     local ____agua_result_162 = agua(nil, x - 9, y)
-                    __O[558] = ____agua_result_162
+                    __O[571] = ____agua_result_162
                     if ____t_163(____agua_result_162) then
                         ____t_result_164 = agua(nil, x + 9, y)
                     else
-                        ____t_result_164 = __O[558]
+                        ____t_result_164 = __O[571]
                     end
-                    __O[559] = ____t_result_164
+                    __O[572] = ____t_result_164
                     if ____t_165(____t_result_164) then
                         ____t_result_166 = agua(nil, x, y - 7)
                     else
-                        ____t_result_166 = __O[559]
+                        ____t_result_166 = __O[572]
                     end
-                    __O[560] = ____t_result_166
+                    __O[573] = ____t_result_166
                     if ____t_167(____t_result_166) then
                         ____t_result_168 = agua(nil, x, y + 7)
                     else
-                        ____t_result_168 = __O[560]
+                        ____t_result_168 = __O[573]
                     end
                     local longe = ____t_result_168
                     local ____t_170 = __t
@@ -6721,7 +6721,7 @@ local __O = {};
                         local ____t_result_175
                         local ____t_174 = __t
                         local ____temp_173 = __get(wd, i) == 0 and __get(wh, i) > 12
-                        __O[561] = ____temp_173
+                        __O[574] = ____temp_173
                         if ____t_174(____temp_173) then
                             ____t_result_175 = __call(
                                 VERDE,
@@ -6729,25 +6729,25 @@ local __O = {};
                                 __get(wt, i)
                             )
                         else
-                            ____t_result_175 = __O[561]
+                            ____t_result_175 = __O[574]
                         end
-                        __O[562] = ____t_result_175
+                        __O[575] = ____t_result_175
                         if ____t_176(____t_result_175) then
                             ____t_result_177 = __get(wd, i - 3) >= 0
                         else
-                            ____t_result_177 = __O[562]
+                            ____t_result_177 = __O[575]
                         end
-                        __O[563] = ____t_result_177
+                        __O[576] = ____t_result_177
                         if ____t_178(____t_result_177) then
                             ____t_result_179 = __get(wd, i + 3) >= 0
                         else
-                            ____t_result_179 = __O[563]
+                            ____t_result_179 = __O[576]
                         end
-                        __O[564] = ____t_result_179
+                        __O[577] = ____t_result_179
                         if ____t_180(____t_result_179) then
                             ____t_result_181 = h2(nil, k, y, 41) > 0.55
                         else
-                            ____t_result_181 = __O[564]
+                            ____t_result_181 = __O[577]
                         end
                         if ____t_182(____t_result_181) then
                             local n = 4 + math.floor(h2(nil, k, 11, 39) * (__get(wh, i) - 8))
@@ -6833,35 +6833,35 @@ local __O = {};
                 local ____t_result_185
                 local ____t_184 = __t
                 local ____agua_result_183 = agua(nil, x, y)
-                __O[565] = ____agua_result_183
+                __O[578] = ____agua_result_183
                 if ____t_184(____agua_result_183) then
                     ____t_result_185 = agua(nil, x - 6, y)
                 else
-                    ____t_result_185 = __O[565]
+                    ____t_result_185 = __O[578]
                 end
-                __O[566] = ____t_result_185
+                __O[579] = ____t_result_185
                 if ____t_186(____t_result_185) then
                     ____t_result_187 = agua(nil, x + 6, y)
                 else
-                    ____t_result_187 = __O[566]
+                    ____t_result_187 = __O[579]
                 end
-                __O[567] = ____t_result_187
+                __O[580] = ____t_result_187
                 if ____t_188(____t_result_187) then
                     ____t_result_189 = agua(nil, x, y - 4)
                 else
-                    ____t_result_189 = __O[567]
+                    ____t_result_189 = __O[580]
                 end
-                __O[568] = ____t_result_189
+                __O[581] = ____t_result_189
                 if ____t_190(____t_result_189) then
                     ____t_result_191 = agua(nil, x, y + 4)
                 else
-                    ____t_result_191 = __O[568]
+                    ____t_result_191 = __O[581]
                 end
-                __O[569] = ____t_result_191
+                __O[582] = ____t_result_191
                 if ____t_192(____t_result_191) then
                     ____t_result_193 = __get(wd, y * W + x) < 0
                 else
-                    ____t_result_193 = __O[569]
+                    ____t_result_193 = __O[582]
                 end
                 if ____t_194(____t_result_193) then
                     __call(
@@ -6965,9 +6965,9 @@ local __O = {};
             local ____t_result_208
             local ____t_207 = __t
             local ____hypot_result_206 = __hypot(a.x - b.x, a.y - b.y)
-            __O[570] = ____hypot_result_206
+            __O[583] = ____hypot_result_206
             if ____t_207(____hypot_result_206) then
-                ____t_result_208 = __O[570]
+                ____t_result_208 = __O[583]
             else
                 ____t_result_208 = 1
             end
@@ -7018,11 +7018,11 @@ local __O = {};
                 else
                     ____t_result_209 = pinca
                 end
-                __O[571] = ____t_result_209
+                __O[584] = ____t_result_209
                 if ____t_210(____t_result_209) then
                     ____t_result_211 = not __t(viagem)
                 else
-                    ____t_result_211 = __O[571]
+                    ____t_result_211 = __O[584]
                 end
                 if ____t_212(____t_result_211) then
                     cam.z = math.max(
@@ -7039,9 +7039,9 @@ local __O = {};
                 local ____t_result_215
                 local ____t_214 = __t
                 local ____temp_213 = not __t(drag)
-                __O[572] = ____temp_213
+                __O[585] = ____temp_213
                 if ____t_214(____temp_213) then
-                    ____t_result_215 = __O[572]
+                    ____t_result_215 = __O[585]
                 else
                     ____t_result_215 = viagem
                 end
@@ -7078,11 +7078,11 @@ local __O = {};
                 else
                     ____t_result_217 = drag
                 end
-                __O[573] = ____t_result_217
+                __O[586] = ____t_result_217
                 if ____t_218(____t_result_217) then
                     ____t_result_219 = not __t(eraPinca)
                 else
-                    ____t_result_219 = __O[573]
+                    ____t_result_219 = __O[586]
                 end
                 if ____t_220(____t_result_219) then
                     clique(nil, e)
@@ -7424,17 +7424,17 @@ local __O = {};
             local ____t_result_231
             local ____t_230 = __t
             local ____temp_229 = math.abs(r - g) < 22 and math.abs(g - b) < 26
-            __O[574] = ____temp_229
+            __O[587] = ____temp_229
             if ____t_230(____temp_229) then
                 ____t_result_231 = __gt(r, 140)
             else
-                ____t_result_231 = __O[574]
+                ____t_result_231 = __O[587]
             end
-            __O[575] = ____t_result_231
+            __O[588] = ____t_result_231
             if ____t_232(____t_result_231) then
                 ____t_result_233 = not __t(__gt(g, r + 6) and __gt(g, b + 18))
             else
-                ____t_result_233 = __O[575]
+                ____t_result_233 = __O[588]
             end
             return ____t_result_233
         end
@@ -7463,17 +7463,17 @@ local __O = {};
                             local ____t_result_236
                             local ____t_235 = __t
                             local ____temp_234 = x >= 0 and __lt(x, W)
-                            __O[576] = ____temp_234
+                            __O[589] = ____temp_234
                             if ____t_235(____temp_234) then
                                 ____t_result_236 = y >= 0
                             else
-                                ____t_result_236 = __O[576]
+                                ____t_result_236 = __O[589]
                             end
-                            __O[577] = ____t_result_236
+                            __O[590] = ____t_result_236
                             if ____t_237(____t_result_236) then
                                 ____t_result_238 = __lt(y, H)
                             else
-                                ____t_result_238 = __O[577]
+                                ____t_result_238 = __O[590]
                             end
                             if ____t_239(____t_result_238) then
                                 __set(cls, Y * W2 + X, 1)
@@ -7530,14 +7530,14 @@ local __O = {};
                                         __get(bd, q + 1),
                                         236
                                     )
-                                    __O[578] = ____temp_244
+                                    __O[591] = ____temp_244
                                     if ____t_245(____temp_244) then
                                         ____t_result_246 = __gt(
                                             __get(bd, q + 2),
                                             236
                                         )
                                     else
-                                        ____t_result_246 = __O[578]
+                                        ____t_result_246 = __O[591]
                                     end
                                     return ____t_result_246
                                 end
@@ -7551,29 +7551,29 @@ local __O = {};
                                 local ____t_result_249
                                 local ____t_248 = __t
                                 local ____br_result_247 = br(nil, cx, cy)
-                                __O[579] = ____br_result_247
+                                __O[592] = ____br_result_247
                                 if ____t_248(____br_result_247) then
                                     ____t_result_249 = br(nil, cx - 10, cy - 10)
                                 else
-                                    ____t_result_249 = __O[579]
+                                    ____t_result_249 = __O[592]
                                 end
-                                __O[580] = ____t_result_249
+                                __O[593] = ____t_result_249
                                 if ____t_250(____t_result_249) then
                                     ____t_result_251 = br(nil, cx + 10, cy + 10)
                                 else
-                                    ____t_result_251 = __O[580]
+                                    ____t_result_251 = __O[593]
                                 end
-                                __O[581] = ____t_result_251
+                                __O[594] = ____t_result_251
                                 if ____t_252(____t_result_251) then
                                     ____t_result_253 = br(nil, cx - 10, cy + 10)
                                 else
-                                    ____t_result_253 = __O[581]
+                                    ____t_result_253 = __O[594]
                                 end
-                                __O[582] = ____t_result_253
+                                __O[595] = ____t_result_253
                                 if ____t_254(____t_result_253) then
                                     ____t_result_255 = br(nil, cx + 10, cy - 10)
                                 else
-                                    ____t_result_255 = __O[582]
+                                    ____t_result_255 = __O[595]
                                 end
                                 if ____t_256(____t_result_255) then
                                     if dd < 14 then
@@ -7611,11 +7611,11 @@ local __O = {};
                                     local ____t_result_259
                                     local ____t_258 = __t
                                     local ____rua_result_257 = rua(nil, er, eg, eb)
-                                    __O[583] = ____rua_result_257
+                                    __O[596] = ____rua_result_257
                                     if ____t_258(____rua_result_257) then
                                         ____t_result_259 = dd < m - 16
                                     else
-                                        ____t_result_259 = __O[583]
+                                        ____t_result_259 = __O[596]
                                     end
                                     if ____t_260(____t_result_259) then
                                         col = __get(
@@ -7745,15 +7745,15 @@ local __O = {};
                             local ____t_result_267
                             local ____t_266 = __t
                             local ____temp_265 = __get(cls, Y * W2 + X + 3) == 3 or __get(cls, Y * W2 + X - 3) == 3
-                            __O[584] = ____temp_265
+                            __O[597] = ____temp_265
                             if ____t_266(____temp_265) then
-                                ____t_result_267 = __O[584]
+                                ____t_result_267 = __O[597]
                             else
                                 ____t_result_267 = __get(cls, (Y + 3) * W2 + X) == 3
                             end
-                            __O[585] = ____t_result_267
+                            __O[598] = ____t_result_267
                             if ____t_268(____t_result_267) then
-                                ____t_result_269 = __O[585]
+                                ____t_result_269 = __O[598]
                             else
                                 ____t_result_269 = __get(cls, (Y - 3) * W2 + X) == 3
                             end
@@ -7771,9 +7771,9 @@ local __O = {};
                                 local ____t_result_273
                                 local ____t_272 = __t
                                 local ____hypot_result_271 = __hypot(x - cx, y - cy)
-                                __O[586] = ____hypot_result_271
+                                __O[599] = ____hypot_result_271
                                 if ____t_272(____hypot_result_271) then
-                                    ____t_result_273 = __O[586]
+                                    ____t_result_273 = __O[599]
                                 else
                                     ____t_result_273 = 1
                                 end
@@ -7908,27 +7908,27 @@ local __O = {};
                 local ____t_result_276
                 local ____t_275 = __t
                 local ____temp_274 = X < 0 or Y < 0
-                __O[587] = ____temp_274
+                __O[600] = ____temp_274
                 if ____t_275(____temp_274) then
-                    ____t_result_276 = __O[587]
+                    ____t_result_276 = __O[600]
                 else
                     ____t_result_276 = __ge(X, W2)
                 end
-                __O[588] = ____t_result_276
+                __O[601] = ____t_result_276
                 if ____t_277(____t_result_276) then
-                    ____t_result_278 = __O[588]
+                    ____t_result_278 = __O[601]
                 else
                     ____t_result_278 = __ge(Y, H2)
                 end
-                __O[589] = ____t_result_278
+                __O[602] = ____t_result_278
                 if ____t_279(____t_result_278) then
-                    ____t_result_280 = __O[589]
+                    ____t_result_280 = __O[602]
                 else
                     ____t_result_280 = __get(cls, Y * W2 + X) ~= 1
                 end
-                __O[590] = ____t_result_280
+                __O[603] = ____t_result_280
                 if ____t_281(____t_result_280) then
-                    ____t_result_282 = __O[590]
+                    ____t_result_282 = __O[603]
                 else
                     ____t_result_282 = __get(trilha, Y * W2 + X)
                 end
@@ -7947,15 +7947,15 @@ local __O = {};
                 x,
                 __add(W, r) + 4
             )
-            __O[591] = ____temp_284
+            __O[604] = ____temp_284
             if ____t_285(____temp_284) then
-                ____t_result_286 = __O[591]
+                ____t_result_286 = __O[604]
             else
                 ____t_result_286 = __lt(y, -4)
             end
-            __O[592] = ____t_result_286
+            __O[605] = ____t_result_286
             if ____t_287(____t_result_286) then
-                ____t_result_288 = __O[592]
+                ____t_result_288 = __O[605]
             else
                 ____t_result_288 = __gt(y, H + 34)
             end
@@ -7974,9 +7974,9 @@ local __O = {};
                     local ____t_result_291
                     local ____t_290 = __t
                     local ____temp_289 = not __t(livre(nil, x, y, raio))
-                    __O[593] = ____temp_289
+                    __O[606] = ____temp_289
                     if ____t_290(____temp_289) then
-                        ____t_result_291 = __O[593]
+                        ____t_result_291 = __O[606]
                     else
                         ____t_result_291 = __call(
                             ocupados,
@@ -8169,50 +8169,50 @@ local __O = {};
                     local ____t_result_295
                     local ____t_294 = __t
                     local ____temp_293 = X < 0 or Y < 0
-                    __O[594] = ____temp_293
+                    __O[607] = ____temp_293
                     if ____t_294(____temp_293) then
-                        ____t_result_295 = __O[594]
+                        ____t_result_295 = __O[607]
                     else
                         ____t_result_295 = __ge(X, W2)
                     end
-                    __O[595] = ____t_result_295
+                    __O[608] = ____t_result_295
                     if ____t_296(____t_result_295) then
-                        ____t_result_297 = __O[595]
+                        ____t_result_297 = __O[608]
                     else
                         ____t_result_297 = __ge(Y, H2)
                     end
-                    __O[596] = ____t_result_297
+                    __O[609] = ____t_result_297
                     if ____t_298(____t_result_297) then
-                        ____t_result_299 = __O[596]
+                        ____t_result_299 = __O[609]
                     else
                         ____t_result_299 = __get(cls, Y * W2 + X) ~= 1
                     end
-                    __O[599] = ____t_result_299
+                    __O[612] = ____t_result_299
                     if ____t_300(____t_result_299) then
-                        ____t_result_306 = __O[599]
+                        ____t_result_306 = __O[612]
                     else
                         local ____t_result_305
                         local ____t_304 = __t
                         local ____t_result_303
                         local ____t_302 = __t
                         local ____temp_301 = x > -10 and __lt(x, W + 10)
-                        __O[597] = ____temp_301
+                        __O[610] = ____temp_301
                         if ____t_302(____temp_301) then
                             ____t_result_303 = y > -10
                         else
-                            ____t_result_303 = __O[597]
+                            ____t_result_303 = __O[610]
                         end
-                        __O[598] = ____t_result_303
+                        __O[611] = ____t_result_303
                         if ____t_304(____t_result_303) then
                             ____t_result_305 = __lt(y, H + 10)
                         else
-                            ____t_result_305 = __O[598]
+                            ____t_result_305 = __O[611]
                         end
                         ____t_result_306 = ____t_result_305
                     end
-                    __O[600] = ____t_result_306
+                    __O[613] = ____t_result_306
                     if ____t_307(____t_result_306) then
-                        ____t_result_308 = __O[600]
+                        ____t_result_308 = __O[613]
                     else
                         ____t_result_308 = __call(
                             eolicas,
@@ -8606,9 +8606,9 @@ local __O = {};
         if ____opt_347 ~= nil then
             ____opt_347 = ____opt_347.rotulo
         end
-        __O[601] = ____opt_347
+        __O[614] = ____opt_347
         if ____t_349(____opt_347) then
-            ____t_result_350 = __O[601]
+            ____t_result_350 = __O[614]
         else
             ____t_result_350 = ""
         end
@@ -8685,9 +8685,9 @@ local __O = {};
         if ____opt_412 ~= nil then
             ____opt_412 = ____opt_412.rotulo
         end
-        __O[606] = ____opt_412
+        __O[619] = ____opt_412
         if ____t_414(____opt_412) then
-            ____t_result_415 = __O[606]
+            ____t_result_415 = __O[619]
         else
             ____t_result_415 = ""
         end
@@ -8764,11 +8764,11 @@ local __O = {};
                     else
                         ____t_result_421 = aberto
                     end
-                    __O[607] = ____t_result_421
+                    __O[620] = ____t_result_421
                     if ____t_422(____t_result_421) then
                         ____t_result_423 = selecionar(nil, atual)
                     else
-                        ____t_result_423 = __O[607]
+                        ____t_result_423 = __O[620]
                     end
                     return ____t_result_423
                 end,

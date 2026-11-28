@@ -15,9 +15,9 @@ local __O = {};
         local ____t_result_2
         local ____t_1 = __t
         local ____temp_0 = not __t(j)
-        __O[1351] = ____temp_0
+        __O[1364] = ____temp_0
         if ____t_1(____temp_0) then
-            ____t_result_2 = __O[1351]
+            ____t_result_2 = __O[1364]
         else
             ____t_result_2 = j.fim
         end
@@ -826,9 +826,9 @@ local __O = {};
         if ____opt_result_30 ~= nil then
             ____opt_result_31 = ____opt_result_30.night
         end
-        __O[1354] = ____opt_result_31
+        __O[1367] = ____opt_result_31
         if ____t_32(____opt_result_31) then
-            ____t_result_33 = __O[1354]
+            ____t_result_33 = __O[1367]
         else
             ____t_result_33 = 0
         end
@@ -1214,11 +1214,11 @@ local __O = {};
         local ____t_result_49
         local ____t_48 = __t
         local ____temp_47 = j.fase == "pegou"
-        __O[1355] = ____temp_47
+        __O[1368] = ____temp_47
         if ____t_48(____temp_47) then
             ____t_result_49 = j.ultimo
         else
-            ____t_result_49 = __O[1355]
+            ____t_result_49 = __O[1368]
         end
         if ____t_50(____t_result_49) then
             local u = math.min(1, j.tf / 0.6)
@@ -1307,9 +1307,9 @@ local __O = {};
                     else
                         ____t_result_51 = j.peixesTipo
                     end
-                    __O[1356] = ____t_result_51
+                    __O[1369] = ____t_result_51
                     if ____t_52(____t_result_51) then
-                        ____t_result_53 = __O[1356]
+                        ____t_result_53 = __O[1369]
                     else
                         ____t_result_53 = "TILÁPIA"
                     end
@@ -1448,9 +1448,9 @@ local __O = {};
             if j ~= nil then
                 ____opt_result_59 = j.peixes
             end
-            __O[1357] = ____opt_result_59
+            __O[1370] = ____opt_result_59
             if ____t_60(____opt_result_59) then
-                ____t_result_61 = __O[1357]
+                ____t_result_61 = __O[1370]
             else
                 ____t_result_61 = 0
             end
@@ -1585,11 +1585,11 @@ local __O = {};
                 "includes",
                 j.fase
             )
-            __O[1352] = ____call_result_9
+            __O[1365] = ____call_result_9
             if ____t_10(____call_result_9) then
                 ____t_result_11 = __ge(j.tf, 1.3)
             else
-                ____t_result_11 = __O[1352]
+                ____t_result_11 = __O[1365]
             end
             if ____t_12(____t_result_11) then
                 j.tent = j.tent + 1
@@ -1604,9 +1604,9 @@ local __O = {};
                             if j ~= nil then
                                 ____opt_result_15 = j.peixes
                             end
-                            __O[1353] = ____opt_result_15
+                            __O[1366] = ____opt_result_15
                             if ____t_16(____opt_result_15) then
-                                ____t_result_17 = __O[1353]
+                                ____t_result_17 = __O[1366]
                             else
                                 ____t_result_17 = 0
                             end
@@ -1678,9 +1678,9 @@ local __O = {};
                 if j ~= nil then
                     ____opt_result_66 = j.peixes
                 end
-                __O[1358] = ____opt_result_66
+                __O[1371] = ____opt_result_66
                 if ____t_67(____opt_result_66) then
-                    ____t_result_68 = __O[1358]
+                    ____t_result_68 = __O[1371]
                 else
                     ____t_result_68 = 0
                 end

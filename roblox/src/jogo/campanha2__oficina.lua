@@ -40,9 +40,9 @@ local __O = {};
                     PW:estado().niveis,
                     p.id
                 )
-                __O[849] = ____get_result_12
+                __O[862] = ____get_result_12
                 if ____t_13(____get_result_12) then
-                    ____t_result_14 = __O[849]
+                    ____t_result_14 = __O[862]
                 else
                     ____t_result_14 = 1
                 end
@@ -74,9 +74,9 @@ local __O = {};
             PW:estado().niveis,
             p.id
         )
-        __O[850] = ____get_result_15
+        __O[863] = ____get_result_15
         if ____t_16(____get_result_15) then
-            ____t_result_17 = __O[850]
+            ____t_result_17 = __O[863]
         else
             ____t_result_17 = 1
         end
@@ -84,9 +84,9 @@ local __O = {};
         local ____t_result_20
         local ____t_19 = __t
         local ____get_result_18 = __get(PRECO, n)
-        __O[851] = ____get_result_18
+        __O[864] = ____get_result_18
         if ____t_19(____get_result_18) then
-            ____t_result_20 = __O[851]
+            ____t_result_20 = __O[864]
         else
             ____t_result_20 = 0
         end
@@ -98,20 +98,20 @@ local __O = {};
             moedas(nil),
             preco
         )
-        __O[852] = ____temp_21
+        __O[865] = ____temp_21
         if ____t_22(____temp_21) then
             ____t_result_23 = not __t(anim)
         else
-            ____t_result_23 = __O[852]
+            ____t_result_23 = __O[865]
         end
         local pode = ____t_result_23
         local ____p_nome_32 = p.nome
         local ____t_result_26
         local ____t_25 = __t
         local ____get_result_24 = __get(p.niveis, n - 1)
-        __O[853] = ____get_result_24
+        __O[866] = ____get_result_24
         if ____t_25(____get_result_24) then
-            ____t_result_26 = __O[853]
+            ____t_result_26 = __O[866]
         else
             ____t_result_26 = p.desc
         end
@@ -123,9 +123,9 @@ local __O = {};
             local ____t_result_29
             local ____t_28 = __t
             local ____get_result_27 = __get(p.niveis, n)
-            __O[854] = ____get_result_27
+            __O[867] = ____get_result_27
             if ____t_28(____get_result_27) then
-                ____t_result_29 = __O[854]
+                ____t_result_29 = __O[867]
             else
                 ____t_result_29 = ""
             end
@@ -140,9 +140,9 @@ local __O = {};
         local ____t_result_35
         local ____t_34 = __t
         local ____temp_33 = not __t(__len(L))
-        __O[855] = ____temp_33
+        __O[868] = ____temp_33
         if ____t_34(____temp_33) then
-            ____t_result_35 = __O[855]
+            ____t_result_35 = __O[868]
         else
             ____t_result_35 = anim
         end
@@ -171,9 +171,9 @@ local __O = {};
         local ____t_result_39
         local ____t_38 = __t
         local ____temp_37 = not __t(__len(L))
-        __O[856] = ____temp_37
+        __O[869] = ____temp_37
         if ____t_38(____temp_37) then
-            ____t_result_39 = __O[856]
+            ____t_result_39 = __O[869]
         else
             ____t_result_39 = anim
         end
@@ -187,9 +187,9 @@ local __O = {};
             PW:estado().niveis,
             p.id
         )
-        __O[857] = ____get_result_41
+        __O[870] = ____get_result_41
         if ____t_42(____get_result_41) then
-            ____t_result_43 = __O[857]
+            ____t_result_43 = __O[870]
         else
             ____t_result_43 = 1
         end
@@ -374,9 +374,9 @@ local __O = {};
                     local ____t_result_10
                     local ____t_9 = __t
                     local ____temp_8 = k == "Enter" or k == "KeyE"
-                    __O[848] = ____temp_8
+                    __O[861] = ____temp_8
                     if ____t_9(____temp_8) then
-                        ____t_result_10 = __O[848]
+                        ____t_result_10 = __O[861]
                     else
                         ____t_result_10 = k == "Space"
                     end
@@ -1098,11 +1098,11 @@ local __O = {};
         else
             ____t_result_67 = anim
         end
-        __O[858] = ____t_result_67
+        __O[871] = ____t_result_67
         if ____t_68(____t_result_67) then
             ____t_result_69 = __lt(anim.t, 1.9)
         else
-            ____t_result_69 = __O[858]
+            ____t_result_69 = __O[871]
         end
         if ____t_70(____t_result_69) then
             ____t_result_71 = math.floor(math.sin(t * 60) + 0.5)
@@ -1430,11 +1430,11 @@ local __O = {};
             local ____t_result_83
             local ____t_82 = __t
             local ____temp_81 = __gt(anim.t, 0.6) and __lt(anim.t, 1.9)
-            __O[859] = ____temp_81
+            __O[872] = ____temp_81
             if ____t_82(____temp_81) then
                 ____t_result_83 = math.random() < 0.5
             else
-                ____t_result_83 = __O[859]
+                ____t_result_83 = __O[872]
             end
             if ____t_84(____t_result_83) then
                 __call(
@@ -1461,11 +1461,11 @@ local __O = {};
         else
             ____t_result_85 = anim
         end
-        __O[860] = ____t_result_85
+        __O[873] = ____t_result_85
         if ____t_86(____t_result_85) then
             ____t_result_87 = __lt(anim.t, 1.8)
         else
-            ____t_result_87 = __O[860]
+            ____t_result_87 = __O[873]
         end
         if ____t_88(____t_result_87) then
             o = __assign(
@@ -1482,11 +1482,11 @@ local __O = {};
             local ____t_result_91
             local ____t_90 = __t
             local ____temp_89 = falaT < 1.2
-            __O[861] = ____temp_89
+            __O[874] = ____temp_89
             if ____t_90(____temp_89) then
                 ____t_result_91 = falaTxt
             else
-                ____t_result_91 = __O[861]
+                ____t_result_91 = __O[874]
             end
             if ____t_92(____t_result_91) then
                 o = __assign({}, o, {moving = false})
@@ -1817,11 +1817,11 @@ local __O = {};
         else
             ____t_result_97 = anim
         end
-        __O[862] = ____t_result_97
+        __O[875] = ____t_result_97
         if ____t_98(____t_result_97) then
             ____t_result_99 = __lt(anim.t, 1.8)
         else
-            ____t_result_99 = __O[862]
+            ____t_result_99 = __O[875]
         end
         if ____t_100(____t_result_99) then
             do
@@ -1873,11 +1873,11 @@ local __O = {};
         else
             ____t_result_101 = anim
         end
-        __O[863] = ____t_result_101
+        __O[876] = ____t_result_101
         if ____t_102(____t_result_101) then
             ____t_result_103 = __lt(anim.t, 1.8)
         else
-            ____t_result_103 = __O[863]
+            ____t_result_103 = __O[876]
         end
         if ____t_104(____t_result_103) then
             c:save()
@@ -1945,11 +1945,11 @@ local __O = {};
                     )).width,
                     150
                 )
-                __O[864] = ____gt_result_107
+                __O[877] = ____gt_result_107
                 if ____t_108(____gt_result_107) then
                     ____t_result_109 = l
                 else
-                    ____t_result_109 = __O[864]
+                    ____t_result_109 = __O[877]
                 end
                 if ____t_110(____t_result_109) then
                     __call(ls, "push", l)

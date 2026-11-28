@@ -146,9 +146,9 @@ local __O = {};
                     local ____t_result_7
                     local ____t_6 = __t
                     local ____temp_5 = p.base - q.base
-                    __O[356] = ____temp_5
+                    __O[369] = ____temp_5
                     if ____t_6(____temp_5) then
-                        ____t_result_7 = __O[356]
+                        ____t_result_7 = __O[369]
                     else
                         ____t_result_7 = p.x - q.x
                     end
@@ -194,9 +194,9 @@ local __O = {};
         if ____opt_15 ~= nil then
             ____opt_result_17 = ____opt_15(____opt_15)
         end
-        __O[357] = ____opt_result_17
+        __O[370] = ____opt_result_17
         if ____t_18(____opt_result_17) then
-            ____t_result_19 = __O[357]
+            ____t_result_19 = __O[370]
         else
             ____t_result_19 = {}
         end
@@ -211,9 +211,9 @@ local __O = {};
         if ____opt_22 ~= nil then
             ____opt_result_24 = ____opt_22(____opt_22)
         end
-        __O[358] = ____opt_result_24
+        __O[371] = ____opt_result_24
         if ____t_25(____opt_result_24) then
-            ____t_result_26 = __O[358]
+            ____t_result_26 = __O[371]
         else
             ____t_result_26 = {lean = 0, str = 1}
         end
@@ -339,9 +339,9 @@ local __O = {};
         local ____t_result_52
         local ____t_51 = __t
         local ____TS__Number_result_50 = __TS__Number(w.wind)
-        __O[359] = ____TS__Number_result_50
+        __O[372] = ____TS__Number_result_50
         if ____t_51(____TS__Number_result_50) then
-            ____t_result_52 = __O[359]
+            ____t_result_52 = __O[372]
         else
             ____t_result_52 = 0.15
         end
@@ -370,9 +370,9 @@ local __O = {};
         local ____t_result_59
         local ____t_58 = __t
         local ____TS__Number_result_57 = __TS__Number(p.x)
-        __O[360] = ____TS__Number_result_57
+        __O[373] = ____TS__Number_result_57
         if ____t_58(____TS__Number_result_57) then
-            ____t_result_59 = __O[360]
+            ____t_result_59 = __O[373]
         else
             ____t_result_59 = 0
         end
@@ -380,9 +380,9 @@ local __O = {};
         local ____t_result_62
         local ____t_61 = __t
         local ____TS__Number_result_60 = __TS__Number(p.y)
-        __O[361] = ____TS__Number_result_60
+        __O[374] = ____TS__Number_result_60
         if ____t_61(____TS__Number_result_60) then
-            ____t_result_62 = __O[361]
+            ____t_result_62 = __O[374]
         else
             ____t_result_62 = FLOOR
         end
@@ -390,9 +390,9 @@ local __O = {};
         local ____t_result_65
         local ____t_64 = __t
         local ____TS__Number_result_63 = __TS__Number(p.vx)
-        __O[362] = ____TS__Number_result_63
+        __O[375] = ____TS__Number_result_63
         if ____t_64(____TS__Number_result_63) then
-            ____t_result_65 = __O[362]
+            ____t_result_65 = __O[375]
         else
             ____t_result_65 = 0
         end
@@ -453,11 +453,11 @@ local __O = {};
         else
             ____t_result_66 = inField
         end
-        __O[363] = ____t_result_66
+        __O[376] = ____t_result_66
         if ____t_67(____t_result_66) then
             ____t_result_68 = py > FLOOR - 30
         else
-            ____t_result_68 = __O[363]
+            ____t_result_68 = __O[376]
         end
         if ____t_69(____t_result_68) then
             stepAcc = stepAcc + math.abs(vx) * dt
@@ -626,17 +626,17 @@ local __O = {};
                     local ____t_result_94
                     local ____t_93 = __t
                     local ____temp_92 = not __t(lite) and __gt(PAL.sunStr, 0.05)
-                    __O[364] = ____temp_92
+                    __O[377] = ____temp_92
                     if ____t_93(____temp_92) then
                         ____t_result_94 = j > 0
                     else
-                        ____t_result_94 = __O[364]
+                        ____t_result_94 = __O[377]
                     end
-                    __O[365] = ____t_result_94
+                    __O[378] = ____t_result_94
                     if ____t_95(____t_result_94) then
                         ____t_result_96 = side > 0 == __lt(lean, 0)
                     else
-                        ____t_result_96 = __O[365]
+                        ____t_result_96 = __O[378]
                     end
                     if ____t_97(____t_result_96) then
                         c.fillStyle = PAL.rim
@@ -705,9 +705,9 @@ local __O = {};
                             local ____t_result_101
                             local ____t_100 = __t
                             local ____TS__Number_result_99 = __TS__Number(p.x)
-                            __O[366] = ____TS__Number_result_99
+                            __O[379] = ____TS__Number_result_99
                             if ____t_100(____TS__Number_result_99) then
-                                ____t_result_101 = __O[366]
+                                ____t_result_101 = __O[379]
                             else
                                 ____t_result_101 = -999
                             end
@@ -717,9 +717,9 @@ local __O = {};
                             local ____t_result_105
                             local ____t_104 = __t
                             local ____TS__Number_result_103 = __TS__Number(p.y)
-                            __O[367] = ____TS__Number_result_103
+                            __O[380] = ____TS__Number_result_103
                             if ____t_104(____TS__Number_result_103) then
-                                ____t_result_105 = __O[367]
+                                ____t_result_105 = __O[380]
                             else
                                 ____t_result_105 = FLOOR
                             end
@@ -778,11 +778,11 @@ local __O = {};
         local ____t_result_110
         local ____t_109 = __t
         local ____temp_108 = o.scene == SCENE and not __t(o.arena)
-        __O[368] = ____temp_108
+        __O[381] = ____temp_108
         if ____t_109(____temp_108) then
             ____t_result_110 = not __t(o.room)
         else
-            ____t_result_110 = __O[368]
+            ____t_result_110 = __O[381]
         end
         return ____t_result_110
     end
@@ -812,9 +812,9 @@ local __O = {};
         local ____t_result_113
         local ____t_112 = __t
         local ____TS__Number_result_111 = __TS__Number(o.time)
-        __O[369] = ____TS__Number_result_111
+        __O[382] = ____TS__Number_result_111
         if ____t_112(____TS__Number_result_111) then
-            ____t_result_113 = __O[369]
+            ____t_result_113 = __O[382]
         else
             ____t_result_113 = 0
         end
@@ -847,11 +847,11 @@ local __O = {};
                 local ____t_result_122
                 local ____t_121 = __t
                 local ____temp_120 = not __t(lite) or __mod(i, 2) == 0
-                __O[370] = ____temp_120
+                __O[383] = ____temp_120
                 if ____t_121(____temp_120) then
                     ____t_result_122 = onScreen(nil, s, o.camera)
                 else
-                    ____t_result_122 = __O[370]
+                    ____t_result_122 = __O[383]
                 end
                 if ____t_123(____t_result_122) then
                     stalk(
@@ -903,11 +903,11 @@ local __O = {};
                 local ____t_result_132
                 local ____t_131 = __t
                 local ____temp_130 = not __t(lite) or __mod(i, 2) == 0
-                __O[371] = ____temp_130
+                __O[384] = ____temp_130
                 if ____t_131(____temp_130) then
                     ____t_result_132 = onScreen(nil, s, o.camera)
                 else
-                    ____t_result_132 = __O[371]
+                    ____t_result_132 = __O[384]
                 end
                 if ____t_133(____t_result_132) then
                     stalk(nil, ctx, s, lite)
